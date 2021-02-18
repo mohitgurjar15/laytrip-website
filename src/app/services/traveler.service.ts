@@ -41,11 +41,11 @@ export class TravelerService{
     }
 
     addAdult(data) {
-        let userToken = localStorage.getItem('_lay_sess');
-        if (userToken) {
-            return this.http.post(`${environment.apiUrl}v1/traveler/save`, data, this.commonFunction.setHeaders());
-        } else {
+        
+        if (data.guest_id) {
             return this.http.post(`${environment.apiUrl}v1/traveler/save`, data);
+        } else {
+            return this.http.post(`${environment.apiUrl}v1/traveler/save`, data,this.commonFunction.setHeaders());
         }
     }
 

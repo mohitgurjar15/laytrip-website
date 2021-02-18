@@ -11,6 +11,7 @@ import { CookieService } from 'ngx-cookie';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
+import { CommonFunction } from 'src/app/_helpers/common-function';
 
 export interface CartItem {
 
@@ -49,6 +50,7 @@ export class CheckoutComponent implements OnInit {
   cardListChangeCount: number = 0;
   isBookingProgress: boolean = false;
   $cartIdsubscription;
+  guestUserId:string='';
   bookingRequest = {
     payment_type: "",
     laycredit_points: 0,
@@ -67,7 +69,8 @@ export class CheckoutComponent implements OnInit {
     private cartService: CartService,
     private cookieService: CookieService,
     private cd: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private commonFunction:CommonFunction
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -76,8 +79,12 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
     window.scroll(0, 0);
     this.userInfo = getLoginUserInfo();
-    if (this.userInfo && Object.keys(this.userInfo).length > 0) {
+    if (this.userInfo && this.userInfo.roleId!=7) {
       this.getTravelers();
+    }
+    else{
+      this.getTravelers();
+      this.guestUserId=this.commonFunction.getGuestUser();
     }
 
     this.cartLoading = true;
@@ -254,6 +261,10 @@ export class CheckoutComponent implements OnInit {
   bookFlight() {
     this.validationErrorMessage = '';
     this.validateCartItems();
+    if(this.userInfo.roleId==7){
+      $('#sign_in_modal').modal('show');
+      return false;
+    }
     let carts = this.carts.map(cart=>{ return {  cart_id: cart.id} })
     this.bookingRequest.card_token=this.cardToken;
     this.bookingRequest.payment_type = this.priceSummary.paymentType;

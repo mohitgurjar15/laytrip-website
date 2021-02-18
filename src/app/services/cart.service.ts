@@ -55,11 +55,12 @@ export class CartService {
     this.cartItems.next(cartItem);
   }
 
-  getCartList(live_availiblity='no') {
+  getCartList(live_availiblity='no',guestUserId='') {
     let headers = {
       currency: 'USD',
       language: 'en'
     }
+
     return this.http.get(`${environment.apiUrl}v1/cart/list?live_availiblity=${live_availiblity}`, this.commonFunction.setHeaders(headers))
       .pipe(
         catchError(this.handleError)
@@ -71,6 +72,7 @@ export class CartService {
       currency: 'USD',
       language: 'en'
     }
+    
     return this.http.post(`${environment.apiUrl}v1/cart/add`, data, this.commonFunction.setHeaders(headers))
       .pipe(
         catchError(this.handleError)
@@ -78,7 +80,7 @@ export class CartService {
   }
 
   deleteCartItem(id) {
-    return this.http.delete(environment.apiUrl + 'v1/cart/delete/' + id, this.commonFunction.setHeaders());
+    return this.http.delete(`${environment.apiUrl}v1/cart/delete/${id}`,this.commonFunction.setHeaders());
   }
 
   handleError(error) {

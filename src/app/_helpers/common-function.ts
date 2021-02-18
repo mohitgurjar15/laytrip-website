@@ -2,7 +2,8 @@ import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
-
+import { getLoginUserInfo } from './jwt.helper';
+import { v4 as uuidv4 } from 'uuid';
 @Injectable({
     providedIn: 'root',
 })
@@ -185,5 +186,23 @@ export class CommonFunction {
     convertFlotToDecimal(floatNumber){
         return Math.round(floatNumber);
     } 
+
+    getGuestUser(){
+        
+        let userDetails = getLoginUserInfo();
+        if(!userDetails.roleId || userDetails.roleId==7){
+
+            let guestuserId = localStorage.getItem('__gst')
+            if(guestuserId){
+                return guestuserId
+            }
+            else{
+                return '';
+            }
+        }
+        else{
+            return '';
+        }
+    }
 }
 

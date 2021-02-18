@@ -76,9 +76,9 @@ export class GenericService {
   }
 
   emptyCart() {
-    return this.http.delete(`${environment.apiUrl}v1/cart/empty-cart`, this.commonFunction.setHeaders()).pipe(
-      catchError(this.handleError)
-    );
+      return this.http.delete(`${environment.apiUrl}v1/cart/empty-cart`, this.commonFunction.setHeaders()).pipe(
+        catchError(this.handleError)
+        );
   }
 
   handleError(error) {
