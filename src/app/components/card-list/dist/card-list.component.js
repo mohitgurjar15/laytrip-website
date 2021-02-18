@@ -23,6 +23,7 @@ var CardListComponent = /** @class */ (function () {
         this.totalNumberOfcard = new core_1.EventEmitter();
         this.cardToken = '';
         this.cardListChangeCount = 0;
+        this.deleteApiError = '';
         this.cardObject = card_helper_1.cardObject;
         this.cardType = card_helper_1.cardType;
     }
@@ -97,6 +98,12 @@ var CardListComponent = /** @class */ (function () {
             _this.modalService.dismissAll();
         }, function (error) {
             _this.cardLoader = false;
+            if (error.status === 409) {
+                _this.deleteApiError = error.message;
+            }
+            else {
+                _this.modalService.dismissAll();
+            }
         });
     };
     __decorate([

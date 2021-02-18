@@ -30,6 +30,7 @@ export class CardListComponent implements OnInit {
   userInfo;
   cardId;
   closeResult;
+  deleteApiError : string = '';
 
   cardObject =cardObject
   cardType = cardType;
@@ -110,6 +111,11 @@ export class CardListComponent implements OnInit {
       this.modalService.dismissAll();
     }, (error) => {
       this.cardLoader = false;
+      if(error.status === 409){
+        this.deleteApiError = error.message; 
+      }else {        
+        this.modalService.dismissAll();
+      }
     }); 
   }
   
