@@ -101,9 +101,12 @@
                             [ngStyle]="getProgressPercentage(booking.paidAmount,booking.totalAmount)" aria-valuenow="25"
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <div class="payment_status">
+                        <!-- <div class="payment_status">
                           Next Payment {{ (booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
                           commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
+                        </div> -->
+                        <div class="payment_status">
+                          <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"> Past Due
                         </div>
                       </div>
                       <div class="pricer_wrp">

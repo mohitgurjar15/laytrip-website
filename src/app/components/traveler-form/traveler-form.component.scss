@@ -445,6 +445,17 @@
               }
 
               li {
+                flex: 1;
+                &:first-child {
+                  a {
+                    margin-left: 0;
+                  }
+                }
+                &:last-child {
+                  a {
+                    margin-right: 5px;
+                  }
+                }
                 @include tab-view {
                   margin-left: 5px;
                   margin-bottom: 5px;
@@ -462,7 +473,9 @@
                   border: 1px solid $text_grey_dark;
                   border-radius: 8px;
                   font-size: 12px;
-                  margin: 0 5px;
+                  margin: 0 0 0 5px;
+                  padding: 10px;
+                  text-align: center;
 
                   @include tab-view {
                     margin: 0;
@@ -499,8 +512,8 @@
                 width: 100%;
                 padding: 6px 10px;
                 position: relative;
-                max-width: 420px;
-                margin-right: 30px;
+                max-width: 430px;
+                margin-right: 20px;
 
                 &:focus {
                   outline: none;

@@ -303,6 +303,13 @@
                                                 font-size: 12px;
                                                 color: $pink;
                                                 margin-top: 10px;
+                                                align-items: center;
+                                                display: flex;
+                                                justify-content: center;
+                                                img{
+                                                    max-width: 15px;
+                                                    margin-right: 10px;
+                                                }
                                             }
                                         }
 

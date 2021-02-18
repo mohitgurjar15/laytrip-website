@@ -122,6 +122,20 @@
                 }
             }
         }
+
+        &.custom_inputs{
+            .ng-select-container{
+                .ng-value-container{
+                    .ng-value{
+                        padding: 3px 0 0 0;
+                        max-width: 275px;
+                    }
+                    .ng-input{
+                        padding-left: 0;
+                    }
+                }
+            } 
+        }
     }
     &.ng-customClass {
         .ng-select-container {
@@ -151,6 +165,7 @@
             }
         }
     }
+   
 }
 
 // NG-SELECT FOCUS REMOVE CSS START
