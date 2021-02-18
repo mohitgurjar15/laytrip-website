@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
+import { CcpaComponent } from './ccpa/ccpa.component';
 import { CmsPagesComponent } from './cms-pages/cms-pages.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
@@ -91,6 +92,10 @@ const routes: Routes = [
             {
                 path: 'pages',
                 component: CmsPagesComponent
+            },
+            {
+                path: 'ccpa',
+                component: CcpaComponent
             },
         ]
     }
