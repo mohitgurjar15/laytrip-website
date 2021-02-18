@@ -18,7 +18,38 @@
   @include mobile-view {
     right: 10px !important;
   }
+
+  .block_share {
+    .hover-link {
+      position: relative;
+      transition: 0.3s;
+
+      &:hover {
+        .hover_label {
+          display: flex;
+        }
+      }
+
+      .hover_label {
+        position: absolute;
+        color: $text-black;
+        font-size: 12px;
+        font-weight: 600;
+        bottom: 5px;
+        left: -15px;
+        height: 21px;
+        display: none;
+        align-items: center;
+        justify-content: flex-start;
+        border-radius: 6px;
+        background-color: $tab-bg-gray;
+        padding: 0 5px;
+
+      }
+    }
+  }
 }
+
 .footer_cta_dropdown {
   display: flex;
   align-items: center;
@@ -28,18 +59,22 @@
   @include mobile-view {
     justify-content: center;
   }
+
   .cta_drop_wrp {
     font-size: 14px;
     color: $text-grey;
     font-weight: 400;
     margin-right: 30px;
+
     @include tab-view {
       margin: 0;
       width: 95px;
     }
+
     ul {
       &.dropdown-menu {
         padding: 0;
+
         li {
           a {
             color: $background-blue;
@@ -52,6 +87,7 @@
     }
   }
 }
+
 .menu_grid {
   .footer_down_links {
     li {
@@ -62,14 +98,17 @@
     }
   }
 }
-.ftr_flex_row{
-  .logo_w{
+
+.ftr_flex_row {
+  .logo_w {
     padding: 0 15px;
-    img{
+
+    img {
       height: 40px;
       margin-bottom: 3px;
     }
-    @include tab-view{
+
+    @include tab-view {
       margin: 0px auto 10px;
     }
   }

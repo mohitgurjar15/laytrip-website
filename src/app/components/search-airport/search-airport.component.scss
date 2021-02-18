@@ -3,6 +3,7 @@
 .flight_form {
     position: relative;
 }
+
 .laytrip-input {
     width: 100%;
     border: none;
@@ -33,6 +34,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+
             p {
                 font-size: 14px;
                 margin: 0;
@@ -41,12 +43,14 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+
                 &:last-child {
                     font-size: 10px;
                     color: $text-grey;
                     margin: 2px 0 0;
                 }
             }
+
             .item-name {
                 font-size: 20px;
                 font-weight: 600;
@@ -67,3 +71,18 @@
     }
 }
 
+.lab_wrapper {
+    display: flex;
+    align-items: center;
+    height: 53px;
+    justify-content: flex-start;
+
+    label {
+        padding-right: 10px !important;
+        max-width: 50px !important;
+    }
+
+    .custom_inputs {
+        padding-right: 10px;
+    }
+}
