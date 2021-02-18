@@ -12,7 +12,7 @@ declare var $: any;
 import * as moment from 'moment';
 import { TravelerService } from '../../services/traveler.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
+import { getLoginUserInfo } from '../../_helpers/jwt.helper';
 
 @Component({
   selector: 'app-traveler-form',

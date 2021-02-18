@@ -6,7 +6,7 @@ import { CartService } from '../../../../services/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DeleteCartitemConfirmationPopupComponent, MODAL_TYPE } from 'src/app/components/delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
+import { DeleteCartitemConfirmationPopupComponent, MODAL_TYPE } from '../../../../components/delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
 
 @Component({
   selector: 'app-flight-cart-item',

@@ -9,9 +9,8 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { CartService } from '../../services/cart.service';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
-import { UserService } from 'src/app/services/user.service';
-import { EmptyCartComponent } from 'src/app/components/empty-cart/empty-cart.component';
-
+import { UserService } from '../../services/user.service';
+import { EmptyCartComponent } from '../../components/empty-cart/empty-cart.component';
 declare var $: any;
 
 @Component({

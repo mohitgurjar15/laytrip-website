@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../environments/environment';
 
 export enum MODAL_TYPE {
@@ -15,7 +15,8 @@ export class DeleteCartitemConfirmationPopupComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   constructor(
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -23,6 +24,10 @@ export class DeleteCartitemConfirmationPopupComponent implements OnInit {
 
   onClickDelete() {
     this.activeModal.close({ STATUS: MODAL_TYPE.DELETE });
+  }
+
+  close() {
+    this.activeModal.close();
   }
 
 }
