@@ -89,15 +89,15 @@ var CardListComponent = /** @class */ (function () {
         }
     };
     CardListComponent.prototype.deleteCreditCard = function () {
+        var _this = this;
         this.cardLoader = true;
-        console.log(this.cardLoader);
-        /* this.genericService.deleteCard(this.cardId).subscribe((res: any) => {
-          this.cardLoader = false;
-          this.getCardlist();
-          this.modalService.dismissAll();
-        }, (error) => {
-          this.cardLoader = false;
-        }); */
+        this.genericService.deleteCard(this.cardId).subscribe(function (res) {
+            _this.cardLoader = false;
+            _this.getCardlist();
+            _this.modalService.dismissAll();
+        }, function (error) {
+            _this.cardLoader = false;
+        });
     };
     __decorate([
         core_1.Output()

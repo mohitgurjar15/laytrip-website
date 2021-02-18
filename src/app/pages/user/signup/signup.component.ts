@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ViewChild, Renderer2 } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
@@ -42,6 +42,7 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService : UserService,
     public router: Router,
+    public renderer: Renderer2,
     ) {}
 
   ngOnInit() {    
@@ -103,6 +104,9 @@ export class SignupComponent implements OnInit {
   }
 
   openSignInModal(){
+    setTimeout(() => {
+      this.renderer.addClass(document.body, 'modal-open');
+    }, 1000);
     $('#sign_up_modal').modal('hide');
     this.emailExist = false;
   }

@@ -13,11 +13,12 @@ var forms_1 = require("@angular/forms");
 var must_match_validators_1 = require("../../../_helpers/must-match.validators");
 var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
 var SignupComponent = /** @class */ (function () {
-    function SignupComponent(modalService, formBuilder, userService, router) {
+    function SignupComponent(modalService, formBuilder, userService, router, renderer) {
         this.modalService = modalService;
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.router = router;
+        this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.valueChange = new core_1.EventEmitter();
         this.submitted = false;
@@ -85,6 +86,10 @@ var SignupComponent = /** @class */ (function () {
         }
     };
     SignupComponent.prototype.openSignInModal = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.renderer.addClass(document.body, 'modal-open');
+        }, 1000);
         $('#sign_up_modal').modal('hide');
         this.emailExist = false;
     };

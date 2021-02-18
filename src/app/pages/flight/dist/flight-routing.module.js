@@ -13,13 +13,14 @@ var flight_search_component_1 = require("./flight-search/flight-search.component
 var flight_traveler_component_1 = require("./flight-traveler/flight-traveler.component");
 var flight_checkout_component_1 = require("./flight-checkout/flight-checkout.component");
 var flight_payment_component_1 = require("./flight-payment/flight-payment.component");
+var flight_not_found_component_1 = require("./components/flight-not-found/flight-not-found.component");
 var routes = [
     {
         path: 'search',
         component: flight_search_component_1.FlightSearchComponent
     },
     {
-        path: 'traveler/:rc',
+        path: 'travelers/:rc',
         component: flight_traveler_component_1.FlightTravelerComponent
     },
     {
@@ -29,6 +30,10 @@ var routes = [
     {
         path: 'checkout/:rc',
         component: flight_checkout_component_1.FlightCheckoutComponent
+    },
+    {
+        path: 'flight-not-found',
+        component: flight_not_found_component_1.FlightNotFoundComponent
     }
 ];
 var FlightRoutingModule = /** @class */ (function () {

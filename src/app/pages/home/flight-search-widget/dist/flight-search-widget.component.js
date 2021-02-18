@@ -70,9 +70,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             departureDate: [[forms_1.Validators.required]],
             returnDate: [[forms_1.Validators.required]]
         });
-        var date = new Date();
-        date.setDate(date.getDate() + 7);
-        this.flightDepartureMinDate = date;
+        this.setFlightDepartureMinDate();
         this.flightReturnMinDate = this.departureDate;
         this.countryCode = this.commonFunction.getUserCountry();
         this.rangeDates = [this.departureDate, this.returnDate];
@@ -102,6 +100,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.toggleOnewayRoundTrip(params['trip']);
                 _this.searchFlightInfo["class"] = params['class'];
                 _this.departureDate = new Date(params['departure_date']);
+                if (moment(_this.departureDate).format("YYYY-MM-DD") < '2021-06-01') {
+                    // this.router.navigate(['/flight/flight-not-found'])
+                }
                 _this.currentMonth = moment(_this.departureDate).format("MM");
                 _this.currentYear = moment(_this.departureDate).format("YYYY");
                 // this.returnDate = new Date(params['arrival_date']);
@@ -137,6 +138,25 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         if (typeof changes['calenderPrices'].currentValue != 'undefined' && changes['calenderPrices'].firstChange == false) {
             // this.isCalenderPriceLoading=false;
             // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
+        }
+    };
+    FlightSearchWidgetComponent.prototype.setFlightDepartureMinDate = function () {
+        var date = new Date();
+        var curretdate = moment().format();
+        var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
+        var daysDiffFromCurToJune = moment('2021-06-07', "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+        date.setDate(date.getDate() + 7);
+        if (curretdate < juneDate && daysDiffFromCurToJune > 7) {
+            this.flightDepartureMinDate = new Date(juneDate);
+            this.departureDate = this.flightDepartureMinDate;
+        }
+        else if (daysDiffFromCurToJune < 7) {
+            this.flightDepartureMinDate = date;
+            this.departureDate = date;
+        }
+        else {
+            this.departureDate = date;
+            this.flightDepartureMinDate = date;
         }
     };
     FlightSearchWidgetComponent.prototype.destinationChangedValue = function (event) {
@@ -268,6 +288,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     };
     FlightSearchWidgetComponent.prototype.changeMonth = function (event) {
         var _this = this;
+        var currentDate = new Date();
+        // 1 June validation apply
+        var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
         this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
         this.route.queryParams.subscribe(function (params) {
             _this.calPrices = false;
@@ -300,21 +323,22 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                     start_date: startDate,
                     end_date: endDate
                 };
-                var CurrentDate = new Date();
                 var GivenDate = new Date(endDate);
-                if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
-                    this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
-                    this.isCalenderPriceLoading = this.calPrices = true;
-                    this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
-                        _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
-                        _this.isCalenderPriceLoading = false;
-                    }, function (err) {
-                        _this.calPrices = false;
-                        _this.isCalenderPriceLoading = false;
-                    });
-                }
-                else {
-                    this.calPrices = this.isCalenderPriceLoading = false;
+                if (startDate >= juneDate) { //june calendar validation        
+                    if (GivenDate > currentDate || currentDate < new Date(startDate)) {
+                        this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
+                        this.isCalenderPriceLoading = this.calPrices = true;
+                        this.flightService.getFlightCalenderDate(payload).subscribe(function (res) {
+                            _this.calenderPrices = __spreadArrays(_this.calenderPrices, res);
+                            _this.isCalenderPriceLoading = false;
+                        }, function (err) {
+                            _this.calPrices = false;
+                            _this.isCalenderPriceLoading = false;
+                        });
+                    }
+                    else {
+                        this.calPrices = this.isCalenderPriceLoading = false;
+                    }
                 }
             }
         }

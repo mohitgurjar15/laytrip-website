@@ -31,6 +31,7 @@ export class SigninComponent  implements OnInit {
   public loading: boolean = false;
   public userNotVerify: boolean = false;
   emailForVerifyOtp : string = '';
+  guestUserId:string='';
 
   @Input() pageData;
   @Input() resetRecaptcha;
@@ -51,6 +52,7 @@ export class SigninComponent  implements OnInit {
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required]]
     });
+    this.guestUserId=localStorage.getItem('__gst') || "";
   }  
 
   get f() { return this.loginForm.controls; }
@@ -70,17 +72,29 @@ export class SigninComponent  implements OnInit {
           localStorage.setItem("_lay_sess", data.token);
           const userDetails = getLoginUserInfo();    
           
-          $('#sign_in_modal').modal('hide');          
+                   
           this.loading = this.submitted = false;
+          $('#sign_in_modal').modal('hide'); 
           const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
          
           if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
             this.router.navigate(['account/subscription']);
           } else {
-              let urlData = this.commonFunction.decodeUrl(this.router.url)
-              this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
-              });
+              
+              if(this.guestUserId){
+                this.userService.mapGuestUser(this.guestUserId).subscribe(res=>{
+                  let urlData = this.commonFunction.decodeUrl(this.router.url)
+                  this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                    this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+                  });  
+                })
+              }
+              else{
+                let urlData = this.commonFunction.decodeUrl(this.router.url)
+                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                  this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+                });
+              }
           } 
         }
       }, (error: HttpErrorResponse) => { 

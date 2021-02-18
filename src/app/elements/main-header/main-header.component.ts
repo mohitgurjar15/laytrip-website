@@ -1,13 +1,15 @@
-import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output } from '@angular/core';
+import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output, ViewChild } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { CommonFunction } from '../../_helpers/common-function';
 import { CartService } from '../../services/cart.service';
 import * as moment from 'moment';
+import { CookieService } from 'ngx-cookie';
+import { UserService } from 'src/app/services/user.service';
 
 declare var $: any;
 
@@ -34,6 +36,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   totalAmount: number;
   fullPageLoading = false;
   modalRef;
+  guestUserId:string='';
 
   constructor(
     private genericService: GenericService,
@@ -43,6 +46,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     private commonFunction: CommonFunction,
     public cd: ChangeDetectorRef,
     private cartService: CartService,
+    private cookieService:CookieService,
+    private userService:UserService
   ) {
   }
 
@@ -51,11 +56,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.loadJquery();
     //this.getUserLocationInfo();
     if (this.isLoggedIn) {
-      if (this.userDetails.roleId != 7) {
         this.totalLaycredit();
-        this.getCartList();
-      }
     }
+    this.getCartList();
 
     this.cartService.getCartItems.subscribe(data => {
 
@@ -67,55 +70,51 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   getCartList() {
-    if (this.isLoggedIn) {
-      // GET CART LIST FROM GENERIC SERVICE
-      let live_availiblity='no';
-      let url = window.location.href;
-      if(url.includes('cart/booking')){
-        live_availiblity='yes';
-      }
-      this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
-        if (res) {
-          // SET CART ITEMS IN CART SERVICE
-          let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
-          this.cartService.setCartItems(cartItems);
-          if (cartItems) {
-            this.cartItemsCount = res.count;
-            localStorage.setItem('$crt', this.cartItemsCount);
-          }
-          this.calculateInstalment(cartItems);
-          // this.cd.detectChanges();
-        }
-      }, (error) => {
-        if (error && error.status === 404) {
-          this.cartItems = [];
-          this.cartItemsCount = 0;
+    
+    let live_availiblity='no';
+    let url = window.location.href;
+    if(url.includes('cart/booking')){
+      live_availiblity='yes';
+    }
+    this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
+      if (res) {
+        // SET CART ITEMS IN CART SERVICE
+        let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
+        this.cartService.setCartItems(cartItems);
+        if (cartItems) {
+          this.cartItemsCount = res.count;
           localStorage.setItem('$crt', this.cartItemsCount);
         }
-      });
-    }
+        this.calculateInstalment(cartItems);
+        // this.cd.detectChanges();
+      }
+    }, (error) => {
+      if (error && error.status === 404) {
+        this.cartItems = [];
+        this.cartItemsCount = 0;
+        localStorage.setItem('$crt', this.cartItemsCount);
+      }
+    });
   }
 
   updateCartSummary(){
-    if (this.isLoggedIn) {
-      let live_availiblity='no';
-      let url = window.location.href;
-      if(url.includes('cart/booking')){
-        live_availiblity='yes';
-      }
-      this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
-        if (res) {
-          // SET CART ITEMS IN CART SERVICE
-          let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
-          this.calculateInstalment(cartItems);
-          this.cd.detectChanges();
-        }
-      }, (error) => {
-        if (error && error.status === 404) {
-          
-        }
-      });
+    let live_availiblity='no';
+    let url = window.location.href;
+    if(url.includes('cart/booking')){
+      live_availiblity='yes';
     }
+    this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
+      if (res) {
+        // SET CART ITEMS IN CART SERVICE
+        let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
+        this.calculateInstalment(cartItems);
+        this.cd.detectChanges();
+      }
+    }, (error) => {
+      if (error && error.status === 404) {
+        
+      }
+    });
   }
 
   ngDoCheck() {
@@ -140,13 +139,11 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   checkUser() {
-    let userToken = localStorage.getItem('_lay_sess');
-
+    this.userDetails = getLoginUserInfo();    
     this.isLoggedIn = false;
-    if (userToken && userToken != 'undefined' && userToken != 'null') {
+    if (Object.keys(this.userDetails).length && this.userDetails.roleId != 7) {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
-      this.userDetails = getLoginUserInfo();
       var name = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
       var domain = this.userDetails.email.substring(this.userDetails.email.lastIndexOf("@") + 1);
       this.username = this.userDetails.firstName ? this.userDetails.firstName : name;
@@ -163,7 +160,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.showTotalLayCredit = 0;
     localStorage.removeItem('_lay_sess');
     localStorage.removeItem('$crt');
+    this.cookieService.remove('__cc');
     this.cartItemsCount = '';
+    this.loginGuestUser();
     this.router.navigate(['/']);
   }
 
@@ -201,14 +200,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   openSignModal() {
-    // const modalRef = this.modalService.open(AuthComponent);
     $('#sign_in_modal').modal('show');
     $("#signin-form").trigger("reset");
   }
 
   redirectToPayment() {
-    /* if (this.isLoggedIn && this.cartItemsCount > 0) {
-    } */
+    
     this.router.navigate([`cart/booking`]);
   }
 
@@ -254,6 +251,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   emptyCart() {
     $('#empty_modal').modal('hide');
     this.fullPageLoading = true;
+    
     this.genericService.emptyCart().subscribe((res: any) => {
       if (res) {
         this.fullPageLoading = false;
@@ -273,5 +271,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   redirectToHome() {
     $('#empty_modal').modal('hide');
     this.router.navigate(['/']);
+  }
+
+  loginGuestUser(){
+    let uuid= localStorage.getItem('__gst')
+    this.userService.registerGuestUser({guest_id : uuid}).subscribe((result:any)=>{
+      localStorage.setItem("_lay_sess",result.accessToken)
+    })
   }
 }

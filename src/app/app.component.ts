@@ -6,6 +6,7 @@ import { SwPush } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 import { getLoginUserInfo } from './_helpers/jwt.helper';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent {
     private cookieService:CookieService,
     private genericService:GenericService,
     private swPush: SwPush,
+    private userService:UserService
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
@@ -100,12 +102,20 @@ export class AppComponent {
   }
 
   registerGuestUser(){
-
-    let user = getLoginUserInfo()
-    if(Object.keys(user).length==0){
-      let __gst= this.cookieService.get('__gst');
+    let user = getLoginUserInfo();
+    if(!user.roleId || user.roleId==7){
+      let __gst= localStorage.getItem('__gst')
       if(!__gst){
-        this.cookieService.put('__gst',uuidv4())
+        let uuid=uuidv4();
+        localStorage.setItem('__gst',uuid)
+        this.userService.registerGuestUser({guest_id : uuid}).subscribe((result:any)=>{
+          localStorage.setItem("_lay_sess",result.accessToken)
+        })
+      }
+      else{
+        this.userService.registerGuestUser({guest_id : __gst}).subscribe((result:any)=>{
+          localStorage.setItem("_lay_sess",result.accessToken)
+        })
       }
     }
   }

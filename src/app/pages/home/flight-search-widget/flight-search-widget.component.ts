@@ -95,15 +95,15 @@ export class FlightSearchWidgetComponent implements OnInit {
       returnDate: [[Validators.required]]
     });
 
-    let  date = new Date();
-    date.setDate(date.getDate() + 7);
-    this.flightDepartureMinDate =  date;
+    this.setFlightDepartureMinDate();
+    
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
     
   }
-
+  
+  
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.countryCode = this.commonFunction.getUserCountry();
@@ -134,6 +134,9 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.class = params['class'];
 
         this.departureDate = new Date(params['departure_date']);
+        if(moment(this.departureDate).format("YYYY-MM-DD") < '2021-06-01'){
+            // this.router.navigate(['/flight/flight-not-found'])
+        }
         this.currentMonth = moment(this.departureDate).format("MM");
         this.currentYear = moment(this.departureDate).format("YYYY");
         // this.returnDate = new Date(params['arrival_date']);
@@ -173,6 +176,29 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
 
+
+  setFlightDepartureMinDate(){
+    let  date = new Date();
+    var curretdate = moment().format();
+    let  juneDate :any =  moment('2021-06-01').format('YYYY-MM-DD');
+    
+    let daysDiffFromCurToJune = moment('2021-06-07', "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+
+    date.setDate(date.getDate() + 7);
+
+    if(curretdate < juneDate && daysDiffFromCurToJune > 7 ){    
+      this.flightDepartureMinDate =  new Date(juneDate);
+      this.departureDate = this.flightDepartureMinDate; 
+    } else if(daysDiffFromCurToJune < 7){
+      this.flightDepartureMinDate =  date;
+      this.departureDate = date; 
+    } else {
+      this.departureDate = date; 
+      this.flightDepartureMinDate =  date;
+    }
+  }
+
+  
   destinationChangedValue(event) {
     if (event && event.key && event.key === 'fromSearch') {
       //this.fromDestinationCode = event.value.code;
@@ -214,6 +240,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     queryParams.departure = this.fromSearch.code ? this.fromSearch.code : this.searchFlightInfo.departure;
     queryParams.arrival = this.toSearch.code ? this.toSearch.code : this.searchFlightInfo.arrival;
     queryParams.departure_date = moment(this.departureDate).format('YYYY-MM-DD');
+    
     if (this.isRoundTrip === true) {
       queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
     }
@@ -319,6 +346,11 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   changeMonth(event) {
+
+    var currentDate = new Date();
+    // 1 June validation apply
+    let  juneDate :any =  moment('2021-06-01').format('YYYY-MM-DD');
+
     this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
 
     this.route.queryParams.subscribe(params => {
@@ -357,22 +389,24 @@ export class FlightSearchWidgetComponent implements OnInit {
           start_date: startDate,
           end_date: endDate
         }
-        var CurrentDate = new Date();
+      
         var GivenDate = new Date(endDate);
-
-        if (GivenDate > CurrentDate || CurrentDate < new Date(startDate)) {
-          this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
-          this.isCalenderPriceLoading = this.calPrices = true;
-            
-          this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
-              this.calenderPrices = [...this.calenderPrices,...res];
+       
+        if(startDate >= juneDate) { //june calendar validation        
+          if (GivenDate > currentDate || currentDate < new Date(startDate)) {
+            this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
+            this.isCalenderPriceLoading = this.calPrices = true;
+              
+            this.flightService.getFlightCalenderDate(payload).subscribe((res:any) => {
+                this.calenderPrices = [...this.calenderPrices,...res];
+                this.isCalenderPriceLoading = false;
+            }, err => {
+              this.calPrices = false;
               this.isCalenderPriceLoading = false;
-          }, err => {
-            this.calPrices = false;
-            this.isCalenderPriceLoading = false;
-          });
-        } else {
-          this.calPrices = this.isCalenderPriceLoading = false;
+            });
+          } else {
+            this.calPrices = this.isCalenderPriceLoading = false;
+          }
         }
       }
     }
@@ -429,5 +463,6 @@ export class FlightSearchWidgetComponent implements OnInit {
       return 0;
     }
   }
+
 
 }

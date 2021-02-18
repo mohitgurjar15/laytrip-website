@@ -37,18 +37,18 @@
             }
             &:checked + label {
                 background: $background-white;
-                border: 3px solid $text_light_yellow;
+                border: 3px solid $grayed_border;
                 &::after{
                     left: calc(100% - 5px);
                     transform: translateX(-100%);
                     background: $background-white;
-                    border: 3px solid $text_light_yellow;
+                    border: 3px solid $grayed_border;
                 }
             }
         }
         
         label {
-            cursor: pointer;
+            cursor: not-allowed;
             text-indent: -9999px;
             width: 40px;
             height: 26px;
