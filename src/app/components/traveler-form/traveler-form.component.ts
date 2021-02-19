@@ -12,7 +12,6 @@ declare var $: any;
 import * as moment from 'moment';
 import { TravelerService } from '../../services/traveler.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-
 @Component({
   selector: 'app-traveler-form',
   templateUrl: './traveler-form.component.html',

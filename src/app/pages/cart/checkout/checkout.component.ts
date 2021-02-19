@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { CommonFunction } from '../../../_helpers/common-function';
 
 export interface CartItem {
 
