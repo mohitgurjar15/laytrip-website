@@ -274,28 +274,99 @@
 /*------------- color variables ------------*/
 /*----------------- responsive variations -----------------*/
 /*----------------- responsive variations -----------------*/
-.accordion_cardss {
-  margin: 15px 15px 0px 15px;
+.account_part {
+  background-color: #ffffff;
 }
-.accordion_cardss .card {
+.account_part .traveller_detail_wrpper {
+  padding: 15px 0;
+  max-width: 655px;
+  margin: 0 auto;
+}
+.account_part .traveller_detail_wrpper .title_bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.account_part .traveller_detail_wrpper .title_bar h3 {
+  color: #1445f5;
+  font-size: 34px;
+  margin-bottom: 5px;
+  margin: 25px 0 15px;
+}
+@media (max-width: 768px) {
+  .account_part .traveller_detail_wrpper .title_bar h3 {
+    font-size: 18px;
+  }
+}
+.account_part .traveller_detail_wrpper .title_bar .edit_btns a {
+  background-color: transparent;
+  color: #ffaa00;
+  box-shadow: none;
+  font-size: 16px;
+  padding: 0;
+  text-align: right;
+  text-decoration: none;
+}
+.account_part .traveller_detail_wrpper .travel_detail_bg_wrps {
+  background-color: #e4e4e4;
+  border-radius: 5px;
+  padding: 15px;
+}
+.account_part .card_details_wrppers {
+  padding: 15px 0;
+  max-width: 655px;
+  margin: 0 auto;
+}
+.account_part .card_details_wrppers .title_bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.account_part .card_details_wrppers .title_bar h3 {
+  color: #1445f5;
+  font-size: 34px;
+  margin-bottom: 5px;
+  margin: 25px 0 15px;
+}
+@media (max-width: 768px) {
+  .account_part .card_details_wrppers .title_bar h3 {
+    font-size: 18px;
+  }
+}
+.account_part .card_details_wrppers .title_bar .edit_btns a {
+  background-color: transparent;
+  color: #ffaa00;
+  box-shadow: none;
+  font-size: 16px;
+  padding: 0;
+  text-align: right;
+  text-decoration: none;
+}
+.account_part .card_details_wrppers .booking_detail_bg_wrps {
+  background-color: #e4e4e4;
+  border-radius: 5px;
+  padding: 15px;
+}
+.account_part .card_details_wrppers .booking_detail_bg_wrps .card_accordion .card {
+  border: 1px solid #bababa;
+  border-radius: 10px;
+}
+.account_part .card_details_wrppers .booking_detail_bg_wrps .card_accordion .card .new_card {
   border: 1px solid #d6d6d6;
   border-radius: 10px;
-  margin-top: 20px;
+  margin: 15px;
 }
-.accordion_cardss .card:first-child {
-  margin-top: 0;
+.account_part .card_details_wrppers .booking_detail_bg_wrps .card_accordion .card .new_card .heade_wrps img {
+  margin-right: 15px;
 }
-.accordion_cardss .card.current_selected_card {
-  border: 2px solid #ffaa00 !important;
-}
-.accordion_cardss .card .card-header {
+.account_part .card_details_wrppers .booking_detail_bg_wrps .card_accordion .card .card-header {
   border: none;
   background-color: transparent;
   padding: 15px;
   height: 68px;
   display: flex;
 }
-.accordion_cardss .card .card-header a {
+.account_part .card_details_wrppers .booking_detail_bg_wrps .card_accordion .card .card-header a {
   font-weight: 600;
   color: #000000;
   font-size: 16px;
@@ -307,99 +378,197 @@
   width: 100%;
   padding: 0;
 }
-.accordion_cardss .card .card-header a[aria-expanded=true]:after {
+.account_part .card_details_wrppers .booking_detail_bg_wrps .card_accordion .card .card-header a[aria-expanded=true]:after {
   font-family: "FontAwesome";
   content: "";
   color: #8188ab;
   font-weight: normal;
   transition: 0.3s;
-  right: 0;
+  right: 10px;
+  top: 5px;
 }
-.accordion_cardss .card .card-header a[aria-expanded=false]:after {
+.account_part .card_details_wrppers .booking_detail_bg_wrps .card_accordion .card .card-header a[aria-expanded=false]:after {
   font-family: "FontAwesome";
   content: "";
   color: #8188ab;
   font-weight: normal;
   transition: 0.3s;
-  right: 0;
+  right: 10px;
+  top: 5px;
 }
-.accordion_cardss .card .card-header a .heade_wrps img {
-  margin-right: 15px;
-}
-.accordion_cardss .card .card-body {
+.account_part .card_details_wrppers .booking_detail_bg_wrps .card_accordion .card .card-body {
   padding: 15px;
 }
+.account_part .prefrence_main_wrapper {
+  padding: 15px 0;
+  max-width: 655px;
+  margin: 0 auto;
+}
+.account_part .prefrence_main_wrapper .title_bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.account_part .prefrence_main_wrapper .title_bar h3 {
+  color: #1445f5;
+  font-size: 34px;
+  margin-bottom: 5px;
+  margin: 25px 0 15px;
+}
 @media (max-width: 768px) {
-  .accordion_cardss .card .card-body .mb-sm-10 {
-    margin-bottom: 10px;
+  .account_part .prefrence_main_wrapper .title_bar h3 {
+    font-size: 18px;
   }
 }
-.accordion_cardss .card .card-body .card_headbar {
-  color: #878787;
-  font-size: 12px;
+.account_part .security_main_wrapper {
+  padding: 15px 0;
+  max-width: 655px;
+  margin: 0 auto;
 }
-.accordion_cardss .card .card-body .card_texter {
-  color: #000000;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 22px;
-}
-.accordion_cardss .card .card-body .card_texter span {
-  font-weight: 500;
-}
-.accordion_cardss .card .card-body .save_btn_wrps {
+.account_part .security_main_wrapper .title_bar {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  flex-direction: column;
-  height: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
-.accordion_cardss .card .card-body .save_btn_wrps a {
+.account_part .security_main_wrapper .title_bar h3 {
+  color: #1445f5;
+  font-size: 34px;
+  margin-bottom: 5px;
+  margin: 25px 0 15px;
+}
+@media (max-width: 768px) {
+  .account_part .security_main_wrapper .title_bar h3 {
+    font-size: 18px;
+  }
+}
+.account_part .security_main_wrapper .security_accord_wrppaer {
+  background-color: #ffffff;
+  border: none;
+}
+.account_part .security_main_wrapper .security_accord_wrppaer .secur_accordion .card {
+  border: none;
+  border-radius: 10px;
+}
+.account_part .security_main_wrapper .security_accord_wrppaer .secur_accordion .card .card-header {
+  border: none;
+  border-bottom: 1px solid #bababa;
+  padding: 10px 0;
+  background-color: transparent;
+}
+.account_part .security_main_wrapper .security_accord_wrppaer .secur_accordion .card .card-header a {
+  font-weight: 600;
+  color: #000000;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+.account_part .security_main_wrapper .security_accord_wrppaer .secur_accordion .card .card-header a[aria-expanded=true]:after {
+  content: "";
+  position: relative;
+  padding: 5px 9px;
+  margin-left: 10px;
+  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 12px;
+  transition: 0.3s;
+  right: 15px;
+}
+@media (max-width: 768px) {
+  .account_part .security_main_wrapper .security_accord_wrppaer .secur_accordion .card .card-header a[aria-expanded=true]:after {
+    position: absolute;
+    right: 0;
+    height: 12px;
+  }
+}
+.account_part .security_main_wrapper .security_accord_wrppaer .secur_accordion .card .card-header a[aria-expanded=false]:after {
+  position: relative;
+  padding: 5px 9px;
+  margin-left: 10px;
+  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 12px;
+  content: "";
+  transition: 0.3s;
+  right: 15px;
+}
+@media (max-width: 768px) {
+  .account_part .security_main_wrapper .security_accord_wrppaer .secur_accordion .card .card-header a[aria-expanded=false]:after {
+    position: absolute;
+    right: 0;
+    height: 12px;
+  }
+}
+.account_part .security_main_wrapper .security_accord_wrppaer .secur_accordion .card .card-body {
+  padding: 15px 0;
+}
+.account_part .delete_main_wrpper {
+  padding: 15px 0;
+  max-width: 655px;
+  margin: 0 auto;
+}
+.account_part .delete_main_wrpper .edit_btns {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 5px 0;
+  width: 100%;
+  border-bottom: 1px solid #d6d6d6;
+  padding-bottom: 10px;
+}
+.account_part .delete_main_wrpper .edit_btns a {
   background-color: transparent;
   color: #ffaa00;
-  border: none;
   box-shadow: none;
   font-size: 16px;
   padding: 0;
+  text-align: right;
+  text-decoration: none;
 }
 
-.delete_credit_card .modal-header {
+.delete_account_block .modal-header {
   justify-content: center;
   border: none;
   padding: 25px;
 }
-.delete_credit_card .modal-header .close {
+.delete_account_block .modal-header .close {
   opacity: 1;
   position: absolute;
   top: 20px;
   right: 20px;
 }
-.delete_credit_card .modal-header .close img {
+.delete_account_block .modal-header .close img {
   width: 12px;
 }
 @media (max-width: 558px) {
-  .delete_credit_card .modal-header .close {
+  .delete_account_block .modal-header .close {
     top: 15px;
     right: 15px;
   }
 }
-.delete_credit_card .modal-body {
+.delete_account_block .modal-body {
   width: 100%;
   padding: 0px 15px 20px;
 }
 @media (max-width: 768px) {
-  .delete_credit_card .modal-body {
+  .delete_account_block .modal-body {
     height: 100%;
     justify-content: center;
     display: flex;
     flex-flow: column;
   }
 }
-.delete_credit_card .modal-body .block_im {
+.delete_account_block .modal-body .block_im {
   margin: 0 auto 15px;
   width: 85px;
 }
-.delete_credit_card .modal-body h4 {
+.delete_account_block .modal-body h4 {
   font-size: 32px;
   line-height: 40px;
   font-weight: 500;
@@ -408,25 +577,25 @@
   text-align: center;
 }
 @media (max-width: 768px) {
-  .delete_credit_card .modal-body h4 {
+  .delete_account_block .modal-body h4 {
     font-size: 24px;
     text-align: center;
   }
 }
 @media (max-width: 558px) {
-  .delete_credit_card .modal-body h4 {
+  .delete_account_block .modal-body h4 {
     font-size: 20px;
     line-height: 26px;
     text-align: center;
   }
 }
-.delete_credit_card .modal-body .check {
+.delete_account_block .modal-body .check {
   width: 100%;
   display: flex;
   justify-content: center;
   margin: 0 0 30px;
 }
-.delete_credit_card .modal-body .check .custom_checkbox {
+.delete_account_block .modal-body .check .custom_checkbox {
   position: relative;
   margin-bottom: 0;
   vertical-align: middle;
@@ -438,7 +607,7 @@
   color: #878787;
   text-transform: none;
 }
-.delete_credit_card .modal-body .check .custom_checkbox input {
+.delete_account_block .modal-body .check .custom_checkbox input {
   position: absolute;
   top: 0;
   left: 0;
@@ -446,13 +615,13 @@
   height: 100%;
   opacity: 0;
 }
-.delete_credit_card .modal-body .check .custom_checkbox input:checked ~ .checkmark {
+.delete_account_block .modal-body .check .custom_checkbox input:checked ~ .checkmark {
   border-color: #0044fb;
 }
-.delete_credit_card .modal-body .check .custom_checkbox input:checked ~ .checkmark:after {
+.delete_account_block .modal-body .check .custom_checkbox input:checked ~ .checkmark:after {
   opacity: 1;
 }
-.delete_credit_card .modal-body .check .custom_checkbox .checkmark {
+.delete_account_block .modal-body .check .custom_checkbox .checkmark {
   width: 14px;
   min-width: 14px;
   height: 14px;
@@ -462,7 +631,7 @@
   margin-right: 11px;
   position: relative;
 }
-.delete_credit_card .modal-body .check .custom_checkbox .checkmark:after {
+.delete_account_block .modal-body .check .custom_checkbox .checkmark:after {
   content: "";
   position: absolute;
   top: 1px;
@@ -486,23 +655,12 @@
   transition: all 0.2s;
   opacity: 0;
 }
-.delete_credit_card .modal-body .alert_box {
-  max-width: 375px;
-  width: 100%;
-  margin: 10px auto 5px;
-  padding: 5px 20px;
-  font-size: 12px;
-  color: #ff7272;
-  background: rgba(255, 114, 114, 0.15);
-  text-align: center;
-  border-radius: 25px;
-}
-.delete_credit_card .modal-body .cta_btn_wrps {
+.delete_account_block .modal-body .cta_btn_wrps {
   padding: 10px;
   width: 100%;
   display: flex;
 }
-.delete_credit_card .modal-body .cta_btn_wrps button {
+.delete_account_block .modal-body .cta_btn_wrps button {
   max-width: 472px;
   width: 100%;
   height: 40px;
@@ -522,39 +680,39 @@
   align-items: center;
   justify-content: center;
 }
-.delete_credit_card .modal-body .cta_btn_wrps button:hover {
+.delete_account_block .modal-body .cta_btn_wrps button:hover {
   border: 1px solid #F826C1;
   color: #ffffff;
   background: #F826C1;
 }
-.delete_credit_card .modal-body .cta_btn_wrps button:focus {
+.delete_account_block .modal-body .cta_btn_wrps button:focus {
   outline: none;
   box-shadow: none;
 }
-.delete_credit_card .modal-body .footer_logo {
+.delete_account_block .modal-body .footer_logo {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   margin-top: 10px;
 }
-.delete_credit_card .modal-body .footer_logo img {
+.delete_account_block .modal-body .footer_logo img {
   max-width: 62px;
   height: 23px;
 }
-.delete_credit_card .modal-footer {
+.delete_account_block .modal-footer {
   padding: 0 20px 25px;
   border: 0;
   margin: 0;
 }
-.delete_credit_card .modal-footer .modal_btm {
+.delete_account_block .modal-footer .modal_btm {
   width: 100%;
 }
-.delete_credit_card .modal-footer .modal_btm .block_logo {
+.delete_account_block .modal-footer .modal_btm .block_logo {
   width: 100%;
   text-align: center;
   margin: 0 0 0;
 }
-.delete_credit_card .modal-footer .modal_btm .block_logo img {
+.delete_account_block .modal-footer .modal_btm .block_logo img {
   height: 22px;
 }
