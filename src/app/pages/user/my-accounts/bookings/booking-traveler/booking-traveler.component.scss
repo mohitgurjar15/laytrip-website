@@ -414,13 +414,13 @@
                                 flex-wrap: wrap;
                                 margin: 5px 0;
                                 width: 100%;
+                                justify-content: flex-start;
+                                display: flex;
                             }
 
                             li {
-                                margin: 0 5px;
-
+                                margin-right: 5px;
                                 @include tab-view {
-                                    margin-left: 5px;
                                     margin-bottom: 5px;
 
                                     &:first-child {
@@ -442,6 +442,7 @@
 
                                     @include tab-view {
                                         margin: 0;
+                                        padding: 10px;
                                     }
 
                                     &.active {
@@ -457,6 +458,10 @@
                         padding: 0;
                         margin-top: 15px;
 
+                        @include tab-view{
+                            margin: 0;
+                        }
+
                         .addon_listins_wrps {
                             display: flex;
                             justify-content: flex-end;
@@ -465,6 +470,9 @@
                             span {
                                 flex: 1;
                                 max-width: 95px;
+                                @include tab-view{
+                                    display: none;
+                                }
                             }
 
                             @include tab-view {
