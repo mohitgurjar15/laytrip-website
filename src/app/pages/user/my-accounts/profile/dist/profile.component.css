@@ -113,6 +113,13 @@
   background-position: left 25px center;
   color: #808080;
 }
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 3px 0 0 0;
+  max-width: 275px;
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
+  padding-left: 0;
+}
 .ng-select.ng-customClass .ng-select-container {
   height: 100%;
   border: none !important;
@@ -148,10 +155,6 @@
   height: 3px;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-selection {
-  background: #F826C1;
-}
-
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
   width: 13px;
   height: 13px;
@@ -159,7 +162,6 @@
   /* to remove the default positioning */
   top: -6px;
   background-color: #fff;
-  border: 1px solid #F826C1;
   border-radius: 50%;
   outline: none;
 }
@@ -195,12 +197,7 @@
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
   font-weight: bold;
-  color: #F826C1;
   display: none;
-}
-
-.custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-  background: #F826C1;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
@@ -544,6 +541,22 @@ input.ng-invalid.ng-touched {
 .account_cnt_main .update_info .form_row .text_field .gender_anchers a:focus {
   outline: none;
 }
+.account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a {
+  color: #878787;
+  font-size: 14px;
+  padding: 0 25px 0 0;
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a.active {
+  color: #ffaa00;
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a:focus {
+  outline: none;
+}
 .account_cnt_main .update_info .form_row .text_field .tel_span {
   display: flex;
   position: relative;
@@ -551,6 +564,7 @@ input.ng-invalid.ng-touched {
 }
 .account_cnt_main .update_info .form_row .text_field .tel_span input {
   border-bottom: none;
+  padding: 0;
 }
 .account_cnt_main .update_info .form_row .text_field .tel_span input:first-child {
   width: 55px;
@@ -567,6 +581,7 @@ input.ng-invalid.ng-touched {
 .account_cnt_main .update_info .form_row input:focus {
   border: none;
   outline: none;
+  box-shadow: none;
 }
 .account_cnt_main .update_info .form_row input.birth_date {
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;

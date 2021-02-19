@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
-import { CommonFunction } from 'src/app/_helpers/common-function';
+import { CommonFunction } from '../../../_helpers/common-function';
 
 export interface CartItem {
 
@@ -203,6 +203,11 @@ export class CheckoutComponent implements OnInit {
     this.cardListChangeCount = data;
   }
 
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+  }
+
   deleteCart(cartId) {
     if (cartId == 0) {
       return;
@@ -210,6 +215,7 @@ export class CheckoutComponent implements OnInit {
     this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
+      this.redirectTo('/cart/checkout');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1)
@@ -245,7 +251,7 @@ export class CheckoutComponent implements OnInit {
   validateCartItems() {
     this.validationErrorMessage = '';
     if (!this.isValidTravelers) {
-      this.validationErrorMessage = 'Traveller details is not valid for '
+      this.validationErrorMessage = 'Complete required fields in Traveler Details for '
       let message = '';
       for (let i in Object.keys(this.travelerForm.controls)) {
         message = '';
