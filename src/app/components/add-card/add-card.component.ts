@@ -227,18 +227,13 @@ export class AddCardComponent implements OnInit {
   }
 
   submitPaymentForm() {
-
+    $("#submit_button").prop('disabled', true);
     var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
     for (var i = 0; i < paymentMethodFields.length; i++) {
       var field = paymentMethodFields[i];
-
-      // Reset existing styles (to clear previous errors)
       var fieldEl = (<HTMLInputElement>document.getElementById(field));
-      //fieldEl.style.border = normalBorder;
-
-      // add value to options
-      // options[field] = fieldEl.value;
+      
 
       if (fieldEl.id === 'month-year') {
         let value = fieldEl.value;
