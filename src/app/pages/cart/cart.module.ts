@@ -14,6 +14,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { HomeModule } from '../home/home.module';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { SpreedlyService } from 'src/app/services/spreedly.service';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
     CalendarModule,
     HomeModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [SpreedlyService]
 })
 export class CartModule { }

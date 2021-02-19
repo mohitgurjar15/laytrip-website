@@ -91,7 +91,11 @@ const routes: Routes = [
             {
                 path: 'pages',
                 component: CmsPagesComponent
-            },
+          },
+          {
+            path: 'book',
+            loadChildren: () => import('./book/book.module').then(m => m.BookModule)
+          },
         ]
     }
 ];

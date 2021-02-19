@@ -291,7 +291,7 @@ export class CheckoutComponent implements OnInit {
           if (i === this.carts.length - 1) {
 
             let browser_info = this.spreedly.browserInfo();
-
+            console.log(browser_info);
             this.bookingRequest.browser_info = browser_info;
             // this.bookingRequest.site_url = this.document.location.origin;
             this.bookingRequest.site_url = 'https://demo.eztoflow.com';
@@ -301,24 +301,24 @@ export class CheckoutComponent implements OnInit {
               let transaction = res.transaction;
               console.log(res);
 
-              // let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
-              // res.redirection = redirection;
-              // if (transaction.state == "succeeded") {
+              let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+              res.redirection = redirection;
+              if (transaction.state == "succeeded") {
 
-              //   console.log('succeeded', [redirection]);
-              //   /* Note: Do not use this.router.navigateByUrl or navigate here */
-              //   window.location.href = redirection;
-              // } else if (transaction.state == "pending") {
+                console.log('succeeded', [redirection]);
+                /* Note: Do not use this.router.navigateByUrl or navigate here */
+                window.location.href = redirection;
+              } else if (transaction.state == "pending") {
 
-              //   console.log('pending', [res]);
+                console.log('pending', [res]);
 
-              //   this.spreedly.lifeCycle(res);
-              // } else {
+                this.spreedly.lifeCycle(res);
+              } else {
 
-              //   console.log('fail', [res]);
+                console.log('fail', [res]);
 
-              //   this.router.navigate(['/book/failure']);
-              // }
+                this.router.navigate(['/book/failure']);
+              }
             }, (error) => {
                 console.log(error);
             });
