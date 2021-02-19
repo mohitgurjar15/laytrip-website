@@ -42,6 +42,9 @@ var my_wallet_add_points_component_1 = require("./my-wallet-add-points/my-wallet
 var send_email_popup_component_1 = require("./bookings/send-email-popup/send-email-popup.component");
 var account_component_1 = require("./account/account.component");
 var preferances_component_1 = require("./preferances/preferances.component");
+var booking_traveler_component_1 = require("./bookings/booking-traveler/booking-traveler.component");
+var cart_price_summary_component_1 = require("./bookings/cart-price-summary/cart-price-summary.component");
+var ngx_mask_1 = require("ngx-mask");
 var MyAccountsModule = /** @class */ (function () {
     function MyAccountsModule() {
     }
@@ -73,6 +76,8 @@ var MyAccountsModule = /** @class */ (function () {
                 send_email_popup_component_1.SendEmailPopupComponent,
                 account_component_1.AccountComponent,
                 preferances_component_1.PreferancesComponent,
+                booking_traveler_component_1.BookingTravelerComponent,
+                cart_price_summary_component_1.CartPriceSummaryComponent,
             ],
             imports: [
                 common_1.CommonModule,
@@ -84,7 +89,8 @@ var MyAccountsModule = /** @class */ (function () {
                 calendar_1.CalendarModule,
                 flight_module_1.FlightModule,
                 angular2_text_mask_1.TextMaskModule,
-                components_module_1.ComponentsModule
+                components_module_1.ComponentsModule,
+                ngx_mask_1.NgxMaskModule.forRoot(),
             ],
             providers: [common_1.DatePipe, ng_bootstrap_1.NgbActiveModal],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA],

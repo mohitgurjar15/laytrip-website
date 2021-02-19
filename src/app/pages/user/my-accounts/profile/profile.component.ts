@@ -194,7 +194,8 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.loadingValue.emit(true);   
+    this.loadingValue.emit(true);
+    console.log(this.profileForm)   
     if (this.profileForm.invalid) {
       this.loadingValue.emit(false);   
       //scroll top if any error 
