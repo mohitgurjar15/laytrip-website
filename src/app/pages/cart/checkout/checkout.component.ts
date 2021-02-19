@@ -118,6 +118,7 @@ export class CheckoutComponent implements OnInit {
           notAvilableItems.push(items.data[i])
         }
       }
+      this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);

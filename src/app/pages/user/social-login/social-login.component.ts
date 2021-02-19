@@ -9,7 +9,7 @@ import { SocialAuthService } from 'angularx-social-login';
 import { AppleLoginProvider } from './apple.provider';
 declare var $: any;
 import { getUserDetails } from '../../../_helpers/jwt.helper';
-import { ToastrService } from 'ngx-toastr';
+import { CommonFunction } from '../../../_helpers/common-function';
 declare const gapi: any;
 
 @Component({
@@ -28,6 +28,7 @@ export class SocialLoginComponent implements OnInit {
   apple_loading: boolean = false;
   @ViewChild('loginRef', { static: true }) loginElement: ElementRef;
   auth2: any;
+  guestUserId:string='';
 
   constructor(
     private userService: UserService,
@@ -35,7 +36,7 @@ export class SocialLoginComponent implements OnInit {
     public modalService: NgbModal,
     public location: Location,
     private authService: SocialAuthService,
-    private toastr: ToastrService,
+    private commonFunction:CommonFunction
 
   ) {
   
@@ -44,6 +45,7 @@ export class SocialLoginComponent implements OnInit {
   
   ngOnInit() {
     this.loadGoogleSdk();
+    this.guestUserId = localStorage.getItem('__gst') || '';
 
    this.loadFacebookSdk();
     // APPLE LOGIN RESPONSE 
@@ -65,10 +67,28 @@ export class SocialLoginComponent implements OnInit {
         };
         this.userService.socialLogin(jsonData).subscribe((data: any) => {
           if (data.user_details) {
+
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
             document.getElementById('navbarNav').click();
             this.router.url;
+
+            if(this.guestUserId){
+              this.userService.mapGuestUser(this.guestUserId).subscribe(res=>{
+                let urlData = this.commonFunction.decodeUrl(this.router.url)
+                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                  this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+                });  
+              })
+            }
+            else{
+              let urlData = this.commonFunction.decodeUrl(this.router.url)
+              this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+              });
+            }
+
+            
           }
         }, (error: HttpErrorResponse) => {         
           this.socialError.emit(error.message);
@@ -103,6 +123,21 @@ export class SocialLoginComponent implements OnInit {
             $('#sign_in_modal').modal('hide');
             $('#sign_up_modal').modal('hide');
             this.router.url;
+            if(this.guestUserId){
+              this.userService.mapGuestUser(this.guestUserId).subscribe(res=>{
+                let urlData = this.commonFunction.decodeUrl(this.router.url)
+                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                  this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+                });  
+              })
+            }
+            else{
+              let urlData = this.commonFunction.decodeUrl(this.router.url)
+              this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+              });
+            }
+
             document.getElementById('navbarNav').click();
           }
         }, (error: HttpErrorResponse) => {
@@ -185,6 +220,21 @@ export class SocialLoginComponent implements OnInit {
               this.test = true;
               document.getElementById('navbarNav').click();
               this.router.url;
+
+              if(this.guestUserId){
+                this.userService.mapGuestUser(this.guestUserId).subscribe(res=>{
+                  let urlData = this.commonFunction.decodeUrl(this.router.url)
+                  this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                    this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+                  });  
+                })
+              }
+              else{
+                let urlData = this.commonFunction.decodeUrl(this.router.url)
+                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                  this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+                });
+              }
             }
           }, (error: HttpErrorResponse) => {
             this.loading = false;
