@@ -12,7 +12,6 @@ declare var $: any;
 import * as moment from 'moment';
 import { TravelerService } from '../../services/traveler.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
 
 @Component({
   selector: 'app-traveler-form',
@@ -31,7 +30,6 @@ export class TravelerFormComponent implements OnInit {
   @Input() cartId: number;
   @Input() cartItem;
   traveler_number: number = 0;
-  userInfo;
   countries = []
   myTravelers;
   travelers = {
@@ -39,19 +37,36 @@ export class TravelerFormComponent implements OnInit {
       adults: [],
       adult:0,
       child:0,
-      infant:0
+      infant:0,
+      cartId:0
     },
     type1: {
-      adults: []
+      adults: [],
+      adult:0,
+      child:0,
+      infant:0,
+      cartId:0
     },
     type2: {
-      adults: []
+      adults: [],
+      adult:0,
+      child:0,
+      infant:0,
+      cartId:0
     },
     type3: {
-      adults: []
+      adults: [],
+      adult:0,
+      child:0,
+      infant:0,
+      cartId:0
     },
     type4: {
-      adults: []
+      adults: [],
+      adult:0,
+      child:0,
+      infant:0,
+      cartId:0
     }
   };
   dobMinDate = new Date();
@@ -75,22 +90,29 @@ export class TravelerFormComponent implements OnInit {
 
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
-        adults: this.formBuilder.array([])
+        adults: this.formBuilder.array([]),
+        cartId:['']
       }),
       type1: this.formBuilder.group({
-        adults: this.formBuilder.array([])
+        adults: this.formBuilder.array([]),
+        cartId:['']
       }),
       type2: this.formBuilder.group({
-        adults: this.formBuilder.array([])
+        adults: this.formBuilder.array([]),
+        cartId:['']
       }),
       type3: this.formBuilder.group({
-        adults: this.formBuilder.array([])
+        adults: this.formBuilder.array([]),
+        cartId:['']
       }),
       type4: this.formBuilder.group({
-        adults: this.formBuilder.array([])
+        adults: this.formBuilder.array([]),
+        cartId:['']
       })
     });
 
+    
+    
     this.checkOutService.getTravelers.subscribe((travelers: any) => {
       this.myTravelers = travelers;
     })
@@ -99,6 +121,7 @@ export class TravelerFormComponent implements OnInit {
     })
 
     for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
+      this.travelers[`type${this.cartNumber}`].cartId=this.cartId
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
       this.travelers[`type${this.cartNumber}`].adult=this.cartItem.module_info.adult_count;
       
@@ -190,6 +213,8 @@ export class TravelerFormComponent implements OnInit {
     this.cartService.getSelectedCart.subscribe(cartNumber => {
       this.cartNumber = cartNumber;
     })
+    
+    
 
     this.checkOutService.getTraveler.subscribe((traveler: any) => {
       if (traveler && Object.keys(traveler).length > 0) {
@@ -220,6 +245,7 @@ export class TravelerFormComponent implements OnInit {
 
   patch() {
     for (let i = 0; i < Object.keys(this.travelers).length; i++) {
+      this.travelerForm.controls[`type${i}`]['controls'].cartId.setValue(this.travelers[`type${i}`].cartId);
       let control: any = <FormArray>this.travelerForm.get(`type${i}.adults`);
       control.controls = [];
       this.travelers[`type${i}`].adults.forEach((x, i) => {
@@ -243,45 +269,6 @@ export class TravelerFormComponent implements OnInit {
       dobMinDate: [x.dobMinDate],
       dobMaxDate: [x.dobMaxDate]
     }, { updateOn: 'blur' });
-
-    // if (x.type == 'adult') {
-
-    //   return this.formBuilder.group({
-    //     first_name: [x.first_name, [Validators.required]],
-    //     last_name: [x.last_name, [Validators.required]],
-    //     email: [x.email, [Validators.required]],
-    //     phone_no: [x.phone_no, [Validators.required]],
-    //     country_code: [x.country_code, [Validators.required]],
-    //     dob: [x.dob, [Validators.required]],
-    //     country_id: [x.country_id, [Validators.required]],
-    //     gender: [x.gender, [Validators.required]],
-    //     userId: [x.userId],
-    //     type: [x.type],
-    //     dobMinDate: [x.dobMinDate],
-    //     dobMaxDate: [x.dobMaxDate]
-    //   }, { updateOn: 'blur' })
-    // }
-    // else {
-    //   return this.formBuilder.group({
-    //     first_name: [x.first_name, [Validators.required]],
-    //     last_name: [x.last_name, [Validators.required]],
-    //     dob: [x.dob, [Validators.required]],
-    //     country_id: [x.country_id, [Validators.required]],
-    //     gender: [x.gender, [Validators.required]],
-    //     userId: [x.userId],
-    //     type: [x.type],
-    //     dobMinDate: [x.dobMinDate],
-    //     dobMaxDate: [x.dobMaxDate]
-    //   }, { updateOn: 'blur' })
-    // }
-  }
-
-  submit(value) {
-    // console.log("value", value)
-  }
-
-  typeOf(value) {
-    return typeof value;
   }
 
   /**

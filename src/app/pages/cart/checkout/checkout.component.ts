@@ -245,7 +245,7 @@ export class CheckoutComponent implements OnInit {
   validateCartItems() {
     this.validationErrorMessage = '';
     if (!this.isValidTravelers) {
-      this.validationErrorMessage = 'Traveller details is not valid for '
+      this.validationErrorMessage = 'Complete required fields in Traveler Details for '
       let message = '';
       for (let i in Object.keys(this.travelerForm.controls)) {
         message = '';
