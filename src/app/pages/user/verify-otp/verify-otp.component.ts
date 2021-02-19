@@ -49,13 +49,14 @@ export class VerifyOtpComponent implements OnInit {
   otp:number=0;  
   configCountDown : any = {leftTime: 60,demand: false};
   isTimerEnable = true;
+  guestUserId:string='';
 
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService : UserService,
     public router: Router,
-    public commonFunctoin: CommonFunction,
+    public commonFunction: CommonFunction,
     public activeModal: NgbActiveModal
 
     ) { }
@@ -68,6 +69,8 @@ export class VerifyOtpComponent implements OnInit {
     setTimeout(() => {
       this.isResend = true;
     }, 60000);
+
+    this.guestUserId = localStorage.getItem('__gst') || '';
   }
 
   timerComplete() {
@@ -140,6 +143,22 @@ export class VerifyOtpComponent implements OnInit {
         this.submitted = this.loading = false;    
         localStorage.setItem("_lay_sess", data.userDetails.access_token);  
         const userDetails = getLoginUserInfo();    
+
+        if(this.guestUserId){
+          this.userService.mapGuestUser(this.guestUserId).subscribe(res=>{
+            let urlData = this.commonFunction.decodeUrl(this.router.url)
+            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+              this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+            });  
+          })
+        }
+        else{
+          let urlData = this.commonFunction.decodeUrl(this.router.url)
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+          });
+        }
+
         const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
         if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
           this.router.navigate(['account/subscription']);

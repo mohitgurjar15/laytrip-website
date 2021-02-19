@@ -114,6 +114,7 @@ export class BookingComponent implements OnInit {
           notAvilableItems.push(items.data[i])
         }
       }
+      this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
       if (notAvilableItems.length) {
         // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
@@ -140,9 +141,6 @@ export class BookingComponent implements OnInit {
     catch (e) {
       this.cardToken = '';
     }
-
-    console.log("this.cardToken",this.cardToken)
-
 
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
       this.isValidTravelers = travelerFrom.status === 'VALID' ? true : false;

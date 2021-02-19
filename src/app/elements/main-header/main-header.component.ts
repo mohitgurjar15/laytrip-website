@@ -61,7 +61,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.getCartList();
 
     this.cartService.getCartItems.subscribe(data => {
-
       if (data.length > 0) {
         this.updateCartSummary()
       }
@@ -73,9 +72,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     
     let live_availiblity='no';
     let url = window.location.href;
-    if(url.includes('cart/booking')){
+    if(url.includes('cart/booking') || url.includes('cart/checkout')){
       live_availiblity='yes';
     }
+    console.log("live_availiblity list::",live_availiblity)
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
         // SET CART ITEMS IN CART SERVICE
@@ -100,9 +100,11 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   updateCartSummary(){
     let live_availiblity='no';
     let url = window.location.href;
-    if(url.includes('cart/booking')){
+    if(url.includes('cart/booking') || url.includes('cart/checkout')){
       live_availiblity='yes';
     }
+    console.log("live_availiblity update::",live_availiblity)
+
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
         // SET CART ITEMS IN CART SERVICE
