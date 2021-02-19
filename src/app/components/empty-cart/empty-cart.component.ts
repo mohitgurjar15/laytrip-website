@@ -16,7 +16,7 @@ export class EmptyCartComponent implements OnInit {
     private renderer: Renderer2,
     public router: Router,
     public activeModal: NgbActiveModal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     $('#cart_modal').modal('show');
@@ -25,11 +25,13 @@ export class EmptyCartComponent implements OnInit {
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'cms-bgColor');
   }
-  
-  redirectToHome(){
+
+  redirectToHome() {
     $('#cart_modal').modal('hide');
     this.activeModal.close();
-    this.router.navigate(['/']);
+    let url = window.location.href;
+    if (url.includes('cart/booking') || url.includes('cart/checkout')) {
+      this.router.navigate(['/']);
+    }
   }
-
 }
