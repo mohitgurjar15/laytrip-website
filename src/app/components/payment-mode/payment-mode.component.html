@@ -46,7 +46,7 @@
           number : '1.2-2' }}</button>
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='biweekly'}"
           (click)="togglePaymentFrequency('biweekly')" [disabled]="biWeeklyInstalment < 5">
-          <span>Biweekly</span> ${{biWeeklyInstalment
+          <span>Bi-weekly</span> ${{biWeeklyInstalment
           | number : '1.2-2' }}</button>
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='monthly'}"
           (click)="togglePaymentFrequency('monthly')" [disabled]="montlyInstalment < 5">
