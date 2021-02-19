@@ -178,6 +178,7 @@ var ProfileComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = true;
         this.loadingValue.emit(true);
+        console.log(this.profileForm);
         if (this.profileForm.invalid) {
             this.loadingValue.emit(false);
             //scroll top if any error 

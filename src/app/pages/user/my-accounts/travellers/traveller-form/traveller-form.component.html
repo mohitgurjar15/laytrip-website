@@ -58,7 +58,7 @@
                 <span class="tel_span">
                     <input (keypress)="commonFunction.validatePhoneCode($event)"  type="text"  class="form-control" tabindex="25" maxlength="4"
                       formControlName="country_code">
-                      <input type="text" (keypress)="commonFunction.validateNumber($event)" tabindex="26" class="form-control" maxlength="10"
+                      <input type="text" mask="(000) 000-0000"  tabindex="26" class="form-control" maxlength="14"
                       formControlName="phone_no">
                 </span>
             

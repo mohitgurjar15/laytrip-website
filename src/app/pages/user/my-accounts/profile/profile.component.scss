@@ -340,6 +340,25 @@ input.ng-invalid.ng-touched {
                         }
                     }
                 }
+                .gender_anchers_notEnable {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    a {
+                        &.active {
+                            color: $text_light_yellow;
+                        }
+
+                        color: $mid_gray_bg;
+                        font-size: 14px;
+                        padding: 0 25px 0 0;                       
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
 
                 .tel_span {
                     display: flex;
