@@ -21,7 +21,7 @@
     }
 
     @media(max-width: 991px) {
-        padding: 15px 0;
+        padding: 10px 0;
     }
 
     &.fixed-top {
@@ -910,11 +910,12 @@
         display: none;
         position: absolute;
         top: 5px;
-        right: 55px;
+        right: 15px;
         transform: translateY(0%);
 
         @media(max-width: 991px) {
             display: flex;
+            align-items: center;
         }
 
         a {
@@ -973,67 +974,84 @@
         .dropdown {
             &.account_ddown {
                 .dropdown-menu {
-                    left: auto !important;
+                    left: auto;
                     right: 0;
-                    top: 120%;
-                    border: 1px solid $box-border-color;
-                    border-radius: 5px;
-                    padding: 0;
-
-                    &:before {
-                        width: 0;
-                        height: 0;
-                        border-left: 9px solid transparent;
-                        border-right: 9px solid transparent;
-                        border-bottom: 9px solid $background-white;
-                        position: absolute;
-                        top: -9px;
-                        right: 20px;
-                        content: '';
-                        z-index: 2;
-                    }
-
-                    &:after {
-                        width: 0;
-                        height: 0;
-                        border-left: 10px solid transparent;
-                        border-right: 10px solid transparent;
-                        border-bottom: 10px solid $box-border-color;
-                        position: absolute;
-                        top: -10px;
-                        right: 19px;
-                        content: '';
-                    }
+                    top: 30px;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    border-radius: 10px;
+                    box-shadow: 0px 3px 6px #00000015;
+                    border: 1px solid #E4E4E4;
+                    min-width: 120px;
+                    padding: 5px 0;
 
                     li {
-                        border-bottom: 0px solid $box-border-color;
+                        width: 100%;
+                        padding: 5px 10px;
 
                         a {
-                            color: $text-darkblue;
-                            display: block;
-                            padding: 10px;
+                            padding: 0;
+                            color: $mid_gray_bg;
+                            font-size: 16px;
 
                             &:hover {
-                                color: $text-white;
-                                background: $background-grey;
+                                background-color: transparent;
+                            }
+
+                            &.bld_txt {
+                                color: $active-tab-text;
+                                font-weight: 400;
                             }
                         }
+                    }
+                }
 
-                        &:first-child {
-                            border-radius: 5px 5px 0 0;
+                .mobile_span {
+                    font-size: 12px;
+                    color: $text-grey;
+                    display: flex;
+                    font-weight: 400;
+                    align-items: center;
+                    padding-right: 5px;
 
-                            a {
-                                border-radius: 5px 5px 0 0;
-                            }
+                    img {
+                        max-width: 27px;
+                        height: 27px;
+                        -o-object-fit: cover;
+                        object-fit: cover;
+                        -o-object-position: center;
+                        object-position: center;
+                        margin-right: 5px;
+                        border-radius: 50%;
+                    }
+
+                    &[aria-expanded="true"] {
+                        &::after {
+                            content: "";
+                            position: relative;
+                            padding: 5px 9px;
+                            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                            background-position: right;
+                            background-repeat: no-repeat;
+                            background-size: 10px;
+                            transition: 0.3s;
+                            right: 1px;
+                            border: none;
                         }
+                    }
 
-                        &:last-child {
-                            border-radius: 0 0 5px 5px;
-                            border-bottom: none;
-
-                            a {
-                                border-radius: 0 0 5px 5px;
-                            }
+                    &[aria-expanded="false"] {
+                        &::after {
+                            position: relative;
+                            padding: 5px 9px;
+                            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                            background-position: right;
+                            background-repeat: no-repeat;
+                            background-size: 10px;
+                            content: "";
+                            transition: 0.3s;
+                            right: 1px;
+                            border: none;
                         }
                     }
                 }
@@ -1109,7 +1127,7 @@
                     &::after {
                         content: "";
                         position: relative;
-                        padding: 5px 9px;
+                        padding: 7px 9px;
                         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                         background-position: right;
                         background-repeat: no-repeat;
@@ -1123,7 +1141,7 @@
                 &[aria-expanded="false"] {
                     &::after {
                         position: relative;
-                        padding: 5px 9px;
+                        padding: 7px 9px;
                         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
                         background-position: right;
                         background-repeat: no-repeat;
@@ -1140,15 +1158,16 @@
                 &.show {
                     left: auto;
                     right: 0;
-                    top: 30px;
+                    top: 13px !important;
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
                     border-radius: 10px;
-                    box-shadow: 0px 3px 6px #000015;
+                    box-shadow: 0px 3px 6px #00000015;
                     border: 1px solid #E4E4E4;
                     min-width: 120px;
                     padding: 5px 0;
+                    transform: translate3d(-80px, 14px, 0px) !important;
 
                     li {
                         width: 100%;
