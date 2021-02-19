@@ -187,8 +187,8 @@ input.ng-invalid.ng-touched {
         height: auto;
     }
 
-    @media(max-width: 575px) {
-        padding: 20px;
+    @include tab-view {
+        padding: 10px 0;
     }
 
     .update_info {
@@ -267,7 +267,7 @@ input.ng-invalid.ng-touched {
             justify-content: flex-start;
             align-items: center;
 
-            @media(max-width: 767px) {
+            @include tab-view {
                 flex-wrap: wrap;
             }
 
@@ -275,6 +275,14 @@ input.ng-invalid.ng-touched {
                 border-bottom: 1px solid $box-border-color;
                 margin-bottom: 15px;
                 padding-bottom: 10px;
+
+                @include tab-view {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    label{
+
+                    }
+                }
             }
 
             &.title_row {
@@ -288,7 +296,7 @@ input.ng-invalid.ng-touched {
                 margin: 25px 0 15px;
 
                 @include tab-view {
-                    font-size: 18px;
+                    font-size: 28px;
                 }
             }
 
@@ -366,6 +374,9 @@ input.ng-invalid.ng-touched {
                 font-size: 16px;
                 color: $mid_gray_bg;
                 position: relative;
+                @include tab-view {
+                    height: 30px;
+                }
 
                 &:focus {
                     border: none;
