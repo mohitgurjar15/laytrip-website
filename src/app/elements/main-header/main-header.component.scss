@@ -262,6 +262,11 @@
                         a {
                             img {
                                 max-width: 27px;
+                                height: 27px;
+                                -o-object-fit: cover;
+                                object-fit: cover;
+                                -o-object-position: center;
+                                object-position: center;
                                 margin-right: 5px;
                                 border-radius: 50%;
                             }
