@@ -7,7 +7,7 @@
             </span>
         </div>
         <div class="right_sec">
-            ${{cartItem?.totalAmount}}
+            ${{cartItem?.totalAmount | number : '1.2-2'}}
         </div>
         <span class="fake_paid_markss">
         </span>
@@ -18,7 +18,7 @@
                 Booking Downpayment
             </div>
             <div class="right_sec">
-                ${{cartItem?.cartInstallments[0]?.amount}}
+                ${{cartItem?.cartInstallments[0]?.amount | number : '1.2-2' }}
             </div>
             <span class="fake_paid_markss">
             </span>
@@ -52,7 +52,7 @@
                 <div class="card">
                     <div class="card-header">
                         <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#listing_descrip">
-                            {{cartItem?.cartInstallments?.length}} Monthly Installments of ${{cartItem?.cartInstallments[0]?.amount}}
+                            {{cartItem?.cartInstallments?.length}} Monthly Installments of ${{cartItem?.cartInstallments[0]?.amount | number : '1.2-2'}}
                         </a>
                     </div>
                     <div id="listing_descrip" class="collapse show" data-parent="#accordion_listing">
@@ -63,7 +63,7 @@
                                        #{{i+1}} Paid  {{commonFunction.convertDateFormat(installment.instalmentDate,'YYYY-MM-DD')}} 
                                     </div>
                                     <div class="right_sec">
-                                        ${{installment.amount}}
+                                        ${{installment.amount | number : '1.2-2' }}
                                     </div>
                                     <span class="paid_markss">
                                         <i class="fa fa-check-circle-o" aria-hidden="true" *ngIf="installment.instalmentStatus"></i>
@@ -93,7 +93,7 @@
                                     Total Installments
                                 </div>
                                 <div class="right_sec">
-                                    ${{ cartItem?.totalAmount}}
+                                    ${{ cartItem?.totalAmount | number : '1.2-2' }}
                                 </div>
                                 <span class="paid_markss"></span>
                             </div>

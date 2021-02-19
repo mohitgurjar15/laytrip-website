@@ -20,7 +20,7 @@
                 </h3>
                 <span class="edit_btns">
                     <a class="hover-link" *ngIf="!isFormControlEnable" (click)="enableFormControlInputs()">Edit</a>
-                    <a class="hover-link" *ngIf="isFormControlEnable" (click)="onSubmit()">{{'update' |
+                    <a class="hover-link" *ngIf="isFormControlEnable" (click)="onSubmit()">{{'save' |
                         translate}}</a>
 
                 </span>
@@ -101,7 +101,7 @@
                         <input (keypress)="commonFunction.validatePhoneCode($event)"  [readonly]="!isFormControlEnable" type="text" class="form-control" tabindex="14" placeholder="+00"
                          maxlength="4"
                             formControlName="country_code">
-                        <input [readonly]="!isFormControlEnable" (keypress)="commonFunction.validateNumber($event)" type="text" tabindex="15" class="form-control" placeholder="000000000" maxlength="10"
+                        <input [readonly]="!isFormControlEnable" (keypress)="commonFunction.validateNumber($event)" type="text" tabindex="15" class="form-control" placeholder="000-000-0000" maxlength="10"
                             formControlName="phone_no">
                         </span> 
                     <div class="error" *ngIf="(submitted || profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) && (profileForm.controls.phone_no.errors || profileForm.controls.phone_no.errors || profileForm.hasError('phoneAndPhoneCodeError'))">

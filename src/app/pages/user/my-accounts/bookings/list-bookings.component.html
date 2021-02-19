@@ -5,13 +5,11 @@
         *ngIf="searchTextLength > 0 || (completeBookings.length  || upComingbookings.length )">
         <input type="text" placeholder="Search" (input)="searchBooking($event.target.value)" />
       </div>
-      <!--       <app-flight-not-found *ngIf="(!upComingloading && !completeLoading) && (!completeBookings.length  && !upComingbookings.length )">
-      </app-flight-not-found> -->
       <h3>
         Upcoming
       </h3>
       <!-- no booking condition -->
-      <p *ngIf="!upComingbookings.length && !upComingloading" class="no_data_found">No Upcoming Bookings</p>
+        <p *ngIf="!upComingbookings.length && !upComingloading" class="no_data_found">No Upcoming Bookings</p>
       <!-- no booking condition -->
       <!-- loader starts -->
       <div class="loader_wrapper" *ngIf="upComingloading">
@@ -105,8 +103,12 @@
                           Next Payment {{ (booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
                           commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
                         </div> -->
-                        <div class="payment_status">
-                          <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"> Past Due
+                        <div class="payment_status {{booking.is_installation_on_track}}">
+                           <!-- {{ ( booking.is_installation_on_track === true && booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
+                          'Next Payment'+commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
+                           -->
+                          <img *ngIf="!booking.is_installation_on_track" src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
+                          > {{ booking.is_installation_on_track ?  'Next Payment '+ commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : 'Past Due'}} 
                         </div>
                       </div>
                       <div class="pricer_wrp">

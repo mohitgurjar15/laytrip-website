@@ -37,6 +37,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                flex-direction: column;
 
                 img {
                     max-width: 66px;
@@ -51,14 +52,14 @@
 $max: 12;
 $angle: 360/$max;
 $size: 120px;
-$fill: dodgerblue;
+$fill: #0043FF;
 
 
 
 svg {
-    height: $size;
-    width: $size;
-    margin: 0 2em 2em;
+    height: 32px;
+    width: 32px;
+    margin: 0 0 10px 0 ;
     overflow: visible;
    
 }
@@ -112,69 +113,6 @@ svg {
 
 }
 
-@keyframes colors {
-    0% {
-        fill: yellowgreen;
-    }
-
-    10% {
-        fill: gold;
-    }
-
-    75% {
-        fill: crimson;
-    }
-}
-
-@keyframes colors-stroke {
-    0% {
-        stroke: yellowgreen;
-    }
-
-    10% {
-        stroke: gold;
-    }
-
-    75% {
-        stroke: crimson;
-    }
-}
-
-@keyframes colors-2 {
-    0% {
-        fill: yellow;
-    }
-
-    50% {
-        fill: red;
-    }
-
-    65% {
-        fill: orangered;
-    }
-
-    95% {
-        fill: gold;
-    }
-}
-
-@keyframes colors-3 {
-    0% {
-        fill: yellowgreen;
-    }
-
-    50% {
-        fill: turquoise;
-    }
-
-    65% {
-        fill: yellow;
-    }
-
-    95% {
-        fill: orange;
-    }
-}
 
 @keyframes transform {
     10% {
