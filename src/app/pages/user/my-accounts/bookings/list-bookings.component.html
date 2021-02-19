@@ -64,24 +64,88 @@
           <div class="card" *ngFor="let booking of upComingbookings; let i = index;">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" aria-expanded="false" [href]="'#upcoming'+i">
-                <span class="header_image">
-                  <span class="title_image">
-                    <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
-                    <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
+                <div class="l_view">
+                  <span class="header_image">
+                    <span class="title_image">
+                      <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
+                      <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
+                    </span>
                   </span>
-                </span>
-                <div class="headerin_wrapper">
-                  <div class="header_second_sec">
-                    <div class="header_upper_wrper">
-                      <div class="header_name">
-                        {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
-                        {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
+                  <div class="headerin_wrapper">
+                    <div class="header_second_sec">
+                      <div class="header_upper_wrper">
+                        <div class="header_name">
+                          {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
+                          {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
+                        </div>
+                        <div class="book_id">
+                          Booking ID {{ booking.laytripCartId}}
+                        </div>
+                        <div class="date_head">
+                          {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
+                        </div>
                       </div>
-                      <div class="book_id">
-                        Booking ID {{ booking.laytripCartId}}
+                      <div class="header_lower_wrper" *ngIf="booking.cartInstallments?.length > 0">
+                        <div class="pricer_wrp">
+                          <span class="pink_price">
+                            ${{ booking.paidAmount | number : '1.2-2' }}
+                          </span>
+                          <div class="status">
+                            Paid
+                          </div>
+                        </div>
+                        <div class="payment_bar_wrps">
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar"
+                              [ngStyle]="getProgressPercentage(booking.paidAmount,booking.totalAmount)"
+                              aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                          <div class="payment_status">
+                            <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"> Past Due
+                          </div>
+                        </div>
+                        <div class="pricer_wrp">
+                          <span class="pink_price">
+                            ${{ booking.totalAmount | number : '1.2-2' }}
+                          </span>
+                          <div class="status">
+                            Total
+                          </div>
+                        </div>
                       </div>
-                      <div class="date_head">
-                        {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
+                    </div>
+                  </div>
+                </div>
+                <div class="mob_view card_mob_head">
+                  <div class="card_head_container">
+                    <div class="header_bar">
+                      <span class="header_image">
+                        <span class="title_image">
+                          <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
+                          <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
+                        </span>
+                      </span>
+                      <div class="headerin_wrapper">
+                        <div class="header_second_sec">
+                          <div class="header_upper_wrper">
+                            <div class="head_bookin">
+                              <div class="booking_bar">
+                                <div class="header_name">
+                                  {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
+                                  {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…'
+                                  :
+                                  ''}}
+                                </div>
+                                <div class="date_head">
+                                  {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
+                                </div>
+                              </div>
+                              <div class="book_id">
+                                Booking ID {{ booking.laytripCartId}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="header_lower_wrper" *ngIf="booking.cartInstallments?.length > 0">
@@ -212,7 +276,7 @@
           <div class="card" *ngFor="let booking of completeBookings; let i = index;">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" aria-expanded="false" [href]="'#completed'+i">
-                <span class="header_image">
+                <!-- <span class="header_image">
                   <span class="title_image">
                     <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
                     <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
@@ -230,6 +294,64 @@
                       </div>
                       <div class="date_head">
                         {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="l_view">
+                  <span class="header_image">
+                    <span class="title_image">
+                      <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
+                      <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
+                    </span>
+                  </span>
+                  <div class="headerin_wrapper">
+                    <div class="header_second_sec">
+                      <div class="header_upper_wrper">
+                        <div class="header_name">
+                          {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
+                          {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
+                        </div>
+                        <div class="book_id">
+                          Booking ID {{ booking.laytripCartId}}
+                        </div>
+                        <div class="date_head">
+                          {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mob_view card_mob_head">
+                  <div class="card_head_container">
+                    <div class="header_bar">
+                      <span class="header_image">
+                        <span class="title_image">
+                          <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
+                          <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
+                        </span>
+                      </span>
+                      <div class="headerin_wrapper">
+                        <div class="header_second_sec">
+                          <div class="header_upper_wrper">
+                            <div class="head_bookin">
+                              <div class="booking_bar">
+                                <div class="header_name">
+                                  {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
+                                  {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…'
+                                  :
+                                  ''}}
+                                </div>
+                                <div class="date_head">
+                                  {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
+                                </div>
+                              </div>
+                              <div class="book_id">
+                                Booking ID {{ booking.laytripCartId}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
