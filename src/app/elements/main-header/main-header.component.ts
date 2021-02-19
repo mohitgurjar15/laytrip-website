@@ -75,7 +75,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if(url.includes('cart/booking') || url.includes('cart/checkout')){
       live_availiblity='yes';
     }
-    console.log("live_availiblity list::",live_availiblity)
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
         // SET CART ITEMS IN CART SERVICE
@@ -104,8 +103,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if(url.includes('cart/booking') || url.includes('cart/checkout')){
       live_availiblity='yes';
     }
-    console.log("live_availiblity update::",live_availiblity)
-
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
         // SET CART ITEMS IN CART SERVICE

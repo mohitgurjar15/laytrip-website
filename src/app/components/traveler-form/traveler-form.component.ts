@@ -85,6 +85,7 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log("i m innn")
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
 
     this.travelerForm = this.formBuilder.group({
@@ -216,6 +217,7 @@ export class TravelerFormComponent implements OnInit {
     
 
     this.checkOutService.getTraveler.subscribe((traveler: any) => {
+      console.log(this.travelerForm,"++++++++")
       if (traveler && Object.keys(traveler).length > 0) {
         if (this.travelers && this.travelers[`type${this.cartNumber}`] && this.travelers[`type${this.cartNumber}`].adults && traveler.traveler_number && this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number]) {
           this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].first_name = traveler.firstName;
@@ -239,6 +241,10 @@ export class TravelerFormComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     this.checkOutService.getCountries.subscribe(res => {
       this.countries = res;
+    })
+    console.log("changes===>",changes)
+    this.cartService.getCartDeletedItem.subscribe(item=>{
+      //this.travelerForm.reset()
     })
   }
 
@@ -268,6 +274,10 @@ export class TravelerFormComponent implements OnInit {
       dobMinDate: [x.dobMinDate],
       dobMaxDate: [x.dobMaxDate]
     }, { updateOn: 'blur' });
+  }
+
+  submit(value){
+
   }
 
   /**

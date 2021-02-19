@@ -263,6 +263,11 @@ export class BookingComponent implements OnInit {
     this.$cartIdsubscription.unsubscribe();
   }
 
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+  }
+
   deleteCart(cartId) {
     if(cartId==0){
       return;
@@ -271,6 +276,7 @@ export class BookingComponent implements OnInit {
     
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
+      this.redirectTo('/cart/booking');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1)
@@ -347,9 +353,9 @@ export class BookingComponent implements OnInit {
     if (!this.isValidTravelers) {
       this.validationErrorMessage='Complete required fields in Traveler Details for'
       let message='';
-     /*  console.log("====================")
+      console.log("====================")
       console.log(this.travelerForm)
-      console.log(this.carts) */
+      console.log(this.carts)
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
         if(this.travelerForm.controls[`type${i}`].status=="INVALID"){

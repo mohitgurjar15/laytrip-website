@@ -203,6 +203,11 @@ export class CheckoutComponent implements OnInit {
     this.cardListChangeCount = data;
   }
 
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+  }
+
   deleteCart(cartId) {
     if (cartId == 0) {
       return;
@@ -210,6 +215,7 @@ export class CheckoutComponent implements OnInit {
     this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
+      this.redirectTo('/cart/checkout');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1)
