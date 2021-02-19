@@ -263,6 +263,11 @@ export class BookingComponent implements OnInit {
     this.$cartIdsubscription.unsubscribe();
   }
 
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+  }
+
   deleteCart(cartId) {
     if(cartId==0){
       return;
@@ -271,9 +276,15 @@ export class BookingComponent implements OnInit {
     
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
+      this.redirectTo('/cart/booking');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1)
+      console.log(this.travelerForm,"=====")
+      if(typeof this.travelerForm.controls[`type${index}`]!=='undefined'){
+        //delete this.travelerForm.controls[`type${index}`];
+        //this.travelerForm.controls[`type${index}`].setErrors(null)
+      }
       setTimeout(()=>{
         this.cartService.setCartItems(this.carts);
         this.cartService.setCartPrices(this.cartPrices)
@@ -340,8 +351,11 @@ export class BookingComponent implements OnInit {
   validateCartItems() {
     this.validationErrorMessage = '';
     if (!this.isValidTravelers) {
-      this.validationErrorMessage='Traveller details is not valid for'
+      this.validationErrorMessage='Complete required fields in Traveler Details for'
       let message='';
+      console.log("====================")
+      console.log(this.travelerForm)
+      console.log(this.carts)
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
         if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
@@ -349,6 +363,17 @@ export class BookingComponent implements OnInit {
           this.validationErrorMessage +=message;
         }
       }
+
+      /* for(let cart of this.carts){
+        message='';
+        for(let i in Object.keys(this.travelerForm.controls)){
+          if(cart.id == this.travelerForm.controls[`type${i}`]['controls'].cartId.value && this.travelerForm.controls[`type${i}`].status=="INVALID"){
+            message = ` ${cart.module_info.departure_code}- ${cart.module_info.arrival_code} and`;
+            this.validationErrorMessage +=message;
+          }
+        }
+      } */
+      
       let index = this.validationErrorMessage.lastIndexOf(" ");
       this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
     }

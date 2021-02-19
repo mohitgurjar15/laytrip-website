@@ -34,6 +34,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { CountdownModule } from 'ngx-countdown';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { TermsComponent } from './terms/terms.component';
+import { CcpaComponent } from './ccpa/ccpa.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { TermsComponent } from './terms/terms.component';
     AboutUsComponent,
     CmsPagesComponent,
     TermsComponent,
+    CcpaComponent,
 
   ],
   imports: [

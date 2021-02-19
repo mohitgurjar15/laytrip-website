@@ -19,16 +19,16 @@ export class FlightClassComponent implements OnInit {
   
   loadJquery() {
     $("body").click(function () {
-      $("#add_class_sec_open").hide();
+      $(".add_class_sec_open_").hide();
     });
 
-    $("#add_class_sec").click(function (e) {
+    $(".class_sec_info").click(function (e) {
       e.stopPropagation();
-      $("#add_class_sec_open").slideToggle();
-      $('#add_traveler_open').hide();
+      $(".add_class_sec_open_").slideToggle();
+      $('.add_traveler__open').hide(); 
     });
 
-    $('#add_class_sec_open').click(
+    $('.add_class_sec_open_').click(
       function (e) {
         e.stopPropagation();
       }

@@ -12,6 +12,7 @@ export class TravellerInfoComponent implements OnInit {
 
   @Output() changeValue = new EventEmitter<any>();
   @Input() label;
+  @Input() Id;
 
   adultValue: number = 1;
   childValue: number = 0;
@@ -48,16 +49,16 @@ export class TravellerInfoComponent implements OnInit {
 
   loadJquery() {
     $("body").click(function () {
-      $("#add_traveler_open").hide();
+      $(".add_traveler__open").hide();
     });
 
-    $("#add_traveler").click(function (e) {
+    $(".add_traveler_").click(function (e) {
       e.stopPropagation();
-      $("#add_traveler_open").slideToggle("slow");
-      $("#add_class_sec_open").hide();
+      $(".add_traveler__open").slideToggle("slow");
+      $(".add_class_sec_open_").hide();
     });
 
-    $('#add_traveler_open').click(
+    $('.add_traveler__open').click(
       function (e) {
         e.stopPropagation();
       }

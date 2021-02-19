@@ -24,12 +24,12 @@
         </li>
         <li class="nav-item travellers_resp desk_li">
             <div class="travellers">
-                <app-traveller-info label="{{'travellers_and_class' | translate}}"
+                <app-traveller-info id="desk_traveller" label="{{'travellers_and_class' | translate}}"
                     (changeValue)="changeTravellerInfo($event)">
                 </app-traveller-info>
             </div>
         </li>
-        <!-- <ul class="mobile_ul">
+        <ul class="mobile_ul">
             <li class="nav-item class_resp mobile_li">
                 <div class="class_section">
                     <app-flight-class [mobileView]="add_class_sec_open2" (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
@@ -38,12 +38,12 @@
             </li>
             <li class="nav-item travellers_resp mobile_li">
                 <div class="travellers">
-                    <app-traveller-info label="{{'travellers_and_class' | translate}}"
+                    <app-traveller-info id="mobile_traveller" label="{{'travellers_and_class' | translate}}"
                         (changeValue)="changeTravellerInfo($event)">
                     </app-traveller-info>
                 </div>
             </li>
-        </ul> -->
+        </ul>
         <!-- <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#Multi-city">
               <img class="default-icon"

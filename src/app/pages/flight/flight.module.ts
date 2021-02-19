@@ -38,7 +38,6 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
 import { HomeModule } from '../home/home.module';
 import { FlightCartItemComponent } from './components/flight-cart-item/flight-cart-item.component';
 
-
 @NgModule({
   declarations: [
     FlightSearchComponent,
@@ -64,7 +63,7 @@ import { FlightCartItemComponent } from './components/flight-cart-item/flight-ca
     FlightSummaryLoaderComponent,
     FlightErrorComponent,
     PopupTermConditionComponent,
-    PopupLoaderComponent
+    PopupLoaderComponent,
   ],
   imports: [
     CommonModule,
