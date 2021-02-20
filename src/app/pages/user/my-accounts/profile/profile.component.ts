@@ -173,7 +173,7 @@ export class ProfileComponent implements OnInit {
           phone_no  : res.phoneNo,        
           state_id: res.state.name,       
           city_name  : res.cityName,        
-          address  : res.profile_picaddress,  
+          address  : res.address,  
           home_airport  : res.airportInfo.code ? res.airportInfo.code : null,  
           language_id : res.preferredLanguage.name,     
           currency_id : res.preferredCurrency.code,     
