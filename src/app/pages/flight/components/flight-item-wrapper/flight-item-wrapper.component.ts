@@ -44,6 +44,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   @Input() filteredLabel;
   @Output() changeLoading = new EventEmitter;
   @Output() maxCartValidation = new EventEmitter;
+  @Output() flightNotAvailable = new EventEmitter;
   cartItems = [];
 
   animationState = 'out';
@@ -242,7 +243,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
           }
         }, error => {
           this.changeLoading.emit(false);
-          this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+          //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+          this.flightNotAvailable.emit(true)
         });
 
       }

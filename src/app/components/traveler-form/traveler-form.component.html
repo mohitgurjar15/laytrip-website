@@ -75,14 +75,14 @@
                       *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                       <label for="">{{ 'phone_no' | translate}}*</label>
                       <span class="tel_span">
-                        <input type="text" class="form-control" maxlength="6"
+                        <input (keypress)="commonFunction.validatePhoneCode($event)" type="text" class="form-control" maxlength="6"
                           formControlName="country_code">
                         <!-- <ng-select [items]="countries" 
                           bindLabel="phonecode" 
                           bindValue="phonecode"
                           formControlName="country_code"
                           ></ng-select>-->
-                        <input type="text" class="form-control"  maxlength="10"
+                        <input type="text" class="form-control" mask="(000) 000-0000"  maxlength="14"
                           formControlName="phone_no">
                       </span>
                       <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"

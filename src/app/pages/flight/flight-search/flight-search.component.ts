@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Renderer2, Input } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,6 +34,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   fullPageLoading: any = false;
   isCartFull: boolean = false;
+  isFlightAvaibale:boolean=false;
 
   filteredLabel = 'Price Low to High';
 
@@ -377,5 +378,13 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   hideMaxCartValidation() {
     this.isCartFull = false;
+  }
+
+  flightNotAvailable(data){
+    this.isFlightAvaibale=data;
+  }
+
+  hideFlightNotAvailable(){
+    this.isFlightAvaibale=false;
   }
 }

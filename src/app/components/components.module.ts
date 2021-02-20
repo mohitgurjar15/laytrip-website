@@ -55,6 +55,7 @@ import { EmptyCartComponent } from './empty-cart/empty-cart.component';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DeleteCartitemConfirmationPopupComponent } from './delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import { DeleteCartitemConfirmationPopupComponent } from './delete-cartitem-conf
     InfiniteScrollModule,
     NgxSpinnerModule,
     RouterModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgxMaskModule.forRoot()
   ],
   exports: [
     SearchAirportComponent,
