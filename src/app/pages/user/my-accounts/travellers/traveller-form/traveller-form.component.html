@@ -56,8 +56,11 @@
                 <label for="">{{'phone_no' |translate}}*</label>
 
                 <span class="tel_span">
-                    <input (keypress)="commonFunction.validatePhoneCode($event)" type="text" class="form-control"
-                        tabindex="25" maxlength="4" formControlName="country_code">
+                    <!-- <input (keypress)="commonFunction.validatePhoneCode($event)" type="text" class="form-control"
+                        tabindex="25" maxlength="4" formControlName="country_code"> -->
+                    <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="countryCode" bindValue="countryCode" [clearable]="false"
+                        formControlName="country_code">
+                    </ng-select>
                     <input type="text" mask="000-000-0000" tabindex="26" class="form-control" maxlength="14"
                         formControlName="phone_no">
                 </span>
