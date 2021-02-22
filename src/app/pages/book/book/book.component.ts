@@ -13,6 +13,8 @@ export class BookComponent implements OnInit {
   transaction_token: string;
   uuid: string;
   bookingRequest;
+  carts;
+  cartPrices;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +26,16 @@ export class BookComponent implements OnInit {
   ngOnInit() {
     this.uuid = this.route.snapshot.paramMap.get('uuid');
     this.transaction_token = this.route.snapshot.queryParamMap.get('transaction_token');
-    console.log(this.uuid, this.transaction_token,"-------");
+    this.cartService.getCartItems.subscribe(data => {
+      if (data.length > 0) {
+        this.carts=data;
+      }
+    })
+
+    this.cartService.getCartPrice.subscribe(data=>{
+      this.cartPrices=data;
+    })
+
     this.bookFlight();
   }
 
@@ -59,7 +70,7 @@ export class BookComponent implements OnInit {
         }
       });
 
-      /* let index
+      let index
       for (let item of successItem) {
         index = this.carts.findIndex(x => x.id == item.cart_id)
         this.carts.splice(index, 1)
@@ -68,7 +79,7 @@ export class BookComponent implements OnInit {
       this.cartService.setCartItems(this.carts);
       this.cartService.setCartPrices(this.cartPrices)
 
-      localStorage.setItem('$crt', failedItem.length || 0); */
+      localStorage.setItem('$crt', failedItem.length || 0);
 
       this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
     })
