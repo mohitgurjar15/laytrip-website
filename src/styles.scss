@@ -1981,6 +1981,7 @@ select {
 
                   @media (max-width: 480px) {
                     flex-flow: column;
+                    margin-bottom: 10px;
                   }
 
                   label {
@@ -3067,7 +3068,7 @@ select {
 
           @media (max-width: 480px) {
             width: 100%;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             text-align: center;
 
             //&:last-child {

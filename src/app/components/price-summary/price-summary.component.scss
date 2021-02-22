@@ -6,166 +6,195 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 
-.pay_summery_wrapper{
-    margin-top: 25px;
-    h3{
-      color: $blue-text;
-      font-size: 34px;
-      margin-bottom: 10px;
-      @include tab-view{
-        font-size: 18px;
+.pay_summery_wrapper {
+  margin-top: 25px;
+
+  h3 {
+    color: $blue-text;
+    font-size: 34px;
+    margin-bottom: 10px;
+
+    @include tab-view {
+      font-size: 18px;
     }
-    }
-    .pay_sum_inner{
-      border-radius: 15px;
-      border: 1px solid $feedback_text-clr;
-      .pay_list_wrper{
-        padding: 15px;
-       
-        &:nth-child(2){
-          border-top: 1px solid $feedback_text-clr;
+  }
+
+  .pay_sum_inner {
+    border-radius: 15px;
+    border: 1px solid $feedback_text-clr;
+
+    .pay_list_wrper {
+      padding: 15px;
+
+      &:nth-child(2) {
+        border-top: 1px solid $feedback_text-clr;
+      }
+
+      .pay_listing {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: $text-black;
+        font-size: 16px;
+        margin-bottom: 10px;
+
+        &.total_amm_blue {
+          color: $active-tab-text;
+          font-weight: 500;
+          margin: 0;
         }
-        .pay_listing{
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          color: $text-black;
-          font-size: 16px;
-          margin-bottom: 10px;
-          &.total_amm_blue{
-            color: $active-tab-text;
-            font-weight: 500;
-            margin: 0;
-          }
-          @include tab-view{
-            font-size: 12px;
-          }
-          &:last-child{
-            margin: 0;
-          }
+
+        @include tab-view {
+          font-size: 12px;
         }
-        .grayed_text{
-          color: $mid_gray_bg;
-          font-size: 10px;
+
+        &:last-child {
+          margin: 0;
         }
       }
-      .price_accordion{
-        .card{
-          border-bottom-left-radius: 15px;
-          border-bottom-right-radius: 15px;
-          border-top-left-radius: 0;
-          border-top-right-radius: 0;
+
+      .grayed_text {
+        color: $mid_gray_bg;
+        font-size: 10px;
+      }
+    }
+
+    .price_accordion {
+      .card {
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border: none;
+
+        .card-header {
+          background-color: transparent;
           border: none;
-          .card-header{
-            background-color: transparent;
+          border-top: 1px solid $feedback_text-clr;
+          padding: 15px 5px 15px 15px;
+
+          .card_header_btn {
+            color: $text-grey;
+            font-size: 16px;
             border: none;
-            border-top: 1px solid $feedback_text-clr;
-            padding: 15px 5px 15px 15px;
-            .card_header_btn{
-              color: $text-grey;
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10px 0 0;
+
+            @include tab-view {
               font-size: 16px;
-              border: none;
-              background-color: transparent;
-              display: flex;
-              justify-content: space-between;
-              width: 100%;
-              padding: 0 10px 0 0;
-              @include tab-view{
-                font-size: 16px;
-              }
-              
-              &[aria-expanded="true"]{
-                &:after {
-                  content: "";
+            }
+
+            &[aria-expanded="true"] {
+              &:after {
+                content: "";
+                position: relative;
+                padding: 5px 9px;
+                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                background-position: right;
+                background-repeat: no-repeat;
+                background-size: 14px;
+                transition: 0.3s;
+                right: 0;
+                border: none;
+                top: 5px;
+
+                @include tab-view {
                   position: relative;
-                  padding: 5px 9px;
-                  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                  background-position: right;
-                  background-repeat: no-repeat;
-                  background-size: 14px;
-                  transition: 0.3s;
-                  right: 0;
-                  border: none;
-                  top: 5px;
-                  @include tab-view{
-                  position: absolute;
                   right: 0;
                   height: 12px;
-                  }
                 }
               }
-              &[aria-expanded="false"]{
-                &:after {
+            }
+
+            &[aria-expanded="false"] {
+              &:after {
+                position: relative;
+                padding: 5px 9px;
+                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                background-position: right;
+                background-repeat: no-repeat;
+                background-size: 14px;
+                content: "";
+                transition: 0.3s;
+                right: 0;
+                border: none;
+                top: 5px;
+
+                @include tab-view {
                   position: relative;
-                  padding: 5px 9px;
-                  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-                  background-position: right;
-                  background-repeat: no-repeat;
-                  background-size: 14px;
-                  content: "";
-                  transition: 0.3s;
                   right: 0;
-                  border: none;
-                  top: 5px;
-                  @include tab-view{
-                    position: absolute;
-                    right: 0;
-                    height: 12px;
-                  }
+                  height: 12px;
                 }
               }
             }
           }
-          .card-body{
-            padding: 0 15px 15px;
-            
-            .pay_sap_setions{
-              &:first-child{
-                h3{
-                  margin-top: 0;
-                }
-              }
-              h3{
-                color: $text-grey;
-                font-size: 16px;
-                margin-top: 25px;
-                margin-bottom: 10px;
-                @include tab-view{
-                  font-size: 16px;
-              }
-              }
-              .due_details{
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                color: $text-black;
-                font-size: 16px;
-                @include tab-view{
-                  font-size: 12px;
-                }
+        }
+
+        .card-body {
+          padding: 0 15px 15px;
+
+          .pay_sap_setions {
+            &:first-child {
+              h3 {
+                margin-top: 0;
               }
             }
-            .total_amm_blue{
+
+            h3 {
+              color: $text-grey;
+              font-size: 16px;
+              margin-top: 25px;
+              margin-bottom: 10px;
+
+              @include tab-view {
+                font-size: 16px;
+              }
+            }
+
+            .due_details {
               display: flex;
               align-items: center;
               justify-content: space-between;
+              color: $text-black;
               font-size: 16px;
-              color: $active-tab-text;
-              font-weight: 500;
-              margin-top: 10px;
-              @include tab-view{
+
+              @include tab-view {
                 font-size: 12px;
               }
             }
           }
+
+          .total_amm_blue {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px;
+            color: $active-tab-text;
+            font-weight: 500;
+            margin-top: 10px;
+
+            @include tab-view {
+              font-size: 12px;
+            }
+          }
         }
       }
     }
   }
-  .section_description{
-    transform: translate(-17%, 0%);
-    max-width: 240px;
-    // &.second_pop{
-    //   transform: translate(-17%, 40%);
-    // }
+}
+
+.section_description {
+  transform: translate(-17%, 0%);
+  max-width: 240px;
+  // &.second_pop{
+  //   transform: translate(-17%, 40%);
+  // }
+  &.total_price_popup {
+    @include tab-view{
+      transform: translate(13%, 0%);
+    }
   }
+}
