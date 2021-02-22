@@ -55,12 +55,12 @@
                             {{cartItem?.cartInstallments?.length}} Monthly Installments of ${{cartItem?.cartInstallments[0]?.amount | number : '1.2-2'}}
                         </a>
                     </div>
-                    <div id="listing_descrip" class="collapse show" data-parent="#accordion_listing">
+                    <div id="listing_descrip" class="collapse show"Paid data-parent="#accordion_listing">
                         <div class="card-body">
                             <ng-container *ngFor="let installment of cartItem.cartInstallments;let i = index;">
                                 <div class="line_desc paid_clr" [ngClass]="{'paid_clr' : (installment.instalmentStatus), 'due_clr' : (  installment.dueInstallment && !installment.instalmentStatus),'' : (  !installment.dueInstallment && !installment.instalmentStatus) }">
                                     <div class="left_sec">
-                                       #{{i+1}} Paid  {{commonFunction.convertDateFormat(installment.instalmentDate,'YYYY-MM-DD')}} 
+                                       #{{i+1}} {{ installment.instalmentStatus ? 'Paid' : 'Due'}}  {{commonFunction.convertCustomDateFormat(installment.instalmentDate,'YYYY-MM-DD','MMM D, YYYY')}} 
                                     </div>
                                     <div class="right_sec">
                                         ${{installment.amount | number : '1.2-2' }}
