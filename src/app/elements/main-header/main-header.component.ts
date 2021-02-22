@@ -134,9 +134,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     });
   }
 
-  ngOnChanges() {
-    // this.totalLaycredit();
-  }
 
   checkUser() {
     this.userDetails = getLoginUserInfo();
@@ -144,10 +141,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if (Object.keys(this.userDetails).length && this.userDetails.roleId != 7) {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
-      var name = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
-      var domain = this.userDetails.email.substring(this.userDetails.email.lastIndexOf("@") + 1);
-      this.username = this.userDetails.firstName ? this.userDetails.firstName : name;
-      if (this.userDetails.roleId != 7 && !this._isLayCredit) {
+      if(typeof this.userDetails.email!='undefined' && this.userDetails.email!=''){
+        var name = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
+        var domain = this.userDetails.email.substring(this.userDetails.email.lastIndexOf("@") + 1);
+      }
+        this.username = this.userDetails.firstName ? this.userDetails.firstName : name;
+      if (!this._isLayCredit) {
         this.totalLaycredit();
         this.getCartList();
       }
@@ -162,6 +161,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     localStorage.removeItem('$crt');
     this.cookieService.remove('__cc');
     this.cartItemsCount = '';
+    this.cartService.setCartItems([]);
     this.loginGuestUser();
     this.router.navigate(['/']);
   }
