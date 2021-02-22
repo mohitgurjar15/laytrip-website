@@ -13,9 +13,10 @@ export const travelersFileds={
             dobMinDate:new Date(moment().subtract(100,'years').format("YYYY-MM-DD") ),
             dobMaxDate:new Date(moment().subtract(12, 'years').format("YYYY-MM-DD")),
             country_id:'',
-            gender:'',
+            gender:'',/* 
             passport_number:'',
-            passport_expiry:''
+            passport_expiry:'',
+            checkout_date:new Date() */
         },
         child : {
             type : 'child',
@@ -27,7 +28,8 @@ export const travelersFileds={
             country_id:'',
             gender:'',
             passport_number:'',
-            passport_expiry:''
+            passport_expiry:'',
+            checkout_date:new Date()
         },
         infant : {
             type : 'infant',

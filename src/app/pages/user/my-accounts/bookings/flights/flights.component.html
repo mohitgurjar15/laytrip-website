@@ -113,7 +113,7 @@
               {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}} 
             </div>
             <div class="timing_wrp colmns_w">
-              {{stop.departure_time}} -  {{stop.arrival_time}} 
+              {{ stop.departure_time | lowercase }} - {{stop.arrival_time | lowercase}} 
             </div>
           </div>
           <div class="lines_cols">
@@ -165,7 +165,7 @@
               {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
             </div>
             <div class="timing_wrp colmns_w">
-              {{ convertHHMM(stop.departure_time) }} - {{convertHHMM(stop.arrival_time) }}
+              {{ stop.departure_time | lowercase }} - {{ stop.arrival_time | lowercase}}
             </div>
           </div>
           <div class="lines_cols">
