@@ -155,7 +155,7 @@ h3 {
         border: 1px solid $blue-text-one;
 
         span {
-          color: $pink;
+          color: $blue-text-one;
 
           &.min_text {
             position: absolute;
@@ -166,7 +166,7 @@ h3 {
 
       span {
         color: $pink;
-        font-size: 11px;
+        font-size: 9px;
 
         @include tab-view {
           font-size: 12px;
