@@ -165,21 +165,21 @@
                             }
                         }
 
-                        &:hover {
-                            img {
-                                &.normal {
-                                    opacity: 0;
-                                }
+                        // &:hover {
+                        //     img {
+                        //         &.normal {
+                        //             opacity: 1;
+                        //         }
 
-                                &.on_hover {
-                                    opacity: 1;
-                                }
-                            }
+                        //         &.on_hover {
+                        //             opacity: 0;
+                        //         }
+                        //     }
 
-                            span {
-                                color: $text_grey_dark;
-                            }
-                        }
+                        //     span {
+                        //         color: $text_grey_dark;
+                        //     }
+                        // }
                     }
                 }
             }

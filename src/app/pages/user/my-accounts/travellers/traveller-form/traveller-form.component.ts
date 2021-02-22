@@ -35,7 +35,6 @@ export class TravellerFormComponent implements OnInit {
   travellerForm: FormGroup;
   traveller: any = [];
   isLoggedIn: boolean = false;
-  submitted = false;
   loading = false;
   dobMinDate;
   dobMaxDate;
@@ -61,7 +60,7 @@ export class TravellerFormComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService,
     private cookieService: CookieService,
-    private travelerService:TravelerService
+    private travelerService: TravelerService
 
   ) { }
 
@@ -71,12 +70,12 @@ export class TravellerFormComponent implements OnInit {
       this.location = JSON.parse(location);
     }
     catch (e) {
-    }   
+    }
 
     this.travellerForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      gender: ['',[Validators.required]],
+      gender: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
@@ -84,28 +83,28 @@ export class TravellerFormComponent implements OnInit {
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
-    },{validators:phoneAndPhoneCodeValidation()});
+    }, { validators: phoneAndPhoneCodeValidation() });
 
     this.setUserTypeValidation();
     if (this.travellerId) {
       this.setTravelerForm();
     }
-  }    
-    
+  }
+
   setTravelerForm() {
     this.traveller = this.travelerInfo;
-    
+
     var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     var travellerDob = moment(this.travelerInfo.dob).format('YYYY-MM-DD');
-    if(travellerDob  <   adult12YrPastDate){    
+    if (travellerDob < adult12YrPastDate) {
       this.isAdult = true;
-      this.isChild  = false;
+      this.isChild = false;
       const phoneControl = this.travellerForm.get('phone_no');
       phoneControl.setValidators([Validators.required]);
       phoneControl.updateValueAndValidity();
 
-    } else if(travellerDob < child2YrPastDate ){
+    } else if (travellerDob < child2YrPastDate) {
       this.isAdult = false;
       this.isChild = true;
       this.travellerForm.setErrors(null);
@@ -156,7 +155,7 @@ export class TravellerFormComponent implements OnInit {
     }
   }
 
-  setUserTypeValidation() {    
+  setUserTypeValidation() {
     this.dobMinDate = new Date(moment().subtract(50, 'years').format("MM/DD/YYYY"));
     this.dobMaxDate = new Date(moment().format("MM/DD/YYYY"));
     this.dobYearRange = moment(this.dobMinDate).format("YYYY") + ":" + moment(this.dobMaxDate).format("YYYY");
@@ -170,13 +169,15 @@ export class TravellerFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
     this.loadingValue.emit(true);
-    if(this.travellerId){
+    const controls = this.travellerForm.controls;
+    if (this.travellerId) {
       this.selectDob(moment(this.travellerForm.controls.dob.value).format('YYYY-MM-DD'));
     }
     if (this.travellerForm.invalid) {
-      this.submitted = true;
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
       this.loadingValue.emit(false);
       return;
     } else {
@@ -189,7 +190,7 @@ export class TravellerFormComponent implements OnInit {
           country_id = this.location.country.id;
         }
       }
-      
+
       let jsonData = {
         first_name: this.travellerForm.value.firstName,
         last_name: this.travellerForm.value.lastName,
@@ -198,23 +199,23 @@ export class TravellerFormComponent implements OnInit {
         country_id: country_id ? country_id : '',
         passport_expiry: typeof this.travellerForm.value.passport_expiry === 'object' ? moment(this.travellerForm.value.passport_expiry).format('YYYY-MM-DD') : null,
         passport_number: this.travellerForm.value.passport_number,
-        country_code: this.travellerForm.value.country_code ? this.travellerForm.value.country_code  : '',
+        country_code: this.travellerForm.value.country_code ? this.travellerForm.value.country_code : '',
         phone_no: this.travellerForm.value.phone_no,
       };
       let emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
-      
+
       if (this.travellerId) {
         this.loadingValue.emit(true);
         jsonData = Object.assign(jsonData, emailObj);
         this.travelerService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {
           this.loadingValue.emit(false);
           this.travelerFormChange.emit(data);
-          $("#collapseTravInner"+this.travellerId).removeClass('show');
-          this.toastr.success('', 'Traveller Updated Successfully');
-          
+          $("#collapseTravInner" + this.travellerId).removeClass('show');
+          this.toastr.success('', 'Traveler updated successfully');
+
         }, (error: HttpErrorResponse) => {
-          this.submitted = false; this.loadingValue.emit(false);
-          this.toastr.error(error.error.message, 'Traveller Update Error');
+          this.loadingValue.emit(false);
+          this.toastr.error(error.error.message, 'Traveler Update Error');
           if (error.status === 401) {
             this.router.navigate(['/']);
           }
@@ -227,12 +228,11 @@ export class TravellerFormComponent implements OnInit {
           this.loadingValue.emit(false);
           this.travellerForm.reset();
           this.travellerForm.setErrors(null);
-          this.toastr.success('Success', 'Traveller Add Successfully');
+          this.toastr.success('', 'Traveler added successfully');
 
         }, (error: HttpErrorResponse) => {
-          this.submitted = false;
           this.loadingValue.emit(false);
-          this.toastr.error(error.error.message, 'Traveller Add Error');
+          this.toastr.error(error.error.message, 'Traveler Add Error');
           if (error.status === 401) {
             this.router.navigate(['/']);
           }
@@ -247,28 +247,28 @@ export class TravellerFormComponent implements OnInit {
     return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
 
-  selectDob(event){
+  selectDob(event) {
     var selectedDate = moment(event).format('YYYY-MM-DD');
     var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
     const emailControl = this.travellerForm.get('email');
     const phoneControl = this.travellerForm.get('phone_no');
     const countryControl = this.travellerForm.get('country_code');
-    if(selectedDate < adult12YrPastDate) {
-     this.isAdult = true;
-     this.isChild = false; 
-      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));     
-      phoneControl.setValidators([Validators.required,Validators.minLength(10)]);
+    if (selectedDate < adult12YrPastDate) {
+      this.isAdult = true;
+      this.isChild = false;
+      emailControl.setValidators(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
+      phoneControl.setValidators([Validators.required, Validators.minLength(10)]);
       countryControl.setValidators([Validators.required]);
-    } else if(selectedDate < child2YrPastDate){
+    } else if (selectedDate < child2YrPastDate) {
       this.isAdult = false;
       this.isChild = true;
       this.travellerForm.setValidators(null)
       emailControl.setValidators(null)
       phoneControl.setValidators(null)
       countryControl.setValidators(null)
-    } else  {
-      this.isAdult = this.isChild = false;    
+    } else {
+      this.isAdult = this.isChild = false;
       this.travellerForm.setValidators(null)
       emailControl.setValidators(null)
       phoneControl.setValidators(null)
