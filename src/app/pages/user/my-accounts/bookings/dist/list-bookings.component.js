@@ -16,6 +16,7 @@ exports.__esModule = true;
 exports.ListBookingsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
+var moment = require("moment");
 var ListBookingsComponent = /** @class */ (function () {
     function ListBookingsComponent(userService, accountService, commonFunction, cartService, renderer) {
         this.userService = userService;
@@ -106,6 +107,13 @@ var ListBookingsComponent = /** @class */ (function () {
     };
     ListBookingsComponent.prototype.getProgressPercentage = function (value, totalValue) {
         return { 'width': Math.floor((value / totalValue) * 100) + '%' };
+    };
+    ListBookingsComponent.prototype.convertDateFormat = function (date, sourceFormat, languageCode) {
+        if (languageCode === void 0) { languageCode = null; }
+        if (languageCode == null) {
+            return moment(date, sourceFormat).format('MMM D, YYYY');
+        }
+        return date;
     };
     ListBookingsComponent = __decorate([
         core_1.Component({

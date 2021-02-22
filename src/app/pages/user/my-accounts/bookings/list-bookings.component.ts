@@ -113,5 +113,12 @@ export class ListBookingsComponent implements OnInit {
     return { 'width': Math.floor((value / totalValue) * 100) + '%' };
   }
 
+  convertDateFormat(date, sourceFormat, languageCode = null) {
+
+    if (languageCode == null) {
+        return moment(date, sourceFormat).format('MMM D, YYYY')
+    }
+    return date;
+}
 
 }

@@ -121,7 +121,7 @@
                                     </svg>
                                     {{traveler.roleId==6?'Primary Traveler':'Additional Traveler'}}
                                 </a>
-                                <a *ngIf="traveler.roleId != 6" (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a>
+                                <a style="display: none;" *ngIf="traveler.roleId != 6" (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a>
                             </div>
                             <div id="collapseTravInner{{traveler.userId}}" class="collapse" data-parent="#trav_accordion_inner">
                                 <div class="card-body">

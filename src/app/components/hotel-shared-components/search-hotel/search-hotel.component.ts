@@ -69,7 +69,7 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
         }
       });
     } else {
-      console.log('no');
+      // console.log('no');
     }
   }
 

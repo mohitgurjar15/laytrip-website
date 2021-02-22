@@ -19,6 +19,7 @@ var TravellerInfoComponent = /** @class */ (function () {
         this.totalPerson = 1;
         this["class"] = 'Economy';
         this.errorMessage = '';
+        this.showTraveller = false;
         this.travellerInfo = {
             adult: 0,
             child: 0,
@@ -38,16 +39,20 @@ var TravellerInfoComponent = /** @class */ (function () {
     };
     TravellerInfoComponent.prototype.loadJquery = function () {
         $("body").click(function () {
-            $("#add_traveler_open").hide();
+            $(".add_traveler__open").hide();
         });
-        $("#add_traveler").click(function (e) {
+        $(".add_traveler_").click(function (e) {
             e.stopPropagation();
-            $("#add_traveler_open").slideToggle("slow");
-            $("#add_class_sec_open").hide();
+            // $(".add_traveler__open").slideToggle("slow");
+            $(".add_traveler__open").show();
+            $(".add_class_sec_open_").hide();
         });
-        $('#add_traveler_open').click(function (e) {
+        $('.add_traveler__open').click(function (e) {
             e.stopPropagation();
         });
+    };
+    TravellerInfoComponent.prototype.toggleTraveller = function () {
+        this.showTraveller = !this.showTraveller;
     };
     TravellerInfoComponent.prototype.btnClickForChange = function (item) {
         // FOR ADULT
@@ -129,6 +134,9 @@ var TravellerInfoComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], TravellerInfoComponent.prototype, "label");
+    __decorate([
+        core_1.Input()
+    ], TravellerInfoComponent.prototype, "domid");
     TravellerInfoComponent = __decorate([
         core_1.Component({
             selector: 'app-traveller-info',

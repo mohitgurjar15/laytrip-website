@@ -13,13 +13,10 @@ var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
 var custom_validators_1 = require("../../../../../_helpers/custom.validators");
 var TravellerFormComponent = /** @class */ (function () {
-    function TravellerFormComponent(formBuilder, genericService, router, commonFunction, flightService, userService, toastr, cookieService, travelerService) {
+    function TravellerFormComponent(formBuilder, router, commonFunction, toastr, cookieService, travelerService) {
         this.formBuilder = formBuilder;
-        this.genericService = genericService;
         this.router = router;
         this.commonFunction = commonFunction;
-        this.flightService = flightService;
-        this.userService = userService;
         this.toastr = toastr;
         this.cookieService = cookieService;
         this.travelerService = travelerService;
@@ -184,11 +181,11 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.loadingValue.emit(false);
                     _this.travelerFormChange.emit(data);
                     $("#collapseTravInner" + _this.travellerId).removeClass('show');
-                    _this.toastr.success('', 'Traveller updated successfully');
+                    // this.toastr.success('', 'Traveller updated successfully');
                 }, function (error) {
                     _this.submitted = false;
                     _this.loadingValue.emit(false);
-                    _this.toastr.error(error.error.message, 'Traveller update error');
+                    // this.toastr.error(error.error.message, 'Traveller update error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
                     }
@@ -201,11 +198,11 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.loadingValue.emit(false);
                     _this.travellerForm.reset();
                     _this.travellerForm.setErrors(null);
-                    _this.toastr.success('Success', 'Traveller add successfully');
+                    // this.toastr.success('Success', 'Traveller add successfully');
                 }, function (error) {
                     _this.submitted = false;
                     _this.loadingValue.emit(false);
-                    _this.toastr.error(error.error.message, 'Traveller add error');
+                    // this.toastr.error(error.error.message, 'Traveller add error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
                     }
