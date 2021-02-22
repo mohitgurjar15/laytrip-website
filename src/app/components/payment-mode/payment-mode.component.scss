@@ -126,7 +126,7 @@ h3 {
   .inner_accordion {
     .btn_accrodion {
       background-color: $background-white;
-      color: $grayed_border;
+      color: $text-black;
       font-size: 16px;
       border: 1px solid $background-grey;
       border-radius: 10px;
@@ -155,7 +155,7 @@ h3 {
         border: 1px solid $blue-text-one;
 
         span {
-          color: $blue-text-one;
+          color: $pink;
 
           &.min_text {
             position: absolute;
@@ -165,7 +165,7 @@ h3 {
       }
 
       span {
-        color: $grayed_border;
+        color: $pink;
         font-size: 11px;
 
         @include tab-view {

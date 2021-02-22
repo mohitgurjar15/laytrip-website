@@ -79,13 +79,13 @@
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
             </div>
             <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete this credit card?</span></h4>
-           
+            <div class="alert_box" *ngIf="deleteApiError.length > 0"> {{deleteApiError}} </div>
             <div class="cta_btn_wrps">
                 <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>
                 <button class="btn_yes" (click)=deleteCreditCard()>Yes</button>
             </div>
             <div class="footer_logo">
-                <a class="hover-link">
+                <a >
                     <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
                 </a>
             </div>

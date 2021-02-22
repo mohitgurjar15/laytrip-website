@@ -156,7 +156,7 @@ var ProfileComponent = /** @class */ (function () {
                 phone_no: res.phoneNo,
                 state_id: res.state.name,
                 city_name: res.cityName,
-                address: res.profile_picaddress,
+                address: res.address,
                 home_airport: res.airportInfo.code ? res.airportInfo.code : null,
                 language_id: res.preferredLanguage.name,
                 currency_id: res.preferredCurrency.code,
@@ -178,6 +178,7 @@ var ProfileComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = true;
         this.loadingValue.emit(true);
+        console.log(this.profileForm);
         if (this.profileForm.invalid) {
             this.loadingValue.emit(false);
             //scroll top if any error 

@@ -9,11 +9,18 @@ $bg-grey-light : #D6D6D6;
 /*------------- color variables ------------*/
 
 /*----------------- responsive variations -----------------*/
+$mini-screen: 1200px;
 $tab-max: 1032px;
 $ipad-view: 991px;
 $tab-view: 768px;
 $mobile-view: 558px;
+$mobile-sm-view: 480px;
 
+@mixin  mini-screen {
+    @media (max-width: #{$mini-screen}) {
+        @content;
+    }
+}
 @mixin  tab-max {
     @media (max-width: #{$tab-max}) {
         @content;
@@ -31,6 +38,11 @@ $mobile-view: 558px;
 }
 @mixin  mobile-view {
     @media (max-width: #{$mobile-view}) {
+        @content;
+    }
+}
+@mixin  mobile-sm-view {
+    @media (max-width: #{$mobile-sm-view}) {
         @content;
     }
 }

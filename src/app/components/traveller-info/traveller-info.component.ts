@@ -12,6 +12,7 @@ export class TravellerInfoComponent implements OnInit {
 
   @Output() changeValue = new EventEmitter<any>();
   @Input() label;
+  @Input() domid;
 
   adultValue: number = 1;
   childValue: number = 0;
@@ -20,6 +21,7 @@ export class TravellerInfoComponent implements OnInit {
   class = 'Economy';
   errorMessage:string='';
   countryCode:string;
+  showTraveller:boolean=false;
 
   travellerInfo = {
     adult: 0,
@@ -33,6 +35,7 @@ export class TravellerInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private commonFunction:CommonFunction
   ) {
+    console.log("id",this.domid)
     this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
     this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
     this.infantValue = parseInt(this.route.snapshot.queryParams['infant']) ? parseInt(this.route.snapshot.queryParams['infant']) : 0;
@@ -48,21 +51,26 @@ export class TravellerInfoComponent implements OnInit {
 
   loadJquery() {
     $("body").click(function () {
-      $("#add_traveler_open").hide();
+      //$(".add_traveler__open").hide();
     });
 
-    $("#add_traveler").click(function (e) {
+    /* $(document).on('click','#desk_traveller', function(e){
       e.stopPropagation();
-      $("#add_traveler_open").slideToggle("slow");
-      $("#add_class_sec_open").hide();
-    });
+      console.log($(this).siblings(".add_traveler__open"))
+      $(this).siblings(".add_traveler__open").slideToggle("slow");
+      $(".add_class_sec_open_").hide();
+    }); */
 
-    $('#add_traveler_open').click(
+    $('.add_traveler__open').click(
       function (e) {
         e.stopPropagation();
       }
     );
 
+  }
+
+  toggleTraveller(){
+    this.showTraveller=!this.showTraveller;
   }
 
   btnClickForChange(item) {

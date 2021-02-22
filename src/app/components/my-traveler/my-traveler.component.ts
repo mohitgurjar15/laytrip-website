@@ -29,10 +29,10 @@ export class MyTravelerComponent implements OnInit {
     this.cd.detectChanges();
   }
 
-  removeTraveler(userId) {
-    this.travelerId = '';
-    let traveler = { traveler_number: this.traveler_number };
-    this.checkOutService.selectTraveler(traveler);
-    this.cd.detectChanges();
-  }
+  // removeTraveler(userId) {
+  //   this.travelerId = '';
+  //   let traveler = { traveler_number: this.traveler_number };
+  //   this.checkOutService.selectTraveler(traveler);
+  //   this.cd.detectChanges();
+  // }
 }

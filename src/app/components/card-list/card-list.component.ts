@@ -30,6 +30,7 @@ export class CardListComponent implements OnInit {
   userInfo;
   cardId;
   closeResult;
+  deleteApiError : string = '';
 
   cardObject =cardObject
   cardType = cardType;
@@ -81,7 +82,7 @@ export class CardListComponent implements OnInit {
   
   openDeleteModal(content,id) {
     this.cardId = id;
-    console.log(id)
+    this.deleteApiError = ''; 
     this.modalService.open(content, {windowClass:'delete_account_window', centered: true, backdrop: 'static',
     keyboard: false}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -110,6 +111,12 @@ export class CardListComponent implements OnInit {
       this.modalService.dismissAll();
     }, (error) => {
       this.cardLoader = false;
+      this.deleteApiError = ''; 
+      if(error.status === 409) {
+        this.deleteApiError = error.message; 
+      } else {        
+        this.modalService.dismissAll();
+      }
     }); 
   }
   

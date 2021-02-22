@@ -1,4 +1,5 @@
 @import "_dr_home_variable.scss";
+@import "_hotel.scss";
 // NG-SELECT SCSS
 
 .ng-select {
@@ -122,6 +123,30 @@
                 }
             }
         }
+
+        &.custom_inputs{
+            .ng-select-container{
+                .ng-value-container{
+                    .ng-value{
+                        padding: 3px 0 0 0;
+                        max-width: 275px;
+                        width: 100%;
+                        @include mini-screen{
+                            max-width: 215px;
+                        }
+                        @include tab-view{
+                            max-width: 175px;
+                        }
+                        @include mobile-sm-view{
+                            max-width: 215px;
+                        }
+                    }
+                    .ng-input{
+                        padding-left: 0;
+                    }
+                }
+            } 
+        }
     }
     &.ng-customClass {
         .ng-select-container {
@@ -151,6 +176,7 @@
             }
         }
     }
+   
 }
 
 // NG-SELECT FOCUS REMOVE CSS START

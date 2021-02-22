@@ -9,7 +9,7 @@
         <span class="plane_wrps">
           <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
           Change Planes in {{stop?.layover_airport_name}}</span>
-        <span class="hr_wrps">1h</span>
+        <span class="hr_wrps">{{stop.layover_duration}}</span>
       </div>
       <div class="cols_wrps">
         <div class="lines_cols">
@@ -51,7 +51,8 @@
 
 <div class="total_hrs_wrps cta_btns_wrps">
   <span class="ct_btns">
-    <button *ngIf="cartItem.module_info?.routes?.length === 1" (click)="deleteCart(cartItem.id)">Cancel</button>
+    <button *ngIf="cartItem.module_info?.routes?.length === 1" (click)="openDeleteConfirmationPopup(cartItem.id)">Cancel</button>
+    <!-- deleteCart(cartItem.id) -->
   </span>
   {{cartItem.module_info?.routes[0]?.duration}}
 </div>
@@ -64,7 +65,7 @@
         <span class="plane_wrps">
           <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
           Change Planes in {{stop?.layover_airport_name}}</span>
-        <span class="hr_wrps">1h</span>
+        <span class="hr_wrps">{{stop.layover_duration}}</span>
       </div>
       <div class="cols_wrps">
         <div class="lines_cols">
@@ -106,7 +107,8 @@
 
 <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem.module_info?.routes?.length === 2">
   <span class="ct_btns">
-    <button (click)="deleteCart(cartItem.id)">Cancel</button>
+    <button (click)="openDeleteConfirmationPopup(cartItem.id)">Cancel</button>
+    <!-- deleteCart(cartItem.id) -->
   </span>
   {{cartItem.module_info?.routes[1]?.duration}}
 </div>

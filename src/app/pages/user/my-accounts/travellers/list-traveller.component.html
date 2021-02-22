@@ -130,7 +130,7 @@
             <div id="collapseTrav" class="collapse show" >
                 <div class="card-body">
                     <app-traveller-form    [countries]="countries" (loadingValue)="getLoadingValue($event)"  (travelerFormChange)="pushTraveler($event)"  #child [countries]="countries"></app-traveller-form>
-                    <div *ngFor="let traveler of  travelers" id="trav_accordion_inner" class="traveller_accordion">
+                    <div *ngFor="let traveler of  travelers;let x = index;" id="trav_accordion_inner" class="traveller_accordion">
                         <div class="card" >
                             <div class="card-header">
                                 <a class="card-link" data-toggle="collapse" href="#collapseTravInner{{traveler.userId}}" aria-controls="collapseTravInner"
@@ -140,7 +140,7 @@
                                         <path class="a"
                                             d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
                                     </svg>
-                                    {{traveler.firstName + ' ' +traveler.lastName }}
+                                    {{traveler.roleId==6?'Primary Traveler':'Additional Traveler'}}
                                 </a>
                             </div>
                             <div id="collapseTravInner{{traveler.userId}}" class="collapse" data-parent="#trav_accordion_inner">

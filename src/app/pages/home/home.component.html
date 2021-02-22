@@ -33,7 +33,7 @@
                             alt="Flight Icon" />
                         <!-- <span>{{'flight' | translate}}</span> -->
                     </a>
-                    <a class="nav-item nav-link" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab"
+                    <a class="nav-item nav-link" style="pointer-events: none;" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab"
                         aria-selected="false" (click)="clickOnTab('hotel')">
                         <!-- data-toggle="tab" href="#hotel" -->
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/bed_active.svg" alt="Hotel Icon" />
@@ -43,7 +43,7 @@
                             alt="Flight Icon">
                         <!-- <span>{{'hotel' | translate}}</span> -->
                     </a>
-                    <a class="nav-item nav-link" id="nav-accommodation" data-toggle="tab" href="#accommodation"
+                    <a class="nav-item nav-link" style="pointer-events: none;" id="nav-accommodation" data-toggle="tab" href="#accommodation"
                         role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/home_active.svg"
                             alt="Accommodation Icon" />
@@ -96,18 +96,4 @@
 
 <app-deal [dealList]="dealList" (toString)="setToString($event)"></app-deal>
 
-<!-- <app-user-benefit></app-user-benefit> -->
-
-<!-- <app-discover-city></app-discover-city> -->
-
-
-<!-- <app-toaster 
-    position="po_top_center" 
-    type="info" 
-    title="Info"
-    message="Lorem ispum is simple dummy text!"
-    [closable]="false"
-    seconds="10"
-    >
-</app-toaster> -->
 <app-mobile-and-subscribe></app-mobile-and-subscribe>

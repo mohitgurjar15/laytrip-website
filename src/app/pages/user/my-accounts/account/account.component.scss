@@ -46,6 +46,9 @@
       background-color: $tab-bg-gray;
       border-radius: 5px;
       padding: 15px;
+      @include tab-view {
+        margin: 0 -15px;
+      }
     }
   }
 
@@ -536,6 +539,8 @@
     //     }
     //   }
     // }
+  
+
     .cta_btn_wrps {
       padding: 10px;
       width: 100%;

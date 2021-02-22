@@ -1,9 +1,9 @@
-<div [formGroup]="form">
+<div [formGroup]="form" class="lab_wrapper">
     <label>{{label}}</label>
     <ng-select [formControlName]="controlName" [loading]="false" id="{{id}}" [selectOnTab]="true" [items]="data"
         bindLabel="display_name" bindValue="city" [clearable]="false" minTermLength="3" notFoundText=""
         [virtualScroll]="true" [(ngModel)]="defaultCity" (search)="onChangeSearch($event)" loadingText=""
-        (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input"
+        (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input custom_inputs"
         placeholder="{{ placeHolder }}" [tabIndex]="tabIndex">
         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
             <div [ngClass]="(item.parentId==0)?'parent':'child'">

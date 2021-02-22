@@ -184,11 +184,11 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.loadingValue.emit(false);
                     _this.travelerFormChange.emit(data);
                     $("#collapseTravInner" + _this.travellerId).removeClass('show');
-                    _this.toastr.success('Success', 'Traveller Updated Successfully');
+                    _this.toastr.success('', 'Traveller updated successfully');
                 }, function (error) {
                     _this.submitted = false;
                     _this.loadingValue.emit(false);
-                    _this.toastr.error(error.error.message, 'Traveller Update Error');
+                    _this.toastr.error(error.error.message, 'Traveller update error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
                     }
@@ -201,11 +201,11 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.loadingValue.emit(false);
                     _this.travellerForm.reset();
                     _this.travellerForm.setErrors(null);
-                    _this.toastr.success('Success', 'Traveller Add Successfully');
+                    _this.toastr.success('Success', 'Traveller add successfully');
                 }, function (error) {
                     _this.submitted = false;
                     _this.loadingValue.emit(false);
-                    _this.toastr.error(error.error.message, 'Traveller Add Error');
+                    _this.toastr.error(error.error.message, 'Traveller add error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
                     }
