@@ -13,6 +13,7 @@ import { UserService } from '../../../../../services/user.service';
 import { CookieService } from 'ngx-cookie';
 import { TravelerService } from '../../../../../services/traveler.service';
 import { phoneAndPhoneCodeValidation } from '../../../../../_helpers/custom.validators';
+import { CheckOutService } from '../../../../../services/checkout.service';
 declare var $: any;
 
 @Component({
@@ -57,7 +58,8 @@ export class TravellerFormComponent implements OnInit {
     public commonFunction: CommonFunction,
     private toastr: ToastrService,
     private cookieService: CookieService,
-    private travelerService: TravelerService
+    private travelerService: TravelerService,
+    private checkOutService: CheckOutService,
 
   ) { }
 
@@ -76,7 +78,7 @@ export class TravellerFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
-      country_code: ['', [Validators.required]],
+      country_code: ['01', [Validators.required]],
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
