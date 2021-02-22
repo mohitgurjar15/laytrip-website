@@ -15,6 +15,7 @@ import { HomeModule } from '../home/home.module';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { SpreedlyService } from 'src/app/services/spreedly.service';
+import { BookModule } from '../book/book.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { SpreedlyService } from 'src/app/services/spreedly.service';
     NgSelectModule,
     CookieModule.forRoot(),
     CalendarModule,
-    HomeModule
+    HomeModule,
+    BookModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [SpreedlyService]

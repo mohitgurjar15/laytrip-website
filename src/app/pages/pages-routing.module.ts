@@ -45,6 +45,10 @@ const routes: Routes = [
                 loadChildren: () => import('./cart/cart.module').then(m => m.CartModule)
             },
             {
+                path: 'book',
+                loadChildren: () => import('./book/book.module').then(m => m.BookModule)
+            },
+            {
                 path: 'cancellation-policy',
                 component: CancellationPolicyComponent
             },

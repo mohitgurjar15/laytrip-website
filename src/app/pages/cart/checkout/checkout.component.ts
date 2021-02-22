@@ -8,7 +8,7 @@ import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from '../../../services/cart.service';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { CommonFunction } from 'src/app/_helpers/common-function';
@@ -64,6 +64,7 @@ export class CheckoutComponent implements OnInit {
     browser_info: {},
     site_url: ""
   }
+  challengePopUp:boolean=false;
 
   constructor(
     private genericService: GenericService,
@@ -74,7 +75,8 @@ export class CheckoutComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private router: Router,
     private commonFunction:CommonFunction,
-    private spreedly:SpreedlyService
+    private spreedly:SpreedlyService,
+    private route:ActivatedRoute
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -82,6 +84,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
+
     this.userInfo = getLoginUserInfo();
     if (this.userInfo && this.userInfo.roleId!=7) {
       this.getTravelers();
@@ -275,6 +278,7 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
     this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
     this.bookingRequest.cart = carts;
+    sessionStorage.setItem('__cbk',JSON.stringify(this.bookingRequest))
     console.log("this.bookingRequest",this.bookingRequest)
     if(this.isValidTravelers && this.cardToken!=''){
       this.isBookingProgress=true;
@@ -311,7 +315,8 @@ export class CheckoutComponent implements OnInit {
               } else if (transaction.state == "pending") {
 
                 console.log('pending', [res]);
-
+                this.isBookingProgress=false;
+                this.challengePopUp=true;
                 this.spreedly.lifeCycle(res);
               } else {
 
@@ -322,32 +327,7 @@ export class CheckoutComponent implements OnInit {
             }, (error) => {
                 console.log(error);
             });
-            // this.cartService.bookCart(this.bookingRequest).subscribe((result: any) => {
-
-            //   let successItem = result.carts.filter(cart => {
-            //     if (cart.status == 1) {
-            //       return { cart_id: cart.id }
-            //     }
-            //   });
-            //   let failedItem = result.carts.filter(cart => {
-            //     if (cart.status == 2) {
-            //       return { car_id: cart.id }
-            //     }
-            //   });
-
-            //   let index
-            //   for (let item of successItem) {
-            //     index = this.carts.findIndex(x => x.id == item.cart_id)
-            //     this.carts.splice(index, 1)
-            //     this.cartPrices.splice(index, 1)
-            //   }
-            //   this.cartService.setCartItems(this.carts);
-            //   this.cartService.setCartPrices(this.cartPrices)
-
-            //   localStorage.setItem('$crt', failedItem.length || 0);
-
-            //   this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
-            // })
+            
           }
         }, (error) => {
           this.isBookingProgress = false;

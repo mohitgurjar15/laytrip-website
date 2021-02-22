@@ -5,6 +5,7 @@ import { BookRoutingModule } from './book-routing.module';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FailureComponent } from './failure/failure.component';
 import { ChallengeComponent } from './challenge/challenge.component';
+import { ComponentsModule } from '../../components/components.module';
 
 
 
@@ -12,7 +13,8 @@ import { ChallengeComponent } from './challenge/challenge.component';
   declarations: [BookComponent, ConfirmComponent, FailureComponent, ChallengeComponent],
   imports: [
     CommonModule,
-    BookRoutingModule
+    BookRoutingModule,
+    ComponentsModule
   ],exports: [ChallengeComponent]
 })
 export class BookModule { }
