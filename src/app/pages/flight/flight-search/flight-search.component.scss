@@ -39,13 +39,15 @@
 
 //<!-- Start Responsive Filter css -->
 .filter_responsive {
-    width: 100%;
     display: none;
-    padding: 20px 15px;
+    padding: 8px 15px;
     align-items: center;
+    cursor: pointer;
     background: $background-white;
     border: 1px solid $box-border-color;
     border-radius: 35px;
+    height: 33px;
+    font-size: 12px;
     z-index: 999;
 
     @include tab-view {
@@ -58,16 +60,102 @@
         a {
             width: 100%;
             display: inline-block;
-            font-size: 20px;
+            font-size: 12px;
             color: $text-grey;
             font-weight: 500;
             width: 100%;
             text-decoration: none;
+			&::after {
+				content: '';
+                position: relative;
+                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg);
+                background-position: right;
+                background-repeat: no-repeat;
+                background-size: 7px;
+                right: 0;
+                top: 0;
+				padding: 1px 10px;
+            }
         }
     }
 }
 
-.responsive_filter_show {
+.sortby_responsive {
+    display: none;
+    padding: 8px 15px;
+    align-items: center;
+    cursor: pointer;
+    background: $background-white;
+    border: 1px solid $box-border-color;
+    border-radius: 35px;
+    height: 33px;
+    font-size: 12px;
+    z-index: 999;
+    margin-left: 10px;
+
+
+
+    .btn_sort {
+        width: 100%;
+
+        a {
+            width: 100%;
+            display: inline-block;
+            font-size: 12px;
+            color: $text-grey;
+            font-weight: 500;
+            width: 100%;
+            text-decoration: none;
+
+            &::after {
+				content: '';
+                position: relative;
+                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg);
+                background-position: right;
+                background-repeat: no-repeat;
+                background-size: 7px;
+                right: 0;
+                top: 0;
+				padding: 1px 10px;
+            }
+        }
+    }
+}
+
+.filter_saidbar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    @include tab-view {
+        flex-direction: row;
+    }
+
+    .filter_by {
+        &.desktop_ver {
+            @include tab-view {
+                display: none;
+            }
+        }
+    }
+}
+
+.desk_versort {
+    @include tab-view {
+        display: none;
+    }
+}
+
+.sortby_responsive {
+    display: none;
+
+    @include tab-view {
+        display: block;
+    }
+}
+
+.responsive_filter_show,
+.responsive_sortby_show {
     background: $bg-light-grey;
     height: 100%;
     left: 0;
@@ -83,7 +171,7 @@
         .filter_head_popup {
             width: 100%;
             padding: 10px 20px;
-            background: $text-darkblue;
+
             text-align: center;
             display: flex;
             align-items: center;
@@ -115,7 +203,7 @@
                 position: absolute;
                 top: 50%;
                 right: 15px;
-                transform: translateY(-50%);
+                transform: translate(10px, 10px);
 
                 img {
                     width: 20px;
@@ -169,8 +257,8 @@
         position: relative;
 
         @include tab-view {
-            top: -120px;
-            margin-top: 0px;
+            top: 0;
+            margin-top: -110px;
         }
     }
 
@@ -181,6 +269,11 @@
 
 .search_result {
     transform: translate(0px, -95px);
+
+    @include tab-view {
+        transform: initial;
+        padding: 0;
+    }
 
     &.flight {
         .left_m {
