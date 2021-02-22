@@ -146,6 +146,10 @@
 	.search_tab_listing_wrapper{
 		top: -100px;
 		position: relative;
+		@include tab-view{
+			top: -60px;
+			margin-top: 0px;
+		}
 	}
 	@include tab-view{
 		padding: 15px;

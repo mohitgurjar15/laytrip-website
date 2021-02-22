@@ -2992,6 +2992,9 @@ select {
           font-weight: 600;
           // opacity: 0.7;
           text-align: left;
+          @media (max-width: 768px) {
+            text-align: center;
+          }
         }
 
         .company_contact {
