@@ -1,6 +1,8 @@
 @import "_cstm-variable.scss";
 @import "_cstm-components.scss";
 @import "_dr_home_variable.scss";
+@import "_hotel.scss";
+
 //<!-- Start Search Modify section -->
 
 //<!-- Start Search Modify section -->
@@ -491,6 +493,9 @@
 	.price_by_date {
 		width: 100%;
 		margin: 0 0 30px;
+		@include tab-view{
+			margin-top: 10px;
+		}
 
 		label {
 			font-size: 16px;

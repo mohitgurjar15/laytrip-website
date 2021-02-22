@@ -5,7 +5,7 @@
         <div class="card_iinner">
             <div class="main_left_side">
                 <div class="common_wrper" *ngFor="let route of item.routes; let lastroute = last">
-                    <div class="left_side">
+                    <div class="left_side desktop_on">
                         <div class="flight_nams_wrps">
                             <div class="fight_secs">
                                 <img src="{{ route.stops[0].airline_logo || defaultImage }}" alt="Airlines Logo"
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="center_side">
+                    <div class="center_side desktop_on">
                         <div class="stops_wr">
                             <div class="stopages">
                                 <span class="fl_type" *ngIf="route.stops.length-1==0">Non-Stop</span>
@@ -64,7 +64,75 @@
                                 </span>
                             </ng-container>
                         </div>
+                    </div>
+                    <div class="mobile_views comnn_wrspss">
+                        <div class="col_wrpps">
+                            <div class="left_side">
+                                <div class="flight_nams_wrps">
+                                    <div class="fight_secs">
+                                        <img src="{{ route.stops[0].airline_logo || defaultImage }}" alt="Airlines Logo"
+                                            onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                        <span class="fl_name">
+                                            {{route.stops[0].airline_name}}
+                                        </span>
+                                        <span class="fl_num">
+                                            {{route.stops[0].airline}} - {{route.stops[0].flight_number}}
+                                        </span>
+                                    </div>
+                                    <div class="fight_secs">
+                                        <div class="upper_f_wrps">
+                                            <span class="fl_times duel_wrps">
+                                                {{route.stops[0].departure_time}}
+                                                <span class="fl_desitines">
+                                                    {{route.stops[0]?.departure_info?.code}}<br>
+                                                    {{route.stops[0]?.departure_info?.city}}
+                                                </span>
+                                            </span>
+                                            <span class="pipe_wrap">
+                                                <div class="pipe_line_wrps">
+                                                    <span class="pine_line"></span>
+                                                    <div class="stp_names">
+                                                        <div class="t_name">PUJ</div> 
+                                                        <div class="t_name">PUJ</div> 
+                                                        <div class="n_stop">Non Stop</div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span class="fl_desti duel_wrps">
+                                                <span class="fl_name">
+                                                    {{route.stops[route.stops.length-1].arrival_time}} <span
+                                                        *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
+                                                </span>
 
+                                                {{route.stops[route.stops.length-1]?.arrival_info?.code}} <br>
+                                                {{route.stops[route.stops.length-1]?.arrival_info?.city}}
+                                            </span>
+                                        </div>
+                                        <div class="fl_timin">
+                                            <span class="hh_mm">
+                                                {{route.duration}}
+                                            </span>
+                                            <div class="layover_wrps">
+                                                <ng-container *ngIf="route.stops.length>1">
+                                                    <span class="lyovr_txt"
+                                                        *ngFor="let stop of route.stops | slice:1; let laststop = last">
+                                                        {{stop?.departure_info?.code}} Plane Change
+                                                        {{stop?.layover_duration}}
+                                                    </span>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span [id]="'accordion_infos'+i" class="accordion_infos_1" *ngIf="lastroute">
+                            <a (click)="getCancellationPolicy(item.route_code)" class="det_link" data-toggle="collapse"
+                                [attr.data-target]="'#detail_accorrd'+i" [attr.aria-controls]="'#detail_accorrd'+i"
+                                aria-expanded="false" [href]="'#detail_accorrd'+i">
+                                Details
+                            </a>
+                        </span>
                     </div>
                 </div>
             </div>
