@@ -56,11 +56,13 @@ export class ListBookingsComponent implements OnInit {
   }
 
   getComplteBooking(search = '') {
+    this.completeLoading = true;
     this.accountService.getComplteBooking(search).subscribe((res: any) => {
       this.completeBookings = res.data;
       this.completeBookingsForFilter = res.data;
       this.completeLoading = false;
     }, err => {
+      this.completeLoading = false;
       this.completeBookings = [];
     });
   }

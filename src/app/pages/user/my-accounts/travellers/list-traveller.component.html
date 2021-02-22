@@ -96,28 +96,7 @@
     <app-traveller-form [countries]="countries" [countries_code]="countries_code" [modalReference]="modalReference">
     </app-traveller-form>
 </ng-template>
-
-<ng-template #deleteContent let-modal>
-    <div class="modal-header">
-        <div class="block_title">
-            <h4>Delete Co - Traveler</h4>
-        </div>
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
-            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-        </button>
-    </div>
-    <div class="modal-body">
-        <div class="modal_btm">
-            <p>Are you sure you want to delete traveler?</p>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <div class="form_btn">
-            <button type="button" class="btn_no" (click)="modal.dismiss('Cross click')">No</button>
-            <button type="button" (click)="deleteTraveller()">Yes</button>
-        </div>
-    </div>
-</ng-template> -->
+ -->
 <div class="title_bar">
     <h3>Traveler Details</h3>
     <!-- <span class="edit_btns">
@@ -142,6 +121,7 @@
                                     </svg>
                                     {{traveler.roleId==6?'Primary Traveler':'Additional Traveler'}}
                                 </a>
+                                <a *ngIf="traveler.roleId != 6" (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a>
                             </div>
                             <div id="collapseTravInner{{traveler.userId}}" class="collapse" data-parent="#trav_accordion_inner">
                                 <div class="card-body">
@@ -155,3 +135,26 @@
         </div>
     </div>
 </div>
+
+
+<ng-template #deleteContent let-modal>
+    <div class="modal-header">
+        <div class="block_title">
+            <h4>Delete Co - Traveler</h4>
+        </div>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal_btm">
+            <p>Are you sure you want to delete traveler?</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="form_btn">
+            <button type="button" class="btn_no" (click)="modal.dismiss('Cross click')">No</button>
+            <button type="button" (click)="deleteTraveller()">Yes</button>
+        </div>
+    </div>
+</ng-template>

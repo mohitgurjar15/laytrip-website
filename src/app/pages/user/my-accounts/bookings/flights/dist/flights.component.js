@@ -9,7 +9,6 @@ exports.__esModule = true;
 exports.FlightsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
-var moment = require("moment");
 var FlightsComponent = /** @class */ (function () {
     function FlightsComponent(commonFunction) {
         this.commonFunction = commonFunction;
@@ -21,11 +20,14 @@ var FlightsComponent = /** @class */ (function () {
     FlightsComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['cartItem'].currentValue != 'undefined') {
             this.cartItem = changes['cartItem'].currentValue;
-            // console.log("cartItem=====>",this.cartItem)
         }
     };
     FlightsComponent.prototype.convertHHMM = function (time) {
-        return moment(time).format('HH:MM'); // 5:04 PM
+        time = time.replace(' AM', '');
+        time = time.replace(' PM', '');
+        return time;
+        // console.log(time)
+        // return moment(new Date(time)).format('LT');   // 5:04 PM
     };
     __decorate([
         core_1.Input()
