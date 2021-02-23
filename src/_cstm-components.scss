@@ -120,6 +120,11 @@
                         no-repeat;
                     background-position: left 25px center;
                     color: #808080;
+
+                    @include tab-view{
+                        padding: 5px 5px 5px 24px !important;
+                        background-position: left 5px center;
+                    }
                 }
             }
         }
