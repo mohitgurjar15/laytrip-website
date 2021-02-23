@@ -1,4 +1,4 @@
-@import '../../../../../cstm-variable';
+@import "../../../../../cstm-variable";
 @import "../../../../../_cstm-variable.scss";
 @import "../../../../../_cstm-components.scss";
 @import "../../../../../_hotel.scss";
@@ -7,6 +7,10 @@
 
 input.ng-invalid.ng-touched {
     border-bottom: 1px solid #f4516c !important;
+}
+
+.ng-customClass.country_code {
+    width: 140px;
 }
 
 .account_part {
@@ -36,7 +40,17 @@ input.ng-invalid.ng-touched {
     }
 }
 
-.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown .ng-select.ng-customClass .ng-select-container {
+.account_part
+    .account_cnt_main
+    .update_info
+    .update_info_right
+    .form_row
+    .form_field
+    .phone_no
+    .code
+    .dropdown
+    .ng-select.ng-customClass
+    .ng-select-container {
     height: 100%;
     border: none;
 }
@@ -48,7 +62,6 @@ input.ng-invalid.ng-touched {
 ::ng-deep .calender-passport-expiry {
     min-width: 300px !important;
 }
-
 
 ::ng-deep .calender-price-view {
     //width: 340px;
@@ -71,7 +84,7 @@ input.ng-invalid.ng-touched {
                                 background: transparent;
 
                                 .c_date {
-                                    background: #F826C1;
+                                    background: #f826c1;
                                 }
                             }
 
@@ -79,7 +92,7 @@ input.ng-invalid.ng-touched {
                                 background: transparent !important;
 
                                 .c_date {
-                                    background: #F826C1;
+                                    background: #f826c1;
                                 }
                             }
                         }
@@ -89,7 +102,7 @@ input.ng-invalid.ng-touched {
                             width: 30px;
                             height: 30px;
                             border-radius: 50%;
-                            background: #2196F3;
+                            background: #2196f3;
                             padding: 5px;
                             text-align: center;
                             line-height: 20px;
@@ -100,14 +113,12 @@ input.ng-invalid.ng-touched {
                             display: block;
                             margin-top: 3px;
                         }
-
                     }
                 }
             }
         }
     }
 }
-
 
 .dobs_account {
     input {
@@ -117,7 +128,6 @@ input.ng-invalid.ng-touched {
     }
 
     ::ng-deep .birth_date {
-
         .p-inputtext {
             border: none;
         }
@@ -174,7 +184,6 @@ input.ng-invalid.ng-touched {
     }
 }
 
-
 .account_cnt_main {
     width: 100%;
     //border-radius: 5px;
@@ -182,7 +191,7 @@ input.ng-invalid.ng-touched {
     padding: 30px 30px 0;
     //box-shadow: 3px 4px 10px $shadow-color;
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         margin: 20px 0;
         height: auto;
     }
@@ -198,7 +207,7 @@ input.ng-invalid.ng-touched {
         max-width: 655px;
         margin: 0 auto;
 
-        @media(max-width: 991px) {
+        @media (max-width: 991px) {
             flex-wrap: wrap;
         }
 
@@ -230,7 +239,7 @@ input.ng-invalid.ng-touched {
                     transform: translate(-50%, -50%);
                 }
 
-                @media(max-width: 991px) {
+                @media (max-width: 991px) {
                     width: 90px;
                     height: 90px;
 
@@ -279,8 +288,7 @@ input.ng-invalid.ng-touched {
                 @include tab-view {
                     flex-direction: column;
                     align-items: flex-start;
-                    label{
-
+                    label {
                     }
                 }
             }
@@ -360,7 +368,7 @@ input.ng-invalid.ng-touched {
 
                         color: $mid_gray_bg;
                         font-size: 14px;
-                        padding: 0 25px 0 0;                       
+                        padding: 0 25px 0 0;
 
                         &:focus {
                             outline: none;
@@ -379,7 +387,6 @@ input.ng-invalid.ng-touched {
 
                         &:first-child {
                             width: 55px;
-
                         }
                     }
                 }
@@ -558,11 +565,11 @@ input.ng-invalid.ng-touched {
                     list-style: none;
                     display: flex;
 
-                    @media(max-width: 1199px) {
+                    @media (max-width: 1199px) {
                         flex-wrap: wrap;
                     }
 
-                    @media(max-width: 575px) {
+                    @media (max-width: 575px) {
                         flex-wrap: wrap;
                     }
 
@@ -571,7 +578,7 @@ input.ng-invalid.ng-touched {
                         margin: 0 10px 0 0;
                         text-align: center;
 
-                        @media(max-width: 1199px) {
+                        @media (max-width: 1199px) {
                             margin: 0 10px 10px 0;
                         }
 
@@ -685,7 +692,7 @@ input.ng-invalid.ng-touched {
                         font-size: 14px;
                         font-weight: 300;
 
-                        @media(max-width: 575px) {
+                        @media (max-width: 575px) {
                             padding: 0 30px 0 0;
                         }
 
@@ -747,7 +754,6 @@ input.ng-invalid.ng-touched {
                         }
                     }
                 }
-
             }
         }
 
@@ -779,20 +785,20 @@ input.ng-invalid.ng-touched {
                     display: flex;
                     justify-content: space-between;
 
-                    @media(max-width: 991px) {
+                    @media (max-width: 991px) {
                         flex-wrap: wrap;
                     }
 
                     .field_bolck {
                         width: 31%;
 
-                        @media(max-width: 991px) {
+                        @media (max-width: 991px) {
                             width: 100%;
                             display: flex;
                             justify-content: space-between;
                         }
 
-                        @media(max-width: 767px) {
+                        @media (max-width: 767px) {
                             flex-wrap: wrap;
                         }
 
@@ -800,14 +806,13 @@ input.ng-invalid.ng-touched {
                             width: 100%;
                             margin-bottom: 30px;
 
-                            @media(max-width: 991px) {
+                            @media (max-width: 991px) {
                                 width: 48%;
                             }
 
-                            @media(max-width: 767px) {
+                            @media (max-width: 767px) {
                                 width: 100%;
                             }
-
 
                             label {
                                 width: 100%;
@@ -854,7 +859,8 @@ input.ng-invalid.ng-touched {
                                     }
 
                                     &.birth_date {
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
+                                            no-repeat;
                                         background-position: right center;
                                         padding: 0 !important;
                                     }
@@ -945,12 +951,12 @@ input.ng-invalid.ng-touched {
                             width: 49%;
 
                             .field_inn {
-                                @media(max-width: 991px) {
+                                @media (max-width: 991px) {
                                     width: 100%;
                                 }
                             }
 
-                            @media(max-width: 767px) {
+                            @media (max-width: 767px) {
                                 width: 100%;
                             }
                         }
@@ -959,7 +965,6 @@ input.ng-invalid.ng-touched {
             }
         }
     }
-
 
     &.booking_main {
         background: transparent;
@@ -972,7 +977,7 @@ input.ng-invalid.ng-touched {
             .nav-tabs {
                 display: none;
 
-                @media(min-width: 991px) {
+                @media (min-width: 991px) {
                     display: flex;
                     background-color: transparent;
                     border: none;
@@ -1081,7 +1086,7 @@ input.ng-invalid.ng-touched {
 
             .tab-content {
                 .card {
-                    @media(min-width: 991px) {
+                    @media (min-width: 991px) {
                         border: none;
 
                         .card-header {
@@ -1094,7 +1099,7 @@ input.ng-invalid.ng-touched {
                     }
                 }
 
-                @media(max-width:991px) {
+                @media (max-width: 991px) {
                     .tab-pane {
                         opacity: 1;
                         margin: 0 0 15px;
@@ -1140,7 +1145,7 @@ input.ng-invalid.ng-touched {
                         padding: 25px 30px;
                         box-shadow: 3px 4px 10px $shadow-color;
 
-                        @media(max-width: 767px) {
+                        @media (max-width: 767px) {
                             padding: 20px;
                         }
 
@@ -1171,7 +1176,7 @@ input.ng-invalid.ng-touched {
                                                             padding: 0;
                                                             list-style: none;
 
-                                                            @media(max-width: 767px) {
+                                                            @media (max-width: 767px) {
                                                                 flex-flow: column;
                                                                 text-align: center;
                                                             }
@@ -1191,7 +1196,7 @@ input.ng-invalid.ng-touched {
                                                                     padding: 0 0 0 5px;
                                                                 }
 
-                                                                @media(max-width:767px) {
+                                                                @media (max-width: 767px) {
                                                                     padding: 0 0 10px 0;
 
                                                                     span {
@@ -1213,9 +1218,8 @@ input.ng-invalid.ng-touched {
 
                                                             &.refund {
                                                                 font-size: 16px;
-                                                                color: #FF0000;
+                                                                color: #ff0000;
                                                                 font-weight: 500;
-
                                                             }
                                                         }
 
@@ -1235,7 +1239,7 @@ input.ng-invalid.ng-touched {
                                                                 color: $text-white;
                                                             }
 
-                                                            @media(max-width: 767px) {
+                                                            @media (max-width: 767px) {
                                                                 padding: 15px 0 0;
                                                             }
                                                         }
@@ -1264,7 +1268,7 @@ input.ng-invalid.ng-touched {
                                                 &:last-child {
                                                     margin: 0;
 
-                                                    @media(max-width: 767px) {
+                                                    @media (max-width: 767px) {
                                                         margin: 0 0 15px;
                                                     }
                                                 }
@@ -1314,7 +1318,7 @@ input.ng-invalid.ng-touched {
                                     margin: 30px 0 0;
                                 }
 
-                                @media(max-width:767px) {
+                                @media (max-width: 767px) {
                                     padding: 20px;
 
                                     img {
@@ -1352,7 +1356,7 @@ input.ng-invalid.ng-touched {
                                 left: 0;
                                 transform: translateY(-50%);
                                 background: $tab-br-clr;
-                                content: '';
+                                content: "";
                             }
                         }
 
@@ -1422,7 +1426,7 @@ input.ng-invalid.ng-touched {
                                         }
                                     }
 
-                                    @media(max-width:991px) {
+                                    @media (max-width: 991px) {
                                         position: relative;
                                         top: 0;
                                         margin-bottom: 15px;
@@ -1449,7 +1453,7 @@ input.ng-invalid.ng-touched {
                                         align-items: center;
                                         border-bottom: 1px solid $box-border-color;
 
-                                        @media(max-width: 991px) {
+                                        @media (max-width: 991px) {
                                             flex-wrap: wrap;
                                             justify-content: center;
                                         }
@@ -1466,11 +1470,11 @@ input.ng-invalid.ng-touched {
                                                 display: flex;
                                                 align-items: center;
 
-                                                @media(max-width: 991px) {
+                                                @media (max-width: 991px) {
                                                     justify-content: center;
                                                 }
 
-                                                @media(max-width:767px) {
+                                                @media (max-width: 767px) {
                                                     flex-wrap: wrap;
                                                 }
 
@@ -1518,16 +1522,16 @@ input.ng-invalid.ng-touched {
                                                             transform: translateY(-50%);
                                                         }
 
-                                                        @media(max-width:767px) {
+                                                        @media (max-width: 767px) {
                                                             margin: 10px auto;
                                                         }
 
-                                                        @media(max-width:360px) {
+                                                        @media (max-width: 360px) {
                                                             width: 100%;
                                                         }
                                                     }
 
-                                                    @media(max-width:767px) {
+                                                    @media (max-width: 767px) {
                                                         width: 100%;
                                                         margin: 0;
                                                         text-align: center;
@@ -1535,7 +1539,7 @@ input.ng-invalid.ng-touched {
                                                 }
                                             }
 
-                                            @media(max-width:991px) {
+                                            @media (max-width: 991px) {
                                                 width: 100%;
                                                 margin: 0 0 20px;
                                             }
@@ -1575,7 +1579,7 @@ input.ng-invalid.ng-touched {
                                                 }
                                             }
 
-                                            @media(max-width:991px) {
+                                            @media (max-width: 991px) {
                                                 margin: 0;
                                             }
                                         }
@@ -1588,7 +1592,7 @@ input.ng-invalid.ng-touched {
                                         align-items: center;
                                         justify-content: space-between;
 
-                                        @media(max-width: 991px) {
+                                        @media (max-width: 991px) {
                                             flex-wrap: wrap;
                                         }
 
@@ -1599,7 +1603,7 @@ input.ng-invalid.ng-touched {
                                             &:first-child {
                                                 border-left: none;
 
-                                                @media(max-width: 767px) {
+                                                @media (max-width: 767px) {
                                                     padding-top: 0;
                                                 }
                                             }
@@ -1620,7 +1624,7 @@ input.ng-invalid.ng-touched {
                                                     font-size: 10px;
                                                     color: $text-white;
 
-                                                    @media(max-width: 991px) {
+                                                    @media (max-width: 991px) {
                                                         display: inline-block;
                                                     }
                                                 }
@@ -1630,17 +1634,17 @@ input.ng-invalid.ng-touched {
                                                     font-weight: 500;
                                                     color: $text-lightblue;
 
-                                                    @media(max-width: 991px) {
+                                                    @media (max-width: 991px) {
                                                         display: block;
                                                     }
                                                 }
 
-                                                @media(max-width:991px) {
+                                                @media (max-width: 991px) {
                                                     width: 100%;
                                                     margin: 20px 0 0;
                                                 }
 
-                                                @media(max-width:767px) {
+                                                @media (max-width: 767px) {
                                                     border: none;
                                                     margin: 00;
                                                     padding-bottom: 0;
@@ -1672,13 +1676,13 @@ input.ng-invalid.ng-touched {
                                                         font-weight: 600;
                                                     }
 
-                                                    @media(max-width:767px) {
+                                                    @media (max-width: 767px) {
                                                         text-align: center;
                                                     }
                                                 }
                                             }
 
-                                            @media(max-width:767px) {
+                                            @media (max-width: 767px) {
                                                 width: 100%;
                                                 padding: 15px;
                                                 border-left: none;
@@ -1705,14 +1709,14 @@ input.ng-invalid.ng-touched {
             justify-content: space-between;
             align-items: flex-end;
 
-            @media(max-width: 991px) {
+            @media (max-width: 991px) {
                 flex-wrap: wrap;
             }
 
             .filter_form {
                 width: 100%;
 
-                @media(max-width: 991px) {
+                @media (max-width: 991px) {
                     width: 100%;
                 }
 
@@ -1721,7 +1725,7 @@ input.ng-invalid.ng-touched {
                     display: flex;
                     justify-content: space-between;
 
-                    @media(max-width: 767px) {
+                    @media (max-width: 767px) {
                         flex-wrap: wrap;
                     }
 
@@ -1729,7 +1733,7 @@ input.ng-invalid.ng-touched {
                         width: 48%;
                         margin: 0 0 20px;
 
-                        @media(max-width: 767px) {
+                        @media (max-width: 767px) {
                             width: 100%;
                         }
 
@@ -1836,7 +1840,8 @@ input.ng-invalid.ng-touched {
                                 }
 
                                 &.birth_date {
-                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
+                                        no-repeat;
                                     background-position: right center;
                                     padding: 0 !important;
                                 }
@@ -1955,7 +1960,7 @@ input.ng-invalid.ng-touched {
                 width: 300px;
                 margin: 0 0 20px 50px;
 
-                @media(max-width: 991px) {
+                @media (max-width: 991px) {
                     width: 100%;
                     text-align: right;
                     margin-left: 0;
@@ -1970,14 +1975,14 @@ input.ng-invalid.ng-touched {
                     justify-content: flex-end;
                     flex-flow: column;
 
-                    @media(max-width: 991px) {
+                    @media (max-width: 991px) {
                         flex-flow: row;
                     }
 
                     li {
                         margin: 0 0 20px;
 
-                        @media(max-width: 991px) {
+                        @media (max-width: 991px) {
                             margin: 0 15px 0 0;
                         }
 
@@ -2031,11 +2036,11 @@ input.ng-invalid.ng-touched {
                         }
                     }
 
-                    @media(max-width:991px) {
+                    @media (max-width: 991px) {
                         width: 200px;
                     }
 
-                    @media(max-width:575px) {
+                    @media (max-width: 575px) {
                         width: 117px;
                         padding: 8px 25px;
                         font-size: 14px;
@@ -2160,7 +2165,7 @@ input.ng-invalid.ng-touched {
                                     padding: 0 0 15px;
                                     display: flex;
 
-                                    @media(max-width: 575px) {
+                                    @media (max-width: 575px) {
                                         flex-flow: column;
                                     }
 
@@ -2223,7 +2228,7 @@ input.ng-invalid.ng-touched {
                                 border-radius: 8px;
                                 margin: 0 0 0 50px;
 
-                                @media(max-width: 767px) {
+                                @media (max-width: 767px) {
                                     margin: 30px 0 0;
                                 }
 
@@ -2252,7 +2257,7 @@ input.ng-invalid.ng-touched {
                             }
                         }
 
-                        @media(max-width:767px) {
+                        @media (max-width: 767px) {
                             flex-flow: column;
                         }
                     }
@@ -2389,7 +2394,7 @@ input.ng-invalid.ng-touched {
                 margin: 30px 0 0;
             }
 
-            @media(max-width:767px) {
+            @media (max-width: 767px) {
                 padding: 20px;
 
                 img {
@@ -2411,7 +2416,7 @@ input.ng-invalid.ng-touched {
             padding: 15px;
             box-shadow: 3px 4px 10px $shadow-color;
 
-            @media(max-width: 480px) {
+            @media (max-width: 480px) {
                 margin-right: 0;
             }
 
@@ -2476,7 +2481,7 @@ input.ng-invalid.ng-touched {
                             padding: 0;
                         }
 
-                        @media(max-width: 480px) {
+                        @media (max-width: 480px) {
                             font-size: 17px;
                         }
                     }
@@ -2572,7 +2577,7 @@ input.ng-invalid.ng-touched {
                     position: relative;
 
                     &:after {
-                        content: '';
+                        content: "";
                         position: absolute;
                         top: 1px;
                         -webkit-transform: translate(0, -50%);
@@ -2610,7 +2615,7 @@ input.ng-invalid.ng-touched {
                 padding: 20px 30px;
                 border-bottom: 1px solid $box-border-color;
 
-                @media(max-width: 575px) {
+                @media (max-width: 575px) {
                     padding: 20px;
                 }
 
@@ -2619,7 +2624,7 @@ input.ng-invalid.ng-touched {
                     font-weight: 600;
                     color: $text-lightblue;
 
-                    @media(max-width: 575px) {
+                    @media (max-width: 575px) {
                         font-size: 12px;
                     }
                 }
@@ -2629,7 +2634,7 @@ input.ng-invalid.ng-touched {
                 width: 100%;
                 padding: 30px;
 
-                @media(max-width: 575px) {
+                @media (max-width: 575px) {
                     padding: 20px;
                 }
 
@@ -2649,7 +2654,7 @@ input.ng-invalid.ng-touched {
                         margin: 30px 0 0;
                     }
 
-                    @media(max-width:767px) {
+                    @media (max-width: 767px) {
                         padding: 20px;
 
                         img {
@@ -2690,7 +2695,7 @@ input.ng-invalid.ng-touched {
                             margin: 0 0 0 15px;
                             box-shadow: 3px 4px 10px $shadow-color;
 
-                            @media(max-width: 575px) {
+                            @media (max-width: 575px) {
                                 margin: 0;
                                 padding: 10px;
                             }
@@ -2701,7 +2706,7 @@ input.ng-invalid.ng-touched {
                                     font-weight: 500;
                                     color: $text-black;
 
-                                    @media(max-width: 575px) {
+                                    @media (max-width: 575px) {
                                         font-size: 14px;
                                     }
 
@@ -2712,7 +2717,7 @@ input.ng-invalid.ng-touched {
                                         padding: 0 0 0 10px;
                                     }
 
-                                    @media(max-width:480px) {
+                                    @media (max-width: 480px) {
                                         font-size: 12px;
 
                                         span {
@@ -2726,14 +2731,14 @@ input.ng-invalid.ng-touched {
                                     font-weight: 400;
                                     color: $text-grey;
 
-                                    @media(max-width: 480px) {
+                                    @media (max-width: 480px) {
                                         font-size: 12px;
                                     }
                                 }
                             }
 
                             .list_action {
-                                @media(max-width: 575px) {
+                                @media (max-width: 575px) {
                                     margin-left: 15px;
                                 }
 
@@ -2752,7 +2757,7 @@ input.ng-invalid.ng-touched {
                                             color: $text-grey;
                                         }
 
-                                        @media(max-width:575px) {
+                                        @media (max-width: 575px) {
                                             padding: 0 0 0 10px;
 
                                             &:first-child {
@@ -2802,11 +2807,11 @@ input.ng-invalid.ng-touched {
                         width: 33.33%;
                         padding: 0 0 20px;
 
-                        @media(max-width: 991px) {
+                        @media (max-width: 991px) {
                             width: 50%;
                         }
 
-                        @media(max-width:575px) {
+                        @media (max-width: 575px) {
                             width: 100%;
                         }
 
@@ -2853,7 +2858,7 @@ input.ng-invalid.ng-touched {
                                 position: relative;
 
                                 &:after {
-                                    content: '';
+                                    content: "";
                                     position: absolute;
                                     top: 1px;
                                     -webkit-transform: translate(0, -50%);
@@ -2917,7 +2922,7 @@ input.ng-invalid.ng-touched {
                 width: 100%;
                 padding: 0 25px;
 
-                @media(max-width: 575px) {
+                @media (max-width: 575px) {
                     padding: 0 10px;
                 }
 
@@ -2929,7 +2934,7 @@ input.ng-invalid.ng-touched {
                         width: 50%;
                         margin: 0 0 30px;
 
-                        @media(max-width: 575px) {
+                        @media (max-width: 575px) {
                             width: 100%;
                         }
 
@@ -2991,7 +2996,7 @@ input.ng-invalid.ng-touched {
                                     color: $text-grey;
                                     margin-top: -10px;
                                     cursor: pointer;
-                                    transition: .3s ease all;
+                                    transition: 0.3s ease all;
                                 }
                             }
                         }
@@ -3055,7 +3060,7 @@ input.ng-invalid.ng-touched {
                     }
                 }
 
-                @media(max-width: 991px) {
+                @media (max-width: 991px) {
                     display: inline-flex;
                 }
             }
@@ -3073,7 +3078,7 @@ input.ng-invalid.ng-touched {
             .nav-tabs {
                 display: none;
 
-                @media(min-width: 768px) {
+                @media (min-width: 768px) {
                     display: flex;
                     background-color: transparent;
                     border: none;
@@ -3164,7 +3169,7 @@ input.ng-invalid.ng-touched {
 
             .tab-content {
                 .card {
-                    @media(min-width: 768px) {
+                    @media (min-width: 768px) {
                         border: none;
 
                         .card-header {
@@ -3177,7 +3182,7 @@ input.ng-invalid.ng-touched {
                     }
                 }
 
-                @media(max-width:767px) {
+                @media (max-width: 767px) {
                     .tab-pane {
                         display: block;
                         opacity: 1;
@@ -3223,7 +3228,7 @@ input.ng-invalid.ng-touched {
                         padding: 25px 30px;
                         box-shadow: 3px 4px 10px $shadow-color;
 
-                        @media(max-width: 480px) {
+                        @media (max-width: 480px) {
                             padding: 20px 15px;
                         }
 
@@ -3237,7 +3242,7 @@ input.ng-invalid.ng-touched {
                                 margin: 0 0 15px;
                                 display: flex;
 
-                                @media(max-width: 767px) {
+                                @media (max-width: 767px) {
                                     flex-wrap: wrap;
                                 }
 
@@ -3255,7 +3260,7 @@ input.ng-invalid.ng-touched {
                                         left: 0;
                                     }
 
-                                    @media(max-width:767px) {
+                                    @media (max-width: 767px) {
                                         margin: 0 0 10px;
                                     }
                                 }
@@ -3283,18 +3288,18 @@ input.ng-invalid.ng-touched {
                                             padding: 0;
                                         }
 
-                                        @media(max-width:575px) {
+                                        @media (max-width: 575px) {
                                             width: 100%;
                                             padding: 10px 0;
                                         }
                                     }
 
-                                    @media(max-width:767px) {
+                                    @media (max-width: 767px) {
                                         width: 100%;
                                         flex-wrap: wrap;
                                     }
 
-                                    @media(max-width:575px) {
+                                    @media (max-width: 575px) {
                                         flex-wrap: wrap;
                                     }
                                 }
@@ -3320,7 +3325,7 @@ input.ng-invalid.ng-touched {
                 display: flex;
                 justify-content: space-between;
 
-                @media(max-width: 767px) {
+                @media (max-width: 767px) {
                     flex-flow: column;
                 }
 
@@ -3332,7 +3337,7 @@ input.ng-invalid.ng-touched {
                         padding: 0;
                         list-style: none;
 
-                        @media(max-width: 480px) {
+                        @media (max-width: 480px) {
                             flex-wrap: wrap;
                         }
 
@@ -3343,13 +3348,14 @@ input.ng-invalid.ng-touched {
                             border-radius: 5px;
                             display: flex;
                             align-items: center;
-                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_pink.svg) no-repeat;
+                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_pink.svg)
+                                no-repeat;
                             background-size: cover;
                             margin: 0;
                             margin: 0 30px 0 0;
                             position: relative;
 
-                            @media(max-width: 480px) {
+                            @media (max-width: 480px) {
                                 width: 300px;
                                 margin: 0 0 20px 0;
                                 background-position: bottom center;
@@ -3382,7 +3388,7 @@ input.ng-invalid.ng-touched {
                 }
 
                 .block_points_add {
-                    @media(max-width: 767px) {
+                    @media (max-width: 767px) {
                         margin: 20px 0 0;
                         display: flex;
                         justify-content: flex-end;
@@ -3474,7 +3480,7 @@ input.ng-invalid.ng-touched {
                                     margin: 30px 0 0;
                                 }
 
-                                @media(max-width:767px) {
+                                @media (max-width: 767px) {
                                     padding: 20px;
 
                                     img {
@@ -3494,7 +3500,7 @@ input.ng-invalid.ng-touched {
                                     align-items: center;
                                     justify-content: space-between;
 
-                                    @media(max-width: 767px) {
+                                    @media (max-width: 767px) {
                                         flex-flow: column;
                                     }
 
@@ -3509,7 +3515,7 @@ input.ng-invalid.ng-touched {
                                             margin: 0 5px 0 0;
                                         }
 
-                                        @media(max-width: 767px) {
+                                        @media (max-width: 767px) {
                                             width: 100%;
                                             padding-bottom: 15px;
                                             justify-content: center;
@@ -3526,19 +3532,19 @@ input.ng-invalid.ng-touched {
                                         color: $text-black;
                                         padding-left: 30px;
 
-                                        @media(max-width: 767px) {
+                                        @media (max-width: 767px) {
                                             width: 100%;
                                             padding: 0;
                                         }
 
-                                        @media(max-width: 480px) {
+                                        @media (max-width: 480px) {
                                             flex-flow: column;
                                         }
 
                                         .block_point_left {
                                             width: 40%;
 
-                                            @media(max-width: 480px) {
+                                            @media (max-width: 480px) {
                                                 margin-bottom: 15px;
                                                 width: 100%;
                                                 text-align: center;
@@ -3549,7 +3555,7 @@ input.ng-invalid.ng-touched {
                                             width: 40%;
                                             text-align: right;
 
-                                            @media(max-width: 480px) {
+                                            @media (max-width: 480px) {
                                                 width: 100%;
                                                 text-align: center;
                                             }
@@ -3577,7 +3583,7 @@ input.ng-invalid.ng-touched {
             box-shadow: 3px 4px 10px $shadow-color;
             margin: 0 0 30px;
 
-            @media(max-width: 480px) {
+            @media (max-width: 480px) {
                 padding: 20px;
             }
 
@@ -3608,17 +3614,18 @@ input.ng-invalid.ng-touched {
                     flex-flow: column;
                     justify-content: space-between;
 
-                    @media(max-width: 767px) {
+                    @media (max-width: 767px) {
                         width: 70%;
                     }
 
-                    @media(max-width: 480px) {
+                    @media (max-width: 480px) {
                         width: 100%;
                     }
 
                     .block_top {
                         width: 100%;
-                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/Subscription_top_bg.svg) no-repeat;
+                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/Subscription_top_bg.svg)
+                            no-repeat;
                         background-size: 100%;
                         padding: 55px 0 85px;
                         color: $text-white;
@@ -3628,17 +3635,17 @@ input.ng-invalid.ng-touched {
                         text-align: center;
                         border-radius: 15px 15px 0 0;
 
-                        @media(max-width: 991px) {
+                        @media (max-width: 991px) {
                             padding: 45px 0 75px;
                             font-size: 26px;
                         }
 
-                        @media(max-width: 767px) {
+                        @media (max-width: 767px) {
                             padding: 55px 0 70px;
                             font-size: 26px;
                         }
 
-                        @media(max-width: 575px) {
+                        @media (max-width: 575px) {
                             padding: 45px 0 55px;
                             font-size: 26px;
                             background-size: cover;
@@ -3663,7 +3670,7 @@ input.ng-invalid.ng-touched {
                                 font-size: 23px;
                             }
 
-                            @media(max-width: 575px) {
+                            @media (max-width: 575px) {
                                 font-size: 30px;
 
                                 span {
@@ -3688,7 +3695,7 @@ input.ng-invalid.ng-touched {
                                 position: relative;
 
                                 &:before {
-                                    font-family: 'FontAwesome';
+                                    font-family: "FontAwesome";
                                     content: "\f00c";
                                     float: right;
                                     color: $bg-green;
@@ -3743,14 +3750,14 @@ input.ng-invalid.ng-touched {
                                     }
                                 }
 
-                                @media(max-width:575px) {
+                                @media (max-width: 575px) {
                                     font-size: 14px;
                                     line-height: 50px;
                                     padding: 0 15px;
                                 }
                             }
 
-                            @media(max-width:575px) {
+                            @media (max-width: 575px) {
                                 height: 50px;
                             }
                         }
@@ -3764,7 +3771,7 @@ input.ng-invalid.ng-touched {
                         height: 100%;
                     }
 
-                    @media(max-width: 767px) {
+                    @media (max-width: 767px) {
                         display: none;
                     }
                 }
@@ -3800,18 +3807,18 @@ input.ng-invalid.ng-touched {
                     display: flex;
                     align-items: center;
 
-                    @media(max-width: 575px) {
+                    @media (max-width: 575px) {
                         flex-flow: column;
                     }
 
                     .search_field {
                         width: 50%;
 
-                        @media(max-width: 991px) {
+                        @media (max-width: 991px) {
                             width: 100%;
                         }
 
-                        @media(max-width: 575px) {
+                        @media (max-width: 575px) {
                             width: 100%;
                         }
 
@@ -3851,7 +3858,7 @@ input.ng-invalid.ng-touched {
                     .search_btn {
                         margin-left: 30px;
 
-                        @media(max-width: 575px) {
+                        @media (max-width: 575px) {
                             width: 100%;
                             margin: 20px 0 0;
                             display: flex;
@@ -3902,7 +3909,7 @@ input.ng-invalid.ng-touched {
                                 }
                             }
 
-                            @media(max-width: 991px) {
+                            @media (max-width: 991px) {
                                 display: inline-flex;
                             }
                         }
