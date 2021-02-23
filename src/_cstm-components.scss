@@ -181,7 +181,15 @@
             }
         }
     }
-   
+    &.country_code{
+        .ng-select-container{
+            .ng-value-container {
+                .ng-value{
+                    width: 40px;
+                }
+            }
+        } 
+    }
 }
 
 // NG-SELECT FOCUS REMOVE CSS START
