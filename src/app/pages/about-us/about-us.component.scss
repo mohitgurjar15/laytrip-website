@@ -19,6 +19,7 @@
       width: 100%;
       .page_back_link {
         margin-bottom: 30px;
+        margin-left: 15px;
         a {
           color: $active-tab-text;
           font-size: 15px;
@@ -34,7 +35,7 @@
       .about_page_cmn {
         .block_cmspage_comman {
           @include tab-view {
-            padding: 15px;
+            padding: 10px;
           }
         }
         h3 {

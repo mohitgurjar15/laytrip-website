@@ -1,4 +1,5 @@
 @import "./../../../cstm-variable";
+@import "./../../../_hotel.scss";
 
 .flight_form {
     position: relative;
@@ -77,9 +78,18 @@
     height: 53px;
     justify-content: flex-start;
 
+    @include tab-view {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0 15px;
+    }
+
     label {
         padding-right: 10px !important;
         max-width: 50px !important;
+        @include tab-view {
+            padding-left: 0 !important;
+        }
     }
 
     .custom_inputs {
