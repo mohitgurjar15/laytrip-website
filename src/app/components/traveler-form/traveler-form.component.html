@@ -101,15 +101,17 @@
                         placeholder="Date of birth">
                       </p-calendar> -->
                     </div>
-                    <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_number')">
-                      <label for="">Passport number</label>
+                    <div class="col-sm-12 col-md-4 mb-sm-10"
+                      *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_number')">
+                      <label for="">Passport number*</label>
                       <input type="text" class="form-control" formControlName="passport_number">
                     </div>
-                    <!-- <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_expiry')">
-                      <label for="">Passport Expiry</label>
-                      <input type="text"  class="form-control" bsDatepicker
-                        formControlName="passport_expiry" [bsConfig]="bsConfig" [minDate]="passPortMinDate">
-                    </div> -->
+                    <div class="col-sm-12 col-md-4 mb-sm-10"
+                      *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_expiry')">
+                      <label for="">Passport Expiry*</label>
+                      <input type="text" class="form-control" bsDatepicker formControlName="passport_expiry"
+                        [bsConfig]="bsConfig" [minDate]="passPortMinDate">
+                    </div>
 
 
                     <div class="col-sm-12 col-md-4 nation_wrps">

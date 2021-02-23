@@ -34,39 +34,40 @@ export class TravelerFormComponent implements OnInit {
   travelers = {
     type0: {
       adults: [],
-      adult:0,
-      child:0,
-      infant:0
+      adult: 0,
+      child: 0,
+      infant: 0
     },
     type1: {
       adults: [],
-      adult:0,
-      child:0,
-      infant:0
+      adult: 0,
+      child: 0,
+      infant: 0
     },
     type2: {
       adults: [],
-      adult:0,
-      child:0,
-      infant:0
+      adult: 0,
+      child: 0,
+      infant: 0
     },
     type3: {
       adults: [],
-      adult:0,
-      child:0,
-      infant:0
+      adult: 0,
+      child: 0,
+      infant: 0
     },
     type4: {
       adults: [],
-      adult:0,
-      child:0,
-      infant:0
+      adult: 0,
+      child: 0,
+      infant: 0
     }
   };
   dobMinDate = new Date();
   baggageDescription: string = '';
 
   bsConfig: Partial<BsDatepickerConfig>;
+  passPortMinDate = new Date();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -100,8 +101,8 @@ export class TravelerFormComponent implements OnInit {
       })
     });
 
-    
-    
+
+
     this.checkOutService.getTravelers.subscribe((travelers: any) => {
       this.myTravelers = travelers;
     })
@@ -110,33 +111,32 @@ export class TravelerFormComponent implements OnInit {
     })
 
     for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
-      this.travelers[`type${this.cartNumber}`].cartId=this.cartId
+      this.travelers[`type${this.cartNumber}`].cartId = this.cartId
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
 
-      if(!this.cartItem.module_info.is_passport_required){
+      if (!this.cartItem.module_info.is_passport_required) {
         delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
         delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
       }
-      else{
-        this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required=true;
+      else {
+        this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required = true;
       }
 
-      this.travelers[`type${this.cartNumber}`].adult=this.cartItem.module_info.adult_count;
-      
+      this.travelers[`type${this.cartNumber}`].adult = this.cartItem.module_info.adult_count;
+
       this.cd.detectChanges();
     }
     for (let i = 0; i < this.cartItem.module_info.child_count; i++) {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.child));
-      this.travelers[`type${this.cartNumber}`].child=this.cartItem.module_info.child_count;
-      
+      this.travelers[`type${this.cartNumber}`].child = this.cartItem.module_info.child_count;
+
       this.cd.detectChanges();
     }
     for (let i = 0; i < this.cartItem.module_info.infant_count; i++) {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.infant));
-      this.travelers[`type${this.cartNumber}`].infant=this.cartItem.module_info.infant_count;
+      this.travelers[`type${this.cartNumber}`].infant = this.cartItem.module_info.infant_count;
       this.cd.detectChanges();
     }
-    console.log("this.tra",this.travelers)
     if (this.travelers && this.travelers[`type${this.cartNumber}`] && this.travelers[`type${this.cartNumber}`].adults) {
       for (let i = 0; i < this.cartItem.travelers.length; i++) {
         let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
@@ -150,28 +150,27 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo;
         this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
         this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy');
-        if(this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required){
+        if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
           this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
+          this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = moment(traveler.passport_expiry, "YYYY-MM-DD").format('MMM DD, yy');
         }
       }
       this.patch();
-      console.log("this.tra",this.travelers)
       this.cartService.setCartTravelers(this.travelers);
       this.cd.detectChanges();
     }
 
     this.travelerForm.valueChanges.subscribe(value => {
       if (typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number] !== 'undefined') {
-        // console.log("dob", this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob)
         if (this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status == 'VALID') {
 
           let data = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value;
-          data.dob = moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob).format("YYYY-MM-DD")
+          data.dob = moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob).format("YYYY-MM-DD");
+          data.passport_expiry = moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.passport_expiry).format("YYYY-MM-DD");
           let userId = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.userId;
           if (userId) {
             //Edit
-            console.log(data,"data")
-            this.travelerService.updateAdult(data, userId).subscribe((traveler:any) => {
+            this.travelerService.updateAdult(data, userId).subscribe((traveler: any) => {
               /* let index = this.myTravelers.findIndex(x=>x.userId=traveler.userId)
               this.myTravelers[index]=traveler;
               for(let i=0; i <5; i++){
@@ -200,8 +199,9 @@ export class TravelerFormComponent implements OnInit {
                 this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].phone_no = traveler.phoneNo;
                 this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].country_id = traveler.country != null ? traveler.country.id : '';
                 this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].dob = moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy');
-                if(this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].is_passport_required){
+                if (this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].is_passport_required) {
                   this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].passport_number = traveler.passportNumber;
+                  this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].passport_expiry = moment(traveler.passport_expiry, "YYYY-MM-DD").format('MMM DD, yy');
                 }
 
                 this.checkOutService.setTravelers([...this.myTravelers, traveler]);
@@ -219,27 +219,26 @@ export class TravelerFormComponent implements OnInit {
     this.cartService.getSelectedCart.subscribe(cartNumber => {
       this.cartNumber = cartNumber;
     })
-    
-    
+
+
 
     this.checkOutService.getTraveler.subscribe((traveler: any) => {
       if (traveler && Object.keys(traveler).length > 0) {
-          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].first_name = traveler.firstName;
-          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].last_name = traveler.lastName;
-          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].email = traveler.email;
-          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].userId = traveler.userId;
-          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].gender = traveler.gender;
-          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].phone_no = traveler.phoneNo;
-          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country_code = traveler.countryCode;
-          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country_id = traveler.country != null ? traveler.country.id : '';
-          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy') : '';
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].first_name = traveler.firstName;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].last_name = traveler.lastName;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].email = traveler.email;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].userId = traveler.userId;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].gender = traveler.gender;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].phone_no = traveler.phoneNo;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country_code = traveler.countryCode;
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].country_id = traveler.country != null ? traveler.country.id : '';
+        this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy') : '';
 
-          console.log(this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number],"this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number]",traveler)
-          if(this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].is_passport_required){
-            this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].passport_number = traveler.passportNumber;
-          }
-          this.patch();
-       
+        if (this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].is_passport_required) {
+          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].passport_number = traveler.passportNumber;
+          this.travelers[`type${this.cartNumber}`].adults[traveler.traveler_number].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy') : '';
+        }
+        this.patch();
       }
     })
     this.checkOutService.emitTravelersformData(this.travelerForm);
@@ -251,7 +250,7 @@ export class TravelerFormComponent implements OnInit {
     this.checkOutService.getCountries.subscribe(res => {
       this.countries = res;
     })
-    
+
   }
 
   patch() {
@@ -273,6 +272,7 @@ export class TravelerFormComponent implements OnInit {
       phone_no: (x.type === 'adult' || x.type === '') ? [x.phone_no, [Validators.required]] : [x.phone_no],
       country_code: (x.type === 'adult' || x.type === '') ? [x.country_code, [Validators.required]] : [x.country_code],
       passport_number: (x.is_passport_required) ? [x.passport_number, [Validators.required]] : [x.passport_number],
+      passport_expiry: (x.is_passport_required) ? [x.passport_expiry, [Validators.required]] : [x.passport_expiry],
       is_passport_required: [x.is_passport_required, [Validators.required]],
       dob: [x.dob, [Validators.required]],
       country_id: [x.country_id, [Validators.required]],
@@ -284,7 +284,7 @@ export class TravelerFormComponent implements OnInit {
     }, { updateOn: 'blur' });
   }
 
-  submit(value){
+  submit(value) {
 
   }
 

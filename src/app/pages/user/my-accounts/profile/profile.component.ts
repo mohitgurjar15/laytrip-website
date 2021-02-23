@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   profileForm: FormGroup;
-  submitted = false;
+  // submitted = false;
   loading = true;
   @Output() loadingValue = new EventEmitter<boolean>();
   minDate: any = {};
@@ -161,13 +161,13 @@ export class ProfileComponent implements OnInit {
         imgfile = this.imageFile;
         formdata.append("profile_pic", imgfile);
         this.userService.updateProfileImage(formdata).subscribe((data: any) => {
-          this.submitted = false;
+          // this.submitted = false;
           this.loadingValue.emit(false);
           localStorage.setItem("_lay_sess", data.token);
           // this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
         }, (error: HttpErrorResponse) => {
           this.loadingValue.emit(false);
-          this.submitted = false;
+          // this.submitted = false;
           // this.toastr.error(error.error.message, 'Profile Error');
         });
       }
@@ -201,7 +201,8 @@ export class ProfileComponent implements OnInit {
         passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
         passport_number: res.passportNumber
       });
-      this.profileForm.controls['home_airport'].disable()
+      this.profileForm.controls['home_airport'].disable();
+      this.profileForm.controls['country_code'].disable();
 
     }, (error: HttpErrorResponse) => {
       this.loadingValue.emit(false);
@@ -214,10 +215,14 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
+    // this.submitted = true;
+    const controls = this.profileForm.controls;
     this.loadingValue.emit(true);
     console.log(this.profileForm)
     if (this.profileForm.invalid) {
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
       this.loadingValue.emit(false);
       //scroll top if any error 
       let scrollToTop = window.setInterval(() => {
@@ -251,15 +256,16 @@ export class ProfileComponent implements OnInit {
       this.isFormControlEnable = false;
 
       this.profileForm.controls['home_airport'].disable();
+      this.profileForm.controls['country_code'].disable();
 
       this.userService.updateProfile(formdata).subscribe((data: any) => {
-        this.submitted = false;
+        // this.submitted = false;
         this.loadingValue.emit(false);
         localStorage.setItem("_lay_sess", data.token);
         // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
       }, (error: HttpErrorResponse) => {
         this.loadingValue.emit(false);
-        this.submitted = false;
+        // this.submitted = false;
         // this.toastr.error(error.error.message, 'Profile Error');
       });
     }
@@ -267,7 +273,8 @@ export class ProfileComponent implements OnInit {
 
   enableFormControlInputs(event) {
     this.isFormControlEnable = true;
-    this.profileForm.controls['home_airport'].enable()
+    this.profileForm.controls['home_airport'].enable();
+    this.profileForm.controls['country_code'].enable();
   }
 
   onRemove(event, item) {
