@@ -64,6 +64,7 @@ h3 {
       @include tab-view {
         height: 45px;
         max-width: 200px;
+        font-size: 12px;
       }
 
       &:first-child {
@@ -126,7 +127,8 @@ h3 {
   .inner_accordion {
     .btn_accrodion {
       background-color: $background-white;
-      color: $text-black;
+      //color: $text-black;
+      color: $mid_gray_bg;
       font-size: 16px;
       border: 1px solid $background-grey;
       border-radius: 10px;
@@ -142,8 +144,9 @@ h3 {
       position: relative;
 
       @include tab-view {
-        font-size: 18px;
+        font-size: 16px;
         height: 65px;
+        margin-right: 10px;
       }
 
       &:last-child {
@@ -157,15 +160,20 @@ h3 {
         span {
           color: $blue-text-one;
 
+          @include tab-view{
+            font-size: 8px;
+          }
+
           &.min_text {
-            position: absolute;
+            //position: absolute;
             bottom: 5px;
           }
         }
       }
 
       span {
-        color: $pink;
+        //color: $pink;
+        color: $mid_gray_bg;
         font-size: 9px;
 
         @include tab-view {

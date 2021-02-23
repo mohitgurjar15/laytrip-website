@@ -18,6 +18,9 @@
       width: 100%;
       .page_back_link {
         margin-bottom: 30px;
+        @include tab-view{
+          margin-left: 15px;
+        }
         a {
           color: $active-tab-text;
           font-size: 15px;

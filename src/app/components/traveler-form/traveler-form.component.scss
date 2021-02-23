@@ -7,6 +7,10 @@
 
 .ng-customClass.country_code {
   width: 150px;
+
+  .ng-input {
+    padding-left: 0;
+  }
 }
 
 .img_country_code {
@@ -74,6 +78,8 @@
     }
   }
 }
+
+
 
 .accordion_bookings {
   .card {
@@ -446,16 +452,19 @@
 
               li {
                 flex: 1;
+
                 &:first-child {
                   a {
                     margin-left: 0;
                   }
                 }
+
                 &:last-child {
                   a {
                     margin-right: 5px;
                   }
                 }
+
                 @include tab-view {
                   margin-left: 5px;
                   margin-bottom: 5px;
@@ -479,7 +488,15 @@
 
                   @include tab-view {
                     margin: 0;
+                    font-size: 9px;
+                    padding: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
                   }
+
+
 
                   &.active {
                     color: $text_grey_dark;
@@ -493,6 +510,10 @@
           .card-body {
             padding: 0;
             margin-top: 15px;
+
+            @include tab-view{
+              margin-top: 5px;
+            }
 
             .addon_listins_wrps {
               display: flex;

@@ -279,6 +279,7 @@ input.ng-invalid.ng-touched {
                 @include tab-view {
                     flex-direction: column;
                     align-items: flex-start;
+                    padding-bottom: 4px;
                     label{
 
                     }
@@ -287,6 +288,12 @@ input.ng-invalid.ng-touched {
 
             &.title_row {
                 justify-content: space-between;
+            }
+
+            &.ar_field{
+                .text_field{
+                    width: 100%;
+                }
             }
 
             h3 {
@@ -323,6 +330,8 @@ input.ng-invalid.ng-touched {
 
             .text_field {
                 flex: 2;
+
+                
 
                 .gender_anchers {
                     display: flex;
