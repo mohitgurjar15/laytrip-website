@@ -18,21 +18,21 @@ var FlightClassComponent = /** @class */ (function () {
     };
     FlightClassComponent.prototype.loadJquery = function () {
         $("body").click(function () {
-            $("#add_class_sec_open").hide();
+            $(".add_class_sec_open_").hide();
         });
-        $("#add_class_sec").click(function (e) {
+        $(".class_sec_info").click(function (e) {
             e.stopPropagation();
-            $("#add_class_sec_open").slideToggle();
-            $('#add_traveler_open').hide();
+            $(".add_class_sec_open_").show();
+            $(".add_traveler__open").hide();
         });
-        $('#add_class_sec_open').click(function (e) {
+        $('.add_class_sec_open_').click(function (e) {
             e.stopPropagation();
         });
     };
     FlightClassComponent.prototype.btnClickForChange = function (item) {
         this.changeValue.emit(item.value);
         this.flightClass = item.value;
-        $("#add_class_sec_open").hide();
+        $(".add_class_sec_open_").hide();
     };
     __decorate([
         core_1.Output()

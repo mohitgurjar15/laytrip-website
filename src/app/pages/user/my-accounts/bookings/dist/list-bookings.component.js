@@ -5,6 +5,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 exports.__esModule = true;
 exports.ListBookingsComponent = void 0;
 var core_1 = require("@angular/core");
@@ -19,12 +26,15 @@ var ListBookingsComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.upComingloading = false;
         this.upComingbookings = [];
+        this.upComingbookingsForFilter = [];
         this.completeLoading = false;
         this.completeBookings = [];
+        this.completeBookingsForFilter = [];
         this.selectedInCompletedTabNumber = 0;
         this.selectedCompletedTabNumber = 0;
         this.cartItemsCount = 0;
         this.searchTextLength = 0;
+        this.searchText = '';
     }
     ListBookingsComponent.prototype.ngOnInit = function () {
         this.getIncomplteBooking();
@@ -37,6 +47,7 @@ var ListBookingsComponent = /** @class */ (function () {
         this.upComingloading = true;
         this.accountService.getIncomplteBooking(search).subscribe(function (res) {
             _this.upComingbookings = res.data;
+            _this.upComingbookingsForFilter = res.data;
             _this.upComingloading = false;
         }, function (err) {
             _this.upComingloading = false;
@@ -49,29 +60,43 @@ var ListBookingsComponent = /** @class */ (function () {
         this.completeLoading = true;
         this.accountService.getComplteBooking(search).subscribe(function (res) {
             _this.completeBookings = res.data;
+            _this.completeBookingsForFilter = res.data;
             _this.completeLoading = false;
         }, function (err) {
             _this.completeLoading = false;
             _this.completeBookings = [];
         });
     };
+    ListBookingsComponent.prototype.filterBooking = function (items, searchValue) {
+        var result = [];
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].laytripCartId.toLowerCase().toString().includes(searchValue)) {
+                result.push(items[i]);
+            }
+            for (var j = 0; j < items[i].booking.length; j++) {
+                if (items[i].booking[j].moduleInfo[0].departure_code.toLowerCase().toString().includes(searchValue) ||
+                    items[i].booking[j].moduleInfo[0].arrival_code.toLowerCase().toString().includes(searchValue) ||
+                    items[i].booking[j].moduleInfo[0].airline_name.toLowerCase().toString().includes(searchValue) ||
+                    items[i].booking[j].moduleInfo[0].departure_info.city.toLowerCase().toString().includes(searchValue) ||
+                    items[i].booking[j].moduleInfo[0].arrival_info.city.toLowerCase().toString().includes(searchValue)) {
+                    result.push(items[i]);
+                }
+            }
+        }
+        return result;
+    };
     ListBookingsComponent.prototype.searchBooking = function (searchValue) {
         this.searchTextLength = searchValue.length;
-        // var upComingbookingsData = this.upComingbookings;
-        // console.log(upComingbookingsData)
-        // if(this.searchTextLength > 0 ){
-        //   this.upComingbookings = this.upComingbookings.filter(element => {
-        //     if(element.laytripCartId.includes(searchValue)){
-        //       return element;
-        //     }
-        //   });
-        // } else {
-        //   console.log('her')
-        //   this.upComingbookings = upComingbookingsData;
-        // }
-        // console.log(this.upComingbookings,upComingbookingsData)
-        // this.getComplteBooking(searchValue);
-        // this.getIncomplteBooking(searchValue);
+        if (this.searchTextLength > 0) {
+            // UPCOMING BOOKING
+            this.upComingbookings = this.filterBooking(this.upComingbookingsForFilter, searchValue.toLowerCase().toString());
+            // COMPLETED BOOKING
+            this.completeBookings = this.filterBooking(this.completeBookingsForFilter, searchValue.toLowerCase().toString());
+        }
+        else {
+            this.upComingbookings = __spreadArrays(this.upComingbookingsForFilter);
+            this.completeBookings = __spreadArrays(this.completeBookingsForFilter);
+        }
     };
     ListBookingsComponent.prototype.selectInCompletedTab = function (cartNumber) {
         this.selectedInCompletedTabNumber = cartNumber;

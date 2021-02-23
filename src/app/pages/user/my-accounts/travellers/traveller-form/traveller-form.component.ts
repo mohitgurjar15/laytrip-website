@@ -210,11 +210,11 @@ export class TravellerFormComponent implements OnInit {
           this.loadingValue.emit(false);
           this.travelerFormChange.emit(data);
           $("#collapseTravInner" + this.travellerId).removeClass('show');
-          this.toastr.success('', 'Traveler updated successfully');
+          // this.toastr.success('', 'Traveler updated successfully');
 
         }, (error: HttpErrorResponse) => {
           this.loadingValue.emit(false);
-          this.toastr.error(error.error.message, 'Traveler Update Error');
+          // this.toastr.error(error.error.message, 'Traveler Update Error');
           if (error.status === 401) {
             this.router.navigate(['/']);
           }
@@ -227,11 +227,11 @@ export class TravellerFormComponent implements OnInit {
           this.loadingValue.emit(false);
           this.travellerForm.reset();
           this.travellerForm.setErrors(null);
-          this.toastr.success('', 'Traveler added successfully');
+          // this.toastr.success('', 'Traveler added successfully');
 
         }, (error: HttpErrorResponse) => {
           this.loadingValue.emit(false);
-          this.toastr.error(error.error.message, 'Traveler Add Error');
+          // this.toastr.error(error.error.message, 'Traveler Add Error');
           if (error.status === 401) {
             this.router.navigate(['/']);
           }

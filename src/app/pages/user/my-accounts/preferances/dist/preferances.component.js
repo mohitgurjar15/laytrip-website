@@ -13,12 +13,12 @@ var PreferancesComponent = /** @class */ (function () {
         this.userService = userService;
         this.toastr = toastr;
         this.loading = false;
-        this.isEmailNotifiationOn = false;
+        this.isEmailNotifiationOn = true;
         this.isSmsNotifiationOn = false;
         this.loadingValue = new core_1.EventEmitter();
     }
     PreferancesComponent.prototype.ngOnInit = function () {
-        this.getPreference();
+        // this.getPreference();
     };
     PreferancesComponent.prototype.notificationChnaged = function (event, type) {
         var _this = this;
