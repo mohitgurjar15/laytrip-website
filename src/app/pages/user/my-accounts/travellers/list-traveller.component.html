@@ -105,15 +105,17 @@
 </div>
 <div class="travel_detail_bg_wrps">
     <div id="trav_accordion" class="traveller_accordion">
-        <div class="card">       
-            <div id="collapseTrav" class="collapse show" >
+        <div class="card">
+            <div id="collapseTrav" class="collapse show">
                 <div class="card-body">
-                    <app-traveller-form    [countries]="countries" (loadingValue)="getLoadingValue($event)"  (travelerFormChange)="pushTraveler($event)"  #child [countries]="countries"></app-traveller-form>
-                    <div *ngFor="let traveler of  travelers;let x = index;" id="trav_accordion_inner" class="traveller_accordion">
-                        <div class="card" >
+                    <app-traveller-form [countries]="countries" (loadingValue)="getLoadingValue($event)"
+                        (travelerFormChange)="pushTraveler($event)" #child [countries]="countries"></app-traveller-form>
+                    <div *ngFor="let traveler of  travelers;let x = index;" id="trav_accordion_inner"
+                        class="traveller_accordion">
+                        <div class="card">
                             <div class="card-header">
-                                <a class="card-link" data-toggle="collapse" href="#collapseTravInner{{traveler.userId}}" aria-controls="collapseTravInner"
-                                    aria-expanded="false">
+                                <a class="card-link" data-toggle="collapse" href="#collapseTravInner{{traveler.userId}}"
+                                    aria-controls="collapseTravInner" aria-expanded="false">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
                                         <defs></defs>
                                         <path class="a"
@@ -121,14 +123,21 @@
                                     </svg>
                                     {{traveler.roleId==6?'Primary Traveler':'Additional Traveler'}}
                                 </a>
-                                <a  *ngIf="traveler.roleId != 6" (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a>
+                                <!-- <a *ngIf="traveler.roleId != 6"
+                                    (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a> -->
                             </div>
-                            <div id="collapseTravInner{{traveler.userId}}" class="collapse" data-parent="#trav_accordion_inner">
+                            <div id="collapseTravInner{{traveler.userId}}" class="collapse"
+                                data-parent="#trav_accordion_inner">
                                 <div class="card-body">
-                                    <app-traveller-form [countries]="countries" (loadingValue)="getLoadingValue($event)"  (travelerFormChange)="pushTraveler($event)"  [travelerInfo]="traveler"  [travellerId]="traveler.userId"></app-traveller-form>
+                                    <app-traveller-form [countries]="countries" (loadingValue)="getLoadingValue($event)"
+                                        (travelerFormChange)="pushTraveler($event)" [travelerInfo]="traveler"
+                                        [travellerId]="traveler.userId"></app-traveller-form>
                                 </div>
                             </div>
                         </div>
+                        <span class="remove_wrps">
+                            <a class="hover-link" (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -138,23 +147,28 @@
 
 
 <ng-template #deleteContent let-modal>
-    <div class="modal-header">
-        <div class="block_title">
-            <h4>Delete Co - Traveler</h4>
+    <div class="delete_account_block">
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+            </button>
         </div>
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
-            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-        </button>
-    </div>
-    <div class="modal-body">
-        <div class="modal_btm">
-            <p>Are you sure you want to delete traveler?</p>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <div class="form_btn">
-            <button type="button" class="btn_no" (click)="modal.dismiss('Cross click')">No</button>
-            <button type="button" (click)="deleteTraveller()">Yes</button>
+        <div class="modal-body">
+            <div class="block_im">
+                <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
+            </div>
+<!--             <h4 class="name_traveller">Delete Co - Traveler</h4>
+ -->            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete account?</span></h4>
+
+            <div class="cta_btn_wrps">
+                <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>
+                <button class="btn_yes" (click)=deleteTraveller()>Yes</button>
+            </div>
+            <div class="footer_logo">
+                <a>
+                    <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
+                </a>
+            </div>
         </div>
     </div>
 </ng-template>

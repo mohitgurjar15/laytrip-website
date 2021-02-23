@@ -117,7 +117,7 @@
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account" *ngIf="isAdult || isChild">
                 <label for="">{{'passport_expiry_date' |translate}}</label>
-                <p-calendar tabindex="29" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date"
+                <p-calendar [minDate]="expiryMinDate" tabindex="29" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date"
                     inputId="basic" formControlName="passport_expiry" [readonlyInput]="true" [yearNavigator]="true"
                     [monthNavigator]="true" yearRange="2021:2030">
                 </p-calendar>
