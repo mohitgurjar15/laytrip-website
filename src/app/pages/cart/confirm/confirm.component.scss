@@ -4,17 +4,34 @@
 @import "../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-.page_topbanner{
+.page_topbanner {
     display: flex;
     width: 100%;
-    img{
+
+    @include tab-view {
+        height: 63px;
+        position: relative;
+        margin-top: 40px;
+    }
+
+    img {
         width: 100%;
+
+        @include tab-view {
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center;
+            object-position: center;
+        }
     }
 }
+
 .conf_main_wrapper {
     padding: 15px 0;
+
     .back_cta_btn {
-        a{
+        a {
             color: $active-tab-text;
         }
     }
