@@ -354,18 +354,24 @@ a:hover {
   }
 }
 
-.mobile_ul{
+.mobile_ul {
   padding: 0;
-  .mobile_li{
+
+  @include tab-view {
+    display: flex;
+  }
+
+  .mobile_li {
     display: none !important;
-    @include tab-view{
+
+    @include tab-view {
       display: inline-block !important;
     }
   }
 }
 
-.desk_li{
-  @include tab-view{
+.desk_li {
+  @include tab-view {
     display: none !important;
   }
 }
