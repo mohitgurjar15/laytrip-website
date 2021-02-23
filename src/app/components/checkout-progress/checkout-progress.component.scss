@@ -5,37 +5,45 @@
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-.progress_breadcum_wrapper{
+.progress_breadcum_wrapper {
     background-color: $bg-body;
     margin-top: 40px;
-    .prgrs_container{
+
+    .prgrs_container {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 12.5px 0;
-        .progress_bar_inner{
+
+        .progress_bar_inner {
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            @include mobile-view{
+
+            @include mobile-view {
                 //align-items: flex-start;
                 //flex-direction: column;
             }
-            .pr_steps_wrapper{
+
+            .pr_steps_wrapper {
                 position: relative;
                 margin-right: 10px;
-                @include mobile-view{
+
+                @include mobile-view {
                     margin-right: 0;
                 }
-                a{
+
+                a {
                     padding-right: 50px;
                     display: flex;
                     align-items: center;
-                    @include mobile-view{
+
+                    @include mobile-view {
                         padding-right: 30px;
                         font-size: 10px;
                     }
-                    .step_num{
+
+                    .step_num {
                         font-size: 14px;
                         color: $text-white;
                         background-color: $mid_gray_bg;
@@ -47,44 +55,59 @@
                         align-items: center;
                         margin-right: 10px;
                     }
-                    .step_text{
+
+                    .step_text {
                         font-size: 14px;
                         color: $text-grey;
-                        @include tab-view{
+
+                        @include tab-view {
                             font-size: 11px;
                         }
                     }
-                    &.current{
-                        .step_num{
+
+                    &.current {
+                        .step_num {
                             color: $text-white;
                             background-color: $pink;
                         }
-                        .step_text{
+
+                        .step_text {
                             color: $pink;
                         }
+
+                        &::after {
+                            background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/pinkarrow.svg');
+
+                        }
+                    }
+
+                    &::after {
+                        content: '';
+                        background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg');
+                        background-repeat: no-repeat;
+                        background-size: 8px;
+                        padding: 8px 4px;
+                        position: absolute;
+                        right: 15px;
+                        top: 6px;
                     }
                 }
-                &::after{
-                    content: '';
-                    background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg');
-                    background-repeat: no-repeat;
-                    background-size: 8px;
-                    padding: 8px 4px;
-                    position: absolute;
-                    right: 15px;
-                    top: 6px;
-                }
-                &:last-child{
+
+                &:last-child {
                     padding: 0;
                     margin: 0;
-                    &::after{
-                        background-image: none;
+
+                    a {
+                        &::after {
+                            background-image: none;
+                        }
                     }
                 }
             }
         }
-        .cart_section{
-            .cart_i_wrapper{
+
+        .cart_section {
+            .cart_i_wrapper {
                 position: relative;
                 background-color: $background-grey;
                 border-radius: 50%;
@@ -93,19 +116,24 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                @include tab-view{
+
+                @include tab-view {
                     height: 30px;
                     width: 30px;
                 }
-                a{
+
+                a {
                     display: flex;
-                    img{
+
+                    img {
                         max-width: 20px;
-                        @include tab-view{
+
+                        @include tab-view {
                             max-width: 16px;
                         }
                     }
-                    .cart_count{
+
+                    .cart_count {
                         font-size: 14px;
                         position: absolute;
                         top: 2px;
