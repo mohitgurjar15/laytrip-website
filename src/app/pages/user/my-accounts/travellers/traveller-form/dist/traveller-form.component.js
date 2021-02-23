@@ -13,13 +13,14 @@ var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
 var custom_validators_1 = require("../../../../../_helpers/custom.validators");
 var TravellerFormComponent = /** @class */ (function () {
-    function TravellerFormComponent(formBuilder, router, commonFunction, toastr, cookieService, travelerService) {
+    function TravellerFormComponent(formBuilder, router, commonFunction, toastr, cookieService, travelerService, checkOutService) {
         this.formBuilder = formBuilder;
         this.router = router;
         this.commonFunction = commonFunction;
         this.toastr = toastr;
         this.cookieService = cookieService;
         this.travelerService = travelerService;
+        this.checkOutService = checkOutService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loadingValue = new core_1.EventEmitter();
         this.travelerFormChange = new core_1.EventEmitter();
@@ -29,7 +30,6 @@ var TravellerFormComponent = /** @class */ (function () {
         this.is_type = 'M';
         this.traveller = [];
         this.isLoggedIn = false;
-        this.submitted = false;
         this.loading = false;
         this.expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
         this.subscriptions = [];
@@ -55,7 +55,7 @@ var TravellerFormComponent = /** @class */ (function () {
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
-            country_code: ['', [forms_1.Validators.required]],
+            country_code: ['01', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
             passport_number: ['']
@@ -142,13 +142,15 @@ var TravellerFormComponent = /** @class */ (function () {
     };
     TravellerFormComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.submitted = true;
         this.loadingValue.emit(true);
+        var controls = this.travellerForm.controls;
         if (this.travellerId) {
             this.selectDob(moment(this.travellerForm.controls.dob.value).format('YYYY-MM-DD'));
         }
         if (this.travellerForm.invalid) {
-            this.submitted = true;
+            Object.keys(controls).forEach(function (controlName) {
+                return controls[controlName].markAsTouched();
+            });
             this.loadingValue.emit(false);
             return;
         }
@@ -181,11 +183,10 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.loadingValue.emit(false);
                     _this.travelerFormChange.emit(data);
                     $("#collapseTravInner" + _this.travellerId).removeClass('show');
-                    // this.toastr.success('', 'Traveller updated successfully');
+                    // this.toastr.success('', 'Traveler updated successfully');
                 }, function (error) {
-                    _this.submitted = false;
                     _this.loadingValue.emit(false);
-                    // this.toastr.error(error.error.message, 'Traveller update error');
+                    // this.toastr.error(error.error.message, 'Traveler Update Error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
                     }
@@ -198,11 +199,10 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.loadingValue.emit(false);
                     _this.travellerForm.reset();
                     _this.travellerForm.setErrors(null);
-                    // this.toastr.success('Success', 'Traveller add successfully');
+                    // this.toastr.success('', 'Traveler added successfully');
                 }, function (error) {
-                    _this.submitted = false;
                     _this.loadingValue.emit(false);
-                    // this.toastr.error(error.error.message, 'Traveller add error');
+                    // this.toastr.error(error.error.message, 'Traveler Add Error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
                     }
