@@ -30,6 +30,10 @@ export class FlightsComponent implements OnInit {
   }
 
   convertHHMM(time){
-    return moment(time).format('HH:MM');   // 5:04 PM
+    time = time.replace(' AM','');
+    time = time.replace(' PM','');
+    return time;
+    // console.log(time)
+    // return moment(new Date(time)).format('LT');   // 5:04 PM
   }
 }

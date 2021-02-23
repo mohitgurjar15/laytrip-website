@@ -103,7 +103,8 @@ export class ListTravellerComponent implements OnInit {
     return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years')+" yrs, ":"";
   }
   
-  deleteTravellerModal(content, userId = '') {
+  openDeleteModal(content, userId = '') {
+
     this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal',centered: true });
     this.userId = userId;
     this.modalReference.result.then((result) => {
@@ -111,28 +112,26 @@ export class ListTravellerComponent implements OnInit {
     }, (reason) => {
       // this.getTravelers();
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      console.log(this.closeResult)
     });
   }
 
 
 
   deleteTraveller() {
-
     this.travelerService.delete(this.userId).subscribe((data: any) => {
       this.getTravelers();
       if (data.message) {
-        this.toastr.success('Traveler deleted successfully.', 'Success');
+        // this.toastr.success('Traveler deleted successfully.', 'Success');
       } else {
-        this.toastr.error(data.message, 'Failure');
+        // this.toastr.error(data.message, 'Failure');
       }
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
-        this.toastr.error(error.error.errorMsg, 'Error');
+        // this.toastr.error(error.error.errorMsg, 'Error');
         this.router.navigate(['/']);
       } else {
         this.getTravelers();
-        this.toastr.error(error.error.errorMsg, 'Error');
+        // this.toastr.error(error.error.errorMsg, 'Error');
       }
     });
     this.modalReference.close();

@@ -35,7 +35,6 @@ export class TravellerInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private commonFunction:CommonFunction
   ) {
-    console.log("id",this.domid)
     this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
     this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
     this.infantValue = parseInt(this.route.snapshot.queryParams['infant']) ? parseInt(this.route.snapshot.queryParams['infant']) : 0;
@@ -51,15 +50,15 @@ export class TravellerInfoComponent implements OnInit {
 
   loadJquery() {
     $("body").click(function () {
-      //$(".add_traveler__open").hide();
+      $(".add_traveler__open").hide();
     });
 
-    /* $(document).on('click','#desk_traveller', function(e){
+    $(".add_traveler_").click(function (e) {
       e.stopPropagation();
-      console.log($(this).siblings(".add_traveler__open"))
-      $(this).siblings(".add_traveler__open").slideToggle("slow");
+      // $(".add_traveler__open").slideToggle("slow");
+      $(".add_traveler__open").show();
       $(".add_class_sec_open_").hide();
-    }); */
+    });
 
     $('.add_traveler__open').click(
       function (e) {
@@ -68,6 +67,7 @@ export class TravellerInfoComponent implements OnInit {
     );
 
   }
+
 
   toggleTraveller(){
     this.showTraveller=!this.showTraveller;
