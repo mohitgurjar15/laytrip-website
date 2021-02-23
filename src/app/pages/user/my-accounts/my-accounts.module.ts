@@ -50,7 +50,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ListPaymentHistoryComponent,
     HistoryListComponent,
     ViewHistoryComponent,
-    ChangePasswordComponent,
+    ChangePasswordComponent, 
     SubscriptionPlanComponent,
     AccountCardListComponent,
     CardActionFormComponent,
