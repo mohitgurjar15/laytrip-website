@@ -44,7 +44,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             format: 'MM/DD/YYYY',
             displayFormat: 'MM/DD/YYYY'
         };
-        this.returnDate = new Date(moment("2021-06-07").format("MM/DD/YYYY"));
+        this.customStartDateValidation = "2021-06-01";
+        this.customEndDateValidation = "2021-06-07";
+        this.returnDate = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
         this.totalPerson = 1;
         this.calPrices = false;
         this.searchFlightInfo = {
@@ -74,8 +76,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.departureDate = moment("2021-06-01").format();
-        console.log(this.departureDate);
+        this.departureDate = moment(this.customStartDateValidation).toDate();
         window.scrollTo(0, 0);
         this.countryCode = this.commonFunction.getUserCountry();
         if (this.calenderPrices.length == 0) {
@@ -99,7 +100,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.toggleOnewayRoundTrip(params['trip']);
                 _this.searchFlightInfo["class"] = params['class'];
                 _this.departureDate = new Date(params['departure_date']);
-                if (moment(_this.departureDate).format("YYYY-MM-DD") < '2021-06-01') {
+                if (moment(_this.departureDate).format("YYYY-MM-DD") < _this.customStartDateValidation) {
                     // this.router.navigate(['/flight/flight-not-found'])
                 }
                 _this.currentMonth = moment(_this.departureDate).format("MM");
@@ -142,8 +143,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.setFlightDepartureMinDate = function () {
         var date = new Date();
         var curretdate = moment().format();
-        var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
-        var daysDiffFromCurToJune = moment('2021-06-07', "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+        var juneDate = moment(this.customStartDateValidation).format('YYYY-MM-DD');
+        var daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
         date.setDate(date.getDate() + 7);
         if (curretdate < juneDate && daysDiffFromCurToJune > 7) {
             this.flightDepartureMinDate = new Date(juneDate);
@@ -289,7 +290,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var _this = this;
         var currentDate = new Date();
         // 1 June validation apply
-        var juneDate = moment('2021-06-01').format('YYYY-MM-DD');
+        var juneDate = moment(this.customStartDateValidation).format('YYYY-MM-DD');
         this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
         this.route.queryParams.subscribe(function (params) {
             _this.calPrices = false;
