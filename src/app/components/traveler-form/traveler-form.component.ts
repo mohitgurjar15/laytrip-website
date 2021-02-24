@@ -151,8 +151,8 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
         this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MMM DD, yy');
         if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
-          this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
-          this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = moment(traveler.passport_expiry, "YYYY-MM-DD").format('MMM DD, yy');
+          this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber ? traveler.passportNumber : '';
+          this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passport_expiry ? moment(traveler.passport_expiry, "YYYY-MM-DD").format('MMM DD, yy') : '';
         }
       }
       this.patch();
