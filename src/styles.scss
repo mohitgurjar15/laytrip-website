@@ -4988,3 +4988,17 @@ body {
     }
   }
 }
+
+#challenge-modal{
+  iframe{
+      height: 318px;
+      box-shadow: none;
+      border-width: 0;
+      width: 250px;
+      .acs{
+        &.one{
+          width: 100%;
+        }
+      }
+  }
+}
