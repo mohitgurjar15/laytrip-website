@@ -36,7 +36,7 @@ export class AddCardComponent implements OnInit {
   };
   saveCardLoader: boolean = false;
   expiryMinDate = new Date();
-  cardListChangeCount:number=0;
+  cardListChangeCount: number = 0;
 
   mask = {
     guide: false,
@@ -85,9 +85,9 @@ export class AddCardComponent implements OnInit {
       Spreedly.setPlaceholder("cvv", "CVV");
       Spreedly.setFieldType("cvv", "text");
       Spreedly.setFieldType('number', 'text');
-      //Spreedly.setNumberFormat('maskedFormat');
-      Spreedly.setStyle('number', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding: .65em .5em; font-size: 14px;');
-      Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding: .65em .5em; font-size: 14px;');
+      Spreedly.setNumberFormat('maskedFormat');
+      Spreedly.setStyle('number', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;');
+      Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;');
     });
 
     Spreedly.on('errors', function (errors) {
@@ -112,7 +112,7 @@ export class AddCardComponent implements OnInit {
       }
     });
 
-    
+
 
     Spreedly.on('paymentMethod', function (token, pmData) {
       console.log("In submit")
@@ -222,18 +222,17 @@ export class AddCardComponent implements OnInit {
           // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
       });
-      
+
     });
   }
 
   submitPaymentForm() {
-    $("#submit_button").prop('disabled', true);
     var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
     for (var i = 0; i < paymentMethodFields.length; i++) {
       var field = paymentMethodFields[i];
       var fieldEl = (<HTMLInputElement>document.getElementById(field));
-      
+
 
       if (fieldEl.id === 'month-year') {
         let value = fieldEl.value;
@@ -250,15 +249,15 @@ export class AddCardComponent implements OnInit {
       }
     }
 
-    
+
     document.getElementById('message').innerHTML = "";
 
     // Tokenize!
     Spreedly.tokenizeCreditCard(options);
-    setTimeout(()=>{
-      this.cardListChangeCount+=this.cardListChangeCount+1;
+    setTimeout(() => {
+      this.cardListChangeCount += this.cardListChangeCount + 1;
       this.emitCardListChange.emit(this.cardListChangeCount)
-    },5000)
+    }, 5000)
   }
 
   saveCard(cardData) {

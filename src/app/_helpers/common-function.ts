@@ -204,5 +204,15 @@ export class CommonFunction {
             return '';
         }
     }
+
+    convertCustomDateFormat(date, sourceFormat,destFormat, languageCode = null) {
+
+        if (languageCode == null) {
+            return moment(date, sourceFormat).format(destFormat)
+        }
+        return date;
+    }
+
+    
 }
 

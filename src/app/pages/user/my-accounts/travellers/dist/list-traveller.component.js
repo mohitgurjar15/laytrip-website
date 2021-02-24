@@ -73,7 +73,7 @@ var ListTravellerComponent = /** @class */ (function () {
     ListTravellerComponent.prototype.calculateAge = function (birthdate) {
         return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years') + " yrs, " : "";
     };
-    ListTravellerComponent.prototype.deleteTravellerModal = function (content, userId) {
+    ListTravellerComponent.prototype.openDeleteModal = function (content, userId) {
         var _this = this;
         if (userId === void 0) { userId = ''; }
         this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
@@ -83,7 +83,6 @@ var ListTravellerComponent = /** @class */ (function () {
         }, function (reason) {
             // this.getTravelers();
             // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-            console.log(_this.closeResult);
         });
     };
     ListTravellerComponent.prototype.deleteTraveller = function () {
@@ -91,19 +90,19 @@ var ListTravellerComponent = /** @class */ (function () {
         this.travelerService["delete"](this.userId).subscribe(function (data) {
             _this.getTravelers();
             if (data.message) {
-                _this.toastr.success('Traveler deleted successfully.', 'Success');
+                // this.toastr.success('Traveler deleted successfully.', 'Success');
             }
             else {
-                _this.toastr.error(data.message, 'Failure');
+                // this.toastr.error(data.message, 'Failure');
             }
         }, function (error) {
             if (error.status === 401) {
-                _this.toastr.error(error.error.errorMsg, 'Error');
+                // this.toastr.error(error.error.errorMsg, 'Error');
                 _this.router.navigate(['/']);
             }
             else {
                 _this.getTravelers();
-                _this.toastr.error(error.error.errorMsg, 'Error');
+                // this.toastr.error(error.error.errorMsg, 'Error');
             }
         });
         this.modalReference.close();
@@ -115,7 +114,7 @@ var ListTravellerComponent = /** @class */ (function () {
                 return {
                     id: country.id,
                     name: country.name,
-                    code: country.phonecode,
+                    countryCode: country.phonecode,
                     flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
             }),
@@ -123,7 +122,7 @@ var ListTravellerComponent = /** @class */ (function () {
                     return {
                         id: country.id,
                         name: country.phonecode + ' (' + country.iso2 + ')',
-                        code: country.phonecode,
+                        countryCode: country.phonecode,
                         country_name: country.name + ' ' + country.phonecode,
                         flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                     };

@@ -1,4 +1,4 @@
-<app-laytrip-loader  [loading]="loading"></app-laytrip-loader>
+<app-laytrip-loader [loading]="loading"></app-laytrip-loader>
 
 <section class="account_part">
     <div class="container">
@@ -16,7 +16,7 @@
                         </span>
                     </div>
                     <div class="travel_detail_bg_wrps"> -->
-                        <app-list-traveller (loadingValue)="getLoadingValue($event)"></app-list-traveller>
+                    <app-list-traveller (loadingValue)="getLoadingValue($event)"></app-list-traveller>
                     <!-- </div> -->
                 </div>
                 <div class="card_details_wrppers">
@@ -26,7 +26,7 @@
                             <a href="javascrip:void(0);">Add New</a>
                         </span> -->
                     </div>
-                    <div class="booking_detail_bg_wrps"> 
+                    <div class="booking_detail_bg_wrps">
 
                         <div id="accordion" class="card_accordion">
                             <div class="card">
@@ -43,7 +43,8 @@
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                         <div class="card-body">
-                                            <app-add-card (emitCardListChange)="getCardListChange($event)"></app-add-card>
+                                            <app-add-card (emitCardListChange)="getCardListChange($event)">
+                                            </app-add-card>
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +56,7 @@
                     <div class="title_bar">
                         <h3>Preferences</h3>
                     </div>
-                    <app-preferances  (loadingValue)="getLoadingValue($event)"></app-preferances>
+                    <app-preferances (loadingValue)="getLoadingValue($event)"></app-preferances>
                 </div>
                 <div class="security_main_wrapper">
                     <div class="title_bar">
@@ -72,7 +73,8 @@
                                 </div>
                                 <div id="collapseSec" class="collapse show" data-parent="#secur_accordion">
                                     <div class="card-body">
-                                        <app-change-password  (loadingValue)="getLoadingValue($event)"></app-change-password>
+                                        <app-change-password (loadingValue)="getLoadingValue($event)">
+                                        </app-change-password>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +94,9 @@
 
 <ng-template #content let-modal>
     <div class="delete_account_block">
-        <div class="modal-header">        
+        <div class="modal-header">
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-               <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+                <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
             </button>
         </div>
         <div class="modal-body">
@@ -102,23 +104,8 @@
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
             </div>
             <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete account?</span></h4>
-            <!-- <div class="check">
-                <label class="custom_checkbox">
-                    <input name="checkbox" (change)="changeDeleteAccountForBackup($event)" tabindex="16" type="checkbox">
-                    <span class="checkmark"></span>
-                    Do you want your all data before delete account?
-                </label>
-            </div> -->
-            <!-- <ul>
-                <li>
-                    <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>
-                </li>
-                <li>
-                    <button class="btn_yes" (click)=deleteAccount()>Yes</button>
-                </li>
-            </ul> -->
-<!--             <div class="alert_box"> Lorem ipsum dolor. </div>
- -->            <div class="cta_btn_wrps">
+
+            <div class="cta_btn_wrps">
                 <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>
                 <button class="btn_yes" (click)=deleteAccount()>Yes</button>
             </div>
@@ -129,4 +116,4 @@
             </div>
         </div>
     </div>
-  </ng-template>
+</ng-template>

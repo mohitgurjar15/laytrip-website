@@ -24,8 +24,8 @@ export class FlightClassComponent implements OnInit {
 
     $(".class_sec_info").click(function (e) {
       e.stopPropagation();
-      $(".add_class_sec_open_").slideToggle();
-      $('.add_traveler__open').hide(); 
+      $(".add_class_sec_open_").show();
+      $(".add_traveler__open").hide();
     });
 
     $('.add_class_sec_open_').click(
@@ -40,7 +40,7 @@ export class FlightClassComponent implements OnInit {
   btnClickForChange(item){
     this.changeValue.emit(item.value);
     this.flightClass = item.value;
-    $("#add_class_sec_open").hide();
+    $(".add_class_sec_open_").hide();
   }
 }
 

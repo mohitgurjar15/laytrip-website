@@ -29,6 +29,12 @@ export class EmptyCartComponent implements OnInit {
   redirectToHome() {
     $('#cart_modal').modal('hide');
     this.activeModal.close();
+    this.router.navigate(['/']);
+  }
+
+  close() {
+    $('#cart_modal').modal('hide');
+    this.activeModal.close();
     let url = window.location.href;
     if (url.includes('cart/booking') || url.includes('cart/checkout')) {
       this.router.navigate(['/']);

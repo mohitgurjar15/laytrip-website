@@ -32,7 +32,9 @@
         <ul class="mobile_ul">
             <li class="nav-item class_resp mobile_li">
                 <div class="class_section">
-                    <app-flight-class [mobileView]="add_class_sec_open2" (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
+                    <!-- <app-flight-class [mobileView]="add_class_sec_open2" (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
+                    </app-flight-class> -->
+                    <app-flight-class (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
                     </app-flight-class>
                 </div>
             </li>
@@ -147,7 +149,7 @@
                                 <div class="search_area" *ngIf="isRoundTrip" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                                     <label>{{'return' | translate}}</label>
                                     <p-calendar inputId="basic" [(ngModel)]="returnDate" [ngModelOptions]="{standalone: true}" flightReturnMinDate [minDate]="flightReturnMinDate" [readonlyInput]="true" panelStyleClass="calender-responsive-view">
-                                    </p-calendar>
+                                    </p-calendar> 
                                     <div class="prev-next">
                                         <a (click)="dateChange('arrival','previous')">{{'prev' | translate}}</a>
                                         <a (click)="dateChange('arrival','next')">{{'next' | translate}}</a>

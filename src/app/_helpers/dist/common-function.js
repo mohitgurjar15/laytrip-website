@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.CommonFunction = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
+var jwt_helper_1 = require("./jwt.helper");
 var CommonFunction = /** @class */ (function () {
     function CommonFunction(cookieService, _location) {
         this.cookieService = cookieService;
@@ -163,6 +164,28 @@ var CommonFunction = /** @class */ (function () {
     };
     CommonFunction.prototype.convertFlotToDecimal = function (floatNumber) {
         return Math.round(floatNumber);
+    };
+    CommonFunction.prototype.getGuestUser = function () {
+        var userDetails = jwt_helper_1.getLoginUserInfo();
+        if (!userDetails.roleId || userDetails.roleId == 7) {
+            var guestuserId = localStorage.getItem('__gst');
+            if (guestuserId) {
+                return guestuserId;
+            }
+            else {
+                return '';
+            }
+        }
+        else {
+            return '';
+        }
+    };
+    CommonFunction.prototype.convertCustomDateFormat = function (date, sourceFormat, destFormat, languageCode) {
+        if (languageCode === void 0) { languageCode = null; }
+        if (languageCode == null) {
+            return moment(date, sourceFormat).format(destFormat);
+        }
+        return date;
     };
     CommonFunction = __decorate([
         core_1.Injectable({

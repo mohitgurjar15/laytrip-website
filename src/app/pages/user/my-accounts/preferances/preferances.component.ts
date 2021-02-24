@@ -11,7 +11,7 @@ import { UserService } from '../../../../services/user.service';
 export class PreferancesComponent implements OnInit {
 
   loading : boolean = false;
-  isEmailNotifiationOn : boolean = false;
+  isEmailNotifiationOn : boolean = true;
   isSmsNotifiationOn : boolean = false;
   @Output() loadingValue = new EventEmitter<boolean>();
 
@@ -21,7 +21,7 @@ export class PreferancesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getPreference();
+    // this.getPreference();
   }
 
 

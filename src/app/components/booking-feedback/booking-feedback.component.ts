@@ -19,7 +19,7 @@ export class BookingFeedbackComponent implements OnInit {
   is_rating = true;
   loading = false;
   ratingValue = 5;
-  _rating = 'Excllent';
+  _rating = '';
   @Output() feedbackValueChange = new EventEmitter();
 
   constructor(

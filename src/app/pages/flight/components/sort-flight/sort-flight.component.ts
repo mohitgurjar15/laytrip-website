@@ -28,6 +28,18 @@ export class SortFlightComponent implements OnInit {
   }
 
   loadJquery() {
+    //Start REsponsive Fliter js
+    
+    $(".responsive_sort_btn").click(function () {
+      $("#responsive_sortby_show").slideDown("slow");
+      $("body").addClass('overflow-hidden');
+    });
+
+    $(".filter_close > a").click(function () {
+      $("#responsive_sortby_show").slideUp("slow");
+      $("body").removeClass('overflow-hidden');
+    });
+    //Close REsponsive Fliter js
     // Start filter Shortby js
     $(document).on('show', '#accordion', function (e) {
       $(e.target).prev('.accordion-heading').addClass('accordion-opened');
