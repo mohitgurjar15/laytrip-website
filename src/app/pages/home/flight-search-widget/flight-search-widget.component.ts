@@ -47,7 +47,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   //departureDate : any = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
   //returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
-  departureDate : any = new Date(moment("2021-06-01").format("MM/DD/YYYY"));
+  departureDate;// : any = ''new Date(moment("2021-06-01").parseZone().unix());
   returnDate = new Date(moment("2021-06-07").format("MM/DD/YYYY"))
 
   totalPerson: number = 1;
@@ -105,6 +105,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   
   
   ngOnInit(): void {
+    this.departureDate = moment("2021-06-01").format();
+    console.log(this.departureDate)
     window.scrollTo(0, 0);
     this.countryCode = this.commonFunction.getUserCountry();
     if (this.calenderPrices.length == 0) {

@@ -44,9 +44,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             format: 'MM/DD/YYYY',
             displayFormat: 'MM/DD/YYYY'
         };
-        //departureDate : any = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
-        //returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
-        this.departureDate = new Date(moment("2021-06-01").format("MM/DD/YYYY"));
         this.returnDate = new Date(moment("2021-06-07").format("MM/DD/YYYY"));
         this.totalPerson = 1;
         this.calPrices = false;
@@ -77,6 +74,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.departureDate = moment("2021-06-01").format();
+        console.log(this.departureDate);
         window.scrollTo(0, 0);
         this.countryCode = this.commonFunction.getUserCountry();
         if (this.calenderPrices.length == 0) {

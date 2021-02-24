@@ -92,7 +92,7 @@
                     <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                       <label for="">{{'dob' | translate}}*</label>
                       <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
-                      <input type="text" class="form-control" bsDatepicker formControlName="dob" [bsConfig]="bsConfig"
+                      <input onkeydown="return false" type="text" class="form-control" bsDatepicker formControlName="dob" [bsConfig]="bsConfig"
                         [minDate]="traveler.controls.dobMinDate.value" [maxDate]="traveler.controls.dobMaxDate.value">
                       <!-- <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                         formControlName="dob" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"

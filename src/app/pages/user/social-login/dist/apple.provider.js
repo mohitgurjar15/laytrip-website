@@ -87,6 +87,7 @@ var AppleLoginProvider = /** @class */ (function (_super) {
                 return [2 /*return*/, new Promise(function (resolve, reject) {
                         try {
                             var data = AppleID.auth.signIn();
+                            console.log(data);
                             resolve(data);
                         }
                         catch (er) {
