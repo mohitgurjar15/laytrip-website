@@ -44,12 +44,10 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   flightDepartureMinDate;
   flightReturnMinDate;
-
-  //departureDate : any = new Date(moment().add(31, 'days').format("MM/DD/YYYY"));
-  //returnDate = new Date(moment().add(38, 'days').format("MM/DD/YYYY"))
-  departureDate : any = new Date(moment("2021-06-01").format("MM/DD/YYYY"));
-  returnDate = new Date(moment("2021-06-07").format("MM/DD/YYYY"))
-
+  customStartDateValidation = "2021-06-01";
+  customEndDateValidation = "2021-06-07";
+  departureDate;
+  returnDate : any = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
   totalPerson: number = 1;
   lowMinPrice: number;
   midMinPrice: number;
@@ -83,8 +81,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     private renderer: Renderer2,
     private flightService: FlightService,
     private homeService: HomeService
-  ) {
-
+  ) {  
 
     this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
     this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
@@ -102,9 +99,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.rangeDates = [this.departureDate, this.returnDate];
     
   }
-  
-  
+    
   ngOnInit(): void {
+    this.departureDate = moment(this.customStartDateValidation).toDate();
+    
     window.scrollTo(0, 0);
     this.countryCode = this.commonFunction.getUserCountry();
     if (this.calenderPrices.length == 0) {
@@ -134,7 +132,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.class = params['class'];
 
         this.departureDate = new Date(params['departure_date']);
-        if(moment(this.departureDate).format("YYYY-MM-DD") < '2021-06-01'){
+        if(moment(this.departureDate).format("YYYY-MM-DD") < this.customStartDateValidation){
             // this.router.navigate(['/flight/flight-not-found'])
         }
         this.currentMonth = moment(this.departureDate).format("MM");
@@ -180,9 +178,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   setFlightDepartureMinDate(){
     let  date = new Date();
     var curretdate = moment().format();
-    let  juneDate :any =  moment('2021-06-01').format('YYYY-MM-DD');
+    let  juneDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
     
-    let daysDiffFromCurToJune = moment('2021-06-07', "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+    let daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
 
     date.setDate(date.getDate() + 7);
 
@@ -348,7 +346,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     var currentDate = new Date();
     // 1 June validation apply
-    let  juneDate :any =  moment('2021-06-01').format('YYYY-MM-DD');
+    let  juneDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
 
     this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
 

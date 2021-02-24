@@ -1,7 +1,7 @@
 <div class="search_area">
     <!-- <label>{{ label }}</label> -->
     <div class="travel_info add_traveler_" [id]="domid" (click)="toggleTraveller()" [ngClass]="{'dr_travel_info':countryCode=='DR'}">
-        <span>{{ totalPerson }}</span> {{'traveler' | translate}}
+        <span>{{ totalPerson }}</span> <!-- {{'traveler' | translate}} --> {{ travelerLabel }}
         <div class="drop_aerrow">
         </div>
     </div>
@@ -14,7 +14,7 @@
                 <div class="right">
                     <!-- <input type='button' value='-' class='qtyminus' field='quantity' [disabled]="adultValue === 1 && adultValue > 0" [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }" (click)="btnClickForChange({type: 'minus',label: 'adult', value: adultValue})"
                     />  -->
-                    <button class="qtyminus" [disabled]="adultValue === 1 && adultValue > 0" [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }" (click)="btnClickForChange({type: 'minus',label: 'adult', value: adultValue})" (click)="btnClickForChange({type: 'plus',label: 'adult', value: adultValue})">-</button>
+                    <button class="qtyminus" [disabled]="adultValue === 1 && adultValue > 0" [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }" (click)="btnClickForChange({type: 'minus',label: 'adult', value: adultValue})">-</button>
                     <input type='text' name='quantity' value='{{ adultValue }}' class='qty' />
                     <button class="qtyplus" (click)="btnClickForChange({type: 'plus',label: 'adult', value: adultValue})">+</button>
                     <!-- <input type='button' value='+' class='qtyplus' field='quantity' (click)="btnClickForChange({type: 'plus',label: 'adult', value: adultValue})" /> -->

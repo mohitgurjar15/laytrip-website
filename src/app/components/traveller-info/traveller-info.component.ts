@@ -18,6 +18,7 @@ export class TravellerInfoComponent implements OnInit {
   childValue: number = 0;
   infantValue: number = 0;
   totalPerson: number = 1;
+  travelerLabel = 'Traveler'
   class = 'Economy';
   errorMessage:string='';
   countryCode:string;
@@ -74,6 +75,7 @@ export class TravellerInfoComponent implements OnInit {
   }
 
   btnClickForChange(item) {
+    console.log(item)
     // FOR ADULT
     if (item && item.type === 'minus' && item.label === 'adult') {
 
@@ -137,6 +139,7 @@ export class TravellerInfoComponent implements OnInit {
 
     
     this.totalPerson = this.adultValue + this.childValue + this.infantValue;
+    this.travelerLabel = this.totalPerson > 1 ? 'Travelers' : 'Traveler';
 
     if (item && item.type === 'class' && item.value) {
       this.travellerInfo.class = item.value;

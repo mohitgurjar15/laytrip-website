@@ -17,6 +17,7 @@ var TravellerInfoComponent = /** @class */ (function () {
         this.childValue = 0;
         this.infantValue = 0;
         this.totalPerson = 1;
+        this.travelerLabel = 'Traveler';
         this["class"] = 'Economy';
         this.errorMessage = '';
         this.showTraveller = false;
@@ -55,6 +56,7 @@ var TravellerInfoComponent = /** @class */ (function () {
         this.showTraveller = !this.showTraveller;
     };
     TravellerInfoComponent.prototype.btnClickForChange = function (item) {
+        console.log(item);
         // FOR ADULT
         if (item && item.type === 'minus' && item.label === 'adult') {
             if (this.adultValue - 1 < this.infantValue) {
@@ -115,6 +117,7 @@ var TravellerInfoComponent = /** @class */ (function () {
             this.infantValue = this.infantValue + 1;
         }
         this.totalPerson = this.adultValue + this.childValue + this.infantValue;
+        this.travelerLabel = this.totalPerson > 1 ? 'Travelers' : 'Traveler';
         if (item && item.type === 'class' && item.value) {
             this.travellerInfo["class"] = item.value;
             this["class"] = item.value;
