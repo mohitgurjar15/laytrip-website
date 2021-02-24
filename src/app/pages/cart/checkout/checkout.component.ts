@@ -256,7 +256,7 @@ export class CheckoutComponent implements OnInit {
       for (let i in Object.keys(this.travelerForm.controls)) {
         message = '';
         if (this.travelerForm.controls[`type${i}`].status == "INVALID") {
-          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and `;
+          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
           this.validationErrorMessage += message;
         }
       }
