@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -19,7 +20,8 @@ export class CartItemComponent implements OnInit {
 
   constructor(
     public commonFunction: CommonFunction,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private cartService:CartService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +41,10 @@ export class CartItemComponent implements OnInit {
 
   closePricePopup(){
     this.priceFluctuationAmount=0;
+  }
+
+  deleteCart(id){
+    this.cartService.setCardId(id);
   }
   
 }
