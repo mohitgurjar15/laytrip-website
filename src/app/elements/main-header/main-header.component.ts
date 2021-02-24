@@ -72,8 +72,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
     let live_availiblity = 'no';
     let url = window.location.href;
-    if(url.includes('cart/booking') || url.includes('cart/checkout')){
-      live_availiblity='yes';
+    if (url.includes('cart/booking') || url.includes('cart/checkout')) {
+      live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
@@ -100,8 +100,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   updateCartSummary() {
     let live_availiblity = 'no';
     let url = window.location.href;
-    if(url.includes('cart/booking') || url.includes('cart/checkout')){
-      live_availiblity='yes';
+    if (url.includes('cart/booking') || url.includes('cart/checkout')) {
+      live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
@@ -141,11 +141,11 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if (Object.keys(this.userDetails).length && this.userDetails.roleId != 7) {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
-      if(typeof this.userDetails.email!='undefined' && this.userDetails.email!=''){
+      if (typeof this.userDetails.email != 'undefined' && this.userDetails.email != '') {
         var name = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
         var domain = this.userDetails.email.substring(this.userDetails.email.lastIndexOf("@") + 1);
       }
-        this.username = this.userDetails.firstName ? this.userDetails.firstName : name;
+      this.username = this.userDetails.firstName ? this.userDetails.firstName : name;
       if (!this._isLayCredit) {
         this.totalLaycredit();
         this.getCartList();
@@ -205,7 +205,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   redirectToPayment() {
-    if (this.cartItems && this.cartItems.length) {
+    this.cartItemsCount = JSON.parse(localStorage.getItem('$crt')) || 0;
+    if (this.cartItemsCount > 0) {
       this.router.navigate([`cart/booking`]);
     } else {
       this.openEmptyCartPopup();

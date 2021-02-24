@@ -78,7 +78,7 @@ export class TravellerFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [Validators.required]],
-      country_code: ['01', [Validators.required]],
+      country_code: ['+1', [Validators.required]],
       dob: ['', Validators.required],
       passport_expiry: [''],
       passport_number: [''],
