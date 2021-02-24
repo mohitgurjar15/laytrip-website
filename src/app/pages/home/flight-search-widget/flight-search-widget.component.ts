@@ -216,10 +216,9 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.searchFlightInfo.arrival = this.toSearch.code;
   }
 
-  getDateWithFormat(date) {
+  /* getDateWithFormat(date) {
     this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
-    // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
-  }
+  } */
 
   changeTravellerInfo(event) {
     this.searchFlightInfo.adult = event.adult;
