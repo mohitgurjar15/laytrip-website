@@ -95,7 +95,7 @@ export class BookingComponent implements OnInit {
         cart = {};
         cart.type = items.data[i].type;
         cart.module_info = items.data[i].moduleInfo[0];
-        cart.is_available = items.data[i].id==1240?false:items.data[i].is_available;
+        cart.is_available = items.data[i].id==1265?false:items.data[i].is_available;
         cart.old_module_info = {
           selling_price: items.data[i].oldModuleInfo[0].selling_price
         };
@@ -109,13 +109,13 @@ export class BookingComponent implements OnInit {
         price.start_price = items.data[i].moduleInfo[0].start_price;
         price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         this.cartPrices.push(price)
-        if (items.data[i].is_available) {
+        /* if (items.data[i].is_available) {
 
 
         }
         else {
           notAvilableItems.push(items.data[i])
-        }
+        } */
       }
       console.log("carts",this.carts)
       this.cartService.setCartItems(this.carts)
@@ -354,9 +354,10 @@ export class BookingComponent implements OnInit {
       this.validationErrorMessage='Complete required fields in Traveler Details for'
       let message='';
       
+      console.log(this.carts,"this.carts[i]")
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
-        if(this.carts[i].is_available && this.travelerForm.controls[`type${i}`].status=="INVALID"){
+        if(typeof this.carts[i]!='undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`].status=="INVALID"){
           message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
           this.validationErrorMessage +=message;
         }
@@ -373,13 +374,16 @@ export class BookingComponent implements OnInit {
       if(!this.carts[i].is_available){
         this.isNotAvailableItinerary=true;
         notAvailableMessage = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
+        this.notAvailableError +=notAvailableMessage;
       }
     }
 
     if(this.isNotAvailableItinerary){
-      let index = this.validationErrorMessage.lastIndexOf(" ");
-      this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
+      let index = this.notAvailableError.lastIndexOf(" ");
+      this.notAvailableError = this.notAvailableError.substring(0, index);
     }
+
+    console.log("this.isNotAvailableItinerary",this.isNotAvailableItinerary,this.notAvailableError)
   }
 
   continueToCheckout(){
@@ -417,5 +421,9 @@ export class BookingComponent implements OnInit {
 
   getCardListChange(data){
     this.cardListChangeCount=data;
+  }
+
+  removeNotAvailableError(){
+    this.isNotAvailableItinerary=false;
   }
 }
