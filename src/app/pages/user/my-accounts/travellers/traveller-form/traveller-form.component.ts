@@ -40,7 +40,7 @@ export class TravellerFormComponent implements OnInit {
   dobMinDate;
   dobMaxDate;
   dobYearRange;
-  maxyear;
+  maxyear; 
   expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
   subscriptions: Subscription[] = [];
   locale = {

@@ -13,6 +13,17 @@
   --mobile-bkp: $mobile-bkp;
 }
 
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
 }
@@ -112,6 +123,35 @@
   background-position: left 25px center;
   color: #808080;
 }
+@media (max-width: 768px) {
+  .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+    padding: 5px 5px 5px 24px !important;
+    background-position: left 5px center;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 3px 0 0 0;
+  max-width: 275px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 175px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
+  padding-left: 0;
+}
 .ng-select.ng-customClass .ng-select-container {
   height: 100%;
   border: none !important;
@@ -137,6 +177,9 @@
   height: auto !important;
   border: none !important;
 }
+.ng-select.country_code .ng-select-container .ng-value-container .ng-value {
+  width: 40px;
+}
 
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
   box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
@@ -147,10 +190,6 @@
   height: 3px;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-selection {
-  background: #F826C1;
-}
-
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
   width: 13px;
   height: 13px;
@@ -158,7 +197,6 @@
   /* to remove the default positioning */
   top: -6px;
   background-color: #fff;
-  border: 1px solid #F826C1;
   border-radius: 50%;
   outline: none;
 }
@@ -194,12 +232,7 @@
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
   font-weight: bold;
-  color: #F826C1;
   display: none;
-}
-
-.custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-  background: #F826C1;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
@@ -276,6 +309,10 @@
 /*------------- color variables ------------*/
 /*----------------- responsive variations -----------------*/
 /*----------------- responsive variations -----------------*/
+.ng-customClass.country_code {
+  width: 140px;
+}
+
 .cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field.half .text_field .phone_no .code .dropdown {
   width: 150px;
 }
@@ -289,7 +326,7 @@
 }
 
 .cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field .text_field.custom-select {
-  border-bottom: 1px solid #E0E2E5;
+  border-bottom: 1px solid #e0e2e5;
 }
 
 ::ng-deep .calender-price-view {
@@ -307,20 +344,20 @@
   background: transparent;
 }
 ::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple:hover .c_date {
-  background: #F826C1;
+  background: #f826c1;
 }
 ::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple.p-highlight {
   background: transparent !important;
 }
 ::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple.p-highlight .c_date {
-  background: #F826C1;
+  background: #f826c1;
 }
 ::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .c_date {
   display: block;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #2196F3;
+  background: #2196f3;
   padding: 5px;
   text-align: center;
   line-height: 20px;
@@ -329,6 +366,58 @@
 ::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .calender_price {
   display: block;
   margin-top: 3px;
+}
+
+.dobs_account input.p-inputtext {
+  border: none;
+}
+.dobs_account ::ng-deep .birth_date .p-inputtext {
+  border: none;
+}
+.dobs_account ::ng-deep .birth_date th {
+  font-size: 13px !important;
+  border-bottom: none !important;
+  font-weight: 600 !important;
+  text-align: center;
+}
+.dobs_account ::ng-deep .birth_date td {
+  padding: 0.1rem !important;
+}
+.dobs_account ::ng-deep .birth_date td span {
+  width: 35px;
+  height: auto;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: #8188ab;
+  margin: 1px;
+  position: relative;
+}
+@media (max-width: 558px) {
+  .dobs_account ::ng-deep .birth_date td span {
+    width: 33px;
+  }
+}
+.dobs_account ::ng-deep .birth_date td span:hover {
+  background: none !important;
+}
+.dobs_account ::ng-deep .birth_date td span.p-highlight {
+  background: none !important;
+  font-weight: 500;
+  overflow: visible;
+}
+.dobs_account ::ng-deep .birth_date td span.p-highlight::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #F826C1;
+  position: absolute;
+  top: -5px;
 }
 
 .common_form label {
@@ -418,6 +507,9 @@
   background-size: 20px;
   border: none;
 }
+.common_form .mb-sm-10.dobs .form-control {
+  border-bottom: 2px solid #d6d6d6 !important;
+}
 .common_form .mb-sm-10 .gender_anchers {
   display: flex;
   justify-content: flex-start;
@@ -437,4 +529,38 @@
 }
 .common_form .mb-sm-10 .gender_anchers a:focus {
   outline: none;
+}
+.common_form .mb-sm-10 .gender_anchers select {
+  width: 100%;
+  padding: 6px 10px 6px 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: relative;
+  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 11px;
+  transition: 0.3s;
+  right: 0;
+  top: 1px;
+  background-color: #ffffff;
+}
+.common_form .edit_btns {
+  display: flex;
+  justify-content: flex-end;
+}
+.common_form .edit_btns button {
+  background-color: transparent;
+  color: #ffaa00;
+  box-shadow: none;
+  font-size: 16px;
+  padding: 0;
+  border: none;
+  text-align: right;
+  text-decoration: none;
+}
+.common_form .edit_btns button:focus {
+  outline: none;
+  box-shadow: none;
 }
