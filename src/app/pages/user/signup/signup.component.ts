@@ -91,7 +91,7 @@ export class SignupComponent implements OnInit {
       this.loading = false;
       return;
     } else {
-      
+       
       this.userService.signup(this.signupForm.value).subscribe((data: any) => {
         this.emailForVerifyOtp = this.signupForm.value.email;
         this.submitted = this.loading = false;         

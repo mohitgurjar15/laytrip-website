@@ -135,7 +135,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="remove_wrps">
+                        <span class="remove_wrps" *ngIf="traveler.roleId != 6">
                             <a class="hover-link" (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a>
                         </span>
                     </div>

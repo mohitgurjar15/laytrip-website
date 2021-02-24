@@ -86,7 +86,7 @@ var UserService = /** @class */ (function () {
                 data: data
             }
         };
-        return this.http["delete"](this.apiURL + 'v1/auth/delete-account-request', options);
+        return this.http["delete"](this.apiURL + 'v1/user/delete-account-request', options);
     };
     UserService.prototype.changePassword = function (data) {
         return this.http.put(this.apiURL + 'v1/auth/change-password', data, this.commonFunction.setHeaders());
@@ -172,6 +172,12 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.emailVeryfiy = function (email) {
         return this.http.get(this.apiURL + "v1/auth/verify-email-id?email=" + email, this.commonFunction.setHeaders());
+    };
+    UserService.prototype.registerGuestUser = function (data) {
+        return this.http.post(this.apiURL + "v1/auth/guest-user", data);
+    };
+    UserService.prototype.mapGuestUser = function (guestUserId) {
+        return this.http.patch(this.apiURL + "v1/cart/map-guest-user/" + guestUserId, {}, this.commonFunction.setHeaders());
     };
     UserService = __decorate([
         core_1.Injectable({
