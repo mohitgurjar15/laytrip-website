@@ -81,7 +81,7 @@
                           formControlName="country_code"> -->
                         <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="phonecode"
                           bindValue="phonecode" formControlName="country_code" [clearable]="false"></ng-select>
-                        <input type="text" class="form-control" maxlength="10" formControlName="phone_no">
+                        <input type="text" mask="000-000-0000" class="form-control" maxlength="14" formControlName="phone_no">
                       </span>
                       <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
                         class="error">

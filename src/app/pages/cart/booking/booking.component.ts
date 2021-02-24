@@ -358,7 +358,7 @@ export class BookingComponent implements OnInit {
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
         if(typeof this.carts[i]!='undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`].status=="INVALID"){
-          message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
+          message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
           this.validationErrorMessage +=message;
         }
       }
@@ -373,7 +373,7 @@ export class BookingComponent implements OnInit {
       notAvailableMessage='';
       if(!this.carts[i].is_available){
         this.isNotAvailableItinerary=true;
-        notAvailableMessage = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
+        notAvailableMessage = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
         this.notAvailableError +=notAvailableMessage;
       }
     }
@@ -381,9 +381,9 @@ export class BookingComponent implements OnInit {
     if(this.isNotAvailableItinerary){
       let index = this.notAvailableError.lastIndexOf(" ");
       this.notAvailableError = this.notAvailableError.substring(0, index);
+      //this.notAvailableError +='.';
     }
 
-    console.log("this.isNotAvailableItinerary",this.isNotAvailableItinerary,this.notAvailableError)
   }
 
   continueToCheckout(){
