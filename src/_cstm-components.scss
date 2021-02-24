@@ -185,7 +185,12 @@
         .ng-select-container{
             .ng-value-container {
                 .ng-value{
-                    width: 40px;
+                    width: 50px;
+                }
+                .ng-arrow-wrapper{
+                    .ng-arrow{
+                        top: -4px;
+                    }
                 }
             }
         } 

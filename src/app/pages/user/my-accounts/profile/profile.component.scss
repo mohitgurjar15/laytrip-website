@@ -197,7 +197,8 @@ input.ng-invalid.ng-touched {
     }
 
     @include tab-view {
-        padding: 10px 0;
+        padding: 10px 0 0 0;
+        margin-bottom: 0;
     }
 
     .update_info {
