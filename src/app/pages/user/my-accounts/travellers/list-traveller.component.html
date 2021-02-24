@@ -135,10 +135,10 @@
                                 </div>
                             </div>
                         </div>
+                        <span class="remove_wrps" *ngIf="traveler.roleId != 6">
+                            <a class="hover-link" (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a>
+                        </span>
                     </div>
-                    <span class="remove_wrps">
-                        <a href="javascript:void(0);">Delete</a>
-                    </span>
                 </div>
             </div>
         </div>
@@ -157,8 +157,8 @@
             <div class="block_im">
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
             </div>
-            <h4 class="name_traveller">Delete Co - Traveler</h4>
-            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete account?</span></h4>
+<!--             <h4 class="name_traveller">Delete Co - Traveler</h4>
+ -->            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete account?</span></h4>
 
             <div class="cta_btn_wrps">
                 <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>

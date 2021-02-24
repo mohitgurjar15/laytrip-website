@@ -92,9 +92,12 @@
                                                 <div class="pipe_line_wrps">
                                                     <span class="pine_line"></span>
                                                     <div class="stp_names">
-                                                        <div class="t_name">PUJ</div> 
-                                                        <div class="t_name">PUJ</div> 
-                                                        <div class="n_stop">Non Stop</div>
+                                                        <ng-container *ngIf="route.stops.length>1">
+                                                            <div class="t_name" *ngFor="let stop of route.stops | slice:1; let laststop = last">
+                                                                {{stop.departure_info.code}}
+                                                            </div> 
+                                                        </ng-container>
+                                                        <div class="n_stop" *ngIf="route.stops.length==1">Non Stop</div>
                                                     </div>
                                                 </div>
                                             </span>

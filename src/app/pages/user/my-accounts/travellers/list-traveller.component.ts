@@ -171,7 +171,7 @@ export class ListTravellerComponent implements OnInit {
     }
     console.log( this.travelers)
     this.getCheckedItemList();
-  }
+  } 
   
   isAllSelected() {
     this.isMasterSel = this.travelers.every(function(item:any) {
