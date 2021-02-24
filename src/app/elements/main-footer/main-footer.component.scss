@@ -89,6 +89,12 @@
 }
 
 .menu_grid {
+  .share_li{
+    padding: 0 0 10px !important;
+    a{
+      cursor: pointer;
+    }
+  }
   .footer_down_links {
     li {
       width: auto !important;

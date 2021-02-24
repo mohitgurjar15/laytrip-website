@@ -11,6 +11,17 @@
 .anchor_link {
     cursor: pointer;
 }
+.desk_ver{
+	@include tab-view{
+		display: none;
+	}
+}
+.responsive_mobile{
+	display: none;
+	@include tab-view{
+		display: block;
+	}
+}
 
 //<!-- Start Responsive Filter css -->
 .filter_responsive {

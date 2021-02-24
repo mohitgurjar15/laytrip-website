@@ -93,9 +93,10 @@
                                                     <span class="pine_line"></span>
                                                     <div class="stp_names">
                                                         <ng-container *ngIf="route.stops.length>1">
-                                                            <div class="t_name" *ngFor="let stop of route.stops | slice:1; let laststop = last">
+                                                            <div class="t_name"
+                                                                *ngFor="let stop of route.stops | slice:1; let laststop = last">
                                                                 {{stop.departure_info.code}}
-                                                            </div> 
+                                                            </div>
                                                         </ng-container>
                                                         <div class="n_stop" *ngIf="route.stops.length==1">Non Stop</div>
                                                     </div>
@@ -143,7 +144,7 @@
             <div class="right_side">
                 <div class="fl_fares">
                     <ng-container *ngIf="item.secondary_start_price>0">
-                        <span class="fare_type">
+                        <span class="fare_type desk_fare">
                             Flexible Installments
                         </span>
                         <span class="total_pr">
@@ -153,10 +154,23 @@
                             </span>
                             weekly
                         </span>
+                        <span class="cta_btn">
+                            <button (click)="bookNow(item)">
+                                Select
+                            </button>
+                        </span>
+                        <span class="fare_type mobile_fare">
+                            Flexible Installments
+                        </span>
                     </ng-container>
                     <ng-container *ngIf="item.secondary_start_price==0">
                         <span class="fare_type">
                             Full Payment
+                        </span>
+                        <span class="cta_btn">
+                            <button (click)="bookNow(item)">
+                                Select
+                            </button>
                         </span>
                         <span class="total_pr">
                             <span class="big-num">
@@ -164,11 +178,11 @@
                             </span>
                         </span>
                     </ng-container>
-                    <span class="cta_btn">
+                    <!-- <span class="cta_btn">
                         <button (click)="bookNow(item)">
                             Select
                         </button>
-                    </span>
+                    </span> -->
                 </div>
             </div>
         </div>
@@ -216,6 +230,7 @@
                             </span>
                         </div>
                     </div>
+
                     <div class="rules_wrps">
                         <span class="heads">
                             <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt=""> Rules
@@ -226,6 +241,9 @@
                         <!-- <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy && !loadMoreCancellationPolicy"
                     [innerHtml]="cancellationPolicyArray[0]">
                     </span> -->
+                        <div class="notifi_text mobile_notifi">
+                            Bi-weekly and monthly installments plans also available
+                        </div>
                         <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy"
                             [innerHtml]="cancellationPolicy.cancellation_policy">
                         </span>
@@ -246,7 +264,7 @@
                         {{ loadMoreCancellationPolicy===true ? 'View Less' : 'View More' }}</a> -->
                     </div>
                 </div>
-                <div class="notifi_text">
+                <div class="notifi_text desk_notifi">
                     Bi-weekly and monthly installments plans also available
                 </div>
             </div>

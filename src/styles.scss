@@ -295,6 +295,11 @@ textarea:focus:-ms-input-placeholder {
       border: none;
       font-size: 14px;
       padding: 0;
+      &.ng-select-disabled{
+        .ng-select-container{
+          background-color: $background-white;
+        }
+      }
 
       .ng-select-container {
         border: none;
@@ -318,8 +323,9 @@ textarea:focus:-ms-input-placeholder {
 
         @include tab-view {
           position: absolute;
-          right: 0;
+          right: 10px;
           height: 12px;
+          top: -5px;
         }
       }
 
@@ -1057,8 +1063,8 @@ select {
                             font-size: 18px;
 
                             &:hover {
-                              border: 1px solid $secondary-color;
-                              color: $secondary-color;
+                              border: 1px solid $pink;
+                              color: $pink;
                             }
                           }
 
@@ -1773,6 +1779,10 @@ select {
                   background-repeat: no-repeat;
                   background-size: 12px;
 
+                  @include tab-view{
+                    width: 20px;
+                  }
+
                   // &:before {
                   // 	content: '';
                   // 	position: absolute;
@@ -1878,8 +1888,8 @@ select {
                         font-size: 18px;
 
                         &:hover {
-                          border: 1px solid $secondary-color;
-                          color: $secondary-color;
+                          border: 1px solid $pink;
+                          color: $pink;
                         }
                       }
 
@@ -1976,12 +1986,13 @@ select {
 
                   @media (max-width: 991px) {
                     width: 100%;
-                    margin-bottom: 20px;
+                    margin-bottom: 5px;
                   }
 
                   @media (max-width: 480px) {
                     flex-flow: column;
-                    margin-bottom: 10px;
+                    margin-bottom: 5px;
+                    padding: 0;
                   }
 
                   label {
@@ -2075,7 +2086,8 @@ select {
 
                   @media (max-width: 991px) {
                     width: 100%;
-                    margin-bottom: 20px;
+                    margin-bottom: 10px;
+                    padding: 0;
                   }
 
                   label {
@@ -2171,6 +2183,7 @@ select {
 
                   @media (max-width: 575px) {
                     width: 100%;
+                    padding: 0;
                   }
 
                   .serch_btn {

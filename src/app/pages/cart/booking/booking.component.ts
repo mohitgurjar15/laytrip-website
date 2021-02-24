@@ -93,6 +93,7 @@ export class BookingComponent implements OnInit {
         cart = {};
         cart.type = items.data[i].type;
         cart.module_info = items.data[i].moduleInfo[0];
+        cart.is_available = items.data[i].id==1222?false:items.data[i].is_available;
         cart.old_module_info = {
           selling_price: items.data[i].oldModuleInfo[0].selling_price
         };
@@ -114,6 +115,7 @@ export class BookingComponent implements OnInit {
           notAvilableItems.push(items.data[i])
         }
       }
+      console.log("carts",this.carts)
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
       if (notAvilableItems.length) {
@@ -280,11 +282,7 @@ export class BookingComponent implements OnInit {
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1)
-      console.log(this.travelerForm,"=====")
-      if(typeof this.travelerForm.controls[`type${index}`]!=='undefined'){
-        //delete this.travelerForm.controls[`type${index}`];
-        //this.travelerForm.controls[`type${index}`].setErrors(null)
-      }
+      
       setTimeout(()=>{
         this.cartService.setCartItems(this.carts);
         this.cartService.setCartPrices(this.cartPrices)
@@ -353,12 +351,12 @@ export class BookingComponent implements OnInit {
     if (!this.isValidTravelers) {
       this.validationErrorMessage='Complete required fields in Traveler Details for'
       let message='';
-      console.log("====================")
-      console.log(this.travelerForm)
-      console.log(this.carts)
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
-        if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
+        if(!this.carts[i].is_available){
+          
+        }
+        else if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
           message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
           this.validationErrorMessage +=message;
         }

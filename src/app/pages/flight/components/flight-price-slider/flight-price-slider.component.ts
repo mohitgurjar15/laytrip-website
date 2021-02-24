@@ -81,7 +81,7 @@ export class FlightPriceSliderComponent implements OnInit {
           {
             breakpoint: 480,
             settings: {
-              slidesToShow: count>=1?1:count,
+              slidesToShow: count>=1?3:count,
               slidesToScroll: 1
             }
           }
@@ -106,6 +106,10 @@ export class FlightPriceSliderComponent implements OnInit {
     let result =[]
     let sourceIndex = dates.findIndex(date=>{ return moment(date.date,"DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] })
     let targetIndex = 4;
+    if(window.screen.width<=360){
+      targetIndex=2;
+    }
+    console.log(targetIndex,"targetIndex")
     if(targetIndex > sourceIndex){
       targetIndex=5;
       for(let i=targetIndex; i < this.dates.length; i++){
