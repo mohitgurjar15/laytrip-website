@@ -69,7 +69,22 @@ export class CartItemComponent implements OnInit {
     }
   }
 
-  closePricePopup(){
+  closePricePopup(id){
+    try{
+      let cartAlerts = localStorage.getItem("__alrt")
+      if(cartAlerts){
+        this.cartAlerts= JSON.parse(cartAlerts)
+        let index = this.cartAlerts.findIndex(x=>x.id==id)
+        this.cartAlerts.splice(index,1)
+      }
+      else{
+        this.cartAlerts=[]
+      }
+    }
+    catch(e){
+      this.cartAlerts=[];
+    }
+    localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
     this.priceFluctuationAmount=0;
   }
 
