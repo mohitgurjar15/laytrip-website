@@ -211,7 +211,8 @@ export class CheckoutComponent implements OnInit {
       this.redirectTo('/cart/checkout');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
-      this.cartPrices.splice(index, 1)
+      this.cartPrices.splice(index, 1);
+      localStorage.removeItem('$cartOver');
       this.adjustPriceSummary();
       setTimeout(() => {
         this.cartService.setCartItems(this.carts);

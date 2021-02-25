@@ -274,7 +274,8 @@ export class BookingComponent implements OnInit {
       this.redirectTo('/cart/booking');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
-      this.cartPrices.splice(index, 1)
+      this.cartPrices.splice(index, 1);
+      localStorage.removeItem('$cartOver');
 
       setTimeout(() => {
         this.cartService.setCartItems(this.carts);

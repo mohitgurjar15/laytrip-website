@@ -221,7 +221,7 @@
     </div>
 </section>
 
-<div class="section_description max_cart_alert" style="display: none;">
+<div class="section_description max_cart_alert" style="display: block;" *ngIf="cartOverLimit">
     <span class="sec_text">5 item Cart maximum.</span>
-    <a href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+    <a><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close" (click)="closeCartMaximum()"></a>
 </div>

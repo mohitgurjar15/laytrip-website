@@ -28,7 +28,7 @@ export class SocialLoginComponent implements OnInit {
   apple_loading: boolean = false;
   @ViewChild('loginRef', { static: true }) loginElement: ElementRef;
   auth2: any;
-  guestUserId:string='';
+  guestUserId: string = '';
 
   constructor(
     private userService: UserService,
@@ -36,26 +36,26 @@ export class SocialLoginComponent implements OnInit {
     public modalService: NgbModal,
     public location: Location,
     private authService: SocialAuthService,
-    private commonFunction:CommonFunction
+    private commonFunction: CommonFunction
 
   ) {
-  
-   }
 
-  
+  }
+
+
   ngOnInit() {
     this.loadGoogleSdk();
     this.guestUserId = localStorage.getItem('__gst') || '';
 
-   this.loadFacebookSdk();
+    this.loadFacebookSdk();
     // APPLE LOGIN RESPONSE 
     this.authService.authState.subscribe((userInfo: any) => {
       if (userInfo) {
         let objApple = getUserDetails(userInfo.authorization.id_token);
-        console.log(objApple,userInfo)
+        console.log(objApple, userInfo)
 
         let jsonData = {
-          "account_type": 1, 
+          "account_type": 1,
           "name": "",
           "email": objApple.email,
           "social_account_id": userInfo.authorization.code,
@@ -73,24 +73,25 @@ export class SocialLoginComponent implements OnInit {
             document.getElementById('navbarNav').click();
             this.router.url;
 
-            if(this.guestUserId){
-              this.userService.mapGuestUser(this.guestUserId).subscribe(res=>{
+            if (this.guestUserId) {
+              this.userService.mapGuestUser(this.guestUserId).subscribe((res: any) => {
+                localStorage.setItem('$cartOver', res.cartOverLimit);
                 let urlData = this.commonFunction.decodeUrl(this.router.url)
-                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                  this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
-                });  
+                this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                  this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+                });
               })
             }
-            else{
+            else {
               let urlData = this.commonFunction.decodeUrl(this.router.url)
-              this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
               });
             }
 
-            
+
           }
-        }, (error: HttpErrorResponse) => {         
+        }, (error: HttpErrorResponse) => {
           this.socialError.emit(error.message);
           // this.toastr.error(error.message, 'SignIn Error');
         });
@@ -107,7 +108,7 @@ export class SocialLoginComponent implements OnInit {
         var name = profile.getName().split(" ");
         let jsonData = {
           "account_type": 1,
-          "name": name[0] ? name[0] : name, 
+          "name": name[0] ? name[0] : name,
           "email": profile.getEmail(),
           "social_account_id": profile.getId(),
           "device_type": 1,
@@ -123,18 +124,18 @@ export class SocialLoginComponent implements OnInit {
             $('#sign_in_modal').modal('hide');
             $('#sign_up_modal').modal('hide');
             this.router.url;
-            if(this.guestUserId){
-              this.userService.mapGuestUser(this.guestUserId).subscribe(res=>{
+            if (this.guestUserId) {
+              this.userService.mapGuestUser(this.guestUserId).subscribe(res => {
                 let urlData = this.commonFunction.decodeUrl(this.router.url)
-                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                  this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
-                });  
+                this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                  this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+                });
               })
             }
-            else{
+            else {
               let urlData = this.commonFunction.decodeUrl(this.router.url)
-              this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
               });
             }
 
@@ -151,12 +152,12 @@ export class SocialLoginComponent implements OnInit {
         this.google_loading = false;
       });
   }
- 
-  ngAfterViewInit(){
+
+  ngAfterViewInit() {
     this.loadGoogleSdk();
   }
 
-  loadGoogleSdk(){
+  loadGoogleSdk() {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
         client_id: environment.google_client_id,
@@ -221,18 +222,18 @@ export class SocialLoginComponent implements OnInit {
               document.getElementById('navbarNav').click();
               this.router.url;
 
-              if(this.guestUserId){
-                this.userService.mapGuestUser(this.guestUserId).subscribe(res=>{
+              if (this.guestUserId) {
+                this.userService.mapGuestUser(this.guestUserId).subscribe(res => {
                   let urlData = this.commonFunction.decodeUrl(this.router.url)
-                  this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                    this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
-                  });  
+                  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                    this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+                  });
                 })
               }
-              else{
+              else {
                 let urlData = this.commonFunction.decodeUrl(this.router.url)
-                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                  this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+                this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                  this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
                 });
               }
             }

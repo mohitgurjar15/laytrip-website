@@ -13,25 +13,25 @@ import { ResetPasswordComponent } from '../reset-password/reset-password.compone
 
 declare var $: any;
 
-@Component({ 
+@Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
 
-export class SigninComponent  implements OnInit {
+export class SigninComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   signUpModal = false;
   signInModal = true;
   loginForm: FormGroup;
-  submitted =  false;Location
-  fieldTextType :  boolean;
-  apiError :string =  '';
+  submitted = false; Location
+  fieldTextType: boolean;
+  apiError: string = '';
   public loading: boolean = false;
   public userNotVerify: boolean = false;
-  emailForVerifyOtp : string = '';
-  guestUserId:string='';
+  emailForVerifyOtp: string = '';
+  guestUserId: string = '';
 
   @Input() pageData;
   @Input() resetRecaptcha;
@@ -40,11 +40,11 @@ export class SigninComponent  implements OnInit {
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private userService : UserService,
+    private userService: UserService,
     public router: Router,
-    public commonFunction:CommonFunction,
+    public commonFunction: CommonFunction,
     private renderer: Renderer2,
-    ) { }    
+  ) { }
 
 
   ngOnInit() {
@@ -52,13 +52,13 @@ export class SigninComponent  implements OnInit {
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required]]
     });
-    this.guestUserId=localStorage.getItem('__gst') || "";
-  }  
+    this.guestUserId = localStorage.getItem('__gst') || "";
+  }
 
   get f() { return this.loginForm.controls; }
 
-  onSubmit() {    
-    this.apiError = '';        
+  onSubmit() {
+    this.apiError = '';
     this.submitted = false;
     this.loading = true;
     if (this.loginForm.invalid) {
@@ -67,76 +67,77 @@ export class SigninComponent  implements OnInit {
       return;
     } else {
       this.userService.signin(this.loginForm.value).subscribe((data: any) => {
-        if(data.token){
+        if (data.token) {
 
           localStorage.setItem("_lay_sess", data.token);
-          const userDetails = getLoginUserInfo();    
-          
-                   
+          const userDetails = getLoginUserInfo();
+
+
           this.loading = this.submitted = false;
-          $('#sign_in_modal').modal('hide'); 
-          const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
-         
-          if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
+          $('#sign_in_modal').modal('hide');
+          const _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
+
+          if (_isSubscribeNow == "Yes" && userDetails.roleId == 6) {
             this.router.navigate(['account/subscription']);
           } else {
-              
-              if(this.guestUserId){
-                this.userService.mapGuestUser(this.guestUserId).subscribe(res=>{
-                  let urlData = this.commonFunction.decodeUrl(this.router.url)
-                  this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                    this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
-                  });  
-                })
-              }
-              else{
+
+            if (this.guestUserId) {
+              this.userService.mapGuestUser(this.guestUserId).subscribe((res: any) => {
+                localStorage.setItem('$cartOver', res.cartOverLimit);
                 let urlData = this.commonFunction.decodeUrl(this.router.url)
-                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                  this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+                this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                  this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
                 });
-              }
-          } 
+              })
+            }
+            else {
+              let urlData = this.commonFunction.decodeUrl(this.router.url)
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+              });
+            }
+          }
         }
-      }, (error: HttpErrorResponse) => { 
-        this.submitted = this.loading = false;      
-        if(error.status == 406){
+      }, (error: HttpErrorResponse) => {
+        this.submitted = this.loading = false;
+        if (error.status == 406) {
           this.emailForVerifyOtp = this.loginForm.value.email;
-          this.userNotVerify = true;  
-          this.apiError = '';        
+          this.userNotVerify = true;
+          this.apiError = '';
         } else {
           this.apiError = error.message;
         }
       });
     }
-  }  
+  }
 
-  emailVerify(){
+  emailVerify() {
     this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
       this.openOtpPage();
     }, (error: HttpErrorResponse) => {
-      this.userNotVerify = false;                  
+      this.userNotVerify = false;
       this.apiError = error.message;
     });
   }
 
-  toggleFieldTextType(){
+  toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
   }
 
-  socialError(error){
+  socialError(error) {
     this.apiError = error;
-  } 
+  }
 
-  closeModal(){
-    this.apiError ='';
+  closeModal() {
+    this.apiError = '';
     $('#sign_in_modal').modal('hide');
-  } 
+  }
 
-  btnSignUpClick(){
-    
+  btnSignUpClick() {
+
     $('#sign_in_modal').modal('hide');
     $('#sign_up_modal').modal('show');
-    $("#signup-form").trigger( "reset" );
+    $("#signup-form").trigger("reset");
     setTimeout(() => {
       this.renderer.addClass(document.body, 'modal-open');
     }, 1500);
@@ -146,7 +147,7 @@ export class SigninComponent  implements OnInit {
   openOtpPage() {
     $('#sign_in_modal').modal('hide');
     const modalRef = this.modalService.open(VerifyOtpComponent, {
-      windowClass:'otp_window', 
+      windowClass: 'otp_window',
       centered: true,
       backdrop: 'static',
       keyboard: false
@@ -159,8 +160,9 @@ export class SigninComponent  implements OnInit {
     $('#sign_in_modal').modal('hide');
     setTimeout(() => {
       this.renderer.addClass(document.body, 'modal-open');
-    }, 1500);    
-    this.modalService.open(ForgotPasswordComponent, {windowClass:'forgot_window', centered: true, backdrop: 'static',
+    }, 1500);
+    this.modalService.open(ForgotPasswordComponent, {
+      windowClass: 'forgot_window', centered: true, backdrop: 'static',
       keyboard: false
     });
   }
