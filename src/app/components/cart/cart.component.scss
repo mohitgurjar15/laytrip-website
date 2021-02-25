@@ -89,8 +89,14 @@ h3{
                         display: none;
                     }
                 }
-                img{
-                    margin-bottom: 5px;
+                .tab_imgs_wrps{
+                    .alrt_img{
+                        margin-left: 5px;
+                        max-width: 15px;
+                    }
+                    img{
+                        margin-bottom: 5px;
+                    }
                 }
             }
             &.active{

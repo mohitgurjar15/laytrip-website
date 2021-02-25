@@ -145,19 +145,19 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   getCancellationPolicy(routeCode) {
 
-    this.loadCancellationPolicy = true;
-    this.loadMoreCancellationPolicy = false;
-    this.errorMessage = '';
-    this.cancellationPolicyArray = [];
-    this.cancellationPolicy = '';
-    this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
-      this.cancellationPolicyArray = data.cancellation_policy.split('--')
-      this.loadCancellationPolicy = false;
-      this.cancellationPolicy = data;
-    }, (err) => {
-      this.loadCancellationPolicy = false;
-      this.errorMessage = err.message;
-    });
+    // this.loadCancellationPolicy = true;
+    // this.loadMoreCancellationPolicy = false;
+    // this.errorMessage = '';
+    // this.cancellationPolicyArray = [];
+    // this.cancellationPolicy = '';
+    // this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
+    //   this.cancellationPolicyArray = data.cancellation_policy.split('--')
+    //   this.loadCancellationPolicy = false;
+    //   this.cancellationPolicy = data;
+    // }, (err) => {
+    //   this.loadCancellationPolicy = false;
+    //   this.errorMessage = err.message;
+    // });
   }
 
   toggleCancellationContent() {

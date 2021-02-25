@@ -56,47 +56,66 @@
                     align-items: center;
                     flex: 1;
                     padding-right: 20px;
+                    flex-direction: column;
                     @include tab-view{
                         flex-direction: column;
                         justify-content: flex-start;
                         align-items: flex-start;
                     }
-                    .header_name{
+                    .headin_upper_wrparr{
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        font-size: 27px;
-                        position: relative; 
-                        .title_image{
-                            border-radius: 50%;
-                            border: 2px solid $pink;
-                            padding: 5px;
-                            height: 38px;
-                            width: 38px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            margin-right: 15px;
-                            img{
-                                width: 24px;
-                            }
-                            @include tab-view{
-                                display: none;
-                            }
-                        }
-                        .flight_routing_imgs{
-                            display: flex;
+                        flex: 1;
+                        padding-right: 20px;
+                        width: 100%;
+                        @include tab-view{
                             flex-direction: column;
-                            padding: 0 20px;
-                            @include tab-view{
-                                max-width: 110px;
-                            }
+                            justify-content: flex-start;
+                            align-items: flex-start;
                         }
-                        
+                        .header_name{
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 27px;
+                            position: relative; 
+                            .title_image{
+                                border-radius: 50%;
+                                border: 2px solid $pink;
+                                padding: 5px;
+                                height: 38px;
+                                width: 38px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                margin-right: 15px;
+                                img{
+                                    width: 24px;
+                                }
+                                @include tab-view{
+                                    display: none;
+                                }
+                            }
+                            .flight_routing_imgs{
+                                display: flex;
+                                flex-direction: column;
+                                padding: 0 20px;
+                                @include tab-view{
+                                    max-width: 110px;
+                                }
+                            }
+                            
+                        }
+                        .header_date{
+                            font-size: 16px;
+                            font-weight: 400;
+                        }
                     }
-                    .header_date{
-                        font-size: 16px;
-                        font-weight: 400;
+                    .alert_boxes{
+                        img{
+                            max-width: 15px;
+                        }
                     }
                 }
             }

@@ -228,6 +228,9 @@
                             <span class="texts">
                                 ${{item.selling_price | number : '1.2-2'}} including taxes and fees
                             </span>
+                            <div class="notifi_text mobile_notifi">
+                                Bi-weekly and monthly installments plans also available
+                            </div>
                         </div>
                     </div>
 
@@ -241,21 +244,20 @@
                         <!-- <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy && !loadMoreCancellationPolicy"
                     [innerHtml]="cancellationPolicyArray[0]">
                     </span> -->
-                        <div class="notifi_text mobile_notifi">
-                            Bi-weekly and monthly installments plans also available
-                        </div>
-                        <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy"
-                            [innerHtml]="cancellationPolicy.cancellation_policy">
+
+                        <span class="texts_rules">
+                            Non-refundable, non-transferable. Change policy reflected in Laytrip <a
+                                [routerLink]="['/terms']">Terms</a> which apply.
                         </span>
 
                         <!-- skeleton loader for rules -->
-                        <div class="loader_rules" style="margin: 10px 0;" *ngIf="loadCancellationPolicy">
+                        <!-- <div class="loader_rules" style="margin: 10px 0;" *ngIf="loadCancellationPolicy">
                             <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
                             <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
                             <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
                             <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
                             <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                        </div>
+                        </div> -->
                         <!-- skeleton loader for rules -->
 
                         <!-- <a class="view_more"
@@ -264,9 +266,9 @@
                         {{ loadMoreCancellationPolicy===true ? 'View Less' : 'View More' }}</a> -->
                     </div>
                 </div>
-                <div class="notifi_text desk_notifi">
+                <!-- <div class="notifi_text desk_notifi">
                     Bi-weekly and monthly installments plans also available
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
