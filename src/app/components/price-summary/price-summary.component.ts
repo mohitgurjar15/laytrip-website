@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { CommonFunction } from '../../_helpers/common-function';
+import {installmentType} from '../../_helpers/generic.helper';
 
 @Component({
   selector: 'app-price-summary',
@@ -14,30 +15,55 @@ export class PriceSummaryComponent implements OnInit {
   insatllmentAmount:number=0;
   s3BucketUrl=environment.s3BucketUrl;
   installmentVartion:number=0;
+  installmentType;
+  cartAlerts=[];
   
   constructor(
     private commonFunction:CommonFunction
-  ) { }
+  ) {
+    this.installmentType= installmentType.en;
+   }
 
   ngOnInit(): void {
     console.log("changes", this.priceSummary);
   }
   
   ngOnChanges(changes: SimpleChanges) {
+    try{
+      let cartAlerts = localStorage.getItem("__alrt")
+      if(cartAlerts){
+        this.cartAlerts= JSON.parse(cartAlerts)
+      }
+      else{
+        this.cartAlerts=[]
+      }
+    }
+    catch(e){
+      this.cartAlerts=[];
+    }
     this.insatllmentAmount=0;
     if (typeof changes['priceSummary'].currentValue!='undefined') {
-      console.log("changes",changes);
       this.priceSummary = changes['priceSummary'].currentValue;
       if(typeof this.priceSummary.instalments!=='undefined' && this.priceSummary.paymentType=='instalment'){
        for(let i =1 ; i<this.priceSummary.instalments.instalment_date.length; i++){
           this.insatllmentAmount += this.priceSummary.instalments.instalment_date[i].instalment_amount
        }
-       console.log(this.insatllmentAmount, 'this.insatllmentAmount::::::');
 
        if(this.priceSummary.instalments.instalment_date.length>2){
 
           if(this.priceSummary.instalments.instalment_date[1].instalment_amount!=this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length-1].instalment_amount){
+
             this.installmentVartion = this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length-1].instalment_amount-this.priceSummary.instalments.instalment_date[1].instalment_amount;
+            if(this.installmentVartion>0){
+              let indexExist = this.cartAlerts.findIndex(x=>x.type=="installment_vartion");
+              if(indexExist==-1){
+                this.cartAlerts.push({
+                  type : 'installment_vartion',
+                  id : -1
+                })
+              }
+              localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
+            }
           }
        }
       }

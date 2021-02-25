@@ -1,6 +1,6 @@
 <section class="search_result flight">
     <div class="container">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-12">
                 <div class="block_page_not_available">
                     <div class="block_page_not_available_inner">
@@ -10,6 +10,36 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+        <section class="block_not_found_main modal fade comman_modal show" id="not_found_modal" data-backdrop="static"
+            data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal_title">
+                        <button type="button" class="close" >
+                            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+                        </button>
+                    </div>
+                    <div class="empty_modal_wrp">
+                        <div class="cartempty_main_wrapper">
+                            <div class="inner_wrppar">
+                                <div class="cart_img_wrpper">
+                                    <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Not found image">
+                                </div>
+                                <div class="cart_msg">
+                                    404 Error
+                                </div>
+                                <p class="page_para">Go back by your browsers back button.</p>
+                                <div class="logo_wrpper_footer">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </section>

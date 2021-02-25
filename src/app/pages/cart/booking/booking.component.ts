@@ -27,7 +27,7 @@ export interface CartItem {
 })
 export class BookingComponent implements OnInit {
 
-  @ViewChild(AddCardComponent, {static: false}) addCardRef: AddCardComponent;
+  @ViewChild(AddCardComponent, { static: false }) addCardRef: AddCardComponent;
   s3BucketUrl = environment.s3BucketUrl;
   progressStep = { step1: true, step2: false, step3: false, step4: false };
   userInfo;
@@ -77,12 +77,12 @@ export class BookingComponent implements OnInit {
   ngOnInit() {
     window.scroll(0, 0);
     this.userInfo = getLoginUserInfo();
-    if (this.userInfo && this.userInfo.roleId!=7) {
+    if (this.userInfo && this.userInfo.roleId != 7) {
       this.getTravelers();
     }
-    else{
+    else {
       this.getTravelers();
-      this.guestUserId=this.commonFunction.getGuestUser();
+      this.guestUserId = this.commonFunction.getGuestUser();
     }
 
     this.cartLoading = true;
@@ -110,20 +110,20 @@ export class BookingComponent implements OnInit {
         this.cartPrices.push(price)
         
       }
-      console.log("carts",this.carts)
+      console.log("carts", this.carts)
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
       
     }, error => {
       this.isCartEmpty = true;
       this.cartLoading = false;
-      this.carts=[];
-      this.cartPrices=[];
-      localStorage.setItem('$crt','0');
+      this.carts = [];
+      this.cartPrices = [];
+      localStorage.setItem('$crt', '0');
     });
 
     this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
-      console.log("catyddd",cartId)
+      console.log("catyddd", cartId)
       if (cartId > 0) {
         this.deleteCart(cartId);
       }
@@ -250,7 +250,7 @@ export class BookingComponent implements OnInit {
       }
     });
 
-    if(this.addCardRef){
+    if (this.addCardRef) {
       this.addCardRef.ngOnDestroy();
     }
     this.cartService.setCartNumber(0);
@@ -258,34 +258,34 @@ export class BookingComponent implements OnInit {
     this.$cartIdsubscription.unsubscribe();
   }
 
-  redirectTo(uri:string){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    this.router.navigate([uri]));
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([uri]));
   }
 
   deleteCart(cartId) {
-    if(cartId==0){
+    if (cartId == 0) {
       return;
     }
     this.loading = true;
-    
+
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
       this.redirectTo('/cart/booking');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1)
-      
-      setTimeout(()=>{
+
+      setTimeout(() => {
         this.cartService.setCartItems(this.carts);
         this.cartService.setCartPrices(this.cartPrices)
-      },2000)
+      }, 2000)
       if (this.carts.length == 0) {
         this.isCartEmpty = true;
       }
 
-      if(index>0){
-        this.cartService.setCartNumber(index-1);
+      if (index > 0) {
+        this.cartService.setCartNumber(index - 1);
       }
 
       localStorage.setItem('$crt', JSON.stringify(this.carts.length));
@@ -307,7 +307,7 @@ export class BookingComponent implements OnInit {
   saveAndSearch() {
     this.router.navigate(['/']);
     return false;
-    this.validationErrorMessage='';
+    this.validationErrorMessage = '';
     if (this.isValidTravelers) {
       this.loading = true;
       for (let i = 0; i < this.carts.length; i++) {
@@ -377,14 +377,14 @@ export class BookingComponent implements OnInit {
 
   }
 
-  continueToCheckout(){
+  continueToCheckout() {
 
-    this.validationErrorMessage='';
+    this.validationErrorMessage = '';
     this.validateCartItems();
 
-    if(this.cardToken==''){
-      if(this.validationErrorMessage==''){
-        this.validationErrorMessage=` Please select credit card`;
+    if (this.cardToken == '') {
+      if (this.validationErrorMessage == '') {
+        this.validationErrorMessage = ` Please select credit card`;
       }
       else {
         this.validationErrorMessage += ` and please select credit card`;
@@ -410,8 +410,8 @@ export class BookingComponent implements OnInit {
     }
   }
 
-  getCardListChange(data){
-    this.cardListChangeCount=data;
+  getCardListChange(data) {
+    this.cardListChangeCount = data;
   }
 
   removeNotAvailableError(){
