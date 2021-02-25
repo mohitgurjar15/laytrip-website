@@ -244,8 +244,12 @@
                         <div class="notifi_text mobile_notifi">
                             Bi-weekly and monthly installments plans also available
                         </div>
-                        <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy"
+                        <!-- <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy"
                             [innerHtml]="cancellationPolicy.cancellation_policy">
+                        </span> -->
+                        <span class="texts_rules">
+                            Non-refundable, non-transferable. Change policy reflected in Laytrip <a
+                                [routerLink]="['/terms']">Terms</a> which apply.
                         </span>
 
                         <!-- skeleton loader for rules -->

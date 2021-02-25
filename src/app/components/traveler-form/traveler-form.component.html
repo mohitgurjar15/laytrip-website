@@ -81,7 +81,7 @@
                           formControlName="country_code"> -->
                         <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="phonecode"
                           bindValue="phonecode" formControlName="country_code" [clearable]="false"></ng-select>
-                        <input type="text" class="form-control" maxlength="10" formControlName="phone_no">
+                        <input type="text" mask="000-000-0000" class="form-control" maxlength="14" formControlName="phone_no">
                       </span>
                       <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
                         class="error">
@@ -92,7 +92,7 @@
                     <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                       <label for="">{{'dob' | translate}}*</label>
                       <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
-                      <input type="text" class="form-control" bsDatepicker formControlName="dob" [bsConfig]="bsConfig"
+                      <input onkeydown="return false" type="text" class="form-control" bsDatepicker formControlName="dob" [bsConfig]="bsConfig"
                         [minDate]="traveler.controls.dobMinDate.value" [maxDate]="traveler.controls.dobMaxDate.value">
                       <!-- <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                         formControlName="dob" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
