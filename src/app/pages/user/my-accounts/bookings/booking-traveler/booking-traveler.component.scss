@@ -82,7 +82,7 @@
         .card-body {
             padding: 15px;
 
-            @include tab-view{
+            @include tab-view {
                 padding: 10px;
             }
 
@@ -301,7 +301,8 @@
                             color: $text-black;
                             font-size: 16px;
                             font-weight: 500;
-                            margin-right: 15px;
+                            // margin-right: 15px;
+                            flex: 1;
 
                             @include tab-view {
                                 display: flex;
@@ -412,6 +413,7 @@
                         #addon_tab {
                             flex-direction: row;
                             flex-wrap: nowrap;
+                            flex: auto;
 
                             // flex: 2;
                             @include tab-view {
@@ -424,6 +426,9 @@
 
                             li {
                                 margin-right: 5px;
+                                flex: 1;
+                                display: flex;
+                                text-align: center;
 
                                 @include tab-view {
                                     margin-bottom: 5px;
@@ -478,9 +483,9 @@
                             justify-content: flex-end;
                             width: 100%;
 
-                            span {
+                            .fake_span {
                                 flex: 1;
-                                max-width: 95px;
+                                max-width: 100px;
 
                                 @include tab-view {
                                     display: none;
