@@ -69,8 +69,13 @@
 
                     </div>
                     <div class="section_description" *ngIf="validationErrorMessage">
-                        <span class="sec_text">{{validationErrorMessage}}</span>
+                        <span class="sec_text">{{validationErrorMessage}}.</span>
                         <a (click)="removeValidationError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                alt="Close"></a>
+                    </div>
+                    <div class="section_description" *ngIf="isNotAvailableItinerary">
+                        <span class="sec_text">{{notAvailableError}}.</span>
+                        <a (click)="removeNotAvailableError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
                                 alt="Close"></a>
                     </div>
                 </div>

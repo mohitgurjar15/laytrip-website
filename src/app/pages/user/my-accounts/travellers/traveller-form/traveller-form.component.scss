@@ -6,7 +6,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 .ng-customClass.country_code {
-  width: 140px;
+  width: 90px;
 }
  
 .cmn_add_edit_modal {
@@ -321,6 +321,9 @@
         outline: none;
         box-shadow: none;
       }
+    }
+    &.duel_buttons{
+      justify-content: space-between;
     }
   }
 }

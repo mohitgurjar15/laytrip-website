@@ -57,6 +57,8 @@ export class BookingComponent implements OnInit {
   cardListChangeCount: number = 0;
   $cartIdsubscription;
   guestUserId:string='';
+  notAvailableError:string='';
+  isNotAvailableItinerary:boolean=false;
 
   constructor(
     private router: Router,
@@ -86,14 +88,13 @@ export class BookingComponent implements OnInit {
     this.cartLoading = true;
     this.cartService.getCartList('yes').subscribe((items: any) => {
       this.cartLoading = false;
-      let notAvilableItems = [];
       let cart: any;
       let price: any;
       for (let i = 0; i < items.data.length; i++) {
         cart = {};
         cart.type = items.data[i].type;
         cart.module_info = items.data[i].moduleInfo[0];
-        cart.is_available = items.data[i].id==1222?false:items.data[i].is_available;
+        cart.is_available = items.data[i].id==1265?false:items.data[i].is_available;
         cart.old_module_info = {
           selling_price: items.data[i].oldModuleInfo[0].selling_price
         };
@@ -107,20 +108,12 @@ export class BookingComponent implements OnInit {
         price.start_price = items.data[i].moduleInfo[0].start_price;
         price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         this.cartPrices.push(price)
-        if (items.data[i].is_available) {
-
-
-        }
-        else {
-          notAvilableItems.push(items.data[i])
-        }
+        
       }
       console.log("carts",this.carts)
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
-      if (notAvilableItems.length) {
-        // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
-      }
+      
     }, error => {
       this.isCartEmpty = true;
       this.cartLoading = false;
@@ -351,30 +344,37 @@ export class BookingComponent implements OnInit {
     if (!this.isValidTravelers) {
       this.validationErrorMessage='Complete required fields in Traveler Details for'
       let message='';
+      
+      console.log(this.carts,"this.carts[i]")
       for(let i in Object.keys(this.travelerForm.controls)){
         message='';
-        if(!this.carts[i].is_available){
-          
-        }
-        else if(this.travelerForm.controls[`type${i}`].status=="INVALID"){
-          message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and`;
+        if(typeof this.carts[i]!='undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`].status=="INVALID"){
+          message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
           this.validationErrorMessage +=message;
         }
       }
-
-      /* for(let cart of this.carts){
-        message='';
-        for(let i in Object.keys(this.travelerForm.controls)){
-          if(cart.id == this.travelerForm.controls[`type${i}`]['controls'].cartId.value && this.travelerForm.controls[`type${i}`].status=="INVALID"){
-            message = ` ${cart.module_info.departure_code}- ${cart.module_info.arrival_code} and`;
-            this.validationErrorMessage +=message;
-          }
-        }
-      } */
       
       let index = this.validationErrorMessage.lastIndexOf(" ");
       this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
     }
+    
+    let notAvailableMessage='';
+    this.notAvailableError='Itinerary is not available from ';
+    for(let i=0; i < this.carts.length; i++){
+      notAvailableMessage='';
+      if(!this.carts[i].is_available){
+        this.isNotAvailableItinerary=true;
+        notAvailableMessage = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+        this.notAvailableError +=notAvailableMessage;
+      }
+    }
+
+    if(this.isNotAvailableItinerary){
+      let index = this.notAvailableError.lastIndexOf(" ");
+      this.notAvailableError = this.notAvailableError.substring(0, index);
+      //this.notAvailableError +='.';
+    }
+
   }
 
   continueToCheckout(){
@@ -391,7 +391,7 @@ export class BookingComponent implements OnInit {
       }
     }
 
-    if (this.isValidTravelers && this.cardToken != '') {
+    if (this.isValidTravelers && this.cardToken != '' && !this.isNotAvailableItinerary) {
       this.loading = true;
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
@@ -412,5 +412,9 @@ export class BookingComponent implements OnInit {
 
   getCardListChange(data){
     this.cardListChangeCount=data;
+  }
+
+  removeNotAvailableError(){
+    this.isNotAvailableItinerary=false;
   }
 }

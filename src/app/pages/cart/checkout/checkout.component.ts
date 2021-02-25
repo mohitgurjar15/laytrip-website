@@ -62,7 +62,8 @@ export class CheckoutComponent implements OnInit {
     cart: [
     ],
     browser_info: {},
-    site_url: ""
+    site_url: "",
+    selected_down_payment:0
   }
   challengePopUp:boolean=false;
 
@@ -97,7 +98,6 @@ export class CheckoutComponent implements OnInit {
     this.cartLoading = true;
     this.cartService.getCartList('yes').subscribe((items: any) => {
       this.cartLoading = false;
-      let notAvilableItems = [];
       let cart: any;
       let price: any;
       for (let i = 0; i < items.data.length; i++) {
@@ -108,6 +108,7 @@ export class CheckoutComponent implements OnInit {
           selling_price: items.data[i].oldModuleInfo[0].selling_price
         };
         cart.travelers = items.data[i].travelers;
+        cart.is_available = items.data[i].id==1265?false:items.data[i].is_available;
         cart.id = items.data[i].id;
         this.carts.push(cart);
 
@@ -117,19 +118,11 @@ export class CheckoutComponent implements OnInit {
         price.start_price = items.data[i].moduleInfo[0].start_price;
         price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         this.cartPrices.push(price)
-        if (items.data[i].is_available) {
-
-
-        }
-        else {
-          notAvilableItems.push(items.data[i])
-        }
+        
       }
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
-      if (notAvilableItems.length) {
-        // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
-      }
+      
 
     }, error => {
       this.isCartEmpty = true;
@@ -263,7 +256,7 @@ export class CheckoutComponent implements OnInit {
       for (let i in Object.keys(this.travelerForm.controls)) {
         message = '';
         if (this.travelerForm.controls[`type${i}`].status == "INVALID") {
-          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} and `;
+          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
           this.validationErrorMessage += message;
         }
       }
@@ -281,6 +274,7 @@ export class CheckoutComponent implements OnInit {
     }
     let carts = this.carts.map(cart=>{ return {  cart_id: cart.id} })
     this.bookingRequest.card_token=this.cardToken;
+    this.bookingRequest.selected_down_payment=this.priceSummary.selectedDownPayment;
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
     this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
     this.bookingRequest.cart = carts;

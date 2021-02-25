@@ -37,6 +37,7 @@ export class AddCardComponent implements OnInit {
   saveCardLoader: boolean = false;
   expiryMinDate = new Date();
   cardListChangeCount: number = 0;
+  envKey:string='ZEtZM7nm85AsIuVL3BD74LNousS';
 
   mask = {
     guide: false,
@@ -75,7 +76,7 @@ export class AddCardComponent implements OnInit {
   }
 
   spreedlySdk() {
-    Spreedly.init('9KGMvRTcGfbQkaHQU0fPlr2jnQ8', {
+    Spreedly.init(this.envKey, {
       'numberEl': 'spreedly-number',
       'cvvEl': 'spreedly-cvv',
     });
@@ -89,6 +90,11 @@ export class AddCardComponent implements OnInit {
       Spreedly.setStyle('number', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;');
       Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;');
     });
+
+    Spreedly.on('validation', function(inputProperties) {
+      console.log("inputProperties",inputProperties)
+    });
+    
 
     Spreedly.on('errors', function (errors) {
       $(".credit_card_error").hide();

@@ -99,17 +99,37 @@
  -->
 <div class="title_bar">
     <h3>Traveler Details</h3>
-    <!-- <span class="edit_btns">
-        <a class="hover-link" (click)="onSubmit()">Add New</a>
-    </span> -->
+    <span class="edit_btns">
+        <a class="hover-link" href="javascript:void(0);">Add New</a>
+    </span>
 </div>
 <div class="travel_detail_bg_wrps">
     <div id="trav_accordion" class="traveller_accordion">
         <div class="card">
             <div id="collapseTrav" class="collapse show">
                 <div class="card-body">
-                    <app-traveller-form [countries]="countries" (loadingValue)="getLoadingValue($event)"
-                        (travelerFormChange)="pushTraveler($event)" #child [countries]="countries"></app-traveller-form>
+                    <!-- <app-traveller-form [countries]="countries" (loadingValue)="getLoadingValue($event)"
+                        (travelerFormChange)="pushTraveler($event)" #child [countries]="countries"></app-traveller-form> -->
+                    <div class="card" id="travller_new_accordion_inner">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#new_traveller_form"
+                                aria-controls="new_traveller_form" aria-expanded="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
+                                    <defs></defs>
+                                    <path class="a"
+                                        d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
+                                </svg>
+                                New form
+                            </a>
+                        </div>
+                        <div id="new_traveller_form" class="collapse show" data-parent="#travller_new_accordion_inner">
+                            <div class="card-body">
+                                <app-traveller-form [countries]="countries" (loadingValue)="getLoadingValue($event)"
+                                    (travelerFormChange)="pushTraveler($event)" #child [countries]="countries">
+                                </app-traveller-form>
+                            </div>
+                        </div>
+                    </div>
                     <div *ngFor="let traveler of  travelers;let x = index;" id="trav_accordion_inner"
                         class="traveller_accordion">
                         <div class="card">
@@ -135,9 +155,11 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="remove_wrps" *ngIf="traveler.roleId != 6">
+                        <!-- <span class="remove_wrps" *ngIf="traveler.roleId != 6">
                             <a class="hover-link" (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a>
-                        </span>
+                        </span> -->
+
+
                     </div>
                 </div>
             </div>
@@ -157,8 +179,9 @@
             <div class="block_im">
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
             </div>
-<!--             <h4 class="name_traveller">Delete Co - Traveler</h4>
- -->            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete account?</span></h4>
+            <!--             <h4 class="name_traveller">Delete Co - Traveler</h4>
+ -->
+            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete account?</span></h4>
 
             <div class="cta_btn_wrps">
                 <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>

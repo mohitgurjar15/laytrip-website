@@ -94,7 +94,8 @@
                         align-items: center;
                     }
                 }
-                .n_stop{
+
+                .n_stop {
                     width: 100%;
                     display: flex;
                     align-items: center;
@@ -155,6 +156,7 @@
             color: $active-tab-text;
             font-size: 9px;
             margin-left: 45px;
+            font-weight: 500;
 
             &[aria-expanded="true"] {
                 color: $mid_gray_bg;
@@ -272,7 +274,7 @@
                 .common_wrper {
                     display: flex;
 
-                    &:nth-child(2){
+                    &:nth-child(2) {
                         @include tab-view {
                             margin-top: 15px;
                         }
@@ -510,8 +512,29 @@
                     font-weight: 400;
                     text-align: center;
 
+                    @include tab-view {
+                        min-width: 71px;
+                    }
+
                     .fare_type {
                         color: $mid_gray_bg;
+
+                        &.desk_fare {
+                            @include tab-view {
+                                display: none;
+                            }
+                        }
+
+                        &.mobile_fare {
+                            display: none;
+
+                            @include tab-view {
+                                display: flex;
+                                font-size: 7px;
+                                text-align: center;
+                                margin-top: 5px;
+                            }
+                        }
                     }
 
                     .total_pr {
@@ -671,6 +694,18 @@
                 margin-top: 5px;
                 display: flex;
                 justify-content: flex-start;
+                &.desk_notifi{
+                    @include tab-view{
+                        display: none;
+                    }
+                }
+                &.mobile_notifi{
+                    display: none;
+                    @include tab-view{
+                        display: block;
+                        margin-bottom: 5px;
+                    }
+                }
             }
         }
     }
