@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+declare var $: any;
 
 @Component({
   selector: 'app-not-found',
@@ -19,6 +20,7 @@ export class NotFoundComponent implements OnInit {
   }
 
   closeModal() {
+    $('#not_found_modal').modal('hide');
     this.router.navigate(['/']);
   }
 
