@@ -110,11 +110,11 @@
                                     border: none;
                                     top: 5px;
 
-                                    @include tab-view {
-                                        position: absolute;
-                                        right: 0;
-                                        height: 12px;
-                                    }
+                                    // @include tab-view {
+                                    //     position: absolute;
+                                    //     right: 0;
+                                    //     height: 12px;
+                                    // }
                                 }
                             }
 
@@ -132,11 +132,11 @@
                                     border: none;
                                     top: 5px;
 
-                                    @include tab-view {
-                                        position: absolute;
-                                        right: 0;
-                                        height: 12px;
-                                    }
+                                    // @include tab-view {
+                                    //     position: absolute;
+                                    //     right: 0;
+                                    //     height: 12px;
+                                    // }
                                 }
                             }
                         }
