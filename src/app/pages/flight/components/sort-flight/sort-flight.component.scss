@@ -1,3 +1,16 @@
+@import "../../../../../_hotel.scss";
 .anchor_link{
     cursor: pointer;
+}
+
+.desktop_sort{
+	@include tab-view{
+		display: none;
+	}
+}
+.mobile_sort{
+	display: none;
+	@include tab-view{
+		display: block;
+	}
 }
