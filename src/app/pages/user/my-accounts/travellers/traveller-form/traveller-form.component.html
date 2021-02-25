@@ -58,8 +58,8 @@
                 <span class="tel_span">
                     <!-- <input (keypress)="commonFunction.validatePhoneCode($event)" type="text" class="form-control"
                         tabindex="25" maxlength="4" formControlName="country_code"> -->
-                    <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="countryCode" bindValue="countryCode" [clearable]="false"
-                        formControlName="country_code">
+                    <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="countryCode"
+                        bindValue="countryCode" [clearable]="false" formControlName="country_code">
                     </ng-select>
                     <input type="text" mask="000-000-0000" tabindex="26" class="form-control" maxlength="14"
                         formControlName="phone_no">
@@ -109,7 +109,7 @@
                         select
                         your country.</small>
                 </div>
- 
+
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult || isChild">
                 <label for="">{{'passport_number' |translate}}</label>
@@ -117,15 +117,19 @@
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account" *ngIf="isAdult || isChild">
                 <label for="">{{'passport_expiry_date' |translate}}</label>
-                <p-calendar [minDate]="expiryMinDate" tabindex="29" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date"
-                    inputId="basic" formControlName="passport_expiry" [readonlyInput]="true" [yearNavigator]="true"
-                    [monthNavigator]="true" yearRange="2021:2030">
+                <p-calendar [minDate]="expiryMinDate" tabindex="29" dateFormat="M d, yy" class="form-control"
+                    panelStyleClass="birth_date" inputId="basic" formControlName="passport_expiry"
+                    [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="2021:2030">
                 </p-calendar>
             </div>
-
         </div>
-        <span class="edit_btns">
-            <button (click)="onSubmit()" class="hover-link">{{ travellerId ? 'Update' : 'Save'}} </button>
+        <span class="edit_btns duel_buttons">
+            <span class="remove_wrps">
+                <button class="hover-link">Delete</button>
+            </span>
+            <button (click)="onSubmit()" class="hover-link">{{ travellerId ? 'Update' : 'Save'}}
+            </button>
         </span>
     </div>
+
 </form>
