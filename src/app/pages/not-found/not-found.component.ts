@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -9,10 +10,16 @@ import { environment } from '../../../environments/environment';
 export class NotFoundComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  constructor() { }
+  constructor(
+    public router: Router,
+  ) { }
   ngOnInit(): void {
     window.scroll(0, 0);
     document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
+  }
+
+  closeModal() {
+    this.router.navigate(['/']);
   }
 
 }
