@@ -37,6 +37,7 @@ export class AddCardComponent implements OnInit {
   saveCardLoader: boolean = false;
   expiryMinDate = new Date();
   cardListChangeCount: number = 0;
+  envKey:string='9KGMvRTcGfbQkaHQU0fPlr2jnQ8';
 
   mask = {
     guide: false,
@@ -75,7 +76,7 @@ export class AddCardComponent implements OnInit {
   }
 
   spreedlySdk() {
-    Spreedly.init('9KGMvRTcGfbQkaHQU0fPlr2jnQ8', {
+    Spreedly.init(this.envKey, {
       'numberEl': 'spreedly-number',
       'cvvEl': 'spreedly-cvv',
     });

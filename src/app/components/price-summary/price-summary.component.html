@@ -35,7 +35,7 @@
           <div class="card-header" id="headingOne">
             <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc"
               aria-expanded="true" aria-controls="instalment_acc">
-              {{priceSummary.instalments?.instalment_date?.length-1}} Monthly Installments of ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount |
+              {{priceSummary.instalments?.instalment_date?.length-1}} {{installmentType[priceSummary.instalmentType]}} Installments of ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount |
                 number : '1.2-2'}}
             </button>
           </div>

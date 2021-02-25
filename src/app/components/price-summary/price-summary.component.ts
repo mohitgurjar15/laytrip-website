@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { CommonFunction } from '../../_helpers/common-function';
+import {installmentType} from '../../_helpers/generic.helper';
 
 @Component({
   selector: 'app-price-summary',
@@ -14,10 +15,13 @@ export class PriceSummaryComponent implements OnInit {
   insatllmentAmount:number=0;
   s3BucketUrl=environment.s3BucketUrl;
   installmentVartion:number=0;
+  installmentType;
   
   constructor(
     private commonFunction:CommonFunction
-  ) { }
+  ) {
+    this.installmentType= installmentType.en;
+   }
 
   ngOnInit(): void {
     console.log("changes", this.priceSummary);
@@ -26,13 +30,11 @@ export class PriceSummaryComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     this.insatllmentAmount=0;
     if (typeof changes['priceSummary'].currentValue!='undefined') {
-      console.log("changes",changes);
       this.priceSummary = changes['priceSummary'].currentValue;
       if(typeof this.priceSummary.instalments!=='undefined' && this.priceSummary.paymentType=='instalment'){
        for(let i =1 ; i<this.priceSummary.instalments.instalment_date.length; i++){
           this.insatllmentAmount += this.priceSummary.instalments.instalment_date[i].instalment_amount
        }
-       console.log(this.insatllmentAmount, 'this.insatllmentAmount::::::');
 
        if(this.priceSummary.instalments.instalment_date.length>2){
 
