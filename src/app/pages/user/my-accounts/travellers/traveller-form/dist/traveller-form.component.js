@@ -13,7 +13,7 @@ var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
 var custom_validators_1 = require("../../../../../_helpers/custom.validators");
 var TravellerFormComponent = /** @class */ (function () {
-    function TravellerFormComponent(formBuilder, router, commonFunction, toastr, cookieService, travelerService, checkOutService) {
+    function TravellerFormComponent(formBuilder, router, commonFunction, toastr, cookieService, travelerService, checkOutService, modalService) {
         this.formBuilder = formBuilder;
         this.router = router;
         this.commonFunction = commonFunction;
@@ -21,9 +21,11 @@ var TravellerFormComponent = /** @class */ (function () {
         this.cookieService = cookieService;
         this.travelerService = travelerService;
         this.checkOutService = checkOutService;
+        this.modalService = modalService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loadingValue = new core_1.EventEmitter();
         this.travelerFormChange = new core_1.EventEmitter();
+        this.deleteTravelerId = new core_1.EventEmitter();
         // countries = [];
         this.countries_code = [];
         this.is_gender = true;
@@ -151,7 +153,6 @@ var TravellerFormComponent = /** @class */ (function () {
         if (this.travellerId) {
             this.selectDob(moment(this.travellerForm.controls.dob.value).format('YYYY-MM-DD'));
         }
-        console.log(this.travellerForm);
         if (this.travellerForm.invalid) {
             Object.keys(controls).forEach(function (controlName) {
                 return controls[controlName].markAsTouched();
@@ -229,7 +230,7 @@ var TravellerFormComponent = /** @class */ (function () {
         if (selectedDate < adult12YrPastDate) {
             this.isAdult = true;
             this.isChild = false;
-            emailControl.setValidators(forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$'));
+            emailControl.setValidators([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
             phoneControl.setValidators([forms_1.Validators.required, forms_1.Validators.minLength(10)]);
             countryControl.setValidators([forms_1.Validators.required]);
         }
@@ -252,6 +253,34 @@ var TravellerFormComponent = /** @class */ (function () {
         emailControl.updateValueAndValidity();
         countryControl.updateValueAndValidity();
     };
+    TravellerFormComponent.prototype.deleteTraveller = function (travellerId) {
+        this.deleteTravelerId.emit(travellerId);
+    };
+    TravellerFormComponent.prototype.openDeleteModal = function (content, userId) {
+        var _this = this;
+        if (userId === void 0) { userId = ''; }
+        this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
+        this.userId = userId;
+        this.modalReference.result.then(function (result) {
+            _this.closeResult = "Closed with: " + result;
+        }, function (reason) {
+            // this.getTravelers();
+            // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    };
+    TravellerFormComponent.prototype.deleteTravellerData = function () {
+        var _this = this;
+        this.travelerService["delete"](this.userId).subscribe(function (data) {
+            _this.travelerFormChange.emit(_this.userId);
+        }, function (error) {
+            if (error.status === 401) {
+                _this.router.navigate(['/']);
+            }
+            else {
+            }
+        });
+        this.modalReference.close();
+    };
     __decorate([
         core_1.Input()
     ], TravellerFormComponent.prototype, "travellerId");
@@ -267,6 +296,9 @@ var TravellerFormComponent = /** @class */ (function () {
     __decorate([
         core_1.Output()
     ], TravellerFormComponent.prototype, "travelerFormChange");
+    __decorate([
+        core_1.Output()
+    ], TravellerFormComponent.prototype, "deleteTravelerId");
     TravellerFormComponent = __decorate([
         core_1.Component({
             selector: 'app-traveller-form',

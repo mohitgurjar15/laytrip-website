@@ -86,28 +86,6 @@ var ListTravellerComponent = /** @class */ (function () {
             // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
     };
-    ListTravellerComponent.prototype.deleteTraveller = function () {
-        var _this = this;
-        this.travelerService["delete"](this.userId).subscribe(function (data) {
-            _this.getTravelers();
-            if (data.message) {
-                // this.toastr.success('Traveler deleted successfully.', 'Success');
-            }
-            else {
-                // this.toastr.error(data.message, 'Failure');
-            }
-        }, function (error) {
-            if (error.status === 401) {
-                // this.toastr.error(error.error.errorMsg, 'Error');
-                _this.router.navigate(['/']);
-            }
-            else {
-                _this.getTravelers();
-                // this.toastr.error(error.error.errorMsg, 'Error');
-            }
-        });
-        this.modalReference.close();
-    };
     ListTravellerComponent.prototype.getCountry = function () {
         var _this = this;
         this.genericService.getCountry().subscribe(function (data) {
@@ -139,7 +117,6 @@ var ListTravellerComponent = /** @class */ (function () {
         for (var i = 0; i < checkboxes.length; i++) {
             this.travelers[i].isSelected = this.isMasterSel;
         }
-        console.log(this.travelers);
         this.getCheckedItemList();
     };
     ListTravellerComponent.prototype.isAllSelected = function () {
@@ -209,9 +186,17 @@ var ListTravellerComponent = /** @class */ (function () {
     ListTravellerComponent.prototype.getLoadingValue = function (event) {
         this.loadingValue.emit(event ? event : false);
     };
+    ListTravellerComponent.prototype.getTravellerIdFromChild = function (travelerId) {
+        this.openDeleteModal('deleteContent', travelerId);
+    };
     ListTravellerComponent.prototype.pushTraveler = function (traveler) {
-        this.travelers = this.travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
-        this.travelers.push(traveler);
+        if (typeof traveler == 'string') {
+            this.travelers = this.travelers.filter(function (obj) { return obj.userId !== traveler; });
+        }
+        else {
+            this.travelers = this.travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
+            this.travelers.push(traveler);
+        }
     };
     __decorate([
         core_1.ViewChild(traveller_form_component_1.TravellerFormComponent, { static: false })

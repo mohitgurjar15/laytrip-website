@@ -51,24 +51,19 @@
                                 data-parent="#trav_accordion_inner">
                                 <div class="card-body">
                                     <app-traveller-form [countries]="countries" (loadingValue)="getLoadingValue($event)"
-                                        (travelerFormChange)="pushTraveler($event)" [travelerInfo]="traveler"
+                                        (travelerFormChange)="pushTraveler($event)" (deleteTravelerId)="getTravellerIdFromChild($event)" [travelerInfo]="traveler"
                                         [travellerId]="traveler.userId"></app-traveller-form>
                                 </div>
                             </div>
                         </div>
-                        <!-- <span class="remove_wrps" *ngIf="traveler.roleId != 6">
-                            <a class="hover-link" (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a>
-                        </span> -->
-
-
-                    </div>
+                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
+<!-- 
 <ng-template #deleteContent let-modal>
     <div class="delete_account_block">
         <div class="modal-header">
@@ -80,8 +75,7 @@
             <div class="block_im">
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
             </div>
-            <!--             <h4 class="name_traveller">Delete Co - Traveler</h4>
- -->
+       
             <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete account?</span></h4>
 
             <div class="cta_btn_wrps">
@@ -95,4 +89,4 @@
             </div>
         </div>
     </div>
-</ng-template>
+</ng-template> -->
