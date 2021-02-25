@@ -83,6 +83,8 @@ export class TravellerFormComponent implements OnInit {
       passport_expiry: [''],
       passport_number: [''],
     }, { validators: phoneAndPhoneCodeValidation() });
+    
+    // this.travelerFormChange.emit(this.travellerForm);
 
     this.setUserTypeValidation();
     if (this.travellerId) {
@@ -96,12 +98,15 @@ export class TravellerFormComponent implements OnInit {
     var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     var travellerDob = moment(this.travelerInfo.dob).format('YYYY-MM-DD');
+    const phoneControl = this.travellerForm.get('phone_no');
+    const emailControl = this.travellerForm.get('email');
     if (travellerDob < adult12YrPastDate) {
       this.isAdult = true;
       this.isChild = false;
-      const phoneControl = this.travellerForm.get('phone_no');
       phoneControl.setValidators([Validators.required]);
+      emailControl.setValidators([Validators.required]);
       phoneControl.updateValueAndValidity();
+      emailControl.updateValueAndValidity();
 
     } else if (travellerDob < child2YrPastDate) {
       this.isAdult = false;
@@ -111,7 +116,6 @@ export class TravellerFormComponent implements OnInit {
       this.isAdult = this.isChild = false;
       this.travellerForm.setErrors(null);
     }
-
     this.travellerForm.patchValue({
       // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
       firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
@@ -123,7 +127,7 @@ export class TravellerFormComponent implements OnInit {
       country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
       dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
       passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
-      passport_expiry: this.travelerInfo.passportExpiry ? new Date(this.travelerInfo.passportExpiry) : '',
+      passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : '',
     });
   }
 
@@ -173,6 +177,7 @@ export class TravellerFormComponent implements OnInit {
     if (this.travellerId) {
       this.selectDob(moment(this.travellerForm.controls.dob.value).format('YYYY-MM-DD'));
     }
+    console.log(this.travellerForm)
     if (this.travellerForm.invalid) {
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()

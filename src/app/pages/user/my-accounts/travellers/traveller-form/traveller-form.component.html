@@ -123,11 +123,11 @@
                 </p-calendar>
             </div>
         </div>
-        <span class="edit_btns duel_buttons">
+        <span class="edit_btns duel_buttons" *ngIf="travellerId">
             <span class="remove_wrps">
-                <button class="hover-link">Delete</button>
+                <button class="hover-link" *ngIf="traveller.roleId != 6">Delete</button>
             </span>
-            <button (click)="onSubmit()" class="hover-link">{{ travellerId ? 'Update' : 'Save'}}
+            <button (click)="onSubmit()" class="hover-link">{{ travellerId ? 'Update' : ''}}
             </button>
         </span>
     </div>

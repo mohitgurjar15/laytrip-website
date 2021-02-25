@@ -10,6 +10,7 @@ exports.ListTravellerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var moment = require("moment");
+var traveller_form_component_1 = require("./traveller-form/traveller-form.component");
 var ListTravellerComponent = /** @class */ (function () {
     function ListTravellerComponent(travelerService, router, modalService, toastr, genericService, cookieService) {
         this.travelerService = travelerService;
@@ -155,11 +156,16 @@ var ListTravellerComponent = /** @class */ (function () {
         }
         this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
     };
-    ListTravellerComponent.prototype.onSubmit = function () {
+    ListTravellerComponent.prototype.submitTravellerForm = function () {
         var _this = this;
-        var formData = this.childCompopnent.travellerForm;
+        this.loadingValue.emit(true);
+        var formData = this.childComponent.travellerForm;
         if (formData.invalid) {
-            console.log('sds');
+            Object.keys(formData.controls).forEach(function (controlName) {
+                return formData.controls[controlName].markAsTouched();
+            });
+            this.loadingValue.emit(false);
+            return;
         }
         else {
             var country_id = formData.value.country_id.id;
@@ -171,32 +177,27 @@ var ListTravellerComponent = /** @class */ (function () {
                     country_id = this.location.country.id;
                 }
             }
-            console.log(country_id);
             var jsonData = {
                 first_name: formData.value.firstName,
                 last_name: formData.value.lastName,
                 dob: typeof formData.value.dob === 'object' ? moment(formData.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(formData.value.dob, '/')).format('YYYY-MM-DD'),
-                gender: formData.value.gender,
+                gender: formData.value.gender ? formData.value.gender : 'M',
                 country_id: country_id ? country_id : '',
                 passport_expiry: typeof formData.value.passport_expiry === 'object' ? moment(formData.value.passport_expiry).format('YYYY-MM-DD') : null,
                 passport_number: formData.value.passport_number,
                 country_code: formData.value.country_code ? formData.value.country_code : '',
                 phone_no: formData.value.phone_no
             };
-            console.log(formData, jsonData);
+            var emailObj = { email: formData.value.email ? formData.value.email : '' };
             this.travelerService.addAdult(jsonData).subscribe(function (data) {
-                // this.travelersChanges.emit(data);
-                console.log(data);
                 _this.getTravelers();
+                _this.loadingValue.emit(false);
             }, function (error) {
-                console.log('error');
-                _this.loading = false;
+                _this.loadingValue.emit(false);
                 if (error.status === 401) {
                     _this.router.navigate(['/']);
                 }
                 else {
-                    _this.loading = false;
-                    _this.toastr.error(error.error.message, 'Traveller Add Error');
                 }
             });
         }
@@ -213,8 +214,8 @@ var ListTravellerComponent = /** @class */ (function () {
         this.travelers.push(traveler);
     };
     __decorate([
-        core_1.ViewChild('child', { static: false })
-    ], ListTravellerComponent.prototype, "childCompopnent");
+        core_1.ViewChild(traveller_form_component_1.TravellerFormComponent, { static: false })
+    ], ListTravellerComponent.prototype, "childComponent");
     __decorate([
         core_1.Output()
     ], ListTravellerComponent.prototype, "loadingValue");

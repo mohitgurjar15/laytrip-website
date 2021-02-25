@@ -55,11 +55,12 @@ var TravellerFormComponent = /** @class */ (function () {
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
-            country_code: ['01', [forms_1.Validators.required]],
+            country_code: ['+1', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
             passport_number: ['']
         }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });
+        // this.travelerFormChange.emit(this.travellerForm);
         this.setUserTypeValidation();
         if (this.travellerId) {
             this.setTravelerForm();
@@ -70,12 +71,15 @@ var TravellerFormComponent = /** @class */ (function () {
         var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
         var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
         var travellerDob = moment(this.travelerInfo.dob).format('YYYY-MM-DD');
+        var phoneControl = this.travellerForm.get('phone_no');
+        var emailControl = this.travellerForm.get('email');
         if (travellerDob < adult12YrPastDate) {
             this.isAdult = true;
             this.isChild = false;
-            var phoneControl = this.travellerForm.get('phone_no');
             phoneControl.setValidators([forms_1.Validators.required]);
+            emailControl.setValidators([forms_1.Validators.required]);
             phoneControl.updateValueAndValidity();
+            emailControl.updateValueAndValidity();
         }
         else if (travellerDob < child2YrPastDate) {
             this.isAdult = false;
@@ -97,7 +101,7 @@ var TravellerFormComponent = /** @class */ (function () {
             country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
             dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
             passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
-            passport_expiry: this.travelerInfo.passportExpiry ? new Date(this.travelerInfo.passportExpiry) : ''
+            passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : ''
         });
     };
     TravellerFormComponent.prototype.changeDateOfBirth = function (event) {
@@ -147,6 +151,7 @@ var TravellerFormComponent = /** @class */ (function () {
         if (this.travellerId) {
             this.selectDob(moment(this.travellerForm.controls.dob.value).format('YYYY-MM-DD'));
         }
+        console.log(this.travellerForm);
         if (this.travellerForm.invalid) {
             Object.keys(controls).forEach(function (controlName) {
                 return controls[controlName].markAsTouched();
