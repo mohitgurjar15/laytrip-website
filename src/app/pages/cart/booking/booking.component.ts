@@ -88,7 +88,6 @@ export class BookingComponent implements OnInit {
     this.cartLoading = true;
     this.cartService.getCartList('yes').subscribe((items: any) => {
       this.cartLoading = false;
-      let notAvilableItems = [];
       let cart: any;
       let price: any;
       for (let i = 0; i < items.data.length; i++) {
@@ -109,20 +108,12 @@ export class BookingComponent implements OnInit {
         price.start_price = items.data[i].moduleInfo[0].start_price;
         price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         this.cartPrices.push(price)
-        /* if (items.data[i].is_available) {
-
-
-        }
-        else {
-          notAvilableItems.push(items.data[i])
-        } */
+        
       }
       console.log("carts",this.carts)
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
-      if (notAvilableItems.length) {
-        // this.toastrService.warning(`${notAvilableItems.length} itinerary is not available`);
-      }
+      
     }, error => {
       this.isCartEmpty = true;
       this.cartLoading = false;
