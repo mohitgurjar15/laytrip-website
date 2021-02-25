@@ -1,0 +1,93 @@
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.block_not_found_main {
+    padding: 0;
+    display: block;
+    background-color: $mid_gray_bg;
+}
+.cartempty_main_wrapper {
+    background-color: $background-white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 0 0;
+    border-radius: 10px;
+
+    @include tab-view {
+        padding: 15px 0;
+    }
+
+    .inner_wrppar {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .cart_img_wrpper {
+            img {
+                max-width: 80px;
+            }
+
+            margin-bottom: 20px;
+        }
+
+        .cart_msg {
+            color: $blue-text;
+            font-size: 23px;
+            margin-bottom: 5px;
+            margin: 5px 0 15px;
+            font-weight: 500;
+
+            @include tab-view {
+                font-size: 18px;
+            }
+        }
+
+        .page_para{
+            color: $text_grey_dark;
+            font-size: 14px;
+            margin: 0;
+        }
+        .logo_wrpper_footer {
+            img {
+                height: 32px;
+                margin-top: 20px;
+            }
+        }
+    }
+}
+
+
+.modal-dialog {
+    max-width: 514px;
+    width: 96%;
+
+    .modal-content {
+        max-width: 510px;
+        margin: 0 auto;
+        border-radius: 10px;
+
+        .modal_title {
+            .close {
+                position: absolute;
+                right: 20px;
+                top: 16px;
+                z-index: 9;
+                cursor: pointer;
+
+                img {
+                    max-width: 10px;
+                }
+            }
+        }
+
+        .cart_modal_wrp {
+            padding: 32px 20px;
+        }
+    }
+}
