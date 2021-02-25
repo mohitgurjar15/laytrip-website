@@ -228,6 +228,9 @@
                             <span class="texts">
                                 ${{item.selling_price | number : '1.2-2'}} including taxes and fees
                             </span>
+                            <div class="notifi_text mobile_notifi">
+                                Bi-weekly and monthly installments plans also available
+                            </div>
                         </div>
                     </div>
 
@@ -241,9 +244,7 @@
                         <!-- <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy && !loadMoreCancellationPolicy"
                     [innerHtml]="cancellationPolicyArray[0]">
                     </span> -->
-                        <div class="notifi_text mobile_notifi">
-                            Bi-weekly and monthly installments plans also available
-                        </div>
+                        
                         <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy"
                             [innerHtml]="cancellationPolicy.cancellation_policy">
                         </span>
