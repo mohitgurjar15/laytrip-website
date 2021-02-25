@@ -16,24 +16,54 @@ export class CartItemComponent implements OnInit {
   @Input() travelers: [];
   @Input() cartNumber: number;
   priceFluctuationAmount:number=0;
+  cartAlerts=[];
 
 
   constructor(
     public commonFunction: CommonFunction,
     private cd: ChangeDetectorRef,
     private cartService:CartService
-  ) { }
+  ) {
+    /* this.cartService.getCartAlerts.subscribe(data=>{
+      this.cartAlerts = data;
+      console.log(this.cartAlerts,"this.cartAlerts")
+    }) */
+   }
 
   ngOnInit(): void {
     
   }
 
   ngOnChanges(changes: SimpleChanges) {
+
+    try{
+      let cartAlerts = localStorage.getItem("__alrt")
+      if(cartAlerts){
+        this.cartAlerts= JSON.parse(cartAlerts)
+      }
+      else{
+        this.cartAlerts=[]
+      }
+    }
+    catch(e){
+      this.cartAlerts=[];
+    }
+
     if (changes && changes['cartItem']) {
       this.cartItem = changes['cartItem'].currentValue;
 
       if(this.cartItem.old_module_info.selling_price!=this.cartItem.module_info.selling_price){
         this.priceFluctuationAmount = this.cartItem.module_info.selling_price - this.cartItem.old_module_info.selling_price;
+        let indexExist = this.cartAlerts.findIndex(x=>x.id==this.cartItem.id);
+
+        if(indexExist==-1){
+          this.cartAlerts.push({
+            type : 'price_change',
+            id : this.cartItem.id
+          })
+          localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
+        }
+        
       }
       this.cd.detectChanges();
     }

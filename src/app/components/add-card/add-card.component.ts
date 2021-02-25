@@ -37,7 +37,7 @@ export class AddCardComponent implements OnInit {
   saveCardLoader: boolean = false;
   expiryMinDate = new Date();
   cardListChangeCount: number = 0;
-  envKey:string='ZEtZM7nm85AsIuVL3BD74LNousS';
+  envKey:string='9KGMvRTcGfbQkaHQU0fPlr2jnQ8';
 
   mask = {
     guide: false,
