@@ -120,7 +120,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.checkUser();
-    this.cartOverLimit = localStorage.getItem('$cartOver');
+    this.cartOverLimit = JSON.parse(localStorage.getItem('$cartOver'));
     this.cd.detectChanges();
     let host = window.location.href;
     this.isCovidPage = true;
