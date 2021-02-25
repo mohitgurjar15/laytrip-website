@@ -17,6 +17,7 @@ export class CartItemComponent implements OnInit {
   @Input() cartNumber: number;
   priceFluctuationAmount:number=0;
   cartAlerts=[];
+  origin:string='';
 
 
   constructor(
@@ -24,14 +25,11 @@ export class CartItemComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private cartService:CartService
   ) {
-    /* this.cartService.getCartAlerts.subscribe(data=>{
-      this.cartAlerts = data;
-      console.log(this.cartAlerts,"this.cartAlerts")
-    }) */
+   
    }
 
   ngOnInit(): void {
-    
+    this.origin = window.location.pathname;
   }
 
   ngOnChanges(changes: SimpleChanges) {

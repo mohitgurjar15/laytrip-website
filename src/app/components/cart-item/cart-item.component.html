@@ -25,7 +25,7 @@
                 </span>
                 {{cartItem.module_info?.arrival_code}}
 
-                <div class="section_description" *ngIf="priceFluctuationAmount!=0">
+                <div class="section_description" *ngIf="origin=='/cart/booking' && priceFluctuationAmount!=0">
                   <span class="sec_text">The price for this booking has {{ priceFluctuationAmount > 0 ? 'increased' :
                     'decreased' }} from ${{cartItem.old_module_info.selling_price}} to
                     ${{cartItem.module_info.selling_price}}.</span>

@@ -442,4 +442,8 @@ export class BookingComponent implements OnInit {
   removeNotAvailableError(){
     this.isNotAvailableItinerary=false;
   }
+
+  removeAllAlertError(){
+    this.isAllAlertClosed=true;
+  }
 }

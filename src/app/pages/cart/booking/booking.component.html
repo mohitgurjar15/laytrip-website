@@ -80,7 +80,7 @@
                     </div>
                     <div class="section_description" *ngIf="!isAllAlertClosed">
                         <span class="sec_text">Please close all alert box from itinerary and payment summary if any in order to checkout.</span>
-                        <a (click)="removeNotAvailableError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                        <a (click)="removeAllAlertError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
                                 alt="Close"></a>
                     </div>
                 </div>
