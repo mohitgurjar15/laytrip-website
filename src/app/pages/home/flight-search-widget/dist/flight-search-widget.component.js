@@ -99,14 +99,15 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 //this.toAirport = airports[this.toDestinationCode];
                 _this.toggleOnewayRoundTrip(params['trip']);
                 _this.searchFlightInfo["class"] = params['class'];
-                _this.departureDate = new Date(params['departure_date']);
+                _this.departureDate = moment(params['departure_date']).toDate();
+                // console.log(params['departure_date'], moment(params['departure_date']).format("YYYY-MM-DD"))
                 if (moment(_this.departureDate).format("YYYY-MM-DD") < _this.customStartDateValidation) {
                     // this.router.navigate(['/flight/flight-not-found'])
                 }
                 _this.currentMonth = moment(_this.departureDate).format("MM");
                 _this.currentYear = moment(_this.departureDate).format("YYYY");
                 // this.returnDate = new Date(params['arrival_date']);
-                _this.returnDate = params['arrival_date'] ? new Date(params['arrival_date']) : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
+                _this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
                 _this.rangeDates = [_this.departureDate, _this.returnDate];
             }
             else {
@@ -176,10 +177,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.searchFlightInfo.arrival = this.toSearch.code;
     };
-    FlightSearchWidgetComponent.prototype.getDateWithFormat = function (date) {
-        this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
-        // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
-    };
+    /* getDateWithFormat(date) {
+      this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
+    } */
     FlightSearchWidgetComponent.prototype.changeTravellerInfo = function (event) {
         this.searchFlightInfo.adult = event.adult;
         this.searchFlightInfo.child = event.child;
@@ -212,6 +212,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
               queryParams: queryParams,
               queryParamsHandling: 'merge'
             }); */
+            console.log(this);
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
                 _this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
             });

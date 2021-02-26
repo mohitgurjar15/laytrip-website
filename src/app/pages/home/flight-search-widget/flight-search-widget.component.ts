@@ -130,15 +130,15 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.toggleOnewayRoundTrip(params['trip']);
 
         this.searchFlightInfo.class = params['class'];
-
-        this.departureDate = new Date(params['departure_date']);
+        this.departureDate = moment(params['departure_date']).toDate();
+        // console.log(params['departure_date'], moment(params['departure_date']).format("YYYY-MM-DD"))
         if(moment(this.departureDate).format("YYYY-MM-DD") < this.customStartDateValidation){
             // this.router.navigate(['/flight/flight-not-found'])
         }
         this.currentMonth = moment(this.departureDate).format("MM");
         this.currentYear = moment(this.departureDate).format("YYYY");
         // this.returnDate = new Date(params['arrival_date']);
-        this.returnDate = params['arrival_date'] ? new Date(params['arrival_date']) : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
+        this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
         this.rangeDates = [this.departureDate, this.returnDate];
       } else {
         this.calPrices = false;
@@ -237,7 +237,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     queryParams.departure = this.fromSearch.code ? this.fromSearch.code : this.searchFlightInfo.departure;
     queryParams.arrival = this.toSearch.code ? this.toSearch.code : this.searchFlightInfo.arrival;
     queryParams.departure_date = moment(this.departureDate).format('YYYY-MM-DD');
-    
     if (this.isRoundTrip === true) {
       queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
     }
@@ -252,6 +251,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         queryParams: queryParams,
         queryParamsHandling: 'merge'
       }); */
+      console.log(this)
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
