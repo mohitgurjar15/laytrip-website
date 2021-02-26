@@ -59,6 +59,7 @@ export class BookingComponent implements OnInit {
   guestUserId:string='';
   notAvailableError:string='';
   isNotAvailableItinerary:boolean=false;
+  isAllAlertClosed:boolean=true;
 
   constructor(
     private router: Router,
@@ -76,6 +77,7 @@ export class BookingComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
+    localStorage.removeItem("__alrt")
     this.userInfo = getLoginUserInfo();
     if (this.userInfo && this.userInfo.roleId != 7) {
       this.getTravelers();
@@ -376,6 +378,28 @@ export class BookingComponent implements OnInit {
       //this.notAvailableError +='.';
     }
 
+    let cartAlerts = localStorage.getItem("__alrt")
+    try{
+
+      if(cartAlerts){
+        cartAlerts = JSON.parse(cartAlerts);
+        if(cartAlerts.length){
+          this.isAllAlertClosed=false;
+        }
+        else{
+          this.isAllAlertClosed=true;
+        }
+      }
+      else{
+        this.isAllAlertClosed=true;
+      }
+    }
+    catch(e){
+      this.isAllAlertClosed=true;
+    }
+
+    console.log("this.isAllAlertClosed",this.isAllAlertClosed,cartAlerts)
+
   }
 
   continueToCheckout() {
@@ -392,7 +416,7 @@ export class BookingComponent implements OnInit {
       }
     }
 
-    if (this.isValidTravelers && this.cardToken != '' && !this.isNotAvailableItinerary) {
+    if (this.isValidTravelers && this.cardToken != '' && !this.isNotAvailableItinerary && this.isAllAlertClosed) {
       this.loading = true;
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
@@ -417,5 +441,9 @@ export class BookingComponent implements OnInit {
 
   removeNotAvailableError(){
     this.isNotAvailableItinerary=false;
+  }
+
+  removeAllAlertError(){
+    this.isAllAlertClosed=true;
   }
 }

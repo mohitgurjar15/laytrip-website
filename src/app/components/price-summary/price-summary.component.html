@@ -43,9 +43,9 @@
             <div class="card-body">
               <div class="pay_sap_setions" *ngIf="typeOf(priceSummary.instalments)!='undefined'">
 
-                <div class="section_description total_price_popup" *ngIf="installmentVartion>0">
+                <div class="section_description total_price_popup" *ngIf="origin=='/cart/booking' && installmentVartion>0">
                   <span class="sec_text">If your plan has an odd Total Price, your final payment will show a slightly higher amount.</span>
-                  <a (click)="closeInstallmentVartion()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+                  <a (click)="closeInstallmentVartion(-1)"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                 </div>
 
                 <div class="due_details" *ngFor="let instalment of priceSummary.instalments.instalment_date | slice:1; let i = index;">

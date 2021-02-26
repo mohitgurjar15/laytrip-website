@@ -203,16 +203,24 @@
     }
 }
 
-.section_description {
-    transform: translate(0%, -30%);
-    max-width: 445px;
-    position: relative;
-    justify-content: space-between;
-
-    a {
-        width: 10px !important;
+.error_wrapper{
+    display: flex;
+    flex-direction: column;
+    .section_description {
+        transform: translate(0%, -0%);
+        max-width: 445px;
+        position: relative;
+        justify-content: space-between;
+        flex: 1;
+        width: 100%;
+        margin-bottom: 5px;
+    
+        a {
+            width: 10px !important;
+        }
     }
 }
+
 
 .btn_payment {
     display: flex;

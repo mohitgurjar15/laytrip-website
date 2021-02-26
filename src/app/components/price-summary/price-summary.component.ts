@@ -17,6 +17,7 @@ export class PriceSummaryComponent implements OnInit {
   installmentVartion:number=0;
   installmentType;
   cartAlerts=[];
+  origin:string='';
   
   constructor(
     private commonFunction:CommonFunction
@@ -25,7 +26,7 @@ export class PriceSummaryComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log("changes", this.priceSummary);
+    this.origin = window.location.pathname;
   }
   
   ngOnChanges(changes: SimpleChanges) {
@@ -74,7 +75,24 @@ export class PriceSummaryComponent implements OnInit {
     return typeof value;
   }
 
-  closeInstallmentVartion(){
+  closeInstallmentVartion(id){
+    try{
+      let cartAlerts = localStorage.getItem("__alrt")
+      if(cartAlerts){
+        this.cartAlerts= JSON.parse(cartAlerts)
+        let index = this.cartAlerts.findIndex(x=>x.id==id)
+        this.cartAlerts.splice(index,1)
+      }
+      else{
+        this.cartAlerts=[]
+      }
+    }
+    catch(e){
+      this.cartAlerts=[];
+    }
+    
+    localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
     this.installmentVartion=0;
+
   }
 }

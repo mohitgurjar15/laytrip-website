@@ -29,18 +29,19 @@ export class ListTravellerComponent implements OnInit {
   dataPassToChild: any = null;
   modalReference: any;
   notFound = false;
-  perPageLimitConfig=[10,25,50,100];
-  pageNumber:1;
-  limit:number;
-  pageSize=10;
+  perPageLimitConfig = [10, 25, 50, 100];
+  pageNumber: 1;
+  limit: number;
+  pageSize = 10;
   showPaginationBar: boolean = false;
-  isMasterSel:boolean;
-  categoryList:any;
-  checkedCategoryList:any;
+  isMasterSel: boolean;
+  categoryList: any;
+  checkedCategoryList: any;
   selectedAll: any;
   selectedAllSecondname: any;
   name: any;
-  @ViewChild('child',{static:false}) childCompopnent: any;
+  // @ViewChild('child',{static:false}) childCompopnent: any;
+  @ViewChild(TravellerFormComponent, { static: false }) childComponent: TravellerFormComponent;
   location;
   traveller: any = [];
   @Output() loadingValue = new EventEmitter<boolean>();
@@ -56,7 +57,7 @@ export class ListTravellerComponent implements OnInit {
 
   ) {
     this.isMasterSel = false;
-   }
+  }
 
 
   ngOnInit() {
@@ -66,11 +67,11 @@ export class ListTravellerComponent implements OnInit {
     }
     catch (e) {
     }
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.getCountry();
-    this.pageNumber=1;
-    this.limit=this.perPageLimitConfig[0];
-  
+    this.pageNumber = 1;
+    this.limit = this.perPageLimitConfig[0];
+
     this.loading = true;
     this.getTravelers();
     this.getCheckedItemList();
@@ -78,20 +79,20 @@ export class ListTravellerComponent implements OnInit {
 
   pageChange(event) {
     this.loading = false;
-    this.pageNumber = event;    
+    this.pageNumber = event;
   }
 
   getTravelers() {
     this.travelerService.getTravelers().subscribe((data: any) => {
       this.travelers = data.data;
       this.loading = false;
-      this.showPaginationBar =true;
-      if(this.travelers.length === 0){
+      this.showPaginationBar = true;
+      if (this.travelers.length === 0) {
         this.notFound = true;
       }
     }, (error: HttpErrorResponse) => {
 
-      this.loading  = this.showPaginationBar =false;
+      this.loading = this.showPaginationBar = false;
       this.notFound = true;
       if (error.status === 401) {
         this.router.navigate(['/']);
@@ -100,12 +101,11 @@ export class ListTravellerComponent implements OnInit {
   }
 
   calculateAge(birthdate: any) {
-    return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years')+" yrs, ":"";
+    return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years') + " yrs, " : "";
   }
-  
-  openDeleteModal(content, userId = '') {
 
-    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal',centered: true });
+  openDeleteModal(content, userId = '') {
+    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
     this.userId = userId;
     this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -117,26 +117,7 @@ export class ListTravellerComponent implements OnInit {
 
 
 
-  deleteTraveller() {
-    this.travelerService.delete(this.userId).subscribe((data: any) => {
-      this.getTravelers();
-      if (data.message) {
-        // this.toastr.success('Traveler deleted successfully.', 'Success');
-      } else {
-        // this.toastr.error(data.message, 'Failure');
-      }
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        // this.toastr.error(error.error.errorMsg, 'Error');
-        this.router.navigate(['/']);
-      } else {
-        this.getTravelers();
-        // this.toastr.error(error.error.errorMsg, 'Error');
-      }
-    });
-    this.modalReference.close();
-  }
- 
+
   getCountry() {
     this.genericService.getCountry().subscribe((data: any) => {
       this.countries = data.map(country => {
@@ -144,16 +125,16 @@ export class ListTravellerComponent implements OnInit {
           id: country.id,
           name: country.name,
           countryCode: country.phonecode,
-          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
+          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
         }
       }),
         this.countries_code = data.map(country => {
           return {
             id: country.id,
-            name: country.phonecode+' ('+country.iso2+')',
-            countryCode:country.phonecode,
-            country_name:country.name+ ' ' +country.phonecode,
-            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
+            name: country.phonecode + ' (' + country.iso2 + ')',
+            countryCode: country.phonecode,
+            country_name: country.name + ' ' + country.phonecode,
+            flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
           }
         });
 
@@ -167,33 +148,40 @@ export class ListTravellerComponent implements OnInit {
   checkUncheckAll() {
     var checkboxes = document.getElementsByClassName('travelerCheckbox');
     for (var i = 0; i < checkboxes.length; i++) {
-      this.travelers[i].isSelected = this.isMasterSel;      
+      this.travelers[i].isSelected = this.isMasterSel;
     }
-    console.log( this.travelers)
     this.getCheckedItemList();
-  } 
-  
+  }
+
   isAllSelected() {
-    this.isMasterSel = this.travelers.every(function(item:any) {
+    this.isMasterSel = this.travelers.every(function (item: any) {
       return item.isSelected == true;
     });
     this.getCheckedItemList();
   }
 
-  getCheckedItemList(){
+  getCheckedItemList() {
     this.checkedCategoryList = [];
     for (var i = 0; i < this.travelers.length; i++) {
-      if(this.travelers[i].isSelected)
-      this.checkedCategoryList.push(this.travelers[i]);
+      if (this.travelers[i].isSelected)
+        this.checkedCategoryList.push(this.travelers[i]);
     }
     this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
   }
 
-  onSubmit() {
-    var formData = this.childCompopnent.travellerForm;
-    
-    if(formData.invalid){
-      console.log('sds')
+  submitTravellerForm() {
+    this.loadingValue.emit(true);
+
+
+    var formData = this.childComponent.travellerForm;
+
+
+    if (formData.invalid) {
+      Object.keys(formData.controls).forEach(controlName =>
+        formData.controls[controlName].markAsTouched()
+      );
+      this.loadingValue.emit(false);
+      return;
     } else {
       let country_id = formData.value.country_id.id;
       if (!Number(country_id)) {
@@ -203,33 +191,28 @@ export class ListTravellerComponent implements OnInit {
           country_id = this.location.country.id;
         }
       }
-      console.log(country_id)
+
       let jsonData = {
         first_name: formData.value.firstName,
         last_name: formData.value.lastName,
         dob: typeof formData.value.dob === 'object' ? moment(formData.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(formData.value.dob, '/')).format('YYYY-MM-DD'),
-        gender: formData.value.gender,
+        gender: formData.value.gender ? formData.value.gender : 'M',
         country_id: country_id ? country_id : '',
         passport_expiry: typeof formData.value.passport_expiry === 'object' ? moment(formData.value.passport_expiry).format('YYYY-MM-DD') : null,
         passport_number: formData.value.passport_number,
         country_code: formData.value.country_code ? formData.value.country_code : '',
         phone_no: formData.value.phone_no,
       };
-      console.log(formData,jsonData)
+      let emailObj = { email: formData.value.email ? formData.value.email : '' };
 
       this.travelerService.addAdult(jsonData).subscribe((data: any) => {
-        // this.travelersChanges.emit(data);
-        console.log(data)
         this.getTravelers();
-      
+        this.loadingValue.emit(false);
       }, (error: HttpErrorResponse) => {
-        console.log('error')
-         this.loading = false;
+        this.loadingValue.emit(false);
         if (error.status === 401) {
           this.router.navigate(['/']);
         } else {
-         this.loading = false;
-          this.toastr.error(error.error.message, 'Traveller Add Error');
         }
       });
     }
@@ -240,14 +223,22 @@ export class ListTravellerComponent implements OnInit {
     return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
 
-  getLoadingValue(event){   
+  getLoadingValue(event) {
     this.loadingValue.emit(event ? event : false);
   }
 
 
-  pushTraveler(traveler){
-    this.travelers = this.travelers.filter(obj => obj.userId !== traveler.userId);
-    this.travelers.push(traveler)  
+  getTravellerIdFromChild(travelerId) {
+    this.openDeleteModal('deleteContent', travelerId);
+  }
+
+  pushTraveler(traveler) {
+    if (typeof traveler == 'string') {
+      this.travelers = this.travelers.filter(obj => obj.userId !== traveler);
+    } else {
+      this.travelers = this.travelers.filter(obj => obj.userId !== traveler.userId);
+      this.travelers.push(traveler)
+    }
   }
 
 }
