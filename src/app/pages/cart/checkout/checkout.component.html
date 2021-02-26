@@ -4,6 +4,16 @@
     <div class="container" *ngIf="!isCartEmpty">
         <form>
             <div class="row">
+                <div class="timer_main_wrapper">
+                    <div class="upper_big_fonts">
+                        You have <span>9:15</span> to complete this booking!
+                    </div>
+                    <div class="lo_sm_fn">
+                        Review all details then Pay and Book
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-7">
                     <h3>Your Bookings</h3>
                     <div class="booking_detail_bg_wrps">
@@ -14,7 +24,8 @@
                     <div class="booking_detail_bg_wrps">
                         <div id="accordion-card" class="card_accordion">
                             <div class="card">
-                                <app-card-list cardListChangeCount="{{cardListChangeCount}}" cardToken={{cardToken}}></app-card-list>
+                                <app-card-list cardListChangeCount="{{cardListChangeCount}}" cardToken={{cardToken}}>
+                                </app-card-list>
                                 <div class="new_card">
                                     <div class="card-header">
                                         <a class="card-link" data-toggle="collapse" href="#collapseOne"
@@ -27,7 +38,8 @@
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                         <div class="card-body">
-                                            <app-add-card (emitCardListChange)="getCardListChange($event)"></app-add-card>
+                                            <app-add-card (emitCardListChange)="getCardListChange($event)">
+                                            </app-add-card>
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +55,7 @@
                             </app-price-summary>
                         </div>
                         <div class="cta_btn_wrapper">
-                            <button  (click)="bookFlight()">Pay and Book</button>
+                            <button (click)="bookFlight()">Pay and Book</button>
 
                         </div>
                     </div>

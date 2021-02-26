@@ -26,6 +26,33 @@
         }
     }
 
+    .timer_main_wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 25px 0px;
+        .upper_big_fonts{
+            color: $text-black;
+            font-size: 36px;
+            margin-bottom: 6px;
+            font-weight: 400;
+            span{
+                color: $blue-text;
+            }
+            @include tab-view{
+                font-size: 12px;
+            }
+        }
+        .lo_sm_fn{
+            color: $pink;
+            font-size: 20px;
+            @include tab-view{
+                font-size: 10px;
+            }
+        }
+    }
+
     .booking_detail_bg_wrps {
         background-color: $bg-body;
         border-radius: 5px;
