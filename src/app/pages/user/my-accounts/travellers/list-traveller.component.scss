@@ -46,6 +46,10 @@
   .traveller_accordion {
     margin-top: 10px;
 
+    &:nth-child(1){
+      margin-top: 0;
+    }
+
     .card {
       border: 1px solid $grayed_border;
       border-radius: 10px;
