@@ -2,11 +2,11 @@
     *ngIf="(travelers | json) != '{}' && (moduleInfo | json) != '{}' ">
     <div class="card traveller_card_accr" *ngFor="let traveler of travelers">
         <div class="card-header tr_card_header">
-            <a class="card-link">
-                {{ traveler.userData.firstName || '' | titlecase}} {{ traveler.userData.lastName || '' | titlecase }}
+            <a class="card-link ">
+                {{traveler.roleId == 6 ?'Primary Traveler':'Additional Traveler'}} 
             </a>
             <a class="card-link new_link">
-                Primary 
+                {{ traveler.userData.firstName || '' | titlecase}} {{ traveler.userData.lastName || '' | titlecase }}
             </a>
         </div>
         <div class="collapse show">

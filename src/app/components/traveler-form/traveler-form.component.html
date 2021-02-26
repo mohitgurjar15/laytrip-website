@@ -12,7 +12,8 @@
                 {{x==0?'Primary Traveler':'Additional Traveler'}}
               </span>
               <span class="trv_name">
-                Name here
+                {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
+                +travelerItem.value.adults[x].last_name:'Booking Traveler' | titlecase}} 
               </span>
               </a> 
             </div>
