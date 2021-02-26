@@ -8,7 +8,7 @@ import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from '../../../services/cart.service';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { CommonFunction } from '../../../_helpers/common-function';
@@ -50,7 +50,7 @@ export class CheckoutComponent implements OnInit {
   cardListChangeCount: number = 0;
   isBookingProgress: boolean = false;
   $cartIdsubscription;
-  guestUserId:string='';
+  guestUserId: string = '';
   bookingRequest = {
     payment_type: "",
     laycredit_points: 0,
@@ -60,8 +60,11 @@ export class CheckoutComponent implements OnInit {
     booking_through: "web",
     cart: [
     ],
-    selected_down_payment:0
+    selected_down_payment: 0
   }
+  isSessionTimeOut: boolean = false;
+  bookingTimerConfig;
+  routeCode: string;
 
   constructor(
     private genericService: GenericService,
@@ -71,7 +74,8 @@ export class CheckoutComponent implements OnInit {
     private cookieService: CookieService,
     private cd: ChangeDetectorRef,
     private router: Router,
-    private commonFunction:CommonFunction
+    private commonFunction: CommonFunction,
+    private route: ActivatedRoute,
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -80,13 +84,17 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
     window.scroll(0, 0);
     this.userInfo = getLoginUserInfo();
-    if (this.userInfo && this.userInfo.roleId!=7) {
+    if (this.userInfo && this.userInfo.roleId != 7) {
       this.getTravelers();
     }
-    else{
+    else {
       this.getTravelers();
-      this.guestUserId=this.commonFunction.getGuestUser();
+      this.guestUserId = this.commonFunction.getGuestUser();
     }
+
+    this.routeCode = decodeURIComponent(this.route.snapshot.paramMap.get('rc'));
+    console.log(this.routeCode);
+    this.bookingTimerConfiguration();
 
     this.cartLoading = true;
     this.cartService.getCartList('yes').subscribe((items: any) => {
@@ -101,7 +109,7 @@ export class CheckoutComponent implements OnInit {
           selling_price: items.data[i].oldModuleInfo[0].selling_price
         };
         cart.travelers = items.data[i].travelers;
-        cart.is_available = items.data[i].id==1265?false:items.data[i].is_available;
+        cart.is_available = items.data[i].id == 1265 ? false : items.data[i].is_available;
         cart.id = items.data[i].id;
         this.carts.push(cart);
 
@@ -111,11 +119,11 @@ export class CheckoutComponent implements OnInit {
         price.start_price = items.data[i].moduleInfo[0].start_price;
         price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         this.cartPrices.push(price)
-        
+
       }
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
-      
+
 
     }, error => {
       this.isCartEmpty = true;
@@ -151,6 +159,17 @@ export class CheckoutComponent implements OnInit {
       this.cardToken = '';
     }
 
+  }
+
+  sessionTimeout(event) {
+    this.isSessionTimeOut = event;
+  }
+
+  bookingTimerConfiguration() {
+    this.bookingTimerConfig = {
+      leftTime: 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(moment().format('YYYY-MM-DD h:mm:ss'), 'seconds'),
+      format: 'm:s'
+    }
   }
 
   getTravelers() {
@@ -196,9 +215,9 @@ export class CheckoutComponent implements OnInit {
     this.cardListChangeCount = data;
   }
 
-  redirectTo(uri:string){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    this.router.navigate([uri]));
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([uri]));
   }
 
   deleteCart(cartId) {
@@ -262,19 +281,19 @@ export class CheckoutComponent implements OnInit {
   bookFlight() {
     this.validationErrorMessage = '';
     this.validateCartItems();
-    if(this.userInfo.roleId==7){
+    if (this.userInfo.roleId == 7) {
       $('#sign_in_modal').modal('show');
       return false;
     }
-    let carts = this.carts.map(cart=>{ return {  cart_id: cart.id} })
-    this.bookingRequest.card_token=this.cardToken;
-    this.bookingRequest.selected_down_payment=this.priceSummary.selectedDownPayment;
+    let carts = this.carts.map(cart => { return { cart_id: cart.id } })
+    this.bookingRequest.card_token = this.cardToken;
+    this.bookingRequest.selected_down_payment = this.priceSummary.selectedDownPayment;
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
     this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
     this.bookingRequest.cart = carts;
-    console.log("this.bookingRequest",this.bookingRequest)
-    if(this.isValidTravelers && this.cardToken!=''){
-      this.isBookingProgress=true;
+    console.log("this.bookingRequest", this.bookingRequest)
+    if (this.isValidTravelers && this.cardToken != '') {
+      this.isBookingProgress = true;
       window.scroll(0, 0);
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
@@ -317,10 +336,10 @@ export class CheckoutComponent implements OnInit {
         });
       }
     }
-    else{
-      this.isBookingProgress=false;
+    else {
+      this.isBookingProgress = false;
     }
-    
+
   }
 
   adjustPriceSummary() {
