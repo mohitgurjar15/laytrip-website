@@ -171,17 +171,23 @@ export class TravelerFormComponent implements OnInit {
           if (userId) {
             //Edit
             this.travelerService.updateAdult(data, userId).subscribe((traveler: any) => {
-              // let index = this.myTravelers.find(x => x.userId = traveler.userId)
-              // this.myTravelers[index] = traveler;
-              // for (let i = 0; i < 5; i++) {
-              //   for (let j = 0; j < this.travelers[`type${i}`].adults.length; j++) {
 
-              //     index = this.travelers[`type${i}`].adults[j].findIndex(x => x.userId = traveler.userId);
-              //     if (index > -1) {
-              //       this.travelers[`type${i}`].adults[j] = traveler;
-              //     }
-              //   }
-              // }
+              let index = this.myTravelers.findIndex(x => x.userId == traveler.userId)
+              this.myTravelers[index] = traveler;
+
+              /* for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < this.travelers[`type${i}`].adults.length; j++) {
+
+                  if(typeof this.travelers[`type${i}`].adults[j]!=='undefined'){
+                    console.log(this.travelers[`type${i}`].adults[j],j,"this.travelers[`type${i}`].")
+                    index = this.travelers[`type${i}`].adults[j].findIndex(x => x.userId == traveler.userId);
+                    if (index > -1) {
+                      this.travelers[`type${i}`].adults[j] = traveler;
+                    }
+                  }
+                }
+              } */
+              //this.patch()
             })
           }
           else {
