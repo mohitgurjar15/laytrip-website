@@ -8,8 +8,14 @@
               <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+y+x" aria-expanded="false">
                 <!-- {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
                 +travelerItem.value.adults[x].last_name:'Booking Traveler'}} -->
+                <span class="tr_type">
                 {{x==0?'Primary Traveler':'Additional Traveler'}}
-              </a>
+              </span>
+              <span class="trv_name">
+                {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
+                +travelerItem.value.adults[x].last_name:'Booking Traveler' | titlecase}} 
+              </span>
+              </a> 
             </div>
             <div [id]="'adult_collapse'+y+x" class="collapse" [ngClass]="{'show':traveler_number==x}"
               data-parent="#accordion">

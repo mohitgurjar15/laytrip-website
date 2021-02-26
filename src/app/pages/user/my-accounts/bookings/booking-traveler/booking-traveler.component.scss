@@ -16,6 +16,27 @@
             margin-bottom: 0;
         }
 
+        &.traveller_card_accr {
+            .card-header {
+                &.tr_card_header {
+                    display: flex;
+
+                    .card-link {
+                        flex: 1;
+
+                        &.new_link {
+                            flex: 2;
+                            margin: 0;
+                        }
+                    }
+                }
+
+                @include tab-view {
+                    font-size: 12px;
+                }
+            }
+        }
+
         .card-header {
             border: none;
             background-color: transparent;
