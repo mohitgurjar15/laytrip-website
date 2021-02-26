@@ -15,6 +15,7 @@ export class ShareSocialMediaComponent implements OnInit {
   environment=environment;
   constructor(public activeModal: NgbActiveModal) { }
   isCopyText : boolean = false;
+  baseUrl = "www.laytrip.com";
   ngOnInit() {
   }
 
@@ -24,18 +25,18 @@ export class ShareSocialMediaComponent implements OnInit {
 
 
   share(media){
-    var message = encodeURIComponent('Welcome to Laytrip click here to visit our portal : '+ environment.siteUrl);
+    var message = encodeURIComponent('Laytrip - Layaway Travel for Everyone :'+ this.baseUrl);
 
     if(media == 'Instagram'){        
       window.open('https://www.instagram.com/p/CKlezHrJt6R/?utm_source=ig_embed&amp;utm_campaign=loading')
     }else if(media == 'Facebook'){
-      window.open(`https://www.facebook.com/sharer/sharer.php?u=${escape(environment.siteUrl)}&t=${escape(message)}`, '', 
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${escape(this.baseUrl)}&t=${escape(message)}`, '', 
       'menubar=no,toolbar=no,resizable=yes,scrollbars=textyes,height=300,width=600');      
     }else if(media == 'Whatapp'){
       var whatsapp_url = "https://api.whatsapp.com/send?text=" + message;
       window.open(whatsapp_url);     
     } else if(media == 'CopiedLink'){
-      var url : any = environment.siteUrl;
+      var url : any = this.baseUrl;
       this.isCopyText = true;
       url.select();
       document.execCommand('copy');
@@ -48,7 +49,7 @@ export class ShareSocialMediaComponent implements OnInit {
     var dummy = document.createElement("textarea");
     dummy.setAttribute("id", "dummy_textarea");
     document.body.appendChild(dummy);
-    dummy.value = environment.siteUrl;
+    dummy.value = this.baseUrl;
     dummy.select();
     document.execCommand("copy");
     this.isCopyText = true;
