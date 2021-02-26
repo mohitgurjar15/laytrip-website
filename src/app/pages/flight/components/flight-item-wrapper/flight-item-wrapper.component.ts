@@ -19,23 +19,6 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-flight-item-wrapper',
   templateUrl: './flight-item-wrapper.component.html',
   styleUrls: ['./flight-item-wrapper.component.scss'],
-  animations: [
-    trigger('listAnimation', [
-      transition('* => *', [ // each time the binding value changes
-        query(':leave', [
-          stagger(10, [
-            animate('0.001s', style({ opacity: 0 }))
-          ])
-        ], { optional: true }),
-        query(':enter', [
-          style({ opacity: 0 }),
-          stagger(50, [
-            animate('0.5s', style({ opacity: 1 }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ],
 })
 export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, OnDestroy {
 
@@ -279,10 +262,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       this.filteredLabel = changes.filteredLabel.currentValue;
     }
     // this.flightList = changes.flightDetails.currentValue;
-  }
-
-  logAnimation(event) {
-    // console.log(event);
   }
 
   ngOnDestroy(): void {
