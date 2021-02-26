@@ -37,7 +37,7 @@ export class AddCardComponent implements OnInit {
   saveCardLoader: boolean = false;
   expiryMinDate = new Date();
   cardListChangeCount: number = 0;
-  envKey:string='9KGMvRTcGfbQkaHQU0fPlr2jnQ8';
+  envKey:string='';
 
   mask = {
     guide: false,
@@ -72,7 +72,10 @@ export class AddCardComponent implements OnInit {
       card_number: ['', [Validators.required, Validators.maxLength(20)]],
       expiry: ['', Validators.required]
     });
-    this.spreedlySdk();
+    this.genericService.getPaymentDetails().subscribe((result:any)=>{
+      this.envKey = result.credentials.environment;
+      this.spreedlySdk();
+    })
   }
 
   spreedlySdk() {
@@ -121,6 +124,7 @@ export class AddCardComponent implements OnInit {
 
 
     Spreedly.on('paymentMethod', function (token, pmData) {
+      
       console.log("In submit")
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);

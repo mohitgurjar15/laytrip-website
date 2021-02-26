@@ -156,4 +156,9 @@ export class GenericService {
         catchError(this.handleError)
       );
   }
+
+
+  getPaymentDetails(){
+    return this.http.get(`${environment.apiUrl}v1/payment/details`, this.commonFunction.setHeaders());
+  }
 }

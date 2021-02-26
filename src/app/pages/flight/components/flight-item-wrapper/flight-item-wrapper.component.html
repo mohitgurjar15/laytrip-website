@@ -1,5 +1,4 @@
-<div class="routing_main_wrps" id="routing_main_wrps" [@listAnimation]="flightListArray.length"
-    (@listAnimation.start)="logAnimation($event)" (@listAnimation.done)="logAnimation($event)">
+<div class="routing_main_wrps" id="routing_main_wrps">
     <h3 class="shorting_label">{{filteredLabel}}</h3>
     <div class="one_way card_box" *ngFor="let item of flightListArray; let i = index;">
         <div class="card_iinner">
