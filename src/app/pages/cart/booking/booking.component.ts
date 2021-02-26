@@ -96,7 +96,7 @@ export class BookingComponent implements OnInit {
         cart = {};
         cart.type = items.data[i].type;
         cart.module_info = items.data[i].moduleInfo[0];
-        cart.is_available = items.data[i].id==1265?false:items.data[i].is_available;
+        cart.is_available = items.data[i].id==1?false:items.data[i].is_available;
         cart.old_module_info = {
           selling_price: items.data[i].oldModuleInfo[0].selling_price
         };
