@@ -1,9 +1,12 @@
 <div id="accordion_Bookings" class="accordion_bookings"
     *ngIf="(travelers | json) != '{}' && (moduleInfo | json) != '{}' ">
-    <div class="card" *ngFor="let traveler of travelers">
-        <div class="card-header">
+    <div class="card traveller_card_accr" *ngFor="let traveler of travelers">
+        <div class="card-header tr_card_header">
             <a class="card-link">
                 {{ traveler.userData.firstName || '' | titlecase}} {{ traveler.userData.lastName || '' | titlecase }}
+            </a>
+            <a class="card-link new_link">
+                Primary 
             </a>
         </div>
         <div class="collapse show">
