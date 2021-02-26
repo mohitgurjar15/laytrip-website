@@ -41,6 +41,11 @@
     .center_side {
         .stops_wr {
             min-width: 55px;
+            .accordion_infos_1 {
+                .det_link{
+                    width: 68px;
+                }
+            }
         }
     }
 
@@ -407,6 +412,11 @@
                         .stopages {
                             flex-direction: column;
                             display: flex;
+                        }
+                        .accordion_infos_1 {
+                            .det_link{
+                                width: 68px;
+                            }
                         }
 
                         .accordion_infos {
