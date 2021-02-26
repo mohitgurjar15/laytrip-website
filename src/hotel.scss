@@ -7,12 +7,14 @@
 .ng-select {
     &.laytrip-input-new {
         padding: 0 15px 0 0;
+
         .ng-dropdown-panel {
             top: 100%;
             background: $background-white;
             left: 0;
             //width: 480px;
             width: 100%;
+
             @media (max-width: 767px) {
                 width: 410px;
             }
@@ -30,14 +32,17 @@
 
         .ng-select-container {
             display: flex !important;
+
             .ng-value-container {
                 .ng-placeholder {
                     padding: 0 15px;
                 }
             }
+
             span {
                 &.ng-arrow-wrapper {
                     display: none !important;
+
                     span {
                         &.ng-arrow {
                             margin: 0 !important;
@@ -61,18 +66,23 @@
             height: 100%;
             min-height: 0px !important;
             display: block;
+
             &:hover {
                 box-shadow: none !important;
             }
+
             .ng-value-container {
                 padding-left: 0px !important;
+
                 .ng-input {
                     padding: 0 15px;
                     top: 0;
+
                     input {
                         padding-left: 0px !important;
                     }
                 }
+
                 .ng-value {
                     padding: 0 0 0 15px;
                     color: #000;
@@ -80,6 +90,7 @@
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     overflow: hidden;
+
                     .sub-parent {
                         font-size: 20px;
                         color: #000;
@@ -87,27 +98,34 @@
                     }
                 }
             }
+
             .ng-clear-wrapper {
                 padding: 0 0px 0px 5px !important;
+
                 .ng-clear {
                     font-size: 17px !important;
                     color: red !important;
                 }
             }
+
             .ng-arrow-wrapper {
                 .ng-arrow {
                     display: none !important;
                 }
             }
         }
+
         .ng-dropdown-panel {
             border: none !important;
             box-shadow: none !important;
+
             .ng-select-bottom {
                 border-top-color: #fff !important;
             }
+
             .ng-dropdown-panel-items {
                 max-height: 255px;
+
                 //border: 1px solid #808080;
                 .ng-option {
                     padding: 3px 3px 3px 10px !important;
@@ -118,10 +136,12 @@
                 .hotel-parent {
                     padding: 10px 10px 10px 10px;
                     display: flex !important;
+
                     img {
                         // background: darkred;
                         margin: 2px 5px 5px 0px;
                     }
+
                     .sub-parent {
                         color: #012178;
                         font-size: 14px;
@@ -131,6 +151,7 @@
             }
         }
     }
+
     &.ng-customClass {
         .ng-select-container {
             height: 100%;
@@ -138,9 +159,11 @@
             display: flex;
             align-items: center;
             border-radius: 0;
+
             &:hover {
                 box-shadow: none;
             }
+
             .ng-value-container {
                 height: auto;
 
@@ -149,8 +172,10 @@
                     font-size: 14px;
                     color: #000000;
                 }
+
                 .ng-input {
                     height: auto;
+
                     input {
                         height: auto !important;
                         border: none !important;
@@ -159,6 +184,7 @@
             }
         }
     }
+
     &.country_code {
         .ng-select-container {
             height: 100%;
@@ -166,9 +192,11 @@
             display: flex;
             align-items: center;
             border-radius: 0;
+
             &:hover {
                 box-shadow: none;
             }
+
             .ng-value-container {
                 height: auto;
 
@@ -177,14 +205,23 @@
                     font-size: 14px;
                     color: #000000;
                 }
+
                 .ng-input {
                     height: auto;
                     padding-left: 0;
+
                     input {
                         height: auto !important;
                         border: none !important;
                     }
                 }
+            }
+        }
+
+        .ng-dropdown-panel-items {
+            .ng-option {
+                padding: 5px;
+                font-size: 11px;
             }
         }
     }
@@ -193,6 +230,7 @@
 .custom_range_slide .ng5-slider .ng5-slider-selection {
     background: $text_light_yellow;
 }
+
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
     border: 1px solid $text_light_yellow;
     background-color: $text_light_yellow;
@@ -200,26 +238,31 @@
     height: 16px;
     top: -7px;
 }
+
 // NG-SELECT FOCUS REMOVE CSS START
-.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+.ng-select-focused:not(.ng-select-opened)>.ng-select-container {
     box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
 }
+
 // NG-SELECT FOCUS REMOVE CSS END
 
 // datepicker hotel and rentals search
 ngb-datepicker {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
     .ngb-dp-header {
         padding: 0.75em 0;
         background-color: #f5f5f5;
         border-bottom: 1px solid #c7c7c7;
     }
+
     .ngb-dp-months {
         .ngb-dp-month {
             ngb-datepicker-month-view {
                 .ngb-dp-weekdays {
                     background-color: #fff !important;
                     border-bottom: none !important;
+
                     .ngb-dp-weekday {
                         color: #000;
                         font-size: 14px;
@@ -227,6 +270,7 @@ ngb-datepicker {
                         font-weight: bold;
                     }
                 }
+
                 .ngb-dp-week {
                     .ngb-dp-day {
                         display: flex;
@@ -238,17 +282,19 @@ ngb-datepicker {
         }
     }
 }
+
 // datepicker hotel and rentals search
 
 // hotel tab
 .hotel_tab {
-    .tab_upper_content{
+    .tab_upper_content {
         width: 100%;
         margin-bottom: 24px;
+
         .travellers {
             width: auto;
             display: inline-block;
-        
+
             label {
                 width: 100%;
                 margin-bottom: 0px;
@@ -258,11 +304,11 @@ ngb-datepicker {
                 padding: 0 15px;
                 text-transform: uppercase;
             }
-        
+
             .search_area {
                 background: $background-white;
                 position: relative;
-        
+
                 .travel_info {
                     width: 100%;
                     height: 30px;
@@ -273,12 +319,12 @@ ngb-datepicker {
                     position: relative;
                     padding: 0 20px 0 0;
                     cursor: pointer;
-        
+
                     span {
                         font-size: 14px;
                         padding: 0 10px 0 0;
                     }
-        
+
                     .drop_aerrow {
                         width: 14px;
                         position: relative;
@@ -302,14 +348,14 @@ ngb-datepicker {
                         // }
                     }
                 }
-        
+
                 span {
                     font-size: 10px;
                     font-weight: 400;
                     color: $text-grey;
                     padding: 0 20px;
                 }
-        
+
                 .traveller_add_block {
                     width: 260px;
                     position: absolute;
@@ -323,7 +369,7 @@ ngb-datepicker {
                     z-index: 1021;
                     max-height: 500px;
                     overflow-y: auto;
-        
+
                     &:before {
                         width: 0;
                         height: 0;
@@ -336,7 +382,7 @@ ngb-datepicker {
                         content: '';
                         z-index: 2;
                     }
-        
+
                     &:after {
                         width: 0;
                         height: 0;
@@ -348,46 +394,57 @@ ngb-datepicker {
                         left: 90px;
                         content: '';
                     }
+
                     .rooms_aloc {
                         margin-top: 10px;
-                        &:first-child{
+
+                        &:first-child {
                             margin: 0;
                         }
+
                         &.marign_rooms {
                             margin-top: 10px;
                             border-top: 1px solid $box-border-color;
                             padding-top: 10px;
                         }
+
                         .room_label_main {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
                             margin-bottom: 10px;
+
                             span {
                                 padding: 0;
+
                                 &:first-child {
                                     font-size: 14px;
                                     font-weight: 500;
                                     text-transform: uppercase;
                                 }
+
                                 a {
                                     color: $pink;
                                     font-size: 12px;
                                     font-weight: 500;
                                     text-transform: uppercase;
                                     cursor: pointer;
+
                                     &.remove_room {
                                         color: $error-color;
                                     }
                                 }
                             }
                         }
+
                         .room_bottom_label {
                             display: flex;
                             justify-content: flex-end;
                             align-items: center;
+
                             span {
                                 padding: 0;
+
                                 a {
                                     color: $pink;
                                     font-size: 12px;
@@ -396,10 +453,12 @@ ngb-datepicker {
                                 }
                             }
                         }
+
                         .child_sel_wrapper {
                             display: flex;
                             flex-wrap: wrap;
                             justify-content: flex-start;
+
                             .child_boxes {
                                 border: 1px solid $box-border-color;
                                 border-radius: 8px;
@@ -408,13 +467,16 @@ ngb-datepicker {
                                 margin: 2px;
                                 width: 48%;
                                 display: none;
+
                                 &.open {
                                     display: block;
                                 }
+
                                 .label_name {
                                     padding: 0;
                                     width: 100%;
                                 }
+
                                 select {
                                     border: none;
                                     width: 100%;
@@ -422,10 +484,10 @@ ngb-datepicker {
                                     -webkit-appearance: none;
                                     -moz-appearance: none;
                                     appearance: none;
+
                                     &::after {
                                         content: "";
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
-                                            center right 15px no-repeat !important;
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
                                         height: 34px;
                                         padding: 15px 0px 0px 8px;
                                         position: absolute;
@@ -433,6 +495,7 @@ ngb-datepicker {
                                 }
                             }
                         }
+
                         ul {
                             margin: 0;
                             padding: 0;
@@ -509,24 +572,24 @@ ngb-datepicker {
                             }
                         }
                     }
-        
+
                     ul {
                         margin: 0;
                         padding: 0;
                         list-style: none;
-        
+
                         li {
                             width: 100%;
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
                             padding: 0 0 20px;
-        
+
                             .left {
                                 font-size: 10px;
                                 font-weight: 400;
                                 color: $text-grey;
-        
+
                                 span {
                                     font-size: 14px;
                                     color: $text-darkblue;
@@ -534,12 +597,12 @@ ngb-datepicker {
                                     padding: 0;
                                 }
                             }
-        
+
                             .right {
                                 width: 100px;
                                 display: flex;
                                 align-items: center;
-        
+
                                 .qtyminus {
                                     width: 30px;
                                     height: 30px;
@@ -549,13 +612,13 @@ ngb-datepicker {
                                     color: $text-light-grey;
                                     padding: 0;
                                     font-size: 18px;
-        
+
                                     &:hover {
                                         border: 1px solid $secondary-color;
                                         color: $secondary-color;
                                     }
                                 }
-        
+
                                 .qty {
                                     width: 30px;
                                     height: 30px;
@@ -565,7 +628,7 @@ ngb-datepicker {
                                     border: none;
                                     text-align: center;
                                 }
-        
+
                                 .qtyplus {
                                     width: 30px;
                                     height: 30px;
@@ -575,7 +638,7 @@ ngb-datepicker {
                                     color: $pink;
                                     padding: 0;
                                     font-size: 18px;
-        
+
                                     &:hover {
                                         border: 1px solid $pink_clr;
                                         color: $pink_clr;
@@ -584,11 +647,12 @@ ngb-datepicker {
                             }
                         }
                     }
-        
+
                 }
             }
         }
     }
+
     .hotels_search {
         position: relative;
 
@@ -624,6 +688,7 @@ ngb-datepicker {
 
                     .hotel_where {
                         width: 100%;
+
                         @include ipad-view {
                             width: 100%;
                         }
@@ -713,12 +778,14 @@ ngb-datepicker {
                             font-weight: 600;
                             padding: 0 15px 0 70px;
                             background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
-                        @media (max-width: 575px) {
-                            .calender-responsive-view {
-                                right: 0 !important;
-                                left: auto !important;
+
+                            @media (max-width: 575px) {
+                                .calender-responsive-view {
+                                    right: 0 !important;
+                                    left: auto !important;
+                                }
                             }
-                        }
+
                             @media(max-width: 1199px) {
                                 font-size: 16px;
                             }
@@ -746,17 +813,19 @@ ngb-datepicker {
 
                     .date_form {
                         width: 100%;
-                        p-calendar{
+
+                        p-calendar {
                             display: flex;
                             align-items: center;
                             height: 100%;
                         }
+
                         .search_area {
                             border-radius: 8px;
                             height: 100%;
                         }
                     }
-                    
+
                 }
 
                 &.third {
@@ -797,9 +866,11 @@ ngb-datepicker {
 
                             img {
                                 max-height: 29px;
-                                &.hover_btn{
-                                    display: none; 
-                                    &.show{
+
+                                &.hover_btn {
+                                    display: none;
+
+                                    &.show {
                                         display: block;
                                     }
                                 }
@@ -821,6 +892,7 @@ ngb-datepicker {
 
                             &:hover {
                                 border: 1px solid $hotel-secondary-color;
+
                                 &:before {
                                     height: 190%;
                                 }
@@ -844,20 +916,22 @@ ngb-datepicker {
             }
         }
 
-        
+
     }
 }
+
 // hotel tab
 
 // home tab
 .home_tab {
-    .tab_upper_content{
+    .tab_upper_content {
         width: 100%;
         margin-bottom: 24px;
+
         .travellers {
             width: auto;
             display: inline-block;
-        
+
             label {
                 width: 100%;
                 margin-bottom: 0px;
@@ -867,11 +941,11 @@ ngb-datepicker {
                 padding: 0 15px;
                 text-transform: uppercase;
             }
-        
+
             .search_area {
                 background: $background-white;
                 position: relative;
-        
+
                 .travel_info {
                     width: 100%;
                     height: 30px;
@@ -882,12 +956,12 @@ ngb-datepicker {
                     position: relative;
                     padding: 0 20px 0 0;
                     cursor: pointer;
-        
+
                     span {
                         font-size: 14px;
                         padding: 0 10px 0 0;
                     }
-        
+
                     .drop_aerrow {
                         width: 14px;
                         position: relative;
@@ -911,14 +985,14 @@ ngb-datepicker {
                         // }
                     }
                 }
-        
+
                 span {
                     font-size: 10px;
                     font-weight: 400;
                     color: $text-grey;
                     padding: 0 20px;
                 }
-        
+
                 .traveller_add_block {
                     width: 260px;
                     position: absolute;
@@ -930,7 +1004,7 @@ ngb-datepicker {
                     border: 1px solid #E0E2E5;
                     border-radius: 5px;
                     z-index: 99;
-        
+
                     &:before {
                         width: 0;
                         height: 0;
@@ -943,7 +1017,7 @@ ngb-datepicker {
                         content: '';
                         z-index: 2;
                     }
-        
+
                     &:after {
                         width: 0;
                         height: 0;
@@ -955,42 +1029,51 @@ ngb-datepicker {
                         left: 20px;
                         content: '';
                     }
+
                     .rooms_aloc {
                         &.marign_rooms {
                             margin-top: 10px;
                             border-top: 1px solid $box-border-color;
                             padding-top: 10px;
                         }
+
                         .room_label_main {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
                             margin-bottom: 10px;
+
                             span {
                                 padding: 0;
+
                                 &:first-child {
                                     font-size: 14px;
                                     font-weight: 500;
                                     text-transform: uppercase;
                                 }
+
                                 a {
                                     color: $pink;
                                     font-size: 12px;
                                     font-weight: 500;
                                     text-transform: uppercase;
                                     cursor: pointer;
+
                                     &.remove_room {
                                         color: $error-color;
                                     }
                                 }
                             }
                         }
+
                         .room_bottom_label {
                             display: flex;
                             justify-content: flex-end;
                             align-items: center;
+
                             span {
                                 padding: 0;
+
                                 a {
                                     color: $pink;
                                     font-size: 12px;
@@ -999,10 +1082,12 @@ ngb-datepicker {
                                 }
                             }
                         }
+
                         .child_sel_wrapper {
                             display: flex;
                             flex-wrap: wrap;
                             justify-content: flex-start;
+
                             .child_boxes {
                                 border: 1px solid $box-border-color;
                                 border-radius: 8px;
@@ -1011,13 +1096,16 @@ ngb-datepicker {
                                 margin: 2px;
                                 width: 48%;
                                 display: none;
+
                                 &.open {
                                     display: block;
                                 }
+
                                 .label_name {
                                     padding: 0;
                                     width: 100%;
                                 }
+
                                 select {
                                     border: none;
                                     width: 100%;
@@ -1025,10 +1113,10 @@ ngb-datepicker {
                                     -webkit-appearance: none;
                                     -moz-appearance: none;
                                     appearance: none;
+
                                     &::after {
                                         content: "";
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
-                                            center right 15px no-repeat !important;
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
                                         height: 34px;
                                         padding: 15px 0px 0px 8px;
                                         position: absolute;
@@ -1036,6 +1124,7 @@ ngb-datepicker {
                                 }
                             }
                         }
+
                         ul {
                             margin: 0;
                             padding: 0;
@@ -1112,24 +1201,24 @@ ngb-datepicker {
                             }
                         }
                     }
-        
+
                     ul {
                         margin: 0;
                         padding: 0;
                         list-style: none;
-        
+
                         li {
                             width: 100%;
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
                             padding: 0 0 20px;
-        
+
                             .left {
                                 font-size: 10px;
                                 font-weight: 400;
                                 color: $text-grey;
-        
+
                                 span {
                                     font-size: 14px;
                                     color: $text-darkblue;
@@ -1137,12 +1226,12 @@ ngb-datepicker {
                                     padding: 0;
                                 }
                             }
-        
+
                             .right {
                                 width: 100px;
                                 display: flex;
                                 align-items: center;
-        
+
                                 .qtyminus {
                                     width: 30px;
                                     height: 30px;
@@ -1152,13 +1241,13 @@ ngb-datepicker {
                                     color: $text-light-grey;
                                     padding: 0;
                                     font-size: 18px;
-        
+
                                     &:hover {
                                         border: 1px solid $secondary-color;
                                         color: $secondary-color;
                                     }
                                 }
-        
+
                                 .qty {
                                     width: 30px;
                                     height: 30px;
@@ -1168,7 +1257,7 @@ ngb-datepicker {
                                     border: none;
                                     text-align: center;
                                 }
-        
+
                                 .qtyplus {
                                     width: 30px;
                                     height: 30px;
@@ -1178,7 +1267,7 @@ ngb-datepicker {
                                     color: $pink;
                                     padding: 0;
                                     font-size: 18px;
-        
+
                                     &:hover {
                                         border: 1px solid $pink_clr;
                                         color: $pink_clr;
@@ -1187,11 +1276,12 @@ ngb-datepicker {
                             }
                         }
                     }
-        
+
                 }
             }
         }
     }
+
     .home_search {
         position: relative;
 
@@ -1227,6 +1317,7 @@ ngb-datepicker {
 
                     .home_where {
                         width: 100%;
+
                         @include ipad-view {
                             width: 100%;
                         }
@@ -1307,12 +1398,14 @@ ngb-datepicker {
                             font-weight: 600;
                             padding: 0 15px 0 70px;
                             background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
-                        @media (max-width: 575px) {
-                            .calender-responsive-view {
-                                right: 0 !important;
-                                left: auto !important;
+
+                            @media (max-width: 575px) {
+                                .calender-responsive-view {
+                                    right: 0 !important;
+                                    left: auto !important;
+                                }
                             }
-                        }
+
                             @media(max-width: 1199px) {
                                 font-size: 16px;
                             }
@@ -1340,17 +1433,19 @@ ngb-datepicker {
 
                     .date_form {
                         width: 100%;
-                        p-calendar{
+
+                        p-calendar {
                             display: flex;
                             align-items: center;
                             height: 100%;
                         }
+
                         .search_area {
                             border-radius: 8px;
                             height: 100%;
                         }
                     }
-                    
+
                 }
 
                 &.third {
@@ -1391,9 +1486,11 @@ ngb-datepicker {
 
                             img {
                                 max-height: 29px;
-                                &.hover_btn{
-                                    display: none; 
-                                    &.show{
+
+                                &.hover_btn {
+                                    display: none;
+
+                                    &.show {
                                         display: block;
                                     }
                                 }
@@ -1415,6 +1512,7 @@ ngb-datepicker {
 
                             &:hover {
                                 border: 1px solid $hotel-secondary-color;
+
                                 &:before {
                                     height: 190%;
                                 }
@@ -1439,6 +1537,7 @@ ngb-datepicker {
         }
     }
 }
+
 // home tab
 
 // loader for hotel
@@ -1491,6 +1590,7 @@ ngb-datepicker {
         }
     }
 }
+
 // loader for hotel
 
 // start Search Modify section
@@ -1498,16 +1598,19 @@ ngb-datepicker {
     &.search_result {
         padding: 30px 0 40px;
         margin-top: 30px;
+
         .hotel_detail_sidebar {
-            &.sticky-top{
+            &.sticky-top {
                 top: 70px;
             }
         }
     }
+
     &.modify_search {
         width: 100%;
         background: $text-darkblue;
         padding: 15px 0;
+
         @include ipad-view {
             padding: 15px;
         }
@@ -1562,9 +1665,11 @@ ngb-datepicker {
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
+
                             &[readonly] {
                                 background-color: transparent;
                             }
+
                             &:focus {
                                 outline: none;
                                 box-shadow: none;
@@ -1591,6 +1696,7 @@ ngb-datepicker {
 
                         .hotel_where {
                             width: 100%;
+
                             @include ipad-view {
                                 width: 100%;
                             }
@@ -1673,8 +1779,10 @@ ngb-datepicker {
                             width: 100%;
                             margin-bottom: 15px;
                         }
+
                         .input-group {
                             width: 100%;
+
                             input {
                                 background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) !important;
                                 background-size: 20px;
@@ -1682,6 +1790,7 @@ ngb-datepicker {
                                 background-position: center right 15px;
                             }
                         }
+
                         .search_area {
                             padding: 10px 0;
                             border: 1px solid $box-border-color;
@@ -1795,8 +1904,7 @@ ngb-datepicker {
                                         right: 15px;
                                         top: 50%;
                                         transform: translateY(-50%);
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg)
-                                            no-repeat;
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
                                         background-size: cover;
                                     }
 
@@ -1837,6 +1945,7 @@ ngb-datepicker {
                                     color: $text-grey;
                                     padding: 0 15px;
                                 }
+
                                 .traveller_add_block {
                                     width: 260px;
                                     position: absolute;
@@ -1873,42 +1982,51 @@ ngb-datepicker {
                                         right: 20px;
                                         content: "";
                                     }
+
                                     .rooms_aloc {
                                         &.marign_rooms {
                                             margin-top: 10px;
                                             border-top: 1px solid $box-border-color;
                                             padding-top: 10px;
                                         }
+
                                         .room_label_main {
                                             display: flex;
                                             justify-content: space-between;
                                             align-items: center;
                                             margin-bottom: 10px;
+
                                             span {
                                                 padding: 0;
+
                                                 &:first-child {
                                                     font-size: 14px;
                                                     font-weight: 500;
                                                     text-transform: uppercase;
                                                 }
+
                                                 a {
                                                     color: $pink;
                                                     font-size: 12px;
                                                     font-weight: 500;
                                                     text-transform: uppercase;
                                                     cursor: pointer;
+
                                                     &.remove_room {
                                                         color: $error-color;
                                                     }
                                                 }
                                             }
                                         }
+
                                         .room_bottom_label {
                                             display: flex;
                                             justify-content: flex-end;
                                             align-items: center;
+
                                             span {
                                                 padding: 0;
+
                                                 a {
                                                     color: $pink;
                                                     font-size: 12px;
@@ -1917,10 +2035,12 @@ ngb-datepicker {
                                                 }
                                             }
                                         }
+
                                         .child_sel_wrapper {
                                             display: flex;
                                             flex-wrap: wrap;
                                             justify-content: flex-start;
+
                                             .child_boxes {
                                                 border: 1px solid $box-border-color;
                                                 border-radius: 8px;
@@ -1933,10 +2053,12 @@ ngb-datepicker {
                                                 &.open {
                                                     display: block;
                                                 }
+
                                                 .label_name {
                                                     padding: 0;
                                                     width: 100%;
                                                 }
+
                                                 select {
                                                     border: none;
                                                     width: 100%;
@@ -1944,10 +2066,10 @@ ngb-datepicker {
                                                     -webkit-appearance: none;
                                                     -moz-appearance: none;
                                                     appearance: none;
+
                                                     &::after {
                                                         content: "";
-                                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
-                                                            center right 15px no-repeat !important;
+                                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
                                                         height: 34px;
                                                         padding: 15px 0px 0px 8px;
                                                         position: absolute;
@@ -1955,6 +2077,7 @@ ngb-datepicker {
                                                 }
                                             }
                                         }
+
                                         ul {
                                             margin: 0;
                                             padding: 0;
@@ -2410,7 +2533,8 @@ ngb-datepicker {
                     background: $background-white;
                     border: 1px solid $box-border-color;
                     border-radius: 35px;
-                    .accordion-heading{
+
+                    .accordion-heading {
                         padding: 20px 15px;
                         display: flex;
                         align-items: center;
@@ -2422,7 +2546,7 @@ ngb-datepicker {
                             width: 100%;
                             display: block;
                         }
-                        
+
                     }
 
                     &.active {
@@ -2904,16 +3028,20 @@ ngb-datepicker {
                             color: #8188ab;
                             margin: 0 0 10px;
                         }
+
                         .ng-select-container {
                             border: none;
                             margin-bottom: 20px;
                             height: 39px;
+
                             &:hover {
                                 box-shadow: none;
                             }
                         }
+
                         .ng-input {
                             padding: 0;
+
                             input {
                                 // border: 1px solid $box-border-color;
                                 border-bottom: 1px solid $box-border-color;
@@ -2931,6 +3059,7 @@ ngb-datepicker {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
+
                             a {
                                 display: inline-block;
                                 line-height: 38px;
@@ -2957,6 +3086,7 @@ ngb-datepicker {
                                     background: $primary-color;
                                     border: 1px solid $primary-color;
                                     color: $text-white;
+
                                     &:hover {
                                         background: transparent;
                                         color: $primary-color;
@@ -2989,23 +3119,26 @@ ngb-datepicker {
                 }
             }
 
-            .block_shortby{
-                .accordion-group{
+            .block_shortby {
+                .accordion-group {
                     background: $background-white;
                     border: 1px solid $box-border-color;
                     border-radius: 35px;
-                    .accordion-heading{
+
+                    .accordion-heading {
                         padding: 20px 15px;
                         display: flex;
                         align-items: center;
-                       .accordion-toggle{
+
+                        .accordion-toggle {
                             font-size: 20px;
                             color: $text-grey;
                             font-weight: 500;
                             width: 100%;
                             display: block;
-                       }
-                       &:after {
+                        }
+
+                        &:after {
                             font-family: 'FontAwesome';
                             content: "\f054";
                             float: right;
@@ -3013,12 +3146,14 @@ ngb-datepicker {
                             font-weight: normal;
                             transition: 0.3s;
                         }
-                        .anchor_link{
+
+                        .anchor_link {
                             color: $text_light_yellow;
                             font-size: 16px;
                             margin-right: 10px;
                         }
                     }
+
                     &.active {
                         .accordion-heading {
                             &:after {
@@ -3036,11 +3171,14 @@ ngb-datepicker {
         display: flex;
         justify-content: space-between;
         margin-bottom: 18px;
+
         @include tab-view {
             flex-direction: column;
         }
-        .hotel-counter-wrapper{
+
+        .hotel-counter-wrapper {
             flex: 1;
+
             .block_result_found {
                 background: $background-white;
                 border: 1px solid $box-border-color;
@@ -3051,7 +3189,7 @@ ngb-datepicker {
                 display: flex;
                 padding: 10px 20px;
                 justify-content: flex-start;
-    
+
                 // &:after {
                 //     width: 0;
                 //     height: 0;
@@ -3064,7 +3202,7 @@ ngb-datepicker {
                 //     transform: translate(-50%, -50%);
                 //     content: "";
                 // }
-    
+
                 // &:before {
                 //     width: 0;
                 //     height: 0;
@@ -3078,14 +3216,14 @@ ngb-datepicker {
                 //     content: "";
                 //     z-index: 2;
                 // }
-    
+
                 p {
                     font-size: 16px;
                     font-weight: 500;
                     color: $text-grey;
                     margin: 0 0 2px;
                 }
-    
+
                 span {
                     font-size: 20px;
                     font-weight: 600;
@@ -3095,7 +3233,7 @@ ngb-datepicker {
                 }
             }
         }
-        
+
 
         button {
             background-color: $background-white;
@@ -3106,15 +3244,18 @@ ngb-datepicker {
             font-size: 14px;
             height: 55px;
             margin-left: 10px;
+
             img {
                 margin-right: 5px;
             }
+
             @include tab-view {
                 margin: 10px 0 0 0;
                 width: 100%;
             }
         }
     }
+
     .result_listing {
         width: 100%;
         display: flex;
@@ -3187,28 +3328,33 @@ ngb-datepicker {
                                         border-right: none;
                                         padding: 0;
                                     }
+
                                     .hotel_list_img_wrp {
                                         position: relative;
                                         // background-size: cover;
                                         // background-position: center center;
                                         width: 100%;
                                         height: 170px;
-                                        @include tab-view{
+
+                                        @include tab-view {
                                             display: flex;
                                             justify-content: center;
                                         }
+
                                         img {
                                             max-width: 100%;
                                             height: 100%;
                                             object-fit: cover;
                                             object-position: center;
                                         }
+
                                         .fav_sections {
                                             position: absolute;
                                             top: 10px;
                                             left: 10px;
                                             height: 20px;
                                             width: 20px;
+
                                             a {
                                                 background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
                                                 background-repeat: no-repeat;
@@ -3254,6 +3400,7 @@ ngb-datepicker {
 
                                         span {
                                             margin: 0;
+
                                             &.adress_span {
                                                 max-width: 380px;
                                                 white-space: nowrap;
@@ -3263,13 +3410,16 @@ ngb-datepicker {
                                                 width: 100%;
                                             }
                                         }
+
                                         .review_section_wrap {
                                             display: flex;
                                             justify-content: space-between;
                                             align-items: center;
                                             margin: 5px 0 10px;
+
                                             .left_bar {
                                                 display: flex;
+
                                                 .rating_num {
                                                     span {
                                                         background-color: #1445f5;
@@ -3283,11 +3433,14 @@ ngb-datepicker {
                                                         border-radius: 5px;
                                                     }
                                                 }
+
                                                 .stars_text {
                                                     margin-left: 14px;
+
                                                     .stars_rating {
                                                         margin-top: 0px;
                                                     }
+
                                                     .review_num_text {
                                                         a {
                                                             font-size: 12px;
@@ -3307,6 +3460,7 @@ ngb-datepicker {
                                                     color: #5a5a5a;
                                                     font-weight: 500;
                                                     margin-left: 20px;
+
                                                     img {
                                                         margin-right: 8px;
                                                     }
@@ -3381,6 +3535,7 @@ ngb-datepicker {
                                     }
                                 }
                             }
+
                             .weekly_price_wrps {
                                 font-size: 12px;
                                 color: $text-grey;
@@ -3489,7 +3644,7 @@ ngb-datepicker {
                             }
                         }
 
-                        
+
                         .book_btn {
                             display: inline-block;
                             line-height: 38px;
@@ -3520,10 +3675,11 @@ ngb-datepicker {
 
                             &:hover {
                                 color: $primary-color;
+
                                 &:before {
-									height: 37px;
+                                    height: 37px;
                                     width: 100%;
-								}
+                                }
                             }
                         }
 
@@ -4302,6 +4458,7 @@ ngb-datepicker {
                 }
             }
         }
+
         &.hotel_map_listings {
             .search_block {
                 background-color: $background-white;
@@ -4331,39 +4488,46 @@ ngb-datepicker {
                                 border-right: none;
                                 padding: 0;
                             }
+
                             .hotel_list_img_wrp {
                                 position: relative;
                                 // background-size: cover;
                                 // background-position: center center;
                                 width: 100%;
                                 height: 170px;
-                                @include tab-view{
+
+                                @include tab-view {
                                     display: flex;
                                     justify-content: center;
                                 }
+
                                 img {
                                     max-width: 100%;
                                     height: 100%;
                                     object-fit: cover;
                                     object-position: center;
                                 }
+
                                 .fav_sections {
                                     position: absolute;
                                     top: 10px;
                                     right: 10px;
                                     height: 20px;
                                     width: 20px;
+
                                     a {
                                         background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
                                         background-repeat: no-repeat;
                                         padding: 0px 12px;
                                     }
                                 }
+
                                 .review_section_wrap {
                                     position: absolute;
                                     top: 10px;
                                     left: 10px;
                                     display: flex;
+
                                     .rating_num {
                                         span {
                                             background-color: #1445f5;
@@ -4378,8 +4542,10 @@ ngb-datepicker {
                                             margin-right: 5px;
                                         }
                                     }
+
                                     .stars_rating {
                                         display: flex;
+
                                         img {
                                             object-fit: contain;
                                             max-width: 24px;
@@ -4406,9 +4572,11 @@ ngb-datepicker {
                                 color: $text-grey;
                                 width: 100%;
                                 padding: 0 10px;
+
                                 .place_name {
                                     display: flex;
                                     justify-content: space-between;
+
                                     .adress_span {
                                         max-width: 140px;
                                         white-space: nowrap;
@@ -4417,8 +4585,10 @@ ngb-datepicker {
                                         display: inline-block;
                                         width: 100%;
                                     }
+
                                     .ammin_listing {
                                         display: flex;
+
                                         .amminities_list {
                                             margin-left: 5px;
                                         }
@@ -4445,11 +4615,13 @@ ngb-datepicker {
                                 span {
                                     margin: 5px 0 0;
                                 }
+
                                 .review_section_wrap {
                                     display: flex;
                                     justify-content: flex-start;
                                     align-items: center;
                                     margin: 5px 0 10px;
+
                                     .rating_num {
                                         span {
                                             background-color: #1445f5;
@@ -4463,11 +4635,14 @@ ngb-datepicker {
                                             border-radius: 5px;
                                         }
                                     }
+
                                     .stars_text {
                                         margin-left: 14px;
+
                                         .stars_rating {
                                             margin-top: 0;
                                         }
+
                                         .review_num_text {
                                             a {
                                                 font-size: 12px;
@@ -4552,6 +4727,7 @@ ngb-datepicker {
                                     color: #5a5a5a;
                                     font-weight: 500;
                                     margin-left: 20px;
+
                                     img {
                                         margin-right: 8px;
                                     }
@@ -4560,16 +4736,20 @@ ngb-datepicker {
                         }
                     }
                 }
+
                 .block_price {
                     padding: 0 10px;
+
                     .block_inn_pr {
                         .block {
                             display: flex;
                             justify-content: space-between;
                             margin: 5px 0;
+
                             p {
                                 font-size: 12px;
                                 color: $text-grey;
+
                                 &span {
                                     color: #1943ff;
                                     font-size: 18px;
@@ -4582,22 +4762,26 @@ ngb-datepicker {
         }
     }
 }
+
 // Close Search Modify section
 
 // start Search Modify section
 .home_rental {
     &.search_result {
         padding: 30px 0 40px;
-        @include tab-view{
-            .container{
+
+        @include tab-view {
+            .container {
                 padding: 0 15px !important;
             }
         }
     }
+
     &.modify_search {
         width: 100%;
         background: $text-darkblue;
         padding: 15px 0;
+
         @include ipad-view {
             padding: 15px;
         }
@@ -4652,9 +4836,11 @@ ngb-datepicker {
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px;
+
                             &[readonly] {
                                 background-color: transparent;
                             }
+
                             &:focus {
                                 outline: none;
                                 box-shadow: none;
@@ -4681,6 +4867,7 @@ ngb-datepicker {
 
                         .hotel_where {
                             width: 100%;
+
                             @include ipad-view {
                                 width: 100%;
                             }
@@ -4763,8 +4950,10 @@ ngb-datepicker {
                             width: 100%;
                             margin-bottom: 15px;
                         }
+
                         .input-group {
                             width: 100%;
+
                             input {
                                 background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) !important;
                                 background-size: 20px;
@@ -4772,6 +4961,7 @@ ngb-datepicker {
                                 background-position: center right 15px;
                             }
                         }
+
                         .search_area {
                             padding: 10px 0;
                             border: 1px solid $box-border-color;
@@ -4795,12 +4985,13 @@ ngb-datepicker {
                                 color: $text-black;
                                 font-weight: 600;
                                 padding: 0 15px;
-                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
-                                    center right 15px no-repeat !important;
+                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px no-repeat !important;
+
                                 @media (max-width: 1199px) {
                                     font-size: 16px;
                                 }
                             }
+
                             .date_icon {
                                 width: 20px;
                                 height: 20px;
@@ -4900,8 +5091,7 @@ ngb-datepicker {
                                         right: 15px;
                                         top: 50%;
                                         transform: translateY(-50%);
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg)
-                                            no-repeat;
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
                                         background-size: cover;
                                     }
 
@@ -4942,6 +5132,7 @@ ngb-datepicker {
                                     color: $text-grey;
                                     padding: 0 15px;
                                 }
+
                                 .traveller_add_block {
                                     width: 260px;
                                     position: absolute;
@@ -4978,42 +5169,51 @@ ngb-datepicker {
                                         right: 20px;
                                         content: "";
                                     }
+
                                     .rooms_aloc {
                                         &.marign_rooms {
                                             margin-top: 10px;
                                             border-top: 1px solid $box-border-color;
                                             padding-top: 10px;
                                         }
+
                                         .room_label_main {
                                             display: flex;
                                             justify-content: space-between;
                                             align-items: center;
                                             margin-bottom: 10px;
+
                                             span {
                                                 padding: 0;
+
                                                 &:first-child {
                                                     font-size: 14px;
                                                     font-weight: 500;
                                                     text-transform: uppercase;
                                                 }
+
                                                 a {
                                                     color: $pink;
                                                     font-size: 12px;
                                                     font-weight: 500;
                                                     text-transform: uppercase;
                                                     cursor: pointer;
+
                                                     &.remove_room {
                                                         color: $error-color;
                                                     }
                                                 }
                                             }
                                         }
+
                                         .room_bottom_label {
                                             display: flex;
                                             justify-content: flex-end;
                                             align-items: center;
+
                                             span {
                                                 padding: 0;
+
                                                 a {
                                                     color: $pink;
                                                     font-size: 12px;
@@ -5022,10 +5222,12 @@ ngb-datepicker {
                                                 }
                                             }
                                         }
+
                                         .child_sel_wrapper {
                                             display: flex;
                                             flex-wrap: wrap;
                                             justify-content: flex-start;
+
                                             .child_boxes {
                                                 border: 1px solid $box-border-color;
                                                 border-radius: 8px;
@@ -5038,10 +5240,12 @@ ngb-datepicker {
                                                 &.open {
                                                     display: block;
                                                 }
+
                                                 .label_name {
                                                     padding: 0;
                                                     width: 100%;
                                                 }
+
                                                 select {
                                                     border: none;
                                                     width: 100%;
@@ -5049,8 +5253,8 @@ ngb-datepicker {
                                                     -webkit-appearance: none;
                                                     -moz-appearance: none;
                                                     appearance: none;
-                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg)
-                                                        center right 15px no-repeat !important;
+                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
+
                                                     &::after {
                                                         content: "";
 
@@ -5061,6 +5265,7 @@ ngb-datepicker {
                                                 }
                                             }
                                         }
+
                                         ul {
                                             margin: 0;
                                             padding: 0;
@@ -5267,11 +5472,13 @@ ngb-datepicker {
             }
         }
     }
+
     .sticky-top {
         &.left_side_bar {
             top: 80px;
         }
     }
+
     .filter_saidbar {
         width: 100%;
 
@@ -5354,7 +5561,8 @@ ngb-datepicker {
                     background: $background-white;
                     border: 1px solid $box-border-color;
                     border-radius: 35px;
-                    .accordion-heading{
+
+                    .accordion-heading {
                         padding: 20px 15px;
                         display: flex;
                         align-items: center;
@@ -5366,7 +5574,7 @@ ngb-datepicker {
                             width: 100%;
                             display: block;
                         }
-                        
+
                     }
 
                     &.active {
@@ -5848,16 +6056,20 @@ ngb-datepicker {
                             color: #8188ab;
                             margin: 0 0 10px;
                         }
+
                         .ng-select-container {
                             border: none;
                             margin-bottom: 20px;
                             height: 39px;
+
                             &:hover {
                                 box-shadow: none;
                             }
                         }
+
                         .ng-input {
                             padding: 0;
+
                             input {
                                 // border: 1px solid $box-border-color;
                                 border-bottom: 1px solid $box-border-color;
@@ -5875,6 +6087,7 @@ ngb-datepicker {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
+
                             a {
                                 display: inline-block;
                                 line-height: 38px;
@@ -5901,6 +6114,7 @@ ngb-datepicker {
                                     background: $primary-color;
                                     border: 1px solid $primary-color;
                                     color: $text-white;
+
                                     &:hover {
                                         // background: transparent;
                                         color: $primary-color;
@@ -5933,23 +6147,26 @@ ngb-datepicker {
                 }
             }
 
-            .block_shortby{
-                .accordion-group{
+            .block_shortby {
+                .accordion-group {
                     background: $background-white;
                     border: 1px solid $box-border-color;
                     border-radius: 35px;
-                    .accordion-heading{
+
+                    .accordion-heading {
                         padding: 20px 15px;
                         display: flex;
                         align-items: center;
-                       .accordion-toggle{
+
+                        .accordion-toggle {
                             font-size: 20px;
                             color: $text-grey;
                             font-weight: 500;
                             width: 100%;
                             display: block;
-                       }
-                       &:after {
+                        }
+
+                        &:after {
                             font-family: 'FontAwesome';
                             content: "\f054";
                             float: right;
@@ -5957,12 +6174,14 @@ ngb-datepicker {
                             font-weight: normal;
                             transition: 0.3s;
                         }
-                        .anchor_link{
+
+                        .anchor_link {
                             color: $text_light_yellow;
                             font-size: 16px;
                             margin-right: 10px;
                         }
                     }
+
                     &.active {
                         .accordion-heading {
                             &:after {
@@ -6047,6 +6266,7 @@ ngb-datepicker {
                                         border-right: none;
                                         padding: 0;
                                     }
+
                                     .home_list_img_wrp {
                                         position: relative;
                                         background-size: cover;
@@ -6054,16 +6274,19 @@ ngb-datepicker {
                                         background-position: center center;
                                         width: 100%;
                                         height: 170px;
+
                                         img {
                                             max-width: 100%;
                                             height: 100%;
                                         }
+
                                         .fav_sections {
                                             position: absolute;
                                             top: 10px;
                                             left: 10px;
                                             height: 20px;
                                             width: 20px;
+
                                             a {
                                                 background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
                                                 background-repeat: no-repeat;
@@ -6109,6 +6332,7 @@ ngb-datepicker {
 
                                         span {
                                             margin: 0;
+
                                             &.adress_span {
                                                 max-width: 380px;
                                                 white-space: nowrap;
@@ -6118,16 +6342,17 @@ ngb-datepicker {
                                                 width: 100%;
                                             }
                                         }
+
                                         .review_section_wrap {
                                             display: flex;
                                             justify-content: flex-start;
                                             align-items: center;
                                             margin: 5px 0 10px;
 
-                                            @include tab-view{
+                                            @include tab-view {
                                                 display: none;
                                             }
-                                            
+
                                             .rating_num {
                                                 span {
                                                     background-color: #1445f5;
@@ -6141,11 +6366,14 @@ ngb-datepicker {
                                                     border-radius: 5px;
                                                 }
                                             }
+
                                             .stars_text {
                                                 margin-left: 14px;
+
                                                 .stars_rating {
                                                     margin-top: 0;
                                                 }
+
                                                 .review_num_text {
                                                     a {
                                                         font-size: 12px;
@@ -6232,6 +6460,7 @@ ngb-datepicker {
                                     color: #5a5a5a;
                                     font-weight: 500;
                                     margin-left: 20px;
+
                                     img {
                                         margin-right: 8px;
                                     }
@@ -6366,10 +6595,11 @@ ngb-datepicker {
 
                             &:hover {
                                 color: $primary-color;
+
                                 &:before {
-									height: 37px;
+                                    height: 37px;
                                     width: 100%;
-								}
+                                }
                             }
                         }
 
@@ -7149,6 +7379,7 @@ ngb-datepicker {
             }
 
         }
+
         &.home_map_listings {
             .search_block {
                 background-color: $background-white;
@@ -7178,35 +7409,41 @@ ngb-datepicker {
                                 border-right: none;
                                 padding: 0;
                             }
+
                             .home_list_img_wrp {
                                 position: relative;
                                 // background-size: cover;
                                 // background-position: center center;
                                 width: 100%;
                                 height: 170px;
+
                                 img {
                                     max-width: 100%;
                                     height: 100%;
                                     object-fit: cover;
                                     object-position: center;
                                 }
+
                                 .fav_sections {
                                     position: absolute;
                                     top: 10px;
                                     right: 10px;
                                     height: 20px;
                                     width: 20px;
+
                                     a {
                                         background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
                                         background-repeat: no-repeat;
                                         padding: 0px 12px;
                                     }
                                 }
+
                                 .review_section_wrap {
                                     position: absolute;
                                     top: 10px;
                                     left: 10px;
                                     display: flex;
+
                                     .rating_num {
                                         span {
                                             background-color: #1445f5;
@@ -7221,8 +7458,10 @@ ngb-datepicker {
                                             margin-right: 5px;
                                         }
                                     }
+
                                     .stars_rating {
                                         display: flex;
+
                                         img {
                                             object-fit: contain;
                                             max-width: 24px;
@@ -7249,9 +7488,11 @@ ngb-datepicker {
                                 color: $text-grey;
                                 width: 100%;
                                 padding: 0 10px;
+
                                 .place_name {
                                     display: flex;
                                     justify-content: space-between;
+
                                     .adress_span {
                                         max-width: 140px;
                                         white-space: nowrap;
@@ -7260,8 +7501,10 @@ ngb-datepicker {
                                         display: inline-block;
                                         width: 100%;
                                     }
+
                                     .ammin_listing {
                                         display: flex;
+
                                         .amminities_list {
                                             margin-left: 5px;
                                         }
@@ -7288,11 +7531,13 @@ ngb-datepicker {
                                 span {
                                     margin: 5px 0 0;
                                 }
+
                                 .review_section_wrap {
                                     display: flex;
                                     justify-content: flex-start;
                                     align-items: center;
                                     margin: 5px 0 10px;
+
                                     .rating_num {
                                         span {
                                             background-color: #1445f5;
@@ -7306,11 +7551,14 @@ ngb-datepicker {
                                             border-radius: 5px;
                                         }
                                     }
+
                                     .stars_text {
                                         margin-left: 14px;
+
                                         .stars_rating {
                                             margin-top: 0;
                                         }
+
                                         .review_num_text {
                                             a {
                                                 font-size: 12px;
@@ -7395,6 +7643,7 @@ ngb-datepicker {
                                     color: #5a5a5a;
                                     font-weight: 500;
                                     margin-left: 20px;
+
                                     img {
                                         margin-right: 8px;
                                     }
@@ -7403,16 +7652,20 @@ ngb-datepicker {
                         }
                     }
                 }
+
                 .block_price {
                     padding: 0 10px;
+
                     .block_inn_pr {
                         .block {
                             display: flex;
                             justify-content: space-between;
                             margin: 5px 0;
+
                             p {
                                 font-size: 12px;
                                 color: $text-grey;
+
                                 &span {
                                     color: #1943ff;
                                     font-size: 18px;
@@ -7425,10 +7678,12 @@ ngb-datepicker {
         }
     }
 }
+
 // Close Search Modify section
 
 // detail slider
-.hotel_detail_slider , .home_detail_slider {
+.hotel_detail_slider,
+.home_detail_slider {
     padding-bottom: 40px;
 
     .slider_main_contain {
@@ -7441,6 +7696,7 @@ ngb-datepicker {
             @include tab-view {
                 height: 350px !important;
             }
+
             ngx-gallery-image {
                 margin-bottom: 13px;
 
@@ -7455,15 +7711,14 @@ ngb-datepicker {
                         z-index: -1;
                         top: 0;
                         left: 0;
-                        background: -webkit-radial-gradient(
-                            top center,
-                            ellipse cover,
-                            rgba(255, 255, 255, 0.15) 0%,
-                            rgba(0, 0, 0, 0.5) 100%
-                        );
+                        background: -webkit-radial-gradient(top center,
+                                ellipse cover,
+                                rgba(255, 255, 255, 0.15) 0%,
+                                rgba(0, 0, 0, 0.5) 100%);
                     }
                 }
             }
+
             ngx-gallery-thumbnails {
                 a {
                     &.ngx-gallery-thumbnail {
@@ -7482,6 +7737,7 @@ ngb-datepicker {
             color: $text-white;
             margin: 0px;
             z-index: 9999;
+
             @include tab-view {
                 bottom: 90px;
                 padding: 0px 15px;
@@ -7489,9 +7745,11 @@ ngb-datepicker {
 
             .hotel_name {
                 padding-bottom: 20px;
+
                 span {
                     font-size: 12px;
                 }
+
                 @include tab-view {
                     padding-bottom: 10px;
 
@@ -7509,16 +7767,20 @@ ngb-datepicker {
                 background-color: $text-white;
                 margin: 0 0;
             }
+
             .room-rating {
                 @include tab-view {
                     margin: 10px 0;
                 }
+
                 .room_rate_box {
                     display: flex;
                     justify-content: flex-end;
+
                     @include tab-view {
                         justify-content: flex-start;
                     }
+
                     .rate-box {
                         background: $text-white;
                         font-size: 14px;
@@ -7530,21 +7792,25 @@ ngb-datepicker {
                         display: flex;
                         justify-content: center;
                         align-items: center;
+
                         @include tab-view {
                             font-size: 11px;
                             width: 25px;
                             height: 25px;
                         }
                     }
+
                     .rating {
                         border-bottom: 2px solid;
                         display: flex;
                         padding: 0;
                         align-items: center;
                         font-size: 12px;
+
                         @include tab-view {
                             border-bottom: none;
                         }
+
                         i {
                             &:first-child {
                                 margin-left: 5px;
@@ -7597,22 +7863,26 @@ ngb-datepicker {
         }
     }
 }
+
 // detail slider
 
 // hotel tab
-.hotel_detail_tabs , .home_detail_tab {
+.hotel_detail_tabs,
+.home_detail_tab {
     .nav-tabs {
         border-bottom: none;
 
         .nav-item {
             width: 25%;
             text-align: center;
+
             &:first-child {
                 a {
                     border-top-left-radius: 5px;
                     margin: 0px 1px 0 0;
                 }
             }
+
             &:last-child {
                 a {
                     border-top-right-radius: 5px;
@@ -7633,6 +7903,7 @@ ngb-datepicker {
                     color: $text-white;
                     background-color: $primary-color;
                 }
+
                 @include tab-view {
                     padding: 8px;
                     font-size: 12px;
@@ -7646,6 +7917,7 @@ ngb-datepicker {
         padding: 20px;
         box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
         border-radius: 0 0 5px 5px;
+
         @include tab-view {
             padding: 15px;
             font-size: 12px;
@@ -7654,6 +7926,7 @@ ngb-datepicker {
         .tab-pane {
             h4 {
                 font-weight: 600;
+
                 @include tab-view {
                     font-size: 16px;
                 }
@@ -7664,17 +7937,21 @@ ngb-datepicker {
                 line-height: 21px;
                 font-weight: 300;
                 margin-bottom: 20px;
+
                 @include tab-view {
                     font-size: 12px;
                 }
             }
+
             .amenities_listin_tab {
                 .aminities_detailing {
                     padding: 5px;
+
                     i {
                         color: $text-grey;
                         font-size: 14px;
                     }
+
                     span {
                         font-size: 12px;
                         color: $text-grey;
@@ -7682,10 +7959,12 @@ ngb-datepicker {
                     }
                 }
             }
+
             .reviews_wrapper_main {
                 .ratings_section {
                     display: flex;
                     justify-content: flex-start;
+
                     .rating_num {
                         .blue_box {
                             color: $text-white;
@@ -7699,27 +7978,33 @@ ngb-datepicker {
                             clip-path: polygon(21% 0, 100% 0%, 75% 100%, 0% 100%);
                         }
                     }
+
                     .rating_detail {
                         margin-left: 15px;
+
                         .users_name {
                             font-size: 14px;
                             margin-bottom: 5px;
                             display: flex;
                         }
+
                         .stars_text {
                             display: flex;
                             justify-content: flex-start;
                             align-items: center;
                             margin-bottom: 10px;
+
                             .stars_wrapper {
                                 margin-right: 10px;
                                 display: flex;
+
                                 img {
                                     display: flex;
                                     justify-content: flex-start;
                                     align-items: center;
                                 }
                             }
+
                             p {
                                 color: #19dd00;
                                 font-size: 14px;
@@ -7729,12 +8014,14 @@ ngb-datepicker {
                         }
                     }
                 }
+
                 .rating_text {
                     color: $text-grey;
                     line-height: 21px;
                     font-weight: 300;
                     margin-bottom: 20px;
                     margin-left: 65px;
+
                     @include tab-view {
                         font-size: 12px;
                     }
@@ -7743,13 +8030,15 @@ ngb-datepicker {
         }
     }
 }
-.home_detail_tab{
+
+.home_detail_tab {
     .nav-tabs {
         .nav-item {
             width: 33.33%;
         }
     }
 }
+
 // hotel tab
 
 // HOTEL CUSTOM CSS
@@ -7757,11 +8046,13 @@ ngb-datepicker {
     border-bottom: 1px solid #000;
     line-height: 2.2;
 }
+
 .hotel-parent-recent-search {
     padding: 2px 10px 10px 10px;
 
     .recent-search-body {
         display: flex;
+
         img {
             margin: 2px 5px 5px 0px;
         }
