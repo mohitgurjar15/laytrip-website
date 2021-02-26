@@ -108,6 +108,10 @@
         width: 100%;
         padding: 0;
 
+        @include tab-view {
+          font-size: 12px;
+        }
+
         &[aria-expanded="true"] {
           &:after {
             font-family: "FontAwesome";
@@ -128,6 +132,12 @@
             transition: 0.3s;
             right: 0;
           }
+        }
+        .tr_type{
+          flex: 1;
+        }
+        .trv_name{
+          flex: 2;
         }
       }
     }
