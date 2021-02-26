@@ -3,16 +3,8 @@
 <section class="payment_mode_main_wrapper flight">
     <div class="container" *ngIf="!isCartEmpty">
         <form>
-            <div class="row">
-                <div class="timer_main_wrapper">
-                    <div class="upper_big_fonts">
-                        You have <span>9:15</span> to complete this booking!
-                    </div>
-                    <div class="lo_sm_fn">
-                        Review all details then Pay and Book
-                    </div>
-                </div>
-            </div>
+            <app-booking-timer (sessionTimeout)="sessionTimeout($event)" [config]="bookingTimerConfig">
+            </app-booking-timer>
             <div class="row">
                 <div class="col-lg-7">
                     <h3>Your Bookings</h3>
