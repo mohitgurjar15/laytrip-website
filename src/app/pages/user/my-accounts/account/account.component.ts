@@ -65,8 +65,8 @@ export class AccountComponent implements OnInit {
 
   deleteAccount(){
     this.loading = true;
-    let data = {"requireBackupFile": this.isRequireBackupFile};
-    this.userService.deleteAccount(data).subscribe((data: any) => {      
+    
+    this.userService.deleteAccount(this.isRequireBackupFile).subscribe((data: any) => {      
       this.modalService.dismissAll();
       this.loading = false;
       this.toastrService.success(data.message,'Deleted Account Successfully')

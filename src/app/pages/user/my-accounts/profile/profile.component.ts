@@ -116,6 +116,7 @@ export class ProfileComponent implements OnInit {
   }
 
   selectGender(event, type) {
+
     if (this.isFormControlEnable) {
       this.is_gender = true;
       if (type == 'M') {
@@ -218,7 +219,6 @@ export class ProfileComponent implements OnInit {
     // this.submitted = true;
     const controls = this.profileForm.controls;
     this.loadingValue.emit(true);
-    console.log(this.profileForm)
     if (this.profileForm.invalid) {
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()
@@ -250,7 +250,7 @@ export class ProfileComponent implements OnInit {
       formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
       formdata.append("address", this.profileForm.value.address);
       formdata.append("phone_no", this.profileForm.value.phone_no);
-      formdata.append("gender", this.profileForm.value.gender);
+      formdata.append("gender", this.is_type);
       formdata.append("country_code", this.profileForm.value.country_code);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
       this.isFormControlEnable = false;

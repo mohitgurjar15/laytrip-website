@@ -14,7 +14,7 @@ var custom_validators_1 = require("../../../../_helpers/custom.validators");
 var moment = require("moment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(formBuilder, userService, genericService, router, commonFunction, toastr, cookieService, flightService) {
+    function ProfileComponent(formBuilder, userService, genericService, router, commonFunction, toastr, cookieService, flightService, checkOutService) {
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.genericService = genericService;
@@ -23,8 +23,9 @@ var ProfileComponent = /** @class */ (function () {
         this.toastr = toastr;
         this.cookieService = cookieService;
         this.flightService = flightService;
+        this.checkOutService = checkOutService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
-        this.submitted = false;
+        // submitted = false;
         this.loading = true;
         this.loadingValue = new core_1.EventEmitter();
         this.minDate = {};
@@ -53,6 +54,7 @@ var ProfileComponent = /** @class */ (function () {
         this.loadingDeparture = false;
         this.departureAirport = {};
         this.arrivalAirport = {};
+        this.countries = [];
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.loadingValue.emit(true);
@@ -77,6 +79,24 @@ var ProfileComponent = /** @class */ (function () {
             home_airport: ['']
         }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });
         this.getProfileInfo();
+        this.getCountry();
+    };
+    ProfileComponent.prototype.getCountry = function () {
+        var _this = this;
+        this.genericService.getCountry().subscribe(function (data) {
+            _this.countries = data.map(function (country) {
+                return {
+                    id: country.id,
+                    name: country.name,
+                    countryCode: country.phonecode,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
+                };
+            }, function (error) {
+                if (error.status === 401) {
+                    _this.router.navigate(['/']);
+                }
+            });
+        });
     };
     ProfileComponent.prototype.selectGender = function (event, type) {
         if (this.isFormControlEnable) {
@@ -124,13 +144,13 @@ var ProfileComponent = /** @class */ (function () {
                 imgfile = this.imageFile;
                 formdata.append("profile_pic", imgfile);
                 this.userService.updateProfileImage(formdata).subscribe(function (data) {
-                    _this.submitted = false;
+                    // this.submitted = false;
                     _this.loadingValue.emit(false);
                     localStorage.setItem("_lay_sess", data.token);
                     // this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
                 }, function (error) {
                     _this.loadingValue.emit(false);
-                    _this.submitted = false;
+                    // this.submitted = false;
                     // this.toastr.error(error.error.message, 'Profile Error');
                 });
             }
@@ -164,6 +184,7 @@ var ProfileComponent = /** @class */ (function () {
                 passport_number: res.passportNumber
             });
             _this.profileForm.controls['home_airport'].disable();
+            _this.profileForm.controls['country_code'].disable();
         }, function (error) {
             _this.loadingValue.emit(false);
             if (error.status === 401) {
@@ -176,10 +197,13 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.submitted = true;
+        // this.submitted = true;
+        var controls = this.profileForm.controls;
         this.loadingValue.emit(true);
-        console.log(this.profileForm);
         if (this.profileForm.invalid) {
+            Object.keys(controls).forEach(function (controlName) {
+                return controls[controlName].markAsTouched();
+            });
             this.loadingValue.emit(false);
             //scroll top if any error 
             var scrollToTop_1 = window.setInterval(function () {
@@ -207,19 +231,20 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
             formdata.append("address", this.profileForm.value.address);
             formdata.append("phone_no", this.profileForm.value.phone_no);
-            formdata.append("gender", this.profileForm.value.gender);
+            formdata.append("gender", this.is_type);
             formdata.append("country_code", this.profileForm.value.country_code);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
             this.isFormControlEnable = false;
             this.profileForm.controls['home_airport'].disable();
+            this.profileForm.controls['country_code'].disable();
             this.userService.updateProfile(formdata).subscribe(function (data) {
-                _this.submitted = false;
+                // this.submitted = false;
                 _this.loadingValue.emit(false);
                 localStorage.setItem("_lay_sess", data.token);
                 // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
             }, function (error) {
                 _this.loadingValue.emit(false);
-                _this.submitted = false;
+                // this.submitted = false;
                 // this.toastr.error(error.error.message, 'Profile Error');
             });
         }
@@ -227,6 +252,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.enableFormControlInputs = function (event) {
         this.isFormControlEnable = true;
         this.profileForm.controls['home_airport'].enable();
+        this.profileForm.controls['country_code'].enable();
     };
     ProfileComponent.prototype.onRemove = function (event, item) {
         if (item.key === 'fromSearch') {

@@ -78,15 +78,24 @@ var UserService = /** @class */ (function () {
     UserService.prototype.resetPassword = function (data) {
         return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
     };
-    UserService.prototype.deleteAccount = function (data) {
+    UserService.prototype.deleteAccount = function (isRequireBackupFile) {
         var accessToken = localStorage.getItem('_lay_sess');
+        /*   const options = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                
+            },
+          } */
         var options = {
             headers: {
-                Authorization: "Bearer " + accessToken,
-                data: data
+                Authorization: "Bearer " + accessToken
+            },
+            body: {
+                requireBackupFile: isRequireBackupFile
             }
         };
-        return this.http["delete"](this.apiURL + 'v1/user/delete-account-request', options);
+        console.log(options);
+        return this.http["delete"](this.apiURL + 'v1/user/account-request', options);
     };
     UserService.prototype.changePassword = function (data) {
         return this.http.put(this.apiURL + 'v1/auth/change-password', data, this.commonFunction.setHeaders());
