@@ -12,6 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { BookingCompletionErrorPopupComponent } from 'src/app/components/booking-completion-error-popup/booking-completion-error-popup.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export interface CartItem {
 
@@ -64,7 +66,8 @@ export class CheckoutComponent implements OnInit {
   }
   isSessionTimeOut: boolean = false;
   bookingTimerConfig;
-  routeCode: string;
+  isBookingRequest = false;
+  modalRef;
 
   constructor(
     private genericService: GenericService,
@@ -76,9 +79,11 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private commonFunction: CommonFunction,
     private route: ActivatedRoute,
+    private modalService: NgbModal,
   ) {
     //this.totalLaycredit();
     this.getCountry();
+    // this.openBookingCompletionErrorPopup();
   }
 
   ngOnInit() {
@@ -92,8 +97,6 @@ export class CheckoutComponent implements OnInit {
       this.guestUserId = this.commonFunction.getGuestUser();
     }
 
-    this.routeCode = decodeURIComponent(this.route.snapshot.paramMap.get('rc'));
-    console.log(this.routeCode);
     this.bookingTimerConfiguration();
 
     this.cartLoading = true;
@@ -163,6 +166,9 @@ export class CheckoutComponent implements OnInit {
 
   sessionTimeout(event) {
     this.isSessionTimeOut = event;
+    if (this.isSessionTimeOut && !this.isBookingRequest) {
+      this.router.navigate(['/cart/booking']);
+    }
   }
 
   bookingTimerConfiguration() {
@@ -279,6 +285,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   bookFlight() {
+    this.isBookingRequest = true;
     this.validationErrorMessage = '';
     this.validateCartItems();
     if (this.userInfo.roleId == 7) {
@@ -291,7 +298,6 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
     this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
     this.bookingRequest.cart = carts;
-    console.log("this.bookingRequest", this.bookingRequest)
     if (this.isValidTravelers && this.cardToken != '') {
       this.isBookingProgress = true;
       window.scroll(0, 0);
@@ -339,7 +345,6 @@ export class CheckoutComponent implements OnInit {
     else {
       this.isBookingProgress = false;
     }
-
   }
 
   adjustPriceSummary() {
@@ -380,5 +385,14 @@ export class CheckoutComponent implements OnInit {
     }, (err) => {
 
     })
+  }
+
+  openBookingCompletionErrorPopup() {
+    this.modalRef = this.modalService.open(BookingCompletionErrorPopupComponent, {
+      windowClass: 'booking_completion_error_block', centered: true, backdrop: 'static',
+      keyboard: false
+    }).result.then((result) => {
+
+    });
   }
 }
