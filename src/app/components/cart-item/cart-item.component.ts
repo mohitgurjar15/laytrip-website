@@ -57,6 +57,7 @@ export class CartItemComponent implements OnInit {
         if(indexExist==-1){
           this.cartAlerts.push({
             type : 'price_change',
+            name : `${this.cartItem.module_info.departure_code}-${this.cartItem.module_info.arrival_code}`,
             id : this.cartItem.id
           })
           localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))

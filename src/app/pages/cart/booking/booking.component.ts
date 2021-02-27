@@ -60,6 +60,8 @@ export class BookingComponent implements OnInit {
   notAvailableError:string='';
   isNotAvailableItinerary:boolean=false;
   isAllAlertClosed:boolean=true;
+  isSubmitted:boolean=false;
+  alertErrorMessage:string='';
 
   constructor(
     private router: Router,
@@ -96,7 +98,7 @@ export class BookingComponent implements OnInit {
         cart = {};
         cart.type = items.data[i].type;
         cart.module_info = items.data[i].moduleInfo[0];
-        cart.is_available = items.data[i].id==1?false:items.data[i].is_available;
+        cart.is_available = items.data[i].is_available;
         cart.old_module_info = {
           selling_price: items.data[i].oldModuleInfo[0].selling_price
         };
@@ -125,7 +127,7 @@ export class BookingComponent implements OnInit {
     });
 
     this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
-      console.log("catyddd", cartId)
+    
       if (cartId > 0) {
         this.deleteCart(cartId);
       }
@@ -142,6 +144,10 @@ export class BookingComponent implements OnInit {
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
       this.isValidTravelers = travelerFrom.status === 'VALID' ? true : false;
       this.travelerForm = travelerFrom;
+      if(this.carts.length && this.isSubmitted){
+        this.validationErrorMessage = '';
+        this.validateCartItems();
+      }
     })
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
@@ -336,6 +342,8 @@ export class BookingComponent implements OnInit {
   selectCreditCard(data) {
     this.cardToken = data;
     this.cookieService.put("__cc", this.cardToken);
+    this.validationErrorMessage = '';
+    this.validateCartItems();
   }
 
   removeValidationError() {
@@ -378,12 +386,32 @@ export class BookingComponent implements OnInit {
       //this.notAvailableError +='.';
     }
 
-    let cartAlerts = localStorage.getItem("__alrt")
+    let cartAlerts:any = localStorage.getItem("__alrt")
+    this.alertErrorMessage='';
     try{
 
       if(cartAlerts){
+        this.alertErrorMessage='Please close alert of price change for';
         cartAlerts = JSON.parse(cartAlerts);
         if(cartAlerts.length){
+          for(let i=0; i <cartAlerts.length;i++){
+            if(cartAlerts[i].type=='price_change'){
+              this.alertErrorMessage+=` ${cartAlerts[i].name} ,`
+            }
+          }
+          let index = this.alertErrorMessage.lastIndexOf(" ");
+          this.alertErrorMessage = this.alertErrorMessage.substring(0, index);
+          for(let i=0; i <cartAlerts.length;i++){
+            if(cartAlerts[i].type=='installment_vartion'){
+              if(cartAlerts.length==1){
+                this.alertErrorMessage="Please close alert of odd installment amount.";
+              }
+              else{
+                this.alertErrorMessage+=` and odd installment amount.`;
+              }
+            }
+          }
+          
           this.isAllAlertClosed=false;
         }
         else{
@@ -406,6 +434,7 @@ export class BookingComponent implements OnInit {
 
     this.validationErrorMessage = '';
     this.validateCartItems();
+    this.isSubmitted=true;
 
     if (this.cardToken == '') {
       if (this.validationErrorMessage == '') {
