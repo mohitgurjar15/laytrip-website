@@ -387,12 +387,12 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-  openBookingCompletionErrorPopup() {
+  /* openBookingCompletionErrorPopup() {
     this.modalRef = this.modalService.open(BookingCompletionErrorPopupComponent, {
       windowClass: 'booking_completion_error_block', centered: true, backdrop: 'static',
       keyboard: false
     }).result.then((result) => {
 
     });
-  }
+  } */
 }
