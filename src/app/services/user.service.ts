@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { throwError, Observable } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
@@ -107,15 +107,24 @@ export class UserService {
     return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
   }
 
-  deleteAccount(data) {
+  deleteAccount(isRequireBackupFile) {
     const accessToken = localStorage.getItem('_lay_sess');
-    const options = {
+  /*   const options = {
       headers: {
           Authorization: `Bearer ${accessToken}`,
-          data
+          
       },
+    } */
+    const options = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,          
+      },
+      body: {
+        requireBackupFile: isRequireBackupFile
+      }
     }
-    return this.http.delete( this.apiURL + 'v1/user/delete-account-request', options)
+    console.log(options)
+    return this.http.delete( this.apiURL + 'v1/user/account-request', options)
   }
 
   changePassword(data) {

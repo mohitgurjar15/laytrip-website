@@ -168,6 +168,7 @@ var ListTravellerComponent = /** @class */ (function () {
             var emailObj = { email: formData.value.email ? formData.value.email : '' };
             this.travelerService.addAdult(jsonData).subscribe(function (data) {
                 _this.getTravelers();
+                _this.childComponent.travellerForm.reset();
                 _this.loadingValue.emit(false);
             }, function (error) {
                 _this.loadingValue.emit(false);

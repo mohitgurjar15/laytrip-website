@@ -207,6 +207,7 @@ export class ListTravellerComponent implements OnInit {
 
       this.travelerService.addAdult(jsonData).subscribe((data: any) => {
         this.getTravelers();
+        this.childComponent.travellerForm.reset();
         this.loadingValue.emit(false);
       }, (error: HttpErrorResponse) => {
         this.loadingValue.emit(false);
