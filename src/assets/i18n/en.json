@@ -272,7 +272,7 @@
     "current_password_placeholder": "Enter your current password",
     "re_enter_new_password": "Re-enter your new password",
     "current_password_touched_validation": "Please enter your old password.",
-    "confirm_new_password_match_validation": "Confirm password and Reenter password doesn't match.",
+    "confirm_new_password_match_validation": "Confirm password and Re-enter new password doesn't match.",
     "error_change_password": "Error Chagne Password",
     "current_password_not_match": "Your current password doesn't match",
     "password_update": "Password Updated",
