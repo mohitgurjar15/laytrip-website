@@ -56,6 +56,8 @@ import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DeleteCartitemConfirmationPopupComponent } from './delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { BookingCompletionErrorPopupComponent } from './booking-completion-error-popup/booking-completion-error-popup.component';
+
 
 @NgModule({
   declarations: [
@@ -99,6 +101,7 @@ import { NgxMaskModule } from 'ngx-mask';
     CartLoaderComponent,
     LaytripLoaderComponent,
     EmptyCartComponent,
+    BookingCompletionErrorPopupComponent,
   ],
   imports: [
     CommonModule,
@@ -162,10 +165,11 @@ import { NgxMaskModule } from 'ngx-mask';
     NgxSpinnerModule,
     EmptyCartComponent,
     LottieAnimationViewModule,
-    DeleteCartitemConfirmationPopupComponent
+    DeleteCartitemConfirmationPopupComponent,
+    BookingCompletionErrorPopupComponent
   ],
   providers: [DatePipe, NgxSpinnerService, NgbActiveModal],
-  entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent],
+  entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ]

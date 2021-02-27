@@ -12,6 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { BookingCompletionErrorPopupComponent } from 'src/app/components/booking-completion-error-popup/booking-completion-error-popup.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export interface CartItem {
 
@@ -65,6 +67,7 @@ export class CheckoutComponent implements OnInit {
   isSessionTimeOut: boolean = false;
   bookingTimerConfig;
   isBookingRequest = false;
+  modalRef;
 
   constructor(
     private genericService: GenericService,
@@ -76,9 +79,11 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private commonFunction: CommonFunction,
     private route: ActivatedRoute,
+    private modalService: NgbModal,
   ) {
     //this.totalLaycredit();
     this.getCountry();
+    // this.openBookingCompletionErrorPopup();
   }
 
   ngOnInit() {
@@ -380,5 +385,14 @@ export class CheckoutComponent implements OnInit {
     }, (err) => {
 
     })
+  }
+
+  openBookingCompletionErrorPopup() {
+    this.modalRef = this.modalService.open(BookingCompletionErrorPopupComponent, {
+      windowClass: 'booking_completion_error_block', centered: true, backdrop: 'static',
+      keyboard: false
+    }).result.then((result) => {
+
+    });
   }
 }
