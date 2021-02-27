@@ -178,7 +178,7 @@ export class TravelerFormComponent implements OnInit {
               /* for (let i = 0; i < 5; i++) {
                 for (let j = 0; j < this.travelers[`type${i}`].adults.length; j++) {
 
-                  if(typeof this.travelers[`type${i}`].adults[j]!=='undefined'){
+                  if(typeof this.travelers[`type${i}`].adults[j]!=='undefined' && this.travelers[`type${i}`].adults[j].length>0){
                     console.log(this.travelers[`type${i}`].adults[j],j,"this.travelers[`type${i}`].")
                     index = this.travelers[`type${i}`].adults[j].findIndex(x => x.userId == traveler.userId);
                     if (index > -1) {
