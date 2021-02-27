@@ -52,7 +52,7 @@
                 <div class="card">
                     <div class="card-header">
                         <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#listing_descrip">
-                            {{cartItem?.cartInstallments?.length}} Monthly Installments of ${{cartItem?.cartInstallments[0]?.amount | number : '1.2-2'}}
+                            {{cartItem?.cartInstallments?.length}} {{installmentType[cartItem.installmentType]}} Installments of ${{cartItem?.cartInstallments[0]?.amount | number : '1.2-2'}}
                         </a>
                     </div>
                     <div id="listing_descrip" class="collapse show"Paid data-parent="#accordion_listing">

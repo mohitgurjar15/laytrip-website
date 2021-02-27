@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
+import {installmentType} from '../../../../../_helpers/generic.helper';
 
 @Component({
   selector: 'app-cart-price-summary',
@@ -10,8 +11,11 @@ export class CartPriceSummaryComponent implements OnInit {
 
   @Input() cartItem: any = {}; 
   cartDueLoopNum=0;
+  installmentType;
 
-  constructor(public commonFunction:CommonFunction) { }
+  constructor(public commonFunction:CommonFunction) {
+    this.installmentType= installmentType.en;
+   }
 
   ngOnInit(): void {
   }

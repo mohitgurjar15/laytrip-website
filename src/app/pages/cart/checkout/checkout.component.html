@@ -3,6 +3,8 @@
 <section class="payment_mode_main_wrapper flight">
     <div class="container" *ngIf="!isCartEmpty">
         <form>
+            <app-booking-timer (sessionTimeout)="sessionTimeout($event)" [config]="bookingTimerConfig">
+            </app-booking-timer>
             <div class="row">
                 <div class="col-lg-7">
                     <h3>Your Bookings</h3>
@@ -14,7 +16,8 @@
                     <div class="booking_detail_bg_wrps">
                         <div id="accordion-card" class="card_accordion">
                             <div class="card">
-                                <app-card-list cardListChangeCount="{{cardListChangeCount}}" cardToken={{cardToken}}></app-card-list>
+                                <app-card-list cardListChangeCount="{{cardListChangeCount}}" cardToken={{cardToken}}>
+                                </app-card-list>
                                 <div class="new_card">
                                     <div class="card-header">
                                         <a class="card-link" data-toggle="collapse" href="#collapseOne"
@@ -27,7 +30,8 @@
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                         <div class="card-body">
-                                            <app-add-card (emitCardListChange)="getCardListChange($event)"></app-add-card>
+                                            <app-add-card (emitCardListChange)="getCardListChange($event)">
+                                            </app-add-card>
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +47,7 @@
                             </app-price-summary>
                         </div>
                         <div class="cta_btn_wrapper">
-                            <button  (click)="bookFlight()">Pay and Book</button>
+                            <button (click)="bookFlight()">Pay and Book</button>
 
                         </div>
                     </div>

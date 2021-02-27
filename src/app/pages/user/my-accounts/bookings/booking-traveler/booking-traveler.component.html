@@ -1,8 +1,11 @@
 <div id="accordion_Bookings" class="accordion_bookings"
     *ngIf="(travelers | json) != '{}' && (moduleInfo | json) != '{}' ">
-    <div class="card" *ngFor="let traveler of travelers">
-        <div class="card-header">
-            <a class="card-link">
+    <div class="card traveller_card_accr" *ngFor="let traveler of travelers">
+        <div class="card-header tr_card_header">
+            <a class="card-link ">
+                {{traveler.roleId == 6 ?'Primary Traveler':'Additional Traveler'}} 
+            </a>
+            <a class="card-link new_link">
                 {{ traveler.userData.firstName || '' | titlecase}} {{ traveler.userData.lastName || '' | titlecase }}
             </a>
         </div>
@@ -88,7 +91,7 @@
                                     <div class="tab-pane fade show active" id="baggage" role="tabpanel"
                                         aria-labelledby="baggage-tab">
                                         <div class="addon_listins_wrps">
-                                            <span></span>
+                                            <span class="fake_span"></span>
                                             <button class="addon_btn_drop" (click)="$event.preventDefault()">
                                                <!--  {{formatBaggageDescription(moduleInfo[0]?.routes[0]?.stops[0]?.cabin_baggage,
                                                 moduleInfo[0]?.routes[0]?.stops[0]?.checkin_baggage)}} -->

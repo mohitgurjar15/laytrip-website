@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input,EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -29,9 +29,9 @@ export class VerifyOtpComponent implements OnInit {
   errorMessage = '';
   spinner = false;
   @Input() emailForVerifyOtp;
-  @Input() isUserNotVerify : boolean = false;
-  @Input() isSignup : boolean = false;
-  apiError :string =  '';
+  @Input() isUserNotVerify: boolean = false;
+  @Input() isSignup: boolean = false;
+  apiError: string = '';
   config = {
     allowNumbersOnly: true,
     length: 6,
@@ -43,29 +43,29 @@ export class VerifyOtpComponent implements OnInit {
       'height': '64px'
     }
   };
-  isResend : boolean = false;
-  @ViewChild('ngOtpInput',{static:false}) ngOtpInputRef:any;//Get reference using ViewChild and the specified hash
-  @ViewChild('countdown',{static:false}) counter: CountdownComponent;
-  otp:number=0;  
-  configCountDown : any = {leftTime: 60,demand: false};
+  isResend: boolean = false;
+  @ViewChild('ngOtpInput', { static: false }) ngOtpInputRef: any;//Get reference using ViewChild and the specified hash
+  @ViewChild('countdown', { static: false }) counter: CountdownComponent;
+  otp: number = 0;
+  configCountDown: any = { leftTime: 60, demand: false };
   isTimerEnable = true;
-  guestUserId:string='';
+  guestUserId: string = '';
 
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private userService : UserService,
+    private userService: UserService,
     public router: Router,
     public commonFunction: CommonFunction,
     public activeModal: NgbActiveModal
 
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.otpForm = this.formBuilder.group({
-      otp: [''],  
+      otp: [''],
     }, { validator: optValidation() });
-    
+
     setTimeout(() => {
       this.isResend = true;
     }, 60000);
@@ -74,33 +74,33 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   timerComplete() {
-    this.isResend = true; 
+    this.isResend = true;
     this.isTimerEnable = false;
-    this.configCountDown = {leftTime: 60,demand: true};
+    this.configCountDown = { leftTime: 60, demand: true };
   }
 
-  onOtpChange(event){
+  onOtpChange(event) {
     this.otp = event;
-    if(event.length == 6){
+    if (event.length == 6) {
       this.otpForm.controls.otp.setValue(event);
       this.ngOtpInputRef.setValue(event);
     }
-  }  
+  }
 
-  resendOtp(){
-    if(this.isResend){
-      this.configCountDown = {leftTime: 60,demand: true};
+  resendOtp() {
+    if (this.isResend) {
+      this.configCountDown = { leftTime: 60, demand: true };
       this.ngOtpInputRef.setValue('');
       this.spinner = true;
       this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
-        this.spinner = this.isResend = this.otpLengthError = false;         
-        this.isTimerEnable = true;     
-        this.apiError = '';  
+        this.spinner = this.isResend = this.otpLengthError = false;
+        this.isTimerEnable = true;
+        this.apiError = '';
         setTimeout(() => {
-          this.counter.begin();         
-        }, 1000); 
-      }, (error: HttpErrorResponse) => {       
-        this.submitted = this.spinner = this.otpLengthError =  false;
+          this.counter.begin();
+        }, 1000);
+      }, (error: HttpErrorResponse) => {
+        this.submitted = this.spinner = this.otpLengthError = false;
         this.apiError = error.message;
       });
     }
@@ -116,57 +116,58 @@ export class VerifyOtpComponent implements OnInit {
     }
   }
 
-  onSubmit() {  
+  onSubmit() {
     this.submitted = this.loading = true;
-    var otpValue='';
-    let otps : any = this.ngOtpInputRef.otpForm.value;
-      Object.values(otps).forEach((v) => {    
+    var otpValue = '';
+    let otps: any = this.ngOtpInputRef.otpForm.value;
+    Object.values(otps).forEach((v) => {
       otpValue += v;
     });
     this.otpLengthError = false;
-    if(otpValue.length != 6){
+    if (otpValue.length != 6) {
       this.otpLengthError = true;
     }
     if (this.otpForm.hasError('otpsError') || otpValue.length != 6) {
-      this.submitted = true; 
-      this.loading = false; 
+      this.submitted = true;
+      this.loading = false;
       return;
-    } else {    
-      
-      let data = {
-        "email":this.emailForVerifyOtp,
-        "otp": otpValue,
-       }; 
-      
-      this.userService.verifyOtp(data).subscribe((data: any) => {
-        this.otpVerified = true;  
-        this.submitted = this.loading = false;    
-        localStorage.setItem("_lay_sess", data.userDetails.access_token);  
-        const userDetails = getLoginUserInfo();    
+    } else {
 
-        if(this.guestUserId){
-          this.userService.mapGuestUser(this.guestUserId).subscribe(res=>{
+      let data = {
+        "email": this.emailForVerifyOtp,
+        "otp": otpValue,
+      };
+
+      this.userService.verifyOtp(data).subscribe((data: any) => {
+        this.otpVerified = true;
+        this.submitted = this.loading = false;
+        localStorage.setItem("_lay_sess", data.userDetails.access_token);
+        const userDetails = getLoginUserInfo();
+
+        if (this.guestUserId) {
+          this.userService.mapGuestUser(this.guestUserId).subscribe((res: any) => {
+            localStorage.setItem('$cartOver', res.cartOverLimit);
             let urlData = this.commonFunction.decodeUrl(this.router.url)
-            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-              this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
-            });  
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+            });
           })
         }
-        else{
+        else {
           let urlData = this.commonFunction.decodeUrl(this.router.url)
-          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-            this.router.navigate([`${urlData.url}`],{queryParams:urlData.params})
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
           });
         }
 
-        const _isSubscribeNow = localStorage.getItem("_isSubscribeNow"); 
-        if(_isSubscribeNow == "Yes" && userDetails.roleId == 6){
+        const _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
+        if (_isSubscribeNow == "Yes" && userDetails.roleId == 6) {
           this.router.navigate(['account/subscription']);
         }
-      }, (error: HttpErrorResponse) => {       
+      }, (error: HttpErrorResponse) => {
         this.apiError = error.message;
-        this.submitted = this.loading = false;        
-      });                          
+        this.submitted = this.loading = false;
+      });
     }
-  } 
+  }
 }

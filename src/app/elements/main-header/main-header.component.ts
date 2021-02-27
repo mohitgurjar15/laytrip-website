@@ -37,6 +37,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   fullPageLoading = false;
   modalRef;
   guestUserId: string = '';
+  cartOverLimit;
 
   constructor(
     private genericService: GenericService,
@@ -119,6 +120,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.checkUser();
+    this.cartOverLimit = JSON.parse(localStorage.getItem('$cartOver'));
+    this.cd.detectChanges();
     let host = window.location.href;
     this.isCovidPage = true;
     if (host.includes("covid-19")) {
@@ -159,6 +162,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.showTotalLayCredit = 0;
     localStorage.removeItem('_lay_sess');
     localStorage.removeItem('$crt');
+    localStorage.removeItem('$cartOver');
     this.cookieService.remove('__cc');
     this.cartItemsCount = '';
     this.cartService.setCartItems([]);
@@ -269,6 +273,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.cartItems = [];
         this.cartItemsCount = 0;
         localStorage.setItem('$crt', this.cartItemsCount);
+        localStorage.removeItem('$cartOver');
         this.cartService.setCartItems(this.cartItems);
         this.redirectToHome();
       }
@@ -289,5 +294,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.userService.registerGuestUser({ guest_id: uuid }).subscribe((result: any) => {
       localStorage.setItem("_lay_sess", result.accessToken)
     })
+  }
+
+  closeCartMaximum() {
+    localStorage.removeItem('$cartOver');
   }
 }

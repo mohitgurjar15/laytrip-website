@@ -20,17 +20,17 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+        width: 100%;
         .cart_img_wrpper{
             img{
                 max-width: 80px;
             }
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .cart_msg{
             color: $blue-text;
             font-size: 32px;
-            margin-bottom: 5px;
-            margin: 25px 0 15px;
+            margin: 0 0 10px;
             @include tab-view{
                 font-size: 18px;
             }
@@ -69,6 +69,18 @@
             }
             
         }
+        .footer_logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 5px;
+            a{
+                img{
+                    height: 23px;
+                }
+            }
+        }
     }
 }
 .block_contact_us_main{
@@ -79,6 +91,7 @@
   width: 96%;
   
   .modal-content {
+      border-radius: 10px;
     .modal_title {
         .close {
           position: absolute;
@@ -86,6 +99,9 @@
           top: 16px;
           z-index: 9;
           cursor: pointer;
+          img{
+              max-width: 12px;
+          }
         }
       }
     .cart_modal_wrp {

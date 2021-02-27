@@ -16,6 +16,8 @@ export class PriceSummaryComponent implements OnInit {
   s3BucketUrl=environment.s3BucketUrl;
   installmentVartion:number=0;
   installmentType;
+  cartAlerts=[];
+  origin:string='';
   
   constructor(
     private commonFunction:CommonFunction
@@ -24,10 +26,22 @@ export class PriceSummaryComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log("changes", this.priceSummary);
+    this.origin = window.location.pathname;
   }
   
   ngOnChanges(changes: SimpleChanges) {
+    try{
+      let cartAlerts = localStorage.getItem("__alrt")
+      if(cartAlerts){
+        this.cartAlerts= JSON.parse(cartAlerts)
+      }
+      else{
+        this.cartAlerts=[]
+      }
+    }
+    catch(e){
+      this.cartAlerts=[];
+    }
     this.insatllmentAmount=0;
     if (typeof changes['priceSummary'].currentValue!='undefined') {
       this.priceSummary = changes['priceSummary'].currentValue;
@@ -39,7 +53,18 @@ export class PriceSummaryComponent implements OnInit {
        if(this.priceSummary.instalments.instalment_date.length>2){
 
           if(this.priceSummary.instalments.instalment_date[1].instalment_amount!=this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length-1].instalment_amount){
+
             this.installmentVartion = this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length-1].instalment_amount-this.priceSummary.instalments.instalment_date[1].instalment_amount;
+            if(this.installmentVartion>0){
+              let indexExist = this.cartAlerts.findIndex(x=>x.type=="installment_vartion");
+              if(indexExist==-1){
+                this.cartAlerts.push({
+                  type : 'installment_vartion',
+                  id : -1
+                })
+              }
+              localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
+            }
           }
        }
       }
@@ -50,7 +75,24 @@ export class PriceSummaryComponent implements OnInit {
     return typeof value;
   }
 
-  closeInstallmentVartion(){
+  closeInstallmentVartion(id){
+    try{
+      let cartAlerts = localStorage.getItem("__alrt")
+      if(cartAlerts){
+        this.cartAlerts= JSON.parse(cartAlerts)
+        let index = this.cartAlerts.findIndex(x=>x.id==id)
+        this.cartAlerts.splice(index,1)
+      }
+      else{
+        this.cartAlerts=[]
+      }
+    }
+    catch(e){
+      this.cartAlerts=[];
+    }
+    
+    localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
     this.installmentVartion=0;
+
   }
 }

@@ -1,7 +1,10 @@
-<div class="block_time">
-    <img src="{{s3BucketUrl}}assets/images/icon/ic_clock.svg" alt="Clock Icon">
-    <p>{{'timeout_in_boking_description_1' | translate}} <span>
-    <countdown #cd [config]="config" (event)="handleEvent($event)">$!m!:$!s!</countdown> {{'minuts' | translate}}
-  </span> {{'timeout_in_boking_description_2' | translate}}</p>
-
+<div class="row">
+  <div class="timer_main_wrapper">
+    <div class="upper_big_fonts">
+      You have <span><countdown #cd [config]="config" (event)="handleEvent($event)">$!m!:$!s!</countdown></span> to complete this booking!
+    </div>
+    <div class="lo_sm_fn">
+      Review all details then Pay and Book
+    </div>
+  </div>
 </div>

@@ -19,23 +19,6 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-flight-item-wrapper',
   templateUrl: './flight-item-wrapper.component.html',
   styleUrls: ['./flight-item-wrapper.component.scss'],
-  animations: [
-    trigger('listAnimation', [
-      transition('* => *', [ // each time the binding value changes
-        query(':leave', [
-          stagger(10, [
-            animate('0.001s', style({ opacity: 0 }))
-          ])
-        ], { optional: true }),
-        query(':enter', [
-          style({ opacity: 0 }),
-          stagger(50, [
-            animate('0.5s', style({ opacity: 1 }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ],
 })
 export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, OnDestroy {
 
@@ -145,19 +128,19 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   getCancellationPolicy(routeCode) {
 
-    this.loadCancellationPolicy = true;
-    this.loadMoreCancellationPolicy = false;
-    this.errorMessage = '';
-    this.cancellationPolicyArray = [];
-    this.cancellationPolicy = '';
-    this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
-      this.cancellationPolicyArray = data.cancellation_policy.split('--')
-      this.loadCancellationPolicy = false;
-      this.cancellationPolicy = data;
-    }, (err) => {
-      this.loadCancellationPolicy = false;
-      this.errorMessage = err.message;
-    });
+    // this.loadCancellationPolicy = true;
+    // this.loadMoreCancellationPolicy = false;
+    // this.errorMessage = '';
+    // this.cancellationPolicyArray = [];
+    // this.cancellationPolicy = '';
+    // this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
+    //   this.cancellationPolicyArray = data.cancellation_policy.split('--')
+    //   this.loadCancellationPolicy = false;
+    //   this.cancellationPolicy = data;
+    // }, (err) => {
+    //   this.loadCancellationPolicy = false;
+    //   this.errorMessage = err.message;
+    // });
   }
 
   toggleCancellationContent() {
@@ -279,10 +262,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       this.filteredLabel = changes.filteredLabel.currentValue;
     }
     // this.flightList = changes.flightDetails.currentValue;
-  }
-
-  logAnimation(event) {
-    // console.log(event);
   }
 
   ngOnDestroy(): void {
