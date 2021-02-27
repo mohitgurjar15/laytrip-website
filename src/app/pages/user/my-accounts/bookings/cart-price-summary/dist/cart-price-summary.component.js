@@ -8,11 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.CartPriceSummaryComponent = void 0;
 var core_1 = require("@angular/core");
+var generic_helper_1 = require("../../../../../_helpers/generic.helper");
 var CartPriceSummaryComponent = /** @class */ (function () {
     function CartPriceSummaryComponent(commonFunction) {
         this.commonFunction = commonFunction;
         this.cartItem = {};
         this.cartDueLoopNum = 0;
+        this.installmentType = generic_helper_1.installmentType.en;
     }
     CartPriceSummaryComponent.prototype.ngOnInit = function () {
     };
