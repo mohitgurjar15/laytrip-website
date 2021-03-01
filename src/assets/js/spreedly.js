@@ -27,7 +27,7 @@ function statusUpdates(event){
     window.location.href = rUrl;
 
   } else if (event.action === 'error') {
-    window.location.href = '/book/failure';
+    window.location.href = '/cart/checkout';
   } else if (event.action === 'challenge') {
     document.getElementById("challenge-loader").classList.add("hidden");
     document.getElementById('challenge-modal').classList.remove('hidden');
@@ -52,9 +52,9 @@ function statusUpdates(event){
           document.getElementById("challenge-loader").classList.add("hidden");
           event.finalize(transaction);
         }else if (transaction.state === "gateway_processing_failed") {
-          window.location.href = '/book/failure';
+          window.location.href = '/cart/checkout';
         } else {
-          window.location.href = '/book/failure';
+          window.location.href = '/cart/checkout';
         }
       }
     });

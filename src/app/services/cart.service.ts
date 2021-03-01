@@ -72,7 +72,7 @@ export class CartService {
       currency: 'USD',
       language: 'en'
     }
-    
+
     return this.http.post(`${environment.apiUrl}v1/cart/add`, data, this.commonFunction.setHeaders(headers))
       .pipe(
         catchError(this.handleError)
@@ -137,5 +137,17 @@ export class CartService {
       language: 'en'
     }
     return this.http.get(`${environment.apiUrl}v1/booking/cart-detail/${bookingId}`, this.commonFunction.setHeaders(headers))
+  }
+
+
+  validate(payload) {
+    let headers = {
+      currency: 'USD',
+      language: 'en'
+    };
+    return this.http.post(`${environment.apiUrl}v1/payment/validate`, payload, this.commonFunction.setHeaders(headers))
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 }

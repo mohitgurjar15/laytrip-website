@@ -11,8 +11,9 @@ import { CookieService } from 'ngx-cookie';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
+import { SpreedlyService } from '../../../services/spreedly.service';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { BookingCompletionErrorPopupComponent } from 'src/app/components/booking-completion-error-popup/booking-completion-error-popup.component';
+import { BookingCompletionErrorPopupComponent } from '../../../components/booking-completion-error-popup/booking-completion-error-popup.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export interface CartItem {
@@ -62,8 +63,11 @@ export class CheckoutComponent implements OnInit {
     booking_through: "web",
     cart: [
     ],
-    selected_down_payment: 0
+    browser_info: {},
+    site_url: "",
+    selected_down_payment:0
   }
+  challengePopUp:boolean=false;
   isSessionTimeOut: boolean = false;
   bookingTimerConfig;
   isBookingRequest = false;
@@ -80,6 +84,7 @@ export class CheckoutComponent implements OnInit {
     private commonFunction: CommonFunction,
     private route: ActivatedRoute,
     private modalService: NgbModal,
+    private spreedly:SpreedlyService,
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -88,6 +93,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
+
     this.userInfo = getLoginUserInfo();
     if (this.userInfo && this.userInfo.roleId != 7) {
       this.getTravelers();
@@ -298,8 +304,10 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
     this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
     this.bookingRequest.cart = carts;
-    if (this.isValidTravelers && this.cardToken != '') {
-      this.isBookingProgress = true;
+    sessionStorage.setItem('__cbk',JSON.stringify(this.bookingRequest))
+    console.log("this.bookingRequest",this.bookingRequest)
+    if(this.isValidTravelers && this.cardToken!=''){
+      this.isBookingProgress=true;
       window.scroll(0, 0);
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
@@ -308,34 +316,44 @@ export class CheckoutComponent implements OnInit {
           cart_id: this.carts[i].id,
           travelers: travelers
         }
+
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
-            this.cartService.bookCart(this.bookingRequest).subscribe((result: any) => {
 
-              let successItem = result.carts.filter(cart => {
-                if (cart.status == 1) {
-                  return { cart_id: cart.id }
-                }
-              });
-              let failedItem = result.carts.filter(cart => {
-                if (cart.status == 2) {
-                  return { car_id: cart.id }
-                }
-              });
+            let browser_info = this.spreedly.browserInfo();
+            console.log(browser_info);
+            this.bookingRequest.browser_info = browser_info;
+            // this.bookingRequest.site_url = this.document.location.origin;
+            this.bookingRequest.site_url = 'https://demo.eztoflow.com';
 
-              let index
-              for (let item of successItem) {
-                index = this.carts.findIndex(x => x.id == item.cart_id)
-                this.carts.splice(index, 1)
-                this.cartPrices.splice(index, 1)
+
+            this.cartService.validate(this.bookingRequest).subscribe((res: any) => {
+              let transaction = res.transaction;
+              console.log(res);
+
+              let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+              res.redirection = redirection;
+              if (transaction.state == "succeeded") {
+
+                console.log('succeeded', [redirection]);
+                /* Note: Do not use this.router.navigateByUrl or navigate here */
+                window.location.href = redirection;
+              } else if (transaction.state == "pending") {
+
+                console.log('pending', [res]);
+                this.isBookingProgress=false;
+                this.challengePopUp=true;
+                this.spreedly.lifeCycle(res);
+              } else {
+
+                console.log('fail', [res]);
+
+                this.router.navigate(['/book/failure']);
               }
-              this.cartService.setCartItems(this.carts);
-              this.cartService.setCartPrices(this.cartPrices)
-
-              localStorage.setItem('$crt', failedItem.length || 0);
-
-              this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
-            })
+            }, (error) => {
+                console.log(error);
+            });
+            
           }
         }, (error) => {
           this.isBookingProgress = false;
