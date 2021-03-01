@@ -42,23 +42,31 @@
 
         &[aria-expanded="true"] {
           &:after {
-            font-family: "FontAwesome";
-            content: "\f077";
-            color: $text-grey;
-            font-weight: normal;
+            content: "";
+            padding: 5px 9px;
+            margin-left: 10px;
+            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: 12px;
             transition: 0.3s;
-            right: 0;
+            position: absolute;
+            right: 15px;
           }
         }
 
         &[aria-expanded="false"] {
           &:after {
-            font-family: "FontAwesome";
-            content: "\f078";
-            color: $text-grey;
-            font-weight: normal;
+            padding: 5px 9px;
+            margin-left: 10px;
+            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: 12px;
+            content: "";
             transition: 0.3s;
-            right: 0;
+            position: absolute;
+            right: 15px;
           }
         }
 

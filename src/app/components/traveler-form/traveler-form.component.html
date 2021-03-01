@@ -9,13 +9,13 @@
                 <!-- {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
                 +travelerItem.value.adults[x].last_name:'Booking Traveler'}} -->
                 <span class="tr_type">
-                {{x==0?'Primary Traveler':'Additional Traveler'}}
-              </span>
-              <span class="trv_name">
-                {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
-                +travelerItem.value.adults[x].last_name:'Booking Traveler' | titlecase}} 
-              </span>
-              </a> 
+                  {{x==0?'Primary Traveler':'Additional Traveler'}}
+                </span>
+                <span class="trv_name">
+                  {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
+                  +travelerItem.value.adults[x].last_name:'Booking Traveler' | titlecase}}
+                </span>
+              </a>
             </div>
             <div [id]="'adult_collapse'+y+x" class="collapse" [ngClass]="{'show':traveler_number==x}"
               data-parent="#accordion">
@@ -46,6 +46,8 @@
                         <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Please enter
                           your
                           first name.</small>
+                        <small *ngIf="traveler.controls.first_name.errors.pattern" class="error_field">
+                          first name should not contain digit</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10">
@@ -55,6 +57,8 @@
                         class="error">
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">Please enter your
                           last name.</small>
+                        <small *ngIf="traveler.controls.last_name.errors.pattern" class="error_field">
+                          last name should not contain digit</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10">
@@ -77,6 +81,8 @@
                         <small *ngIf="traveler.controls.email.errors.required" class="error_field">Please enter your
                           email
                           address.</small>
+                        <small *ngIf="traveler.controls.email.errors.pattern" class="error_field">Please enter valid
+                          email address.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps"
@@ -87,19 +93,23 @@
                           formControlName="country_code"> -->
                         <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="phonecode"
                           bindValue="phonecode" formControlName="country_code" [clearable]="false"></ng-select>
-                        <input type="text" mask="000-000-0000" class="form-control" maxlength="14" formControlName="phone_no">
+                        <input type="text" mask="000-000-0000" class="form-control" maxlength="14"
+                          formControlName="phone_no">
                       </span>
                       <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
                         class="error">
                         <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">Please enter
                           your phone number.</small>
+                        <small *ngIf="traveler.controls.phone_no.errors.minlength" class="error_field">Phone number
+                          should be minimum 10</small>
                       </div>
                     </div>
                     <div class="col-sm-12 dobs col-md-4 mb-sm-10">
                       <label for="">{{'dob' | translate}}*</label>
                       <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
-                      <input onkeydown="return false" type="text" class="form-control" bsDatepicker formControlName="dob" [bsConfig]="bsConfig"
-                        [minDate]="traveler.controls.dobMinDate.value" [maxDate]="traveler.controls.dobMaxDate.value">
+                      <input onkeydown="return false" type="text" class="form-control" bsDatepicker
+                        formControlName="dob" [bsConfig]="bsConfig" [minDate]="traveler.controls.dobMinDate.value"
+                        [maxDate]="traveler.controls.dobMaxDate.value">
                       <!-- <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
                         formControlName="dob" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                         (onBlur)=changeDateOfBirth($event)
@@ -136,7 +146,7 @@
                       <span class="heade_wrps">
                         Add-Ons
                         <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord"
-                          class="addon_anchor responsive_anch" aria-expanded="true" aria-controls="add_acord">
+                          class="addon_anchor responsive_anch"  aria-controls="add_acord">
                         </a>
                       </span>
                       <ul class="nav nav-pills" id="addon_tab" role="tablist">
@@ -154,11 +164,10 @@
                         </li>
 
                       </ul>
-                      <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord" class="addon_anchor"
-                        aria-expanded="true" aria-controls="add_acord">
+                      <a data-toggle="collapse" href="#add_acord" class="addon_anchor">
                       </a>
                     </div>
-                    <div id="add_acord" class="collapse show" data-parent="#accordion_add">
+                    <div id="add_acord" class="collapse show" >
                       <div class="card-body">
                         <div class="tab-content" id="addon_tabContent">
                           <div class="tab-pane fade show active" id="baggage" role="tabpanel"

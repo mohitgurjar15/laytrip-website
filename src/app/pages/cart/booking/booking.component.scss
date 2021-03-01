@@ -42,8 +42,9 @@
                     border-radius: 10px;
                     margin: 15px;
                     position: relative;
-                    .heade_wrps{
-                        img{
+
+                    .heade_wrps {
+                        img {
                             margin-right: 15px;
                         }
                     }
@@ -70,20 +71,24 @@
 
                         &[aria-expanded="true"] {
                             &:after {
-                                font-family: 'FontAwesome';
-                                content: "\f077";
-                                color: $text-grey;
-                                font-weight: normal;
+                                content: "";
+                                padding: 5px 9px;
+                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 12px;
                                 transition: 0.3s;
                             }
                         }
 
                         &[aria-expanded="false"] {
                             &:after {
-                                font-family: 'FontAwesome';
-                                content: "\f078";
-                                color: $text-grey;
-                                font-weight: normal;
+                                padding: 5px 9px;
+                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 12px;
+                                content: "";
                                 transition: 0.3s;
                             }
                         }
@@ -203,9 +208,10 @@
     }
 }
 
-.error_wrapper{
+.error_wrapper {
     display: flex;
     flex-direction: column;
+
     .section_description {
         transform: translate(0%, -0%);
         max-width: 445px;
@@ -214,7 +220,7 @@
         flex: 1;
         width: 100%;
         margin-bottom: 5px;
-    
+
         a {
             width: 10px !important;
         }
