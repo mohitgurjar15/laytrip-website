@@ -79,7 +79,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   };
 
   subscriptions: Subscription[] = [];
-  is_open : boolean = false;
+  is_open: boolean = false;
 
 
   constructor(
@@ -98,8 +98,8 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       this.maxPrice = Math.ceil(this.priceHighValue);
       this.priceOptions.floor = this.priceValue;
       this.priceOptions.ceil = this.priceHighValue;
-        parseInt(this.filterFlightDetails.price_range.max_price) ?
-          parseInt(this.filterFlightDetails.price_range.max_price) : 0;
+      parseInt(this.filterFlightDetails.price_range.max_price) ?
+        parseInt(this.filterFlightDetails.price_range.max_price) : 0;
 
     }
     if (this.filterFlightDetails && this.filterFlightDetails.partial_payment_price_range) {
@@ -109,12 +109,12 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
       this.partialPaymentHighValue =
         this.filterFlightDetails.partial_payment_price_range.max_price ? Math.ceil(this.filterFlightDetails.partial_payment_price_range.max_price) : 0;
-      this.maxPartialPaymentPrice =Math.ceil(this.partialPaymentHighValue);
-      this.partialPaymentOptions.floor =this.partialPaymentValue;
-      this.partialPaymentOptions.ceil =this.partialPaymentHighValue;
+      this.maxPartialPaymentPrice = Math.ceil(this.partialPaymentHighValue);
+      this.partialPaymentOptions.floor = this.partialPaymentValue;
+      this.partialPaymentOptions.ceil = this.partialPaymentHighValue;
 
       //this.partialPriceSlider.controls.partial_price.setValue([Math.floor(this.partialPaymentValue), Math.ceil(this.partialPaymentHighValue)])
-      this.partialPriceSlider.controls.partial_price.setValue(this.partialPaymentValue,this.partialPaymentHighValue)
+      this.partialPriceSlider.controls.partial_price.setValue(this.partialPaymentValue, this.partialPaymentHighValue)
     }
     if (this.filterFlightDetails && this.filterFlightDetails.arrival_time_slot || this.filterFlightDetails
       && this.filterFlightDetails.depature_time_slot) {
@@ -156,7 +156,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
   loadJquery() {
     //Start REsponsive Fliter js
-    
+
     $(".responsive_filter_btn").click(function () {
       $("#responsive_filter_show").slideDown("slow");
       $("body").addClass('overflow-hidden');
@@ -500,11 +500,11 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     if (this.outBoundStops.length) {
       filterdFlights = filterdFlights.filter(item => {
 
-        if(typeof item.inbound_stop_count!='undefined'){
+        if (typeof item.inbound_stop_count != 'undefined') {
 
           return (this.outBoundStops.includes(item.stop_count) || this.outBoundStops.includes(item.inbound_stop_count));
         }
-        else{
+        else {
           return this.outBoundStops.includes(item.stop_count);
         }
 

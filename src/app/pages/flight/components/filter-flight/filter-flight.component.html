@@ -1,7 +1,8 @@
 <div class="filter_main_wrapper desk_ver">
     <div class="accordion block_shortby" id="accordion2">
         <div class="accordion-group" [ngClass]="{'active': is_open === true}">
-            <div class="accordion-heading" (click)="toggleFilter()" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+            <div class="accordion-heading" (click)="toggleFilter()" data-toggle="collapse" data-parent="#accordion2"
+                href="#collapseTwo">
                 <a class="accordion-toggle">
                     Filters
                 </a>
@@ -31,7 +32,7 @@
                             <form [formGroup]="partialPriceSlider">
                                 <div class="custom_range_slide">
                                     <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol
-                                        }}{{partialPaymentHighValue}} Weekly</p> 
+                                        }}{{partialPaymentHighValue}} Weekly</p>
                                     <ng5-slider
                                         *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
                                         [(value)]="partialPaymentValue" formControlName="partial_price"
@@ -411,17 +412,17 @@
             </div>
         </div>
     </div>
-</div> 
- 
+</div>
+
 
 <div class="filter_main_wrapper responsive_mobile">
     <div class="accordion block_shortby" id="accordion2">
-        <div class="accordion-group" >
+        <div class="accordion-group">
             <div class="accordion-heading" aria-expanded="true" data-parent="#accordion2" href="#collapseTwo">
-                <a class="accordion-toggle" >
+                <a class="accordion-toggle">
                     Filters
                 </a>
-                <a class="anchor_link"  (click)="resetFilter()"> Clear</a>
+                <a class="anchor_link" (click)="resetFilter()"> Clear</a>
             </div>
             <div id="collapseTwo" class="accordion-body collapse show">
                 <div class="accordion-inner">
@@ -447,7 +448,7 @@
                             <form [formGroup]="partialPriceSlider">
                                 <div class="custom_range_slide">
                                     <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol
-                                        }}{{partialPaymentHighValue}} Weekly</p> 
+                                        }}{{partialPaymentHighValue}} Weekly</p>
                                     <ng5-slider
                                         *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
                                         [(value)]="partialPaymentValue" formControlName="partial_price"
@@ -461,7 +462,7 @@
                         <div class="cmn_block pad_no">
                             <div class="accordion block_shortby" id="accordion-outbound">
                                 <div class="accordion-group" [ngClass]="{'active':isShowoutbound==true}">
-                                    
+
                                     <div id="collapseOutbound" class="accordion-body show">
                                         <div class="accordion-inner">
                                             <div class="block_cmn stop">
@@ -624,10 +625,10 @@
                         <div class="cmn_block pad_no" *ngIf="filterFlightDetails.inbound_arrival_time_slot">
                             <div class="accordion block_shortby" id="accordion-inbound">
                                 <div class="accordion-group" [ngClass]="{'active':isShowinbound==true}">
-                                    
+
                                     <div id="collapseInbound" class="accordion-body show">
                                         <div class="accordion-inner">
-                                           
+
                                             <div class="block_cmn arrival_to">
                                                 <div class="block_top_in">
                                                     <h5>Arrival in {{ departureTimeSlotCityName}}</h5>
@@ -775,7 +776,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 
 <!-- <div class="mobile_view_popup">
