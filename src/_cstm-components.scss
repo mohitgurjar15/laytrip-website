@@ -195,6 +195,16 @@
             }
         } 
     }
+    &.account_telephone_n{
+        .ng-select-container{
+            .ng-value-container {
+                .ng-value{
+                    color: $mid_gray_bg;
+                    font-size: 16px
+                }
+            }
+        }
+    }
 }
 
 // NG-SELECT FOCUS REMOVE CSS START
