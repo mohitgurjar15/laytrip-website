@@ -32,7 +32,7 @@
             </div>
 
 
-            <div class="header_bar" *ngIf="!loading">
+            <div class="header_bar" *ngIf="!loading && allBookingStatus">
                 <h3>
                     Booking Confirmed
                     <span class="b_num">Booking ID #{{cartDetails.laytripCartId}}</span>
@@ -43,10 +43,10 @@
                         [routerLink]="['/account/bookings']">My Bookings</a>.
                 </p>
             </div>
-            <div class="book_detailers" *ngIf="!loading">
+            <div class="book_detailers" *ngIf="!loading && allBookingStatus">
                 <h3>Details</h3>
                 <ng-container *ngFor="let booking of cartDetails.booking">
-                    <div class="detail_liners" *ngIf="booking.moduleId==1">
+                    <div class="detail_liners" *ngIf="booking.moduleId==1 && (booking.bookingStatus==0 || bookingStatus==1)">
                         <span class="lefts">Flight</span>
                         <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==1">
                             {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
@@ -105,6 +105,6 @@
     </div>
 </div>
 
-<app-booking-feedback [hidden]="!isFeedbackPage" (feedbackValueChange)="feedbackValueChange($event)">
+<app-booking-feedback *ngIf="anyBookingStatus" [hidden]="!isFeedbackPage" (feedbackValueChange)="feedbackValueChange($event)">
 </app-booking-feedback>
 <app-contact-us></app-contact-us>
