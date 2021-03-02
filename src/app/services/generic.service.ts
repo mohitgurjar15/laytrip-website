@@ -54,8 +54,12 @@ export class GenericService {
       );
   }
 
+  makeDefaultCard(data) {
+    return this.http.put(`${environment.apiUrl}v1/payment/default-card/` + data.card_id, {}, this.commonFunction.setHeaders())
+  }
+
   deleteCard(id) {
-    return this.http.delete(`${environment.apiUrl}v1/payment/`+id, this.commonFunction.setHeaders())
+    return this.http.delete(`${environment.apiUrl}v1/payment/` + id, this.commonFunction.setHeaders())
       .pipe(
         catchError(this.handleError)
       );
@@ -76,9 +80,9 @@ export class GenericService {
   }
 
   emptyCart() {
-      return this.http.delete(`${environment.apiUrl}v1/cart/empty-cart`, this.commonFunction.setHeaders()).pipe(
-        catchError(this.handleError)
-        );
+    return this.http.delete(`${environment.apiUrl}v1/cart/empty-cart`, this.commonFunction.setHeaders()).pipe(
+      catchError(this.handleError)
+    );
   }
 
   handleError(error) {
@@ -137,8 +141,6 @@ export class GenericService {
   }
 
   addPushSubscriber(data) {
-    console.log(data, data.endpoint, 'here')
-
     var notificationData = {
       "end_point": data.endpoint,
       "auth_keys": data.keys.auth,
@@ -158,7 +160,7 @@ export class GenericService {
   }
 
 
-  getPaymentDetails(){
+  getPaymentDetails() {
     return this.http.get(`${environment.apiUrl}v1/payment/details`, this.commonFunction.setHeaders());
   }
 }

@@ -34,6 +34,7 @@ export class CardListComponent implements OnInit {
 
   cardObject = cardObject
   cardType = cardType;
+  is_open_popup = false;
 
   ngOnInit() {
     this.getCardlist();
@@ -65,7 +66,10 @@ export class CardListComponent implements OnInit {
 
   makeDefaultCard(cardId) {
     console.log(cardId);
-    this.getCardlist();
+    const payload = { card_id: cardId };
+    this.genericService.makeDefaultCard(payload).subscribe((res: any) => {
+      this.getCardlist();
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -86,18 +90,26 @@ export class CardListComponent implements OnInit {
     })
   }
 
-  openDeleteModal(content, id) {
-    this.cardId = id;
-    this.deleteApiError = '';
-    this.modalService.open(content, {
-      windowClass: 'delete_account_window', centered: true, backdrop: 'static',
-      keyboard: false
-    }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
+  openDeleteModal(content, card) {
+    console.log(card);
+    if (card && card.isDefault) {
+      this.is_open_popup = true;
+    } else {
+      this.cardId = card.id;
+      this.deleteApiError = '';
+      this.modalService.open(content, {
+        windowClass: 'delete_account_window', centered: true, backdrop: 'static',
+        keyboard: false
+      }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+  }
 
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  closePopup() {
+    this.is_open_popup = false;
   }
 
   private getDismissReason(reason: any): string {
