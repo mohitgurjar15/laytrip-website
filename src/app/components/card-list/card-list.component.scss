@@ -5,6 +5,17 @@
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+.section_description {
+  width: 240px;
+  &.one {
+    transform: translate(10%, -10%);
+    max-width: 170px;
+    right: 0;
+  }
+  transform: translate(-28%, 70%);
+  max-width: 240px;
+}
+
 .accordion_cardss {
   margin: 15px 15px 0px 15px;
 

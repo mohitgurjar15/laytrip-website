@@ -37,7 +37,7 @@ export class AddCardComponent implements OnInit {
   saveCardLoader: boolean = false;
   expiryMinDate = new Date();
   cardListChangeCount: number = 0;
-  envKey:string='';
+  envKey: string = '';
 
   mask = {
     guide: false,
@@ -72,7 +72,7 @@ export class AddCardComponent implements OnInit {
       card_number: ['', [Validators.required, Validators.maxLength(20)]],
       expiry: ['', Validators.required]
     });
-    this.genericService.getPaymentDetails().subscribe((result:any)=>{
+    this.genericService.getPaymentDetails().subscribe((result: any) => {
       this.envKey = result.credentials.environment;
       this.spreedlySdk();
     })
@@ -94,10 +94,10 @@ export class AddCardComponent implements OnInit {
       Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;');
     });
 
-    Spreedly.on('validation', function(inputProperties) {
-      console.log("inputProperties",inputProperties)
+    Spreedly.on('validation', function (inputProperties) {
+      console.log("inputProperties", inputProperties)
     });
-    
+
 
     Spreedly.on('errors', function (errors) {
       $(".credit_card_error").hide();
@@ -124,7 +124,7 @@ export class AddCardComponent implements OnInit {
 
 
     Spreedly.on('paymentMethod', function (token, pmData) {
-      
+
       console.log("In submit")
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);
@@ -220,7 +220,6 @@ export class AddCardComponent implements OnInit {
           $("#payment-form")[0].reset();
           Spreedly.reload();
           var cardTokenNew = obj.cardToken;
-          console.log(cardTokenNew);
           /* $(document).on("click", "div#card_list_accodrio", function () {
             if (cardTokenNew === obj.cardToken) {
               $('#card_list_accodrio').children('div').addClass('current_selected_card');
