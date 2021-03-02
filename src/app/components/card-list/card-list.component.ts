@@ -35,6 +35,7 @@ export class CardListComponent implements OnInit {
   cardObject = cardObject
   cardType = cardType;
   is_open_popup = false;
+  loading = false;
 
   ngOnInit() {
     this.getCardlist();
@@ -65,11 +66,14 @@ export class CardListComponent implements OnInit {
   }
 
   makeDefaultCard(cardId) {
-    console.log(cardId);
+    this.loading = true;
     const payload = { card_id: cardId };
     this.genericService.makeDefaultCard(payload).subscribe((res: any) => {
+      this.loading = false;
       this.getCardlist();
-    });
+    }, (error => {
+      this.loading = false;
+    }));
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -91,7 +95,6 @@ export class CardListComponent implements OnInit {
   }
 
   openDeleteModal(content, card) {
-    console.log(card);
     if (card && card.isDefault) {
       this.is_open_popup = true;
     } else {

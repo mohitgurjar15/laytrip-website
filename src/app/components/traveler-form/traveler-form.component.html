@@ -40,25 +40,27 @@
                   <div class="form-row">
                     <div class="col-sm-12 col-md-4 mb-sm-10 ">
                       <label for="">First Name*</label>
-                      <input type="text" class="form-control" formControlName="first_name" tabindex="1">
+                      <input type="text" class="form-control" formControlName="first_name" tabindex="1"
+                        (keypress)="commonFunction.preventNumberInput($event)">
                       <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Please enter
                           your
                           first name.</small>
                         <small *ngIf="traveler.controls.first_name.errors.pattern" class="error_field">
-                          first name should not contain digit</small>
+                          First name only allow alphabet character. </small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10">
                       <label for="">Last Name*</label>
-                      <input type="text" class="form-control" formControlName="last_name" tabindex="2">
+                      <input type="text" class="form-control" formControlName="last_name" tabindex="2"
+                        (keypress)="commonFunction.preventNumberInput($event)">
                       <div *ngIf="traveler.controls.last_name.touched && traveler.controls.last_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">Please enter your
                           last name.</small>
                         <small *ngIf="traveler.controls.last_name.errors.pattern" class="error_field">
-                          last name should not contain digit</small>
+                          Last name only allow alphabet character. </small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10">
@@ -126,8 +128,8 @@
                     <div class="col-sm-12 col-md-4 mb-sm-10"
                       *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_expiry')">
                       <label for="">Passport Expiry*</label>
-                      <input type="text" class="form-control" bsDatepicker formControlName="passport_expiry" tabindex="9"
-                        [bsConfig]="bsConfig" [minDate]="passPortMinDate">
+                      <input type="text" class="form-control" bsDatepicker formControlName="passport_expiry"
+                        tabindex="9" [bsConfig]="bsConfig" [minDate]="passPortMinDate">
                     </div>
 
 

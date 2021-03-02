@@ -228,6 +228,7 @@ export class AddCardComponent implements OnInit {
         },
         error: function (error) {
           console.log('error:', error);
+          $('#main_loader').hide();
           // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
       });
