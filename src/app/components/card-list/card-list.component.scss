@@ -75,6 +75,29 @@
             margin-right: 15px;
           }
         }
+
+        .make_default_btn {
+          a {
+            background-color: transparent;
+            color: $text_light_yellow;
+            border: none;
+            box-shadow: none;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 0;
+          }
+        }
+        .default_btn {
+          a {
+            background-color: transparent;
+            color: $mid_gray_bg;
+            border: none;
+            box-shadow: none;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 0;
+          }
+        }
       }
     }
 
@@ -397,7 +420,6 @@
           box-shadow: none;
         }
       }
-
     }
 
     .footer_logo {
