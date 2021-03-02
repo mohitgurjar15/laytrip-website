@@ -167,6 +167,9 @@ h3 {
           &.min_text {
             position: absolute;
             bottom: 8px;
+            width: 100%;
+            text-align: center;
+            left: 0;
           }
         }
       }

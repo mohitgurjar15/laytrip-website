@@ -308,7 +308,9 @@ textarea:focus:-ms-input-placeholder {
           padding-left: 0;
         }
       }
-
+      .ng-arrow-wrapper{
+        width: 17px;
+      }
       .ng-arrow {
         content: "";
         padding: 5px 9px;

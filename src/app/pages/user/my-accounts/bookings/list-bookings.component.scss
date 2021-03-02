@@ -417,13 +417,14 @@
                                     .header_lower_wrper {
                                         display: flex;
                                         justify-content: space-around;
-                                        align-items: center;
+                                        //align-items: center;
                                         text-align: center;
 
                                         .payment_bar_wrps {
                                             width: 100%;
                                             max-width: 300px;
                                             margin: 0 10px;
+                                            padding-top: 12px;
 
                                             .progress {
                                                 height: 5px;
@@ -549,7 +550,7 @@
 
                                     .tab_round_wrps {
                                         color: $mid_gray_bg;
-                                        font-size: 13px;
+                                        font-size: 12px;
                                         display: flex;
                                         justify-content: space-around;
                                         align-items: center;
