@@ -17,7 +17,7 @@ export class CartPriceSummaryComponent implements OnInit {
     this.installmentType= installmentType.en;
    }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
   }
 
   ngOnChanges(changes: SimpleChanges) {
