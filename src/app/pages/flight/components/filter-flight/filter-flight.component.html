@@ -1,8 +1,7 @@
 <div class="filter_main_wrapper desk_ver">
     <div class="accordion block_shortby" id="accordion2">
         <div class="accordion-group" [ngClass]="{'active': is_open === true}">
-            <div class="accordion-heading" (click)="toggleFilter()" data-toggle="collapse" data-parent="#accordion2"
-                href="#collapseTwo">
+            <div class="accordion-heading" (click)="toggleFilter()" data-toggle="collapse" aria-expanded="true" data-parent="#accordion2" href="#collapseTwo">
                 <a class="accordion-toggle">
                     Filters
                 </a>
