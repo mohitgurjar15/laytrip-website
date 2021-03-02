@@ -323,8 +323,12 @@ export class CheckoutComponent implements OnInit {
             let browser_info = this.spreedly.browserInfo();
             console.log(browser_info);
             this.bookingRequest.browser_info = browser_info;
-            // this.bookingRequest.site_url = this.document.location.origin;
-            this.bookingRequest.site_url = 'https://demo.eztoflow.com';
+            if(window.location.origin.includes("localhost")){
+              this.bookingRequest.site_url = 'https://demo.eztoflow.com';
+            }
+            else{
+              this.bookingRequest.site_url = window.location.origin;
+            }
 
 
             this.cartService.validate(this.bookingRequest).subscribe((res: any) => {
