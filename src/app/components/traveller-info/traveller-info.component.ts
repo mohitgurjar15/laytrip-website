@@ -75,10 +75,11 @@ export class TravellerInfoComponent implements OnInit {
   }
 
   btnClickForChange(item) {
-    console.log(item)
     // FOR ADULT
     if (item && item.type === 'minus' && item.label === 'adult') {
-
+      if(this.adultValue === this.infantValue){
+        this.infantValue = this.infantValue - 1;
+      }
       if(this.adultValue-1 < this.infantValue){
         this.errorMessage="Infant count should be less than Adults.";
         return false;
@@ -86,6 +87,7 @@ export class TravellerInfoComponent implements OnInit {
       else{
         this.errorMessage='';
       }
+      
       this.adultValue = this.adultValue - 1;
     } else if (item && item.type === 'plus' && item.label === 'adult') {
       if(this.adultValue+1 + this.childValue  > 9){

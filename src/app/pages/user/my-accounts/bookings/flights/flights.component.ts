@@ -27,7 +27,7 @@ export class FlightsComponent implements OnInit {
     if(typeof changes['cartItem'].currentValue!='undefined'){
       this.cartItem=changes['cartItem'].currentValue;
     }
-  }
+  } 
 
   convertHHMM(time){
     time = time.replace(' AM','');
