@@ -341,8 +341,6 @@ input.ng-invalid.ng-touched {
             .text_field {
                 flex: 2;
 
-                
-
                 .gender_anchers {
                     display: flex;
                     justify-content: flex-start;
@@ -432,7 +430,8 @@ input.ng-invalid.ng-touched {
             textarea {
                 width: 100%;
                 background: transparent;
-                height: 40px;
+                max-height: 70px;
+                resize: none;
                 border: none;
                 font-size: 16px;
                 color: $mid_gray_bg;

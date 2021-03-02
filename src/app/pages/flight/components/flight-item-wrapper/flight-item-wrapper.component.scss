@@ -41,9 +41,14 @@
     .center_side {
         .stops_wr {
             min-width: 55px;
+
             .accordion_infos_1 {
-                .det_link{
+                .det_link {
                     width: 68px;
+                    position: relative;
+                    padding-right: 15px;
+                    display: flex;
+                    align-items: center
                 }
             }
         }
@@ -162,13 +167,17 @@
             font-size: 9px;
             margin-left: 45px;
             font-weight: 500;
+            position: relative;
+            padding-right: 15px;
+            display: flex;
+            align-items: center;
 
             &[aria-expanded="true"] {
                 color: $mid_gray_bg;
 
                 &:after {
                     content: "";
-                    position: relative;
+                    position: absolute;
                     padding: 5px 6px;
                     background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                     background-position: right;
@@ -177,7 +186,6 @@
                     transition: 0.3s;
                     right: 0;
                     border: none;
-                    top: 1px;
                 }
             }
 
@@ -185,7 +193,7 @@
                 color: $active-tab-text;
 
                 &:after {
-                    position: relative;
+                    position: absolute;
                     padding: 5px 6px;
                     background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
                     background-position: right;
@@ -195,7 +203,6 @@
                     transition: 0.3s;
                     right: 0;
                     border: none;
-                    top: 1px;
                 }
             }
         }
@@ -413,9 +420,14 @@
                             flex-direction: column;
                             display: flex;
                         }
+
                         .accordion_infos_1 {
-                            .det_link{
+                            .det_link {
                                 width: 68px;
+                                position: relative;
+                                padding-right: 15px;
+                                display: flex;
+                                align-items: center
                             }
                         }
 
@@ -474,7 +486,7 @@
 
                                 &:after {
                                     content: "";
-                                    position: relative;
+                                    position: absolute;
                                     padding: 5px 9px;
                                     background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                                     background-position: right;
@@ -483,7 +495,6 @@
                                     transition: 0.3s;
                                     right: 0;
                                     border: none;
-                                    top: 1px;
                                 }
                             }
 
@@ -491,7 +502,7 @@
                                 color: $active-tab-text;
 
                                 &:after {
-                                    position: relative;
+                                    position: absolute;
                                     padding: 5px 9px;
                                     background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
                                     background-position: right;
@@ -501,7 +512,6 @@
                                     transition: 0.3s;
                                     right: 0;
                                     border: none;
-                                    top: 1px;
                                 }
                             }
                         }
