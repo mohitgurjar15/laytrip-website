@@ -151,7 +151,7 @@ var ListTravellerComponent = /** @class */ (function () {
                     country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
                 }
                 else {
-                    country_id = this.location.country.id;
+                    country_id = 233;
                 }
             }
             var jsonData = {
