@@ -23,17 +23,18 @@
                     aria-controls="collapse11" class="d-flex justify-content-start">
                     <span class="heade_wrps">
                         <img [src]="cardObject[card.cardType]" alt="Card icon" />
-                        {{cardType[card.cardType]}} ending in {{card.cardDigits}}
+                        <div class="card_hedr">
+                            {{cardType[card.cardType]}} ending in {{card.cardDigits}}
+                            <div class="make_default_btn" [hidden]="card.isDefault">
+                                <a class="hover-link" (click)="makeDefaultCard(card.id)"><i
+                                        class="fa fa-spinner fa-spin"
+                                        *ngIf="loading && cardIndex === card.id"></i>&nbsp;Make Default</a>
+                            </div>
+                            <div class="default_btn" [hidden]="!card.isDefault">
+                                <a class="">Default</a>
+                            </div>
+                        </div>
                     </span>
-                    <div class="pl-3">
-                        <div class="make_default_btn" [hidden]="card.isDefault">
-                            <a class="hover-link" (click)="makeDefaultCard(card.id)"><i class="fa fa-spinner fa-spin"
-                                    *ngIf="loading"></i>&nbsp;Make Default</a>
-                        </div>
-                        <div class="default_btn" [hidden]="!card.isDefault">
-                            <a class="">Default</a>
-                        </div>
-                    </div>
                 </a>
             </div>
             <div id="card{{blockIndex}}" class="collapse " data-parent="#accordion">

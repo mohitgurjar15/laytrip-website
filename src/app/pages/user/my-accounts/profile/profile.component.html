@@ -97,12 +97,12 @@
             <div class="form_row common_row">
                 <label>{{'phone_no' | translate}}<sup>*</sup></label>
 
-                <div class="text_field telephone_wrps">
+                <div class="text_field telephone_wrps account_telephone">
                     <span class="tel_span">
                         <!-- <input (keypress)="commonFunction.validatePhoneCode($event)"  [readonly]="!isFormControlEnable" type="text" class="form-control" tabindex="14" placeholder="+00"
                          maxlength="4"
                             formControlName="country_code"> -->
-                        <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="countryCode"
+                        <ng-select class="ng-customClass country_code account_telephone_n" [items]="countries" bindLabel="countryCode"
                             bindValue="countryCode" [clearable]="false" formControlName="country_code">
                         </ng-select>
                         <input [readonly]="!isFormControlEnable" mask="000-000-0000" placeholder="(000) 000-0000"
@@ -123,7 +123,7 @@
             <div class="form_row common_row dobs_account">
                 <label>{{'dob' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <p-calendar [disabled]="!isFormControlEnable" dateFormat="M d, yy" class="form-control"
+                    <p-calendar [disabled]="!isFormControlEnable" dateFormat="mm/dd/yy" class="form-control"
                         panelStyleClass="birth_date" inputId="basic" tabindex="9" formControlName="dob"
                         [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                         yearRange="{{'1971:'+this.dobMinDate.getFullYear()}}"

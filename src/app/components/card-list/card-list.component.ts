@@ -37,6 +37,7 @@ export class CardListComponent implements OnInit {
   cardType = cardType;
   is_open_popup = false;
   loading = false;
+  cardIndex;
 
   ngOnInit() {
     this.getCardlist();
@@ -66,6 +67,7 @@ export class CardListComponent implements OnInit {
   }
 
   makeDefaultCard(cardId) {
+    this.cardIndex = cardId;
     this.loading = true;
     const payload = { card_id: cardId };
     this.genericService.makeDefaultCard(payload).subscribe((res: any) => {

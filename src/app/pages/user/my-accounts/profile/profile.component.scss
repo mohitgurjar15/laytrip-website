@@ -10,7 +10,7 @@ input.ng-invalid.ng-touched {
 }
 
 .ng-customClass.country_code {
-    width: 140px;
+    width: 85px;
 }
 
 .account_part {
@@ -40,17 +40,7 @@ input.ng-invalid.ng-touched {
     }
 }
 
-.account_part
-    .account_cnt_main
-    .update_info
-    .update_info_right
-    .form_row
-    .form_field
-    .phone_no
-    .code
-    .dropdown
-    .ng-select.ng-customClass
-    .ng-select-container {
+.account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown .ng-select.ng-customClass .ng-select-container {
     height: 100%;
     border: none;
 }
@@ -290,18 +280,23 @@ input.ng-invalid.ng-touched {
                     flex-direction: column;
                     align-items: flex-start;
                     padding-bottom: 4px;
-                    label{
 
-                    }
+                    label {}
                 }
             }
 
             &.title_row {
                 justify-content: space-between;
+
+                .edit_btns {
+                    @include tab-view {
+                        font-size: 12px;
+                    }
+                }
             }
 
-            &.ar_field{
-                .text_field{
+            &.ar_field {
+                .text_field {
                     width: 100%;
                 }
             }
@@ -365,6 +360,7 @@ input.ng-invalid.ng-touched {
                         }
                     }
                 }
+
                 .gender_anchers_notEnable {
                     display: flex;
                     justify-content: flex-start;
@@ -409,6 +405,7 @@ input.ng-invalid.ng-touched {
                 font-size: 16px;
                 color: $mid_gray_bg;
                 position: relative;
+
                 @include tab-view {
                     height: 30px;
                 }
@@ -869,8 +866,7 @@ input.ng-invalid.ng-touched {
                                     }
 
                                     &.birth_date {
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
-                                            no-repeat;
+                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
                                         background-position: right center;
                                         padding: 0 !important;
                                     }
@@ -1850,8 +1846,7 @@ input.ng-invalid.ng-touched {
                                 }
 
                                 &.birth_date {
-                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
-                                        no-repeat;
+                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
                                     background-position: right center;
                                     padding: 0 !important;
                                 }
@@ -3358,8 +3353,7 @@ input.ng-invalid.ng-touched {
                             border-radius: 5px;
                             display: flex;
                             align-items: center;
-                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_pink.svg)
-                                no-repeat;
+                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_pink.svg) no-repeat;
                             background-size: cover;
                             margin: 0;
                             margin: 0 30px 0 0;
@@ -3634,8 +3628,7 @@ input.ng-invalid.ng-touched {
 
                     .block_top {
                         width: 100%;
-                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/Subscription_top_bg.svg)
-                            no-repeat;
+                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/Subscription_top_bg.svg) no-repeat;
                         background-size: 100%;
                         padding: 55px 0 85px;
                         color: $text-white;

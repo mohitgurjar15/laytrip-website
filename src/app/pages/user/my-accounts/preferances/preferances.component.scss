@@ -71,4 +71,9 @@
             }
         }
     }
+    &.last_row{
+        @include tab-view{
+            margin-bottom: 0;
+        }
+    }
 } 
