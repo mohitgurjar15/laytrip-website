@@ -352,4 +352,15 @@ export class TravelerFormComponent implements OnInit {
     return (2.20462 * Number(weight)).toFixed(2);
   }
 
+  // preventNumberInput(event: any) {
+  //   var a = [];
+  //   var k = event.which;
+
+  //   for (let i = 48; i < 58; i++)
+  //     a.push(i);
+
+  //   if ((a.indexOf(k) >= 0))
+  //     event.preventDefault();
+  // }
+
 }

@@ -3,7 +3,8 @@
         <div class="form-row">
             <div class="col-sm-12 col-md-4 mb-sm-10 ">
                 <label for="">{{'first_name' |translate}}*</label>
-                <input tabindex="21" type="text" class="form-control" formControlName="firstName">
+                <input tabindex="21" type="text" class="form-control" formControlName="firstName"
+                    (keypress)="commonFunction.preventNumberInput($event)">
                 <div *ngIf="travellerForm.controls.firstName.touched && travellerForm.controls.firstName.errors"
                     class="error">
                     <small *ngIf="travellerForm.controls.firstName.errors.required" class="error_field">Please enter
@@ -14,7 +15,8 @@
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10">
                 <label for="">{{'last_name' |translate}}*</label>
-                <input tabindex="22" type="text" class="form-control" formControlName="lastName">
+                <input tabindex="22" type="text" class="form-control" formControlName="lastName"
+                    (keypress)="commonFunction.preventNumberInput($event)">
                 <div *ngIf="travellerForm.controls.lastName.touched && travellerForm.controls.lastName.errors"
                     class="error">
                     <small *ngIf="travellerForm.controls.lastName.errors.required" class="error_field">Please
@@ -125,7 +127,8 @@
         </div>
         <span class="edit_btns duel_buttons" *ngIf="travellerId">
             <span class="remove_wrps">
-                <button class="hover-link" *ngIf="traveller.roleId != 6" (click)="openDeleteModal(deleteContent,travellerId)">Delete</button>
+                <button class="hover-link" *ngIf="traveller.roleId != 6"
+                    (click)="openDeleteModal(deleteContent,travellerId)">Delete</button>
             </span>
             <button (click)="onSubmit()" class="hover-link">{{ travellerId ? 'Update' : ''}}
             </button>

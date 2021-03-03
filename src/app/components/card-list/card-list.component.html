@@ -20,14 +20,15 @@
         <div class="card" [attr.id]="blockIndex" [ngClass]="{'current_selected_card': cardToken === card.cardToken}">
             <div class="card-header">
                 <a data-toggle="collapse" data-parent="#accordion" href="#card{{blockIndex}}" aria-expanded="false"
-                    aria-controls="collapse11" class="d-flex align-items-center">
+                    aria-controls="collapse11" class="d-flex justify-content-start">
                     <span class="heade_wrps">
                         <img [src]="cardObject[card.cardType]" alt="Card icon" />
                         {{cardType[card.cardType]}} ending in {{card.cardDigits}}
                     </span>
-                    <div class="pl-3 flex-grow-1">
+                    <div class="pl-3">
                         <div class="make_default_btn" [hidden]="card.isDefault">
-                            <a class="hover-link" (click)="makeDefaultCard(card.id)">Make Default</a>
+                            <a class="hover-link" (click)="makeDefaultCard(card.id)"><i class="fa fa-spinner fa-spin"
+                                    *ngIf="loading"></i>&nbsp;Make Default</a>
                         </div>
                         <div class="default_btn" [hidden]="!card.isDefault">
                             <a class="">Default</a>

@@ -40,14 +40,14 @@ export class CommonFunction {
             e.preventDefault();
         }
     }
-    validatePhoneCode(e: any){
+    validatePhoneCode(e: any) {
         let input = String.fromCharCode(e.charCode);
         const reg = /^[0-9+]*$/;
-    
+
         if (!reg.test(input)) {
             e.preventDefault();
         }
-      }
+    }
     validateNotAllowSpecial(e: any) {
         let input = String.fromCharCode(e.charCode);
         var reg = /^[a-zA-Z0-9-]*$/;
@@ -179,33 +179,33 @@ export class CommonFunction {
         }
     }
 
-    goBack(){
+    goBack() {
         this._location.back();
     }
-    
-    convertFlotToDecimal(floatNumber){
-        return Math.round(floatNumber);
-    } 
 
-    getGuestUser(){
-        
+    convertFlotToDecimal(floatNumber) {
+        return Math.round(floatNumber);
+    }
+
+    getGuestUser() {
+
         let userDetails = getLoginUserInfo();
-        if(!userDetails.roleId || userDetails.roleId==7){
+        if (!userDetails.roleId || userDetails.roleId == 7) {
 
             let guestuserId = localStorage.getItem('__gst')
-            if(guestuserId){
+            if (guestuserId) {
                 return guestuserId
             }
-            else{
+            else {
                 return '';
             }
         }
-        else{
+        else {
             return '';
         }
     }
 
-    convertCustomDateFormat(date, sourceFormat,destFormat, languageCode = null) {
+    convertCustomDateFormat(date, sourceFormat, destFormat, languageCode = null) {
 
         if (languageCode == null) {
             return moment(date, sourceFormat).format(destFormat)
@@ -213,6 +213,15 @@ export class CommonFunction {
         return date;
     }
 
-    
+    preventNumberInput(event: any) {
+        var a = [];
+        var k = event.which;
+
+        for (let i = 48; i < 58; i++)
+            a.push(i);
+
+        if ((a.indexOf(k) >= 0))
+            event.preventDefault();
+    }
 }
 
