@@ -9,9 +9,7 @@ import { GenericService } from '../../../services/generic.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
-import { start } from 'repl';
 import { HomeService } from '../../../services/home.service';
-import { cookieServiceFactory } from 'ngx-cookie';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -116,18 +114,10 @@ export class FlightSearchWidgetComponent implements OnInit {
 
         this.calPrices = true;
         this.fromSearch = airports[params['departure']];
-        //this.fromDestinationCode = this.fromSearch.code;
-        //this.departureCity = this.fromSearch.city;toSearch
-        //this.departureAirportCountry =`${this.fromSearch.code}, ${this.fromSearch.country}`
-        //this.fromAirport = airports[this.fromDestinationCode];
-
         this.toSearch = airports[params['arrival']];
-
-        //this.toDestinationCode = this.toSearch.code;
-        //this.arrivalCity = this.toSearch.city;
-        //this.arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
-        //this.toAirport = airports[this.toDestinationCode];
         this.toggleOnewayRoundTrip(params['trip']);
+        localStorage.setItem('__from',params['departure'])
+        localStorage.setItem('__to',params['arrival'])
 
         this.searchFlightInfo.class = params['class'];
         this.departureDate = moment(params['departure_date']).toDate();
@@ -461,5 +451,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
 
-
+  ngOnDestroy(){
+    localStorage.removeItem('__from');
+    localStorage.removeItem('__to');
+  }
 }

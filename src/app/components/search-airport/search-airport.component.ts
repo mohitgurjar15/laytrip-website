@@ -22,8 +22,6 @@ export class SearchAirportComponent implements OnInit {
   @Output() changeValue = new EventEmitter<any>();
   @Input() defaultCity: any;
   @Input() airport;
-  airportDefaultDestValue;
-  departureAirport;
 
   constructor(
     private flightService: FlightService,
@@ -44,8 +42,18 @@ export class SearchAirportComponent implements OnInit {
   }
 
   searchAirport(searchItem) {
+    console.log("this.selectedAirport",this.selectedAirport)
     this.loading = true;
-    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+    let isFromLocation=this.id=='fromSearch'?'yes':'no';
+    let alternateLocation='';
+    if(this.id=='fromSearch'){
+      alternateLocation=localStorage.getItem('__to') || '';
+    }
+    else{
+      alternateLocation=localStorage.getItem('__from') || '';
+    }
+
+    this.flightService.searchRoute(searchItem,isFromLocation,alternateLocation).subscribe((response: any) => {
       this.data = response.map(res => {
         this.loading = false;
         return {
@@ -55,7 +63,7 @@ export class SearchAirportComponent implements OnInit {
           city: res.city,
           country: res.country,
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
-          parentId: res.parentId
+          parentId: 0
         };
       });
     },
@@ -75,10 +83,13 @@ export class SearchAirportComponent implements OnInit {
     if (!event) {
       this.placeHolder = this.placeHolder;
     }
-    //this.selectedAirport = event;
+    this.selectedAirport = event;
+    //console.log("this.selectedAirport:::",this.selectedAirport)
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });
+      localStorage.setItem('__from',this.selectedAirport.code)
     } else if (event && index && index === 'toSearch') {
+      localStorage.setItem('__to',this.selectedAirport.code)
       this.changeValue.emit({ key: 'toSearch', value: event });
     }
   }
