@@ -40,7 +40,7 @@
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account">
                 <label for="">{{'dob' |translate}}*</label>
-                <p-calendar tabindex="24" dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date"
+                <p-calendar tabindex="24" dateFormat="mm/dd/yy" class="form-control" panelStyleClass="birth_date"
                     inputId="basic" formControlName="dob" [maxDate]="dobMaxDate" [readonlyInput]="true"
                     [yearNavigator]="true" [monthNavigator]="true" yearRange="{{dobYearRange}}"
                     (onSelect)=selectDob($event)>
@@ -61,7 +61,7 @@
                     <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="countryCode"
                         bindValue="countryCode" [clearable]="false" formControlName="country_code">
                     </ng-select>
-                    <input type="text" mask="000-000-0000" tabindex="26" class="form-control" maxlength="14"
+                    <input type="text" mask="(000) 000-0000" tabindex="26" class="form-control" maxlength="14"
                         formControlName="phone_no">
                 </span>
 

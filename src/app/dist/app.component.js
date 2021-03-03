@@ -10,11 +10,14 @@ exports.AppComponent = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
 var environment_1 = require("../environments/environment");
+var uuid_1 = require("uuid");
+var jwt_helper_1 = require("./_helpers/jwt.helper");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(cookieService, genericService, swPush) {
+    function AppComponent(cookieService, genericService, swPush, userService) {
         this.cookieService = cookieService;
         this.genericService = genericService;
         this.swPush = swPush;
+        this.userService = userService;
         this.title = 'laytrip-website';
         this.VAPID_PUBLIC_KEY = environment_1.environment.VAPID_PUBLIC_KEY;
         this.setUserOrigin();
@@ -25,6 +28,7 @@ var AppComponent = /** @class */ (function () {
         if (token) {
             this.subscribeToNotifications();
         }
+        this.registerGuestUser();
     };
     AppComponent.prototype.subscribeToNotifications = function () {
         var _this = this;
@@ -75,6 +79,24 @@ var AppComponent = /** @class */ (function () {
         if (location.country.iso2 == 'PL') {
             if (window.location.origin == 'https://staging.laytrip.com' || window.location.origin == 'http://staging.laytrip.com' || window.location.origin == 'http://localhost:4200') {
                 //window.location.href='https://www.google.com/'
+            }
+        }
+    };
+    AppComponent.prototype.registerGuestUser = function () {
+        var user = jwt_helper_1.getLoginUserInfo();
+        if (!user.roleId || user.roleId == 7) {
+            var __gst = localStorage.getItem('__gst');
+            if (!__gst) {
+                var uuid = uuid_1.v4();
+                localStorage.setItem('__gst', uuid);
+                this.userService.registerGuestUser({ guest_id: uuid }).subscribe(function (result) {
+                    localStorage.setItem("_lay_sess", result.accessToken);
+                });
+            }
+            else {
+                this.userService.registerGuestUser({ guest_id: __gst }).subscribe(function (result) {
+                    localStorage.setItem("_lay_sess", result.accessToken);
+                });
             }
         }
     };
