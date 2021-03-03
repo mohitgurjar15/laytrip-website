@@ -1,5 +1,9 @@
+@import "cstm-variable";
 @import "_cstm-variable.scss";
+@import "_cstm-components.scss";
+@import "_hotel.scss";
 @import "_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 //<!-- Start Account Section Css -->
 .account_part {
@@ -181,6 +185,26 @@
 		}
 	}
 
+	.prefrence_main_wrapper{
+		.title_bar{
+			h3{
+				@include tab-view{
+					font-size: 28px !important;
+					margin-top: 0 !important;
+				}
+			}
+		}
+	}
+	.security_main_wrapper{
+		.title_bar{
+			h3{
+				@include tab-view{
+					font-size: 28px !important;
+					margin-top: 0 !important;
+				}
+			}
+		}
+	}
 	
 	.form_update_btn {
 		width: 100%;

@@ -49,6 +49,11 @@ a {
 }
 
 .dobs {
+  .p-calendar{
+    @include tab-view{
+      width: 100%;
+    }
+  }
   .form-control {
     border-radius: 0;
     border: none;
@@ -295,8 +300,9 @@ textarea:focus:-ms-input-placeholder {
       border: none;
       font-size: 14px;
       padding: 0;
-      &.ng-select-disabled{
-        .ng-select-container{
+
+      &.ng-select-disabled {
+        .ng-select-container {
           background-color: $background-white;
         }
       }
@@ -308,9 +314,11 @@ textarea:focus:-ms-input-placeholder {
           padding-left: 0;
         }
       }
-      .ng-arrow-wrapper{
+
+      .ng-arrow-wrapper {
         width: 17px;
       }
+
       .ng-arrow {
         content: "";
         padding: 5px 9px;
@@ -704,6 +712,10 @@ select {
             border: none;
             margin-bottom: 20px;
 
+            @include tab-view {
+              margin-bottom: 0;
+            }
+
             li {
               display: inline-block;
               margin: 0 10px 0 0;
@@ -756,8 +768,40 @@ select {
                 }
               }
 
+              &.upper_li {
+                @include tab-view {
+                  margin-right: 22px;
+
+                  a {
+                    width: 100px;
+
+                    span {
+                      width: 100%;
+                      text-align: center;
+                    }
+                  }
+                }
+              }
+
+              &.upper_li_2 {
+                @include tab-view {
+                  a {
+                    width: 110px;
+
+                    span {
+                      width: 100%;
+                      text-align: center;
+                    }
+                  }
+                }
+              }
+
               .class_section {
                 width: 110px;
+
+                @include mobile-view {
+                  width: 100px;
+                }
 
                 label {
                   width: 100%;
@@ -995,8 +1039,7 @@ select {
                     z-index: 99;
 
                     @include tab-view {
-                      right: 0;
-                      left: auto;
+                      transform: translate(11%, 0%);
                     }
 
                     // &:before {
@@ -1165,6 +1208,10 @@ select {
                         flex-flow: column;
                       }
 
+                      @include tab-view {
+                        padding: 0;
+                      }
+
                       label {
                         width: 100%;
                         margin-bottom: 0px;
@@ -1265,6 +1312,11 @@ select {
                         margin-bottom: 20px;
                       }
 
+                      @include tab-view {
+                        margin-bottom: 5px;
+                        padding: 0;
+                      }
+
                       label {
                         width: 100%;
                         margin-bottom: 0px;
@@ -1359,6 +1411,10 @@ select {
                       @media (max-width: 575px) {
                         width: 100%;
                         margin-bottom: 0;
+                      }
+
+                      @include tab-view {
+                        padding: 0;
                       }
 
                       .serch_btn {
@@ -1529,9 +1585,41 @@ select {
         border: none;
         margin-bottom: 20px;
 
+        @include tab-view{
+          margin-bottom: 0;
+        }
+
         li {
           display: inline-block;
           margin: 0 10px 0 0;
+
+          &.upper_li {
+            @include tab-view {
+              margin-right: 22px;
+
+              a {
+                width: 100px;
+
+                span {
+                  width: 100%;
+                  text-align: center;
+                }
+              }
+            }
+          }
+
+          &.upper_li_2 {
+            @include tab-view {
+              a {
+                width: 110px;
+
+                span {
+                  width: 100%;
+                  text-align: center;
+                }
+              }
+            }
+          }
 
           a {
             display: flex;
@@ -1608,6 +1696,11 @@ select {
                 position: relative;
                 padding: 0 10px;
                 cursor: pointer;
+
+                @include tab-view {
+                  padding-left: 0;
+                  margin-right: 10px;
+                }
 
                 span {
                   font-size: 14px;
@@ -1767,6 +1860,10 @@ select {
                 padding: 0 10px;
                 cursor: pointer;
 
+                @include tab-view {
+                  padding-left: 0;
+                }
+
                 span {
                   font-size: 14px;
                   width: 15px;
@@ -1782,7 +1879,7 @@ select {
                   background-repeat: no-repeat;
                   background-size: 12px;
 
-                  @include tab-view{
+                  @include tab-view {
                     width: 20px;
                   }
 
@@ -2089,7 +2186,7 @@ select {
 
                   @media (max-width: 991px) {
                     width: 100%;
-                    margin-bottom: 10px;
+                    margin-bottom: 5px;
                     padding: 0;
                   }
 
@@ -2187,6 +2284,10 @@ select {
                   @media (max-width: 575px) {
                     width: 100%;
                     padding: 0;
+                  }
+
+                  @include tab-view{
+                    margin-bottom: 0;
                   }
 
                   .serch_btn {
@@ -3009,6 +3110,7 @@ select {
           font-weight: 600;
           // opacity: 0.7;
           text-align: left;
+
           @media (max-width: 768px) {
             text-align: center;
           }
@@ -5005,16 +5107,17 @@ body {
   }
 }
 
-#challenge-modal{
-  iframe{
-      height: 318px;
-      box-shadow: none;
-      border-width: 0;
-      width: 250px;
-      .acs{
-        &.one{
-          width: 100%;
-        }
+#challenge-modal {
+  iframe {
+    height: 318px;
+    box-shadow: none;
+    border-width: 0;
+    width: 250px;
+
+    .acs {
+      &.one {
+        width: 100%;
       }
+    }
   }
 }
