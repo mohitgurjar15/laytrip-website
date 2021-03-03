@@ -178,6 +178,11 @@ h3 {
         //color: $pink;
         color: $mid_gray_bg;
         font-size: 9px;
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        text-align: center;
+        left: 0;
 
         @include tab-view {
           font-size: 12px;

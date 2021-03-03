@@ -14,3 +14,20 @@
 		display: block;
 	}
 }
+.filter_saidbar{
+	&.mobile_sort{
+		.short_by{
+			.block_shortby{
+				margin-top: 0;
+				.accordion-group{
+					.accordion-heading{
+						&::after{
+							background-image: none;
+							margin-left: 15px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

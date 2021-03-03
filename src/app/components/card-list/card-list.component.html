@@ -23,16 +23,16 @@
                     aria-controls="collapse11" class="d-flex align-items-center">
                     <span class="heade_wrps">
                         <img [src]="cardObject[card.cardType]" alt="Card icon" />
-                        {{cardType[card.cardType]}} ending in {{card.cardDigits}}
+                        <div class="card_hedr">
+                            {{cardType[card.cardType]}} ending in {{card.cardDigits}}
+                            <div class="make_default_btn" [hidden]="card.is_default">
+                                <a class="hover-link" (click)="makeDefaultCard(card.id)">Make Default</a>
+                            </div>
+                            <div class="default_btn" [hidden]="!card.is_default">
+                                <a class="">Default</a>
+                            </div>
+                        </div>
                     </span>
-                    <div class="pl-3 flex-grow-1">
-                        <div class="make_default_btn" [hidden]="card.is_default">
-                            <a class="hover-link" (click)="makeDefaultCard(card.id)">Make Default</a>
-                        </div>
-                        <div class="default_btn" [hidden]="!card.is_default">
-                            <a class="">Default</a>
-                        </div>
-                    </div>
                 </a>
             </div>
             <div id="card{{blockIndex}}" class="collapse " data-parent="#accordion">

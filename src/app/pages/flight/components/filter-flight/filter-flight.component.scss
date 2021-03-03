@@ -22,7 +22,19 @@
 		display: block;
 	}
 }
-
+.filter_main_wrapper {
+	&.responsive_mobile{
+		.accordion{
+			&.block_shortby{
+				.accordion-heading{
+					&::after{
+						background-image: none;
+					}
+				}
+			}
+		} 
+	}
+}
 //<!-- Start Responsive Filter css -->
 .filter_responsive {
 	width: 100%;

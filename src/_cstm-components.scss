@@ -243,7 +243,17 @@
 .redeem_laypoint .ng5-slider .ng5-slider-bubble {
     display: none;
 }
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+    background: $text_light_yellow;
+}
 
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+    border: 1px solid $text_light_yellow;
+    background-color: $text_light_yellow;
+    width: 16px;
+    height: 16px;
+    top: -7px;
+}
 .custom_range_slide {
     p {
         margin: 0;

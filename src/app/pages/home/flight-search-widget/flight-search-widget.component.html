@@ -1,6 +1,6 @@
 <div class="flight_tab">
     <ul class="nav nav-tabs">
-        <li class="nav-item">
+        <li class="nav-item upper_li">
             <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab" href="#Oneway"
                 (click)="toggleOnewayRoundTrip('onway')">
                 <!-- <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
@@ -8,7 +8,7 @@
                 <span>{{'oneway' | translate}}</span>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item upper_li_2">
             <a class="nav-link" [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab" href="#Oneway"
                 (click)="toggleOnewayRoundTrip('roundtrip')">
                 <!-- <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />

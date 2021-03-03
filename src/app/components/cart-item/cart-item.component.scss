@@ -13,6 +13,11 @@
     }
     transform: translate(20%, 70%);
     max-width: 240px;
+    &.price_descrip{
+        right: 0;
+        transform: translate(10%, 0);
+        top: 30px;
+    }
 }
 .inner_accordion_wrapper{
     .panel-heading{
