@@ -18,21 +18,26 @@
         font-weight: 600;
         padding: 10px 15px;
         font-size: 16px;
-        &.bb{ 
+
+        &.bb {
             border-bottom: 1px solid $box-border-color;
-            .left_sec{
+
+            .left_sec {
                 flex-direction: column;
                 display: flex;
-                span{
+
+                span {
                     color: $mid_gray_bg;
                     font-size: 10px;
                 }
             }
         }
-        .left_sec{
+
+        .left_sec {
             flex: 1;
         }
-        .paid_markss{
+
+        .paid_markss {
             width: 21px;
             display: flex;
             align-items: center;
@@ -40,6 +45,7 @@
             margin-left: 10px;
         }
     }
+
     .price_descrip {
         .line_desc {
             display: flex;
@@ -48,16 +54,20 @@
             color: $text-black;
             padding: 5px 15px;
             font-size: 16px;
-            &.paid_clr{
+
+            &.paid_clr {
                 color: #1CD304;
             }
-            &.due_clr{
+
+            &.due_clr {
                 color: $pink;
             }
-            .left_sec{
+
+            .left_sec {
                 flex: 1;
             }
-            .paid_markss{
+
+            .paid_markss {
                 width: 21px;
                 display: flex;
                 align-items: center;
@@ -85,7 +95,7 @@
 
                         a {
                             font-weight: 600;
-                            color: $active-tab-text;
+                            color: $text-grey;
                             font-size: 16px;
                             border: none;
                             background-color: transparent;
@@ -141,14 +151,16 @@
                             }
                         }
                     }
-                    .card-body{
+
+                    .card-body {
                         padding: 0;
                     }
                 }
             }
         }
     }
-    .fake_paid_markss{
+
+    .fake_paid_markss {
         width: 31px;
     }
 }
