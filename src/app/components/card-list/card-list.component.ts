@@ -5,6 +5,7 @@ import { GenericService } from '../../services/generic.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 import { cardObject, cardType } from '../../_helpers/card.helper';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-card-list',
@@ -48,7 +49,6 @@ export class CardListComponent implements OnInit {
     this.cardLoader = true;
 
     this.genericService.getCardlist().subscribe((res: any) => {
-      console.log('card list::::::', res);
       this.cardLoader = false;
       this.cards = res;
       this.totalNumberOfcard.emit(res.length)
@@ -109,6 +109,14 @@ export class CardListComponent implements OnInit {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
     }
+  }
+
+  convertExpiry(month, year) {
+    if (!month) {
+      return '';
+    }
+    let date = `${month}/${year}`;
+    return moment(date, 'M/YYYY').format('MM/YYYY');
   }
 
   closePopup() {

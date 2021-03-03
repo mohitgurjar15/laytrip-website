@@ -60,7 +60,7 @@
                                 Expires
                             </div>
                             <div class="card_texter" *ngIf="card.cardMetaData!=null">
-                                {{ card.cardMetaData?.month}}/{{ card.cardMetaData?.year}}
+                                {{convertExpiry(card.cardMetaData?.month, card.cardMetaData?.year)}}
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-2 mb-sm-10">
