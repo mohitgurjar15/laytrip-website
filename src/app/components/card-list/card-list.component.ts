@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
-import {cardObject, cardType} from '../../_helpers/card.helper';
+import { cardObject, cardType } from '../../_helpers/card.helper';
 
 @Component({
   selector: 'app-card-list',
@@ -26,13 +26,13 @@ export class CardListComponent implements OnInit {
   @Output() totalNumberOfcard = new EventEmitter();
   @Input() newCard;
   @Input() cardToken: string = '';
-  @Input() cardListChangeCount:number=0;
+  @Input() cardListChangeCount: number = 0;
   userInfo;
   cardId;
   closeResult;
-  deleteApiError : string = '';
+  deleteApiError: string = '';
 
-  cardObject =cardObject
+  cardObject = cardObject
   cardType = cardType;
 
   ngOnInit() {
@@ -46,11 +46,12 @@ export class CardListComponent implements OnInit {
     this.cardLoader = true;
 
     this.genericService.getCardlist().subscribe((res: any) => {
+      console.log('card list::::::', res);
       this.cardLoader = false;
       this.cards = res;
       this.totalNumberOfcard.emit(res.length)
-    }, (error) => { 
-      this.cards=[];
+    }, (error) => {
+      this.cards = [];
       this.cardLoader = false;
       this.totalNumberOfcard.emit(0);
     });
@@ -62,6 +63,11 @@ export class CardListComponent implements OnInit {
     this.selectCreditCard.emit(cardToken);
   }
 
+  makeDefaultCard(cardId) {
+    console.log(cardId);
+    this.getCardlist();
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (typeof changes['newCard'] !== 'undefined') {
       if (typeof this.newCard !== 'undefined') {
@@ -71,7 +77,7 @@ export class CardListComponent implements OnInit {
       }
     }
 
-    if(typeof changes['cardListChangeCount']!='undefined'){
+    if (typeof changes['cardListChangeCount'] != 'undefined') {
       this.getCardlist();
     }
 
@@ -79,15 +85,17 @@ export class CardListComponent implements OnInit {
       return typeof card != 'undefined'
     })
   }
-  
-  openDeleteModal(content,id) {
+
+  openDeleteModal(content, id) {
     this.cardId = id;
-    this.deleteApiError = ''; 
-    this.modalService.open(content, {windowClass:'delete_account_window', centered: true, backdrop: 'static',
-    keyboard: false}).result.then((result) => {
+    this.deleteApiError = '';
+    this.modalService.open(content, {
+      windowClass: 'delete_account_window', centered: true, backdrop: 'static',
+      keyboard: false
+    }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      
+
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
@@ -102,23 +110,23 @@ export class CardListComponent implements OnInit {
     }
   }
 
-  deleteCreditCard(){
+  deleteCreditCard() {
 
     this.cardLoader = true;
-     this.genericService.deleteCard(this.cardId).subscribe((res: any) => {
+    this.genericService.deleteCard(this.cardId).subscribe((res: any) => {
       this.cardLoader = false;
       this.getCardlist();
       this.modalService.dismissAll();
     }, (error) => {
       this.cardLoader = false;
-      this.deleteApiError = ''; 
-      if(error.status === 409) {
-        this.deleteApiError = error.message; 
-      } else {        
+      this.deleteApiError = '';
+      if (error.status === 409) {
+        this.deleteApiError = error.message;
+      } else {
         this.modalService.dismissAll();
       }
-    }); 
+    });
   }
-  
+
 
 }

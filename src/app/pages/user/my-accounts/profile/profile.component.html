@@ -122,7 +122,7 @@
             <div class="form_row common_row dobs_account">
                 <label>{{'dob' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <p-calendar [disabled]="!isFormControlEnable" dateFormat="M d, yy" class="form-control"
+                    <p-calendar [disabled]="!isFormControlEnable" dateFormat="mm/dd/yy" class="form-control"
                         panelStyleClass="birth_date" inputId="basic" tabindex="9" formControlName="dob"
                         [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                         yearRange="{{'1971:'+this.dobMinDate.getFullYear()}}"

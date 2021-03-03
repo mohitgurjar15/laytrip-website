@@ -333,14 +333,12 @@ export class CheckoutComponent implements OnInit {
 
             this.cartService.validate(this.bookingRequest).subscribe((res: any) => {
               let transaction = res.transaction;
-              console.log(res);
-
+              
               let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
               res.redirection = redirection;
+              console.log("res",res);
               if (transaction.state == "succeeded") {
-
                 console.log('succeeded', [redirection]);
-                /* Note: Do not use this.router.navigateByUrl or navigate here */
                 window.location.href = redirection;
               } else if (transaction.state == "pending") {
 
@@ -349,10 +347,8 @@ export class CheckoutComponent implements OnInit {
                 this.challengePopUp=true;
                 this.spreedly.lifeCycle(res);
               } else {
-
                 console.log('fail', [res]);
-
-                this.router.navigate(['/book/failure']);
+                this.router.navigate(['/cart/checkout']);
               }
             }, (error) => {
                 console.log(error);

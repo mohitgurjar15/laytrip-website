@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { CommonFunction } from "../_helpers/common-function";
 import { throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
+import { GenericService } from "./generic.service";
 
 declare var Spreedly: any;
 declare var env: any;
@@ -13,12 +14,19 @@ declare var env: any;
 @Injectable()
 export class SpreedlyService {
   eventData: any;
+  environmentKey:string='';
   constructor(
     private router:Router,
     @Inject(DOCUMENT) private document: Document,
     private http: HttpClient,
-    private commonFunction: CommonFunction
-  ) { }
+    private commonFunction: CommonFunction,
+    private genericService:GenericService
+  ) {
+    this.genericService.getPaymentDetails().subscribe((result:any)=>{
+      this.environmentKey = result.credentials.environment;
+      console.log("this.environmentKey",this.environmentKey)
+    })
+   }
 
   browserInfo() {
 
@@ -41,11 +49,11 @@ export class SpreedlyService {
     let transaction = res.transaction;
 
     let accessToken = localStorage.getItem('_lay_sess');
-
+    console.log("this.environmentKey12",this.environmentKey)
     env.init(environment, accessToken, res.redirection);
 
     var lifecycle = new Spreedly.ThreeDS.Lifecycle({
-      environmentKey: "9KGMvRTcGfbQkaHQU0fPlr2jnQ8",
+      environmentKey: this.environmentKey,
       // The environmentKey field is required, but if omitted, you will receive a console warning message and the transaction will still succeed.
       hiddenIframeLocation: 'device-fingerprint',
       // The DOM node that you'd like to inject hidden iframes
@@ -82,7 +90,7 @@ export class SpreedlyService {
       redirect_url: res.redirection,
       // The challenge url that is loaded when there is no challenge form
     };
-
+    console.log("transactionData",transactionData)
     lifecycle.start(transactionData);
   }
 

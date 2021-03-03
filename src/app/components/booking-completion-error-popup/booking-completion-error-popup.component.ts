@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Route, Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -12,18 +13,19 @@ export class BookingCompletionErrorPopupComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   constructor(
     public activeModal: NgbActiveModal,
-    private modalService: NgbModal,
+    private router:Router
   ) { }
 
   ngOnInit() {
   }
 
   returnToCart() {
-    console.log('RETURN TO CART');
+    this.router.navigate(['/cart/booking']);
   }
 
   close() {
     this.activeModal.close();
+    //this.router.navigate(['/cart/booking']);
   }
 
 }

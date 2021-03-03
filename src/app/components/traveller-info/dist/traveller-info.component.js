@@ -56,9 +56,11 @@ var TravellerInfoComponent = /** @class */ (function () {
         this.showTraveller = !this.showTraveller;
     };
     TravellerInfoComponent.prototype.btnClickForChange = function (item) {
-        console.log(item);
         // FOR ADULT
         if (item && item.type === 'minus' && item.label === 'adult') {
+            if (this.adultValue === this.infantValue) {
+                this.infantValue = this.infantValue - 1;
+            }
             if (this.adultValue - 1 < this.infantValue) {
                 this.errorMessage = "Infant count should be less than Adults.";
                 return false;
