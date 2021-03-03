@@ -28,6 +28,10 @@
       height: 68px;
       display: flex;
 
+      @include tab-view {
+        height: auto;
+      }
+
       a {
         font-weight: 600;
         color: $text-black;
@@ -39,6 +43,10 @@
         align-items: center;
         width: 100%;
         padding: 0;
+
+        @include tab-view {
+          align-items: flex-start;
+        }
 
         &[aria-expanded="true"] {
           &:after {
@@ -52,6 +60,10 @@
             transition: 0.3s;
             position: absolute;
             right: 15px;
+
+            @include tab-view {
+              top: 25px;
+            }
           }
         }
 
@@ -67,6 +79,10 @@
             transition: 0.3s;
             position: absolute;
             right: 15px;
+
+            @include tab-view {
+              top: 25px;
+            }
           }
         }
 
@@ -75,20 +91,36 @@
           width: 100%;
           justify-content: space-between;
 
+          @include tab-view {
+            align-items: flex-start;
+          }
+
           img {
             margin-right: 15px;
+
+            @include tab-view {
+              margin-top: 5px;
+            }
           }
 
           .card_hedr {
             display: flex;
             width: 100%;
-            justify-content: space-between;
+            justify-content: flex-start;
             padding-right: 25px;
             align-items: center;
+
+            div {
+              margin-left: 10px;
+            }
 
             @include tab-view {
               align-items: flex-start;
               flex-direction: column;
+
+              div {
+                margin-left: 0;
+              }
             }
           }
         }

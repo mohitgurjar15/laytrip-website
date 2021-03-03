@@ -20,7 +20,7 @@
         <div class="card" [attr.id]="blockIndex" [ngClass]="{'current_selected_card': cardToken === card.cardToken}">
             <div class="card-header">
                 <a data-toggle="collapse" data-parent="#accordion" href="#card{{blockIndex}}" aria-expanded="false"
-                    aria-controls="collapse11" class="d-flex align-items-center">
+                    aria-controls="collapse11" >
                     <span class="heade_wrps">
                         <img [src]="cardObject[card.cardType]" alt="Card icon" />
                         <div class="card_hedr">
