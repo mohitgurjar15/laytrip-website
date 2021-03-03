@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">Telephone*</label>
-                            <input type="text" class="form-control" placeholder="{{ traveler.userData.countryCode +' '+ getPhoneNoInMaskFormat(traveler.userData.phoneNo) }}"
+                            <input type="text" class="form-control" placeholder="{{  getPhoneNoInMaskFormat(traveler.userData.phoneNo,traveler.userData.countryCode) }}"
                                 disabled>
                         </div>
                         <div class="col dobs col-md-4 mb-sm-10">
