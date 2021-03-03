@@ -42,6 +42,8 @@ var cms_pages_component_1 = require("./cms-pages/cms-pages.component");
 var ng_otp_input_1 = require("ng-otp-input");
 var ngx_countdown_1 = require("ngx-countdown");
 var ng_recaptcha_1 = require("ng-recaptcha");
+var terms_component_1 = require("./terms/terms.component");
+var ccpa_component_1 = require("./ccpa/ccpa.component");
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -70,6 +72,8 @@ var PagesModule = /** @class */ (function () {
                 covid_page_component_1.CovidPageComponent,
                 about_us_component_1.AboutUsComponent,
                 cms_pages_component_1.CmsPagesComponent,
+                terms_component_1.TermsComponent,
+                ccpa_component_1.CcpaComponent,
             ],
             imports: [
                 common_1.CommonModule,

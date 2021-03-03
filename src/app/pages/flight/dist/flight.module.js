@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.FlightModule = void 0;
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var flight_routing_module_1 = require("./flight-routing.module");
 var flight_search_component_1 = require("./flight-search/flight-search.component");
 var sort_flight_component_1 = require("./components/sort-flight/sort-flight.component");
@@ -21,7 +22,6 @@ var flight_not_found_component_1 = require("./components/flight-not-found/flight
 var flight_traveler_component_1 = require("./flight-traveler/flight-traveler.component");
 var flight_summary_component_1 = require("./flight-summary/flight-summary.component");
 var components_module_1 = require("../../components/components.module");
-var clickOutSide_directive_1 = require("../../_helpers/clickOutSide.directive");
 var forms_1 = require("@angular/forms");
 var ng_select_1 = require("@ng-select/ng-select");
 var flight_checkout_component_1 = require("./flight-checkout/flight-checkout.component");
@@ -36,6 +36,13 @@ var flight_session_time_out_component_1 = require("./components/flight-session-t
 var baggage_policy_popup_component_1 = require("./components/baggage-policy-popup/baggage-policy-popup.component");
 var cancellation_policy_popup_component_1 = require("./components/cancellation-policy-popup/cancellation-policy-popup.component");
 var flight_payment_component_1 = require("./flight-payment/flight-payment.component");
+var flight_summary_loader_component_1 = require("./components/flight-summary-loader/flight-summary-loader.component");
+var flight_error_component_1 = require("./components/flight-error/flight-error.component");
+var popup_term_condition_component_1 = require("./components/popup-term-condition/popup-term-condition.component");
+var popup_loader_component_1 = require("./components/popup-loader/popup-loader.component");
+// HELPERS MODULE
+var _helpers_module_1 = require("../../_helpers/_helpers.module");
+var home_module_1 = require("../home/home.module");
 var FlightModule = /** @class */ (function () {
     function FlightModule() {
     }
@@ -47,11 +54,11 @@ var FlightModule = /** @class */ (function () {
                 filter_flight_component_1.FilterFlightComponent,
                 flight_price_slider_component_1.FlightPriceSliderComponent,
                 flight_item_wrapper_component_1.FlightItemWrapperComponent,
+                flight_item_wrapper_component_1.LaytripOkPopup,
                 flight_search_bar_component_1.FlightSearchBarComponent,
                 flight_not_found_component_1.FlightNotFoundComponent,
                 flight_traveler_component_1.FlightTravelerComponent,
                 flight_summary_component_1.FlightSummaryComponent,
-                clickOutSide_directive_1.ClickOutSideDirective,
                 flight_checkout_component_1.FlightCheckoutComponent,
                 booking_summary_loader_component_1.BookingSummaryLoaderComponent,
                 flight_confirmation_component_1.FlightConfirmationComponent,
@@ -61,20 +68,33 @@ var FlightModule = /** @class */ (function () {
                 flight_session_time_out_component_1.FlightSessionTimeOutComponent,
                 baggage_policy_popup_component_1.BaggagePolicyPopupComponent,
                 cancellation_policy_popup_component_1.CancellationPolicyPopupComponent,
-                flight_payment_component_1.FlightPaymentComponent
+                flight_payment_component_1.FlightPaymentComponent,
+                flight_summary_loader_component_1.FlightSummaryLoaderComponent,
+                flight_error_component_1.FlightErrorComponent,
+                popup_term_condition_component_1.PopupTermConditionComponent,
+                popup_loader_component_1.PopupLoaderComponent,
             ],
             imports: [
                 common_1.CommonModule,
                 flight_routing_module_1.FlightRoutingModule,
                 ng5_slider_1.Ng5SliderModule,
+                ng_bootstrap_1.NgbModule,
+                _helpers_module_1.HelpersModule,
                 components_module_1.ComponentsModule,
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
                 ng_select_1.NgSelectModule,
                 ngx_cookie_1.CookieModule.forRoot(),
-                calendar_1.CalendarModule
+                calendar_1.CalendarModule,
+                home_module_1.HomeModule
             ],
-            exports: [flight_loader_component_1.FlightLoaderComponent, flight_not_found_component_1.FlightNotFoundComponent, flight_confirmation_component_1.FlightConfirmationComponent, flight_summary_component_1.FlightSummaryComponent]
+            exports: [
+                flight_loader_component_1.FlightLoaderComponent,
+                flight_not_found_component_1.FlightNotFoundComponent,
+                flight_confirmation_component_1.FlightConfirmationComponent,
+                flight_summary_component_1.FlightSummaryComponent
+            ],
+            entryComponents: [flight_item_wrapper_component_1.LaytripOkPopup]
         })
     ], FlightModule);
     return FlightModule;
