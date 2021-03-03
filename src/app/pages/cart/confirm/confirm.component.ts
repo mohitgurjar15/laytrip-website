@@ -41,7 +41,7 @@ export class ConfirmComponent implements OnInit {
       if (localStorage.getItem('$bkg') !== this.cartDetails.laytripCartId) {
         this.isFeedbackPage = true;
       }
-    }, 12000);
+    }, 20000);
   }
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'cms-bgColor');

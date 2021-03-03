@@ -8,14 +8,16 @@
                     <label for="">Cardholder Name*</label>
                     <input type="text" id="full_name" class="form-control" placeholder="Name on Card">
                     <div class="error">
-                        <small class="error_field credit_card_error" id="first_name" style="display:none">Please enter cardholder name.</small>
+                        <small class="error_field credit_card_error" id="first_name" style="display:none">Please enter
+                            cardholder name.</small>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label for="">Credit Card Number*</label>
                     <div id="spreedly-number" class="iframe_wrapper"></div>
                     <div class="error">
-                        <small class="error_field credit_card_error" id="number" style="display:none">Please enter valid credit card number.</small>
+                        <small class="error_field credit_card_error" id="number" style="display:none">Please enter valid
+                            credit card number.</small>
                     </div>
                 </div>
             </div>
@@ -24,11 +26,12 @@
                 <div class="col-sm-12 col-md-4 mb-sm-10">
                     <label>Expiration Date*</label>
                     <div class="cvv_wrapper">
-                        <input type="text" class="spf-input-text spf-exp" id="month-year"
-                            placeholder="MM/YYYY" [textMask]="dateYeaMask">
+                        <input type="text" class="spf-input-text spf-exp" id="month-year" placeholder="MM/YYYY"
+                            [textMask]="dateYeaMask">
                     </div>
                     <div class="error">
-                        <small class="error_field credit_card_error month_year_error" id="month"  style="display:none">Please enter valid expiry date.</small>
+                        <small class="error_field credit_card_error month_year_error" id="month"
+                            style="display:none">Please enter valid expiry date.</small>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-sm-10">
@@ -42,6 +45,11 @@
                     </div> -->
                     <div class="save_btn_wrps">
                         <input type="submit" id="submit_button" class="button " value="Save">
+                        <div class="section_description" id="cardError">
+                            <span class="sec_text pt-1" id="cardErrorMessage"></span>
+                            <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                    alt="Close"></a>
+                        </div>
                     </div>
                 </div>
                 <div id="message"></div>

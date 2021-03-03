@@ -15,12 +15,7 @@ import { GenericService } from '../../services/generic.service';
 })
 export class AddCardComponent implements OnInit {
 
-  constructor(
-    private genericService: GenericService,
-    private formBuilder: FormBuilder,
-    private toastr: ToastrService,
-    private spinner: NgxSpinnerService
-  ) { }
+  s3BucketUrl = environment.s3BucketUrl;
   @Input() showAddCardForm: boolean;
   @Output() emitNewCard = new EventEmitter();
   @Output() changeLoading = new EventEmitter;
@@ -37,7 +32,7 @@ export class AddCardComponent implements OnInit {
   saveCardLoader: boolean = false;
   expiryMinDate = new Date();
   cardListChangeCount: number = 0;
-  envKey:string='';
+  envKey: string = '';
 
   mask = {
     guide: false,
@@ -64,6 +59,13 @@ export class AddCardComponent implements OnInit {
       /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
 
+  constructor(
+    private genericService: GenericService,
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
+  ) { }
+
   ngOnInit() {
     this.cardForm = this.formBuilder.group({
       first_name: ['', Validators.required],
@@ -72,10 +74,11 @@ export class AddCardComponent implements OnInit {
       card_number: ['', [Validators.required, Validators.maxLength(20)]],
       expiry: ['', Validators.required]
     });
-    this.genericService.getPaymentDetails().subscribe((result:any)=>{
+    this.genericService.getPaymentDetails().subscribe((result: any) => {
       this.envKey = result.credentials.environment;
       this.spreedlySdk();
-    })
+    });
+    $('#cardError').hide();
   }
 
   spreedlySdk() {
@@ -91,13 +94,12 @@ export class AddCardComponent implements OnInit {
       Spreedly.setFieldType('number', 'text');
       // Spreedly.setNumberFormat('maskedFormat');
       Spreedly.setStyle('number', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;');
-      Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;');
+      Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .96em ; padding-bottom: .5em; font-size: 14px;');
     });
 
-    Spreedly.on('validation', function(inputProperties) {
-      console.log("inputProperties",inputProperties)
+    Spreedly.on('validation', function (inputProperties) {
     });
-    
+
 
     Spreedly.on('errors', function (errors) {
       $(".credit_card_error").hide();
@@ -109,7 +111,6 @@ export class AddCardComponent implements OnInit {
         $("#month").show();
       }
 
-      console.log("Error", errors)
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
         if (error["attribute"]) {
@@ -124,8 +125,7 @@ export class AddCardComponent implements OnInit {
 
 
     Spreedly.on('paymentMethod', function (token, pmData) {
-      
-      console.log("In submit")
+
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);
       this.token = token;
@@ -220,7 +220,6 @@ export class AddCardComponent implements OnInit {
           $("#payment-form")[0].reset();
           Spreedly.reload();
           var cardTokenNew = obj.cardToken;
-          console.log(cardTokenNew);
           /* $(document).on("click", "div#card_list_accodrio", function () {
             if (cardTokenNew === obj.cardToken) {
               $('#card_list_accodrio').children('div').addClass('current_selected_card');
@@ -228,12 +227,18 @@ export class AddCardComponent implements OnInit {
           }); */
         },
         error: function (error) {
-          console.log('error:', error);
+          let errorMessage = document.getElementById('cardErrorMessage');
+          $('#main_loader').hide();
+          $('#cardError').show();
+          errorMessage.innerHTML = error.responseJSON.message;
           // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
       });
-
     });
+  }
+
+  closePopup() {
+    $('#cardError').hide();
   }
 
   submitPaymentForm() {
@@ -242,7 +247,6 @@ export class AddCardComponent implements OnInit {
     for (var i = 0; i < paymentMethodFields.length; i++) {
       var field = paymentMethodFields[i];
       var fieldEl = (<HTMLInputElement>document.getElementById(field));
-
 
       if (fieldEl.id === 'month-year') {
         let value = fieldEl.value;

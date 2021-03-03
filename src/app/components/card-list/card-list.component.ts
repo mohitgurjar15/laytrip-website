@@ -5,6 +5,7 @@ import { GenericService } from '../../services/generic.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 import { cardObject, cardType } from '../../_helpers/card.helper';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-card-list',
@@ -34,6 +35,9 @@ export class CardListComponent implements OnInit {
 
   cardObject = cardObject
   cardType = cardType;
+  is_open_popup = false;
+  loading = false;
+  cardIndex;
 
   ngOnInit() {
     this.getCardlist();
@@ -46,7 +50,6 @@ export class CardListComponent implements OnInit {
     this.cardLoader = true;
 
     this.genericService.getCardlist().subscribe((res: any) => {
-      console.log('card list::::::', res);
       this.cardLoader = false;
       this.cards = res;
       this.totalNumberOfcard.emit(res.length)
@@ -64,8 +67,15 @@ export class CardListComponent implements OnInit {
   }
 
   makeDefaultCard(cardId) {
-    console.log(cardId);
-    this.getCardlist();
+    this.cardIndex = cardId;
+    this.loading = true;
+    const payload = { card_id: cardId };
+    this.genericService.makeDefaultCard(payload).subscribe((res: any) => {
+      this.loading = false;
+      this.getCardlist();
+    }, (error => {
+      this.loading = false;
+    }));
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -86,18 +96,33 @@ export class CardListComponent implements OnInit {
     })
   }
 
-  openDeleteModal(content, id) {
-    this.cardId = id;
-    this.deleteApiError = '';
-    this.modalService.open(content, {
-      windowClass: 'delete_account_window', centered: true, backdrop: 'static',
-      keyboard: false
-    }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
+  openDeleteModal(content, card) {
+    if (card && card.isDefault) {
+      this.is_open_popup = true;
+    } else {
+      this.cardId = card.id;
+      this.deleteApiError = '';
+      this.modalService.open(content, {
+        windowClass: 'delete_account_window', centered: true, backdrop: 'static',
+        keyboard: false
+      }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+  }
 
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  convertExpiry(month, year) {
+    if (!month) {
+      return '';
+    }
+    let date = `${month}/${year}`;
+    return moment(date, 'M/YYYY').format('MM/YYYY');
+  }
+
+  closePopup() {
+    this.is_open_popup = false;
   }
 
   private getDismissReason(reason: any): string {

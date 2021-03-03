@@ -20,15 +20,17 @@
         <div class="card" [attr.id]="blockIndex" [ngClass]="{'current_selected_card': cardToken === card.cardToken}">
             <div class="card-header">
                 <a data-toggle="collapse" data-parent="#accordion" href="#card{{blockIndex}}" aria-expanded="false"
-                    aria-controls="collapse11" class="d-flex align-items-center">
+                    aria-controls="collapse11" class="d-flex justify-content-start">
                     <span class="heade_wrps">
                         <img [src]="cardObject[card.cardType]" alt="Card icon" />
                         <div class="card_hedr">
                             {{cardType[card.cardType]}} ending in {{card.cardDigits}}
-                            <div class="make_default_btn" [hidden]="card.is_default">
-                                <a class="hover-link" (click)="makeDefaultCard(card.id)">Make Default</a>
+                            <div class="make_default_btn" [hidden]="card.isDefault">
+                                <a class="hover-link" (click)="makeDefaultCard(card.id)"><i
+                                        class="fa fa-spinner fa-spin"
+                                        *ngIf="loading && cardIndex === card.id"></i>&nbsp;Make Default</a>
                             </div>
-                            <div class="default_btn" [hidden]="!card.is_default">
+                            <div class="default_btn" [hidden]="!card.isDefault">
                                 <a class="">Default</a>
                             </div>
                         </div>
@@ -59,12 +61,19 @@
                                 Expires
                             </div>
                             <div class="card_texter" *ngIf="card.cardMetaData!=null">
-                                {{ card.cardMetaData?.month}}/{{ card.cardMetaData?.year}}
+                                {{convertExpiry(card.cardMetaData?.month, card.cardMetaData?.year)}}
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-2 mb-sm-10">
                             <div class="save_btn_wrps">
-                                <a class="hover-link" (click)="openDeleteModal(content,card.id)">Delete</a>
+                                <a class="hover-link" (click)="openDeleteModal(content,card)">Delete</a>
+                                <div class="section_description" id="delete_card_desc" *ngIf="is_open_popup">
+                                    <span class="sec_text">For Deleting the Credit card you must have one Default credit
+                                        card
+                                        selected.</span>
+                                    <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                            alt="Close"></a>
+                                </div>
                             </div>
                         </div>
                     </div>

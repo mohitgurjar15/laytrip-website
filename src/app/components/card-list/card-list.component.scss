@@ -5,6 +5,17 @@
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+.section_description {
+  width: 240px;
+  &.one {
+    transform: translate(10%, -10%);
+    max-width: 170px;
+    right: 0;
+  }
+  transform: translate(-28%, 70%);
+  max-width: 240px;
+}
+
 .accordion_cardss {
   margin: 15px 15px 0px 15px;
 
@@ -28,6 +39,10 @@
       height: 68px;
       display: flex;
 
+      @include tab-view {
+        height: auto;
+      }
+
       a {
         font-weight: 600;
         color: $text-black;
@@ -39,6 +54,10 @@
         align-items: center;
         width: 100%;
         padding: 0;
+
+        @include tab-view {
+          align-items: flex-start;
+        }
 
         &[aria-expanded="true"] {
           &:after {
@@ -52,6 +71,10 @@
             transition: 0.3s;
             position: absolute;
             right: 15px;
+
+            @include tab-view {
+              top: 25px;
+            }
           }
         }
 
@@ -67,6 +90,10 @@
             transition: 0.3s;
             position: absolute;
             right: 15px;
+
+            @include tab-view {
+              top: 25px;
+            }
           }
         }
 
@@ -75,20 +102,36 @@
           width: 100%;
           justify-content: space-between;
 
+          @include tab-view {
+            align-items: flex-start;
+          }
+
           img {
             margin-right: 15px;
+
+            @include tab-view {
+              margin-top: 5px;
+            }
           }
 
           .card_hedr {
             display: flex;
             width: 100%;
-            justify-content: space-between;
+            justify-content: flex-start;
             padding-right: 25px;
             align-items: center;
+
+            div {
+              margin-left: 10px;
+            }
 
             @include tab-view {
               align-items: flex-start;
               flex-direction: column;
+
+              div {
+                margin-left: 0;
+              }
             }
           }
         }
@@ -114,6 +157,7 @@
             font-size: 14px;
             font-weight: normal;
             padding: 0;
+            cursor: default;
           }
         }
       }

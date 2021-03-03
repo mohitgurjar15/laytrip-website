@@ -17,6 +17,17 @@
     }
 }
 
+.section_description {
+    width: 240px;
+    &.one {
+        transform: translate(10%, -10%);
+        max-width: 170px;
+        right: 0;
+    }
+    transform: translate(-28%, 70%);
+    max-width: 240px;
+}
+
 /* .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn input {
     width: auto;
     padding: 0 35px;
@@ -78,6 +89,7 @@
     }
     .iframe_wrapper {
         height: 38px;
+        margin-top: 1px;
     }
     .cvv_wrapper {
         display: flex;
