@@ -107,22 +107,25 @@ export class FlightPriceSliderComponent implements OnInit {
     let sourceIndex = dates.findIndex(date=>{ return moment(date.date,"DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] })
     let targetIndex = 4;
     if(window.screen.width<=360){
-      targetIndex=2;
+      targetIndex=6;
     }
-    console.log(targetIndex,"targetIndex")
+    console.log(targetIndex,"targetIndex",sourceIndex)
+    this.dates = this.arrayRotate(this.dates,targetIndex);
+    console.log("this.dates",this.dates)
     if(targetIndex > sourceIndex){
-      targetIndex=5;
+
+      /* targetIndex=5;
       for(let i=targetIndex; i < this.dates.length; i++){
         result.push(this.dates[i])
       }
       for(let i=0; i < targetIndex; i++){
         result.push(this.dates[i])
-      }
+      } */
 
     }
     else{
 
-      for(let i=targetIndex; i <= sourceIndex; i++){
+      /* for(let i=targetIndex; i <= sourceIndex; i++){
         
         result.push(this.dates[i])
       }
@@ -133,10 +136,17 @@ export class FlightPriceSliderComponent implements OnInit {
       
       for(let i=0; i < targetIndex; i++){
         result.push(this.dates[i])
-      }
+      } */
 
+      
     }
-    this.dates = result;
+    //this.dates = result;
+  }
+
+  arrayRotate(arr, count) {
+    count -= arr.length * Math.floor(count / arr.length);
+    arr.push.apply(arr, arr.splice(0, count));
+    return arr;
   }
 
   getPrice(item){
