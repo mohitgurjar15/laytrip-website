@@ -89,4 +89,7 @@ export class BookingTravelerComponent implements OnInit {
       return false;
     }
   }
+  getPhoneNoInMaskFormat(phNum,countryCode){
+    return countryCode+' '+phNum.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+  }
 }

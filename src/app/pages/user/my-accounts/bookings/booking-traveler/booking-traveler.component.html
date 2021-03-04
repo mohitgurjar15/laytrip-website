@@ -36,13 +36,13 @@
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">Telephone*</label>
-                            <input type="text" class="form-control" placeholder="{{traveler.userData.phoneNo}}"
+                            <input type="text" class="form-control" placeholder="{{  getPhoneNoInMaskFormat(traveler.userData.phoneNo,traveler.userData.countryCode) }}"
                                 disabled>
                         </div>
                         <div class="col dobs col-md-4 mb-sm-10">
                             <label for="">Date of Birth*</label>
                             <input type="text" class="form-control"
-                                placeholder="{{ traveler.userData.dob && traveler.userData.dob != ''  ? commonFunction.convertDateFormat(traveler.userData.dob,'YYYY-MM-DD') : ''}}"
+                                placeholder="{{ traveler.userData.dob && traveler.userData.dob != ''  ? commonFunction.convertCustomDateFormat(traveler.userData.dob,'YYYY-MM-DD','MM/DD/YYYY') : ''}}"
                                 disabled>
                         </div>
 

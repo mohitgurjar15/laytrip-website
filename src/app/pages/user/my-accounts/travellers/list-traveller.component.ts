@@ -188,7 +188,7 @@ export class ListTravellerComponent implements OnInit {
         if (this.traveller.country) {
           country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
         } else {
-          country_id = this.location.country.id;
+          country_id = 233;
         }
       }
 
