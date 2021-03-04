@@ -105,7 +105,7 @@
                         <ng-select class="ng-customClass country_code account_telephone_n" [items]="countries" bindLabel="countryCode"
                             bindValue="countryCode" [clearable]="false" formControlName="country_code">
                         </ng-select>
-                        <input [readonly]="!isFormControlEnable" mask="000-000-0000" placeholder="(000) 000-0000"
+                        <input [readonly]="!isFormControlEnable" mask="(000) 000-0000" placeholder="(000) 000-0000"
                             type="text" tabindex="15" class="form-control" maxlength="14" formControlName="phone_no">
                     </span>
                     <div class="error"

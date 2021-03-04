@@ -96,12 +96,12 @@
                         <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="phonecode"
                           [tabIndex]="5" bindValue="phonecode" formControlName="country_code" [clearable]="false">
                         </ng-select>
-                        <input type="text" mask="000-000-0000" class="form-control" maxlength="14"
+                        <input type="text" mask="(000) 000-0000" class="form-control" maxlength="14"
                           formControlName="phone_no" tabindex="6">
                       </span>
                       <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
                         class="error">
-                        <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">Please enter
+                        <small *ngIf="traveler.concountrycountrytrols.phone_no.errors.required" class="error_field">Please enter
                           your phone number.</small>
                         <small *ngIf="traveler.controls.phone_no.errors.minlength" class="error_field">Phone number
                           should be minimum 10</small>
@@ -134,7 +134,7 @@
 
 
                     <div class="col-sm-12 col-md-4 nation_wrps">
-                      <label for="">Nationality*</label>
+                      <label for="">Country*</label>
                       <!-- <input type="text" class="form-control" placeholder="Nationality" formControlName="country"> -->
                       <ng-select [clearable]="false" [items]="countries" bindLabel="name" bindValue="id" tabindex="10"
                         formControlName="country_id">
