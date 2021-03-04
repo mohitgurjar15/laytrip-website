@@ -151,6 +151,10 @@
                     display: flex;
                     justify-content: center;
 
+                    @include tab-view{
+                        font-size: 10px;
+                    }
+
                     img {
                         max-width: 15px;
                         margin-right: 10px;
@@ -189,6 +193,10 @@
     position: relative;
     min-height: calc(100vh - 110px);
     padding-top: 80px;
+
+    @include tab-view{
+        padding-top: 60px;
+    }
 
     .booking_inner_container {
         max-width: 680px;
@@ -409,7 +417,7 @@
 
                                         .date_head {
                                             @include tab-view {
-                                                font-size: 12px;
+                                                font-size: 10px;
                                             }
                                         }
                                     }
@@ -478,6 +486,10 @@
                         padding: 15px;
                         border-top: 1px solid $box-border-color;
                         background-color: $tab-bg-gray;
+
+                        @include tab-view{
+                            padding: 10px;
+                        }
 
                         .booking_tab_header {
                             border-bottom: none;
