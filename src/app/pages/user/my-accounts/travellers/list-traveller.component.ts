@@ -120,14 +120,14 @@ export class ListTravellerComponent implements OnInit {
 
   getCountry() {
     this.genericService.getCountry().subscribe((data: any) => {
-      this.countries = data.map(country => {
+      this.countries =  data.map(country => {
         return {
           id: country.id,
           name: country.name,
           countryCode: country.phonecode,
           flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
         }
-      }),
+      });
         this.countries_code = data.map(country => {
           return {
             id: country.id,
@@ -136,7 +136,9 @@ export class ListTravellerComponent implements OnInit {
             country_name: country.name + ' ' + country.phonecode,
             flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
           }
-        });
+      });
+
+      this.setUSCountryInFirstElement(this.countries);
 
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
@@ -145,6 +147,20 @@ export class ListTravellerComponent implements OnInit {
     });
   }
 
+  setUSCountryInFirstElement(countries){
+    var usCountryObj = countries.find(x=> x.id === 233);
+    var removedUsObj = countries.filter( obj => obj.id !== 233);
+    // this.countries = [];
+     removedUsObj.unshift(usCountryObj); 
+     this.countries=[];
+     removedUsObj.sort(function(a, b) {
+      return (b['name'] > a['name']) ? 1 : ((b['name'] < a['name']) ? -1 : 0); 
+    });
+
+     this.countries = removedUsObj;  
+
+  }
+  
   checkUncheckAll() {
     var checkboxes = document.getElementsByClassName('travelerCheckbox');
     for (var i = 0; i < checkboxes.length; i++) {
