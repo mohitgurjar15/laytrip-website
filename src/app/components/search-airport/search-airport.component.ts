@@ -95,6 +95,7 @@ export class SearchAirportComponent implements OnInit {
   }
 
   onRemove(event) {
+    console.log("innnnn")
     this.selectedAirport = {};
   }
 
