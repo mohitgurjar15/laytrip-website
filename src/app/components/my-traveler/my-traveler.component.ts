@@ -22,7 +22,7 @@ export class MyTravelerComponent implements OnInit {
   }
 
   selectTraveler(traveler) {
-
+    
     traveler.traveler_number = this.traveler_number;
     this.travelerId = traveler.userId;
     this.checkOutService.selectTraveler(traveler);

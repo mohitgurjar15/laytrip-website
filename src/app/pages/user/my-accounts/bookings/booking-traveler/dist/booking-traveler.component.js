@@ -82,6 +82,9 @@ var BookingTravelerComponent = /** @class */ (function () {
             return false;
         }
     };
+    BookingTravelerComponent.prototype.getPhoneNoInMaskFormat = function (phNum, countryCode) {
+        return countryCode + ' ' + phNum.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+    };
     __decorate([
         core_1.Input()
     ], BookingTravelerComponent.prototype, "travelers");

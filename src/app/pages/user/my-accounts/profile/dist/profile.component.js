@@ -68,7 +68,7 @@ var ProfileComponent = /** @class */ (function () {
             first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             dob: ['', forms_1.Validators.required],
-            country_code: ['', [forms_1.Validators.required]],
+            country_code: ['+1', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             address: [''],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
