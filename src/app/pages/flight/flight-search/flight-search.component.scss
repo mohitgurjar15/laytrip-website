@@ -9,7 +9,7 @@
 }
 
 .search_tab_listing_wrapper {
-    margin-top: 50px;
+    //margin-top: 50px;
 
     @include tab-view {
         margin-top: 130px;
@@ -224,69 +224,145 @@
     }
 }
 
-.page_topbanner {
-    position: relative;
-    width: 100%;
-    display: flex;
-    margin-top: 40px;
+// .page_topbanner {
+//     position: relative;
+//     width: 100%;
+//     display: flex;
+//     margin-top: 40px;
 
-    img {
-        width: 100%;
+//     img {
+//         width: 100%;
 
-    }
+//     }
 
-    @include tab-view {
-        height: 144px;
+//     @include tab-view {
+//         height: 144px;
 
-        img {
-            height: 100%;
-            -o-object-fit: cover;
-            object-fit: cover;
-            -o-object-position: center;
-            object-position: center;
-        }
-    }
-}
+//         img {
+//             height: 100%;
+//             -o-object-fit: cover;
+//             object-fit: cover;
+//             -o-object-position: center;
+//             object-position: center;
+//         }
+//     }
+// }
 
 .listing_main_box {
+    margin-top: 40px;
+    position: relative;
 
     // transform: translate(0px, -155px);
     .search_tab_listing_wrapper {
-        top: -100px;
-        position: relative;
+        // top: -100px;
+        // position: relative;
 
         @include tab-view {
             top: 0;
-            margin-top: -110px;
+            margin-top: 0;
         }
     }
 
     @include tab-view {
         padding: 15px;
+        top: -20px;
     }
 }
 
 .search_result {
-    transform: translate(0px, -95px);
+    //transform: translate(0px, -95px);
+    padding: 25px 0 40px;
 
     @include tab-view {
         transform: initial;
         padding: 0;
     }
-
+    .price_by_date{
+        margin: 0 0 20px;
+    }
     &.flight {
         .left_m {
             margin-top: 24px;
-            @include tab-view{
+
+            @include tab-view {
                 margin: 15px 0 10px;
             }
         }
     }
 }
 
+
 .search_tab_listing_wrapper {
+    padding-top: 30px;
+    display: flex;
+    width: 100%;
+
+    &::before {
+        content: '';
+        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/cms_page_banner.png);
+        background-position: top;
+        background-repeat: no-repeat;
+        height: 160px;
+        width: 100%;
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        -o-object-fit: cover;
+        object-fit: cover;
+        -o-object-position: center;
+        object-position: center;
+    }
+
+    .search_tab_icons_wrps {
+        display: flex;
+        margin-bottom: 25px;
+
+        .tab_anch {
+            padding: 20px 30px 20px 30px;
+            background: $box-border-color;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 23px;
+            height: 69px;
+            width: 69px;
+
+            @include tab-view {
+                height: 59px;
+                width: 59px;
+                padding: 20px;
+            }
+
+            .active-icon {
+                display: none;
+            }
+
+            &.active {
+                background: $primary-color;
+
+                .active-icon {
+                    display: block;
+                }
+
+                .default-icon {
+                    display: none;
+                }
+            }
+        }
+    }
+
     .searchbar_box_common {
         position: relative;
+
+
     }
 }
 
