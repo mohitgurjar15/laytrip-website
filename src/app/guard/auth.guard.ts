@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-        let result = this.validateUserandRole(next)
+        let result = this.validateUserandRole(next);
         if (result)
             return true;
         else
@@ -27,8 +27,7 @@ export class AuthGuard implements CanActivate {
     validateUserandRole(next) {
 
         const user = getUserDetails(localStorage.getItem('_lay_sess'))
-        // console.log(user,typeof next.data);
-        if (user) {
+        if (user && user.roleId !== 7) {
             if (typeof next.data == 'object' && Object.values(next.data).length == 0) {
                 return true;
             }
