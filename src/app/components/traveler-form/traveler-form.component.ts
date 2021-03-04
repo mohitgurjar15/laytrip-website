@@ -254,8 +254,19 @@ export class TravelerFormComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     this.checkOutService.getCountries.subscribe(res => {
       this.countries = res;
-    })
+      this.setUSCountryInFirstElement(this.countries)
+    });
+  }
 
+  setUSCountryInFirstElement(countries){
+    var usCountryObj = countries.find(x=> x.id === 233);
+    var removedUsObj = countries.filter( obj => obj.id !== 233);
+    this.countries=[];
+    removedUsObj.sort(function(a, b) {
+      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);          
+    });
+    removedUsObj.unshift(usCountryObj); 
+    this.countries = removedUsObj;  
   }
 
   patch() {

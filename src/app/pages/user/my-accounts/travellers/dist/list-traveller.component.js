@@ -116,12 +116,11 @@ var ListTravellerComponent = /** @class */ (function () {
     ListTravellerComponent.prototype.setUSCountryInFirstElement = function (countries) {
         var usCountryObj = countries.find(function (x) { return x.id === 233; });
         var removedUsObj = countries.filter(function (obj) { return obj.id !== 233; });
-        // this.countries = [];
-        removedUsObj.unshift(usCountryObj);
         this.countries = [];
         removedUsObj.sort(function (a, b) {
-            return (b['name'] > a['name']) ? 1 : ((b['name'] < a['name']) ? -1 : 0);
+            return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
         });
+        removedUsObj.unshift(usCountryObj);
         this.countries = removedUsObj;
     };
     ListTravellerComponent.prototype.checkUncheckAll = function () {

@@ -150,15 +150,12 @@ export class ListTravellerComponent implements OnInit {
   setUSCountryInFirstElement(countries){
     var usCountryObj = countries.find(x=> x.id === 233);
     var removedUsObj = countries.filter( obj => obj.id !== 233);
-    // this.countries = [];
-     removedUsObj.unshift(usCountryObj); 
-     this.countries=[];
-     removedUsObj.sort(function(a, b) {
-      return (b['name'] > a['name']) ? 1 : ((b['name'] < a['name']) ? -1 : 0); 
+    this.countries=[];
+    removedUsObj.sort(function(a, b) {
+      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);          
     });
-
-     this.countries = removedUsObj;  
-
+    removedUsObj.unshift(usCountryObj); 
+    this.countries = removedUsObj;  
   }
   
   checkUncheckAll() {
