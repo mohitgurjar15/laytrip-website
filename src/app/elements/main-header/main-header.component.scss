@@ -996,6 +996,9 @@
                             &:hover {
                                 background-color: transparent;
                             }
+                            @include tab-view{
+                                font-size: 14px;
+                            }
 
                             &.bld_txt {
                                 color: $active-tab-text;
