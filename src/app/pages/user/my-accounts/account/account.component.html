@@ -31,7 +31,7 @@
                         <div id="accordion" class="card_accordion">
                             <div class="card">
                                 <app-card-list cardListChangeCount="{{cardListChangeCount}}"></app-card-list>
-                                <div class="new_card" [hidden]="!is_add_new_card">
+                                <div class="new_card" [ngClass]="{'mt-0':add_new_card}" [hidden]="!add_new_card">
                                     <div class="card-header">
                                         <a class="card-link" data-toggle="collapse" href="#collapseOne"
                                             aria-controls="collapseOne" aria-expanded="true">
@@ -43,7 +43,8 @@
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                         <div class="card-body">
-                                            <app-add-card (emitCardListChange)="getCardListChange($event)">
+                                            <app-add-card (emitCardListChange)="getCardListChange($event)"
+                                                (add_new_card)="closeNewCardPanel($event)">
                                             </app-add-card>
                                         </div>
                                     </div>

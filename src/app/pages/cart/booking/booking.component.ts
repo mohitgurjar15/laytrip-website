@@ -63,7 +63,7 @@ export class BookingComponent implements OnInit {
   isSubmitted: boolean = false;
   alertErrorMessage: string = '';
 
-  is_add_new_card = false;
+  add_new_card = false;
 
   constructor(
     private router: Router,
@@ -156,7 +156,11 @@ export class BookingComponent implements OnInit {
   }
 
   addNewCard() {
-    this.is_add_new_card = true;
+    this.add_new_card = true;
+  }
+
+  closeNewCardPanel(event) {
+    this.add_new_card = event;
   }
 
   ngAfterViewInit() {
@@ -471,7 +475,7 @@ export class BookingComponent implements OnInit {
   }
 
   getCardListChange(data) {
-    this.is_add_new_card = false;
+    this.add_new_card = false;
     this.cardListChangeCount = data;
   }
 
