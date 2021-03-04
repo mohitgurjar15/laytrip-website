@@ -56,12 +56,14 @@ export class BookingComponent implements OnInit {
   validationErrorMessage: string = '';
   cardListChangeCount: number = 0;
   $cartIdsubscription;
-  guestUserId:string='';
-  notAvailableError:string='';
-  isNotAvailableItinerary:boolean=false;
-  isAllAlertClosed:boolean=true;
-  isSubmitted:boolean=false;
-  alertErrorMessage:string='';
+  guestUserId: string = '';
+  notAvailableError: string = '';
+  isNotAvailableItinerary: boolean = false;
+  isAllAlertClosed: boolean = true;
+  isSubmitted: boolean = false;
+  alertErrorMessage: string = '';
+
+  is_add_new_card = false;
 
   constructor(
     private router: Router,
@@ -112,12 +114,12 @@ export class BookingComponent implements OnInit {
         price.start_price = items.data[i].moduleInfo[0].start_price;
         price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         this.cartPrices.push(price)
-        
+
       }
       console.log("carts", this.carts)
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
-      
+
     }, error => {
       this.isCartEmpty = true;
       this.cartLoading = false;
@@ -127,7 +129,7 @@ export class BookingComponent implements OnInit {
     });
 
     this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
-    
+
       if (cartId > 0) {
         this.deleteCart(cartId);
       }
@@ -144,13 +146,17 @@ export class BookingComponent implements OnInit {
     this.checkOutService.getTravelerFormData.subscribe((travelerFrom: any) => {
       this.isValidTravelers = travelerFrom.status === 'VALID' ? true : false;
       this.travelerForm = travelerFrom;
-      if(this.carts.length && this.isSubmitted){
+      if (this.carts.length && this.isSubmitted) {
         this.validationErrorMessage = '';
         this.validateCartItems();
       }
     })
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
+  }
+
+  addNewCard() {
+    this.is_add_new_card = true;
   }
 
   ngAfterViewInit() {
@@ -353,80 +359,80 @@ export class BookingComponent implements OnInit {
   validateCartItems() {
     this.validationErrorMessage = '';
     if (!this.isValidTravelers) {
-      this.validationErrorMessage='Complete required fields in Traveler Details for'
-      let message='';
-      
-      console.log(this.carts,"this.carts[i]")
-      for(let i in Object.keys(this.travelerForm.controls)){
-        message='';
-        if(typeof this.carts[i]!='undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`].status=="INVALID"){
+      this.validationErrorMessage = 'Complete required fields in Traveler Details for'
+      let message = '';
+
+      console.log(this.carts, "this.carts[i]")
+      for (let i in Object.keys(this.travelerForm.controls)) {
+        message = '';
+        if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`].status == "INVALID") {
           message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
-          this.validationErrorMessage +=message;
+          this.validationErrorMessage += message;
         }
       }
-      
+
       let index = this.validationErrorMessage.lastIndexOf(" ");
       this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
     }
-    
-    let notAvailableMessage='';
-    this.notAvailableError='Itinerary is not available from ';
-    for(let i=0; i < this.carts.length; i++){
-      notAvailableMessage='';
-      if(!this.carts[i].is_available){
-        this.isNotAvailableItinerary=true;
+
+    let notAvailableMessage = '';
+    this.notAvailableError = 'Itinerary is not available from ';
+    for (let i = 0; i < this.carts.length; i++) {
+      notAvailableMessage = '';
+      if (!this.carts[i].is_available) {
+        this.isNotAvailableItinerary = true;
         notAvailableMessage = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
-        this.notAvailableError +=notAvailableMessage;
+        this.notAvailableError += notAvailableMessage;
       }
     }
 
-    if(this.isNotAvailableItinerary){
+    if (this.isNotAvailableItinerary) {
       let index = this.notAvailableError.lastIndexOf(" ");
       this.notAvailableError = this.notAvailableError.substring(0, index);
       //this.notAvailableError +='.';
     }
 
-    let cartAlerts:any = localStorage.getItem("__alrt")
-    this.alertErrorMessage='';
-    try{
+    let cartAlerts: any = localStorage.getItem("__alrt")
+    this.alertErrorMessage = '';
+    try {
 
-      if(cartAlerts){
-        this.alertErrorMessage='Please close alert of price change for';
+      if (cartAlerts) {
+        this.alertErrorMessage = 'Please close alert of price change for';
         cartAlerts = JSON.parse(cartAlerts);
-        if(cartAlerts.length){
-          for(let i=0; i <cartAlerts.length;i++){
-            if(cartAlerts[i].type=='price_change'){
-              this.alertErrorMessage+=` ${cartAlerts[i].name} ,`
+        if (cartAlerts.length) {
+          for (let i = 0; i < cartAlerts.length; i++) {
+            if (cartAlerts[i].type == 'price_change') {
+              this.alertErrorMessage += ` ${cartAlerts[i].name} ,`
             }
           }
           let index = this.alertErrorMessage.lastIndexOf(" ");
           this.alertErrorMessage = this.alertErrorMessage.substring(0, index);
-          for(let i=0; i <cartAlerts.length;i++){
-            if(cartAlerts[i].type=='installment_vartion'){
-              if(cartAlerts.length==1){
-                this.alertErrorMessage="Please close alert of odd installment amount.";
+          for (let i = 0; i < cartAlerts.length; i++) {
+            if (cartAlerts[i].type == 'installment_vartion') {
+              if (cartAlerts.length == 1) {
+                this.alertErrorMessage = "Please close alert of odd installment amount.";
               }
-              else{
-                this.alertErrorMessage+=` and odd installment amount.`;
+              else {
+                this.alertErrorMessage += ` and odd installment amount.`;
               }
             }
           }
-          
-          this.isAllAlertClosed=false;
+
+          this.isAllAlertClosed = false;
         }
-        else{
-          this.isAllAlertClosed=true;
+        else {
+          this.isAllAlertClosed = true;
         }
       }
-      else{
-        this.isAllAlertClosed=true;
+      else {
+        this.isAllAlertClosed = true;
       }
     }
-    catch(e){
-      this.isAllAlertClosed=true;
+    catch (e) {
+      this.isAllAlertClosed = true;
     }
 
-    console.log("this.isAllAlertClosed",this.isAllAlertClosed,cartAlerts)
+    console.log("this.isAllAlertClosed", this.isAllAlertClosed, cartAlerts)
 
   }
 
@@ -434,7 +440,7 @@ export class BookingComponent implements OnInit {
 
     this.validationErrorMessage = '';
     this.validateCartItems();
-    this.isSubmitted=true;
+    this.isSubmitted = true;
 
     if (this.cardToken == '') {
       if (this.validationErrorMessage == '') {
@@ -468,11 +474,11 @@ export class BookingComponent implements OnInit {
     this.cardListChangeCount = data;
   }
 
-  removeNotAvailableError(){
-    this.isNotAvailableItinerary=false;
+  removeNotAvailableError() {
+    this.isNotAvailableItinerary = false;
   }
 
-  removeAllAlertError(){
-    this.isAllAlertClosed=true;
+  removeAllAlertError() {
+    this.isAllAlertClosed = true;
   }
 }

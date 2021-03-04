@@ -227,6 +227,7 @@ export class AddCardComponent implements OnInit {
           }); */
         },
         error: function (error) {
+          console.log(error);
           let errorMessage = document.getElementById('cardErrorMessage');
           $('#main_loader').hide();
           $('#cardError').show();
