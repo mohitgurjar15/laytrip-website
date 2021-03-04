@@ -22,6 +22,7 @@ export class AccountComponent implements OnInit {
   isRequireBackupFile : boolean = false;
   userDetails;
   cardListChangeCount: number = 0;
+  is_add_new_card = false;
 
   constructor(
     private modalService: NgbModal,
@@ -92,7 +93,12 @@ export class AccountComponent implements OnInit {
     this.addCardRef.ngOnDestroy();
   }
 
+  addNewCard() {
+    this.is_add_new_card = true;
+  }
+
   getCardListChange(data){
+    this.is_add_new_card = false;
     this.cardListChangeCount=data;
   }
 }

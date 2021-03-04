@@ -471,6 +471,7 @@ export class BookingComponent implements OnInit {
   }
 
   getCardListChange(data) {
+    this.is_add_new_card = false;
     this.cardListChangeCount = data;
   }
 
