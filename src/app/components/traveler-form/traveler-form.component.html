@@ -48,7 +48,7 @@
                           your
                           first name.</small>
                         <small *ngIf="traveler.controls.first_name.errors.pattern" class="error_field">
-                          First name only allow alphabet character. </small>
+                          {{'first_name_string_validation' | translate}} </small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10">
@@ -60,7 +60,7 @@
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">Please enter your
                           last name.</small>
                         <small *ngIf="traveler.controls.last_name.errors.pattern" class="error_field">
-                          Last name only allow alphabet character. </small>
+                          {{'last_name_string_validation' | translate}} </small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10">
