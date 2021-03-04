@@ -20,6 +20,7 @@ export class AddCardComponent implements OnInit {
   @Output() emitNewCard = new EventEmitter();
   @Output() changeLoading = new EventEmitter;
   @Output() emitCardListChange = new EventEmitter();
+  @Output() add_new_card = new EventEmitter();
   cardForm: FormGroup;
   submitted: boolean = false;
   token: string;
@@ -227,9 +228,11 @@ export class AddCardComponent implements OnInit {
           }); */
         },
         error: function (error) {
+          console.log(error);
           let errorMessage = document.getElementById('cardErrorMessage');
           $('#main_loader').hide();
           $('#cardError').show();
+          $('#new_card').show();
           errorMessage.innerHTML = error.responseJSON.message;
           // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
@@ -256,7 +259,7 @@ export class AddCardComponent implements OnInit {
       }
       else {
         // add value to options
-        options[field] = fieldEl.value
+        options[field] = fieldEl.value;
       }
       if (options[field]) {
         // this.changeLoading.emit(false);
@@ -270,7 +273,7 @@ export class AddCardComponent implements OnInit {
     Spreedly.tokenizeCreditCard(options);
     setTimeout(() => {
       this.cardListChangeCount += this.cardListChangeCount + 1;
-      this.emitCardListChange.emit(this.cardListChangeCount)
+      this.emitCardListChange.emit(this.cardListChangeCount);
     }, 5000)
   }
 
@@ -285,6 +288,10 @@ export class AddCardComponent implements OnInit {
       this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
     })
     );
+  }
+
+  closeNewCardPanel() {
+    this.add_new_card.emit(false);
   }
 
   ngOnDestroy() {

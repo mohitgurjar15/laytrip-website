@@ -106,7 +106,7 @@ export class FlightPriceSliderComponent implements OnInit {
     let result =[]
     let sourceIndex = dates.findIndex(date=>{ return moment(date.date,"DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] })
     let targetIndex = 4;
-    if(window.screen.width<=360){
+    if(window.screen.width<=600){
       targetIndex=6;
     }
     console.log(targetIndex,"targetIndex",sourceIndex)
