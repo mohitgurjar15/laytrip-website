@@ -190,34 +190,43 @@
             <div class="accordion_body">
                 <div class="io_ru_wrps">
                     <div class="installment_wprs">
-                        <div class="type_lines" *ngIf="item.start_price>0">
+                        <div class="type_lines" >
                             <span class="titles">
                                 Installment Option 1
                             </span>
-                            <span class="texts">
+                            <span class="texts" *ngIf="item.start_price>0">
                                 ${{item.start_price | number : '1.2-2'}} downpayment and
                                 {{item.no_of_weekly_installment}} weekly installments of ${{item.secondary_start_price |
                                 number : '1.2-2'}}
                             </span>
+                            <span class="texts" *ngIf="item.start_price==0">
+                                Flights within 30 days of travel not available in installments
+                            </span>
                         </div>
-                        <div class="type_lines" *ngIf="item.biweekly_down_payment>0">
+                        <div class="type_lines" >
                             <span class="titles">
                                 Installment Option 2
                             </span>
-                            <span class="texts">
-                                ${{item.biweekly_down_payment | number : '1.2-2'}} downpayment and
-                                {{item.no_of_biweekly_installment}} bi-weekly installments of
-                                ${{item.biweekly_installment | number : '1.2-2'}}
+                            <span class="texts" *ngIf="item.start_price>0">
+                                ${{item.second_down_payment | number : '1.2-2'}} downpayment and
+                                {{item.no_of_weekly_installment_2}} weekly installments of
+                                ${{item.secondary_start_price_2 | number : '1.2-2'}}
+                            </span>
+                            <span class="texts" *ngIf="item.start_price==0">
+                                Flights within 30 days of travel not available in installments
                             </span>
                         </div>
-                        <div class="type_lines" *ngIf="item.monthly_down_payment>0">
+                        <div class="type_lines" >
                             <span class="titles">
                                 Installment Option 3
                             </span>
-                            <span class="texts">
-                                ${{item.monthly_down_payment | number : '1.2-2'}} downpayment and
-                                {{item.no_of_monthly_installment}} monthly installments of ${{item.monthly_installment |
+                            <span class="texts" *ngIf="item.start_price>0">
+                                ${{item.third_down_payment | number : '1.2-2'}} downpayment and
+                                {{item.no_of_weekly_installment_3}} weekly installments of ${{item.secondary_start_price_3 |
                                 number : '1.2-2'}}
+                            </span>
+                            <span class="texts" *ngIf="item.start_price==0">
+                                Flights within 30 days of travel not available in installments
                             </span>
                         </div>
                         <div class="type_lines">
