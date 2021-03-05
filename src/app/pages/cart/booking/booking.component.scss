@@ -66,12 +66,12 @@
             .card {
                 border: 1px solid $grayed_border;
                 border-radius: 10px;
-                padding: 15px;
+                // padding: 15px;
 
                 .new_card {
                     border: 1px solid $box-border-color;
                     border-radius: 10px;
-                    margin: 0;
+                    margin: 15px;
                     position: relative;
 
                     .heade_wrps {

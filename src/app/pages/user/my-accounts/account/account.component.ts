@@ -23,6 +23,7 @@ export class AccountComponent implements OnInit {
   userDetails;
   cardListChangeCount: number = 0;
   add_new_card = false;
+  totalCard: number = 0;
 
   constructor(
     private modalService: NgbModal,
@@ -89,6 +90,11 @@ export class AccountComponent implements OnInit {
     if (event.target.checked) {
       this.isRequireBackupFile = true;
     }
+  }
+
+  totalNumberOfcard(event) {
+    console.log(event);
+    this.totalCard = event;
   }
 
   ngOnDestroy() {

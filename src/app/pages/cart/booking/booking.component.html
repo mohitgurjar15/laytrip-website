@@ -13,7 +13,7 @@
                     <div class="card_details_wrppers">
                         <div class="title_bar">
                             <h3>Payment Card Details</h3>
-                            <span class="edit_btns">
+                            <span class="edit_btns" [hidden]="totalCard === 0">
                                 <a class="anchor-tag" (click)="addNewCard()">Add New</a>
                             </span>
                         </div>
@@ -21,10 +21,11 @@
                             <div id="accordion-card" class="card_accordion">
                                 <div class="card">
                                     <app-card-list cardListChangeCount="{{cardListChangeCount}}"
-                                        (selectCreditCard)="selectCreditCard($event)" cardToken={{cardToken}}>
+                                        (selectCreditCard)="selectCreditCard($event)"
+                                        (totalNumberOfcard)="totalNumberOfcard($event)" cardToken={{cardToken}}>
                                     </app-card-list>
                                     <div id="new_card" class="new_card" [ngClass]="{'mt-0':add_new_card}"
-                                        [hidden]="!add_new_card">
+                                        [hidden]="!add_new_card && totalCard !== 0">
                                         <div class="card-header">
                                             <!-- <a class="card-link" data-toggle="collapse" href="#collapseOne"
                                             aria-controls="collapseOne" aria-expanded="true">
@@ -41,6 +42,7 @@
                                         <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                             <div class="card-body">
                                                 <app-add-card (emitCardListChange)="getCardListChange($event)"
+                                                    totalCard="{{totalCard}}"
                                                     (add_new_card)="closeNewCardPanel($event)">
                                                 </app-add-card>
                                             </div>
