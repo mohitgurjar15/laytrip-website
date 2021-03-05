@@ -715,6 +715,9 @@
                         overflow-y: auto;
                         max-height: 150px;
 
+                        a{
+                            text-decoration: underline;
+                        }
                         @include tab-view {
                             margin-top: 0;
                         }
