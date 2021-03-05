@@ -102,8 +102,9 @@
                         <!-- <input (keypress)="commonFunction.validatePhoneCode($event)"  [readonly]="!isFormControlEnable" type="text" class="form-control" tabindex="14" placeholder="+00"
                          maxlength="4"
                             formControlName="country_code"> -->
-                        <ng-select class="ng-customClass country_code account_telephone_n" [items]="countries_code" bindLabel="countryCode"
-                            bindValue="countryCode" [clearable]="false" formControlName="country_code">
+                        <ng-select class="ng-customClass country_code account_telephone_n" [items]="countries_code"
+                            bindLabel="countryCode" bindValue="countryCode" [clearable]="false"
+                            formControlName="country_code">
                         </ng-select>
                         <input [readonly]="!isFormControlEnable" mask="(000) 000-0000" placeholder="(000) 000-0000"
                             type="text" tabindex="15" class="form-control" maxlength="14" formControlName="phone_no">
@@ -150,31 +151,33 @@
                 </div>
 
             </div>
-            <div class="form_row common_row">
-                <label>{{'address_label' | translate}}</label>
-                <input [readonly]="!isFormControlEnable" type="text" formControlName="city">
-                <ng-select [readonly]="!isFormControlEnable"  tabindex="27" class="ng-customClass" [items]="countries" bindLabel="name"
-                    [selectOnTab]="true" formControlName="country_id" selectOnTab="true" (change)="getStates($event)"  [clearable]="false">
-                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                        <span class="ng-value-label"><img class="img_country_code"
-                                [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'"
-                                width="20px" height="20px">
-                            {{ item.name ? item.name : 'Select country' }} </span>
-                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                    </ng-template>
-                    <ng-template ng-option-tmp let-item="item">
-                        <img class="img_country_code" [src]="item.flag" width="20px" height="20px">
-                        {{item.name}}
-                    </ng-template>
-                </ng-select>
-                <ng-select [readonly]="!isFormControlEnable"  clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id" placeholder="Select State" tabindex="4">
-                    <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
-                </ng-select>
-                <input [readonly]="!isFormControlEnable" type="text" formControlName="zip_code">
+            <div class="form_row common_row address_main">
+                <!-- <label>{{'address_label' | translate}}</label> -->
+                <label>Street Address <br>City, State, Zip <br>Country</label>
 
-                <div class="text_field">
-                    <textarea [readonly]="!isFormControlEnable" formControlName="address" placeholder="Enter Address"
-                        id="" cols="15" rows="10" tabindex="12" maxlength="255"></textarea>
+                <div class="text_field address_box">
+                    <input [readonly]="!isFormControlEnable" type="text" formControlName="city"
+                        placeholder="Street Address" class="inputs_com">
+                    <ng-select [readonly]="!isFormControlEnable" class="address_ng" clearSearchOnAdd="true" selectOnTab="true"
+                        formControlName="state_id" placeholder="Select State" tabindex="4">
+                        <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
+                    </ng-select>
+                    <input [readonly]="!isFormControlEnable" type="text"  class="inputs_com" formControlName="zip_code" placeholder="Zip">
+                    <ng-select [readonly]="!isFormControlEnable" tabindex="27" class="ng-customClass address_ng"
+                        [items]="countries" bindLabel="name" [selectOnTab]="true" formControlName="country_id"
+                        selectOnTab="true" (change)="getStates($event)" [clearable]="false">
+                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                            <span class="ng-value-label">
+                                {{ item.name ? item.name : 'Select country' }} </span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        </ng-template>
+                        <!-- <ng-template ng-option-tmp let-item="item">
+                            <img class="img_country_code" [src]="item.flag" width="20px" height="20px">
+                            {{item.name}}
+                        </ng-template> -->
+                    </ng-select>
+                    <!-- <textarea [readonly]="!isFormControlEnable" formControlName="address" placeholder="Enter Address"
+                        id="" cols="15" rows="10" tabindex="12" maxlength="255"></textarea> -->
                 </div>
             </div>
         </div>
