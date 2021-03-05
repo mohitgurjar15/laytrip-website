@@ -8,6 +8,10 @@
 .card-body {
     padding: 15px;
 
+    @include tab-view{
+        padding: 10px;
+    }
+
     &.main_body {
         border-top: 1px solid $grayed_border;
         background-color: $background-white;
@@ -19,6 +23,7 @@
     .accordion_detailed_wrps {
         border: 1px solid $grayed_border;
         border-radius: 10px;
+        margin-bottom: 10px;
 
         .card-body {
             padding: 15px; 
@@ -34,7 +39,7 @@
 
                 @include tab-view {
                     align-items: flex-start;
-                    flex-direction: column;
+                    flex-direction: row;
                 }
 
                 .lines_cols {
@@ -46,12 +51,15 @@
                     color: $mid_gray_bg;
 
                     @include tab-view {
-                        font-size: 18px;
+                        font-size: 12px;
                     }
 
                     .colmns_w {
                         @include tab-view {
                             margin-bottom: 10px;
+                            &.timing_wrp {
+                                margin-bottom: 0;
+                            }
                         }
                     }
 
@@ -73,11 +81,15 @@
                         font-weight: 600;
                         flex: 1;
 
+                        @include tab-view{
+                            font-size: 16px;
+                        }
+
                         img {
                             margin-right: 20px;
 
                             @include tab-view {
-                                max-width: 20px;
+                                max-width: 18px;
                                 margin-right: 5px;
                             }
                         }
@@ -89,7 +101,7 @@
                             font-weight: 400;
 
                             @include tab-view {
-                                display: flex;
+                                display: none;
                             }
                         }
                     }
@@ -99,12 +111,16 @@
                         justify-content: space-between;
                         align-items: center;
                         flex: 1;
-
+                        @include tab-view {
+                            margin-top: 5px;
+                        }
                         .hrs_ {
                             font-size: 18px;
 
                             @include tab-view {
-                                display: none;
+                                //display: none;
+                                font-size: 10px;
+                                margin-top: 5px;
                             }
                         }
                     }
@@ -149,6 +165,9 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    @include mobile-sm-view{
+                        flex: 3;
+                    }
                 }
                 .hr_wrps{
                     display: flex;
@@ -157,11 +176,21 @@
                 }
                 img {
                     margin-right: 15px;
+                    @include mobile-sm-view{
+                        max-width: 24px;
+                    }
                 }
 
                 @include tab-view {
-                    margin: 20px 0;
-                    font-size: 15px;
+                    margin: 10px 0;
+                    font-size: 14px;
+                    padding: 6px 0;
+                    .hr_wrps{
+                        font-size: 10px;
+                    }
+                }
+                @include mobile-sm-view{
+                    font-size: 11px;
                 }
             }
         }
@@ -169,38 +198,50 @@
         &.w_return {
             margin-top: 15px;
         }
-    }
+        .total_hrs_wrps {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            color: $mid_gray_bg;
+            font-size: 18px;
+            margin: 5px 0;
+            padding: 0 15px;
+            @include tab-view{
+                padding: 0 10px;
+                margin-top: 0;
+            }
+    
+            &.cta_btns_wrps {
+                justify-content: space-between;
+                font-size: 15px;
+                @include tab-view{
+                    font-size: 12px;
+                }
+                .ct_btns {
+                    a {
+                        background-color: transparent;
+                        color: $text_light_yellow;
+                        border: none;
+                        box-shadow: none;
+                        font-size: 15px;
+                        padding: 0;
 
-    .total_hrs_wrps {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        color: $mid_gray_bg;
-        font-size: 18px;
-        margin: 5px 0;
-        padding: 0 15px;
-
-        &.cta_btns_wrps {
-            justify-content: space-between;
-
-            .ct_btns {
-                button {
-                    background-color: transparent;
-                    color: $text_light_yellow;
-                    border: none;
-                    box-shadow: none;
-                    font-size: 16px;
-                    padding: 0;
-
-                    // margin-right: 40px;
-                    &:last-child {
-                        margin: 0;
+                        @include tab-view{
+                            font-size: 12px;
+                        }
+    
+                        // margin-right: 40px;
+                        &:last-child {
+                            margin: 0;
+                        }
                     }
                 }
+    
             }
-
         }
     }
+
+    
 
     .sub_accordions {
         margin-top: 15px;

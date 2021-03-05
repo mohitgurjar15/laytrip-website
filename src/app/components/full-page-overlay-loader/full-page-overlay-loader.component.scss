@@ -15,6 +15,11 @@
         padding: 30px;
         width: 100%;
 
+        @include tab-view{
+            max-width: 93%;
+            padding: 15px;
+        }
+
         .page_laoding {
             h3 {
                 font-size: 32px;

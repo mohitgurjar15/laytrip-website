@@ -134,12 +134,17 @@
         </div>
       </div>
     </div>
+    <div class="total_hrs_wrps cta_btns_wrps" *ngIf="(cartItem | json) != '{}'">
+      <span class="ct_btns" >
+        <a href="javascript:void(0);">
+          Cancel
+        </a>
+      </span>
+      {{cartItem?.moduleInfo[0]?.routes[0]?.duration}} 
+    </div>
   </div>
 
-  <div class="total_hrs_wrps cta_btns_wrps" *ngIf="(cartItem | json) != '{}'">
-    <span class="ct_btns" ></span>
-    {{cartItem?.moduleInfo[0]?.routes[0]?.duration}} 
-  </div>
+
   
   <div class="card accordion_detailed_wrps wo_return"  *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2"  >
     <div class="card-body">

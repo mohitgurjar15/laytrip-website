@@ -6026,6 +6026,18 @@
 }
 
 //<!-- Close Payment ifno Modal css -->
+
+.custom_range_slide {
+    &.redeem_laypoint{
+        .ng5-slider{
+            .ng5-slider-pointer{
+                height: 0;
+                width: 0;
+                border: none;
+            }
+        } 
+    }
+}
 //<!-- Start Facebook Loader css -->
 .fb_animation {
     -webkit-animation-duration: 1.25s;
