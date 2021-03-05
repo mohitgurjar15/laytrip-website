@@ -6054,9 +6054,14 @@
             }
         }
     }
-
+    .ng-select-disabled{
+        .ng-select-container{
+            background-color: $background-white;
+        }
+    }
     .ng-select-container {
         border: none;
+        background-color: $background-white;
         &:hover {
             box-shadow: none;
             outline: none;
