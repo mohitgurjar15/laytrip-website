@@ -55,6 +55,8 @@ var ProfileComponent = /** @class */ (function () {
         this.departureAirport = {};
         this.arrivalAirport = {};
         this.countries = [];
+        this.countries_code = [];
+        this.stateList = [];
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.loadingValue.emit(true);
@@ -76,7 +78,11 @@ var ProfileComponent = /** @class */ (function () {
             profile_pic: [''],
             passport_expiry: [''],
             passport_number: [''],
-            home_airport: ['']
+            home_airport: [''],
+            city: [''],
+            state_id: [''],
+            country_id: [''],
+            zip_code: ['']
         }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });
         this.getProfileInfo();
         this.getCountry();
@@ -91,12 +97,49 @@ var ProfileComponent = /** @class */ (function () {
                     countryCode: country.phonecode,
                     flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
-            }, function (error) {
-                if (error.status === 401) {
-                    _this.router.navigate(['/']);
-                }
             });
+            var countries_code = data.map(function (country) {
+                return {
+                    id: country.id,
+                    name: country.phonecode + ' (' + country.iso2 + ')',
+                    countryCode: country.phonecode,
+                    country_name: country.name + ' ' + country.phonecode,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
+                };
+            });
+            var filteredArr = countries_code.reduce(function (acc, current) {
+                var x = acc.find(function (item) { return item.countryCode == current.countryCode; });
+                if (!x) {
+                    return acc.concat([current]);
+                }
+                else {
+                    return acc;
+                }
+            }, []);
+            _this.countries_code = filteredArr;
+            _this.setUSCountryInFirstElement(_this.countries);
         });
+    };
+    ProfileComponent.prototype.getStates = function (countryId) {
+        var _this = this;
+        this.genericService.getStates(countryId.id).subscribe(function (data) {
+            _this.stateList = data;
+        }, function (error) {
+            if (error.status === 401) {
+                localStorage.setItem('userToken', "");
+                _this.router.navigate(['/login']);
+            }
+        });
+    };
+    ProfileComponent.prototype.setUSCountryInFirstElement = function (countries) {
+        var usCountryObj = countries.find(function (x) { return x.id === 233; });
+        var removedUsObj = countries.filter(function (obj) { return obj.id !== 233; });
+        this.countries = [];
+        removedUsObj.sort(function (a, b) {
+            return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
+        });
+        removedUsObj.unshift(usCountryObj);
+        this.countries = removedUsObj;
     };
     ProfileComponent.prototype.selectGender = function (event, type) {
         if (this.isFormControlEnable) {

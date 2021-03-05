@@ -57,6 +57,8 @@ export class ProfileComponent implements OnInit {
   arrivalAirport: any = {}
   home_airport;
   countries = [];
+  countries_code = [];
+  stateList = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -92,6 +94,11 @@ export class ProfileComponent implements OnInit {
       passport_expiry: [''],
       passport_number: [''],
       home_airport: [''],
+      city: [''],
+      state_id: [''],
+      country_id: [''],
+      zip_code: [''],
+      
     }, { validators: phoneAndPhoneCodeValidation() });
 
     this.getProfileInfo();
@@ -107,14 +114,51 @@ export class ProfileComponent implements OnInit {
           countryCode: country.phonecode,
           flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
         }
-      }, (error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          this.router.navigate(['/']);
+      });
+      var countries_code = data.map(country => {
+        return {
+          id: country.id,
+          name: country.phonecode + ' (' + country.iso2 + ')',
+          countryCode: country.phonecode,
+          country_name: country.name + ' ' + country.phonecode,
+          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
         }
       });
+      const filteredArr = countries_code.reduce((acc, current) => {
+        const x = acc.find(item => item.countryCode == current.countryCode);
+        if (!x) {        
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+      this.countries_code = filteredArr;
+      this.setUSCountryInFirstElement(this.countries);
+
     });
   }
 
+  getStates(countryId) {
+    this.genericService.getStates(countryId.id).subscribe((data: any) => {
+      this.stateList = data;
+    }, (error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        localStorage.setItem('userToken', "");
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
+  setUSCountryInFirstElement(countries){
+    var usCountryObj = countries.find(x=> x.id === 233);
+    var removedUsObj = countries.filter( obj => obj.id !== 233);
+    this.countries=[];
+    removedUsObj.sort(function(a, b) {
+      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);          
+    });
+    removedUsObj.unshift(usCountryObj); 
+    this.countries = removedUsObj; 
+  }
   selectGender(event, type) {
 
     if (this.isFormControlEnable) {

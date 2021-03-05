@@ -106,6 +106,17 @@ var ListTravellerComponent = /** @class */ (function () {
                     flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
             });
+            var filteredArr = _this.countries_code.reduce(function (acc, current) {
+                var x = acc.find(function (item) { return item.countryCode == current.countryCode; });
+                if (!x) {
+                    return acc.concat([current]);
+                }
+                else {
+                    return acc;
+                }
+            }, []);
+            _this.countries_code = [];
+            _this.countries_code = filteredArr;
             _this.setUSCountryInFirstElement(_this.countries);
         }, function (error) {
             if (error.status === 401) {
