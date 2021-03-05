@@ -6054,7 +6054,7 @@
             }
         }
     }
-    .ng-select-disabled{
+    &.ng-select-disabled{
         .ng-select-container{
             background-color: $background-white;
         }
