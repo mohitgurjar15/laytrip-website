@@ -248,6 +248,8 @@ export class ProfileComponent implements OnInit {
       });
       this.profileForm.controls['home_airport'].disable();
       this.profileForm.controls['country_code'].disable();
+      this.profileForm.controls['country_id'].disable();
+      this.profileForm.controls['state_id'].disable();
 
     }, (error: HttpErrorResponse) => {
       this.loadingValue.emit(false);
@@ -286,21 +288,26 @@ export class ProfileComponent implements OnInit {
         imgfile = this.imageFile;
         // formdata.append("profile_pic",imgfile);
       }
-
       // formdata.append("title",'mr');
       formdata.append("first_name", this.profileForm.value.first_name);
       formdata.append("last_name", this.profileForm.value.last_name);
       formdata.append("email", this.profileForm.value.email);
       formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
-      formdata.append("address", this.profileForm.value.address);
       formdata.append("phone_no", this.profileForm.value.phone_no);
       formdata.append("gender", this.is_type);
       formdata.append("country_code", this.profileForm.value.country_code);
+      formdata.append("city", this.profileForm.value.city);
+      formdata.append("address", this.profileForm.value.address);
+      formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : '');
+      formdata.append("state_id", this.profileForm.value.state_id);
+      formdata.append("zip_code", this.profileForm.value.zip_code);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
       this.isFormControlEnable = false;
 
       this.profileForm.controls['home_airport'].disable();
       this.profileForm.controls['country_code'].disable();
+      this.profileForm.controls['country_id'].disable();
+      this.profileForm.controls['state_id'].disable();
 
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         // this.submitted = false;
@@ -309,7 +316,7 @@ export class ProfileComponent implements OnInit {
         // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
       }, (error: HttpErrorResponse) => {
         this.loadingValue.emit(false);
-        // this.submitted = false;
+        // this.submitted = false;city
         // this.toastr.error(error.error.message, 'Profile Error');
       });
     }
@@ -319,6 +326,8 @@ export class ProfileComponent implements OnInit {
     this.isFormControlEnable = true;
     this.profileForm.controls['home_airport'].enable();
     this.profileForm.controls['country_code'].enable();
+    this.profileForm.controls['country_id'].enable();
+    this.profileForm.controls['state_id'].enable();
   }
 
   onRemove(event, item) {

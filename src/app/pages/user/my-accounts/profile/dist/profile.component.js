@@ -228,6 +228,8 @@ var ProfileComponent = /** @class */ (function () {
             });
             _this.profileForm.controls['home_airport'].disable();
             _this.profileForm.controls['country_code'].disable();
+            _this.profileForm.controls['country_id'].disable();
+            _this.profileForm.controls['state_id'].disable();
         }, function (error) {
             _this.loadingValue.emit(false);
             if (error.status === 401) {
@@ -272,14 +274,20 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("last_name", this.profileForm.value.last_name);
             formdata.append("email", this.profileForm.value.email);
             formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
-            formdata.append("address", this.profileForm.value.address);
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.is_type);
             formdata.append("country_code", this.profileForm.value.country_code);
+            formdata.append("city", this.profileForm.value.city);
+            formdata.append("address", this.profileForm.value.address);
+            formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : '');
+            formdata.append("state_id", this.profileForm.value.state_id);
+            formdata.append("zip_code", this.profileForm.value.zip_code);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
             this.isFormControlEnable = false;
             this.profileForm.controls['home_airport'].disable();
             this.profileForm.controls['country_code'].disable();
+            this.profileForm.controls['country_id'].disable();
+            this.profileForm.controls['state_id'].disable();
             this.userService.updateProfile(formdata).subscribe(function (data) {
                 // this.submitted = false;
                 _this.loadingValue.emit(false);
@@ -287,7 +295,7 @@ var ProfileComponent = /** @class */ (function () {
                 // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
             }, function (error) {
                 _this.loadingValue.emit(false);
-                // this.submitted = false;
+                // this.submitted = false;city
                 // this.toastr.error(error.error.message, 'Profile Error');
             });
         }
@@ -296,6 +304,8 @@ var ProfileComponent = /** @class */ (function () {
         this.isFormControlEnable = true;
         this.profileForm.controls['home_airport'].enable();
         this.profileForm.controls['country_code'].enable();
+        this.profileForm.controls['country_id'].enable();
+        this.profileForm.controls['state_id'].enable();
     };
     ProfileComponent.prototype.onRemove = function (event, item) {
         if (item.key === 'fromSearch') {

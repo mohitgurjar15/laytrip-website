@@ -153,16 +153,10 @@
             </div>
             <div class="form_row common_row address_main">
                 <!-- <label>{{'address_label' | translate}}</label> -->
-                <label>Street Address <br>City, State, Zip <br>Country</label>
+                <label>Street Address <br> Country, State,City, <br>Zip</label>
 
                 <div class="text_field address_box">
-                    <input [readonly]="!isFormControlEnable" type="text" formControlName="city"
-                        placeholder="Street Address" class="inputs_com">
-                    <ng-select [readonly]="!isFormControlEnable" class="address_ng" clearSearchOnAdd="true" selectOnTab="true"
-                        formControlName="state_id" placeholder="Select State" tabindex="4">
-                        <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
-                    </ng-select>
-                    <input [readonly]="!isFormControlEnable" type="text"  class="inputs_com" formControlName="zip_code" placeholder="Zip">
+                   
                     <ng-select [readonly]="!isFormControlEnable" tabindex="27" class="ng-customClass address_ng"
                         [items]="countries" bindLabel="name" [selectOnTab]="true" formControlName="country_id"
                         selectOnTab="true" (change)="getStates($event)" [clearable]="false">
@@ -176,6 +170,14 @@
                             {{item.name}}
                         </ng-template> -->
                     </ng-select>
+                    <ng-select [readonly]="!isFormControlEnable" class="address_ng" clearSearchOnAdd="true" selectOnTab="true"
+                        formControlName="state_id" placeholder="Select State" tabindex="4">
+                        <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
+                    </ng-select>
+                    <input [readonly]="!isFormControlEnable" type="text" formControlName="city"
+                    placeholder="Street Address" class="inputs_com">
+                    <input [readonly]="!isFormControlEnable" type="text"  class="inputs_com" formControlName="zip_code" placeholder="Zip">
+                    
                     <!-- <textarea [readonly]="!isFormControlEnable" formControlName="address" placeholder="Enter Address"
                         id="" cols="15" rows="10" tabindex="12" maxlength="255"></textarea> -->
                 </div>
