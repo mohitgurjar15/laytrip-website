@@ -56,7 +56,7 @@ var TravellerFormComponent = /** @class */ (function () {
             gender: ['', [forms_1.Validators.required]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
-            country_id: [typeof this.location != 'undefined' ? this.location.country.name : '', [forms_1.Validators.required]],
+            country_id: ['United States', [forms_1.Validators.required]],
             country_code: ['+1', [forms_1.Validators.required]],
             dob: ['', forms_1.Validators.required],
             passport_expiry: [''],
@@ -167,7 +167,7 @@ var TravellerFormComponent = /** @class */ (function () {
                     country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
                 }
                 else {
-                    country_id = this.location.country.id;
+                    country_id = 233; //this.location.country.id;
                 }
             }
             var jsonData = {

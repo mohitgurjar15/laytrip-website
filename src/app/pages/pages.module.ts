@@ -35,6 +35,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { TermsComponent } from './terms/terms.component';
 import { CcpaComponent } from './ccpa/ccpa.component';
+import { AppleSecurityLoginPopupComponent } from './user/apple-security-login-popup/apple-security-login-popup.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { CcpaComponent } from './ccpa/ccpa.component';
     CmsPagesComponent,
     TermsComponent,
     CcpaComponent,
+    AppleSecurityLoginPopupComponent
 
   ],
   imports: [
@@ -79,7 +81,7 @@ import { CcpaComponent } from './ccpa/ccpa.component';
     CountdownModule,
     RecaptchaModule
   ],
-  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, ForgotPasswordComponent, ResetPasswordComponent],
+  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, ForgotPasswordComponent, ResetPasswordComponent, AppleSecurityLoginPopupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagesModule { }

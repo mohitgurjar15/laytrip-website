@@ -1,4 +1,4 @@
-@import '../../../../cstm-variable';
+@import "../../../../cstm-variable";
 @import "../../../../_cstm-variable.scss";
 @import "../../../../_cstm-components.scss";
 @import "../../../../_hotel.scss";
@@ -24,6 +24,36 @@
         @include tab-view {
             font-size: 18px;
             padding: 0 15px;
+        }
+    }
+
+    .title_bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h3 {
+            color: $blue-text;
+            font-size: 34px;
+            margin-bottom: 5px;
+            margin: 25px 0 15px;
+
+            @include tab-view {
+                font-size: 28px;
+                margin-top: 0;
+            }
+        }
+
+        .edit_btns {
+            a {
+                background-color: transparent;
+                color: $text_light_yellow;
+                box-shadow: none;
+                font-size: 16px;
+                padding: 0;
+                text-align: right;
+                text-decoration: none;
+            }
         }
     }
 
@@ -158,7 +188,6 @@
                 border: 1px solid $primary-color;
                 margin-bottom: 10px;
 
-
                 &::before {
                     content: "";
                     position: absolute;
@@ -227,7 +256,6 @@
         }
     }
 }
-
 
 .btn_payment {
     display: flex;

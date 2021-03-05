@@ -228,7 +228,18 @@ var TravelerFormComponent = /** @class */ (function () {
         var _this = this;
         this.checkOutService.getCountries.subscribe(function (res) {
             _this.countries = res;
+            _this.setUSCountryInFirstElement(_this.countries);
         });
+    };
+    TravelerFormComponent.prototype.setUSCountryInFirstElement = function (countries) {
+        var usCountryObj = countries.find(function (x) { return x.id === 233; });
+        var removedUsObj = countries.filter(function (obj) { return obj.id !== 233; });
+        this.countries = [];
+        removedUsObj.sort(function (a, b) {
+            return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
+        });
+        removedUsObj.unshift(usCountryObj);
+        this.countries = removedUsObj;
     };
     TravelerFormComponent.prototype.patch = function () {
         var _this = this;
@@ -255,8 +266,8 @@ var TravelerFormComponent = /** @class */ (function () {
             passport_number: (x.is_passport_required) ? [x.passport_number, [forms_1.Validators.required]] : [x.passport_number],
             passport_expiry: (x.is_passport_required) ? [x.passport_expiry, [forms_1.Validators.required]] : [x.passport_expiry],
             is_passport_required: [x.is_passport_required, [forms_1.Validators.required]],
-            dob: [x.dob, [forms_1.Validators.required]],
-            country_id: [x.country_id, [forms_1.Validators.required]],
+            dob: [x.dob ? moment(x.dob).toDate() : '', [forms_1.Validators.required]],
+            country_id: [x.country_id ? x.country_id : 233, [forms_1.Validators.required]],
             gender: [x.gender, [forms_1.Validators.required]],
             userId: [x.userId],
             type: [x.type],

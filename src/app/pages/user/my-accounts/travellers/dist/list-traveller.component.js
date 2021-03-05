@@ -96,21 +96,32 @@ var ListTravellerComponent = /** @class */ (function () {
                     countryCode: country.phonecode,
                     flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
-            }),
-                _this.countries_code = data.map(function (country) {
-                    return {
-                        id: country.id,
-                        name: country.phonecode + ' (' + country.iso2 + ')',
-                        countryCode: country.phonecode,
-                        country_name: country.name + ' ' + country.phonecode,
-                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-                    };
-                });
+            });
+            _this.countries_code = data.map(function (country) {
+                return {
+                    id: country.id,
+                    name: country.phonecode + ' (' + country.iso2 + ')',
+                    countryCode: country.phonecode,
+                    country_name: country.name + ' ' + country.phonecode,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
+                };
+            });
+            _this.setUSCountryInFirstElement(_this.countries);
         }, function (error) {
             if (error.status === 401) {
                 _this.router.navigate(['/']);
             }
         });
+    };
+    ListTravellerComponent.prototype.setUSCountryInFirstElement = function (countries) {
+        var usCountryObj = countries.find(function (x) { return x.id === 233; });
+        var removedUsObj = countries.filter(function (obj) { return obj.id !== 233; });
+        this.countries = [];
+        removedUsObj.sort(function (a, b) {
+            return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
+        });
+        removedUsObj.unshift(usCountryObj);
+        this.countries = removedUsObj;
     };
     ListTravellerComponent.prototype.checkUncheckAll = function () {
         var checkboxes = document.getElementsByClassName('travelerCheckbox');
@@ -151,7 +162,7 @@ var ListTravellerComponent = /** @class */ (function () {
                     country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
                 }
                 else {
-                    country_id = this.location.country.id;
+                    country_id = 233;
                 }
             }
             var jsonData = {

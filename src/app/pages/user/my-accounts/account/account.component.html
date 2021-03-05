@@ -23,7 +23,7 @@
                     <div class="title_bar">
                         <h3>Payment Card Details</h3>
                         <span class="edit_btns">
-                            <a href="javascrip:void(0);">Add New</a>
+                            <a class="anchor-tag" (click)="addNewCard()">Add New</a>
                         </span>
                     </div>
                     <div class="booking_detail_bg_wrps">
@@ -31,7 +31,7 @@
                         <div id="accordion" class="card_accordion">
                             <div class="card">
                                 <app-card-list cardListChangeCount="{{cardListChangeCount}}"></app-card-list>
-                                <div class="new_card">
+                                <div class="new_card" [ngClass]="{'mt-0':add_new_card}" [hidden]="!add_new_card">
                                     <div class="card-header">
                                         <a class="card-link" data-toggle="collapse" href="#collapseOne"
                                             aria-controls="collapseOne" aria-expanded="true">
@@ -43,7 +43,8 @@
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                         <div class="card-body">
-                                            <app-add-card (emitCardListChange)="getCardListChange($event)">
+                                            <app-add-card (emitCardListChange)="getCardListChange($event)"
+                                                (add_new_card)="closeNewCardPanel($event)">
                                             </app-add-card>
                                         </div>
                                     </div>

@@ -254,8 +254,19 @@ export class TravelerFormComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     this.checkOutService.getCountries.subscribe(res => {
       this.countries = res;
-    })
+      this.setUSCountryInFirstElement(this.countries)
+    });
+  }
 
+  setUSCountryInFirstElement(countries){
+    var usCountryObj = countries.find(x=> x.id === 233);
+    var removedUsObj = countries.filter( obj => obj.id !== 233);
+    this.countries=[];
+    removedUsObj.sort(function(a, b) {
+      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);          
+    });
+    removedUsObj.unshift(usCountryObj); 
+    this.countries = removedUsObj;  
   }
 
   patch() {
@@ -279,8 +290,8 @@ export class TravelerFormComponent implements OnInit {
       passport_number: (x.is_passport_required) ? [x.passport_number, [Validators.required]] : [x.passport_number],
       passport_expiry: (x.is_passport_required) ? [x.passport_expiry, [Validators.required]] : [x.passport_expiry],
       is_passport_required: [x.is_passport_required, [Validators.required]],
-      dob: [x.dob, [Validators.required]],
-      country_id: [x.country_id, [Validators.required]],
+      dob: [ x.dob ? moment(x.dob).toDate() : '', [Validators.required]],
+      country_id: [ x.country_id ? x.country_id : 233, [Validators.required]],
       gender: [x.gender, [Validators.required]],
       userId: [x.userId],
       type: [x.type],
