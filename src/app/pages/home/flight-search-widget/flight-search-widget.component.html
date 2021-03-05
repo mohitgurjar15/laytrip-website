@@ -75,6 +75,7 @@
                                         [defaultCity]=fromSearch.city (changeValue)="destinationChangedValue($event)">
                                     </app-search-airport>
                                 </div>
+                                <app-airport-suggestion></app-airport-suggestion>
                             </div>
                             <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
                                 <a (click)="swapAirport()">
@@ -92,6 +93,7 @@
                                         (changeValue)="destinationChangedValue($event)">
                                     </app-search-airport>
                                 </div>
+                                <app-airport-suggestion></app-airport-suggestion>
                             </div>
                         </li>
                         <li class="grid_box secound">

@@ -106,9 +106,10 @@
                                                     {{route.stops[route.stops.length-1].arrival_time}} <span
                                                         *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
                                                 </span>
-
-                                                {{route.stops[route.stops.length-1]?.arrival_info?.code}} <br>
-                                                {{route.stops[route.stops.length-1]?.arrival_info?.city}}
+                                                <div class="fl_name_inner">
+                                                    {{route.stops[route.stops.length-1]?.arrival_info?.code}} <br>
+                                                    {{route.stops[route.stops.length-1]?.arrival_info?.city}}
+                                                </div>
                                             </span>
                                         </div>
                                         <div class="fl_timin">
