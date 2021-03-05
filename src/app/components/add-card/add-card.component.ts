@@ -273,10 +273,12 @@ export class AddCardComponent implements OnInit {
 
     // Tokenize!
     Spreedly.tokenizeCreditCard(options);
-    setTimeout(() => {
-      this.cardListChangeCount += this.cardListChangeCount + 1;
-      this.emitCardListChange.emit(this.cardListChangeCount);
-    }, 5000)
+    if (options && options['full_name'] && options['month'] && options['year']) {
+      setTimeout(() => {
+        this.cardListChangeCount += this.cardListChangeCount + 1;
+        this.emitCardListChange.emit(this.cardListChangeCount);
+      }, 5000)
+    }
   }
 
   saveCard(cardData) {
