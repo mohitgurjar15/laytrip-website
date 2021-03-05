@@ -137,7 +137,6 @@ export class ListTravellerComponent implements OnInit {
             flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
           }
       });
-
       this.setUSCountryInFirstElement(this.countries);
 
     }, (error: HttpErrorResponse) => {
@@ -155,7 +154,8 @@ export class ListTravellerComponent implements OnInit {
       return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);          
     });
     removedUsObj.unshift(usCountryObj); 
-    this.countries = removedUsObj;  
+    this.countries = removedUsObj; 
+
   }
   
   checkUncheckAll() {

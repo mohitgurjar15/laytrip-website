@@ -239,7 +239,16 @@ var TravelerFormComponent = /** @class */ (function () {
             return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
         });
         removedUsObj.unshift(usCountryObj);
-        this.countries = removedUsObj;
+        var filteredArr = removedUsObj.reduce(function (acc, current) {
+            var x = acc.find(function (item) { return item.phonecode == current.phonecode; });
+            if (!x) {
+                return acc.concat([current]);
+            }
+            else {
+                return acc;
+            }
+        }, []);
+        this.countries = filteredArr;
     };
     TravelerFormComponent.prototype.patch = function () {
         var _this = this;

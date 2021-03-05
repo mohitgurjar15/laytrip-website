@@ -259,14 +259,24 @@ export class TravelerFormComponent implements OnInit {
   }
 
   setUSCountryInFirstElement(countries){
+
     var usCountryObj = countries.find(x=> x.id === 233);
     var removedUsObj = countries.filter( obj => obj.id !== 233);
     this.countries=[];
     removedUsObj.sort(function(a, b) {
       return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);          
     });
-    removedUsObj.unshift(usCountryObj); 
-    this.countries = removedUsObj;  
+    removedUsObj.unshift(usCountryObj);
+    
+    const filteredArr = removedUsObj.reduce((acc, current) => {
+      const x = acc.find(item => item.phonecode == current.phonecode);
+      if (!x) {        
+        return acc.concat([current]);
+      } else {
+        return acc;
+      }
+    }, []);
+    this.countries = filteredArr;  
   }
 
   patch() {
