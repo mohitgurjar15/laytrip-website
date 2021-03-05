@@ -44,7 +44,8 @@
                         <a href="javascript:void(0);">Save</a>
                     </div> -->
                     <div class="save_btn_wrps d-flex justify-content-end">
-                        <input type="button" class="button mr-3" value="Close" (click)="closeNewCardPanel()">
+                        <input type="button" class="button mr-3" value="Close" (click)="closeNewCardPanel()"
+                            [hidden]="totalCard === 0">
                         <input type="submit" id="submit_button" class="button w-25 " value="Save">
                         <div class="section_description" id="cardError">
                             <span class="sec_text pt-1" id="cardErrorMessage"></span>

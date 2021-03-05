@@ -17,6 +17,7 @@ export class AddCardComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Input() showAddCardForm: boolean;
+  @Input() totalCard;
   @Output() emitNewCard = new EventEmitter();
   @Output() changeLoading = new EventEmitter;
   @Output() emitCardListChange = new EventEmitter();
@@ -68,6 +69,7 @@ export class AddCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.totalCard = JSON.parse(this.totalCard);
     this.cardForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
@@ -250,8 +252,6 @@ export class AddCardComponent implements OnInit {
     for (var i = 0; i < paymentMethodFields.length; i++) {
       var field = paymentMethodFields[i];
       var fieldEl = (<HTMLInputElement>document.getElementById(field));
-
-      console.log(field, 'fieldEl::::::::');
 
       if (fieldEl.id === 'month-year') {
         let value = fieldEl.value;

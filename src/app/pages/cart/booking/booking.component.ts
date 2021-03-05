@@ -64,6 +64,7 @@ export class BookingComponent implements OnInit {
   alertErrorMessage: string = '';
 
   add_new_card = false;
+  totalCard: number = 0;
 
   constructor(
     private router: Router,
@@ -153,6 +154,11 @@ export class BookingComponent implements OnInit {
     })
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
+  }
+
+  totalNumberOfcard(event) {
+    console.log(event);
+    this.totalCard = event;
   }
 
   addNewCard() {
