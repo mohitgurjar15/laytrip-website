@@ -12,7 +12,7 @@ import { TravelerService } from '../../../../../services/traveler.service';
 import { phoneAndPhoneCodeValidation } from '../../../../../_helpers/custom.validators';
 import { CheckOutService } from '../../../../../services/checkout.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { GenericService } from 'src/app/services/generic.service';
+import { GenericService } from '../../../../../services/generic.service';
 declare var $: any;
 
 @Component({
