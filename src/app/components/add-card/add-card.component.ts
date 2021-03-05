@@ -251,6 +251,8 @@ export class AddCardComponent implements OnInit {
       var field = paymentMethodFields[i];
       var fieldEl = (<HTMLInputElement>document.getElementById(field));
 
+      console.log(field, 'fieldEl::::::::');
+
       if (fieldEl.id === 'month-year') {
         let value = fieldEl.value;
         let values = value.split("/");
