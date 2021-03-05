@@ -156,9 +156,9 @@
                 <label>Street Address <br> Country, State,City, <br>Zip</label>
 
                 <div class="text_field address_box">
-                    <input [readonly]="!isFormControlEnable" type="text" formControlName="city"
+                    <input [readonly]="!isFormControlEnable"  tabindex="10" type="text" formControlName="address"
                     placeholder="Street Address" class="inputs_com">
-                    <ng-select [readonly]="!isFormControlEnable" tabindex="27" class="ng-customClass address_ng"
+                    <ng-select [readonly]="!isFormControlEnable" tabindex="11" class="ng-customClass address_ng"
                         [items]="countries" bindLabel="name" [selectOnTab]="true" formControlName="country_id"
                         selectOnTab="true" (change)="getStates($event)" [clearable]="false">
                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
@@ -171,12 +171,13 @@
                             {{item.name}}
                         </ng-template> -->
                     </ng-select>
-                    <ng-select [readonly]="!isFormControlEnable" class="address_ng" clearSearchOnAdd="true" selectOnTab="true"
+                    <ng-select  tabindex="12" [readonly]="!isFormControlEnable" class="address_ng" clearSearchOnAdd="true" selectOnTab="true"
                         formControlName="state_id" placeholder="Select State" tabindex="4">
                         <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
                     </ng-select>
                     
-                    <input [readonly]="!isFormControlEnable" type="text"  class="inputs_com" formControlName="zip_code" placeholder="Zip">
+                    <input  tabindex="13" [readonly]="!isFormControlEnable" type="text"  class="inputs_com" formControlName="city" placeholder="City">
+                    <input  tabindex="14" [readonly]="!isFormControlEnable" type="text"  class="inputs_com" formControlName="zip_code" placeholder="Zip">
                     
                     <!-- <textarea [readonly]="!isFormControlEnable" formControlName="address" placeholder="Enter Address"
                         id="" cols="15" rows="10" tabindex="12" maxlength="255"></textarea> -->

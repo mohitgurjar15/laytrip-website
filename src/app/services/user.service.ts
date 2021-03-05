@@ -124,7 +124,7 @@ export class UserService {
       }
     }
     console.log(options)
-    return this.http.delete( this.apiURL + 'v1/user/account-request', options)
+    return this.http.delete( this.apiURL + 'v1/user/account/request', options)
   }
 
   changePassword(data) {

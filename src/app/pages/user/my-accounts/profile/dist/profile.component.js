@@ -217,12 +217,11 @@ var ProfileComponent = /** @class */ (function () {
                 dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
                 country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
                 phone_no: res.phoneNo,
-                state_id: res.state.name,
                 city_name: res.cityName,
                 address: res.address,
                 home_airport: res.airportInfo.code ? res.airportInfo.code : null,
-                language_id: res.preferredLanguage.name,
-                currency_id: res.preferredCurrency.code,
+                country_id: res.country.name ? res.country.name : null,
+                state_id: res.state.name ? res.state.name : null,
                 passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
                 passport_number: res.passportNumber
             });
@@ -242,6 +241,7 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.onSubmit = function () {
         var _this = this;
+        console.log(this.profileForm.value);
         // this.submitted = true;
         var controls = this.profileForm.controls;
         this.loadingValue.emit(true);
@@ -276,11 +276,11 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.is_type);
-            formdata.append("country_code", this.profileForm.value.country_code);
-            formdata.append("city", this.profileForm.value.city);
+            formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '+1');
+            formdata.append("city_name", this.profileForm.value.city);
             formdata.append("address", this.profileForm.value.address);
             formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : '');
-            formdata.append("state_id", this.profileForm.value.state_id);
+            formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
             formdata.append("zip_code", this.profileForm.value.zip_code);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
             this.isFormControlEnable = false;
