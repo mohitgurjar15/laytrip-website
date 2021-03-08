@@ -93,7 +93,6 @@ export class AccountComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    console.log(event);
     this.totalCard = event;
   }
 

@@ -46,9 +46,13 @@
                             <app-price-summary [priceSummary]="priceSummary" [cartPrices]="cartPrices">
                             </app-price-summary>
                         </div>
+                        <label class="custom_checkbox">
+                            <input type="checkbox" >
+                            <span class="checkmark"></span>
+                            I agree to your <a href="">Privacy Policy</a> and <a href="">Terms</a>, which include terms from Laytrip suppliers and travel partners.
+                        </label>
                         <div class="cta_btn_wrapper">
                             <button (click)="bookFlight()">Pay and Book</button>
-
                         </div>
                     </div>
                     <div class="section_description" *ngIf="validationErrorMessage">

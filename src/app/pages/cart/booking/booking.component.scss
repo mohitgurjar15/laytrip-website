@@ -15,6 +15,16 @@
         }
     }
 
+    .card_details_wrppers{
+        .title_bar{
+            .edit_btns{
+                @include tab-view{
+                    display: flex;
+                }
+            }
+        }
+    }
+
     h3 {
         color: $blue-text;
         font-size: 34px;
@@ -22,7 +32,7 @@
         margin: 25px 0 15px;
 
         @include tab-view {
-            font-size: 18px;
+            font-size: 23px;
             padding: 0 15px;
         }
     }
@@ -31,6 +41,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @include tab-view {
+            font-size: 23px;
+            margin: 15px 0;
+            padding: 0 15px;
+        }
 
         h3 {
             color: $blue-text;
@@ -39,8 +54,9 @@
             margin: 25px 0 15px;
 
             @include tab-view {
-                font-size: 28px;
-                margin-top: 0;
+                font-size: 23px;
+                margin: 0;
+                padding: 0;
             }
         }
 
@@ -53,6 +69,10 @@
                 padding: 0;
                 text-align: right;
                 text-decoration: none;
+                @include tab-view {
+                    font-size: 12px;
+                    margin: 0;
+                  }
             }
         }
     }
@@ -187,6 +207,11 @@
                 cursor: pointer;
                 border: 1px solid $primary-color;
                 margin-bottom: 10px;
+
+                @include tab-view{
+                    font-size: 14px;
+                    height: 44px;
+                }
 
                 &::before {
                     content: "";

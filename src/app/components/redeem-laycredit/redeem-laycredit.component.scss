@@ -23,6 +23,9 @@
             // display: inline-block;
             label{
                 font-size: 19px;
+                @include tab-view{
+                    font-size: 14px;
+                }
             }
             @include tab-view{
                 width: 100%;

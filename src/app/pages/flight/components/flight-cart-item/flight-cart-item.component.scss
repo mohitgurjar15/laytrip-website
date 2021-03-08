@@ -2,98 +2,131 @@
 @import "../../../../../_cstm-components.scss";
 @import "../../../../../_hotel.scss";
 @import "../../../../../_dr_home_variable.scss";
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+;
 
-.section_header{
+.section_header {
     color: $active-tab-text;
     font-size: 16px;
     font-weight: 500;
     margin: 25px 0 10px;
 }
-.accordion_detailed_wrps{
+
+.accordion_detailed_wrps {
     border: 1px solid $grayed_border;
     border-radius: 10px;
-    .card-body{
+
+    .card-body {
         padding: 15px;
-        .cols_wrps{
+        
+        @include tab-view{
+            padding: 10px;
+        }
+
+        .cols_wrps {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            @include tab-view{
+
+            @include tab-view {
                 align-items: flex-start;
-                flex-direction: column;
+                flex-direction: row;
             }
-            .lines_cols{
+
+            .lines_cols {
                 display: flex;
                 flex-direction: column;
                 flex: 1;
                 width: 100%;
                 font-size: 20px;
-                color: $mid_gray_bg ;
-                @include tab-view{
-                    font-size: 18px;
+                color: $mid_gray_bg;
+
+                @include tab-view {
+                    font-size: 14px;
                 }
-                .colmns_w{
-                    @include tab-view{
+
+                .colmns_w {
+                    @include tab-view {
                         margin-bottom: 10px;
                     }
                 }
-                &:last-child{
-                    .colmns_w{
-                        @include tab-view{
-                            &:last-child{
+
+                &:last-child {
+                    .colmns_w {
+                        @include tab-view {
+                            &:last-child {
                                 margin-bottom: 0px;
                             }
                         }
                     }
                 }
-                .line_shortname{
+
+                .line_shortname {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                     color: $text-black;
                     font-weight: 600;
                     flex: 1;
-                    img{
+
+                    @include tab-view {
+                        font-size: 16px;
+                    }
+
+                    img {
                         margin-right: 20px;
-                        @include tab-view{
+
+                        @include tab-view {
                             max-width: 20px;
                             margin-right: 5px;
                         }
                     }
-                    .hrs_{
+
+                    .hrs_ {
                         display: none;
                         font-size: 18px;
-                        color: $mid_gray_bg ;
+                        color: $mid_gray_bg;
                         font-weight: 400;
-                        @include tab-view{
-                            display: flex;
-                        }
-                    }
-                }
-                .line_company_name{
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    flex: 1;
-                    .hrs_{
-                        font-size: 18px;
-                        @include tab-view{
+
+                        @include tab-view {
                             display: none;
                         }
                     }
                 }
-                .fl_number{
+
+                .line_company_name {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex: 1;
+
+                    @include tab-view {
+                        margin-top: 5px;
+                    }
+
+                    .hrs_ {
+                        font-size: 18px;
+
+                        @include tab-view {
+                            //display: none;
+                            font-size: 10px;
+                        }
+                    }
+                }
+
+                .fl_number {
                     flex: 1;
                     display: flex;
                     align-items: center;
-                    .pink_stamp{
+
+                    .pink_stamp {
                         width: 14px;
                         height: 14px;
                         background-color: $pink;
                         border-radius: 50%;
                         margin-right: 10px;
-                        @include tab-view{
+
+                        @include tab-view {
                             width: 8px;
                             height: 8px;
                         }
@@ -101,7 +134,8 @@
                 }
             }
         }
-        .change_plane_wrapper{
+
+        .change_plane_wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -114,50 +148,70 @@
             color: $grayed_border;
             padding: 10px 0;
             margin: 40px 0;
-            .plane_wrps{
+
+            .plane_wrps {
                 flex: 5;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
-            .hr_wrps{
+
+            .hr_wrps {
                 display: flex;
                 justify-content: flex-end;
                 flex: 1;
+
+                @include tab-view {
+                    font-size: 10px;
+                }
             }
-            img{
+
+            img {
                 margin-right: 15px;
             }
-            @include tab-view{
-                margin: 20px 0;
-                font-size: 15px;
+
+            @include tab-view {
+                margin: 5px 0 10px 0;
+                font-size: 14px;
+                padding: 5px 0;
             }
         }
     }
-    &.w_return{
+
+    &.w_return {
         margin-top: 15px;
     }
 }
-.total_hrs_wrps{
+
+.total_hrs_wrps {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    color: $mid_gray_bg ;
+    color: $mid_gray_bg;
     font-size: 18px;
-    margin: 5px 0;
-    padding: 0 15px;
-    &.cta_btns_wrps{
+    margin: 5px 0 0;
+    padding: 0;
+
+    @include tab-view{
+        font-size: 12px;
+        padding: 0;
+        margin: 0;
+    }
+
+    &.cta_btns_wrps {
         justify-content: space-between;
-        .ct_btns{
-            button{
+
+        .ct_btns {
+            button {
                 background-color: transparent;
                 color: $text_light_yellow;
                 border: none;
                 box-shadow: none;
                 font-size: 16px;
                 padding: 0;
+
                 // margin-right: 40px;
-                &:last-child{
+                &:last-child {
                     margin: 0;
                 }
             }
@@ -165,9 +219,11 @@
 
     }
 }
-.sub_accordions{
+
+.sub_accordions {
     margin-top: 15px;
-    .card-body{
+
+    .card-body {
         padding: 0;
     }
 }

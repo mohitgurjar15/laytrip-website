@@ -88,6 +88,10 @@ a {
       border: none;
       padding: 0;
 
+      @include tab-view{
+        background: none;
+      }
+
       &:focus {
         outline: none;
         box-shadow: none;

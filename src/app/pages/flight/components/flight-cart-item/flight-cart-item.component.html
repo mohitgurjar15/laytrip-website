@@ -46,16 +46,18 @@
         </div>
       </div>
     </div>
+    <div class="total_hrs_wrps cta_btns_wrps">
+      <span class="ct_btns">
+        <button *ngIf="cartItem.module_info?.routes?.length === 1"
+          (click)="openDeleteConfirmationPopup(cartItem.id)">Cancel</button>
+        <!-- deleteCart(cartItem.id) -->
+      </span>
+      {{cartItem.module_info?.routes[0]?.duration}}
+    </div>
   </div>
 </div>
 
-<div class="total_hrs_wrps cta_btns_wrps">
-  <span class="ct_btns">
-    <button *ngIf="cartItem.module_info?.routes?.length === 1" (click)="openDeleteConfirmationPopup(cartItem.id)">Cancel</button>
-    <!-- deleteCart(cartItem.id) -->
-  </span>
-  {{cartItem.module_info?.routes[0]?.duration}}
-</div>
+
 
 
 <div class="card accordion_detailed_wrps wo_return" *ngIf="cartItem.module_info?.routes?.length === 2">
@@ -102,16 +104,17 @@
         </div>
       </div>
     </div>
+    <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem.module_info?.routes?.length === 2">
+      <span class="ct_btns">
+        <button (click)="openDeleteConfirmationPopup(cartItem.id)">Cancel</button>
+        <!-- deleteCart(cartItem.id) -->
+      </span>
+      {{cartItem.module_info?.routes[1]?.duration}}
+    </div>
   </div>
 </div>
 
-<div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem.module_info?.routes?.length === 2">
-  <span class="ct_btns">
-    <button (click)="openDeleteConfirmationPopup(cartItem.id)">Cancel</button>
-    <!-- deleteCart(cartItem.id) -->
-  </span>
-  {{cartItem.module_info?.routes[1]?.duration}}
-</div>
+
 <div id="collapse_" class="collapse show sub_accordions" data-parent="#accordion1">
   <div class="card-body">
     <app-traveler-form [cartItem]="cartItem" cartNumber={{cartNumber}} cartId={{cartItem.id}}></app-traveler-form>
