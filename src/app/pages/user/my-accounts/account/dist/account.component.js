@@ -23,6 +23,8 @@ var AccountComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.isRequireBackupFile = false;
         this.cardListChangeCount = 0;
+        this.add_new_card = false;
+        this.totalCard = 0;
     }
     AccountComponent.prototype.ngOnInit = function () {
         this.userDetails = jwt_helper_1.getLoginUserInfo();
@@ -39,8 +41,10 @@ var AccountComponent = /** @class */ (function () {
     };
     AccountComponent.prototype.open = function (content) {
         var _this = this;
-        this.modalService.open(content, { windowClass: 'delete_account_window', centered: true, backdrop: 'static',
-            keyboard: false }).result.then(function (result) {
+        this.modalService.open(content, {
+            windowClass: 'delete_account_window', centered: true, backdrop: 'static',
+            keyboard: false
+        }).result.then(function (result) {
             _this.closeResult = "Closed with: " + result;
         }, function (reason) {
             _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
@@ -80,10 +84,20 @@ var AccountComponent = /** @class */ (function () {
             this.isRequireBackupFile = true;
         }
     };
+    AccountComponent.prototype.totalNumberOfcard = function (event) {
+        this.totalCard = event;
+    };
     AccountComponent.prototype.ngOnDestroy = function () {
         this.addCardRef.ngOnDestroy();
     };
+    AccountComponent.prototype.addNewCard = function () {
+        this.add_new_card = true;
+    };
+    AccountComponent.prototype.closeNewCardPanel = function (event) {
+        this.add_new_card = event;
+    };
     AccountComponent.prototype.getCardListChange = function (data) {
+        this.add_new_card = false;
         this.cardListChangeCount = data;
     };
     __decorate([
