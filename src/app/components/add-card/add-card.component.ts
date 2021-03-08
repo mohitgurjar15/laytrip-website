@@ -231,11 +231,14 @@ export class AddCardComponent implements OnInit {
         },
         error: function (error) {
           console.log(error);
-          let errorMessage = document.getElementById('cardErrorMessage');
-          $('#main_loader').hide();
-          $('#cardError').show();
-          $('#new_card').show();
-          errorMessage.innerHTML = error.responseJSON.message;
+          if (error && error.status !== 406) {
+            let errorMessage = document.getElementById('cardErrorMessage');
+            $('#main_loader').hide();
+            $('#cardError').show();
+            $('#new_card').show();
+            errorMessage.innerHTML = error.responseJSON.message;
+          }
+
           // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
       });

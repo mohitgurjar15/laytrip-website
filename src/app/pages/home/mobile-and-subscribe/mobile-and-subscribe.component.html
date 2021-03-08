@@ -75,10 +75,10 @@
                     </p> 
                 </div> -->
                 <div *ngIf="submitted" class="focus-input100 message_block">
-                    <p *ngIf="subscribeForm.controls.email.errors.required" class="message_error">
+                    <p *ngIf="subscribeForm.controls.email.errors && subscribeForm.controls.email.errors.required" class="message_error">
                         {{'mobile_page_subscribe_email_touched_validation' | translate}}
                     </p>
-                    <p *ngIf="subscribeForm.controls.email.errors.pattern" class="message_error">
+                    <p *ngIf="subscribeForm.controls.email.errors && subscribeForm.controls.email.errors.pattern" class="message_error">
                         {{'email_invalid_validation' | translate}}
                     </p>
                 </div>

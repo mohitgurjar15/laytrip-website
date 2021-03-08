@@ -26,6 +26,36 @@
         }
     }
 
+    .title_bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h3 {
+            color: $blue-text;
+            font-size: 34px;
+            margin-bottom: 5px;
+            margin: 25px 0 15px;
+
+            @include tab-view {
+                font-size: 28px;
+                margin-top: 0;
+            }
+        }
+
+        .edit_btns {
+            a {
+                background-color: transparent;
+                color: $text_light_yellow;
+                box-shadow: none;
+                font-size: 16px;
+                padding: 0;
+                text-align: right;
+                text-decoration: none;
+            }
+        }
+    }
+
     .timer_main_wrapper{
         display: flex;
         flex-direction: column;
