@@ -32,7 +32,8 @@
         justify-content: space-between;
         height: 100%;
         width: 100%;
-        .left_side{
+
+        .left_side {
             max-width: 100% !important;
         }
     }
@@ -68,7 +69,7 @@
         width: 33.33%;
         //max-width: 45px;
         font-size: 8px;
-        padding: 0 6px;
+        padding: 0 2px;
         color: $grayed_border;
 
         .pipe_line_wrps {
@@ -224,18 +225,21 @@
             &.duel_wrps {
                 flex-direction: column;
                 display: flex;
-                width: 33.33%;
+                width: auto;
+                position: relative;
 
                 .fl_desitines {
                     font-weight: 400;
                     color: $mid_gray_bg;
                     font-size: 8px;
-                    
+                    position: absolute;
+                    width: 100%;
+                    bottom: -10px;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    
-                    br{
+
+                    br {
                         display: none;
                     }
                 }
@@ -246,7 +250,8 @@
             &.duel_wrps {
                 flex-direction: column;
                 display: flex;
-                width: 33.33%;
+                width: auto;
+                position: relative;
 
                 .fl_name {
                     font-size: 12px !important;
@@ -257,14 +262,19 @@
                         font-size: 10px !important;
                     }
                 }
-                .fl_name_inner{
+
+                .fl_name_inner {
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    position: absolute;
+                    width: 100%;
+                    bottom: -10px;
                 }
-                br{
+
+                br {
                     display: none;
-                    
+
                 }
             }
         }
@@ -738,9 +748,10 @@
                         overflow-y: auto;
                         max-height: 150px;
 
-                        a{
+                        a {
                             text-decoration: underline;
                         }
+
                         @include tab-view {
                             margin-top: 0;
                         }
