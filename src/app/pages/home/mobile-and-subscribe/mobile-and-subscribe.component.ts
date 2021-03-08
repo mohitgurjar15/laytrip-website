@@ -75,7 +75,6 @@ export class MobileAndSubscribeComponent implements OnInit {
       return;
     } else {
       this.userService.subscribeNow(this.subscribeForm.value.email).subscribe((data: any) => {
-        console.log(data);
         this.submitted = this.loading = false;
         this.success = true;
         this.error = false;
@@ -96,12 +95,12 @@ export class MobileAndSubscribeComponent implements OnInit {
     }
   }
 
-  // ngDoCheck(){
-  //   if(this.error || this.success){
-  //     setTimeout(() => {
-  //       this.success = false;
-  //       this.error = false;    
-  //     }, 2000);
-  //   }
-  // }
+  ngDoCheck(){
+    if(this.error || this.success){
+      setTimeout(() => {
+        this.success = false;
+        this.error = false;    
+      }, 2000);
+    }
+  }
 }
