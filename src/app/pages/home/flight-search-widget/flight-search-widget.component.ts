@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 declare var $: any;
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Module } from '../../../model/module.model';
@@ -30,10 +30,12 @@ export class FlightSearchWidgetComponent implements OnInit {
   flightSearchFormSubmitted = false;
   isCalenderPriceLoading: boolean = true;
   // DATE OF FROM_DESTINATION & TO_DESTINATION
-  fromSearch : any = airports['JFK'];
+  //fromSearch : any = airports['JFK'];
+  fromSearch : any = {};
   countryCode: string;
   monthYearArr = [];
-  toSearch = airports['PUJ'];
+  //toSearch:any = airports['PUJ'];
+  toSearch:any = {};
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -54,6 +56,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   
   currentMonth:string;
   currentYear:string;
+  showFromAirportSuggestion:boolean=false;
+  showToAirportSuggestion:boolean=false;
+  thisElementClicked: boolean = false;
 
   searchFlightInfo =
     {
@@ -81,8 +86,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     private homeService: HomeService
   ) {  
 
-    this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
-    this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+    if(typeof this.fromSearch.city!='undefined'){
+      this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
+      this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+    }
     this.flightSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
       toDestination: ['', [Validators.required]],
@@ -200,6 +207,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       //this.arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
       this.searchedValue.push({ key: 'toSearch', value: this.toSearch });
     }
+    console.log("this.fromSearch",this.fromSearch,this.toSearch)
     this.searchFlightInfo.departure = this.fromSearch.code;
     this.searchFlightInfo.arrival = this.toSearch.code;
   }
@@ -454,5 +462,64 @@ export class FlightSearchWidgetComponent implements OnInit {
   ngOnDestroy(){
     localStorage.removeItem('__from');
     localStorage.removeItem('__to');
+  }
+
+  showAirportSuggestion(type){
+    this.showFromAirportSuggestion=false;
+    this.showToAirportSuggestion=false;
+    if(type=='from'){
+      this.showFromAirportSuggestion=true;
+    }
+    if(type=='to'){
+      this.showToAirportSuggestion=true;
+    }
+  }
+
+  closeAirportSuggestion(type){
+
+    if(type=='from'){
+      this.showFromAirportSuggestion=false;
+    }
+
+    if(type=='to'){
+      this.showToAirportSuggestion=false;
+    }
+  }
+
+  @HostListener('document:click')
+  clickOutside() {
+    if (!this.thisElementClicked) {
+      this.showFromAirportSuggestion=false;
+      this.showToAirportSuggestion=false;
+    }
+    this.thisElementClicked=false;
+  }
+
+  @HostListener('click')
+  clickInside() {
+    this.thisElementClicked=true;
+  }
+
+  searchAirport(event){
+    console.log("event",event)
+  }
+
+  searchItem(data){
+    if(data.type=='fromSearch'){
+      if(data.key.length>0){
+        this.showFromAirportSuggestion=false;
+      }
+      else{
+        this.showFromAirportSuggestion=true;
+      }
+    }
+    else{
+      if(data.key.length>0){
+        this.showToAirportSuggestion=false;
+      }
+      else{
+        this.showToAirportSuggestion=true;
+      }
+    }
   }
 }

@@ -34,6 +34,13 @@ export class FlightService {
             );
     }
 
+    searchAirports(type=''){
+        return this.http.get(`${environment.apiUrl}v1/flight/route/${type}`)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     airRevalidate(routeCode) {
 
         let headers = {

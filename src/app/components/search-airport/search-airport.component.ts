@@ -20,6 +20,7 @@ export class SearchAirportComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
+  @Output() searchItem = new EventEmitter<any>();
   @Input() defaultCity: any;
   @Input() airport;
 
@@ -36,13 +37,13 @@ export class SearchAirportComponent implements OnInit {
   loading = false;
 
   ngOnInit() {
-    this.setDefaultAirport();
-    //this.data.push(this.airport)
-    this.data[0] = this.airport ? this.airport : [];
+    //this.setDefaultAirport();
+    //this.data[0] = this.airport ? this.airport : [];
+    //this.data[0]=[];
   }
 
   searchAirport(searchItem) {
-    console.log("this.selectedAirport",this.selectedAirport)
+    
     this.loading = true;
     let isFromLocation=this.id=='fromSearch'?'yes':'no';
     let alternateLocation='';
@@ -74,9 +75,8 @@ export class SearchAirportComponent implements OnInit {
   }
 
   onChangeSearch(event) {
-    if (event.term.length > 2) {
-      this.searchAirport(event.term);
-    }
+    this.searchAirport(event.term);
+    this.searchItem.emit({key : event.term,type : this.id})
   }
 
   selectEvent(event, index) {
@@ -120,7 +120,8 @@ export class SearchAirportComponent implements OnInit {
 
     if (changes['airport']) {
       this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
-      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+      //this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+      this.data=[];
     }
   }
 
