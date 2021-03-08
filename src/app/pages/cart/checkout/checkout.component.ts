@@ -13,7 +13,6 @@ import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { SpreedlyService } from '../../../services/spreedly.service';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { BookingCompletionErrorPopupComponent } from '../../../components/booking-completion-error-popup/booking-completion-error-popup.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export interface CartItem {
@@ -65,13 +64,19 @@ export class CheckoutComponent implements OnInit {
     ],
     browser_info: {},
     site_url: "",
-    selected_down_payment:0
+    selected_down_payment: 0
   }
-  challengePopUp:boolean=false;
+  challengePopUp: boolean = false;
   isSessionTimeOut: boolean = false;
   bookingTimerConfig;
   isBookingRequest = false;
-  modalRef;
+
+  totalCard: number = 0;
+  add_new_card = false;
+  alertErrorMessage:string='';
+  isAllAlertClosed: boolean = true;
+  isTermConditionAccepted:boolean=false;
+  isTermConditionError:boolean=false;
 
   constructor(
     private genericService: GenericService,
@@ -84,7 +89,7 @@ export class CheckoutComponent implements OnInit {
     private commonFunction: CommonFunction,
     private route: ActivatedRoute,
     private modalService: NgbModal,
-    private spreedly:SpreedlyService,
+    private spreedly: SpreedlyService,
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -93,7 +98,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
-
+    localStorage.removeItem("__alrt")
     this.userInfo = getLoginUserInfo();
     if (this.userInfo && this.userInfo.roleId != 7) {
       this.getTravelers();
@@ -224,6 +229,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getCardListChange(data) {
+    this.add_new_card = false;
     this.cardListChangeCount = data;
   }
 
@@ -288,6 +294,53 @@ export class CheckoutComponent implements OnInit {
       let index = this.validationErrorMessage.lastIndexOf(" ");
       this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
     }
+
+    let cartAlerts: any = localStorage.getItem("__alrt")
+    this.alertErrorMessage = '';
+    try {
+
+      if (cartAlerts) {
+        this.alertErrorMessage = 'Please close alert of price change for';
+        cartAlerts = JSON.parse(cartAlerts);
+        if (cartAlerts.length) {
+          for (let i = 0; i < cartAlerts.length; i++) {
+            if (cartAlerts[i].type == 'price_change') {
+              this.alertErrorMessage += ` ${cartAlerts[i].name} ,`
+            }
+          }
+          let index = this.alertErrorMessage.lastIndexOf(" ");
+          this.alertErrorMessage = this.alertErrorMessage.substring(0, index);
+          for (let i = 0; i < cartAlerts.length; i++) {
+            if (cartAlerts[i].type == 'installment_vartion') {
+              if (cartAlerts.length == 1) {
+                this.alertErrorMessage = "Please close alert of odd installment amount.";
+              }
+              else {
+                this.alertErrorMessage += ` and odd installment amount.`;
+              }
+            }
+          }
+
+          this.isAllAlertClosed = false;
+        }
+        else {
+          this.isAllAlertClosed = true;
+        }
+      }
+      else {
+        this.isAllAlertClosed = true;
+      }
+    }
+    catch (e) {
+      this.isAllAlertClosed = true;
+    }
+
+    if(!this.isTermConditionAccepted){
+      this.isTermConditionError=true;
+    }
+    else{
+      this.isTermConditionError=false;
+    }
   }
 
   bookFlight() {
@@ -304,10 +357,10 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
     this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
     this.bookingRequest.cart = carts;
-    sessionStorage.setItem('__cbk',JSON.stringify(this.bookingRequest))
-    console.log("this.bookingRequest",this.bookingRequest)
-    if(this.isValidTravelers && this.cardToken!=''){
-      this.isBookingProgress=true;
+    sessionStorage.setItem('__cbk', JSON.stringify(this.bookingRequest))
+    console.log("this.bookingRequest", this.bookingRequest)
+    if (this.isValidTravelers && this.cardToken != '' && this.isAllAlertClosed && this.isTermConditionAccepted) {
+      this.isBookingProgress = true;
       window.scroll(0, 0);
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
@@ -323,37 +376,37 @@ export class CheckoutComponent implements OnInit {
             let browser_info = this.spreedly.browserInfo();
             console.log(browser_info);
             this.bookingRequest.browser_info = browser_info;
-            if(window.location.origin.includes("localhost")){
+            if (window.location.origin.includes("localhost")) {
               this.bookingRequest.site_url = 'https://demo.eztoflow.com';
             }
-            else{
+            else {
               this.bookingRequest.site_url = window.location.origin;
             }
 
 
             this.cartService.validate(this.bookingRequest).subscribe((res: any) => {
               let transaction = res.transaction;
-              
+
               let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
               res.redirection = redirection;
-              console.log("res",res);
+              console.log("res", res);
               if (transaction.state == "succeeded") {
                 console.log('succeeded', [redirection]);
                 window.location.href = redirection;
               } else if (transaction.state == "pending") {
 
                 console.log('pending', [res]);
-                this.isBookingProgress=false;
-                this.challengePopUp=true;
+                this.isBookingProgress = false;
+                this.challengePopUp = true;
                 this.spreedly.lifeCycle(res);
               } else {
                 console.log('fail', [res]);
                 this.router.navigate(['/cart/checkout']);
               }
             }, (error) => {
-                console.log(error);
+              console.log(error);
             });
-            
+
           }
         }, (error) => {
           this.isBookingProgress = false;
@@ -405,12 +458,31 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-  /* openBookingCompletionErrorPopup() {
-    this.modalRef = this.modalService.open(BookingCompletionErrorPopupComponent, {
-      windowClass: 'booking_completion_error_block', centered: true, backdrop: 'static',
-      keyboard: false
-    }).result.then((result) => {
+  addNewCard() {
+    this.add_new_card = true;
+  }
 
-    });
-  } */
+  closeNewCardPanel(event) {
+    this.add_new_card = event;
+  }
+
+  totalNumberOfcard(event) {
+    console.log(event);
+    this.totalCard = event;
+  }
+
+  acceptTermCondition(event){
+    if(event.target.checked){
+      this.isTermConditionAccepted=true;
+      this.isTermConditionError=false;
+    }
+    else{
+      this.isTermConditionAccepted=false;
+      this.isTermConditionError=true;
+    }
+  }
+
+  removeTermConditionError(){
+    this.isTermConditionError=false;
+  }
 }
