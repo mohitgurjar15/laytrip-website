@@ -57,6 +57,9 @@
       margin-top: 0;
     }
 
+    .custom_cardbody{
+      padding: 0;
+    }
     .card {
       border: 1px solid $grayed_border;
       border-radius: 10px;
@@ -120,6 +123,10 @@
 
       .card-body {
         padding: 15px;
+
+        @include tab-view {
+          padding: 10px;
+        }
 
         .common_form {
           label {
