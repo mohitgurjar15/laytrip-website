@@ -59,7 +59,7 @@
                             </app-price-summary>
                         </div>
                         <label class="custom_checkbox">
-                            <input type="checkbox" >
+                            <input type="checkbox" (click)="acceptTermCondition($event)" >
                             <span class="checkmark"></span>
                             I agree to your <a href="">Privacy Policy</a> and <a href="">Terms</a>, which include terms from Laytrip suppliers and travel partners.
                         </label>
@@ -67,11 +67,24 @@
                             <button (click)="bookFlight()">Pay and Book</button>
                         </div>
                     </div>
-                    <div class="section_description" *ngIf="validationErrorMessage">
-                        <span class="sec_text">{{validationErrorMessage}}.</span>
-                        <a (click)="removeValidationError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
-                                alt="Close"></a>
+                    <div class="error_wrapper">
+                        <div class="section_description" *ngIf="validationErrorMessage">
+                            <span class="sec_text">{{validationErrorMessage}}.</span>
+                            <a (click)="removeValidationError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                    alt="Close"></a>
+                        </div>
+                        <div class="section_description" *ngIf="!isAllAlertClosed">
+                            <span class="sec_text">{{alertErrorMessage}}</span>
+                            <a (click)="removeAllAlertError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                    alt="Close"></a>
+                        </div>
+                        <div class="section_description" *ngIf="isTermConditionError">
+                            <span class="sec_text">Please accept terms & condition.</span>
+                            <a (click)="removeTermConditionError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                    alt="Close"></a>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
         </form>

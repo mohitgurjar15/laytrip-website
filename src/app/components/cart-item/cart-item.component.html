@@ -25,7 +25,7 @@
                 </span>
                 {{cartItem.module_info?.arrival_code}}
 
-                <div class="section_description price_descrip" *ngIf="origin=='/cart/booking' && priceFluctuationAmount!=0">
+                <div class="section_description price_descrip" *ngIf="priceFluctuationAmount!=0">
                   <span class="sec_text">The price for this booking has {{ priceFluctuationAmount > 0 ? 'increased' :
                     'decreased' }} from ${{cartItem.old_module_info.selling_price}} to
                     ${{cartItem.module_info.selling_price}}.</span>
@@ -46,7 +46,7 @@
         </a>
       </h4>
     </div>
-    <div id="collapse1" class="panel-collapse collapse in pannel_cont_wrapper ">
+    <div id="collapse1" class="panel-collapse collapse in pannel_cont_wrapper " [ngClass]="{'show':origin==='/cart/checkout'}">
       <div class="panel-body">
         <app-flight-cart-item cartNumber={{cartNumber}} [cartItem]="cartItem"></app-flight-cart-item>
       </div>

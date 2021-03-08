@@ -13,7 +13,6 @@ import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { SpreedlyService } from '../../../services/spreedly.service';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { BookingCompletionErrorPopupComponent } from '../../../components/booking-completion-error-popup/booking-completion-error-popup.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export interface CartItem {
@@ -74,6 +73,10 @@ export class CheckoutComponent implements OnInit {
 
   totalCard: number = 0;
   add_new_card = false;
+  alertErrorMessage:string='';
+  isAllAlertClosed: boolean = true;
+  isTermConditionAccepted:boolean=false;
+  isTermConditionError:boolean=false;
 
   constructor(
     private genericService: GenericService,
@@ -95,7 +98,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     window.scroll(0, 0);
-
+    localStorage.removeItem("__alrt")
     this.userInfo = getLoginUserInfo();
     if (this.userInfo && this.userInfo.roleId != 7) {
       this.getTravelers();
@@ -291,6 +294,53 @@ export class CheckoutComponent implements OnInit {
       let index = this.validationErrorMessage.lastIndexOf(" ");
       this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
     }
+
+    let cartAlerts: any = localStorage.getItem("__alrt")
+    this.alertErrorMessage = '';
+    try {
+
+      if (cartAlerts) {
+        this.alertErrorMessage = 'Please close alert of price change for';
+        cartAlerts = JSON.parse(cartAlerts);
+        if (cartAlerts.length) {
+          for (let i = 0; i < cartAlerts.length; i++) {
+            if (cartAlerts[i].type == 'price_change') {
+              this.alertErrorMessage += ` ${cartAlerts[i].name} ,`
+            }
+          }
+          let index = this.alertErrorMessage.lastIndexOf(" ");
+          this.alertErrorMessage = this.alertErrorMessage.substring(0, index);
+          for (let i = 0; i < cartAlerts.length; i++) {
+            if (cartAlerts[i].type == 'installment_vartion') {
+              if (cartAlerts.length == 1) {
+                this.alertErrorMessage = "Please close alert of odd installment amount.";
+              }
+              else {
+                this.alertErrorMessage += ` and odd installment amount.`;
+              }
+            }
+          }
+
+          this.isAllAlertClosed = false;
+        }
+        else {
+          this.isAllAlertClosed = true;
+        }
+      }
+      else {
+        this.isAllAlertClosed = true;
+      }
+    }
+    catch (e) {
+      this.isAllAlertClosed = true;
+    }
+
+    if(!this.isTermConditionAccepted){
+      this.isTermConditionError=true;
+    }
+    else{
+      this.isTermConditionError=false;
+    }
   }
 
   bookFlight() {
@@ -309,7 +359,7 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.cart = carts;
     sessionStorage.setItem('__cbk', JSON.stringify(this.bookingRequest))
     console.log("this.bookingRequest", this.bookingRequest)
-    if (this.isValidTravelers && this.cardToken != '') {
+    if (this.isValidTravelers && this.cardToken != '' && this.isAllAlertClosed && this.isTermConditionAccepted) {
       this.isBookingProgress = true;
       window.scroll(0, 0);
       for (let i = 0; i < this.carts.length; i++) {
@@ -419,5 +469,20 @@ export class CheckoutComponent implements OnInit {
   totalNumberOfcard(event) {
     console.log(event);
     this.totalCard = event;
+  }
+
+  acceptTermCondition(event){
+    if(event.target.checked){
+      this.isTermConditionAccepted=true;
+      this.isTermConditionError=false;
+    }
+    else{
+      this.isTermConditionAccepted=false;
+      this.isTermConditionError=true;
+    }
+  }
+
+  removeTermConditionError(){
+    this.isTermConditionError=false;
   }
 }

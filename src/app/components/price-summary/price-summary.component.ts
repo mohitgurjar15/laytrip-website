@@ -17,7 +17,6 @@ export class PriceSummaryComponent implements OnInit {
   installmentVartion:number=0;
   installmentType;
   cartAlerts=[];
-  origin:string='';
   
   constructor(
     private commonFunction:CommonFunction
@@ -26,7 +25,6 @@ export class PriceSummaryComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.origin = window.location.pathname;
   }
   
   ngOnChanges(changes: SimpleChanges) {
