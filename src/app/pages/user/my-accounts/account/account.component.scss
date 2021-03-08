@@ -65,6 +65,10 @@
       align-items: center;
       justify-content: space-between;
 
+      @include tab-view{
+        margin: 25px 0 15px;
+      }
+
       h3 {
         color: $blue-text;
         font-size: 34px;
@@ -72,13 +76,16 @@
         margin: 25px 0 15px;
 
         @include tab-view {
-          font-size: 28px;
-          margin-top: 0;
+          font-size: 23px;
+          margin: 0;
         }
       }
 
       .edit_btns {
         margin: 25px 0 15px;
+        @include tab-view {
+          margin: 0;
+        }
         a {
           background-color: transparent;
           color: $text_light_yellow;
@@ -87,6 +94,10 @@
           padding: 0;
           text-align: right;
           text-decoration: none;
+          @include tab-view {
+            font-size: 12px;
+            margin: 0;
+          }
         }
       }
     }
@@ -95,6 +106,11 @@
       background-color: $tab-bg-gray;
       border-radius: 5px;
       padding: 15px;
+
+      @include tab-view {
+        margin: 0 -15px;
+        padding: 10px;
+      }
 
       .card_accordion {
         .card {
@@ -203,7 +219,7 @@
     margin: 0 auto;
 
     @include tab-view{
-      padding: 15px 0 0;
+      padding: 5px 0 0;
     }
 
     .title_bar {

@@ -294,6 +294,7 @@ input.ng-invalid.ng-touched {
                     .address_box{
                         @include tab-view{
                             width: 100%;
+                            flex-direction: column;
                         }
                         .inputs_com{
                             padding: 0;
@@ -353,6 +354,11 @@ input.ng-invalid.ng-touched {
 
             .text_field {
                 flex: 2;
+
+                @include tab-view{
+                    height: 40px;
+                    display: flex;
+                }
 
                 .gender_anchers {
                     display: flex;
