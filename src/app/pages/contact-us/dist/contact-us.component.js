@@ -72,11 +72,11 @@ var ContactUsComponent = /** @class */ (function () {
         this.genericService.createEnquiry(formValue).subscribe(function (res) {
             $('#contact_modal').modal('hide');
             _this.loading = false;
-            _this.toastr.success(res.message, 'Success');
+            // this.toastr.success(res.message, 'Success');
             _this.ngOnInit();
         }, (function (error) {
             _this.loading = false;
-            _this.toastr.error(error.message, 'Error');
+            // this.toastr.error(error.message, 'Error');
         }));
     };
     ContactUsComponent.prototype.setMessageLenght = function (value) {

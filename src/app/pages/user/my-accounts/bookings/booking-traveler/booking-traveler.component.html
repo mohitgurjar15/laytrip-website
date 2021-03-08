@@ -6,7 +6,7 @@
                 {{traveler.roleId == 6 ?'Primary Traveler':'Additional Traveler'}} 
             </a>
             <a class="card-link new_link">
-                {{ traveler.userData.firstName || '' | titlecase}} {{ traveler.userData.lastName || '' | titlecase }}
+                {{ traveler.travelerInfo.firstName || '' | titlecase}} {{ traveler.travelerInfo.lastName || '' | titlecase }}
             </a>
         </div>
         <div class="collapse show">
@@ -15,47 +15,47 @@
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">First Name*</label>
-                            <input type="text" class="form-control" placeholder="{{traveler.userData.firstName}}"
+                            <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.firstName}}"
                                 disabled>
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">Last Name*</label>
-                            <input type="text" class="form-control" placeholder="{{traveler.userData.lastName}}"
+                            <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.lastName}}"
                                 disabled>
                         </div>
 
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">Gender*</label>
                             <input type="text" class="form-control"
-                                placeholder="{{getGender(traveler.userData.gender)}}" disabled>
+                                placeholder="{{getGender(traveler.travelerInfo.gender)}}" disabled>
 
                         </div>
-                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="checkIsChild(traveler.userData.dob)">
+                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="checkIsChild(traveler.travelerInfo.dob)">
                             <label for="">Email*</label>
-                            <input type="email" class="form-control" placeholder="{{traveler.userData.email}}" disabled>
+                            <input type="email" class="form-control" placeholder="{{traveler.travelerInfo.email}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">Telephone*</label>
-                            <input type="text" class="form-control" placeholder="{{  getPhoneNoInMaskFormat(traveler.userData.phoneNo,traveler.userData.countryCode) }}"
+                            <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.countryCode != 'null' ? getPhoneNoInMaskFormat(traveler.travelerInfo.phoneNo,traveler.travelerInfo.countryCode): '' }}"
                                 disabled>
                         </div>
                         <div class="col dobs col-md-4 mb-sm-10">
                             <label for="">Date of Birth*</label>
                             <input type="text" class="form-control"
-                                placeholder="{{ traveler.userData.dob && traveler.userData.dob != ''  ? commonFunction.convertCustomDateFormat(traveler.userData.dob,'YYYY-MM-DD','MM/DD/YYYY') : ''}}"
+                                placeholder="{{ traveler.travelerInfo.dob && traveler.travelerInfo.dob != ''  ? commonFunction.convertCustomDateFormat(traveler.travelerInfo.dob,'YYYY-MM-DD','MM/DD/YYYY') : ''}}"
                                 disabled>
                         </div>
 
                         <div class="col-sm-12 col-md-4"
-                            *ngIf="traveler.is_passport_required && checkIsChild(traveler.userData.dob) ">
+                            *ngIf="traveler.is_passport_required && checkIsChild(traveler.travelerInfo.dob) ">
                             <label for="">{{'passport_number'| translate}}</label>
-                            <input type="text" class="form-control" placeholder="{{traveler.userData.passportNumber}}"
+                            <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.passportNumber}}"
                                 disabled>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label for="">Nationality*</label>
                             <input type="text" class="form-control"
-                                placeholder="{{traveler.userData.country ? traveler.userData.country.name : ''}}"
+                                placeholder="{{traveler.travelerInfo.country ? traveler.travelerInfo.country.name : ''}}"
                                 disabled>
                         </div>
                     </div>
