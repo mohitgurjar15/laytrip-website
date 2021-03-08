@@ -78,6 +78,7 @@ var MobileAndSubscribeComponent = /** @class */ (function () {
                 _this.successMessage = data.message;
                 // this.toastr.success(data.message, '');
             }, function (error) {
+                console.log('sd');
                 _this.error = true;
                 _this.successMessage = '';
                 _this.submitted = _this.loading = _this.success = false;
