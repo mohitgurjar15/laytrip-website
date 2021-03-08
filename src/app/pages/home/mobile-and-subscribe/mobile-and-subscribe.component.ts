@@ -84,6 +84,7 @@ export class MobileAndSubscribeComponent implements OnInit {
         this.successMessage = data.message;
         // this.toastr.success(data.message, '');
       }, (error: HttpErrorResponse) => {
+        console.log('sd')
         this.error = true;
         this.successMessage = '';
         this.submitted = this.loading = this.success = false;

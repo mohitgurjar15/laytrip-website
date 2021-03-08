@@ -11,6 +11,9 @@
     align-items: center;
     width: 100%;
     padding: 25px 0px;
+    @include tab-view {
+        padding: 20px 0px 10px;
+    }
     .upper_big_fonts {
         color: $text-black;
         font-size: 36px;
@@ -20,14 +23,14 @@
             color: $blue-text;
         }
         @include tab-view {
-            font-size: 12px;
+            font-size: 14px;
         }
     }
     .lo_sm_fn {
         color: $pink;
         font-size: 20px;
         @include tab-view {
-            font-size: 10px;
+            font-size: 12px;
         }
     }
 }

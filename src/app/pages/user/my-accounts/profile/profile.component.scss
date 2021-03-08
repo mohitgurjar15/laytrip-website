@@ -283,6 +283,25 @@ input.ng-invalid.ng-touched {
 
                     label {}
                 }
+                &.address_main{
+                    label{
+                        @include tab-view{
+                            br{
+                                display: none;
+                            }
+                        }
+                    }
+                    .address_box{
+                        @include tab-view{
+                            width: 100%;
+                            flex-direction: column;
+                        }
+                        .inputs_com{
+                            padding: 0;
+                        }
+                    }
+                }
+                
             }
 
             &.title_row {
@@ -336,6 +355,11 @@ input.ng-invalid.ng-touched {
             .text_field {
                 flex: 2;
 
+                @include tab-view{
+                    height: 40px;
+                    display: flex;
+                }
+
                 .gender_anchers {
                     display: flex;
                     justify-content: flex-start;
@@ -372,7 +396,7 @@ input.ng-invalid.ng-touched {
                         }
 
                         color: $mid_gray_bg;
-                        font-size: 14px;
+                        font-size: 16px;
                         padding: 0 25px 0 0;
 
                         &:focus {

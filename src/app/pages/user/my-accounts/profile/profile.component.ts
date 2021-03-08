@@ -57,6 +57,8 @@ export class ProfileComponent implements OnInit {
   arrivalAirport: any = {}
   home_airport;
   countries = [];
+  countries_code = [];
+  stateList = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -83,7 +85,7 @@ export class ProfileComponent implements OnInit {
       first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       last_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       dob: ['', Validators.required],
-      country_code: ['+1', [Validators.required]],
+      country_code: ['', [Validators.required]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       address: [''],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
@@ -92,6 +94,11 @@ export class ProfileComponent implements OnInit {
       passport_expiry: [''],
       passport_number: [''],
       home_airport: [''],
+      city: [''],
+      state_id: [''],
+      country_id: [''],
+      zip_code: [''],
+      
     }, { validators: phoneAndPhoneCodeValidation() });
 
     this.getProfileInfo();
@@ -107,14 +114,51 @@ export class ProfileComponent implements OnInit {
           countryCode: country.phonecode,
           flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
         }
-      }, (error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          this.router.navigate(['/']);
+      });
+      var countries_code = data.map(country => {
+        return {
+          id: country.id,
+          name: country.phonecode + ' (' + country.iso2 + ')',
+          countryCode: country.phonecode,
+          country_name: country.name + ' ' + country.phonecode,
+          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
         }
       });
+      const filteredArr = countries_code.reduce((acc, current) => {
+        const x = acc.find(item => item.countryCode == current.countryCode);
+        if (!x) {        
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+      this.countries_code = filteredArr;
+      this.setUSCountryInFirstElement(this.countries);
+
     });
   }
 
+  getStates(countryId) {
+    this.genericService.getStates(countryId.id).subscribe((data: any) => {
+      this.stateList = data;
+    }, (error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        localStorage.setItem('userToken', "");
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
+  setUSCountryInFirstElement(countries){
+    var usCountryObj = countries.find(x=> x.id === 233);
+    var removedUsObj = countries.filter( obj => obj.id !== 233);
+    this.countries=[];
+    removedUsObj.sort(function(a, b) {
+      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);          
+    });
+    removedUsObj.unshift(usCountryObj); 
+    this.countries = removedUsObj; 
+  }
   selectGender(event, type) {
 
     if (this.isFormControlEnable) {
@@ -191,19 +235,20 @@ export class ProfileComponent implements OnInit {
         zip_code: res.zipCode,
         title: res.title ? res.title : 'mr',
         dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
-        country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '',
+        country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
         phone_no: res.phoneNo,
-        state_id: res.state.name,
-        city_name: res.cityName,
+        city : res.cityName,
         address: res.address,
         home_airport: res.airportInfo.code ? res.airportInfo.code : null,
-        language_id: res.preferredLanguage.name,
-        currency_id: res.preferredCurrency.code,
-        passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
-        passport_number: res.passportNumber
+        country_id: res.country.name ? res.country.name : null,
+        state_id: res.state.name ? res.state.name : null,
+        // passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
+        // passport_number: res.passportNumber
       });
       this.profileForm.controls['home_airport'].disable();
       this.profileForm.controls['country_code'].disable();
+      this.profileForm.controls['country_id'].disable();
+      this.profileForm.controls['state_id'].disable();
 
     }, (error: HttpErrorResponse) => {
       this.loadingValue.emit(false);
@@ -216,6 +261,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.profileForm.value)
     // this.submitted = true;
     const controls = this.profileForm.controls;
     this.loadingValue.emit(true);
@@ -242,21 +288,42 @@ export class ProfileComponent implements OnInit {
         imgfile = this.imageFile;
         // formdata.append("profile_pic",imgfile);
       }
-
       // formdata.append("title",'mr');
       formdata.append("first_name", this.profileForm.value.first_name);
       formdata.append("last_name", this.profileForm.value.last_name);
       formdata.append("email", this.profileForm.value.email);
       formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
-      formdata.append("address", this.profileForm.value.address);
       formdata.append("phone_no", this.profileForm.value.phone_no);
       formdata.append("gender", this.is_type);
-      formdata.append("country_code", this.profileForm.value.country_code);
+      formdata.append("city_name", this.profileForm.value.city);
+      formdata.append("address", this.profileForm.value.address);
+     
+      if(!Number.isInteger(this.profileForm.value.country_id)){
+        console.log('here',this.selectResponse);
+        formdata.append("country_id", this.profileForm.value.country_id.id);
+      } else {
+        console.log('no');
+        formdata.append("country_id", this.selectResponse.country.id);
+      }
+      if(!Number.isInteger(this.profileForm.value.state_id)){
+        formdata.append("state_id", this.profileForm.value.state_id);
+      } else{
+        formdata.append("state_id", this.selectResponse.state.id);
+      }
+      if(typeof(this.profileForm.value.country_code) != 'object'){        
+        formdata.append("country_code",this.profileForm.value.country_code.name);
+      } else {
+        formdata.append("country_code", this.selectResponse.countryCode);
+      } 
+     
+      formdata.append("zip_code", this.profileForm.value.zip_code ? this.profileForm.value.zip_code : this.selectResponse.zipCode);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+      
       this.isFormControlEnable = false;
-
       this.profileForm.controls['home_airport'].disable();
       this.profileForm.controls['country_code'].disable();
+      this.profileForm.controls['country_id'].disable();
+      this.profileForm.controls['state_id'].disable();
 
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         // this.submitted = false;
@@ -265,7 +332,7 @@ export class ProfileComponent implements OnInit {
         // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
       }, (error: HttpErrorResponse) => {
         this.loadingValue.emit(false);
-        // this.submitted = false;
+        // this.submitted = false;city
         // this.toastr.error(error.error.message, 'Profile Error');
       });
     }
@@ -275,6 +342,8 @@ export class ProfileComponent implements OnInit {
     this.isFormControlEnable = true;
     this.profileForm.controls['home_airport'].enable();
     this.profileForm.controls['country_code'].enable();
+    this.profileForm.controls['country_id'].enable();
+    this.profileForm.controls['state_id'].enable();
   }
 
   onRemove(event, item) {

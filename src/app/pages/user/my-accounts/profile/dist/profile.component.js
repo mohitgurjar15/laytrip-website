@@ -55,6 +55,8 @@ var ProfileComponent = /** @class */ (function () {
         this.departureAirport = {};
         this.arrivalAirport = {};
         this.countries = [];
+        this.countries_code = [];
+        this.stateList = [];
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.loadingValue.emit(true);
@@ -68,7 +70,7 @@ var ProfileComponent = /** @class */ (function () {
             first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             dob: ['', forms_1.Validators.required],
-            country_code: ['+1', [forms_1.Validators.required]],
+            country_code: ['', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             address: [''],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
@@ -76,7 +78,11 @@ var ProfileComponent = /** @class */ (function () {
             profile_pic: [''],
             passport_expiry: [''],
             passport_number: [''],
-            home_airport: ['']
+            home_airport: [''],
+            city: [''],
+            state_id: [''],
+            country_id: [''],
+            zip_code: ['']
         }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });
         this.getProfileInfo();
         this.getCountry();
@@ -91,12 +97,49 @@ var ProfileComponent = /** @class */ (function () {
                     countryCode: country.phonecode,
                     flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
-            }, function (error) {
-                if (error.status === 401) {
-                    _this.router.navigate(['/']);
-                }
             });
+            var countries_code = data.map(function (country) {
+                return {
+                    id: country.id,
+                    name: country.phonecode + ' (' + country.iso2 + ')',
+                    countryCode: country.phonecode,
+                    country_name: country.name + ' ' + country.phonecode,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
+                };
+            });
+            var filteredArr = countries_code.reduce(function (acc, current) {
+                var x = acc.find(function (item) { return item.countryCode == current.countryCode; });
+                if (!x) {
+                    return acc.concat([current]);
+                }
+                else {
+                    return acc;
+                }
+            }, []);
+            _this.countries_code = filteredArr;
+            _this.setUSCountryInFirstElement(_this.countries);
         });
+    };
+    ProfileComponent.prototype.getStates = function (countryId) {
+        var _this = this;
+        this.genericService.getStates(countryId.id).subscribe(function (data) {
+            _this.stateList = data;
+        }, function (error) {
+            if (error.status === 401) {
+                localStorage.setItem('userToken', "");
+                _this.router.navigate(['/login']);
+            }
+        });
+    };
+    ProfileComponent.prototype.setUSCountryInFirstElement = function (countries) {
+        var usCountryObj = countries.find(function (x) { return x.id === 233; });
+        var removedUsObj = countries.filter(function (obj) { return obj.id !== 233; });
+        this.countries = [];
+        removedUsObj.sort(function (a, b) {
+            return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
+        });
+        removedUsObj.unshift(usCountryObj);
+        this.countries = removedUsObj;
     };
     ProfileComponent.prototype.selectGender = function (event, type) {
         if (this.isFormControlEnable) {
@@ -172,19 +215,18 @@ var ProfileComponent = /** @class */ (function () {
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
                 dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
-                country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '',
+                country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
                 phone_no: res.phoneNo,
-                state_id: res.state.name,
-                city_name: res.cityName,
+                city: res.cityName,
                 address: res.address,
                 home_airport: res.airportInfo.code ? res.airportInfo.code : null,
-                language_id: res.preferredLanguage.name,
-                currency_id: res.preferredCurrency.code,
-                passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
-                passport_number: res.passportNumber
+                country_id: res.country.name ? res.country.name : null,
+                state_id: res.state.name ? res.state.name : null
             });
             _this.profileForm.controls['home_airport'].disable();
             _this.profileForm.controls['country_code'].disable();
+            _this.profileForm.controls['country_id'].disable();
+            _this.profileForm.controls['state_id'].disable();
         }, function (error) {
             _this.loadingValue.emit(false);
             if (error.status === 401) {
@@ -197,6 +239,7 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.onSubmit = function () {
         var _this = this;
+        console.log(this.profileForm.value);
         // this.submitted = true;
         var controls = this.profileForm.controls;
         this.loadingValue.emit(true);
@@ -229,14 +272,37 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("last_name", this.profileForm.value.last_name);
             formdata.append("email", this.profileForm.value.email);
             formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
-            formdata.append("address", this.profileForm.value.address);
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.is_type);
-            formdata.append("country_code", this.profileForm.value.country_code);
+            formdata.append("city_name", this.profileForm.value.city);
+            formdata.append("address", this.profileForm.value.address);
+            if (!Number.isInteger(this.profileForm.value.country_id)) {
+                console.log('here', this.selectResponse);
+                formdata.append("country_id", this.profileForm.value.country_id.id);
+            }
+            else {
+                console.log('no');
+                formdata.append("country_id", this.selectResponse.country.id);
+            }
+            if (!Number.isInteger(this.profileForm.value.state_id)) {
+                formdata.append("state_id", this.profileForm.value.state_id);
+            }
+            else {
+                formdata.append("state_id", this.selectResponse.state.id);
+            }
+            if (typeof (this.profileForm.value.country_code) != 'object') {
+                formdata.append("country_code", this.profileForm.value.country_code.name);
+            }
+            else {
+                formdata.append("country_code", this.selectResponse.countryCode);
+            }
+            formdata.append("zip_code", this.profileForm.value.zip_code ? this.profileForm.value.zip_code : this.selectResponse.zipCode);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
             this.isFormControlEnable = false;
             this.profileForm.controls['home_airport'].disable();
             this.profileForm.controls['country_code'].disable();
+            this.profileForm.controls['country_id'].disable();
+            this.profileForm.controls['state_id'].disable();
             this.userService.updateProfile(formdata).subscribe(function (data) {
                 // this.submitted = false;
                 _this.loadingValue.emit(false);
@@ -244,7 +310,7 @@ var ProfileComponent = /** @class */ (function () {
                 // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
             }, function (error) {
                 _this.loadingValue.emit(false);
-                // this.submitted = false;
+                // this.submitted = false;city
                 // this.toastr.error(error.error.message, 'Profile Error');
             });
         }
@@ -253,6 +319,8 @@ var ProfileComponent = /** @class */ (function () {
         this.isFormControlEnable = true;
         this.profileForm.controls['home_airport'].enable();
         this.profileForm.controls['country_code'].enable();
+        this.profileForm.controls['country_id'].enable();
+        this.profileForm.controls['state_id'].enable();
     };
     ProfileComponent.prototype.onRemove = function (event, item) {
         if (item.key === 'fromSearch') {

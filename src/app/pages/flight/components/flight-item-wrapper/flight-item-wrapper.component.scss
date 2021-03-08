@@ -32,6 +32,9 @@
         justify-content: space-between;
         height: 100%;
         width: 100%;
+        .left_side{
+            max-width: 100% !important;
+        }
     }
 
     @include tab-view {
@@ -62,9 +65,10 @@
 
     .pipe_wrap {
         display: flex;
-        width: 100%;
-        max-width: 45px;
+        width: 33.33%;
+        //max-width: 45px;
         font-size: 8px;
+        padding: 0 6px;
         color: $grayed_border;
 
         .pipe_line_wrps {
@@ -214,17 +218,26 @@
         display: flex;
         justify-content: space-between;
         flex-direction: row;
-        padding: 0 5px 0 0;
+        padding: 0 2px 0 0;
 
         .fl_times {
             &.duel_wrps {
                 flex-direction: column;
                 display: flex;
+                width: 33.33%;
 
                 .fl_desitines {
                     font-weight: 400;
                     color: $mid_gray_bg;
                     font-size: 8px;
+                    
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                    br{
+                        display: none;
+                    }
                 }
             }
         }
@@ -233,6 +246,7 @@
             &.duel_wrps {
                 flex-direction: column;
                 display: flex;
+                width: 33.33%;
 
                 .fl_name {
                     font-size: 12px !important;
@@ -242,6 +256,15 @@
                     @include mobile-xsm-view {
                         font-size: 10px !important;
                     }
+                }
+                .fl_name_inner{
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                br{
+                    display: none;
+                    
                 }
             }
         }

@@ -137,6 +137,16 @@ export class ListTravellerComponent implements OnInit {
             flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
           }
       });
+      const filteredArr = this.countries_code.reduce((acc, current) => {
+        const x = acc.find(item => item.countryCode == current.countryCode);
+        if (!x) {        
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+      this.countries_code = [];
+      this.countries_code = filteredArr;  
 
       this.setUSCountryInFirstElement(this.countries);
 
@@ -155,7 +165,8 @@ export class ListTravellerComponent implements OnInit {
       return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);          
     });
     removedUsObj.unshift(usCountryObj); 
-    this.countries = removedUsObj;  
+    this.countries = removedUsObj; 
+
   }
   
   checkUncheckAll() {

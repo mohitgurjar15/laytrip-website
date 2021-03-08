@@ -94,6 +94,9 @@
                             align-items: center;
                             font-size: 27px;
                             position: relative; 
+                            @include tab-view {
+                                font-size: 24px;
+                            }
                             .title_image{
                                 border-radius: 50%;
                                 border: 2px solid $pink;
@@ -124,6 +127,9 @@
                         .header_date{
                             font-size: 16px;
                             font-weight: 400;
+                            @include tab-view {
+                                font-size: 12px;
+                            }
                         }
                     }
                     .alert_boxes{

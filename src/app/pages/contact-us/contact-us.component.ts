@@ -80,11 +80,11 @@ export class ContactUsComponent implements OnInit {
     this.genericService.createEnquiry(formValue).subscribe((res: any) => {
       $('#contact_modal').modal('hide');
       this.loading = false;
-      this.toastr.success(res.message, 'Success');
+      // this.toastr.success(res.message, 'Success');
       this.ngOnInit();
     }, (error => {
       this.loading = false;
-      this.toastr.error(error.message, 'Error');
+      // this.toastr.error(error.message, 'Error');
     }));
   }
 

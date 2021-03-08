@@ -135,6 +135,9 @@
     text-transform: none;
   }
   .message_error {
-    background: #dc3545;
+    color: red;
+    background-color: transparent;
+    text-transform: none;
+    // background: #dc3545;
   }
 }

@@ -95,7 +95,7 @@ var UserService = /** @class */ (function () {
             }
         };
         console.log(options);
-        return this.http["delete"](this.apiURL + 'v1/user/account-request', options);
+        return this.http["delete"](this.apiURL + 'v1/user/account/request', options);
     };
     UserService.prototype.changePassword = function (data) {
         return this.http.put(this.apiURL + 'v1/auth/change-password', data, this.commonFunction.setHeaders());
