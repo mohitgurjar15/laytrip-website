@@ -1,3 +1,56 @@
+<!-- Start Our Mobile App Section-->
+<!-- <section class="our_mobile_apps">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="app_intro">
+                    <div class="app_icon">
+                        <img src="{{s3BucketUrl}}assets/images/icon/Appicon-new.svg" alt="App Icon" />
+                    </div>
+                    <h2 [innerHTML]="'mobile_page_title' | translate"></h2>
+                    <p>{{'mobile_page_description_1' | translate}} <span>{{'mobile_page_description_2' | translate}}</span></p>
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="{{s3BucketUrl}}assets/images/app-store-im.webp" alt="App Store Image" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="{{s3BucketUrl}}assets/images/play-store-im.webp" alt="Play Store Image" />
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="our_subscription">
+                        <p>{{'mobile_page_get_nearly_update' | translate}}</p>
+                        <div class="subscription">
+                            <form [formGroup]="subscribeForm" (ngSubmit)="subscribeNow()">
+                                <input type="email" formControlName="email" maxlength="40" tabindex="1" placeholder="{{ 'mobile_page_subscribe_email_placeholder' | translate}}" /> -->
+
+<!--                                 <button (click)="subscribeNow()">Subscribe Now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+ -->
+<!-- <button type="submit"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'mobil_page_subscribe_now_button' | translate}} <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+                            </form>
+                            <div *ngIf="(submitted  || subscribeForm.controls.email.touched) && subscribeForm.controls.email.errors" class="focus-input100 login-error">
+                                <div *ngIf="subscribeForm.controls.email.errors.required" class="text-danger">{{'mobile_page_subscribe_email_touched_validation' | translate}}
+                                </div>
+                                <div *ngIf="subscribeForm.controls.email.errors.pattern" class="text-danger">{{'email_invalid_validation' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="app_im">
+                    <img src="{{s3BucketUrl}}assets/images/mobile-apps.png" alt="Mobile Image" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+<!-- Close Our Mobile App Section-->
+
 <!-- start contect us section -->
 <form [formGroup]="subscribeForm" (ngSubmit)="subscribeNow()">
     <section class="contact_us_upper_main">
@@ -21,18 +74,17 @@
                         {{'email_invalid_validation' | translate}}
                     </p> 
                 </div> -->
-                <div *ngIf="submitted" class="message_block">
-                   
-                </div>
-                <div class="message_block" *ngIf="submitted || success || error">
-                    <p class="message_success" *ngIf="success && !error">{{successMessage}}</p>
-                    <p class="message_error err" *ngIf="error && !success">{{errorMessage}}</p>
-                    <p *ngIf="subscribeForm.controls.email.errors.required" class="message_error req">
+                <div *ngIf="submitted" class="focus-input100 message_block">
+                    <p *ngIf="subscribeForm.controls.email.errors.required" class="message_error">
                         {{'mobile_page_subscribe_email_touched_validation' | translate}}
                     </p>
                     <p *ngIf="subscribeForm.controls.email.errors.pattern" class="message_error">
                         {{'email_invalid_validation' | translate}}
                     </p>
+                </div>
+                <div class="message_block" *ngIf="success || error">
+                    <p class="message_success" *ngIf="success">{{successMessage}}</p>
+                    <p class="message_error" *ngIf="error">{{errorMessage}}</p>
                 </div>
             </div>
         </div>
