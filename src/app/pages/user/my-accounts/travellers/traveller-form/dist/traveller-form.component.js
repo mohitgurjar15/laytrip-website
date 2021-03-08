@@ -13,13 +13,14 @@ var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
 var custom_validators_1 = require("../../../../../_helpers/custom.validators");
 var TravellerFormComponent = /** @class */ (function () {
-    function TravellerFormComponent(formBuilder, router, commonFunction, toastr, cookieService, travelerService, checkOutService, modalService) {
+    function TravellerFormComponent(formBuilder, router, commonFunction, toastr, cookieService, travelerService, genericService, checkOutService, modalService) {
         this.formBuilder = formBuilder;
         this.router = router;
         this.commonFunction = commonFunction;
         this.toastr = toastr;
         this.cookieService = cookieService;
         this.travelerService = travelerService;
+        this.genericService = genericService;
         this.checkOutService = checkOutService;
         this.modalService = modalService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -44,6 +45,7 @@ var TravellerFormComponent = /** @class */ (function () {
         this.isAdult = true;
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
+        // this.getCountry();
         var location = this.cookieService.get('__loc');
         try {
             this.location = JSON.parse(location);
@@ -67,6 +69,17 @@ var TravellerFormComponent = /** @class */ (function () {
         if (this.travellerId) {
             this.setTravelerForm();
         }
+    };
+    /*  ngOnChanges(changes: SimpleChanges) {
+       this.checkOutService.getCountries.subscribe(res => {
+         this.countries = res;
+       });
+     } */
+    TravellerFormComponent.prototype.getCountry = function () {
+        var _this = this;
+        this.genericService.getCountry().subscribe(function (res) {
+            _this.checkOutService.setCountries(res);
+        });
     };
     TravellerFormComponent.prototype.setTravelerForm = function () {
         this.traveller = this.travelerInfo;
@@ -299,6 +312,9 @@ var TravellerFormComponent = /** @class */ (function () {
     __decorate([
         core_1.Output()
     ], TravellerFormComponent.prototype, "deleteTravelerId");
+    __decorate([
+        core_1.Input()
+    ], TravellerFormComponent.prototype, "countries_code");
     TravellerFormComponent = __decorate([
         core_1.Component({
             selector: 'app-traveller-form',

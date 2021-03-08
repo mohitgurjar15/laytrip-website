@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '../guard/auth.guard';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
 import { CcpaComponent } from './ccpa/ccpa.component';
@@ -39,6 +40,7 @@ const routes: Routes = [
             },
             {
                 path: 'account',
+                canActivate: [AuthGuard],
                 loadChildren: () => import('./user/user.module').then(m => m.UserModule)
             },
             {

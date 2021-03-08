@@ -78,6 +78,7 @@
       }
 
       .edit_btns {
+        margin: 25px 0 15px;
         a {
           background-color: transparent;
           color: $text_light_yellow;
@@ -99,12 +100,11 @@
         .card {
           border: 1px solid $grayed_border;
           border-radius: 10px;
-          padding: 15px;
 
           .new_card {
             border: 1px solid $box-border-color;
             border-radius: 10px;
-            margin: 0;
+            margin: 15px;
 
             .heade_wrps {
               img {

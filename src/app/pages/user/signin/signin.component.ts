@@ -10,6 +10,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
+import { AppleSecurityLoginPopupComponent } from '../apple-security-login-popup/apple-security-login-popup.component';
 
 declare var $: any;
 
@@ -53,9 +54,19 @@ export class SigninComponent implements OnInit {
       password: ['', [Validators.required]]
     });
     this.guestUserId = localStorage.getItem('__gst') || "";
+    // this.openAppleSecurityLogin();
   }
 
   get f() { return this.loginForm.controls; }
+
+  openAppleSecurityLogin() {
+    this.modalService.open(AppleSecurityLoginPopupComponent, {
+      windowClass: 'apple_security_login_block', centered: true, backdrop: 'static',
+      keyboard: false
+    }).result.then((result) => {
+
+    });
+  }
 
   onSubmit() {
     this.apiError = '';

@@ -14,19 +14,21 @@ import { AddCardComponent } from '../../../../components/add-card/add-card.compo
 })
 export class AccountComponent implements OnInit {
 
-  @ViewChild(AddCardComponent, {static: false}) addCardRef: AddCardComponent;
-  loading : boolean = true; 
-  isSocialLogin : boolean = false; 
+  @ViewChild(AddCardComponent, { static: false }) addCardRef: AddCardComponent;
+  loading: boolean = true;
+  isSocialLogin: boolean = false;
   closeResult = '';
   s3BucketUrl = environment.s3BucketUrl;
-  isRequireBackupFile : boolean = false;
+  isRequireBackupFile: boolean = false;
   userDetails;
   cardListChangeCount: number = 0;
+  add_new_card = false;
+  totalCard: number = 0;
 
   constructor(
     private modalService: NgbModal,
-    private userService : UserService,
-    private toastrService : ToastrService,
+    private userService: UserService,
+    private toastrService: ToastrService,
 
 
   ) { }
@@ -35,20 +37,22 @@ export class AccountComponent implements OnInit {
     this.userDetails = getLoginUserInfo();
     this.isSocialLogin = this.userDetails.socialAccountId.length > 0 ? true : false;;
   }
-  getLoadingValue(event){
-    if(event === false){
+  getLoadingValue(event) {
+    if (event === false) {
       this.loading = false;
     } else {
-      this.loading = true;      
+      this.loading = true;
     }
   }
 
   open(content) {
-    this.modalService.open(content, {windowClass:'delete_account_window', centered: true, backdrop: 'static',
-    keyboard: false}).result.then((result) => {
+    this.modalService.open(content, {
+      windowClass: 'delete_account_window', centered: true, backdrop: 'static',
+      keyboard: false
+    }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      
+
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
@@ -63,36 +67,50 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  deleteAccount(){
+  deleteAccount() {
     this.loading = true;
-    
-    this.userService.deleteAccount(this.isRequireBackupFile).subscribe((data: any) => {      
+
+    this.userService.deleteAccount(this.isRequireBackupFile).subscribe((data: any) => {
       this.modalService.dismissAll();
       this.loading = false;
-      this.toastrService.success(data.message,'Deleted Account Successfully')
+      this.toastrService.success(data.message, 'Deleted Account Successfully')
       redirectToLogin();
     }, (error: HttpErrorResponse) => {
       this.modalService.dismissAll();
       this.loading = false;
-      this.toastrService.error(error.error.message,'Deleted Account Error')
-      if(error.status == 401){
+      this.toastrService.error(error.error.message, 'Deleted Account Error')
+      if (error.status == 401) {
         // redirectToLogin();
-      }       
-    }); 
+      }
+    });
   }
 
-  changeDeleteAccountForBackup(event){
+  changeDeleteAccountForBackup(event) {
     this.isRequireBackupFile = false;
-    if(event.target.checked){
+    if (event.target.checked) {
       this.isRequireBackupFile = true;
     }
   }
 
-  ngOnDestroy() { 
+  totalNumberOfcard(event) {
+    console.log(event);
+    this.totalCard = event;
+  }
+
+  ngOnDestroy() {
     this.addCardRef.ngOnDestroy();
   }
 
-  getCardListChange(data){
-    this.cardListChangeCount=data;
+  addNewCard() {
+    this.add_new_card = true;
+  }
+
+  closeNewCardPanel(event) {
+    this.add_new_card = event;
+  }
+
+  getCardListChange(data) {
+    this.add_new_card = false;
+    this.cardListChangeCount = data;
   }
 }

@@ -228,7 +228,27 @@ var TravelerFormComponent = /** @class */ (function () {
         var _this = this;
         this.checkOutService.getCountries.subscribe(function (res) {
             _this.countries = res;
+            _this.setUSCountryInFirstElement(_this.countries);
         });
+    };
+    TravelerFormComponent.prototype.setUSCountryInFirstElement = function (countries) {
+        var usCountryObj = countries.find(function (x) { return x.id === 233; });
+        var removedUsObj = countries.filter(function (obj) { return obj.id !== 233; });
+        this.countries = [];
+        removedUsObj.sort(function (a, b) {
+            return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
+        });
+        removedUsObj.unshift(usCountryObj);
+        var filteredArr = removedUsObj.reduce(function (acc, current) {
+            var x = acc.find(function (item) { return item.phonecode == current.phonecode; });
+            if (!x) {
+                return acc.concat([current]);
+            }
+            else {
+                return acc;
+            }
+        }, []);
+        this.countries = filteredArr;
     };
     TravelerFormComponent.prototype.patch = function () {
         var _this = this;

@@ -105,7 +105,7 @@
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
-        flex-direction: column;
+        // flex-direction: column;
         height: 100%;
         a {
             background-color: transparent;
@@ -223,4 +223,8 @@
             }
         }
     }
+}
+
+.custom-w-26 {
+    width: 26% !important;
 }

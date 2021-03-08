@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../../environments/environment';
 import * as moment from 'moment';
@@ -12,6 +12,7 @@ import { TravelerService } from '../../../../../services/traveler.service';
 import { phoneAndPhoneCodeValidation } from '../../../../../_helpers/custom.validators';
 import { CheckOutService } from '../../../../../services/checkout.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GenericService } from '../../../../../services/generic.service';
 declare var $: any;
 
 @Component({
@@ -29,7 +30,7 @@ export class TravellerFormComponent implements OnInit {
   @Output() travelerFormChange = new EventEmitter();
   @Output() deleteTravelerId = new EventEmitter();
   // countries = [];
-  countries_code = [];
+  @Input() countries_code :any= [];
   is_gender: boolean = true;
   is_type: string = 'M';
   travellerForm: FormGroup;
@@ -58,6 +59,7 @@ export class TravellerFormComponent implements OnInit {
     private toastr: ToastrService,
     private cookieService: CookieService,
     private travelerService: TravelerService,
+    private genericService: GenericService,
     private checkOutService: CheckOutService,
     public modalService: NgbModal
 
@@ -65,6 +67,7 @@ export class TravellerFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // this.getCountry();
     let location: any = this.cookieService.get('__loc');
     try {
       this.location = JSON.parse(location);
@@ -91,6 +94,18 @@ export class TravellerFormComponent implements OnInit {
     if (this.travellerId) {
       this.setTravelerForm();
     }
+  }
+  
+ /*  ngOnChanges(changes: SimpleChanges) {
+    this.checkOutService.getCountries.subscribe(res => {
+      this.countries = res;
+    });
+  } */
+
+  getCountry() {
+    this.genericService.getCountry().subscribe(res => {
+      this.checkOutService.setCountries(res);
+    })
   }
 
   setTravelerForm() {

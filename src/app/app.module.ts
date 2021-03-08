@@ -15,6 +15,7 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AuthGuard } from './guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { environment } from '../environments/environment';
           },
         ] 
       } as SocialAuthServiceConfig,
-    }
+    },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

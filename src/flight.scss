@@ -1354,7 +1354,7 @@
 
                 &[aria-expanded="true"] {
                     &:after {
-						padding: 5px 9px;
+                        padding: 5px 9px;
                         margin-left: 10px;
                         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
                         background-position: right;
@@ -6026,6 +6026,84 @@
 }
 
 //<!-- Close Payment ifno Modal css -->
+
+.custom_range_slide {
+    &.redeem_laypoint {
+        .ng5-slider {
+            .ng5-slider-pointer {
+                height: 0;
+                width: 0;
+                border: none;
+            }
+        }
+    }
+}
+
+.address_ng {
+    &.ng-select-opened {
+        .ng-select-container {
+            .ng-arrow {
+                border: none;
+                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                background-position: right;
+                background-repeat: no-repeat;
+                background-size: 11px;
+                transition: 0.3s;
+                width: 12px !important;
+                height: 10px !important;
+            }
+        }
+    }
+    &.ng-select-disabled{
+        .ng-select-container{
+            background-color: $background-white;
+        }
+    }
+    .ng-select-container {
+        border: none;
+        background-color: $background-white;
+        &:hover {
+            box-shadow: none;
+            outline: none;
+        }
+
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
+        .ng-value-container {
+            padding-left: 0;
+
+            .ng-placeholder{
+                font-size: 16px;
+                color: $mid_gray_bg;
+            }
+
+            .ng-value {
+                .ng-value-label {
+                    font-size: 16px;
+                color: $mid_gray_bg;
+                }
+            }
+
+            .ng-input {
+                padding: 0 !important; 
+            }
+        }
+
+        .ng-arrow {
+            border: none;
+            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: 11px;
+            transition: 0.3s;
+            width: 12px !important;
+            height: 10px !important;
+        }
+    }
+}
+
 //<!-- Start Facebook Loader css -->
 .fb_animation {
     -webkit-animation-duration: 1.25s;

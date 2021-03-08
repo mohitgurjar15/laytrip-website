@@ -31,7 +31,7 @@
                     </div>
                     <div class="error">
                         <small class="error_field credit_card_error month_year_error" id="month"
-                            style="display:none">Please enter valid expiry date.</small>
+                            style="display:none">Enter valid expiration.</small>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-sm-10">
@@ -43,8 +43,10 @@
                     <!-- <div class="save_btn_wrps">
                         <a href="javascript:void(0);">Save</a>
                     </div> -->
-                    <div class="save_btn_wrps">
-                        <input type="submit" id="submit_button" class="button " value="Save">
+                    <div class="save_btn_wrps d-flex justify-content-end">
+                        <input type="button" class="button mr-2 custom-w-26" value="Close" (click)="closeNewCardPanel()"
+                            [hidden]="totalCard === 0">
+                        <input type="submit" id="submit_button" class="button w-25 " value="Save">
                         <div class="section_description" id="cardError">
                             <span class="sec_text pt-1" id="cardErrorMessage"></span>
                             <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"

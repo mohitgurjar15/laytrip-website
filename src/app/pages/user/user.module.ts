@@ -9,9 +9,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    UserRoutingModule, 
+    UserRoutingModule,
     NgbModule,
-    
+
   ],
   declarations: [],
 })

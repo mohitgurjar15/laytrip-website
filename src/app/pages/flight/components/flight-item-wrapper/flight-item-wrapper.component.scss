@@ -32,6 +32,9 @@
         justify-content: space-between;
         height: 100%;
         width: 100%;
+        .left_side{
+            max-width: 100% !important;
+        }
     }
 
     @include tab-view {
@@ -220,11 +223,20 @@
             &.duel_wrps {
                 flex-direction: column;
                 display: flex;
+                width: 30%;
 
                 .fl_desitines {
                     font-weight: 400;
                     color: $mid_gray_bg;
                     font-size: 8px;
+                    
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                    br{
+                        display: none;
+                    }
                 }
             }
         }
@@ -233,6 +245,7 @@
             &.duel_wrps {
                 flex-direction: column;
                 display: flex;
+                width: 30%;
 
                 .fl_name {
                     font-size: 12px !important;
@@ -242,6 +255,15 @@
                     @include mobile-xsm-view {
                         font-size: 10px !important;
                     }
+                }
+                .fl_name_inner{
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                br{
+                    display: none;
+                    
                 }
             }
         }
@@ -715,6 +737,9 @@
                         overflow-y: auto;
                         max-height: 150px;
 
+                        a{
+                            text-decoration: underline;
+                        }
                         @include tab-view {
                             margin-top: 0;
                         }
