@@ -139,6 +139,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getStates(countryId) {
+
     this.genericService.getStates(countryId.id).subscribe((data: any) => {
       this.stateList = data;
     }, (error: HttpErrorResponse) => {
@@ -225,7 +226,10 @@ export class ProfileComponent implements OnInit {
       this.image = res.profilePic;
       this.selectResponse = res;
       this.is_type = res.gender ? res.gender : 'M';
-
+      if(typeof res.country.name =='undefined' ){
+        var countryId = {id:233};
+        this.getStates(countryId);
+      }
       this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
       this.profileForm.patchValue({
         first_name: res.firstName,
@@ -237,10 +241,10 @@ export class ProfileComponent implements OnInit {
         dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
         country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
         phone_no: res.phoneNo,
-        city : res.cityName,
+        // city : res.cityName,
         address: res.address,
         home_airport: res.airportInfo.code ? res.airportInfo.code : null,
-        country_id: res.country.name ? res.country.name : null,
+        country_id: res.country.name ? res.country.name : 'United States',
         state_id: res.state.name ? res.state.name : null,
         // passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
         // passport_number: res.passportNumber
@@ -261,7 +265,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.profileForm.value)
     // this.submitted = true;
     const controls = this.profileForm.controls;
     this.loadingValue.emit(true);
@@ -299,11 +302,9 @@ export class ProfileComponent implements OnInit {
       formdata.append("address", this.profileForm.value.address);
      
       if(!Number.isInteger(this.profileForm.value.country_id)){
-        console.log('here',this.selectResponse);
-        formdata.append("country_id", this.profileForm.value.country_id.id);
+        formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : 233);
       } else {
-        console.log('no');
-        formdata.append("country_id", this.selectResponse.country.id);
+        formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
       }
       if(!Number.isInteger(this.profileForm.value.state_id)){
         formdata.append("state_id", this.profileForm.value.state_id);
