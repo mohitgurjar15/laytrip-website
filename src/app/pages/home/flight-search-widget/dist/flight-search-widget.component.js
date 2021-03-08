@@ -44,7 +44,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             format: 'MM/DD/YYYY',
             displayFormat: 'MM/DD/YYYY'
         };
-        this.customStartDateValidation = "2021-06-02";
+        this.customStartDateValidation = "2021-06-01";
         this.customEndDateValidation = "2021-06-07";
         this.returnDate = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
         this.totalPerson = 1;
@@ -77,10 +77,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.departureDate = moment(this.customStartDateValidation).toDate();
-        if (new Date(this.customStartDateValidation) < new Date()) {
+        if (new Date(this.customStartDateValidation) <= new Date()) {
             this.departureDate = moment().add('30', 'days').toDate();
         }
-        console.log(new Date(this.customStartDateValidation), new Date());
         window.scrollTo(0, 0);
         this.countryCode = this.commonFunction.getUserCountry();
         if (this.calenderPrices.length == 0) {
@@ -216,7 +215,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
               queryParams: queryParams,
               queryParamsHandling: 'merge'
             }); */
-            console.log(this);
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
                 _this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
             });

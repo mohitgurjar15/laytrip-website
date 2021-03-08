@@ -44,7 +44,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   flightDepartureMinDate;
   flightReturnMinDate;
-  customStartDateValidation = "2021-06-02";
+  customStartDateValidation = "2021-06-01";
   customEndDateValidation = "2021-06-07";
   departureDate;
   returnDate : any = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
@@ -103,11 +103,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   ngOnInit(): void {
     this.departureDate = moment(this.customStartDateValidation).toDate();
     
-    if(new Date(this.customStartDateValidation) < new Date() ){
-
+    if(new Date(this.customStartDateValidation) <= new Date() ){
       this.departureDate = moment().add('30','days').toDate();      
     }
-    console.log(new Date(this.customStartDateValidation) , new Date());
 
     window.scrollTo(0, 0);
     this.countryCode = this.commonFunction.getUserCountry();
@@ -257,7 +255,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         queryParams: queryParams,
         queryParamsHandling: 'merge'
       }); */
-      console.log(this)
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
