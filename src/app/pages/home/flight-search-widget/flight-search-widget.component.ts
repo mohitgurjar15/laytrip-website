@@ -97,7 +97,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
-    
+    console.log(this.departureDate)
   }
     
   ngOnInit(): void {
@@ -144,6 +144,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         // this.returnDate = new Date(params['arrival_date']);
         this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
         this.rangeDates = [this.departureDate, this.returnDate];
+      console.log(this.rangeDates)
       } else {
         this.calPrices = false;
       }
@@ -189,7 +190,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     date.setDate(date.getDate() + 30);
 
     if(curretdate < juneDate && daysDiffFromCurToJune > 30 ){    
-      this.flightDepartureMinDate =  new Date(juneDate);
+      this.flightDepartureMinDate =  moment(juneDate).toDate();
       this.departureDate = this.flightDepartureMinDate; 
     } else if(daysDiffFromCurToJune < 30){
       this.flightDepartureMinDate =  date;

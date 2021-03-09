@@ -73,6 +73,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.flightReturnMinDate = this.departureDate;
         this.countryCode = this.commonFunction.getUserCountry();
         this.rangeDates = [this.departureDate, this.returnDate];
+        console.log(this.departureDate);
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -112,6 +113,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 // this.returnDate = new Date(params['arrival_date']);
                 _this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
                 _this.rangeDates = [_this.departureDate, _this.returnDate];
+                console.log(_this.rangeDates);
             }
             else {
                 _this.calPrices = false;
@@ -151,7 +153,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
         date.setDate(date.getDate() + 30);
         if (curretdate < juneDate && daysDiffFromCurToJune > 30) {
-            this.flightDepartureMinDate = new Date(juneDate);
+            this.flightDepartureMinDate = moment(juneDate).toDate();
             this.departureDate = this.flightDepartureMinDate;
         }
         else if (daysDiffFromCurToJune < 30) {

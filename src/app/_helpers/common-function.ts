@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
 import { getLoginUserInfo } from './jwt.helper';
 import { v4 as uuidv4 } from 'uuid';
+import { ActivatedRoute, Router } from '@angular/router';
 @Injectable({
     providedIn: 'root',
 })
@@ -12,7 +13,11 @@ export class CommonFunction {
 
     constructor(
         private cookieService: CookieService,
-        private _location: Location
+        private _location: Location,
+        private router: Router,
+        private route: ActivatedRoute
+        
+        
 
     ) {
 
