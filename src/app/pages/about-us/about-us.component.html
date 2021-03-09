@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row">
         <div class="page_back_link">
-          <a class="hover-link" (click)="commonFunction.goBack()"><img style="margin-right: 5px;" src="{{s3BucketUrl}}assets/images/icon/ic_back.svg" alt=""> Back</a>
+          <a class="hover-link" [routerLink]="['/']"><img style="margin-right: 5px;" src="{{s3BucketUrl}}assets/images/icon/ic_back.svg" alt=""> Back</a>
         </div> 
 
         <div class="col-lg-12 about_page_cmn" *ngIf="loading">
