@@ -7,11 +7,23 @@
 .block_cms_page_main {
   &.page_about {
     padding: 40px 0 70px;
+
+    @include tab-view{
+      padding: 40px 0 20px;
+    }
     .page_topbanner {
       margin: 0 0 25px;
       width: 100%;
       img {
         width: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+        -o-object-position: center;
+        object-position: center;
+
+        @include tab-view {
+          max-height: 52px;
+        }
       }
     }
 
@@ -35,7 +47,19 @@
       .about_page_cmn {
         .block_cmspage_comman {
           @include tab-view {
-            padding: 10px;
+            padding: 0;
+          }
+          h3 {
+            color: $blue-text;
+            font-size: 34px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            @include tab-view {
+              font{
+              font-size: 24px;
+              line-height: 1;
+            }
+            }
           }
         }
         h3 {
@@ -44,7 +68,8 @@
           font-weight: 500;
           margin-bottom: 30px;
           @include tab-view {
-            font-size: 28px;
+            font-size: 24px;
+            line-height: 1;
           }
         }
         .detail_wpr {
@@ -53,6 +78,12 @@
           @include tab-view {
             span {
               display: none;
+            }
+          }
+          p{
+            @include tab-view {
+              font-size: 14px;
+              line-height: 24px;
             }
           }
         }
