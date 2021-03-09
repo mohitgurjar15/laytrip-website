@@ -36,7 +36,7 @@
 
     .modal-body {
         width: 100%;
-        padding: 20px;
+        padding: 0 20px 20px;
         @include tab-view {
             flex: revert;
         }
@@ -48,34 +48,56 @@
                 margin: 0;
             }
 
-            h4 {
-                font-size: 32px;
-                line-height: 28px;
-                font-weight: 500;
-                color: $active-tab-text;
-                margin: 0 0 35px;
-                text-align: center;
-
-                &.suc_title {
-                    margin: 15px 0;
-                }
-                @include tab-view {
-                    text-align: left;
-                }
-            }
-            span {
-                font-size: 14px;
-                font-weight: 400;
+            small{
                 color: $text_grey_dark;
-                padding: 0;
+                font-size: 14px;
                 text-align: center;
+                width: 100%;
+                margin: 15px 0;
             }
-
+            
             &.success_modal {
                 text-align: center;
 
                 h4 {
                     text-align: center;
+                }
+            }
+        }
+        .form_wrps{
+            .duel_input{
+                display: flex;
+                justify-content: space-between;
+
+                @include mobile-sm-view{
+                    flex-direction: column;
+                }
+
+                input{
+                    max-width: 227px;
+                    margin-bottom: 20px;
+                    @include mobile-sm-view{
+                        max-width: 100%;
+                    }
+                }
+            }
+            .single_input{
+                input{
+                    margin-bottom: 20px;
+                }
+            }
+            input{
+                border: 1px solid $box-border-color;
+                border-radius: 10px;
+                height: 50px;
+                padding: 0 15px;
+                width: 100%;
+                background-color: $background-white;
+                color: $mid_gray_bg;
+                &:focus{
+                    outline: none;
+                    box-shadow: none;
+                    background-color: $background-white;
                 }
             }
         }
