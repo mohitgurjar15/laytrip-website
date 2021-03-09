@@ -19,7 +19,6 @@ export class CartItemComponent implements OnInit {
   cartAlerts=[];
   origin:string='';
 
-
   constructor(
     public commonFunction: CommonFunction,
     private cd: ChangeDetectorRef,
@@ -29,7 +28,8 @@ export class CartItemComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.origin = window.location.pathname;
+
+    this.origin= window.location.pathname;
   }
 
   ngOnChanges(changes: SimpleChanges) {
