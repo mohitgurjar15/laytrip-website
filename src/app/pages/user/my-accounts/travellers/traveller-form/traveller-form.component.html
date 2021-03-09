@@ -135,8 +135,8 @@
                 <button class="hover-link" *ngIf="traveller.roleId != 6"
                     (click)="openDeleteModal(deleteContent,travellerId)">Delete</button>
             </span>
-            <button (click)="onSubmit()" class="hover-link">{{ travellerId ? 'Update' : ''}}
-            </button>
+            <button (click)="onSubmit()" class="hover-link">Edit</button>
+            <button (click)="onSubmit()" class="hover-link">Save</button>
         </span>
     </div>
 

@@ -31,6 +31,7 @@ var ListTravellerComponent = /** @class */ (function () {
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.pageSize = 10;
         this.showPaginationBar = false;
+        this.showNewForm = false;
         this.traveller = [];
         this.loadingValue = new core_1.EventEmitter();
         this.isMasterSel = false;
@@ -220,6 +221,9 @@ var ListTravellerComponent = /** @class */ (function () {
             this.travelers = this.travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
             this.travelers.push(traveler);
         }
+    };
+    ListTravellerComponent.prototype.showForm = function () {
+        this.showNewForm = true;
     };
     __decorate([
         core_1.ViewChild(traveller_form_component_1.TravellerFormComponent, { static: false })
