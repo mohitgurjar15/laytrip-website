@@ -45,7 +45,7 @@
                                     </svg>
                                     <span class="typeName"> 
                                         {{traveler.roleId==6 ? 'Primary Traveler ' : ''}}
-                                        {{traveler.user_type | titlecase }}
+                                        {{traveler.user_type+' ' | titlecase }}
                                     </span>
                                     <span class="nameUser">
                                         {{ ' '+traveler.firstName | titlecase }} {{traveler.lastName | titlecase}}
