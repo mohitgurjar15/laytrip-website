@@ -77,6 +77,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.departureDate = moment(this.customStartDateValidation).toDate();
+        if (new Date(this.customStartDateValidation) <= new Date()) {
+            this.departureDate = moment().add('30', 'days').toDate();
+        }
         window.scrollTo(0, 0);
         this.countryCode = this.commonFunction.getUserCountry();
         if (this.calenderPrices.length == 0) {
@@ -146,12 +149,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var curretdate = moment().format();
         var juneDate = moment(this.customStartDateValidation).format('YYYY-MM-DD');
         var daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
-        date.setDate(date.getDate() + 7);
-        if (curretdate < juneDate && daysDiffFromCurToJune > 7) {
+        date.setDate(date.getDate() + 30);
+        if (curretdate < juneDate && daysDiffFromCurToJune > 30) {
             this.flightDepartureMinDate = new Date(juneDate);
             this.departureDate = this.flightDepartureMinDate;
         }
-        else if (daysDiffFromCurToJune < 7) {
+        else if (daysDiffFromCurToJune < 30) {
             this.flightDepartureMinDate = date;
             this.departureDate = date;
         }
@@ -212,7 +215,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
               queryParams: queryParams,
               queryParamsHandling: 'merge'
             }); */
-            console.log(this);
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
                 _this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
             });

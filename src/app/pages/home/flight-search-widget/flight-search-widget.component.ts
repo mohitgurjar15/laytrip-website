@@ -108,6 +108,10 @@ export class FlightSearchWidgetComponent implements OnInit {
   ngOnInit(): void {
     this.departureDate = moment(this.customStartDateValidation).toDate();
     
+    if(new Date(this.customStartDateValidation) <= new Date() ){
+      this.departureDate = moment().add('30','days').toDate();      
+    }
+
     window.scrollTo(0, 0);
     this.countryCode = this.commonFunction.getUserCountry();
     if (this.calenderPrices.length == 0) {
@@ -179,12 +183,12 @@ export class FlightSearchWidgetComponent implements OnInit {
     
     let daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
 
-    date.setDate(date.getDate() + 7);
+    date.setDate(date.getDate() + 30);
 
-    if(curretdate < juneDate && daysDiffFromCurToJune > 7 ){    
+    if(curretdate < juneDate && daysDiffFromCurToJune > 30 ){    
       this.flightDepartureMinDate =  new Date(juneDate);
       this.departureDate = this.flightDepartureMinDate; 
-    } else if(daysDiffFromCurToJune < 7){
+    } else if(daysDiffFromCurToJune < 30){
       this.flightDepartureMinDate =  date;
       this.departureDate = date; 
     } else {
@@ -249,7 +253,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         queryParams: queryParams,
         queryParamsHandling: 'merge'
       }); */
-      console.log(this)
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
