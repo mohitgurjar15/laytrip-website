@@ -95,6 +95,18 @@ export class TravellerFormComponent implements OnInit {
       this.setTravelerForm();
     }
   }
+
+  loadJquery() {
+    $(document).ready(function () {
+      $('.error_border').each(function(){
+        $(this).removeClass('error_border');
+     });
+     
+      if ($('.tel_span .form-control').hasClass('.ng-touched .ng-invalid')){
+          $(".tel_span").toggleClass("error_border");
+      }
+    });
+  }
   
  /*  ngOnChanges(changes: SimpleChanges) {
     this.checkOutService.getCountries.subscribe(res => {
