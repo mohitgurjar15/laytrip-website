@@ -181,6 +181,33 @@
             }
         }
     }
+    &.from_to_inputs{
+        .ng-input {
+            input {
+                padding: 0;
+            }
+        }
+        .ng-select-container {
+            .ng-value-container {
+                //width: 100%;
+                .ng-placeholder {
+                    padding: 0;
+                }
+            }
+            .ng-clear-wrapper{
+                display: none;
+                /* position: absolute;
+                top: 0;
+                right: 0;
+                span{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                } */
+            }
+        }
+        
+    }
     &.country_code{
         .ng-select-container{
             .ng-value-container {
