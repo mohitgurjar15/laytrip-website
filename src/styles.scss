@@ -403,6 +403,12 @@ select {
 
 .error_field {
   color: $error-color;
+
+  .error_img{
+    position: absolute;
+    top: 35px;
+    right: 15px;
+  }
 }
 
 .block_apply_laycredits {
