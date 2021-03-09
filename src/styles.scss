@@ -1326,7 +1326,7 @@ select {
                         left: 50%;
                         transform: translate(-50%, -50%);
                         border-radius: 50%;
-                        z-index: 9;
+                        z-index: 99;
 
                         img {
                           width: 14px;
@@ -2203,7 +2203,7 @@ select {
                     left: 50%;
                     transform: translate(-50%, -50%);
                     border-radius: 50%;
-                    z-index: 9;
+                    z-index: 99;
 
                     img {
                       width: 14px;
