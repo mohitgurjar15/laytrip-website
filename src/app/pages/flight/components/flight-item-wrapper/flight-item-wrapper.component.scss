@@ -383,6 +383,9 @@
                                 @include tab-view {
                                     max-width: 36px;
                                 }
+                                @include mobile-sm-view {
+                                    max-width: 29px;
+                                }
                             }
 
                             .fl_name {
