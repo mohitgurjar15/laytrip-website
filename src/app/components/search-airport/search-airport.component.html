@@ -1,10 +1,10 @@
 <div [formGroup]="form" class="lab_wrapper">
     <label>{{label}}</label>
     <ng-select [formControlName]="controlName" [loading]="false" id="{{id}}" [selectOnTab]="true" [items]="data"
-        bindLabel="display_name" bindValue="city" [clearable]="false" minTermLength="3" notFoundText=""
+        bindLabel="display_name" bindValue="city" [clearable]="true" notFoundText=""
         [virtualScroll]="true" [(ngModel)]="defaultCity" (search)="onChangeSearch($event)" loadingText=""
-        (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input custom_inputs"
-        placeholder="{{ placeHolder }}" [tabIndex]="tabIndex">
+        (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input custom_inputs from_to_inputs"
+        placeholder="{{ placeHolder }}" [tabIndex]="tabIndex" [clearSearchOnAdd]="true" [clearOnBackspace]="true" [hideSelected]="true"	>
         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
             <div [ngClass]="(item.parentId==0)?'parent':'child'">
                 {{item.code}} {{item.city}},{{item.country}}-{{item.name}}

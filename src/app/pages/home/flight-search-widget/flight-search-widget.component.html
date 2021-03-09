@@ -70,12 +70,13 @@
                                 [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
                                 <div class="search_area">
                                     <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'"
-                                        [id]="'fromSearch'" [label]="'from' | translate" [placeHolder]=fromSearch.city
+                                        [id]="'fromSearch'" [label]="'from' | translate" placeHolder="From where?"
                                         [defaultSelected]="" [tabIndex]=1 [airport]=fromSearch
-                                        [defaultCity]=fromSearch.city (changeValue)="destinationChangedValue($event)">
+                                        [defaultCity]=fromSearch.city (changeValue)="destinationChangedValue($event)"
+                                        (click)="showAirportSuggestion('from')" (searchItem)="searchItem($event)">
                                     </app-search-airport>
                                 </div>
-                                <!-- <app-airport-suggestion></app-airport-suggestion> -->
+                                <app-airport-suggestion *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
                             </div>
                             <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
                                 <a (click)="swapAirport()">
@@ -88,12 +89,13 @@
                                 [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
                                 <div class="search_area">
                                     <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'"
-                                        [id]="'toSearch'" [label]="'to' | translate" [placeHolder]=toSearch.city
+                                        [id]="'toSearch'" [label]="'to' | translate" placeHolder="Where to?"
                                         [defaultSelected]="" [tabIndex]=2 [airport]=toSearch [defaultCity]=toSearch.city
-                                        (changeValue)="destinationChangedValue($event)">
+                                        (changeValue)="destinationChangedValue($event)"
+                                        (click)="showAirportSuggestion('to')" (searchItem)="searchItem($event)">
                                     </app-search-airport>
                                 </div>
-                                <!-- <app-airport-suggestion></app-airport-suggestion> -->
+                                <app-airport-suggestion *ngIf="showToAirportSuggestion" [airport]=toSearch type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
                             </div>
                         </li>
                         <li class="grid_box secound">
@@ -136,10 +138,6 @@
                                         [numberOfMonths]="2" (onSelect)=returnDateUpdate($event) [readonlyInput]="true">
 
                                     </p-calendar>
-                                    <!-- <div class="prev-next">
-                                        <a (click)="dateChange('departure','previous')">{{'prev' | translate}}</a>
-                                        <a (click)="dateChange('departure','next')">{{'next' | translate}}</a>
-                                    </div> -->
                                 </div>
                             </div>
                             <!-- <div class="date_to">

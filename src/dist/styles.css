@@ -10223,6 +10223,17 @@ h3 {
   --mobile-bkp: $mobile-bkp;
 }
 
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
 }
@@ -10322,6 +10333,35 @@ h3 {
   background-position: left 25px center;
   color: #808080;
 }
+@media (max-width: 768px) {
+  .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+    padding: 5px 5px 5px 24px !important;
+    background-position: left 5px center;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 3px 0 0 0;
+  max-width: 275px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 175px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
+  padding-left: 0;
+}
 .ng-select.ng-customClass .ng-select-container {
   height: 100%;
   border: none !important;
@@ -10347,6 +10387,16 @@ h3 {
   height: auto !important;
   border: none !important;
 }
+.ng-select.country_code .ng-select-container .ng-value-container .ng-value {
+  width: 50px;
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
+  top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
+}
 
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
   box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
@@ -10357,10 +10407,6 @@ h3 {
   height: 3px;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-selection {
-  background: #F826C1;
-}
-
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
   width: 13px;
   height: 13px;
@@ -10368,7 +10414,6 @@ h3 {
   /* to remove the default positioning */
   top: -6px;
   background-color: #fff;
-  border: 1px solid #F826C1;
   border-radius: 50%;
   outline: none;
 }
@@ -10379,6 +10424,18 @@ h3 {
 
 .redeem_laypoint .ng5-slider .ng5-slider-bubble {
   display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
 }
 
 .custom_range_slide p {
@@ -10404,12 +10461,7 @@ h3 {
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
   font-weight: bold;
-  color: #F826C1;
   display: none;
-}
-
-.custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-  background: #F826C1;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
@@ -10670,6 +10722,11 @@ a:hover {
   transition: 0.3s;
 }
 
+@media (max-width: 768px) {
+  .dobs .p-calendar {
+    width: 100%;
+  }
+}
 .dobs .form-control {
   border-radius: 0;
   border: none;
@@ -10700,9 +10757,86 @@ a:hover {
   border: none;
   padding: 0;
 }
+@media (max-width: 768px) {
+  .dobs_account .form-control input {
+    background: none;
+  }
+}
 .dobs_account .form-control input:focus {
   outline: none;
   box-shadow: none;
+}
+
+.ar_field .ng-select.ng-select-disabled.laytrip-input .ng-select-container {
+  background-color: #ffffff;
+}
+.ar_field .ng-select.laytrip-input .ng-select-container {
+  background-color: #ffffff;
+}
+.ar_field .ng-select.laytrip-input .ng-select-container .ng-value-container {
+  height: 40px;
+}
+.ar_field .ng-select.laytrip-input .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  color: #878787;
+}
+.ar_field .ng-select.laytrip-input .ng-select-container .ng-value-container .ng-value {
+  width: 100%;
+  background: transparent;
+  height: 40px;
+  border: none;
+  font-size: 16px;
+  padding: 5px 0 0 0;
+  font-weight: 400;
+  color: #878787;
+  position: relative;
+}
+.ar_field .ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input {
+  padding: 0;
+  top: 7px;
+}
+.ar_field .ng-select.laytrip-input .ng-select-container .ng-arrow-wrapper {
+  display: block;
+}
+
+.section_description {
+  border: 1px solid #F826C1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #000000;
+  z-index: 999;
+  background-color: #ffffff;
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-shadow: 0px 3px 6px #00000015;
+}
+.section_description a {
+  cursor: pointer;
+  width: 30px !important;
+}
+.section_description a img {
+  max-width: 9px;
+}
+
+p-calendar input:read-only {
+  pointer-events: auto;
+}
+
+input:read-only,
+textarea:read-only {
+  pointer-events: none;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+.form-control:read-only {
+  background-color: #ffffff;
 }
 
 input:focus::-webkit-input-placeholder {
@@ -10749,6 +10883,7 @@ textarea:focus:-ms-input-placeholder {
   border-bottom: 2px solid #d6d6d6;
   font-size: 14px;
   padding: 0;
+  bottom: 3px;
 }
 .nation_wrps .ng-select .ng-select-container {
   border: none;
@@ -10801,11 +10936,17 @@ textarea:focus:-ms-input-placeholder {
   font-size: 14px;
   padding: 0;
 }
+.telephone_wrps .tel_span .ng-select.ng-select-disabled .ng-select-container {
+  background-color: #ffffff;
+}
 .telephone_wrps .tel_span .ng-select .ng-select-container {
   border: none;
 }
 .telephone_wrps .tel_span .ng-select .ng-select-container .ng-value-container {
   padding-left: 0;
+}
+.telephone_wrps .tel_span .ng-select .ng-arrow-wrapper {
+  width: 17px;
 }
 .telephone_wrps .tel_span .ng-select .ng-arrow {
   content: "";
@@ -10822,8 +10963,9 @@ textarea:focus:-ms-input-placeholder {
 @media (max-width: 768px) {
   .telephone_wrps .tel_span .ng-select .ng-arrow {
     position: absolute;
-    right: 0;
+    right: 10px;
     height: 12px;
+    top: -5px;
   }
 }
 .telephone_wrps .tel_span .ng-select.ng-select-opened > .ng-select-container .ng-arrow {
@@ -10867,20 +11009,32 @@ select:focus {
   opacity: 0.5;
 }
 
+.disabled_addon {
+  -webkit-filter: grayscale(90%);
+  filter: grayscale(51%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .error_field {
   color: #ff0000;
 }
 
+.block_apply_laycredits .custom_range_slide {
+  /* .ng5-slider {
+    .ng5-slider-pointer {
+      border: 1px solid $pink;
+      background-color: $pink;
+    }
+
+    .ng5-slider-bar {
+      background: $pink;
+    }
+  } */
+}
 .block_apply_laycredits .custom_range_slide .point_val {
   margin: 0 15px;
   font-size: 20px;
-}
-.block_apply_laycredits .custom_range_slide .ng5-slider .ng5-slider-pointer {
-  border: 1px solid #F826C1;
-  background-color: #F826C1;
-}
-.block_apply_laycredits .custom_range_slide .ng5-slider .ng5-slider-bar {
-  background: #F826C1;
 }
 
 .coming_soon {
@@ -11151,9 +11305,14 @@ select:focus {
   border: none;
   margin-bottom: 20px;
 }
+@media (max-width: 768px) {
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs {
+    margin-bottom: 0;
+  }
+}
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li {
   display: inline-block;
-  margin: 0 20px 0 0;
+  margin: 0 10px 0 0;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li a {
   display: flex;
@@ -11197,8 +11356,34 @@ select:focus {
     font-size: 14px;
   }
 }
+@media (max-width: 768px) {
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li.upper_li {
+    margin-right: 22px;
+  }
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li.upper_li a {
+    width: 100px;
+  }
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li.upper_li a span {
+    width: 100%;
+    text-align: center;
+  }
+}
+@media (max-width: 768px) {
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li.upper_li_2 a {
+    width: 110px;
+  }
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li.upper_li_2 a span {
+    width: 100%;
+    text-align: center;
+  }
+}
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section {
-  width: 140px;
+  width: 110px;
+}
+@media (max-width: 558px) {
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section {
+    width: 100px;
+  }
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section label {
   width: 100%;
@@ -11221,7 +11406,7 @@ select:focus {
   font-size: 14px;
   color: #8188ab;
   position: relative;
-  padding: 0 20px;
+  padding: 0;
   cursor: pointer;
   justify-content: flex-end;
 }
@@ -11300,7 +11485,7 @@ select:focus {
   margin-bottom: 0;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .travellers {
-  width: 150px;
+  width: 125px;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .travellers label {
   width: 100%;
@@ -11323,7 +11508,7 @@ select:focus {
   font-size: 14px;
   color: #8188ab;
   position: relative;
-  padding: 0 20px;
+  padding: 0;
   cursor: pointer;
   justify-content: flex-end;
 }
@@ -11360,7 +11545,7 @@ select:focus {
 }
 @media (max-width: 768px) {
   .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block {
-    left: 0;
+    transform: translate(11%, 0%);
   }
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block ul {
@@ -11402,8 +11587,8 @@ select:focus {
   font-size: 18px;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block ul li .right .qtyminus:hover {
-  border: 1px solid #fc7e66;
-  color: #fc7e66;
+  border: 1px solid #F826C1;
+  color: #F826C1;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block ul li .right .qty {
   width: 30px;
@@ -11479,7 +11664,7 @@ select:focus {
 @media (max-width: 991px) {
   .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
 }
 @media (max-width: 480px) {
@@ -11487,12 +11672,17 @@ select:focus {
     flex-flow: column;
   }
 }
+@media (max-width: 768px) {
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first {
+    padding: 0;
+  }
+}
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first label {
   width: 100%;
   margin-bottom: 0px;
-  font-size: 10px;
-  color: #8188ab;
-  font-weight: 400;
+  color: #878787;
+  font-size: 11px;
+  font-weight: 500;
   padding: 0 15px;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first .search_area {
@@ -11578,6 +11768,12 @@ select:focus {
     margin-bottom: 20px;
   }
 }
+@media (max-width: 768px) {
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound {
+    margin-bottom: 5px;
+    padding: 0;
+  }
+}
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound label {
   width: 100%;
   margin-bottom: 0px;
@@ -11592,6 +11788,9 @@ select:focus {
   border-radius: 8px;
   background: #ffffff;
   position: relative;
+}
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area span.p-calendar {
+  width: 100%;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input {
   width: 100%;
@@ -11656,6 +11855,12 @@ select:focus {
 @media (max-width: 575px) {
   .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third {
     width: 100%;
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 768px) {
+  .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third {
+    padding: 0;
   }
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third .serch_btn {
@@ -11701,12 +11906,6 @@ select:focus {
   z-index: -1;
   transition: 0.8s;
   border-radius: 0 0 50% 50%;
-}
-.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third .serch_btn button:hover {
-  border: 1px solid #F826C1;
-}
-.home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third .serch_btn button:hover:before {
-  height: 190%;
 }
 @media (max-width: 480px) {
   .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third .serch_btn {
@@ -11797,9 +11996,35 @@ select:focus {
   border: none;
   margin-bottom: 20px;
 }
+@media (max-width: 768px) {
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs {
+    margin-bottom: 0;
+  }
+}
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li {
   display: inline-block;
-  margin: 0 20px 0 0;
+  margin: 0 10px 0 0;
+}
+@media (max-width: 768px) {
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li.upper_li {
+    margin-right: 22px;
+  }
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li.upper_li a {
+    width: 100px;
+  }
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li.upper_li a span {
+    width: 100%;
+    text-align: center;
+  }
+}
+@media (max-width: 768px) {
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li.upper_li_2 a {
+    width: 110px;
+  }
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li.upper_li_2 a span {
+    width: 100%;
+    text-align: center;
+  }
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li a {
   display: flex;
@@ -11867,8 +12092,14 @@ select:focus {
   font-size: 14px;
   color: #8188ab;
   position: relative;
-  padding: 0 20px;
+  padding: 0 10px;
   cursor: pointer;
+}
+@media (max-width: 768px) {
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section .search_area .class_sec_info {
+    padding-left: 0;
+    margin-right: 10px;
+  }
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section .search_area .class_sec_info span {
   font-size: 14px;
@@ -11968,8 +12199,13 @@ select:focus {
   font-size: 14px;
   color: #8188ab;
   position: relative;
-  padding: 0 20px;
+  padding: 0 10px;
   cursor: pointer;
+}
+@media (max-width: 768px) {
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .travel_info {
+    padding-left: 0;
+  }
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .travel_info span {
   font-size: 14px;
@@ -11984,6 +12220,11 @@ select:focus {
   background-position: right;
   background-repeat: no-repeat;
   background-size: 12px;
+}
+@media (max-width: 768px) {
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .travel_info .drop_aerrow {
+    width: 20px;
+  }
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area span {
   font-size: 10px;
@@ -12004,7 +12245,8 @@ select:focus {
 }
 @media (max-width: 768px) {
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block {
-    left: 0;
+    right: 0;
+    left: auto;
   }
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block ul {
@@ -12046,8 +12288,8 @@ select:focus {
   font-size: 18px;
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block ul li .right .qtyminus:hover {
-  border: 1px solid #fc7e66;
-  color: #fc7e66;
+  border: 1px solid #F826C1;
+  color: #F826C1;
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block ul li .right .qty {
   width: 30px;
@@ -12072,12 +12314,22 @@ select:focus {
   border: 1px solid #F826C1;
   color: #F826C1;
 }
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs {
     flex-wrap: wrap;
   }
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li {
     margin: 0 5px 5px 0;
+  }
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li.class_resp {
+    width: 48%;
+  }
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li.travellers_resp {
+    width: 48%;
+  }
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li.travellers_resp .travellers .traveller_add_block {
+    right: 0;
+    left: auto;
   }
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li:last-child {
     margin: 0;
@@ -12115,12 +12367,14 @@ select:focus {
 @media (max-width: 991px) {
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
 }
 @media (max-width: 480px) {
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first {
     flex-flow: column;
+    margin-bottom: 5px;
+    padding: 0;
   }
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first label {
@@ -12172,6 +12426,7 @@ select:focus {
 @media (max-width: 480px) {
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first .flight_to {
     width: 100%;
+    margin-top: 5px;
   }
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first .switch_btn {
@@ -12207,7 +12462,8 @@ select:focus {
 @media (max-width: 991px) {
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    padding: 0;
   }
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound label {
@@ -12225,6 +12481,9 @@ select:focus {
   background: #ffffff;
   position: relative;
 }
+.search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area span.p-calendar {
+  width: 100%;
+}
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input {
   width: 100%;
   border: none;
@@ -12233,7 +12492,7 @@ select:focus {
   font-size: 16px;
   color: #000000;
   font-weight: 600;
-  padding: 0 15px 0 70px;
+  padding: 0 0 0 60px;
   background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
 }
 @media (max-width: 575px) {
@@ -12282,12 +12541,18 @@ select:focus {
 @media (max-width: 991px) {
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third {
     width: 50%;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
   }
 }
 @media (max-width: 575px) {
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third {
     width: 100%;
+    padding: 0;
+  }
+}
+@media (max-width: 768px) {
+  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third {
+    margin-bottom: 0;
   }
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third .serch_btn {
@@ -12333,12 +12598,6 @@ select:focus {
   z-index: -1;
   transition: 0.8s;
   border-radius: 0 0 50% 50%;
-}
-.search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third .serch_btn button:hover {
-  border: 1px solid #F826C1;
-}
-.search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third .serch_btn button:hover:before {
-  height: 190%;
 }
 @media (max-width: 480px) {
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third .serch_btn {
@@ -12956,6 +13215,7 @@ select:focus {
   width: auto;
   display: inline-block;
   margin-bottom: 15px;
+  color: #d6d6d6;
 }
 .site_footer .footer_top .ftr_flex_row .ftr_info a img {
   display: inline-block;
@@ -12966,6 +13226,12 @@ select:focus {
   color: #d6d6d6;
   margin: 0;
   font-weight: 600;
+  text-align: left;
+}
+@media (max-width: 768px) {
+  .site_footer .footer_top .ftr_flex_row .ftr_info p {
+    text-align: center;
+  }
 }
 .site_footer .footer_top .ftr_flex_row .ftr_info .company_contact {
   width: 100%;
@@ -13024,7 +13290,7 @@ select:focus {
 @media (max-width: 480px) {
   .site_footer .footer_top .ftr_flex_row .ftr_menu .menu_grid {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     text-align: center;
   }
 }
@@ -13056,6 +13322,7 @@ select:focus {
 }
 .site_footer .footer_top .ftr_flex_row .ftr_menu .menu_grid ul li:last-child {
   padding: 0;
+  margin: 0;
 }
 .site_footer .footer_top .ftr_flex_row .ftr_menu .menu_grid div:last-child {
   margin: 30px 0 0;
@@ -13080,8 +13347,8 @@ select:focus {
 }
 
 .block_share a {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   display: flex;
   border-radius: 30px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
@@ -13096,9 +13363,6 @@ select:focus {
 .block_share a img {
   max-width: 20px;
 }
-.block_share a:hover {
-  background-color: #F826C1;
-}
 
 .share_modal .modal-dialog {
   max-width: 514px;
@@ -13111,11 +13375,6 @@ select:focus {
 @media (max-width: 767px) {
   .share_modal .modal-dialog .modal-content {
     padding: 20px 15px;
-    bottom: 0px;
-    left: 0;
-    position: fixed;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
   }
 }
 .share_modal .modal-dialog .modal-content .block_modal_main {
@@ -13149,14 +13408,6 @@ select:focus {
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
-@media (max-width: 767px) {
-  .share_modal .modal-dialog .modal-content .block_modal_main .modal_cnt {
-    flex-flow: column;
-    height: 60vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
 }
 .share_modal .modal-dialog .modal-content .block_modal_main .modal_cnt .block_cnt_left {
   width: 50%;
@@ -13624,7 +13875,6 @@ select:focus {
   text-align: left;
 }
 .block_cms_page_main .block_cmspage_comman .block_top h6 {
-  text-transform: uppercase;
   font-size: 40px;
   font-weight: 700;
   margin: 0 0 30px;
@@ -14638,4 +14888,14 @@ body.modal-open {
 }
 body.modal-open .site_header.fixed-top {
   z-index: 9;
+}
+
+#challenge-modal iframe {
+  height: 318px;
+  box-shadow: none;
+  border-width: 0;
+  width: 250px;
+}
+#challenge-modal iframe .acs.one {
+  width: 100%;
 }

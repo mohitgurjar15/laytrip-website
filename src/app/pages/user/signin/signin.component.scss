@@ -16,6 +16,29 @@
     .modal-content {
       border-radius: 10px;
 
+      .header_img {
+        position: absolute;
+        height: 83px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        img {
+
+          width: 100%;
+          height: 100%;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+
+          @include tab-view {
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center;
+            object-position: center;
+
+          }
+        }
+      }
+
       @include tab-view {
         // position: fixed;
         // left: 0;
@@ -30,25 +53,25 @@
         width: 100%;
         padding: 20px 20px 25px;
 
-        &::before {
-          content: '';
-          background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/cms_page_banner.png);
-          background-position: top;
-          background-repeat: no-repeat;
-          height: 84px;
-          width: 100%;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-          background-size: cover;
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: 1;
-          -o-object-fit: cover;
-          object-fit: cover;
-          -o-object-position: center;
-          object-position: center;
-        }
+        // &::before {
+        //   content: '';
+        //   background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/cms_page_banner.png);
+        //   background-position: top;
+        //   background-repeat: no-repeat;
+        //   height: 84px;
+        //   width: 100%;
+        //   border-top-left-radius: 10px;
+        //   border-top-right-radius: 10px;
+        //   background-size: cover;
+        //   position: absolute;
+        //   top: 0;
+        //   left: 0;
+        //   z-index: 1;
+        //   -o-object-fit: cover;
+        //   object-fit: cover;
+        //   -o-object-position: center;
+        //   object-position: center;
+        // }
 
         .close {
           opacity: 1;
@@ -67,21 +90,21 @@
           .modal_title {
             width: 100%;
 
-            .block_im {
-              width: 100%;
-              text-align: center;
+            // .block_im {
+            //   width: 100%;
+            //   text-align: center;
 
-              img {
-                background: $text-white;
-                padding: 8px;
-                border-radius: 80px;
-                border: 1px solid $grayed_border;
-              }
+            //   img {
+            //     background: $text-white;
+            //     padding: 8px;
+            //     border-radius: 80px;
+            //     border: 1px solid $grayed_border;
+            //   }
 
-              @include tab-view {
-                display: none;
-              }
-            }
+            //   @include tab-view {
+            //     display: none;
+            //   }
+            // }
 
             h4 {
               font-size: 32px;
@@ -109,6 +132,7 @@
             ul {
               margin: 0;
             }
+
             .border_block {
               width: 100%;
               position: relative;
@@ -168,23 +192,29 @@
                     color: $mid_gray_bg;
                     -webkit-text-fill-color: $mid_gray_bg;
                   }
+
                   &:focus {
                     &::-webkit-input-placeholder {
                       color: transparent;
                       -webkit-text-fill-color: transparent;
                     }
+
                     &:-moz-placeholder {
                       color: transparent;
                     }
+
                     &::-moz-placeholder {
                       color: transparent;
                     }
+
                     &:-ms-input-placeholder {
                       color: transparent;
                     }
                   }
+
                   &.error {
                     border-color: $error-color;
+
                     //color: $error-color;
                     &::placeholder {
                       //color: $error-color;
@@ -360,9 +390,11 @@
               padding: 5px 20px;
               font-size: 12px;
               color: $api_error_text;
-              background: $api_error_bg;
+              //background: $api_error_bg;
+              background: transparent;
               text-align: center;
               border-radius: 25px;
+
               .clickHereLink {
                 text-decoration: underline;
                 color: $text-blue;
