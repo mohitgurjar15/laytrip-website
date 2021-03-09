@@ -16,6 +16,29 @@
     .modal-content {
       border-radius: 10px;
 
+      .header_img {
+        position: absolute;
+        height: 83px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        img {
+
+          width: 100%;
+          height: 100%;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+
+          @include tab-view {
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center;
+            object-position: center;
+
+          }
+        }
+      }
+
       @include tab-view {
         // position: fixed;
         // left: 0;
@@ -30,25 +53,25 @@
         width: 100%;
         padding: 20px 20px 25px;
 
-        &::before {
-          content: '';
-          background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/cms_page_banner.png);
-          background-position: top;
-          background-repeat: no-repeat;
-          height: 84px;
-          width: 100%;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-          background-size: cover;
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: 1;
-          -o-object-fit: cover;
-          object-fit: cover;
-          -o-object-position: center;
-          object-position: center;
-        }
+        // &::before {
+        //   content: '';
+        //   background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/cms_page_banner.png);
+        //   background-position: top;
+        //   background-repeat: no-repeat;
+        //   height: 84px;
+        //   width: 100%;
+        //   border-top-left-radius: 10px;
+        //   border-top-right-radius: 10px;
+        //   background-size: cover;
+        //   position: absolute;
+        //   top: 0;
+        //   left: 0;
+        //   z-index: 1;
+        //   -o-object-fit: cover;
+        //   object-fit: cover;
+        //   -o-object-position: center;
+        //   object-position: center;
+        // }
 
         // @include tab-view {
         //   height: 100vh;

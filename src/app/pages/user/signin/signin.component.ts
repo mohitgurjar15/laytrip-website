@@ -54,7 +54,7 @@ export class SigninComponent implements OnInit {
       password: ['', [Validators.required]]
     });
     this.guestUserId = localStorage.getItem('__gst') || "";
-    // this.openAppleSecurityLogin();
+    this.openAppleSecurityLogin();
   }
 
   get f() { return this.loginForm.controls; }

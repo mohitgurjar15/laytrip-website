@@ -1,14 +1,18 @@
 <div class="modal fade comman_modal signin_modal" id="sign_in_modal" data-backdrop="static" data-keyboard="false" >
 
     <div class="modal-dialog modal-dialog-centered">
+        
         <div class="modal-content">
+            <div class="header_img">
+                <img src="{{s3BucketUrl}}assets/images/cms_page_banner.png" alt="image">
+            </div>
             <div class="sign_in_modal">
                 <button type="button" class="close" (click)="closeModal()"> <img
                         src="{{s3BucketUrl}}assets/images/icon/close_white.svg" alt="Close Icon"> </button>
                 <div class="modal_top">
                     <div class="modal_title">
                         <!-- <div class="block_im"> 
-                            <img src="{{s3BucketUrl}}assets/images/modal_head_im.png" alt="image">
+                            <img src="{{s3BucketUrl}}assets/images/cms_page_banner.png" alt="image">
                         </div> -->
                         <h4>{{'sign_in' | translate}}</h4>
                     </div>
