@@ -112,6 +112,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 // this.returnDate = new Date(params['arrival_date']);
                 _this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
                 _this.rangeDates = [_this.departureDate, _this.returnDate];
+                console.log(_this.rangeDates);
             }
             else {
                 _this.calPrices = false;

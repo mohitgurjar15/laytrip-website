@@ -11,9 +11,11 @@ var core_1 = require("@angular/core");
 var moment = require("moment");
 var jwt_helper_1 = require("./jwt.helper");
 var CommonFunction = /** @class */ (function () {
-    function CommonFunction(cookieService, _location) {
+    function CommonFunction(cookieService, _location, router, route) {
         this.cookieService = cookieService;
         this._location = _location;
+        this.router = router;
+        this.route = route;
     }
     CommonFunction.prototype.closeModal = function (modelBox) {
         return modelBox = false;
@@ -186,6 +188,14 @@ var CommonFunction = /** @class */ (function () {
             return moment(date, sourceFormat).format(destFormat);
         }
         return date;
+    };
+    CommonFunction.prototype.preventNumberInput = function (event) {
+        var a = [];
+        var k = event.which;
+        for (var i = 48; i < 58; i++)
+            a.push(i);
+        if ((a.indexOf(k) >= 0))
+            event.preventDefault();
     };
     CommonFunction = __decorate([
         core_1.Injectable({

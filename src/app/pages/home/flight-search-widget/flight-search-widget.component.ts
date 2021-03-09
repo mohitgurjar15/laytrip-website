@@ -144,6 +144,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         // this.returnDate = new Date(params['arrival_date']);
         this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
         this.rangeDates = [this.departureDate, this.returnDate];
+      console.log(this.rangeDates)
       } else {
         this.calPrices = false;
       }
