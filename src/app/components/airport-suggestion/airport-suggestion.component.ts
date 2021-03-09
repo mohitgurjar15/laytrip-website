@@ -15,7 +15,7 @@ export class AirportSuggestionComponent implements OnInit {
   @Output() closeAirportSuggestion=new EventEmitter();
   @Output() changeValue = new EventEmitter<any>();
   s3BucketUrl = environment.s3BucketUrl;
-  
+  loading:boolean=false;
   
   constructor(
     private flightService: FlightService,
@@ -39,7 +39,9 @@ export class AirportSuggestionComponent implements OnInit {
     let to = localStorage.getItem('__to') || '';
 
     if(from=='' && to==''){
+      this.loading=true;
       this.flightService.searchAirports(this.type).subscribe((result:any)=>{
+        this.loading=false;
         for(let i=0; i <result.length; i++){
           for(let j=0; j<result[i].value.length; j++){
             result[i].value[j].display_name = `${result[i].value[j].city},${ result[i].value[j].country},(${result[i].value[j].code}),${ result[i].value[j].name}`
@@ -47,6 +49,7 @@ export class AirportSuggestionComponent implements OnInit {
         }
         this.data=result;
       },error=>{
+        this.loading=false;
         this.data=[];
       })
     }
@@ -59,9 +62,9 @@ export class AirportSuggestionComponent implements OnInit {
       else{
         alternateLocation=localStorage.getItem('__from') || '';
       }
-
+      this.loading=true;
       this.flightService.searchRoute('',isFromLocation,alternateLocation).subscribe((response: any) => {
-        
+        this.loading=false;
         let opResult = this.groupByKey(response,'key')
         let airportArray=[];
 		
@@ -80,6 +83,8 @@ export class AirportSuggestionComponent implements OnInit {
         this.data=airportArray;
       },
         error => {
+          this.data=[];
+          this.loading=false;
         }
       );
     }
