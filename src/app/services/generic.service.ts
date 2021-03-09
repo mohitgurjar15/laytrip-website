@@ -163,4 +163,8 @@ export class GenericService {
   getPaymentDetails() {
     return this.http.get(`${environment.apiUrl}v1/payment/details`, this.commonFunction.setHeaders());
   }
+
+  updateViaAppleLogin(data) {
+    return this.http.put(`${environment.apiUrl}v1/auth/update/apple-user`, data, this.commonFunction.setHeaders())
+  }
 }

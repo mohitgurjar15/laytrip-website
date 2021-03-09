@@ -55,7 +55,7 @@ export class SocialLoginComponent implements OnInit {
         console.log(objApple, userInfo)
 
         let jsonData = {
-          "account_type": 1,
+          "account_type": 3,
           "name": "",
           "email": objApple.email,
           "social_account_id": userInfo.authorization.code,
@@ -101,13 +101,14 @@ export class SocialLoginComponent implements OnInit {
 
 
   public googleLogin(element) {
+    // GOOGLE LOGIN
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
         this.socialError.emit('');
         let profile = googleUser.getBasicProfile();
         var name = profile.getName().split(" ");
         let jsonData = {
-          "account_type": 1,
+          "account_type": 2,
           "name": name[0] ? name[0] : name,
           "email": profile.getEmail(),
           "social_account_id": profile.getId(),

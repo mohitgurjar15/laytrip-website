@@ -54,19 +54,9 @@ export class SigninComponent implements OnInit {
       password: ['', [Validators.required]]
     });
     this.guestUserId = localStorage.getItem('__gst') || "";
-    this.openAppleSecurityLogin();
   }
 
   get f() { return this.loginForm.controls; }
-
-  openAppleSecurityLogin() {
-    this.modalService.open(AppleSecurityLoginPopupComponent, {
-      windowClass: 'apple_security_login_block', centered: true, backdrop: 'static',
-      keyboard: false
-    }).result.then((result) => {
-
-    });
-  }
 
   onSubmit() {
     this.apiError = '';
@@ -87,6 +77,10 @@ export class SigninComponent implements OnInit {
           this.loading = this.submitted = false;
           $('#sign_in_modal').modal('hide');
           const _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
+
+          if (userDetails.requireToupdate === true) {
+            this.openAppleSecurityLogin();
+          }
 
           if (_isSubscribeNow == "Yes" && userDetails.roleId == 6) {
             this.router.navigate(['account/subscription']);
@@ -120,6 +114,15 @@ export class SigninComponent implements OnInit {
         }
       });
     }
+  }
+
+  openAppleSecurityLogin() {
+    this.modalService.open(AppleSecurityLoginPopupComponent, {
+      windowClass: 'apple_security_login_block', centered: true, backdrop: 'static',
+      keyboard: false
+    }).result.then((result) => {
+
+    });
   }
 
   emailVerify() {
