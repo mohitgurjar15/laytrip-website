@@ -103,7 +103,7 @@ export class TravellerFormComponent implements OnInit {
      });
      
       if ($('.tel_span .form-control').hasClass('.ng-touched .ng-invalid')){
-          $(".tel_span").toggleClass("error_border");
+          $(".tel_span").toggleClass("error_border"); 
       }
     });
   }
