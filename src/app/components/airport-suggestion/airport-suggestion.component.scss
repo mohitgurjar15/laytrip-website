@@ -53,20 +53,27 @@
                 font-size: 18px;
                 font-weight: 500;
                 color: $text-black;
-                margin-right: 20px;
+                width: 25px;
+
+                @include tab-view{
+                    font-size: 14px;
+                }
             }
 
             .linew_wrps {
                 display: flex;
                 justify-content: flex-start;
                 flex-direction: column;
-
+                @include tab-view{
+                    font-size: 12px;
+                }
                 .line_names {
                     margin-bottom: 10px;
+                    display: flex;
                     cursor: pointer;
-                    &:last-child{
-                        margin-bottom: 0;
-                    }
+                    // &:last-child{
+                    //     margin-bottom: 0;
+                    // }
                 }
             }
         }
