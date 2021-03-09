@@ -49,6 +49,8 @@
     height: 33px;
     font-size: 12px;
     z-index: 999;
+    width: 50%;
+    text-align: center;
 
     @include tab-view {
         display: flex;
@@ -93,6 +95,8 @@
     font-size: 12px;
     z-index: 999;
     margin-left: 10px;
+    text-align: center;
+    width: 50%;
 
     .btn_sort {
         width: 100%;

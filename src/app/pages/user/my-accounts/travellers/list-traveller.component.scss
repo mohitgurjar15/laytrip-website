@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   @include tab-view {
     margin: 0 0 10px;
   }
@@ -34,6 +35,7 @@
       padding: 0;
       text-align: right;
       text-decoration: none;
+
       @include tab-view {
         font-size: 12px;
       }
@@ -53,13 +55,14 @@
   .traveller_accordion {
     margin-top: 10px;
 
-    &:nth-child(1){
+    &:nth-child(1) {
       margin-top: 0;
     }
 
-    .custom_cardbody{
+    .custom_cardbody {
       padding: 0;
     }
+
     .card {
       border: 1px solid $grayed_border;
       border-radius: 10px;
@@ -117,6 +120,15 @@
               right: 15px;
               top: 25px;
             }
+          }
+
+          .typeName {
+            flex: 1;
+          }
+
+          .nameUser {
+            flex: 2;
+            font-weight: 400;
           }
         }
       }
@@ -324,9 +336,9 @@
       margin: 0 auto 15px;
       width: 85px;
     }
-    .name_traveller{
 
-    }
+    .name_traveller {}
+
     h4 {
       font-size: 32px;
       line-height: 40px;

@@ -249,6 +249,10 @@
         display: flex;
         position: relative;
         bottom: 2px;
+
+        &.error_border{
+          border-color: $error-color !important;
+        }
         input {
           border-bottom: none;
           &:first-child {
@@ -266,6 +270,11 @@
       }
       .form-control {
         border-bottom: 2px solid $box-border-color !important;
+        &.ng-touched {
+          &.ng-invalid {
+            border-color: $error-color !important;
+          }
+        }
       }
     }
     .gender_anchers {
