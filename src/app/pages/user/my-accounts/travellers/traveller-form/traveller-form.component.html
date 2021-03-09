@@ -7,12 +7,13 @@
                     (keypress)="commonFunction.preventNumberInput($event)">
                 <div *ngIf="travellerForm.controls.firstName.touched && travellerForm.controls.firstName.errors"
                     class="error">
-
-                    <small *ngIf="travellerForm.controls.firstName.errors.required" class="error_field">
+                    <small *ngIf="travellerForm.controls.firstName.errors" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> </small>
+                   <!--  <small *ngIf="travellerForm.controls.firstName.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> 
                         Please enter your first name.</small>
                     <small *ngIf="travellerForm.controls.firstName.errors.pattern" class="error_field">
-                        {{'first_name_string_validation' | translate}}</small>
+                        {{'first_name_string_validation' | translate}}</small> -->
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
@@ -21,11 +22,13 @@
                     (keypress)="commonFunction.preventNumberInput($event)">
                 <div *ngIf="travellerForm.controls.lastName.touched && travellerForm.controls.lastName.errors"
                     class="error">
-                    <small *ngIf="travellerForm.controls.lastName.errors.required" class="error_field">
+                    <small *ngIf="travellerForm.controls.lastName.errors" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">.</small>
+                    <!-- <small *ngIf="travellerForm.controls.lastName.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please
                         enter your last name.</small>
                     <small *ngIf="travellerForm.controls.lastName.errors.pattern" class="error_field">
-                        {{'last_name_string_validation' | translate}}</small>
+                        {{'last_name_string_validation' | translate}}</small> -->
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory">
@@ -39,9 +42,11 @@
                 </div>
                 <div *ngIf="travellerForm.controls.gender.touched && travellerForm.controls.gender.errors"
                     class="error">
-                    <small *ngIf="travellerForm.controls.gender.errors.required" class="error_field">
+                    <small *ngIf="travellerForm.controls.gender.errors" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"></small>
+                   <!--  <small *ngIf="travellerForm.controls.gender.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please select
-                        your gender.</small>
+                        your gender.</small> -->
                 </div>
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps">
@@ -52,10 +57,12 @@
                     (onSelect)=selectDob($event)>
                 </p-calendar>
                 <div *ngIf="travellerForm.controls.dob.touched && travellerForm.controls.dob.errors" class="error">
-                    <small *ngIf="travellerForm.controls.dob.errors.required" class="error_field">
-                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please
-                        select
-                        your date of birth.</small>
+                    <small *ngIf="travellerForm.controls.dob.errors" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"></small>
+                        <!-- <small *ngIf="travellerForm.controls.dob.errors.required" class="error_field">
+                            <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please
+                            select
+                            your date of birth.</small> -->
                 </div>
             </div>
 
@@ -75,11 +82,13 @@
                 <div class="error"
                     *ngIf="(travellerForm.controls.country_code.touched || travellerForm.controls.phone_no.touched) && (travellerForm.controls.phone_no.errors || travellerForm.controls.country_code.errors)">
                     <small *ngIf="travellerForm.hasError('phoneAndPhoneCodeError')" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"></small>
+                    <!-- <small *ngIf="travellerForm.hasError('phoneAndPhoneCodeError')" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please enter
                         phone number</small>
                     <small
                         *ngIf="!travellerForm.hasError('phoneAndPhoneCodeError') && (travellerForm.controls.phone_no.errors.minlength)"
-                        class="error_field">Phone number should be minimum 10</small>
+                        class="error_field">Phone number should be minimum 10</small> -->
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps" *ngIf="isAdult">
@@ -88,12 +97,14 @@
                     [readonly]="traveller.email && traveller.email != 'undefined' && traveller.email != ''" type="email"
                     class="form-control" formControlName="email">
                 <div *ngIf="travellerForm.controls.email.touched && travellerForm.controls.email.errors" class="error">
-                    <small *ngIf="travellerForm.controls.email.errors.required" class="error_field">
+                    <small *ngIf="travellerForm.controls.email.errors" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"></small>
+                    <!-- <small *ngIf="travellerForm.controls.email.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please enter
                         your email
                         address.</small>
                     <small *ngIf="travellerForm.controls.email.errors.pattern" class="error_field">
-                        {{'email_invalid_validation' | translate}}</small>
+                        {{'email_invalid_validation' | translate}}</small> -->
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps">
@@ -115,9 +126,11 @@
                 <div *ngIf="travellerForm.controls.country_id.touched && travellerForm.controls.country_id.errors"
                     class="error">
                     <small *ngIf="travellerForm.controls.country_id.errors.required" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"></small>
+                  <!--   <small *ngIf="travellerForm.controls.country_id.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please
                         select
-                        your country.</small>
+                        your country.</small> -->
                 </div>
 
             </div>
@@ -133,7 +146,7 @@
                 </p-calendar>
             </div>
         </div>
-        <span class="edit_btns duel_buttons" *ngIf="travellerId">
+        <span class="edit_btns duel_buttons" >
             <span class="remove_wrps">
                 <button class="hover-link" *ngIf="traveller.roleId != 6"
                     (click)="openDeleteModal(deleteContent,travellerId)">Delete</button>
