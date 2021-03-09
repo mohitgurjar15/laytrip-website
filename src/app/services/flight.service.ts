@@ -27,6 +27,20 @@ export class FlightService {
             );
     }
 
+    searchRoute(searchItem,isFromLocation,alternateLocation=''){
+        return this.http.get(`${environment.apiUrl}v1/flight/route/search?search=${searchItem}&is_from_location=${isFromLocation}&alternet_location=${alternateLocation}`)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    searchAirports(type=''){
+        return this.http.get(`${environment.apiUrl}v1/flight/route/${type}`)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     airRevalidate(routeCode) {
 
         let headers = {

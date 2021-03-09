@@ -44,6 +44,8 @@ export class HomeComponent implements OnInit {
     this.getModules();
     this.loadJquery();
     this.getDeal(this.moduleId);
+    localStorage.removeItem('__from');
+    localStorage.removeItem('__to');
   }
 
   loadJquery() {
@@ -164,6 +166,7 @@ export class HomeComponent implements OnInit {
 
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'bg_color');
+    
   }
 
   setToString(newItem: string) {

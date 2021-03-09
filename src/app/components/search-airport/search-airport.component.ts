@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, Afte
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
+import { type } from 'os';
 // import { data } from './airport';
 
 
@@ -20,10 +21,9 @@ export class SearchAirportComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
+  @Output() searchItem = new EventEmitter<any>();
   @Input() defaultCity: any;
   @Input() airport;
-  airportDefaultDestValue;
-  departureAirport;
 
   constructor(
     private flightService: FlightService,
@@ -38,14 +38,28 @@ export class SearchAirportComponent implements OnInit {
   loading = false;
 
   ngOnInit() {
-    this.setDefaultAirport();
-    //this.data.push(this.airport)
+
     this.data[0] = this.airport ? this.airport : [];
+    console.log(this.airport,"this.airport")
+    if(Object.keys(this.airport).length==0){
+      this.data=[];
+    }
+    console.log(this.data,"----")
   }
 
   searchAirport(searchItem) {
+    
     this.loading = true;
-    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+    let isFromLocation=this.id=='fromSearch'?'yes':'no';
+    let alternateLocation='';
+    if(this.id=='fromSearch'){
+      alternateLocation=localStorage.getItem('__to') || '';
+    }
+    else{
+      alternateLocation=localStorage.getItem('__from') || '';
+    }
+
+    this.flightService.searchRoute(searchItem,isFromLocation,alternateLocation).subscribe((response: any) => {
       this.data = response.map(res => {
         this.loading = false;
         return {
@@ -55,7 +69,7 @@ export class SearchAirportComponent implements OnInit {
           city: res.city,
           country: res.country,
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
-          parentId: res.parentId
+          parentId: 0
         };
       });
     },
@@ -66,24 +80,34 @@ export class SearchAirportComponent implements OnInit {
   }
 
   onChangeSearch(event) {
-    if (event.term.length > 2) {
-      this.searchAirport(event.term);
-    }
+    this.searchAirport(event.term);
+    console.log("event.term",event.term)
+    this.searchItem.emit({key : event.term,type : this.id})
   }
 
   selectEvent(event, index) {
     if (!event) {
       this.placeHolder = this.placeHolder;
     }
-    //this.selectedAirport = event;
+    if(typeof event=='undefined'){
+      if (index === 'fromSearch') {
+        localStorage.removeItem('__from')
+      } else if (index === 'toSearch') {
+        localStorage.removeItem('__to')
+      }
+    }
+    this.selectedAirport = event;
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });
+      localStorage.setItem('__from',this.selectedAirport.code)
     } else if (event && index && index === 'toSearch') {
+      localStorage.setItem('__to',this.selectedAirport.code)
       this.changeValue.emit({ key: 'toSearch', value: event });
     }
   }
 
   onRemove(event) {
+    console.log("innnnn")
     this.selectedAirport = {};
   }
 
@@ -109,6 +133,8 @@ export class SearchAirportComponent implements OnInit {
     if (changes['airport']) {
       this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
       this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+      //this.data=[];
+      console.log(changes['airport'],this.data,"=======")
     }
   }
 
