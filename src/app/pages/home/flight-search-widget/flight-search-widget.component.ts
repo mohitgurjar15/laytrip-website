@@ -126,6 +126,9 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.calPrices = true;
         this.fromSearch = airports[params['departure']];
         this.toSearch = airports[params['arrival']];
+        //this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
+        //this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+        console.log(this.fromSearch,this.toSearch,"=====")
         this.toggleOnewayRoundTrip(params['trip']);
         localStorage.setItem('__from',params['departure'])
         localStorage.setItem('__to',params['arrival'])
@@ -169,10 +172,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (typeof changes['calenderPrices'].currentValue != 'undefined' && changes['calenderPrices'].firstChange == false) {
-      // this.isCalenderPriceLoading=false;
-      // this.getMinimumPricesList(changes['calenderPrices'].currentValue);
-    }
+   
   }
 
 
@@ -200,25 +200,15 @@ export class FlightSearchWidgetComponent implements OnInit {
   
   destinationChangedValue(event) {
     if (event && event.key && event.key === 'fromSearch') {
-      //this.fromDestinationCode = event.value.code;
       this.fromSearch = event.value;
-      //this.departureCity = this.fromSearch.city;
-      //this.departureAirportCountry = `${this.fromSearch.code}, ${this.fromSearch.country}`;
       this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });
     } else if (event && event.key && event.key === 'toSearch') {
       this.toSearch = event.value;
-      //this.arrivalCity = this.toSearch.city;
-      //this.arrivalAirportCountry = `${this.toSearch.code}, ${this.toSearch.country}`;
       this.searchedValue.push({ key: 'toSearch', value: this.toSearch });
     }
-    console.log("this.fromSearch",this.fromSearch,this.toSearch)
     this.searchFlightInfo.departure = this.fromSearch.code;
     this.searchFlightInfo.arrival = this.toSearch.code;
   }
-
-  /* getDateWithFormat(date) {
-    this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
-  } */
 
   changeTravellerInfo(event) {
     this.searchFlightInfo.adult = event.adult;
@@ -249,10 +239,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
-      /* this.router.navigate(['flight/search'], {
-        queryParams: queryParams,
-        queryParamsHandling: 'merge'
-      }); */
+     
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
@@ -283,13 +270,12 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.searchFlightInfo.departure = this.searchFlightInfo.arrival;
     this.searchFlightInfo.arrival = temp;
 
-    /* let tempCity = this.departureCity;
-    this.departureCity = this.arrivalCity;
-    this.arrivalCity = tempCity; */
 
     let tempAirport = this.fromSearch;
     this.fromSearch = this.toSearch;
     this.toSearch = tempAirport;
+    localStorage.setItem('__from',this.fromSearch.code)
+    localStorage.setItem('__to',this.toSearch.code)
   }
 
   returnDateUpdate(date) {
@@ -302,10 +288,6 @@ export class FlightSearchWidgetComponent implements OnInit {
       this.flightDepartureMinDate = this.rangeDates[0];
       this.returnDate = this.rangeDates[1];
       this.rangeDates = [this.departureDate, this.returnDate];
-      // this.checkOutDate = this.rangeDates[1];
-      // this.checkOutMinDate = this.rangeDates[1];
-      // this.searchHotelInfo.check_in = this.checkInDate;
-      // this.searchHotelInfo.check_out = this.checkOutDate;
     }
   }
 
@@ -524,5 +506,18 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.showToAirportSuggestion=true;
       }
     }
+  }
+
+  airportValueChange(event){
+    if(event.key=='fromSearch'){
+      this.fromSearch=event.value;
+      this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });
+    }
+    else{
+      this.toSearch=event.value;
+      this.searchedValue.push({ key: 'toSearch', value: this.toSearch });
+    }
+    this.searchFlightInfo.departure = this.fromSearch.code;
+    this.searchFlightInfo.arrival = this.toSearch.code;
   }
 }

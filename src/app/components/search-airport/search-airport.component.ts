@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, Afte
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
+import { type } from 'os';
 // import { data } from './airport';
 
 
@@ -37,9 +38,13 @@ export class SearchAirportComponent implements OnInit {
   loading = false;
 
   ngOnInit() {
-    //this.setDefaultAirport();
-    //this.data[0] = this.airport ? this.airport : [];
-    //this.data[0]=[];
+
+    this.data[0] = this.airport ? this.airport : [];
+    console.log(this.airport,"this.airport")
+    if(Object.keys(this.airport).length==0){
+      this.data=[];
+    }
+    console.log(this.data,"----")
   }
 
   searchAirport(searchItem) {
@@ -76,6 +81,7 @@ export class SearchAirportComponent implements OnInit {
 
   onChangeSearch(event) {
     this.searchAirport(event.term);
+    console.log("event.term",event.term)
     this.searchItem.emit({key : event.term,type : this.id})
   }
 
@@ -83,8 +89,14 @@ export class SearchAirportComponent implements OnInit {
     if (!event) {
       this.placeHolder = this.placeHolder;
     }
+    if(typeof event=='undefined'){
+      if (index === 'fromSearch') {
+        localStorage.removeItem('__from')
+      } else if (index === 'toSearch') {
+        localStorage.removeItem('__to')
+      }
+    }
     this.selectedAirport = event;
-    //console.log("this.selectedAirport:::",this.selectedAirport)
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });
       localStorage.setItem('__from',this.selectedAirport.code)
@@ -120,8 +132,9 @@ export class SearchAirportComponent implements OnInit {
 
     if (changes['airport']) {
       this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
-      //this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
-      this.data=[];
+      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+      //this.data=[];
+      console.log(changes['airport'],this.data,"=======")
     }
   }
 
