@@ -7,8 +7,10 @@
                     (keypress)="commonFunction.preventNumberInput($event)">
                 <div *ngIf="travellerForm.controls.firstName.touched && travellerForm.controls.firstName.errors"
                     class="error">
-                    <small *ngIf="travellerForm.controls.firstName.errors.required" class="error_field">Please enter
-                        your first name.</small>
+
+                    <small *ngIf="travellerForm.controls.firstName.errors.required" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> 
+                        Please enter your first name.</small>
                     <small *ngIf="travellerForm.controls.firstName.errors.pattern" class="error_field">
                         {{'first_name_string_validation' | translate}}</small>
                 </div>
@@ -19,7 +21,8 @@
                     (keypress)="commonFunction.preventNumberInput($event)">
                 <div *ngIf="travellerForm.controls.lastName.touched && travellerForm.controls.lastName.errors"
                     class="error">
-                    <small *ngIf="travellerForm.controls.lastName.errors.required" class="error_field">Please
+                    <small *ngIf="travellerForm.controls.lastName.errors.required" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please
                         enter your last name.</small>
                     <small *ngIf="travellerForm.controls.lastName.errors.pattern" class="error_field">
                         {{'last_name_string_validation' | translate}}</small>
@@ -69,7 +72,8 @@
 
                 <div class="error"
                     *ngIf="(travellerForm.controls.country_code.touched || travellerForm.controls.phone_no.touched) && (travellerForm.controls.phone_no.errors || travellerForm.controls.country_code.errors)">
-                    <small *ngIf="travellerForm.hasError('phoneAndPhoneCodeError')" class="error_field">Please enter
+                    <small *ngIf="travellerForm.hasError('phoneAndPhoneCodeError')" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please enter
                         phone number</small>
                     <small
                         *ngIf="!travellerForm.hasError('phoneAndPhoneCodeError') && (travellerForm.controls.phone_no.errors.minlength)"
@@ -82,7 +86,8 @@
                     [readonly]="traveller.email && traveller.email != 'undefined' && traveller.email != ''" type="email"
                     class="form-control" formControlName="email">
                 <div *ngIf="travellerForm.controls.email.touched && travellerForm.controls.email.errors" class="error">
-                    <small *ngIf="travellerForm.controls.email.errors.required" class="error_field">Please enter
+                    <small *ngIf="travellerForm.controls.email.errors.required" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please enter
                         your email
                         address.</small>
                     <small *ngIf="travellerForm.controls.email.errors.pattern" class="error_field">
