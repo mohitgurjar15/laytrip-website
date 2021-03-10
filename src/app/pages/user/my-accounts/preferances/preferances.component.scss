@@ -26,6 +26,9 @@
         font-weight: 600;
         flex: 1;
         margin: 0;
+        @include tab-view {
+            font-size: 14px;
+        }
     }
     .text_field{
         input{

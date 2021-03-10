@@ -21,7 +21,7 @@
     margin: 25px 0 15px;
 
     @include tab-view {
-      font-size: 28px;
+      font-size: 24px;
       margin: 0;
     }
   }
@@ -129,6 +129,9 @@
           .nameUser {
             flex: 2;
             font-weight: 400;
+            @include tab-view{
+              font-weight: 600;
+            }
           }
         }
       }

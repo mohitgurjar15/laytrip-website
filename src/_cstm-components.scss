@@ -5,11 +5,13 @@
 .ng-select {
     &.laytrip-input {
         padding: 0 15px 0 0;
+
         .ng-dropdown-panel {
             top: 100%;
             background: $background-white;
             left: 0;
             width: 480px;
+
             @media (max-width: 767px) {
                 width: 410px;
             }
@@ -31,6 +33,7 @@
                     padding: 0 15px;
                 }
             }
+
             span {
                 &.ng-arrow-wrapper {
                     span {
@@ -56,18 +59,23 @@
             height: 100%;
             min-height: 0px !important;
             display: block;
+
             &:hover {
                 box-shadow: none !important;
             }
+
             .ng-value-container {
                 padding-left: 0px !important;
+
                 .ng-input {
                     padding: 0 15px;
                     top: 0;
+
                     input {
                         padding-left: 0px !important;
                     }
                 }
+
                 .ng-value {
                     padding: 5px 0px 0 15px;
                     color: #000;
@@ -79,27 +87,34 @@
                     overflow: hidden;
                 }
             }
+
             .ng-clear-wrapper {
                 padding: 0 0px 0px 5px !important;
+
                 .ng-clear {
                     font-size: 17px !important;
                     color: red !important;
                 }
             }
+
             .ng-arrow-wrapper {
                 .ng-arrow {
                     display: none !important;
                 }
             }
         }
+
         .ng-dropdown-panel {
             border: none !important;
             box-shadow: none !important;
+
             .ng-select-bottom {
                 border-top-color: #fff !important;
             }
+
             .ng-dropdown-panel-items {
                 max-height: 255px;
+
                 //border: 1px solid #808080;
                 .ng-option {
                     padding: 3px 3px 3px 10px !important;
@@ -109,19 +124,18 @@
 
                 .parent {
                     padding: 5px 5px 5px 30px;
-                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg)
-                        no-repeat;
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
                     background-position: left center;
                     color: #012178;
                 }
+
                 .child {
                     padding: 5px 5px 5px 50px !important;
-                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg)
-                        no-repeat;
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
                     background-position: left 25px center;
                     color: #808080;
 
-                    @include tab-view{
+                    @include tab-view {
                         padding: 5px 5px 5px 24px !important;
                         background-position: left 5px center;
                     }
@@ -129,30 +143,35 @@
             }
         }
 
-        &.custom_inputs{
-            .ng-select-container{
-                .ng-value-container{
-                    .ng-value{
+        &.custom_inputs {
+            .ng-select-container {
+                .ng-value-container {
+                    .ng-value {
                         padding: 3px 0 0 0;
                         max-width: 275px;
                         width: 100%;
-                        @include mini-screen{
+
+                        @include mini-screen {
                             max-width: 215px;
                         }
-                        @include tab-view{
+
+                        @include tab-view {
                             max-width: 175px;
                         }
-                        @include mobile-sm-view{
+
+                        @include mobile-sm-view {
                             max-width: 215px;
                         }
                     }
-                    .ng-input{
+
+                    .ng-input {
                         padding-left: 0;
                     }
                 }
-            } 
+            }
         }
     }
+
     &.ng-customClass {
         .ng-select-container {
             height: 100%;
@@ -160,9 +179,11 @@
             display: flex;
             align-items: center;
             border-radius: 0;
+
             &:hover {
                 box-shadow: none;
             }
+
             .ng-value-container {
                 height: auto;
 
@@ -171,8 +192,10 @@
                     font-size: 14px;
                     color: #000000;
                 }
+
                 .ng-input {
                     height: auto;
+
                     input {
                         height: auto !important;
                         border: none !important;
@@ -181,20 +204,25 @@
             }
         }
     }
-    &.from_to_inputs{
+
+    &.from_to_inputs {
         .ng-input {
             input {
                 padding: 0;
             }
         }
+
         .ng-select-container {
             .ng-value-container {
+
                 //width: 100%;
                 .ng-placeholder {
-                    padding: 0;
+                    padding: 3px 0 0 0;
+                    font-size: 16px;
                 }
             }
-            .ng-clear-wrapper{
+
+            .ng-clear-wrapper {
                 display: none;
                 /* position: absolute;
                 top: 0;
@@ -206,26 +234,29 @@
                 } */
             }
         }
-        
+
     }
-    &.country_code{
-        .ng-select-container{
+
+    &.country_code {
+        .ng-select-container {
             .ng-value-container {
-                .ng-value{
+                .ng-value {
                     width: 50px;
                 }
-                .ng-arrow-wrapper{
-                    .ng-arrow{
+
+                .ng-arrow-wrapper {
+                    .ng-arrow {
                         top: -4px;
                     }
                 }
             }
-        } 
+        }
     }
-    &.account_telephone_n{
-        .ng-select-container{
+
+    &.account_telephone_n {
+        .ng-select-container {
             .ng-value-container {
-                .ng-value{
+                .ng-value {
                     color: $mid_gray_bg;
                     font-size: 16px
                 }
@@ -235,9 +266,10 @@
 }
 
 // NG-SELECT FOCUS REMOVE CSS START
-.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+.ng-select-focused:not(.ng-select-opened)>.ng-select-container {
     box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
 }
+
 // NG-SELECT FOCUS REMOVE CSS END
 
 .custom_range_slide .ng5-slider .ng5-slider-bar {
@@ -252,7 +284,8 @@
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
     width: 13px;
     height: 13px;
-    top: auto; /* to remove the default positioning */
+    top: auto;
+    /* to remove the default positioning */
     // bottom: 0;
     top: -6px;
     background-color: #fff;
@@ -270,6 +303,7 @@
 .redeem_laypoint .ng5-slider .ng5-slider-bubble {
     display: none;
 }
+
 .custom_range_slide .ng5-slider .ng5-slider-selection {
     background: $text_light_yellow;
 }
@@ -281,6 +315,7 @@
     height: 16px;
     top: -7px;
 }
+
 .custom_range_slide {
     p {
         margin: 0;
@@ -288,8 +323,10 @@
         font-weight: 300;
         color: #8188ab;
     }
+
     .ng5-slider {
         margin: 15px 0;
+
         .ng5-slider-bubble {
             bottom: 14px;
             width: 100%;
@@ -322,8 +359,7 @@
                     .grid_box.secound {
                         .search_area {
                             input {
-                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
-                                    center left 15px no-repeat !important;
+                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
                             }
                         }
                     }
@@ -333,15 +369,7 @@
     }
 }
 
-.modify_search
-    .flight_tab
-    .tab-content
-    .flight_search
-    .flight-grid
-    .grid_box.third
-    .travellers
-    .search_area
-    .travel_info {
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
     height: 22px !important;
     margin-top: -3px !important;
     margin-bottom: 2px !important;
@@ -361,6 +389,7 @@
                         .tab_detail.baggage_rules_cnt {
                             .detail_right {
                                 width: 100% !important;
+
                                 table {
                                     width: 100% !important;
                                 }
@@ -371,6 +400,7 @@
             }
         }
     }
+
     .result_listing.roundtrip_list {
         .search_block {
             .detail_info_show {
@@ -379,6 +409,7 @@
                         .tab_detail.baggage_rules_cnt {
                             .detail_right {
                                 width: 100% !important;
+
                                 table {
                                     width: 100% !important;
                                 }

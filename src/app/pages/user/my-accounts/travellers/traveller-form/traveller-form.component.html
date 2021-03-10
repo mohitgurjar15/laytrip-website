@@ -132,10 +132,10 @@
         </div>
         <span class="edit_btns duel_buttons">
             <span class="remove_wrps">
-                <button class="hover-link" *ngIf="traveller.roleId != 6"
+                <button class="hover-link disabled" *ngIf="traveller.roleId != 6"
                     (click)="openDeleteModal(deleteContent,travellerId)">Delete</button>
             </span>
-            <button (click)="onSubmit()" class="hover-link">Edit</button>
+            <button (click)="onSubmit()" class="hover-link disabled">Edit</button>
             <button (click)="onSubmit()" class="hover-link">Save</button>
         </span>
     </div>

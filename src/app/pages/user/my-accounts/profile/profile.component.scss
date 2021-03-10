@@ -254,6 +254,10 @@ input.ng-invalid.ng-touched {
                     padding: 0;
                     text-align: right;
 
+                    @include tab-view {
+                        font-size: 12px;
+                    }
+
                     img {
                         margin-right: 10px;
                     }
@@ -283,25 +287,49 @@ input.ng-invalid.ng-touched {
 
                     label {}
                 }
-                &.address_main{
-                    label{
-                        @include tab-view{
-                            br{
+
+                &.address_main {
+                    @include tab-view {
+                        flex-direction: row;
+                    }
+                    label {
+                        display: flex;
+                        flex-direction: column;
+
+                        span {
+                            min-height: 40px;
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        @include tab-view {
+                            br {
                                 display: none;
                             }
                         }
                     }
-                    .address_box{
-                        @include tab-view{
+
+                    .address_box {
+                        @include tab-view {
                             width: 100%;
                             flex-direction: column;
+                            
                         }
-                        .inputs_com{
+
+                        .inputs_com {
                             padding: 0;
+                            @include tab-view {
+                                min-height: 40px;
+                            }
+                            
+                        }
+
+                        .address_ng {
+                            min-height: 40px;
                         }
                     }
                 }
-                
+
             }
 
             &.title_row {
@@ -310,6 +338,7 @@ input.ng-invalid.ng-touched {
                 .edit_btns {
                     @include tab-view {
                         font-size: 12px;
+                        margin-top: 8px;
                     }
                 }
             }
@@ -327,7 +356,7 @@ input.ng-invalid.ng-touched {
                 margin: 25px 0 15px;
 
                 @include tab-view {
-                    font-size: 28px;
+                    font-size: 24px;
                 }
             }
 
@@ -340,6 +369,10 @@ input.ng-invalid.ng-touched {
                     padding: 0;
                     text-align: right;
                     text-decoration: none;
+
+                    @include tab-view {
+                        font-size: 12px;
+                    }
                 }
             }
 
@@ -350,12 +383,16 @@ input.ng-invalid.ng-touched {
                 font-weight: 600;
                 flex: 1;
                 margin: 0;
+
+                @include tab-view {
+                    font-size: 14px;
+                }
             }
 
             .text_field {
                 flex: 2;
 
-                @include tab-view{
+                @include tab-view {
                     height: 40px;
                     display: flex;
                 }
@@ -432,6 +469,7 @@ input.ng-invalid.ng-touched {
 
                 @include tab-view {
                     height: 30px;
+                    font-size: 14px;
                 }
 
                 &:focus {
