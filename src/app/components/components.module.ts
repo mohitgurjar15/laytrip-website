@@ -123,7 +123,8 @@ import { AirportSuggestionComponent } from './airport-suggestion/airport-suggest
     NgxSpinnerModule,
     RouterModule,
     BsDatepickerModule.forRoot(),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    NgScrollbarModule
   ],
   exports: [
     SearchAirportComponent,
