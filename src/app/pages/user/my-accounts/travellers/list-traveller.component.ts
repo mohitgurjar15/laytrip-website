@@ -84,8 +84,17 @@ export class ListTravellerComponent implements OnInit {
   }
 
   getTravelers() {
-    this.travelerService.getTravelers().subscribe((data: any) => {
-      this.travelers = data.data;
+    this.travelerService.getTravelers().subscribe((res: any) => {
+      // this.travelers = res.data;
+      this.travelers  = res.data.filter(function(e){
+        if(e.roleId !=6 ){
+          return e;
+        }
+      });
+      console.log(this.travelers.length)
+      if(this.travelers.length == 0){
+        this.showNewForm = true;
+      }
       this.loading = false;
       this.showPaginationBar = true;
       if (this.travelers.length === 0) {

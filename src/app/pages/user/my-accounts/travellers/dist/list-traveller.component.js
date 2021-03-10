@@ -57,8 +57,17 @@ var ListTravellerComponent = /** @class */ (function () {
     };
     ListTravellerComponent.prototype.getTravelers = function () {
         var _this = this;
-        this.travelerService.getTravelers().subscribe(function (data) {
-            _this.travelers = data.data;
+        this.travelerService.getTravelers().subscribe(function (res) {
+            // this.travelers = res.data;
+            _this.travelers = res.data.filter(function (e) {
+                if (e.roleId != 6) {
+                    return e;
+                }
+            });
+            console.log(_this.travelers.length);
+            if (_this.travelers.length == 0) {
+                _this.showNewForm = true;
+            }
             _this.loading = false;
             _this.showPaginationBar = true;
             if (_this.travelers.length === 0) {
