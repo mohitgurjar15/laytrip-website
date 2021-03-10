@@ -300,6 +300,9 @@ input.ng-invalid.ng-touched {
                             min-height: 40px;
                             display: flex;
                             align-items: center;
+                            @include tab-view{
+                                min-height: 25px;
+                            }
                         }
 
                         @include tab-view {
@@ -313,19 +316,23 @@ input.ng-invalid.ng-touched {
                         @include tab-view {
                             width: 100%;
                             flex-direction: column;
-                            
+                            height: auto;
                         }
 
                         .inputs_com {
                             padding: 0;
                             @include tab-view {
-                                min-height: 40px;
+                                min-height: 25px;
+                                max-height: 25px;
                             }
                             
                         }
 
                         .address_ng {
                             min-height: 40px;
+                            @include tab-view{
+                                min-height: 25px;
+                            }
                         }
                     }
                 }
@@ -357,6 +364,7 @@ input.ng-invalid.ng-touched {
 
                 @include tab-view {
                     font-size: 24px;
+                    margin: 25px 0 24px;
                 }
             }
 
@@ -393,7 +401,7 @@ input.ng-invalid.ng-touched {
                 flex: 2;
 
                 @include tab-view {
-                    height: 40px;
+                    height: 30px;
                     display: flex;
                 }
 
@@ -435,6 +443,10 @@ input.ng-invalid.ng-touched {
                         color: $mid_gray_bg;
                         font-size: 16px;
                         padding: 0 25px 0 0;
+
+                        @include tab-view{
+                            font-size: 14px;
+                        }
 
                         &:focus {
                             outline: none;

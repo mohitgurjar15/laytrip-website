@@ -128,7 +128,8 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.toSearch = airports[params['arrival']];
         //this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
         //this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
-        console.log(this.fromSearch,this.toSearch,"=====")
+        this.searchFlightInfo.departure = this.fromSearch.code;
+        this.searchFlightInfo.arrival = this.toSearch.code;
         this.toggleOnewayRoundTrip(params['trip']);
         localStorage.setItem('__from',params['departure'])
         localStorage.setItem('__to',params['arrival'])
@@ -237,6 +238,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     queryParams.adult = this.searchFlightInfo.adult;
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
+    console.log("this.searchFlightInfo",this.searchFlightInfo)
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));

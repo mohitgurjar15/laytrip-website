@@ -99,6 +99,13 @@ export class FlightPriceSliderComponent implements OnInit {
       if(this.trip == 'oneway'){
         this.flipDates(this.dates)
       }
+      else{
+        if(window.screen.width<=600){
+          let targetIndex=2;
+          this.dates = this.arrayRotate(this.dates,targetIndex);
+          console.log("this.dates",this.dates)
+        }
+      }
     }
   }
 
