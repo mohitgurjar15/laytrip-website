@@ -22,7 +22,6 @@ var animations_1 = require("@angular/platform-browser/animations");
 var ngx_toastr_1 = require("ngx-toastr");
 var angularx_social_login_1 = require("angularx-social-login");
 var apple_provider_1 = require("./pages/user/social-login/apple.provider");
-// import { ServiceWorkerModule } from '@angular/service-worker';
 var auth_guard_1 = require("./guard/auth.guard");
 var AppModule = /** @class */ (function () {
     function AppModule() {

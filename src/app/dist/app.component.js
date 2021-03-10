@@ -9,7 +9,6 @@ exports.__esModule = true;
 exports.AppComponent = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
-// import { SwPush } from '@angular/service-worker';
 var environment_1 = require("../environments/environment");
 var uuid_1 = require("uuid");
 var jwt_helper_1 = require("./_helpers/jwt.helper");

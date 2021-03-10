@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 import { GenericService } from './services/generic.service';
 import * as moment from 'moment';
-// import { SwPush } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 import { getLoginUserInfo } from './_helpers/jwt.helper';
