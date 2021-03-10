@@ -1,7 +1,7 @@
 <div class="title_bar">
     <h3>Traveler Details</h3>
     <span class="edit_btns">
-        <a class="hover-link" (click)="submitTravellerForm()">Add New</a>
+        <a class="hover-link" (click)="showForm()">Add New</a>
     </span>
 </div>
 <div class="travel_detail_bg_wrps">
@@ -11,7 +11,7 @@
                 <div class="card-body custom_cardbody">
                     <!-- <app-traveller-form [countries]="countries" (loadingValue)="getLoadingValue($event)"
                         (travelerFormChange)="pushTraveler($event)" #child [countries]="countries"></app-traveller-form> -->
-                    <div class="card" id="travller_new_accordion_inner">
+                    <div class="card" id="travller_new_accordion_inner" *ngIf="showNewForm">
                         <div class="card-header">
                             <a class="card-link" data-toggle="collapse" href="#new_traveller_form"
                                 aria-controls="new_traveller_form" aria-expanded="true">
@@ -44,11 +44,11 @@
                                             d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
                                     </svg>
                                     <span class="typeName"> 
-                                        {{traveler.roleId==6 ? 'Primary Traveler ' : ''}}
-                                        {{traveler.user_type | titlecase }}
+                                        {{ traveler.roleId==6 ? 'Primary Traveler ' : '' }}
+                                        {{ (traveler.roleId != 6  ? traveler.user_type + ' '  : '') | titlecase }}
                                     </span>
                                     <span class="nameUser">
-                                        {{ ' '+traveler.firstName | titlecase }} {{traveler.lastName | titlecase}}
+                                        {{ '  '+traveler.firstName | titlecase }} {{traveler.lastName | titlecase}}
                                     </span>
                                     <!-- {{traveler.roleId==6 ? 'Primary Traveler' : 'Additional Traveler'}} -->
                                 </a>

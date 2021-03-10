@@ -8,20 +8,52 @@
         <div class="modal_top_block success_modal">
             <small>Due to your Apple Security Settings, please enter your First Name, Last Name and Email.</small>
         </div>
-        <div class="form_wrps">
-            <div class="duel_input">
-                <input type="text" placeholder="First Name">
-                <input type="text" placeholder="Last Name">
+        <form [formGroup]="appleLoginForm" novalidate (ngSubmit)="onSubmit(appleLoginForm.value)">
+            <div class="form_wrps">
+                <div class="duel_input">
+                    <div class="w-50 mr-2">
+                        <input type="text" formControlName="first_name" placeholder="{{'first_name' | translate}}"
+                            tabindex="1" (keypress)="commonFunction.preventNumberInput($event)">
+                        <div *ngIf="appleLoginForm.controls.first_name.errors && appleLoginForm.controls.first_name.touched"
+                            class="focus-input100 login-error">
+                            <p *ngIf="appleLoginForm.controls.first_name.errors.required" class="error_text">
+                                {{'first_name_touched_validation' | translate}}</p>
+                            <p *ngIf="appleLoginForm.controls.first_name.errors.pattern" class="error_text">
+                                {{'first_name_string_validation' | translate}}</p>
+                        </div>
+                    </div>
+                    <div class="w-50 mr-2">
+                        <input type="text" formControlName="last_name" placeholder="{{'last_name' | translate}}"
+                            tabindex="2" (keypress)="commonFunction.preventNumberInput($event)">
+                        <div *ngIf="appleLoginForm.controls.last_name.errors && appleLoginForm.controls.last_name.touched"
+                            class="focus-input100 login-error">
+                            <p *ngIf="appleLoginForm.controls.last_name.errors.required" class="error_text">
+                                {{'last_name_touched_validation' | translate}}</p>
+                            <p *ngIf="appleLoginForm.controls.last_name.errors.pattern" class="error_text">
+                                {{'last_name_string_validation' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="single_input">
+                    <input type="email" formControlName="email" maxlength="50" tabindex="3"
+                        placeholder="{{'email_placeholder' | translate}}">
+                    <div *ngIf="appleLoginForm.controls.email.errors && appleLoginForm.controls.email.touched">
+                        <div *ngIf="appleLoginForm.controls.email.errors && appleLoginForm.controls.email.touched">
+                            <p *ngIf="appleLoginForm.controls.email.errors.required" class="error_text">
+                                {{'email_touched_validation' | translate}}</p>
+                            <p *ngIf="appleLoginForm.controls.email.errors.pattern" class="error_text">
+                                {{'email_invalid_validation' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="single_input">
-                <input type="email" placeholder="Email">
+            <div class="form_btn">
+                <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10">
+                    <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;{{'submit' |
+                    translate}}
+                </button>
             </div>
-        </div>
-        <div class="form_btn">
-            <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10">
-                Submit
-            </button>
-        </div>
+        </form>
     </div>
     <div class="modal-footer">
         <div class="modal_btm">
