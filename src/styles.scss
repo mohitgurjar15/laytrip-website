@@ -117,11 +117,17 @@ a {
 
         .ng-value-container {
           height: 40px;
+          @include tab-view{
+            font-size: 30px;
+          }
 
           .ng-placeholder {
             padding: 0;
             font-size: 16px;
             color: $mid_gray_bg;
+            @include tab-view{
+              font-size: 14px;
+            }
           }
 
           .ng-value {
@@ -134,11 +140,17 @@ a {
             font-weight: 400;
             color: $mid_gray_bg;
             position: relative;
+            @include tab-view{
+              font-size: 14px;
+            }
           }
 
           .ng-input {
             padding: 0;
             top: 7px;
+            @include tab-view{
+              font-size: 14px;
+            }
           }
         }
 
@@ -1077,7 +1089,7 @@ select {
                     padding: 15px;
                     border: 1px solid #e0e2e5;
                     border-radius: 0 0 5px 5px;
-                    z-index: 99;
+                    z-index: 999;
 
                     @include tab-view {
                       transform: translate(11%, 0%);
@@ -1966,7 +1978,7 @@ select {
                 padding: 15px;
                 border: 1px solid #e0e2e5;
                 border-radius: 0 0 5px 5px;
-                z-index: 99;
+                z-index: 999;
 
                 @include tab-view {
                   right: 0;
@@ -2144,6 +2156,10 @@ select {
                     flex-flow: column;
                     margin-bottom: 5px;
                     padding: 0;
+                  }
+
+                  @include tab-view{
+                    z-index: 1000;
                   }
 
                   label {

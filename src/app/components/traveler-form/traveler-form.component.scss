@@ -516,6 +516,10 @@
                   padding: 10px;
                   text-align: center;
 
+                  br{
+                    display: none;
+                  }
+
                   @include tab-view {
                     margin: 0;
                     font-size: 9px;
@@ -524,6 +528,9 @@
                     align-items: center;
                     justify-content: center;
                     height: 100%;
+                    br{
+                      display: flex;
+                    }
                   }
 
 
