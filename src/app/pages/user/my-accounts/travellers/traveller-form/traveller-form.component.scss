@@ -326,6 +326,10 @@
       border: none;
       text-align: right;
       text-decoration: none;
+
+      @include tab-view{
+        font-size: 12px;
+      }
       &:focus {
         outline: none;
         box-shadow: none;
