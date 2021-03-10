@@ -44,7 +44,6 @@ export class SearchAirportComponent implements OnInit {
     if(Object.keys(this.airport).length==0){
       this.data=[];
     }
-    console.log(this.data,"----")
   }
 
   searchAirport(searchItem) {
@@ -134,7 +133,6 @@ export class SearchAirportComponent implements OnInit {
       this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
       this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
       //this.data=[];
-      console.log(changes['airport'],this.data,"=======")
     }
   }
 
