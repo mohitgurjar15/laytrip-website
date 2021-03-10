@@ -24,7 +24,7 @@
           font-weight: 500;
 
           @include tab-view{
-            margin-left: 15px;
+            //margin-left: 15px;
           }
         }
       }
@@ -40,7 +40,7 @@
           font-weight: 500;
           margin-bottom: 30px;
           @include tab-view {
-            font-size: 28px;
+            font-size: 24px;
           }
         }
         p {

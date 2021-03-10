@@ -47,7 +47,7 @@
 
                 .colmns_w {
                     @include tab-view {
-                        margin-bottom: 10px;
+                        margin-bottom: 5px;
                     }
                 }
 
@@ -209,6 +209,9 @@
                 box-shadow: none;
                 font-size: 16px;
                 padding: 0;
+                @include tab-view{
+                    font-size: 12px;
+                }
 
                 // margin-right: 40px;
                 &:last-child {

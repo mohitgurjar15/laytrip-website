@@ -34,6 +34,7 @@ export class ListTravellerComponent implements OnInit {
   limit: number;
   pageSize = 10;
   showPaginationBar: boolean = false;
+  showNewForm: boolean = false;
   isMasterSel: boolean;
   categoryList: any;
   checkedCategoryList: any;
@@ -264,6 +265,10 @@ export class ListTravellerComponent implements OnInit {
       this.travelers = this.travelers.filter(obj => obj.userId !== traveler.userId);
       this.travelers.push(traveler)
     }
+  }
+
+  showForm(){
+    this.showNewForm = true;
   }
 
 }

@@ -275,8 +275,12 @@ export class FlightSearchWidgetComponent implements OnInit {
     let tempAirport = this.fromSearch;
     this.fromSearch = this.toSearch;
     this.toSearch = tempAirport;
-    localStorage.setItem('__from',this.fromSearch.code)
-    localStorage.setItem('__to',this.toSearch.code)
+    if(this.fromSearch.code){
+      localStorage.setItem('__from',this.fromSearch.code)
+    }
+    if(this.toSearch.code){
+      localStorage.setItem('__to',this.toSearch.code)
+    }
   }
 
   returnDateUpdate(date) {

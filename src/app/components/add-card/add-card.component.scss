@@ -115,6 +115,9 @@
             font-size: 16px;
             padding: 0;
             text-align: right;
+            @include tab-view{
+                font-size: 12px;
+            }
         }
         .button {
             background-color: transparent;
@@ -125,6 +128,9 @@
             padding: 0;
             text-align: right;
             pointer-events: all;
+            @include tab-view{
+                font-size: 12px;
+            }
         }
     }
 }

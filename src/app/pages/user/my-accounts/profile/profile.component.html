@@ -153,34 +153,41 @@
             </div>
             <div class="form_row common_row address_main">
                 <!-- <label>{{'address_label' | translate}}</label> -->
-                <label>Street Address <br> City,State,Zip, <br>Country</label>
+                <!-- <label>Street Address <br> City,State,Zip, <br>Country</label> -->
+                <label>
+                    <span>Street</span>
+                    <span>City</span>
+                    <span>State</span>
+                    <span>Zip</span>
+                    <span>Country</span>
+                </label>
 
                 <div class="text_field address_box">
-                    <input [readonly]="!isFormControlEnable"  tabindex="10" type="text" formControlName="address"
-                    placeholder="Street Address" class="inputs_com">
-                    <ng-select  tabindex="12" [readonly]="!isFormControlEnable" class="address_ng" clearSearchOnAdd="true" selectOnTab="true"
-                        formControlName="state_id" placeholder="Select State" tabindex="4">
+                    <input [readonly]="!isFormControlEnable" tabindex="10" type="text" formControlName="address"
+                        placeholder="Street" class="inputs_com" maxlength="255">
+                    <input tabindex="13" [readonly]="!isFormControlEnable" type="text" class="inputs_com"
+                        formControlName="city" placeholder="City">
+                    <ng-select tabindex="12" [readonly]="!isFormControlEnable" class="address_ng"
+                        clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id" placeholder="Select State"
+                        tabindex="4">
                         <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
                     </ng-select>
-                
-                    <!-- <input  tabindex="13" [readonly]="!isFormControlEnable" type="text"  class="inputs_com" formControlName="city" placeholder="City">-->                    
-
-                <input  tabindex="14" [readonly]="!isFormControlEnable" type="text"  class="inputs_com" formControlName="zip_code" placeholder="Zip Code">
-                
-                <ng-select [readonly]="!isFormControlEnable" tabindex="11" class="ng-customClass address_ng"
-                            [items]="countries" bindLabel="name" [selectOnTab]="true" formControlName="country_id"
-                            selectOnTab="true" (change)="getStates($event)" [clearable]="false">
-                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                <span class="ng-value-label">
-                                    {{ item.name ? item.name : 'Select country' }} </span>
-                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                            </ng-template>
-                            <!-- <ng-template ng-option-tmp let-item="item">
+                    <input tabindex="14" [readonly]="!isFormControlEnable" maxlength="8" type="text" class="inputs_com"
+                        formControlName="zip_code" placeholder="Zip Code">
+                    <ng-select [readonly]="!isFormControlEnable" tabindex="11" class="ng-customClass address_ng"
+                        [items]="countries" bindLabel="name" [selectOnTab]="true" formControlName="country_id"
+                        selectOnTab="true" (change)="getStates($event)" [clearable]="false">
+                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                            <span class="ng-value-label">
+                                {{ item.name ? item.name : 'Select country' }} </span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        </ng-template>
+                        <!-- <ng-template ng-option-tmp let-item="item">
                                 <img class="img_country_code" [src]="item.flag" width="20px" height="20px">
                                 {{item.name}}
                             </ng-template> -->
-                </ng-select>
-                <!-- <textarea [readonly]="!isFormControlEnable" formControlName="address" placeholder="Enter Address"
+                    </ng-select>
+                    <!-- <textarea [readonly]="!isFormControlEnable" formControlName="address" placeholder="Enter Address"
                         id="" cols="15" rows="10" tabindex="12" maxlength="255"></textarea> -->
                 </div>
             </div>

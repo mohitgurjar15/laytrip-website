@@ -471,6 +471,9 @@
                                     width: 100%;
                                     justify-content: center;
                                     align-items: center;
+                                    br{
+                                        display: none;
+                                      }
 
                                     @include tab-view {
                                         margin: 0;
@@ -480,6 +483,9 @@
                                         align-items: center;
                                         justify-content: center;
                                         height: 100%;
+                                        br{
+                                            display: flex;
+                                          }
                                     }
 
                                     &.active {
@@ -569,6 +575,7 @@
                                     text-align: center;
                                     align-items: center;
                                     display: flex;
+                                    font-size: 10px;
                                 }
                             }
 

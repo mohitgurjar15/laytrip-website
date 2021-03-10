@@ -117,11 +117,17 @@ a {
 
         .ng-value-container {
           height: 40px;
+          @include tab-view{
+            font-size: 30px;
+          }
 
           .ng-placeholder {
             padding: 0;
             font-size: 16px;
             color: $mid_gray_bg;
+            @include tab-view{
+              font-size: 14px;
+            }
           }
 
           .ng-value {
@@ -134,11 +140,17 @@ a {
             font-weight: 400;
             color: $mid_gray_bg;
             position: relative;
+            @include tab-view{
+              font-size: 14px;
+            }
           }
 
           .ng-input {
             padding: 0;
             top: 7px;
+            @include tab-view{
+              font-size: 14px;
+            }
           }
         }
 
@@ -1077,7 +1089,7 @@ select {
                     padding: 15px;
                     border: 1px solid #e0e2e5;
                     border-radius: 0 0 5px 5px;
-                    z-index: 99;
+                    z-index: 999;
 
                     @include tab-view {
                       transform: translate(11%, 0%);
@@ -1253,6 +1265,16 @@ select {
                         padding: 0;
                       }
 
+                      .flight_to{
+                        .search_area{
+                          .lab_wrapper{
+                            label{
+                              padding-right: 0px !important;
+                              max-width: 35px !important;
+                            }
+                          }
+                        }
+                      }
                       label {
                         width: 100%;
                         margin-bottom: 0px;
@@ -1956,7 +1978,7 @@ select {
                 padding: 15px;
                 border: 1px solid #e0e2e5;
                 border-radius: 0 0 5px 5px;
-                z-index: 99;
+                z-index: 999;
 
                 @include tab-view {
                   right: 0;
@@ -2134,6 +2156,10 @@ select {
                     flex-flow: column;
                     margin-bottom: 5px;
                     padding: 0;
+                  }
+
+                  @include tab-view{
+                    z-index: 1000;
                   }
 
                   label {
@@ -3115,6 +3141,9 @@ select {
     width: 100%;
     padding: 50px 0 30px;
     background: $background-blue;
+    @include tab-view{
+      padding: 40px 0 25px;
+    }
 
     .ftr_flex_row {
       display: flex;
@@ -3131,12 +3160,18 @@ select {
           text-align: center;
           margin-bottom: 30px;
         }
-
+        @include tab-view{
+          margin-bottom: 20px;
+        }
         a {
           width: auto;
           display: inline-block;
           margin-bottom: 15px;
           color: $box-border-color;
+
+          @include tab-view{
+            font-size: 12px;
+          }
 
           img {
             display: inline-block;
@@ -3179,6 +3214,7 @@ select {
               width: 100%;
               margin-bottom: 10px;
 
+              
               &:last-child {
                 margin-bottom: 0;
               }
@@ -3227,12 +3263,15 @@ select {
 
           @media (max-width: 480px) {
             width: 100%;
-            margin-bottom: 10px;
+           
             text-align: center;
 
             //&:last-child {
             //width: 100%;
             //}
+          }
+          @include tab-view{
+            margin-bottom: 0;
           }
 
           h5 {
@@ -3241,6 +3280,10 @@ select {
             color: $box-border-color;
             font-weight: 600;
             margin: 0 0 15px;
+            @include tab-view{
+              margin: 30px 0 15px;
+              font-size: 12px;
+            }
           }
 
           ul {
@@ -3253,12 +3296,18 @@ select {
               width: 100%;
               padding: 0 0 10px;
 
+              @include tab-view{
+                padding: 0 0 20px;
+              }
+
               a {
                 font-size: 14px;
                 color: $box-border-color;
                 font-weight: 600;
                 //opacity: 0.7;
-
+                @include tab-view{
+                  font-size: 12px;
+                }
                 &:hover {
                   color: $pink;
                   opacity: 1;
@@ -3268,6 +3317,9 @@ select {
               &:last-child {
                 padding: 0;
                 margin: 0;
+                @include tab-view{
+                  padding: 0 0 20px;
+                }
               }
             }
           }
@@ -3292,8 +3344,9 @@ select {
       color: $box-border-color;
       margin: 0;
       font-weight: 300;
-
-      @media (max-width: 767px) {
+      
+      @include tab-view{
+        font-size: 12px;
         padding: 0 20px;
       }
     }

@@ -13,10 +13,11 @@ var environment_1 = require("../environments/environment");
 var uuid_1 = require("uuid");
 var jwt_helper_1 = require("./_helpers/jwt.helper");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(cookieService, genericService, swPush, userService) {
+    function AppComponent(cookieService, genericService, 
+    // private swPush: SwPush,
+    userService) {
         this.cookieService = cookieService;
         this.genericService = genericService;
-        this.swPush = swPush;
         this.userService = userService;
         this.title = 'laytrip-website';
         this.VAPID_PUBLIC_KEY = environment_1.environment.VAPID_PUBLIC_KEY;
@@ -26,27 +27,22 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.ngOnInit = function () {
         var token = localStorage.getItem('_lay_sess');
         if (token) {
-            this.subscribeToNotifications();
+            // this.subscribeToNotifications()
         }
         this.registerGuestUser();
     };
-    AppComponent.prototype.subscribeToNotifications = function () {
-        var _this = this;
-        this.swPush.requestSubscription({
-            serverPublicKey: this.VAPID_PUBLIC_KEY
-        })
-            .then(function (sub) { return _this.genericService.addPushSubscriber(sub).subscribe(); })["catch"](
-        // err =>console.log("Could not subscribe to notifications")
-        );
-        /* this.swPush.requestSubscription({
-            serverPublicKey: this.VAPID_PUBLIC_KEY
-        })
-        .then(sub =>
-          console.log(sub)
-            // this.genericService.addPushSubscriber(sub).subscribe()
-          )
-        .catch(err => console.error(this.VAPID_PUBLIC_KEY,"Could not subscribe to notifications", err)); */
-    };
+    /* subscribeToNotifications() {
+  
+      this.swPush.requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY
+    })
+    .then(sub =>   this.genericService.addPushSubscriber(sub).subscribe()
+      )
+    .catch(
+      
+    );
+    
+    } */
     AppComponent.prototype.setUserOrigin = function () {
         var host = window.location.origin;
         if (host.includes("dr.")) {

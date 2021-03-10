@@ -6054,14 +6054,17 @@
             }
         }
     }
-    &.ng-select-disabled{
-        .ng-select-container{
+
+    &.ng-select-disabled {
+        .ng-select-container {
             background-color: $background-white;
         }
     }
+
     .ng-select-container {
         border: none;
         background-color: $background-white;
+
         &:hover {
             box-shadow: none;
             outline: none;
@@ -6071,23 +6074,37 @@
             box-shadow: none;
             outline: none;
         }
+
         .ng-value-container {
             padding-left: 0;
 
-            .ng-placeholder{
+            .ng-placeholder {
                 font-size: 16px;
                 color: $mid_gray_bg;
+
+                @include tab-view {
+                    font-size: 14px;
+                }
             }
 
             .ng-value {
+                @include tab-view {
+                    top: -3px;
+                    position: relative;
+                }
+
                 .ng-value-label {
                     font-size: 16px;
-                color: $mid_gray_bg;
+                    color: $mid_gray_bg;
+
+                    @include tab-view {
+                        font-size: 14px;
+                    }
                 }
             }
 
             .ng-input {
-                padding: 0 !important; 
+                padding: 0 !important;
             }
         }
 
