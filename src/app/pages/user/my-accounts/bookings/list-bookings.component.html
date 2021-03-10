@@ -170,7 +170,7 @@
                           Next Payment {{ (booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
                           commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
                         </div> -->
-                        <div class="payment_status {{booking.is_installation_on_track}}">
+                        <div class="payment_status" *ngIf="booking.booking[0].paymentStatus === 0">
                            <!-- {{ ( booking.is_installation_on_track === true && booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
                           'Next Payment'+commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
                            -->
