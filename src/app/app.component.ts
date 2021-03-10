@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 import { GenericService } from './services/generic.service';
 import * as moment from 'moment';
-import { SwPush } from '@angular/service-worker';
+// import { SwPush } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 import { getLoginUserInfo } from './_helpers/jwt.helper';
@@ -19,7 +19,7 @@ export class AppComponent {
   constructor(
     private cookieService:CookieService,
     private genericService:GenericService,
-    private swPush: SwPush,
+    // private swPush: SwPush,
     private userService:UserService
   ){
     this.setUserOrigin();
@@ -29,14 +29,14 @@ export class AppComponent {
   ngOnInit(){
     let token = localStorage.getItem('_lay_sess');
     if(token){
-      this.subscribeToNotifications()
+      // this.subscribeToNotifications()
     }
 
     this.registerGuestUser()
   }
 
 
-  subscribeToNotifications() {
+  /* subscribeToNotifications() {
 
     this.swPush.requestSubscription({
       serverPublicKey: this.VAPID_PUBLIC_KEY
@@ -44,17 +44,10 @@ export class AppComponent {
   .then(sub =>   this.genericService.addPushSubscriber(sub).subscribe()
     )
   .catch(
-    // err =>console.log("Could not subscribe to notifications")
+    
   );
-    /* this.swPush.requestSubscription({
-        serverPublicKey: this.VAPID_PUBLIC_KEY
-    })
-    .then(sub =>
-      console.log(sub)
-        // this.genericService.addPushSubscriber(sub).subscribe()
-      )
-    .catch(err => console.error(this.VAPID_PUBLIC_KEY,"Could not subscribe to notifications", err)); */
-  }
+  
+  } */
 
   setUserOrigin(){
     
