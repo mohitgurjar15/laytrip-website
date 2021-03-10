@@ -17,7 +17,8 @@
 <div id="card-list" *ngIf="cards.length">
     <div id="card_list_accodrio" class="accordion_cardss anchor-tag" *ngFor="let card of cards; let blockIndex = index;"
         (click)="selectCard(card.cardToken)">
-        <div class="card" [attr.id]="blockIndex" [ngClass]="{'current_selected_card': cardToken === card.cardToken}">
+        <div class="card" [attr.id]="blockIndex"
+            [ngClass]='{"current_selected_card": cardToken === card.cardToken && origin!=="/cart/checkout" && origin!=="/account"}'>
             <div class="card-header">
                 <a data-toggle="collapse" data-parent="#accordion" href="#card{{blockIndex}}" aria-expanded="false"
                     aria-controls="collapse11" class="d-flex justify-content-start">
@@ -37,7 +38,8 @@
                     </span>
                 </a>
             </div>
-            <div id="card{{blockIndex}}" class="collapse" [ngClass]='{"show":origin=="/cart/booking" && cardToken === card.cardToken}' data-parent="#accordion">
+            <div id="card{{blockIndex}}" class="collapse"
+                [ngClass]='{"show":origin=="/cart/booking" && cardToken === card.cardToken}' data-parent="#accordion">
                 <div class="card-body">
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4 mb-sm-10">
