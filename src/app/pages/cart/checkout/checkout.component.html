@@ -64,7 +64,7 @@
                             I agree to your <a [routerLink]="['/privacy-policy']" target="_blank">Privacy Policy</a> and <a [routerLink]="['/terms']" target="_blank">Terms</a>, which include terms from Laytrip suppliers and travel partners.
                         </label>
                         <div class="cta_btn_wrapper">
-                            <button (click)="bookFlight()">Pay and Book</button>
+                            <button [disabled]="!isTermConditionAccepted" (click)="bookFlight()">Pay and Book</button>
                         </div>
                     </div>
                     <div class="error_wrapper">

@@ -136,7 +136,7 @@
     </div>
     <div class="total_hrs_wrps cta_btns_wrps" *ngIf="(cartItem | json) != '{}'">
       <span class="ct_btns" >
-        <a href="javascript:void(0);">
+        <a class="hover-link" *ngIf="cartItem?.bookingStatus == 0">
           Cancel
         </a>
       </span>

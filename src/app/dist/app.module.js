@@ -22,8 +22,7 @@ var animations_1 = require("@angular/platform-browser/animations");
 var ngx_toastr_1 = require("ngx-toastr");
 var angularx_social_login_1 = require("angularx-social-login");
 var apple_provider_1 = require("./pages/user/social-login/apple.provider");
-var service_worker_1 = require("@angular/service-worker");
-var environment_1 = require("../environments/environment");
+var auth_guard_1 = require("./guard/auth.guard");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -51,7 +50,6 @@ var AppModule = /** @class */ (function () {
                 animations_1.BrowserAnimationsModule,
                 ngx_toastr_1.ToastrModule.forRoot(),
                 angularx_social_login_1.SocialLoginModule,
-                service_worker_1.ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment_1.environment.production }),
             ],
             providers: [
                 {
@@ -65,7 +63,8 @@ var AppModule = /** @class */ (function () {
                             },
                         ]
                     }
-                }
+                },
+                auth_guard_1.AuthGuard
             ],
             bootstrap: [app_component_1.AppComponent]
         })
