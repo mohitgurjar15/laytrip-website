@@ -36,6 +36,9 @@
                 span {
                     color: $mid_gray_bg;
                     font-size: 10px;
+                    @include tab-view{
+                        font-weight: 400;
+                    }
                 }
             }
             .fake_paid_markss{

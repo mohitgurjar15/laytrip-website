@@ -84,7 +84,16 @@
     }
     .mb-sm-10 {
         @include tab-view {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+    padding: 0;
+        }
+    }
+    .form-row{
+        &.margin_top{
+            margin-top: 10px;
+            @include tab-view{
+                margin-top: 0;
+            }
         }
     }
     .iframe_wrapper {
@@ -107,6 +116,9 @@
         align-items: flex-end;
         // flex-direction: column;
         height: 100%;
+        @include tab-view{
+            justify-content: space-between;
+        }
         a {
             background-color: transparent;
             color: $text_light_yellow;
@@ -115,8 +127,10 @@
             font-size: 16px;
             padding: 0;
             text-align: right;
+
             @include tab-view{
                 font-size: 12px;
+                
             }
         }
         .button {
@@ -128,6 +142,12 @@
             padding: 0;
             text-align: right;
             pointer-events: all;
+
+            &:first-child{
+                @include tab-view{
+                    text-align: left;
+                } 
+            }
             @include tab-view{
                 font-size: 12px;
             }
@@ -218,6 +238,9 @@
                 align-items: flex-end;
                 flex-direction: column;
                 height: 100%;
+                @include tab-view{
+                    justify-content: space-between;
+                }
                 a {
                     background-color: transparent;
                     color: $text_light_yellow;
@@ -225,6 +248,9 @@
                     box-shadow: none;
                     font-size: 16px;
                     padding: 0;
+                    @include tab-view{
+                        font-size: 12px;
+                    }
                 }
             }
         }

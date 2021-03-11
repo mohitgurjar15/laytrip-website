@@ -256,6 +256,10 @@
                     border: 1px solid $box-border-color;
                     margin-top: 15px;
 
+                    @include tab-view {
+                        margin-top: 10px;
+                    }
+
                     &:first-child {
                         margin-top: 0;
                     }

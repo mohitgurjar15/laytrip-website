@@ -83,6 +83,7 @@
         margin: 25px 0 15px;
         @include tab-view {
           margin: 0;
+          min-width: 55px;
         }
         a {
           background-color: transparent;

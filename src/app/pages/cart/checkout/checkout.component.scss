@@ -23,6 +23,7 @@
         @include tab-view {
             font-size: 24px;
             padding: 0 15px;
+            margin-top: 5px;
         }
     }
 
@@ -52,6 +53,10 @@
                 padding: 0;
                 text-align: right;
                 text-decoration: none;
+                @include tab-view{
+                    font-size: 12px;
+                    min-width: 55px;
+                }
             }
         }
     }
@@ -72,6 +77,7 @@
             }
             @include tab-view{
                 font-size: 12px;
+                font-weight: 500;
             }
         }
         .lo_sm_fn{
@@ -175,6 +181,24 @@
             }
         }
     }
+    .card_details_wrppers{
+        .title_bar{
+            @include tab-view{
+            margin: 25px 0 15px;
+            padding: 0 15px;
+                h3{
+                    margin: 0;
+                    padding: 0;
+                }
+                .edit_btns{
+                    @include tab-view{
+                        font-size: 12px;
+                        min-width: 55px;
+                    }
+                }
+            }
+        }
+    }
 
     .payment_container {
         max-width: 658px;
@@ -205,12 +229,13 @@
             margin-top: 10px;
             vertical-align: middle;
             line-height: normal;
-            display: flex;
-            align-items: flex-start;
+            // display: flex;
+            // align-items: flex-start;
             font-size: 11px;
             a{
                 color: $txt_clr_blue;
-                display: contents;
+                // display: contents;
+                position: relative;
             }
 
             input {
@@ -245,6 +270,7 @@
                 margin-right: 11px;
                 margin-top: 3px;
                 position: relative;
+                float: left;
 
                 &:after {
                     content: "";
