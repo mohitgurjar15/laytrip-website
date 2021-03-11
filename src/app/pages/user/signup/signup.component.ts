@@ -8,6 +8,7 @@ import { MustMatch } from '../../../_helpers/must-match.validators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
+import { CommonFunction } from '../../../_helpers/common-function';
 
 declare var $: any;
 
@@ -43,6 +44,8 @@ export class SignupComponent implements OnInit {
     private userService : UserService,
     public router: Router,
     public renderer: Renderer2,
+    public commonFunction: CommonFunction,
+
     ) {}
 
   ngOnInit() {    

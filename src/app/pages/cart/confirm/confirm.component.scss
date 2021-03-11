@@ -30,6 +30,9 @@
 .conf_main_wrapper {
     padding: 15px 0;
 
+    @include tab-view{
+        padding: 15px 0 0;
+    }
     .back_cta_btn {
         a {
             color: $active-tab-text;
@@ -46,15 +49,30 @@
                 font-size: 34px;
                 margin-bottom: 15px;
 
+                @include tab-view {
+                    font-size: 24px;
+                }
+
                 .b_num {
                     color: $text-black;
                     font-size: 20px;
+
+                    @include tab-view {
+                        font-size: 18px;
+                        display: flex;
+                        width: 100%;
+                        margin-top: 10px;
+                    }
                 }
             }
 
             p {
                 font-size: 20px;
                 color: $mid_gray_bg;
+
+                @include tab-view {
+                    font-size: 14px;
+                }
 
                 a {
                     color: $txt_clr_blue;
@@ -67,6 +85,10 @@
                 color: $active-tab-text;
                 font-size: 34px;
                 margin: 25px 0 15px;
+
+                @include tab-view {
+                    font-size: 24px;
+                }
             }
 
             .detail_liners {
@@ -77,9 +99,20 @@
                 justify-content: flex-start;
                 align-items: center;
 
+                @include tab-view {
+                    font-size: 14px;
+                    align-items: flex-start;
+                    flex-direction: column;
+                }
+
                 .lefts {
                     color: $text-black;
                     flex: 1;
+
+                    @include tab-view {
+                        font-weight: 500;
+                    }
+
                 }
 
                 .rights {
@@ -97,6 +130,10 @@
                     color: $txt_clr_blue;
                     font-size: 20px;
                     margin-bottom: 10px;
+
+                    @include tab-view {
+                        font-size: 18px;
+                    }
                 }
             }
         }

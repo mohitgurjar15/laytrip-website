@@ -65,8 +65,9 @@
                       <div *ngIf="traveler.controls.last_name.touched && traveler.controls.last_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"><!-- Please enter your
-                          last name. --></small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          enter your
+                          last name.</small>
                         <small *ngIf="traveler.controls.last_name.errors.pattern" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                           <!-- {{'last_name_string_validation' | translate}} --> </small>
@@ -81,8 +82,8 @@
                       </select>
                       <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors" class="error">
                         <small *ngIf="traveler.controls.gender.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"><!-- Please select your
-                          gender. --></small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          select your gender.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10"
@@ -91,12 +92,14 @@
                       <input type="email" class="form-control" formControlName="email" tabindex="4">
                       <div *ngIf="traveler.controls.email.touched && traveler.controls.email.errors" class="error">
                         <small *ngIf="traveler.controls.email.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"><!-- Please enter your
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          enter your
                           email
-                          address. --></small>
+                          address.</small>
                         <small *ngIf="traveler.controls.email.errors.pattern" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"><!-- Please enter valid
-                          email address. --></small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          enter valid
+                          email address.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps"
@@ -113,12 +116,12 @@
                       </span>
                       <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
                         class="error">
-                        <small *ngIf="traveler.concountrycountrytrols.phone_no.errors.required"
-                          class="error_field">
+                        <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                          <!-- Please enter your phone number. --></small>
+                          Please enter your phone number.</small>
                         <small *ngIf="traveler.controls.phone_no.errors.minlength" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"><!-- Phone number should be minimum 10 --></small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
+                            class="error_img">Minimum 10 characters.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 dobs col-md-4 mb-sm-10">

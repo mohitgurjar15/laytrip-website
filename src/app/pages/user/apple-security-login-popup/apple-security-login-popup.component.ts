@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GenericService } from '../../../services/generic.service';
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
+
+export enum MODAL_TYPE {
+  CLOSE,
+}
 
 @Component({
   selector: 'app-apple-security-login-popup',
@@ -34,7 +38,7 @@ export class AppleSecurityLoginPopupComponent implements OnInit {
   }
 
   close() {
-    this.activeModal.close();
+    this.activeModal.close({ STATUS: MODAL_TYPE.CLOSE });
   }
 
   onSubmit(formValue) {
@@ -47,9 +51,11 @@ export class AppleSecurityLoginPopupComponent implements OnInit {
       return;
     }
     // API CALL
-    console.log(formValue);
     this.genericService.updateViaAppleLogin(formValue).subscribe((res: any) => {
-      console.log(res);
+      if (res) {
+        this.loading = false;
+        this.activeModal.close({ STATUS: MODAL_TYPE.CLOSE });
+      }
     });
   }
 

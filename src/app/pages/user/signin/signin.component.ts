@@ -10,7 +10,6 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
-import { AppleSecurityLoginPopupComponent } from '../apple-security-login-popup/apple-security-login-popup.component';
 
 declare var $: any;
 
@@ -77,11 +76,6 @@ export class SigninComponent implements OnInit {
           this.loading = this.submitted = false;
           $('#sign_in_modal').modal('hide');
           const _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
-
-          if (userDetails.requireToupdate === true) {
-            this.openAppleSecurityLogin();
-          }
-
           if (_isSubscribeNow == "Yes" && userDetails.roleId == 6) {
             this.router.navigate(['account/subscription']);
           } else {
@@ -114,15 +108,6 @@ export class SigninComponent implements OnInit {
         }
       });
     }
-  }
-
-  openAppleSecurityLogin() {
-    this.modalService.open(AppleSecurityLoginPopupComponent, {
-      windowClass: 'apple_security_login_block', centered: true, backdrop: 'static',
-      keyboard: false
-    }).result.then((result) => {
-
-    });
   }
 
   emailVerify() {
