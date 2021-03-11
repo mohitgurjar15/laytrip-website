@@ -8,6 +8,7 @@ import { MustMatch } from '../../../_helpers/must-match.validators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
+import { CommonFunction } from '../../../_helpers/common-function';
 
 declare var $: any;
 
@@ -25,106 +26,107 @@ export class SignupComponent implements OnInit {
   submitted = false;
   closeResult = '';
   is_type: string = 'M';
-  emailForVerifyOtp : string = '';
+  emailForVerifyOtp: string = '';
   loading: boolean = false;
-  cnfPassFieldTextType :  boolean;
-  passFieldTextType :  boolean;
-  apiError =  '';
+  cnfPassFieldTextType: boolean;
+  passFieldTextType: boolean;
+  apiError = '';
   is_email_available = false;
   emailExist = false;
   public isCaptchaValidated: boolean = false;
   public message: string = "";
-  iAccept : boolean = false;
-  @ViewChild('captchaElem',{static:false}) captchaElem: RecaptchaComponent;
+  iAccept: boolean = false;
+  @ViewChild('captchaElem', { static: false }) captchaElem: RecaptchaComponent;
 
   constructor(
     public modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private userService : UserService,
+    private userService: UserService,
     public router: Router,
     public renderer: Renderer2,
-    ) {}
+    public commonFunction: CommonFunction
+  ) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.signupForm = this.formBuilder.group({
-      first_name:['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      last_name:['',[Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      last_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
       confirm_password: ['', Validators.required],
-      checked:  ['', Validators.required],  
-    },{
-      validators: MustMatch('password', 'confirm_password'),     
+      checked: ['', Validators.required],
+    }, {
+      validators: MustMatch('password', 'confirm_password'),
     });
-  }  
+  }
 
   openOtpPage() {
     $('#sign_up_modal').modal('hide');
-    const modalRef = this.modalService.open(VerifyOtpComponent, {windowClass:'otp_window', centered: true,backdrop: 'static',keyboard: false});
+    const modalRef = this.modalService.open(VerifyOtpComponent, { windowClass: 'otp_window', centered: true, backdrop: 'static', keyboard: false });
     (<VerifyOtpComponent>modalRef.componentInstance).isSignup = true;
     (<VerifyOtpComponent>modalRef.componentInstance).emailForVerifyOtp = this.emailForVerifyOtp;
   }
 
-  closeModal(){
-    this.apiError ='';
+  closeModal() {
+    this.apiError = '';
     $('#sign_up_modal').modal('hide');
-  } 
+  }
 
 
-  toggleFieldTextType(event){
-    if(event.target.id == 'passEye'){
+  toggleFieldTextType(event) {
+    if (event.target.id == 'passEye') {
       this.passFieldTextType = !this.passFieldTextType;
-      
-    }else if(event.target.id == 'cnfEye'){
+
+    } else if (event.target.id == 'cnfEye') {
       this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
     }
-  } 
+  }
 
   captchaResponse(response: string) {
     this.isCaptchaValidated = true;
   }
-    
-  onSubmit() {    
-    this.submitted = this.loading  = true;   
-    if (this.signupForm.invalid || !this.isCaptchaValidated || !this.iAccept ) {
-      this.submitted = true;      
+
+  onSubmit() {
+    this.submitted = this.loading = true;
+    if (this.signupForm.invalid || !this.isCaptchaValidated || !this.iAccept) {
+      this.submitted = true;
       this.loading = false;
       return;
     } else {
-       
+
       this.userService.signup(this.signupForm.value).subscribe((data: any) => {
         this.emailForVerifyOtp = this.signupForm.value.email;
-        this.submitted = this.loading = false;         
-        this.openOtpPage();   
-      }, (error: HttpErrorResponse) => {       
+        this.submitted = this.loading = false;
+        this.openOtpPage();
+      }, (error: HttpErrorResponse) => {
         this.apiError = error.message;
         this.submitted = this.loading = false;
       });
     }
   }
 
-  openSignInModal(){
+  openSignInModal() {
     setTimeout(() => {
       this.renderer.addClass(document.body, 'modal-open');
     }, 1000);
     $('#sign_up_modal').modal('hide');
     this.emailExist = false;
   }
-  
-  socialError(error){
-    this.apiError = error;
-  } 
 
-  checkAccept(event){
-    if(event.target.checked){
+  socialError(error) {
+    this.apiError = error;
+  }
+
+  checkAccept(event) {
+    if (event.target.checked) {
       this.iAccept = true;
     } else {
       this.iAccept = false;
     }
-  }  
-  
+  }
+
   checkEmailExist(emailString) {
-    if(emailString.toString().length >= 3){
+    if (emailString.toString().length >= 3) {
       this.userService.emailVeryfiy(emailString).subscribe((data: any) => {
         console.log(data)
         if (data && data.is_available) {
@@ -134,7 +136,7 @@ export class SignupComponent implements OnInit {
         else {
           this.emailExist = false;
         }
-      }); 
+      });
     }
   }
 }
