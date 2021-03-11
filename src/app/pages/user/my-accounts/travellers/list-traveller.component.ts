@@ -91,7 +91,6 @@ export class ListTravellerComponent implements OnInit {
           return e;
         }
       });
-      console.log(this.travelers.length)
       if(this.travelers.length == 0){
         this.showNewForm = true;
       }
@@ -273,6 +272,11 @@ export class ListTravellerComponent implements OnInit {
     } else {
       this.travelers = this.travelers.filter(obj => obj.userId !== traveler.userId);
       this.travelers.push(traveler)
+    }
+    if(this.travelers.length == 0){
+      this.showNewForm = true;
+    } else {
+      this.showNewForm = false;
     }
   }
 

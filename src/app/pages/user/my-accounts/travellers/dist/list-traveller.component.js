@@ -64,7 +64,6 @@ var ListTravellerComponent = /** @class */ (function () {
                     return e;
                 }
             });
-            console.log(_this.travelers.length);
             if (_this.travelers.length == 0) {
                 _this.showNewForm = true;
             }
@@ -229,6 +228,12 @@ var ListTravellerComponent = /** @class */ (function () {
         else {
             this.travelers = this.travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
             this.travelers.push(traveler);
+        }
+        if (this.travelers.length == 0) {
+            this.showNewForm = true;
+        }
+        else {
+            this.showNewForm = false;
         }
     };
     ListTravellerComponent.prototype.showForm = function () {
