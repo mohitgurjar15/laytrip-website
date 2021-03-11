@@ -44,3 +44,11 @@ export const travelersFileds={
         }
     }
 }
+
+export const travlerLabels={
+    en  : {
+        adult   : 'Adult',
+        child   : 'Child',
+        infant  : 'Infant'
+    }
+}

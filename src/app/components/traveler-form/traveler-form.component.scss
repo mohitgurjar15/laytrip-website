@@ -355,6 +355,31 @@
             }
           }
         }
+        .edit_btns {
+          display: flex;
+          justify-content: flex-end;
+          button {
+            background-color: transparent;
+            color: $text_light_yellow;
+            box-shadow: none;
+            font-size: 16px;
+            padding: 0;
+            border: none;
+            text-align: right;
+            text-decoration: none;
+      
+            @include tab-view{
+              font-size: 12px;
+            }
+            &:focus {
+              outline: none;
+              box-shadow: none;
+            }
+          }
+          &.duel_buttons{
+            justify-content: space-between;
+          }
+        }
       }
 
       .accordion_addn {
@@ -644,4 +669,8 @@
       }
     }
   }
+}
+
+.hide_section{
+  display: none;
 }
