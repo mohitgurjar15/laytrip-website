@@ -132,11 +132,11 @@
         </div>
         <span class="edit_btns duel_buttons">
             <span class="remove_wrps">
-                <button class="hover-link disabled" *ngIf="traveller.roleId != 6"
+                <button class="hover-link " [ngClass]="{'disabled': !travellerId }" 
                     (click)="openDeleteModal(deleteContent,travellerId)">Delete</button>
             </span>
-            <button (click)="onSubmit()" class="hover-link disabled">Edit</button>
-            <button (click)="onSubmit()" class="hover-link">Save</button>
+            <button (click)="onSubmit()" class="hover-link"  [ngClass]="{'disabled': !travellerId }" >Edit</button>
+            <button (click)="onSubmit()" class="hover-link" [ngClass]="{'disabled': travellerId }" >Save</button>
         </span>
     </div>
 

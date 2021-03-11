@@ -3596,7 +3596,9 @@ select {
 .block_contact_us_main {
   width: 100%;
   padding: 50px 0;
-
+  .modal-content{
+    border-radius: 10px;
+  }
   .block_contact_inner {
     width: 100%;
     padding: 40px 15px;
@@ -5335,6 +5337,12 @@ select {
 
           @include tab-view {
             font-size: 14px;
+          }
+
+          font{
+            
+            font-size: 18px;
+            font-family: "Poppins", sans-serif;
           }
         }
       }

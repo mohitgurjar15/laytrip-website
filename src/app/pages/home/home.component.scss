@@ -116,7 +116,7 @@
                 }
 
                 @media(max-width: 599px) {
-                    font-size: 16px;
+                    font-size: 17px;
                 }
             }
         }
@@ -160,8 +160,8 @@
                     width: 69px;
 
                     @include tab-view {
-                        height: 59px;
-                        width: 59px;
+                        height: 51px;
+                        width: 51px;
                         margin-right: 20px;
 
                         &:last-child {
