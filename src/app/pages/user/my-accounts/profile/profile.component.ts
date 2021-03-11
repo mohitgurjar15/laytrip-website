@@ -264,7 +264,6 @@ export class ProfileComponent implements OnInit {
           toastClass: 'custom_toastr',
           titleClass: 'custom_toastr_title',
           messageClass: 'custom_toastr_message',
-          disableTimeOut: true
         });
       }
     });

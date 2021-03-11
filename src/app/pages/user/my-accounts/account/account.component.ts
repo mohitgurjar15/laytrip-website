@@ -77,7 +77,6 @@ export class AccountComponent implements OnInit {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
         messageClass: 'custom_toastr_message',
-        disableTimeOut: true
       });
       redirectToLogin();
     }, (error: HttpErrorResponse) => {
@@ -87,7 +86,6 @@ export class AccountComponent implements OnInit {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
         messageClass: 'custom_toastr_message',
-        disableTimeOut: true
       });
       if (error.status == 401) {
         // redirectToLogin();

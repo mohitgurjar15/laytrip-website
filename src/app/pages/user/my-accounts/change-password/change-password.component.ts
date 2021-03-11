@@ -62,7 +62,6 @@ export class ChangePasswordComponent implements OnInit {
           toastClass: 'custom_toastr',
           titleClass: 'custom_toastr_title',
           messageClass: 'custom_toastr_message',
-          disableTimeOut: true
         });
         this.submitted = false;
 
@@ -75,7 +74,6 @@ export class ChangePasswordComponent implements OnInit {
           toastClass: 'custom_toastr',
           titleClass: 'custom_toastr_title',
           messageClass: 'custom_toastr_message',
-          disableTimeOut: true
         });
       });
     }
