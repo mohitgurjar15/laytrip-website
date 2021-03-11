@@ -76,7 +76,7 @@ export class BookingFeedbackComponent implements OnInit {
         this.loading = false;
       }, (error: HttpErrorResponse) => {
         this.loading = false;
-        this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
+        // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
       });
     }
   }

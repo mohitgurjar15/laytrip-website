@@ -216,7 +216,7 @@ export class FlightCheckoutComponent implements OnInit {
           }
         },(error=>{
           this.bookingLoader=false;
-          this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
+          // this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
         }))
       }
       /* Login user */
@@ -267,7 +267,7 @@ export class FlightCheckoutComponent implements OnInit {
           this.bookingStatus=2; // Booking failed from supplier side
         }
         else{
-          this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
+          // this.toastr.error(error.message, 'Error',{positionClass:'toast-top-center',easeTime:1000});
         }
         this.bookingLoader=false;
       });

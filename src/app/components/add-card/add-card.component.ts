@@ -292,7 +292,7 @@ export class AddCardComponent implements OnInit {
       this.saveCardLoader = false;
     }, (error => {
       this.saveCardLoader = false;
-      this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
+      // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
     })
     );
   }
