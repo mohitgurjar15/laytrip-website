@@ -96,7 +96,7 @@ export class FlightPriceSliderComponent implements OnInit {
    
     if(changes['dates'].currentValue.length){
       setTimeout(()=>{this.loadJquery();},100)
-      if(this.trip == 'oneway'){
+      /* if(this.trip == 'oneway'){
         this.flipDates(this.dates)
       }
       else{
@@ -105,34 +105,48 @@ export class FlightPriceSliderComponent implements OnInit {
           this.dates = this.arrayRotate(this.dates,targetIndex);
           console.log("this.dates",this.dates)
         }
-      }
+      } */
+      this.flipDates(this.dates)
     }
   }
 
   flipDates(dates){
     let result =[]
     let sourceIndex = dates.findIndex(date=>{ return moment(date.date,"DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] })
-    let targetIndex = 4;
+    let targetIndex = 3;
     if(window.screen.width<=600){
-      targetIndex=6;
+      targetIndex=1;
+      /* targetIndex=dates.length-sourceIndex+1;
+      this.dates = this.rotateArray1(dates,targetIndex) */
     }
-    console.log(targetIndex,"targetIndex",sourceIndex)
-    this.dates = this.arrayRotate(this.dates,targetIndex);
-    console.log("this.dates",this.dates)
-    if(targetIndex > sourceIndex){
+    let startIndex=sourceIndex-targetIndex;
 
-      /* targetIndex=5;
+    for(let i=startIndex; i<dates.length;i++){
+      result.push(dates[i])
+    }
+
+    for(let i=0; i<startIndex;i++){
+      result.push(dates[i])
+    }
+
+    this.dates = result;
+    /* else{
+      this.dates = this.arrayRotate(this.dates,targetIndex);
+    } */
+    /* if(targetIndex > sourceIndex){
+
+      targetIndex=5;
       for(let i=targetIndex; i < this.dates.length; i++){
         result.push(this.dates[i])
       }
       for(let i=0; i < targetIndex; i++){
         result.push(this.dates[i])
-      } */
+      }
 
     }
     else{
 
-      /* for(let i=targetIndex; i <= sourceIndex; i++){
+      for(let i=targetIndex; i <= sourceIndex; i++){
         
         result.push(this.dates[i])
       }
@@ -143,11 +157,20 @@ export class FlightPriceSliderComponent implements OnInit {
       
       for(let i=0; i < targetIndex; i++){
         result.push(this.dates[i])
-      } */
+      }
 
       
     }
-    //this.dates = result;
+    this.dates = result; */
+  }
+
+  rotateArray1(dates, k) {
+
+    for (let i = 0; i < k; i++) {
+        dates.unshift(dates.pop());
+    }
+  
+    return dates;
   }
 
   arrayRotate(arr, count) {
