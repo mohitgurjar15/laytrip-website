@@ -2165,8 +2165,8 @@ select {
                     padding: 0;
                   }
 
-                  @include tab-view {
-                    z-index: 1000;
+                  @include tab-view{
+                    z-index: 999;
                   }
 
                   label {
