@@ -20,6 +20,7 @@
             .edit_btns{
                 @include tab-view{
                     display: flex;
+                    min-width: 55px;
                 }
             }
         }

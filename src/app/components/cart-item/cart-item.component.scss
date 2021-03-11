@@ -111,7 +111,7 @@
                                     width: 24px;
                                 }
                                 @include tab-view{
-                                    display: none;
+                                    //display: none;
                                 }
                             }
                             .flight_routing_imgs{
@@ -129,6 +129,7 @@
                             font-weight: 400;
                             @include tab-view {
                                 font-size: 12px;
+                                margin-left: 54px;
                             }
                         }
                     }
