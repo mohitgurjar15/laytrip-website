@@ -36,6 +36,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { TermsComponent } from './terms/terms.component';
 import { CcpaComponent } from './ccpa/ccpa.component';
 import { AppleSecurityLoginPopupComponent } from './user/apple-security-login-popup/apple-security-login-popup.component';
+import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { AppleSecurityLoginPopupComponent } from './user/apple-security-login-po
     CmsPagesComponent,
     TermsComponent,
     CcpaComponent,
-    AppleSecurityLoginPopupComponent
+    AppleSecurityLoginPopupComponent,
+    CookiePolicyComponent
 
   ],
   imports: [
