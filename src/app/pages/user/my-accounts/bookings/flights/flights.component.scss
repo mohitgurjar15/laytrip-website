@@ -56,7 +56,7 @@
 
                     .colmns_w {
                         @include tab-view {
-                            margin-bottom: 10px;
+                            margin-bottom: 1px;
                             &.timing_wrp {
                                 margin-bottom: 0;
                             }

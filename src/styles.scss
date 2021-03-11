@@ -88,9 +88,11 @@ a {
       background-size: 20px;
       border: none;
       padding: 0;
+      color: $mid_gray_bg;
 
       @include tab-view {
         background: none;
+        font-size: 14px;
       }
 
       &:focus {
@@ -1291,6 +1293,10 @@ select {
                         border-radius: 8px;
                         background: $background-white;
 
+                        @include tab-view{
+                          padding: 6px 0;
+                        }
+
                         .comon_pcale {
                           .p-calendar {
                             width: 100%;
@@ -1396,6 +1402,7 @@ select {
                         border-radius: 8px;
                         background: $background-white;
                         position: relative;
+                        
 
                         span {
                           &.p-calendar {
@@ -2177,6 +2184,9 @@ select {
                     border: 1px solid $box-border-color;
                     border-radius: 8px;
                     background: $background-white;
+                    @include tab-view{
+                      padding: 6px 0;
+                    }
 
                     input {
                       width: 100%;
@@ -5287,7 +5297,7 @@ select {
 
   &.page_trems {
     padding: 40px 0 70px;
-
+    font-family: "Poppins", sans-serif;
     .page_topbanner {
       margin: 0 0 25px;
       width: 100%;
@@ -5325,6 +5335,7 @@ select {
           font-size: 34px;
           font-weight: 500;
           margin-bottom: 30px;
+          font-family: "Poppins", sans-serif;
 
           @include tab-view {
             font-size: 24px;
@@ -5347,6 +5358,9 @@ select {
             
             font-size: 18px;
             font-family: "Poppins", sans-serif;
+            @include tab-view {
+              font-size: 14px;
+            }
           }
         }
       }

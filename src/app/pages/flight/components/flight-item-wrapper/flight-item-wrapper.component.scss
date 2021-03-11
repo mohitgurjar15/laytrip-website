@@ -662,6 +662,9 @@
 
             .accordion_body {
                 padding: 15px;
+                @include tab-view {
+                    padding: 10px;
+                }
             }
 
             .io_ru_wrps {
@@ -690,8 +693,9 @@
 
                         @include tab-view {
                             flex-direction: column;
-                            padding-bottom: 10px;
-                            margin-bottom: 10px;
+                            padding-bottom: 6px;
+                            margin-bottom: 6px;
+                            font-size: 10px;
                         }
 
                         &:last-child {
@@ -709,6 +713,9 @@
                         .texts {
                             font-weight: 500;
                             color: $mid_gray_bg;
+                            @include tab-view {
+                                font-weight: 400;
+                            }
                         }
                     }
                 }
@@ -720,7 +727,7 @@
                     flex-direction: column;
 
                     @include tab-view {
-                        padding-top: 15px;
+                        padding-top: 5px;
                         max-width: 100%;
                         flex-direction: row;
                     }

@@ -37,15 +37,36 @@
                     </span>
                 </a>
             </div>
-            <div id="card{{blockIndex}}" class="collapse" [ngClass]='{"show":origin=="/cart/booking" && cardToken === card.cardToken}' data-parent="#accordion">
+            <div id="card{{blockIndex}}" class="collapse"
+                [ngClass]='{"show":origin=="/cart/booking" && cardToken === card.cardToken}' data-parent="#accordion">
                 <div class="card-body">
                     <div class="form-row">
-                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                        <div class="col-sm-12 col-md-4 mb-sm-10 desktop_carding">
                             <div class="card_headbar">
                                 Name on Card
                             </div>
                             <div class="card_texter">
                                 {{ card.cardHolderName }}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-sm-10 mobile_carding">
+                            <div class="cardin_main">
+                                <div class="cardin_inner">
+                                    <div class="card_headbar">
+                                        Name on Card
+                                    </div>
+                                    <div class="card_texter">
+                                        {{ card.cardHolderName }}
+                                    </div>
+                                </div>
+                                <div class="cardin_inner">
+                                    <div class="card_headbar">
+                                        Expires
+                                    </div>
+                                    <div class="card_texter" *ngIf="card.cardMetaData!=null">
+                                        {{convertExpiry(card.cardMetaData?.month, card.cardMetaData?.year)}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
@@ -56,7 +77,7 @@
                                 {{ card.cardHolderName }} <span> {{userInfo?.address}}</span>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-2 mb-sm-10">
+                        <div class="col-sm-12 col-md-2 mb-sm-10 desktop_carding">
                             <div class="card_headbar">
                                 Expires
                             </div>

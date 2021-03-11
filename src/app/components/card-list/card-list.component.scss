@@ -7,11 +7,13 @@
 
 .section_description {
   width: 240px;
+
   &.one {
     transform: translate(10%, -10%);
     max-width: 170px;
     right: 0;
   }
+
   transform: translate(-28%, 70%);
   max-width: 240px;
 }
@@ -125,6 +127,7 @@
             justify-content: flex-start;
             padding-right: 25px;
             align-items: center;
+
             @include tab-view {
               font-size: 14px;
             }
@@ -153,6 +156,7 @@
             font-size: 14px;
             font-weight: normal;
             padding: 0;
+
             @include tab-view {
               font-size: 12px;
             }
@@ -169,6 +173,7 @@
             font-weight: normal;
             padding: 0;
             cursor: default;
+
             @include tab-view {
               font-size: 12px;
             }
@@ -180,13 +185,42 @@
     .card-body {
       padding: 15px;
 
+      @include tab-view{
+        padding: 5px 15px;
+      }
       .mb-sm-10 {
         @include tab-view {
-          margin-bottom: 10px;
+          margin-bottom: 0;
         }
-        &:last-child{
+
+        &:last-child {
           @include tab-view {
             margin-bottom: 0;
+          }
+        }
+      }
+
+      .desktop_carding {
+        @include tab-view {
+          display: none;
+        }
+      }
+
+      .mobile_carding {
+        display: none;
+
+        @include tab-view {
+          display: flex;
+          margin-bottom: 10px;
+
+          .cardin_main {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+
+            .cardin_inner {
+              flex: 1;
+            }
           }
         }
       }
@@ -213,6 +247,10 @@
         align-items: flex-end;
         flex-direction: column;
         height: 100%;
+        @include tab-view{
+          position: absolute;
+          right: 0;
+        }
 
         a {
           background-color: transparent;
@@ -221,6 +259,9 @@
           box-shadow: none;
           font-size: 16px;
           padding: 0;
+          @include tab-view{
+            font-size: 12px;
+          }
         }
       }
     }

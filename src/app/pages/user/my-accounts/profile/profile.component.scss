@@ -231,12 +231,12 @@ input.ng-invalid.ng-touched {
                 }
 
                 @media (max-width: 991px) {
-                    width: 90px;
-                    height: 90px;
+                    width: 80px;
+                    height: 80px;
 
                     img {
-                        width: 80px;
-                        height: 80px;
+                        width: 72px;
+                        height: 72px;
                     }
                 }
             }
@@ -291,6 +291,7 @@ input.ng-invalid.ng-touched {
                 &.address_main {
                     @include tab-view {
                         flex-direction: row;
+                        padding-bottom: 11px;
                     }
                     label {
                         display: flex;
@@ -314,9 +315,11 @@ input.ng-invalid.ng-touched {
 
                     .address_box {
                         @include tab-view {
-                            width: 100%;
+                            width: 73%;
                             flex-direction: column;
                             height: auto;
+                            position: relative;
+                            z-index: 9;
                         }
 
                         .inputs_com {
@@ -462,6 +465,10 @@ input.ng-invalid.ng-touched {
                     input {
                         border-bottom: none;
                         padding: 0;
+
+                        @include tab-view{
+                            top: 3px;
+                        }
 
                         &:first-child {
                             width: 55px;

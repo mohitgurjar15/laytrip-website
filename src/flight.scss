@@ -803,6 +803,10 @@
                         font-weight: 500;
                         width: 100%;
                         display: block;
+
+                        @include tab-view {
+                            font-size: 14px;
+                        }
                     }
 
                     &:after {
@@ -824,6 +828,11 @@
                         color: $text_light_yellow;
                         font-size: 16px;
                         margin-right: 30px;
+
+                        @include tab-view {
+                            font-size: 12px;
+                            margin-right: 10px;
+                        }
                     }
                 }
 
@@ -865,6 +874,10 @@
                             font-size: 16px;
                             font-weight: 600;
                             color: $text-black;
+
+                            @include tab-view {
+                                font-size: 14px;
+                            }
                         }
 
                         ul {
@@ -880,6 +893,10 @@
                                 color: $text-grey;
                                 font-size: 14px;
                                 font-weight: 300;
+
+                                @include tab-view {
+                                    font-size: 12px;
+                                }
 
                                 .custom_radio {
                                     width: 100%;
@@ -1153,6 +1170,10 @@
                                     font-size: 16px;
                                     font-weight: 500;
                                     color: $text-black;
+
+                                    @include tab-view {
+                                        font-size: 14px;
+                                    }
                                 }
 
                                 ul {
@@ -1168,6 +1189,10 @@
                                         color: $text-grey;
                                         font-size: 14px;
                                         font-weight: 300;
+
+                                        @include tab-view {
+                                            font-size: 12px;
+                                        }
 
                                         .custom_checkbox {
                                             .checkmark {
@@ -1196,6 +1221,10 @@
                         font-size: 16px;
                         font-weight: 600;
                         color: $text-black;
+
+                        @include tab-view {
+                            font-size: 14px;
+                        }
                     }
 
                     .view_more {
@@ -1350,6 +1379,10 @@
                     font-weight: 500;
                     width: 100%;
                     display: block;
+
+                    @include tab-view {
+                        font-size: 14px;
+                    }
                 }
 
                 &[aria-expanded="true"] {
@@ -1382,6 +1415,11 @@
                     color: $text_light_yellow;
                     font-size: 16px;
                     margin-right: 30px;
+
+                    @include tab-view {
+                        font-size: 12px;
+                        margin-right: 10px;
+                    }
                 }
             }
 
@@ -6038,8 +6076,24 @@
         }
     }
 }
-
+.account_telephone{
+    .ng-select-container{
+        .ng-value-container{
+            .ng-value{
+                .ng-value-label{
+                    @include tab-view{
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
 .address_ng {
+    @include tab-view {
+        max-height: 25px;
+    }
+
     &.ng-select-opened {
         .ng-select-container {
             .ng-arrow {
@@ -6078,12 +6132,19 @@
         .ng-value-container {
             padding-left: 0;
 
+            @include tab-view {
+                top: -2px;
+                position: relative;
+            }
+
             .ng-placeholder {
                 font-size: 16px;
                 color: $mid_gray_bg;
 
                 @include tab-view {
                     font-size: 14px;
+                    top: -4px;
+                    position: relative;
                 }
             }
 
@@ -6105,19 +6166,42 @@
 
             .ng-input {
                 padding: 0 !important;
+
+                @include tab-view {
+                    top: -6px !important;
+                }
+            }
+        }
+        .ng-clear-wrapper{
+            @include tab-view {
+                top: -4px;
+            }
+        }
+        .ng-arrow-wrapper {
+            @include tab-view {
+                top: -6px;
+            }
+
+            .ng-arrow {
+                border: none;
+                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                background-position: right;
+                background-repeat: no-repeat;
+                background-size: 11px;
+                transition: 0.3s;
+                width: 12px !important;
+                height: 10px !important;
+            }
+        }
+    }
+
+    &.2address_ng {
+        .ng-select-container {
+            @include tab-view {
+                top: -7px;
             }
         }
 
-        .ng-arrow {
-            border: none;
-            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-            background-position: right;
-            background-repeat: no-repeat;
-            background-size: 11px;
-            transition: 0.3s;
-            width: 12px !important;
-            height: 10px !important;
-        }
     }
 }
 
