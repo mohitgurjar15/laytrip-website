@@ -101,6 +101,17 @@
             img {
                 height: 47px;
             }
+            small{
+                &.beta_text{
+                    color: $pink;
+                    font-size: 14px;
+                    position: relative;
+                    top: -5px;
+                    @include tab-view{
+                        font-size: 10px;
+                    }
+                }
+            }
 
             @media (max-width: 991px) {
                 padding: 0;
