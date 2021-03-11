@@ -37,7 +37,6 @@ export class PreferancesComponent implements OnInit {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
         messageClass: 'custom_toastr_message',
-        disableTimeOut: true
       });
       this.loadingValue.emit(false);
     }, (error: HttpErrorResponse) => {
@@ -47,7 +46,6 @@ export class PreferancesComponent implements OnInit {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
         messageClass: 'custom_toastr_message',
-        disableTimeOut: true
       });
     });
   }
@@ -64,7 +62,6 @@ export class PreferancesComponent implements OnInit {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
         messageClass: 'custom_toastr_message',
-        disableTimeOut: true
       });
     });
   }

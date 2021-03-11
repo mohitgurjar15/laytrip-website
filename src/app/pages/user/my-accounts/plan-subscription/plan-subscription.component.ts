@@ -88,7 +88,6 @@ export class PlanSubscriptionComponent implements OnInit {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
         messageClass: 'custom_toastr_message',
-        disableTimeOut: true
       });
       this.router.navigate(['/']);
     }, (error: HttpErrorResponse) => {
@@ -98,7 +97,6 @@ export class PlanSubscriptionComponent implements OnInit {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
         messageClass: 'custom_toastr_message',
-        disableTimeOut: true
       });
     });
   }
