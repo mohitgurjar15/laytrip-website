@@ -73,7 +73,11 @@
                         z-index: 9;
                         overflow: hidden;
                         white-space: normal;
-                
+                        
+                        @include tab-view{
+                            font-size: 14px;
+                            padding: 8px 20px;
+                        }
                 
                         &::before {
                             content: "";

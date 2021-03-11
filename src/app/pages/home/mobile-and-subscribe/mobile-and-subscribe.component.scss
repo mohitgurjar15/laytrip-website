@@ -28,9 +28,9 @@
       margin-bottom: 30px;
 
       @include tab-view {
-        font-size: 22px;
+        font-size: 16px;
         text-align: center;
-        margin-bottom: 28px;
+        margin-bottom: 18px;
       }
     }
     .custom_input_wrapper {
@@ -43,17 +43,22 @@
       height: 56px;
       border-radius: 30px;
 
+      @include tab-view{
+        height: 44px;
+      }
+
       input {
         border: none;
         padding: 15px 30px;
         background-color: transparent;
         font-size: 22px;
         width: 100%;
-        font-style: italic;
+        font-style: normal;
         &::placeholder {
           color: $mid_gray_bg;
           opacity: 1;
           font-weight: 300;
+          font-style: italic;
         }
         
         &:-ms-input-placeholder { 
@@ -67,6 +72,7 @@
         }
         @include tab-view {
           font-size: 14px;
+          padding: 0 0 0 20px;
           width: calc(100% - 85px);
         }
       }
@@ -88,8 +94,9 @@
         right: -1px;
 
         @include tab-view {
-          max-width: 85px;
-          font-size: 16px;
+          max-width: 65px;
+          font-size: 14px;
+          height: 43px;
         }
 
         &::before {

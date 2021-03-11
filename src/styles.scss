@@ -106,7 +106,7 @@ a {
     &.ng-select-disabled {
       &.laytrip-input {
         .ng-select-container {
-          background-color: $background-white
+          background-color: $background-white;
         }
       }
     }
@@ -117,7 +117,7 @@ a {
 
         .ng-value-container {
           height: 40px;
-          @include tab-view{
+          @include tab-view {
             font-size: 30px;
           }
 
@@ -125,7 +125,7 @@ a {
             padding: 0;
             font-size: 16px;
             color: $mid_gray_bg;
-            @include tab-view{
+            @include tab-view {
               font-size: 14px;
             }
           }
@@ -140,7 +140,7 @@ a {
             font-weight: 400;
             color: $mid_gray_bg;
             position: relative;
-            @include tab-view{
+            @include tab-view {
               font-size: 14px;
             }
           }
@@ -148,7 +148,7 @@ a {
           .ng-input {
             padding: 0;
             top: 7px;
-            @include tab-view{
+            @include tab-view {
               font-size: 14px;
             }
           }
@@ -209,7 +209,7 @@ textarea {
   }
 
   &:read-only {
-    background-color: $background-white
+    background-color: $background-white;
   }
 }
 
@@ -287,7 +287,7 @@ textarea:focus:-ms-input-placeholder {
       }
     }
 
-    &.ng-select-opened>.ng-select-container {
+    &.ng-select-opened > .ng-select-container {
       .ng-arrow {
         padding: 5px 9px;
         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -356,7 +356,7 @@ textarea:focus:-ms-input-placeholder {
         }
       }
 
-      &.ng-select-opened>.ng-select-container {
+      &.ng-select-opened > .ng-select-container {
         .ng-arrow {
           padding: 5px 9px;
           background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -414,7 +414,7 @@ select {
 }
 
 .mandetory_wrps {
-  .form-control{
+  .form-control {
     &.ng-touched {
       &.ng-invalid {
         border-color: $error-color !important;
@@ -440,7 +440,6 @@ select {
       right: 45px;
     }
   }
-  
 }
 
 .error_field {
@@ -1265,10 +1264,10 @@ select {
                         padding: 0;
                       }
 
-                      .flight_to{
-                        .search_area{
-                          .lab_wrapper{
-                            label{
+                      .flight_to {
+                        .search_area {
+                          .lab_wrapper {
+                            label {
                               padding-right: 0px !important;
                               max-width: 35px !important;
                             }
@@ -1412,7 +1411,8 @@ select {
                           color: $text-black;
                           font-weight: 600;
                           padding: 0 15px 0 70px;
-                          background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
+                          background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center
+                            left 15px no-repeat !important;
 
                           @media (max-width: 575px) {
                             .calender-responsive-view {
@@ -2097,7 +2097,6 @@ select {
 
             &.class_resp {
               width: 48%;
-
             }
 
             &.travellers_resp {
@@ -2158,7 +2157,7 @@ select {
                     padding: 0;
                   }
 
-                  @include tab-view{
+                  @include tab-view {
                     z-index: 1000;
                   }
 
@@ -2289,7 +2288,8 @@ select {
                       color: $text-black;
                       font-weight: 600;
                       padding: 0 0 0 60px;
-                      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
+                      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center
+                        left 15px no-repeat !important;
 
                       @media (max-width: 575px) {
                         .calender-responsive-view {
@@ -2447,9 +2447,11 @@ select {
   padding: 100px 0px 100px;
   background: $background-white;
 
-  @media (max-width: 1199px) {}
+  @media (max-width: 1199px) {
+  }
 
-  @media (max-width: 767px) {}
+  @media (max-width: 767px) {
+  }
 
   .featured_list {
     width: 100%;
@@ -2489,9 +2491,7 @@ select {
             &:after {
               width: 100%;
               height: 35%;
-              background: linear-gradient(180deg,
-                  $gradient-white 0%,
-                  $gradient-blue 100%) 0% 0% no-repeat;
+              background: linear-gradient(180deg, $gradient-white 0%, $gradient-blue 100%) 0% 0% no-repeat;
               position: absolute;
               bottom: 0;
               left: 0;
@@ -3141,7 +3141,7 @@ select {
     width: 100%;
     padding: 50px 0 30px;
     background: $background-blue;
-    @include tab-view{
+    @include tab-view {
       padding: 40px 0 25px;
     }
 
@@ -3160,7 +3160,7 @@ select {
           text-align: center;
           margin-bottom: 30px;
         }
-        @include tab-view{
+        @include tab-view {
           margin-bottom: 20px;
         }
         a {
@@ -3169,7 +3169,7 @@ select {
           margin-bottom: 15px;
           color: $box-border-color;
 
-          @include tab-view{
+          @include tab-view {
             font-size: 12px;
           }
 
@@ -3214,7 +3214,6 @@ select {
               width: 100%;
               margin-bottom: 10px;
 
-              
               &:last-child {
                 margin-bottom: 0;
               }
@@ -3263,14 +3262,14 @@ select {
 
           @media (max-width: 480px) {
             width: 100%;
-           
+
             text-align: center;
 
             //&:last-child {
             //width: 100%;
             //}
           }
-          @include tab-view{
+          @include tab-view {
             margin-bottom: 0;
           }
 
@@ -3280,7 +3279,7 @@ select {
             color: $box-border-color;
             font-weight: 600;
             margin: 0 0 15px;
-            @include tab-view{
+            @include tab-view {
               margin: 30px 0 15px;
               font-size: 12px;
             }
@@ -3296,7 +3295,7 @@ select {
               width: 100%;
               padding: 0 0 10px;
 
-              @include tab-view{
+              @include tab-view {
                 padding: 0 0 20px;
               }
 
@@ -3305,7 +3304,7 @@ select {
                 color: $box-border-color;
                 font-weight: 600;
                 //opacity: 0.7;
-                @include tab-view{
+                @include tab-view {
                   font-size: 12px;
                 }
                 &:hover {
@@ -3317,7 +3316,7 @@ select {
               &:last-child {
                 padding: 0;
                 margin: 0;
-                @include tab-view{
+                @include tab-view {
                   padding: 0 0 20px;
                 }
               }
@@ -3344,8 +3343,8 @@ select {
       color: $box-border-color;
       margin: 0;
       font-weight: 300;
-      
-      @include tab-view{
+
+      @include tab-view {
         font-size: 12px;
         padding: 0 20px;
       }
@@ -3597,7 +3596,9 @@ select {
 .block_contact_us_main {
   width: 100%;
   padding: 50px 0;
-
+  .modal-content{
+    border-radius: 10px;
+  }
   .block_contact_inner {
     width: 100%;
     padding: 40px 15px;
@@ -5094,7 +5095,6 @@ select {
   }
 
   &.block_covid_19 {
-
     // h3 {
     //   color: $blue-text;
     //   font-size: 34px;
@@ -5132,7 +5132,6 @@ select {
     .block_cmspage_comman {
       p {
         font-size: 18px;
-
 
         &:first-child {
           color: $mid_gray_bg;
@@ -5259,7 +5258,6 @@ select {
             color: $primary-color;
             text-decoration: none;
           }
-
         }
 
         h5 {
@@ -5339,6 +5337,12 @@ select {
 
           @include tab-view {
             font-size: 14px;
+          }
+
+          font{
+            
+            font-size: 18px;
+            font-family: "Poppins", sans-serif;
           }
         }
       }
@@ -5433,4 +5437,39 @@ body {
       }
     }
   }
+}
+
+.custom_toastr {
+  border: 1px solid $pink;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 400;
+  color: $text-black;
+  z-index: 999;
+  background-color: $background-white;
+  position: absolute;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-shadow: 0px 3px 6px #00000015;
+  width: 240px;
+  transform: translate(-101%, 28%);
+  max-width: 240px;
+
+  a {
+    cursor: pointer;
+    width: 30px !important;
+
+    img {
+      max-width: 9px;
+    }
+  }
+}
+
+.custom_toastr_title {
+  font-weight: 600;
+}
+
+.custom_toastr_message {
+  margin-top: 5px;
 }

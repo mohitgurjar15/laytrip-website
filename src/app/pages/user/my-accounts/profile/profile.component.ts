@@ -98,7 +98,7 @@ export class ProfileComponent implements OnInit {
       state_id: [''],
       country_id: [''],
       zip_code: [''],
-      
+
     }, { validators: phoneAndPhoneCodeValidation() });
 
     this.getProfileInfo();
@@ -126,7 +126,7 @@ export class ProfileComponent implements OnInit {
       });
       const filteredArr = countries_code.reduce((acc, current) => {
         const x = acc.find(item => item.countryCode == current.countryCode);
-        if (!x) {        
+        if (!x) {
           return acc.concat([current]);
         } else {
           return acc;
@@ -150,15 +150,15 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  setUSCountryInFirstElement(countries){
-    var usCountryObj = countries.find(x=> x.id === 233);
-    var removedUsObj = countries.filter( obj => obj.id !== 233);
-    this.countries=[];
-    removedUsObj.sort(function(a, b) {
-      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);          
+  setUSCountryInFirstElement(countries) {
+    var usCountryObj = countries.find(x => x.id === 233);
+    var removedUsObj = countries.filter(obj => obj.id !== 233);
+    this.countries = [];
+    removedUsObj.sort(function (a, b) {
+      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
     });
-    removedUsObj.unshift(usCountryObj); 
-    this.countries = removedUsObj; 
+    removedUsObj.unshift(usCountryObj);
+    this.countries = removedUsObj;
   }
   selectGender(event, type) {
 
@@ -226,8 +226,8 @@ export class ProfileComponent implements OnInit {
       this.image = res.profilePic;
       this.selectResponse = res;
       this.is_type = res.gender ? res.gender : 'M';
-      if(typeof res.country.name =='undefined' ){
-        var countryId = {id:233};
+      if (typeof res.country.name == 'undefined') {
+        var countryId = { id: 233 };
         this.getStates(countryId);
       }
       this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
@@ -259,7 +259,13 @@ export class ProfileComponent implements OnInit {
       if (error.status === 401) {
         redirectToLogin();
       } else {
-        this.toastr.error(error.message, 'Profile Error');
+        // this.toastr.error(error.message, 'Profile Error');
+        this.toastr.show(error.message, 'Profile Error', {
+          toastClass: 'custom_toastr',
+          titleClass: 'custom_toastr_title',
+          messageClass: 'custom_toastr_message',
+          disableTimeOut: true
+        });
       }
     });
   }
@@ -300,26 +306,26 @@ export class ProfileComponent implements OnInit {
       formdata.append("gender", this.is_type);
       formdata.append("city_name", this.profileForm.value.city);
       formdata.append("address", this.profileForm.value.address);
-     
-      if(!Number.isInteger(this.profileForm.value.country_id)){
+
+      if (!Number.isInteger(this.profileForm.value.country_id)) {
         formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : 233);
       } else {
         formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
       }
-      if(!Number.isInteger(this.profileForm.value.state_id)){
+      if (!Number.isInteger(this.profileForm.value.state_id)) {
         formdata.append("state_id", this.profileForm.value.state_id);
-      } else{
+      } else {
         formdata.append("state_id", this.selectResponse.state.id);
       }
-      if(typeof(this.profileForm.value.country_code) != 'object'){        
-        formdata.append("country_code",this.profileForm.value.country_code.name);
+      if (typeof (this.profileForm.value.country_code) != 'object') {
+        formdata.append("country_code", this.profileForm.value.country_code.name);
       } else {
         formdata.append("country_code", this.selectResponse.countryCode);
-      } 
-     
+      }
+
       formdata.append("zip_code", this.profileForm.value.zip_code ? this.profileForm.value.zip_code : this.selectResponse.zipCode);
       formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-      
+
       this.isFormControlEnable = false;
       this.profileForm.controls['home_airport'].disable();
       this.profileForm.controls['country_code'].disable();

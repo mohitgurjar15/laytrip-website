@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output, ViewChild, SimpleChanges } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
 import { UserService } from '../../services/user.service';
 import { EmptyCartComponent } from '../../components/empty-cart/empty-cart.component';
+import { AppleSecurityLoginPopupComponent, MODAL_TYPE } from '../../pages/user/apple-security-login-popup/apple-security-login-popup.component';
 declare var $: any;
 
 @Component({
@@ -38,6 +39,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   modalRef;
   guestUserId: string = '';
   cartOverLimit;
+  isOpenAppleLoginPopup = false;
 
   constructor(
     private genericService: GenericService,
@@ -135,8 +137,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
       }
     });
-  }
 
+  }
 
   checkUser() {
     this.userDetails = getLoginUserInfo();
@@ -154,8 +156,24 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.getCartList();
       }
       this.showTotalLayCredit = this.totalLayCredit;
+      if (this.userDetails && this.userDetails.requireToupdate) {
+        if (!this.isOpenAppleLoginPopup) {
+          this.openAppleSecurityLogin();
+          this.isOpenAppleLoginPopup = true;
+        }
+      }
     }
   }
+
+  openAppleSecurityLogin() {
+    const modalRef = this.modalService.open(AppleSecurityLoginPopupComponent, {
+      windowClass: 'apple_security_login_block', centered: true, backdrop: 'static',
+      keyboard: false
+    }).result.then((result) => {
+      
+    });
+  }
+
 
   onLoggedout() {
     this.isLoggedIn = this._isLayCredit = false;

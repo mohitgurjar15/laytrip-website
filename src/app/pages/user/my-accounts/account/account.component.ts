@@ -35,7 +35,7 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.userDetails = getLoginUserInfo();
-    this.isSocialLogin = this.userDetails.socialAccountId.length > 0 ? true : false;;
+    this.isSocialLogin = this.userDetails.socialAccountId.length > 0 ? true : false;
   }
   getLoadingValue(event) {
     if (event === false) {
@@ -73,12 +73,22 @@ export class AccountComponent implements OnInit {
     this.userService.deleteAccount(this.isRequireBackupFile).subscribe((data: any) => {
       this.modalService.dismissAll();
       this.loading = false;
-      this.toastrService.success(data.message, 'Deleted Account Successfully')
+      this.toastrService.show(data.message, 'Account Deleted Successfully', {
+        toastClass: 'custom_toastr',
+        titleClass: 'custom_toastr_title',
+        messageClass: 'custom_toastr_message',
+        disableTimeOut: true
+      });
       redirectToLogin();
     }, (error: HttpErrorResponse) => {
       this.modalService.dismissAll();
       this.loading = false;
-      this.toastrService.error(error.error.message, 'Deleted Account Error')
+      this.toastrService.show(error.error.message, 'Deleted Account Error', {
+        toastClass: 'custom_toastr',
+        titleClass: 'custom_toastr_title',
+        messageClass: 'custom_toastr_message',
+        disableTimeOut: true
+      });
       if (error.status == 401) {
         // redirectToLogin();
       }
