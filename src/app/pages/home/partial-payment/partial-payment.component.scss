@@ -14,8 +14,8 @@
 	margin: 10px 0;
 
 	@include tab-view {
-        padding: 15px 0;
-        margin: 15px 0;
+        padding: 15px 0 0 0;
+        margin: 15px 0 0 0;
 	}
 
 	.partial_payment_info {
@@ -33,18 +33,35 @@
             @include tab-view {
                 max-width: 100%;
             }
+            &:last-child{
+                .pay_info_inner_wrapper{
+                    @include mobile-view{
+                        padding: 0px 15px;
+                    }
+                }
+            }
             .pay_info_inner_wrapper{
                 color: $text-black;
                 // padding: 10px 75px;
                 @include ipad-view{
                     padding: 20px 0;
                 }
-                @include mobile-view{
-                    padding: 20px 15px;
+                @include tab-view{
+                    padding: 0px 15px 15px;
                 }
+                
                 .pay_type_img_wrap{
                     margin-bottom: 15px;
                     min-height: 90px;
+                    @include tab-view{
+                        min-height: auto;
+                    }
+                    img{
+                        @include tab-view{
+                            max-height: 80px;
+                            max-width: 90px;
+                        }
+                    }
                 }
                 .pay_title{
                     margin: 15px 0;
@@ -54,13 +71,21 @@
                     padding: 0 17px;
                     width: 100%;
                     @include mobile-view{
+                        margin: 10px 0 0px;
                         padding: 0;
+                        font-size: 14px;
+                        line-height: 21px;
                     }
                 }
                 p{
                     margin: 5px 0 10px;
                     font-size: 18px;
                     line-height: 23px;
+                    @include mobile-view{
+                        margin: 5px 0 20px;
+                        font-size: 14px;
+                        line-height: 21px;
+                    }
                 }
             }
         }
@@ -137,6 +162,10 @@
             overflow: hidden;
             white-space: normal;
             
+            @include tab-view{
+                font-size: 14px;
+                height: 38px;
+            }
     
             // &::before {
             //     content: "";

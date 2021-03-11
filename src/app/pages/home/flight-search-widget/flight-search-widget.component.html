@@ -76,7 +76,7 @@
                                         (click)="showAirportSuggestion('from')" (searchItem)="searchItem($event)">
                                     </app-search-airport>
                                 </div>
-                                <app-airport-suggestion *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
+                                <app-airport-suggestion class="desk_suggetions" *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
                             </div>
                             <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
                                 <a (click)="swapAirport()">
@@ -95,7 +95,11 @@
                                         (click)="showAirportSuggestion('to')" (searchItem)="searchItem($event)">
                                     </app-search-airport>
                                 </div>
-                                <app-airport-suggestion *ngIf="showToAirportSuggestion" [airport]=toSearch type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
+                                <app-airport-suggestion class="desk_suggetions" *ngIf="showToAirportSuggestion" [airport]=toSearch type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
+                            </div>
+                            <div class="mobile_suggetions">
+                                <app-airport-suggestion *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
+                            <app-airport-suggestion *ngIf="showToAirportSuggestion" [airport]=toSearch type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
                             </div>
                         </li>
                         <li class="grid_box secound">
