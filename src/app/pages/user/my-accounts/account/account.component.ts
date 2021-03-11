@@ -35,7 +35,12 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.userDetails = getLoginUserInfo();
-    this.isSocialLogin = this.userDetails.socialAccountId.length > 0 ? true : false;;
+    this.isSocialLogin = this.userDetails.socialAccountId.length > 0 ? true : false;
+    // this.toastrService.show('Message', 'Testing', {
+    //   toastClass: 'custom_toastr',
+    //   titleClass: 'custom_toastr_title',
+    //   messageClass: 'custom_toastr_message',
+    // });
   }
   getLoadingValue(event) {
     if (event === false) {
