@@ -19,21 +19,21 @@
                   +travelerItem.value.adults[x].last_name:'' | titlecase}}
                 </span>
               </a>
-              <!-- <a class="dropdown-toggle traveler_drop_down" data-toggle="dropdown">Saved Travelers</a>
+              <a class="dropdown-toggle traveler_drop_down" data-toggle="dropdown">{{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
+                +travelerItem.value.adults[x].last_name:'Saved Travelers' | titlecase}}</a>
               <ul class="dropdown-menu options_name">
-                <li *ngFor="let user of myTravelers" [selected]="travelerItem.value.adults[x].userId===user.userId">
-                  {{user.firstName}} {{user.lastName}}</li>
-              </ul> -->
+                <ng-container *ngFor="let user of myTravelers">
+                  <li (click)='selectTraveler(user.userId,x)' *ngIf="user.user_type==traveler.controls.type.value">{{user.firstName}} {{user.lastName}}</li>
+                </ng-container>
+              </ul>
 
-              <select class="form-control traveler_drop_down" (change)='selectTraveler($event,x)'>
+              <!-- <select class="form-control traveler_drop_down" (change)='selectTraveler($event,x)'>
                 <option [selected]>Saved Travelers </option>
                 <ng-container *ngFor="let user of myTravelers">
-                  <!-- *ngIf="user.user_type==traveler.controls.type.value" -->
                   <option [selected]="travelerItem.value.adults[x].userId===user.userId" [value]="user.userId">
                     {{user.firstName}} {{user.lastName}}</option>
                 </ng-container>
-              </select>
-              </select>
+              </select> -->
             </div>
             <div [id]="'adult_collapse'+y+x" class="collapse show" data-parent="#accordion">
               <div class="card-body">
@@ -220,10 +220,13 @@
 
                 <span class="edit_btns duel_buttons">
                   <span class="remove_wrps">
-                    <button class="hover-link disabled" (click)="deleteTraveler(cartNumber,x)">Delete</button>
+                    <button class="hover-link" [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }"
+                      (click)="deleteTraveler(cartNumber,x)">Delete</button>
                   </span>
-                  <button (click)="editTraveler(cartNumber,x)" class="hover-link">Edit</button>
-                  <button (click)="saveTraveler(cartNumber,x)" class="hover-link">Save</button>
+                  <button (click)="editTraveler(cartNumber,x)" class="hover-link"
+                    [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }">Edit</button>
+                  <button (click)="saveTraveler(cartNumber,x)" class="hover-link"
+                    [ngClass]="{'disabled': travelerItem.value.adults[x].userId }">Save</button>
                 </span>
               </div>
             </div>

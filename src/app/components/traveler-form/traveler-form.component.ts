@@ -141,24 +141,24 @@ export class TravelerFormComponent implements OnInit {
       this.cd.detectChanges();
     }
     if (this.travelers && this.travelers[`type${this.cartNumber}`] && this.travelers[`type${this.cartNumber}`].adults) {
-      // for (let i = 0; i < this.cartItem.travelers.length; i++) {
-      //   let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
-      //   this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
-      //   this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
-      //   this.userId = traveler.userId;
-      //   this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
-      //   this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
-      //   this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender;
-      //   this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
-      //   this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode;
-      //   this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo;
-      //   this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
-      //   this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
-      //   if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
-      //     this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
-      //     this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy') : '';
-      //   }
-      // }
+      for (let i = 0; i < this.cartItem.travelers.length; i++) {
+        let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
+        this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
+        this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
+        this.userId = traveler.userId;
+        this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
+        this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
+        this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender;
+        this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
+        this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode;
+        this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo;
+        this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
+        this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
+        if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
+          this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
+          this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy') : '';
+        }
+      }
       this.patch();
       this.cartService.setCartTravelers(this.travelers);
       this.cd.detectChanges();
@@ -477,9 +477,9 @@ export class TravelerFormComponent implements OnInit {
     }
   }
 
-  selectTraveler(event, traveler_number) {
-    console.log(event.target.value, traveler_number)
-    let traveler = this.myTravelers.find(x => x.userId == event.target.value)
+  selectTraveler(travlerId, traveler_number) {
+    console.log(travlerId, traveler_number)
+    let traveler = this.myTravelers.find(x => x.userId == travlerId)
     if (traveler && Object.keys(traveler).length > 0) {
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
