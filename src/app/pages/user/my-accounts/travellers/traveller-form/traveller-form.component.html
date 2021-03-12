@@ -31,7 +31,7 @@
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory">
                 <label for="">{{'gender' |translate}}*</label>
                 <div class="gender_anchers">
-                   <!--  <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender">
+                    <!--  <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender">
                         <ng-option value="M">Male</ng-option>
                         <ng-option value="F">Female</ng-option>
                         <ng-option value="O">Other</ng-option> 
@@ -68,7 +68,8 @@
             <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps mandetory_wrps" *ngIf="isAdult">
                 <label for="">{{'phone_no' |translate}}*</label>
 
-                <span class="tel_span">
+                <span class="tel_span"
+                    [ngClass]="{'red_underline':(travellerForm.controls.country_code.touched || travellerForm.controls.phone_no.touched) && (travellerForm.controls.phone_no.errors || travellerForm.controls.country_code.errors)}">
                     <!-- <input (keypress)="commonFunction.validatePhoneCode($event)" type="text" class="form-control"
                         tabindex="25" maxlength="4" formControlName="country_code"> -->
                     <ng-select class="ng-customClass country_code" [items]="countries_code" bindLabel="countryCode"
@@ -177,7 +178,8 @@
             </div>
             <!--             <h4 class="name_traveller">Delete Co - Traveler</h4>
  -->
-            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete this traveler?</span></h4>
+            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete this traveler?</span>
+            </h4>
 
             <div class="cta_btn_wrps">
                 <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>

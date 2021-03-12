@@ -25,19 +25,13 @@
 
                 </span>
             </div>
-            <div class="form_row common_row error_main_class">
+            <div class="form_row common_row"
+                [ngClass]="{'error_main_class':profileForm.controls.first_name.touched && profileForm.controls.first_name.errors}">
                 <label>{{'first_name' | translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <input type="text" placeholder="{{'first_name_placeholder' | translate}}"
                         formControlName="first_name" maxlength="25" tabindex="1" [readonly]="!isFormControlEnable"
                         (keypress)="commonFunction.preventNumberInput($event)">
-                    <div *ngIf="profileForm.controls.first_name.touched && profileForm.controls.first_name.errors"
-                        class="error">
-                        <small *ngIf="profileForm.controls.first_name.errors.required" class="error_field">
-                            {{'first_name_touched_validation' | translate}}</small>
-                        <small *ngIf="profileForm.controls.first_name.errors.pattern" class="error_field">
-                            {{'first_name_string_validation' | translate}}</small>
-                    </div>
                 </div>
             </div>
             <div *ngIf="profileForm.controls.first_name.touched && profileForm.controls.first_name.errors"
@@ -50,19 +44,13 @@
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
                     {{'first_name_string_validation' | translate}}</small>
             </div>
-            <div class="form_row common_row">
+            <div class="form_row common_row"
+                [ngClass]="{'error_main_class':profileForm.controls.last_name.touched && profileForm.controls.last_name.errors}">
                 <label>{{'last_name' | translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <input type="text" [readonly]="!isFormControlEnable"
                         placeholder="{{'last_name_placeholder' | translate}}" formControlName="last_name" maxlength="25"
                         tabindex="2" (keypress)="commonFunction.preventNumberInput($event)">
-                    <div *ngIf="(isFormControlEnable && profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
-                        class="error">
-                        <small *ngIf="profileForm.controls.last_name.errors.required" class="error_field">
-                            {{'last_name_touched_validation' | translate}}</small>
-                        <small *ngIf="profileForm.controls.last_name.errors.pattern" class="error_field">
-                            {{'last_name_string_validation' | translate}}</small>
-                    </div>
                 </div>
             </div>
             <div *ngIf="(isFormControlEnable && profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
@@ -76,7 +64,8 @@
                     {{'last_name_string_validation' | translate}}</small>
             </div>
 
-            <div class="form_row common_row">
+            <div class="form_row common_row"
+                [ngClass]="{'error_main_class':profileForm.controls.email.touched && profileForm.controls.email.errors}">
                 <label>{{'email_small' | translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <input
@@ -119,7 +108,8 @@
                     <span *ngIf="!departureAirport?.code"></span>
                 </div>
             </div>
-            <div class="form_row common_row">
+            <div class="form_row common_row"
+                [ngClass]="{'error_main_class':(profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) && profileForm.controls.phone_no.errors}">
                 <label>{{'phone_no' | translate}}<sup>*</sup></label>
 
                 <div class="text_field telephone_wrps account_telephone">
@@ -149,7 +139,8 @@
                     class="error_field_new"><img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
                         class="error_img_new"> Minimum 10 characters.</small>
             </div>
-            <div class="form_row common_row dobs_account">
+            <div class="form_row common_row dobs_account"
+                [ngClass]="{'error_main_class':profileForm.controls.dob.touched && profileForm.controls.dob.errors}">
                 <label>{{'dob' | translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <p-calendar [disabled]="!isFormControlEnable" dateFormat="mm/dd/yy" class="form-control"
@@ -196,19 +187,20 @@
 
                 <div class="text_field address_box">
                     <input [readonly]="!isFormControlEnable" tabindex="10" type="text" formControlName="address"
-                        placeholder="Street" class="inputs_com" maxlength="100">
-                    <input tabindex="11" [readonly]="!isFormControlEnable" type="text" class="inputs_com"
-                        formControlName="city" placeholder="City"  maxlength="50">
+                        placeholder="Street" class="inputs_com" maxlength="255">
+                    <input tabindex="13" [readonly]="!isFormControlEnable" type="text" class="inputs_com"
+                        formControlName="city" placeholder="City">
                     <ng-select tabindex="12" [clearable]="false" [readonly]="!isFormControlEnable" class="address_ng"
                         clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id" placeholder="Select State"
-                        tabindex="12">
+                        tabindex="4">
                         <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
                     </ng-select>
-                    <input tabindex="13" [readonly]="!isFormControlEnable" maxlength="16" type="text" class="inputs_com"
+                    <input tabindex="14" [readonly]="!isFormControlEnable" maxlength="8" type="text" class="inputs_com"
                         formControlName="zip_code" placeholder="Zip Code">
-                    <ng-select [readonly]="!isFormControlEnable" tabindex="14" class="ng-customClass address_ng 2address_ng"
-                        [items]="countries" bindLabel="name" [selectOnTab]="true" formControlName="country_id"
-                        selectOnTab="true" (change)="getStates($event)" [clearable]="false">
+                    <ng-select [readonly]="!isFormControlEnable" tabindex="11"
+                        class="ng-customClass address_ng 2address_ng" [items]="countries" bindLabel="name"
+                        [selectOnTab]="true" formControlName="country_id" selectOnTab="true"
+                        (change)="getStates($event)" [clearable]="false">
                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                             <span class="ng-value-label">
                                 {{ item.name ? item.name : 'Select country' }} </span>
