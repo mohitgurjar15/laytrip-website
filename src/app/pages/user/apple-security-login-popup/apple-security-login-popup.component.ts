@@ -55,7 +55,7 @@ export class AppleSecurityLoginPopupComponent implements OnInit {
     // API CALL
     this.genericService.updateViaAppleLogin(formValue).subscribe((res: any) => {
       if (res) {
-        // localStorage.setItem("_lay_sess", data.token);
+        localStorage.setItem("_lay_sess", res.token);
         this.loading = false;
         this.activeModal.close({ STATUS: MODAL_TYPE.CLOSE });
       }

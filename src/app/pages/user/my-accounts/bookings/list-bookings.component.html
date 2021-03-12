@@ -95,15 +95,15 @@
                           </div>
                         </div>
                         <div class="payment_bar_wrps">
-                          <div class="progress">
+                          <div class="progress"  >
                             <div class="progress-bar" role="progressbar"
                               [ngStyle]="getProgressPercentage(booking.paidAmount,booking.totalAmount)"
                               aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
-                          <div class="payment_status" *ngIf="booking.booking[0].paymentStatus === 0">
+                          <div class="payment_status" *ngIf="booking.booking[0].paymentStatus == 0">
                           
-                           <img *ngIf="!booking.is_installation_on_track" src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
-                           > {{ booking.is_installation_on_track ?  'Next Payment '+ commonFunction.convertCustomDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD','MMM D, YYYY') : 'Past Due'}} 
+                           <img  src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
+                           > {{ booking.is_installation_on_track == true ?  'Next Payment '+ commonFunction.convertCustomDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD','MMM D, YYYY') : 'Past Due'}} 
                          </div>
  
                         </div>
@@ -170,12 +170,12 @@
                           Next Payment {{ (booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
                           commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
                         </div> -->
-                        <div class="payment_status" *ngIf="booking.booking[0].paymentStatus === 0">
+                        <div class="payment_status" *ngIf="booking.booking[0].paymentStatus == 0">
                            <!-- {{ ( booking.is_installation_on_track === true && booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
                           'Next Payment'+commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
                            -->
-                          <img *ngIf="!booking.is_installation_on_track" src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
-                          > {{ booking.is_installation_on_track ?  'Next Payment '+ commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : 'Past Due'}} 
+                          <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
+                          > {{ booking.is_installation_on_track  == true ?  'Next Payment '+ commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : 'Past Due'}} 
                         </div>
                       </div>
                       <div class="pricer_wrp">
@@ -212,7 +212,7 @@
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
                     <div class="tab-pane" [id]="'cart_item'+j"
                       [ngClass]="{'show active':selectedInCompletedTabNumber===j}">
-                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="cartItem"></app-flights>
+                      <app-flights *ngIf="cartItem.moduleId==1" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-flights>
                     </div>
                   </ng-container>
                 </div>
@@ -381,7 +381,7 @@
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
                     <div class="tab-pane" [id]="'completed_item'+j"
                       [ngClass]="{'active':selectedCompletedTabNumber===j}">
-                      <app-flights *ngIf="cartItem.moduleId==1" [cartItem]="cartItem"></app-flights>
+                      <app-flights *ngIf="cartItem.moduleId==1" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (laytripCartId)="cancelCartIdRemove($event)" (upCommingloadingValue)="loadUpcomming($event)"></app-flights>
                     </div>
                   </ng-container>
                 </div>

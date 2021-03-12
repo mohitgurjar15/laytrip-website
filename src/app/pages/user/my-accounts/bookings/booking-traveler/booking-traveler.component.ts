@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import * as moment from 'moment';
+import { CheckOutService } from 'src/app/services/checkout.service';
+import { GenericService } from 'src/app/services/generic.service';
 
 @Component({
   selector: 'app-booking-traveler',
@@ -13,20 +15,30 @@ export class BookingTravelerComponent implements OnInit {
   @Input() isPassportRequired=false;
   baggageDescription: string = '';
   moduleInfo : any ={};
+  countries=[];
 
   constructor(   
-    private commonFunction: CommonFunction
+    private commonFunction: CommonFunction,   
+    private checkOutService: CheckOutService,   
+    private genericService: GenericService,   
+
     ) { }
 
   ngOnInit(): void {
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {
 
     if(typeof changes['travelers'].currentValue!='undefined'){
-      this.travelers = changes['travelers'].currentValue.travelers;      
+      this.travelers = changes['travelers'].currentValue.travelers;          
       this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
-      this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;    }
+      if(this.travelers.length > 0){
+        this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;  
+      }      
+    }
+    
+    
   }
 
   formatBaggageDescription(cabbinBaggage, checkInBaggage) {
@@ -91,5 +103,13 @@ export class BookingTravelerComponent implements OnInit {
   }
   getPhoneNoInMaskFormat(phNum,countryCode){
     return countryCode+' '+phNum.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+  }
+
+  getContryName(id){
+    this.checkOutService.getCountries.subscribe(res => {
+      this.countries = res;
+    });
+    var countryObj = this.countries.filter(item => item.id == id );
+    return countryObj[0].name ? countryObj[0].name : '';
   }
 }

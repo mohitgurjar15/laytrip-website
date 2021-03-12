@@ -45,4 +45,11 @@ import { throwError } from "rxjs";
                 catchError(this.handleError)
             );
     } 
+    
+    cancelBooking(bookingId){
+        return this.http.delete(`${environment.apiUrl}v1/booking?booking_id=`+bookingId, this.commonFunction.setHeaders())
+            .pipe(
+                catchError(this.handleError)
+            );
+    } 
 }   

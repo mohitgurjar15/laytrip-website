@@ -16,8 +16,8 @@ export class CommonFunction {
         private _location: Location,
         private router: Router,
         private route: ActivatedRoute
-        
-        
+
+
 
     ) {
 
@@ -226,6 +226,14 @@ export class CommonFunction {
             a.push(i);
 
         if ((a.indexOf(k) >= 0))
+            event.preventDefault();
+    }
+
+    preventSpecialCharacter(event: any) {
+        var a = [];
+        var k = event.charCode;
+
+        if ((k >= 33 && k <= 91) || k == 32 || k == 64 || (k >= 123 && k <= 126) || (k >= 92 && k <= 96))
             event.preventDefault();
     }
 }
