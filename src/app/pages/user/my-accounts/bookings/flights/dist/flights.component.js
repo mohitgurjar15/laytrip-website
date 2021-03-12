@@ -11,29 +11,34 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var FlightsComponent = /** @class */ (function () {
-    function FlightsComponent(commonFunction, modalService) {
+    function FlightsComponent(commonFunction, modalService, accountService) {
         this.commonFunction = commonFunction;
         this.modalService = modalService;
+        this.accountService = accountService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.cartItem = {};
+        this.laytrip_cart_id = '';
         this.closeResult = '';
+        this.bookingId = '';
+        this.laytripCartId = new core_1.EventEmitter();
+        this.upCommingloadingValue = new core_1.EventEmitter();
     }
     FlightsComponent.prototype.ngOnInit = function () {
     };
     FlightsComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['cartItem'].currentValue != 'undefined') {
             this.cartItem = changes['cartItem'].currentValue;
+            this.laytrip_cart_id = changes['laytrip_cart_id'].currentValue;
         }
     };
     FlightsComponent.prototype.convertHHMM = function (time) {
         time = time.replace(' AM', '');
         time = time.replace(' PM', '');
-        return time;
-        // console.log(time)
-        // return moment(new Date(time)).format('LT');   // 5:04 PM
+        return time; // 5:04 PM
     };
-    FlightsComponent.prototype.open = function (content) {
+    FlightsComponent.prototype.open = function (content, bookingId) {
         var _this = this;
+        this.bookingId = bookingId;
         this.modalService.open(content, {
             windowClass: 'delete_account_window', centered: true, backdrop: 'static',
             keyboard: false
@@ -54,9 +59,30 @@ var FlightsComponent = /** @class */ (function () {
             return "with: " + reason;
         }
     };
+    FlightsComponent.prototype.cancelBooking = function () {
+        var _this = this;
+        // this.upCommingloadingValue.emit(true);
+        this.accountService.cancelBooking(this.bookingId).subscribe(function (data) {
+            _this.laytripCartId.emit(_this.bookingId);
+            // this.upCommingloadingValue.emit(false);
+            _this.modalService.dismissAll();
+        }, function (error) {
+            // this.upCommingloadingValue.emit(false);
+            _this.modalService.dismissAll();
+        });
+    };
     __decorate([
         core_1.Input()
     ], FlightsComponent.prototype, "cartItem");
+    __decorate([
+        core_1.Input()
+    ], FlightsComponent.prototype, "laytrip_cart_id");
+    __decorate([
+        core_1.Output()
+    ], FlightsComponent.prototype, "laytripCartId");
+    __decorate([
+        core_1.Output()
+    ], FlightsComponent.prototype, "upCommingloadingValue");
     FlightsComponent = __decorate([
         core_1.Component({
             selector: 'app-flights',
