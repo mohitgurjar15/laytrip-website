@@ -4,23 +4,43 @@
       <div formArrayName="adults">
         <div id="accordion" class="accordion_bookings">
           <div class="card" *ngFor="let traveler of travelerForm.get('type'+y+'.adults')['controls']; let x = index;">
-            <div class="card-header" (click)="selectTravelerNumber($event,x)">
+            <div class="card-header custom_header" (click)="selectTravelerNumber($event,x)">
               <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+y+x" aria-expanded="false">
-                <!-- {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
-                +travelerItem.value.adults[x].last_name:'Booking Traveler'}} -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
+                  <defs></defs>
+                  <path class="a"
+                    d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
+                </svg>
                 <span class="tr_type">
-                  {{x==0?'Primary Traveler':'Additional Traveler'}}
+                  {{x==0?'Primary Traveler':travlerLabels['en'][traveler.controls.type.value]}}
                 </span>
-                <span class="trv_name">
+                <span class="trv_name ">
                   {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
-                  +travelerItem.value.adults[x].last_name:'Booking Traveler' | titlecase}}
+                  +travelerItem.value.adults[x].last_name:'' | titlecase}}
                 </span>
               </a>
+              <a class="dropdown-toggle traveler_drop_down"
+                data-toggle="dropdown">{{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + '
+                '
+                +travelerItem.value.adults[x].last_name:'Saved Travelers' | titlecase}}</a>
+              <ul class="dropdown-menu options_name">
+                <ng-container *ngFor="let user of myTravelers">
+                  <li (click)='selectTraveler(user.userId,x)' *ngIf="user.user_type==traveler.controls.type.value">
+                    {{user.firstName}} {{user.lastName}}</li>
+                </ng-container>
+              </ul>
+
+              <!-- <select class="form-control traveler_drop_down" (change)='selectTraveler($event,x)'>
+                <option [selected]>Saved Travelers </option>
+                <ng-container *ngFor="let user of myTravelers">
+                  <option [selected]="travelerItem.value.adults[x].userId===user.userId" [value]="user.userId">
+                    {{user.firstName}} {{user.lastName}}</option>
+                </ng-container>
+              </select> -->
             </div>
-            <div [id]="'adult_collapse'+y+x" class="collapse" [ngClass]="{'show':traveler_number==x}"
-              data-parent="#accordion">
+            <div [id]="'adult_collapse'+y+x" class="collapse show" data-parent="#accordion">
               <div class="card-body">
-                <div class="sub_cat_wrapper">
+                <!-- <div class="sub_cat_wrapper">
                   <button (click)="selectTravelerType('adult',x)" class="add_btn_lined"
                     [ngClass]="{'active' : traveler.controls.type.value=='adult'}">Add Adult (Over 12)
                   </button>
@@ -32,32 +52,34 @@
                     class="add_btn_lined" [ngClass]="{'active' : traveler.controls.type.value=='infant'}">Add Infant
                     (Under 12)
                   </button>
-                </div>
-                <app-my-traveler travelerId={{travelerItem.value.adults[x].userId}}
-                  traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
+                </div> -->
+                <!-- <app-my-traveler travelerId={{travelerItem.value.adults[x].userId}}
+                  traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler> -->
 
                 <div [formGroupName]="x" class="common_form">
                   <div class="form-row">
-                    <div class="col-sm-12 col-md-4 mb-sm-10 ">
+                    <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                       <label for="">First Name*</label>
                       <input type="text" class="form-control" formControlName="first_name" tabindex="1"
-                        (keypress)="commonFunction.preventNumberInput($event);commonFunction.preventSpecialCharacter($event)">
+                        (keypress)="commonFunction.preventNumberInput($event)">
                       <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                          Please
                           enter
                           your
-                          first name.</small>
+                          first name.
+                        </small>
                         <small *ngIf="traveler.controls.first_name.errors.pattern" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                           {{'first_name_string_validation' | translate}} </small>
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 mb-sm-10">
+                    <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                       <label for="">Last Name*</label>
                       <input type="text" class="form-control" formControlName="last_name" tabindex="2"
-                        (keypress)="commonFunction.preventNumberInput($event);commonFunction.preventSpecialCharacter($event)">
+                        (keypress)="commonFunction.preventNumberInput($event)">
                       <div *ngIf="traveler.controls.last_name.touched && traveler.controls.last_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">
@@ -69,7 +91,7 @@
                           {{'last_name_string_validation' | translate}} </small>
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 mb-sm-10">
+                    <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory">
                       <label for="">Gender*</label>
                       <select class="form-control" formControlName="gender" tabindex="3">
                         <option value="M">Male</option>
@@ -82,7 +104,7 @@
                           select your gender.</small>
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 mb-sm-10"
+                    <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
                       *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                       <label for="">Email*</label>
                       <input type="email" class="form-control" formControlName="email" tabindex="4">
@@ -98,10 +120,11 @@
                           email address.</small>
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps"
+                    <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps mandetory_wrps"
                       *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                       <label for="">{{ 'phone_no' | translate}}*</label>
-                      <span class="tel_span">
+                      <span class="tel_span"
+                        [ngClass]="{'red_underline':traveler.controls.phone_no.touched && traveler.controls.phone_no.errors}">
                         <!-- <input type="text" class="form-control" maxlength="6"
                           formControlName="country_code"> -->
                         <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="phonecode"
@@ -120,18 +143,11 @@
                             class="error_img">Minimum 10 characters.</small>
                       </div>
                     </div>
-                    <div class="col-sm-12 dobs col-md-4 mb-sm-10">
+                    <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps">
                       <label for="">{{'dob' | translate}}*</label>
-                      <!-- <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob"> -->
                       <input onkeydown="return false" type="text" class="form-control" bsDatepicker tabindex="7"
                         formControlName="dob" [bsConfig]="bsConfig" [minDate]="traveler.controls.dobMinDate.value"
                         [maxDate]="traveler.controls.dobMaxDate.value">
-                      <!-- <p-calendar dateFormat="M d, yy" class="form-control" panelStyleClass="birth_date" inputId="basic"
-                        formControlName="dob" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
-                        (onBlur)=changeDateOfBirth($event)
-                        yearRange="{{traveler.controls.dobMinDate.value.getFullYear()}}:{{traveler.controls.dobMaxDate.value.getFullYear()}}"
-                        placeholder="Date of birth">
-                      </p-calendar> -->
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10"
                       *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_number')">
@@ -146,7 +162,7 @@
                     </div>
 
 
-                    <div class="col-sm-12 col-md-4 nation_wrps">
+                    <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps">
                       <label for="">Country*</label>
                       <!-- <input type="text" class="form-control" placeholder="Nationality" formControlName="country"> -->
                       <ng-select [clearable]="false" [items]="countries" bindLabel="name" bindValue="id" tabindex="10"
@@ -206,6 +222,16 @@
                   </div>
                 </div>
 
+                <span class="edit_btns duel_buttons">
+                  <span class="remove_wrps">
+                    <button class="hover-link" [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }"
+                      (click)="deleteTraveler(cartNumber,x)">Delete</button>
+                  </span>
+                  <button (click)="editTraveler(cartNumber,x)" class="hover-link"
+                    [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }">Edit</button>
+                  <button (click)="saveTraveler(cartNumber,x)" class="hover-link"
+                    [ngClass]="{'disabled': travelerItem.value.adults[x].userId }">Save</button>
+                </span>
               </div>
             </div>
           </div>
@@ -213,128 +239,4 @@
       </div>
     </div>
   </ng-container>
-  <!-- <div *ngIf="travelers.type1.adults.length>0 && cartNumber==1" formGroupName="type1">
-    <div formArrayName="adults">
-      <div id="accordion" class="accordion_bookings">
-        <div class="card" *ngFor="let traveler of travelerForm.get('type1.adults')['controls']; let x = index">
-          <div class="card-header">
-            <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+x" aria-expanded="false">
-              Booking Traveler{{cartNumber}} {{x+1}}
-            </a>
-          </div>
-          <div [id]="'adult_collapse'+x" class="collapse show" data-parent="#accordion">
-            <div class="card-body">
-              <div class="sub_cat_wrapper">
-                <a href="javascript:void(0);" class="add_btn_lined">Add Adult (Over 12)</a>
-                <a href="javascript:void(0);" class="add_btn_lined">Add Child (2-12)</a>
-                <a href="javascript:void(0);" class="add_btn_lined">Add Infant (Under 12)</a>
-              </div>
-              <app-my-traveler travelerId={{travelers.type1.adults[traveler_number].userId}}
-                traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler>
-
-              <div [formGroupName]="x" class="common_form">
-                <div class="form-row">
-                  <div class="col-sm-12 col-md-4 mb-sm-10">
-                    <label for="">First Name*</label>
-                    <input type="text" class="form-control"  formControlName="first_name">
-                    <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
-                      class="error">
-                      <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">Your name is
-                        required</small>
-                    </div>
-                  </div>
-                  <div class="col-sm-12 col-md-4 mb-sm-10">
-                    <label for="">Last Name*</label>
-                    <input type="text" class="form-control"  formControlName="last_name">
-                  </div>
-
-                  <div class="col-sm-12 col-md-4 mb-sm-10">
-                    <label for="">Gender*</label>
-                    <select class="form-control" formControlName="gender">
-                      <option>Male</option>
-                      <option>Female</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-row mt-3">
-                  <div class="col-sm-12 col-md-4 mb-sm-10">
-                    <label for="">Email*</label>
-                    <input type="email" class="form-control" placeholder="Email" formControlName="email">
-                  </div>
-                  <div class="col-sm-12 col-md-4 mb-sm-10">
-                    <label for="">Telephone*</label>
-                    <input type="text" class="form-control" placeholder="Telephone" formControlName="phone_no">
-                  </div>
-                  <div class="col dobs col-md-4 mb-sm-10">
-                    <label for="">Date of birth*</label>
-                    <input type="text" class="form-control" placeholder="Date of birth" formControlName="dob">
-                  </div>
-                </div>
-                <div class="form-row mt-3 mb-sm-10">
-                  <div class="col-sm-12 col-md-4" *ngIf="travelers.type1?.adults[x]?.passport_number">
-                    <label for="">Passport number</label>
-                    <input type="text" class="form-control" placeholder="Passport number"
-                      formControlName="passport_number">
-                  </div>
-                  <div class="col-sm-12 col-md-4">
-                    <label for="">Nationality*</label>
-                    <input type="text" class="form-control" placeholder="Nationality" formControlName="country_code">
-                  </div>
-                </div>
-              </div>
-
-              <div id="accordion_add" class="accordion_addn">
-                <div class="card">
-                  <div class="card-header">
-                    <span class="heade_wrps">
-                      Add-Ons
-                      <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord"
-                        class="addon_anchor responsive_anch" aria-expanded="true" aria-controls="add_acord">
-                      </a>
-                    </span>
-                    <ul class="nav nav-pills" id="addon_tab" role="tablist">
-                      <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="baggage-tab" data-toggle="tab" href="#baggage" role="tab"
-                          aria-controls="baggage" aria-selected="true">Baggage</a>
-                      </li>
-                      <li class="nav-item disabled" role="presentation">
-                        <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding" role="tab"
-                          aria-controls="boarding" aria-selected="false">Priority Boarding</a>
-                      </li>
-                      <li class="nav-item disabled" role="presentation">
-                        <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance" role="tab"
-                          aria-controls="insurance" aria-selected="false">Insurance</a>
-                      </li>
-                    </ul>
-                    <a data-toggle="collapse" data-parent="#accordion_add" href="#add_acord" class="addon_anchor"
-                      aria-expanded="true" aria-controls="add_acord">
-                    </a>
-                  </div>
-                  <div id="add_acord" class="collapse show" data-parent="#accordion_add">
-                    <div class="card-body">
-                      <div class="tab-content" id="addon_tabContent">
-                        <div class="tab-pane fade show active" id="baggage" role="tabpanel"
-                          aria-labelledby="baggage-tab">
-                          <div class="addon_listins_wrps">
-                            <button class="addon_btn_drop" (click)="$event.preventDefault()">
-                              {{baggageDescription}}
-                            </button>
-                          </div>
-                        </div>
-                        <div class="tab-pane fade" id="boarding" role="tabpanel" aria-labelledby="boarding-tab">
-                        </div>
-                        <div class="tab-pane fade" id="insurance" role="tabpanel" aria-labelledby="insurance-tab">.bbbb
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
 </form>

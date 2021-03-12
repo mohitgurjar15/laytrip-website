@@ -5490,3 +5490,7 @@ body {
 .custom_toastr_message {
   margin-top: 5px;
 }
+
+.red_underline {
+  border-color: $error-color !important;
+}
