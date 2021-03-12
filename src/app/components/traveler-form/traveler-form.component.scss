@@ -97,9 +97,9 @@
       padding: 15px;
 
       @include tab-view {
-        &.custom_header {
-          padding: 15px 15px 0;
-        }
+        // &.custom_header {
+        //   padding: 15px 15px 0;
+        // }
       }
 
       svg {
@@ -233,7 +233,7 @@
     }
 
     .card-body {
-      padding: 15px;
+      padding: 0 15px 15px;
 
       .sub_cat_wrapper {
         display: flex;
@@ -769,5 +769,5 @@
 }
 
 .hide_section {
-  display: none;
+  display: none !important;
 }
