@@ -1,0 +1,89 @@
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.cookie_main_wrapper {
+    background-color: $background-white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 0 0;
+    border-radius: 10px;
+
+    @include tab-view {
+        padding: 15px 0;
+    }
+
+    .inner_wrppar {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        .cookie_header{
+            color: $active-tab-text;
+            font-size: 32px;
+            margin: 5px 0 15px;
+            @include tab-view{
+                font-size: 18px;
+            }
+        }
+        .cookie_msg {
+            color: $text_grey_dark;
+            font-size: 12px;
+            margin-bottom: 5px;
+
+            a{
+                color: $txt_clr_blue;
+            }
+        }
+
+        .cta_btn_wrps {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            button {
+                margin: 5px;
+                flex: 1;
+                height: 40px;
+                padding: 10px 25px;
+                background: $hotel-secondary-color;
+                border-radius: 25px;
+                border: 1px solid $hotel-secondary-color;
+                font-size: 14px;
+                color: $text-white;
+                transition: 0.3s;
+                position: relative;
+                z-index: 9;
+                overflow: hidden;
+                white-space: normal;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                @inc
+
+                &:hover {
+                    border: 1px solid $hotel-secondary-color;
+                    color: $text-white;
+                    background: $hotel-secondary-color;
+                }
+
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+
+        .logo_wrpper_footer {
+            img {
+                height: 32px;
+                margin-top: 20px;
+            }
+        }
+    }
+}
