@@ -66,11 +66,18 @@
 
     .pipe_wrap {
         display: flex;
-        width: 33.33%;
+        width: 20%;
         //max-width: 45px;
         font-size: 8px;
-        padding: 0 2px;
+        padding: 0 8px;
         color: $grayed_border;
+        min-width: 70px;
+
+        @include mobile-xsm-view{
+            width: 33.33%;
+            padding: 0 8px;
+        }
+
 
         .pipe_line_wrps {
             width: 100%;
@@ -225,8 +232,13 @@
             &.duel_wrps {
                 flex-direction: column;
                 display: flex;
-                width: auto;
+                // width: auto;
+                width: 40%;
                 position: relative;
+
+                @include mobile-xsm-view{
+                    width: 33.33%;
+                }
 
                 .fl_desitines {
                     font-weight: 400;
@@ -250,8 +262,13 @@
             &.duel_wrps {
                 flex-direction: column;
                 display: flex;
-                width: auto;
+                //width: auto;
+                width: 40%;
                 position: relative;
+                @include mobile-xsm-view{
+                    width: 33.33%;
+                }
+
 
                 .fl_name {
                     font-size: 12px !important;
