@@ -96,12 +96,13 @@
       background-color: transparent;
       padding: 15px;
 
-      @include tab-view{
-        &.custom_header{
+      @include tab-view {
+        &.custom_header {
           padding: 15px 15px 0;
         }
       }
-      svg{
+
+      svg {
         fill: $grayed_border;
       }
 
@@ -173,7 +174,10 @@
         position: absolute;
         top: 10px;
         margin: 0 auto;
-        max-width: 120px;
+        max-width: 155px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         left: 0;
         right: 0;
         border: none;
@@ -192,17 +196,19 @@
         background-repeat: no-repeat;
         background-size: 11px;
         transition: 0.3s;
-        &::after{
+
+        &::after {
           content: none;
         }
-        @include tab-view{
+
+        @include tab-view {
           position: relative;
           top: 0;
           left: 30px;
           margin: 0;
           font-size: 12px;
           display: flex;
-          width: 100px;
+          width: 135px;
         }
 
         &:focus {
@@ -210,6 +216,7 @@
           box-shadow: none;
         }
       }
+
       .options_name {
         background-color: $background-white;
         border-bottom-left-radius: 15px;
@@ -218,7 +225,8 @@
         font-size: 12px;
         padding: 2px 0;
         cursor: pointer;
-        li{
+
+        li {
           padding: 4px 10px;
         }
       }
@@ -402,7 +410,7 @@
               background-size: 20px;
               // border: none;
 
-              @include tab-view{
+              @include tab-view {
                 background-image: none;
               }
             }
@@ -751,7 +759,7 @@
           justify-content: space-between;
           margin-top: 15px;
 
-          @include tab-view{
+          @include tab-view {
             margin-top: 10px;
           }
         }
