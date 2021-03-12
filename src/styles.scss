@@ -1204,7 +1204,7 @@ select {
               }
             }
 
-            @media (max-width: 480px) {
+            @include tab-view{
               flex-wrap: wrap;
 
               li {
@@ -1212,6 +1212,7 @@ select {
 
                 &.class_resp {
                   width: 100%;
+                  flex: 1;
                 }
 
                 &.travellers_resp {
@@ -1258,7 +1259,7 @@ select {
                         margin-bottom: 5px;
                       }
 
-                      @media (max-width: 480px) {
+                      @include tab-view {
                         flex-flow: column;
                       }
 
@@ -1326,7 +1327,7 @@ select {
                         position: relative;
                         z-index: 2;
 
-                        @media (max-width: 480px) {
+                        @include tab-view{
                           width: 100%;
                           z-index: auto;
                           margin-bottom: 5px;
@@ -1338,7 +1339,7 @@ select {
                         position: relative;
                         z-index: 10;
 
-                        @media (max-width: 480px) {
+                        @include tab-view {
                           width: 100%;
                         }
                       }
@@ -1363,7 +1364,7 @@ select {
                           transform: translate(-50%, -50%);
                         }
 
-                        @media (max-width: 480px) {
+                        @include tab-view {
                           left: 90%;
                         }
                       }
@@ -2097,7 +2098,7 @@ select {
           }
         }
 
-        @media (max-width: 768px) {
+        @include tab-view{
           flex-wrap: wrap;
 
           li {
@@ -2159,7 +2160,7 @@ select {
                     margin-bottom: 5px;
                   }
 
-                  @media (max-width: 480px) {
+                  @include tab-view{
                     flex-flow: column;
                     margin-bottom: 5px;
                     padding: 0;
@@ -2212,7 +2213,7 @@ select {
                     position: relative;
                     z-index: 2;
 
-                    @media (max-width: 480px) {
+                    @include tab-view {
                       width: 100%;
                       z-index: auto;
                     }
@@ -2223,7 +2224,7 @@ select {
                     position: relative;
                     z-index: 1;
 
-                    @media (max-width: 480px) {
+                    @include tab-view {
                       width: 100%;
                       margin-top: 5px;
                     }
@@ -2249,7 +2250,7 @@ select {
                       transform: translate(-50%, -50%);
                     }
 
-                    @media (max-width: 480px) {
+                    @include tab-view {
                       left: 90%;
                     }
                   }
