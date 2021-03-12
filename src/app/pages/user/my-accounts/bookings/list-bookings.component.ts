@@ -111,4 +111,19 @@ export class ListBookingsComponent implements OnInit {
   getProgressPercentage(value, totalValue) {
     return { 'width': Math.floor((value / totalValue) * 100) + '%' };
   }
+  
+  cancelCartIdRemove(event){
+    
+    var filterData = this.upComingbookings.filter(function(obj){
+      return obj.laytripCartId != event
+    });
+    this.upComingbookings = [];
+    this.upComingbookings = filterData;
+  }
+
+  loadUpcomming(event){
+    console.log(event)
+
+    this.upComingloading = event;
+  }
 }

@@ -107,6 +107,17 @@ var ListBookingsComponent = /** @class */ (function () {
     ListBookingsComponent.prototype.getProgressPercentage = function (value, totalValue) {
         return { 'width': Math.floor((value / totalValue) * 100) + '%' };
     };
+    ListBookingsComponent.prototype.cancelCartIdRemove = function (event) {
+        var filterData = this.upComingbookings.filter(function (obj) {
+            return obj.laytripCartId != event;
+        });
+        this.upComingbookings = [];
+        this.upComingbookings = filterData;
+    };
+    ListBookingsComponent.prototype.loadUpcomming = function (event) {
+        console.log(event);
+        this.upComingloading = event;
+    };
     ListBookingsComponent = __decorate([
         core_1.Component({
             selector: 'app-list-bookings',

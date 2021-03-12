@@ -128,7 +128,7 @@ export class TravellerFormComponent implements OnInit {
     var travellerDob = moment(this.travelerInfo.dob).format('YYYY-MM-DD');
     const phoneControl = this.travellerForm.get('phone_no');
     const emailControl = this.travellerForm.get('email');
-    if (travellerDob < adult12YrPastDate) {
+    if (travellerDob <= adult12YrPastDate) {
       this.isAdult = true;
       this.isChild = false;
       phoneControl.setValidators([Validators.required]);
@@ -284,7 +284,8 @@ export class TravellerFormComponent implements OnInit {
     const emailControl = this.travellerForm.get('email');
     const phoneControl = this.travellerForm.get('phone_no');
     const countryControl = this.travellerForm.get('country_code');
-    if (selectedDate < adult12YrPastDate) {
+    console.log(selectedDate , adult12YrPastDate)
+    if (selectedDate <= adult12YrPastDate) {
       this.isAdult = true;
       this.isChild = false;
       emailControl.setValidators([Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);

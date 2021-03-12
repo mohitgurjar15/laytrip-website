@@ -58,7 +58,7 @@
                     <div class="col-sm-12 col-md-4 mb-sm-10 ">
                       <label for="">First Name*</label>
                       <input type="text" class="form-control" formControlName="first_name" tabindex="1"
-                        (keypress)="commonFunction.preventNumberInput($event)">
+                        (keypress)="commonFunction.preventNumberInput($event);commonFunction.preventSpecialCharacter($event)">
                       <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">
@@ -76,7 +76,7 @@
                     <div class="col-sm-12 col-md-4 mb-sm-10">
                       <label for="">Last Name*</label>
                       <input type="text" class="form-control" formControlName="last_name" tabindex="2"
-                        (keypress)="commonFunction.preventNumberInput($event)">
+                        (keypress)="commonFunction.preventNumberInput($event);commonFunction.preventSpecialCharacter($event)">
                       <div *ngIf="traveler.controls.last_name.touched && traveler.controls.last_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">

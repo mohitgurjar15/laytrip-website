@@ -39,6 +39,10 @@ var AccountService = /** @class */ (function () {
         return this.http.get(environment_1.environment.apiUrl + "v1/booking/complete-bookings?search=" + search, this.commonFunction.setHeaders())
             .pipe(operators_1.catchError(this.handleError));
     };
+    AccountService.prototype.cancelBooking = function (bookingId) {
+        return this.http["delete"](environment_1.environment.apiUrl + "v1/booking?booking_id=" + bookingId, this.commonFunction.setHeaders())
+            .pipe(operators_1.catchError(this.handleError));
+    };
     AccountService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

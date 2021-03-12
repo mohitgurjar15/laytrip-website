@@ -98,7 +98,7 @@ var TravellerFormComponent = /** @class */ (function () {
         var travellerDob = moment(this.travelerInfo.dob).format('YYYY-MM-DD');
         var phoneControl = this.travellerForm.get('phone_no');
         var emailControl = this.travellerForm.get('email');
-        if (travellerDob < adult12YrPastDate) {
+        if (travellerDob <= adult12YrPastDate) {
             this.isAdult = true;
             this.isChild = false;
             phoneControl.setValidators([forms_1.Validators.required]);
@@ -250,7 +250,8 @@ var TravellerFormComponent = /** @class */ (function () {
         var emailControl = this.travellerForm.get('email');
         var phoneControl = this.travellerForm.get('phone_no');
         var countryControl = this.travellerForm.get('country_code');
-        if (selectedDate < adult12YrPastDate) {
+        console.log(selectedDate, adult12YrPastDate);
+        if (selectedDate <= adult12YrPastDate) {
             this.isAdult = true;
             this.isChild = false;
             emailControl.setValidators([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);

@@ -6,6 +6,7 @@ import { environment } from '../environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 import { getLoginUserInfo } from './_helpers/jwt.helper';
 import { UserService } from './services/user.service';
+import { CheckOutService } from './services/checkout.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
   constructor(
     private cookieService:CookieService,
     private genericService:GenericService,
+    private checkOutService:CheckOutService,
     // private swPush: SwPush,
     private userService:UserService
   ){
@@ -31,7 +33,9 @@ export class AppComponent {
       // this.subscribeToNotifications()
     }
 
-    this.registerGuestUser()
+    this.registerGuestUser();
+    this.setCountryBehaviour();
+
   }
 
 
@@ -111,4 +115,11 @@ export class AppComponent {
       }
     }
   }
+
+  setCountryBehaviour(){
+    this.genericService.getCountry().subscribe(res => {
+      this.checkOutService.setCountries(res);
+    })
+  }
+
 }
