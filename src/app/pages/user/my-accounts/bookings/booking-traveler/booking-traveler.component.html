@@ -55,7 +55,7 @@
                         <div class="col-sm-12 col-md-4">
                             <label for="">Country*</label>
                             <input type="text" class="form-control"
-                                placeholder="{{traveler.travelerInfo.country ? traveler.travelerInfo.country.name : ''}}"
+                                placeholder="{{traveler.travelerInfo.country ? getContryName(traveler.travelerInfo.countryId) : ''}}"
                                 disabled>
                         </div>
                     </div>

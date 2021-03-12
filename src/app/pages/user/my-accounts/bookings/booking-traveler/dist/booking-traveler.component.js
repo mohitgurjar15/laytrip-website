@@ -23,7 +23,9 @@ var BookingTravelerComponent = /** @class */ (function () {
         if (typeof changes['travelers'].currentValue != 'undefined') {
             this.travelers = changes['travelers'].currentValue.travelers;
             this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
-            this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;
+            if (this.travelers.length > 0) {
+                this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;
+            }
         }
     };
     BookingTravelerComponent.prototype.formatBaggageDescription = function (cabbinBaggage, checkInBaggage) {
@@ -84,6 +86,9 @@ var BookingTravelerComponent = /** @class */ (function () {
     };
     BookingTravelerComponent.prototype.getPhoneNoInMaskFormat = function (phNum, countryCode) {
         return countryCode + ' ' + phNum.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+    };
+    BookingTravelerComponent.prototype.getContryName = function (id) {
+        console.log(id);
     };
     __decorate([
         core_1.Input()

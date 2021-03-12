@@ -25,8 +25,12 @@ export class BookingTravelerComponent implements OnInit {
 
     if(typeof changes['travelers'].currentValue!='undefined'){
       this.travelers = changes['travelers'].currentValue.travelers;      
+      
       this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
-      this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;    }
+     if(this.travelers.length > 0){
+       this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;  
+     }
+    }
   }
 
   formatBaggageDescription(cabbinBaggage, checkInBaggage) {
@@ -91,5 +95,11 @@ export class BookingTravelerComponent implements OnInit {
   }
   getPhoneNoInMaskFormat(phNum,countryCode){
     return countryCode+' '+phNum.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+  }
+
+  getContryName(id){
+    console.log(id)
+
+
   }
 }

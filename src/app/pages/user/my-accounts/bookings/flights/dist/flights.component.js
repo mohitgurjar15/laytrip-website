@@ -9,11 +9,14 @@ exports.__esModule = true;
 exports.FlightsComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var FlightsComponent = /** @class */ (function () {
-    function FlightsComponent(commonFunction) {
+    function FlightsComponent(commonFunction, modalService) {
         this.commonFunction = commonFunction;
+        this.modalService = modalService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.cartItem = {};
+        this.closeResult = '';
     }
     FlightsComponent.prototype.ngOnInit = function () {
     };
@@ -28,6 +31,28 @@ var FlightsComponent = /** @class */ (function () {
         return time;
         // console.log(time)
         // return moment(new Date(time)).format('LT');   // 5:04 PM
+    };
+    FlightsComponent.prototype.open = function (content) {
+        var _this = this;
+        this.modalService.open(content, {
+            windowClass: 'delete_account_window', centered: true, backdrop: 'static',
+            keyboard: false
+        }).result.then(function (result) {
+            _this.closeResult = "Closed with: " + result;
+        }, function (reason) {
+            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
+        });
+    };
+    FlightsComponent.prototype.getDismissReason = function (reason) {
+        if (reason === ng_bootstrap_1.ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        }
+        else if (reason === ng_bootstrap_1.ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        }
+        else {
+            return "with: " + reason;
+        }
     };
     __decorate([
         core_1.Input()
