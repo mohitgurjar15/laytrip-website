@@ -221,7 +221,7 @@ var ProfileComponent = /** @class */ (function () {
                 dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
                 country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
                 phone_no: res.phoneNo,
-                // city : res.cityName,
+                city: res.cityName,
                 address: res.address,
                 home_airport: res.airportInfo.code ? res.airportInfo.code : null,
                 country_id: res.country.name ? res.country.name : 'United States',
@@ -237,7 +237,12 @@ var ProfileComponent = /** @class */ (function () {
                 jwt_helper_1.redirectToLogin();
             }
             else {
-                _this.toastr.error(error.message, 'Profile Error');
+                // this.toastr.error(error.message, 'Profile Error');
+                _this.toastr.show(error.message, 'Profile Error', {
+                    toastClass: 'custom_toastr',
+                    titleClass: 'custom_toastr_title',
+                    messageClass: 'custom_toastr_message'
+                });
             }
         });
     };
@@ -311,7 +316,7 @@ var ProfileComponent = /** @class */ (function () {
                 // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
             }, function (error) {
                 _this.loadingValue.emit(false);
-                // this.submitted = false;city
+                // this.submitted = false;
                 // this.toastr.error(error.error.message, 'Profile Error');
             });
         }
