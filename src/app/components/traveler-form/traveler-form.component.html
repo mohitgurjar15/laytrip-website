@@ -9,9 +9,9 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
                   <defs></defs>
                   <path class="a"
-                      d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
-              </svg>
-                <span class="tr_type"> 
+                    d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
+                </svg>
+                <span class="tr_type">
                   {{x==0?'Primary Traveler':travlerLabels['en'][traveler.controls.type.value]}}
                 </span>
                 <span class="trv_name ">
@@ -19,22 +19,21 @@
                   +travelerItem.value.adults[x].last_name:'' | titlecase}}
                 </span>
               </a>
-              <a class="dropdown-toggle traveler_drop_down" data-toggle="dropdown">asdsadsa</a>
+              <!-- <a class="dropdown-toggle traveler_drop_down" data-toggle="dropdown">Saved Travelers</a>
               <ul class="dropdown-menu options_name">
-                <li>asdasd</li>
-                <li>sad</li>
-                <li>asdfdfsdasd</li>
-                <li>asdasgrthyd</li>
-              </ul>
-            
-              <!-- <select class="form-control traveler_drop_down" (change)='selectTraveler($event,x)'>
+                <li *ngFor="let user of myTravelers" [selected]="travelerItem.value.adults[x].userId===user.userId">
+                  {{user.firstName}} {{user.lastName}}</li>
+              </ul> -->
+
+              <select class="form-control traveler_drop_down" (change)='selectTraveler($event,x)'>
                 <option [selected]>Saved Travelers </option>
                 <ng-container *ngFor="let user of myTravelers">
-                  <option [selected]="travelerItem.value.adults[x].userId===user.userId"
-                    *ngIf="user.user_type==traveler.controls.type.value" [value]="user.userId">{{user.firstName}}
-                    {{user.lastName}}</option>
+                  <!-- *ngIf="user.user_type==traveler.controls.type.value" -->
+                  <option [selected]="travelerItem.value.adults[x].userId===user.userId" [value]="user.userId">
+                    {{user.firstName}} {{user.lastName}}</option>
                 </ng-container>
-              </select> -->
+              </select>
+              </select>
             </div>
             <div [id]="'adult_collapse'+y+x" class="collapse show" data-parent="#accordion">
               <div class="card-body">
