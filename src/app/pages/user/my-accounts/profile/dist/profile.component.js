@@ -206,10 +206,8 @@ var ProfileComponent = /** @class */ (function () {
             _this.image = res.profilePic;
             _this.selectResponse = res;
             _this.is_type = res.gender ? res.gender : 'M';
-            if (typeof res.country.name == 'undefined') {
-                var countryId = { id: 233 };
-                _this.getStates(countryId);
-            }
+            var countryId = { id: res.country.id ? res.country.id : 233 };
+            _this.getStates(countryId);
             _this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
             _this.profileForm.patchValue({
                 first_name: res.firstName,

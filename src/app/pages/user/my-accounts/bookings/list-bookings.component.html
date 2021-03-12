@@ -174,7 +174,7 @@
                            <!-- {{ ( booking.is_installation_on_track === true && booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
                           'Next Payment'+commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
                            -->
-                          <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
+                          <img *ngIf="!booking.is_installation_on_track"  src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
                           > {{ booking.is_installation_on_track  == true ?  'Next Payment '+ commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : 'Past Due'}} 
                         </div>
                       </div>

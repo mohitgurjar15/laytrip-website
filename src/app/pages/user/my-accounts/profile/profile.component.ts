@@ -226,10 +226,9 @@ export class ProfileComponent implements OnInit {
       this.image = res.profilePic;
       this.selectResponse = res;
       this.is_type = res.gender ? res.gender : 'M';
-      if (typeof res.country.name == 'undefined') {
-        var countryId = { id: 233 };
-        this.getStates(countryId);
-      }
+      var countryId = { id: res.country.id ? res.country.id : 233 };
+      this.getStates(countryId);
+
       this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
       this.profileForm.patchValue({
         first_name: res.firstName,
