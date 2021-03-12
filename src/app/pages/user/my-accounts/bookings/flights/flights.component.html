@@ -191,12 +191,12 @@
         </div>
       </div>
     </div> 
+    <div class="total_hrs_wrps cta_btns_wrps mohit" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
+      <span class="ct_btns"></span>
+      Duration {{cartItem?.moduleInfo[0]?.routes[1]?.duration}}
+    </div>
   </div>
 
-  <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
-    <span class="ct_btns"></span>
-    Duration {{cartItem?.moduleInfo[0]?.routes[1]?.duration}}
-  </div>
   <app-booking-traveler [travelers]="cartItem" [isPassportRequired]="cartItem?.moduleInfo[0]?.routes.is_passport_required"></app-booking-traveler>
 </ng-container>
  

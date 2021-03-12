@@ -152,9 +152,10 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
         if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
           this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
-          this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy') : '';
+          this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
         }
       }
+
       this.patch();
       this.cartService.setCartTravelers(this.travelers);
       this.cd.detectChanges();
@@ -206,7 +207,7 @@ export class TravelerFormComponent implements OnInit {
                 this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
                 if (this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].is_passport_required) {
                   this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].passport_number = traveler.passportNumber;
-                  this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy');
+                  this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY');
                 }
 
                 this.checkOutService.setTravelers([...this.myTravelers, traveler]);
