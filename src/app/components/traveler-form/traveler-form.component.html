@@ -13,7 +13,7 @@
                   {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
                   +travelerItem.value.adults[x].last_name:'' | titlecase}}
                 </span>
-              </a>
+              </a> 
               <select class="form-control traveler_drop_down"  (change)='selectTraveler($event,x)'>
                 <option [selected]>Saved Travelers </option>
                 <ng-container *ngFor="let user of myTravelers">

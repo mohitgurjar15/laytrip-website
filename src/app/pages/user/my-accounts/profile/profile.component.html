@@ -25,20 +25,23 @@
 
                 </span>
             </div>
-            <div class="form_row common_row">
+            <div class="form_row common_row error_main_class">
                 <label>{{'first_name' | translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <input type="text" placeholder="{{'first_name_placeholder' | translate}}"
                         formControlName="first_name" maxlength="25" tabindex="1" [readonly]="!isFormControlEnable"
                         (keypress)="commonFunction.preventNumberInput($event)">
-                    <div *ngIf="profileForm.controls.first_name.touched && profileForm.controls.first_name.errors"
-                        class="error">
-                        <small *ngIf="profileForm.controls.first_name.errors.required" class="error_field">
-                            {{'first_name_touched_validation' | translate}}</small>
-                        <small *ngIf="profileForm.controls.first_name.errors.pattern" class="error_field">
-                            {{'first_name_string_validation' | translate}}</small>
-                    </div>
                 </div>
+            </div>
+            <div *ngIf="profileForm.controls.first_name.touched && profileForm.controls.first_name.errors"
+                class="error error_profile">
+                <div class="fake_div"></div>
+                <small *ngIf="profileForm.controls.first_name.errors.required" class="error_field_new">
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    {{'first_name_touched_validation' | translate}}</small>
+                <small *ngIf="profileForm.controls.first_name.errors.pattern" class="error_field">
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    {{'first_name_string_validation' | translate}}</small>
             </div>
             <div class="form_row common_row">
                 <label>{{'last_name' | translate}}<sup>*</sup></label>
@@ -46,14 +49,17 @@
                     <input type="text" [readonly]="!isFormControlEnable"
                         placeholder="{{'last_name_placeholder' | translate}}" formControlName="last_name" maxlength="25"
                         tabindex="2" (keypress)="commonFunction.preventNumberInput($event)">
-                    <div *ngIf="(isFormControlEnable && profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
-                        class="error">
-                        <small *ngIf="profileForm.controls.last_name.errors.required" class="error_field">
-                            {{'last_name_touched_validation' | translate}}</small>
-                        <small *ngIf="profileForm.controls.last_name.errors.pattern" class="error_field">
-                            {{'last_name_string_validation' | translate}}</small>
-                    </div>
                 </div>
+            </div>
+            <div *ngIf="(isFormControlEnable && profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
+                class="error error_profile">
+                <div class="fake_div"></div>
+                <small *ngIf="profileForm.controls.last_name.errors.required" class="error_field_new">
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    {{'last_name_touched_validation' | translate}}</small>
+                <small *ngIf="profileForm.controls.last_name.errors.pattern" class="error_field_new">
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    {{'last_name_string_validation' | translate}}</small>
             </div>
 
             <div class="form_row common_row">
@@ -63,13 +69,18 @@
                         [readonly]="(!isFormControlEnable ) || (selectResponse.email != '' && selectResponse.email !='undefined') "
                         type="email" placeholder="{{'email_placeholder' | translate}}" formControlName="email"
                         tabindex="4">
-                    <div class="error" *ngIf="profileForm.controls.email.touched && profileForm.controls.email.errors">
-                        <span *ngIf="profileForm.controls.email.errors.required" class="error_field">
-                            {{'email_touched_validation' | translate}}</span>
-                        <span *ngIf="profileForm.controls.email.errors.pattern" class="error_field">
-                            {{'email_invalid_validation' | translate}}</span>
-                    </div>
+
                 </div>
+            </div>
+            <div class="error error_profile"
+                *ngIf="profileForm.controls.email.touched && profileForm.controls.email.errors">
+                <div class="fake_div"></div>
+                <span *ngIf="profileForm.controls.email.errors.required" class="error_field_new">
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    {{'email_touched_validation' | translate}}</span>
+                <span *ngIf="profileForm.controls.email.errors.pattern" class="error_field_new">
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    {{'email_invalid_validation' | translate}}</span>
             </div>
             <div class="form_row common_row ar_field">
                 <label>Home Airport</label>
@@ -109,17 +120,20 @@
                         <input [readonly]="!isFormControlEnable" mask="(000) 000-0000" placeholder="(000) 000-0000"
                             type="text" tabindex="15" class="form-control" maxlength="14" formControlName="phone_no">
                     </span>
-                    <div class="error"
-                        *ngIf="(profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) && profileForm.controls.phone_no.errors">
-                        <small class="error_field"
-                            *ngIf="profileForm.hasError('phoneAndPhoneCodeError')">{{'phone_touched_validation' |
-                            translate}}</small>
-                        <small
-                            *ngIf="!profileForm.hasError('phoneAndPhoneCodeError') && (profileForm.controls.phone_no.errors.minlength)"
-                            class="error_field">Minimum 10 characters.</small>
 
-                    </div>
                 </div>
+            </div>
+            <div class="error error_profile"
+                *ngIf="(profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) && profileForm.controls.phone_no.errors">
+                <div class="fake_div"></div>
+                <small class="error_field_new" *ngIf="profileForm.hasError('phoneAndPhoneCodeError')"><img
+                        src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    {{'phone_touched_validation' |
+                    translate}}</small>
+                <small
+                    *ngIf="!profileForm.hasError('phoneAndPhoneCodeError') && (profileForm.controls.phone_no.errors.minlength)"
+                    class="error_field_new"><img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
+                        class="error_img_new"> Minimum 10 characters.</small>
             </div>
             <div class="form_row common_row dobs_account">
                 <label>{{'dob' | translate}}<sup>*</sup></label>
@@ -130,11 +144,15 @@
                         yearRange="{{'1971:'+this.dobMinDate.getFullYear()}}"
                         placeholder="{{'dob_placeholder' | translate}}" [defaultDate]="dobMinDate">
                     </p-calendar>
-                    <div *ngIf="profileForm.controls.dob.touched && profileForm.controls.dob.errors" class="error">
-                        <span *ngIf="profileForm.controls.dob.errors.required" class="error_field">
-                            {{'dob_touched_validation' | translate}}</span>
-                    </div>
+
                 </div>
+            </div>
+            <div *ngIf="profileForm.controls.dob.touched && profileForm.controls.dob.errors"
+                class="error error_profile">
+                <div class="fake_div"></div>
+                <span *ngIf="profileForm.controls.dob.errors.required" class="error_field_new">
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    {{'dob_touched_validation' | translate}}</span>
             </div>
             <div class="form_row common_row">
                 <label>{{'gender' |translate}}<sup>*</sup></label>
@@ -174,9 +192,10 @@
                     </ng-select>
                     <input tabindex="14" [readonly]="!isFormControlEnable" maxlength="8" type="text" class="inputs_com"
                         formControlName="zip_code" placeholder="Zip Code">
-                    <ng-select [readonly]="!isFormControlEnable" tabindex="11" class="ng-customClass address_ng 2address_ng"
-                        [items]="countries" bindLabel="name" [selectOnTab]="true" formControlName="country_id"
-                        selectOnTab="true" (change)="getStates($event)" [clearable]="false">
+                    <ng-select [readonly]="!isFormControlEnable" tabindex="11"
+                        class="ng-customClass address_ng 2address_ng" [items]="countries" bindLabel="name"
+                        [selectOnTab]="true" formControlName="country_id" selectOnTab="true"
+                        (change)="getStates($event)" [clearable]="false">
                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                             <span class="ng-value-label">
                                 {{ item.name ? item.name : 'Select country' }} </span>

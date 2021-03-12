@@ -46,6 +46,9 @@ export class HomeComponent implements OnInit {
     this.getDeal(this.moduleId);
     localStorage.removeItem('__from');
     localStorage.removeItem('__to');
+    // setTimeout(() => {
+    //   $('#cookie_policy').show();
+    // }, 5000);
   }
 
   loadJquery() {
