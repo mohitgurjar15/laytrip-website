@@ -179,7 +179,7 @@
         }
     }
 
-    &.w_return {
+    &:nth-child(2) {
         margin-top: 15px;
     }
 }
@@ -189,7 +189,7 @@
     justify-content: flex-end;
     align-items: center;
     color: $mid_gray_bg;
-    font-size: 18px;
+    font-size: 15px;
     margin: 5px 0 0;
     padding: 0;
 
@@ -208,7 +208,7 @@
                 color: $text_light_yellow;
                 border: none;
                 box-shadow: none;
-                font-size: 16px;
+                font-size: 15px;
                 padding: 0;
                 @include tab-view{
                     font-size: 12px;
