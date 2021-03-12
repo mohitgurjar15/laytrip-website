@@ -369,6 +369,7 @@ a:hover {
 
   @include tab-view {
     display: flex;
+    width: 100%;
   }
 
   .mobile_li {
