@@ -55,7 +55,7 @@ var TravellerFormComponent = /** @class */ (function () {
         this.travellerForm = this.formBuilder.group({
             firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            gender: ['', [forms_1.Validators.required]],
+            gender: ['M', [forms_1.Validators.required]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: ['United States', [forms_1.Validators.required]],
@@ -69,6 +69,16 @@ var TravellerFormComponent = /** @class */ (function () {
         if (this.travellerId) {
             this.setTravelerForm();
         }
+    };
+    TravellerFormComponent.prototype.loadJquery = function () {
+        $(document).ready(function () {
+            $('.error_border').each(function () {
+                $(this).removeClass('error_border');
+            });
+            if ($('.tel_span .form-control').hasClass('.ng-touched .ng-invalid')) {
+                $(".tel_span").toggleClass("error_border");
+            }
+        });
     };
     /*  ngOnChanges(changes: SimpleChanges) {
        this.checkOutService.getCountries.subscribe(res => {

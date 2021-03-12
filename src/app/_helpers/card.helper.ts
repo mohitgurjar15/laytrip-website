@@ -15,7 +15,7 @@ export const cardObject = {
 
   export const cardType = {
     visa: 'Visa',
-    master: 'Master Card',
+    master: 'Mastercard',
     american_express: 'American Express',
     discover: 'Discover',
     dankort: 'Dankort',

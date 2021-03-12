@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GenericService } from '../../../services/generic.service';
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { ToastrService } from 'ngx-toastr';
+
+export enum MODAL_TYPE {
+  CLOSE,
+}
 
 @Component({
   selector: 'app-apple-security-login-popup',
@@ -23,6 +28,7 @@ export class AppleSecurityLoginPopupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private genericService: GenericService,
     public commonFunction: CommonFunction,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -34,7 +40,7 @@ export class AppleSecurityLoginPopupComponent implements OnInit {
   }
 
   close() {
-    this.activeModal.close();
+    this.activeModal.close({ STATUS: MODAL_TYPE.CLOSE });
   }
 
   onSubmit(formValue) {
@@ -47,9 +53,19 @@ export class AppleSecurityLoginPopupComponent implements OnInit {
       return;
     }
     // API CALL
-    console.log(formValue);
     this.genericService.updateViaAppleLogin(formValue).subscribe((res: any) => {
-      console.log(res);
+      if (res) {
+        // localStorage.setItem("_lay_sess", data.token);
+        this.loading = false;
+        this.activeModal.close({ STATUS: MODAL_TYPE.CLOSE });
+      }
+    }, error => {
+      this.loading = false;
+      this.toastr.show(error.message, '', {
+        toastClass: 'custom_toastr',
+        titleClass: 'custom_toastr_title',
+        messageClass: 'custom_toastr_message',
+      });
     });
   }
 

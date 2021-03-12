@@ -44,7 +44,7 @@ export class PlanSubscriptionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.planId = this.route.snapshot.paramMap.get('id');
@@ -83,11 +83,21 @@ export class PlanSubscriptionComponent implements OnInit {
     const data = { plan_id: this.planId, currency_id: this.currency.id, card_token: this.cardToken };
     this.userService.payNowSubscription(data).subscribe((res: any) => {
       this.loading = true;
-      this.toastr.success(res.message, 'Plan Subscription');
+      // this.toastr.success(res.message, 'Plan Subscription');
+      this.toastr.show(res.message, 'Plan Subscription', {
+        toastClass: 'custom_toastr',
+        titleClass: 'custom_toastr_title',
+        messageClass: 'custom_toastr_message',
+      });
       this.router.navigate(['/']);
     }, (error: HttpErrorResponse) => {
       this.loading = false;
-      this.toastr.error(error.error.message);
+      // this.toastr.error(error.error.message);
+      this.toastr.show(error.error.message, '', {
+        toastClass: 'custom_toastr',
+        titleClass: 'custom_toastr_title',
+        messageClass: 'custom_toastr_message',
+      });
     });
   }
 

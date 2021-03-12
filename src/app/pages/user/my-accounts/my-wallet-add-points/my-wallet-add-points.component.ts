@@ -84,11 +84,11 @@ export class MyWalletAddPointsComponent implements OnInit {
     this.userService.addNewPoints(data).subscribe((res: any) => {
       this.loading = false;
       this.getLayCreditInfo();
-      this.toastr.success(res.message, 'Points');
+      // this.toastr.success(res.message, 'Points');
       this.router.navigate(['/account/lay-credit-points']);
     }, (error: HttpErrorResponse) => {
       this.loading = false;
-      this.toastr.error(error.error.message);
+      // this.toastr.error(error.error.message);
     });
   }
 

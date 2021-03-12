@@ -167,7 +167,7 @@ export class FlightTravelerComponent implements OnInit {
 
   checkTravelesValid() {
     if(typeof this.slectedItinerary == 'undefined' || Object.keys(this.slectedItinerary).length == 0 || (typeof this.slectedItinerary.adult != 'undefined' && this.slectedItinerary.adult.length == 0 && this.slectedItinerary.child.length == 0 && this.slectedItinerary.infant.length == 0)) {
-      this.toastr.error('Please select itinerary', 'Invalid Criteria',{positionClass:'toast-top-center',easeTime:1000});
+      // this.toastr.error('Please select itinerary', 'Invalid Criteria',{positionClass:'toast-top-center',easeTime:1000});
       return;
     }
     if(this._travellersCountValid ){
@@ -185,7 +185,7 @@ export class FlightTravelerComponent implements OnInit {
       } 
       errorMessage = errorMessage.replace(/,\s*$/, "");
       
-      this.toastr.error(errorMessage, 'Invalid Criteria',{positionClass:'toast-top-center',easeTime:1000});
+      // this.toastr.error(errorMessage, 'Invalid Criteria',{positionClass:'toast-top-center',easeTime:1000});
     }
   }
 

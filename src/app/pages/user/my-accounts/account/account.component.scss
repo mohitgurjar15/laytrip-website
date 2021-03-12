@@ -13,8 +13,6 @@
     max-width: 655px;
     margin: 0 auto;
 
-
-
     .title_bar {
       display: flex;
       align-items: center;
@@ -65,7 +63,7 @@
       align-items: center;
       justify-content: space-between;
 
-      @include tab-view{
+      @include tab-view {
         margin: 0 0 15px;
       }
 
@@ -219,7 +217,7 @@
     max-width: 655px;
     margin: 0 auto;
 
-    @include tab-view{
+    @include tab-view {
       padding: 5px 0 0;
     }
 
@@ -267,9 +265,9 @@
               width: 100%;
               padding: 0;
 
-              @include tab-view{
+              @include tab-view {
                 font-size: 14px;
-            }
+              }
 
               &[aria-expanded="true"] {
                 &:after {
@@ -318,7 +316,7 @@
           .card-body {
             padding: 15px 0;
 
-            @include tab-view{
+            @include tab-view {
               padding-bottom: 0;
             }
           }
@@ -350,9 +348,9 @@
         text-align: right;
         text-decoration: none;
 
-        @include tab-view{
+        @include tab-view {
           font-size: 14px;
-      }
+        }
       }
     }
   }
@@ -586,7 +584,6 @@
     //   }
     // }
 
-
     .cta_btn_wrps {
       padding: 10px;
       width: 100%;
@@ -623,7 +620,6 @@
           box-shadow: none;
         }
       }
-
     }
 
     .footer_logo {
@@ -660,3 +656,4 @@
     }
   }
 }
+

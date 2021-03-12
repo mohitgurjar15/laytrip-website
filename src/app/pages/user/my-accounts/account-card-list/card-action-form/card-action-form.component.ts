@@ -131,7 +131,7 @@ export class CardActionFormComponent implements OnInit {
       this.activeModal.close(result);
     }, (error => {
       this.saveCardLoader = false;
-      this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
+      // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
     })
     );
   }

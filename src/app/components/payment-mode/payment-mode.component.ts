@@ -121,7 +121,7 @@ export class PaymentModeComponent implements OnInit {
             
             if(this.paymentType=='instalment'){
 
-             this.toastr.warning(this.minimumPriceValidationError, 'Warning',{positionClass:'toast-top-center',easeTime:1000});
+            //  this.toastr.warning(this.minimumPriceValidationError, 'Warning',{positionClass:'toast-top-center',easeTime:1000});
              this.togglePaymentMode('no-instalment');
             }
             this.isBelowMinimumInstallment=true;

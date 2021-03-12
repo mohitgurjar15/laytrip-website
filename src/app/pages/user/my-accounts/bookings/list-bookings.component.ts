@@ -108,9 +108,7 @@ export class ListBookingsComponent implements OnInit {
     this.selectedCompletedTabNumber = cartNumber;
   }
 
-
   getProgressPercentage(value, totalValue) {
     return { 'width': Math.floor((value / totalValue) * 100) + '%' };
   }
-
 }

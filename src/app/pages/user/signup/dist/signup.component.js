@@ -13,12 +13,13 @@ var forms_1 = require("@angular/forms");
 var must_match_validators_1 = require("../../../_helpers/must-match.validators");
 var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
 var SignupComponent = /** @class */ (function () {
-    function SignupComponent(modalService, formBuilder, userService, router, renderer) {
+    function SignupComponent(modalService, formBuilder, userService, router, renderer, commonFunction) {
         this.modalService = modalService;
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.router = router;
         this.renderer = renderer;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.valueChange = new core_1.EventEmitter();
         this.submitted = false;
