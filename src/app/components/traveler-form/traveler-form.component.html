@@ -123,7 +123,8 @@
                     <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps mandetory_wrps"
                       *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                       <label for="">{{ 'phone_no' | translate}}*</label>
-                      <span class="tel_span">
+                      <span class="tel_span"
+                        [ngClass]="{'red_underline':traveler.controls.phone_no.touched && traveler.controls.phone_no.errors}">
                         <!-- <input type="text" class="form-control" maxlength="6"
                           formControlName="country_code"> -->
                         <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="phonecode"
