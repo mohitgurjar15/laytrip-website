@@ -30,7 +30,7 @@
                 <div class="text_field">
                     <input type="text" placeholder="{{'first_name_placeholder' | translate}}"
                         formControlName="first_name" maxlength="25" tabindex="1" [readonly]="!isFormControlEnable"
-                        (keypress)="commonFunction.preventNumberInput($event);commonFunction.preventSpecialCharacter($event)">
+                        (keypress)="commonFunction.preventNumberInput($event)">
                     <div *ngIf="profileForm.controls.first_name.touched && profileForm.controls.first_name.errors"
                         class="error">
                         <small *ngIf="profileForm.controls.first_name.errors.required" class="error_field">
@@ -55,7 +55,7 @@
                 <div class="text_field">
                     <input type="text" [readonly]="!isFormControlEnable"
                         placeholder="{{'last_name_placeholder' | translate}}" formControlName="last_name" maxlength="25"
-                        tabindex="2" (keypress)="commonFunction.preventNumberInput($event);commonFunction.preventSpecialCharacter($event)">
+                        tabindex="2" (keypress)="commonFunction.preventNumberInput($event)">
                     <div *ngIf="(isFormControlEnable && profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
                         class="error">
                         <small *ngIf="profileForm.controls.last_name.errors.required" class="error_field">
