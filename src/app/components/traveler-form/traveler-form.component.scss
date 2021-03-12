@@ -96,6 +96,15 @@
       background-color: transparent;
       padding: 15px;
 
+      @include tab-view{
+        &.custom_header{
+          padding: 15px 15px 0;
+        }
+      }
+      svg{
+        fill: $grayed_border;
+      }
+
       .card-link {
         font-weight: 600;
         color: $text-black;
@@ -125,6 +134,10 @@
             position: absolute;
             right: 15px;
           }
+
+          // .trv_name{
+          //   display: none;
+          // }
         }
 
         &[aria-expanded="false"] {
@@ -140,12 +153,73 @@
             position: absolute;
             right: 15px;
           }
+
+          // .trv_name{
+          //   display: flex;
+          // }
         }
-        .tr_type{
+
+        .tr_type {
           flex: 1;
+          margin-left: 15px;
         }
-        .trv_name{
+
+        .trv_name {
           flex: 2;
+        }
+      }
+
+      .traveler_drop_down {
+        position: absolute;
+        top: 10px;
+        margin: 0 auto;
+        max-width: 120px;
+        left: 0;
+        right: 0;
+        border: none;
+        cursor: pointer;
+        border-radius: 0;
+        //border-bottom: 2px solid $text_light_yellow;
+        font-size: 14px;
+        color: $text_light_yellow;
+        background-color: $background-white;
+        padding: 8px 10px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow.svg);
+        background-position: right 16px;
+        background-repeat: no-repeat;
+        background-size: 11px;
+        transition: 0.3s;
+        &::after{
+          content: none;
+        }
+        @include tab-view{
+          position: relative;
+          top: 0;
+          left: 30px;
+          margin: 0;
+          font-size: 12px;
+          display: flex;
+          width: 100px;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+      .options_name {
+        background-color: $background-white;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        color: $text_light_yellow;
+        font-size: 12px;
+        padding: 2px 0;
+        cursor: pointer;
+        li{
+          padding: 4px 10px;
         }
       }
     }
@@ -359,6 +433,7 @@
             }
           }
         }
+
       }
 
       .accordion_addn {
@@ -417,7 +492,7 @@
                   //     transition: 0.3s;
                   //   }
                   // }
-          
+
                   // &[aria-expanded="false"] {
                   //   &:after {
                   //     padding: 5px 9px;
@@ -455,7 +530,7 @@
               //     transition: 0.3s;
               //   }
               // }
-      
+
               // &[aria-expanded="false"] {
               //   &:after {
               //     padding: 5px 9px;
@@ -520,7 +595,7 @@
                   padding: 10px;
                   text-align: center;
 
-                  br{
+                  br {
                     display: none;
                   }
 
@@ -532,7 +607,8 @@
                     align-items: center;
                     justify-content: center;
                     height: 100%;
-                    br{
+
+                    br {
                       display: flex;
                     }
                   }
@@ -646,6 +722,44 @@
           }
         }
       }
+
+      .edit_btns {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          background-color: transparent;
+          color: $text_light_yellow;
+          box-shadow: none;
+          font-size: 16px;
+          padding: 0;
+          border: none;
+          text-align: right;
+          text-decoration: none;
+
+          @include tab-view {
+            font-size: 12px;
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: none;
+          }
+        }
+
+        &.duel_buttons {
+          justify-content: space-between;
+          margin-top: 15px;
+
+          @include tab-view{
+            margin-top: 10px;
+          }
+        }
+      }
     }
   }
+}
+
+.hide_section {
+  display: none;
 }

@@ -13,7 +13,7 @@
                 <div class="duel_input">
                     <div class="w-50 mr-2">
                         <input type="text" formControlName="first_name" placeholder="{{'first_name' | translate}}"
-                            tabindex="1" (keypress)="commonFunction.preventNumberInput($event);commonFunction.preventSpecialCharacter($event)">
+                            tabindex="1" (keypress)="commonFunction.preventNumberInput($event)">
                         <div *ngIf="appleLoginForm.controls.first_name.errors && appleLoginForm.controls.first_name.touched"
                             class="focus-input100 login-error">
                             <p *ngIf="appleLoginForm.controls.first_name.errors.required" class="error_text">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="w-50 mr-2">
                         <input type="text" formControlName="last_name" placeholder="{{'last_name' | translate}}"
-                            tabindex="2" (keypress)="commonFunction.preventNumberInput($event);commonFunction.preventSpecialCharacter($event)">
+                            tabindex="2" (keypress)="commonFunction.preventNumberInput($event)">
                         <div *ngIf="appleLoginForm.controls.last_name.errors && appleLoginForm.controls.last_name.touched"
                             class="focus-input100 login-error">
                             <p *ngIf="appleLoginForm.controls.last_name.errors.required" class="error_text">

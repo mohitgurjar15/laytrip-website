@@ -5,9 +5,9 @@
 @import "../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-input.ng-invalid.ng-touched {
-    border-bottom: 1px solid #f4516c !important;
-}
+// input.ng-invalid.ng-touched {
+//     border-bottom: 1px solid #f4516c !important;
+// }
 
 .ng-customClass.country_code {
     width: 85px;
@@ -174,6 +174,30 @@ input.ng-invalid.ng-touched {
     }
 }
 
+
+.error_profile{
+    display: flex; 
+    position: relative;
+    padding-bottom: 5px;
+    margin-top: -5px;
+
+    .fake_div{
+        flex: 1;
+        @include tab-view{
+            display: none;
+        }
+    }
+    .error_field_new {
+        flex: 2;
+        color: $error-color;
+        .error_img_new{
+            position: absolute;
+            top: -45px;
+            right: 0;
+        }
+    }
+}
+
 .account_cnt_main {
     width: 100%;
     //border-radius: 5px;
@@ -279,6 +303,10 @@ input.ng-invalid.ng-touched {
                 border-bottom: 1px solid $box-border-color;
                 margin-bottom: 15px;
                 padding-bottom: 10px;
+
+                &.error_main_class{
+                    border-color: $error-color;
+                }
 
                 @include tab-view {
                     flex-direction: column;

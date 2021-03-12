@@ -27,7 +27,7 @@
                                 <input type="text" formControlName="first_name"
                                     [ngClass]="{'error': (submitted && signupForm.controls.first_name.errors) || (signupForm.controls.first_name.touched && signupForm.controls.first_name.errors)}"
                                     maxlength="25" tabindex="11" placeholder="{{'first_name' | translate}}"
-                                    (keypress)="commonFunction.preventNumberInput($event);commonFunction.preventSpecialCharacter($event)">
+                                    (keypress)="commonFunction.preventNumberInput($event)">
                                 <div class="error_text"
                                     *ngIf="(submitted || signupForm.controls.first_name.touched) && signupForm.controls.first_name.errors">
                                     <div *ngIf="signupForm.controls.first_name.errors.required">
@@ -40,7 +40,7 @@
                                 <input type="text" formControlName="last_name"
                                     [ngClass]="{'error': (submitted && signupForm.controls.last_name.errors) || (signupForm.controls.last_name.touched && signupForm.controls.last_name.errors)}"
                                     maxlength="25" tabindex="12" placeholder="{{'last_name' | translate}}"
-                                    (keypress)="commonFunction.preventNumberInput($event);commonFunction.preventSpecialCharacter($event)">
+                                    (keypress)="commonFunction.preventNumberInput($event)">
                                 <div class="error_text"
                                     *ngIf="(submitted || signupForm.controls.last_name.touched) && signupForm.controls.last_name.errors">
                                     <div *ngIf="signupForm.controls.last_name.errors.required">

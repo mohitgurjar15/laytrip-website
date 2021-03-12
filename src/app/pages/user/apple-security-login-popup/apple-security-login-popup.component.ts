@@ -61,11 +61,19 @@ export class AppleSecurityLoginPopupComponent implements OnInit {
       }
     }, error => {
       this.loading = false;
-      this.toastr.show(error.message, '', {
-        toastClass: 'custom_toastr',
-        titleClass: 'custom_toastr_title',
-        messageClass: 'custom_toastr_message',
-      });
+      if (error && error.status === 409) {
+        this.toastr.show('This email address is already registered with us. Please enter different email address.', '', {
+          toastClass: 'custom_toastr',
+          titleClass: 'custom_toastr_title',
+          messageClass: 'custom_toastr_message',
+        });
+      } else {
+        this.toastr.show(error.message, '', {
+          toastClass: 'custom_toastr',
+          titleClass: 'custom_toastr_title',
+          messageClass: 'custom_toastr_message',
+        });
+      }
     });
   }
 

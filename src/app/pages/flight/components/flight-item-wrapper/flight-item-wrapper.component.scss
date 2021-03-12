@@ -708,11 +708,13 @@
                             font-weight: 600;
                             color: $text-black;
                             margin-right: 15px;
+                            flex: 1;
                         }
 
                         .texts {
                             font-weight: 500;
                             color: $mid_gray_bg;
+                            flex: 3;
                             @include tab-view {
                                 font-weight: 400;
                             }
