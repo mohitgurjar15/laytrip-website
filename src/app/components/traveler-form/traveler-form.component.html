@@ -138,9 +138,11 @@
                     </div>
                     <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps">
                       <label for="">{{'dob' | translate}}*</label>
-                      <input onkeydown="return false" type="text" class="form-control" bsDatepicker tabindex={{x}}
+                      <!-- <input onkeydown="return false" type="text" class="form-control" bsDatepicker tabindex={{x}}
                         formControlName="dob" [bsConfig]="bsConfig" [minDate]="traveler.controls.dobMinDate.value"
-                        [maxDate]="traveler.controls.dobMaxDate.value">
+                        [maxDate]="traveler.controls.dobMaxDate.value"> -->
+                        <input placeholder="MM/DD/YYYY" type="text" class="form-control"  tabindex={{x}}
+                        formControlName="dob" >
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10"
                       *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_number')">

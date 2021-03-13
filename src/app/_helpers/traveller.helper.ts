@@ -3,6 +3,7 @@ export const travelersFileds={
 
     flight : {
         adult : {
+            userId:'',
             type : 'adult',
             first_name: '',
             last_name: '',
@@ -21,6 +22,7 @@ export const travelersFileds={
             checkout_date:new Date()
         },
         child : {
+            userId:'',
             type : 'child',
             first_name: '',
             last_name: '',
@@ -34,6 +36,7 @@ export const travelersFileds={
             checkout_date:new Date()
         },
         infant : {
+            userId:'',
             type : 'infant',
             first_name: '',
             last_name: '',

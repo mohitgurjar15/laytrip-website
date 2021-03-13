@@ -313,7 +313,7 @@ export class TravelerFormComponent implements OnInit {
       dob: [x.dob ? moment(x.dob).toDate() : '', [Validators.required]],
       country_id: [x.country_id ? x.country_id : 233, [Validators.required]],
       gender: [x.gender, [Validators.required]],
-      userId: [x.userId],
+      userId: [x.userId,[Validators.required]],
       type: [x.type],
       dobMinDate: [x.dobMinDate],
       dobMaxDate: [x.dobMaxDate]
@@ -405,12 +405,14 @@ export class TravelerFormComponent implements OnInit {
   } */
   saveTraveler(cartNumber, traveler_number) {
 
-    if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
+    /* if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') { */
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
       console.log("data", data)
       data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob).format("YYYY-MM-DD");
-      data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
-      data.passport_expiry = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
+      if (this.travelers[`type${cartNumber}`].adults[traveler_number].is_passport_required) {
+        data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
+        data.passport_expiry = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
+      }
       this.cartService.setLoaderStatus(true)
       this.travelerService.addAdult(data).subscribe((traveler: any) => {
         this.cartService.setLoaderStatus(false)
@@ -440,7 +442,7 @@ export class TravelerFormComponent implements OnInit {
           //this.patch();
         } 
       })
-    }
+    /* } */
   }
 
   deleteTraveler(cartNumber, traveler_number) {

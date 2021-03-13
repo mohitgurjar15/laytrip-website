@@ -373,22 +373,35 @@ export class BookingComponent implements OnInit {
 
   validateCartItems() {
     this.validationErrorMessage = '';
-    if (!this.isValidTravelers) {
-      this.validationErrorMessage = 'Complete required fields in Traveler Details for'
+    console.log("this.travelerForm",this.travelerForm)
+    /* if (!this.isValidTravelers) { */
+      //this.validationErrorMessage = 'Complete required fields in Traveler Details for'
       let message = '';
 
       console.log(this.carts, "this.carts[i]")
       for (let i in Object.keys(this.travelerForm.controls)) {
         message = '';
-        if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`].status == "INVALID") {
+        console.log(this.travelerForm.controls[`type${i}`],"this.travelerForm.controls[`type${i}`]")
+        for(let j=0; j< this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++){
+          if(typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status=='INVALID'){
+
+            if(this.validationErrorMessage==''){
+              this.validationErrorMessage = 'Complete required fields in Traveler Details for'
+            }
+            message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+            this.validationErrorMessage += message;
+            this.isValidTravelers=false;
+          }
+        }
+        /* if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`].status == "INVALID") {
           message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
           this.validationErrorMessage += message;
-        }
+        } */
       }
 
       let index = this.validationErrorMessage.lastIndexOf(" ");
       this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
-    }
+    /* } */
 
     let notAvailableMessage = '';
     this.notAvailableError = 'Itinerary is not available from ';
