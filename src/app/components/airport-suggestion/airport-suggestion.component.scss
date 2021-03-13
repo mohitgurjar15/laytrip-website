@@ -81,6 +81,9 @@ ng-scrollbar{
                     // &:last-child{
                     //     margin-bottom: 0;
                     // }
+                    @include tab-view{
+                        font-size: 12px;
+                    }
                 }
             }
         }
