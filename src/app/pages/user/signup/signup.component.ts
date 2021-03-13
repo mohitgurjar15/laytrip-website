@@ -126,15 +126,13 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  checkEmailExist(emailString) {
-    if (emailString.toString().length >= 3) {
+  checkEmailExist(emailString) {    
+    if (this.signupForm.controls.email.valid) {
       this.userService.emailVeryfiy(emailString).subscribe((data: any) => {
-        console.log(data)
         if (data && data.is_available) {
           this.is_email_available = data.is_available;
           this.emailExist = true;
-        }
-        else {
+        } else {
           this.emailExist = false;
         }
       });
