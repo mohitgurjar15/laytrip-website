@@ -63,6 +63,7 @@ export class BookingComponent implements OnInit {
   isAllAlertClosed: boolean = true;
   isSubmitted: boolean = false;
   alertErrorMessage: string = '';
+  inValidCartTravller=[]
 
   add_new_card = false;
   totalCard: number = 0;
@@ -373,6 +374,7 @@ export class BookingComponent implements OnInit {
 
   validateCartItems() {
     this.validationErrorMessage = '';
+    this.inValidCartTravller=[];
     console.log("this.travelerForm",this.travelerForm)
     /* if (!this.isValidTravelers) { */
       //this.validationErrorMessage = 'Complete required fields in Traveler Details for'
@@ -385,12 +387,32 @@ export class BookingComponent implements OnInit {
         for(let j=0; j< this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++){
           if(typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status=='INVALID'){
 
+
             if(this.validationErrorMessage==''){
               this.validationErrorMessage = 'Complete required fields in Traveler Details for'
             }
-            message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
-            this.validationErrorMessage += message;
+            if(!this.inValidCartTravller.includes(i)){
+              message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+              this.validationErrorMessage += message;
+            }
             this.isValidTravelers=false;
+            this.inValidCartTravller.push(i)
+          }
+          if(typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status=='VALID'){
+
+            if(this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].value.userId==""){
+
+              if(this.validationErrorMessage==''){
+                this.validationErrorMessage = 'Complete required fields in Traveler Details for'
+              }
+              if(!this.inValidCartTravller.includes(i)){
+                message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+                this.validationErrorMessage += message;
+              }
+              
+              this.isValidTravelers=false;
+              this.inValidCartTravller.push(i)
+            }
           }
         }
         /* if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`].status == "INVALID") {

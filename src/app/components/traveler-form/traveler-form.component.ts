@@ -313,7 +313,7 @@ export class TravelerFormComponent implements OnInit {
       dob: [x.dob ? moment(x.dob).toDate() : '', [Validators.required]],
       country_id: [x.country_id ? x.country_id : 233, [Validators.required]],
       gender: [x.gender, [Validators.required]],
-      userId: [x.userId,[Validators.required]],
+      userId: [x.userId],
       type: [x.type],
       dobMinDate: [x.dobMinDate],
       dobMaxDate: [x.dobMaxDate]
@@ -405,7 +405,7 @@ export class TravelerFormComponent implements OnInit {
   } */
   saveTraveler(cartNumber, traveler_number) {
 
-    /* if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') { */
+    if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
       console.log("data", data)
       data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob).format("YYYY-MM-DD");
@@ -442,7 +442,7 @@ export class TravelerFormComponent implements OnInit {
           //this.patch();
         } 
       })
-    /* } */
+    }
   }
 
   deleteTraveler(cartNumber, traveler_number) {
