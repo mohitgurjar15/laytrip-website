@@ -38,6 +38,9 @@ h3{
                 }
                 &.active{
                     border-top-right-radius: 10px;
+                    @include tab-view{
+                        top: 1px;
+                    }
                 }
             }
         }

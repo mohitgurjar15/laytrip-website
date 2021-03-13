@@ -10,7 +10,7 @@ exports.HomeComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(genericService, commonFunction, fb, router, cd, renderer, homeService) {
+    function HomeComponent(genericService, commonFunction, fb, router, cd, renderer, homeService, cartService) {
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.fb = fb;
@@ -18,6 +18,7 @@ var HomeComponent = /** @class */ (function () {
         this.cd = cd;
         this.renderer = renderer;
         this.homeService = homeService;
+        this.cartService = cartService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
         this.isRoundTrip = false;
@@ -31,6 +32,11 @@ var HomeComponent = /** @class */ (function () {
         this.getModules();
         this.loadJquery();
         this.getDeal(this.moduleId);
+        localStorage.removeItem('__from');
+        localStorage.removeItem('__to');
+        // setTimeout(() => {
+        //   $('#cookie_policy').show();
+        // }, 5000);
     };
     HomeComponent.prototype.loadJquery = function () {
         // Start Featured List Js
@@ -66,12 +72,14 @@ var HomeComponent = /** @class */ (function () {
         // Close Featured List Js
         $('[data-toggle="popover"]').popover();
     };
-    // HomeComponent.prototype.ngAfterViewInit = function () {
-    //     $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(function () {
-    //         $('.norm_btn').toggleClass("d-none");
-    //         $('.hover_btn').toggleClass("show");
-    //     });
-    // };
+    // ngAfterViewInit() {
+    //   $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
+    //     function () {
+    //       $('.norm_btn').toggleClass("d-none");
+    //       $('.hover_btn').toggleClass("show");
+    //     }
+    //   );
+    // }
     /**
      * Get All module like (hotel, flight & VR)
      */

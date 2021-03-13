@@ -226,10 +226,9 @@ export class ProfileComponent implements OnInit {
       this.image = res.profilePic;
       this.selectResponse = res;
       this.is_type = res.gender ? res.gender : 'M';
-      if (typeof res.country.name == 'undefined') {
-        var countryId = { id: 233 };
-        this.getStates(countryId);
-      }
+      var countryId = { id: res.country.id ? res.country.id : 233 };
+      this.getStates(countryId);
+
       this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
       this.profileForm.patchValue({
         first_name: res.firstName,
@@ -241,7 +240,7 @@ export class ProfileComponent implements OnInit {
         dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
         country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
         phone_no: res.phoneNo,
-        // city : res.cityName,
+        city : res.cityName,
         address: res.address,
         home_airport: res.airportInfo.code ? res.airportInfo.code : null,
         country_id: res.country.name ? res.country.name : 'United States',
@@ -338,7 +337,7 @@ export class ProfileComponent implements OnInit {
         // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
       }, (error: HttpErrorResponse) => {
         this.loadingValue.emit(false);
-        // this.submitted = false;city
+        // this.submitted = false;
         // this.toastr.error(error.error.message, 'Profile Error');
       });
     }

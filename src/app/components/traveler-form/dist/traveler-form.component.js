@@ -133,7 +133,7 @@ var TravelerFormComponent = /** @class */ (function () {
                 this_1.travelers["type" + this_1.cartNumber].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
                 if (this_1.travelers["type" + this_1.cartNumber].adults[i].is_passport_required) {
                     this_1.travelers["type" + this_1.cartNumber].adults[i].passport_number = traveler.passportNumber;
-                    this_1.travelers["type" + this_1.cartNumber].adults[i].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy') : '';
+                    this_1.travelers["type" + this_1.cartNumber].adults[i].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
                 }
             };
             var this_1 = this;
@@ -188,7 +188,7 @@ var TravelerFormComponent = /** @class */ (function () {
                                 _this.travelers["type" + _this.cartNumber].adults[_this.traveler_number].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
                                 if (_this.travelers["type" + _this.cartNumber].adults[_this.traveler_number].is_passport_required) {
                                     _this.travelers["type" + _this.cartNumber].adults[_this.traveler_number].passport_number = traveler.passportNumber;
-                                    _this.travelers["type" + _this.cartNumber].adults[_this.traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy');
+                                    _this.travelers["type" + _this.cartNumber].adults[_this.traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY');
                                 }
                                 _this.checkOutService.setTravelers(__spreadArrays(_this.myTravelers, [traveler]));
                                 _this.patch();
@@ -223,6 +223,16 @@ var TravelerFormComponent = /** @class */ (function () {
         });
         this.checkOutService.emitTravelersformData(this.travelerForm);
         this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage);
+    };
+    TravelerFormComponent.prototype.loadJquery = function () {
+        $(document).ready(function () {
+            $('.error_border').each(function () {
+                $(this).removeClass('error_border');
+            });
+            if ($('.tel_span .form-control').hasClass('.ng-touched .ng-invalid')) {
+                $(".tel_span").toggleClass("error_border");
+            }
+        });
     };
     TravelerFormComponent.prototype.ngOnChanges = function (changes) {
         var _this = this;

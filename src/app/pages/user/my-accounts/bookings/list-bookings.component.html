@@ -102,8 +102,8 @@
                           </div>
                           <div class="payment_status" *ngIf="booking.booking[0].paymentStatus == 0">
                           
-                           <img  src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
-                           > {{ booking.is_installation_on_track == true ?  'Next Payment '+ commonFunction.convertCustomDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD','MMM D, YYYY') : 'Past Due'}} 
+                           <img *ngIf="!booking.is_installation_on_track"  src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon">
+                            {{ booking.is_installation_on_track === true ?  'Next Payment '+ commonFunction.convertCustomDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD','MMM D, YYYY') : 'Past Due'}} 
                          </div>
  
                         </div>
@@ -174,7 +174,7 @@
                            <!-- {{ ( booking.is_installation_on_track === true && booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
                           'Next Payment'+commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
                            -->
-                          <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
+                          <img *ngIf="!booking.is_installation_on_track"  src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
                           > {{ booking.is_installation_on_track  == true ?  'Next Payment '+ commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : 'Past Due'}} 
                         </div>
                       </div>

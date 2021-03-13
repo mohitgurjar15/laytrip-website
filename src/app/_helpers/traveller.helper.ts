@@ -51,4 +51,4 @@ export const travlerLabels={
         child   : 'Child',
         infant  : 'Infant'
     }
-}
+} 

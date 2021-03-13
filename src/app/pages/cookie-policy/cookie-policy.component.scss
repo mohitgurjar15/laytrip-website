@@ -4,6 +4,16 @@
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+.modal_title{
+    button{
+        top: 15px;
+        right: 15px;
+        position: absolute;
+        img{
+            max-width: 12px;
+        }
+    }
+}
 .cookie_main_wrapper {
     background-color: $background-white;
     display: flex;
@@ -64,7 +74,9 @@
                 align-items: center;
                 justify-content: center;
 
-                @inc
+                @include tab-view{
+                    font-size: 12px;
+                }
 
                 &:hover {
                     border: 1px solid $hotel-secondary-color;
