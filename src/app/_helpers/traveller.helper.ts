@@ -8,6 +8,7 @@ export const travelersFileds={
             last_name: '',
             email: '',
             country_code:'+1',
+            is_duplictae_email:false,
             phone_no:'',
             dob:'',
             dobMinDate:new Date(moment().subtract(100,'years').format("YYYY-MM-DD") ),

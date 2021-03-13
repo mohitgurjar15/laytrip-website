@@ -13,6 +13,7 @@ import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { stat } from 'fs';
 
 export interface CartItem {
 
@@ -151,6 +152,10 @@ export class BookingComponent implements OnInit {
         this.validationErrorMessage = '';
         this.validateCartItems();
       }
+    })
+
+    this.cartService.getLoaderStatus.subscribe(state=>{
+      this.loading=state;
     })
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
