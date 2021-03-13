@@ -48,6 +48,27 @@ a {
   }
 }
 
+::ng-deep {
+  ng-scrollbar.scrollbar {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    --scrollbar-padding: 45px 0 0 5px !important;
+  }
+  ng-scrollbar.scrollbar-thumbs {
+    background-color: rgba(161, 27, 27, 0.4);
+    &:hover,
+    &:active {
+      background-color: rgba(161, 27, 27, 0.7);
+    }
+  }
+}
+
+ng-scrollbar{
+  &.custom_scroll_suggetion{
+    --scrollbar-padding: 45px 0 0 5px !important;
+  }
+}
+
 .dobs {
   .p-calendar {
     @include tab-view {
