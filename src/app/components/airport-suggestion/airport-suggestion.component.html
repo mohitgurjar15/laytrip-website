@@ -1,21 +1,52 @@
-<div class="search_suggetion_main" style="height: 186px;">
+<div class="search_suggetion_main" >
     <div class="close_btn">
         <button (click)="closeAirportDropDown(type)" type="button" class="close">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
         </button>
     </div>
-    <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all" pointerEventsMethod="scrollbar">
+    <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
+        pointerEventsMethod="scrollbar">
         <span *ngIf="loading">Loading...</span>
-        <div class="suggtions">
-            <div class="sug_line_box" *ngFor="let item of data">
-                <a href="#a" class="word_alpha">{{item.key}}</a>
-                <span class="linew_wrps">
-                    <ng-conatiner *ngFor="let sub_item of item.value">
-                        <span class="line_names" (click)="selectAirport(sub_item)">
-                            {{sub_item.city}} ({{sub_item.code}})
-                        </span>
-                    </ng-conatiner>
-                </span>
+        <div class="suggtions_wrps_mn">
+            <div class="suggtions">
+                <div class="sug_line_box" *ngFor="let item of data">
+                    <a href="#a" class="word_alpha">{{item.key}}</a>
+                    <span class="linew_wrps">
+                        <ng-conatiner *ngFor="let sub_item of item.value">
+                            <span class="line_names" (click)="selectAirport(sub_item)">
+                                {{sub_item.city}} ({{sub_item.code}})
+                            </span>
+                        </ng-conatiner>
+                    </span>
+                </div>
+            </div>
+
+            <div class="alphabets_wrps">
+                <a href="" class="alphas">a</a>
+                <a href="" class="alphas">b</a>
+                <a href="" class="alphas">c</a>
+                <a href="" class="alphas">d</a>
+                <a href="" class="alphas">e</a>
+                <a href="" class="alphas">f</a>
+                <a href="" class="alphas">g</a>
+                <a href="" class="alphas">h</a>
+                <a href="" class="alphas">i</a>
+                <a href="" class="alphas">j</a>
+                <a href="" class="alphas">k</a>
+                <a href="" class="alphas">l</a>
+                <a href="" class="alphas">m</a>
+                <a href="" class="alphas">n</a>
+                <a href="" class="alphas">o</a>
+                <a href="" class="alphas">p</a>
+                <a href="" class="alphas">q</a>
+                <a href="" class="alphas">r</a>
+                <a href="" class="alphas">s</a>
+                <a href="" class="alphas">t</a>
+                <a href="" class="alphas">u</a>
+                <a href="" class="alphas">v</a>
+                <a href="" class="alphas">w</a>
+                <a href="" class="alphas">y</a>
+                <a href="" class="alphas">z</a>
             </div>
         </div>
     </ng-scrollbar>
