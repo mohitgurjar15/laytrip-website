@@ -2,6 +2,16 @@
 @import "_hotel.scss";
 // NG-SELECT SCSS
 
+app-search-airport {
+    .ng-select {
+        &.laytrip-input {
+            .ng-dropdown-panel {
+                display: none !important;
+            }
+        }
+    }
+}
+
 .ng-select {
     &.laytrip-input {
         padding: 0 15px 0 0;
@@ -94,6 +104,7 @@
                 .ng-clear {
                     font-size: 17px !important;
                     color: red !important;
+                    pointer-events: all;
                 }
             }
 
@@ -224,7 +235,8 @@
             }
 
             .ng-clear-wrapper {
-                display: none;
+                // display: none;
+                display: block;
                 position: absolute;
                 top: 0;
                 right: 0;

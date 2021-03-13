@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie';
 import { environment } from '../../../environments/environment';
@@ -30,7 +30,7 @@ export class CookiePolicyComponent implements OnInit {
   }
 
   acceptCookiePolicy() {
-    // this.cookieService.put('__cke', JSON.stringify(false));
+    this.cookieService.put('__cke', JSON.stringify(true));
     this.activeModal.close({ STATUS: MODAL_TYPE.CLOSE });
   }
 

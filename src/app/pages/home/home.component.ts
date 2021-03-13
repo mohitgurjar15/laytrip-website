@@ -52,18 +52,18 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('__from');
     localStorage.removeItem('__to');
     setTimeout(() => {
-      // this.openCookiePolicyPopup();
+      this.openCookiePolicyPopup();
     }, 5000);
   }
 
   openCookiePolicyPopup() {
-    if (JSON.parse(this.cookieService.get('__cke')) == true) {
+    if (!this.cookieService.get('__cke')) {
       this.modalService.open(CookiePolicyComponent, {
         windowClass: 'block_cookie_policy_main', centered: true, backdrop: 'static',
         keyboard: false
-      }).result.then((result) => {
-
       });
+    } else {
+
     }
   }
 
