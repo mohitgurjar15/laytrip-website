@@ -10,6 +10,7 @@ import { HomeService } from '../../services/home.service';
 import { CartService } from '../../services/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiePolicyComponent, MODAL_TYPE } from '../cookie-policy/cookie-policy.component';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
     private homeService: HomeService,
     private cartService: CartService,
     public modalService: NgbModal,
+    private cookieService: CookieService,
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
@@ -50,21 +52,19 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('__from');
     localStorage.removeItem('__to');
     setTimeout(() => {
-      this.openCookiePolicyPopup();
+      // this.openCookiePolicyPopup();
     }, 5000);
   }
 
   openCookiePolicyPopup() {
-    let openCookiePolicy = true;
-    localStorage.setItem('_cke', JSON.stringify(openCookiePolicy));
-    this.modalService.open(CookiePolicyComponent, {
-      windowClass: 'block_cookie_policy_main', centered: true, backdrop: 'static',
-      keyboard: false
-    }).result.then((result) => {
-      if (result.STATUS === MODAL_TYPE.CLOSE) {
-        localStorage.removeItem('_cke');
-      }
-    });
+    if (JSON.parse(this.cookieService.get('__cke')) == true) {
+      this.modalService.open(CookiePolicyComponent, {
+        windowClass: 'block_cookie_policy_main', centered: true, backdrop: 'static',
+        keyboard: false
+      }).result.then((result) => {
+
+      });
+    }
   }
 
   loadJquery() {

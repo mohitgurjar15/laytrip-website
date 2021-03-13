@@ -100,9 +100,6 @@ export class AddCardComponent implements OnInit {
       Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .96em ; padding-bottom: .5em; font-size: 14px;');
     });
 
-
-
-
     Spreedly.on('errors', function (errors) {
       $(".credit_card_error").hide();
 
@@ -115,6 +112,7 @@ export class AddCardComponent implements OnInit {
 
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
+        console.log(error);
         if (error["attribute"]) {
           if (error["attribute"] == 'month' || error["attribute"] == 'year') {
             $('.month_year_error').show();
@@ -125,7 +123,6 @@ export class AddCardComponent implements OnInit {
     });
 
     Spreedly.on('paymentMethod', function (token, pmData) {
-
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);
       this.token = token;
@@ -240,61 +237,6 @@ export class AddCardComponent implements OnInit {
         }
       });
     });
-
-    Spreedly.on('validation', function (inputProperties) {
-      console.log(inputProperties);
-      if (!inputProperties["validNumber"]) {
-        // prompt user to correct input
-        Spreedly.on('errors', function (errors) {
-          console.log(errors);
-          $(".credit_card_error").hide();
-
-          if ($("#full_name").val() == "") {
-            $("#first_name").show();
-          }
-          if ($("#month-year").val() == "") {
-            $("#month").show();
-          }
-
-          for (var i = 0; i < errors.length; i++) {
-            var error = errors[i];
-            if (error["attribute"]) {
-              if (error["attribute"] == 'month' || error["attribute"] == 'year') {
-                $('.month_year_error').show();
-              }
-              $("#" + error["attribute"]).show();
-            }
-          }
-        });
-      } else {
-        var paymentMethodFields = ['full_name', 'month-year'],
-          options = {};
-        for (var i = 0; i < paymentMethodFields.length; i++) {
-          var field = paymentMethodFields[i];
-          var fieldEl = (<HTMLInputElement>document.getElementById(field));
-          if (fieldEl.id === 'month-year') {
-            let value = fieldEl.value;
-            let values = value.split("/");
-            options['month'] = values[0];
-            options['year'] = values[1];
-          }
-          else {
-            // add value to options
-            options[field] = fieldEl.value;
-          }
-          if (options[field]) {
-            // this.changeLoading.emit(false);
-          }
-        }
-        document.getElementById('message').innerHTML = "";
-        // Tokenize!
-        Spreedly.tokenizeCreditCard(options);
-        setTimeout(() => {
-          this.cardListChangeCount += this.cardListChangeCount + 1;
-          this.emitCardListChange.emit(this.cardListChangeCount);
-        }, 5000)
-      }
-    });
   }
 
   closePopup() {
@@ -302,40 +244,35 @@ export class AddCardComponent implements OnInit {
   }
 
   submitPaymentForm() {
-    Spreedly.validate();
-    // var paymentMethodFields = ['full_name', 'month-year'],
-    //   options = {};
-    // for (var i = 0; i < paymentMethodFields.length; i++) {
-    //   var field = paymentMethodFields[i];
-    //   var fieldEl = (<HTMLInputElement>document.getElementById(field));
+    var paymentMethodFields = ['full_name', 'month-year'],
+      options = {};
+    for (var i = 0; i < paymentMethodFields.length; i++) {
+      var field = paymentMethodFields[i];
+      var fieldEl = (<HTMLInputElement>document.getElementById(field));
 
-    //   if (fieldEl.id === 'month-year') {
-    //     let value = fieldEl.value;
-    //     let values = value.split("/");
-    //     options['month'] = values[0];
-    //     options['year'] = values[1];
-    //   }
-    //   else {
-    //     // add value to options
-    //     options[field] = fieldEl.value;
-    //   }
-    //   if (options[field]) {
-    //     // this.changeLoading.emit(false);
-    //   }
-    // }
-
-
-    // document.getElementById('message').innerHTML = "";
-
-    // // Tokenize!
-    // Spreedly.tokenizeCreditCard(options);
-    // console.log(fieldEl);
-    // if (options && options['full_name'] && options['month'] && options['year']) {
-    //   setTimeout(() => {
-    //     this.cardListChangeCount += this.cardListChangeCount + 1;
-    //     this.emitCardListChange.emit(this.cardListChangeCount);
-    //   }, 5000)
-    // }
+      if (fieldEl.id === 'month-year') {
+        let value = fieldEl.value;
+        let values = value.split("/");
+        options['month'] = values[0];
+        options['year'] = values[1];
+      }
+      else {
+        // add value to options
+        options[field] = fieldEl.value;
+      }
+      if (options[field]) {
+        // this.changeLoading.emit(false);
+      }
+    }
+    document.getElementById('message').innerHTML = "";
+    // Tokenize!
+    Spreedly.tokenizeCreditCard(options);
+    if (options && options['full_name'] && options['month'] && options['year']) {
+      setTimeout(() => {
+        this.cardListChangeCount += this.cardListChangeCount + 1;
+        this.emitCardListChange.emit(this.cardListChangeCount);
+      }, 5000)
+    }
   }
 
   saveCard(cardData) {
