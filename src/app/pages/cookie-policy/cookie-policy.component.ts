@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../environments/environment';
+
+export enum MODAL_TYPE {
+  CLOSE,
+}
 
 @Component({
   selector: 'app-cookie-policy',
@@ -10,9 +15,16 @@ export class CookiePolicyComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
 
-  constructor() { }
+  constructor(
+    public activeModal: NgbActiveModal,
+    private modalService: NgbModal,
+  ) { }
 
   ngOnInit() {
+  }
+
+  close() {
+    this.activeModal.close({ STATUS: MODAL_TYPE.CLOSE });
   }
 
 }
