@@ -208,8 +208,8 @@
           left: 30px;
           margin: 0;
           font-size: 12px;
-          display: flex;
-          width: 135px;
+          width: auto;
+          transform: translate(5px, 0px);
         }
 
         &:focus {
