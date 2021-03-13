@@ -5,6 +5,14 @@
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+
+
+ng-scrollbar {
+
+    --scrollbar-padding: 25px 0 0 5px !important;
+
+}
+
 .search_suggetion_main {
     border: 1px solid $box-border-color;
     background-color: $background-white;
@@ -16,13 +24,19 @@
     margin-top: 5px;
     width: 100%;
     z-index: 999;
+    height: 186px;
+
+    @include tab-view{
+        height: 265px;
+    }
 
     .close_btn {
         position: absolute;
-        top: -5px;
-        right: 0;
+        top: 10px;
+        right: 15px;
 
         button {
+            cursor: pointer;
             img {
                 max-width: 9px;
             }
@@ -34,48 +48,83 @@
         }
     }
 
-    .suggtions {
-        scroll-behavior: smooth;
-        height: 100%;
-        max-height: 180px;
-        //overflow-y: auto;
-
-        .sug_line_box {
+    .suggtions_wrps_mn {
+        display: flex;
+        .suggtions {
+            scroll-behavior: smooth;
+            height: 100%;
+            max-height: 180px;
+            //overflow-y: auto;
+            flex: auto;
             display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-            //margin-bottom: 10px;
-            &:last-child{
-                margin-bottom: 0;
-            }
+            flex-direction: column;
 
-            .word_alpha {
-                font-size: 18px;
-                font-weight: 500;
-                color: $text-black;
-                width: 25px;
-
-                @include tab-view{
-                    font-size: 14px;
-                }
-            }
-
-            .linew_wrps {
+            .sug_line_box {
                 display: flex;
                 justify-content: flex-start;
-                flex-direction: column;
-                @include tab-view{
-                    font-size: 12px;
+                align-items: flex-start;
+                margin-bottom: 10px;
+
+                &:last-child{
+                    margin-bottom: 0;
                 }
-                .line_names {
-                    margin-bottom: 10px;
+
+                .word_alpha {
+                    font-size: 18px;
+                    font-weight: 500;
+                    color: $text-black;
+                    width: 25px;
+
+                    @include tab-view {
+                        font-size: 14px;
+                    }
+                }
+
+                .linew_wrps {
                     display: flex;
-                    cursor: pointer;
-                    // &:last-child{
-                    //     margin-bottom: 0;
-                    // }
+                    justify-content: flex-start;
+                    flex-direction: column;
+
+                    @include tab-view {
+                        font-size: 12px;
+                    }
+
+                    .line_names {
+                        margin-bottom: 10px;
+                        display: flex;
+                        cursor: pointer;
+
+                        // &:last-child{
+                        //     margin-bottom: 0;
+                        // }
+                        @include tab-view {
+                            font-size: 12px;
+                        }
+                    }
                 }
             }
+        }
+    }
+    .alphabets_wrps {
+
+        flex: 1;
+        display: none;
+        position: fixed;
+        flex-direction: column;
+        align-items: flex-end;
+        right: 50px;
+        margin-top: 20px;
+
+        @include tab-view{
+            display: flex;
+        }
+
+        a {
+            font-size: 6px;
+            color: $grayed_border;
+            padding: 0;
+            width: 10px;
+            text-transform: capitalize;
         }
     }
 }

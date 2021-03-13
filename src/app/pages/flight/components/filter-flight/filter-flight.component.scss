@@ -44,6 +44,10 @@
 	left: 0;
 	z-index: 999;
 
+	@include tab-view{
+		z-index: 998;
+	}
+
 	.btn_filter {
 		width: 100%;
 		text-align: center;

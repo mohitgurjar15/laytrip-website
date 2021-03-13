@@ -54,6 +54,7 @@
 
     @include tab-view {
         display: flex;
+        z-index: 998;
     }
 
     .btn_filter {
@@ -97,6 +98,9 @@
     margin-left: 10px;
     text-align: center;
     width: 50%;
+    @include tab-view{
+		z-index: 998;
+	}
 
     .btn_sort {
         width: 100%;
