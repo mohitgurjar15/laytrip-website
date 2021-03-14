@@ -551,8 +551,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   width: 30px;
 }
 .common_form .mb-sm-10.dobs input {
-  /* background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
-    no-repeat; */
+  background-image: none;
   background-size: 20px;
   border: none;
 }
