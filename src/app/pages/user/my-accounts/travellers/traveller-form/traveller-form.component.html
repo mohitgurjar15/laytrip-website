@@ -52,7 +52,20 @@
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps">
                 <label for="">{{'dob' |translate}}*</label>
-                <p-calendar tabindex="24" dateFormat="mm/dd/yy" class="form-control" panelStyleClass="birth_date"
+                <input placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}} [textMask]="dateYeaMask"
+                    formControlName="dob">
+                <div *ngIf="travellerForm.controls.dob.touched && travellerForm.controls.dob.errors" class="error">
+                    <small *ngIf="travellerForm.controls.dob.errors.required" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                        Please enter your date
+                        of birth.</small>
+                    <small *ngIf="travellerForm.controls.dob.errors.pattern" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                        Please
+                        enter
+                        your valid date of birth.</small>
+                </div>
+                <!-- <p-calendar tabindex="24" dateFormat="mm/dd/yy" class="form-control" panelStyleClass="birth_date"
                     inputId="basic" formControlName="dob" [maxDate]="dobMaxDate" [readonlyInput]="true"
                     [yearNavigator]="true" [monthNavigator]="true" yearRange="{{dobYearRange}}"
                     (onSelect)=selectDob($event)>
@@ -62,7 +75,7 @@
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                         Please enter your date
                         of birth.</small>
-                </div>
+                </div> -->
             </div>
 
             <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps mandetory_wrps" *ngIf="isAdult">
