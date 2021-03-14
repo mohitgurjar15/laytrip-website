@@ -20,6 +20,7 @@ import { FlightSearchWidgetComponent } from './flight-search-widget/flight-searc
 import { HotelSearchWidgetComponent } from './hotel-search-widget/hotel-search-widget.component';
 import { VacationSearchWidgetComponent } from './vacation-search-widget/vacation-search-widget.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FlightSearchWidgetComponent,
     HotelSearchWidgetComponent,
     VacationSearchWidgetComponent,
+    CookiePolicyComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
-  ]
+  ], entryComponents: [CookiePolicyComponent]
 })
 export class HomeModule { }

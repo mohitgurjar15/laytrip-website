@@ -306,6 +306,7 @@ export class TravelerFormComponent implements OnInit {
       email: (x.type === 'adult' || x.type === '') ? [x.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]] : [x.email],
       phone_no: (x.type === 'adult' || x.type === '') ? [x.phone_no, [Validators.required, Validators.minLength(10)]] : [x.phone_no],
       country_code: (x.type === 'adult' || x.type === '') ? [x.country_code, [Validators.required]] : [x.country_code],
+      is_duplictae_email: (x.type === 'adult' || x.type === '') ? [x.is_duplictae_email, [Validators.required]] : [x.is_duplictae_email],
       passport_number: (x.is_passport_required) ? [x.passport_number, [Validators.required]] : [x.passport_number],
       passport_expiry: (x.is_passport_required) ? [x.passport_expiry || null, [Validators.required]] : [x.passport_expiry],
       is_passport_required: [x.is_passport_required, [Validators.required]],
@@ -403,15 +404,18 @@ export class TravelerFormComponent implements OnInit {
       event.preventDefault();
   } */
   saveTraveler(cartNumber, traveler_number) {
-    console.log("cartNumber,traveler_number", this.travelerForm)
 
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
       console.log("data", data)
       data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob).format("YYYY-MM-DD");
-      data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
-      data.passport_expiry = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
+      if (this.travelers[`type${cartNumber}`].adults[traveler_number].is_passport_required) {
+        data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
+        data.passport_expiry = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
+      }
+      this.cartService.setLoaderStatus(true)
       this.travelerService.addAdult(data).subscribe((traveler: any) => {
+        this.cartService.setLoaderStatus(false)
         if (traveler) {
           this.travelers[`type${cartNumber}`].adults[traveler_number].type = traveler.user_type;
           this.travelers[`type${cartNumber}`].adults[traveler_number].userId = traveler.userId;
@@ -432,7 +436,11 @@ export class TravelerFormComponent implements OnInit {
           this.patch();
         }
       }, error => {
-
+        this.cartService.setLoaderStatus(false)
+        if(error.status==409){
+          //this.travelers[`type${cartNumber}`].adults[traveler_number].is_duplictae_email = true;
+          //this.patch();
+        } 
       })
     }
   }
@@ -459,7 +467,9 @@ export class TravelerFormComponent implements OnInit {
   }
 
   editTraveler(cartNumber, traveler_number) {
+    console.log(this.travelerForm)
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
+      this.cartService.setLoaderStatus(true);
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
       data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob).format("YYYY-MM-DD");
       data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
@@ -468,7 +478,7 @@ export class TravelerFormComponent implements OnInit {
       if (userId) {
         //Edit
         this.travelerService.updateAdult(data, userId).subscribe((traveler: any) => {
-
+          this.cartService.setLoaderStatus(false);
           let index = this.myTravelers.findIndex(x => x.userId == traveler.userId)
           this.myTravelers[index] = traveler;
 

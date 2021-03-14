@@ -8,6 +8,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HomeService } from '../../services/home.service';
 import { CartService } from '../../services/cart.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookiePolicyComponent, MODAL_TYPE } from '../cookie-policy/cookie-policy.component';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +37,8 @@ export class HomeComponent implements OnInit {
     private renderer: Renderer2,
     private homeService: HomeService,
     private cartService: CartService,
+    public modalService: NgbModal,
+    private cookieService: CookieService,
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
@@ -46,9 +51,20 @@ export class HomeComponent implements OnInit {
     this.getDeal(this.moduleId);
     localStorage.removeItem('__from');
     localStorage.removeItem('__to');
-    // setTimeout(() => {
-    //   $('#cookie_policy').show();
-    // }, 5000);
+    setTimeout(() => {
+      this.openCookiePolicyPopup();
+    }, 5000);
+  }
+
+  openCookiePolicyPopup() {
+    if (!this.cookieService.get('__cke')) {
+      this.modalService.open(CookiePolicyComponent, {
+        windowClass: 'block_cookie_policy_main', centered: true, backdrop: 'static',
+        keyboard: false
+      });
+    } else {
+
+    }
   }
 
   loadJquery() {
@@ -169,7 +185,7 @@ export class HomeComponent implements OnInit {
 
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'bg_color');
-    
+
   }
 
   setToString(newItem: string) {

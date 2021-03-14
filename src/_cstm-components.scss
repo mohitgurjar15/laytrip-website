@@ -2,6 +2,16 @@
 @import "_hotel.scss";
 // NG-SELECT SCSS
 
+app-search-airport {
+    .ng-select {
+        &.laytrip-input {
+            .ng-dropdown-panel {
+                display: none !important;
+            }
+        }
+    }
+}
+
 .ng-select {
     &.laytrip-input {
         padding: 0 15px 0 0;
@@ -124,14 +134,16 @@
 
                 .parent {
                     padding: 5px 5px 5px 30px;
-                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg)
+                        no-repeat;
                     background-position: left center;
                     color: #012178;
                 }
 
                 .child {
                     padding: 5px 5px 5px 50px !important;
-                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg)
+                        no-repeat;
                     background-position: left 25px center;
                     color: #808080;
 
@@ -214,8 +226,7 @@
 
         .ng-select-container {
             .ng-value-container {
-
-                //width: 100%;
+                width: 100%;
                 .ng-placeholder {
                     padding: 3px 0 0 0;
                     font-size: 16px;
@@ -228,14 +239,13 @@
                 /* position: absolute;
                 top: 0;
                 right: 0;
-                span{
+                span {
                     position: absolute;
                     top: 0;
                     right: 0;
                 } */
             }
         }
-
     }
 
     &.country_code {
@@ -259,7 +269,7 @@
             .ng-value-container {
                 .ng-value {
                     color: $mid_gray_bg;
-                    font-size: 16px
+                    font-size: 16px;
                 }
             }
         }
@@ -267,7 +277,7 @@
 }
 
 // NG-SELECT FOCUS REMOVE CSS START
-.ng-select-focused:not(.ng-select-opened)>.ng-select-container {
+.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
     box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
 }
 
@@ -360,7 +370,8 @@
                     .grid_box.secound {
                         .search_area {
                             input {
-                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg)
+                                    center left 15px no-repeat !important;
                             }
                         }
                     }
@@ -370,7 +381,15 @@
     }
 }
 
-.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
+.modify_search
+    .flight_tab
+    .tab-content
+    .flight_search
+    .flight-grid
+    .grid_box.third
+    .travellers
+    .search_area
+    .travel_info {
     height: 22px !important;
     margin-top: -3px !important;
     margin-bottom: 2px !important;
