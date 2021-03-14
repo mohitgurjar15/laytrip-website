@@ -104,7 +104,6 @@ app-search-airport {
                 .ng-clear {
                     font-size: 17px !important;
                     color: red !important;
-                    pointer-events: all;
                 }
             }
 
@@ -235,16 +234,15 @@ app-search-airport {
             }
 
             .ng-clear-wrapper {
-                // display: none;
-                display: block;
-                position: absolute;
+                display: none;
+                /* position: absolute;
                 top: 0;
                 right: 0;
                 span {
                     position: absolute;
                     top: 0;
                     right: 0;
-                }
+                } */
             }
         }
     }
