@@ -64,7 +64,8 @@ a {
     padding: 8px 0;
 
     input {
-      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
+      // background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
+      background-image: none !important;
       background-size: 20px;
       border: none;
       padding: 0;
@@ -75,8 +76,48 @@ a {
       }
     }
   }
+  &.expiry_date{
+    .p-calendar{
+      @include tab-view {
+        width: 100%;
+      }
+    }
+    input {
+      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
+        no-repeat;
+      background-size: 20px;
+      border: none;
+    }
+  }
 }
+.gender_selection{
+  border-bottom: 2px solid $box-border-color;
+  .ng-select{
+    .ng-select-container{
+      border: none;
+      min-height: 34px;
+      .ng-value-container{
+        padding: 0;
+        .ng-input{
+          padding: 0;
+        }
+      }
+      .ng-arrow-wrapper{
+        padding: 0;
+        .ng-arrow{
+          background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+          background-position: right;
+          background-repeat: no-repeat;
+          background-size: 11px;
+          border: none;
+          height: 11px;
+          width: 11px;
 
+        }
+      }
+    }
+  } 
+}
 .dobs_account {
   .form-control {
     border-radius: 0;
@@ -85,8 +126,8 @@ a {
     padding: 8px 0;
 
     input {
-      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
-      background-size: 20px;
+      // background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
+      background-image: none !important;
       border: none;
       padding: 0;
       color: $mid_gray_bg;
@@ -101,6 +142,20 @@ a {
         box-shadow: none;
       }
     }
+  }
+  &.expiry_date{
+    .p-calendar{
+      @include tab-view {
+        width: 100%;
+      }
+      input {
+        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0
+          no-repeat !important;
+        background-size: 20px !important;
+        border: none;
+      }
+    }
+    
   }
 }
 
