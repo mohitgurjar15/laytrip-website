@@ -10,6 +10,10 @@
         transform: translate(10%, -10%);
         max-width: 170px;
         right: 0;
+
+        @include tab-view{
+            transform: translate(0%, -10%);
+        }
     }
     transform: translate(20%, 70%);
     max-width: 240px;
