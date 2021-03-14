@@ -143,24 +143,34 @@
                 [ngClass]="{'error_main_class':profileForm.controls.dob.touched && profileForm.controls.dob.errors}">
                 <label>{{'dob' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <input type="text" formControlName="dob" placeholder="MM/DD/YYYY" [readonly]="!isFormControlEnable" 
-                    [textMask]="dateYeaMask" >
+                    <input type="text" formControlName="dob" placeholder="MM/DD/YYYY" [readonly]="!isFormControlEnable"
+                        [textMask]="dateYeaMask">
                     <!-- <p-calendar [disabled]="!isFormControlEnable" dateFormat="mm/dd/yy" class="form-control"
                         panelStyleClass="birth_date" inputId="basic" tabindex="9" formControlName="dob"
                         [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                         yearRange="{{'1971:'+this.dobMinDate.getFullYear()}}"
                         placeholder="{{'dob_placeholder' | translate}}" [defaultDate]="dobMinDate">
                     </p-calendar> -->
-
                 </div>
             </div>
             <div *ngIf="profileForm.controls.dob.touched && profileForm.controls.dob.errors"
                 class="error error_profile">
                 <div class="fake_div"></div>
+                <small *ngIf="profileForm.controls.dob.errors.required" class="error_field_new">
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    {{'dob_touched_validation' | translate}}</small>
+                <small *ngIf="profileForm.controls.dob.errors.pattern" class="error_field_new">
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">Please
+                    enter
+                    your valid date of birth.</small>
+            </div>
+            <!-- <div *ngIf="profileForm.controls.dob.touched && profileForm.controls.dob.errors"
+                class="error error_profile">
+                <div class="fake_div"></div>
                 <span *ngIf="profileForm.controls.dob.errors.required" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
                     {{'dob_touched_validation' | translate}}</span>
-            </div>
+            </div> -->
             <div class="form_row common_row">
                 <label>{{'gender' |translate}}<sup>*</sup></label>
                 <div class="text_field">

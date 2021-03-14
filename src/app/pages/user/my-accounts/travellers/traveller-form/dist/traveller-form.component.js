@@ -67,7 +67,7 @@ var TravellerFormComponent = /** @class */ (function () {
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: ['United States', [forms_1.Validators.required]],
             country_code: ['+1', [forms_1.Validators.required]],
-            dob: ['', [forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
+            dob: [null, [forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
             passport_expiry: [''],
             passport_number: ['']
         }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });
@@ -131,7 +131,7 @@ var TravellerFormComponent = /** @class */ (function () {
             phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
             country_code: this.travelerInfo.countryCode ? this.travelerInfo.countryCode : '',
             country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
-            dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
+            dob: this.travelerInfo.dob ? this.travelerInfo.dob : '',
             passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
             passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : ''
         });

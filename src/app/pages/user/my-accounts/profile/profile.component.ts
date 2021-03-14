@@ -90,7 +90,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
       first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       last_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      dob: ['', Validators.required,Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)],
+      dob: ['', [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
       country_code: ['', [Validators.required]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       address: [''],
@@ -242,10 +242,10 @@ export class ProfileComponent implements OnInit {
         gender: res.gender ? res.gender : 'M',
         zip_code: res.zipCode,
         title: res.title ? res.title : 'mr',
-        // dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? moment(res.dob, "YYYY-MM-DD").format('MM/DD/YYYY') : '',
+        dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? this.commonFunction.convertDateMMDDYYYY(res.dob, 'YYYY-MM-DD') : '',
         country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
         phone_no: res.phoneNo,
-        city : res.cityName,
+        city: res.cityName,
         address: res.address,
         home_airport: res.airportInfo.code ? res.airportInfo.code : null,
         country_id: res.country.name ? res.country.name : 'United States',
@@ -327,7 +327,7 @@ export class ProfileComponent implements OnInit {
       }
 
       formdata.append("zip_code", this.profileForm.value.zip_code ? this.profileForm.value.zip_code : this.selectResponse.zipCode);
-      formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? this.commonFunction.convertDateYYYYMMDD(this.profileForm.value.dob,'MM/DD/YYYY') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+      formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? this.commonFunction.convertDateYYYYMMDD(this.profileForm.value.dob, 'MM/DD/YYYY') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
 
       this.isFormControlEnable = false;
       this.profileForm.controls['home_airport'].disable();
