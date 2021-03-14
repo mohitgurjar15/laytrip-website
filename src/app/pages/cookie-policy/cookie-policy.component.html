@@ -1,9 +1,9 @@
-<section class="block_contact_us_main modal fade comman_modal show" id="cookie_modal" data-backdrop="static"
+<!-- <section class="block_cookie_policy_main modal fade comman_modal show" id="cookie_modal" data-backdrop="static"
     data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal_title">
-                <button type="button" class="close" >
+                <button type="button" class="close" (click)="close()">
                     <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                 </button>
             </div>
@@ -14,10 +14,13 @@
                             Cookie Policy
                         </div>
                         <div class="cookie_msg">
-                            By clicking Accept or an item or other link on this website, you agree to the use of cookies and other technologies to process your data, customize content and advertising, to provide features and to analyze traffic to the site. We share information about your use with our trusted social media, advertising and analytics partners. See <a href="javascript:void(0);">Privacy</a> to learn more.
+                            By clicking Accept or an item or other link on this website, you agree to the use of cookies
+                            and other technologies to process your data, customize content and advertising, to provide
+                            features and to analyze traffic to the site. We share information about your use with our
+                            trusted social media, advertising and analytics partners. See <a>Privacy</a> to learn more.
                         </div>
                         <div class="cta_btn_wrps">
-                            <button >Accept</button>
+                            <button (click)="close()">Accept</button>
                         </div>
                         <div class="logo_wrpper_footer">
                             <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />
@@ -27,4 +30,31 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
+
+<div class="modal_title">
+    <button type="button" class="close" (click)="close()">
+        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+    </button>
+</div>
+<div class="empty_modal_wrp">
+    <div class="cookie_main_wrapper">
+        <div class="inner_wrppar">
+            <div class="cookie_header">
+                Cookie Policy
+            </div>
+            <div class="cookie_msg">
+                By clicking Accept or an item or other link on this website, you agree to the use of cookies
+                and other technologies to process your data, customize content and advertising, to provide
+                features and to analyze traffic to the site. We share information about your use with our
+                trusted social media, advertising and analytics partners. See <a>Privacy</a> to learn more.
+            </div>
+            <div class="cta_btn_wrps">
+                <button (click)="acceptCookiePolicy()">Accept</button>
+            </div>
+            <div class="logo_wrpper_footer">
+                <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />
+            </div>
+        </div>
+    </div>
+</div>
