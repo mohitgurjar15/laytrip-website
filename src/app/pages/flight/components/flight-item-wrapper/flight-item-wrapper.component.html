@@ -87,7 +87,7 @@
                                     <div class="fight_secs">
                                         <div class="upper_f_wrps">
                                             <span class="fl_times duel_wrps">
-                                                {{route.stops[0].departure_time}}
+                                                {{convertTime(route.stops[0].departure_time)}}
                                                 <span class="fl_desitines">
                                                     <span class="code_bt_m">
                                                         {{route.stops[0]?.departure_info?.code}}
@@ -114,7 +114,7 @@
                                             </span>
                                             <span class="fl_desti duel_wrps">
                                                 <span class="fl_name">
-                                                    {{route.stops[route.stops.length-1].arrival_time}} <span
+                                                    {{convertTime(route.stops[route.stops.length-1].arrival_time) }} <span
                                                         *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
                                                 </span>
                                                 <div class="fl_name_inner">
