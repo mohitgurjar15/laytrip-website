@@ -185,7 +185,7 @@
     .card-body {
       padding: 15px;
 
-      @include tab-view{
+      @include tab-view {
         padding: 5px 15px;
       }
       .mb-sm-10 {
@@ -247,7 +247,7 @@
         align-items: flex-end;
         flex-direction: column;
         height: 100%;
-        @include tab-view{
+        @include tab-view {
           position: absolute;
           right: 0;
         }
@@ -259,7 +259,7 @@
           box-shadow: none;
           font-size: 16px;
           padding: 0;
-          @include tab-view{
+          @include tab-view {
             font-size: 12px;
           }
         }
@@ -502,7 +502,7 @@
       padding: 5px 20px;
       font-size: 12px;
       color: #ff7272;
-      background: rgba(255, 114, 114, 0.15);
+      background: transparent;
       text-align: center;
       border-radius: 25px;
     }
