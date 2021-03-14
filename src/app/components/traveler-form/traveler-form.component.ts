@@ -78,7 +78,7 @@ export class TravelerFormComponent implements OnInit {
     guide: false,
     showMask: false,
     mask: [
-      /\d/, /\d/, '/',/\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+      /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
   isTravller:boolean=true;
   constructor(
@@ -314,7 +314,6 @@ export class TravelerFormComponent implements OnInit {
   }
 
   patchValues(x) {
-    //x.dob = new DatePipe("en-US").transform(x.dob, "MM/DD/YYYY");
     return this.formBuilder.group({
       first_name: [x.first_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
       last_name: [x.last_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
@@ -325,7 +324,7 @@ export class TravelerFormComponent implements OnInit {
       passport_number: (x.is_passport_required) ? [x.passport_number, [Validators.required]] : [x.passport_number],
       passport_expiry: (x.is_passport_required) ? [x.passport_expiry || null, [Validators.required]] : [x.passport_expiry],
       is_passport_required: [x.is_passport_required, [Validators.required]],
-      dob: [x.dob ? x.dob : '', [Validators.required]],
+      dob: [x.dob ? x.dob : '', [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
       country_id: [x.country_id ? x.country_id : 233, [Validators.required]],
       gender: [x.gender, [Validators.required]],
       userId: [x.userId],
@@ -420,7 +419,7 @@ export class TravelerFormComponent implements OnInit {
   } */
   saveTraveler(cartNumber, traveler_number) {
 
-    console.log("this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value",this.travelerForm.controls[`type${cartNumber}`]['controls'].adults)
+    console.log("this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value", this.travelerForm.controls[`type${cartNumber}`]['controls'].adults)
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
@@ -454,10 +453,10 @@ export class TravelerFormComponent implements OnInit {
         }
       }, error => {
         this.cartService.setLoaderStatus(false)
-        if(error.status==409){
+        if (error.status == 409) {
           //this.travelers[`type${cartNumber}`].adults[traveler_number].is_duplictae_email = true;
           //this.patch();
-        } 
+        }
       })
     }
   }
