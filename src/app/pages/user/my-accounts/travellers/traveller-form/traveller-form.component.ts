@@ -30,7 +30,7 @@ export class TravellerFormComponent implements OnInit {
   @Output() travelerFormChange = new EventEmitter();
   @Output() deleteTravelerId = new EventEmitter();
   // countries = [];
-  @Input() countries_code :any= [];
+  @Input() countries_code: any = [];
   is_gender: boolean = true;
   is_type: string = 'M';
   travellerForm: FormGroup;
@@ -40,7 +40,7 @@ export class TravellerFormComponent implements OnInit {
   dobMinDate;
   dobMaxDate;
   dobYearRange;
-  maxyear; 
+  maxyear;
   expiryMinDate = new Date(moment().format("YYYY-MM-DD"));
   subscriptions: Subscription[] = [];
   locale = {
@@ -51,6 +51,12 @@ export class TravellerFormComponent implements OnInit {
   isChild = false;
   isInfant = false;
   isAdult = true;
+  dateYeaMask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -81,13 +87,13 @@ export class TravellerFormComponent implements OnInit {
       gender: ['M', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
-      country_id: ['United States' , [Validators.required]],
+      country_id: ['United States', [Validators.required]],
       country_code: ['+1', [Validators.required]],
-      dob: ['', Validators.required],
+      dob: [null, [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
       passport_expiry: [''],
       passport_number: [''],
     }, { validators: phoneAndPhoneCodeValidation() });
-    
+
     // this.travelerFormChange.emit(this.travellerForm);
 
     this.setUserTypeValidation();
@@ -98,21 +104,21 @@ export class TravellerFormComponent implements OnInit {
 
   loadJquery() {
     $(document).ready(function () {
-      $('.error_border').each(function(){
+      $('.error_border').each(function () {
         $(this).removeClass('error_border');
-     });
-     
-      if ($('.tel_span .form-control').hasClass('.ng-touched .ng-invalid')){
-          $(".tel_span").toggleClass("error_border"); 
+      });
+
+      if ($('.tel_span .form-control').hasClass('.ng-touched .ng-invalid')) {
+        $(".tel_span").toggleClass("error_border");
       }
     });
   }
-  
- /*  ngOnChanges(changes: SimpleChanges) {
-    this.checkOutService.getCountries.subscribe(res => {
-      this.countries = res;
-    });
-  } */
+
+  /*  ngOnChanges(changes: SimpleChanges) {
+     this.checkOutService.getCountries.subscribe(res => {
+       this.countries = res;
+     });
+   } */
 
   getCountry() {
     this.genericService.getCountry().subscribe(res => {
@@ -153,7 +159,7 @@ export class TravellerFormComponent implements OnInit {
       phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
       country_code: this.travelerInfo.countryCode ? this.travelerInfo.countryCode : '',
       country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
-      dob: this.travelerInfo.dob ? new Date(this.travelerInfo.dob) : '',
+      dob: this.travelerInfo.dob ? this.travelerInfo.dob : '',
       passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
       passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : '',
     });
@@ -284,11 +290,11 @@ export class TravellerFormComponent implements OnInit {
     const emailControl = this.travellerForm.get('email');
     const phoneControl = this.travellerForm.get('phone_no');
     const countryControl = this.travellerForm.get('country_code');
-    console.log(selectedDate , adult12YrPastDate)
+    console.log(selectedDate, adult12YrPastDate)
     if (selectedDate <= adult12YrPastDate) {
       this.isAdult = true;
       this.isChild = false;
-      emailControl.setValidators([Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
+      emailControl.setValidators([Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
       phoneControl.setValidators([Validators.required, Validators.minLength(10)]);
       countryControl.setValidators([Validators.required]);
     } else if (selectedDate < child2YrPastDate) {
@@ -310,7 +316,7 @@ export class TravellerFormComponent implements OnInit {
     countryControl.updateValueAndValidity();
   }
 
-  deleteTraveller(travellerId){
+  deleteTraveller(travellerId) {
     this.deleteTravelerId.emit(travellerId);
   }
 
@@ -319,7 +325,7 @@ export class TravellerFormComponent implements OnInit {
   closeResult;
 
   openDeleteModal(content, userId = '') {
-    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal',centered: true });
+    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
     this.userId = userId;
     this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
