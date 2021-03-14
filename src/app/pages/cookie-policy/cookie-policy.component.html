@@ -47,8 +47,10 @@
                 By clicking Accept or an item or other link on this website, you agree to the use of cookies
                 and other technologies to process your data, customize content and advertising, to provide
                 features and to analyze traffic to the site. We share information about your use with our
-                trusted social media, advertising and analytics partners. See <a>Privacy</a> to learn more.
+                trusted social media, advertising and analytics partners. See <a class="anchor-tag"
+                    (click)="goToPrivacyPolicy()">Privacy</a> to learn more.
             </div>
+            <!-- [routerLink]="['/privacy-policy']" -->
             <div class="cta_btn_wrps">
                 <button (click)="acceptCookiePolicy()">Accept</button>
             </div>

@@ -73,10 +73,10 @@ export class CheckoutComponent implements OnInit {
   inValidCartTravller=[];
   totalCard: number = 0;
   add_new_card = false;
-  alertErrorMessage:string='';
+  alertErrorMessage: string = '';
   isAllAlertClosed: boolean = true;
-  isTermConditionAccepted:boolean=false;
-  isTermConditionError:boolean=false;
+  isTermConditionAccepted: boolean = false;
+  isTermConditionError: boolean = false;
 
   constructor(
     private genericService: GenericService,
@@ -108,10 +108,11 @@ export class CheckoutComponent implements OnInit {
       this.guestUserId = this.commonFunction.getGuestUser();
     }
 
-    this.bookingTimerConfiguration();
-
     this.cartLoading = true;
     this.cartService.getCartList('yes').subscribe((items: any) => {
+      if (items && items.data && items.data.length) {
+        this.bookingTimerConfiguration();
+      }
       this.cartLoading = false;
       let cart: any;
       let price: any;
@@ -187,10 +188,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   bookingTimerConfiguration() {
-    this.bookingTimerConfig = {
+    this.bookingTimerConfig = Object.assign({}, {
       leftTime: 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(moment().format('YYYY-MM-DD h:mm:ss'), 'seconds'),
       format: 'm:s'
-    }
+    });
   }
 
   getTravelers() {
@@ -365,11 +366,11 @@ export class CheckoutComponent implements OnInit {
       this.isAllAlertClosed = true;
     }
 
-    if(!this.isTermConditionAccepted){
-      this.isTermConditionError=true;
+    if (!this.isTermConditionAccepted) {
+      this.isTermConditionError = true;
     }
-    else{
-      this.isTermConditionError=false;
+    else {
+      this.isTermConditionError = false;
     }
   }
 
@@ -502,18 +503,18 @@ export class CheckoutComponent implements OnInit {
     this.totalCard = event;
   }
 
-  acceptTermCondition(event){
-    if(event.target.checked){
-      this.isTermConditionAccepted=true;
-      this.isTermConditionError=false;
+  acceptTermCondition(event) {
+    if (event.target.checked) {
+      this.isTermConditionAccepted = true;
+      this.isTermConditionError = false;
     }
-    else{
-      this.isTermConditionAccepted=false;
-      this.isTermConditionError=true;
+    else {
+      this.isTermConditionAccepted = false;
+      this.isTermConditionError = true;
     }
   }
 
-  removeTermConditionError(){
-    this.isTermConditionError=false;
+  removeTermConditionError() {
+    this.isTermConditionError = false;
   }
 }

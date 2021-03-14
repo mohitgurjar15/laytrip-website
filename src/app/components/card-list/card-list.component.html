@@ -90,9 +90,7 @@
                             <div class="save_btn_wrps">
                                 <a class="hover-link" (click)="openDeleteModal(content,card)">Delete</a>
                                 <div class="section_description" id="delete_card_desc" *ngIf="is_open_popup">
-                                    <span class="sec_text">For Deleting the Credit card you must have one Default credit
-                                        card
-                                        selected.</span>
+                                    <span class="sec_text">You must have one default credit card selected.</span>
                                     <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
                                             alt="Close"></a>
                                 </div>
