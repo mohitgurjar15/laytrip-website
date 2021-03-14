@@ -19,13 +19,13 @@
                   +travelerItem.value.adults[x].last_name:'' | titlecase}}
                 </span>
               </a>
-              <a class="dropdown-toggle traveler_drop_down"
+              <a *ngIf="isTravller" class="dropdown-toggle traveler_drop_down"
                 data-toggle="dropdown">{{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + '
                 '
                 +travelerItem.value.adults[x].last_name:'Saved Travelers' | titlecase}}</a>
-              <ul class="dropdown-menu options_name">
+              <ul *ngIf="isTravlle" class="dropdown-menu options_name" >
                 <ng-container *ngFor="let user of myTravelers">
-                  <li (click)='selectTraveler(user.userId,x)' *ngIf="user.user_type==traveler.controls.type.value">
+                  <li (click)='selectTraveler(user.userId,x)' *ngIf="user.user_type==traveler.controls.type.value && traveler.roleId!=7">
                     {{user.firstName}} {{user.lastName}}</li>
                 </ng-container>
               </ul>

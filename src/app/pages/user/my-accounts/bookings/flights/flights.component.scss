@@ -142,6 +142,18 @@
                                 height: 8px;
                             }
                         }
+                        .blue_stamp{
+                            width: 14px;
+                            height: 14px;
+                            background-color: $blue-text;
+                            border-radius: 50%;
+                            margin-right: 10px;
+
+                            @include tab-view {
+                                width: 8px;
+                                height: 8px;
+                            }
+                        }
                     }
                 }
             }
@@ -214,8 +226,12 @@
             &.cta_btns_wrps {
                 justify-content: space-between;
                 font-size: 15px;
+                padding: 0;
+                margin-top: 15px;
+
                 @include tab-view{
                     font-size: 12px;
+                    margin-top: 10px;
                 }
                 .ct_btns {
                     a {

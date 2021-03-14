@@ -265,6 +265,7 @@
       input {
         background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
           no-repeat;
+
         background-size: 20px;
         border: none;
       }
@@ -275,6 +276,14 @@
             border-color: $error-color !important;
           }
         }
+      }
+    }
+    &.expiry_date{
+      input {
+        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
+          no-repeat;
+        background-size: 20px;
+        border: none;
       }
     }
     .gender_anchers {
@@ -296,21 +305,15 @@
           outline: none;
         }
       }
-      select {
+      ng-select {
         width: 100%;
-        padding: 6px 10px 6px 0;
+        padding: 0 ;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
         position: relative;
-        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-        background-position: right;
-        background-repeat: no-repeat;
-        background-size: 11px;
-        transition: 0.3s;
-        right: 0;
-        top: 1px;
         background-color: $background-white;
+        top: -1px;
       }
     }
   }
@@ -321,7 +324,7 @@
       background-color: transparent;
       color: $text_light_yellow;
       box-shadow: none;
-      font-size: 16px;
+      font-size: 14px;
       padding: 0;
       border: none;
       text-align: right;

@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import { TravelerService } from '../../services/traveler.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { DatePipe } from '@angular/common';
+import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
 @Component({
   selector: 'app-traveler-form',
   templateUrl: './traveler-form.component.html',
@@ -32,9 +33,10 @@ export class TravelerFormComponent implements OnInit {
   selectedType;
   traveler_number: number = 0;
   countries = []
-  myTravelers;
+  myTravelers=[];
   travlerLabels;
   userId;
+  userInfo;
   travelers = {
     type0: {
       adults: [],
@@ -78,6 +80,7 @@ export class TravelerFormComponent implements OnInit {
     mask: [
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
+  isTravller:boolean=true;
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -88,11 +91,17 @@ export class TravelerFormComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {
     this.travlerLabels = travlerLabels;
+    this.userInfo=getLoginUserInfo();
+    
   }
 
   ngOnInit() {
     this.loadJquery();
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MM/DD/YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
+    if(this.myTravelers.length==0){
+      this.isTravller=false;
+    }
+    console.log("this.myTravelers",this.myTravelers,this.isTravller)
 
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
@@ -151,7 +160,6 @@ export class TravelerFormComponent implements OnInit {
         let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
         this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
         this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
-        this.userId = traveler.userId;
         this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
         this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
         this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender;
@@ -497,14 +505,12 @@ export class TravelerFormComponent implements OnInit {
   }
 
   selectTraveler(travlerId, traveler_number) {
-    console.log(travlerId, traveler_number)
     let traveler = this.myTravelers.find(x => x.userId == travlerId)
     if (traveler && Object.keys(traveler).length > 0) {
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].email = traveler.email;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].userId = traveler.userId;
-      this.userId = traveler.userId;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].gender = traveler.gender;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].phone_no = traveler.phoneNo;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code = traveler.countryCode || '+1';
