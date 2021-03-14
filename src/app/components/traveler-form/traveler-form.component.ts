@@ -98,8 +98,6 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     this.loadJquery();
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MM/DD/YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
-    
-    console.log("this.myTravelers",this.myTravelers,this.isTravller)
 
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
@@ -423,11 +421,9 @@ export class TravelerFormComponent implements OnInit {
   } */
   saveTraveler(cartNumber, traveler_number) {
 
-    console.log("this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value", this.travelerForm.controls[`type${cartNumber}`]['controls'].adults)
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
-      console.log("data", data)
       data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob,"MM/DD/YYYY").format("YYYY-MM-DD");
       if (this.travelers[`type${cartNumber}`].adults[traveler_number].is_passport_required) {
         data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
@@ -529,6 +525,5 @@ export class TravelerFormComponent implements OnInit {
     }
     this.checkOutService.emitTravelersformData(this.travelerForm);
     this.cd.detectChanges();
-    console.log("this.travelerForm", this.travelerForm)
   }
 }

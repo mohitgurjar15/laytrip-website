@@ -100,9 +100,10 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       this.cartItems = cartItems;
     })
 
+    setTimeout(()=>{this.loadJquery();},3000)
     
-
   }
+
   loadJquery() {
     $("body").click(function () {
       $(".code_name_m").hide();
@@ -110,7 +111,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     $(".code_bt_m").click(function (e){
       e.stopPropagation();
       $(this).siblings(".code_name_m").toggle();
-      //$(".code_name_m").show();
     });
     $('.code_name_m').click(
       function (e) {
@@ -288,6 +288,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   getDayDiff(arrivalDate, departureDate) {
     let diff = moment(arrivalDate, "DD/MM/YYYY").diff(moment(departureDate, "DD/MM/YYYY"), 'days')
     return diff;
+  }
+
+  convertTime(time){
+    let newTime =  this.commonFunction.convertTime(time,'h:mm A','h:mma')
+    return newTime.slice(0, -1)
   }
 }
 
