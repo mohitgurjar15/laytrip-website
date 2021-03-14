@@ -174,6 +174,10 @@ export class CheckoutComponent implements OnInit {
       this.cardToken = '';
     }
 
+    this.cartService.getLoaderStatus.subscribe(state=>{
+      this.loading=state;
+    })
+
   }
 
   sessionTimeout(event) {

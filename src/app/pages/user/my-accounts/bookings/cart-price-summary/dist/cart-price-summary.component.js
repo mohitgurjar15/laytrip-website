@@ -14,6 +14,7 @@ var CartPriceSummaryComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.cartItem = {};
         this.cartDueLoopNum = 0;
+        this.totalInstallmentAmount = 0;
         this.installmentType = generic_helper_1.installmentType.en;
     }
     CartPriceSummaryComponent.prototype.ngOnInit = function () {
@@ -22,7 +23,11 @@ var CartPriceSummaryComponent = /** @class */ (function () {
         if (typeof changes['cartItem'].currentValue != 'undefined') {
             this.cartItem = changes['cartItem'].currentValue;
             var loop = 0;
-            this.cartItem.cartInstallments.forEach(function (element) {
+            var totalInstallment = 0;
+            this.cartItem.cartInstallments.forEach(function (element, i) {
+                if (i != 0) {
+                    totalInstallment += element.amount;
+                }
                 if (element.instalmentStatus == 0) {
                     loop += 1;
                     if (loop == 1) {
@@ -36,6 +41,7 @@ var CartPriceSummaryComponent = /** @class */ (function () {
                     element.dueInstallment = 0;
                 }
             });
+            this.totalInstallmentAmount = totalInstallment;
         }
     };
     CartPriceSummaryComponent.prototype.setLoopNumber = function (loopNumber) {

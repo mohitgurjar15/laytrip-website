@@ -127,11 +127,11 @@
             .payment_bar_wrps {
                 width: 100%;
                 max-width: 300px;
-                margin: 10px 6px 0 6px;
+                margin: 8px 6px 0 6px;
                 display: flex;
                 align-items: center;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
 
                 .progress {
                     height: 5px;

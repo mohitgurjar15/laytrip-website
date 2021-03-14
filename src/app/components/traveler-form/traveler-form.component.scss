@@ -171,15 +171,16 @@
       }
 
       .traveler_drop_down {
-        position: absolute;
-        top: 10px;
+        position: relative;
+        top: -32px;
+        display: inline-block;
         margin: 0 auto;
-        max-width: 155px;
+        width: auto;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        left: 0;
-        right: 0;
+        left: 50%;
+        transform: translate(-60%, 5%);
         border: none;
         cursor: pointer;
         border-radius: 0;
@@ -187,7 +188,7 @@
         font-size: 14px;
         color: $text_light_yellow;
         background-color: $background-white;
-        padding: 8px 10px;
+        padding: 8px 20px 8px 10px;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -207,8 +208,8 @@
           left: 30px;
           margin: 0;
           font-size: 12px;
-          display: flex;
-          width: 135px;
+          width: auto;
+          transform: translate(5px, 0px);
         }
 
         &:focus {
@@ -406,7 +407,8 @@
 
           &.dobs {
             input {
-              background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+              //background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+              background-image: none;
               background-size: 20px;
               // border: none;
 
@@ -739,7 +741,7 @@
           background-color: transparent;
           color: $text_light_yellow;
           box-shadow: none;
-          font-size: 16px;
+          font-size: 14px;
           padding: 0;
           border: none;
           text-align: right;

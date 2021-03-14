@@ -12,6 +12,7 @@ export class CartPriceSummaryComponent implements OnInit {
   @Input() cartItem: any = {}; 
   cartDueLoopNum=0;
   installmentType;
+  totalInstallmentAmount : any = 0;
 
   constructor(public commonFunction:CommonFunction) {
     this.installmentType= installmentType.en;
@@ -25,7 +26,12 @@ export class CartPriceSummaryComponent implements OnInit {
     if(typeof changes['cartItem'].currentValue!='undefined'){
       this.cartItem = changes['cartItem'].currentValue;
       var loop=0;
-      this.cartItem.cartInstallments.forEach(element => {
+      var totalInstallment =0;
+      
+      this.cartItem.cartInstallments.forEach(function(element,i) {
+        if(i != 0){
+          totalInstallment  += element.amount;
+        }
         if(element.instalmentStatus == 0){
           loop += 1;
           if(loop == 1){
@@ -37,7 +43,9 @@ export class CartPriceSummaryComponent implements OnInit {
           element.dueInstallment=0;
         }
       });
+      this.totalInstallmentAmount = totalInstallment;
     }
+
   }
  
   setLoopNumber(loopNumber){
