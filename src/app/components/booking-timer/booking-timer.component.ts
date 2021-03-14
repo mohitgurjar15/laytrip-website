@@ -11,13 +11,13 @@ export class BookingTimerComponent implements OnInit {
   constructor() { }
   s3BucketUrl = environment.s3BucketUrl;
   @Input() config;
-  @Output() sessionTimeout= new EventEmitter();
-  
+  @Output() sessionTimeout = new EventEmitter();
+
   ngOnInit() {
   }
 
-  handleEvent(event){
-    if(event.action=="finished"){
+  handleEvent(event) {
+    if (event.action == "finished") {
       this.sessionTimeout.emit(true)
     }
   }
