@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 import { TravelerService } from '../../../../services/traveler.service';
@@ -54,7 +54,8 @@ export class ListTravellerComponent implements OnInit {
     public modalService: NgbModal,
     private toastr: ToastrService,
     private genericService: GenericService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private renderer: Renderer2
 
   ) {
     this.isMasterSel = false;
@@ -265,7 +266,8 @@ export class ListTravellerComponent implements OnInit {
   getTravellerIdFromChild(travelerId) {
     this.openDeleteModal('deleteContent', travelerId);
   }
-
+  
+  travellerTabClass = '';
   pushTraveler(traveler) {
     if (typeof traveler == 'string') {
       this.travelers = this.travelers.filter(obj => obj.userId !== traveler);
@@ -278,7 +280,8 @@ export class ListTravellerComponent implements OnInit {
     } else {
       this.showNewForm = false;
     }
-
+    //For add class show in traveler tab 
+    this.travellerTabClass = traveler.userId; 
   }
 
   showForm(){

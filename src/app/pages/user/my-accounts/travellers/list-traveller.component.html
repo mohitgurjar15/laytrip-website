@@ -56,6 +56,8 @@
                                     (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a> -->
                             </div>
                             <div id="collapseTravInner{{traveler.userId}}" class="collapse"
+                            [ngClass]="{'show': traveler.userId == travellerTabClass}"
+
                                 data-parent="#trav_accordion_inner">
                                 <div class="card-body">
                                     <app-traveller-form [countries]="countries" [countries_code]="countries_code"

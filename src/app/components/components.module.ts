@@ -124,7 +124,6 @@ import { AirportSuggestionComponent } from './airport-suggestion/airport-suggest
     RouterModule,
     BsDatepickerModule.forRoot(),
     NgxMaskModule.forRoot(),
-    NgScrollbarModule
   ],
   exports: [
     SearchAirportComponent,
