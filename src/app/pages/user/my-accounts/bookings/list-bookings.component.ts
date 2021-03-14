@@ -122,8 +122,7 @@ export class ListBookingsComponent implements OnInit {
   }
 
   loadUpcomming(event){
-    console.log(event)
-
+    console.log(event);
     this.upComingloading = event;
   }
 }
