@@ -143,12 +143,13 @@
                 [ngClass]="{'error_main_class':profileForm.controls.dob.touched && profileForm.controls.dob.errors}">
                 <label>{{'dob' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <p-calendar [disabled]="!isFormControlEnable" dateFormat="mm/dd/yy" class="form-control"
+                    <input type="text" formControlName="dob" placeholder="MM/DD/YYYY" [readonly]="!isFormControlEnable" [patterns]="customPatterns" mask="00/00/0000">
+                    <!-- <p-calendar [disabled]="!isFormControlEnable" dateFormat="mm/dd/yy" class="form-control"
                         panelStyleClass="birth_date" inputId="basic" tabindex="9" formControlName="dob"
                         [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
                         yearRange="{{'1971:'+this.dobMinDate.getFullYear()}}"
                         placeholder="{{'dob_placeholder' | translate}}" [defaultDate]="dobMinDate">
-                    </p-calendar>
+                    </p-calendar> -->
 
                 </div>
             </div>
@@ -178,7 +179,7 @@
                 <!-- <label>{{'address_label' | translate}}</label> -->
                 <!-- <label>Street Address <br> City,State,Zip, <br>Country</label> -->
                 <label>
-                    <span>Street</span>
+                    <span>Street Address</span>
                     <span>City</span>
                     <span>State</span>
                     <span>Zip</span>
@@ -187,7 +188,7 @@
 
                 <div class="text_field address_box">
                     <input [readonly]="!isFormControlEnable" tabindex="10" type="text" formControlName="address"
-                        placeholder="Street" class="inputs_com" maxlength="255">
+                        placeholder="Street Address" class="inputs_com" maxlength="255">
                     <input tabindex="13" [readonly]="!isFormControlEnable" type="text" class="inputs_com"
                         formControlName="city" placeholder="City">
                     <ng-select tabindex="12" [clearable]="false" [readonly]="!isFormControlEnable" class="address_ng"

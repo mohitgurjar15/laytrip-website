@@ -93,6 +93,11 @@
                         <option value="F">Female</option>
                         <option value="O">Other</option>
                       </select>
+                      <!-- <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender">
+                        <ng-option value="M">Male</ng-option>
+                        <ng-option value="F">Female</ng-option>
+                        <ng-option value="O">Other</ng-option> 
+                    </ng-select> -->
                       <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors" class="error">
                         <small *ngIf="traveler.controls.gender.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please select your gender.</small>
