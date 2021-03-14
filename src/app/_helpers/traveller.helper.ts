@@ -3,11 +3,13 @@ export const travelersFileds={
 
     flight : {
         adult : {
+            userId:'',
             type : 'adult',
             first_name: '',
             last_name: '',
             email: '',
             country_code:'+1',
+            is_duplictae_email:false,
             phone_no:'',
             dob:'',
             dobMinDate:new Date(moment().subtract(100,'years').format("YYYY-MM-DD") ),
@@ -20,6 +22,7 @@ export const travelersFileds={
             checkout_date:new Date()
         },
         child : {
+            userId:'',
             type : 'child',
             first_name: '',
             last_name: '',
@@ -33,6 +36,7 @@ export const travelersFileds={
             checkout_date:new Date()
         },
         infant : {
+            userId:'',
             type : 'infant',
             first_name: '',
             last_name: '',

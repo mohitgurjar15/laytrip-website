@@ -26,6 +26,9 @@ export class CartService {
   private cartDeletedItem = new BehaviorSubject(-1)
   getCartDeletedItem = this.cartDeletedItem.asObservable();
 
+  private loader = new BehaviorSubject(false)
+  getLoaderStatus = this.loader.asObservable();
+
   private cartTravelers = new BehaviorSubject({
     type0 : {
       adults : []
@@ -121,6 +124,10 @@ export class CartService {
 
   setDeletedCartItem(cartDeletedItem){
     this.cartDeletedItem.next(cartDeletedItem);
+  }
+
+  setLoaderStatus(loader){
+    this.loader.next(loader)
   }
 
   bookCart(data){
