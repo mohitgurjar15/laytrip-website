@@ -98,9 +98,7 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     this.loadJquery();
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MM/DD/YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
-    if(this.myTravelers.length==0){
-      this.isTravller=false;
-    }
+    
     console.log("this.myTravelers",this.myTravelers,this.isTravller)
 
     this.travelerForm = this.formBuilder.group({
@@ -123,6 +121,12 @@ export class TravelerFormComponent implements OnInit {
 
     this.checkOutService.getTravelers.subscribe((travelers: any) => {
       this.myTravelers = travelers;
+      if(this.myTravelers.length==0){
+        this.isTravller=false;
+      }
+      else{
+        this.isTravller=true;
+      }
     })
     this.cartService.getCartTravelers.subscribe((travelers: any) => {
       this.travelers = travelers;
@@ -447,7 +451,7 @@ export class TravelerFormComponent implements OnInit {
             this.travelers[`type${cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
             this.travelers[`type${cartNumber}`].adults[traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy');
           }
-
+          this.isTravller=true;
           this.checkOutService.setTravelers([...this.myTravelers, traveler]);
           this.patch();
         }
