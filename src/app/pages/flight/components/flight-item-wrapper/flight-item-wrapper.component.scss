@@ -66,14 +66,14 @@
 
     .pipe_wrap {
         display: flex;
-        width: 20%;
         //max-width: 45px;
+        width: 56%;
         font-size: 8px;
-        padding: 0 8px;
+        padding: 0 15px;
         color: $grayed_border;
         min-width: 70px;
 
-        @include mobile-xsm-view{
+        @include mobile-xsm-view {
             width: 33.33%;
             padding: 0 8px;
         }
@@ -137,7 +137,7 @@
         @include tab-view {
             flex-direction: row;
             align-items: flex-start;
-            margin-top: 25px;
+            margin-top: 7px;
         }
 
         .hh_mm {
@@ -146,10 +146,16 @@
             color: $text-black;
 
             @include tab-view {
-                margin-right: 5px;
+                padding-right: 7px;
                 font-size: 10px;
                 min-width: 50px;
-                text-align: left;
+                text-align: right;
+                width: 27%;
+            }
+
+            @include mobile-xsm-view {
+                padding-right: 5px;
+                width: 33.33%;
             }
         }
 
@@ -233,26 +239,45 @@
                 flex-direction: column;
                 display: flex;
                 // width: auto;
-                width: 40%;
+                width: 27%;
                 position: relative;
+                text-align: right;
 
-                @include mobile-xsm-view{
+                @include mobile-xsm-view {
                     width: 33.33%;
+                    text-align: right;
                 }
 
                 .fl_desitines {
                     font-weight: 400;
                     color: $mid_gray_bg;
                     font-size: 8px;
-                    position: absolute;
+                    position: relative;
                     width: 100%;
-                    bottom: -10px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                    margin-top: 2px;
+                    // white-space: nowrap;
+                    // overflow: hidden;
+                    // text-overflow: ellipsis;
 
                     br {
                         display: none;
+                    }
+
+                    .code_bt_m {}
+
+                    .code_name_m {
+                        display: none;
+                        position: absolute;
+                        color: $text-black;
+                        font-size: 8px;
+                        font-weight: 600;
+                        top: 13px;
+                        right: 0;
+                        align-items: center;
+                        justify-content: flex-start;
+                        border-radius: 6px;
+                        background-color: $tab-bg-gray;
+                        padding: 1px 6px;
                     }
                 }
             }
@@ -263,9 +288,10 @@
                 flex-direction: column;
                 display: flex;
                 //width: auto;
-                width: 40%;
+                width: 27%;
                 position: relative;
-                @include mobile-xsm-view{
+
+                @include mobile-xsm-view {
                     width: 33.33%;
                 }
 
@@ -281,17 +307,40 @@
                 }
 
                 .fl_name_inner {
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    position: absolute;
+                    font-weight: 400;
+                    color: $mid_gray_bg;
+                    font-size: 8px;
+                    position: relative;
                     width: 100%;
-                    bottom: -10px;
+                    margin-top: 2px;
+                    // white-space: nowrap;
+                    // overflow: hidden;
+                    // text-overflow: ellipsis;
                 }
 
                 br {
                     display: none;
 
+                }
+
+                .code_bt_m {}
+
+                .code_name_m {
+                    display: none;
+                    position: absolute;
+                    color: $text-black;
+                    font-size: 8px;
+                    font-weight: 600;
+                    top: 13px;
+                    left: 0;
+                    align-items: center;
+                    justify-content: flex-start;
+                    border-radius: 6px;
+                    background-color: $tab-bg-gray;
+                    padding: 1px 6px;
+                    &.active{
+                        display: flex;
+                    }
                 }
             }
         }
@@ -400,6 +449,7 @@
                                 @include tab-view {
                                     max-width: 36px;
                                 }
+
                                 @include mobile-sm-view {
                                     max-width: 29px;
                                 }
@@ -447,6 +497,62 @@
                                 font-size: 12px;
                                 font-weight: 400;
                                 color: $mid_gray_bg;
+                                position: relative;
+
+                                
+
+                                .code_sp_d {
+                                    position: relative;
+                                    cursor: pointer;
+                                    &:hover{
+                                        .name_span_d{
+                                            display: inline-block;
+                                        }
+                                    }
+                                    
+                                    .name_span_d {
+                                        display: none;
+                                        position: absolute;
+                                        color: $text-black;
+                                        font-size: 12px;
+                                        font-weight: 500;
+                                        top: 20px;
+                                        left: 0;
+                                        width: auto;
+                                        margin: 0 auto;
+                                        text-align: center;
+                                        border-radius: 6px;
+                                        background-color: $tab-bg-gray;
+                                        padding: 1px 6px;
+                                    }
+                                }
+                                .code_sp_d2 {
+                                    position: relative;
+                                    cursor: pointer;
+                                    &:hover{
+                                        .name_span_d2{
+                                            display: inline-block;
+                                        }
+                                    }
+                                    .name_span_d2 {
+                                        display: none;
+                                        position: absolute;
+                                        color: $text-black;
+                                        font-size: 12px;
+                                        font-weight: 500;
+                                        top: 20px;
+                                        left: 0;
+                                        width: auto;
+                                        margin: 0 auto;
+                                        text-align: center;
+                                        border-radius: 6px;
+                                        background-color: $tab-bg-gray;
+                                        padding: 1px 6px;
+                                    }
+                                }
+
+                                
+                                
 
                                 @include tab-view {
                                     font-size: 8px;
@@ -679,6 +785,7 @@
 
             .accordion_body {
                 padding: 15px;
+
                 @include tab-view {
                     padding: 10px;
                 }
@@ -732,6 +839,7 @@
                             font-weight: 500;
                             color: $mid_gray_bg;
                             flex: 3;
+
                             @include tab-view {
                                 font-weight: 400;
                             }

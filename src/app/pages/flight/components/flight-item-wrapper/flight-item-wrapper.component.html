@@ -23,9 +23,15 @@
                                         *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
                                 </span>
                                 <span class="fl_desti">
-                                    {{route.stops[0]?.departure_info?.code}} {{route.stops[0]?.departure_info?.city}} -
-                                    {{route.stops[route.stops.length-1]?.arrival_info?.code}}
-                                    {{route.stops[route.stops.length-1]?.arrival_info?.city}}
+                                   <span class="code_sp_d"> {{route.stops[0]?.departure_info?.code}}
+                                    <span class="name_span_d">{{route.stops[0]?.departure_info?.city}}</span>
+                                   </span> -
+                                   <span class="code_sp_d2"> {{route.stops[route.stops.length-1]?.arrival_info?.code}}
+                                    <span class="name_span_d2">
+                                        {{route.stops[route.stops.length-1]?.arrival_info?.city}}
+                                    </span>
+                                   </span>
+                                    
                                 </span>
                             </div>
                         </div>
@@ -83,8 +89,13 @@
                                             <span class="fl_times duel_wrps">
                                                 {{route.stops[0].departure_time}}
                                                 <span class="fl_desitines">
-                                                    {{route.stops[0]?.departure_info?.code}}<br>
-                                                    {{route.stops[0]?.departure_info?.city}}
+                                                    <span class="code_bt_m">
+                                                        {{route.stops[0]?.departure_info?.code}}
+                                                    </span>
+                                                    <br>
+                                                    <span class="code_name_m">
+                                                        {{route.stops[0]?.departure_info?.city}}
+                                                    </span>
                                                 </span>
                                             </span>
                                             <span class="pipe_wrap">
@@ -107,8 +118,12 @@
                                                         *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
                                                 </span>
                                                 <div class="fl_name_inner">
-                                                    {{route.stops[route.stops.length-1]?.arrival_info?.code}} <br>
-                                                    {{route.stops[route.stops.length-1]?.arrival_info?.city}}
+                                                    <span class="code_bt_m">
+                                                        {{route.stops[route.stops.length-1]?.arrival_info?.code}}
+                                                    </span><br>
+                                                    <span class="code_name_m">
+                                                        {{route.stops[route.stops.length-1]?.arrival_info?.city}}
+                                                    </span>
                                                 </div>
                                             </span>
                                         </div>
@@ -191,7 +206,7 @@
             <div class="accordion_body">
                 <div class="io_ru_wrps">
                     <div class="installment_wprs">
-                        <div class="type_lines" >
+                        <div class="type_lines">
                             <span class="titles">
                                 Installment Option 1
                             </span>
@@ -204,7 +219,7 @@
                                 Flights within 30 days of travel not available in installments
                             </span>
                         </div>
-                        <div class="type_lines" >
+                        <div class="type_lines">
                             <span class="titles">
                                 Installment Option 2
                             </span>
@@ -217,13 +232,14 @@
                                 Flights within 30 days of travel not available in installments
                             </span>
                         </div>
-                        <div class="type_lines" >
+                        <div class="type_lines">
                             <span class="titles">
                                 Installment Option 3
                             </span>
                             <span class="texts" *ngIf="item.start_price>0">
                                 ${{item.third_down_payment | number : '1.2-2'}} downpayment and
-                                {{item.no_of_weekly_installment_3}} weekly installments of ${{item.secondary_start_price_3 |
+                                {{item.no_of_weekly_installment_3}} weekly installments of
+                                ${{item.secondary_start_price_3 |
                                 number : '1.2-2'}}
                             </span>
                             <span class="texts" *ngIf="item.start_price==0">

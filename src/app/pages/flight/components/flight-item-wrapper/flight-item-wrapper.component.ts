@@ -100,6 +100,23 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       this.cartItems = cartItems;
     })
 
+    
+
+  }
+  loadJquery() {
+    $("body").click(function () {
+      $(".code_name_m").hide();
+    });
+    $(".code_bt_m").click(function (e){
+      e.stopPropagation();
+      $(this).siblings(".code_name_m").toggle();
+      //$(".code_name_m").show();
+    });
+    $('.code_name_m').click(
+      function (e) {
+        e.stopPropagation();
+      }
+    );
   }
 
   ngDoCheck() {

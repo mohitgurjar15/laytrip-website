@@ -158,7 +158,11 @@ a {
     
   }
 }
-
+.block_cookie_policy_main{
+  .modal-content{
+    border-radius: 10px;
+  }
+}
 .ar_field {
   .ng-select {
     &.ng-select-disabled {
@@ -495,7 +499,7 @@ select {
   &.dobs_account {
     .error_img {
       top: 40px;
-      right: 45px;
+      right: 15px;
     }
   }
 }

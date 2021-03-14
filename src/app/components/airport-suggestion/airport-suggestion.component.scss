@@ -116,7 +116,7 @@ ng-scrollbar {
         margin-top: 20px;
 
         @include tab-view{
-            display: flex;
+            display: none;
         }
 
         a {

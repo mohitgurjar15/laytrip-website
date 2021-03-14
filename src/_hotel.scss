@@ -14,6 +14,7 @@ $tab-max: 1032px;
 $ipad-view: 991px;
 $tab-view: 768px;
 $mobile-view: 558px;
+$mobile-md-view: 530px;
 $mobile-sm-view: 480px;
 $mobile-xsm-view: 370px;
 
@@ -39,6 +40,11 @@ $mobile-xsm-view: 370px;
 }
 @mixin  mobile-view {
     @media (max-width: #{$mobile-view}) {
+        @content;
+    }
+}
+@mixin  mobile-md-view {
+    @media (max-width: #{$mobile-md-view}) {
         @content;
     }
 }
