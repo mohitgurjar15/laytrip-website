@@ -129,6 +129,7 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.getStates = function (countryId) {
         var _this = this;
+        this.profileForm.controls.state_id.setValue('');
         this.genericService.getStates(countryId.id).subscribe(function (data) {
             _this.stateList = data;
         }, function (error) {

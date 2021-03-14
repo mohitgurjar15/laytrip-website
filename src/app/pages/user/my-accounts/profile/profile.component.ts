@@ -145,7 +145,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getStates(countryId) {
-
+    this.profileForm.controls.state_id.setValue('');
     this.genericService.getStates(countryId.id).subscribe((data: any) => {
       this.stateList = data;
     }, (error: HttpErrorResponse) => {

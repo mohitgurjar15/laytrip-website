@@ -24,6 +24,7 @@ var TravellerFormComponent = /** @class */ (function () {
         this.checkOutService = checkOutService;
         this.modalService = modalService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.index = 0;
         this.loadingValue = new core_1.EventEmitter();
         this.travelerFormChange = new core_1.EventEmitter();
         this.deleteTravelerId = new core_1.EventEmitter();
@@ -52,6 +53,7 @@ var TravellerFormComponent = /** @class */ (function () {
         };
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
+        console.log(this.index);
         // this.getCountry();
         var location = this.cookieService.get('__loc');
         try {
@@ -315,6 +317,9 @@ var TravellerFormComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], TravellerFormComponent.prototype, "travellerId");
+    __decorate([
+        core_1.Input()
+    ], TravellerFormComponent.prototype, "index");
     __decorate([
         core_1.Input()
     ], TravellerFormComponent.prototype, "travelerInfo");

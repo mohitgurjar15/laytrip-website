@@ -24,6 +24,7 @@ export class TravellerFormComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Input() travellerId: any;
+  @Input() index: number = 0;
   @Input() travelerInfo: any;
   @Input() countries: [];
   @Output() loadingValue = new EventEmitter<boolean>();
@@ -74,6 +75,7 @@ export class TravellerFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.index)
     // this.getCountry();
     let location: any = this.cookieService.get('__loc');
     try {
