@@ -57,6 +57,7 @@ var ProfileComponent = /** @class */ (function () {
         this.countries = [];
         this.countries_code = [];
         this.stateList = [];
+        this.customPatterns = { '0': { pattern: new RegExp('\[0-9\]') } };
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.loadingValue.emit(true);
@@ -216,7 +217,7 @@ var ProfileComponent = /** @class */ (function () {
                 gender: res.gender ? res.gender : 'M',
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
-                dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
+                dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? _this.commonFunction.convertDateMMDDYYYY(res.dob, 'YYYY-MM-DD') : '',
                 country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
                 phone_no: res.phoneNo,
                 city: res.cityName,
@@ -235,7 +236,6 @@ var ProfileComponent = /** @class */ (function () {
                 jwt_helper_1.redirectToLogin();
             }
             else {
-                // this.toastr.error(error.message, 'Profile Error');
                 _this.toastr.show(error.message, 'Profile Error', {
                     toastClass: 'custom_toastr',
                     titleClass: 'custom_toastr_title',
@@ -301,7 +301,7 @@ var ProfileComponent = /** @class */ (function () {
                 formdata.append("country_code", this.selectResponse.countryCode);
             }
             formdata.append("zip_code", this.profileForm.value.zip_code ? this.profileForm.value.zip_code : this.selectResponse.zipCode);
-            formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+            formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? this.commonFunction.convertDateYYYYMMDD(this.profileForm.value.dob, 'MM/DD/YYYY') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
             this.isFormControlEnable = false;
             this.profileForm.controls['home_airport'].disable();
             this.profileForm.controls['country_code'].disable();
@@ -309,6 +309,11 @@ var ProfileComponent = /** @class */ (function () {
             this.profileForm.controls['state_id'].disable();
             this.userService.updateProfile(formdata).subscribe(function (data) {
                 // this.submitted = false;
+                _this.toastr.show('sd', 'Profile Error', {
+                    toastClass: 'custom_toastr',
+                    titleClass: 'custom_toastr_title',
+                    messageClass: 'custom_toastr_message'
+                });
                 _this.loadingValue.emit(false);
                 localStorage.setItem("_lay_sess", data.token);
                 // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');

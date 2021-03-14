@@ -81,6 +81,9 @@ var CommonFunction = /** @class */ (function () {
     CommonFunction.prototype.convertDateYYYYMMDD = function (date, sourceFormat) {
         return moment(date, sourceFormat).format('YYYY-MM-DD');
     };
+    CommonFunction.prototype.convertDateMMDDYYYY = function (date, sourceFormat) {
+        return moment(date, sourceFormat).format('MM/DD/YYYY');
+    };
     CommonFunction.prototype.dateFormat = function (languageCode) {
         if (languageCode === void 0) { languageCode = null; }
         var dateFormats = {
@@ -195,6 +198,12 @@ var CommonFunction = /** @class */ (function () {
         for (var i = 48; i < 58; i++)
             a.push(i);
         if ((a.indexOf(k) >= 0))
+            event.preventDefault();
+    };
+    CommonFunction.prototype.preventSpecialCharacter = function (event) {
+        var a = [];
+        var k = event.charCode;
+        if ((k >= 33 && k <= 91) || k == 32 || k == 64 || (k >= 123 && k <= 126) || (k >= 92 && k <= 96))
             event.preventDefault();
     };
     CommonFunction = __decorate([

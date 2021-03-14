@@ -70,7 +70,7 @@ export class CheckoutComponent implements OnInit {
   isSessionTimeOut: boolean = false;
   bookingTimerConfig;
   isBookingRequest = false;
-
+  inValidCartTravller=[];
   totalCard: number = 0;
   add_new_card = false;
   alertErrorMessage: string = '';
@@ -124,7 +124,7 @@ export class CheckoutComponent implements OnInit {
           selling_price: items.data[i].oldModuleInfo[0].selling_price
         };
         cart.travelers = items.data[i].travelers;
-        cart.is_available = items.data[i].id == 1265 ? false : items.data[i].is_available;
+        cart.is_available = items.data[i].is_available;
         cart.id = items.data[i].id;
         this.carts.push(cart);
 
@@ -286,19 +286,45 @@ export class CheckoutComponent implements OnInit {
 
   validateCartItems() {
     this.validationErrorMessage = '';
-    if (!this.isValidTravelers) {
-      this.validationErrorMessage = 'Complete required fields in Traveler Details for '
-      let message = '';
-      for (let i in Object.keys(this.travelerForm.controls)) {
-        message = '';
-        if (this.travelerForm.controls[`type${i}`].status == "INVALID") {
-          message = `${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
-          this.validationErrorMessage += message;
+    let message = '';
+    this.inValidCartTravller=[];
+    for (let i in Object.keys(this.travelerForm.controls)) {
+      message = '';
+      for(let j=0; j< this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++){
+        if(typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status=='INVALID'){
+
+          if(this.validationErrorMessage==''){
+            this.validationErrorMessage = 'Complete required fields in Traveler Details for'
+          }
+          
+          if(!this.inValidCartTravller.includes(i)){
+            message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+            this.validationErrorMessage += message;
+          }
+          this.isValidTravelers=false;
+          this.inValidCartTravller.push(i)
+        }
+        if(typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status=='VALID'){
+
+          if(this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].value.userId==""){
+
+            if(this.validationErrorMessage==''){
+              this.validationErrorMessage = 'Complete required fields in Traveler Details for'
+            }
+            if(!this.inValidCartTravller.includes(i)){
+              message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+              this.validationErrorMessage += message;
+            }
+            
+            this.isValidTravelers=false;
+            this.inValidCartTravller.push(i)
+          }
         }
       }
-      let index = this.validationErrorMessage.lastIndexOf(" ");
-      this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
     }
+
+    let index = this.validationErrorMessage.lastIndexOf(" ");
+    this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
 
     let cartAlerts: any = localStorage.getItem("__alrt")
     this.alertErrorMessage = '';
@@ -356,6 +382,7 @@ export class CheckoutComponent implements OnInit {
       $('#sign_in_modal').modal('show');
       return false;
     }
+    
     let carts = this.carts.map(cart => { return { cart_id: cart.id } })
     this.bookingRequest.card_token = this.cardToken;
     this.bookingRequest.selected_down_payment = this.priceSummary.selectedDownPayment;

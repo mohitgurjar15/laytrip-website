@@ -278,6 +278,7 @@ export class ListTravellerComponent implements OnInit {
     } else {
       this.showNewForm = false;
     }
+
   }
 
   showForm(){

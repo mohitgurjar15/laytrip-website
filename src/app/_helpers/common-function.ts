@@ -94,6 +94,11 @@ export class CommonFunction {
         return moment(date, sourceFormat).format('YYYY-MM-DD')
 
     }
+    convertDateMMDDYYYY(date, sourceFormat) {
+
+        return moment(date, sourceFormat).format('MM/DD/YYYY')
+
+    }
     dateFormat(languageCode = null) {
 
         const dateFormats = {

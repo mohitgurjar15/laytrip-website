@@ -14,18 +14,18 @@
                 <span class="tr_type">
                   {{x==0?'Primary Traveler':travlerLabels['en'][traveler.controls.type.value]}}
                 </span>
-                <span class="trv_name ">
+                <span class="trv_name hide_section">
                   {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
                   +travelerItem.value.adults[x].last_name:'' | titlecase}}
                 </span>
               </a>
-              <a class="dropdown-toggle traveler_drop_down"
+              <a *ngIf="isTravller" class="dropdown-toggle traveler_drop_down"
                 data-toggle="dropdown">{{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + '
                 '
                 +travelerItem.value.adults[x].last_name:'Saved Travelers' | titlecase}}</a>
-              <ul class="dropdown-menu options_name">
+              <ul *ngIf="isTravlle" class="dropdown-menu options_name" >
                 <ng-container *ngFor="let user of myTravelers">
-                  <li (click)='selectTraveler(user.userId,x)' *ngIf="user.user_type==traveler.controls.type.value">
+                  <li (click)='selectTraveler(user.userId,x)' *ngIf="user.user_type==traveler.controls.type.value && traveler.roleId!=7">
                     {{user.firstName}} {{user.lastName}}</li>
                 </ng-container>
               </ul>
@@ -80,7 +80,8 @@
                       <div *ngIf="traveler.controls.last_name.touched && traveler.controls.last_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please enter your last name.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          enter your last name.</small>
                         <small *ngIf="traveler.controls.last_name.errors.pattern" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                           {{'last_name_string_validation' | translate}} </small>
@@ -93,9 +94,15 @@
                         <option value="F">Female</option>
                         <option value="O">Other</option>
                       </select>
+                      <!-- <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender">
+                        <ng-option value="M">Male</ng-option>
+                        <ng-option value="F">Female</ng-option>
+                        <ng-option value="O">Other</ng-option> 
+                    </ng-select> -->
                       <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors" class="error">
                         <small *ngIf="traveler.controls.gender.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please select your gender.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          select your gender.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
@@ -104,13 +111,16 @@
                       <input type="email" class="form-control" formControlName="email" tabindex={{x}}>
                       <div *ngIf="traveler.controls.email.touched && traveler.controls.email.errors" class="error">
                         <small *ngIf="traveler.controls.email.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please enter your email address.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          enter your email address.</small>
                         <small *ngIf="traveler.controls.email.errors.pattern" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please enter valid email address.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          enter valid email address.</small>
                       </div>
                       <div *ngIf="traveler.controls.is_duplictae_email.value==true" class="error">
                         <small *ngIf="traveler.controls.email.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Traveler with this email already exists.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
+                            class="error_img">Traveler with this email already exists.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps mandetory_wrps"
@@ -138,10 +148,19 @@
                     </div>
                     <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps">
                       <label for="">{{'dob' | translate}}*</label>
-                      <input onkeydown="return false" type="text" class="form-control" bsDatepicker tabindex={{x}}
+                      <!-- <input onkeydown="return false" type="text" class="form-control" bsDatepicker tabindex={{x}}
                         formControlName="dob" [bsConfig]="bsConfig" [minDate]="traveler.controls.dobMinDate.value"
-                        [maxDate]="traveler.controls.dobMaxDate.value">
-                        <!-- <input placeholder="MM/DD/YYYY" type="text" class="form-control"  tabindex={{x}}> -->
+                        [maxDate]="traveler.controls.dobMaxDate.value"> -->
+                      <input placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}}
+                        [textMask]="dateYeaMask" formControlName="dob">
+                      <div *ngIf="traveler.controls.dob.touched && traveler.controls.dob.errors" class="error">
+                        <small *ngIf="traveler.controls.dob.errors.required" class="error_field">
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                          Please enter your date of birth.</small>
+                        <small *ngIf="traveler.controls.dob.errors.pattern" class="error_field">
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
+                            class="error_img">Please enter your valid date of birth.</small>
+                      </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10"
                       *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_number')">
@@ -150,9 +169,9 @@
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10"
                       *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_expiry')">
-                      <label for="">Expiration Date*</label>
+                      <label for="">Expiration*</label>
                       <input type="text" class="form-control" bsDatepicker formControlName="passport_expiry"
-                      tabindex={{x}} [bsConfig]="bsConfig" [minDate]="passPortMinDate">
+                        tabindex={{x}} [bsConfig]="bsConfig" [minDate]="passPortMinDate">
                     </div>
 
 

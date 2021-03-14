@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
   countries = [];
   countries_code = [];
   stateList = [];
-
+  public customPatterns = { '0': { pattern: new RegExp('\[0-9\]')} };
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -228,7 +228,6 @@ export class ProfileComponent implements OnInit {
       this.is_type = res.gender ? res.gender : 'M';
       var countryId = { id: res.country.id ? res.country.id : 233 };
       this.getStates(countryId);
-
       this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
       this.profileForm.patchValue({
         first_name: res.firstName,
@@ -237,7 +236,7 @@ export class ProfileComponent implements OnInit {
         gender: res.gender ? res.gender : 'M',
         zip_code: res.zipCode,
         title: res.title ? res.title : 'mr',
-        dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? new Date(res.dob) : '',
+        dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? this.commonFunction.convertDateMMDDYYYY(res.dob,'YYYY-MM-DD') : '',
         country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
         phone_no: res.phoneNo,
         city : res.cityName,
@@ -258,7 +257,6 @@ export class ProfileComponent implements OnInit {
       if (error.status === 401) {
         redirectToLogin();
       } else {
-        // this.toastr.error(error.message, 'Profile Error');
         this.toastr.show(error.message, 'Profile Error', {
           toastClass: 'custom_toastr',
           titleClass: 'custom_toastr_title',
@@ -267,6 +265,7 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
+
 
   onSubmit() {
     // this.submitted = true;
@@ -322,7 +321,7 @@ export class ProfileComponent implements OnInit {
       }
 
       formdata.append("zip_code", this.profileForm.value.zip_code ? this.profileForm.value.zip_code : this.selectResponse.zipCode);
-      formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+      formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? this.commonFunction.convertDateYYYYMMDD(this.profileForm.value.dob,'MM/DD/YYYY') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
 
       this.isFormControlEnable = false;
       this.profileForm.controls['home_airport'].disable();
@@ -332,6 +331,11 @@ export class ProfileComponent implements OnInit {
 
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         // this.submitted = false;
+        this.toastr.show('sd', 'Profile Error', {
+          toastClass: 'custom_toastr',
+          titleClass: 'custom_toastr_title',
+          messageClass: 'custom_toastr_message',
+        });
         this.loadingValue.emit(false);
         localStorage.setItem("_lay_sess", data.token);
         // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');

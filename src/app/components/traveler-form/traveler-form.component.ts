@@ -12,6 +12,8 @@ declare var $: any;
 import * as moment from 'moment';
 import { TravelerService } from '../../services/traveler.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { DatePipe } from '@angular/common';
+import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
 @Component({
   selector: 'app-traveler-form',
   templateUrl: './traveler-form.component.html',
@@ -31,9 +33,10 @@ export class TravelerFormComponent implements OnInit {
   selectedType;
   traveler_number: number = 0;
   countries = []
-  myTravelers;
+  myTravelers=[];
   travlerLabels;
   userId;
+  userInfo;
   travelers = {
     type0: {
       adults: [],
@@ -71,7 +74,13 @@ export class TravelerFormComponent implements OnInit {
 
   bsConfig: Partial<BsDatepickerConfig>;
   passPortMinDate = new Date();
-
+  dateYeaMask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+  };
+  isTravller:boolean=true;
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -82,11 +91,17 @@ export class TravelerFormComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {
     this.travlerLabels = travlerLabels;
+    this.userInfo=getLoginUserInfo();
+    
   }
 
   ngOnInit() {
     this.loadJquery();
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MM/DD/YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
+    if(this.myTravelers.length==0){
+      this.isTravller=false;
+    }
+    console.log("this.myTravelers",this.myTravelers,this.isTravller)
 
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
@@ -145,7 +160,6 @@ export class TravelerFormComponent implements OnInit {
         let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
         this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
         this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
-        this.userId = traveler.userId;
         this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
         this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
         this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender;
@@ -310,7 +324,7 @@ export class TravelerFormComponent implements OnInit {
       passport_number: (x.is_passport_required) ? [x.passport_number, [Validators.required]] : [x.passport_number],
       passport_expiry: (x.is_passport_required) ? [x.passport_expiry || null, [Validators.required]] : [x.passport_expiry],
       is_passport_required: [x.is_passport_required, [Validators.required]],
-      dob: [x.dob ? moment(x.dob).toDate() : '', [Validators.required]],
+      dob: [x.dob ? x.dob : '', [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
       country_id: [x.country_id ? x.country_id : 233, [Validators.required]],
       gender: [x.gender, [Validators.required]],
       userId: [x.userId],
@@ -405,6 +419,8 @@ export class TravelerFormComponent implements OnInit {
   } */
   saveTraveler(cartNumber, traveler_number) {
 
+    console.log("this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value", this.travelerForm.controls[`type${cartNumber}`]['controls'].adults)
+    this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
       console.log("data", data)
@@ -437,10 +453,10 @@ export class TravelerFormComponent implements OnInit {
         }
       }, error => {
         this.cartService.setLoaderStatus(false)
-        if(error.status==409){
+        if (error.status == 409) {
           //this.travelers[`type${cartNumber}`].adults[traveler_number].is_duplictae_email = true;
           //this.patch();
-        } 
+        }
       })
     }
   }
@@ -467,7 +483,7 @@ export class TravelerFormComponent implements OnInit {
   }
 
   editTraveler(cartNumber, traveler_number) {
-    console.log(this.travelerForm)
+    this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       this.cartService.setLoaderStatus(true);
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
@@ -489,14 +505,12 @@ export class TravelerFormComponent implements OnInit {
   }
 
   selectTraveler(travlerId, traveler_number) {
-    console.log(travlerId, traveler_number)
     let traveler = this.myTravelers.find(x => x.userId == travlerId)
     if (traveler && Object.keys(traveler).length > 0) {
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].email = traveler.email;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].userId = traveler.userId;
-      this.userId = traveler.userId;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].gender = traveler.gender;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].phone_no = traveler.phoneNo;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code = traveler.countryCode || '+1';
