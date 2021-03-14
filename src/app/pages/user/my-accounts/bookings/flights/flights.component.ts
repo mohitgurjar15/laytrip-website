@@ -36,7 +36,7 @@ export class FlightsComponent implements OnInit {
   }
   ngOnChanges(changes: SimpleChanges) {
     if(typeof changes['cartItem'].currentValue!='undefined'){
-      this.cartItem=changes['cartItem'].currentValue;
+      this.cartItem=changes['cartItem'].currentValue; 
       this.laytrip_cart_id=changes['laytrip_cart_id'].currentValue;
     }
   } 

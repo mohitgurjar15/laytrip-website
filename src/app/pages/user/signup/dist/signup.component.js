@@ -107,9 +107,8 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.checkEmailExist = function (emailString) {
         var _this = this;
-        if (emailString.toString().length >= 3) {
+        if (this.signupForm.controls.email.valid) {
             this.userService.emailVeryfiy(emailString).subscribe(function (data) {
-                console.log(data);
                 if (data && data.is_available) {
                     _this.is_email_available = data.is_available;
                     _this.emailExist = true;

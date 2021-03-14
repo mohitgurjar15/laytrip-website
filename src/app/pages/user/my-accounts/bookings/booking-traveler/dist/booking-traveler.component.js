@@ -25,6 +25,7 @@ var BookingTravelerComponent = /** @class */ (function () {
     BookingTravelerComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['travelers'].currentValue != 'undefined') {
             this.travelers = changes['travelers'].currentValue.travelers;
+            console.log(changes['travelers'].currentValue);
             this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
             if (this.travelers.length > 0) {
                 this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;

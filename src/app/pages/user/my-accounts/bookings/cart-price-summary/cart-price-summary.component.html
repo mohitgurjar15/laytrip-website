@@ -52,12 +52,12 @@
                 <div class="card">
                     <div class="card-header">
                         <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#listing_descrip">
-                            {{cartItem?.cartInstallments?.length}} {{installmentType[cartItem.installmentType]}} Installments of ${{cartItem?.cartInstallments[0]?.amount | number : '1.2-2'}}
+                            {{cartItem?.cartInstallments?.length -1 }} {{installmentType[cartItem.installmentType]}} Installments of ${{cartItem?.cartInstallments[0]?.amount | number : '1.2-2'}}
                         </a>
                     </div>
                     <div id="listing_descrip" class="collapse show"Paid data-parent="#accordion_listing">
                         <div class="card-body">
-                            <ng-container *ngFor="let installment of cartItem.cartInstallments;let i = index;">
+                            <ng-container *ngFor="let installment of cartItem.cartInstallments | slice:1;let i = index ;">
                                 <div class="line_desc paid_clr" [ngClass]="{'paid_clr' : (installment.instalmentStatus), 'due_clr' : (  installment.dueInstallment && !installment.instalmentStatus),'' : (  !installment.dueInstallment && !installment.instalmentStatus) }">
                                     <div class="left_sec">
                                        #{{i+1}} {{ installment.instalmentStatus ? 'Paid' : 'Due'}}  {{commonFunction.convertCustomDateFormat(installment.instalmentDate,'YYYY-MM-DD','MMM D, YYYY')}} 
@@ -93,7 +93,7 @@
                                     Total Installments
                                 </div>
                                 <div class="right_sec">
-                                    ${{ cartItem?.totalAmount || 0 | number : '1.2-2' }}
+                                    ${{ totalInstallmentAmount || 0 | number : '1.2-2' }}
                                 </div>
                                 <span class="paid_markss"></span>
                             </div>
