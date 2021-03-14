@@ -105,14 +105,36 @@ a {
       .ng-arrow-wrapper{
         padding: 0;
         .ng-arrow{
+          padding: 5px 9px;
           background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
           background-position: right;
           background-repeat: no-repeat;
-          background-size: 11px;
+          background-size: 12px;
+          content: "";
+          transition: 0.3s;
+          right: 8px;
           border: none;
-          height: 11px;
-          width: 11px;
+          top: 0px;
+        }
+      }
+    }
+    &.ng-select-opened > .ng-select-container {
+      .ng-arrow {
+        padding: 5px 9px;
+        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: 12px;
+        content: "";
+        transition: 0.3s;
+        right: 8px;
+        border: none;
+        top: 0px;
 
+        @include tab-view {
+          position: absolute;
+          right: 0;
+          height: 12px;
         }
       }
     }
