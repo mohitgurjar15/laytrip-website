@@ -151,6 +151,7 @@ export class TravellerFormComponent implements OnInit {
       this.isAdult = this.isChild = false;
       this.travellerForm.setErrors(null);
     }
+
     this.travellerForm.patchValue({
       // title: this.travelerInfo.title?this.travelerInfo.title:'mr',
       firstName: this.travelerInfo.firstName ? this.travelerInfo.firstName : '',
@@ -160,7 +161,7 @@ export class TravellerFormComponent implements OnInit {
       phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
       country_code: this.travelerInfo.countryCode ? this.travelerInfo.countryCode : '',
       country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
-      dob: this.travelerInfo.dob ? this.travelerInfo.dob : '',
+      dob: this.travelerInfo.dob ? this.commonFunction.convertDateMMDDYYYY(this.travelerInfo.dob, 'YYYY-MM-DD') : '',
       passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
       passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : '',
     });

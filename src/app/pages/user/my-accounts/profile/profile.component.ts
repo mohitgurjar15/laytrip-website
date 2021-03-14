@@ -228,6 +228,8 @@ export class ProfileComponent implements OnInit {
 
   getProfileInfo() {
     this.userService.getProfile().subscribe((res: any) => {
+      // console.log(this.commonFunction.convertDateMMDDYYYY(res.dob, 'YYYY-MM-DD'))
+
       this.loadingValue.emit(false);
       this.image = res.profilePic;
       this.selectResponse = res;

@@ -24,6 +24,10 @@
 /*------------- color variables ------------*/
 /*----------------- responsive variations -----------------*/
 /*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
 }
@@ -177,11 +181,37 @@
   height: auto !important;
   border: none !important;
 }
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 3px 0 0 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
 .ng-select.country_code .ng-select-container .ng-value-container .ng-value {
   width: 50px;
 }
 .ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
   top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
 }
 
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
@@ -210,6 +240,18 @@
 
 .redeem_laypoint .ng5-slider .ng5-slider-bubble {
   display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
 }
 
 .custom_range_slide p {
@@ -499,6 +541,9 @@
   position: relative;
   bottom: 2px;
 }
+.common_form .mb-sm-10.telephone_wrps .tel_span.error_border {
+  border-color: #ff0000 !important;
+}
 .common_form .mb-sm-10.telephone_wrps .tel_span input {
   border-bottom: none;
 }
@@ -506,12 +551,21 @@
   width: 30px;
 }
 .common_form .mb-sm-10.dobs input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+  /* background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
+    no-repeat; */
   background-size: 20px;
   border: none;
 }
 .common_form .mb-sm-10.dobs .form-control {
   border-bottom: 2px solid #d6d6d6 !important;
+}
+.common_form .mb-sm-10.dobs .form-control.ng-touched.ng-invalid {
+  border-color: #ff0000 !important;
+}
+.common_form .mb-sm-10.expiry_date input {
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+  background-size: 20px;
+  border: none;
 }
 .common_form .mb-sm-10 .gender_anchers {
   display: flex;
@@ -533,21 +587,15 @@
 .common_form .mb-sm-10 .gender_anchers a:focus {
   outline: none;
 }
-.common_form .mb-sm-10 .gender_anchers select {
+.common_form .mb-sm-10 .gender_anchers ng-select {
   width: 100%;
-  padding: 6px 10px 6px 0;
+  padding: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   position: relative;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-  background-position: right;
-  background-repeat: no-repeat;
-  background-size: 11px;
-  transition: 0.3s;
-  right: 0;
-  top: 1px;
   background-color: #ffffff;
+  top: -1px;
 }
 .common_form .edit_btns {
   display: flex;
@@ -557,11 +605,16 @@
   background-color: transparent;
   color: #ffaa00;
   box-shadow: none;
-  font-size: 16px;
+  font-size: 14px;
   padding: 0;
   border: none;
   text-align: right;
   text-decoration: none;
+}
+@media (max-width: 768px) {
+  .common_form .edit_btns button {
+    font-size: 12px;
+  }
 }
 .common_form .edit_btns button:focus {
   outline: none;
