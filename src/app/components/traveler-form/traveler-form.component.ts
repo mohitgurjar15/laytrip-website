@@ -306,8 +306,6 @@ export class TravelerFormComponent implements OnInit {
   }
 
   patchValues(x) {
-    // x.dob = new DatePipe("en-US").transform(x.dob, "MM/dd/yyyy");
-    console.log(x.dob);
     return this.formBuilder.group({
       first_name: [x.first_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
       last_name: [x.last_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
