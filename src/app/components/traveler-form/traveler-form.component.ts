@@ -12,6 +12,7 @@ declare var $: any;
 import * as moment from 'moment';
 import { TravelerService } from '../../services/traveler.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-traveler-form',
   templateUrl: './traveler-form.component.html',
@@ -71,7 +72,12 @@ export class TravelerFormComponent implements OnInit {
 
   bsConfig: Partial<BsDatepickerConfig>;
   passPortMinDate = new Date();
-
+  dateYeaMask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, '/',/\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+  };
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -300,6 +306,7 @@ export class TravelerFormComponent implements OnInit {
   }
 
   patchValues(x) {
+    //x.dob = new DatePipe("en-US").transform(x.dob, "MM/DD/YYYY");
     return this.formBuilder.group({
       first_name: [x.first_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
       last_name: [x.last_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
@@ -310,7 +317,7 @@ export class TravelerFormComponent implements OnInit {
       passport_number: (x.is_passport_required) ? [x.passport_number, [Validators.required]] : [x.passport_number],
       passport_expiry: (x.is_passport_required) ? [x.passport_expiry || null, [Validators.required]] : [x.passport_expiry],
       is_passport_required: [x.is_passport_required, [Validators.required]],
-      dob: [x.dob ? moment(x.dob).toDate() : '', [Validators.required]],
+      dob: [x.dob ? x.dob : '', [Validators.required]],
       country_id: [x.country_id ? x.country_id : 233, [Validators.required]],
       gender: [x.gender, [Validators.required]],
       userId: [x.userId],
@@ -405,6 +412,8 @@ export class TravelerFormComponent implements OnInit {
   } */
   saveTraveler(cartNumber, traveler_number) {
 
+    console.log("this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value",this.travelerForm.controls[`type${cartNumber}`]['controls'].adults)
+    this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
       console.log("data", data)
@@ -467,7 +476,7 @@ export class TravelerFormComponent implements OnInit {
   }
 
   editTraveler(cartNumber, traveler_number) {
-    console.log(this.travelerForm)
+    this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       this.cartService.setLoaderStatus(true);
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;

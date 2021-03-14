@@ -13,7 +13,6 @@ import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { stat } from 'fs';
 
 export interface CartItem {
 
@@ -380,10 +379,8 @@ export class BookingComponent implements OnInit {
       //this.validationErrorMessage = 'Complete required fields in Traveler Details for'
       let message = '';
 
-      console.log(this.carts, "this.carts[i]")
       for (let i in Object.keys(this.travelerForm.controls)) {
         message = '';
-        console.log(this.travelerForm.controls[`type${i}`],"this.travelerForm.controls[`type${i}`]")
         for(let j=0; j< this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++){
           if(typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status=='INVALID'){
 
@@ -415,10 +412,6 @@ export class BookingComponent implements OnInit {
             }
           }
         }
-        /* if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`].status == "INVALID") {
-          message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
-          this.validationErrorMessage += message;
-        } */
       }
 
       let index = this.validationErrorMessage.lastIndexOf(" ");
