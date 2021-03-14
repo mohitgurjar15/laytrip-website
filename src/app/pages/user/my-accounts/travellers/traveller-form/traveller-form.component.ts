@@ -52,6 +52,12 @@ export class TravellerFormComponent implements OnInit {
   isInfant = false;
   isAdult = true;
 
+  dateYeaMask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+  };
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -83,7 +89,7 @@ export class TravellerFormComponent implements OnInit {
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       country_id: ['United States' , [Validators.required]],
       country_code: ['+1', [Validators.required]],
-      dob: ['', Validators.required],
+      dob: ['', [Validators.required,Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
       passport_expiry: [''],
       passport_number: [''],
     }, { validators: phoneAndPhoneCodeValidation() });

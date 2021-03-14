@@ -57,7 +57,13 @@ var ProfileComponent = /** @class */ (function () {
         this.countries = [];
         this.countries_code = [];
         this.stateList = [];
-        this.customPatterns = { '0': { pattern: new RegExp('\[0-9\]') } };
+        this.dateYeaMask = {
+            guide: false,
+            showMask: false,
+            mask: [
+                /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/
+            ]
+        };
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.loadingValue.emit(true);
@@ -70,7 +76,7 @@ var ProfileComponent = /** @class */ (function () {
         this.profileForm = this.formBuilder.group({
             first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            dob: ['', forms_1.Validators.required],
+            dob: ['', forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)],
             country_code: ['', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             address: [''],
@@ -217,7 +223,7 @@ var ProfileComponent = /** @class */ (function () {
                 gender: res.gender ? res.gender : 'M',
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
-                dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? _this.commonFunction.convertDateMMDDYYYY(res.dob, 'YYYY-MM-DD') : '',
+                // dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? moment(res.dob, "YYYY-MM-DD").format('MM/DD/YYYY') : '',
                 country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
                 phone_no: res.phoneNo,
                 city: res.cityName,

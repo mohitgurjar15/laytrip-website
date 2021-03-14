@@ -59,7 +59,13 @@ export class ProfileComponent implements OnInit {
   countries = [];
   countries_code = [];
   stateList = [];
-  public customPatterns = { '0': { pattern: new RegExp('\[0-9\]')} };
+  dateYeaMask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -84,7 +90,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
       first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       last_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      dob: ['', Validators.required],
+      dob: ['', Validators.required,Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)],
       country_code: ['', [Validators.required]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       address: [''],
@@ -236,7 +242,7 @@ export class ProfileComponent implements OnInit {
         gender: res.gender ? res.gender : 'M',
         zip_code: res.zipCode,
         title: res.title ? res.title : 'mr',
-        dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? this.commonFunction.convertDateMMDDYYYY(res.dob,'YYYY-MM-DD') : '',
+        // dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? moment(res.dob, "YYYY-MM-DD").format('MM/DD/YYYY') : '',
         country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
         phone_no: res.phoneNo,
         city : res.cityName,

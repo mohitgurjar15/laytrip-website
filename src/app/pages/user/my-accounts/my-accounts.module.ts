@@ -24,7 +24,6 @@ import { MyWalletComponent } from './my-wallet/my-wallet.component';
 import { SearchTripComponent } from './search-trip/search-trip.component';
 import { FlightTripDetailComponent } from './flight-trip-detail/flight-trip-detail.component';
 import { TripNotFoundComponent } from './trip-not-found/trip-not-found.component';
-import { TextMaskModule } from 'angular2-text-mask';
 import { ConfirmationModalComponent } from '../../../components/confirmation-modal/confirmation-modal.component';
 import { HomeRentalsComponent } from './bookings/home-rentals/home-rentals.component';
 import { PlanSubscriptionComponent } from './plan-subscription/plan-subscription.component';
@@ -35,7 +34,6 @@ import { AccountComponent } from './account/account.component';
 import { PreferancesComponent } from './preferances/preferances.component';
 import { BookingTravelerComponent } from './bookings/booking-traveler/booking-traveler.component';
 import { CartPriceSummaryComponent } from './bookings/cart-price-summary/cart-price-summary.component';
-import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -76,9 +74,7 @@ import { NgxMaskModule } from 'ngx-mask';
     NgbModule,
     CalendarModule,
     FlightModule,
-    TextMaskModule,
-    ComponentsModule,
-    NgxMaskModule.forRoot(),
+    ComponentsModule
   ],
   providers: [DatePipe, NgbActiveModal],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

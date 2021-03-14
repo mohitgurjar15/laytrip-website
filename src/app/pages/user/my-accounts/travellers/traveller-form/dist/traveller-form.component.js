@@ -43,6 +43,13 @@ var TravellerFormComponent = /** @class */ (function () {
         this.isChild = false;
         this.isInfant = false;
         this.isAdult = true;
+        this.dateYeaMask = {
+            guide: false,
+            showMask: false,
+            mask: [
+                /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/
+            ]
+        };
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
         // this.getCountry();
@@ -60,7 +67,7 @@ var TravellerFormComponent = /** @class */ (function () {
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: ['United States', [forms_1.Validators.required]],
             country_code: ['+1', [forms_1.Validators.required]],
-            dob: ['', forms_1.Validators.required],
+            dob: ['', [forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
             passport_expiry: [''],
             passport_number: ['']
         }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });

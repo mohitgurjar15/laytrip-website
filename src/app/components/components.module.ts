@@ -124,7 +124,6 @@ import { AirportSuggestionComponent } from './airport-suggestion/airport-suggest
     RouterModule,
     BsDatepickerModule.forRoot(),
     NgxMaskModule.forRoot(),
-    NgScrollbarModule
   ],
   exports: [
     SearchAirportComponent,
@@ -170,7 +169,8 @@ import { AirportSuggestionComponent } from './airport-suggestion/airport-suggest
     LottieAnimationViewModule,
     DeleteCartitemConfirmationPopupComponent,
     BookingCompletionErrorPopupComponent,
-    AirportSuggestionComponent
+    AirportSuggestionComponent,
+    TextMaskModule
   ],
   providers: [DatePipe, NgxSpinnerService, NgbActiveModal],
   entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent],

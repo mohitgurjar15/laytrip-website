@@ -143,7 +143,8 @@
                 [ngClass]="{'error_main_class':profileForm.controls.dob.touched && profileForm.controls.dob.errors}">
                 <label>{{'dob' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <input type="text" formControlName="dob" placeholder="MM/DD/YYYY" [readonly]="!isFormControlEnable" [patterns]="customPatterns" mask="00/00/0000">
+                    <input type="text" formControlName="dob" placeholder="MM/DD/YYYY" [readonly]="!isFormControlEnable" 
+                    [textMask]="dateYeaMask" >
                     <!-- <p-calendar [disabled]="!isFormControlEnable" dateFormat="mm/dd/yy" class="form-control"
                         panelStyleClass="birth_date" inputId="basic" tabindex="9" formControlName="dob"
                         [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
