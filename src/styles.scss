@@ -64,7 +64,8 @@ a {
     padding: 8px 0;
 
     input {
-      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
+      // background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
+      background-image: none !important;
       background-size: 20px;
       border: none;
       padding: 0;
@@ -75,8 +76,70 @@ a {
       }
     }
   }
+  &.expiry_date{
+    .p-calendar{
+      @include tab-view {
+        width: 100%;
+      }
+    }
+    input {
+      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
+        no-repeat;
+      background-size: 20px;
+      border: none;
+    }
+  }
 }
+.gender_selection{
+  border-bottom: 2px solid $box-border-color;
+  .ng-select{
+    .ng-select-container{
+      border: none;
+      min-height: 34px;
+      .ng-value-container{
+        padding: 0;
+        .ng-input{
+          padding: 0;
+        }
+      }
+      .ng-arrow-wrapper{
+        padding: 0;
+        .ng-arrow{
+          padding: 5px 9px;
+          background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+          background-position: right;
+          background-repeat: no-repeat;
+          background-size: 12px;
+          content: "";
+          transition: 0.3s;
+          right: 8px;
+          border: none;
+          top: 0px;
+        }
+      }
+    }
+    &.ng-select-opened > .ng-select-container {
+      .ng-arrow {
+        padding: 5px 9px;
+        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: 12px;
+        content: "";
+        transition: 0.3s;
+        right: 8px;
+        border: none;
+        top: 0px;
 
+        @include tab-view {
+          position: absolute;
+          right: 0;
+          height: 12px;
+        }
+      }
+    }
+  } 
+}
 .dobs_account {
   .form-control {
     border-radius: 0;
@@ -85,8 +148,8 @@ a {
     padding: 8px 0;
 
     input {
-      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
-      background-size: 20px;
+      // background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0px no-repeat;
+      background-image: none !important;
       border: none;
       padding: 0;
       color: $mid_gray_bg;
@@ -102,8 +165,26 @@ a {
       }
     }
   }
+  &.expiry_date{
+    .p-calendar{
+      @include tab-view {
+        width: 100%;
+      }
+      input {
+        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0
+          no-repeat !important;
+        background-size: 20px !important;
+        border: none;
+      }
+    }
+    
+  }
 }
-
+.block_cookie_policy_main{
+  .modal-content{
+    border-radius: 10px;
+  }
+}
 .ar_field {
   .ng-select {
     &.ng-select-disabled {
@@ -440,7 +521,7 @@ select {
   &.dobs_account {
     .error_img {
       top: 40px;
-      right: 45px;
+      right: 15px;
     }
   }
 }

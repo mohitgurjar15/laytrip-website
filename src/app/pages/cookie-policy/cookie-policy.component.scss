@@ -20,7 +20,7 @@
     align-items: center;
     flex-direction: column;
     text-align: center;
-    padding: 10px 0 0;
+    padding: 0;
     border-radius: 10px;
 
     @include tab-view {
@@ -35,7 +35,7 @@
         .cookie_header{
             color: $active-tab-text;
             font-size: 32px;
-            margin: 5px 0 15px;
+            margin: 15px 0;
             @include tab-view{
                 font-size: 18px;
             }
@@ -43,7 +43,7 @@
         .cookie_msg {
             color: $text_grey_dark;
             font-size: 12px;
-            margin-bottom: 5px;
+            margin-bottom: 25px;
 
             a{
                 color: $txt_clr_blue;
@@ -93,7 +93,7 @@
 
         .logo_wrpper_footer {
             img {
-                height: 32px;
+                height: 22px;
                 margin-top: 20px;
             }
         }

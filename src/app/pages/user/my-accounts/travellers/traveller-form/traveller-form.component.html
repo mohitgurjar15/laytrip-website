@@ -30,17 +30,17 @@
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory">
                 <label for="">{{'gender' |translate}}*</label>
-                <div class="gender_anchers">
-                    <!--  <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender">
+                <div class="gender_anchers gender_selection">
+                     <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender">
                         <ng-option value="M">Male</ng-option>
                         <ng-option value="F">Female</ng-option>
                         <ng-option value="O">Other</ng-option> 
-                    </ng-select> -->
-                    <select tabindex="23" formControlName="gender">
+                    </ng-select>
+                    <!-- <select tabindex="23" formControlName="gender">
                         <option value="M">Male</option>
                         <option value="F">Female</option>
                         <option value="O">Other</option>
-                    </select>
+                    </select> -->
                 </div>
                 <div *ngIf="travellerForm.controls.gender.touched && travellerForm.controls.gender.errors"
                     class="error">
@@ -152,7 +152,7 @@
                         enter your passport number.</small>
                 </div>
             </div>
-            <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account" *ngIf="isAdult || isChild">
+            <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account expiry_date" *ngIf="isAdult || isChild">
                 <label for="">{{'passport_expiry_date' |translate}}</label>
                 <p-calendar [minDate]="expiryMinDate" tabindex="29" dateFormat="M d, yy" class="form-control"
                     panelStyleClass="birth_date" inputId="basic" formControlName="passport_expiry"
