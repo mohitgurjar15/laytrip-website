@@ -52,7 +52,7 @@
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps">
                 <label for="">{{'dob' |translate}}*</label>
-                <input placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}} [textMask]="dateYeaMask"
+                <input placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex="24" [textMask]="dateYeaMask"
                     formControlName="dob">
                 <div *ngIf="travellerForm.controls.dob.touched && travellerForm.controls.dob.errors" class="error">
                     <small *ngIf="travellerForm.controls.dob.errors.required" class="error_field">
