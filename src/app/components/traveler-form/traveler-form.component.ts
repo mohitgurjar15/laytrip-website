@@ -320,6 +320,7 @@ export class TravelerFormComponent implements OnInit {
   }
 
   patchValues(x) {
+    console.log(x);
     return this.formBuilder.group({
       first_name: [x.first_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
       last_name: [x.last_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
@@ -336,7 +337,8 @@ export class TravelerFormComponent implements OnInit {
       userId: [x.userId],
       type: [x.type],
       dobMinDate: [x.dobMinDate],
-      dobMaxDate: [x.dobMaxDate]
+      dobMaxDate: [x.dobMaxDate],
+      is_valid_date: [x.is_valid_date]
     }, { updateOn: 'blur' });
   }
 
@@ -537,5 +539,22 @@ export class TravelerFormComponent implements OnInit {
     }
     this.checkOutService.emitTravelersformData(this.travelerForm);
     this.cd.detectChanges();
+  }
+
+  checkMaximumMinimum(event, dobValue, cartNumber, traveler_number) {
+    // CHECK MAXIMUM OR MINIMUM DATE OF BIRTH
+    if (
+      moment(dobValue)
+        .isAfter(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMinDate).format('MM/DD/YYYY')) &&
+      moment(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMaxDate).format('MM/DD/YYYY'))
+        .isBefore(dobValue)) {
+      this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].dob = dobValue;
+      this.patch();
+    } else {
+      this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = true;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].dob = dobValue;
+      this.patch();
+    }
   }
 }
