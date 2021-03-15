@@ -4,34 +4,39 @@
             <!-- <input type="hidden" formControlName="payment_method_token" id="payment_method_token"> -->
             <input type="hidden" name="payment_method_token" id="payment_method_token">
             <div class="form-row">
-                <div class="col-sm-12 col-md-4 mb-sm-10">
+                <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                     <label for="">Cardholder Name*</label>
                     <input type="text" id="full_name" class="form-control" placeholder="Name on Card">
                     <div class="error">
-                        <small class="error_field credit_card_error" id="first_name" style="display:none">Please enter
+                        <small class="error_field credit_card_error" id="first_name" style="display:none">
+                            <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                            Please enter
                             cardholder name.</small>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-4 mb-sm-10">
+                <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                     <label for="">Credit Card Number*</label>
                     <div id="spreedly-number" class="iframe_wrapper"></div>
                     <div class="error">
-                        <small class="error_field credit_card_error" id="number" style="display:none">Please enter valid
+                        <small class="error_field credit_card_error" id="number" style="display:none">
+                            <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                            Please enter valid
                             credit card number.</small>
                     </div>
                 </div>
             </div>
 
             <div class="form-row margin_top">
-                <div class="col-sm-12 col-md-4 mb-sm-10">
+                <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                     <label>Expiration*</label>
                     <div class="cvv_wrapper">
                         <input type="text" class="spf-input-text spf-exp" id="month-year" placeholder="MM/YYYY"
                             [textMask]="dateYeaMask">
                     </div>
                     <div class="error">
-                        <small class="error_field credit_card_error month_year_error" id="month"
-                            style="display:none">Enter valid expiration date.</small>
+                        <small class="error_field credit_card_error month_year_error" id="month" style="display:none">
+                            <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                            Enter valid expiration date.</small>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-sm-10">

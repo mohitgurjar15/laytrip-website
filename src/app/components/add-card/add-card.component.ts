@@ -102,24 +102,31 @@ export class AddCardComponent implements OnInit {
 
     Spreedly.on('errors', function (errors) {
       $(".credit_card_error").hide();
-      $("#error_message").text("")
+      $("#error_message").text("");
 
       if ($("#full_name").val() == "") {
         $("#first_name").show();
+        $("#full_name").css("border-bottom", "2px solid #ff0000");
       }
       if ($("#month-year").val() == "") {
         $("#month").show();
+        $("#month-year").css("border-bottom", "2px solid #ff0000");
       }
 
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
-        console.log(error);
         if (error["attribute"]) {
-          $("#error_message").text("error")
+          $("#error_message").text("error");
           if (error["attribute"] == 'month' || error["attribute"] == 'year') {
             $('.month_year_error').show();
+            $("#month-year").css("border-bottom", "2px solid #ff0000");
           }
           $("#" + error["attribute"]).show();
+          Spreedly.setStyle(error["attribute"], "border-bottom: 2px solid #ff0000;");
+        } else {
+          $("#full_name").css("border-bottom", "2px solid #d6d6d6");
+          $("#month-year").css("border-bottom", "2px solid #d6d6d6");
+          Spreedly.setStyle(error["attribute"], "border-bottom: 2px solid #d6d6d6;");
         }
       }
     });
@@ -130,6 +137,8 @@ export class AddCardComponent implements OnInit {
       //this.token = token;
       $('#main_loader').show();
       $(".credit_card_error").hide();
+      $("#full_name").css("border-bottom", "2px solid #d6d6d6");
+      $("#month-year").css("border-bottom", "2px solid #d6d6d6");
       let cardData = {
         card_type: pmData.card_type,
         card_holder_name: pmData.full_name,
@@ -171,7 +180,7 @@ export class AddCardComponent implements OnInit {
           $("#payment-form")[0].reset();
           Spreedly.reload();
           var cardTokenNew = obj.cardToken;
-         
+
         },
         error: function (error) {
           console.log(error);
@@ -216,13 +225,13 @@ export class AddCardComponent implements OnInit {
     }
     // Tokenize!
     Spreedly.tokenizeCreditCard(options);
-    
+
     console.log("Submit payment")
     setTimeout(() => {
       this.cardListChangeCount += this.cardListChangeCount + 1;
       this.emitCardListChange.emit(this.cardListChangeCount);
     }, 5000)
-    
+
   }
 
   saveCard(cardData) {

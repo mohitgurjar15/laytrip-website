@@ -533,18 +533,30 @@ export class TravelerFormComponent implements OnInit {
 
   checkMaximumMinimum(event, dobValue, cartNumber, traveler_number) {
     // CHECK MAXIMUM OR MINIMUM DATE OF BIRTH
+    let traveler = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
     if (
       moment(dobValue)
         .isAfter(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMinDate).format('MM/DD/YYYY')) &&
       moment(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMaxDate).format('MM/DD/YYYY'))
         .isBefore(dobValue)) {
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
-      this.travelers[`type${cartNumber}`].adults[traveler_number].dob = dobValue;
-      this.patch();
     } else {
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = true;
-      this.travelers[`type${cartNumber}`].adults[traveler_number].dob = dobValue;
-      this.patch();
     }
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].first_name = traveler.first_name;
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].last_name = traveler.last_name;
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].email = traveler.email;
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].userId = traveler.userId;
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].gender = traveler.gender;
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].phone_no = traveler.phone_no;
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code = traveler.country_code || '+1';
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_id = traveler.country_id != null ? traveler.country_id : '';
+    this.travelers[`type${this.cartNumber}`].adults[traveler_number].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
+
+    if (this.travelers[`type${this.cartNumber}`].adults[traveler_number].is_passport_required) {
+      this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_number = traveler.passport_number;
+      this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_expiry = traveler.passport_expiry ? `${moment(traveler.passport_expiry, "YYYY-MM-DD").format('MMM DD, yy')}` : '';
+    }
+    this.patch();
   }
 }
