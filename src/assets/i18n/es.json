@@ -248,7 +248,7 @@
     "male": "Masculino",
     "female": "Femenino",
     "gender": "Género",
-    "nationality": "Nacionalidad",
+    "nationality": "Country of Issue",
     "select_nationality_placeholder": "Seleccionar nacionalidad",
     "dob_touched_validation": "Seleccione la fecha de nacimiento.",
     "phone_touched_validation": "Ingrese el número de teléfono",

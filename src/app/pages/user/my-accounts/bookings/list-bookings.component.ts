@@ -118,7 +118,6 @@ export class ListBookingsComponent implements OnInit {
   }
   
   cancelCartIdRemove(event){
-    
     var filterData = this.upComingbookings.filter(function(obj){
       return obj.laytripCartId != event
     });
@@ -127,7 +126,6 @@ export class ListBookingsComponent implements OnInit {
   }
 
   loadUpcomming(event){
-    console.log(event);
     this.upComingloading = event;
   }
 }

@@ -121,7 +121,6 @@ var ListBookingsComponent = /** @class */ (function () {
         this.upComingbookings = filterData;
     };
     ListBookingsComponent.prototype.loadUpcomming = function (event) {
-        console.log(event);
         this.upComingloading = event;
     };
     ListBookingsComponent = __decorate([

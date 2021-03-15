@@ -163,9 +163,9 @@
         </div>
         <div class="total_hrs_wrps cta_btns_wrps" *ngIf="(cartItem | json) != '{}'">
           <span class="ct_btns">
-            <a class="hover-link" *ngIf="cartItem?.bookingStatus == 0" (click)="open(content,laytrip_cart_id)">
+            <!-- <a class="hover-link" *ngIf="cartItem?.bookingStatus == 0" (click)="open(content,laytrip_cart_id)">
               Cancel
-            </a>
+            </a> -->
           </span>
           Duration {{cartItem?.moduleInfo[0]?.routes[0]?.duration}}
         </div>
@@ -224,35 +224,7 @@
       </div>
     </div>
 
-    <app-booking-traveler [travelers]="cartItem"
-      [isPassportRequired]="cartItem?.moduleInfo[0]?.routes.is_passport_required"></app-booking-traveler>
-    
+    <app-booking-traveler [travelers]="cartItem" [laytrip_cart_id]="laytrip_cart_id"
+      [isPassportRequired]="cartItem?.moduleInfo[0]?.routes.is_passport_required"  (laytripCartId)="cancelCartIdRemove($event)"></app-booking-traveler>
+
   </ng-container>
-
-
-  <ng-template #content let-modal>
-    <div class="delete_account_block">
-      <div class="modal-header">
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="block_im">
-          <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
-        </div>
-        <h4 class="modal-title" id="modal-basic-title">Canceling this item will cancel all items you purchased under
-          this Booking ID. Please confirm.</h4>
-
-        <div class="cta_btn_wrps">
-          <button class="btn_no" (click)="modal.dismiss('Cross click')">Go Back</button>
-          <button class="btn_yes" (click)="cancelBooking()">Confirm</button>
-        </div>
-        <div class="footer_logo">
-          <a>
-            <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
-          </a>
-        </div>
-      </div>
-    </div>
-  </ng-template>

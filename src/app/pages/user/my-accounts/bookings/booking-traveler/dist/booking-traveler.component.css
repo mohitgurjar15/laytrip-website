@@ -890,3 +890,188 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
     font-size: 12px;
   }
 }
+
+.delete_account_block .modal-header {
+  justify-content: center;
+  border: none;
+  padding: 25px;
+}
+.delete_account_block .modal-header .close {
+  opacity: 1;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.delete_account_block .modal-header .close img {
+  width: 12px;
+}
+@media (max-width: 558px) {
+  .delete_account_block .modal-header .close {
+    top: 15px;
+    right: 15px;
+  }
+}
+.delete_account_block .modal-body {
+  width: 100%;
+  padding: 0px 15px 20px;
+}
+@media (max-width: 768px) {
+  .delete_account_block .modal-body {
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    flex-flow: column;
+  }
+}
+.delete_account_block .modal-body .block_im {
+  margin: 0 auto 15px;
+  width: 85px;
+}
+.delete_account_block .modal-body h4 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 500;
+  color: #0043ff;
+  padding: 0px 0px 15px;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .delete_account_block .modal-body h4 {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+@media (max-width: 558px) {
+  .delete_account_block .modal-body h4 {
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
+  }
+}
+.delete_account_block .modal-body .check {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 30px;
+}
+.delete_account_block .modal-body .check .custom_checkbox {
+  position: relative;
+  margin-bottom: 0;
+  vertical-align: middle;
+  line-height: normal;
+  display: inline;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: #878787;
+  text-transform: none;
+}
+.delete_account_block .modal-body .check .custom_checkbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.delete_account_block .modal-body .check .custom_checkbox input:checked ~ .checkmark {
+  border-color: #0044fb;
+}
+.delete_account_block .modal-body .check .custom_checkbox input:checked ~ .checkmark:after {
+  opacity: 1;
+}
+.delete_account_block .modal-body .check .custom_checkbox .checkmark {
+  width: 14px;
+  min-width: 14px;
+  height: 14px;
+  display: inline-block;
+  border: 1px solid #0044fb;
+  vertical-align: middle;
+  margin-right: 11px;
+  position: relative;
+}
+.delete_account_block .modal-body .check .custom_checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  width: 4px;
+  height: 8px;
+  border-radius: 2px;
+  border: solid #0044fb;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  border-radius: 0px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transition: all 0.2s;
+  opacity: 0;
+}
+.delete_account_block .modal-body .cta_btn_wrps {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+}
+.delete_account_block .modal-body .cta_btn_wrps button {
+  max-width: 472px;
+  width: 100%;
+  height: 40px;
+  padding: 10px 25px;
+  background: #F826C1;
+  border-radius: 25px;
+  border: 1px solid #F826C1;
+  font-size: 14px;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+  display: flex;
+  margin: 0 10px;
+  align-items: center;
+  justify-content: center;
+}
+.delete_account_block .modal-body .cta_btn_wrps button:hover {
+  border: 1px solid #F826C1;
+  color: #ffffff;
+  background: #F826C1;
+}
+.delete_account_block .modal-body .cta_btn_wrps button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.delete_account_block .modal-body .footer_logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+.delete_account_block .modal-body .footer_logo img {
+  max-width: 62px;
+  height: 23px;
+}
+.delete_account_block .modal-footer {
+  padding: 0 20px 25px;
+  border: 0;
+  margin: 0;
+}
+.delete_account_block .modal-footer .modal_btm {
+  width: 100%;
+}
+.delete_account_block .modal-footer .modal_btm .block_logo {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 0;
+}
+.delete_account_block .modal-footer .modal_btm .block_logo img {
+  height: 22px;
+}

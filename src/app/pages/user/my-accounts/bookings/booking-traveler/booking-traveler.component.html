@@ -53,7 +53,7 @@
                                 disabled>
                         </div>
                         <div class="col-sm-12 col-md-4">
-                            <label for="">Country *</label>
+                            <label for="">Country of Issue *</label>
                             <input type="text" class="form-control" 
                                 placeholder="{{traveler.travelerInfo.countryId ? getContryName(traveler.travelerInfo.countryId) : ''}}"
                                 disabled>
@@ -116,8 +116,35 @@
         </div>
     </div>
     <div class="bottom_cta_btn">
-        <a class="hover-link">
+        <a class="hover-link"  (click)="open(content,laytrip_cart_id)">
           Cancel Entire Booking
         </a>
-      </div>
+    </div>
 </div>
+
+<ng-template #content let-modal>
+    <div class="delete_account_block">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="block_im">
+          <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
+        </div>
+        <h4 class="modal-title" id="modal-basic-title">Canceling this item will cancel all items you purchased under
+          this Booking ID. Please confirm.</h4>
+
+        <div class="cta_btn_wrps">
+          <button class="btn_no" (click)="modal.dismiss('Cross click')">Go Back</button>
+          <button class="btn_yes" (click)="cancelBooking()">Confirm</button>
+        </div>
+        <div class="footer_logo">
+          <a>
+            <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-template>

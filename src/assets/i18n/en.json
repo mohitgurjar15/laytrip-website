@@ -249,7 +249,7 @@
     "male": "Male",
     "female": "Female",
     "gender": "Gender",
-    "nationality": "Country",
+    "nationality": "Country of Issue",
     "select_nationality_placeholder": "Select country",
     "dob_touched_validation": "Please enter your date of birth.",
     "phone_touched_validation": "Please enter your phone number.",
