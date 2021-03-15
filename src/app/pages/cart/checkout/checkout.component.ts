@@ -178,6 +178,14 @@ export class CheckoutComponent implements OnInit {
       this.loading=state;
     })
 
+    this.genericService.getCardItems.subscribe((res:any)=>{
+
+      if(this.totalCard!=res.length){
+        this.totalCard=res.length;
+        this.add_new_card = false;
+      }
+    })
+
   }
 
   sessionTimeout(event) {
@@ -234,7 +242,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getCardListChange(data) {
-    this.add_new_card = false;
+    //this.add_new_card = false;
     this.cardListChangeCount = data;
   }
 
@@ -500,7 +508,7 @@ export class CheckoutComponent implements OnInit {
 
   totalNumberOfcard(event) {
     console.log(event);
-    this.totalCard = event;
+    //this.totalCard = event;
   }
 
   acceptTermCondition(event) {

@@ -158,12 +158,20 @@ export class BookingComponent implements OnInit {
       this.loading=state;
     })
 
+    this.genericService.getCardItems.subscribe((res:any)=>{
+
+      if(this.totalCard!=res.length){
+        this.totalCard=res.length;
+        this.add_new_card = false;
+      }
+    })
+
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
   }
 
   totalNumberOfcard(event) {
-    console.log(event);
-    this.totalCard = event;
+    console.log(event,"------");
+    //this.totalCard = event;
   }
 
   addNewCard() {
@@ -171,6 +179,7 @@ export class BookingComponent implements OnInit {
   }
 
   closeNewCardPanel(event) {
+    console.log("Event",event)
     this.add_new_card = event;
   }
 
@@ -514,7 +523,7 @@ export class BookingComponent implements OnInit {
   }
 
   getCardListChange(data) {
-    this.add_new_card = false;
+    //this.add_new_card = false;
     this.cardListChangeCount = data;
   }
 
