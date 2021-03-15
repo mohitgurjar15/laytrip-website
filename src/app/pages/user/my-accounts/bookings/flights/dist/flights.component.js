@@ -28,7 +28,7 @@ var FlightsComponent = /** @class */ (function () {
     FlightsComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['cartItem'].currentValue != 'undefined') {
             this.cartItem = changes['cartItem'].currentValue;
-            console.log(this.cartItem);
+            // console.log(this.cartItem)
             this.laytrip_cart_id = changes['laytrip_cart_id'].currentValue;
         }
     };
