@@ -257,6 +257,26 @@
         }
     }
 
+    .bottom_cta_btn{
+        margin-top: 15px;
+        display: flex;
+    width: 100%;
+    justify-content: center;
+        .hover-link {
+            background-color: transparent;
+            color: $text_light_yellow;
+            border: none;
+            box-shadow: none;
+            font-size: 15px;
+            padding: 0;
+
+            @include tab-view{
+                font-size: 12px;
+            }
+
+        }
+    }
+
     .card_title_wrps{
 
         .headin_upper_wrparr{
