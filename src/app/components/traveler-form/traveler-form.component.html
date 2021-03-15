@@ -153,7 +153,8 @@
                         formControlName="dob" [bsConfig]="bsConfig" [minDate]="traveler.controls.dobMinDate.value"
                         [maxDate]="traveler.controls.dobMaxDate.value"> -->
                       <input #dobText placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}}
-                        [textMask]="dateYeaMask" formControlName="dob">
+                        [textMask]="dateYeaMask" formControlName="dob"
+                        (change)="checkMaximumMinimum($event, dobText.value, cartNumber, x)">
                       <div *ngIf="traveler.controls.dob.touched && traveler.controls.dob.errors" class="error">
                         <small *ngIf="traveler.controls.dob.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
@@ -161,20 +162,35 @@
                         <small *ngIf="traveler.controls.dob.errors.pattern" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
                           enter your valid date of birth.</small>
-                        <!-- <small class="error_field" id="maximumDate">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"></small> -->
+                      </div>
+                      <div *ngIf="!traveler.controls.is_valid_date.value" class="error">
+                        <small class="error_field">
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          enter your valid date of birth.</small>
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 mb-sm-10"
+                    <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
                       *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_number')">
                       <label for="">Passport number*</label>
                       <input type="text" class="form-control" formControlName="passport_number" tabindex={{x}}>
+                      <div *ngIf="traveler.controls.passport_number.touched && traveler.controls.passport_number.errors"
+                        class="error">
+                        <small *ngIf="traveler.controls.passport_number.errors.required" class="error_field">
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
+                            class="error_img">Passport number is required.</small>
+                      </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 mb-sm-10"
+                    <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
                       *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_expiry')">
                       <label for="">Expiration*</label>
                       <input type="text" class="form-control" bsDatepicker formControlName="passport_expiry"
                         tabindex={{x}} [bsConfig]="bsConfig" [minDate]="passPortMinDate">
+                      <div *ngIf="traveler.controls.passport_expiry.touched && traveler.controls.passport_expiry.errors"
+                        class="error">
+                        <small *ngIf="traveler.controls.passport_expiry.errors.required" class="error_field">
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
+                            class="error_img">Passport expiration date is required.</small>
+                      </div>
                     </div>
 
 
