@@ -64,6 +64,8 @@
 
                 img {
                     max-width: 150px;
+                    max-height: 70px;
+                    height: 70px;
 
                     @include tab-view {
                         max-width: 110px;
