@@ -23,9 +23,10 @@
                 data-toggle="dropdown">{{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + '
                 '
                 +travelerItem.value.adults[x].last_name:'Saved Travelers' | titlecase}}</a>
-              <ul *ngIf="isTravller" class="dropdown-menu options_name" >
+              <ul *ngIf="isTravller" class="dropdown-menu options_name">
                 <ng-container *ngFor="let user of myTravelers">
-                  <li (click)='selectTraveler(user.userId,x)' *ngIf="user.user_type==traveler.controls.type.value && traveler.roleId!=7">
+                  <li (click)='selectTraveler(user.userId,x)'
+                    *ngIf="user.user_type==traveler.controls.type.value && traveler.roleId!=7">
                     {{user.firstName}} {{user.lastName}}</li>
                 </ng-container>
               </ul>
@@ -151,15 +152,17 @@
                       <!-- <input onkeydown="return false" type="text" class="form-control" bsDatepicker tabindex={{x}}
                         formControlName="dob" [bsConfig]="bsConfig" [minDate]="traveler.controls.dobMinDate.value"
                         [maxDate]="traveler.controls.dobMaxDate.value"> -->
-                      <input placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}}
+                      <input #dobText placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}}
                         [textMask]="dateYeaMask" formControlName="dob">
                       <div *ngIf="traveler.controls.dob.touched && traveler.controls.dob.errors" class="error">
                         <small *ngIf="traveler.controls.dob.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                           Please enter valid date of Birth.</small>
                         <small *ngIf="traveler.controls.dob.errors.pattern" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
-                            class="error_img">Please enter your valid date of birth.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
+                          enter your valid date of birth.</small>
+                        <!-- <small class="error_field" id="maximumDate">
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"></small> -->
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10"
