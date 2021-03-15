@@ -269,10 +269,12 @@ export class TravelerFormComponent implements OnInit {
     $(document).on("click", ".card-header", function () {
       if ($(this).find('.card-link').hasClass('collapsed')) {
         $(this).find('.traveler_drop_down').addClass('hide_section')
+        $(this).find('.mob_names').addClass('hide_section')
       }
       else {
         $(this).find('.trv_name').addClass('hide_section')
         $(this).find('.traveler_drop_down').removeClass('hide_section')
+        $(this).find('.mob_names').removeClass('hide_section')
       }
     })
 
@@ -358,16 +360,24 @@ export class TravelerFormComponent implements OnInit {
     this.patch();
   }
 
-  selectTravelerNumber(event, traveler_number) {
+  selectTravelerNumber(event,cartNumber ,traveler_number) {
     this.traveler_number = traveler_number;
+    let userId= this.travelers[`type${cartNumber}`].adults[traveler_number].userId;
+    console.log("this.travelers",this.travelers[`type${cartNumber}`].adults[traveler_number].userId)
     $(document).on("click", ".card-header", function () {
       if ($(this).find('.card-link').hasClass('collapsed')) {
         $(this).find('.traveler_drop_down').addClass('hide_section')
         $(this).find('.trv_name').removeClass('hide_section')
+        if(userId!=""){
+          $(this).find('.mob_names').addClass('hide_section')
+        }
       }
       else {
         $(this).find('.trv_name').addClass('hide_section')
         $(this).find('.traveler_drop_down').removeClass('hide_section')
+        if(userId!=""){
+          $(this).find('.mob_names').removeClass('hide_section')
+        }
       }
     })
   }
