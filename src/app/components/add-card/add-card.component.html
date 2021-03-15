@@ -24,7 +24,7 @@
 
             <div class="form-row margin_top">
                 <div class="col-sm-12 col-md-4 mb-sm-10">
-                    <label>Expiration Date*</label>
+                    <label>Expiration*</label>
                     <div class="cvv_wrapper">
                         <input type="text" class="spf-input-text spf-exp" id="month-year" placeholder="MM/YYYY"
                             [textMask]="dateYeaMask">
@@ -46,13 +46,12 @@
                         <input type="submit" id="submit_button" class="button" value="Save">
                     </div>
                     <div class="section_description" id="cardError">
-                        <span class="sec_text pt-1" id="cardErrorMessage"></span>
+                        <span class="sec_text pt-1 pr-1" id="cardErrorMessage"></span>
                         <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
                                 alt="Close"></a>
                     </div>
                 </div>
-                <div id="message"></div>
-                <!-- <div id="errors"></div> -->
+                <div id="error_message" style="display: none;"></div>
             </div>
         </div>
     </div>

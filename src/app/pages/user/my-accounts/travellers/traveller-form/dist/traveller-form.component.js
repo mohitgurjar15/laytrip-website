@@ -24,6 +24,7 @@ var TravellerFormComponent = /** @class */ (function () {
         this.checkOutService = checkOutService;
         this.modalService = modalService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.index = 0;
         this.loadingValue = new core_1.EventEmitter();
         this.travelerFormChange = new core_1.EventEmitter();
         this.deleteTravelerId = new core_1.EventEmitter();
@@ -52,6 +53,7 @@ var TravellerFormComponent = /** @class */ (function () {
         };
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
+        console.log(this.index);
         // this.getCountry();
         var location = this.cookieService.get('__loc');
         try {
@@ -131,7 +133,7 @@ var TravellerFormComponent = /** @class */ (function () {
             phone_no: this.travelerInfo.phoneNo ? this.travelerInfo.phoneNo : '',
             country_code: this.travelerInfo.countryCode ? this.travelerInfo.countryCode : '',
             country_id: typeof this.travelerInfo.country != 'undefined' && this.travelerInfo.country ? this.travelerInfo.country.name : '',
-            dob: this.travelerInfo.dob ? this.travelerInfo.dob : '',
+            dob: this.travelerInfo.dob ? this.commonFunction.convertDateMMDDYYYY(this.travelerInfo.dob, 'YYYY-MM-DD') : '',
             passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
             passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : ''
         });
@@ -315,6 +317,9 @@ var TravellerFormComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], TravellerFormComponent.prototype, "travellerId");
+    __decorate([
+        core_1.Input()
+    ], TravellerFormComponent.prototype, "index");
     __decorate([
         core_1.Input()
     ], TravellerFormComponent.prototype, "travelerInfo");

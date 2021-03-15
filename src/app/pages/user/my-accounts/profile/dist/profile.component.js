@@ -129,6 +129,7 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.getStates = function (countryId) {
         var _this = this;
+        this.profileForm.controls.state_id.setValue('');
         this.genericService.getStates(countryId.id).subscribe(function (data) {
             _this.stateList = data;
         }, function (error) {
@@ -209,6 +210,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.getProfileInfo = function () {
         var _this = this;
         this.userService.getProfile().subscribe(function (res) {
+            // console.log(this.commonFunction.convertDateMMDDYYYY(res.dob, 'YYYY-MM-DD'))
             _this.loadingValue.emit(false);
             _this.image = res.profilePic;
             _this.selectResponse = res;

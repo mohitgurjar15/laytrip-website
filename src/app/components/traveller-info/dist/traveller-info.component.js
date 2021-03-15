@@ -28,6 +28,7 @@ var TravellerInfoComponent = /** @class */ (function () {
             "class": 'Economy',
             totalPerson: 0
         };
+        this.toggle = 0;
         this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
         this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
         this.infantValue = parseInt(this.route.snapshot.queryParams['infant']) ? parseInt(this.route.snapshot.queryParams['infant']) : 0;
@@ -44,8 +45,13 @@ var TravellerInfoComponent = /** @class */ (function () {
         });
         $(".add_traveler_").click(function (e) {
             e.stopPropagation();
-            // $(".add_traveler__open").slideToggle("slow");
-            $(".add_traveler__open").show();
+            // $(".add_traveler__open").toggle();
+            if (e.target.nextSibling.classList[2] == 'panel_hide') {
+                $(".add_traveler__open").hide();
+            }
+            else {
+                $(".add_traveler__open").show();
+            }
             $(".add_class_sec_open_").hide();
         });
         $('.add_traveler__open').click(function (e) {

@@ -1,7 +1,7 @@
 <div id="accordion_Bookings" class="accordion_bookings"
     *ngIf="(travelers | json) != '{}' && (moduleInfo | json) != '{}' ">
-    <div class="card traveller_card_accr" *ngFor="let traveler of travelers">
-        <div class="card-header tr_card_header">
+    <div class="card traveller_card_accr" *ngFor="let traveler of travelers; let last = last;">
+        <div class="card-header tr_card_header {{last}}" >
             <a class="card-link ">
                 {{traveler.roleId == 6 ?'Primary Traveler':'Additional Traveler'}} 
             </a>
@@ -115,4 +115,9 @@
             </div>
         </div>
     </div>
+    <div class="bottom_cta_btn">
+        <a class="hover-link">
+          Cancel Entire Booking
+        </a>
+      </div>
 </div>

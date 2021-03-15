@@ -33,7 +33,7 @@ export class TravelerFormComponent implements OnInit {
   selectedType;
   traveler_number: number = 0;
   countries = []
-  myTravelers=[];
+  myTravelers = [];
   travlerLabels;
   userId;
   userInfo;
@@ -80,7 +80,7 @@ export class TravelerFormComponent implements OnInit {
     mask: [
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
-  isTravller:boolean=true;
+  isTravller: boolean = true;
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -91,13 +91,15 @@ export class TravelerFormComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {
     this.travlerLabels = travlerLabels;
-    this.userInfo=getLoginUserInfo();
-    
+    this.userInfo = getLoginUserInfo();
+
   }
 
   ngOnInit() {
     this.loadJquery();
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MM/DD/YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
+
+    console.log("this.myTravelers", this.myTravelers, this.isTravller)
 
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
@@ -119,11 +121,11 @@ export class TravelerFormComponent implements OnInit {
 
     this.checkOutService.getTravelers.subscribe((travelers: any) => {
       this.myTravelers = travelers;
-      if(this.myTravelers.length==0){
-        this.isTravller=false;
+      if (this.myTravelers.length == 0) {
+        this.isTravller = false;
       }
-      else{
-        this.isTravller=true;
+      else {
+        this.isTravller = true;
       }
     })
     this.cartService.getCartTravelers.subscribe((travelers: any) => {
@@ -267,10 +269,12 @@ export class TravelerFormComponent implements OnInit {
     $(document).on("click", ".card-header", function () {
       if ($(this).find('.card-link').hasClass('collapsed')) {
         $(this).find('.traveler_drop_down').addClass('hide_section')
+        $(this).find('.mob_names').addClass('hide_section')
       }
       else {
         $(this).find('.trv_name').addClass('hide_section')
         $(this).find('.traveler_drop_down').removeClass('hide_section')
+        $(this).find('.mob_names').removeClass('hide_section')
       }
     })
 
@@ -316,6 +320,7 @@ export class TravelerFormComponent implements OnInit {
   }
 
   patchValues(x) {
+    console.log(x);
     return this.formBuilder.group({
       first_name: [x.first_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
       last_name: [x.last_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
@@ -332,7 +337,8 @@ export class TravelerFormComponent implements OnInit {
       userId: [x.userId],
       type: [x.type],
       dobMinDate: [x.dobMinDate],
-      dobMaxDate: [x.dobMaxDate]
+      dobMaxDate: [x.dobMaxDate],
+      is_valid_date: [x.is_valid_date]
     }, { updateOn: 'blur' });
   }
 
@@ -356,16 +362,24 @@ export class TravelerFormComponent implements OnInit {
     this.patch();
   }
 
-  selectTravelerNumber(event, traveler_number) {
+  selectTravelerNumber(event,cartNumber ,traveler_number) {
     this.traveler_number = traveler_number;
+    let userId= this.travelers[`type${cartNumber}`].adults[traveler_number].userId;
+    console.log("this.travelers",this.travelers[`type${cartNumber}`].adults[traveler_number].userId)
     $(document).on("click", ".card-header", function () {
       if ($(this).find('.card-link').hasClass('collapsed')) {
         $(this).find('.traveler_drop_down').addClass('hide_section')
         $(this).find('.trv_name').removeClass('hide_section')
+        if(userId!=""){
+          $(this).find('.mob_names').addClass('hide_section')
+        }
       }
       else {
         $(this).find('.trv_name').addClass('hide_section')
         $(this).find('.traveler_drop_down').removeClass('hide_section')
+        if(userId!=""){
+          $(this).find('.mob_names').removeClass('hide_section')
+        }
       }
     })
   }
@@ -424,7 +438,7 @@ export class TravelerFormComponent implements OnInit {
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
-      data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob,"MM/DD/YYYY").format("YYYY-MM-DD");
+      data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
       if (this.travelers[`type${cartNumber}`].adults[traveler_number].is_passport_required) {
         data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
         data.passport_expiry = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
@@ -447,7 +461,7 @@ export class TravelerFormComponent implements OnInit {
             this.travelers[`type${cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
             this.travelers[`type${cartNumber}`].adults[traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy');
           }
-          this.isTravller=true;
+          this.isTravller = true;
           this.checkOutService.setTravelers([...this.myTravelers, traveler]);
           this.patch();
         }
@@ -487,7 +501,7 @@ export class TravelerFormComponent implements OnInit {
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       this.cartService.setLoaderStatus(true);
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
-      data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob,"MM/DD/YYYY").format("YYYY-MM-DD");
+      data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
       data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
       data.passport_expiry = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
       let userId = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.userId;
@@ -525,5 +539,22 @@ export class TravelerFormComponent implements OnInit {
     }
     this.checkOutService.emitTravelersformData(this.travelerForm);
     this.cd.detectChanges();
+  }
+
+  checkMaximumMinimum(event, dobValue, cartNumber, traveler_number) {
+    // CHECK MAXIMUM OR MINIMUM DATE OF BIRTH
+    if (
+      moment(dobValue)
+        .isAfter(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMinDate).format('MM/DD/YYYY')) &&
+      moment(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMaxDate).format('MM/DD/YYYY'))
+        .isBefore(dobValue)) {
+      this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].dob = dobValue;
+      this.patch();
+    } else {
+      this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = true;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].dob = dobValue;
+      this.patch();
+    }
   }
 }

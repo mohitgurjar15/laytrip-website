@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from '../../environments/environment';
 import { HttpClient } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
+import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { catchError, retry } from 'rxjs/operators';
 import { CommonFunction } from './../_helpers/common-function'
 
@@ -11,11 +11,18 @@ import { CommonFunction } from './../_helpers/common-function'
 
 export class GenericService {
 
+  private cardItems = new BehaviorSubject([]);
+  getCardItems = this.cardItems.asObservable();
+
   constructor(
     private http: HttpClient,
     private commonFunction: CommonFunction
   ) {
 
+  }
+
+  setCardItems(cardItems){
+    this.cardItems.next(cardItems)
   }
 
   getAllLangunage() {
