@@ -12,7 +12,18 @@
     padding-left: 0;
   }
 }
+.desk_names{
+  @include tab-view{
+    display: none;
+  }
+}
 
+.mob_names{
+  display: none;
+  @include tab-view{
+    display: block;
+  }
+}
 .img_country_code {
   border-radius: 3px;
 }

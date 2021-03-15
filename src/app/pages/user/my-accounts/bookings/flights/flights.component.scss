@@ -257,7 +257,67 @@
         }
     }
 
-    
+    .card_title_wrps{
+
+        .headin_upper_wrparr{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            margin-bottom: 20px;
+            width: 100%;
+            @include tab-view{
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+            .header_name{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 27px;
+                position: relative; 
+                font-weight: 500;
+                @include tab-view {
+                    font-size: 24px;
+                }
+                .title_image{
+                    border-radius: 50%;
+                    border: 2px solid $pink;
+                    padding: 5px;
+                    height: 38px;
+                    width: 38px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 15px;
+                    img{
+                        width: 24px;
+                    }
+                    @include tab-view{
+                        //display: none;
+                    }
+                }
+                .flight_routing_imgs{
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0 20px;
+                    @include tab-view{
+                        max-width: 110px;
+                    }
+                }
+                
+            }
+            .header_date{
+                font-size: 16px;
+                font-weight: 400;
+                @include tab-view {
+                    font-size: 12px;
+                    margin-left: 54px;
+                }
+            }
+        }
+    }
 
     .sub_accordions {
         margin-top: 15px;
