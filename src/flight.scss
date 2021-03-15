@@ -496,7 +496,7 @@
         width: 100%;
         margin: 0 0 30px;
 
-        @include tab-view {
+        @include ipad-view {
             margin-top: 10px;
         }
 
