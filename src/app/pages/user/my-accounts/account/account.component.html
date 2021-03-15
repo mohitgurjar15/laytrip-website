@@ -31,7 +31,7 @@
                         <div id="accordion" class="card_accordion">
                             <div class="card">
                                 <app-card-list cardListChangeCount="{{cardListChangeCount}}"
-                                    (totalNumberOfcard)="totalNumberOfcard($event)"></app-card-list>
+                                    ></app-card-list>
                                 <div class="new_card" [ngClass]="{'mt-0':add_new_card}"
                                     [hidden]="!add_new_card && totalCard !== 0">
                                     <div class="card-header">

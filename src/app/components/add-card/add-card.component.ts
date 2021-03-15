@@ -102,6 +102,7 @@ export class AddCardComponent implements OnInit {
 
     Spreedly.on('errors', function (errors) {
       $(".credit_card_error").hide();
+      $("#error_message").text("")
 
       if ($("#full_name").val() == "") {
         $("#first_name").show();
@@ -114,6 +115,7 @@ export class AddCardComponent implements OnInit {
         var error = errors[i];
         console.log(error);
         if (error["attribute"]) {
+          $("#error_message").text("error")
           if (error["attribute"] == 'month' || error["attribute"] == 'year') {
             $('.month_year_error').show();
           }
@@ -125,7 +127,7 @@ export class AddCardComponent implements OnInit {
     Spreedly.on('paymentMethod', function (token, pmData) {
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);
-      this.token = token;
+      //this.token = token;
       $('#main_loader').show();
       $(".credit_card_error").hide();
       let cardData = {
@@ -166,62 +168,10 @@ export class AddCardComponent implements OnInit {
             jcb: 'JCB',
             diners_club: 'Diners Club',
           }
-
-          /* $('#card-list').prepend(`<div class="accordion_cardss anchor-tag" id="card_list_accodrio">
-          <div class="card">
-          <div class="card-header">
-              <a data-toggle="collapse" data-parent="#accordion" href="#card" aria-expanded="false"
-                  aria-controls="collapse11">
-                  <span class="heade_wrps">
-                      <img src="${cardObject[obj.cardType]}" alt="Card icon" /> 
-                      ${cardType[obj.cardType]} ending in ${obj.cardDigits}
-                  </span>
-              </a>
-          </div>
-          <div id="card" class="collapse" data-parent="#accordion">
-              <div class="card-body">
-                  <div class="form-row">
-                      <div class="col col-lg-4">
-                          <div class="card_headbar">
-                              Name on Card
-                          </div>
-                          <div class="card_texter">
-                              ${obj.cardHolderName}
-                          </div>
-                      </div>
-                      <div class="col col-lg-4">
-                          <div class="card_headbar">
-                              Billing Address
-                          </div>
-                          <div class="card_texter">
-                              Victor Pacheco <span> Via della Libertà #19 Milano, 33098 Italia 3478691146</span>
-                          </div>
-                      </div>
-                      <div class="col col-lg-2">
-                          <div class="card_headbar">
-                              Expires
-                          </div>
-                          <div class="card_texter">
-                              09/2023
-                          </div>
-                      </div>
-                      <div class="col col-lg-2">
-                          <div class="save_btn_wrps">
-                              <a href="javascript:void(0);">Delete</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div></div>`); */
           $("#payment-form")[0].reset();
           Spreedly.reload();
           var cardTokenNew = obj.cardToken;
-          /* $(document).on("click", "div#card_list_accodrio", function () {
-            if (cardTokenNew === obj.cardToken) {
-              $('#card_list_accodrio').children('div').addClass('current_selected_card');
-            }
-          }); */
+         
         },
         error: function (error) {
           console.log(error);
@@ -264,15 +214,15 @@ export class AddCardComponent implements OnInit {
         // this.changeLoading.emit(false);
       }
     }
-    document.getElementById('message').innerHTML = "";
     // Tokenize!
     Spreedly.tokenizeCreditCard(options);
-    if (options && options['full_name'] && options['month'] && options['year']) {
-      setTimeout(() => {
-        this.cardListChangeCount += this.cardListChangeCount + 1;
-        this.emitCardListChange.emit(this.cardListChangeCount);
-      }, 5000)
-    }
+    
+    console.log("Submit payment")
+    setTimeout(() => {
+      this.cardListChangeCount += this.cardListChangeCount + 1;
+      this.emitCardListChange.emit(this.cardListChangeCount);
+    }, 5000)
+    
   }
 
   saveCard(cardData) {

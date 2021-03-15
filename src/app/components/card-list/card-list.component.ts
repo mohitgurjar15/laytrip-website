@@ -24,7 +24,7 @@ export class CardListComponent implements OnInit {
   cardLoader: boolean = true;
   cards = []
   @Output() selectCreditCard = new EventEmitter();
-  @Output() totalNumberOfcard = new EventEmitter();
+  //@Output() totalNumberOfcard = new EventEmitter();
   @Input() newCard;
   @Input() cardToken: string = '';
   @Input() cardListChangeCount: number = 0;
@@ -54,11 +54,13 @@ export class CardListComponent implements OnInit {
     this.genericService.getCardlist().subscribe((res: any) => {
       this.cardLoader = false;
       this.cards = res;
-      this.totalNumberOfcard.emit(res.length)
+      this.genericService.setCardItems(this.cards)
+      //this.totalNumberOfcard.emit(1)
     }, (error) => {
       this.cards = [];
+      this.genericService.setCardItems(this.cards)
       this.cardLoader = false;
-      this.totalNumberOfcard.emit(0);
+      //this.totalNumberOfcard.emit(0);
     });
   }
 
