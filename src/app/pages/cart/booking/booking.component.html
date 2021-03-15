@@ -22,7 +22,7 @@
                                 <div class="card">
                                     <app-card-list cardListChangeCount="{{cardListChangeCount}}"
                                         (selectCreditCard)="selectCreditCard($event)"
-                                        (totalNumberOfcard)="totalNumberOfcard($event)" cardToken={{cardToken}}>
+                                         cardToken={{cardToken}}>
                                     </app-card-list>
                                     <div id="new_card" class="new_card" [ngClass]="{'mt-0':add_new_card}"
                                         [hidden]="!add_new_card && totalCard !== 0">

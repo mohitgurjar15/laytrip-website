@@ -241,5 +241,9 @@ export class CommonFunction {
         if ((k >= 33 && k <= 91) || k == 32 || k == 64 || (k >= 123 && k <= 126) || (k >= 92 && k <= 96))
             event.preventDefault();
     }
+
+    convertTime(time,sourceFormat,targetFormat){
+        return moment(time, sourceFormat).format(targetFormat)
+    }
 }
 

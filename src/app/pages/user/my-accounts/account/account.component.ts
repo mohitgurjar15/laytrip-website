@@ -6,6 +6,7 @@ import { environment } from '../../../../../environments/environment';
 import { UserService } from '../../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { AddCardComponent } from '../../../../components/add-card/add-card.component';
+import { GenericService } from '../../../../services/generic.service';
 
 @Component({
   selector: 'app-account',
@@ -29,6 +30,7 @@ export class AccountComponent implements OnInit {
     private modalService: NgbModal,
     private userService: UserService,
     private toastrService: ToastrService,
+    private genericService:GenericService
 
 
   ) { }
@@ -36,6 +38,14 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
     this.userDetails = getLoginUserInfo();
     this.isSocialLogin = this.userDetails.socialAccountId.length > 0 ? true : false;
+
+    this.genericService.getCardItems.subscribe((res:any)=>{
+
+      if(this.totalCard!=res.length){
+        this.totalCard=res.length;
+        this.add_new_card = false;
+      }
+    })
   }
   getLoadingValue(event) {
     if (event === false) {
@@ -101,7 +111,7 @@ export class AccountComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    this.totalCard = event;
+    //this.totalCard = event;
   }
 
   ngOnDestroy() {
@@ -117,7 +127,7 @@ export class AccountComponent implements OnInit {
   }
 
   getCardListChange(data) {
-    this.add_new_card = false;
+    //this.add_new_card = false;
     this.cardListChangeCount = data;
   }
 }

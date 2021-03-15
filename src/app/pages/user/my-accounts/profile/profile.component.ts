@@ -145,7 +145,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getStates(countryId) {
-
+    this.profileForm.controls.state_id.setValue('');
     this.genericService.getStates(countryId.id).subscribe((data: any) => {
       this.stateList = data;
     }, (error: HttpErrorResponse) => {
@@ -228,6 +228,8 @@ export class ProfileComponent implements OnInit {
 
   getProfileInfo() {
     this.userService.getProfile().subscribe((res: any) => {
+      // console.log(this.commonFunction.convertDateMMDDYYYY(res.dob, 'YYYY-MM-DD'))
+
       this.loadingValue.emit(false);
       this.image = res.profilePic;
       this.selectResponse = res;

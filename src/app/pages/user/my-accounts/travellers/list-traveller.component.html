@@ -27,7 +27,8 @@
                             <div class="card-body">
                                 <app-traveller-form [countries]="countries" [countries_code]="countries_code"
                                     (loadingValue)="getLoadingValue($event)" (travelerFormChange)="pushTraveler($event)"
-                                    #child [countries]="countries">
+                                    #child [countries]="countries"
+                                    [index]="0">
                                 </app-traveller-form>
                             </div>
                         </div>
@@ -56,13 +57,17 @@
                                     (click)="openDeleteModal(deleteContent,traveler.userId)">Delete</a> -->
                             </div>
                             <div id="collapseTravInner{{traveler.userId}}" class="collapse"
+                            [ngClass]="{'show': traveler.userId == travellerTabClass}"
+
                                 data-parent="#trav_accordion_inner">
                                 <div class="card-body">
                                     <app-traveller-form [countries]="countries" [countries_code]="countries_code"
                                         (loadingValue)="getLoadingValue($event)"
                                         (travelerFormChange)="pushTraveler($event)"
                                         (deleteTravelerId)="getTravellerIdFromChild($event)" [travelerInfo]="traveler"
-                                        [travellerId]="traveler.userId"></app-traveller-form>
+                                        [travellerId]="traveler.userId"
+                                        [index]=" x + 1"
+                                        ></app-traveller-form>
                                 </div>
                             </div>
                         </div>

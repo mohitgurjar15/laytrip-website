@@ -12,13 +12,14 @@ var environment_1 = require("../../../../../environments/environment");
 var moment = require("moment");
 var traveller_form_component_1 = require("./traveller-form/traveller-form.component");
 var ListTravellerComponent = /** @class */ (function () {
-    function ListTravellerComponent(travelerService, router, modalService, toastr, genericService, cookieService) {
+    function ListTravellerComponent(travelerService, router, modalService, toastr, genericService, cookieService, renderer) {
         this.travelerService = travelerService;
         this.router = router;
         this.modalService = modalService;
         this.toastr = toastr;
         this.genericService = genericService;
         this.cookieService = cookieService;
+        this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
         this.closeResult = '';
@@ -34,6 +35,7 @@ var ListTravellerComponent = /** @class */ (function () {
         this.showNewForm = false;
         this.traveller = [];
         this.loadingValue = new core_1.EventEmitter();
+        this.travellerTabClass = '';
         this.isMasterSel = false;
     }
     ListTravellerComponent.prototype.ngOnInit = function () {
@@ -235,6 +237,8 @@ var ListTravellerComponent = /** @class */ (function () {
         else {
             this.showNewForm = false;
         }
+        //For add class show in traveler tab 
+        this.travellerTabClass = traveler.userId;
     };
     ListTravellerComponent.prototype.showForm = function () {
         this.showNewForm = true;
