@@ -147,7 +147,7 @@
     "city": "City",
     "zip_code": "Zip Code",
     "passport_number": "Passport Number",
-    "passport_expiry_date": "Expiration Date",
+    "passport_expiry_date": "Expiration",
     "first_name_placeholder": "Enter first name",
     "last_name_placeholder": "Enter last name",
     "emai_Placeholder": "Enter email",

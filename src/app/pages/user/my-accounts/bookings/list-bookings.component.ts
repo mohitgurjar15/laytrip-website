@@ -100,8 +100,12 @@ export class ListBookingsComponent implements OnInit {
     }
   }
 
-  selectInCompletedTab(cartNumber) {
-    this.selectedInCompletedTabNumber = cartNumber;
+  selectInCompletedTab(cartNumber,data=[]) {
+    // console.log(data.length)
+    // if(data.length > 1){
+      // console.log('sds')
+      this.selectedInCompletedTabNumber = cartNumber;
+    // }
   }
 
   selectCompletedTab(cartNumber) {

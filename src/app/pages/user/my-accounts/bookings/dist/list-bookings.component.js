@@ -98,8 +98,13 @@ var ListBookingsComponent = /** @class */ (function () {
             this.completeBookings = __spreadArrays(this.completeBookingsForFilter);
         }
     };
-    ListBookingsComponent.prototype.selectInCompletedTab = function (cartNumber) {
+    ListBookingsComponent.prototype.selectInCompletedTab = function (cartNumber, data) {
+        if (data === void 0) { data = []; }
+        // console.log(data.length)
+        // if(data.length > 1){
+        // console.log('sds')
         this.selectedInCompletedTabNumber = cartNumber;
+        // }
     };
     ListBookingsComponent.prototype.selectCompletedTab = function (cartNumber) {
         this.selectedCompletedTabNumber = cartNumber;

@@ -263,8 +263,8 @@
     }
     &.dobs {
       input {
-        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
-          no-repeat;
+        // background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+        background-image: none;
 
         background-size: 20px;
         border: none;
@@ -278,7 +278,7 @@
         }
       }
     }
-    &.expiry_date{
+    &.expiry_date {
       input {
         background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
           no-repeat;
@@ -307,7 +307,7 @@
       }
       ng-select {
         width: 100%;
-        padding: 0 ;
+        padding: 0;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -475,5 +475,3 @@
     }
   }
 }
-
-

@@ -46,7 +46,7 @@ export class ListTravellerComponent implements OnInit {
   location;
   traveller: any = [];
   @Output() loadingValue = new EventEmitter<boolean>();
-
+  travellerTabClass = '';
 
   constructor(
     public travelerService: TravelerService,
@@ -267,7 +267,7 @@ export class ListTravellerComponent implements OnInit {
     this.openDeleteModal('deleteContent', travelerId);
   }
   
-  travellerTabClass = '';
+  
   pushTraveler(traveler) {
     if (typeof traveler == 'string') {
       this.travelers = this.travelers.filter(obj => obj.userId !== traveler);
