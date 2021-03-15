@@ -98,11 +98,8 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     this.loadJquery();
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MM/DD/YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
-<<<<<<< HEAD
-=======
 
     console.log("this.myTravelers", this.myTravelers, this.isTravller)
->>>>>>> fd390b2b5a2010b254be9f92ea54c39fe0f5976b
 
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({

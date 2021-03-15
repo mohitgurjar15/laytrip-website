@@ -85,6 +85,7 @@ var TravelerFormComponent = /** @class */ (function () {
         var _this = this;
         this.loadJquery();
         this.bsConfig = Object.assign({}, { dateInputFormat: 'MM/DD/YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
+        console.log("this.myTravelers", this.myTravelers, this.isTravller);
         this.travelerForm = this.formBuilder.group({
             type0: this.formBuilder.group({
                 adults: this.formBuilder.array([])
