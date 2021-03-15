@@ -1559,14 +1559,12 @@ select {
                       @media (max-width: 991px) {
                         width: 50%;
                         margin-bottom: 20px;
+                        margin: 0 auto;
                       }
 
-                      @media (max-width: 575px) {
+                      @include tab-view{
                         width: 100%;
                         margin-bottom: 0;
-                      }
-
-                      @include tab-view {
                         padding: 0;
                       }
 
@@ -3346,7 +3344,7 @@ select {
           //width: 34%;
           //}
 
-          @media (max-width: 767px) {
+         @include ipad-view {
             width: 50%;
             margin-bottom: 30px;
 
@@ -3355,7 +3353,7 @@ select {
             //}
           }
 
-          @media (max-width: 480px) {
+          @include tab-view {
             width: 100%;
 
             text-align: center;

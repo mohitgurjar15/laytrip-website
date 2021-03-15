@@ -34,6 +34,11 @@ ng-scrollbar {
         position: absolute;
         top: 10px;
         right: 15px;
+        z-index: 999;
+
+        @include tab-view{
+            right: 30px;
+        }
 
         button {
             cursor: pointer;
@@ -60,10 +65,11 @@ ng-scrollbar {
             flex-direction: column;
 
             .sug_line_box {
-                display: flex;
-                justify-content: flex-start;
-                align-items: flex-start;
+                // display: flex;
+                // justify-content: flex-start;
+                // align-items: flex-start;
                 margin-bottom: 10px;
+                float: left;
 
                 &:last-child{
                     margin-bottom: 0;
@@ -73,7 +79,8 @@ ng-scrollbar {
                     font-size: 18px;
                     font-weight: 500;
                     color: $text-black;
-                    width: 25px;
+                    width: 25px;    
+                    float: left;
 
                     @include tab-view {
                         font-size: 14px;
@@ -81,9 +88,10 @@ ng-scrollbar {
                 }
 
                 .linew_wrps {
-                    display: flex;
-                    justify-content: flex-start;
-                    flex-direction: column;
+                    // display: flex;
+                    // justify-content: flex-start;
+                    // flex-direction: column;
+                    float: left;
 
                     @include tab-view {
                         font-size: 12px;
