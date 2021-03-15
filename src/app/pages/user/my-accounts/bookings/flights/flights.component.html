@@ -95,19 +95,27 @@
           <span class="title_image">
             <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
           </span>
-          AZD
-          <span class="flight_routing_imgs">
+          {{cartItem.moduleInfo[0]?.departure_code}}
+        
+          <span class="flight_routing_imgs"  *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 1">
+            <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
+          </span>
+          {{cartItem.moduleInfo[0]?.arrival_code}}
+          <span class="flight_routing_imgs"  *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
             <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
             <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f_return.svg" alt="" class="route_image" />
           </span>
-          <span class="flight_routing_imgs">
-            <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
-          </span>
-          ABC
+        
         </span>
-        <span class="header_date">Sep 15, 2021</span>
-      </div>
+        <span *ngIf="cartItem.moduleInfo[0].routes.length==2"
+        class="header_date">{{commonFunction.convertDateFormat(cartItem.moduleInfo[0]?.departure_date,'DD/MM/YYYY')}}
+        - {{commonFunction.convertDateFormat(cartItem.moduleInfo[0]?.arrival_date,'DD/MM/YYYY')}}</span>
+        <span *ngIf="cartItem.moduleInfo[0].routes.length==1"
+        class="header_date">{{commonFunction.convertDateFormat(cartItem.moduleInfo[0]?.departure_date,'DD/MM/YYYY')}}</span> 
+         
     </div>
+  </div>
+
     <div class="card accordion_detailed_wrps">
       <div class="card-body" *ngIf="(cartItem | json) != '{}'">
         <div *ngFor="let stop of cartItem?.moduleInfo[0]?.routes[0]?.stops">
