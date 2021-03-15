@@ -87,6 +87,8 @@ export class ListTravellerComponent implements OnInit {
   getTravelers() {
     this.travelerService.getTravelers().subscribe((res: any) => {
       // this.travelers = res.data;
+      
+
       this.travelers  = res.data.filter(function(e){
         if(e.roleId !=6 ){
           return e;

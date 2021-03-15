@@ -198,7 +198,7 @@
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
                     <li>
                       <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
-                        [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(i,booking.booking)">
+                        [ngClass]="{'active':selectedInCompletedTabNumber == j}" (click)="selectInCompletedTab(i,booking.booking)">
                         <span class="tab_round_wrps" *ngIf="cartItem.moduleId==1">
                           <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                           <span
@@ -211,7 +211,7 @@
                 <div class="tab-content main_tab_content">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
                     <div class="tab-pane" [id]="'cart_item'+j"
-                      [ngClass]="{'show active':selectedInCompletedTabNumber===j }">
+                      [ngClass]="{'show active':selectedInCompletedTabNumber == j }">
                       <app-flights *ngIf="cartItem.moduleId==1" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-flights>
                     </div>
                   </ng-container>
