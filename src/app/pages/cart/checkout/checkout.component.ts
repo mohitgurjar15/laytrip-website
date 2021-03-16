@@ -197,7 +197,7 @@ export class CheckoutComponent implements OnInit {
 
   bookingTimerConfiguration() {
     this.bookingTimerConfig = Object.assign({}, {
-      leftTime: 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(moment().format('YYYY-MM-DD h:mm:ss'), 'seconds'),
+      leftTime: 600 - moment(moment().format('YYYY-MM-DDTHH:mm:ssZ')).diff(moment().format('YYYY-MM-DDTHH:mm:ssZ'), 'seconds'),
       format: 'm:s'
     });
   }
