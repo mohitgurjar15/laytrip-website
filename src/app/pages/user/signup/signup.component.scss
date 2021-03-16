@@ -295,7 +295,8 @@
                 .check {
                   width: 100%;
                   display: flex;
-                  align-items: center;
+                  align-items: flex-start;
+                  justify-content: flex-start;
 
                   .custom_checkbox {
                     position: relative;
@@ -309,6 +310,7 @@
                     height: 14px;
                     text-transform: none;
                     display: flex;
+                    top: 2px;
 
                     input {
                       position: absolute;

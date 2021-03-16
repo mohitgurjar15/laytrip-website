@@ -53,7 +53,8 @@
                 padding: 0;
                 text-align: right;
                 text-decoration: none;
-                @include tab-view{
+
+                @include tab-view {
                     font-size: 12px;
                     min-width: 55px;
                 }
@@ -61,29 +62,34 @@
         }
     }
 
-    .timer_main_wrapper{
+    .timer_main_wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         padding: 25px 0px;
-        .upper_big_fonts{
+
+        .upper_big_fonts {
             color: $text-black;
             font-size: 36px;
             margin-bottom: 6px;
             font-weight: 400;
-            span{
+
+            span {
                 color: $blue-text;
             }
-            @include tab-view{
+
+            @include tab-view {
                 font-size: 12px;
                 font-weight: 500;
             }
         }
-        .lo_sm_fn{
+
+        .lo_sm_fn {
             color: $pink;
             font-size: 20px;
-            @include tab-view{
+
+            @include tab-view {
                 font-size: 10px;
             }
         }
@@ -92,15 +98,16 @@
     .booking_detail_bg_wrps {
         background-color: $bg-body;
         border-radius: 5px;
-        padding: 15px;
+        padding: 0;
+        margin-bottom: 15px;
 
         .card_accordion {
             .card {
                 border: 1px solid $grayed_border;
                 border-radius: 10px;
-                padding: 15px;
+                padding: 0;
 
-                @include tab-view{
+                @include tab-view {
                     padding: 0;
                 }
 
@@ -108,7 +115,9 @@
                     border: 1px solid $box-border-color;
                     border-radius: 10px;
                     position: relative;
-                    @include tab-view{
+                    margin: 15px;
+
+                    @include tab-view {
                         margin: 0 15px 15px;
                     }
                 }
@@ -116,6 +125,9 @@
                 .card-header {
                     border: none;
                     background-color: transparent;
+                    padding: 15px;
+                    height: 68px;
+                    display: flex;
 
                     a {
                         font-weight: 600;
@@ -131,47 +143,53 @@
 
                         &[aria-expanded="true"] {
                             &:after {
-                              content: "";
-                              position: relative;
-                              padding: 5px 9px;
-                              background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                              background-position: right;
-                              background-repeat: no-repeat;
-                              background-size: 14px;
-                              transition: 0.3s;
-                              right: 0;
-                              border: none;
-                              top: 5px;
-              
-                              @include tab-view {
-                                position: relative;
+                                content: "";
+                                //position: relative;
+                                padding: 5px 9px;
+                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 12px;
+                                transition: 0.3s;
                                 right: 0;
-                                height: 12px;
-                              }
+                                border: none;
+                                top: 5px;
+
+                                @include tab-view {
+                                    position: relative;
+                                    right: 0;
+                                    height: 12px;
+                                }
                             }
-                          }
-              
-                          &[aria-expanded="false"] {
+                        }
+
+                        &[aria-expanded="false"] {
                             &:after {
-                              position: relative;
-                              padding: 5px 9px;
-                              background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-                              background-position: right;
-                              background-repeat: no-repeat;
-                              background-size: 14px;
-                              content: "";
-                              transition: 0.3s;
-                              right: 0;
-                              border: none;
-                              top: 5px;
-              
-                              @include tab-view {
-                                position: relative;
+                                //position: relative;
+                                padding: 5px 9px;
+                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 12px;
+                                content: "";
+                                transition: 0.3s;
                                 right: 0;
-                                height: 12px;
-                              }
+                                border: none;
+                                top: 5px;
+
+                                @include tab-view {
+                                    position: relative;
+                                    right: 0;
+                                    height: 12px;
+                                }
                             }
-                          }
+                        }
+
+                        .heade_wrps {
+                            img {
+                                margin-right: 15px;
+                            }
+                        }
                     }
                 }
 
@@ -181,17 +199,20 @@
             }
         }
     }
-    .card_details_wrppers{
-        .title_bar{
-            @include tab-view{
-            margin: 25px 0 15px;
-            padding: 0 15px;
-                h3{
+
+    .card_details_wrppers {
+        .title_bar {
+            @include tab-view {
+                margin: 25px 0 15px;
+                padding: 0 15px;
+
+                h3 {
                     margin: 0;
                     padding: 0;
                 }
-                .edit_btns{
-                    @include tab-view{
+
+                .edit_btns {
+                    @include tab-view {
                         font-size: 12px;
                         min-width: 55px;
                     }
@@ -224,6 +245,7 @@
                 }
             }
         }
+
         .custom_checkbox {
             position: relative;
             margin-top: 10px;
@@ -232,7 +254,8 @@
             // display: flex;
             // align-items: flex-start;
             font-size: 11px;
-            a{
+
+            a {
                 color: $txt_clr_blue;
                 // display: contents;
                 position: relative;
@@ -302,6 +325,7 @@
                 }
             }
         }
+
         .cta_btn_wrapper {
             display: flex;
             justify-content: center;
@@ -314,6 +338,7 @@
                 &:disabled {
                     cursor: not-allowed;
                 }
+
                 width: 100%;
                 height: 54px;
                 padding: 10px 45px;
@@ -331,7 +356,7 @@
                 border: 1px solid $primary-color;
                 margin-bottom: 10px;
 
-                @include tab-view{
+                @include tab-view {
                     font-size: 14px;
                     height: 44px;
                 }
@@ -376,7 +401,7 @@
                         display: inline-block;
                     }
                 }
-                
+
             }
         }
     }
