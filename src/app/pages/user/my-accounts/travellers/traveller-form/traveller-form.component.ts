@@ -287,12 +287,12 @@ export class TravellerFormComponent implements OnInit {
   }
 
   selectDob(event) {
-    console.log(event.target.value.length)
+    console.log(event.target.value, event.target.value.length)
     if(event.target.value.length == 10){
       console.log('sds')
-
-      var event2 = event.target.value.replace("/","-");
-      console.log(event2,event.target.value)
+      var string = event.target.value;
+      var event2 = string.replace("/","-");
+      console.log(event2,string)
       var selectedDate = moment(event).format('YYYY-MM-DD');
       var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
       var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
