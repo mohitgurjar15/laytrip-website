@@ -142,6 +142,10 @@ var BookingTravelerComponent = /** @class */ (function () {
             _this.modalService.dismissAll();
         });
     };
+    BookingTravelerComponent.prototype.openChat = function () {
+        window.fcWidget.open();
+        this.modalService.dismissAll();
+    };
     __decorate([
         core_1.Input()
     ], BookingTravelerComponent.prototype, "travelers");

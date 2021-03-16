@@ -7,6 +7,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../../../environments/environment';
 import { AccountService } from '../../../../../services/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
+declare var window : any;
 
 @Component({
   selector: 'app-booking-traveler',
@@ -157,5 +158,10 @@ export class BookingTravelerComponent implements OnInit {
       // this.upCommingloadingValue.emit(false);
       this.modalService.dismissAll();
     });
+  }
+
+  openChat(){
+    window.fcWidget.open();
+    this.modalService.dismissAll();
   }
 }
