@@ -101,6 +101,7 @@ var TravellerFormComponent = /** @class */ (function () {
     };
     TravellerFormComponent.prototype.setTravelerForm = function () {
         this.traveller = this.travelerInfo;
+        console.log(typeof this.travelerInfo.dob);
         var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
         var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
         var travellerDob = moment(this.travelerInfo.dob).format('YYYY-MM-DD');
@@ -201,7 +202,6 @@ var TravellerFormComponent = /** @class */ (function () {
                     country_id = 233; //this.location.country.id;
                 }
             }
-            console.log(this.travellerForm.value.dob, typeof this.travellerForm.value.dob);
             var jsonData = {
                 first_name: this.travellerForm.value.firstName,
                 last_name: this.travellerForm.value.lastName,
