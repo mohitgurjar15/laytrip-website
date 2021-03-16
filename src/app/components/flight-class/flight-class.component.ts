@@ -26,10 +26,12 @@ export class FlightClassComponent implements OnInit {
 
     $(".class_sec_info").click(function (e) {
       e.stopPropagation();
-      if(e.target.nextSibling.classList[2] == 'panel_show'){          
-        $(".add_class_sec_open_").show();
-      } else {      
+      if((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') || 
+      (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')
+      ){         
         $(".add_class_sec_open_").hide();      
+      } else {      
+        $(".add_class_sec_open_").show();
       }
 
       $(".add_traveler__open").hide();

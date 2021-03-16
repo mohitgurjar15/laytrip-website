@@ -32,7 +32,7 @@ var ProfileComponent = /** @class */ (function () {
         this.maxDate = {};
         this.data = [];
         this.is_gender = true;
-        this.is_type = 'M';
+        this.gender_type = 'M';
         this.imageFile = '';
         this.imageFileError = false;
         this.imageErrorMsg = 'Image is required';
@@ -153,13 +153,13 @@ var ProfileComponent = /** @class */ (function () {
         if (this.isFormControlEnable) {
             this.is_gender = true;
             if (type == 'M') {
-                this.is_type = 'M';
+                this.gender_type = 'M';
             }
             else if (type == 'F') {
-                this.is_type = 'F';
+                this.gender_type = 'F';
             }
             else if (type == 'O') {
-                this.is_type = 'O';
+                this.gender_type = 'O';
             }
         }
     };
@@ -214,7 +214,7 @@ var ProfileComponent = /** @class */ (function () {
             _this.loadingValue.emit(false);
             _this.image = res.profilePic;
             _this.selectResponse = res;
-            _this.is_type = res.gender ? res.gender : 'M';
+            _this.gender_type = res.gender ? res.gender : 'M';
             var countryId = { id: res.country.id ? res.country.id : 233 };
             _this.getStates(countryId);
             _this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
@@ -287,7 +287,7 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("email", this.profileForm.value.email);
             formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
             formdata.append("phone_no", this.profileForm.value.phone_no);
-            formdata.append("gender", this.is_type);
+            formdata.append("gender", this.gender_type ? this.gender_type : 'M');
             formdata.append("city_name", this.profileForm.value.city);
             formdata.append("address", this.profileForm.value.address);
             if (!Number.isInteger(this.profileForm.value.country_id)) {
@@ -297,16 +297,17 @@ var ProfileComponent = /** @class */ (function () {
                 formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
             }
             if (!Number.isInteger(this.profileForm.value.state_id)) {
-                formdata.append("state_id", this.profileForm.value.state_id);
+                formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
             }
             else {
-                formdata.append("state_id", this.selectResponse.state.id);
+                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
             }
+            console.log(this.gender_type);
             if (typeof (this.profileForm.value.country_code) != 'object') {
-                formdata.append("country_code", this.profileForm.value.country_code.name);
+                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
             }
             else {
-                formdata.append("country_code", this.selectResponse.countryCode);
+                formdata.append("country_code", this.selectResponse.countryCode ? this.selectResponse.countryCode : '');
             }
             formdata.append("zip_code", this.profileForm.value.zip_code ? this.profileForm.value.zip_code : this.selectResponse.zipCode);
             formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? this.commonFunction.convertDateYYYYMMDD(this.profileForm.value.dob, 'MM/DD/YYYY') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
@@ -317,11 +318,6 @@ var ProfileComponent = /** @class */ (function () {
             this.profileForm.controls['state_id'].disable();
             this.userService.updateProfile(formdata).subscribe(function (data) {
                 // this.submitted = false;
-                _this.toastr.show('sd', 'Profile Error', {
-                    toastClass: 'custom_toastr',
-                    titleClass: 'custom_toastr_title',
-                    messageClass: 'custom_toastr_message'
-                });
                 _this.loadingValue.emit(false);
                 localStorage.setItem("_lay_sess", data.token);
                 // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');

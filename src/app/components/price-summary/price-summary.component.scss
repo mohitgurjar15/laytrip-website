@@ -89,6 +89,7 @@
             border: none;
             background-color: transparent;
             display: flex;
+            align-items: center;
             justify-content: space-between;
             width: 100%;
             padding: 0 10px 0 0;
@@ -101,7 +102,7 @@
             &[aria-expanded="true"] {
               &:after {
                 content: "";
-                position: relative;
+                //position: relative;
                 padding: 5px 9px;
                 background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                 background-position: right;
@@ -113,16 +114,16 @@
                 top: 5px;
 
                 @include tab-view {
-                  position: relative;
-                  right: 0;
-                  height: 12px;
+                  // position: relative;
+                  // right: 0;
+                  // height: 12px;
                 }
               }
             }
 
             &[aria-expanded="false"] {
               &:after {
-                position: relative;
+                //position: relative;
                 padding: 5px 9px;
                 background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
                 background-position: right;
@@ -135,9 +136,9 @@
                 top: 5px;
 
                 @include tab-view {
-                  position: relative;
-                  right: 0;
-                  height: 12px;
+                  // position: relative;
+                  // right: 0;
+                  // height: 12px;
                 }
               }
             }
