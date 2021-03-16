@@ -1233,6 +1233,22 @@
     }
 }
 
+.desk_span {
+    @include tab-view {
+        display: none;
+    }
+}
+
+.mob_span {
+    display: none;
+
+    @include tab-view {
+        display: flex;
+        font-size: 8px !important;
+        margin-left: 35px;
+    }
+}
+
 @-webkit-keyframes fadeInUp {
     from {
         opacity: 0;
