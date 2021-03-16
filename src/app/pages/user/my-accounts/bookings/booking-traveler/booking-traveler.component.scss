@@ -617,7 +617,7 @@
     }
 
     .bottom_cta_btn {
-        margin: 20px 0 0;
+        margin: 15px 0 10px;
         display: flex;
         width: 100%;
         justify-content: center;
@@ -675,7 +675,14 @@
     
         .block_im {
             margin: 0 auto 15px;
-            width: 85px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            img{
+                @include tab-view{
+                    max-width: 50px;
+                }
+            }
         }
     
         h4 {
@@ -691,13 +698,13 @@
             // }
     
             @include tab-view {
-            font-size: 24px;
+            font-size: 12px;
             text-align: center;
             }
     
             @include mobile-view {
-            font-size: 20px;
-            line-height: 26px;
+            font-size: 12px;
+            line-height: 16px;
             text-align: center;
             }
         }
@@ -871,6 +878,10 @@
             padding: 10px;
             width: 100%;
             display: flex;
+
+            @include tab-view{
+                padding: 0;
+            }
     
             button {
             max-width: 472px;
@@ -891,6 +902,12 @@
             margin: 0 10px;
             align-items: center;
             justify-content: center;
+
+            @include tab-view{
+                font-size: 12px;
+                height: auto;
+                padding: 4px 25px;
+            }
     
             &:hover {
                 border: 1px solid $hotel-secondary-color;
