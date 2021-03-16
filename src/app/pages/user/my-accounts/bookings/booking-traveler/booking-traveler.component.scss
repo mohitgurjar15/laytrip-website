@@ -617,7 +617,7 @@
     }
 
     .bottom_cta_btn {
-        margin: 15px;
+        margin: 20px 0 0;
         display: flex;
         width: 100%;
         justify-content: center;
@@ -637,304 +637,307 @@
         }
     }
 }
-.delete_account_block {
-    .modal-header {
-      justify-content: center;
-      border: none;
-      padding: 25px;
-  
-      .close {
-        opacity: 1;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-  
-        img {
-          width: 12px;
-        }
-  
-        @include mobile-view {
-          top: 15px;
-          right: 15px;
-        }
-      }
-    }
-  
-    .modal-body {
-      width: 100%;
-      padding: 0px 15px 20px;
-  
-      @include tab-view {
-        height: 100%;
+.delete_account_block  {
+    &.cancel_booking{
+
+        .modal-header {
         justify-content: center;
-        display: flex;
-        flex-flow: column;
-      }
-  
-      .block_im {
-        margin: 0 auto 15px;
-        width: 85px;
-      }
-  
-      h4 {
-        font-size: 32px;
-        line-height: 40px;
-        font-weight: 500;
-        color: $active-tab-text;
-        padding: 0px 0px 15px;
-        text-align: center;
-  
-        // span {
-        //   display: block;
-        // }
-  
-        @include tab-view {
-          font-size: 24px;
-          text-align: center;
-        }
-  
-        @include mobile-view {
-          font-size: 20px;
-          line-height: 26px;
-          text-align: center;
-        }
-      }
-  
-      .check {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin: 0 0 30px;
-  
-        .custom_checkbox {
-          position: relative;
-          margin-bottom: 0;
-          vertical-align: middle;
-          line-height: normal;
-          display: inline;
-          align-items: center;
-          font-size: 12px;
-          font-weight: 400;
-          color: $mid_gray_bg;
-          text-transform: none;
-  
-          input {
+        border: none;
+        padding: 25px;
+    
+        .close {
+            opacity: 1;
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            top: 20px;
+            right: 20px;
+    
+            img {
+            width: 12px;
+            }
+    
+            @include mobile-view {
+            top: 15px;
+            right: 15px;
+            }
+        }
+        }
+    
+        .modal-body {
+        width: 100%;
+        padding: 0px 15px 20px;
+    
+        @include tab-view {
             height: 100%;
-            opacity: 0;
-  
-            &:checked {
-              ~ {
-                .checkmark {
-                  border-color: $blue-text-one;
-  
-                  &:after {
-                    opacity: 1;
-                  }
-                }
-              }
+            justify-content: center;
+            display: flex;
+            flex-flow: column;
+        }
+    
+        .block_im {
+            margin: 0 auto 15px;
+            width: 85px;
+        }
+    
+        h4 {
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 400;
+            color: $mid_gray_bg;
+            padding: 0px 0px 15px;
+            text-align: center;
+    
+            // span {
+            //   display: block;
+            // }
+    
+            @include tab-view {
+            font-size: 24px;
+            text-align: center;
             }
-          }
-  
-          .checkmark {
-            width: 14px;
-            min-width: 14px;
-            height: 14px;
-            display: inline-block;
-            border: 1px solid $blue-text-one;
-            vertical-align: middle;
-            margin-right: 11px;
+    
+            @include mobile-view {
+            font-size: 20px;
+            line-height: 26px;
+            text-align: center;
+            }
+        }
+    
+        .check {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 0 0 30px;
+    
+            .custom_checkbox {
             position: relative;
-  
-            &:after {
-              content: "";
-              position: absolute;
-              top: 1px;
-              -webkit-transform: translate(0, -50%);
-              -moz-transform: translate(0, -50%);
-              -ms-transform: translate(0, -50%);
-              -o-transform: translate(0, -50%);
-              transform: translate(0, -50%);
-              width: 4px;
-              height: 8px;
-              border-radius: 2px;
-              border: solid $blue-text-one;
-              border-width: 0 1px 1px 0;
-              transform: rotate(45deg);
-              -webkit-transform: rotate(45deg);
-              -ms-transform: rotate(45deg);
-              border-radius: 0px;
-              left: 0;
-              right: 0;
-              margin: 0 auto;
-              transition: all 0.2s;
-              opacity: 0;
+            margin-bottom: 0;
+            vertical-align: middle;
+            line-height: normal;
+            display: inline;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 400;
+            color: $mid_gray_bg;
+            text-transform: none;
+    
+            input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+    
+                &:checked {
+                ~ {
+                    .checkmark {
+                    border-color: $blue-text-one;
+    
+                    &:after {
+                        opacity: 1;
+                    }
+                    }
+                }
+                }
             }
-          }
+    
+            .checkmark {
+                width: 14px;
+                min-width: 14px;
+                height: 14px;
+                display: inline-block;
+                border: 1px solid $blue-text-one;
+                vertical-align: middle;
+                margin-right: 11px;
+                position: relative;
+    
+                &:after {
+                content: "";
+                position: absolute;
+                top: 1px;
+                -webkit-transform: translate(0, -50%);
+                -moz-transform: translate(0, -50%);
+                -ms-transform: translate(0, -50%);
+                -o-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+                width: 4px;
+                height: 8px;
+                border-radius: 2px;
+                border: solid $blue-text-one;
+                border-width: 0 1px 1px 0;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                border-radius: 0px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                transition: all 0.2s;
+                opacity: 0;
+                }
+            }
+            }
         }
-      }
-  
-      // ul {
-      //   width: 100%;
-      //   display: flex;
-      //   justify-content: center;
-      //   margin: 0;
-      //   padding: 0 0 30px;
-      //   list-style: none;
-  
-      //   li {
-      //     width: auto;
-      //     margin: 0 25px;
-  
-      //     @include mobile-view {
-      //       margin: 0 10px;
-      //     }
-  
-      //     button {
-      //       width: 151px;
-      //       height: 40px;
-      //       padding: 0px 25px;
-      //       background: $hotel-secondary-color;
-      //       border-radius: 25px;
-      //       border: 1px solid $hotel-secondary-color;
-      //       font-size: 14px;
-      //       font-weight: 500;
-      //       color: $text-white;
-      //       transition: 0.3s;
-      //       position: relative;
-      //       z-index: 9;
-      //       overflow: hidden;
-      //       white-space: normal;
-  
-      //       &.btn_no {
-      //         border: 1px solid $feedback_text-clr;
-      //         color: $feedback_text-clr;
-      //         background: $background-white;
-  
-      //         // &:hover {
-      //         //   background: transparent;
-      //         //   color: $text-white;
-      //         // }
-      //       }
-  
-      //       &.btn_yes {
-      //         border: 1px solid $primary-color;
-      //         color: $text-white;
-      //         background: $primary-color;
-  
-      //         // &:hover {
-      //         //   background: transparent;
-      //         //   color: $text-white;
-      //         // }
-      //       }
-  
-      //       &::before {
-      //         content: "";
-      //         position: absolute;
-      //         top: 2px;
-      //         left: 2px;
-      //         width: 100%;
-      //         height: 0%;
-      //         background: $pink_clr;
-      //         z-index: -1;
-      //         transition: 0.8s;
-      //         border-radius: 25px;
-      //       }
-  
-      //       // &:hover {
-      //       //   border: 1px solid $hotel-secondary-color;
-      //       //   color: $text-white;
-  
-      //       //   &:before {
-      //       //     height: calc(100% - 4px);
-      //       //     width: calc(100% - 4px);
-      //       //   }
-      //       // }
-  
-      //       &.btn_disable {
-      //         cursor: default;
-      //       }
-  
-      //       @include mobile-view {
-      //         width: 135px;
-      //       }
-      //     }
-      //   }
-      // }
-  
-      .cta_btn_wrps {
-        padding: 10px;
-        width: 100%;
-        display: flex;
-  
-        button {
-          max-width: 472px;
-          width: 100%;
-          height: 40px;
-          padding: 10px 25px;
-          background: $hotel-secondary-color;
-          border-radius: 25px;
-          border: 1px solid $hotel-secondary-color;
-          font-size: 14px;
-          color: $text-white;
-          transition: 0.3s;
-          position: relative;
-          z-index: 9;
-          overflow: hidden;
-          white-space: normal;
-          display: flex;
-          margin: 0 10px;
-          align-items: center;
-          justify-content: center;
-  
-          &:hover {
-            border: 1px solid $hotel-secondary-color;
-            color: $text-white;
+    
+        // ul {
+        //   width: 100%;
+        //   display: flex;
+        //   justify-content: center;
+        //   margin: 0;
+        //   padding: 0 0 30px;
+        //   list-style: none;
+    
+        //   li {
+        //     width: auto;
+        //     margin: 0 25px;
+    
+        //     @include mobile-view {
+        //       margin: 0 10px;
+        //     }
+    
+        //     button {
+        //       width: 151px;
+        //       height: 40px;
+        //       padding: 0px 25px;
+        //       background: $hotel-secondary-color;
+        //       border-radius: 25px;
+        //       border: 1px solid $hotel-secondary-color;
+        //       font-size: 14px;
+        //       font-weight: 500;
+        //       color: $text-white;
+        //       transition: 0.3s;
+        //       position: relative;
+        //       z-index: 9;
+        //       overflow: hidden;
+        //       white-space: normal;
+    
+        //       &.btn_no {
+        //         border: 1px solid $feedback_text-clr;
+        //         color: $feedback_text-clr;
+        //         background: $background-white;
+    
+        //         // &:hover {
+        //         //   background: transparent;
+        //         //   color: $text-white;
+        //         // }
+        //       }
+    
+        //       &.btn_yes {
+        //         border: 1px solid $primary-color;
+        //         color: $text-white;
+        //         background: $primary-color;
+    
+        //         // &:hover {
+        //         //   background: transparent;
+        //         //   color: $text-white;
+        //         // }
+        //       }
+    
+        //       &::before {
+        //         content: "";
+        //         position: absolute;
+        //         top: 2px;
+        //         left: 2px;
+        //         width: 100%;
+        //         height: 0%;
+        //         background: $pink_clr;
+        //         z-index: -1;
+        //         transition: 0.8s;
+        //         border-radius: 25px;
+        //       }
+    
+        //       // &:hover {
+        //       //   border: 1px solid $hotel-secondary-color;
+        //       //   color: $text-white;
+    
+        //       //   &:before {
+        //       //     height: calc(100% - 4px);
+        //       //     width: calc(100% - 4px);
+        //       //   }
+        //       // }
+    
+        //       &.btn_disable {
+        //         cursor: default;
+        //       }
+    
+        //       @include mobile-view {
+        //         width: 135px;
+        //       }
+        //     }
+        //   }
+        // }
+    
+        .cta_btn_wrps {
+            padding: 10px;
+            width: 100%;
+            display: flex;
+    
+            button {
+            max-width: 472px;
+            width: 100%;
+            height: 40px;
+            padding: 10px 25px;
             background: $hotel-secondary-color;
-          }
-  
-          &:focus {
-            outline: none;
-            box-shadow: none;
-          }
+            border-radius: 25px;
+            border: 1px solid $hotel-secondary-color;
+            font-size: 14px;
+            color: $text-white;
+            transition: 0.3s;
+            position: relative;
+            z-index: 9;
+            overflow: hidden;
+            white-space: normal;
+            display: flex;
+            margin: 0 10px;
+            align-items: center;
+            justify-content: center;
+    
+            &:hover {
+                border: 1px solid $hotel-secondary-color;
+                color: $text-white;
+                background: $hotel-secondary-color;
+            }
+    
+            &:focus {
+                outline: none;
+                box-shadow: none;
+            }
+            }
         }
-      }
-  
-      .footer_logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin-top: 10px;
-  
-        img {
-          max-width: 62px;
-          height: 23px;
+    
+        .footer_logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 10px;
+    
+            img {
+            max-width: 62px;
+            height: 23px;
+            }
         }
-      }
-    }
-  
-    .modal-footer {
-      padding: 0 20px 25px;
-      border: 0;
-      margin: 0;
-  
-      .modal_btm {
-        width: 100%;
-  
-        .block_logo {
-          width: 100%;
-          text-align: center;
-          margin: 0 0 0;
-  
-          img {
-            height: 22px;
-          }
         }
-      }
+    
+        .modal-footer {
+        padding: 0 20px 25px;
+        border: 0;
+        margin: 0;
+    
+        .modal_btm {
+            width: 100%;
+    
+            .block_logo {
+            width: 100%;
+            text-align: center;
+            margin: 0 0 0;
+    
+            img {
+                height: 22px;
+            }
+            }
+        }
+        }
     }
   }
   
