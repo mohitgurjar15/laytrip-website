@@ -99,8 +99,6 @@ export class TravelerFormComponent implements OnInit {
     this.loadJquery();
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MM/DD/YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
 
-    console.log("this.myTravelers", this.myTravelers, this.isTravller)
-
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
         adults: this.formBuilder.array([])
@@ -152,14 +150,28 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.child));
       this.travelers[`type${this.cartNumber}`].child = this.cartItem.module_info.child_count;
 
+      if (!this.cartItem.module_info.is_passport_required) {
+        delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
+        delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
+      }
+      else {
+        this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required = true;
+      }
       this.cd.detectChanges();
     }
     for (let i = 0; i < this.cartItem.module_info.infant_count; i++) {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.infant));
       this.travelers[`type${this.cartNumber}`].infant = this.cartItem.module_info.infant_count;
+
       this.cd.detectChanges();
     }
     if (this.travelers && this.travelers[`type${this.cartNumber}`] && this.travelers[`type${this.cartNumber}`].adults) {
+      // console.log(this.travelers[`type${this.cartNumber}`].adults[this.traveler_number], 'YYYYYYYYY::::::::');
+      // if (this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].type === 'child') {
+      //   console.log(this.travelers[`type${this.cartNumber}`].adults[this.traveler_number], 'ZZZZZZZZZZZ:::::::::');
+      //   delete this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].passport_number;
+      //   delete this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].passport_expiry;
+      // }
       for (let i = 0; i < this.cartItem.travelers.length; i++) {
         let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
         this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
@@ -177,11 +189,10 @@ export class TravelerFormComponent implements OnInit {
           this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
         }
       }
-
+      console.log(this.travelers, 'TTTTTTTTTTT:::::::::');
       this.patch();
       this.cartService.setCartTravelers(this.travelers);
       this.cd.detectChanges();
-      console.log(this.travelers);
     }
 
     this.travelerForm.valueChanges.subscribe(value => {
@@ -318,7 +329,6 @@ export class TravelerFormComponent implements OnInit {
   }
 
   patchValues(x) {
-    console.log(x);
     return this.formBuilder.group({
       first_name: [x.first_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
       last_name: [x.last_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
@@ -534,6 +544,7 @@ export class TravelerFormComponent implements OnInit {
   checkMaximumMinimum(event, dobValue, cartNumber, traveler_number) {
     // CHECK MAXIMUM OR MINIMUM DATE OF BIRTH
     let traveler = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
+
     if (
       moment(dobValue)
         .isAfter(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMinDate).format('MM/DD/YYYY')) &&
@@ -543,20 +554,21 @@ export class TravelerFormComponent implements OnInit {
     } else {
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = true;
     }
-    this.travelers[`type${this.cartNumber}`].adults[traveler_number].first_name = traveler.first_name;
-    this.travelers[`type${this.cartNumber}`].adults[traveler_number].last_name = traveler.last_name;
-    this.travelers[`type${this.cartNumber}`].adults[traveler_number].email = traveler.email;
-    this.travelers[`type${this.cartNumber}`].adults[traveler_number].userId = traveler.userId;
-    this.travelers[`type${this.cartNumber}`].adults[traveler_number].gender = traveler.gender;
-    this.travelers[`type${this.cartNumber}`].adults[traveler_number].phone_no = traveler.phone_no;
-    this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code = traveler.country_code || '+1';
-    this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_id = traveler.country_id != null ? traveler.country_id : '';
-    this.travelers[`type${this.cartNumber}`].adults[traveler_number].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
+    this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.first_name;
+    this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.last_name;
+    this.travelers[`type${cartNumber}`].adults[traveler_number].email = traveler.email;
+    this.travelers[`type${cartNumber}`].adults[traveler_number].userId = traveler.userId;
+    this.travelers[`type${cartNumber}`].adults[traveler_number].gender = traveler.gender;
+    this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no = traveler.phone_no;
+    this.travelers[`type${cartNumber}`].adults[traveler_number].country_code = traveler.country_code || '+1';
+    this.travelers[`type${cartNumber}`].adults[traveler_number].country_id = traveler.country_id != null ? traveler.country_id : '';
+    this.travelers[`type${cartNumber}`].adults[traveler_number].dob = dobValue;
 
-    if (this.travelers[`type${this.cartNumber}`].adults[traveler_number].is_passport_required) {
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_number = traveler.passport_number;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_expiry = traveler.passport_expiry ? `${moment(traveler.passport_expiry, "YYYY-MM-DD").format('MMM DD, yy')}` : '';
+    if (this.travelers[`type${cartNumber}`].adults[traveler_number].is_passport_required) {
+      this.travelers[`type${cartNumber}`].adults[traveler_number].passport_number = traveler.passport_number;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].passport_expiry = traveler.passport_expiry ? `${moment(traveler.passport_expiry, "YYYY-MM-DD").format('MMM DD, yy')}` : '';
     }
     this.patch();
+    this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.dob.markAsTouched();
   }
 }

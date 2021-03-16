@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 declare var $: any;
 import { ToastrService } from 'ngx-toastr';
+import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 
@@ -65,7 +66,8 @@ export class AddCardComponent implements OnInit {
     private genericService: GenericService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    public commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {

@@ -131,6 +131,7 @@ export class TravellerFormComponent implements OnInit {
 
   setTravelerForm() {
     this.traveller = this.travelerInfo;
+    console.log(typeof this.travelerInfo.dob);
 
     var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");

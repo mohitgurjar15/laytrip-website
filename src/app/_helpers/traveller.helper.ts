@@ -33,6 +33,7 @@ export const travelersFileds = {
             is_valid_date: true,
             country_id: '',
             gender: '',
+            is_passport_required: false,
             passport_number: '',
             passport_expiry: '',
             checkout_date: new Date()

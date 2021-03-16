@@ -154,7 +154,7 @@
                         [maxDate]="traveler.controls.dobMaxDate.value"> -->
                       <input #dobText placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}}
                         [textMask]="dateYeaMask" formControlName="dob"
-                        (change)="checkMaximumMinimum($event, dobText.value, cartNumber, x)">
+                        (blur)="checkMaximumMinimum($event, dobText.value, cartNumber, x)">
                       <div *ngIf="traveler.controls.dob.touched && traveler.controls.dob.errors" class="error">
                         <small *ngIf="traveler.controls.dob.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
