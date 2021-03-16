@@ -212,7 +212,7 @@ export class TravellerFormComponent implements OnInit {
     this.loadingValue.emit(true);
     const controls = this.travellerForm.controls;
     if (this.travellerId) {
-      this.selectDob(moment(this.travellerForm.controls.dob.value).format('YYYY-MM-DD'));
+      this.validateDob(moment(this.travellerForm.controls.dob.value).format('MM-DD-YYYY'));
     }
     if (this.travellerForm.invalid) {
       Object.keys(controls).forEach(controlName =>
@@ -230,10 +230,11 @@ export class TravellerFormComponent implements OnInit {
           country_id = 233;//this.location.country.id;
         }
       }
+      console.log(this.travellerForm.value.dob,typeof this.travellerForm.value.dob)
       let jsonData = {
         first_name: this.travellerForm.value.firstName,
         last_name: this.travellerForm.value.lastName,
-        dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(this.travellerForm.value.dob, '/')).format('YYYY-MM-DD'),
+        dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob,'MM-DD-YYYY').format('YYYY-MM-DD') : moment(this.travellerForm.value.dob, 'MM-DD-YYYY').format('YYYY-MM-DD'),
         gender: this.travellerForm.value.gender ? this.travellerForm.value.gender : 'M',
         country_id: country_id ? country_id : '',
         passport_expiry: typeof this.travellerForm.value.passport_expiry === 'object' ? moment(this.travellerForm.value.passport_expiry).format('YYYY-MM-DD') : null,
@@ -286,20 +287,21 @@ export class TravellerFormComponent implements OnInit {
     return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
   }
 
-  selectDob(event) {
-    console.log(event.target.value, event.target.value.length)
-    if(event.target.value.length == 10){
-      console.log('sds')
-      var string = event.target.value;
-      var event2 = string.replace("/","-");
-      console.log(event2,string)
-      var selectedDate = moment(event).format('YYYY-MM-DD');
+  validateDob(event) {
+    console.log(typeof event)
+    var eventDate = (typeof event == 'object' && event.target.value != 'undefined') ? event.target.value : event;
+console.log(eventDate)
+
+    if(eventDate.length == 10 ){
+      var inputValueReplace = eventDate.replace("/","-");
+      var inputDate = inputValueReplace.replace("/","-");
+      var selectedDate = moment(inputDate,'MM-DD-YYYY').format('YYYY-MM-DD');
       var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
       var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
       const emailControl = this.travellerForm.get('email');
       const phoneControl = this.travellerForm.get('phone_no');
       const countryControl = this.travellerForm.get('country_code');
-      console.log(selectedDate, adult12YrPastDate)
+
       if (selectedDate <= adult12YrPastDate) {
         this.isAdult = true;
         this.isChild = false;

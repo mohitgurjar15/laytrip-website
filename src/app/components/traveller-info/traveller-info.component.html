@@ -15,7 +15,7 @@
                     <!-- <input type='button' value='-' class='qtyminus' field='quantity' [disabled]="adultValue === 1 && adultValue > 0" [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }" (click)="btnClickForChange({type: 'minus',label: 'adult', value: adultValue})"
                     />  -->
                     <button class="qtyminus" [disabled]="adultValue === 1 && adultValue > 0" [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }" (click)="btnClickForChange({type: 'minus',label: 'adult', value: adultValue})">-</button>
-                    <input type='text' name='quantity' value='{{ adultValue }}' class='qty' />
+                    <input type='text' name='quantity' value='{{ adultValue }}' class='qty' readonly/>
                     <button class="qtyplus" (click)="btnClickForChange({type: 'plus',label: 'adult', value: adultValue})">+</button>
                     <!-- <input type='button' value='+' class='qtyplus' field='quantity' (click)="btnClickForChange({type: 'plus',label: 'adult', value: adultValue})" /> -->
                 </div>
@@ -27,7 +27,7 @@
                 <div class="right">
                     <!-- <input type='button' value='-' class='qtyminus' field='quantity' [ngClass]="{ 'disable_btn' : childValue === 0 }" [disabled]="childValue === 0" (click)="btnClickForChange({type: 'minus',label: 'child', value: childValue})" /> -->
                     <button class="qtyminus" [ngClass]="{ 'disable_btn' : childValue === 0 }" [disabled]="childValue === 0" (click)="btnClickForChange({type: 'minus',label: 'child', value: childValue})">-</button>
-                    <input type='text' name='quantity' value='{{ childValue }}' class='qty' />
+                    <input readonly type='text' name='quantity' value='{{ childValue }}' class='qty' />
                     <!-- <input type='button' value='+' class='qtyplus' field='quantity' (click)="btnClickForChange({type: 'plus',label: 'child', value: childValue})" /> -->
                     <button class="qtyplus" (click)="btnClickForChange({type: 'plus',label: 'child', value: childValue})" >+</button>
                 </div>
@@ -39,7 +39,7 @@
                 <div class="right">
                     <!-- <input type='button' value='-' class='qtyminus' field='quantity' [ngClass]="{ 'disable_btn' : infantValue === 0 }" [disabled]="infantValue === 0" (click)="btnClickForChange({type: 'minus',label: 'infant', value: infantValue})" /> -->
                     <button class="qtyminus" field='quantity' [ngClass]="{ 'disable_btn' : infantValue === 0 }" [disabled]="infantValue === 0" (click)="btnClickForChange({type: 'minus',label: 'infant', value: infantValue})" >-</button>
-                    <input type='text' name='quantity' value='{{ infantValue }}' class='qty' />
+                    <input readonly type='text' name='quantity' value='{{ infantValue }}' class='qty' />
                     <!-- <input type='button' value='+' class='qtyplus' field='quantity' (click)="btnClickForChange({type: 'plus',label: 'infant', value: infantValue})" /> -->
                     <button class="qtyplus" (click)="btnClickForChange({type: 'plus',label: 'infant', value: infantValue})">+</button>
                 </div>
