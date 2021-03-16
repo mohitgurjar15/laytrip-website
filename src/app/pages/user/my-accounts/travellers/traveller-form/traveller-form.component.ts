@@ -75,7 +75,6 @@ export class TravellerFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.index)
     // this.getCountry();
     let location: any = this.cookieService.get('__loc');
     try {
@@ -288,36 +287,43 @@ export class TravellerFormComponent implements OnInit {
   }
 
   selectDob(event) {
-    var selectedDate = moment(event).format('YYYY-MM-DD');
-    var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
-    var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
-    const emailControl = this.travellerForm.get('email');
-    const phoneControl = this.travellerForm.get('phone_no');
-    const countryControl = this.travellerForm.get('country_code');
-    console.log(selectedDate, adult12YrPastDate)
-    if (selectedDate <= adult12YrPastDate) {
-      this.isAdult = true;
-      this.isChild = false;
-      emailControl.setValidators([Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
-      phoneControl.setValidators([Validators.required, Validators.minLength(10)]);
-      countryControl.setValidators([Validators.required]);
-    } else if (selectedDate < child2YrPastDate) {
-      this.isAdult = false;
-      this.isChild = true;
-      this.travellerForm.setValidators(null)
-      emailControl.setValidators(null)
-      phoneControl.setValidators(null)
-      countryControl.setValidators(null)
-    } else {
-      this.isAdult = this.isChild = false;
-      this.travellerForm.setValidators(null)
-      emailControl.setValidators(null)
-      phoneControl.setValidators(null)
-      countryControl.setValidators(null)
+    console.log(event.target.value.length)
+    if(event.target.value.length == 10){
+      console.log('sds')
+
+      var event2 = event.target.value.replace("/","-");
+      console.log(event2,event.target.value)
+      var selectedDate = moment(event).format('YYYY-MM-DD');
+      var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+      var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
+      const emailControl = this.travellerForm.get('email');
+      const phoneControl = this.travellerForm.get('phone_no');
+      const countryControl = this.travellerForm.get('country_code');
+      console.log(selectedDate, adult12YrPastDate)
+      if (selectedDate <= adult12YrPastDate) {
+        this.isAdult = true;
+        this.isChild = false;
+        emailControl.setValidators([Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
+        phoneControl.setValidators([Validators.required, Validators.minLength(10)]);
+        countryControl.setValidators([Validators.required]);
+      } else if (selectedDate < child2YrPastDate) {
+        this.isAdult = false;
+        this.isChild = true;
+        this.travellerForm.setValidators(null)
+        emailControl.setValidators(null)
+        phoneControl.setValidators(null)
+        countryControl.setValidators(null)
+      } else {
+        this.isAdult = this.isChild = false;
+        this.travellerForm.setValidators(null)
+        emailControl.setValidators(null)
+        phoneControl.setValidators(null)
+        countryControl.setValidators(null)
+      }
+      phoneControl.updateValueAndValidity();
+      emailControl.updateValueAndValidity();
+      countryControl.updateValueAndValidity();
     }
-    phoneControl.updateValueAndValidity();
-    emailControl.updateValueAndValidity();
-    countryControl.updateValueAndValidity();
   }
 
   deleteTraveller(travellerId) {

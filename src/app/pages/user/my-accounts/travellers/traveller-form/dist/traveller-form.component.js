@@ -53,7 +53,6 @@ var TravellerFormComponent = /** @class */ (function () {
         };
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
-        console.log(this.index);
         // this.getCountry();
         var location = this.cookieService.get('__loc');
         try {
@@ -253,38 +252,44 @@ var TravellerFormComponent = /** @class */ (function () {
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
     };
     TravellerFormComponent.prototype.selectDob = function (event) {
-        var selectedDate = moment(event).format('YYYY-MM-DD');
-        var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
-        var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
-        var emailControl = this.travellerForm.get('email');
-        var phoneControl = this.travellerForm.get('phone_no');
-        var countryControl = this.travellerForm.get('country_code');
-        console.log(selectedDate, adult12YrPastDate);
-        if (selectedDate <= adult12YrPastDate) {
-            this.isAdult = true;
-            this.isChild = false;
-            emailControl.setValidators([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
-            phoneControl.setValidators([forms_1.Validators.required, forms_1.Validators.minLength(10)]);
-            countryControl.setValidators([forms_1.Validators.required]);
+        console.log(event.target.value.length);
+        if (event.target.value.length == 10) {
+            console.log('sds');
+            var event2 = event.target.value.replace("/", "-");
+            console.log(event2, event.target.value);
+            var selectedDate = moment(event).format('YYYY-MM-DD');
+            var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
+            var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
+            var emailControl = this.travellerForm.get('email');
+            var phoneControl = this.travellerForm.get('phone_no');
+            var countryControl = this.travellerForm.get('country_code');
+            console.log(selectedDate, adult12YrPastDate);
+            if (selectedDate <= adult12YrPastDate) {
+                this.isAdult = true;
+                this.isChild = false;
+                emailControl.setValidators([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]);
+                phoneControl.setValidators([forms_1.Validators.required, forms_1.Validators.minLength(10)]);
+                countryControl.setValidators([forms_1.Validators.required]);
+            }
+            else if (selectedDate < child2YrPastDate) {
+                this.isAdult = false;
+                this.isChild = true;
+                this.travellerForm.setValidators(null);
+                emailControl.setValidators(null);
+                phoneControl.setValidators(null);
+                countryControl.setValidators(null);
+            }
+            else {
+                this.isAdult = this.isChild = false;
+                this.travellerForm.setValidators(null);
+                emailControl.setValidators(null);
+                phoneControl.setValidators(null);
+                countryControl.setValidators(null);
+            }
+            phoneControl.updateValueAndValidity();
+            emailControl.updateValueAndValidity();
+            countryControl.updateValueAndValidity();
         }
-        else if (selectedDate < child2YrPastDate) {
-            this.isAdult = false;
-            this.isChild = true;
-            this.travellerForm.setValidators(null);
-            emailControl.setValidators(null);
-            phoneControl.setValidators(null);
-            countryControl.setValidators(null);
-        }
-        else {
-            this.isAdult = this.isChild = false;
-            this.travellerForm.setValidators(null);
-            emailControl.setValidators(null);
-            phoneControl.setValidators(null);
-            countryControl.setValidators(null);
-        }
-        phoneControl.updateValueAndValidity();
-        emailControl.updateValueAndValidity();
-        countryControl.updateValueAndValidity();
     };
     TravellerFormComponent.prototype.deleteTraveller = function (travellerId) {
         this.deleteTravelerId.emit(travellerId);

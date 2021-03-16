@@ -872,7 +872,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   box-shadow: none;
 }
 .accordion_bookings .bottom_cta_btn {
-  margin: 15px 0 10px;
+  margin: 15px;
   display: flex;
   width: 100%;
   justify-content: center;
