@@ -573,10 +573,11 @@
                     font-weight: 600;
 
                     .stops_wr {
-                        max-width: 105px;
+                        max-width: 71px;
                         justify-content: space-between;
                         flex-direction: column;
                         display: flex;
+                        flex: 1;
 
                         .stopages {
                             flex-direction: column;
@@ -904,7 +905,7 @@
             }
             .notifi_text {
                 font-weight: 500;
-                color: $grayed_border;
+                color: $active-tab-text;
                 font-size: 10px;
                 margin-top: 15px;
                 display: flex;
