@@ -12,7 +12,6 @@ declare var $: any;
 import * as moment from 'moment';
 import { TravelerService } from '../../services/traveler.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { DatePipe } from '@angular/common';
 import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
 @Component({
   selector: 'app-traveler-form',
@@ -141,15 +140,14 @@ export class TravelerFormComponent implements OnInit {
       else {
         this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required = true;
       }
-
       this.travelers[`type${this.cartNumber}`].adult = this.cartItem.module_info.adult_count;
-
+      
       this.cd.detectChanges();
     }
     for (let i = 0; i < this.cartItem.module_info.child_count; i++) {
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.child));
       this.travelers[`type${this.cartNumber}`].child = this.cartItem.module_info.child_count;
-
+      
       if (!this.cartItem.module_info.is_passport_required) {
         delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
         delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
@@ -165,35 +163,28 @@ export class TravelerFormComponent implements OnInit {
 
       this.cd.detectChanges();
     }
-    if (this.travelers && this.travelers[`type${this.cartNumber}`] && this.travelers[`type${this.cartNumber}`].adults) {
-      // console.log(this.travelers[`type${this.cartNumber}`].adults[this.traveler_number], 'YYYYYYYYY::::::::');
-      // if (this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].type === 'child') {
-      //   console.log(this.travelers[`type${this.cartNumber}`].adults[this.traveler_number], 'ZZZZZZZZZZZ:::::::::');
-      //   delete this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].passport_number;
-      //   delete this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].passport_expiry;
-      // }
-      for (let i = 0; i < this.cartItem.travelers.length; i++) {
-        let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
-        this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
-        this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
-        this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
-        this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
-        this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender;
-        this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
-        this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode;
-        this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo;
-        this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
-        this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
-        if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
-          this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
-          this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
-        }
+      
+    for (let i = 0; i < this.cartItem.travelers.length; i++) {
+      let traveler = this.myTravelers.find(traveler => traveler.userId == this.cartItem.travelers[i].userId);
+      this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
+      this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
+      this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
+      this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
+      this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender;
+      this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
+      this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode;
+      this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo;
+      this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
+      this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
+      if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
+        this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
+        this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
       }
-      console.log(this.travelers, 'TTTTTTTTTTT:::::::::');
-      this.patch();
-      this.cartService.setCartTravelers(this.travelers);
-      this.cd.detectChanges();
     }
+    this.patch();
+    this.cartService.setCartTravelers(this.travelers);
+    this.cd.detectChanges();
+    
 
     this.travelerForm.valueChanges.subscribe(value => {
       this.checkOutService.emitTravelersformData(this.travelerForm);
@@ -337,7 +328,6 @@ export class TravelerFormComponent implements OnInit {
       email: (x.type === 'adult' || x.type === '') ? [x.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]] : [x.email],
       phone_no: (x.type === 'adult' || x.type === '') ? [x.phone_no, [Validators.required, Validators.minLength(10)]] : [x.phone_no],
       country_code: (x.type === 'adult' || x.type === '') ? [x.country_code, [Validators.required]] : [x.country_code],
-      is_duplictae_email: (x.type === 'adult' || x.type === '') ? [x.is_duplictae_email, [Validators.required]] : [x.is_duplictae_email],
       passport_number: (x.is_passport_required) ? [x.passport_number, [Validators.required]] : [x.passport_number],
       passport_expiry: (x.is_passport_required) ? [x.passport_expiry || null, [Validators.required]] : [x.passport_expiry],
       is_passport_required: [x.is_passport_required, [Validators.required]],

@@ -35,14 +35,6 @@
                     {{user.firstName}} {{user.lastName}}</li>
                 </ng-container>
               </ul>
-
-              <!-- <select class="form-control traveler_drop_down" (change)='selectTraveler($event,x)'>
-                <option [selected]>Saved Travelers </option>
-                <ng-container *ngFor="let user of myTravelers">
-                  <option [selected]="travelerItem.value.adults[x].userId===user.userId" [value]="user.userId">
-                    {{user.firstName}} {{user.lastName}}</option>
-                </ng-container>
-              </select> -->
             </div>
             <div [id]="'adult_collapse'+y+x" class="collapse show" data-parent="#accordion">
               <div class="card-body">
@@ -100,11 +92,7 @@
                         <option value="F">Female</option>
                         <option value="O">Other</option>
                       </select>
-                      <!-- <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender">
-                        <ng-option value="M">Male</ng-option>
-                        <ng-option value="F">Female</ng-option>
-                        <ng-option value="O">Other</ng-option> 
-                    </ng-select> -->
+                      
                       <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors" class="error">
                         <small *ngIf="traveler.controls.gender.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
@@ -122,11 +110,6 @@
                         <small *ngIf="traveler.controls.email.errors.pattern" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
                           enter valid email address.</small>
-                      </div>
-                      <div *ngIf="traveler.controls.is_duplictae_email.value==true" class="error">
-                        <small *ngIf="traveler.controls.email.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
-                            class="error_img">Traveler with this email already exists.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps mandetory_wrps"
@@ -181,7 +164,7 @@
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
-                      *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_number')">
+                      *ngIf="traveler.controls.is_passport_required.value && travelerItem.value?.adults[x].hasOwnProperty('passport_number')">
                       <label for="">Passport number*</label>
                       <input type="text" class="form-control" formControlName="passport_number" tabindex={{x}}>
                       <div *ngIf="traveler.controls.passport_number.touched && traveler.controls.passport_number.errors"
@@ -192,7 +175,7 @@
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
-                      *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_expiry')">
+                      *ngIf="traveler.controls.is_passport_required.value && travelerItem.value?.adults[x].hasOwnProperty('passport_expiry')">
                       <label for="">Expiration*</label>
                       <input type="text" class="form-control" bsDatepicker formControlName="passport_expiry"
                         tabindex={{x}} [bsConfig]="bsConfig" [minDate]="passPortMinDate">
