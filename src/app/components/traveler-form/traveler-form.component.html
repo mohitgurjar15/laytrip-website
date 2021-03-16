@@ -171,13 +171,13 @@
                       <div *ngIf="!traveler.controls.is_valid_date.value" class="error">
                         <small class="error_field" *ngIf="traveler.controls.type.value === 'adult'">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Adult
-                          age should be greater then 12 years</small>
+                          is age 12+.</small>
                         <small class="error_field" *ngIf="traveler.controls.type.value === 'child'">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Child
-                          age should be between then 2-12 years</small>
+                          is age 2-12.</small>
                         <small class="error_field" *ngIf="traveler.controls.type.value === 'infant'">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Infant
-                          age should be between then 0-2 years</small>
+                          is age  0-2.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
@@ -188,7 +188,7 @@
                         class="error">
                         <small *ngIf="traveler.controls.passport_number.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
-                            class="error_img">Passport number is required.</small>
+                            class="error_img">Enter Passport number.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
@@ -200,7 +200,7 @@
                         class="error">
                         <small *ngIf="traveler.controls.passport_expiry.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
-                            class="error_img">Passport expiration date is required.</small>
+                            class="error_img">Enter Passport expiration date.</small>
                       </div>
                     </div>
 

@@ -318,14 +318,14 @@ export class ProfileComponent implements OnInit {
         formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
       }
       if (!Number.isInteger(this.profileForm.value.state_id)) {
-        formdata.append("state_id", this.profileForm.value.state_id);
+        formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
       } else {
-        formdata.append("state_id", this.selectResponse.state.id);
+        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
       }
       if (typeof (this.profileForm.value.country_code) != 'object') {
-        formdata.append("country_code", this.profileForm.value.country_code.name);
+        formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code.name : '');
       } else {
-        formdata.append("country_code", this.selectResponse.countryCode);
+        formdata.append("country_code", this.selectResponse.countryCode ? this.selectResponse.countryCode : '');
       }
 
       formdata.append("zip_code", this.profileForm.value.zip_code ? this.profileForm.value.zip_code : this.selectResponse.zipCode);
@@ -339,11 +339,6 @@ export class ProfileComponent implements OnInit {
 
       this.userService.updateProfile(formdata).subscribe((data: any) => {
         // this.submitted = false;
-        this.toastr.show('sd', 'Profile Error', {
-          toastClass: 'custom_toastr',
-          titleClass: 'custom_toastr_title',
-          messageClass: 'custom_toastr_message',
-        });
         this.loadingValue.emit(false);
         localStorage.setItem("_lay_sess", data.token);
         // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
