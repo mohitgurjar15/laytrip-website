@@ -173,6 +173,7 @@
                 display: flex;
                 justify-content: flex-end;
                 flex: 1;
+                font-size: 15px;
 
                 @include tab-view {
                     font-size: 10px;
