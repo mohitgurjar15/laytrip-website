@@ -53,7 +53,7 @@
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps">
                 <label for="">{{'dob' |translate}}*</label>
                 <input placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex="{{travellerId}}" [textMask]="dateYeaMask"
-                    formControlName="dob">
+                    formControlName="dob" (keypress)="selectDob($event)">
                 <div *ngIf="travellerForm.controls.dob.touched && travellerForm.controls.dob.errors" class="error">
                     <small *ngIf="travellerForm.controls.dob.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
@@ -115,30 +115,7 @@
                         {{'email_invalid_validation' | translate}}</small>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps">
-                <label for="">{{'nationality' |translate}}*</label>
-                <ng-select tabindex="{{travellerId}}" class="ng-customClass" [items]="countries" bindLabel="name"
-                    [selectOnTab]="true" formControlName="country_id" selectOnTab="true" [clearable]="false">
-                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                        <span class="ng-value-label"><img class="img_country_code"
-                                [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'"
-                                width="20px" height="20px">
-                            {{ item.name ? item.name : 'Select country' }} </span>
-                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                    </ng-template>
-                    <ng-template ng-option-tmp let-item="item">
-                        <img class="img_country_code" [src]="item.flag" width="20px" height="20px">
-                        {{item.name}}
-                    </ng-template>
-                </ng-select>
-                <div *ngIf="travellerForm.controls.country_id.touched && travellerForm.controls.country_id.errors"
-                    class="error">
-                    <small *ngIf="travellerForm.controls.country_id.errors.required" class="error_field">Please
-                        select
-                        your country.</small>
-                </div>
-
-            </div>
+            
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps" *ngIf="isAdult || isChild">
                 <label for="">{{'passport_number' |translate}}</label>
                 <input tabindex="{{travellerId}}" type="text" class="form-control" formControlName="passport_number">
@@ -162,6 +139,30 @@
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                         Please enter expiration date.</small>
                 </div>
+            </div>
+            <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps">
+                <label for="">{{'nationality' |translate}}*</label>
+                <ng-select tabindex="{{travellerId}}" class="ng-customClass" [items]="countries" bindLabel="name"
+                    [selectOnTab]="true" formControlName="country_id" selectOnTab="true" [clearable]="false">
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"><img class="img_country_code"
+                                [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'"
+                                width="20px" height="20px">
+                            {{ item.name ? item.name : 'Select country' }} </span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item">
+                        <img class="img_country_code" [src]="item.flag" width="20px" height="20px">
+                        {{item.name}}
+                    </ng-template>
+                </ng-select>
+                <div *ngIf="travellerForm.controls.country_id.touched && travellerForm.controls.country_id.errors"
+                    class="error">
+                    <small *ngIf="travellerForm.controls.country_id.errors.required" class="error_field">Please
+                        select
+                        your country.</small>
+                </div>
+
             </div>
         </div>
         <span class="edit_btns duel_buttons">

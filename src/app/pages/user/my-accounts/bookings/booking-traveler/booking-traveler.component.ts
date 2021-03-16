@@ -1,8 +1,12 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import * as moment from 'moment';
-import { CheckOutService } from 'src/app/services/checkout.service';
-import { GenericService } from 'src/app/services/generic.service';
+import { CheckOutService } from '../../../../../services/checkout.service';
+import { GenericService } from '../../../../../services/generic.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../../../../environments/environment';
+import { AccountService } from '../../../../../services/account.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-booking-traveler',
@@ -11,16 +15,23 @@ import { GenericService } from 'src/app/services/generic.service';
 })
 export class BookingTravelerComponent implements OnInit {
 
+  s3BucketUrl = environment.s3BucketUrl;
   @Input() travelers : any = {};
   @Input() isPassportRequired=false;
   baggageDescription: string = '';
   moduleInfo : any ={};
   countries=[];
+  @Input() laytrip_cart_id='';
+  closeResult = '';
+  bookingId = '';
+  @Output() laytripCartId = new EventEmitter();
 
   constructor(   
     private commonFunction: CommonFunction,   
     private checkOutService: CheckOutService,   
-    private genericService: GenericService,   
+    private genericService: GenericService, 
+    private modalService: NgbModal,  
+    private accountService: AccountService
 
     ) { }
 
@@ -111,5 +122,40 @@ export class BookingTravelerComponent implements OnInit {
     });
     var countryObj = this.countries.filter(item => item.id == id );
     return countryObj[0].name ? countryObj[0].name : '';
+  }
+
+  open(content,bookingId) {
+    this.bookingId = bookingId;
+    this.modalService.open(content, {
+      windowClass: 'delete_account_window', centered: true, backdrop: 'static',
+      keyboard: false
+    }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+
+  cancelBooking(){
+    // this.upCommingloadingValue.emit(true);
+    this.accountService.cancelBooking(this.bookingId).subscribe((data: any) => {
+      this.laytripCartId.emit(this.bookingId);
+      // this.upCommingloadingValue.emit(false);
+      this.modalService.dismissAll();
+    }, (error: HttpErrorResponse) => {
+      // this.upCommingloadingValue.emit(false);
+      this.modalService.dismissAll();
+    });
   }
 }

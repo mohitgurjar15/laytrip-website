@@ -13,6 +13,20 @@
   }
 }
 
+.desk_names {
+  @include tab-view {
+    display: none;
+  }
+}
+
+.mob_names {
+  display: none;
+
+  @include tab-view {
+    display: block;
+  }
+}
+
 .img_country_code {
   border-radius: 3px;
 }
@@ -202,11 +216,35 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow.svg);
-        background-position: right 16px;
-        background-repeat: no-repeat;
-        background-size: 11px;
+        align-items: center;
+        display: flex;
         transition: 0.3s;
+
+        &[aria-expanded="true"] {
+          &:after {
+            content: '';
+            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow_up.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 11px;
+            border: none;
+            height: 15px;
+            width: 15px;
+          }
+        }
+
+        &[aria-expanded="false"] {
+          &:after {
+            content: '';
+            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 11px;
+            border: none;
+            height: 15px;
+            width: 15px;
+          }
+        }
 
         &::after {
           content: none;

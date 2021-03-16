@@ -11,6 +11,8 @@ export class FlightClassComponent implements OnInit {
   @Output() changeValue = new EventEmitter<any>();
   
   @Input() flightClass;
+  showClass:boolean=false;
+
   constructor(private eRef: ElementRef) { }
 
   ngOnInit() {
@@ -24,7 +26,12 @@ export class FlightClassComponent implements OnInit {
 
     $(".class_sec_info").click(function (e) {
       e.stopPropagation();
-      $(".add_class_sec_open_").show();
+      if(e.target.nextSibling.classList[2] == 'panel_show'){          
+        $(".add_class_sec_open_").show();
+      } else {      
+        $(".add_class_sec_open_").hide();      
+      }
+
       $(".add_traveler__open").hide();
     });
 
@@ -36,7 +43,9 @@ export class FlightClassComponent implements OnInit {
 
   }
 
- 
+  toggleTraveller(){
+    this.showClass=!this.showClass;
+  }
   btnClickForChange(item){
     this.changeValue.emit(item.value);
     this.flightClass = item.value;

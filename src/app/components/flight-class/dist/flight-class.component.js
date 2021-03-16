@@ -12,6 +12,7 @@ var FlightClassComponent = /** @class */ (function () {
     function FlightClassComponent(eRef) {
         this.eRef = eRef;
         this.changeValue = new core_1.EventEmitter();
+        this.showClass = false;
     }
     FlightClassComponent.prototype.ngOnInit = function () {
         this.loadJquery();
@@ -22,12 +23,20 @@ var FlightClassComponent = /** @class */ (function () {
         });
         $(".class_sec_info").click(function (e) {
             e.stopPropagation();
-            $(".add_class_sec_open_").show();
+            if (e.target.nextSibling.classList[2] == 'panel_show') {
+                $(".add_class_sec_open_").show();
+            }
+            else {
+                $(".add_class_sec_open_").hide();
+            }
             $(".add_traveler__open").hide();
         });
         $('.add_class_sec_open_').click(function (e) {
             e.stopPropagation();
         });
+    };
+    FlightClassComponent.prototype.toggleTraveller = function () {
+        this.showClass = !this.showClass;
     };
     FlightClassComponent.prototype.btnClickForChange = function (item) {
         this.changeValue.emit(item.value);

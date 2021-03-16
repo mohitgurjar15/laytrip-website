@@ -538,14 +538,13 @@
 
                                 a {
                                     background-color: transparent;
-                                    padding: 10px 15px;
+                                    padding: 10px 11px;
                                     border: 1px solid $box-border-color;
                                     border-left: 0;
                                     //border-top: 0;
                                     position: relative;
                                     top: 10px;
-                                    display: flex;
-                                    width: 114px;
+                                    width: 98px;
                                     align-items: center;
                                     display: flex;
                                     justify-content: center;
@@ -611,10 +610,10 @@
                                         }
 
                                         .tab_round_wrps {
-                                            width: 169px;
+                                            width: 186px;
                                             border: 2px solid $pink;
                                             border-radius: 25px;
-                                            padding: 5px 20px;
+                                            padding: 0 10px;
                                             color: $text-black;
                                             font-weight: 600;
                                             font-size: 18px;

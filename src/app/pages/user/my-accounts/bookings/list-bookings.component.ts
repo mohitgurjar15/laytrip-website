@@ -101,7 +101,8 @@ export class ListBookingsComponent implements OnInit {
   }
 
   selectInCompletedTab(cartNumber,data=[]) {
-    // console.log(data.length)
+    // console.log(this.selectedInCompletedTabNumber)
+    // this.selectedInCompletedTabNumber = 0;
     // if(data.length > 1){
       // console.log('sds')
       this.selectedInCompletedTabNumber = cartNumber;
@@ -117,7 +118,6 @@ export class ListBookingsComponent implements OnInit {
   }
   
   cancelCartIdRemove(event){
-    
     var filterData = this.upComingbookings.filter(function(obj){
       return obj.laytripCartId != event
     });
@@ -126,7 +126,6 @@ export class ListBookingsComponent implements OnInit {
   }
 
   loadUpcomming(event){
-    console.log(event);
     this.upComingloading = event;
   }
 }

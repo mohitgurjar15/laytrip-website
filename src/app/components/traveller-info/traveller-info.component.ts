@@ -48,6 +48,7 @@ export class TravellerInfoComponent implements OnInit {
   ngOnInit() {
     this.loadJquery();
   }
+  toggle = 0;
 
   loadJquery() {
     $("body").click(function () {
@@ -56,8 +57,12 @@ export class TravellerInfoComponent implements OnInit {
 
     $(".add_traveler_").click(function (e) {
       e.stopPropagation();
-      // $(".add_traveler__open").slideToggle("slow");
-      $(".add_traveler__open").show();
+        // $(".add_traveler__open").toggle();
+        if(e.target.nextSibling.classList[2] == 'panel_hide'){          
+          $(".add_traveler__open").hide();      
+        } else {
+          $(".add_traveler__open").show();
+        }
       $(".add_class_sec_open_").hide();
     });
 

@@ -100,7 +100,8 @@ var ListBookingsComponent = /** @class */ (function () {
     };
     ListBookingsComponent.prototype.selectInCompletedTab = function (cartNumber, data) {
         if (data === void 0) { data = []; }
-        // console.log(data.length)
+        // console.log(this.selectedInCompletedTabNumber)
+        // this.selectedInCompletedTabNumber = 0;
         // if(data.length > 1){
         // console.log('sds')
         this.selectedInCompletedTabNumber = cartNumber;
@@ -120,7 +121,6 @@ var ListBookingsComponent = /** @class */ (function () {
         this.upComingbookings = filterData;
     };
     ListBookingsComponent.prototype.loadUpcomming = function (event) {
-        console.log(event);
         this.upComingloading = event;
     };
     ListBookingsComponent = __decorate([
