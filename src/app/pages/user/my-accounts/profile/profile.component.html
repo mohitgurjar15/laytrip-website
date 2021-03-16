@@ -198,7 +198,7 @@
                 <div class="text_field address_box">
                     <input [readonly]="!isFormControlEnable" tabindex="10" type="text" formControlName="address"
                         placeholder="Street Address" class="inputs_com" maxlength="255">
-                    <input tabindex="13" [readonly]="!isFormControlEnable" type="text" class="inputs_com"
+                    <input tabindex="13" [readonly]="!isFormControlEnable" maxlength="50" type="text" class="inputs_com"
                         formControlName="city" placeholder="City">
                     <ng-select tabindex="12" [clearable]="false" [readonly]="!isFormControlEnable" class="address_ng"
                         clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id" placeholder="Select State"

@@ -1,7 +1,7 @@
 <div class="title_bar">
     <h3>Traveler Details</h3>
     <span class="edit_btns">
-        <a class="hover-link" (click)="showForm()">Add New</a>
+        <a class="hover-link" (click)="showForm()" *ngIf="!showNewForm">Add New</a>
     </span>
 </div>
 <div class="travel_detail_bg_wrps">

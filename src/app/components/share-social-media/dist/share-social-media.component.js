@@ -26,7 +26,7 @@ var ShareSocialMediaComponent = /** @class */ (function () {
     ShareSocialMediaComponent.prototype.share = function (media) {
         var message = encodeURIComponent('Laytrip - Layaway Travel for Everyone :' + this.baseUrl);
         if (media == 'Instagram') {
-            window.open('https://www.instagram.com/p/CKlezHrJt6R/?utm_source=ig_embed&amp;utm_campaign=loading');
+            window.open('https://www.instagram.com/laytrip_travel/');
         }
         else if (media == 'Facebook') {
             window.open("https://www.facebook.com/sharer/sharer.php?u=" + escape(this.baseUrl) + "&t=" + escape(message), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=textyes,height=300,width=600');
