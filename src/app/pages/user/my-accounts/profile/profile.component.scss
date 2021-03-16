@@ -352,6 +352,21 @@
 
                         .inputs_com {
                             padding: 0;
+                            &::placeholder {
+                                color: $mid_gray_bg;
+                                opacity: 1; /* Firefox */
+                                font-weight: 400;
+                              }
+                              
+                              &:-ms-input-placeholder { 
+                               color: $mid_gray_bg;
+                               font-weight: 400;
+                              }
+                              
+                              &::-ms-input-placeholder { /* Microsoft Edge */
+                               color: $mid_gray_bg;
+                               font-weight: 400;
+                              }
                             @include tab-view {
                                 min-height: 25px;
                                 max-height: 25px;
