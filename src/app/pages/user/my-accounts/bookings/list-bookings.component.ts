@@ -100,32 +100,29 @@ export class ListBookingsComponent implements OnInit {
     }
   }
 
-  selectInCompletedTab(cartNumber,data=[]) {
-    // console.log(this.selectedInCompletedTabNumber)
-    // this.selectedInCompletedTabNumber = 0;
-    // if(data.length > 1){
-      // console.log('sds')
-      this.selectedInCompletedTabNumber = cartNumber;
-    // }
+  selectInCompletedTab(cartNumber) {
+    this.selectedInCompletedTabNumber = cartNumber;
+    this.cartService.setCartNumber(cartNumber);
   }
 
   selectCompletedTab(cartNumber) {
     this.selectedCompletedTabNumber = cartNumber;
+    this.cartService.setCartNumber(cartNumber);
   }
 
   getProgressPercentage(value, totalValue) {
     return { 'width': Math.floor((value / totalValue) * 100) + '%' };
   }
-  
-  cancelCartIdRemove(event){
-    var filterData = this.upComingbookings.filter(function(obj){
+
+  cancelCartIdRemove(event) {
+    var filterData = this.upComingbookings.filter(function (obj) {
       return obj.laytripCartId != event
     });
     this.upComingbookings = [];
     this.upComingbookings = filterData;
   }
 
-  loadUpcomming(event){
+  loadUpcomming(event) {
     this.upComingloading = event;
   }
 }
