@@ -210,7 +210,6 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.getProfileInfo = function () {
         var _this = this;
         this.userService.getProfile().subscribe(function (res) {
-            // console.log(this.commonFunction.convertDateMMDDYYYY(res.dob, 'YYYY-MM-DD'))
             _this.loadingValue.emit(false);
             _this.image = res.profilePic;
             _this.selectResponse = res;
@@ -302,7 +301,6 @@ var ProfileComponent = /** @class */ (function () {
             else {
                 formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
             }
-            console.log(this.gender_type);
             if (typeof (this.profileForm.value.country_code) != 'object') {
                 formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
             }

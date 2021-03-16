@@ -130,7 +130,6 @@ export class TravellerFormComponent implements OnInit {
 
   setTravelerForm() {
     this.traveller = this.travelerInfo;
-    console.log(typeof this.travelerInfo.dob);
 
     var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
@@ -288,9 +287,7 @@ export class TravellerFormComponent implements OnInit {
   }
 
   validateDob(event) {
-    console.log(typeof event)
     var eventDate = (typeof event == 'object' && event.target.value != 'undefined') ? event.target.value : event;
-console.log(eventDate)
 
     if(eventDate.length == 10 ){
       var inputValueReplace = eventDate.replace("/","-");

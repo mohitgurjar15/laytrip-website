@@ -101,7 +101,6 @@ var TravellerFormComponent = /** @class */ (function () {
     };
     TravellerFormComponent.prototype.setTravelerForm = function () {
         this.traveller = this.travelerInfo;
-        console.log(typeof this.travelerInfo.dob);
         var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
         var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
         var travellerDob = moment(this.travelerInfo.dob).format('YYYY-MM-DD');
@@ -253,9 +252,7 @@ var TravellerFormComponent = /** @class */ (function () {
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
     };
     TravellerFormComponent.prototype.validateDob = function (event) {
-        console.log(typeof event);
         var eventDate = (typeof event == 'object' && event.target.value != 'undefined') ? event.target.value : event;
-        console.log(eventDate);
         if (eventDate.length == 10) {
             var inputValueReplace = eventDate.replace("/", "-");
             var inputDate = inputValueReplace.replace("/", "-");
