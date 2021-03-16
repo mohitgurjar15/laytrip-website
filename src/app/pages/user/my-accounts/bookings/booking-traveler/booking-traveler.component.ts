@@ -26,11 +26,11 @@ export class BookingTravelerComponent implements OnInit {
   closeResult = '';
   bookingId = '';
   @Output() laytripCartId = new EventEmitter();
-
+  bookingStatus;
+  
   constructor(   
     private commonFunction: CommonFunction,   
     private checkOutService: CheckOutService,   
-    private genericService: GenericService, 
     private modalService: NgbModal,  
     private accountService: AccountService
 
@@ -45,6 +45,7 @@ export class BookingTravelerComponent implements OnInit {
     if(typeof changes['travelers'].currentValue!='undefined'){
       this.travelers = changes['travelers'].currentValue.travelers;          
       this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
+      this.bookingStatus = changes['travelers'].currentValue.bookingStatus;
       if(this.travelers.length > 0){
         this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;  
       }      

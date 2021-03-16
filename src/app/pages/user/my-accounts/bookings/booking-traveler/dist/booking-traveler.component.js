@@ -12,10 +12,9 @@ var moment = require("moment");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var environment_1 = require("../../../../../../environments/environment");
 var BookingTravelerComponent = /** @class */ (function () {
-    function BookingTravelerComponent(commonFunction, checkOutService, genericService, modalService, accountService) {
+    function BookingTravelerComponent(commonFunction, checkOutService, modalService, accountService) {
         this.commonFunction = commonFunction;
         this.checkOutService = checkOutService;
-        this.genericService = genericService;
         this.modalService = modalService;
         this.accountService = accountService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -35,6 +34,7 @@ var BookingTravelerComponent = /** @class */ (function () {
         if (typeof changes['travelers'].currentValue != 'undefined') {
             this.travelers = changes['travelers'].currentValue.travelers;
             this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
+            this.bookingStatus = changes['travelers'].currentValue.bookingStatus;
             if (this.travelers.length > 0) {
                 this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;
             }

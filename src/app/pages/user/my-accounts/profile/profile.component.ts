@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   data = [];
   public startDate: Date;
   is_gender: boolean = true;
-  is_type: string = 'M';
+  gender_type: string = 'M';
   public imageFile: any = '';
   public imageFileError = false;
   public imageErrorMsg: string = 'Image is required';
@@ -171,11 +171,11 @@ export class ProfileComponent implements OnInit {
     if (this.isFormControlEnable) {
       this.is_gender = true;
       if (type == 'M') {
-        this.is_type = 'M';
+        this.gender_type = 'M';
       } else if (type == 'F') {
-        this.is_type = 'F';
+        this.gender_type = 'F';
       } else if (type == 'O') {
-        this.is_type = 'O';
+        this.gender_type = 'O';
       }
     }
   }
@@ -233,7 +233,7 @@ export class ProfileComponent implements OnInit {
       this.loadingValue.emit(false);
       this.image = res.profilePic;
       this.selectResponse = res;
-      this.is_type = res.gender ? res.gender : 'M';
+      this.gender_type = res.gender ? res.gender : 'M';
       var countryId = { id: res.country.id ? res.country.id : 233 };
       this.getStates(countryId);
       this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
@@ -308,7 +308,7 @@ export class ProfileComponent implements OnInit {
       formdata.append("email", this.profileForm.value.email);
       formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
       formdata.append("phone_no", this.profileForm.value.phone_no);
-      formdata.append("gender", this.is_type);
+      formdata.append("gender", this.gender_type ? this.gender_type : 'M');
       formdata.append("city_name", this.profileForm.value.city);
       formdata.append("address", this.profileForm.value.address);
 
@@ -322,8 +322,9 @@ export class ProfileComponent implements OnInit {
       } else {
         formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
       }
+      console.log(this.gender_type)
       if (typeof (this.profileForm.value.country_code) != 'object') {
-        formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code.name : '');
+        formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
       } else {
         formdata.append("country_code", this.selectResponse.countryCode ? this.selectResponse.countryCode : '');
       }
