@@ -133,12 +133,11 @@
         <div class="block_im">
           <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
         </div>
-        <h4 class="modal-title" id="modal-basic-title">Canceling this item will cancel all items you purchased under
-          this Booking ID. Please confirm.</h4>
+        <h4 class="modal-title" id="modal-basic-title">Canceling this item will cancel all items you purchased under this Booking ID, and per our <a href="#">Terms</a>, there are no refunds.</h4>
 
         <div class="cta_btn_wrps">
-          <button class="btn_no" (click)="modal.dismiss('Cross click')">Go Back</button>
-          <button class="btn_yes" (click)="cancelBooking()">Confirm</button>
+          <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel Booking</button>
+          <button class="btn_yes" (click)="cancelBooking()">Customer Service</button>
         </div>
         <div class="footer_logo">
           <a>
