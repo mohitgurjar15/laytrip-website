@@ -507,7 +507,14 @@ export class BookingComponent implements OnInit {
       this.loading = true;
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
-        let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+
+        //let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+        let travelers=[];
+        for(let k=0; k<data.length; k++){
+          travelers.push({
+            traveler_id: data[k].userId
+          })
+        }
         let cartData = {
           cart_id: this.carts[i].id,
           travelers: travelers

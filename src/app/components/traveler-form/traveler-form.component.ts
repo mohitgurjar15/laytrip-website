@@ -79,7 +79,9 @@ export class TravelerFormComponent implements OnInit {
     mask: [
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
-  isTravller: boolean = true;
+  isAdultTravller: boolean = true;
+  isChildTravller: boolean = true;
+  isInfantTravller: boolean = true;
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -119,10 +121,17 @@ export class TravelerFormComponent implements OnInit {
     this.checkOutService.getTravelers.subscribe((travelers: any) => {
       this.myTravelers = travelers;
       if (this.myTravelers.length == 0) {
-        this.isTravller = false;
+        this.isAdultTravller = false;
+        this.isChildTravller = false;
+        this.isInfantTravller = false;
       }
       else {
-        this.isTravller = true;
+        let adult = this.myTravelers.findIndex(x=>x.user_type=='adult')
+        if(adult!=-1){ this.isAdultTravller = true; }else{ this.isAdultTravller = false;}
+        let child = this.myTravelers.findIndex(x=>x.user_type=='child')
+        if(child!=-1){ this.isChildTravller = true; }else{ this.isChildTravller = false;}
+        let infant = this.myTravelers.findIndex(x=>x.user_type=='infant')
+        if(infant!=-1){ this.isInfantTravller = true; }else{ this.isInfantTravller = false;}
       }
     })
     this.cartService.getCartTravelers.subscribe((travelers: any) => {
@@ -365,7 +374,6 @@ export class TravelerFormComponent implements OnInit {
   selectTravelerNumber(event,cartNumber ,traveler_number) {
     this.traveler_number = traveler_number;
     let userId= this.travelers[`type${cartNumber}`].adults[traveler_number].userId;
-    console.log("this.travelers",this.travelers[`type${cartNumber}`].adults[traveler_number].userId)
     $(document).on("click", ".card-header", function () {
       if ($(this).find('.card-link').hasClass('collapsed')) {
         $(this).find('.traveler_drop_down').addClass('hide_section')
@@ -461,7 +469,10 @@ export class TravelerFormComponent implements OnInit {
             this.travelers[`type${cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
             this.travelers[`type${cartNumber}`].adults[traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy');
           }
-          this.isTravller = true;
+          
+          if(traveler.user_type=='adult'){ this.isAdultTravller = true; }
+          if(traveler.user_type=='child'){ this.isChildTravller = true; }
+          if(traveler.user_type=='infant'){ this.isInfantTravller = true; }
           this.checkOutService.setTravelers([...this.myTravelers, traveler]);
           this.patch();
         }

@@ -197,7 +197,7 @@ export class CheckoutComponent implements OnInit {
 
   bookingTimerConfiguration() {
     this.bookingTimerConfig = Object.assign({}, {
-      leftTime: 600 - moment(moment().format('YYYY-MM-DD h:mm:ss')).diff(moment().format('YYYY-MM-DD h:mm:ss'), 'seconds'),
+      leftTime: 600,
       format: 'm:s'
     });
   }
@@ -404,7 +404,13 @@ export class CheckoutComponent implements OnInit {
       window.scroll(0, 0);
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
-        let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+        //let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+        let travelers=[];
+        for(let k=0; k<data.length; k++){
+          travelers.push({
+            traveler_id: data[k].userId
+          })
+        }
         let cartData = {
           cart_id: this.carts[i].id,
           travelers: travelers
