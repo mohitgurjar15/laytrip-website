@@ -34,7 +34,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   fullPageLoading: any = false;
   isCartFull: boolean = false;
-  isFlightAvaibale:boolean=false;
+  isFlightAvaibale: boolean = false;
 
   filteredLabel = 'Price Low to High';
 
@@ -251,40 +251,40 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       // this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
         this.filteredLabel = 'Duration Shortest to Longest';
-        this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
+        this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
       } else if (order === 'DESC') {
         this.filteredLabel = 'Duration Longest to Shortest';
-        this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
+        this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
       }
     }
     else if (key === 'arrival') {
       // this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
         this.filteredLabel = 'Arrival Earliest to Latest';
-        this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
+        this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
       } else if (order === 'DESC') {
         this.filteredLabel = 'Arrival Latest to Earliest';
-        this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
+        this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
       }
     }
     else if (key === 'departure') {
       // this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
         this.filteredLabel = 'Departure Earliest to Latest';
-        this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
+        this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
       } else if (order === 'DESC') {
         this.filteredLabel = 'Departure Latest to Earliest';
-        this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
+        this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
       }
     }
     else {
       // this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
         this.filteredLabel = 'Price Low to High';
-        this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
+        this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       } else if (order === 'DESC') {
         this.filteredLabel = 'Price High to Low';
-        this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
+        this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       }
     }
     // console.log("After Key:",key,this.flightDetails)
@@ -380,11 +380,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.isCartFull = false;
   }
 
-  flightNotAvailable(data){
-    this.isFlightAvaibale=data;
+  flightNotAvailable(data) {
+    this.isFlightAvaibale = data;
   }
 
-  hideFlightNotAvailable(){
-    this.isFlightAvaibale=false;
+  hideFlightNotAvailable() {
+    this.isFlightAvaibale = false;
   }
 }
