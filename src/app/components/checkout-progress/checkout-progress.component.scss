@@ -9,6 +9,10 @@
     background-color: $bg-body;
     margin-top: 40px;
 
+    @include tab-view {
+        margin-top: 0;
+    }
+
     .prgrs_container {
         display: flex;
         justify-content: space-between;
