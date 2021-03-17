@@ -169,6 +169,9 @@ export class TravellerFormComponent implements OnInit {
       passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
       passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : '',
     });
+    this.travellerForm.controls['country_id'].disable();
+    this.travellerForm.controls['country_code'].disable();
+    this.travellerForm.controls['gender'].disable();
   }
 
   changeDateOfBirth(event) {
@@ -249,6 +252,7 @@ export class TravellerFormComponent implements OnInit {
       let emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
 
       if (this.travellerId) {
+
         this.loadingValue.emit(true);
         jsonData = Object.assign(jsonData, emailObj);
         this.travelerService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {
@@ -257,7 +261,10 @@ export class TravellerFormComponent implements OnInit {
           this.travelerFormChange.emit(data);
           $("#collapseTravInner" + this.travellerId).removeClass('show');
           // this.toastr.success('', 'Traveler updated successfully');
-
+          this.formEnable = false;
+          this.travellerForm.controls['country_id'].enable();
+          this.travellerForm.controls['country_code'].enable();
+          this.travellerForm.controls['gender'].enable();
         }, (error: HttpErrorResponse) => {
           this.loadingValue.emit(false);
           this.submitted = false;
@@ -376,5 +383,8 @@ export class TravellerFormComponent implements OnInit {
 
   disabledForm(){
     this.formEnable = false;
+    this.travellerForm.controls['country_id'].enable();
+    this.travellerForm.controls['country_code'].enable();
+    this.travellerForm.controls['gender'].enable();
   }
 }
