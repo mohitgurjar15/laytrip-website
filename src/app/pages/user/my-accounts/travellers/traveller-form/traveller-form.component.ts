@@ -33,7 +33,7 @@ export class TravellerFormComponent implements OnInit {
   // countries = [];
   @Input() countries_code: any = [];
   is_gender: boolean = true;
-  is_type: string = 'M';
+  is_type: string = '';
   travellerForm: FormGroup;
   traveller: any = [];
   isLoggedIn: boolean = false;
@@ -86,7 +86,7 @@ export class TravellerFormComponent implements OnInit {
     this.travellerForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      gender: ['M', [Validators.required]],
+      gender: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       country_id: ['United States', [Validators.required]],
@@ -358,7 +358,7 @@ export class TravellerFormComponent implements OnInit {
     });
     this.modalReference.close();
   }
-  
+
   disabledForm(){
     this.formEnable = false;
   }

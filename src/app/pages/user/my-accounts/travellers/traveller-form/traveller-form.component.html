@@ -32,6 +32,7 @@
                 <label for="">{{'gender' |translate}}*</label>
                 <div class="gender_anchers gender_selection">
                      <ng-select  [readonly]="formEnable" formControlName="gender" [clearable]="false" placeholder="Select Gender">
+                        <ng-option></ng-option>
                         <ng-option value="M">Male</ng-option>
                         <ng-option value="F">Female</ng-option>
                         <ng-option value="O">Other</ng-option> 

@@ -31,7 +31,7 @@ var TravellerFormComponent = /** @class */ (function () {
         // countries = [];
         this.countries_code = [];
         this.is_gender = true;
-        this.is_type = 'M';
+        this.is_type = '';
         this.traveller = [];
         this.isLoggedIn = false;
         this.loading = false;
@@ -64,7 +64,7 @@ var TravellerFormComponent = /** @class */ (function () {
         this.travellerForm = this.formBuilder.group({
             firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            gender: ['M', [forms_1.Validators.required]],
+            gender: ['', [forms_1.Validators.required]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: ['United States', [forms_1.Validators.required]],
