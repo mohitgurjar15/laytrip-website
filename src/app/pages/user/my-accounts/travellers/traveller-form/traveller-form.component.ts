@@ -130,7 +130,6 @@ export class TravellerFormComponent implements OnInit {
 
   setTravelerForm() {
     this.traveller = this.travelerInfo;
-    console.log(typeof this.travelerInfo.dob);
 
     var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
@@ -231,7 +230,6 @@ export class TravellerFormComponent implements OnInit {
           country_id = 233;//this.location.country.id;
         }
       }
-      console.log(this.travellerForm.value.dob,typeof this.travellerForm.value.dob)
       let jsonData = {
         first_name: this.travellerForm.value.firstName,
         last_name: this.travellerForm.value.lastName,
@@ -289,9 +287,7 @@ export class TravellerFormComponent implements OnInit {
   }
 
   validateDob(event) {
-    console.log(typeof event)
     var eventDate = (typeof event == 'object' && event.target.value != 'undefined') ? event.target.value : event;
-console.log(eventDate)
 
     if(eventDate.length == 10 ){
       var inputValueReplace = eventDate.replace("/","-");

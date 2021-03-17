@@ -201,7 +201,6 @@ var TravellerFormComponent = /** @class */ (function () {
                     country_id = 233; //this.location.country.id;
                 }
             }
-            console.log(this.travellerForm.value.dob, typeof this.travellerForm.value.dob);
             var jsonData = {
                 first_name: this.travellerForm.value.firstName,
                 last_name: this.travellerForm.value.lastName,
@@ -253,9 +252,7 @@ var TravellerFormComponent = /** @class */ (function () {
         return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
     };
     TravellerFormComponent.prototype.validateDob = function (event) {
-        console.log(typeof event);
         var eventDate = (typeof event == 'object' && event.target.value != 'undefined') ? event.target.value : event;
-        console.log(eventDate);
         if (eventDate.length == 10) {
             var inputValueReplace = eventDate.replace("/", "-");
             var inputDate = inputValueReplace.replace("/", "-");

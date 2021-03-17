@@ -198,16 +198,15 @@
                 <div class="text_field address_box">
                     <input [readonly]="!isFormControlEnable" tabindex="10" type="text" formControlName="address"
                         placeholder="Street Address" class="inputs_com" maxlength="255">
-                    <input tabindex="13" [readonly]="!isFormControlEnable" maxlength="50" type="text" class="inputs_com"
+                    <input tabindex="11" [readonly]="!isFormControlEnable" maxlength="50" type="text" class="inputs_com"
                         formControlName="city" placeholder="City">
                     <ng-select tabindex="12" [clearable]="false" [readonly]="!isFormControlEnable" class="address_ng"
-                        clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id" placeholder="Select State"
-                        tabindex="4">
+                        clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id" placeholder="Select State">
                         <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
                     </ng-select>
-                    <input tabindex="14" [readonly]="!isFormControlEnable" maxlength="8" type="text" class="inputs_com"
+                    <input tabindex="13" [readonly]="!isFormControlEnable" maxlength="8" type="text" class="inputs_com"
                         formControlName="zip_code" placeholder="Zip Code">
-                    <ng-select [readonly]="!isFormControlEnable" tabindex="11"
+                    <ng-select [readonly]="!isFormControlEnable" tabindex="14"
                         class="ng-customClass address_ng 2address_ng" [items]="countries" bindLabel="name"
                         [selectOnTab]="true" formControlName="country_id" selectOnTab="true"
                         (change)="getStates($event)" [clearable]="false">
