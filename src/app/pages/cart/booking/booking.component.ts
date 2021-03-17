@@ -383,7 +383,6 @@ export class BookingComponent implements OnInit {
   validateCartItems() {
     this.validationErrorMessage = '';
     this.inValidCartTravller=[];
-    console.log("this.travelerForm",this.travelerForm)
     /* if (!this.isValidTravelers) { */
       //this.validationErrorMessage = 'Complete required fields in Traveler Details for'
       let message = '';
@@ -483,9 +482,6 @@ export class BookingComponent implements OnInit {
     catch (e) {
       this.isAllAlertClosed = true;
     }
-
-    console.log("this.isAllAlertClosed", this.isAllAlertClosed, cartAlerts)
-
   }
 
   continueToCheckout() {
@@ -505,9 +501,11 @@ export class BookingComponent implements OnInit {
 
     if (this.isValidTravelers && this.cardToken != '' && !this.isNotAvailableItinerary && this.isAllAlertClosed) {
       this.loading = true;
+      this.travelerForm.enable();
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
-
+        //console.log(data,"=======",this.travelerForm);
+        //return false;
         //let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
         let travelers=[];
         for(let k=0; k<data.length; k++){

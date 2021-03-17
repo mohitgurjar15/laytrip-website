@@ -572,6 +572,7 @@ export class TravelerFormComponent implements OnInit {
       this.patch();
     }
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
+    //console.log("this.travelerForm===>",this.travelerForm);
     this.checkOutService.emitTravelersformData(this.travelerForm);
     this.cd.detectChanges();
   }
