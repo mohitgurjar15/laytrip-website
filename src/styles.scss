@@ -90,6 +90,70 @@ a {
     }
   }
 }
+.drop_down_mandetory{
+  .gender_selection{
+    border: none;
+    .ng-select{
+      .ng-select-container{
+        border-bottom: 2px solid $box-border-color;
+        min-height: 38px;
+        border-radius: 0;
+        .ng-value-container{
+          padding: 0;
+          .ng-input{
+            padding: 0;
+          }
+        }
+        .ng-arrow-wrapper{
+          padding: 0;
+          .ng-arrow{
+            padding: 5px 9px;
+            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: 12px;
+            content: "";
+            transition: 0.3s;
+            right: 8px;
+            border: none;
+            top: 0px;
+          }
+        }
+      }
+      &.ng-select-opened > .ng-select-container {
+        .ng-arrow {
+          padding: 5px 9px;
+          background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+          background-position: right;
+          background-repeat: no-repeat;
+          background-size: 12px;
+          content: "";
+          transition: 0.3s;
+          right: 8px;
+          border: none;
+          top: 0px;
+  
+          @include tab-view {
+            position: absolute;
+            right: 0;
+            height: 12px;
+          }
+        }
+      }
+      &.ng-touched {
+        &.ng-invalid {
+          .ng-select-container{
+            border-color: $error-color !important;
+          }
+        }
+      }
+    } 
+    .error_img {
+      top: 35px !important;
+      right: 35px !important;
+    }
+  }
+}
 .gender_selection{
   border-bottom: 2px solid $box-border-color;
   .ng-select{
@@ -525,6 +589,7 @@ select {
     }
   }
 }
+
 
 .error_field {
   color: $error-color;

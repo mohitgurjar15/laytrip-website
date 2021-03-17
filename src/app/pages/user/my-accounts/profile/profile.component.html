@@ -174,11 +174,11 @@
                 <div class="text_field">
                     <div
                         [ngClass]="{'gender_anchers' : isFormControlEnable , 'gender_anchers_notEnable' : !isFormControlEnable }">
-                        <a [ngClass]="{'active': (is_type == 'M')}" class="hover-link"
+                        <a [ngClass]="{'active': (gender_type == 'M')}" class="hover-link"
                             (click)="selectGender($event,'M')">Male</a>
-                        <a [ngClass]="{'active': (is_type == 'F')}" (click)="selectGender($event,'F')"
+                        <a [ngClass]="{'active': (gender_type == 'F')}" (click)="selectGender($event,'F')"
                             class="hover-link">Female</a>
-                        <a [ngClass]="{'active': (is_type == 'O')}" (click)="selectGender($event,'O')"
+                        <a [ngClass]="{'active': (gender_type == 'O')}" (click)="selectGender($event,'O')"
                             class="hover-link">Other</a>
                     </div>
                 </div>

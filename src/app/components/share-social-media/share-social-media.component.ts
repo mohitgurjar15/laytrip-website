@@ -27,7 +27,8 @@ export class ShareSocialMediaComponent implements OnInit {
   share(media){
     var message = encodeURIComponent('Laytrip - Layaway Travel for Everyone :'+ this.baseUrl);
 
-    if(media == 'Instagram'){        
+    if(media == 'Instagram'){       
+       
       window.open('https://www.instagram.com/laytrip_travel/')
     }else if(media == 'Facebook'){
       window.open(`https://www.facebook.com/sharer/sharer.php?u=${escape(this.baseUrl)}&t=${escape(message)}`, '', 

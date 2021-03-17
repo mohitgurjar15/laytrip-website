@@ -573,10 +573,11 @@
                     font-weight: 600;
 
                     .stops_wr {
-                        max-width: 105px;
+                        max-width: 71px;
                         justify-content: space-between;
                         flex-direction: column;
                         display: flex;
+                        flex: 1;
 
                         .stopages {
                             flex-direction: column;
@@ -816,6 +817,7 @@
                         justify-content: flex-start;
                         margin-bottom: 15px;
 
+
                         @include tab-view {
                             flex-direction: column;
                             padding-bottom: 6px;
@@ -823,7 +825,7 @@
                             font-size: 10px;
                         }
 
-                        &:last-child {
+                        &:nth-child(4) {
                             border: none;
                             margin: 0;
                             padding: 0;
@@ -876,12 +878,12 @@
                             margin-right: 5px;
                         }
                     }
-
+                    
                     .texts_rules {
                         font-size: 10px;
                         font-weight: 400;
-                        color: $mid_gray_bg;
-                        margin-top: 5px;
+                        color: $grayed_border;
+                        margin-top: 15px;
                         line-height: 14px;
                         overflow-y: auto;
                         max-height: 150px;
@@ -896,15 +898,21 @@
                     }
                 }
             }
-
+            .full_desk_not{
+                @include tab-view{
+                    display: none;
+                }
+            }
             .notifi_text {
-                font-weight: 500;
-                color: $mid_gray_bg;
+                font-weight: 400;
+                color: $active-tab-text;
                 font-size: 10px;
-                margin-top: 5px;
+                margin-top: 15px;
                 display: flex;
                 justify-content: flex-start;
-
+                @include tab-view{
+                    margin-top: 10px;
+                }
                 &.desk_notifi {
                     @include tab-view {
                         display: none;

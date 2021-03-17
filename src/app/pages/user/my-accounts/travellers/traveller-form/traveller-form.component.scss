@@ -290,6 +290,8 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      position: relative;
+      top: -2px;
       a {
         &.active {
           color: $text_light_yellow;

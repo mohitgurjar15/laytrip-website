@@ -101,13 +101,15 @@
             img {
                 height: 47px;
             }
-            small{
-                &.beta_text{
+
+            small {
+                &.beta_text {
                     color: $pink;
                     font-size: 14px;
                     position: relative;
                     top: -5px;
-                    @include tab-view{
+
+                    @include tab-view {
                         font-size: 10px;
                     }
                 }
@@ -1007,7 +1009,8 @@
                             &:hover {
                                 background-color: transparent;
                             }
-                            @include tab-view{
+
+                            @include tab-view {
                                 font-size: 14px;
                             }
 
@@ -1027,11 +1030,12 @@
                     align-items: center;
                     padding-right: 5px;
 
-                    @include tab-view{
+                    @include tab-view {
                         font-size: 12px;
                         padding-top: 0;
                         padding-bottom: 0;
                     }
+
                     img {
                         max-width: 27px;
                         height: 27px;
@@ -1042,10 +1046,21 @@
                         object-position: center;
                         margin-right: 5px;
                         border-radius: 50%;
-                        @include tab-view{
+
+                        @include tab-view {
                             max-width: 30px;
                             height: 30px;
                             width: 30px;
+                            margin-right: 2px;
+                        }
+                    }
+
+                    span {
+                        @include tab-view {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-width: 55px;
                         }
                     }
 
@@ -1215,6 +1230,22 @@
                 }
             }
         }
+    }
+}
+
+.desk_span {
+    @include tab-view {
+        display: none;
+    }
+}
+
+.mob_span {
+    display: none;
+
+    @include tab-view {
+        display: flex;
+        font-size: 8px !important;
+        margin-left: 35px;
     }
 }
 
@@ -1428,7 +1459,7 @@
     top: 25%;
     position: fixed;
 
-    a{
+    a {
         width: 10px !important;
         margin-left: 10px;
     }

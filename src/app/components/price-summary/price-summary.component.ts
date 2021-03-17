@@ -42,6 +42,7 @@ export class PriceSummaryComponent implements OnInit {
     }
     this.insatllmentAmount=0;
     if (typeof changes['priceSummary'].currentValue!='undefined') {
+      console.log("changes['priceSummary']",changes['priceSummary'])
       this.priceSummary = changes['priceSummary'].currentValue;
       if(typeof this.priceSummary.instalments!=='undefined' && this.priceSummary.paymentType=='instalment'){
        for(let i =1 ; i<this.priceSummary.instalments.instalment_date.length; i++){
@@ -53,7 +54,7 @@ export class PriceSummaryComponent implements OnInit {
           if(this.priceSummary.instalments.instalment_date[1].instalment_amount!=this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length-1].instalment_amount){
 
             this.installmentVartion = this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length-1].instalment_amount-this.priceSummary.instalments.instalment_date[1].instalment_amount;
-            if(this.installmentVartion>0){
+            /* if(this.installmentVartion>0){
               let indexExist = this.cartAlerts.findIndex(x=>x.type=="installment_vartion");
               if(indexExist==-1){
                 this.cartAlerts.push({
@@ -62,7 +63,7 @@ export class PriceSummaryComponent implements OnInit {
                 })
               }
               localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
-            }
+            } */
           }
        }
       }
@@ -74,7 +75,7 @@ export class PriceSummaryComponent implements OnInit {
   }
 
   closeInstallmentVartion(id){
-    try{
+    /* try{
       let cartAlerts = localStorage.getItem("__alrt")
       if(cartAlerts){
         this.cartAlerts= JSON.parse(cartAlerts)
@@ -89,7 +90,7 @@ export class PriceSummaryComponent implements OnInit {
       this.cartAlerts=[];
     }
     
-    localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
+    localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts)) */
     this.installmentVartion=0;
 
   }

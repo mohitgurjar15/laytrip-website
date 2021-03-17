@@ -24,10 +24,10 @@ ng-scrollbar {
     margin-top: 5px;
     width: 100%;
     z-index: 999;
-    height: 186px;
+    //max-height: 186px;
 
     @include tab-view{
-        height: 265px;
+        //max-height: 265px;
     }
 
     .close_btn {
