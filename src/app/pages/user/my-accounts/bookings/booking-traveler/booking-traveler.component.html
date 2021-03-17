@@ -34,7 +34,7 @@
                             <label for="">Email*</label>
                             <input type="email" class="form-control" placeholder="{{traveler.travelerInfo.email}}" disabled>
                         </div>
-                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="traveler.user_type == 'adult'" >
                             <label for="">Telephone*</label>
                             <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.countryCode != 'null' ? getPhoneNoInMaskFormat(traveler.travelerInfo.phoneNo,traveler.travelerInfo.countryCode): '' }}"
                                 disabled>
@@ -46,8 +46,8 @@
                                 disabled>
                         </div>
 
-                        <div class="col-sm-12 col-md-4"
-                            *ngIf="traveler.is_passport_required && checkIsChild(traveler.travelerInfo.dob) ">
+                        <div class="col-sm-12 col-md-4" 
+                            *ngIf="traveler.user_type == 'adult' &&  traveler.is_passport_required && checkIsChild(traveler.travelerInfo.dob) ">
                             <label for="">{{'passport_number'| translate}}</label>
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.passportNumber}}"
                                 disabled>
