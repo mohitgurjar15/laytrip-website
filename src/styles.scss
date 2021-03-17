@@ -157,6 +157,11 @@ a {
 .gender_selection{
   border-bottom: 2px solid $box-border-color;
   .ng-select{
+    &.ng-select-disabled{
+      .ng-select-container{
+        background-color: $background-white;
+      }
+    }
     .ng-select-container{
       border: none;
       min-height: 34px;

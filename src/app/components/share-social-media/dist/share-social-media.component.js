@@ -24,7 +24,7 @@ var ShareSocialMediaComponent = /** @class */ (function () {
         this.activeModal.close({ STATUS: confirmation_modal_component_1.MODAL_TYPE.CLOSE });
     };
     ShareSocialMediaComponent.prototype.share = function (media) {
-        var message = encodeURIComponent('Laytrip - Layaway Travel for Everyone :' + this.baseUrl);
+        var message = encodeURIComponent('Laytrip - Layaway Travel for Everyone:' + this.baseUrl);
         if (media == 'Instagram') {
             window.open('https://www.instagram.com/laytrip_travel/');
         }

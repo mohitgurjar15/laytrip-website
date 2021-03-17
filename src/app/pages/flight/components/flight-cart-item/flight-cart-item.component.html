@@ -49,7 +49,7 @@
     <div class="total_hrs_wrps cta_btns_wrps">
       <span class="ct_btns">
         <button *ngIf="cartItem.module_info?.routes?.length === 1"
-          (click)="openDeleteConfirmationPopup(cartItem.id)">Cancel</button>
+          (click)="openDeleteConfirmationPopup(cartItem.id)">Delete</button>
         <!-- deleteCart(cartItem.id) -->
       </span>
       Duration {{cartItem.module_info?.routes[0]?.duration}}
@@ -100,7 +100,7 @@
       </div>
       <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem.module_info?.routes?.length === 2">
         <span class="ct_btns">
-          <button (click)="openDeleteConfirmationPopup(cartItem.id)">Cancel</button>
+          <button (click)="openDeleteConfirmationPopup(cartItem.id)">Delete</button>
           <!-- deleteCart(cartItem.id) -->
         </span>
         Duration {{cartItem.module_info?.routes[1]?.duration}}
