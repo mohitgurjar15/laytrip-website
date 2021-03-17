@@ -14,8 +14,9 @@
   min-height: 610px;
   background-position: center center;
   @include tab-view {
-    padding: 15px 0;
-    background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/mobile_hollywood_banner.png");
+    padding: 5px 0 45px;
+    min-height: 440px;
+    background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hollywood_mobile_banner.jpg");
   }
   .contect_text_wrapper {
     display: flex;

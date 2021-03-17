@@ -58,7 +58,9 @@ export class TravellerFormComponent implements OnInit {
     mask: [
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
-  formEnable : boolean = false;
+  formEnable : boolean = false; 
+  submitted = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -211,11 +213,13 @@ export class TravellerFormComponent implements OnInit {
 
   onSubmit() {
     this.loadingValue.emit(true);
+    this.submitted = true;
     const controls = this.travellerForm.controls;
     if (this.travellerId) {
       this.validateDob(moment(this.travellerForm.controls.dob.value).format('MM-DD-YYYY'));
     }
     if (this.travellerForm.invalid) {
+      this.submitted = true;
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()
       );
@@ -249,12 +253,14 @@ export class TravellerFormComponent implements OnInit {
         jsonData = Object.assign(jsonData, emailObj);
         this.travelerService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {
           this.loadingValue.emit(false);
+          this.submitted = false;
           this.travelerFormChange.emit(data);
           $("#collapseTravInner" + this.travellerId).removeClass('show');
           // this.toastr.success('', 'Traveler updated successfully');
 
         }, (error: HttpErrorResponse) => {
           this.loadingValue.emit(false);
+          this.submitted = false;
           // this.toastr.error(error.error.message, 'Traveler Update Error');
           if (error.status === 401) {
             this.router.navigate(['/']);
@@ -266,12 +272,14 @@ export class TravellerFormComponent implements OnInit {
         this.travelerService.addAdult(jsonData).subscribe((data: any) => {
           this.travelerFormChange.emit(data);
           this.loadingValue.emit(false);
+          this.submitted = false;
           this.travellerForm.reset();
           this.travellerForm.setErrors(null);
           // this.toastr.success('', 'Traveler added successfully');
 
         }, (error: HttpErrorResponse) => {
           this.loadingValue.emit(false);
+          this.submitted = false;
           // this.toastr.error(error.error.message, 'Traveler Add Error');
           if (error.status === 401) {
             this.router.navigate(['/']);

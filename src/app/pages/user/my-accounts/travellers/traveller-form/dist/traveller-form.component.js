@@ -52,6 +52,7 @@ var TravellerFormComponent = /** @class */ (function () {
             ]
         };
         this.formEnable = false;
+        this.submitted = false;
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
         // this.getCountry();
@@ -182,11 +183,13 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.onSubmit = function () {
         var _this = this;
         this.loadingValue.emit(true);
+        this.submitted = true;
         var controls = this.travellerForm.controls;
         if (this.travellerId) {
             this.validateDob(moment(this.travellerForm.controls.dob.value).format('MM-DD-YYYY'));
         }
         if (this.travellerForm.invalid) {
+            this.submitted = true;
             Object.keys(controls).forEach(function (controlName) {
                 return controls[controlName].markAsTouched();
             });
@@ -220,11 +223,13 @@ var TravellerFormComponent = /** @class */ (function () {
                 jsonData = Object.assign(jsonData, emailObj);
                 this.travelerService.updateAdult(jsonData, this.travellerId).subscribe(function (data) {
                     _this.loadingValue.emit(false);
+                    _this.submitted = false;
                     _this.travelerFormChange.emit(data);
                     $("#collapseTravInner" + _this.travellerId).removeClass('show');
                     // this.toastr.success('', 'Traveler updated successfully');
                 }, function (error) {
                     _this.loadingValue.emit(false);
+                    _this.submitted = false;
                     // this.toastr.error(error.error.message, 'Traveler Update Error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
@@ -236,11 +241,13 @@ var TravellerFormComponent = /** @class */ (function () {
                 this.travelerService.addAdult(jsonData).subscribe(function (data) {
                     _this.travelerFormChange.emit(data);
                     _this.loadingValue.emit(false);
+                    _this.submitted = false;
                     _this.travellerForm.reset();
                     _this.travellerForm.setErrors(null);
                     // this.toastr.success('', 'Traveler added successfully');
                 }, function (error) {
                     _this.loadingValue.emit(false);
+                    _this.submitted = false;
                     // this.toastr.error(error.error.message, 'Traveler Add Error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
