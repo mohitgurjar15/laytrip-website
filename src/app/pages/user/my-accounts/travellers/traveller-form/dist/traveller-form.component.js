@@ -139,6 +139,9 @@ var TravellerFormComponent = /** @class */ (function () {
             passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
             passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : ''
         });
+        this.travellerForm.controls['country_id'].disable();
+        this.travellerForm.controls['country_code'].disable();
+        this.travellerForm.controls['gender'].disable();
     };
     TravellerFormComponent.prototype.changeDateOfBirth = function (event) {
         var todayDate = moment();
@@ -227,6 +230,10 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.travelerFormChange.emit(data);
                     $("#collapseTravInner" + _this.travellerId).removeClass('show');
                     // this.toastr.success('', 'Traveler updated successfully');
+                    _this.formEnable = false;
+                    _this.travellerForm.controls['country_id'].enable();
+                    _this.travellerForm.controls['country_code'].enable();
+                    _this.travellerForm.controls['gender'].enable();
                 }, function (error) {
                     _this.loadingValue.emit(false);
                     _this.submitted = false;
@@ -336,6 +343,9 @@ var TravellerFormComponent = /** @class */ (function () {
     };
     TravellerFormComponent.prototype.disabledForm = function () {
         this.formEnable = false;
+        this.travellerForm.controls['country_id'].enable();
+        this.travellerForm.controls['country_code'].enable();
+        this.travellerForm.controls['gender'].enable();
     };
     __decorate([
         core_1.Input()
