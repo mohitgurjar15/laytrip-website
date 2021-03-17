@@ -156,6 +156,7 @@ export class SigninComponent implements OnInit {
   }
 
   openForgotPassModal() {
+    this.apiError = '';
     $('#sign_in_modal').modal('hide');
     setTimeout(() => {
       this.renderer.addClass(document.body, 'modal-open');
