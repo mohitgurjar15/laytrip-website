@@ -78,6 +78,9 @@ export class CheckoutComponent implements OnInit {
   isTermConditionAccepted: boolean = false;
   isTermConditionError: boolean = false;
 
+  isExcludedCountryAccepted: boolean = false;
+  isExcludedCountryError: boolean = false;
+
   constructor(
     private genericService: GenericService,
     private travelerService: TravelerService,
@@ -197,7 +200,7 @@ export class CheckoutComponent implements OnInit {
 
   bookingTimerConfiguration() {
     this.bookingTimerConfig = Object.assign({}, {
-      leftTime: 600 - moment(moment().format('YYYY-MM-DDTHH:mm:ssZ')).diff(moment().format('YYYY-MM-DDTHH:mm:ssZ'), 'seconds'),
+      leftTime: 600,
       format: 'm:s'
     });
   }
@@ -380,6 +383,13 @@ export class CheckoutComponent implements OnInit {
     else {
       this.isTermConditionError = false;
     }
+
+    if (!this.isExcludedCountryAccepted) {
+      this.isExcludedCountryError = true;
+    }
+    else {
+      this.isExcludedCountryError = false;
+    }
   }
 
   bookFlight() {
@@ -399,12 +409,18 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.cart = carts;
     sessionStorage.setItem('__cbk', JSON.stringify(this.bookingRequest))
     console.log("this.bookingRequest", this.bookingRequest)
-    if (this.isValidTravelers && this.cardToken != '' && this.isAllAlertClosed && this.isTermConditionAccepted) {
+    if (this.isValidTravelers && this.cardToken != '' && this.isAllAlertClosed && this.isTermConditionAccepted && this.isExcludedCountryAccepted) {
       this.isBookingProgress = true;
       window.scroll(0, 0);
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
-        let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+        //let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+        let travelers=[];
+        for(let k=0; k<data.length; k++){
+          travelers.push({
+            traveler_id: data[k].userId
+          })
+        }
         let cartData = {
           cart_id: this.carts[i].id,
           travelers: travelers
@@ -524,5 +540,20 @@ export class CheckoutComponent implements OnInit {
 
   removeTermConditionError() {
     this.isTermConditionError = false;
+  }
+
+  acceptExcludedCountry(event){
+    if (event.target.checked) {
+      this.isExcludedCountryAccepted = true;
+      this.isExcludedCountryError = false;
+    }
+    else {
+      this.isExcludedCountryAccepted = false;
+      this.isExcludedCountryError = true;
+    }
+  }
+
+  removeExculdedError(){
+    this.isExcludedCountryError = false;
   }
 }

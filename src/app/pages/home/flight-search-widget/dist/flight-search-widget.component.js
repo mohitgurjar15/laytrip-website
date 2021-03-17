@@ -126,6 +126,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.homeService.getToString.subscribe(function (toSearchString) {
             if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
                 var keys = toSearchString;
+                localStorage.setItem('__to', keys);
+                // this.toSearch = null;   
                 _this.toSearch = airports_1.airports[keys];
                 _this.flightSearchForm.controls.fromDestination.setValue('');
                 _this.fromSearch = [];

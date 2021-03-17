@@ -63,8 +63,13 @@
                             <span class="checkmark"></span>
                             I agree to your <a [routerLink]="['/privacy-policy']" target="_blank">Privacy Policy</a> and <a [routerLink]="['/terms']" target="_blank">Terms</a>, which include terms from Laytrip suppliers and travel partners.
                         </label>
+                        <label class="custom_checkbox">
+                            <input type="checkbox"  (click)="acceptExcludedCountry($event)">
+                            <span class="checkmark"></span>
+                            By purchasing this booking, I confirm that I am not a resident of CA, FL, IL or WA.
+                        </label>
                         <div class="cta_btn_wrapper">
-                            <button [ngClass]="{'btn':isTermConditionAccepted==false}" [disabled]="!isTermConditionAccepted" (click)="bookFlight()">Pay and Book</button>
+                            <button [ngClass]="{'btn':isTermConditionAccepted==false || isExcludedCountryAccepted==false}" [disabled]="!isTermConditionAccepted || !isExcludedCountryAccepted" (click)="bookFlight()">Pay and Book</button>
                         </div>
                     </div>
                     <div class="error_wrapper">
@@ -78,11 +83,16 @@
                             <a (click)="removeAllAlertError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
                                     alt="Close"></a>
                         </div>
-                        <div class="section_description" *ngIf="isTermConditionError">
+                        <!-- <div class="section_description" *ngIf="isTermConditionError">
                             <span class="sec_text">Please accept terms & condition.</span>
                             <a (click)="removeTermConditionError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
                                     alt="Close"></a>
                         </div>
+                        <div class="section_description" *ngIf="isExcludedCountryError">
+                            <span class="sec_text">Please confirm that you are not a resident of CA, FL, IL or WA.</span>
+                            <a (click)="removeExculdedError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                    alt="Close"></a>
+                        </div> -->
                     </div>
                     
                 </div>

@@ -26,7 +26,8 @@
         </div>
         <div class="pay_listing total_amm_blue">
           <span>Total Due Now</span>
-          <span>${{priceSummary.remainingAmount | number : '1.2-2'}}</span>
+          <span *ngIf="priceSummary?.paymentType=='instalment'">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
+          <span *ngIf="priceSummary?.paymentType=='no-instalment'">${{priceSummary.totalAmount | number : '1.2-2'}}</span>
         </div>
       </div>
       <!-- End -->

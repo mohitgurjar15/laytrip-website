@@ -155,6 +155,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.homeService.getToString.subscribe(toSearchString=> {
       if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){        
         let keys : any = toSearchString;
+        localStorage.setItem('__to',keys)
+        // this.toSearch = null;   
         this.toSearch = airports[keys];
         this.flightSearchForm.controls.fromDestination.setValue('');
         this.fromSearch = [];

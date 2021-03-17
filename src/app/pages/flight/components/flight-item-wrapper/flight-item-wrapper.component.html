@@ -253,8 +253,13 @@
                             <span class="texts">
                                 ${{item.selling_price | number : '1.2-2'}} including taxes and fees
                             </span>
-                            <div class="notifi_text mobile_notifi">
-                                Bi-weekly and monthly installments plans also available
+                            <div class="notifi_text mobile_notifi" *ngIf="item.start_price>0">
+                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose Select.
+                            </div>
+                        </div>
+                        <div class="full_desk_not" *ngIf="item.start_price>0">
+                            <div class="notifi_text">
+                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose Select.
                             </div>
                         </div>
                     </div>
