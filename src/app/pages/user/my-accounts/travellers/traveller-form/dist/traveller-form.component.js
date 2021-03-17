@@ -69,7 +69,7 @@ var TravellerFormComponent = /** @class */ (function () {
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: ['United States', [forms_1.Validators.required]],
             country_code: ['+1', [forms_1.Validators.required]],
-            dob: [null, [forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
+            dob: ['', [forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
             passport_expiry: [''],
             passport_number: ['']
         }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });
@@ -294,17 +294,25 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.deleteTraveller = function (travellerId) {
         this.deleteTravelerId.emit(travellerId);
     };
-    TravellerFormComponent.prototype.openDeleteModal = function (content, userId) {
+    TravellerFormComponent.prototype.removeTraveller = function (content, userId) {
         var _this = this;
         if (userId === void 0) { userId = ''; }
-        this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
-        this.userId = userId;
-        this.modalReference.result.then(function (result) {
-            _this.closeResult = "Closed with: " + result;
-        }, function (reason) {
-            // this.getTravelers();
-            // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
+        console.log(content, userId);
+        if (userId) {
+            this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
+            this.userId = userId;
+            this.modalReference.result.then(function (result) {
+                _this.closeResult = "Closed with: " + result;
+            }, function (reason) {
+                // this.getTravelers();
+                // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            });
+        }
+        else {
+            this.travellerForm.reset();
+            this.travellerForm.controls.country_code.setValue('+1');
+            this.travellerForm.controls.country_id.setValue('United States');
+        }
     };
     TravellerFormComponent.prototype.deleteTravellerData = function () {
         var _this = this;

@@ -91,7 +91,7 @@ export class TravellerFormComponent implements OnInit {
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       country_id: ['United States', [Validators.required]],
       country_code: ['+1', [Validators.required]],
-      dob: [null, [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
+      dob: ['', [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
       passport_expiry: [''],
       passport_number: [''],
     }, { validators: phoneAndPhoneCodeValidation() });
@@ -334,15 +334,22 @@ export class TravellerFormComponent implements OnInit {
   userId;
   closeResult;
 
-  openDeleteModal(content, userId = '') {
-    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
-    this.userId = userId;
-    this.modalReference.result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      // this.getTravelers();
-      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  removeTraveller(content, userId = '') {
+    console.log(content,userId)
+    if(userId){
+      this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
+      this.userId = userId;
+      this.modalReference.result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        // this.getTravelers();
+        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    } else {
+      this.travellerForm.reset();
+      this.travellerForm.controls.country_code.setValue('+1');
+      this.travellerForm.controls.country_id.setValue('United States');
+    }
   }
 
 
