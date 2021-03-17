@@ -93,7 +93,7 @@ export class AddCardComponent implements OnInit {
     });
 
     Spreedly.on('ready', function (frame) {
-      Spreedly.setPlaceholder("number", "0000000000000000");
+      Spreedly.setPlaceholder("number", "Payment card number");
       Spreedly.setPlaceholder("cvv", "CVV");
       Spreedly.setFieldType("cvv", "text");
       Spreedly.setFieldType('number', 'text');
