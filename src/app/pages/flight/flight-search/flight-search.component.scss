@@ -273,7 +273,8 @@
 
     @include tab-view {
         padding: 15px;
-        top: -20px;
+        top: 0px;
+        margin: 0;
     }
 }
 
