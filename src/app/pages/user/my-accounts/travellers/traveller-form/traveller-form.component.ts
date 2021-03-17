@@ -58,7 +58,7 @@ export class TravellerFormComponent implements OnInit {
     mask: [
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
-
+  formEnable : boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -100,6 +100,7 @@ export class TravellerFormComponent implements OnInit {
 
     this.setUserTypeValidation();
     if (this.travellerId) {
+      this.formEnable = true;
       this.setTravelerForm();
     }
   }
@@ -356,5 +357,9 @@ export class TravellerFormComponent implements OnInit {
       }
     });
     this.modalReference.close();
+  }
+  
+  disabledForm(){
+    this.formEnable = false;
   }
 }

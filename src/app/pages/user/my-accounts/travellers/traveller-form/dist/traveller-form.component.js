@@ -51,6 +51,7 @@ var TravellerFormComponent = /** @class */ (function () {
                 /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/
             ]
         };
+        this.formEnable = false;
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
         // this.getCountry();
@@ -75,6 +76,7 @@ var TravellerFormComponent = /** @class */ (function () {
         // this.travelerFormChange.emit(this.travellerForm);
         this.setUserTypeValidation();
         if (this.travellerId) {
+            this.formEnable = true;
             this.setTravelerForm();
         }
     };
@@ -316,6 +318,9 @@ var TravellerFormComponent = /** @class */ (function () {
             }
         });
         this.modalReference.close();
+    };
+    TravellerFormComponent.prototype.disabledForm = function () {
+        this.formEnable = false;
     };
     __decorate([
         core_1.Input()

@@ -71,7 +71,7 @@
                     <input
                         [readonly]="(!isFormControlEnable ) || (selectResponse.email != '' && selectResponse.email !='undefined') "
                         type="email" placeholder="{{'email_placeholder' | translate}}" formControlName="email"
-                        tabindex="4">
+                        tabindex="3">
 
                 </div>
             </div>
@@ -93,7 +93,7 @@
                         formControlName="home_airport" [ngModelOptions]="{standalone: true}"
                         (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDeparture($event)"
                         loadingText="" class="laytrip-input" placeholder="Select home airport "
-                        [readonly]="!isFormControlEnable">
+                        [readonly]="!isFormControlEnable" tabindex="4">
                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                             <div [ngClass]="(item.parentId==0)?'parent':'child'">
                                 {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
@@ -118,11 +118,11 @@
                          maxlength="4"
                             formControlName="country_code"> -->
                         <ng-select class="ng-customClass country_code account_telephone_n" [items]="countries_code"
-                            bindLabel="countryCode" bindValue="countryCode" [clearable]="false"
+                            bindLabel="countryCode" tabindex="5" bindValue="countryCode" [clearable]="false"
                             formControlName="country_code">
                         </ng-select>
                         <input [readonly]="!isFormControlEnable" mask="(000) 000-0000" placeholder="(000) 000-0000"
-                            type="text" tabindex="15" class="form-control" maxlength="14" formControlName="phone_no">
+                            type="text" tabindex="6" class="form-control" maxlength="14" formControlName="phone_no">
                     </span>
 
                 </div>
@@ -143,7 +143,7 @@
                 [ngClass]="{'error_main_class':profileForm.controls.dob.touched && profileForm.controls.dob.errors}">
                 <label>{{'dob' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <input type="text" formControlName="dob" placeholder="MM/DD/YYYY" [readonly]="!isFormControlEnable"
+                    <input type="text" formControlName="dob" tabindex="7" placeholder="MM/DD/YYYY" [readonly]="!isFormControlEnable"
                         [textMask]="dateYeaMask">
                     <!-- <p-calendar [disabled]="!isFormControlEnable" dateFormat="mm/dd/yy" class="form-control"
                         panelStyleClass="birth_date" inputId="basic" tabindex="9" formControlName="dob"
@@ -196,17 +196,17 @@
                 </label>
 
                 <div class="text_field address_box">
-                    <input [readonly]="!isFormControlEnable" tabindex="10" type="text" formControlName="address"
+                    <input [readonly]="!isFormControlEnable" tabindex="8" type="text" formControlName="address"
                         placeholder="Street Address" class="inputs_com" maxlength="255">
-                    <input tabindex="11" [readonly]="!isFormControlEnable" maxlength="50" type="text" class="inputs_com"
+                    <input tabindex="9" [readonly]="!isFormControlEnable" maxlength="50" type="text" class="inputs_com"
                         formControlName="city" placeholder="City">
-                    <ng-select tabindex="12" [clearable]="false" [readonly]="!isFormControlEnable" class="address_ng"
+                    <ng-select tabindex="10" [clearable]="false" [readonly]="!isFormControlEnable" class="address_ng"
                         clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id" placeholder="Select State">
                         <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
                     </ng-select>
-                    <input tabindex="13" [readonly]="!isFormControlEnable" maxlength="8" type="text" class="inputs_com"
+                    <input tabindex="11" [readonly]="!isFormControlEnable" maxlength="8" type="text" class="inputs_com"
                         formControlName="zip_code" placeholder="Zip Code">
-                    <ng-select [readonly]="!isFormControlEnable" tabindex="14"
+                    <ng-select [readonly]="!isFormControlEnable" tabindex="12"
                         class="ng-customClass address_ng 2address_ng" [items]="countries" bindLabel="name"
                         [selectOnTab]="true" formControlName="country_id" selectOnTab="true"
                         (change)="getStates($event)" [clearable]="false">

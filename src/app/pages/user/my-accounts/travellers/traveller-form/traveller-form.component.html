@@ -3,7 +3,7 @@
         <div class="form-row {{travellerId}}">
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                 <label for="">{{'first_name' |translate}}*</label>
-                <input tabindex="{{travellerId}}" type="text" class="form-control" formControlName="firstName"
+                <input  [readonly]="formEnable" tabindex="{{travellerId}}" type="text" class="form-control" formControlName="firstName"
                     (keypress)="commonFunction.preventNumberInput($event)">
                 <div *ngIf="travellerForm.controls.firstName.touched && travellerForm.controls.firstName.errors"
                     class="error">
@@ -17,7 +17,7 @@
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                 <label for="">{{'last_name' |translate}}*</label>
-                <input tabindex="{{travellerId}}" type="text" class="form-control" formControlName="lastName"
+                <input  [readonly]="formEnable" tabindex="{{travellerId}}" type="text" class="form-control" formControlName="lastName"
                     (keypress)="commonFunction.preventNumberInput($event)">
                 <div *ngIf="travellerForm.controls.lastName.touched && travellerForm.controls.lastName.errors"
                     class="error">
@@ -31,7 +31,7 @@
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory">
                 <label for="">{{'gender' |translate}}*</label>
                 <div class="gender_anchers gender_selection">
-                     <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender">
+                     <ng-select  [readonly]="formEnable" formControlName="gender" [clearable]="false" placeholder="Select Gender">
                         <ng-option value="M">Male</ng-option>
                         <ng-option value="F">Female</ng-option>
                         <ng-option value="O">Other</ng-option> 
@@ -52,7 +52,7 @@
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps">
                 <label for="">{{'dob' |translate}}*</label>
-                <input placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex="{{travellerId}}" [textMask]="dateYeaMask"
+                <input  [readonly]="formEnable" placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex="{{travellerId}}" [textMask]="dateYeaMask"
                     formControlName="dob" (blur)="validateDob($event)">
                 <div *ngIf="travellerForm.controls.dob.touched && travellerForm.controls.dob.errors" class="error">
                     <small *ngIf="travellerForm.controls.dob.errors.required" class="error_field">
@@ -83,10 +83,10 @@
                     [ngClass]="{'red_underline':(travellerForm.controls.country_code.touched || travellerForm.controls.phone_no.touched) && (travellerForm.controls.phone_no.errors || travellerForm.controls.country_code.errors)}">
                     <!-- <input (keypress)="commonFunction.validatePhoneCode($event)" type="text" class="form-control"
                         tabindex="{{travellerId}}" maxlength="4" formControlName="country_code"> -->
-                    <ng-select class="ng-customClass country_code" [items]="countries_code" bindLabel="countryCode"
+                    <ng-select  [readonly]="formEnable" class="ng-customClass country_code" [items]="countries_code" bindLabel="countryCode"
                         bindValue="countryCode" [clearable]="false" formControlName="country_code">
                     </ng-select>
-                    <input type="text" mask="(000) 000-0000" tabindex="{{travellerId}}" class="form-control" maxlength="14"
+                    <input  [readonly]="formEnable" type="text" mask="(000) 000-0000" tabindex="{{travellerId}}" class="form-control" maxlength="14"
                         formControlName="phone_no">
                 </span>
 
@@ -102,7 +102,7 @@
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps" *ngIf="isAdult">
                 <label for="">{{'email' |translate}}*</label>
-                <input tabindex="{{travellerId}}"
+                <input  [readonly]="formEnable" tabindex="{{travellerId}}"
                     [readonly]="traveller.email && traveller.email != 'undefined' && traveller.email != ''" type="email"
                     class="form-control" formControlName="email">
                 <div *ngIf="travellerForm.controls.email.touched && travellerForm.controls.email.errors" class="error">
@@ -118,7 +118,7 @@
             
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps" *ngIf="isAdult || isChild">
                 <label for="">{{'passport_number' |translate}}</label>
-                <input tabindex="{{travellerId}}" type="text" class="form-control" formControlName="passport_number">
+                <input  [readonly]="formEnable" tabindex="{{travellerId}}" type="text" class="form-control" formControlName="passport_number">
                 <div *ngIf="travellerForm.controls.passport_number.touched && travellerForm.controls.passport_number.errors"
                     class="error">
                     <small *ngIf="travellerForm.controls.passport_number.errors.required" class="error_field">
@@ -129,7 +129,7 @@
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account expiry_date" *ngIf="isAdult || isChild">
                 <label for="">{{'passport_expiry_date' |translate}}</label>
-                <p-calendar [minDate]="expiryMinDate" tabindex="{{travellerId}}" dateFormat="M d, yy" class="form-control"
+                <p-calendar  [disabled]="formEnable" [minDate]="expiryMinDate" tabindex="{{travellerId}}" dateFormat="M d, yy" class="form-control"
                     panelStyleClass="birth_date" inputId="basic" formControlName="passport_expiry"
                     [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="2021:2030">
                 </p-calendar>
@@ -142,7 +142,7 @@
             </div>
             <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps">
                 <label for="">{{'nationality' |translate}}*</label>
-                <ng-select tabindex="{{travellerId}}" class="ng-customClass" [items]="countries" bindLabel="name"
+                <ng-select  [readonly]="formEnable" tabindex="{{travellerId}}" class="ng-customClass" [items]="countries" bindLabel="name"
                     [selectOnTab]="true" formControlName="country_id" selectOnTab="true" [clearable]="false">
                     <ng-template ng-label-tmp let-item="item" let-clear="clear">
                         <span class="ng-value-label"><img class="img_country_code"
@@ -167,11 +167,11 @@
         </div>
         <span class="edit_btns duel_buttons">
             <span class="remove_wrps">
-                <button class="hover-link " [ngClass]="{'disabled': !travellerId }"
+                <button class="hover-link " [ngClass]="{'disabled': !formEnable }"
                     (click)="openDeleteModal(deleteContent,travellerId)">Delete</button>
             </span>
-            <button (click)="onSubmit()" class="hover-link" [ngClass]="{'disabled': !travellerId }">Edit</button>
-            <button (click)="onSubmit()" class="hover-link" [ngClass]="{'disabled': travellerId }">Save</button>
+            <button (click)="disabledForm()" class="hover-link" [ngClass]="{'disabled': !travellerId }">Edit</button>
+            <button (click)="onSubmit()" class="hover-link" [ngClass]="{'disabled': !formEnable }">Save</button>
         </span>
     </div>
 
