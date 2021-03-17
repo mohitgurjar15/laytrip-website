@@ -192,7 +192,7 @@
     background-color: $background-white;
     position: relative;
     min-height: calc(100vh - 110px);
-    padding-top: 80px;
+    padding-top: 50px;
 
     @include tab-view{
         padding-top: 25px;

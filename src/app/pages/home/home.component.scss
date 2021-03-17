@@ -44,18 +44,26 @@
         bottom: 0;
         right: 0;
         left: 0;
-        padding: 130px 0;
+        padding: 130px 0 50px;
         // transform: translate(0%, 28%);
-        transform: translate(0%, 0%);
+        //transform: translate(0%, 0%);
+
+        //height: calc(100vh - 100px);
 
         @include ipad-view {
             transform: translate(0%, 0%);
             position: relative;
             padding: 20px 0 70px;
+            height: 100%;
         }
 
         .banner_text {
             width: auto;
+            margin-top: 60px;
+
+            @include tab-view{
+                margin-top: 0;
+            }
 
             .banner_text_span {
                 display: flex;

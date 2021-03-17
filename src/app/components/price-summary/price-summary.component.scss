@@ -173,6 +173,18 @@
               color: $text-black;
               font-size: 16px;
 
+              span{
+                @include tab-view{
+                  &:first-child{
+
+                    flex: 90%;
+                  }
+                  &:last-child{
+                    flex: 1;
+                  }
+                }
+              }
+
               &:last-child{
                 @include tab-view {
                   margin-bottom: 0;

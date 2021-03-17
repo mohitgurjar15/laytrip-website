@@ -5313,7 +5313,7 @@ select {
   }
 
   &.page_about {
-    padding: 40px 0 70px;
+    padding: 0 0 70px;
 
     .page_topbanner {
       margin: 0 0 25px;
@@ -5440,7 +5440,7 @@ select {
   }
 
   &.page_trems {
-    padding: 40px 0 70px;
+    padding: 0 0 70px;
     //font-family: "Poppins", sans-serif;
 
     @include tab-view{
