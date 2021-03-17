@@ -499,6 +499,7 @@ export class BookingComponent implements OnInit {
       }
     }
 
+    console.log(this.travelerForm,"-----");
     if (this.isValidTravelers && this.cardToken != '' && !this.isNotAvailableItinerary && this.isAllAlertClosed) {
       this.loading = true;
       this.travelerForm.enable();

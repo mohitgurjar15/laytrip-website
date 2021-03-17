@@ -113,7 +113,7 @@
                         [ngClass]="{'red_underline':traveler.controls.phone_no.touched && traveler.controls.phone_no.errors}">
                         <!-- <input type="text" class="form-control" maxlength="6"
                           formControlName="country_code"> -->
-                        <ng-select class="ng-customClass country_code" [items]="countries" bindLabel="phonecode"
+                        <ng-select class="ng-customClass country_code" [items]="phoneCodelist" bindLabel="phonecode"
                           [tabIndex]="x" bindValue="phonecode" formControlName="country_code" [clearable]="false">
                         </ng-select>
                         <input type="text" mask="(000) 000-0000" class="form-control" maxlength="14"
