@@ -25,7 +25,7 @@ export class ShareSocialMediaComponent implements OnInit {
 
 
   share(media){
-    var message = encodeURIComponent('Laytrip - Layaway Travel for Everyone :'+ this.baseUrl);
+    var message = encodeURIComponent('Laytrip - Layaway Travel for Everyone:'+ this.baseUrl);
 
     if(media == 'Instagram'){       
        

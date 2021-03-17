@@ -72,11 +72,19 @@ var ContactUsComponent = /** @class */ (function () {
         this.genericService.createEnquiry(formValue).subscribe(function (res) {
             $('#contact_modal').modal('hide');
             _this.loading = false;
-            // this.toastr.success(res.message, 'Success');
+            _this.toastr.show(res.message, '', {
+                toastClass: 'custom_toastr',
+                titleClass: 'custom_toastr_title',
+                messageClass: 'custom_toastr_message'
+            });
             _this.ngOnInit();
         }, (function (error) {
             _this.loading = false;
-            // this.toastr.error(error.message, 'Error');
+            _this.toastr.show(error.message, '', {
+                toastClass: 'custom_toastr',
+                titleClass: 'custom_toastr_title',
+                messageClass: 'custom_toastr_message'
+            });
         }));
     };
     ContactUsComponent.prototype.setMessageLenght = function (value) {

@@ -7,7 +7,7 @@
 .block_cms_page_main {
   font-family: "Poppins", sans-serif;
   &.page_trems {
-    padding: 40px 0 70px;
+    padding: 0 0 70px;
 
     @include tab-view {
       padding: 0 0 20px;
