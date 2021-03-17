@@ -908,9 +908,9 @@
             justify-content: center;
 
             @include tab-view{
-                font-size: 12px;
+                font-size: 13px;
                 height: auto;
-                padding: 4px 25px;
+                padding: 9px 5px;
             }
     
             &:hover {
