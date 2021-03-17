@@ -28,6 +28,10 @@
           color: $active-tab-text;
           font-size: 15px;
           font-weight: 500;
+          @include tab-view{
+            min-width: 60px;
+            display: block;
+          }
         }
       }
       .block_cmspage_comman {

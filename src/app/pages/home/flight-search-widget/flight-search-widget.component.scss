@@ -251,10 +251,23 @@ a:hover {
 
     &.round_trip_calender {
       table {
+        th{
+          span{
+            @include mobile-view{
+              font-size: 12px;
+            }
+          }
+        }
         td {
           span {
             height: 35px;
             width: 35px;
+
+            @include mobile-view{
+              height: 24px;
+              width: 24px;
+              font-size: 10px;
+            }
 
             &.p-highlight {
               color: $pink !important;
