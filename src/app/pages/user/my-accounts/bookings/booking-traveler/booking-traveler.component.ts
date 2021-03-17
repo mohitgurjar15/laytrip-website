@@ -7,6 +7,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../../../environments/environment';
 import { AccountService } from '../../../../../services/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { travlerLabels } from 'src/app/_helpers/traveller.helper';
 declare var window : any;
 
 @Component({
@@ -164,5 +165,26 @@ export class BookingTravelerComponent implements OnInit {
   openChat(){
     window.fcWidget.open();
     this.modalService.dismissAll();
+  }
+
+  getUserType(traveler){
+
+    if(typeof traveler.travelerInfo.user_type!='undefined'){
+      return travlerLabels.en[traveler.user_type];
+    }
+    else{
+      let user_type='';
+      let ageDiff = moment(new Date()).diff(moment(traveler.travelerInfo.dob,'MM/DD/YYYY').format('YYYY-MM-DD'),"years");
+      if(ageDiff>0 && ageDiff<=2){
+        user_type='infant';
+      }
+      if(ageDiff>2 && ageDiff<=12){
+        user_type='child';
+      }
+      if(ageDiff>12){
+        user_type='adult';
+      }
+      return travlerLabels.en[user_type];
+    }
   }
 }
