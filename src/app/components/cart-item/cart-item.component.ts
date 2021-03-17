@@ -52,7 +52,7 @@ export class CartItemComponent implements OnInit {
 
       if(this.cartItem.old_module_info.selling_price!=this.cartItem.module_info.selling_price){
         this.priceFluctuationAmount = this.cartItem.module_info.selling_price - this.cartItem.old_module_info.selling_price;
-        let indexExist = this.cartAlerts.findIndex(x=>x.id==this.cartItem.id);
+        /* let indexExist = this.cartAlerts.findIndex(x=>x.id==this.cartItem.id);
 
         if(indexExist==-1){
           this.cartAlerts.push({
@@ -61,7 +61,7 @@ export class CartItemComponent implements OnInit {
             id : this.cartItem.id
           })
           localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
-        }
+        } */
         
       }
       this.cd.detectChanges();
