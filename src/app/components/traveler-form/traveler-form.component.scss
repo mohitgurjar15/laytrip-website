@@ -359,13 +359,16 @@
           font-size: 12px;
           font-weight: 500;
         }
-
+        
         input {
           border: none;
           border-radius: 0;
           border-bottom: 2px solid $box-border-color;
           font-size: 14px;
           padding: 8px 0;
+          &:disabled{
+            background-color: $background-white;
+          }
 
           &:focus {
             outline: none;

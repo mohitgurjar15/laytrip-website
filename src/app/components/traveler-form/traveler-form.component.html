@@ -30,7 +30,7 @@
                 +travelerItem.value.adults[x].last_name:'Saved Travelers' | titlecase}}</a>
               <ul *ngIf="(traveler.controls.type.value=='adult' && isAdultTravller) || (traveler.controls.type.value=='child' && isChildTravller) || (traveler.controls.type.value=='infant' && isInfantTravller)" class="dropdown-menu options_name">
                 <ng-container *ngFor="let user of myTravelers">
-                  <li (click)='selectTraveler(user.userId,x)'
+                  <li (click)='selectTraveler(user.userId,x,cartNumber)'
                     *ngIf="user.user_type==traveler.controls.type.value && traveler.roleId!=7">
                     {{user.firstName}} {{user.lastName}}</li>
                 </ng-container>
@@ -38,21 +38,6 @@
             </div>
             <div [id]="'adult_collapse'+y+x" class="collapse show" data-parent="#accordion">
               <div class="card-body">
-                <!-- <div class="sub_cat_wrapper">
-                  <button (click)="selectTravelerType('adult',x)" class="add_btn_lined"
-                    [ngClass]="{'active' : traveler.controls.type.value=='adult'}">Add Adult (Over 12)
-                  </button>
-                  <button *ngIf="travelerItem.value.child>0" (click)="selectTravelerType('child',x)"
-                    class="add_btn_lined" [ngClass]="{'active' : traveler.controls.type.value=='child'}">Add Child
-                    (2-12)
-                  </button>
-                  <button *ngIf="travelerItem.value.infant>0" (click)="selectTravelerType('infant',x)"
-                    class="add_btn_lined" [ngClass]="{'active' : traveler.controls.type.value=='infant'}">Add Infant
-                    (Under 12)
-                  </button>
-                </div> -->
-                <!-- <app-my-traveler travelerId={{travelerItem.value.adults[x].userId}}
-                  traveler_type={{traveler.controls.type.value}} traveler_number={{x}}></app-my-traveler> -->
 
                 <div [formGroupName]="x" class="common_form">
                   <div class="form-row">
@@ -263,12 +248,14 @@
                       (click)="deleteTraveler(cartNumber,x)">Delete</button>
                   </span> -->
                   <span class="remove_wrps">
-                    <button class="hover-link" (click)="deleteTraveler(cartNumber,x)">Delete</button>
+                    <button class="hover-link" (click)="deleteTraveler(cartNumber,x)" [ngClass]="{'disabled': !traveler.touched }">Delete</button>
                   </span>
-                  <button (click)="editTraveler(cartNumber,x)" class="hover-link"
+                  <!-- <button (click)="saveTraveler(cartNumber,x)" class="hover-link"
                     [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }">Edit</button>
                   <button (click)="saveTraveler(cartNumber,x)" class="hover-link"
-                    [ngClass]="{'disabled': travelerItem.value.adults[x].userId }">Save</button>
+                    [ngClass]="{'disabled': travelerItem.value.adults[x].userId }">Save</button> -->
+                  <button (click)="editTraveler(cartNumber,x)" [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }"  class="hover-link">Edit</button>
+                  <button (click)="saveTraveler(cartNumber,x)" [ngClass]="{'disabled': !traveler.touched }" class="hover-link">Save</button>
                 </span>
               </div>
             </div>

@@ -228,7 +228,6 @@ export class ProfileComponent implements OnInit {
 
   getProfileInfo() {
     this.userService.getProfile().subscribe((res: any) => {
-      // console.log(this.commonFunction.convertDateMMDDYYYY(res.dob, 'YYYY-MM-DD'))
 
       this.loadingValue.emit(false);
       this.image = res.profilePic;
@@ -322,7 +321,6 @@ export class ProfileComponent implements OnInit {
       } else {
         formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
       }
-      console.log(this.gender_type)
       if (typeof (this.profileForm.value.country_code) != 'object') {
         formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
       } else {

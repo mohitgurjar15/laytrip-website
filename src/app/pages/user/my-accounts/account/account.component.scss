@@ -8,6 +8,10 @@
 .account_part {
   background-color: $background-white;
 
+  @include tab-view{
+    padding: 0 0 30px;
+  }
+
   .traveller_detail_wrpper {
     padding: 15px 0;
     max-width: 655px;

@@ -9,8 +9,9 @@ exports.__esModule = true;
 exports.HomeComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
+var cookie_policy_component_1 = require("../cookie-policy/cookie-policy.component");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(genericService, commonFunction, fb, router, cd, renderer, homeService, cartService) {
+    function HomeComponent(genericService, commonFunction, fb, router, cd, renderer, homeService, cartService, modalService, cookieService) {
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.fb = fb;
@@ -19,6 +20,8 @@ var HomeComponent = /** @class */ (function () {
         this.renderer = renderer;
         this.homeService = homeService;
         this.cartService = cartService;
+        this.modalService = modalService;
+        this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
         this.isRoundTrip = false;
@@ -28,15 +31,26 @@ var HomeComponent = /** @class */ (function () {
         this.countryCode = this.commonFunction.getUserCountry();
     }
     HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
         window.scrollTo(0, 0);
         this.getModules();
         this.loadJquery();
         this.getDeal(this.moduleId);
         localStorage.removeItem('__from');
         localStorage.removeItem('__to');
-        // setTimeout(() => {
-        //   $('#cookie_policy').show();
-        // }, 5000);
+        setTimeout(function () {
+            _this.openCookiePolicyPopup();
+        }, 5000);
+    };
+    HomeComponent.prototype.openCookiePolicyPopup = function () {
+        if (!this.cookieService.get('__cke')) {
+            this.modalService.open(cookie_policy_component_1.CookiePolicyComponent, {
+                windowClass: 'block_cookie_policy_main', centered: true, backdrop: 'static',
+                keyboard: false
+            });
+        }
+        else {
+        }
     };
     HomeComponent.prototype.loadJquery = function () {
         // Start Featured List Js

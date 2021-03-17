@@ -169,60 +169,65 @@
           </span>
           Duration {{cartItem?.moduleInfo[0]?.routes[0]?.duration}}
         </div>
+
+        <ng-container *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
+          <div *ngFor="let stop of cartItem?.moduleInfo[0]?.routes[1]?.stops">
+            <div class="change_plane_wrapper" *ngIf="stop.is_layover">
+              <span class="plane_wrps">
+                <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
+                Change Planes in {{stop?.layover_airport_name}}</span>
+              <span class="hr_wrps" *ngIf="stop?.is_layover">{{stop?.layover_duration}}</span>
+            </div>
+            <div class="cols_wrps">
+              <div class="lines_cols">
+                <div class="line_shortname colmns_w">
+                  <span>
+                    <img src="{{s3BucketUrl}}assets/images/icon/blue_return_flight.svg" alt=""
+                      class="Blue filled Flight" />
+                    {{stop.departure_info.code}} - {{stop.arrival_info.code}}
+                  </span>
+                  <span class="hrs_">
+                    {{stop.duration}}
+                  </span>
+                </div>
+                <div class="date_wrp colmns_w">
+                  {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
+                </div>
+                <div class="timing_wrp colmns_w">
+                  {{ stop.departure_time | lowercase }} - {{ stop.arrival_time | lowercase}}
+                </div>
+              </div>
+              <div class="lines_cols">
+                <div class="line_company_name colmns_w">
+                  {{stop.airline_name}}
+                  <span class="hrs_">
+                    {{stop.duration}}
+                  </span>
+                </div>
+                <div class="fl_number colmns_w">
+                  <span class="blue_stamp"></span>
+                  Flight {{stop.airline}}-{{stop.flight_number}}
+                </div>
+                <div class="class_wrps colmns_w">
+                  {{stop.cabin_class}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="total_hrs_wrps cta_btns_wrps mohit" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
+            <span class="ct_btns"></span>
+            Duration {{cartItem?.moduleInfo[0]?.routes[1]?.duration}}
+          </div>
+        </ng-container>
+
       </div>
     </div>
 
-    <div class="card accordion_detailed_wrps wo_return" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
+    <!-- <div class="card accordion_detailed_wrps wo_return" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
       <div class="card-body">
-        <div *ngFor="let stop of cartItem?.moduleInfo[0]?.routes[1]?.stops">
-          <div class="change_plane_wrapper" *ngIf="stop.is_layover">
-            <span class="plane_wrps">
-              <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
-              Change Planes in {{stop?.layover_airport_name}}</span>
-            <span class="hr_wrps" *ngIf="stop?.is_layover">{{stop?.layover_duration}}</span>
-          </div>
-          <div class="cols_wrps">
-            <div class="lines_cols">
-              <div class="line_shortname colmns_w">
-                <span>
-                  <img src="{{s3BucketUrl}}assets/images/icon/blue_return_flight.svg" alt=""
-                    class="Blue filled Flight" />
-                  {{stop.departure_info.code}} - {{stop.arrival_info.code}}
-                </span>
-                <span class="hrs_">
-                  {{stop.duration}}
-                </span>
-              </div>
-              <div class="date_wrp colmns_w">
-                {{commonFunction.convertDateFormat(stop.departure_date,'DD/MM/YYYY')}}
-              </div>
-              <div class="timing_wrp colmns_w">
-                {{ stop.departure_time | lowercase }} - {{ stop.arrival_time | lowercase}}
-              </div>
-            </div>
-            <div class="lines_cols">
-              <div class="line_company_name colmns_w">
-                {{stop.airline_name}}
-                <span class="hrs_">
-                  {{stop.duration}}
-                </span>
-              </div>
-              <div class="fl_number colmns_w">
-                <span class="blue_stamp"></span>
-                Flight {{stop.airline}}-{{stop.flight_number}}
-              </div>
-              <div class="class_wrps colmns_w">
-                {{stop.cabin_class}}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="total_hrs_wrps cta_btns_wrps mohit" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
-          <span class="ct_btns"></span>
-          Duration {{cartItem?.moduleInfo[0]?.routes[1]?.duration}}
-        </div>
+        
       </div>
-    </div>
+    </div> -->
 
     <app-booking-traveler [travelers]="cartItem" [laytrip_cart_id]="laytrip_cart_id"
       [isPassportRequired]="cartItem?.moduleInfo[0]?.routes.is_passport_required"  (laytripCartId)="cancelCartIdRemove($event)"></app-booking-traveler>

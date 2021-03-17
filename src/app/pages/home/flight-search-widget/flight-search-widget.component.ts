@@ -10,6 +10,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { HomeService } from '../../../services/home.service';
+import { cookieServiceFactory } from 'ngx-cookie';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -106,6 +107,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
     
   ngOnInit(): void {
+
     this.departureDate = moment(this.customStartDateValidation).toDate();
     
     if(new Date(this.customStartDateValidation) <= new Date() ){
@@ -145,7 +147,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         // this.returnDate = new Date(params['arrival_date']);
         this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
         this.rangeDates = [this.departureDate, this.returnDate];
-      console.log(this.rangeDates)
       } else {
         this.calPrices = false;
       }
@@ -159,11 +160,11 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.toSearch = airports[keys];
         this.flightSearchForm.controls.fromDestination.setValue('');
         this.fromSearch = [];
-        // this.flightDepartureMinDate = moment(this.departureDate).add(1 ,'M');
+
         if(!this.isRoundTrip){
-          this.departureDate = new Date(moment().add(1, 'M').format("MM/DD/YYYY"));
+          this.departureDate = moment(this.customStartDateValidation).add(1, 'M').toDate();
         } else {
-          this.rangeDates =[ new Date(moment().add(1, 'M').format("MM/DD/YYYY")), new Date(moment().add(38, 'days').format("MM/DD/YYYY"))];
+          this.rangeDates =[ moment(this.customStartDateValidation).add(1, 'M').toDate(), moment(this.customStartDateValidation).add(38, 'days').toDate()];
           this.searchFlightInfo.arrival = this.toSearch.code;
         }
       }
