@@ -1,7 +1,7 @@
 export const installmentType={
     en:{
         weekly : 'Weekly',
-        biweekly : 'Bi-weekly',
+        biweekly : 'Bi-Weekly',
         monthly : 'Monthly'
     }
 }
