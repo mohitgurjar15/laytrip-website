@@ -38,10 +38,10 @@ export class CardListComponent implements OnInit {
   is_open_popup = false;
   loading = false;
   cardIndex;
-  origin:string='';
+  origin: string = '';
 
   ngOnInit() {
-    this.origin= window.location.pathname;
+    this.origin = window.location.pathname;
     this.getCardlist();
     this.userService.getProfile().subscribe(res => {
       this.userInfo = res;
@@ -54,6 +54,15 @@ export class CardListComponent implements OnInit {
     this.genericService.getCardlist().subscribe((res: any) => {
       this.cardLoader = false;
       this.cards = res;
+      if (this.cardToken == '') {
+        let card = this.cards.find(card => {
+          return card.isDefault == true;
+        });
+        if (card) {
+          this.cardToken = card.cardToken;
+          this.selectCreditCard.emit(this.cardToken);
+        }
+      }
       this.genericService.setCardItems(this.cards)
       //this.totalNumberOfcard.emit(1)
     }, (error) => {
