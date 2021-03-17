@@ -1,9 +1,9 @@
 <div id="accordion_Bookings" class="accordion_bookings"
     *ngIf="(travelers | json) != '{}' && (moduleInfo | json) != '{}' ">
-    <div class="card traveller_card_accr" *ngFor="let traveler of travelers; let last = last;">
+    <div class="card traveller_card_accr" *ngFor="let traveler of travelers;let i = index; let last = last;">
         <div class="card-header tr_card_header {{last}}" >
             <a class="card-link ">
-                {{traveler.roleId == 6 ?'Primary Traveler':'Additional Traveler'}} 
+                {{i == 0 ?'Primary Traveler':getUserType(traveler)}} 
             </a>
             <a class="card-link new_link">
                 {{ traveler.travelerInfo.firstName || '' | titlecase}} {{ traveler.travelerInfo.lastName || '' | titlecase }}
@@ -34,7 +34,7 @@
                             <label for="">Email*</label>
                             <input type="email" class="form-control" placeholder="{{traveler.travelerInfo.email}}" disabled>
                         </div>
-                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="traveler.user_type == 'adult'" >
                             <label for="">Telephone*</label>
                             <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.countryCode != 'null' ? getPhoneNoInMaskFormat(traveler.travelerInfo.phoneNo,traveler.travelerInfo.countryCode): '' }}"
                                 disabled>
@@ -46,8 +46,8 @@
                                 disabled>
                         </div>
 
-                        <div class="col-sm-12 col-md-4"
-                            *ngIf="traveler.is_passport_required && checkIsChild(traveler.travelerInfo.dob) ">
+                        <div class="col-sm-12 col-md-4" 
+                            *ngIf="traveler.user_type == 'adult' &&  traveler.is_passport_required && checkIsChild(traveler.travelerInfo.dob) ">
                             <label for="">{{'passport_number'| translate}}</label>
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.passportNumber}}"
                                 disabled>
@@ -116,7 +116,7 @@
         </div>
         <div class="bottom_cta_btn" *ngIf="last == true && bookingStatus == 0">
             <a class="hover-link"  (click)="open(content,laytrip_cart_id)">
-              Cancel Entire Booking
+              Cancel Booking
             </a>
         </div>
     </div>

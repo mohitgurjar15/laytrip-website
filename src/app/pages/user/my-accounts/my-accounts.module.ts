@@ -34,6 +34,7 @@ import { AccountComponent } from './account/account.component';
 import { PreferancesComponent } from './preferances/preferances.component';
 import { BookingTravelerComponent } from './bookings/booking-traveler/booking-traveler.component';
 import { CartPriceSummaryComponent } from './bookings/cart-price-summary/cart-price-summary.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { CartPriceSummaryComponent } from './bookings/cart-price-summary/cart-pr
     NgbModule,
     CalendarModule,
     FlightModule,
-    ComponentsModule
+    ComponentsModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [DatePipe, NgbActiveModal],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

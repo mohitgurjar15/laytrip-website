@@ -33,7 +33,7 @@ export class TravellerFormComponent implements OnInit {
   // countries = [];
   @Input() countries_code: any = [];
   is_gender: boolean = true;
-  is_type: string = 'M';
+  is_type: string = '';
   travellerForm: FormGroup;
   traveller: any = [];
   isLoggedIn: boolean = false;
@@ -58,6 +58,8 @@ export class TravellerFormComponent implements OnInit {
     mask: [
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
+  formEnable : boolean = false; 
+  submitted = false;
 
 
   constructor(
@@ -86,12 +88,12 @@ export class TravellerFormComponent implements OnInit {
     this.travellerForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      gender: ['M', [Validators.required]],
+      gender: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
       country_id: ['United States', [Validators.required]],
       country_code: ['+1', [Validators.required]],
-      dob: [null, [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
+      dob: ['', [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
       passport_expiry: [''],
       passport_number: [''],
     }, { validators: phoneAndPhoneCodeValidation() });
@@ -100,6 +102,7 @@ export class TravellerFormComponent implements OnInit {
 
     this.setUserTypeValidation();
     if (this.travellerId) {
+      this.formEnable = true;
       this.setTravelerForm();
     }
   }
@@ -166,6 +169,9 @@ export class TravellerFormComponent implements OnInit {
       passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
       passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : '',
     });
+    this.travellerForm.controls['country_id'].disable();
+    this.travellerForm.controls['country_code'].disable();
+    this.travellerForm.controls['gender'].disable();
   }
 
   changeDateOfBirth(event) {
@@ -210,11 +216,13 @@ export class TravellerFormComponent implements OnInit {
 
   onSubmit() {
     this.loadingValue.emit(true);
+    this.submitted = true;
     const controls = this.travellerForm.controls;
     if (this.travellerId) {
       this.validateDob(moment(this.travellerForm.controls.dob.value).format('MM-DD-YYYY'));
     }
     if (this.travellerForm.invalid) {
+      this.submitted = true;
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()
       );
@@ -244,16 +252,22 @@ export class TravellerFormComponent implements OnInit {
       let emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
 
       if (this.travellerId) {
+
         this.loadingValue.emit(true);
         jsonData = Object.assign(jsonData, emailObj);
         this.travelerService.updateAdult(jsonData, this.travellerId).subscribe((data: any) => {
           this.loadingValue.emit(false);
+          this.submitted = false;
           this.travelerFormChange.emit(data);
           $("#collapseTravInner" + this.travellerId).removeClass('show');
           // this.toastr.success('', 'Traveler updated successfully');
-
+          this.formEnable = false;
+          this.travellerForm.controls['country_id'].enable();
+          this.travellerForm.controls['country_code'].enable();
+          this.travellerForm.controls['gender'].enable();
         }, (error: HttpErrorResponse) => {
           this.loadingValue.emit(false);
+          this.submitted = false;
           // this.toastr.error(error.error.message, 'Traveler Update Error');
           if (error.status === 401) {
             this.router.navigate(['/']);
@@ -265,12 +279,14 @@ export class TravellerFormComponent implements OnInit {
         this.travelerService.addAdult(jsonData).subscribe((data: any) => {
           this.travelerFormChange.emit(data);
           this.loadingValue.emit(false);
+          this.submitted = false;
           this.travellerForm.reset();
           this.travellerForm.setErrors(null);
           // this.toastr.success('', 'Traveler added successfully');
 
         }, (error: HttpErrorResponse) => {
           this.loadingValue.emit(false);
+          this.submitted = false;
           // this.toastr.error(error.error.message, 'Traveler Add Error');
           if (error.status === 401) {
             this.router.navigate(['/']);
@@ -333,15 +349,22 @@ export class TravellerFormComponent implements OnInit {
   userId;
   closeResult;
 
-  openDeleteModal(content, userId = '') {
-    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
-    this.userId = userId;
-    this.modalReference.result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      // this.getTravelers();
-      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  removeTraveller(content, userId = '') {
+    console.log(content,userId)
+    if(userId){
+      this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
+      this.userId = userId;
+      this.modalReference.result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        // this.getTravelers();
+        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    } else {
+      this.travellerForm.reset();
+      this.travellerForm.controls.country_code.setValue('+1');
+      this.travellerForm.controls.country_id.setValue('United States');
+    }
   }
 
 
@@ -356,5 +379,12 @@ export class TravellerFormComponent implements OnInit {
       }
     });
     this.modalReference.close();
+  }
+
+  disabledForm(){
+    this.formEnable = false;
+    this.travellerForm.controls['country_id'].enable();
+    this.travellerForm.controls['country_code'].enable();
+    this.travellerForm.controls['gender'].enable();
   }
 }

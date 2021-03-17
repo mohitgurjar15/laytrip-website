@@ -31,7 +31,7 @@ var TravellerFormComponent = /** @class */ (function () {
         // countries = [];
         this.countries_code = [];
         this.is_gender = true;
-        this.is_type = 'M';
+        this.is_type = '';
         this.traveller = [];
         this.isLoggedIn = false;
         this.loading = false;
@@ -51,6 +51,8 @@ var TravellerFormComponent = /** @class */ (function () {
                 /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/
             ]
         };
+        this.formEnable = false;
+        this.submitted = false;
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
         // this.getCountry();
@@ -63,18 +65,19 @@ var TravellerFormComponent = /** @class */ (function () {
         this.travellerForm = this.formBuilder.group({
             firstName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
             lastName: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            gender: ['M', [forms_1.Validators.required]],
+            gender: ['', [forms_1.Validators.required]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             country_id: ['United States', [forms_1.Validators.required]],
             country_code: ['+1', [forms_1.Validators.required]],
-            dob: [null, [forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
+            dob: ['', [forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
             passport_expiry: [''],
             passport_number: ['']
         }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });
         // this.travelerFormChange.emit(this.travellerForm);
         this.setUserTypeValidation();
         if (this.travellerId) {
+            this.formEnable = true;
             this.setTravelerForm();
         }
     };
@@ -136,6 +139,9 @@ var TravellerFormComponent = /** @class */ (function () {
             passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
             passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : ''
         });
+        this.travellerForm.controls['country_id'].disable();
+        this.travellerForm.controls['country_code'].disable();
+        this.travellerForm.controls['gender'].disable();
     };
     TravellerFormComponent.prototype.changeDateOfBirth = function (event) {
         var todayDate = moment();
@@ -180,11 +186,13 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.onSubmit = function () {
         var _this = this;
         this.loadingValue.emit(true);
+        this.submitted = true;
         var controls = this.travellerForm.controls;
         if (this.travellerId) {
             this.validateDob(moment(this.travellerForm.controls.dob.value).format('MM-DD-YYYY'));
         }
         if (this.travellerForm.invalid) {
+            this.submitted = true;
             Object.keys(controls).forEach(function (controlName) {
                 return controls[controlName].markAsTouched();
             });
@@ -218,11 +226,17 @@ var TravellerFormComponent = /** @class */ (function () {
                 jsonData = Object.assign(jsonData, emailObj);
                 this.travelerService.updateAdult(jsonData, this.travellerId).subscribe(function (data) {
                     _this.loadingValue.emit(false);
+                    _this.submitted = false;
                     _this.travelerFormChange.emit(data);
                     $("#collapseTravInner" + _this.travellerId).removeClass('show');
                     // this.toastr.success('', 'Traveler updated successfully');
+                    _this.formEnable = false;
+                    _this.travellerForm.controls['country_id'].enable();
+                    _this.travellerForm.controls['country_code'].enable();
+                    _this.travellerForm.controls['gender'].enable();
                 }, function (error) {
                     _this.loadingValue.emit(false);
+                    _this.submitted = false;
                     // this.toastr.error(error.error.message, 'Traveler Update Error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
@@ -234,11 +248,13 @@ var TravellerFormComponent = /** @class */ (function () {
                 this.travelerService.addAdult(jsonData).subscribe(function (data) {
                     _this.travelerFormChange.emit(data);
                     _this.loadingValue.emit(false);
+                    _this.submitted = false;
                     _this.travellerForm.reset();
                     _this.travellerForm.setErrors(null);
                     // this.toastr.success('', 'Traveler added successfully');
                 }, function (error) {
                     _this.loadingValue.emit(false);
+                    _this.submitted = false;
                     // this.toastr.error(error.error.message, 'Traveler Add Error');
                     if (error.status === 401) {
                         _this.router.navigate(['/']);
@@ -292,17 +308,25 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.deleteTraveller = function (travellerId) {
         this.deleteTravelerId.emit(travellerId);
     };
-    TravellerFormComponent.prototype.openDeleteModal = function (content, userId) {
+    TravellerFormComponent.prototype.removeTraveller = function (content, userId) {
         var _this = this;
         if (userId === void 0) { userId = ''; }
-        this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
-        this.userId = userId;
-        this.modalReference.result.then(function (result) {
-            _this.closeResult = "Closed with: " + result;
-        }, function (reason) {
-            // this.getTravelers();
-            // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
+        console.log(content, userId);
+        if (userId) {
+            this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
+            this.userId = userId;
+            this.modalReference.result.then(function (result) {
+                _this.closeResult = "Closed with: " + result;
+            }, function (reason) {
+                // this.getTravelers();
+                // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            });
+        }
+        else {
+            this.travellerForm.reset();
+            this.travellerForm.controls.country_code.setValue('+1');
+            this.travellerForm.controls.country_id.setValue('United States');
+        }
     };
     TravellerFormComponent.prototype.deleteTravellerData = function () {
         var _this = this;
@@ -316,6 +340,12 @@ var TravellerFormComponent = /** @class */ (function () {
             }
         });
         this.modalReference.close();
+    };
+    TravellerFormComponent.prototype.disabledForm = function () {
+        this.formEnable = false;
+        this.travellerForm.controls['country_id'].enable();
+        this.travellerForm.controls['country_code'].enable();
+        this.travellerForm.controls['gender'].enable();
     };
     __decorate([
         core_1.Input()

@@ -31,7 +31,8 @@ export class TravelerFormComponent implements OnInit {
   @Input() cartItem;
   selectedType;
   traveler_number: number = 0;
-  countries = []
+  countries = [];
+  phoneCodelist=[]
   myTravelers = [];
   travlerLabels;
   userId;
@@ -302,7 +303,7 @@ export class TravelerFormComponent implements OnInit {
 
     var usCountryObj = countries.find(x => x.id === 233);
     var removedUsObj = countries.filter(obj => obj.id !== 233);
-    this.countries = [];
+    this.phoneCodelist = [];
     removedUsObj.sort(function (a, b) {
       return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
     });
@@ -316,7 +317,7 @@ export class TravelerFormComponent implements OnInit {
         return acc;
       }
     }, []);
-    this.countries = filteredArr;
+    this.phoneCodelist = filteredArr;
   }
 
   patch() {
@@ -443,6 +444,7 @@ export class TravelerFormComponent implements OnInit {
   } */
   saveTraveler(cartNumber, traveler_number) {
 
+    console.log("this.travelerForm===>",this.travelerForm);
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
@@ -571,6 +573,7 @@ export class TravelerFormComponent implements OnInit {
       }
       this.patch();
     }
+    
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
     this.checkOutService.emitTravelersformData(this.travelerForm);
     this.cd.detectChanges();
