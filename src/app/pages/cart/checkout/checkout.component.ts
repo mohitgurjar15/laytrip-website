@@ -352,7 +352,7 @@ export class CheckoutComponent implements OnInit {
           }
           let index = this.alertErrorMessage.lastIndexOf(" ");
           this.alertErrorMessage = this.alertErrorMessage.substring(0, index);
-          for (let i = 0; i < cartAlerts.length; i++) {
+          /* for (let i = 0; i < cartAlerts.length; i++) {
             if (cartAlerts[i].type == 'installment_vartion') {
               if (cartAlerts.length == 1) {
                 this.alertErrorMessage = "Please close alert of odd installment amount.";
@@ -361,7 +361,7 @@ export class CheckoutComponent implements OnInit {
                 this.alertErrorMessage += ` and odd installment amount.`;
               }
             }
-          }
+          } */
 
           this.isAllAlertClosed = false;
         }
