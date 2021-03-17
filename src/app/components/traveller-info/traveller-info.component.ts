@@ -47,6 +47,8 @@ export class TravellerInfoComponent implements OnInit {
 
   ngOnInit() {
     this.loadJquery();
+    this.totalPerson = this.adultValue + this.childValue + this.infantValue;
+    this.travelerLabel = this.totalPerson > 1 ? 'Travelers' : 'Traveler';
   }
   toggle = 0;
 
