@@ -170,7 +170,7 @@ export class BookingTravelerComponent implements OnInit {
   getUserType(traveler){
 
     if(typeof traveler.travelerInfo.user_type!='undefined'){
-      return travlerLabels.en[traveler.user_type];
+      return travlerLabels.en[traveler.travelerInfo.user_type];
     }
     else{
       let user_type='';
