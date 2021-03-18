@@ -46,7 +46,7 @@ export class ChangePasswordComponent implements OnInit {
 
     if (this.changePasswordForm.invalid) {
       this.loadingValue.emit(false);
-      // this.submitted = false;
+      this.submitted = true;
       return;
     } else {
       let jsonFromData = {
@@ -57,7 +57,6 @@ export class ChangePasswordComponent implements OnInit {
       this.userService.changePassword(jsonFromData).subscribe((data: any) => {
         this.loadingValue.emit(false);
         this.changePasswordForm.reset();
-        // this.toastr.success("Your password has been updated successfully!", 'Password Updated');
         this.toastr.show('Your password has been updated successfully!', 'Password Updated', {
           toastClass: 'custom_toastr',
           titleClass: 'custom_toastr_title',
@@ -69,7 +68,6 @@ export class ChangePasswordComponent implements OnInit {
         this.submitted = false;
         this.apiError = error.message;
         this.loadingValue.emit(false);
-        // this.toastr.error(error.error.message, 'Error Change Password');
         this.toastr.show(error.error.message, 'Error Change Password', {
           toastClass: 'custom_toastr',
           titleClass: 'custom_toastr_title',

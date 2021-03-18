@@ -26,7 +26,7 @@
                 </span>
             </div>
             <div class="form_row common_row"
-                [ngClass]="{'error_main_class':profileForm.controls.first_name.touched && profileForm.controls.first_name.errors}">
+                [ngClass]="{'error_main_class': submitted && profileForm.controls.first_name.errors}">
                 <label>{{'first_name' | translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <input type="text" placeholder="{{'first_name_placeholder' | translate}}"
@@ -34,7 +34,7 @@
                         (keypress)="commonFunction.preventNumberInput($event)">
                 </div>
             </div>
-            <div *ngIf="profileForm.controls.first_name.touched && profileForm.controls.first_name.errors"
+            <div *ngIf="submitted && profileForm.controls.first_name.errors"
                 class="error error_profile">
                 <div class="fake_div"></div>
                 <small *ngIf="profileForm.controls.first_name.errors.required" class="error_field_new">
@@ -45,7 +45,7 @@
                     {{'first_name_string_validation' | translate}}</small>
             </div>
             <div class="form_row common_row"
-                [ngClass]="{'error_main_class':profileForm.controls.last_name.touched && profileForm.controls.last_name.errors}">
+                [ngClass]="{'error_main_class': submitted && profileForm.controls.last_name.errors}">
                 <label>{{'last_name' | translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <input type="text" [readonly]="!isFormControlEnable"
@@ -53,10 +53,10 @@
                         tabindex="2" (keypress)="commonFunction.preventNumberInput($event)">
                 </div>
             </div>
-            <div *ngIf="(isFormControlEnable && profileForm.controls.last_name.touched) && profileForm.controls.last_name.errors"
+            <div *ngIf="(isFormControlEnable ) && profileForm.controls.last_name.errors"
                 class="error error_profile">
                 <div class="fake_div"></div>
-                <small *ngIf="profileForm.controls.last_name.errors.required" class="error_field_new">
+                <small *ngIf="submitted && profileForm.controls.last_name.errors.required" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
                     {{'last_name_touched_validation' | translate}}</small>
                 <small *ngIf="profileForm.controls.last_name.errors.pattern" class="error_field_new">
@@ -65,7 +65,7 @@
             </div>
 
             <div class="form_row common_row"
-                [ngClass]="{'error_main_class':profileForm.controls.email.touched && profileForm.controls.email.errors}">
+                [ngClass]="{'error_main_class': submitted && profileForm.controls.email.errors}">
                 <label>{{'email_small' | translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <input
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="error error_profile"
-                *ngIf="profileForm.controls.email.touched && profileForm.controls.email.errors">
+                *ngIf="profileForm.controls.email.errors">
                 <div class="fake_div"></div>
                 <span *ngIf="profileForm.controls.email.errors.required" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="form_row common_row"
-                [ngClass]="{'error_main_class':(profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) && profileForm.controls.phone_no.errors}">
+                [ngClass]="{'error_main_class':(submitted &&   profileForm.controls.phone_no.errors)}">
                 <label>{{'phone_no' | translate}}<sup>*</sup></label>
 
                 <div class="text_field telephone_wrps account_telephone">
@@ -128,7 +128,7 @@
                 </div>
             </div>
             <div class="error error_profile"
-                *ngIf="(profileForm.controls.country_code.touched || profileForm.controls.phone_no.touched) && profileForm.controls.phone_no.errors">
+                *ngIf="submitted && profileForm.controls.phone_no.errors">
                 <div class="fake_div"></div>
                 <small class="error_field_new" *ngIf="profileForm.hasError('phoneAndPhoneCodeError')"><img
                         src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
@@ -140,7 +140,7 @@
                         class="error_img_new"> Minimum 10 characters.</small>
             </div>
             <div class="form_row common_row dobs_account"
-                [ngClass]="{'error_main_class':profileForm.controls.dob.touched && profileForm.controls.dob.errors}">
+                [ngClass]="{'error_main_class':  submitted && profileForm.controls.dob.errors}">
                 <label>{{'dob' | translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <input type="text" formControlName="dob" tabindex="7" placeholder="MM/DD/YYYY" [readonly]="!isFormControlEnable"
@@ -153,7 +153,7 @@
                     </p-calendar> -->
                 </div>
             </div>
-            <div *ngIf="profileForm.controls.dob.touched && profileForm.controls.dob.errors"
+            <div *ngIf="submitted &&  profileForm.controls.dob.errors"
                 class="error error_profile">
                 <div class="fake_div"></div>
                 <small *ngIf="profileForm.controls.dob.errors.required" class="error_field_new">
@@ -162,7 +162,7 @@
                 <small *ngIf="profileForm.controls.dob.errors.pattern" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">Please enter valid date of Birth.</small>
             </div>
-            <!-- <div *ngIf="profileForm.controls.dob.touched && profileForm.controls.dob.errors"
+            <!-- <div *ngIf="profileForm.controls.dob.errors"
                 class="error error_profile">
                 <div class="fake_div"></div>
                 <span *ngIf="profileForm.controls.dob.errors.required" class="error_field_new">

@@ -37,7 +37,7 @@ var ChangePasswordComponent = /** @class */ (function () {
         this.submitted = true;
         if (this.changePasswordForm.invalid) {
             this.loadingValue.emit(false);
-            // this.submitted = false;
+            this.submitted = true;
             return;
         }
         else {
@@ -49,13 +49,21 @@ var ChangePasswordComponent = /** @class */ (function () {
             this.userService.changePassword(jsonFromData).subscribe(function (data) {
                 _this.loadingValue.emit(false);
                 _this.changePasswordForm.reset();
-                _this.toastr.success("Your password has been updated successfully!", 'Password Updated');
+                _this.toastr.show('Your password has been updated successfully!', 'Password Updated', {
+                    toastClass: 'custom_toastr',
+                    titleClass: 'custom_toastr_title',
+                    messageClass: 'custom_toastr_message'
+                });
                 _this.submitted = false;
             }, function (error) {
                 _this.submitted = false;
                 _this.apiError = error.message;
                 _this.loadingValue.emit(false);
-                _this.toastr.error(error.error.message, 'Error Change Password');
+                _this.toastr.show(error.error.message, 'Error Change Password', {
+                    toastClass: 'custom_toastr',
+                    titleClass: 'custom_toastr_title',
+                    messageClass: 'custom_toastr_message'
+                });
             });
         }
     };

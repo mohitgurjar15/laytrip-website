@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
     mask: [
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
-
+  submitted : boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -275,10 +275,11 @@ export class ProfileComponent implements OnInit {
 
 
   onSubmit() {
-    // this.submitted = true;
+    this.submitted = true;
     const controls = this.profileForm.controls;
     this.loadingValue.emit(true);
     if (this.profileForm.invalid) {
+      this.submitted = true;
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()
       );
@@ -337,13 +338,13 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls['state_id'].disable();
 
       this.userService.updateProfile(formdata).subscribe((data: any) => {
-        // this.submitted = false;
+        this.submitted = false;
         this.loadingValue.emit(false);
         localStorage.setItem("_lay_sess", data.token);
         // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
       }, (error: HttpErrorResponse) => {
         this.loadingValue.emit(false);
-        // this.submitted = false;
+        this.submitted = false;
         // this.toastr.error(error.error.message, 'Profile Error');
       });
     }

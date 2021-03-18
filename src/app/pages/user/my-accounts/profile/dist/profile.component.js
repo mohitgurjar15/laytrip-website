@@ -64,6 +64,7 @@ var ProfileComponent = /** @class */ (function () {
                 /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/
             ]
         };
+        this.submitted = false;
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.loadingValue.emit(true);
@@ -253,10 +254,11 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.onSubmit = function () {
         var _this = this;
-        // this.submitted = true;
+        this.submitted = true;
         var controls = this.profileForm.controls;
         this.loadingValue.emit(true);
         if (this.profileForm.invalid) {
+            this.submitted = true;
             Object.keys(controls).forEach(function (controlName) {
                 return controls[controlName].markAsTouched();
             });
@@ -315,13 +317,13 @@ var ProfileComponent = /** @class */ (function () {
             this.profileForm.controls['country_id'].disable();
             this.profileForm.controls['state_id'].disable();
             this.userService.updateProfile(formdata).subscribe(function (data) {
-                // this.submitted = false;
+                _this.submitted = false;
                 _this.loadingValue.emit(false);
                 localStorage.setItem("_lay_sess", data.token);
                 // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
             }, function (error) {
                 _this.loadingValue.emit(false);
-                // this.submitted = false;
+                _this.submitted = false;
                 // this.toastr.error(error.error.message, 'Profile Error');
             });
         }
