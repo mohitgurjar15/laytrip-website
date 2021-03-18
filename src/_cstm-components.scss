@@ -16,6 +16,12 @@ app-search-airport {
     &.laytrip-input {
         padding: 0 15px 0 0;
 
+        &.ng-select-disabled{
+            &:focus{
+                outline: none;
+            }
+        }
+
         .ng-dropdown-panel {
             top: 100%;
             background: $background-white;
