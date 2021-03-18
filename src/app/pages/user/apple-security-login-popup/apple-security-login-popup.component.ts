@@ -21,6 +21,7 @@ export class AppleSecurityLoginPopupComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   appleLoginForm: FormGroup;
   loading = false;
+  submitted = false;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -45,10 +46,12 @@ export class AppleSecurityLoginPopupComponent implements OnInit {
 
   onSubmit(formValue) {
     this.loading = true;
+    this.submitted = true;
     if (this.appleLoginForm.invalid) {
       Object.keys(this.appleLoginForm.controls).forEach(key => {
         this.appleLoginForm.get(key).markAsTouched();
       });
+      this.submitted = true;
       this.loading = false;
       return;
     }
@@ -57,10 +60,12 @@ export class AppleSecurityLoginPopupComponent implements OnInit {
       if (res) {
         localStorage.setItem("_lay_sess", res.token);
         this.loading = false;
+        this.submitted = false;
         this.activeModal.close({ STATUS: MODAL_TYPE.CLOSE });
       }
     }, error => {
       this.loading = false;
+      this.submitted = false;
       if (error && error.status === 409) {
         this.toastr.show('This email address is already registered with us. Please enter different email address.', '', {
           toastClass: 'custom_toastr',

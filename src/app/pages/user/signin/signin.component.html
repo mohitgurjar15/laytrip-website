@@ -1,7 +1,7 @@
-<div class="modal fade comman_modal signin_modal" id="sign_in_modal" data-backdrop="static" data-keyboard="false" >
+<div class="modal fade comman_modal signin_modal" id="sign_in_modal" data-backdrop="static" data-keyboard="false">
 
     <div class="modal-dialog modal-dialog-centered">
-        
+
         <div class="modal-content">
             <div class="header_img">
                 <img src="{{s3BucketUrl}}assets/images/cms_page_banner.png" alt="image">
@@ -26,15 +26,15 @@
                     <form [formGroup]="loginForm" novalidate autocomplete="off" id="signin-form">
                         <div class="form_row">
                             <div class="text_field">
-                                <input type="email"
-                                [ngClass]="{'error': (submitted && loginForm.controls.email.errors ) || (  loginForm.controls.email.touched && loginForm.controls.email.errors)}"
+                                <input type="email" [ngClass]="{'error':submitted && !loginForm.controls.email.valid}"
                                     type="email" maxlength="50" formControlName="email" tabindex="101"
                                     placeholder="{{'email_placeholder' | translate}}">
-                                <div
-                                    *ngIf="(submitted || loginForm.controls.email.touched) && loginForm.controls.email.errors">
-                                    <p *ngIf="loginForm.controls.email.errors.required" class="error_text">
+                                <div *ngIf="submitted">
+                                    <p *ngIf="loginForm.controls.email.errors && loginForm.controls.email.errors.required"
+                                        class="error_text">
                                         {{'email_touched_validation' | translate}}</p>
-                                    <p *ngIf="loginForm.controls.email.errors.pattern" class="error_text">
+                                    <p *ngIf="loginForm.controls.email.errors && loginForm.controls.email.errors.pattern"
+                                        class="error_text">
                                         {{'email_invalid_validation' | translate}}</p>
                                 </div>
                             </div>
@@ -42,25 +42,27 @@
                         <div class="form_row">
                             <div class="text_field pass_show">
                                 <input tabindex="102"
-                                    [ngClass]="{'error':  (submitted && loginForm.controls.password.errors ) || (  loginForm.controls.password.touched && loginForm.controls.password.errors)}"
+                                    [ngClass]="{'error':  submitted && !loginForm.controls.password.valid}"
                                     type="password" autocomplete="new-password"
                                     [type]="fieldTextType ? 'text' : 'password'" formControlName="password"
                                     maxlength="50" placeholder="{{'password_placholder' | translate}}">
                                 <span class="ptxt"><i [ngClass]="fieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                         aria-hidden="true" (click)="toggleFieldTextType()"></i></span>
-                                <div
-                                    *ngIf="(submitted || loginForm.controls.password.touched) && loginForm.controls.password.errors">
-                                    <p *ngIf="loginForm.controls.password.errors.required" class="error_text">
+                                <div *ngIf="submitted">
+                                    <p *ngIf="loginForm.controls.password.errors && loginForm.controls.password.errors.required"
+                                        class="error_text">
                                         {{'password_touched_validation' | translate}}
                                     </p>
-                                    <p *ngIf="loginForm.controls.password.errors.pattern" class="error_text">Please
+                                    <!-- <p *ngIf="loginForm.controls.password.errors && loginForm.controls.password.errors.pattern"
+                                        class="error_text">Please
                                         enter valid password.
-                                    </p>
+                                    </p> -->
                                 </div>
                             </div>
                         </div>
                         <div class="form_row last">
-                            <div class="forgot_pass"> <a (click)="openForgotPassModal()"  class="forgotPassword hover-link">Forgot
+                            <div class="forgot_pass"> <a (click)="openForgotPassModal()"
+                                    class="forgotPassword hover-link">Forgot
                                     Password?</a> </div>
                             <div class="check">
                                 <label class="custom_checkbox">
@@ -69,7 +71,7 @@
                             </div>
                         </div>
                         <div class="form_btn">
-                            <button type="submit" [disabled]="(!loginForm.valid)" [ngClass]="{'btn_disable':(!loginForm.valid )}" class="btn  btn-accent btn-block btn-flat b-r-10"
+                            <button type="submit" class="btn  btn-accent btn-block btn-flat b-r-10"
                                 (click)="onSubmit()">
                                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'sign_in' | translate}}
                             </button>
@@ -77,14 +79,17 @@
                         <div class="block_api_error" *ngIf="apiError.length > 0">
                             {{apiError}}
                         </div>
-                        <div class="block_api_error" *ngIf="userNotVerify">Your account is not verified, <a class="hover-link clickHereLink" (click)="emailVerify()">click here</a> to verify your account
+                        <div class="block_api_error" *ngIf="!userNotVerify">Your account is not verified, <a
+                                class="hover-link clickHereLink" (click)="emailVerify()">click here</a> to verify your
+                            account
                         </div>
                     </form>
                     <div class="modal_btm">
                         <!-- <div class="border_block"><span>Or</span></div>
                         <app-social-login (socialError)="socialError($event)"></app-social-login> -->
-                        <p>{{'do_not_have_an_account' | translate}} 
-                            <a (click)="btnSignUpClick()" class="signUp hover-link">{{'sign_up' | translate}}</a></p>
+                        <p>{{'do_not_have_an_account' | translate}}
+                            <a (click)="btnSignUpClick()" class="signUp hover-link">{{'sign_up' | translate}}</a>
+                        </p>
                         <div class="block_logo">
                             <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
                         </div>

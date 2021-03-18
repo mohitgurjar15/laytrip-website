@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
     public renderer: Renderer2,
     public commonFunction: CommonFunction,
 
-    ) {}
+  ) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -59,9 +59,16 @@ export class SignupComponent implements OnInit {
     }, {
       validators: MustMatch('password', 'confirm_password'),
     });
+    this.isCaptchaValidated = false;
   }
 
   openOtpPage() {
+    Object.keys(this.signupForm.controls).forEach(key => {
+      this.signupForm.get(key).markAsUntouched();
+    });
+    this.signupForm.reset();
+    this.submitted = false;
+    this.isCaptchaValidated = false;
     $('#sign_up_modal').modal('hide');
     const modalRef = this.modalService.open(VerifyOtpComponent, { windowClass: 'otp_window', centered: true, backdrop: 'static', keyboard: false });
     (<VerifyOtpComponent>modalRef.componentInstance).isSignup = true;
@@ -70,6 +77,12 @@ export class SignupComponent implements OnInit {
 
   closeModal() {
     this.apiError = '';
+    this.isCaptchaValidated = false;
+    this.submitted = false;
+    Object.keys(this.signupForm.controls).forEach(key => {
+      this.signupForm.get(key).markAsUntouched();
+    });
+    this.signupForm.reset();
     $('#sign_up_modal').modal('hide');
   }
 
@@ -90,6 +103,10 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.submitted = this.loading = true;
     if (this.signupForm.invalid || !this.isCaptchaValidated || !this.iAccept) {
+      Object.keys(this.signupForm.controls).forEach(key => {
+        this.signupForm.get(key).markAsTouched();
+      });
+      this.signupForm.reset();
       this.submitted = true;
       this.loading = false;
       return;
@@ -107,6 +124,12 @@ export class SignupComponent implements OnInit {
   }
 
   openSignInModal() {
+    this.isCaptchaValidated = false;
+    this.submitted = false;
+    Object.keys(this.signupForm.controls).forEach(key => {
+      this.signupForm.get(key).markAsUntouched();
+    });
+    this.signupForm.reset();
     setTimeout(() => {
       this.renderer.addClass(document.body, 'modal-open');
     }, 1000);
@@ -126,7 +149,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  checkEmailExist(emailString) {    
+  checkEmailExist(emailString) {
     if (this.signupForm.controls.email.valid) {
       this.userService.emailVeryfiy(emailString).subscribe((data: any) => {
         if (data && data.is_available) {

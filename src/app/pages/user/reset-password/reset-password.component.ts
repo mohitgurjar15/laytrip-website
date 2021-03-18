@@ -75,6 +75,11 @@ export class ResetPasswordComponent implements OnInit {
 
   openSignInPage() {
     this.activeModal.close();
+    this.submitted = false;
+    Object.keys(this.resetForm.controls).forEach(key => {
+      this.resetForm.get(key).markAsUntouched();
+    });
+    this.resetForm.reset();
     $("#signin-form").trigger("reset");
     $('#sign_in_modal').modal('show');
   }
@@ -89,6 +94,9 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmit() {
     var otpValue = '';
+    Object.keys(this.resetForm.controls).forEach(key => {
+      this.resetForm.get(key).markAsUntouched();
+    });
     let otps: any = this.ngOtpInputRef.otpForm.value;
     Object.values(otps).forEach((v) => {
       otpValue += v;
@@ -151,6 +159,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onOtpChange(event) {
+    console.log(event);
     if (event.length == 6) {
       this.otp = event;
       this.resetForm.controls.otp.setValue(event);

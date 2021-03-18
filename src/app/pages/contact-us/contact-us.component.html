@@ -15,9 +15,9 @@
                             <div class="text_field">
                                 <input type="text" formControlName="name" maxlength="30" tabindex="1"
                                     placeholder="{{'full_name_placeholder' | translate}}">
-                                <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.touched"
-                                    class="focus-input100 login-error">
-                                    <div *ngIf="contactUsForm.controls.name.errors.required" class="text-danger">
+                                <div *ngIf="submitted" class="focus-input100 login-error">
+                                    <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.errors.required"
+                                        class="text-danger">
                                         {{'full_name_touched_validation' | translate}}
                                     </div>
                                 </div>
@@ -48,9 +48,8 @@
                                 </textarea>
                                 <div class="block_btm_msg">
                                     <div>
-                                        <div
-                                            *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.touched">
-                                            <div *ngIf="contactUsForm.controls.message.errors.required"
+                                        <div *ngIf="submitted">
+                                            <div *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.errors.required"
                                                 class="text-danger">
                                                 {{'messege_touched_validation' | translate}}
                                             </div>
@@ -61,7 +60,7 @@
                             </div>
                         </div>
                         <div class="form_btn">
-                            <button [ngClass]="{'btn_disable':(!contactUsForm.valid )}" type="submit">
+                            <button type="submit">
                                 <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;{{'submit' |
                                 translate}}</button>
                         </div>

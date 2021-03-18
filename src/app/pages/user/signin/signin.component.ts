@@ -59,9 +59,12 @@ export class SigninComponent implements OnInit {
 
   onSubmit() {
     this.apiError = '';
-    this.submitted = false;
+    this.submitted = true;
     this.loading = true;
     if (this.loginForm.invalid) {
+      Object.keys(this.loginForm.controls).forEach(key => {
+        this.loginForm.get(key).markAsTouched();
+      });
       this.submitted = true;
       this.loading = false;
       return;
@@ -71,8 +74,6 @@ export class SigninComponent implements OnInit {
 
           localStorage.setItem("_lay_sess", data.token);
           const userDetails = getLoginUserInfo();
-
-
           this.loading = this.submitted = false;
           $('#sign_in_modal').modal('hide');
           const _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
@@ -111,6 +112,7 @@ export class SigninComponent implements OnInit {
   }
 
   emailVerify() {
+    this.openOtpPage();
     this.userService.resendOtp(this.emailForVerifyOtp).subscribe((data: any) => {
       this.openOtpPage();
     }, (error: HttpErrorResponse) => {
@@ -129,11 +131,20 @@ export class SigninComponent implements OnInit {
 
   closeModal() {
     this.apiError = '';
+    this.submitted = false;
     $('#sign_in_modal').modal('hide');
+    Object.keys(this.loginForm.controls).forEach(key => {
+      this.loginForm.get(key).markAsUntouched();
+    });
+    this.loginForm.reset();
   }
 
   btnSignUpClick() {
-
+    this.submitted = false;
+    Object.keys(this.loginForm.controls).forEach(key => {
+      this.loginForm.get(key).markAsUntouched();
+    });
+    this.loginForm.reset();
     $('#sign_in_modal').modal('hide');
     $('#sign_up_modal').modal('show');
     $("#signup-form").trigger("reset");
@@ -144,6 +155,11 @@ export class SigninComponent implements OnInit {
   }
 
   openOtpPage() {
+    this.submitted = false;
+    Object.keys(this.loginForm.controls).forEach(key => {
+      this.loginForm.get(key).markAsUntouched();
+    });
+    this.loginForm.reset();
     $('#sign_in_modal').modal('hide');
     const modalRef = this.modalService.open(VerifyOtpComponent, {
       windowClass: 'otp_window',
@@ -156,6 +172,11 @@ export class SigninComponent implements OnInit {
   }
 
   openForgotPassModal() {
+    this.submitted = false;
+    Object.keys(this.loginForm.controls).forEach(key => {
+      this.loginForm.get(key).markAsUntouched();
+    });
+    this.loginForm.reset();
     this.apiError = '';
     $('#sign_in_modal').modal('hide');
     setTimeout(() => {
