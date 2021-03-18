@@ -19,7 +19,8 @@ export const travelersFileds = {
             is_passport_required: false,
             passport_number: '',
             passport_expiry: '',
-            checkout_date: new Date()
+            checkout_date: new Date(),
+            is_submitted:false
         },
         child: {
             userId: '',
@@ -35,7 +36,8 @@ export const travelersFileds = {
             is_passport_required: false,
             passport_number: '',
             passport_expiry: '',
-            checkout_date: new Date()
+            checkout_date: new Date(),
+            is_submitted:false
         },
         infant: {
             userId: '',
@@ -48,7 +50,8 @@ export const travelersFileds = {
             is_valid_date: true,
             dob: '',
             country_id: '',
-            gender: ''
+            gender: '',
+            is_submitted:false
         }
     }
 }

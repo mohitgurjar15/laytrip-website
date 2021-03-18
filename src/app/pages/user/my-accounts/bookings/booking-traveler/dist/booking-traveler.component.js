@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var moment = require("moment");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var environment_1 = require("../../../../../../environments/environment");
+var traveller_helper_1 = require("src/app/_helpers/traveller.helper");
 var BookingTravelerComponent = /** @class */ (function () {
     function BookingTravelerComponent(commonFunction, checkOutService, modalService, accountService) {
         this.commonFunction = commonFunction;
@@ -145,6 +146,25 @@ var BookingTravelerComponent = /** @class */ (function () {
     BookingTravelerComponent.prototype.openChat = function () {
         window.fcWidget.open();
         this.modalService.dismissAll();
+    };
+    BookingTravelerComponent.prototype.getUserType = function (traveler) {
+        if (typeof traveler.travelerInfo.user_type != 'undefined') {
+            return traveller_helper_1.travlerLabels.en[traveler.travelerInfo.user_type];
+        }
+        else {
+            var user_type = '';
+            var ageDiff = moment(new Date()).diff(moment(traveler.travelerInfo.dob, 'MM/DD/YYYY').format('YYYY-MM-DD'), "years");
+            if (ageDiff > 0 && ageDiff <= 2) {
+                user_type = 'infant';
+            }
+            if (ageDiff > 2 && ageDiff <= 12) {
+                user_type = 'child';
+            }
+            if (ageDiff > 12) {
+                user_type = 'adult';
+            }
+            return traveller_helper_1.travlerLabels.en[user_type];
+        }
     };
     __decorate([
         core_1.Input()
