@@ -271,10 +271,13 @@
       }
       .form-control {
         border-bottom: 2px solid $box-border-color !important;
-        &.ng-touched {
+        /* &.ng-touched {
           &.ng-invalid {
             border-color: $error-color !important;
           }
+        } */
+        &.input-error {
+          border-color: $error-color !important;
         }
       }
     }

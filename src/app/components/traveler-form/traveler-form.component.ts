@@ -333,8 +333,8 @@ export class TravelerFormComponent implements OnInit {
 
   patchValues(x) {
     return this.formBuilder.group({
-      first_name: [x.first_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
-      last_name: [x.last_name, [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]$')]],
+      first_name: [x.first_name, [Validators.required]],
+      last_name: [x.last_name, [Validators.required]],
       email: (x.type === 'adult' || x.type === '') ? [x.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]] : [x.email],
       phone_no: (x.type === 'adult' || x.type === '') ? [x.phone_no, [Validators.required, Validators.minLength(10)]] : [x.phone_no],
       country_code: (x.type === 'adult' || x.type === '') ? [x.country_code, [Validators.required]] : [x.country_code],
@@ -444,7 +444,9 @@ export class TravelerFormComponent implements OnInit {
   } */
   saveTraveler(cartNumber, traveler_number) {
 
-    console.log("this.travelerForm===>",this.travelerForm);
+    this.travelers[`type${cartNumber}`].adults[traveler_number].is_submitted = true;
+    console.log("this.travelerForm===>",this.travelers);
+
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;

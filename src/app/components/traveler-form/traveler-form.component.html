@@ -44,8 +44,8 @@
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                       <label for="">First Name*</label>
                       <input type="text" class="form-control" formControlName="first_name" tabindex={{x}}
-                        (keypress)="commonFunction.preventNumberInput($event)">
-                      <div *ngIf="traveler.controls.first_name.touched && traveler.controls.first_name.errors"
+                        (keypress)="commonFunction.preventNumberInput($event)" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.first_name.errors}">
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.first_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
@@ -59,8 +59,8 @@
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                       <label for="">Last Name*</label>
                       <input type="text" class="form-control" formControlName="last_name" tabindex={{x}}
-                        (keypress)="commonFunction.preventNumberInput($event)">
-                      <div *ngIf="traveler.controls.last_name.touched && traveler.controls.last_name.errors"
+                        (keypress)="commonFunction.preventNumberInput($event)" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.last_name.errors}" >
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.last_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
@@ -79,12 +79,12 @@
                       </select> -->
                       <div class="gender_anchers gender_selection">
                         <label for="">Gender*</label>
-                        <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender">
+                        <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.gender.errors}">
                           <ng-option value="M">Male</ng-option>
                           <ng-option value="F">Female</ng-option>
                           <ng-option value="O">Other</ng-option>
                         </ng-select>
-                        <div *ngIf="traveler.controls.gender.touched && traveler.controls.gender.errors" class="error">
+                        <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.gender.errors" class="error">
                           <small *ngIf="traveler.controls.gender.errors.required" class="error_field">
                             <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
                               class="error_img">Please
@@ -96,8 +96,8 @@
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
                       *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                       <label for="">Email*</label>
-                      <input type="email" class="form-control" formControlName="email" tabindex={{x}}>
-                      <div *ngIf="traveler.controls.email.touched && traveler.controls.email.errors" class="error">
+                      <input type="email" class="form-control" formControlName="email" tabindex={{x}} [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.gender.errors}">
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.email.errors" class="error">
                         <small *ngIf="traveler.controls.email.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
                           enter your email address.</small>
@@ -110,16 +110,16 @@
                       *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                       <label for="">{{ 'phone_no' | translate}}*</label>
                       <span class="tel_span"
-                        [ngClass]="{'red_underline':traveler.controls.phone_no.touched && traveler.controls.phone_no.errors}">
+                      [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.phone_no.errors}">
                         <!-- <input type="text" class="form-control" maxlength="6"
                           formControlName="country_code"> -->
                         <ng-select class="ng-customClass country_code" [items]="phoneCodelist" bindLabel="phonecode"
                           [tabIndex]="x" bindValue="phonecode" formControlName="country_code" [clearable]="false">
                         </ng-select>
                         <input type="text" mask="(000) 000-0000" class="form-control" maxlength="14"
-                          formControlName="phone_no" tabindex={{x}}>
+                          formControlName="phone_no" tabindex={{x}} [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.phone_no.errors}">
                       </span>
-                      <div *ngIf="traveler.controls.phone_no.touched && traveler.controls.phone_no.errors"
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.phone_no.errors"
                         class="error">
                         <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
@@ -136,8 +136,8 @@
                         [maxDate]="traveler.controls.dobMaxDate.value"> -->
                       <input #dobText placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}}
                         [textMask]="dateYeaMask" formControlName="dob"
-                        (blur)="checkMaximumMinimum($event, dobText.value, cartNumber, x)">
-                      <div *ngIf="traveler.controls.dob.touched && traveler.controls.dob.errors" class="error">
+                        (blur)="checkMaximumMinimum($event, dobText.value, cartNumber, x)" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.dob.errors}">
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.dob.errors" class="error">
                         <small *ngIf="traveler.controls.dob.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                           Please enter valid date of Birth.</small>
@@ -145,7 +145,7 @@
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
                           enter valid date of Birth.</small>
                       </div>
-                      <div *ngIf="!traveler.controls.is_valid_date.value" class="error">
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && !traveler.controls.is_valid_date.value" class="error">
                         <small class="error_field" *ngIf="traveler.controls.type.value === 'adult'">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Adult
                           is age 12+.</small>
@@ -160,8 +160,8 @@
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
                       *ngIf="traveler.controls.is_passport_required.value && travelerItem.value?.adults[x].hasOwnProperty('passport_number')">
                       <label for="">Passport number*</label>
-                      <input type="text" class="form-control" formControlName="passport_number" tabindex={{x}}>
-                      <div *ngIf="traveler.controls.passport_number.touched && traveler.controls.passport_number.errors"
+                      <input type="text" class="form-control" formControlName="passport_number" tabindex={{x}} [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.passport_number.errors}">
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.passport_number.errors"
                         class="error">
                         <small *ngIf="traveler.controls.passport_number.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter
@@ -172,8 +172,8 @@
                       *ngIf="traveler.controls.is_passport_required.value && travelerItem.value?.adults[x].hasOwnProperty('passport_expiry')">
                       <label for="">Expiration*</label>
                       <input type="text" class="form-control" bsDatepicker formControlName="passport_expiry"
-                        tabindex={{x}} [bsConfig]="bsConfig" [minDate]="passPortMinDate">
-                      <div *ngIf="traveler.controls.passport_expiry.touched && traveler.controls.passport_expiry.errors"
+                        tabindex={{x}} [bsConfig]="bsConfig" [minDate]="passPortMinDate" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.passport_expiry.errors}">
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.passport_expiry.errors"
                         class="error">
                         <small *ngIf="traveler.controls.passport_expiry.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter
