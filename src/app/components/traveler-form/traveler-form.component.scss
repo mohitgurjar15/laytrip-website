@@ -456,6 +456,9 @@
               display: flex;
               position: relative;
               bottom: 2px;
+              &.input-error{
+                border-color: $error-color !important;
+              }
 
               input {
                 border-bottom: none;

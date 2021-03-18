@@ -94,6 +94,11 @@ a {
   .gender_selection{
     border: none;
     .ng-select{
+      &.input-error{
+        .ng-select-container{
+          border-color: $error-color !important;
+        }
+      }
       .ng-select-container{
         border-bottom: 2px solid $box-border-color;
         min-height: 38px;
@@ -140,12 +145,15 @@ a {
           }
         }
       }
-      &.ng-touched {
+      /* &.ng-touched {
         &.ng-invalid {
           .ng-select-container{
             border-color: $error-color !important;
           }
         }
+      } */
+      &.input-error {
+        border-color: $error-color !important;
       }
     } 
     .error_img {
@@ -157,6 +165,11 @@ a {
 .gender_selection{
   border-bottom: 2px solid $box-border-color;
   .ng-select{
+    &.input-error{
+      .ng-select-container{
+        border-color: $error-color !important;
+      }
+    }
     &.ng-select-disabled{
       .ng-select-container{
         background-color: $background-white;
@@ -568,17 +581,20 @@ select {
 
 .mandetory_wrps {
   .form-control {
-    &.ng-touched {
+    /* &.ng-touched {
       &.ng-invalid {
         border-color: $error-color !important;
       }
-    }
-  }
-  .ng-touched {
-    &.ng-invalid {
+    } */
+    &.input-error {
       border-color: $error-color !important;
     }
   }
+  /* .ng-touched {
+    &.ng-invalid {
+      border-color: $error-color !important;
+    }
+  } */
 
   &.drop_down_mandetory {
     .error_img {
