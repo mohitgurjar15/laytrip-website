@@ -55,6 +55,11 @@
               }
               &.error {
                 border-color: $error-color;
+                &::placeholder {
+                  color: $mid_gray_bg;
+                  -webkit-text-fill-color: $mid_gray_bg;
+                  
+                }
               }
             }
             .text_area_wrps {
