@@ -329,7 +329,7 @@ a {
 }
 .iframe_wrapper{
   &#spreedly-cvv{
-    
+    border-bottom: 2px solid $box-border-color;
   }
 }
 // discription popup
@@ -618,11 +618,16 @@ select {
 
 .error_field {
   color: $error-color;
+  display: flex;
+  margin-top: 5px;
+  font-size: 10px;
+  align-items: flex-start;
 
   .error_img {
-    position: absolute;
-    top: 35px;
-    right: 15px;
+    margin-top: 3px;
+    display: flex;
+    max-width: 10px;
+    margin-right: 5px;
   }
 }
 

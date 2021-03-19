@@ -99,7 +99,7 @@ export class AddCardComponent implements OnInit {
       Spreedly.setFieldType('number', 'text');
       // Spreedly.setNumberFormat('maskedFormat');
       Spreedly.setStyle('number', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
-      Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .96em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
+      Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border: none; padding-top: .96em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
     });
 
     Spreedly.on('errors', function (errors) {
