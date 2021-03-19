@@ -10,7 +10,7 @@
 
                     <small *ngIf="travellerForm.controls.firstName.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                        Please enter your first name.</small>
+                         Enter first name.</small>
                     <small *ngIf="travellerForm.controls.firstName.errors.pattern" class="error_field">
                         {{'first_name_string_validation' | translate}}</small>
                 </div>
@@ -22,8 +22,8 @@
                 <div *ngIf="submitted && travellerForm.controls.lastName.errors"
                     class="error">
                     <small *ngIf="travellerForm.controls.lastName.errors.required" class="error_field">
-                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please
-                        enter your last name.</small>
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> 
+                        Enter last name.</small>
                     <small *ngIf="travellerForm.controls.lastName.errors.pattern" class="error_field">
                         {{'last_name_string_validation' | translate}}</small>
                 </div>
@@ -36,18 +36,13 @@
                         <ng-option value="F">Female</ng-option>
                         <ng-option value="O">Other</ng-option>
                     </ng-select>
-                    <!-- <select tabindex="{{travellerId}}" formControlName="gender">
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                        <option value="O">Other</option>
-                    </select> -->
+                   
                 </div>
                 <div *ngIf="submitted && travellerForm.controls.gender.errors"
                     class="error">
                     <small *ngIf="travellerForm.controls.gender.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                        Please select your
-                        gender.</small>
+                         Select gender.</small>
                 </div>
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps">
@@ -57,11 +52,11 @@
                 <div *ngIf="submitted && travellerForm.controls.dob.errors" class="error">
                     <small *ngIf="travellerForm.controls.dob.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                        Please enter your date
+                         Enter date
                         of birth.</small>
                     <small *ngIf="travellerForm.controls.dob.errors.pattern" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                        Please enter valid date of Birth.</small>
+                         Enter valid date of Birth.</small>
                 </div>
                 <!-- <p-calendar tabindex="{{travellerId}}" dateFormat="mm/dd/yy" class="form-control" panelStyleClass="birth_date"
                     inputId="basic" formControlName="dob" [maxDate]="dobMaxDate" [readonlyInput]="true"
@@ -71,7 +66,7 @@
                 <div *ngIf="travellerForm.controls.dob.errors" class="error">
                     <small *ngIf="travellerForm.controls.dob.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                        Please enter your date
+                         Enter date
                         of birth.</small>
                 </div> -->
             </div>
@@ -92,8 +87,8 @@
                 <div class="error"
                     *ngIf="(submitted &&  (travellerForm.controls.phone_no.errors || travellerForm.controls.country_code.errors))">
                     <small *ngIf="travellerForm.hasError('phoneAndPhoneCodeError')" class="error_field">
-                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
-                        enter your phone number.</small>
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                        Enter phone number.</small>
                     <small
                         *ngIf="!travellerForm.hasError('phoneAndPhoneCodeError') && (travellerForm.controls.phone_no.errors.minlength)"
                         class="error_field">Minimum 10 characters.</small>
@@ -108,9 +103,9 @@
                 <div *ngIf="submitted" [ngClass]="{'error':submitted}">
                     <small *ngIf="travellerForm.controls.email.errors && travellerForm.controls.email.errors.required"
                         class="error_field">
-                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> Please
-                        enter
-                        your email
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> 
+                        Enter
+                     email
                         address.</small>
                     <small *ngIf="travellerForm.controls.email.errors && travellerForm.controls.email.errors.pattern"
                         class="error_field">
@@ -125,8 +120,8 @@
                     class="error">
                     <small *ngIf="travellerForm.controls.passport_number.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                        Please
-                        enter your passport number.</small>
+                        
+                        Enter passport number.</small>
                 </div>
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account expiry_date" *ngIf="isAdult || isChild">
@@ -139,7 +134,7 @@
                     class="error">
                     <small *ngIf="travellerForm.controls.passport_expiry.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                        Please enter expiration date.</small>
+                         Enter expiration date.</small>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps">
@@ -161,9 +156,9 @@
                 </ng-select>
                 <div *ngIf="submitted && travellerForm.controls.country_id.errors"
                     class="error">
-                    <small *ngIf="travellerForm.controls.country_id.errors.required" class="error_field">Please
+                    <small *ngIf="travellerForm.controls.country_id.errors.required" class="error_field">
                         select
-                        your country.</small>
+                     country.</small>
                 </div>
 
             </div>

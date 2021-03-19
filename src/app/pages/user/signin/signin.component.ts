@@ -99,13 +99,14 @@ export class SigninComponent implements OnInit {
           }
         }
       }, (error: HttpErrorResponse) => {
+console.log(error)
         this.submitted = this.loading = false;
         if (error.status == 406) {
           this.emailForVerifyOtp = this.loginForm.value.email;
           this.userNotVerify = true;
           this.apiError = '';
         } else {
-          this.apiError = error.message;
+          this.apiError = error.message ? error.message : '';
         }
       });
     }

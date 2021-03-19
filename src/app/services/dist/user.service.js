@@ -21,7 +21,7 @@ var UserService = /** @class */ (function () {
     UserService.prototype.handleError = function (error) {
         var errorMessage = {};
         if (error.status == 0) {
-            errorMessage = { message: "API Server is not responding" };
+            return rxjs_1.throwError({ status: error.status, message: "API Server is not responding" });
         }
         if (error.error instanceof ErrorEvent) {
             // client-side error
