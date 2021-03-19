@@ -45,15 +45,30 @@ var SignupComponent = /** @class */ (function () {
         }, {
             validators: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
+        this.isCaptchaValidated = false;
     };
     SignupComponent.prototype.openOtpPage = function () {
+        var _this = this;
+        Object.keys(this.signupForm.controls).forEach(function (key) {
+            _this.signupForm.get(key).markAsUntouched();
+        });
+        this.signupForm.reset();
+        this.submitted = false;
+        this.isCaptchaValidated = false;
         $('#sign_up_modal').modal('hide');
         var modalRef = this.modalService.open(verify_otp_component_1.VerifyOtpComponent, { windowClass: 'otp_window', centered: true, backdrop: 'static', keyboard: false });
         modalRef.componentInstance.isSignup = true;
         modalRef.componentInstance.emailForVerifyOtp = this.emailForVerifyOtp;
     };
     SignupComponent.prototype.closeModal = function () {
+        var _this = this;
         this.apiError = '';
+        this.isCaptchaValidated = false;
+        this.submitted = false;
+        Object.keys(this.signupForm.controls).forEach(function (key) {
+            _this.signupForm.get(key).markAsUntouched();
+        });
+        this.signupForm.reset();
         $('#sign_up_modal').modal('hide');
     };
     SignupComponent.prototype.toggleFieldTextType = function (event) {
@@ -71,6 +86,10 @@ var SignupComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = this.loading = true;
         if (this.signupForm.invalid || !this.isCaptchaValidated || !this.iAccept) {
+            Object.keys(this.signupForm.controls).forEach(function (key) {
+                _this.signupForm.get(key).markAsTouched();
+            });
+            // this.signupForm.reset();
             this.submitted = true;
             this.loading = false;
             return;
@@ -88,6 +107,12 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.openSignInModal = function () {
         var _this = this;
+        this.isCaptchaValidated = false;
+        this.submitted = false;
+        Object.keys(this.signupForm.controls).forEach(function (key) {
+            _this.signupForm.get(key).markAsUntouched();
+        });
+        this.signupForm.reset();
         setTimeout(function () {
             _this.renderer.addClass(document.body, 'modal-open');
         }, 1000);

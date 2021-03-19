@@ -12,12 +12,12 @@ var environment_1 = require("../../../../environments/environment");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var custom_validators_1 = require("../../../_helpers/custom.validators");
 var VerifyOtpComponent = /** @class */ (function () {
-    function VerifyOtpComponent(modalService, formBuilder, userService, router, commonFunctoin, activeModal) {
+    function VerifyOtpComponent(modalService, formBuilder, userService, router, commonFunction, activeModal) {
         this.modalService = modalService;
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.router = router;
-        this.commonFunctoin = commonFunctoin;
+        this.commonFunction = commonFunction;
         this.activeModal = activeModal;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.valueChange = new core_1.EventEmitter();
@@ -45,6 +45,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.otp = 0;
         this.configCountDown = { leftTime: 60, demand: false };
         this.isTimerEnable = true;
+        this.guestUserId = '';
     }
     VerifyOtpComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -54,6 +55,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         setTimeout(function () {
             _this.isResend = true;
         }, 60000);
+        this.guestUserId = localStorage.getItem('__gst') || '';
     };
     VerifyOtpComponent.prototype.timerComplete = function () {
         this.isResend = true;
@@ -121,6 +123,21 @@ var VerifyOtpComponent = /** @class */ (function () {
                 _this.submitted = _this.loading = false;
                 localStorage.setItem("_lay_sess", data.userDetails.access_token);
                 var userDetails = jwt_helper_1.getLoginUserInfo();
+                if (_this.guestUserId) {
+                    _this.userService.mapGuestUser(_this.guestUserId).subscribe(function (res) {
+                        localStorage.setItem('$cartOver', res.cartOverLimit);
+                        var urlData = _this.commonFunction.decodeUrl(_this.router.url);
+                        _this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+                            _this.router.navigate(["" + urlData.url], { queryParams: urlData.params });
+                        });
+                    });
+                }
+                else {
+                    var urlData_1 = _this.commonFunction.decodeUrl(_this.router.url);
+                    _this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+                        _this.router.navigate(["" + urlData_1.url], { queryParams: urlData_1.params });
+                    });
+                }
                 var _isSubscribeNow = localStorage.getItem("_isSubscribeNow");
                 if (_isSubscribeNow == "Yes" && userDetails.roleId == 6) {
                     _this.router.navigate(['account/subscription']);

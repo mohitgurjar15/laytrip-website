@@ -69,7 +69,7 @@ export class VerifyOtpComponent implements OnInit {
     setTimeout(() => {
       this.isResend = true;
     }, 60000);
-
+ 
     this.guestUserId = localStorage.getItem('__gst') || '';
   }
 

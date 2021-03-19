@@ -95,7 +95,7 @@ export class SignupComponent implements OnInit {
       this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
     }
   }
-
+ 
   captchaResponse(response: string) {
     this.isCaptchaValidated = true;
   }
@@ -106,7 +106,7 @@ export class SignupComponent implements OnInit {
       Object.keys(this.signupForm.controls).forEach(key => {
         this.signupForm.get(key).markAsTouched();
       });
-      this.signupForm.reset();
+      // this.signupForm.reset();
       this.submitted = true;
       this.loading = false;
       return;
