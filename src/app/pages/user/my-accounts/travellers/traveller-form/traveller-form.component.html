@@ -166,8 +166,8 @@
         <span class="edit_btns duel_buttons">
             <span class="remove_wrps">
                 <button type="button" *ngIf="!travellerId" class="hover-link " [ngClass]="{'disabled':  (!travellerForm.touched) }"
-                    (click)="removeTraveller(deleteContent,travellerId)">Delete</button>
-                <button type="button" class="hover-link" *ngIf="travellerId" [ngClass]="{'disabled':  (formEnable) }"
+                    (click)="removeTraveller(deleteContent)">Delete</button>
+                <button type="button" class="hover-link" *ngIf="travellerId" 
                     (click)="removeTraveller(deleteContent,travellerId)">Delete</button>
             </span>
             <button (click)="disabledForm()" class="hover-link" [ngClass]="{'disabled': !travellerId }">Edit</button>

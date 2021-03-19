@@ -350,7 +350,6 @@ export class TravellerFormComponent implements OnInit {
   closeResult;
 
   removeTraveller(content, userId = '') {
-    console.log(content,userId)
     if(userId){
       this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
       this.userId = userId;
