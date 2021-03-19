@@ -445,7 +445,6 @@ export class TravelerFormComponent implements OnInit {
   saveTraveler(cartNumber, traveler_number) {
 
     this.travelers[`type${cartNumber}`].adults[traveler_number].is_submitted = true;
-    console.log("this.travelerForm===>",this.travelers);
 
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
@@ -460,6 +459,7 @@ export class TravelerFormComponent implements OnInit {
       if (userId) {
         //Edit
         this.travelerService.updateAdult(data, userId).subscribe((traveler: any) => {
+          this.travelers[`type${cartNumber}`].adults[traveler_number].is_submitted = false;
           this.cartService.setLoaderStatus(false);
           let index = this.myTravelers.findIndex(x => x.userId == traveler.userId)
           this.myTravelers[index] = traveler;
@@ -470,6 +470,7 @@ export class TravelerFormComponent implements OnInit {
       }
       else{
         this.travelerService.addAdult(data).subscribe((traveler: any) => {
+          this.travelers[`type${cartNumber}`].adults[traveler_number].is_submitted = false;
           this.cartService.setLoaderStatus(false)
           if (traveler) {
             this.travelers[`type${cartNumber}`].adults[traveler_number].type = traveler.user_type;
