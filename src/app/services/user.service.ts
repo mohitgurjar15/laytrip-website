@@ -25,7 +25,7 @@ export class UserService {
   handleError(error) {
     let errorMessage = {};
     if (error.status == 0) {
-      errorMessage = { message: "API Server is not responding" };
+      return throwError({status:error.status, message: "API Server is not responding" });
     }
     if (error.error instanceof ErrorEvent) {
       // client-side error
