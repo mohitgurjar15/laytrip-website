@@ -311,7 +311,6 @@ var TravellerFormComponent = /** @class */ (function () {
     TravellerFormComponent.prototype.removeTraveller = function (content, userId) {
         var _this = this;
         if (userId === void 0) { userId = ''; }
-        console.log(content, userId);
         if (userId) {
             this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
             this.userId = userId;
