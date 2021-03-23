@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   toString: string;
   moduleId = 1;
   dealList = [];
+  host:string='';
 
   constructor(
     private genericService: GenericService,
@@ -46,6 +47,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.host = window.location.host;
     this.getModules();
     this.loadJquery();
     this.getDeal(this.moduleId);
