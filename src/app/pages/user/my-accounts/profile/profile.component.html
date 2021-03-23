@@ -8,7 +8,7 @@
                     </span>
                     <small class="error_field" *ngIf="imageFileError">{{imageErrorMsg}}</small>
                     <div class="update_profile_btn">
-                        <input #hiddenfileinput style="display: none" capture="camera" type="file" accept="image/*"
+                        <input #hiddenfileinput style="display: none" type="file" accept="image/*;capture=camera"
                             (change)="uploadImageFile($event)">
                         <button #upload (click)="hiddenfileinput.click()">Edit</button>
                     </div>
