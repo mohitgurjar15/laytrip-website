@@ -14,7 +14,7 @@ import { CheckOutService } from '../../../../../services/checkout.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GenericService } from '../../../../../services/generic.service';
 declare var $: any;
-import { parsePhoneNumberFromString, format, isValidNumberForRegion, AsYouType } from 'libphonenumber-js';
+import { PHONE_NUMBER_MASK } from '../../../../../_helpers/phone-masking.helper';
 
 @Component({
   selector: 'app-traveller-form',
@@ -61,7 +61,10 @@ export class TravellerFormComponent implements OnInit {
   };
   formEnable: boolean = false;
   submitted = false;
-
+  phoneNumberMask = {
+    format: '',
+    length: 0
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -98,6 +101,10 @@ export class TravellerFormComponent implements OnInit {
       passport_expiry: [''],
       passport_number: [''],
     }, { validators: phoneAndPhoneCodeValidation() });
+    this.travellerForm.controls.phone_no.setValidators([Validators.minLength(PHONE_NUMBER_MASK['+1'].length)]);
+    this.travellerForm.controls.phone_no.updateValueAndValidity();
+    this.phoneNumberMask.format = PHONE_NUMBER_MASK['+1'].format;
+    this.phoneNumberMask.length = PHONE_NUMBER_MASK['+1'].length;
 
     // this.travelerFormChange.emit(this.travellerForm);
 
@@ -388,20 +395,12 @@ export class TravellerFormComponent implements OnInit {
     this.travellerForm.controls['gender'].enable();
   }
 
-  validatePhoneNumber(event: any): void {
-    console.log(this.countries_code, event);
+  validateCountryWithPhoneNumber(event: any): void {
     let selectedCountry = this.travellerForm.controls['country_code'].value;
-    let inputValue = `${this.travellerForm.controls['phone_no'].value}`;
-    let countryCode = this.countries_code.find((cd) => cd.countryCode === selectedCountry);
-    let phoneNumber = parsePhoneNumberFromString(inputValue, countryCode.iso2);
-    let isRegion = isValidNumberForRegion(inputValue, countryCode.iso2);
-    let asYouType = new AsYouType(countryCode.iso2).input(inputValue)
-    if (phoneNumber && phoneNumber.isValid()) {
-      console.log('phoneNumber.isValid()::::::', phoneNumber.isValid());
-      console.log('asYouType::::::', asYouType);
-      // console.log('isRegion:::::', isRegion);
-      console.log(format(inputValue, countryCode.iso2, 'International'));
-      console.log(phoneNumber.formatInternational());
-    }
+    console.log(PHONE_NUMBER_MASK[selectedCountry].format);
+    this.travellerForm.controls.phone_no.setValidators([Validators.minLength(PHONE_NUMBER_MASK[selectedCountry].length)]);
+    this.travellerForm.controls.phone_no.updateValueAndValidity();
+    this.phoneNumberMask.format = PHONE_NUMBER_MASK[selectedCountry].format;
+    this.phoneNumberMask.length = PHONE_NUMBER_MASK[selectedCountry].length;
   }
 }

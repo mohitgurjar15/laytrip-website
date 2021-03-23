@@ -3,26 +3,26 @@
         <div class="form-row {{travellerId}}">
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                 <label for="">{{'first_name' |translate}}*</label>
-                <input [ngClass]="{'input-error' : (submitted && travellerForm.controls.firstName.errors)}" [readonly]="formEnable" tabindex="{{travellerId}}" type="text" class="form-control" formControlName="firstName"
-                    (keypress)="commonFunction.preventNumberInput($event)">
-                <div *ngIf="submitted && travellerForm.controls.firstName.errors"
-                    class="error">
+                <input [ngClass]="{'input-error' : (submitted && travellerForm.controls.firstName.errors)}"
+                    [readonly]="formEnable" tabindex="{{travellerId}}" type="text" class="form-control"
+                    formControlName="firstName" (keypress)="commonFunction.preventNumberInput($event)">
+                <div *ngIf="submitted && travellerForm.controls.firstName.errors" class="error">
 
                     <small *ngIf="travellerForm.controls.firstName.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                         Enter first name.</small>
+                        Enter first name.</small>
                     <small *ngIf="travellerForm.controls.firstName.errors.pattern" class="error_field">
                         {{'first_name_string_validation' | translate}}</small>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                 <label for="">{{'last_name' |translate}}*</label>
-                <input [ngClass]="{'input-error' : (submitted && travellerForm.controls.lastName.errors)}" [readonly]="formEnable" tabindex="{{travellerId}}" type="text" class="form-control" formControlName="lastName"
-                    (keypress)="commonFunction.preventNumberInput($event)">
-                <div *ngIf="submitted && travellerForm.controls.lastName.errors"
-                    class="error">
+                <input [ngClass]="{'input-error' : (submitted && travellerForm.controls.lastName.errors)}"
+                    [readonly]="formEnable" tabindex="{{travellerId}}" type="text" class="form-control"
+                    formControlName="lastName" (keypress)="commonFunction.preventNumberInput($event)">
+                <div *ngIf="submitted && travellerForm.controls.lastName.errors" class="error">
                     <small *ngIf="travellerForm.controls.lastName.errors.required" class="error_field">
-                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> 
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                         Enter last name.</small>
                     <small *ngIf="travellerForm.controls.lastName.errors.pattern" class="error_field">
                         {{'last_name_string_validation' | translate}}</small>
@@ -31,32 +31,35 @@
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory">
                 <label for="">{{'gender' |translate}}*</label>
                 <div class="gender_anchers gender_selection">
-                     <ng-select  [ngClass]="{'input-error' : (submitted && travellerForm.controls.gender.errors)}" [readonly]="formEnable" formControlName="gender" [clearable]="false" placeholder="Select Gender">                    
+                    <ng-select [ngClass]="{'input-error' : (submitted && travellerForm.controls.gender.errors)}"
+                        [readonly]="formEnable" formControlName="gender" [clearable]="false"
+                        placeholder="Select Gender">
                         <ng-option value="M">Male</ng-option>
                         <ng-option value="F">Female</ng-option>
                         <ng-option value="O">Other</ng-option>
                     </ng-select>
-                   
+
                 </div>
-                <div *ngIf="submitted && travellerForm.controls.gender.errors"
-                    class="error">
+                <div *ngIf="submitted && travellerForm.controls.gender.errors" class="error">
                     <small *ngIf="travellerForm.controls.gender.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                         Select gender.</small>
+                        Select gender.</small>
                 </div>
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps">
                 <label for="">{{'dob' |translate}}*</label>
-                <input  [ngClass]="{'input-error' : (submitted && travellerForm.controls.dob.errors)}" [readonly]="formEnable" placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex="{{travellerId}}" [textMask]="dateYeaMask"
-                    formControlName="dob" (blur)="validateDob($event)">
+                <input [ngClass]="{'input-error' : (submitted && travellerForm.controls.dob.errors)}"
+                    [readonly]="formEnable" placeholder="MM/DD/YYYY" type="text" class="form-control"
+                    tabindex="{{travellerId}}" [textMask]="dateYeaMask" formControlName="dob"
+                    (blur)="validateDob($event)">
                 <div *ngIf="submitted && travellerForm.controls.dob.errors" class="error">
                     <small *ngIf="travellerForm.controls.dob.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                         Enter date
+                        Enter date
                         of birth.</small>
                     <small *ngIf="travellerForm.controls.dob.errors.pattern" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                         Enter valid date of Birth.</small>
+                        Enter valid date of Birth.</small>
                 </div>
                 <!-- <p-calendar tabindex="{{travellerId}}" dateFormat="mm/dd/yy" class="form-control" panelStyleClass="birth_date"
                     inputId="basic" formControlName="dob" [maxDate]="dobMaxDate" [readonlyInput]="true"
@@ -77,11 +80,12 @@
                 <span class="tel_span"
                     [ngClass]="{'red_underline':(submitted && (travellerForm.controls.phone_no.errors || travellerForm.controls.country_code.errors))}">
 
-                    <ng-select  [readonly]="formEnable" class="ng-customClass country_code" [items]="countries_code" bindLabel="countryCode"
-                        bindValue="countryCode" [clearable]="false" formControlName="country_code">
+                    <ng-select [readonly]="formEnable" class="ng-customClass country_code" [items]="countries_code"
+                        bindLabel="countryCode" bindValue="countryCode" [clearable]="false"
+                        formControlName="country_code" (change)="validateCountryWithPhoneNumber($event)">
                     </ng-select>
-                    <input  [readonly]="formEnable" type="text" mask="(000) 000-0000" tabindex="{{travellerId}}" class="form-control" maxlength="14"
-                        formControlName="phone_no" (change)="validatePhoneNumber($event)">
+                    <input [readonly]="formEnable" type="text" mask="{{phoneNumberMask.format}}"
+                        tabindex="{{travellerId}}" class="form-control" maxlength="14" formControlName="phone_no">
                 </span>
 
                 <div class="error"
@@ -91,21 +95,21 @@
                         Enter phone number.</small>
                     <small
                         *ngIf="!travellerForm.hasError('phoneAndPhoneCodeError') && (travellerForm.controls.phone_no.errors.minlength)"
-                        class="error_field">Minimum 10 characters.</small>
+                        class="error_field">Minimum {{phoneNumberMask.length}} characters.</small>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult"
-                [ngClass]="{'mandetory_wrps':submitted}">
+            <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult" [ngClass]="{'mandetory_wrps':submitted}">
                 <label for="">{{'email' |translate}}*</label>
-                <input  [ngClass]="{'input-error' : (submitted && travellerForm.controls.email.errors)}" [readonly]="formEnable" tabindex="{{travellerId}}"
+                <input [ngClass]="{'input-error' : (submitted && travellerForm.controls.email.errors)}"
+                    [readonly]="formEnable" tabindex="{{travellerId}}"
                     [readonly]="traveller.email && traveller.email != 'undefined' && traveller.email != ''" type="email"
                     class="form-control" formControlName="email">
                 <div *ngIf="submitted" [ngClass]="{'error':submitted}">
                     <small *ngIf="travellerForm.controls.email.errors && travellerForm.controls.email.errors.required"
                         class="error_field">
-                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img"> 
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                         Enter
-                     email
+                        email
                         address.</small>
                     <small *ngIf="travellerForm.controls.email.errors && travellerForm.controls.email.errors.pattern"
                         class="error_field">
@@ -115,33 +119,35 @@
 
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps" *ngIf="isAdult || isChild">
                 <label for="">{{'passport_number' |translate}}</label>
-                <input  [ngClass]="{'input-error' : (submitted && travellerForm.controls.passport_number.errors)}" [readonly]="formEnable" tabindex="{{travellerId}}" type="text" class="form-control" formControlName="passport_number">
-                <div *ngIf="submitted && travellerForm.controls.passport_number.errors"
-                    class="error">
+                <input [ngClass]="{'input-error' : (submitted && travellerForm.controls.passport_number.errors)}"
+                    [readonly]="formEnable" tabindex="{{travellerId}}" type="text" class="form-control"
+                    formControlName="passport_number">
+                <div *ngIf="submitted && travellerForm.controls.passport_number.errors" class="error">
                     <small *ngIf="travellerForm.controls.passport_number.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                        
+
                         Enter passport number.</small>
                 </div>
             </div>
             <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account expiry_date" *ngIf="isAdult || isChild">
                 <label for="">{{'passport_expiry_date' |translate}}</label>
-                <p-calendar  [ngClass]="{'input-error' : (submitted && travellerForm.controls.passport_expiry.errors)}" [disabled]="formEnable" [minDate]="expiryMinDate" tabindex="{{travellerId}}" dateFormat="M d, yy" class="form-control"
-                    panelStyleClass="birth_date" inputId="basic" formControlName="passport_expiry"
+                <p-calendar [ngClass]="{'input-error' : (submitted && travellerForm.controls.passport_expiry.errors)}"
+                    [disabled]="formEnable" [minDate]="expiryMinDate" tabindex="{{travellerId}}" dateFormat="M d, yy"
+                    class="form-control" panelStyleClass="birth_date" inputId="basic" formControlName="passport_expiry"
                     [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true" yearRange="2021:2030">
                 </p-calendar>
-                <div *ngIf="submitted && travellerForm.controls.passport_expiry.errors"
-                    class="error">
+                <div *ngIf="submitted && travellerForm.controls.passport_expiry.errors" class="error">
                     <small *ngIf="travellerForm.controls.passport_expiry.errors.required" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                         Enter expiration date.</small>
+                        Enter expiration date.</small>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps">
                 <label for="">{{'nationality' |translate}}*</label>
-                <ng-select [ngClass]="{'input-error' : (submitted && travellerForm.controls.country_id.errors)}" [readonly]="formEnable" tabindex="{{travellerId}}"
-                 class="ng-customClass" [items]="countries" bindLabel="name"
-                    [selectOnTab]="true" formControlName="country_id" selectOnTab="true" [clearable]="false">
+                <ng-select [ngClass]="{'input-error' : (submitted && travellerForm.controls.country_id.errors)}"
+                    [readonly]="formEnable" tabindex="{{travellerId}}" class="ng-customClass" [items]="countries"
+                    bindLabel="name" [selectOnTab]="true" formControlName="country_id" selectOnTab="true"
+                    [clearable]="false">
                     <ng-template ng-label-tmp let-item="item" let-clear="clear">
                         <span class="ng-value-label"><img class="img_country_code"
                                 [src]="item.flag ? item.flag : s3BucketUrl+'assets/images/icon/flag/flag-svg.jpg'"
@@ -154,24 +160,25 @@
                         {{item.name}}
                     </ng-template>
                 </ng-select>
-                <div *ngIf="submitted && travellerForm.controls.country_id.errors"
-                    class="error">
+                <div *ngIf="submitted && travellerForm.controls.country_id.errors" class="error">
                     <small *ngIf="travellerForm.controls.country_id.errors.required" class="error_field">
                         select
-                     country.</small>
+                        country.</small>
                 </div>
 
             </div>
         </div>
         <span class="edit_btns duel_buttons">
             <span class="remove_wrps">
-                <button type="button" *ngIf="!travellerId" class="hover-link " [ngClass]="{'disabled':  (!travellerForm.touched) }"
+                <button type="button" *ngIf="!travellerId" class="hover-link "
+                    [ngClass]="{'disabled':  (!travellerForm.touched) }"
                     (click)="removeTraveller(deleteContent)">Delete</button>
-                <button type="button" class="hover-link" *ngIf="travellerId" 
+                <button type="button" class="hover-link" *ngIf="travellerId"
                     (click)="removeTraveller(deleteContent,travellerId)">Delete</button>
             </span>
             <button (click)="disabledForm()" class="hover-link" [ngClass]="{'disabled': !travellerId }">Edit</button>
-            <button (click)="onSubmit()" class="hover-link" [ngClass]="{'disabled': !travellerForm.touched }">Save</button>
+            <button (click)="onSubmit()" class="hover-link"
+                [ngClass]="{'disabled': !travellerForm.touched }">Save</button>
         </span>
     </div>
 
