@@ -75,8 +75,8 @@ var ProfileComponent = /** @class */ (function () {
         }
         catch (e) { }
         this.profileForm = this.formBuilder.group({
-            first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+            first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+            last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
             dob: ['', [forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
             country_code: ['', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],

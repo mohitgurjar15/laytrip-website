@@ -26,7 +26,7 @@
                             <div class="text_field half">
                                 <input type="text" formControlName="first_name"
                                     [ngClass]="{'error': submitted && !signupForm.controls.first_name.valid}"
-                                    maxlength="25" tabindex="11" placeholder="{{'first_name' | translate}}"
+                                   maxlength="25" tabindex="11" placeholder="{{'first_name' | translate}}"
                                     (keypress)="commonFunction.preventNumberInput($event)">
                                 <div class="error_text" *ngIf="submitted">
                                     <div

@@ -8,7 +8,7 @@
                     </span>
                     <small class="error_field" *ngIf="imageFileError">{{imageErrorMsg}}</small>
                     <div class="update_profile_btn">
-                        <input #hiddenfileinput style="display: none" type="file" accept="image/*"
+                        <input #hiddenfileinput style="display: none" capture="camera" type="file" accept="image/*"
                             (change)="uploadImageFile($event)">
                         <button #upload (click)="hiddenfileinput.click()">Edit</button>
                     </div>
@@ -40,7 +40,7 @@
                 <small *ngIf="profileForm.controls.first_name.errors.required" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
                     {{'first_name_touched_validation' | translate}}</small>
-                <small *ngIf="profileForm.controls.first_name.errors.pattern" class="error_field">
+                <small *ngIf="profileForm.controls.first_name.errors.pattern" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
                     {{'first_name_string_validation' | translate}}</small>
             </div>
@@ -78,12 +78,12 @@
             <div class="error error_profile"
                 *ngIf="profileForm.controls.email.errors">
                 <div class="fake_div"></div>
-                <span *ngIf="profileForm.controls.email.errors.required" class="error_field_new">
+                <small *ngIf="profileForm.controls.email.errors.required" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
-                    {{'email_touched_validation' | translate}}</span>
-                <span *ngIf="profileForm.controls.email.errors.pattern" class="error_field_new">
+                    {{'email_touched_validation' | translate}}</small>
+                <small *ngIf="profileForm.controls.email.errors.pattern" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
-                    {{'email_invalid_validation' | translate}}</span>
+                    {{'email_invalid_validation' | translate}}</small>
             </div>
             <div class="form_row common_row ar_field">
                 <label>Home Airport</label>
@@ -130,7 +130,8 @@
             <div class="error error_profile"
                 *ngIf="submitted && profileForm.controls.phone_no.errors">
                 <div class="fake_div"></div>
-                <small class="error_field_new" *ngIf="profileForm.hasError('phoneAndPhoneCodeError')"><img
+                <small class="error_field_new" *ngIf="profileForm.hasError('phoneAndPhoneCodeError')">
+                    <img
                         src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
                     {{'phone_touched_validation' |
                     translate}}</small>
