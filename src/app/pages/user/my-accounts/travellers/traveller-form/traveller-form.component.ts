@@ -14,6 +14,7 @@ import { CheckOutService } from '../../../../../services/checkout.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GenericService } from '../../../../../services/generic.service';
 declare var $: any;
+import { parsePhoneNumberFromString, format, isValidNumberForRegion, AsYouType } from 'libphonenumber-js';
 
 @Component({
   selector: 'app-traveller-form',
@@ -58,7 +59,7 @@ export class TravellerFormComponent implements OnInit {
     mask: [
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
-  formEnable : boolean = false; 
+  formEnable: boolean = false;
   submitted = false;
 
 
@@ -241,7 +242,7 @@ export class TravellerFormComponent implements OnInit {
       let jsonData = {
         first_name: this.travellerForm.value.firstName,
         last_name: this.travellerForm.value.lastName,
-        dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob,'MM-DD-YYYY').format('YYYY-MM-DD') : moment(this.travellerForm.value.dob, 'MM-DD-YYYY').format('YYYY-MM-DD'),
+        dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob, 'MM-DD-YYYY').format('YYYY-MM-DD') : moment(this.travellerForm.value.dob, 'MM-DD-YYYY').format('YYYY-MM-DD'),
         gender: this.travellerForm.value.gender ? this.travellerForm.value.gender : 'M',
         country_id: country_id ? country_id : '',
         passport_expiry: typeof this.travellerForm.value.passport_expiry === 'object' ? moment(this.travellerForm.value.passport_expiry).format('YYYY-MM-DD') : null,
@@ -305,10 +306,10 @@ export class TravellerFormComponent implements OnInit {
   validateDob(event) {
     var eventDate = (typeof event == 'object' && event.target.value != 'undefined') ? event.target.value : event;
 
-    if(eventDate.length == 10 ){
-      var inputValueReplace = eventDate.replace("/","-");
-      var inputDate = inputValueReplace.replace("/","-");
-      var selectedDate = moment(inputDate,'MM-DD-YYYY').format('YYYY-MM-DD');
+    if (eventDate.length == 10) {
+      var inputValueReplace = eventDate.replace("/", "-");
+      var inputDate = inputValueReplace.replace("/", "-");
+      var selectedDate = moment(inputDate, 'MM-DD-YYYY').format('YYYY-MM-DD');
       var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
       var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
       const emailControl = this.travellerForm.get('email');
@@ -350,7 +351,7 @@ export class TravellerFormComponent implements OnInit {
   closeResult;
 
   removeTraveller(content, userId = '') {
-    if(userId){
+    if (userId) {
       this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
       this.userId = userId;
       this.modalReference.result.then((result) => {
@@ -380,10 +381,27 @@ export class TravellerFormComponent implements OnInit {
     this.modalReference.close();
   }
 
-  disabledForm(){
+  disabledForm() {
     this.formEnable = false;
     this.travellerForm.controls['country_id'].enable();
     this.travellerForm.controls['country_code'].enable();
     this.travellerForm.controls['gender'].enable();
+  }
+
+  validatePhoneNumber(event: any): void {
+    console.log(this.countries_code, event);
+    let selectedCountry = this.travellerForm.controls['country_code'].value;
+    let inputValue = `${this.travellerForm.controls['phone_no'].value}`;
+    let countryCode = this.countries_code.find((cd) => cd.countryCode === selectedCountry);
+    let phoneNumber = parsePhoneNumberFromString(inputValue, countryCode.iso2);
+    let isRegion = isValidNumberForRegion(inputValue, countryCode.iso2);
+    let asYouType = new AsYouType(countryCode.iso2).input(inputValue)
+    if (phoneNumber && phoneNumber.isValid()) {
+      console.log('phoneNumber.isValid()::::::', phoneNumber.isValid());
+      console.log('asYouType::::::', asYouType);
+      // console.log('isRegion:::::', isRegion);
+      console.log(format(inputValue, countryCode.iso2, 'International'));
+      console.log(phoneNumber.formatInternational());
+    }
   }
 }

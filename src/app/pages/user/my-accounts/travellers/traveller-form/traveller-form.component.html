@@ -81,7 +81,7 @@
                         bindValue="countryCode" [clearable]="false" formControlName="country_code">
                     </ng-select>
                     <input  [readonly]="formEnable" type="text" mask="(000) 000-0000" tabindex="{{travellerId}}" class="form-control" maxlength="14"
-                        formControlName="phone_no">
+                        formControlName="phone_no" (change)="validatePhoneNumber($event)">
                 </span>
 
                 <div class="error"
