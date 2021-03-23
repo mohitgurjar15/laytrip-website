@@ -24,6 +24,11 @@
         max-width: 170px;
         right: 0;
     }
+    &.cvv_description{
+        @include tab-view{
+            transform: translate(0%, 12%);
+        }
+    }
     transform: translate(-32%, 12%);
     max-width: 240px;
 }
