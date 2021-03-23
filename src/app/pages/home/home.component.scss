@@ -348,6 +348,10 @@
     }
 }
 
+.disable_mod{
+    pointer-events: none;
+}
+
 @-webkit-keyframes plane-animation {
     0% {
         -webkit-transform: translateY(-50px);
