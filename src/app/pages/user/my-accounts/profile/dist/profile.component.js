@@ -292,16 +292,16 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("city_name", this.profileForm.value.city);
             formdata.append("address", this.profileForm.value.address);
             if (!Number.isInteger(this.profileForm.value.country_id)) {
-                formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : 233);
-            }
-            else {
                 formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
             }
+            else {
+                formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : 233);
+            }
             if (!Number.isInteger(this.profileForm.value.state_id)) {
-                formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
+                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
             }
             else {
-                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
+                formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
             }
             if (typeof (this.profileForm.value.country_code) != 'object') {
                 formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');

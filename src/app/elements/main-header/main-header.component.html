@@ -68,9 +68,9 @@
 
                             <li class="nav-item responsive_li" *ngIf="isLoggedIn && userDetails.roleId != 7">
                                 <div class="dropdown account_ddown account_prof">
-                                    <a class="nav-link dropdown-toggle hover-link" data-toggle="dropdown"
+                                    <a class="nav-link dropdown-toggle hover-link sdsd" data-toggle="dropdown"
                                         aria-expanded="false">
-                                        <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
+                                        <img src="{{userDetails.profilePic || defaultImage}}" (error)="errors()" alt="Profile Image">
                                         <span>{{username}}</span>
                                     </a>
                                     <ul class="dropdown-menu">

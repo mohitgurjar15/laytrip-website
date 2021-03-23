@@ -318,4 +318,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   closeCartMaximum() {
     localStorage.removeItem('$cartOver');
   }
+
+  errors() {
+    this.userDetails.profilePic = '';
+    // this.userDetails.profilePic = '';
+  }
 }
