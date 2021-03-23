@@ -49,7 +49,7 @@
                         class="error">
                         <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                          Please enter your first name.
+                          Enter first name.
                         </small>
                         <small *ngIf="traveler.controls.first_name.errors.pattern" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
@@ -63,8 +63,7 @@
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.last_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
-                          enter your last name.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter last name.</small>
                         <small *ngIf="traveler.controls.last_name.errors.pattern" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                           {{'last_name_string_validation' | translate}} </small>
@@ -87,8 +86,7 @@
                         <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.gender.errors" class="error">
                           <small *ngIf="traveler.controls.gender.errors.required" class="error_field">
                             <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
-                              class="error_img">Please
-                            select your gender.</small>
+                              class="error_img">Select gender.</small>
                         </div>
                       </div>
                     </div>
@@ -99,11 +97,9 @@
                       <input type="email" class="form-control" formControlName="email" tabindex={{x}} [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.gender.errors}">
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.email.errors" class="error">
                         <small *ngIf="traveler.controls.email.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
-                          enter your email address.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter email address.</small>
                         <small *ngIf="traveler.controls.email.errors.pattern" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
-                          enter valid email address.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter valid email address.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps mandetory_wrps"
@@ -123,7 +119,7 @@
                         class="error">
                         <small *ngIf="traveler.controls.phone_no.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                          Please enter your phone number.</small>
+                          Enter phone number.</small>
                         <small *ngIf="traveler.controls.phone_no.errors.minlength" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
                             class="error_img">Minimum 10 characters.</small>
@@ -140,10 +136,10 @@
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.dob.errors" class="error">
                         <small *ngIf="traveler.controls.dob.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                          Please enter valid date of Birth.</small>
+                          Enter date of birth.</small>
                         <small *ngIf="traveler.controls.dob.errors.pattern" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Please
-                          enter valid date of Birth.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                          Enter valid date of birth.</small>
                       </div>
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && !traveler.controls.is_valid_date.value" class="error">
                         <small class="error_field" *ngIf="traveler.controls.type.value === 'adult'">

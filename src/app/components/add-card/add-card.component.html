@@ -11,8 +11,7 @@
                     <div class="error">
                         <small class="error_field credit_card_error" id="first_name" style="display:none">
                             <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                            Please enter
-                            cardholder name.</small>
+                            Enter cardholder name.</small>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
@@ -21,8 +20,7 @@
                     <div class="error">
                         <small class="error_field credit_card_error" id="number" style="display:none">
                             <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                            Please enter valid
-                            credit card number.</small>
+                            Enter valid credit card number.</small>
                     </div>
                 </div>
             </div>
@@ -51,7 +49,7 @@
                             [hidden]="totalCard === 0">
                         <input type="submit" id="submit_button" class="button" value="Save">
                     </div>
-                    <div class="section_description" id="cardError">
+                    <div class="section_description cvv_description" id="cardError">
                         <span class="sec_text pt-1 pr-1" id="cardErrorMessage"></span>
                         <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
                                 alt="Close"></a>

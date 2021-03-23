@@ -151,8 +151,8 @@
                         border-color: $error-color;
                         color: $error-color;
                         &::placeholder {
-                            color: $error-color;
-                            -webkit-text-fill-color: $error-color;
+                            color: $mid_gray_bg;
+                            -webkit-text-fill-color: $mid_gray_bg;
                         }
                     }
                 }

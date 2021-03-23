@@ -29,6 +29,7 @@
     .custom_fc_frame {
       right: 20px !important;
       bottom: 20px !important;
+
     }
 
     .custom_fc_frame .d-hotline.h-btn {
@@ -48,6 +49,12 @@
       overflow: hidden;
       top: 0;
     }
+
+    @media (max-width: 768px){
+      body #fc_frame.fc_open123{
+        right: 0px !important;
+      }
+    }
   </style>
 
   <link rel="manifest" href="manifest.json">
@@ -62,7 +69,9 @@
       host: "https://wchat.freshchat.com",
       config: {
         cssNames: {
-          widget: "custom_fc_frame"
+          widget: "custom_fc_frame",
+          open: 'fc_open123',
+        expanded: 'fc_expanded123'
         }
       }
     });

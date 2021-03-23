@@ -10,6 +10,15 @@
 @import "_hotel.scss";
 //@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
+.ng-scrollbar-layout {
+  .ng-scrollbar-layout {
+    .ng-scroll-view-container {
+      .ng-scroll-view {
+        width: calc(100% - -18%) !important;
+      }
+    }
+  }
+}
 .wrapper {
   position: relative;
   min-height: calc(100vh - 50px);
@@ -48,7 +57,6 @@ a {
   }
 }
 
-
 .dobs {
   .p-calendar {
     @include tab-view {
@@ -76,42 +84,42 @@ a {
       }
     }
   }
-  &.expiry_date{
-    .p-calendar{
+  &.expiry_date {
+    .p-calendar {
       @include tab-view {
         width: 100%;
       }
     }
     input {
-      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
-        no-repeat;
+      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
+        center right 15px no-repeat;
       background-size: 20px;
       border: none;
     }
   }
 }
-.drop_down_mandetory{
-  .gender_selection{
+.drop_down_mandetory {
+  .gender_selection {
     border: none;
-    .ng-select{
-      &.input-error{
-        .ng-select-container{
+    .ng-select {
+      &.input-error {
+        .ng-select-container {
           border-color: $error-color !important;
         }
       }
-      .ng-select-container{
+      .ng-select-container {
         border-bottom: 2px solid $box-border-color;
         min-height: 38px;
         border-radius: 0;
-        .ng-value-container{
+        .ng-value-container {
           padding: 0;
-          .ng-input{
+          .ng-input {
             padding: 0;
           }
         }
-        .ng-arrow-wrapper{
+        .ng-arrow-wrapper {
           padding: 0;
-          .ng-arrow{
+          .ng-arrow {
             padding: 5px 9px;
             background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
             background-position: right;
@@ -137,7 +145,7 @@ a {
           right: 8px;
           border: none;
           top: 0px;
-  
+
           @include tab-view {
             position: absolute;
             right: 0;
@@ -155,38 +163,38 @@ a {
       &.input-error {
         border-color: $error-color !important;
       }
-    } 
+    }
     .error_img {
       top: 35px !important;
       right: 35px !important;
     }
   }
 }
-.gender_selection{
+.gender_selection {
   border-bottom: 2px solid $box-border-color;
-  .ng-select{
-    &.input-error{
-      .ng-select-container{
+  .ng-select {
+    &.input-error {
+      .ng-select-container {
         border-color: $error-color !important;
       }
     }
-    &.ng-select-disabled{
-      .ng-select-container{
+    &.ng-select-disabled {
+      .ng-select-container {
         background-color: $background-white;
       }
     }
-    .ng-select-container{
+    .ng-select-container {
       border: none;
       min-height: 34px;
-      .ng-value-container{
+      .ng-value-container {
         padding: 0;
-        .ng-input{
+        .ng-input {
           padding: 0;
         }
       }
-      .ng-arrow-wrapper{
+      .ng-arrow-wrapper {
         padding: 0;
-        .ng-arrow{
+        .ng-arrow {
           padding: 5px 9px;
           background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
           background-position: right;
@@ -220,7 +228,7 @@ a {
         }
       }
     }
-  } 
+  }
 }
 .dobs_account {
   .form-control {
@@ -247,23 +255,22 @@ a {
       }
     }
   }
-  &.expiry_date{
-    .p-calendar{
+  &.expiry_date {
+    .p-calendar {
       @include tab-view {
         width: 100%;
       }
       input {
-        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0
-          no-repeat !important;
+        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
+          center right 0 no-repeat !important;
         background-size: 20px !important;
         border: none;
       }
     }
-    
   }
 }
-.block_cookie_policy_main{
-  .modal-content{
+.block_cookie_policy_main {
+  .modal-content {
     border-radius: 10px;
   }
 }
@@ -327,9 +334,9 @@ a {
     }
   }
 }
-.iframe_wrapper{
-  &#spreedly-cvv{
-    
+.iframe_wrapper {
+  &#spreedly-cvv {
+    border-bottom: 2px solid $box-border-color;
   }
 }
 // discription popup
@@ -615,14 +622,18 @@ select {
   }
 }
 
-
 .error_field {
   color: $error-color;
+  display: flex;
+  margin-top: 5px;
+  font-size: 10px;
+  align-items: flex-start;
 
   .error_img {
-    position: absolute;
-    top: 35px;
-    right: 15px;
+    margin-top: 3px;
+    display: flex;
+    max-width: 10px;
+    margin-right: 5px;
   }
 }
 
@@ -650,7 +661,8 @@ select {
 .coming_soon {
   width: 100%;
   height: 100vh;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/coming_soon_bg.webp) no-repeat;
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/coming_soon_bg.webp)
+    no-repeat;
   background-size: cover;
   position: relative;
 
@@ -1376,7 +1388,7 @@ select {
               }
             }
 
-            @include tab-view{
+            @include tab-view {
               flex-wrap: wrap;
 
               li {
@@ -1465,7 +1477,7 @@ select {
                         border-radius: 8px;
                         background: $background-white;
 
-                        @include tab-view{
+                        @include tab-view {
                           padding: 6px 0;
                         }
 
@@ -1499,7 +1511,7 @@ select {
                         position: relative;
                         z-index: 2;
 
-                        @include tab-view{
+                        @include tab-view {
                           width: 100%;
                           z-index: auto;
                           margin-bottom: 5px;
@@ -1574,7 +1586,6 @@ select {
                         border-radius: 8px;
                         background: $background-white;
                         position: relative;
-                        
 
                         span {
                           &.p-calendar {
@@ -1591,8 +1602,8 @@ select {
                           color: $text-black;
                           font-weight: 600;
                           padding: 0 15px 0 70px;
-                          background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center
-                            left 15px no-repeat !important;
+                          background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
+                            center left 15px no-repeat !important;
 
                           @media (max-width: 575px) {
                             .calender-responsive-view {
@@ -1652,7 +1663,7 @@ select {
                         margin: 0 auto;
                       }
 
-                      @include tab-view{
+                      @include tab-view {
                         width: 100%;
                         margin-bottom: 0;
                         padding: 0;
@@ -2268,7 +2279,7 @@ select {
           }
         }
 
-        @include tab-view{
+        @include tab-view {
           flex-wrap: wrap;
 
           li {
@@ -2276,7 +2287,6 @@ select {
 
             &.class_resp {
               width: 120px;
-
             }
 
             &.travellers_resp {
@@ -2331,13 +2341,13 @@ select {
                     margin-bottom: 5px;
                   }
 
-                  @include tab-view{
+                  @include tab-view {
                     flex-flow: column;
                     margin-bottom: 5px;
                     padding: 0;
                   }
 
-                  @include tab-view{
+                  @include tab-view {
                     z-index: 999;
                   }
 
@@ -2356,7 +2366,7 @@ select {
                     border: 1px solid $box-border-color;
                     border-radius: 8px;
                     background: $background-white;
-                    @include tab-view{
+                    @include tab-view {
                       padding: 6px 0;
                     }
 
@@ -2471,8 +2481,8 @@ select {
                       color: $text-black;
                       font-weight: 600;
                       padding: 0 0 0 60px;
-                      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center
-                        left 15px no-repeat !important;
+                      background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
+                        center left 15px no-repeat !important;
 
                       @media (max-width: 575px) {
                         .calender-responsive-view {
@@ -2674,7 +2684,12 @@ select {
             &:after {
               width: 100%;
               height: 35%;
-              background: linear-gradient(180deg, $gradient-white 0%, $gradient-blue 100%) 0% 0% no-repeat;
+              background: linear-gradient(
+                  180deg,
+                  $gradient-white 0%,
+                  $gradient-blue 100%
+                )
+                0% 0% no-repeat;
               position: absolute;
               bottom: 0;
               left: 0;
@@ -2835,7 +2850,8 @@ select {
 .user_benefits {
   width: 100%;
   padding: 100px 0;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/user_benefits_bg.webp) no-repeat;
+  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/user_benefits_bg.webp)
+    no-repeat;
   background-size: cover;
   background-attachment: fixed;
   position: relative;
@@ -2850,7 +2866,8 @@ select {
     position: absolute;
     top: 0;
     left: 0;
-    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/gradient_bg-im.svg) no-repeat;
+    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/gradient_bg-im.svg)
+      no-repeat;
     background-size: cover;
     content: "";
   }
@@ -3434,7 +3451,7 @@ select {
           //width: 34%;
           //}
 
-         @include ipad-view {
+          @include ipad-view {
             width: 50%;
             margin-bottom: 30px;
 
@@ -3779,7 +3796,7 @@ select {
 .block_contact_us_main {
   width: 100%;
   padding: 50px 0;
-  .modal-content{
+  .modal-content {
     border-radius: 10px;
   }
   .block_contact_inner {
@@ -3873,7 +3890,8 @@ select {
                 }
 
                 &.birth_date {
-                  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
+                    no-repeat;
                   background-position: right center;
                 }
               }
@@ -3947,12 +3965,14 @@ select {
                         width: 0;
                         height: 0;
                         border: 4px solid transparent;
-                        border-color: $text-grey transparent transparent transparent;
+                        border-color: $text-grey transparent transparent
+                          transparent;
                       }
 
                       &.select-arrow-active {
                         &:after {
-                          border-color: transparent transparent $text-grey transparent;
+                          border-color: transparent transparent $text-grey
+                            transparent;
                           top: 11px;
                         }
                       }
@@ -3969,7 +3989,8 @@ select {
                       div {
                         padding: 8px 16px;
                         border: 1px solid transparent;
-                        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+                        border-color: transparent transparent rgba(0, 0, 0, 0.1)
+                          transparent;
                         cursor: pointer;
                         user-select: none;
                         font-size: 14px;
@@ -4675,7 +4696,8 @@ select {
                   }
 
                   &.birth_date {
-                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
+                      no-repeat;
                     background-position: right center;
                   }
 
@@ -4736,12 +4758,14 @@ select {
                       width: 0;
                       height: 0;
                       border: 4px solid transparent;
-                      border-color: $text-grey transparent transparent transparent;
+                      border-color: $text-grey transparent transparent
+                        transparent;
                     }
 
                     &.select-arrow-active {
                       &:after {
-                        border-color: transparent transparent $text-grey transparent;
+                        border-color: transparent transparent $text-grey
+                          transparent;
                         top: 11px;
                       }
                     }
@@ -4758,7 +4782,8 @@ select {
                     div {
                       padding: 8px 16px;
                       border: 1px solid transparent;
-                      border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+                      border-color: transparent transparent rgba(0, 0, 0, 0.1)
+                        transparent;
                       cursor: pointer;
                       user-select: none;
                       font-size: 14px;
@@ -5468,7 +5493,7 @@ select {
     padding: 0 0 70px;
     //font-family: "Poppins", sans-serif;
 
-    @include tab-view{
+    @include tab-view {
       padding: 0 0 70px;
     }
     .page_topbanner {
@@ -5527,8 +5552,7 @@ select {
             font-size: 14px;
           }
 
-          font{
-            
+          font {
             font-size: 18px;
             font-family: "Poppins", sans-serif;
             @include tab-view {
