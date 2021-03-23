@@ -797,6 +797,10 @@
                     align-items: center;
                     cursor: pointer;
 
+                    @include tab-view{
+                        padding: 15px 25px 0;
+                    }
+
                     .accordion-toggle {
                         font-size: 16px;
                         color: $mid_gray_bg;
@@ -861,6 +865,9 @@
                     .block_cmn {
                         width: 100%;
                         padding: 15px 15px 0;
+                        @include tab-view{
+                            padding: 15px 25px 0;
+                        }
 
                         &:last-child {
                             padding-bottom: 15px;
@@ -996,6 +1003,10 @@
 
             .cmn_block {
                 padding: 15px 15px 0;
+
+                @include tab-view{
+                    padding: 15px 25px 0;
+                }
 
                 //border-bottom: 1px solid $box-border-color;
                 &.price {
@@ -1163,6 +1174,9 @@
                                 width: 100%;
                                 padding: 15px 15px 0;
 
+                                @include tab-view{
+                                    padding: 15px 25px 0;
+                                }
 
                                 h5 {
                                     width: 100%;
@@ -1372,6 +1386,9 @@
                 display: flex;
                 align-items: center;
                 cursor: pointer;
+                @include tab-view {
+                    padding: 15px 25px;
+                }
 
                 .accordion-toggle {
                     font-size: 16px;
