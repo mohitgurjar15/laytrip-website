@@ -30,6 +30,7 @@ var ContactUsComponent = /** @class */ (function () {
         this.xlsxIcon = 'assets/images/xls.svg';
         this.wordIcon = 'assets/images/word.svg';
         this.imageFileError = false;
+        this.attatchmentArray = [];
     }
     ContactUsComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -136,53 +137,12 @@ var ContactUsComponent = /** @class */ (function () {
                     _this.fileUploadErrorMessage = '';
                 };
             }
-            else if (fileList_1[0] && fileList_1[0].type === 'application/vnd.ms-excel') {
-                var reader = new FileReader();
-                reader.readAsDataURL(event.target.files[0]);
-                this.fileObj = event.target.files[0];
-                reader.onload = function (_event) {
-                    _this.defaultImage = '';
-                    _this.image = _this.csvIcon;
-                    _this.fileName = fileList_1[0].name;
-                    // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-                    _this.fileUploadErrorMessage = '';
-                    _this.cd.markForCheck();
-                };
-            }
-            else if (fileList_1[0] && fileList_1[0].name.substring(fileList_1[0].name.indexOf('xlsx')) &&
-                fileList_1[0].type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-                var reader = new FileReader();
-                reader.readAsDataURL(event.target.files[0]);
-                this.fileObj = event.target.files[0];
-                reader.onload = function (_event) {
-                    _this.defaultImage = '';
-                    _this.image = _this.xlsxIcon;
-                    _this.fileName = fileList_1[0].name;
-                    // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-                    _this.fileUploadErrorMessage = '';
-                    _this.cd.markForCheck();
-                };
-            }
-            else if (fileList_1[0] && fileList_1[0].name.substring(fileList_1[0].name.indexOf('doc') || fileList_1[0].name.indexOf('docx'))
-                && fileList_1[0].type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-                || fileList_1[0].type === 'application/doc'
-                || fileList_1[0].type === 'application/ms-doc'
-                || fileList_1[0].type === 'application/msword') {
-                var reader = new FileReader();
-                reader.readAsDataURL(event.target.files[0]);
-                this.fileObj = event.target.files[0];
-                reader.onload = function (_event) {
-                    _this.defaultImage = '';
-                    _this.image = _this.wordIcon;
-                    _this.fileName = fileList_1[0].name;
-                    _this.cd.markForCheck();
-                    // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-                    _this.fileUploadErrorMessage = '';
-                };
-            }
             else {
                 this.fileUploadErrorMessage = 'Please upload valid file';
             }
+            this.attatchmentArray.push({ image: this.fileObj });
+            console.log('dfdf');
+            console.log(this.attatchmentArray);
         }
     };
     ContactUsComponent.prototype.resetImage = function () {

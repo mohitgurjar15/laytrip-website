@@ -77,9 +77,9 @@
                                     </label>
                                 </a>
                                 <div class="upload_list_wrapper">
-                                    <div class="listing_lines_wrps">
+                                    <div class="listing_lines_wrps" *ngFor="let attatchment of attatchmentArray;">
                                         <div class="uploaded_list">
-                                            <img [src]=" defaultImage || image" alt="" />
+                                            <img [src]=" defaultImage || attatchment.image" alt="" />
 
                                             <h5>{{ fileName }}</h5>
                                             <button type="button" class="close" (click)="resetImage();">
@@ -90,7 +90,7 @@
                                         <small class="error_field" style="display:none">
                                             <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
                                                 class="error_img">
-                                            asdsadsadsa</small>
+                                            Error</small>
                                     </div>
                                 </div>
 

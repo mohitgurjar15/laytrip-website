@@ -33,6 +33,7 @@ export class ContactUsComponent implements OnInit {
   xlsxIcon = 'assets/images/xls.svg';
   wordIcon = 'assets/images/word.svg';
   public imageFileError = false;
+  attatchmentArray = [];
 
 
   constructor(
@@ -155,50 +156,13 @@ export class ContactUsComponent implements OnInit {
           // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
           this.fileUploadErrorMessage = '';
         };
-      } else if (fileList[0] && fileList[0].type === 'application/vnd.ms-excel') {
-        const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        this.fileObj = event.target.files[0];
-        reader.onload = (_event) => {
-          this.defaultImage = '';
-          this.image = this.csvIcon;
-          this.fileName = fileList[0].name;
-          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-          this.fileUploadErrorMessage = '';
-          this.cd.markForCheck();
-        };
-      } else if (fileList[0] && fileList[0].name.substring(fileList[0].name.indexOf('xlsx')) &&
-        fileList[0].type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-        const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        this.fileObj = event.target.files[0];
-        reader.onload = (_event) => {
-          this.defaultImage = '';
-          this.image = this.xlsxIcon;
-          this.fileName = fileList[0].name;
-          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-          this.fileUploadErrorMessage = '';
-          this.cd.markForCheck();
-        };
-      } else if (fileList[0] && fileList[0].name.substring(fileList[0].name.indexOf('doc') || fileList[0].name.indexOf('docx'))
-        && fileList[0].type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        || fileList[0].type === 'application/doc'
-        || fileList[0].type === 'application/ms-doc'
-        || fileList[0].type === 'application/msword') {
-        const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        this.fileObj = event.target.files[0];
-        reader.onload = (_event) => {
-          this.defaultImage = '';
-          this.image = this.wordIcon;
-          this.fileName = fileList[0].name;
-          this.cd.markForCheck();
-          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-          this.fileUploadErrorMessage = '';
-        };
       } else {
         this.fileUploadErrorMessage = 'Please upload valid file';
       }
+      this.attatchmentArray.push({ image :  this.fileObj });
+      console.log('dfdf')
+
+      console.log(this.attatchmentArray)
     }
   }
 
