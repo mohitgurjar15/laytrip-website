@@ -10,6 +10,7 @@ exports.ContactUsComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../environments/environment");
+var custom_validators_1 = require("../../_helpers/custom.validators");
 var ContactUsComponent = /** @class */ (function () {
     function ContactUsComponent(formBuilder, toastr, genericService, commonFunction, cookieService, cd) {
         this.formBuilder = formBuilder;
@@ -28,6 +29,7 @@ var ContactUsComponent = /** @class */ (function () {
         this.csvIcon = 'assets/images/csv.svg';
         this.xlsxIcon = 'assets/images/xls.svg';
         this.wordIcon = 'assets/images/word.svg';
+        this.imageFileError = false;
     }
     ContactUsComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -43,11 +45,20 @@ var ContactUsComponent = /** @class */ (function () {
             message: ['', [forms_1.Validators.required]]
         });
     };
-    ContactUsComponent.prototype.onSubmit = function (formValue) {
+    ContactUsComponent.prototype.onSubmit = function () {
         var _this = this;
-        console.log('sdsd');
         this.loading = true;
         this.submitted = true;
+        if (!custom_validators_1.fileSizeValidator(this.fileObj, 10000)) {
+            this.imageFileError = this.submitted = true;
+            this.toastr.show("File is too large", '', {
+                toastClass: 'custom_toastr',
+                titleClass: 'custom_toastr_title',
+                messageClass: 'custom_toastr_message'
+            });
+            this.loading = false;
+            return;
+        }
         if (this.contactUsForm.invalid) {
             this.submitted = true;
             Object.keys(this.contactUsForm.controls).forEach(function (key) {
@@ -56,10 +67,12 @@ var ContactUsComponent = /** @class */ (function () {
             this.loading = false;
             return;
         }
-        this.contactUsForm.controls.file.setValue(this.fileObj ? this.fileObj : '');
-        console.log(this.contactUsForm.controls.value);
-        this.genericService.createEnquiry(formValue).subscribe(function (res) {
-            console.log('sdsd');
+        var formdata = new FormData();
+        formdata.append("name", this.contactUsForm.value.name);
+        formdata.append("email", this.contactUsForm.value.email);
+        formdata.append("message", this.contactUsForm.value.message);
+        formdata.append("file", this.fileObj);
+        this.genericService.createEnquiry(formdata).subscribe(function (res) {
             $('#contact_modal').modal('hide');
             _this.loading = false;
             _this.submitted = false;

@@ -5,6 +5,8 @@ import { GenericService } from '../../services/generic.service';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
+import { fileSizeValidator} from '../../_helpers/custom.validators';
+
 declare var $: any;
 
 @Component({
@@ -30,7 +32,8 @@ export class ContactUsComponent implements OnInit {
   csvIcon = 'assets/images/csv.svg';
   xlsxIcon = 'assets/images/xls.svg';
   wordIcon = 'assets/images/word.svg';
- 
+  public imageFileError = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -59,10 +62,20 @@ export class ContactUsComponent implements OnInit {
   }
 
 
-  onSubmit(formValue) {
-    console.log('sdsd')
+  onSubmit() {
     this.loading = true;
     this.submitted = true;
+    if (!fileSizeValidator(this.fileObj,10000)) {
+      this.imageFileError = this.submitted = true;
+      this.toastr.show("File is too large", '', {
+        toastClass: 'custom_toastr',
+        titleClass: 'custom_toastr_title',
+        messageClass: 'custom_toastr_message',
+      });
+      this.loading = false;
+      return;
+    }
+
     if (this.contactUsForm.invalid) {
       this.submitted = true;
       Object.keys(this.contactUsForm.controls).forEach(key => {
@@ -72,10 +85,13 @@ export class ContactUsComponent implements OnInit {
       return;
     }
    
-    this.contactUsForm.controls.file.setValue(this.fileObj ? this.fileObj : '')
-    console.log(this.contactUsForm.controls.value)
-    this.genericService.createEnquiry(formValue).subscribe((res: any) => {
-      console.log('sdsd')
+    let formdata = new FormData();
+    formdata.append("name",this.contactUsForm.value.name);
+    formdata.append("email",this.contactUsForm.value.email);
+    formdata.append("message",this.contactUsForm.value.message);
+    formdata.append("file",this.fileObj);
+
+    this.genericService.createEnquiry(formdata).subscribe((res: any) => {
       $('#contact_modal').modal('hide');
       this.loading = false;
       this.submitted = false;
