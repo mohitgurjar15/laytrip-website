@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form_row mb-0" >
+                        <div class="form_row mb-0">
                             <div class="text_field text_area_wrps">
                                 <textarea (keyup)="setMessageLenght($event.target.value)"
                                     (keypress)="setMessageLenght($event.target.value)" formControlName="message"
@@ -77,18 +77,23 @@
                                     </label>
                                 </a>
                                 <div class="upload_list_wrapper">
-                                    <div class="uploaded_list">
-                                        <img [src]=" defaultImage || image" alt="" />
+                                    <div class="listing_lines_wrps">
+                                        <div class="uploaded_list">
+                                            <img [src]=" defaultImage || image" alt="" />
 
-                                        <h5 >{{ fileName }}</h5>
-                                        <button type="button" class="close" (click)="resetImage();">
-                                            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="attach">
-                                        </button>
+                                            <h5>{{ fileName }}</h5>
+                                            <button type="button" class="close" (click)="resetImage();">
+                                                <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg"
+                                                    alt="attach">
+                                            </button>
+                                        </div>
+                                        <small class="error_field" style="display:none">
+                                            <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
+                                                class="error_img">
+                                            asdsadsadsa</small>
                                     </div>
                                 </div>
-                                <small class="error_field"  style="display:none">
-                                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
-                                    {{fileUploadErrorMessage}}</small>
+
 
                                 <!--  <div class="block_btm_msg">
                                     <div>
