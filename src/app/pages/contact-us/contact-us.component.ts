@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { GenericService } from '../../services/generic.service';
@@ -14,25 +14,36 @@ declare var $: any;
 })
 export class ContactUsComponent implements OnInit {
 
+  @ViewChild('fileInput', { static: false } as any) fileInput;
   s3BucketUrl = environment.s3BucketUrl;
   contactUsForm: FormGroup;
   loading = false;
-  countries_code: any = [];
   location;
   messageLenght = 0;
   submitted = false;
+  fileUploadErrorMessage = '';
+  fileObj;
+  defaultImage = 'assets/images/file-upload.svg';
+  image;
+  fileName;
+  pdfIcon = 'assets/images/pdf.svg';
+  csvIcon = 'assets/images/csv.svg';
+  xlsxIcon = 'assets/images/xls.svg';
+  wordIcon = 'assets/images/word.svg';
+ 
 
   constructor(
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private genericService: GenericService,
     public commonFunction: CommonFunction,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private cd: ChangeDetectorRef
+
   ) { }
 
   ngOnInit() {
     window.scroll(0, 0);
-    this.getCountry();
 
     let location: any = this.cookieService.get('__loc');
     try {
@@ -41,32 +52,15 @@ export class ContactUsComponent implements OnInit {
 
     this.contactUsForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      country_code: [''],
-      phone_no: [''],
+      file: [''],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       message: ['', [Validators.required]],
     });
   }
 
-  getCountry() {
-    this.genericService.getCountry().subscribe((data: any) => {
-      this.countries_code = data.map(country => {
-        return {
-          id: country.id,
-          name: country.phonecode + ' (' + country.iso2 + ')',
-          code: country.phonecode,
-          country_name: country.name + ' ' + country.phonecode,
-          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-        };
-      });
-      if (this.location) {
-        const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
-        this.contactUsForm.controls.country_code.setValue(countryCode.country_name);
-      }
-    });
-  }
 
   onSubmit(formValue) {
+    console.log('sdsd')
     this.loading = true;
     this.submitted = true;
     if (this.contactUsForm.invalid) {
@@ -77,10 +71,11 @@ export class ContactUsComponent implements OnInit {
       this.loading = false;
       return;
     }
-    if (formValue.country_code) {
-      formValue.country_code = formValue.country_code.id;
-    }
+   
+    this.contactUsForm.controls.file.setValue(this.fileObj ? this.fileObj : '')
+    console.log(this.contactUsForm.controls.value)
     this.genericService.createEnquiry(formValue).subscribe((res: any) => {
+      console.log('sdsd')
       $('#contact_modal').modal('hide');
       this.loading = false;
       this.submitted = false;
@@ -112,5 +107,93 @@ export class ContactUsComponent implements OnInit {
       this.contactUsForm.get(key).markAsUntouched();
     });
     this.contactUsForm.reset();
+  }
+
+  
+  documentFileChange(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const fileList: FileList = event.target.files;
+      if (fileList[0] && fileList[0].type === 'image/svg+xml' ||
+        fileList[0].type === 'image/jpeg' ||
+        fileList[0].type === 'image/png' ||
+        fileList[0].type === 'image/gif') {
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        this.fileObj = event.target.files[0];
+        reader.onload = (_event) => {
+          this.defaultImage = '';
+          this.image = reader.result;
+          this.fileName = fileList[0].name;
+          this.cd.markForCheck();
+          this.fileUploadErrorMessage = '';
+        };
+      } else if (fileList[0] && fileList[0].type === 'application/pdf') {
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        this.fileObj = event.target.files[0];
+        reader.onload = (_event) => {
+          this.defaultImage = '';
+          this.image = this.pdfIcon;
+          this.fileName = fileList[0].name;
+          this.cd.markForCheck();
+          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
+          this.fileUploadErrorMessage = '';
+        };
+      } else if (fileList[0] && fileList[0].type === 'application/vnd.ms-excel') {
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        this.fileObj = event.target.files[0];
+        reader.onload = (_event) => {
+          this.defaultImage = '';
+          this.image = this.csvIcon;
+          this.fileName = fileList[0].name;
+          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
+          this.fileUploadErrorMessage = '';
+          this.cd.markForCheck();
+        };
+      } else if (fileList[0] && fileList[0].name.substring(fileList[0].name.indexOf('xlsx')) &&
+        fileList[0].type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        this.fileObj = event.target.files[0];
+        reader.onload = (_event) => {
+          this.defaultImage = '';
+          this.image = this.xlsxIcon;
+          this.fileName = fileList[0].name;
+          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
+          this.fileUploadErrorMessage = '';
+          this.cd.markForCheck();
+        };
+      } else if (fileList[0] && fileList[0].name.substring(fileList[0].name.indexOf('doc') || fileList[0].name.indexOf('docx'))
+        && fileList[0].type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        || fileList[0].type === 'application/doc'
+        || fileList[0].type === 'application/ms-doc'
+        || fileList[0].type === 'application/msword') {
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        this.fileObj = event.target.files[0];
+        reader.onload = (_event) => {
+          this.defaultImage = '';
+          this.image = this.wordIcon;
+          this.fileName = fileList[0].name;
+          this.cd.markForCheck();
+          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
+          this.fileUploadErrorMessage = '';
+        };
+      } else {
+        this.fileUploadErrorMessage = 'Please upload valid file';
+      }
+    }
+  }
+
+
+  resetImage() {
+    if (this.fileInput) {
+      this.fileInput.nativeElement.value = '';
+      // this.sendMassCommunicationForm.controls['file'].setValue(null);
+      this.image = '';
+      this.defaultImage = 'assets/images/file-upload.svg';
+      this.fileName = '';
+    }
   }
 }
