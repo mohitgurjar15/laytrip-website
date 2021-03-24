@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
   <!-- <meta name="robots" content="noindex" /> -->
-  <meta name="description" content="Welcome to Laytrip! Layaway travel for everyone. Flights, hotels, home and car rentals. Launching soon.">
+  <meta name="description" content="Welcome to Laytrip! Layaway travel for everyone. Flights, hotels, home and car rentals.">
   <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
   <meta http-equiv="cache-control" content="max-age=0" />
   <meta http-equiv="Expires" content="-1" />
@@ -29,6 +29,7 @@
     .custom_fc_frame {
       right: 20px !important;
       bottom: 20px !important;
+
     }
 
     .custom_fc_frame .d-hotline.h-btn {
@@ -48,6 +49,12 @@
       overflow: hidden;
       top: 0;
     }
+
+    @media (max-width: 768px){
+      body #fc_frame.fc_open123{
+        right: 0px !important;
+      }
+    }
   </style>
 
   <link rel="manifest" href="manifest.json">
@@ -62,7 +69,9 @@
       host: "https://wchat.freshchat.com",
       config: {
         cssNames: {
-          widget: "custom_fc_frame"
+          widget: "custom_fc_frame",
+          open: 'fc_open123',
+        expanded: 'fc_expanded123'
         }
       }
     });
@@ -82,11 +91,14 @@
 
   function initialize(i, t) { var e; i.getElementById(t) ? initFreshChat() : ((e = i.createElement("script")).id = t, e.async = !0, e.src = "https://wchat.freshchat.com/js/widget.js", e.onload = initFreshChat, i.head.appendChild(e)) } function initiateCall() { initialize(document, "freshchat-js-sdk") } window.addEventListener ? window.addEventListener("load", initiateCall, !1) : window.attachEvent("load", initiateCall, !1);
 
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  if(window.location.host=='laytrip.com'){
 
-  gtag('config', 'G-6Q6CPSPBTH');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-6Q6CPSPBTH');
+  }
 </script>
 
 <body>
