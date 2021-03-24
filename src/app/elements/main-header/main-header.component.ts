@@ -319,8 +319,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     localStorage.removeItem('$cartOver');
   }
 
-  errors() {
-    this.userDetails.profilePic = '';
-    // this.userDetails.profilePic = '';
+  imgError() {
+    return  this.userDetails.profilePic = '';
   }
 }
