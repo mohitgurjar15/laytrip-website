@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form_row">
+                        <div class="form_row mb-0" >
                             <div class="text_field text_area_wrps">
                                 <textarea (keyup)="setMessageLenght($event.target.value)"
                                     (keypress)="setMessageLenght($event.target.value)" formControlName="message"
@@ -60,31 +60,37 @@
                             </div>
                         </div>
                         <div class="form_row">
-                            <div class="text_field text_area_wrps">
-                                <div class="d-flex align-item-start justify-content-between custom_size">
+                            <div class="custom_upload">
+                                <!-- <div class="d-flex align-item-start justify-content-between custom_size">
                                     <h5 class="modal-title"></h5>
-                                    <!-- <button type="button" class="close" (click)="resetImage();">
+                                    <button type="button" class="close" (click)="resetImage();">
                                         <span aria-hidden="true">×</span>
-                                    </button> -->
+                                    </button> 
+                                </div>-->
+
+                                <a href="javascript:void(0)" class="upload_btn">
+                                    <label class="mb-0">
+                                        <img src="{{s3BucketUrl}}assets/images/icon/pin.svg" alt="attach"> Attach
+                                        <input accept="image/*,.pdf" #fileInput type="file" formControlName="file"
+                                            id="output" class="form-control input d-none"
+                                            (change)="documentFileChange($event)">
+                                    </label>
+                                </a>
+                                <div class="upload_list_wrapper">
+                                    <div class="uploaded_list">
+                                        <img [src]=" defaultImage || image" alt="" />
+
+                                        <h5 >{{ fileName }}</h5>
+                                        <button type="button" class="close" (click)="resetImage();">
+                                            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="attach">
+                                        </button>
+                                    </div>
                                 </div>
+                                <small class="error_field"  style="display:none">
+                                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                                    {{fileUploadErrorMessage}}</small>
 
-                                    <img [src]=" defaultImage || image" alt="" height="50px" width="50px" class="mx-auto my-2">
-                                    
-                                    <h5 class="mb-2">{{ fileName }}</h5>
-                                    
-                                    <label class="text-danger mt-2" *ngIf="fileUploadErrorMessage">{{fileUploadErrorMessage}}</label>
-                                   
-                                   
-                                    <a href="javascript:void(0)" class="icon-rounded btn btn-primary mx-auto">
-                                        <label class="mb-0">
-                                            <i class="material-icons text-white">backup</i> Upload
-                                            <input  accept="image/*,.pdf" #fileInput type="file" formControlName="file" id="output"
-                                                class="form-control input"
-                                                (change)="documentFileChange($event)">
-                                        </label>
-                                    </a>
-
-                               <!--  <div class="block_btm_msg">
+                                <!--  <div class="block_btm_msg">
                                     <div>
                                         <div *ngIf="submitted">
                                             <div *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.errors.required"
@@ -96,7 +102,7 @@
                                 </div> -->
                             </div>
                         </div>
-                        
+
                         <div class="form_btn">
                             <button type="submit">
                                 <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;{{'submit' |
