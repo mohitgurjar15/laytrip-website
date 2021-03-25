@@ -10,7 +10,6 @@ exports.ContactUsComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../environments/environment");
-var custom_validators_1 = require("../../_helpers/custom.validators");
 var ContactUsComponent = /** @class */ (function () {
     function ContactUsComponent(formBuilder, toastr, genericService, commonFunction, cookieService, cd) {
         this.formBuilder = formBuilder;
@@ -26,9 +25,9 @@ var ContactUsComponent = /** @class */ (function () {
         this.fileUploadErrorMessage = '';
         this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
         this.image = '';
-        this.pdfIcon = this.s3BucketUrl + 'assets/images/pdf.svg';
+        this.pdfIcon = this.s3BucketUrl + 'assets/images/pdf.jpeg';
         this.imageFileError = false;
-        this.attatchmentArray = [];
+        this.attatchmentFiles = [];
     }
     ContactUsComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -60,12 +59,12 @@ var ContactUsComponent = /** @class */ (function () {
         formdata.append("name", this.contactUsForm.value.name);
         formdata.append("email", this.contactUsForm.value.email);
         formdata.append("message", this.contactUsForm.value.message);
-        formdata.append("file", this.fileObj);
+        formdata.append("file", this.attatchmentFiles);
         this.genericService.createEnquiry(formdata).subscribe(function (res) {
             $('#contact_modal').modal('hide');
-            _this.loading = false;
-            _this.submitted = false;
+            _this.loading = _this.submitted = false;
             _this.contactUsForm.reset();
+            _this.attatchmentFiles = [];
             _this.toastr.show(res.message, '', {
                 toastClass: 'custom_toastr',
                 titleClass: 'custom_toastr_title',
@@ -92,36 +91,37 @@ var ContactUsComponent = /** @class */ (function () {
             _this.contactUsForm.get(key).markAsUntouched();
         });
         this.contactUsForm.reset();
+        this.attatchmentFiles = [];
     };
     ContactUsComponent.prototype.documentFileChange = function (event) {
         var _this = this;
+        if (this.attatchmentFiles.length >= 5) {
+            this.toastr.show('Maximum upload of 5 files.', '', {
+                toastClass: 'custom_toastr',
+                titleClass: 'custom_toastr_title',
+                messageClass: 'custom_toastr_message'
+            });
+            return;
+        }
         if (event.target.files && event.target.files[0]) {
             this.fileUploadErrorMessage = '';
             this.imageFileError = false;
             var fileList_1 = event.target.files;
-            var fileSize = fileList_1[0].size / 1024 / 1024;
+            var fileSize = Math.floor(fileList_1[0].size / 1000);
             this.image = '';
-            if (fileList_1[0] && fileList_1[0].type === 'image/svg+xml' ||
-                fileList_1[0].type == 'image/jpeg' ||
+            if (fileList_1[0] && (fileList_1[0].type == 'image/jpg' ||
                 fileList_1[0].type == 'image/png' ||
-                fileList_1[0].type == 'application/pdf' ||
-                fileList_1[0].type == 'image/gif') {
-                console.log(fileSize);
+                fileList_1[0].type == 'application/pdf')) {
                 if (fileSize > 10000) {
                     this.imageFileError = true;
-                    this.fileUploadErrorMessage = 'Maximum upload size is 10MB';
+                    this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
                 }
-                else {
-                    this.fileUploadErrorMessage = '';
-                    this.imageFileError = false;
-                }
-                console.log(this.imageFileError, custom_validators_1.fileSizeValidator(fileList_1[0].size, 10000));
                 var reader_1 = new FileReader();
                 reader_1.readAsDataURL(event.target.files[0]);
                 this.fileObj = event.target.files[0];
                 reader_1.onload = function (_event) {
                     _this.defaultImage = '';
-                    _this.image = fileList_1[0].type == '' ? _this.pdfIcon : reader_1.result;
+                    _this.image = fileList_1[0].type == 'application/pdf' ? _this.pdfIcon : reader_1.result;
                     _this.fileName = fileList_1[0].name;
                     _this.cd.markForCheck();
                     var attatchData = {
@@ -130,35 +130,23 @@ var ContactUsComponent = /** @class */ (function () {
                         fileName: _this.fileName,
                         is_error: _this.imageFileError
                     };
-                    _this.attatchmentArray.push(attatchData);
+                    _this.attatchmentFiles.push(attatchData);
                 };
             }
             else {
                 this.imageFileError = true;
                 var attatchData = {
                     image: this.image ? this.image : this.defaultImage,
-                    errorMsg: this.imageFileError ? 'Please upload valid file' : '',
+                    errorMsg: this.imageFileError ? 'Error attaching, try again' : '',
                     fileName: this.fileName,
                     is_error: this.imageFileError
                 };
-                this.attatchmentArray.push(attatchData);
+                this.attatchmentFiles.push(attatchData);
             }
-            /*this.attatchmentArray.push({
-              image: this.image ? this.image : this.defaultImage,
-              errorMsg:this.fileUploadErrorMessage,
-              fileName : this.fileName
-            });*/
-            console.log(this.attatchmentArray);
         }
     };
-    ContactUsComponent.prototype.resetImage = function () {
-        if (this.fileInput) {
-            this.fileInput.nativeElement.value = '';
-            // this.sendMassCommunicationForm.controls['file'].setValue(null);
-            this.image = '';
-            // this.defaultImage = 'assets/images/file-upload.svg';
-            this.fileName = '';
-        }
+    ContactUsComponent.prototype.removeAttatchedFile = function (i) {
+        this.attatchmentFiles.splice(i, 1);
     };
     __decorate([
         core_1.ViewChild('fileInput', { static: false })

@@ -71,18 +71,18 @@
                                 <a class="upload_btn hover-link">
                                     <label class="mb-0">
                                         <img src="{{s3BucketUrl}}assets/images/icon/pin.svg" alt="attach"> Attach
-                                        <input accept="image/*,.pdf" #fileInput type="file" formControlName="file"
+                                        <input accept="image/png,image/jpg,.pdf" #fileInput type="file" formControlName="file"
                                             id="output" class="form-control input d-none"
                                             (change)="documentFileChange($event)">
                                     </label>
                                 </a>
                                 <div class="upload_list_wrapper">
-                                    <div class="listing_lines_wrps" *ngFor="let attatchment of attatchmentArray;">
+                                    <div class="listing_lines_wrps" *ngFor="let attatchment of attatchmentFiles; let i = index">
                                         <div class="uploaded_list">
                                             <img [src]="attatchment.image || defaultImage" alt="" />
 
                                             <h5> {{ attatchment.fileName }} </h5>
-                                            <button type="button" class="close" (click)="resetImage();">
+                                            <button type="button" class="close" (click)="removeAttatchedFile(i);">
                                                 <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg"
                                                     alt="attach">
                                             </button>

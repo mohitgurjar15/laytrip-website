@@ -28,9 +28,9 @@ export class ContactUsComponent implements OnInit {
   defaultImage = this.s3BucketUrl +'assets/images/profile_im.svg';
   image :any= '';
   fileName;
-  pdfIcon = this.s3BucketUrl + 'assets/images/pdf.svg';
+  pdfIcon = this.s3BucketUrl + 'assets/images/pdf.jpeg';
   public imageFileError = false;
-  attatchmentArray : any = [];
+  attatchmentFiles : any = [];
 
 
   constructor(
@@ -77,13 +77,13 @@ export class ContactUsComponent implements OnInit {
     formdata.append("name",this.contactUsForm.value.name);
     formdata.append("email",this.contactUsForm.value.email);
     formdata.append("message",this.contactUsForm.value.message);
-    formdata.append("file",this.fileObj);
+    formdata.append("file",this.attatchmentFiles);
 
     this.genericService.createEnquiry(formdata).subscribe((res: any) => {
       $('#contact_modal').modal('hide');
-      this.loading = false;
-      this.submitted = false;
+      this.loading = this.submitted = false;
       this.contactUsForm.reset();
+      this.attatchmentFiles = [];
       this.toastr.show(res.message, '', {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
@@ -111,33 +111,35 @@ export class ContactUsComponent implements OnInit {
       this.contactUsForm.get(key).markAsUntouched();
     });
     this.contactUsForm.reset();
+    this.attatchmentFiles = [];
   }
 
-  
+
   documentFileChange(event: any) {
+    if(this.attatchmentFiles.length >= 5){
+      this.toastr.show('Maximum upload of 5 files.', '', {
+        toastClass: 'custom_toastr',
+        titleClass: 'custom_toastr_title',
+        messageClass: 'custom_toastr_message',
+      });
+      return;
+    }
     if (event.target.files && event.target.files[0]) {
       this.fileUploadErrorMessage = '';
       this.imageFileError = false;      
       const fileList: FileList = event.target.files;
-      var fileSize = fileList[0].size / 1024 / 1024;
+      var fileSize  = Math.floor(fileList[0].size / 1000);
       this.image = '';
-      if (fileList[0] && fileList[0].type === 'image/svg+xml' ||
-        fileList[0].type == 'image/jpeg' ||
+      if (fileList[0] && (
+        fileList[0].type == 'image/jpg' ||
         fileList[0].type == 'image/png' ||
-        fileList[0].type == 'application/pdf' ||
-        fileList[0].type == 'image/gif') {
-          console.log(fileSize)
+        fileList[0].type == 'application/pdf')) {          
 
         if (fileSize > 10000) {
           this.imageFileError = true;
-          this.fileUploadErrorMessage = 'Maximum upload size is 10MB';
-        }else {
-          this.fileUploadErrorMessage = '';
-          this.imageFileError = false;
+          this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
         }
         
-        console.log(this.imageFileError,fileSizeValidator(fileList[0].size,10000))
-          
         let reader = new FileReader();
 
         reader.readAsDataURL(event.target.files[0]);
@@ -145,7 +147,7 @@ export class ContactUsComponent implements OnInit {
         
         reader.onload = (_event) => {
           this.defaultImage = '';
-          this.image = fileList[0].type == '' ? this.pdfIcon : reader.result;
+          this.image = fileList[0].type == 'application/pdf' ? this.pdfIcon : reader.result;
           this.fileName = fileList[0].name;
           this.cd.markForCheck();
           var attatchData = {
@@ -154,7 +156,7 @@ export class ContactUsComponent implements OnInit {
             fileName : this.fileName,
             is_error : this.imageFileError
           };
-          this.attatchmentArray.push(attatchData);
+          this.attatchmentFiles.push(attatchData);
         };
         
       } else {
@@ -162,31 +164,17 @@ export class ContactUsComponent implements OnInit {
 
         var attatchData = {
           image: this.image ? this.image : this.defaultImage,
-          errorMsg: this.imageFileError ? 'Please upload valid file' : '',
+          errorMsg: this.imageFileError ? 'Error attaching, try again' : '',
           fileName : this.fileName,
           is_error : this.imageFileError
         };
-        this.attatchmentArray.push(attatchData);
-      }
-      
-      
-      /*this.attatchmentArray.push({
-        image: this.image ? this.image : this.defaultImage,
-        errorMsg:this.fileUploadErrorMessage,
-        fileName : this.fileName
-      });*/
-      console.log(this.attatchmentArray)
+        this.attatchmentFiles.push(attatchData);
+      }     
     }
   }
 
 
-  resetImage() {
-    if (this.fileInput) {
-      this.fileInput.nativeElement.value = '';
-      // this.sendMassCommunicationForm.controls['file'].setValue(null);
-      this.image = '';
-      // this.defaultImage = 'assets/images/file-upload.svg';
-      this.fileName = '';
-    }
+  removeAttatchedFile(i) {
+    this.attatchmentFiles.splice(i,1);
   }
 }
