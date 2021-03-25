@@ -90,7 +90,7 @@
                 <div class="text_field airport_dropdown">
                     <input
                         [readonly]="(!isFormControlEnable)"
-                        type="text" placeholder=" {{hmPlaceHolder}} " (click)="clickHomeAirport()" formControlName="home_airport"
+                        type="text" placeholder=" {{hmPlaceHolder}}" (keypress)="searchAirportDeparture($event)" formControlName="home_airport"
                         tabindex="3">
                      <!-- <ng-select [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="code"
                         [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true"
@@ -107,8 +107,8 @@
                             {{item.city}}
                         </ng-template>
                     </ng-select>  -->
-                    <span *ngIf="departureAirport?.code"> {{ departureAirport?.country}} ({{ departureAirport?.code }})</span>
-                    <span *ngIf="!departureAirport?.code"></span>
+                   <!--  <span *ngIf="departureAirport?.code"> {{ departureAirport?.country}} ({{ departureAirport?.code }})</span>
+                    <span *ngIf="!departureAirport?.code"></span> -->
 
                     <div class="search_suggetion_main" *ngIf="!closeAirportSuggestion" >
                         <div class="close_btn">
@@ -118,11 +118,11 @@
                         </div>
                         <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
                             pointerEventsMethod="scrollbar">
-                            <span *ngIf="airportLoading">Loading...</span>
+                            <span *ngIf="loadingDeparture">Loading...</span>
                             <div class="suggtions_wrps_mn">
                                 <div class="suggtions">
-                                    <div class="sug_line_box" *ngFor="let item of airportData">
-                                        <a href="#a" class="word_alpha">{{item.key}}</a>
+                                    <div class="sug_line_box" *ngFor="let item of data">
+                                        <a href="#a" class="word_alpha">{{item.key}} </a>
                                         <span class="linew_wrps">
                                             <ng-conatiner *ngFor="let sub_item of item.value">
                                                 <span class="line_names" (click)="selectAirport(sub_item)">

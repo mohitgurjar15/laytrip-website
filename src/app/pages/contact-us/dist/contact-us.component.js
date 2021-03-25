@@ -25,6 +25,7 @@ var ContactUsComponent = /** @class */ (function () {
         this.submitted = false;
         this.fileUploadErrorMessage = '';
         this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+        this.image = '';
         this.pdfIcon = this.s3BucketUrl + 'assets/images/pdf.svg';
         this.imageFileError = false;
         this.attatchmentArray = [];
@@ -95,53 +96,58 @@ var ContactUsComponent = /** @class */ (function () {
     ContactUsComponent.prototype.documentFileChange = function (event) {
         var _this = this;
         if (event.target.files && event.target.files[0]) {
-            if (!custom_validators_1.fileSizeValidator(event.target.files, 10000)) {
-                this.imageFileError = true;
-                this.fileUploadErrorMessage = 'Maximum upload size is 10MB';
-            }
+            this.fileUploadErrorMessage = '';
+            this.imageFileError = false;
             var fileList_1 = event.target.files;
+            var fileSize = fileList_1[0].size / 1024 / 1024;
+            this.image = '';
             if (fileList_1[0] && fileList_1[0].type === 'image/svg+xml' ||
                 fileList_1[0].type == 'image/jpeg' ||
                 fileList_1[0].type == 'image/png' ||
+                fileList_1[0].type == 'application/pdf' ||
                 fileList_1[0].type == 'image/gif') {
-                this.imageFileError = false;
+                console.log(fileSize);
+                if (fileSize > 10000) {
+                    this.imageFileError = true;
+                    this.fileUploadErrorMessage = 'Maximum upload size is 10MB';
+                }
+                else {
+                    this.fileUploadErrorMessage = '';
+                    this.imageFileError = false;
+                }
+                console.log(this.imageFileError, custom_validators_1.fileSizeValidator(fileList_1[0].size, 10000));
                 var reader_1 = new FileReader();
                 reader_1.readAsDataURL(event.target.files[0]);
                 this.fileObj = event.target.files[0];
                 reader_1.onload = function (_event) {
                     _this.defaultImage = '';
-                    _this.image = reader_1.result;
+                    _this.image = fileList_1[0].type == '' ? _this.pdfIcon : reader_1.result;
                     _this.fileName = fileList_1[0].name;
                     _this.cd.markForCheck();
-                    _this.fileUploadErrorMessage = '';
-                };
-            }
-            else if (fileList_1[0] && fileList_1[0].type === 'application/pdf') {
-                this.imageFileError = false;
-                var reader = new FileReader();
-                reader.readAsDataURL(event.target.files[0]);
-                this.fileObj = event.target.files[0];
-                reader.onload = function (_event) {
-                    _this.defaultImage = '';
-                    _this.image = _this.pdfIcon;
-                    _this.fileName = fileList_1[0].name;
-                    _this.cd.markForCheck();
-                    // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-                    _this.fileUploadErrorMessage = '';
+                    var attatchData = {
+                        image: _this.image ? _this.image : _this.defaultImage,
+                        errorMsg: _this.imageFileError ? _this.fileUploadErrorMessage : '',
+                        fileName: _this.fileName,
+                        is_error: _this.imageFileError
+                    };
+                    _this.attatchmentArray.push(attatchData);
                 };
             }
             else {
                 this.imageFileError = true;
-                this.fileUploadErrorMessage = 'Please upload valid file';
+                var attatchData = {
+                    image: this.image ? this.image : this.defaultImage,
+                    errorMsg: this.imageFileError ? 'Please upload valid file' : '',
+                    fileName: this.fileName,
+                    is_error: this.imageFileError
+                };
+                this.attatchmentArray.push(attatchData);
             }
-            this.attatchmentArray.push({
-                image: this.image ? this.image : this.defaultImage,
-                errorMsg: this.fileUploadErrorMessage,
-                fileName: this.fileName
-            });
-            var aa = [];
-            aa.push(['ss']);
-            console.log(aa);
+            /*this.attatchmentArray.push({
+              image: this.image ? this.image : this.defaultImage,
+              errorMsg:this.fileUploadErrorMessage,
+              fileName : this.fileName
+            });*/
             console.log(this.attatchmentArray);
         }
     };

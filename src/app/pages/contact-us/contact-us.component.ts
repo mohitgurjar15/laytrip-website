@@ -26,11 +26,11 @@ export class ContactUsComponent implements OnInit {
   fileUploadErrorMessage = '';
   fileObj;
   defaultImage = this.s3BucketUrl +'assets/images/profile_im.svg';
-  image;
+  image :any= '';
   fileName;
   pdfIcon = this.s3BucketUrl + 'assets/images/pdf.svg';
   public imageFileError = false;
-  attatchmentArray = [];
+  attatchmentArray : any = [];
 
 
   constructor(
@@ -116,53 +116,65 @@ export class ContactUsComponent implements OnInit {
   
   documentFileChange(event: any) {
     if (event.target.files && event.target.files[0]) {
-      if (!fileSizeValidator(event.target.files,10000)) {
-        this.imageFileError = true;
-        this.fileUploadErrorMessage = 'Maximum upload size is 10MB';
-      }
-  
+      this.fileUploadErrorMessage = '';
+      this.imageFileError = false;      
       const fileList: FileList = event.target.files;
-
+      var fileSize = fileList[0].size / 1024 / 1024;
+      this.image = '';
       if (fileList[0] && fileList[0].type === 'image/svg+xml' ||
         fileList[0].type == 'image/jpeg' ||
         fileList[0].type == 'image/png' ||
+        fileList[0].type == 'application/pdf' ||
         fileList[0].type == 'image/gif') {
-        this.imageFileError = false;
-        const reader = new FileReader();
+          console.log(fileSize)
+
+        if (fileSize > 10000) {
+          this.imageFileError = true;
+          this.fileUploadErrorMessage = 'Maximum upload size is 10MB';
+        }else {
+          this.fileUploadErrorMessage = '';
+          this.imageFileError = false;
+        }
+        
+        console.log(this.imageFileError,fileSizeValidator(fileList[0].size,10000))
+          
+        let reader = new FileReader();
+
         reader.readAsDataURL(event.target.files[0]);
         this.fileObj = event.target.files[0];
+        
         reader.onload = (_event) => {
           this.defaultImage = '';
-          this.image = reader.result;
+          this.image = fileList[0].type == '' ? this.pdfIcon : reader.result;
           this.fileName = fileList[0].name;
           this.cd.markForCheck();
-          this.fileUploadErrorMessage = '';
+          var attatchData = {
+            image: this.image ? this.image : this.defaultImage,
+            errorMsg: this.imageFileError ? this.fileUploadErrorMessage : '',
+            fileName : this.fileName,
+            is_error : this.imageFileError
+          };
+          this.attatchmentArray.push(attatchData);
         };
-      } else if (fileList[0] && fileList[0].type === 'application/pdf') {
-        this.imageFileError = false;
-        const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        this.fileObj = event.target.files[0];
-        reader.onload = (_event) => {
-          this.defaultImage = '';
-          this.image = this.pdfIcon;
-          this.fileName = fileList[0].name;
-          this.cd.markForCheck();
-          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-          this.fileUploadErrorMessage = '';
-        };
+        
       } else {
         this.imageFileError = true;
-        this.fileUploadErrorMessage = 'Please upload valid file';
+
+        var attatchData = {
+          image: this.image ? this.image : this.defaultImage,
+          errorMsg: this.imageFileError ? 'Please upload valid file' : '',
+          fileName : this.fileName,
+          is_error : this.imageFileError
+        };
+        this.attatchmentArray.push(attatchData);
       }
-      this.attatchmentArray.push( {
+      
+      
+      /*this.attatchmentArray.push({
         image: this.image ? this.image : this.defaultImage,
         errorMsg:this.fileUploadErrorMessage,
         fileName : this.fileName
-      });
-      var aa = [];
-      aa.push(['ss']);
-      console.log(aa)
+      });*/
       console.log(this.attatchmentArray)
     }
   }

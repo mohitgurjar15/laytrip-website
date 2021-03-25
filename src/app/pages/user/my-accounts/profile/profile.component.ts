@@ -70,6 +70,7 @@ export class ProfileComponent implements OnInit {
   submitted : boolean = false;
   type = 'form';
   hmPlaceHolder = 'Select home airport';
+  closeAirportSuggestion = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -254,7 +255,7 @@ export class ProfileComponent implements OnInit {
         phone_no: res.phoneNo,
         city: res.cityName,
         address: res.address,
-        home_airport: res.airportInfo.code ? res.airportInfo.code : null,
+        home_airport: res.airportInfo.code ? res.airportInfo.city+' ('+ res.airportInfo.code+')' : null,
         country_id: res.country.name ? res.country.name : 'United States',
         state_id: res.state.name ? res.state.name : null,
         // passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
@@ -372,32 +373,34 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  changeSearchDeparture(event) {
-    if (event.term.length > 2) {
-      this.searchAirportDeparture(event.term);
-    }
-  }
+  
 
   searchAirportDeparture(searchItem) {
-    this.loadingDeparture =  true;
+    this.loadingDeparture =   true;
     this.closeAirportSuggestion  =  false;
 
-
-    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+    this.data = [];
+    this.flightService.searchAirport(searchItem.target.value).subscribe((response: any) => {
       this.data = response.map(res => {
         this.loadingDeparture = false;
-        return {
-          id: res.id,
-          name: res.name,
-          code: res.code,
-          city: res.city,
-          country: res.country,
-          display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
-          parentId: res.parentId
+        return { 
+          key :res.code.charAt(0),
+          value : [{
+            id: res.id,
+            name: res.name,
+            code: res.code,
+            city: res.city,
+            country: res.country,
+            display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
+            parentId: res.parentId
+          }]
         };
       });
+      console.log(this.data)
     },
       error => {
+
+        this.closeAirportSuggestion  =  true;
         this.loadingDeparture = false;
       }
     );
@@ -428,6 +431,8 @@ export class ProfileComponent implements OnInit {
           }
         }
         this.airportData=result;
+        console.log(this.airportData)
+
       },error=>{
         this.airportLoading=false;
         this.airportData=[];
@@ -461,13 +466,12 @@ export class ProfileComponent implements OnInit {
           }
         }
         this.airportData=airportArray;
-        console.log(this.airportData)
-
+        
       },
-        error => {
-          this.airportData=[];
-          this.airportLoading=false;
-        }
+      error => {
+        this.airportData=[];
+        this.airportLoading=false;
+      }
       );
     }
   }
@@ -479,22 +483,16 @@ export class ProfileComponent implements OnInit {
 			return Object.assign(hash, { [obj[key]]:( hash[obj[key]] || [] ).concat(obj)})
 		  }, {})
 	 }
-  
-  closeAirportSuggestion = true;
-  
+    
   closeAirportDropDown(type){
-    this.closeAirportSuggestion = false;
+    this.closeAirportSuggestion = true;
   }
 
   selectAirport(event){
+    this.profileForm.controls.home_airport.setValue(event.city +' ('+ event.code+')' );
     this.closeAirportSuggestion = true;
     this.hmPlaceHolder = '';
     this.departureAirport.code = event.code;
-    this.departureAirport.country = event.city;
   }
-  clickHomeAirport(){
-    this.profileForm.controls.home_airport.setValue('');
-    this.hmPlaceHolder = '';
-    this.closeAirportSuggestion = false;
-  }
+  
 }

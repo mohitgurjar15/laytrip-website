@@ -236,7 +236,7 @@ var ProfileComponent = /** @class */ (function () {
                 phone_no: res.phoneNo,
                 city: res.cityName,
                 address: res.address,
-                home_airport: res.airportInfo.code ? res.airportInfo.code : null,
+                home_airport: res.airportInfo.code ? res.airportInfo.city + ' (' + res.airportInfo.code + ')' : null,
                 country_id: res.country.name ? res.country.name : 'United States',
                 state_id: res.state.name ? res.state.name : null
             });
@@ -349,29 +349,30 @@ var ProfileComponent = /** @class */ (function () {
             this.arrivalAirport = Object.create(null);
         }
     };
-    ProfileComponent.prototype.changeSearchDeparture = function (event) {
-        if (event.term.length > 2) {
-            this.searchAirportDeparture(event.term);
-        }
-    };
     ProfileComponent.prototype.searchAirportDeparture = function (searchItem) {
         var _this = this;
         this.loadingDeparture = true;
         this.closeAirportSuggestion = false;
-        this.flightService.searchAirport(searchItem).subscribe(function (response) {
+        this.data = [];
+        this.flightService.searchAirport(searchItem.target.value).subscribe(function (response) {
             _this.data = response.map(function (res) {
                 _this.loadingDeparture = false;
                 return {
-                    id: res.id,
-                    name: res.name,
-                    code: res.code,
-                    city: res.city,
-                    country: res.country,
-                    display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
-                    parentId: res.parentId
+                    key: res.code.charAt(0),
+                    value: [{
+                            id: res.id,
+                            name: res.name,
+                            code: res.code,
+                            city: res.city,
+                            country: res.country,
+                            display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
+                            parentId: res.parentId
+                        }]
                 };
             });
+            console.log(_this.data);
         }, function (error) {
+            _this.closeAirportSuggestion = true;
             _this.loadingDeparture = false;
         });
     };
@@ -396,6 +397,7 @@ var ProfileComponent = /** @class */ (function () {
                     }
                 }
                 _this.airportData = result;
+                console.log(_this.airportData);
             }, function (error) {
                 _this.airportLoading = false;
                 _this.airportData = [];
@@ -429,7 +431,6 @@ var ProfileComponent = /** @class */ (function () {
                     }
                 }
                 _this.airportData = airportArray;
-                console.log(_this.airportData);
             }, function (error) {
                 _this.airportData = [];
                 _this.airportLoading = false;
@@ -446,18 +447,13 @@ var ProfileComponent = /** @class */ (function () {
         }, {});
     };
     ProfileComponent.prototype.closeAirportDropDown = function (type) {
-        this.closeAirportSuggestion = false;
+        this.closeAirportSuggestion = true;
     };
     ProfileComponent.prototype.selectAirport = function (event) {
+        this.profileForm.controls.home_airport.setValue(event.city + ' (' + event.code + ')');
         this.closeAirportSuggestion = true;
         this.hmPlaceHolder = '';
         this.departureAirport.code = event.code;
-        this.departureAirport.country = event.city;
-    };
-    ProfileComponent.prototype.clickHomeAirport = function () {
-        this.profileForm.controls.home_airport.setValue('');
-        this.hmPlaceHolder = '';
-        this.closeAirportSuggestion = false;
     };
     __decorate([
         core_1.Output()
