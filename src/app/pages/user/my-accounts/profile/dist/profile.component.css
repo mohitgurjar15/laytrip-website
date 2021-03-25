@@ -14,8 +14,26 @@
   --mobile-bkp: $mobile-bkp;
 }
 
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
 }
 .ng-select.laytrip-input .ng-dropdown-panel {
   top: 100%;
@@ -113,9 +131,31 @@
   background-position: left 25px center;
   color: #808080;
 }
+@media (max-width: 768px) {
+  .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+    padding: 5px 5px 5px 24px !important;
+    background-position: left 5px center;
+  }
+}
 .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
   padding: 3px 0 0 0;
   max-width: 275px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 175px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
 }
 .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
   padding-left: 0;
@@ -145,6 +185,41 @@
   height: auto !important;
   border: none !important;
 }
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-value {
+  width: 44px;
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
+  top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
+}
 
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
   box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
@@ -172,6 +247,18 @@
 
 .redeem_laypoint .ng5-slider .ng5-slider-bubble {
   display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
 }
 
 .custom_range_slide p {
@@ -274,8 +361,8 @@
 /*------------- color variables ------------*/
 /*----------------- responsive variations -----------------*/
 /*----------------- responsive variations -----------------*/
-input.ng-invalid.ng-touched {
-  border-bottom: 1px solid #f4516c !important;
+.ng-customClass.country_code {
+  width: 85px;
 }
 
 .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown {
@@ -314,20 +401,20 @@ input.ng-invalid.ng-touched {
   background: transparent;
 }
 ::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple:hover .c_date {
-  background: #F826C1;
+  background: #f826c1;
 }
 ::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple.p-highlight {
   background: transparent !important;
 }
 ::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple.p-highlight .c_date {
-  background: #F826C1;
+  background: #f826c1;
 }
 ::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .c_date {
   display: block;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #2196F3;
+  background: #2196f3;
   padding: 5px;
   text-align: center;
   line-height: 20px;
@@ -390,6 +477,34 @@ input.ng-invalid.ng-touched {
   top: -5px;
 }
 
+.error_profile {
+  display: flex;
+  position: relative;
+  padding-bottom: 5px;
+  margin-top: -5px;
+}
+.error_profile .fake_div {
+  flex: 1;
+}
+@media (max-width: 768px) {
+  .error_profile .fake_div {
+    display: none;
+  }
+}
+.error_profile .error_field_new {
+  flex: 2;
+  color: #ff0000;
+  display: flex;
+  font-size: 10px;
+  align-items: flex-start;
+}
+.error_profile .error_field_new .error_img_new {
+  margin-top: 3px;
+  display: flex;
+  max-width: 10px;
+  margin-right: 5px;
+}
+
 .account_cnt_main {
   width: 100%;
   background: #ffffff;
@@ -401,9 +516,10 @@ input.ng-invalid.ng-touched {
     height: auto;
   }
 }
-@media (max-width: 575px) {
+@media (max-width: 768px) {
   .account_cnt_main {
-    padding: 20px;
+    padding: 10px 0 0 0;
+    margin-bottom: 0;
   }
 }
 .account_cnt_main .update_info {
@@ -447,12 +563,12 @@ input.ng-invalid.ng-touched {
 }
 @media (max-width: 991px) {
   .account_cnt_main .update_info .update_profile span {
-    width: 90px;
-    height: 90px;
-  }
-  .account_cnt_main .update_info .update_profile span img {
     width: 80px;
     height: 80px;
+  }
+  .account_cnt_main .update_info .update_profile span img {
+    width: 72px;
+    height: 72px;
   }
 }
 .account_cnt_main .update_info .update_profile .update_profile_btn {
@@ -468,6 +584,11 @@ input.ng-invalid.ng-touched {
   padding: 0;
   text-align: right;
 }
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .update_profile .update_profile_btn button {
+    font-size: 12px;
+  }
+}
 .account_cnt_main .update_info .update_profile .update_profile_btn button img {
   margin-right: 10px;
 }
@@ -477,7 +598,7 @@ input.ng-invalid.ng-touched {
   justify-content: flex-start;
   align-items: center;
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .account_cnt_main .update_info .form_row {
     flex-wrap: wrap;
   }
@@ -487,8 +608,96 @@ input.ng-invalid.ng-touched {
   margin-bottom: 15px;
   padding-bottom: 10px;
 }
+.account_cnt_main .update_info .form_row.common_row.error_main_class {
+  border-color: #ff0000;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 4px;
+  }
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main {
+    flex-direction: row;
+    padding-bottom: 11px;
+  }
+}
+.account_cnt_main .update_info .form_row.common_row.address_main label {
+  display: flex;
+  flex-direction: column;
+}
+.account_cnt_main .update_info .form_row.common_row.address_main label span {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main label span {
+    min-height: 25px;
+  }
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main label br {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main .address_box {
+    width: 73%;
+    flex-direction: column;
+    height: auto;
+    position: relative;
+    z-index: 9;
+  }
+}
+.account_cnt_main .update_info .form_row.common_row.address_main .address_box .inputs_com {
+  padding: 0;
+}
+.account_cnt_main .update_info .form_row.common_row.address_main .address_box .inputs_com::placeholder {
+  color: #878787;
+  opacity: 1;
+  /* Firefox */
+  font-weight: 400;
+}
+.account_cnt_main .update_info .form_row.common_row.address_main .address_box .inputs_com:-ms-input-placeholder {
+  color: #878787;
+  font-weight: 400;
+}
+.account_cnt_main .update_info .form_row.common_row.address_main .address_box .inputs_com::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #878787;
+  font-weight: 400;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main .address_box .inputs_com {
+    min-height: 25px;
+    max-height: 25px;
+  }
+}
+.account_cnt_main .update_info .form_row.common_row.address_main .address_box .address_ng {
+  min-height: 40px;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main .address_box .address_ng {
+    min-height: 25px;
+  }
+}
 .account_cnt_main .update_info .form_row.title_row {
   justify-content: space-between;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.title_row .edit_btns {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+}
+.account_cnt_main .update_info .form_row.ar_field .text_field {
+  width: 100%;
+}
+.account_cnt_main .update_info .form_row.ar_field .text_field.airport_dropdown {
+  position: relative;
 }
 .account_cnt_main .update_info .form_row h3 {
   color: #1445f5;
@@ -498,7 +707,8 @@ input.ng-invalid.ng-touched {
 }
 @media (max-width: 768px) {
   .account_cnt_main .update_info .form_row h3 {
-    font-size: 18px;
+    font-size: 24px;
+    margin: 25px 0 24px;
   }
 }
 .account_cnt_main .update_info .form_row .edit_btns a {
@@ -510,6 +720,11 @@ input.ng-invalid.ng-touched {
   text-align: right;
   text-decoration: none;
 }
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row .edit_btns a {
+    font-size: 12px;
+  }
+}
 .account_cnt_main .update_info .form_row label {
   margin-bottom: 10px;
   color: #000000;
@@ -518,8 +733,19 @@ input.ng-invalid.ng-touched {
   flex: 1;
   margin: 0;
 }
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row label {
+    font-size: 14px;
+  }
+}
 .account_cnt_main .update_info .form_row .text_field {
   flex: 2;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row .text_field {
+    height: 30px;
+    display: flex;
+  }
 }
 .account_cnt_main .update_info .form_row .text_field .gender_anchers {
   display: flex;
@@ -548,11 +774,16 @@ input.ng-invalid.ng-touched {
 }
 .account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a {
   color: #878787;
-  font-size: 14px;
+  font-size: 16px;
   padding: 0 25px 0 0;
 }
 .account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a.active {
   color: #ffaa00;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a {
+    font-size: 14px;
+  }
 }
 .account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a:focus {
   outline: none;
@@ -566,6 +797,11 @@ input.ng-invalid.ng-touched {
   border-bottom: none;
   padding: 0;
 }
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row .text_field .tel_span input {
+    top: 3px;
+  }
+}
 .account_cnt_main .update_info .form_row .text_field .tel_span input:first-child {
   width: 55px;
 }
@@ -577,6 +813,13 @@ input.ng-invalid.ng-touched {
   font-size: 16px;
   color: #878787;
   position: relative;
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row input {
+    height: 30px;
+    font-size: 14px;
+  }
 }
 .account_cnt_main .update_info .form_row input:focus {
   border: none;
@@ -592,7 +835,8 @@ input.ng-invalid.ng-touched {
 .account_cnt_main .update_info .form_row textarea {
   width: 100%;
   background: transparent;
-  height: 40px;
+  max-height: 70px;
+  resize: none;
   border: none;
   font-size: 16px;
   color: #878787;
@@ -1253,7 +1497,7 @@ input.ng-invalid.ng-touched {
 }
 .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info span.refund {
   font-size: 16px;
-  color: #FF0000;
+  color: #ff0000;
   font-weight: 500;
 }
 .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info .block_cancle {
@@ -3555,4 +3799,112 @@ input.ng-invalid.ng-touched {
   .account_cnt_main.search_trip .block_search_trip .search_block form .search_btn button {
     display: inline-flex;
   }
+}
+
+ng-scrollbar {
+  --scrollbar-padding: 25px 0 0 5px !important;
+}
+
+.search_suggetion_main {
+  border: 1px solid #d6d6d6;
+  background-color: #ffffff;
+  border-radius: 10px;
+  color: #878787;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 15px;
+  position: absolute;
+  margin-top: 15px;
+  width: 100%;
+  z-index: 999;
+}
+.search_suggetion_main .close_btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 999;
+}
+@media (max-width: 768px) {
+  .search_suggetion_main .close_btn {
+    right: 30px;
+  }
+}
+.search_suggetion_main .close_btn button {
+  cursor: pointer;
+}
+.search_suggetion_main .close_btn button img {
+  max-width: 9px;
+}
+.search_suggetion_main .close_btn button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.search_suggetion_main .suggtions_wrps_mn {
+  display: flex;
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions {
+  scroll-behavior: smooth;
+  height: 100%;
+  max-height: 180px;
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box {
+  margin-bottom: 10px;
+  float: left;
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box:last-child {
+  margin-bottom: 0;
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .word_alpha {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+  width: 25px;
+  float: left;
+}
+@media (max-width: 768px) {
+  .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .word_alpha {
+    font-size: 14px;
+  }
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps {
+  float: left;
+}
+@media (max-width: 768px) {
+  .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps {
+    font-size: 12px;
+  }
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps .line_names {
+  margin-bottom: 10px;
+  display: flex;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps .line_names {
+    font-size: 12px;
+  }
+}
+.search_suggetion_main .alphabets_wrps {
+  flex: 1;
+  display: none;
+  position: fixed;
+  flex-direction: column;
+  align-items: flex-end;
+  right: 50px;
+  margin-top: 20px;
+}
+@media (max-width: 768px) {
+  .search_suggetion_main .alphabets_wrps {
+    display: none;
+  }
+}
+.search_suggetion_main .alphabets_wrps a {
+  font-size: 6px;
+  color: #bababa;
+  padding: 0;
+  width: 10px;
+  text-transform: capitalize;
 }

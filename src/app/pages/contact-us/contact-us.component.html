@@ -68,7 +68,7 @@
                                     </button> 
                                 </div>-->
 
-                                <a href="javascript:void(0)" class="upload_btn">
+                                <a class="upload_btn hover-link">
                                     <label class="mb-0">
                                         <img src="{{s3BucketUrl}}assets/images/icon/pin.svg" alt="attach"> Attach
                                         <input accept="image/*,.pdf" #fileInput type="file" formControlName="file"
@@ -79,18 +79,18 @@
                                 <div class="upload_list_wrapper">
                                     <div class="listing_lines_wrps" *ngFor="let attatchment of attatchmentArray;">
                                         <div class="uploaded_list">
-                                            <img [src]=" defaultImage || attatchment.image" alt="" />
+                                            <img [src]="attatchment.image || defaultImage" alt="" />
 
-                                            <h5>{{ fileName }}</h5>
+                                            <h5> {{ attatchment.fileName }} </h5>
                                             <button type="button" class="close" (click)="resetImage();">
                                                 <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg"
                                                     alt="attach">
                                             </button>
                                         </div>
-                                        <small class="error_field" style="display:none">
+                                        <small class="error_field" *ngIf="attatchment.errorMsg.length > 0">
                                             <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
                                                 class="error_img">
-                                            Error</small>
+                                            {{attatchment.errorMsg}}</small>
                                     </div>
                                 </div>
 

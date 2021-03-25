@@ -27,10 +27,12 @@ var ProfileComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         // submitted = false;
         this.loading = true;
+        this.airportLoading = false;
         this.loadingValue = new core_1.EventEmitter();
         this.minDate = {};
         this.maxDate = {};
         this.data = [];
+        this.airportData = [];
         this.is_gender = true;
         this.gender_type = 'M';
         this.imageFile = '';
@@ -65,8 +67,12 @@ var ProfileComponent = /** @class */ (function () {
             ]
         };
         this.submitted = false;
+        this.type = 'form';
+        this.hmPlaceHolder = 'Select home airport';
+        this.closeAirportSuggestion = true;
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        this.getAirports();
         this.loadingValue.emit(true);
         window.scroll(0, 0);
         var location = this.cookieService.get('__loc');
@@ -286,7 +292,7 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
             formdata.append("email", this.profileForm.value.email);
-            formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
+            formdata.append("home_airport", this.departureAirport.code ? this.departureAirport.code : '');
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.gender_type ? this.gender_type : 'M');
             formdata.append("city_name", this.profileForm.value.city);
@@ -351,6 +357,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.searchAirportDeparture = function (searchItem) {
         var _this = this;
         this.loadingDeparture = true;
+        this.closeAirportSuggestion = false;
         this.flightService.searchAirport(searchItem).subscribe(function (response) {
             _this.data = response.map(function (res) {
                 _this.loadingDeparture = false;
@@ -374,6 +381,83 @@ var ProfileComponent = /** @class */ (function () {
             // this.departureAirport=event;
             // this.searchedValue.push({ key: 'fromSearch', value: event });
         }
+    };
+    ProfileComponent.prototype.getAirports = function () {
+        var _this = this;
+        var from = localStorage.getItem('__from') || '';
+        var to = localStorage.getItem('__to') || '';
+        if (from == '' && to == '') {
+            this.airportLoading = true;
+            this.flightService.searchAirports(this.type).subscribe(function (result) {
+                _this.airportLoading = false;
+                for (var i = 0; i < result.length; i++) {
+                    for (var j = 0; j < result[i].value.length; j++) {
+                        result[i].value[j].display_name = result[i].value[j].city + "," + result[i].value[j].country + ",(" + result[i].value[j].code + ")," + result[i].value[j].name;
+                    }
+                }
+                _this.airportData = result;
+            }, function (error) {
+                _this.airportLoading = false;
+                _this.airportData = [];
+            });
+        }
+        else {
+            var isFromLocation = this.type == 'from' ? 'yes' : 'no';
+            var alternateLocation = '';
+            if (this.type == 'from') {
+                alternateLocation = localStorage.getItem('__to') || '';
+            }
+            else {
+                alternateLocation = localStorage.getItem('__from') || '';
+            }
+            this.airportLoading = true;
+            this.flightService.searchRoute('', isFromLocation, alternateLocation).subscribe(function (response) {
+                _this.airportLoading = false;
+                var opResult = _this.groupByKey(response, 'key');
+                var airportArray = [];
+                for (var _i = 0, _a = Object.entries(opResult); _i < _a.length; _i++) {
+                    var _b = _a[_i], key = _b[0], value = _b[1];
+                    airportArray.push({
+                        key: key,
+                        value: value
+                    });
+                }
+                airportArray = airportArray.sort(function (a, b) { return a.key.localeCompare(b.key); });
+                for (var i = 0; i < airportArray.length; i++) {
+                    for (var j = 0; j < airportArray[i].value.length; j++) {
+                        airportArray[i].value[j].display_name = airportArray[i].value[j].city + "," + airportArray[i].value[j].country + ",(" + airportArray[i].value[j].code + ")," + airportArray[i].value[j].name;
+                    }
+                }
+                _this.airportData = airportArray;
+                console.log(_this.airportData);
+            }, function (error) {
+                _this.airportData = [];
+                _this.airportLoading = false;
+            });
+        }
+    };
+    ProfileComponent.prototype.groupByKey = function (array, key) {
+        return array
+            .reduce(function (hash, obj) {
+            var _a;
+            if (obj[key] === undefined)
+                return hash;
+            return Object.assign(hash, (_a = {}, _a[obj[key]] = (hash[obj[key]] || []).concat(obj), _a));
+        }, {});
+    };
+    ProfileComponent.prototype.closeAirportDropDown = function (type) {
+        this.closeAirportSuggestion = false;
+    };
+    ProfileComponent.prototype.selectAirport = function (event) {
+        this.closeAirportSuggestion = true;
+        this.hmPlaceHolder = '';
+        this.departureAirport.code = event.code;
+        this.departureAirport.country = event.city;
+    };
+    ProfileComponent.prototype.clickHomeAirport = function () {
+        this.profileForm.controls.home_airport.setValue('');
+        this.hmPlaceHolder = '';
+        this.closeAirportSuggestion = false;
     };
     __decorate([
         core_1.Output()

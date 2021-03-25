@@ -24,11 +24,8 @@ var ContactUsComponent = /** @class */ (function () {
         this.messageLenght = 0;
         this.submitted = false;
         this.fileUploadErrorMessage = '';
-        this.defaultImage = 'assets/images/file-upload.svg';
-        this.pdfIcon = 'assets/images/pdf.svg';
-        this.csvIcon = 'assets/images/csv.svg';
-        this.xlsxIcon = 'assets/images/xls.svg';
-        this.wordIcon = 'assets/images/word.svg';
+        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+        this.pdfIcon = this.s3BucketUrl + 'assets/images/pdf.svg';
         this.imageFileError = false;
         this.attatchmentArray = [];
     }
@@ -50,16 +47,6 @@ var ContactUsComponent = /** @class */ (function () {
         var _this = this;
         this.loading = true;
         this.submitted = true;
-        if (!custom_validators_1.fileSizeValidator(this.fileObj, 10000)) {
-            this.imageFileError = this.submitted = true;
-            this.toastr.show("File is too large", '', {
-                toastClass: 'custom_toastr',
-                titleClass: 'custom_toastr_title',
-                messageClass: 'custom_toastr_message'
-            });
-            this.loading = false;
-            return;
-        }
         if (this.contactUsForm.invalid) {
             this.submitted = true;
             Object.keys(this.contactUsForm.controls).forEach(function (key) {
@@ -108,11 +95,16 @@ var ContactUsComponent = /** @class */ (function () {
     ContactUsComponent.prototype.documentFileChange = function (event) {
         var _this = this;
         if (event.target.files && event.target.files[0]) {
+            if (!custom_validators_1.fileSizeValidator(event.target.files, 10000)) {
+                this.imageFileError = true;
+                this.fileUploadErrorMessage = 'Maximum upload size is 10MB';
+            }
             var fileList_1 = event.target.files;
             if (fileList_1[0] && fileList_1[0].type === 'image/svg+xml' ||
-                fileList_1[0].type === 'image/jpeg' ||
-                fileList_1[0].type === 'image/png' ||
-                fileList_1[0].type === 'image/gif') {
+                fileList_1[0].type == 'image/jpeg' ||
+                fileList_1[0].type == 'image/png' ||
+                fileList_1[0].type == 'image/gif') {
+                this.imageFileError = false;
                 var reader_1 = new FileReader();
                 reader_1.readAsDataURL(event.target.files[0]);
                 this.fileObj = event.target.files[0];
@@ -125,6 +117,7 @@ var ContactUsComponent = /** @class */ (function () {
                 };
             }
             else if (fileList_1[0] && fileList_1[0].type === 'application/pdf') {
+                this.imageFileError = false;
                 var reader = new FileReader();
                 reader.readAsDataURL(event.target.files[0]);
                 this.fileObj = event.target.files[0];
@@ -138,10 +131,17 @@ var ContactUsComponent = /** @class */ (function () {
                 };
             }
             else {
+                this.imageFileError = true;
                 this.fileUploadErrorMessage = 'Please upload valid file';
             }
-            this.attatchmentArray.push({ image: this.fileObj });
-            console.log('dfdf');
+            this.attatchmentArray.push({
+                image: this.image ? this.image : this.defaultImage,
+                errorMsg: this.fileUploadErrorMessage,
+                fileName: this.fileName
+            });
+            var aa = [];
+            aa.push(['ss']);
+            console.log(aa);
             console.log(this.attatchmentArray);
         }
     };
@@ -150,7 +150,7 @@ var ContactUsComponent = /** @class */ (function () {
             this.fileInput.nativeElement.value = '';
             // this.sendMassCommunicationForm.controls['file'].setValue(null);
             this.image = '';
-            this.defaultImage = 'assets/images/file-upload.svg';
+            // this.defaultImage = 'assets/images/file-upload.svg';
             this.fileName = '';
         }
     };

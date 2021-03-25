@@ -25,10 +25,12 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   // submitted = false;
   loading = true;
+  airportLoading = false;
   @Output() loadingValue = new EventEmitter<boolean>();
   minDate: any = {};
   maxDate: any = {};
   data = [];
+  airportData = [];
   public startDate: Date;
   is_gender: boolean = true;
   gender_type: string = 'M';
@@ -66,6 +68,9 @@ export class ProfileComponent implements OnInit {
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
   submitted : boolean = false;
+  type = 'form';
+  hmPlaceHolder = 'Select home airport';
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -79,6 +84,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getAirports();
     this.loadingValue.emit(true);
     window.scroll(0, 0);
 
@@ -306,7 +312,7 @@ export class ProfileComponent implements OnInit {
       formdata.append("first_name", this.profileForm.value.first_name);
       formdata.append("last_name", this.profileForm.value.last_name);
       formdata.append("email", this.profileForm.value.email);
-      formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
+      formdata.append("home_airport",   this.departureAirport.code ?  this.departureAirport.code : '');
       formdata.append("phone_no", this.profileForm.value.phone_no);
       formdata.append("gender", this.gender_type ? this.gender_type : 'M');
       formdata.append("city_name", this.profileForm.value.city);
@@ -373,7 +379,10 @@ export class ProfileComponent implements OnInit {
   }
 
   searchAirportDeparture(searchItem) {
-    this.loadingDeparture = true;
+    this.loadingDeparture =  true;
+    this.closeAirportSuggestion  =  false;
+
+
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
       this.data = response.map(res => {
         this.loadingDeparture = false;
@@ -404,5 +413,88 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  getAirports(){
 
+    let from = localStorage.getItem('__from') || '';
+    let to = localStorage.getItem('__to') || '';
+
+    if(from=='' && to==''){
+      this.airportLoading=true;
+      this.flightService.searchAirports(this.type).subscribe((result:any)=>{
+        this.airportLoading=false;
+        for(let i=0; i <result.length; i++){
+          for(let j=0; j<result[i].value.length; j++){
+            result[i].value[j].display_name = `${result[i].value[j].city},${ result[i].value[j].country},(${result[i].value[j].code}),${ result[i].value[j].name}`
+          }
+        }
+        this.airportData=result;
+      },error=>{
+        this.airportLoading=false;
+        this.airportData=[];
+      })
+    }
+    else{
+      let isFromLocation=this.type=='from'?'yes':'no';
+      let alternateLocation='';
+      if(this.type=='from'){
+        alternateLocation=localStorage.getItem('__to') || '';
+      }
+      else{
+        alternateLocation=localStorage.getItem('__from') || '';
+      }
+      this.airportLoading=true;
+      this.flightService.searchRoute('',isFromLocation,alternateLocation).subscribe((response: any) => {
+        this.airportLoading=false;
+        let opResult = this.groupByKey(response,'key')
+        let airportArray=[];
+		
+        for (const [key, value] of Object.entries(opResult)) {
+          airportArray.push({
+            key : key,
+            value : value
+          })
+        }
+        airportArray = airportArray.sort((a, b) => a.key.localeCompare(b.key));
+        for(let i=0; i <airportArray.length; i++){
+          for(let j=0; j<airportArray[i].value.length; j++){
+            airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
+          }
+        }
+        this.airportData=airportArray;
+        console.log(this.airportData)
+
+      },
+        error => {
+          this.airportData=[];
+          this.airportLoading=false;
+        }
+      );
+    }
+  }
+
+  groupByKey(array, key) {
+		return array
+		  .reduce((hash, obj) => {
+			if(obj[key] === undefined) return hash; 
+			return Object.assign(hash, { [obj[key]]:( hash[obj[key]] || [] ).concat(obj)})
+		  }, {})
+	 }
+  
+  closeAirportSuggestion = true;
+  
+  closeAirportDropDown(type){
+    this.closeAirportSuggestion = false;
+  }
+
+  selectAirport(event){
+    this.closeAirportSuggestion = true;
+    this.hmPlaceHolder = '';
+    this.departureAirport.code = event.code;
+    this.departureAirport.country = event.city;
+  }
+  clickHomeAirport(){
+    this.profileForm.controls.home_airport.setValue('');
+    this.hmPlaceHolder = '';
+    this.closeAirportSuggestion = false;
+  }
 }

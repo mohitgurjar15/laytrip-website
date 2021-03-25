@@ -25,13 +25,10 @@ export class ContactUsComponent implements OnInit {
   submitted = false;
   fileUploadErrorMessage = '';
   fileObj;
-  defaultImage = 'assets/images/file-upload.svg';
+  defaultImage = this.s3BucketUrl +'assets/images/profile_im.svg';
   image;
   fileName;
-  pdfIcon = 'assets/images/pdf.svg';
-  csvIcon = 'assets/images/csv.svg';
-  xlsxIcon = 'assets/images/xls.svg';
-  wordIcon = 'assets/images/word.svg';
+  pdfIcon = this.s3BucketUrl + 'assets/images/pdf.svg';
   public imageFileError = false;
   attatchmentArray = [];
 
@@ -66,16 +63,6 @@ export class ContactUsComponent implements OnInit {
   onSubmit() {
     this.loading = true;
     this.submitted = true;
-    if (!fileSizeValidator(this.fileObj,10000)) {
-      this.imageFileError = this.submitted = true;
-      this.toastr.show("File is too large", '', {
-        toastClass: 'custom_toastr',
-        titleClass: 'custom_toastr_title',
-        messageClass: 'custom_toastr_message',
-      });
-      this.loading = false;
-      return;
-    }
 
     if (this.contactUsForm.invalid) {
       this.submitted = true;
@@ -129,11 +116,18 @@ export class ContactUsComponent implements OnInit {
   
   documentFileChange(event: any) {
     if (event.target.files && event.target.files[0]) {
+      if (!fileSizeValidator(event.target.files,10000)) {
+        this.imageFileError = true;
+        this.fileUploadErrorMessage = 'Maximum upload size is 10MB';
+      }
+  
       const fileList: FileList = event.target.files;
+
       if (fileList[0] && fileList[0].type === 'image/svg+xml' ||
-        fileList[0].type === 'image/jpeg' ||
-        fileList[0].type === 'image/png' ||
-        fileList[0].type === 'image/gif') {
+        fileList[0].type == 'image/jpeg' ||
+        fileList[0].type == 'image/png' ||
+        fileList[0].type == 'image/gif') {
+        this.imageFileError = false;
         const reader = new FileReader();
         reader.readAsDataURL(event.target.files[0]);
         this.fileObj = event.target.files[0];
@@ -145,6 +139,7 @@ export class ContactUsComponent implements OnInit {
           this.fileUploadErrorMessage = '';
         };
       } else if (fileList[0] && fileList[0].type === 'application/pdf') {
+        this.imageFileError = false;
         const reader = new FileReader();
         reader.readAsDataURL(event.target.files[0]);
         this.fileObj = event.target.files[0];
@@ -157,11 +152,17 @@ export class ContactUsComponent implements OnInit {
           this.fileUploadErrorMessage = '';
         };
       } else {
+        this.imageFileError = true;
         this.fileUploadErrorMessage = 'Please upload valid file';
       }
-      this.attatchmentArray.push({ image :  this.fileObj });
-      console.log('dfdf')
-
+      this.attatchmentArray.push( {
+        image: this.image ? this.image : this.defaultImage,
+        errorMsg:this.fileUploadErrorMessage,
+        fileName : this.fileName
+      });
+      var aa = [];
+      aa.push(['ss']);
+      console.log(aa)
       console.log(this.attatchmentArray)
     }
   }
@@ -172,7 +173,7 @@ export class ContactUsComponent implements OnInit {
       this.fileInput.nativeElement.value = '';
       // this.sendMassCommunicationForm.controls['file'].setValue(null);
       this.image = '';
-      this.defaultImage = 'assets/images/file-upload.svg';
+      // this.defaultImage = 'assets/images/file-upload.svg';
       this.fileName = '';
     }
   }
