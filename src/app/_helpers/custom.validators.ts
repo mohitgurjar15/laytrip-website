@@ -12,10 +12,10 @@ export function validateImageFile(name: String) {
   }
 }
 
-export function fileSizeValidator(file) {
+export function fileSizeValidator(file,sizeValidation=5000) {
 
   var size = Math.floor(file.size / 1000);
-  if (size <= 5000) {
+  if (size <= sizeValidation ? sizeValidation : 5000) {
     return true;
   }else {
     return false;

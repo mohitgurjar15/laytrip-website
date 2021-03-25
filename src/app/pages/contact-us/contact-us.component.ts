@@ -5,6 +5,8 @@ import { GenericService } from '../../services/generic.service';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
+import { fileSizeValidator} from '../../_helpers/custom.validators';
+
 declare var $: any;
 
 @Component({
@@ -23,14 +25,13 @@ export class ContactUsComponent implements OnInit {
   submitted = false;
   fileUploadErrorMessage = '';
   fileObj;
-  defaultImage = 'assets/images/file-upload.svg';
+  defaultImage = this.s3BucketUrl +'assets/images/profile_im.svg';
   image;
   fileName;
-  pdfIcon = 'assets/images/pdf.svg';
-  csvIcon = 'assets/images/csv.svg';
-  xlsxIcon = 'assets/images/xls.svg';
-  wordIcon = 'assets/images/word.svg';
- 
+  pdfIcon = this.s3BucketUrl + 'assets/images/pdf.svg';
+  public imageFileError = false;
+  attatchmentArray = [];
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -59,10 +60,10 @@ export class ContactUsComponent implements OnInit {
   }
 
 
-  onSubmit(formValue) {
-    console.log('sdsd')
+  onSubmit() {
     this.loading = true;
     this.submitted = true;
+
     if (this.contactUsForm.invalid) {
       this.submitted = true;
       Object.keys(this.contactUsForm.controls).forEach(key => {
@@ -72,10 +73,13 @@ export class ContactUsComponent implements OnInit {
       return;
     }
    
-    this.contactUsForm.controls.file.setValue(this.fileObj ? this.fileObj : '')
-    console.log(this.contactUsForm.controls.value)
-    this.genericService.createEnquiry(formValue).subscribe((res: any) => {
-      console.log('sdsd')
+    let formdata = new FormData();
+    formdata.append("name",this.contactUsForm.value.name);
+    formdata.append("email",this.contactUsForm.value.email);
+    formdata.append("message",this.contactUsForm.value.message);
+    formdata.append("file",this.fileObj);
+
+    this.genericService.createEnquiry(formdata).subscribe((res: any) => {
       $('#contact_modal').modal('hide');
       this.loading = false;
       this.submitted = false;
@@ -112,11 +116,18 @@ export class ContactUsComponent implements OnInit {
   
   documentFileChange(event: any) {
     if (event.target.files && event.target.files[0]) {
+      if (!fileSizeValidator(event.target.files,10000)) {
+        this.imageFileError = true;
+        this.fileUploadErrorMessage = 'Maximum upload size is 10MB';
+      }
+  
       const fileList: FileList = event.target.files;
+
       if (fileList[0] && fileList[0].type === 'image/svg+xml' ||
-        fileList[0].type === 'image/jpeg' ||
-        fileList[0].type === 'image/png' ||
-        fileList[0].type === 'image/gif') {
+        fileList[0].type == 'image/jpeg' ||
+        fileList[0].type == 'image/png' ||
+        fileList[0].type == 'image/gif') {
+        this.imageFileError = false;
         const reader = new FileReader();
         reader.readAsDataURL(event.target.files[0]);
         this.fileObj = event.target.files[0];
@@ -128,6 +139,7 @@ export class ContactUsComponent implements OnInit {
           this.fileUploadErrorMessage = '';
         };
       } else if (fileList[0] && fileList[0].type === 'application/pdf') {
+        this.imageFileError = false;
         const reader = new FileReader();
         reader.readAsDataURL(event.target.files[0]);
         this.fileObj = event.target.files[0];
@@ -139,50 +151,19 @@ export class ContactUsComponent implements OnInit {
           // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
           this.fileUploadErrorMessage = '';
         };
-      } else if (fileList[0] && fileList[0].type === 'application/vnd.ms-excel') {
-        const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        this.fileObj = event.target.files[0];
-        reader.onload = (_event) => {
-          this.defaultImage = '';
-          this.image = this.csvIcon;
-          this.fileName = fileList[0].name;
-          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-          this.fileUploadErrorMessage = '';
-          this.cd.markForCheck();
-        };
-      } else if (fileList[0] && fileList[0].name.substring(fileList[0].name.indexOf('xlsx')) &&
-        fileList[0].type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-        const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        this.fileObj = event.target.files[0];
-        reader.onload = (_event) => {
-          this.defaultImage = '';
-          this.image = this.xlsxIcon;
-          this.fileName = fileList[0].name;
-          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-          this.fileUploadErrorMessage = '';
-          this.cd.markForCheck();
-        };
-      } else if (fileList[0] && fileList[0].name.substring(fileList[0].name.indexOf('doc') || fileList[0].name.indexOf('docx'))
-        && fileList[0].type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        || fileList[0].type === 'application/doc'
-        || fileList[0].type === 'application/ms-doc'
-        || fileList[0].type === 'application/msword') {
-        const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        this.fileObj = event.target.files[0];
-        reader.onload = (_event) => {
-          this.defaultImage = '';
-          this.image = this.wordIcon;
-          this.fileName = fileList[0].name;
-          this.cd.markForCheck();
-          // this.sendMassCommunicationForm.controls['file'].setValue(fileList[0].name);
-          this.fileUploadErrorMessage = '';
-        };
       } else {
+        this.imageFileError = true;
         this.fileUploadErrorMessage = 'Please upload valid file';
       }
+      this.attatchmentArray.push( {
+        image: this.image ? this.image : this.defaultImage,
+        errorMsg:this.fileUploadErrorMessage,
+        fileName : this.fileName
+      });
+      var aa = [];
+      aa.push(['ss']);
+      console.log(aa)
+      console.log(this.attatchmentArray)
     }
   }
 
@@ -192,7 +173,7 @@ export class ContactUsComponent implements OnInit {
       this.fileInput.nativeElement.value = '';
       // this.sendMassCommunicationForm.controls['file'].setValue(null);
       this.image = '';
-      this.defaultImage = 'assets/images/file-upload.svg';
+      // this.defaultImage = 'assets/images/file-upload.svg';
       this.fileName = '';
     }
   }
