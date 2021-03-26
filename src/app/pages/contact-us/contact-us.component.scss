@@ -72,8 +72,8 @@
               .upload_btn {
                 color: $mid_gray_bg;
                 font-size: 12px;
-                position: absolute;
-                top: -32px;
+                // position: absolute;
+                // top: -32px;
 
                 label {
                   cursor: pointer;
@@ -85,7 +85,7 @@
               }
 
               .upload_list_wrapper {
-                margin-top: 15px;
+                margin-top: 10px;
                 .listing_lines_wrps{
                   margin-bottom: 7px;
                   &:last-child {
@@ -103,7 +103,7 @@
                     img {
                       border-top-left-radius: 5px;
                       border-bottom-left-radius: 5px;
-                      height: 30px;
+                      height: 28px;
                       width: 30px;
                     }
 
@@ -147,10 +147,12 @@
 
               .word_counter {
                 display: flex;
-                color: $box-border-color;
                 font-size: 12px;
                 justify-content: flex-end;
                 color: $mid_gray_bg;
+                right: 0;
+                position: absolute;
+                transform: translate(0px, 3px);
               }
 
               .block_btm_msg {
