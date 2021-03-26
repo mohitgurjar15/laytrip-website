@@ -28,6 +28,8 @@ var ContactUsComponent = /** @class */ (function () {
         this.pdfIcon = this.s3BucketUrl + 'assets/images/pdf.jpeg';
         this.imageFileError = false;
         this.attatchmentFiles = [];
+        this.files = [];
+        this.spinner = false;
     }
     ContactUsComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -59,12 +61,13 @@ var ContactUsComponent = /** @class */ (function () {
         formdata.append("name", this.contactUsForm.value.name);
         formdata.append("email", this.contactUsForm.value.email);
         formdata.append("message", this.contactUsForm.value.message);
-        formdata.append("file", this.attatchmentFiles);
+        formdata.append("file", this.files ? this.files : []);
+        console.log(this.files);
         this.genericService.createEnquiry(formdata).subscribe(function (res) {
             $('#contact_modal').modal('hide');
             _this.loading = _this.submitted = false;
             _this.contactUsForm.reset();
-            _this.attatchmentFiles = [];
+            _this.attatchmentFiles = _this.files = [];
             _this.toastr.show(res.message, '', {
                 toastClass: 'custom_toastr',
                 titleClass: 'custom_toastr_title',
@@ -95,7 +98,9 @@ var ContactUsComponent = /** @class */ (function () {
     };
     ContactUsComponent.prototype.documentFileChange = function (event) {
         var _this = this;
+        this.spinner = true;
         if (this.attatchmentFiles.length >= 5) {
+            this.spinner = false;
             this.toastr.show('Maximum upload of 5 files.', '', {
                 toastClass: 'custom_toastr',
                 titleClass: 'custom_toastr_title',
@@ -132,9 +137,12 @@ var ContactUsComponent = /** @class */ (function () {
                     };
                     _this.attatchmentFiles.push(attatchData);
                 };
+                this.files.push(this.fileObj);
+                this.spinner = false;
             }
             else {
                 this.imageFileError = true;
+                this.spinner = false;
                 var attatchData = {
                     image: this.image ? this.image : this.defaultImage,
                     errorMsg: this.imageFileError ? 'Error attaching, try again' : '',

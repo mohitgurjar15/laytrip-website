@@ -70,7 +70,7 @@
 
                                 <a class="upload_btn hover-link">
                                     <label class="mb-0">
-                                        <img src="{{s3BucketUrl}}assets/images/icon/pin.svg" alt="attach"> Attach
+                                        <img src="{{s3BucketUrl}}assets/images/icon/pin.svg" alt="attach"> Attach          <i class="fa fa-spinner fa-spin resendSpinner" *ngIf="spinner"></i>
                                         <input accept="image/png,image/jpg,.pdf" #fileInput type="file" formControlName="file"
                                             id="output" class="form-control input d-none"
                                             (change)="documentFileChange($event)">

@@ -31,7 +31,8 @@ export class ContactUsComponent implements OnInit {
   pdfIcon = this.s3BucketUrl + 'assets/images/pdf.jpeg';
   public imageFileError = false;
   attatchmentFiles : any = [];
-
+  files : any = [];
+  spinner : boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -77,13 +78,13 @@ export class ContactUsComponent implements OnInit {
     formdata.append("name",this.contactUsForm.value.name);
     formdata.append("email",this.contactUsForm.value.email);
     formdata.append("message",this.contactUsForm.value.message);
-    formdata.append("file",this.attatchmentFiles);
-
+    formdata.append("file",this.files ? this.files : []);
+    console.log(this.files)
     this.genericService.createEnquiry(formdata).subscribe((res: any) => {
       $('#contact_modal').modal('hide');
       this.loading = this.submitted = false;
       this.contactUsForm.reset();
-      this.attatchmentFiles = [];
+      this.attatchmentFiles = this.files= [];
       this.toastr.show(res.message, '', {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
@@ -116,7 +117,9 @@ export class ContactUsComponent implements OnInit {
 
 
   documentFileChange(event: any) {
+    this.spinner = true;
     if(this.attatchmentFiles.length >= 5){
+      this.spinner = false;
       this.toastr.show('Maximum upload of 5 files.', '', {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
@@ -158,10 +161,11 @@ export class ContactUsComponent implements OnInit {
           };
           this.attatchmentFiles.push(attatchData);
         };
-        
+        this.files.push(this.fileObj);
+        this.spinner = false;
       } else {
         this.imageFileError = true;
-
+        this.spinner = false;
         var attatchData = {
           image: this.image ? this.image : this.defaultImage,
           errorMsg: this.imageFileError ? 'Error attaching, try again' : '',
