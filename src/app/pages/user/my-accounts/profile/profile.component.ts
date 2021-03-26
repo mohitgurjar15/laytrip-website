@@ -264,6 +264,11 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls['country_code'].disable();
       this.profileForm.controls['country_id'].disable();
       this.profileForm.controls['state_id'].disable();
+      let phoneFormat=getPhoneFormat(res.countryCode || '+1');
+      this.profileForm.controls.phone_no.setValidators([Validators.minLength(phoneFormat.length)]);
+      this.profileForm.controls.phone_no.updateValueAndValidity();
+      this.phoneNumberMask.format = phoneFormat.format;
+      this.phoneNumberMask.length = phoneFormat.length;
 
     }, (error: HttpErrorResponse) => {
       this.loadingValue.emit(false);
