@@ -177,6 +177,13 @@ export class TravellerFormComponent implements OnInit {
       passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
       passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : '',
     });
+
+    let phoneFormat=getPhoneFormat(this.travelerInfo.countryCode || '+1');
+    this.travellerForm.controls.phone_no.setValidators([Validators.minLength(phoneFormat.length)]);
+    this.travellerForm.controls.phone_no.updateValueAndValidity();
+    this.phoneNumberMask.format = phoneFormat.format;
+    this.phoneNumberMask.length = phoneFormat.length;
+
     this.travellerForm.controls['country_id'].disable();
     this.travellerForm.controls['country_code'].disable();
     this.travellerForm.controls['gender'].disable();
