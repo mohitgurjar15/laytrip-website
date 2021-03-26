@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie';
 import { redirectToLogin } from '../../../../_helpers/jwt.helper';
 import { FlightService } from '../../../../services/flight.service';
 import { CheckOutService } from '../../../../services/checkout.service';
+import { getPhoneFormat } from 'src/app/_helpers/phone-masking.helper';
 
 @Component({
   selector: 'app-profile',
@@ -66,6 +67,11 @@ export class ProfileComponent implements OnInit {
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
   submitted : boolean = false;
+  phoneNumberMask = {
+    format: '',
+    length: 0
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -404,5 +410,11 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-
+  validateCountryWithPhoneNumber(event: any): void {
+    let selectedCountry = getPhoneFormat(this.profileForm.controls['country_code'].value);
+    this.profileForm.controls.phone_no.setValidators([Validators.minLength(selectedCountry.length)]);
+    this.profileForm.controls.phone_no.updateValueAndValidity();
+    this.phoneNumberMask.format = selectedCountry.format;
+    this.phoneNumberMask.length = selectedCountry.length;
+  }
 }

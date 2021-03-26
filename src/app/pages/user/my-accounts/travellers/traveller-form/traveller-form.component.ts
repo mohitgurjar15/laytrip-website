@@ -14,7 +14,7 @@ import { CheckOutService } from '../../../../../services/checkout.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GenericService } from '../../../../../services/generic.service';
 declare var $: any;
-import { PHONE_NUMBER_MASK } from '../../../../../_helpers/phone-masking.helper';
+import { getPhoneFormat, PHONE_NUMBER_MASK } from '../../../../../_helpers/phone-masking.helper';
 
 @Component({
   selector: 'app-traveller-form',
@@ -396,11 +396,10 @@ export class TravellerFormComponent implements OnInit {
   }
 
   validateCountryWithPhoneNumber(event: any): void {
-    let selectedCountry = this.travellerForm.controls['country_code'].value;
-    console.log(PHONE_NUMBER_MASK[selectedCountry].format);
-    this.travellerForm.controls.phone_no.setValidators([Validators.minLength(PHONE_NUMBER_MASK[selectedCountry].length)]);
+    let selectedCountry = getPhoneFormat(this.travellerForm.controls['country_code'].value);
+    this.travellerForm.controls.phone_no.setValidators([Validators.minLength(selectedCountry.length)]);
     this.travellerForm.controls.phone_no.updateValueAndValidity();
-    this.phoneNumberMask.format = PHONE_NUMBER_MASK[selectedCountry].format;
-    this.phoneNumberMask.length = PHONE_NUMBER_MASK[selectedCountry].length;
+    this.phoneNumberMask.format = selectedCountry.format;
+    this.phoneNumberMask.length = selectedCountry.length;
   }
 }

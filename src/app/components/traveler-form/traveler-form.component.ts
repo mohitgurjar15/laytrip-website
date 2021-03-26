@@ -13,7 +13,7 @@ import * as moment from 'moment';
 import { TravelerService } from '../../services/traveler.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
-import { PHONE_NUMBER_MASK } from 'src/app/_helpers/phone-masking.helper';
+import { getPhoneFormat } from 'src/app/_helpers/phone-masking.helper';
 
 @Component({
   selector: 'app-traveler-form',
@@ -558,10 +558,11 @@ export class TravelerFormComponent implements OnInit {
 
   setPhoneNumberFormat(phonecode,cartNumber,traveler_number){
     if(this.travelers[`type${cartNumber}`].adults[traveler_number].type=='adult'){
-      this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.phone_no.setValidators([Validators.minLength(PHONE_NUMBER_MASK[phonecode].length)]);
+      let phoneFormat = getPhoneFormat(phonecode);
+      this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.phone_no.setValidators([Validators.minLength(phoneFormat.length)]);
       this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.phone_no.updateValueAndValidity();
-      this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no_format = PHONE_NUMBER_MASK[phonecode].format;
-      this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no_length = PHONE_NUMBER_MASK[phonecode].length;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no_format = phoneFormat.format;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no_length = phoneFormat.length;
     }
   }
 
