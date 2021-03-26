@@ -286,6 +286,7 @@ export class ProfileComponent implements OnInit {
 
 
   onSubmit() {
+    console.log(this.profileForm)
     this.submitted = true;
     const controls = this.profileForm.controls;
     this.loadingValue.emit(true);

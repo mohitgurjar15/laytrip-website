@@ -232,6 +232,7 @@ export class TravellerFormComponent implements OnInit {
   onSubmit() {
     this.loadingValue.emit(true);
     this.submitted = true;
+    console.log(this.travellerForm)
     const controls = this.travellerForm.controls;
     if (this.travellerId) {
       this.validateDob(moment(this.travellerForm.controls.dob.value).format('MM-DD-YYYY'));
@@ -241,6 +242,11 @@ export class TravellerFormComponent implements OnInit {
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()
       );
+      let selectedCountry = getPhoneFormat(this.travellerForm.controls['country_code'].value);
+      this.travellerForm.controls.phone_no.setValidators([Validators.minLength(selectedCountry.length)]);
+      this.travellerForm.controls.phone_no.updateValueAndValidity();
+      this.phoneNumberMask.format = selectedCountry.format;
+      this.phoneNumberMask.length = selectedCountry.length;
       this.loadingValue.emit(false);
       return;
     } else {
