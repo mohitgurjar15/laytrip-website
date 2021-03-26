@@ -173,6 +173,7 @@ export class ProfileComponent implements OnInit {
     removedUsObj.unshift(usCountryObj);
     this.countries = removedUsObj;
   }
+
   selectGender(event, type) {
 
     if (this.isFormControlEnable) {
@@ -373,8 +374,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  
-
   searchAirportDeparture(searchItem) {
     this.loadingDeparture =   true;
     this.closeAirportSuggestion  =  false;
@@ -396,10 +395,8 @@ export class ProfileComponent implements OnInit {
           }]
         };
       });
-      console.log(this.data)
     },
       error => {
-
         this.closeAirportSuggestion  =  true;
         this.loadingDeparture = false;
       }

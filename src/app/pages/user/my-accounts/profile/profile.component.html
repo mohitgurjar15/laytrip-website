@@ -90,7 +90,7 @@
                 <div class="text_field airport_dropdown">
                     <input
                         [readonly]="(!isFormControlEnable)"
-                        type="text" placeholder=" {{hmPlaceHolder}}" (keypress)="searchAirportDeparture($event)" formControlName="home_airport"
+                        type="text" placeholder=" {{hmPlaceHolder}}" (keyup)="searchAirportDeparture($event)" formControlName="home_airport"
                         tabindex="3">
                      <!-- <ng-select [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="code"
                         [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true"

@@ -370,7 +370,6 @@ var ProfileComponent = /** @class */ (function () {
                         }]
                 };
             });
-            console.log(_this.data);
         }, function (error) {
             _this.closeAirportSuggestion = true;
             _this.loadingDeparture = false;
