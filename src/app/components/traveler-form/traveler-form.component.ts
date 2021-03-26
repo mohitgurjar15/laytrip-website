@@ -267,8 +267,8 @@ export class TravelerFormComponent implements OnInit {
 
   patchValues(x) {
     return this.formBuilder.group({
-      first_name: [x.first_name, [Validators.required]],
-      last_name: [x.last_name, [Validators.required]],
+      first_name: [x.first_name, [Validators.required,Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+      last_name: [x.last_name, [Validators.required,Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
       email: (x.type === 'adult' || x.type === '') ? [x.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]] : [x.email],
       phone_no: (x.type === 'adult' || x.type === '') ? [x.phone_no, [Validators.required, Validators.minLength(10)]] : [x.phone_no],
       phone_no_format: (x.type === 'adult' || x.type === '') ? [x.phone_no_format, [Validators.required]] : [x.phone_no_format],

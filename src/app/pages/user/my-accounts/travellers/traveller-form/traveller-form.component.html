@@ -12,6 +12,7 @@
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                         Enter first name.</small>
                     <small *ngIf="travellerForm.controls.firstName.errors.pattern" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                         {{'first_name_string_validation' | translate}}</small>
                 </div>
             </div>
@@ -25,6 +26,7 @@
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                         Enter last name.</small>
                     <small *ngIf="travellerForm.controls.lastName.errors.pattern" class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                         {{'last_name_string_validation' | translate}}</small>
                 </div>
             </div>
@@ -95,7 +97,8 @@
                         Enter phone number.</small>
                     <small
                         *ngIf="!travellerForm.hasError('phoneAndPhoneCodeError') && (travellerForm.controls.phone_no.errors.minlength)"
-                        class="error_field">Minimum {{phoneNumberMask.length}} characters.</small>
+                        class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Minimum {{phoneNumberMask.length}} characters.</small>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult" [ngClass]="{'mandetory_wrps':submitted}">
@@ -113,6 +116,7 @@
                         address.</small>
                     <small *ngIf="travellerForm.controls.email.errors && travellerForm.controls.email.errors.pattern"
                         class="error_field">
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                         {{'email_invalid_validation' | translate}}</small>
                 </div>
             </div>
@@ -162,8 +166,8 @@
                 </ng-select>
                 <div *ngIf="submitted && travellerForm.controls.country_id.errors" class="error">
                     <small *ngIf="travellerForm.controls.country_id.errors.required" class="error_field">
-                        select
-                        country.</small>
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                        Select country.</small>
                 </div>
 
             </div>

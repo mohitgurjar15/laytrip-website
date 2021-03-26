@@ -80,7 +80,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.flightReturnMinDate = this.departureDate;
         this.countryCode = this.commonFunction.getUserCountry();
         this.rangeDates = [this.departureDate, this.returnDate];
-        console.log(this.departureDate);
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;

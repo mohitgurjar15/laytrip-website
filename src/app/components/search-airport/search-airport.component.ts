@@ -40,7 +40,6 @@ export class SearchAirportComponent implements OnInit {
   ngOnInit() {
 
     this.data[0] = this.airport ? this.airport : [];
-    console.log(this.airport,"this.airport")
     if(Object.keys(this.airport).length==0){
       this.data=[];
     }

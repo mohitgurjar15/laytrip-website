@@ -90,8 +90,8 @@ export class TravellerFormComponent implements OnInit {
     }
 
     this.travellerForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+      firstName: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
       gender: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       phone_no: ['', [Validators.required, Validators.minLength(10)]],
