@@ -271,10 +271,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       // this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
         this.filteredLabel = 'Departure Earliest to Latest';
-        this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
+        this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
       } else if (order === 'DESC') {
         this.filteredLabel = 'Departure Latest to Earliest';
-        this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
+        this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
       }
     }
     else {
@@ -315,8 +315,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     }
     else {
       return data.sort(function (a, b) {
-        let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY hh:mm A').diff(moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
-        let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY hh:mm A').diff(moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
+        let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY h:mm A').diff(moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
+        let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY h:mm A').diff(moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
         if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }
@@ -332,9 +332,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       return data;
     }
     else {
+      //console.log("data",key,way,data)
       return data.sort(function (a, b) {
-        let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY hh:mm A').format("X");
-        let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY hh:mm A').format("X");
+        let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY h:mm A').format("X");
+        let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY h:mm A').format("X");
         if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }
@@ -352,8 +353,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     else {
       return data.sort(function (a, b) {
 
-        let x = moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A').format("X");
-        let y = moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A').format("X");
+        let x = moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY h:mm A').format("X");
+        let y = moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY h:mm A').format("X");
         if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }
