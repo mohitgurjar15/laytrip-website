@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { GenericService } from '../../services/generic.service';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
+import { fileSizeValidator} from '../../_helpers/custom.validators';
+
 declare var $: any;
 
 @Component({
@@ -14,25 +16,36 @@ declare var $: any;
 })
 export class ContactUsComponent implements OnInit {
 
+  @ViewChild('fileInput', { static: false } as any) fileInput;
   s3BucketUrl = environment.s3BucketUrl;
   contactUsForm: FormGroup;
   loading = false;
-  countries_code: any = [];
   location;
   messageLenght = 0;
   submitted = false;
+  fileUploadErrorMessage = '';
+  fileObj;
+  defaultImage = this.s3BucketUrl +'assets/images/profile_im.svg';
+  image :any= '';
+  fileName;
+  pdfIcon = this.s3BucketUrl + 'assets/images/pdf.jpeg';
+  public imageFileError = false;
+  attatchmentFiles : any = [];
+  files : any = [];
+  spinner : boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private genericService: GenericService,
     public commonFunction: CommonFunction,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private cd: ChangeDetectorRef
+
   ) { }
 
   ngOnInit() {
     window.scroll(0, 0);
-    this.getCountry();
 
     let location: any = this.cookieService.get('__loc');
     try {
@@ -41,34 +54,17 @@ export class ContactUsComponent implements OnInit {
 
     this.contactUsForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      country_code: [''],
-      phone_no: [''],
+      file: [''],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       message: ['', [Validators.required]],
     });
   }
 
-  getCountry() {
-    this.genericService.getCountry().subscribe((data: any) => {
-      this.countries_code = data.map(country => {
-        return {
-          id: country.id,
-          name: country.phonecode + ' (' + country.iso2 + ')',
-          code: country.phonecode,
-          country_name: country.name + ' ' + country.phonecode,
-          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-        };
-      });
-      if (this.location) {
-        const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
-        this.contactUsForm.controls.country_code.setValue(countryCode.country_name);
-      }
-    });
-  }
 
-  onSubmit(formValue) {
+  onSubmit() {
     this.loading = true;
     this.submitted = true;
+
     if (this.contactUsForm.invalid) {
       this.submitted = true;
       Object.keys(this.contactUsForm.controls).forEach(key => {
@@ -77,14 +73,18 @@ export class ContactUsComponent implements OnInit {
       this.loading = false;
       return;
     }
-    if (formValue.country_code) {
-      formValue.country_code = formValue.country_code.id;
-    }
-    this.genericService.createEnquiry(formValue).subscribe((res: any) => {
+   
+    let formdata = new FormData();
+    formdata.append("name",this.contactUsForm.value.name);
+    formdata.append("email",this.contactUsForm.value.email);
+    formdata.append("message",this.contactUsForm.value.message);
+    formdata.append("file",this.files ? this.files : []);
+    console.log(this.files)
+    this.genericService.createEnquiry(formdata).subscribe((res: any) => {
       $('#contact_modal').modal('hide');
-      this.loading = false;
-      this.submitted = false;
+      this.loading = this.submitted = false;
       this.contactUsForm.reset();
+      this.attatchmentFiles = this.files= [];
       this.toastr.show(res.message, '', {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
@@ -112,5 +112,73 @@ export class ContactUsComponent implements OnInit {
       this.contactUsForm.get(key).markAsUntouched();
     });
     this.contactUsForm.reset();
+    this.attatchmentFiles = [];
+  }
+
+
+  documentFileChange(event: any) {
+    this.spinner = true;
+    if(this.attatchmentFiles.length >= 5){
+      this.spinner = false;
+      this.toastr.show('Maximum upload of 5 files.', '', {
+        toastClass: 'custom_toastr',
+        titleClass: 'custom_toastr_title',
+        messageClass: 'custom_toastr_message',
+      });
+      return;
+    }
+    if (event.target.files && event.target.files[0]) {
+      this.fileUploadErrorMessage = '';
+      this.imageFileError = false;      
+      const fileList: FileList = event.target.files;
+      var fileSize  = Math.floor(fileList[0].size / 1000);
+      this.image = '';
+      if (fileList[0] && (
+        fileList[0].type == 'image/jpg' ||
+        fileList[0].type == 'image/png' ||
+        fileList[0].type == 'application/pdf')) {          
+
+        if (fileSize > 10000) {
+          this.imageFileError = true;
+          this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
+        }
+        
+        let reader = new FileReader();
+
+        reader.readAsDataURL(event.target.files[0]);
+        this.fileObj = event.target.files[0];
+        
+        reader.onload = (_event) => {
+          this.defaultImage = '';
+          this.image = fileList[0].type == 'application/pdf' ? this.pdfIcon : reader.result;
+          this.fileName = fileList[0].name;
+          this.cd.markForCheck();
+          var attatchData = {
+            image: this.image ? this.image : this.defaultImage,
+            errorMsg: this.imageFileError ? this.fileUploadErrorMessage : '',
+            fileName : this.fileName,
+            is_error : this.imageFileError
+          };
+          this.attatchmentFiles.push(attatchData);
+        };
+        this.files.push(this.fileObj);
+        this.spinner = false;
+      } else {
+        this.imageFileError = true;
+        this.spinner = false;
+        var attatchData = {
+          image: this.image ? this.image : this.defaultImage,
+          errorMsg: this.imageFileError ? 'Error attaching, try again' : '',
+          fileName : this.fileName,
+          is_error : this.imageFileError
+        };
+        this.attatchmentFiles.push(attatchData);
+      }     
+    }
+  }
+
+
+  removeAttatchedFile(i) {
+    this.attatchmentFiles.splice(i,1);
   }
 }

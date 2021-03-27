@@ -15,20 +15,30 @@ var SearchAirportComponent = /** @class */ (function () {
         this.cd = cd;
         this.cookieService = cookieService;
         this.changeValue = new core_1.EventEmitter();
+        this.searchItem = new core_1.EventEmitter();
         this.selectedAirport = {};
         this.keyword = 'name';
         this.data = [];
         this.loading = false;
     }
     SearchAirportComponent.prototype.ngOnInit = function () {
-        this.setDefaultAirport();
-        //this.data.push(this.airport)
         this.data[0] = this.airport ? this.airport : [];
+        if (Object.keys(this.airport).length == 0) {
+            this.data = [];
+        }
     };
     SearchAirportComponent.prototype.searchAirport = function (searchItem) {
         var _this = this;
         this.loading = true;
-        this.flightService.searchAirport(searchItem).subscribe(function (response) {
+        var isFromLocation = this.id == 'fromSearch' ? 'yes' : 'no';
+        var alternateLocation = '';
+        if (this.id == 'fromSearch') {
+            alternateLocation = localStorage.getItem('__to') || '';
+        }
+        else {
+            alternateLocation = localStorage.getItem('__from') || '';
+        }
+        this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe(function (response) {
             _this.data = response.map(function (res) {
                 _this.loading = false;
                 return {
@@ -38,7 +48,7 @@ var SearchAirportComponent = /** @class */ (function () {
                     city: res.city,
                     country: res.country,
                     display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
-                    parentId: res.parentId
+                    parentId: 0
                 };
             });
         }, function (error) {
@@ -46,23 +56,34 @@ var SearchAirportComponent = /** @class */ (function () {
         });
     };
     SearchAirportComponent.prototype.onChangeSearch = function (event) {
-        if (event.term.length > 2) {
-            this.searchAirport(event.term);
-        }
+        this.searchAirport(event.term);
+        console.log("event.term", event.term);
+        this.searchItem.emit({ key: event.term, type: this.id });
     };
     SearchAirportComponent.prototype.selectEvent = function (event, index) {
         if (!event) {
             this.placeHolder = this.placeHolder;
         }
-        //this.selectedAirport = event;
+        if (typeof event == 'undefined') {
+            if (index === 'fromSearch') {
+                localStorage.removeItem('__from');
+            }
+            else if (index === 'toSearch') {
+                localStorage.removeItem('__to');
+            }
+        }
+        this.selectedAirport = event;
         if (event && index && index === 'fromSearch') {
             this.changeValue.emit({ key: 'fromSearch', value: event });
+            localStorage.setItem('__from', this.selectedAirport.code);
         }
         else if (event && index && index === 'toSearch') {
+            localStorage.setItem('__to', this.selectedAirport.code);
             this.changeValue.emit({ key: 'toSearch', value: event });
         }
     };
     SearchAirportComponent.prototype.onRemove = function (event) {
+        console.log("innnnn");
         this.selectedAirport = {};
     };
     SearchAirportComponent.prototype.setDefaultAirport = function () {
@@ -84,6 +105,7 @@ var SearchAirportComponent = /** @class */ (function () {
         if (changes['airport']) {
             this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];
             this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+            //this.data=[];
         }
     };
     __decorate([
@@ -110,6 +132,9 @@ var SearchAirportComponent = /** @class */ (function () {
     __decorate([
         core_1.Output()
     ], SearchAirportComponent.prototype, "changeValue");
+    __decorate([
+        core_1.Output()
+    ], SearchAirportComponent.prototype, "searchItem");
     __decorate([
         core_1.Input()
     ], SearchAirportComponent.prototype, "defaultCity");

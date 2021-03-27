@@ -5,20 +5,16 @@
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-.block_contact_us_main
-  .block_contact_inner
-  .block_contact_form
-  .block_form
-  .form_row
-  .form_field.half
-  .phone_no
-  .code {
+.block_contact_us_main .block_contact_inner .block_contact_form .block_form .form_row .form_field.half .phone_no .code {
   width: 100% !important;
 }
+
 .modal-dialog {
   max-width: 514px;
   width: 96%;
+
   .modal-content {
+
     // @include tab-view {
     //   position: fixed;
     //   left: 0;
@@ -28,48 +24,135 @@
     // }
     .contact_modal_wrp {
       padding: 32px 20px;
+
       .modal_title {
         font-size: 32px !important;
         color: $active-tab-text !important;
         text-transform: capitalize !important;
         font-weight: 500 !important;
         margin-bottom: 15px;
+
         .close {
           position: absolute;
           right: 20px;
           top: 16px;
         }
       }
+
       .modal_content {
         form {
           .form_row {
             margin-bottom: 20px;
+
             input,
             textarea {
               border: 1px solid $box-border-color;
               border-radius: 10px;
               padding: 14px 17px;
               width: 100%;
+
               &:focus {
                 outline: none;
               }
+
               &.error {
                 border-color: $error-color;
+
                 &::placeholder {
                   color: $mid_gray_bg;
                   -webkit-text-fill-color: $mid_gray_bg;
-                  
+
                 }
               }
             }
+
+            .custom_upload {
+              position: relative;
+
+              .upload_btn {
+                color: $mid_gray_bg;
+                font-size: 12px;
+                // position: absolute;
+                // top: -32px;
+
+                label {
+                  cursor: pointer;
+
+                  img{
+                    max-width: 11px;
+                  }
+                }
+              }
+
+              .upload_list_wrapper {
+                margin-top: 10px;
+                .listing_lines_wrps{
+                  margin-bottom: 7px;
+                  &:last-child {
+                    margin-bottom: 0;
+                  }
+
+                  .uploaded_list {
+                    border: 1px solid $box-border-color;
+                    border-radius: 5px;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    height: 30px;
+
+                    img {
+                      border-top-left-radius: 5px;
+                      border-bottom-left-radius: 5px;
+                      height: 28px;
+                      width: 30px;
+                    }
+
+                    h5 {
+                      color: $mid_gray_bg;
+                      font-size: 12px;
+                      margin: 0 0 0 10px;
+                      font-weight: 400;
+                    }
+
+                    button {
+                      cursor: pointer;
+                      outline: none;
+                      border: none;
+                      background-color: transparent;
+                      padding: 0;
+                      width: auto;
+                      position: absolute;
+                      right: 5px;
+                      height: auto;
+
+                      &:focus {
+                        outline: none;
+                        border: none;
+                      }
+
+                      img {
+                        width: 19px;
+                        height: 19px;
+                        padding: 5px;
+                      }
+                    }
+
+                  }
+                }
+              }
+            }
+
             .text_area_wrps {
               position: relative;
+
               .word_counter {
                 display: flex;
-                color: $box-border-color;
                 font-size: 12px;
                 justify-content: flex-end;
                 color: $mid_gray_bg;
+                right: 0;
+                position: absolute;
+                transform: translate(0px, 3px);
               }
 
               .block_btm_msg {
@@ -121,12 +204,14 @@
               cursor: default;
             }
           }
+
           .footer_logo {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
             margin-top: 30px;
+
             img {
               max-width: 62px;
               height: 23px;

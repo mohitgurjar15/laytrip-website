@@ -12,13 +12,13 @@ export function validateImageFile(name: String) {
   }
 }
 
-export function fileSizeValidator(file) {
-
+export function fileSizeValidator(file,maxSizeValidation=5000) {
+  
+  console.log(size,maxSizeValidation);
   var size = Math.floor(file.size / 1000);
-  if (size <= 2000) {
+  if (size <= maxSizeValidation) {
     return true;
-  }
-  else {
+  }else {
     return false;
   }
 }

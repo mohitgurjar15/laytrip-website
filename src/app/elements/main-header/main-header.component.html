@@ -68,9 +68,11 @@
 
                             <li class="nav-item responsive_li" *ngIf="isLoggedIn && userDetails.roleId != 7">
                                 <div class="dropdown account_ddown account_prof">
-                                    <a class="nav-link dropdown-toggle hover-link" data-toggle="dropdown"
+                                    <a class="nav-link dropdown-toggle hover-link sdsd" data-toggle="dropdown"
                                         aria-expanded="false">
-                                        <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
+                                        <img src="{{userDetails.profilePic || defaultImage}}"
+                                          onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';"
+                                        alt="Profile Image">
                                         <span>{{username}}</span>
                                     </a>
                                     <ul class="dropdown-menu">

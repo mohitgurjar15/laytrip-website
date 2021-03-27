@@ -155,6 +155,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.totalLaycredit();
         this.getCartList();
       }
+
       this.showTotalLayCredit = this.totalLayCredit;
       if (this.userDetails && this.userDetails.requireToupdate) {
         if (!this.isOpenAppleLoginPopup) {
@@ -316,5 +317,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   closeCartMaximum() {
     localStorage.removeItem('$cartOver');
+  }
+
+  imgError() {
+    return  this.userDetails.profilePic = '';
   }
 }

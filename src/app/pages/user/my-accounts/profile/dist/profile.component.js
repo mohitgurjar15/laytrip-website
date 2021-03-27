@@ -27,10 +27,12 @@ var ProfileComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         // submitted = false;
         this.loading = true;
+        this.airportLoading = false;
         this.loadingValue = new core_1.EventEmitter();
         this.minDate = {};
         this.maxDate = {};
         this.data = [];
+        this.airportData = [];
         this.is_gender = true;
         this.gender_type = 'M';
         this.imageFile = '';
@@ -65,8 +67,12 @@ var ProfileComponent = /** @class */ (function () {
             ]
         };
         this.submitted = false;
+        this.type = 'form';
+        this.hmPlaceHolder = 'Select home airport';
+        this.closeAirportSuggestion = true;
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        this.getAirports();
         this.loadingValue.emit(true);
         window.scroll(0, 0);
         var location = this.cookieService.get('__loc');
@@ -75,8 +81,8 @@ var ProfileComponent = /** @class */ (function () {
         }
         catch (e) { }
         this.profileForm = this.formBuilder.group({
-            first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
+            first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+            last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
             dob: ['', [forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
             country_code: ['', [forms_1.Validators.required]],
             phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
@@ -177,7 +183,7 @@ var ProfileComponent = /** @class */ (function () {
         //file size validation max=10
         if (!custom_validators_1.fileSizeValidator(event.target.files[0])) {
             this.imageFileError = true;
-            this.imageErrorMsg = 'Please select file up to 2mb size';
+            this.imageErrorMsg = 'Maximum file size is 5MB.';
             // this.toastr.error(this.imageErrorMsg, 'Profile Error');
             return;
         }
@@ -230,7 +236,7 @@ var ProfileComponent = /** @class */ (function () {
                 phone_no: res.phoneNo,
                 city: res.cityName,
                 address: res.address,
-                home_airport: res.airportInfo.code ? res.airportInfo.code : null,
+                home_airport: res.airportInfo.code ? res.airportInfo.city + ' (' + res.airportInfo.code + ')' : null,
                 country_id: res.country.name ? res.country.name : 'United States',
                 state_id: res.state.name ? res.state.name : null
             });
@@ -286,22 +292,22 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
             formdata.append("email", this.profileForm.value.email);
-            formdata.append("home_airport", this.profileForm.value.home_airport ? this.profileForm.value.home_airport : '');
+            formdata.append("home_airport", this.departureAirport.code ? this.departureAirport.code : '');
             formdata.append("phone_no", this.profileForm.value.phone_no);
             formdata.append("gender", this.gender_type ? this.gender_type : 'M');
             formdata.append("city_name", this.profileForm.value.city);
             formdata.append("address", this.profileForm.value.address);
             if (!Number.isInteger(this.profileForm.value.country_id)) {
-                formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : 233);
-            }
-            else {
                 formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
             }
+            else {
+                formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : 233);
+            }
             if (!Number.isInteger(this.profileForm.value.state_id)) {
-                formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
+                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
             }
             else {
-                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
+                formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
             }
             if (typeof (this.profileForm.value.country_code) != 'object') {
                 formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
@@ -343,28 +349,30 @@ var ProfileComponent = /** @class */ (function () {
             this.arrivalAirport = Object.create(null);
         }
     };
-    ProfileComponent.prototype.changeSearchDeparture = function (event) {
-        if (event.term.length > 2) {
-            this.searchAirportDeparture(event.term);
-        }
-    };
     ProfileComponent.prototype.searchAirportDeparture = function (searchItem) {
         var _this = this;
         this.loadingDeparture = true;
-        this.flightService.searchAirport(searchItem).subscribe(function (response) {
+        this.closeAirportSuggestion = false;
+        this.data = [];
+        this.flightService.searchAirport(searchItem.target.value).subscribe(function (response) {
             _this.data = response.map(function (res) {
                 _this.loadingDeparture = false;
                 return {
-                    id: res.id,
-                    name: res.name,
-                    code: res.code,
-                    city: res.city,
-                    country: res.country,
-                    display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
-                    parentId: res.parentId
+                    key: res.code.charAt(0),
+                    value: [{
+                            id: res.id,
+                            name: res.name,
+                            code: res.code,
+                            city: res.city,
+                            country: res.country,
+                            display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
+                            parentId: res.parentId
+                        }]
                 };
             });
+            console.log(_this.data);
         }, function (error) {
+            _this.closeAirportSuggestion = true;
             _this.loadingDeparture = false;
         });
     };
@@ -374,6 +382,78 @@ var ProfileComponent = /** @class */ (function () {
             // this.departureAirport=event;
             // this.searchedValue.push({ key: 'fromSearch', value: event });
         }
+    };
+    ProfileComponent.prototype.getAirports = function () {
+        var _this = this;
+        var from = localStorage.getItem('__from') || '';
+        var to = localStorage.getItem('__to') || '';
+        if (from == '' && to == '') {
+            this.airportLoading = true;
+            this.flightService.searchAirports(this.type).subscribe(function (result) {
+                _this.airportLoading = false;
+                for (var i = 0; i < result.length; i++) {
+                    for (var j = 0; j < result[i].value.length; j++) {
+                        result[i].value[j].display_name = result[i].value[j].city + "," + result[i].value[j].country + ",(" + result[i].value[j].code + ")," + result[i].value[j].name;
+                    }
+                }
+                _this.airportData = result;
+                console.log(_this.airportData);
+            }, function (error) {
+                _this.airportLoading = false;
+                _this.airportData = [];
+            });
+        }
+        else {
+            var isFromLocation = this.type == 'from' ? 'yes' : 'no';
+            var alternateLocation = '';
+            if (this.type == 'from') {
+                alternateLocation = localStorage.getItem('__to') || '';
+            }
+            else {
+                alternateLocation = localStorage.getItem('__from') || '';
+            }
+            this.airportLoading = true;
+            this.flightService.searchRoute('', isFromLocation, alternateLocation).subscribe(function (response) {
+                _this.airportLoading = false;
+                var opResult = _this.groupByKey(response, 'key');
+                var airportArray = [];
+                for (var _i = 0, _a = Object.entries(opResult); _i < _a.length; _i++) {
+                    var _b = _a[_i], key = _b[0], value = _b[1];
+                    airportArray.push({
+                        key: key,
+                        value: value
+                    });
+                }
+                airportArray = airportArray.sort(function (a, b) { return a.key.localeCompare(b.key); });
+                for (var i = 0; i < airportArray.length; i++) {
+                    for (var j = 0; j < airportArray[i].value.length; j++) {
+                        airportArray[i].value[j].display_name = airportArray[i].value[j].city + "," + airportArray[i].value[j].country + ",(" + airportArray[i].value[j].code + ")," + airportArray[i].value[j].name;
+                    }
+                }
+                _this.airportData = airportArray;
+            }, function (error) {
+                _this.airportData = [];
+                _this.airportLoading = false;
+            });
+        }
+    };
+    ProfileComponent.prototype.groupByKey = function (array, key) {
+        return array
+            .reduce(function (hash, obj) {
+            var _a;
+            if (obj[key] === undefined)
+                return hash;
+            return Object.assign(hash, (_a = {}, _a[obj[key]] = (hash[obj[key]] || []).concat(obj), _a));
+        }, {});
+    };
+    ProfileComponent.prototype.closeAirportDropDown = function (type) {
+        this.closeAirportSuggestion = true;
+    };
+    ProfileComponent.prototype.selectAirport = function (event) {
+        this.profileForm.controls.home_airport.setValue(event.city + ' (' + event.code + ')');
+        this.closeAirportSuggestion = true;
+        this.hmPlaceHolder = '';
+        this.departureAirport.code = event.code;
     };
     __decorate([
         core_1.Output()

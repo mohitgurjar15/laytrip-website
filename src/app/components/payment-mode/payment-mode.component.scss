@@ -196,5 +196,18 @@ h3 {
         }
       }
     }
+    .pay_alerts{
+      color: $active-tab-text;
+      font-size: 11px;
+      text-align: center;
+      width: 100%;
+      display: flex;
+      margin-top: 9px;
+      padding: 0 35px;
+
+      @include tab-view{
+        padding: 0;
+      }
+    }
   }
 }
