@@ -85,6 +85,8 @@ export class TravelerFormComponent implements OnInit {
   isAdultTravller: boolean = true;
   isChildTravller: boolean = true;
   isInfantTravller: boolean = true;
+  accountHolderEmail:string='';
+
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -96,7 +98,7 @@ export class TravelerFormComponent implements OnInit {
   ) {
     this.travlerLabels = travlerLabels;
     this.userInfo = getLoginUserInfo();
-
+    this.accountHolderEmail = this.userInfo.email || '';
   }
 
   ngOnInit() {
@@ -144,7 +146,7 @@ export class TravelerFormComponent implements OnInit {
     for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
       this.travelers[`type${this.cartNumber}`].cartId = this.cartId
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
-
+      this.travelers[`type${this.cartNumber}`].adults[i].email=this.accountHolderEmail || '';
       if (!this.cartItem.module_info.is_passport_required) {
         delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
         delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
@@ -207,7 +209,7 @@ export class TravelerFormComponent implements OnInit {
     })
 
     this.checkOutService.emitTravelersformData(this.travelerForm);
-    this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
+    //this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
   }
 
   loadJquery() {
@@ -296,7 +298,7 @@ export class TravelerFormComponent implements OnInit {
    * 
    * @param type ['adult','child','infant']
    */
-  selectTravelerType(type, traveler_number) {
+  /* selectTravelerType(type, traveler_number) {
     this.travelers[`type${this.cartNumber}`].adults[traveler_number] = {};
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].type = type;
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].dobMinDate = travelersFileds.flight[type].dobMinDate;
@@ -306,7 +308,7 @@ export class TravelerFormComponent implements OnInit {
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_expiry = travelersFileds.flight[type].passport_expiry;
     // this.travelers[`type${this.cartNumber}`].adults[traveler_number].is_passport_required = travelersFileds.flight[type].is_passport_required;
     this.patch();
-  }
+  } */
 
   selectTravelerNumber(event,cartNumber ,traveler_number) {
     this.traveler_number = traveler_number;
@@ -381,7 +383,6 @@ export class TravelerFormComponent implements OnInit {
   saveTraveler(cartNumber, traveler_number) {
 
     this.travelers[`type${cartNumber}`].adults[traveler_number].is_submitted = true;
-    console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number],"save")
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
@@ -466,28 +467,6 @@ export class TravelerFormComponent implements OnInit {
     this.checkOutService.emitTravelersformData(this.travelerForm);
   }
 
-  editTravelerNotinUse(cartNumber, traveler_number) {
-    this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
-    if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
-      this.cartService.setLoaderStatus(true);
-      let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
-      data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
-      data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
-      data.passport_expiry = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
-      let userId = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.userId;
-      if (userId) {
-        //Edit
-        this.travelerService.updateAdult(data, userId).subscribe((traveler: any) => {
-          this.cartService.setLoaderStatus(false);
-          let index = this.myTravelers.findIndex(x => x.userId == traveler.userId)
-          this.myTravelers[index] = traveler;
-
-        })
-      }
-      this.checkOutService.emitTravelersformData(this.travelerForm);
-    }
-  }
-
   editTraveler(cartNumber, traveler_number) {
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].enable()
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAsTouched();
@@ -498,7 +477,7 @@ export class TravelerFormComponent implements OnInit {
     if (traveler && Object.keys(traveler).length > 0) {
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].email = traveler.email;
+      this.travelers[`type${this.cartNumber}`].adults[traveler_number].email = this.accountHolderEmail || traveler.email;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].userId = traveler.userId;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].gender = traveler.gender;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].phone_no = traveler.phoneNo;
