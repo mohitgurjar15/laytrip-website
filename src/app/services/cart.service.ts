@@ -29,6 +29,9 @@ export class CartService {
   private loader = new BehaviorSubject(false)
   getLoaderStatus = this.loader.asObservable();
 
+  private paymentOptions = new BehaviorSubject({})
+  getPaymentOptions = this.paymentOptions.asObservable();
+
   private cartTravelers = new BehaviorSubject({
     type0 : {
       adults : []
@@ -156,5 +159,10 @@ export class CartService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  setPaymentOptions(paymentOptions){
+    localStorage.setItem('__pm_inf',btoa(JSON.stringify(paymentOptions)))
+    this.paymentOptions.next(paymentOptions)
   }
 }

@@ -104,11 +104,12 @@
                             <li class="nav-item responsive_li cart_drop" *ngIf="cartItemsCount">
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
                                 <ul class="dropdown-menu">
-                                    <!-- <li><a href="javascript:void(0);" class="gryd_txt"
-                                            *ngIf="weeklyInstallmentAmount>0">Weekly</a></li>
-                                    <li><a href="javascript:void(0);" class="bld_txt"
-                                            *ngIf="weeklyInstallmentAmount>0">${{weeklyInstallmentAmount | number :
-                                            '1.2-2'}}</a></li> -->
+                                    <ng-container *ngIf="paymentType=='instalment'">
+
+                                        <li><a href="javascript:void(0);" class="gryd_txt">{{installmentOptions['en'][instalmentType]}}</a></li>
+                                        <li><a href="javascript:void(0);" class="bld_txt">${{installmentAmount | number :
+                                                    '1.2-2'}}</a></li>
+                                    </ng-container>
                                     <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
                                     <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number :
                                             '1.2-2'}}</a></li>
@@ -161,11 +162,12 @@
                     <span class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     </span>
                     <ul class="dropdown-menu">
-                        <!-- <li><a href="javascript:void(0);" class="gryd_txt" *ngIf="weeklyInstallmentAmount>0">Weekly</a>
-                        </li>
-                        <li><a href="javascript:void(0);" class="bld_txt"
-                                *ngIf="weeklyInstallmentAmount>0">${{weeklyInstallmentAmount | number : '1.2-2'}}</a>
-                        </li> -->
+                        <ng-container *ngIf="paymentType=='instalment'">
+                            <li><a href="javascript:void(0);" class="gryd_txt">{{installmentOptions['en'][instalmentType]}}</a>
+                            </li>
+                            <li><a href="javascript:void(0);" class="bld_txt">${{installmentAmount | number : '1.2-2'}}</a>
+                            </li>
+                        </ng-container>
                         <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
                         <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number : '1.2-2'}}</a></li>
                         <li><a data-toggle="modal" data-target="#empty_modal" class="gryd_txt">Empty Cart</a></li>

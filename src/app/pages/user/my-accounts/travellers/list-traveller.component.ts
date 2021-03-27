@@ -146,7 +146,8 @@ export class ListTravellerComponent implements OnInit {
             name: country.phonecode + ' (' + country.iso2 + ')',
             countryCode: country.phonecode,
             country_name: country.name + ' ' + country.phonecode,
-            flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
+            flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg',
+            iso2: country.iso2
           }
       });
       const filteredArr = this.countries_code.reduce((acc, current) => {

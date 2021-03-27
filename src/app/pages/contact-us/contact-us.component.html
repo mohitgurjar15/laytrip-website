@@ -13,7 +13,7 @@
                     <form [formGroup]="contactUsForm" novalidate (ngSubmit)="onSubmit(contactUsForm.value)">
                         <div class="form_row">
                             <div class="text_field">
-                                <input type="text" formControlName="name" maxlength="30" tabindex="1"
+                                <input type="text" formControlName="name" maxlength="30" tabindex="11"
                                     placeholder="{{'full_name_placeholder' | translate}}">
                                 <div *ngIf="submitted" class="focus-input100 login-error">
                                     <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.errors.required"
@@ -25,7 +25,7 @@
                         </div>
                         <div class="form_row">
                             <div class="text_field">
-                                <input type="email" formControlName="email" maxlength="50" tabindex="2"
+                                <input type="email" formControlName="email" maxlength="50" tabindex="12"
                                     placeholder="{{'email_placeholder' | translate}}">
                                 <div *ngIf="submitted">
                                     <div *ngIf="contactUsForm.controls.email.errors && contactUsForm.controls.email.errors.required"
@@ -43,7 +43,7 @@
                             <div class="text_field text_area_wrps">
                                 <textarea (keyup)="setMessageLenght($event.target.value)"
                                     (keypress)="setMessageLenght($event.target.value)" formControlName="message"
-                                    maxlength="1000" tabindex="3" rows="5"
+                                    maxlength="1000" tabindex="13" rows="5"
                                     placeholder="{{'messege_placeholder' | translate}}">
                                 </textarea>
                                 <div class="block_btm_msg">
