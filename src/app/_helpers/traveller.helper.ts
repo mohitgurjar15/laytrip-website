@@ -10,6 +10,8 @@ export const travelersFileds = {
             email: '',
             country_code: '+1',
             phone_no: '',
+            phone_no_format: '(000) 000-0000',
+            phone_no_length: '10',
             dob: '',
             dobMinDate: new Date(moment().subtract(100, 'years').format("YYYY-MM-DD")),
             dobMaxDate: new Date(moment().subtract(12, 'years').format("YYYY-MM-DD")),

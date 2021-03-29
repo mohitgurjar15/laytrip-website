@@ -103,7 +103,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
-    console.log(this.departureDate)
   }
     
   ngOnInit(): void {
