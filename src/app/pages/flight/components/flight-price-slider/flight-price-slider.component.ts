@@ -23,13 +23,14 @@ export class FlightPriceSliderComponent implements OnInit {
   child:number;
   infant:number;
 
-  @Input() flexibleLoading:boolean=false;
+  @Input() flexibleLoading:boolean=true;
   @Input() dates=[];
 
   constructor(
     private commonFunction:CommonFunction,
     private route:ActivatedRoute
   ) { 
+
     this.departureDate = this.route.snapshot.queryParams['departure_date'];
     this.departureDate = this.commonFunction.convertDateFormat(this.departureDate,'YYYY-MM-DD')
     this.trip      = this.route.snapshot.queryParams['trip'];
@@ -53,7 +54,9 @@ export class FlightPriceSliderComponent implements OnInit {
   loadJquery() {
     // Start Flight Price By Day slider js
 
-    if(this.dates.length>0){
+    console.log('before',this.flexibleLoading)
+    if(this.dates.length > 0 && !this.flexibleLoading){
+      console.log('after',this.flexibleLoading)
       let count = this.dates.length;
       $('.price_day_slider').slick({
         dots: false,

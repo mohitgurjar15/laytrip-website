@@ -26,7 +26,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   tripType: string = '';
 
-  flexibleLoading: boolean = false;
+  flexibleLoading: boolean = true;
   flexibleNotFound: boolean = false;
   dates: [] = [];
   calenderPrices: [] = []

@@ -14,7 +14,7 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.route = route;
         this.flexibleNotFound = false;
-        this.flexibleLoading = false;
+        this.flexibleLoading = true;
         this.dates = [];
         this.departureDate = this.route.snapshot.queryParams['departure_date'];
         this.departureDate = this.commonFunction.convertDateFormat(this.departureDate, 'YYYY-MM-DD');
@@ -35,7 +35,9 @@ var FlightPriceSliderComponent = /** @class */ (function () {
     };
     FlightPriceSliderComponent.prototype.loadJquery = function () {
         // Start Flight Price By Day slider js
-        if (this.dates.length > 0) {
+        console.log('before', this.flexibleLoading);
+        if (this.dates.length > 0 && !this.flexibleLoading) {
+            console.log('after', this.flexibleLoading);
             var count = this.dates.length;
             $('.price_day_slider').slick({
                 dots: false,
@@ -63,7 +65,7 @@ var FlightPriceSliderComponent = /** @class */ (function () {
                     {
                         breakpoint: 480,
                         settings: {
-                            slidesToShow: count >= 1 ? 1 : count,
+                            slidesToShow: count >= 1 ? 3 : count,
                             slidesToScroll: 1
                         }
                     }
@@ -76,37 +78,80 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         var _this = this;
         if (changes['dates'].currentValue.length) {
             setTimeout(function () { _this.loadJquery(); }, 100);
-            if (this.trip == 'oneway') {
-                this.flipDates(this.dates);
+            /* if(this.trip == 'oneway'){
+              this.flipDates(this.dates)
             }
+            else{
+              if(window.screen.width<=600){
+                let targetIndex=2;
+                this.dates = this.arrayRotate(this.dates,targetIndex);
+                console.log("this.dates",this.dates)
+              }
+            } */
+            this.flipDates(this.dates);
         }
     };
     FlightPriceSliderComponent.prototype.flipDates = function (dates) {
         var _this = this;
         var result = [];
         var sourceIndex = dates.findIndex(function (date) { return moment(date.date, "DD/MM/YYYY").format("YYYY-MM-DD") === _this.route.snapshot.queryParams['departure_date']; });
-        var targetIndex = 4;
-        if (targetIndex > sourceIndex) {
-            targetIndex = 5;
-            for (var i = targetIndex; i < this.dates.length; i++) {
-                result.push(this.dates[i]);
-            }
-            for (var i = 0; i < targetIndex; i++) {
-                result.push(this.dates[i]);
-            }
+        var targetIndex = 3;
+        if (window.screen.width <= 600) {
+            targetIndex = 1;
+            /* targetIndex=dates.length-sourceIndex+1;
+            this.dates = this.rotateArray1(dates,targetIndex) */
         }
-        else {
-            for (var i = targetIndex; i <= sourceIndex; i++) {
-                result.push(this.dates[i]);
-            }
-            for (var i = sourceIndex + 1; i < this.dates.length; i++) {
-                result.push(this.dates[i]);
-            }
-            for (var i = 0; i < targetIndex; i++) {
-                result.push(this.dates[i]);
-            }
+        var startIndex = sourceIndex - targetIndex;
+        for (var i = startIndex; i < dates.length; i++) {
+            result.push(dates[i]);
+        }
+        for (var i = 0; i < startIndex; i++) {
+            result.push(dates[i]);
         }
         this.dates = result;
+        /* else{
+          this.dates = this.arrayRotate(this.dates,targetIndex);
+        } */
+        /* if(targetIndex > sourceIndex){
+    
+          targetIndex=5;
+          for(let i=targetIndex; i < this.dates.length; i++){
+            result.push(this.dates[i])
+          }
+          for(let i=0; i < targetIndex; i++){
+            result.push(this.dates[i])
+          }
+    
+        }
+        else{
+    
+          for(let i=targetIndex; i <= sourceIndex; i++){
+            
+            result.push(this.dates[i])
+          }
+          
+          for(let i=sourceIndex+1; i < this.dates.length; i++){
+            result.push(this.dates[i])
+          }
+          
+          for(let i=0; i < targetIndex; i++){
+            result.push(this.dates[i])
+          }
+    
+          
+        }
+        this.dates = result; */
+    };
+    FlightPriceSliderComponent.prototype.rotateArray1 = function (dates, k) {
+        for (var i = 0; i < k; i++) {
+            dates.unshift(dates.pop());
+        }
+        return dates;
+    };
+    FlightPriceSliderComponent.prototype.arrayRotate = function (arr, count) {
+        count -= arr.length * Math.floor(count / arr.length);
+        arr.push.apply(arr, arr.splice(0, count));
+        return arr;
     };
     FlightPriceSliderComponent.prototype.getPrice = function (item) {
         var price;
