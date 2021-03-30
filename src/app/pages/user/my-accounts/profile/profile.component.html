@@ -4,7 +4,7 @@
             <div class="form_row">
                 <div class="update_profile">
                     <span>
-                        <img class="img-rounded" src="{{image || defaultImage}}" alt="Profile Image">
+                        <img  accept="image/*"class="img-rounded" src="{{image || defaultImage}}" alt="Profile Image">
                     </span>
                     <small class="error_field" *ngIf="imageFileError">{{imageErrorMsg}}</small>
                     <div class="update_profile_btn">
