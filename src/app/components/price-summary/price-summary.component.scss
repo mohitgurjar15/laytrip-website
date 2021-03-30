@@ -23,15 +23,17 @@
     border-radius: 15px;
     border: 1px solid $feedback_text-clr;
 
-    @include tab-view{
+    @include tab-view {
       border-radius: 10px;
     }
 
     .pay_list_wrper {
       padding: 15px;
-      @include tab-view{
+
+      @include tab-view {
         padding: 10px;
       }
+
       &:nth-child(2) {
         border-top: 1px solid $feedback_text-clr;
       }
@@ -99,6 +101,10 @@
               text-align: left;
             }
 
+            .close_text {
+              display: none;
+            }
+
             &[aria-expanded="true"] {
               &:after {
                 content: "";
@@ -122,6 +128,19 @@
             }
 
             &[aria-expanded="false"] {
+              color: $active-tab-text;
+
+              .close_text {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                padding-right: 15px;
+              }
+
+              .open_text {
+                display: none;
+              }
+
               &:after {
                 //position: relative;
                 padding: 5px 9px;
@@ -173,19 +192,20 @@
               color: $text-black;
               font-size: 16px;
 
-              span{
-                @include tab-view{
-                  &:first-child{
+              span {
+                @include tab-view {
+                  &:first-child {
 
                     flex: 90%;
                   }
-                  &:last-child{
+
+                  &:last-child {
                     flex: 1;
                   }
                 }
               }
 
-              &:last-child{
+              &:last-child {
                 @include tab-view {
                   margin-bottom: 0;
                 }
@@ -220,11 +240,12 @@
 .section_description {
   transform: translate(-17%, 0%);
   max-width: 240px;
+
   // &.second_pop{
   //   transform: translate(-17%, 40%);
   // }
   &.total_price_popup {
-    @include tab-view{
+    @include tab-view {
       transform: translate(13%, 0%);
     }
   }

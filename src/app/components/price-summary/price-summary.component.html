@@ -36,8 +36,14 @@
           <div class="card-header" id="headingOne">
             <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc"
               aria-expanded="true" aria-controls="instalment_acc">
+              <span class="open_text">
               {{priceSummary.instalments?.instalment_date?.length-1}} {{installmentType[priceSummary.instalmentType]}} Installments of ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount |
                 number : '1.2-2'}}
+              </span>
+                <span class="close_text">
+                  <span>Total Installments</span>
+                  <span>${{insatllmentAmount | number : '1.2-2' }}</span>
+                </span>
             </button>
           </div>
           <div id="instalment_acc" class="collapse show" aria-labelledby="headingOne" data-parent="#price_collapse">
