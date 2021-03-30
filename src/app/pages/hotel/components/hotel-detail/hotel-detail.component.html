@@ -1,5 +1,9 @@
+<app-laytrip-loader [loading]="addCartLoading">
+</app-laytrip-loader>
+<app-hotel-not-found *ngIf="isNotFound"></app-hotel-not-found>
+
 <!-- Start Search Result section -->
-<section class="search_result flight" *ngIf="loading">
+<section class="search_result flight" *ngIf="loading && !isNotFound">
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
