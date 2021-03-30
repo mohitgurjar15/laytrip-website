@@ -51,14 +51,13 @@
         <!-- Hotel -->
         <ng-container *ngIf="cartItem.type=='hotel'">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true"
-            aria-controls="collapse1">
+            aria-controls="collapse1" class="hotel_anchor">
             <span class="headerin_wrapper">
-              <div class="headin_upper_wrparr">
+              <div class="headin_upper_wrparr hotel_header_wrpper">
                 <span class="header_name">
                   <span class="title_image">
                     <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                   </span>
-                  FabHotel Harsoli Haveli
                   
                   <!-- <span class="flight_routing_imgs" *ngIf="cartItem.module_info?.routes?.length === 1">
                     <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
@@ -73,7 +72,11 @@
                         src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                   </div> -->
                 </span>
-                <span class="header_date">For the room type and rate that you've selected, you are not allowed to change or cancel your reservation.</span>
+                <div class="hotel_names_wrps">
+                  FabHotel Harsoli Haveli
+                  <span class="header_date">For the room type and rate that you've selected, you are not allowed to change or cancel your reservation.</span>
+                </div>
+                
               </div>
               <span class="alert_boxes" *ngIf="!cartItem.is_available">
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Alert image">
