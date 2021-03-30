@@ -120,22 +120,25 @@ export class BookingComponent implements OnInit {
           price.start_price = items.data[i].moduleInfo[0].start_price;
           price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         }
-        else  if(items.data[i].type=='flight'){
-          cart.module_info = items.data[i].moduleInfo.data[0];
+        else  if(items.data[i].type=='hotel'){
+
+          cart.module_info = items.data[i].moduleInfo[0];
           cart.old_module_info = {
-            selling_price: items.data[i].oldModuleInfo.data[0].selling.total
+            selling_price: items.data[i].oldModuleInfo[0].selling.total
           };
 
-          price.selling_price = items.data[i].moduleInfo.data[0].selling.total;
-          price.departure_date = items.data[i].moduleInfo.data[0].departure_date;
+          price.selling_price = items.data[i].moduleInfo[0].selling.total;
+          price.departure_date = items.data[i].moduleInfo[0].departure_date;
           price.start_price = 0;
-          price.location = items.data[i].moduleInfo.data[0].hotel_name;
+          price.location = items.data[i].moduleInfo[0].hotel_name;
         }
 
         this.carts.push(cart);
         this.cartPrices.push(price)
 
       }
+
+      console.log("Data",this.carts)
 
       
       this.cartService.setCartItems(this.carts)

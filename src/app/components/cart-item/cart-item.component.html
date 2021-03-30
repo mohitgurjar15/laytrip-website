@@ -73,8 +73,8 @@
                   </div> -->
                 </span>
                 <div class="hotel_names_wrps">
-                  FabHotel Harsoli Haveli
-                  <span class="header_date">For the room type and rate that you've selected, you are not allowed to change or cancel your reservation.</span>
+                  {{ cartItem.module_info.hotel_name }}
+                  <span class="header_date">{{cartItem.module_info.address.city_name}}, {{cartItem.module_info.address.address_line_one}}, {{cartItem.module_info.address.state_code}}, {{cartItem.module_info.address.state_name}}, {{cartItem.module_info.address.country_name}}</span>
                 </div>
                 
               </div>
@@ -94,8 +94,6 @@
         <ng-container *ngIf="cartItem.type=='hotel'">
           <app-hotel-cart-item  cartNumber={{cartNumber}} [cartItem]="cartItem"></app-hotel-cart-item>
         </ng-container>
-        
-
       </div>
     </div>
   </div>

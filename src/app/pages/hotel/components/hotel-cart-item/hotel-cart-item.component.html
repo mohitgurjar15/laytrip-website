@@ -5,13 +5,13 @@
                 <span>
                     Check In
                 </span>
-                Dec 9, 2021
+                {{commonFunction.convertDateFormat(cartItem.module_info.input_data.check_in,'YYYY-MM-DD') }}
             </div>
             <div class="col_boxs desk_box">
                 <span>
                     Check Out
                 </span>
-                Dec 11, 2021
+                {{commonFunction.convertDateFormat(cartItem.module_info.input_data.check_out,'YYYY-MM-DD') }}
             </div>
             <div class="col_boxs desk_box">
                 1 Night, 2 Rooms
@@ -22,23 +22,26 @@
                         <span>
                             Check In
                         </span>
-                        Dec 9, 2021
+                        {{commonFunction.convertDateFormat(cartItem.module_info.input_data.check_in,'YYYY-MM-DD') }}
                     </div>
                     <div class="col_boxs">
                         <span>
                             Check Out
                         </span>
-                        Dec 11, 2021
+                        {{commonFunction.convertDateFormat(cartItem.module_info.input_data.check_out,'YYYY-MM-DD') }}
                     </div>
                 </div>
                 <div class="col_boxs">
-                    1 Night <br> 2 Rooms
+                    {{cartItem.module_info.input_data.num_nights}} Night <br> {{cartItem.module_info.input_data.num_rooms >1 ? 'Rooms' : 'Room'}}
                 </div>
             </div>
         </div>
-        <div class="hotel_lower_inner">
+        <div class="hotel_lower_inner" *ngIf="cartItem.module_info.amenities.length">
             <span>
-                Breakfast available (pay at property), King Bed, Non Smoking, Fridge, Wifi
+                <ng-container *ngFor="let amenity of cartItem.module_info.amenities ; let laststop = last">
+                    {{amenity}}
+                    <ng-container *ngIf="!laststop">,</ng-container>
+                </ng-container>
             </span>
         </div>
         <div class="cta_btn_wrps">
