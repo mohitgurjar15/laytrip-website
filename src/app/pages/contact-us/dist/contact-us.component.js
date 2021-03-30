@@ -23,13 +23,13 @@ var ContactUsComponent = /** @class */ (function () {
         this.messageLenght = 0;
         this.submitted = false;
         this.fileUploadErrorMessage = '';
+        this.maxUploadError = '';
         this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
         this.image = '';
         this.pdfIcon = this.s3BucketUrl + 'assets/images/pdf.jpeg';
         this.imageFileError = false;
         this.attatchmentFiles = [];
         this.files = [];
-        this.spinner = false;
     }
     ContactUsComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -62,12 +62,12 @@ var ContactUsComponent = /** @class */ (function () {
         formdata.append("email", this.contactUsForm.value.email);
         formdata.append("message", this.contactUsForm.value.message);
         formdata.append("file", this.files ? this.files : []);
-        console.log(this.files);
         this.genericService.createEnquiry(formdata).subscribe(function (res) {
             $('#contact_modal').modal('hide');
             _this.loading = _this.submitted = false;
             _this.contactUsForm.reset();
             _this.attatchmentFiles = _this.files = [];
+            _this.maxUploadError = '';
             _this.toastr.show(res.message, '', {
                 toastClass: 'custom_toastr',
                 titleClass: 'custom_toastr_title',
@@ -95,20 +95,18 @@ var ContactUsComponent = /** @class */ (function () {
         });
         this.contactUsForm.reset();
         this.attatchmentFiles = [];
+        this.maxUploadError = '';
     };
     ContactUsComponent.prototype.documentFileChange = function (event) {
         var _this = this;
-        this.spinner = true;
+        this.maxUploadError = '';
         if (this.attatchmentFiles.length >= 5) {
-            this.spinner = false;
-            this.toastr.show('Maximum upload of 5 files.', '', {
-                toastClass: 'custom_toastr',
-                titleClass: 'custom_toastr_title',
-                messageClass: 'custom_toastr_message'
-            });
+            $("#contact_modal").scrollTop(100);
+            this.maxUploadError = 'Maximum upload of 5 files';
             return;
         }
         if (event.target.files && event.target.files[0]) {
+            var reader_1 = new FileReader();
             this.fileUploadErrorMessage = '';
             this.imageFileError = false;
             var fileList_1 = event.target.files;
@@ -121,7 +119,6 @@ var ContactUsComponent = /** @class */ (function () {
                     this.imageFileError = true;
                     this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
                 }
-                var reader_1 = new FileReader();
                 reader_1.readAsDataURL(event.target.files[0]);
                 this.fileObj = event.target.files[0];
                 reader_1.onload = function (_event) {
@@ -138,11 +135,9 @@ var ContactUsComponent = /** @class */ (function () {
                     _this.attatchmentFiles.push(attatchData);
                 };
                 this.files.push(this.fileObj);
-                this.spinner = false;
             }
             else {
                 this.imageFileError = true;
-                this.spinner = false;
                 var attatchData = {
                     image: this.image ? this.image : this.defaultImage,
                     errorMsg: this.imageFileError ? 'Error attaching, try again' : '',

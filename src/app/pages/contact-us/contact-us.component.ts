@@ -24,6 +24,7 @@ export class ContactUsComponent implements OnInit {
   messageLenght = 0;
   submitted = false;
   fileUploadErrorMessage = '';
+  maxUploadError = '';
   fileObj;
   defaultImage = this.s3BucketUrl +'assets/images/profile_im.svg';
   image :any= '';
@@ -32,7 +33,6 @@ export class ContactUsComponent implements OnInit {
   public imageFileError = false;
   attatchmentFiles : any = [];
   files : any = [];
-  spinner : boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,12 +79,12 @@ export class ContactUsComponent implements OnInit {
     formdata.append("email",this.contactUsForm.value.email);
     formdata.append("message",this.contactUsForm.value.message);
     formdata.append("file",this.files ? this.files : []);
-    console.log(this.files)
     this.genericService.createEnquiry(formdata).subscribe((res: any) => {
       $('#contact_modal').modal('hide');
       this.loading = this.submitted = false;
       this.contactUsForm.reset();
       this.attatchmentFiles = this.files= [];
+      this.maxUploadError = '';
       this.toastr.show(res.message, '', {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
@@ -113,21 +113,20 @@ export class ContactUsComponent implements OnInit {
     });
     this.contactUsForm.reset();
     this.attatchmentFiles = [];
+    this.maxUploadError = '';
   }
 
 
   documentFileChange(event: any) {
-    this.spinner = true;
+    this.maxUploadError = '';
     if(this.attatchmentFiles.length >= 5){
-      this.spinner = false;
-      this.toastr.show('Maximum upload of 5 files.', '', {
-        toastClass: 'custom_toastr',
-        titleClass: 'custom_toastr_title',
-        messageClass: 'custom_toastr_message',
-      });
+      $("#contact_modal").scrollTop(100);      
+      this.maxUploadError = 'Maximum upload of 5 files';
       return;
     }
     if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
+
       this.fileUploadErrorMessage = '';
       this.imageFileError = false;      
       const fileList: FileList = event.target.files;
@@ -143,8 +142,6 @@ export class ContactUsComponent implements OnInit {
           this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
         }
         
-        let reader = new FileReader();
-
         reader.readAsDataURL(event.target.files[0]);
         this.fileObj = event.target.files[0];
         
@@ -162,10 +159,10 @@ export class ContactUsComponent implements OnInit {
           this.attatchmentFiles.push(attatchData);
         };
         this.files.push(this.fileObj);
-        this.spinner = false;
+        
       } else {
         this.imageFileError = true;
-        this.spinner = false;
+        
         var attatchData = {
           image: this.image ? this.image : this.defaultImage,
           errorMsg: this.imageFileError ? 'Error attaching, try again' : '',
@@ -176,7 +173,6 @@ export class ContactUsComponent implements OnInit {
       }     
     }
   }
-
 
   removeAttatchedFile(i) {
     this.attatchmentFiles.splice(i,1);
