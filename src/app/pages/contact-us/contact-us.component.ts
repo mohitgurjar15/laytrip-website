@@ -61,7 +61,7 @@ export class ContactUsComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  onSubmit(data) {
     this.loading = true;
     this.submitted = true;
 

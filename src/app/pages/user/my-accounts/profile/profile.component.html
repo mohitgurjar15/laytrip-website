@@ -175,9 +175,9 @@
                             formControlName="country_code"> -->
                         <ng-select class="ng-customClass country_code account_telephone_n" [items]="countries_code"
                             bindLabel="countryCode" tabindex="5" bindValue="countryCode" [clearable]="false"
-                            formControlName="country_code">
+                            formControlName="country_code" (change)="validateCountryWithPhoneNumber($event)">
                         </ng-select>
-                        <input [readonly]="!isFormControlEnable" mask="(000) 000-0000" placeholder="(000) 000-0000"
+                        <input [readonly]="!isFormControlEnable" mask="{{phoneNumberMask.format}}" placeholder="(000) 000-0000"
                             type="text" tabindex="6" class="form-control" maxlength="14" formControlName="phone_no">
                     </span>
 
@@ -194,7 +194,7 @@
                 <small
                     *ngIf="!profileForm.hasError('phoneAndPhoneCodeError') && (profileForm.controls.phone_no.errors.minlength)"
                     class="error_field_new"><img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
-                        class="error_img_new"> Minimum 10 characters.</small>
+                        class="error_img_new"> Minimum {{phoneNumberMask.length}} characters.</small>
             </div>
             <div class="form_row common_row dobs_account"
                 [ngClass]="{'error_main_class':  submitted && profileForm.controls.dob.errors}">

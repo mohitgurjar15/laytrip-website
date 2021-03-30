@@ -143,7 +143,16 @@ export class PaymentModeComponent implements OnInit {
             totalAmount:this.sellingPrice,
             paymentType:this.paymentType,
             selectedDownPayment:this.selectedDownPaymentIndex
-          })
+          });
+          this.cartService.setPaymentOptions({
+            layCreditPoints :this.laycreditpoints,
+            instalmentType: this.instalmentType,
+            instalments:this.instalments,
+            remainingAmount:this.remainingAmount,
+            totalAmount:this.sellingPrice,
+            paymentType:this.paymentType,
+            selectedDownPayment:this.selectedDownPaymentIndex
+          });
         }
         else{
           this.instalmentAvavible=false;
@@ -157,6 +166,16 @@ export class PaymentModeComponent implements OnInit {
             paymentType:this.paymentType,
             selectedDownPayment:this.selectedDownPaymentIndex
           })
+
+          this.cartService.setPaymentOptions({
+            layCreditPoints :this.laycreditpoints,
+            instalmentType: this.instalmentType,
+            instalments:this.instalments,
+            remainingAmount:this.remainingAmount,
+            totalAmount:this.sellingPrice,
+            paymentType:this.paymentType,
+            selectedDownPayment:this.selectedDownPaymentIndex
+          });
         }
       },(err)=>{
 
@@ -272,7 +291,7 @@ export class PaymentModeComponent implements OnInit {
       return;
     }
     this.paymentType=type;
-    this.getInstalmentData.emit({
+    let paymentInfo={
       layCreditPoints :this.laycreditpoints,
       instalmentType: this.instalmentType,
       instalments:this.instalments,
@@ -280,7 +299,10 @@ export class PaymentModeComponent implements OnInit {
       totalAmount:this.sellingPrice,
       paymentType:this.paymentType,
       selectedDownPayment:this.selectedDownPaymentIndex
-    })
+    }
+    this.getInstalmentData.emit(paymentInfo)
+
+    this.cartService.setPaymentOptions(paymentInfo);
   }
 
   /**
@@ -291,6 +313,12 @@ export class PaymentModeComponent implements OnInit {
 
     this.instalmentRequest.instalment_type=type;
     this.instalmentType=type;
+    /* let paymentInfo={
+      instalment_type : this.instalmentType,
+      payment_type : this.paymentType,
+      down_payment : this.selectedDownPaymentIndex
+    }
+    this.cartService.setPaymentOptions(paymentInfo); */
     this.calculateInstalment('down-payment','redeemable_point','set-default-down-payment');
     this.getAllInstalment();
   }
@@ -308,6 +336,12 @@ export class PaymentModeComponent implements OnInit {
     //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][index]);
     this.calculateInstalment();
     this.getAllInstalment();
+    /* let paymentInfo={
+      instalment_type : this.instalmentType,
+      payment_type : this.paymentType,
+      down_payment : this.selectedDownPaymentIndex
+    }
+    this.cartService.setPaymentOptions(paymentInfo); */
   }
 
   applyLaycredit(laycreditpoints){

@@ -13,6 +13,7 @@ import { UserService } from '../../services/user.service';
 import { EmptyCartComponent } from '../../components/empty-cart/empty-cart.component';
 import { AppleSecurityLoginPopupComponent, MODAL_TYPE } from '../../pages/user/apple-security-login-popup/apple-security-login-popup.component';
 declare var $: any;
+import {installmentType} from '../../_helpers/generic.helper';
 
 @Component({
   selector: 'app-main-header',
@@ -33,13 +34,17 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   isCovidPage = true;
   cartItems;
   cartItemsCount;
-  weeklyInstallmentAmount: number;
+  installmentAmount: number;
   totalAmount: number;
   fullPageLoading = false;
   modalRef;
   guestUserId: string = '';
   cartOverLimit;
   isOpenAppleLoginPopup = false;
+  paymentType:string='';
+  instalmentType:string='weekly';
+  installmentOptions;
+  paymentInfo;
 
   constructor(
     private genericService: GenericService,
@@ -62,6 +67,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       this.totalLaycredit();
     }
     this.getCartList();
+    this.installmentOptions=installmentType;
 
     this.cartService.getCartItems.subscribe(data => {
       if (data.length > 0) {
@@ -69,6 +75,41 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     })
     this.countryCode = this.commonFunction.getUserCountry();
+
+    this.cartService.getPaymentOptions.subscribe((data:any)=>{
+      if(Object.keys(data).length>0){
+        this.paymentInfo=data;
+        if(data.paymentType=='instalment'){
+          this.paymentType='instalment';
+          this.instalmentType=data.instalmentType;
+          this.installmentAmount=data.instalments.instalment_date[1].instalment_amount;
+        }
+        else{
+          this.paymentType='no-instalment';
+          this.instalmentType='';
+        }
+      }
+      else{
+        try{
+          let data:any=localStorage.getItem("__pm_inf");
+          data = atob(data);
+          data=JSON.parse(data);
+          this.paymentInfo=data;
+          if(data.paymentType=='instalment'){
+            this.paymentType='instalment';
+            this.instalmentType=data.instalmentType;
+            this.installmentAmount=data.instalments.instalment_date[1].instalment_amount;
+          }
+          else{
+            this.paymentType='no-instalment';
+            this.instalmentType='';
+          }
+        }
+        catch(e){
+          this.paymentInfo={};
+        }
+      }
+    })
   }
 
   getCartList() {
@@ -263,22 +304,22 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
     this.totalAmount = totalPrice;
     let instalmentRequest = {
-      instalment_type: "weekly",
+      instalment_type: this.paymentInfo.instalmentType || "weekly",
       checkin_date: checkinDate,
       booking_date: moment().format("YYYY-MM-DD"),
       amount: totalPrice,
       additional_amount: 0,
-      selected_down_payment: 0
+      selected_down_payment: this.paymentInfo.selectedDownPayment || 0
     }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available) {
-        this.weeklyInstallmentAmount = res.instalment_date[1].instalment_amount;
+        this.installmentAmount = res.instalment_date[1].instalment_amount;
       }
       else {
-        this.weeklyInstallmentAmount = 0;
+        this.installmentAmount = 0;
       }
     }, (err) => {
-      this.weeklyInstallmentAmount = 0;
+      this.installmentAmount = 0;
     })
   }
 

@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie';
 import { redirectToLogin } from '../../../../_helpers/jwt.helper';
 import { FlightService } from '../../../../services/flight.service';
 import { CheckOutService } from '../../../../services/checkout.service';
+import { getPhoneFormat } from 'src/app/_helpers/phone-masking.helper';
 
 @Component({
   selector: 'app-profile',
@@ -71,6 +72,10 @@ export class ProfileComponent implements OnInit {
   type = 'form';
   hmPlaceHolder = 'Select home airport';
   closeAirportSuggestion = true;
+  phoneNumberMask = {
+    format: '',
+    length: 0
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -266,6 +271,11 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls['country_code'].disable();
       this.profileForm.controls['country_id'].disable();
       this.profileForm.controls['state_id'].disable();
+      let phoneFormat=getPhoneFormat(res.countryCode || '+1');
+      this.profileForm.controls.phone_no.setValidators([Validators.minLength(phoneFormat.length)]);
+      this.profileForm.controls.phone_no.updateValueAndValidity();
+      this.phoneNumberMask.format = phoneFormat.format;
+      this.phoneNumberMask.length = phoneFormat.length;
 
     }, (error: HttpErrorResponse) => {
       this.loadingValue.emit(false);
@@ -283,6 +293,7 @@ export class ProfileComponent implements OnInit {
 
 
   onSubmit() {
+    console.log(this.profileForm)
     this.submitted = true;
     const controls = this.profileForm.controls;
     this.loadingValue.emit(true);
@@ -490,6 +501,14 @@ export class ProfileComponent implements OnInit {
     this.closeAirportSuggestion = true;
     this.hmPlaceHolder = '';
     this.departureAirport.code = event.code;
+  }
+
+  validateCountryWithPhoneNumber(event: any): void {
+    let selectedCountry = getPhoneFormat(this.profileForm.controls['country_code'].value);
+    this.profileForm.controls.phone_no.setValidators([Validators.minLength(selectedCountry.length)]);
+    this.profileForm.controls.phone_no.updateValueAndValidity();
+    this.phoneNumberMask.format = selectedCountry.format;
+    this.phoneNumberMask.length = selectedCountry.length;
   }
   
 }

@@ -14,6 +14,7 @@ import { CheckOutService } from '../../../../../services/checkout.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GenericService } from '../../../../../services/generic.service';
 declare var $: any;
+import { getPhoneFormat, PHONE_NUMBER_MASK } from '../../../../../_helpers/phone-masking.helper';
 
 @Component({
   selector: 'app-traveller-form',
@@ -58,9 +59,12 @@ export class TravellerFormComponent implements OnInit {
     mask: [
       /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
-  formEnable : boolean = false; 
+  formEnable: boolean = false;
   submitted = false;
-
+  phoneNumberMask = {
+    format: '',
+    length: 0
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -97,6 +101,10 @@ export class TravellerFormComponent implements OnInit {
       passport_expiry: [''],
       passport_number: [''],
     }, { validators: phoneAndPhoneCodeValidation() });
+    this.travellerForm.controls.phone_no.setValidators([Validators.minLength(PHONE_NUMBER_MASK['+1'].length)]);
+    this.travellerForm.controls.phone_no.updateValueAndValidity();
+    this.phoneNumberMask.format = PHONE_NUMBER_MASK['+1'].format;
+    this.phoneNumberMask.length = PHONE_NUMBER_MASK['+1'].length;
 
     // this.travelerFormChange.emit(this.travellerForm);
 
@@ -169,6 +177,13 @@ export class TravellerFormComponent implements OnInit {
       passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
       passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : '',
     });
+
+    let phoneFormat=getPhoneFormat(this.travelerInfo.countryCode || '+1');
+    this.travellerForm.controls.phone_no.setValidators([Validators.minLength(phoneFormat.length)]);
+    this.travellerForm.controls.phone_no.updateValueAndValidity();
+    this.phoneNumberMask.format = phoneFormat.format;
+    this.phoneNumberMask.length = phoneFormat.length;
+
     this.travellerForm.controls['country_id'].disable();
     this.travellerForm.controls['country_code'].disable();
     this.travellerForm.controls['gender'].disable();
@@ -217,6 +232,7 @@ export class TravellerFormComponent implements OnInit {
   onSubmit() {
     this.loadingValue.emit(true);
     this.submitted = true;
+    console.log(this.travellerForm)
     const controls = this.travellerForm.controls;
     if (this.travellerId) {
       this.validateDob(moment(this.travellerForm.controls.dob.value).format('MM-DD-YYYY'));
@@ -226,6 +242,11 @@ export class TravellerFormComponent implements OnInit {
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()
       );
+      let selectedCountry = getPhoneFormat(this.travellerForm.controls['country_code'].value);
+      this.travellerForm.controls.phone_no.setValidators([Validators.minLength(selectedCountry.length)]);
+      this.travellerForm.controls.phone_no.updateValueAndValidity();
+      this.phoneNumberMask.format = selectedCountry.format;
+      this.phoneNumberMask.length = selectedCountry.length;
       this.loadingValue.emit(false);
       return;
     } else {
@@ -241,7 +262,7 @@ export class TravellerFormComponent implements OnInit {
       let jsonData = {
         first_name: this.travellerForm.value.firstName,
         last_name: this.travellerForm.value.lastName,
-        dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob,'MM-DD-YYYY').format('YYYY-MM-DD') : moment(this.travellerForm.value.dob, 'MM-DD-YYYY').format('YYYY-MM-DD'),
+        dob: typeof this.travellerForm.value.dob === 'object' ? moment(this.travellerForm.value.dob, 'MM-DD-YYYY').format('YYYY-MM-DD') : moment(this.travellerForm.value.dob, 'MM-DD-YYYY').format('YYYY-MM-DD'),
         gender: this.travellerForm.value.gender ? this.travellerForm.value.gender : 'M',
         country_id: country_id ? country_id : '',
         passport_expiry: typeof this.travellerForm.value.passport_expiry === 'object' ? moment(this.travellerForm.value.passport_expiry).format('YYYY-MM-DD') : null,
@@ -305,10 +326,10 @@ export class TravellerFormComponent implements OnInit {
   validateDob(event) {
     var eventDate = (typeof event == 'object' && event.target.value != 'undefined') ? event.target.value : event;
 
-    if(eventDate.length == 10 ){
-      var inputValueReplace = eventDate.replace("/","-");
-      var inputDate = inputValueReplace.replace("/","-");
-      var selectedDate = moment(inputDate,'MM-DD-YYYY').format('YYYY-MM-DD');
+    if (eventDate.length == 10) {
+      var inputValueReplace = eventDate.replace("/", "-");
+      var inputDate = inputValueReplace.replace("/", "-");
+      var selectedDate = moment(inputDate, 'MM-DD-YYYY').format('YYYY-MM-DD');
       var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
       var child2YrPastDate = moment().subtract(2, 'years').format("YYYY-MM-DD");
       const emailControl = this.travellerForm.get('email');
@@ -350,7 +371,7 @@ export class TravellerFormComponent implements OnInit {
   closeResult;
 
   removeTraveller(content, userId = '') {
-    if(userId){
+    if (userId) {
       this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
       this.userId = userId;
       this.modalReference.result.then((result) => {
@@ -380,10 +401,18 @@ export class TravellerFormComponent implements OnInit {
     this.modalReference.close();
   }
 
-  disabledForm(){
+  disabledForm() {
     this.formEnable = false;
     this.travellerForm.controls['country_id'].enable();
     this.travellerForm.controls['country_code'].enable();
     this.travellerForm.controls['gender'].enable();
+  }
+
+  validateCountryWithPhoneNumber(event: any): void {
+    let selectedCountry = getPhoneFormat(this.travellerForm.controls['country_code'].value);
+    this.travellerForm.controls.phone_no.setValidators([Validators.minLength(selectedCountry.length)]);
+    this.travellerForm.controls.phone_no.updateValueAndValidity();
+    this.phoneNumberMask.format = selectedCountry.format;
+    this.phoneNumberMask.length = selectedCountry.length;
   }
 }
