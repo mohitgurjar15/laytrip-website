@@ -1,5 +1,9 @@
+<app-laytrip-loader [loading]="addCartLoading">
+</app-laytrip-loader>
+<app-hotel-not-found *ngIf="isNotFound"></app-hotel-not-found>
+
 <!-- Start Search Result section -->
-<section class="search_result flight" *ngIf="loading">
+<section class="search_result flight" *ngIf="loading && !isNotFound">
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
@@ -577,9 +581,19 @@
 
       <div class="col-lg-4">
         <div class="hotel_detail_sidebar sticky-top">
+          <div class="searchbar_box_common">
+            <div class="section_description" *ngIf="isCartFull">
+                <span class="sec_text">5 items cart maximum, please Checkout and start another Cart if you require
+                    more than 5.</span>
+                <a (click)="removeCartFullError()"  href="javascript:void(0);"><img
+                        src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+            </div>
+            
+          </div>
           <h3 class="section_title">
             Room Summary
           </h3>
+         
           <div class="display_wrapper">
             <div class="detail_display">
               <div class="display_text">

@@ -14,6 +14,20 @@
                     </span>
                 </a>
             </ng-container>
+
+            <ng-container *ngIf="cart.type=='hotel'">
+                <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]="{'active':selectedCart===i}"
+                    (click)="selectCart(i)">
+                    <span class="tab_round_wrps hotel_tab_round_wrps">
+                        <span class="tab_imgs_wrps">
+                            <img src="{{s3BucketUrl}}assets/images/icon/hotel_blue.svg" alt="Flight icon" />
+                            <img *ngIf="!cart.is_available && selectedCart!==i " src="{{s3BucketUrl}}assets/images/alert_pink.svg" class="alrt_img" alt="Alert image">
+                        </span>
+                        <span class="tab_txt_head">{{cart.module_info.hotel_name}}</span>
+                    </span>
+                </a>
+            </ng-container>
+
         </li>
     </ng-container>
 </ul>
@@ -21,7 +35,7 @@
 <div class="tab-content booking_tab_content">
     <ng-container *ngFor="let cart of carts;let i = index;">
         <div [id]="'cart_item'+i" class="tab-pane fade in" [ngClass]="{'show active':selectedCart===i}">
-            <app-cart-item cartNumber={{i}} [cartItem]="cart"></app-cart-item>
+            <app-cart-item  cartNumber={{i}} [cartItem]="cart"></app-cart-item>
         </div>
     </ng-container>
 </div>

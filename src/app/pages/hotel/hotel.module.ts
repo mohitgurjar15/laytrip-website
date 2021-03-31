@@ -47,7 +47,7 @@ import { HomeModule } from '../home/home.module';
     // ClickOutSideDirective,
     HotelDetailComponent,
     HotelPaymentComponent,
-    HotelPolicyPopupComponent,
+    HotelPolicyPopupComponent
   ],
   imports: [
     CommonModule,

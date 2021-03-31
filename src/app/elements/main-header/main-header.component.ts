@@ -122,7 +122,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
         // SET CART ITEMS IN CART SERVICE
-        let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
+        let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0], type : item.type } });
         this.cartItems = cartItems;
         this.cartService.setCartItems(cartItems);
         if (cartItems) {
@@ -150,7 +150,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
       if (res) {
         // SET CART ITEMS IN CART SERVICE
-        let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0] } });
+        let cartItems = res.data.map(item => { 
+          return { id: item.id, module_Info: item.moduleInfo[0],type : item.type } 
+        });
         this.calculateInstalment(cartItems);
         this.cd.detectChanges();
       }
@@ -287,17 +289,15 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   calculateInstalment(cartPrices) {
     let totalPrice = 0;
     let checkinDate;
-    //console.log('cartprices:::::', cartPrices);
     if (cartPrices && cartPrices.length > 0) {
-
-      checkinDate = moment(cartPrices[0].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+      checkinDate = this.getCheckinDate(cartPrices[0].module_Info,cartPrices[0].type)
       for (let i = 0; i < cartPrices.length; i++) {
-        totalPrice += cartPrices[i].module_Info.selling_price;
+        totalPrice += this.getPrice(cartPrices[i].module_Info,cartPrices[i].type);
         if (i == 0) {
           continue;
         }
-        if (moment(checkinDate).isAfter(moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD"))) {
-          checkinDate = moment(cartPrices[i].module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+        if (moment(checkinDate).isAfter(moment(this.getCheckinDate(cartPrices[i].module_Info,cartPrices[i].type)))) {
+          checkinDate = this.getCheckinDate(cartPrices[i].module_Info,cartPrices[i].type);
         }
       }
     }
@@ -362,5 +362,28 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   imgError() {
     return  this.userDetails.profilePic = '';
+  }
+
+  getCheckinDate(module_Info,type){
+    let checkinDate;
+    //console.log(module_Info)
+    if(type=='flight'){
+      checkinDate = moment(module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+    }
+    else if(type=='hotel'){
+      checkinDate = moment(module_Info.input_data.check_in, "YYYY-MM-DD'").format("YYYY-MM-DD");
+    }
+    return checkinDate;
+  }
+
+  getPrice(module_Info,type){
+    let price;
+    if(type=='flight'){
+      price = module_Info.selling_price;
+    }
+    else if(type=='hotel'){
+      price = module_Info.selling.total;
+    }
+    return price;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from '../../../../services/hotel.service';
@@ -10,6 +10,9 @@ import { collect } from 'collect.js';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
+import { CartService } from '../../../../services/cart.service';
+import { EventEmitter } from 'events';
+
 
 @Component({
   selector: 'app-hotel-detail',
@@ -58,14 +61,19 @@ export class HotelDetailComponent implements OnInit {
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  cartItems = [];
+  addCartLoading:boolean=false;
+  isNotFound:boolean=false;
+  isCartFull:boolean=false;
 
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
     private toastr: ToastrService,
-    public router: Router,
+    private router: Router,
     private commonFunction: CommonFunction,
-    public modalService: NgbModal,
+    private modalService: NgbModal,
+    private cartService:CartService
   ) { }
 
   ngOnInit() {
@@ -107,6 +115,10 @@ export class HotelDetailComponent implements OnInit {
         this.hotelToken = params.token;
       }
     });
+    this.cartService.getCartItems.subscribe(cartItems => {
+      this.cartItems = cartItems;
+    })
+
     this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
       if (res && res.data && res.data.hotel) {
         this.loading = false;
@@ -144,8 +156,9 @@ export class HotelDetailComponent implements OnInit {
         }
       }
     }, error => {
-      this.toastr.error('Search session is expired', 'Error');
-      this.router.navigate(['/']);
+      //this.toastr.error('Search session is expired', 'Error');
+      this.isNotFound=true;
+      //this.router.navigate(['/']);
     });
     this.hotelService.getRoomDetails(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
       if (res) {
@@ -154,8 +167,8 @@ export class HotelDetailComponent implements OnInit {
       }
     }, error => {
       this.loading = false;
-      this.toastr.error('Search session is expired', 'Error');
-      this.router.navigate(['/']);
+      //this.toastr.error('Search session is expired', 'Error');
+      //this.router.navigate(['/']);
     });
   }
 
@@ -164,11 +177,33 @@ export class HotelDetailComponent implements OnInit {
   }
 
   showRoomDetails(roomInfo) {
-    this.dataLoading = true;
-    setTimeout(() => {
-      this.roomSummary.hotelInfo = roomInfo;
-      this.dataLoading = false;
-    }, 1000);
+    
+    if (this.cartItems && this.cartItems.length >= 5) {
+      this.addCartLoading=false;
+      this.isCartFull=true;
+      //this.maxCartValidation.emit(true)
+    } else {
+      this.addCartLoading=true;
+      
+      let payload = {
+        module_id: 3,
+        route_code: roomInfo.bundle
+      };
+      this.cartService.addCartItem(payload).subscribe((res: any) => {
+        this.addCartLoading=false;
+        if (res) {
+          let newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] }
+          this.cartItems = [...this.cartItems, newItem]
+          this.cartService.setCartItems(this.cartItems);
+
+          localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+          this.router.navigate([`cart/booking`]);
+        }
+      }, error => {
+        this.addCartLoading=false;
+      });
+
+    }
   }
 
   openPolicyPopup(policyInfo, type) {
@@ -193,5 +228,9 @@ export class HotelDetailComponent implements OnInit {
 
   logAnimation(event) {
     // console.log(event);
+  }
+
+  removeCartFullError(){
+    this.isCartFull=false;
   }
 }

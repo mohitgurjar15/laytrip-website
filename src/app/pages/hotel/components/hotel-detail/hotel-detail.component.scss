@@ -4,6 +4,14 @@
 @import "../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+.section_description {
+    //transform: translate(-60%, -70%);
+    transform: translate(-100%, -50%);
+    max-width: 240px;
+    right: 0;
+    position: fixed;
+}
+
 agm-map {
     height: 100%;
     width: 100%;

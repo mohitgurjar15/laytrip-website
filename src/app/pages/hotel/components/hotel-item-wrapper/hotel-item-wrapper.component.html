@@ -107,7 +107,7 @@
                             <div class="block" *ngIf="item.secondary_start_price === 0">
                                 <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span></p>
                             </div>
-                        </div> <a class="book_btn anchor-tag" target="_blank"
+                        </div> <a class="book_btn anchor-tag" 
                             [routerLink]="['/hotel/detail', item.id, hotelToken]">Select</a>
                         <div class="show_detail anchor-tag">
                             <a (click)="showDetails(blockIndex,'true')" class="show_more_detail"> <img

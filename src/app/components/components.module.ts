@@ -58,6 +58,7 @@ import { DeleteCartitemConfirmationPopupComponent } from './delete-cartitem-conf
 import { NgxMaskModule } from 'ngx-mask';
 import { BookingCompletionErrorPopupComponent } from './booking-completion-error-popup/booking-completion-error-popup.component';
 import { AirportSuggestionComponent } from './airport-suggestion/airport-suggestion.component';
+import { HotelCartItemComponent } from '../pages/hotel/components/hotel-cart-item/hotel-cart-item.component';
 
 
 @NgModule({
@@ -104,6 +105,7 @@ import { AirportSuggestionComponent } from './airport-suggestion/airport-suggest
     EmptyCartComponent,
     BookingCompletionErrorPopupComponent,
     AirportSuggestionComponent,
+    HotelCartItemComponent
   ],
   imports: [
     CommonModule,
