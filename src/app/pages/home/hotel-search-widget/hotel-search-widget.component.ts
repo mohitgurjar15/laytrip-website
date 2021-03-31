@@ -5,6 +5,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -59,19 +60,25 @@ export class HotelSearchWidgetComponent implements OnInit {
   ];
 
   showCommingSoon: boolean = false;
+  customStartDateValidation = "2021-05-03";
+  customEndDateValidation = "2021-05-04";
 
   constructor(
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
     private route: ActivatedRoute,
+    private homeService: HomeService
+
   ) {
     this.hotelSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
     });
     
-    this.checkInMinDate = new Date();
+    this.setHotelDate();
     this.checkOutMinDate = this.checkInDate;
+    console.log(this.checkInDate)
+
     this.checkOutDate.setDate(this.checkInDate.getDate() + 1);
     this.rangeDates = [this.checkInDate, this.checkOutDate];
 
@@ -95,12 +102,40 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
+  setHotelDate(){
+
+    var curretdate = moment().format();
+
+    let  juneDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
+    
+    let daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+
+    if(curretdate < juneDate && daysDiffFromCurToJune > 30 ){    
+      this.checkInDate =  moment(juneDate).toDate();
+       this.checkInMinDate = this.checkInDate; 
+      } else if(daysDiffFromCurToJune < 30){
+        this.checkInDate =  moment(curretdate).add(31,'days').toDate();
+        this.checkInMinDate = this.checkInDate; 
+        // this.departureDate = date; 
+      } else {
+        this.checkInDate = moment(curretdate).add(31,'days').toDate(); 
+        this.checkInMinDate = this.checkInDate; 
+      // this.flightDepartureMinDate =  date;
+    }
+  }
+
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.checkInDate = moment(this.customStartDateValidation).toDate();
+    
+    if(new Date(this.customStartDateValidation) <= new Date() ){
+      this.checkInDate = moment().add('31','days').toDate();      
+    }
 
     this.countryCode = this.commonFunction.getUserCountry();
 
     if (this.route && this.route.snapshot.queryParams['check_in']) {
+      this.homeService.removeToString('hotel');  
       this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
       this.checkInMinDate = this.checkInDate;
       this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
@@ -134,11 +169,22 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     }
 
+   
     if (this.fromDestinationInfo) {
       this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
       this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
       this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
     }
+    this.homeService.getLocationForHotelDeal.subscribe(toSearchString=> {
+      if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){        
+
+      this.fromDestinationInfo.city = 'Miami from deal';
+      this.searchHotelInfo.latitude =  40.7681;
+      this.searchHotelInfo.longitude =-73.9819;
+      }
+    });
+    this.homeService.setLocationForHotel('hotel');  
+
     if (this.selectedGuest) {
       this.searchedValue.push({ key: 'guest', value: this.selectedGuest });
     }

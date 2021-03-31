@@ -34,6 +34,7 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         this.loadJquery();
     };
     FlightPriceSliderComponent.prototype.loadJquery = function () {
+        console.log('here');
         // Start Flight Price By Day slider js
         console.log('before', this.flexibleLoading);
         if (this.dates.length > 0 && !this.flexibleLoading) {
@@ -75,9 +76,8 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         }
     };
     FlightPriceSliderComponent.prototype.ngOnChanges = function (changes) {
-        var _this = this;
         if (changes['dates'].currentValue.length) {
-            setTimeout(function () { _this.loadJquery(); }, 100);
+            // setTimeout(()=>{this.loadJquery();},100)
             /* if(this.trip == 'oneway'){
               this.flipDates(this.dates)
             }

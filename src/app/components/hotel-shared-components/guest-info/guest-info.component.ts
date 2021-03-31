@@ -19,7 +19,7 @@ export class GuestInfoComponent implements OnInit {
   countryCode: string;
   roomsGroup = [
     {
-      adults: 2,
+      adults: 1,
       child: [],
       children: []
     }
@@ -43,17 +43,19 @@ export class GuestInfoComponent implements OnInit {
     } else {
       this.roomsGroup = this.roomsGroup;
     }
+    console.log(this.roomsGroup)
+
     this.totalPerson = this.getTotalPerson();
   }
 
   loadJquery() {
     $("body").click(function () {
-      $("#add_child_open").hide("slow");
+      $("#add_child_open").hide();
     });
 
     $("#add_child").click(function (e) {
       e.stopPropagation();
-      $("#add_child_open").slideToggle("slow");
+      $("#add_child_open").slideToggle();
     });
 
     $('#add_child_open').click(
@@ -85,6 +87,8 @@ export class GuestInfoComponent implements OnInit {
   }
 
   addRemovePerson(item) {
+    console.log(item)
+
     // FOR ADULT
     if (item && item.type === 'plus' && item.label === 'adult') {
       this.roomsGroup[item.id].adults += 1;

@@ -1,4 +1,4 @@
-<div class="price_by_date p-2" style="background: #fff;" *ngIf="flexibleLoading">
+ <div class="price_by_date p-2" style="background: #fff;" *ngIf="flexibleLoading">
     <div class="d-flex w-100">
         <div class="inner w-100">
             <div class="slid_block">
@@ -11,10 +11,10 @@
                     </div>
                 </a>
             </div>
-        </div>
+        </div> 
     </div>
 </div>
-
+ 
 <div class="price_by_date" *ngIf="dates.length > 0 && !flexibleLoading">
     <!-- <label>{{'flexible_date' | translate}} <span *ngIf="dates[0].secondary_start_price >0" class="price_per_week_label">(weekly payment)</span></label> -->
     <label>{{'flexible_date' | translate}} <span *ngIf="dates[0].secondary_start_price >0" class="price_per_week_label"></span></label>

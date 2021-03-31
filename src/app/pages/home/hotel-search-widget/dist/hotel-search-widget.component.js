@@ -12,11 +12,12 @@ var environment_1 = require("../../../../environments/environment");
 var moment = require("moment");
 var forms_1 = require("@angular/forms");
 var HotelSearchWidgetComponent = /** @class */ (function () {
-    function HotelSearchWidgetComponent(commonFunction, fb, router, route) {
+    function HotelSearchWidgetComponent(commonFunction, fb, router, route, homeService) {
         this.commonFunction = commonFunction;
         this.fb = fb;
         this.router = router;
         this.route = route;
+        this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.checkInDate = new Date();
         this.checkOutDate = new Date();
@@ -56,11 +57,14 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             }
         ];
         this.showCommingSoon = false;
+        this.customStartDateValidation = "2021-05-03";
+        this.customEndDateValidation = "2021-05-04";
         this.hotelSearchForm = this.fb.group({
             fromDestination: ['', [forms_1.Validators.required]]
         });
-        this.checkInMinDate = new Date();
+        this.setHotelDate();
         this.checkOutMinDate = this.checkInDate;
+        console.log(this.checkInDate);
         this.checkOutDate.setDate(this.checkInDate.getDate() + 1);
         this.rangeDates = [this.checkInDate, this.checkOutDate];
         this.searchHotelInfo =
@@ -81,10 +85,35 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             this.showCommingSoon = true;
         }
     }
+    HotelSearchWidgetComponent.prototype.setHotelDate = function () {
+        var curretdate = moment().format();
+        var juneDate = moment(this.customStartDateValidation).format('YYYY-MM-DD');
+        var daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+        if (curretdate < juneDate && daysDiffFromCurToJune > 30) {
+            this.checkInDate = moment(juneDate).toDate();
+            this.checkInMinDate = this.checkInDate;
+        }
+        else if (daysDiffFromCurToJune < 30) {
+            this.checkInDate = moment(curretdate).add(31, 'days').toDate();
+            this.checkInMinDate = this.checkInDate;
+            // this.departureDate = date; 
+        }
+        else {
+            this.checkInDate = moment(curretdate).add(31, 'days').toDate();
+            this.checkInMinDate = this.checkInDate;
+            // this.flightDepartureMinDate =  date;
+        }
+    };
     HotelSearchWidgetComponent.prototype.ngOnInit = function () {
+        var _this = this;
         window.scrollTo(0, 0);
+        this.checkInDate = moment(this.customStartDateValidation).toDate();
+        if (new Date(this.customStartDateValidation) <= new Date()) {
+            this.checkInDate = moment().add('31', 'days').toDate();
+        }
         this.countryCode = this.commonFunction.getUserCountry();
         if (this.route && this.route.snapshot.queryParams['check_in']) {
+            this.homeService.removeToString('hotel');
             this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
             this.checkInMinDate = this.checkInDate;
             this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
@@ -121,52 +150,18 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
             this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
         }
+        this.homeService.getLocationForHotelDeal.subscribe(function (toSearchString) {
+            if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
+                _this.fromDestinationInfo.city = 'Miami from deal';
+                _this.searchHotelInfo.latitude = 40.7681;
+                _this.searchHotelInfo.longitude = -73.9819;
+            }
+        });
+        this.homeService.setLocationForHotel('hotel');
         if (this.selectedGuest) {
             this.searchedValue.push({ key: 'guest', value: this.selectedGuest });
         }
     };
-    // ngAfterContentChecked() {
-    //   if (this.route && this.route.snapshot.queryParams['check_in']) {
-    //     this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
-    //     this.checkInMinDate = this.checkInDate;
-    //     this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
-    //     this.checkOutMinDate = this.checkOutDate;
-    //     this.rangeDates = [this.checkInDate, this.checkOutDate];
-    //     if (this.route && this.route.snapshot && this.route.snapshot.queryParams) {
-    //       let info;
-    //       this.searchHotelInfo =
-    //       {
-    //         latitude: this.route.snapshot.queryParams['latitude'],
-    //         longitude: this.route.snapshot.queryParams['longitude'],
-    //         check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
-    //         check_out: moment(this.route.snapshot.queryParams['check_out']).format('MM/DD/YYYY'),
-    //       };
-    //       if (this.route.snapshot.queryParams['location']) {
-    //         info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
-    //         if (info) {
-    //           this.fromDestinationInfo.city = info.city;
-    //           this.fromDestinationInfo.country = info.country;
-    //           this.searchHotelInfo.city = info.city;
-    //           this.searchHotelInfo.country = info.country;
-    //         }
-    //       }
-    //       if (this.route.snapshot.queryParams['itenery']) {
-    //         info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-    //         if (info) {
-    //           this.searchHotelInfo.occupancies = info;
-    //         }
-    //       }
-    //     }
-    //   }
-    //   if (this.fromDestinationInfo) {
-    //     this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
-    //     this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
-    //     this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
-    //   }
-    //   if (this.selectedGuest) {
-    //     this.searchedValue.push({ key: 'guest', value: this.selectedGuest });
-    //   }
-    // }
     HotelSearchWidgetComponent.prototype.checkInDateUpdate = function (date) {
         // this is only for closing date range picker, after selecting both dates
         if (this.rangeDates[1]) { // If second date is selected
@@ -174,38 +169,14 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         }
         ;
         if (this.rangeDates[0] && this.rangeDates[1]) {
-            this.checkInDate = this.rangeDates[0];
-            this.checkInMinDate = this.rangeDates[0];
+            this.checkInDate = new Date();
+            this.checkInMinDate = new Date();
             this.checkOutDate = this.rangeDates[1];
             this.checkOutMinDate = this.rangeDates[1];
-            this.searchHotelInfo.check_in = this.checkInDate;
-            this.searchHotelInfo.check_out = this.checkOutDate;
+            this.searchHotelInfo.check_in = this.rangeDates[0];
+            this.searchHotelInfo.check_out = this.rangeDates[1];
         }
     };
-    // dateChange(type, direction) {
-    //   if (type === 'checkIn') {
-    //     if (direction === 'previous') {
-    //       if (moment(this.checkInDate).isAfter(moment(new Date()))) {
-    //         this.checkInDate = new Date(moment(this.checkInDate).subtract(1, 'days').format('MM/DD/YYYY'));
-    //       }
-    //     } else {
-    //       this.checkInDate = new Date(moment(this.checkInDate).add(1, 'days').format('MM/DD/YYYY'));
-    //       if (moment(this.checkInDate).isAfter(this.checkOutDate)) {
-    //         this.checkOutDate = new Date(moment(this.checkOutDate).add(1, 'days').format('MM/DD/YYYY'));
-    //       }
-    //     }
-    //     this.checkOutMinDate = new Date(this.checkInDate);
-    //   }
-    //   if (type === 'checkOut') {
-    //     if (direction === 'previous') {
-    //       if (moment(this.checkInDate).isBefore(this.checkOutDate)) {
-    //         this.checkOutDate = new Date(moment(this.checkOutDate).subtract(1, 'days').format('MM/DD/YYYY'));
-    //       }
-    //     } else {
-    //       this.checkOutDate = new Date(moment(this.checkOutDate).add(1, 'days').format('MM/DD/YYYY'));
-    //     }
-    //   }
-    // }
     HotelSearchWidgetComponent.prototype.changeGuestInfo = function (event) {
         if (this.searchedValue && this.searchedValue.find(function (i) { return i.key === 'guest'; })) {
             this.searchedValue[1]['value'] = event;

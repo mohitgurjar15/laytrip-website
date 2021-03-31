@@ -123,7 +123,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       console.log("innn",params)
       if (Object.keys(params).length > 0 && window.location.pathname=='/flight/search') {
         //delete BehaviorSubject in the listing page
-        this.homeService.removeToString();  
+        this.homeService.removeToString('flight');  
 
         this.calPrices = true;
         this.fromSearch = airports[params['departure']];
@@ -170,7 +170,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       }
     });
     //delete BehaviorSubject at the end
-    this.homeService.removeToString();  
+    this.homeService.removeToString('flight');  
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;      
     
   }

@@ -27,12 +27,14 @@ var HomeComponent = /** @class */ (function () {
         this.isRoundTrip = false;
         this.moduleId = 1;
         this.dealList = [];
+        this.host = '';
         this.renderer.addClass(document.body, 'bg_color');
         this.countryCode = this.commonFunction.getUserCountry();
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
+        this.host = window.location.host;
         this.getModules();
         this.loadJquery();
         this.getDeal(this.moduleId);
@@ -117,6 +119,7 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.getDeal = function (moduleId) {
         var _this = this;
+        this.moduleId = moduleId;
         this.homeService.getDealList(moduleId).subscribe(function (response) {
             _this.dealList = response['data'];
         }, function (error) {
@@ -158,8 +161,15 @@ var HomeComponent = /** @class */ (function () {
         this.renderer.removeClass(document.body, 'bg_color');
     };
     HomeComponent.prototype.setToString = function (newItem) {
-        this.toString = newItem;
-        this.homeService.setToString(newItem);
+        if (this.moduleId == 1) {
+            this.toString = newItem;
+            this.homeService.setToString(newItem);
+        }
+        else if (this.moduleId == 2) {
+            this.homeService.setLocationForHotel(newItem);
+        }
+        else {
+        }
     };
     HomeComponent = __decorate([
         core_1.Component({

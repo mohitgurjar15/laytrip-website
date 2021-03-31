@@ -11,8 +11,9 @@ import { CommonFunction } from "../_helpers/common-function";
   })
 export class HomeService {
     private toString : any = new BehaviorSubject({});
+    private fromDestinationInfo : any = new BehaviorSubject({});
     getToString = this.toString.asObservable();
-
+    getLocationForHotelDeal = this.fromDestinationInfo.asObservable();
     
     constructor(
         private http: HttpClient,
@@ -38,6 +39,10 @@ export class HomeService {
         this.toString.next(flightToCode)
     }
 
+    setLocationForHotel(destinationInfo) {
+        this.fromDestinationInfo.next(destinationInfo)
+    }
+
     getDealList(moduleId) {
         let headers = {
             currency: 'USD',
@@ -48,7 +53,14 @@ export class HomeService {
             catchError(this.handleError)
         );
     }
-    removeToString() {
-        this.toString.next({})
+
+    removeToString(module) {
+        if(module == 'flight' ){
+            this.toString.next({});
+        } else if(module == 'hotel' ) {
+            this.fromDestinationInfo.next({})
+        } else {
+            
+        }
     }   
 }
