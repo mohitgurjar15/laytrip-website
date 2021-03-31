@@ -128,19 +128,14 @@ export class BookingComponent implements OnInit {
           };
 
           price.selling_price = items.data[i].moduleInfo[0].selling.total;
-          price.departure_date = items.data[i].moduleInfo[0].departure_date;
+          price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in,"YYYY-MM-DD").format('DD/MM/YYYY') ;
           price.start_price = 0;
           price.location = items.data[i].moduleInfo[0].hotel_name;
         }
-
         this.carts.push(cart);
         this.cartPrices.push(price)
-
       }
 
-      console.log("Data",this.carts)
-
-      
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
 
@@ -331,7 +326,6 @@ export class BookingComponent implements OnInit {
         this.add_new_card = false;
       }
     })
-    console.log("this.carts",this.carts)
 
     sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
   }

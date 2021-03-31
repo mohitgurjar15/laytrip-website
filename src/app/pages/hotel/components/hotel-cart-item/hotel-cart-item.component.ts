@@ -2,8 +2,9 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MODAL_TYPE } from '../../../../components/confirmation-modal/confirmation-modal.component';
-import { DeleteCartitemConfirmationPopupComponent } from '../../../../components/delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
+//import { MODAL_TYPE } from '../../../../components/confirmation-modal/confirmation-modal.component';
+import { DeleteCartitemConfirmationPopupComponent,MODAL_TYPE } from '../../../../components/delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
+
 import { CartService } from '../../../../services/cart.service';
 import { GenericService } from '../../../../services/generic.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
@@ -50,6 +51,7 @@ export class HotelCartItemComponent implements OnInit {
       windowClass: 'delete_cart_item_block', centered: true, backdrop: 'static',
       keyboard: false
     }).result.then((result) => {
+      console.log(result.STATUS," === ",MODAL_TYPE.DELETE)
       if (result.STATUS === MODAL_TYPE.DELETE) {
         this.deleteCart(cartId);
       }

@@ -84,6 +84,7 @@ export class PaymentModeComponent implements OnInit {
 
     this.cartService.getCartPrice.subscribe(cartPrices=>{
       this.cartPrices = cartPrices;
+      console.log("this.cartPrices",this.cartPrices)
       this.getTotalPrice();
       if(this.instalmentRequest.checkin_date){
 
@@ -222,6 +223,18 @@ export class PaymentModeComponent implements OnInit {
           selectedDownPayment:this.selectedDownPaymentIndex
         })
     }
+  }
+
+  getCheckinDate(module_Info,type){
+    let checkinDate;
+    //console.log(module_Info)
+    if(type=='flight'){
+      checkinDate = moment(module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+    }
+    else if(type=='hotel'){
+      checkinDate = moment(module_Info.input_data.check_in, "YYYY-MM-DD'").format("YYYY-MM-DD");
+    }
+    return checkinDate;
   }
 
   convertToNumber(number){
