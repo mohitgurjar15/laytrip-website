@@ -4123,6 +4123,15 @@ ng-scrollbar {
 
                 &:last-child{
                     margin-bottom: 0;
+                    .linew_wrps{
+                        ng-conatiner{
+                            &:last-child{
+                                .line_names{
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                    }
                 }
 
                 .word_alpha {
