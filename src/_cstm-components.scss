@@ -234,6 +234,9 @@ app-search-airport {
             display: flex;
             .ng-value-container {
                 width: 100%;
+                .ng-value{
+                    padding: 0 !important;
+                }
                 .ng-placeholder {
                     padding: 0;
                     font-size: 16px;
