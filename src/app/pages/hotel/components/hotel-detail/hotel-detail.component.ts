@@ -64,6 +64,7 @@ export class HotelDetailComponent implements OnInit {
   cartItems = [];
   addCartLoading:boolean=false;
   isNotFound:boolean=false;
+  isCartFull:boolean=false;
 
   constructor(
     private route: ActivatedRoute,
@@ -179,6 +180,7 @@ export class HotelDetailComponent implements OnInit {
     
     if (this.cartItems && this.cartItems.length >= 5) {
       this.addCartLoading=false;
+      this.isCartFull=true;
       //this.maxCartValidation.emit(true)
     } else {
       this.addCartLoading=true;
@@ -226,5 +228,9 @@ export class HotelDetailComponent implements OnInit {
 
   logAnimation(event) {
     // console.log(event);
+  }
+
+  removeCartFullError(){
+    this.isCartFull=false;
   }
 }
