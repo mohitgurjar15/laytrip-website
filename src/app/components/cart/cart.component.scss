@@ -165,6 +165,15 @@ h3 {
 
                     &.hotel_tab_round_wrps{
                         border: 2px solid $blue-text-one;
+                        @include tab-view {
+                            border: none;
+                            padding: 0;
+                            width: auto;
+    
+                            .tab_txt_head {
+                                display: none;
+                            }
+                        }
                     }
 
                     @include tab-view {
