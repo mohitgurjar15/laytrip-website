@@ -23,7 +23,7 @@
                             <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                             <img *ngIf="!cart.is_available && selectedCart!==i " src="{{s3BucketUrl}}assets/images/alert_pink.svg" class="alrt_img" alt="Alert image">
                         </span>
-                        <span class="tab_txt_head">Fair Mont</span>
+                        <span class="tab_txt_head">{{cart.module_info.hotel_name}}</span>
                     </span>
                 </a>
             </ng-container>

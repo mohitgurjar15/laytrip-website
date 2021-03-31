@@ -93,7 +93,7 @@ export class BookingComponent implements OnInit {
       this.guestUserId = this.commonFunction.getGuestUser();
     }
 
-    /*this.cartLoading = true;
+    this.cartLoading = true;
      this.cartService.getCartList('yes').subscribe((items: any) => {
       this.cartLoading = false;
       let cart: any;
@@ -120,11 +120,25 @@ export class BookingComponent implements OnInit {
           price.start_price = items.data[i].moduleInfo[0].start_price;
           price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         }
+        else  if(items.data[i].type=='hotel'){
+
+          cart.module_info = items.data[i].moduleInfo[0];
+          cart.old_module_info = {
+            selling_price: items.data[i].oldModuleInfo[0].selling.total
+          };
+
+          price.selling_price = items.data[i].moduleInfo[0].selling.total;
+          price.departure_date = items.data[i].moduleInfo[0].departure_date;
+          price.start_price = 0;
+          price.location = items.data[i].moduleInfo[0].hotel_name;
+        }
 
         this.carts.push(cart);
         this.cartPrices.push(price)
 
       }
+
+      console.log("Data",this.carts)
 
       
       this.cartService.setCartItems(this.carts)
@@ -136,9 +150,9 @@ export class BookingComponent implements OnInit {
       this.carts = [];
       this.cartPrices = [];
       localStorage.setItem('$crt', '0');
-    }); */
+    });
     /* Temp */
-    let cart: any={};
+    /* let cart: any={};
     let price: any={};
     cart.type = 'hotel';
     cart.travelers = [];
@@ -279,7 +293,7 @@ export class BookingComponent implements OnInit {
     price.location = 'Sample'
     
     this.carts.push(cart);
-    this.cartPrices.push(price)
+    this.cartPrices.push(price) */
   /* !temp */
 
     this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {

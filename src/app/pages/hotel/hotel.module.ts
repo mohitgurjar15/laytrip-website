@@ -32,7 +32,6 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
 import { HotelPolicyPopupComponent } from './components/hotel-policy-popup/hotel-policy-popup.component';
 import { HomeModule } from '../home/home.module';
-import { HotelCartItemComponent } from './components/hotel-cart-item/hotel-cart-item.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +47,7 @@ import { HotelCartItemComponent } from './components/hotel-cart-item/hotel-cart-
     // ClickOutSideDirective,
     HotelDetailComponent,
     HotelPaymentComponent,
-    HotelPolicyPopupComponent,
-    HotelCartItemComponent,
+    HotelPolicyPopupComponent
   ],
   imports: [
     CommonModule,
