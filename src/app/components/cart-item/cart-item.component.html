@@ -56,9 +56,9 @@
               <div class="headin_upper_wrparr hotel_header_wrpper">
                 <span class="header_name">
                   <span class="title_image">
-                    <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                    <img src="{{s3BucketUrl}}assets/images/icon/hotel_blue.svg" alt="hotel icon" />
                   </span>
-                  
+
                   <!-- <span class="flight_routing_imgs" *ngIf="cartItem.module_info?.routes?.length === 1">
                     <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
                   </span>
@@ -73,10 +73,15 @@
                   </div> -->
                 </span>
                 <div class="hotel_names_wrps">
-                  {{ cartItem.module_info.hotel_name }}
-                  <span class="header_date">{{cartItem.module_info.address.city_name}}, {{cartItem.module_info.address.address_line_one}}, {{cartItem.module_info.address.state_code}}, {{cartItem.module_info.address.state_name}}, {{cartItem.module_info.address.country_name}}</span>
+
+                  <h6 class="hotel_name">
+                    {{ cartItem.module_info.hotel_name }}
+                  </h6>
+                  <span class="header_date">{{cartItem.module_info.address.city_name}},
+                    {{cartItem.module_info.address.address_line_one}}, {{cartItem.module_info.address.state_code}},
+                    {{cartItem.module_info.address.state_name}}, {{cartItem.module_info.address.country_name}}</span>
                 </div>
-                
+
               </div>
               <span class="alert_boxes" *ngIf="!cartItem.is_available">
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Alert image">
@@ -86,13 +91,13 @@
         </ng-container>
       </h4>
     </div>
-    <div id="collapse1" class="panel-collapse collapse in pannel_cont_wrapper show" >
+    <div id="collapse1" class="panel-collapse collapse in pannel_cont_wrapper show">
       <div class="panel-body">
         <ng-container *ngIf="cartItem.type=='flight'">
-          <app-flight-cart-item  cartNumber={{cartNumber}} [cartItem]="cartItem"></app-flight-cart-item>
+          <app-flight-cart-item cartNumber={{cartNumber}} [cartItem]="cartItem"></app-flight-cart-item>
         </ng-container>
         <ng-container *ngIf="cartItem.type=='hotel'">
-          <app-hotel-cart-item  cartNumber={{cartNumber}} [cartItem]="cartItem"></app-hotel-cart-item>
+          <app-hotel-cart-item cartNumber={{cartNumber}} [cartItem]="cartItem"></app-hotel-cart-item>
         </ng-container>
       </div>
     </div>
