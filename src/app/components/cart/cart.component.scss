@@ -6,52 +6,60 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 
-h3{
+h3 {
     color: $blue-text;
     font-size: 34px;
     margin-bottom: 5px;
     margin: 25px 0 15px;
-    @include tab-view{
+
+    @include tab-view {
         font-size: 18px;
     }
-  }
-.booking_tab_header{
+}
+
+.booking_tab_header {
     border-bottom: none;
     position: relative;
     z-index: 9;
     overflow: hidden;
     max-height: 71px;
-    li{
+
+    li {
         position: relative;
         z-index: -99;
         margin-left: 0;
-        &:first-child{
+
+        &:first-child {
             margin-left: 0;
             z-index: 9;
-            a{
+
+            a {
                 border-top-left-radius: 10px;
                 border-top-right-radius: 0px;
                 border-left: 1px solid $box-border-color;
                 border-top: 1px solid $box-border-color;
-                &::before{
+
+                &::before {
                     border: none;
                 }
-                &.active{
+
+                &.active {
                     border-top-right-radius: 10px;
-                    @include tab-view{
+
+                    @include tab-view {
                         top: 1px;
                     }
                 }
             }
         }
-        
-        &:last-child{
-            a{
+
+        &:last-child {
+            a {
                 border-top-right-radius: 15px;
             }
         }
-        
-        a{  
+
+        a {
             background-color: transparent;
             padding: 10px 11px;
             border: 1px solid $box-border-color;
@@ -64,8 +72,8 @@ h3{
             align-items: center;
             justify-content: center;
             //margin-left: -8px;
-            
-            &::before{
+
+            &::before {
                 // content: '';
                 // position: absolute;
                 // height: 1px;
@@ -74,34 +82,52 @@ h3{
                 // top: 1px;
                 // left: -8px;
             }
-            @include tab-view{
+
+            @include tab-view {
                 top: 8px;
                 padding: 10px 14px;
                 width: auto;
             }
-            .tab_round_wrps{
+
+            .tab_round_wrps {
                 color: $mid_gray_bg;
                 font-size: 12px;
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
                 flex-direction: column;
-                @include tab-view{
-                    .tab_txt_head{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 100%;
+
+                @include tab-view {
+                    .tab_txt_head {
                         display: none;
                     }
                 }
-                .tab_imgs_wrps{
-                    .alrt_img{
+
+                .tab_imgs_wrps {
+                    .alrt_img {
                         margin-left: 5px;
                         max-width: 15px;
                     }
-                    img{
+
+                    img {
                         margin-bottom: 5px;
                     }
                 }
+
+                .tab_txt_head {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 100%;
+                    margin-left: 5px;
+                }
             }
-            &.active{
+
+            &.active {
                 background-color: $background-white;
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
@@ -113,16 +139,19 @@ h3{
                 border-bottom: none;
                 width: auto;
                 margin: 0;
-                &::before{
+
+                &::before {
                     border: none;
                 }
-                @include tab-view{
+
+                @include tab-view {
                     width: 67px;
                     height: 45px;
                     display: flex;
                     justify-content: center;
                 }
-                .tab_round_wrps{
+
+                .tab_round_wrps {
                     width: 186px;
                     border: 2px solid $pink;
                     border-radius: 25px;
@@ -133,24 +162,39 @@ h3{
                     flex-direction: row;
                     padding: 0 20px;
                     height: 50px;
-                    @include tab-view{
+
+                    &.hotel_tab_round_wrps{
+                        border: 2px solid $blue-text-one;
+                    }
+
+                    @include tab-view {
                         border: none;
                         padding: 0;
                         width: auto;
-                        .tab_txt_head{
+
+                        .tab_txt_head {
                             display: none;
                         }
                     }
-                    img{
+
+                    .tab_txt_head {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 100%;
+                    }
+
+                    img {
                         margin-bottom: 0;
                     }
                 }
             }
         }
-        
+
     }
 }
-.booking_tab_content{
+
+.booking_tab_content {
     background-color: $background-white;
     padding: 15px;
     border-bottom-left-radius: 10px;

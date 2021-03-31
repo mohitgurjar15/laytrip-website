@@ -18,9 +18,9 @@
             <ng-container *ngIf="cart.type=='hotel'">
                 <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]="{'active':selectedCart===i}"
                     (click)="selectCart(i)">
-                    <span class="tab_round_wrps">
+                    <span class="tab_round_wrps hotel_tab_round_wrps">
                         <span class="tab_imgs_wrps">
-                            <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                            <img src="{{s3BucketUrl}}assets/images/icon/hotel_blue.svg" alt="Flight icon" />
                             <img *ngIf="!cart.is_available && selectedCart!==i " src="{{s3BucketUrl}}assets/images/alert_pink.svg" class="alrt_img" alt="Alert image">
                         </span>
                         <span class="tab_txt_head">{{cart.module_info.hotel_name}}</span>
