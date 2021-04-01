@@ -18,13 +18,14 @@ export class GuestInfoComponent implements OnInit {
   errorMessage = '';
   openDrawer : boolean = false;
   countryCode: string;
-  roomsGroup = [
+  roomsGroup = 
     {
+      rooms:1,
       adults: 1,
-      child: [],
-      children: []
+      child: 0,
+      children: 0
     }
-  ];
+  ;
   totalPerson: number;
 
   constructor(
@@ -73,44 +74,57 @@ export class GuestInfoComponent implements OnInit {
   toggleDrawer(){
     this.openDrawer=!this.openDrawer;
   }
+
   counter(i: number) {
     return new Array(i);
   }
 
   addRoom(index) {
-    this.roomsGroup.push({
-      adults: 2,
-      child: [],
-      children: []
+   /*  this.roomsGroup.push({
+      adults: 1,
+      child: 0,
+      children: 0
     });
-    this.totalPerson = this.getTotalPerson();
-    this.changeValue.emit(this.roomsGroup);
+ */
+    if(this.roomsGroup.rooms < 9) {
+      this.roomsGroup.rooms += 1;
+      this.totalPerson = this.getTotalPerson();
+      this.changeValue.emit(this.roomsGroup);
+    }
   }
 
   removeRoom(index) {
-    this.roomsGroup.splice(index, 1);
-    this.totalPerson = this.getTotalPerson();
-    this.changeValue.emit(this.roomsGroup);
+    if(this.roomsGroup.rooms >1 ){
+      this.roomsGroup.rooms -= 1;
+    }
+  /*   if(this.roomsGroup.length > 1){
+      this.roomsGroup.splice(index, 1);
+      this.totalPerson = this.getTotalPerson();
+      this.changeValue.emit(this.roomsGroup);
+    } */
   }
 
   addRemovePerson(item) {
-    console.log(item)
 
     // FOR ADULT
     if (item && item.type === 'plus' && item.label === 'adult') {
-      this.roomsGroup[item.id].adults += 1;
+      // this.roomsGroup[item.id].adults += 1;
+      this.roomsGroup.adults += 1;
       this.totalPerson = this.getTotalPerson();
     } else if (item && item.type === 'minus' && item.label === 'adult') {
-      this.roomsGroup[item.id].adults -= 1;
+      // this.roomsGroup[item.id].adults -= 1;
+      this.roomsGroup.adults -= 1;
       this.totalPerson = this.getTotalPerson();
     }
     // FOR CHILD
     if (item && item.type === 'plus' && item.label === 'child') {
-      this.roomsGroup[item.id].child.push(1);
+      // this.roomsGroup[item.id].child.push(1);
+      this.roomsGroup.child +=  1;
       this.totalPerson = this.getTotalPerson();
     } else if (item && item.type === 'minus' && item.label === 'child') {
-      this.roomsGroup[item.id].child.pop();
-      this.roomsGroup[item.id].children.pop();
+      // this.roomsGroup[item.id].child.pop();
+      this.roomsGroup.child = this.roomsGroup.child - 1;
+      // this.roomsGroup[item.id].children.pop();
       this.totalPerson = this.getTotalPerson();
     }
     this.changeValue.emit(this.roomsGroup);
@@ -118,14 +132,15 @@ export class GuestInfoComponent implements OnInit {
 
   getTotalPerson() {
     let total = 0;
-    for (let data of this.roomsGroup) {
+/*     for (let data of this.roomsGroup) {
       total += data.adults + data.child.length;
+      total += data.adults + data.child;
     }
-    return total;
+ */    return total;
   }
 
   changeChildAge(age, index) {
-    this.roomsGroup[index].children.push(parseInt(age));
+    // this.roomsGroup[index].children.push(parseInt(age));
     this.changeValue.emit(this.roomsGroup);
   }
 }

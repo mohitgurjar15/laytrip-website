@@ -78,7 +78,13 @@ export class ContactUsComponent implements OnInit {
     formdata.append("name",this.contactUsForm.value.name);
     formdata.append("email",this.contactUsForm.value.email);
     formdata.append("message",this.contactUsForm.value.message);
-    formdata.append("file",this.files ? this.files : []);
+    formdata.append("file[]",this.files ? this.files : []);
+   /*  for  (var i =  0; i <  this.files.length; i++)  {  
+      formdata.append("file",  this.files[i]);
+    } */ 
+    console.log("formdata",formdata);
+    console.log(this.files);
+    
     this.genericService.createEnquiry(formdata).subscribe((res: any) => {
       $('#contact_modal').modal('hide');
       this.loading = this.submitted = false;
