@@ -45,7 +45,7 @@ var ContactUsComponent = /** @class */ (function () {
             message: ['', [forms_1.Validators.required]]
         });
     };
-    ContactUsComponent.prototype.onSubmit = function () {
+    ContactUsComponent.prototype.onSubmit = function (data) {
         var _this = this;
         this.loading = true;
         this.submitted = true;
@@ -61,7 +61,11 @@ var ContactUsComponent = /** @class */ (function () {
         formdata.append("name", this.contactUsForm.value.name);
         formdata.append("email", this.contactUsForm.value.email);
         formdata.append("message", this.contactUsForm.value.message);
-        formdata.append("file", this.files ? this.files : []);
+        // formdata.append("file[]",this.files ? this.files : []);
+        for (var i = 0; i < this.files.length; i++) {
+            formdata.append("file", this.files[i]);
+        }
+        console.log(this.files);
         this.genericService.createEnquiry(formdata).subscribe(function (res) {
             $('#contact_modal').modal('hide');
             _this.loading = _this.submitted = false;
