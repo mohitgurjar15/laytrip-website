@@ -16,13 +16,12 @@ var GuestInfoComponent = /** @class */ (function () {
         this.totalRoom = [];
         this.errorMessage = '';
         this.openDrawer = false;
-        this.roomsGroup = [
-            {
-                adults: 1,
-                child: [],
-                children: []
-            }
-        ];
+        this.roomsGroup = {
+            rooms: 1,
+            adults: 1,
+            child: 0,
+            children: 0
+        };
         this.countryCode = this.commonFunction.getUserCountry();
     }
     GuestInfoComponent.prototype.ngOnInit = function () {
@@ -63,52 +62,64 @@ var GuestInfoComponent = /** @class */ (function () {
         return new Array(i);
     };
     GuestInfoComponent.prototype.addRoom = function (index) {
-        this.roomsGroup.push({
-            adults: 2,
-            child: [],
-            children: []
-        });
-        this.totalPerson = this.getTotalPerson();
-        this.changeValue.emit(this.roomsGroup);
+        /*  this.roomsGroup.push({
+           adults: 1,
+           child: 0,
+           children: 0
+         });
+      */
+        if (this.roomsGroup.rooms < 9) {
+            this.roomsGroup.rooms += 1;
+            this.totalPerson = this.getTotalPerson();
+            this.changeValue.emit(this.roomsGroup);
+        }
     };
     GuestInfoComponent.prototype.removeRoom = function (index) {
-        this.roomsGroup.splice(index, 1);
-        this.totalPerson = this.getTotalPerson();
-        this.changeValue.emit(this.roomsGroup);
+        if (this.roomsGroup.rooms > 1) {
+            this.roomsGroup.rooms -= 1;
+        }
+        /*   if(this.roomsGroup.length > 1){
+            this.roomsGroup.splice(index, 1);
+            this.totalPerson = this.getTotalPerson();
+            this.changeValue.emit(this.roomsGroup);
+          } */
     };
     GuestInfoComponent.prototype.addRemovePerson = function (item) {
-        console.log(item);
         // FOR ADULT
         if (item && item.type === 'plus' && item.label === 'adult') {
-            this.roomsGroup[item.id].adults += 1;
+            // this.roomsGroup[item.id].adults += 1;
+            this.roomsGroup.adults += 1;
             this.totalPerson = this.getTotalPerson();
         }
         else if (item && item.type === 'minus' && item.label === 'adult') {
-            this.roomsGroup[item.id].adults -= 1;
+            // this.roomsGroup[item.id].adults -= 1;
+            this.roomsGroup.adults -= 1;
             this.totalPerson = this.getTotalPerson();
         }
         // FOR CHILD
         if (item && item.type === 'plus' && item.label === 'child') {
-            this.roomsGroup[item.id].child.push(1);
+            // this.roomsGroup[item.id].child.push(1);
+            this.roomsGroup.child += 1;
             this.totalPerson = this.getTotalPerson();
         }
         else if (item && item.type === 'minus' && item.label === 'child') {
-            this.roomsGroup[item.id].child.pop();
-            this.roomsGroup[item.id].children.pop();
+            // this.roomsGroup[item.id].child.pop();
+            this.roomsGroup.child = this.roomsGroup.child - 1;
+            // this.roomsGroup[item.id].children.pop();
             this.totalPerson = this.getTotalPerson();
         }
         this.changeValue.emit(this.roomsGroup);
     };
     GuestInfoComponent.prototype.getTotalPerson = function () {
         var total = 0;
-        for (var _i = 0, _a = this.roomsGroup; _i < _a.length; _i++) {
-            var data = _a[_i];
-            total += data.adults + data.child.length;
-        }
-        return total;
+        /*     for (let data of this.roomsGroup) {
+              total += data.adults + data.child.length;
+              total += data.adults + data.child;
+            }
+         */ return total;
     };
     GuestInfoComponent.prototype.changeChildAge = function (age, index) {
-        this.roomsGroup[index].children.push(parseInt(age));
+        // this.roomsGroup[index].children.push(parseInt(age));
         this.changeValue.emit(this.roomsGroup);
     };
     __decorate([
