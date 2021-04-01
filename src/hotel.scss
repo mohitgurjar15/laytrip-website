@@ -368,7 +368,7 @@ ngb-datepicker {
                     border-radius: 5px;
                     z-index: 1021;
                     max-height: 500px;
-                    overflow-y: auto;
+                    //overflow-y: auto;
 
                     &:before {
                         width: 0;
@@ -460,21 +460,91 @@ ngb-datepicker {
                             justify-content: flex-start;
 
                             .child_boxes {
-                                border: 1px solid $box-border-color;
-                                border-radius: 8px;
+                                //border: 1px solid $box-border-color;
                                 background: $background-white;
-                                padding: 5px 10px;
-                                margin: 2px;
-                                width: 48%;
+                                width: 100%;
                                 display: none;
+                                padding-top: 20px;
 
                                 &.open {
-                                    display: block;
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
                                 }
 
-                                .label_name {
-                                    padding: 0;
-                                    width: 100%;
+                                // .label_name {
+                                //     padding: 0;
+                                //     width: 100%;
+                                //     font-size: 16px;
+                                //     color: $text-darkblue;
+                                //     display: block;
+                                // }
+                                .left {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: $text-grey;
+
+                                    span {
+                                        font-size: 16px;
+                                        color: $text-darkblue;
+                                        display: block;
+                                        padding: 0;
+                                    }
+                                }
+
+                                .right {
+                                    width: 55px;
+                                    display: flex;
+                                    align-items: center;
+
+                                    ng-select{
+                                        width: 100%;
+                                        &.child_select_ng{
+                                            .ng-clear-wrapper{
+                                                display: none;
+                                            }
+                                            &.ng-select-focused:not(.ng-select-opened){
+                                                .ng-select-container{
+                                                    border: 1px solid $text_light_grey;
+                                                    box-shadow: none;
+                                                }
+                                            }
+                                            .ng-select-container{
+                                                border: 1px solid $text_light_grey;
+                                            }
+                                            
+                                            .ng-value-container{
+                                                .ng-value{
+                                                    .ng-value-label{
+                                                        color: $text-darkblue;
+                                                        font-size: 14px;
+                                                        padding: 0;
+                                                    }
+                                                }
+                                            }
+                                            .ng-arrow-wrapper{
+                                                padding: 0;
+                                                .ng-arrow{
+                                                    border: none;
+                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) center right 5px no-repeat !important;
+                                                    height: 24px;
+                                                    width: 20px;
+                                                    background-position: 2px 11px !important;
+                                                    padding: 0;
+                                                }
+                                            }
+                                            ng-dropdown-panel{
+                                                .ng-option{
+                                                    .ng-option-label{
+                                                        padding: 0;
+                                                        font-size: 12px;
+                                                        color: $text-black
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
 
                                 select {
@@ -508,13 +578,17 @@ ngb-datepicker {
                                 align-items: center;
                                 padding: 0 0 20px;
 
+                                &:last-child{
+                                    padding: 0;
+                                }
+
                                 .left {
                                     font-size: 10px;
                                     font-weight: 400;
                                     color: $text-grey;
 
                                     span {
-                                        font-size: 14px;
+                                        font-size: 16px;
                                         color: $text-darkblue;
                                         display: block;
                                         padding: 0;
@@ -522,7 +596,7 @@ ngb-datepicker {
                                 }
 
                                 .right {
-                                    width: 100px;
+                                    width: 90px;
                                     display: flex;
                                     align-items: center;
 
@@ -599,7 +673,7 @@ ngb-datepicker {
                             }
 
                             .right {
-                                width: 100px;
+                                width: 90px;
                                 display: flex;
                                 align-items: center;
 
