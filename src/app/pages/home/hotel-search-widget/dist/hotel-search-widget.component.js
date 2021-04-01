@@ -66,7 +66,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.checkOutMinDate = this.checkInDate;
         this.checkOutDate = moment(this.checkInDate).add(1, 'days').toDate();
         this.rangeDates = [this.checkInDate, this.checkOutDate];
-        console.log(this.rangeDates);
         this.searchHotelInfo =
             {
                 latitude: null,
@@ -163,7 +162,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         if (this.selectedGuest) {
             this.searchedValue.push({ key: 'guest', value: this.selectedGuest });
         }
-        console.log(this.checkOutDate);
     };
     HotelSearchWidgetComponent.prototype.checkInDateUpdate = function (date) {
         // this is only for closing date range picker, after selecting both dates

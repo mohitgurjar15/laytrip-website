@@ -1,12 +1,12 @@
 <div class="search_area">
   <!-- <label>{{ label }}</label> -->
-  <div class="travel_info" id="add_child">
+  <div class="travel_info" id="add_child" (click)="toggleDrawer()">
     <span>{{ totalPerson }}</span> Traveler
     <div class="drop_aerrow"></div>
   </div>
   <!-- <span>{{roomsGroup.length}} Rooms</span> -->
   <!-- {{ totalRoom }} Rooms -->
-  <div class="traveller_add_block" id="add_child_open" style="display: none;">
+  <div class="traveller_add_block" id="add_child_open"  [ngClass]="(openDrawer==true)?'panel_show':'panel_hide'">
     <!-- room 1 div -->
     <ng-container *ngFor="let room of roomsGroup;let id=index;">
       <div class="rooms_aloc" [attr.id]="id">

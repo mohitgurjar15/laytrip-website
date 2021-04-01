@@ -16,6 +16,7 @@ export class GuestInfoComponent implements OnInit {
 
   totalRoom = [];
   errorMessage = '';
+  openDrawer : boolean = false;
   countryCode: string;
   roomsGroup = [
     {
@@ -43,8 +44,6 @@ export class GuestInfoComponent implements OnInit {
     } else {
       this.roomsGroup = this.roomsGroup;
     }
-    console.log(this.roomsGroup)
-
     this.totalPerson = this.getTotalPerson();
   }
 
@@ -55,7 +54,12 @@ export class GuestInfoComponent implements OnInit {
 
     $("#add_child").click(function (e) {
       e.stopPropagation();
-      $("#add_child_open").slideToggle();
+      if((e.target.nextSibling != null && e.target.nextSibling.classList[1] == 'panel_hide') || 
+      e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide') {
+        $("#add_child_open").hide();        
+      }  else {
+        $("#add_child_open").show();
+      }
     });
 
     $('#add_child_open').click(
@@ -66,6 +70,9 @@ export class GuestInfoComponent implements OnInit {
 
   }
 
+  toggleDrawer(){
+    this.openDrawer=!this.openDrawer;
+  }
   counter(i: number) {
     return new Array(i);
   }

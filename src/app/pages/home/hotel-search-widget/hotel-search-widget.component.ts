@@ -81,7 +81,6 @@ export class HotelSearchWidgetComponent implements OnInit {
 
     this.checkOutDate = moment(this.checkInDate).add(1,'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
-    console.log(this.rangeDates)
     this.searchHotelInfo =
     {
       latitude: null,
@@ -190,7 +189,6 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (this.selectedGuest) {
       this.searchedValue.push({ key: 'guest', value: this.selectedGuest });
     }
-    console.log(this.checkOutDate)
   }
 
   checkInDateUpdate(date) {

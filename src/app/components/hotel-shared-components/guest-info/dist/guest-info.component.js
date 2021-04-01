@@ -15,6 +15,7 @@ var GuestInfoComponent = /** @class */ (function () {
         this.changeValue = new core_1.EventEmitter();
         this.totalRoom = [];
         this.errorMessage = '';
+        this.openDrawer = false;
         this.roomsGroup = [
             {
                 adults: 1,
@@ -35,7 +36,6 @@ var GuestInfoComponent = /** @class */ (function () {
         else {
             this.roomsGroup = this.roomsGroup;
         }
-        console.log(this.roomsGroup);
         this.totalPerson = this.getTotalPerson();
     };
     GuestInfoComponent.prototype.loadJquery = function () {
@@ -44,11 +44,20 @@ var GuestInfoComponent = /** @class */ (function () {
         });
         $("#add_child").click(function (e) {
             e.stopPropagation();
-            $("#add_child_open").slideToggle();
+            if ((e.target.nextSibling != null && e.target.nextSibling.classList[1] == 'panel_hide') ||
+                e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide') {
+                $("#add_child_open").hide();
+            }
+            else {
+                $("#add_child_open").show();
+            }
         });
         $('#add_child_open').click(function (e) {
             e.stopPropagation();
         });
+    };
+    GuestInfoComponent.prototype.toggleDrawer = function () {
+        this.openDrawer = !this.openDrawer;
     };
     GuestInfoComponent.prototype.counter = function (i) {
         return new Array(i);
