@@ -58,6 +58,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       children: []
     }
   ];
+  $dealLocatoin;
 
   showCommingSoon: boolean = false;
   customStartDateValidation = "2021-05-03";
@@ -77,11 +78,10 @@ export class HotelSearchWidgetComponent implements OnInit {
     
     this.setHotelDate();
     this.checkOutMinDate = this.checkInDate;
-    console.log(this.checkInDate)
 
-    this.checkOutDate.setDate(this.checkInDate.getDate() + 1);
+    this.checkOutDate = moment(this.checkInDate).add(1,'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
-
+    console.log(this.rangeDates)
     this.searchHotelInfo =
     {
       latitude: null,
@@ -135,7 +135,9 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.countryCode = this.commonFunction.getUserCountry();
 
     if (this.route && this.route.snapshot.queryParams['check_in']) {
-      this.homeService.removeToString('hotel');  
+      // this.$dealLocatoin.unsubscribe();  
+      this.homeService.removeToString('hotel'); 
+
       this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
       this.checkInMinDate = this.checkInDate;
       this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
@@ -175,19 +177,20 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
       this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
     }
-    this.homeService.getLocationForHotelDeal.subscribe(toSearchString=> {
-      if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){        
-
+    this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(toSearchString=> {
+      if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){       
+        console.log(toSearchString)
       this.fromDestinationInfo.city = 'Miami from deal';
       this.searchHotelInfo.latitude =  40.7681;
       this.searchHotelInfo.longitude =-73.9819;
       }
     });
-    this.homeService.setLocationForHotel('hotel');  
+    this.homeService.removeToString('hotel'); 
 
     if (this.selectedGuest) {
       this.searchedValue.push({ key: 'guest', value: this.selectedGuest });
     }
+    console.log(this.checkOutDate)
   }
 
   checkInDateUpdate(date) {

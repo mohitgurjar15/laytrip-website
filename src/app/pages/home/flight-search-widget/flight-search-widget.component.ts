@@ -119,8 +119,6 @@ export class FlightSearchWidgetComponent implements OnInit {
       this.isCalenderPriceLoading = false;
     }
     this.route.queryParams.subscribe(params => {
-
-      console.log("innn",params)
       if (Object.keys(params).length > 0 && window.location.pathname=='/flight/search') {
         //delete BehaviorSubject in the listing page
         this.homeService.removeToString('flight');  

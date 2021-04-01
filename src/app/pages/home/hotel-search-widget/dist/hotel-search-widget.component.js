@@ -64,9 +64,9 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         });
         this.setHotelDate();
         this.checkOutMinDate = this.checkInDate;
-        console.log(this.checkInDate);
-        this.checkOutDate.setDate(this.checkInDate.getDate() + 1);
+        this.checkOutDate = moment(this.checkInDate).add(1, 'days').toDate();
         this.rangeDates = [this.checkInDate, this.checkOutDate];
+        console.log(this.rangeDates);
         this.searchHotelInfo =
             {
                 latitude: null,
@@ -113,6 +113,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         }
         this.countryCode = this.commonFunction.getUserCountry();
         if (this.route && this.route.snapshot.queryParams['check_in']) {
+            // this.$dealLocatoin.unsubscribe();  
             this.homeService.removeToString('hotel');
             this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
             this.checkInMinDate = this.checkInDate;
@@ -150,17 +151,19 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
             this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
         }
-        this.homeService.getLocationForHotelDeal.subscribe(function (toSearchString) {
+        this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(function (toSearchString) {
             if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
+                console.log(toSearchString);
                 _this.fromDestinationInfo.city = 'Miami from deal';
                 _this.searchHotelInfo.latitude = 40.7681;
                 _this.searchHotelInfo.longitude = -73.9819;
             }
         });
-        this.homeService.setLocationForHotel('hotel');
+        this.homeService.removeToString('hotel');
         if (this.selectedGuest) {
             this.searchedValue.push({ key: 'guest', value: this.selectedGuest });
         }
+        console.log(this.checkOutDate);
     };
     HotelSearchWidgetComponent.prototype.checkInDateUpdate = function (date) {
         // this is only for closing date range picker, after selecting both dates
