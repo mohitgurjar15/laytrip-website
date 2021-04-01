@@ -11,20 +11,28 @@
                   <path class="a"
                     d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
                 </svg>
-                <span class="tr_type">
-                  {{x==0?'Primary Traveler':travlerLabels['en'][traveler.controls.type.value]}}
-                </span>
-                <!-- <span class="tr_type mob_names {{travelerItem.value.adults[x].userId}}" [ngClass]="{'hide_section':travelerItem.value.adults[x].userId==''}">
-                  {{x==0?'Primary Traveler':travlerLabels['en'][traveler.controls.type.value]}}
-                </span> -->
-
-
-                <span class="trv_name hide_section">
-                  {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
-                  +travelerItem.value.adults[x].last_name:'' | titlecase}}
-                </span>
+                  <span class="tr_type" *ngIf="cartItem.type=='flight'">
+                    {{x==0 && cartItem.type=='flight' ?'Primary Traveler':travlerLabels['en'][traveler.controls.type.value]}}
+                  </span>
+                  <span class="tr_type hotel_type_name" *ngIf="cartItem.type=='hotel'">
+                    {{cartItem.module_info.title }}
+                  </span>
+                  <span class="adult_countr" *ngIf="cartItem.type=='hotel'">
+                    2 Adults
+                  </span>
+                  <!-- <span class="tr_type mob_names {{travelerItem.value.adults[x].userId}}" [ngClass]="{'hide_section':travelerItem.value.adults[x].userId==''}">
+                    {{x==0?'Primary Traveler':travlerLabels['en'][traveler.controls.type.value]}}
+                  </span> -->
+  
+  
+                  <span class="trv_name hide_section" *ngIf="cartItem.type=='flight'">
+                    {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
+                    +travelerItem.value.adults[x].last_name:'' | titlecase}}
+                  </span>
+                
+                
               </a>
-              <a *ngIf="(traveler.controls.type.value=='adult' && isAdultTravller) || (traveler.controls.type.value=='child' && isChildTravller) || (traveler.controls.type.value=='infant' && isInfantTravller)" class="dropdown-toggle traveler_drop_down"
+              <a [ngClass]="{'hotel_travller': cartItem.type=='hotel'}" *ngIf="(traveler.controls.type.value=='adult' && isAdultTravller) || (traveler.controls.type.value=='child' && isChildTravller) || (traveler.controls.type.value=='infant' && isInfantTravller)" class="dropdown-toggle traveler_drop_down"
                 data-toggle="dropdown" aria-expanded="false">{{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + '
                 '
                 +travelerItem.value.adults[x].last_name:'Saved Travelers' | titlecase}}</a>
@@ -69,7 +77,7 @@
                           {{'last_name_string_validation' | translate}} </small>
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory" *ngIf="travelerItem.value?.adults[x].hasOwnProperty('gender')">
+                    <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory" *ngIf="cartItem.type=='flight'">
                       
                       <div class="gender_anchers gender_selection">
                         <label for="">Gender*</label>
@@ -118,7 +126,7 @@
                             class="error_img">Minimum {{travelerItem.value.adults[x].phone_no_length}} characters.</small>
                       </div>
                     </div>
-                    <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps" *ngIf="travelerItem.value?.adults[x].hasOwnProperty('dob')">
+                    <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps" *ngIf="cartItem.type=='flight'">
                       <label for="">{{'dob' | translate}}*</label>
                       <input #dobText placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}}
                         [textMask]="dateYeaMask" formControlName="dob"
@@ -168,7 +176,7 @@
                     </div>
 
 
-                    <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps" *ngIf="travelerItem.value?.adults[x].hasOwnProperty('country_id')">
+                    <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps" *ngIf="cartItem.type=='flight'">
                       <label for="">{{traveler.controls.is_passport_required.value ? 'Country of Issue*' :
                         'Country*'}}</label>
                       <ng-select [clearable]="false" [items]="countries" bindLabel="name" bindValue="id" tabindex="10"

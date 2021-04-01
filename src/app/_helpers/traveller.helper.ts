@@ -75,12 +75,18 @@ export const travelersFileds = {
             first_name: '',
             last_name: '',
             email: '',
+            gender:'',
+            dob:'',
+            country_id:'',
             country_code: '+1',
             phone_no: '',
             phone_no_format: '(000) 000-0000',
             phone_no_length: '10',
             is_valid_date: true,
-            is_submitted:false
+            is_submitted:false,
+            passport_number: '',
+            passport_expiry: '',
+            is_passport_required:false
         }
     }
 }

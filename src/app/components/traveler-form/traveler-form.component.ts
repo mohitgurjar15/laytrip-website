@@ -317,6 +317,12 @@ export class TravelerFormComponent implements OnInit {
         phone_no_length: (i == 0 ) ? [x.phone_no_length, [Validators.required]] : [x.phone_no_length],
         country_code: (i == 0 ) ? [x.country_code, [Validators.required]] : [x.country_code],
         userId: [x.userId],
+        dob: [x.dob],
+        gender: [x.gender],
+        passport_number:[x.passport_number],
+        passport_expiry:[x.passport_expiry],
+        is_passport_required: [x.is_passport_required],
+        country_id: [x.country_id],
         type: [x.type],
         module: [x.module],
         is_valid_date: [x.is_valid_date],
@@ -343,7 +349,6 @@ export class TravelerFormComponent implements OnInit {
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code = travelersFileds.flight[type].country_code;
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_number = travelersFileds.flight[type].passport_number;
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_expiry = travelersFileds.flight[type].passport_expiry;
-    // this.travelers[`type${this.cartNumber}`].adults[traveler_number].is_passport_required = travelersFileds.flight[type].is_passport_required;
     this.patch();
   }
 
@@ -468,7 +473,7 @@ export class TravelerFormComponent implements OnInit {
 
 
             this.travelers[`type${cartNumber}`].adults[traveler_number].module = this.cartItem.type;
-            if((this.cartItem.type=='flight' && traveler.type=='adult') || (this.cartItem.type=='hotel' && traveler_number==0)){
+            if((this.cartItem.type=='flight' && traveler.user_type=='adult') || (this.cartItem.type=='hotel' && traveler_number==0)){
               this.travelers[`type${cartNumber}`].adults[traveler_number].is_email_required = true;
               this.travelers[`type${cartNumber}`].adults[traveler_number].is_phone_required = true;
             }
@@ -550,23 +555,36 @@ export class TravelerFormComponent implements OnInit {
   selectTraveler(travlerId, traveler_number,cartNumber) {
     let traveler = this.myTravelers.find(x => x.userId == travlerId)
     if (traveler && Object.keys(traveler).length > 0) {
+      console.log(cartNumber,traveler_number)
       //this.travelers[`type${cartNumber}`].adults[traveler_number].module = traveler.module;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].email = traveler.email;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].userId = traveler.userId;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].gender = traveler.gender;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].phone_no = traveler.phoneNo;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code = traveler.countryCode || '+1';
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_id = traveler.country != null ? traveler.country.id : '';
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
+      this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].email = traveler.email;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].userId = traveler.userId;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].gender = traveler.gender;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no = traveler.phoneNo;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].country_code = traveler.countryCode || '+1';
+      this.travelers[`type${cartNumber}`].adults[traveler_number].country_id = traveler.country != null ? traveler.country.id : '';
+      this.travelers[`type${cartNumber}`].adults[traveler_number].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
 
-      if (this.travelers[`type${this.cartNumber}`].adults[traveler_number].is_passport_required) {
-        this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
-        this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_expiry = traveler.passportExpiry ? `${moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy')}` : '';
+      this.travelers[`type${cartNumber}`].adults[traveler_number].module = this.cartItem.type;
+      if((this.cartItem.type=='flight' && traveler.user_type=='adult') || (this.cartItem.type=='hotel' && traveler_number==0)){
+        this.travelers[`type${cartNumber}`].adults[traveler_number].is_email_required = true;
+        this.travelers[`type${cartNumber}`].adults[traveler_number].is_phone_required = true;
       }
+      else{
+        this.travelers[`type${cartNumber}`].adults[traveler_number].is_email_required = false;
+        this.travelers[`type${cartNumber}`].adults[traveler_number].is_phone_required = false;
+      }
+
+      if (this.travelers[`type${cartNumber}`].adults[traveler_number].is_passport_required) {
+        this.travelers[`type${cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
+        this.travelers[`type${cartNumber}`].adults[traveler_number].passport_expiry = traveler.passportExpiry ? `${moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy')}` : '';
+      }
+      console.log(this.travelers,"-----",this.cartItem.type,traveler.type)
+      //return false;
       this.patch();
-      this.setPhoneNumberFormat(this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code,cartNumber,traveler_number)
+      //this.setPhoneNumberFormat(this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code,cartNumber,traveler_number)
     }
     
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
