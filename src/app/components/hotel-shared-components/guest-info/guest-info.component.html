@@ -1,7 +1,8 @@
 <div class="search_area">
   <!-- <label>{{ label }}</label> -->
   <div class="travel_info" id="add_child" (click)="toggleDrawer()">
-    <span>{{ totalPerson }}</span> Traveler
+    <span>1</span> Room, 
+    <span class="guest_num"> 4</span> Guest
     <div class="drop_aerrow"></div>
   </div>
   <!-- <span>{{roomsGroup.length}} Rooms</span> -->
@@ -64,8 +65,8 @@
           </li>
         </ul>
         <ng-container>
-          <div class="child_sel_wrapper">
-            <div class="child_boxes open" *ngFor="let childage of room.child;let idx=index;">
+          <div class="child_sel_wrapper" *ngIf="room.child.length">
+            <div class="child_boxes open"  *ngFor="let childage of room.child;let idx=index;">
               <div class="left">
                 <span class="label_name">Child {{idx+1}} age</span>
               </div>
