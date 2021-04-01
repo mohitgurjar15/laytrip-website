@@ -3,12 +3,15 @@ export const travelersFileds = {
 
     flight: {
         adult: {
+            module : 'flight',
             userId: '',
             type: 'adult',
             first_name: '',
             last_name: '',
+            is_email_required:true,
             email: '',
             country_code: '+1',
+            is_phone_required:true,
             phone_no: '',
             phone_no_format: '(000) 000-0000',
             phone_no_length: '10',
@@ -25,9 +28,12 @@ export const travelersFileds = {
             is_submitted:false
         },
         child: {
+            module : 'flight',
             userId: '',
             type: 'child',
             first_name: '',
+            is_email_required:false,
+            is_phone_required:false,
             last_name: '',
             dob: '',
             dobMinDate: new Date(moment().subtract(12, 'years').format("YYYY-MM-DD")),
@@ -42,8 +48,11 @@ export const travelersFileds = {
             is_submitted:false
         },
         infant: {
+            module : 'flight',
             userId: '',
             type: 'infant',
+            is_email_required:false,
+            is_phone_required:false,
             first_name: '',
             last_name: '',
             dobMinDate: new Date(moment().subtract(2, 'years').format("YYYY-MM-DD")),
@@ -53,6 +62,24 @@ export const travelersFileds = {
             dob: '',
             country_id: '',
             gender: '',
+            is_submitted:false
+        }
+    },
+    hotel:{
+        adult: {
+            module : 'hotel',
+            userId: '',
+            type: 'adult',
+            is_email_required:true,
+            is_phone_required:true,
+            first_name: '',
+            last_name: '',
+            email: '',
+            country_code: '+1',
+            phone_no: '',
+            phone_no_format: '(000) 000-0000',
+            phone_no_length: '10',
+            is_valid_date: true,
             is_submitted:false
         }
     }
