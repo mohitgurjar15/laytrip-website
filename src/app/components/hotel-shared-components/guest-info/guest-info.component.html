@@ -33,7 +33,7 @@
               <input type='text' name='quantity' value='{{ roomsGroup.rooms ? roomsGroup.rooms : 1  }}' class='qty' readonly />
               <button class='qtyplus' field='quantity' id=""
               [disabled]="roomsGroup.rooms >= 9" 
-              [ngClass]="{ 'un_active' : roomsGroup.rooms > 9 || roomsGroup.rooms == 9 }"
+              [ngClass]="{ 'un_active' : roomsGroup.rooms >= 9 || roomsGroup.rooms == 9 }"
               (click)="addRoom(id)">+</button>
             </div>
           </li>
@@ -74,8 +74,8 @@
               <input type='text' name='quantity' value='{{ roomsGroup.child === 0 ? 0 : roomsGroup.child }}'
                 class='qty' readonly />
               <button type='button' class='qtyplus' field='quantity'
-                [ngClass]="{ 'un_active' : ((roomsGroup.adults + roomsGroup.child) === 28 || roomsGroup.child >= 8 )}"
-                [disabled]="((roomsGroup.adults + roomsGroup.child) === 28 || roomsGroup.child >= 8 )" id="{{id}}"
+                [ngClass]="{ 'un_active' : ((roomsGroup.adults + roomsGroup.child) === 8 || roomsGroup.child >= 8 )}"
+                [disabled]="((roomsGroup.adults + roomsGroup.child) === 8 || roomsGroup.child >= 8 )" id="{{id}}"
                 (click)="addRemovePerson({id: id, type: 'plus',label: 'child', value: roomsGroup.child})">+</button>
             </div>
           </li>
