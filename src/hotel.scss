@@ -825,9 +825,10 @@ ngb-datepicker {
                     justify-content: space-between;
                     position: relative;
 
-                    @media(max-width: 991px) {
+                    @include tab-view{
                         width: 100%;
                         margin-bottom: 20px;
+                        padding: 0;
                     }
 
                     label {
