@@ -1,0 +1,29 @@
+.guest_error {
+  color: #ff0000;
+  font-size: 12px;
+}
+
+.qtyminus.un_active,
+.qtyplus.un_active {
+  border: 1px solid #d5d7e3 !important;
+  color: #d5d7e3 !important;
+  cursor: not-allowed;
+}
+.qtyminus.un_active:hover,
+.qtyplus.un_active:hover {
+  border: 1px solid #d5d7e3 !important;
+  color: #d5d7e3 !important;
+  cursor: not-allowed;
+  background: #f1f1f1;
+}
+.qtyminus.disable_btn,
+.qtyplus.disable_btn {
+  border: 1px solid #d5d7e3;
+  color: #d5d7e3;
+  cursor: not-allowed;
+  background: #f1f1f1;
+}
+
+ng-scrollbar {
+  --scrollbar-padding: 25px 0 0 5px !important;
+}

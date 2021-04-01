@@ -101,28 +101,6 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
-  setHotelDate(){
-
-    var curretdate = moment().format();
-
-    let  juneDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
-    
-    let daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
-
-    if(curretdate < juneDate && daysDiffFromCurToJune > 30 ){    
-      this.checkInDate =  moment(juneDate).toDate();
-       this.checkInMinDate = this.checkInDate; 
-      } else if(daysDiffFromCurToJune < 30){
-        this.checkInDate =  moment(curretdate).add(31,'days').toDate();
-        this.checkInMinDate = this.checkInDate; 
-        // this.departureDate = date; 
-      } else {
-        this.checkInDate = moment(curretdate).add(31,'days').toDate(); 
-        this.checkInMinDate = this.checkInDate; 
-      // this.flightDepartureMinDate =  date;
-    }
-  }
-
   ngOnInit() {
     window.scrollTo(0, 0);
     this.checkInDate = moment(this.customStartDateValidation).toDate();
@@ -191,6 +169,28 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
+  setHotelDate(){
+
+    var curretdate = moment().format();
+
+    let  juneDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
+    
+    let daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+
+    if(curretdate < juneDate && daysDiffFromCurToJune > 30 ){    
+      this.checkInDate =  moment(juneDate).toDate();
+       this.checkInMinDate = this.checkInDate; 
+      } else if(daysDiffFromCurToJune < 30){
+        this.checkInDate =  moment(curretdate).add(31,'days').toDate();
+        this.checkInMinDate = this.checkInDate; 
+        // this.departureDate = date; 
+      } else {
+        this.checkInDate = moment(curretdate).add(31,'days').toDate(); 
+        this.checkInMinDate = this.checkInDate; 
+      // this.flightDepartureMinDate =  date;
+    }
+  }
+
   checkInDateUpdate(date) {
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
@@ -210,6 +210,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (this.searchedValue && this.searchedValue.find(i => i.key === 'guest')) {
       this.searchedValue[1]['value'] = event;
       this.searchHotelInfo.occupancies = event;
+      console.log(this.searchHotelInfo.occupancies)
+
     }
   }
 
@@ -231,7 +233,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value']));
     queryParams.location = btoa(JSON.stringify(this.searchedValue[0]['value']));
-
+    console.log("queryParams",queryParams)
     if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
       // localStorage.setItem('_hote', JSON.stringify(this.searchedValue));

@@ -16,11 +16,12 @@ var GuestInfoComponent = /** @class */ (function () {
         this.totalRoom = [];
         this.errorMessage = '';
         this.openDrawer = false;
+        this.childGroup = [];
         this.roomsGroup = {
             rooms: 1,
             adults: 1,
             child: 0,
-            children: 0
+            children: []
         };
         this.countryCode = this.commonFunction.getUserCountry();
     }
@@ -100,14 +101,18 @@ var GuestInfoComponent = /** @class */ (function () {
         if (item && item.type === 'plus' && item.label === 'child') {
             // this.roomsGroup[item.id].child.push(1);
             this.roomsGroup.child += 1;
+            this.childGroup.push('child');
             this.totalPerson = this.getTotalPerson();
         }
         else if (item && item.type === 'minus' && item.label === 'child') {
+            this.childGroup.splice(-1, 1);
+            // this.childGroup.pop('child')
             // this.roomsGroup[item.id].child.pop();
-            this.roomsGroup.child = this.roomsGroup.child - 1;
+            this.roomsGroup.child -= 1;
             // this.roomsGroup[item.id].children.pop();
             this.totalPerson = this.getTotalPerson();
         }
+        console.log(this.childGroup);
         this.changeValue.emit(this.roomsGroup);
     };
     GuestInfoComponent.prototype.getTotalPerson = function () {
@@ -116,11 +121,13 @@ var GuestInfoComponent = /** @class */ (function () {
               total += data.adults + data.child.length;
               total += data.adults + data.child;
             }
-         */ return total;
+         */ return this.roomsGroup.adults + this.roomsGroup.child;
     };
     GuestInfoComponent.prototype.changeChildAge = function (age, index) {
-        // this.roomsGroup[index].children.push(parseInt(age));
-        this.changeValue.emit(this.roomsGroup);
+        /*  console.log(age, index)
+         this.roomsGroup.children[index].push(parseInt(age));
+         this.changeValue.emit(this.roomsGroup);
+         console.log(this.roomsGroup) */
     };
     __decorate([
         core_1.Output()
