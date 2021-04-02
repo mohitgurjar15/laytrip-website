@@ -25,3 +25,7 @@
         background: #f1f1f1;
     }
 }
+
+ng-scrollbar {
+    --scrollbar-padding: 0 0 0 5px !important;
+}

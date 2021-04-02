@@ -18,12 +18,13 @@ export class GuestInfoComponent implements OnInit {
   errorMessage = '';
   openDrawer : boolean = false;
   countryCode: string;
+  childGroup=[];
   roomsGroup = 
     {
       rooms:1,
       adults: 1,
       child: 0,
-      children: 0
+      children: []
     }
   ;
   totalPerson: number;
@@ -75,7 +76,7 @@ export class GuestInfoComponent implements OnInit {
     this.openDrawer=!this.openDrawer;
   }
 
-  counter(i: number) {
+  counter(i) {
     return new Array(i);
   }
 
@@ -105,7 +106,6 @@ export class GuestInfoComponent implements OnInit {
   }
 
   addRemovePerson(item) {
-
     // FOR ADULT
     if (item && item.type === 'plus' && item.label === 'adult') {
       // this.roomsGroup[item.id].adults += 1;
@@ -120,15 +120,21 @@ export class GuestInfoComponent implements OnInit {
     if (item && item.type === 'plus' && item.label === 'child') {
       // this.roomsGroup[item.id].child.push(1);
       this.roomsGroup.child +=  1;
+      this.childGroup.push('child');
       this.totalPerson = this.getTotalPerson();
     } else if (item && item.type === 'minus' && item.label === 'child') {
+      this.childGroup.splice(-1,1)
+
+      // this.childGroup.pop('child')
       // this.roomsGroup[item.id].child.pop();
-      this.roomsGroup.child = this.roomsGroup.child - 1;
+      this.roomsGroup.child -=  1;
       // this.roomsGroup[item.id].children.pop();
       this.totalPerson = this.getTotalPerson();
     }
+    console.log(this.childGroup)
     this.changeValue.emit(this.roomsGroup);
   }
+  
 
   getTotalPerson() {
     let total = 0;
@@ -136,11 +142,13 @@ export class GuestInfoComponent implements OnInit {
       total += data.adults + data.child.length;
       total += data.adults + data.child;
     }
- */    return total;
+ */    return this.roomsGroup.adults + this.roomsGroup.child ;
   }
 
   changeChildAge(age, index) {
-    // this.roomsGroup[index].children.push(parseInt(age));
+   /*  console.log(age, index)
+    this.roomsGroup.children[index].push(parseInt(age));
     this.changeValue.emit(this.roomsGroup);
+    console.log(this.roomsGroup) */
   }
 }
