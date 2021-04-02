@@ -5,7 +5,7 @@
     <div class="drop_aerrow"></div>
   </div>
   
-  <div class="traveller_add_block" id="add_child_open" style="height: 200px;" [ngClass]="(openDrawer==true)?'panel_show':'panel_hide'">
+  <div class="traveller_add_block" id="add_child_open" [ngClass]="(openDrawer==true)?'panel_show':'panel_hide'">
     
     <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
     pointerEventsMethod="scrollbar"> 
