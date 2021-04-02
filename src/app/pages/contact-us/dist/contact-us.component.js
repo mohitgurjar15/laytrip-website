@@ -61,7 +61,8 @@ var ContactUsComponent = /** @class */ (function () {
         formdata.append("name", this.contactUsForm.value.name);
         formdata.append("email", this.contactUsForm.value.email);
         formdata.append("message", this.contactUsForm.value.message);
-        formdata.append("file[]", this.files ? this.files : []);
+        var d = { 'file': this.files };
+        formdata.append("file", d);
         /*  for  (var i =  0; i <  this.files.length; i++)  {
            formdata.append("file",  this.files[i]);
          } */
