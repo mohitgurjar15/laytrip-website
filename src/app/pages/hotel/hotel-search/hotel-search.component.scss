@@ -1,6 +1,121 @@
-.anchor_link{
+@import "../../../../_cstm-variable.scss";
+@import "../../../../_cstm-components.scss";
+@import "../../../../_hotel.scss";
+@import "../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.anchor_link {
     cursor: pointer;
 }
-.search_tab_listing_wrapper{
-    margin-top: 50px;
+
+.search_tab_listing_wrapper {
+    //margin-top: 50px;
+
+    @include tab-view {
+        margin-top: 130px;
+    }
+
+    .container {
+        padding: 0;
+    }
+}
+
+.listing_main_box {
+    margin-top: 0;
+    position: relative;
+
+    // transform: translate(0px, -155px);
+    .search_tab_listing_wrapper {
+        // top: -100px;
+        // position: relative;
+
+        @include tab-view {
+            top: 0;
+            margin-top: 0;
+        }
+    }
+
+    @include tab-view {
+        padding: 15px;
+        top: 0px;
+        margin: 0;
+    }
+}
+
+.search_tab_listing_wrapper {
+    padding-top: 30px;
+    display: flex;
+    width: 100%;
+
+    &::before {
+        content: '';
+        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/cms_page_banner.png);
+        background-position: top;
+        background-repeat: no-repeat;
+        height: 160px;
+        width: 100%;
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        -o-object-fit: cover;
+        object-fit: cover;
+        -o-object-position: center;
+        object-position: center;
+    }
+
+    .search_tab_icons_wrps {
+        display: flex;
+        margin-bottom: 25px;
+
+        .tab_anch {
+            padding: 20px 30px 20px 30px;
+            background: $box-border-color;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 23px;
+            height: 69px;
+            width: 69px;
+
+            @include tab-view {
+                height: 51px;
+                width: 51px;
+                padding: 20px;
+            }
+
+            img {
+                @include tab-view {
+                    max-width: 27px;
+                }
+            }
+
+            .active-icon {
+                display: none;
+            }
+
+            &.active {
+                background: $primary-color;
+
+                .active-icon {
+                    display: block;
+                }
+
+                .default-icon {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .searchbar_box_common {
+        position: relative;
+    }
 }
