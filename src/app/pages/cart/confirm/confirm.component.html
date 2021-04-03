@@ -57,6 +57,10 @@
                             {{commonFunction.convertDateFormat(booking.moduleInfo[0].departure_date,'DD/MM/YYYY')}}-{{commonFunction.convertDateFormat(booking.moduleInfo[0].arrival_date,'DD/MM/YYYY')}}
                         </span>
                     </div>
+                    <div class="detail_liners" *ngIf="booking.moduleId==3 && (booking.bookingStatus==0 || bookingStatus==1)" >
+                        <span class="lefts">Hotel</span>
+                        <span class="rights">{{booking.moduleInfo[0].hotel_name}} {{commonFunction.convertDateFormat(booking.moduleInfo[0].input_data.check_in,'YYYY-MM-DD')}}</span>
+                    </div>
                 </ng-container>
 
                 <!-- <div class="detail_liners">

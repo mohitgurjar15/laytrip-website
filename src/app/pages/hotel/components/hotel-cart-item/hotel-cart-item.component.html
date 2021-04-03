@@ -39,7 +39,7 @@
         <div class="hotel_lower_inner" *ngIf="cartItem.module_info.amenities.length">
             <span>
                 <ng-container *ngFor="let amenity of cartItem.module_info.amenities ; let laststop = last">
-                    {{amenity}}
+                    {{amenity | titlecase}}
                     <ng-container *ngIf="!laststop">,</ng-container>
                 </ng-container>
             </span>
