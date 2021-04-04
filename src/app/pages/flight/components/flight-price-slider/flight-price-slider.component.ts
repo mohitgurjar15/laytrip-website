@@ -23,6 +23,18 @@ export class FlightPriceSliderComponent implements OnInit {
   child:number;
   infant:number;
 
+  slides = [
+    {img: "http://placehold.it/350x150/000000"},
+    {img: "http://placehold.it/350x150/111111"},
+    {img: "http://placehold.it/350x150/333333"},
+    {img: "http://placehold.it/350x150/666666"},
+    {img: "http://placehold.it/350x150/000000"},
+    {img: "http://placehold.it/350x150/111111"},
+    {img: "http://placehold.it/350x150/333333"},
+    {img: "http://placehold.it/350x150/666666"}
+  ];
+  slideConfig = {"slidesToShow": 7, "slidesToScroll": 1};
+
   @Input() flexibleLoading:boolean=false;
   @Input() dates=[];
 

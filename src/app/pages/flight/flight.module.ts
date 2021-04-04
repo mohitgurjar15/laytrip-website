@@ -33,6 +33,7 @@ import { PopupLoaderComponent } from './components/popup-loader/popup-loader.com
 import { HelpersModule } from '../../_helpers/_helpers.module';
 import { HomeModule } from '../home/home.module';
 import { FlightCartItemComponent } from './components/flight-cart-item/flight-cart-item.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { FlightCartItemComponent } from './components/flight-cart-item/flight-ca
     NgSelectModule,
     CookieModule.forRoot(),
     CalendarModule,
-    HomeModule
+    HomeModule,
+    SlickCarouselModule
   ],
   exports: [
     FlightLoaderComponent,
