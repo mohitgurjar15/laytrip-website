@@ -173,6 +173,7 @@ export class HotelDetailComponent implements OnInit {
   }
 
   counter(i: any) {
+    i = Math.ceil(i);
     return new Array(i);
   }
 

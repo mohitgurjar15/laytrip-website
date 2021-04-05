@@ -198,7 +198,7 @@ export class HotelSearchBarComponent implements OnInit {
     }
     if (this.recentSearchInfo && this.recentSearchInfo.length < 3) {
       this.recentSearchInfo.push(event);
-      localStorage.setItem('_hotel_recent', JSON.stringify(this.recentSearchInfo));
+      //localStorage.setItem('_hotel_recent', JSON.stringify(this.recentSearchInfo));
     }
   }
 
