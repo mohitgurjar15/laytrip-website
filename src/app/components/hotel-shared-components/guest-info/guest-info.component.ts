@@ -40,7 +40,8 @@ export class GuestInfoComponent implements OnInit {
     this.loadJquery();
     if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
       const info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-      if (info && info.length) {
+      console.log("info",info)
+      if (info) {
         this.roomsGroup = info;
       }
     } else {
@@ -81,22 +82,19 @@ export class GuestInfoComponent implements OnInit {
   }
 
   addRoom(index) {
-   /*  this.roomsGroup.push({
-      adults: 1,
-      child: 0,
-      children: 0
-    });
- */
-    if(this.roomsGroup.rooms < 9) {
-      this.roomsGroup.rooms += 1;
+    if(typeof this.roomsGroup.rooms == 'undefined' || this.roomsGroup.rooms < 9) {
+        this.roomsGroup.rooms += 1;
+      console.log(typeof this.roomsGroup.rooms)
       this.totalPerson = this.getTotalPerson();
       this.changeValue.emit(this.roomsGroup);
-    }
+    } 
   }
 
   removeRoom(index) {
-    if(this.roomsGroup.rooms >1 ){
+    if(this.roomsGroup.rooms > 1 ){
       this.roomsGroup.rooms -= 1;
+      this.changeValue.emit(this.roomsGroup);
+      this.totalPerson = this.getTotalPerson();
     }
   /*   if(this.roomsGroup.length > 1){
       this.roomsGroup.splice(index, 1);

@@ -53,8 +53,8 @@ export class HotelSearchWidgetComponent implements OnInit {
   };
   selectedGuest = [
     {
-      adults: 2,
-      child: [],
+      adults: 1,
+      child: 0,
       children: []
     }
   ];
@@ -132,6 +132,7 @@ export class HotelSearchWidgetComponent implements OnInit {
         };
         if (this.route.snapshot.queryParams['location']) {
           info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+          
           if (info) {
             this.fromDestinationInfo.city = info.city;
             this.fromDestinationInfo.country = info.country;
@@ -210,8 +211,6 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (this.searchedValue && this.searchedValue.find(i => i.key === 'guest')) {
       this.searchedValue[1]['value'] = event;
       this.searchHotelInfo.occupancies = event;
-      console.log(this.searchHotelInfo.occupancies)
-
     }
   }
 
@@ -231,9 +230,9 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.check_out = moment(this.searchHotelInfo.check_out).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
-    queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value']));
+    queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value'][0]));
     queryParams.location = btoa(JSON.stringify(this.searchedValue[0]['value']));
-    console.log("queryParams",queryParams)
+    console.log("queryParams",queryParams.itenery)
     if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
       // localStorage.setItem('_hote', JSON.stringify(this.searchedValue));
