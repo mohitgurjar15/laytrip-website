@@ -19,6 +19,8 @@ export class GuestInfoComponent implements OnInit {
   openDrawer : boolean = false;
   countryCode: string;
   childGroup=[];
+  childAges=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+  isShowChildDropDown:boolean=false;
   roomsGroup = 
     {
       rooms:1,
@@ -53,6 +55,7 @@ export class GuestInfoComponent implements OnInit {
     $("#add_child_open").hide();
     $("body").click(function () {
       $("#add_child_open").hide();
+      $("#child_su_drop_op").css('display', 'none');
     });
 
     $("#add_child").click(function (e) {
@@ -65,7 +68,21 @@ export class GuestInfoComponent implements OnInit {
       }
     });
 
+    console.log("out");
+    $(document).on("click",".child_sub_drop",function(e){
+      console.log("in");
+      e.stopPropagation();
+      $(this).siblings(".child_su_drop_op").show();
+      //$("#child_su_drop_op").css('display', 'flex');
+    })
+    
+
     $('#add_child_open').click(
+      function (e) {
+        e.stopPropagation();
+      }
+    );
+    $('#child_su_drop_op').click(
       function (e) {
         e.stopPropagation();
       }
@@ -146,5 +163,9 @@ export class GuestInfoComponent implements OnInit {
     this.roomsGroup.children[index].push(parseInt(age));
     this.changeValue.emit(this.roomsGroup);
     console.log(this.roomsGroup) */
+  }
+
+  toggleChildDropDown(){
+    this.isShowChildDropDown=!this.isShowChildDropDown;
   }
 }
