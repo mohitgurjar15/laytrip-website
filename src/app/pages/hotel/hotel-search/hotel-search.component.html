@@ -1,39 +1,58 @@
 <!-- <app-hotel-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getHotelSearchDataByModify($event)"></app-hotel-search-bar> -->
-
-<div class="search_tab_listing_wrapper">
-  <div class="container">
-    <div class="searchbar_box_common">
-      <app-hotel-search-widget></app-hotel-search-widget>
+<div class="listing_main_box">
+  <div class="search_tab_listing_wrapper">
+    <div class="container">
+      <div class="search_tab_icons_wrps">
+        <a class="tab_anch" href="javascript:void(0);">
+          <img class="active-icon" src="{{s3BucketUrl}}assets/images/airplane_tab.svg" alt="Flight Icon" />
+          <img class="default-icon" src="{{s3BucketUrl}}assets/images/airplane-flying-inactive.svg" alt="Flight Icon" />
+        </a>
+        <a class="active tab_anch" href="javascript:void(0);">
+          <img class="active-icon" src="{{s3BucketUrl}}assets/images/bed_active.svg" alt="Hotel Icon" />
+          <img class="default-icon" src="{{s3BucketUrl}}assets/images/bed_tab_inactive.svg" alt="Hotel Icon" />
+        </a>
+        <a class="tab_anch" href="javascript:void(0);" style="pointer-events: none;">
+          <img class="active-icon" src="{{s3BucketUrl}}assets/images/home_active.svg" alt="Accommodation Icon" />
+          <img class="default-icon" src="{{s3BucketUrl}}assets/images/home_inactive.svg" alt="Accommodation Icon" />
+        </a>
+        <a class="tab_anch" href="javascript:void(0);" style="pointer-events: none;">
+          <img class="active-icon" src="{{s3BucketUrl}}assets/images/car_tab_inactive.svg" alt="car Icon" />
+          <img class="default-icon" src="{{s3BucketUrl}}assets/images/car_tab_inactive.svg" alt="car Icon" />
+        </a>
+      </div>
+      <div class="searchbar_box_common">
+        <app-hotel-search-widget></app-hotel-search-widget>
+      </div>
     </div>
   </div>
-</div>
 
-<app-hotel-loader *ngIf="loading"></app-hotel-loader>
-<app-hotel-popup-loader *ngIf="loading"></app-hotel-popup-loader>
+  <app-hotel-loader *ngIf="loading"></app-hotel-loader>
+  <app-hotel-popup-loader *ngIf="loading"></app-hotel-popup-loader>
 
-<app-hotel-not-found *ngIf="isNotFound"></app-hotel-not-found>
-<app-hotel-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-hotel-error>
+  <app-hotel-not-found *ngIf="isNotFound"></app-hotel-not-found>
+  <app-hotel-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-hotel-error>
 
-<section class="search_result hotels" *ngIf="!loading && !isNotFound && errorMessage==''">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3">
-        <div class="sticky-top left_side_bar">
-          <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
-          <div class="filter_saidbar">
-            <div class="filter_by d-none d-lg-block">
-              <!-- <div class="block_inn">
+  <section class="search_result hotels" *ngIf="!loading && !isNotFound && errorMessage==''">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <!-- <div class="sticky-top left_side_bar"> -->
+          <div class="left_side_bar">
+            <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
+            <div class="filter_saidbar">
+              <div class="filter_by d-none d-lg-block">
+                <!-- <div class="block_inn">
                 <h4>Filter By</h4>
                 <a class="anchor_link" (click)="resetFilter()">Reset</a>
               </div>  -->
-              <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain"
-                (filterHotel)="filterHotel($event)" isResetFilter={{isResetFilter}}></app-filter-hotel>
+                <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain"
+                  (filterHotel)="filterHotel($event)" isResetFilter={{isResetFilter}}></app-filter-hotel>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-9">
-        <!-- <div class="view_btn_wrapper">
+        <div class="col-lg-9">
+          <!-- <div class="view_btn_wrapper">
           <button class="list_v_btn">
             <img src="{{s3BucketUrl}}assets/images/hotels/list_btn.svg" alt="List view">
             List view
@@ -43,16 +62,16 @@
             Map view
           </button>
         </div> -->
-        <app-hotel-item-wrapper *ngIf="hotelDetails" [hotelToken]="hotelToken" [hotelDetails]="hotelDetails">
-        </app-hotel-item-wrapper>
+          <app-hotel-item-wrapper *ngIf="hotelDetails" [hotelToken]="hotelToken" [hotelDetails]="hotelDetails">
+          </app-hotel-item-wrapper>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
-<!-- For responsive -->
-<!-- <div class="filter_responsive flight" id="responsive_filter">
+  <!-- For responsive -->
+  <!-- <div class="filter_responsive flight" id="responsive_filter">
   <div class="btn_filter">
       <a href="javascript:void(0)" class="responsive_filter_btn">Show Filter</a>
   </div>
@@ -79,3 +98,5 @@
       </div>
   </div>
 </div> -->
+
+</div>
