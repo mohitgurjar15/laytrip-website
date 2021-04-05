@@ -86,14 +86,12 @@
                 <ng-option *ngFor='let in of counter(17) ;let i = index' value="{{i+1}}">{{i+1}}</ng-option>
               </ng-select> -->
               <div class="dropdown ">
-                <a id="child_sub_drop" >
+                <a class="child_sub_drop" (click)="toggleChildDropDown()" >
                   Dropdown link
                 </a>
               
-                <div id="child_su_drop_op" style="display: none;">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                <div class="child_su_drop_op" *ngIf="isShowChildDropDown">
+                  <a *ngFor="let child of childAges;let x = index"  class="dropdown-item" href="javascript:void(0)">{{x}}</a>
                 </div>
               </div>
               
