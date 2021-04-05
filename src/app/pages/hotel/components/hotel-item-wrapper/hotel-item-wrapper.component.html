@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div [hidden]="isMapView" [@listAnimation]="hotelListArray.length" (@listAnimation.start)="logAnimation($event)"
+<div [hidden]="isMapView" *ngIf="hotelListArray.length" [@listAnimation]="hotelListArray.length" (@listAnimation.start)="logAnimation($event)"
     (@listAnimation.done)="logAnimation($event)" class="result_listing hotel_listings infinite-search-results"
     (clickOutside)="closeHotelDetail()" infiniteScroll [infiniteScrollDistance]="scrollDistance"
     [infiniteScrollDisabled]="isFullListDisplayed" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"
@@ -327,5 +327,4 @@
         </div>
     </div> -->
 </div>
-
 <app-hotel-not-found *ngIf="!hotelListArray.length"></app-hotel-not-found>

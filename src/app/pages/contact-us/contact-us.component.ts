@@ -110,6 +110,7 @@ export class ContactUsComponent implements OnInit {
   }
 
   closeModal() {
+    this.messageLenght=0;
     this.submitted = false;
     Object.keys(this.contactUsForm.controls).forEach(key => {
       this.contactUsForm.get(key).markAsUntouched();

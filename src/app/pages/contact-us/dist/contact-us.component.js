@@ -91,6 +91,7 @@ var ContactUsComponent = /** @class */ (function () {
     };
     ContactUsComponent.prototype.closeModal = function () {
         var _this = this;
+        this.messageLenght = 0;
         this.submitted = false;
         Object.keys(this.contactUsForm.controls).forEach(function (key) {
             _this.contactUsForm.get(key).markAsUntouched();

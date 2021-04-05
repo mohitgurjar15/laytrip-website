@@ -51,13 +51,14 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     ],
   };
-  selectedGuest = [
+  selectedGuest = 
     {
+      rooms:1,
       adults: 1,
       child: 0,
       children: []
     }
-  ];
+  ;
   $dealLocatoin;
 
   showCommingSoon: boolean = false;
@@ -87,12 +88,11 @@ export class HotelSearchWidgetComponent implements OnInit {
       longitude: null,
       check_in: this.checkInDate,
       check_out: this.checkOutDate,
-      occupancies: [
+      occupancies: 
         {
           adults: null,
           children: []
-        }
-      ],
+        },
     };
 
     let host = window.location.origin;
@@ -132,7 +132,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         };
         if (this.route.snapshot.queryParams['location']) {
           info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
-          
           if (info) {
             this.fromDestinationInfo.city = info.city;
             this.fromDestinationInfo.country = info.country;
@@ -211,6 +210,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (this.searchedValue && this.searchedValue.find(i => i.key === 'guest')) {
       this.searchedValue[1]['value'] = event;
       this.searchHotelInfo.occupancies = event;
+      console.log(this.searchHotelInfo.occupancies)
     }
   }
 
@@ -230,9 +230,9 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.check_out = moment(this.searchHotelInfo.check_out).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
-    queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value'][0]));
+    queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value']));
     queryParams.location = btoa(JSON.stringify(this.searchedValue[0]['value']));
-    console.log("queryParams",queryParams.itenery)
+    console.log("queryParams",this.searchedValue[1]['value'])
     if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
       // localStorage.setItem('_hote', JSON.stringify(this.searchedValue));

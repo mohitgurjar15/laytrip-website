@@ -29,7 +29,6 @@ var GuestInfoComponent = /** @class */ (function () {
         this.loadJquery();
         if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
             var info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-            console.log("info", info);
             if (info) {
                 this.roomsGroup = info;
             }
@@ -40,6 +39,7 @@ var GuestInfoComponent = /** @class */ (function () {
         this.totalPerson = this.getTotalPerson();
     };
     GuestInfoComponent.prototype.loadJquery = function () {
+        $("#add_child_open").hide();
         $("body").click(function () {
             $("#add_child_open").hide();
         });
@@ -66,7 +66,6 @@ var GuestInfoComponent = /** @class */ (function () {
     GuestInfoComponent.prototype.addRoom = function (index) {
         if (typeof this.roomsGroup.rooms == 'undefined' || this.roomsGroup.rooms < 9) {
             this.roomsGroup.rooms += 1;
-            console.log(typeof this.roomsGroup.rooms);
             this.totalPerson = this.getTotalPerson();
             this.changeValue.emit(this.roomsGroup);
         }
@@ -110,7 +109,6 @@ var GuestInfoComponent = /** @class */ (function () {
             // this.roomsGroup[item.id].children.pop();
             this.totalPerson = this.getTotalPerson();
         }
-        console.log(this.childGroup);
         this.changeValue.emit(this.roomsGroup);
     };
     GuestInfoComponent.prototype.getTotalPerson = function () {

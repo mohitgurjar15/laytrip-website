@@ -40,7 +40,6 @@ export class GuestInfoComponent implements OnInit {
     this.loadJquery();
     if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
       const info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-      console.log("info",info)
       if (info) {
         this.roomsGroup = info;
       }
@@ -51,6 +50,7 @@ export class GuestInfoComponent implements OnInit {
   }
 
   loadJquery() {
+    $("#add_child_open").hide();
     $("body").click(function () {
       $("#add_child_open").hide();
     });
@@ -84,7 +84,6 @@ export class GuestInfoComponent implements OnInit {
   addRoom(index) {
     if(typeof this.roomsGroup.rooms == 'undefined' || this.roomsGroup.rooms < 9) {
         this.roomsGroup.rooms += 1;
-      console.log(typeof this.roomsGroup.rooms)
       this.totalPerson = this.getTotalPerson();
       this.changeValue.emit(this.roomsGroup);
     } 
@@ -129,7 +128,6 @@ export class GuestInfoComponent implements OnInit {
       // this.roomsGroup[item.id].children.pop();
       this.totalPerson = this.getTotalPerson();
     }
-    console.log(this.childGroup)
     this.changeValue.emit(this.roomsGroup);
   }
   
