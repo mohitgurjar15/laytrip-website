@@ -16,14 +16,17 @@ export class GuestInfoComponent implements OnInit {
 
   totalRoom = [];
   errorMessage = '';
+  openDrawer : boolean = false;
   countryCode: string;
-  roomsGroup = [
+  childGroup=[];
+  roomsGroup = 
     {
-      adults: 2,
-      child: [],
+      rooms:1,
+      adults: 1,
+      child: 0,
       children: []
     }
-  ];
+  ;
   totalPerson: number;
 
   constructor(
@@ -48,12 +51,17 @@ export class GuestInfoComponent implements OnInit {
 
   loadJquery() {
     $("body").click(function () {
-      $("#add_child_open").hide("slow");
+      $("#add_child_open").hide();
     });
 
     $("#add_child").click(function (e) {
       e.stopPropagation();
-      $("#add_child_open").slideToggle("slow");
+      if((e.target.nextSibling != null && e.target.nextSibling.classList[1] == 'panel_hide') || 
+      e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide') {
+        $("#add_child_open").hide();        
+      }  else {
+        $("#add_child_open").show();
+      }
     });
 
     $('#add_child_open').click(
@@ -64,57 +72,83 @@ export class GuestInfoComponent implements OnInit {
 
   }
 
-  counter(i: number) {
+  toggleDrawer(){
+    this.openDrawer=!this.openDrawer;
+  }
+
+  counter(i) {
     return new Array(i);
   }
 
   addRoom(index) {
-    this.roomsGroup.push({
-      adults: 2,
-      child: [],
-      children: []
+   /*  this.roomsGroup.push({
+      adults: 1,
+      child: 0,
+      children: 0
     });
-    this.totalPerson = this.getTotalPerson();
-    this.changeValue.emit(this.roomsGroup);
+ */
+    if(this.roomsGroup.rooms < 9) {
+      this.roomsGroup.rooms += 1;
+      this.totalPerson = this.getTotalPerson();
+      this.changeValue.emit(this.roomsGroup);
+    }
   }
 
   removeRoom(index) {
-    this.roomsGroup.splice(index, 1);
-    this.totalPerson = this.getTotalPerson();
-    this.changeValue.emit(this.roomsGroup);
+    if(this.roomsGroup.rooms >1 ){
+      this.roomsGroup.rooms -= 1;
+    }
+  /*   if(this.roomsGroup.length > 1){
+      this.roomsGroup.splice(index, 1);
+      this.totalPerson = this.getTotalPerson();
+      this.changeValue.emit(this.roomsGroup);
+    } */
   }
 
   addRemovePerson(item) {
     // FOR ADULT
     if (item && item.type === 'plus' && item.label === 'adult') {
-      this.roomsGroup[item.id].adults += 1;
+      // this.roomsGroup[item.id].adults += 1;
+      this.roomsGroup.adults += 1;
       this.totalPerson = this.getTotalPerson();
     } else if (item && item.type === 'minus' && item.label === 'adult') {
-      this.roomsGroup[item.id].adults -= 1;
+      // this.roomsGroup[item.id].adults -= 1;
+      this.roomsGroup.adults -= 1;
       this.totalPerson = this.getTotalPerson();
     }
     // FOR CHILD
     if (item && item.type === 'plus' && item.label === 'child') {
-      this.roomsGroup[item.id].child.push(1);
+      // this.roomsGroup[item.id].child.push(1);
+      this.roomsGroup.child +=  1;
+      this.childGroup.push('child');
       this.totalPerson = this.getTotalPerson();
     } else if (item && item.type === 'minus' && item.label === 'child') {
-      this.roomsGroup[item.id].child.pop();
-      this.roomsGroup[item.id].children.pop();
+      this.childGroup.splice(-1,1)
+
+      // this.childGroup.pop('child')
+      // this.roomsGroup[item.id].child.pop();
+      this.roomsGroup.child -=  1;
+      // this.roomsGroup[item.id].children.pop();
       this.totalPerson = this.getTotalPerson();
     }
+    console.log(this.childGroup)
     this.changeValue.emit(this.roomsGroup);
   }
+  
 
   getTotalPerson() {
     let total = 0;
-    for (let data of this.roomsGroup) {
+/*     for (let data of this.roomsGroup) {
       total += data.adults + data.child.length;
+      total += data.adults + data.child;
     }
-    return total;
+ */    return this.roomsGroup.adults + this.roomsGroup.child ;
   }
 
   changeChildAge(age, index) {
-    this.roomsGroup[index].children.push(parseInt(age));
+   /*  console.log(age, index)
+    this.roomsGroup.children[index].push(parseInt(age));
     this.changeValue.emit(this.roomsGroup);
+    console.log(this.roomsGroup) */
   }
 }

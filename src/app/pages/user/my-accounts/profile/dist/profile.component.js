@@ -13,6 +13,7 @@ var forms_1 = require("@angular/forms");
 var custom_validators_1 = require("../../../../_helpers/custom.validators");
 var moment = require("moment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
+var phone_masking_helper_1 = require("src/app/_helpers/phone-masking.helper");
 var ProfileComponent = /** @class */ (function () {
     function ProfileComponent(formBuilder, userService, genericService, router, commonFunction, toastr, cookieService, flightService, checkOutService) {
         this.formBuilder = formBuilder;
@@ -70,6 +71,10 @@ var ProfileComponent = /** @class */ (function () {
         this.type = 'form';
         this.hmPlaceHolder = 'Select home airport';
         this.closeAirportSuggestion = true;
+        this.phoneNumberMask = {
+            format: '',
+            length: 0
+        };
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.getAirports();
@@ -244,6 +249,11 @@ var ProfileComponent = /** @class */ (function () {
             _this.profileForm.controls['country_code'].disable();
             _this.profileForm.controls['country_id'].disable();
             _this.profileForm.controls['state_id'].disable();
+            var phoneFormat = phone_masking_helper_1.getPhoneFormat(res.countryCode || '+1');
+            _this.profileForm.controls.phone_no.setValidators([forms_1.Validators.minLength(phoneFormat.length)]);
+            _this.profileForm.controls.phone_no.updateValueAndValidity();
+            _this.phoneNumberMask.format = phoneFormat.format;
+            _this.phoneNumberMask.length = phoneFormat.length;
         }, function (error) {
             _this.loadingValue.emit(false);
             if (error.status === 401) {
@@ -260,6 +270,7 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.onSubmit = function () {
         var _this = this;
+        console.log(this.profileForm);
         this.submitted = true;
         var controls = this.profileForm.controls;
         this.loadingValue.emit(true);
@@ -449,10 +460,22 @@ var ProfileComponent = /** @class */ (function () {
         this.closeAirportSuggestion = true;
     };
     ProfileComponent.prototype.selectAirport = function (event) {
-        this.profileForm.controls.home_airport.setValue(event.city + ' (' + event.code + ')');
+        if (event.parentId != 0) {
+            this.profileForm.controls.home_airport.setValue(event.city + ' (' + event.code + ')');
+        }
+        else {
+            this.profileForm.controls.home_airport.setValue(event.city + ' International (' + event.code + ')');
+        }
         this.closeAirportSuggestion = true;
         this.hmPlaceHolder = '';
         this.departureAirport.code = event.code;
+    };
+    ProfileComponent.prototype.validateCountryWithPhoneNumber = function (event) {
+        var selectedCountry = phone_masking_helper_1.getPhoneFormat(this.profileForm.controls['country_code'].value);
+        this.profileForm.controls.phone_no.setValidators([forms_1.Validators.minLength(selectedCountry.length)]);
+        this.profileForm.controls.phone_no.updateValueAndValidity();
+        this.phoneNumberMask.format = selectedCountry.format;
+        this.phoneNumberMask.length = selectedCountry.length;
     };
     __decorate([
         core_1.Output()

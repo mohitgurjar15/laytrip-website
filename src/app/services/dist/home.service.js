@@ -16,7 +16,9 @@ var HomeService = /** @class */ (function () {
         this.http = http;
         this.commonFunction = commonFunction;
         this.toString = new rxjs_1.BehaviorSubject({});
+        this.fromDestinationInfo = new rxjs_1.BehaviorSubject({});
         this.getToString = this.toString.asObservable();
+        this.getLocationForHotelDeal = this.fromDestinationInfo.asObservable();
     }
     HomeService.prototype.handleError = function (error) {
         var errorMessage = {};
@@ -36,6 +38,9 @@ var HomeService = /** @class */ (function () {
     HomeService.prototype.setToString = function (flightToCode) {
         this.toString.next(flightToCode);
     };
+    HomeService.prototype.setLocationForHotel = function (destinationInfo) {
+        this.fromDestinationInfo.next(destinationInfo);
+    };
     HomeService.prototype.getDealList = function (moduleId) {
         var headers = {
             currency: 'USD',
@@ -44,8 +49,15 @@ var HomeService = /** @class */ (function () {
         return this.http.get(environment_1.environment.apiUrl + "v1/deal/" + moduleId, this.commonFunction.setHeaders(headers))
             .pipe(operators_1.catchError(this.handleError));
     };
-    HomeService.prototype.removeToString = function () {
-        this.toString.next({});
+    HomeService.prototype.removeToString = function (module) {
+        if (module == 'flight') {
+            this.toString.next({});
+        }
+        else if (module == 'hotel') {
+            this.fromDestinationInfo.next({});
+        }
+        else {
+        }
     };
     HomeService = __decorate([
         core_1.Injectable({

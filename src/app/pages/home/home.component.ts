@@ -11,6 +11,7 @@ import { CartService } from '../../services/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiePolicyComponent, MODAL_TYPE } from '../cookie-policy/cookie-policy.component';
 import { CookieService } from 'ngx-cookie';
+import { ComingSoonComponent } from '../coming-soon/coming-soon.component';
 
 @Component({
   selector: 'app-home',
@@ -144,6 +145,7 @@ export class HomeComponent implements OnInit {
   }
 
   getDeal(moduleId) {
+    this.moduleId = moduleId;  
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
         this.dealList = response['data'];
@@ -158,6 +160,7 @@ export class HomeComponent implements OnInit {
     document.getElementById('home_banner').style.paddingBottom = '180px';
     if (tabName === 'flight') {
       this.getDeal(1);
+
 
       document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
@@ -191,8 +194,15 @@ export class HomeComponent implements OnInit {
   }
 
   setToString(newItem: string) {
-    this.toString = newItem;
-    this.homeService.setToString(newItem);
+    if(this.moduleId == 1){
+      this.toString = newItem;
+      this.homeService.setToString(newItem);
+    } else if(this.moduleId == 2) {
+
+      this.homeService.setLocationForHotel(newItem);
+    } else {
+
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -37,12 +37,16 @@ export class HotelSearchComponent implements OnInit {
     private hotelService: HotelService,
     public commonFunction: CommonFunction,
     public router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private renderer: Renderer2
+
   ) {
   }
 
   ngOnInit() {
     window.scroll(0, 0);
+    this.renderer.addClass(document.body, 'cms-bgColor');
+
     // if (document.getElementById('login_btn')) {
     //   setTimeout(() => {
     //     document.getElementById('login_btn').style.background = '#FF00BC';

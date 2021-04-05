@@ -11,29 +11,36 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var moment = require("moment");
 var FlightSearchComponent = /** @class */ (function () {
-    function FlightSearchComponent(route, flightService, router, location, commonFunction) {
+    function FlightSearchComponent(route, flightService, router, location, commonFunction, spinner, renderer) {
         this.route = route;
         this.flightService = flightService;
         this.router = router;
         this.location = location;
         this.commonFunction = commonFunction;
+        this.spinner = spinner;
+        this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = true;
         this.isNotFound = false;
         this.isResetFilter = 'no';
         this.subscriptions = [];
         this.tripType = '';
-        this.flexibleLoading = false;
+        this.flexibleLoading = true;
         this.flexibleNotFound = false;
         this.dates = [];
         this.calenderPrices = [];
         this.errorMessage = '';
+        this.fullPageLoading = false;
+        this.isCartFull = false;
+        this.isFlightAvaibale = false;
+        this.filteredLabel = 'Price Low to High';
     }
     FlightSearchComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scroll(0, 0);
         sessionStorage.removeItem("__insMode");
         sessionStorage.removeItem("__islt");
+        this.renderer.addClass(document.body, 'cms-bgColor');
         var payload = {};
         this.route.queryParams.forEach(function (params) {
             _this.flightSearchInfo = params;
@@ -63,15 +70,25 @@ var FlightSearchComponent = /** @class */ (function () {
             _this.getFlightSearchData(payload, params.trip);
         });
     };
+    // ngAfterViewInit() {
+    //   $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
+    //     function () {
+    //       $('.norm_btn').toggleClass("d-none");
+    //       $('.hover_btn').toggleClass("show");
+    //     }
+    //   );
+    // }
     FlightSearchComponent.prototype.getFlightSearchData = function (payload, tripType) {
         var _this = this;
         this.loading = true;
+        this.fullPageLoading = true;
         this.tripType = tripType;
         this.errorMessage = '';
         if (payload && tripType === 'roundtrip') {
             this.flightService.getRoundTripFlightSearchResult(payload).subscribe(function (res) {
                 if (res) {
                     _this.loading = false;
+                    _this.fullPageLoading = false;
                     _this.isNotFound = false;
                     _this.flightDetails = res.items;
                     _this.filterFlightDetails = res;
@@ -84,6 +101,7 @@ var FlightSearchComponent = /** @class */ (function () {
                     _this.isNotFound = true;
                 }
                 _this.loading = false;
+                _this.fullPageLoading = false;
             });
             this.dates = [];
             this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe(function (res) {
@@ -102,6 +120,7 @@ var FlightSearchComponent = /** @class */ (function () {
             this.flightService.getFlightSearchResult(payload).subscribe(function (res) {
                 if (res) {
                     _this.loading = false;
+                    _this.fullPageLoading = false;
                     _this.isNotFound = false;
                     _this.flightDetails = res.items;
                     _this.filterFlightDetails = res;
@@ -114,6 +133,7 @@ var FlightSearchComponent = /** @class */ (function () {
                     _this.isNotFound = true;
                 }
                 _this.loading = false;
+                _this.fullPageLoading = false;
             });
             this.dates = [];
             this.flightService.getFlightFlexibleDates(payload).subscribe(function (res) {
@@ -128,6 +148,9 @@ var FlightSearchComponent = /** @class */ (function () {
             });
             this.getCalenderPrice(payload);
         }
+    };
+    FlightSearchComponent.prototype.changeLoading = function (event) {
+        this.fullPageLoading = event;
     };
     FlightSearchComponent.prototype.getCalenderPrice = function (payload) {
         var _this = this;
@@ -195,21 +218,53 @@ var FlightSearchComponent = /** @class */ (function () {
     };
     FlightSearchComponent.prototype.ngOnDestroy = function () {
         this.subscriptions.forEach(function (sub) { return sub.unsubscribe(); });
+        this.renderer.removeClass(document.body, 'cms-bgColor');
     };
     FlightSearchComponent.prototype.sortFlight = function (event) {
         var key = event.key, order = event.order;
-        console.log("Before Key:", key, this.flightDetails);
         if (key === 'total_duration') {
-            this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
+            // this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
+            if (order === 'ASC') {
+                this.filteredLabel = 'Duration Shortest to Longest';
+                this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
+            }
+            else if (order === 'DESC') {
+                this.filteredLabel = 'Duration Longest to Shortest';
+                this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
+            }
         }
         else if (key === 'arrival') {
-            this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
+            // this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
+            if (order === 'ASC') {
+                this.filteredLabel = 'Arrival Earliest to Latest';
+                this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
+            }
+            else if (order === 'DESC') {
+                this.filteredLabel = 'Arrival Latest to Earliest';
+                this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
+            }
         }
         else if (key === 'departure') {
-            this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, key, order);
+            // this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, key, order);
+            if (order === 'ASC') {
+                this.filteredLabel = 'Departure Earliest to Latest';
+                this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
+            }
+            else if (order === 'DESC') {
+                this.filteredLabel = 'Departure Latest to Earliest';
+                this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
+            }
         }
         else {
-            this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
+            // this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
+            if (order === 'ASC') {
+                this.filteredLabel = 'Price Low to High';
+                this.flightDetails = this.sortJSON(this.flightDetails, key, order);
+            }
+            else if (order === 'DESC') {
+                this.filteredLabel = 'Price High to Low';
+                this.flightDetails = this.sortJSON(this.flightDetails, key, order);
+            }
         }
         // console.log("After Key:",key,this.flightDetails)
     };
@@ -236,9 +291,8 @@ var FlightSearchComponent = /** @class */ (function () {
         }
         else {
             return data.sort(function (a, b) {
-                var x = moment(a.arrival_date + " " + a.arrival_time, 'DD/MM/YYYY hh:mm A').diff(moment(a.departure_date + " " + a.departure_time, 'DD/MM/YYYY hh:mm A'), 'seconds');
-                var y = moment(b.arrival_date + " " + b.arrival_time, 'DD/MM/YYYY hh:mm A').diff(moment(b.departure_date + " " + b.departure_time, 'DD/MM/YYYY hh:mm A'), 'seconds');
-                console.log(a.arrival_date + " " + a.arrival_time, a.departure_date + " " + a.departure_time, x, y, way);
+                var x = moment(a.arrival_date + " " + a.arrival_time, 'DD/MM/YYYY h:mm A').diff(moment(a.departure_date + " " + a.departure_time, 'DD/MM/YYYY hh:mm A'), 'seconds');
+                var y = moment(b.arrival_date + " " + b.arrival_time, 'DD/MM/YYYY h:mm A').diff(moment(b.departure_date + " " + b.departure_time, 'DD/MM/YYYY hh:mm A'), 'seconds');
                 if (way === 'ASC') {
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 }
@@ -253,9 +307,10 @@ var FlightSearchComponent = /** @class */ (function () {
             return data;
         }
         else {
+            //console.log("data",key,way,data)
             return data.sort(function (a, b) {
-                var x = moment(a.arrival_date + " " + a.arrival_time, 'DD/MM/YYYY hh:mm A').format("X");
-                var y = moment(b.arrival_date + " " + b.arrival_time, 'DD/MM/YYYY hh:mm A').format("X");
+                var x = moment(a.arrival_date + " " + a.arrival_time, 'DD/MM/YYYY h:mm A').format("X");
+                var y = moment(b.arrival_date + " " + b.arrival_time, 'DD/MM/YYYY h:mm A').format("X");
                 if (way === 'ASC') {
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 }
@@ -271,8 +326,8 @@ var FlightSearchComponent = /** @class */ (function () {
         }
         else {
             return data.sort(function (a, b) {
-                var x = moment(a.departure_date + " " + a.departure_time, 'DD/MM/YYYY hh:mm A').format("X");
-                var y = moment(b.departure_date + " " + b.departure_time, 'DD/MM/YYYY hh:mm A').format("X");
+                var x = moment(a.departure_date + " " + a.departure_time, 'DD/MM/YYYY h:mm A').format("X");
+                var y = moment(b.departure_date + " " + b.departure_time, 'DD/MM/YYYY h:mm A').format("X");
                 if (way === 'ASC') {
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 }
@@ -287,6 +342,18 @@ var FlightSearchComponent = /** @class */ (function () {
     };
     FlightSearchComponent.prototype.resetFilter = function () {
         this.isResetFilter = (new Date()).toString();
+    };
+    FlightSearchComponent.prototype.maxCartValidation = function (data) {
+        this.isCartFull = data;
+    };
+    FlightSearchComponent.prototype.hideMaxCartValidation = function () {
+        this.isCartFull = false;
+    };
+    FlightSearchComponent.prototype.flightNotAvailable = function (data) {
+        this.isFlightAvaibale = data;
+    };
+    FlightSearchComponent.prototype.hideFlightNotAvailable = function () {
+        this.isFlightAvaibale = false;
     };
     FlightSearchComponent = __decorate([
         core_1.Component({

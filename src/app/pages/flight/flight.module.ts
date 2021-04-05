@@ -32,7 +32,6 @@ import { PopupLoaderComponent } from './components/popup-loader/popup-loader.com
 // HELPERS MODULE
 import { HelpersModule } from '../../_helpers/_helpers.module';
 import { HomeModule } from '../home/home.module';
-import { FlightCartItemComponent } from './components/flight-cart-item/flight-cart-item.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,7 @@ import { FlightCartItemComponent } from './components/flight-cart-item/flight-ca
     FlightSummaryLoaderComponent,
     FlightErrorComponent,
     PopupTermConditionComponent,
-    PopupLoaderComponent,
+    PopupLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +68,8 @@ import { FlightCartItemComponent } from './components/flight-cart-item/flight-ca
     NgSelectModule,
     CookieModule.forRoot(),
     CalendarModule,
-    HomeModule
+    HomeModule,
+    
   ],
   exports: [
     FlightLoaderComponent,

@@ -497,7 +497,11 @@ export class ProfileComponent implements OnInit {
   }
 
   selectAirport(event){
-    this.profileForm.controls.home_airport.setValue(event.city +' ('+ event.code+')' );
+    if(event.parentId != 0){
+      this.profileForm.controls.home_airport.setValue(event.city +' ('+ event.code+')' );
+    } else {
+      this.profileForm.controls.home_airport.setValue(event.city +' International ('+ event.code+')' );
+    }
     this.closeAirportSuggestion = true;
     this.hmPlaceHolder = '';
     this.departureAirport.code = event.code;

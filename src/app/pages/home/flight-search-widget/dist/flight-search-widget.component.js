@@ -93,9 +93,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             this.isCalenderPriceLoading = false;
         }
         this.route.queryParams.subscribe(function (params) {
-            if (Object.keys(params).length > 0) {
+            if (Object.keys(params).length > 0 && window.location.pathname == '/flight/search') {
                 //delete BehaviorSubject in the listing page
-                _this.homeService.removeToString();
+                _this.homeService.removeToString('flight');
                 _this.calPrices = true;
                 _this.fromSearch = airports_1.airports[params['departure']];
                 _this.toSearch = airports_1.airports[params['arrival']];
@@ -140,7 +140,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             }
         });
         //delete BehaviorSubject at the end
-        this.homeService.removeToString();
+        this.homeService.removeToString('flight');
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
