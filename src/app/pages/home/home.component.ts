@@ -157,7 +157,6 @@ export class HomeComponent implements OnInit {
   clickOnTab(tabName) {
     document.getElementById('home_banner').style.position = 'relative';
     document.getElementById('home_banner').style.width = '100%';
-    document.getElementById('home_banner').style.paddingBottom = '180px';
     if (tabName === 'flight') {
       this.getDeal(1);
 
@@ -170,7 +169,7 @@ export class HomeComponent implements OnInit {
       // }
     } else if (tabName === 'hotel') {
       this.getDeal(2);
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
+      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
       // if (document.getElementById('login_btn')) {
@@ -179,7 +178,7 @@ export class HomeComponent implements OnInit {
     }
     else if (tabName === 'home-rentals') {
       this.getDeal(3);
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
+      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
       // if (document.getElementById('login_btn')) {

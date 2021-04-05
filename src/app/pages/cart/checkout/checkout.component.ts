@@ -121,23 +121,40 @@ export class CheckoutComponent implements OnInit {
       let price: any;
       for (let i = 0; i < items.data.length; i++) {
         cart = {};
-        cart.type = items.data[i].type;
-        cart.module_info = items.data[i].moduleInfo[0];
-        cart.old_module_info = {
-          selling_price: items.data[i].oldModuleInfo[0].selling_price
-        };
-        cart.travelers = items.data[i].travelers;
-        cart.is_available = items.data[i].is_available;
-        cart.id = items.data[i].id;
-        this.carts.push(cart);
-
         price = {}
-        price.selling_price = items.data[i].moduleInfo[0].selling_price;
-        price.departure_date = items.data[i].moduleInfo[0].departure_date;
-        price.start_price = items.data[i].moduleInfo[0].start_price;
-        price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
-        this.cartPrices.push(price)
 
+        
+        cart.type = items.data[i].type;
+        cart.travelers = items.data[i].travelers;
+        cart.id = items.data[i].id;
+        cart.is_available = items.data[i].is_available;
+        
+        
+        if(items.data[i].type=='flight'){
+          cart.module_info = items.data[i].moduleInfo[0];
+          cart.old_module_info = {
+            selling_price: items.data[i].oldModuleInfo[0].selling_price
+          };
+
+          price.selling_price = items.data[i].moduleInfo[0].selling_price;
+          price.departure_date = items.data[i].moduleInfo[0].departure_date;
+          price.start_price = items.data[i].moduleInfo[0].start_price;
+          price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
+        }
+        else  if(items.data[i].type=='hotel'){
+
+          cart.module_info = items.data[i].moduleInfo[0];
+          cart.old_module_info = {
+            selling_price: items.data[i].oldModuleInfo[0].selling.total
+          };
+
+          price.selling_price = items.data[i].moduleInfo[0].selling.total;
+          price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in,"YYYY-MM-DD").format('DD/MM/YYYY') ;
+          price.start_price = 0;
+          price.location = items.data[i].moduleInfo[0].hotel_name;
+        }
+        this.carts.push(cart);
+        this.cartPrices.push(price)
       }
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
@@ -309,7 +326,12 @@ export class CheckoutComponent implements OnInit {
           }
           
           if(!this.inValidCartTravller.includes(i)){
-            message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+            if(this.carts[i].type=='flight'){
+              message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+            }
+            if(this.carts[i].type=='hotel'){
+              message = ` ${this.carts[i].module_info.title} ,`;
+            }
             this.validationErrorMessage += message;
           }
           this.isValidTravelers=false;
@@ -323,7 +345,12 @@ export class CheckoutComponent implements OnInit {
               this.validationErrorMessage = 'Complete required fields in Traveler Details for'
             }
             if(!this.inValidCartTravller.includes(i)){
-              message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+              if(this.carts[i].type=='flight'){
+                message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+              }
+              if(this.carts[i].type=='hotel'){
+                message = ` ${this.carts[i].module_info.title} ,`;
+              }
               this.validationErrorMessage += message;
             }
             

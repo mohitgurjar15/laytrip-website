@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges, ChangeDetectorRef, ElementRef, ViewChild, ViewChildren } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
@@ -141,39 +141,54 @@ export class TravelerFormComponent implements OnInit {
       this.travelers = travelers;
     })
 
-    for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
-      this.travelers[`type${this.cartNumber}`].cartId = this.cartId
-      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
+    if(this.cartItem.type=='flight'){
+        for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
+          this.travelers[`type${this.cartNumber}`].cartId = this.cartId
+          this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
 
-      if (!this.cartItem.module_info.is_passport_required) {
-        delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
-        delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
-      }
-      else {
-        this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required = true;
-      }
-      this.travelers[`type${this.cartNumber}`].adult = this.cartItem.module_info.adult_count;
-      
-      this.cd.detectChanges();
-    }
-    for (let i = 0; i < this.cartItem.module_info.child_count; i++) {
-      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.child));
-      this.travelers[`type${this.cartNumber}`].child = this.cartItem.module_info.child_count;
-      
-      if (!this.cartItem.module_info.is_passport_required) {
-        delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
-        delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
-      }
-      else {
-        this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required = true;
-      }
-      this.cd.detectChanges();
-    }
-    for (let i = 0; i < this.cartItem.module_info.infant_count; i++) {
-      this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.infant));
-      this.travelers[`type${this.cartNumber}`].infant = this.cartItem.module_info.infant_count;
+          if (!this.cartItem.module_info.is_passport_required) {
+            delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
+            delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
+          }
+          else {
+            this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required = true;
+          }
+          this.travelers[`type${this.cartNumber}`].adult = this.cartItem.module_info.adult_count;
+          
+          this.cd.detectChanges();
+        }
+        for (let i = 0; i < this.cartItem.module_info.child_count; i++) {
+          this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.child));
+          this.travelers[`type${this.cartNumber}`].child = this.cartItem.module_info.child_count;
+          
+          if (!this.cartItem.module_info.is_passport_required) {
+            delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
+            delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
+          }
+          else {
+            this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required = true;
+          }
+          this.cd.detectChanges();
+        }
+        for (let i = 0; i < this.cartItem.module_info.infant_count; i++) {
+          this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.infant));
+          this.travelers[`type${this.cartNumber}`].infant = this.cartItem.module_info.infant_count;
 
-      this.cd.detectChanges();
+          this.cd.detectChanges();
+        }
+    }
+    if(this.cartItem.type=='hotel'){
+      for (let i = 0; i < this.cartItem.module_info.input_data.num_rooms; i++) {
+        this.travelers[`type${this.cartNumber}`].cartId = this.cartId
+        this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.hotel.adult));
+        if(i!=0){
+          this.travelers[`type${this.cartNumber}`].adults[i].is_email_required=false;
+          this.travelers[`type${this.cartNumber}`].adults[i].is_phone_required=false;
+        }
+        this.travelers[`type${this.cartNumber}`].adult = this.cartItem.module_info.adult_count;
+        
+        this.cd.detectChanges();
+      }
     }
       
     for (let i = 0; i < this.cartItem.travelers.length; i++) {
@@ -207,7 +222,7 @@ export class TravelerFormComponent implements OnInit {
     })
 
     this.checkOutService.emitTravelersformData(this.travelerForm);
-    this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
+    //this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
   }
 
   loadJquery() {
@@ -260,32 +275,62 @@ export class TravelerFormComponent implements OnInit {
       let control: any = <FormArray>this.travelerForm.get(`type${i}.adults`);
       control.controls = [];
       this.travelers[`type${i}`].adults.forEach((x, i) => {
-        control.push(this.patchValues(x))
+        control.push(this.patchValues(x,i))
       })
     }
   }
 
-  patchValues(x) {
-    return this.formBuilder.group({
-      first_name: [x.first_name, [Validators.required,Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
-      last_name: [x.last_name, [Validators.required,Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
-      email: (x.type === 'adult' || x.type === '') ? [x.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]] : [x.email],
-      phone_no: (x.type === 'adult' || x.type === '') ? [x.phone_no, [Validators.required, Validators.minLength(10)]] : [x.phone_no],
-      phone_no_format: (x.type === 'adult' || x.type === '') ? [x.phone_no_format, [Validators.required]] : [x.phone_no_format],
-      phone_no_length: (x.type === 'adult' || x.type === '') ? [x.phone_no_length, [Validators.required]] : [x.phone_no_length],
-      country_code: (x.type === 'adult' || x.type === '') ? [x.country_code, [Validators.required]] : [x.country_code],
-      passport_number: (x.is_passport_required) ? [x.passport_number, [Validators.required]] : [x.passport_number],
-      passport_expiry: (x.is_passport_required) ? [x.passport_expiry || null, [Validators.required]] : [x.passport_expiry],
-      is_passport_required: [x.is_passport_required, [Validators.required]],
-      dob: [x.dob ? x.dob : '', [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
-      country_id: [x.country_id ? x.country_id : 233, [Validators.required]],
-      gender: [x.gender, [Validators.required]],
-      userId: [x.userId],
-      type: [x.type],
-      dobMinDate: [x.dobMinDate],
-      dobMaxDate: [x.dobMaxDate],
-      is_valid_date: [x.is_valid_date]
-    }, { updateOn: 'blur' });
+  patchValues(x,i) {
+
+    if(x.module=='flight'){
+      return this.formBuilder.group({
+        first_name: [x.first_name, [Validators.required,Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+        last_name: [x.last_name, [Validators.required,Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+        email: (x.type === 'adult' || x.type === '') ? [x.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]] : [x.email],
+        phone_no: (x.type === 'adult' || x.type === '') ? [x.phone_no, [Validators.required, Validators.minLength(10)]] : [x.phone_no],
+        phone_no_format: (x.type === 'adult' || x.type === '') ? [x.phone_no_format, [Validators.required]] : [x.phone_no_format],
+        phone_no_length: (x.type === 'adult' || x.type === '') ? [x.phone_no_length, [Validators.required]] : [x.phone_no_length],
+        country_code: (x.type === 'adult' || x.type === '') ? [x.country_code, [Validators.required]] : [x.country_code],
+        passport_number: (x.is_passport_required) ? [x.passport_number, [Validators.required]] : [x.passport_number],
+        passport_expiry: (x.is_passport_required) ? [x.passport_expiry || null, [Validators.required]] : [x.passport_expiry],
+        is_passport_required: [x.is_passport_required, [Validators.required]],
+        dob: [x.dob ? x.dob : '', [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
+        country_id: [x.country_id ? x.country_id : 233, [Validators.required]],
+        gender: [x.gender, [Validators.required]],
+        userId: [x.userId],
+        type: [x.type],
+        dobMinDate: [x.dobMinDate],
+        dobMaxDate: [x.dobMaxDate],
+        module: [x.module],
+        is_valid_date: [x.is_valid_date],
+        is_email_required: [x.is_email_required],
+        is_phone_required: [x.is_phone_required]
+      }, { updateOn: 'blur' });
+    }
+    if(x.module=='hotel'){
+      return this.formBuilder.group({
+        first_name: [x.first_name, [Validators.required,Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+        last_name: [x.last_name, [Validators.required,Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+        email: (i == 0 ) ? [x.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]] : [x.email],
+        phone_no: (i ==0 ) ? [x.phone_no, [Validators.required, Validators.minLength(10)]] : [x.phone_no],
+        phone_no_format: (i == 0 ) ? [x.phone_no_format, [Validators.required]] : [x.phone_no_format],
+        phone_no_length: (i == 0 ) ? [x.phone_no_length, [Validators.required]] : [x.phone_no_length],
+        country_code: (i == 0 ) ? [x.country_code, [Validators.required]] : [x.country_code],
+        userId: [x.userId],
+        dob: [x.dob],
+        gender: [x.gender],
+        passport_number:[x.passport_number],
+        passport_expiry:[x.passport_expiry],
+        is_passport_required: [x.is_passport_required],
+        country_id: [x.country_id],
+        type: [x.type],
+        module: [x.module],
+        is_valid_date: [x.is_valid_date],
+        is_email_required: [x.is_email_required],
+        is_phone_required: [x.is_phone_required]
+      }, { updateOn: 'blur' });
+    }
+    
   }
 
   submit(value) {
@@ -304,7 +349,6 @@ export class TravelerFormComponent implements OnInit {
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code = travelersFileds.flight[type].country_code;
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_number = travelersFileds.flight[type].passport_number;
     this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_expiry = travelersFileds.flight[type].passport_expiry;
-    // this.travelers[`type${this.cartNumber}`].adults[traveler_number].is_passport_required = travelersFileds.flight[type].is_passport_required;
     this.patch();
   }
 
@@ -381,11 +425,20 @@ export class TravelerFormComponent implements OnInit {
   saveTraveler(cartNumber, traveler_number) {
 
     this.travelers[`type${cartNumber}`].adults[traveler_number].is_submitted = true;
-    console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number],"save")
+    //console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.email.validator({} as AbstractControl),"save")
+
+    //return false;
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
     if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
-      data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
+      if(this.cartItem.type=='hotel'){
+        data.is_primary_traveler = traveler_number==0?true:false;
+        data.module_id = 3;
+        delete data.country_id;
+      }
+      else{
+        data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
+      }
       if (this.travelers[`type${cartNumber}`].adults[traveler_number].is_passport_required) {
         data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
         data.passport_expiry = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
@@ -410,6 +463,7 @@ export class TravelerFormComponent implements OnInit {
           this.cartService.setLoaderStatus(false)
           if (traveler) {
             this.travelers[`type${cartNumber}`].adults[traveler_number].type = traveler.user_type;
+            
             this.travelers[`type${cartNumber}`].adults[traveler_number].userId = traveler.userId;
             this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
             this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
@@ -423,11 +477,23 @@ export class TravelerFormComponent implements OnInit {
               this.travelers[`type${cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
               this.travelers[`type${cartNumber}`].adults[traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy');
             }
+
+
+            this.travelers[`type${cartNumber}`].adults[traveler_number].module = this.cartItem.type;
+            if((this.cartItem.type=='flight' && traveler.user_type=='adult') || (this.cartItem.type=='hotel' && traveler_number==0)){
+              this.travelers[`type${cartNumber}`].adults[traveler_number].is_email_required = true;
+              this.travelers[`type${cartNumber}`].adults[traveler_number].is_phone_required = true;
+            }
+            else{
+              this.travelers[`type${cartNumber}`].adults[traveler_number].is_email_required = false;
+              this.travelers[`type${cartNumber}`].adults[traveler_number].is_phone_required = false;
+            }
             
             if(traveler.user_type=='adult'){ this.isAdultTravller = true; }
             if(traveler.user_type=='child'){ this.isChildTravller = true; }
             if(traveler.user_type=='infant'){ this.isInfantTravller = true; }
             this.checkOutService.setTravelers([...this.myTravelers, traveler]);
+            console.log("llll",this.travelers)
             this.patch();
 
             this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAsUntouched();
@@ -496,22 +562,36 @@ export class TravelerFormComponent implements OnInit {
   selectTraveler(travlerId, traveler_number,cartNumber) {
     let traveler = this.myTravelers.find(x => x.userId == travlerId)
     if (traveler && Object.keys(traveler).length > 0) {
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].email = traveler.email;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].userId = traveler.userId;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].gender = traveler.gender;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].phone_no = traveler.phoneNo;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code = traveler.countryCode || '+1';
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_id = traveler.country != null ? traveler.country.id : '';
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
+      console.log(cartNumber,traveler_number)
+      //this.travelers[`type${cartNumber}`].adults[traveler_number].module = traveler.module;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].email = traveler.email;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].userId = traveler.userId;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].gender = traveler.gender;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no = traveler.phoneNo;
+      this.travelers[`type${cartNumber}`].adults[traveler_number].country_code = traveler.countryCode || '+1';
+      this.travelers[`type${cartNumber}`].adults[traveler_number].country_id = traveler.country != null ? traveler.country.id : '';
+      this.travelers[`type${cartNumber}`].adults[traveler_number].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
 
-      if (this.travelers[`type${this.cartNumber}`].adults[traveler_number].is_passport_required) {
-        this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
-        this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_expiry = traveler.passportExpiry ? `${moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy')}` : '';
+      this.travelers[`type${cartNumber}`].adults[traveler_number].module = this.cartItem.type;
+      if((this.cartItem.type=='flight' && traveler.user_type=='adult') || (this.cartItem.type=='hotel' && traveler_number==0)){
+        this.travelers[`type${cartNumber}`].adults[traveler_number].is_email_required = true;
+        this.travelers[`type${cartNumber}`].adults[traveler_number].is_phone_required = true;
       }
+      else{
+        this.travelers[`type${cartNumber}`].adults[traveler_number].is_email_required = false;
+        this.travelers[`type${cartNumber}`].adults[traveler_number].is_phone_required = false;
+      }
+
+      if (this.travelers[`type${cartNumber}`].adults[traveler_number].is_passport_required) {
+        this.travelers[`type${cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
+        this.travelers[`type${cartNumber}`].adults[traveler_number].passport_expiry = traveler.passportExpiry ? `${moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy')}` : '';
+      }
+      console.log(this.travelers,"-----",this.cartItem.type,traveler.type)
+      //return false;
       this.patch();
-      this.setPhoneNumberFormat(this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code,cartNumber,traveler_number)
+      //this.setPhoneNumberFormat(this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code,cartNumber,traveler_number)
     }
     
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
