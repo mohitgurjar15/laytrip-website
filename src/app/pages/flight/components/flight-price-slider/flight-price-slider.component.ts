@@ -60,6 +60,9 @@ export class FlightPriceSliderComponent implements OnInit {
   ngOnInit() {
    // this.loadJquery();
   }
+  breakpoint(e) {
+    console.log('breakpoint', e);
+  }
  
 
   loadJquery() {
