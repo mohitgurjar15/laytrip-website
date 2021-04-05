@@ -52,6 +52,7 @@ export class GuestInfoComponent implements OnInit {
   loadJquery() {
     $("body").click(function () {
       $("#add_child_open").hide();
+      $("#child_su_drop_op").css('display', 'none');
     });
 
     $("#add_child").click(function (e) {
@@ -63,8 +64,17 @@ export class GuestInfoComponent implements OnInit {
         $("#add_child_open").show();
       }
     });
+    $("#child_sub_drop").click(function (e) {
+      e.stopPropagation();
+      $("#child_su_drop_op").css('display', 'flex');
+    });
 
     $('#add_child_open').click(
+      function (e) {
+        e.stopPropagation();
+      }
+    );
+    $('#child_su_drop_op').click(
       function (e) {
         e.stopPropagation();
       }
