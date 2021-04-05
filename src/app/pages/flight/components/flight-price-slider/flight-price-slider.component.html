@@ -53,7 +53,7 @@
             (breakpoint)="breakpoint($event)"
             (afterChange)="afterChange($event)"
             (beforeChange)="beforeChange($event)">
-            <div ngxSlickItem *ngFor="let item of dates" >
+            <div ngxSlickItem *ngFor="let item of dates" class="inner" >
                 <div class="slid_block" *ngIf="trip =='oneway'">
                     <a  [routerLink]="['/flight/search']" [queryParams]="{trip:trip,departure:departure,arrival:arrival,departure_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),class:class,adult:adult,child:child,infant:infant}" [ngClass]="{'selected':departureDate==commonFunction.convertDateFormat(item.date,'DD/MM/YYYY'),'disabled':checkDateValidation(item.date)}">
                         <div class="block_top">

@@ -58,7 +58,7 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadJquery();
+   // this.loadJquery();
   }
  
 
@@ -107,7 +107,7 @@ export class FlightPriceSliderComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
    
     if(changes['dates'].currentValue.length){
-      setTimeout(()=>{this.loadJquery();},100)
+    //  setTimeout(()=>{this.loadJquery();},100)
       /* if(this.trip == 'oneway'){
         this.flipDates(this.dates)
       }
