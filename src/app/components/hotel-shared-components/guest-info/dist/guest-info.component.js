@@ -17,6 +17,8 @@ var GuestInfoComponent = /** @class */ (function () {
         this.errorMessage = '';
         this.openDrawer = false;
         this.childGroup = [];
+        this.childAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+        this.isShowChildDropDown = false;
         this.roomsGroup = {
             rooms: 1,
             adults: 1,
@@ -42,6 +44,7 @@ var GuestInfoComponent = /** @class */ (function () {
         $("#add_child_open").hide();
         $("body").click(function () {
             $("#add_child_open").hide();
+            $("#child_su_drop_op").css('display', 'none');
         });
         $("#add_child").click(function (e) {
             e.stopPropagation();
@@ -53,7 +56,15 @@ var GuestInfoComponent = /** @class */ (function () {
                 $("#add_child_open").show();
             }
         });
+        $(document).on("click", ".child_sub_drop", function (e) {
+            e.stopPropagation();
+            $(this).siblings(".child_su_drop_op").show();
+            //$("#child_su_drop_op").css('display', 'flex');
+        });
         $('#add_child_open').click(function (e) {
+            e.stopPropagation();
+        });
+        $('#child_su_drop_op').click(function (e) {
             e.stopPropagation();
         });
     };
@@ -124,6 +135,9 @@ var GuestInfoComponent = /** @class */ (function () {
          this.roomsGroup.children[index].push(parseInt(age));
          this.changeValue.emit(this.roomsGroup);
          console.log(this.roomsGroup) */
+    };
+    GuestInfoComponent.prototype.toggleChildDropDown = function () {
+        this.isShowChildDropDown = !this.isShowChildDropDown;
     };
     __decorate([
         core_1.Output()

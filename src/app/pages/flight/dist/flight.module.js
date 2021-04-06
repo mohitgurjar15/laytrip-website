@@ -39,6 +39,7 @@ var popup_loader_component_1 = require("./components/popup-loader/popup-loader.c
 // HELPERS MODULE
 var _helpers_module_1 = require("../../_helpers/_helpers.module");
 var home_module_1 = require("../home/home.module");
+var ngx_slick_carousel_1 = require("ngx-slick-carousel");
 var FlightModule = /** @class */ (function () {
     function FlightModule() {
     }
@@ -79,6 +80,7 @@ var FlightModule = /** @class */ (function () {
                 ngx_cookie_1.CookieModule.forRoot(),
                 calendar_1.CalendarModule,
                 home_module_1.HomeModule,
+                ngx_slick_carousel_1.SlickCarouselModule
             ],
             exports: [
                 flight_loader_component_1.FlightLoaderComponent,

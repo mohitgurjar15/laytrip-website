@@ -44,7 +44,10 @@ export class AirportSuggestionComponent implements OnInit {
         this.loading=false;
         for(let i=0; i <result.length; i++){
           for(let j=0; j<result[i].value.length; j++){
-            result[i].value[j].display_name = `${result[i].value[j].city},${ result[i].value[j].country},(${result[i].value[j].code}),${ result[i].value[j].name}`
+            console.log(result[i].value[j].code)
+            if(result[i].value[j].code != 'AMD'){
+              result[i].value[j].display_name = `${result[i].value[j].city},${ result[i].value[j].country},(${result[i].value[j].code}),${ result[i].value[j].name}`
+            }
           }
         }
         this.data=result;
@@ -77,7 +80,9 @@ export class AirportSuggestionComponent implements OnInit {
         airportArray = airportArray.sort((a, b) => a.key.localeCompare(b.key));
         for(let i=0; i <airportArray.length; i++){
           for(let j=0; j<airportArray[i].value.length; j++){
-            airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
+            if(airportArray[i].value[j].code != 'AMD'){
+              airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
+            }
           }
         }
         this.data=airportArray;
