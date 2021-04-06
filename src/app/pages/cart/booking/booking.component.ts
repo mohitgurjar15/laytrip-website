@@ -505,13 +505,19 @@ export class BookingComponent implements OnInit {
       this.travelerForm.enable();
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
-        //console.log(data,"=======",this.travelerForm);
-        //return false;
-        //let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
+        /*  */
         let travelers=[];
         for(let k=0; k<data.length; k++){
           travelers.push({
             traveler_id: data[k].userId
+          })
+          
+          data[k].dob=moment(data[k].dob,"MM/DD/YYYY").format("YYYY-MM-DD")
+          if(data[k].passport_expiry){
+            data[k].passport_expiry=moment(data[k].passport_expiry,"MM/DD/YYYY").format("YYYY-MM-DD")
+          }
+          this.travelerService.updateAdult(data[k], data[k].userId).subscribe((traveler: any) => {
+
           })
         }
         let cartData = {
