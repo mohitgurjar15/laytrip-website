@@ -2,8 +2,11 @@
     *ngIf="(travelers | json) != '{}' && (moduleInfo | json) != '{}' ">
     <div class="card traveller_card_accr" *ngFor="let traveler of travelers;let i = index; let last = last;">
         <div class="card-header tr_card_header {{last}}" >
-            <a class="card-link ">
+            <a class="card-link" *ngIf="moduleId == 1">
                 {{i == 0 ?'Primary Traveler':getUserType(traveler)}} 
+            </a>
+            <a class="card-link" *ngIf="moduleId == 3">
+                {{ moduleInfo[0].title }} 
             </a>
             <a class="card-link new_link">
                 {{ traveler.travelerInfo.firstName || '' | titlecase}} {{ traveler.travelerInfo.lastName || '' | titlecase }}
@@ -12,7 +15,7 @@
         <div class="collapse show">
             <div class="card-body">
                 <div class="common_form">
-                    <div class="form-row">
+                    <div class="form-row" *ngIf="moduleId == 1">
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <label for="">First Name*</label>
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.firstName}}"
@@ -34,7 +37,7 @@
                             <label for="">Email*</label>
                             <input type="email" class="form-control" placeholder="{{traveler.travelerInfo.email}}" disabled>
                         </div>
-                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="traveler.user_type == 'adult'" >
+                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="traveler.travelerInfo.user_type == 'adult'" >
                             <label for="">Telephone*</label>
                             <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.countryCode != 'null' ? getPhoneNoInMaskFormat(traveler.travelerInfo.phoneNo,traveler.travelerInfo.countryCode): '' }}"
                                 disabled>
@@ -47,7 +50,7 @@
                         </div>
 
                         <div class="col-sm-12 col-md-4" 
-                            *ngIf="traveler.user_type == 'adult' &&  traveler.is_passport_required && checkIsChild(traveler.travelerInfo.dob) ">
+                            *ngIf="traveler.travelerInfo.user_type == 'adult' &&  traveler.is_passport_required && checkIsChild(traveler.travelerInfo.dob) ">
                             <label for="">{{'passport_number'| translate}}</label>
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.passportNumber}}"
                                 disabled>
@@ -58,6 +61,27 @@
                                 placeholder="{{traveler.travelerInfo.countryId ? getContryName(traveler.travelerInfo.countryId) : ''}}"
                                 disabled>
                         </div>
+                    </div>
+                    <div class="form-row" *ngIf="moduleId == 3">
+                        <div class="col-sm-12 col-md-6 mb-sm-10">
+                            <label for="">First Name*</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.firstName}}"
+                                disabled>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-sm-10">
+                            <label for="">Last Name*</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.lastName}}"
+                                disabled>
+                        </div>                        
+                        <div class="col-sm-12 col-md-6 mb-sm-10 " *ngIf="checkIsChild(traveler.travelerInfo.dob) && i == 0 ">
+                            <label for="">Email*</label>
+                            <input type="email" class="form-control" placeholder="{{traveler.travelerInfo.email}}" disabled>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-sm-10" *ngIf="traveler.travelerInfo.user_type == 'adult' && i == 0 " >
+                            <label for="">Telephone*</label>
+                            <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.countryCode != 'null' ? getPhoneNoInMaskFormat(traveler.travelerInfo.phoneNo,traveler.travelerInfo.countryCode): '' }}"
+                                disabled>
+                        </div>                       
                     </div>
                 </div>
 

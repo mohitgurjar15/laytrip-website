@@ -229,7 +229,7 @@
       </div>
     </div> -->
 
-    <app-booking-traveler [travelers]="cartItem" [laytrip_cart_id]="laytrip_cart_id"
+    <app-booking-traveler [cartItem]="cartItem" [laytrip_cart_id]="laytrip_cart_id"
       [isPassportRequired]="cartItem?.moduleInfo[0]?.routes.is_passport_required"  (laytripCartId)="cancelCartIdRemove($event)"></app-booking-traveler>
 
   </ng-container>

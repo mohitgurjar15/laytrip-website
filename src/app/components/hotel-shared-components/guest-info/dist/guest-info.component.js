@@ -16,7 +16,6 @@ var GuestInfoComponent = /** @class */ (function () {
         this.totalRoom = [];
         this.errorMessage = '';
         this.openDrawer = false;
-        this.childGroup = [];
         this.childAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
         this.isShowChildDropDown = false;
         this.roomsGroup = {
@@ -31,6 +30,7 @@ var GuestInfoComponent = /** @class */ (function () {
         this.loadJquery();
         if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
             var info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+            console.log(info);
             if (info) {
                 this.roomsGroup = info;
             }
@@ -109,13 +109,11 @@ var GuestInfoComponent = /** @class */ (function () {
         if (item && item.type === 'plus' && item.label === 'child') {
             // this.roomsGroup[item.id].child.push(1);
             this.roomsGroup.child += 1;
-            this.childGroup.push('child');
+            this.roomsGroup.children.push({ type: 'child', is_show: false, age: 0 });
             this.totalPerson = this.getTotalPerson();
         }
         else if (item && item.type === 'minus' && item.label === 'child') {
-            this.childGroup.splice(-1, 1);
-            // this.childGroup.pop('child')
-            // this.roomsGroup[item.id].child.pop();
+            this.roomsGroup.children.pop();
             this.roomsGroup.child -= 1;
             // this.roomsGroup[item.id].children.pop();
             this.totalPerson = this.getTotalPerson();
@@ -136,8 +134,12 @@ var GuestInfoComponent = /** @class */ (function () {
          this.changeValue.emit(this.roomsGroup);
          console.log(this.roomsGroup) */
     };
-    GuestInfoComponent.prototype.toggleChildDropDown = function () {
-        this.isShowChildDropDown = !this.isShowChildDropDown;
+    GuestInfoComponent.prototype.toggleChildDropDown = function (index) {
+        this.roomsGroup.children[index].is_show = !this.roomsGroup.children[index].is_show;
+    };
+    GuestInfoComponent.prototype.selectChildAge = function (index, age) {
+        this.roomsGroup.children[index].age = age;
+        this.roomsGroup.children[index].is_show = !this.roomsGroup.children[index].is_show;
     };
     __decorate([
         core_1.Output()
