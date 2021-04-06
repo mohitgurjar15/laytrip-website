@@ -398,7 +398,7 @@ export class TravelerFormComponent implements OnInit {
       this.cartService.setLoaderStatus(true)
       let userId = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.userId;
       if (userId) {
-        if(traveler_number==0){
+        if(traveler_number==0 && this.accountHolderEmail){
           data.email = this.accountHolderEmail;
         }
         //Edit
