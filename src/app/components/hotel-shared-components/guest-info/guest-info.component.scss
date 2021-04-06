@@ -1,4 +1,10 @@
-// @import '../../../_cstm-traveller-info';
+@import "../../../../_cstm-variable.scss";
+@import "../../../../_cstm-components.scss";
+@import "../../../../_hotel.scss";
+@import "../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
 .guest_error {
     color: #ff0000;
     font-size: 12px;
@@ -10,6 +16,7 @@
         border: 1px solid #d5d7e3 !important;
         color: #d5d7e3 !important;
         cursor: not-allowed;
+
         &:hover {
             border: 1px solid #d5d7e3 !important;
             color: #d5d7e3 !important;
@@ -27,5 +34,57 @@
 }
 
 ng-scrollbar {
-    --scrollbar-padding: 0 0 0 5px !important;
+    --scrollbar-padding: 10px 5px 0 0 !important;
+    .ng-scrollbar-layout {
+        .ng-scrollbar-layout{
+            .ng-scroll-view-container{
+                .ng-scroll-view{
+                    width: auto;
+                }
+            }
+        }
+    }  
+}
+
+.child_dropdown_wrapper {
+    .child_sub_drop {
+        border: 1px solid #E0E2E5;
+        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) center right 5px no-repeat !important;
+        height: 34px;
+        width: 55px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: $background-white;
+        box-shadow: 0px 3px 15px $shadow-black;
+        display: flex;
+        align-items: center;
+        color: $text-grey;
+        cursor: pointer;
+    }
+
+    .child_su_drop_op {
+        position: absolute;
+        top: 110%;
+        left: 0;
+        background: $background-white;
+        box-shadow: 0px 3px 15px $shadow-black;
+        border: 1px solid #E0E2E5;
+        border-radius: 5px;
+        z-index: 99999;
+        width: 55px;
+        height: 210px;
+        color: $text-grey;
+
+        .dropdown-item {
+            color: $text-grey;
+            padding: 7px 9px;
+            width: 40px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            &:hover{
+                color: $text-black;
+            }
+        }
+    }
 }
