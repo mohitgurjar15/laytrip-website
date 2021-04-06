@@ -6,9 +6,9 @@
   </div>
 
   <div class="traveller_add_block" id="add_child_open" [ngClass]="(openDrawer==true)?'panel_show':'panel_hide'">
-
+<!-- 
     <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
-      pointerEventsMethod="scrollbar">
+      pointerEventsMethod="scrollbar"> -->
       <div class="rooms_aloc">
         <!-- <ul >
           <li ><div class="left"> <span>Room</span>
@@ -34,14 +34,14 @@
             </div>
             <div class="right">
               <button type='button' class='qtyminus' field='quantity'
-              [disabled]="(roomsGroup.rooms  === 1 && roomsGroup.rooms  > 0 )"
-              [ngClass]="{ 'un_active' : roomsGroup.rooms === 1 && roomsGroup.rooms > 0 }"
-              (click)="removeRoom()">-</button>
-              <input type='text' name='quantity' value='{{ roomsGroup.rooms ? roomsGroup.rooms : 1  }}' class='qty' readonly />
-              <button class='qtyplus' field='quantity' 
-              [disabled]="roomsGroup.rooms >= 9" 
-              [ngClass]="{ 'un_active' : roomsGroup.rooms >= 9 || roomsGroup.rooms == 9 }"
-              (click)="addRoom()">+</button>
+                [disabled]="(roomsGroup.rooms  === 1 && roomsGroup.rooms  > 0 )"
+                [ngClass]="{ 'un_active' : roomsGroup.rooms === 1 && roomsGroup.rooms > 0 }"
+                (click)="removeRoom()">-</button>
+              <input type='text' name='quantity' value='{{ roomsGroup.rooms ? roomsGroup.rooms : 1  }}' class='qty'
+                readonly />
+              <button class='qtyplus' field='quantity' [disabled]="roomsGroup.rooms >= 9"
+                [ngClass]="{ 'un_active' : roomsGroup.rooms >= 9 || roomsGroup.rooms == 9 }"
+                (click)="addRoom()">+</button>
             </div>
           </li>
           <li>
@@ -79,27 +79,31 @@
         <div class="child_sel_wrapper {{childGroup.length}}" *ngIf="roomsGroup.child >= 1">
           <div class="child_boxes open" *ngFor="let child of childGroup;let idx = index">
             <div class="left">
-              <span class="label_name">Child {{idx + 1}} age</span>
+              <span class="label_name">Child {{idx + 1}} Age</span>
             </div>
             <div class="right">
               <!-- <ng-select placeholder="0" class="child_select_ng" #child>
                 <ng-option *ngFor='let in of counter(17) ;let i = index' value="{{i+1}}">{{i+1}}</ng-option>
               </ng-select> -->
-              <div class="dropdown ">
-                <a class="child_sub_drop" (click)="toggleChildDropDown()" >
-                  Dropdown link
+              <div class="dropdown child_dropdown_wrapper">
+                <a class="child_sub_drop" (click)="toggleChildDropDown()">
+                  0
                 </a>
-              
+
                 <div class="child_su_drop_op" *ngIf="isShowChildDropDown">
-                  <a *ngFor="let child of childAges;let x = index"  class="dropdown-item" href="javascript:void(0)">{{x}}</a>
+                  <ng-scrollbar class="custom_scroll_suggetion child_scrollbox" barClass="scrollbar" customview="true"
+                    #scrollable track="all" pointerEventsMethod="scrollbar">
+                    <a *ngFor="let child of childAges;let x = index" class="dropdown-item"
+                      href="javascript:void(0)">{{x}}</a>
+                  </ng-scrollbar>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
       </div>
-    </ng-scrollbar>
-   
+    <!-- </ng-scrollbar> -->
+
   </div>
 </div>
