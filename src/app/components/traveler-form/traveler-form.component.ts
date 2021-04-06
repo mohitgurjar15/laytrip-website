@@ -85,6 +85,7 @@ export class TravelerFormComponent implements OnInit {
   isAdultTravller: boolean = true;
   isChildTravller: boolean = true;
   isInfantTravller: boolean = true;
+  accountHolderEmail:string='';
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -96,6 +97,10 @@ export class TravelerFormComponent implements OnInit {
   ) {
     this.travlerLabels = travlerLabels;
     this.userInfo = getLoginUserInfo();
+    if(this.userInfo.roleId!=7){
+      this.accountHolderEmail=this.userInfo.email;
+    }
+    console.log("this.accountHolderEmail",this.userInfo)
 
   }
 

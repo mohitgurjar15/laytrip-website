@@ -94,7 +94,7 @@
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
                       *ngIf="traveler.controls.type.value=='' || traveler.controls.type.value=='adult'">
                       <label for="">Email*</label>
-                      <input type="email" class="form-control" formControlName="email" tabindex={{x}} [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.gender.errors}">
+                      <input type="email" class="form-control" formControlName="email" tabindex={{x}} [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.email.errors}">
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.email.errors" class="error">
                         <small *ngIf="traveler.controls.email.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter email address.</small>
