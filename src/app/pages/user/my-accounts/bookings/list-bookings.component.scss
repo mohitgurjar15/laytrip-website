@@ -151,7 +151,7 @@
                     display: flex;
                     justify-content: center;
 
-                    @include tab-view{
+                    @include tab-view {
                         font-size: 10px;
                     }
 
@@ -194,7 +194,7 @@
     min-height: calc(100vh - 110px);
     padding-top: 50px;
 
-    @include tab-view{
+    @include tab-view {
         padding-top: 25px;
     }
 
@@ -414,8 +414,14 @@
                                         }
 
                                         .header_name {
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            max-width: 100px;
+
                                             @include tab-view {
                                                 font-size: 14px;
+                                                max-width: 120px;
                                             }
                                         }
 
@@ -491,7 +497,7 @@
                         border-top: 1px solid $box-border-color;
                         background-color: $tab-bg-gray;
 
-                        @include tab-view{
+                        @include tab-view {
                             padding: 10px;
                         }
 
@@ -523,7 +529,8 @@
 
                                         &.active {
                                             border-top-right-radius: 10px;
-                                            @include tab-view{
+
+                                            @include tab-view {
                                                 top: 1px;
                                             }
                                         }
@@ -621,6 +628,15 @@
                                             padding: 0 20px;
                                             height: 50px;
 
+                                            &.hotel_round{
+                                                border: 2px solid $blue-text-one;
+                                                @include tab-view {
+                                                    border: none;
+                                                    padding: 0;
+                                                    width: auto;
+                                                }
+                                            }
+
                                             @include tab-view {
                                                 border: none;
                                                 padding: 0;
@@ -629,6 +645,13 @@
                                                 .tab_txt_head {
                                                     display: none;
                                                 }
+                                            }
+
+                                            .tab_txt_head {
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                margin-left: 5px;
                                             }
 
                                             img {

@@ -136,11 +136,14 @@
                           <div class="header_upper_wrper">
                             <div class="head_bookin">
                               <div class="booking_bar">
-                                <div class="header_name">
+                                <div class="header_name" *ngIf="booking.booking[0].moduleId==1">
                                   {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
                                   {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…'
                                   :
                                   ''}}
+                                </div>
+                                <div class="header_name" *ngIf="booking.booking[0].moduleId==3">
+                                  {{ booking.booking[0]?.moduleInfo[0]?.hotel_name }}
                                 </div>
                                 <div class="date_head">
                                   {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
@@ -209,11 +212,12 @@
                         </span>
                       </a>
                     </li>
+
                     <li class="{{cartItem.moduleId}}" *ngIf="cartItem.moduleId==3">
                       <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
                         [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
-                        <span class="tab_round_wrps" *ngIf="cartItem.moduleId==3">
-                          <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                        <span class="tab_round_wrps hotel_round" *ngIf="cartItem.moduleId==3">
+                          <img src="{{s3BucketUrl}}assets/images/icon/hotel_blue.svg" alt="Flight icon" />
                           <span
                             class="tab_txt_head">{{cartItem.moduleInfo[0].hotel_name}}</span>
                         </span>
@@ -223,7 +227,7 @@
                 </ul>
                 <div class="tab-content main_tab_content">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
-                    <div class="tab-pane" [id]="'cart_item'+j"
+                    <div class="tab-pane " [id]="'cart_item'+j"
                       [ngClass]="{'show active':selectedInCompletedTabNumber == j }">
                       <app-flights *ngIf="cartItem.moduleId==1" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-flights>
                       <app-hotels  *ngIf="cartItem.moduleId==3" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-hotels>

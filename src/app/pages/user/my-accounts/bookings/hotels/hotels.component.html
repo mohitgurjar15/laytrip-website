@@ -1,60 +1,93 @@
 <ng-container *ngIf="(cartItem | json) != '{}'">
-  
-  <div class="card hotel_card">
-    <div class="card-body ">
-        <div class="hotel_upper_inner">
-            <div class="col_boxs desk_box">
-                <span>
-                    Check In
-                </span>
-                {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_in,'YYYY-MM-DD') }}
-            </div>
-            <div class="col_boxs desk_box">
-                <span>
-                    Check Out
-                </span>
-                {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_out,'YYYY-MM-DD') }}
-            </div>
-            <div class="col_boxs desk_box">
-                {{cartItem.moduleInfo[0].input_data.num_nights}} {{cartItem.moduleInfo[0].input_data.num_nights>1 ? 'Nights':'Night'}}, {{cartItem.moduleInfo[0].input_data.num_rooms}} {{cartItem.moduleInfo[0].input_data.num_rooms >1 ? 'Rooms' : 'Room'}}
-            </div>
-            <div class="responsive_boxes">
-                <div>
-                    <div class="col_boxs">
-                        <span>
-                            Check In
+    <div id="hotel_accordions_booking">
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#booking_hotels">
+                    <span class="header_image">
+                        <span class="title_image">
+                            <img src="{{s3BucketUrl}}assets/images/icon/hotel_blue.svg" alt="Hotel icon" />
                         </span>
-                        {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_in,'YYYY-MM-DD') }}
+                        <div class="hotel_dets">
+                            <span class="hotel_name">Marriott</span>
+                            <span class="hotel_address">55 Church Street, New York, NY, 1007</span>
+                        </div>
+                    </span>
+                </a>
+            </div>
+
+            <div data-parent="#hotel_accordions_booking" class="collapse show" id="booking_hotels">
+                <div class="card-body custom_body_box">
+                    <div class="card hotel_card hotel_card_wrps">
+                        <div class="card-body ">
+                            <div class="hotel_upper_inner">
+                                <div class="col_boxs desk_box">
+                                    <span>
+                                        Check In
+                                    </span>
+                                    {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_in,'YYYY-MM-DD')
+                                    }}
+                                </div>
+                                <div class="col_boxs desk_box">
+                                    <span>
+                                        Check Out
+                                    </span>
+                                    {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_out,'YYYY-MM-DD')
+                                    }}
+                                </div>
+                                <div class="col_boxs desk_box">
+                                    {{cartItem.moduleInfo[0].input_data.num_nights}}
+                                    {{cartItem.moduleInfo[0].input_data.num_nights>1 ? 'Nights':'Night'}},
+                                    {{cartItem.moduleInfo[0].input_data.num_rooms}}
+                                    {{cartItem.moduleInfo[0].input_data.num_rooms >1
+                                    ? 'Rooms' : 'Room'}}
+                                </div>
+                                <div class="responsive_boxes">
+                                    <div>
+                                        <div class="col_boxs">
+                                            <span>
+                                                Check In
+                                            </span>
+                                            {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_in,'YYYY-MM-DD')
+                                            }}
+                                        </div>
+                                        <div class="col_boxs">
+                                            <span>
+                                                Check Out
+                                            </span>
+                                            {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_out,'YYYY-MM-DD')
+                                            }}
+                                        </div>
+                                    </div>
+                                    <div class="col_boxs">
+                                        {{cartItem.moduleInfo[0].input_data.num_nights}}
+                                        {{cartItem.moduleInfo[0].input_data.num_nights>1 ? 'Nights':'Night'}} <br>
+                                        {{cartItem.moduleInfo[0].input_data.num_rooms}}
+                                        {{cartItem.moduleInfo[0].input_data.num_rooms >1 ? 'Rooms' : 'Room'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hotel_lower_inner" *ngIf="cartItem.moduleInfo[0].amenities.length">
+                                <span>
+                                    <ng-container
+                                        *ngFor="let amenity of cartItem.moduleInfo[0].amenities ; let laststop = last">
+                                        {{amenity | titlecase}}
+                                        <ng-container *ngIf="!laststop">,</ng-container>
+                                    </ng-container>
+                                </span>
+                            </div>
+                            <div class="cta_btn_wrps">
+                                <a href="javascript:void(0);">
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col_boxs">
-                        <span>
-                            Check Out
-                        </span>
-                        {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_out,'YYYY-MM-DD') }}
-                    </div>
-                </div>
-                <div class="col_boxs">
-                    {{cartItem.moduleInfo[0].input_data.num_nights}} {{cartItem.moduleInfo[0].input_data.num_nights>1 ? 'Nights':'Night'}} <br> {{cartItem.moduleInfo[0].input_data.num_rooms}} {{cartItem.moduleInfo[0].input_data.num_rooms >1 ? 'Rooms' : 'Room'}}
+
+                    <app-booking-traveler [travelers]="cartItem" [laytrip_cart_id]="laytrip_cart_id"
+                        [isPassportRequired]="false" (laytripCartId)="cancelCartIdRemove($event)">
+                    </app-booking-traveler>
                 </div>
             </div>
-        </div>
-        <div class="hotel_lower_inner" *ngIf="cartItem.moduleInfo[0].amenities.length">
-            <span>
-                <ng-container *ngFor="let amenity of cartItem.moduleInfo[0].amenities ; let laststop = last">
-                    {{amenity | titlecase}}
-                    <ng-container *ngIf="!laststop">,</ng-container>
-                </ng-container>
-            </span>
-        </div>
-        <div class="cta_btn_wrps">
-            <a href="javascript:void(0);">
-                Delete
-            </a>
         </div>
     </div>
-  </div>
-
-  <app-booking-traveler [travelers]="cartItem" [laytrip_cart_id]="laytrip_cart_id"
-      [isPassportRequired]="false"  (laytripCartId)="cancelCartIdRemove($event)"></app-booking-traveler>
 </ng-container>
-
