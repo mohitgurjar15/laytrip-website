@@ -257,7 +257,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
    * @param event 
    */
   filterHotelByPrice(key, name) {
-    console.log(name)
     if (key === 'total') {
       this.sortType = name;
     } else if (key === 'weekly') {
@@ -307,6 +306,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     }
 
     /* Filter by price total or weekly */
+    console.log(this.sortType)
     if (this.sortType === 'total') {
       filteredHotels = filteredHotels.filter(item => {
         if (item.secondary_start_price === 0) {

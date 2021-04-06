@@ -68,9 +68,7 @@ export class GuestInfoComponent implements OnInit {
       }
     });
 
-    console.log("out");
     $(document).on("click",".child_sub_drop",function(e){
-      console.log("in");
       e.stopPropagation();
       $(this).siblings(".child_su_drop_op").show();
       //$("#child_su_drop_op").css('display', 'flex');

@@ -213,7 +213,6 @@ var FilterHotelComponent = /** @class */ (function () {
      * @param event
      */
     FilterHotelComponent.prototype.filterHotelByPrice = function (key, name) {
-        console.log(name);
         if (key === 'total') {
             this.sortType = name;
         }
@@ -259,6 +258,7 @@ var FilterHotelComponent = /** @class */ (function () {
             });
         }
         /* Filter by price total or weekly */
+        console.log(this.sortType);
         if (this.sortType === 'total') {
             filteredHotels = filteredHotels.filter(function (item) {
                 if (item.secondary_start_price === 0) {
