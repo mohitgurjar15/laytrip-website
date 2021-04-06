@@ -85,6 +85,7 @@ export class TravelerFormComponent implements OnInit {
   isAdultTravller: boolean = true;
   isChildTravller: boolean = true;
   isInfantTravller: boolean = true;
+  accountHolderEmail:string='';
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -96,6 +97,10 @@ export class TravelerFormComponent implements OnInit {
   ) {
     this.travlerLabels = travlerLabels;
     this.userInfo = getLoginUserInfo();
+    if(this.userInfo.roleId!=7){
+      this.accountHolderEmail=this.userInfo.email;
+    }
+    console.log("this.accountHolderEmail",this.userInfo,this.accountHolderEmail)
 
   }
 
@@ -144,7 +149,7 @@ export class TravelerFormComponent implements OnInit {
     for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
       this.travelers[`type${this.cartNumber}`].cartId = this.cartId
       this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
-
+      this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
       if (!this.cartItem.module_info.is_passport_required) {
         delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
         delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
@@ -393,6 +398,9 @@ export class TravelerFormComponent implements OnInit {
       this.cartService.setLoaderStatus(true)
       let userId = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.userId;
       if (userId) {
+        if(traveler_number==0 && this.accountHolderEmail){
+          data.email = this.accountHolderEmail;
+        }
         //Edit
         this.travelerService.updateAdult(data, userId).subscribe((traveler: any) => {
           this.travelers[`type${cartNumber}`].adults[traveler_number].is_submitted = false;
@@ -498,7 +506,7 @@ export class TravelerFormComponent implements OnInit {
     if (traveler && Object.keys(traveler).length > 0) {
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
-      this.travelers[`type${this.cartNumber}`].adults[traveler_number].email = traveler.email;
+      this.travelers[`type${this.cartNumber}`].adults[traveler_number].email = (this.accountHolderEmail && traveler_number==0)?this.accountHolderEmail:traveler.email;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].userId = traveler.userId;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].gender = traveler.gender;
       this.travelers[`type${this.cartNumber}`].adults[traveler_number].phone_no = traveler.phoneNo;
