@@ -23,6 +23,39 @@ export class FlightPriceSliderComponent implements OnInit {
   adult:number;
   child:number;
   infant:number;
+  
+  slideConfig = {
+    dots: false,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 7,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 7,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  }
 
   @Input() flexibleLoading:boolean=true;
   @Input() dates=[];
@@ -48,70 +81,15 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadJquery();
+  }
+  breakpoint(e) {
+    console.log('breakpoint', e);
   }
  
-
-  loadJquery() {
-    console.log('here')
-
-    // Start Flight Price By Day slider js
-
-    console.log('before',this.flexibleLoading)
-    if(this.dates.length > 0 && !this.flexibleLoading){
-      console.log('after',this.flexibleLoading)
-      let count = this.dates.length;
-      $('.price_day_slider').slick({
-        dots: false,
-        infinite: true,
-        speed: 300,
-        slidesToShow: count>=7?7:count,
-        slidesToScroll: 1,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: count>=6?6:count,
-              slidesToScroll: 1,
-              infinite: true,
-              dots: false
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: count>=3?3:count,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: count>=1?3:count,
-              slidesToScroll: 1
-            }
-          }
-        ]
-      });
-      // Close Flight Price By Day slider js
-    }
-    
-  }
 
   ngOnChanges(changes: SimpleChanges) {
    
     if(changes['dates'].currentValue.length){
-      // setTimeout(()=>{this.loadJquery();},100)
-      /* if(this.trip == 'oneway'){
-        this.flipDates(this.dates)
-      }
-      else{
-        if(window.screen.width<=600){
-          let targetIndex=2;
-          this.dates = this.arrayRotate(this.dates,targetIndex);
-          console.log("this.dates",this.dates)
-        }
-      } */
       this.flipDates(this.dates)
     }
   }
@@ -122,8 +100,6 @@ export class FlightPriceSliderComponent implements OnInit {
     let targetIndex = 3;
     if(window.screen.width<=600){
       targetIndex=1;
-      /* targetIndex=dates.length-sourceIndex+1;
-      this.dates = this.rotateArray1(dates,targetIndex) */
     }
     let startIndex=sourceIndex-targetIndex;
 
@@ -136,38 +112,7 @@ export class FlightPriceSliderComponent implements OnInit {
     }
 
     this.dates = result;
-    /* else{
-      this.dates = this.arrayRotate(this.dates,targetIndex);
-    } */
-    /* if(targetIndex > sourceIndex){
-
-      targetIndex=5;
-      for(let i=targetIndex; i < this.dates.length; i++){
-        result.push(this.dates[i])
-      }
-      for(let i=0; i < targetIndex; i++){
-        result.push(this.dates[i])
-      }
-
-    }
-    else{
-
-      for(let i=targetIndex; i <= sourceIndex; i++){
-        
-        result.push(this.dates[i])
-      }
-      
-      for(let i=sourceIndex+1; i < this.dates.length; i++){
-        result.push(this.dates[i])
-      }
-      
-      for(let i=0; i < targetIndex; i++){
-        result.push(this.dates[i])
-      }
-
-      
-    }
-    this.dates = result; */
+    
   }
 
   rotateArray1(dates, k) {
