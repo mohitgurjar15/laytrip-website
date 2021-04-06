@@ -51,13 +51,14 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     ],
   };
-  selectedGuest = [
+  selectedGuest = 
     {
-      adults: 2,
-      child: [],
+      rooms:1,
+      adults: 1,
+      child: 0,
       children: []
     }
-  ];
+  ;
   $dealLocatoin;
 
   showCommingSoon: boolean = false;
@@ -87,12 +88,11 @@ export class HotelSearchWidgetComponent implements OnInit {
       longitude: null,
       check_in: this.checkInDate,
       check_out: this.checkOutDate,
-      occupancies: [
+      occupancies: 
         {
           adults: null,
           children: []
-        }
-      ],
+        },
     };
 
     let host = window.location.origin;
@@ -211,7 +211,6 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.searchedValue[1]['value'] = event;
       this.searchHotelInfo.occupancies = event;
       console.log(this.searchHotelInfo.occupancies)
-
     }
   }
 
@@ -233,7 +232,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value']));
     queryParams.location = btoa(JSON.stringify(this.searchedValue[0]['value']));
-    console.log("queryParams",queryParams)
+    console.log("queryParams",this.searchedValue[1]['value'])
     if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
       // localStorage.setItem('_hote', JSON.stringify(this.searchedValue));

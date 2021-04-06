@@ -49,13 +49,12 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                 }
             ]
         };
-        this.selectedGuest = [
-            {
-                adults: 2,
-                child: [],
-                children: []
-            }
-        ];
+        this.selectedGuest = {
+            rooms: 1,
+            adults: 1,
+            child: 0,
+            children: []
+        };
         this.showCommingSoon = false;
         this.customStartDateValidation = "2021-05-03";
         this.customEndDateValidation = "2021-05-04";
@@ -72,12 +71,10 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                 longitude: null,
                 check_in: this.checkInDate,
                 check_out: this.checkOutDate,
-                occupancies: [
-                    {
-                        adults: null,
-                        children: []
-                    }
-                ]
+                occupancies: {
+                    adults: null,
+                    children: []
+                }
             };
         var host = window.location.origin;
         if (host.includes("staging")) {
@@ -203,7 +200,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
         queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value']));
         queryParams.location = btoa(JSON.stringify(this.searchedValue[0]['value']));
-        console.log("queryParams", queryParams);
+        console.log("queryParams", this.searchedValue[1]['value']);
         if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
             this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
             // localStorage.setItem('_hote', JSON.stringify(this.searchedValue));

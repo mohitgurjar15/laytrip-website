@@ -46,6 +46,7 @@ var HotelSearchComponent = /** @class */ (function () {
         var info;
         this.route.queryParams.forEach(function (params) {
             info = JSON.parse(atob(_this.route.snapshot.queryParams['itenery']));
+            console.log(info);
             payload = {
                 check_in: params.check_in,
                 check_out: params.check_out,
@@ -54,9 +55,9 @@ var HotelSearchComponent = /** @class */ (function () {
                 occupancies: [],
                 filter: true
             };
-            info.forEach(function (item) {
-                payload.occupancies.push({ adults: item.adults, children: item.children });
-            });
+            // info.forEach(item => {
+            payload.occupancies.push({ adults: info.adults, children: info.child });
+            // });
             _this.getHotelSearchData(payload);
         });
     };

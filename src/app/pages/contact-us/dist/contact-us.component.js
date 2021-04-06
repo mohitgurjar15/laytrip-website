@@ -61,13 +61,9 @@ var ContactUsComponent = /** @class */ (function () {
         formdata.append("name", this.contactUsForm.value.name);
         formdata.append("email", this.contactUsForm.value.email);
         formdata.append("message", this.contactUsForm.value.message);
-        var d = { 'file': this.files };
-        formdata.append("file", d);
-        /*  for  (var i =  0; i <  this.files.length; i++)  {
-           formdata.append("file",  this.files[i]);
-         } */
-        console.log("formdata", formdata);
-        console.log(this.files);
+        for (var i = 0; i < this.files.length; i++) {
+            formdata.append("file", this.files[i]);
+        }
         this.genericService.createEnquiry(formdata).subscribe(function (res) {
             $('#contact_modal').modal('hide');
             _this.loading = _this.submitted = false;
@@ -95,6 +91,7 @@ var ContactUsComponent = /** @class */ (function () {
     };
     ContactUsComponent.prototype.closeModal = function () {
         var _this = this;
+        this.messageLenght = 0;
         this.submitted = false;
         Object.keys(this.contactUsForm.controls).forEach(function (key) {
             _this.contactUsForm.get(key).markAsUntouched();

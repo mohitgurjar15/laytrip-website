@@ -34,14 +34,14 @@
             </div>
             <div class="right">
               <button type='button' class='qtyminus' field='quantity'
-                [disabled]="(roomsGroup.rooms  === 1 && roomsGroup.rooms  > 0 )"
-                [ngClass]="{ 'un_active' : roomsGroup.rooms === 1 && roomsGroup.rooms > 0 }"
-                (click)="removeRoom(id)">-</button>
-              <input type='text' name='quantity' value='{{ roomsGroup.rooms ? roomsGroup.rooms : 1  }}' class='qty'
-                readonly />
-              <button class='qtyplus' field='quantity' [disabled]="roomsGroup.rooms >= 9"
-                [ngClass]="{ 'un_active' : roomsGroup.rooms >= 9 || roomsGroup.rooms == 9 }"
-                (click)="addRoom(id)">+</button>
+              [disabled]="(roomsGroup.rooms  === 1 && roomsGroup.rooms  > 0 )"
+              [ngClass]="{ 'un_active' : roomsGroup.rooms === 1 && roomsGroup.rooms > 0 }"
+              (click)="removeRoom()">-</button>
+              <input type='text' name='quantity' value='{{ roomsGroup.rooms ? roomsGroup.rooms : 1  }}' class='qty' readonly />
+              <button class='qtyplus' field='quantity' 
+              [disabled]="roomsGroup.rooms >= 9" 
+              [ngClass]="{ 'un_active' : roomsGroup.rooms >= 9 || roomsGroup.rooms == 9 }"
+              (click)="addRoom()">+</button>
             </div>
           </li>
           <li>

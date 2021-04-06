@@ -49,6 +49,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    console.log('ioko')
+
     window.scroll(0, 0);
     sessionStorage.removeItem("__insMode")
     sessionStorage.removeItem("__islt")
@@ -197,6 +199,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   getSearchItem(event) {
+    console.log('getSearchItem')
+
     // TRIP is round-trip then call this API
     if (event.trip === 'roundtrip') {
       this.getFlightSearchDataForRoundTrip(event);

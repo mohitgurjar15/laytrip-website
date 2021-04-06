@@ -257,6 +257,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
    * @param event 
    */
   filterHotelByPrice(key, name) {
+    console.log(name)
     if (key === 'total') {
       this.sortType = name;
     } else if (key === 'weekly') {
@@ -308,15 +309,15 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     /* Filter by price total or weekly */
     if (this.sortType === 'total') {
       filteredHotels = filteredHotels.filter(item => {
-        // if (item.secondary_start_price === 0) {
-        //   // return item.secondary_start_price === 0;
-        // }
+        if (item.secondary_start_price === 0) {
+          return item.secondary_start_price === 0;
+        }
       });
     } else if (this.sortType === 'weekly') {
       filteredHotels = filteredHotels.filter(item => {
-        // if (item.secondary_start_price > 0) {
-        //   // return item.name === hotelname.value;
-        // }
+        if (item.secondary_start_price > 0) {
+          return item.name === hotelname.value;
+        }
       });
     }
     this.filterHotel.emit(filteredHotels);

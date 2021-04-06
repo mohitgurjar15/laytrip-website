@@ -37,6 +37,7 @@ var FlightSearchComponent = /** @class */ (function () {
     }
     FlightSearchComponent.prototype.ngOnInit = function () {
         var _this = this;
+        console.log('ioko');
         window.scroll(0, 0);
         sessionStorage.removeItem("__insMode");
         sessionStorage.removeItem("__islt");
@@ -173,6 +174,7 @@ var FlightSearchComponent = /** @class */ (function () {
         });
     };
     FlightSearchComponent.prototype.getSearchItem = function (event) {
+        console.log('getSearchItem');
         // TRIP is round-trip then call this API
         if (event.trip === 'roundtrip') {
             this.getFlightSearchDataForRoundTrip(event);

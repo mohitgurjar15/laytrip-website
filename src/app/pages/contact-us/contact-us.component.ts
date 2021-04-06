@@ -78,14 +78,9 @@ export class ContactUsComponent implements OnInit {
     formdata.append("name",this.contactUsForm.value.name);
     formdata.append("email",this.contactUsForm.value.email);
     formdata.append("message",this.contactUsForm.value.message);
-    var d : any = {'file': this.files  };
-    formdata.append("file",d );
-
-   /*  for  (var i =  0; i <  this.files.length; i++)  {  
-      formdata.append("file",  this.files[i]);
-    } */ 
-    console.log("formdata",formdata);
-    console.log(this.files);
+    for (var i = 0; i < this.files.length; i++) { 
+      formdata.append("file", this.files[i]);
+    }
     
     this.genericService.createEnquiry(formdata).subscribe((res: any) => {
       $('#contact_modal').modal('hide');
@@ -115,6 +110,7 @@ export class ContactUsComponent implements OnInit {
   }
 
   closeModal() {
+    this.messageLenght=0;
     this.submitted = false;
     Object.keys(this.contactUsForm.controls).forEach(key => {
       this.contactUsForm.get(key).markAsUntouched();
