@@ -4,7 +4,7 @@
         <div class="card_iinner">
             <div class="main_left_side">
                 <div class="common_wrper" *ngFor="let route of item.routes; let lastroute = last">
-                    <div class="left_side desktop_on">
+                    <div class="left_side desktop_on"> 
                         <div class="flight_nams_wrps">
                             <div class="fight_secs {{route.stops[0].airline_logo}}">
                                 <img src="{{ route.stops[0].airline_logo || defaultImage }}" alt="Airlines Logo"
