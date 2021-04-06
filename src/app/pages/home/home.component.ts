@@ -196,8 +196,7 @@ export class HomeComponent implements OnInit {
     if(this.moduleId == 1){
       this.toString = newItem;
       this.homeService.setToString(newItem);
-    } else if(this.moduleId == 2) {
-
+    } else if(this.moduleId == 3) {
       this.homeService.setLocationForHotel(newItem);
     } else {
 

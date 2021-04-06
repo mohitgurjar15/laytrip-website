@@ -27,8 +27,9 @@ export class DealComponent implements OnInit {
     this.list = this.dealList;
   }
 
-  btnDealClick(code : string){
+  btnDealClick(item){
+  
     window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-    this.toString.emit(code);  
+    this.toString.emit(item.title ? item :item.code  );  
   }
 }
