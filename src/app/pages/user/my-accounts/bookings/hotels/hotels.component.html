@@ -8,8 +8,8 @@
                             <img src="{{s3BucketUrl}}assets/images/icon/hotel_blue.svg" alt="Hotel icon" />
                         </span>
                         <div class="hotel_dets">
-                            <span class="hotel_name">Marriott</span>
-                            <span class="hotel_address">55 Church Street, New York, NY, 1007</span>
+                            <span class="hotel_name">{{cartItem.moduleInfo[0].hotel_name}}</span>
+                            <span class="hotel_address">{{cartItem.moduleInfo[0].address.address_line_one}}</span>
                         </div>
                     </span>
                 </a>
@@ -75,15 +75,15 @@
                                     </ng-container>
                                 </span>
                             </div>
-                            <div class="cta_btn_wrps">
+                           <!--  <div class="cta_btn_wrps">
                                 <a href="javascript:void(0);">
                                     Delete
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
-                    <app-booking-traveler [travelers]="cartItem" [laytrip_cart_id]="laytrip_cart_id"
+                    <app-booking-traveler [cartItem]="cartItem" [laytrip_cart_id]="laytrip_cart_id"
                         [isPassportRequired]="false" (laytripCartId)="cancelCartIdRemove($event)">
                     </app-booking-traveler>
                 </div>

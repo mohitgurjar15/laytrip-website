@@ -20,6 +20,7 @@ var BookingTravelerComponent = /** @class */ (function () {
         this.accountService = accountService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = {};
+        this.cartItem = {};
         this.isPassportRequired = false;
         this.baggageDescription = '';
         this.moduleInfo = {};
@@ -32,10 +33,12 @@ var BookingTravelerComponent = /** @class */ (function () {
     BookingTravelerComponent.prototype.ngOnInit = function () {
     };
     BookingTravelerComponent.prototype.ngOnChanges = function (changes) {
-        if (typeof changes['travelers'].currentValue != 'undefined') {
-            this.travelers = changes['travelers'].currentValue.travelers;
-            this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
-            this.bookingStatus = changes['travelers'].currentValue.bookingStatus;
+        if (typeof changes['cartItem'].currentValue != 'undefined') {
+            this.travelers = changes['cartItem'].currentValue.travelers;
+            this.moduleInfo = changes['cartItem'].currentValue.moduleInfo;
+            this.cartItem = changes['cartItem'].currentValue;
+            this.bookingStatus = changes['cartItem'].currentValue.bookingStatus;
+            this.moduleId = changes['cartItem'].currentValue.moduleId;
             if (this.travelers.length > 0) {
                 this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;
             }
@@ -169,6 +172,9 @@ var BookingTravelerComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], BookingTravelerComponent.prototype, "travelers");
+    __decorate([
+        core_1.Input()
+    ], BookingTravelerComponent.prototype, "cartItem");
     __decorate([
         core_1.Input()
     ], BookingTravelerComponent.prototype, "isPassportRequired");

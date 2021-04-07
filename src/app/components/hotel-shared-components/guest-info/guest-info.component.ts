@@ -18,7 +18,6 @@ export class GuestInfoComponent implements OnInit {
   errorMessage = '';
   openDrawer : boolean = false;
   countryCode: string;
-  childGroup=[];
   childAges=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
   isShowChildDropDown:boolean=false;
   roomsGroup = 
@@ -30,7 +29,7 @@ export class GuestInfoComponent implements OnInit {
     }
   ;
   totalPerson: number;
-
+  selectedChildAge;  
   constructor(
     private route: ActivatedRoute,
     private commonFunction: CommonFunction
@@ -42,6 +41,7 @@ export class GuestInfoComponent implements OnInit {
     this.loadJquery();
     if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
       const info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+      console.log(info)
       if (info) {
         this.roomsGroup = info;
       }
@@ -132,13 +132,10 @@ export class GuestInfoComponent implements OnInit {
     if (item && item.type === 'plus' && item.label === 'child') {
       // this.roomsGroup[item.id].child.push(1);
       this.roomsGroup.child +=  1;
-      this.childGroup.push('child');
+      this.roomsGroup.children.push({type: 'child',is_show:false,age:0})
       this.totalPerson = this.getTotalPerson();
     } else if (item && item.type === 'minus' && item.label === 'child') {
-      this.childGroup.splice(-1,1)
-
-      // this.childGroup.pop('child')
-      // this.roomsGroup[item.id].child.pop();
+      this.roomsGroup.children.pop();
       this.roomsGroup.child -=  1;
       // this.roomsGroup[item.id].children.pop();
       this.totalPerson = this.getTotalPerson();
@@ -163,7 +160,13 @@ export class GuestInfoComponent implements OnInit {
     console.log(this.roomsGroup) */
   }
 
-  toggleChildDropDown(){
-    this.isShowChildDropDown=!this.isShowChildDropDown;
+  toggleChildDropDown(index){
+    this.roomsGroup.children[index].is_show = !this.roomsGroup.children[index].is_show;
+
+  }
+
+  selectChildAge(index,age){
+    this.roomsGroup.children[index].age = age;
+    this.roomsGroup.children[index].is_show = !this.roomsGroup.children[index].is_show;    
   }
 }

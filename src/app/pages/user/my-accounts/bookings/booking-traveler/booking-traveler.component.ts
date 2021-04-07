@@ -19,6 +19,7 @@ export class BookingTravelerComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Input() travelers : any = {};
+  @Input() cartItem : any = {};
   @Input() isPassportRequired=false;
   baggageDescription: string = '';
   moduleInfo : any ={};
@@ -27,6 +28,7 @@ export class BookingTravelerComponent implements OnInit {
   closeResult = '';
   bookingId = '';
   @Output() laytripCartId = new EventEmitter();
+  moduleId;
   bookingStatus;
   
   constructor(   
@@ -43,10 +45,14 @@ export class BookingTravelerComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
 
-    if(typeof changes['travelers'].currentValue!='undefined'){
-      this.travelers = changes['travelers'].currentValue.travelers;          
-      this.moduleInfo = changes['travelers'].currentValue.moduleInfo;
-      this.bookingStatus = changes['travelers'].currentValue.bookingStatus;
+    if(typeof changes['cartItem'].currentValue!='undefined'){
+      this.travelers = changes['cartItem'].currentValue.travelers;          
+      this.moduleInfo = changes['cartItem'].currentValue.moduleInfo;
+      this.cartItem = changes['cartItem'].currentValue;
+      
+
+      this.bookingStatus = changes['cartItem'].currentValue.bookingStatus;
+      this.moduleId = changes['cartItem'].currentValue.moduleId;
       if(this.travelers.length > 0){
         this.travelers[0].is_passport_required = this.moduleInfo[0].is_passport_required ? this.moduleInfo[0].is_passport_required : false;  
       }      
