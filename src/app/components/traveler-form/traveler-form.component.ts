@@ -106,7 +106,7 @@ export class TravelerFormComponent implements OnInit {
 
   ngOnInit() {
     this.loadJquery();
-    this.bsConfig = Object.assign({}, { dateInputFormat: 'MM/DD/YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
+    this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
 
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
@@ -518,6 +518,9 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
         this.travelers[`type${this.cartNumber}`].adults[traveler_number].passport_expiry = traveler.passportExpiry ? `${moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy')}` : '';
       }
+      console.log(this.travelers[`type${this.cartNumber}`].adults[traveler_number],"----")
+      /* this.travelerService.updateAdult(this.travelers[`type${this.cartNumber}`].adults[traveler_number], traveler.userId).subscribe((traveler: any) => {
+      }) */
       this.patch();
       this.setPhoneNumberFormat(this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code,cartNumber,traveler_number)
     }
