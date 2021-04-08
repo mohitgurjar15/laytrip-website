@@ -767,10 +767,10 @@ ngb-datepicker {
 
                     @include ipad-view {
                         width: 100%;
-                        margin-bottom: 20px;
+                        margin-bottom: 5px;
                     }
 
-                    @media (max-width: 480px) {
+                    @include tab-view {
                         flex-flow: column;
                     }
 
@@ -834,9 +834,13 @@ ngb-datepicker {
                     justify-content: space-between;
                     position: relative;
 
-                    @include tab-view {
+                    @include ipad-view {
                         width: 100%;
-                        margin-bottom: 20px;
+                        margin-bottom: 5px;
+                        padding: 0;
+                    }
+
+                    @include tab-view {
                         padding: 0;
                     }
 
@@ -857,6 +861,12 @@ ngb-datepicker {
                         background: $background-white;
                         position: relative;
 
+                        span {
+                            &.p-calendar {
+                                width: 100%;
+                            }
+                        }
+
                         input {
                             width: 100%;
                             border: none;
@@ -868,7 +878,9 @@ ngb-datepicker {
                             padding: 0 15px 0 70px;
                             background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
 
+
                             @media (max-width: 575px) {
+
                                 .calender-responsive-view {
                                     right: 0 !important;
                                     left: auto !important;
@@ -923,7 +935,8 @@ ngb-datepicker {
 
                     @include ipad-view {
                         width: 50%;
-                        margin-bottom: 20px;
+                        margin: 0 auto;
+                        padding: 0;
                     }
 
                     @media (max-width: 575px) {

@@ -144,30 +144,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   loadJquery() {
     //Start REsponsive Fliter js
-    $(window).on("scroll", function () {
-      if ($(window).width() < 1200) {
-        if ($(this).scrollTop() < 10) {
-          $('#responsive_filter').slideUp("slow");
-        }
-
-        if ($(this).scrollTop() > 10) {
-          $('#responsive_filter').slideDown("slow");
-        }
-
-        var scrollHeight = $(document).height();
-        var scrollPosition = $(window).height() + $(window).scrollTop();
-        if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-          $('#responsive_filter').slideUp("slow");
-        }
-      } else {
-        $('#responsive_filter').hide("slow");
-      }
-    });
-    var sheight = $(window).scrollTop();
-    var swidth = $(window).width();
-    if (sheight > 10 && swidth < 991) {
-      $('#responsive_filter').slideDown("slow");
-    }
     $(".responsive_filter_btn").click(function () {
       $("#responsive_filter_show").slideDown("slow");
       $("body").addClass('overflow-hidden');
