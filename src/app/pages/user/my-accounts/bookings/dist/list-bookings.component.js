@@ -98,17 +98,13 @@ var ListBookingsComponent = /** @class */ (function () {
             this.completeBookings = __spreadArrays(this.completeBookingsForFilter);
         }
     };
-    ListBookingsComponent.prototype.selectInCompletedTab = function (cartNumber, data) {
-        if (data === void 0) { data = []; }
-        // console.log(this.selectedInCompletedTabNumber)
-        // this.selectedInCompletedTabNumber = 0;
-        // if(data.length > 1){
-        // console.log('sds')
+    ListBookingsComponent.prototype.selectInCompletedTab = function (cartNumber) {
         this.selectedInCompletedTabNumber = cartNumber;
-        // }
+        this.cartService.setCartNumber(cartNumber);
     };
     ListBookingsComponent.prototype.selectCompletedTab = function (cartNumber) {
         this.selectedCompletedTabNumber = cartNumber;
+        this.cartService.setCartNumber(cartNumber);
     };
     ListBookingsComponent.prototype.getProgressPercentage = function (value, totalValue) {
         return { 'width': Math.floor((value / totalValue) * 100) + '%' };

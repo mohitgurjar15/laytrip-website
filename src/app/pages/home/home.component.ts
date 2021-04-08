@@ -168,7 +168,7 @@ export class HomeComponent implements OnInit {
       //   document.getElementById('login_btn').style.background = '#FC7E66';
       // }
     } else if (tabName === 'hotel') {
-      this.getDeal(2);
+      this.getDeal(3);
       document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';

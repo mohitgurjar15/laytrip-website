@@ -143,6 +143,8 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   }
 
   infoWindowAction(template, event, action) {
+
+
     if (action === 'open') {
       template.open();
     } else if (action === 'close') {
