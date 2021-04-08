@@ -20,12 +20,37 @@ ng-scrollbar {
     // max-height: 300px;
 }
 
+.desk_ver{
+	@include tab-view{
+		display: none;
+	}
+}
+
 .mobile_view_popup {
     display: none;
 
     @include tab-view {
         display: block;
     }
+}
+.responsive_mobile{
+	display: none;
+	@include tab-view{
+		display: block;
+	}
+}
+.filter_main_wrapper {
+	&.responsive_mobile{
+		.accordion{
+			&.block_shortby{
+				.accordion-heading{
+					&::after{
+						background-image: none;
+					}
+				}
+			}
+		} 
+	}
 }
 
 .star-rating {

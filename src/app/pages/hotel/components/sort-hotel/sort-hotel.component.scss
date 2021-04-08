@@ -1,3 +1,4 @@
+@import "../../../../../_hotel.scss";
 .anchor_link {
     cursor: pointer;
 }
@@ -8,4 +9,34 @@ ng-scrollbar {
     --scrollbar-thumb-hover-color: #ff00bc;
     --scrollbar-border-radius: 15px;
     max-height: 300px;
+}
+
+
+.desktop_sort{
+	@include tab-view{
+		display: none;
+	}
+}
+.mobile_sort{
+	display: none;
+	@include tab-view{
+		display: block;
+	}
+}
+.filter_saidbar{
+	&.mobile_sort{
+		.short_by{
+			.block_shortby{
+				margin-top: 0;
+				.accordion-group{
+					.accordion-heading{
+						&::after{
+							background-image: none;
+							margin-left: 15px;
+						}
+					}
+				}
+			}
+		}
+	}
 }
