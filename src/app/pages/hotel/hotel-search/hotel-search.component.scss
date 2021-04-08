@@ -242,7 +242,11 @@
         display: block;
     }
 }
-
+.mobile_box_listing{
+    @include tab-view{
+        padding: 0;
+    }
+}
 .responsive_filter_show,
 .responsive_sortby_show {
     background: $bg-light-grey;
