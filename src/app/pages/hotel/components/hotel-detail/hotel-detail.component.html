@@ -445,7 +445,7 @@
                   <div class="rating_detail">
                     <span class="users_name">{{item?.user_name}}</span>
                     <div class="stars_text">
-                      <div class="stars_wrapper">
+                      <div class="stars_wrapper {{item.average_rating}}">
                         <img *ngFor='let in of counter(item.average_rating)'
                           src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
                       </div>

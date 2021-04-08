@@ -76,7 +76,6 @@
         </li>
       </ul>
 
-<<<<<<< HEAD
         <div class="child_sel_wrapper" *ngIf="roomsGroup.child > 0">
           <div class="child_boxes open" *ngFor="let child of roomsGroup.children;let idx = index">
             <div class="left">
@@ -98,25 +97,6 @@
                       href="javascript:void(0)" (click)="selectChildAge(idx,x)">{{x}}</a>
                   </ng-scrollbar>
                 </div>
-=======
-      <div class="child_sel_wrapper" *ngIf="roomsGroup.child > 0">
-        <div class="child_boxes open" *ngFor="let child of roomsGroup.children;let idx = index">
-          <div class="left">
-            <span class="label_name">Child {{idx + 1}} Age</span>
-          </div>
-          <div class="right">
-            <div class="dropdown child_dropdown_wrapper">
-              <a class="child_sub_drop" (click)="toggleChildDropDown(idx)">
-                {{ child.age }}
-              </a>
-
-              <div class="child_su_drop_op" *ngIf="isShowChildDropDown">
-                <ng-scrollbar class="custom_scroll_suggetion child_scrollbox" barClass="scrollbar" customview="true"
-                  #scrollable track="all" pointerEventsMethod="scrollbar">
-                  <a *ngFor="let child of childAges;let x = index" class="dropdown-item"
-                href="javascript:void(0)" (click)="selectChildAge(idx,x)">{{x}}</a>
-                </ng-scrollbar>
->>>>>>> 99eb078a53658cfc3c0c44bc2f2f676eefc91090
               </div>
             </div>
 

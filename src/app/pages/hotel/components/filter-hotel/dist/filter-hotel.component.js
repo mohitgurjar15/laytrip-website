@@ -168,10 +168,12 @@ var FilterHotelComponent = /** @class */ (function () {
      * @param event
      */
     FilterHotelComponent.prototype.filterByHotelRatings = function (event, count) {
+        console.log(event);
         if (event.target.checked === true) {
             this.ratingArray.push(parseInt(count));
         }
         else {
+            console.log(count);
             this.ratingArray = this.ratingArray.filter(function (item) {
                 return item != count;
             });

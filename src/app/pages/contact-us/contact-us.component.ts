@@ -163,7 +163,7 @@ export class ContactUsComponent implements OnInit {
           this.attatchmentFiles.push(attatchData);
         };
         this.files.push(this.fileObj);
-        
+        console.log(this.files)
       } else {
         this.imageFileError = true;
         
