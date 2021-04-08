@@ -20,9 +20,9 @@
             </div>
             <div class="searchbar_box">
               <!-- <input type="text" id="" class="amount" placeholder="Ahmedabad"> -->
-              <label for="">Search</label>
+              <!-- <label for="">Search</label> -->
               <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
-                placeholder="Search Hotel" (change)="searchHotel()" [clearable]="false" [selectOnTab]="true">
+                placeholder="Search" (change)="searchHotel()" [clearable]="false" [selectOnTab]="true">
               </ng-select>
               <!-- <div class="search_btns">
                 <a (click)="clearHotelSearch()">Clear</a>

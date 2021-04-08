@@ -54,6 +54,7 @@ ng-scrollbar {
         color: #bbb;
         font-size: 18px;
         padding: 0;
+        margin-right: 8px;
         cursor: pointer;
         -webkit-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
@@ -80,12 +81,12 @@ ng-scrollbar {
 
         .filled {
             display: none;
-            height: 15px;
+            height: 20px;
         }
 
         .blank {
             display: block;
-            height: 15px;
+            height: 20px;
         }
     }
 }
