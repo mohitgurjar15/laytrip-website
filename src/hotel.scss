@@ -402,7 +402,7 @@ ngb-datepicker {
                     .rooms_aloc {
                         margin-top: 10px;
                         //margin-right: 30px;
-                        max-height: 380px;
+                        //max-height: 380px;
 
                         &:first-child {
                             margin-top: 0;
@@ -3164,7 +3164,8 @@ ngb-datepicker {
                         .ng-select-container {
                             border: none;
                             margin-bottom: 20px;
-                            height: 39px;
+                            height: 42px;
+                            overflow: visible;
 
                             &:hover {
                                 box-shadow: none;
@@ -3175,11 +3176,11 @@ ngb-datepicker {
                             padding: 0;
 
                             input {
-                                // border: 1px solid $box-border-color;
-                                border-bottom: 1px solid $box-border-color;
-                                // border-radius: 3px;
+                                border: 1px solid $box-border-color;
+                                //border-bottom: 1px solid $box-border-color;
+                                border-radius: 18px;
                                 width: 100%;
-                                height: 32px;
+                                height: 35px;
                                 padding: 0;
                                 //margin-bottom: 15px;
                                 font-size: 14px;

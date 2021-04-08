@@ -35,15 +35,69 @@
     class="result_listing hotel_listings infinite-search-results" (clickOutside)="closeHotelDetail()" infiniteScroll
     [infiniteScrollDistance]="scrollDistance" [infiniteScrollDisabled]="isFullListDisplayed"
     [infiniteScrollThrottle]="throttle" [scrollWindow]="false" (scrolled)="onScrollDown()">
-
+    <!-- <div class="carousel_box">
+        <ul class="slides">
+            <input type="radio" name="radio-buttons" id="img-1" checked />
+            <li class="slide-container">
+                <div class="slide-image">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Timisoara_-_Regional_Business_Centre.jpg">
+                </div>
+                <div class="carousel-controls">
+                    <label for="img-3" class="prev-slide">
+                        <span>&lsaquo;</span>
+                    </label>
+                    <label for="img-2" class="next-slide">
+                        <span>&rsaquo;</span>
+                    </label>
+                </div>
+            </li>
+            <input type="radio" name="radio-buttons" id="img-2" />
+            <li class="slide-container">
+                <div class="slide-image">
+                    <img
+                        src="https://content.r9cdn.net/rimg/dimg/db/02/06b291e8-city-14912-171317ad83a.jpg?width=1750&height=1000&xhint=3040&yhint=2553&crop=true">
+                </div>
+                <div class="carousel-controls">
+                    <label for="img-1" class="prev-slide">
+                        <span>&lsaquo;</span>
+                    </label>
+                    <label for="img-3" class="next-slide">
+                        <span>&rsaquo;</span>
+                    </label>
+                </div>
+            </li>
+            <input type="radio" name="radio-buttons" id="img-3" />
+            <li class="slide-container">
+                <div class="slide-image">
+                    <img src="https://speakzeasy.files.wordpress.com/2015/05/twa_blogpic_timisoara-4415.jpg">
+                </div>
+                <div class="carousel-controls">
+                    <label for="img-2" class="prev-slide">
+                        <span>&lsaquo;</span>
+                    </label>
+                    <label for="img-1" class="next-slide">
+                        <span>&rsaquo;</span>
+                    </label>
+                </div>
+            </li>
+            <div class="carousel-dots">
+                <label for="img-1" class="carousel-dot" id="img-dot-1"></label>
+                <label for="img-2" class="carousel-dot" id="img-dot-2"></label>
+                <label for="img-3" class="carousel-dot" id="img-dot-3"></label>
+            </div>
+        </ul>
+    </div> -->
     <div class="search_block" *ngFor="let item of hotelListArray; let blockIndex = index;">
         <div class="listing_block">
-            <div class="row">
-                <div class="col-md-9">
+            <div class="listing_inner_box_wrppr">
+
+                <div class="box_left">
                     <div class="block_main">
                         <div class="block_top">
                             <div class="block_inner">
-                                <div class="col-md-4 col-lg-4 px-0">
+
+                                <div class="box_img">
                                     <div class="block_im">
                                         <div class="hotel_list_img_wrp">
                                             <span class="fav_sections">
@@ -52,15 +106,47 @@
                                             <img src="{{item?.thumbnail}}" alt="Hotel image">
                                         </div>
                                     </div>
+                                    <!-- <div class="site">
+
+                                        <div class="slider"
+                                            style="background-image:url('https://images.unsplash.com/photo-1470020337050-543c4e581988?dpr=1&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=')">
+
+                                            <div class="slick-slide">Phosfluorescently evolve impactful partnerships
+                                                through alternative process improvements. Interactively morph
+                                                cutting-edge niche markets for premium portals. Quickly fabricate
+                                                best-of-breed paradigms for low-risk high-yield data. Appropriately
+                                                disintermediate.Phosfluorescently evolve impactful partnerships through
+                                                alternative process improvements. Interactively morph cutting-edge niche
+                                                markets for premium portals. Quickly fabricate best-of-breed paradigms
+                                                for low-risk high-yield data. Appropriately disintermediate.
+
+                                            </div>
+
+
+                                            <div class="slick-slide">Interactively communicate 2.0 markets for
+                                                revolutionary supply chains. Collaboratively simplify user-centric data
+                                                through innovative web-readiness. Compellingly engage plug-and-play
+                                                strategic theme areas before cross functional niches. Uniquely
+                                                myocardinate worldwide total linkage and backward-compatible synergy.
+                                            </div>
+
+                                            <div class="slick-slide">Slide Three</div>
+
+                                        </div>
+
+                                    </div> -->
                                 </div>
-                                <div class="col-md-8 col-lg-8 pr-0">
+
+
+                                <div class="box_info">
                                     <div class="block_detail">
                                         <div class="block_detail_top">
                                             <div class="detail_info">
                                                 <h4>{{item?.name}}</h4>
                                                 <span class="adress_span">
                                                     <!-- <img  src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg" alt="Map pin"> -->
-                                                    {{item?.full_address}}</span>
+                                                    {{item?.full_address}}
+                                                </span>
                                                 <div class="review_section_wrap">
                                                     <div class="left_bar">
                                                         <!-- <div class="rating_num">
@@ -107,7 +193,7 @@
 
                     </div>
                 </div>
-                <div class="col-md-3 px-0">
+                <div class="box_right">
                     <div class="block_price block_pr">
                         <div class="block_inn_pr">
                             <div class="block" *ngIf="item.secondary_start_price > 0">
@@ -127,6 +213,7 @@
 
         <div class="detail_info_show" [attr.id]="blockIndex" *ngIf="showHotelDetails[blockIndex] === true">
             <div class="card-body">
+
                 <!-- <div class="block_flight_info">
                     <div class="tab_detail fare_detail_cnt">
                         <div class="triangle_right"></div>
@@ -158,6 +245,7 @@
                         </ul>
                     </div>
                 </div> -->
+
                 <div class="io_ru_wrps">
                     <div class="installment_wprs">
                         <div class="type_lines">
