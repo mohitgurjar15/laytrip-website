@@ -270,7 +270,6 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.onSubmit = function () {
         var _this = this;
-        console.log(this.profileForm);
         this.submitted = true;
         var controls = this.profileForm.controls;
         this.loadingValue.emit(true);

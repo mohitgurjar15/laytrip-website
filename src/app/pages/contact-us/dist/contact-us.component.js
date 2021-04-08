@@ -138,7 +138,6 @@ var ContactUsComponent = /** @class */ (function () {
                     _this.attatchmentFiles.push(attatchData);
                 };
                 this.files.push(this.fileObj);
-                console.log(this.files);
             }
             else {
                 this.imageFileError = true;

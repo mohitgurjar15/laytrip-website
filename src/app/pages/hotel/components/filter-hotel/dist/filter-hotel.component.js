@@ -16,6 +16,7 @@ var FilterHotelComponent = /** @class */ (function () {
         this.compact = false;
         this.invertX = false;
         this.invertY = false;
+        this.isHotelSearch = false;
         this.shown = 'native';
         this.filterHotel = new core_1.EventEmitter();
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -96,7 +97,10 @@ var FilterHotelComponent = /** @class */ (function () {
         this.hotelname = 'Search Hotel';
         this.filterHotel.emit(this.hotelDetailsMain.hotels);
     };
-    FilterHotelComponent.prototype.searchHotel = function () {
+    FilterHotelComponent.prototype.searchHotel = function (event) {
+        /* if (event.target.textContent) {
+          this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
+        } */
         if (this.hotelname) {
             this.filterHotels({ key: 'searchByHotelName', value: this.hotelname.hotelName });
         }
@@ -109,29 +113,6 @@ var FilterHotelComponent = /** @class */ (function () {
     };
     FilterHotelComponent.prototype.loadJquery = function () {
         //Start REsponsive Fliter js
-        $(window).on("scroll", function () {
-            if ($(window).width() < 1200) {
-                if ($(this).scrollTop() < 10) {
-                    $('#responsive_filter').slideUp("slow");
-                }
-                if ($(this).scrollTop() > 10) {
-                    $('#responsive_filter').slideDown("slow");
-                }
-                var scrollHeight = $(document).height();
-                var scrollPosition = $(window).height() + $(window).scrollTop();
-                if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-                    $('#responsive_filter').slideUp("slow");
-                }
-            }
-            else {
-                $('#responsive_filter').hide("slow");
-            }
-        });
-        var sheight = $(window).scrollTop();
-        var swidth = $(window).width();
-        if (sheight > 10 && swidth < 991) {
-            $('#responsive_filter').slideDown("slow");
-        }
         $(".responsive_filter_btn").click(function () {
             $("#responsive_filter_show").slideDown("slow");
             $("body").addClass('overflow-hidden');
@@ -168,12 +149,11 @@ var FilterHotelComponent = /** @class */ (function () {
      * @param event
      */
     FilterHotelComponent.prototype.filterByHotelRatings = function (event, count) {
-        console.log(event);
+        console.log(event.target.checked, count);
         if (event.target.checked === true) {
             this.ratingArray.push(parseInt(count));
         }
         else {
-            console.log(count);
             this.ratingArray = this.ratingArray.filter(function (item) {
                 return item != count;
             });
@@ -341,6 +321,12 @@ var FilterHotelComponent = /** @class */ (function () {
     };
     FilterHotelComponent.prototype.ngOnDestroy = function () {
         this.subscriptions.forEach(function (sub) { return sub.unsubscribe(); });
+    };
+    FilterHotelComponent.prototype.searchHotelName = function (text) {
+        // var family = this.hotelNamesArray.filter(f => f.name.indexOf(text.code) > -1);
+        // console.log(family)
+        this.isHotelSearch = true;
+        // this.hotelNamesArray = this.hotelNamesArray;
     };
     __decorate([
         core_1.ViewChild("scrollable", { static: true, read: core_1.ElementRef })

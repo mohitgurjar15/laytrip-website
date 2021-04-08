@@ -21,17 +21,39 @@
               <h5>Hotel Name</h5>
             </div>
             <div class="searchbar_box">
-              <!-- <input type="text" id="" class="amount" placeholder="Ahmedabad"> -->
-              <!-- <label for="">Search</label> -->
-               <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
-                  [virtualScroll]="false"
+              <!-- <input type="text" placeholder="Search" tabindex="3"  (keyup)="searchHotelName($event)" >
+              
+              <div class="search_suggetion_main" *ngIf="isHotelSearch" >
+                <div class="close_btn">
+                    <button  type="button" class="close">
+                        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+                    </button>
+                </div>
+                <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
+                    pointerEventsMethod="scrollbar">
+                    <div class="suggtions_wrps_mn">
+                        <div class="suggtions">
+                            <div class="sug_line_box" >
+                                <span class="linew_wrps">
+                                    <div *ngFor="let item of hotelNamesArray">
+                                       
+                                        <span  class="line_names" (click)="searchHotel($event)">
+                                            {{item.hotelName}}
+                                        </span>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-scrollbar>
+                
+            </div> -->
+                
+            
+              <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
                   placeholder="Search" (change)="searchHotel()" [clearable]="false" [selectOnTab]="true">
-
                 </ng-select>
-              <!-- <div class="search_btns">
-                <a (click)="clearHotelSearch()">Clear</a>
-                <a (click)="searchHotel()">Search</a>
-              </div> -->
+             
             </div>
           </div>
           <div class="cmn_block price">
@@ -111,35 +133,35 @@
                       </ul>
                     </div> -->
                     <div class="star-rating">
-                      <input (change)="filterByHotelRatings($event,5)" id="star-5" type="radio" name="rating" value="star-5" />
+                      <input (change)="filterByHotelRatings($event,5)" id="star-5" type="checkbox" name="rating"  />
                       <label for="star-5" title="5 stars">
                         <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                           alt="blank Stars Icon">
                         <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                           alt="filled Stars Icon">
                       </label>
-                      <input (change)="filterByHotelRatings($event,4)" id="star-4" type="radio" name="rating" value="star-4" />
+                      <input (change)="filterByHotelRatings($event,4)" id="star-4" type="checkbox" name="rating"  />
                       <label for="star-4" title="4 stars">
                         <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                           alt="blank Stars Icon">
                         <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                           alt="filled Stars Icon">
                       </label>
-                      <input (change)="filterByHotelRatings($event,3)" id="star-3" type="radio" name="rating" value="star-3" />
+                      <input (change)="filterByHotelRatings($event,3)" id="star-3" type="checkbox" name="rating"  />
                       <label for="star-3" title="3 stars">
                         <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                           alt="blank Stars Icon">
                         <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                           alt="filled Stars Icon">
                       </label>
-                      <input (change)="filterByHotelRatings($event,2)" id="star-2" type="radio" name="rating" value="star-2" />
+                      <input (change)="filterByHotelRatings($event,2)" id="star-2" type="checkbox" name="rating"  />
                       <label for="star-2" title="2 stars">
                         <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                           alt="blank Stars Icon">
                         <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                           alt="filled Stars Icon">
                       </label>
-                      <input  (change)="filterByHotelRatings($event,1)" id="star-1" type="radio" name="rating" value="star-1" />
+                      <input  (change)="filterByHotelRatings($event,1)" id="star-1" type="checkbox" name="rating"  />
                       <label for="star-1" title="1 star">
                         <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                           alt="blank Stars Icon">

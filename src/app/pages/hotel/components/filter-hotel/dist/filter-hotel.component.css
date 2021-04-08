@@ -371,6 +371,12 @@ ng-scrollbar {
   --scrollbar-border-radius: 15px;
 }
 
+@media (max-width: 768px) {
+  .desk_ver {
+    display: none;
+  }
+}
+
 .mobile_view_popup {
   display: none;
 }
@@ -380,6 +386,19 @@ ng-scrollbar {
   }
 }
 
+.responsive_mobile {
+  display: none;
+}
+@media (max-width: 768px) {
+  .responsive_mobile {
+    display: block;
+  }
+}
+
+.filter_main_wrapper.responsive_mobile .accordion.block_shortby .accordion-heading::after {
+  background-image: none;
+}
+
 .star-rating {
   direction: rtl;
   display: flex;
@@ -387,13 +406,13 @@ ng-scrollbar {
   padding: 5px 15px 10px;
   align-items: center;
 }
-.star-rating input[type=radio] {
+.star-rating input[type=checkbox] {
   display: none;
 }
-.star-rating input[type=radio]:checked ~ label .filled {
+.star-rating input[type=checkbox]:checked ~ label .filled {
   display: block;
 }
-.star-rating input[type=radio]:checked ~ label .blank {
+.star-rating input[type=checkbox]:checked ~ label .blank {
   display: none;
 }
 .star-rating label {
