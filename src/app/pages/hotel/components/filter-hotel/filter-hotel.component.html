@@ -20,9 +20,9 @@
             </div>
             <div class="searchbar_box">
               <!-- <input type="text" id="" class="amount" placeholder="Ahmedabad"> -->
-              <label for="">Search Hotel</label>
+              <!-- <label for="">Search</label> -->
               <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
-                placeholder="Search Hotel" (change)="searchHotel()" [clearable]="false" [selectOnTab]="true">
+                placeholder="Search" (change)="searchHotel()" [clearable]="false" [selectOnTab]="true">
               </ng-select>
               <!-- <div class="search_btns">
                 <a (click)="clearHotelSearch()">Clear</a>
@@ -84,17 +84,17 @@
     </div>
   </form>
 </div> -->
-         
+
           <div class="cmn_block pad_no">
             <div class="accordion block_shortby inner_accodeions" id="accordion-starrates">
               <div class="accordion-group" [ngClass]="{'active': lowToHighToggleRating  === true}">
-                <div class="accordion-heading no_accordion" (click)="toggleLowToHighRating()"> <a class="accordion-toggle"
-                    >
+                <div class="accordion-heading no_accordion" (click)="toggleLowToHighRating()"> <a
+                    class="accordion-toggle">
                     Star Ratings
                   </a> </div>
                 <div id="collapseOutbound" class="accordion-body filter_acc ">
                   <div class="accordion-inner">
-                    <div class="block_cmn stop">
+                    <!-- <div class="block_cmn stop">
                       <ul>
                         <li *ngFor="let item of ratingStar">
                           <label class="custom_checkbox">
@@ -105,6 +105,43 @@
                               alt="5 Stars Icon"></span>
                         </li>
                       </ul>
+                    </div> -->
+                    <div class="star-rating">
+                      <input id="star-5" type="radio" name="rating" value="star-5" />
+                      <label for="star-5" title="5 stars">
+                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                          alt="blank Stars Icon">
+                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                          alt="filled Stars Icon">
+                      </label>
+                      <input id="star-4" type="radio" name="rating" value="star-4" />
+                      <label for="star-4" title="4 stars">
+                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                          alt="blank Stars Icon">
+                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                          alt="filled Stars Icon">
+                      </label>
+                      <input id="star-3" type="radio" name="rating" value="star-3" />
+                      <label for="star-3" title="3 stars">
+                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                          alt="blank Stars Icon">
+                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                          alt="filled Stars Icon">
+                      </label>
+                      <input id="star-2" type="radio" name="rating" value="star-2" />
+                      <label for="star-2" title="2 stars">
+                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                          alt="blank Stars Icon">
+                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                          alt="filled Stars Icon">
+                      </label>
+                      <input id="star-1" type="radio" name="rating" value="star-1" />
+                      <label for="star-1" title="1 star">
+                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                          alt="blank Stars Icon">
+                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                          alt="filled Stars Icon">
+                      </label>
                     </div>
                   </div>
                 </div>
@@ -114,8 +151,8 @@
           <div class="cmn_block pad_no">
             <div class="accordion block_shortby inner_accodeions" id="accordion-amenities">
               <div class="accordion-group" [ngClass]="{'active': lowToHighToggleAmenities  === true}">
-                <div class="accordion-heading no_accordion" (click)="toggleLowToHighAmenities()"> <a class="accordion-toggle"
-                    >
+                <div class="accordion-heading no_accordion" (click)="toggleLowToHighAmenities()"> <a
+                    class="accordion-toggle">
                     Amenities
                   </a> </div>
                 <div id="collapseInbound" class="accordion-body filter_acc">
@@ -143,15 +180,13 @@
             <ul>
               <li>
                 <label class="custom_checkbox">
-                  <input type="checkbox" value="true" (click)="filterByPolicy($event)"> <span
-                    class="checkmark"></span>
+                  <input type="checkbox" value="true" (click)="filterByPolicy($event)"> <span class="checkmark"></span>
                   <p>Free Cancellation</p>
                 </label>
               </li>
               <li>
                 <label class="custom_checkbox">
-                  <input type="checkbox" value="false" (click)="filterByPolicy($event)"> <span
-                    class="checkmark"></span>
+                  <input type="checkbox" value="false" (click)="filterByPolicy($event)"> <span class="checkmark"></span>
                   <p>Non Refundable</p>
                 </label>
               </li>

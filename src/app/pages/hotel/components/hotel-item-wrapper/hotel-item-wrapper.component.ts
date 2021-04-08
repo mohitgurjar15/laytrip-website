@@ -206,6 +206,32 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     }, (error => {
     }));
   }
+  loadJquery() {
+  //   $('#carousel-example-generic').on('slid.bs.carousel', function () {
+  //     $('#slidenum').val($('.carousel-inner .active').index());
+  //  })
+   
+  //  $('#slidenum').on('change',function(){
+  //    var sn = parseInt($('#slidenum').val());
+  //    $('#carousel-example-generic').carousel(sn);
+  //  })
+  $(document).ready(function(){
+  
+    // SLIDER
+    //$('.slider').slick({});
+      
+    $('.slider').slick({
+      dots: true,
+      speed: 1000,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      nextArrow: '<div class="slick-custom-arrow slick-custom-arrow-right"><i class="fas fa-angle-right"></i></div>',
+      prevArrow: '<div class="slick-custom-arrow slick-custom-arrow-left"><i class="fa fa-angle-left"></i></div>',
+    });
+  
+  });
+  }
 
 
   ngOnChanges(changes: SimpleChanges) {

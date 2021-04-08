@@ -19,9 +19,74 @@ ng-scrollbar {
     --scrollbar-border-radius: 15px;
     // max-height: 300px;
 }
-.mobile_view_popup{
+
+.mobile_view_popup {
     display: none;
-    @include tab-view{
+
+    @include tab-view {
         display: block;
+    }
+}
+
+.star-rating {
+    direction: rtl;
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 15px 10px;
+    align-items: center;
+
+    input[type=radio] {
+        display: none;
+
+        &:checked~label {
+            .filled {
+                display: block;
+            }
+
+            .blank {
+                display: none;
+            }
+        }
+
+    }
+
+    label {
+        color: #bbb;
+        font-size: 18px;
+        padding: 0;
+        margin-right: 8px;
+        cursor: pointer;
+        -webkit-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+            .filled {
+                display: block;
+            }
+
+            .blank {
+                display: none;
+            }
+
+            ~label {
+                .filled {
+                    display: block;
+                }
+
+                .blank {
+                    display: none;
+                }
+            }
+        }
+
+        .filled {
+            display: none;
+            height: 20px;
+        }
+
+        .blank {
+            display: block;
+            height: 20px;
+        }
     }
 }

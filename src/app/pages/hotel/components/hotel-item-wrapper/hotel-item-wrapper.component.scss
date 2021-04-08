@@ -4,14 +4,7 @@
 @import "../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-.search_result
-    .result_listing.one_way_list
-    .search_block
-    .detail_info_show
-    .tab-content
-    .card-body
-    .tab_detail.fare_detail_cnt
-    p {
+.search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.fare_detail_cnt p {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -63,7 +56,7 @@ agm-map {
 // .hover-anchor-tag:hover {
 //     border: 1px solid #000 !important;
 // }
-.top_wrapper_box{
+.top_wrapper_box {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -71,20 +64,24 @@ agm-map {
     font-size: 16px;
     font-weight: 400;
     padding: 5px 0;
-    .shorting_label{
+
+    .shorting_label {
         margin: 0;
         font-size: 16px;
         font-weight: 400;
     }
-    button{
+
+    button {
         color: $text_light_yellow;
         border: none;
         background-color: transparent;
-        &:hover{
+
+        &:hover {
             outline: none;
             box-shadow: none;
         }
-        &:focus{
+
+        &:focus {
             outline: none;
             box-shadow: none;
         }
@@ -121,6 +118,150 @@ agm-map {
                 border-radius: 10px;
                 //padding: 15px;
                 overflow: hidden;
+
+                .listing_inner_box_wrppr {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+
+                    .box_left {
+                        display: flex;
+                        flex: 7;
+
+                        .box_img {
+                            display: flex;
+                            flex: 2;
+
+                            .carousel {
+                                position: relative;
+                                box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
+                                margin-top: 26px;
+
+                                .carousel-inner {
+                                    position: relative;
+                                    overflow: hidden;
+                                    width: 100%;
+                                }
+
+                                .carousel-open:checked+.carousel-item {
+                                    position: static;
+                                    opacity: 100;
+                                }
+
+                                .carousel-item {
+                                    position: absolute;
+                                    opacity: 0;
+                                    -webkit-transition: opacity 0.6s ease-out;
+                                    transition: opacity 0.6s ease-out;
+
+                                    img {
+                                        display: block;
+                                        height: auto;
+                                        max-width: 100%;
+                                    }
+                                }
+
+
+                                .carousel-control {
+                                    background: rgba(0, 0, 0, 0.28);
+                                    border-radius: 50%;
+                                    color: #fff;
+                                    cursor: pointer;
+                                    display: none;
+                                    font-size: 40px;
+                                    height: 40px;
+                                    line-height: 35px;
+                                    position: absolute;
+                                    top: 50%;
+                                    -webkit-transform: translate(0, -50%);
+                                    cursor: pointer;
+                                    -ms-transform: translate(0, -50%);
+                                    transform: translate(0, -50%);
+                                    text-align: center;
+                                    width: 40px;
+                                    z-index: 10;
+
+                                    .prev {
+                                        left: 2%;
+                                    }
+
+                                    .next {
+                                        right: 2%;
+                                    }
+
+                                    &:hover {
+                                        background: rgba(0, 0, 0, 0.8);
+                                        color: #aaaaaa;
+                                    }
+                                }
+
+
+
+                                #carousel-1:checked~.control-1,
+                                #carousel-2:checked~.control-2,
+                                #carousel-3:checked~.control-3 {
+                                    display: block;
+                                }
+
+                                .carousel-indicators {
+                                    list-style: none;
+                                    margin: 0;
+                                    padding: 0;
+                                    position: absolute;
+                                    bottom: 2%;
+                                    left: 0;
+                                    right: 0;
+                                    text-align: center;
+                                    z-index: 10;
+
+                                    li {
+                                        display: inline-block;
+                                        margin: 0 5px;
+
+                                        .carousel-bullet {
+                                            color: #fff;
+                                            cursor: pointer;
+                                            display: block;
+                                            font-size: 35px;
+
+                                            &:hover {
+                                                color: #aaaaaa;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                #carousel-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
+                                #carousel-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
+                                #carousel-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
+                                    color: #428bca;
+                                }
+                            }
+
+
+
+
+
+
+                        }
+
+                        .box_info {
+                            padding: 0 15px;
+                            display: flex;
+                            flex: 3;
+                            flex-direction: column;
+                            height: 100%;
+                        }
+                    }
+
+                    .box_right {
+                        flex: 2;
+                        display: flex;
+                    }
+
+
+                }
 
                 @include tab-view {
                     height: auto;
@@ -218,7 +359,7 @@ agm-map {
                                     width: 100%;
 
                                     h4 {
-                                        font-size: 20px;
+                                        font-size: 16px;
                                         color: $text-black;
                                         font-weight: 600;
                                         margin: 10px 0 5px;
@@ -333,11 +474,14 @@ agm-map {
                             width: auto;
 
                             a {
-                                display: inline;
                                 font-size: 14px;
                                 font-weight: 500;
                                 color: $primary-color;
+                                width: 68px;
                                 position: relative;
+                                padding-right: 15px;
+                                display: flex;
+                                align-items: center;
 
                                 img {
                                     margin-right: 5px;
@@ -345,28 +489,33 @@ agm-map {
 
                                 &:after {
                                     content: "";
-                                    position: absolute;
-                                    left: 105%;
-                                    top: 50%;
-                                    width: 0;
-                                    height: 0;
-                                    border-top: 3px solid transparent;
-                                    border-bottom: 3px solid transparent;
-                                    border-left: 3px solid $primary-color;
-                                    transform: translate(-50%, -50%);
+                                    //position: absolute;
+                                    padding: 5px 6px;
+                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 10px;
+                                    transition: 0.3s;
+                                    border: none;
+                                    margin-left: 5px;
                                 }
                             }
 
                             &.open_detail {
                                 a {
+                                    color: $mid_gray_bg;
+
                                     &:after {
-                                        width: 0;
-                                        height: 0;
-                                        border-left: 3px solid transparent;
-                                        border-right: 3px solid transparent;
-                                        border-top: 3px solid $primary-color;
-                                        left: 105%;
-                                        top: 54%;
+                                        content: "";
+                                        //position: absolute;
+                                        padding: 5px 6px;
+                                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                        background-position: right;
+                                        background-repeat: no-repeat;
+                                        background-size: 10px;
+                                        transition: 0.3s;
+                                        border: none;
+                                        margin-left: 5px;
                                     }
                                 }
                             }
@@ -450,12 +599,16 @@ agm-map {
                         .block {
                             margin: 0 0 15px;
 
+
                             p {
                                 width: 100%;
                                 margin: 0;
                                 font-size: 10px;
                                 font-weight: 300;
                                 color: $pink;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
 
                                 &:first-child {
                                     margin: 0 0 5px;
@@ -570,19 +723,19 @@ agm-map {
                     .io_ru_wrps {
                         display: flex;
                         justify-content: space-between;
-        
+
                         @include tab-view {
                             flex-direction: column;
                         }
-        
+
                         .installment_wprs {
                             flex: 2;
                             padding-right: 50px;
-        
+
                             @include tab-view {
                                 padding-right: 0px;
                             }
-        
+
                             .type_lines {
                                 border-bottom: 1px solid $box-border-color;
                                 padding-bottom: 15px;
@@ -590,40 +743,40 @@ agm-map {
                                 display: flex;
                                 justify-content: flex-start;
                                 margin-bottom: 15px;
-        
-        
+
+
                                 @include tab-view {
                                     flex-direction: column;
                                     padding-bottom: 6px;
                                     margin-bottom: 6px;
                                     font-size: 10px;
                                 }
-        
+
                                 &:nth-child(4) {
                                     border: none;
                                     margin: 0;
                                     padding: 0;
                                 }
-        
+
                                 .titles {
                                     font-weight: 600;
                                     color: $text-black;
                                     margin-right: 15px;
                                     flex: 1;
                                 }
-        
+
                                 .texts {
                                     font-weight: 500;
                                     color: $mid_gray_bg;
                                     flex: 3;
-        
+
                                     @include tab-view {
                                         font-weight: 400;
                                     }
                                 }
 
                             }
-                            
+
                             .notifi_text {
                                 font-weight: 400;
                                 color: $active-tab-text;
@@ -631,18 +784,20 @@ agm-map {
                                 margin-top: 15px;
                                 display: flex;
                                 justify-content: flex-start;
-                                @include tab-view{
+
+                                @include tab-view {
                                     margin-top: 10px;
                                 }
+
                                 &.desk_notifi {
                                     @include tab-view {
                                         display: none;
                                     }
                                 }
-                
+
                                 &.mobile_notifi {
                                     display: none;
-                
+
                                     @include tab-view {
                                         display: block;
                                         margin-bottom: 5px;
@@ -650,36 +805,36 @@ agm-map {
                                 }
                             }
                         }
-        
+
                         .rules_wrps {
                             flex: 1;
                             max-width: 188px;
                             display: flex;
                             flex-direction: column;
-        
+
                             @include tab-view {
                                 padding-top: 5px;
                                 max-width: 100%;
                                 flex-direction: row;
                             }
-        
+
                             .heads {
                                 font-size: 14px;
                                 font-weight: 600;
                                 color: $text-black;
-        
+
                                 @include tab-view {
                                     min-width: 60px;
                                     flex: 1;
                                     font-size: 10px;
                                 }
-        
+
                                 img {
                                     max-width: 15px;
                                     margin-right: 5px;
                                 }
                             }
-                            
+
                             .texts_rules {
                                 font-size: 10px;
                                 font-weight: 400;
@@ -688,19 +843,20 @@ agm-map {
                                 line-height: 14px;
                                 overflow-y: auto;
                                 max-height: 150px;
-        
+
                                 a {
                                     text-decoration: underline;
                                 }
-        
+
                                 @include tab-view {
                                     margin-top: 0;
                                 }
                             }
                         }
                     }
-                    .full_desk_not{
-                        @include tab-view{
+
+                    .full_desk_not {
+                        @include tab-view {
                             display: none;
                         }
                     }
@@ -1737,3 +1893,241 @@ agm-map {
         }
     }
 }
+
+// slick slider css
+// $slick-btn-bg-color: #fff;
+// $slick-btn-txt-color: #000;
+
+// $slick-btn-txt-color__hover: #fff;
+// $slick-btn-bg-color__hover: #000;
+
+// $slick-opacity-on-hover: 1;
+
+// .slider {
+// 	background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center center;
+// }
+
+// .slick-slide {
+// 	text-align:center;
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center center;
+// }
+
+/* SLICK: ARROWS */
+// .slick-custom-arrow {
+// 	position: absolute;
+// 	transform: translateY(-50%);
+// 	z-index:100;
+// 	padding:20px 16px;
+	
+// 	background-color: $slick-btn-bg-color;
+// 	color:$slick-btn-txt-color;
+	
+// 	&:hover {
+// 			cursor:pointer;
+// 			background-color: $slick-btn-bg-color__hover;
+// 			color:$slick-btn-txt-color__hover;
+// 	}
+	
+// 	&-right {
+// 		right: 0;
+//   	top: 50%;
+// 	}
+// 	&-left {
+// 		left: 0;
+//   	top: 50%;
+// 	}
+// }
+
+/* SLICK: DOTS */
+// .slick-dots {
+// 	list-style: none;
+// 	margin: 0;
+// 	padding: 0;
+// 	position: absolute;
+// 	bottom: 30px;
+// 	left: 50%;
+// 	transform: translateX(-50%);
+// 	display:flex;
+// 	align-items:center; 
+	
+// 	.slick-active {
+// 		button {
+// 			border: 0;
+// 			height: 15px;
+//     	width: 15px;
+// 			background-color:#ffffff;
+// 		}
+// 	}
+	
+// 	li {
+// 		display:flex;
+// 		align-items:center; 
+		
+// 		margin:0 4px;
+// 		padding:0;
+		
+// 		height: 20px;
+//     width: 20px;
+		
+// 		button {
+// 			background-color:rgba(255,255,255,0);
+// 			border: 1px solid #fff;
+// 			border-radius:50%;
+// 			opacity: 1;
+// 			display: block;
+// 			height: 18px;
+// 			width: 18px;
+// 			outline: none;
+// 			line-height: 0px;
+// 			font-size: 0px;
+
+// 			cursor: pointer;
+			
+// 			&:hover, &:focus {
+//       	//background-color:$slick-btn-bg-color__hover;
+//      	}
+			
+// 		}
+// 	}
+
+
+// }
+
+// slick slider css
+// .carousel_box {
+//     margin-left: 15%;
+//     margin-right: 15%;
+
+//     ul {
+//         &.slides {
+//             display: block;
+//             position: relative;
+//             height: 180px;
+//             margin: 0;
+//             padding: 0;
+//             overflow: hidden;
+//             list-style: none;
+
+//             &* {
+//                 user-select: none;
+//                 -ms-user-select: none;
+//                 -moz-user-select: none;
+//                 -khtml-user-select: none;
+//                 -webkit-user-select: none;
+//                 -webkit-touch-callout: none;
+//             }
+
+//             input {
+//                 display: none;
+//             }
+
+//             .slide-container {
+//                 display: block;
+
+//                 .slide-image {
+//                     display: block;
+//                     position: absolute;
+//                     width: 100%;
+//                     height: 100%;
+//                     top: 0;
+//                     opacity: 0;
+//                     transition: all .7s ease-in-out;
+
+//                     img {
+//                         width: auto;
+//                         min-width: 100%;
+//                         height: 100%;
+//                     }
+//                 }
+
+//                 .carousel-controls {
+//                     position: absolute;
+//                     top: 0;
+//                     left: 0;
+//                     right: 0;
+//                     z-index: 999;
+//                     font-size: 100px;
+//                     line-height: 600px;
+//                     color: #fff;
+
+//                     label {
+//                         display: none;
+//                         position: absolute;
+//                         padding: 0 20px;
+//                         opacity: 0;
+//                         transition: opacity .2s;
+//                         cursor: pointer;
+
+//                         &:hover {
+//                             opacity: 1;
+//                         }
+//                     }
+
+//                     .prev-slide {
+//                         width: 49%;
+//                         text-align: left;
+//                         left: 0;
+//                     }
+
+//                     .next-slide {
+//                         width: 49%;
+//                         text-align: right;
+//                         right: 0;
+//                     }
+//                 }
+
+//             }
+
+//             .carousel-dots {
+//                 position: absolute;
+//                 left: 0;
+//                 right: 0;
+//                 bottom: 20px;
+//                 z-index: 999;
+//                 text-align: center;
+
+//                 .carousel-dot {
+//                     display: inline-block;
+//                     width: 30px;
+//                     height: 30px;
+//                     border-radius: 50%;
+//                     background-color: #fff;
+//                     opacity: 0.5;
+//                     margin: 10px;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// .slide-image:hover+.carousel-controls label {
+//     opacity: 0.5;
+// }
+
+// input:checked+.slide-container .slide-image {
+//     opacity: 1;
+//     transform: scale(1);
+//     transition: opacity 1s ease-in-out;
+// }
+
+// input:checked+.slide-container .carousel-controls label {
+//     display: block;
+// }
+
+// input#img-1:checked~.carousel-dots label#img-dot-1,
+// input#img-2:checked~.carousel-dots label#img-dot-2,
+// input#img-3:checked~.carousel-dots label#img-dot-3,
+// input#img-4:checked~.carousel-dots label#img-dot-4,
+// input#img-5:checked~.carousel-dots label#img-dot-5,
+// input#img-6:checked~.carousel-dots label#img-dot-6 {
+//     opacity: 1;
+// }
+
+
+// input:checked+.slide-container .nav label {
+//     display: block;
+// }
