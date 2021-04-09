@@ -289,111 +289,185 @@
                     </agm-marker-cluster>
                 </agm-map>
             </div>
-            <div class="col-lg-12 ">
+            <div class="col-lg-12 mt-3">
                 <ng-container *ngFor="let item of hotelListArray; let blockIndex = index;">
-                    <div class="search_block">
+                    <div class="search_block" >
                         <div class="listing_block">
                             <div class="listing_inner_box_wrppr">
-
-                                <div class="box_left">
-                                    <div class="block_main">
-                                        <div class="block_top">
-                                            <div class="block_inner">
-
-                                                <div class="box_img">
-                                                    <div class="block_im">
-                                                        <div class="hotel_list_img_wrp">
-                                                            <span class="fav_sections">
-                                                                <a class="heart_blank"></a>
-                                                            </span>
-                                                            <img src="{{item?.thumbnail}}" alt="Hotel image">
-                                                            
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-
-                                                <div class="box_info">
-                                                    <div class="block_detail">
-                                                        <div class="block_detail_top">
-                                                            <div class="detail_info">
-                                                                <h4>{{item?.name}}</h4>
-                                                                <span class="adress_span">
-
-                                                                    {{item?.full_address}}
-                                                                </span>
-                                                                <div class="review_section_wrap">
-                                                                    <div class="left_bar">
-
-                                                                        <div class="stars_text">
-                                                                            <div class="stars_rating">
-                                                                                <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                                                    alt="Stars"
-                                                                                    *ngFor='let in of counter(item.rating)'>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
+                                <div class="desktop_box">
+                                    <div class="box_left">
+                                        <div class="block_main">
+                                            <div class="block_top">
+                                                <div class="block_inner">
+                                                    <div class="box_img">
+                                                        <div class="block_im">
+                                                            <div class="hotel_list_img_wrp">
+                                                                <!-- <img src="{{item?.thumbnail}}" alt="Hotel image"> -->
+                                                                <ngx-gallery [options]="galleryOptions" [images]="item.galleryImages"></ngx-gallery>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="block_detail_btm">
-                                                        <div class="show_detail"
-                                                            [ngClass]="{'open_detail':showHotelDetails[blockIndex]}">
-                                                            <a class="show_more_detail anchor-tag"
-                                                                (click)="showDetails(blockIndex)">
-                                                                Details </a>
+                
+                                                    <div class="box_info">
+                                                        <div class="block_detail">
+                                                            <div class="block_detail_top">
+                                                                <div class="detail_info">
+                                                                    <h4>{{item?.name}}</h4>
+                                                                    <span class="adress_span">
+                
+                                                                        {{item?.full_address}}
+                                                                    </span>
+                                                                    <div class="review_section_wrap">
+                                                                        <div class="left_bar">
+                
+                                                                            <div class="stars_text">
+                                                                                <div class="stars_rating">
+                                                                                    <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
+                                                                                        alt="Stars"
+                                                                                        *ngFor='let in of counter(item.rating)'>
+                                                                                </div>
+                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-
+                                                        <div class="block_detail_btm">
+                                                            <div class="show_detail"
+                                                                [ngClass]="{'open_detail':showHotelDetails[blockIndex]}">
+                                                                <a class="show_more_detail anchor-tag"
+                                                                    (click)="showDetails(blockIndex)">
+                                                                    Details </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                
+                                            </div>
+                
+                                        </div>
+                                    </div>
+                                    <div class="box_right">
+                                        <div class="block_price block_pr">
+                                            <div class="block_inn_pr">
+                                                <div class="block" *ngIf="item.secondary_start_price > 0">
+                                                    <p>Flexible Installments</p>
+                                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> weekly
+                                                    </p>
+                                                </div>
+                                                <div class="block" *ngIf="item.secondary_start_price === 0">
+                                                    <p>From <span>{{ currency?.symbol }}{{item?.selling?.total}}</span> weekly</p>
+                                                </div>
+                                            </div> <a class="book_btn anchor-tag"
+                                                [routerLink]="['/hotel/detail', item.id, hotelToken]">Select</a>
+                
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mobile_box">
+                
+                                    <div class="hotel_list_img_wrp">
+                                        <ngx-gallery [options]="galleryOptions" [images]="item.galleryImages"></ngx-gallery>
+                                    </div>
+                                    <div class="middle_part">
+                                        <div class="detail_info">
+                                            <h4>{{item?.name}}</h4>
+                                            <span class="adress_span">
+                
+                                                {{item?.full_address}}
+                                            </span>
+                                            <div class="review_section_wrap">
+                                                <div class="left_bar">
+                
+                                                    <div class="stars_text">
+                                                        <div class="stars_rating">
+                                                            <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars"
+                                                                *ngFor='let in of counter(item.rating)'>
+                                                        </div>
+                
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
+                                        <div class="show_detail" [ngClass]="{'open_detail':showHotelDetails[blockIndex]}">
+                                            <a class="show_more_detail anchor-tag" (click)="showDetails(blockIndex)">
+                                                Details </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="box_right">
-                                    <div class="block_price block_pr">
-                                        <div class="block_inn_pr">
-                                            <div class="block" *ngIf="item.secondary_start_price > 0">
+                                    <div class="thrd_part">
+                                        <div class="block_price block_pr">
+                                            <div class="block_inn_pr">
+                                                <div class="block" *ngIf="item.secondary_start_price > 0">
+                                                    
+                                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> weekly
+                                                    </p>
+                                                </div>
+                                                <div class="block" *ngIf="item.secondary_start_price === 0">
+                                                    <p>From <span>{{ currency?.symbol }}{{item?.selling?.total}}</span> weekly</p>
+                                                </div>
+                                            </div> <a class="book_btn anchor-tag"
+                                                [routerLink]="['/hotel/detail', item.id, hotelToken]">Select</a>
                                                 <p>Flexible Installments</p>
-                                                <p>From <span>{{ currency?.symbol
-                                                        }}{{item?.secondary_start_price}}</span> weekly</p>
-                                            </div>
-                                            <div class="block" *ngIf="item.secondary_start_price === 0">
-                                                <p>From <span>{{ currency?.symbol }}{{item?.selling?.total}}</span>
-                                                    weekly</p>
-                                            </div>
-                                        </div> <a class="book_btn anchor-tag"
-                                            [routerLink]="['/hotel/detail', item.id, hotelToken]">Select</a>
-
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="detail_info_show" [attr.id]="blockIndex"
-                            *ngIf="showHotelDetails[blockIndex] === true">
+                
+                        <div class="detail_info_show" [attr.id]="blockIndex" *ngIf="showHotelDetails[blockIndex] === true">
                             <div class="card-body">
-
-
-
+                
+                                <!-- <div class="block_flight_info">
+                                    <div class="tab_detail fare_detail_cnt">
+                                        <div class="triangle_right"></div>
+                                        <ul>
+                                            <li>Base Fare <span>{{ currency?.symbol
+                                                    }}{{item?.selling?.sub_total}}</span></li>
+                                            <li>Taxes and Fees <span>{{ currency?.symbol
+                                                    }}{{item?.selling?.taxes}}</span></li>
+                                            <li>Total Fare <span>{{ currency?.symbol
+                                                    }}{{item?.selling?.total}}</span></li>
+                                        </ul>
+                                        <div class="triangle_left"></div>
+                                        <ul *ngIf="item.instalment_details.instalment_available">
+                                            <li class="down_payment">
+                                                {{'down_payment' | translate}}
+                                                <span class="down_value">{{ currency?.symbol }}{{ item?.start_price | number :
+                                                    '1.2-2'}}</span>
+                                            </li>
+                                            <ng-container
+                                                *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">
+                                                <li *ngIf="i>0">
+                                                    <div class="detail"> {{i}} {{'installment' | translate}}
+                                                        <p>{{
+                                                            commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}
+                                                        </p>
+                                                    </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
+                                                </li>
+                                            </ng-container>
+                                        </ul>
+                                    </div>
+                                </div> -->
+                
                                 <div class="io_ru_wrps">
                                     <div class="installment_wprs">
-                                        <div class="type_lines">
-                                            <span class="titles">
-                                                Installment Option 1
-                                            </span>
-                                            <span class="texts">
-                                                $121 downpayment and
-                                                23 weekly installments of 234
-                                            </span>
-                                        </div>
-                                        <div class="type_lines">
+                                        <ng-container
+                                        *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">                        
+                                            <div class="type_lines" *ngIf="i>0">
+                                                <span class="titles">
+                                                     {{'installment' | translate}} Option {{i}}
+                                                </span>
+                                                <span class="texts">
+                                                    {{ currency?.symbol }}{{instalment.instalment_amount}} downpayment and
+                                                    23 weekly installments of 234
+                                                </span>
+                                                <!-- <span class="texts" >
+                                                    Flights within 30 days of travel not available in installments
+                                                </span> -->
+                                            </div>                            
+                                        </ng-container>
+                                        <!-- <div class="type_lines">
                                             <span class="titles">
                                                 Installment Option 2
                                             </span>
@@ -401,6 +475,9 @@
                                                 $121 downpayment and
                                                 23 weekly installments of 234
                                             </span>
+                                            <span class="texts" *ngIf="item.start_price==0">
+                                                Flights within 30 days of travel not available in installments
+                                            </span> 
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">
@@ -410,6 +487,9 @@
                                                 $121 downpayment and
                                                 23 weekly installments of 234
                                             </span>
+                                             <span class="texts" *ngIf="item.start_price==0">
+                                                Flights within 30 days of travel not available in installments
+                                            </span> 
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">
@@ -419,35 +499,31 @@
                                                 $21323 including taxes and fees
                                             </span>
                                             <div class="notifi_text mobile_notifi">
-                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen after
-                                                you choose
+                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose
                                                 Select.
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="full_desk_not">
                                             <div class="notifi_text">
-                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen after
-                                                you choose
+                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose
                                                 Select.
                                             </div>
                                         </div>
                                     </div>
-
+                
                                     <div class="rules_wrps">
                                         <span class="heads">
-                                            <img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="">
-                                            Rules
+                                            <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> Rules
                                         </span>
-
                                         <span class="texts_rules">
                                             Non-refundable, non-transferable. Change policy reflected in Laytrip <a
                                                 [routerLink]="['/terms']">Terms</a> which apply.
                                         </span>
-
+                
                                     </div>
                                 </div>
                             </div>
-
+                
                         </div>
                     </div>
                 </ng-container>
