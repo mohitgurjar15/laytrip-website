@@ -67,3 +67,20 @@
 //     }
 // }
 
+.lab_wrapper{
+    display: flex;
+    align-items: center;
+    height: 53px;
+    justify-content: flex-start;
+    .label_wrp{
+        padding-right: 10px !important;
+        max-width: 80px !important;
+
+        @include tab-view{
+            max-width: 90px !important;
+        }
+    }
+    ng-select{
+        width: 90%;
+    }
+}
