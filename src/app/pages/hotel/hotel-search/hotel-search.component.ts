@@ -67,8 +67,9 @@ export class HotelSearchComponent implements OnInit {
         filter: true,
       };
       // info.forEach(item => {
-        payload.occupancies.push({ adults: info.adults, children: info.child });
+        payload.occupancies.push({ rooms:info.rooms,adults: info.adults, children: info.child });
       // });
+      console.log(payload.occupancies)
       this.getHotelSearchData(payload);
     });
   }

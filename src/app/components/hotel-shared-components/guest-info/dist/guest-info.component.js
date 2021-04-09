@@ -16,7 +16,7 @@ var GuestInfoComponent = /** @class */ (function () {
         this.totalRoom = [];
         this.errorMessage = '';
         this.openDrawer = false;
-        this.childAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+        this.childAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
         this.isShowChildDropDown = false;
         this.roomsGroup = {
             rooms: 1,
