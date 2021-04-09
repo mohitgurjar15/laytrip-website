@@ -145,63 +145,29 @@
 
         <div class="detail_info_show" [attr.id]="blockIndex" *ngIf="showHotelDetails[blockIndex] === true">
             <div class="card-body">
-
-                <!-- <div class="block_flight_info">
-                    <div class="tab_detail fare_detail_cnt">
-                        <div class="triangle_right"></div>
-                        <ul>
-                            <li>Base Fare <span>{{ currency?.symbol
-                                    }}{{item?.selling?.sub_total}}</span></li>
-                            <li>Taxes and Fees <span>{{ currency?.symbol
-                                    }}{{item?.selling?.taxes}}</span></li>
-                            <li>Total Fare <span>{{ currency?.symbol
-                                    }}{{item?.selling?.total}}</span></li>
-                        </ul>
-                        <div class="triangle_left"></div>
-                        <ul *ngIf="item.instalment_details.instalment_available">
-                            <li class="down_payment">
-                                {{'down_payment' | translate}}
-                                <span class="down_value">{{ currency?.symbol }}{{ item?.start_price | number :
-                                    '1.2-2'}}</span>
-                            </li>
-                            <ng-container
-                                *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">
-                                <li *ngIf="i>0">
-                                    <div class="detail"> {{i}} {{'installment' | translate}}
-                                        <p>{{
-                                            commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}
-                                        </p>
-                                    </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
-                                </li>
-                            </ng-container>
-                        </ul>
-                    </div>
-                </div> -->
-
                 <div class="io_ru_wrps">
                     <div class="installment_wprs">
-                        <ng-container
-                        *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">                        
-                            <div class="type_lines" *ngIf="i>0">
-                                <span class="titles">
-                                     {{'installment' | translate}} Option {{i}}
-                                </span>
-                                <span class="texts">
-                                    {{ currency?.symbol }}{{instalment.instalment_amount}} downpayment and
-                                    23 weekly installments of 234
-                                </span>
-                                <!-- <span class="texts" >
-                                    Flights within 30 days of travel not available in installments
-                                </span> -->
-                            </div>                            
-                        </ng-container>
-                        <!-- <div class="type_lines">
+                        <div class="type_lines">
+                            <span class="titles">
+                                Installment Option 1
+                            </span>
+                            <span class="texts" *ngIf="item.start_price>0">
+                                ${{item.start_price | number : '1.2-2'}} downpayment and
+                                {{item.no_of_weekly_installment}} weekly installments of ${{item.secondary_start_price |
+                                number : '1.2-2'}}
+                            </span>
+                            <span class="texts" *ngIf="item.start_price==0">
+                                Flights within 30 days of travel not available in installments
+                            </span> 
+                        </div>
+                        <div class="type_lines">
                             <span class="titles">
                                 Installment Option 2
                             </span>
-                            <span class="texts">
-                                $121 downpayment and
-                                23 weekly installments of 234
+                            <span class="texts" *ngIf="item.start_price>0">
+                                ${{item.second_down_payment | number : '1.2-2'}} downpayment and
+                                {{item.no_of_weekly_installment_2}} bi-weekly installments of
+                                ${{item.secondary_start_price_2 | number : '1.2-2'}}
                             </span>
                             <span class="texts" *ngIf="item.start_price==0">
                                 Flights within 30 days of travel not available in installments
@@ -211,9 +177,11 @@
                             <span class="titles">
                                 Installment Option 3
                             </span>
-                            <span class="texts">
-                                $121 downpayment and
-                                23 weekly installments of 234
+                            <span class="texts" *ngIf="item.start_price>0">
+                                ${{item.third_down_payment | number : '1.2-2'}} downpayment and
+                                {{item.no_of_weekly_installment_3}} monthly installments of
+                                ${{item.secondary_start_price_3 |
+                                number : '1.2-2'}}
                             </span>
                              <span class="texts" *ngIf="item.start_price==0">
                                 Flights within 30 days of travel not available in installments
@@ -221,7 +189,7 @@
                         </div>
                         <div class="type_lines">
                             <span class="titles">
-                                Full Payment
+                                Average Nightly Rate
                             </span>
                             <span class="texts">
                                 $21323 including taxes and fees
@@ -230,7 +198,7 @@
                                 More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose
                                 Select.
                             </div>
-                        </div> -->
+                        </div>
                         <div class="full_desk_not">
                             <div class="notifi_text">
                                 More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose
