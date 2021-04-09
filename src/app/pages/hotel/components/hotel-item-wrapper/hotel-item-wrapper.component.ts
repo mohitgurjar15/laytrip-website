@@ -12,6 +12,7 @@ import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
 declare const google: any;
 import { google } from 'google-maps';
 import { collect } from 'collect.js';
+import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 
 @Component({
   selector: 'app-hotel-item-wrapper',
@@ -78,6 +79,14 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   scrollDistance = 2;
   throttle = 50;
   scrollLoading = false;
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[];
+
+ 
+  /* galleryImages=[
+    "https://q-xx.bstatic.com/xdata/images/hotel/max500/174961131.jpg?k=a49c0911f27104454d58ec1c9ab4bcf78d824b616ae068864716e728fb14bf62&o=",
+    "https://q-xx.bstatic.com/xdata/images/hotel/max500/174961131.jpg?k=a49c0911f27104454d58ec1c9ab4bcf78d824b616ae068864716e728fb14bf62&o="
+  ] */
 
   constructor(
     private router: Router,
@@ -86,7 +95,28 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     private commonFunction: CommonFunction,
     private genericService: GenericService,
   ) {
+      this.galleryOptions = [
+        { "thumbnails": false, previewRotate:true,preview:false,width: "230px", height: "200px" },
+        { "breakpoint": 500, "width": "100%", "height": "200px"  }
+      ];
 
+      this.galleryImages = [
+        {
+            small: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg',
+            medium: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg',
+            big: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg'
+        },
+        {
+            small: 'http://d2q1prebf1m2s9.cloudfront.net/assets/images/laytrip_logo_blue.svg',
+            medium: 'http://d2q1prebf1m2s9.cloudfront.net/assets/images/laytrip_logo_blue.svg',
+            big: 'http://d2q1prebf1m2s9.cloudfront.net/assets/images/laytrip_logo_blue.svg'
+        },
+        {
+          small: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg',
+          medium: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg',
+          big: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg'
+        }
+    ];
   }
 
   ngOnInit() {
@@ -107,9 +137,16 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     }
     // this.hotelListArray = this.hotelDetails;
     this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-    if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
-      // this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
+    for(let i=0; i < this.hotelListArray.length; i++){
+      this.hotelDetails[i].galleryImages=[];
+      for(let image of this.hotelDetails[i].images)
+      this.hotelDetails[i].galleryImages.push({
+        small: image,
+        medium:image,
+        big:image
+      })
     }
+    
     this.userInfo = getLoginUserInfo();
     // this.totalLaycredit();
     this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
