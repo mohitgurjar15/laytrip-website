@@ -21,7 +21,7 @@
               <h5>Hotel Name</h5>
             </div>
             <div class="searchbar_box">
-              <!-- <input type="text" placeholder="Search" tabindex="3"  (keyup)="searchHotelName($event)" >
+              <input type="text" placeholder="Search" tabindex="3"  (keyup)="searchHotelName($event)" >
               
               <div class="search_suggetion_main" *ngIf="isHotelSearch" >
                 <div class="close_btn">
@@ -35,9 +35,8 @@
                         <div class="suggtions">
                             <div class="sug_line_box" >
                                 <span class="linew_wrps">
-                                    <div *ngFor="let item of hotelNamesArray">
-                                       
-                                        <span  class="line_names" (click)="searchHotel($event)">
+                                    <div *ngFor="let item of filterHotelNames">                                       
+                                        <span  class="line_names" (click)="clickHotelFilterName($event)">
                                             {{item.hotelName}}
                                         </span>
                                     </div>
@@ -47,12 +46,12 @@
                     </div>
                 </ng-scrollbar>
                 
-            </div> -->
+            </div> 
                 
             
-              <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
+              <!-- <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
                   placeholder="Search" (change)="searchHotel()" [clearable]="false" [selectOnTab]="true">
-                </ng-select>
+                </ng-select> -->
              
             </div>
           </div>
