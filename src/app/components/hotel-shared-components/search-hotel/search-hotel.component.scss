@@ -77,12 +77,16 @@
     align-items: center;
     height: 53px;
     justify-content: flex-start;
+    @include tab-view{
+        align-items: flex-start;
+        flex-direction: column;
+    }
     .label_wrp{
         padding-right: 10px !important;
         max-width: 80px !important;
 
         @include tab-view{
-            max-width: 90px !important;
+            max-width: 100px !important;
         }
     }
     ng-select{

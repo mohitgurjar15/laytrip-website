@@ -91,7 +91,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     private genericService: GenericService,
   ) {
       this.galleryOptions = [
-        { "thumbnails": false, previewRotate:true,preview:false,width: "270px", height: "170px" },
+        { "thumbnails": false, previewRotate:true,preview:false,width: "270px", height: "100%" },
       ];
   }
 

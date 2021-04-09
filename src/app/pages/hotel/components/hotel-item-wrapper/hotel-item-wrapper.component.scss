@@ -1543,6 +1543,8 @@ agm-map {
                 display: flex;
                 flex-direction: column;
                 flex: 2;
+                justify-content: space-between;
+                width: 100%;
 
                 .detail_info {
                     padding: 10px 5px 5px;
@@ -1576,6 +1578,10 @@ agm-map {
                         display: flex;
                         align-items: center;
                         margin: 0 auto;
+
+                        @include tab-view{
+                            font-size: 11px;
+                        }
 
                         img {
                             margin-right: 5px;
