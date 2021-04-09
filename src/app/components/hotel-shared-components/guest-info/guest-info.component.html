@@ -1,7 +1,7 @@
 <div class="search_area">
   <div class="travel_info" id="add_child" (click)="toggleDrawer()">
-    <span>{{roomsGroup.rooms ? roomsGroup.rooms : 1 }}</span> Room,
-    <span class="guest_num"> {{roomsGroup.adults + roomsGroup.child}}</span> Guest
+    <span>{{roomsGroup.rooms ? roomsGroup.rooms : 1 }}</span> {{roomsGroup.rooms == 1 ? 'Room': 'Rooms'}},
+    <span class="guest_num"> {{roomsGroup.adults + roomsGroup.child}}</span> {{roomsGroup.adults + roomsGroup.child == 1 ? 'Guest': 'Guests'}}
     <div class="drop_aerrow"></div>
   </div>
 

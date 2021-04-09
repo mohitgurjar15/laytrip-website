@@ -798,6 +798,10 @@ ngb-datepicker {
                         border-radius: 8px;
                         background: $background-white;
 
+                        @include tab-view{
+                            padding: 6px 0;
+                        }
+
                         input {
                             width: 100%;
                             border: none;
