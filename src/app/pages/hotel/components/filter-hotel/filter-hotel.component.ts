@@ -122,6 +122,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         this.ratingStar = this.hotelDetailsMain.filter_objects.ratings;
       }
     }
+    console.log(this.priceValue,this.priceHighValue)
     this.loadJquery();
   }
 

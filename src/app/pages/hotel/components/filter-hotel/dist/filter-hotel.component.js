@@ -93,6 +93,7 @@ var FilterHotelComponent = /** @class */ (function () {
                 this.ratingStar = this.hotelDetailsMain.filter_objects.ratings;
             }
         }
+        console.log(this.priceValue, this.priceHighValue);
         this.loadJquery();
     };
     FilterHotelComponent.prototype.clearHotelSearch = function () {
