@@ -215,6 +215,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    
 
     @include tab-view {
         flex-direction: row;
@@ -222,6 +223,7 @@
 
     .filter_by {
         &.desktop_ver {
+            margin-top: 35px;
             @include tab-view {
                 display: none;
             }

@@ -95,6 +95,7 @@
                         font-size: 20px;
                         color: #000;
                         font-weight: 600;
+
                         @include tab-view {
                             font-size: 16px;
                         }
@@ -248,6 +249,53 @@
 }
 
 // NG-SELECT FOCUS REMOVE CSS END
+
+// custom slider for hotels
+.hotel_list_img_wrp {
+    ngx-gallery {
+        ngx-gallery-image {
+            .ngx-gallery-image-wrapper{
+                border-radius: 10px;
+            }
+            .ngx-gallery-arrow-wrapper {
+                &.ngx-gallery-arrow-left {
+                    i {
+                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+                        background-repeat: no-repeat;
+                        background-color: $background-white;
+                        border-radius: 50%;
+                        padding: 14px;
+                        background-position: center center;
+                        background-size: 7px;
+
+                        &::before {
+                            content: none;
+                        }
+                    }
+                }
+
+                &.ngx-gallery-arrow-right {
+                    i {
+                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+                        background-repeat: no-repeat;
+                        background-color: $background-white;
+                        border-radius: 50%;
+                        padding: 14px;
+                        background-position: center center;
+                        background-size: 7px;
+
+                        &::before {
+                            content: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+// custom slider for hotels
 
 // datepicker hotel and rentals search
 ngb-datepicker {
@@ -801,7 +849,7 @@ ngb-datepicker {
                         border-radius: 8px;
                         background: $background-white;
 
-                        @include tab-view{
+                        @include tab-view {
                             padding: 6px 0;
                         }
 
@@ -2715,12 +2763,12 @@ ngb-datepicker {
                     .accordion-body {
                         .block_cmn {
                             width: 100%;
-                            padding: 20px 15px;
+                            padding: 0 15px 10px 15px;
                             //border-top: 1px solid $box-border-color;
 
                             h5 {
                                 width: 100%;
-                                margin: 0 0 15px;
+                                margin: 20px 0 15px;
                                 font-size: 16px;
                                 font-weight: 500;
                                 color: $text-black;

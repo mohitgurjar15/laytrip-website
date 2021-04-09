@@ -136,9 +136,18 @@ ng-scrollbar {
     justify-content: flex-end;
     padding: 5px 15px 10px;
     align-items: center;
-
+    input[type=radio]{
+        display: none;
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    }
+    input[type=checkbox] 
     input[type=checkbox] {
         display: none;
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
 
         &:checked~label {
             .filled {
