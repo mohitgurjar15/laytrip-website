@@ -237,7 +237,7 @@
                 <agm-map #gm [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10">
                     <agm-marker-cluster
                         imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-                        <agm-marker #marker *ngFor="let hotel of mapListArray;" [latitude]="hotel.geocodes.latitude"
+                        <agm-marker #marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
                             [longitude]="hotel.geocodes.longitude"
                             [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-map-marker.svg', scaledSize: {height: 80,width: 48}}"
                             [label]="{text:currency?.symbol+hotel?.selling?.total, fontSize: '12px'}"
@@ -267,7 +267,6 @@
                                                     <div class="box_img">
                                                         <div class="block_im">
                                                             <div class="hotel_list_img_wrp">
-                                                                <!-- <img src="{{item?.thumbnail}}" alt="Hotel image"> -->
                                                                 <ngx-gallery [options]="galleryOptions" [images]="item.galleryImages"></ngx-gallery>
                                                             </div>
                                                         </div>
