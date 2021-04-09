@@ -17,6 +17,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   compact = false;
   invertX = false;
   invertY = false;
+  isHotelSearch = false;
   shown = 'native';
 
   @ViewChild("scrollable", { static: true, read: ElementRef } as any)
@@ -128,7 +129,11 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.filterHotel.emit(this.hotelDetailsMain.hotels);
   }
 
-  searchHotel() {
+  searchHotel(event) {
+    /* if (event.target.textContent) {
+      this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
+    } */
+
     if (this.hotelname) {
       this.filterHotels({ key: 'searchByHotelName', value: this.hotelname.hotelName });
     }
@@ -186,10 +191,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
    * @param event 
    */
   filterByHotelRatings(event, count) {
+    console.log(event.target.checked,count)
     if (event.target.checked === true) {
       this.ratingArray.push(parseInt(count));
-    }
-    else {
+    } else {
       this.ratingArray = this.ratingArray.filter(item => {
         return item != count;
       })
@@ -202,6 +207,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   * @param event 
   */
   filterByHotelAmenities(event, value) {
+    
     if (event.target.checked === true) {
       this.amenitiesArray.push(value);
     }
@@ -380,5 +386,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  searchHotelName(text){
+    // var family = this.hotelNamesArray.filter(f => f.name.indexOf(text.code) > -1);
+    // console.log(family)
+    this.isHotelSearch = true;
+    // this.hotelNamesArray = this.hotelNamesArray;
   }
 }

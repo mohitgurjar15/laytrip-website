@@ -1,7 +1,7 @@
 <div class="search_area">
   <div class="travel_info" id="add_child" (click)="toggleDrawer()">
-    <span>{{roomsGroup.rooms ? roomsGroup.rooms : 1 }}</span> Room,
-    <span class="guest_num"> {{roomsGroup.adults + roomsGroup.child}}</span> Guest
+    <span>{{roomsGroup.rooms ? roomsGroup.rooms : 1 }}</span> {{roomsGroup.rooms == 1 ? 'Room': 'Rooms'}},
+    <span class="guest_num"> {{roomsGroup.adults + roomsGroup.child}}</span> {{roomsGroup.adults + roomsGroup.child == 1 ? 'Guest': 'Guests'}}
     <div class="drop_aerrow"></div>
   </div>
 
@@ -76,23 +76,27 @@
         </li>
       </ul>
 
-      <div class="child_sel_wrapper" *ngIf="roomsGroup.child > 0">
-        <div class="child_boxes open" *ngFor="let child of roomsGroup.children;let idx = index">
-          <div class="left">
-            <span class="label_name">Child {{idx + 1}} Age</span>
-          </div>
-          <div class="right">
-            <div class="dropdown child_dropdown_wrapper">
-              <a class="child_sub_drop" (click)="toggleChildDropDown(idx)">
-                {{ child.age }}
-              </a>
+        <div class="child_sel_wrapper" *ngIf="roomsGroup.child > 0">
+          <div class="child_boxes open" *ngFor="let child of roomsGroup.children;let idx = index">
+            <div class="left">
+              <span class="label_name">Child {{idx + 1}} Age</span>
+            </div>
+            <div class="right">
+              <!-- <ng-select placeholder="0" class="child_select_ng" #child>
+                <ng-option *ngFor='let in of counter(17) ;let i = index' value="{{i+1}}">{{i+1}}</ng-option>
+              </ng-select> -->
+              <div class="dropdown child_dropdown_wrapper">
+                <a class="child_sub_drop" (click)="toggleChildDropDown(idx)">
+                 {{ child.age }}
+                </a>
 
-              <div class="child_su_drop_op" *ngIf="isShowChildDropDown">
-                <ng-scrollbar class="custom_scroll_suggetion child_scrollbox" barClass="scrollbar" customview="true"
-                  #scrollable track="all" pointerEventsMethod="scrollbar">
-                  <a *ngFor="let child of childAges;let x = index" class="dropdown-item"
-                href="javascript:void(0)" (click)="selectChildAge(idx,x)">{{x}}</a>
-                </ng-scrollbar>
+                <div class="child_su_drop_op" *ngIf="child.is_show">
+                  <ng-scrollbar class="custom_scroll_suggetion child_scrollbox" barClass="scrollbar" customview="true"
+                    #scrollable track="all" pointerEventsMethod="scrollbar">
+                    <a *ngFor="let child of childAges;let x = index" class="dropdown-item"
+                      href="javascript:void(0)" (click)="selectChildAge(idx,x)">{{x}}</a>
+                  </ng-scrollbar>
+                </div>
               </div>
             </div>
 
@@ -103,4 +107,3 @@
     <!-- </ng-scrollbar> -->
 
   </div>
-</div>

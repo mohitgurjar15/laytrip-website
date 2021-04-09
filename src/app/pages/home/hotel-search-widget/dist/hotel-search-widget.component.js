@@ -128,12 +128,11 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
             this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
         }
-        this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(function (toSearchString) {
-            if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
-                console.log(toSearchString);
-                _this.fromDestinationInfo.city = 'Miami from deal';
-                _this.searchHotelInfo.latitude = 40.7681;
-                _this.searchHotelInfo.longitude = -73.9819;
+        this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(function (hotelInfo) {
+            if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
+                _this.fromDestinationInfo.city = hotelInfo.city;
+                _this.searchHotelInfo.latitude = hotelInfo.lat;
+                _this.searchHotelInfo.longitude = hotelInfo.long;
             }
         });
         this.homeService.removeToString('hotel');

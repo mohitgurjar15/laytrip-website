@@ -16,7 +16,7 @@ var GuestInfoComponent = /** @class */ (function () {
         this.totalRoom = [];
         this.errorMessage = '';
         this.openDrawer = false;
-        this.childAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+        this.childAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
         this.isShowChildDropDown = false;
         this.roomsGroup = {
             rooms: 1,
@@ -30,7 +30,6 @@ var GuestInfoComponent = /** @class */ (function () {
         this.loadJquery();
         if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
             var info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-            console.log(info);
             if (info) {
                 this.roomsGroup = info;
             }
@@ -48,8 +47,9 @@ var GuestInfoComponent = /** @class */ (function () {
         });
         $("#add_child").click(function (e) {
             e.stopPropagation();
+            console.log(e.currentTarget.nextSibling.classList[1]);
             if ((e.target.nextSibling != null && e.target.nextSibling.classList[1] == 'panel_hide') ||
-                e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide') {
+                e.currentTarget.nextSibling != null && e.currentTarget.nextSibling.classList[1] == 'panel_hide') {
                 $("#add_child_open").hide();
             }
             else {
