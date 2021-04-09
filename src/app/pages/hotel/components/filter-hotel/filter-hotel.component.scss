@@ -12,14 +12,6 @@
     cursor: pointer;
 }
 
-ng-scrollbar {
-    --scrollbar-size: 5px;
-    --scrollbar-thumb-color: #ff66d6;
-    --scrollbar-thumb-hover-color: #ff00bc;
-    --scrollbar-border-radius: 15px;
-    // max-height: 300px;
-}
-
 .desk_ver {
     @include tab-view {
         display: none;
@@ -41,6 +33,9 @@ ng-scrollbar {
         display: block;
     }
 }
+ng-scrollbar {
+    --scrollbar-padding: 25px 0 0 5px !important;
+}
 
 .searchbar_box {
     position: relative;
@@ -57,7 +52,8 @@ ng-scrollbar {
         background-position: 10px;
         background-size: 16px;
         width: 100%;
-        &:focus{
+
+        &:focus {
             background-image: none;
             padding: 0 15px;
         }
@@ -74,15 +70,48 @@ ng-scrollbar {
         border: 1px solid $box-border-color;
         border-radius: 10px;
         color: $mid_gray_bg;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 12px;
+        line-height: 22px;
         background-color: $background-white;
 
         .close_btn {
             position: absolute;
             top: 10px;
-            right: 15px;
+            right: 8px;
             z-index: 999;
+            button{
+                img{
+                    max-width: 10px;
+                }
+            }
+        }
+
+        .suggtions_wrps_mn {
+            display: flex;
+
+            .suggtions {
+                scroll-behavior: smooth;
+                height: 100%;
+                max-height: 180px;
+                flex: auto;
+                display: flex;
+                flex-direction: column;
+
+                .sug_line_box {
+                    margin-bottom: 10px;
+                    float: left;
+
+                    .linew_wrps {
+                        float: left;
+
+                        .line_names {
+                            margin-bottom: 10px;
+                            display: flex;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
         }
     }
 }
