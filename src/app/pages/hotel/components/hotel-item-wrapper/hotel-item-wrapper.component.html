@@ -30,7 +30,6 @@
                                     <div class="box_img">
                                         <div class="block_im">
                                             <div class="hotel_list_img_wrp">
-                                                <!-- <img src="{{item?.thumbnail}}" alt="Hotel image"> -->
                                                 <ngx-gallery [options]="galleryOptions" [images]="item.galleryImages"></ngx-gallery>
                                             </div>
                                         </div>
@@ -195,14 +194,12 @@
                                 ${{item.night_rate}} including taxes and fees
                             </span>
                             <div class="notifi_text mobile_notifi">
-                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose
-                                Select.
+                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                             </div>
                         </div>
                         <div class="full_desk_not">
                             <div class="notifi_text">
-                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose
-                                Select.
+                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                             </div>
                         </div>
                     </div>
@@ -240,7 +237,7 @@
                 <agm-map #gm [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10">
                     <agm-marker-cluster
                         imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-                        <agm-marker #marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
+                        <agm-marker #marker *ngFor="let hotel of mapListArray;" [latitude]="hotel.geocodes.latitude"
                             [longitude]="hotel.geocodes.longitude"
                             [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-map-marker.svg', scaledSize: {height: 80,width: 48}}"
                             [label]="{text:currency?.symbol+hotel?.selling?.total, fontSize: '12px'}"
@@ -258,7 +255,7 @@
                 </agm-map>
             </div>
             <div class="col-lg-12 mt-3">
-                <ng-container *ngFor="let item of hotelListArray; let blockIndex = index;">
+                <ng-container *ngFor="let item of mapListArray; let blockIndex = index;">
                     <div class="search_block" >
                         <div class="listing_block">
                             <div class="listing_inner_box_wrppr">
@@ -435,14 +432,12 @@
                                                 ${{item.night_rate}} including taxes and fees
                                             </span>
                                             <div class="notifi_text mobile_notifi">
-                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose
-                                                Select.
+                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                                             </div>
                                         </div>
                                         <div class="full_desk_not">
                                             <div class="notifi_text">
-                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose
-                                                Select.
+                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                                             </div>
                                         </div>
                                     </div>
