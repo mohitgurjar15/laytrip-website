@@ -46,6 +46,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   s3BucketUrl = environment.s3BucketUrl;
   public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
   hotelListArray = [];
+  mapListArray=[];
   noOfDataToShowInitially = 20;
   dataToLoad = 20;
   isFullListDisplayed = false;
@@ -122,6 +123,8 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
         big:image
       })
     }
+
+    this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
     
     this.userInfo = getLoginUserInfo();
     // this.totalLaycredit();
@@ -144,15 +147,22 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   }
 
   ngAfterContentChecked() {
-    // this.hotelListArray = this.hotelDetails;
     this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+    /* for(let i=0; i < this.hotelListArray.length; i++){
+      this.hotelDetails[i].galleryImages=[];
+      for(let image of this.hotelDetails[i].images)
+      this.hotelDetails[i].galleryImages.push({
+        small: image,
+        medium:image,
+        big:image
+      })
+    }
+    this.mapListArray[0]=Object.assign({},this.hotelListArray[0]); */
     let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
     }
-    // if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
-    //   this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
-    // }
+    
   }
 
   infoWindowAction(template, event, action) {
@@ -184,6 +194,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
   differentView(view) {
     this.isMapView = (view !== 'listView');
+    console.log("this.isMapView",this.isMapView)
   }
 
   showDetails(index, flag = null) {
