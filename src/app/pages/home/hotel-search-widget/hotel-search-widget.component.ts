@@ -154,12 +154,11 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
       this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
     }
-    this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(toSearchString=> {
-      if(typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0){       
-        console.log(toSearchString)
-      this.fromDestinationInfo.city = 'Miami from deal';
-      this.searchHotelInfo.latitude =  40.7681;
-      this.searchHotelInfo.longitude =-73.9819;
+    this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo=> {
+      if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){       
+      this.fromDestinationInfo.city = hotelInfo.city;
+      this.searchHotelInfo.latitude =   hotelInfo.lat;
+      this.searchHotelInfo.longitude = hotelInfo.long;
       }
     });
     this.homeService.removeToString('hotel'); 
