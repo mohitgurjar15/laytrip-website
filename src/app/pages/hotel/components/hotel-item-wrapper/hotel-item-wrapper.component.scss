@@ -57,17 +57,20 @@ agm-map {
 //     border: 1px solid #000 !important;
 // }
 
-.mob_line{
+.mob_line {
     display: none;
+
     @include tab-view {
         display: flex;
         justify-content: center;
         margin: 20px 0 5px;
-        img{
+
+        img {
             margin-right: 3px;
         }
     }
 }
+
 .top_wrapper_box {
     display: flex;
     justify-content: space-between;
@@ -82,11 +85,13 @@ agm-map {
         font-size: 16px;
         font-weight: 400;
     }
-    .desk_line{
+
+    .desk_line {
         @include tab-view {
             display: none;
         }
     }
+
     button {
         color: $text_light_yellow;
         border: none;
@@ -685,14 +690,14 @@ agm-map {
                                 .titles {
                                     font-weight: 600;
                                     color: $text-black;
-                                    margin-right: 15px;
-                                    flex: 1;
+                                    margin-right: 0px;
+                                    flex: 2;
                                 }
 
                                 .texts {
                                     font-weight: 500;
                                     color: $mid_gray_bg;
-                                    flex: 3;
+                                    flex: 5;
 
                                     @include tab-view {
                                         font-weight: 400;
@@ -1580,7 +1585,7 @@ agm-map {
                         align-items: center;
                         margin: 0 auto;
 
-                        @include tab-view{
+                        @include tab-view {
                             font-size: 11px;
                         }
 
@@ -2171,6 +2176,9 @@ agm-map {
                 background: $background-white;
                 padding: 20px 15px;
                 border-radius: 10px;
+                @include tab-view {
+                    padding: 10px;
+                }
 
                 .card-body {
                     border: 1px solid $box-border-color;
@@ -2179,8 +2187,9 @@ agm-map {
                     //margin-top: 15px;
 
                     @include tab-view {
-                        border: none;
+                        //border: none;
                         margin: 0;
+                        padding: 10px;
                     }
 
                     .io_ru_wrps {
@@ -2224,14 +2233,14 @@ agm-map {
                                 .titles {
                                     font-weight: 600;
                                     color: $text-black;
-                                    margin-right: 15px;
-                                    flex: 1;
+                                    margin-right: 0px;
+                                    flex: 2;
                                 }
 
                                 .texts {
                                     font-weight: 500;
                                     color: $mid_gray_bg;
-                                    flex: 3;
+                                    flex: 5;
 
                                     @include tab-view {
                                         font-weight: 400;
