@@ -83,11 +83,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   galleryImages: NgxGalleryImage[];
 
  
-  /* galleryImages=[
-    "https://q-xx.bstatic.com/xdata/images/hotel/max500/174961131.jpg?k=a49c0911f27104454d58ec1c9ab4bcf78d824b616ae068864716e728fb14bf62&o=",
-    "https://q-xx.bstatic.com/xdata/images/hotel/max500/174961131.jpg?k=a49c0911f27104454d58ec1c9ab4bcf78d824b616ae068864716e728fb14bf62&o="
-  ] */
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -97,26 +92,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   ) {
       this.galleryOptions = [
         { "thumbnails": false, previewRotate:true,preview:false,width: "230px", height: "200px" },
-        { "breakpoint": 500, "width": "100%", "height": "200px"  }
       ];
-
-      this.galleryImages = [
-        {
-            small: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg',
-            medium: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg',
-            big: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg'
-        },
-        {
-            small: 'http://d2q1prebf1m2s9.cloudfront.net/assets/images/laytrip_logo_blue.svg',
-            medium: 'http://d2q1prebf1m2s9.cloudfront.net/assets/images/laytrip_logo_blue.svg',
-            big: 'http://d2q1prebf1m2s9.cloudfront.net/assets/images/laytrip_logo_blue.svg'
-        },
-        {
-          small: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg',
-          medium: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg',
-          big: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/2-medium.jpeg'
-        }
-    ];
   }
 
   ngOnInit() {

@@ -165,7 +165,7 @@
                 <div class="mobile_box">
 
                     <div class="hotel_list_img_wrp">
-                        <img src="{{item?.thumbnail}}" alt="Hotel image">
+                        <ngx-gallery [options]="galleryOptions" [images]="item.galleryImages"></ngx-gallery>
                     </div>
                     <div class="middle_part">
                         <div class="detail_info">
