@@ -18,6 +18,7 @@ var FilterHotelComponent = /** @class */ (function () {
         this.invertY = false;
         this.isHotelSearch = false;
         this.shown = 'native';
+        this.searchHotel = '';
         this.filterHotel = new core_1.EventEmitter();
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.priceSlider = new forms_1.FormGroup({
@@ -95,10 +96,13 @@ var FilterHotelComponent = /** @class */ (function () {
         this.loadJquery();
     };
     FilterHotelComponent.prototype.clearHotelSearch = function () {
+        this.isHotelSearch = false;
         this.hotelname = 'Search Hotel';
         this.filterHotel.emit(this.hotelDetailsMain.hotels);
     };
     FilterHotelComponent.prototype.clickHotelFilterName = function (event) {
+        this.isHotelSearch = false;
+        this.searchHotel = event.target.textContent ? event.target.textContent : '';
         if (event.target.textContent) {
             this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
         }

@@ -31,7 +31,7 @@ var LaytripLoaderComponent = /** @class */ (function () {
         };
     };
     LaytripLoaderComponent.prototype.ngOnChanges = function (changes) {
-        console.log(changes);
+        console.log(changes.module);
     };
     __decorate([
         core_1.Input()

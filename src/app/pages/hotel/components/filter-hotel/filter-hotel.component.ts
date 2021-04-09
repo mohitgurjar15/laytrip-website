@@ -19,7 +19,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   invertY = false;
   isHotelSearch = false;
   shown = 'native';
-
+  searchHotel ='';
   @ViewChild("scrollable", { static: true, read: ElementRef } as any)
   scrollbar: ElementRef;
   contentWrapper: HTMLElement;
@@ -126,11 +126,14 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   clearHotelSearch() {
+    this.isHotelSearch = false;
     this.hotelname = 'Search Hotel';
     this.filterHotel.emit(this.hotelDetailsMain.hotels);
   }
 
   clickHotelFilterName(event) {
+    this.isHotelSearch = false;
+    this.searchHotel = event.target.textContent ? event.target.textContent : '';
     if (event.target.textContent) {
       this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
     }

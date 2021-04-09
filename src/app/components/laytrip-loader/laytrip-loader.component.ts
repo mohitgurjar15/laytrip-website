@@ -34,6 +34,6 @@ export class LaytripLoaderComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes)
+    console.log(changes.module)
   }
 }

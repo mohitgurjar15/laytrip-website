@@ -21,11 +21,11 @@
               <h5>Hotel Name</h5>
             </div>
             <div class="searchbar_box">
-              <input type="text" placeholder="Search" tabindex="3"  (keyup)="searchHotelName($event)" >
+              <input type="text" placeholder="Search" tabindex="3"  (keyup)="searchHotelName($event)" placeholder="{{searchHotel}}">
               
               <div class="search_suggetion_main" *ngIf="isHotelSearch" >
                 <div class="close_btn">
-                    <button  type="button" class="close">
+                    <button (click)="clearHotelSearch()" type="button" class="close">
                         <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                     </button>
                 </div>
@@ -197,10 +197,9 @@
               </div>
             </div>
           </div>
-          <div class="cmn_block departure_to">
+        <!--   <div class="cmn_block departure_to">
             <div class="block_top_in">
               <h5>Cancellation Policy</h5>
-              <!--<a class="view_more" href="javascript:void(0);">Show All</a> -->
             </div>
             <ul>
               <li>
@@ -216,7 +215,7 @@
                 </label>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -259,7 +258,7 @@
               </div>
             </div>
             <div class="cmn_block price">
-              <div class="block_top_in">
+              <!-- <div class="block_top_in">
                 <h5>Total Price</h5>
               </div>
               <ul class="block_price_radio">
@@ -275,7 +274,7 @@
                       (click)="filterHotelByPrice('weekly','filter_weekly_price')"> <span class="checkmark"></span>
                   </label>
                 </li>
-              </ul>
+              </ul> -->
               <form [formGroup]="priceSlider">
                 <div class="custom_range_slide">
                   <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
