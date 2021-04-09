@@ -95,6 +95,9 @@
                         font-size: 20px;
                         color: #000;
                         font-weight: 600;
+                        @include tab-view {
+                            font-size: 16px;
+                        }
                     }
                 }
             }
