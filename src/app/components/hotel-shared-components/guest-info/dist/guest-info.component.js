@@ -30,7 +30,6 @@ var GuestInfoComponent = /** @class */ (function () {
         this.loadJquery();
         if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
             var info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-            console.log(info);
             if (info) {
                 this.roomsGroup = info;
             }
@@ -48,8 +47,9 @@ var GuestInfoComponent = /** @class */ (function () {
         });
         $("#add_child").click(function (e) {
             e.stopPropagation();
+            console.log(e.currentTarget.nextSibling.classList[1]);
             if ((e.target.nextSibling != null && e.target.nextSibling.classList[1] == 'panel_hide') ||
-                e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide') {
+                e.currentTarget.nextSibling != null && e.currentTarget.nextSibling.classList[1] == 'panel_hide') {
                 $("#add_child_open").hide();
             }
             else {
