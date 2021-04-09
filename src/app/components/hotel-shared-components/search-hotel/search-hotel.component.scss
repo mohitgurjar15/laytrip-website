@@ -80,6 +80,7 @@
     @include tab-view{
         align-items: flex-start;
         flex-direction: column;
+        justify-content: center;
     }
     .label_wrp{
         padding-right: 10px !important;
