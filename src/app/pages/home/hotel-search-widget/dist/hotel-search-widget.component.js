@@ -56,8 +56,8 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             children: []
         };
         this.showCommingSoon = false;
-        this.customStartDateValidation = "2021-05-03";
-        this.customEndDateValidation = "2021-05-04";
+        this.customStartDateValidation = "2021-06-02";
+        this.customEndDateValidation = "2021-06-03";
         this.hotelSearchForm = this.fb.group({
             fromDestination: ['', [forms_1.Validators.required]]
         });

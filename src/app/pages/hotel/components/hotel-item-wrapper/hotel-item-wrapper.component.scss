@@ -266,6 +266,8 @@ agm-map {
                             flex: 3;
                             flex-direction: column;
                             height: 100%;
+                            min-height: 170px;
+                            justify-content: space-between;
                         }
                     }
 
@@ -273,8 +275,6 @@ agm-map {
                         flex: 2;
                         display: flex;
                     }
-
-
                 }
 
                 @include tab-view {
@@ -1649,6 +1649,58 @@ agm-map {
                     .review_section_wrap {
                         img {
                             width: 12px;
+                        }
+                    }
+                }
+                
+                .show_detail {
+                    width: auto;
+
+                    a {
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: $primary-color;
+                        width: 68px;
+                        position: relative;
+                        padding-right: 15px;
+                        display: flex;
+                        align-items: center;
+                        margin: 0 auto;
+
+                        img {
+                            margin-right: 5px;
+                        }
+
+                        &:after {
+                            content: "";
+                            //position: absolute;
+                            padding: 5px 6px;
+                            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                            background-position: right;
+                            background-repeat: no-repeat;
+                            background-size: 10px;
+                            transition: 0.3s;
+                            border: none;
+                            margin-left: 5px;
+                        }
+                    }
+
+                    &.open_detail {
+                        a {
+                            color: $mid_gray_bg;
+
+                            &:after {
+                                content: "";
+                                //position: absolute;
+                                padding: 5px 6px;
+                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 10px;
+                                transition: 0.3s;
+                                border: none;
+                                margin-left: 5px;
+                            }
                         }
                     }
                 }

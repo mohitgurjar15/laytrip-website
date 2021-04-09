@@ -79,6 +79,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   policyArray = [];
 
   hotelNamesArray = [];
+  filterHotelNames=[];
   hotelname;
   sortType: string = 'filter_total_price';
   lowToHighToggleRating: boolean = false;
@@ -129,14 +130,14 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.filterHotel.emit(this.hotelDetailsMain.hotels);
   }
 
-  searchHotel(event) {
-    /* if (event.target.textContent) {
+  clickHotelFilterName(event) {
+    if (event.target.textContent) {
       this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
-    } */
-
-    if (this.hotelname) {
-      this.filterHotels({ key: 'searchByHotelName', value: this.hotelname.hotelName });
     }
+
+    /* if (this.hotelname) {
+      this.filterHotels({ key: 'searchByHotelName', value: this.hotelname.hotelName });
+    } */
   }
 
   counter(i: any) {
@@ -287,8 +288,9 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       });
     }
 
+    console.log(filteredHotels)
+
     /* Filter by price total or weekly */
-    console.log(this.sortType)
     if (this.sortType === 'total') {
       filteredHotels = filteredHotels.filter(item => {
         if (item.secondary_start_price === 0) {
@@ -388,10 +390,15 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  searchHotelName(text){
-    // var family = this.hotelNamesArray.filter(f => f.name.indexOf(text.code) > -1);
-    // console.log(family)
+  searchHotelName(searchValue){
     this.isHotelSearch = true;
-    // this.hotelNamesArray = this.hotelNamesArray;
+    var result = [];
+    for (let i = 0; i < this.hotelNamesArray.length; i++) {
+      if (this.hotelNamesArray[i].hotelName.toLowerCase().toString().includes(searchValue.target.value)) {
+        result.push(this.hotelNamesArray[i]);
+      }
+    }   
+    this.filterHotelNames = result;
+    return this.filterHotelNames;
   }
 }
