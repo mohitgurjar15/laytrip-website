@@ -108,22 +108,6 @@ export class HotelSearchBarComponent implements OnInit {
         }
       }
     }
-    if (localStorage.getItem('_hotel_recent')) {
-      this.recentSearchInfo = JSON.parse(localStorage.getItem('_hotel_recent'));
-      this.data = this.recentSearchInfo.map(item => {
-        return {
-          city: item.city,
-          country: item.country,
-          hotel_id: null,
-          title: item.title,
-          type: item.type,
-          geo_codes: item.geo_codes,
-          recentSearches: 'Recent Searches',
-          isRecentSearch: true
-        }
-      });
-    } else {
-    }
   }
 
   searchHotel(searchItem) {
@@ -196,10 +180,7 @@ export class HotelSearchBarComponent implements OnInit {
       this.searchHotelInfo.country = event.country;
       this.searchedValue.push({ key: 'fromSearch', value: event });
     }
-    if (this.recentSearchInfo && this.recentSearchInfo.length < 3) {
-      this.recentSearchInfo.push(event);
-      //localStorage.setItem('_hotel_recent', JSON.stringify(this.recentSearchInfo));
-    }
+    
   }
 
   onRemove(event, item) {

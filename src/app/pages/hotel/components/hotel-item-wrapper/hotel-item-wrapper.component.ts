@@ -12,6 +12,7 @@ import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
 declare const google: any;
 import { google } from 'google-maps';
 import { collect } from 'collect.js';
+import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 
 @Component({
   selector: 'app-hotel-item-wrapper',
@@ -78,7 +79,10 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   scrollDistance = 2;
   throttle = 50;
   scrollLoading = false;
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[];
 
+ 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -86,7 +90,9 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     private commonFunction: CommonFunction,
     private genericService: GenericService,
   ) {
-
+      this.galleryOptions = [
+        { "thumbnails": false, previewRotate:true,preview:false,width: "230px", height: "200px" },
+      ];
   }
 
   ngOnInit() {
@@ -107,9 +113,16 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     }
     // this.hotelListArray = this.hotelDetails;
     this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-    if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
-      // this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
+    for(let i=0; i < this.hotelListArray.length; i++){
+      this.hotelDetails[i].galleryImages=[];
+      for(let image of this.hotelDetails[i].images)
+      this.hotelDetails[i].galleryImages.push({
+        small: image,
+        medium:image,
+        big:image
+      })
     }
+    
     this.userInfo = getLoginUserInfo();
     // this.totalLaycredit();
     this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
