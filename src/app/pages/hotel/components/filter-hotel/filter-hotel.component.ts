@@ -133,6 +133,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   clickHotelFilterName(event) {
     this.isHotelSearch = false;
+    $('#searchHotelName').val(event.target.textContent)
     this.searchHotel = event.target.textContent ? event.target.textContent : '';
     if (event.target.textContent) {
       this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
@@ -287,11 +288,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     /* Search hotels by name */
     if (hotelname && hotelname.key === 'searchByHotelName') {
       filteredHotels = filteredHotels.filter(item => {
-        return item.name === hotelname.value;
+        return item.name.toLowerCase().toString() == hotelname.value.trim().toLowerCase().toString();
       });
     }
 
-    console.log(filteredHotels)
 
     /* Filter by price total or weekly */
     if (this.sortType === 'total') {
@@ -400,8 +400,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       if (this.hotelNamesArray[i].hotelName.toLowerCase().toString().includes(searchValue.target.value)) {
         result.push(this.hotelNamesArray[i]);
       }
-    }   
-    this.filterHotelNames = result;
-    return this.filterHotelNames;
+    }
+    if(result.length > 0){
+      this.filterHotelNames = result;
+      return this.filterHotelNames;
+    } else {
+      return this.filterHotelNames = [{hotelName:'No result!!'}]
+    }
   }
 }

@@ -102,6 +102,7 @@ var FilterHotelComponent = /** @class */ (function () {
     };
     FilterHotelComponent.prototype.clickHotelFilterName = function (event) {
         this.isHotelSearch = false;
+        $('#searchHotelName').val(event.target.textContent);
         this.searchHotel = event.target.textContent ? event.target.textContent : '';
         if (event.target.textContent) {
             this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
@@ -241,10 +242,9 @@ var FilterHotelComponent = /** @class */ (function () {
         /* Search hotels by name */
         if (hotelname && hotelname.key === 'searchByHotelName') {
             filteredHotels = filteredHotels.filter(function (item) {
-                return item.name === hotelname.value;
+                return item.name.toLowerCase().toString() == hotelname.value.trim().toLowerCase().toString();
             });
         }
-        console.log(filteredHotels);
         /* Filter by price total or weekly */
         if (this.sortType === 'total') {
             filteredHotels = filteredHotels.filter(function (item) {
@@ -335,8 +335,13 @@ var FilterHotelComponent = /** @class */ (function () {
                 result.push(this.hotelNamesArray[i]);
             }
         }
-        this.filterHotelNames = result;
-        return this.filterHotelNames;
+        if (result.length > 0) {
+            this.filterHotelNames = result;
+            return this.filterHotelNames;
+        }
+        else {
+            return this.filterHotelNames = [{ hotelName: 'No result!!' }];
+        }
     };
     __decorate([
         core_1.ViewChild("scrollable", { static: true, read: core_1.ElementRef })

@@ -14,24 +14,12 @@ var LaytripLoaderComponent = /** @class */ (function () {
     }
     LaytripLoaderComponent.prototype.ngOnInit = function () {
         var lottie_path = '';
-        console.log(this.module, this.loading);
-        if (this.module == 'flight') {
-            lottie_path = 'assets/lottie-json/flight/data.json';
-        }
-        else if (this.module == 'hotel') {
-            lottie_path = 'assets/lottie-json/hotel/data.json';
-        }
-        else {
-            lottie_path = 'assets/lottie-json/flight/data.json';
-        }
+        /*
         this.lottieConfig = {
-            path: lottie_path,
-            autoplay: true,
-            loop: true
-        };
-    };
-    LaytripLoaderComponent.prototype.ngOnChanges = function (changes) {
-        console.log(changes.module);
+          path: lottie_path,
+          autoplay: true,
+          loop: true
+        }; */
     };
     __decorate([
         core_1.Input()

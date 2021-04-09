@@ -47,7 +47,6 @@ var GuestInfoComponent = /** @class */ (function () {
         });
         $("#add_child").click(function (e) {
             e.stopPropagation();
-            console.log(e.currentTarget.nextSibling.classList[1]);
             if ((e.target.nextSibling != null && e.target.nextSibling.classList[1] == 'panel_hide') ||
                 e.currentTarget.nextSibling != null && e.currentTarget.nextSibling.classList[1] == 'panel_hide') {
                 $("#add_child_open").hide();

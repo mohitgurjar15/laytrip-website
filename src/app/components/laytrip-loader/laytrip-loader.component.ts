@@ -18,22 +18,12 @@ export class LaytripLoaderComponent implements OnInit {
 
   ngOnInit() {
     var lottie_path = '';
-    console.log(this.module,this.loading)
-    if(this.module == 'flight'){
-      lottie_path = 'assets/lottie-json/flight/data.json';   
-    } else if(this.module == 'hotel'){
-      lottie_path = 'assets/lottie-json/hotel/data.json'; 
-    } else {
-      lottie_path = 'assets/lottie-json/flight/data.json';
-    }
+    /* 
     this.lottieConfig = {
       path: lottie_path,
       autoplay: true,
       loop: true
-    };
+    }; */
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes.module)
-  }
 }
