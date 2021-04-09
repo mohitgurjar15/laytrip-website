@@ -113,7 +113,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
       this.hotelName = hotelinfo.city;
     }
     // this.hotelListArray = this.hotelDetails;
-    this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+    this.hotelListArray = this.hotelDetails;
     for(let i=0; i < this.hotelListArray.length; i++){
       this.hotelDetails[i].galleryImages=[];
       for(let image of this.hotelDetails[i].images)
@@ -147,21 +147,11 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   }
 
   ngAfterContentChecked() {
-    this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-    /* for(let i=0; i < this.hotelListArray.length; i++){
-      this.hotelDetails[i].galleryImages=[];
-      for(let image of this.hotelDetails[i].images)
-      this.hotelDetails[i].galleryImages.push({
-        small: image,
-        medium:image,
-        big:image
-      })
-    }
-    this.mapListArray[0]=Object.assign({},this.hotelListArray[0]); */
+    /* this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
     let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
-    }
+    } */
     
   }
 
@@ -259,7 +249,22 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
 
   ngOnChanges(changes: SimpleChanges) {
-    this.hotelsList = changes.hotelDetails.currentValue;
+    console.log("changes",changes)
+    if(changes.hotelDetails.currentValue.length){
+      this.hotelListArray = changes.hotelDetails.currentValue.length;
+      for(let i=0; i < this.hotelListArray.length; i++){
+        this.hotelDetails[i].galleryImages=[];
+        for(let image of this.hotelDetails[i].images)
+        this.hotelDetails[i].galleryImages.push({
+          small: image,
+          medium:image,
+          big:image
+        })
+      }
+
+      this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
+    }
+    //this.hotelsList = changes.hotelDetails.currentValue;
   }
 
   logAnimation(event) {
