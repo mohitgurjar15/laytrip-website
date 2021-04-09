@@ -59,6 +59,7 @@ var FilterHotelComponent = /** @class */ (function () {
         this.amenitiesArray = [];
         this.policyArray = [];
         this.hotelNamesArray = [];
+        this.filterHotelNames = [];
         this.sortType = 'filter_total_price';
         this.lowToHighToggleRating = false;
         this.lowToHighToggleAmenities = false;
@@ -97,13 +98,13 @@ var FilterHotelComponent = /** @class */ (function () {
         this.hotelname = 'Search Hotel';
         this.filterHotel.emit(this.hotelDetailsMain.hotels);
     };
-    FilterHotelComponent.prototype.searchHotel = function (event) {
-        /* if (event.target.textContent) {
-          this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
-        } */
-        if (this.hotelname) {
-            this.filterHotels({ key: 'searchByHotelName', value: this.hotelname.hotelName });
+    FilterHotelComponent.prototype.clickHotelFilterName = function (event) {
+        if (event.target.textContent) {
+            this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
         }
+        /* if (this.hotelname) {
+          this.filterHotels({ key: 'searchByHotelName', value: this.hotelname.hotelName });
+        } */
     };
     FilterHotelComponent.prototype.counter = function (i) {
         return new Array(i);
@@ -239,8 +240,8 @@ var FilterHotelComponent = /** @class */ (function () {
                 return item.name === hotelname.value;
             });
         }
+        console.log(filteredHotels);
         /* Filter by price total or weekly */
-        console.log(this.sortType);
         if (this.sortType === 'total') {
             filteredHotels = filteredHotels.filter(function (item) {
                 if (item.secondary_start_price === 0) {
@@ -322,11 +323,16 @@ var FilterHotelComponent = /** @class */ (function () {
     FilterHotelComponent.prototype.ngOnDestroy = function () {
         this.subscriptions.forEach(function (sub) { return sub.unsubscribe(); });
     };
-    FilterHotelComponent.prototype.searchHotelName = function (text) {
-        // var family = this.hotelNamesArray.filter(f => f.name.indexOf(text.code) > -1);
-        // console.log(family)
+    FilterHotelComponent.prototype.searchHotelName = function (searchValue) {
         this.isHotelSearch = true;
-        // this.hotelNamesArray = this.hotelNamesArray;
+        var result = [];
+        for (var i = 0; i < this.hotelNamesArray.length; i++) {
+            if (this.hotelNamesArray[i].hotelName.toLowerCase().toString().includes(searchValue.target.value)) {
+                result.push(this.hotelNamesArray[i]);
+            }
+        }
+        this.filterHotelNames = result;
+        return this.filterHotelNames;
     };
     __decorate([
         core_1.ViewChild("scrollable", { static: true, read: core_1.ElementRef })

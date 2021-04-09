@@ -62,8 +62,8 @@ export class HotelSearchWidgetComponent implements OnInit {
   $dealLocatoin;
 
   showCommingSoon: boolean = false;
-  customStartDateValidation = "2021-05-03";
-  customEndDateValidation = "2021-05-04";
+  customStartDateValidation = "2021-06-02";
+  customEndDateValidation = "2021-06-03";
 
   constructor(
     public commonFunction: CommonFunction,
