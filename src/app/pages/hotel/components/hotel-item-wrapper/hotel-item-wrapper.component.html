@@ -265,8 +265,8 @@
                             imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
                             <agm-marker #marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
                                 [longitude]="hotel.geocodes.longitude"
-                                [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-map-marker.svg', scaledSize: {height: 80,width: 48}}"
-                                [label]="{text:currency?.symbol+hotel?.selling?.total, fontSize: '12px', class: 'mapLabel'}"
+                                [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-marker.svg', scaledSize: {height: 80,width: 48}}"
+                                [label]="{text:currency?.symbol+hotel?.selling?.total, color: 'white',fontSize: '12px', class: 'mapLabel'}"
                                 (mouseOver)="infoWindowAction(infoWindow, $event, 'open')"
                                 (mouseOut)="infoWindowAction(infoWindow, $event, 'close')"
                                 (markerClick)="infoWindowAction(hotel.id, $event, 'click')">
