@@ -40,24 +40,6 @@ var SearchHotelComponent = /** @class */ (function () {
                 geo_codes: this.defaultSelected.geo_codes
             });
         }
-        if (localStorage.getItem('_hotel_recent')) {
-            this.recentSearchInfo = JSON.parse(localStorage.getItem('_hotel_recent'));
-            this.data = this.recentSearchInfo.map(function (item) {
-                return {
-                    city: item.city,
-                    country: item.country,
-                    hotel_id: null,
-                    title: item.title,
-                    type: item.type,
-                    geo_codes: item.geo_codes,
-                    recentSearches: 'Recent Searches',
-                    isRecentSearch: true
-                };
-            });
-        }
-        else {
-            // console.log('no');
-        }
     };
     SearchHotelComponent.prototype.ngDocheck = function () {
     };
@@ -102,15 +84,14 @@ var SearchHotelComponent = /** @class */ (function () {
         this.defaultSelected = event;
         if (event && index && index === 'fromSearch') {
             this.changeValue.emit({ key: 'fromSearch', value: event });
-            if (this.recentSearchInfo && this.recentSearchInfo.length < 3) {
-                this.recentSearchInfo.push(event);
-                localStorage.setItem('_hotel_recent', JSON.stringify(this.recentSearchInfo));
-            }
         }
     };
     SearchHotelComponent.prototype.onRemove = function (event) {
         this.selectedHotel = {};
         this.defaultSelected = this.defaultSelectedTemp;
+    };
+    SearchHotelComponent.prototype.onAuxClick = function (event) {
+        console.log("auxclick - button", event);
     };
     __decorate([
         core_1.Input()

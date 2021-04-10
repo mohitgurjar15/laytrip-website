@@ -114,4 +114,8 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
     this.selectedHotel = {};
     this.defaultSelected = this.defaultSelectedTemp;
   }
+
+  onAuxClick(event) {
+    console.log("auxclick - button",  event);
+  }
 }
