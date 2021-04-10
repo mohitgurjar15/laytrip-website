@@ -364,13 +364,6 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   cursor: pointer;
 }
 
-ng-scrollbar {
-  --scrollbar-size: 5px;
-  --scrollbar-thumb-color: #ff66d6;
-  --scrollbar-thumb-hover-color: #ff00bc;
-  --scrollbar-border-radius: 15px;
-}
-
 @media (max-width: 768px) {
   .desk_ver {
     display: none;
@@ -395,6 +388,78 @@ ng-scrollbar {
   }
 }
 
+ng-scrollbar {
+  --scrollbar-padding: 25px 0 0 5px !important;
+}
+
+.searchbar_box {
+  position: relative;
+}
+.searchbar_box input {
+  border: 1px solid #d6d6d6;
+  border-radius: 25px;
+  color: #878787;
+  padding: 0 15px 0 40px;
+  height: 35px;
+  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/search_gray.svg);
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-size: 16px;
+  width: 100%;
+}
+.searchbar_box input:focus {
+  background-image: none;
+  padding: 0 15px;
+}
+.searchbar_box .search_suggetion_main {
+  height: 250px;
+  margin-top: 5px;
+  position: absolute;
+  display: flex;
+  padding: 10px;
+  width: 100%;
+  z-index: 999;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+  color: #878787;
+  font-size: 12px;
+  line-height: 22px;
+  background-color: #ffffff;
+}
+.searchbar_box .search_suggetion_main .close_btn {
+  position: absolute;
+  top: 10px;
+  right: 8px;
+  z-index: 999;
+}
+.searchbar_box .search_suggetion_main .close_btn button img {
+  max-width: 10px;
+}
+.searchbar_box .search_suggetion_main .suggtions_wrps_mn {
+  display: flex;
+}
+.searchbar_box .search_suggetion_main .suggtions_wrps_mn .suggtions {
+  scroll-behavior: smooth;
+  height: 100%;
+  max-height: 180px;
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+}
+.searchbar_box .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box {
+  margin-bottom: 10px;
+  float: left;
+}
+.searchbar_box .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps {
+  float: left;
+}
+.searchbar_box .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps .line_names {
+  margin-bottom: 10px;
+  display: flex;
+  cursor: pointer;
+}
+
 .filter_main_wrapper.responsive_mobile .accordion.block_shortby .accordion-heading::after {
   background-image: none;
 }
@@ -406,8 +471,17 @@ ng-scrollbar {
   padding: 5px 15px 10px;
   align-items: center;
 }
+.star-rating input[type=radio] {
+  display: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
 .star-rating input[type=checkbox] {
   display: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
 .star-rating input[type=checkbox]:checked ~ label .filled {
   display: block;

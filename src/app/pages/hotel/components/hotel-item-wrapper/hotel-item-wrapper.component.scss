@@ -64,6 +64,7 @@ agm-map {
         display: flex;
         justify-content: center;
         margin: 20px 0 5px;
+        font-size: 12px;
 
         img {
             margin-right: 3px;
@@ -79,11 +80,17 @@ agm-map {
     font-size: 16px;
     font-weight: 400;
     padding: 5px 0;
+    @include tab-view {
+        font-size: 14px;
+    }
 
     .shorting_label {
         margin: 0;
         font-size: 16px;
         font-weight: 400;
+        @include tab-view {
+            font-size: 14px;
+        }
     }
 
     .desk_line {
@@ -1591,6 +1598,7 @@ agm-map {
 
                         @include tab-view {
                             font-size: 11px;
+                            margin-bottom: 5px;
                         }
 
                         img {
@@ -3128,6 +3136,11 @@ agm-map {
                         display: flex;
                         align-items: center;
                         margin: 0 auto;
+
+                        @include tab-view {
+                            font-size: 11px;
+                            margin-bottom: 5px;
+                        }
 
                         img {
                             margin-right: 5px;

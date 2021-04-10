@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -10,16 +10,20 @@ export class LaytripLoaderComponent implements OnInit {
 
   public lottieConfig: Object;
   @Input() loading;
+  @Input() module;
 
   constructor(
     private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
+    var lottie_path = '';
+    /* 
     this.lottieConfig = {
-      path: 'assets/data.json',
+      path: lottie_path,
       autoplay: true,
       loop: true
-    };
+    }; */
   }
+
 }

@@ -44,7 +44,6 @@ export class AirportSuggestionComponent implements OnInit {
         this.loading=false;
         for(let i=0; i <result.length; i++){
           for(let j=0; j<result[i].value.length; j++){
-            console.log(result[i].value[j].code)
             if(result[i].value[j].code != 'AMD'){
               result[i].value[j].display_name = `${result[i].value[j].city},${ result[i].value[j].country},(${result[i].value[j].code}),${ result[i].value[j].name}`
             }

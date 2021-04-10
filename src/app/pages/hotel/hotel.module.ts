@@ -32,6 +32,7 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
 import { HotelPolicyPopupComponent } from './components/hotel-policy-popup/hotel-policy-popup.component';
 import { HomeModule } from '../home/home.module';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { HomeModule } from '../home/home.module';
     ReactiveFormsModule,
     NgbModule,
     NgSelectModule,
+    NgxSliderModule,
     CookieModule.forRoot(),
     CalendarModule,
     AgmCoreModule.forRoot({

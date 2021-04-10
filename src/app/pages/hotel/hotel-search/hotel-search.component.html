@@ -1,3 +1,4 @@
+<app-laytrip-loader [loading]="loading" [module]="'hotel'"> </app-laytrip-loader>
 <!-- <app-hotel-search-bar [calenderPrices]="calenderPrices" (searchBarInfo)="getHotelSearchDataByModify($event)"></app-hotel-search-bar> -->
 <div class="listing_main_box">
   <div class="search_tab_listing_wrapper">
@@ -27,8 +28,8 @@
   </div>
 
   <app-hotel-loader *ngIf="loading"></app-hotel-loader>
-  <app-hotel-popup-loader *ngIf="loading"></app-hotel-popup-loader>
-
+<!--   <app-hotel-popup-loader *ngIf="loading"></app-hotel-popup-loader>
+ -->
   <app-hotel-not-found *ngIf="isNotFound"></app-hotel-not-found>
   <app-hotel-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-hotel-error>
 

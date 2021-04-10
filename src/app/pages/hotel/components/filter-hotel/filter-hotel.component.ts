@@ -19,7 +19,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   invertY = false;
   isHotelSearch = false;
   shown = 'native';
-
+  searchHotel ='';
   @ViewChild("scrollable", { static: true, read: ElementRef } as any)
   scrollbar: ElementRef;
   contentWrapper: HTMLElement;
@@ -107,7 +107,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         this.maxPrice = this.priceHighValue;
 
         this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
-        this.priceOptions.ceil = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
+        this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
 
         if (this.hotelDetailsMain.filter_objects && this.hotelDetailsMain.filter_objects.secondary_price && this.hotelDetailsMain.filter_objects.secondary_price.min && this.hotelDetailsMain.filter_objects.secondary_price.max) {
           this.priceValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
@@ -115,22 +115,27 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
           this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
 
           this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
-          this.priceOptions.ceil = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
+          this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
         }
 
         this.amenities = this.hotelDetailsMain.filter_objects.ameneties;
         this.ratingStar = this.hotelDetailsMain.filter_objects.ratings;
       }
     }
+    
     this.loadJquery();
   }
 
   clearHotelSearch() {
+    this.isHotelSearch = false;
     this.hotelname = 'Search Hotel';
     this.filterHotel.emit(this.hotelDetailsMain.hotels);
   }
 
   clickHotelFilterName(event) {
+    this.isHotelSearch = false;
+    $('#searchHotelName').val(event.target.textContent)
+    this.searchHotel = event.target.textContent ? event.target.textContent : '';
     if (event.target.textContent) {
       this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
     }
@@ -284,11 +289,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     /* Search hotels by name */
     if (hotelname && hotelname.key === 'searchByHotelName') {
       filteredHotels = filteredHotels.filter(item => {
-        return item.name === hotelname.value;
+        return item.name.toLowerCase().toString() == hotelname.value.trim().toLowerCase().toString();
       });
     }
 
-    console.log(filteredHotels)
 
     /* Filter by price total or weekly */
     if (this.sortType === 'total') {
@@ -397,8 +401,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       if (this.hotelNamesArray[i].hotelName.toLowerCase().toString().includes(searchValue.target.value)) {
         result.push(this.hotelNamesArray[i]);
       }
-    }   
-    this.filterHotelNames = result;
-    return this.filterHotelNames;
+    }
+    if(result.length > 0){
+      this.filterHotelNames = result;
+      return this.filterHotelNames;
+    } else {
+      return this.filterHotelNames = [{hotelName:'No result!!'}]
+    }
   }
 }

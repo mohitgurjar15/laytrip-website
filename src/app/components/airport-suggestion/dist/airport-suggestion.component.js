@@ -36,7 +36,6 @@ var AirportSuggestionComponent = /** @class */ (function () {
                 _this.loading = false;
                 for (var i = 0; i < result.length; i++) {
                     for (var j = 0; j < result[i].value.length; j++) {
-                        console.log(result[i].value[j].code);
                         if (result[i].value[j].code != 'AMD') {
                             result[i].value[j].display_name = result[i].value[j].city + "," + result[i].value[j].country + ",(" + result[i].value[j].code + ")," + result[i].value[j].name;
                         }

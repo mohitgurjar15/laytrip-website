@@ -1,8 +1,9 @@
 <div class="filter_main_wrapper desk_ver">
   <div class="accordion block_shortby" id="accordion3">
     <div class="accordion-group" [ngClass]="{'active': is_open === true}">
-      <div class="accordion-heading" (click)="toggleFilter()">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">
+      <div class="accordion-heading" (click)="toggleFilter()" data-toggle="collapse" aria-expanded="true"
+        data-parent="#accordion3" href="#collapseThree">
+        <a class="accordion-toggle">
           Filters
         </a>
         <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> {{'clear' | translate}}</a>
@@ -20,11 +21,12 @@
                 <h5>Hotel Name</h5>
               </div>
               <div class="searchbar_box">
-                <input type="text" placeholder="Search" tabindex="3" (keyup)="searchHotelName($event)">
+                <input type="text" id="searchHotelName" placeholder="Search" tabindex="3"
+                  (keyup)="searchHotelName($event)" placeholder="{{searchHotel}}">
 
                 <div class="search_suggetion_main" *ngIf="isHotelSearch">
                   <div class="close_btn">
-                    <button type="button" class="close">
+                    <button (click)="clearHotelSearch()" type="button" class="close">
                       <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                     </button>
                   </div>
@@ -34,12 +36,10 @@
                       <div class="suggtions">
                         <div class="sug_line_box">
                           <span class="linew_wrps">
-                            <div *ngFor="let item of filterHotelNames">
-                              <span class="line_names" (click)="clickHotelFilterName($event)">
-                                {{item.hotelName}}
-                              </span>
-                            </div>
-                          </span>
+                            <span class="line_names" (click)="clickHotelFilterName($event)" *ngFor="let item of filterHotelNames">
+                              {{item.hotelName}}
+                            </span>
+                        </span>
                         </div>
                       </div>
                     </div>
@@ -54,9 +54,32 @@
               </div>
             </div>
             <div class="cmn_block price">
-              <div class="block_top_in">
-                <h5>Total Price</h5>
-              </div>
+              <!-- <div class="block_top_in">
+              <h5>Total Price</h5>
+            </div>
+            <ul class="block_price_radio">
+              <li>
+                <label class="custom_radio">Total
+                  <input type="radio" [checked]="sortType=='filter_total_price'" name="fl_price_radio"
+                    (click)="filterHotelByPrice('total','filter_total_price')">
+                  <span class="checkmark"></span> </label>
+              </li>
+              <li>
+                <label class="custom_radio">Weekly
+                  <input type="radio" [checked]="sortType=='filter_weekly_price'" name="fl_price_radio"
+                    (click)="filterHotelByPrice('weekly','filter_weekly_price')"> <span class="checkmark"></span>
+                </label>
+              </li>
+            </ul> -->
+              <form [formGroup]="priceSlider">
+                <div class="custom_range_slide">
+                  <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
+                  <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
+                    [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions"
+                    (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
+                  <!-- *ngIf="priceValue && priceOptions && priceHighValue" -->
+                </div>
+              </form>
               <ul class="block_price_radio">
                 <li>
                   <label class="custom_radio">Total
@@ -195,29 +218,26 @@
                 </div>
               </div>
             </div>
-            <div class="cmn_block departure_to">
-              <div class="block_top_in">
-                <h5>Cancellation Policy</h5>
-                <!--<a class="view_more" href="javascript:void(0);">Show All</a> -->
-              </div>
-              <ul>
-                <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value="true" (click)="filterByPolicy($event)"> <span
-                      class="checkmark"></span>
-                    <p>Free Cancellation</p>
-                  </label>
-                </li>
-                <li>
-                  <label class="custom_checkbox">
-                    <input type="checkbox" value="false" (click)="filterByPolicy($event)"> <span
-                      class="checkmark"></span>
-                    <p>Non Refundable</p>
-                  </label>
-                </li>
-              </ul>
-            </div>
           </div>
+          <!--   <div class="cmn_block departure_to">
+            <div class="block_top_in">
+              <h5>Cancellation Policy</h5>
+            </div>
+            <ul>
+              <li>
+                <label class="custom_checkbox">
+                  <input type="checkbox" value="true" (click)="filterByPolicy($event)"> <span class="checkmark"></span>
+                  <p>Free Cancellation</p>
+                </label>
+              </li>
+              <li>
+                <label class="custom_checkbox">
+                  <input type="checkbox" value="false" (click)="filterByPolicy($event)"> <span class="checkmark"></span>
+                  <p>Non Refundable</p>
+                </label>
+              </li>
+            </ul>
+          </div> -->
         </div>
       </div>
     </div>
@@ -261,11 +281,9 @@
                       <div class="suggtions">
                         <div class="sug_line_box">
                           <span class="linew_wrps">
-                            <div *ngFor="let item of filterHotelNames">
-                              <span class="line_names" (click)="clickHotelFilterName($event)">
+                              <span class="line_names" (click)="clickHotelFilterName($event)" *ngFor="let item of filterHotelNames">
                                 {{item.hotelName}}
                               </span>
-                            </div>
                           </span>
                         </div>
                       </div>
@@ -279,7 +297,7 @@
               </div>
             </div>
             <div class="cmn_block price">
-              <div class="block_top_in">
+              <!-- <div class="block_top_in">
                 <h5>Total Price</h5>
               </div>
               <ul class="block_price_radio">
@@ -295,7 +313,7 @@
                       (click)="filterHotelByPrice('weekly','filter_weekly_price')"> <span class="checkmark"></span>
                   </label>
                 </li>
-              </ul>
+              </ul> -->
               <form [formGroup]="priceSlider">
                 <div class="custom_range_slide">
                   <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
@@ -420,10 +438,9 @@
                 </div>
               </div>
             </div>
-            <div class="cmn_block departure_to">
+            <!-- <div class="cmn_block departure_to">
               <div class="block_top_in">
                 <h5>Cancellation Policy</h5>
-                <!--<a class="view_more" href="javascript:void(0);">Show All</a> -->
               </div>
               <ul>
                 <li>
@@ -441,7 +458,7 @@
                   </label>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

@@ -3,16 +3,12 @@ declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CookieService } from 'ngx-cookie';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../services/generic.service';
-import * as moment from 'moment';
 import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
 declare const google: any;
-import { google } from 'google-maps';
-import { collect } from 'collect.js';
-import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
+import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 
 @Component({
   selector: 'app-hotel-item-wrapper',
@@ -46,6 +42,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   s3BucketUrl = environment.s3BucketUrl;
   public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
   hotelListArray = [];
+  mapListArray=[];
   noOfDataToShowInitially = 20;
   dataToLoad = 20;
   isFullListDisplayed = false;
@@ -86,7 +83,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private cookieService: CookieService,
     private commonFunction: CommonFunction,
     private genericService: GenericService,
   ) {
@@ -111,8 +107,8 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
     }
-    // this.hotelListArray = this.hotelDetails;
     this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+    //this.hotelListArray = this.hotelDetails;
     for(let i=0; i < this.hotelListArray.length; i++){
       this.hotelDetails[i].galleryImages=[];
       for(let image of this.hotelDetails[i].images)
@@ -122,6 +118,8 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
         big:image
       })
     }
+
+    this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
     
     this.userInfo = getLoginUserInfo();
     // this.totalLaycredit();
@@ -144,26 +142,24 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   }
 
   ngAfterContentChecked() {
-    // this.hotelListArray = this.hotelDetails;
-    this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+    /* this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
     let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
-    }
-    // if (this.hotelListArray[0] && this.hotelListArray[0].address && this.hotelListArray[0].address.city_name) {
-    //   this.hotelName = `${this.hotelListArray[0].address.city_name},${this.hotelListArray[0].address.country_name}`;
-    // }
+    } */
+    
   }
 
   infoWindowAction(template, event, action) {
-
 
     if (action === 'open') {
       template.open();
     } else if (action === 'close') {
       template.close();
     } else if (action === 'click') {
-      this.showMapInfo(template);
+      console.log(template,"-----")
+      this.mapListArray[0]= this.hotelListArray.find(hotel=>hotel.id==template);
+      //this.showMapInfo(template);
     }
   }
 
@@ -184,6 +180,10 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
   differentView(view) {
     this.isMapView = (view !== 'listView');
+    console.log("this.isMapView",this.isMapView)
+    if(!this.isMapView){
+      this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
+    }
   }
 
   showDetails(index, flag = null) {
@@ -248,7 +248,21 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
 
   ngOnChanges(changes: SimpleChanges) {
-    this.hotelsList = changes.hotelDetails.currentValue;
+    if(changes.hotelDetails.currentValue.length){
+      this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);;
+      for(let i=0; i < this.hotelListArray.length; i++){
+        this.hotelDetails[i].galleryImages=[];
+        for(let image of this.hotelDetails[i].images)
+        this.hotelDetails[i].galleryImages.push({
+          small: image,
+          medium:image,
+          big:image
+        })
+      }
+
+      this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
+    }
+    //this.hotelsList = changes.hotelDetails.currentValue;
   }
 
   logAnimation(event) {

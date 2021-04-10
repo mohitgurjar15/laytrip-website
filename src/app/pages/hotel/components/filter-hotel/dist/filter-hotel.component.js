@@ -18,6 +18,7 @@ var FilterHotelComponent = /** @class */ (function () {
         this.invertY = false;
         this.isHotelSearch = false;
         this.shown = 'native';
+        this.searchHotel = '';
         this.filterHotel = new core_1.EventEmitter();
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.priceSlider = new forms_1.FormGroup({
@@ -80,13 +81,13 @@ var FilterHotelComponent = /** @class */ (function () {
                 this.minPrice = this.priceValue;
                 this.maxPrice = this.priceHighValue;
                 this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
-                this.priceOptions.ceil = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
+                this.priceOptions.ceil = this.priceHighValue; //this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
                 if (this.hotelDetailsMain.filter_objects && this.hotelDetailsMain.filter_objects.secondary_price && this.hotelDetailsMain.filter_objects.secondary_price.min && this.hotelDetailsMain.filter_objects.secondary_price.max) {
                     this.priceValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
                     this.priceHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
                     this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
                     this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
-                    this.priceOptions.ceil = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
+                    this.priceOptions.ceil = this.priceHighValue; //this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
                 }
                 this.amenities = this.hotelDetailsMain.filter_objects.ameneties;
                 this.ratingStar = this.hotelDetailsMain.filter_objects.ratings;
@@ -95,10 +96,14 @@ var FilterHotelComponent = /** @class */ (function () {
         this.loadJquery();
     };
     FilterHotelComponent.prototype.clearHotelSearch = function () {
+        this.isHotelSearch = false;
         this.hotelname = 'Search Hotel';
         this.filterHotel.emit(this.hotelDetailsMain.hotels);
     };
     FilterHotelComponent.prototype.clickHotelFilterName = function (event) {
+        this.isHotelSearch = false;
+        $('#searchHotelName').val(event.target.textContent);
+        this.searchHotel = event.target.textContent ? event.target.textContent : '';
         if (event.target.textContent) {
             this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
         }
@@ -237,10 +242,9 @@ var FilterHotelComponent = /** @class */ (function () {
         /* Search hotels by name */
         if (hotelname && hotelname.key === 'searchByHotelName') {
             filteredHotels = filteredHotels.filter(function (item) {
-                return item.name === hotelname.value;
+                return item.name.toLowerCase().toString() == hotelname.value.trim().toLowerCase().toString();
             });
         }
-        console.log(filteredHotels);
         /* Filter by price total or weekly */
         if (this.sortType === 'total') {
             filteredHotels = filteredHotels.filter(function (item) {
@@ -331,8 +335,13 @@ var FilterHotelComponent = /** @class */ (function () {
                 result.push(this.hotelNamesArray[i]);
             }
         }
-        this.filterHotelNames = result;
-        return this.filterHotelNames;
+        if (result.length > 0) {
+            this.filterHotelNames = result;
+            return this.filterHotelNames;
+        }
+        else {
+            return this.filterHotelNames = [{ hotelName: 'No result!!' }];
+        }
     };
     __decorate([
         core_1.ViewChild("scrollable", { static: true, read: core_1.ElementRef })

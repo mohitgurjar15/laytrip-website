@@ -1,6 +1,20 @@
-<div class="loader_full_page" *ngIf="loading">
-    <div id="lottie">
-        <lottie-animation-view [options]="lottieConfig" [width]="250" [height]="200">
+<div class="loader_full_page" *ngIf="loading && module == 'flight'">
+    <div id="lottie {{module}}">
+        <lottie-animation-view [options]="{
+            path: 'assets/lottie-json/flight/data.json',
+            autoplay: true,
+            loop: true
+          }" [width]="250" [height]="200">
+        </lottie-animation-view> 
+    </div>
+</div>
+<div class="loader_full_page" *ngIf="loading && module == 'hotel'">
+    <div id="lottie {{module}}">
+        <lottie-animation-view [options]="{
+            path: 'assets/lottie-json/hotel/data.json',
+            autoplay: true,
+            loop: true
+          }" [width]="250" [height]="200">
         </lottie-animation-view> 
         <!-- <img src="http://d2q1prebf1m2s9.cloudfront.net/assets/images/main_new_loader.gif" alt="Loader"> -->
     </div>
