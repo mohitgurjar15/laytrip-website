@@ -87,7 +87,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     private genericService: GenericService,
   ) {
       this.galleryOptions = [
-        { "thumbnails": false, previewRotate:true,preview:false,width: "270px", height: "100%" },
+        { "thumbnails": false, previewRotate:true,preview:false,width: "270px", height: "100%", imageSwipe:true,imageBullets:false },
       ];
   }
 
@@ -192,14 +192,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     } else {
       this.showHotelDetails[index] = !this.showHotelDetails[index];
     }
-
-    if (flag == 'true') {
-      this.showFareDetails = 1;
-    }
-    else {
-
-      this.showFareDetails = 0;
-    }
+    console.log("innnn")
 
     this.showHotelDetails = this.showHotelDetails.map((item, i) => {
       return ((index === i) && this.showHotelDetails[index] === true) ? true : false;

@@ -81,11 +81,11 @@
                             <div class="block_inn_pr">
                                 <div class="block" *ngIf="item.secondary_start_price > 0">
                                     <p>Flexible Installments</p>
-                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> weekly
+                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price | number : '1.2-2'}}</span> weekly
                                     </p>
                                 </div>
                                 <div class="block" *ngIf="item.secondary_start_price === 0">
-                                    <p>From <span>{{ currency?.symbol }}{{item?.selling?.total}}</span> weekly</p>
+                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total | number : '1.2-2'}}</span></p>
                                 </div>
                             </div> <a class="book_btn anchor-tag"
                                 [routerLink]="['/hotel/detail', item.id, hotelToken]">Select</a>
@@ -128,11 +128,11 @@
                             <div class="block_inn_pr">
                                 <div class="block" *ngIf="item.secondary_start_price > 0">
                                     
-                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> weekly
+                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price | number : '1.2-2'}}</span> weekly
                                     </p>
                                 </div>
                                 <div class="block" *ngIf="item.secondary_start_price === 0">
-                                    <p>From <span>{{ currency?.symbol }}{{item?.selling?.total}}</span> weekly</p>
+                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total | number : '1.2-2'}}</span></p>
                                 </div>
                             </div> <a class="book_btn anchor-tag"
                                 [routerLink]="['/hotel/detail', item.id, hotelToken]">Select</a>
@@ -318,11 +318,11 @@
                                             <div class="block_inn_pr">
                                                 <div class="block" *ngIf="item.secondary_start_price > 0">
                                                     <p>Flexible Installments</p>
-                                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> weekly
+                                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price | number : '1.2-2'}}</span> weekly
                                                     </p>
                                                 </div>
                                                 <div class="block" *ngIf="item.secondary_start_price === 0">
-                                                    <p>From <span>{{ currency?.symbol }}{{item?.selling?.total}}</span> weekly</p>
+                                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total | number : '1.2-2'}}</span></p>
                                                 </div>
                                             </div> <a class="book_btn anchor-tag"
                                                 [routerLink]="['/hotel/detail', item.id, hotelToken]">Select</a>
@@ -365,11 +365,11 @@
                                             <div class="block_inn_pr">
                                                 <div class="block" *ngIf="item.secondary_start_price > 0">
                                                     
-                                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> weekly
+                                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price | number : '1.2-2'}}</span> weekly
                                                     </p>
                                                 </div>
                                                 <div class="block" *ngIf="item.secondary_start_price === 0">
-                                                    <p>From <span>{{ currency?.symbol }}{{item?.selling?.total}}</span> weekly</p>
+                                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total | number : '1.2-2'}}</span></p>
                                                 </div>
                                             </div> <a class="book_btn anchor-tag"
                                                 [routerLink]="['/hotel/detail', item.id, hotelToken]">Select</a>
