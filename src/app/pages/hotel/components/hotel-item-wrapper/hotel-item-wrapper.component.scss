@@ -80,14 +80,17 @@ agm-map {
     font-size: 16px;
     font-weight: 400;
     padding: 5px 0;
+
     @include tab-view {
         font-size: 14px;
+        padding: 5px 10px;
     }
 
     .shorting_label {
         margin: 0;
         font-size: 16px;
         font-weight: 400;
+
         @include tab-view {
             font-size: 14px;
         }
@@ -139,6 +142,9 @@ agm-map {
     }
 
     &.hotel_listings {
+        @include tab-view{
+            padding: 10px;
+        }
         .search_block {
             width: 100%;
             margin-bottom: 15px;
@@ -407,51 +413,95 @@ agm-map {
                         }
 
                         .show_detail {
-                            width: auto;
+                            // a {
+                            //     font-size: 14px;
+                            //     font-weight: 500;
+                            //     color: $primary-color;
+                            //     width: 68px;
+                            //     position: relative;
+                            //     padding-right: 15px;
+                            //     display: flex;
+                            //     align-items: center;
 
-                            a {
+                            //     img {
+                            //         margin-right: 5px;
+                            //     }
+
+                            //     &:after {
+                            //         content: "";
+                            //         //position: absolute;
+                            //         padding: 5px 6px;
+                            //         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                            //         background-position: right;
+                            //         background-repeat: no-repeat;
+                            //         background-size: 10px;
+                            //         transition: 0.3s;
+                            //         border: none;
+                            //         margin-left: 5px;
+                            //     } 
+                            // }
+
+                            // &.open_detail {
+                            //     a {
+                            //         color: $mid_gray_bg;
+
+                            //         &:after {
+                            //             content: "";
+                            //             //position: absolute;
+                            //             padding: 5px 6px;
+                            //             background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                            //             background-position: right;
+                            //             background-repeat: no-repeat;
+                            //             background-size: 10px;
+                            //             transition: 0.3s;
+                            //             border: none;
+                            //             margin-left: 5px;
+                            //         }
+                            //     }
+                            // }
+                            .hotel_anchor{
+                                color: $active-tab-text;
                                 font-size: 14px;
                                 font-weight: 500;
-                                color: $primary-color;
                                 width: 68px;
                                 position: relative;
                                 padding-right: 15px;
                                 display: flex;
                                 align-items: center;
 
-                                img {
-                                    margin-right: 5px;
-                                }
-
-                                &:after {
-                                    content: "";
-                                    //position: absolute;
-                                    padding: 5px 6px;
-                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
-                                    background-position: right;
-                                    background-repeat: no-repeat;
-                                    background-size: 10px;
-                                    transition: 0.3s;
-                                    border: none;
-                                    margin-left: 5px;
-                                }
-                            }
-
-                            &.open_detail {
-                                a {
+                                &[aria-expanded="true"] {
                                     color: $mid_gray_bg;
 
                                     &:after {
                                         content: "";
-                                        //position: absolute;
-                                        padding: 5px 6px;
+                                        position: absolute;
+                                        padding: 5px 9px;
                                         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                                         background-position: right;
                                         background-repeat: no-repeat;
-                                        background-size: 10px;
+                                        background-size: 11px;
                                         transition: 0.3s;
+                                        right: 0;
+                                        top: 5px;
                                         border: none;
-                                        margin-left: 5px;
+                                    }
+                                }
+
+                                &[aria-expanded="false"] {
+                                    color: $active-tab-text;
+
+                                    &:after {
+                                        position: absolute;
+                                        padding: 5px 9px;
+                                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                                        background-position: right;
+                                        background-repeat: no-repeat;
+                                        background-size: 11px;
+                                        content: "";
+                                        transition: 0.3s;
+                                        right: 0;
+                                        top: 5px;
+                                        border: none;
                                     }
                                 }
                             }
@@ -644,6 +694,7 @@ agm-map {
                 background: $background-white;
                 padding: 20px 15px;
                 border-radius: 10px;
+
                 @include tab-view {
                     padding: 10px;
                 }
@@ -1583,57 +1634,54 @@ agm-map {
                 }
 
                 .show_detail {
-                    width: auto;
-
-                    a {
+                    
+                    .hotel_anchor{
+                        color: $active-tab-text;
                         font-size: 14px;
                         font-weight: 500;
-                        color: $primary-color;
                         width: 68px;
                         position: relative;
                         padding-right: 15px;
                         display: flex;
                         align-items: center;
-                        margin: 0 auto;
-
                         @include tab-view {
                             font-size: 11px;
-                            margin-bottom: 5px;
+                            margin: 0 auto 10px;
                         }
 
-                        img {
-                            margin-right: 5px;
-                        }
-
-                        &:after {
-                            content: "";
-                            //position: absolute;
-                            padding: 5px 6px;
-                            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
-                            background-position: right;
-                            background-repeat: no-repeat;
-                            background-size: 10px;
-                            transition: 0.3s;
-                            border: none;
-                            margin-left: 5px;
-                        }
-                    }
-
-                    &.open_detail {
-                        a {
+                        &[aria-expanded="true"] {
                             color: $mid_gray_bg;
 
                             &:after {
                                 content: "";
-                                //position: absolute;
-                                padding: 5px 6px;
+                                // position: absolute;
+                                padding: 5px 9px;
                                 background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                                 background-position: right;
                                 background-repeat: no-repeat;
-                                background-size: 10px;
+                                background-size: 11px;
                                 transition: 0.3s;
+                                right: 0;
+                                top: 5px;
                                 border: none;
-                                margin-left: 5px;
+                            }
+                        }
+
+                        &[aria-expanded="false"] {
+                            color: $active-tab-text;
+
+                            &:after {
+                               // position: absolute;
+                                padding: 5px 9px;
+                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 11px;
+                                content: "";
+                                transition: 0.3s;
+                                right: 0;
+                                top: 5px;
+                                border: none;
                             }
                         }
                     }
@@ -1688,6 +1736,9 @@ agm-map {
     }
 
     &.hotel_map_listings {
+        @include tab-view{
+            padding: 10px;
+        }
         .search_block {
             width: 100%;
             margin-bottom: 15px;
@@ -1951,51 +2002,95 @@ agm-map {
                         }
 
                         .show_detail {
-                            width: auto;
+                            // a {
+                            //     font-size: 14px;
+                            //     font-weight: 500;
+                            //     color: $primary-color;
+                            //     width: 68px;
+                            //     position: relative;
+                            //     padding-right: 15px;
+                            //     display: flex;
+                            //     align-items: center;
 
-                            a {
+                            //     img {
+                            //         margin-right: 5px;
+                            //     }
+
+                            //     &:after {
+                            //         content: "";
+                            //         //position: absolute;
+                            //         padding: 5px 6px;
+                            //         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                            //         background-position: right;
+                            //         background-repeat: no-repeat;
+                            //         background-size: 10px;
+                            //         transition: 0.3s;
+                            //         border: none;
+                            //         margin-left: 5px;
+                            //     } 
+                            // }
+
+                            // &.open_detail {
+                            //     a {
+                            //         color: $mid_gray_bg;
+
+                            //         &:after {
+                            //             content: "";
+                            //             //position: absolute;
+                            //             padding: 5px 6px;
+                            //             background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                            //             background-position: right;
+                            //             background-repeat: no-repeat;
+                            //             background-size: 10px;
+                            //             transition: 0.3s;
+                            //             border: none;
+                            //             margin-left: 5px;
+                            //         }
+                            //     }
+                            // }
+                            .hotel_anchor{
+                                color: $active-tab-text;
                                 font-size: 14px;
                                 font-weight: 500;
-                                color: $primary-color;
                                 width: 68px;
                                 position: relative;
                                 padding-right: 15px;
                                 display: flex;
                                 align-items: center;
 
-                                img {
-                                    margin-right: 5px;
-                                }
-
-                                &:after {
-                                    content: "";
-                                    //position: absolute;
-                                    padding: 5px 6px;
-                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
-                                    background-position: right;
-                                    background-repeat: no-repeat;
-                                    background-size: 10px;
-                                    transition: 0.3s;
-                                    border: none;
-                                    margin-left: 5px;
-                                }
-                            }
-
-                            &.open_detail {
-                                a {
+                                &[aria-expanded="true"] {
                                     color: $mid_gray_bg;
 
                                     &:after {
                                         content: "";
-                                        //position: absolute;
-                                        padding: 5px 6px;
+                                        position: absolute;
+                                        padding: 5px 9px;
                                         background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                                         background-position: right;
                                         background-repeat: no-repeat;
-                                        background-size: 10px;
+                                        background-size: 11px;
                                         transition: 0.3s;
+                                        right: 0;
+                                        top: 5px;
                                         border: none;
-                                        margin-left: 5px;
+                                    }
+                                }
+
+                                &[aria-expanded="false"] {
+                                    color: $active-tab-text;
+
+                                    &:after {
+                                        position: absolute;
+                                        padding: 5px 9px;
+                                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                                        background-position: right;
+                                        background-repeat: no-repeat;
+                                        background-size: 11px;
+                                        content: "";
+                                        transition: 0.3s;
+                                        right: 0;
+                                        top: 5px;
+                                        border: none;
                                     }
                                 }
                             }
@@ -2188,6 +2283,7 @@ agm-map {
                 background: $background-white;
                 padding: 20px 15px;
                 border-radius: 10px;
+
                 @include tab-view {
                     padding: 10px;
                 }
@@ -3124,57 +3220,54 @@ agm-map {
                 }
 
                 .show_detail {
-                    width: auto;
-
-                    a {
+                    
+                    .hotel_anchor{
+                        color: $active-tab-text;
                         font-size: 14px;
                         font-weight: 500;
-                        color: $primary-color;
                         width: 68px;
                         position: relative;
                         padding-right: 15px;
                         display: flex;
                         align-items: center;
-                        margin: 0 auto;
-
                         @include tab-view {
                             font-size: 11px;
-                            margin-bottom: 5px;
+                            margin: 0 auto 10px;
                         }
 
-                        img {
-                            margin-right: 5px;
-                        }
-
-                        &:after {
-                            content: "";
-                            //position: absolute;
-                            padding: 5px 6px;
-                            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
-                            background-position: right;
-                            background-repeat: no-repeat;
-                            background-size: 10px;
-                            transition: 0.3s;
-                            border: none;
-                            margin-left: 5px;
-                        }
-                    }
-
-                    &.open_detail {
-                        a {
+                        &[aria-expanded="true"] {
                             color: $mid_gray_bg;
 
                             &:after {
                                 content: "";
                                 //position: absolute;
-                                padding: 5px 6px;
+                                padding: 5px 9px;
                                 background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                                 background-position: right;
                                 background-repeat: no-repeat;
-                                background-size: 10px;
+                                background-size: 11px;
                                 transition: 0.3s;
+                                right: 0;
+                                top: 5px;
                                 border: none;
-                                margin-left: 5px;
+                            }
+                        }
+
+                        &[aria-expanded="false"] {
+                            color: $active-tab-text;
+
+                            &:after {
+                                //position: absolute;
+                                padding: 5px 9px;
+                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 11px;
+                                content: "";
+                                transition: 0.3s;
+                                right: 0;
+                                top: 5px;
+                                border: none;
                             }
                         }
                     }
