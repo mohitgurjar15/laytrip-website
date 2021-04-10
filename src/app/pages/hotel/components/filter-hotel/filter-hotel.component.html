@@ -1,89 +1,87 @@
-
 <div class="filter_main_wrapper desk_ver">
-<div class="accordion block_shortby" id="accordion3">
-  <div class="accordion-group" [ngClass]="{'active': is_open === true}">
-    <div class="accordion-heading" (click)="toggleFilter()">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">
-        Filters
-      </a>
-      <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> {{'clear' | translate}}</a>
-    </div>
-    <div id="collapseThree" class="accordion-body collapse">
-      <div class="accordion-inner">
-        <!-- <ng-scrollbar #scrollable [invertX]="invertX" [invertY]="invertY" [trackX]="false" [compact]="compact"
+  <div class="accordion block_shortby" id="accordion3">
+    <div class="accordion-group" [ngClass]="{'active': is_open === true}">
+      <div class="accordion-heading" (click)="toggleFilter()">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">
+          Filters
+        </a>
+        <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> {{'clear' | translate}}</a>
+      </div>
+      <div id="collapseThree" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <!-- <ng-scrollbar #scrollable [invertX]="invertX" [invertY]="invertY" [trackX]="false" [compact]="compact"
           [shown]="shown" [disableOnBreakpoints]="false">
 
          
         </ng-scrollbar> -->
-        <div class="fliter_block">
-          <div class="cmn_block">
-            <div class="block_top_in">
-              <h5>Hotel Name</h5>
-            </div>
-            <div class="searchbar_box">
-              <input type="text" placeholder="Search" tabindex="3"  (keyup)="searchHotelName($event)" >
-              
-              <div class="search_suggetion_main" *ngIf="isHotelSearch" >
-                <div class="close_btn">
-                    <button  type="button" class="close">
-                        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+          <div class="fliter_block">
+            <div class="cmn_block">
+              <div class="block_top_in">
+                <h5>Hotel Name</h5>
+              </div>
+              <div class="searchbar_box">
+                <input type="text" placeholder="Search" tabindex="3" (keyup)="searchHotelName($event)">
+
+                <div class="search_suggetion_main" *ngIf="isHotelSearch">
+                  <div class="close_btn">
+                    <button type="button" class="close">
+                      <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                     </button>
-                </div>
-                <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
-                    pointerEventsMethod="scrollbar">
+                  </div>
+                  <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable
+                    track="all" pointerEventsMethod="scrollbar">
                     <div class="suggtions_wrps_mn">
-                        <div class="suggtions">
-                            <div class="sug_line_box" >
-                                <span class="linew_wrps">
-                                    <div *ngFor="let item of filterHotelNames">                                       
-                                        <span  class="line_names" (click)="clickHotelFilterName($event)">
-                                            {{item.hotelName}}
-                                        </span>
-                                    </div>
-                                </span>
+                      <div class="suggtions">
+                        <div class="sug_line_box">
+                          <span class="linew_wrps">
+                            <div *ngFor="let item of filterHotelNames">
+                              <span class="line_names" (click)="clickHotelFilterName($event)">
+                                {{item.hotelName}}
+                              </span>
                             </div>
+                          </span>
                         </div>
+                      </div>
                     </div>
-                </ng-scrollbar>
-                
-            </div> 
-                
-            
-              <!-- <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
+                  </ng-scrollbar>
+                </div>
+
+
+                <!-- <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
                   placeholder="Search" (change)="searchHotel()" [clearable]="false" [selectOnTab]="true">
                 </ng-select> -->
-             
-            </div>
-          </div>
-          <div class="cmn_block price">
-            <div class="block_top_in">
-              <h5>Total Price</h5>
-            </div>
-            <ul class="block_price_radio">
-              <li>
-                <label class="custom_radio">Total
-                  <input type="radio" [checked]="sortType=='filter_total_price'" name="fl_price_radio"
-                    (click)="filterHotelByPrice('total','filter_total_price')">
-                  <span class="checkmark"></span> </label>
-              </li>
-              <li>
-                <label class="custom_radio">Weekly
-                  <input type="radio" [checked]="sortType=='filter_weekly_price'" name="fl_price_radio"
-                    (click)="filterHotelByPrice('weekly','filter_weekly_price')"> <span class="checkmark"></span>
-                </label>
-              </li>
-            </ul>
-            <form [formGroup]="priceSlider">
-              <div class="custom_range_slide">
-                <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
-                <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
-                  [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions"
-                  (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
-                <!-- *ngIf="priceValue && priceOptions && priceHighValue" -->
+
               </div>
-            </form>
-          </div>
-          <!-- <div class="cmn_block price">
+            </div>
+            <div class="cmn_block price">
+              <div class="block_top_in">
+                <h5>Total Price</h5>
+              </div>
+              <ul class="block_price_radio">
+                <li>
+                  <label class="custom_radio">Total
+                    <input type="radio" [checked]="sortType=='filter_total_price'" name="fl_price_radio"
+                      (click)="filterHotelByPrice('total','filter_total_price')">
+                    <span class="checkmark"></span> </label>
+                </li>
+                <li>
+                  <label class="custom_radio">Weekly
+                    <input type="radio" [checked]="sortType=='filter_weekly_price'" name="fl_price_radio"
+                      (click)="filterHotelByPrice('weekly','filter_weekly_price')"> <span class="checkmark"></span>
+                  </label>
+                </li>
+              </ul>
+              <form [formGroup]="priceSlider">
+                <div class="custom_range_slide">
+                  <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
+                  <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
+                    [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions"
+                    (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
+                  <!-- *ngIf="priceValue && priceOptions && priceHighValue" -->
+                </div>
+              </form>
+            </div>
+            <!-- <div class="cmn_block price">
   <div class="block_top_in">
     <h5>Price</h5>
   </div>
@@ -110,16 +108,16 @@
   </form>
 </div> -->
 
-          <div class="cmn_block pad_no">
-            <div class="accordion block_shortby inner_accodeions" id="accordion-starrates">
-              <div class="accordion-group" [ngClass]="{'active': lowToHighToggleRating  === true}">
-                <div class="accordion-heading no_accordion" (click)="toggleLowToHighRating()"> <a
-                    class="accordion-toggle">
-                    Star Ratings
-                  </a> </div>
-                <div id="collapseOutbound" class="accordion-body filter_acc ">
-                  <div class="accordion-inner">
-                    <!-- <div class="block_cmn stop">
+            <div class="cmn_block pad_no">
+              <div class="accordion block_shortby inner_accodeions" id="accordion-starrates">
+                <div class="accordion-group" [ngClass]="{'active': lowToHighToggleRating  === true}">
+                  <div class="accordion-heading no_accordion" (click)="toggleLowToHighRating()"> <a
+                      class="accordion-toggle">
+                      Star Ratings
+                    </a> </div>
+                  <div id="collapseOutbound" class="accordion-body filter_acc ">
+                    <div class="accordion-inner">
+                      <!-- <div class="block_cmn stop">
                       <ul>
                         <li *ngFor="let item of ratingStar">
                           <label class="custom_checkbox">
@@ -131,104 +129,106 @@
                         </li>
                       </ul>
                     </div> -->
-                    <div class="star-rating">
-                      <input (change)="filterByHotelRatings($event,5)" id="star-5" type="checkbox" name="rating"  />
-                      <label for="star-5" title="5 stars">
-                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
-                          alt="blank Stars Icon">
-                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
-                          alt="filled Stars Icon">
-                      </label>
-                      <input (change)="filterByHotelRatings($event,4)" id="star-4" type="checkbox" name="rating"  />
-                      <label for="star-4" title="4 stars">
-                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
-                          alt="blank Stars Icon">
-                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
-                          alt="filled Stars Icon">
-                      </label>
-                      <input (change)="filterByHotelRatings($event,3)" id="star-3" type="checkbox" name="rating"  />
-                      <label for="star-3" title="3 stars">
-                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
-                          alt="blank Stars Icon">
-                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
-                          alt="filled Stars Icon">
-                      </label>
-                      <input (change)="filterByHotelRatings($event,2)" id="star-2" type="checkbox" name="rating"  />
-                      <label for="star-2" title="2 stars">
-                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
-                          alt="blank Stars Icon">
-                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
-                          alt="filled Stars Icon">
-                      </label>
-                      <input  (change)="filterByHotelRatings($event,1)" id="star-1" type="checkbox" name="rating"  />
-                      <label for="star-1" title="1 star">
-                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
-                          alt="blank Stars Icon">
-                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
-                          alt="filled Stars Icon">
-                      </label>
+                      <div class="star-rating">
+                        <input (change)="filterByHotelRatings($event,5)" id="star-5" type="checkbox" name="rating" />
+                        <label for="star-5" title="5 stars">
+                          <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                            alt="blank Stars Icon">
+                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                            alt="filled Stars Icon">
+                        </label>
+                        <input (change)="filterByHotelRatings($event,4)" id="star-4" type="checkbox" name="rating" />
+                        <label for="star-4" title="4 stars">
+                          <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                            alt="blank Stars Icon">
+                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                            alt="filled Stars Icon">
+                        </label>
+                        <input (change)="filterByHotelRatings($event,3)" id="star-3" type="checkbox" name="rating" />
+                        <label for="star-3" title="3 stars">
+                          <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                            alt="blank Stars Icon">
+                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                            alt="filled Stars Icon">
+                        </label>
+                        <input (change)="filterByHotelRatings($event,2)" id="star-2" type="checkbox" name="rating" />
+                        <label for="star-2" title="2 stars">
+                          <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                            alt="blank Stars Icon">
+                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                            alt="filled Stars Icon">
+                        </label>
+                        <input (change)="filterByHotelRatings($event,1)" id="star-1" type="checkbox" name="rating" />
+                        <label for="star-1" title="1 star">
+                          <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                            alt="blank Stars Icon">
+                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                            alt="filled Stars Icon">
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="cmn_block pad_no">
-            <div class="accordion block_shortby inner_accodeions" id="accordion-amenities">
-              <div class="accordion-group" [ngClass]="{'active': lowToHighToggleAmenities  === true}">
-                <div class="accordion-heading no_accordion" (click)="toggleLowToHighAmenities()"> <a
-                    class="accordion-toggle">
-                    Amenities
-                  </a> </div>
-                <div id="collapseInbound" class="accordion-body filter_acc">
-                  <div class="accordion-inner">
-                    <div class="block_cmn stop">
-                      <ul>
-                        <li *ngFor="let item of amenities">
-                          <label class="custom_checkbox">
-                            <input type="checkbox" value="{{item.title}}"
-                              (click)="filterByHotelAmenities($event,item.title)">
-                            <span class="checkmark"></span>{{item.title}}</label>
-                        </li>
-                      </ul>
+            <div class="cmn_block pad_no">
+              <div class="accordion block_shortby inner_accodeions" id="accordion-amenities">
+                <div class="accordion-group" [ngClass]="{'active': lowToHighToggleAmenities  === true}">
+                  <div class="accordion-heading no_accordion" (click)="toggleLowToHighAmenities()"> <a
+                      class="accordion-toggle">
+                      Amenities
+                    </a> </div>
+                  <div id="collapseInbound" class="accordion-body filter_acc">
+                    <div class="accordion-inner">
+                      <div class="block_cmn stop">
+                        <ul>
+                          <li *ngFor="let item of amenities">
+                            <label class="custom_checkbox">
+                              <input type="checkbox" value="{{item.title}}"
+                                (click)="filterByHotelAmenities($event,item.title)">
+                              <span class="checkmark"></span>{{item.title}}</label>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="cmn_block departure_to">
-            <div class="block_top_in">
-              <h5>Cancellation Policy</h5>
-              <!--<a class="view_more" href="javascript:void(0);">Show All</a> -->
+            <div class="cmn_block departure_to">
+              <div class="block_top_in">
+                <h5>Cancellation Policy</h5>
+                <!--<a class="view_more" href="javascript:void(0);">Show All</a> -->
+              </div>
+              <ul>
+                <li>
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value="true" (click)="filterByPolicy($event)"> <span
+                      class="checkmark"></span>
+                    <p>Free Cancellation</p>
+                  </label>
+                </li>
+                <li>
+                  <label class="custom_checkbox">
+                    <input type="checkbox" value="false" (click)="filterByPolicy($event)"> <span
+                      class="checkmark"></span>
+                    <p>Non Refundable</p>
+                  </label>
+                </li>
+              </ul>
             </div>
-            <ul>
-              <li>
-                <label class="custom_checkbox">
-                  <input type="checkbox" value="true" (click)="filterByPolicy($event)"> <span class="checkmark"></span>
-                  <p>Free Cancellation</p>
-                </label>
-              </li>
-              <li>
-                <label class="custom_checkbox">
-                  <input type="checkbox" value="false" (click)="filterByPolicy($event)"> <span class="checkmark"></span>
-                  <p>Non Refundable</p>
-                </label>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-</div>
- 
+
 <div class="filter_main_wrapper responsive_mobile">
   <div class="accordion block_shortby" id="accordion3">
     <div class="accordion-group">
-    <!-- <div class="accordion-group" [ngClass]="{'active': is_open === true}"> -->
-      <div class="accordion-heading" aria-expanded="true" data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">
+      <!-- <div class="accordion-group" [ngClass]="{'active': is_open === true}"> -->
+      <div class="accordion-heading">
         <a class="accordion-toggle">
           Filters
         </a>
@@ -247,15 +247,35 @@
                 <h5>Hotel Name</h5>
               </div>
               <div class="searchbar_box">
-                <!-- <input type="text" id="" class="amount" placeholder="Ahmedabad"> -->
-                <!-- <label for="">Search</label> -->
-                <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
+                <input type="text" placeholder="Search" tabindex="3" (keyup)="searchHotelName($event)">
+
+                <div class="search_suggetion_main" *ngIf="isHotelSearch">
+                  <div class="close_btn">
+                    <button type="button" class="close">
+                      <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+                    </button>
+                  </div>
+                  <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable
+                    track="all" pointerEventsMethod="scrollbar">
+                    <div class="suggtions_wrps_mn">
+                      <div class="suggtions">
+                        <div class="sug_line_box">
+                          <span class="linew_wrps">
+                            <div *ngFor="let item of filterHotelNames">
+                              <span class="line_names" (click)="clickHotelFilterName($event)">
+                                {{item.hotelName}}
+                              </span>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-scrollbar>
+                </div>
+                <!-- <ng-select [(ngModel)]="hotelname" [items]="hotelNamesArray" bindLabel="hotelName" [loading]=""
                   placeholder="Search" (change)="searchHotel()" [clearable]="false" [selectOnTab]="true">
-                </ng-select>
-                <!-- <div class="search_btns">
-                  <a (click)="clearHotelSearch()">Clear</a>
-                  <a (click)="searchHotel()">Search</a>
-                </div> -->
+                </ng-select> -->
+
               </div>
             </div>
             <div class="cmn_block price">
@@ -312,7 +332,7 @@
       </div>
     </form>
   </div> -->
-  
+
             <div class="cmn_block pad_no">
               <div class="accordion block_shortby inner_accodeions" id="accordion-starrates">
                 <div class="accordion-group" [ngClass]="{'active': lowToHighToggleRating  === true}">
@@ -408,13 +428,15 @@
               <ul>
                 <li>
                   <label class="custom_checkbox">
-                    <input type="checkbox" value="true" (click)="filterByPolicy($event)"> <span class="checkmark"></span>
+                    <input type="checkbox" value="true" (click)="filterByPolicy($event)"> <span
+                      class="checkmark"></span>
                     <p>Free Cancellation</p>
                   </label>
                 </li>
                 <li>
                   <label class="custom_checkbox">
-                    <input type="checkbox" value="false" (click)="filterByPolicy($event)"> <span class="checkmark"></span>
+                    <input type="checkbox" value="false" (click)="filterByPolicy($event)"> <span
+                      class="checkmark"></span>
                     <p>Non Refundable</p>
                   </label>
                 </li>

@@ -637,6 +637,9 @@ agm-map {
                 background: $background-white;
                 padding: 20px 15px;
                 border-radius: 10px;
+                @include tab-view {
+                    padding: 10px;
+                }
 
                 .card-body {
                     border: 1px solid $box-border-color;
@@ -645,8 +648,9 @@ agm-map {
                     //margin-top: 15px;
 
                     @include tab-view {
-                        border: none;
+                        //border: none;
                         margin: 0;
+                        padding: 10px;
                     }
 
                     .io_ru_wrps {
@@ -1831,7 +1835,7 @@ agm-map {
                                         color: $text-black;
                                         font-weight: 600;
                                         margin: 10px 0 5px;
-                                        max-width: 380px;
+                                        max-width: 340px;
                                         white-space: nowrap;
                                         overflow: hidden;
                                         text-overflow: ellipsis;
