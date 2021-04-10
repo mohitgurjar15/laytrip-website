@@ -10,9 +10,9 @@
     </div> -->
     <div class="accordion block_shortby" id="accordion-shortby">
       <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
-        <div class="accordion-heading" (click)="toggleLowToHigh()"> 
-          <a class="accordion-toggle" data-toggle="collapse"
-            data-parent="#accordion-shortby" href="#collapseshortBy">
+        <div class="accordion-heading" (click)="toggleLowToHigh()" data-toggle="collapse"
+        data-parent="#accordion-shortby" href="#collapseshortBy"> 
+          <a class="accordion-toggle" >
             Sort By
           </a> 
           <a class="anchor_link" [hidden]="lowToHighToggle !== true" (click)="resetSorting('total','ASC')">Clear</a>
@@ -144,8 +144,7 @@
     <div class="accordion block_shortby" id="accordion-shortby">
       <!-- <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}"> -->
       <div class="accordion-group">
-        <div class="accordion-heading" aria-expanded="true" data-toggle="collapse"
-        data-parent="#accordion-shortby" href="#collapseshortBy"> 
+        <div class="accordion-heading" aria-expanded="true"> 
           <a class="accordion-toggle" >
             Sort By
           </a> 

@@ -60,7 +60,7 @@ ng-scrollbar {
     }
 
     .search_suggetion_main {
-        height: 250px;
+        height: auto;
         margin-top: 5px;
         position: absolute;
         display: flex;
@@ -98,8 +98,11 @@ ng-scrollbar {
                 flex-direction: column;
 
                 .sug_line_box {
-                    margin-bottom: 10px;
                     float: left;
+
+                    &:last-child{
+                        margin-bottom: 0;
+                    }
 
                     .linew_wrps {
                         float: left;
@@ -108,6 +111,9 @@ ng-scrollbar {
                             margin-bottom: 10px;
                             display: flex;
                             cursor: pointer;
+                            &:last-child{
+                                margin: 0;
+                            }
                         }
                     }
                 }
