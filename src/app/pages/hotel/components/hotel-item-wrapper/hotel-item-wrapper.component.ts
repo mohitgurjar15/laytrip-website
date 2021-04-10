@@ -272,4 +272,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+
+  
 }

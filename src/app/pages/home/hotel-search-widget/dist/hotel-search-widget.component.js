@@ -165,6 +165,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             this.dateFilter.hideOverlay();
         }
         ;
+        console.log(this.rangeDates);
         if (this.rangeDates[0] && this.rangeDates[1]) {
             this.checkInDate = new Date();
             this.checkInMinDate = new Date();
