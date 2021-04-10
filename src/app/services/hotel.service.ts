@@ -53,8 +53,8 @@ export class HotelService {
     }
 
     getRoomDetails(id, token) {
-        this.headers.token = `${token}`;
-        return this.http.post(`${environment.apiUrl}v1/hotel/rooms`, { hotel_id: id }, this.commonFunction.setHeaders(this.headers))
+        //this.headers.token = `${token}`;
+        return this.http.post(`${environment.apiUrl}v1/hotel/rooms`, { hotel_id: id, bundle:token }, this.commonFunction.setHeaders(this.headers))
             .pipe(
                 catchError(this.handleError)
             );
