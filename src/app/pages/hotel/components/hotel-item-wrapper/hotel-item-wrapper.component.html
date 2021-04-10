@@ -54,9 +54,10 @@
 
                                                                 <div class="stars_text">
                                                                     <div class="stars_rating mohit">
-                                                                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                                            alt="Stars"
-                                                                            *ngFor='let in of counter(item.rating)'>
+                                                                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                                                                            alt="blank Stars Icon" >
+                                                                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                                                                            alt="filled Stars Icon" *ngFor='let in of counter(item.rating)'>
                                                                     </div>
 
                                                                 </div>
