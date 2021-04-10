@@ -37,6 +37,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     type: 'city',
     geo_codes: { lat: 40.7681, long: -73.9819 },
   };
+  showHotelDropDown:boolean=false;
+  searchItem:string="";
   searchedValue = [];
   hotelSearchFormSubmitted = false;
   searchHotelInfo: any = {
@@ -245,4 +247,15 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
+  openHotelDropDown(){
+    this.showHotelDropDown=true;
+  }
+  closeHotelDropDown(event:boolean){
+    this.showHotelDropDown=event;
+  }
+
+  searchLocation(){
+    this.searchItem=this.hotelSearchForm.controls.fromDestination.value;
+    //console.log(this.hotelSearchForm.controls.fromDestination.value)
+  }
 }
