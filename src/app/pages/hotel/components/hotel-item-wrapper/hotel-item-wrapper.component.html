@@ -66,22 +66,14 @@
                                                 </div>
                                             </div>
                                             <div class="block_detail_btm">
-                                                <span id="accordion_infos1" class="show_detail">
+                                                <span [id]="'accordion_infos1'+blockIndex" class="show_detail">
                                                     <a data-toggle="collapse" data-parent="#full_hotel_listing"
-                                                        href="#collapse1" aria-expanded="false"
+                                                        [href]="'#collapse'+blockIndex" aria-expanded="false"
                                                         aria-controls="collapse1" class="hotel_anchor">
                                                         Details
                                                     </a>
                                                 </span>
                                             </div>
-                                            <!-- <div class="block_detail_btm">
-                                            <div class="show_detail"
-                                                [ngClass]="{'open_detail':showHotelDetails[blockIndex]}">
-                                                <a class="show_more_detail anchor-tag"
-                                                    (click)="showDetails(blockIndex)">
-                                                    Details </a>
-                                            </div>
-                                        </div> -->
                                         </div>
                                     </div>
 
@@ -137,9 +129,9 @@
                                 <a class="show_more_detail anchor-tag" (click)="showDetails(blockIndex)">
                                     Details </a>
                             </div> -->
-                            <span id="accordion_infos1" class="show_detail">
+                            <span [id]="'accordion_infos1'+blockIndex" class="show_detail">
                                 <a data-toggle="collapse" data-parent="#full_hotel_listing"
-                                    href="#collapse1" aria-expanded="false"
+                                    [href]="'#collapse'+blockIndex" aria-expanded="false"
                                     aria-controls="collapse1" class="hotel_anchor">
                                     Details
                                 </a>
@@ -167,7 +159,7 @@
                 </div>
             </div>
 
-            <div id="collapse1" class="detail_info_show collapse">
+            <div [id]="'collapse'+blockIndex" class="detail_info_show collapse">
                 <div class="card-body">
                     <div class="io_ru_wrps">
                         <div class="installment_wprs">
@@ -325,9 +317,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="block_detail_btm">
-                                                                <span id="accordion_infos1" class="show_detail">
+                                                                <span [id]="'accordion_infos'+blockIndex" class="show_detail">
                                                                     <a data-toggle="collapse" data-parent="#full_hotel_listing"
-                                                                        href="#collapse1" aria-expanded="false"
+                                                                        [href]="'#collapse'+blockIndex" aria-expanded="false"
                                                                         aria-controls="collapse1" class="hotel_anchor">
                                                                         Details
                                                                     </a>
@@ -391,9 +383,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <span id="accordion_infos1" class="show_detail">
+                                            <span [id]="'accordion_infos'+blockIndex" class="show_detail">
                                                 <a data-toggle="collapse" data-parent="#full_hotel_listing"
-                                                    href="#collapse1" aria-expanded="false"
+                                                    [href]="'#collapse'+blockIndex" aria-expanded="false"
                                                     aria-controls="collapse1" class="hotel_anchor">
                                                     Details
                                                 </a>
@@ -428,7 +420,7 @@
 
                             <!-- <div class="detail_info_show" [attr.id]="blockIndex"
                                 *ngIf="showHotelDetails[blockIndex] === true"> -->
-                                <div class="detail_info_show" id="collapse1">
+                                <div class="detail_info_show" [id]="'collapse'+blockIndex">
                                 
                                 <div class="card-body">
                                     <div class="io_ru_wrps">
