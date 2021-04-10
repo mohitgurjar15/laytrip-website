@@ -46,7 +46,6 @@ var HotelSearchComponent = /** @class */ (function () {
         var info;
         this.route.queryParams.forEach(function (params) {
             info = JSON.parse(atob(_this.route.snapshot.queryParams['itenery']));
-            console.log(info);
             payload = {
                 check_in: params.check_in,
                 check_out: params.check_out,
@@ -58,7 +57,6 @@ var HotelSearchComponent = /** @class */ (function () {
             // info.forEach(item => {
             payload.occupancies.push({ rooms: info.rooms, adults: info.adults, children: info.child });
             // });
-            console.log(payload.occupancies);
             _this.getHotelSearchData(payload);
         });
     };

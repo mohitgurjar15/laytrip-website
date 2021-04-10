@@ -56,7 +56,6 @@ export class HotelSearchComponent implements OnInit {
     let info;
     this.route.queryParams.forEach(params => {
       info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-      console.log(info)
 
       payload = {
         check_in: params.check_in,
@@ -69,7 +68,6 @@ export class HotelSearchComponent implements OnInit {
       // info.forEach(item => {
         payload.occupancies.push({ rooms:info.rooms,adults: info.adults, children: info.child });
       // });
-      console.log(payload.occupancies)
       this.getHotelSearchData(payload);
     });
   }

@@ -1749,11 +1749,19 @@ ngb-datepicker {
 }
 
 // loader for hotel
-
+agm-map{
+    .agm-map-container-inner{
+        border-radius: 10px;
+    }
+}
 // start Search Modify section
 .hotels {
     &.search_result {
         padding: 25px 0 40px;
+
+        .container {
+            padding: 0;
+        }
 
         .hotel_detail_sidebar {
             &.sticky-top {
@@ -2689,6 +2697,7 @@ ngb-datepicker {
                     background: $background-white;
                     border: 1px solid $box-border-color;
                     border-radius: 35px;
+                    max-width: 160px;
 
                     .accordion-heading {
                         padding: 8px 15px;
@@ -2741,6 +2750,7 @@ ngb-datepicker {
 
                     &.active {
                         border-radius: 10px;
+                        max-width: 100%;
 
                         .accordion-heading {
                             &:after {
@@ -3019,7 +3029,7 @@ ngb-datepicker {
                         .accordion-group {
                             background: $background-white;
                             border: none;
-                            border-radius: 3px;
+                            border-radius: 35px;
 
                             .accordion-heading {
                                 padding: 0;
@@ -3061,6 +3071,7 @@ ngb-datepicker {
                             // }
 
                             .accordion-body {
+                                border-radius: 35px;
                                 .block_cmn {
                                     width: 100%;
                                     padding: 15px 15px;
@@ -3325,13 +3336,14 @@ ngb-datepicker {
                     background: $background-white;
                     border: 1px solid $box-border-color;
                     border-radius: 35px;
+                    max-width: 160px;
 
                     .accordion-heading {
                         padding: 8px 15px;
                         display: flex;
                         align-items: center;
                         cursor: pointer;
-
+                        
                         @include tab-view {
                             padding: 15px 25px 0;
                         }
@@ -3377,6 +3389,7 @@ ngb-datepicker {
 
                     &.active {
                         border-radius: 10px;
+                        max-width: 100%;
 
                         .accordion-heading {
                             &:after {
