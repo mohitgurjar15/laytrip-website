@@ -1,4 +1,5 @@
-<div class="search_suggetion_main" >
+<input class="" [(ngModel)]="searchItem" (keyup)="searchLocation()"  >
+<div class="search_suggetion_main" *ngIf="isShowDropDown">
     <div class="close_btn">
         <button (click)="closeHotelSuggestion()" type="button" class="close">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
@@ -12,8 +13,8 @@
                 <div class="sug_line_box" >
                     <span class="linew_wrps">
                         <ng-conatiner >
-                            <span class="line_names" >
-                                Hotel Name
+                            <span (click)="selectHotelItem(item)" class="line_names" *ngFor="let item of data">
+                                {{item.title}}
                             </span>
                         </ng-conatiner>
                     </span>

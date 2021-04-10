@@ -17,14 +17,13 @@
                 [label]="'DESTINATION'" [placeHolder]=defaultCity [defaultSelected]=fromDestinationInfo [tabIndex]=1
                 [defaultCity]=defaultCity (changeValue)="destinationChangedValue($event)">
               </app-search-hotel> -->
-              <input class="" formControlName="fromDestination" (blur)="searchLocation()" (click)="openHotelDropDown()">
-              <app-hotel-suggestion serachItem="serachItem" (closeHotelDropDown)="closeHotelDropDown($event)"></app-hotel-suggestion>
+              <!-- <input class="" formControlName="fromDestination" (blur)="searchLocation()" (click)="openHotelDropDown()"> -->
+              <app-hotel-suggestion [searchItem]=defaultCity (selectedHotel)="selectedHotel($event)"></app-hotel-suggestion>
             </div>
           </div>
         </li>
         <li class="grid_box secound">
-          <div class="date_form"
-            [ngClass]="{'hotel-error': hotelSearchFormSubmitted && hotelSearchForm.controls.fromDestination.errors && hotelSearchForm.controls.fromDestination.errors.required==true}">
+          <div class="date_form">
             <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
               <p-calendar #dateFilter inputId="range" dateFormat="M d yy" selectionMode="range" [(ngModel)]="rangeDates"
                 [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
