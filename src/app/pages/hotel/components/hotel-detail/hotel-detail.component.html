@@ -750,7 +750,7 @@
                         <div class="box_img">
                           <div class="block_im">
                             <div class="hotel_list_img_wrp">
-                              <ngx-gallery [options]="galleryOptions" [images]="item.galleryImages"></ngx-gallery>
+                              <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
                             </div>
                           </div>
                         </div>
@@ -804,12 +804,11 @@
                         <p>From <span>$45454</span> weekly
                         </p>
                       </div>
-                      <div class="block" *ngIf="item.secondary_start_price === 0">
-                        <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total | number :
-                            '1.2-2'}}</span></p>
+                      <div class="block">
+                        <p>Full Payment <span>$10</span></p>
                       </div>
                     </div> <a class="book_btn anchor-tag"
-                      [routerLink]="['/hotel/detail', item.id, item.bundle]">Select</a>
+                      [routerLink]="['/hotel/detail']">Select</a>
 
                   </div>
                 </div>
@@ -817,7 +816,7 @@
               <div class="mobile_box">
 
                 <div class="hotel_list_img_wrp">
-                  <ngx-gallery [options]="galleryOptions" [images]="item.galleryImages"></ngx-gallery>
+                  <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
                 </div>
                 <div class="middle_part">
                   <div class="detail_info">
@@ -831,7 +830,7 @@
                         <div class="stars_text">
                           <div class="stars_rating">
                             <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars"
-                              *ngFor='let in of counter(item.rating)'>
+                              *ngFor='let in of counter(5)'>
                           </div>
 
                         </div>
@@ -850,15 +849,14 @@
                   <div class="block_price block_pr">
                     <div class="block_inn_pr">
                       <div class="block">
-
                         <p>From <span>$121</span> weekly
                         </p>
                       </div>
-                      <div class="block" *ngIf="item.secondary_start_price === 0">
+                      <div class="block">
                         <p>Full Payment <span>$444</span></p>
                       </div>
                     </div> <a class="book_btn anchor-tag"
-                      [routerLink]="['/hotel/detail', item.id, item.bundle]">Select</a>
+                      [routerLink]="['/hotel/detail']">Select</a>
                     <p>Flexible Installments</p>
                   </div>
                 </div>
@@ -874,13 +872,12 @@
                     <span class="titles">
                       Installment Option 1
                     </span>
-                    <span class="texts" *ngIf="item.start_price>0">
-                      ${{item.start_price | number : '1.2-2'}} downpayment and
-                      {{item.no_of_weekly_installment}} weekly installments of
-                      ${{item.secondary_start_price |
-                      number : '1.2-2'}}
+                    <span class="texts">
+                      4 downpayment and
+                      4 weekly installments of
+                      4
                     </span>
-                    <span class="texts" *ngIf="item.start_price==0">
+                    <span class="texts">
                       Flights within 30 days of travel not available in installments
                     </span>
                   </div>
@@ -888,12 +885,12 @@
                     <span class="titles">
                       Installment Option 2
                     </span>
-                    <span class="texts" *ngIf="item.start_price>0">
-                      ${{item.second_down_payment | number : '1.2-2'}} downpayment and
-                      {{item.no_of_weekly_installment_2}} bi-weekly installments of
-                      ${{item.secondary_start_price_2 | number : '1.2-2'}}
+                    <span class="texts" >
+                      $20 downpayment and
+                      4 bi-weekly installments of
+                      $10
                     </span>
-                    <span class="texts" *ngIf="item.start_price==0">
+                    <span class="texts" >
                       Flights within 30 days of travel not available in installments
                     </span>
                   </div>
@@ -901,13 +898,12 @@
                     <span class="titles">
                       Installment Option 3
                     </span>
-                    <span class="texts" *ngIf="item.start_price>0">
-                      ${{item.third_down_payment | number : '1.2-2'}} downpayment and
-                      {{item.no_of_weekly_installment_3}} monthly installments of
-                      ${{item.secondary_start_price_3 |
-                      number : '1.2-2'}}
+                    <span class="texts">
+                      $12 downpayment and
+                      4 monthly installments of
+                      $4
                     </span>
-                    <span class="texts" *ngIf="item.start_price==0">
+                    <span class="texts">
                       Flights within 30 days of travel not available in installments
                     </span>
                   </div>
@@ -916,7 +912,7 @@
                       Average Nightly Rate
                     </span>
                     <span class="texts">
-                      ${{item.night_rate}} including taxes and fees
+                      $10 including taxes and fees
                     </span>
                     <div class="notifi_text mobile_notifi">
                       More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
