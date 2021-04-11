@@ -128,11 +128,21 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   }
 
   onScrollDown() {
+
     this.scrollLoading = true;
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.hotelListArray.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
         this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+        for(let i=0; i < this.hotelListArray.length; i++){
+          this.hotelDetails[i].galleryImages=[];
+          for(let image of this.hotelDetails[i].images)
+          this.hotelDetails[i].galleryImages.push({
+            small: image,
+            medium:image,
+            big:image
+          })
+        }
         this.scrollLoading = false;
       } else {
         this.isFullListDisplayed = true;
