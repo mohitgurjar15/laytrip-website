@@ -48,6 +48,7 @@ export class HotelDetailComponent implements OnInit {
   loading = false;
   currency;
   showFareDetails: number = 0;
+  showMoreAmenties:boolean=false;
   roomSummary: any = {
     hotelInfo: {},
     roomDetail: {
@@ -61,6 +62,7 @@ export class HotelDetailComponent implements OnInit {
   dataLoading = false;
 
   galleryOptions: NgxGalleryOptions[];
+  galleryOptionsMain: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   cartItems = [];
   addCartLoading:boolean=false;
@@ -87,29 +89,26 @@ export class HotelDetailComponent implements OnInit {
       {
         width: '270px',
         height: '100%',
-        thumbnailsColumns: 1,
-        image: false,
+        thumbnails: false,
         imageAnimation: NgxGalleryAnimation.Slide,
         spinnerIcon: 'fa fa-spinner fa-pulse fa-3x fa-fw',
-        imageArrows: false,
         imageSwipe:true,
-        thumbnailsArrows: false,
-        imageAutoPlay: true,
-        thumbnailsRemainingCount: true
-      },
+        previewRotate:true,
+        preview:false,
+      }
+    ];
+
+    this.galleryOptionsMain = [
       {
-        thumbnailsColumns: 5,
-        thumbnailsRows: 1,
-        thumbnailsPercent: 30,
-        imagePercent: 100,
-        thumbnailMargin: 3,
-        thumbnailsMargin: 3
-      },
-      {
-        breakpoint: 500,
-        width: '270px',
-        height: '100%'
-      },
+        width: '100%',
+        height: '400px',
+        thumbnails: false,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        spinnerIcon: 'fa fa-spinner fa-pulse fa-3x fa-fw',
+        imageSwipe:true,
+        previewRotate:true,
+        preview:false,
+      }
     ];
 
     this.route.params.subscribe(params => {
@@ -237,5 +236,9 @@ export class HotelDetailComponent implements OnInit {
 
   removeCartFullError(){
     this.isCartFull=false;
+  }
+
+  toggleAmenities(){
+    this.showMoreAmenties=!this.showMoreAmenties;
   }
 }

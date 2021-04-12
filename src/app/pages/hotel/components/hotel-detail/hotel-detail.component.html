@@ -729,13 +729,14 @@
                 src="{{s3BucketUrl}}assets/images/icon/star_blank.svg" alt="blank Stars Icon">
             </span>
           </span>
+          
         </div>
         <div class="col_right">
           <div class="price_wrpper">
             <small class="desk_small">Flexible Installments</small>
             <span>
               From
-              <span class="big_font">$54.54</span>
+              <span class="big_font">${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}}</span>
               weekly
             </span>
             <small class="mobile_small">Flexible Installments</small>
@@ -744,6 +745,7 @@
     </div>
     <div class="row">
       <div class="col-lg-8">
+        <ngx-gallery [options]="galleryOptionsMain" [images]="galleryImages"></ngx-gallery>
         <div class="description_wrpper">
           <h3 class="common_title_wrps">Description</h3>
           <p>
@@ -752,7 +754,7 @@
         </div>
         <div class="room_list_wrp" id="full_hotel_listing">
           <h3 class="common_title_wrps">Rooms</h3>
-          <div class="search_block">
+          <div class="search_block" *ngFor="let room of hotelRoomArray; let index = index;">
             <div class="listing_block">
               <div class="listing_inner_box_wrppr">
                 <div class="desktop_box">
@@ -772,11 +774,11 @@
                             <div class="block_detail">
                               <div class="block_detail_top">
                                 <div class="detail_info">
-                                  <h4>OYO Hotel East Hanover NJ-10</h4>
+                                  <h4>{{room.title}}</h4>
                                   <span class="adress_span">
-                                    East Hanover, 130 New Jersey 10, NJ, New Jersey, US, United States, NJ 07936
+                                    Sleeps {{room.occupancy}}                                 
                                   </span>
-                                  <div class="review_section_wrap">
+                                  <!-- <div class="review_section_wrap">
                                     <div class="left_bar">
 
                                       <div class="stars_text">
@@ -789,13 +791,13 @@
 
                                       </div>
                                     </div>
-                                  </div>
+                                  </div> -->
                                 </div>
                               </div>
                             </div>
                             <div class="block_detail_btm">
-                              <span id="accordion_infos1" class="show_detail">
-                                <a data-toggle="collapse" data-parent="#full_hotel_listing" href="#collapse1"
+                              <span [id]="'accordion_infos1'+index" class="show_detail">
+                                <a data-toggle="collapse" data-parent="#full_hotel_listing" [href]="'#collapse1'+index"
                                   aria-expanded="false" aria-controls="collapse1" class="hotel_anchor">
                                   Details
                                 </a>
@@ -812,13 +814,13 @@
                   <div class="box_right">
                     <div class="block_price block_pr">
                       <div class="block_inn_pr">
-                        <div class="block">
+                        <div class="block" *ngIf="room.start_price>0">
                           <p>Flexible Installments</p>
-                          <p>From <span>$45454</span> weekly
+                          <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
                           </p>
                         </div>
-                        <div class="block">
-                          <p>Full Payment <span>$10</span></p>
+                        <div class="block" *ngIf="room.start_price==0">
+                          <p>Full Payment <span>${{ room.selling.total | number : '1.2-2' }}</span></p>
                         </div>
                       </div> <a class="book_btn anchor-tag" [routerLink]="['/hotel/detail']">Select</a>
 
@@ -832,26 +834,15 @@
                   </div>
                   <div class="middle_part">
                     <div class="detail_info">
-                      <h4>asaddsadas</h4>
+                      <h4>{{room.title}}</h4>
                       <span class="adress_span">
-                        East Hanover, 130 New Jersey 10, NJ, New Jersey, US, United States, NJ 07936
+                        Sleeps {{room.occupancy}}
                       </span>
-                      <div class="review_section_wrap">
-                        <div class="left_bar">
-
-                          <div class="stars_text">
-                            <div class="stars_rating">
-                              <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars"
-                                *ngFor='let in of counter(5)'>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
+                      
                     </div>
 
-                    <span id="accordion_infos1" class="show_detail">
-                      <a data-toggle="collapse" data-parent="#full_hotel_listing" href="#collapse1"
+                    <span [id]="'accordion_infos1'+index" class="show_detail">
+                      <a data-toggle="collapse" data-parent="#full_hotel_listing" [href]="'#collapse1'+blockIndex"
                         aria-expanded="false" aria-controls="collapse1" class="hotel_anchor">
                         Details
                       </a>
@@ -860,12 +851,12 @@
                   <div class="thrd_part">
                     <div class="block_price block_pr">
                       <div class="block_inn_pr">
-                        <div class="block">
-                          <p>From <span>$121</span> weekly
+                        <div class="block" *ngIf="room.start_price>0">
+                          <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
                           </p>
                         </div>
-                        <div class="block">
-                          <p>Full Payment <span>$444</span></p>
+                        <div class="block" *ngIf="room.start_price==0">
+                          <p>Full Payment <span>${{ room.selling.total | number : '1.2-2' }}</span></p>
                         </div>
                       </div> <a class="book_btn anchor-tag" [routerLink]="['/hotel/detail']">Select</a>
                       <p>Flexible Installments</p>
@@ -875,7 +866,7 @@
               </div>
             </div>
 
-            <div id="collapse1" class="detail_info_show collapse">
+            <div [id]="'collapse1'+index" class="detail_info_show collapse">
               <div class="card-body">
                 <div class="io_ru_wrps">
                   <div class="installment_wprs">
@@ -883,12 +874,11 @@
                       <span class="titles">
                         Installment Option 1
                       </span>
-                      <span class="texts">
-                        4 downpayment and
-                        4 weekly installments of
-                        4
+                      <span class="texts" *ngIf="room.start_price>0">
+                        ${{room.start_price | number : '1.2-2'}} downpayment and {{room.no_of_weekly_installment}} weekly installments of 
+                        ${{room.secondary_start_price | number : '1.2-2'}}
                       </span>
-                      <span class="texts">
+                      <span class="texts" *ngIf="room.start_price==0">
                         Flights within 30 days of travel not available in installments
                       </span>
                     </div>
@@ -896,12 +886,12 @@
                       <span class="titles">
                         Installment Option 2
                       </span>
-                      <span class="texts">
-                        $20 downpayment and
-                        4 bi-weekly installments of
-                        $10
+                      <span class="texts" *ngIf="room.start_price>0">
+                        ${{room.second_down_payment | number : '1.2-2'}} downpayment and
+                                                    {{room.no_of_weekly_installment_2}} bi-weekly installments of
+                                                    ${{room.secondary_start_price_2 | number : '1.2-2'}}
                       </span>
-                      <span class="texts">
+                      <span class="texts" *ngIf="room.start_price==0">
                         Flights within 30 days of travel not available in installments
                       </span>
                     </div>
@@ -909,12 +899,13 @@
                       <span class="titles">
                         Installment Option 3
                       </span>
-                      <span class="texts">
-                        $12 downpayment and
-                        4 monthly installments of
-                        $4
+                      <span class="texts" *ngIf="room.start_price>0">
+                        ${{room.third_down_payment | number : '1.2-2'}} downpayment and
+                                                    {{room.no_of_weekly_installment_3}} monthly installments of
+                                                    ${{room.secondary_start_price_3 |
+                                                    number : '1.2-2'}}
                       </span>
-                      <span class="texts">
+                      <span class="texts" *ngIf="room.start_price==0">
                         Flights within 30 days of travel not available in installments
                       </span>
                     </div>
@@ -923,7 +914,7 @@
                         Average Nightly Rate
                       </span>
                       <span class="texts">
-                        $10 including taxes and fees
+                        ${{room.night_rate | number : '1.2-2'}} including taxes and fees
                       </span>
                       <div class="notifi_text mobile_notifi">
                         More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
@@ -951,41 +942,51 @@
 
             </div>
           </div>
+
+          
         </div>
       </div>
       <div class="col-lg-4">
 
         <div class="map_wrapper">
-          <agm-map #gm [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10">
+          <!-- <agm-map #gm [latitude]="hotelDetails.hotelLocations.latitude" [longitude]="hotelDetails.hotelLocations.longitude" [zoom]="10">
             <agm-marker-cluster
               imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-              <agm-marker #marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
-                [longitude]="hotel.geocodes.longitude"
+              <agm-marker #marker [latitude]="hotelDetails.hotelLocations.latitude"
+                [longitude]="hotelDetails.hotelLocations.longitude"
                 [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-map-marker.svg', scaledSize: {height: 80,width: 48}}"
                 [label]="{text:currency?.symbol+hotel?.selling?.total, fontSize: '12px', class: 'mapLabel'}"
                 (mouseOver)="infoWindowAction(infoWindow, $event, 'open')"
                 (mouseOut)="infoWindowAction(infoWindow, $event, 'close')"
                 (markerClick)="infoWindowAction(hotel.id, $event, 'click')">
-                <!-- [iconUrl]="s3BucketUrl+'assets/images/hotels/custom-map-marker.svg'" -->
                 <agm-info-window [disableAutoPan]="false" #infoWindow>
                   <div>
-                    <p>{{hotel.name}}</p>
+                    <p>{{hotelDetails.name}}</p>
                   </div>
                 </agm-info-window>
               </agm-marker>
             </agm-marker-cluster>
-          </agm-map>
+          </agm-map> -->
+          <div style="height: 400px; width: 100%;">
+              <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
+              [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
+                <agm-marker iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                [latitude]="hotelDetails?.hotelLocations?.latitude"
+                [longitude]="hotelDetails?.hotelLocations?.longitude">
+              </agm-marker>
+            </agm-map>
+        </div>
         </div>
         <div class="amenities_wrpper">
           <h3 class="common_title_wrps">Amenities</h3>
-          <ul>
-            <li>
-              Swimming Pool
-            </li>
+          <ul *ngIf="hotelDetails.amenities?.list.length">
+            <ng-container *ngFor="let amenity of hotelDetails.amenities.list ; let i=index">
+              <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity}}</li>
+              <li *ngIf="showMoreAmenties">{{amenity}}</li>
+            </ng-container>
           </ul>
-          <a href="javascript:void(0);" class="cta_link">
-            More
-          </a>
+          <a *ngIf="!showMoreAmenties && hotelDetails.amenities?.list.length>10" (click)="toggleAmenities()" class="cta_link hover-link">More</a>
+          <a *ngIf="showMoreAmenties && hotelDetails.amenities?.list.length>10" (click)="toggleAmenities()" class="cta_link hover-link">Less</a>
         </div>
       </div>
     </div>
