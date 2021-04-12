@@ -85,13 +85,14 @@ export class HotelDetailComponent implements OnInit {
     let occupancies;
     this.galleryOptions = [
       {
-        width: '100%',
-        height: '400px',
+        width: '270px',
+        height: '100%',
         thumbnailsColumns: 1,
         image: false,
         imageAnimation: NgxGalleryAnimation.Slide,
         spinnerIcon: 'fa fa-spinner fa-pulse fa-3x fa-fw',
         imageArrows: false,
+        imageSwipe:true,
         thumbnailsArrows: false,
         imageAutoPlay: true,
         thumbnailsRemainingCount: true
@@ -106,8 +107,8 @@ export class HotelDetailComponent implements OnInit {
       },
       {
         breakpoint: 500,
-        width: '100%',
-        height: '600px'
+        width: '270px',
+        height: '100%'
       },
     ];
 

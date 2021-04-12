@@ -157,6 +157,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
     } */
+    //console.log("inn")
     
   }
 
@@ -251,6 +252,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log("changes",changes)
     if(changes.hotelDetails.currentValue.length){
       this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);;
       for(let i=0; i < this.hotelListArray.length; i++){
