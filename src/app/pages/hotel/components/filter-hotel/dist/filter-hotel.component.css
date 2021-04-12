@@ -497,18 +497,25 @@ ng-scrollbar {
   cursor: pointer;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-}
-.star-rating label:hover .filled {
-  display: block;
-}
-.star-rating label:hover .blank {
-  display: none;
-}
-.star-rating label:hover ~ label .filled {
-  display: block;
-}
-.star-rating label:hover ~ label .blank {
-  display: none;
+  /* &:hover {
+      .filled {
+          display: block;
+      }
+
+      .blank {
+          display: none;
+      }
+
+      ~label {
+          .filled {
+              display: block;
+          }
+
+          .blank {
+              display: none;
+          }
+      }
+  } */
 }
 .star-rating label .filled {
   display: none;

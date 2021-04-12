@@ -36,10 +36,11 @@
                       <div class="suggtions">
                         <div class="sug_line_box">
                           <span class="linew_wrps">
-                            <span class="line_names" (click)="clickHotelFilterName($event)" *ngFor="let item of filterHotelNames">
+                            <span class="line_names" (click)="clickHotelFilterName($event)"
+                              *ngFor="let item of filterHotelNames">
                               {{item.hotelName}}
                             </span>
-                        </span>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -54,9 +55,10 @@
               </div>
             </div>
             <div class="cmn_block price">
-              <!-- <div class="block_top_in">
-              <h5>Total Price</h5>
-            </div>
+              <div class="block_top_in">
+                <h5>Total Price</h5>
+              </div>
+              <!--
             <ul class="block_price_radio">
               <li>
                 <label class="custom_radio">Total
@@ -80,56 +82,24 @@
                   <!-- *ngIf="priceValue && priceOptions && priceHighValue" -->
                 </div>
               </form>
-              <ul class="block_price_radio">
-                <li>
-                  <label class="custom_radio">Total
-                    <input type="radio" [checked]="sortType=='filter_total_price'" name="fl_price_radio"
-                      (click)="filterHotelByPrice('total','filter_total_price')">
-                    <span class="checkmark"></span> </label>
-                </li>
-                <li>
-                  <label class="custom_radio">Weekly
-                    <input type="radio" [checked]="sortType=='filter_weekly_price'" name="fl_price_radio"
-                      (click)="filterHotelByPrice('weekly','filter_weekly_price')"> <span class="checkmark"></span>
-                  </label>
-                </li>
-              </ul>
-              <form [formGroup]="priceSlider">
+              
+            </div>
+           <!--  <div class="cmn_block price">
+              <div class="block_top_in">
+                <h5>Installment Amount</h5>
+              </div>
+              
+              <form [formGroup]="partialPriceSlider">
                 <div class="custom_range_slide">
-                  <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
-                  <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
-                    [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions"
-                    (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
-                  <!-- *ngIf="priceValue && priceOptions && priceHighValue" -->
+                  <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol }}{{partialPaymentHighValue}}
+                  </p>
+                  <ng5-slider *ngIf="partialPaymentValue && priceOptions && partialPaymentHighValue"
+                    [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue"
+                    formControlName="partial_price" [options]="partialPaymentOptions"
+                    (userChangeEnd)="fliterByPartialPayment($event)"></ng5-slider>
                 </div>
               </form>
-            </div>
-            <!-- <div class="cmn_block price">
-  <div class="block_top_in">
-    <h5>Price</h5>
-  </div>
-  <ul class="block_price_radio">
-    <li>
-      <label class="custom_radio">Total
-        <input type="radio" [checked]="sortType=='filter_total_price'" name="fl_price_radio"
-          (click)="filterHotelByPrice('total','filter_total_price')">
-        <span class="checkmark"></span> </label>
-    </li>
-    <li>
-      <label class="custom_radio">Weekly
-        <input type="radio" [checked]="sortType=='filter_weekly_price'" name="fl_price_radio"
-          (click)="filterHotelByPrice('weekly','filter_weekly_price')"> <span class="checkmark"></span> </label>
-    </li>
-  </ul>
-  <form [formGroup]="partialPriceSlider">
-    <div class="custom_range_slide">
-      <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol }}{{partialPaymentHighValue}}</p>
-      <ng5-slider *ngIf="partialPaymentValue && priceOptions && partialPaymentHighValue" [(value)]="partialPaymentValue"
-        [(highValue)]="partialPaymentHighValue" formControlName="partial_price" [options]="partialPaymentOptions"
-        (userChangeEnd)="fliterByPartialPayment($event)"></ng5-slider>
-    </div>
-  </form>
-</div> -->
+            </div> -->
 
             <div class="cmn_block pad_no">
               <div class="accordion block_shortby inner_accodeions" id="accordion-starrates">
@@ -281,9 +251,10 @@
                       <div class="suggtions">
                         <div class="sug_line_box">
                           <span class="linew_wrps">
-                              <span class="line_names" (click)="clickHotelFilterName($event)" *ngFor="let item of filterHotelNames">
-                                {{item.hotelName}}
-                              </span>
+                            <span class="line_names" (click)="clickHotelFilterName($event)"
+                              *ngFor="let item of filterHotelNames">
+                              {{item.hotelName}}
+                            </span>
                           </span>
                         </div>
                       </div>

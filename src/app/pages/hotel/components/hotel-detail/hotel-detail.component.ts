@@ -12,6 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
 import { CartService } from '../../../../services/cart.service';
 import { EventEmitter } from 'events';
+declare var $: any;
 
 
 @Component({
@@ -78,6 +79,7 @@ export class HotelDetailComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    $('body').addClass('cms-bgColor');
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     let occupancies;
@@ -125,6 +127,7 @@ export class HotelDetailComponent implements OnInit {
         this.hotelDetails = {
           name: res.data.hotel.name,
           city_name: res.data.hotel.address.city_name,
+          address: res.data.hotel.full_address,
           state_code: res.data.hotel.address.state_code,
           country_name: res.data.hotel.address.country_name,
           rating: res.data.hotel.rating,

@@ -157,10 +157,18 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
     }
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo=> {
-      if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){       
+      if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){      
+
       this.fromDestinationInfo.city = hotelInfo.city;
+      this.searchHotelInfo.check_in =  this.checkInDate = moment().add(31,'days').toDate();
+      this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1,'days').toDate();
       this.searchHotelInfo.latitude =   hotelInfo.lat;
       this.searchHotelInfo.longitude = hotelInfo.long;
+
+      this.checkInMinDate = moment(this.customStartDateValidation).toDate();
+
+      this.rangeDates = [this.checkInDate, this.checkOutDate];
+
       }
     });
     this.homeService.removeToString('hotel'); 
@@ -174,14 +182,13 @@ export class HotelSearchWidgetComponent implements OnInit {
 
     var curretdate = moment().format();
 
-    let  juneDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
+    let  customStartDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
     
-    let daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
-
-    if(curretdate < juneDate && daysDiffFromCurToJune > 30 ){    
-      this.checkInDate =  moment(juneDate).toDate();
+    let daysDiff = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+    if(curretdate < customStartDate && daysDiff > 30 ){    
+      this.checkInDate =  moment(customStartDate).toDate();
        this.checkInMinDate = this.checkInDate; 
-      } else if(daysDiffFromCurToJune < 30){
+      } else if(daysDiff < 30){
         this.checkInDate =  moment(curretdate).add(31,'days').toDate();
         this.checkInMinDate = this.checkInDate; 
         // this.departureDate = date; 
@@ -197,14 +204,12 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();
     };
-    if (this.rangeDates[0] && this.rangeDates[1]) {
-      this.checkInDate = new Date();
-      this.checkInMinDate = new Date();
-      this.checkOutDate = this.rangeDates[1];
-      this.checkOutMinDate = this.rangeDates[1];
+      this.checkInDate =  date;
+      this.checkInMinDate = moment(this.customStartDateValidation,'YYYY-MM-DD').add(1,'days').toDate();
+      this.checkOutDate =  moment(this.checkInDate).add(1,'days').toDate();
+      this.checkOutMinDate = this.checkOutDate;
       this.searchHotelInfo.check_in = this.rangeDates[0];
-      this.searchHotelInfo.check_out = this.rangeDates[1];
-    }
+      this.rangeDates[1]= this.searchHotelInfo.check_out = this.checkOutDate;
   }
 
   changeGuestInfo(event) {

@@ -17,11 +17,9 @@
 </div>
 
 <div id="full_hotel_listing">
-    <div [hidden]="isMapView" *ngIf="hotelListArray.length" [@listAnimation]="hotelListArray.length"
-        (@listAnimation.start)="logAnimation($event)" (@listAnimation.done)="logAnimation($event)"
-        class="result_listing hotel_listings infinite-search-results" (clickOutside)="closeHotelDetail()" infiniteScroll
-        [infiniteScrollDistance]="scrollDistance" [infiniteScrollDisabled]="isFullListDisplayed"
-        [infiniteScrollThrottle]="throttle" [scrollWindow]="false" (scrolled)="onScrollDown()">
+    <div [hidden]="isMapView" *ngIf="hotelListArray.length" class="result_listing hotel_listings infinite-search-results" (clickOutside)="closeHotelDetail()" infinite-scroll
+        [infiniteScrollDistance]="2" 
+        [infiniteScrollThrottle]="50"  (scrolled)="onScrollDown()">
 
         <div class="search_block" *ngFor="let item of hotelListArray; let blockIndex = index;">
             <div class="listing_block">
@@ -51,15 +49,14 @@
                                                         </span>
                                                         <div class="review_section_wrap">
                                                             <div class="left_bar">
-
                                                                 <div class="stars_text">
-                                                                    <div class="stars_rating mohit">
-                                                                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
-                                                                            alt="blank Stars Icon" >
-                                                                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                                                                    <div class="stars_rating {{item.rating}}">                                                                    
+                                                                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                                                                             alt="filled Stars Icon" *ngFor='let in of counter(item.rating)'>
+                                                                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                                                                            alt="blank Stars Icon" *ngFor='let in of counter(5 - item.rating)' >
+                                                                    
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -67,22 +64,14 @@
                                                 </div>
                                             </div>
                                             <div class="block_detail_btm">
-                                                <span id="accordion_infos1" class="show_detail">
+                                                <span [id]="'accordion_infos1'+blockIndex" class="show_detail">
                                                     <a data-toggle="collapse" data-parent="#full_hotel_listing"
-                                                        href="#collapse1" aria-expanded="false"
+                                                        [href]="'#collapse'+blockIndex" aria-expanded="false"
                                                         aria-controls="collapse1" class="hotel_anchor">
                                                         Details
                                                     </a>
                                                 </span>
                                             </div>
-                                            <!-- <div class="block_detail_btm">
-                                            <div class="show_detail"
-                                                [ngClass]="{'open_detail':showHotelDetails[blockIndex]}">
-                                                <a class="show_more_detail anchor-tag"
-                                                    (click)="showDetails(blockIndex)">
-                                                    Details </a>
-                                            </div>
-                                        </div> -->
                                         </div>
                                     </div>
 
@@ -138,9 +127,9 @@
                                 <a class="show_more_detail anchor-tag" (click)="showDetails(blockIndex)">
                                     Details </a>
                             </div> -->
-                            <span id="accordion_infos1" class="show_detail">
+                            <span [id]="'accordion_infos1'+blockIndex" class="show_detail">
                                 <a data-toggle="collapse" data-parent="#full_hotel_listing"
-                                    href="#collapse1" aria-expanded="false"
+                                    [href]="'#collapse'+blockIndex" aria-expanded="false"
                                     aria-controls="collapse1" class="hotel_anchor">
                                     Details
                                 </a>
@@ -168,7 +157,7 @@
                 </div>
             </div>
 
-            <div id="collapse1" class="detail_info_show collapse">
+            <div [id]="'collapse'+blockIndex" class="detail_info_show collapse">
                 <div class="card-body">
                     <div class="io_ru_wrps">
                         <div class="installment_wprs">
@@ -326,9 +315,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="block_detail_btm">
-                                                                <span id="accordion_infos1" class="show_detail">
+                                                                <span [id]="'accordion_infos'+blockIndex" class="show_detail">
                                                                     <a data-toggle="collapse" data-parent="#full_hotel_listing"
-                                                                        href="#collapse1" aria-expanded="false"
+                                                                        [href]="'#collapse'+blockIndex" aria-expanded="false"
                                                                         aria-controls="collapse1" class="hotel_anchor">
                                                                         Details
                                                                     </a>
@@ -392,9 +381,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <span id="accordion_infos1" class="show_detail">
+                                            <span [id]="'accordion_infos'+blockIndex" class="show_detail">
                                                 <a data-toggle="collapse" data-parent="#full_hotel_listing"
-                                                    href="#collapse1" aria-expanded="false"
+                                                    [href]="'#collapse'+blockIndex" aria-expanded="false"
                                                     aria-controls="collapse1" class="hotel_anchor">
                                                     Details
                                                 </a>
@@ -429,7 +418,7 @@
 
                             <!-- <div class="detail_info_show" [attr.id]="blockIndex"
                                 *ngIf="showHotelDetails[blockIndex] === true"> -->
-                                <div class="detail_info_show" id="collapse1">
+                                <div class="detail_info_show" [id]="'collapse'+blockIndex">
                                 
                                 <div class="card-body">
                                     <div class="io_ru_wrps">

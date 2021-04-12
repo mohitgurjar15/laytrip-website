@@ -195,7 +195,7 @@ ng-scrollbar {
         -webkit-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
 
-        &:hover {
+        /* &:hover {
             .filled {
                 display: block;
             }
@@ -213,7 +213,7 @@ ng-scrollbar {
                     display: none;
                 }
             }
-        }
+        } */
 
         .filled {
             display: none;
