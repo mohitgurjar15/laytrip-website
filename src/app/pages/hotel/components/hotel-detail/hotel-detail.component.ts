@@ -62,6 +62,7 @@ export class HotelDetailComponent implements OnInit {
   dataLoading = false;
 
   galleryOptions: NgxGalleryOptions[];
+  galleryOptionsMain: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   cartItems = [];
   addCartLoading:boolean=false;
@@ -88,6 +89,19 @@ export class HotelDetailComponent implements OnInit {
       {
         width: '270px',
         height: '100%',
+        thumbnails: false,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        spinnerIcon: 'fa fa-spinner fa-pulse fa-3x fa-fw',
+        imageSwipe:true,
+        previewRotate:true,
+        preview:false,
+      }
+    ];
+
+    this.galleryOptionsMain = [
+      {
+        width: '100%',
+        height: '400px',
         thumbnails: false,
         imageAnimation: NgxGalleryAnimation.Slide,
         spinnerIcon: 'fa fa-spinner fa-pulse fa-3x fa-fw',
