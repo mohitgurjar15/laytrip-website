@@ -178,7 +178,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     } else if (action === 'close') {
       template.close();
     } else if (action === 'click') {
-      console.log(template,"-----")
       this.mapListArray[0]= this.hotelListArray.find(hotel=>hotel.id==template);
       //this.showMapInfo(template);
     }
@@ -201,7 +200,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
   differentView(view) {
     this.isMapView = (view !== 'listView');
-    console.log("this.isMapView",this.isMapView)
     if(!this.isMapView){
       this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
     }
@@ -262,7 +260,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes",changes)
     if(changes.hotelDetails.currentValue.length){
       this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);;
       for(let i=0; i < this.hotelListArray.length; i++){
@@ -283,7 +280,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
           })          
         }        
       }
-      console.log(this.hotelDetails)
 
       this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
     }

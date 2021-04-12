@@ -131,7 +131,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             template.close();
         }
         else if (action === 'click') {
-            console.log(template, "-----");
             this.mapListArray[0] = this.hotelListArray.find(function (hotel) { return hotel.id == template; });
             //this.showMapInfo(template);
         }
@@ -151,7 +150,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
     };
     HotelItemWrapperComponent.prototype.differentView = function (view) {
         this.isMapView = (view !== 'listView');
-        console.log("this.isMapView", this.isMapView);
         if (!this.isMapView) {
             this.mapListArray[0] = Object.assign({}, this.hotelListArray[0]);
         }
@@ -206,7 +204,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         });
     };
     HotelItemWrapperComponent.prototype.ngOnChanges = function (changes) {
-        console.log("changes", changes);
         if (changes.hotelDetails.currentValue.length) {
             this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);
             ;
@@ -230,7 +227,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                     });
                 }
             }
-            console.log(this.hotelDetails);
             this.mapListArray[0] = Object.assign({}, this.hotelListArray[0]);
         }
         //this.hotelsList = changes.hotelDetails.currentValue;
