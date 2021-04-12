@@ -1040,6 +1040,16 @@ agm-map {
                     color: $text_grey_dark;
                     font-size: 18px;
                     margin-top: 3px;
+
+                    &::before {
+                        content: '';
+                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/arrow_right_circle.svg);
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        padding: 1px 10px;
+                        margin-right: 5px;
+                    }
+
                     @include tab-view {
                         font-size: 14px;
                     }
@@ -1049,6 +1059,7 @@ agm-map {
             .cta_link {
                 font-size: 15px;
                 color: $text_light_yellow;
+
                 @include tab-view {
                     font-size: 12px;
                 }
