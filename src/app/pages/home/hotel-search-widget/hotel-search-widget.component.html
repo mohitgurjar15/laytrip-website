@@ -13,16 +13,18 @@
         <li class="grid_box first"> 
           <div class="hotel_where">
             <div class="search_area">
-              <app-search-hotel [form]="hotelSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'"
+              <!-- <app-search-hotel [form]="hotelSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'"
                 [label]="'DESTINATION'" [placeHolder]=defaultCity [defaultSelected]=fromDestinationInfo [tabIndex]=1
                 [defaultCity]=defaultCity (changeValue)="destinationChangedValue($event)">
-              </app-search-hotel>
+              </app-search-hotel> -->
+              <!-- <input class="" formControlName="fromDestination" (blur)="searchLocation()" (click)="openHotelDropDown()"> -->
+              <label for="">Destination</label>
+              <app-hotel-suggestion [searchItem]=defaultCity (selectedHotel)="selectedHotel($event)"></app-hotel-suggestion>
             </div>
           </div>
         </li>
         <li class="grid_box secound">
-          <div class="date_form"
-            [ngClass]="{'hotel-error': hotelSearchFormSubmitted && hotelSearchForm.controls.fromDestination.errors && hotelSearchForm.controls.fromDestination.errors.required==true}">
+          <div class="date_form">
             <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
               <!-- <label>Check In-Check Out</label> -->
               <p-calendar #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range" [(ngModel)]="rangeDates"
@@ -30,25 +32,8 @@
                 panelStyleClass="calender-responsive-view round_trip_calender laytrip-cal-view" [numberOfMonths]="2"
                 (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
               </p-calendar>
-              <!-- <div class="prev-next">
-                <a (click)="dateChange('checkIn','previous')">Prev</a>
-                <a (click)="dateChange('checkIn','next')">Next</a>
-              </div> -->
             </div>
           </div>
-          <!-- <div class="date_to">
-            <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
-              <label>Check OUT</label>
-              <p-calendar inputId="basic" [(ngModel)]="checkOutDate" [ngModelOptions]="{standalone: true}"
-                checkOutMinDate [minDate]="checkOutMinDate" [readonlyInput]="true" (onSelect)=checkOutDateUpdate($event)
-                panelStyleClass="calender-responsive-view">
-              </p-calendar>
-              <div class="prev-next">
-                <a (click)="dateChange('checkOut','previous')">Prev</a>
-                <a (click)="dateChange('checkOut','next')">Next</a>
-              </div>
-            </div>
-          </div> -->
         </li>
         <li class="grid_box third">
           <div class="serch_btn">
