@@ -17,11 +17,9 @@
 </div>
 
 <div id="full_hotel_listing">
-    <div [hidden]="isMapView" *ngIf="hotelListArray.length" [@listAnimation]="hotelListArray.length"
-        (@listAnimation.start)="logAnimation($event)" (@listAnimation.done)="logAnimation($event)"
-        class="result_listing hotel_listings infinite-search-results" (clickOutside)="closeHotelDetail()" infiniteScroll
-        [infiniteScrollDistance]="scrollDistance" [infiniteScrollDisabled]="isFullListDisplayed"
-        [infiniteScrollThrottle]="throttle" [scrollWindow]="false" (scrolled)="onScrollDown()">
+    <div [hidden]="isMapView" *ngIf="hotelListArray.length" class="result_listing hotel_listings infinite-search-results" (clickOutside)="closeHotelDetail()" infinite-scroll
+        [infiniteScrollDistance]="2" 
+        [infiniteScrollThrottle]="50"  (scrolled)="onScrollDown()">
 
         <div class="search_block" *ngFor="let item of hotelListArray; let blockIndex = index;">
             <div class="listing_block">

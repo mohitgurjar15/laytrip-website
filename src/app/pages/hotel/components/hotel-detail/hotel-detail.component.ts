@@ -127,6 +127,7 @@ export class HotelDetailComponent implements OnInit {
         this.hotelDetails = {
           name: res.data.hotel.name,
           city_name: res.data.hotel.address.city_name,
+          address: res.data.hotel.full_address,
           state_code: res.data.hotel.address.state_code,
           country_name: res.data.hotel.address.country_name,
           rating: res.data.hotel.rating,
