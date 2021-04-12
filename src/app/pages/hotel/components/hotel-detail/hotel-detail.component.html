@@ -729,6 +729,7 @@
                 src="{{s3BucketUrl}}assets/images/icon/star_blank.svg" alt="blank Stars Icon">
             </span>
           </span>
+          <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
         </div>
         <div class="col_right">
           <div class="price_wrpper">
@@ -752,7 +753,7 @@
         </div>
         <div class="room_list_wrp" id="full_hotel_listing">
           <h3 class="common_title_wrps">Rooms</h3>
-          <div class="search_block">
+          <div class="search_block" *ngFor="let room of hotelRoomArray; let index = index;">
             <div class="listing_block">
               <div class="listing_inner_box_wrppr">
                 <div class="desktop_box">
@@ -772,11 +773,11 @@
                             <div class="block_detail">
                               <div class="block_detail_top">
                                 <div class="detail_info">
-                                  <h4>OYO Hotel East Hanover NJ-10</h4>
+                                  <h4>{{room.title}}</h4>
                                   <span class="adress_span">
-                                    East Hanover, 130 New Jersey 10, NJ, New Jersey, US, United States, NJ 07936
+                                    Sleeps                                    
                                   </span>
-                                  <div class="review_section_wrap">
+                                  <!-- <div class="review_section_wrap">
                                     <div class="left_bar">
 
                                       <div class="stars_text">
@@ -789,13 +790,13 @@
 
                                       </div>
                                     </div>
-                                  </div>
+                                  </div> -->
                                 </div>
                               </div>
                             </div>
                             <div class="block_detail_btm">
-                              <span id="accordion_infos1" class="show_detail">
-                                <a data-toggle="collapse" data-parent="#full_hotel_listing" href="#collapse1"
+                              <span [id]="'accordion_infos1'+index" class="show_detail">
+                                <a data-toggle="collapse" data-parent="#full_hotel_listing" [href]="'#collapse1'+index"
                                   aria-expanded="false" aria-controls="collapse1" class="hotel_anchor">
                                   Details
                                 </a>
@@ -850,8 +851,8 @@
                       </div>
                     </div>
 
-                    <span id="accordion_infos1" class="show_detail">
-                      <a data-toggle="collapse" data-parent="#full_hotel_listing" href="#collapse1"
+                    <span [id]="'accordion_infos1'+index" class="show_detail">
+                      <a data-toggle="collapse" data-parent="#full_hotel_listing" [href]="'#collapse1'+blockIndex"
                         aria-expanded="false" aria-controls="collapse1" class="hotel_anchor">
                         Details
                       </a>
@@ -875,7 +876,7 @@
               </div>
             </div>
 
-            <div id="collapse1" class="detail_info_show collapse">
+            <div [id]="'collapse1'+index" class="detail_info_show collapse">
               <div class="card-body">
                 <div class="io_ru_wrps">
                   <div class="installment_wprs">
@@ -951,6 +952,8 @@
 
             </div>
           </div>
+
+          
         </div>
       </div>
       <div class="col-lg-4">
@@ -978,14 +981,14 @@
         </div>
         <div class="amenities_wrpper">
           <h3 class="common_title_wrps">Amenities</h3>
-          <ul>
-            <li>
-              Swimming Pool
-            </li>
+          <ul *ngIf="hotelDetails.amenities?.list.length">
+            <ng-container *ngFor="let amenity of hotelDetails.amenities.list ; let i=index">
+              <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity}}</li>
+              <li *ngIf="showMoreAmenties">{{amenity}}</li>
+            </ng-container>
           </ul>
-          <a href="javascript:void(0);" class="cta_link">
-            More
-          </a>
+          <a *ngIf="!showMoreAmenties && hotelDetails.amenities?.list.length>10" (click)="toggleAmenities()" class="cta_link hover-link">More</a>
+          <a *ngIf="showMoreAmenties && hotelDetails.amenities?.list.length>10" (click)="toggleAmenities()" class="cta_link hover-link">Less</a>
         </div>
       </div>
     </div>
