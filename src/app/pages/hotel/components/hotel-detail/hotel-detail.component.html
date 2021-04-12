@@ -716,26 +716,23 @@
       <div class="col-lg-8">
 
         <div class="title_name_wrapper">
-          <h5 class="">Marriott Miami</h5>
+          <h5 class="">{{hotelDetails.name}}</h5>
           <span class="add_wrpper">
             <span class="hotel_address">
-              123 Collins Ave, Miami, Florida 33333, United States
+              {{hotelDetails.address}}
             </span>
             <span class="hotel_stars">
-              <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg" alt="filled Stars Icon">
-              <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg" alt="filled Stars Icon">
-              <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg" alt="filled Stars Icon">
-              <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg" alt="filled Stars Icon">
-              <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg" alt="blank Stars Icon">
+              <ng-container *ngIf="hotelDetails.rating">
+                <img *ngFor="let in of counter(hotelDetails.rating)" class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg" alt="filled Stars Icon">
+              </ng-container>
+              <img *ngFor="let in of counter(5-hotelDetails.rating)" class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg" alt="blank Stars Icon">
             </span>
           </span>
         </div>
         <div class="description_wrpper">
           <h3 class="common_title_wrps">Description</h3>
           <p>
-            Laytrip users can search thousands of real-time flight, hotel, home and car rental listings and book any
-            combination of travel itineraries all from our simple one-stop-travel platform. After you select your
-            bookings, you will be able to choose to pay in flexible and customizable installments at checkout.
+            {{hotelDetails.description}}
           </p>
         </div>
         <div class="room_list_wrp" id="full_hotel_listing">
