@@ -134,7 +134,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   clickHotelFilterName(event) {
     this.isHotelSearch = false;
-    $('#searchHotelName').val(event.target.textContent)
+    // $('#searchHotelName').val(event.target.textContent)
     this.searchHotel = event.target.textContent ? event.target.textContent : '';
     if (event.target.textContent) {
       this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
@@ -197,7 +197,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
    * @param event 
    */
   filterByHotelRatings(event, count) {
-    console.log(event.target.checked,count)
     if (event.target.checked === true) {
       this.ratingArray.push(parseInt(count));
     } else {
@@ -287,6 +286,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     }
 
     /* Search hotels by name */
+    console.log(hotelname)
     if (hotelname && hotelname.key === 'searchByHotelName') {
       filteredHotels = filteredHotels.filter(item => {
         return item.name.toLowerCase().toString() == hotelname.value.trim().toLowerCase().toString();
@@ -342,7 +342,8 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
     // Reset hotel name search
     this.hotelname = 'Search Hotel';
-
+    this.filterHotels({});
+    $('#searchHotelName').val()
     $("input:checkbox").prop('checked', false);
   }
 
