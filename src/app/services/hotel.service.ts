@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
 
@@ -21,6 +21,13 @@ export class HotelService {
         private commonFunction: CommonFunction
     ) {
 
+    }
+
+    private hotels = new BehaviorSubject([]);
+    getHotels = this.hotels.asObservable();
+
+    setHotels(hotels){
+        this.hotels.next(hotels)
     }
 
     searchHotels(data) {

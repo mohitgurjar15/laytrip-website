@@ -88,6 +88,7 @@ export class HotelSearchComponent implements OnInit {
     this.errorMessage = '';
     this.hotelService.getHotelSearchResult(payload).subscribe((res: any) => {
       this.hotelDetails = res.data.hotels;
+      this.hotelService.setHotels(this.hotelDetails)
       this.hotelDetailsMain = res.data;
       this.hotelToken = res.data.details.token;
       this.loading = false;
@@ -132,6 +133,8 @@ export class HotelSearchComponent implements OnInit {
 
       }
     }
+
+    this.hotelService.setHotels(this.hotelDetails)
   }
 
   sortJSON(data, key, way) {
@@ -189,6 +192,7 @@ export class HotelSearchComponent implements OnInit {
   filterHotel(event) {
     setTimeout(() => {
       this.hotelDetails = event;
+      this.hotelService.setHotels(this.hotelDetails)
     }, 100);
   }
 

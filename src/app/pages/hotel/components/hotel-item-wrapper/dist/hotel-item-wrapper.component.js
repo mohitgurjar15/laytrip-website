@@ -12,11 +12,12 @@ var environment_1 = require("../../../../../environments/environment");
 var animations_1 = require("@angular/animations");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var HotelItemWrapperComponent = /** @class */ (function () {
-    function HotelItemWrapperComponent(router, route, commonFunction, genericService) {
+    function HotelItemWrapperComponent(router, route, commonFunction, genericService, hotelService) {
         this.router = router;
         this.route = route;
         this.commonFunction = commonFunction;
         this.genericService = genericService;
+        this.hotelService = hotelService;
         this.animationState = 'out';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
@@ -62,33 +63,55 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         if (hotelinfo) {
             this.hotelName = hotelinfo.city;
         }
-        this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-        //this.hotelListArray = this.hotelDetails;
-        for (var i = 0; i < this.hotelListArray.length; i++) {
-            this.hotelDetails[i].galleryImages = [];
-            if (this.hotelDetails[i].images.length > 0) {
-                for (var _i = 0, _a = this.hotelDetails[i].images; _i < _a.length; _i++) {
-                    var image = _a[_i];
-                    this.hotelDetails[i].galleryImages.push({
-                        small: image,
-                        medium: image,
-                        big: image
+        /* this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+        for(let i=0; i < this.hotelListArray.length; i++){
+          this.hotelDetails[i].galleryImages=[];
+          if(this.hotelDetails[i].images.length > 0){
+            for(let image of this.hotelDetails[i].images){
+              this.hotelDetails[i].galleryImages.push({
+                small: image,
+                medium:image,
+                big:image
+              })
+            }
+    
+          } else {
+            this.hotelDetails[i].galleryImages.push({
+              small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
+              medium:this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
+              big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
+            })
+          }
+        }
+    
+        this.mapListArray[0]=Object.assign({},this.hotelListArray[0]); */
+        this.userInfo = jwt_helper_1.getLoginUserInfo();
+        this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
+        this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
+        this.hotelService.getHotels.subscribe(function (result) {
+            _this.hotelDetails = result;
+            _this.hotelListArray = _this.hotelDetails.slice(0, _this.noOfDataToShowInitially);
+            for (var i = 0; i < _this.hotelListArray.length; i++) {
+                _this.hotelDetails[i].galleryImages = [];
+                if (_this.hotelDetails[i].images.length > 0) {
+                    for (var _i = 0, _a = _this.hotelDetails[i].images; _i < _a.length; _i++) {
+                        var image = _a[_i];
+                        _this.hotelDetails[i].galleryImages.push({
+                            small: image,
+                            medium: image,
+                            big: image
+                        });
+                    }
+                }
+                else {
+                    _this.hotelDetails[i].galleryImages.push({
+                        small: _this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
+                        medium: _this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
+                        big: _this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
                     });
                 }
             }
-            else {
-                this.hotelDetails[i].galleryImages.push({
-                    small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-                    medium: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-                    big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
-                });
-            }
-        }
-        this.mapListArray[0] = Object.assign({}, this.hotelListArray[0]);
-        this.userInfo = jwt_helper_1.getLoginUserInfo();
-        // this.totalLaycredit();
-        this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
-        this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
+        });
     };
     HotelItemWrapperComponent.prototype.onScrollDown = function () {
         var _this = this;
@@ -117,11 +140,11 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         }, 1000);
     };
     HotelItemWrapperComponent.prototype.ngAfterContentChecked = function () {
-        this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-        var hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
-        if (hotelinfo) {
-            this.hotelName = hotelinfo.city;
-        }
+        /*  this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+         let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+         if (hotelinfo) {
+           this.hotelName = hotelinfo.city;
+         } */
     };
     HotelItemWrapperComponent.prototype.infoWindowAction = function (template, event, action) {
         if (action === 'open') {
@@ -181,55 +204,34 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         }, (function (error) {
         }));
     };
-    HotelItemWrapperComponent.prototype.loadJquery = function () {
-        //   $('#carousel-example-generic').on('slid.bs.carousel', function () {
-        //     $('#slidenum').val($('.carousel-inner .active').index());
-        //  })
-        //  $('#slidenum').on('change',function(){
-        //    var sn = parseInt($('#slidenum').val());
-        //    $('#carousel-example-generic').carousel(sn);
-        //  })
-        $(document).ready(function () {
-            // SLIDER
-            //$('.slider').slick({});
-            $('.slider').slick({
-                dots: true,
-                speed: 1000,
-                infinite: true,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                nextArrow: '<div class="slick-custom-arrow slick-custom-arrow-right"><i class="fas fa-angle-right"></i></div>',
-                prevArrow: '<div class="slick-custom-arrow slick-custom-arrow-left"><i class="fa fa-angle-left"></i></div>'
-            });
-        });
-    };
     HotelItemWrapperComponent.prototype.ngOnChanges = function (changes) {
-        if (changes.hotelDetails.currentValue.length) {
-            this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);
-            ;
-            for (var i = 0; i < this.hotelListArray.length; i++) {
-                this.hotelDetails[i].galleryImages = [];
-                if (this.hotelDetails[i].images.length > 0) {
-                    for (var _i = 0, _a = this.hotelDetails[i].images; _i < _a.length; _i++) {
-                        var image = _a[_i];
-                        this.hotelDetails[i].galleryImages.push({
-                            small: image,
-                            medium: image,
-                            big: image
-                        });
-                    }
-                }
-                else {
-                    this.hotelDetails[i].galleryImages.push({
-                        small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-                        medium: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-                        big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
-                    });
-                }
+        console.log("changes", changes);
+        /* if(typeof changes.hotelDetails!='undefined' && changes.hotelDetails.currentValue.length){
+          this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);;
+          for(let i=0; i < this.hotelListArray.length; i++){
+            this.hotelDetails[i].galleryImages=[];
+            if(this.hotelDetails[i].images.length  > 0){
+              for(let image of this.hotelDetails[i].images){
+                this.hotelDetails[i].galleryImages.push({
+                  small: image,
+                  medium:image,
+                  big:image
+                })
+              }
+            } else {
+              this.hotelDetails[i].galleryImages.push({
+                small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
+                medium:this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
+                big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
+              })
             }
-            this.mapListArray[0] = Object.assign({}, this.hotelListArray[0]);
+          }
+    
+          this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
+        } */
+        if (typeof changes.hotelDetails != 'undefined' && changes.hotelDetails.currentValue.length) {
+            this.hotelsList = changes.hotelDetails.currentValue;
         }
-        //this.hotelsList = changes.hotelDetails.currentValue;
     };
     HotelItemWrapperComponent.prototype.logAnimation = function (event) {
         // console.log(event);
@@ -249,6 +251,9 @@ var HotelItemWrapperComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], HotelItemWrapperComponent.prototype, "hotelToken");
+    __decorate([
+        core_1.Input()
+    ], HotelItemWrapperComponent.prototype, "triggerChange");
     HotelItemWrapperComponent = __decorate([
         core_1.Component({
             selector: 'app-hotel-item-wrapper',

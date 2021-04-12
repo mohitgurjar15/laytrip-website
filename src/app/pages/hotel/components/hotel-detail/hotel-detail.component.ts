@@ -45,7 +45,8 @@ export class HotelDetailComponent implements OnInit {
   hotelDetails;
   hotelRoomArray = [];
   imageTemp = [];
-  loading = false;
+  loading:boolean = false;
+  roomLoading:boolean=false;
   currency;
   showFareDetails: number = 0;
   showMoreAmenties:boolean=false;
@@ -122,8 +123,8 @@ export class HotelDetailComponent implements OnInit {
     })
 
     this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
+      this.loading = false;
       if (res && res.data && res.data.hotel) {
-        this.loading = false;
         this.hotelDetails = {
           name: res.data.hotel.name,
           city_name: res.data.hotel.address.city_name,
@@ -158,18 +159,22 @@ export class HotelDetailComponent implements OnInit {
           this.roomSummary.roomDetail.totalChildren = occupancies.flatMap((value) => value['children']).count();
         }
       }
+      else{
+        this.isNotFound=true;  
+      }
     }, error => {
-      //this.toastr.error('Search session is expired', 'Error');
       this.isNotFound=true;
-      //this.router.navigate(['/']);
+      this.loading = false;
     });
+    this.roomLoading=true;
     this.hotelService.getRoomDetails(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
+      this.roomLoading=false;
       if (res) {
         this.hotelRoomArray = res.data;
         this.roomSummary.hotelInfo = res.data[0];
       }
     }, error => {
-      this.loading = false;
+      this.roomLoading=false;
       //this.toastr.error('Search session is expired', 'Error');
       //this.router.navigate(['/']);
     });
@@ -180,7 +185,7 @@ export class HotelDetailComponent implements OnInit {
     return new Array(i);
   }
 
-  showRoomDetails(roomInfo) {
+  selectRoom(roomInfo) {
     
     if (this.cartItems && this.cartItems.length >= 5) {
       this.addCartLoading=false;
