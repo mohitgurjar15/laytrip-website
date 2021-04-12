@@ -206,6 +206,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         });
     };
     HotelItemWrapperComponent.prototype.ngOnChanges = function (changes) {
+        console.log("changes", changes);
         if (changes.hotelDetails.currentValue.length) {
             this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);
             ;

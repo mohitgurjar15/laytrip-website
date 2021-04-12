@@ -37,6 +37,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     type: 'city',
     geo_codes: { lat: 40.7681, long: -73.9819 },
   };
+  showHotelDropDown:boolean=false;
   searchedValue = [];
   hotelSearchFormSubmitted = false;
   searchHotelInfo: any = {
@@ -133,6 +134,7 @@ export class HotelSearchWidgetComponent implements OnInit {
         if (this.route.snapshot.queryParams['location']) {
           info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
           if (info) {
+            this.defaultCity = info.title;
             this.fromDestinationInfo.city = info.city;
             this.fromDestinationInfo.country = info.country;
             this.searchHotelInfo.city = info.city;
@@ -248,4 +250,12 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
+  selectedHotel(event) {
+
+      this.searchedValue[0]['value'] = event;
+      console.log(this.searchedValue,event)
+      this.fromDestinationTitle = event.title;
+      this.searchHotelInfo.latitude = event.geo_codes.lat;
+      this.searchHotelInfo.longitude = event.geo_codes.long;
+  }
 }
