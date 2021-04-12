@@ -102,7 +102,7 @@ var FilterHotelComponent = /** @class */ (function () {
     };
     FilterHotelComponent.prototype.clickHotelFilterName = function (event) {
         this.isHotelSearch = false;
-        $('#searchHotelName').val(event.target.textContent);
+        // $('#searchHotelName').val(event.target.textContent)
         this.searchHotel = event.target.textContent ? event.target.textContent : '';
         if (event.target.textContent) {
             this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
@@ -155,7 +155,6 @@ var FilterHotelComponent = /** @class */ (function () {
      * @param event
      */
     FilterHotelComponent.prototype.filterByHotelRatings = function (event, count) {
-        console.log(event.target.checked, count);
         if (event.target.checked === true) {
             this.ratingArray.push(parseInt(count));
         }
@@ -240,6 +239,7 @@ var FilterHotelComponent = /** @class */ (function () {
             });
         }
         /* Search hotels by name */
+        console.log(hotelname);
         if (hotelname && hotelname.key === 'searchByHotelName') {
             filteredHotels = filteredHotels.filter(function (item) {
                 return item.name.toLowerCase().toString() == hotelname.value.trim().toLowerCase().toString();
@@ -287,6 +287,8 @@ var FilterHotelComponent = /** @class */ (function () {
         }
         // Reset hotel name search
         this.hotelname = 'Search Hotel';
+        this.filterHotels({});
+        $('#searchHotelName').val();
         $("input:checkbox").prop('checked', false);
     };
     // ngOnChanges(changes: SimpleChanges) {

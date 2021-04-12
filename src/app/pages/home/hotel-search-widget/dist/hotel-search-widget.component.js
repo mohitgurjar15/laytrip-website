@@ -180,7 +180,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         if (this.searchedValue && this.searchedValue.find(function (i) { return i.key === 'guest'; })) {
             this.searchedValue[1]['value'] = event;
             this.searchHotelInfo.occupancies = event;
-            console.log(this.searchHotelInfo.occupancies);
         }
     };
     HotelSearchWidgetComponent.prototype.destinationChangedValue = function (event) {
@@ -201,7 +200,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
         queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value']));
         queryParams.location = btoa(JSON.stringify(this.searchedValue[0]['value']));
-        console.log("queryParams", this.searchedValue[1]['value']);
         if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
             this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
             // localStorage.setItem('_hote', JSON.stringify(this.searchedValue));

@@ -35,6 +35,7 @@ import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   @Input() hotelDetails;
+  @Input() filteredLabel;
   @Input() filter;
   @Input() hotelToken;
   animationState = 'out';
@@ -111,12 +112,22 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     //this.hotelListArray = this.hotelDetails;
     for(let i=0; i < this.hotelListArray.length; i++){
       this.hotelDetails[i].galleryImages=[];
-      for(let image of this.hotelDetails[i].images)
-      this.hotelDetails[i].galleryImages.push({
-        small: image,
-        medium:image,
-        big:image
-      })
+      if(this.hotelDetails[i].images.length > 0){
+        for(let image of this.hotelDetails[i].images){
+          this.hotelDetails[i].galleryImages.push({
+            small: image,
+            medium:image,
+            big:image
+          })
+        }
+
+      } else {
+        this.hotelDetails[i].galleryImages.push({
+          small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
+          medium:this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
+          big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
+        })
+      }
     }
 
     this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
@@ -152,11 +163,11 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   }
 
   ngAfterContentChecked() {
-    /* this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+    this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
     let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
-    } */
+    }
     
   }
 
@@ -255,13 +266,23 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
       this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);;
       for(let i=0; i < this.hotelListArray.length; i++){
         this.hotelDetails[i].galleryImages=[];
-        for(let image of this.hotelDetails[i].images)
-        this.hotelDetails[i].galleryImages.push({
-          small: image,
-          medium:image,
-          big:image
-        })
+        if(this.hotelDetails[i].images.length  > 0){
+          for(let image of this.hotelDetails[i].images){
+            this.hotelDetails[i].galleryImages.push({
+              small: image,
+              medium:image,
+              big:image
+            })
+          }
+        } else {
+          this.hotelDetails[i].galleryImages.push({
+            small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
+            medium:this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
+            big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
+          })          
+        }        
       }
+      console.log(this.hotelDetails)
 
       this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
     }

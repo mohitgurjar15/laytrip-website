@@ -24,6 +24,8 @@ export class HotelSearchComponent implements OnInit {
   hotelToken;
   isResetFilter: string = 'no';
   searchedValue = [];
+  filteredLabel : string = 'Price Low to High';
+
   roomsGroup = [
     {
       adults: 2,
@@ -103,11 +105,32 @@ export class HotelSearchComponent implements OnInit {
   sortHotels(event) {
     let { key, order } = event;
     if (key === 'total') {
-      this.hotelDetails = this.sortJSON(this.hotelDetails, key, order);
+      if (order === 'ASC') {
+        this.filteredLabel = 'Price Lowest to Highest';
+        this.hotelDetails = this.sortJSON(this.hotelDetails, key, order);
+      } else if (order === 'DESC') {
+        this.filteredLabel = 'Price Highest to Lowest';
+        this.hotelDetails = this.sortJSON(this.hotelDetails, key, order);
+      }
     } else if (key === 'rating') {
-      this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
+      
+      if (order === 'ASC') {
+        this.filteredLabel = 'Rating Lowest to Highest';
+        this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);        
+      } else if(order === 'DESC'){
+        this.filteredLabel = 'Rating Highest to Lowest';
+        this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
+      }
     } else if (key === 'name') {
-      this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
+      
+      if (order === 'ASC') {
+        this.filteredLabel = 'Alphabetical A to Z';
+        this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
+      }else if(order === 'DESC'){
+        this.filteredLabel = 'Alphabetical Z to A';
+        this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
+
+      }
     }
   }
 
@@ -118,10 +141,9 @@ export class HotelSearchComponent implements OnInit {
       return data.sort(function (a, b) {
         var x = a.selling[key];
         var y = b.selling[key];
-        if (way === 'ASC') {
+        if (way === 'ASC') {        
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        }
-        if (way === 'DESC') {
+        } else if (way === 'DESC') {         
           return ((x > y) ? -1 : ((x < y) ? 1 : 0));
         }
       });
@@ -129,6 +151,7 @@ export class HotelSearchComponent implements OnInit {
   }
 
   sortByRatings(data, key, way) {
+    
     if (typeof data === "undefined") {
       return data;
     } else {
@@ -146,6 +169,7 @@ export class HotelSearchComponent implements OnInit {
   }
 
   sortByHotelName(data, key, way) {
+
     if (typeof data === "undefined") {
       return data;
     } else {
