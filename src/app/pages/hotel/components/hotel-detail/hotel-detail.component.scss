@@ -24,10 +24,6 @@ agm-map {
     margin-top: 0;
     position: relative;
 
-    @include tab-view {
-        margin-top: 130px;
-    }
-
     .container {
         padding: 0;
     }
@@ -107,17 +103,38 @@ agm-map {
 
 .search_result {
     &.hotels {
+        @include tab-view {
+            padding: 5px 0 10px;
+        }
+
+        .container {
+            @include tab-view {
+                padding: 15px;
+            }
+        }
+
         .common_title_wrps {
             font-size: 20px;
             color: $text-black;
             margin: 0 0 5px 0;
+            font-weight: 600;
+
+            @include tab-view {
+                font-size: 14px;
+            }
         }
 
         .title_name_wrapper {
+            display: flex;
+
             h5 {
                 font-size: 26px;
                 color: $text-black;
                 margin: 0 0 5px 0;
+
+                @include tab-view {
+                    font-size: 20px;
+                }
             }
 
             .add_wrpper {
@@ -127,127 +144,474 @@ agm-map {
                 color: $text_grey_dark;
                 font-size: 16px;
                 line-height: 25px;
+
+                @include tab-view {
+                    font-size: 12px;
+                    line-height: 16px;
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .hotel_stars {
+                    min-width: 80px;
+
+                    @include tab-view {
+                        margin-top: 10px;
+                    }
+                }
+            }
+
+            .col_left {
+                display: flex;
+                flex-direction: column;
+                flex: 2;
+            }
+
+            .col_right {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                align-items: flex-end;
             }
         }
 
         .description_wrpper {
+            margin-top: 25px;
+
             p {
                 color: $text_grey_dark;
                 font-size: 18px;
                 line-height: 26px;
+
+                @include tab-view {
+                    font-size: 12px;
+                    line-height: 20px;
+                }
             }
         }
 
         .room_list_wrp {
-            .listing_block {
+            margin-top: 25px;
+
+            .search_block {
                 width: 100%;
-                background: $background-white;
+                margin-bottom: 15px;
+                border: 1px solid $box-border-color;
                 border-radius: 10px;
-                overflow: hidden;
 
-                .listing_inner_box_wrppr {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
+                .listing_block {
                     width: 100%;
+                    background: $background-white;
+                    border-radius: 10px;
+                    overflow: hidden;
 
-                    .box_left {
-                        display: flex;
-                        flex: 7;
-
-                        @include tab-view {
-                            width: 80%;
-                        }
-
-                        .box_img {
-                            display: flex;
-                            flex: 2;
-
-                            .block_main {
-                                @include tab-view {
-                                    width: 100%;
-                                }
-                            }
-
-                        }
-
-                        .box_info {
-                            padding: 0 15px;
-                            display: flex;
-                            flex: 3;
-                            flex-direction: column;
-                            height: 100%;
-                            min-height: 170px;
-                            justify-content: space-between;
-                        }
-                    }
-
-                    .box_right {
-                        flex: 2;
-                        display: flex;
-                    }
-
-                    .desktop_box {
+                    .listing_inner_box_wrppr {
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
                         width: 100%;
 
-                        @include tab-view {
-                            display: none;
-                        }
-                    }
-
-                    .mobile_box {
-                        display: none;
-
-                        @include tab-view {
+                        .box_left {
                             display: flex;
-                            justify-content: space-between;
-                            width: 100%;
-                        }
+                            flex: 7;
 
-                        .hotel_list_img_wrp {
-                            display: flex;
-                            min-width: 127px;
-                            /* height: 140px; */
-                            flex: 1;
+                            @include tab-view {
+                                width: 80%;
+                            }
 
-                            img {
-                                width: 100%;
+                            .box_img {
+                                display: flex;
+                                flex: 2;
+
+                                .block_main {
+                                    @include tab-view {
+                                        width: 100%;
+                                    }
+                                }
+
+                            }
+
+                            .box_info {
+                                padding: 0 15px;
+                                display: flex;
+                                flex: 3;
+                                flex-direction: column;
                                 height: 100%;
-                                -o-object-fit: cover;
-                                object-fit: cover;
-                                -o-object-position: center;
-                                object-position: center;
+                                min-height: 170px;
+                                justify-content: space-between;
                             }
                         }
 
-                        .middle_part {
-                            display: flex;
-                            flex-direction: column;
+                        .box_right {
                             flex: 2;
+                            display: flex;
+                        }
+
+                        .desktop_box {
+                            display: flex;
+                            align-items: center;
                             justify-content: space-between;
                             width: 100%;
 
-                            .detail_info {
-                                padding: 10px 5px 5px;
-                                word-break: break-word;
+                            @include tab-view {
+                                display: none;
+                            }
+                        }
 
-                                h4 {
-                                    font-size: 12px;
+                        .mobile_box {
+                            display: none;
+
+                            @include tab-view {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100%;
+                            }
+
+                            .hotel_list_img_wrp {
+                                display: flex;
+                                min-width: 127px;
+                                /* height: 140px; */
+                                flex: 1;
+
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    -o-object-fit: cover;
+                                    object-fit: cover;
+                                    -o-object-position: center;
+                                    object-position: center;
                                 }
+                            }
 
-                                .adress_span {
-                                    font-size: 10px;
-                                    line-height: 13px;
-                                }
+                            .middle_part {
+                                display: flex;
+                                flex-direction: column;
+                                flex: 2;
+                                justify-content: space-between;
+                                width: 100%;
 
-                                .review_section_wrap {
-                                    img {
-                                        width: 12px;
+                                .detail_info {
+                                    padding: 10px 5px 5px;
+                                    word-break: break-word;
+
+                                    h4 {
+                                        font-size: 12px;
+                                    }
+
+                                    .adress_span {
+                                        font-size: 10px;
+                                        line-height: 13px;
+                                    }
+
+                                    .review_section_wrap {
+                                        img {
+                                            width: 12px;
+                                        }
                                     }
                                 }
+
+                                .show_detail {
+
+                                    .hotel_anchor {
+                                        color: $active-tab-text;
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        width: 68px;
+                                        position: relative;
+                                        padding-right: 15px;
+                                        display: flex;
+                                        align-items: center;
+
+                                        @include tab-view {
+                                            font-size: 11px;
+                                            margin: 0 auto 10px;
+                                        }
+
+                                        &[aria-expanded="true"] {
+                                            color: $mid_gray_bg;
+
+                                            &:after {
+                                                content: "";
+                                                // position: absolute;
+                                                padding: 5px 9px;
+                                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                                background-position: right;
+                                                background-repeat: no-repeat;
+                                                background-size: 11px;
+                                                transition: 0.3s;
+                                                right: 0;
+                                                top: 5px;
+                                                border: none;
+                                            }
+                                        }
+
+                                        &[aria-expanded="false"] {
+                                            color: $active-tab-text;
+
+                                            &:after {
+                                                // position: absolute;
+                                                padding: 5px 9px;
+                                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                                                background-position: right;
+                                                background-repeat: no-repeat;
+                                                background-size: 11px;
+                                                content: "";
+                                                transition: 0.3s;
+                                                right: 0;
+                                                top: 5px;
+                                                border: none;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .thrd_part {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                flex: 1;
+
+                                .block_price {
+                                    padding: 0 5px;
+
+                                    .block_inn_pr {
+                                        .block {
+                                            &:last-child {
+                                                p {
+                                                    span {
+                                                        font-size: 16px;
+                                                    }
+                                                }
+                                            }
+
+                                            p {
+                                                flex-direction: column;
+                                                font-size: 7px;
+
+                                                &:first-child {
+                                                    margin: 0;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .book_btn {
+                                        line-height: 30px;
+                                        padding: 0px 21px;
+                                        font-size: 12px;
+                                        margin-bottom: 0;
+                                    }
+
+                                    p {
+                                        margin: 0;
+                                        color: $text-grey;
+                                        font-size: 7px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @include tab-view {
+                        height: auto;
+                    }
+
+                    .row {
+                        align-items: center;
+                    }
+
+                    .block_main {
+                        padding: 0 15px 0 0;
+                        margin-right: -15px;
+
+                        @include tab-view {
+                            padding: 0;
+                            border-right: 0;
+                            margin: 0;
+                        }
+
+                        .block_top {
+                            width: 100%;
+                            display: flex;
+                            flex-flow: column;
+
+                            .block_inner {
+                                display: flex;
+                                align-items: center;
+
+                                @include tab-view {
+                                    flex-wrap: wrap;
+                                }
+
+                                .block_im {
+                                    width: 100%;
+                                    display: flex;
+                                    flex-flow: column;
+                                    text-align: left;
+                                    height: 100%;
+
+                                    @include tab-view {
+                                        border-right: none;
+                                        padding: 0;
+                                    }
+
+                                    .hotel_list_img_wrp {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 170px;
+
+                                        @include tab-view {
+                                            display: flex;
+                                            justify-content: center;
+                                        }
+
+                                        img {
+                                            max-width: 100%;
+                                            height: 100%;
+                                            object-fit: cover;
+                                            object-position: center;
+                                        }
+
+                                        .fav_sections {
+                                            position: absolute;
+                                            top: 10px;
+                                            left: 10px;
+                                            height: 20px;
+                                            width: 20px;
+
+                                            a {
+                                                background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
+                                                background-repeat: no-repeat;
+                                                padding: 0px 12px;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .block_detail_top {
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    padding: 0;
+
+                                    @include tab-view {
+                                        padding: 0;
+                                        margin: 15px 0 0;
+                                    }
+
+                                    .detail_info {
+                                        font-size: 12px;
+                                        color: $text-grey;
+                                        width: 100%;
+
+                                        h4 {
+                                            font-size: 16px;
+                                            color: $text-black;
+                                            font-weight: 600;
+                                            margin: 10px 0 5px;
+                                            max-width: 380px;
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            display: inline-block;
+                                            width: 100%;
+
+                                            @media (max-width: 767px) {
+                                                font-size: 16px;
+                                            }
+                                        }
+
+                                        span {
+                                            margin: 0;
+
+                                            &.adress_span {
+                                                display: inline-block;
+                                                width: 100%;
+                                            }
+                                        }
+
+                                        .review_section_wrap {
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            margin: 5px 0 10px;
+
+                                            .left_bar {
+                                                display: flex;
+
+                                                .rating_num {
+                                                    span {
+                                                        background-color: #1445f5;
+                                                        color: $text-white;
+                                                        font-size: 12px;
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        justify-content: center;
+                                                        border-radius: 5px;
+                                                    }
+                                                }
+
+                                                .stars_text {
+                                                    //margin-left: 14px;
+
+                                                    .stars_rating {
+                                                        margin-top: 0px;
+                                                    }
+
+                                                    .review_num_text {
+                                                        a {
+                                                            font-size: 12px;
+                                                            color: $text-grey;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            .ammin_listing {
+                                                display: flex;
+                                                align-items: center;
+
+                                                .amminities_list {
+                                                    font-size: 12px;
+                                                    text-transform: uppercase;
+                                                    color: #5a5a5a;
+                                                    font-weight: 500;
+                                                    margin-left: 20px;
+
+                                                    img {
+                                                        margin-right: 8px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                &:last-child {
+                                    //margin: 20px 0 15px;
+                                    margin: 0;
+                                }
+                            }
+                        }
+
+                        .block_detail_btm {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            //border-top: 1px solid $box-border-color;
+                            padding-top: 10px;
+                            margin-bottom: 10px;
+
+                            @include tab-view {
+                                flex-wrap: wrap;
+                                justify-content: center;
+                                padding-bottom: 10px;
+                                //border-bottom: 1px solid $box-border-color;
+                                margin: 0 0 0px;
                             }
 
                             .show_detail {
@@ -262,17 +626,12 @@ agm-map {
                                     display: flex;
                                     align-items: center;
 
-                                    @include tab-view {
-                                        font-size: 11px;
-                                        margin: 0 auto 10px;
-                                    }
-
                                     &[aria-expanded="true"] {
                                         color: $mid_gray_bg;
 
                                         &:after {
                                             content: "";
-                                            // position: absolute;
+                                            position: absolute;
                                             padding: 5px 9px;
                                             background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                                             background-position: right;
@@ -289,7 +648,7 @@ agm-map {
                                         color: $active-tab-text;
 
                                         &:after {
-                                            // position: absolute;
+                                            position: absolute;
                                             padding: 5px 9px;
                                             background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
                                             background-position: right;
@@ -304,609 +663,311 @@ agm-map {
                                     }
                                 }
                             }
-                        }
 
-                        .thrd_part {
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            flex: 1;
+                            .weekly_price_wrps {
+                                font-size: 12px;
+                                color: $text-grey;
 
-                            .block_price {
-                                padding: 0 5px;
-
-                                .block_inn_pr {
-                                    .block {
-                                        &:last-child {
-                                            p {
-                                                span {
-                                                    font-size: 16px;
-                                                }
-                                            }
-                                        }
-
-                                        p {
-                                            flex-direction: column;
-                                            font-size: 7px;
-
-                                            &:first-child {
-                                                margin: 0;
-                                            }
-                                        }
-                                    }
-                                }
-
-                                .book_btn {
-                                    line-height: 30px;
-                                    padding: 0px 21px;
-                                    font-size: 12px;
-                                    margin-bottom: 0;
-                                }
-
-                                p {
-                                    margin: 0;
-                                    color: $text-grey;
-                                    font-size: 7px;
+                                span {
+                                    color: $pink;
+                                    font-size: 20px;
                                 }
                             }
                         }
                     }
-                }
 
-                @include tab-view {
-                    height: auto;
-                }
-
-                .row {
-                    align-items: center;
-                }
-
-                .block_main {
-                    padding: 0 15px 0 0;
-                    margin-right: -15px;
-
-                    @include tab-view {
-                        padding: 0;
-                        border-right: 0;
-                        margin: 0;
-                    }
-
-                    .block_top {
+                    .block_price {
                         width: 100%;
-                        display: flex;
-                        flex-flow: column;
-
-                        .block_inner {
-                            display: flex;
-                            align-items: center;
-
-                            @include tab-view {
-                                flex-wrap: wrap;
-                            }
-
-                            .block_im {
-                                width: 100%;
-                                display: flex;
-                                flex-flow: column;
-                                text-align: left;
-                                height: 100%;
-
-                                @include tab-view {
-                                    border-right: none;
-                                    padding: 0;
-                                }
-
-                                .hotel_list_img_wrp {
-                                    position: relative;
-                                    width: 100%;
-                                    height: 170px;
-
-                                    @include tab-view {
-                                        display: flex;
-                                        justify-content: center;
-                                    }
-
-                                    img {
-                                        max-width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                        object-position: center;
-                                    }
-
-                                    .fav_sections {
-                                        position: absolute;
-                                        top: 10px;
-                                        left: 10px;
-                                        height: 20px;
-                                        width: 20px;
-
-                                        a {
-                                            background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
-                                            background-repeat: no-repeat;
-                                            padding: 0px 12px;
-                                        }
-                                    }
-                                }
-                            }
-
-                            .block_detail_top {
-                                display: flex;
-                                flex-wrap: wrap;
-                                justify-content: space-between;
-                                align-items: center;
-                                padding: 0;
-
-                                @include tab-view {
-                                    padding: 0;
-                                    margin: 15px 0 0;
-                                }
-
-                                .detail_info {
-                                    font-size: 12px;
-                                    color: $text-grey;
-                                    width: 100%;
-
-                                    h4 {
-                                        font-size: 16px;
-                                        color: $text-black;
-                                        font-weight: 600;
-                                        margin: 10px 0 5px;
-                                        max-width: 380px;
-                                        white-space: nowrap;
-                                        overflow: hidden;
-                                        text-overflow: ellipsis;
-                                        display: inline-block;
-                                        width: 100%;
-
-                                        @media (max-width: 767px) {
-                                            font-size: 16px;
-                                        }
-                                    }
-
-                                    span {
-                                        margin: 0;
-
-                                        &.adress_span {
-                                            display: inline-block;
-                                            width: 100%;
-                                        }
-                                    }
-
-                                    .review_section_wrap {
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-                                        margin: 5px 0 10px;
-
-                                        .left_bar {
-                                            display: flex;
-
-                                            .rating_num {
-                                                span {
-                                                    background-color: #1445f5;
-                                                    color: $text-white;
-                                                    font-size: 12px;
-                                                    width: 30px;
-                                                    height: 30px;
-                                                    display: flex;
-                                                    align-items: center;
-                                                    justify-content: center;
-                                                    border-radius: 5px;
-                                                }
-                                            }
-
-                                            .stars_text {
-                                                //margin-left: 14px;
-
-                                                .stars_rating {
-                                                    margin-top: 0px;
-                                                }
-
-                                                .review_num_text {
-                                                    a {
-                                                        font-size: 12px;
-                                                        color: $text-grey;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        .ammin_listing {
-                                            display: flex;
-                                            align-items: center;
-
-                                            .amminities_list {
-                                                font-size: 12px;
-                                                text-transform: uppercase;
-                                                color: #5a5a5a;
-                                                font-weight: 500;
-                                                margin-left: 20px;
-
-                                                img {
-                                                    margin-right: 8px;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            &:last-child {
-                                //margin: 20px 0 15px;
-                                margin: 0;
-                            }
-                        }
-                    }
-
-                    .block_detail_btm {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        //border-top: 1px solid $box-border-color;
-                        padding-top: 10px;
-                        margin-bottom: 10px;
+                        text-align: center;
+                        padding: 0 15px;
+                        position: relative;
+                        z-index: 5;
 
                         @include tab-view {
-                            flex-wrap: wrap;
-                            justify-content: center;
-                            padding-bottom: 10px;
-                            //border-bottom: 1px solid $box-border-color;
-                            margin: 0 0 0px;
+                            border-left: none;
+                            padding: 15px 15px 0;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            color: $text-black;
+                            margin: 0;
+                        }
+
+                        h6 {
+                            font-size: 24px;
+                            font-weight: 600;
+                            color: $text_blue;
+                            margin: 15px 0;
                         }
 
                         .show_detail {
-
-                            .hotel_anchor {
-                                color: $active-tab-text;
-                                font-size: 14px;
-                                font-weight: 500;
-                                width: 68px;
-                                position: relative;
-                                padding-right: 15px;
-                                display: flex;
-                                align-items: center;
-
-                                &[aria-expanded="true"] {
-                                    color: $mid_gray_bg;
-
-                                    &:after {
-                                        content: "";
-                                        position: absolute;
-                                        padding: 5px 9px;
-                                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                                        background-position: right;
-                                        background-repeat: no-repeat;
-                                        background-size: 11px;
-                                        transition: 0.3s;
-                                        right: 0;
-                                        top: 5px;
-                                        border: none;
-                                    }
-                                }
-
-                                &[aria-expanded="false"] {
-                                    color: $active-tab-text;
-
-                                    &:after {
-                                        position: absolute;
-                                        padding: 5px 9px;
-                                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
-                                        background-position: right;
-                                        background-repeat: no-repeat;
-                                        background-size: 11px;
-                                        content: "";
-                                        transition: 0.3s;
-                                        right: 0;
-                                        top: 5px;
-                                        border: none;
-                                    }
-                                }
-                            }
-                        }
-
-                        .weekly_price_wrps {
-                            font-size: 12px;
-                            color: $text-grey;
-
-                            span {
-                                color: $pink;
-                                font-size: 20px;
-                            }
-                        }
-                    }
-                }
-
-                .block_price {
-                    width: 100%;
-                    text-align: center;
-                    padding: 0 15px;
-                    position: relative;
-                    z-index: 5;
-
-                    @include tab-view {
-                        border-left: none;
-                        padding: 15px 15px 0;
-                    }
-
-                    p {
-                        font-size: 14px;
-                        color: $text-black;
-                        margin: 0;
-                    }
-
-                    h6 {
-                        font-size: 24px;
-                        font-weight: 600;
-                        color: $text_blue;
-                        margin: 15px 0;
-                    }
-
-                    .show_detail {
-                        width: auto;
-                        display: flex;
-                        justify-content: center;
-
-                        a {
+                            width: auto;
                             display: flex;
-                            align-items: center;
-                            font-size: 12px;
-                            font-weight: 500;
-                            color: $primary-color;
-                            position: relative;
+                            justify-content: center;
 
-                            img {
-                                margin-right: 5px;
-                            }
-
-                            &::after {
-                                content: "";
-                                position: absolute;
-                                left: 105%;
-                                top: 50%;
-                                width: 0;
-                                height: 0;
-                                border-top: 3px solid transparent;
-                                border-bottom: 3px solid transparent;
-                                border-left: 3px solid $primary-color;
-                                transform: translate(-50%, -50%);
-                            }
-                        }
-                    }
-
-                    .block_inn_pr {
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-around;
-                        align-items: center;
-
-                        .block {
-                            margin: 0 0 15px;
-
-
-                            p {
-                                width: 100%;
-                                margin: 0;
-                                font-size: 10px;
-                                font-weight: 300;
-                                color: $pink;
+                            a {
                                 display: flex;
                                 align-items: center;
-                                justify-content: center;
+                                font-size: 12px;
+                                font-weight: 500;
+                                color: $primary-color;
+                                position: relative;
 
-                                &:first-child {
-                                    margin: 0 0 5px;
-                                    color: $text-grey;
+                                img {
+                                    margin-right: 5px;
                                 }
 
-                                span {
-                                    font-size: 24px;
-                                    color: $pink;
-                                    font-weight: 600;
+                                &::after {
+                                    content: "";
+                                    position: absolute;
+                                    left: 105%;
+                                    top: 50%;
+                                    width: 0;
+                                    height: 0;
+                                    border-top: 3px solid transparent;
+                                    border-bottom: 3px solid transparent;
+                                    border-left: 3px solid $primary-color;
+                                    transform: translate(-50%, -50%);
                                 }
                             }
+                        }
 
-                            &:last-child {
+                        .block_inn_pr {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-around;
+                            align-items: center;
+
+                            .block {
+                                margin: 0 0 15px;
+
+
                                 p {
+                                    width: 100%;
+                                    margin: 0;
+                                    font-size: 10px;
+                                    font-weight: 300;
+                                    color: $pink;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+
+                                    &:first-child {
+                                        margin: 0 0 5px;
+                                        color: $text-grey;
+                                    }
+
                                     span {
                                         font-size: 24px;
                                         color: $pink;
                                         font-weight: 600;
                                     }
                                 }
+
+                                &:last-child {
+                                    p {
+                                        span {
+                                            font-size: 24px;
+                                            color: $pink;
+                                            font-weight: 600;
+                                        }
+                                    }
+                                }
                             }
                         }
+
+
+                        .book_btn {
+                            display: inline-block;
+                            line-height: 38px;
+                            padding: 0 25px;
+                            font-size: 16px;
+                            color: $text-white;
+                            font-weight: 500;
+                            border-radius: 20px;
+                            background: $primary-color;
+                            position: relative;
+                            z-index: 9;
+                            overflow: hidden;
+                            margin-bottom: 10px;
+                            border: 1px solid $primary-color;
+                        }
+
+                        .partial_payment_info {
+                            display: block;
+                            margin: 10px 0 0;
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: $primary-color;
+                        }
+
+                        &.block_pr {}
                     }
-
-
-                    .book_btn {
-                        display: inline-block;
-                        line-height: 38px;
-                        padding: 0 25px;
-                        font-size: 16px;
-                        color: $text-white;
-                        font-weight: 500;
-                        border-radius: 20px;
-                        background: $primary-color;
-                        position: relative;
-                        z-index: 9;
-                        overflow: hidden;
-                        margin-bottom: 10px;
-                        border: 1px solid $primary-color;
-                    }
-
-                    .partial_payment_info {
-                        display: block;
-                        margin: 10px 0 0;
-                        font-size: 12px;
-                        font-weight: 500;
-                        color: $primary-color;
-                    }
-
-                    &.block_pr {}
-                }
-            }
-
-            .detail_info_show {
-                width: 100%;
-                background: $background-white;
-                padding: 20px 15px;
-                border-radius: 10px;
-
-                @include tab-view {
-                    padding: 10px;
                 }
 
-                .card-body {
-                    border: 1px solid $box-border-color;
+                .detail_info_show {
+                    width: 100%;
+                    background: $background-white;
+                    padding: 20px 15px;
                     border-radius: 10px;
-                    padding: 15px;
-                    //margin-top: 15px;
 
                     @include tab-view {
-                        //border: none;
-                        margin: 0;
                         padding: 10px;
                     }
 
-                    .io_ru_wrps {
-                        display: flex;
-                        justify-content: space-between;
+                    .card-body {
+                        border: 1px solid $box-border-color;
+                        border-radius: 10px;
+                        padding: 15px;
+                        //margin-top: 15px;
 
                         @include tab-view {
-                            flex-direction: column;
+                            //border: none;
+                            margin: 0;
+                            padding: 10px;
                         }
 
-                        .installment_wprs {
-                            flex: 2;
-                            padding-right: 50px;
+                        .io_ru_wrps {
+                            display: flex;
+                            justify-content: space-between;
 
                             @include tab-view {
-                                padding-right: 0px;
+                                flex-direction: column;
                             }
 
-                            .type_lines {
-                                border-bottom: 1px solid $box-border-color;
-                                padding-bottom: 15px;
-                                font-size: 12px;
-                                display: flex;
-                                justify-content: flex-start;
-                                margin-bottom: 15px;
-
+                            .installment_wprs {
+                                flex: 2;
+                                padding-right: 50px;
 
                                 @include tab-view {
-                                    flex-direction: column;
-                                    padding-bottom: 6px;
-                                    margin-bottom: 6px;
+                                    padding-right: 0px;
+                                }
+
+                                .type_lines {
+                                    border-bottom: 1px solid $box-border-color;
+                                    padding-bottom: 15px;
+                                    font-size: 12px;
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    margin-bottom: 15px;
+
+
+                                    @include tab-view {
+                                        flex-direction: column;
+                                        padding-bottom: 6px;
+                                        margin-bottom: 6px;
+                                        font-size: 10px;
+                                    }
+
+                                    &:nth-child(4) {
+                                        border: none;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+
+                                    .titles {
+                                        font-weight: 600;
+                                        color: $text-black;
+                                        margin-right: 0px;
+                                        flex: 2;
+                                        min-width: 160px;
+                                    }
+
+                                    .texts {
+                                        font-weight: 500;
+                                        color: $mid_gray_bg;
+                                        flex: 5;
+
+                                        @include tab-view {
+                                            font-weight: 400;
+                                        }
+                                    }
+
+                                }
+
+                                .notifi_text {
+                                    font-weight: 400;
+                                    color: $active-tab-text;
                                     font-size: 10px;
+                                    margin-top: 15px;
+                                    display: flex;
+                                    justify-content: flex-start;
+
+                                    @include tab-view {
+                                        margin-top: 10px;
+                                    }
+
+                                    &.desk_notifi {
+                                        @include tab-view {
+                                            display: none;
+                                        }
+                                    }
+
+                                    &.mobile_notifi {
+                                        display: none;
+
+                                        @include tab-view {
+                                            display: block;
+                                            margin-bottom: 5px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .rules_wrps {
+                                flex: 1;
+                                max-width: 188px;
+                                display: flex;
+                                flex-direction: column;
+
+                                @include tab-view {
+                                    padding-top: 5px;
+                                    max-width: 100%;
+                                    flex-direction: row;
                                 }
 
-                                &:nth-child(4) {
-                                    border: none;
-                                    margin: 0;
-                                    padding: 0;
-                                }
-
-                                .titles {
+                                .heads {
+                                    font-size: 14px;
                                     font-weight: 600;
                                     color: $text-black;
-                                    margin-right: 0px;
-                                    flex: 2;
-                                    min-width: 160px;
-                                }
-
-                                .texts {
-                                    font-weight: 500;
-                                    color: $mid_gray_bg;
-                                    flex: 5;
 
                                     @include tab-view {
-                                        font-weight: 400;
+                                        min-width: 60px;
+                                        flex: 1;
+                                        font-size: 10px;
+                                    }
+
+                                    img {
+                                        max-width: 15px;
+                                        margin-right: 5px;
                                     }
                                 }
 
-                            }
-
-                            .notifi_text {
-                                font-weight: 400;
-                                color: $active-tab-text;
-                                font-size: 10px;
-                                margin-top: 15px;
-                                display: flex;
-                                justify-content: flex-start;
-
-                                @include tab-view {
-                                    margin-top: 10px;
-                                }
-
-                                &.desk_notifi {
-                                    @include tab-view {
-                                        display: none;
-                                    }
-                                }
-
-                                &.mobile_notifi {
-                                    display: none;
-
-                                    @include tab-view {
-                                        display: block;
-                                        margin-bottom: 5px;
-                                    }
-                                }
-                            }
-                        }
-
-                        .rules_wrps {
-                            flex: 1;
-                            max-width: 188px;
-                            display: flex;
-                            flex-direction: column;
-
-                            @include tab-view {
-                                padding-top: 5px;
-                                max-width: 100%;
-                                flex-direction: row;
-                            }
-
-                            .heads {
-                                font-size: 14px;
-                                font-weight: 600;
-                                color: $text-black;
-
-                                @include tab-view {
-                                    min-width: 60px;
-                                    flex: 1;
+                                .texts_rules {
                                     font-size: 10px;
-                                }
+                                    font-weight: 400;
+                                    color: $grayed_border;
+                                    margin-top: 15px;
+                                    line-height: 14px;
+                                    overflow-y: auto;
+                                    max-height: 150px;
 
-                                img {
-                                    max-width: 15px;
-                                    margin-right: 5px;
-                                }
-                            }
+                                    a {
+                                        text-decoration: underline;
+                                    }
 
-                            .texts_rules {
-                                font-size: 10px;
-                                font-weight: 400;
-                                color: $grayed_border;
-                                margin-top: 15px;
-                                line-height: 14px;
-                                overflow-y: auto;
-                                max-height: 150px;
-
-                                a {
-                                    text-decoration: underline;
-                                }
-
-                                @include tab-view {
-                                    margin-top: 0;
+                                    @include tab-view {
+                                        margin-top: 0;
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    .full_desk_not {
-                        @include tab-view {
-                            display: none;
+                        .full_desk_not {
+                            @include tab-view {
+                                display: none;
+                            }
                         }
                     }
                 }
@@ -918,10 +979,32 @@ agm-map {
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            float: right;
 
             small {
                 color: $mid_gray_bg;
                 font-size: 10px;
+
+                @include tab-view {
+                    font-size: 7px;
+                }
+
+                &.desk_small {
+                    @include tab-view {
+                        display: none;
+                    }
+                }
+
+                &.mobile_small {
+                    display: none;
+
+                    @include tab-view {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                    }
+                }
             }
 
             span {
@@ -931,24 +1014,44 @@ agm-map {
                 align-items: center;
                 justify-content: center;
 
+                @include tab-view {
+                    flex-direction: column;
+                    font-size: 7px;
+                }
+
                 .big_font {
                     font-size: 24px;
+
+                    @include tab-view {
+                        font-size: 16px;
+                    }
                 }
             }
         }
 
-        .amenities_wrpper{
-            ul{
+        .amenities_wrpper {
+            margin-top: 25px;
+
+            ul {
                 padding: 0;
                 list-style: none;
-                li{
+
+                li {
                     color: $text_grey_dark;
                     font-size: 18px;
+                    margin-top: 3px;
+                    @include tab-view {
+                        font-size: 14px;
+                    }
                 }
             }
-            .cta_link{
+
+            .cta_link {
                 font-size: 15px;
                 color: $text_light_yellow;
+                @include tab-view {
+                    font-size: 12px;
+                }
             }
         }
 
