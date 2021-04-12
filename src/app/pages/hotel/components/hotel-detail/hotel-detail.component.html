@@ -1,6 +1,5 @@
 <app-laytrip-loader [loading]="addCartLoading" [module]="'hotel'">
 </app-laytrip-loader>
-<app-hotel-not-found *ngIf="isNotFound"></app-hotel-not-found>
 
 <!-- Start Search Result section -->
 <section class="search_result flight" *ngIf="loading && !isNotFound">
@@ -387,6 +386,8 @@
     </div>
   </div>
 </div>
+<app-hotel-not-found *ngIf="isNotFound"></app-hotel-not-found>
+
 <section class="search_result hotels" *ngIf="galleryImages && galleryImages.length">
   <div class="container">
     <!-- <div class="row">
