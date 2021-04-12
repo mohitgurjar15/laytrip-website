@@ -37,6 +37,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   @Input() hotelDetails;
   @Input() filter;
   @Input() hotelToken;
+  @Input() triggerChange;
   animationState = 'out';
   hotelsList;
   s3BucketUrl = environment.s3BucketUrl;
@@ -153,10 +154,18 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
   ngAfterContentChecked() {
     /* this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-    let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
-    if (hotelinfo) {
-      this.hotelName = hotelinfo.city;
-    } */
+    for(let i=0; i < this.hotelListArray.length; i++){
+        this.hotelDetails[i].galleryImages=[];
+        for(let image of this.hotelDetails[i].images){
+          this.hotelDetails[i].galleryImages.push({
+            small: image,
+            medium:image,
+            big:image
+          })
+        }
+    }
+
+    this.mapListArray[0]=Object.assign({},this.hotelListArray[0]); */
     //console.log("inn")
     
   }
@@ -223,37 +232,12 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     }, (error => {
     }));
   }
-  loadJquery() {
-  //   $('#carousel-example-generic').on('slid.bs.carousel', function () {
-  //     $('#slidenum').val($('.carousel-inner .active').index());
-  //  })
-   
-  //  $('#slidenum').on('change',function(){
-  //    var sn = parseInt($('#slidenum').val());
-  //    $('#carousel-example-generic').carousel(sn);
-  //  })
-  $(document).ready(function(){
   
-    // SLIDER
-    //$('.slider').slick({});
-      
-    $('.slider').slick({
-      dots: true,
-      speed: 1000,
-      infinite: true,
-      autoplay: true,
-      autoplaySpeed: 3000,
-      nextArrow: '<div class="slick-custom-arrow slick-custom-arrow-right"><i class="fas fa-angle-right"></i></div>',
-      prevArrow: '<div class="slick-custom-arrow slick-custom-arrow-left"><i class="fa fa-angle-left"></i></div>',
-    });
-  
-  });
-  }
 
 
   ngOnChanges(changes: SimpleChanges) {
     console.log("changes",changes)
-    if(changes.hotelDetails.currentValue.length){
+    /* if(typeof changes.hotelDetails!='undefined' && changes.hotelDetails.currentValue.length){
       this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);;
       for(let i=0; i < this.hotelListArray.length; i++){
         this.hotelDetails[i].galleryImages=[];
@@ -266,8 +250,10 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
       }
 
       this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
+    } */
+    if(typeof changes.hotelDetails!='undefined' && changes.hotelDetails.currentValue.length){
+      this.hotelsList = changes.hotelDetails.currentValue;
     }
-    //this.hotelsList = changes.hotelDetails.currentValue;
   }
 
   logAnimation(event) {
