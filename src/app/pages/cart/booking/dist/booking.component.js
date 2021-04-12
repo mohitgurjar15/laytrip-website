@@ -106,8 +106,12 @@ var BookingComponent = /** @class */ (function () {
                 _this.carts.push(cart);
                 _this.cartPrices.push(price);
             }
-            console.log("this.modules", _this.modules);
-            console.log(_this.modules.some(function (x) { return x === "hotel"; }));
+            if (_this.modules.some(function (x) { return x === "flight"; })) {
+                _this.lottieLoaderType = "flight";
+            }
+            else {
+                _this.lottieLoaderType = "hotel";
+            }
             _this.cartService.setCartItems(_this.carts);
             _this.cartService.setCartPrices(_this.cartPrices);
         }, function (error) {

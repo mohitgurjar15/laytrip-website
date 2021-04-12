@@ -159,7 +159,7 @@ export class CheckoutComponent implements OnInit {
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
 
-      console.log("cart",this.carts)
+
     }, error => {
       this.isCartEmpty = true;
       this.cartLoading = false;

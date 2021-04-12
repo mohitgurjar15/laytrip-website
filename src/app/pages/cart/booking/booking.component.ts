@@ -135,8 +135,11 @@ export class BookingComponent implements OnInit {
         this.carts.push(cart);
         this.cartPrices.push(price)
       }
-      console.log("this.modules",this.modules)
-      console.log(this.modules.some(x => x === "hotel"));
+      if(this.modules.some(x => x === "flight")){
+        this.lottieLoaderType = "flight";
+      } else {
+        this.lottieLoaderType = "hotel";
+      }
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
 

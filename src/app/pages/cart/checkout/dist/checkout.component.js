@@ -124,7 +124,6 @@ var CheckoutComponent = /** @class */ (function () {
             }
             _this.cartService.setCartItems(_this.carts);
             _this.cartService.setCartPrices(_this.cartPrices);
-            console.log("cart", _this.carts);
         }, function (error) {
             _this.isCartEmpty = true;
             _this.cartLoading = false;
