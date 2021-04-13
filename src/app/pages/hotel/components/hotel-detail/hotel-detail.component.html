@@ -398,11 +398,11 @@
             {{hotelDetails.address}}
           </span>
           <span class="hotel_stars">
-            <ng-container *ngIf="hotelDetails.rating">
-              <img *ngFor="let in of counter(hotelDetails.rating)" class="filled"
+            <ng-container *ngIf="hotelDetails?.rating">
+              <img *ngFor="let in of counter(hotelDetails?.rating)" class="filled"
                 src="{{s3BucketUrl}}assets/images/icon/star_filled.svg" alt="filled Stars Icon">
             </ng-container>
-            <img *ngFor="let in of counter(5-hotelDetails.rating)" class="blank"
+            <img *ngFor="let in of counter(5-hotelDetails?.rating)" class="blank"
               src="{{s3BucketUrl}}assets/images/icon/star_blank.svg" alt="blank Stars Icon">
           </span>
         </span>
@@ -444,15 +444,15 @@
           </div>
           <div class="amenities_wrpper">
             <h3 class="common_title_wrps">Amenities</h3>
-            <ul *ngIf="hotelDetails.amenities?.list.length">
-              <ng-container *ngFor="let amenity of hotelDetails.amenities.list ; let i=index">
+            <ul *ngIf="hotelDetails?.amenities?.list.length">
+              <ng-container *ngFor="let amenity of hotelDetails?.amenities?.list ; let i=index">
                 <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity}}</li>
                 <li *ngIf="showMoreAmenties">{{amenity}}</li>
               </ng-container>
             </ul>
-            <a *ngIf="!showMoreAmenties && hotelDetails.amenities?.list.length>10" (click)="toggleAmenities()"
+            <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities()"
               class="cta_link hover-link">More</a>
-            <a *ngIf="showMoreAmenties && hotelDetails.amenities?.list.length>10" (click)="toggleAmenities()"
+            <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities()"
               class="cta_link hover-link">Less</a>
           </div>
         </div>

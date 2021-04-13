@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter, Input, SimpleChanges, HostListener } from '@angular/core';
 import { HotelService } from 'src/app/services/hotel.service';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +15,7 @@ export class HotelSuggestionComponent implements OnInit {
   data=[];
   @Input() searchItem:string;
   isShowDropDown:boolean=false;
+  thisElementClicked: boolean = false;
   constructor(
     private hotelService:HotelService
   ) { }
@@ -67,4 +68,16 @@ export class HotelSuggestionComponent implements OnInit {
     this.selectedHotel.emit(item)
   }
 
+  @HostListener('document:click')
+  clickOutside() {
+    if (!this.thisElementClicked) {
+      this.isShowDropDown=false;
+    }
+    this.thisElementClicked=false;
+  }
+
+  @HostListener('click')
+  clickInside() {
+    this.isShowDropDown=true;
+  }
 }

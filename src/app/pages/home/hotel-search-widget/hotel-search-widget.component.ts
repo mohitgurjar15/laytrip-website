@@ -133,6 +133,7 @@ export class HotelSearchWidgetComponent implements OnInit {
         };
         if (this.route.snapshot.queryParams['location']) {
           info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+          this.searchedValue.push({ key: 'fromSearch', value: info });
           if (info) {
             this.defaultCity = info.title;
             this.fromDestinationInfo.city = info.city;
@@ -143,15 +144,14 @@ export class HotelSearchWidgetComponent implements OnInit {
         }
         if (this.route.snapshot.queryParams['itenery']) {
           info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+          this.searchedValue.push({ key: 'guest', value: info });
           if (info) {
             this.searchHotelInfo.occupancies = info;
           }
         }
       }
     }
-
-   
-    if (this.fromDestinationInfo) {
+    else {
       this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
       this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
       this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
@@ -219,14 +219,14 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
-  destinationChangedValue(event) {
+  /* destinationChangedValue(event) {
     if (event && event.key && event.key === 'fromSearch') {
       this.searchedValue[0]['value'] = event.value;
       this.fromDestinationTitle = event.value.title;
       this.searchHotelInfo.latitude = event.value.geo_codes.lat;
       this.searchHotelInfo.longitude = event.value.geo_codes.long;
     }
-  }
+  } */
 
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
@@ -237,13 +237,10 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value']));
     queryParams.location = btoa(JSON.stringify(this.searchedValue[0]['value']));
+
     if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
-      // localStorage.setItem('_hote', JSON.stringify(this.searchedValue));
-      // this.router.navigate(['hotel/search'], {
-      //   queryParams: queryParams,
-      //   queryParamsHandling: 'merge'
-      // });
+     
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['hotel/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
@@ -253,8 +250,6 @@ export class HotelSearchWidgetComponent implements OnInit {
   selectedHotel(event) {
 
       this.searchedValue[0]['value'] = event;
-      console.log(this.searchedValue,event)
-      this.fromDestinationTitle = event.title;
       this.searchHotelInfo.latitude = event.geo_codes.lat;
       this.searchHotelInfo.longitude = event.geo_codes.long;
   }

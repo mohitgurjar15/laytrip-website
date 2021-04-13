@@ -81,6 +81,12 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   scrollLoading = false;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  check_in:string=''
+  check_out:string=''
+  latitude:string=''
+  longitude:string=''
+  itenery:string='';
+  location:string='';
 
  
   constructor(
@@ -93,6 +99,12 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
       this.galleryOptions = [
         { "thumbnails": false, previewRotate:true,preview:false,width: "270px", height: "100%", imageSwipe:true,imageBullets:false },
       ];
+      this.check_in = this.route.snapshot.queryParams['check_in']
+      this.check_out = this.route.snapshot.queryParams['check_out']
+      this.latitude = this.route.snapshot.queryParams['latitude']
+      this.longitude = this.route.snapshot.queryParams['longitude']
+      this.itenery = this.route.snapshot.queryParams['itenery']
+      this.location = this.route.snapshot.queryParams['location']
   }
 
   ngOnInit() {
@@ -160,6 +172,8 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
           })
         }
       }
+
+      this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
     })
   }
 
