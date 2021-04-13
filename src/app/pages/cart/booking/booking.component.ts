@@ -63,10 +63,10 @@ export class BookingComponent implements OnInit {
   isSubmitted: boolean = false;
   alertErrorMessage: string = '';
   inValidCartTravller=[]
-
+  lottieLoaderType="flight";
   add_new_card = false;
   totalCard: number = 0;
-
+  modules=[];
   constructor(
     private router: Router,
     private flightService: FlightService,
@@ -108,7 +108,8 @@ export class BookingComponent implements OnInit {
         cart.id = items.data[i].id;
         cart.is_available = items.data[i].is_available;
         
-        
+        this.modules.push(items.data[i].type);
+
         if(items.data[i].type=='flight'){
           cart.module_info = items.data[i].moduleInfo[0];
           cart.old_module_info = {
@@ -121,7 +122,6 @@ export class BookingComponent implements OnInit {
           price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         }
         else  if(items.data[i].type=='hotel'){
-
           cart.module_info = items.data[i].moduleInfo[0];
           cart.old_module_info = {
             selling_price: items.data[i].oldModuleInfo[0].selling.total
@@ -135,7 +135,11 @@ export class BookingComponent implements OnInit {
         this.carts.push(cart);
         this.cartPrices.push(price)
       }
-
+      if(this.modules.some(x => x === "flight")){
+        this.lottieLoaderType = "flight";
+      } else {
+        this.lottieLoaderType = "hotel";
+      }
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
 
