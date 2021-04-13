@@ -82,12 +82,12 @@
               </form>
 
             </div>
-            <div class="cmn_block price">
+            <div class="cmn_block price" *ngIf="partialPaymentValue > 0 && partialPaymentHighValue > 0">
               <div class="block_top_in">
                 <h5>Installment Amount</h5>
               </div>
 
-              <form [formGroup]="partialPriceSlider">
+              <form [formGroup]="partialPriceSlider" >
                 <div class="custom_range_slide">
                   <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol }}{{partialPaymentHighValue}}
                   </p>
@@ -297,7 +297,7 @@
                 </div>
               </form>
             </div>
-            <div class="cmn_block price">
+            <div class="cmn_block price" *ngIf="partialPaymentValue > 0 && partialPaymentHighValue > 0">
               <div class="block_top_in">
                 <form [formGroup]="partialPriceSlider">
                   <div class="custom_range_slide">

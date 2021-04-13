@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChange
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
-import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -114,13 +113,13 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
 
         if (this.hotelDetailsMain.filter_objects && this.hotelDetailsMain.filter_objects.secondary_price && this.hotelDetailsMain.filter_objects.secondary_price.min && this.hotelDetailsMain.filter_objects.secondary_price.max) {
-          this.priceValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
-          this.priceHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
-          this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
+          // this.priceValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
+          // this.priceHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
+          // this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
           
           
-          this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
-          this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
+          // this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
+          // this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
           
           this.partialPriceSlider.controls.partial_price.setValue([Math.floor(this.partialPaymentValue), Math.ceil(this.partialPaymentHighValue)]);
           
@@ -274,6 +273,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         return item.selling.total >= this.minPrice && item.selling.total <= this.maxPrice;
       })
     }
+    /* Filter hotel, based on min & max price Payment Price*/
+    if (this.minPartialPaymentPrice && this.maxPartialPaymentPrice) {
+      filteredHotels = filteredHotels.filter(item => {
+        return item.secondary_start_price >= this.minPartialPaymentPrice && item.secondary_start_price <= this.maxPartialPaymentPrice;
+      })
+    }
 
     /* Filter hotels ratings */
     if (this.ratingArray.length) {
@@ -326,8 +331,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.minPrice = this.hotelDetailsMain.filter_objects.price.min;
     this.maxPrice = this.hotelDetailsMain.filter_objects.price.max;
 
+    this.minPartialPaymentPrice = this.hotelDetailsMain.filter_objects.secondary_price.min;
+    this.maxPartialPaymentPrice = this.hotelDetailsMain.filter_objects.secondary_price.max;
+
     // Reset Price
     this.priceSlider.reset({ price: [Math.floor(this.hotelDetailsMain.filter_objects.price.min), Math.ceil(this.hotelDetailsMain.filter_objects.price.max)] });
+    this.partialPriceSlider.reset({ partial_price: [Math.floor(this.minPartialPaymentPrice), Math.ceil(this.maxPartialPaymentPrice)] });
 
     // Reset price by total or weekly
     this.sortType = 'filter_total_price';
@@ -419,15 +428,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       this.filterHotelNames = result.length > 0 ? result : this.filterHotelNames ;
       return this.filterHotelNames;
     } else {
-      console.log(searchValue.target.value.length)
       if(searchValue.target.value.length <= 0){
-        console.log(this.filterHotelNames)
         this.isHotelSearch = false;
         this.hotelname = 'Search Hotel';
         this.filterHotel.emit(this.hotelDetailsMain.hotels);
         this.filterHotels({});
       } else {
-        console.log(this.filterHotelNames)
         return this.filterHotelNames = [{hotelName:'No result!!'}]
       }
     }
