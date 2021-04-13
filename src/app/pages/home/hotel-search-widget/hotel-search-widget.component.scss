@@ -62,6 +62,7 @@
   ::ng-deep .laytrip-cal-view {
     padding: 5px;
     background-color: $bg-crad;
+    z-index: 999999 !important;
 
     p-header {
       &.calender-header {
