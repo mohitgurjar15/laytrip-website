@@ -239,7 +239,7 @@ agm-map {
             margin-top: 25px;
 
             p {
-                color: $text_grey_dark;
+                color: $mid_gray_bg;
                 font-size: 18px;
                 line-height: 26px;
 
@@ -382,6 +382,7 @@ agm-map {
                                     .adress_span {
                                         font-size: 10px;
                                         line-height: 13px;
+                                        color: $mid_gray_bg;
                                     }
 
                                     .review_section_wrap {
@@ -630,6 +631,7 @@ agm-map {
                                             &.adress_span {
                                                 display: inline-block;
                                                 width: 100%;
+                                                color: $mid_gray_bg;
                                             }
                                         }
 
