@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChange
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
-import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -35,6 +34,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   partialPriceSlider: FormGroup = new FormGroup({
     partial_price: new FormControl([20, 80])
   });
+  rating_number : any = 0;
 
   /* Varibale for filter */
   minPrice: number;
@@ -102,7 +102,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         this.priceValue = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
         this.priceHighValue = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
         this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
-
+        
+        this.partialPaymentValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
+        this.partialPaymentHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
+        
         this.minPrice = this.priceValue;
         this.maxPrice = this.priceHighValue;
 
@@ -110,19 +113,24 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
 
         if (this.hotelDetailsMain.filter_objects && this.hotelDetailsMain.filter_objects.secondary_price && this.hotelDetailsMain.filter_objects.secondary_price.min && this.hotelDetailsMain.filter_objects.secondary_price.max) {
-          this.priceValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
-          this.priceHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
-          this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
-
-          this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
-          this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
+          // this.priceValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
+          // this.priceHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
+          // this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
+          
+          
+          // this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
+          // this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
+          
+          this.partialPriceSlider.controls.partial_price.setValue([Math.floor(this.partialPaymentValue), Math.ceil(this.partialPaymentHighValue)]);
+          
+          this.partialPaymentOptions.floor = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
+          this.partialPaymentOptions.ceil = this.hotelDetailsMain.filter_objects.secondary_price.max;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
         }
 
         this.amenities = this.hotelDetailsMain.filter_objects.ameneties;
         this.ratingStar = this.hotelDetailsMain.filter_objects.ratings;
       }
     }
-    
     this.loadJquery();
   }
 
@@ -134,10 +142,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   clickHotelFilterName(event) {
     this.isHotelSearch = false;
-    // $('#searchHotelName').val(event.target.textContent)
+    $('.searchHotelName').val(event.target.textContent)
     this.searchHotel = event.target.textContent ? event.target.textContent : '';
     if (event.target.textContent) {
-      this.filterHotels({ key: 'searchByHotelName', value: event.target.textContent });
+      this.filterHotels({ key: 'searchByHotelName', value:this.searchHotel});
     }
 
     /* if (this.hotelname) {
@@ -197,14 +205,15 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
    * @param event 
    */
   filterByHotelRatings(event, count) {
-    console.log(event.target.checked, count)
     if (event.target.checked === true) {
+      this.rating_number = parseInt(count);
       this.ratingArray.push(parseInt(count));
     } else {
       this.ratingArray = this.ratingArray.filter(item => {
         return item != count;
       })
     }
+    console.log(this.rating_number)
     this.filterHotels({});
   }
 
@@ -264,6 +273,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         return item.selling.total >= this.minPrice && item.selling.total <= this.maxPrice;
       })
     }
+    /* Filter hotel, based on min & max price Payment Price*/
+    if (this.minPartialPaymentPrice && this.maxPartialPaymentPrice) {
+      filteredHotels = filteredHotels.filter(item => {
+        return item.secondary_start_price >= this.minPartialPaymentPrice && item.secondary_start_price <= this.maxPartialPaymentPrice;
+      })
+    }
 
     /* Filter hotels ratings */
     if (this.ratingArray.length) {
@@ -287,7 +302,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     }
 
     /* Search hotels by name */
-    console.log(hotelname)
     if (hotelname && hotelname.key === 'searchByHotelName') {
       filteredHotels = filteredHotels.filter(item => {
         return item.name.toLowerCase().toString() == hotelname.value.trim().toLowerCase().toString();
@@ -317,8 +331,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.minPrice = this.hotelDetailsMain.filter_objects.price.min;
     this.maxPrice = this.hotelDetailsMain.filter_objects.price.max;
 
+    this.minPartialPaymentPrice = this.hotelDetailsMain.filter_objects.secondary_price.min;
+    this.maxPartialPaymentPrice = this.hotelDetailsMain.filter_objects.secondary_price.max;
+
     // Reset Price
     this.priceSlider.reset({ price: [Math.floor(this.hotelDetailsMain.filter_objects.price.min), Math.ceil(this.hotelDetailsMain.filter_objects.price.max)] });
+    this.partialPriceSlider.reset({ partial_price: [Math.floor(this.minPartialPaymentPrice), Math.ceil(this.maxPartialPaymentPrice)] });
 
     // Reset price by total or weekly
     this.sortType = 'filter_total_price';
@@ -344,7 +362,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     // Reset hotel name search
     this.hotelname = 'Search Hotel';
     this.filterHotels({});
-    $('#searchHotelName').val()
+    $('.searchHotelName').val()
     $("input:checkbox").prop('checked', false);
   }
 
@@ -401,14 +419,23 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     var result = [];
     for (let i = 0; i < this.hotelNamesArray.length; i++) {
       if (this.hotelNamesArray[i].hotelName.toLowerCase().toString().includes(searchValue.target.value)) {
+        console.log(this.hotelNamesArray[i],searchValue.target.value)
         result.push(this.hotelNamesArray[i]);
       }
     }
-    if(result.length > 0){
-      this.filterHotelNames = result;
+    if(this.hotelNamesArray.length > 0 && searchValue.target.value.length > 0){            
+    
+      this.filterHotelNames = result.length > 0 ? result : this.filterHotelNames ;
       return this.filterHotelNames;
     } else {
-      return this.filterHotelNames = [{hotelName:'No result!!'}]
+      if(searchValue.target.value.length <= 0){
+        this.isHotelSearch = false;
+        this.hotelname = 'Search Hotel';
+        this.filterHotel.emit(this.hotelDetailsMain.hotels);
+        this.filterHotels({});
+      } else {
+        return this.filterHotelNames = [{hotelName:'No result!!'}]
+      }
     }
   }
 }

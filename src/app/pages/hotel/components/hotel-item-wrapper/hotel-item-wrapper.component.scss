@@ -1652,12 +1652,30 @@ agm-map {
 
                     h4 {
                         font-size: 12px;
+                        display: -moz-box;                /* Mozilla */
+                        display: -webkit-box;             /* WebKit */
+                        display: box;                     /* As specified */
+                        -webkit-line-clamp: 3;
+                        -moz-box-orient: vertical;      /* Mozilla */
+                        -webkit-box-orient: vertical;   /* WebKit */
+                        box-orient: vertical;           /* As specified */
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
 
                     .adress_span {
                         font-size: 10px;
                         line-height: 13px;
                         color: $mid_gray_bg;
+                        display: -moz-box;                /* Mozilla */
+                        display: -webkit-box;             /* WebKit */
+                        display: box;                     /* As specified */
+                        -webkit-line-clamp: 3;
+                        -moz-box-orient: vertical;      /* Mozilla */
+                        -webkit-box-orient: vertical;   /* WebKit */
+                        box-orient: vertical;           /* As specified */
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
 
                     .review_section_wrap {
@@ -3263,12 +3281,26 @@ agm-map {
 
                     h4 {
                         font-size: 12px;
+                        display: -moz-box;                /* Mozilla */
+                        display: -webkit-box;             /* WebKit */
+                        display: box;                     /* As specified */
+                        -webkit-line-clamp: 3;
+                        -moz-box-orient: vertical;      /* Mozilla */
+                        -webkit-box-orient: vertical;   /* WebKit */
+                        box-orient: vertical;           /* As specified */
                     }
 
                     .adress_span {
                         font-size: 10px;
                         line-height: 13px;
                         color: $mid_gray_bg;
+                        display: -moz-box;                /* Mozilla */
+                        display: -webkit-box;             /* WebKit */
+                        display: box;                     /* As specified */
+                        -webkit-line-clamp: 3;
+                        -moz-box-orient: vertical;      /* Mozilla */
+                        -webkit-box-orient: vertical;   /* WebKit */
+                        box-orient: vertical;           /* As specified */
                     }
 
                     .review_section_wrap {

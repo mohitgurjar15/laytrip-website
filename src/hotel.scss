@@ -305,6 +305,9 @@
 
 .main_slider_big {
     ngx-gallery {
+        @include tab-view{
+            max-height: 210px;
+        }
         ngx-gallery-image {
             .ngx-gallery-image-wrapper {
                 border-radius: 10px;
