@@ -20,8 +20,6 @@ export class HotelSuggestionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    console.log("this.serachItem1223",this.searchItem)
   }
 
   closeHotelSuggestion(){
