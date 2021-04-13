@@ -1,9 +1,7 @@
 import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
-import { Subscription } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import {  ActivatedRoute } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../services/generic.service';
 import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
@@ -15,6 +13,7 @@ import { HotelService } from 'src/app/services/hotel.service';
   selector: 'app-hotel-item-wrapper',
   templateUrl: './hotel-item-wrapper.component.html',
   styleUrls: ['./hotel-item-wrapper.component.scss'],
+  
 })
 export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterContentChecked {
 
@@ -22,11 +21,8 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   @Input() filteredLabel;
   @Input() filter;
   @Input() hotelToken;
-  @Input() triggerChange;
-  animationState = 'out';
-  hotelsList;
   s3BucketUrl = environment.s3BucketUrl;
-  public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
+  //public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
   hotelListArray = [];
   mapListArray=[];
   noOfDataToShowInitially = 20;
@@ -39,7 +35,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   defaultLng;
   hotelName;
 
-  subscriptions: Subscription[] = [];
+  //subscriptions: Subscription[] = [];
   geoCodes;
   mapCanvas;
   myLatLng;
@@ -73,7 +69,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
  
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private commonFunction: CommonFunction,
     private genericService: GenericService,
@@ -267,7 +262,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+   // this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   
