@@ -321,19 +321,13 @@
                                                                 </div>
                                                             </div>
                                                             <div class="block_detail_btm">
-                                                                <span [id]="'accordion_infos'+blockIndex" class="show_detail">
+                                                                <span [id]="'accordion_infos_map'+blockIndex" class="show_detail">
                                                                     <a data-toggle="collapse" data-parent="#full_hotel_listing"
-                                                                        [href]="'#collapse'+blockIndex" aria-expanded="false"
-                                                                        aria-controls="collapse1" class="hotel_anchor">
+                                                                        [href]="'#collapse_map'+blockIndex" aria-expanded="false"
+                                                                         class="hotel_anchor">
                                                                         Details
                                                                     </a>
                                                                 </span>
-                                                                <!-- <div class="show_detail"
-                                                                    [ngClass]="{'open_detail':showHotelDetails[blockIndex]}">
-                                                                    <a class="show_more_detail anchor-tag"
-                                                                        (click)="showDetails(blockIndex)">
-                                                                        Details </a>
-                                                                </div> -->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -392,18 +386,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <span [id]="'accordion_infos'+blockIndex" class="show_detail">
+                                            <span [id]="'accordion_infos_map'+blockIndex" class="show_detail">
                                                 <a data-toggle="collapse" data-parent="#full_hotel_listing"
-                                                    [href]="'#collapse'+blockIndex" aria-expanded="false"
+                                                    [href]="'#collapse_map'+blockIndex" aria-expanded="false"
                                                     aria-controls="collapse1" class="hotel_anchor">
                                                     Details
                                                 </a>
                                             </span>
-                                            <!-- <div class="show_detail"
-                                                [ngClass]="{'open_detail':showHotelDetails[blockIndex]}">
-                                                <a class="show_more_detail anchor-tag" (click)="showDetails(blockIndex)">
-                                                    Details </a>
-                                            </div> -->
                                         </div>
                                         <div class="thrd_part">
                                             <div class="block_price block_pr">
@@ -427,9 +416,8 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="detail_info_show" [attr.id]="blockIndex"
-                                *ngIf="showHotelDetails[blockIndex] === true"> -->
-                                <div class="detail_info_show" [id]="'collapse'+blockIndex">
+                           
+                            <div class="detail_info_show collapse" [id]="'collapse_map'+blockIndex">
                                 
                                 <div class="card-body">
                                     <div class="io_ru_wrps">

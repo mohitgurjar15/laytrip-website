@@ -75,7 +75,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     private hotelService:HotelService
   ) {
       this.galleryOptions = [
-        { "thumbnails": false, previewRotate:true,preview:false,width: "270px", height: "100%", imageSwipe:true,imageBullets:false },
+        { "thumbnails": false, previewRotate:true,preview:false,width: "270px", height: "100%", imageSwipe:true,imageBullets:false,lazyLoading:true },
       ];
       this.check_in = this.route.snapshot.queryParams['check_in']
       this.check_out = this.route.snapshot.queryParams['check_out']

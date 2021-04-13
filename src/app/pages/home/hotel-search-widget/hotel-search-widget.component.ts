@@ -26,19 +26,22 @@ export class HotelSearchWidgetComponent implements OnInit {
   checkOutMinDate;
   isPrevButton = false;
   hotelSearchForm: FormGroup;
-  defaultCity = 'New York';
-  defaultHotelCountry = 'NY, United States';
-  fromDestinationTitle = 'New York, United States';
-  fromDestinationInfo = {
-    city: 'New York',
-    country: 'United States',
+  //defaultCity = 'New York';
+  //defaultHotelCountry = 'NY, United States';
+  //fromDestinationTitle = 'New York, United States';
+  fromDestinationInfo={
+    title: "Cancún, Mexico",
+    city: "Cancún",
+    state: "",
+    country: "Mexico",
+    type: "city",
     hotel_id: null,
-    title: 'New York',
-    type: 'city',
-    geo_codes: { lat: 40.7681, long: -73.9819 },
-  };
+    geo_codes: {
+      lat: 21.1613,
+      long: -86.8341
+    }
+  }
   showHotelDropDown:boolean=false;
-  searchedValue = [];
   hotelSearchFormSubmitted = false;
   searchHotelInfo: any = {
     latitude: null,
@@ -89,6 +92,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       longitude: null,
       check_in: this.checkInDate,
       check_out: this.checkOutDate,
+      location:{},
       occupancies: 
         {
           adults: null,
@@ -133,9 +137,9 @@ export class HotelSearchWidgetComponent implements OnInit {
         };
         if (this.route.snapshot.queryParams['location']) {
           info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
-          this.searchedValue.push({ key: 'fromSearch', value: info });
+          this.searchHotelInfo.location=info;
           if (info) {
-            this.defaultCity = info.title;
+            this.fromDestinationInfo.title = info.title;
             this.fromDestinationInfo.city = info.city;
             this.fromDestinationInfo.country = info.country;
             this.searchHotelInfo.city = info.city;
@@ -144,17 +148,15 @@ export class HotelSearchWidgetComponent implements OnInit {
         }
         if (this.route.snapshot.queryParams['itenery']) {
           info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-          this.searchedValue.push({ key: 'guest', value: info });
-          if (info) {
-            this.searchHotelInfo.occupancies = info;
-          }
+          this.searchHotelInfo.occupancies = info;
+          
         }
       }
     }
     else {
       this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
       this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
-      this.searchedValue.push({ key: 'fromSearch', value: this.fromDestinationInfo });
+      this.searchHotelInfo.location=this.fromDestinationInfo;
     }
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo=> {
       if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){      
@@ -174,7 +176,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.homeService.removeToString('hotel'); 
 
     if (this.selectedGuest) {
-      this.searchedValue.push({ key: 'guest', value: this.selectedGuest });
+      this.searchHotelInfo.occupancies = this.selectedGuest;
     }
   }
 
@@ -210,26 +212,13 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.checkOutDate =  moment(this.rangeDates[0]).add(1,'days').toDate();
       this.rangeDates[1]= this.searchHotelInfo.check_out = this.checkOutDate;
     }
-    // this.checkInDate =  date;
-      // this.checkOutMinDate = this.checkOutDate;
-      // this.searchHotelInfo.check_in = this.rangeDates[0];
+   
   }
 
   changeGuestInfo(event) {
-    if (this.searchedValue && this.searchedValue.find(i => i.key === 'guest')) {
-      this.searchedValue[1]['value'] = event;
-      this.searchHotelInfo.occupancies = event;
-    }
+     this.searchHotelInfo.occupancies = event;
   }
 
-  /* destinationChangedValue(event) {
-    if (event && event.key && event.key === 'fromSearch') {
-      this.searchedValue[0]['value'] = event.value;
-      this.fromDestinationTitle = event.value.title;
-      this.searchHotelInfo.latitude = event.value.geo_codes.lat;
-      this.searchHotelInfo.longitude = event.value.geo_codes.long;
-    }
-  } */
 
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
@@ -238,9 +227,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.check_out = moment(this.searchHotelInfo.check_out).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
-    queryParams.itenery = btoa(JSON.stringify(this.searchedValue[1]['value']));
-    queryParams.location = btoa(JSON.stringify(this.searchedValue[0]['value']));
-
+    queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
+    queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
     if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
      
@@ -252,8 +240,8 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   selectedHotel(event) {
 
-      this.searchedValue[0]['value'] = event;
-      this.searchHotelInfo.latitude = event.geo_codes.lat;
-      this.searchHotelInfo.longitude = event.geo_codes.long;
+    this.searchHotelInfo.location = event;
+    this.searchHotelInfo.latitude = event.geo_codes.lat;
+    this.searchHotelInfo.longitude = event.geo_codes.long;
   }
 }

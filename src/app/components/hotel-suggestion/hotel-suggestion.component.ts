@@ -21,24 +21,25 @@ export class HotelSuggestionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    console.log("this.serachItem1223",this.searchItem)
   }
 
   closeHotelSuggestion(){
     this.isShowDropDown=false;
   }
 
-  searchLocation(){
-
-    this.isShowDropDown = this.selectHotelItem.length>0?true:false;
-    this.searchHotel(this.searchItem)
+  searchLocation(event){
+    let notAllowedKey=[40,38,9];
+    if(!notAllowedKey.includes(event.keyCode)){
+      this.isShowDropDown = this.selectHotelItem.length>0?true:false;
+      this.data = [];
+      this.searchHotel(this.searchItem)
+    }
   }
 
   searchHotel(searchItem) {
     this.loading = true;
     const searchedData = { term: searchItem };
-    this.data = [];
+    
     this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
       this.loading = false;
       if (response && response.data && response.data.length) {

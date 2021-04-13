@@ -49,39 +49,21 @@ export class HotelSearchComponent implements OnInit {
     window.scroll(0, 0);
     this.renderer.addClass(document.body, 'cms-bgColor');
 
-    // if (document.getElementById('login_btn')) {
-    //   setTimeout(() => {
-    //     document.getElementById('login_btn').style.background = '#FF00BC';
-    //   }, 1000);
-    // }
-    let payload: any = {};
-    let info;
-    this.route.queryParams.forEach(params => {
-      info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-
-      payload = {
-        check_in: params.check_in,
-        check_out: params.check_out,
-        latitude: params.latitude,
-        longitude: params.longitude,
-        occupancies: [],
-        filter: true,
-      };
-      // info.forEach(item => {
-        payload.occupancies.push({ rooms:info.rooms,adults: info.adults, children: info.child });
-      // });
-      this.getHotelSearchData(payload);
-    });
+    let info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+    let payload = {
+      check_in: this.route.snapshot.queryParams['check_in'],
+      check_out: this.route.snapshot.queryParams['check_out'],
+      latitude: this.route.snapshot.queryParams['latitude'],
+      longitude: this.route.snapshot.queryParams['longitude'],
+      rooms:info.rooms,
+      adults: info.adults,
+      children: info.child,
+      filter: true,
+    };
+    this.getHotelSearchData(payload);
   }
 
-  // ngAfterViewInit() {
-  //   $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
-  //     function () {
-  //       $('.norm_btn').toggleClass("d-none");
-  //       $('.hover_btn').toggleClass("show");
-  //     }
-  //   );
-  // }
+  
 
   getHotelSearchData(payload) {
     this.loading = true;
