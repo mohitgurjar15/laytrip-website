@@ -63,7 +63,7 @@ export class BookingComponent implements OnInit {
   isSubmitted: boolean = false;
   alertErrorMessage: string = '';
   inValidCartTravller=[]
-  lottieLoaderType="flight";
+  lottieLoaderType="";
   add_new_card = false;
   totalCard: number = 0;
   modules=[];
@@ -109,7 +109,11 @@ export class BookingComponent implements OnInit {
         cart.is_available = items.data[i].is_available;
         
         this.modules.push(items.data[i].type);
-
+        if(this.modules.some(x => x === "flight")){
+          this.lottieLoaderType = "flight";
+        } else {
+          this.lottieLoaderType = "hotel";
+        }
         if(items.data[i].type=='flight'){
           cart.module_info = items.data[i].moduleInfo[0];
           cart.old_module_info = {
@@ -135,11 +139,7 @@ export class BookingComponent implements OnInit {
         this.carts.push(cart);
         this.cartPrices.push(price)
       }
-      if(this.modules.some(x => x === "flight")){
-        this.lottieLoaderType = "flight";
-      } else {
-        this.lottieLoaderType = "hotel";
-      }
+      
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
 
