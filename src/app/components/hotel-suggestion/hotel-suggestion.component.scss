@@ -31,6 +31,11 @@ ng-scrollbar {
 
     @include tab-view{
         //max-height: 265px;
+        margin: 0;
+        left: -1px;
+        z-index: 9999;
+        top: 106%;
+        width: 101%;
     }
 
     .close_btn {
@@ -40,7 +45,7 @@ ng-scrollbar {
         z-index: 999;
 
         @include tab-view{
-            right: 30px;
+            right: 10px;
         }
 
         button {
@@ -81,6 +86,9 @@ ng-scrollbar {
                             &:last-child{
                                 .line_names{
                                     margin-bottom: 10px;
+                                    &:last-child{
+                                        margin-bottom: 0;
+                                    }
                                 }
                             }
                         }

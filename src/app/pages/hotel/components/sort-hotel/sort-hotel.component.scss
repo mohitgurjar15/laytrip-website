@@ -26,9 +26,10 @@ ng-scrollbar {
 .filter_saidbar{
 	&.mobile_sort{
 		.short_by{
-			.block_shortby{
+			.block_shortby{ 
 				margin-top: 0;
 				.accordion-group{
+					max-width: 100%;
 					.accordion-heading{
 						&::after{
 							background-image: none;
