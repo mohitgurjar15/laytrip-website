@@ -197,7 +197,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
    * @param event 
    */
   filterByHotelRatings(event, count) {
-    console.log(event, count)
+    console.log(event.target.checked, count)
     if (event.target.checked === true) {
       this.ratingArray.push(parseInt(count));
     } else {
