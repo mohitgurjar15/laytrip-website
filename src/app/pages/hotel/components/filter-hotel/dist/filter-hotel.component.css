@@ -413,7 +413,7 @@ ng-scrollbar {
   padding: 0 15px;
 }
 .searchbar_box .search_suggetion_main {
-  height: 250px;
+  height: auto;
   margin-top: 5px;
   position: absolute;
   display: flex;
@@ -448,8 +448,10 @@ ng-scrollbar {
   flex-direction: column;
 }
 .searchbar_box .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box {
-  margin-bottom: 10px;
   float: left;
+}
+.searchbar_box .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box:last-child {
+  margin-bottom: 0;
 }
 .searchbar_box .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps {
   float: left;
@@ -459,8 +461,14 @@ ng-scrollbar {
   display: flex;
   cursor: pointer;
 }
+.searchbar_box .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps .line_names:last-child {
+  margin: 0;
+}
 
-.filter_main_wrapper.responsive_mobile .accordion.block_shortby .accordion-heading::after {
+.filter_main_wrapper.responsive_mobile .accordion.block_shortby .accordion-group {
+  max-width: 100%;
+}
+.filter_main_wrapper.responsive_mobile .accordion.block_shortby .accordion-group .accordion-heading::after {
   background-image: none;
 }
 
@@ -471,17 +479,31 @@ ng-scrollbar {
   padding: 5px 15px 10px;
   align-items: center;
 }
-.star-rating input[type=radio] {
+.star-rating input[type=checkbox] {
   display: none;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
+}
+.star-rating input[type=checkbox]:checked ~ label .filled {
+  display: block;
+}
+.star-rating input[type=checkbox]:checked ~ label .blank {
+  display: none;
 }
 .star-rating input[type=checkbox] {
   display: none;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
+}
+.star-rating input[type=checkbox]:not(:checked) ~ label .filled {
+  display: none;
+  height: 20px;
+}
+.star-rating input[type=checkbox]:not(:checked) ~ label .blank {
+  display: block;
+  height: 20px;
 }
 .star-rating input[type=checkbox]:checked ~ label .filled {
   display: block;
