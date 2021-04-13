@@ -204,12 +204,13 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();
     };
-      this.checkInDate =  date;
-      this.checkInMinDate = moment(this.customStartDateValidation,'YYYY-MM-DD').add(1,'days').toDate();
-      this.checkOutDate =  moment(this.checkInDate).add(1,'days').toDate();
-      this.checkOutMinDate = this.checkOutDate;
-      this.searchHotelInfo.check_in = this.rangeDates[0];
-      this.rangeDates[1]= this.searchHotelInfo.check_out = this.checkOutDate;
+   
+      // this.checkInDate =  date;
+      this.checkInMinDate = moment(this.rangeDates[0],'YYYY-MM-DD').add(1,'days').toDate();
+      // this.checkOutDate =  moment(this.checkInDate).add(1,'days').toDate();
+      // this.checkOutMinDate = this.checkOutDate;
+      // this.searchHotelInfo.check_in = this.rangeDates[0];
+      // this.rangeDates[1]= this.searchHotelInfo.check_out = this.checkOutDate;
   }
 
   changeGuestInfo(event) {

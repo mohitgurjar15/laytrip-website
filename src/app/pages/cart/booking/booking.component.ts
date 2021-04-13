@@ -108,12 +108,12 @@ export class BookingComponent implements OnInit {
         cart.id = items.data[i].id;
         cart.is_available = items.data[i].is_available;
         
-        this.modules.push(items.data[i].type);
+       /*  this.modules.push(items.data[i].type);
         if(this.modules.some(x => x === "flight")){
           this.lottieLoaderType = "flight";
         } else {
           this.lottieLoaderType = "hotel";
-        }
+        } */
         if(items.data[i].type=='flight'){
           cart.module_info = items.data[i].moduleInfo[0];
           cart.old_module_info = {

@@ -35,6 +35,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             type: 'city',
             geo_codes: { lat: 40.7681, long: -73.9819 }
         };
+        this.showHotelDropDown = false;
         this.searchedValue = [];
         this.hotelSearchFormSubmitted = false;
         this.searchHotelInfo = {
@@ -109,6 +110,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                 if (this.route.snapshot.queryParams['location']) {
                     info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
                     if (info) {
+                        this.defaultCity = info.title;
                         this.fromDestinationInfo.city = info.city;
                         this.fromDestinationInfo.country = info.country;
                         this.searchHotelInfo.city = info.city;
@@ -169,12 +171,12 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             this.dateFilter.hideOverlay();
         }
         ;
-        this.checkInDate = date;
-        this.checkInMinDate = moment(this.customStartDateValidation, 'YYYY-MM-DD').add(1, 'days').toDate();
-        this.checkOutDate = moment(this.checkInDate).add(1, 'days').toDate();
-        this.checkOutMinDate = this.checkOutDate;
-        this.searchHotelInfo.check_in = this.rangeDates[0];
-        this.rangeDates[1] = this.searchHotelInfo.check_out = this.checkOutDate;
+        // this.checkInDate =  date;
+        this.checkInMinDate = moment(this.rangeDates[0], 'YYYY-MM-DD').add(1, 'days').toDate();
+        // this.checkOutDate =  moment(this.checkInDate).add(1,'days').toDate();
+        // this.checkOutMinDate = this.checkOutDate;
+        // this.searchHotelInfo.check_in = this.rangeDates[0];
+        // this.rangeDates[1]= this.searchHotelInfo.check_out = this.checkOutDate;
     };
     HotelSearchWidgetComponent.prototype.changeGuestInfo = function (event) {
         if (this.searchedValue && this.searchedValue.find(function (i) { return i.key === 'guest'; })) {
@@ -211,6 +213,13 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                 _this.router.navigate(['hotel/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
             });
         }
+    };
+    HotelSearchWidgetComponent.prototype.selectedHotel = function (event) {
+        this.searchedValue[0]['value'] = event;
+        console.log(this.searchedValue, event);
+        this.fromDestinationTitle = event.title;
+        this.searchHotelInfo.latitude = event.geo_codes.lat;
+        this.searchHotelInfo.longitude = event.geo_codes.long;
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)
