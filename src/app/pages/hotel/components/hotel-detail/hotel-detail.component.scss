@@ -26,6 +26,10 @@ agm-map {
 
     .container {
         padding: 0;
+
+        @include tab-view {
+            padding: 15px;
+        }
     }
 
     &::before {
@@ -252,6 +256,12 @@ agm-map {
                 align-items: center;
                 margin-bottom: 5px;
 
+                .common_title_wrps {
+                    @include tab-view {
+                        margin: 0;
+                    }
+                }
+
                 .cta_link {
                     font-size: 15px;
                     color: $text_light_yellow;
@@ -260,6 +270,7 @@ agm-map {
 
                     @include tab-view {
                         font-size: 12px;
+                        margin: 0;
                     }
                 }
             }
@@ -401,6 +412,21 @@ agm-map {
 
                                     h4 {
                                         font-size: 12px;
+                                        display: -moz-box;
+                                        /* Mozilla */
+                                        display: -webkit-box;
+                                        /* WebKit */
+                                        display: box;
+                                        /* As specified */
+                                        -webkit-line-clamp: 3;
+                                        -moz-box-orient: vertical;
+                                        /* Mozilla */
+                                        -webkit-box-orient: vertical;
+                                        /* WebKit */
+                                        box-orient: vertical;
+                                        /* As specified */
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
 
                                         @include tab-view {
                                             margin: 0;
@@ -411,6 +437,21 @@ agm-map {
                                         font-size: 10px;
                                         line-height: 13px;
                                         color: $mid_gray_bg;
+                                        display: -moz-box;
+                                        /* Mozilla */
+                                        display: -webkit-box;
+                                        /* WebKit */
+                                        display: box;
+                                        /* As specified */
+                                        -webkit-line-clamp: 3;
+                                        -moz-box-orient: vertical;
+                                        /* Mozilla */
+                                        -webkit-box-orient: vertical;
+                                        /* WebKit */
+                                        box-orient: vertical;
+                                        /* As specified */
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
                                     }
 
                                     .review_section_wrap {
