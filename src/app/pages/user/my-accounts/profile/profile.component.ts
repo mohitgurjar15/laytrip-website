@@ -329,16 +329,15 @@ export class ProfileComponent implements OnInit {
       formdata.append("gender", this.gender_type ? this.gender_type : 'M');
       formdata.append("city_name", this.profileForm.value.city);
       formdata.append("address", this.profileForm.value.address);
-
-      if (!Number.isInteger(this.profileForm.value.country_id)) {
-        formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
-      } else {
+      if (typeof this.profileForm.value.country_id == 'object') {
         formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : 233);
-      }
-      if (!Number.isInteger(this.profileForm.value.state_id)) {
-        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
       } else {
+        formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
+      }
+      if (typeof this.profileForm.value.state_id == 'string') {
         formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
+      } else {
+        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
       }
       if (typeof (this.profileForm.value.country_code) != 'object') {
         formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
@@ -438,8 +437,6 @@ export class ProfileComponent implements OnInit {
           }
         }
         this.airportData=result;
-        console.log(this.airportData)
-
       },error=>{
         this.airportLoading=false;
         this.airportData=[];

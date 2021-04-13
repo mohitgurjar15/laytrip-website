@@ -91,7 +91,7 @@
                 </span>
 
                 <div class="error"
-                    *ngIf="(submitted &&  (travellerForm.controls.phone_no.errors || travellerForm.controls.country_code.errors))">
+                    *ngIf="(submitted &&  (travellerForm.controls.phone_no.errors || travellerForm.controls.country_code.errors || travellerForm.hasError('phoneAndPhoneCodeError')) )">
                     <small *ngIf="travellerForm.hasError('phoneAndPhoneCodeError')" class="error_field">
                         <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                         Enter phone number.</small>

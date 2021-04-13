@@ -344,35 +344,35 @@
                         </ul>
                       </div> -->
                       <div class="star-rating">
-                        <input id="star-5" type="radio" name="rating" value="star-5" />
+                        <input id="star-5" (change)="filterByHotelRatings($event,5)" type="checkbox" name="rating"  />
                         <label for="star-5" title="5 stars">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                             alt="blank Stars Icon">
                           <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                             alt="filled Stars Icon">
                         </label>
-                        <input id="star-4" type="radio" name="rating" value="star-4" />
+                        <input id="star-4" (change)="filterByHotelRatings($event,4)" type="checkbox" name="rating"  />
                         <label for="star-4" title="4 stars">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                             alt="blank Stars Icon">
                           <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                             alt="filled Stars Icon">
                         </label>
-                        <input id="star-3" type="radio" name="rating" value="star-3" />
+                        <input id="star-3" (change)="filterByHotelRatings($event,3)" type="checkbox" name="rating"  />
                         <label for="star-3" title="3 stars">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                             alt="blank Stars Icon">
                           <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                             alt="filled Stars Icon">
                         </label>
-                        <input id="star-2" type="radio" name="rating" value="star-2" />
+                        <input id="star-2" (change)="filterByHotelRatings($event,2)" type="checkbox" name="rating"  />
                         <label for="star-2" title="2 stars">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                             alt="blank Stars Icon">
                           <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                             alt="filled Stars Icon">
                         </label>
-                        <input id="star-1" type="radio" name="rating" value="star-1" />
+                        <input id="star-1" (change)="filterByHotelRatings($event,1)" type="checkbox" name="rating"  />
                         <label for="star-1" title="1 star">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                             alt="blank Stars Icon">
