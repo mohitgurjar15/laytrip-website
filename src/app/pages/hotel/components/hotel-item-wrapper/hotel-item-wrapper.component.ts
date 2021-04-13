@@ -15,23 +15,6 @@ import { HotelService } from 'src/app/services/hotel.service';
   selector: 'app-hotel-item-wrapper',
   templateUrl: './hotel-item-wrapper.component.html',
   styleUrls: ['./hotel-item-wrapper.component.scss'],
-  animations: [
-    trigger('listAnimation', [
-      transition('* => *', [ // each time the binding value changes
-        query(':leave', [
-          stagger(10, [
-            animate('0.001s', style({ opacity: 0 }))
-          ])
-        ], { optional: true }),
-        query(':enter', [
-          style({ opacity: 0 }),
-          stagger(50, [
-            animate('0.5s', style({ opacity: 1 }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ],
 })
 export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterContentChecked {
 
@@ -256,7 +239,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes",changes)
+    //console.log("changes",changes)
     /* if(typeof changes.hotelDetails!='undefined' && changes.hotelDetails.currentValue.length){
       this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);;
       for(let i=0; i < this.hotelListArray.length; i++){
@@ -274,9 +257,9 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
       this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
     } */
-    if(typeof changes.hotelDetails!='undefined' && changes.hotelDetails.currentValue.length){
+    /* if(typeof changes.hotelDetails!='undefined' && changes.hotelDetails.currentValue.length){
       this.hotelsList = changes.hotelDetails.currentValue;
-    }
+    } */
   }
 
   logAnimation(event) {
