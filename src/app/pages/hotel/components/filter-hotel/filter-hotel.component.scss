@@ -126,9 +126,12 @@ ng-scrollbar {
     &.responsive_mobile {
         .accordion {
             &.block_shortby {
-                .accordion-heading {
-                    &::after {
-                        background-image: none;
+                .accordion-group{
+                    max-width: 100%;
+                    .accordion-heading {
+                        &::after {
+                            background-image: none;
+                        }
                     }
                 }
             }
