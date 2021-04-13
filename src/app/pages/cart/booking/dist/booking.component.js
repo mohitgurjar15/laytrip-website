@@ -51,7 +51,7 @@ var BookingComponent = /** @class */ (function () {
         this.isSubmitted = false;
         this.alertErrorMessage = '';
         this.inValidCartTravller = [];
-        this.lottieLoaderType = "flight";
+        this.lottieLoaderType = "";
         this.add_new_card = false;
         this.totalCard = 0;
         this.modules = [];
@@ -82,7 +82,12 @@ var BookingComponent = /** @class */ (function () {
                 cart.travelers = items.data[i].travelers;
                 cart.id = items.data[i].id;
                 cart.is_available = items.data[i].is_available;
-                _this.modules.push(items.data[i].type);
+                /*  this.modules.push(items.data[i].type);
+                 if(this.modules.some(x => x === "flight")){
+                   this.lottieLoaderType = "flight";
+                 } else {
+                   this.lottieLoaderType = "hotel";
+                 } */
                 if (items.data[i].type == 'flight') {
                     cart.module_info = items.data[i].moduleInfo[0];
                     cart.old_module_info = {
@@ -105,12 +110,6 @@ var BookingComponent = /** @class */ (function () {
                 }
                 _this.carts.push(cart);
                 _this.cartPrices.push(price);
-            }
-            if (_this.modules.some(function (x) { return x === "flight"; })) {
-                _this.lottieLoaderType = "flight";
-            }
-            else {
-                _this.lottieLoaderType = "hotel";
             }
             _this.cartService.setCartItems(_this.carts);
             _this.cartService.setCartPrices(_this.cartPrices);

@@ -126,7 +126,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     /* this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
     for(let i=0; i < this.hotelListArray.length; i++){
       this.hotelDetails[i].galleryImages=[];
-      if(this.hotelDetails[i].images.length > 0){
         for(let image of this.hotelDetails[i].images){
           this.hotelDetails[i].galleryImages.push({
             small: image,
@@ -134,14 +133,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
             big:image
           })
         }
-
-      } else {
-        this.hotelDetails[i].galleryImages.push({
-          small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-          medium:this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-          big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
-        })
-      }
     }
 
     this.mapListArray[0]=Object.assign({},this.hotelListArray[0]); */
@@ -155,21 +146,12 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       for(let i=0; i < this.hotelListArray.length; i++){
         this.hotelDetails[i].galleryImages=[];
-        if(this.hotelDetails[i].images.length > 0){
           for(let image of this.hotelDetails[i].images){
             this.hotelDetails[i].galleryImages.push({
               small: image,
               medium:image,
               big:image
-            })
-          }
-
-        } else {
-          this.hotelDetails[i].galleryImages.push({
-            small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-            medium:this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-            big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
-          })
+            });
         }
       }
 
@@ -287,13 +269,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
               big:image
             })
           }
-        } else {
-          this.hotelDetails[i].galleryImages.push({
-            small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-            medium:this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-            big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
-          })          
-        }        
+        }       
       }
 
       this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);

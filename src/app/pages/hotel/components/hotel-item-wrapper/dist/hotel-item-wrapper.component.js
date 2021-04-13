@@ -66,7 +66,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         /* this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
         for(let i=0; i < this.hotelListArray.length; i++){
           this.hotelDetails[i].galleryImages=[];
-          if(this.hotelDetails[i].images.length > 0){
             for(let image of this.hotelDetails[i].images){
               this.hotelDetails[i].galleryImages.push({
                 small: image,
@@ -74,14 +73,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                 big:image
               })
             }
-    
-          } else {
-            this.hotelDetails[i].galleryImages.push({
-              small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-              medium:this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-              big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
-            })
-          }
         }
     
         this.mapListArray[0]=Object.assign({},this.hotelListArray[0]); */
@@ -93,21 +84,12 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             _this.hotelListArray = _this.hotelDetails.slice(0, _this.noOfDataToShowInitially);
             for (var i = 0; i < _this.hotelListArray.length; i++) {
                 _this.hotelDetails[i].galleryImages = [];
-                if (_this.hotelDetails[i].images.length > 0) {
-                    for (var _i = 0, _a = _this.hotelDetails[i].images; _i < _a.length; _i++) {
-                        var image = _a[_i];
-                        _this.hotelDetails[i].galleryImages.push({
-                            small: image,
-                            medium: image,
-                            big: image
-                        });
-                    }
-                }
-                else {
+                for (var _i = 0, _a = _this.hotelDetails[i].images; _i < _a.length; _i++) {
+                    var image = _a[_i];
                     _this.hotelDetails[i].galleryImages.push({
-                        small: _this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-                        medium: _this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-                        big: _this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
+                        small: image,
+                        medium: image,
+                        big: image
                     });
                 }
             }
@@ -218,12 +200,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                   big:image
                 })
               }
-            } else {
-              this.hotelDetails[i].galleryImages.push({
-                small: this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-                medium:this.s3BucketUrl + 'assets/images/hotels/default_img.svg',
-                big: this.s3BucketUrl + 'assets/images/hotels/default_img.svg'
-              })
             }
           }
     

@@ -32,10 +32,10 @@
                                         <div class="box_img">
                                             <div class="block_im">
                                                 <div class="hotel_list_img_wrp">
-                                                    <ngx-gallery [options]="galleryOptions"
+                                                    <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
                                                         [images]="item.galleryImages"></ngx-gallery>
 
-                                                    <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
+                                                    <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
                                                 </div>
                                             </div>
                                         </div>
@@ -103,8 +103,10 @@
                     <div class="mobile_box">
 
                         <div class="hotel_list_img_wrp">
-                            <ngx-gallery [options]="galleryOptions" [images]="item.galleryImages"></ngx-gallery>
-                            <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
+                            <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
+                                [images]="item.galleryImages"></ngx-gallery>
+
+                            <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">                           
                         </div>
                         <div class="middle_part">
                             <div class="detail_info">
@@ -117,9 +119,12 @@
                                     <div class="left_bar">
 
                                         <div class="stars_text">
-                                            <div class="stars_rating">
-                                                <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                    alt="Stars" *ngFor='let in of counter(item.rating)'>
+                                            <div class="stars_rating {{item.rating}}">                                                                    
+                                                <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                                                    alt="filled Stars Icon" *ngFor='let in of counter(item.rating)'>
+                                                <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                                                    alt="blank Stars Icon" *ngFor='let in of counter(5 - item.rating)' >
+                                            
                                             </div>
 
                                         </div>
@@ -282,9 +287,10 @@
                                                         <div class="box_img">
                                                             <div class="block_im">
                                                                 <div class="hotel_list_img_wrp">
-                                                                    <ngx-gallery [options]="galleryOptions"
+                                                                    <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
                                                                         [images]="item.galleryImages"></ngx-gallery>
-                                                                        <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
+                
+                                                                    <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -302,10 +308,12 @@
                                                                             <div class="left_bar">
 
                                                                                 <div class="stars_text">
-                                                                                    <div class="stars_rating">
-                                                                                        <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                                                            alt="Stars"
-                                                                                            *ngFor='let in of counter(item.rating)'>
+                                                                                    <div class="stars_rating {{item.rating}}">                                                                    
+                                                                                        <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                                                                                            alt="filled Stars Icon" *ngFor='let in of counter(item.rating)'>
+                                                                                        <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                                                                                            alt="blank Stars Icon" *ngFor='let in of counter(5 - item.rating)' >
+                                                                                    
                                                                                     </div>
 
                                                                                 </div>
@@ -358,9 +366,10 @@
                                     <div class="mobile_box">
 
                                         <div class="hotel_list_img_wrp">
-                                            <ngx-gallery [options]="galleryOptions" [images]="item.galleryImages">
-                                            </ngx-gallery>
-                                            <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
+                                            <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
+                                                [images]="item.galleryImages"></ngx-gallery>
+
+                                            <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
                                         </div>
                                         <div class="middle_part">
                                             <div class="detail_info">
@@ -373,9 +382,12 @@
                                                     <div class="left_bar">
 
                                                         <div class="stars_text">
-                                                            <div class="stars_rating">
-                                                                <img src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars" *ngFor='let in of counter(item.rating)'>
+                                                            <div class="stars_rating {{item.rating}}">                                                                    
+                                                                <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                                                                    alt="filled Stars Icon" *ngFor='let in of counter(item.rating)'>
+                                                                <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                                                                    alt="blank Stars Icon" *ngFor='let in of counter(5 - item.rating)' >
+                                                            
                                                             </div>
 
                                                         </div>
