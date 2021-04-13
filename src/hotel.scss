@@ -867,6 +867,7 @@ ngb-datepicker {
 
                     @include tab-view {
                         flex-flow: column;
+                        padding: 0;
                     }
 
                     .hotel_where {
