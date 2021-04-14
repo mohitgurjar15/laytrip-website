@@ -96,7 +96,12 @@
 
     .custom_inputs {
         padding-right: 10px;
+
+        &.from_to_inputs {
+            width: 90%;
+        }
     }
+
 }
 
 

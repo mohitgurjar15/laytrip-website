@@ -408,7 +408,6 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
     this.bookingRequest.cart = carts;
     sessionStorage.setItem('__cbk', JSON.stringify(this.bookingRequest))
-    console.log("this.bookingRequest", this.bookingRequest)
     if (this.isValidTravelers && this.cardToken != '' && this.isAllAlertClosed && this.isTermConditionAccepted && this.isExcludedCountryAccepted) {
       this.isBookingProgress = true;
       window.scroll(0, 0);
@@ -420,11 +419,20 @@ export class CheckoutComponent implements OnInit {
           travelers.push({
             traveler_id: data[k].userId
           })
+
+          data[k].dob=moment(data[k].dob,"MM/DD/YYYY").format("YYYY-MM-DD")
+          if(data[k].passport_expiry){
+            data[k].passport_expiry=moment(data[k].passport_expiry,"MM/DD/YYYY").format("YYYY-MM-DD")
+          }
+          this.travelerService.updateAdult(data[k], data[k].userId).subscribe((traveler: any) => {
+
+          })
         }
         let cartData = {
           cart_id: this.carts[i].id,
           travelers: travelers
         }
+
 
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {

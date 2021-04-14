@@ -604,13 +604,13 @@
                 background: transparent;
 
                 &.slick-prev {
-                    left: 5px;
+                    left: -25px;
                     background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_prev.svg) no-repeat;
                     background-position: center;
                 }
 
                 &.slick-next {
-                    right: 5px;
+                    right: -25px;
                     background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg) no-repeat;
                     background-position: center;
                 }
