@@ -80,10 +80,6 @@ export class FlightPriceSliderComponent implements OnInit {
 
   ngOnInit() {
   }
-  breakpoint(e) {
-    console.log('breakpoint', e);
-  }
- 
 
   ngOnChanges(changes: SimpleChanges) {
    
