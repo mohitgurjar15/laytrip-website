@@ -248,7 +248,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             this.returnDate = this.rangeDates[1];
             this.rangeDates = [this.departureDate, this.returnDate];
         }
-        console.log(this.flightDepartureMinDate);
     };
     FlightSearchWidgetComponent.prototype.getPrice = function (d, m, y) {
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
