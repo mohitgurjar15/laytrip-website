@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, HostListener, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonFunction } from '../../_helpers/common-function';
 declare var $: any;
@@ -31,10 +31,12 @@ export class TravellerInfoComponent implements OnInit {
     class: 'Economy',
     totalPerson: 0,
   };
+  toggle = 0;
 
   constructor(
     private route: ActivatedRoute,
-    private commonFunction:CommonFunction
+    private commonFunction:CommonFunction,
+    private eRef: ElementRef
   ) {
     this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
     this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
@@ -50,38 +52,60 @@ export class TravellerInfoComponent implements OnInit {
     this.totalPerson = this.adultValue + this.childValue + this.infantValue;
     this.travelerLabel = this.totalPerson > 1 ? 'Travelers' : 'Traveler';
   }
-  toggle = 0;
 
   loadJquery() {
-    $("body").click(function () {
+   /*  $("body").click(function () {
       $(".add_traveler__open").hide();
-    });
+    }); */
 
-    $(".add_traveler_").click(function (e) {
-        e.stopPropagation();
-        if((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') || 
-        (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')
-        ) {          
-          $(".add_traveler__open").hide();
-        } else {
-          $(".add_traveler__open").show();          
-        /*   if(e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide'){            
-            $(".add_traveler__open").hide();
-          }  else {
-            $(".add_traveler__open").show();          
-          } */ 
-        }
-      $(".add_class_sec_open_").hide();
-    });
+  //  /*  $(".add_traveler_").click(function (e) {
+  //     console.log(e)
+  //       // e.stopPropagation();
+  //       if((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') || 
+  //       (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')
+  //       ) {          
+  //         $(".add_traveler__open").hide();
+  //       } else {
+  //         $(".add_traveler__open").show();          
+  //       /*   if(e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide'){            
+  //           $(".add_traveler__open").hide();
+  //         }  else {
+  //           $(".add_traveler__open").show();          
+  //         } */ 
+  //       }
+  //     $(".add_class_sec_open_").hide();
+  //   }); */
 
-    $('.add_traveler__open').click(
+   /*  $('.add_traveler__open').click(
       function (e) {
-        e.stopPropagation();
+        // e.stopPropagation();
       }
-    );
+    ); */
 
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(this.eRef.nativeElement.contains(event.target)) {      
+      $(".add_class_sec_open_").hide();
+
+      if(
+
+        // (event.target.nextSibling.classList != '' && typeof event.target.nextSibling.classList != 'undefined' &&  event.target.nextSibling.classList[2] == 'panel_hide') || 
+      
+    //  (event.currentTarget.nextSibling.classList != null &&  typeof event.currentTarget.nextSibling.classList != 'undefined'&&   event.currentTarget.nextSibling.classList[1] == 'panel_hide') ||
+      
+      ( event.target.offsetParent.nextElementSibling.classList != null && typeof event.target.offsetParent.nextElementSibling.classList != 'undefined' && event.target.offsetParent.nextElementSibling.classList[2] == 'panel_hide')
+            
+      ) {    
+        this.showTraveller = false;
+      }  else {        
+        this.showTraveller = true;
+      }      
+    } else {
+      this.showTraveller = false;
+    }
+  }
 
   toggleTraveller(){
     this.showTraveller=!this.showTraveller;

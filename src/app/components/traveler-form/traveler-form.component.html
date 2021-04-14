@@ -81,7 +81,7 @@
                       
                       <div class="gender_anchers gender_selection">
                         <label for="">Gender*</label>
-                        <ng-select formControlName="gender" [clearable]="false" placeholder="Select Gender" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.gender.errors}">
+                        <ng-select [searchable]="false" [selectOnTab]="true" formControlName="gender" [clearable]="false" placeholder="Select Gender" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.gender.errors}">
                           <ng-option value="M">Male</ng-option>
                           <ng-option value="F">Female</ng-option>
                           <ng-option value="O">Other</ng-option>

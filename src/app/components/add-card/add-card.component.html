@@ -47,7 +47,7 @@
                     <div class="save_btn_wrps">
                         <input type="button" class="button" value="Close" (click)="closeNewCardPanel()"
                             [hidden]="totalCard === 0">
-                        <input type="submit" id="submit_button" class="button" value="Save">
+                        <input [disabled]="saveCardLoader" [ngClass]="{'disabled':saveCardLoader}" type="submit" id="submit_button" class="button" value="Save">
                     </div>
                     <div class="section_description cvv_description" id="cardError">
                         <span class="sec_text pt-1 pr-1" id="cardErrorMessage"></span>
