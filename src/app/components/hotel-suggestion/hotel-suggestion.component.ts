@@ -30,9 +30,9 @@ export class HotelSuggestionComponent implements OnInit {
     })
   }
 
-  closeHotelSuggestion(){
+  /* closeHotelSuggestion(){
     this.isShowDropDown=false;
-  }
+  } */
 
   searchLocation(event){
     let notAllowedKey=[40,38,9];

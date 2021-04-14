@@ -176,14 +176,16 @@
         width: 100%;
 
         .filter_head_popup {
-            width: 100%;
+            width: 75px;
             padding: 0;
-
+            right:0;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
+            position: absolute;
+            height: 75px;
+            z-index: 9999;
 
             .filter_clear {
                 width: auto;

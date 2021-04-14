@@ -96,16 +96,16 @@
 
 <div class="filter_saidbar mobile_sort">
     <div class="short_by">
-        <div class="accordion block_shortby" id="accordion">
-            <div class="accordion-group" >
-                <div class="accordion-heading" (click)="toggleLowToHigh()" data-parent="#accordion" href="#collapseOne">
+        <div class="accordion block_shortby" id="accordion1">
+            <div class="accordion-group">
+                <div class="accordion-heading" (click)="toggleLowToHigh()" data-parent="#accordion1" href="#collapseTwo">
                     <a class="accordion-toggle">
                         {{'sort_by' | translate}}
                     </a>
                     <a class="anchor_link" 
                         (click)="resetSorting('selling_price','ASC')"> Clear</a>
                 </div>
-                <div id="collapseOne" class="accordion-body collapse show">
+                <div id="collapseTwo" class="accordion-body collapse show">
                     <div class="accordion-inner">
                         <div class="block_cmn price">
                             <h5>{{'price' | translate}}</h5>

@@ -1,10 +1,10 @@
 <input class="" [(ngModel)]="searchItem" (keyup)="searchLocation($event)"  >
 <div class="search_suggetion_main" *ngIf="isShowDropDown">
-    <div class="close_btn">
+    <!-- <div class="close_btn">
         <button (click)="closeHotelSuggestion()" type="button" class="close">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
         </button>
-    </div>
+    </div> -->
     <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
         pointerEventsMethod="scrollbar">
         <span *ngIf="loading">Loading...</span>
