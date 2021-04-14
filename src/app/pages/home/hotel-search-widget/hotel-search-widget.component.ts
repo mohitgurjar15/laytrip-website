@@ -151,6 +151,7 @@ export class HotelSearchWidgetComponent implements OnInit {
           this.searchHotelInfo.occupancies = info;
           
         }
+        console.log("this.searchHotelInfo",this.searchHotelInfo)
       }
     }
     else {
@@ -160,17 +161,15 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo=> {
       if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){      
-
-      this.fromDestinationInfo.city = hotelInfo.city;
-      this.searchHotelInfo.check_in =  this.checkInDate = moment().add(31,'days').toDate();
-      this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1,'days').toDate();
-      this.searchHotelInfo.latitude =   hotelInfo.lat;
-      this.searchHotelInfo.longitude = hotelInfo.long;
-
+        this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.city;
+        this.searchHotelInfo.check_in =  this.checkInDate = moment().add(31,'days').toDate();
+        this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1,'days').toDate();
+        this.searchHotelInfo.latitude =   hotelInfo.lat;
+        this.searchHotelInfo.longitude = hotelInfo.long;
+        
       this.checkInMinDate = moment(this.customStartDateValidation).toDate();
 
       this.rangeDates = [this.checkInDate, this.checkOutDate];
-
       }
     });
     this.homeService.removeToString('hotel'); 
@@ -223,12 +222,13 @@ export class HotelSearchWidgetComponent implements OnInit {
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
     let queryParams: any = {};
-    queryParams.check_in = moment(this.searchHotelInfo.check_in).format('YYYY-MM-DD');
-    queryParams.check_out = moment(this.searchHotelInfo.check_out).format('YYYY-MM-DD');
+    queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
+    queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
     queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
+    console.log(queryParams,this.searchHotelInfo.occupancies)
     if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
      
