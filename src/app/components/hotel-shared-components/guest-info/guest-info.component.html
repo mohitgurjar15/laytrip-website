@@ -90,7 +90,7 @@
                   <ng-scrollbar class="custom_scroll_suggetion child_scrollbox" barClass="scrollbar" customview="true"
                     #scrollable track="all" pointerEventsMethod="scrollbar">
                     <a *ngFor="let child of childAges;let x = index" class="dropdown-item"
-                      href="javascript:void(0)" (click)="selectChildAge(idx,x)">{{x}}</a>
+                       (click)="selectChildAge(idx,x)">{{x}}</a>
                   </ng-scrollbar>
                 </div>
               </div>

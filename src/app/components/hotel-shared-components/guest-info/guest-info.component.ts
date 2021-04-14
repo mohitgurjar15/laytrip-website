@@ -58,7 +58,7 @@ export class GuestInfoComponent implements OnInit {
     });
 
     $("#add_child").click(function (e) {
-      e.stopPropagation();
+      // e.stopPropagation();
       if((e.target.nextSibling != null && e.target.nextSibling.classList[1] == 'panel_hide') || 
       e.currentTarget.nextSibling != null && e.currentTarget.nextSibling.classList[1] == 'panel_hide') {
         $("#add_child_open").hide();        
@@ -68,13 +68,13 @@ export class GuestInfoComponent implements OnInit {
     });
 
     $(document).on("click",".child_sub_drop",function(e){
-      e.stopPropagation();
+      // e.stopPropagation();
       $(this).siblings(".child_su_drop_op").show();
       //$("#child_su_drop_op").css('display', 'flex');
     })
     
 
-    $('#add_child_open').click(
+   /*  $('#add_child_open').click(
       function (e) {
         e.stopPropagation();
       }
@@ -83,7 +83,7 @@ export class GuestInfoComponent implements OnInit {
       function (e) {
         e.stopPropagation();
       }
-    );
+    ); */
 
   }
 

@@ -102,7 +102,13 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                     });
                 }
             }
-            _this.mapListArray[0] = Object.assign({}, _this.hotelListArray[0]);
+            if (_this.hotelListArray.length > 0) {
+                _this.mapListArray[0] = Object.assign({}, _this.hotelListArray[0]);
+            }
+            else {
+                _this.mapListArray = [];
+            }
+            console.log(_this.mapListArray, _this.mapListArray.length, _this.hotelListArray.length);
         });
     };
     HotelItemWrapperComponent.prototype.onScrollDown = function () {

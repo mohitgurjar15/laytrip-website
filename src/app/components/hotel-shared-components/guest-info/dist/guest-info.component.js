@@ -46,7 +46,7 @@ var GuestInfoComponent = /** @class */ (function () {
             $("#child_su_drop_op").css('display', 'none');
         });
         $("#add_child").click(function (e) {
-            e.stopPropagation();
+            // e.stopPropagation();
             if ((e.target.nextSibling != null && e.target.nextSibling.classList[1] == 'panel_hide') ||
                 e.currentTarget.nextSibling != null && e.currentTarget.nextSibling.classList[1] == 'panel_hide') {
                 $("#add_child_open").hide();
@@ -56,16 +56,20 @@ var GuestInfoComponent = /** @class */ (function () {
             }
         });
         $(document).on("click", ".child_sub_drop", function (e) {
-            e.stopPropagation();
+            // e.stopPropagation();
             $(this).siblings(".child_su_drop_op").show();
             //$("#child_su_drop_op").css('display', 'flex');
         });
-        $('#add_child_open').click(function (e) {
-            e.stopPropagation();
-        });
-        $('#child_su_drop_op').click(function (e) {
-            e.stopPropagation();
-        });
+        /*  $('#add_child_open').click(
+           function (e) {
+             e.stopPropagation();
+           }
+         );
+         $('#child_su_drop_op').click(
+           function (e) {
+             e.stopPropagation();
+           }
+         ); */
     };
     GuestInfoComponent.prototype.toggleDrawer = function () {
         this.openDrawer = !this.openDrawer;

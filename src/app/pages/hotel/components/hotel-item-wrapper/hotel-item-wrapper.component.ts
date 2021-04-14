@@ -134,8 +134,14 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
         }
       }
 
-      this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
-    })
+      if(this.hotelListArray.length > 0){
+        this.mapListArray[0] =  Object.assign({},this.hotelListArray[0]);
+      } else {
+        this.mapListArray = [];
+      }
+      
+      console.log(this.mapListArray,this.mapListArray.length,this.hotelListArray.length)
+    });
   }
 
   onScrollDown() {
@@ -172,7 +178,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   }
 
   infoWindowAction(template, event, action) {
-
+    
     if (action === 'open') {
       template.open();
     } else if (action === 'close') {

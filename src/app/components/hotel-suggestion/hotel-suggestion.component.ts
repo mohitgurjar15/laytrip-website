@@ -1,6 +1,7 @@
 import { Component, OnInit, Output,EventEmitter, Input, SimpleChanges, HostListener } from '@angular/core';
 import { HotelService } from 'src/app/services/hotel.service';
 import { environment } from 'src/environments/environment';
+declare var $: any;
 
 @Component({
   selector: 'app-hotel-suggestion',
@@ -21,6 +22,12 @@ export class HotelSuggestionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    $("body").click(function () {
+      this.isShowDropDown=false;
+    });
+    $("#add_child").click(function (e) {  
+      this.isShowDropDown=false;       
+    })
   }
 
   closeHotelSuggestion(){
@@ -79,6 +86,6 @@ export class HotelSuggestionComponent implements OnInit {
 
   @HostListener('click')
   clickInside() {
-    this.isShowDropDown=true;
+    this.thisElementClicked=true;
   }
 }
