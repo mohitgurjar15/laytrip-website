@@ -244,10 +244,11 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         ;
         if (this.rangeDates[0] && this.rangeDates[1]) {
             this.departureDate = this.rangeDates[0];
-            this.flightDepartureMinDate = this.rangeDates[0];
+            // this.flightDepartureMinDate = this.rangeDates[0];
             this.returnDate = this.rangeDates[1];
             this.rangeDates = [this.departureDate, this.returnDate];
         }
+        console.log(this.flightDepartureMinDate);
     };
     FlightSearchWidgetComponent.prototype.getPrice = function (d, m, y) {
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
