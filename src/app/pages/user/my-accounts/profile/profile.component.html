@@ -184,7 +184,7 @@
                 </div>
             </div>
             <div class="error error_profile"
-                *ngIf="submitted && profileForm.controls.phone_no.errors">
+                *ngIf="submitted && (profileForm.controls.phone_no.errors ||profileForm.hasError('phoneAndPhoneCodeError'))">
                 <div class="fake_div"></div>
                 <small class="error_field_new" *ngIf="profileForm.hasError('phoneAndPhoneCodeError')">
                     <img

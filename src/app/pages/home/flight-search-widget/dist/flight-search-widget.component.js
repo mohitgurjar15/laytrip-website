@@ -93,7 +93,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             this.isCalenderPriceLoading = false;
         }
         this.route.queryParams.subscribe(function (params) {
-            if (Object.keys(params).length > 0) {
+            console.log("innn", params);
+            if (Object.keys(params).length > 0 && window.location.pathname == '/flight/search') {
                 //delete BehaviorSubject in the listing page
                 _this.homeService.removeToString();
                 _this.calPrices = true;
@@ -244,7 +245,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         ;
         if (this.rangeDates[0] && this.rangeDates[1]) {
             this.departureDate = this.rangeDates[0];
-            this.flightDepartureMinDate = this.rangeDates[0];
+            // this.flightDepartureMinDate = this.rangeDates[0];
             this.returnDate = this.rangeDates[1];
             this.rangeDates = [this.departureDate, this.returnDate];
         }
