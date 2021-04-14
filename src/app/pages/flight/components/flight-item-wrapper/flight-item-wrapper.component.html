@@ -193,11 +193,6 @@
                             </span>
                         </span>
                     </ng-container>
-                    <!-- <span class="cta_btn">
-                        <button (click)="bookNow(item)">
-                            Select
-                        </button>
-                    </span> -->
                 </div>
             </div>
         </div>
@@ -271,34 +266,13 @@
                         <span class="texts_rules" *ngIf="!loadCancellationPolicy && errorMessage!=''">
                             {{ errorMessage }}
                         </span>
-                        <!-- <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy && !loadMoreCancellationPolicy"
-                    [innerHtml]="cancellationPolicyArray[0]">
-                    </span> -->
 
                         <span class="texts_rules">
                             Non-refundable, non-transferable. Change policy reflected in Laytrip <a
                                 [routerLink]="['/terms']">Terms</a> which apply.
                         </span>
-
-                        <!-- skeleton loader for rules -->
-                        <!-- <div class="loader_rules" style="margin: 10px 0;" *ngIf="loadCancellationPolicy">
-                            <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                            <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                            <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                            <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                            <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                        </div> -->
-                        <!-- skeleton loader for rules -->
-
-                        <!-- <a class="view_more"
-                        *ngIf="!loadCancellationPolicy && cancellationPolicyArray.length"
-                        (click)="toggleCancellationContent()">
-                        {{ loadMoreCancellationPolicy===true ? 'View Less' : 'View More' }}</a> -->
                     </div>
                 </div>
-                <!-- <div class="notifi_text desk_notifi">
-                    Bi-weekly and monthly installments plans also available
-                </div> -->
             </div>
         </div>
     </div>
