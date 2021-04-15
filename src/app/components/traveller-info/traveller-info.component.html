@@ -2,10 +2,10 @@
     <!-- <label>{{ label }}</label> -->
     <div class="travel_info add_traveler_" [id]="domid" (click)="toggleTraveller()" [ngClass]="{'dr_travel_info':countryCode=='DR'}">
         <span>{{ totalPerson }}</span> <!-- {{'traveler' | translate}} --> {{ travelerLabel }}
-        <div class="drop_aerrow" (click)="toggleTraveller()">
+        <div class="drop_aerrow" >
         </div>
     </div>
-    <div class="traveller_add_block add_traveler__open" id="add_traveler_open"  [ngClass]="(showTraveller==true)?'panel_show':'panel_hide'">
+    <div class="traveller_add_block add_traveler__open {{showTraveller}}" id="add_traveler_open"  [ngClass]="(showTraveller==true)?'panel_show':'panel_hide'">
         <ul>
             <li>
                 <div class="left">

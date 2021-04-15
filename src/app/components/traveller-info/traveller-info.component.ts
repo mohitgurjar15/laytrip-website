@@ -84,12 +84,12 @@ export class TravellerInfoComponent implements OnInit {
 
   }
 
-  /* @HostListener('document:click', ['$event'])
+  @HostListener('document:click', ['$event'])
   clickout(event) {
     if(this.eRef.nativeElement.contains(event.target)) {      
       $(".add_class_sec_open_").hide();
 
-      if(
+      /* if(
 
         // (event.target.nextSibling.classList != '' && typeof event.target.nextSibling.classList != 'undefined' &&  event.target.nextSibling.classList[2] == 'panel_hide') || 
       
@@ -101,16 +101,18 @@ export class TravellerInfoComponent implements OnInit {
         this.showTraveller = false;
       }  else {        
         this.showTraveller = true;
-      }      
+      }  */     
     } else {
       this.showTraveller = false;
     }
   }
- */
+
   toggleTraveller(){
+    $(".add_class_sec_open_").hide();
     this.showTraveller=!this.showTraveller;
   }
 
+ 
   btnClickForChange(item) {
     // FOR ADULT
     if (item && item.type === 'minus' && item.label === 'adult') {

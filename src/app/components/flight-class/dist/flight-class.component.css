@@ -1,0 +1,7 @@
+.panel_show {
+  display: block !important;
+}
+
+.panel_hide {
+  display: none !important;
+}

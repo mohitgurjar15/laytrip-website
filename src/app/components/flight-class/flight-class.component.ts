@@ -20,7 +20,7 @@ export class FlightClassComponent implements OnInit {
   }
   
   loadJquery() {
-    $("body").click(function () {
+    /* $("body").click(function () {
       $(".add_class_sec_open_").hide();
     });
 
@@ -41,13 +41,26 @@ export class FlightClassComponent implements OnInit {
       function (e) {
         e.stopPropagation();
       }
-    );
+    ); */
 
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(this.eRef.nativeElement.contains(event.target)) {     
+      $(".add_traveler__open").hide();      
+    } else {
+      this.showClass = false;
+    }
+  }
+  
+  
+  
   toggleTraveller(){
+    $(".add_traveler__open").hide();
     this.showClass=!this.showClass;
   }
+
   btnClickForChange(item){
     this.changeValue.emit(item.value);
     this.flightClass = item.value;
