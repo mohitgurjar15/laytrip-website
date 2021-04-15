@@ -84,7 +84,7 @@ export class TravellerInfoComponent implements OnInit {
 
   }
 
-  @HostListener('document:click', ['$event'])
+  /* @HostListener('document:click', ['$event'])
   clickout(event) {
     if(this.eRef.nativeElement.contains(event.target)) {      
       $(".add_class_sec_open_").hide();
@@ -106,7 +106,7 @@ export class TravellerInfoComponent implements OnInit {
       this.showTraveller = false;
     }
   }
-
+ */
   toggleTraveller(){
     this.showTraveller=!this.showTraveller;
   }
