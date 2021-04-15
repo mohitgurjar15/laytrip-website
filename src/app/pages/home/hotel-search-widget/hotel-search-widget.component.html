@@ -12,14 +12,9 @@
       <ul class="hotels-grid oneway">
         <li class="grid_box first"> 
           <div class="hotel_where">
-            <div class="search_area">
-              <!-- <app-search-hotel [form]="hotelSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'"
-                [label]="'DESTINATION'" [placeHolder]=defaultCity [defaultSelected]=fromDestinationInfo [tabIndex]=1
-                [defaultCity]=defaultCity (changeValue)="destinationChangedValue($event)">
-              </app-search-hotel> -->
-              <!-- <input class="" formControlName="fromDestination" (blur)="searchLocation()" (click)="openHotelDropDown()"> -->
+            <div class="search_area" [ngClass]="{'flight-error': !isValidSearch && hotelSearchFormSubmitted}">
               <label for="">Destination</label>
-              <app-hotel-suggestion [searchItem]=fromDestinationInfo.title (selectedHotel)="selectedHotel($event)"></app-hotel-suggestion>
+              <app-hotel-suggestion [searchItem]=fromDestinationInfo.title (selectedHotel)="selectedHotel($event)" (validateSearch)="validateSearch($event)"></app-hotel-suggestion>
             </div>
           </div>
         </li>

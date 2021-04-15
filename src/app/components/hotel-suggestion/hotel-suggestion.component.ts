@@ -10,10 +10,13 @@ import { environment } from 'src/environments/environment';
 export class HotelSuggestionComponent implements OnInit {
 
   @Output() selectedHotel=new EventEmitter();
+  @Output() validateSearch=new EventEmitter();
+  isValidSearch:boolean=true;
   s3BucketUrl = environment.s3BucketUrl;
   loading:boolean=false;
   data=[];
   @Input() searchItem:string;
+  @Input() isFormSubmitted:boolean;
   isShowDropDown:boolean=false;
   thisElementClicked: boolean = false;
   constructor(
@@ -23,16 +26,15 @@ export class HotelSuggestionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /* closeHotelSuggestion(){
-    this.isShowDropDown=false;
-  } */
-
   searchLocation(event){
+    this.isFormSubmitted = false;
     let notAllowedKey=[40,38,9];
     if(!notAllowedKey.includes(event.keyCode)){
       this.isShowDropDown = this.selectHotelItem.length>0?true:false;
+      this.isValidSearch = this.selectHotelItem.length>0?true:false;
       this.data = [];
       this.searchHotel(this.searchItem)
+      this.validateSearch.emit(false);
     }
   }
 
@@ -67,6 +69,8 @@ export class HotelSuggestionComponent implements OnInit {
     this.isShowDropDown=false;
     this.searchItem=item.title;
     this.selectedHotel.emit(item)
+    this.validateSearch.emit(true);
+    this.isValidSearch=true;
   }
 
   @HostListener('document:click')
