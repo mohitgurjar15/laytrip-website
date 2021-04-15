@@ -5,22 +5,28 @@
     <div class="container">
       <div class="search_tab_icons_wrps">
         <a class="tab_anch hover-link" [routerLink]="['/']"  >
-          <img class="active-icon" src="{{s3BucketUrl}}assets/images/airplane_tab.svg" alt="Flight Icon" />
-          <img class="default-icon" src="{{s3BucketUrl}}assets/images/airplane-flying-inactive.svg" alt="Flight Icon" />
+          <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" 
+                alt="Flight Icon" />
+            <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_gray.svg"
+                alt="Flight Icon" />
         </a>
-        <a class="active tab_anch" >
-          <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/bed-white.svg" alt="Hotel Icon" />
-          <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/bed-gray.svg" alt="Hotel Icon" />
-        </a>
-        <a class="tab_anch"  style="pointer-events: none;">
-          <img class="active-icon" src="{{s3BucketUrl}}assets/images/home_active.svg" alt="Accommodation Icon" />
-          <img class="default-icon" src="{{s3BucketUrl}}assets/images/home_inactive.svg" alt="Accommodation Icon" />
+        <a class="active tab_anch"  style="pointer-events: none;">
+            <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
+            <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_gray.svg" alt="Hotel Icon" />
         </a>
         <a class="tab_anch"  style="pointer-events: none;">
-          <img class="active-icon" src="{{s3BucketUrl}}assets/images/car_tab_inactive.svg" alt="car Icon" />
-          <img class="default-icon" src="{{s3BucketUrl}}assets/images/car_tab_inactive.svg" alt="car Icon" />
+            <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
+                alt="Accommodation Icon" />
+            <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_gray.svg"
+                alt="Accommodation Icon" />
         </a>
-      </div>
+        <a class="tab_anch"  style="pointer-events: none;">
+            <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_blue.svg"
+                alt="car Icon" />
+            <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_gray.svg"
+                alt="car Icon" />
+        </a>
+    </div>
       <div class="searchbar_box_common">
         <app-hotel-search-widget></app-hotel-search-widget>
       </div>

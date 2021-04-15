@@ -24,11 +24,8 @@ export class HotelSearchWidgetComponent implements OnInit {
   minDate: any = {};
   checkInMinDate;
   checkOutMinDate;
-  isPrevButton = false;
   hotelSearchForm: FormGroup;
-  //defaultCity = 'New York';
-  //defaultHotelCountry = 'NY, United States';
-  //fromDestinationTitle = 'New York, United States';
+  validSearch:boolean=true;
   fromDestinationInfo={
     title: "Cancún, Mexico",
     city: "Cancún",
@@ -227,7 +224,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
     queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
-    if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
+    console.log(queryParams,this.searchHotelInfo.occupancies)
+    if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
      
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -241,5 +239,9 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.searchHotelInfo.location = event;
     this.searchHotelInfo.latitude = event.geo_codes.lat;
     this.searchHotelInfo.longitude = event.geo_codes.long;
+  }
+
+  validateSearch(event){
+    this.validSearch=event;
   }
 }

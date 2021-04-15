@@ -23,10 +23,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.checkOutDate = new Date();
         this.maxDate = {};
         this.minDate = {};
-        this.isPrevButton = false;
-        //defaultCity = 'New York';
-        //defaultHotelCountry = 'NY, United States';
-        //fromDestinationTitle = 'New York, United States';
+        this.validSearch = true;
         this.fromDestinationInfo = {
             title: "Cancún, Mexico",
             city: "Cancún",
@@ -194,7 +191,8 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
         queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
         queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
-        if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
+        console.log(queryParams, this.searchHotelInfo.occupancies);
+        if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
             this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
                 _this.router.navigate(['hotel/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
@@ -205,6 +203,9 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.searchHotelInfo.location = event;
         this.searchHotelInfo.latitude = event.geo_codes.lat;
         this.searchHotelInfo.longitude = event.geo_codes.long;
+    };
+    HotelSearchWidgetComponent.prototype.validateSearch = function (event) {
+        this.validSearch = event;
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

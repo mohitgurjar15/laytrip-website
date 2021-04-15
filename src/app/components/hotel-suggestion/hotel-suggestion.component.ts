@@ -1,7 +1,6 @@
 import { Component, OnInit, Output,EventEmitter, Input, SimpleChanges, HostListener } from '@angular/core';
 import { HotelService } from 'src/app/services/hotel.service';
 import { environment } from 'src/environments/environment';
-declare var $: any;
 
 @Component({
   selector: 'app-hotel-suggestion',
@@ -11,6 +10,8 @@ declare var $: any;
 export class HotelSuggestionComponent implements OnInit {
 
   @Output() selectedHotel=new EventEmitter();
+  @Output() validateSearch=new EventEmitter();
+  isValidSearch:boolean=true;
   s3BucketUrl = environment.s3BucketUrl;
   loading:boolean=false;
   data=[];
@@ -22,24 +23,16 @@ export class HotelSuggestionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    $("body").click(function () {
-      this.isShowDropDown=false;
-    });
-    $("#add_child").click(function (e) {  
-      this.isShowDropDown=false;       
-    })
   }
-
-  /* closeHotelSuggestion(){
-    this.isShowDropDown=false;
-  } */
 
   searchLocation(event){
     let notAllowedKey=[40,38,9];
     if(!notAllowedKey.includes(event.keyCode)){
       this.isShowDropDown = this.selectHotelItem.length>0?true:false;
+      this.isValidSearch = this.selectHotelItem.length>0?true:false;
       this.data = [];
       this.searchHotel(this.searchItem)
+      this.validateSearch.emit(false);
     }
   }
 
@@ -74,6 +67,8 @@ export class HotelSuggestionComponent implements OnInit {
     this.isShowDropDown=false;
     this.searchItem=item.title;
     this.selectedHotel.emit(item)
+    this.validateSearch.emit(true);
+    this.isValidSearch=true;
   }
 
   @HostListener('document:click')
@@ -86,6 +81,6 @@ export class HotelSuggestionComponent implements OnInit {
 
   @HostListener('click')
   clickInside() {
-    this.thisElementClicked=true;
+    this.isShowDropDown=true;
   }
 }
