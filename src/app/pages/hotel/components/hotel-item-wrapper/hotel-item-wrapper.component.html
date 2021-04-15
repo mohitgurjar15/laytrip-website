@@ -10,7 +10,7 @@
         <img src="{{s3BucketUrl}}assets/images/icon/list_y.svg" alt="List view">
         List
     </button>
-    <button class="map_v_btn" (click)="differentView('mapView')" [hidden]="isMapView">
+    <button *ngIf="hotelListArray.length > 0" class="map_v_btn" (click)="differentView('mapView')" [hidden]="isMapView">
         <img src="{{s3BucketUrl}}assets/images/icon/map_.svg" alt="map view">
         Map
     </button>
@@ -33,7 +33,7 @@
                                                     <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
                                                         [images]="item.galleryImages"></ngx-gallery>
 
-                                                    <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
+                                                    <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box">
                                                 </div>
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@
                             <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
                                 [images]="item.galleryImages"></ngx-gallery>
 
-                            <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">                           
+                            <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box">                           
                         </div>
                         <div class="middle_part">
                             <div class="detail_info">
@@ -248,7 +248,7 @@
         <i class="fa fa-spinner fa-spin"></i>
     </div>
 
-    <div class="result_listing hotel_map_listings" [hidden]="!isMapView">
+    <div class="result_listing hotel_map_listings" [hidden]="!isMapView" >
         <div class="col-lg-12" style="padding: 0;">
             <div class="row">
                 <div class="col-lg-12">
@@ -288,7 +288,7 @@
                                                                     <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
                                                                         [images]="item.galleryImages"></ngx-gallery>
                 
-                                                                    <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
+                                                                    <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -361,7 +361,7 @@
                                             <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
                                                 [images]="item.galleryImages"></ngx-gallery>
 
-                                            <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
+                                            <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box">
                                         </div>
                                         <div class="middle_part">
                                             <div class="detail_info">

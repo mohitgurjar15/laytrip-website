@@ -465,6 +465,10 @@ ng-scrollbar {
   margin: 0;
 }
 
+.custom_range_form_slider {
+  width: 100%;
+}
+
 .filter_main_wrapper.responsive_mobile .accordion.block_shortby .accordion-group {
   max-width: 100%;
 }
@@ -478,18 +482,6 @@ ng-scrollbar {
   justify-content: flex-end;
   padding: 5px 15px 10px;
   align-items: center;
-}
-.star-rating input[type=checkbox] {
-  display: none;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}
-.star-rating input[type=checkbox]:checked ~ label .filled {
-  display: block;
-}
-.star-rating input[type=checkbox]:checked ~ label .blank {
-  display: none;
 }
 .star-rating input[type=checkbox] {
   display: none;

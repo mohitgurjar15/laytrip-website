@@ -162,13 +162,16 @@ var FilterHotelComponent = /** @class */ (function () {
      */
     FilterHotelComponent.prototype.filterByHotelRatings = function (event, count) {
         if (event.target.checked === true) {
+            $('.star-' + count).prop('checked', true);
             this.rating_number = parseInt(count);
             this.ratingArray.push(parseInt(count));
         }
         else {
+            $('.star-' + count).prop('checked', false);
             this.ratingArray = this.ratingArray.filter(function (item) {
                 return item != count;
             });
+            console.log(count);
         }
         console.log(this.rating_number);
         this.filterHotels({});

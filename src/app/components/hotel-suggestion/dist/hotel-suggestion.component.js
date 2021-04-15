@@ -17,21 +17,31 @@ var HotelSuggestionComponent = /** @class */ (function () {
         this.loading = false;
         this.data = [];
         this.isShowDropDown = false;
+        this.thisElementClicked = false;
     }
     HotelSuggestionComponent.prototype.ngOnInit = function () {
+        $("body").click(function () {
+            this.isShowDropDown = false;
+        });
+        $("#add_child").click(function (e) {
+            this.isShowDropDown = false;
+        });
     };
     HotelSuggestionComponent.prototype.closeHotelSuggestion = function () {
         this.isShowDropDown = false;
     };
-    HotelSuggestionComponent.prototype.searchLocation = function () {
-        this.isShowDropDown = this.selectHotelItem.length > 0 ? true : false;
-        this.searchHotel(this.searchItem);
+    HotelSuggestionComponent.prototype.searchLocation = function (event) {
+        var notAllowedKey = [40, 38, 9];
+        if (!notAllowedKey.includes(event.keyCode)) {
+            this.isShowDropDown = this.selectHotelItem.length > 0 ? true : false;
+            this.data = [];
+            this.searchHotel(this.searchItem);
+        }
     };
     HotelSuggestionComponent.prototype.searchHotel = function (searchItem) {
         var _this = this;
         this.loading = true;
         var searchedData = { term: searchItem };
-        this.data = [];
         this.hotelService.searchHotels(searchedData).subscribe(function (response) {
             _this.loading = false;
             if (response && response.data && response.data.length) {
@@ -56,12 +66,27 @@ var HotelSuggestionComponent = /** @class */ (function () {
         this.searchItem = item.title;
         this.selectedHotel.emit(item);
     };
+    HotelSuggestionComponent.prototype.clickOutside = function () {
+        if (!this.thisElementClicked) {
+            this.isShowDropDown = false;
+        }
+        this.thisElementClicked = false;
+    };
+    HotelSuggestionComponent.prototype.clickInside = function () {
+        this.thisElementClicked = true;
+    };
     __decorate([
         core_1.Output()
     ], HotelSuggestionComponent.prototype, "selectedHotel");
     __decorate([
         core_1.Input()
     ], HotelSuggestionComponent.prototype, "searchItem");
+    __decorate([
+        core_1.HostListener('document:click')
+    ], HotelSuggestionComponent.prototype, "clickOutside");
+    __decorate([
+        core_1.HostListener('click')
+    ], HotelSuggestionComponent.prototype, "clickInside");
     HotelSuggestionComponent = __decorate([
         core_1.Component({
             selector: 'app-hotel-suggestion',

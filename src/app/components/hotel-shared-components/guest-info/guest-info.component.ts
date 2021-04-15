@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, HostListener, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Key } from 'protractor';
 import { CommonFunction } from '../../../_helpers/common-function';
@@ -32,7 +32,8 @@ export class GuestInfoComponent implements OnInit {
   selectedChildAge;  
   constructor(
     private route: ActivatedRoute,
-    private commonFunction: CommonFunction
+    private commonFunction: CommonFunction,
+    private eRef: ElementRef
   ) {
     this.countryCode = this.commonFunction.getUserCountry();
   }
@@ -52,40 +53,38 @@ export class GuestInfoComponent implements OnInit {
 
   loadJquery() {
     $("#add_child_open").hide();
-    $("body").click(function () {
-      $("#add_child_open").hide();
-      $("#child_su_drop_op").css('display', 'none');
-    });
-
-    $("#add_child").click(function (e) {
-      e.stopPropagation();
-      if((e.target.nextSibling != null && e.target.nextSibling.classList[1] == 'panel_hide') || 
-      e.currentTarget.nextSibling != null && e.currentTarget.nextSibling.classList[1] == 'panel_hide') {
-        $("#add_child_open").hide();        
-      }  else {
-        $("#add_child_open").show();
-      }
-    });
+ 
 
     $(document).on("click",".child_sub_drop",function(e){
-      e.stopPropagation();
+      // e.stopPropagation();
       $(this).siblings(".child_su_drop_op").show();
       //$("#child_su_drop_op").css('display', 'flex');
     })
     
-
-    $('#add_child_open').click(
-      function (e) {
-        e.stopPropagation();
-      }
-    );
-    $('#child_su_drop_op').click(
-      function (e) {
-        e.stopPropagation();
-      }
-    );
-
   }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(this.eRef.nativeElement.contains(event.target)) {
+      if((typeof event.target.nextSibling.classList != 'undefined' && event.target.nextSibling.classList != null && event.target.nextSibling.classList[1] == 'panel_hide') || 
+      
+      typeof event.currentTarget.nextSibling.classList != 'undefined'&&  event.currentTarget.nextSibling.classList!= null && event.currentTarget.nextSibling.classList[1] == 'panel_hide' ||
+      
+      typeof event.target.offsetParent.nextElementSibling.classList != 'undefined'&& event.target.offsetParent.nextElementSibling.classList != null && event.target.offsetParent.nextElementSibling.classList[1] == 'panel_hide'
+      
+      ) {       
+        $("#add_child_open").hide();        
+        this.openDrawer = false;
+      }  else {        
+        $("#add_child_open").show();
+        this.openDrawer = true;
+      }      
+    } else {
+      $("#add_child_open").hide();
+      this.openDrawer = false;
+    }
+  }
+
 
   toggleDrawer(){
     this.openDrawer=!this.openDrawer;
