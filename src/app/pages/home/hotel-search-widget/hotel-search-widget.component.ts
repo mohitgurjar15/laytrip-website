@@ -151,7 +151,6 @@ export class HotelSearchWidgetComponent implements OnInit {
           this.searchHotelInfo.occupancies = info;
           
         }
-        console.log("this.searchHotelInfo",this.searchHotelInfo)
       }
     }
     else {
@@ -228,7 +227,6 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
     queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
-    console.log(queryParams,this.searchHotelInfo.occupancies)
     if (this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
      

@@ -13,7 +13,7 @@
                     <img class="default-icon" src="{{s3BucketUrl}}assets/images/airplane-flying-inactive.svg"
                         alt="Flight Icon" />
                 </a>
-                <a class="tab_anch"  style="pointer-events: none;">
+                <a class="tab_anch hover-link" (click)="moduleTabClick('hotel')" [routerLink]="['/']">
                     <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/bed-white.svg" alt="Hotel Icon" />
                     <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/bed-gray.svg" alt="Hotel Icon" />
                 </a>

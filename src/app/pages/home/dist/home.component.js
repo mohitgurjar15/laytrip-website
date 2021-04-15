@@ -43,6 +43,15 @@ var HomeComponent = /** @class */ (function () {
         setTimeout(function () {
             _this.openCookiePolicyPopup();
         }, 5000);
+        this.$tabName = this.homeService.getActiveTabName.subscribe(function (tabName) {
+            if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) {
+                var tab = tabName;
+                if (tab == 'hotel') {
+                    $('.hotel-tab').trigger('click');
+                }
+            }
+        });
+        this.$tabName.unsubscribe();
     };
     HomeComponent.prototype.openCookiePolicyPopup = function () {
         if (!this.cookieService.get('__cke')) {

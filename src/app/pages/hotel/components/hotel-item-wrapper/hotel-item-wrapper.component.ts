@@ -139,8 +139,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
       } else {
         this.mapListArray = [];
       }
-      
-      console.log(this.mapListArray,this.mapListArray.length,this.hotelListArray.length)
     });
   }
 

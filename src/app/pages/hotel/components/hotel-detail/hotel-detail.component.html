@@ -364,7 +364,7 @@
 <div class="search_tab_listing_wrapper">
   <div class="container">
     <div class="search_tab_icons_wrps">
-      <a class="tab_anch" >
+      <a class="tab_anch flight hover-link" [routerLink]="['/']">
         <img class="active-icon" src="{{s3BucketUrl}}assets/images/airplane_tab.svg" alt="Flight Icon" />
         <img class="default-icon" src="{{s3BucketUrl}}assets/images/airplane-flying-inactive.svg" alt="Flight Icon" />
       </a>
@@ -437,9 +437,11 @@
         <div class="right_box_wrps mobile_right">
 
           <div class="map_wrapper">
+            <!-- iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" -->
               <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
                 [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
-                <agm-marker iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                <agm-marker
+                 iconUrl="{{s3BucketUrl}}assets/images/hotels/map-pinfull.svg"
                   [latitude]="hotelDetails?.hotelLocations?.latitude"
                   [longitude]="hotelDetails?.hotelLocations?.longitude">
                 </agm-marker>
@@ -647,7 +649,9 @@
         <div class="map_wrapper">
             <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
               [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
-              <agm-marker iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+<!--               iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+ -->              <agm-marker              
+              iconUrl="{{s3BucketUrl}}assets/images/hotels/map-pinfull.svg" 
                 [latitude]="hotelDetails?.hotelLocations?.latitude"
                 [longitude]="hotelDetails?.hotelLocations?.longitude">
               </agm-marker>
