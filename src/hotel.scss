@@ -2870,60 +2870,131 @@ agm-map {
                                     font-weight: 300;
 
                                     .custom_radio {
-                                        width: 100%;
-                                        display: block;
                                         position: relative;
-                                        padding-left: 25px;
-                                        margin: 0;
-                                        cursor: pointer;
-                                        font-size: 14px;
-                                        -webkit-user-select: none;
-                                        -moz-user-select: none;
-                                        -ms-user-select: none;
-                                        user-select: none;
-                                        color: $text-grey;
-
+                                        margin-bottom: 0;
+                                        vertical-align: middle;
+                                        line-height: normal;
+                                        display: flex;
+                                        //align-items: center;
+                                        // white-space: nowrap;
+                                        // text-overflow: ellipsis;
+                                        // overflow: hidden;
+                                        align-items: flex-start;
+                                        overflow: visible;
+                                        white-space: normal;
+                                        text-overflow: unset;
+                                        padding: 0;
+        
                                         input {
                                             position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 100%;
                                             opacity: 0;
                                             cursor: pointer;
-
+        
                                             &:checked {
                                                 ~ {
                                                     .checkmark {
-                                                        border: 1px solid $text_light_yellow;
-
+                                                        border-color: $text_light_yellow;
+        
                                                         &:after {
-                                                            display: block;
+                                                            opacity: 1;
                                                         }
                                                     }
                                                 }
                                             }
                                         }
-
+        
                                         .checkmark {
-                                            position: absolute;
-                                            top: 4px;
-                                            left: 0;
-                                            height: 14px;
-                                            width: 14px;
-                                            background-color: transparent;
+                                            width: 20px;
+                                            min-width: 20px;
+                                            height: 20px;
+                                            display: inline-block;
                                             border: 1px solid $text-grey;
-                                            border-radius: 50%;
-
+                                            vertical-align: middle;
+                                            margin-right: 11px;
+                                            position: relative;
+                                            top: 0;
+        
                                             &:after {
+                                                content: "";
                                                 content: "";
                                                 position: absolute;
                                                 display: none;
-                                                top: 2px;
-                                                left: 2px;
-                                                width: 8px;
-                                                height: 8px;
+                                                top: 1px;
+                                                left: 1.2px;
+                                                width: 15.5px;
+                                                height: 15.5px;
                                                 border-radius: 50%;
-                                                background: $text_light_yellow;
+                                                background: $text_light_yellow;        
                                             }
                                         }
+        
+                                        p {
+                                            margin: 0;
+                                            text-overflow: ellipsis;
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                        }
                                     }
+
+                                    // .custom_radio {
+                                    //     width: 100%;
+                                    //     display: block;
+                                    //     position: relative;
+                                    //     padding-left: 25px;
+                                    //     margin: 0;
+                                    //     cursor: pointer;
+                                    //     font-size: 14px;
+                                    //     -webkit-user-select: none;
+                                    //     -moz-user-select: none;
+                                    //     -ms-user-select: none;
+                                    //     user-select: none;
+                                    //     color: $text-grey;
+
+                                    //     input {
+                                    //         position: absolute;
+                                    //         opacity: 0;
+                                    //         cursor: pointer;
+
+                                    //         &:checked {
+                                    //             ~ {
+                                    //                 .checkmark {
+                                    //                     border: 1px solid $text_light_yellow;
+
+                                    //                     &:after {
+                                    //                         display: block;
+                                    //                     }
+                                    //                 }
+                                    //             }
+                                    //         }
+                                    //     }
+
+                                    //     .checkmark {
+                                    //         position: absolute;
+                                    //         top: 4px;
+                                    //         left: 0;
+                                    //         height: 14px;
+                                    //         width: 14px;
+                                    //         background-color: transparent;
+                                    //         border: 1px solid $text-grey;
+                                    //         border-radius: 50%;
+
+                                    //         &:after {
+                                    //             content: "";
+                                    //             position: absolute;
+                                    //             display: none;
+                                    //             top: 2px;
+                                    //             left: 2px;
+                                    //             width: 8px;
+                                    //             height: 8px;
+                                    //             border-radius: 50%;
+                                    //             background: $text_light_yellow;
+                                    //         }
+                                    //     }
+                                    // }
 
                                     &:last-child {
                                         padding-bottom: 0;

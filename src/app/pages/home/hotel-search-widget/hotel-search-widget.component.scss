@@ -165,8 +165,8 @@
         padding: 0.1rem !important;
 
         span {
-          width: 45px;
-          height: auto;
+          width: 31px !important;
+          height: 31px !important;
           font-size: 11px;
           display: flex;
           align-items: center;
@@ -179,7 +179,8 @@
           position: relative;
 
           @include mobile-view {
-            width: 33px;
+            width: 28px !important;
+            height: 28px !important;
           }
 
           &:hover {

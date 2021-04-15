@@ -173,13 +173,15 @@
                         height: 51px;
                         width: 51px;
                         margin-right: 20px;
+                        padding: 0;
+                        background-color: transparent;
 
                         &:last-child {
                             margin-right: 0;
                         }
 
                         img {
-                            max-width: 27px;
+                            max-width: 51px;
                         }
                     }
 
@@ -204,8 +206,8 @@
                     // }
 
                     &.active {
-                        background: $active-tab-text;
-                        color: $background-white;
+                       // background: $active-tab-text;
+                        //color: $background-white;
 
                         .active-icon {
                             display: block;
