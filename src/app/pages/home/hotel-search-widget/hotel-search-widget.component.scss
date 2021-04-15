@@ -5,6 +5,7 @@
 @import "../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+
 .hotel-error {
   border: 1px solid red;
   border-radius: 8px;
@@ -298,6 +299,11 @@
           align-items: center;
           height: 67px;
           position: relative;
+
+          &.hotel-error {
+            border: 1px solid red;
+            border-radius: 8px;
+          }
 
           @include tab-view {
             align-items: flex-start;

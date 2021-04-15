@@ -1,7 +1,6 @@
 import { Component, OnInit, Output,EventEmitter, Input, SimpleChanges, HostListener } from '@angular/core';
 import { HotelService } from 'src/app/services/hotel.service';
 import { environment } from 'src/environments/environment';
-declare var $: any;
 
 @Component({
   selector: 'app-hotel-suggestion',
@@ -17,7 +16,6 @@ export class HotelSuggestionComponent implements OnInit {
   loading:boolean=false;
   data=[];
   @Input() searchItem:string;
-  @Input() isFormSubmitted:boolean;
   isShowDropDown:boolean=false;
   thisElementClicked: boolean = false;
   constructor(
@@ -25,16 +23,9 @@ export class HotelSuggestionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    $("body").click(function () {
-      this.isShowDropDown=false;
-    });
-    $("#add_child").click(function (e) {  
-      this.isShowDropDown=false;       
-    })
   }
 
   searchLocation(event){
-    this.isFormSubmitted = false;
     let notAllowedKey=[40,38,9];
     if(!notAllowedKey.includes(event.keyCode)){
       this.isShowDropDown = this.selectHotelItem.length>0?true:false;
@@ -90,6 +81,6 @@ export class HotelSuggestionComponent implements OnInit {
 
   @HostListener('click')
   clickInside() {
-    this.thisElementClicked=true;
+    this.isShowDropDown=true;
   }
 }

@@ -12,7 +12,7 @@
       <ul class="hotels-grid oneway">
         <li class="grid_box first"> 
           <div class="hotel_where">
-            <div class="search_area" [ngClass]="{'flight-error': !isValidSearch && hotelSearchFormSubmitted}">
+            <div class="search_area {{!validSearch && hotelSearchFormSubmitted}}" [ngClass]="{'hotel-error': !validSearch && hotelSearchFormSubmitted}">
               <label for="">Destination</label>
               <app-hotel-suggestion [searchItem]=fromDestinationInfo.title (selectedHotel)="selectedHotel($event)" (validateSearch)="validateSearch($event)"></app-hotel-suggestion>
             </div>
