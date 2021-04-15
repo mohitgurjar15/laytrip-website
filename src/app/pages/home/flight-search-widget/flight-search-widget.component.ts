@@ -480,7 +480,6 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   @HostListener('document:click')
   clickOutside() {
-    console.log(this.thisElementClicked,'out')
     if (!this.thisElementClicked) {
       this.showFromAirportSuggestion=false;
       this.showToAirportSuggestion=false;

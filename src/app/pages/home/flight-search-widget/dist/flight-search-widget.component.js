@@ -408,7 +408,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
     };
     FlightSearchWidgetComponent.prototype.clickOutside = function () {
-        console.log(this.thisElementClicked, 'out');
         if (!this.thisElementClicked) {
             this.showFromAirportSuggestion = false;
             this.showToAirportSuggestion = false;

@@ -69,30 +69,29 @@ var TravellerInfoComponent = /** @class */ (function () {
            }
          ); */
     };
-    /* @HostListener('document:click', ['$event'])
-    clickout(event) {
-      if(this.eRef.nativeElement.contains(event.target)) {
-        $(".add_class_sec_open_").hide();
-  
-        if(
-  
-          // (event.target.nextSibling.classList != '' && typeof event.target.nextSibling.classList != 'undefined' &&  event.target.nextSibling.classList[2] == 'panel_hide') ||
-        
-      //  (event.currentTarget.nextSibling.classList != null &&  typeof event.currentTarget.nextSibling.classList != 'undefined'&&   event.currentTarget.nextSibling.classList[1] == 'panel_hide') ||
-        
-        ( event.target.offsetParent.nextElementSibling.classList != null && typeof event.target.offsetParent.nextElementSibling.classList != 'undefined' && event.target.offsetParent.nextElementSibling.classList[2] == 'panel_hide')
-              
-        ) {
-          this.showTraveller = false;
-        }  else {
-          this.showTraveller = true;
+    TravellerInfoComponent.prototype.clickout = function (event) {
+        if (this.eRef.nativeElement.contains(event.target)) {
+            $(".add_class_sec_open_").hide();
+            /* if(
+      
+              // (event.target.nextSibling.classList != '' && typeof event.target.nextSibling.classList != 'undefined' &&  event.target.nextSibling.classList[2] == 'panel_hide') ||
+            
+          //  (event.currentTarget.nextSibling.classList != null &&  typeof event.currentTarget.nextSibling.classList != 'undefined'&&   event.currentTarget.nextSibling.classList[1] == 'panel_hide') ||
+            
+            ( event.target.offsetParent.nextElementSibling.classList != null && typeof event.target.offsetParent.nextElementSibling.classList != 'undefined' && event.target.offsetParent.nextElementSibling.classList[2] == 'panel_hide')
+                  
+            ) {
+              this.showTraveller = false;
+            }  else {
+              this.showTraveller = true;
+            }  */
         }
-      } else {
-        this.showTraveller = false;
-      }
-    }
-   */
+        else {
+            this.showTraveller = false;
+        }
+    };
     TravellerInfoComponent.prototype.toggleTraveller = function () {
+        $(".add_class_sec_open_").hide();
         this.showTraveller = !this.showTraveller;
     };
     TravellerInfoComponent.prototype.btnClickForChange = function (item) {
@@ -182,6 +181,9 @@ var TravellerInfoComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], TravellerInfoComponent.prototype, "domid");
+    __decorate([
+        core_1.HostListener('document:click', ['$event'])
+    ], TravellerInfoComponent.prototype, "clickout");
     TravellerInfoComponent = __decorate([
         core_1.Component({
             selector: 'app-traveller-info',
