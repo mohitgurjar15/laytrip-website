@@ -447,7 +447,7 @@
               <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
                 [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
                 <agm-marker
-                 iconUrl="{{s3BucketUrl}}assets/images/hotels/map-pinfull.svg"
+                [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
                   [latitude]="hotelDetails?.hotelLocations?.latitude"
                   [longitude]="hotelDetails?.hotelLocations?.longitude">
                 </agm-marker>
@@ -653,7 +653,7 @@
               [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
 <!--               iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
  -->              <agm-marker              
-                [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-marker.svg', scaledSize: {height: 80,width: 48}}"
+                [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
                 [latitude]="hotelDetails?.hotelLocations?.latitude"
                 [longitude]="hotelDetails?.hotelLocations?.longitude">
               </agm-marker>

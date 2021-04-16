@@ -43,7 +43,13 @@ var FlightClassComponent = /** @class */ (function () {
     };
     FlightClassComponent.prototype.clickout = function (event) {
         if (this.eRef.nativeElement.contains(event.target)) {
-            $(".add_traveler__open").hide();
+            if ((typeof event.target.nextSibling.classList != 'undefined' && event.target.nextSibling.classList != null && event.target.nextSibling.classList[1] == 'panel_hide')) {
+                $(".add_traveler__open").hide();
+                this.showClass = false;
+            }
+            else {
+                this.showClass = true;
+            }
         }
         else {
             this.showClass = false;
