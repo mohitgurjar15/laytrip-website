@@ -51,6 +51,7 @@ export class HotelSuggestionComponent implements OnInit {
             title: res.title,
             type: res.type,
             geo_codes: res.geo_codes,
+            city_id:res.city_id
           };
         });
       }

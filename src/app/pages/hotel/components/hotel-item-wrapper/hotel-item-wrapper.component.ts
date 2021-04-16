@@ -22,7 +22,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   @Input() filter;
   @Input() hotelToken;
   s3BucketUrl = environment.s3BucketUrl;
-  //public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
   hotelListArray = [];
   mapListArray=[];
   noOfDataToShowInitially = 20;
@@ -34,8 +33,6 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   defaultLat;
   defaultLng;
   hotelName;
-
-  //subscriptions: Subscription[] = [];
   geoCodes;
   mapCanvas;
   myLatLng;
@@ -66,6 +63,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   longitude:string=''
   itenery:string='';
   location:string='';
+  city_id:string='';
 
  
   constructor(
@@ -83,6 +81,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
       this.longitude = this.route.snapshot.queryParams['longitude']
       this.itenery = this.route.snapshot.queryParams['itenery']
       this.location = this.route.snapshot.queryParams['location']
+      this.city_id = this.route.snapshot.queryParams['city_id']
   }
 
   ngOnInit() {

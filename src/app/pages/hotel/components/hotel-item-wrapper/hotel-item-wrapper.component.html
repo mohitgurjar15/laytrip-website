@@ -93,7 +93,7 @@
                                                 '1.2-2'}}</span></p>
                                     </div>
                                 </div> <a class="book_btn anchor-tag"
-                                    [routerLink]="['/hotel/detail', item.id, item.bundle]" [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location}">Select</a>
+                                    [routerLink]="['/hotel/detail', item.id, item.bundle]" [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">Select</a>
 
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                                                 '1.2-2'}}</span></p>
                                     </div>
                                 </div> <a class="book_btn anchor-tag"
-                                    [routerLink]="['/hotel/detail', item.id, item.bundle]" [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location}">Select</a>
+                                    [routerLink]="['/hotel/detail', item.id, item.bundle]" [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">Select</a>
                                 <p>Flexible Installments</p>
                             </div>
                         </div>
@@ -258,7 +258,7 @@
                             <agm-marker #marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
                                 [longitude]="hotel.geocodes.longitude"
                                 [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-marker.svg', scaledSize: {height: 80,width: 48}}"
-                                [label]="{text:currency?.symbol+hotel?.selling?.total, color: 'white',fontSize: '12px', class: 'mapLabel'}"
+                                [label]="{text:currency?.symbol+hotel?.selling?.total, color: 'white',fontSize: '12px', class: 'mapLabel',backgroundColor:black}"
                                 (mouseOver)="infoWindowAction(infoWindow, $event, 'open')"
                                 (mouseOut)="infoWindowAction(infoWindow, $event, 'close')"
                                 (markerClick)="infoWindowAction(hotel.id, $event, 'click')">
@@ -350,7 +350,7 @@
                                                                 number : '1.2-2'}}</span></p>
                                                     </div>
                                                 </div> <a class="book_btn anchor-tag"
-                                                    [routerLink]="['/hotel/detail', item.id, item.bundle]" [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location}">Select</a>
+                                                    [routerLink]="['/hotel/detail', item.id, item.bundle]" [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">Select</a>
 
                                             </div>
                                         </div>
@@ -408,7 +408,7 @@
                                                                 number : '1.2-2'}}</span> </p>
                                                     </div>
                                                 </div> <a class="book_btn anchor-tag"
-                                                    [routerLink]="['/hotel/detail', item.id, item.bundle]" [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location}">Select</a>
+                                                    [routerLink]="['/hotel/detail', item.id, item.bundle]" [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">Select</a>
                                                 <p>Flexible Installments</p>
                                             </div>
                                         </div>
