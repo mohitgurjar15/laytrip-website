@@ -274,6 +274,7 @@
                         @include tab-view{
                             padding: 10px;
                             background-size: 5px;
+                            display: none;
                         }
 
                         &::before {
@@ -294,6 +295,7 @@
                         @include tab-view{
                             padding: 10px;
                             background-size: 5px;
+                            display: none;
                         }
 
                         &::before {
