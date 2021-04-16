@@ -95,7 +95,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             // this.$dealLocatoin.unsubscribe();  
             this.homeService.removeToString('hotel');
             this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
-            this.checkInMinDate = this.checkInDate;
+            this.checkInMinDate = this.customStartDateValidation ? moment(this.customStartDateValidation).toDate() : moment();
             this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
             this.checkOutMinDate = this.checkOutDate;
             this.rangeDates = [this.checkInDate, this.checkOutDate];
