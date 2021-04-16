@@ -8,6 +8,8 @@ import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { NgxSpinnerService } from "ngx-spinner";
+import { HotelService } from '../../../services/hotel.service';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -45,11 +47,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public location: Location,
     public commonFunction: CommonFunction,
     private spinner: NgxSpinnerService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private homeService: HomeService
   ) { }
 
   ngOnInit() {
-    console.log('ioko')
 
     window.scroll(0, 0);
     sessionStorage.removeItem("__insMode")
@@ -391,5 +393,12 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   hideFlightNotAvailable() {
     this.isFlightAvaibale = false;
+  }
+
+  moduleTabClick(tabName) {
+    if(tabName == 'hotel'){
+      this.homeService.setActiveTab(tabName)
+      this.router.navigate(['/']);
+    }
   }
 }

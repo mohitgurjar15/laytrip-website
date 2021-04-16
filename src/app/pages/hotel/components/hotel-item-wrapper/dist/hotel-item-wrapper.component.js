@@ -108,7 +108,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             else {
                 _this.mapListArray = [];
             }
-            console.log(_this.mapListArray, _this.mapListArray.length, _this.hotelListArray.length);
         });
     };
     HotelItemWrapperComponent.prototype.onScrollDown = function () {

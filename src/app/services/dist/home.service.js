@@ -19,6 +19,8 @@ var HomeService = /** @class */ (function () {
         this.fromDestinationInfo = new rxjs_1.BehaviorSubject({});
         this.getToString = this.toString.asObservable();
         this.getLocationForHotelDeal = this.fromDestinationInfo.asObservable();
+        this.tabName = new rxjs_1.BehaviorSubject([]);
+        this.getActiveTabName = this.tabName.asObservable();
     }
     HomeService.prototype.handleError = function (error) {
         var errorMessage = {};
@@ -34,6 +36,9 @@ var HomeService = /** @class */ (function () {
             errorMessage = { status: error.status, message: error.error.message };
         }
         return rxjs_1.throwError(errorMessage);
+    };
+    HomeService.prototype.setActiveTab = function (tabName) {
+        this.tabName.next(tabName);
     };
     HomeService.prototype.setToString = function (flightToCode) {
         this.toString.next(flightToCode);

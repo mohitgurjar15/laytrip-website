@@ -11,8 +11,9 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var FilterHotelComponent = /** @class */ (function () {
-    function FilterHotelComponent() {
+    function FilterHotelComponent(eRef) {
         var _this = this;
+        this.eRef = eRef;
         this.compact = false;
         this.invertX = false;
         this.invertY = false;
@@ -103,7 +104,8 @@ var FilterHotelComponent = /** @class */ (function () {
     };
     FilterHotelComponent.prototype.clearHotelSearch = function () {
         this.isHotelSearch = false;
-        this.hotelname = 'Search Hotel';
+        this.hotelname = 'Search';
+        $('.searchHotelName').val('');
         this.filterHotel.emit(this.hotelDetailsMain.hotels);
     };
     FilterHotelComponent.prototype.clickHotelFilterName = function (event) {
@@ -113,9 +115,13 @@ var FilterHotelComponent = /** @class */ (function () {
         if (event.target.textContent) {
             this.filterHotels({ key: 'searchByHotelName', value: this.searchHotel });
         }
-        /* if (this.hotelname) {
-          this.filterHotels({ key: 'searchByHotelName', value: this.hotelname.hotelName });
-        } */
+    };
+    FilterHotelComponent.prototype.onBlurMethod = function (event) {
+        // $('.searchHotelName').val(event.target.value);
+        // this.searchHotel = event.target.textContent ? event.target.textContent : '';
+        // if (event.target.value) 
+        // this.filterHotels({ key: 'searchByHotelName', value:this.searchHotel})
+        // this.isHotelSearch = false;
     };
     FilterHotelComponent.prototype.counter = function (i) {
         return new Array(i);
@@ -161,6 +167,7 @@ var FilterHotelComponent = /** @class */ (function () {
      * @param event
      */
     FilterHotelComponent.prototype.filterByHotelRatings = function (event, count) {
+        this.ratingArray = [];
         if (event.target.checked === true) {
             $('.star-' + count).prop('checked', true);
             this.rating_number = parseInt(count);
@@ -171,9 +178,8 @@ var FilterHotelComponent = /** @class */ (function () {
             this.ratingArray = this.ratingArray.filter(function (item) {
                 return item != count;
             });
-            console.log(count);
         }
-        console.log(this.rating_number);
+        // console.log(this.rating_number)
         this.filterHotels({});
     };
     /**
@@ -305,9 +311,9 @@ var FilterHotelComponent = /** @class */ (function () {
             this.filterHotels({});
         }
         // Reset hotel name search
-        this.hotelname = 'Search Hotel';
+        this.hotelname = 'Search';
         this.filterHotels({});
-        $('.searchHotelName').val();
+        $('.searchHotelName').val('');
         $("input:checkbox").prop('checked', false);
     };
     // ngOnChanges(changes: SimpleChanges) {
@@ -352,24 +358,23 @@ var FilterHotelComponent = /** @class */ (function () {
         this.isHotelSearch = true;
         var result = [];
         for (var i = 0; i < this.hotelNamesArray.length; i++) {
-            if (this.hotelNamesArray[i].hotelName.toLowerCase().toString().includes(searchValue.target.value)) {
-                console.log(this.hotelNamesArray[i], searchValue.target.value);
+            if (this.hotelNamesArray[i].hotelName.toLowerCase().toString().includes(searchValue.target.value.toLowerCase())) {
                 result.push(this.hotelNamesArray[i]);
             }
         }
         if (this.hotelNamesArray.length > 0 && searchValue.target.value.length > 0) {
-            this.filterHotelNames = result.length > 0 ? result : this.filterHotelNames;
+            this.filterHotelNames = result.length > 0 ? result : [{ hotelName: 'No result!' }];
             return this.filterHotelNames;
         }
         else {
             if (searchValue.target.value.length <= 0) {
                 this.isHotelSearch = false;
-                this.hotelname = 'Search Hotel';
+                this.hotelname = 'Search';
                 this.filterHotel.emit(this.hotelDetailsMain.hotels);
                 this.filterHotels({});
             }
             else {
-                return this.filterHotelNames = [{ hotelName: 'No result!!' }];
+                return this.filterHotelNames = [{ hotelName: 'No result!' }];
             }
         }
     };

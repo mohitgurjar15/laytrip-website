@@ -353,11 +353,16 @@
             @include tab-view {
                 height: 51px;
                 width: 51px;
-                padding: 20px;
-            }
-            img{
-                @include tab-view{
-                    max-width: 27px;
+                margin-right: 20px;
+                padding: 0;
+                background-color: transparent;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                img {
+                    max-width: 51px;
                 }
             }
             .active-icon {
@@ -365,7 +370,7 @@
             }
 
             &.active {
-                background: $primary-color;
+                //background: $primary-color;
 
                 .active-icon {
                     display: block;

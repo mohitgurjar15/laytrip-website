@@ -1,17 +1,16 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 import { GenericService } from '../../services/generic.service';
 import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HomeService } from '../../services/home.service';
 import { CartService } from '../../services/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CookiePolicyComponent, MODAL_TYPE } from '../cookie-policy/cookie-policy.component';
+import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
 import { CookieService } from 'ngx-cookie';
-import { ComingSoonComponent } from '../coming-soon/coming-soon.component';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +28,7 @@ export class HomeComponent implements OnInit {
   moduleId = 1;
   dealList = [];
   host:string='';
+  $tabName;
 
   constructor(
     private genericService: GenericService,
@@ -57,6 +57,16 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.openCookiePolicyPopup();
     }, 5000);
+
+    this.$tabName = this.homeService.getActiveTabName.subscribe(tabName=> {
+      if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){        
+        let tab : any = tabName;
+        if(tab == 'hotel'){
+          $('.hotel-tab').trigger('click');
+        }
+      }
+    });
+    this.$tabName.unsubscribe();
   }
 
   openCookiePolicyPopup() {

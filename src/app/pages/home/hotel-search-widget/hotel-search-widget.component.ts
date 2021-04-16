@@ -148,7 +148,6 @@ export class HotelSearchWidgetComponent implements OnInit {
           this.searchHotelInfo.occupancies = info;
           
         }
-        console.log("this.searchHotelInfo",this.searchHotelInfo)
       }
     }
     else {

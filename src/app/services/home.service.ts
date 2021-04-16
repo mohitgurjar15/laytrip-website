@@ -14,7 +14,9 @@ export class HomeService {
     private fromDestinationInfo : any = new BehaviorSubject({});
     getToString = this.toString.asObservable();
     getLocationForHotelDeal = this.fromDestinationInfo.asObservable();
-    
+    private tabName = new BehaviorSubject([]);
+    getActiveTabName = this.tabName.asObservable();
+
     constructor(
         private http: HttpClient,
         private commonFunction: CommonFunction
@@ -35,6 +37,11 @@ export class HomeService {
         return throwError(errorMessage);
     }    
     
+
+    setActiveTab(tabName){
+        this.tabName.next(tabName)
+    }
+
     setToString(flightToCode) {
         this.toString.next(flightToCode)
     }

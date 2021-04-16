@@ -11,7 +11,7 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var moment = require("moment");
 var FlightSearchComponent = /** @class */ (function () {
-    function FlightSearchComponent(route, flightService, router, location, commonFunction, spinner, renderer) {
+    function FlightSearchComponent(route, flightService, router, location, commonFunction, spinner, renderer, homeService) {
         this.route = route;
         this.flightService = flightService;
         this.router = router;
@@ -19,6 +19,7 @@ var FlightSearchComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.spinner = spinner;
         this.renderer = renderer;
+        this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = true;
         this.isNotFound = false;
@@ -37,7 +38,6 @@ var FlightSearchComponent = /** @class */ (function () {
     }
     FlightSearchComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log('ioko');
         window.scroll(0, 0);
         sessionStorage.removeItem("__insMode");
         sessionStorage.removeItem("__islt");
@@ -356,6 +356,12 @@ var FlightSearchComponent = /** @class */ (function () {
     };
     FlightSearchComponent.prototype.hideFlightNotAvailable = function () {
         this.isFlightAvaibale = false;
+    };
+    FlightSearchComponent.prototype.moduleTabClick = function (tabName) {
+        if (tabName == 'hotel') {
+            this.homeService.setActiveTab(tabName);
+            this.router.navigate(['/']);
+        }
     };
     FlightSearchComponent = __decorate([
         core_1.Component({
