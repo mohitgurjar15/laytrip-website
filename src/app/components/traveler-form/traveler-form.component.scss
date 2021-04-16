@@ -128,6 +128,17 @@
       svg {
         fill: $grayed_border;
       }
+      .hotel_svg{
+        border: 2px solid $grayed_border;
+        border-radius: 50%;
+        padding: 5px;
+        height: 38px;
+        width: 38px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+      }
 
       .card-link {
         font-weight: 600;
