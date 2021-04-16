@@ -42,7 +42,7 @@ export class FlightClassComponent implements OnInit {
         e.stopPropagation();
       }
     ); */
-
+ 
   }
 
   @HostListener('document:click', ['$event'])
