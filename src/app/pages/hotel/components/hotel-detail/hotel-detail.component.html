@@ -453,7 +453,7 @@
                 </agm-marker>
               </agm-map>
           </div>
-          <div class="amenities_wrpper" #target id="target">
+          <div class="amenities_wrpper" #target1>
             <h3 class="common_title_wrps">Amenities</h3>
             <ul *ngIf="hotelDetails?.amenities?.list.length" >
               <ng-container *ngFor="let amenity of hotelDetails?.amenities?.list ; let i=index">
@@ -461,9 +461,9 @@
                 <li *ngIf="showMoreAmenties">{{amenity}}</li>
               </ng-container>
             </ul>
-            <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'more')"
+            <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target1,'more')"
               class="cta_link hover-link">More</a>
-            <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'less')"
+            <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target1,'less')"
               class="cta_link hover-link">Less</a>
           </div>
         </div>

@@ -1,9 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
+import {  NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from '../../../../services/hotel.service';
 import { environment } from '../../../../../environments/environment';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { collect } from 'collect.js';
@@ -11,7 +10,6 @@ import { CommonFunction } from '../../../../_helpers/common-function';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
 import { CartService } from '../../../../services/cart.service';
-import { EventEmitter } from 'events';
 declare var $: any;
 
 
@@ -74,8 +72,6 @@ export class HotelDetailComponent implements OnInit {
         width: '270px',
         height: '100%',
         thumbnails: false,
-        imageAnimation: NgxGalleryAnimation.Slide,
-        spinnerIcon: 'fa fa-spinner fa-pulse fa-3x fa-fw',
         imageSwipe:true,
         previewRotate:true,
         preview:false,
@@ -87,8 +83,6 @@ export class HotelDetailComponent implements OnInit {
         width: '100%',
         height: '400px',
         thumbnails: false,
-        imageAnimation: NgxGalleryAnimation.Slide,
-        spinnerIcon: 'fa fa-spinner fa-pulse fa-3x fa-fw',
         imageSwipe:true,
         previewRotate:true,
         preview:false,
@@ -227,7 +221,11 @@ export class HotelDetailComponent implements OnInit {
   }
 
   toggleAmenities(target:HTMLElement,type){
+
     this.showMoreAmenties=!this.showMoreAmenties;
-    document.querySelector('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if(type=='less'){
+      target.scrollIntoView({behavior: 'smooth'});
+    }
+    //document.getElementsByClassName('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
