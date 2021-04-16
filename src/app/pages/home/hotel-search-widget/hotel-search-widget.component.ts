@@ -243,6 +243,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   validateSearch(event){
+    this.hotelSearchFormSubmitted=false;
     this.validSearch=event;
   }
 }
