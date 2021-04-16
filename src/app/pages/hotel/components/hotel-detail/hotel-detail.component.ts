@@ -226,7 +226,8 @@ export class HotelDetailComponent implements OnInit {
     this.isCartFull=false;
   }
 
-  toggleAmenities(){
+  toggleAmenities(target:HTMLElement,type){
     this.showMoreAmenties=!this.showMoreAmenties;
+    document.querySelector('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }

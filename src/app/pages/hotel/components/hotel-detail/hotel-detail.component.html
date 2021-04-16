@@ -453,17 +453,17 @@
                 </agm-marker>
               </agm-map>
           </div>
-          <div class="amenities_wrpper">
+          <div class="amenities_wrpper" #target id="target">
             <h3 class="common_title_wrps">Amenities</h3>
-            <ul *ngIf="hotelDetails?.amenities?.list.length">
+            <ul *ngIf="hotelDetails?.amenities?.list.length" >
               <ng-container *ngFor="let amenity of hotelDetails?.amenities?.list ; let i=index">
                 <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity}}</li>
                 <li *ngIf="showMoreAmenties">{{amenity}}</li>
               </ng-container>
             </ul>
-            <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities()"
+            <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'more')"
               class="cta_link hover-link">More</a>
-            <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities()"
+            <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'less')"
               class="cta_link hover-link">Less</a>
           </div>
         </div>
@@ -659,17 +659,17 @@
               </agm-marker>
             </agm-map>
         </div>
-        <div class="amenities_wrpper">
+        <div class="amenities_wrpper" #target id="target">
           <h3 class="common_title_wrps">Amenities</h3>
-          <ul *ngIf="hotelDetails.amenities?.list.length">
-            <ng-container *ngFor="let amenity of hotelDetails.amenities.list ; let i=index">
+          <ul *ngIf="hotelDetails?.amenities?.list.length" >
+            <ng-container *ngFor="let amenity of hotelDetails?.amenities.list ; let i=index">
               <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity}}</li>
               <li *ngIf="showMoreAmenties">{{amenity}}</li>
             </ng-container>
           </ul>
-          <a *ngIf="!showMoreAmenties && hotelDetails.amenities?.list.length>10" (click)="toggleAmenities()"
+          <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'more')"
             class="cta_link hover-link">More</a>
-          <a *ngIf="showMoreAmenties && hotelDetails.amenities?.list.length>10" (click)="toggleAmenities()"
+          <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'less')"
             class="cta_link hover-link">Less</a>
         </div>
       </div>
