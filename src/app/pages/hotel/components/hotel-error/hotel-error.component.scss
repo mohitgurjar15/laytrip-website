@@ -1,6 +1,39 @@
-.block_noresult_found{
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.block_noresult_found {
     box-shadow: none;
-    .block_noresult_found_inner{
+    padding: 20px;
+
+    .block_noresult_found_inner {
         width: 100%;
+
+        h6 {
+            color: $active-tab-text;
+
+            br {
+                display: none;
+
+                @include tab-view {
+                    display: block;
+                }
+            }
+        }
+
+        .logo_wrpper_footer {
+            display: none;
+
+            img {
+                max-width: 62px;
+                margin-top: 15px;
+            }
+
+            @include tab-view {
+                display: block;
+            }
+        }
     }
 }
