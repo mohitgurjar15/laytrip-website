@@ -144,7 +144,9 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   onScrollDown() {
 
     this.scrollLoading = true;
-    setTimeout(() => {
+    console.log('scrolled!!');
+
+    /* setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.hotelListArray.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
         this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
@@ -162,7 +164,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
         this.isFullListDisplayed = true;
         this.scrollLoading = false;
       }
-    }, 1000);
+    }, 1000); */
 
     
   }

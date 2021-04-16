@@ -17,7 +17,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         this.genericService = genericService;
         this.hotelService = hotelService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
-        //public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
         this.hotelListArray = [];
         this.mapListArray = [];
         this.noOfDataToShowInitially = 20;
@@ -44,6 +43,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         this.longitude = '';
         this.itenery = '';
         this.location = '';
+        this.city_id = '';
         this.galleryOptions = [
             { "thumbnails": false, previewRotate: true, preview: false, width: "270px", height: "100%", imageSwipe: true, imageBullets: false, lazyLoading: true },
         ];
@@ -53,6 +53,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         this.longitude = this.route.snapshot.queryParams['longitude'];
         this.itenery = this.route.snapshot.queryParams['itenery'];
         this.location = this.route.snapshot.queryParams['location'];
+        this.city_id = this.route.snapshot.queryParams['city_id'];
     }
     HotelItemWrapperComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -111,30 +112,27 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         });
     };
     HotelItemWrapperComponent.prototype.onScrollDown = function () {
-        var _this = this;
         this.scrollLoading = true;
-        setTimeout(function () {
-            if (_this.noOfDataToShowInitially <= _this.hotelListArray.length) {
-                _this.noOfDataToShowInitially += _this.dataToLoad;
-                _this.hotelListArray = _this.hotelDetails.slice(0, _this.noOfDataToShowInitially);
-                for (var i = 0; i < _this.hotelListArray.length; i++) {
-                    _this.hotelDetails[i].galleryImages = [];
-                    for (var _i = 0, _a = _this.hotelDetails[i].images; _i < _a.length; _i++) {
-                        var image = _a[_i];
-                        _this.hotelDetails[i].galleryImages.push({
-                            small: image,
-                            medium: image,
-                            big: image
-                        });
-                    }
-                }
-                _this.scrollLoading = false;
+        console.log('scrolled!!');
+        /* setTimeout(() => {
+          if (this.noOfDataToShowInitially <= this.hotelListArray.length) {
+            this.noOfDataToShowInitially += this.dataToLoad;
+            this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+            for(let i=0; i < this.hotelListArray.length; i++){
+              this.hotelDetails[i].galleryImages=[];
+              for(let image of this.hotelDetails[i].images)
+              this.hotelDetails[i].galleryImages.push({
+                small: image,
+                medium:image,
+                big:image
+              })
             }
-            else {
-                _this.isFullListDisplayed = true;
-                _this.scrollLoading = false;
-            }
-        }, 1000);
+            this.scrollLoading = false;
+          } else {
+            this.isFullListDisplayed = true;
+            this.scrollLoading = false;
+          }
+        }, 1000); */
     };
     HotelItemWrapperComponent.prototype.ngAfterContentChecked = function () {
         /*  this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
