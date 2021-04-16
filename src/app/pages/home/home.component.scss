@@ -44,7 +44,8 @@
         bottom: 0;
         right: 0;
         left: 0;
-        padding: 130px 0 50px;
+        //padding: 130px 0 50px;
+        padding: 80px 0 50px;
         // transform: translate(0%, 28%);
         //transform: translate(0%, 0%);
 
@@ -59,10 +60,12 @@
 
         .banner_text {
             width: auto;
-            margin-top: 60px;
+            //margin-top: 60px;
+            margin-bottom: 135px;
 
             @include tab-view{
                 margin-top: 0;
+                margin-bottom: 15px;
             }
 
             .banner_text_span {
