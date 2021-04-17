@@ -15,7 +15,7 @@ import { HotelService } from 'src/app/services/hotel.service';
   styleUrls: ['./hotel-item-wrapper.component.scss'],
   
 })
-export class HotelItemWrapperComponent implements OnInit, AfterContentChecked {
+export class HotelItemWrapperComponent implements OnInit {
 
   hotelDetails;
   @Input() filteredLabel;
@@ -168,15 +168,6 @@ export class HotelItemWrapperComponent implements OnInit, AfterContentChecked {
       }
     }, 1000); */
 
-    
-  }
-
-  ngAfterContentChecked() {
-   /*  this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-    let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
-    if (hotelinfo) {
-      this.hotelName = hotelinfo.city;
-    } */
     
   }
 
