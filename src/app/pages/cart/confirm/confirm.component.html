@@ -80,7 +80,7 @@
                     <span class="lefts">Downpayment</span>
                     <span class="rights">${{cartDetails.cartInstallments[0].amount | number : '1.2-2'}}</span>
                 </div>
-                <div class="detail_liners">
+                <div class="detail_liners" *ngIf="cartDetails.cartInstallments.length">
                     <span class="lefts">Installments</span>
                     <span class="rights">{{cartDetails.cartInstallments.length-1}} {{cartDetails.installmentType |
                         titlecase}} Installments of
@@ -90,9 +90,13 @@
                     <span class="lefts">Total Price</span>
                     <span class="rights">${{cartDetails.totalAmount | number : '1.2-2'}}</span>
                 </div>
-                <div class="detail_liners">
+                <div class="detail_liners" *ngIf="cartDetails.cartInstallments.length">
                     <span class="lefts">Total Paid</span>
-                    <span class="rights">${{cartDetails.paidAmount | number : '1.2-2'}} <span *ngIf="cartDetails.cardDetail"> {{ cardType[cartDetails?.cardDetail?.cardType]}} ending in {{cartDetails?.cardDetail?.cardDigits}}</span> </span>
+                    <span class="rights">${{ cartDetails.paidAmount | number : '1.2-2'}} <span *ngIf="cartDetails.cardDetail"> {{ cardType[cartDetails?.cardDetail?.cardType]}} ending in {{cartDetails?.cardDetail?.cardDigits}}</span> </span>
+                </div>
+                <div class="detail_liners" *ngIf="cartDetails.cartInstallments.length==0">
+                    <span class="lefts">Total Paid</span>
+                    <span class="rights">${{ cartDetails.totalAmount | number : '1.2-2'}} <span *ngIf="cartDetails.cardDetail"> {{ cardType[cartDetails?.cardDetail?.cardType]}} ending in {{cartDetails?.cardDetail?.cardDigits}}</span> </span>
                 </div>
                 <h3>Policies</h3>
                 <div class="linking_wrapper">
