@@ -17,7 +17,7 @@ import { HotelService } from 'src/app/services/hotel.service';
 })
 export class HotelItemWrapperComponent implements OnInit, AfterContentChecked {
 
-  @Input() hotelDetails;
+  hotelDetails;
   @Input() filteredLabel;
   @Input() filter;
   @Input() hotelToken;

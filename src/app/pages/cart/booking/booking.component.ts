@@ -548,7 +548,9 @@ export class BookingComponent implements OnInit {
             traveler_id: data[k].userId
           })
           
-          data[k].dob=moment(data[k].dob,"MM/DD/YYYY").format("YYYY-MM-DD")
+          if(data[k].dob){
+            data[k].dob=moment(data[k].dob,"MM/DD/YYYY").format("YYYY-MM-DD")
+          }
           if(data[k].passport_expiry){
             data[k].passport_expiry=moment(data[k].passport_expiry,"MM/DD/YYYY").format("YYYY-MM-DD")
           }

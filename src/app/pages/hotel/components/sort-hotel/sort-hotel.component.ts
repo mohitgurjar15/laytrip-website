@@ -30,7 +30,7 @@ export class SortHotelComponent implements OnInit {
         this.locationName = info.city;
       }
     }
-    this.sortHotelData('total', 'ASC', 'lh_price');
+    //this.sortHotelData('total', 'ASC', 'lh_price');
     this.loadJquery();
   }
 

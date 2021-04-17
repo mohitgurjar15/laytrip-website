@@ -4,6 +4,7 @@ export const travelersFileds = {
     flight: {
         adult: {
             module : 'flight',
+            module_id : 1,
             userId: '',
             type: 'adult',
             first_name: '',
@@ -29,6 +30,7 @@ export const travelersFileds = {
         },
         child: {
             module : 'flight',
+            module_id : 1,
             userId: '',
             type: 'child',
             first_name: '',
@@ -49,6 +51,7 @@ export const travelersFileds = {
         },
         infant: {
             module : 'flight',
+            module_id : 1,
             userId: '',
             type: 'infant',
             is_email_required:false,
@@ -68,6 +71,7 @@ export const travelersFileds = {
     hotel:{
         adult: {
             module : 'hotel',
+            module_id : 3,
             userId: '',
             type: 'adult',
             is_email_required:true,

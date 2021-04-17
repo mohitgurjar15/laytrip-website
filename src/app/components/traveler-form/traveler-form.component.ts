@@ -186,6 +186,7 @@ export class TravelerFormComponent implements OnInit {
       for (let i = 0; i < this.cartItem.module_info.input_data.num_rooms; i++) {
         this.travelers[`type${this.cartNumber}`].cartId = this.cartId
         this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.hotel.adult));
+        this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
         if(i!=0){
           this.travelers[`type${this.cartNumber}`].adults[i].is_email_required=false;
           this.travelers[`type${this.cartNumber}`].adults[i].is_phone_required=false;
@@ -307,6 +308,7 @@ export class TravelerFormComponent implements OnInit {
         dobMinDate: [x.dobMinDate],
         dobMaxDate: [x.dobMaxDate],
         module: [x.module],
+        module_id: [x.module_id],
         is_valid_date: [x.is_valid_date],
         is_email_required: [x.is_email_required],
         is_phone_required: [x.is_phone_required]
@@ -330,6 +332,7 @@ export class TravelerFormComponent implements OnInit {
         country_id: [x.country_id],
         type: [x.type],
         module: [x.module],
+        module_id: [x.module_id],
         is_valid_date: [x.is_valid_date],
         is_email_required: [x.is_email_required],
         is_phone_required: [x.is_phone_required]
@@ -417,16 +420,7 @@ export class TravelerFormComponent implements OnInit {
     return (2.20462 * Number(weight)).toFixed(2);
   }
 
-  /* preventNumberInput(event: any) {
-    var a = [];
-    var k = event.which;
-
-    for (let i = 48; i < 58; i++)
-      a.push(i);
-
-    if ((a.indexOf(k) >= 0))
-      event.preventDefault();
-  } */
+  
   saveTraveler(cartNumber, traveler_number) {
 
     this.travelers[`type${cartNumber}`].adults[traveler_number].is_submitted = true;
@@ -440,6 +434,7 @@ export class TravelerFormComponent implements OnInit {
         data.is_primary_traveler = traveler_number==0?true:false;
         data.module_id = 3;
         delete data.country_id;
+        delete data.dob;
       }
       else{
         data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
@@ -524,7 +519,9 @@ export class TravelerFormComponent implements OnInit {
     //let traveler = { traveler_number: traveler_number };
     this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = "";
     this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = "";
-    this.travelers[`type${cartNumber}`].adults[traveler_number].email = "";
+    if(this.accountHolderEmail=='' ||  traveler_number!=0){
+      this.travelers[`type${cartNumber}`].adults[traveler_number].email = "";
+    }
     this.travelers[`type${cartNumber}`].adults[traveler_number].userId = "";
     this.travelers[`type${cartNumber}`].adults[traveler_number].gender = "";
     this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no = "";
@@ -596,7 +593,6 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
         this.travelers[`type${cartNumber}`].adults[traveler_number].passport_expiry = traveler.passportExpiry ? `${moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy')}` : '';
       }
-      console.log(this.travelers,"-----",this.cartItem.type,traveler.type)
       //return false;
       this.patch();
       //this.setPhoneNumberFormat(this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code,cartNumber,traveler_number)
