@@ -15,7 +15,7 @@ import { HotelService } from 'src/app/services/hotel.service';
   styleUrls: ['./hotel-item-wrapper.component.scss'],
   
 })
-export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterContentChecked {
+export class HotelItemWrapperComponent implements OnInit, AfterContentChecked {
 
   @Input() hotelDetails;
   @Input() filteredLabel;
@@ -24,7 +24,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   s3BucketUrl = environment.s3BucketUrl;
   hotelListArray = [];
   mapListArray=[];
-  noOfDataToShowInitially = 20;
+  noOfDataToShowInitially = 20000;
   dataToLoad = 20;
   isFullListDisplayed = false;
   currency;
@@ -37,6 +37,7 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
   mapCanvas;
   myLatLng;
   map;
+  currentPage:number=1;
 
   showHotelDetails = [];
   errorMessage;
@@ -120,9 +121,10 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
 
     this.hotelService.getHotels.subscribe(result=>{
       this.hotelDetails = result;
+      this.currentPage=1;
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       for(let i=0; i < this.hotelListArray.length; i++){
-        // this.hotelDetails[i].images = [];
+        
         this.hotelDetails[i].galleryImages=[];
           for(let image of this.hotelDetails[i].images){
             this.hotelDetails[i].galleryImages.push({
@@ -236,39 +238,13 @@ export class HotelItemWrapperComponent implements OnInit, OnDestroy, AfterConten
     }, (error => {
     }));
   }
+
+  pageChanged(page){
+    //console.log("Innnn",event)
+    this.currentPage=page;
+    window.scroll(0, 0);
+  }
   
-
-
-  ngOnChanges(changes: SimpleChanges) {
-    /* if(typeof changes.hotelDetails!='undefined' && changes.hotelDetails.currentValue.length){
-      this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);;
-      for(let i=0; i < this.hotelListArray.length; i++){
-        this.hotelDetails[i].galleryImages=[];
-        if(this.hotelDetails[i].images.length  > 0){
-          for(let image of this.hotelDetails[i].images){
-            this.hotelDetails[i].galleryImages.push({
-              small: image,
-              medium:image,
-              big:image
-            })
-          }
-        }       
-      }
-
-      this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
-    } */
-    /* if(typeof changes.hotelDetails!='undefined' && changes.hotelDetails.currentValue.length){
-      this.hotelsList = changes.hotelDetails.currentValue;
-    } */
-  }
-
-  logAnimation(event) {
-    // console.log(event);
-  }
-
-  ngOnDestroy(): void {
-   // this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
 
   
 }

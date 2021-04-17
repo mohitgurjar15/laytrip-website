@@ -3436,6 +3436,13 @@ agm-map {
     }
 }
 
+.hotel-pagination{
+    text-align: center;
+}
+.hotel-pagination /deep/ .ngx-pagination .current {
+    background: #F826C1;
+}
+
 // slick slider css
 // $slick-btn-bg-color: #fff;
 // $slick-btn-txt-color: #000;

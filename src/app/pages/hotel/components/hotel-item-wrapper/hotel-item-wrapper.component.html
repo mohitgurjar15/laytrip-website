@@ -19,8 +19,8 @@
 <div id="full_hotel_listing">
    <!--  <div [hidden]="isMapView" *ngIf="hotelListArray.length" class="result_listing hotel_listings infinite-search-results" (clickOutside)="closeHotelDetail()" infinite-scroll
         [infiniteScrollDistance]="2"  [infiniteScrollThrottle]="50"  (scrolled)="onScrollDown()"> -->
-    <div [hidden]="isMapView" *ngIf="hotelListArray.length" class="result_listing hotel_listings infinite-search-results" (clickOutside)="closeHotelDetail()" >
-        <div class="search_block" *ngFor="let item of hotelListArray  | paginate: { itemsPerPage: 10, currentPage: p }; let blockIndex = index;">
+    <div [hidden]="isMapView" *ngIf="hotelListArray.length" class="result_listing hotel_listings infinite-search-results" >
+        <div class="search_block" *ngFor="let item of hotelListArray  | paginate: { itemsPerPage: 20, currentPage: currentPage }; let blockIndex = index;">
             <div class="listing_block">
                 <div class="listing_inner_box_wrppr">
                     <div class="desktop_box">
@@ -242,7 +242,6 @@
             </div>
         </div>
     </div>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
     <div *ngIf="scrollLoading && !isMapView " class="scrollLoading_wrapper">
         <i class="fa fa-spinner fa-spin" class="pink_spinner"></i>
@@ -501,5 +500,7 @@
             </div>
         </div>
     </div>
+
+    <pagination-controls class="hotel-pagination" autoHide="true" [hidden]="isMapView" (pageChange)="pageChanged($event)"></pagination-controls>
     <app-hotel-not-found *ngIf="!hotelListArray.length"></app-hotel-not-found>
 </div>
