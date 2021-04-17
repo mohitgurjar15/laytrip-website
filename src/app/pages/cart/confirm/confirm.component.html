@@ -46,7 +46,7 @@
             <div class="book_detailers" *ngIf="!loading && allBookingStatus">
                 <h3>Details</h3>
                 <ng-container *ngFor="let booking of cartDetails.booking">
-                    <div class="detail_liners" *ngIf="booking.moduleId==1 && (booking.bookingStatus==0 || bookingStatus==1)">
+                    <div class="detail_liners" *ngIf="booking.moduleId==1 && (booking.bookingStatus==0 || booking.bookingStatus==1)">
                         <span class="lefts">Flight</span>
                         <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==1">
                             {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
@@ -57,7 +57,7 @@
                             {{commonFunction.convertDateFormat(booking.moduleInfo[0].departure_date,'DD/MM/YYYY')}}-{{commonFunction.convertDateFormat(booking.moduleInfo[0].arrival_date,'DD/MM/YYYY')}}
                         </span>
                     </div>
-                    <div class="detail_liners" *ngIf="booking.moduleId==3 && (booking.bookingStatus==0 || bookingStatus==1)" >
+                    <div class="detail_liners" *ngIf="booking.moduleId==3 && (booking.bookingStatus==0 || booking.bookingStatus==1)" >
                         <span class="lefts">Hotel</span>
                         <span class="rights">{{booking.moduleInfo[0].hotel_name}} {{commonFunction.convertDateFormat(booking.moduleInfo[0].input_data.check_in,'YYYY-MM-DD')}}</span>
                     </div>

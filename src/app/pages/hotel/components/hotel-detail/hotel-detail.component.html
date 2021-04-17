@@ -392,7 +392,7 @@
     </div>
   </div>
 </div>
-<app-hotel-not-found *ngIf="isNotFound"></app-hotel-not-found>
+<app-hotel-not-found *ngIf="isNotFound || hotelRoomArray.length==0"></app-hotel-not-found>
 
 <section class="search_result hotels" *ngIf="!isNotFound && hotelRoomArray.length">
   <div class="container">

@@ -74,14 +74,25 @@ export class ListBookingsComponent implements OnInit {
         result.push(items[i]);
       }
       for (let j = 0; j < items[i].booking.length; j++) {
-        if (items[i].booking[j].moduleInfo[0].departure_code.toLowerCase().toString().includes(searchValue) ||
-          items[i].booking[j].moduleInfo[0].arrival_code.toLowerCase().toString().includes(searchValue) ||
-          items[i].booking[j].moduleInfo[0].airline_name.toLowerCase().toString().includes(searchValue) ||
-          items[i].booking[j].moduleInfo[0].departure_info.city.toLowerCase().toString().includes(searchValue) ||
-          items[i].booking[j].moduleInfo[0].arrival_info.city.toLowerCase().toString().includes(searchValue)
-        ) {
-          result.push(items[i]);
+
+        if(items[i].booking[j].moduleId==1){
+          if (items[i].booking[j].moduleInfo[0].departure_code.toLowerCase().toString().includes(searchValue) ||
+            items[i].booking[j].moduleInfo[0].arrival_code.toLowerCase().toString().includes(searchValue) ||
+            items[i].booking[j].moduleInfo[0].airline_name.toLowerCase().toString().includes(searchValue) ||
+            items[i].booking[j].moduleInfo[0].departure_info.city.toLowerCase().toString().includes(searchValue) ||
+            items[i].booking[j].moduleInfo[0].arrival_info.city.toLowerCase().toString().includes(searchValue)
+          ) {
+            result.push(items[i]);
+          }
         }
+        if(items[i].booking[j].moduleId==3){
+          if (items[i].booking[j].moduleInfo[0].hotel_name.toLowerCase().toString().includes(searchValue) ||
+            items[i].booking[j].moduleInfo[0].title.toLowerCase().toString().includes(searchValue)
+          ) {
+            result.push(items[i]);
+          }
+        }
+        
       }
     }
     return result;
