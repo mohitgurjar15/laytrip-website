@@ -73,6 +73,7 @@ export class HotelItemWrapperComponent implements OnInit {
     private genericService: GenericService,
     private hotelService:HotelService
   ) {
+    
       this.galleryOptions = [
         { "thumbnails": false, previewRotate:true,preview:false,width: "270px", height: "100%", imageSwipe:true,imageBullets:false,lazyLoading:true },
       ];
@@ -233,11 +234,18 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   pageChanged(page){
-    //console.log("Innnn",event)
     this.currentPage=page;
     window.scroll(0, 0);
   }
   
+  getMapPrice(hotel){
+    return `$${Math.floor(hotel.secondary_start_price)}`
+  }
 
+  checkMarkersInBounds(event){
+    console.log("Event",event)
+  }
+
+  
   
 }
