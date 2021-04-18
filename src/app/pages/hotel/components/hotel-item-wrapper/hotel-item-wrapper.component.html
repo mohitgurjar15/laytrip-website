@@ -36,7 +36,7 @@
                             imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m"> -->
                             <agm-marker #marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
                                 [longitude]="hotel.geocodes.longitude"
-                                [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-marker.svg', scaledSize: {height: 80,width: 48}}"
+                                [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-marker-1.svg', scaledSize: {height: 80,width: 48}}"
                                 [label]="{text:getMapPrice(hotel), color: 'white',fontSize: '12px', class: 'mapLabel',backgroundColor:black}"
                                 (markerClick)="infoWindowAction(hotel.id, $event, 'click')"
                                 (boundsChange)="checkMarkersInBounds($event)">
