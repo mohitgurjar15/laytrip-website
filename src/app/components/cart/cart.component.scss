@@ -21,23 +21,43 @@ h3 {
     border-bottom: none;
     position: relative;
     z-index: 9;
-    overflow: hidden;
-    max-height: 71px;
+    // overflow: hidden;
+    // max-height: 71px;
 
     li {
-        position: relative;
+        // position: relative;
+        // z-index: -99;
+        // margin-left: 0;
         z-index: -99;
         margin-left: 0;
+        position: relative;
+        justify-content: center;
+        display: flex;
+        flex: auto;
+        max-width: 121px;
+        align-items: center;
+        border-left: 1px solid $box-border-color;
+        border-top: 1px solid $box-border-color;
+
+        &.active {
+            max-width: 187px;
+            top: 0;
+            position: relative;
+            padding: 0;
+            overflow: visible;
+        }
 
         &:first-child {
             margin-left: 0;
             z-index: 9;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 0px;
 
             a {
                 border-top-left-radius: 10px;
                 border-top-right-radius: 0px;
-                border-left: 1px solid $box-border-color;
-                border-top: 1px solid $box-border-color;
+                // border-left: 1px solid $box-border-color;
+                // border-top: 1px solid $box-border-color;
 
                 &::before {
                     border: none;
@@ -54,24 +74,35 @@ h3 {
         }
 
         &:last-child {
+            border-right: 1px solid $box-border-color;
+            border-top-right-radius: 15px;
+
             a {
                 border-top-right-radius: 15px;
             }
         }
 
         a {
+            // background-color: transparent;
+            // padding: 10px 11px;
+            // border: 1px solid $box-border-color;
+            // border-left: 0;
+            // position: relative;
+            // top: 10px;
+            // display: flex;
+            // width: 98px;
+            // align-items: center;
+            // justify-content: center;
             background-color: transparent;
-            padding: 10px 11px;
-            border: 1px solid $box-border-color;
             border-left: 0;
-            //border-top: 0;
             position: relative;
-            top: 10px;
             display: flex;
-            width: 98px;
+            width: 100%;
             align-items: center;
             justify-content: center;
-            //margin-left: -8px;
+            max-width: 94px;
+            z-index: 9999;
+            padding: 10px 0px;
 
             &::before {
                 // content: '';
@@ -124,21 +155,35 @@ h3 {
                     text-overflow: ellipsis;
                     width: 100%;
                     margin-left: 5px;
+                    min-width: 94px;
                 }
             }
 
             &.active {
+                // background-color: $background-white;
+                // border-top-left-radius: 10px;
+                // border-top-right-radius: 10px;
+                // border-bottom: none;
+                // top: 0;
+                // height: 71px;
+                // padding: 10px;
+                // border: 1px solid $box-border-color;
+                // border-bottom: none;
+                // width: auto;
+                // margin: 0;
+
                 background-color: $background-white;
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
                 border-bottom: none;
-                top: 0;
-                height: 71px;
-                padding: 10px;
                 border: 1px solid $box-border-color;
                 border-bottom: none;
-                width: auto;
+                width: 190px;
                 margin: 0;
+                max-width: 100%;
+                top: -7px;
+                padding: 0;
+                height: 63px;
 
                 &::before {
                     border: none;
@@ -152,7 +197,8 @@ h3 {
                 }
 
                 .tab_round_wrps {
-                    width: 186px;
+                    //width: 186px;
+                    width: 166px;
                     border: 2px solid $pink;
                     border-radius: 25px;
                     padding: 0 10px;
@@ -160,16 +206,16 @@ h3 {
                     font-weight: 600;
                     font-size: 18px;
                     flex-direction: row;
-                    padding: 0 20px;
                     height: 50px;
 
-                    &.hotel_tab_round_wrps{
+                    &.hotel_tab_round_wrps {
                         border: 2px solid $blue-text-one;
+
                         @include tab-view {
                             border: none;
                             padding: 0;
                             width: auto;
-    
+
                             .tab_txt_head {
                                 display: none;
                             }
@@ -191,6 +237,7 @@ h3 {
                         overflow: hidden;
                         text-overflow: ellipsis;
                         width: 100%;
+                        min-width: 94px;
                     }
 
                     img {
