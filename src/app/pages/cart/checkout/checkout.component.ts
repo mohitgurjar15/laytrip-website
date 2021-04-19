@@ -251,6 +251,21 @@ export class CheckoutComponent implements OnInit {
       },
       type4: {
         adults: []
+      },
+      type5: {
+        adults: []
+      },
+      type6: {
+        adults: []
+      },
+      type7: {
+        adults: []
+      },
+      type8: {
+        adults: []
+      },
+      type9: {
+        adults: []
       }
     });
     if (this.addCardRef) {
