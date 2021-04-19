@@ -18,7 +18,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   countryCode: string;
   checkInDate = new Date();
-  checkOutDate = new Date();
+  checkOutDate : any = new Date();
   rangeDates: Date[];
   maxDate: any = {};
   minDate: any = {};
@@ -119,20 +119,20 @@ export class HotelSearchWidgetComponent implements OnInit {
       // this.$dealLocatoin.unsubscribe();  
       this.homeService.removeToString('hotel'); 
 
-      this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
+      this.checkInDate = moment(this.route.snapshot.queryParams['check_in']).toDate();
       this.checkInMinDate = this.customStartDateValidation ? moment(this.customStartDateValidation).toDate() : moment();
-      this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
+      
+      this.checkOutDate = moment(this.route.snapshot.queryParams['check_out']).isValid() ? moment(this.route.snapshot.queryParams['check_out']).toDate() : moment(this.route.snapshot.queryParams['check_in']).add(1,'days').toDate();
       this.checkOutMinDate = this.checkOutDate;
       this.rangeDates = [this.checkInDate, this.checkOutDate];
 
-      
       let info;
       this.searchHotelInfo =
       {
         latitude: this.route.snapshot.queryParams['latitude'],
         longitude: this.route.snapshot.queryParams['longitude'],
         check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
-        check_out: moment(this.route.snapshot.queryParams['check_out']).format('MM/DD/YYYY'),
+        check_out: moment(this.checkOutDate).format('MM/DD/YYYY'),
         city_id: this.route.snapshot.queryParams['city_id'],
       };
       if (this.route.snapshot.queryParams['location']) {
@@ -148,12 +148,9 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
       if (this.route.snapshot.queryParams['itenery']) {
         info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-        this.searchHotelInfo.occupancies = info;
-        
-      }
-      
-    }
-    else {
+        this.searchHotelInfo.occupancies = info;     
+      }      
+    } else {
       this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
       this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id;
       this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
@@ -175,6 +172,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     });
     this.homeService.removeToString('hotel'); 
+    
   }
 
   setHotelDate(){
@@ -198,7 +196,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
-  checkInDateUpdate(date) {
+  selectCheckInDateUpdate(date) {
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();
@@ -216,19 +214,18 @@ export class HotelSearchWidgetComponent implements OnInit {
      this.searchHotelInfo.occupancies = event;
   }
 
-
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
     let queryParams: any = {};
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
-    queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
+    queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1,'days').format('YYYY-MM-DD');
+    // queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
     queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
     queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
-    console.log("queryParams",queryParams)
-    console.log(queryParams,this.searchHotelInfo.occupancies)
+    
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
      
