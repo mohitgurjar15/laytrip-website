@@ -22,9 +22,6 @@
                   <span class="tr_type hotel_type_name" *ngIf="cartItem.type=='hotel'">
                     {{cartItem.module_info.title }}
                   </span>
-                  <span class="adult_countr" *ngIf="cartItem.type=='hotel'">
-                    2 Adults
-                  </span>
                   <!-- <span class="tr_type mob_names {{travelerItem.value.adults[x].userId}}" [ngClass]="{'hide_section':travelerItem.value.adults[x].userId==''}">
                     {{x==0?'Primary Traveler':travlerLabels['en'][traveler.controls.type.value]}}
                   </span> -->
@@ -38,9 +35,7 @@
                 
               </a>
               <a [ngClass]="{'hotel_travller': cartItem.type=='hotel'}" *ngIf="(traveler.controls.type.value=='adult' && isAdultTravller) || (traveler.controls.type.value=='child' && isChildTravller) || (traveler.controls.type.value=='infant' && isInfantTravller)" class="dropdown-toggle traveler_drop_down"
-                data-toggle="dropdown" aria-expanded="false">{{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + '
-                '
-                +travelerItem.value.adults[x].last_name:'Saved Travelers' | titlecase}}</a>
+                data-toggle="dropdown" aria-expanded="false">Saved Travelers</a>
               <ul *ngIf="(traveler.controls.type.value=='adult' && isAdultTravller) || (traveler.controls.type.value=='child' && isChildTravller) || (traveler.controls.type.value=='infant' && isInfantTravller)" class="dropdown-menu options_name">
                 <ng-container *ngFor="let user of myTravelers">
                   <li (click)='selectTraveler(user.userId,x,cartNumber)'

@@ -30,6 +30,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     title: "Cancún, Mexico",
     city: "Cancún",
     state: "",
+    city_id:800026864,
     country: "Mexico",
     type: "city",
     hotel_id: null,
@@ -45,6 +46,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     longitude: null,
     check_in: null,
     check_out: null,
+    city_id:'',
     occupancies: [
       {
         adults: null,
@@ -118,42 +120,45 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.homeService.removeToString('hotel'); 
 
       this.checkInDate = new Date(this.route.snapshot.queryParams['check_in']);
-      this.checkInMinDate = this.checkInDate;
+      this.checkInMinDate = this.customStartDateValidation ? moment(this.customStartDateValidation).toDate() : moment();
       this.checkOutDate = new Date(this.route.snapshot.queryParams['check_out']);
       this.checkOutMinDate = this.checkOutDate;
       this.rangeDates = [this.checkInDate, this.checkOutDate];
 
-      if (this.route && this.route.snapshot && this.route.snapshot.queryParams) {
-        let info;
-        this.searchHotelInfo =
-        {
-          latitude: this.route.snapshot.queryParams['latitude'],
-          longitude: this.route.snapshot.queryParams['longitude'],
-          check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
-          check_out: moment(this.route.snapshot.queryParams['check_out']).format('MM/DD/YYYY'),
-        };
-        if (this.route.snapshot.queryParams['location']) {
-          info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
-          this.searchHotelInfo.location=info;
-          if (info) {
-            this.fromDestinationInfo.title = info.title;
-            this.fromDestinationInfo.city = info.city;
-            this.fromDestinationInfo.country = info.country;
-            this.searchHotelInfo.city = info.city;
-            this.searchHotelInfo.country = info.country;
-          }
-        }
-        if (this.route.snapshot.queryParams['itenery']) {
-          info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-          this.searchHotelInfo.occupancies = info;
-          
+      
+      let info;
+      this.searchHotelInfo =
+      {
+        latitude: this.route.snapshot.queryParams['latitude'],
+        longitude: this.route.snapshot.queryParams['longitude'],
+        check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
+        check_out: moment(this.route.snapshot.queryParams['check_out']).format('MM/DD/YYYY'),
+        city_id: this.route.snapshot.queryParams['city_id'],
+      };
+      if (this.route.snapshot.queryParams['location']) {
+        info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+        this.searchHotelInfo.location=info;
+        if (info) {
+          this.fromDestinationInfo.title = info.title;
+          this.fromDestinationInfo.city = info.city;
+          this.fromDestinationInfo.country = info.country;
+          this.searchHotelInfo.city = info.city;
+          this.searchHotelInfo.country = info.country;
         }
       }
+      if (this.route.snapshot.queryParams['itenery']) {
+        info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+        this.searchHotelInfo.occupancies = info;
+        
+      }
+      
     }
     else {
       this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
+      this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id;
       this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
       this.searchHotelInfo.location=this.fromDestinationInfo;
+      this.searchHotelInfo.occupancies = this.selectedGuest;
     }
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo=> {
       if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){      
@@ -161,6 +166,7 @@ export class HotelSearchWidgetComponent implements OnInit {
         this.searchHotelInfo.check_in =  this.checkInDate = moment().add(31,'days').toDate();
         this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1,'days').toDate();
         this.searchHotelInfo.latitude =   hotelInfo.lat;
+        this.searchHotelInfo.city_id =   hotelInfo.city_id;
         this.searchHotelInfo.longitude = hotelInfo.long;
         
       this.checkInMinDate = moment(this.customStartDateValidation).toDate();
@@ -169,10 +175,6 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     });
     this.homeService.removeToString('hotel'); 
-
-    if (this.selectedGuest) {
-      this.searchHotelInfo.occupancies = this.selectedGuest;
-    }
   }
 
   setHotelDate(){
@@ -222,8 +224,10 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
+    queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
     queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
     queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
+    console.log("queryParams",queryParams)
     console.log(queryParams,this.searchHotelInfo.occupancies)
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
@@ -237,12 +241,12 @@ export class HotelSearchWidgetComponent implements OnInit {
   selectedHotel(event) {
 
     this.searchHotelInfo.location = event;
+    this.searchHotelInfo.city_id = event.city_id;
     this.searchHotelInfo.latitude = event.geo_codes.lat;
     this.searchHotelInfo.longitude = event.geo_codes.long;
   }
 
   validateSearch(event){
-    this.hotelSearchFormSubmitted=false;
     this.validSearch=event;
   }
 }

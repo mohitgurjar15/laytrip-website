@@ -103,10 +103,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
+
   }
     
   ngOnInit(): void {
-
     this.departureDate = moment(this.customStartDateValidation).toDate();
     
     if(new Date(this.customStartDateValidation) <= new Date() ){
@@ -179,6 +179,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
 
   setFlightDepartureMinDate(){
+    
     let  date = new Date();
     var curretdate = moment().format();
     let  juneDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
@@ -238,7 +239,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     queryParams.adult = this.searchFlightInfo.adult;
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
-    console.log("this.searchFlightInfo",this.searchFlightInfo)
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
@@ -251,8 +251,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   toggleOnewayRoundTrip(type) {
-
     if (type === 'roundtrip') {
+      this.returnDate =   moment(this.departureDate).add(7, 'days').toDate();
+      this.rangeDates = [this.departureDate, this.returnDate];
       this.isRoundTrip = true;
     } else {
       this.isRoundTrip = false;
@@ -260,7 +261,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
 
-  departureDateUpdate(date) {
+  selectDepartureDate(date) {
+    this.departureDate = moment(date).toDate();
     this.returnDate = new Date(date);
     this.flightReturnMinDate = new Date(date);
   }
@@ -285,7 +287,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
 
-  returnDateUpdate(date) {
+  selectReturnDateUpdate(date) {
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();

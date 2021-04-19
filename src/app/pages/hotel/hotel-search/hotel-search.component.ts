@@ -55,6 +55,7 @@ export class HotelSearchComponent implements OnInit {
       check_out: this.route.snapshot.queryParams['check_out'],
       latitude: this.route.snapshot.queryParams['latitude'],
       longitude: this.route.snapshot.queryParams['longitude'],
+      city_id: this.route.snapshot.queryParams['city_id'],
       rooms:info.rooms,
       adults: info.adults,
       children: info.child,

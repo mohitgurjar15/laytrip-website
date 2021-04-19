@@ -204,7 +204,6 @@ var AddCardComponent = /** @class */ (function () {
         }
         // Tokenize!
         Spreedly.tokenizeCreditCard(options);
-        console.log("Submit payment");
         setTimeout(function () {
             _this.cardListChangeCount += _this.cardListChangeCount + 1;
             _this.emitCardListChange.emit(_this.cardListChangeCount);

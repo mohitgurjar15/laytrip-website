@@ -73,11 +73,11 @@
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.lastName}}"
                                 disabled>
                         </div>                        
-                        <div class="col-sm-12 col-md-6 mb-sm-10 " *ngIf="checkIsChild(traveler.travelerInfo.dob) && i == 0 ">
+                        <div class="col-sm-12 col-md-6 mb-sm-10 " *ngIf="i == 0 ">
                             <label for="">Email*</label>
                             <input type="email" class="form-control" placeholder="{{traveler.travelerInfo.email}}" disabled>
                         </div>
-                        <div class="col-sm-12 col-md-6 mb-sm-10" *ngIf="traveler.travelerInfo.user_type == 'adult' && i == 0 " >
+                        <div class="col-sm-12 col-md-6 mb-sm-10" *ngIf="i == 0 " >
                             <label for="">Telephone*</label>
                             <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.countryCode != 'null' ? getPhoneNoInMaskFormat(traveler.travelerInfo.phoneNo,traveler.travelerInfo.countryCode): '' }}"
                                 disabled>
