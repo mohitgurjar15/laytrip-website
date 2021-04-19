@@ -164,7 +164,7 @@ export class HotelDetailComponent implements OnInit {
 
   selectRoom(roomInfo) {
     
-    if (this.cartItems && this.cartItems.length >= 5) {
+    if (this.cartItems && this.cartItems.length >= 10) {
       this.addCartLoading=false;
       this.isCartFull=true;
       //this.maxCartValidation.emit(true)

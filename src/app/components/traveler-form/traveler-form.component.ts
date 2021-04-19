@@ -69,7 +69,38 @@ export class TravelerFormComponent implements OnInit {
       adult: 0,
       child: 0,
       infant: 0
-    }
+    },
+    type5: {
+      adults: [],
+      adult: 0,
+      child: 0,
+      infant: 0
+    },
+    type6: {
+      adults: [],
+      adult: 0,
+      child: 0,
+      infant: 0
+    },
+    type7: {
+      adults: [],
+      adult: 0,
+      child: 0,
+      infant: 0
+    },
+    type8: {
+      adults: [],
+      adult: 0,
+      child: 0,
+      infant: 0
+    },
+    type9: {
+      adults: [],
+      adult: 0,
+      child: 0,
+      infant: 0
+    },
+    
   };
   dobMinDate = new Date();
   baggageDescription: string = '';
@@ -122,6 +153,21 @@ export class TravelerFormComponent implements OnInit {
         adults: this.formBuilder.array([])
       }),
       type4: this.formBuilder.group({
+        adults: this.formBuilder.array([])
+      }),
+      type5: this.formBuilder.group({
+        adults: this.formBuilder.array([])
+      }),
+      type6: this.formBuilder.group({
+        adults: this.formBuilder.array([])
+      }),
+      type7: this.formBuilder.group({
+        adults: this.formBuilder.array([])
+      }),
+      type8: this.formBuilder.group({
+        adults: this.formBuilder.array([])
+      }),
+      type9: this.formBuilder.group({
         adults: this.formBuilder.array([])
       })
     });
