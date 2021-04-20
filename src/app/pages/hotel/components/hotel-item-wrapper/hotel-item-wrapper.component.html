@@ -275,7 +275,19 @@
             </div>
         </div>
     </div>
+    
 
     <pagination-controls class="hotel-pagination" autoHide="true" (pageChange)="pageChanged($event)"></pagination-controls>
     <app-hotel-not-found *ngIf="!hotelListArray.length"></app-hotel-not-found>
+    <div class="clearfix" style=" max-width:1020px;min-width:300px; margin: auto">
+        <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+             <ng-container *ngFor="let item of tempImage"> 
+                <li> 
+                    <img src={{item.medium}} style="width:100%"/>
+                    <div style=" height: 50px; font-size: 30px;text-align: center; position: relative; width: 100%; top: -100px;"><h3 style="color: blue">This is text1</h3></div>
+                </li>
+            </ng-container> 
+            
+        </ul>
+    </div>
 </div>

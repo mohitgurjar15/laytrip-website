@@ -65,6 +65,20 @@ export class HotelItemWrapperComponent implements OnInit {
   itenery:string='';
   location:string='';
   city_id:string='';
+  tempImage=[
+    {
+      medium :'https://asia.olympus-imaging.com/content/000107507.jpg'
+    },
+    {
+      medium :'https://asia.olympus-imaging.com/content/000107507.jpg'
+    },
+    {
+      medium :'https://asia.olympus-imaging.com/content/000107507.jpg'
+    },
+    {
+      medium :'https://asia.olympus-imaging.com/content/000107507.jpg'
+    }
+  ]
 
  
   constructor(
@@ -84,6 +98,20 @@ export class HotelItemWrapperComponent implements OnInit {
       this.itenery = this.route.snapshot.queryParams['itenery']
       this.location = this.route.snapshot.queryParams['location']
       this.city_id = this.route.snapshot.queryParams['city_id']
+
+
+      $('#image-gallery').lightSlider({
+        gallery:true,
+        item:1,
+        thumbItem:7,
+        slideMargin: 0,
+        speed:500,
+        auto:false,
+        loop:false,
+        onSliderLoad: function() {
+            $('#image-gallery').removeClass('cS-hidden');
+        }  
+      });
   }
 
   ngOnInit() {

@@ -40,6 +40,7 @@
               "src/comman-modal.scss",
               "src/laytrip.scss",
               "src/alert.scss",
+              "src/assets/css/lightslider.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/primeng/resources/themes/md-light-indigo/theme.css",
               "node_modules/primeicons/primeicons.css",
@@ -56,6 +57,7 @@
               "src/assets/js/lottie-player.js",
               "src/assets/js/iframe-v1.min.js",
               "src/assets/js/spreedly.js",
+              "src/assets/js/lightslider.js",
               "src/assets/js/apple-auth.js",
               "node_modules/slick-carousel/slick/slick.min.js"
             ],
