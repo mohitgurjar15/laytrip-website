@@ -227,52 +227,6 @@ var FilterHotelComponent = /** @class */ (function () {
         }
         this.filterHotels({});
     };
-    FilterHotelComponent.prototype.ratingSortFilter = function (filteredHotels, order, key) {
-        return filteredHotels.sort(function (a, b) {
-            var x = a[key];
-            var y = b[key];
-            if (order === 'ASC') {
-                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-            }
-            if (order === 'DESC') {
-                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-            }
-        });
-    };
-    FilterHotelComponent.prototype.sortByHotelName = function (data, key, way) {
-        if (typeof data === "undefined") {
-            return data;
-        }
-        else {
-            return data.sort(function (a, b) {
-                var x = a[key];
-                var y = b[key];
-                if (way === 'ASC') {
-                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-                }
-                if (way === 'DESC') {
-                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-                }
-            });
-        }
-    };
-    FilterHotelComponent.prototype.sortJSON = function (data, key, way) {
-        if (typeof data === "undefined") {
-            return data;
-        }
-        else {
-            return data.sort(function (a, b) {
-                var x = a.selling[key];
-                var y = b.selling[key];
-                if (way === 'ASC') {
-                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-                }
-                else if (way === 'DESC') {
-                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-                }
-            });
-        }
-    };
     /**
     * Common function to process filtration of hotel
     */
@@ -439,6 +393,52 @@ var FilterHotelComponent = /** @class */ (function () {
             else {
                 return this.filterHotelNames = [{ hotelName: 'No result!' }];
             }
+        }
+    };
+    FilterHotelComponent.prototype.ratingSortFilter = function (filteredHotels, order, key) {
+        return filteredHotels.sort(function (a, b) {
+            var x = a[key];
+            var y = b[key];
+            if (order === 'ASC') {
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            }
+            if (order === 'DESC') {
+                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+            }
+        });
+    };
+    FilterHotelComponent.prototype.sortByHotelName = function (data, key, way) {
+        if (typeof data === "undefined") {
+            return data;
+        }
+        else {
+            return data.sort(function (a, b) {
+                var x = a[key];
+                var y = b[key];
+                if (way === 'ASC') {
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                }
+                if (way === 'DESC') {
+                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                }
+            });
+        }
+    };
+    FilterHotelComponent.prototype.sortJSON = function (data, key, way) {
+        if (typeof data === "undefined") {
+            return data;
+        }
+        else {
+            return data.sort(function (a, b) {
+                var x = a.selling[key];
+                var y = b.selling[key];
+                if (way === 'ASC') {
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                }
+                else if (way === 'DESC') {
+                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                }
+            });
         }
     };
     __decorate([

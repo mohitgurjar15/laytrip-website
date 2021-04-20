@@ -276,51 +276,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.filterHotels({});
   }
 
-  ratingSortFilter(filteredHotels,order,key){
-    return filteredHotels.sort(function (a, b) {
-      var x = a[key];
-      var y = b[key];
-      if (order === 'ASC') {
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-      }
-      if (order === 'DESC') {
-        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-      }
-    });
-  }
-  sortByHotelName(data, key, way) {
-
-    if (typeof data === "undefined") {
-      return data;
-    } else {
-      return data.sort(function (a, b) {
-        var x = a[key];
-        var y = b[key];
-        if (way === 'ASC') {
-          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        }
-        if (way === 'DESC') {
-          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-        }
-      });
-    }
-  }
-
-  sortJSON(data, key, way) {
-    if (typeof data === "undefined") {
-      return data;
-    } else {
-      return data.sort(function (a, b) {
-        var x = a.selling[key];
-        var y = b.selling[key];
-        if (way === 'ASC') {        
-          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        } else if (way === 'DESC') {         
-          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-        }
-      });
-    }
-  }
   /**
   * Common function to process filtration of hotel
   */
@@ -389,11 +344,11 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         var sortFilter :any = hotelInfo; 
         console.log(sortFilter.key)    
         if(sortFilter.key == 'rating'){
-          filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.order,sortFilter.key)
+          filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.order,sortFilter.key);
         } else if(sortFilter.key == 'name'){
-          filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.order,sortFilter.key)
+          filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.order,sortFilter.key);
         } else if(sortFilter.key == 'total'){
-          filteredHotels = this.sortJSON(filteredHotels,sortFilter.order,sortFilter.key)
+          filteredHotels = this.sortJSON(filteredHotels,sortFilter.order,sortFilter.key);
         } 
       }
       
@@ -513,4 +468,49 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   
+  ratingSortFilter(filteredHotels,order,key){
+    return filteredHotels.sort(function (a, b) {
+      var x = a[key];
+      var y = b[key];
+      if (order === 'ASC') {
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+      }
+      if (order === 'DESC') {
+        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+      }
+    });
+  }
+  sortByHotelName(data, key, way) {
+
+    if (typeof data === "undefined") {
+      return data;
+    } else {
+      return data.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
+
+  sortJSON(data, key, way) {
+    if (typeof data === "undefined") {
+      return data;
+    } else {
+      return data.sort(function (a, b) {
+        var x = a.selling[key];
+        var y = b.selling[key];
+        if (way === 'ASC') {        
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        } else if (way === 'DESC') {         
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
 }
