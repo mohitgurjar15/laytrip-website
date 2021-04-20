@@ -135,9 +135,8 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         }
         this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
-                _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = hotelInfo.city;
-                _this.searchHotelInfo.check_in = _this.checkInDate = moment().add(31, 'days').toDate();
-                _this.searchHotelInfo.check_out = _this.checkOutMinDate = _this.checkOutDate = moment(_this.searchHotelInfo.check_in).add(1, 'days').toDate();
+                _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = hotelInfo.title;
+                _this.dealDateValidation();
                 _this.searchHotelInfo.latitude = hotelInfo.lat;
                 _this.searchHotelInfo.city_id = hotelInfo.city_id;
                 _this.searchHotelInfo.longitude = hotelInfo.long;
@@ -146,6 +145,15 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             }
         });
         this.homeService.removeToString('hotel');
+    };
+    HotelSearchWidgetComponent.prototype.dealDateValidation = function () {
+        if (moment(moment(this.customStartDateValidation).subtract(31, 'days')).diff(moment(), 'days') > 0) {
+            this.searchHotelInfo.check_in = this.checkInDate = moment(this.customStartDateValidation).toDate();
+        }
+        else {
+            this.searchHotelInfo.check_in = this.checkInDate = moment().add(31, 'days').toDate();
+        }
+        this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
     };
     HotelSearchWidgetComponent.prototype.setHotelDate = function () {
         var curretdate = moment().format();

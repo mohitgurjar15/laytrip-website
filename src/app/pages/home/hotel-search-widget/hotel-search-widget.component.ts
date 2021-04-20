@@ -158,23 +158,28 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.searchHotelInfo.occupancies = this.selectedGuest;
     }
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo=> {
-      if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){      
-        this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.city;
-        this.searchHotelInfo.check_in =  this.checkInDate = moment().add(31,'days').toDate();
-        this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1,'days').toDate();
+      if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){  
+        this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
+        this.dealDateValidation();
         this.searchHotelInfo.latitude =   hotelInfo.lat;
         this.searchHotelInfo.city_id =   hotelInfo.city_id;
-        this.searchHotelInfo.longitude = hotelInfo.long;
-        
-      this.checkInMinDate = moment(this.customStartDateValidation).toDate();
-
-      this.rangeDates = [this.checkInDate, this.checkOutDate];
+        this.searchHotelInfo.longitude = hotelInfo.long;      
+        this.checkInMinDate = moment(this.customStartDateValidation).toDate();
+        this.rangeDates = [this.checkInDate, this.checkOutDate];
       }
     });
     this.homeService.removeToString('hotel'); 
     
   }
-
+  dealDateValidation(){
+    if(moment(moment(this.customStartDateValidation).subtract(31,'days')).diff(moment(),'days') > 0){
+      this.searchHotelInfo.check_in =  this.checkInDate = moment(this.customStartDateValidation).toDate();
+    }else {      
+      this.searchHotelInfo.check_in =  this.checkInDate = moment().add(31,'days').toDate();
+    }
+    this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1,'days').toDate();
+    
+  }
   setHotelDate(){
 
     var curretdate = moment().format();
