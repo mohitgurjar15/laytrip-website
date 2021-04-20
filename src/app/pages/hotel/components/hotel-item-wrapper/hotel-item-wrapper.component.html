@@ -4,7 +4,7 @@
 <div class="top_wrapper_box">
     <h3 class="shorting_label">{{filteredLabel}}</h3>
     <span class="desk_line"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
-        {{hotelDetails.length}} {{hotelDetails.length > 1 ? 'Hotels' : 'Hotel'}}
+        {{hotelListArray.length}} {{hotelListArray.length > 1 ? 'Hotels' : 'Hotel'}}
         found in {{hotelName}}</span>
     <button class="list_v_btn" (click)="differentView('listView')" [hidden]="!isMapView">
         <img src="{{s3BucketUrl}}assets/images/icon/list_y.svg" alt="List view">
@@ -31,7 +31,7 @@
         <div class="col-lg-12" style="padding: 0;">
             <div class="row">
                 <div class="col-lg-12" [hidden]="!isMapView">
-                    <agm-map #gm [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10">
+                    <agm-map #gm [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10"  (boundsChange)="checkMarkersInBounds($event)">
                         <!-- <agm-marker-cluster
                             imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m"> -->
                             <agm-marker #marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
@@ -39,7 +39,8 @@
                                 [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/custom-marker-1.svg', scaledSize: {height: 80,width: 48}}"
                                 [label]="{text:getMapPrice(hotel), color: 'white',fontSize: '12px', class: 'mapLabel',backgroundColor:black}"
                                 (markerClick)="infoWindowAction(hotel.id, $event, 'click')"
-                                (boundsChange)="checkMarkersInBounds($event)">
+                                
+                                >
                                 <agm-info-window [disableAutoPan]="false" #infoWindow>
                                     <div>
                                         <p>{{hotel.name}}</p>
@@ -277,5 +278,5 @@
     </div>
 
     <pagination-controls class="hotel-pagination" autoHide="true" (pageChange)="pageChanged($event)"></pagination-controls>
-    <app-hotel-not-found *ngIf="!hotelListArray.length"></app-hotel-not-found>
+    <app-hotel-not-found  *ngIf="!this.isMapView &&  !hotelListArray.length"></app-hotel-not-found>
 </div>
