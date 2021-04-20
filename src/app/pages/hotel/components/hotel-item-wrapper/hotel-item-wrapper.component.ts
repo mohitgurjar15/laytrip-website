@@ -38,6 +38,17 @@ export class HotelItemWrapperComponent implements OnInit {
   myLatLng;
   map;
   currentPage:number=1;
+  tempImages=[
+    {
+      small:"https://q-xx.bstatic.com/xdata/images/hotel/max500/182209467.jpg?k=156cd1216a514cd600c566396f401111aa7c01cb5b2de2040c4d1b60a0bead19&o="
+    },
+    {
+      small:"https://q-xx.bstatic.com/xdata/images/hotel/max500/182209467.jpg?k=156cd1216a514cd600c566396f401111aa7c01cb5b2de2040c4d1b60a0bead19&o="
+    },
+    {
+      small:"https://q-xx.bstatic.com/xdata/images/hotel/max500/182209467.jpg?k=156cd1216a514cd600c566396f401111aa7c01cb5b2de2040c4d1b60a0bead19&o="
+    }
+  ]
 
   showHotelDetails = [];
   errorMessage;

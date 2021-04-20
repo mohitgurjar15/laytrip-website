@@ -61,10 +61,17 @@
                                                     <div class="box_img">
                                                         <div class="block_im">
                                                             <div class="hotel_list_img_wrp">
-                                                                <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
+                                                                <!-- <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
                                                                     [images]="item.galleryImages"></ngx-gallery>
             
-                                                                <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box">
+                                                                <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box"> -->
+                                                                <ngb-carousel [interval]="false">
+                                                                    <ng-template ngbSlide *ngFor="let image of item.galleryImages">
+                                                                      <div class="picsum-img-wrapper">
+                                                                        <img src={{image.small}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                                                      </div>
+                                                                    </ng-template>
+                                                                </ngb-carousel>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -132,10 +139,17 @@
                                 <div class="mobile_box">
             
                                     <div class="hotel_list_img_wrp">
-                                        <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
+                                        <!-- <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
                                             [images]="item.galleryImages"></ngx-gallery>
             
-                                        <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box">                           
+                                        <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box"> -->                           
+                                        <ngb-carousel [interval]="false">
+                                            <ng-template ngbSlide *ngFor="let image of item.galleryImages">
+                                              <div class="picsum-img-wrapper">
+                                                <img src={{image.small}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                              </div>
+                                            </ng-template>
+                                        </ngb-carousel>
                                     </div>
                                     <div class="middle_part">
                                         <div class="detail_info">
