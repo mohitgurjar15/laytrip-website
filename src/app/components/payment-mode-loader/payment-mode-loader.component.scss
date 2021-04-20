@@ -16,8 +16,8 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.text-line{
-  text-decoration:line-through;
+.text-line {
+  text-decoration: line-through;
 }
 
 /* .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_installment_radio li{
@@ -34,25 +34,30 @@ input[type=number] {
 //   }
 // }
 
-.payment_accordion{
-  .payment_mode_header{
+.payment_accordion {
+  .payment_mode_header {
     display: flex;
-    @include tab-view{
+
+    @include tab-view {
       justify-content: center;
     }
-    .btn_accrodion{
+
+    .btn_accrodion {
       height: 80px;
       margin-right: 0;
-      @include tab-view{
+
+      @include tab-view {
         height: 45px;
         max-width: 200px;
       }
-      &:first-child{
+
+      &:first-child {
         margin-right: 20px;
       }
     }
   }
-  .btn_accrodion{
+
+  .btn_accrodion {
     background-color: $background-white;
     color: $text-grey;
     font-size: 34px;
@@ -61,33 +66,40 @@ input[type=number] {
     flex: 1;
     height: 108px;
     margin-right: 20px;
-    @include tab-view{
+
+    @include tab-view {
       font-size: 18px;
     }
-    &:last-child{
+
+    &:last-child {
       margin-right: 0;
     }
-    &.current_active_btn{
+
+    &.current_active_btn {
       color: $blue-text;
       border: 1px solid $blue-text;
     }
   }
-  h3{
+
+  h3 {
     color: $text-grey;
     font-size: 26px;
     margin-top: 35px;
     margin-bottom: 15px;
-    @include tab-view{
+
+    @include tab-view {
       font-size: 18px;
+    }
   }
-  }
-  .flex_center_wrapper{
+
+  .flex_center_wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .inner_accordion{
-    .btn_accrodion{
+
+  .inner_accordion {
+    .btn_accrodion {
       background-color: $background-white;
       color: $text-black;
       font-size: 34px;
@@ -102,24 +114,30 @@ input[type=number] {
       align-items: center;
       justify-content: center;
       font-weight: 500;
-      @include tab-view{
+
+      @include tab-view {
         font-size: 18px;
         height: 65px;
       }
-      &:last-child{
+
+      &:last-child {
         margin-right: 0;
       }
-      &.current_active_btn{
+
+      &.current_active_btn {
         color: $blue-text;
         border: 1px solid $blue-text;
       }
-      span{
+
+      span {
         color: $pink;
         font-size: 16px;
-        @include tab-view{
+
+        @include tab-view {
           font-size: 12px;
         }
-        &.gray_text{
+
+        &.gray_text {
           color: $text-grey;
         }
       }
@@ -127,54 +145,65 @@ input[type=number] {
   }
 }
 
-.pay_summery_wrapper{
+.pay_summery_wrapper {
   margin-top: 25px;
-  h3{
+
+  h3 {
     color: $blue-text;
     font-size: 34px;
     margin-bottom: 10px;
-    @include tab-view{
+
+    @include tab-view {
       font-size: 24px;
+    }
   }
-  }
-  .pay_sum_inner{
+
+  .pay_sum_inner {
     border-radius: 15px;
     border: 1px solid $feedback_text-clr;
-    .pay_list_wrper{
+
+    .pay_list_wrper {
       padding: 20px;
-      @include tab-view{
+
+      @include tab-view {
         padding: 15px;
       }
-      .pay_listing{
+
+      .pay_listing {
         display: flex;
         align-items: center;
         justify-content: space-between;
         color: $text-black;
         font-size: 26px;
         margin-bottom: 10px;
-        @include tab-view{
+
+        @include tab-view {
           font-size: 12px;
         }
-        &:last-child{
+
+        &:last-child {
           margin: 0;
         }
       }
     }
-    .price_accordion{
-      .card{
+
+    .price_accordion {
+      .card {
         border-bottom-left-radius: 15px;
         border-bottom-right-radius: 15px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         border: none;
         border-top: 1px solid $feedback_text-clr;
-        .card-header{
+
+        .card-header {
           background-color: transparent;
           border-width: 0 1px 0 0;
           border-bottom-left-radius: 15px;
           border-bottom-right-radius: 15px;
           padding: 15px;
-          .card_header_btn{
+
+          .card_header_btn {
             font-weight: 600;
             color: $text-black;
             font-size: 26px;
@@ -184,36 +213,38 @@ input[type=number] {
             justify-content: space-between;
             width: 100%;
             padding: 0 45px 0 0;
-            @include tab-view{
+
+            @include tab-view {
               font-size: 16px;
             }
 
-            &.fb_animation{
-                &[aria-expanded="true"]{
-                    &:after {
-                      font-family: '';
-                      content: "";
-                      position: absolute;
-                      color: $blue-text;
-                      font-weight: normal;
-                      transition: 0.3s;
-                      right: 20px;
-                    }
-                  }
-                  &[aria-expanded="false"]{
-                    &:after {
-                      font-family: '';
-                      content: "";
-                      position: absolute;
-                      color: $blue-text;
-                      font-weight: normal;
-                      transition: 0.3s;
-                      right: 20px;
-                    }
-                  }
+            &.fb_animation {
+              &[aria-expanded="true"] {
+                &:after {
+                  font-family: '';
+                  content: "";
+                  position: absolute;
+                  color: $blue-text;
+                  font-weight: normal;
+                  transition: 0.3s;
+                  right: 20px;
+                }
+              }
+
+              &[aria-expanded="false"] {
+                &:after {
+                  font-family: '';
+                  content: "";
+                  position: absolute;
+                  color: $blue-text;
+                  font-weight: normal;
+                  transition: 0.3s;
+                  right: 20px;
+                }
+              }
             }
-            
-            &[aria-expanded="true"]{
+
+            &[aria-expanded="true"] {
               &:after {
                 font-family: 'FontAwesome';
                 content: "\f077";
@@ -224,7 +255,8 @@ input[type=number] {
                 right: 20px;
               }
             }
-            &[aria-expanded="false"]{
+
+            &[aria-expanded="false"] {
               &:after {
                 font-family: 'FontAwesome';
                 content: "";
@@ -237,30 +269,36 @@ input[type=number] {
             }
           }
         }
-        .card-body{
+
+        .card-body {
           padding: 15px;
-          .pay_sap_setions{
-            &:first-child{
-              h3{
+
+          .pay_sap_setions {
+            &:first-child {
+              h3 {
                 margin-top: 0;
               }
             }
-            h3{
+
+            h3 {
               color: $text-grey;
               font-size: 26px;
               margin-top: 25px;
               margin-bottom: 10px;
-              @include tab-view{
+
+              @include tab-view {
                 font-size: 16px;
+              }
             }
-            }
-            .due_details{
+
+            .due_details {
               display: flex;
               align-items: center;
               justify-content: space-between;
               color: $text-black;
               font-size: 26px;
-              @include tab-view{
+
+              @include tab-view {
                 font-size: 12px;
               }
             }

@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, ViewChild, ElementRef, HostListener } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
+import { HotelService } from '../../../../services/hotel.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   shown = 'native';
   searchHotel ='';
   @ViewChild("scrollable", { static: true, read: ElementRef } as any)
+  @Output() sortHotel1 : any = new EventEmitter();
   scrollbar: ElementRef;
   contentWrapper: HTMLElement;
   @Input() hotelDetailsMain: any;
@@ -87,7 +89,8 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   is_open: boolean = false;
 
   constructor(
-    private eRef: ElementRef
+    private eRef: ElementRef,
+    private hotelService: HotelService
   
     ) { }
 
@@ -151,6 +154,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       this.filterHotels({ key: 'searchByHotelName', value:this.searchHotel});
     }   
   }
+
   onBlurMethod(event){      
     // $('.searchHotelName').val(event.target.value);
     // this.searchHotel = event.target.textContent ? event.target.textContent : '';
@@ -170,12 +174,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   loadJquery() {
     //Start REsponsive Fliter js
     $(".responsive_filter_btn").click(function () {
-      $("#responsive_filter_show").slideDown("slow");
+      $("#responsive_filter_show").slideDown();
       $("body").addClass('overflow-hidden');
     });
 
     $(".filter_close > a").click(function () {
-      $("#responsive_filter_show").slideUp("slow");
+      $("#responsive_filter_show").slideUp();
       $("body").removeClass('overflow-hidden');
     });
     //Close REsponsive Fliter js
@@ -212,17 +216,18 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
    */
   filterByHotelRatings(event, count) {
     this.ratingArray = [];
+    
     if (event.target.checked === true) {
-      $('.star-'+count).prop('checked', true);
+      // $(".star-"+count).prop('checked', true);
       this.rating_number = parseInt(count);
       this.ratingArray.push(parseInt(count));
     } else {
-      $('.star-'+count).prop('checked', false);
+      // $(".star-"+count).prop('checked', false);
       this.ratingArray = this.ratingArray.filter(item => {
         return item != count;
       });
     }
-    // console.log(this.rating_number)
+    console.log('count',this.rating_number)
     this.filterHotels({});
   }
 
@@ -274,8 +279,11 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   /**
   * Common function to process filtration of hotel
   */
+
   filterHotels(hotelname) {
     let filteredHotels = this.hotelDetailsMain.hotels;
+
+   
     /* Filter hotel, based on min & max price */
     if (this.minPrice && this.maxPrice) {
       filteredHotels = filteredHotels.filter(item => {
@@ -317,7 +325,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       });
     }
 
-
     /* Filter by price total or weekly */
     if (this.sortType === 'total') {
       filteredHotels = filteredHotels.filter(item => {
@@ -332,6 +339,20 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         }
       });
     }
+    this.hotelService.getSortFilter.subscribe(hotelInfo=> {
+      if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){  
+        var sortFilter :any = hotelInfo; 
+        console.log(sortFilter.key)    
+        if(sortFilter.key == 'rating'){
+          filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.order,sortFilter.key);
+        } else if(sortFilter.key == 'name'){
+          filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.order,sortFilter.key);
+        } else if(sortFilter.key == 'total'){
+          filteredHotels = this.sortJSON(filteredHotels,sortFilter.order,sortFilter.key);
+        } 
+      }
+      
+    })
     this.filterHotel.emit(filteredHotels);
   }
 
@@ -447,4 +468,49 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   
+  ratingSortFilter(filteredHotels,order,key){
+    return filteredHotels.sort(function (a, b) {
+      var x = a[key];
+      var y = b[key];
+      if (order === 'ASC') {
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+      }
+      if (order === 'DESC') {
+        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+      }
+    });
+  }
+  sortByHotelName(data, key, way) {
+
+    if (typeof data === "undefined") {
+      return data;
+    } else {
+      return data.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
+
+  sortJSON(data, key, way) {
+    if (typeof data === "undefined") {
+      return data;
+    } else {
+      return data.sort(function (a, b) {
+        var x = a.selling[key];
+        var y = b.selling[key];
+        if (way === 'ASC') {        
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        } else if (way === 'DESC') {         
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
 }

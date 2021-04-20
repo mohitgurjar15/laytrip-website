@@ -273,7 +273,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes)
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
       this.flightList = changes.flightDetails.currentValue;
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {

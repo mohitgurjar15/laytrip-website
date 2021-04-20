@@ -86,7 +86,9 @@ export class HotelSearchComponent implements OnInit {
     });
   }
 
+  
   sortHotels(event) {
+    this.hotelService.setSortFilter(event);
     let { key, order } = event;
     if (key === 'total') {
       if (order === 'ASC') {
@@ -97,7 +99,6 @@ export class HotelSearchComponent implements OnInit {
         this.hotelDetails = this.sortJSON(this.hotelDetails, key, order);
       }
     } else if (key === 'rating') {
-      
       if (order === 'ASC') {
         this.filteredLabel = 'Rating Lowest to Highest';
         this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);        

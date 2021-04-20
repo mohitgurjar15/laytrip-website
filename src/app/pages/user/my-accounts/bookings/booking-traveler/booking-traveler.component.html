@@ -2,10 +2,10 @@
     *ngIf="(travelers | json) != '{}' && (moduleInfo | json) != '{}' ">
     <div class="card traveller_card_accr" *ngFor="let traveler of travelers;let i = index; let last = last;">
         <div class="card-header tr_card_header {{last}}" >
-            <a class="card-link" *ngIf="moduleId == 1">
+            <a class="card-link card_link_max" *ngIf="moduleId == 1">
                 {{i == 0 ?'Primary Traveler':getUserType(traveler)}} 
             </a>
-            <a class="card-link" *ngIf="moduleId == 3">
+            <a class="card-link card_link_max" *ngIf="moduleId == 3">
                 {{ moduleInfo[0].title }} 
             </a>
             <a class="card-link new_link">

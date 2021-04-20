@@ -187,7 +187,7 @@ agm-map {
 
                 @include tab-view {
                     align-items: flex-start;
-                    justify-content: flex-start;
+                    justify-content: flex-end;
                 }
             }
         }
@@ -1197,6 +1197,7 @@ agm-map {
                 @include tab-view {
                     flex-direction: column;
                     font-size: 7px;
+                    color: $mid_gray_bg;
                 }
 
                 .big_font {
@@ -1204,6 +1205,9 @@ agm-map {
 
                     @include tab-view {
                         font-size: 16px;
+                        font-weight: 600;
+                        color: $pink;
+                        line-height: 15px;
                     }
                 }
             }

@@ -25,7 +25,7 @@
               <p-calendar #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range" [(ngModel)]="rangeDates"
                 [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
                 panelStyleClass="calender-responsive-view round_trip_calender laytrip-cal-view" [numberOfMonths]="2"
-                (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
+                (onSelect)=selectCheckInDateUpdate($event) [readonlyInput]="true">
               </p-calendar>
             </div>
           </div>

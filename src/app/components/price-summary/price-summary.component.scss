@@ -51,6 +51,14 @@
           font-weight: 500;
           margin: 0;
         }
+        span {
+          &:first-child {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 15px;
+          }
+        }
 
         @include tab-view {
           font-size: 14px;

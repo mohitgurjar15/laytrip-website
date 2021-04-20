@@ -53,7 +53,7 @@
                   <a class="anchor_link" (click)="resetFilter()">{{'reset' | translate}}</a>
               </div> -->
                 <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain"
-                  (filterHotel)="filterHotel($event)" isResetFilter={{isResetFilter}}></app-filter-hotel>
+                  (filterHotel)="filterHotel($event)"   isResetFilter={{isResetFilter}}></app-filter-hotel>
               </div>
               <!-- For responsive -->
               <div class="filter_responsive flight" id="responsive_filter">
@@ -74,14 +74,14 @@
                     <div class="filter_saidbar">
                       <div class="filter_by">
                         <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain"
-                          (filterHotel)="filterHotel($event)" isResetFilter={{isResetFilter}}></app-filter-hotel>
+                          (filterHotel)="filterHotel($event)"  isResetFilter={{isResetFilter}}></app-filter-hotel>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="desk_versort">
-                <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
+                <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetailsMain"></app-sort-hotel>
               </div>
               <div class="sortby_responsive flight" id="responsive_filter">
                 <div class="btn_sort">
@@ -102,7 +102,7 @@
                   <div class="filter_cnt">
                     <div class="filter_saidbar">
                       <div class="filter_by">
-                        <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
+                        <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetailsMain"></app-sort-hotel>
                       </div>
                     </div>
                   </div>

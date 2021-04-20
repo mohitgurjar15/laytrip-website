@@ -21,10 +21,15 @@ var HotelService = /** @class */ (function () {
             token: ""
         };
         this.hotels = new rxjs_1.BehaviorSubject([]);
+        this.sortFilter = new rxjs_1.BehaviorSubject([]);
         this.getHotels = this.hotels.asObservable();
+        this.getSortFilter = this.sortFilter.asObservable();
     }
     HotelService.prototype.setHotels = function (hotels) {
         this.hotels.next(hotels);
+    };
+    HotelService.prototype.setSortFilter = function (filter) {
+        this.sortFilter.next(filter);
     };
     HotelService.prototype.searchHotels = function (data) {
         return this.http.post(environment_1.environment.apiUrl + "v1/hotel/search-location/", data)
