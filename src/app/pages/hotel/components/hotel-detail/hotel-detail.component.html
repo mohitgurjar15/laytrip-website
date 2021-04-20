@@ -365,28 +365,24 @@
   <div class="container">
     <div class="search_tab_icons_wrps">
       <a class="tab_anch flight hover-link" [routerLink]="['/']">
-        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" 
-        alt="Flight Icon" />
-        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_gray.svg"
-        alt="Flight Icon" />
+        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" alt="Flight Icon" />
+        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_gray.svg" alt="Flight Icon" />
       </a>
-      <a class="active tab_anch"  style="pointer-events: none;">
-          <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
-          <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_gray.svg" alt="Hotel Icon" />
+      <a class="active tab_anch" style="pointer-events: none;">
+        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
+        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_gray.svg" alt="Hotel Icon" />
       </a>
-      <a class="tab_anch"  style="pointer-events: none;">
-          <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
-              alt="Accommodation Icon" />
-          <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_gray.svg"
-              alt="Accommodation Icon" />
+      <a class="tab_anch" style="pointer-events: none;">
+        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
+          alt="Accommodation Icon" />
+        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_gray.svg"
+          alt="Accommodation Icon" />
       </a>
-      <a class="tab_anch"  style="pointer-events: none;">
-          <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_blue.svg"
-              alt="car Icon" />
-          <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_gray.svg"
-              alt="car Icon" />
+      <a class="tab_anch" style="pointer-events: none;">
+        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_blue.svg" alt="car Icon" />
+        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_gray.svg" alt="car Icon" />
       </a>
-  </div>
+    </div>
     <div class="searchbar_box_common">
       <app-hotel-search-widget></app-hotel-search-widget>
     </div>
@@ -432,9 +428,9 @@
         </div>
         <div class="description_wrpper">
           <span class="upper_descrip">
-          <h3 class="common_title_wrps">Description</h3>
-          <a href="javascript:void(0);" class="cta_link hover-link">User Reviews</a>
-        </span>
+            <h3 class="common_title_wrps">Description</h3>
+            <!-- <a href="javascript:void(0);" class="cta_link hover-link">User Reviews</a> -->
+          </span>
           <p>
             {{hotelDetails.description}}
           </p>
@@ -443,27 +439,27 @@
 
           <div class="map_wrapper">
             <!-- iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" -->
-              <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
-                [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
-                <agm-marker
+            <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
+              [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
+              <agm-marker
                 [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
-                  [latitude]="hotelDetails?.hotelLocations?.latitude"
-                  [longitude]="hotelDetails?.hotelLocations?.longitude">
-                </agm-marker>
-              </agm-map>
+                [latitude]="hotelDetails?.hotelLocations?.latitude"
+                [longitude]="hotelDetails?.hotelLocations?.longitude">
+              </agm-marker>
+            </agm-map>
           </div>
           <div class="amenities_wrpper" #target1>
             <h3 class="common_title_wrps">Amenities</h3>
-            <ul *ngIf="hotelDetails?.amenities?.list.length" >
+            <ul *ngIf="hotelDetails?.amenities?.list.length">
               <ng-container *ngFor="let amenity of hotelDetails?.amenities?.list ; let i=index">
                 <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity}}</li>
                 <li *ngIf="showMoreAmenties">{{amenity}}</li>
               </ng-container>
             </ul>
-            <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target1,'more')"
-              class="cta_link hover-link">More</a>
-            <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target1,'less')"
-              class="cta_link hover-link">Less</a>
+            <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10"
+              (click)="toggleAmenities(target1,'more')" class="cta_link hover-link">More</a>
+            <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10"
+              (click)="toggleAmenities(target1,'less')" class="cta_link hover-link">Less</a>
           </div>
         </div>
         <div class="room_list_wrp" id="full_hotel_listing">
@@ -480,7 +476,8 @@
                             <div class="block_im">
                               <div class="hotel_list_img_wrp">
                                 <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
-                                <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image" class="blank_image_box">
+                                <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image"
+                                  class="blank_image_box">
                               </div>
                             </div>
                           </div>
@@ -648,28 +645,28 @@
       <div class="right_box_wrps desk_right">
 
         <div class="map_wrapper">
-            <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
-              [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
-<!--               iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
- -->              <agm-marker              
-                [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
-                [latitude]="hotelDetails?.hotelLocations?.latitude"
-                [longitude]="hotelDetails?.hotelLocations?.longitude">
-              </agm-marker>
-            </agm-map>
+          <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
+            [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
+            <!--               iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+ -->
+            <agm-marker
+              [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
+              [latitude]="hotelDetails?.hotelLocations?.latitude" [longitude]="hotelDetails?.hotelLocations?.longitude">
+            </agm-marker>
+          </agm-map>
         </div>
         <div class="amenities_wrpper" #target id="target">
           <h3 class="common_title_wrps">Amenities</h3>
-          <ul *ngIf="hotelDetails?.amenities?.list.length" >
+          <ul *ngIf="hotelDetails?.amenities?.list.length">
             <ng-container *ngFor="let amenity of hotelDetails?.amenities.list ; let i=index">
               <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity}}</li>
               <li *ngIf="showMoreAmenties">{{amenity}}</li>
             </ng-container>
           </ul>
-          <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'more')"
-            class="cta_link hover-link">More</a>
-          <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'less')"
-            class="cta_link hover-link">Less</a>
+          <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10"
+            (click)="toggleAmenities(target,'more')" class="cta_link hover-link">More</a>
+          <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10"
+            (click)="toggleAmenities(target,'less')" class="cta_link hover-link">Less</a>
         </div>
       </div>
     </div>

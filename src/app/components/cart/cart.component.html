@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs booking_tab_header">
     <ng-container *ngFor="let cart of carts;let i = index;">
-        <li>
+        <li [ngClass]="{'active':selectedCart===i}">
             <ng-container *ngIf="cart.type=='flight'">
                 <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]="{'active':selectedCart===i}"
                     (click)="selectCart(i)">
