@@ -512,6 +512,8 @@
                     object-fit: cover;
                     -o-object-position: center;
                     object-position: center;
+                    max-height: 383px;
+                    border-radius: 10px;
                     &:focus{
                         outline: none;
                         border: none;
