@@ -287,7 +287,6 @@ var FilterHotelComponent = /** @class */ (function () {
         }
         this.hotelService.getSortFilter.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
-                console.log(hotelInfo);
                 var sortFilter = hotelInfo;
                 if (sortFilter.key == 'rating') {
                     filteredHotels = _this.ratingSortFilter(filteredHotels, sortFilter.order, sortFilter.key);

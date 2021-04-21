@@ -343,7 +343,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     }
     this.hotelService.getSortFilter.subscribe(hotelInfo=> {
       if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){  
-        console.log(hotelInfo)
         var sortFilter :any = hotelInfo; 
         if(sortFilter.key == 'rating'){        
           filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.order,sortFilter.key);
