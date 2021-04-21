@@ -65,7 +65,7 @@
                                                                     [images]="item.galleryImages"></ngx-gallery>
             
                                                                 <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box"> -->
-                                                                <ngb-carousel [interval]="false">
+                                                                <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
                                                                     <ng-template ngbSlide *ngFor="let image of item.galleryImages">
                                                                       <div class="picsum-img-wrapper">
                                                                         <img src={{image.small}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
@@ -143,7 +143,7 @@
                                             [images]="item.galleryImages"></ngx-gallery>
             
                                         <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box"> -->                           
-                                        <ngb-carousel [interval]="false">
+                                        <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
                                             <ng-template ngbSlide *ngFor="let image of item.galleryImages">
                                               <div class="picsum-img-wrapper">
                                                 <img src={{image.small}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
