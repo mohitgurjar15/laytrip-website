@@ -1856,12 +1856,13 @@ agm-map {
             border-radius: 10px;
 
             @include tab-view {
-                width: 49%;
-            }
-
-            @media (max-width: 575px) {
+                //width: 49%;
                 width: 100%;
             }
+
+            // @media (max-width: 575px) {
+            //     width: 100%;
+            // }
 
             .listing_block {
                 width: 100%;

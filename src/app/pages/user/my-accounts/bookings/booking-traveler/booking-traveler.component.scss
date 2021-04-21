@@ -24,6 +24,14 @@
                     .card-link {
                         flex: 1;
 
+                        &.card_link_max{
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: block;
+                            padding-right: 10px;
+                        }
+
                         &.new_link {
                             flex: 2;
                             margin: 0;
