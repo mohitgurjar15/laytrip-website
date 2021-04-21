@@ -4,6 +4,10 @@
 @import "../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+::ng-deep .gm-style .gm-style-iw-c button {
+    display: none !important;
+}
+
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.fare_detail_cnt p {
     display: flex;
     justify-content: space-between;

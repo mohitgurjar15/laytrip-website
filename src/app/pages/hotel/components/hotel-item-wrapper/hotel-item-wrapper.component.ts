@@ -166,8 +166,8 @@ export class HotelItemWrapperComponent implements OnInit {
 
   closeWindow(){
     if (this.previousInfoWindow != null ) {
-      console.log("this.previousInfoWindow",this.previousInfoWindow)
       this.previousInfoWindow.close()
+      this.previousInfoWindow=null;
     }    
   }
 
@@ -177,10 +177,13 @@ export class HotelItemWrapperComponent implements OnInit {
     if (this.previousInfoWindow == null)
       this.previousInfoWindow = infoWindow;
     else{
-      this.infoWindowOpened = infoWindow
-      this.previousInfoWindow.close()
+      this.infoWindowOpened = infoWindow;
+      if (this.previousInfoWindow != null ) {
+        this.previousInfoWindow.close();
+        this.previousInfoWindow=null;
+      }
     }
-    this.previousInfoWindow = infoWindow
+    //this.previousInfoWindow = infoWindow
     
     infoWindow.open();
     let hotelIndex= this.hotelListArray.findIndex(hotel=>hotel.id==hotelId);
@@ -190,20 +193,20 @@ export class HotelItemWrapperComponent implements OnInit {
 
   showInfoWindow(infoWindow,event,action) {
     
-    /* if (this.previousInfoWindow == null)
+    if (this.previousInfoWindow == null)
       this.previousInfoWindow = infoWindow;
     else{
       this.infoWindowOpened = infoWindow
       this.previousInfoWindow.close()
     }
-    this.previousInfoWindow = infoWindow */
+    this.previousInfoWindow = infoWindow
 
-    if (this.previousInfoWindow) {
+    /* if (this.previousInfoWindow) {
       console.log("this.previousInfoWindow",this.previousInfoWindow)
       this.previousInfoWindow.close();
       this.previousInfoWindow = null;
     }
-    this.previousInfoWindow = infoWindow;
+    this.previousInfoWindow = infoWindow; */
     
 
     if (action === 'open') {

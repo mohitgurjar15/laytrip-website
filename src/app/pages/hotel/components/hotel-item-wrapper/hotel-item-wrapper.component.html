@@ -31,12 +31,13 @@
         <div class="col-lg-12" style="padding: 0;">
             <div class="row">
                 <div class="col-lg-12" [hidden]="!isMapView">
-                    <agm-map #gm [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10"  (boundsChange)="checkMarkersInBounds($event)" >
-                            <agm-marker #marker *ngFor="let hotel of hotelListArray;" [latitude]="hotel.geocodes.latitude"
+                    <agm-map #gm (mapClick)="closeWindow($event)" [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10"  (boundsChange)="checkMarkersInBounds($event)" >
+                            <agm-marker #marker *ngFor="let hotel of hotelListArray;let i = index;" [latitude]="hotel.geocodes.latitude"
                                 [longitude]="hotel.geocodes.longitude"
                                 [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/circle.svg', scaledSize: {height: 80,width: 48}}"
                                 [label]="{text:getMapPrice(hotel), position:'relative',zIndex:'100', color: 'white',fontSize: '12px', class: 'mapLabel'}"
                                 (markerClick)="displayHotelDetails(hotel.id,infoWindow)"
+                                [zIndex]="i+1"
                                 >
                                 <agm-info-window [disableAutoPan]="false" #infoWindow>
                                     <div>
