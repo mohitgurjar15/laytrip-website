@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HotelService } from '../../../../services/hotel.service';
+import { HotelSearchComponent } from '../../hotel-search/hotel-search.component';
 
 
 @Component({
@@ -90,7 +91,8 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   constructor(
     private eRef: ElementRef,
-    private hotelService: HotelService
+    private hotelService: HotelService,
+    public hotelSearchComp : HotelSearchComponent
   
     ) { }
 
@@ -307,7 +309,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
       filteredHotels = filteredHotels.filter(item => {
-        return this.amenitiesArray.some(r => item.amenities.list.includes(r));
+        return this.amenitiesArray.every(r => item.amenities.list.includes(r));
       })
     }
 
@@ -341,17 +343,16 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     }
     this.hotelService.getSortFilter.subscribe(hotelInfo=> {
       if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){  
+        console.log(hotelInfo)
         var sortFilter :any = hotelInfo; 
-        console.log(sortFilter.key)    
-        if(sortFilter.key == 'rating'){
+        if(sortFilter.key == 'rating'){        
           filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.order,sortFilter.key);
         } else if(sortFilter.key == 'name'){
           filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.order,sortFilter.key);
         } else if(sortFilter.key == 'total'){
-          filteredHotels = this.sortJSON(filteredHotels,sortFilter.order,sortFilter.key);
-        } 
-      }
-      
+          filteredHotels = this.sortPriceJSON(filteredHotels,sortFilter.order,sortFilter.key);
+        }
+      }      
     })
     this.filterHotel.emit(filteredHotels);
   }
@@ -486,8 +487,8 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       return data;
     } else {
       return data.sort(function (a, b) {
-        var x = a[key];
-        var y = b[key];
+        var x = a[key].toLowerCase();
+        var y = b[key].toLowerCase();
         if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }
@@ -498,13 +499,13 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     }
   }
 
-  sortJSON(data, key, way) {
+  sortPriceJSON(data, key, way) {
     if (typeof data === "undefined") {
       return data;
     } else {
       return data.sort(function (a, b) {
-        var x = a.selling[key];
-        var y = b.selling[key];
+        var x = a.secondary_start_price > 0 ?  a.secondary_start_price : a.selling[key];
+        var y = b.secondary_start_price > 0 ?  b.secondary_start_price : b.selling[key];
         if (way === 'ASC') {        
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         } else if (way === 'DESC') {         
@@ -513,4 +514,5 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       });
     }
   }
+  
 }
