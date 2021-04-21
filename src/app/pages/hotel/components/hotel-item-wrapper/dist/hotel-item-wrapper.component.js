@@ -5,6 +5,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 exports.__esModule = true;
 exports.HotelItemWrapperComponent = void 0;
 var core_1 = require("@angular/core");
@@ -18,11 +25,13 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         this.hotelService = hotelService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.hotelListArray = [];
+        this.hotelList = [];
         this.mapListArray = [];
-        this.noOfDataToShowInitially = 20;
+        this.noOfDataToShowInitially = 20000;
         this.dataToLoad = 20;
         this.isFullListDisplayed = false;
         this.isMapView = false;
+        this.currentPage = 1;
         this.showHotelDetails = [];
         this.totalLaycreditPoints = 0;
         this.showFareDetails = 0;
@@ -72,27 +81,14 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         if (hotelinfo) {
             this.hotelName = hotelinfo.city;
         }
-        /* this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-        for(let i=0; i < this.hotelListArray.length; i++){
-          this.hotelDetails[i].galleryImages=[];
-            for(let image of this.hotelDetails[i].images){
-              this.hotelDetails[i].galleryImages.push({
-                small: image,
-                medium:image,
-                big:image
-              })
-            }
-        }
-    
-        this.mapListArray[0]=Object.assign({},this.hotelListArray[0]); */
         this.userInfo = jwt_helper_1.getLoginUserInfo();
         this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
         this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
         this.hotelService.getHotels.subscribe(function (result) {
             _this.hotelDetails = result;
+            _this.currentPage = 1;
             _this.hotelListArray = _this.hotelDetails.slice(0, _this.noOfDataToShowInitially);
             for (var i = 0; i < _this.hotelListArray.length; i++) {
-                // this.hotelDetails[i].images = [];
                 _this.hotelDetails[i].galleryImages = [];
                 for (var _i = 0, _a = _this.hotelDetails[i].images; _i < _a.length; _i++) {
                     var image = _a[_i];
@@ -103,12 +99,12 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                     });
                 }
             }
-            if (_this.hotelListArray.length > 0) {
-                _this.mapListArray[0] = Object.assign({}, _this.hotelListArray[0]);
-            }
-            else {
-                _this.mapListArray = [];
-            }
+            _this.hotelList = __spreadArrays(_this.hotelListArray);
+            /* if(this.hotelListArray.length > 0){
+              this.mapListArray[0] =  Object.assign({},this.hotelListArray[0]);
+            } else {
+              this.mapListArray = [];
+            } */
         });
     };
     HotelItemWrapperComponent.prototype.onScrollDown = function () {
@@ -133,13 +129,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             this.scrollLoading = false;
           }
         }, 1000); */
-    };
-    HotelItemWrapperComponent.prototype.ngAfterContentChecked = function () {
-        /*  this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-         let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
-         if (hotelinfo) {
-           this.hotelName = hotelinfo.city;
-         } */
     };
     HotelItemWrapperComponent.prototype.infoWindowAction = function (template, event, action) {
         if (action === 'open') {
@@ -168,8 +157,14 @@ var HotelItemWrapperComponent = /** @class */ (function () {
     };
     HotelItemWrapperComponent.prototype.differentView = function (view) {
         this.isMapView = (view !== 'listView');
-        if (!this.isMapView) {
-            this.mapListArray[0] = Object.assign({}, this.hotelListArray[0]);
+        if (this.isMapView) {
+            if (this.bounds) {
+                this.checkMarkersInBounds(this.bounds);
+            }
+        }
+        else {
+            console.log("this.hotelList.length", this.hotelList.length);
+            this.hotelListArray = __spreadArrays(this.hotelList);
         }
     };
     HotelItemWrapperComponent.prototype.showDetails = function (index, flag) {
@@ -181,7 +176,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         else {
             this.showHotelDetails[index] = !this.showHotelDetails[index];
         }
-        console.log("innnn");
         this.showHotelDetails = this.showHotelDetails.map(function (item, i) {
             return ((index === i) && _this.showHotelDetails[index] === true) ? true : false;
         });
@@ -199,37 +193,27 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         }, (function (error) {
         }));
     };
-    HotelItemWrapperComponent.prototype.ngOnChanges = function (changes) {
-        /* if(typeof changes.hotelDetails!='undefined' && changes.hotelDetails.currentValue.length){
-          this.hotelListArray = changes.hotelDetails.currentValue.slice(0, this.noOfDataToShowInitially);;
-          for(let i=0; i < this.hotelListArray.length; i++){
-            this.hotelDetails[i].galleryImages=[];
-            if(this.hotelDetails[i].images.length  > 0){
-              for(let image of this.hotelDetails[i].images){
-                this.hotelDetails[i].galleryImages.push({
-                  small: image,
-                  medium:image,
-                  big:image
-                })
-              }
+    HotelItemWrapperComponent.prototype.pageChanged = function (page) {
+        this.currentPage = page;
+        window.scroll(0, 0);
+    };
+    HotelItemWrapperComponent.prototype.getMapPrice = function (hotel) {
+        return "$" + Math.floor(hotel.secondary_start_price);
+    };
+    HotelItemWrapperComponent.prototype.checkMarkersInBounds = function (bounds) {
+        this.bounds = bounds;
+        if (this.isMapView) {
+            this.hotelListArray = [];
+            for (var _i = 0, _a = this.hotelList; _i < _a.length; _i++) {
+                var hotel = _a[_i];
+                var hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
+                if (this.bounds.contains(hotelPosition)) {
+                    this.hotelListArray.push(hotel);
+                    //this.hotelDetails=[...this.hotelListArray]
+                }
             }
-          }
-    
-          this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
-        } */
-        /* if(typeof changes.hotelDetails!='undefined' && changes.hotelDetails.currentValue.length){
-          this.hotelsList = changes.hotelDetails.currentValue;
-        } */
+        }
     };
-    HotelItemWrapperComponent.prototype.logAnimation = function (event) {
-        // console.log(event);
-    };
-    HotelItemWrapperComponent.prototype.ngOnDestroy = function () {
-        // this.subscriptions.forEach(sub => sub.unsubscribe());
-    };
-    __decorate([
-        core_1.Input()
-    ], HotelItemWrapperComponent.prototype, "hotelDetails");
     __decorate([
         core_1.Input()
     ], HotelItemWrapperComponent.prototype, "filteredLabel");

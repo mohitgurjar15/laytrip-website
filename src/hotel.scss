@@ -256,7 +256,8 @@
         ngx-gallery-image {
             .ngx-gallery-image-wrapper {
                 border-radius: 10px;
-                .ngx-gallery-image{
+
+                .ngx-gallery-image {
                     border-radius: 10px;
                 }
             }
@@ -271,7 +272,8 @@
                         padding: 14px;
                         background-position: center center;
                         background-size: 7px;
-                        @include tab-view{
+
+                        @include tab-view {
                             padding: 10px;
                             background-size: 5px;
                             display: none;
@@ -292,7 +294,8 @@
                         padding: 14px;
                         background-position: center center;
                         background-size: 7px;
-                        @include tab-view{
+
+                        @include tab-view {
                             padding: 10px;
                             background-size: 5px;
                             display: none;
@@ -308,15 +311,127 @@
     }
 }
 
+.hotel_list_img_wrp {
+    .carousel {
+        &.slide {
+            &:focus{
+                outline: none;
+                border: none;
+            }
+            .carousel-inner{
+                &:focus{
+                    outline: none;
+                    border: none;
+                }
+                .carousel-item{
+                    &:focus{
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+            .picsum-img-wrapper{
+                &:focus{
+                    outline: none;
+                    border: none;
+                }
+                img{
+                    &:focus{
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+            .carousel-control-prev {
+                opacity: 1;
+
+                .carousel-control-prev-icon {
+                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+                    background-repeat: no-repeat;
+                    background-color: $background-white;
+                    border-radius: 50%;
+                    padding: 14px;
+                    background-position: center center;
+                    background-size: 7px;
+
+                    @include tab-view {
+                       // display: none;
+                    }
+                }
+            }
+
+            .carousel-control-next {
+                opacity: 1;
+
+                .carousel-control-next-icon {
+                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+                    background-repeat: no-repeat;
+                    background-color: $background-white;
+                    border-radius: 50%;
+                    padding: 14px;
+                    background-position: center center;
+                    background-size: 7px;
+
+                    @include tab-view {
+                       // display: none;
+                    }
+                }
+            }
+
+            .carousel-indicators {
+                text-align: center;
+
+                li {
+                    display: none;
+                    margin: 0 2px;
+                    width: 4px;
+                    height: 3px;
+                    border-radius: 50%;
+                    padding: 1px;
+                }
+            }
+        }
+    }
+}
+
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active,
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li,
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li+li {
+    display: inline-block;
+}
+
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li:nth-last-child(1),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li:nth-last-child(2),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li:nth-last-child(3) {
+    display: inline-block;
+}
+
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active~li:nth-last-child(1),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active~li:nth-last-child(2),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active~li:nth-last-child(3) {
+    display: none;
+}
+
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li+li:nth-last-child(3),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li+li:nth-last-child(2),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li+li:nth-last-child(1),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li:nth-last-child(3),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li:nth-last-child(2),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li:nth-last-child(1) {
+    display: inline-block;
+}
+
 .main_slider_big {
     ngx-gallery {
-        @include tab-view{
+        @include tab-view {
             max-height: 210px;
         }
+
         ngx-gallery-image {
             .ngx-gallery-image-wrapper {
                 border-radius: 10px;
-                .ngx-gallery-image{
+
+                .ngx-gallery-image {
                     border-radius: 10px;
                 }
             }
@@ -331,7 +446,8 @@
                         padding: 20px;
                         background-position: center center;
                         background-size: 8px;
-                        @include tab-view{
+
+                        @include tab-view {
                             padding: 10px;
                             background-size: 5px;
                         }
@@ -351,7 +467,8 @@
                         padding: 20px;
                         background-position: center center;
                         background-size: 8px;
-                        @include tab-view{
+
+                        @include tab-view {
                             padding: 10px;
                             background-size: 5px;
                         }
@@ -360,6 +477,95 @@
                             content: none;
                         }
                     }
+                }
+            }
+        }
+    }
+    .carousel {
+        &.slide {
+            &:focus{
+                outline: none;
+                border: none;
+            }
+            .carousel-inner{
+                &:focus{
+                    outline: none;
+                    border: none;
+                }
+                .carousel-item{
+                    &:focus{
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+            .picsum-img-wrapper{
+                &:focus{
+                    outline: none;
+                    border: none;
+                }
+                img{
+                    max-width: 100%;
+                    width: 100%;
+                    height: 100%;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                    -o-object-position: center;
+                    object-position: center;
+                    max-height: 383px;
+                    border-radius: 10px;
+                    &:focus{
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+            .carousel-control-prev {
+                opacity: 1;
+
+                .carousel-control-prev-icon {
+                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+                    background-repeat: no-repeat;
+                    background-color: $background-white;
+                    border-radius: 50%;
+                    padding: 14px;
+                    background-position: center center;
+                    background-size: 7px;
+
+                    @include tab-view {
+                        //display: none;
+                    }
+                }
+            }
+
+            .carousel-control-next {
+                opacity: 1;
+
+                .carousel-control-next-icon {
+                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+                    background-repeat: no-repeat;
+                    background-color: $background-white;
+                    border-radius: 50%;
+                    padding: 14px;
+                    background-position: center center;
+                    background-size: 7px;
+
+                    @include tab-view {
+                        //display: none;
+                    }
+                }
+            }
+
+            .carousel-indicators {
+                text-align: center;
+
+                li {
+                    display: none;
+                    margin: 0 2px;
+                    width: 4px;
+                    height: 3px;
+                    border-radius: 50%;
+                    padding: 1px;
                 }
             }
         }
@@ -2855,6 +3061,20 @@ agm-map {
                                 font-size: 16px;
                                 font-weight: 500;
                                 color: $text-black;
+                                &.title_h5{
+                                    display: flex;
+                                    justify-content: space-between;
+                                    width: 100%;
+                                    align-items: center;
+                                    .anchor_link{
+                                        color: $text_light_yellow;
+                                        font-size: 16px;
+    
+                                        @include tab-view {
+                                            font-size: 12px;
+                                        }
+                                    }
+                                }
                             }
 
                             ul {
@@ -2886,7 +3106,7 @@ agm-map {
                                         white-space: normal;
                                         text-overflow: unset;
                                         padding: 0;
-        
+
                                         input {
                                             position: absolute;
                                             top: 0;
@@ -2895,12 +3115,12 @@ agm-map {
                                             height: 100%;
                                             opacity: 0;
                                             cursor: pointer;
-        
+
                                             &:checked {
                                                 ~ {
                                                     .checkmark {
                                                         border-color: $text_light_yellow;
-        
+
                                                         &:after {
                                                             opacity: 1;
                                                         }
@@ -2908,32 +3128,34 @@ agm-map {
                                                 }
                                             }
                                         }
-        
+
                                         .checkmark {
                                             width: 20px;
                                             min-width: 20px;
                                             height: 20px;
-                                            display: inline-block;
+                                            display: flex;
                                             border: 1px solid $text-grey;
                                             vertical-align: middle;
                                             margin-right: 11px;
                                             position: relative;
                                             top: 0;
-        
+                                            align-items: center;
+                                            justify-content: center;
+
                                             &:after {
                                                 content: "";
                                                 content: "";
                                                 position: absolute;
                                                 display: none;
-                                                top: 1px;
-                                                left: 1.2px;
-                                                width: 15.5px;
-                                                height: 15.5px;
+                                                top: auto;
+                                                left: auto;
+                                                width: 13.5px;
+                                                height: 13.5px;
                                                 border-radius: 50%;
-                                                background: $text_light_yellow;        
+                                                background: $text_light_yellow;
                                             }
                                         }
-        
+
                                         p {
                                             margin: 0;
                                             text-overflow: ellipsis;
@@ -3272,6 +3494,20 @@ agm-map {
                             font-size: 16px;
                             font-weight: 500;
                             color: $text-black;
+                            &.title_h5{
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100%;
+                                align-items: center;
+                                .anchor_link{
+                                    color: $text_light_yellow;
+                                    font-size: 16px;
+
+                                    @include tab-view {
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
                         }
 
                         .view_more {
@@ -3337,21 +3573,23 @@ agm-map {
                                     width: 20px;
                                     min-width: 20px;
                                     height: 20px;
-                                    display: inline-block;
+                                    display: flex;
                                     border: 1px solid $text-grey;
                                     vertical-align: middle;
                                     margin-right: 11px;
                                     position: relative;
+                                    align-items: center;
+                                    justify-content: center;
 
                                     &:after {
                                         content: "";
                                         content: "";
                                         position: absolute;
                                         display: none;
-                                        top: 1px;
-                                        left: 1.2px;
-                                        width: 15.5px;
-                                        height: 15.5px;
+                                        top: auto;
+                                        left: auto;
+                                        width: 13.5px;
+                                        height: 13.5px;
                                         border-radius: 50%;
                                         background: $text_light_yellow;
                                         // border-top-width: medium;

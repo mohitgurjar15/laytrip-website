@@ -72,7 +72,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AgmJsMarkerClustererModule,
     NgxGalleryModule,
     HomeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModule
   ],
   exports: [
     HotelLoaderComponent,

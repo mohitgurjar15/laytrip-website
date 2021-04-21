@@ -49,6 +49,10 @@ h3 {
         border-top-right-radius: 10px;
         border-top: 1px solid $box-border-color;
 
+        @include tab-view{
+            max-width: 55px;
+        }
+
         &::before {
             content: '';
             position: absolute;
@@ -61,19 +65,104 @@ h3 {
 
         &:nth-child(6) {
             border-left: 1px solid $box-border-color;
+            @include tab-view{
+                border-left: none;
+            }
+            @media (max-width: 352px){
+                border-left: 1px solid $box-border-color;
+                border-top: none !important;
+            }
             &::before {
                 width: 0;
+                @include tab-view{
+                    width: 8px;
+                }
+                @include mobile-xxsm-view{
+                    width: 0;
+                }
+            }           
+        }
+        &:nth-child(7){
+            @media (max-width: 402px){
+                border-left: 1px solid $box-border-color;
             }
+            @media (max-width: 352px) {
+                border-left: none;
+                border-top: none !important;
+            }
+            &::before {
+                @media (max-width: 402px){
+                    width: 0;
+                }
+                @media (max-width: 352px) {
+                    width: 8px;
+                }
+            } 
+        }
+        &:nth-child(8){
+            @media (max-width: 454px){
+                border-left: 1px solid $box-border-color;
+            }
+            @media (max-width: 402px) {
+                border-left: none;
+                border-top: none !important;
+            }
+            &::before {
+                @media (max-width: 454px){
+                    width: 0;
+                }
+                @media (max-width: 402px) {
+                    width: 8px;
+                }
+            } 
+        }
+        &:nth-child(9){
+            @media (max-width: 505px){
+                border-left: 1px solid $box-border-color;
+            }
+            @media (max-width: 454px) {
+                border-left: none;
+                border-top: none !important;
+            }
+            &::before {
+                @media (max-width: 505px){
+                    width: 0;
+                }
+                @media (max-width: 454px) {
+                    width: 8px;
+                }
+            } 
+        }
+
+        &:nth-child(10){
+            @include tab-view{
+                border-left: 1px solid $box-border-color;
+            }
+            @media (max-width: 505px) {
+                border-left: none;
+                border-top: none !important;
+            }
+            &::before {
+                @include tab-view{
+                    width: 0;
+                }
+                @media (max-width: 505px) {
+                    width: 8px;
+                }
+            } 
         }
 
         &:nth-child(n + 6) {
             //border-left: 1px solid $box-border-color;
             border-top: none;
+            @include tab-view{
+                border-top: 1px solid $box-border-color;
+            }
         }
 
-        &:nth-child(6).active>li.a {
-            max-width: 104px;
-        }
+        // &:nth-child(6).active>li.a {
+        //     max-width: 104px;
+        // }
 
 
         &.active {
@@ -86,6 +175,10 @@ h3 {
             z-index: 999;
             &::before {
                 border: none;
+            }
+            @include tab-view{
+                border: none !important;
+                max-width: 67px;
             }
         }
 
@@ -122,10 +215,10 @@ h3 {
 
         &:last-child {
             border-right: 1px solid $box-border-color;
-            border-top-right-radius: 15px;
+            border-top-right-radius: 10px;
 
             a {
-                border-top-right-radius: 15px;
+                border-top-right-radius: 10px;
             }
         }
 
@@ -162,7 +255,7 @@ h3 {
             }
 
             @include tab-view {
-                top: 8px;
+                top: 3px;
                 padding: 10px 14px;
                 width: auto;
             }
@@ -242,6 +335,7 @@ h3 {
                     height: 45px;
                     display: flex;
                     justify-content: center;
+                    top: -4px !important;
                 }
 
                 .tab_round_wrps {

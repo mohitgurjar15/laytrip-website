@@ -15,12 +15,14 @@
           <a class="accordion-toggle" >
             Sort By
           </a> 
-          <a class="anchor_link" [hidden]="lowToHighToggle !== true" (click)="resetSorting('total','ASC')">Clear</a>
+          <!-- <a class="anchor_link" [hidden]="lowToHighToggle !== true" (click)="resetSorting('total','ASC')">Clear</a> -->
         </div>
         <div id="collapseshortBy" class="accordion-body filter_acc collapse">
           <div class="accordion-inner">
             <div class="block_cmn price">
-              <h5>Price</h5>
+              <h5 class="title_h5">Price
+                <a class="anchor_link" (click)="resetSorting('total','ASC')">Clear</a>
+              </h5>
               <ul>
                 <li>
                   <label class="custom_radio">
