@@ -309,7 +309,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
       filteredHotels = filteredHotels.filter(item => {
-        return this.amenitiesArray.some(r => item.amenities.list.includes(r));
+        return this.amenitiesArray.every(r => item.amenities.list.includes(r));
       })
     }
 
@@ -343,6 +343,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     }
     this.hotelService.getSortFilter.subscribe(hotelInfo=> {
       if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){  
+        console.log(hotelInfo)
         var sortFilter :any = hotelInfo; 
         if(sortFilter.key == 'rating'){        
           filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.order,sortFilter.key);
@@ -350,9 +351,8 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
           filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.order,sortFilter.key);
         } else if(sortFilter.key == 'total'){
           filteredHotels = this.sortPriceJSON(filteredHotels,sortFilter.order,sortFilter.key);
-        } 
-      }
-      
+        }
+      }      
     })
     this.filterHotel.emit(filteredHotels);
   }
@@ -514,4 +514,5 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       });
     }
   }
+  
 }

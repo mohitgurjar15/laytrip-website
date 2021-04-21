@@ -255,7 +255,7 @@ var FilterHotelComponent = /** @class */ (function () {
         /* Filter hotels amenities */
         if (this.amenitiesArray.length) {
             filteredHotels = filteredHotels.filter(function (item) {
-                return _this.amenitiesArray.some(function (r) { return item.amenities.list.includes(r); });
+                return _this.amenitiesArray.every(function (r) { return item.amenities.list.includes(r); });
             });
         }
         /* Filter hotels policy */
@@ -287,6 +287,7 @@ var FilterHotelComponent = /** @class */ (function () {
         }
         this.hotelService.getSortFilter.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
+                console.log(hotelInfo);
                 var sortFilter = hotelInfo;
                 if (sortFilter.key == 'rating') {
                     filteredHotels = _this.ratingSortFilter(filteredHotels, sortFilter.order, sortFilter.key);

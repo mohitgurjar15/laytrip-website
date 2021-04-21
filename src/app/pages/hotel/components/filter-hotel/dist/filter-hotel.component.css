@@ -394,6 +394,7 @@ ng-scrollbar {
 
 .searchbar_box {
   position: relative;
+  margin-bottom: 10px;
 }
 .searchbar_box input {
   border: 1px solid #d6d6d6;
