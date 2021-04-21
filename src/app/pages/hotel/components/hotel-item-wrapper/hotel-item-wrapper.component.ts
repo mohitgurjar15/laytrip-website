@@ -39,6 +39,7 @@ export class HotelItemWrapperComponent implements OnInit {
   myLatLng;
   map;
   currentPage:number=1;
+  bounds;
 
   showHotelDetails = [];
   errorMessage;
@@ -190,7 +191,12 @@ export class HotelItemWrapperComponent implements OnInit {
 
   differentView(view) {
     this.isMapView = (view !== 'listView');
-    if(!this.isMapView){
+    if(this.isMapView){
+      if(this.bounds){
+        this.checkMarkersInBounds(this.bounds)
+      }
+    }
+    else{
       console.log("this.hotelList.length",this.hotelList.length)
       this.hotelListArray=[...this.hotelList];
     }
@@ -232,11 +238,12 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   checkMarkersInBounds(bounds){
+    this.bounds=bounds;
     if(this.isMapView){
       this.hotelListArray = [];
       for(let hotel of this.hotelList){
         let hotelPosition = {lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude)};
-        if (bounds.contains(hotelPosition)){
+        if (this.bounds.contains(hotelPosition)){
           this.hotelListArray.push(hotel)
           //this.hotelDetails=[...this.hotelListArray]
         }
