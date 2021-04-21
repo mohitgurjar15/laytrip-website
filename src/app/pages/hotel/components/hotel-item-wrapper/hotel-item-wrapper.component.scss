@@ -22,7 +22,8 @@
 agm-map {
     height: 560px;
 }
-.pink_spinner{
+
+.pink_spinner {
     color: $pink !important;
 }
 
@@ -145,9 +146,10 @@ agm-map {
     }
 
     &.hotel_listings {
-        @include tab-view{
+        @include tab-view {
             padding: 10px;
         }
+
         .search_block {
             width: 100%;
             margin-bottom: 15px;
@@ -259,30 +261,48 @@ agm-map {
                                     height: 170px;
                                     z-index: 9;
 
+                                    .carousel {
+                                        &.slide {
+                                            height: 100%;
+                                        }
+                                    }
+
                                     @include tab-view {
                                         display: flex;
                                         justify-content: center;
                                     }
 
-                                    img{
-                                        &.blank_image_box{
+                                    img {
+                                        &.blank_image_box {
                                             width: 270px;
                                             border-radius: 10px;
                                             height: 100%;
                                             min-width: 270px;
-                                            @include tab-view{
+
+                                            @include tab-view {
                                                 width: 100%;
                                                 min-width: 100%;
                                             }
                                         }
                                     }
-                                    
+
 
                                     img {
                                         max-width: 100%;
+                                        width: 100%;
                                         height: 100%;
+                                        -o-object-fit: cover;
                                         object-fit: cover;
+                                        -o-object-position: center;
                                         object-position: center;
+                                        border-radius: 10px;
+                                        min-height: 170px;
+                                        min-width: 252px;
+                                        max-height: 170px;
+                                        @include tab-view {
+                                            min-width: 127px;
+                                            max-height: 100%;
+                                        }
                                     }
 
                                     .fav_sections {
@@ -376,7 +396,8 @@ agm-map {
 
                                                 .stars_rating {
                                                     margin-top: 0px;
-                                                    img{
+
+                                                    img {
                                                         margin-right: 3px;
                                                     }
                                                 }
@@ -480,7 +501,7 @@ agm-map {
                             //         }
                             //     }
                             // }
-                            .hotel_anchor{
+                            .hotel_anchor {
                                 color: $active-tab-text;
                                 font-size: 14px;
                                 font-weight: 500;
@@ -1621,13 +1642,20 @@ agm-map {
                 flex: 1;
                 z-index: 9;
 
-                img{
-                    &.blank_image_box{
+                .carousel {
+                    &.slide {
+                        height: 100%;
+                    }
+                }
+
+                img {
+                    &.blank_image_box {
                         width: 270px;
                         border-radius: 10px;
                         height: 100%;
                         min-width: 270px;
-                        @include tab-view{
+
+                        @include tab-view {
                             width: 100%;
                             min-width: 100%;
                         }
@@ -1635,12 +1663,22 @@ agm-map {
                 }
 
                 img {
+                    max-width: 100%;
                     width: 100%;
                     height: 100%;
                     -o-object-fit: cover;
                     object-fit: cover;
                     -o-object-position: center;
                     object-position: center;
+                    border-radius: 10px;
+                    min-height: 170px;
+                    min-width: 252px;
+                    max-height: 170px;
+
+                    @include tab-view {
+                        min-width: 127px;
+                        max-height: 100%;
+                    }
                 }
             }
 
@@ -1658,13 +1696,19 @@ agm-map {
 
                     h4 {
                         font-size: 12px;
-                        display: -moz-box;                /* Mozilla */
-                        display: -webkit-box;             /* WebKit */
-                        display: box;                     /* As specified */
+                        display: -moz-box;
+                        /* Mozilla */
+                        display: -webkit-box;
+                        /* WebKit */
+                        display: box;
+                        /* As specified */
                         -webkit-line-clamp: 3;
-                        -moz-box-orient: vertical;      /* Mozilla */
-                        -webkit-box-orient: vertical;   /* WebKit */
-                        box-orient: vertical;           /* As specified */
+                        -moz-box-orient: vertical;
+                        /* Mozilla */
+                        -webkit-box-orient: vertical;
+                        /* WebKit */
+                        box-orient: vertical;
+                        /* As specified */
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
@@ -1673,13 +1717,19 @@ agm-map {
                         font-size: 10px;
                         line-height: 13px;
                         color: $mid_gray_bg;
-                        display: -moz-box;                /* Mozilla */
-                        display: -webkit-box;             /* WebKit */
-                        display: box;                     /* As specified */
+                        display: -moz-box;
+                        /* Mozilla */
+                        display: -webkit-box;
+                        /* WebKit */
+                        display: box;
+                        /* As specified */
                         -webkit-line-clamp: 3;
-                        -moz-box-orient: vertical;      /* Mozilla */
-                        -webkit-box-orient: vertical;   /* WebKit */
-                        box-orient: vertical;           /* As specified */
+                        -moz-box-orient: vertical;
+                        /* Mozilla */
+                        -webkit-box-orient: vertical;
+                        /* WebKit */
+                        box-orient: vertical;
+                        /* As specified */
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
@@ -1692,8 +1742,8 @@ agm-map {
                 }
 
                 .show_detail {
-                    
-                    .hotel_anchor{
+
+                    .hotel_anchor {
                         color: $active-tab-text;
                         font-size: 14px;
                         font-weight: 500;
@@ -1702,6 +1752,7 @@ agm-map {
                         padding-right: 15px;
                         display: flex;
                         align-items: center;
+
                         @include tab-view {
                             font-size: 11px;
                             margin: 0 auto 10px;
@@ -1729,7 +1780,7 @@ agm-map {
                             color: $active-tab-text;
 
                             &:after {
-                               // position: absolute;
+                                // position: absolute;
                                 padding: 5px 9px;
                                 background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
                                 background-position: right;
@@ -1794,9 +1845,10 @@ agm-map {
     }
 
     &.hotel_map_listings {
-        @include tab-view{
+        @include tab-view {
             padding: 10px;
         }
+
         .search_block {
             width: 100%;
             margin-bottom: 15px;
@@ -1903,27 +1955,47 @@ agm-map {
                                     height: 170px;
                                     z-index: 9;
 
+                                    .carousel {
+                                        &.slide {
+                                            height: 100%;
+                                        }
+                                    }
+
                                     @include tab-view {
                                         display: flex;
                                         justify-content: center;
                                     }
-                                    img{
-                                        &.blank_image_box{
+
+                                    img {
+                                        &.blank_image_box {
                                             width: 270px;
                                             border-radius: 10px;
                                             height: 100%;
                                             min-width: 270px;
-                                            @include tab-view{
+
+                                            @include tab-view {
                                                 width: 100%;
                                                 min-width: 100%;
                                             }
                                         }
                                     }
+
                                     img {
                                         max-width: 100%;
+                                        width: 100%;
                                         height: 100%;
+                                        -o-object-fit: cover;
                                         object-fit: cover;
+                                        -o-object-position: center;
                                         object-position: center;
+                                        border-radius: 10px;
+                                        min-height: 170px;
+                                        min-width: 252px;
+                                        max-height: 170px;
+                                        @include tab-view {
+                                            min-width: 127px;
+                                            max-height: 100%;
+                                        }
                                     }
 
                                     .fav_sections {
@@ -2017,6 +2089,10 @@ agm-map {
 
                                                 .stars_rating {
                                                     margin-top: 0px;
+
+                                                    img {
+                                                        margin-right: 3px;
+                                                    }
                                                 }
 
                                                 .review_num_text {
@@ -2118,7 +2194,7 @@ agm-map {
                             //         }
                             //     }
                             // }
-                            .hotel_anchor{
+                            .hotel_anchor {
                                 color: $active-tab-text;
                                 font-size: 14px;
                                 font-weight: 500;
@@ -3251,7 +3327,8 @@ agm-map {
                 height: 100%;
                 min-height: 164px;
             }
-            agm-map{
+
+            agm-map {
                 @include tab-view {
                     max-height: 210px;
                 }
@@ -3263,25 +3340,43 @@ agm-map {
                 /* height: 140px; */
                 flex: 1;
                 z-index: 9;
-                img{
-                    &.blank_image_box{
+
+                .carousel {
+                    &.slide {
+                        height: 100%;
+                    }
+                }
+
+                img {
+                    &.blank_image_box {
                         width: 270px;
                         border-radius: 10px;
                         height: 100%;
                         min-width: 270px;
-                        @include tab-view{
+
+                        @include tab-view {
                             width: 100%;
                             min-width: 100%;
                         }
                     }
                 }
+
                 img {
+                    max-width: 100%;
                     width: 100%;
                     height: 100%;
                     -o-object-fit: cover;
                     object-fit: cover;
                     -o-object-position: center;
                     object-position: center;
+                    border-radius: 10px;
+                    min-height: 170px;
+                    min-width: 252px;
+                    max-height: 170px;
+                    @include tab-view {
+                        min-width: 127px;
+                        max-height: 100%;
+                    }
                 }
             }
 
@@ -3300,13 +3395,19 @@ agm-map {
 
                     h4 {
                         font-size: 12px;
-                        display: -moz-box;                /* Mozilla */
-                        display: -webkit-box;             /* WebKit */
-                        display: box;                     /* As specified */
+                        display: -moz-box;
+                        /* Mozilla */
+                        display: -webkit-box;
+                        /* WebKit */
+                        display: box;
+                        /* As specified */
                         -webkit-line-clamp: 3;
-                        -moz-box-orient: vertical;      /* Mozilla */
-                        -webkit-box-orient: vertical;   /* WebKit */
-                        box-orient: vertical;           /* As specified */
+                        -moz-box-orient: vertical;
+                        /* Mozilla */
+                        -webkit-box-orient: vertical;
+                        /* WebKit */
+                        box-orient: vertical;
+                        /* As specified */
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
@@ -3315,13 +3416,19 @@ agm-map {
                         font-size: 10px;
                         line-height: 13px;
                         color: $mid_gray_bg;
-                        display: -moz-box;                /* Mozilla */
-                        display: -webkit-box;             /* WebKit */
-                        display: box;                     /* As specified */
+                        display: -moz-box;
+                        /* Mozilla */
+                        display: -webkit-box;
+                        /* WebKit */
+                        display: box;
+                        /* As specified */
                         -webkit-line-clamp: 3;
-                        -moz-box-orient: vertical;      /* Mozilla */
-                        -webkit-box-orient: vertical;   /* WebKit */
-                        box-orient: vertical;           /* As specified */
+                        -moz-box-orient: vertical;
+                        /* Mozilla */
+                        -webkit-box-orient: vertical;
+                        /* WebKit */
+                        box-orient: vertical;
+                        /* As specified */
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
@@ -3334,8 +3441,8 @@ agm-map {
                 }
 
                 .show_detail {
-                    
-                    .hotel_anchor{
+
+                    .hotel_anchor {
                         color: $active-tab-text;
                         font-size: 14px;
                         font-weight: 500;
@@ -3344,6 +3451,7 @@ agm-map {
                         padding-right: 15px;
                         display: flex;
                         align-items: center;
+
                         @include tab-view {
                             font-size: 11px;
                             margin: 0 auto 10px;
@@ -3436,9 +3544,10 @@ agm-map {
     }
 }
 
-.hotel-pagination{
+.hotel-pagination {
     text-align: center;
 }
+
 .hotel-pagination /deep/ .ngx-pagination .current {
     background: #F826C1;
 }

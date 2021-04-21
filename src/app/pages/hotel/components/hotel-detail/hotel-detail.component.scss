@@ -164,6 +164,10 @@ agm-map {
                 .hotel_stars {
                     min-width: 80px;
 
+                    img{
+                        margin-left: 3px;
+                    }
+
                     @include tab-view {
                         margin-top: 10px;
                     }
