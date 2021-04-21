@@ -314,6 +314,34 @@
 .hotel_list_img_wrp {
     .carousel {
         &.slide {
+            &:focus{
+                outline: none;
+                border: none;
+            }
+            .carousel-inner{
+                &:focus{
+                    outline: none;
+                    border: none;
+                }
+                .carousel-item{
+                    &:focus{
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+            .picsum-img-wrapper{
+                &:focus{
+                    outline: none;
+                    border: none;
+                }
+                img{
+                    &:focus{
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
             .carousel-control-prev {
                 opacity: 1;
 
@@ -327,7 +355,7 @@
                     background-size: 7px;
 
                     @include tab-view {
-                        display: none;
+                       // display: none;
                     }
                 }
             }
@@ -345,7 +373,7 @@
                     background-size: 7px;
 
                     @include tab-view {
-                        display: none;
+                       // display: none;
                     }
                 }
             }
@@ -449,6 +477,93 @@
                             content: none;
                         }
                     }
+                }
+            }
+        }
+    }
+    .carousel {
+        &.slide {
+            &:focus{
+                outline: none;
+                border: none;
+            }
+            .carousel-inner{
+                &:focus{
+                    outline: none;
+                    border: none;
+                }
+                .carousel-item{
+                    &:focus{
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+            .picsum-img-wrapper{
+                &:focus{
+                    outline: none;
+                    border: none;
+                }
+                img{
+                    max-width: 100%;
+                    width: 100%;
+                    height: 100%;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                    -o-object-position: center;
+                    object-position: center;
+                    &:focus{
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+            .carousel-control-prev {
+                opacity: 1;
+
+                .carousel-control-prev-icon {
+                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+                    background-repeat: no-repeat;
+                    background-color: $background-white;
+                    border-radius: 50%;
+                    padding: 14px;
+                    background-position: center center;
+                    background-size: 7px;
+
+                    @include tab-view {
+                        //display: none;
+                    }
+                }
+            }
+
+            .carousel-control-next {
+                opacity: 1;
+
+                .carousel-control-next-icon {
+                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+                    background-repeat: no-repeat;
+                    background-color: $background-white;
+                    border-radius: 50%;
+                    padding: 14px;
+                    background-position: center center;
+                    background-size: 7px;
+
+                    @include tab-view {
+                        //display: none;
+                    }
+                }
+            }
+
+            .carousel-indicators {
+                text-align: center;
+
+                li {
+                    display: none;
+                    margin: 0 2px;
+                    width: 4px;
+                    height: 3px;
+                    border-radius: 50%;
+                    padding: 1px;
                 }
             }
         }
