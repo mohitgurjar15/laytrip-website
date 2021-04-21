@@ -18,6 +18,7 @@ export class HotelSuggestionComponent implements OnInit {
   @Input() searchItem:string;
   isShowDropDown:boolean=false;
   thisElementClicked: boolean = false;
+  $autoComplete;
   constructor(
     private hotelService:HotelService
   ) { }
@@ -31,6 +32,9 @@ export class HotelSuggestionComponent implements OnInit {
       this.isShowDropDown = this.selectHotelItem.length>0?true:false;
       this.isValidSearch = this.selectHotelItem.length>0?true:false;
       this.data = [];
+      if(this.loading){
+        this.$autoComplete.unsubscribe();
+      }
       this.searchHotel(this.searchItem)
       this.validateSearch.emit(false);
     }
@@ -40,7 +44,7 @@ export class HotelSuggestionComponent implements OnInit {
     this.loading = true;
     const searchedData = { term: searchItem };
     
-    this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
+    this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
       this.loading = false;
       if (response && response.data && response.data.length) {
         this.data = response.data.map(res => {

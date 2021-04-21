@@ -23,6 +23,7 @@ export class HotelItemWrapperComponent implements OnInit {
   @Input() hotelToken;
   s3BucketUrl = environment.s3BucketUrl;
   hotelListArray = [];
+  hotelList = [];
   mapListArray=[];
   noOfDataToShowInitially = 20000;
   dataToLoad = 20;
@@ -38,6 +39,7 @@ export class HotelItemWrapperComponent implements OnInit {
   myLatLng;
   map;
   currentPage:number=1;
+  bounds;
 
   showHotelDetails = [];
   errorMessage;
@@ -102,19 +104,7 @@ export class HotelItemWrapperComponent implements OnInit {
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
     }
-    /* this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-    for(let i=0; i < this.hotelListArray.length; i++){
-      this.hotelDetails[i].galleryImages=[];
-        for(let image of this.hotelDetails[i].images){
-          this.hotelDetails[i].galleryImages.push({
-            small: image,
-            medium:image,
-            big:image
-          })
-        }
-    }
-
-    this.mapListArray[0]=Object.assign({},this.hotelListArray[0]); */
+    
     
     this.userInfo = getLoginUserInfo();
     this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
@@ -125,7 +115,6 @@ export class HotelItemWrapperComponent implements OnInit {
       this.currentPage=1;
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       for(let i=0; i < this.hotelListArray.length; i++){
-        
         this.hotelDetails[i].galleryImages=[];
           for(let image of this.hotelDetails[i].images){
             this.hotelDetails[i].galleryImages.push({
@@ -135,12 +124,13 @@ export class HotelItemWrapperComponent implements OnInit {
             });
         }
       }
+      this.hotelList = [...this.hotelListArray]
 
-      if(this.hotelListArray.length > 0){
+      /* if(this.hotelListArray.length > 0){
         this.mapListArray[0] =  Object.assign({},this.hotelListArray[0]);
       } else {
         this.mapListArray = [];
-      }
+      } */
     });
   }
 
@@ -201,8 +191,14 @@ export class HotelItemWrapperComponent implements OnInit {
 
   differentView(view) {
     this.isMapView = (view !== 'listView');
-    if(!this.isMapView){
-      this.mapListArray[0]=Object.assign({},this.hotelListArray[0]);
+    if(this.isMapView){
+      if(this.bounds){
+        this.checkMarkersInBounds(this.bounds)
+      }
+    }
+    else{
+      console.log("this.hotelList.length",this.hotelList.length)
+      this.hotelListArray=[...this.hotelList];
     }
   }
 
@@ -212,7 +208,6 @@ export class HotelItemWrapperComponent implements OnInit {
     } else {
       this.showHotelDetails[index] = !this.showHotelDetails[index];
     }
-    console.log("innnn")
 
     this.showHotelDetails = this.showHotelDetails.map((item, i) => {
       return ((index === i) && this.showHotelDetails[index] === true) ? true : false;
@@ -242,10 +237,19 @@ export class HotelItemWrapperComponent implements OnInit {
     return `$${Math.floor(hotel.secondary_start_price)}`
   }
 
-  checkMarkersInBounds(event){
-    console.log("Event",event)
+  checkMarkersInBounds(bounds){
+    this.bounds=bounds;
+    if(this.isMapView){
+      this.hotelListArray = [];
+      for(let hotel of this.hotelList){
+        let hotelPosition = {lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude)};
+        if (this.bounds.contains(hotelPosition)){
+          this.hotelListArray.push(hotel)
+          //this.hotelDetails=[...this.hotelListArray]
+        }
+      }
+    }
+    
   }
 
-  
-  
 }
