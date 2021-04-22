@@ -27,10 +27,20 @@ export class HotelSuggestionComponent implements OnInit {
   }
 
   searchLocation(event){
-    let notAllowedKey=[40,38,9];
+    let notAllowedKey=[40,38,9,37,39];
+    if((this.searchItem.length==0 && event.keyCode==8)){
+      this.data = [];
+      this.loading = false;
+      this.isShowDropDown = this.searchItem.length>0?true:false;
+      this.isValidSearch = this.searchItem.length>0?true:false;
+      //this.selectedHotel.emit({})
+      this.validateSearch.emit(false);
+      return;
+    }
+
     if(!notAllowedKey.includes(event.keyCode)){
-      this.isShowDropDown = this.selectHotelItem.length>0?true:false;
-      this.isValidSearch = this.selectHotelItem.length>0?true:false;
+      this.isShowDropDown = this.searchItem.length>0?true:false;
+      this.isValidSearch = this.searchItem.length>0?true:false;
       this.data = [];
       if(this.loading){
         this.$autoComplete.unsubscribe();
@@ -38,12 +48,15 @@ export class HotelSuggestionComponent implements OnInit {
       this.searchHotel(this.searchItem)
       this.validateSearch.emit(false);
     }
+    else{
+      this.loading = false;
+    }
   }
 
   searchHotel(searchItem) {
     this.loading = true;
     const searchedData = { term: searchItem };
-    
+    console.log("searchHotel")
     this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
       this.loading = false;
       if (response && response.data && response.data.length) {
@@ -58,9 +71,13 @@ export class HotelSuggestionComponent implements OnInit {
             city_id:res.city_id
           };
         });
+        console.log("innn")
+        this.selectedHotel.emit(this.data[0])
+        this.validateSearch.emit(true);
       }
     },
       error => {
+        this.validateSearch.emit(false);
         this.loading = false;
         this.isShowDropDown=false;
       }
