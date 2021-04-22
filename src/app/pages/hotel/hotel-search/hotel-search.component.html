@@ -58,14 +58,14 @@
               <!-- For responsive -->
               <div class="filter_responsive flight" id="responsive_filter">
                 <div class="btn_filter">
-                  <a href="javascript:void(0)" class="responsive_filter_btn" (click)="filterClick()">Filters</a>
+                  <a href="javascript:void(0)" class="responsive_filter_btn" (click)="filterDrawerOpen()">Filters</a>
                 </div>
               </div>
-              <div id="responsive_filter_show" class="responsive_filter_show">
+              <div id="responsive_filter_show" class="responsive_filter_show" [ngClass]="{'filterOpen' : filterOpen}">
                 <div class="filter_popup">
                   <div class="filter_head_popup">
                     <div class="filter_close">
-                      <a href="javascript:void(0)">
+                      <a href="javascript:void(0)" (click)="filterClick()">
                         <img src="{{s3BucketUrl}}assets/images/icon/arrow_up_dropdown.svg" alt="">
                       </a>
                     </div>
@@ -85,11 +85,11 @@
               </div>
               <div class="sortby_responsive flight" id="responsive_filter">
                 <div class="btn_sort">
-                  <a href="javascript:void(0)" class="responsive_sort_btn">Sort By
+                  <a href="javascript:void(0)" class="responsive_sort_btn" (click)="sortByDrawerOpen()">Sort By
                   </a>
                 </div>
               </div>
-              <div id="responsive_sortby_show" class="responsive_sortby_show"
+              <div id="responsive_sortby_show" class="responsive_sortby_show" [ngClass]="{'sortByOpen' : sortByOpen}"
                 *ngIf="!loading && !isNotFound && errorMessage==''">
                 <div class="filter_popup">
                   <div class="filter_head_popup">

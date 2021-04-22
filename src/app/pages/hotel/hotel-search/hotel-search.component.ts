@@ -33,7 +33,9 @@ export class HotelSearchComponent implements OnInit {
       children: []
     }
   ];
-
+  filterOpen : boolean = false;
+  sortByOpen : boolean = false;
+  
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
@@ -63,8 +65,6 @@ export class HotelSearchComponent implements OnInit {
     };
     this.getHotelSearchData(payload);
   }
-
-  
 
   getHotelSearchData(payload) {
     this.loading = true;
@@ -184,8 +184,12 @@ export class HotelSearchComponent implements OnInit {
   resetFilter() {
     this.isResetFilter = (new Date()).toString();
   }
-  filterClick(){
-    console.log('here')
+  
+  filterDrawerOpen(){
+   this.filterOpen = !this.filterOpen;
+  }
+  sortByDrawerOpen(){
+   this.sortByOpen = !this.sortByOpen;
   }
 
   getHotelSearchDataByModify(event) {
