@@ -8,6 +8,7 @@ import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
 declare const google: any;
 import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from 'src/app/services/hotel.service';
+import { AgmInfoWindow } from '@agm/core';
 
 @Component({
   selector: 'app-hotel-item-wrapper',
@@ -40,7 +41,8 @@ export class HotelItemWrapperComponent implements OnInit {
   map;
   currentPage:number=1;
   bounds;
-
+  infoWindowOpened = null
+  previousInfoWindow : AgmInfoWindow = null;
   showHotelDetails = [];
   errorMessage;
   userInfo;
@@ -162,15 +164,51 @@ export class HotelItemWrapperComponent implements OnInit {
     
   }
 
-  infoWindowAction(template, event, action) {
+  closeWindow(){
+    if (this.previousInfoWindow != null ) {
+      this.previousInfoWindow.close()
+      this.previousInfoWindow=null;
+    }    
+  }
+  
+  displayHotelDetails(hotelId, infoWindow) {
     
+    infoWindow.open();
+    if (this.previousInfoWindow == null)
+      this.previousInfoWindow = infoWindow;
+    else{
+      this.infoWindowOpened = infoWindow;
+      if (this.previousInfoWindow != null ) {
+        this.previousInfoWindow.close();
+      }
+    }
+    this.previousInfoWindow = infoWindow
+    
+    let hotelIndex= this.hotelListArray.findIndex(hotel=>hotel.id==hotelId);
+    this.hotelListArray.unshift(this.hotelListArray.splice(hotelIndex, 1)[0]);
+    
+  }
+
+  showInfoWindow(infoWindow,event,action) {
+    
+    if (this.previousInfoWindow == null)
+      this.previousInfoWindow = infoWindow;
+    else{
+      this.infoWindowOpened = infoWindow
+      this.previousInfoWindow.close()
+    }
+    this.previousInfoWindow = infoWindow
+
+    /* if (this.previousInfoWindow) {
+      console.log("this.previousInfoWindow",this.previousInfoWindow)
+      this.previousInfoWindow.close();
+      this.previousInfoWindow = null;
+    }
+    this.previousInfoWindow = infoWindow; */
+    
+
     if (action === 'open') {
-      template.open();
-    } else if (action === 'close') {
-      template.close();
-    } else if (action === 'click') {
-      this.mapListArray[0]= this.hotelListArray.find(hotel=>hotel.id==template);
-      //this.showMapInfo(template);
+      infoWindow.open();
     }
   }
 
@@ -197,22 +235,10 @@ export class HotelItemWrapperComponent implements OnInit {
       }
     }
     else{
-      console.log("this.hotelList.length",this.hotelList.length)
       this.hotelListArray=[...this.hotelList];
     }
   }
 
-  showDetails(index, flag = null) {
-    if (typeof this.showHotelDetails[index] === 'undefined') {
-      this.showHotelDetails[index] = true;
-    } else {
-      this.showHotelDetails[index] = !this.showHotelDetails[index];
-    }
-
-    this.showHotelDetails = this.showHotelDetails.map((item, i) => {
-      return ((index === i) && this.showHotelDetails[index] === true) ? true : false;
-    });
-  }
 
   closeHotelDetail() {
     this.showFareDetails = 0;
