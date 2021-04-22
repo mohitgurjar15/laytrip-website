@@ -227,7 +227,7 @@
         <a class="accordion-toggle">
           Filters
         </a>
-        <a class="anchor_link" (click)="resetFilter()"> {{'clear' | translate}}</a>
+        <!-- <a class="anchor_link" (click)="resetFilter()"> {{'clear' | translate}}</a> -->
       </div>
       <div id="collapseThree" class="accordion-body collapse show">
         <div class="accordion-inner">
@@ -239,7 +239,9 @@
           <div class="fliter_block">
             <div class="cmn_block">
               <div class="block_top_in">
-                <h5>Hotel Name</h5>
+                <h5 class="title_h5">Hotel Name
+                  <a class="anchor_link" (click)="resetFilter()"> {{'clear' | translate}}</a>
+                </h5>
               </div>
               <div class="searchbar_box">
                 <input type="text" placeholder="Search" tabindex="3" class="searchHotelName"
