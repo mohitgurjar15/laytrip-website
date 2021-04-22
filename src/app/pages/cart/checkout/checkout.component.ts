@@ -70,7 +70,7 @@ export class CheckoutComponent implements OnInit {
   isSessionTimeOut: boolean = false;
   bookingTimerConfig;
   isBookingRequest = false;
-  inValidCartTravller=[];
+  inValidCartTravller = [];
   totalCard: number = 0;
   add_new_card = false;
   alertErrorMessage: string = '';
@@ -80,6 +80,8 @@ export class CheckoutComponent implements OnInit {
 
   isExcludedCountryAccepted: boolean = false;
   isExcludedCountryError: boolean = false;
+  lottieLoaderType = "";
+  modules = [];
 
   constructor(
     private genericService: GenericService,
@@ -123,14 +125,19 @@ export class CheckoutComponent implements OnInit {
         cart = {};
         price = {}
 
-        
         cart.type = items.data[i].type;
         cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         cart.is_available = items.data[i].is_available;
-        
-        
-        if(items.data[i].type=='flight'){
+
+        this.modules.push(items.data[i].type);
+        if (this.modules.some(x => x === "flight")) {
+          this.lottieLoaderType = "flight";
+        } else {
+          this.lottieLoaderType = "hotel";
+        }
+
+        if (items.data[i].type == 'flight') {
           cart.module_info = items.data[i].moduleInfo[0];
           cart.old_module_info = {
             selling_price: items.data[i].oldModuleInfo[0].selling_price
@@ -141,7 +148,7 @@ export class CheckoutComponent implements OnInit {
           price.start_price = items.data[i].moduleInfo[0].start_price;
           price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         }
-        else  if(items.data[i].type=='hotel'){
+        else if (items.data[i].type == 'hotel') {
 
           cart.module_info = items.data[i].moduleInfo[0];
           cart.old_module_info = {
@@ -149,7 +156,7 @@ export class CheckoutComponent implements OnInit {
           };
 
           price.selling_price = items.data[i].moduleInfo[0].selling.total;
-          price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in,"YYYY-MM-DD").format('DD/MM/YYYY') ;
+          price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in, "YYYY-MM-DD").format('DD/MM/YYYY');
           price.start_price = 0;
           price.location = items.data[i].moduleInfo[0].hotel_name;
         }
@@ -194,14 +201,14 @@ export class CheckoutComponent implements OnInit {
       this.cardToken = '';
     }
 
-    this.cartService.getLoaderStatus.subscribe(state=>{
-      this.loading=state;
+    this.cartService.getLoaderStatus.subscribe(state => {
+      this.loading = state;
     })
 
-    this.genericService.getCardItems.subscribe((res:any)=>{
+    this.genericService.getCardItems.subscribe((res: any) => {
 
-      if(this.totalCard!=res.length){
-        this.totalCard=res.length;
+      if (this.totalCard != res.length) {
+        this.totalCard = res.length;
         this.add_new_card = false;
       }
     })
@@ -330,46 +337,46 @@ export class CheckoutComponent implements OnInit {
   validateCartItems() {
     this.validationErrorMessage = '';
     let message = '';
-    this.inValidCartTravller=[];
+    this.inValidCartTravller = [];
     for (let i in Object.keys(this.travelerForm.controls)) {
       message = '';
-      for(let j=0; j< this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++){
-        if(typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status=='INVALID'){
+      for (let j = 0; j < this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++) {
+        if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status == 'INVALID') {
 
-          if(this.validationErrorMessage==''){
+          if (this.validationErrorMessage == '') {
             this.validationErrorMessage = 'Complete required fields in Traveler Details for'
           }
-          
-          if(!this.inValidCartTravller.includes(i)){
-            if(this.carts[i].type=='flight'){
+
+          if (!this.inValidCartTravller.includes(i)) {
+            if (this.carts[i].type == 'flight') {
               message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
             }
-            if(this.carts[i].type=='hotel'){
+            if (this.carts[i].type == 'hotel') {
               message = ` ${this.carts[i].module_info.title} ,`;
             }
             this.validationErrorMessage += message;
           }
-          this.isValidTravelers=false;
+          this.isValidTravelers = false;
           this.inValidCartTravller.push(i)
         }
-        if(typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status=='VALID'){
+        if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status == 'VALID') {
 
-          if(this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].value.userId==""){
+          if (this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].value.userId == "") {
 
-            if(this.validationErrorMessage==''){
+            if (this.validationErrorMessage == '') {
               this.validationErrorMessage = 'Complete required fields in Traveler Details for'
             }
-            if(!this.inValidCartTravller.includes(i)){
-              if(this.carts[i].type=='flight'){
+            if (!this.inValidCartTravller.includes(i)) {
+              if (this.carts[i].type == 'flight') {
                 message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
               }
-              if(this.carts[i].type=='hotel'){
+              if (this.carts[i].type == 'hotel') {
                 message = ` ${this.carts[i].module_info.title} ,`;
               }
               this.validationErrorMessage += message;
             }
-            
-            this.isValidTravelers=false;
+
+            this.isValidTravelers = false;
             this.inValidCartTravller.push(i)
           }
         }
@@ -442,7 +449,7 @@ export class CheckoutComponent implements OnInit {
       $('#sign_in_modal').modal('show');
       return false;
     }
-    
+
     let carts = this.carts.map(cart => { return { cart_id: cart.id } })
     this.bookingRequest.card_token = this.cardToken;
     this.bookingRequest.selected_down_payment = this.priceSummary.selectedDownPayment;
@@ -456,15 +463,15 @@ export class CheckoutComponent implements OnInit {
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
         //let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
-        let travelers=[];
-        for(let k=0; k<data.length; k++){
+        let travelers = [];
+        for (let k = 0; k < data.length; k++) {
           travelers.push({
             traveler_id: data[k].userId
           })
 
-          data[k].dob=moment(data[k].dob,"MM/DD/YYYY").format("YYYY-MM-DD")
-          if(data[k].passport_expiry){
-            data[k].passport_expiry=moment(data[k].passport_expiry,"MM/DD/YYYY").format("YYYY-MM-DD")
+          data[k].dob = moment(data[k].dob, "MM/DD/YYYY").format("YYYY-MM-DD")
+          if (data[k].passport_expiry) {
+            data[k].passport_expiry = moment(data[k].passport_expiry, "MM/DD/YYYY").format("YYYY-MM-DD")
           }
           this.travelerService.updateAdult(data[k], data[k].userId).subscribe((traveler: any) => {
 
@@ -592,7 +599,7 @@ export class CheckoutComponent implements OnInit {
     this.isTermConditionError = false;
   }
 
-  acceptExcludedCountry(event){
+  acceptExcludedCountry(event) {
     if (event.target.checked) {
       this.isExcludedCountryAccepted = true;
       this.isExcludedCountryError = false;
@@ -603,7 +610,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  removeExculdedError(){
+  removeExculdedError() {
     this.isExcludedCountryError = false;
   }
 }
