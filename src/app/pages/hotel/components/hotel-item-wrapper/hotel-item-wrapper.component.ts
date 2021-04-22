@@ -170,22 +170,20 @@ export class HotelItemWrapperComponent implements OnInit {
       this.previousInfoWindow=null;
     }    
   }
-
+  
   displayHotelDetails(hotelId, infoWindow) {
     
-    console.log("this.previousInfoWindow.",this.previousInfoWindow)
+    infoWindow.open();
     if (this.previousInfoWindow == null)
       this.previousInfoWindow = infoWindow;
     else{
       this.infoWindowOpened = infoWindow;
       if (this.previousInfoWindow != null ) {
         this.previousInfoWindow.close();
-        this.previousInfoWindow=null;
       }
     }
-    //this.previousInfoWindow = infoWindow
+    this.previousInfoWindow = infoWindow
     
-    infoWindow.open();
     let hotelIndex= this.hotelListArray.findIndex(hotel=>hotel.id==hotelId);
     this.hotelListArray.unshift(this.hotelListArray.splice(hotelIndex, 1)[0]);
     
