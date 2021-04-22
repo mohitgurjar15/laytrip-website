@@ -1,14 +1,14 @@
 <div class="filter_main_wrapper desk_ver">
   <div class="accordion block_shortby" id="accordion3">
     <div class="accordion-group" [ngClass]="{'active': is_open === true}">
-      <div class="accordion-heading" (click)="toggleFilter()" data-toggle="collapse" aria-expanded="true"
-        data-parent="#accordion3" href="#collapseThree">
+      <div class="accordion-heading" (click)="toggleFilter()" 
+        >
         <a class="accordion-toggle">
           Filters
         </a>
         <!-- <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> {{'clear' | translate}}</a> -->
       </div>
-      <div id="collapseThree" class="accordion-body collapse">
+      <div id="collapseThree" class="accordion-body collapse mohit" [ngClass]="{'show': is_open === true}">
         <div class="accordion-inner">
           <!-- <ng-scrollbar #scrollable [invertX]="invertX" [invertY]="invertY" [trackX]="false" [compact]="compact"
           [shown]="shown" [disableOnBreakpoints]="false">
@@ -26,7 +26,7 @@
                 <input (blur)="onBlurMethod($event)" type="text" class="searchHotelName" placeholder="Search" tabindex="3"
                   (keyup)="searchHotelName($event)" value="{{searchHotel}}">
 
-                <div class="search_suggetion_main" *ngIf="isHoteresetFilterlSearch">
+                <div class="search_suggetion_main" *ngIf="isHotelSearch">
                   <div class="close_btn">
                     <button (click)="clearHotelSearch()" type="button" class="close">
                       <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
@@ -247,7 +247,7 @@
 
                 <div class="search_suggetion_main" *ngIf="isHotelSearch">
                   <div class="close_btn">
-                    <button  (click)="clearHotelSearch()" type="button" class="close">
+                    <button type="button" class="close">
                       <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                     </button>
                   </div>
