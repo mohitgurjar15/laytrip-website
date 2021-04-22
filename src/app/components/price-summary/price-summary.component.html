@@ -1,73 +1,136 @@
 <div class="pay_summery_wrapper" *ngIf="typeOf(priceSummary)!=='undefined'">
-    <h3>Payment Summary</h3>
-    <div class="pay_sum_inner">
-      
-      <div class="pay_list_wrper">
-        <div class="pay_listing" *ngFor="let item of cartPrices">
-          <span>{{item.location}}</span>
-          <span>${{item.selling_price | number : '1.2-2'}}</span>
-        </div>
-        
-        <div class="pay_listing total_amm_blue">
+  <h3>Payment Summary</h3>
+  <div class="pay_sum_inner">
+
+    <div class="pay_list_wrper">
+      <div class="pay_listing" *ngFor="let item of cartPrices">
+        <span>{{item.location}}</span>
+        <span>${{item.selling_price | number : '1.2-2'}}</span>
+      </div>
+      <div class="pay_listing hotel_line">
+        <span>
+          <p>
+            hotel name here
+          </p>
+          <a data-toggle="modal" data-target="#tax_fee_modal" class="tax_accor_btn">Taxes and Fees</a>
+        </span>
+        <span>$122.11</span>
+      </div>
+
+      <!-- <div class="pay_listing total_amm_blue">
           <span>Total Purchases</span>
           <span *ngIf="typeOf(priceSummary.instalments)!='undefined'">${{priceSummary.totalAmount | number : '1.2-2'}}</span>
-        </div>
-        <small class="grayed_text">Taxes and Fees Included</small>
+        </div> -->
+      <!-- <small class="grayed_text">Taxes and Fees Included</small> -->
+    </div>
+    <div class="pay_listing total_amm_blue">
+      <span>Total Purchases</span>
+      <span *ngIf="typeOf(priceSummary.instalments)!='undefined'">${{priceSummary.totalAmount | number :
+        '1.2-2'}}</span>
+    </div>
+    <!-- Start -->
+    <div class="pay_list_wrper">
+      <div class="pay_listing" *ngIf="priceSummary?.paymentType=='instalment'">
+        <span>Booking Downpayment</span>
+        <span>${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
       </div>
-      <!-- Start -->
-      <div class="pay_list_wrper">
-        <div class="pay_listing" *ngIf="priceSummary?.paymentType=='instalment'">
-          <span>Booking Downpayment</span>
-          <span>${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
-        </div>
-        <div class="pay_listing">
-          <span>Applied Laytrip Points</span>
-          <span>-${{priceSummary.layCreditPoints | number : '1.2-2' }} </span>
-        </div>
-        <div class="pay_listing total_amm_blue">
-          <span>Total Due Now</span>
-          <span *ngIf="priceSummary?.paymentType=='instalment'">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
-          <span *ngIf="priceSummary?.paymentType=='no-instalment'">${{priceSummary.totalAmount | number : '1.2-2'}}</span>
-        </div>
+      <div class="pay_listing">
+        <span>Applied Laytrip Points</span>
+        <span>-${{priceSummary.layCreditPoints | number : '1.2-2' }} </span>
       </div>
-      <!-- End -->
-      <div class="price_accordion" id="price_collapse" *ngIf="priceSummary?.paymentType=='instalment'">
-        <div class="card">
-          <div class="card-header" id="headingOne">
-            <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc"
-              aria-expanded="true" aria-controls="instalment_acc">
-              <span class="open_text">
-              {{priceSummary.instalments?.instalment_date?.length-1}} {{installmentType[priceSummary.instalmentType]}} Installments of ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount |
-                number : '1.2-2'}}
-              </span>
-                <span class="close_text">
-                  <span>Total Installments</span>
-                  <span>${{insatllmentAmount | number : '1.2-2' }}</span>
-                </span>
-            </button>
-          </div>
-          <div id="instalment_acc" class="collapse show" aria-labelledby="headingOne" data-parent="#price_collapse">
-            <div class="card-body">
-              <div class="pay_sap_setions" *ngIf="typeOf(priceSummary.instalments)!='undefined'">
+    </div>
+    <div class="pay_listing total_amm_blue bb_none">
+      <span>Total Due Now</span>
+      <span
+        *ngIf="priceSummary?.paymentType=='instalment'">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount
+        | number : '1.2-2'}}</span>
+      <span *ngIf="priceSummary?.paymentType=='no-instalment'">${{priceSummary.totalAmount | number : '1.2-2'}}</span>
+    </div>
+    <!-- End -->
+    <div class="price_accordion" id="price_collapse" *ngIf="priceSummary?.paymentType=='instalment'">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc"
+            aria-expanded="true" aria-controls="instalment_acc">
+            <span class="open_text">
+              {{priceSummary.instalments?.instalment_date?.length-1}} {{installmentType[priceSummary.instalmentType]}}
+              Installments of ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount |
+              number : '1.2-2'}}
+            </span>
+            <span class="close_text">
+              <span>Total Installments</span>
+              <span>${{insatllmentAmount | number : '1.2-2' }}</span>
+            </span>
+          </button>
+        </div>
+        <div id="instalment_acc" class="collapse show" aria-labelledby="headingOne" data-parent="#price_collapse">
+          <div class="card-body">
+            <div class="pay_sap_setions" *ngIf="typeOf(priceSummary.instalments)!='undefined'">
 
-                <!-- <div class="section_description total_price_popup" *ngIf="installmentVartion>0">
+              <!-- <div class="section_description total_price_popup" *ngIf="installmentVartion>0">
                   <span class="sec_text">If your plan has an odd Total Price, your final payment will show a slightly different amount.</span>
                   <a (click)="closeInstallmentVartion(-1)"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                 </div> -->
 
-                <div class="due_details" *ngFor="let instalment of priceSummary.instalments.instalment_date | slice:1; let i = index;">
-                  <span>#{{i+1}} Due {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
-                  <span>${{instalment.instalment_amount |
-                    number : '1.2-2'}}</span>
-                </div>
-                <div class="total_amm_blue">
-                  <span>Total Installments</span>
-                  <span>${{insatllmentAmount | number : '1.2-2' }}</span>
-                </div>
+              <div class="due_details"
+                *ngFor="let instalment of priceSummary.instalments.instalment_date | slice:1; let i = index;">
+                <span>#{{i+1}} Due {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
+                <span>${{instalment.instalment_amount |
+                  number : '1.2-2'}}</span>
               </div>
             </div>
+          </div>
+          <div class="total_amm_blue">
+            <span>Total Installments</span>
+            <span>${{insatllmentAmount | number : '1.2-2' }}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
+<section class="block_tax_fee_main modal fade comman_modal show" id="tax_fee_modal" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal_title">
+        <button type="button" class="close" (click)="closeModal()">
+          <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+        </button>
+      </div>
+      <div class="tax_fee_modal_wrp">
+        <div class="inner_wrppar">
+          <div class="title_box">
+            Taxes & Fees
+          </div>
+          <div class="fee_msg">
+            <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
+              pointerEventsMethod="scrollbar">
+              <p class="para_fees">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptate cum maiores veritatis
+                consequuntur quisquam explicabo sequi harum minima dicta inventore eum sed ducimus, officiis
+                reprehenderit? Odit dolorem voluptas consequuntur?
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptate cum maiores veritatis
+                consequuntur quisquam explicabo sequi harum minima dicta inventore eum sed ducimus, officiis
+                reprehenderit? Odit dolorem voluptas consequuntur?Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptate cum maiores veritatis
+                consequuntur quisquam explicabo sequi harum minima dicta inventore eum sed ducimus, officiis
+                reprehenderit? Odit dolorem voluptas consequuntur?Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptate cum maiores veritatis
+                consequuntur quisquam explicabo sequi harum minima dicta inventore eum sed ducimus, officiis
+                reprehenderit? Odit dolorem voluptas consequuntur?Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptate cum maiores veritatis
+                consequuntur quisquam explicabo sequi harum minima dicta inventore eum sed ducimus, officiis
+                reprehenderit? Odit dolorem voluptas consequuntur?Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptate cum maiores veritatis
+                consequuntur quisquam explicabo sequi harum minima dicta inventore eum sed ducimus, officiis
+                reprehenderit? Odit dolorem voluptas consequuntur?
+              </p>
+            </ng-scrollbar>
+          </div>
+          <div class="logo_wrpper_footer">
+            <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
