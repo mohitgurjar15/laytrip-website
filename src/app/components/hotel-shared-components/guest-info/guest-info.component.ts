@@ -69,7 +69,7 @@ export class GuestInfoComponent implements OnInit {
       if ((event.target.nextSibling && typeof event.target.nextSibling.classList != 'undefined' && event.target.nextSibling.classList != null && event.target.nextSibling.classList[1] == 'panel_hide') ||
 
       event.target.nextSibling && typeof event.currentTarget.nextSibling.classList != 'undefined' && event.currentTarget.nextSibling.classList != null && event.currentTarget.nextSibling.classList[1] == 'panel_hide' ||
-
+   
         typeof event.target.offsetParent.nextElementSibling.classList != 'undefined' && event.target.offsetParent.nextElementSibling.classList != null && event.target.offsetParent.nextElementSibling.classList[1] == 'panel_hide'
 
       ) {
