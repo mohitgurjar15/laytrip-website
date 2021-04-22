@@ -17,6 +17,7 @@ $mobile-view: 558px;
 $mobile-md-view: 530px;
 $mobile-sm-view: 480px;
 $mobile-xsm-view: 370px;
+$mobile-xxsm-view: 350px;
 
 @mixin  mini-screen {
     @media (max-width: #{$mini-screen}) {
@@ -55,6 +56,11 @@ $mobile-xsm-view: 370px;
 }
 @mixin  mobile-xsm-view {
     @media (max-width: #{$mobile-xsm-view}) {
+        @content;
+    }
+}
+@mixin  mobile-xxsm-view {
+    @media (max-width: #{$mobile-xxsm-view}) {
         @content;
     }
 }
