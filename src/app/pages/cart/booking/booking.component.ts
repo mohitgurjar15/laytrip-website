@@ -123,6 +123,7 @@ export class BookingComponent implements OnInit {
           price.selling_price = items.data[i].moduleInfo[0].selling_price;
           price.departure_date = items.data[i].moduleInfo[0].departure_date;
           price.start_price = items.data[i].moduleInfo[0].start_price;
+          price.type = items.data[i].type;
           price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
         }
         else  if(items.data[i].type=='hotel'){
@@ -131,6 +132,7 @@ export class BookingComponent implements OnInit {
             selling_price: items.data[i].oldModuleInfo[0].selling.total
           };
 
+          price.type = items.data[i].type;
           price.selling_price = items.data[i].moduleInfo[0].selling.total;
           price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in,"YYYY-MM-DD").format('DD/MM/YYYY') ;
           price.start_price = 0;
@@ -191,7 +193,6 @@ export class BookingComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    console.log(event,"------");
     //this.totalCard = event;
   }
 
