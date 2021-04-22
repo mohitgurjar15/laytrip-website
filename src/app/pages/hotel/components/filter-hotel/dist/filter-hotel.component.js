@@ -106,6 +106,7 @@ var FilterHotelComponent = /** @class */ (function () {
         this.loadJquery();
     };
     FilterHotelComponent.prototype.clearHotelSearch = function () {
+        console.log('close');
         this.isHotelSearch = false;
         this.hotelname = 'Search';
         $('.searchHotelName').val('');

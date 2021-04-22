@@ -142,6 +142,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   clearHotelSearch() {
+    console.log('close')
     this.isHotelSearch = false;
     this.hotelname = 'Search';
     $('.searchHotelName').val('');
