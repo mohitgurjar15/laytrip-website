@@ -459,8 +459,8 @@
             <h3 class="common_title_wrps">Amenities</h3>
             <ul *ngIf="hotelDetails?.amenities?.list.length">
               <ng-container *ngFor="let amenity of hotelDetails?.amenities?.list ; let i=index">
-                <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity}}</li>
-                <li *ngIf="showMoreAmenties">{{amenity}}</li>
+                <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity | titlecase}}</li>
+                <li *ngIf="showMoreAmenties">{{amenity | titlecase}}</li>
               </ng-container>
             </ul>
             <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10"
@@ -681,8 +681,8 @@
           <h3 class="common_title_wrps">Amenities</h3>
           <ul *ngIf="hotelDetails?.amenities?.list.length">
             <ng-container *ngFor="let amenity of hotelDetails?.amenities.list ; let i=index">
-              <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity}}</li>
-              <li *ngIf="showMoreAmenties">{{amenity}}</li>
+              <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity | titlecase}}</li>
+              <li *ngIf="showMoreAmenties">{{amenity | titlecase}}</li>
             </ng-container>
           </ul>
           <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10"

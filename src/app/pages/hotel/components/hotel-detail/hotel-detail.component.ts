@@ -224,7 +224,7 @@ export class HotelDetailComponent implements OnInit {
 
     this.showMoreAmenties=!this.showMoreAmenties;
     if(type=='less'){
-      target.scrollIntoView({behavior: 'smooth'});
+      target.scrollIntoView({behavior: 'smooth', block: "start",inline: 'nearest'});
     }
     //document.getElementsByClassName('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }

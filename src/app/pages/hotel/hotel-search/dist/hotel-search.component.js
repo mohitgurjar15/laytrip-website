@@ -33,48 +33,33 @@ var HotelSearchComponent = /** @class */ (function () {
                 children: []
             }
         ];
+        this.filterOpen = false;
+        this.sortByOpen = false;
     }
     HotelSearchComponent.prototype.ngOnInit = function () {
-        var _this = this;
         window.scroll(0, 0);
         this.renderer.addClass(document.body, 'cms-bgColor');
-        // if (document.getElementById('login_btn')) {
-        //   setTimeout(() => {
-        //     document.getElementById('login_btn').style.background = '#FF00BC';
-        //   }, 1000);
-        // }
-        var payload = {};
-        var info;
-        this.route.queryParams.forEach(function (params) {
-            info = JSON.parse(atob(_this.route.snapshot.queryParams['itenery']));
-            payload = {
-                check_in: params.check_in,
-                check_out: params.check_out,
-                latitude: params.latitude,
-                longitude: params.longitude,
-                occupancies: [],
-                filter: true
-            };
-            // info.forEach(item => {
-            payload.occupancies.push({ rooms: info.rooms, adults: info.adults, children: info.child });
-            // });
-            _this.getHotelSearchData(payload);
-        });
+        var info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+        var payload = {
+            check_in: this.route.snapshot.queryParams['check_in'],
+            check_out: this.route.snapshot.queryParams['check_out'],
+            latitude: this.route.snapshot.queryParams['latitude'],
+            longitude: this.route.snapshot.queryParams['longitude'],
+            city_id: this.route.snapshot.queryParams['city_id'],
+            rooms: info.rooms,
+            adults: info.adults,
+            children: info.child,
+            filter: true
+        };
+        this.getHotelSearchData(payload);
     };
-    // ngAfterViewInit() {
-    //   $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
-    //     function () {
-    //       $('.norm_btn').toggleClass("d-none");
-    //       $('.hover_btn').toggleClass("show");
-    //     }
-    //   );
-    // }
     HotelSearchComponent.prototype.getHotelSearchData = function (payload) {
         var _this = this;
         this.loading = true;
         this.errorMessage = '';
         this.hotelService.getHotelSearchResult(payload).subscribe(function (res) {
             _this.hotelDetails = res.data.hotels;
+            _this.hotelService.setHotels(_this.hotelDetails);
             _this.hotelDetailsMain = res.data;
             _this.hotelToken = res.data.details.token;
             _this.loading = false;
@@ -90,15 +75,16 @@ var HotelSearchComponent = /** @class */ (function () {
         });
     };
     HotelSearchComponent.prototype.sortHotels = function (event) {
+        this.hotelService.setSortFilter(event);
         var key = event.key, order = event.order;
         if (key === 'total') {
             if (order === 'ASC') {
                 this.filteredLabel = 'Price Lowest to Highest';
-                this.hotelDetails = this.sortJSON(this.hotelDetails, key, order);
+                this.hotelDetails = this.sortPriceJSON(this.hotelDetails, key, order);
             }
             else if (order === 'DESC') {
                 this.filteredLabel = 'Price Highest to Lowest';
-                this.hotelDetails = this.sortJSON(this.hotelDetails, key, order);
+                this.hotelDetails = this.sortPriceJSON(this.hotelDetails, key, order);
             }
         }
         else if (key === 'rating') {
@@ -121,15 +107,16 @@ var HotelSearchComponent = /** @class */ (function () {
                 this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
             }
         }
+        this.hotelService.setHotels(this.hotelDetails);
     };
-    HotelSearchComponent.prototype.sortJSON = function (data, key, way) {
+    HotelSearchComponent.prototype.sortPriceJSON = function (data, key, way) {
         if (typeof data === "undefined") {
             return data;
         }
         else {
             return data.sort(function (a, b) {
-                var x = a.selling[key];
-                var y = b.selling[key];
+                var x = a.secondary_start_price > 0 ? a.secondary_start_price : a.selling[key];
+                var y = b.secondary_start_price > 0 ? b.secondary_start_price : b.selling[key];
                 if (way === 'ASC') {
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 }
@@ -162,8 +149,8 @@ var HotelSearchComponent = /** @class */ (function () {
         }
         else {
             return data.sort(function (a, b) {
-                var x = a[key];
-                var y = b[key];
+                var x = a[key].toLowerCase();
+                var y = b[key].toLowerCase();
                 if (way === 'ASC') {
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 }
@@ -177,10 +164,17 @@ var HotelSearchComponent = /** @class */ (function () {
         var _this = this;
         setTimeout(function () {
             _this.hotelDetails = event;
+            _this.hotelService.setHotels(_this.hotelDetails);
         }, 100);
     };
     HotelSearchComponent.prototype.resetFilter = function () {
         this.isResetFilter = (new Date()).toString();
+    };
+    HotelSearchComponent.prototype.filterDrawerOpen = function () {
+        this.filterOpen = !this.filterOpen;
+    };
+    HotelSearchComponent.prototype.sortByDrawerOpen = function () {
+        this.sortByOpen = !this.sortByOpen;
     };
     HotelSearchComponent.prototype.getHotelSearchDataByModify = function (event) {
         var _this = this;

@@ -22,16 +22,16 @@ var SortHotelComponent = /** @class */ (function () {
                 this.locationName = info.city;
             }
         }
-        this.sortHotelData('total', 'ASC', 'lh_price');
+        //this.sortHotelData('total', 'ASC', 'lh_price');
         this.loadJquery();
     };
     SortHotelComponent.prototype.loadJquery = function () {
         $(".responsive_sort_btn").click(function () {
-            $("#responsive_sortby_show").slideDown("slow");
+            $("#responsive_sortby_show").slideDown();
             $("body").addClass('overflow-hidden');
         });
         $(".filter_close > a").click(function () {
-            $("#responsive_sortby_show").slideUp("slow");
+            $("#responsive_sortby_show").slideUp();
             $("body").removeClass('overflow-hidden');
         });
         // Start filter Shortby js
@@ -53,7 +53,7 @@ var SortHotelComponent = /** @class */ (function () {
     SortHotelComponent.prototype.ngOnChanges = function (changes) {
         if (changes['hotelDetails'].currentValue != 'undefined') {
             if (this.hotelDetails != 'undefined') {
-                this.hotelDetails = changes['hotelDetails'].currentValue;
+                this.hotelDetails = changes['hotelDetails'].currentValue.hotels;
             }
         }
     };

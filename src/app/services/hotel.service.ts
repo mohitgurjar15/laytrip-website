@@ -24,10 +24,16 @@ export class HotelService {
     }
 
     private hotels = new BehaviorSubject([]);
+    private sortFilter = new BehaviorSubject([]);
     getHotels = this.hotels.asObservable();
+    getSortFilter = this.sortFilter.asObservable();
 
     setHotels(hotels){
         this.hotels.next(hotels)
+    }
+
+    setSortFilter(filter){
+        this.sortFilter.next(filter)
     }
 
     searchHotels(data) {

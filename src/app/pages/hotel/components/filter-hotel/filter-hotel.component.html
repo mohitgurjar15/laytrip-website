@@ -26,7 +26,7 @@
                 <input (blur)="onBlurMethod($event)" type="text" class="searchHotelName" placeholder="Search" tabindex="3"
                   (keyup)="searchHotelName($event)" value="{{searchHotel}}">
 
-                <div class="search_suggetion_main" *ngIf="isHotelSearch">
+                <div class="search_suggetion_main" *ngIf="isHoteresetFilterlSearch">
                   <div class="close_btn">
                     <button (click)="clearHotelSearch()" type="button" class="close">
                       <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
@@ -247,7 +247,7 @@
 
                 <div class="search_suggetion_main" *ngIf="isHotelSearch">
                   <div class="close_btn">
-                    <button type="button" class="close">
+                    <button  (click)="clearHotelSearch()" type="button" class="close">
                       <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                     </button>
                   </div>

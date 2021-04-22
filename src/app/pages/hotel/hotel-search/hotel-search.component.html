@@ -53,19 +53,19 @@
                   <a class="anchor_link" (click)="resetFilter()">{{'reset' | translate}}</a>
               </div> -->
                 <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain"
-                  (filterHotel)="filterHotel($event)" isResetFilter={{isResetFilter}}></app-filter-hotel>
+                  (filterHotel)="filterHotel($event)"   isResetFilter={{isResetFilter}}></app-filter-hotel>
               </div>
               <!-- For responsive -->
               <div class="filter_responsive flight" id="responsive_filter">
                 <div class="btn_filter">
-                  <a href="javascript:void(0)" class="responsive_filter_btn">Filters</a>
+                  <a href="javascript:void(0)" class="responsive_filter_btn" (click)="filterDrawerOpen()">Filters</a>
                 </div>
               </div>
-              <div id="responsive_filter_show" class="responsive_filter_show">
+              <div id="responsive_filter_show" class="responsive_filter_show" [ngClass]="{'filterOpen' : filterOpen}">
                 <div class="filter_popup">
                   <div class="filter_head_popup">
                     <div class="filter_close">
-                      <a href="javascript:void(0)">
+                      <a href="javascript:void(0)" (click)="filterDrawerOpen()">
                         <img src="{{s3BucketUrl}}assets/images/icon/arrow_up_dropdown.svg" alt="">
                       </a>
                     </div>
@@ -74,27 +74,27 @@
                     <div class="filter_saidbar">
                       <div class="filter_by">
                         <app-filter-hotel *ngIf="hotelDetailsMain" [hotelDetailsMain]="hotelDetailsMain"
-                          (filterHotel)="filterHotel($event)" isResetFilter={{isResetFilter}}></app-filter-hotel>
+                          (filterHotel)="filterHotel($event)"  isResetFilter={{isResetFilter}}></app-filter-hotel>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="desk_versort">
-                <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
+                <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetailsMain"></app-sort-hotel>
               </div>
               <div class="sortby_responsive flight" id="responsive_filter">
                 <div class="btn_sort">
-                  <a href="javascript:void(0)" class="responsive_sort_btn">Sort By
+                  <a href="javascript:void(0)" class="responsive_sort_btn" (click)="sortByDrawerOpen()">Sort By
                   </a>
                 </div>
               </div>
-              <div id="responsive_sortby_show" class="responsive_sortby_show"
+              <div id="responsive_sortby_show" class="responsive_sortby_show" [ngClass]="{'sortByOpen' : sortByOpen}"
                 *ngIf="!loading && !isNotFound && errorMessage==''">
                 <div class="filter_popup">
                   <div class="filter_head_popup">
                     <div class="filter_close">
-                      <a href="javascript:void(0)">
+                      <a href="javascript:void(0)" (click)="sortByDrawerOpen()">
                         <img src="{{s3BucketUrl}}assets/images/icon/arrow_up_dropdown.svg" alt="">
                       </a>
                     </div>
@@ -102,7 +102,7 @@
                   <div class="filter_cnt">
                     <div class="filter_saidbar">
                       <div class="filter_by">
-                        <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetails"></app-sort-hotel>
+                        <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetailsMain"></app-sort-hotel>
                       </div>
                     </div>
                   </div>

@@ -229,7 +229,6 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         }));
     };
     FlightItemWrapperComponent.prototype.ngOnChanges = function (changes) {
-        console.log(changes);
         if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
             this.flightList = changes.flightDetails.currentValue;
         }
