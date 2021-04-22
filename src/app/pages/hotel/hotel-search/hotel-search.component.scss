@@ -253,8 +253,15 @@
         padding: 0;
     }
 }
+.filterOpen{
+    display: block !important;
+}
+.sortByOpen{
+    display: block !important;
+}
 .responsive_filter_show,
 .responsive_sortby_show {
+    
     background: $bg-light-grey;
     height: 100%;
     left: 0;
@@ -263,7 +270,7 @@
     width: 100%;
     z-index: 99999;
     display: none;
-
+    
     .filter_popup {
         width: 100%;
 

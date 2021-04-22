@@ -106,6 +106,7 @@ var FilterHotelComponent = /** @class */ (function () {
         this.loadJquery();
     };
     FilterHotelComponent.prototype.clearHotelSearch = function () {
+        console.log('close');
         this.isHotelSearch = false;
         this.hotelname = 'Search';
         $('.searchHotelName').val('');
@@ -134,14 +135,15 @@ var FilterHotelComponent = /** @class */ (function () {
     };
     FilterHotelComponent.prototype.loadJquery = function () {
         //Start REsponsive Fliter js
-        $(".responsive_filter_btn").click(function () {
-            $("#responsive_filter_show").slideDown();
-            $("body").addClass('overflow-hidden');
+        /* $(".responsive_filter_btn").click(function () {
+          $("#responsive_filter_show").slideDown();
+          $("body").addClass('overflow-hidden');
         });
+    
         $(".filter_close > a").click(function () {
-            $("#responsive_filter_show").slideUp();
-            $("body").removeClass('overflow-hidden');
-        });
+          $("#responsive_filter_show").slideUp();
+          $("body").removeClass('overflow-hidden');
+        }); */
         //Close REsponsive Fliter js
         // Start filter Shortby js
         $(document).on('show', '#accordion3', function (e) {

@@ -33,6 +33,8 @@ var HotelSearchComponent = /** @class */ (function () {
                 children: []
             }
         ];
+        this.filterOpen = false;
+        this.sortByOpen = false;
     }
     HotelSearchComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -167,6 +169,12 @@ var HotelSearchComponent = /** @class */ (function () {
     };
     HotelSearchComponent.prototype.resetFilter = function () {
         this.isResetFilter = (new Date()).toString();
+    };
+    HotelSearchComponent.prototype.filterDrawerOpen = function () {
+        this.filterOpen = !this.filterOpen;
+    };
+    HotelSearchComponent.prototype.sortByDrawerOpen = function () {
+        this.sortByOpen = !this.sortByOpen;
     };
     HotelSearchComponent.prototype.getHotelSearchDataByModify = function (event) {
         var _this = this;

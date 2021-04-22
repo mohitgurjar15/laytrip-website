@@ -142,6 +142,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   clearHotelSearch() {
+    console.log('close')
     this.isHotelSearch = false;
     this.hotelname = 'Search';
     $('.searchHotelName').val('');
@@ -175,7 +176,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   loadJquery() {
     //Start REsponsive Fliter js
-    $(".responsive_filter_btn").click(function () {
+    /* $(".responsive_filter_btn").click(function () {
       $("#responsive_filter_show").slideDown();
       $("body").addClass('overflow-hidden');
     });
@@ -183,7 +184,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     $(".filter_close > a").click(function () {
       $("#responsive_filter_show").slideUp();
       $("body").removeClass('overflow-hidden');
-    });
+    }); */
     //Close REsponsive Fliter js
 
     // Start filter Shortby js
@@ -348,9 +349,9 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         if(sortFilter.key == 'rating'){        
           filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.order,sortFilter.key);
         } else if(sortFilter.key == 'name'){
-          filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.key,sortFilter.order);
+          filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.order,sortFilter.key);
         } else if(sortFilter.key == 'total'){
-          filteredHotels = this.sortPriceJSON(filteredHotels,sortFilter.key,sortFilter.order);
+          filteredHotels = this.sortPriceJSON(filteredHotels,sortFilter.order,sortFilter.key);
         }
       }      
     })

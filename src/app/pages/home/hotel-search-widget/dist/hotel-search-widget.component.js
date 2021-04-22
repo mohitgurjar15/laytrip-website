@@ -135,7 +135,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         }
         this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
-                console.log(hotelInfo);
                 _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = hotelInfo.title;
                 _this.dealDateValidation();
                 _this.searchHotelInfo.latitude = hotelInfo.lat;
