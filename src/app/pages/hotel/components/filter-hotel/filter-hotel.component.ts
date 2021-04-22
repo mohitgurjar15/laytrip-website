@@ -348,9 +348,9 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         if(sortFilter.key == 'rating'){        
           filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.order,sortFilter.key);
         } else if(sortFilter.key == 'name'){
-          filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.order,sortFilter.key);
+          filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.key,sortFilter.order);
         } else if(sortFilter.key == 'total'){
-          filteredHotels = this.sortPriceJSON(filteredHotels,sortFilter.order,sortFilter.key);
+          filteredHotels = this.sortPriceJSON(filteredHotels,sortFilter.key,sortFilter.order);
         }
       }      
     })
