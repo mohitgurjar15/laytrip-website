@@ -56,7 +56,6 @@ export class HotelSuggestionComponent implements OnInit {
   searchHotel(searchItem) {
     this.loading = true;
     const searchedData = { term: searchItem };
-    console.log("searchHotel")
     this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
       this.loading = false;
       if (response && response.data && response.data.length) {
@@ -71,7 +70,6 @@ export class HotelSuggestionComponent implements OnInit {
             city_id:res.city_id
           };
         });
-        console.log("innn")
         this.selectedHotel.emit(this.data[0])
         this.validateSearch.emit(true);
       }
