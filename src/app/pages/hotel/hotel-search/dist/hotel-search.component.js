@@ -168,6 +168,9 @@ var HotelSearchComponent = /** @class */ (function () {
     HotelSearchComponent.prototype.resetFilter = function () {
         this.isResetFilter = (new Date()).toString();
     };
+    HotelSearchComponent.prototype.filterClick = function () {
+        console.log('here');
+    };
     HotelSearchComponent.prototype.getHotelSearchDataByModify = function (event) {
         var _this = this;
         var urlData = this.commonFunction.decodeUrl(this.router.url);

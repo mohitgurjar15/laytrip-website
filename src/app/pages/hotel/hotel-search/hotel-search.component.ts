@@ -184,6 +184,9 @@ export class HotelSearchComponent implements OnInit {
   resetFilter() {
     this.isResetFilter = (new Date()).toString();
   }
+  filterClick(){
+    console.log('here')
+  }
 
   getHotelSearchDataByModify(event) {
     let urlData = this.commonFunction.decodeUrl(this.router.url);
