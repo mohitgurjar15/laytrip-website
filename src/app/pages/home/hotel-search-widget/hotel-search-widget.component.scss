@@ -178,10 +178,15 @@
           margin: 2px;
           position: relative;
 
-          @include mobile-view {
-            width: 28px !important;
-            height: 28px !important;
+          @include mini-screen {
+            width: 25px !important;
+            height: 25px !important;
           }
+
+          // @include mobile-view {
+          //   width: 28px !important;
+          //   height: 28px !important;
+          // }
 
           &:hover {
             background: none !important;

@@ -51,6 +51,7 @@
           font-weight: 500;
           margin: 0;
         }
+
         span {
           &:first-child {
             white-space: nowrap;
@@ -72,6 +73,68 @@
       .grayed_text {
         color: $mid_gray_bg;
         font-size: 10px;
+      }
+    }
+
+    .pay_listing {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: $text-black;
+      font-size: 16px;
+      margin-bottom: 10px;
+
+      &.hotel_line {
+        span {
+          display: flex;
+
+          &:first-child {
+            p {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              margin: 0;
+            }
+
+            a {
+              &.tax_accor_btn {
+                color: $txt_clr_blue;
+                margin-left: 3px;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+
+      &.total_amm_blue {
+        color: $active-tab-text;
+        font-weight: 500;
+        margin: 0;
+        padding: 15px;
+        border-top: 1px solid $feedback_text-clr;
+        border-bottom: 1px solid $feedback_text-clr;
+
+        &.bb_none {
+          border-bottom: none;
+        }
+      }
+
+      span {
+        &:first-child {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding-right: 15px;
+        }
+      }
+
+      @include tab-view {
+        font-size: 14px;
+      }
+
+      &:last-child {
+        margin: 0;
       }
     }
 
@@ -173,7 +236,7 @@
         }
 
         .card-body {
-          padding: 0 15px 15px;
+          padding: 0 15px 0 15px;
 
           .pay_sap_setions {
             &:first-child {
@@ -225,19 +288,21 @@
               }
             }
           }
+        }
 
-          .total_amm_blue {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 16px;
-            color: $active-tab-text;
-            font-weight: 500;
-            margin-top: 10px;
+        .total_amm_blue {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 16px;
+          color: $active-tab-text;
+          font-weight: 500;
+          margin-top: 10px;
+          padding: 15px;
+          border-top: 1px solid $feedback_text-clr;
 
-            @include tab-view {
-              font-size: 14px;
-            }
+          @include tab-view {
+            font-size: 14px;
           }
         }
       }
@@ -255,6 +320,67 @@
   &.total_price_popup {
     @include tab-view {
       transform: translate(13%, 0%);
+    }
+  }
+}
+
+.block_tax_fee_main {
+  .modal-content {
+    padding: 15px;
+    border-radius: 10px;
+
+    .modal_title {
+      position: absolute;
+      right: 20px;
+
+      img {
+        max-width: 12px;
+      }
+    }
+
+    .tax_fee_modal_wrp {
+      .title_box {
+        color: $active-tab-text;
+        font-weight: 500;
+        font-size: 32px;
+        margin: 10px auto;
+        text-align: center;
+
+        @include tab-view {
+          font-size: 29px;
+        }
+      }
+
+      .fee_msg {
+        padding: 20px;
+
+        @include tab-view {
+          padding: 5px;
+        }
+
+        p {
+          &.para_fees {
+            font-size: 12px;
+            max-height: 218px;
+            scroll-behavior: smooth;
+
+            @include tab-view {
+              max-height: 205px;
+            }
+          }
+        }
+      }
+
+      .logo_wrpper_footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+
+        img {
+          max-width: 62px;
+        }
+      }
     }
   }
 }

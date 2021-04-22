@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { CommonFunction } from '../../_helpers/common-function';
 import {installmentType} from '../../_helpers/generic.helper';
+declare var $: any;
 
 @Component({
   selector: 'app-price-summary',
@@ -25,6 +26,10 @@ export class PriceSummaryComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+  
+  closeModal() {
+    $('#tax_fee_modal').modal('hide');
   }
   
   ngOnChanges(changes: SimpleChanges) {
