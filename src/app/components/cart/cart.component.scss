@@ -49,8 +49,12 @@ h3 {
         border-top-right-radius: 10px;
         border-top: 1px solid $box-border-color;
 
+        // @include tab-view{
+        //     max-width: 55px;
+        // }
         @include tab-view{
-            max-width: 55px;
+            max-width: 20%;
+            width: 20%;
         }
 
         &::before {
@@ -65,89 +69,101 @@ h3 {
 
         &:nth-child(6) {
             border-left: 1px solid $box-border-color;
-            @include tab-view{
-                border-left: none;
-            }
-            @media (max-width: 352px){
-                border-left: 1px solid $box-border-color;
-                border-top: none !important;
-            }
+            // @include tab-view{
+            //     border-left: none;
+            // }
+            // @media (max-width: 352px){
+            //     border-left: 1px solid $box-border-color;
+            //     border-top: none !important;
+            // }
             &::before {
                 width: 0;
-                @include tab-view{
-                    width: 8px;
-                }
-                @include mobile-xxsm-view{
-                    width: 0;
-                }
+                // @include tab-view{
+                //     width: 8px;
+                // }
+                // @include mobile-xxsm-view{
+                //     width: 0;
+                // }
             }           
         }
-        &:nth-child(7){
-            @media (max-width: 402px){
-                border-left: 1px solid $box-border-color;
-            }
-            @media (max-width: 352px) {
-                border-left: none;
-                border-top: none !important;
-            }
-            &::before {
-                @media (max-width: 402px){
-                    width: 0;
-                }
-                @media (max-width: 352px) {
-                    width: 8px;
-                }
-            } 
-        }
-        &:nth-child(8){
-            @media (max-width: 454px){
-                border-left: 1px solid $box-border-color;
-            }
-            @media (max-width: 402px) {
-                border-left: none;
-                border-top: none !important;
-            }
-            &::before {
-                @media (max-width: 454px){
-                    width: 0;
-                }
-                @media (max-width: 402px) {
-                    width: 8px;
-                }
-            } 
-        }
-        &:nth-child(9){
-            @media (max-width: 505px){
-                border-left: 1px solid $box-border-color;
-            }
-            @media (max-width: 454px) {
-                border-left: none;
-                border-top: none !important;
-            }
-            &::before {
-                @media (max-width: 505px){
-                    width: 0;
-                }
-                @media (max-width: 454px) {
-                    width: 8px;
-                }
-            } 
-        }
-
-        &:nth-child(10){
-            @include tab-view{
-                border-left: 1px solid $box-border-color;
-            }
-            @media (max-width: 505px) {
-                border-left: none;
-                border-top: none !important;
-            }
-            &::before {
+        // &:nth-child(7){
+        //     @media (max-width: 402px){
+        //         border-left: 1px solid $box-border-color;
+        //     }
+        //     @media (max-width: 352px) {
+        //         border-left: none;
+        //         border-top: none !important;
+        //     }
+        //     &::before {
+        //         @media (max-width: 402px){
+        //             width: 0;
+        //         }
+        //         @media (max-width: 352px) {
+        //             width: 8px;
+        //         }
+        //     } 
+        // }
+        // &:nth-child(8){
+        //     @media (max-width: 454px){
+        //         border-left: 1px solid $box-border-color;
+        //     }
+        //     @media (max-width: 402px) {
+        //         border-left: none;
+        //         border-top: none !important;
+        //     }
+        //     &::before {
+        //         @media (max-width: 454px){
+        //             width: 0;
+        //         }
+        //         @media (max-width: 402px) {
+        //             width: 8px;
+        //         }
+        //     } 
+        // }
+        // &:nth-child(9){
+        //     @media (max-width: 505px){
+        //         border-left: 1px solid $box-border-color;
+        //     }
+        //     @media (max-width: 454px) {
+        //         border-left: none;
+        //         border-top: none !important;
+        //     }
+        //     &::before {
+        //         @media (max-width: 505px){
+        //             width: 0;
+        //         }
+        //         @media (max-width: 454px) {
+        //             width: 8px;
+        //         }
+        //     } 
+        // }
+        // &:nth-child(10){
+        //     @include tab-view{
+        //         border-left: 1px solid $box-border-color;
+        //     }
+        //     @media (max-width: 505px) {
+        //         border-left: none;
+        //         border-top: none !important;
+        //     }
+        //     &::before {
+        //         @include tab-view{
+        //             width: 0;
+        //         }
+        //         @media (max-width: 505px) {
+        //             width: 8px;
+        //         }
+        //     } 
+        // }
+         &:nth-child(5){
+            &::after {
                 @include tab-view{
-                    width: 0;
-                }
-                @media (max-width: 505px) {
-                    width: 8px;
+                    content: '';
+                    position: absolute;
+                    height: 10px;
+                    border-top: 1px solid $box-border-color;
+                    width: 1px;
+                    top: -2px;
+                    right: -1px;
                 }
             } 
         }
@@ -155,8 +171,11 @@ h3 {
         &:nth-child(n + 6) {
             //border-left: 1px solid $box-border-color;
             border-top: none;
+            // @include tab-view{
+            //     border-top: 1px solid $box-border-color;
+            // }
             @include tab-view{
-                border-top: 1px solid $box-border-color;
+                border-bottom: none;
             }
         }
 
@@ -177,8 +196,10 @@ h3 {
                 border: none;
             }
             @include tab-view{
-                border: none !important;
-                max-width: 67px;
+                // border: none !important;
+                // max-width: 67px;
+                max-width: 20%;
+                width: 20%;
             }
         }
 
@@ -331,7 +352,9 @@ h3 {
                 }
 
                 @include tab-view {
-                    width: 67px;
+                    // width: 67px;
+                    max-width: 100%;
+                    width: 100%;
                     height: 45px;
                     display: flex;
                     justify-content: center;

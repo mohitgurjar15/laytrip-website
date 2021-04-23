@@ -22,7 +22,7 @@
           <div class="date_form">
             <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
               <!-- <label>Check In-Check Out</label> -->
-              <p-calendar #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range" [(ngModel)]="rangeDates"
+              <p-calendar [appendTo]="body" #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range" [(ngModel)]="rangeDates"
                 [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
                 panelStyleClass="calender-responsive-view round_trip_calender laytrip-cal-view" [numberOfMonths]="2"
                 (onSelect)=selectCheckInDateUpdate($event) [readonlyInput]="true">
