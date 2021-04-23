@@ -52,6 +52,9 @@ h3 {
         // @include tab-view{
         //     max-width: 55px;
         // }
+        @include ipad-view{
+            max-width: 20%;
+        }
         @include tab-view{
             max-width: 20%;
             width: 20%;
