@@ -29,6 +29,26 @@
 
     .pay_list_wrper {
       padding: 15px;
+      &.hotel_pay_list_wrper{
+        &:nth-child(n + 1){
+          border-top: 1px solid $feedback_text-clr;
+        }
+      }
+
+      .hotel-listing-line{
+        &:last-child{
+          .pay_listing{
+            &:last-child{
+              margin-bottom: 0px;
+            }
+          }
+        }
+        .pay_listing{
+          &:last-child{
+            margin-bottom: 10px;
+          }
+        }
+      }
 
       @include tab-view {
         padding: 10px;
