@@ -303,6 +303,7 @@ agm-map {
                                         min-height: 170px;
                                         min-width: 252px;
                                         max-height: 170px;
+
                                         @include tab-view {
                                             min-width: 127px;
                                             max-height: 100%;
@@ -1997,6 +1998,7 @@ agm-map {
                                         min-height: 170px;
                                         min-width: 252px;
                                         max-height: 170px;
+
                                         @include tab-view {
                                             min-width: 127px;
                                             max-height: 100%;
@@ -3378,6 +3380,7 @@ agm-map {
                     min-height: 170px;
                     min-width: 252px;
                     max-height: 170px;
+
                     @include tab-view {
                         min-width: 127px;
                         max-height: 100%;
@@ -3553,8 +3556,48 @@ agm-map {
     text-align: center;
 }
 
-.hotel-pagination /deep/ .ngx-pagination .current {
-    background: #F826C1;
+.hotel-pagination /deep/ .ngx-pagination {
+
+    @include tab-view {
+        margin: 0;
+        padding: 0;
+    }
+
+    .pagination-previous {
+
+        @include tab-view {
+            text-indent: -9999px;
+            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+            background-repeat: no-repeat;
+            background-color: $background-white;
+            border-radius: 50%;
+            background-position: center center;
+            background-size: 7px;
+            padding: 0px 10px;
+            width: 30px;
+        }
+
+    }
+
+    .pagination-next {
+
+        @include tab-view {
+            text-indent: -9999px;
+            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+            background-repeat: no-repeat;
+            background-color: $background-white;
+            border-radius: 50%;
+            background-position: center center;
+            background-size: 7px;
+            padding: 0px 10px;
+            width: 30px;
+        }
+    }
+
+
+    .current {
+        background: #F826C1;
+    }
 }
 
 // slick slider css

@@ -98,11 +98,13 @@
     align-items: flex-start !important;
     flex-direction: column;
     width: 100%;
+
     ng-select {
       width: 100%;
     }
   }
 }
+
 .accordion_bookings {
   .card {
     border: 1px solid $grayed_border;
@@ -128,7 +130,8 @@
       svg {
         fill: $grayed_border;
       }
-      .hotel_svg{
+
+      .hotel_svg {
         border: 2px solid $grayed_border;
         border-radius: 50%;
         padding: 5px;
@@ -208,7 +211,8 @@
             margin-left: 0;
           }
         }
-        .adult_countr{
+
+        .adult_countr {
           color: $grayed_border;
           font-weight: 500;
           flex: 2;
@@ -255,9 +259,23 @@
         transition: 0.3s;
 
         &.hotel_travller {
-          position: relative;
-          left: auto;
+          // position: relative;
+          // left: auto;
+          // padding: 0;
+          position: absolute;
           padding: 0;
+          width: 140px;
+          top: 15px;
+          margin: 0;
+          transform: translateX(100%);
+
+          @include tab-view {
+            position: relative;
+            left: auto;
+            padding: 0;
+            transform: translateX(0);
+            top: 10px;
+          }
         }
 
         &[aria-expanded="true"] {
@@ -397,6 +415,7 @@
           border-bottom: 2px solid $box-border-color;
           font-size: 14px;
           padding: 8px 0;
+
           &:disabled {
             background-color: $background-white;
           }
@@ -487,6 +506,7 @@
               display: flex;
               position: relative;
               bottom: 2px;
+
               &.input-error {
                 border-color: $error-color !important;
               }
