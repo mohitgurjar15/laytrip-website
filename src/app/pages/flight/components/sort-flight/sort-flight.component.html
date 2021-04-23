@@ -9,7 +9,7 @@
                     <!-- <a class="anchor_link" [hidden]="lowToHighToggle !== true"
                         (click)="resetSorting('selling_price','ASC')"> Clear</a> -->
                 </div>
-                <div id="collapseOne" class="accordion-body collapse">
+                <div id="collapseOne" class="accordion-body collapse" [ngClass]="{'show': lowToHighToggle === true}">
                     <div class="accordion-inner">
                         <div class="block_cmn price">
                             <h5 class="title_h5">{{'price' | translate}}

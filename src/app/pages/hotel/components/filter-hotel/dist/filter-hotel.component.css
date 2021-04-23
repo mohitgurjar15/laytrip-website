@@ -540,3 +540,19 @@ ng-scrollbar {
   display: block;
   height: 20px;
 }
+
+h5.title_h5 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+h5.title_h5 .anchor_link {
+  color: #ffaa00;
+  font-size: 16px;
+}
+@media (max-width: 768px) {
+  h5.title_h5 .anchor_link {
+    font-size: 12px;
+  }
+}

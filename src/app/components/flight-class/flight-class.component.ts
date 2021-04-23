@@ -48,7 +48,8 @@ export class FlightClassComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if (this.eRef.nativeElement.contains(event.target)) {
-      if ((typeof event.target.nextSibling.classList != 'undefined' && event.target.nextSibling.classList != null && event.target.nextSibling.classList[1] == 'panel_hide')) {
+      if ((event.target.nextSibling && typeof event.target.nextSibling.classList != 'undefined' && event.target.nextSibling.classList != null && event.target.nextSibling.classList[2] == 'panel_hide' ||
+      event.target.offsetParent && event.target.offsetParent.nextSibling != null && event.target.offsetParent.nextSibling.classList[2] == 'panel_hide')) {
         $(".add_traveler__open").hide();
         this.showClass = false;
       } else {
