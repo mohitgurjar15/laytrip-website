@@ -138,6 +138,7 @@ export class ContactUsComponent implements OnInit {
       this.image = '';
       if (fileList[0] && (
         fileList[0].type == 'image/jpg' ||
+        fileList[0].type == 'image/jpeg' ||
         fileList[0].type == 'image/png' ||
         fileList[0].type == 'application/pdf')) {          
 
@@ -166,10 +167,9 @@ export class ContactUsComponent implements OnInit {
         
       } else {
         this.imageFileError = true;
-        
         var attatchData = {
           image: this.image ? this.image : this.defaultImage,
-          errorMsg: this.imageFileError ? 'Error attaching, try again' : '',
+          errorMsg: this.imageFileError ? 'Only .jpg,jpeg,png and pdf files are allowed' : '',
           fileName : this.fileName,
           is_error : this.imageFileError
         };
