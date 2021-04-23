@@ -262,7 +262,8 @@
 .responsive_filter_show,
 .responsive_sortby_show {
     
-    background: $bg-light-grey;
+    //background: $bg-light-grey;
+    background: transparent;
     height: 100%;
     left: 0;
     position: fixed;
@@ -270,6 +271,7 @@
     width: 100%;
     z-index: 99999;
     display: none;
+    overflow: hidden;
     
     .filter_popup {
         width: 100%;
