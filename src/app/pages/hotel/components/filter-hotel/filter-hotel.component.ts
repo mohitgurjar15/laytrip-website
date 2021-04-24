@@ -499,8 +499,9 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       return data;
     } else {
       return data.sort(function (a, b) {
-        var x = a[key].toLowerCase();
-        var y = b[key].toLowerCase();
+        
+        var x = a.name.toLowerCase();
+        var y = b.name.toLowerCase();
         if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }
