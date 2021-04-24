@@ -199,11 +199,14 @@
             </div>
 
             <div [id]="'upcoming'+i" class="collapse " data-parent="#accordion_upcoming">
-              <div class="accordion_data">
+              <div class="accordion_data"> 
+
+
                 <ul class="nav nav-tabs booking_tab_header">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
-                    <li class="{{cartItem.moduleId}}" *ngIf="cartItem.moduleId==1">
-                      <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
+                    <li [ngClass]="{'active':selectedInCompletedTabNumber===j}">
+                      <ng-container  *ngIf="cartItem.moduleId==1">
+                        <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
                         [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
                         <span class="tab_round_wrps" *ngIf="cartItem.moduleId==1">
                           <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
@@ -211,20 +214,22 @@
                             class="tab_txt_head">{{cartItem.moduleInfo[0].departure_code}}-{{cartItem.moduleInfo[0].arrival_code}}</span>
                         </span>
                       </a>
-                    </li>
-
-                    <li class="{{cartItem.moduleId}}" *ngIf="cartItem.moduleId==3">
-                      <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
+                      </ng-container>
+                      <ng-container  *ngIf="cartItem.moduleId==3">
+                        <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
                         [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
                         <span class="tab_round_wrps hotel_round" *ngIf="cartItem.moduleId==3">
-                          <img src="{{s3BucketUrl}}assets/images/icon/hotel_blue.svg" alt="Flight icon" />
+                          <img src="{{s3BucketUrl}}assets/images/icon/bed_line_blue.svg" alt="Hotel icon" />
                           <span
                             class="tab_txt_head">{{cartItem.moduleInfo[0].hotel_name}}</span>
                         </span>
                       </a>
+                      </ng-container>
                     </li>
                   </ng-container>
                 </ul>
+              
+
                 <div class="tab-content main_tab_content">
                   <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
                     <div class="tab-pane " [id]="'cart_item'+j"
