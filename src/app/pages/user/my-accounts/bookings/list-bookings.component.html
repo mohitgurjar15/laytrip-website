@@ -218,7 +218,7 @@
                       <ng-container  *ngIf="cartItem.moduleId==3">
                         <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
                         [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
-                        <span class="tab_round_wrps hotel_round" *ngIf="cartItem.moduleId==3">
+                        <span class="tab_round_wrps hotel_tab_round_wrps" *ngIf="cartItem.moduleId==3">
                           <img src="{{s3BucketUrl}}assets/images/icon/bed_line_blue.svg" alt="Hotel icon" />
                           <span
                             class="tab_txt_head">{{cartItem.moduleInfo[0].hotel_name}}</span>
