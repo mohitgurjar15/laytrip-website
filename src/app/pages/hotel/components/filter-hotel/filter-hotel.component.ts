@@ -356,6 +356,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.hotelService.getSortFilter.subscribe(hotelInfo=> {
       if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){  
         var sortFilter :any = hotelInfo; 
+        console.log(sortFilter.key)
         if(sortFilter.key == 'rating'){        
           filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.order,sortFilter.key);
         } else if(sortFilter.key == 'name'){
@@ -498,7 +499,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       return data;
     } else {
       return data.sort(function (a, b) {
-        
         var x = a.name.toLowerCase();
         var y = b.name.toLowerCase();
         if (way === 'ASC') {
