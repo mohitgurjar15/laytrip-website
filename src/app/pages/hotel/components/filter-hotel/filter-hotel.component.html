@@ -337,13 +337,6 @@
                           </li>
                         </ul>
                       </div> -->
-
-                      <style>
-                        .star_box .blank{display: flex;}
-                        .star_box .filled{display: none;}
-                        .star_box.active .filled {display: flex;}
-                        .star_box.active .blank{display: none;}
-                      </style>
                       <div class="star-rating {{rating_number}}">
                         <a (click)="starRating(5)" class="star_box" [ngClass]="{'active':rating_number==5}">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
