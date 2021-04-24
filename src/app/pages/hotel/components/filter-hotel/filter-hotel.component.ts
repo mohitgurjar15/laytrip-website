@@ -231,7 +231,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   starRating(rating){
-
+    this.ratingArray = [];
     if(this.rating_number==rating){
       this.rating_number=0;
       this.ratingArray = this.ratingArray.filter(item => {
