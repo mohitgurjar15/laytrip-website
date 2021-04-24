@@ -18,6 +18,7 @@ export class PriceSummaryComponent implements OnInit {
   installmentVartion:number=0;
   installmentType;
   cartAlerts=[];
+  flightCount:number=0;
   
   constructor(
     private commonFunction:CommonFunction
@@ -26,6 +27,7 @@ export class PriceSummaryComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    
   }
   
   closeModal() {
@@ -33,6 +35,16 @@ export class PriceSummaryComponent implements OnInit {
   }
   
   ngOnChanges(changes: SimpleChanges) {
+    /* console.log("======>",changes['cartPrices'])
+    if (typeof changes['cartPrices']!='undefined') {
+      let isFlight = this.cartPrices.find(x=>{return x.type==='flight'});
+      if(isFlight){
+        this.flightCount=1;
+      }
+      console.log("===================",isFlight,this.flightCount)
+    } */
+
+
     try{
       let cartAlerts = localStorage.getItem("__alrt")
       if(cartAlerts){
@@ -47,7 +59,10 @@ export class PriceSummaryComponent implements OnInit {
     }
     this.insatllmentAmount=0;
     if (typeof changes['priceSummary'].currentValue!='undefined') {
-      console.log("changes['priceSummary']",changes['priceSummary'])
+
+      if($('#flight_list_wrper').text()==""){
+        $('#flight_list_wrper').remove();
+      }
       this.priceSummary = changes['priceSummary'].currentValue;
       if(typeof this.priceSummary.instalments!=='undefined' && this.priceSummary.paymentType=='instalment'){
        for(let i =1 ; i<this.priceSummary.instalments.instalment_date.length; i++){

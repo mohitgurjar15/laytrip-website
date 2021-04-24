@@ -126,7 +126,10 @@ export class HotelItemWrapperComponent implements OnInit {
             });
         }
       }
-      this.hotelList = [...this.hotelListArray]
+      this.hotelList = [...this.hotelListArray];
+      if(this.bounds){
+        this.checkMarkersInBounds(this.bounds)
+      }
 
       /* if(this.hotelListArray.length > 0){
         this.mapListArray[0] =  Object.assign({},this.hotelListArray[0]);
