@@ -1244,6 +1244,7 @@ agm-map {
                 .big_font {
                     font-size: 24px;
                     margin: 0 3px;
+                    font-weight: 600;
 
                     @include tab-view {
                         font-size: 16px;
