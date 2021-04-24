@@ -211,6 +211,13 @@ agm-map {
                     .box_right {
                         flex: 2;
                         display: flex;
+                        height: 100%;
+                        padding: 10px 0 0;
+                        position: relative;
+                        z-index: 5;
+                        flex-direction: column;
+                        min-height: 170px;
+                        justify-content: center;
                     }
                 }
 
@@ -1905,6 +1912,13 @@ agm-map {
                     .box_right {
                         flex: 2;
                         display: flex;
+                        height: 100%;
+                        padding: 10px 0 0;
+                        position: relative;
+                        z-index: 5;
+                        flex-direction: column;
+                        min-height: 170px;
+                        justify-content: center;
                     }
 
 

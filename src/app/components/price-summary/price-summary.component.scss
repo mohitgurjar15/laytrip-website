@@ -381,12 +381,13 @@
         p {
           &.para_fees {
             font-size: 12px;
-            max-height: 218px;
+            // max-height: 218px;
+                margin: 0;
             scroll-behavior: smooth;
 
-            @include tab-view {
-              max-height: 205px;
-            }
+            // @include tab-view {
+            //   max-height: 205px;
+            // }
           }
         }
       }
