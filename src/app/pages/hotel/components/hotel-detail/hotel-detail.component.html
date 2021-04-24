@@ -428,7 +428,7 @@
         <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
             <ng-template ngbSlide *ngFor="let image of galleryImages">
               <div class="picsum-img-wrapper">
-                <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
               </div>
             </ng-template>
         </ngb-carousel>
@@ -492,12 +492,12 @@
                                 <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
                                   <ng-template ngbSlide *ngFor="let image of galleryImages">
                                     <div class="picsum-img-wrapper">
-                                      <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                      <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                                     </div>
                                   </ng-template>
                               </ngb-carousel>
-                                <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image"
-                                  class="blank_image_box">
+                                <!-- <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image"
+                                  class="blank_image_box"> -->
                               </div>
                             </div>
                           </div>
@@ -549,7 +549,7 @@
                     <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
                       <ng-template ngbSlide *ngFor="let image of galleryImages">
                         <div class="picsum-img-wrapper">
-                          <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                          <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                         </div>
                       </ng-template>
                     </ngb-carousel>
