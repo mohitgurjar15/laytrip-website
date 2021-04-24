@@ -284,6 +284,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.setCartNumber(0);
     this.cartService.setCardId(0);
     this.$cartIdsubscription.unsubscribe();
+    this.checkOutService.setTravelers([]);
   }
 
   getCardListChange(data) {
@@ -355,7 +356,7 @@ export class CheckoutComponent implements OnInit {
               message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
             }
             if (this.carts[i].type == 'hotel') {
-              message = ` ${this.carts[i].module_info.title} ,`;
+              message = ` ${this.carts[i].module_info.hotel_name} ,`;
             }
             this.validationErrorMessage += message;
           }
