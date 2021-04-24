@@ -219,18 +219,29 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
    */
   filterByHotelRatings(event, count) {
     this.ratingArray = [];
-    
     if (event.target.checked === true) {
-      // $(".star-"+count).prop('checked', true);
       this.rating_number = parseInt(count);
       this.ratingArray.push(parseInt(count));
     } else {
-      // $(".star-"+count).prop('checked', false);
       this.ratingArray = this.ratingArray.filter(item => {
         return item != count;
       });
     }
-    console.log('count',this.rating_number)
+    this.filterHotels({});
+  }
+
+  starRating(rating){
+
+    if(this.rating_number==rating){
+      this.rating_number=0;
+      this.ratingArray = this.ratingArray.filter(item => {
+        return item != rating;
+      });
+    }
+    else{
+      this.rating_number = parseInt(rating);
+      this.ratingArray.push(parseInt(rating));
+    }
     this.filterHotels({});
   }
 

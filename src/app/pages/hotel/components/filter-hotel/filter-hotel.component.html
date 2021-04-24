@@ -337,47 +337,86 @@
                           </li>
                         </ul>
                       </div> -->
+
+                      <style>
+                        .star_box .blank{display: flex;}
+                        .star_box .filled{display: none;}
+                        .star_box.active .filled {display: flex;}
+                        .star_box.active .blank{display: none;}
+                      </style>
                       <div class="star-rating {{rating_number}}">
-                        <input class="star-5" (change)="filterByHotelRatings($event,5)" [checked]="rating_number==5"
+                        <a (click)="starRating(5)" class="star_box" [ngClass]="{'active':rating_number==5}">
+                          <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                            alt="blank Stars Icon">
+                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                            alt="filled Stars Icon">
+                        </a>
+
+                        <a (click)="starRating(4)" class="star_box" [ngClass]="{'active':rating_number >=4}">
+                          <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                            alt="blank Stars Icon">
+                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                            alt="filled Stars Icon">
+                        </a>
+                        <a (click)="starRating(3)" class="star_box" [ngClass]="{'active':rating_number>=3}">
+                          <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                            alt="blank Stars Icon">
+                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                            alt="filled Stars Icon">
+                        </a>
+                        <a (click)="starRating(2)" class="star_box" [ngClass]="{'active':rating_number>=2}">
+                          <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                            alt="blank Stars Icon">
+                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                            alt="filled Stars Icon">
+                        </a>
+                        <a (click)="starRating(1)" class="star_box" [ngClass]="{'active':rating_number>=1}">
+                          <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
+                            alt="blank Stars Icon">
+                          <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
+                            alt="filled Stars Icon">
+                        </a>
+                        
+                        <!-- <input class="star-5" id="star-6" (change)="filterByHotelRatings($event,5)" [checked]="rating_number==5"
                           type="checkbox" name="rating1" />
-                        <label for="star-5" title="5 stars">
+                        <label for="star-6" title="6 stars">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                             alt="blank Stars Icon">
                           <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                             alt="filled Stars Icon">
                         </label>
-                        <input class="star-4" (change)="filterByHotelRatings($event,4)" [checked]="rating_number==4"
+                        <input class="star-4" id="star-7" (change)="filterByHotelRatings($event,4)" [checked]="rating_number==4"
                           type="checkbox" name="rating1" />
-                        <label for="star-4" title="4 stars">
+                        <label for="star-4" title="7 stars">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                             alt="blank Stars Icon">
                           <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                             alt="filled Stars Icon">
                         </label>
-                        <input class="star-3" (change)="filterByHotelRatings($event,3)" [checked]="rating_number==3"
+                        <input class="star-3" id="star-8" (change)="filterByHotelRatings($event,3)" [checked]="rating_number==3"
                           type="checkbox" name="rating1" />
-                        <label for="star-3" title="3 stars">
+                        <label for="star-8" title="8 stars">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                             alt="blank Stars Icon">
                           <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                             alt="filled Stars Icon">
                         </label>
-                        <input class="star-2" (change)="filterByHotelRatings($event,2)" [checked]="rating_number==2"
+                        <input class="star-2" id="star-9" (change)="filterByHotelRatings($event,2)" [checked]="rating_number==2"
                           type="checkbox" name="rating1" />
-                        <label for="star-2" title="2 stars">
+                        <label for="star-9" title="9 stars">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                             alt="blank Stars Icon">
                           <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                             alt="filled Stars Icon">
                         </label>
-                        <input class="star-1" (change)="filterByHotelRatings($event,1)" [checked]="rating_number==1"
+                        <input class="star-1" id="star-10" (change)="filterByHotelRatings($event,1)" [checked]="rating_number==1"
                           type="checkbox" name="rating1" />
-                        <label for="star-1" title="1 star">
+                        <label for="star-10" title="10 star">
                           <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg"
                             alt="blank Stars Icon">
                           <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg"
                             alt="filled Stars Icon">
-                        </label>
+                        </label> -->
                       </div>
                     </div>
                   </div>
