@@ -138,7 +138,7 @@
     width: 50%;
     text-align: center;
 
-    @include tab-view {
+    @include ipad-view {
         display: flex;
         z-index: 998;
     }
@@ -184,7 +184,7 @@
     margin-left: 10px;
     text-align: center;
     width: 50%;
-    @include tab-view{
+    @include ipad-view{
 		z-index: 998;
 	}
 
