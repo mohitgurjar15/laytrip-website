@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
-import {  ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../services/generic.service';
 import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
@@ -14,7 +14,7 @@ import { AgmInfoWindow } from '@agm/core';
   selector: 'app-hotel-item-wrapper',
   templateUrl: './hotel-item-wrapper.component.html',
   styleUrls: ['./hotel-item-wrapper.component.scss'],
-  
+
 })
 export class HotelItemWrapperComponent implements OnInit {
 
@@ -25,7 +25,7 @@ export class HotelItemWrapperComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   hotelListArray = [];
   hotelList = [];
-  mapListArray=[];
+  mapListArray = [];
   noOfDataToShowInitially = 20000;
   dataToLoad = 20;
   isFullListDisplayed = false;
@@ -39,10 +39,10 @@ export class HotelItemWrapperComponent implements OnInit {
   mapCanvas;
   myLatLng;
   map;
-  currentPage:number=1;
+  currentPage: number = 1;
   bounds;
   infoWindowOpened = null
-  previousInfoWindow : AgmInfoWindow = null;
+  previousInfoWindow: AgmInfoWindow = null;
   showHotelDetails = [];
   errorMessage;
   userInfo;
@@ -62,32 +62,32 @@ export class HotelItemWrapperComponent implements OnInit {
   scrollLoading = false;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
-  check_in:string=''
-  check_out:string=''
-  latitude:string=''
-  longitude:string=''
-  itenery:string='';
-  location:string='';
-  city_id:string='';
+  check_in: string = ''
+  check_out: string = ''
+  latitude: string = ''
+  longitude: string = ''
+  itenery: string = '';
+  location: string = '';
+  city_id: string = '';
 
- 
+
   constructor(
     private route: ActivatedRoute,
     private commonFunction: CommonFunction,
     private genericService: GenericService,
-    private hotelService:HotelService
+    private hotelService: HotelService
   ) {
-    
-      this.galleryOptions = [
-        { "thumbnails": false, previewRotate:true,preview:false,width: "270px", height: "100%", imageSwipe:true,imageBullets:false,lazyLoading:true },
-      ];
-      this.check_in = this.route.snapshot.queryParams['check_in']
-      this.check_out = this.route.snapshot.queryParams['check_out']
-      this.latitude = this.route.snapshot.queryParams['latitude']
-      this.longitude = this.route.snapshot.queryParams['longitude']
-      this.itenery = this.route.snapshot.queryParams['itenery']
-      this.location = this.route.snapshot.queryParams['location']
-      this.city_id = this.route.snapshot.queryParams['city_id']
+
+    this.galleryOptions = [
+      { "thumbnails": false, previewRotate: true, preview: false, width: "270px", height: "100%", imageSwipe: true, imageBullets: false, lazyLoading: true },
+    ];
+    this.check_in = this.route.snapshot.queryParams['check_in']
+    this.check_out = this.route.snapshot.queryParams['check_out']
+    this.latitude = this.route.snapshot.queryParams['latitude']
+    this.longitude = this.route.snapshot.queryParams['longitude']
+    this.itenery = this.route.snapshot.queryParams['itenery']
+    this.location = this.route.snapshot.queryParams['location']
+    this.city_id = this.route.snapshot.queryParams['city_id']
   }
 
   ngOnInit() {
@@ -106,28 +106,28 @@ export class HotelItemWrapperComponent implements OnInit {
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
     }
-    
-    
+
+
     this.userInfo = getLoginUserInfo();
     this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
     this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
 
-    this.hotelService.getHotels.subscribe(result=>{
+    this.hotelService.getHotels.subscribe(result => {
       this.hotelDetails = result;
-      this.currentPage=1;
+      this.currentPage = 1;
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-      for(let i=0; i < this.hotelListArray.length; i++){
-        this.hotelDetails[i].galleryImages=[];
-          for(let image of this.hotelDetails[i].images){
-            this.hotelDetails[i].galleryImages.push({
-              small: image,
-              medium:image,
-              big:image
-            });
+      for (let i = 0; i < this.hotelListArray.length; i++) {
+        this.hotelDetails[i].galleryImages = [];
+        for (let image of this.hotelDetails[i].images) {
+          this.hotelDetails[i].galleryImages.push({
+            small: image,
+            medium: image,
+            big: image
+          });
         }
       }
       this.hotelList = [...this.hotelListArray];
-      if(this.bounds){
+      if (this.bounds) {
         this.checkMarkersInBounds(this.bounds)
       }
 
@@ -164,39 +164,41 @@ export class HotelItemWrapperComponent implements OnInit {
       }
     }, 1000); */
 
-    
+
   }
 
-  closeWindow(){
-    if (this.previousInfoWindow != null ) {
+  closeWindow() {
+    if (this.previousInfoWindow != null) {
       this.previousInfoWindow.close()
-      this.previousInfoWindow=null;
-    }    
+      this.previousInfoWindow = null;
+    }
   }
-  
-  displayHotelDetails(hotelId, infoWindow) {
-    
+
+  displayHotelDetails(hotelId, infoWindow, type) {
+
     infoWindow.open();
     if (this.previousInfoWindow == null)
       this.previousInfoWindow = infoWindow;
-    else{
+    else {
       this.infoWindowOpened = infoWindow;
-      if (this.previousInfoWindow != null ) {
+      if (this.previousInfoWindow != null) {
         this.previousInfoWindow.close();
       }
     }
     this.previousInfoWindow = infoWindow
-    
-    let hotelIndex= this.hotelListArray.findIndex(hotel=>hotel.id==hotelId);
-    this.hotelListArray.unshift(this.hotelListArray.splice(hotelIndex, 1)[0]);
-    
+
+    if (type === 'click') {
+      let hotelIndex = this.hotelListArray.findIndex(hotel => hotel.id == hotelId);
+      this.hotelListArray.unshift(this.hotelListArray.splice(hotelIndex, 1)[0]);
+    }
+
   }
 
-  showInfoWindow(infoWindow,event,action) {
-    
+  showInfoWindow(infoWindow, event, action) {
+
     if (this.previousInfoWindow == null)
       this.previousInfoWindow = infoWindow;
-    else{
+    else {
       this.infoWindowOpened = infoWindow
       this.previousInfoWindow.close()
     }
@@ -208,7 +210,7 @@ export class HotelItemWrapperComponent implements OnInit {
       this.previousInfoWindow = null;
     }
     this.previousInfoWindow = infoWindow; */
-    
+
 
     if (action === 'open') {
       infoWindow.open();
@@ -232,13 +234,13 @@ export class HotelItemWrapperComponent implements OnInit {
 
   differentView(view) {
     this.isMapView = (view !== 'listView');
-    if(this.isMapView){
-      if(this.bounds){
+    if (this.isMapView) {
+      if (this.bounds) {
         this.checkMarkersInBounds(this.bounds)
       }
     }
-    else{
-      this.hotelListArray=[...this.hotelList];
+    else {
+      this.hotelListArray = [...this.hotelList];
     }
   }
 
@@ -257,28 +259,28 @@ export class HotelItemWrapperComponent implements OnInit {
     }));
   }
 
-  pageChanged(page){
-    this.currentPage=page;
+  pageChanged(page) {
+    this.currentPage = page;
     window.scroll(0, 0);
   }
-  
-  getMapPrice(hotel){
+
+  getMapPrice(hotel) {
     return `$${Math.floor(hotel.secondary_start_price)}`
   }
 
-  checkMarkersInBounds(bounds){
-    this.bounds=bounds;
-    if(this.isMapView){
+  checkMarkersInBounds(bounds) {
+    this.bounds = bounds;
+    if (this.isMapView) {
       this.hotelListArray = [];
-      for(let hotel of this.hotelList){
-        let hotelPosition = {lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude)};
-        if (this.bounds.contains(hotelPosition)){
+      for (let hotel of this.hotelList) {
+        let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
+        if (this.bounds.contains(hotelPosition)) {
           this.hotelListArray.push(hotel)
           //this.hotelDetails=[...this.hotelListArray]
         }
       }
     }
-    
+
   }
 
 }
