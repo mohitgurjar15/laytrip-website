@@ -109,7 +109,6 @@ export class HotelItemWrapperComponent implements OnInit {
         this.hotelDetails[roomNumber].activeSlide-=1;
       }
     }
-    console.log("Event",this.hotelDetails[roomNumber].activeSlide)
   }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {  NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from '../../../../services/hotel.service';
@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { collect } from 'collect.js';
 import { CommonFunction } from '../../../../_helpers/common-function';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
 import { CartService } from '../../../../services/cart.service';
 declare var $: any;
@@ -42,7 +42,7 @@ export class HotelDetailComponent implements OnInit {
     }
   };
   dataLoading = false;
-
+  @ViewChildren(NgbCarousel) carousel: QueryList<any>;
   galleryOptions: NgxGalleryOptions[];
   galleryOptionsMain: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -227,5 +227,25 @@ export class HotelDetailComponent implements OnInit {
       target.scrollIntoView({behavior: 'smooth', block: "start",inline: 'nearest'});
     }
     //document.getElementsByClassName('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  ngAfterViewInit(): void {
+    this.carousel.toArray().forEach(el => {
+    });
+  }
+
+  onSlide(event,roomNumber){
+    
+    if(event.direction=='left'){
+      if(this.hotelDetails[roomNumber].activeSlide<this.hotelDetails[roomNumber].dots){
+        this.hotelDetails[roomNumber].activeSlide+=1;
+      }
+    }
+    else{
+      console.log(this.hotelDetails[roomNumber].activeSlide,"---")
+      if(this.hotelDetails[roomNumber].activeSlide>1){
+        this.hotelDetails[roomNumber].activeSlide-=1;
+      }
+    }
   }
 }
