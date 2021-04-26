@@ -214,6 +214,14 @@ agm-map {
                     padding-right: 0;
                     width: 100%;
                 }
+                .section_description{
+                    @include tab-view {
+                        transform: translate(-20%, -40%);
+                        bottom: 0;
+                        position: fixed;    
+                        font-size: 12px;
+                    }
+                }
             }
 
             .right_box_wrps {

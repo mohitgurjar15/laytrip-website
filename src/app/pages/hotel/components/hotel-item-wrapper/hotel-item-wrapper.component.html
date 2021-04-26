@@ -70,11 +70,9 @@
                                                                       </div>
                                                                     </ng-template>
                                                                 </ngb-carousel>
-                                                                <ul>
+                                                                <ul class="slider_dots">
                                                                     <ng-container *ngFor="let k of [].constructor(item.dots); let j = index">
-                                                                      <li [ngClass]="{'active':item.activeSlide==j+1}" (click)="changeSlide(j+1)">
-                                                                        ○
-                                                                      </li>
+                                                                      <li [ngClass]="{'active':item.activeSlide==j+1}" (click)="changeSlide(j+1)"></li>
                                                                     </ng-container>
                                                                   </ul>
                                                             </div>
@@ -148,13 +146,25 @@
                                             [images]="item.galleryImages"></ngx-gallery>
             
                                         <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box"> -->                           
-                                        <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
+                                        <!-- <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
+                                            <ng-template ngbSlide *ngFor="let image of item.galleryImages">
+                                              <div class="picsum-img-wrapper">
+                                                <img src={{image.small}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                                              </div>
+                                            </ng-template>
+                                        </ngb-carousel> -->
+                                        <ngb-carousel #carousel [interval]="false" [showNavigationIndicators]="false" [showNavigationArrows]="item.galleryImages.length > 0? true:false" (slide)=onSlide($event,blockIndex)>
                                             <ng-template ngbSlide *ngFor="let image of item.galleryImages">
                                               <div class="picsum-img-wrapper">
                                                 <img src={{image.small}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                                               </div>
                                             </ng-template>
                                         </ngb-carousel>
+                                        <ul class="slider_dots">
+                                            <ng-container *ngFor="let k of [].constructor(item.dots); let j = index">
+                                              <li [ngClass]="{'active':item.activeSlide==j+1}" (click)="changeSlide(j+1)"></li>
+                                            </ng-container>
+                                          </ul>
                                     </div>
                                     <div class="middle_part">
                                         <div class="detail_info">

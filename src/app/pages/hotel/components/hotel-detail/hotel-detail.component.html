@@ -424,20 +424,21 @@
     <div class="detail_box_wrpr">
       <div class="left_box_wrps">
         <div class="main_slider_big">
-        <!-- <ngx-gallery [options]="galleryOptionsMain" [images]="galleryImages"></ngx-gallery> -->
-        <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
+          <!-- <ngx-gallery [options]="galleryOptionsMain" [images]="galleryImages"></ngx-gallery> -->
+          <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
             <ng-template ngbSlide *ngFor="let image of galleryImages">
               <div class="picsum-img-wrapper">
-                <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                <img src={{image.big}}
+                  onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
               </div>
             </ng-template>
-        </ngb-carousel>
+          </ngb-carousel>
         </div>
         <div class="section_description" *ngIf="isCartFull">
           <span class="sec_text">10 items cart maximum, please Checkout and start another Cart if you require
-              more than 10.</span>
+            more than 10.</span>
           <a (click)="removeCartFullError()" href="javascript:void(0);"><img
-                  src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+              src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
         </div>
         <div class="description_wrpper">
           <span class="upper_descrip">
@@ -492,10 +493,11 @@
                                 <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
                                   <ng-template ngbSlide *ngFor="let image of galleryImages">
                                     <div class="picsum-img-wrapper">
-                                      <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                                      <img src={{image.big}}
+                                        onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                                     </div>
                                   </ng-template>
-                              </ngb-carousel>
+                                </ngb-carousel>
                                 <!-- <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image"
                                   class="blank_image_box"> -->
                               </div>
@@ -549,11 +551,12 @@
                     <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
                       <ng-template ngbSlide *ngFor="let image of galleryImages">
                         <div class="picsum-img-wrapper">
-                          <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                          <img src={{image.big}}
+                            onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                         </div>
                       </ng-template>
                     </ngb-carousel>
-                    
+
                   </div>
                   <div class="middle_part">
                     <div class="detail_info">
