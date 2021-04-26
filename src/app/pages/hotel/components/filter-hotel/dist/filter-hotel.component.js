@@ -174,17 +174,28 @@ var FilterHotelComponent = /** @class */ (function () {
     FilterHotelComponent.prototype.filterByHotelRatings = function (event, count) {
         this.ratingArray = [];
         if (event.target.checked === true) {
-            // $(".star-"+count).prop('checked', true);
             this.rating_number = parseInt(count);
             this.ratingArray.push(parseInt(count));
         }
         else {
-            // $(".star-"+count).prop('checked', false);
             this.ratingArray = this.ratingArray.filter(function (item) {
                 return item != count;
             });
         }
-        console.log('count', this.rating_number);
+        this.filterHotels({});
+    };
+    FilterHotelComponent.prototype.starRating = function (rating) {
+        this.ratingArray = [];
+        if (this.rating_number == rating) {
+            this.rating_number = 0;
+            this.ratingArray = this.ratingArray.filter(function (item) {
+                return item != rating;
+            });
+        }
+        else {
+            this.rating_number = parseInt(rating);
+            this.ratingArray.push(parseInt(rating));
+        }
         this.filterHotels({});
     };
     /**
@@ -416,8 +427,8 @@ var FilterHotelComponent = /** @class */ (function () {
         }
         else {
             return data.sort(function (a, b) {
-                var x = a[key].toLowerCase();
-                var y = b[key].toLowerCase();
+                var x = a.name.toLowerCase();
+                var y = b.name.toLowerCase();
                 if (way === 'ASC') {
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 }

@@ -193,6 +193,9 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 .ng-select.from_to_inputs .ng-select-container .ng-value-container {
   width: 100%;
 }
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
 .ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
   padding: 0;
   font-size: 16px;

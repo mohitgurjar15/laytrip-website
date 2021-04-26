@@ -43,7 +43,6 @@ import { FlightClassComponent } from './flight-class/flight-class.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { TravelerListComponent } from './traveler-list/traveler-list.component';
-import { MyTravelerComponent } from './my-traveler/my-traveler.component';
 import { PriceSummaryComponent } from './price-summary/price-summary.component';
 import { PaymentModeLoaderComponent } from './payment-mode-loader/payment-mode-loader.component';
 import { CartComponent } from './cart/cart.component';
@@ -96,7 +95,6 @@ import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.co
     FlightClassComponent,
     CartItemComponent,
     TravelerListComponent,
-    MyTravelerComponent,
     PriceSummaryComponent,
     PaymentModeLoaderComponent,
     CartComponent,
@@ -161,7 +159,6 @@ import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.co
     InfiniteScrollModule,
     CartItemComponent,
     TravelerListComponent,
-    MyTravelerComponent,
     PriceSummaryComponent,
     PaymentModeLoaderComponent,
     TravelerFormComponent,

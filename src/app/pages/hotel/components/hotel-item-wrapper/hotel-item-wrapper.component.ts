@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import {  ActivatedRoute } from '@angular/router';
@@ -9,6 +9,7 @@ declare const google: any;
 import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from 'src/app/services/hotel.service';
 import { AgmInfoWindow } from '@agm/core';
+import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-hotel-item-wrapper',
@@ -69,7 +70,7 @@ export class HotelItemWrapperComponent implements OnInit {
   itenery:string='';
   location:string='';
   city_id:string='';
-
+  @ViewChildren(NgbCarousel) carousel: QueryList<any>;
  
   constructor(
     private route: ActivatedRoute,
@@ -88,6 +89,27 @@ export class HotelItemWrapperComponent implements OnInit {
       this.itenery = this.route.snapshot.queryParams['itenery']
       this.location = this.route.snapshot.queryParams['location']
       this.city_id = this.route.snapshot.queryParams['city_id']
+  }
+
+  ngAfterViewInit(): void {
+    this.carousel.toArray().forEach(el => {
+    });
+  }
+
+  onSlide(event,roomNumber){
+    
+    if(event.direction=='left'){
+      if(this.hotelDetails[roomNumber].activeSlide<this.hotelDetails[roomNumber].dots){
+        this.hotelDetails[roomNumber].activeSlide+=1;
+      }
+    }
+    else{
+      console.log(this.hotelDetails[roomNumber].activeSlide,"---")
+      if(this.hotelDetails[roomNumber].activeSlide>1){
+        this.hotelDetails[roomNumber].activeSlide-=1;
+      }
+    }
+    console.log("Event",this.hotelDetails[roomNumber].activeSlide)
   }
 
   ngOnInit() {
@@ -124,7 +146,9 @@ export class HotelItemWrapperComponent implements OnInit {
               medium:image,
               big:image
             });
-        }
+          }
+          this.hotelDetails[i].dots = this.hotelDetails[i].galleryImages.length>5 ? 5 :this.hotelDetails[i].galleryImages.length;
+          this.hotelDetails[i].activeSlide = 1;
       }
       this.hotelList = [...this.hotelListArray];
       if(this.bounds){

@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
   <!-- <meta name="robots" content="noindex" /> -->
-  <meta name="description" content="Welcome to Laytrip! Layaway travel for everyone. Flights, hotels, home and car rentals.">
+  <meta name="description"
+    content="Welcome to Laytrip! Layaway travel for everyone. Flights, hotels, home and car rentals.">
   <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
   <meta http-equiv="cache-control" content="max-age=0" />
   <meta http-equiv="Expires" content="-1" />
@@ -14,15 +15,15 @@
   <title>Laytrip - Layaway Travel for Everyone</title>
   <base href="/">
   <link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap"
-  type="text/css">
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap"
+    type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  type="text/css" />
-  
+    type="text/css" />
+
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU&amp;libraries=places"
-  type="text/javascript"></script>
+    type="text/javascript"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Q6CPSPBTH"></script>
 
   <style>
@@ -51,8 +52,8 @@
       left: 0;
     }
 
-    @media (max-width: 768px){
-      body #fc_frame.fc_open123{
+    @media (max-width: 768px) {
+      body #fc_frame.fc_open123 {
         right: 0px !important;
       }
     }
@@ -72,7 +73,7 @@
         cssNames: {
           widget: "custom_fc_frame",
           open: 'fc_open123',
-        expanded: 'fc_expanded123'
+          expanded: 'fc_expanded123'
         }
       }
     });
@@ -92,31 +93,34 @@
 
   function initialize(i, t) { var e; i.getElementById(t) ? initFreshChat() : ((e = i.createElement("script")).id = t, e.async = !0, e.src = "https://wchat.freshchat.com/js/widget.js", e.onload = initFreshChat, i.head.appendChild(e)) } function initiateCall() { initialize(document, "freshchat-js-sdk") } window.addEventListener ? window.addEventListener("load", initiateCall, !1) : window.attachEvent("load", initiateCall, !1);
 
-  if(window.location.host=='laytrip.com'){
+  if (window.location.host == 'laytrip.com') {
 
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    
+
     gtag('config', 'G-6Q6CPSPBTH');
   }
   var urlPath = window.location.pathname.split('/');
   var lottieModule = 'flight';
-  if(urlPath.includes('hotel')){
+  if (urlPath.includes('hotel')) {
     lottieModule = 'hotel';
   }
-
 </script>
 
 <body>
   <div class="loader_full_page" id="loader_full_page">
-    <div id="lottie">
-      <lottie-player  id="index-lottie" style="width: 250px; height: 200px;"  class="animation_player" src="../assets/lottie-json/flight/data.json" background="transparent" speed="1" loop autoplay>
-      </lottie-player> 
+    <div id="lottie">  
+      <lottie-player id="index-lottie" style="width: 250px; height: 200px;" class="animation_player"
+        src="" background="transparent" speed="1" loop autoplay>
+      </lottie-player>
     </div>
   </div>
+  <script>
+    document.getElementById('index-lottie').src = '../assets/lottie-json/' + lottieModule + '/data.json';
+  </script>
 
   <app-root></app-root>
 </body>
-
+  
 </html>

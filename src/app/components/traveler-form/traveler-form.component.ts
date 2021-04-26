@@ -131,7 +131,7 @@ export class TravelerFormComponent implements OnInit {
     if(this.userInfo.roleId!=7){
       this.accountHolderEmail=this.userInfo.email;
     }
-    console.log("this.accountHolderEmail",this.userInfo,this.accountHolderEmail)
+    //console.log("this.accountHolderEmail",this.userInfo,this.accountHolderEmail)
 
   }
 
@@ -172,6 +172,7 @@ export class TravelerFormComponent implements OnInit {
       })
     });
 
+    
     this.checkOutService.getTravelers.subscribe((travelers: any) => {
       this.myTravelers = travelers;
       if (this.myTravelers.length == 0) {

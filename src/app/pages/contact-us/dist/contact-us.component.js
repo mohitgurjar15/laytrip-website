@@ -116,6 +116,7 @@ var ContactUsComponent = /** @class */ (function () {
             var fileSize = Math.floor(fileList_1[0].size / 1000);
             this.image = '';
             if (fileList_1[0] && (fileList_1[0].type == 'image/jpg' ||
+                fileList_1[0].type == 'image/jpeg' ||
                 fileList_1[0].type == 'image/png' ||
                 fileList_1[0].type == 'application/pdf')) {
                 if (fileSize > 10000) {
@@ -143,7 +144,7 @@ var ContactUsComponent = /** @class */ (function () {
                 this.imageFileError = true;
                 var attatchData = {
                     image: this.image ? this.image : this.defaultImage,
-                    errorMsg: this.imageFileError ? 'Error attaching, try again' : '',
+                    errorMsg: this.imageFileError ? 'Only .jpg,jpeg,png and pdf files are allowed' : '',
                     fileName: this.fileName,
                     is_error: this.imageFileError
                 };

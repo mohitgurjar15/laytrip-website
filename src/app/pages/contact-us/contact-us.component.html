@@ -80,7 +80,7 @@
                                     <div class="listing_lines_wrps" *ngFor="let attatchment of attatchmentFiles; let i = index">
                                         <div class="uploaded_list">
                                             <img [src]="attatchment.image || defaultImage" alt="" />
-
+ 
                                             <h5> {{ attatchment.fileName }} </h5>
                                             <button type="button" class="close" (click)="removeAttatchedFile(i);">
                                                 <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg"
