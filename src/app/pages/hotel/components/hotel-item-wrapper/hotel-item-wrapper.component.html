@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-lg-12" [hidden]="!isMapView">
                     <agm-map #gm (mapClick)="closeWindow($event)" [latitude]="defaultLat" [longitude]="defaultLng"
-                        [zoom]="10" (boundsChange)="checkMarkersInBounds($event)">
+                        minZoom="2" [zoom]="10" (boundsChange)="checkMarkersInBounds($event)">
                         <agm-marker #marker *ngFor="let hotel of hotelListArray;let i = index;"
                             [latitude]="hotel.geocodes.latitude" [longitude]="hotel.geocodes.longitude"
                             [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/circle.svg', scaledSize: {height: 80,width: 48}}"
