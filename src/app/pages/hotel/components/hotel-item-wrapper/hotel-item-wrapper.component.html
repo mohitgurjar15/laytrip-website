@@ -72,11 +72,11 @@
                                                                       </div>
                                                                     </ng-template>
                                                                 </ngb-carousel>
-                                                                <ul class="slider_dots">
+                                                                <div class="slider_dots">
                                                                     <ng-container *ngFor="let k of [].constructor(item.dots); let j = index">
-                                                                      <li [ngClass]="{'active':item.activeSlide==j+1}" (click)="changeSlide(j+1)"></li>
+                                                                      <span [ngClass]="{'active':item.activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
                                                                     </ng-container>
-                                                                </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -174,11 +174,11 @@
                                                 </div>
                                             </ng-template>
                                         </ngb-carousel>
-                                        <ul class="slider_dots">
+                                        <div class="slider_dots">
                                             <ng-container *ngFor="let k of [].constructor(item.dots); let j = index">
-                                              <li [ngClass]="{'active':item.activeSlide==j+1}" (click)="changeSlide(j+1)"></li>
+                                              <span [ngClass]="{'active':item.activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
                                             </ng-container>
-                                          </ul>
+                                        </div>
                                     </div>
                                     <div class="middle_part">
                                         <div class="detail_info">
