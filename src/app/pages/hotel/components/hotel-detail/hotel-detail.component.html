@@ -424,20 +424,25 @@
     <div class="detail_box_wrpr">
       <div class="left_box_wrps">
         <div class="main_slider_big">
-        <!-- <ngx-gallery [options]="galleryOptionsMain" [images]="galleryImages"></ngx-gallery> -->
-        <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
+          <ngb-carousel [interval]="false" [showNavigationIndicators]="false" (slide)=onMainSlide($event)>
             <ng-template ngbSlide *ngFor="let image of galleryImages">
               <div class="picsum-img-wrapper">
-                <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                <img src={{image.big}}
+                  onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
               </div>
             </ng-template>
-        </ngb-carousel>
+          </ngb-carousel>
+          <ul class="slider_dots">
+            <ng-container *ngFor="let k of [].constructor(dots); let j = index">
+              <li [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></li>
+            </ng-container>
+          </ul>
         </div>
         <div class="section_description" *ngIf="isCartFull">
           <span class="sec_text">10 items cart maximum, please Checkout and start another Cart if you require
-              more than 10.</span>
+            more than 10.</span>
           <a (click)="removeCartFullError()" href="javascript:void(0);"><img
-                  src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+              src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
         </div>
         <div class="description_wrpper">
           <span class="upper_descrip">
@@ -452,7 +457,7 @@
 
           <div class="map_wrapper">
             <!-- iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" -->
-            <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
+            <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude" minZoom="2"
               [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
               <agm-marker
                 [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
@@ -488,14 +493,19 @@
                           <div class="box_img">
                             <div class="block_im">
                               <div class="hotel_list_img_wrp">
-                                <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery> -->
-                                <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
+                                <ngb-carousel #maincarousel [interval]="false" [showNavigationIndicators]="false" (slide)=onMainSlide($event)>
                                   <ng-template ngbSlide *ngFor="let image of galleryImages">
                                     <div class="picsum-img-wrapper">
-                                      <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                                      <img src={{image.big}}
+                                        onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                                     </div>
                                   </ng-template>
-                              </ngb-carousel>
+                                </ngb-carousel>
+                                <ul class="slider_dots">
+                                  <ng-container *ngFor="let k of [].constructor(dots); let j = index">
+                                    <li [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></li>
+                                  </ng-container>
+                                </ul>
                                 <!-- <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image"
                                   class="blank_image_box"> -->
                               </div>
@@ -538,22 +548,25 @@
                           <p>Full Payment <span>${{ room.selling.total | number : '1.2-2' }}</span></p>
                         </div>
                       </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">Select</a>
-
                     </div>
                   </div>
                 </div>
                 <div class="mobile_box">
 
                   <div class="hotel_list_img_wrp">
-                    <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery> -->
-                    <ngb-carousel [interval]="false" [showNavigationIndicators]="false">
+                    <ngb-carousel #maincarousel [interval]="false" [showNavigationIndicators]="false" (slide)=onMainSlide($event)>
                       <ng-template ngbSlide *ngFor="let image of galleryImages">
                         <div class="picsum-img-wrapper">
-                          <img src={{image.big}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                          <img src={{image.big}}
+                            onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                         </div>
                       </ng-template>
                     </ngb-carousel>
-                    
+                    <ul class="slider_dots">
+                      <ng-container *ngFor="let k of [].constructor(dots); let j = index">
+                        <li [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></li>
+                      </ng-container>
+                    </ul>
                   </div>
                   <div class="middle_part">
                     <div class="detail_info">
@@ -673,7 +686,7 @@
       <div class="right_box_wrps desk_right">
 
         <div class="map_wrapper">
-          <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
+          <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude" minZoom="2"
             [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
             <!--               iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
  -->

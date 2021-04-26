@@ -209,10 +209,50 @@ agm-map {
                 flex: 5;
                 padding-right: 20px;
 
+
+                .main_slider_big{
+                    position: relative;
+                    .slider_dots{
+                        z-index: 9999;
+                        padding: 0;
+                        margin: 0;
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        bottom: 10px;
+                        justify-content: center;
+                        width: 100%;
+                        li{
+                            margin: 0 2px;
+                            width: 6px;
+                            height: 6px;
+                            border-radius: 50%;
+                            padding: 1px;
+                            background-color: rgba(255,255,255,0.6);
+                            &::marker{
+                                display: none;
+                                color: transparent;
+                            }
+                            &.active{
+                                background-color: $background-white;
+                            }
+                        }
+                    }
+                }
+                
+
                 @include tab-view {
                     flex: auto;
                     padding-right: 0;
                     width: 100%;
+                }
+                .section_description{
+                    @include tab-view {
+                        transform: translate(-20%, -40%);
+                        bottom: 0;
+                        position: fixed;    
+                        font-size: 12px;
+                    }
                 }
             }
 
@@ -378,10 +418,38 @@ agm-map {
                                 /* height: 140px; */
                                 flex: 1;
                                 z-index: 9;
+                                position: relative;
 
                                 ngx-gallery {
                                     @include tab-view {
                                         min-height: 135px;
+                                    }
+                                }
+
+                                .slider_dots{
+                                    z-index: 9999;
+                                    padding: 0;
+                                    margin: 0;
+                                    position: absolute;
+                                    display: flex;
+                                    align-items: center;
+                                    bottom: 10px;
+                                    justify-content: center;
+                                    width: 100%;
+                                    li{
+                                        margin: 0 2px;
+                                        width: 6px;
+                                        height: 6px;
+                                        border-radius: 50%;
+                                        padding: 1px;
+                                        background-color: rgba(255,255,255,0.6);
+                                        &::marker{
+                                            display: none;
+                                            color: transparent;
+                                        }
+                                        &.active{
+                                            background-color: $background-white;
+                                        }
                                     }
                                 }
 
@@ -654,6 +722,33 @@ agm-map {
                                         @include tab-view {
                                             display: flex;
                                             justify-content: center;
+                                        }
+
+                                        .slider_dots{
+                                            z-index: 9999;
+                                            padding: 0;
+                                            margin: 0;
+                                            position: absolute;
+                                            display: flex;
+                                            align-items: center;
+                                            bottom: 10px;
+                                            justify-content: center;
+                                            width: 100%;
+                                            li{
+                                                margin: 0 2px;
+                                                width: 6px;
+                                                height: 6px;
+                                                border-radius: 50%;
+                                                padding: 1px;
+                                                background-color: rgba(255,255,255,0.6);
+                                                &::marker{
+                                                    display: none;
+                                                    color: transparent;
+                                                }
+                                                &.active{
+                                                    background-color: $background-white;
+                                                }
+                                            }
                                         }
 
                                         .carousel {

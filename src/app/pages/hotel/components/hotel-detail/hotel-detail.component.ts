@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {  NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from '../../../../services/hotel.service';
@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { collect } from 'collect.js';
 import { CommonFunction } from '../../../../_helpers/common-function';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
 import { CartService } from '../../../../services/cart.service';
 declare var $: any;
@@ -25,7 +25,7 @@ export class HotelDetailComponent implements OnInit {
   hotelToken;
   hotelDetails;
   hotelRoomArray = [];
-  imageTemp = [];
+  imageTemp=[];
   loading:boolean = false;
   roomLoading:boolean=false;
   currency;
@@ -42,10 +42,13 @@ export class HotelDetailComponent implements OnInit {
     }
   };
   dataLoading = false;
-
+  @ViewChild('maincarousel',null) maincarousel: NgbCarousel;
+  @ViewChildren(NgbCarousel) carousel: QueryList<any>;
   galleryOptions: NgxGalleryOptions[];
   galleryOptionsMain: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
+  galleryImages;
+  activeSlide=1;
+  dots=5;
   cartItems = [];
   addCartLoading:boolean=false;
   isNotFound:boolean=false;
@@ -67,27 +70,6 @@ export class HotelDetailComponent implements OnInit {
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     let occupancies;
-    this.galleryOptions = [
-      {
-        width: '270px',
-        height: '100%',
-        thumbnails: false,
-        imageSwipe:true,
-        previewRotate:true,
-        preview:false,
-      }
-    ];
-
-    this.galleryOptionsMain = [
-      {
-        width: '100%',
-        height: '400px',
-        thumbnails: false,
-        imageSwipe:true,
-        previewRotate:true,
-        preview:false,
-      }
-    ];
 
     this.route.params.subscribe(params => {
       if (params) {
@@ -117,6 +99,7 @@ export class HotelDetailComponent implements OnInit {
           thumbnail: res.data.hotel.thumbnail
         };
         if (res.data.hotel.images) {
+
           res.data.hotel.images.forEach(imageUrl => {
             this.imageTemp.push({
               small: `${imageUrl}`,
@@ -126,6 +109,7 @@ export class HotelDetailComponent implements OnInit {
             });
             this.galleryImages = this.imageTemp;
           });
+
         }
         occupancies = collect(res.data.details.occupancies);
         this.roomSummary.roomDetail.checkIn = res.data.details.check_in;
@@ -164,7 +148,7 @@ export class HotelDetailComponent implements OnInit {
 
   selectRoom(roomInfo) {
     
-    if (this.cartItems && this.cartItems.length >= 10) {
+     if (this.cartItems && this.cartItems.length >= 10) {
       this.addCartLoading=false;
       this.isCartFull=true;
       //this.maxCartValidation.emit(true)
@@ -227,5 +211,24 @@ export class HotelDetailComponent implements OnInit {
       target.scrollIntoView({behavior: 'smooth', block: "start",inline: 'nearest'});
     }
     //document.getElementsByClassName('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  ngAfterViewInit(): void {
+    this.carousel.toArray().forEach(el => {
+    });
+  }
+
+  onMainSlide(event){
+    
+    if(event.direction=='left'){
+      if(this.activeSlide<this.dots){
+        this.activeSlide+=1;
+      }
+    }
+    else{
+      if(this.activeSlide>1){
+        this.activeSlide-=1;
+      }
+    }
   }
 }
