@@ -30,7 +30,7 @@
     <div class="result_listing hotel_map_listings"  >
         <div class="col-lg-12" style="padding: 0;">
             <div class="row">
-                <div class="col-lg-12" [hidden]="!isMapView">
+                <div class="col-lg-12" [ngClass]="isMapView == true ? 'show-map' : 'hide-map'">
                     <agm-map #gm (mapClick)="closeWindow($event)" [latitude]="defaultLat" [longitude]="defaultLng" [zoom]="10"  (boundsChange)="checkMarkersInBounds($event)" >
                             <agm-marker #marker *ngFor="let hotel of hotelListArray;let i = index;" [latitude]="hotel.geocodes.latitude"
                                 [longitude]="hotel.geocodes.longitude"
@@ -63,13 +63,20 @@
                                                                     [images]="item.galleryImages"></ngx-gallery>
             
                                                                 <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box"> -->
-                                                                <ngb-carousel [interval]="false" [showNavigationIndicators]="false" [showNavigationArrows]="item.galleryImages.length > 0? true:false">
+                                                                <ngb-carousel #carousel [interval]="false" [showNavigationIndicators]="false" [showNavigationArrows]="item.galleryImages.length > 0? true:false" (slide)=onSlide($event,blockIndex)>
                                                                     <ng-template ngbSlide *ngFor="let image of item.galleryImages">
                                                                       <div class="picsum-img-wrapper">
                                                                         <img src={{image.small}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                                                                       </div>
                                                                     </ng-template>
                                                                 </ngb-carousel>
+                                                                <ul>
+                                                                    <ng-container *ngFor="let k of [].constructor(item.dots); let j = index">
+                                                                      <li [ngClass]="{'active':item.activeSlide==j+1}" (click)="changeSlide(j+1)">
+                                                                        ○
+                                                                      </li>
+                                                                    </ng-container>
+                                                                  </ul>
                                                             </div>
                                                         </div>
                                                     </div>
