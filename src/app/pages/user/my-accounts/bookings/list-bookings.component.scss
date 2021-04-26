@@ -572,6 +572,7 @@
                                     overflow: visible;
                                     background-color: $background-white;
                                     z-index: 999;
+                                    border-bottom: none;
                                     &::before {
                                         border: none;
                                     }
