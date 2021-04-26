@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {  NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from '../../../../services/hotel.service';
@@ -25,7 +25,7 @@ export class HotelDetailComponent implements OnInit {
   hotelToken;
   hotelDetails;
   hotelRoomArray = [];
-  imageTemp = [];
+  imageTemp=[];
   loading:boolean = false;
   roomLoading:boolean=false;
   currency;
@@ -42,10 +42,13 @@ export class HotelDetailComponent implements OnInit {
     }
   };
   dataLoading = false;
+  @ViewChild('maincarousel',null) maincarousel: NgbCarousel;
   @ViewChildren(NgbCarousel) carousel: QueryList<any>;
   galleryOptions: NgxGalleryOptions[];
   galleryOptionsMain: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
+  galleryImages;
+  activeSlide=1;
+  dots=5;
   cartItems = [];
   addCartLoading:boolean=false;
   isNotFound:boolean=false;
@@ -67,27 +70,6 @@ export class HotelDetailComponent implements OnInit {
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     let occupancies;
-    this.galleryOptions = [
-      {
-        width: '270px',
-        height: '100%',
-        thumbnails: false,
-        imageSwipe:true,
-        previewRotate:true,
-        preview:false,
-      }
-    ];
-
-    this.galleryOptionsMain = [
-      {
-        width: '100%',
-        height: '400px',
-        thumbnails: false,
-        imageSwipe:true,
-        previewRotate:true,
-        preview:false,
-      }
-    ];
 
     this.route.params.subscribe(params => {
       if (params) {
@@ -117,6 +99,7 @@ export class HotelDetailComponent implements OnInit {
           thumbnail: res.data.hotel.thumbnail
         };
         if (res.data.hotel.images) {
+
           res.data.hotel.images.forEach(imageUrl => {
             this.imageTemp.push({
               small: `${imageUrl}`,
@@ -126,6 +109,7 @@ export class HotelDetailComponent implements OnInit {
             });
             this.galleryImages = this.imageTemp;
           });
+
         }
         occupancies = collect(res.data.details.occupancies);
         this.roomSummary.roomDetail.checkIn = res.data.details.check_in;
@@ -234,17 +218,16 @@ export class HotelDetailComponent implements OnInit {
     });
   }
 
-  onSlide(event,roomNumber){
+  onMainSlide(event){
     
     if(event.direction=='left'){
-      if(this.hotelDetails[roomNumber].activeSlide<this.hotelDetails[roomNumber].dots){
-        this.hotelDetails[roomNumber].activeSlide+=1;
+      if(this.activeSlide<this.dots){
+        this.activeSlide+=1;
       }
     }
     else{
-      console.log(this.hotelDetails[roomNumber].activeSlide,"---")
-      if(this.hotelDetails[roomNumber].activeSlide>1){
-        this.hotelDetails[roomNumber].activeSlide-=1;
+      if(this.activeSlide>1){
+        this.activeSlide-=1;
       }
     }
   }
