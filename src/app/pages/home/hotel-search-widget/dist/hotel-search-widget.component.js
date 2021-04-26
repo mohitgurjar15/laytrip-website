@@ -141,6 +141,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                 _this.searchHotelInfo.city_id = hotelInfo.city_id;
                 _this.searchHotelInfo.longitude = hotelInfo.long;
                 _this.checkInMinDate = moment(_this.customStartDateValidation).toDate();
+                console.log(hotelInfo, _this.searchHotelInfo);
                 _this.rangeDates = [_this.checkInDate, _this.checkOutDate];
             }
         });

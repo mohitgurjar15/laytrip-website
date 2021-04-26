@@ -82,12 +82,13 @@ var BookingComponent = /** @class */ (function () {
                 cart.travelers = items.data[i].travelers;
                 cart.id = items.data[i].id;
                 cart.is_available = items.data[i].is_available;
-                /*  this.modules.push(items.data[i].type);
-                 if(this.modules.some(x => x === "flight")){
-                   this.lottieLoaderType = "flight";
-                 } else {
-                   this.lottieLoaderType = "hotel";
-                 } */
+                _this.modules.push(items.data[i].type);
+                if (_this.modules.some(function (x) { return x === "flight"; })) {
+                    _this.lottieLoaderType = "flight";
+                }
+                else {
+                    _this.lottieLoaderType = "hotel";
+                }
                 if (items.data[i].type == 'flight') {
                     cart.module_info = items.data[i].moduleInfo[0];
                     cart.old_module_info = {
@@ -96,6 +97,7 @@ var BookingComponent = /** @class */ (function () {
                     price.selling_price = items.data[i].moduleInfo[0].selling_price;
                     price.departure_date = items.data[i].moduleInfo[0].departure_date;
                     price.start_price = items.data[i].moduleInfo[0].start_price;
+                    price.type = items.data[i].type;
                     price.location = items.data[i].moduleInfo[0].departure_code + "-" + items.data[i].moduleInfo[0].arrival_code;
                 }
                 else if (items.data[i].type == 'hotel') {
@@ -103,6 +105,8 @@ var BookingComponent = /** @class */ (function () {
                     cart.old_module_info = {
                         selling_price: items.data[i].oldModuleInfo[0].selling.total
                     };
+                    price.type = items.data[i].type;
+                    price.price_break_down = items.data[i].moduleInfo[0].selling;
                     price.selling_price = items.data[i].moduleInfo[0].selling.total;
                     price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in, "YYYY-MM-DD").format('DD/MM/YYYY');
                     price.start_price = 0;
@@ -110,6 +114,7 @@ var BookingComponent = /** @class */ (function () {
                 }
                 _this.carts.push(cart);
                 _this.cartPrices.push(price);
+                console.log(_this.carts);
             }
             _this.cartService.setCartItems(_this.carts);
             _this.cartService.setCartPrices(_this.cartPrices);
@@ -251,6 +256,21 @@ var BookingComponent = /** @class */ (function () {
             },
             type4: {
                 adults: []
+            },
+            type5: {
+                adults: []
+            },
+            type6: {
+                adults: []
+            },
+            type7: {
+                adults: []
+            },
+            type8: {
+                adults: []
+            },
+            type9: {
+                adults: []
             }
         });
         if (this.addCardRef) {
@@ -259,6 +279,7 @@ var BookingComponent = /** @class */ (function () {
         this.cartService.setCartNumber(0);
         this.cartService.setCardId(0);
         this.$cartIdsubscription.unsubscribe();
+        this.checkOutService.setTravelers([]);
     };
     BookingComponent.prototype.redirectTo = function (uri) {
         var _this = this;
@@ -361,7 +382,7 @@ var BookingComponent = /** @class */ (function () {
                             message = " " + this.carts[i].module_info.departure_code + "- " + this.carts[i].module_info.arrival_code + " ,";
                         }
                         if (this.carts[i].type == 'hotel') {
-                            message = " " + this.carts[i].module_info.title + " ,";
+                            message = " " + this.carts[i].module_info.hotel_name + " ,";
                         }
                         this.validationErrorMessage += message;
                     }
@@ -473,7 +494,9 @@ var BookingComponent = /** @class */ (function () {
                     travelers.push({
                         traveler_id: data[k].userId
                     });
-                    data[k].dob = moment(data[k].dob, "MM/DD/YYYY").format("YYYY-MM-DD");
+                    if (data[k].dob) {
+                        data[k].dob = moment(data[k].dob, "MM/DD/YYYY").format("YYYY-MM-DD");
+                    }
                     if (data[k].passport_expiry) {
                         data[k].passport_expiry = moment(data[k].passport_expiry, "MM/DD/YYYY").format("YYYY-MM-DD");
                     }

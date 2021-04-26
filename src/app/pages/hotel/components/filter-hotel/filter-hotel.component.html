@@ -248,7 +248,7 @@
 
                 <div class="search_suggetion_main" *ngIf="isHotelSearch">
                   <div class="close_btn">
-                    <button type="button" class="close">
+                    <button type="button" class="close" (click)="clearHotelSearch()">
                       <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                     </button>
                   </div>
