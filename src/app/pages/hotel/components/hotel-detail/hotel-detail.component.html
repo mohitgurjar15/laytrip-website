@@ -457,7 +457,7 @@
 
           <div class="map_wrapper">
             <!-- iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" -->
-            <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
+            <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude" minZoom="2"
               [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
               <agm-marker
                 [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
@@ -686,7 +686,7 @@
       <div class="right_box_wrps desk_right">
 
         <div class="map_wrapper">
-          <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
+          <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude" minZoom="2"
             [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
             <!--               iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
  -->
