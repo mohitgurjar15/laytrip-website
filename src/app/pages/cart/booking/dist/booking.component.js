@@ -373,6 +373,7 @@ var BookingComponent = /** @class */ (function () {
         for (var i in Object.keys(this.travelerForm.controls)) {
             message = '';
             for (var j = 0; j < this.travelerForm.controls["type" + i]['controls'].adults.controls.length; j++) {
+                console.log(this.travelerForm.controls["type" + i]['controls'].adults.controls[j]);
                 if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls["type" + i]['controls'].adults.controls[j].status == 'INVALID') {
                     if (this.validationErrorMessage == '') {
                         this.validationErrorMessage = 'Complete required fields in Traveler Details for';

@@ -24,6 +24,7 @@ var ContactUsComponent = /** @class */ (function () {
         this.submitted = false;
         this.fileUploadErrorMessage = '';
         this.maxUploadError = '';
+        this.fileNotAllow = '';
         this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
         this.image = '';
         this.pdfIcon = this.s3BucketUrl + 'assets/images/pdf.jpeg';
@@ -47,6 +48,7 @@ var ContactUsComponent = /** @class */ (function () {
     };
     ContactUsComponent.prototype.onSubmit = function (data) {
         var _this = this;
+        console.log(this.files);
         this.loading = true;
         this.submitted = true;
         if (this.contactUsForm.invalid) {
@@ -133,7 +135,9 @@ var ContactUsComponent = /** @class */ (function () {
                     var attatchData = {
                         image: _this.image ? _this.image : _this.defaultImage,
                         errorMsg: _this.imageFileError ? _this.fileUploadErrorMessage : '',
-                        fileName: _this.fileName,
+                        fullFileName: _this.fileName,
+                        fileName: _this.fileName.split(/\.(?=[^\.]+$)/)[0],
+                        extension: _this.fileName.split(/\.(?=[^\.]+$)/)[1],
                         is_error: _this.imageFileError
                     };
                     _this.attatchmentFiles.push(attatchData);
@@ -142,18 +146,23 @@ var ContactUsComponent = /** @class */ (function () {
             }
             else {
                 this.imageFileError = true;
-                var attatchData = {
-                    image: this.image ? this.image : this.defaultImage,
-                    errorMsg: this.imageFileError ? 'Only .jpg,jpeg,png and pdf files are allowed' : '',
-                    fileName: this.fileName,
-                    is_error: this.imageFileError
-                };
-                this.attatchmentFiles.push(attatchData);
+                /* var attatchData = {
+                  image: this.image ? this.image : this.defaultImage,
+                  errorMsg: this.imageFileError ? 'Only .jpg,jpeg,png and pdf files are allowed' : '',
+                  fileName : this.fileName,
+                  is_error : this.imageFileError
+                }; */
+                this.maxUploadError = 'Only .jpg, .jpeg, .png and .pdf files are allowed.';
+                // this.attatchmentFiles.push(attatchData);
             }
+        }
+        else {
+            this.maxUploadError = 'Something went wrong, Please try again!';
         }
     };
     ContactUsComponent.prototype.removeAttatchedFile = function (i) {
         this.attatchmentFiles.splice(i, 1);
+        this.maxUploadError = '';
     };
     __decorate([
         core_1.ViewChild('fileInput', { static: false })

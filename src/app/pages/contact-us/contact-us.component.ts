@@ -25,6 +25,7 @@ export class ContactUsComponent implements OnInit {
   submitted = false;
   fileUploadErrorMessage = '';
   maxUploadError = '';
+  fileNotAllow = '';
   fileObj;
   defaultImage = this.s3BucketUrl +'assets/images/profile_im.svg';
   image :any= '';
@@ -58,10 +59,12 @@ export class ContactUsComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       message: ['', [Validators.required]],
     });
+    
   }
 
 
   onSubmit(data) {
+    console.log(this.files)
     this.loading = true;
     this.submitted = true;
 
@@ -73,7 +76,7 @@ export class ContactUsComponent implements OnInit {
       this.loading = false;
       return;
     }
-   
+       
     let formdata = new FormData();
     formdata.append("name",this.contactUsForm.value.name);
     formdata.append("email",this.contactUsForm.value.email);
@@ -149,7 +152,6 @@ export class ContactUsComponent implements OnInit {
         
         reader.readAsDataURL(event.target.files[0]);
         this.fileObj = event.target.files[0];
-        
         reader.onload = (_event) => {
           this.defaultImage = '';
           this.image = fileList[0].type == 'application/pdf' ? this.pdfIcon : reader.result;
@@ -158,8 +160,10 @@ export class ContactUsComponent implements OnInit {
           var attatchData = {
             image: this.image ? this.image : this.defaultImage,
             errorMsg: this.imageFileError ? this.fileUploadErrorMessage : '',
-            fileName : this.fileName,
-            is_error : this.imageFileError
+            fullFileName : this.fileName,
+            fileName : this.fileName.split(/\.(?=[^\.]+$)/)[0],
+            extension : this.fileName.split(/\.(?=[^\.]+$)/)[1],
+            is_error : this.imageFileError,
           };
           this.attatchmentFiles.push(attatchData);
         };
@@ -167,18 +171,22 @@ export class ContactUsComponent implements OnInit {
         
       } else {
         this.imageFileError = true;
-        var attatchData = {
+        /* var attatchData = {
           image: this.image ? this.image : this.defaultImage,
           errorMsg: this.imageFileError ? 'Only .jpg,jpeg,png and pdf files are allowed' : '',
           fileName : this.fileName,
           is_error : this.imageFileError
-        };
-        this.attatchmentFiles.push(attatchData);
+        }; */
+        this.maxUploadError = 'Only .jpg, .jpeg, .png and .pdf files are allowed.'; 
+        // this.attatchmentFiles.push(attatchData);
       }     
+    } else {
+      this.maxUploadError = 'Something went wrong, Please try again!'; 
     }
   }
 
   removeAttatchedFile(i) {
     this.attatchmentFiles.splice(i,1);
+    this.maxUploadError = '';
   }
 }
