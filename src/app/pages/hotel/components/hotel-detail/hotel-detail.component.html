@@ -432,11 +432,11 @@
               </div>
             </ng-template>
           </ngb-carousel>
-          <ul class="slider_dots">
+          <div class="slider_dots">
             <ng-container *ngFor="let k of [].constructor(dots); let j = index">
-              <li [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></li>
+              <span [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
             </ng-container>
-          </ul>
+          </div>
         </div>
         <div class="section_description" *ngIf="isCartFull">
           <span class="sec_text">10 items cart maximum, please Checkout and start another Cart if you require
@@ -501,11 +501,11 @@
                                     </div>
                                   </ng-template>
                                 </ngb-carousel>
-                                <ul class="slider_dots">
+                                <div class="slider_dots">
                                   <ng-container *ngFor="let k of [].constructor(dots); let j = index">
-                                    <li [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></li>
+                                    <span [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
                                   </ng-container>
-                                </ul>
+                                </div>
                                 <!-- <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image"
                                   class="blank_image_box"> -->
                               </div>
@@ -562,11 +562,11 @@
                         </div>
                       </ng-template>
                     </ngb-carousel>
-                    <ul class="slider_dots">
+                    <div class="slider_dots">
                       <ng-container *ngFor="let k of [].constructor(dots); let j = index">
-                        <li [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></li>
+                        <span [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
                       </ng-container>
-                    </ul>
+                    </div>
                   </div>
                   <div class="middle_part">
                     <div class="detail_info">
