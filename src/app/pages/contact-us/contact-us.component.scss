@@ -113,6 +113,9 @@
                       width: 100%;
                       display: flex;
                       align-items: center;
+                      @include tab-view{
+                        max-width: 90%;
+                      }
                       h5 {
                         font-size: 12px;
                         font-weight: 400;
@@ -123,6 +126,9 @@
                         max-width: 84%;
                         width: auto;
                         margin-right: 2px;
+                        @include mobile-sm-view{
+                          max-width: 74%;
+                        }
                       }
                     }
 
