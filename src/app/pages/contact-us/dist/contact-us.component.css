@@ -445,11 +445,24 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   height: 28px;
   width: 30px;
 }
-.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list h5 {
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list .fileName {
   color: #878787;
   font-size: 12px;
-  margin: 0 0 0 10px;
   font-weight: 400;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list .fileName h5 {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0 0 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 84%;
+  width: auto;
+  margin-right: 2px;
 }
 .modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list button {
   cursor: pointer;

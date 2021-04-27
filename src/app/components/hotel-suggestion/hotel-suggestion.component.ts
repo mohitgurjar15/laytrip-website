@@ -55,7 +55,7 @@ export class HotelSuggestionComponent implements OnInit {
 
   searchHotel(searchItem) {
     this.loading = true;
-    const searchedData = { term: searchItem };
+    const searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
     this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
       this.loading = false;
       if (response && response.data && response.data.length) {
