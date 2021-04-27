@@ -26,7 +26,16 @@ export class HotelSuggestionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  searchLocation(event){
+  ngAfterContentChecked(){
+    // console.log(this.searchItem)
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    // console.log(changes)
+    if(changes['searchItem']){
+      // this.searchItem = changes['searchItem']; 
+    }
+  }
+    searchLocation(event){
     let notAllowedKey=[40,38,9,37,39];
     if((this.searchItem.length==0 && event.keyCode==8)){
       this.data = [];

@@ -24,7 +24,7 @@ export class ContactUsComponent implements OnInit {
   messageLenght = 0;
   submitted = false;
   fileUploadErrorMessage = '';
-  maxUploadError = '';
+  errorMessage = '';
   fileNotAllow = '';
   fileObj;
   defaultImage = this.s3BucketUrl +'assets/images/profile_im.svg';
@@ -64,7 +64,6 @@ export class ContactUsComponent implements OnInit {
 
 
   onSubmit(data) {
-    console.log(this.files)
     this.loading = true;
     this.submitted = true;
 
@@ -81,6 +80,7 @@ export class ContactUsComponent implements OnInit {
     formdata.append("name",this.contactUsForm.value.name);
     formdata.append("email",this.contactUsForm.value.email);
     formdata.append("message",this.contactUsForm.value.message);
+
     for (var i = 0; i < this.files.length; i++) { 
       formdata.append("file", this.files[i]);
     }
@@ -90,7 +90,7 @@ export class ContactUsComponent implements OnInit {
       this.loading = this.submitted = false;
       this.contactUsForm.reset();
       this.attatchmentFiles = this.files= [];
-      this.maxUploadError = '';
+      this.errorMessage = '';
       this.toastr.show(res.message, '', {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
@@ -120,20 +120,20 @@ export class ContactUsComponent implements OnInit {
     });
     this.contactUsForm.reset();
     this.attatchmentFiles = [];
-    this.maxUploadError = '';
+    this.errorMessage = '';
   }
 
-
   documentFileChange(event: any) {
-    this.maxUploadError = '';
+    console.log(event)
+    this.errorMessage = '';
     if(this.attatchmentFiles.length >= 5){
       $("#contact_modal").scrollTop(100);      
-      this.maxUploadError = 'Maximum upload of 5 files';
+      this.errorMessage = 'Maximum upload of 5 files';
       return;
     }
-    if (event.target.files && event.target.files[0]) {
+    if (event.target.files && event.target.files) {
       let reader = new FileReader();
-
+  
       this.fileUploadErrorMessage = '';
       this.imageFileError = false;      
       const fileList: FileList = event.target.files;
@@ -144,14 +144,23 @@ export class ContactUsComponent implements OnInit {
         fileList[0].type == 'image/jpeg' ||
         fileList[0].type == 'image/png' ||
         fileList[0].type == 'application/pdf')) {          
-
+  
         if (fileSize > 10000) {
           this.imageFileError = true;
           this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
         }
         
+        var sameFile = this.attatchmentFiles.filter(file=> {
+          if(file.fullFileName == fileList[0].name){
+            return true;
+          }
+        });
+        if(sameFile.length > 0){          
+          this.errorMessage = 'File already uploaded, Please try with different.';
+          return;
+        }
+       
         reader.readAsDataURL(event.target.files[0]);
-        this.fileObj = event.target.files[0];
         reader.onload = (_event) => {
           this.defaultImage = '';
           this.image = fileList[0].type == 'application/pdf' ? this.pdfIcon : reader.result;
@@ -167,26 +176,23 @@ export class ContactUsComponent implements OnInit {
           };
           this.attatchmentFiles.push(attatchData);
         };
-        this.files.push(this.fileObj);
+        this.files.push(event.target.files[0]);
         
       } else {
         this.imageFileError = true;
-        /* var attatchData = {
-          image: this.image ? this.image : this.defaultImage,
-          errorMsg: this.imageFileError ? 'Only .jpg,jpeg,png and pdf files are allowed' : '',
-          fileName : this.fileName,
-          is_error : this.imageFileError
-        }; */
-        this.maxUploadError = 'Only .jpg, .jpeg, .png and .pdf files are allowed.'; 
+       
+        this.errorMessage = 'Only .jpg, .jpeg, .png and .pdf files are allowed.'; 
         // this.attatchmentFiles.push(attatchData);
       }     
     } else {
-      this.maxUploadError = 'Something went wrong, Please try again!'; 
+      this.errorMessage = 'Something went wrong, Please try again.'; 
     }
-  }
+  } 
+ 
 
-  removeAttatchedFile(i) {
+  removeAttatchedFile(i,filename) {
     this.attatchmentFiles.splice(i,1);
-    this.maxUploadError = '';
+    this.files = this.files.filter(obj => obj.name !== filename);
+    this.errorMessage = '';
   }
 }

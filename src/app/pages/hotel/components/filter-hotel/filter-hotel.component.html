@@ -74,7 +74,7 @@
             </ul> -->
               <form [formGroup]="priceSlider">
                 <div class="custom_range_slide">
-                  <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
+                  <p>{{ currency?.symbol }}{{priceValue  | number : '1.2-2'}} - {{ currency?.symbol }}{{priceHighValue  | number : '1.2-2'}}</p>
                   <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
                     [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions"
                     (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
@@ -90,7 +90,7 @@
 
               <form [formGroup]="partialPriceSlider" >
                 <div class="custom_range_slide">
-                  <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol }}{{partialPaymentHighValue}}
+                  <p>{{ currency?.symbol }}{{partialPaymentValue  | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}}
                   </p>
                   <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
                     [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue"
@@ -293,7 +293,7 @@
               </ul> -->
               <form [formGroup]="priceSlider">
                 <div class="custom_range_slide">
-                  <p>{{ currency?.symbol }}{{priceValue}} - {{ currency?.symbol }}{{priceHighValue}}</p>
+                  <p>{{ currency?.symbol }}{{priceValue  | number : '1.2-2'}} - {{ currency?.symbol }}{{priceHighValue  | number : '1.2-2'}}</p>
                   <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue"
                     [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions"
                     (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
@@ -307,7 +307,7 @@
                </div>
               <form [formGroup]="partialPriceSlider" class="custom_range_form_slider">
                 <div class="custom_range_slide">
-                  <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol }}{{partialPaymentHighValue}}
+                  <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}}
                   </p>
                   <ng5-slider *ngIf="partialPaymentValue  && partialPaymentHighValue" [(value)]="partialPaymentValue"
                     [(highValue)]="partialPaymentHighValue" formControlName="partial_price"

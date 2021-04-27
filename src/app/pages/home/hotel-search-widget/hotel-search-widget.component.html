@@ -14,7 +14,7 @@
           <div class="hotel_where">
             <div class="search_area {{!validSearch && hotelSearchFormSubmitted}}" [ngClass]="{'hotel-error': !validSearch && hotelSearchFormSubmitted}">
               <label for="">Destination</label>
-              <app-hotel-suggestion [searchItem]=fromDestinationInfo.title (selectedHotel)="selectedHotel($event)" (validateSearch)="validateSearch($event)"></app-hotel-suggestion>
+              <app-hotel-suggestion [searchItem]="fromDestinationInfo.title" (selectedHotel)="selectedHotel($event)" (validateSearch)="validateSearch($event)"></app-hotel-suggestion>
             </div>
           </div>
         </li>

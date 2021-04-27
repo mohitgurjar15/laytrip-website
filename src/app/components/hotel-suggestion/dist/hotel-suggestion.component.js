@@ -23,6 +23,15 @@ var HotelSuggestionComponent = /** @class */ (function () {
     }
     HotelSuggestionComponent.prototype.ngOnInit = function () {
     };
+    HotelSuggestionComponent.prototype.ngAfterContentChecked = function () {
+        // console.log(this.searchItem)
+    };
+    HotelSuggestionComponent.prototype.ngOnChanges = function (changes) {
+        // console.log(changes)
+        if (changes['searchItem']) {
+            // this.searchItem = changes['searchItem']; 
+        }
+    };
     HotelSuggestionComponent.prototype.searchLocation = function (event) {
         var notAllowedKey = [40, 38, 9, 37, 39];
         if ((this.searchItem.length == 0 && event.keyCode == 8)) {

@@ -73,7 +73,7 @@
                                         <img src="{{s3BucketUrl}}assets/images/icon/pin.svg" alt="attach"> Attach          
                                         <input accept="image/png,image/jpg,.pdf" #fileInput type="file" formControlName="file"
                                             id="output" class="form-control input d-none"
-                                            (change)="documentFileChange($event)">
+                                            (change)="documentFileChange($event)" >
                                     </label>
                                 </a>
                                 <div class="upload_list_wrapper">
@@ -85,7 +85,7 @@
                                                 <h5>{{ attatchment.fileName }}</h5>
                                                 <span class="extension">.{{ attatchment.extension}}</span>
                                             </div>
-                                            <button type="button" class="close" (click)="removeAttatchedFile(i);">
+                                            <button type="button" class="close" (click)="removeAttatchedFile(i,attatchment.fullFileName);">
                                                 <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg"
                                                     alt="attach">
                                             </button>
@@ -115,8 +115,8 @@
                             <button type="submit">
                                 <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;{{'submit' | translate}}</button>
                         </div>
-                        <div class="block_api_error" *ngIf="maxUploadError != ''">
-                            {{maxUploadError}}
+                        <div class="block_api_error" *ngIf="errorMessage != ''">
+                            {{errorMessage}}
                         </div>
                         <!-- <div class="block_api_error" *ngIf="fileNotAllow != ''">
                             {{fileNotAllow}}
