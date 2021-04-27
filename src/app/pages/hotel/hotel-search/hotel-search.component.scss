@@ -221,14 +221,14 @@
     flex-direction: column;
     
 
-    @include tab-view {
+    @include ipad-view {
         flex-direction: row;
     }
 
     .filter_by {
         &.desktop_ver {
             margin-top: 35px;
-            @include tab-view {
+            @include ipad-view {
                 display: none;
             }
         }
@@ -236,7 +236,7 @@
 }
 
 .desk_versort {
-    @include tab-view {
+    @include ipad-view {
         display: none;
     }
 }
@@ -244,7 +244,7 @@
 .sortby_responsive {
     display: none;
 
-    @include tab-view {
+    @include ipad-view {
         display: block;
     }
 }
