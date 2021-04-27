@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
@@ -73,7 +73,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     public fb: FormBuilder,
     public router: Router,
     private route: ActivatedRoute,
-    private homeService: HomeService
+    private homeService: HomeService,
+    public cd : ChangeDetectorRef
 
   ) {
     this.hotelSearchForm = this.fb.group({
@@ -162,15 +163,15 @@ export class HotelSearchWidgetComponent implements OnInit {
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
         this.dealDateValidation();
-        this.searchHotelInfo.latitude =   hotelInfo.lat;
-        this.searchHotelInfo.city_id =   hotelInfo.city_id;
-        this.searchHotelInfo.longitude = hotelInfo.long;
-        
+        this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat=  hotelInfo.lat;
+        this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long= hotelInfo.long;
+        this.searchHotelInfo.city_id =  this.fromDestinationInfo.city_id = hotelInfo.city_id;
+        this.searchHotelInfo.location = this.fromDestinationInfo;
+
+        this.cd.detectChanges();
+        console.log(this.fromDestinationInfo)
         this.checkInMinDate = moment(this.customStartDateValidation).toDate();
-        
-        console.log(this)
-        console.log(this.searchHotelInfo)
-        console.log(this.fromDestinationInfo.title)
+             
         this.rangeDates = [this.checkInDate, this.checkOutDate];
       }
     });
