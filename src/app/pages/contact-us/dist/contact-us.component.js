@@ -23,7 +23,7 @@ var ContactUsComponent = /** @class */ (function () {
         this.messageLenght = 0;
         this.submitted = false;
         this.fileUploadErrorMessage = '';
-        this.maxUploadError = '';
+        this.errorMessage = '';
         this.fileNotAllow = '';
         this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
         this.image = '';
@@ -48,7 +48,6 @@ var ContactUsComponent = /** @class */ (function () {
     };
     ContactUsComponent.prototype.onSubmit = function (data) {
         var _this = this;
-        console.log(this.files);
         this.loading = true;
         this.submitted = true;
         if (this.contactUsForm.invalid) {
@@ -71,7 +70,7 @@ var ContactUsComponent = /** @class */ (function () {
             _this.loading = _this.submitted = false;
             _this.contactUsForm.reset();
             _this.attatchmentFiles = _this.files = [];
-            _this.maxUploadError = '';
+            _this.errorMessage = '';
             _this.toastr.show(res.message, '', {
                 toastClass: 'custom_toastr',
                 titleClass: 'custom_toastr_title',
@@ -100,21 +99,23 @@ var ContactUsComponent = /** @class */ (function () {
         });
         this.contactUsForm.reset();
         this.attatchmentFiles = [];
-        this.maxUploadError = '';
+        this.errorMessage = '';
     };
     ContactUsComponent.prototype.documentFileChange = function (event) {
         var _this = this;
-        this.maxUploadError = '';
+        console.log(event);
+        this.errorMessage = '';
         if (this.attatchmentFiles.length >= 5) {
             $("#contact_modal").scrollTop(100);
-            this.maxUploadError = 'Maximum upload of 5 files';
+            this.errorMessage = 'Maximum upload of 5 files';
             return;
         }
-        if (event.target.files && event.target.files[0]) {
+        if (event.target.files && event.target.files) {
             var reader_1 = new FileReader();
             this.fileUploadErrorMessage = '';
             this.imageFileError = false;
             var fileList_1 = event.target.files;
+            console.log(fileList_1);
             var fileSize = Math.floor(fileList_1[0].size / 1000);
             this.image = '';
             if (fileList_1[0] && (fileList_1[0].type == 'image/jpg' ||
@@ -146,23 +147,17 @@ var ContactUsComponent = /** @class */ (function () {
             }
             else {
                 this.imageFileError = true;
-                /* var attatchData = {
-                  image: this.image ? this.image : this.defaultImage,
-                  errorMsg: this.imageFileError ? 'Only .jpg,jpeg,png and pdf files are allowed' : '',
-                  fileName : this.fileName,
-                  is_error : this.imageFileError
-                }; */
-                this.maxUploadError = 'Only .jpg, .jpeg, .png and .pdf files are allowed.';
+                this.errorMessage = 'Only .jpg, .jpeg, .png and .pdf files are allowed.';
                 // this.attatchmentFiles.push(attatchData);
             }
         }
         else {
-            this.maxUploadError = 'Something went wrong, Please try again!';
+            this.errorMessage = 'Something went wrong, Please try again!';
         }
     };
     ContactUsComponent.prototype.removeAttatchedFile = function (i) {
         this.attatchmentFiles.splice(i, 1);
-        this.maxUploadError = '';
+        this.errorMessage = '';
     };
     __decorate([
         core_1.ViewChild('fileInput', { static: false })

@@ -24,7 +24,7 @@ export class ContactUsComponent implements OnInit {
   messageLenght = 0;
   submitted = false;
   fileUploadErrorMessage = '';
-  maxUploadError = '';
+  errorMessage = '';
   fileNotAllow = '';
   fileObj;
   defaultImage = this.s3BucketUrl +'assets/images/profile_im.svg';
@@ -64,7 +64,6 @@ export class ContactUsComponent implements OnInit {
 
 
   onSubmit(data) {
-    console.log(this.files)
     this.loading = true;
     this.submitted = true;
 
@@ -90,7 +89,7 @@ export class ContactUsComponent implements OnInit {
       this.loading = this.submitted = false;
       this.contactUsForm.reset();
       this.attatchmentFiles = this.files= [];
-      this.maxUploadError = '';
+      this.errorMessage = '';
       this.toastr.show(res.message, '', {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
@@ -120,23 +119,24 @@ export class ContactUsComponent implements OnInit {
     });
     this.contactUsForm.reset();
     this.attatchmentFiles = [];
-    this.maxUploadError = '';
+    this.errorMessage = '';
   }
 
-
   documentFileChange(event: any) {
-    this.maxUploadError = '';
+    console.log(event)
+    this.errorMessage = '';
     if(this.attatchmentFiles.length >= 5){
       $("#contact_modal").scrollTop(100);      
-      this.maxUploadError = 'Maximum upload of 5 files';
+      this.errorMessage = 'Maximum upload of 5 files';
       return;
     }
-    if (event.target.files && event.target.files[0]) {
+    if (event.target.files && event.target.files) {
       let reader = new FileReader();
-
+  
       this.fileUploadErrorMessage = '';
       this.imageFileError = false;      
       const fileList: FileList = event.target.files;
+      console.log(fileList)
       var fileSize  = Math.floor(fileList[0].size / 1000);
       this.image = '';
       if (fileList[0] && (
@@ -144,7 +144,7 @@ export class ContactUsComponent implements OnInit {
         fileList[0].type == 'image/jpeg' ||
         fileList[0].type == 'image/png' ||
         fileList[0].type == 'application/pdf')) {          
-
+  
         if (fileSize > 10000) {
           this.imageFileError = true;
           this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
@@ -171,22 +171,18 @@ export class ContactUsComponent implements OnInit {
         
       } else {
         this.imageFileError = true;
-        /* var attatchData = {
-          image: this.image ? this.image : this.defaultImage,
-          errorMsg: this.imageFileError ? 'Only .jpg,jpeg,png and pdf files are allowed' : '',
-          fileName : this.fileName,
-          is_error : this.imageFileError
-        }; */
-        this.maxUploadError = 'Only .jpg, .jpeg, .png and .pdf files are allowed.'; 
+       
+        this.errorMessage = 'Only .jpg, .jpeg, .png and .pdf files are allowed.'; 
         // this.attatchmentFiles.push(attatchData);
       }     
     } else {
-      this.maxUploadError = 'Something went wrong, Please try again!'; 
+      this.errorMessage = 'Something went wrong, Please try again!'; 
     }
-  }
+  } 
+ 
 
   removeAttatchedFile(i) {
     this.attatchmentFiles.splice(i,1);
-    this.maxUploadError = '';
+    this.errorMessage = '';
   }
 }
