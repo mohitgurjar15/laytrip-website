@@ -1,8 +1,8 @@
-<app-laytrip-loader [loading]="addCartLoading || loading || roomLoading" [module]="'hotel'">
+<app-laytrip-loader [loading]="addCartLoading || loading" [module]="'hotel'">
 </app-laytrip-loader>
 
 <!-- Start Search Result section -->
-<section class="search_result flight" *ngIf="loading || roomLoading">
+<section class="search_result flight" *ngIf="loading">
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
@@ -457,8 +457,8 @@
 
           <div class="map_wrapper">
             <!-- iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" -->
-            <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude" minZoom="2"
-              [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
+            <agm-map [latitude]="hotelDetails?.latitude"
+              [longitude]="hotelDetails?.longitude" [zoom]="12">
               <agm-marker
                 [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
                 [latitude]="hotelDetails?.hotelLocations?.latitude"
@@ -686,8 +686,8 @@
       <div class="right_box_wrps desk_right">
 
         <div class="map_wrapper">
-          <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude" minZoom="2"
-            [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
+          <agm-map [latitude]="hotelDetails?.latitude"
+            [longitude]="hotelDetails?.longitude" [zoom]="12">
             <!--               iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
  -->
             <agm-marker

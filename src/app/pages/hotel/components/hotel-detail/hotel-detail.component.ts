@@ -27,7 +27,6 @@ export class HotelDetailComponent implements OnInit {
   hotelRoomArray = [];
   imageTemp=[];
   loading:boolean = false;
-  roomLoading:boolean=false;
   currency;
   showFareDetails: number = 0;
   showMoreAmenties:boolean=false;
@@ -44,8 +43,6 @@ export class HotelDetailComponent implements OnInit {
   dataLoading = false;
   @ViewChild('maincarousel',null) maincarousel: NgbCarousel;
   @ViewChildren(NgbCarousel) carousel: QueryList<any>;
-  galleryOptions: NgxGalleryOptions[];
-  galleryOptionsMain: NgxGalleryOptions[];
   galleryImages;
   activeSlide=1;
   dots=5;
@@ -65,11 +62,10 @@ export class HotelDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = true;
+    
     $('body').addClass('cms-bgColor');
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    let occupancies;
 
     this.route.params.subscribe(params => {
       if (params) {
@@ -81,7 +77,7 @@ export class HotelDetailComponent implements OnInit {
       this.cartItems = cartItems;
     })
 
-    this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
+   /*  this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
       this.loading = false;
       if (res && res.data && res.data.hotel) {
         this.hotelDetails = {
@@ -126,18 +122,48 @@ export class HotelDetailComponent implements OnInit {
     }, error => {
       this.isNotFound=true;
       this.loading = false;
-    });
-    this.roomLoading=true;
+    }); */
+    this.loading = true;
     this.hotelService.getRoomDetails(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
-      this.roomLoading=false;
+      this.loading = false;
       if (res) {
         this.hotelRoomArray = res.data;
-        this.roomSummary.hotelInfo = res.data[0];
+        //this.roomSummary.hotelInfo = res.data[0];
+        
+        this.hotelDetails = {
+          name: res.hotel.name,
+          city_name: res.hotel.address.city_name,
+          address: res.hotel.full_address,
+          state_code: res.hotel.address.state_code,
+          country_name: res.hotel.address.country_name,
+          rating: res.hotel.rating,
+          review_rating: res.hotel.review_rating,
+          description: res.hotel.description,
+          amenities: res.hotel.amenities,
+          hotelLocations: res.hotel.geocodes,
+          latitude : parseFloat(res.hotel.geocodes.latitude),
+          longitude : parseFloat(res.hotel.geocodes.longitude),
+          hotelReviews: res.hotel.reviews,
+          thumbnail: res.hotel.thumbnail
+        };
+        if (res.hotel.images.length) {
+
+          res.hotel.images.forEach(imageUrl => {
+            this.imageTemp.push({
+              small: `${imageUrl}`,
+              medium: `${imageUrl}`,
+              big: `${imageUrl}`,
+              description: `${this.hotelDetails.name}`
+            });
+            this.galleryImages = this.imageTemp;
+          });
+
+        }
+        
       }
     }, error => {
-      this.roomLoading=false;
-      //this.toastr.error('Search session is expired', 'Error');
-      //this.router.navigate(['/']);
+      this.loading = false;
+      this.isNotFound=true;  
     });
   }
 
