@@ -92,6 +92,8 @@ h5{
 
 	.filter_popup {
 		width: 100%;
+		overflow-y: scroll;
+		height: calc(100vh - 30px);
 
 		.filter_head_popup {
 			width: 100%;
@@ -140,8 +142,8 @@ h5{
 		.filter_cnt {
 			width: 100%;
 			padding: 15px;
-			overflow-y: scroll;
-			height: calc(100vh - 30px);
+			// overflow-y: scroll;
+			// height: calc(100vh - 30px);
 
 			.filter_by {
 				margin: 0 0 30px;
