@@ -13,13 +13,13 @@ ng-scrollbar {
 
 
 .desktop_sort{
-	@include tab-view{
+	@include ipad-view{
 		display: none;
 	}
 }
 .mobile_sort{
 	display: none;
-	@include tab-view{
+	@include ipad-view{
 		display: block;
 	}
 }

@@ -13,7 +13,7 @@
 }
 
 .desk_ver {
-    @include tab-view {
+    @include ipad-view {
         display: none;
     }
 }
@@ -29,7 +29,7 @@
 .responsive_mobile {
     display: none;
 
-    @include tab-view {
+    @include ipad-view {
         display: block;
     }
 }
