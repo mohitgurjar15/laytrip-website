@@ -85,7 +85,7 @@
                                                 <h5>{{ attatchment.fileName }}</h5>
                                                 <span class="extension">.{{ attatchment.extension}}</span>
                                             </div>
-                                            <button type="button" class="close" (click)="removeAttatchedFile(i);">
+                                            <button type="button" class="close" (click)="removeAttatchedFile(i,attatchment.fullFileName);">
                                                 <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg"
                                                     alt="attach">
                                             </button>

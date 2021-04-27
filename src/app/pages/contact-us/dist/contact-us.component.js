@@ -115,7 +115,6 @@ var ContactUsComponent = /** @class */ (function () {
             this.fileUploadErrorMessage = '';
             this.imageFileError = false;
             var fileList_1 = event.target.files;
-            console.log(fileList_1);
             var fileSize = Math.floor(fileList_1[0].size / 1000);
             this.image = '';
             if (fileList_1[0] && (fileList_1[0].type == 'image/jpg' ||
@@ -126,8 +125,16 @@ var ContactUsComponent = /** @class */ (function () {
                     this.imageFileError = true;
                     this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
                 }
+                var sameFile = this.attatchmentFiles.filter(function (file) {
+                    if (file.fullFileName == fileList_1[0].name) {
+                        return true;
+                    }
+                });
+                if (sameFile.length > 0) {
+                    this.errorMessage = 'File already uploaded, Please try with different.';
+                    return;
+                }
                 reader_1.readAsDataURL(event.target.files[0]);
-                this.fileObj = event.target.files[0];
                 reader_1.onload = function (_event) {
                     _this.defaultImage = '';
                     _this.image = fileList_1[0].type == 'application/pdf' ? _this.pdfIcon : reader_1.result;
@@ -143,7 +150,7 @@ var ContactUsComponent = /** @class */ (function () {
                     };
                     _this.attatchmentFiles.push(attatchData);
                 };
-                this.files.push(this.fileObj);
+                this.files.push(event.target.files[0]);
             }
             else {
                 this.imageFileError = true;
@@ -152,11 +159,12 @@ var ContactUsComponent = /** @class */ (function () {
             }
         }
         else {
-            this.errorMessage = 'Something went wrong, Please try again!';
+            this.errorMessage = 'Something went wrong, Please try again.';
         }
     };
-    ContactUsComponent.prototype.removeAttatchedFile = function (i) {
+    ContactUsComponent.prototype.removeAttatchedFile = function (i, filename) {
         this.attatchmentFiles.splice(i, 1);
+        this.files = this.files.filter(function (obj) { return obj.name !== filename; });
         this.errorMessage = '';
     };
     __decorate([

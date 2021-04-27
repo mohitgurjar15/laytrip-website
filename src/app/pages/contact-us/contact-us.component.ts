@@ -80,6 +80,7 @@ export class ContactUsComponent implements OnInit {
     formdata.append("name",this.contactUsForm.value.name);
     formdata.append("email",this.contactUsForm.value.email);
     formdata.append("message",this.contactUsForm.value.message);
+
     for (var i = 0; i < this.files.length; i++) { 
       formdata.append("file", this.files[i]);
     }
@@ -136,7 +137,6 @@ export class ContactUsComponent implements OnInit {
       this.fileUploadErrorMessage = '';
       this.imageFileError = false;      
       const fileList: FileList = event.target.files;
-      console.log(fileList)
       var fileSize  = Math.floor(fileList[0].size / 1000);
       this.image = '';
       if (fileList[0] && (
@@ -150,8 +150,17 @@ export class ContactUsComponent implements OnInit {
           this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
         }
         
+        var sameFile = this.attatchmentFiles.filter(file=> {
+          if(file.fullFileName == fileList[0].name){
+            return true;
+          }
+        });
+        if(sameFile.length > 0){          
+          this.errorMessage = 'File already uploaded, Please try with different.';
+          return;
+        }
+       
         reader.readAsDataURL(event.target.files[0]);
-        this.fileObj = event.target.files[0];
         reader.onload = (_event) => {
           this.defaultImage = '';
           this.image = fileList[0].type == 'application/pdf' ? this.pdfIcon : reader.result;
@@ -167,7 +176,7 @@ export class ContactUsComponent implements OnInit {
           };
           this.attatchmentFiles.push(attatchData);
         };
-        this.files.push(this.fileObj);
+        this.files.push(event.target.files[0]);
         
       } else {
         this.imageFileError = true;
@@ -176,13 +185,14 @@ export class ContactUsComponent implements OnInit {
         // this.attatchmentFiles.push(attatchData);
       }     
     } else {
-      this.errorMessage = 'Something went wrong, Please try again!'; 
+      this.errorMessage = 'Something went wrong, Please try again.'; 
     }
   } 
  
 
-  removeAttatchedFile(i) {
+  removeAttatchedFile(i,filename) {
     this.attatchmentFiles.splice(i,1);
+    this.files = this.files.filter(obj => obj.name !== filename);
     this.errorMessage = '';
   }
 }
