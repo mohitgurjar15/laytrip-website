@@ -361,7 +361,7 @@
   </div>
 </section>
 <!-- Close Search Result section -->
-<div class="search_tab_listing_wrapper">
+<div class="search_tab_listing_wrapper" *ngIf="!loading">
   <div class="container">
     <div class="search_tab_icons_wrps">
       <a class="tab_anch flight hover-link" [routerLink]="['/']">
@@ -493,21 +493,21 @@
                           <div class="box_img">
                             <div class="block_im">
                               <div class="hotel_list_img_wrp">
-                                <ngb-carousel #maincarousel [interval]="false" [showNavigationIndicators]="false" (slide)=onMainSlide($event)>
-                                  <ng-template ngbSlide *ngFor="let image of galleryImages">
+                                <ngb-carousel *ngIf="room.galleryImages.length" #maincarousel [showNavigationArrows]="room.galleryImages.length>1?true:false" [interval]="false" [showNavigationIndicators]="false" (slide)=onRoomSlide($event,index)>
+                                  <ng-template ngbSlide *ngFor="let image of room.galleryImages">
                                     <div class="picsum-img-wrapper">
-                                      <img src={{image.big}}
+                                      <img src={{image.medium}}
                                         onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                                     </div>
                                   </ng-template>
                                 </ngb-carousel>
-                                <div class="slider_dots">
-                                  <ng-container *ngFor="let k of [].constructor(dots); let j = index">
-                                    <span [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
+                                <div class="slider_dots" *ngIf="room.galleryImages.length>1">
+                                  <ng-container *ngFor="let k of [].constructor(room.dots); let j = index">
+                                    <span [ngClass]="{'active':room.activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
                                   </ng-container>
                                 </div>
-                                <!-- <img src="{{s3BucketUrl}}assets/images/hotel/default_img.svg" alt="blank image"
-                                  class="blank_image_box"> -->
+                                <img *ngIf="room.galleryImages.length==0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image"
+                                  class="blank_image_box">
                               </div>
                             </div>
                           </div>
@@ -554,19 +554,21 @@
                 <div class="mobile_box">
 
                   <div class="hotel_list_img_wrp">
-                    <ngb-carousel #maincarousel [interval]="false" [showNavigationIndicators]="false" (slide)=onMainSlide($event)>
-                      <ng-template ngbSlide *ngFor="let image of galleryImages">
+                    <ngb-carousel *ngIf="room.galleryImages.length" #maincarousel [showNavigationArrows]="room.galleryImages.length>1?true:false" [interval]="false" [showNavigationIndicators]="false" (slide)=onRoomSlide($event,index)>
+                      <ng-template ngbSlide *ngFor="let image of room.galleryImages">
                         <div class="picsum-img-wrapper">
-                          <img src={{image.big}}
+                          <img src={{image.medium}}
                             onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                         </div>
                       </ng-template>
                     </ngb-carousel>
-                    <div class="slider_dots">
-                      <ng-container *ngFor="let k of [].constructor(dots); let j = index">
-                        <span [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
+                    <div class="slider_dots" *ngIf="room.galleryImages.length>1">
+                      <ng-container *ngFor="let k of [].constructor(room.dots); let j = index">
+                        <span [ngClass]="{'active':room.activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
                       </ng-container>
                     </div>
+                    <img *ngIf="room.galleryImages.length==0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image"
+                      class="blank_image_box">
                   </div>
                   <div class="middle_part">
                     <div class="detail_info">
