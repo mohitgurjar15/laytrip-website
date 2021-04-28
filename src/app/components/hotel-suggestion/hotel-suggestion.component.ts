@@ -1,6 +1,6 @@
-import { Component, OnInit, Output,EventEmitter, Input, SimpleChanges, HostListener } from '@angular/core';
-import { HotelService } from 'src/app/services/hotel.service';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit, Output,EventEmitter, Input, SimpleChanges, HostListener, ChangeDetectorRef } from '@angular/core';
+import { HotelService } from '../../services/hotel.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-hotel-suggestion',
@@ -20,17 +20,20 @@ export class HotelSuggestionComponent implements OnInit {
   thisElementClicked: boolean = false;
   $autoComplete;
   constructor(
-    private hotelService:HotelService
+    private hotelService:HotelService,
+    public cd : ChangeDetectorRef
+
   ) { }
 
   ngOnInit(): void {
   }
 
   ngAfterContentChecked(){
+    this.cd.detectChanges();
     // console.log(this.searchItem)
   }
   ngOnChanges(changes: SimpleChanges) {
-    // console.log(changes)
+    console.log(changes)
     if(changes['searchItem']){
       // this.searchItem = changes['searchItem']; 
     }

@@ -16,7 +16,7 @@ exports.__esModule = true;
 exports.HotelDetailComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
-var collect_js_1 = require("collect.js");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var hotel_policy_popup_component_1 = require("../hotel-policy-popup/hotel-policy-popup.component");
 var HotelDetailComponent = /** @class */ (function () {
     function HotelDetailComponent(route, hotelService, toastr, router, commonFunction, modalService, cartService) {
@@ -31,7 +31,6 @@ var HotelDetailComponent = /** @class */ (function () {
         this.hotelRoomArray = [];
         this.imageTemp = [];
         this.loading = false;
-        this.roomLoading = false;
         this.showFareDetails = 0;
         this.showMoreAmenties = false;
         this.roomSummary = {
@@ -45,6 +44,8 @@ var HotelDetailComponent = /** @class */ (function () {
             }
         };
         this.dataLoading = false;
+        this.activeSlide = 1;
+        this.dots = 5;
         this.cartItems = [];
         this.addCartLoading = false;
         this.isNotFound = false;
@@ -52,31 +53,9 @@ var HotelDetailComponent = /** @class */ (function () {
     }
     HotelDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.loading = true;
         $('body').addClass('cms-bgColor');
         var _currency = localStorage.getItem('_curr');
         this.currency = JSON.parse(_currency);
-        var occupancies;
-        this.galleryOptions = [
-            {
-                width: '270px',
-                height: '100%',
-                thumbnails: false,
-                imageSwipe: true,
-                previewRotate: true,
-                preview: false
-            }
-        ];
-        this.galleryOptionsMain = [
-            {
-                width: '100%',
-                height: '400px',
-                thumbnails: false,
-                imageSwipe: true,
-                previewRotate: true,
-                preview: false
-            }
-        ];
         this.route.params.subscribe(function (params) {
             if (params) {
                 _this.hotelId = params.id;
@@ -86,25 +65,76 @@ var HotelDetailComponent = /** @class */ (function () {
         this.cartService.getCartItems.subscribe(function (cartItems) {
             _this.cartItems = cartItems;
         });
-        this.hotelService.getHotelDetail("" + this.hotelId, this.hotelToken).subscribe(function (res) {
+        /*  this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
+           this.loading = false;
+           if (res && res.data && res.data.hotel) {
+             this.hotelDetails = {
+               name: res.data.hotel.name,
+               city_name: res.data.hotel.address.city_name,
+               address: res.data.hotel.full_address,
+               state_code: res.data.hotel.address.state_code,
+               country_name: res.data.hotel.address.country_name,
+               rating: res.data.hotel.rating,
+               review_rating: res.data.hotel.review_rating,
+               description: res.data.hotel.description,
+               amenities: res.data.hotel.amenities,
+               hotelLocations: res.data.hotel.geocodes,
+               hotelReviews: res.data.hotel.reviews,
+               thumbnail: res.data.hotel.thumbnail
+             };
+             if (res.data.hotel.images) {
+     
+               res.data.hotel.images.forEach(imageUrl => {
+                 this.imageTemp.push({
+                   small: `${imageUrl}`,
+                   medium: `${imageUrl}`,
+                   big: `${imageUrl}`,
+                   description: `${this.hotelDetails.name}`
+                 });
+                 this.galleryImages = this.imageTemp;
+               });
+     
+             }
+             occupancies = collect(res.data.details.occupancies);
+             this.roomSummary.roomDetail.checkIn = res.data.details.check_in;
+             this.roomSummary.roomDetail.checkOut = res.data.details.check_out;
+             if (res.data.details && res.data.details.occupancies && res.data.details.occupancies.length) {
+               this.roomSummary.roomDetail.totalRoom = occupancies.count();
+               this.roomSummary.roomDetail.totalAdults = occupancies.sum('adults');
+               this.roomSummary.roomDetail.totalChildren = occupancies.flatMap((value) => value['children']).count();
+             }
+           }
+           else{
+             this.isNotFound=true;
+           }
+         }, error => {
+           this.isNotFound=true;
+           this.loading = false;
+         }); */
+        this.loading = true;
+        this.hotelService.getRoomDetails("" + this.hotelId, this.hotelToken).subscribe(function (res) {
             _this.loading = false;
-            if (res && res.data && res.data.hotel) {
+            if (res) {
+                _this.hotelRoomArray = res.data;
+                //this.roomSummary.hotelInfo = res.data[0];
                 _this.hotelDetails = {
-                    name: res.data.hotel.name,
-                    city_name: res.data.hotel.address.city_name,
-                    address: res.data.hotel.full_address,
-                    state_code: res.data.hotel.address.state_code,
-                    country_name: res.data.hotel.address.country_name,
-                    rating: res.data.hotel.rating,
-                    review_rating: res.data.hotel.review_rating,
-                    description: res.data.hotel.description,
-                    amenities: res.data.hotel.amenities,
-                    hotelLocations: res.data.hotel.geocodes,
-                    hotelReviews: res.data.hotel.reviews,
-                    thumbnail: res.data.hotel.thumbnail
+                    name: res.hotel.name,
+                    city_name: res.hotel.address.city_name,
+                    address: res.hotel.full_address,
+                    state_code: res.hotel.address.state_code,
+                    country_name: res.hotel.address.country_name,
+                    rating: res.hotel.rating,
+                    review_rating: res.hotel.review_rating,
+                    description: res.hotel.description,
+                    amenities: res.hotel.amenities,
+                    hotelLocations: res.hotel.geocodes,
+                    latitude: parseFloat(res.hotel.geocodes.latitude),
+                    longitude: parseFloat(res.hotel.geocodes.longitude),
+                    hotelReviews: res.hotel.reviews,
+                    thumbnail: res.hotel.thumbnail
                 };
-                if (res.data.hotel.images) {
-                    res.data.hotel.images.forEach(function (imageUrl) {
+                if (res.hotel.images.length) {
+                    res.hotel.images.forEach(function (imageUrl) {
                         _this.imageTemp.push({
                             small: "" + imageUrl,
                             medium: "" + imageUrl,
@@ -114,33 +144,10 @@ var HotelDetailComponent = /** @class */ (function () {
                         _this.galleryImages = _this.imageTemp;
                     });
                 }
-                occupancies = collect_js_1.collect(res.data.details.occupancies);
-                _this.roomSummary.roomDetail.checkIn = res.data.details.check_in;
-                _this.roomSummary.roomDetail.checkOut = res.data.details.check_out;
-                if (res.data.details && res.data.details.occupancies && res.data.details.occupancies.length) {
-                    _this.roomSummary.roomDetail.totalRoom = occupancies.count();
-                    _this.roomSummary.roomDetail.totalAdults = occupancies.sum('adults');
-                    _this.roomSummary.roomDetail.totalChildren = occupancies.flatMap(function (value) { return value['children']; }).count();
-                }
-            }
-            else {
-                _this.isNotFound = true;
             }
         }, function (error) {
-            _this.isNotFound = true;
             _this.loading = false;
-        });
-        this.roomLoading = true;
-        this.hotelService.getRoomDetails("" + this.hotelId, this.hotelToken).subscribe(function (res) {
-            _this.roomLoading = false;
-            if (res) {
-                _this.hotelRoomArray = res.data;
-                _this.roomSummary.hotelInfo = res.data[0];
-            }
-        }, function (error) {
-            _this.roomLoading = false;
-            //this.toastr.error('Search session is expired', 'Error');
-            //this.router.navigate(['/']);
+            _this.isNotFound = true;
         });
     };
     HotelDetailComponent.prototype.counter = function (i) {
@@ -207,6 +214,28 @@ var HotelDetailComponent = /** @class */ (function () {
         }
         //document.getElementsByClassName('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
+    HotelDetailComponent.prototype.ngAfterViewInit = function () {
+        this.carousel.toArray().forEach(function (el) {
+        });
+    };
+    HotelDetailComponent.prototype.onMainSlide = function (event) {
+        if (event.direction == 'left') {
+            if (this.activeSlide < this.dots) {
+                this.activeSlide += 1;
+            }
+        }
+        else {
+            if (this.activeSlide > 1) {
+                this.activeSlide -= 1;
+            }
+        }
+    };
+    __decorate([
+        core_1.ViewChild('maincarousel', null)
+    ], HotelDetailComponent.prototype, "maincarousel");
+    __decorate([
+        core_1.ViewChildren(ng_bootstrap_1.NgbCarousel)
+    ], HotelDetailComponent.prototype, "carousel");
     HotelDetailComponent = __decorate([
         core_1.Component({
             selector: 'app-hotel-detail',

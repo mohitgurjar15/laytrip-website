@@ -137,14 +137,16 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
                 _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = '';
+                console.log(_this.fromDestinationInfo.title);
                 _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = hotelInfo.title;
                 _this.dealDateValidation();
                 _this.searchHotelInfo.latitude = _this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;
                 _this.searchHotelInfo.longitude = _this.fromDestinationInfo.geo_codes.long = hotelInfo.long;
                 _this.searchHotelInfo.city_id = _this.fromDestinationInfo.city_id = hotelInfo.city_id;
                 _this.searchHotelInfo.location = _this.fromDestinationInfo;
-                _this.cd.detectChanges();
+                console.log(hotelInfo);
                 console.log(_this.fromDestinationInfo);
+                console.log(_this.fromDestinationInfo.title);
                 _this.checkInMinDate = moment(_this.customStartDateValidation).toDate();
                 _this.rangeDates = [_this.checkInDate, _this.checkOutDate];
             }
