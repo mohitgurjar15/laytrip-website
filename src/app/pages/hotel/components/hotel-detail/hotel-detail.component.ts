@@ -128,6 +128,18 @@ export class HotelDetailComponent implements OnInit {
       this.loading = false;
       if (res) {
         this.hotelRoomArray = res.data;
+        for(let i=0; i < this.hotelRoomArray.length; i++){
+          this.hotelRoomArray[i].galleryImages=[];
+            for(let image of this.hotelRoomArray[i].photos){
+              this.hotelRoomArray[i].galleryImages.push({
+                small: image,
+                medium:image,
+                big:image
+              });
+            }
+            this.hotelRoomArray[i].dots = this.hotelRoomArray[i].galleryImages.length>5 ? 5 :this.hotelRoomArray[i].galleryImages.length;
+            this.hotelRoomArray[i].activeSlide = 1;
+        }
         //this.roomSummary.hotelInfo = res.data[0];
         
         this.hotelDetails = {
@@ -254,6 +266,20 @@ export class HotelDetailComponent implements OnInit {
     else{
       if(this.activeSlide>1){
         this.activeSlide-=1;
+      }
+    }
+  }
+  
+  onRoomSlide(event,roomNumber){
+    
+    if(event.direction=='left'){
+      if(this.hotelRoomArray[roomNumber].activeSlide<this.hotelRoomArray[roomNumber].dots){
+        this.hotelRoomArray[roomNumber].activeSlide+=1;
+      }
+    }
+    else{
+      if(this.hotelRoomArray[roomNumber].activeSlide>1){
+        this.hotelRoomArray[roomNumber].activeSlide-=1;
       }
     }
   }
