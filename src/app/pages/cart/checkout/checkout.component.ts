@@ -158,6 +158,7 @@ export class CheckoutComponent implements OnInit {
 
           price.type = items.data[i].type;
           price.price_break_down = items.data[i].moduleInfo[0].selling;
+          price.mandatory_fee_details = items.data[i].moduleInfo[0].mandatory_fee_details;
           price.selling_price = items.data[i].moduleInfo[0].selling.total;
           price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in, "YYYY-MM-DD").format('DD/MM/YYYY');
           price.start_price = 0;

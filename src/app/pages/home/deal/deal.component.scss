@@ -59,6 +59,9 @@
                 .image_about_text{
                     position: absolute;
                     bottom: 15px;
+                    @include mini-screen {
+                        text-align: center;
+                    }
                     button {
                         width: 100%;
                         height: 100%;
@@ -73,31 +76,36 @@
                         z-index: 9;
                         overflow: hidden;
                         white-space: normal;
+
+                        @include mini-screen {
+                            width: 80%;
+                        }
                         
                         @include tab-view{
                             font-size: 14px;
                             padding: 8px 20px;
+                            width: 100%;
                         }
                 
-                        &::before {
-                            content: "";
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 0%;
-                            background: $background-white;
-                            z-index: -1;
-                            transition: 0.8s;
-                            border-radius: 0 0 50% 50%;
-                        }
+                        // &::before {
+                        //     content: "";
+                        //     position: absolute;
+                        //     top: 0;
+                        //     left: 0;
+                        //     width: 100%;
+                        //     height: 0%;
+                        //     background: $background-white;
+                        //     z-index: -1;
+                        //     transition: 0.8s;
+                        //     border-radius: 0 0 50% 50%;
+                        // }
                 
                         &:hover {
                             border: 1px solid $active-tab-text;
                             color: $active-tab-text;
-                            &:before {
-                                height: 190%;
-                            }
+                            // &:before {
+                            //     height: 190%;
+                            // }
                         }
                     }
                 }
