@@ -277,7 +277,8 @@ agm-map {
                                             height: 100%;
                                         }
                                     }
-                                    .slider_dots{
+
+                                    .slider_dots {
                                         z-index: 9999;
                                         padding: 0;
                                         margin: 0;
@@ -287,18 +288,21 @@ agm-map {
                                         bottom: 10px;
                                         justify-content: center;
                                         width: 100%;
-                                        span{
+
+                                        span {
                                             margin: 0 2px;
                                             width: 6px;
                                             height: 6px;
                                             border-radius: 50%;
                                             padding: 1px;
-                                            background-color: rgba(255,255,255,0.6);
-                                            &::marker{
+                                            background-color: rgba(255, 255, 255, 0.6);
+
+                                            &::marker {
                                                 display: none;
                                                 color: transparent;
                                             }
-                                            &.active{
+
+                                            &.active {
                                                 background-color: $background-white;
                                             }
                                         }
@@ -338,8 +342,11 @@ agm-map {
                                         max-height: 170px;
 
                                         @include tab-view {
+                                            // min-width: 127px;
+                                            // max-height: 100%;
                                             min-width: 127px;
-                                            max-height: 100%;
+                                            max-height: 120px;
+                                            min-height: 120px;
                                         }
                                     }
 
@@ -1670,7 +1677,9 @@ agm-map {
                 justify-content: space-between;
                 width: 100%;
                 height: 100%;
-                min-height: 164px;
+                //min-height: 164px;
+               //min-height: 150px;
+                min-height: 120px;
             }
 
             .hotel_list_img_wrp {
@@ -1686,7 +1695,8 @@ agm-map {
                         height: 100%;
                     }
                 }
-                .slider_dots{
+
+                .slider_dots {
                     z-index: 9999;
                     padding: 0;
                     margin: 0;
@@ -1696,18 +1706,21 @@ agm-map {
                     bottom: 10px;
                     justify-content: center;
                     width: 100%;
-                    span{
+
+                    span {
                         margin: 0 2px;
                         width: 6px;
                         height: 6px;
                         border-radius: 50%;
                         padding: 1px;
-                        background-color: rgba(255,255,255,0.6);
-                        &::marker{
+                        background-color: rgba(255, 255, 255, 0.6);
+
+                        &::marker {
                             display: none;
                             color: transparent;
                         }
-                        &.active{
+
+                        &.active {
                             background-color: $background-white;
                         }
                     }
@@ -1742,7 +1755,9 @@ agm-map {
 
                     @include tab-view {
                         min-width: 127px;
-                        max-height: 100%;
+                        //max-height: 100%;
+                        min-height: 150px;
+                        max-height: 150px;
                     }
                 }
             }
@@ -1960,7 +1975,7 @@ agm-map {
                             min-height: 170px;
                             justify-content: space-between;
 
-                            @include tab-max{
+                            @include mini-screen {
                                 max-width: 290px;
                             }
                         }
@@ -2037,7 +2052,8 @@ agm-map {
                                             height: 100%;
                                         }
                                     }
-                                    .slider_dots{
+
+                                    .slider_dots {
                                         z-index: 9999;
                                         padding: 0;
                                         margin: 0;
@@ -2047,18 +2063,21 @@ agm-map {
                                         bottom: 10px;
                                         justify-content: center;
                                         width: 100%;
-                                        span{
+
+                                        span {
                                             margin: 0 2px;
                                             width: 6px;
                                             height: 6px;
                                             border-radius: 50%;
                                             padding: 1px;
-                                            background-color: rgba(255,255,255,0.6);
-                                            &::marker{
+                                            background-color: rgba(255, 255, 255, 0.6);
+
+                                            &::marker {
                                                 display: none;
                                                 color: transparent;
                                             }
-                                            &.active{
+
+                                            &.active {
                                                 background-color: $background-white;
                                             }
                                         }
@@ -2097,8 +2116,11 @@ agm-map {
                                         max-height: 170px;
 
                                         @include tab-view {
+                                            // min-width: 127px;
+                                            // max-height: 100%;
                                             min-width: 127px;
-                                            max-height: 100%;
+                                            max-height: 120px;
+                                            min-height: 120px;
                                         }
                                     }
 
@@ -3429,7 +3451,8 @@ agm-map {
                 justify-content: space-between;
                 width: 100%;
                 height: 100%;
-                min-height: 164px;
+                //min-height: 164px;
+                min-height: 164\\20px;
             }
 
             agm-map {
@@ -3451,7 +3474,8 @@ agm-map {
                         height: 100%;
                     }
                 }
-                .slider_dots{
+
+                .slider_dots {
                     z-index: 9999;
                     padding: 0;
                     margin: 0;
@@ -3461,18 +3485,21 @@ agm-map {
                     bottom: 10px;
                     justify-content: center;
                     width: 100%;
-                    span{
+
+                    span {
                         margin: 0 2px;
                         width: 6px;
                         height: 6px;
                         border-radius: 50%;
                         padding: 1px;
-                        background-color: rgba(255,255,255,0.6);
-                        &::marker{
+                        background-color: rgba(255, 255, 255, 0.6);
+
+                        &::marker {
                             display: none;
                             color: transparent;
                         }
-                        &.active{
+
+                        &.active {
                             background-color: $background-white;
                         }
                     }
@@ -3506,8 +3533,11 @@ agm-map {
                     max-height: 170px;
 
                     @include tab-view {
+                        // min-width: 127px;
+                        // max-height: 100%;
                         min-width: 127px;
-                        max-height: 100%;
+                        max-height: 120px;
+                        min-height: 120px;
                     }
                 }
             }
@@ -3724,10 +3754,11 @@ agm-map {
     }
 }
 
-.show-map{
+.show-map {
     display: block;
 }
-.hide-map{
+
+.hide-map {
     display: none;
 }
 

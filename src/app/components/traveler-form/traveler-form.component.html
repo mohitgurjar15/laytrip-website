@@ -111,7 +111,8 @@
                       <span class="tel_span"
                       [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.phone_no.errors}">
                         <ng-select class="ng-customClass country_code" [items]="phoneCodelist" bindLabel="phonecode"
-                          [tabIndex]="x" bindValue="phonecode" formControlName="country_code" [clearable]="false" (change)="validateCountryWithPhoneNumber($event,cartNumber,x)">
+                          [tabIndex]="x" bindValue="phonecode" formControlName="country_code" [clearable]="false"
+                          (change)="validateCountryWithPhoneNumber($event,cartNumber,x)">
                         </ng-select>
                         <input type="text" mask="{{travelerItem.value.adults[x].phone_no_format}}" class="form-control" maxlength="20"
                           formControlName="phone_no" tabindex={{x}} [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.phone_no.errors}">

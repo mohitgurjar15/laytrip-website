@@ -73,6 +73,7 @@ export class HotelSuggestionComponent implements OnInit {
     const searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
     this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
       this.loading = false;
+      
       if (response && response.data && response.data.length) {
         this.data = response.data.map(res => {
           return {
@@ -87,6 +88,8 @@ export class HotelSuggestionComponent implements OnInit {
         });
         this.selectedHotel.emit(this.data[0])
         this.validateSearch.emit(true);
+      } else {
+       this.isShowDropDown = false;
       }
     },
       error => {

@@ -23,17 +23,11 @@ var HotelSuggestionComponent = /** @class */ (function () {
     }
     HotelSuggestionComponent.prototype.ngOnInit = function () {
     };
-    HotelSuggestionComponent.prototype.ngAfterContentChecked = function () {
-        // console.log(this.searchItem)
-    };
-    HotelSuggestionComponent.prototype.ngOnChanges = function (changes) {
-        // console.log(changes)
-        if (changes['searchItem']) {
-            // this.searchItem = changes['searchItem']; 
-        }
-    };
     HotelSuggestionComponent.prototype.searchLocation = function (event) {
         var notAllowedKey = [40, 38, 9, 37, 39];
+        if (event.keyCode == 8) {
+            this.searchHotel(this.searchItem);
+        }
         if ((this.searchItem.length == 0 && event.keyCode == 8)) {
             this.data = [];
             this.loading = false;
@@ -59,6 +53,17 @@ var HotelSuggestionComponent = /** @class */ (function () {
     };
     HotelSuggestionComponent.prototype.searchHotel = function (searchItem) {
         var _this = this;
+        this.data = [{
+                city: searchItem,
+                country: '',
+                hotel_id: '',
+                title: searchItem,
+                type: 'city',
+                geo_codes: {},
+                city_id: ''
+            }];
+        this.selectedHotel.emit(this.data[0]);
+        this.validateSearch.emit(true);
         this.loading = true;
         var searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
         this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe(function (response) {
@@ -77,6 +82,9 @@ var HotelSuggestionComponent = /** @class */ (function () {
                 });
                 _this.selectedHotel.emit(_this.data[0]);
                 _this.validateSearch.emit(true);
+            }
+            else {
+                _this.isShowDropDown = false;
             }
         }, function (error) {
             _this.validateSearch.emit(false);

@@ -161,6 +161,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
+        console.log(this.fromDestinationInfo.title)
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
         this.dealDateValidation();
         this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;
@@ -168,9 +169,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = hotelInfo.city_id;
         this.searchHotelInfo.location = this.fromDestinationInfo;
 
-        this.checkInMinDate = moment(this.customStartDateValidation).toDate();
-
-        this.rangeDates = [this.checkInDate, this.checkOutDate];
       }
     });
     this.homeService.removeToString('hotel');
