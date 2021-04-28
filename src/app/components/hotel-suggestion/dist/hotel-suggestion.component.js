@@ -8,11 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.HotelSuggestionComponent = void 0;
 var core_1 = require("@angular/core");
-var environment_1 = require("../../../environments/environment");
+var environment_1 = require("src/environments/environment");
 var HotelSuggestionComponent = /** @class */ (function () {
-    function HotelSuggestionComponent(hotelService, cd) {
+    function HotelSuggestionComponent(hotelService) {
         this.hotelService = hotelService;
-        this.cd = cd;
         this.selectedHotel = new core_1.EventEmitter();
         this.validateSearch = new core_1.EventEmitter();
         this.isValidSearch = true;
@@ -24,18 +23,11 @@ var HotelSuggestionComponent = /** @class */ (function () {
     }
     HotelSuggestionComponent.prototype.ngOnInit = function () {
     };
-    HotelSuggestionComponent.prototype.ngAfterContentChecked = function () {
-        this.cd.detectChanges();
-        // console.log(this.searchItem)
-    };
-    HotelSuggestionComponent.prototype.ngOnChanges = function (changes) {
-        console.log(changes);
-        if (changes['searchItem']) {
-            // this.searchItem = changes['searchItem']; 
-        }
-    };
     HotelSuggestionComponent.prototype.searchLocation = function (event) {
         var notAllowedKey = [40, 38, 9, 37, 39];
+        if (event.keyCode == 8) {
+            this.searchHotel(this.searchItem);
+        }
         if ((this.searchItem.length == 0 && event.keyCode == 8)) {
             this.data = [];
             this.loading = false;
@@ -61,6 +53,17 @@ var HotelSuggestionComponent = /** @class */ (function () {
     };
     HotelSuggestionComponent.prototype.searchHotel = function (searchItem) {
         var _this = this;
+        this.data = [{
+                city: searchItem,
+                country: '',
+                hotel_id: '',
+                title: searchItem,
+                type: 'city',
+                geo_codes: {},
+                city_id: ''
+            }];
+        this.selectedHotel.emit(this.data[0]);
+        this.validateSearch.emit(true);
         this.loading = true;
         var searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
         this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe(function (response) {

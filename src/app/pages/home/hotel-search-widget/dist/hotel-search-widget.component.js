@@ -144,11 +144,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                 _this.searchHotelInfo.longitude = _this.fromDestinationInfo.geo_codes.long = hotelInfo.long;
                 _this.searchHotelInfo.city_id = _this.fromDestinationInfo.city_id = hotelInfo.city_id;
                 _this.searchHotelInfo.location = _this.fromDestinationInfo;
-                console.log(hotelInfo);
-                console.log(_this.fromDestinationInfo);
-                console.log(_this.fromDestinationInfo.title);
-                _this.checkInMinDate = moment(_this.customStartDateValidation).toDate();
-                _this.rangeDates = [_this.checkInDate, _this.checkOutDate];
             }
         });
         this.homeService.removeToString('hotel');
@@ -221,6 +216,10 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.searchHotelInfo.city_id = event.city_id;
         this.searchHotelInfo.latitude = event.geo_codes.lat;
         this.searchHotelInfo.longitude = event.geo_codes.long;
+        if (event && event.city_id == '') {
+            this.fromDestinationInfo = event;
+            this.validateSearch(true);
+        }
     };
     HotelSearchWidgetComponent.prototype.validateSearch = function (event) {
         this.validSearch = event;

@@ -6,15 +6,16 @@
       <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)"></app-guest-info>
     </div>
   </div>
-  <form *ngIf="showCommingSoon == false" [formGroup]="hotelSearchForm"  autocomplete="off"
-    (ngSubmit)="searchHotels()">
+  <form *ngIf="showCommingSoon == false" [formGroup]="hotelSearchForm" autocomplete="off" (ngSubmit)="searchHotels()">
     <div class="hotels_search">
       <ul class="hotels-grid oneway">
-        <li class="grid_box first"> 
+        <li class="grid_box first">
           <div class="hotel_where">
-            <div class="search_area {{!validSearch && hotelSearchFormSubmitted}}" [ngClass]="{'hotel-error': !validSearch && hotelSearchFormSubmitted}">
+            <div class="search_area {{!validSearch && hotelSearchFormSubmitted}}"
+              [ngClass]="{'hotel-error': !validSearch && hotelSearchFormSubmitted}">
               <label for="">Destination</label>
-              <app-hotel-suggestion [searchItem]="fromDestinationInfo.title" (selectedHotel)="selectedHotel($event)" (validateSearch)="validateSearch($event)"></app-hotel-suggestion>
+              <app-hotel-suggestion [searchItem]="fromDestinationInfo.title" (selectedHotel)="selectedHotel($event)"
+                (validateSearch)="validateSearch($event)"></app-hotel-suggestion>
             </div>
           </div>
         </li>
@@ -22,8 +23,8 @@
           <div class="date_form">
             <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
               <!-- <label>Check In-Check Out</label> -->
-              <p-calendar [appendTo]="body" #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range" [(ngModel)]="rangeDates"
-                [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
+              <p-calendar [appendTo]="body" #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range"
+                [(ngModel)]="rangeDates" [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
                 panelStyleClass="calender-responsive-view round_trip_calender laytrip-cal-view" [numberOfMonths]="2"
                 (onSelect)=selectCheckInDateUpdate($event) [readonlyInput]="true">
               </p-calendar>
