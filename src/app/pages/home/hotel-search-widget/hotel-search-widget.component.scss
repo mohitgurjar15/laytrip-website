@@ -134,6 +134,31 @@
         padding: 0 0.5rem;
         border-top-right-radius: 15px !important;
         border-top-left-radius: 15px !important;
+
+        .p-datepicker-title {
+          @include tab-view {
+            font-size: 11px;
+            line-height: 10px;
+          }
+        }
+
+        .p-datepicker-next {
+          .p-datepicker-next-icon {
+            @include tab-view {
+              font-size: 11px;
+              line-height: 10px;
+            }
+          }
+        }
+
+        .p-datepicker-prev {
+          .p-datepicker-prev-icon {
+            @include tab-view {
+              font-size: 11px;
+              line-height: 10px;
+            }
+          }
+        }
       }
 
       @include mobile-view {
@@ -272,6 +297,7 @@
               height: 24px;
               width: 24px;
               font-size: 10px;
+              margin: 0;
             }
 
             &.p-highlight {
@@ -321,7 +347,8 @@
             padding-right: 10px !important;
             max-width: 80px !important;
           }
-          app-hotel-suggestion{
+
+          app-hotel-suggestion {
             width: 100%
           }
 
