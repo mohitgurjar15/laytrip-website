@@ -57,7 +57,7 @@ export class HotelSuggestionComponent implements OnInit {
   }
 
   searchHotel(searchItem) {
-    this.data = [{
+    let tempData = [{
       city: searchItem,
       country: '',
       hotel_id: '',
@@ -66,7 +66,7 @@ export class HotelSuggestionComponent implements OnInit {
       geo_codes: {},
       city_id: ''
     }];
-    this.selectedHotel.emit(this.data[0]);
+    this.selectedHotel.emit(tempData[0]);
     this.validateSearch.emit(true);
 
     this.loading = true;
@@ -101,7 +101,7 @@ export class HotelSuggestionComponent implements OnInit {
   selectHotelItem(item) {
     this.isShowDropDown = false;
     this.searchItem = item.title;
-    this.selectedHotel.emit(item)
+    this.selectedHotel.emit(item);
     this.validateSearch.emit(true);
     this.isValidSearch = true;
   }
