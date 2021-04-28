@@ -638,10 +638,12 @@ select {
   display: flex;
   margin-top: 5px;
   font-size: 10px;
-  align-items: flex-start;
+  // align-items: flex-start;
+  align-items: center;
+    justify-content: flex-start;
 
   .error_img {
-    margin-top: 3px;
+   // margin-top: 3px;
     display: flex;
     max-width: 10px;
     margin-right: 5px;
