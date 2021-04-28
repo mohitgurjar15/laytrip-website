@@ -1117,6 +1117,10 @@ ngb-datepicker {
                     width: 60%;
                     padding-left: 0;
 
+                    @include mini-screen {
+                        width: 56%;
+                    }
+
                     @include ipad-view {
                         width: 100%;
                         margin-bottom: 5px;
@@ -1190,6 +1194,10 @@ ngb-datepicker {
                     display: flex;
                     justify-content: space-between;
                     position: relative;
+
+                    @include mini-screen {
+                        width: 33%;
+                    }
 
                     @include ipad-view {
                         width: 100%;
