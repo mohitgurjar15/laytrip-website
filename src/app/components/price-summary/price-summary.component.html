@@ -31,6 +31,30 @@
             </span>
             <span>${{item.price_break_down.taxes | number : '1.2-2'}}</span>
           </div>
+
+          <ng-container *ngIf="item.mandatory_fee_details.is_prepaid">
+            <div class="pay_listing hotel_line" *ngFor="let price of item.mandatory_fee_details.prepaid_break_dwon">
+              <span>
+                <p>
+                  {{price.name}} (Included in total price)
+                </p>
+              </span>
+              <span>${{price.price | number : '1.2-2'}}</span>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="item.mandatory_fee_details.is_postpaid">
+            <div class="pay_listing hotel_line" *ngFor="let price of item.mandatory_fee_details.postpaid_break_dwon">
+              <span>
+                <p>
+                  {{price.name}} (Pay later)
+                </p>
+              </span>
+              <span>${{price.price | number : '1.2-2'}}</span>
+            </div>
+          </ng-container>
+          
+
         </div>
       </div>
     </ng-container>
