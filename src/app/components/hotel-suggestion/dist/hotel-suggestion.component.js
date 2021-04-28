@@ -80,6 +80,9 @@ var HotelSuggestionComponent = /** @class */ (function () {
                 _this.selectedHotel.emit(_this.data[0]);
                 _this.validateSearch.emit(true);
             }
+            else {
+                _this.isShowDropDown = false;
+            }
         }, function (error) {
             _this.validateSearch.emit(false);
             _this.loading = false;

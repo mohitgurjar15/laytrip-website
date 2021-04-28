@@ -70,6 +70,9 @@ export class VacationSearchWidgetComponent implements OnInit {
     this.rangeDates = [this.rentalForm.check_in_date, this.rentalForm.check_out_date];
   }
 
+  ngDoCheck(){
+    console.log(this.showCommingSoon)
+  }
   ngOnInit() {
     window.scrollTo(0, 0);
    
@@ -77,7 +80,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     if (host.includes("staging")) {
       this.showCommingSoon = true;
     }
-
+    
     this.route.queryParams.subscribe(params => {
       if (Object.keys(params).length > 0) {
         const info = JSON.parse(localStorage.getItem('_rental'));
