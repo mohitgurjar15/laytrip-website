@@ -78,9 +78,9 @@
                             <a (click)="removeValidationError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
                                     alt="Close"></a>
                         </div>
-                        <div class="section_description" *ngIf="!isAllAlertClosed">
+                        <div class="section_description" *ngIf="alertErrorMessage">
                             <span class="sec_text">{{alertErrorMessage}}</span>
-                            <a (click)="removeAllAlertError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                            <a (click)="removeValidationError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
                                     alt="Close"></a>
                         </div>
                         <!-- <div class="section_description" *ngIf="isTermConditionError">

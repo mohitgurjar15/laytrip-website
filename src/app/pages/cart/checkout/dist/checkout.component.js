@@ -68,6 +68,8 @@ var CheckoutComponent = /** @class */ (function () {
         this.isTermConditionError = false;
         this.isExcludedCountryAccepted = false;
         this.isExcludedCountryError = false;
+        this.lottieLoaderType = "";
+        this.modules = [];
         //this.totalLaycredit();
         this.getCountry();
         // this.openBookingCompletionErrorPopup();
@@ -99,6 +101,13 @@ var CheckoutComponent = /** @class */ (function () {
                 cart.travelers = items.data[i].travelers;
                 cart.id = items.data[i].id;
                 cart.is_available = items.data[i].is_available;
+                _this.modules.push(items.data[i].type);
+                if (_this.modules.some(function (x) { return x === "flight"; })) {
+                    _this.lottieLoaderType = "flight";
+                }
+                else {
+                    _this.lottieLoaderType = "hotel";
+                }
                 if (items.data[i].type == 'flight') {
                     cart.module_info = items.data[i].moduleInfo[0];
                     cart.old_module_info = {
@@ -107,6 +116,7 @@ var CheckoutComponent = /** @class */ (function () {
                     price.selling_price = items.data[i].moduleInfo[0].selling_price;
                     price.departure_date = items.data[i].moduleInfo[0].departure_date;
                     price.start_price = items.data[i].moduleInfo[0].start_price;
+                    price.type = items.data[i].type;
                     price.location = items.data[i].moduleInfo[0].departure_code + "-" + items.data[i].moduleInfo[0].arrival_code;
                 }
                 else if (items.data[i].type == 'hotel') {
@@ -114,6 +124,9 @@ var CheckoutComponent = /** @class */ (function () {
                     cart.old_module_info = {
                         selling_price: items.data[i].oldModuleInfo[0].selling.total
                     };
+                    price.type = items.data[i].type;
+                    price.price_break_down = items.data[i].moduleInfo[0].selling;
+                    price.mandatory_fee_details = items.data[i].moduleInfo[0].mandatory_fee_details;
                     price.selling_price = items.data[i].moduleInfo[0].selling.total;
                     price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in, "YYYY-MM-DD").format('DD/MM/YYYY');
                     price.start_price = 0;
@@ -202,6 +215,21 @@ var CheckoutComponent = /** @class */ (function () {
             },
             type4: {
                 adults: []
+            },
+            type5: {
+                adults: []
+            },
+            type6: {
+                adults: []
+            },
+            type7: {
+                adults: []
+            },
+            type8: {
+                adults: []
+            },
+            type9: {
+                adults: []
             }
         });
         if (this.addCardRef) {
@@ -210,6 +238,7 @@ var CheckoutComponent = /** @class */ (function () {
         this.cartService.setCartNumber(0);
         this.cartService.setCardId(0);
         this.$cartIdsubscription.unsubscribe();
+        this.checkOutService.setTravelers([]);
     };
     CheckoutComponent.prototype.getCardListChange = function (data) {
         //this.add_new_card = false;
@@ -276,7 +305,7 @@ var CheckoutComponent = /** @class */ (function () {
                             message = " " + this.carts[i].module_info.departure_code + "- " + this.carts[i].module_info.arrival_code + " ,";
                         }
                         if (this.carts[i].type == 'hotel') {
-                            message = " " + this.carts[i].module_info.title + " ,";
+                            message = " " + this.carts[i].module_info.hotel_name + " ,";
                         }
                         this.validationErrorMessage += message;
                     }
@@ -354,6 +383,9 @@ var CheckoutComponent = /** @class */ (function () {
         else {
             this.isExcludedCountryError = false;
         }
+    };
+    CheckoutComponent.prototype.removeValidationError = function () {
+        this.validationErrorMessage = '';
     };
     CheckoutComponent.prototype.bookFlight = function () {
         var _this = this;

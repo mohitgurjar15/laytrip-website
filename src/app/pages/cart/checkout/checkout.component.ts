@@ -445,6 +445,10 @@ export class CheckoutComponent implements OnInit {
       this.isExcludedCountryError = false;
     }
   }
+  
+  removeValidationError(){
+    this.validationErrorMessage = '';
+  }
 
   bookFlight() {
     this.isBookingRequest = true;
