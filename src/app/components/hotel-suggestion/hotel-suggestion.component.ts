@@ -16,6 +16,7 @@ export class HotelSuggestionComponent implements OnInit {
   loading: boolean = false;
   data = [];
   @Input() searchItem: string;
+  @Input() defaultItem;
   isShowDropDown: boolean = false;
   thisElementClicked: boolean = false;
   $autoComplete;
@@ -29,7 +30,7 @@ export class HotelSuggestionComponent implements OnInit {
   searchLocation(event) {
     let notAllowedKey = [40, 38, 9, 37, 39];
     if (event.keyCode == 8) {
-      this.searchHotel(this.searchItem,'back');
+      this.searchHotel(this.searchItem, 'backspace');
       return;
     }
     if ((this.searchItem.length == 0 && event.keyCode == 8)) {
@@ -57,28 +58,28 @@ export class HotelSuggestionComponent implements OnInit {
     }
   }
 
-  searchHotel(searchItem,keyboardEvent='') {
+  searchHotel(searchItem, keyboardEvent = '') {
     let tempData = [{
-      city: searchItem,
+      city: this.defaultItem.city,
       country: '',
       hotel_id: '',
-      title: searchItem,
+      title: this.defaultItem.title,
       type: 'city',
       geo_codes: {},
       city_id: '',
       objType: 'invalid'
     }];
-    if(keyboardEvent == 'back'){
+    if (keyboardEvent == 'backspace') {
+      searchItem = this.defaultItem.title;
       this.selectedHotel.emit(tempData[0]);
       this.validateSearch.emit(true);
-      return;
     }
 
     this.loading = true;
     const searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
     this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
       this.loading = false;
-      
+
       if (response && response.data && response.data.length) {
         this.data = response.data.map(res => {
           return {
@@ -94,7 +95,7 @@ export class HotelSuggestionComponent implements OnInit {
         this.selectedHotel.emit(this.data[0])
         this.validateSearch.emit(true);
       } else {
-       this.isShowDropDown = false;
+        this.isShowDropDown = false;
       }
     },
       error => {
@@ -105,6 +106,7 @@ export class HotelSuggestionComponent implements OnInit {
     );
 
   }
+
 
   selectHotelItem(item) {
     this.isShowDropDown = false;
