@@ -71,7 +71,6 @@ export class VacationSearchWidgetComponent implements OnInit {
   }
 
   ngDoCheck(){
-    console.log(this.showCommingSoon)
   }
   ngOnInit() {
     window.scrollTo(0, 0);
