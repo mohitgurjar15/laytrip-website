@@ -69,7 +69,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     this.rentalCheckoutMinDate = this.rentalForm.check_in_date;
     this.rangeDates = [this.rentalForm.check_in_date, this.rentalForm.check_out_date];
   }
-
+  
   ngOnInit() {
     window.scrollTo(0, 0);
    
