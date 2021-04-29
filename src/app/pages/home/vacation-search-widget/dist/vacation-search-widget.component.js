@@ -53,9 +53,6 @@ var VacationSearchWidgetComponent = /** @class */ (function () {
         this.rentalCheckoutMinDate = this.rentalForm.check_in_date;
         this.rangeDates = [this.rentalForm.check_in_date, this.rentalForm.check_out_date];
     }
-    VacationSearchWidgetComponent.prototype.ngDoCheck = function () {
-        console.log(this.showCommingSoon);
-    };
     VacationSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
