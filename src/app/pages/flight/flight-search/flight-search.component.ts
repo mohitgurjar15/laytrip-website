@@ -157,7 +157,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
       this.dates = [];
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
-        if (res) {
+        if (res && res.length) {
           this.flexibleLoading = false;
           this.flexibleNotFound = false;
           this.dates = res;
@@ -396,7 +396,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   moduleTabClick(tabName) {
-    if(tabName == 'hotel'){
+    if (tabName == 'hotel') {
       this.homeService.setActiveTab(tabName)
       this.router.navigate(['/']);
     }
