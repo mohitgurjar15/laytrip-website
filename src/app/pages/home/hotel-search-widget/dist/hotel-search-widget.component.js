@@ -137,13 +137,13 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
                 _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = '';
-                console.log(_this.fromDestinationInfo.title);
                 _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = hotelInfo.title;
                 _this.dealDateValidation();
                 _this.searchHotelInfo.latitude = _this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;
                 _this.searchHotelInfo.longitude = _this.fromDestinationInfo.geo_codes.long = hotelInfo.long;
                 _this.searchHotelInfo.city_id = _this.fromDestinationInfo.city_id = hotelInfo.city_id;
                 _this.searchHotelInfo.location = _this.fromDestinationInfo;
+                _this.validateSearch(true);
             }
         });
         this.homeService.removeToString('hotel');
@@ -212,11 +212,12 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         }
     };
     HotelSearchWidgetComponent.prototype.selectedHotel = function (event) {
+        console.log(event);
         this.searchHotelInfo.location = event;
         this.searchHotelInfo.city_id = event.city_id;
         this.searchHotelInfo.latitude = event.geo_codes.lat;
         this.searchHotelInfo.longitude = event.geo_codes.long;
-        if (event && event.city_id == '') {
+        if (event && event.city_id == '' && event.objType === 'invalid') {
             this.fromDestinationInfo = event;
             this.validateSearch(true);
         }

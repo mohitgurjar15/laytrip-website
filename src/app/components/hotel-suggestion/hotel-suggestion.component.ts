@@ -29,7 +29,8 @@ export class HotelSuggestionComponent implements OnInit {
   searchLocation(event) {
     let notAllowedKey = [40, 38, 9, 37, 39];
     if (event.keyCode == 8) {
-      this.searchHotel(this.searchItem);
+      this.searchHotel(this.searchItem,'back');
+      return;
     }
     if ((this.searchItem.length == 0 && event.keyCode == 8)) {
       this.data = [];
@@ -56,7 +57,7 @@ export class HotelSuggestionComponent implements OnInit {
     }
   }
 
-  searchHotel(searchItem) {
+  searchHotel(searchItem,keyboardEvent='') {
     let tempData = [{
       city: searchItem,
       country: '',
@@ -67,8 +68,11 @@ export class HotelSuggestionComponent implements OnInit {
       city_id: '',
       objType: 'invalid'
     }];
-    this.selectedHotel.emit(tempData[0]);
-    this.validateSearch.emit(true);
+    if(keyboardEvent == 'back'){
+      this.selectedHotel.emit(tempData[0]);
+      this.validateSearch.emit(true);
+      return;
+    }
 
     this.loading = true;
     const searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
@@ -103,7 +107,6 @@ export class HotelSuggestionComponent implements OnInit {
   }
 
   selectHotelItem(item) {
-    console.log(item);
     this.isShowDropDown = false;
     this.searchItem = item.title;
     this.selectedHotel.emit(item);

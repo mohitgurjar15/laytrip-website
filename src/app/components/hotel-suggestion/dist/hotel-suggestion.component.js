@@ -26,7 +26,8 @@ var HotelSuggestionComponent = /** @class */ (function () {
     HotelSuggestionComponent.prototype.searchLocation = function (event) {
         var notAllowedKey = [40, 38, 9, 37, 39];
         if (event.keyCode == 8) {
-            this.searchHotel(this.searchItem);
+            this.searchHotel(this.searchItem, 'back');
+            return;
         }
         if ((this.searchItem.length == 0 && event.keyCode == 8)) {
             this.data = [];
@@ -51,19 +52,24 @@ var HotelSuggestionComponent = /** @class */ (function () {
             this.loading = false;
         }
     };
-    HotelSuggestionComponent.prototype.searchHotel = function (searchItem) {
+    HotelSuggestionComponent.prototype.searchHotel = function (searchItem, keyboardEvent) {
         var _this = this;
-        this.data = [{
+        if (keyboardEvent === void 0) { keyboardEvent = ''; }
+        var tempData = [{
                 city: searchItem,
                 country: '',
                 hotel_id: '',
                 title: searchItem,
                 type: 'city',
                 geo_codes: {},
-                city_id: ''
+                city_id: '',
+                objType: 'invalid'
             }];
-        this.selectedHotel.emit(this.data[0]);
-        this.validateSearch.emit(true);
+        if (keyboardEvent == 'back') {
+            this.selectedHotel.emit(tempData[0]);
+            this.validateSearch.emit(true);
+            return;
+        }
         this.loading = true;
         var searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
         this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe(function (response) {

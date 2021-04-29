@@ -230,7 +230,6 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
     queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
     queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
-
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
 
@@ -241,6 +240,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   selectedHotel(event) {
+    console.log(event)
     this.searchHotelInfo.location = event;
     this.searchHotelInfo.city_id = event.city_id;
     this.searchHotelInfo.latitude = event.geo_codes.lat;
