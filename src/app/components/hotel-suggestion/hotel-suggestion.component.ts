@@ -74,8 +74,8 @@ export class HotelSuggestionComponent implements OnInit {
       this.selectedHotel.emit(tempData[0]);
       this.validateSearch.emit(true);
     }
-    searchItem = this.defaultItem.title;
-    this.validateSearch.emit(true);
+    // searchItem = this.defaultItem.title;
+    // this.validateSearch.emit(true);
 
     this.loading = true;
     const searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
