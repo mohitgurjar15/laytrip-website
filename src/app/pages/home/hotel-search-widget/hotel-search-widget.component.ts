@@ -159,21 +159,15 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.searchHotelInfo.occupancies = this.selectedGuest;
     }
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
-      console.log(hotelInfo);
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
-        // this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
-        this.fromDestinationInfo.title = hotelInfo.title;
-        this.fromDestinationInfo.city = hotelInfo.city;
-        this.fromDestinationInfo.country = hotelInfo.country;
+        this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
         this.dealDateValidation();
         this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;
         this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = hotelInfo.long;
         this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = hotelInfo.city_id;
         this.searchHotelInfo.location = this.fromDestinationInfo;
         this.validateSearch(true);
-        console.log(this.fromDestinationInfo);
-        this.cd.detectChanges();
       }
     });
     this.homeService.removeToString('hotel');
@@ -246,7 +240,6 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   selectedHotel(event) {
-    console.log(event)
     this.searchHotelInfo.location = event;
     this.searchHotelInfo.city_id = event.city_id;
     this.searchHotelInfo.latitude = event.geo_codes.lat;
