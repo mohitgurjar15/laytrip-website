@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChild, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
@@ -165,6 +165,10 @@ export class HotelItemWrapperComponent implements OnInit {
         this.checkMarkersInBounds(this.bounds)
       }
     });
+  }
+
+  changeSlide(slideId) {
+    console.log(slideId);
   }
 
   // checkOnError(brokenImage) {
