@@ -1,6 +1,6 @@
 <span class="mob_line"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
     {{hotelCount}} {{hotelCount > 1 ? 'Hotels' : 'Hotel'}}
-        found in {{hotelName}}</span>
+    found in {{hotelName}}</span>
 <div class="top_wrapper_box">
     <h3 class="shorting_label">{{filteredLabel}}</h3>
     <span class="desk_line"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-lg-12" [ngClass]="isMapView == true ? 'show-map' : 'hide-map'">
                     <agm-map #gm (mapClick)="closeWindow($event)" [latitude]="defaultLat" [longitude]="defaultLng"
-                    minZoom="2" [zoom]="10" (boundsChange)="checkMarkersInBounds($event)">
+                        minZoom="2" [zoom]="10" (boundsChange)="checkMarkersInBounds($event)">
                         <agm-marker #marker *ngFor="let hotel of hotelListArray;let i = index;"
                             [latitude]="hotel.geocodes.latitude" [longitude]="hotel.geocodes.longitude"
                             [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/circle.svg', scaledSize: {height: 80,width: 48}}"
@@ -38,7 +38,8 @@
                     </agm-map>
 
                 </div>
-                <div class="col-lg-12" infinite-scroll  [infiniteScrollDistance]="2"  [infiniteScrollThrottle]="50"  (scrolled)="onScrollDown()">
+                <div class="col-lg-12" infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+                    (scrolled)="onScrollDown()">
                     <div class="search_block" *ngFor="let item of hotelListArray ;let blockIndex = index;">
                         <div class="listing_block">
                             <div class="listing_inner_box_wrppr">
@@ -54,17 +55,32 @@
                                                                     [images]="item.galleryImages"></ngx-gallery>
             
                                                                 <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box"> -->
-                                                                <ngb-carousel #carousel [interval]="false" [showNavigationIndicators]="false" [showNavigationArrows]="item.galleryImages.length > 0? true:false" (slide)=onSlide($event,blockIndex)>
-                                                                    <ng-template ngbSlide *ngFor="let image of item.galleryImages; let imageIndex = index" [id]="imageIndex">
-                                                                      <div class="picsum-img-wrapper">
-                                                                        <img #sliderimage  *ngIf="imageIndex==0" attr.data.src={{image.small}} src={{image.small}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
-                                                                        <img #sliderimage [class]="'ngb-slide-'+imageIndex+'-'+blockIndex" *ngIf="imageIndex!=0" attr.data.src={{image.small}}     onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
-                                                                      </div>
+                                                                <ngb-carousel #carousel [interval]="false"
+                                                                    [showNavigationIndicators]="false"
+                                                                    [showNavigationArrows]="item.galleryImages.length > 0? true:false"
+                                                                    (slide)=onSlide($event,blockIndex)>
+                                                                    <ng-template ngbSlide
+                                                                        *ngFor="let image of item.galleryImages; let imageIndex = index"
+                                                                        [id]="imageIndex">
+                                                                        <div class="picsum-img-wrapper">
+                                                                            <img #sliderimage *ngIf="imageIndex==0"
+                                                                                attr.data.src={{image.small}}
+                                                                                src={{image.small}}
+                                                                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                                                                            <img #sliderimage
+                                                                                [class]="'ngb-slide-'+imageIndex+'-'+blockIndex"
+                                                                                *ngIf="imageIndex!=0"
+                                                                                attr.data.src={{image.small}}
+                                                                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                                                                        </div>
                                                                     </ng-template>
                                                                 </ngb-carousel>
                                                                 <div class="slider_dots">
-                                                                    <ng-container *ngFor="let k of [].constructor(item.dots); let j = index">
-                                                                      <span [ngClass]="{'active':item.activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
+                                                                    <ng-container
+                                                                        *ngFor="let k of [].constructor(item.dots); let j = index">
+                                                                        <span
+                                                                            [ngClass]="{'active':item.activeSlide==j+1}"
+                                                                            (click)="changeSlide(j+1)"></span>
                                                                     </ng-container>
                                                                 </div>
                                                             </div>
@@ -145,17 +161,26 @@
                                 <div class="mobile_box">
 
                                     <div class="hotel_list_img_wrp">
-                                        <ngb-carousel #carousel [interval]="false" [showNavigationIndicators]="false" [showNavigationArrows]="item.galleryImages.length > 0? true:false" (slide)=onSlide($event,blockIndex)>
-                                            <ng-template ngbSlide *ngFor="let image of item.galleryImages; let imageIndex = index" [id]="imageIndex">
-                                              <div class="picsum-img-wrapper">
-                                                <img #sliderimage  *ngIf="imageIndex==0" attr.data.src={{image.small}} src={{image.small}} onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
-                                                <img #sliderimage [class]="'ngb-slide-'+imageIndex+'-'+blockIndex" *ngIf="imageIndex!=0" attr.data.src={{image.small}}     onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
-                                              </div>
+                                        <ngb-carousel #carousel [interval]="false" [showNavigationIndicators]="false"
+                                            [showNavigationArrows]="item.galleryImages.length > 0? true:false"
+                                            (slide)=onSlide($event,blockIndex)>
+                                            <ng-template ngbSlide
+                                                *ngFor="let image of item.galleryImages; let imageIndex = index"
+                                                [id]="imageIndex">
+                                                <div class="picsum-img-wrapper">
+                                                    <img #sliderimage *ngIf="imageIndex==0"
+                                                        attr.data.src={{image.small}} src={{image.small}}
+                                                        onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                                                    <img #sliderimage [class]="'ngb-slide-'+imageIndex+'-'+blockIndex"
+                                                        *ngIf="imageIndex!=0" attr.data.src={{image.small}}
+                                                        onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                                                </div>
                                             </ng-template>
                                         </ngb-carousel>
                                         <div class="slider_dots">
                                             <ng-container *ngFor="let k of [].constructor(item.dots); let j = index">
-                                              <span [ngClass]="{'active':item.activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
+                                                <span [ngClass]="{'active':item.activeSlide==j+1}"
+                                                    (click)="changeSlide(j+1)"></span>
                                             </ng-container>
                                         </div>
                                     </div>

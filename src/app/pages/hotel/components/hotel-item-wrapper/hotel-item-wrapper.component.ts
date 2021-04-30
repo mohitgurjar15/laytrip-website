@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChild, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
@@ -63,22 +63,23 @@ export class HotelItemWrapperComponent implements OnInit {
   scrollLoading = false;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
-  check_in:string=''
-  check_out:string=''
-  latitude:string=''
-  longitude:string=''
-  itenery:string='';
-  location:string='';
-  city_id:string='';
-  hotelCount:number=0;
-  previousHotelIndex:number=-1;
+  check_in: string = ''
+  check_out: string = ''
+  latitude: string = ''
+  longitude: string = ''
+  itenery: string = '';
+  location: string = '';
+  city_id: string = '';
+  hotelCount: number = 0;
+  previousHotelIndex: number = -1;
   @ViewChildren(NgbCarousel) carousel: QueryList<any>;
- 
+
   constructor(
     private route: ActivatedRoute,
     private commonFunction: CommonFunction,
     private genericService: GenericService,
-    private hotelService: HotelService
+    private hotelService: HotelService,
+    public cd: ChangeDetectorRef
   ) {
 
     this.galleryOptions = [
@@ -98,25 +99,25 @@ export class HotelItemWrapperComponent implements OnInit {
     });
   }
 
-  onSlide(event,roomNumber){
-    
-    let sliderNumber = ".ngb-slide-"+event.current+'-'+roomNumber;
-    $(sliderNumber).attr('src',$(sliderNumber).attr('data'))
+  onSlide(event, roomNumber) {
+
+    let sliderNumber = ".ngb-slide-" + event.current + '-' + roomNumber;
+    $(sliderNumber).attr('src', $(sliderNumber).attr('data'))
     $(sliderNumber).removeAttr('data')
-    if(event.direction=='left'){
-      if(this.hotelDetails[roomNumber].activeSlide<this.hotelDetails[roomNumber].dots){
-        this.hotelDetails[roomNumber].activeSlide+=1;
+    if (event.direction == 'left') {
+      if (this.hotelDetails[roomNumber].activeSlide < this.hotelDetails[roomNumber].dots) {
+        this.hotelDetails[roomNumber].activeSlide += 1;
       }
     }
-    else{
-      console.log(this.hotelDetails[roomNumber].activeSlide,"---")
-      if(this.hotelDetails[roomNumber].activeSlide>1){
-        this.hotelDetails[roomNumber].activeSlide-=1;
+    else {
+      console.log(this.hotelDetails[roomNumber].activeSlide, "---")
+      if (this.hotelDetails[roomNumber].activeSlide > 1) {
+        this.hotelDetails[roomNumber].activeSlide -= 1;
       }
     }
   }
 
-  
+
 
   ngOnInit() {
     window.scroll(0, 0);
@@ -142,17 +143,19 @@ export class HotelItemWrapperComponent implements OnInit {
 
     this.hotelService.getHotels.subscribe(result => {
       this.hotelDetails = result;
-      for(let i=0; i < this.hotelDetails.length; i++){
-          this.hotelDetails[i].galleryImages=[];
-          for(let image of this.hotelDetails[i].images){
+      for (let i = 0; i < this.hotelDetails.length; i++) {
+        this.hotelDetails[i].galleryImages = [];
+        for (let image of this.hotelDetails[i].images) {
+          if (this.hotelDetails[i].images) {
             this.hotelDetails[i].galleryImages.push({
               small: image,
-              medium:image,
-              big:image
+              medium: image,
+              big: image
             });
           }
-          this.hotelDetails[i].dots = this.hotelDetails[i].galleryImages.length>5 ? 5 :this.hotelDetails[i].galleryImages.length;
-          this.hotelDetails[i].activeSlide = 1;
+        }
+        this.hotelDetails[i].dots = this.hotelDetails[i].galleryImages.length > 5 ? 5 : this.hotelDetails[i].galleryImages.length;
+        this.hotelDetails[i].activeSlide = 1;
       }
       this.hotelCount = this.hotelDetails.length;
       this.currentPage = 1;
@@ -164,15 +167,47 @@ export class HotelItemWrapperComponent implements OnInit {
     });
   }
 
+  // checkOnError(brokenImage) {
+  //   for (let i = 0; i < this.hotelDetails.length; i++) {
+  //     this.hotelDetails[i].galleryImages = [];
+  //     for (let image of this.hotelDetails[i].images) {
+  //       this.hotelDetails[i].galleryImages.splice(brokenImage, 1);
+  //       this.cd.detectChanges();
+  //       console.log(this.hotelDetails[i].galleryImages);
+  //     }
+  //   }
+  // }
+
+  checkOnError(brokenImage) {
+    console.log(brokenImage);
+    for (let i = 0; i < this.hotelDetails.length; i++) {
+      this.hotelDetails[i].galleryImages = [];
+      for (let image of this.hotelDetails[i].images) {
+        if (this.hotelDetails[i].images) {
+          if (image !== brokenImage.small) {
+            this.hotelDetails[i].galleryImages.push({
+              small: image,
+              medium: image,
+              big: image
+            });
+            this.hotelDetails[i].galleryImages = this.hotelDetails[i].galleryImages;
+          }
+        }
+      }
+      this.hotelDetails[i].dots = this.hotelDetails[i].galleryImages.length > 5 ? 5 : this.hotelDetails[i].galleryImages.length;
+      this.hotelDetails[i].activeSlide = 1;
+    }
+  }
+
   onScrollDown() {
 
-    if(this.isMapView){
+    if (this.isMapView) {
       return false;
     }
 
     this.scrollLoading = true;
     console.log("scrolled")
-    console.log(this.noOfDataToShowInitially," <= ",this.hotelListArray.length)
+    console.log(this.noOfDataToShowInitially, " <= ", this.hotelListArray.length)
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.hotelDetails.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
@@ -210,17 +245,17 @@ export class HotelItemWrapperComponent implements OnInit {
 
     if (type === 'click') {
 
-      if(this.previousHotelIndex>-1){
+      if (this.previousHotelIndex > -1) {
         let previousHotel = this.hotelListArray[0];
         //console.log(this.previousHotelIndex,previousHotel)
         //this.hotelListArray.splice(this.previousHotelIndex+1, 0, previousHotel);
-        this.hotelListArray =this.move(this.hotelListArray,0,this.previousHotelIndex)
+        this.hotelListArray = this.move(this.hotelListArray, 0, this.previousHotelIndex)
       }
 
       let hotelIndex = this.hotelListArray.findIndex(hotel => hotel.id == hotelId);
-      if(hotelIndex>=0){
+      if (hotelIndex >= 0) {
         this.hotelListArray.unshift(this.hotelListArray.splice(hotelIndex, 1)[0]);
-        this.previousHotelIndex=hotelIndex;
+        this.previousHotelIndex = hotelIndex;
       }
       /* else{
         let hotel = this.hotelList.find(hotel => hotel.id == hotelId);
@@ -232,11 +267,11 @@ export class HotelItemWrapperComponent implements OnInit {
 
   move(input, from, to) {
     let numberOfDeletedElm = 1;
-  
+
     const elm = input.splice(from, numberOfDeletedElm)[0];
-  
+
     numberOfDeletedElm = 0;
-  
+
     input.splice(to, numberOfDeletedElm, elm);
 
     return input;
@@ -320,7 +355,7 @@ export class HotelItemWrapperComponent implements OnInit {
           //this.hotelDetails=[...this.hotelListArray]
         }
       }
-        
+
       this.hotelCount = this.hotelListArray.length;
     }
 

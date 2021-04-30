@@ -31,7 +31,7 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
     VacationRentalRoutingModule,
     CalendarModule,
     FormsModule, 
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgSelectModule,
     Ng5SliderModule,
     ComponentsModule,

@@ -15,7 +15,7 @@ import { ShareSocialMediaComponent } from '../components/share-social-media/shar
     TranslateModule,
     PagesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
   ],
   exports:[
   ],
