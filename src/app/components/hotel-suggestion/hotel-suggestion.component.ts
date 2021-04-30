@@ -75,7 +75,7 @@ export class HotelSuggestionComponent implements OnInit {
       this.validateSearch.emit(true);
     }
     searchItem = this.defaultItem.title;
-    // this.validateSearch.emit(true);
+    this.validateSearch.emit(true);
 
     this.loading = true;
     const searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
@@ -104,10 +104,10 @@ export class HotelSuggestionComponent implements OnInit {
         this.validateSearch.emit(false);
         this.loading = false;
         this.isShowDropDown = false;
-        if (error && error.status === 422) {
-          this.selectedHotel.emit(this.defaultTempData[0])
-          this.validateSearch.emit(true);
-        }
+        // if (error && error.status === 422) {
+        //   this.selectedHotel.emit(this.defaultTempData[0])
+        //   this.validateSearch.emit(true);
+        // }
       }
     );
   }
