@@ -34,7 +34,7 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
-        this.host = window.location.hostname;
+        this.host = window.location.host;
         this.getModules();
         this.loadJquery();
         this.getDeal(this.moduleId);
