@@ -27,12 +27,16 @@ var HomeComponent = /** @class */ (function () {
         this.isRoundTrip = false;
         this.moduleId = 1;
         this.dealList = [];
+        this.host = '';
         this.renderer.addClass(document.body, 'bg_color');
         this.countryCode = this.commonFunction.getUserCountry();
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
+        this.host = window.location.host;
+        console.log(this.host);
+        console.log("hostname", window.location.hostname);
         this.getModules();
         this.loadJquery();
         this.getDeal(this.moduleId);
