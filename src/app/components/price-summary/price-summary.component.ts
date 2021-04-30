@@ -58,8 +58,8 @@ export class PriceSummaryComponent implements OnInit {
       this.cartAlerts=[];
     }
     this.insatllmentAmount=0;
+    console.log(typeof changes['priceSummary'].currentValue)
     if (typeof changes['priceSummary'].currentValue!='undefined') {
-
       if($('#flight_list_wrper').text()==""){
         $('#flight_list_wrper').remove();
       }

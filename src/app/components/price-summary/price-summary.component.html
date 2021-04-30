@@ -66,7 +66,7 @@
     </div>
     <!-- Start -->
     <div class="pay_list_wrper">
-      <div class="pay_listing" *ngIf="priceSummary?.paymentType=='instalment'">
+      <div class="pay_listing" *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0">
         <span>Booking Downpayment</span>
         <span>${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
       </div>
@@ -78,7 +78,7 @@
     <div class="pay_listing total_amm_blue bb_none">
       <span>Total Due Now</span>
       <span
-        *ngIf="priceSummary?.paymentType=='instalment'">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount
+        *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount 
         | number : '1.2-2'}}</span>
       <span *ngIf="priceSummary?.paymentType=='no-instalment'">${{priceSummary.totalAmount | number : '1.2-2'}}</span>
     </div>
@@ -89,7 +89,7 @@
           <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc"
             aria-expanded="true" aria-controls="instalment_acc">
             <span class="open_text">
-              {{priceSummary.instalments?.instalment_date?.length-1}} {{installmentType[priceSummary.instalmentType]}}
+              {{priceSummary.instalments?.instalment_date?.length-1 > 0 ? priceSummary.instalments?.instalment_date?.length-1 : 0 }} {{installmentType[priceSummary.instalmentType]}}
               Installments of ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount |
               number : '1.2-2'}}
             </span>

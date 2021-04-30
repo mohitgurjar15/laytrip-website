@@ -116,6 +116,19 @@ var HotelDetailComponent = /** @class */ (function () {
             _this.loading = false;
             if (res) {
                 _this.hotelRoomArray = res.data;
+                for (var i = 0; i < _this.hotelRoomArray.length; i++) {
+                    _this.hotelRoomArray[i].galleryImages = [];
+                    for (var _i = 0, _a = _this.hotelRoomArray[i].photos; _i < _a.length; _i++) {
+                        var image = _a[_i];
+                        _this.hotelRoomArray[i].galleryImages.push({
+                            small: image,
+                            medium: image,
+                            big: image
+                        });
+                    }
+                    _this.hotelRoomArray[i].dots = _this.hotelRoomArray[i].galleryImages.length > 5 ? 5 : _this.hotelRoomArray[i].galleryImages.length;
+                    _this.hotelRoomArray[i].activeSlide = 1;
+                }
                 //this.roomSummary.hotelInfo = res.data[0];
                 _this.hotelDetails = {
                     name: res.hotel.name,
@@ -227,6 +240,18 @@ var HotelDetailComponent = /** @class */ (function () {
         else {
             if (this.activeSlide > 1) {
                 this.activeSlide -= 1;
+            }
+        }
+    };
+    HotelDetailComponent.prototype.onRoomSlide = function (event, roomNumber) {
+        if (event.direction == 'left') {
+            if (this.hotelRoomArray[roomNumber].activeSlide < this.hotelRoomArray[roomNumber].dots) {
+                this.hotelRoomArray[roomNumber].activeSlide += 1;
+            }
+        }
+        else {
+            if (this.hotelRoomArray[roomNumber].activeSlide > 1) {
+                this.hotelRoomArray[roomNumber].activeSlide -= 1;
             }
         }
     };

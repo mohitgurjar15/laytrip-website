@@ -82,8 +82,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                 }
             };
         var host = window.location.origin;
-        console.log(window.location.origin);
-        console.log(window.location.hostname);
         if (host.includes("staging")) {
             this.showCommingSoon = true;
         }
@@ -214,7 +212,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         }
     };
     HotelSearchWidgetComponent.prototype.selectedHotel = function (event) {
-        console.log(event);
         this.searchHotelInfo.location = event;
         this.searchHotelInfo.city_id = event.city_id;
         this.searchHotelInfo.latitude = event.geo_codes.lat;
