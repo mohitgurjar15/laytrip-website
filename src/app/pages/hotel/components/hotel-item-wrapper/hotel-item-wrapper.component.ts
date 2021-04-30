@@ -145,6 +145,7 @@ export class HotelItemWrapperComponent implements OnInit {
       for(let i=0; i < this.hotelDetails.length; i++){
           this.hotelDetails[i].galleryImages=[];
           for(let image of this.hotelDetails[i].images){
+          
             this.hotelDetails[i].galleryImages.push({
               small: image,
               medium:image,

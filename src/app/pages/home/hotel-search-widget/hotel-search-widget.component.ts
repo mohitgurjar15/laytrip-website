@@ -101,6 +101,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     };
 
     let host = window.location.origin;
+    console.log(window.location.origin)
+    console.log(window.location.hostname)
     if (host.includes("staging")) {
       this.showCommingSoon = true;
     }
