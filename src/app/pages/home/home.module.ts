@@ -44,7 +44,7 @@ import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component'
     ComponentsModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     CalendarModule,
     NgxGalleryModule,
     NgSelectModule

@@ -111,7 +111,7 @@ import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.co
     CommonModule,
     NgSelectModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgbModule,
     CountdownModule,
     Ng5SliderModule,

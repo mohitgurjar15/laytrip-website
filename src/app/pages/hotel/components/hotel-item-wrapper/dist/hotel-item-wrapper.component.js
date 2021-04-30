@@ -19,11 +19,12 @@ var environment_1 = require("../../../../../environments/environment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var HotelItemWrapperComponent = /** @class */ (function () {
-    function HotelItemWrapperComponent(route, commonFunction, genericService, hotelService) {
+    function HotelItemWrapperComponent(route, commonFunction, genericService, hotelService, cd) {
         this.route = route;
         this.commonFunction = commonFunction;
         this.genericService = genericService;
         this.hotelService = hotelService;
+        this.cd = cd;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.hotelListArray = [];
         this.hotelList = [];
@@ -115,11 +116,13 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                 _this.hotelDetails[i].galleryImages = [];
                 for (var _i = 0, _a = _this.hotelDetails[i].images; _i < _a.length; _i++) {
                     var image = _a[_i];
-                    _this.hotelDetails[i].galleryImages.push({
-                        small: image,
-                        medium: image,
-                        big: image
-                    });
+                    if (_this.hotelDetails[i].images) {
+                        _this.hotelDetails[i].galleryImages.push({
+                            small: image,
+                            medium: image,
+                            big: image
+                        });
+                    }
                 }
                 _this.hotelDetails[i].dots = _this.hotelDetails[i].galleryImages.length > 5 ? 5 : _this.hotelDetails[i].galleryImages.length;
                 _this.hotelDetails[i].activeSlide = 1;
@@ -132,6 +135,40 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                 _this.checkMarkersInBounds(_this.bounds);
             }
         });
+    };
+    HotelItemWrapperComponent.prototype.changeSlide = function (slideId) {
+        console.log(slideId);
+    };
+    // checkOnError(brokenImage) {
+    //   for (let i = 0; i < this.hotelDetails.length; i++) {
+    //     this.hotelDetails[i].galleryImages = [];
+    //     for (let image of this.hotelDetails[i].images) {
+    //       this.hotelDetails[i].galleryImages.splice(brokenImage, 1);
+    //       this.cd.detectChanges();
+    //       console.log(this.hotelDetails[i].galleryImages);
+    //     }
+    //   }
+    // }
+    HotelItemWrapperComponent.prototype.checkOnError = function (brokenImage) {
+        console.log(brokenImage);
+        for (var i = 0; i < this.hotelDetails.length; i++) {
+            this.hotelDetails[i].galleryImages = [];
+            for (var _i = 0, _a = this.hotelDetails[i].images; _i < _a.length; _i++) {
+                var image = _a[_i];
+                if (this.hotelDetails[i].images) {
+                    if (image !== brokenImage.small) {
+                        this.hotelDetails[i].galleryImages.push({
+                            small: image,
+                            medium: image,
+                            big: image
+                        });
+                        this.hotelDetails[i].galleryImages = this.hotelDetails[i].galleryImages;
+                    }
+                }
+            }
+            this.hotelDetails[i].dots = this.hotelDetails[i].galleryImages.length > 5 ? 5 : this.hotelDetails[i].galleryImages.length;
+            this.hotelDetails[i].activeSlide = 1;
+        }
     };
     HotelItemWrapperComponent.prototype.onScrollDown = function () {
         var _this = this;

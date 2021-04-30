@@ -49,7 +49,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     // ClickOutSideDirective,
     HotelDetailComponent,
     HotelPaymentComponent,
-    HotelPolicyPopupComponent
+    HotelPolicyPopupComponent,
   ],
   imports: [
     CommonModule,
@@ -58,7 +58,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HelpersModule,
     ComponentsModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgbModule,
     NgSelectModule,
     NgxSliderModule,

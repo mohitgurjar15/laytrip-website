@@ -28,7 +28,7 @@ import { BookModule } from '../book/book.module';
     HelpersModule,
     ComponentsModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgSelectModule,
     CookieModule.forRoot(),
     CalendarModule,

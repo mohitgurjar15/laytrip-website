@@ -72,7 +72,7 @@ import { AppleSecurityLoginPopupComponent } from './user/apple-security-login-po
     NgSelectModule,
     TranslateModule,
     ComponentsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule,
     // NG5 SLIDER
     Ng5SliderModule,
