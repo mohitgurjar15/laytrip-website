@@ -19,10 +19,12 @@ var core_1 = require("@angular/core");
 
 var environment_1 = require("../../../environments/environment");
 
+var cookie_policy_component_1 = require("../cookie-policy/cookie-policy.component");
+
 var HomeComponent =
 /** @class */
 function () {
-  function HomeComponent(genericService, commonFunction, fb, router, cd, renderer, homeService) {
+  function HomeComponent(genericService, commonFunction, fb, router, cd, renderer, homeService, cartService, modalService, cookieService) {
     this.genericService = genericService;
     this.commonFunction = commonFunction;
     this.fb = fb;
@@ -30,19 +32,53 @@ function () {
     this.cd = cd;
     this.renderer = renderer;
     this.homeService = homeService;
+    this.cartService = cartService;
+    this.modalService = modalService;
+    this.cookieService = cookieService;
     this.s3BucketUrl = environment_1.environment.s3BucketUrl;
     this.moduleList = {};
     this.isRoundTrip = false;
     this.moduleId = 1;
+    this.dealList = [];
+    this.host = '';
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
   }
 
   HomeComponent.prototype.ngOnInit = function () {
+    var _this = this;
+
     window.scrollTo(0, 0);
+    this.host = window.location.host;
     this.getModules();
     this.loadJquery();
     this.getDeal(this.moduleId);
+    localStorage.removeItem('__from');
+    localStorage.removeItem('__to');
+    setTimeout(function () {
+      _this.openCookiePolicyPopup();
+    }, 5000);
+    this.$tabName = this.homeService.getActiveTabName.subscribe(function (tabName) {
+      if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) {
+        var tab = tabName;
+
+        if (tab == 'hotel') {
+          $('.hotel-tab').trigger('click');
+        }
+      }
+    });
+    this.$tabName.unsubscribe();
+  };
+
+  HomeComponent.prototype.openCookiePolicyPopup = function () {
+    if (!this.cookieService.get('__cke')) {
+      this.modalService.open(cookie_policy_component_1.CookiePolicyComponent, {
+        windowClass: 'block_cookie_policy_main',
+        centered: true,
+        backdrop: 'static',
+        keyboard: false
+      });
+    } else {}
   };
 
   HomeComponent.prototype.loadJquery = function () {
@@ -74,7 +110,15 @@ function () {
     }); // Close Featured List Js
 
     $('[data-toggle="popover"]').popover();
-  };
+  }; // ngAfterViewInit() {
+  //   $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
+  //     function () {
+  //       $('.norm_btn').toggleClass("d-none");
+  //       $('.hover_btn').toggleClass("show");
+  //     }
+  //   );
+  // }
+
   /**
    * Get All module like (hotel, flight & VR)
    */
@@ -101,16 +145,15 @@ function () {
   HomeComponent.prototype.getDeal = function (moduleId) {
     var _this = this;
 
+    this.moduleId = moduleId;
     this.homeService.getDealList(moduleId).subscribe(function (response) {
       _this.dealList = response['data'];
-      console.log(_this.dealList);
     }, function (error) {});
   };
 
   HomeComponent.prototype.clickOnTab = function (tabName) {
     document.getElementById('home_banner').style.position = 'relative';
     document.getElementById('home_banner').style.width = '100%';
-    document.getElementById('home_banner').style.paddingBottom = '180px';
 
     if (tabName === 'flight') {
       this.getDeal(1);
@@ -120,15 +163,15 @@ function () {
       //   document.getElementById('login_btn').style.background = '#FC7E66';
       // }
     } else if (tabName === 'hotel') {
-      this.getDeal(2);
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
+      this.getDeal(3);
+      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover'; // if (document.getElementById('login_btn')) {
       //   document.getElementById('login_btn').style.background = '#FF00BC';
       // }
     } else if (tabName === 'home-rentals') {
       this.getDeal(3);
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
+      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover'; // if (document.getElementById('login_btn')) {
       //   document.getElementById('login_btn').style.background = '#FF00BC';
@@ -141,8 +184,12 @@ function () {
   };
 
   HomeComponent.prototype.setToString = function (newItem) {
-    this.toString = newItem;
-    this.homeService.setToString(newItem);
+    if (this.moduleId == 1) {
+      this.toString = newItem;
+      this.homeService.setToString(newItem);
+    } else if (this.moduleId == 3) {
+      this.homeService.setLocationForHotel(newItem);
+    } else {}
   };
 
   HomeComponent = __decorate([core_1.Component({

@@ -45,16 +45,16 @@
 
                 &[aria-expanded="true"] {
                     &:after {
-                        content: "";
-                        padding: 5px 9px;
-                        margin-left: 10px;
-                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                        background-position: right;
-                        background-repeat: no-repeat;
-                        background-size: 12px;
-                        transition: 0.3s;
-                        position: absolute;
-                        right: 15px;
+                      content: "";
+                      padding: 5px 9px;
+                      margin-left: 10px;
+                      background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                      background-position: right;
+                      background-repeat: no-repeat;
+                      background-size: 12px;
+                      transition: 0.3s;
+                      position: absolute;
+                      right: 15px;
                     }
                 }
 

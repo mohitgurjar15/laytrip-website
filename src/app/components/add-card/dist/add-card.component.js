@@ -140,7 +140,7 @@ var AddCardComponent = /** @class */ (function () {
                 success: function (obj) {
                     // this.emitNewCard.emit(obj);
                     $('#main_loader').hide();
-                    var s3BucketUrl = 'http://d2q1prebf1m2s9.cloudfront.net/';
+                    var s3BucketUrl = 'https://d2q1prebf1m2s9.cloudfront.net/';
                     var cardObject = {
                         visa: s3BucketUrl + "assets/images/card_visa.svg",
                         master: s3BucketUrl + "assets/images/master_cards_img.svg",
@@ -204,6 +204,7 @@ var AddCardComponent = /** @class */ (function () {
         }
         // Tokenize!
         Spreedly.tokenizeCreditCard(options);
+        console.log("Submit payment");
         setTimeout(function () {
             _this.cardListChangeCount += _this.cardListChangeCount + 1;
             _this.emitCardListChange.emit(_this.cardListChangeCount);

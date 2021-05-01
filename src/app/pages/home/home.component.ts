@@ -49,6 +49,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.host = window.location.host;
+    console.log(this.host)
+    console.log("hostname",window.location.hostname)
     this.getModules();
     this.loadJquery();
     this.getDeal(this.moduleId);
