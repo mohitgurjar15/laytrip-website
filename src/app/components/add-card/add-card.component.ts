@@ -157,7 +157,7 @@ export class AddCardComponent implements OnInit {
           // this.emitNewCard.emit(obj);
           $('#main_loader').hide();
 
-          let s3BucketUrl = 'http://d2q1prebf1m2s9.cloudfront.net/';
+          let s3BucketUrl = 'https://d2q1prebf1m2s9.cloudfront.net/';
           var cardObject = {
             visa: `${s3BucketUrl}assets/images/card_visa.svg`,
             master: `${s3BucketUrl}assets/images/master_cards_img.svg`,

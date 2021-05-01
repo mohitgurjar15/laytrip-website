@@ -13,8 +13,26 @@
   --mobile-bkp: $mobile-bkp;
 }
 
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
 }
 .ng-select.laytrip-input .ng-dropdown-panel {
   top: 100%;
@@ -102,15 +120,44 @@
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+    padding: 5px 5px 5px 24px !important;
+    background-position: left 5px center;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 3px 0 0 0;
+  max-width: 275px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 175px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
+  padding-left: 0;
 }
 .ng-select.ng-customClass .ng-select-container {
   height: 100%;
@@ -137,6 +184,44 @@
   height: auto !important;
   border: none !important;
 }
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-value {
+  width: 44px;
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
+  top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
+}
 
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
   box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
@@ -147,10 +232,6 @@
   height: 3px;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-selection {
-  background: #F826C1;
-}
-
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
   width: 13px;
   height: 13px;
@@ -158,7 +239,6 @@
   /* to remove the default positioning */
   top: -6px;
   background-color: #fff;
-  border: 1px solid #F826C1;
   border-radius: 50%;
   outline: none;
 }
@@ -169,6 +249,18 @@
 
 .redeem_laypoint .ng5-slider .ng5-slider-bubble {
   display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
 }
 
 .custom_range_slide p {
@@ -194,16 +286,11 @@
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
   font-weight: bold;
-  color: #F826C1;
   display: none;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-  background: #F826C1;
-}
-
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -281,6 +368,11 @@
   align-items: center;
   justify-content: space-between;
 }
+@media (max-width: 768px) {
+  .title_bar {
+    margin: 0 0 10px;
+  }
+}
 .title_bar h3 {
   color: #1445f5;
   font-size: 34px;
@@ -289,10 +381,242 @@
 }
 @media (max-width: 768px) {
   .title_bar h3 {
-    font-size: 18px;
+    font-size: 24px;
+    margin: 0;
+  }
+}
+.title_bar .edit_btns {
+  margin-top: 15px;
+}
+@media (max-width: 768px) {
+  .title_bar .edit_btns {
+    margin-top: 0;
   }
 }
 .title_bar .edit_btns a {
+  background-color: transparent;
+  color: #ffaa00;
+  box-shadow: none;
+  font-size: 12px;
+  padding: 0;
+  text-align: right;
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .title_bar .edit_btns a {
+    font-size: 12px;
+  }
+}
+
+.travel_detail_bg_wrps {
+  background-color: #e4e4e4;
+  border-radius: 5px;
+  padding: 15px;
+}
+@media (max-width: 768px) {
+  .travel_detail_bg_wrps {
+    margin: 0 -15px;
+  }
+}
+.travel_detail_bg_wrps .traveller_accordion {
+  margin-top: 10px;
+}
+.travel_detail_bg_wrps .traveller_accordion:nth-child(1) {
+  margin-top: 0;
+}
+.travel_detail_bg_wrps .traveller_accordion .custom_cardbody {
+  padding: 0;
+}
+.travel_detail_bg_wrps .traveller_accordion .card {
+  border: 1px solid #bababa;
+  border-radius: 10px;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-header {
+  border: none;
+  background-color: transparent;
+  padding: 15px;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-header a {
+  font-weight: 600;
+  color: #000000;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-header a svg {
+  fill: #bababa;
+  max-width: 39px;
+  margin-right: 20px;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-header a[aria-expanded=true]:after {
+  content: "";
+  padding: 5px 9px;
+  margin-left: 10px;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 12px;
+  transition: 0.3s;
+  position: absolute;
+  right: 15px;
+  top: 25px;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-header a[aria-expanded=false]:after {
+  padding: 5px 9px;
+  margin-left: 10px;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 12px;
+  content: "";
+  transition: 0.3s;
+  position: absolute;
+  right: 15px;
+  top: 25px;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-header a .typeName {
+  flex: 1;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-header a .nameUser {
+  flex: 2;
+  font-weight: 400;
+}
+@media (max-width: 768px) {
+  .travel_detail_bg_wrps .traveller_accordion .card .card-header a .nameUser {
+    font-weight: 600;
+  }
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body {
+  padding: 15px;
+}
+@media (max-width: 768px) {
+  .travel_detail_bg_wrps .traveller_accordion .card .card-body {
+    padding: 10px;
+  }
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form label {
+  color: #878787;
+  font-size: 12px;
+  font-weight: 500;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form input {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #d6d6d6;
+  font-size: 14px;
+  padding: 8px 0;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form select {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #d6d6d6;
+  font-size: 14px;
+  padding: 8px 0;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form select:focus {
+  outline: none;
+  box-shadow: none;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=true]:after {
+  content: "";
+  position: relative;
+  padding: 5px 9px;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  transition: 0.3s;
+  right: 8px;
+  border: none;
+  top: 5px;
+}
+@media (max-width: 768px) {
+  .travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=true]:after {
+    position: absolute;
+    right: 0;
+    height: 12px;
+  }
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=false]:after {
+  position: relative;
+  padding: 5px 9px;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  content: "";
+  transition: 0.3s;
+  right: 8px;
+  border: none;
+  top: 5px;
+}
+@media (max-width: 768px) {
+  .travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=false]:after {
+    position: absolute;
+    right: 0;
+    height: 12px;
+  }
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10 {
+  margin-bottom: 10px;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10.telephone_wrps .tel_span {
+  border-bottom: 2px solid #d6d6d6;
+  display: flex;
+  position: relative;
+  bottom: 2px;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10.telephone_wrps .tel_span input {
+  border-bottom: none;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10.telephone_wrps .tel_span input:first-child {
+  width: 30px;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10.dobs input {
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+  background-size: 20px;
+  border: none;
+}
+@media (max-width: 768px) {
+  .travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10.dobs input {
+    background-image: none;
+  }
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10 .gender_anchers {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10 .gender_anchers a {
+  color: #878787;
+  font-size: 14px;
+  padding: 0 25px 0 0;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10 .gender_anchers a.active {
+  color: #ffaa00;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10 .gender_anchers a:hover {
+  color: #ffaa00;
+  text-decoration: none;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .common_form .mb-sm-10 .gender_anchers a:focus {
+  outline: none;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .remove_wrps {
+  display: flex;
+  margin-top: 5px;
+  justify-content: flex-end;
+}
+.travel_detail_bg_wrps .traveller_accordion .card .card-body .remove_wrps a {
   background-color: transparent;
   color: #ffaa00;
   box-shadow: none;
@@ -302,174 +626,121 @@
   text-decoration: none;
 }
 
-.traveller_accordion {
-  margin-top: 10px;
-}
-.traveller_accordion .card {
-  border: 1px solid #bababa;
-  border-radius: 10px;
-}
-.traveller_accordion .card .card-header {
+.delete_account_block .modal-header {
+  justify-content: center;
   border: none;
-  background-color: transparent;
 }
-.traveller_accordion .card .card-header a {
-  font-weight: 600;
-  color: #000000;
-  font-size: 16px;
-  border: none;
-  background-color: transparent;
+.delete_account_block .modal-header .close {
+  opacity: 1;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.delete_account_block .modal-header .close img {
+  width: 12px;
+}
+@media (max-width: 558px) {
+  .delete_account_block .modal-header .close {
+    top: 15px;
+    right: 15px;
+  }
+}
+.delete_account_block .modal-body {
+  width: 100%;
+  padding: 0px;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .delete_account_block .modal-body {
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    flex-flow: column;
+  }
+}
+.delete_account_block .modal-body .block_im {
+  margin: 0 auto 15px;
+  width: 85px;
+}
+.delete_account_block .modal-body h4 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 500;
+  color: #0043ff;
+  padding: 0px 0px 15px;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .delete_account_block .modal-body h4 {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+@media (max-width: 558px) {
+  .delete_account_block .modal-body h4 {
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
+  }
+}
+.delete_account_block .modal-body .cta_btn_wrps {
+  padding: 10px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+}
+.delete_account_block .modal-body .cta_btn_wrps button {
+  max-width: 472px;
+  width: 100%;
+  height: 40px;
+  padding: 10px 25px;
+  background: #F826C1;
+  border-radius: 25px;
+  border: 1px solid #F826C1;
+  font-size: 14px;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+  display: flex;
+  margin: 0 10px;
+  align-items: center;
+  justify-content: center;
+}
+.delete_account_block .modal-body .cta_btn_wrps button:hover {
+  border: 1px solid #F826C1;
+  color: #ffffff;
+  background: #F826C1;
+}
+.delete_account_block .modal-body .cta_btn_wrps button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.delete_account_block .modal-body .footer_logo {
+  display: flex;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0;
+  margin-top: 10px;
 }
-.traveller_accordion .card .card-header a[aria-expanded=true]:after {
-  content: "";
-  position: relative;
-  padding: 5px 9px;
-  margin-left: 10px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-  background-position: right;
-  background-repeat: no-repeat;
-  background-size: 12px;
-  transition: 0.3s;
-  right: 15px;
+.delete_account_block .modal-body .footer_logo img {
+  max-width: 62px;
+  height: 23px;
 }
-@media (max-width: 768px) {
-  .traveller_accordion .card .card-header a[aria-expanded=true]:after {
-    position: absolute;
-    right: 0;
-    height: 12px;
-  }
+.delete_account_block .modal-footer {
+  padding: 0 20px 25px;
+  border: 0;
+  margin: 0;
 }
-.traveller_accordion .card .card-header a[aria-expanded=false]:after {
-  position: relative;
-  padding: 5px 9px;
-  margin-left: 10px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-  background-position: right;
-  background-repeat: no-repeat;
-  background-size: 12px;
-  content: "";
-  transition: 0.3s;
-  right: 15px;
+.delete_account_block .modal-footer .modal_btm {
+  width: 100%;
 }
-@media (max-width: 768px) {
-  .traveller_accordion .card .card-header a[aria-expanded=false]:after {
-    position: absolute;
-    right: 0;
-    height: 12px;
-  }
+.delete_account_block .modal-footer .modal_btm .block_logo {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 0;
 }
-.traveller_accordion .card .card-body {
-  padding: 15px;
-}
-.traveller_accordion .card .card-body .common_form label {
-  color: #878787;
-  font-size: 12px;
-  font-weight: 500;
-}
-.traveller_accordion .card .card-body .common_form input {
-  border: none;
-  border-radius: 0;
-  border-bottom: 2px solid #d6d6d6;
-  font-size: 14px;
-  padding: 8px 0;
-}
-.traveller_accordion .card .card-body .common_form input:focus {
-  outline: none;
-  box-shadow: none;
-}
-.traveller_accordion .card .card-body .common_form select {
-  border: none;
-  border-radius: 0;
-  border-bottom: 2px solid #d6d6d6;
-  font-size: 14px;
-  padding: 8px 0;
-}
-.traveller_accordion .card .card-body .common_form select:focus {
-  outline: none;
-  box-shadow: none;
-}
-.traveller_accordion .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=true]:after {
-  content: "";
-  position: relative;
-  padding: 5px 9px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-  background-position: right;
-  background-repeat: no-repeat;
-  background-size: 10px;
-  transition: 0.3s;
-  right: 8px;
-  border: none;
-  top: 5px;
-}
-@media (max-width: 768px) {
-  .traveller_accordion .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=true]:after {
-    position: absolute;
-    right: 0;
-    height: 12px;
-  }
-}
-.traveller_accordion .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=false]:after {
-  position: relative;
-  padding: 5px 9px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-  background-position: right;
-  background-repeat: no-repeat;
-  background-size: 10px;
-  content: "";
-  transition: 0.3s;
-  right: 8px;
-  border: none;
-  top: 5px;
-}
-@media (max-width: 768px) {
-  .traveller_accordion .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=false]:after {
-    position: absolute;
-    right: 0;
-    height: 12px;
-  }
-}
-.traveller_accordion .card .card-body .common_form .mb-sm-10 {
-  margin-bottom: 10px;
-}
-.traveller_accordion .card .card-body .common_form .mb-sm-10.telephone_wrps .tel_span {
-  border-bottom: 2px solid #d6d6d6;
-  display: flex;
-  position: relative;
-  bottom: 2px;
-}
-.traveller_accordion .card .card-body .common_form .mb-sm-10.telephone_wrps .tel_span input {
-  border-bottom: none;
-}
-.traveller_accordion .card .card-body .common_form .mb-sm-10.telephone_wrps .tel_span input:first-child {
-  width: 30px;
-}
-.traveller_accordion .card .card-body .common_form .mb-sm-10.dobs input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
-  background-size: 20px;
-  border: none;
-}
-.traveller_accordion .card .card-body .common_form .mb-sm-10 .gender_anchers {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-.traveller_accordion .card .card-body .common_form .mb-sm-10 .gender_anchers a {
-  color: #878787;
-  font-size: 14px;
-  padding: 0 25px 0 0;
-}
-.traveller_accordion .card .card-body .common_form .mb-sm-10 .gender_anchers a.active {
-  color: #ffaa00;
-}
-.traveller_accordion .card .card-body .common_form .mb-sm-10 .gender_anchers a:hover {
-  color: #ffaa00;
-  text-decoration: none;
-}
-.traveller_accordion .card .card-body .common_form .mb-sm-10 .gender_anchers a:focus {
-  outline: none;
+.delete_account_block .modal-footer .modal_btm .block_logo img {
+  height: 22px;
 }

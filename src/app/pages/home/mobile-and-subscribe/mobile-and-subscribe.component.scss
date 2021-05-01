@@ -5,8 +5,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 .contact_us_upper_main {
-  //background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/footer-bg-new.png");
-  background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/footer_banner_new.jpg");
+  //background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/footer-bg-new.png");
+  background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/footer_banner_new.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -16,8 +16,8 @@
   @include tab-view {
     padding: 5px 0 45px;
     min-height: 440px;
-    //background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hollywood_mobile_banner.jpg");
-    background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/h_mobile_banner_01.jpg");
+    //background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/hollywood_mobile_banner.jpg");
+    background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/h_mobile_banner_01.jpg");
   }
   .contect_text_wrapper {
     display: flex;

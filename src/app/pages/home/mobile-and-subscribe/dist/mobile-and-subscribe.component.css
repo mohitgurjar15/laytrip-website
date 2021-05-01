@@ -17,8 +17,15 @@
 /*------------- color variables ------------*/
 /*----------------- responsive variations -----------------*/
 /*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
 }
 .ng-select.laytrip-input .ng-dropdown-panel {
   top: 100%;
@@ -106,13 +113,13 @@
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
 }
@@ -170,8 +177,36 @@
   height: auto !important;
   border: none !important;
 }
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
 .ng-select.country_code .ng-select-container .ng-value-container .ng-value {
-  width: 50px;
+  width: 44px;
 }
 .ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
   top: -4px;
@@ -248,7 +283,7 @@
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -322,7 +357,7 @@
 /*----------------- responsive variations -----------------*/
 /*----------------- responsive variations -----------------*/
 .contact_us_upper_main {
-  background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/footer-bg-new.png");
+  background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/footer_banner_new.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -332,7 +367,9 @@
 }
 @media (max-width: 768px) {
   .contact_us_upper_main {
-    padding: 15px 0;
+    padding: 5px 0 45px;
+    min-height: 440px;
+    background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/h_mobile_banner_01.jpg");
   }
 }
 .contact_us_upper_main .contect_text_wrapper {
@@ -350,9 +387,9 @@
 }
 @media (max-width: 768px) {
   .contact_us_upper_main .contect_text_wrapper h3 {
-    font-size: 22px;
+    font-size: 16px;
     text-align: center;
-    margin-bottom: 28px;
+    margin-bottom: 18px;
   }
 }
 .contact_us_upper_main .contect_text_wrapper .custom_input_wrapper {
@@ -365,18 +402,24 @@
   height: 56px;
   border-radius: 30px;
 }
+@media (max-width: 768px) {
+  .contact_us_upper_main .contect_text_wrapper .custom_input_wrapper {
+    height: 44px;
+  }
+}
 .contact_us_upper_main .contect_text_wrapper .custom_input_wrapper input {
   border: none;
   padding: 15px 30px;
   background-color: transparent;
   font-size: 22px;
   width: 100%;
-  font-style: italic;
+  font-style: normal;
 }
 .contact_us_upper_main .contect_text_wrapper .custom_input_wrapper input::placeholder {
   color: #878787;
   opacity: 1;
   font-weight: 300;
+  font-style: italic;
 }
 .contact_us_upper_main .contect_text_wrapper .custom_input_wrapper input:-ms-input-placeholder {
   color: #878787;
@@ -389,6 +432,7 @@
 @media (max-width: 768px) {
   .contact_us_upper_main .contect_text_wrapper .custom_input_wrapper input {
     font-size: 14px;
+    padding: 0 0 0 20px;
     width: calc(100% - 85px);
   }
 }
@@ -411,8 +455,9 @@
 }
 @media (max-width: 768px) {
   .contact_us_upper_main .contect_text_wrapper .custom_input_wrapper button {
-    max-width: 85px;
-    font-size: 16px;
+    max-width: 65px;
+    font-size: 14px;
+    height: 43px;
   }
 }
 .contact_us_upper_main .contect_text_wrapper .custom_input_wrapper button::before {

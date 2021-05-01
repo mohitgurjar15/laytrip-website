@@ -6,9 +6,9 @@
                 <div class="common_wrper" *ngFor="let route of item.routes; let lastroute = last">
                     <div class="left_side desktop_on">
                         <div class="flight_nams_wrps">
-                            <div class="fight_secs {{route.stops[0].airline_logo}}">
-                                <img src="{{ route.stops[0].airline_logo || defaultImage }}" alt="Airlines Logo"
-                                    onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                            <div class="fight_secs  {{route.stops[0].airline_logo}}">
+                                <img src="{{ route.stops[0].airline_logo }}  | secure | async" alt="Airlines Logo"
+                                    onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                 <span class="fl_name">
                                     {{route.stops[0].airline_name}}
                                 </span>
@@ -74,9 +74,9 @@
                         <div class="col_wrpps">
                             <div class="left_side">
                                 <div class="flight_nams_wrps">
-                                    <div class="fight_secs">
-                                        <img src="{{ route.stops[0].airline_logo || defaultImage }}" alt="Airlines Logo"
-                                            onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                    <div class="fight_secs {{route.stops[0].airline_logo}}">
+                                        <img src="{{ route.stops[0].airline_logo || defaultImage }} | secure | async" alt="Airlines Logo"
+                                            onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                         <span class="fl_name">
                                             {{route.stops[0].airline_name}}
                                         </span>

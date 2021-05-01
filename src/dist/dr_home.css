@@ -1,0 +1,571 @@
+@charset "UTF-8";
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+@media (max-width: 380px) {
+  .site_header {
+    padding: 10px 0;
+  }
+}
+@media (max-width: 1199px) {
+  .site_header.dr_home .navbar .navbar-brand img {
+    width: 90px;
+  }
+}
+.site_header.dr_home .navbar .dr_im {
+  height: 50px;
+  margin-left: 40px;
+}
+@media (max-width: 991px) {
+  .site_header.dr_home .navbar .dr_im {
+    height: 40px;
+    position: absolute;
+    left: 100px;
+    margin: 0 0 0 10px;
+  }
+}
+@media (max-width: 380px) {
+  .site_header.dr_home .navbar .dr_im {
+    height: 30px;
+    position: absolute;
+    left: 100px;
+    margin: 0;
+  }
+}
+.site_header.dr_home .navbar .site_menu .nav_left li img {
+  height: 60px;
+}
+.site_header.dr_home .navbar .site_menu .nav_right li:last-child a.login_btn {
+  background: #F826C1;
+}
+.site_header.dr_home .navbar .site_menu .nav_right.dr_menu li a.dr_coin {
+  border: 1px solid #E8E8E8;
+  padding: 5px 6px 5px 30px;
+  border-radius: 20px;
+  color: #0945FF;
+  position: relative;
+}
+.site_header.dr_home .navbar .site_menu .nav_right.dr_menu li a.dr_coin:before {
+  width: 15px;
+  height: 15px;
+  background: #F826C1;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 7px;
+  transform: translateY(-50%);
+  content: "";
+}
+.site_header.dr_home .navbar .site_menu .nav_right.dr_menu li.dr_pay a {
+  line-height: 30px;
+  padding: 0 15px;
+  color: #ffffff;
+  background: #1943ff;
+  border-radius: 6px;
+  font-weight: 400;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+}
+.site_header.dr_home .navbar .site_menu .nav_right.dr_menu li.dr_pay a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #8188ab;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.site_header.dr_home .navbar .site_menu .nav_right.dr_menu li.dr_pay a:hover:before {
+  height: 190%;
+}
+.site_header.dr_home .show_resposive a.login_btn {
+  background: #F826C1;
+}
+
+.home_banner.br_bnr {
+  padding: 140px 0 90px;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/REPUBLICA-DOMINICANA-bnr.webp) no-repeat;
+  background-size: cover;
+}
+@media (max-width: 991px) {
+  .home_banner.br_bnr {
+    padding: 60px 0;
+  }
+}
+.home_banner.br_bnr:before {
+  width: 100%;
+  height: 100%;
+  background: rgba(25, 67, 255, 0.14);
+}
+.home_banner.br_bnr .banner_inner {
+  top: 0;
+}
+.home_banner.br_bnr .banner_inner .banner_text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 991px) {
+  .home_banner.br_bnr .banner_inner .banner_text {
+    flex-flow: column;
+  }
+}
+.home_banner.br_bnr .banner_inner .banner_text .block_right {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+@media (max-width: 767px) {
+  .home_banner.br_bnr .banner_inner .banner_text .block_right img {
+    height: 100px;
+  }
+}
+@media (max-width: 575px) {
+  .home_banner.br_bnr .banner_inner .banner_text .block_right img {
+    height: 80px;
+  }
+}
+.home_banner.br_bnr .banner_inner .banner_text .block_right span {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 23px;
+  color: #F826C1;
+  font-weight: 600;
+  text-align: center;
+}
+.home_banner.br_bnr .banner_inner .banner_tab {
+  padding: 160px 0 0;
+}
+@media (max-width: 991px) {
+  .home_banner.br_bnr .banner_inner .banner_tab {
+    padding: 60px 0 0;
+  }
+}
+.home_banner.br_bnr .banner_inner .banner_tab .block_dr_text {
+  width: calc(100% - 45%);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(40%);
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 600;
+  color: #0045ff;
+}
+.home_banner.br_bnr .banner_inner .banner_tab .block_dr_text span {
+  display: block;
+  font-size: 15px;
+  line-height: 23px;
+  font-weight: 500;
+  color: #F826C1;
+}
+@media (max-width: 1199px) {
+  .home_banner.br_bnr .banner_inner .banner_tab .block_dr_text {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    transform: none;
+    top: -20px;
+  }
+}
+@media (max-width: 767px) {
+  .home_banner.br_bnr .banner_inner .banner_tab .block_dr_text {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .home_banner.br_bnr .banner_inner .banner_tab .block_dr_text span {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+@media (max-width: 575px) {
+  .home_banner.br_bnr .banner_inner .banner_tab .block_dr_text {
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .home_banner.br_bnr .banner_inner .banner_tab .block_dr_text span {
+    font-size: 13px;
+    line-height: 20px;
+  }
+}
+.home_banner.br_bnr .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first .switch_btn.dr_layout {
+  width: 36px;
+  height: 36px;
+}
+.home_banner.br_bnr .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.first .switch_btn.dr_layout img {
+  width: 20px;
+}
+.home_banner.br_bnr .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info.dr_travel_info:before {
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info.dr_travel_info:before {
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
+  background-size: cover;
+}
+
+.block_dominican_republic {
+  width: 100%;
+  padding: 100px 0px 100px;
+  background: #ffffff;
+}
+@media (max-width: 991px) {
+  .block_dominican_republic .col-lg-9 {
+    order: 2;
+  }
+}
+@media (max-width: 991px) {
+  .block_dominican_republic .block_left_title {
+    text-align: center;
+    margin-top: 30px;
+  }
+}
+.block_dominican_republic .block_left_title h2 {
+  font-size: 52px;
+  line-height: 70px;
+  font-weight: 600;
+  color: #0043ff;
+}
+.block_dominican_republic .block_left_title h2 span {
+  display: block;
+}
+@media (max-width: 1199px) {
+  .block_dominican_republic .block_left_title h2 {
+    font-size: 42px;
+    line-height: 60px;
+  }
+}
+@media (max-width: 767px) {
+  .block_dominican_republic .block_left_title h2 {
+    font-size: 32px;
+    line-height: 50px;
+  }
+}
+@media (max-width: 575px) {
+  .block_dominican_republic .block_left_title h2 {
+    font-size: 22px;
+    line-height: 35px;
+  }
+}
+@media (max-width: 991px) {
+  .block_dominican_republic .block_right_logo {
+    text-align: center;
+  }
+}
+.block_dominican_republic .block_right_logo img {
+  max-width: 100%;
+}
+.block_dominican_republic .block_dominican_republic_list {
+  width: 100%;
+  margin: 50px 0 55px;
+}
+.block_dominican_republic .block_dominican_republic_list ul {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.block_dominican_republic .block_dominican_republic_list ul li {
+  padding: 0 7.5px 0;
+}
+.block_dominican_republic .block_dominican_republic_list ul li:first-child {
+  padding-left: 0;
+}
+.block_dominican_republic .block_dominican_republic_list ul li:last-child {
+  padding-right: 0;
+}
+.block_dominican_republic .block_dominican_republic_list ul li.mt-45 {
+  margin-top: 45px;
+}
+.block_dominican_republic .block_dominican_republic_list ul li a {
+  display: inline-block;
+  box-shadow: 3px 4px 40px rgba(0, 0, 0, 0.16);
+}
+.block_dominican_republic .block_dominican_republic_list ul li a img {
+  width: 100%;
+  object-fit: cover;
+  height: 350px;
+  border-radius: 7px;
+}
+.block_dominican_republic .block_btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.block_dominican_republic .block_btn .btn_dr_home {
+  display: inline-block;
+  line-height: 50px;
+  padding: 0 20px;
+  font-size: 20px;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+  font-weight: 400;
+  border-radius: 8px;
+  background: #0043ff;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  box-shadow: 3px 4px 40px rgba(0, 0, 0, 0.16);
+}
+@media (max-width: 575px) {
+  .block_dominican_republic .block_btn .btn_dr_home {
+    font-size: 14px;
+    line-height: 40px;
+  }
+}
+.block_dominican_republic .block_btn .btn_dr_home img {
+  margin: 0 0 0 10px;
+  height: 20px;
+}
+@media (max-width: 575px) {
+  .block_dominican_republic .block_btn .btn_dr_home img {
+    height: 15px;
+  }
+}
+.block_dominican_republic .block_btn .btn_dr_home::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #F826C1;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.block_dominican_republic .block_btn .btn_dr_home:hover {
+  border-color: #F826C1;
+}
+.block_dominican_republic .block_btn .btn_dr_home:hover:before {
+  height: 190%;
+}
+
+.exclusive_deals_list {
+  width: 100%;
+  padding: 60px 0px 100px;
+  background: #ffffff;
+}
+.exclusive_deals_list .section_title {
+  width: 100%;
+  margin: 0 0 75px;
+}
+@media (max-width: 991px) {
+  .exclusive_deals_list .section_title {
+    margin: 0 0 55px;
+  }
+}
+@media (max-width: 767px) {
+  .exclusive_deals_list .section_title {
+    margin: 0 0 35px;
+  }
+}
+.exclusive_deals_list .section_title h2 {
+  font-size: 52px;
+  line-height: 70px;
+  font-weight: 600;
+  color: #0043ff;
+}
+@media (max-width: 991px) {
+  .exclusive_deals_list .section_title h2 {
+    font-size: 42px;
+    line-height: 60px;
+  }
+}
+@media (max-width: 767px) {
+  .exclusive_deals_list .section_title h2 {
+    font-size: 32px;
+    line-height: 50px;
+  }
+}
+@media (max-width: 575px) {
+  .exclusive_deals_list .section_title h2 {
+    font-size: 22px;
+    line-height: 35px;
+  }
+}
+.exclusive_deals_list .deal_list {
+  width: 100%;
+  margin: 30px 0 0;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid {
+  position: relative;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-list {
+  padding: 0;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide {
+  margin: 0 10px;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block {
+  width: 100%;
+  border-radius: 20px;
+  position: relative;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_im {
+  width: 100%;
+  height: 380px;
+  box-shadow: 3px 4px 40px rgba(0, 0, 0, 0.16);
+}
+@media (max-width: 767px) {
+  .exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_im {
+    height: 300px;
+  }
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_im img {
+  width: 100%;
+  border-radius: 10px;
+  height: 100%;
+  object-fit: cover;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in {
+  width: 100%;
+  margin: 10px 0 0;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .info_top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .info_top .block_star {
+  width: auto;
+  padding-right: 25px;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .info_top .block_star ul {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .info_top .block_star ul li {
+  padding-right: 5px;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .info_top .block_star ul li:last-child {
+  padding: 0;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .info_top .block_name {
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 400;
+  color: #464646;
+}
+@media (max-width: 767px) {
+  .exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .info_top .block_name {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .deal_name {
+  font-size: 22px;
+  line-height: 33px;
+  font-weight: 400;
+  color: #464646;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .deal_name {
+    font-size: 16px;
+    line-height: 26px;
+  }
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .block_btm {
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 400;
+  color: #464646;
+}
+@media (max-width: 767px) {
+  .exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .block_btm {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .block_btm span {
+  font-size: 26px;
+  line-height: 39px;
+  font-weight: 700;
+  color: #F826C1;
+}
+@media (max-width: 767px) {
+  .exclusive_deals_list .deal_list .dr_deal_slid .slick-slide .slid_block .block_in .block_btm span {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 35px;
+  height: 35px;
+  background: #ffffff;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  font-size: 0;
+  border: none;
+  border-radius: 8px;
+  z-index: 9;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow.slick-prev {
+  left: -50px;
+  position: absolute;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow.slick-prev:before {
+  content: "";
+  font-family: FontAwesome;
+  font-size: 24px;
+  color: #919191;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow.slick-prev:hover:before {
+  color: #F826C1;
+}
+@media (max-width: 992px) {
+  .exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow.slick-prev {
+    left: -25px;
+  }
+}
+@media (max-width: 575px) {
+  .exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow.slick-prev {
+    left: -5px;
+  }
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow.slick-next {
+  right: -50px;
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow.slick-next:before {
+  content: "";
+  font-family: FontAwesome;
+  font-size: 24px;
+  color: #919191;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow.slick-next:hover:before {
+  color: #F826C1;
+}
+@media (max-width: 992px) {
+  .exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow.slick-next {
+    right: -25px;
+  }
+}
+@media (max-width: 575px) {
+  .exclusive_deals_list .deal_list .dr_deal_slid .slick-arrow.slick-next {
+    right: -5px;
+  }
+}
