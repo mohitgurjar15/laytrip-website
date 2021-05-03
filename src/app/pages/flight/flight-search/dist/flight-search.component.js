@@ -138,7 +138,7 @@ var FlightSearchComponent = /** @class */ (function () {
             });
             this.dates = [];
             this.flightService.getFlightFlexibleDates(payload).subscribe(function (res) {
-                if (res) {
+                if (res && res.length) {
                     _this.flexibleLoading = false;
                     _this.flexibleNotFound = false;
                     _this.dates = res;
@@ -352,10 +352,11 @@ var FlightSearchComponent = /** @class */ (function () {
         this.isCartFull = false;
     };
     FlightSearchComponent.prototype.flightNotAvailable = function (data) {
-        this.isFlightAvaibale = data;
+        // this.isFlightAvaibale = data;
     };
     FlightSearchComponent.prototype.hideFlightNotAvailable = function () {
         this.isFlightAvaibale = false;
+        // window.location.reload();
     };
     FlightSearchComponent.prototype.moduleTabClick = function (tabName) {
         if (tabName == 'hotel') {

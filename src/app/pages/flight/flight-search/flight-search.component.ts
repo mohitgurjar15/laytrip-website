@@ -388,11 +388,12 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   flightNotAvailable(data) {
-    this.isFlightAvaibale = data;
+    // this.isFlightAvaibale = data;
   }
 
   hideFlightNotAvailable() {
     this.isFlightAvaibale = false;
+    // window.location.reload();
   }
 
   moduleTabClick(tabName) {
