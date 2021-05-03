@@ -393,6 +393,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   hideFlightNotAvailable() {
     this.isFlightAvaibale = false;
+    window.location.reload();
   }
 
   moduleTabClick(tabName) {

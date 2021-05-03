@@ -138,7 +138,7 @@ var FlightSearchComponent = /** @class */ (function () {
             });
             this.dates = [];
             this.flightService.getFlightFlexibleDates(payload).subscribe(function (res) {
-                if (res) {
+                if (res && res.length) {
                     _this.flexibleLoading = false;
                     _this.flexibleNotFound = false;
                     _this.dates = res;
@@ -356,6 +356,7 @@ var FlightSearchComponent = /** @class */ (function () {
     };
     FlightSearchComponent.prototype.hideFlightNotAvailable = function () {
         this.isFlightAvaibale = false;
+        window.location.reload();
     };
     FlightSearchComponent.prototype.moduleTabClick = function (tabName) {
         if (tabName == 'hotel') {
