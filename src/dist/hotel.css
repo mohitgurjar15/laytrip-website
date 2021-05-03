@@ -549,7 +549,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   border-radius: 10px;
 }
 .hotel_list_img_wrp ngx-gallery ngx-gallery-image .ngx-gallery-arrow-wrapper.ngx-gallery-arrow-left i {
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
   background-repeat: no-repeat;
   background-color: #ffffff;
   border-radius: 50%;
@@ -568,7 +568,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   content: none;
 }
 .hotel_list_img_wrp ngx-gallery ngx-gallery-image .ngx-gallery-arrow-wrapper.ngx-gallery-arrow-right i {
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
   background-repeat: no-repeat;
   background-color: #ffffff;
   border-radius: 50%;
@@ -611,7 +611,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   opacity: 1;
 }
 .hotel_list_img_wrp .carousel.slide .carousel-control-prev .carousel-control-prev-icon {
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
   background-repeat: no-repeat;
   background-color: #ffffff;
   border-radius: 50%;
@@ -630,7 +630,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   opacity: 1;
 }
 .hotel_list_img_wrp .carousel.slide .carousel-control-next .carousel-control-next-icon {
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
   background-repeat: no-repeat;
   background-color: #ffffff;
   border-radius: 50%;
@@ -696,7 +696,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   border-radius: 10px;
 }
 .main_slider_big ngx-gallery ngx-gallery-image .ngx-gallery-arrow-wrapper.ngx-gallery-arrow-left i {
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
   background-repeat: no-repeat;
   background-color: #ffffff;
   border-radius: 50%;
@@ -714,7 +714,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   content: none;
 }
 .main_slider_big ngx-gallery ngx-gallery-image .ngx-gallery-arrow-wrapper.ngx-gallery-arrow-right i {
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
   background-repeat: no-repeat;
   background-color: #ffffff;
   border-radius: 50%;
@@ -766,7 +766,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   opacity: 1;
 }
 .main_slider_big .carousel.slide .carousel-control-prev .carousel-control-prev-icon {
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
   background-repeat: no-repeat;
   background-color: #ffffff;
   border-radius: 50%;
@@ -785,7 +785,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   opacity: 1;
 }
 .main_slider_big .carousel.slide .carousel-control-next .carousel-control-next-icon {
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
   background-repeat: no-repeat;
   background-color: #ffffff;
   border-radius: 50%;
@@ -1032,7 +1032,7 @@ ngb-datepicker .ngb-dp-months .ngb-dp-month ngb-datepicker-month-view .ngb-dp-we
 }
 .hotel_tab .tab_upper_content .travellers .search_area .traveller_add_block .rooms_aloc .child_sel_wrapper .child_boxes .right ng-select.child_select_ng .ng-arrow-wrapper .ng-arrow {
   border: none;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) center right 5px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) center right 5px no-repeat !important;
   height: 24px;
   width: 20px;
   background-position: 2px 11px !important;
@@ -2846,7 +2846,7 @@ agm-map .agm-map-container-inner {
 .hotels .filter_saidbar .short_by .block_shortby .accordion-group .accordion-heading:after {
   position: relative;
   padding: 9px 5px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 8px;
@@ -2876,7 +2876,7 @@ agm-map .agm-map-container-inner {
   content: "";
   position: relative;
   padding: 5px 9px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 14px;
@@ -3391,7 +3391,7 @@ agm-map .agm-map-container-inner {
 .hotels .filter_saidbar .filter_by .block_shortby .accordion-group .accordion-heading:after {
   position: relative;
   padding: 9px 5px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 8px;
@@ -3421,7 +3421,7 @@ agm-map .agm-map-container-inner {
   content: "";
   position: relative;
   padding: 5px 9px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 14px;

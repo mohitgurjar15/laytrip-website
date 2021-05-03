@@ -113,13 +113,13 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
 }
@@ -283,7 +283,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -399,7 +399,7 @@ ng-scrollbar .ng-scrollbar-layout .ng-scrollbar-layout .ng-scroll-view-container
 
 .child_dropdown_wrapper .child_sub_drop {
   border: 1px solid #E0E2E5;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) center right 5px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) center right 5px no-repeat !important;
   height: 34px;
   width: 55px;
   padding: 10px;

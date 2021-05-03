@@ -113,13 +113,13 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
 }
@@ -283,7 +283,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -394,7 +394,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 .search_tab_listing_wrapper::before {
   content: "";
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/cms_page_banner.png);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/cms_page_banner.png);
   background-position: top;
   background-repeat: no-repeat;
   height: 160px;
@@ -471,7 +471,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   width: 50%;
   text-align: center;
 }
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .filter_responsive {
     display: flex;
     z-index: 998;
@@ -492,7 +492,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 .filter_responsive .btn_filter a::after {
   content: "";
   position: relative;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/downarrow.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/downarrow.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 10px;
@@ -516,7 +516,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   text-align: center;
   width: 50%;
 }
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .sortby_responsive {
     z-index: 998;
   }
@@ -536,7 +536,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 .sortby_responsive .btn_sort a::after {
   content: "";
   position: relative;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/downarrow.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/downarrow.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 10px;
@@ -550,7 +550,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   display: flex;
   flex-direction: column;
 }
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .filter_saidbar {
     flex-direction: row;
   }
@@ -558,13 +558,13 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 .filter_saidbar .filter_by.desktop_ver {
   margin-top: 35px;
 }
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .filter_saidbar .filter_by.desktop_ver {
     display: none;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .desk_versort {
     display: none;
   }
@@ -573,7 +573,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 .sortby_responsive {
   display: none;
 }
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .sortby_responsive {
     display: block;
   }
@@ -593,6 +593,10 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   display: block !important;
 }
 
+.responsive_sortby_show {
+  background: transparent !important;
+}
+
 .responsive_filter_show,
 .responsive_sortby_show {
   background: #fafafa;
@@ -603,10 +607,13 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   width: 100%;
   z-index: 99999;
   display: none;
+  overflow: hidden;
 }
 .responsive_filter_show .filter_popup,
 .responsive_sortby_show .filter_popup {
   width: 100%;
+  overflow-y: auto;
+  height: 100%;
 }
 .responsive_filter_show .filter_popup .filter_head_popup,
 .responsive_sortby_show .filter_popup .filter_head_popup {
@@ -616,8 +623,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  height: 75px;
+  position: relative;
   z-index: 9999;
 }
 .responsive_filter_show .filter_popup .filter_head_popup .filter_clear,
@@ -663,10 +669,8 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 .responsive_sortby_show .filter_popup .filter_cnt {
   width: 100%;
   padding: 15px;
-  overflow-y: scroll;
-  height: calc(100vh - 0px);
 }
 .responsive_filter_show .filter_popup .filter_cnt .filter_by,
 .responsive_sortby_show .filter_popup .filter_cnt .filter_by {
-  margin: 0 0 30px;
+  margin: 0;
 }
