@@ -82,8 +82,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.rangeDates = [this.departureDate, this.returnDate];
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
+        // this.departureDate = moment(this.customStartDateValidation).toDate();
         var _this = this;
-        this.departureDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.departureDate = moment().add('30', 'days').toDate();
         }
@@ -93,7 +93,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             this.isCalenderPriceLoading = false;
         }
         this.route.queryParams.subscribe(function (params) {
-            if (Object.keys(params).length > 0) {
+            console.log("innn", params);
+            if (Object.keys(params).length > 0 && window.location.pathname == '/flight/search') {
                 //delete BehaviorSubject in the listing page
                 _this.homeService.removeToString();
                 _this.calPrices = true;
@@ -149,7 +150,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var date = new Date();
         var curretdate = moment().format();
         var juneDate = moment(this.customStartDateValidation).format('YYYY-MM-DD');
-        var daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+        var daysDiffFromCurToJune = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
         date.setDate(date.getDate() + 30);
         if (curretdate < juneDate && daysDiffFromCurToJune > 30) {
             this.flightDepartureMinDate = moment(juneDate).toDate();

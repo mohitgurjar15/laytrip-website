@@ -107,7 +107,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     
   ngOnInit(): void {
 
-    this.departureDate = moment(this.customStartDateValidation).toDate();
+    // this.departureDate = moment(this.customStartDateValidation).toDate();
     
     if(new Date(this.customStartDateValidation) <= new Date() ){
       this.departureDate = moment().add('30','days').toDate();      
@@ -185,7 +185,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     var curretdate = moment().format();
     let  juneDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
     
-    let daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+    let daysDiffFromCurToJune = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
 
     date.setDate(date.getDate() + 30);
 
