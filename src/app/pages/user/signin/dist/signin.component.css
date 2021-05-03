@@ -6,8 +6,26 @@
   --mobile-bkp: $mobile-bkp;
 }
 
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
 }
 .ng-select.laytrip-input .ng-dropdown-panel {
   top: 100%;
@@ -95,15 +113,44 @@
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+    padding: 5px 5px 5px 24px !important;
+    background-position: left 5px center;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 3px 0 0 0;
+  max-width: 275px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 175px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
+  padding-left: 0;
 }
 .ng-select.ng-customClass .ng-select-container {
   height: 100%;
@@ -130,6 +177,44 @@
   height: auto !important;
   border: none !important;
 }
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-value {
+  width: 44px;
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
+  top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
+}
 
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
   box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
@@ -140,10 +225,6 @@
   height: 3px;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-selection {
-  background: #F826C1;
-}
-
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
   width: 13px;
   height: 13px;
@@ -151,7 +232,6 @@
   /* to remove the default positioning */
   top: -6px;
   background-color: #fff;
-  border: 1px solid #F826C1;
   border-radius: 50%;
   outline: none;
 }
@@ -162,6 +242,18 @@
 
 .redeem_laypoint .ng5-slider .ng5-slider-bubble {
   display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
 }
 
 .custom_range_slide p {
@@ -187,16 +279,11 @@
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
   font-weight: bold;
-  color: #F826C1;
   display: none;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-  background: #F826C1;
-}
-
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -273,65 +360,116 @@
   padding: 0 !important;
   z-index: 2147483601;
 }
-.comman_modal .modal-dialog {
+.comman_modal.signin_modal .modal-dialog {
   max-width: 500px;
 }
-.comman_modal .modal-content {
+.comman_modal.signin_modal .modal-content {
   border-radius: 10px;
 }
-.comman_modal .modal-content .sign_in_modal {
+.comman_modal.signin_modal .modal-content .header_img {
+  position: absolute;
+  height: 83px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.comman_modal.signin_modal .modal-content .header_img img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+@media (max-width: 768px) {
+  .comman_modal.signin_modal .modal-content .header_img img {
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+  }
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal {
   width: 100%;
   padding: 20px 20px 25px;
 }
-.comman_modal .modal-content .sign_in_modal .close {
+.comman_modal.signin_modal .modal-content .sign_in_modal .close {
   opacity: 1;
+  z-index: 9;
+  position: relative;
 }
-.comman_modal .modal-content .sign_in_modal .close img {
-  width: 12px;
+.comman_modal.signin_modal .modal-content .sign_in_modal .close img {
+  width: 30px;
 }
-.comman_modal .modal-content .sign_in_modal .modal_top {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_top {
   width: 100%;
-  margin: 0 0 35px;
+  margin: 80px 0 35px;
 }
-.comman_modal .modal-content .sign_in_modal .modal_top .modal_title {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_top .modal_title {
   width: 100%;
 }
-.comman_modal .modal-content .sign_in_modal .modal_top .modal_title .block_im {
-  width: 100%;
-  text-align: center;
-}
-.comman_modal .modal-content .sign_in_modal .modal_top .modal_title .block_im img {
-  background: #ffffff;
-  padding: 8px;
-  border-radius: 80px;
-  border: 1px solid #bababa;
-}
-@media (max-width: 768px) {
-  .comman_modal .modal-content .sign_in_modal .modal_top .modal_title .block_im {
-    display: none;
-  }
-}
-.comman_modal .modal-content .sign_in_modal .modal_top .modal_title h4 {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_top .modal_title h4 {
   font-size: 32px;
   color: #0043ff;
   font-weight: 500;
   margin: 0;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt {
   width: 100%;
   height: 100%;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form {
+@media (max-width: 768px) {
+  .comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt {
+    justify-content: flex-start;
+  }
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modalcnt_top {
+  margin: 0 0 20px;
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modalcnt_top ul {
+  margin: 0;
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modalcnt_top .border_block {
+  width: 100%;
+  position: relative;
+  height: 20px;
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modalcnt_top .border_block:before {
+  width: 100%;
+  background: #d6d6d6;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 1px;
+  content: "";
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modalcnt_top .border_block span {
+  width: 180px;
+  font-size: 14px;
+  color: #878787;
+  text-align: center;
+  position: absolute;
+  font-weight: 400;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  padding: 0 35px;
+}
+@media (max-width: 768px) {
+  .comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modalcnt_top .border_block span {
+    width: auto;
+    padding: 0 15px;
+  }
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form {
   width: 100%;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row {
   width: 100%;
   margin: 0 0 20px;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input {
   width: 100%;
   height: 50px;
   border: 1px solid #d6d6d6;
@@ -342,29 +480,37 @@
   color: #878787;
   padding: 0 15px;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input::placeholder {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input::placeholder {
   color: #878787;
   -webkit-text-fill-color: #878787;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input.error {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input:focus::-webkit-input-placeholder {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input:focus:-moz-placeholder {
+  color: transparent;
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input:focus::-moz-placeholder {
+  color: transparent;
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input:focus:-ms-input-placeholder {
+  color: transparent;
+}
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input.error {
   border-color: #ff0000;
-  color: #ff0000;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field input.error::placeholder {
-  color: #ff0000;
-  -webkit-text-fill-color: #ff0000;
-}
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field .error_text {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field .error_text {
   width: 100%;
   color: #ff0000;
   font-size: 10px;
   font-weight: 400;
   margin: 5px 0 0;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field.pass_show {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field.pass_show {
   position: relative;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field.pass_show .ptxt {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row .text_field.pass_show .ptxt {
   position: absolute;
   top: 16px;
   right: 10px;
@@ -374,13 +520,13 @@
   cursor: pointer;
   transition: 0.3s ease all;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 0 25px;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox {
   position: relative;
   margin-bottom: 0;
   vertical-align: middle;
@@ -392,7 +538,7 @@
   color: #878787;
   text-transform: none;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox input {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox input {
   position: absolute;
   top: 0;
   left: 0;
@@ -400,13 +546,13 @@
   height: 100%;
   opacity: 0;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox input:checked ~ .checkmark {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox input:checked ~ .checkmark {
   border-color: #0044fb;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox input:checked ~ .checkmark:after {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox input:checked ~ .checkmark:after {
   opacity: 1;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox .checkmark {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox .checkmark {
   width: 14px;
   min-width: 14px;
   height: 14px;
@@ -416,7 +562,7 @@
   margin-right: 11px;
   position: relative;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox .checkmark:after {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .check .custom_checkbox .checkmark:after {
   content: "";
   position: absolute;
   top: 1px;
@@ -440,15 +586,15 @@
   transition: all 0.2s;
   opacity: 0;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .forgot_pass a {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_row.last .forgot_pass a {
   font-size: 12px;
   color: #0043ff;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_btn {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_btn {
   width: 100%;
   text-align: center;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_btn button {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_btn button {
   width: 100%;
   height: 40px;
   padding: 0px 25px;
@@ -463,8 +609,9 @@
   z-index: 9;
   overflow: hidden;
   white-space: normal;
+  cursor: pointer;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_btn button::before {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_btn button::before {
   content: "";
   position: absolute;
   top: 1px;
@@ -476,44 +623,36 @@
   transition: 0.8s;
   border-radius: 25px;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_btn button:hover {
-  border: 1px solid #F826C1;
-  color: #F826C1;
-}
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_btn button:hover:before {
-  height: calc(100% - 2px);
-  width: calc(100% - 2px);
-}
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .form_btn button.btn_disable {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .form_btn button.btn_disable {
   cursor: default;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .block_api_error {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .block_api_error {
   max-width: 375px;
   width: 100%;
   margin: 13px auto 0;
   padding: 5px 20px;
   font-size: 12px;
   color: #ff7272;
-  background: rgba(255, 114, 114, 0.15);
+  background: transparent;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 25px;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt form .block_api_error .clickHereLink {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt form .block_api_error .clickHereLink {
   text-decoration: underline;
   color: #0045ff;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm {
   margin: 25px 0 0;
   width: 100%;
   text-align: center;
   overflow: hidden;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm .border_block {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm .border_block {
   width: 100%;
   position: relative;
   height: 20px;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm .border_block:before {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm .border_block:before {
   width: 100%;
   background: #d6d6d6;
   position: absolute;
@@ -522,7 +661,7 @@
   height: 1px;
   content: "";
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm .border_block span {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm .border_block span {
   width: auto;
   font-size: 14px;
   color: #878787;
@@ -535,7 +674,7 @@
   background: #ffffff;
   padding: 0 35px;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul {
   width: 100%;
   list-style: none;
   margin: 20px 0;
@@ -543,11 +682,11 @@
   display: flex;
   justify-content: center;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul li {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul li {
   width: auto;
   padding: 0 13px;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul li a {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul li a {
   width: 66px;
   height: 66px;
   border-radius: 50%;
@@ -558,7 +697,7 @@
   color: #cf2d48;
   position: relative;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul li a img {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul li a img {
   height: 30px;
   position: absolute;
   top: 50%;
@@ -566,15 +705,15 @@
   transform: translate(-50%, -50%);
 }
 @media (max-width: 991px) {
-  .comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul li a {
+  .comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul li a {
     font-size: 0;
     justify-content: center;
   }
-  .comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul li a img {
+  .comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm ul li a img {
     margin: 0;
   }
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm p {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm p {
   width: 100%;
   text-align: center;
   font-size: 14px;
@@ -582,15 +721,15 @@
   margin: 0;
   font-weight: 400;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm p a {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm p a {
   color: #F826C1;
   font-weight: 500;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm .block_logo {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm .block_logo {
   width: 100%;
   text-align: center;
   margin: 10px 0 0;
 }
-.comman_modal .modal-content .sign_in_modal .modal_cnt .modal_btm .block_logo img {
+.comman_modal.signin_modal .modal-content .sign_in_modal .modal_cnt .modal_btm .block_logo img {
   height: 22px;
 }

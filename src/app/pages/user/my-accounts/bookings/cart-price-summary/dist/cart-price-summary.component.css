@@ -24,8 +24,15 @@
 /*------------- color variables ------------*/
 /*----------------- responsive variations -----------------*/
 /*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
 }
 .ng-select.laytrip-input .ng-dropdown-panel {
   top: 100%;
@@ -113,13 +120,13 @@
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
 }
@@ -177,11 +184,43 @@
   height: auto !important;
   border: none !important;
 }
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
 .ng-select.country_code .ng-select-container .ng-value-container .ng-value {
-  width: 50px;
+  width: 44px;
 }
 .ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
   top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
 }
 
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
@@ -212,6 +251,18 @@
   display: none;
 }
 
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
+}
+
 .custom_range_slide p {
   margin: 0;
   font-size: 14px;
@@ -239,7 +290,7 @@
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -317,6 +368,11 @@
   margin-top: 15px;
   border-radius: 10px;
 }
+@media (max-width: 768px) {
+  .price_listing_wrpper {
+    margin-top: 1px;
+  }
+}
 .price_listing_wrpper .total_p_wrp {
   display: flex;
   justify-content: space-between;
@@ -325,6 +381,11 @@
   font-weight: 600;
   padding: 10px 15px;
   font-size: 16px;
+}
+@media (max-width: 768px) {
+  .price_listing_wrpper .total_p_wrp {
+    font-size: 14px;
+  }
 }
 .price_listing_wrpper .total_p_wrp.bb {
   border-bottom: 1px solid #d6d6d6;
@@ -337,8 +398,23 @@
   color: #878787;
   font-size: 10px;
 }
+@media (max-width: 768px) {
+  .price_listing_wrpper .total_p_wrp.bb .left_sec span {
+    font-weight: 400;
+  }
+}
+@media (max-width: 768px) {
+  .price_listing_wrpper .total_p_wrp.bb .fake_paid_markss {
+    display: none;
+  }
+}
 .price_listing_wrpper .total_p_wrp .left_sec {
   flex: 1;
+}
+@media (max-width: 768px) {
+  .price_listing_wrpper .total_p_wrp .left_sec {
+    font-size: 14px;
+  }
 }
 .price_listing_wrpper .total_p_wrp .paid_markss {
   width: 21px;
@@ -355,14 +431,29 @@
   padding: 5px 15px;
   font-size: 16px;
 }
+@media (max-width: 768px) {
+  .price_listing_wrpper .price_descrip .line_desc {
+    font-size: 14px;
+  }
+}
 .price_listing_wrpper .price_descrip .line_desc.paid_clr {
   color: #1CD304;
 }
 .price_listing_wrpper .price_descrip .line_desc.due_clr {
   color: #F826C1;
 }
+@media (max-width: 768px) {
+  .price_listing_wrpper .price_descrip .line_desc.black_line_head .fake_paid_markss {
+    display: none;
+  }
+}
 .price_listing_wrpper .price_descrip .line_desc .left_sec {
   flex: 1;
+}
+@media (max-width: 768px) {
+  .price_listing_wrpper .price_descrip .line_desc .left_sec {
+    font-size: 14px;
+  }
 }
 .price_listing_wrpper .price_descrip .line_desc .paid_markss {
   width: 21px;
@@ -387,8 +478,8 @@
   border-bottom: none;
 }
 .price_listing_wrpper .price_descrip .listing_accordion #accordion_listing .card .card-header a {
-  font-weight: 600;
-  color: #0043ff;
+  font-weight: 400;
+  color: #8188ab;
   font-size: 16px;
   border: none;
   background-color: transparent;
@@ -398,11 +489,16 @@
   width: 100%;
   padding: 0;
 }
+@media (max-width: 768px) {
+  .price_listing_wrpper .price_descrip .listing_accordion #accordion_listing .card .card-header a {
+    font-size: 14px;
+  }
+}
 .price_listing_wrpper .price_descrip .listing_accordion #accordion_listing .card .card-header a[aria-expanded=true]:after {
   content: "";
   position: relative;
   padding: 5px 9px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 14px;
@@ -414,7 +510,7 @@
 .price_listing_wrpper .price_descrip .listing_accordion #accordion_listing .card .card-header a[aria-expanded=false]:after {
   position: relative;
   padding: 5px 9px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 14px;

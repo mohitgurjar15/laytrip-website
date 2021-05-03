@@ -11,7 +11,6 @@ import * as moment from 'moment'
 })
 export class FlightPriceSliderComponent implements OnInit {
 
-
   flexibleNotFound: boolean = false;
   departureDate: string;
   departure_date: string;
@@ -57,14 +56,13 @@ export class FlightPriceSliderComponent implements OnInit {
     ]
   }
 
-  @Input() flexibleLoading: boolean = true;
+  @Input() flexibleLoading: boolean = false;
   @Input() dates = [];
 
   constructor(
     private commonFunction: CommonFunction,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
-
     this.departureDate = this.route.snapshot.queryParams['departure_date'];
     this.departureDate = this.commonFunction.convertDateFormat(this.departureDate, 'YYYY-MM-DD')
     this.trip = this.route.snapshot.queryParams['trip'];
@@ -84,8 +82,9 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+
     if (changes['dates'].currentValue.length) {
-      this.flipDates(this.dates);
+      this.flipDates(this.dates)
     }
   }
 

@@ -14,8 +14,26 @@
   --mobile-bkp: $mobile-bkp;
 }
 
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
 }
 .ng-select.laytrip-input .ng-dropdown-panel {
   top: 100%;
@@ -103,15 +121,44 @@
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+    padding: 5px 5px 5px 24px !important;
+    background-position: left 5px center;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 3px 0 0 0;
+  max-width: 275px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 175px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
+  padding-left: 0;
 }
 .ng-select.ng-customClass .ng-select-container {
   height: 100%;
@@ -138,6 +185,44 @@
   height: auto !important;
   border: none !important;
 }
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-value {
+  width: 44px;
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
+  top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
+}
 
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
   box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
@@ -148,10 +233,6 @@
   height: 3px;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-selection {
-  background: #F826C1;
-}
-
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
   width: 13px;
   height: 13px;
@@ -159,7 +240,6 @@
   /* to remove the default positioning */
   top: -6px;
   background-color: #fff;
-  border: 1px solid #F826C1;
   border-radius: 50%;
   outline: none;
 }
@@ -170,6 +250,18 @@
 
 .redeem_laypoint .ng5-slider .ng5-slider-bubble {
   display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
 }
 
 .custom_range_slide p {
@@ -195,16 +287,11 @@
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
   font-weight: bold;
-  color: #F826C1;
   display: none;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-  background: #F826C1;
-}
-
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -288,6 +375,22 @@
   border-bottom: 1px solid #1943ff;
 }
 
+.section_description {
+  width: 240px;
+  transform: translate(-32%, 12%);
+  max-width: 240px;
+}
+.section_description.one {
+  transform: translate(10%, -10%);
+  max-width: 170px;
+  right: 0;
+}
+@media (max-width: 768px) {
+  .section_description.cvv_description {
+    transform: translate(0%, 12%);
+  }
+}
+
 /* .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn input {
     width: auto;
     padding: 0 35px;
@@ -342,11 +445,21 @@
 }
 @media (max-width: 768px) {
   .add_card_block .mb-sm-10 {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    padding: 0;
+  }
+}
+.add_card_block .form-row.margin_top {
+  margin-top: 10px;
+}
+@media (max-width: 768px) {
+  .add_card_block .form-row.margin_top {
+    margin-top: 0;
   }
 }
 .add_card_block .iframe_wrapper {
   height: 38px;
+  margin-top: 1px;
 }
 .add_card_block .cvv_wrapper {
   display: flex;
@@ -357,8 +470,12 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  flex-direction: column;
   height: 100%;
+}
+@media (max-width: 768px) {
+  .add_card_block .save_btn_wrps {
+    justify-content: space-between;
+  }
 }
 .add_card_block .save_btn_wrps a {
   background-color: transparent;
@@ -369,6 +486,11 @@
   padding: 0;
   text-align: right;
 }
+@media (max-width: 768px) {
+  .add_card_block .save_btn_wrps a {
+    font-size: 12px;
+  }
+}
 .add_card_block .save_btn_wrps .button {
   background-color: transparent;
   color: #ffaa00;
@@ -377,6 +499,17 @@
   font-size: 16px;
   padding: 0;
   text-align: right;
+  pointer-events: all;
+}
+@media (max-width: 768px) {
+  .add_card_block .save_btn_wrps .button:first-child {
+    text-align: left;
+  }
+}
+@media (max-width: 768px) {
+  .add_card_block .save_btn_wrps .button {
+    font-size: 12px;
+  }
 }
 
 #errors,
@@ -387,7 +520,7 @@
 }
 
 .accordion_cardss {
-  margin: 0 15px 15px 15px !important;
+  margin: 15px 15px 0px 15px !important;
 }
 .accordion_cardss .card {
   border: 1px solid #bababa;
@@ -459,6 +592,11 @@
   flex-direction: column;
   height: 100%;
 }
+@media (max-width: 768px) {
+  .accordion_cardss .card .card-body .save_btn_wrps {
+    justify-content: space-between;
+  }
+}
 .accordion_cardss .card .card-body .save_btn_wrps a {
   background-color: transparent;
   color: #ffaa00;
@@ -466,4 +604,13 @@
   box-shadow: none;
   font-size: 16px;
   padding: 0;
+}
+@media (max-width: 768px) {
+  .accordion_cardss .card .card-body .save_btn_wrps a {
+    font-size: 12px;
+  }
+}
+
+.custom-w-26 {
+  width: 26% !important;
 }

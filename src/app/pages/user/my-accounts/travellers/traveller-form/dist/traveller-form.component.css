@@ -31,6 +31,9 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
 }
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
+}
 .ng-select.laytrip-input .ng-dropdown-panel {
   top: 100%;
   background: #ffffff;
@@ -117,13 +120,13 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
 }
@@ -184,11 +187,17 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 .ng-select.from_to_inputs .ng-input input {
   padding: 0;
 }
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
 .ng-select.from_to_inputs .ng-select-container .ng-value-container {
   width: 100%;
 }
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
 .ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
-  padding: 3px 0 0 0;
+  padding: 0;
   font-size: 16px;
   font-weight: 400;
 }
@@ -204,7 +213,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   } */
 }
 .ng-select.country_code .ng-select-container .ng-value-container .ng-value {
-  width: 50px;
+  width: 44px;
 }
 .ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
   top: -4px;
@@ -281,7 +290,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -496,7 +505,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   content: "";
   position: relative;
   padding: 5px 9px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 10px;
@@ -515,7 +524,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 .common_form .nation_wrps ng-select .ng-input[aria-expanded=false]:after {
   position: relative;
   padding: 5px 9px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 10px;
@@ -557,12 +566,17 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 .common_form .mb-sm-10.dobs .form-control {
   border-bottom: 2px solid #d6d6d6 !important;
+  /* &.ng-touched {
+    &.ng-invalid {
+      border-color: $error-color !important;
+    }
+  } */
 }
-.common_form .mb-sm-10.dobs .form-control.ng-touched.ng-invalid {
+.common_form .mb-sm-10.dobs .form-control.input-error {
   border-color: #ff0000 !important;
 }
 .common_form .mb-sm-10.expiry_date input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
   background-size: 20px;
   border: none;
 }
@@ -570,6 +584,8 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
+  top: -2px;
 }
 .common_form .mb-sm-10 .gender_anchers a {
   color: #878787;

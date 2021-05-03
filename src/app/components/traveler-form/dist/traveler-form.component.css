@@ -1,5 +1,386 @@
-.ng-customClass.country_code {
-  width: 150px;
+@charset "UTF-8";
+/*--------------------------- Color variations ----------------------*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
+.ng-select.laytrip-input {
+  padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
+}
+.ng-select.laytrip-input .ng-dropdown-panel {
+  top: 100%;
+  background: #ffffff;
+  left: 0;
+  width: 480px;
+}
+@media (max-width: 767px) {
+  .ng-select.laytrip-input .ng-dropdown-panel {
+    width: 410px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input .ng-dropdown-panel {
+    width: 100%;
+  }
+}
+.ng-select.laytrip-input .ng-input input {
+  padding: 0;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0 15px;
+}
+.ng-select.laytrip-input .ng-select-container span.ng-arrow-wrapper span.ng-arrow {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 16px !important;
+  color: red !important;
+}
+.ng-select.laytrip-input .ng-select-opened .ng-select-container {
+  z-index: 0 !important;
+}
+.ng-select.laytrip-input .ng-select-container {
+  border: none !important;
+  height: 100%;
+  min-height: 0px !important;
+  display: block;
+}
+.ng-select.laytrip-input .ng-select-container:hover {
+  box-shadow: none !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container {
+  padding-left: 0px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input {
+  padding: 0 15px;
+  top: 0;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input input {
+  padding-left: 0px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-value {
+  padding: 5px 0px 0 15px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ng-select.laytrip-input .ng-select-container .ng-clear-wrapper {
+  padding: 0 0px 0px 5px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-clear-wrapper .ng-clear {
+  font-size: 17px !important;
+  color: red !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-arrow-wrapper .ng-arrow {
+  display: none !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel {
+  border: none !important;
+  box-shadow: none !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-select-bottom {
+  border-top-color: #fff !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items {
+  max-height: 255px;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 3px 3px 3px 10px !important;
+  font-size: 14px;
+  font-weight: normal;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
+  padding: 5px 5px 5px 30px;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background-position: left center;
+  color: #012178;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+  padding: 5px 5px 5px 50px !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background-position: left 25px center;
+  color: #808080;
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+    padding: 5px 5px 5px 24px !important;
+    background-position: left 5px center;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 3px 0 0 0;
+  max-width: 275px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 175px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
+  padding-left: 0;
+}
+.ng-select.ng-customClass .ng-select-container {
+  height: 100%;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  border-radius: 0;
+}
+.ng-select.ng-customClass .ng-select-container:hover {
+  box-shadow: none;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container {
+  height: auto;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-value {
+  height: auto;
+  font-size: 14px;
+  color: #000000;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-input {
+  height: auto;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-input input {
+  height: auto !important;
+  border: none !important;
+}
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-value {
+  width: 44px;
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
+  top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
+}
+
+.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+  box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-bar {
+  background: #d8d8d8;
+  height: 3px;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  width: 13px;
+  height: 13px;
+  top: auto;
+  /* to remove the default positioning */
+  top: -6px;
+  background-color: #fff;
+  border-radius: 50%;
+  outline: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer:after {
+  display: none;
+}
+
+.redeem_laypoint .ng5-slider .ng5-slider-bubble {
+  display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
+}
+
+.custom_range_slide p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8188ab;
+}
+.custom_range_slide .ng5-slider {
+  margin: 15px 0;
+}
+.custom_range_slide .ng5-slider .ng5-slider-bubble {
+  bottom: 14px;
+  width: 100%;
+  padding: 0;
+  height: auto;
+  border: none;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8188ab;
+  display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-limit {
+  font-weight: bold;
+  display: none;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
+  height: 22px !important;
+  margin-top: -3px !important;
+  margin-bottom: 2px !important;
+}
+
+.calender_price {
+  font-size: 9px;
+  color: #012178;
+}
+
+.search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right {
+  width: 100% !important;
+}
+.search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right table {
+  width: 100% !important;
+}
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right {
+  width: 100% !important;
+}
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right table {
+  width: 100% !important;
+}
+
+.anchor-tag {
+  cursor: pointer;
+}
+
+.hotel_tab .hotels_search .hotels-grid .grid_box.secound label {
+  justify-content: flex-start !important;
+}
+
+.custom-z-index {
+  z-index: 99999 !important;
+}
+
+.ui-progressbar {
+  height: 2em !important;
+  text-align: left !important;
+  overflow: hidden !important;
+}
+
+.ui-progressbar .ui-progressbar-value {
+  margin: -1px !important;
+  height: 100% !important;
+}
+
+.ui-progressbar .ui-progressbar-overlay {
+  background: url("data:image/gif;base64,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") !important;
+  height: 100% !important;
+  filter: alpha(opacity=25) !important;
+  /* support: IE8 */
+  opacity: 0.25 !important;
+}
+
+.ui-progressbar-indeterminate .ui-progressbar-value {
+  background-image: none !important;
+}
+
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+.ng-customClass.country_code .ng-input {
+  padding-left: 0;
+}
+
+@media (max-width: 768px) {
+  .desk_names {
+    display: none;
+  }
+}
+
+.mob_names {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mob_names {
+    display: block;
+  }
 }
 
 .img_country_code {
@@ -8,4 +389,664 @@
 
 ::ng-deep .calender-passport-expiry {
   min-width: 300px !important;
+}
+
+.dobs ::ng-deep .birth_date .p-inputtext {
+  border: none;
+}
+.dobs ::ng-deep .birth_date th {
+  font-size: 13px !important;
+  border-bottom: none !important;
+  font-weight: 600 !important;
+  text-align: center;
+}
+.dobs ::ng-deep .birth_date td {
+  padding: 0.1rem !important;
+}
+.dobs ::ng-deep .birth_date td span {
+  width: 35px;
+  height: auto;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: #8188ab;
+  margin: 1px;
+  position: relative;
+}
+@media (max-width: 558px) {
+  .dobs ::ng-deep .birth_date td span {
+    width: 33px;
+  }
+}
+.dobs ::ng-deep .birth_date td span:hover {
+  background: none !important;
+}
+.dobs ::ng-deep .birth_date td span.p-highlight {
+  background: none !important;
+  font-weight: 500;
+  overflow: visible;
+}
+.dobs ::ng-deep .birth_date td span.p-highlight::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #F826C1;
+  position: absolute;
+  top: -5px;
+}
+
+.drop_down_mandetory .gender_anchers {
+  align-items: flex-start !important;
+  flex-direction: column;
+  width: 100%;
+}
+.drop_down_mandetory .gender_anchers ng-select {
+  width: 100%;
+}
+
+.accordion_bookings .card {
+  border: 1px solid #bababa;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.accordion_bookings .card:last-child {
+  margin-bottom: 0;
+}
+.accordion_bookings .card .card-header {
+  border: none;
+  background-color: transparent;
+  padding: 15px;
+  position: relative;
+}
+.accordion_bookings .card .card-header svg {
+  fill: #bababa;
+}
+.accordion_bookings .card .card-header .hotel_svg {
+  border: 2px solid #bababa;
+  border-radius: 50%;
+  padding: 5px;
+  height: 38px;
+  width: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+}
+.accordion_bookings .card .card-header .card-link {
+  font-weight: 600;
+  color: #000000;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-header .card-link {
+    font-size: 12px;
+  }
+}
+.accordion_bookings .card .card-header .card-link[aria-expanded=true]:after {
+  content: "";
+  padding: 5px 9px;
+  margin-left: 10px;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 12px;
+  transition: 0.3s;
+  right: 15px;
+}
+.accordion_bookings .card .card-header .card-link[aria-expanded=false]:after {
+  padding: 5px 9px;
+  margin-left: 10px;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 12px;
+  content: "";
+  transition: 0.3s;
+  right: 15px;
+}
+.accordion_bookings .card .card-header .card-link .tr_type {
+  flex: 1;
+  margin-left: 15px;
+}
+.accordion_bookings .card .card-header .card-link .tr_type.hotel_type_name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  margin-right: 30px;
+  flex: 3;
+  margin-left: 0;
+  max-width: 290px;
+}
+.accordion_bookings .card .card-header .card-link .adult_countr {
+  color: #bababa;
+  font-weight: 500;
+  flex: 2;
+}
+.accordion_bookings .card .card-header .card-link .trv_name {
+  flex: 2;
+}
+.accordion_bookings .card .card-header .traveler_drop_down {
+  position: absolute;
+  top: 6px;
+  margin: 0 auto;
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  left: 36%;
+  transform: translate(0, 15%);
+  border: none;
+  cursor: pointer;
+  border-radius: 0;
+  font-size: 14px;
+  color: #ffaa00;
+  background-color: #ffffff;
+  padding: 8px 20px 8px 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  align-items: center;
+  display: flex;
+  transition: 0.3s;
+}
+.accordion_bookings .card .card-header .traveler_drop_down.hotel_travller {
+  position: absolute;
+  padding: 0;
+  width: 140px;
+  top: 15px;
+  margin: 0;
+  transform: translateX(100%);
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-header .traveler_drop_down.hotel_travller {
+    position: relative;
+    left: auto;
+    padding: 0;
+    transform: translateX(0);
+    top: 10px;
+  }
+}
+.accordion_bookings .card .card-header .traveler_drop_down[aria-expanded=true]:after {
+  content: "";
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow_up.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 11px;
+  border: none;
+  height: 15px;
+  width: 15px;
+}
+.accordion_bookings .card .card-header .traveler_drop_down[aria-expanded=false]:after {
+  content: "";
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 11px;
+  border: none;
+  height: 15px;
+  width: 15px;
+}
+.accordion_bookings .card .card-header .traveler_drop_down::after {
+  content: none;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-header .traveler_drop_down {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    display: flex;
+    font-size: 12px;
+    width: 100%;
+    padding-left: 45px;
+    transform: translate(0px, 0px);
+  }
+}
+.accordion_bookings .card .card-header .traveler_drop_down:focus {
+  outline: none;
+  box-shadow: none;
+}
+.accordion_bookings .card .card-header .options_name {
+  background-color: #ffffff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  color: #ffaa00;
+  font-size: 12px;
+  padding: 2px 0;
+  cursor: pointer;
+}
+.accordion_bookings .card .card-header .options_name li {
+  padding: 4px 10px;
+}
+.accordion_bookings .card .card-body {
+  padding: 0 15px 15px;
+}
+.accordion_bookings .card .card-body .sub_cat_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.accordion_bookings .card .card-body .sub_cat_wrapper .add_btn_lined {
+  color: #ffaa00;
+  border: 1px solid #ffaa00;
+  background-color: #ffffff;
+  border-radius: 5px;
+  font-size: 12px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  padding: 0 10px;
+  position: relative;
+  margin-bottom: 15px;
+}
+.accordion_bookings .card .card-body .sub_cat_wrapper .add_btn_lined:focus {
+  outline: none;
+  box-shadow: none;
+}
+.accordion_bookings .card .card-body .sub_cat_wrapper .add_btn_lined:hover {
+  color: #ffffff;
+  background-color: #ffaa00;
+}
+.accordion_bookings .card .card-body .sub_cat_wrapper .add_btn_lined.active {
+  color: #ffffff;
+  background-color: #ffaa00;
+}
+.accordion_bookings .card .card-body .sub_cat_wrapper .add_btn_lined .close_icon {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  border: 1px solid #ffaa00;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+.accordion_bookings .card .card-body .sub_cat_wrapper .add_btn_lined .close_icon i {
+  color: #ffaa00;
+}
+.accordion_bookings .card .card-body .common_form label {
+  color: #878787;
+  font-size: 12px;
+  font-weight: 500;
+}
+.accordion_bookings .card .card-body .common_form input {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #d6d6d6;
+  font-size: 14px;
+  padding: 8px 0;
+}
+.accordion_bookings .card .card-body .common_form input:disabled {
+  background-color: #ffffff;
+}
+.accordion_bookings .card .card-body .common_form input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.accordion_bookings .card .card-body .common_form select {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #d6d6d6;
+  font-size: 14px;
+  padding: 8px 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  transition: 0.3s;
+}
+.accordion_bookings .card .card-body .common_form select:focus {
+  outline: none;
+  box-shadow: none;
+}
+.accordion_bookings .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=true]:after {
+  content: "";
+  position: relative;
+  padding: 5px 9px;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  transition: 0.3s;
+  right: 8px;
+  border: none;
+  top: 5px;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=true]:after {
+    position: absolute;
+    right: 0;
+    height: 12px;
+  }
+}
+.accordion_bookings .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=false]:after {
+  position: relative;
+  padding: 5px 9px;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  content: "";
+  transition: 0.3s;
+  right: 8px;
+  border: none;
+  top: 5px;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .common_form .nation_wrps ng-select .ng-input[aria-expanded=false]:after {
+    position: absolute;
+    right: 0;
+    height: 12px;
+  }
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10 {
+  margin-bottom: 10px;
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10.telephone_wrps .tel_span {
+  border-bottom: 2px solid #d6d6d6;
+  display: flex;
+  position: relative;
+  bottom: 2px;
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10.telephone_wrps .tel_span.input-error {
+  border-color: #ff0000 !important;
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10.telephone_wrps .tel_span input {
+  border-bottom: none;
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10.telephone_wrps .tel_span input:first-child {
+  width: 30px;
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10.dobs input {
+  background-image: none;
+  background-size: 20px;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .common_form .mb-sm-10.dobs input {
+    background-image: none;
+  }
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10 .gender_anchers {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10 .gender_anchers a {
+  color: #878787;
+  font-size: 14px;
+  padding: 0 25px 0 0;
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10 .gender_anchers a.active {
+  color: #ffaa00;
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10 .gender_anchers a:hover {
+  color: #ffaa00;
+  text-decoration: none;
+}
+.accordion_bookings .card .card-body .common_form .mb-sm-10 .gender_anchers a:focus {
+  outline: none;
+}
+.accordion_bookings .card .card-body .accordion_addn {
+  margin-top: 20px;
+}
+.accordion_bookings .card .card-body .accordion_addn .card {
+  border: none;
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-header {
+    flex-direction: column;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header .heade_wrps {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 15px;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-header .heade_wrps {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header .heade_wrps .responsive_anch {
+  display: none;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-header .heade_wrps .responsive_anch {
+    font-weight: 600;
+    color: #000000;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header .addon_anchor {
+  font-weight: 600;
+  color: #000000;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-header .addon_anchor {
+    display: none;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 2;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab {
+    flex-wrap: wrap;
+    margin: 5px 0;
+    width: 100%;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab li {
+  flex: 1;
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab li:first-child a {
+  margin-left: 0;
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab li:last-child a {
+  margin-right: 0;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab li {
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+  .accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab li:first-child {
+    margin-left: 0;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab li a {
+  background-color: #ffffff;
+  color: #707070;
+  border: 1px solid #707070;
+  border-radius: 8px;
+  font-size: 12px;
+  margin: 0 0 0 5px;
+  padding: 10px;
+  text-align: center;
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab li a br {
+  display: none;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab li a {
+    margin: 0;
+    font-size: 9px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab li a br {
+    display: flex;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-header #addon_tab li a.active {
+  color: #707070;
+  border: 1px solid #707070;
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-body {
+  padding: 0;
+  margin-top: 15px;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-body {
+    margin-top: 5px;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps {
+  display: flex;
+  justify-content: flex-end;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps {
+    justify-content: flex-start;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps .addon_btn_drop {
+  background-color: #ffffff;
+  color: #878787;
+  border: 1px solid #878787;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 0;
+  width: 100%;
+  padding: 6px 10px;
+  position: relative;
+  max-width: 453px;
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps .addon_btn_drop:focus {
+  outline: none;
+  box-shadow: none;
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps .addon_btn_drop:hover {
+  outline: none;
+  box-shadow: none;
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps .addon_btn_drop[aria-expanded=true]:after {
+  font-family: "FontAwesome";
+  content: "";
+  color: #8188ab;
+  font-weight: normal;
+  transition: 0.3s;
+  right: 10px;
+  position: absolute;
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps .addon_btn_drop[aria-expanded=false]:after {
+  font-family: "FontAwesome";
+  content: "";
+  color: #8188ab;
+  font-weight: normal;
+  transition: 0.3s;
+  right: 10px;
+  position: absolute;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps .addon_btn_drop {
+    margin-right: 0;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    font-size: 10px;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps .dropdownList li button {
+  border: none;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps .dropdownList li button {
+    padding: 5px;
+    font-size: 12px;
+    white-space: normal;
+  }
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps .dropdownList li button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.accordion_bookings .card .card-body .accordion_addn .card .card-body .addon_listins_wrps .dropdownList li button:hover {
+  outline: none;
+  box-shadow: none;
+}
+.accordion_bookings .card .card-body .edit_btns {
+  display: flex;
+  justify-content: flex-end;
+}
+.accordion_bookings .card .card-body .edit_btns button {
+  background-color: transparent;
+  color: #ffaa00;
+  box-shadow: none;
+  font-size: 14px;
+  padding: 0;
+  border: none;
+  text-align: right;
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .edit_btns button {
+    font-size: 12px;
+  }
+}
+.accordion_bookings .card .card-body .edit_btns button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.accordion_bookings .card .card-body .edit_btns.duel_buttons {
+  justify-content: space-between;
+  margin-top: 15px;
+}
+@media (max-width: 768px) {
+  .accordion_bookings .card .card-body .edit_btns.duel_buttons {
+    margin-top: 10px;
+  }
+}
+
+.hide_section {
+  display: none !important;
 }

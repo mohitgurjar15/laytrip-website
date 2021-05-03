@@ -46,7 +46,7 @@ var FlightPriceSliderComponent = /** @class */ (function () {
                 }
             ]
         };
-        this.flexibleLoading = true;
+        this.flexibleLoading = false;
         this.dates = [];
         this.departureDate = this.route.snapshot.queryParams['departure_date'];
         this.departureDate = this.commonFunction.convertDateFormat(this.departureDate, 'YYYY-MM-DD');
@@ -63,9 +63,6 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         this.infant = this.route.snapshot.queryParams['infant'];
     }
     FlightPriceSliderComponent.prototype.ngOnInit = function () {
-    };
-    FlightPriceSliderComponent.prototype.breakpoint = function (e) {
-        console.log('breakpoint', e);
     };
     FlightPriceSliderComponent.prototype.ngOnChanges = function (changes) {
         if (changes['dates'].currentValue.length) {
@@ -88,6 +85,9 @@ var FlightPriceSliderComponent = /** @class */ (function () {
             result.push(dates[i]);
         }
         this.dates = result;
+        this.dates = this.dates.filter(function (element) {
+            return element !== undefined;
+        });
     };
     FlightPriceSliderComponent.prototype.rotateArray1 = function (dates, k) {
         for (var i = 0; i < k; i++) {
