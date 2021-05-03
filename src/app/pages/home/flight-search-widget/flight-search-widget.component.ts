@@ -107,7 +107,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
     
   ngOnInit(): void {
-
     // this.departureDate = moment(this.customStartDateValidation).toDate();
     
     if(new Date(this.customStartDateValidation) <= new Date() ){

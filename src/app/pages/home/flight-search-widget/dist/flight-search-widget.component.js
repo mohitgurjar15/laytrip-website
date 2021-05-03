@@ -93,10 +93,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             this.isCalenderPriceLoading = false;
         }
         this.route.queryParams.subscribe(function (params) {
-            console.log("innn", params);
             if (Object.keys(params).length > 0 && window.location.pathname == '/flight/search') {
                 //delete BehaviorSubject in the listing page
-                _this.homeService.removeToString();
+                _this.homeService.removeToString('flight');
                 _this.calPrices = true;
                 _this.fromSearch = airports_1.airports[params['departure']];
                 _this.toSearch = airports_1.airports[params['arrival']];
@@ -141,7 +140,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             }
         });
         //delete BehaviorSubject at the end
-        this.homeService.removeToString();
+        this.homeService.removeToString('flight');
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
@@ -202,7 +201,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         queryParams.adult = this.searchFlightInfo.adult;
         queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
         queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
-        console.log("this.searchFlightInfo", this.searchFlightInfo);
         if (this.searchFlightInfo && this.totalPerson &&
             this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
             localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
@@ -213,13 +211,16 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     };
     FlightSearchWidgetComponent.prototype.toggleOnewayRoundTrip = function (type) {
         if (type === 'roundtrip') {
+            this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
+            this.rangeDates = [this.departureDate, this.returnDate];
             this.isRoundTrip = true;
         }
         else {
             this.isRoundTrip = false;
         }
     };
-    FlightSearchWidgetComponent.prototype.departureDateUpdate = function (date) {
+    FlightSearchWidgetComponent.prototype.selectDepartureDate = function (date) {
+        this.departureDate = moment(date).toDate();
         this.returnDate = new Date(date);
         this.flightReturnMinDate = new Date(date);
     };
@@ -237,7 +238,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             localStorage.setItem('__to', this.toSearch.code);
         }
     };
-    FlightSearchWidgetComponent.prototype.returnDateUpdate = function (date) {
+    FlightSearchWidgetComponent.prototype.selectReturnDateUpdate = function (date) {
         // this is only for closing date range picker, after selecting both dates
         if (this.rangeDates[1]) { // If second date is selected
             this.dateFilter.hideOverlay();
@@ -245,7 +246,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         ;
         if (this.rangeDates[0] && this.rangeDates[1]) {
             this.departureDate = this.rangeDates[0];
-            this.flightDepartureMinDate = this.rangeDates[0];
+            // this.flightDepartureMinDate = this.rangeDates[0];
             this.returnDate = this.rangeDates[1];
             this.rangeDates = [this.departureDate, this.returnDate];
         }

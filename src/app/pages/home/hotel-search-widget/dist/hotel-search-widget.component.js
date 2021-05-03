@@ -89,7 +89,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     HotelSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
-        this.checkInDate = moment(this.customStartDateValidation).toDate();
+        // this.checkInDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.checkInDate = moment().add('31', 'days').toDate();
         }
@@ -160,7 +160,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     HotelSearchWidgetComponent.prototype.setHotelDate = function () {
         var curretdate = moment().format();
         var customStartDate = moment(this.customStartDateValidation).format('YYYY-MM-DD');
-        var daysDiff = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+        var daysDiff = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
         if (curretdate < customStartDate && daysDiff > 30) {
             this.checkInDate = moment(customStartDate).toDate();
             this.checkInMinDate = this.checkInDate;

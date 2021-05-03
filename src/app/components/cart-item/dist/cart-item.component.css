@@ -413,7 +413,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 .inner_accordion_wrapper .panel-heading .panel-title a[aria-expanded=false]:after {
   padding: 5px 9px;
   margin-left: 10px;
-  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: 12px;
@@ -422,35 +422,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   position: absolute;
   right: 15px;
 }
-.inner_accordion_wrapper .panel-heading .panel-title a[aria-expanded=false] .headerin_wrapper {
-  width: 100%;
-}
-.inner_accordion_wrapper .panel-heading .panel-title a[aria-expanded=false] .headerin_wrapper .headin_upper_wrparr .hotel_names_wrps {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-}
-.inner_accordion_wrapper .panel-heading .panel-title a[aria-expanded=false] .headerin_wrapper .headin_upper_wrparr .hotel_names_wrps .hotel_name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-}
-.inner_accordion_wrapper .panel-heading .panel-title a[aria-expanded=false] .headerin_wrapper .headin_upper_wrparr .hotel_names_wrps .header_date {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-}
-.inner_accordion_wrapper .panel-heading .panel-title a.hotel_anchor {
-  position: relative;
-}
-.inner_accordion_wrapper .panel-heading .panel-title a.hotel_anchor[aria-expanded=true]:after {
-  top: 10px;
-  right: 0;
-}
-.inner_accordion_wrapper .panel-heading .panel-title a.hotel_anchor[aria-expanded=false]:after {
+.inner_accordion_wrapper .panel-heading .panel-title a[aria-expanded=false][aria-expanded=false]:after {
   top: 10px;
   right: 0;
 }
