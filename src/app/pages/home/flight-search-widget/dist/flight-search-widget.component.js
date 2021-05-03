@@ -85,7 +85,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         // this.departureDate = moment(this.customStartDateValidation).toDate();
         var _this = this;
         if (new Date(this.customStartDateValidation) <= new Date()) {
-            this.departureDate = moment().add('30', 'days').toDate();
+            this.departureDate = moment().add('31', 'days').toDate();
         }
         window.scrollTo(0, 0);
         this.countryCode = this.commonFunction.getUserCountry();
@@ -150,12 +150,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         var curretdate = moment().format();
         var juneDate = moment(this.customStartDateValidation).format('YYYY-MM-DD');
         var daysDiffFromCurToJune = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
-        date.setDate(date.getDate() + 30);
-        if (curretdate < juneDate && daysDiffFromCurToJune > 30) {
+        date.setDate(date.getDate() + 31);
+        if (curretdate < juneDate && daysDiffFromCurToJune > 31) {
             this.flightDepartureMinDate = moment(juneDate).toDate();
             this.departureDate = this.flightDepartureMinDate;
         }
-        else if (daysDiffFromCurToJune < 30) {
+        else if (daysDiffFromCurToJune < 31) {
             this.flightDepartureMinDate = date;
             this.departureDate = date;
         }
