@@ -32,7 +32,7 @@ export class HotelSuggestionComponent implements OnInit {
   searchLocation(event) {
     let notAllowedKey = [40, 38, 9, 37, 39];
     if (event.keyCode == 8) {
-      this.searchHotel(this.searchItem, 'backspace');
+      this.searchHotelAfterBackspace(this.searchItem, 'backspace');
     }
     if ((this.searchItem.length == 0 && event.keyCode == 8)) {
       this.data = [];
@@ -59,24 +59,8 @@ export class HotelSuggestionComponent implements OnInit {
     }
   }
 
-  searchHotel(searchItem, keyboardEvent = '') {
-    if (keyboardEvent === 'backspace') {
-      let tempData = [{
-        city: searchItem,
-        country: '',
-        hotel_id: '',
-        title: searchItem,
-        type: 'city',
-        geo_codes: {},
-        city_id: '',
-        objType: 'invalid'
-      }];
-      this.selectedHotel.emit(tempData[0]);
-      this.validateSearch.emit(true);
-    }
-    // searchItem = this.defaultItem.title;
-    // this.validateSearch.emit(true);
-
+  searchHotel(searchItem) {
+    searchItem = this.searchHotelAfterBackspace(searchItem, 'backspace');
     this.loading = true;
     const searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
     this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
@@ -104,12 +88,27 @@ export class HotelSuggestionComponent implements OnInit {
         this.validateSearch.emit(false);
         this.loading = false;
         this.isShowDropDown = false;
-        // if (error && error.status === 422) {
-        //   this.selectedHotel.emit(this.defaultTempData[0])
-        //   this.validateSearch.emit(true);
-        // }
       }
     );
+  }
+
+  searchHotelAfterBackspace(searchItem, keyboardEvent = '') {
+    if (keyboardEvent === 'backspace') {
+      let tempData = [{
+        city: searchItem,
+        country: '',
+        hotel_id: '',
+        title: searchItem,
+        type: 'city',
+        geo_codes: {},
+        city_id: '',
+        objType: 'invalid'
+      }];
+      this.selectedHotel.emit(tempData[0]);
+      searchItem = this.defaultItem.title;
+      this.validateSearch.emit(true);
+      return searchItem;
+    }
   }
 
 

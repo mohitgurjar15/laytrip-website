@@ -108,7 +108,7 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    this.checkInDate = moment(this.customStartDateValidation).toDate();
+    // this.checkInDate = moment(this.customStartDateValidation).toDate();
 
     if (new Date(this.customStartDateValidation) <= new Date()) {
       this.checkInDate = moment().add('31', 'days').toDate();
@@ -185,7 +185,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   setHotelDate() {
     var curretdate = moment().format();
     let customStartDate: any = moment(this.customStartDateValidation).format('YYYY-MM-DD');
-    let daysDiff = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+    let daysDiff = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
 
     if (curretdate < customStartDate && daysDiff > 30) {
       this.checkInDate = moment(customStartDate).toDate();
