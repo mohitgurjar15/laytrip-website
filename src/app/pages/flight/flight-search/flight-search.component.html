@@ -40,10 +40,15 @@
                             src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                 </div>
                 <div class="section_description" *ngIf="isFlightAvaibale">
-                    <span class="sec_text">Flight is not available.&nbsp;</span>
+                    <span class="sec_text">This flight is no longer available.</span>
                     <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img
                             src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                 </div>
+               <!--  <div class="section_description" *ngIf="isFlightAvaibale">
+                    <span class="sec_text">Flight is not available.&nbsp;</span>
+                    <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img
+                            src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+                </div> -->
                 <app-flight-search-widget [calenderPrices]="calenderPrices"></app-flight-search-widget>
             </div>
         </div>
@@ -133,7 +138,8 @@
                     <app-flight-price-slider *ngIf="dates && dates.length" [dates]="dates"
                         [flexibleLoading]="flexibleLoading">
                     </app-flight-price-slider>
-                    <app-flight-item-wrapper (maxCartValidation)="maxCartValidation($event)"
+                    <app-flight-item-wrapper 
+                    (maxCartValidation)="maxCartValidation($event)"                  
                         [flightDetails]="flightDetails" (changeLoading)="changeLoading($event)"
                         filteredLabel="{{filteredLabel}}">
                     </app-flight-item-wrapper>
