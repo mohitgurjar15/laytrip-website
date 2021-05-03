@@ -352,11 +352,11 @@ var FlightSearchComponent = /** @class */ (function () {
         this.isCartFull = false;
     };
     FlightSearchComponent.prototype.flightNotAvailable = function (data) {
-        this.isFlightAvaibale = data;
+        // this.isFlightAvaibale = data;
     };
     FlightSearchComponent.prototype.hideFlightNotAvailable = function () {
         this.isFlightAvaibale = false;
-        window.location.reload();
+        // window.location.reload();
     };
     FlightSearchComponent.prototype.moduleTabClick = function (tabName) {
         if (tabName == 'hotel') {
