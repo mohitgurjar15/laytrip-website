@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   name:'suresh',
-  apiUrl:'http://localhost:4040/',
+  apiUrl:'https://hotel-api.laytrip.com/',
   s3BucketUrl:'http://localhost/laytrip-design-main/laytrip_ui/',
   fb_api_key:'402941427334423',
   google_client_id:'154754991565-9lo2g91remkuefocr7q2sb92g24jntba.apps.googleusercontent.com',

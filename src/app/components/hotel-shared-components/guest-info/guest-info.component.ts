@@ -101,7 +101,7 @@ export class GuestInfoComponent implements OnInit {
     return new Array(i);
   }
 
-  addRoom(index) {
+  addRoom() {
     if (typeof this.roomsGroup.rooms == 'undefined' || this.roomsGroup.rooms < 9) {
       this.roomsGroup.rooms += 1;
       this.totalPerson = this.getTotalPerson();
@@ -109,7 +109,7 @@ export class GuestInfoComponent implements OnInit {
     }
   }
 
-  removeRoom(index) {
+  removeRoom() {
     if (this.roomsGroup.rooms > 1) {
       this.roomsGroup.rooms -= 1;
       this.changeValue.emit(this.roomsGroup);
