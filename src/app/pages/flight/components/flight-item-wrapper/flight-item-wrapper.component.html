@@ -7,7 +7,7 @@
                     <div class="left_side desktop_on"> 
                         <div class="flight_nams_wrps">
                             <div class="fight_secs  {{route.stops[0].airline_logo}}">
-                                <img src="{{ route.stops[0].airline_logo }}  | secure | async" alt="Airlines Logo"
+                                <img src="{{ route.stops[0].airline_logo }}" alt="Airlines Logo"
                                     onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                 <span class="fl_name">
                                     {{route.stops[0].airline_name}}
@@ -75,7 +75,7 @@
                             <div class="left_side">
                                 <div class="flight_nams_wrps">
                                     <div class="fight_secs {{route.stops[0].airline_logo}}">
-                                        <img src="{{ route.stops[0].airline_logo || defaultImage }} | secure" alt="Airlines Logo"
+                                        <img src="{{ route.stops[0].airline_logo || defaultImage }}" alt="Airlines Logo"
                                             onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                         <span class="fl_name">
                                             {{route.stops[0].airline_name}}
