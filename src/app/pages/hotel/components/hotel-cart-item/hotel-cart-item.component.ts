@@ -27,7 +27,7 @@ export class HotelCartItemComponent implements OnInit {
   modalRef;
 
   constructor(
-    private commonFunction: CommonFunction,
+    public commonFunction: CommonFunction,
     private genericService: GenericService,
     private cartService: CartService,
     public cd: ChangeDetectorRef,
