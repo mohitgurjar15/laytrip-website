@@ -341,9 +341,9 @@ h3 {
                 background-color: $background-white;
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
-                border-bottom: none;
                 border: 1px solid $box-border-color;
-                border-bottom: none;
+                //border-bottom: none;
+                border-bottom: 0px solid $box-border-color;
                 width: 190px;
                 margin: 0;
                 max-width: 100%;

@@ -1929,14 +1929,17 @@ agm-map {
             padding: 10px;
         }
 
+        .show-map{
+            margin-bottom: 20px;
+        }
         .search_block {
             width: 100%;
             margin-bottom: 15px;
             border: 1px solid $box-border-color;
             border-radius: 10px;
-            &:first-child{
-                margin-top: 20px;
-            }
+            // &:first-child{
+            //     margin-top: 20px;
+            // }
             @include tab-view {
                 //width: 49%;
                 width: 100%;
@@ -1962,23 +1965,25 @@ agm-map {
                     .box_left {
                         display: flex;
                         flex: 7;
+                        .block_main{
+                            width: 100%;
+                            .box_img {
+                                display: flex;
+                                flex: 2;
+                            }
 
-                        .box_img {
-                            display: flex;
-                            flex: 2;
-                        }
+                            .box_info {
+                                padding: 0 15px;
+                                display: flex;
+                                flex: 3;
+                                flex-direction: column;
+                                height: 100%;
+                                min-height: 170px;
+                                justify-content: space-between;
 
-                        .box_info {
-                            padding: 0 15px;
-                            display: flex;
-                            flex: 3;
-                            flex-direction: column;
-                            height: 100%;
-                            min-height: 170px;
-                            justify-content: space-between;
-
-                            @include mini-screen {
-                                max-width: 290px;
+                                @include mini-screen {
+                                    max-width: 290px;
+                                }
                             }
                         }
                     }
