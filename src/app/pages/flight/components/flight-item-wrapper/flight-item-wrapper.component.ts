@@ -235,7 +235,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         
         let payload = {
           module_id: 1,
-          route_code: 'route.route_code'
+          route_code: route.route_code
         };
         //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
         this.cartService.addCartItem(payload).subscribe((res: any) => {

@@ -196,7 +196,7 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             sessionStorage.setItem('_itinerary', JSON.stringify(itinerary));
             var payload = {
                 module_id: 1,
-                route_code: 'route.route_code'
+                route_code: route.route_code
             };
             //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
             this.cartService.addCartItem(payload).subscribe(function (res) {
