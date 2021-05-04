@@ -13,10 +13,25 @@
 }
 .section_description {
     //transform: translate(-60%, -70%);
-    transform: translate(-100%, -50%);
-    max-width: 240px;
-    right: 0;
+    //transform: translate(-100%, -50%);
+    width: 240px;
+    right: 10px;
+    bottom: 10%;
     position: absolute;
+
+    @include tab-view{
+        bottom: 0;
+        right: 0;
+    }
+    .sec_text{
+       // padding-right: 15px;
+    }
+    a{
+        cursor: pointer;
+        width: 20px !important;
+        position: absolute;
+        right: 0;
+    }
 }
 
 
@@ -707,6 +722,12 @@
                     @include tab-view {
                         min-width: 71px;
                     }
+
+                    .cta_btn {
+                        position: relative;
+
+                    }
+                    
 
                     .fare_type {
                         color: $mid_gray_bg;
