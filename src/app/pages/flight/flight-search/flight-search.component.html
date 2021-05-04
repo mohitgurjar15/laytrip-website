@@ -136,6 +136,7 @@
                     </app-flight-price-slider>
                     <app-flight-item-wrapper 
                     (maxCartValidation)="maxCartValidation($event)"                  
+                    (removeFlight)="removeNotAvailabeflight($event)"                  
                         [flightDetails]="flightDetails" (changeLoading)="changeLoading($event)"
                         filteredLabel="{{filteredLabel}}">
                     </app-flight-item-wrapper>

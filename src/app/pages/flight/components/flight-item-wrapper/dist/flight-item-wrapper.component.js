@@ -32,7 +32,8 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         this.modalService = modalService;
         this.changeLoading = new core_1.EventEmitter;
         this.maxCartValidation = new core_1.EventEmitter;
-        this.flightNotAvailable = new core_1.EventEmitter;
+        this.removeFlight = new core_1.EventEmitter;
+        this.isFlightNotAvailable = false;
         this.cartItems = [];
         this.animationState = 'out';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -162,6 +163,13 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         });
     };
     FlightItemWrapperComponent.prototype.bookNow = function (route) {
+        var _this = this;
+        this.removeFlight.emit(this.flightUniqueCode);
+        this.isFlightNotAvailable = false;
+        /*  console.log(this.flightListArray)
+        this.flightListArray = this.flightListArray.filter(obj => obj.unique_code !== this.flightUniqueCode);
+        console.log(this.flightListArray)
+     */
         /* if (!this.isLoggedIn) {
           const modalRef = this.modalService.open(LaytripOkPopup, {
             centered: true,
@@ -169,7 +177,6 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             backdrop: 'static'
           });
         } else { */
-        var _this = this;
         if (this.cartItems && this.cartItems.length >= 10) {
             this.changeLoading.emit(false);
             this.maxCartValidation.emit(true);
@@ -189,7 +196,7 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             sessionStorage.setItem('_itinerary', JSON.stringify(itinerary));
             var payload = {
                 module_id: 1,
-                route_code: route.route_code
+                route_code: 'route.route_code'
             };
             //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
             this.cartService.addCartItem(payload).subscribe(function (res) {
@@ -204,7 +211,9 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             }, function (error) {
                 _this.changeLoading.emit(false);
                 //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
-                _this.flightNotAvailable.emit(true);
+                _this.isFlightNotAvailable = true;
+                _this.flightUniqueCode = route.unique_code;
+                // this.isFlightNotAvailable.emit(true)
             });
         }
         /* } */
@@ -248,6 +257,11 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         var newTime = this.commonFunction.convertTime(time, 'h:mm A', 'h:mma');
         return newTime.slice(0, -1);
     };
+    FlightItemWrapperComponent.prototype.hideFlightNotAvailable = function () {
+        this.isFlightNotAvailable = false;
+        this.flightUniqueCode = '';
+        window.location.reload();
+    };
     __decorate([
         core_1.Input()
     ], FlightItemWrapperComponent.prototype, "flightDetails");
@@ -265,7 +279,7 @@ var FlightItemWrapperComponent = /** @class */ (function () {
     ], FlightItemWrapperComponent.prototype, "maxCartValidation");
     __decorate([
         core_1.Output()
-    ], FlightItemWrapperComponent.prototype, "flightNotAvailable");
+    ], FlightItemWrapperComponent.prototype, "removeFlight");
     FlightItemWrapperComponent = __decorate([
         core_1.Component({
             selector: 'app-flight-item-wrapper',

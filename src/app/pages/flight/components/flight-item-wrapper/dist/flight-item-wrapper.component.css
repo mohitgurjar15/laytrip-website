@@ -369,6 +369,13 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   width: 100%;
 }
 
+.section_description {
+  transform: translate(-100%, -50%);
+  max-width: 240px;
+  right: 0;
+  position: absolute;
+}
+
 .view_more {
   cursor: pointer;
 }

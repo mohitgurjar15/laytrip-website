@@ -387,8 +387,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.isCartFull = false;
   }
 
-  flightNotAvailable(data) {
-    // this.isFlightAvaibale = data;
+  removeNotAvailabeflight(data) {
+    this.flightDetails = this.flightDetails.filter(obj => obj.unique_code !== data);    
+    this.isFlightAvaibale = data;
   }
 
   hideFlightNotAvailable() {
