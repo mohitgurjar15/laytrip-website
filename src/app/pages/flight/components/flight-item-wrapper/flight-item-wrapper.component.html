@@ -196,6 +196,11 @@
                 </div>
             </div>
         </div>
+        <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
+            <span class="sec_text">This flight is no longer available.</span>
+            <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img
+                    src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+        </div>
         <div [id]="'detail_accorrd'+i" [attr.aria-labelledby]="'accordion_infos'+i" class="collapse detail_accorrd"
             data-parent="#routing_main_wrps">
             <div class="accordion_body">
@@ -275,6 +280,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 

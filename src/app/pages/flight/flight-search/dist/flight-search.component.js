@@ -351,8 +351,9 @@ var FlightSearchComponent = /** @class */ (function () {
     FlightSearchComponent.prototype.hideMaxCartValidation = function () {
         this.isCartFull = false;
     };
-    FlightSearchComponent.prototype.flightNotAvailable = function (data) {
-        // this.isFlightAvaibale = data;
+    FlightSearchComponent.prototype.removeNotAvailabeflight = function (data) {
+        this.flightDetails = this.flightDetails.filter(function (obj) { return obj.unique_code !== data; });
+        this.isFlightAvaibale = data;
     };
     FlightSearchComponent.prototype.hideFlightNotAvailable = function () {
         this.isFlightAvaibale = false;

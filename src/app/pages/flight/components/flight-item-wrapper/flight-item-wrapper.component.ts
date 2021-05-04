@@ -27,7 +27,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   @Input() filteredLabel;
   @Output() changeLoading = new EventEmitter;
   @Output() maxCartValidation = new EventEmitter;
-  @Output() flightNotAvailable = new EventEmitter;
+  @Output() removeFlight = new EventEmitter;
+  isFlightNotAvailable : boolean = false;
   cartItems = [];
 
   animationState = 'out';
@@ -55,7 +56,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   userInfo;
   totalLaycreditPoints: number = 0;
   showFareDetails: number = 0;
-
+  flightUniqueCode;
   isRoundTrip = false;
 
   subcell = '$100';
@@ -200,6 +201,12 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   bookNow(route) {
+    this.removeFlight.emit(this.flightUniqueCode);
+    this.isFlightNotAvailable = false;
+    /*  console.log(this.flightListArray)
+    this.flightListArray = this.flightListArray.filter(obj => obj.unique_code !== this.flightUniqueCode);
+    console.log(this.flightListArray)
+ */
     /* if (!this.isLoggedIn) {
       const modalRef = this.modalService.open(LaytripOkPopup, {
         centered: true,
@@ -228,7 +235,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         
         let payload = {
           module_id: 1,
-          route_code: route.route_code
+          route_code: 'route.route_code'
         };
         //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
         this.cartService.addCartItem(payload).subscribe((res: any) => {
@@ -244,7 +251,9 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
         }, error => {
           this.changeLoading.emit(false);
           //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
-          this.flightNotAvailable.emit(true)
+          this.isFlightNotAvailable = true;
+          this.flightUniqueCode = route.unique_code;
+          // this.isFlightNotAvailable.emit(true)
         });
 
       }
@@ -294,6 +303,13 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     let newTime =  this.commonFunction.convertTime(time,'h:mm A','h:mma')
     return newTime.slice(0, -1)
   }
+
+  hideFlightNotAvailable() {
+    this.isFlightNotAvailable = false;
+    this.flightUniqueCode = '';
+    window.location.reload();
+  }
+
 }
 
 @Component({
