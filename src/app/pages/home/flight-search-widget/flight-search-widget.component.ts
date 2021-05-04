@@ -45,8 +45,8 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   flightDepartureMinDate;
   flightReturnMinDate;
-  customStartDateValidation = "2021-06-01";
-  customEndDateValidation = "2021-06-07";
+  customStartDateValidation = "2021-06-02";
+  customEndDateValidation = "2021-06-09";
   departureDate;
   returnDate : any = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
   totalPerson: number = 1;
@@ -103,14 +103,14 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
+
   }
     
   ngOnInit(): void {
-
-    this.departureDate = moment(this.customStartDateValidation).toDate();
+    // this.departureDate = moment(this.customStartDateValidation).toDate();
     
     if(new Date(this.customStartDateValidation) <= new Date() ){
-      this.departureDate = moment().add('30','days').toDate();      
+      this.departureDate = moment().add('31','days').toDate();      
     }
 
     window.scrollTo(0, 0);
@@ -119,11 +119,9 @@ export class FlightSearchWidgetComponent implements OnInit {
       this.isCalenderPriceLoading = false;
     }
     this.route.queryParams.subscribe(params => {
-
-      console.log("innn",params)
       if (Object.keys(params).length > 0 && window.location.pathname=='/flight/search') {
         //delete BehaviorSubject in the listing page
-        this.homeService.removeToString();  
+        this.homeService.removeToString('flight');  
 
         this.calPrices = true;
         this.fromSearch = airports[params['departure']];
@@ -160,17 +158,16 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.toSearch = airports[keys];
         this.flightSearchForm.controls.fromDestination.setValue('');
         this.fromSearch = [];
-
         if(!this.isRoundTrip){
-          this.departureDate = moment(this.customStartDateValidation).add(1, 'M').toDate();
+          // this.departureDate = moment(this.customStartDateValidation).add(31, 'days').toDate();
         } else {
-          this.rangeDates =[ moment(this.customStartDateValidation).add(1, 'M').toDate(), moment(this.customStartDateValidation).add(38, 'days').toDate()];
+          this.rangeDates =[ this.departureDate, moment(this.departureDate).add(7, 'days').toDate()];
           this.searchFlightInfo.arrival = this.toSearch.code;
         }
       }
     });
     //delete BehaviorSubject at the end
-    this.homeService.removeToString();  
+    this.homeService.removeToString('flight');  
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;      
     
   }
@@ -181,18 +178,20 @@ export class FlightSearchWidgetComponent implements OnInit {
 
 
   setFlightDepartureMinDate(){
+    
     let  date = new Date();
+    
     var curretdate = moment().format();
     let  juneDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
     
-    let daysDiffFromCurToJune = moment(this.customEndDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+    let daysDiffFromCurToJune = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
 
-    date.setDate(date.getDate() + 30);
+    date.setDate(date.getDate() + 31);
 
-    if(curretdate < juneDate && daysDiffFromCurToJune > 30 ){    
+    if(curretdate < juneDate && daysDiffFromCurToJune > 31 ){    
       this.flightDepartureMinDate =  moment(juneDate).toDate();
       this.departureDate = this.flightDepartureMinDate; 
-    } else if(daysDiffFromCurToJune < 30){
+    } else if(daysDiffFromCurToJune < 31){
       this.flightDepartureMinDate =  date;
       this.departureDate = date; 
     } else {
@@ -240,7 +239,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     queryParams.adult = this.searchFlightInfo.adult;
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
-    console.log("this.searchFlightInfo",this.searchFlightInfo)
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
@@ -253,8 +251,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   toggleOnewayRoundTrip(type) {
-
     if (type === 'roundtrip') {
+      this.returnDate =   moment(this.departureDate).add(7, 'days').toDate();
+      this.rangeDates = [this.departureDate, this.returnDate];
       this.isRoundTrip = true;
     } else {
       this.isRoundTrip = false;
@@ -262,7 +261,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
 
-  departureDateUpdate(date) {
+  selectDepartureDate(date) {
+    this.departureDate = moment(date).toDate();
     this.returnDate = new Date(date);
     this.flightReturnMinDate = new Date(date);
   }
@@ -287,14 +287,14 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
 
-  returnDateUpdate(date) {
+  selectReturnDateUpdate(date) {
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();
     };
     if (this.rangeDates[0] && this.rangeDates[1]) {
       this.departureDate = this.rangeDates[0];
-      this.flightDepartureMinDate = this.rangeDates[0];
+      // this.flightDepartureMinDate = this.rangeDates[0];
       this.returnDate = this.rangeDates[1];
       this.rangeDates = [this.departureDate, this.returnDate];
     }

@@ -93,8 +93,8 @@ export class AddCardComponent implements OnInit {
     });
 
     Spreedly.on('ready', function (frame) {
-      Spreedly.setPlaceholder("number", "Payment card number");
-      Spreedly.setPlaceholder("cvv", "CVV");
+      Spreedly.setPlaceholder("number", "000 000 0000");
+      Spreedly.setPlaceholder("cvv", "Enter CVV No.");
       Spreedly.setFieldType("cvv", "text");
       Spreedly.setFieldType('number', 'text');
       // Spreedly.setNumberFormat('maskedFormat');
@@ -157,7 +157,7 @@ export class AddCardComponent implements OnInit {
           // this.emitNewCard.emit(obj);
           $('#main_loader').hide();
 
-          let s3BucketUrl = 'http://d2q1prebf1m2s9.cloudfront.net/';
+          let s3BucketUrl = 'https://d2q1prebf1m2s9.cloudfront.net/';
           var cardObject = {
             visa: `${s3BucketUrl}assets/images/card_visa.svg`,
             master: `${s3BucketUrl}assets/images/master_cards_img.svg`,
@@ -228,7 +228,6 @@ export class AddCardComponent implements OnInit {
     // Tokenize!
     Spreedly.tokenizeCreditCard(options);
 
-    console.log("Submit payment")
     setTimeout(() => {
       this.cardListChangeCount += this.cardListChangeCount + 1;
       this.emitCardListChange.emit(this.cardListChangeCount);

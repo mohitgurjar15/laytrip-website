@@ -62,11 +62,11 @@ export class BookingComponent implements OnInit {
   isAllAlertClosed: boolean = true;
   isSubmitted: boolean = false;
   alertErrorMessage: string = '';
-  inValidCartTravller=[]
-
+  inValidCartTravller = []
+  lottieLoaderType = "";
   add_new_card = false;
   totalCard: number = 0;
-
+  modules = [];
   constructor(
     private router: Router,
     private flightService: FlightService,
@@ -100,25 +100,50 @@ export class BookingComponent implements OnInit {
       let price: any;
       for (let i = 0; i < items.data.length; i++) {
         cart = {};
+        price = {}
+
+
         cart.type = items.data[i].type;
-        cart.module_info = items.data[i].moduleInfo[0];
-        cart.is_available = items.data[i].is_available;
-        cart.old_module_info = {
-          selling_price: items.data[i].oldModuleInfo[0].selling_price
-        };
         cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
+        cart.is_available = items.data[i].is_available;
+
+        this.modules.push(items.data[i].type);
+        if (this.modules.some(x => x === "flight")) {
+          this.lottieLoaderType = "flight";
+        } else {
+          this.lottieLoaderType = "hotel";
+        }
+        if (items.data[i].type == 'flight') {
+          cart.module_info = items.data[i].moduleInfo[0];
+          cart.old_module_info = {
+            selling_price: items.data[i].oldModuleInfo[0].selling_price
+          };
+
+          price.selling_price = items.data[i].moduleInfo[0].selling_price;
+          price.departure_date = items.data[i].moduleInfo[0].departure_date;
+          price.start_price = items.data[i].moduleInfo[0].start_price;
+          price.type = items.data[i].type;
+          price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
+        }
+        else if (items.data[i].type == 'hotel') {
+          cart.module_info = items.data[i].moduleInfo[0];
+          cart.old_module_info = {
+            selling_price: items.data[i].oldModuleInfo[0].selling.total
+          };
+
+          price.type = items.data[i].type;
+          price.price_break_down = items.data[i].moduleInfo[0].selling;
+          price.mandatory_fee_details = items.data[i].moduleInfo[0].mandatory_fee_details;
+          price.selling_price = items.data[i].moduleInfo[0].selling.total;
+          price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in, "YYYY-MM-DD").format('DD/MM/YYYY');
+          price.start_price = 0;
+          price.location = items.data[i].moduleInfo[0].hotel_name;
+        }
         this.carts.push(cart);
-
-        price = {}
-        price.selling_price = items.data[i].moduleInfo[0].selling_price;
-        price.departure_date = items.data[i].moduleInfo[0].departure_date;
-        price.start_price = items.data[i].moduleInfo[0].start_price;
-        price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
-        this.cartPrices.push(price)
-
+        this.cartPrices.push(price);
       }
-      console.log("carts", this.carts)
+
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices)
 
@@ -154,14 +179,14 @@ export class BookingComponent implements OnInit {
       }
     })
 
-    this.cartService.getLoaderStatus.subscribe(state=>{
-      this.loading=state;
+    this.cartService.getLoaderStatus.subscribe(state => {
+      this.loading = state;
     })
 
-    this.genericService.getCardItems.subscribe((res:any)=>{
+    this.genericService.getCardItems.subscribe((res: any) => {
 
-      if(this.totalCard!=res.length){
-        this.totalCard=res.length;
+      if (this.totalCard != res.length) {
+        this.totalCard = res.length;
         this.add_new_card = false;
       }
     })
@@ -170,7 +195,7 @@ export class BookingComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    console.log(event,"------");
+    console.log(event, "------");
     //this.totalCard = event;
   }
 
@@ -179,7 +204,7 @@ export class BookingComponent implements OnInit {
   }
 
   closeNewCardPanel(event) {
-    console.log("Event",event)
+    console.log("Event", event)
     this.add_new_card = event;
   }
 
@@ -285,6 +310,21 @@ export class BookingComponent implements OnInit {
       },
       type4: {
         adults: []
+      },
+      type5: {
+        adults: []
+      },
+      type6: {
+        adults: []
+      },
+      type7: {
+        adults: []
+      },
+      type8: {
+        adults: []
+      },
+      type9: {
+        adults: []
       }
     });
 
@@ -294,6 +334,7 @@ export class BookingComponent implements OnInit {
     this.cartService.setCartNumber(0);
     this.cartService.setCardId(0);
     this.$cartIdsubscription.unsubscribe();
+    this.checkOutService.setTravelers([]);
   }
 
   redirectTo(uri: string) {
@@ -382,48 +423,60 @@ export class BookingComponent implements OnInit {
 
   validateCartItems() {
     this.validationErrorMessage = '';
-    this.inValidCartTravller=[];
+    this.inValidCartTravller = [];
     /* if (!this.isValidTravelers) { */
-      //this.validationErrorMessage = 'Complete required fields in Traveler Details for'
-      let message = '';
+    //this.validationErrorMessage = 'Complete required fields in Traveler Details for'
+    let message = '';
 
-      for (let i in Object.keys(this.travelerForm.controls)) {
-        message = '';
-        for(let j=0; j< this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++){
-          if(typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status=='INVALID'){
+    for (let i in Object.keys(this.travelerForm.controls)) {
+      message = '';
+      for (let j = 0; j < this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++) {
+        console.log(this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j] )
+        if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status == 'INVALID') {
 
 
-            if(this.validationErrorMessage==''){
+          if (this.validationErrorMessage == '') {
+            this.validationErrorMessage = 'Complete required fields in Traveler Details for'
+          }
+          if (!this.inValidCartTravller.includes(i)) {
+            if (this.carts[i].type == 'flight') {
+              message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+            }
+            if (this.carts[i].type == 'hotel') {
+              message = ` ${this.carts[i].module_info.hotel_name} ,`;
+            }
+
+            this.validationErrorMessage += message;
+          }
+          this.isValidTravelers = false;
+          this.inValidCartTravller.push(i)
+        }
+        if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status == 'VALID') {
+
+          if (this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].value.userId == "") {
+
+            if (this.validationErrorMessage == '') {
               this.validationErrorMessage = 'Complete required fields in Traveler Details for'
             }
-            if(!this.inValidCartTravller.includes(i)){
-              message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+            if (!this.inValidCartTravller.includes(i)) {
+              if (this.carts[i].type == 'flight') {
+                message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+              }
+              if (this.carts[i].type == 'hotel') {
+                message = ` ${this.carts[i].module_info.title} ,`;
+              }
               this.validationErrorMessage += message;
             }
-            this.isValidTravelers=false;
+
+            this.isValidTravelers = false;
             this.inValidCartTravller.push(i)
-          }
-          if(typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status=='VALID'){
-
-            if(this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].value.userId==""){
-
-              if(this.validationErrorMessage==''){
-                this.validationErrorMessage = 'Complete required fields in Traveler Details for'
-              }
-              if(!this.inValidCartTravller.includes(i)){
-                message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
-                this.validationErrorMessage += message;
-              }
-              
-              this.isValidTravelers=false;
-              this.inValidCartTravller.push(i)
-            }
           }
         }
       }
+    }
 
-      let index = this.validationErrorMessage.lastIndexOf(" ");
-      this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
+    let index = this.validationErrorMessage.lastIndexOf(" ");
+    this.validationErrorMessage = this.validationErrorMessage.substring(0, index);
     /* } */
 
     let notAvailableMessage = '';
@@ -432,7 +485,12 @@ export class BookingComponent implements OnInit {
       notAvailableMessage = '';
       if (!this.carts[i].is_available) {
         this.isNotAvailableItinerary = true;
-        notAvailableMessage = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+        if (this.carts[i].type == 'flight') {
+          notAvailableMessage = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+        }
+        if (this.carts[i].type == 'hotel') {
+          notAvailableMessage = ` ${this.carts[i].module_info.title} ,`;
+        }
         this.notAvailableError += notAvailableMessage;
       }
     }
@@ -499,19 +557,26 @@ export class BookingComponent implements OnInit {
       }
     }
 
-    console.log(this.travelerForm,"-----");
     if (this.isValidTravelers && this.cardToken != '' && !this.isNotAvailableItinerary && this.isAllAlertClosed) {
       this.loading = true;
       this.travelerForm.enable();
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
-        //console.log(data,"=======",this.travelerForm);
-        //return false;
-        //let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
-        let travelers=[];
-        for(let k=0; k<data.length; k++){
+        /*  */
+        let travelers = [];
+        for (let k = 0; k < data.length; k++) {
           travelers.push({
             traveler_id: data[k].userId
+          })
+
+          if (data[k].dob) {
+            data[k].dob = moment(data[k].dob, "MM/DD/YYYY").format("YYYY-MM-DD")
+          }
+          if (data[k].passport_expiry) {
+            data[k].passport_expiry = moment(data[k].passport_expiry, "MM/DD/YYYY").format("YYYY-MM-DD")
+          }
+          this.travelerService.updateAdult(data[k], data[k].userId).subscribe((traveler: any) => {
+
           })
         }
         let cartData = {

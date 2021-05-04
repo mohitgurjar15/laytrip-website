@@ -1,0 +1,17 @@
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.timer_bloc{
+    li{
+        width: 20%;
+        float: left;
+    }
+}

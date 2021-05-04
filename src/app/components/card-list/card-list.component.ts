@@ -6,6 +6,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 import { cardObject, cardType } from '../../_helpers/card.helper';
 import * as moment from 'moment';
+import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
 
 @Component({
   selector: 'app-card-list',
@@ -110,8 +111,9 @@ export class CardListComponent implements OnInit {
   }
 
   openDeleteModal(content, card) {
-    if (card && card.isDefault) {
-      this.is_open_popup = true;
+    let user = getLoginUserInfo();
+    if (card && card.isDefault && (user.roleId && user.roleId != 7)) {      
+        this.is_open_popup = true;
     } else {
       this.cardId = card.id;
       this.deleteApiError = '';

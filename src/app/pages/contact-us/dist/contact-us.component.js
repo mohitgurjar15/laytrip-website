@@ -23,13 +23,14 @@ var ContactUsComponent = /** @class */ (function () {
         this.messageLenght = 0;
         this.submitted = false;
         this.fileUploadErrorMessage = '';
+        this.errorMessage = '';
+        this.fileNotAllow = '';
         this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
         this.image = '';
         this.pdfIcon = this.s3BucketUrl + 'assets/images/pdf.jpeg';
         this.imageFileError = false;
         this.attatchmentFiles = [];
         this.files = [];
-        this.spinner = false;
     }
     ContactUsComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
@@ -45,7 +46,7 @@ var ContactUsComponent = /** @class */ (function () {
             message: ['', [forms_1.Validators.required]]
         });
     };
-    ContactUsComponent.prototype.onSubmit = function () {
+    ContactUsComponent.prototype.onSubmit = function (data) {
         var _this = this;
         this.loading = true;
         this.submitted = true;
@@ -61,13 +62,15 @@ var ContactUsComponent = /** @class */ (function () {
         formdata.append("name", this.contactUsForm.value.name);
         formdata.append("email", this.contactUsForm.value.email);
         formdata.append("message", this.contactUsForm.value.message);
-        formdata.append("file", this.files ? this.files : []);
-        console.log(this.files);
+        for (var i = 0; i < this.files.length; i++) {
+            formdata.append("file", this.files[i]);
+        }
         this.genericService.createEnquiry(formdata).subscribe(function (res) {
             $('#contact_modal').modal('hide');
             _this.loading = _this.submitted = false;
             _this.contactUsForm.reset();
             _this.attatchmentFiles = _this.files = [];
+            _this.errorMessage = '';
             _this.toastr.show(res.message, '', {
                 toastClass: 'custom_toastr',
                 titleClass: 'custom_toastr_title',
@@ -89,41 +92,49 @@ var ContactUsComponent = /** @class */ (function () {
     };
     ContactUsComponent.prototype.closeModal = function () {
         var _this = this;
+        this.messageLenght = 0;
         this.submitted = false;
         Object.keys(this.contactUsForm.controls).forEach(function (key) {
             _this.contactUsForm.get(key).markAsUntouched();
         });
         this.contactUsForm.reset();
         this.attatchmentFiles = [];
+        this.errorMessage = '';
     };
     ContactUsComponent.prototype.documentFileChange = function (event) {
         var _this = this;
-        this.spinner = true;
+        console.log(event);
+        this.errorMessage = '';
         if (this.attatchmentFiles.length >= 5) {
-            this.spinner = false;
-            this.toastr.show('Maximum upload of 5 files.', '', {
-                toastClass: 'custom_toastr',
-                titleClass: 'custom_toastr_title',
-                messageClass: 'custom_toastr_message'
-            });
+            $("#contact_modal").scrollTop(100);
+            this.errorMessage = 'Maximum upload of 5 files';
             return;
         }
-        if (event.target.files && event.target.files[0]) {
+        if (event.target.files && event.target.files) {
+            var reader_1 = new FileReader();
             this.fileUploadErrorMessage = '';
             this.imageFileError = false;
             var fileList_1 = event.target.files;
             var fileSize = Math.floor(fileList_1[0].size / 1000);
             this.image = '';
             if (fileList_1[0] && (fileList_1[0].type == 'image/jpg' ||
+                fileList_1[0].type == 'image/jpeg' ||
                 fileList_1[0].type == 'image/png' ||
                 fileList_1[0].type == 'application/pdf')) {
                 if (fileSize > 10000) {
                     this.imageFileError = true;
                     this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
                 }
-                var reader_1 = new FileReader();
+                var sameFile = this.attatchmentFiles.filter(function (file) {
+                    if (file.fullFileName == fileList_1[0].name) {
+                        return true;
+                    }
+                });
+                if (sameFile.length > 0) {
+                    this.errorMessage = 'File already uploaded, Please try with different.';
+                    return;
+                }
                 reader_1.readAsDataURL(event.target.files[0]);
-                this.fileObj = event.target.files[0];
                 reader_1.onload = function (_event) {
                     _this.defaultImage = '';
                     _this.image = fileList_1[0].type == 'application/pdf' ? _this.pdfIcon : reader_1.result;
@@ -132,29 +143,29 @@ var ContactUsComponent = /** @class */ (function () {
                     var attatchData = {
                         image: _this.image ? _this.image : _this.defaultImage,
                         errorMsg: _this.imageFileError ? _this.fileUploadErrorMessage : '',
-                        fileName: _this.fileName,
+                        fullFileName: _this.fileName,
+                        fileName: _this.fileName.split(/\.(?=[^\.]+$)/)[0],
+                        extension: _this.fileName.split(/\.(?=[^\.]+$)/)[1],
                         is_error: _this.imageFileError
                     };
                     _this.attatchmentFiles.push(attatchData);
                 };
-                this.files.push(this.fileObj);
-                this.spinner = false;
+                this.files.push(event.target.files[0]);
             }
             else {
                 this.imageFileError = true;
-                this.spinner = false;
-                var attatchData = {
-                    image: this.image ? this.image : this.defaultImage,
-                    errorMsg: this.imageFileError ? 'Error attaching, try again' : '',
-                    fileName: this.fileName,
-                    is_error: this.imageFileError
-                };
-                this.attatchmentFiles.push(attatchData);
+                this.errorMessage = 'Only .jpg, .jpeg, .png and .pdf files are allowed.';
+                // this.attatchmentFiles.push(attatchData);
             }
         }
+        else {
+            this.errorMessage = 'Something went wrong, Please try again.';
+        }
     };
-    ContactUsComponent.prototype.removeAttatchedFile = function (i) {
+    ContactUsComponent.prototype.removeAttatchedFile = function (i, filename) {
         this.attatchmentFiles.splice(i, 1);
+        this.files = this.files.filter(function (obj) { return obj.name !== filename; });
+        this.errorMessage = '';
     };
     __decorate([
         core_1.ViewChild('fileInput', { static: false })

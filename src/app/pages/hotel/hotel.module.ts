@@ -32,6 +32,8 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
 import { HotelPolicyPopupComponent } from './components/hotel-policy-popup/hotel-policy-popup.component';
 import { HomeModule } from '../home/home.module';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -56,9 +58,10 @@ import { HomeModule } from '../home/home.module';
     HelpersModule,
     ComponentsModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgbModule,
     NgSelectModule,
+    NgxSliderModule,
     CookieModule.forRoot(),
     CalendarModule,
     AgmCoreModule.forRoot({
@@ -68,7 +71,9 @@ import { HomeModule } from '../home/home.module';
     }),
     AgmJsMarkerClustererModule,
     NgxGalleryModule,
-    HomeModule
+    HomeModule,
+    NgxPaginationModule,
+    NgbModule
   ],
   exports: [
     HotelLoaderComponent,

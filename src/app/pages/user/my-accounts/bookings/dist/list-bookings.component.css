@@ -1,3 +1,361 @@
+/*--------------------------- Color variations ----------------------*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
+.ng-select.laytrip-input {
+  padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
+}
+.ng-select.laytrip-input .ng-dropdown-panel {
+  top: 100%;
+  background: #ffffff;
+  left: 0;
+  width: 480px;
+}
+@media (max-width: 767px) {
+  .ng-select.laytrip-input .ng-dropdown-panel {
+    width: 410px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input .ng-dropdown-panel {
+    width: 100%;
+  }
+}
+.ng-select.laytrip-input .ng-input input {
+  padding: 0;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0 15px;
+}
+.ng-select.laytrip-input .ng-select-container span.ng-arrow-wrapper span.ng-arrow {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 16px !important;
+  color: red !important;
+}
+.ng-select.laytrip-input .ng-select-opened .ng-select-container {
+  z-index: 0 !important;
+}
+.ng-select.laytrip-input .ng-select-container {
+  border: none !important;
+  height: 100%;
+  min-height: 0px !important;
+  display: block;
+}
+.ng-select.laytrip-input .ng-select-container:hover {
+  box-shadow: none !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container {
+  padding-left: 0px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input {
+  padding: 0 15px;
+  top: 0;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input input {
+  padding-left: 0px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-value {
+  padding: 5px 0px 0 15px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ng-select.laytrip-input .ng-select-container .ng-clear-wrapper {
+  padding: 0 0px 0px 5px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-clear-wrapper .ng-clear {
+  font-size: 17px !important;
+  color: red !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-arrow-wrapper .ng-arrow {
+  display: none !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel {
+  border: none !important;
+  box-shadow: none !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-select-bottom {
+  border-top-color: #fff !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items {
+  max-height: 255px;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 3px 3px 3px 10px !important;
+  font-size: 14px;
+  font-weight: normal;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
+  padding: 5px 5px 5px 30px;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background-position: left center;
+  color: #012178;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+  padding: 5px 5px 5px 50px !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background-position: left 25px center;
+  color: #808080;
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+    padding: 5px 5px 5px 24px !important;
+    background-position: left 5px center;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 3px 0 0 0;
+  max-width: 275px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 175px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
+  padding-left: 0;
+}
+.ng-select.ng-customClass .ng-select-container {
+  height: 100%;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  border-radius: 0;
+}
+.ng-select.ng-customClass .ng-select-container:hover {
+  box-shadow: none;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container {
+  height: auto;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-value {
+  height: auto;
+  font-size: 14px;
+  color: #000000;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-input {
+  height: auto;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-input input {
+  height: auto !important;
+  border: none !important;
+}
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-value {
+  width: 44px;
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
+  top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
+}
+
+.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+  box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-bar {
+  background: #d8d8d8;
+  height: 3px;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  width: 13px;
+  height: 13px;
+  top: auto;
+  /* to remove the default positioning */
+  top: -6px;
+  background-color: #fff;
+  border-radius: 50%;
+  outline: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer:after {
+  display: none;
+}
+
+.redeem_laypoint .ng5-slider .ng5-slider-bubble {
+  display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
+}
+
+.custom_range_slide p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8188ab;
+}
+.custom_range_slide .ng5-slider {
+  margin: 15px 0;
+}
+.custom_range_slide .ng5-slider .ng5-slider-bubble {
+  bottom: 14px;
+  width: 100%;
+  padding: 0;
+  height: auto;
+  border: none;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8188ab;
+  display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-limit {
+  font-weight: bold;
+  display: none;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
+  height: 22px !important;
+  margin-top: -3px !important;
+  margin-bottom: 2px !important;
+}
+
+.calender_price {
+  font-size: 9px;
+  color: #012178;
+}
+
+.search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right {
+  width: 100% !important;
+}
+.search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right table {
+  width: 100% !important;
+}
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right {
+  width: 100% !important;
+}
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right table {
+  width: 100% !important;
+}
+
+.anchor-tag {
+  cursor: pointer;
+}
+
+.hotel_tab .hotels_search .hotels-grid .grid_box.secound label {
+  justify-content: flex-start !important;
+}
+
+.custom-z-index {
+  z-index: 99999 !important;
+}
+
+.ui-progressbar {
+  height: 2em !important;
+  text-align: left !important;
+  overflow: hidden !important;
+}
+
+.ui-progressbar .ui-progressbar-value {
+  margin: -1px !important;
+  height: 100% !important;
+}
+
+.ui-progressbar .ui-progressbar-overlay {
+  background: url("data:image/gif;base64,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") !important;
+  height: 100% !important;
+  filter: alpha(opacity=25) !important;
+  /* support: IE8 */
+  opacity: 0.25 !important;
+}
+
+.ui-progressbar-indeterminate .ui-progressbar-value {
+  background-image: none !important;
+}
+
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
 .account_part .account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field.booking-id {
   width: 100%;
 }
@@ -39,4 +397,587 @@
 ::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .calender_price {
   display: block;
   margin-top: 3px;
+}
+
+.mob_view {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mob_view {
+    display: flex;
+  }
+}
+
+.l_view {
+  display: flex;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .l_view {
+    display: none;
+  }
+}
+
+.head_bookin {
+  flex-direction: column;
+  width: 100%;
+}
+.head_bookin .booking_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card_mob_head {
+  width: 100%;
+}
+.card_mob_head .card_head_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.card_mob_head .card_head_container .header_bar {
+  display: flex;
+}
+.card_mob_head .card_head_container .header_lower_wrper {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin-top: 5px;
+}
+.card_mob_head .card_head_container .header_lower_wrper .payment_bar_wrps {
+  width: 100%;
+  max-width: 300px;
+  margin: 8px 6px 0 6px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.card_mob_head .card_head_container .header_lower_wrper .payment_bar_wrps .progress {
+  height: 5px;
+  border-radius: 25px;
+  width: 100%;
+}
+.card_mob_head .card_head_container .header_lower_wrper .payment_bar_wrps .progress .progress-bar {
+  background-color: #F826C1;
+}
+.card_mob_head .card_head_container .header_lower_wrper .payment_bar_wrps .payment_status {
+  font-size: 12px;
+  color: #F826C1;
+  margin-top: 10px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .card_mob_head .card_head_container .header_lower_wrper .payment_bar_wrps .payment_status {
+    font-size: 10px;
+  }
+}
+.card_mob_head .card_head_container .header_lower_wrper .payment_bar_wrps .payment_status img {
+  max-width: 15px;
+  margin-right: 10px;
+}
+.card_mob_head .card_head_container .header_lower_wrper .pricer_wrp .pink_price {
+  font-size: 16px;
+  color: #F826C1;
+  font-weight: 600;
+}
+.card_mob_head .card_head_container .header_lower_wrper .pricer_wrp .status {
+  color: #878787;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+}
+.card_mob_head .card_head_container .header_lower_wrper .pricer_wrp:last-child .status {
+  text-align: right;
+}
+
+.booking_whole_wrapper {
+  background-color: #ffffff;
+  position: relative;
+  min-height: calc(100vh - 110px);
+  padding-top: 50px;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper {
+    padding-top: 25px;
+  }
+}
+.booking_whole_wrapper .booking_inner_container {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.booking_whole_wrapper .booking_inner_container .search_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.booking_whole_wrapper .booking_inner_container .search_wrapper input {
+  border-radius: 18px;
+  border: 1px solid #d6d6d6;
+  font-size: 14px;
+  color: #bababa;
+  font-weight: 400;
+  height: 35px;
+  padding-left: 40px;
+  background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/search_gray.svg");
+  background-position: 10px 8px;
+  background-size: 17px;
+  background-repeat: no-repeat;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .search_wrapper input {
+    width: 100%;
+  }
+}
+.booking_whole_wrapper .booking_inner_container h3 {
+  color: #1445f5;
+  font-size: 34px;
+  margin-bottom: 5px;
+  margin: 25px 0 15px;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container h3 {
+    font-size: 24px;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .no_data_found {
+  font-size: 12px;
+  margin: 15px 0 35px;
+  padding: 0;
+  color: #bababa;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper {
+  margin-bottom: 15px;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card {
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
+  margin-top: 15px;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card {
+    margin-top: 10px;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card:first-child,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card:first-child {
+  margin-top: 0;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header {
+  margin: 0;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  border-bottom: none;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a {
+  font-weight: 600;
+  color: #000000;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a[aria-expanded=true]:after,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a[aria-expanded=true]:after {
+  content: "";
+  position: relative;
+  padding: 5px 9px;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  transition: 0.3s;
+  right: 0;
+  border: none;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a[aria-expanded=true]:after,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a[aria-expanded=true]:after {
+    top: 20px;
+    right: 10px;
+    position: absolute;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a[aria-expanded=false]:after,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a[aria-expanded=false]:after {
+  position: relative;
+  padding: 5px 9px;
+  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  content: "";
+  transition: 0.3s;
+  right: 0;
+  border: none;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a[aria-expanded=false]:after,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a[aria-expanded=false]:after {
+    top: 20px;
+    right: 10px;
+    position: absolute;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .header_image,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .header_image {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 27px;
+  position: relative;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .header_image .title_image,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .header_image .title_image {
+  padding: 5px;
+  height: 39px;
+  width: 39px;
+  margin-right: 15px;
+  position: relative;
+  background-color: #bababa;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .header_image .title_image img,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .header_image .title_image img {
+  width: auto;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .header_image .title_image .cart_count,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .header_image .title_image .cart_count {
+  position: absolute;
+  color: #ffffff;
+  background-color: #F826C1;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 100;
+  top: 0px;
+  right: -8px;
+  height: 16px;
+  width: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .header_image .title_image,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .header_image .title_image {
+    height: 37px;
+    width: 37px;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .header_image .flight_routing_imgs,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .header_image .flight_routing_imgs {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .header_image .flight_routing_imgs,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .header_image .flight_routing_imgs {
+    max-width: 110px;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 20px;
+  flex: 1;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 455px;
+  margin: 0 auto;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_upper_wrper,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_upper_wrper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_upper_wrper .book_id,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_upper_wrper .book_id {
+  color: #bababa;
+  font-size: 12px;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_upper_wrper .header_name,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_upper_wrper .header_name {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_upper_wrper .date_head,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_upper_wrper .date_head {
+    font-size: 10px;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .payment_bar_wrps,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .payment_bar_wrps {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 10px;
+  padding-top: 12px;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .payment_bar_wrps .progress,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .payment_bar_wrps .progress {
+  height: 5px;
+  border-radius: 25px;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .payment_bar_wrps .progress .progress-bar,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .payment_bar_wrps .progress .progress-bar {
+  background-color: #F826C1;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .payment_bar_wrps .payment_status,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .payment_bar_wrps .payment_status {
+  font-size: 12px;
+  color: #F826C1;
+  margin-top: 10px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .payment_bar_wrps .payment_status img,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .payment_bar_wrps .payment_status img {
+  max-width: 15px;
+  margin-right: 10px;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .pricer_wrp .pink_price,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .pricer_wrp .pink_price {
+  font-size: 19px;
+  color: #F826C1;
+  font-weight: 600;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .pricer_wrp .status,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_second_sec .header_lower_wrper .pricer_wrp .status {
+  color: #878787;
+  font-size: 12px;
+  font-weight: 400;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .card-header a .headerin_wrapper .header_date,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a .headerin_wrapper .header_date {
+  font-size: 16px;
+  font-weight: 400;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data {
+  padding: 15px;
+  border-top: 1px solid #d6d6d6;
+  background-color: #e4e4e4;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data {
+    padding: 10px;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header {
+  border-bottom: none;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  max-height: 71px;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li {
+  position: relative;
+  z-index: -99;
+  margin-left: 0;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li:first-child,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li:first-child {
+  margin-left: 0;
+  z-index: 9;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li:first-child a,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li:first-child a {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 0px;
+  border-left: 1px solid #d6d6d6;
+  border-top: 1px solid #d6d6d6;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li:first-child a::before,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li:first-child a::before {
+  border: none;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li:first-child a.active,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li:first-child a.active {
+  border-top-right-radius: 10px;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li:first-child a.active,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li:first-child a.active {
+    top: 1px;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li:last-child a,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li:last-child a {
+  border-top-right-radius: 15px;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a {
+  background-color: transparent;
+  padding: 10px 11px;
+  border: 1px solid #d6d6d6;
+  border-left: 0;
+  position: relative;
+  top: 10px;
+  width: 98px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a {
+    top: 8px;
+    padding: 10px 14px;
+    width: auto;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a .tab_round_wrps,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a .tab_round_wrps {
+  color: #878787;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a .tab_round_wrps .tab_txt_head,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a .tab_round_wrps .tab_txt_head {
+    display: none;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a .tab_round_wrps img,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a .tab_round_wrps img {
+  margin-bottom: 5px;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a.active,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a.active {
+  background-color: #ffffff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: none;
+  top: 0;
+  height: 71px;
+  padding: 10px;
+  border-bottom: none;
+  width: auto;
+  margin: 0;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a.active::before,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a.active::before {
+  border: none;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a.active,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a.active {
+    width: 67px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a.active .tab_round_wrps,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a.active .tab_round_wrps {
+  width: 186px;
+  border: 2px solid #F826C1;
+  border-radius: 25px;
+  padding: 0 10px;
+  color: #000000;
+  font-weight: 600;
+  font-size: 18px;
+  flex-direction: row;
+  padding: 0 20px;
+  height: 50px;
+}
+@media (max-width: 768px) {
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a.active .tab_round_wrps,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a.active .tab_round_wrps {
+    border: none;
+    padding: 0;
+    width: auto;
+  }
+  .booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a.active .tab_round_wrps .tab_txt_head,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a.active .tab_round_wrps .tab_txt_head {
+    display: none;
+  }
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .booking_tab_header li a.active .tab_round_wrps img,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .booking_tab_header li a.active .tab_round_wrps img {
+  margin-bottom: 0;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_upcoming .card .accordion_data .main_tab_content,
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .accordion_data .main_tab_content {
+  background-color: #ffffff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.booking_whole_wrapper .booking_inner_container .accordion_up_wrapper #accordion_completed .card .card-header a {
+  align-items: center;
+}
+
+.loader_wrapper .loader_card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  border: 1px solid #d6d6d6;
+  margin-bottom: 10px;
+}
+.loader_wrapper .loader_card .cart_round span {
+  padding: 5px;
+  height: 39px;
+  width: 39px;
+  margin-right: 15px;
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+}
+.loader_wrapper .loader_card .cart_details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 50px;
 }

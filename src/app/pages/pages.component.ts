@@ -30,7 +30,7 @@ export class PagesComponent implements OnInit {
     this.checkUserValidate();
     document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
     this.lottieConfig = {
-      path: 'assets/data.json',
+      path: 'assets/lottie-json/flight/data.json',
       autoplay: true,
       loop: true
     };

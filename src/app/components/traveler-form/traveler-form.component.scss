@@ -93,17 +93,18 @@
   }
 }
 
-
-.drop_down_mandetory{
+.drop_down_mandetory {
   .gender_anchers {
     align-items: flex-start !important;
     flex-direction: column;
     width: 100%;
-    ng-select{
+
+    ng-select {
       width: 100%;
     }
   }
 }
+
 .accordion_bookings {
   .card {
     border: 1px solid $grayed_border;
@@ -130,6 +131,18 @@
         fill: $grayed_border;
       }
 
+      .hotel_svg {
+        border: 2px solid $grayed_border;
+        border-radius: 50%;
+        padding: 5px;
+        height: 38px;
+        width: 38px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+      }
+
       .card-link {
         font-weight: 600;
         color: $text-black;
@@ -151,12 +164,12 @@
             content: "";
             padding: 5px 9px;
             margin-left: 10px;
-            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
             background-position: right;
             background-repeat: no-repeat;
             background-size: 12px;
             transition: 0.3s;
-            position: absolute;
+            //position: absolute;
             right: 15px;
           }
 
@@ -169,13 +182,13 @@
           &:after {
             padding: 5px 9px;
             margin-left: 10px;
-            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
             background-position: right;
             background-repeat: no-repeat;
             background-size: 12px;
             content: "";
             transition: 0.3s;
-            position: absolute;
+            //position: absolute;
             right: 15px;
           }
 
@@ -187,6 +200,23 @@
         .tr_type {
           flex: 1;
           margin-left: 15px;
+
+          &.hotel_type_name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            margin-right: 30px;
+            flex: 3;
+            margin-left: 0;
+            max-width: 290px;
+          }
+        }
+
+        .adult_countr {
+          color: $grayed_border;
+          font-weight: 500;
+          flex: 2;
         }
 
         .trv_name {
@@ -229,10 +259,30 @@
         display: flex;
         transition: 0.3s;
 
+        &.hotel_travller {
+          // position: relative;
+          // left: auto;
+          // padding: 0;
+          position: absolute;
+          padding: 0;
+          width: 140px;
+          top: 15px;
+          margin: 0;
+          transform: translateX(100%);
+
+          @include tab-view {
+            position: relative;
+            left: auto;
+            padding: 0;
+            transform: translateX(0);
+            top: 10px;
+          }
+        }
+
         &[aria-expanded="true"] {
           &:after {
             content: '';
-            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow_up.svg);
+            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow_up.svg);
             background-position: center;
             background-repeat: no-repeat;
             background-size: 11px;
@@ -245,7 +295,7 @@
         &[aria-expanded="false"] {
           &:after {
             content: '';
-            background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow.svg);
+            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow.svg);
             background-position: center;
             background-repeat: no-repeat;
             background-size: 11px;
@@ -359,14 +409,15 @@
           font-size: 12px;
           font-weight: 500;
         }
-        
+
         input {
           border: none;
           border-radius: 0;
           border-bottom: 2px solid $box-border-color;
           font-size: 14px;
           padding: 8px 0;
-          &:disabled{
+
+          &:disabled {
             background-color: $background-white;
           }
 
@@ -385,7 +436,7 @@
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
-          background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+          background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
           background-position: right;
           background-repeat: no-repeat;
           background-size: 14px;
@@ -405,7 +456,7 @@
                   content: "";
                   position: relative;
                   padding: 5px 9px;
-                  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                   background-position: right;
                   background-repeat: no-repeat;
                   background-size: 10px;
@@ -426,7 +477,7 @@
                 &:after {
                   position: relative;
                   padding: 5px 9px;
-                  background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
                   background-position: right;
                   background-repeat: no-repeat;
                   background-size: 10px;
@@ -456,7 +507,8 @@
               display: flex;
               position: relative;
               bottom: 2px;
-              &.input-error{
+
+              &.input-error {
                 border-color: $error-color !important;
               }
 
@@ -472,7 +524,7 @@
 
           &.dobs {
             input {
-              //background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+              //background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
               background-image: none;
               background-size: 20px;
               // border: none;
@@ -508,7 +560,6 @@
             }
           }
         }
-
       }
 
       .accordion_addn {
@@ -560,7 +611,7 @@
                   //   &:after {
                   //     content: "";
                   //     padding: 5px 9px;
-                  //     background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                  //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                   //     background-position: right;
                   //     background-repeat: no-repeat;
                   //     background-size: 12px;
@@ -571,7 +622,7 @@
                   // &[aria-expanded="false"] {
                   //   &:after {
                   //     padding: 5px 9px;
-                  //     background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                  //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
                   //     background-position: right;
                   //     background-repeat: no-repeat;
                   //     background-size: 12px;
@@ -598,7 +649,7 @@
               //   &:after {
               //     content: "";
               //     padding: 5px 9px;
-              //     background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+              //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
               //     background-position: right;
               //     background-repeat: no-repeat;
               //     background-size: 12px;
@@ -609,7 +660,7 @@
               // &[aria-expanded="false"] {
               //   &:after {
               //     padding: 5px 9px;
-              //     background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+              //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
               //     background-position: right;
               //     background-repeat: no-repeat;
               //     background-size: 12px;
@@ -687,8 +738,6 @@
                       display: flex;
                     }
                   }
-
-
 
                   &.active {
                     color: $text_grey_dark;

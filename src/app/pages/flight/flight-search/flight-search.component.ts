@@ -8,6 +8,8 @@ import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { NgxSpinnerService } from "ngx-spinner";
+import { HotelService } from '../../../services/hotel.service';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -26,7 +28,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   tripType: string = '';
 
-  flexibleLoading: boolean = false;
+  flexibleLoading: boolean = true;
   flexibleNotFound: boolean = false;
   dates: [] = [];
   calenderPrices: [] = []
@@ -45,10 +47,12 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public location: Location,
     public commonFunction: CommonFunction,
     private spinner: NgxSpinnerService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private homeService: HomeService
   ) { }
 
   ngOnInit() {
+
     window.scroll(0, 0);
     sessionStorage.removeItem("__insMode")
     sessionStorage.removeItem("__islt")
@@ -153,7 +157,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
       this.dates = [];
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
-        if (res) {
+        if (res && res.length) {
           this.flexibleLoading = false;
           this.flexibleNotFound = false;
           this.dates = res;
@@ -197,6 +201,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   getSearchItem(event) {
+    console.log('getSearchItem')
+
     // TRIP is round-trip then call this API
     if (event.trip === 'roundtrip') {
       this.getFlightSearchDataForRoundTrip(event);
@@ -382,10 +388,18 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   flightNotAvailable(data) {
-    this.isFlightAvaibale = data;
+    // this.isFlightAvaibale = data;
   }
 
   hideFlightNotAvailable() {
     this.isFlightAvaibale = false;
+    // window.location.reload();
+  }
+
+  moduleTabClick(tabName) {
+    if (tabName == 'hotel') {
+      this.homeService.setActiveTab(tabName)
+      this.router.navigate(['/']);
+    }
   }
 }

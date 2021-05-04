@@ -30,11 +30,20 @@ export class SortHotelComponent implements OnInit {
         this.locationName = info.city;
       }
     }
-    this.sortHotelData('total', 'ASC', 'lh_price');
+    //this.sortHotelData('total', 'ASC', 'lh_price');
     this.loadJquery();
   }
 
   loadJquery() {
+    $(".responsive_sort_btn").click(function () {
+      $("#responsive_sortby_show").slideDown();
+      $("body").addClass('overflow-hidden');
+    });
+
+    $(".filter_close > a").click(function () {
+      $("#responsive_sortby_show").slideUp();
+      $("body").removeClass('overflow-hidden');
+    });
     // Start filter Shortby js
     $(document).on('show', '#accordion', function (e) {
       $(e.target).prev('.accordion-heading').addClass('accordion-opened');
@@ -58,7 +67,7 @@ export class SortHotelComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['hotelDetails'].currentValue != 'undefined') {
       if (this.hotelDetails != 'undefined') {
-        this.hotelDetails = changes['hotelDetails'].currentValue;
+        this.hotelDetails = changes['hotelDetails'].currentValue.hotels;
       }
     }
   }

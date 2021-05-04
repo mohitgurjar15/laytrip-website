@@ -24,6 +24,14 @@
                     .card-link {
                         flex: 1;
 
+                        &.card_link_max{
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: block;
+                            padding-right: 10px;
+                        }
+
                         &.new_link {
                             flex: 2;
                             margin: 0;
@@ -59,7 +67,7 @@
                         content: "";
                         position: relative;
                         padding: 5px 9px;
-                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                         background-position: right;
                         background-repeat: no-repeat;
                         background-size: 14px;
@@ -80,7 +88,7 @@
                     &:after {
                         position: relative;
                         padding: 5px 9px;
-                        background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
                         background-position: right;
                         background-repeat: no-repeat;
                         background-size: 14px;
@@ -203,7 +211,7 @@
                                     content: "";
                                     position: relative;
                                     padding: 5px 9px;
-                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                                     background-position: right;
                                     background-repeat: no-repeat;
                                     background-size: 10px;
@@ -224,7 +232,7 @@
                                 &:after {
                                     position: relative;
                                     padding: 5px 9px;
-                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
                                     background-position: right;
                                     background-repeat: no-repeat;
                                     background-size: 10px;
@@ -267,7 +275,7 @@
 
                     &.dobs {
                         input {
-                            // background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+                            // background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
                             // background-size: 20px;
                             background-image: none;
                             border: none;
@@ -392,7 +400,7 @@
                                     content: "";
                                     position: relative;
                                     padding: 5px 9px;
-                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                                     background-position: right;
                                     background-repeat: no-repeat;
                                     background-size: 14px;
@@ -413,7 +421,7 @@
                                 &:after {
                                     position: relative;
                                     padding: 5px 9px;
-                                    background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
                                     background-position: right;
                                     background-repeat: no-repeat;
                                     background-size: 14px;

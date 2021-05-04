@@ -121,13 +121,13 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
 }
@@ -193,6 +193,9 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 .ng-select.from_to_inputs .ng-select-container .ng-value-container {
   width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
 }
 .ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
   padding: 0;
@@ -288,7 +291,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -827,7 +830,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   box-shadow: none;
 }
 .account_cnt_main .update_info .form_row input.birth_date {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
   padding: 0 !important;
   border: none;
@@ -1216,7 +1219,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   border-bottom: 1px solid #1943ff;
 }
 .account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field input.birth_date {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
   padding: 0 !important;
 }
@@ -2025,7 +2028,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   border-bottom: 1px solid #1943ff;
 }
 .account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field input.birth_date {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
   padding: 0 !important;
 }
@@ -3298,7 +3301,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
   border-radius: 5px;
   display: flex;
   align-items: center;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_pink.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_pink.svg) no-repeat;
   background-size: cover;
   margin: 0;
   margin: 0 30px 0 0;
@@ -3531,7 +3534,7 @@ app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
 }
 .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_top {
   width: 100%;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/Subscription_top_bg.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/Subscription_top_bg.svg) no-repeat;
   background-size: 100%;
   padding: 55px 0 85px;
   color: #ffffff;
@@ -3855,6 +3858,9 @@ ng-scrollbar {
   float: left;
 }
 .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box:last-child {
+  margin-bottom: 0;
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box:last-child .linew_wrps ng-conatiner:last-child .line_names {
   margin-bottom: 0;
 }
 .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .word_alpha {

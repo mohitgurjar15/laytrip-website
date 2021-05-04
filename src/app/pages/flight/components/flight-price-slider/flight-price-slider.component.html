@@ -15,22 +15,19 @@
     </div>
 </div>
 
-<div class="price_by_date" *ngIf="dates.length>0 && !flexibleLoading">
+<div class="price_by_date" *ngIf="dates.length > 0 && !flexibleLoading">
     <!-- <label>{{'flexible_date' | translate}} <span *ngIf="dates[0].secondary_start_price >0" class="price_per_week_label">(weekly payment)</span></label> -->
-    <label>{{'flexible_date' | translate}} <span *ngIf="dates[0].secondary_start_price >0" class="price_per_week_label"></span></label>
+    <label>{{'flexible_date' | translate}} <span
+            *ngIf="dates[0].secondary_start_price && dates[0].secondary_start_price >0"
+            class="price_per_week_label"></span></label>
     <div class="price_day_slider">
-       
 
-        <ngx-slick-carousel class="carousel" 
-            #slickModal="slick-carousel" 
-            [config]="slideConfig" 
-            (init)="slickInit($event)"
-            (breakpoint)="breakpoint($event)"
-            (afterChange)="afterChange($event)"
-            (beforeChange)="beforeChange($event)">
-            <div ngxSlickItem *ngFor="let item of dates" class="inner" >
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+            <div ngxSlickItem *ngFor="let item of dates" class="inner">
                 <div class="slid_block" *ngIf="trip =='oneway'">
-                    <a  [routerLink]="['/flight/search']" [queryParams]="{trip:trip,departure:departure,arrival:arrival,departure_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),class:class,adult:adult,child:child,infant:infant}" [ngClass]="{'selected':departureDate==commonFunction.convertDateFormat(item.date,'DD/MM/YYYY'),'disabled':checkDateValidation(item.date)}">
+                    <a [routerLink]="['/flight/search']"
+                        [queryParams]="{trip:trip,departure:departure,arrival:arrival,departure_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),class:class,adult:adult,child:child,infant:infant}"
+                        [ngClass]="{'selected':departureDate==commonFunction.convertDateFormat(item.date,'DD/MM/YYYY'),'disabled':checkDateValidation(item.date)}">
                         <div class="block_top">
                             <p>{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}</p>
                         </div>
@@ -42,9 +39,12 @@
                     </a>
                 </div>
                 <div class="slid_block" *ngIf="trip =='roundtrip'">
-                    <a [routerLink]="['/flight/search']" [queryParams]="{trip:trip,departure:departure,arrival:arrival,departure_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),arrival_date:commonFunction.convertDateYYYYMMDD(item.arrival_date,'DD/MM/YYYY'),class:class,adult:adult,child:child,infant:infant}" [ngClass]="{'selected':departureDate==commonFunction.convertDateFormat(item.date,'DD/MM/YYYY'),'disabled':checkDateValidation(item.date)}">
+                    <a [routerLink]="['/flight/search']"
+                        [queryParams]="{trip:trip,departure:departure,arrival:arrival,departure_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),arrival_date:commonFunction.convertDateYYYYMMDD(item.arrival_date,'DD/MM/YYYY'),class:class,adult:adult,child:child,infant:infant}"
+                        [ngClass]="{'selected':departureDate==commonFunction.convertDateFormat(item.date,'DD/MM/YYYY'),'disabled':checkDateValidation(item.date)}">
                         <div class="block_top">
-                            <p>{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}<br>{{ getFlexibleArivalDate(item.date,departure) }}</p>
+                            <p>{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}<br>{{
+                                getFlexibleArivalDate(item.date,departure) }}</p>
                         </div>
                         <div class="block_btm">
                             <span>
@@ -54,7 +54,6 @@
                     </a>
                 </div>
             </div>
-            </ngx-slick-carousel>
+        </ngx-slick-carousel>
     </div>
 </div>
-

@@ -1,18 +1,20 @@
 <div class="filter_main_wrapper desk_ver">
     <div class="accordion block_shortby" id="accordion2">
         <div class="accordion-group" [ngClass]="{'active': is_open === true}">
-            <div class="accordion-heading" (click)="toggleFilter()" data-toggle="collapse" aria-expanded="true" data-parent="#accordion2" href="#collapseTwo">
+            <div class="accordion-heading" (click)="toggleFilter()"  aria-expanded="true" data-parent="#accordion2" href="#collapseTwo">
                 <a class="accordion-toggle">
                     Filters
                 </a>
-                <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> Clear</a>
+                <!-- <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> Clear</a> -->
             </div>
-            <div id="collapseTwo" class="accordion-body collapse">
+            <div id="collapseTwo" class="accordion-body collapse" [ngClass]="{'show': is_open === true}">
                 <div class="accordion-inner">
                     <div class="fliter_block">
                         <div class="cmn_block price">
                             <div class="block_top_in">
-                                <h5>Total Price</h5>
+                                <h5 class="title_h5">Total Price
+                                    <a class="anchor_link" (click)="resetFilter()"> Clear</a>
+                                </h5>
                             </div>
                             <form [formGroup]="priceSlider">
                                 <div class="custom_range_slide">
@@ -412,7 +414,7 @@
         </div>
     </div>
 </div>
-
+ 
 
 <div class="filter_main_wrapper responsive_mobile">
     <div class="accordion block_shortby" id="accordion2">
@@ -421,14 +423,16 @@
                 <a class="accordion-toggle">
                     Filters
                 </a>
-                <a class="anchor_link" (click)="resetFilter()"> Clear</a>
+                <!-- <a class="anchor_link" (click)="resetFilter()"> Clear</a> -->
             </div>
             <div id="collapseTwo" class="accordion-body collapse show">
                 <div class="accordion-inner">
                     <div class="fliter_block">
                         <div class="cmn_block price">
                             <div class="block_top_in">
-                                <h5>Total Price</h5>
+                                <h5 class="title_h5">Total Price
+                                    <a class="anchor_link" (click)="resetFilter()"> Clear</a>
+                                </h5>
                             </div>
                             <form [formGroup]="priceSlider">
                                 <div class="custom_range_slide">
@@ -777,7 +781,7 @@
     </div>
 </div>
 
-
+ 
 <!-- <div class="mobile_view_popup">
     <div class="popbar_header" (click)="toggleFilter()">
       <a class="bar_title" >

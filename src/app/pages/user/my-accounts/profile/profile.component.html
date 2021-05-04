@@ -4,7 +4,7 @@
             <div class="form_row">
                 <div class="update_profile">
                     <span>
-                        <img class="img-rounded" src="{{image || defaultImage}}" alt="Profile Image">
+                        <img  accept="image/*"class="img-rounded" src="{{image || defaultImage}}" alt="Profile Image">
                     </span>
                     <small class="error_field" *ngIf="imageFileError">{{imageErrorMsg}}</small>
                     <div class="update_profile_btn">
@@ -122,10 +122,13 @@
                             <div class="suggtions_wrps_mn">
                                 <div class="suggtions">
                                     <div class="sug_line_box" *ngFor="let item of data">
-                                        <a href="#a" class="word_alpha">{{item.key}} </a>
+                                        <!-- <a href="#a" class="word_alpha">{{item.key}} </a> -->
                                         <span class="linew_wrps">
                                             <ng-conatiner *ngFor="let sub_item of item.value">
-                                                <span class="line_names" (click)="selectAirport(sub_item)">
+                                                <span *ngIf="sub_item.parentId == 0" class="line_names"  (click)="selectAirport(sub_item)">
+                                                    {{sub_item.city}} International ({{sub_item.code}})
+                                                </span>
+                                                <span *ngIf="sub_item.parentId != 0" class="line_names"  (click)="selectAirport(sub_item)">
                                                     {{sub_item.city}} ({{sub_item.code}})
                                                 </span>
                                             </ng-conatiner>
@@ -184,7 +187,7 @@
                 </div>
             </div>
             <div class="error error_profile"
-                *ngIf="submitted && profileForm.controls.phone_no.errors">
+                *ngIf="submitted && (profileForm.controls.phone_no.errors ||profileForm.hasError('phoneAndPhoneCodeError'))">
                 <div class="fake_div"></div>
                 <small class="error_field_new" *ngIf="profileForm.hasError('phoneAndPhoneCodeError')">
                     <img

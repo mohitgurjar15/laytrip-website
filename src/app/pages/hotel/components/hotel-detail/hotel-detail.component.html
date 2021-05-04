@@ -1,3 +1,6 @@
+<app-laytrip-loader [loading]="addCartLoading || loading" [module]="'hotel'">
+</app-laytrip-loader>
+
 <!-- Start Search Result section -->
 <section class="search_result flight" *ngIf="loading">
   <div class="container">
@@ -358,346 +361,355 @@
   </div>
 </section>
 <!-- Close Search Result section -->
-<section class="search_result hotels" *ngIf="galleryImages && galleryImages.length">
+<div class="search_tab_listing_wrapper" *ngIf="!loading">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-        <div class="hotel_detail_slider">
-          <div class="slider_main_contain">
-            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+    <div class="search_tab_icons_wrps">
+      <a class="tab_anch flight hover-link" [routerLink]="['/']">
+        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" alt="Flight Icon" />
+        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_gray.svg" alt="Flight Icon" />
+      </a>
+      <a class="active tab_anch" style="pointer-events: none;">
+        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
+        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_gray.svg" alt="Hotel Icon" />
+      </a>
+      <a class="tab_anch" style="pointer-events: none;">
+        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
+          alt="Accommodation Icon" />
+        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_gray.svg"
+          alt="Accommodation Icon" />
+      </a>
+      <a class="tab_anch" style="pointer-events: none;">
+        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_blue.svg" alt="car Icon" />
+        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_gray.svg" alt="car Icon" />
+      </a>
+    </div>
+    <div class="searchbar_box_common">
+      <app-hotel-search-widget></app-hotel-search-widget>
+    </div>
+  </div>
+</div>
+<app-hotel-not-found *ngIf="isNotFound && hotelRoomArray.length==0"></app-hotel-not-found>
 
-            <div class="slider-overlay">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="hotel_name">
-                    <h4>
-                      {{hotelDetails?.name}}, {{hotelDetails?.state_code}}
-                    </h4>
-                    <span>
-                      {{hotelDetails?.city_name}}, {{hotelDetails?.country_name}}
-                    </span>
-                  </div>
-                  <div id="border"></div>
-                </div>
-                <div class="col-md-6 room-rating">
-                  <div class="room_rate_box">
-                    <span class="rate-box">
-                      {{hotelDetails?.review_rating | number : '1.1-1'}}
-                    </span>
-                    <span class="rating">
-                      {{hotelDetails?.rating}} Traveller Ratings:
-                      <i class="fa fa-star" *ngFor='let in of counter(hotelDetails?.rating)'></i>
-                    </span>
-                  </div>
-                </div>
+<section class="search_result hotels" *ngIf="!isNotFound && hotelRoomArray.length">
+  <div class="container">
+    <div class="title_name_wrapper">
+      <div class="col_left">
+        <h5 class="">{{hotelDetails.name}}</h5>
+        <span class="add_wrpper">
+          <span class="hotel_address">
+            {{hotelDetails.address}}
+          </span>
+          <span class="hotel_stars">
+            <ng-container *ngIf="hotelDetails?.rating">
+              <img *ngFor="let in of counter(hotelDetails?.rating)" class="filled"
+                src="{{s3BucketUrl}}assets/images/icon/star_filled.svg" alt="filled Stars Icon">
+            </ng-container>
+            <img *ngFor="let in of counter(5-hotelDetails?.rating)" class="blank"
+              src="{{s3BucketUrl}}assets/images/icon/star_blank.svg" alt="blank Stars Icon">
+          </span>
+        </span>
+
+      </div>
+      <div class="col_right" *ngIf="hotelRoomArray.length">
+        <div class="price_wrpper">
+          <small class="desk_small">Flexible Installments</small>
+          <span>
+            From <span class="big_font">${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}}</span>
+            weekly
+          </span>
+          <small class="mobile_small">Flexible Installments</small>
+        </div>
+      </div>
+    </div>
+    <div class="detail_box_wrpr">
+      <div class="left_box_wrps">
+        <div class="main_slider_big">
+          <ngb-carousel [interval]="false" [showNavigationIndicators]="false" (slide)=onMainSlide($event)>
+            <ng-template ngbSlide *ngFor="let image of galleryImages">
+              <div class="picsum-img-wrapper">
+                <img src={{image.big}}
+                  onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
               </div>
-            </div>
+            </ng-template>
+          </ngb-carousel>
+          <div class="slider_dots">
+            <ng-container *ngFor="let k of [].constructor(dots); let j = index">
+              <span [ngClass]="{'active':activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
+            </ng-container>
           </div>
         </div>
-        <div class="hotel_detail_tabs">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                aria-selected="true">Details</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                aria-selected="false">Amenities</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
-                aria-selected="false">Reviews</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map"
-                aria-selected="false">Map</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div [hidden]="loading" class="tab-pane fade active show" id="home" role="tabpanel"
-              aria-labelledby="home-tab">
-              <h4>Description</h4>
-              <p>
-                {{hotelDetails?.description}}
-              </p>
-            </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <h4>Amenities</h4>
-              <div class="row">
-                <div class="col-md-4 p-3" *ngFor="let item of hotelDetails?.amenities.list">
-                  <i class="fa fa-check-circle" aria-hidden="true"></i>
-                  <span class="pl-3">{{item}}</span>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-              <div class="reviews_wrapper_main" *ngFor="let item of hotelDetails?.hotelReviews">
-                <div class="ratings_section">
-                  <div class="rating_num">
-                    <span class="blue_box">
-                      {{item?.average_rating}}
-                    </span>
-                  </div>
-                  <div class="rating_detail">
-                    <span class="users_name">{{item?.user_name}}</span>
-                    <div class="stars_text">
-                      <div class="stars_wrapper">
-                        <img *ngFor='let in of counter(item.average_rating)'
-                          src="{{s3BucketUrl}}assets/images/hotels/rating_stars.svg" alt="Stars" />
-                      </div>
-                      <p>{{item?.average_rating_description}}</p>
-                    </div>
-                  </div>
-                </div>
-                <p class="rating_text" [innerHtml]="item?.description">
-                </p>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
-              <div style="height: 400px; width: 100%;">
-                <agm-map [latitude]="hotelDetails?.hotelLocations?.latitude"
-                  [longitude]="hotelDetails?.hotelLocations?.longitude" [zoom]="12">
-                  <agm-marker iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-                    [latitude]="hotelDetails?.hotelLocations?.latitude"
-                    [longitude]="hotelDetails?.hotelLocations?.longitude">
-                  </agm-marker>
-                </agm-map>
-              </div>
-            </div>
+        <div class="section_description" *ngIf="isCartFull">
+          <span class="sec_text">10 items cart maximum, please Checkout and start another Cart if you require
+            more than 10.</span>
+          <a (click)="removeCartFullError()" href="javascript:void(0);"><img
+              src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+        </div>
+        <div class="description_wrpper">
+          <span class="upper_descrip">
+            <h3 class="common_title_wrps">Description</h3>
+            <!-- <a href="javascript:void(0);" class="cta_link hover-link">User Reviews</a> -->
+          </span>
+          <p>
+            {{hotelDetails.description}}
+          </p>
+        </div>
+        <div class="right_box_wrps mobile_right">
+
+          <div class="map_wrapper">
+            <!-- iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" -->
+            <agm-map [latitude]="hotelDetails?.latitude"
+              [longitude]="hotelDetails?.longitude" [zoom]="12">
+              <agm-marker
+                [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
+                [latitude]="hotelDetails?.hotelLocations?.latitude"
+                [longitude]="hotelDetails?.hotelLocations?.longitude">
+              </agm-marker>
+            </agm-map>
+          </div>
+          <div class="amenities_wrpper" #target1>
+            <h3 class="common_title_wrps">Amenities</h3>
+            <ul *ngIf="hotelDetails?.amenities?.list.length">
+              <ng-container *ngFor="let amenity of hotelDetails?.amenities?.list ; let i=index">
+                <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity | titlecase}}</li>
+                <li *ngIf="showMoreAmenties">{{amenity | titlecase}}</li>
+              </ng-container>
+            </ul>
+            <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10"
+              (click)="toggleAmenities(target1,'more')" class="cta_link hover-link">More</a>
+            <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10"
+              (click)="toggleAmenities(target1,'less')" class="cta_link hover-link">Less</a>
           </div>
         </div>
-
-        <div class="result_listing hotel_listings" *ngIf="hotelRoomArray && hotelRoomArray.length">
-          <div class="section_title">
-            Rooms
-          </div>
-          <div class="search_block" *ngFor="let item of hotelRoomArray; let blockIndex = index;">
+        <div class="room_list_wrp" id="full_hotel_listing">
+          <h3 class="common_title_wrps">Rooms</h3>
+          <div class="search_block" *ngFor="let room of hotelRoomArray; let index = index;">
             <div class="listing_block">
-              <div class="row">
-                <div class="col-md-9">
-                  <div class="block_main">
-                    <div class="block_top">
-                      <div class="block_inner">
-                        <div class="col-md-4 col-lg-4 px-0">
-                          <div class="block_im">
-                            <div class="hotel_list_img_wrp">
-                              <img src="{{hotelDetails?.thumbnail}}" alt="Hotel image">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-8 col-lg-8 pr-0">
-                          <div class="block_detail">
-                            <div class="block_detail_top">
-                              <div class="detail_info">
-                                <h4>{{item?.title}}</h4>
-                                <div class="refen_tag">
-                                  <span
-                                    [ngClass]="{'non-refundable':item.is_refundable === 'false', 'refundable':item.is_refundable !== 'false'}">{{item.is_refundable
-                                    === 'false' ? 'Non-Refundable' : 'Refundable'}}</span>
-                                </div>
-                                <div class="review_section_wrap">
-                                  <div class="right_bar">
-                                    <div class="ammin_listing mb-2" *ngIf="item.beddings && item.beddings.length">
-                                      <div class="amminities_list">
-                                        <img src="{{s3BucketUrl}}assets/images/hotels/bed-icon.svg" alt="">
-                                        {{item?.beddings}}
-                                      </div>
+              <div class="listing_inner_box_wrppr">
+                <div class="desktop_box">
+                  <div class="box_left">
+                    <div class="block_main">
+                      <div class="block_top">
+                        <div class="block_inner">
+                          <div class="box_img">
+                            <div class="block_im">
+                              <div class="hotel_list_img_wrp">
+                                <ngb-carousel *ngIf="room.galleryImages.length" #maincarousel [showNavigationArrows]="room.galleryImages.length>1?true:false" [interval]="false" [showNavigationIndicators]="false" (slide)=onRoomSlide($event,index)>
+                                  <ng-template ngbSlide *ngFor="let image of room.galleryImages">
+                                    <div class="picsum-img-wrapper">
+                                      <img src={{image.medium}}
+                                        onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
                                     </div>
-                                    <div class="ammin_listing mb-2" *ngIf="item.amenities && item.amenities.length">
-                                      <div class="amminities_list">
-                                        <img src="{{s3BucketUrl}}assets/images/hotels/breakfast.svg" alt="">
-                                        {{item?.amenities}}
-                                      </div>
-                                    </div>
-                                  </div>
+                                  </ng-template>
+                                </ngb-carousel>
+                                <div class="slider_dots" *ngIf="room.galleryImages.length>1">
+                                  <ng-container *ngFor="let k of [].constructor(room.dots); let j = index">
+                                    <span [ngClass]="{'active':room.activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
+                                  </ng-container>
                                 </div>
+                                <img *ngIf="room.galleryImages.length==0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image"
+                                  class="blank_image_box">
                               </div>
                             </div>
                           </div>
+
+                          <div class="box_info">
+                            <div class="block_detail">
+                              <div class="block_detail_top">
+                                <div class="detail_info">
+                                  <h4>{{room.title}}</h4>
+                                  <span class="adress_span">
+                                    Sleeps {{room.occupancy}}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="block_detail_btm">
+                              <span [id]="'accordion_infos1'+index" class="show_detail">
+                                <a data-toggle="collapse" data-parent="#full_hotel_listing" [href]="'#collapse1'+index"
+                                  aria-expanded="false" aria-controls="collapse1" class="hotel_anchor">
+                                  Details
+                                </a>
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-3 px-0 right_sectiond_price">
-                  <div class="row">
+                  <div class="box_right">
                     <div class="block_price block_pr">
                       <div class="block_inn_pr">
-                        <div class="block" *ngIf="item.secondary_start_price > 0">
-                          <p>Room Starts from</p>
-                          <p><span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> /week</p>
+                        <div class="block" *ngIf="room.start_price>0">
+                          <p>Flexible Installments</p>
+                          <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
+                          </p>
                         </div>
-                        <div class="block" *ngIf="item.secondary_start_price === 0">
-                          <p><span>{{ currency?.symbol }}{{item?.selling?.total}}</span></p>
+                        <div class="block" *ngIf="room.start_price==0">
+                          <p>Full Payment <span>${{ room.selling.total | number : '1.2-2' }}</span></p>
                         </div>
-                      </div> <a class="book_btn anchor-tag" (click)="showRoomDetails(item)">Select</a>
-                      <div class="show_detail anchor-tag">
-                        <a class="show_more_detail"> <img src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
-                            alt="Information Icon">Payment
-                          plan details</a>
-                      </div>
+                      </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">Select</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="mobile_box">
+
+                  <div class="hotel_list_img_wrp">
+                    <ngb-carousel *ngIf="room.galleryImages.length" #maincarousel [showNavigationArrows]="room.galleryImages.length>1?true:false" [interval]="false" [showNavigationIndicators]="false" (slide)=onRoomSlide($event,index)>
+                      <ng-template ngbSlide *ngFor="let image of room.galleryImages">
+                        <div class="picsum-img-wrapper">
+                          <img src={{image.medium}}
+                            onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                        </div>
+                      </ng-template>
+                    </ngb-carousel>
+                    <div class="slider_dots" *ngIf="room.galleryImages.length>1">
+                      <ng-container *ngFor="let k of [].constructor(room.dots); let j = index">
+                        <span [ngClass]="{'active':room.activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
+                      </ng-container>
+                    </div>
+                    <img *ngIf="room.galleryImages.length==0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image"
+                      class="blank_image_box">
+                  </div>
+                  <div class="middle_part">
+                    <div class="detail_info">
+                      <h4>{{room.title}}</h4>
+                      <span class="adress_span">
+                        Sleeps {{room.occupancy}}
+                      </span>
+
+                    </div>
+
+                    <span [id]="'accordion_infos1'+index" class="show_detail">
+                      <a data-toggle="collapse" data-parent="#full_hotel_listing" [href]="'#collapse1'+index"
+                        aria-expanded="false" aria-controls="collapse1" class="hotel_anchor">
+                        Details
+                      </a>
+                    </span>
+                  </div>
+                  <div class="thrd_part">
+                    <div class="block_price block_pr">
+                      <div class="block_inn_pr">
+                        <div class="block" *ngIf="room.start_price>0">
+                          <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
+                          </p>
+                        </div>
+                        <div class="block" *ngIf="room.start_price==0">
+                          <p>Full Payment <span>${{ room.selling.total | number : '1.2-2' }}</span></p>
+                        </div>
+                      </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">Select</a>
+                      <p>Flexible Installments</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- <div class="detail_info_show" [attr.id]="blockIndex" *ngIf="showRoomDetails[blockIndex] === true">
+            <div [id]="'collapse1'+index" class="detail_info_show collapse">
               <div class="card-body">
-                <div class="block_flight_info">
-                  <div class="tab_detail fare_detail_cnt">
-                    <div class="triangle_right"></div>
-                    <ul>
-                      <li>Base Fare <span>44</span></li>
-                      <li>Taxes and Fees <span>44</span></li>
-                      <li>Total Fare <span>44</span></li>
-                    </ul>
-                    <div class="triangle_left"></div>
-                    <ul>
-                      <li class="down_payment">
-                        11
-                        <span class="down_value">111</span>
-                      </li>
-                      <ng-container>
-                        <li>
-                          <div class="detail">aa
-                            <p>aa
-                            </p>
-                          </div> <span>aa</span>
-                        </li>
-                      </ng-container>
-                    </ul>
+                <div class="io_ru_wrps">
+                  <div class="installment_wprs">
+                    <div class="type_lines">
+                      <span class="titles">
+                        Installment Option 1
+                      </span>
+                      <span class="texts" *ngIf="room.start_price>0">
+                        ${{room.start_price | number : '1.2-2'}} downpayment and {{room.no_of_weekly_installment}}
+                        weekly installments of
+                        ${{room.secondary_start_price | number : '1.2-2'}}
+                      </span>
+                      <span class="texts" *ngIf="room.start_price==0">
+                        Flights within 30 days of travel not available in installments
+                      </span>
+                    </div>
+                    <div class="type_lines">
+                      <span class="titles">
+                        Installment Option 2
+                      </span>
+                      <span class="texts" *ngIf="room.start_price>0">
+                        ${{room.second_down_payment | number : '1.2-2'}} downpayment and
+                        {{room.no_of_weekly_installment_2}} bi-weekly installments of
+                        ${{room.secondary_start_price_2 | number : '1.2-2'}}
+                      </span>
+                      <span class="texts" *ngIf="room.start_price==0">
+                        Flights within 30 days of travel not available in installments
+                      </span>
+                    </div>
+                    <div class="type_lines">
+                      <span class="titles">
+                        Installment Option 3
+                      </span>
+                      <span class="texts" *ngIf="room.start_price>0">
+                        ${{room.third_down_payment | number : '1.2-2'}} downpayment and
+                        {{room.no_of_weekly_installment_3}} monthly installments of
+                        ${{room.secondary_start_price_3 |
+                        number : '1.2-2'}}
+                      </span>
+                      <span class="texts" *ngIf="room.start_price==0">
+                        Flights within 30 days of travel not available in installments
+                      </span>
+                    </div>
+                    <div class="type_lines">
+                      <span class="titles">
+                        Average Nightly Rate
+                      </span>
+                      <span class="texts">
+                        ${{room.night_rate | number : '1.2-2'}} including taxes and fees
+                      </span>
+                      <div class="notifi_text mobile_notifi">
+                        More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
+                      </div>
+                    </div>
+                    <div class="full_desk_not">
+                      <div class="notifi_text">
+                        More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rules_wrps">
+                    <span class="heads">
+                      <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> Rules
+                    </span>
+                    <span class="texts_rules">
+                      Non-refundable, non-transferable. Change policy reflected in Laytrip <a
+                        [routerLink]="['/terms']">Terms</a> which apply.
+                    </span>
+
                   </div>
                 </div>
               </div>
-            </div> -->
+
+            </div>
           </div>
+
+
         </div>
       </div>
+      <div class="right_box_wrps desk_right">
 
-      <div class="col-lg-4">
-        <div class="hotel_detail_sidebar sticky-top">
-          <h3 class="section_title">
-            Room Summary
-          </h3>
-          <div class="display_wrapper">
-            <div class="detail_display">
-              <div class="display_text">
-                <div *ngIf="dataLoading" class="dataLoading">
-                  <i class="fa fa-spinner fa-spin"></i>
-                </div>
-                <h2 *ngIf="!dataLoading">{{roomSummary?.hotelInfo?.title}}</h2>
-                <p *ngIf="!dataLoading">
-                  <span>{{roomSummary?.roomDetail?.totalRoom}}
-                    Rooms</span><span>{{roomSummary?.roomDetail?.totalAdults}}
-                    Adults</span><span>{{roomSummary?.roomDetail?.totalChildren}} Child</span>
-                </p>
-              </div>
-              <img src="{{s3BucketUrl}}assets/images/Union 1.png" alt="hotel display image">
-            </div>
-            <div class="display_daterange_wrapper">
-              <div class="display_daterange">
-                <div class="datewrapper">
-                  <label for="">CHECK IN</label>
-                  <div *ngIf="dataLoading" class="dataLoading">
-                    <i class="fa fa-spinner fa-spin"></i>
-                  </div>
-                  <span *ngIf="!dataLoading">
-                    <span>{{roomSummary?.roomDetail?.checkIn}}</span>
-                    <img src="{{s3BucketUrl}}assets/images/hotels/disabled-calendar-icon.svg" alt="">
-                  </span>
-                </div>
-                <div class="datewrapper">
-                  <label for="">CHECK OUT</label>
-                  <div *ngIf="dataLoading" class="dataLoading">
-                    <i class="fa fa-spinner fa-spin"></i>
-                  </div>
-                  <span *ngIf="!dataLoading">
-                    <span>{{roomSummary?.roomDetail?.checkOut}}</span>
-                    <img src="{{s3BucketUrl}}assets/images/hotels/disabled-calendar-icon.svg" alt="">
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="fare_detail_wrapper">
-            <div *ngIf="dataLoading" class="dataLoading">
-              <i class="fa fa-spinner fa-spin"></i>
-            </div>
-            <div class="fare_section" *ngIf="!dataLoading">
-              <span class="fare_title">
-                Room Details
-              </span>
-              <div class="fare_listing"
-                *ngIf="roomSummary?.hotelInfo?.board_type && roomSummary?.hotelInfo?.board_type !== 'NONE'">
-                <span>{{roomSummary?.hotelInfo?.board_type}}</span>
-                <span>Included</span>
-              </div>
-              <div class="fare_listing"
-                *ngIf="roomSummary?.hotelInfo?.cancellation_policies && roomSummary?.hotelInfo?.cancellation_policies.length">
-                <a (click)="openPolicyPopup(roomSummary?.hotelInfo?.cancellation_policies, 'cancellation_policies')">
-                  Cancellation Policies
-                </a>
-              </div>
-              <div class="fare_listing"
-                *ngIf="roomSummary?.hotelInfo?.policies && roomSummary?.hotelInfo?.policies.length">
-                <a (click)="openPolicyPopup(roomSummary?.hotelInfo?.policies, 'policies')">
-                  Policies
-                </a>
-              </div>
-            </div>
-            <div class="fare_section"
-              *ngIf="roomSummary?.hotelInfo?.instalment_details?.instalment_available && !dataLoading">
-              <span class="fare_title">
-                Payment
-              </span>
-              <div class="fare_listing">
-                <span>Down Payment</span>
-                <span>{{ currency?.symbol }}{{ roomSummary?.hotelInfo?.start_price | number :
-                  '1.2-2'}}</span>
-              </div>
-              <div class="fare_listing"
-                *ngFor="let instalment of roomSummary?.hotelInfo?.instalment_details?.instalment_date; let i = index">
-                <ng-template [ngIf]="i>0">
-                  <span>{{i}} Installment
-                    <span>{{
-                      commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}</span>
-                  </span>
-                  <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
-                </ng-template>
-              </div>
-            </div>
-            <div class="fare_section" *ngIf="!dataLoading">
-              <span class="fare_title">
-                Fare Details
-              </span>
-              <div class="fare_listing">
-                <span>Base Fare</span>
-                <span>{{ currency?.symbol
-                  }}{{roomSummary?.hotelInfo?.selling?.sub_total}}</span>
-              </div>
-              <div class="fare_listing">
-                <span>Taxes & Fees</span>
-                <span>{{ currency?.symbol
-                  }}{{roomSummary?.hotelInfo?.selling?.taxes}}</span>
-              </div>
-            </div>
-            <div class="fare_section" *ngIf="!dataLoading">
-              <span class="fare_title">
-                Price Details
-              </span>
-              <div class="fare_listing">
-                <span>Hotel</span>
-                <span>{{ currency?.symbol
-                  }}{{roomSummary?.hotelInfo?.selling?.total}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="fare_total_wrapper">
-            <span>Total</span>
-            <span *ngIf="!dataLoading">{{ currency?.symbol
-              }}{{roomSummary?.hotelInfo?.selling?.total}}</span>
-          </div>
+        <div class="map_wrapper">
+          <agm-map [latitude]="hotelDetails?.latitude"
+            [longitude]="hotelDetails?.longitude" [zoom]="12">
+            <!--               iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+ -->
+            <agm-marker
+              [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
+              [latitude]="hotelDetails?.hotelLocations?.latitude" [longitude]="hotelDetails?.hotelLocations?.longitude">
+            </agm-marker>
+          </agm-map>
+        </div>
+        <div class="amenities_wrpper" #target id="target">
+          <h3 class="common_title_wrps">Amenities</h3>
+          <ul *ngIf="hotelDetails?.amenities?.list.length">
+            <ng-container *ngFor="let amenity of hotelDetails?.amenities.list ; let i=index">
+              <li *ngIf="!showMoreAmenties && i < 10 ">{{amenity | titlecase}}</li>
+              <li *ngIf="showMoreAmenties">{{amenity | titlecase}}</li>
+            </ng-container>
+          </ul>
+          <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10"
+            (click)="toggleAmenities(target,'more')" class="cta_link hover-link">More</a>
+          <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10"
+            (click)="toggleAmenities(target,'less')" class="cta_link hover-link">Less</a>
         </div>
       </div>
     </div>

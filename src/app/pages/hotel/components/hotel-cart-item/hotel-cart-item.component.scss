@@ -1,0 +1,129 @@
+@import '../../../../../cstm-variable';
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.hotel_card {
+    &.card {
+        border-radius: 10px;
+        border: 1px solid $grayed_border;
+        margin-top: 10px;
+
+        // &:last-child{
+        //     margin-bottom: 0px;
+        // }
+        .card-body {
+            padding: 10px;
+
+            .hotel_upper_inner {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+
+                .col_boxs {
+                    color: $mid_gray_bg;
+                    font-size: 16px;
+
+                    @include tab-view {
+                        font-size: 14px;
+                        display: flex;
+                    }
+
+                    span {
+                        color: $text-black;
+                        font-weight: 600;
+                        margin-right: 5px;
+                        @include tab-view {
+                            min-width: 80px;
+                        }
+                    }
+                }
+
+                .desk_box {
+                    @include tab-view {
+                        display: none;
+                    }
+                }
+
+                .responsive_boxes {
+                    display: none;
+
+                    @include tab-view {
+                        display: flex;
+                        width: 100%;
+                        justify-content: space-between;
+                    }
+                }
+            }
+
+            .hotel_lower_inner {
+                span {
+                    display: flex;
+                    align-items: flex-start;
+                    color: $mid_gray_bg;
+                    font-size: 16px;
+
+                    @include tab-view {
+                        font-size: 12px;
+                    }
+
+                    &::before {
+                        content: '';
+                        padding: 7.5px;
+                        border-radius: 50%;
+                        background-color: $pink;
+                        display: flex;
+                        margin-right: 5px;
+                        margin-top: 3px;
+
+                        @include tab-view {
+                            padding: 4px;
+                            margin-top: 4px;
+                        }
+                    }
+                }
+            }
+
+            .cta_btn_wrps {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-top: 10px;
+
+                a {
+                    background-color: transparent;
+                    color: $text_light_yellow;
+                    border: none;
+                    box-shadow: none;
+                    font-size: 15px;
+                    padding: 0;
+
+                    @include tab-view {
+                        font-size: 12px;
+                    }
+
+                    &:hover {
+                        outline: none;
+                        border: none;
+                    }
+
+                    &:focus {
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.sub_accordions {
+    margin-top: 15px;
+
+    .card-body {
+        padding: 0;
+    }
+}

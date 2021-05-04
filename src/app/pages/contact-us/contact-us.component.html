@@ -70,19 +70,22 @@
 
                                 <a class="upload_btn hover-link">
                                     <label class="mb-0">
-                                        <img src="{{s3BucketUrl}}assets/images/icon/pin.svg" alt="attach"> Attach          <i class="fa fa-spinner fa-spin resendSpinner" *ngIf="spinner"></i>
+                                        <img src="{{s3BucketUrl}}assets/images/icon/pin.svg" alt="attach"> Attach          
                                         <input accept="image/png,image/jpg,.pdf" #fileInput type="file" formControlName="file"
                                             id="output" class="form-control input d-none"
-                                            (change)="documentFileChange($event)">
+                                            (change)="documentFileChange($event)" >
                                     </label>
                                 </a>
                                 <div class="upload_list_wrapper">
                                     <div class="listing_lines_wrps" *ngFor="let attatchment of attatchmentFiles; let i = index">
                                         <div class="uploaded_list">
                                             <img [src]="attatchment.image || defaultImage" alt="" />
-
-                                            <h5> {{ attatchment.fileName }} </h5>
-                                            <button type="button" class="close" (click)="removeAttatchedFile(i);">
+ 
+                                            <div class="fileName">
+                                                <h5>{{ attatchment.fileName }}</h5>
+                                                <span class="extension">.{{ attatchment.extension}}</span>
+                                            </div>
+                                            <button type="button" class="close" (click)="removeAttatchedFile(i,attatchment.fullFileName);">
                                                 <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg"
                                                     alt="attach">
                                             </button>
@@ -110,9 +113,14 @@
 
                         <div class="form_btn">
                             <button type="submit">
-                                <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;{{'submit' |
-                                translate}}</button>
+                                <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>&nbsp;{{'submit' | translate}}</button>
                         </div>
+                        <div class="block_api_error" *ngIf="errorMessage != ''">
+                            {{errorMessage}}
+                        </div>
+                        <!-- <div class="block_api_error" *ngIf="fileNotAllow != ''">
+                            {{fileNotAllow}}
+                        </div> -->
                         <div class="footer_logo">
                             <a>
                                 <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">

@@ -27,12 +27,14 @@ var HomeComponent = /** @class */ (function () {
         this.isRoundTrip = false;
         this.moduleId = 1;
         this.dealList = [];
+        this.host = '';
         this.renderer.addClass(document.body, 'bg_color');
         this.countryCode = this.commonFunction.getUserCountry();
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
+        this.host = window.location.host;
         this.getModules();
         this.loadJquery();
         this.getDeal(this.moduleId);
@@ -41,6 +43,15 @@ var HomeComponent = /** @class */ (function () {
         setTimeout(function () {
             _this.openCookiePolicyPopup();
         }, 5000);
+        this.$tabName = this.homeService.getActiveTabName.subscribe(function (tabName) {
+            if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) {
+                var tab = tabName;
+                if (tab == 'hotel') {
+                    $('.hotel-tab').trigger('click');
+                }
+            }
+        });
+        this.$tabName.unsubscribe();
     };
     HomeComponent.prototype.openCookiePolicyPopup = function () {
         if (!this.cookieService.get('__cke')) {
@@ -117,6 +128,7 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.getDeal = function (moduleId) {
         var _this = this;
+        this.moduleId = moduleId;
         this.homeService.getDealList(moduleId).subscribe(function (response) {
             _this.dealList = response['data'];
         }, function (error) {
@@ -125,7 +137,6 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.clickOnTab = function (tabName) {
         document.getElementById('home_banner').style.position = 'relative';
         document.getElementById('home_banner').style.width = '100%';
-        document.getElementById('home_banner').style.paddingBottom = '180px';
         if (tabName === 'flight') {
             this.getDeal(1);
             document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
@@ -136,8 +147,8 @@ var HomeComponent = /** @class */ (function () {
             // }
         }
         else if (tabName === 'hotel') {
-            this.getDeal(2);
-            document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
+            this.getDeal(3);
+            document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
             document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
             document.getElementById('home_banner').style.backgroundSize = 'cover';
             // if (document.getElementById('login_btn')) {
@@ -146,7 +157,7 @@ var HomeComponent = /** @class */ (function () {
         }
         else if (tabName === 'home-rentals') {
             this.getDeal(3);
-            document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
+            document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
             document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
             document.getElementById('home_banner').style.backgroundSize = 'cover';
             // if (document.getElementById('login_btn')) {
@@ -158,8 +169,15 @@ var HomeComponent = /** @class */ (function () {
         this.renderer.removeClass(document.body, 'bg_color');
     };
     HomeComponent.prototype.setToString = function (newItem) {
-        this.toString = newItem;
-        this.homeService.setToString(newItem);
+        if (this.moduleId == 1) {
+            this.toString = newItem;
+            this.homeService.setToString(newItem);
+        }
+        else if (this.moduleId == 3) {
+            this.homeService.setLocationForHotel(newItem);
+        }
+        else {
+        }
     };
     HomeComponent = __decorate([
         core_1.Component({

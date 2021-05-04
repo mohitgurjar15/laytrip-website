@@ -4,11 +4,11 @@
         <div class="card_iinner">
             <div class="main_left_side">
                 <div class="common_wrper" *ngFor="let route of item.routes; let lastroute = last">
-                    <div class="left_side desktop_on">
+                    <div class="left_side desktop_on"> 
                         <div class="flight_nams_wrps">
-                            <div class="fight_secs {{route.stops[0].airline_logo}}">
-                                <img src="{{ route.stops[0].airline_logo || defaultImage }}" alt="Airlines Logo"
-                                    onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                            <div class="fight_secs  {{route.stops[0].airline_logo}}">
+                                <img src="{{ route.stops[0].airline_logo }}" alt="Airlines Logo"
+                                    onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                 <span class="fl_name">
                                     {{route.stops[0].airline_name}}
                                 </span>
@@ -74,9 +74,9 @@
                         <div class="col_wrpps">
                             <div class="left_side">
                                 <div class="flight_nams_wrps">
-                                    <div class="fight_secs">
+                                    <div class="fight_secs {{route.stops[0].airline_logo}}">
                                         <img src="{{ route.stops[0].airline_logo || defaultImage }}" alt="Airlines Logo"
-                                            onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                            onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                         <span class="fl_name">
                                             {{route.stops[0].airline_name}}
                                         </span>
@@ -193,11 +193,6 @@
                             </span>
                         </span>
                     </ng-container>
-                    <!-- <span class="cta_btn">
-                        <button (click)="bookNow(item)">
-                            Select
-                        </button>
-                    </span> -->
                 </div>
             </div>
         </div>
@@ -271,34 +266,13 @@
                         <span class="texts_rules" *ngIf="!loadCancellationPolicy && errorMessage!=''">
                             {{ errorMessage }}
                         </span>
-                        <!-- <span class="texts_rules" *ngIf="!loadCancellationPolicy && cancellationPolicy && !loadMoreCancellationPolicy"
-                    [innerHtml]="cancellationPolicyArray[0]">
-                    </span> -->
 
                         <span class="texts_rules">
                             Non-refundable, non-transferable. Change policy reflected in Laytrip <a
                                 [routerLink]="['/terms']">Terms</a> which apply.
                         </span>
-
-                        <!-- skeleton loader for rules -->
-                        <!-- <div class="loader_rules" style="margin: 10px 0;" *ngIf="loadCancellationPolicy">
-                            <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                            <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                            <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                            <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                            <p class="fb_animation p-1 mb-1 mt-1" style="height: 10px;"></p>
-                        </div> -->
-                        <!-- skeleton loader for rules -->
-
-                        <!-- <a class="view_more"
-                        *ngIf="!loadCancellationPolicy && cancellationPolicyArray.length"
-                        (click)="toggleCancellationContent()">
-                        {{ loadMoreCancellationPolicy===true ? 'View Less' : 'View More' }}</a> -->
                     </div>
                 </div>
-                <!-- <div class="notifi_text desk_notifi">
-                    Bi-weekly and monthly installments plans also available
-                </div> -->
             </div>
         </div>
     </div>

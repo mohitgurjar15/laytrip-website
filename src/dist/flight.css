@@ -87,13 +87,13 @@
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
 }
@@ -188,10 +188,10 @@
 }
 
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center left 15px no-repeat !important;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area.dr_search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 @media (max-width: 575px) {
   .home_banner .banner_inner .banner_tab .tab-content .flight_tab .tab-content .tab-pane .flight_search .flight-grid .grid_box.secound .search_area .calender-responsive-view {
@@ -201,10 +201,10 @@
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) center right 15px no-repeat !important;
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area.dr_search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -556,7 +556,7 @@
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/travellers-icon.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/travellers-icon.svg) no-repeat;
   background-size: cover;
 }
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info span {
@@ -749,12 +749,12 @@
 }
 .search_result .price_by_date .price_day_slider .slick-arrow.slick-prev {
   left: 5px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_prev.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_prev.svg) no-repeat;
   background-position: center;
 }
 .search_result .price_by_date .price_day_slider .slick-arrow.slick-next {
   right: 5px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg) no-repeat;
   background-position: center;
 }
 .search_result .result_listing {
@@ -4002,7 +4002,7 @@
   border-bottom: 1px solid #1943FF;
 }
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .text_field input.birth_date {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
 }
 .detail_info_main.add_passenger .detail_info_left .block_passanger_info .passanger_detail_main .block_passenger_detail .block_passenger_info .card_add_pass .card-body .block_add_passenger .form_row .form_field .text_field input:placeholder {
@@ -4310,7 +4310,7 @@
   border-bottom: 1px solid #1943FF;
 }
 .detail_info_main.add_passenger .detail_info_left .block_contact_detail .block_detail .form_row .form_field input.birth_date {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
 }
 .detail_info_main.add_passenger .detail_info_left .block_contact_detail .block_detail .form_row .form_field input:placeholder {
@@ -4409,7 +4409,7 @@
 .detail_info_main .detail_info_right .block_top .summary_info .info_top {
   width: 100%;
   position: relative;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/discover_bg.png) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/discover_bg.png) no-repeat;
   background: cover;
   background-position: center;
   padding: 25px 20px 40px;
@@ -4558,7 +4558,7 @@
   left: 0;
   transform: translateY(-50%);
   content: "";
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_info.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_info.svg) no-repeat;
 }
 .detail_info_main .detail_info_right .block_top .summary_info .info_btm .info_btm_btm .flight_info_text a:after {
   content: "";
@@ -5028,7 +5028,7 @@
   border-bottom: 1px solid #1943FF;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field input.birth_date {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_detail .block_detail .form_row .form_field .text_field input:placeholder {
@@ -5875,7 +5875,7 @@
   border-bottom: 1px solid #1943FF;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field input.birth_date {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
   background-position: right center;
 }
 .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_row .form_field .text_field input:placeholder {
@@ -6739,7 +6739,7 @@
   top: 0;
   right: 0;
   content: "";
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/booking-confirmation-for-guest-login-im.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/booking-confirmation-for-guest-login-im.svg) no-repeat;
 }
 @media (max-width: 767px) {
   .detail_info_main.book_confirm_login .detail_info_left .block_booking_confirmation:after {

@@ -11,9 +11,12 @@ import { CommonFunction } from "../_helpers/common-function";
   })
 export class HomeService {
     private toString : any = new BehaviorSubject({});
+    private fromDestinationInfo : any = new BehaviorSubject({});
     getToString = this.toString.asObservable();
+    getLocationForHotelDeal = this.fromDestinationInfo.asObservable();
+    private tabName = new BehaviorSubject([]);
+    getActiveTabName = this.tabName.asObservable();
 
-    
     constructor(
         private http: HttpClient,
         private commonFunction: CommonFunction
@@ -34,8 +37,17 @@ export class HomeService {
         return throwError(errorMessage);
     }    
     
+
+    setActiveTab(tabName){
+        this.tabName.next(tabName)
+    }
+
     setToString(flightToCode) {
         this.toString.next(flightToCode)
+    }
+
+    setLocationForHotel(destinationInfo) {
+        this.fromDestinationInfo.next(destinationInfo)
     }
 
     getDealList(moduleId) {
@@ -48,7 +60,14 @@ export class HomeService {
             catchError(this.handleError)
         );
     }
-    removeToString() {
-        this.toString.next({})
+
+    removeToString(module) {
+        if(module == 'flight' ){
+            this.toString.next({});
+        } else if(module == 'hotel' ) {
+            this.fromDestinationInfo.next({})
+        } else {
+            
+        }
     }   
 }

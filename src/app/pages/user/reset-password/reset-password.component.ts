@@ -97,7 +97,7 @@ export class ResetPasswordComponent implements OnInit {
     Object.keys(this.resetForm.controls).forEach(key => {
       this.resetForm.get(key).markAsUntouched();
     });
-    let otps: any = this.ngOtpInputRef.otpForm.value;
+    let otps: any = this.resetForm.controls.otp.value;
     Object.values(otps).forEach((v) => {
       otpValue += v;
     });
@@ -159,11 +159,13 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onOtpChange(event) {
-    console.log(event);
     if (event.length == 6) {
       this.otp = event;
       this.resetForm.controls.otp.setValue(event);
-      this.ngOtpInputRef.setValue(event);
+      // this.ngOtpInputRef.setValue(event);
+      this.otpLengthError = false;
+    } else {
+      this.otpLengthError = true;
     }
   }
 

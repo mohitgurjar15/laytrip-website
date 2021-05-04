@@ -70,7 +70,7 @@ import { NgxMaskModule } from 'ngx-mask';
     CommonModule,
     MyAccountsRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgSelectModule,
     NgbModule,
     CalendarModule,

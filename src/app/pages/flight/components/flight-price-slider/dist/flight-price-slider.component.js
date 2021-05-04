@@ -14,6 +14,38 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.route = route;
         this.flexibleNotFound = false;
+        this.slideConfig = {
+            dots: false,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 7,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 7,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        };
         this.flexibleLoading = false;
         this.dates = [];
         this.departureDate = this.route.snapshot.queryParams['departure_date'];
@@ -31,82 +63,42 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         this.infant = this.route.snapshot.queryParams['infant'];
     }
     FlightPriceSliderComponent.prototype.ngOnInit = function () {
-        this.loadJquery();
-    };
-    FlightPriceSliderComponent.prototype.loadJquery = function () {
-        // Start Flight Price By Day slider js
-        if (this.dates.length > 0) {
-            var count = this.dates.length;
-            $('.price_day_slider').slick({
-                dots: false,
-                infinite: true,
-                speed: 300,
-                slidesToShow: count >= 7 ? 7 : count,
-                slidesToScroll: 1,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: count >= 6 ? 6 : count,
-                            slidesToScroll: 1,
-                            infinite: true,
-                            dots: false
-                        }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: count >= 3 ? 3 : count,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: count >= 1 ? 1 : count,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });
-            // Close Flight Price By Day slider js
-        }
     };
     FlightPriceSliderComponent.prototype.ngOnChanges = function (changes) {
-        var _this = this;
         if (changes['dates'].currentValue.length) {
-            setTimeout(function () { _this.loadJquery(); }, 100);
-            if (this.trip == 'oneway') {
-                this.flipDates(this.dates);
-            }
+            this.flipDates(this.dates);
         }
     };
     FlightPriceSliderComponent.prototype.flipDates = function (dates) {
         var _this = this;
         var result = [];
         var sourceIndex = dates.findIndex(function (date) { return moment(date.date, "DD/MM/YYYY").format("YYYY-MM-DD") === _this.route.snapshot.queryParams['departure_date']; });
-        var targetIndex = 4;
-        if (targetIndex > sourceIndex) {
-            targetIndex = 5;
-            for (var i = targetIndex; i < this.dates.length; i++) {
-                result.push(this.dates[i]);
-            }
-            for (var i = 0; i < targetIndex; i++) {
-                result.push(this.dates[i]);
-            }
+        var targetIndex = 3;
+        if (window.screen.width <= 600) {
+            targetIndex = 1;
         }
-        else {
-            for (var i = targetIndex; i <= sourceIndex; i++) {
-                result.push(this.dates[i]);
-            }
-            for (var i = sourceIndex + 1; i < this.dates.length; i++) {
-                result.push(this.dates[i]);
-            }
-            for (var i = 0; i < targetIndex; i++) {
-                result.push(this.dates[i]);
-            }
+        var startIndex = sourceIndex - targetIndex;
+        for (var i = startIndex; i < dates.length; i++) {
+            result.push(dates[i]);
+        }
+        for (var i = 0; i < startIndex; i++) {
+            result.push(dates[i]);
         }
         this.dates = result;
+        this.dates = this.dates.filter(function (element) {
+            return element !== undefined;
+        });
+    };
+    FlightPriceSliderComponent.prototype.rotateArray1 = function (dates, k) {
+        for (var i = 0; i < k; i++) {
+            dates.unshift(dates.pop());
+        }
+        return dates;
+    };
+    FlightPriceSliderComponent.prototype.arrayRotate = function (arr, count) {
+        count -= arr.length * Math.floor(count / arr.length);
+        arr.push.apply(arr, arr.splice(0, count));
+        return arr;
     };
     FlightPriceSliderComponent.prototype.getPrice = function (item) {
         var price;

@@ -4,7 +4,7 @@
             <!-- <input type="hidden" formControlName="payment_method_token" id="payment_method_token"> -->
             <input type="hidden" name="payment_method_token" id="payment_method_token">
             <div class="form-row">
-                <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
+                <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps" style="margin-top: 1px;">
                     <label for="">Cardholder Name*</label>
                     <input type="text" id="full_name" class="form-control" placeholder="Name on Card"
                         (keypress)="commonFunction.preventNumberInput($event)">
@@ -47,8 +47,8 @@
                     <div class="save_btn_wrps">
                         <input type="button" class="button" value="Close" (click)="closeNewCardPanel()"
                             [hidden]="totalCard === 0">
-                        <input type="submit" id="submit_button" class="button" value="Save">
-                    </div>
+                        <input [disabled]="saveCardLoader" [ngClass]="{'disabled':saveCardLoader}" type="submit" id="submit_button" class="button" value="Save">
+                     </div>
                     <div class="section_description cvv_description" id="cardError">
                         <span class="sec_text pt-1 pr-1" id="cardErrorMessage"></span>
                         <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { CommonFunction } from '../../_helpers/common-function';
 import {installmentType} from '../../_helpers/generic.helper';
+declare var $: any;
 
 @Component({
   selector: 'app-price-summary',
@@ -17,6 +18,7 @@ export class PriceSummaryComponent implements OnInit {
   installmentVartion:number=0;
   installmentType;
   cartAlerts=[];
+  flightCount:number=0;
   
   constructor(
     private commonFunction:CommonFunction
@@ -25,9 +27,24 @@ export class PriceSummaryComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    
+  }
+  
+  closeModal() {
+    $('#tax_fee_modal').modal('hide');
   }
   
   ngOnChanges(changes: SimpleChanges) {
+    /* console.log("======>",changes['cartPrices'])
+    if (typeof changes['cartPrices']!='undefined') {
+      let isFlight = this.cartPrices.find(x=>{return x.type==='flight'});
+      if(isFlight){
+        this.flightCount=1;
+      }
+      console.log("===================",isFlight,this.flightCount)
+    } */
+
+
     try{
       let cartAlerts = localStorage.getItem("__alrt")
       if(cartAlerts){
@@ -41,8 +58,11 @@ export class PriceSummaryComponent implements OnInit {
       this.cartAlerts=[];
     }
     this.insatllmentAmount=0;
+    console.log(typeof changes['priceSummary'].currentValue)
     if (typeof changes['priceSummary'].currentValue!='undefined') {
-      console.log("changes['priceSummary']",changes['priceSummary'])
+      if($('#flight_list_wrper').text()==""){
+        $('#flight_list_wrper').remove();
+      }
       this.priceSummary = changes['priceSummary'].currentValue;
       if(typeof this.priceSummary.instalments!=='undefined' && this.priceSummary.paymentType=='instalment'){
        for(let i =1 ; i<this.priceSummary.instalments.instalment_date.length; i++){

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -24,6 +24,8 @@ export class HotelSearchComponent implements OnInit {
   hotelToken;
   isResetFilter: string = 'no';
   searchedValue = [];
+  filteredLabel : string = 'Price Low to High';
+
   roomsGroup = [
     {
       adults: 2,
@@ -31,56 +33,45 @@ export class HotelSearchComponent implements OnInit {
       children: []
     }
   ];
-
+  filterOpen : boolean = false;
+  sortByOpen : boolean = false;
+  
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
     public commonFunction: CommonFunction,
     public router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private renderer: Renderer2
+
   ) {
   }
 
   ngOnInit() {
     window.scroll(0, 0);
-    // if (document.getElementById('login_btn')) {
-    //   setTimeout(() => {
-    //     document.getElementById('login_btn').style.background = '#FF00BC';
-    //   }, 1000);
-    // }
-    let payload: any = {};
-    let info;
-    this.route.queryParams.forEach(params => {
-      info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
-      payload = {
-        check_in: params.check_in,
-        check_out: params.check_out,
-        latitude: params.latitude,
-        longitude: params.longitude,
-        occupancies: [],
-        filter: true,
-      };
-      info.forEach(item => {
-        payload.occupancies.push({ adults: item.adults, children: item.children });
-      });
-      this.getHotelSearchData(payload);
-    });
-  }
+    this.renderer.addClass(document.body, 'cms-bgColor');
 
-  // ngAfterViewInit() {
-  //   $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
-  //     function () {
-  //       $('.norm_btn').toggleClass("d-none");
-  //       $('.hover_btn').toggleClass("show");
-  //     }
-  //   );
-  // }
+    let info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+    let payload = {
+      check_in: this.route.snapshot.queryParams['check_in'],
+      check_out: this.route.snapshot.queryParams['check_out'],
+      latitude: this.route.snapshot.queryParams['latitude'],
+      longitude: this.route.snapshot.queryParams['longitude'],
+      city_id: this.route.snapshot.queryParams['city_id'],
+      rooms:info.rooms,
+      adults: info.adults,
+      children: info.child,
+      filter: true,
+    };
+    this.getHotelSearchData(payload);
+  }
 
   getHotelSearchData(payload) {
     this.loading = true;
     this.errorMessage = '';
     this.hotelService.getHotelSearchResult(payload).subscribe((res: any) => {
       this.hotelDetails = res.data.hotels;
+      this.hotelService.setHotels(this.hotelDetails)
       this.hotelDetailsMain = res.data;
       this.hotelToken = res.data.details.token;
       this.loading = false;
@@ -95,28 +86,52 @@ export class HotelSearchComponent implements OnInit {
     });
   }
 
+  
   sortHotels(event) {
+    this.hotelService.setSortFilter(event);
     let { key, order } = event;
     if (key === 'total') {
-      this.hotelDetails = this.sortJSON(this.hotelDetails, key, order);
+      if (order === 'ASC') {
+        this.filteredLabel = 'Price Lowest to Highest';
+        this.hotelDetails = this.sortPriceJSON(this.hotelDetails, key, order);
+      } else if (order === 'DESC') {
+        this.filteredLabel = 'Price Highest to Lowest';
+        this.hotelDetails = this.sortPriceJSON(this.hotelDetails, key, order);
+      }
     } else if (key === 'rating') {
-      this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
+      if (order === 'ASC') {
+        this.filteredLabel = 'Rating Lowest to Highest';
+        this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);        
+      } else if(order === 'DESC'){
+        this.filteredLabel = 'Rating Highest to Lowest';
+        this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
+      }
     } else if (key === 'name') {
-      this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
+      
+      if (order === 'ASC') {
+        this.filteredLabel = 'Alphabetical A to Z';
+        this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
+      }else if(order === 'DESC'){
+        this.filteredLabel = 'Alphabetical Z to A';
+        this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
+
+      }
     }
+
+    this.hotelService.setHotels(this.hotelDetails)
   }
 
-  sortJSON(data, key, way) {
+  sortPriceJSON(data, key, way) {
     if (typeof data === "undefined") {
       return data;
     } else {
       return data.sort(function (a, b) {
-        var x = a.selling[key];
-        var y = b.selling[key];
-        if (way === 'ASC') {
+        var x = a.secondary_start_price > 0 ?  a.secondary_start_price : a.selling[key];
+        var y = b.secondary_start_price > 0 ?  b.secondary_start_price : b.selling[key];
+        
+        if (way === 'ASC') {        
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        }
-        if (way === 'DESC') {
+        } else if (way === 'DESC') {         
           return ((x > y) ? -1 : ((x < y) ? 1 : 0));
         }
       });
@@ -124,6 +139,7 @@ export class HotelSearchComponent implements OnInit {
   }
 
   sortByRatings(data, key, way) {
+    
     if (typeof data === "undefined") {
       return data;
     } else {
@@ -141,12 +157,13 @@ export class HotelSearchComponent implements OnInit {
   }
 
   sortByHotelName(data, key, way) {
+
     if (typeof data === "undefined") {
       return data;
     } else {
       return data.sort(function (a, b) {
-        var x = a[key];
-        var y = b[key];
+        var x = a[key].toLowerCase();
+        var y = b[key].toLowerCase();
         if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }
@@ -160,11 +177,19 @@ export class HotelSearchComponent implements OnInit {
   filterHotel(event) {
     setTimeout(() => {
       this.hotelDetails = event;
+      this.hotelService.setHotels(this.hotelDetails)
     }, 100);
   }
 
   resetFilter() {
     this.isResetFilter = (new Date()).toString();
+  }
+  
+  filterDrawerOpen(){
+   this.filterOpen = !this.filterOpen;
+  }
+  sortByDrawerOpen(){
+   this.sortByOpen = !this.sortByOpen;
   }
 
   getHotelSearchDataByModify(event) {

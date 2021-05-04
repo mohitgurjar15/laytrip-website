@@ -56,7 +56,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     FlightSummaryLoaderComponent,
     FlightErrorComponent,
     PopupTermConditionComponent,
-    PopupLoaderComponent,
+    PopupLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +66,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     HelpersModule,
     ComponentsModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgSelectModule,
     CookieModule.forRoot(),
     CalendarModule,

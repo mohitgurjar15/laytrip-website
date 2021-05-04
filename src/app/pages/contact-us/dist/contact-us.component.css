@@ -13,8 +13,26 @@
   --mobile-bkp: $mobile-bkp;
 }
 
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
 .ng-select.laytrip-input {
   padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
 }
 .ng-select.laytrip-input .ng-dropdown-panel {
   top: 100%;
@@ -102,15 +120,44 @@
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
   padding: 5px 5px 5px 30px;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
   background-position: left center;
   color: #012178;
 }
 .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
   padding: 5px 5px 5px 50px !important;
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
   background-position: left 25px center;
   color: #808080;
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+    padding: 5px 5px 5px 24px !important;
+    background-position: left 5px center;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 3px 0 0 0;
+  max-width: 275px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 175px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
+  padding-left: 0;
 }
 .ng-select.ng-customClass .ng-select-container {
   height: 100%;
@@ -137,6 +184,44 @@
   height: auto !important;
   border: none !important;
 }
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-value {
+  width: 44px;
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
+  top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
+}
 
 .ng-select-focused:not(.ng-select-opened) > .ng-select-container {
   box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
@@ -147,10 +232,6 @@
   height: 3px;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-selection {
-  background: #F826C1;
-}
-
 .custom_range_slide .ng5-slider .ng5-slider-pointer {
   width: 13px;
   height: 13px;
@@ -158,7 +239,6 @@
   /* to remove the default positioning */
   top: -6px;
   background-color: #fff;
-  border: 1px solid #F826C1;
   border-radius: 50%;
   outline: none;
 }
@@ -169,6 +249,18 @@
 
 .redeem_laypoint .ng5-slider .ng5-slider-bubble {
   display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
 }
 
 .custom_range_slide p {
@@ -194,16 +286,11 @@
 
 .custom_range_slide .ng5-slider .ng5-slider-limit {
   font-weight: bold;
-  color: #F826C1;
   display: none;
 }
 
-.custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
-  background: #F826C1;
-}
-
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
-  background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
 }
 
 .modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
@@ -284,15 +371,6 @@
   max-width: 514px;
   width: 96%;
 }
-@media (max-width: 768px) {
-  .modal-dialog .modal-content {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-}
 .modal-dialog .modal-content .contact_modal_wrp {
   padding: 32px 20px;
 }
@@ -322,15 +400,111 @@
 .modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row textarea:focus {
   outline: none;
 }
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row input.error,
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row textarea.error {
+  border-color: #ff0000;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row input.error::placeholder,
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row textarea.error::placeholder {
+  color: #878787;
+  -webkit-text-fill-color: #878787;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload {
+  position: relative;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_btn {
+  color: #878787;
+  font-size: 12px;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_btn label {
+  cursor: pointer;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_btn label img {
+  max-width: 11px;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper {
+  margin-top: 10px;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps {
+  margin-bottom: 7px;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps:last-child {
+  margin-bottom: 0;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list {
+  border: 1px solid #d6d6d6;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30px;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list img {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  height: 28px;
+  width: 30px;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list .fileName {
+  color: #878787;
+  font-size: 12px;
+  font-weight: 400;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list .fileName {
+    max-width: 90%;
+  }
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list .fileName h5 {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0 0 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+  width: auto;
+  margin-right: 2px;
+}
+@media (max-width: 480px) {
+  .modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list .fileName h5 {
+    max-width: 74%;
+  }
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  width: auto;
+  position: absolute;
+  right: 5px;
+  height: auto;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list button:focus {
+  outline: none;
+  border: none;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .custom_upload .upload_list_wrapper .listing_lines_wrps .uploaded_list button img {
+  width: 19px;
+  height: 19px;
+  padding: 5px;
+}
 .modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .text_area_wrps {
   position: relative;
 }
 .modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .text_area_wrps .word_counter {
   display: flex;
-  color: #d6d6d6;
   font-size: 12px;
   justify-content: flex-end;
   color: #878787;
+  right: 0;
+  position: absolute;
+  transform: translate(0px, 3px);
 }
 .modal-dialog .modal-content .contact_modal_wrp .modal_content form .form_row .text_area_wrps .block_btm_msg {
   display: flex;
@@ -351,6 +525,7 @@
   z-index: 9;
   overflow: hidden;
   white-space: normal;
+  cursor: pointer;
 }
 .modal-dialog .modal-content .contact_modal_wrp .modal_content form button::before {
   content: "";
@@ -364,16 +539,23 @@
   transition: 0.8s;
   border-radius: 25px;
 }
-.modal-dialog .modal-content .contact_modal_wrp .modal_content form button:hover {
-  border: 1px solid #F826C1;
-  color: #F826C1;
-}
-.modal-dialog .modal-content .contact_modal_wrp .modal_content form button:hover:before {
-  height: calc(100% - 2px);
-  width: calc(100% - 2px);
-}
 .modal-dialog .modal-content .contact_modal_wrp .modal_content form button.btn_disable {
   cursor: default;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .block_api_error {
+  max-width: 375px;
+  width: 100%;
+  margin: 13px auto 0;
+  padding: 5px 20px;
+  font-size: 12px;
+  color: #ff7272;
+  background: transparent;
+  text-align: center;
+  border-radius: 25px;
+}
+.modal-dialog .modal-content .contact_modal_wrp .modal_content form .block_api_error .clickHereLink {
+  text-decoration: underline;
+  color: #0045ff;
 }
 .modal-dialog .modal-content .contact_modal_wrp .modal_content form .footer_logo {
   display: flex;
@@ -384,4 +566,5 @@
 }
 .modal-dialog .modal-content .contact_modal_wrp .modal_content form .footer_logo img {
   max-width: 62px;
+  height: 23px;
 }

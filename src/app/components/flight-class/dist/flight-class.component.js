@@ -18,25 +18,46 @@ var FlightClassComponent = /** @class */ (function () {
         this.loadJquery();
     };
     FlightClassComponent.prototype.loadJquery = function () {
-        $("body").click(function () {
-            $(".add_class_sec_open_").hide();
+        /* $("body").click(function () {
+          $(".add_class_sec_open_").hide();
         });
+    
         $(".class_sec_info").click(function (e) {
+          e.stopPropagation();
+          if((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') ||
+          (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')
+          ){
+            $(".add_class_sec_open_").hide();
+          } else {
+            $(".add_class_sec_open_").show();
+          }
+    
+          $(".add_traveler__open").hide();
+        });
+    
+        $('.add_class_sec_open_').click(
+          function (e) {
             e.stopPropagation();
-            if ((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') ||
-                (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')) {
-                $(".add_class_sec_open_").hide();
+          }
+        ); */
+    };
+    FlightClassComponent.prototype.clickout = function (event) {
+        if (this.eRef.nativeElement.contains(event.target)) {
+            if ((event.target.nextSibling && typeof event.target.nextSibling.classList != 'undefined' && event.target.nextSibling.classList != null && event.target.nextSibling.classList[2] == 'panel_hide' ||
+                event.target.offsetParent && event.target.offsetParent.nextSibling != null && event.target.offsetParent.nextSibling.classList[2] == 'panel_hide')) {
+                $(".add_traveler__open").hide();
+                this.showClass = false;
             }
             else {
-                $(".add_class_sec_open_").show();
+                this.showClass = true;
             }
-            $(".add_traveler__open").hide();
-        });
-        $('.add_class_sec_open_').click(function (e) {
-            e.stopPropagation();
-        });
+        }
+        else {
+            this.showClass = false;
+        }
     };
     FlightClassComponent.prototype.toggleTraveller = function () {
+        $(".add_traveler__open").hide();
         this.showClass = !this.showClass;
     };
     FlightClassComponent.prototype.btnClickForChange = function (item) {
@@ -50,6 +71,9 @@ var FlightClassComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], FlightClassComponent.prototype, "flightClass");
+    __decorate([
+        core_1.HostListener('document:click', ['$event'])
+    ], FlightClassComponent.prototype, "clickout");
     FlightClassComponent = __decorate([
         core_1.Component({
             selector: 'app-flight-class',

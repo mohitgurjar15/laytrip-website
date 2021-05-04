@@ -1,9 +1,9 @@
-<div [formGroup]="form">
-    <label>{{label}}</label>
+<div [formGroup]="form" class="lab_wrapper">
+    <label class="label_wrp">{{label}}</label>
     <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}" [selectOnTab]="true" [items]="data"
         groupBy="recentSearches" bindLabel="title" bindValue="title" [(ngModel)]="defaultSelected.city"
         [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true" (search)="onChangeSearch($event)"
-        loadingText="" (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input-new"
+        loadingText="" (click)="onAuxClick($event)" (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input-new"
         placeholder="{{ defaultCity }}" [tabIndex]="tabIndex">
         <!-- [(ngModel)]="defaultSelected.city" -->
         <ng-template ng-label-tmp let-item="item">

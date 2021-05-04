@@ -13,6 +13,7 @@ var forms_1 = require("@angular/forms");
 var custom_validators_1 = require("../../../../_helpers/custom.validators");
 var moment = require("moment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
+var phone_masking_helper_1 = require("src/app/_helpers/phone-masking.helper");
 var ProfileComponent = /** @class */ (function () {
     function ProfileComponent(formBuilder, userService, genericService, router, commonFunction, toastr, cookieService, flightService, checkOutService) {
         this.formBuilder = formBuilder;
@@ -70,6 +71,10 @@ var ProfileComponent = /** @class */ (function () {
         this.type = 'form';
         this.hmPlaceHolder = 'Select home airport';
         this.closeAirportSuggestion = true;
+        this.phoneNumberMask = {
+            format: '',
+            length: 0
+        };
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.getAirports();
@@ -244,6 +249,11 @@ var ProfileComponent = /** @class */ (function () {
             _this.profileForm.controls['country_code'].disable();
             _this.profileForm.controls['country_id'].disable();
             _this.profileForm.controls['state_id'].disable();
+            var phoneFormat = phone_masking_helper_1.getPhoneFormat(res.countryCode || '+1');
+            _this.profileForm.controls.phone_no.setValidators([forms_1.Validators.minLength(phoneFormat.length)]);
+            _this.profileForm.controls.phone_no.updateValueAndValidity();
+            _this.phoneNumberMask.format = phoneFormat.format;
+            _this.phoneNumberMask.length = phoneFormat.length;
         }, function (error) {
             _this.loadingValue.emit(false);
             if (error.status === 401) {
@@ -297,17 +307,17 @@ var ProfileComponent = /** @class */ (function () {
             formdata.append("gender", this.gender_type ? this.gender_type : 'M');
             formdata.append("city_name", this.profileForm.value.city);
             formdata.append("address", this.profileForm.value.address);
-            if (!Number.isInteger(this.profileForm.value.country_id)) {
-                formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
-            }
-            else {
+            if (typeof this.profileForm.value.country_id == 'object') {
                 formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : 233);
             }
-            if (!Number.isInteger(this.profileForm.value.state_id)) {
-                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
+            else {
+                formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
+            }
+            if (typeof this.profileForm.value.state_id == 'string') {
+                formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
             }
             else {
-                formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
+                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
             }
             if (typeof (this.profileForm.value.country_code) != 'object') {
                 formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
@@ -396,7 +406,6 @@ var ProfileComponent = /** @class */ (function () {
                     }
                 }
                 _this.airportData = result;
-                console.log(_this.airportData);
             }, function (error) {
                 _this.airportLoading = false;
                 _this.airportData = [];
@@ -449,10 +458,22 @@ var ProfileComponent = /** @class */ (function () {
         this.closeAirportSuggestion = true;
     };
     ProfileComponent.prototype.selectAirport = function (event) {
-        this.profileForm.controls.home_airport.setValue(event.city + ' (' + event.code + ')');
+        if (event.parentId != 0) {
+            this.profileForm.controls.home_airport.setValue(event.city + ' (' + event.code + ')');
+        }
+        else {
+            this.profileForm.controls.home_airport.setValue(event.city + ' International (' + event.code + ')');
+        }
         this.closeAirportSuggestion = true;
         this.hmPlaceHolder = '';
         this.departureAirport.code = event.code;
+    };
+    ProfileComponent.prototype.validateCountryWithPhoneNumber = function (event) {
+        var selectedCountry = phone_masking_helper_1.getPhoneFormat(this.profileForm.controls['country_code'].value);
+        this.profileForm.controls.phone_no.setValidators([forms_1.Validators.minLength(selectedCountry.length)]);
+        this.profileForm.controls.phone_no.updateValueAndValidity();
+        this.phoneNumberMask.format = selectedCountry.format;
+        this.phoneNumberMask.length = selectedCountry.length;
     };
     __decorate([
         core_1.Output()

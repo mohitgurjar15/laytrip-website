@@ -95,6 +95,10 @@
                         font-size: 20px;
                         color: #000;
                         font-weight: 600;
+
+                        @include tab-view {
+                            font-size: 16px;
+                        }
                     }
                 }
             }
@@ -246,6 +250,354 @@
 
 // NG-SELECT FOCUS REMOVE CSS END
 
+// custom slider for hotels
+.hotel_list_img_wrp {
+    ngx-gallery {
+        ngx-gallery-image {
+            .ngx-gallery-image-wrapper {
+                border-radius: 10px;
+
+                .ngx-gallery-image {
+                    border-radius: 10px;
+                }
+            }
+
+            .ngx-gallery-arrow-wrapper {
+                &.ngx-gallery-arrow-left {
+                    i {
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+                        background-repeat: no-repeat;
+                        background-color: $background-white;
+                        border-radius: 50%;
+                        padding: 14px;
+                        background-position: center center;
+                        background-size: 7px;
+
+                        @include tab-view {
+                            padding: 10px;
+                            background-size: 5px;
+                            display: none;
+                        }
+
+                        &::before {
+                            content: none;
+                        }
+                    }
+                }
+
+                &.ngx-gallery-arrow-right {
+                    i {
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+                        background-repeat: no-repeat;
+                        background-color: $background-white;
+                        border-radius: 50%;
+                        padding: 14px;
+                        background-position: center center;
+                        background-size: 7px;
+
+                        @include tab-view {
+                            padding: 10px;
+                            background-size: 5px;
+                            display: none;
+                        }
+
+                        &::before {
+                            content: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.hotel_list_img_wrp {
+    .carousel {
+        &.slide {
+            &:focus {
+                outline: none;
+                border: none;
+            }
+
+            .carousel-inner {
+                &:focus {
+                    outline: none;
+                    border: none;
+                }
+
+                .carousel-item {
+                    &:focus {
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+
+            .picsum-img-wrapper {
+                &:focus {
+                    outline: none;
+                    border: none;
+                }
+
+                img {
+                    &:focus {
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+
+            .carousel-control-prev {
+                opacity: 1;
+
+                .carousel-control-prev-icon {
+                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+                    background-repeat: no-repeat;
+                    background-color: $background-white;
+                    border-radius: 50%;
+                    padding: 14px;
+                    background-position: center center;
+                    background-size: 7px;
+
+                    @include tab-view {
+                        padding: 10px;
+                        background-size: 5px;
+                        margin-left: 10px;
+                        // display: none;
+                    }
+                }
+            }
+
+            .carousel-control-next {
+                opacity: 1;
+
+                .carousel-control-next-icon {
+                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+                    background-repeat: no-repeat;
+                    background-color: $background-white;
+                    border-radius: 50%;
+                    padding: 14px;
+                    background-position: center center;
+                    background-size: 7px;
+
+                    @include tab-view {
+                        padding: 10px;
+                        background-size: 5px;
+                        margin-right: 10px;
+                        // display: none;
+                    }
+                }
+            }
+
+            .carousel-indicators {
+                text-align: center;
+
+                li {
+                    display: none;
+                    margin: 0 2px;
+                    width: 4px;
+                    height: 3px;
+                    border-radius: 50%;
+                    padding: 1px;
+                }
+            }
+        }
+    }
+}
+
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active,
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li,
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li+li {
+    display: inline-block;
+}
+
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li:nth-last-child(1),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li:nth-last-child(2),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li:nth-last-child(3) {
+    display: inline-block;
+}
+
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active~li:nth-last-child(1),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active~li:nth-last-child(2),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active~li:nth-last-child(3) {
+    display: none;
+}
+
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li+li:nth-last-child(3),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li+li:nth-last-child(2),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li+li:nth-last-child(1),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li:nth-last-child(3),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li:nth-last-child(2),
+.hotel_list_img_wrp .carousel.slide .carousel-indicators li.active+li:nth-last-child(1) {
+    display: inline-block;
+}
+
+.main_slider_big {
+    ngx-gallery {
+        @include tab-view {
+            max-height: 210px;
+        }
+
+        ngx-gallery-image {
+            .ngx-gallery-image-wrapper {
+                border-radius: 10px;
+
+                .ngx-gallery-image {
+                    border-radius: 10px;
+                }
+            }
+
+            .ngx-gallery-arrow-wrapper {
+                &.ngx-gallery-arrow-left {
+                    i {
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+                        background-repeat: no-repeat;
+                        background-color: $background-white;
+                        border-radius: 50%;
+                        padding: 20px;
+                        background-position: center center;
+                        background-size: 8px;
+
+                        @include tab-view {
+                            padding: 10px;
+                            background-size: 5px;
+                        }
+
+                        &::before {
+                            content: none;
+                        }
+                    }
+                }
+
+                &.ngx-gallery-arrow-right {
+                    i {
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+                        background-repeat: no-repeat;
+                        background-color: $background-white;
+                        border-radius: 50%;
+                        padding: 20px;
+                        background-position: center center;
+                        background-size: 8px;
+
+                        @include tab-view {
+                            padding: 10px;
+                            background-size: 5px;
+                        }
+
+                        &::before {
+                            content: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .carousel {
+        &.slide {
+            &:focus {
+                outline: none;
+                border: none;
+            }
+
+            .carousel-inner {
+                &:focus {
+                    outline: none;
+                    border: none;
+                }
+
+                .carousel-item {
+                    &:focus {
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+
+            .picsum-img-wrapper {
+                &:focus {
+                    outline: none;
+                    border: none;
+                }
+
+                img {
+                    max-width: 100%;
+                    width: 100%;
+                    height: 100%;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                    -o-object-position: center;
+                    object-position: center;
+                    max-height: 383px;
+                    border-radius: 10px;
+
+                    &:focus {
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+
+            .carousel-control-prev {
+                opacity: 1;
+
+                .carousel-control-prev-icon {
+                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+                    background-repeat: no-repeat;
+                    background-color: $background-white;
+                    border-radius: 50%;
+                    padding: 14px;
+                    background-position: center center;
+                    background-size: 7px;
+
+                    @include tab-view {
+                        padding: 10px;
+                        background-size: 5px;
+                        margin-left: 10px;
+                        //display: none;
+                    }
+                }
+            }
+
+            .carousel-control-next {
+                opacity: 1;
+
+                .carousel-control-next-icon {
+                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+                    background-repeat: no-repeat;
+                    background-color: $background-white;
+                    border-radius: 50%;
+                    padding: 14px;
+                    background-position: center center;
+                    background-size: 7px;
+
+                    @include tab-view {
+                        padding: 10px;
+                        background-size: 5px;
+                        margin-right: 10px;
+                        //display: none;
+                    }
+                }
+            }
+
+            .carousel-indicators {
+                text-align: center;
+
+                li {
+                    display: none;
+                    margin: 0 2px;
+                    width: 4px;
+                    height: 3px;
+                    border-radius: 50%;
+                    padding: 1px;
+                }
+            }
+        }
+    }
+}
+
+// custom slider for hotels
+
 // datepicker hotel and rentals search
 ngb-datepicker {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -289,7 +641,7 @@ ngb-datepicker {
 .hotel_tab {
     .tab_upper_content {
         width: 100%;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
 
         .travellers {
             width: auto;
@@ -322,14 +674,18 @@ ngb-datepicker {
 
                     span {
                         font-size: 14px;
-                        padding: 0 10px 0 0;
+                        padding: 0 3px 0 0;
+
+                        &.guest_num {
+                            margin-left: 6px;
+                        }
                     }
 
                     .drop_aerrow {
                         width: 14px;
                         position: relative;
                         margin-left: 20px;
-                        background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
+                        background-image: url('https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
                         background-position: right;
                         background-repeat: no-repeat;
                         background-size: 12px;
@@ -367,8 +723,8 @@ ngb-datepicker {
                     border: 1px solid #E0E2E5;
                     border-radius: 5px;
                     z-index: 1021;
-                    max-height: 500px;
-                    overflow-y: auto;
+                    //height: 400px;
+                    //overflow-y: auto;
 
                     &:before {
                         width: 0;
@@ -397,9 +753,11 @@ ngb-datepicker {
 
                     .rooms_aloc {
                         margin-top: 10px;
+                        //margin-right: 30px;
+                        //max-height: 380px;
 
                         &:first-child {
-                            margin: 0;
+                            margin-top: 0;
                         }
 
                         &.marign_rooms {
@@ -458,23 +816,101 @@ ngb-datepicker {
                             display: flex;
                             flex-wrap: wrap;
                             justify-content: flex-start;
+                            border-top: 1px solid $text_light_grey;
+                            margin-top: 20px;
 
                             .child_boxes {
-                                border: 1px solid $box-border-color;
-                                border-radius: 8px;
+                                //border: 1px solid $box-border-color;
                                 background: $background-white;
-                                padding: 5px 10px;
-                                margin: 2px;
-                                width: 48%;
+                                width: 100%;
                                 display: none;
+                                padding-top: 20px;
 
                                 &.open {
-                                    display: block;
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
                                 }
 
-                                .label_name {
-                                    padding: 0;
-                                    width: 100%;
+                                // .label_name {
+                                //     padding: 0;
+                                //     width: 100%;
+                                //     font-size: 16px;
+                                //     color: $text-darkblue;
+                                //     display: block;
+                                // }
+                                .left {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: $text-grey;
+
+                                    span {
+                                        font-size: 16px;
+                                        color: $text-darkblue;
+                                        display: block;
+                                        padding: 0;
+                                    }
+                                }
+
+                                .right {
+                                    width: 55px;
+                                    display: flex;
+                                    align-items: center;
+
+                                    ng-select {
+                                        width: 100%;
+
+                                        &.child_select_ng {
+                                            .ng-clear-wrapper {
+                                                display: none;
+                                            }
+
+                                            &.ng-select-focused:not(.ng-select-opened) {
+                                                .ng-select-container {
+                                                    border: 1px solid $text_light_grey;
+                                                    box-shadow: none;
+                                                }
+                                            }
+
+                                            .ng-select-container {
+                                                border: 1px solid $text_light_grey;
+                                            }
+
+                                            .ng-value-container {
+                                                .ng-value {
+                                                    .ng-value-label {
+                                                        color: $text-darkblue;
+                                                        font-size: 14px;
+                                                        padding: 0;
+                                                    }
+                                                }
+                                            }
+
+                                            .ng-arrow-wrapper {
+                                                padding: 0;
+
+                                                .ng-arrow {
+                                                    border: none;
+                                                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) center right 5px no-repeat !important;
+                                                    height: 24px;
+                                                    width: 20px;
+                                                    background-position: 2px 11px !important;
+                                                    padding: 0;
+                                                }
+                                            }
+
+                                            ng-dropdown-panel {
+                                                .ng-option {
+                                                    .ng-option-label {
+                                                        padding: 0;
+                                                        font-size: 12px;
+                                                        color: $text-black
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
 
                                 select {
@@ -487,7 +923,7 @@ ngb-datepicker {
 
                                     &::after {
                                         content: "";
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
+                                        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
                                         height: 34px;
                                         padding: 15px 0px 0px 8px;
                                         position: absolute;
@@ -508,13 +944,17 @@ ngb-datepicker {
                                 align-items: center;
                                 padding: 0 0 20px;
 
+                                &:last-child {
+                                    padding: 0;
+                                }
+
                                 .left {
                                     font-size: 10px;
                                     font-weight: 400;
                                     color: $text-grey;
 
                                     span {
-                                        font-size: 14px;
+                                        font-size: 16px;
                                         color: $text-darkblue;
                                         display: block;
                                         padding: 0;
@@ -522,7 +962,7 @@ ngb-datepicker {
                                 }
 
                                 .right {
-                                    width: 100px;
+                                    width: 90px;
                                     display: flex;
                                     align-items: center;
 
@@ -599,7 +1039,7 @@ ngb-datepicker {
                             }
 
                             .right {
-                                width: 100px;
+                                width: 90px;
                                 display: flex;
                                 align-items: center;
 
@@ -677,13 +1117,18 @@ ngb-datepicker {
                     width: 60%;
                     padding-left: 0;
 
-                    @include ipad-view {
-                        width: 100%;
-                        margin-bottom: 20px;
+                    @include mini-screen {
+                        width: 56%;
                     }
 
-                    @media (max-width: 480px) {
+                    @include ipad-view {
+                        width: 100%;
+                        margin-bottom: 5px;
+                    }
+
+                    @include tab-view {
                         flex-flow: column;
+                        padding: 0;
                     }
 
                     .hotel_where {
@@ -709,6 +1154,10 @@ ngb-datepicker {
                         border: 1px solid $box-border-color;
                         border-radius: 8px;
                         background: $background-white;
+
+                        @include tab-view {
+                            padding: 6px 0;
+                        }
 
                         input {
                             width: 100%;
@@ -746,9 +1195,18 @@ ngb-datepicker {
                     justify-content: space-between;
                     position: relative;
 
-                    @media(max-width: 991px) {
+                    @include mini-screen {
+                        width: 33%;
+                    }
+
+                    @include ipad-view {
                         width: 100%;
-                        margin-bottom: 20px;
+                        margin-bottom: 5px;
+                        padding: 0;
+                    }
+
+                    @include tab-view {
+                        padding: 0;
                     }
 
                     label {
@@ -768,6 +1226,12 @@ ngb-datepicker {
                         background: $background-white;
                         position: relative;
 
+                        span {
+                            &.p-calendar {
+                                width: 100%;
+                            }
+                        }
+
                         input {
                             width: 100%;
                             border: none;
@@ -777,9 +1241,11 @@ ngb-datepicker {
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px 0 70px;
-                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
+                            background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
+
 
                             @media (max-width: 575px) {
+
                                 .calender-responsive-view {
                                     right: 0 !important;
                                     left: auto !important;
@@ -834,7 +1300,8 @@ ngb-datepicker {
 
                     @include ipad-view {
                         width: 50%;
-                        margin-bottom: 20px;
+                        margin: 0 auto;
+                        padding: 0;
                     }
 
                     @media (max-width: 575px) {
@@ -870,33 +1337,33 @@ ngb-datepicker {
                                 &.hover_btn {
                                     display: none;
 
-                                    &.show {
-                                        display: block;
-                                    }
+                                    // &.show {
+                                    //     display: block;
+                                    // }
                                 }
 
                             }
 
-                            &::before {
-                                content: "";
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 0%;
-                                background-color: $background-white;
-                                z-index: -1;
-                                transition: 0.8s;
-                                border-radius: 0 0 50% 50%;
-                            }
+                            // &::before {
+                            //     content: "";
+                            //     position: absolute;
+                            //     top: 0;
+                            //     left: 0;
+                            //     width: 100%;
+                            //     height: 0%;
+                            //     background-color: $background-white;
+                            //     z-index: -1;
+                            //     transition: 0.8s;
+                            //     border-radius: 0 0 50% 50%;
+                            // }
 
-                            &:hover {
-                                border: 1px solid $hotel-secondary-color;
+                            // &:hover {
+                            //     border: 1px solid $hotel-secondary-color;
 
-                                &:before {
-                                    height: 190%;
-                                }
-                            }
+                            //     &:before {
+                            //         height: 190%;
+                            //     }
+                            // }
                         }
 
                         @media(max-width: 480px) {
@@ -966,7 +1433,7 @@ ngb-datepicker {
                         width: 14px;
                         position: relative;
                         margin-left: 20px;
-                        background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
+                        background-image: url('https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
                         background-position: right;
                         background-repeat: no-repeat;
                         background-size: 12px;
@@ -1116,7 +1583,7 @@ ngb-datepicker {
 
                                     &::after {
                                         content: "";
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
+                                        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
                                         height: 34px;
                                         padding: 15px 0px 0px 8px;
                                         position: absolute;
@@ -1397,7 +1864,7 @@ ngb-datepicker {
                             color: $text-black;
                             font-weight: 600;
                             padding: 0 15px 0 70px;
-                            background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
+                            background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
 
                             @media (max-width: 575px) {
                                 .calender-responsive-view {
@@ -1592,12 +2059,20 @@ ngb-datepicker {
 }
 
 // loader for hotel
+agm-map {
+    .agm-map-container-inner {
+        border-radius: 10px;
+    }
+}
 
 // start Search Modify section
 .hotels {
     &.search_result {
-        padding: 30px 0 40px;
-        margin-top: 30px;
+        padding: 25px 0 40px;
+
+        .container {
+            padding: 0;
+        }
 
         .hotel_detail_sidebar {
             &.sticky-top {
@@ -1784,7 +2259,7 @@ ngb-datepicker {
                             width: 100%;
 
                             input {
-                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) !important;
+                                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) !important;
                                 background-size: 20px;
                                 background-repeat: no-repeat;
                                 background-position: center right 15px;
@@ -1904,7 +2379,7 @@ ngb-datepicker {
                                         right: 15px;
                                         top: 50%;
                                         transform: translateY(-50%);
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
+                                        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
                                         background-size: cover;
                                     }
 
@@ -1919,7 +2394,7 @@ ngb-datepicker {
                                         width: 14px;
                                         position: relative;
                                         margin-left: 20px;
-                                        background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
+                                        background-image: url('https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
                                         background-position: right;
                                         background-repeat: no-repeat;
                                         background-size: 12px;
@@ -2069,7 +2544,7 @@ ngb-datepicker {
 
                                                     &::after {
                                                         content: "";
-                                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
+                                                        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
                                                         height: 34px;
                                                         padding: 15px 0px 0px 8px;
                                                         position: absolute;
@@ -2532,27 +3007,76 @@ ngb-datepicker {
                 .accordion-group {
                     background: $background-white;
                     border: 1px solid $box-border-color;
-                    border-radius: 35px;
+                    //border-radius: 35px;
+                    max-width: 160px;
 
                     .accordion-heading {
-                        padding: 20px 15px;
+                        padding: 8px 15px;
                         display: flex;
                         align-items: center;
+                        cursor: pointer;
+
+                        @include tab-view {
+                            padding: 15px 25px 0;
+                        }
 
                         .accordion-toggle {
-                            font-size: 20px;
-                            color: $text-grey;
+                            font-size: 16px;
+                            color: $mid_gray_bg;
                             font-weight: 500;
                             width: 100%;
                             display: block;
+
+                            @include tab-view {
+                                font-size: 14px;
+                            }
                         }
 
+                        &:after {
+                            position: relative;
+                            padding: 9px 5px;
+                            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg);
+                            background-position: right;
+                            background-repeat: no-repeat;
+                            background-size: 8px;
+                            content: "";
+                            transition: 0.3s;
+                            right: 0;
+                            border: none;
+                            top: 0;
+                            transform: rotate(90deg);
+                        }
+
+                        .anchor_link {
+                            color: $text_light_yellow;
+                            font-size: 16px;
+                            margin-right: 30px;
+
+                            @include tab-view {
+                                font-size: 12px;
+                                margin-right: 10px;
+                            }
+                        }
                     }
 
                     &.active {
+                        border-radius: 10px;
+                        max-width: 100%;
+
                         .accordion-heading {
                             &:after {
-                                content: "\f078";
+                                content: "";
+                                position: relative;
+                                padding: 5px 9px;
+                                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 14px;
+                                transition: 0.3s;
+                                right: 0;
+                                border: none;
+                                top: 0;
+                                transform: rotate(-180deg);
                             }
                         }
                     }
@@ -2560,15 +3084,31 @@ ngb-datepicker {
                     .accordion-body {
                         .block_cmn {
                             width: 100%;
-                            padding: 20px 15px;
-                            border-top: 1px solid $box-border-color;
+                            padding: 0 15px 10px 15px;
+                            //border-top: 1px solid $box-border-color;
 
                             h5 {
                                 width: 100%;
-                                margin: 0 0 15px;
+                                margin: 20px 0 15px;
                                 font-size: 16px;
                                 font-weight: 500;
                                 color: $text-black;
+
+                                &.title_h5 {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    width: 100%;
+                                    align-items: center;
+
+                                    .anchor_link {
+                                        color: $text_light_yellow;
+                                        font-size: 16px;
+
+                                        @include tab-view {
+                                            font-size: 12px;
+                                        }
+                                    }
+                                }
                             }
 
                             ul {
@@ -2586,31 +3126,37 @@ ngb-datepicker {
                                     font-weight: 300;
 
                                     .custom_radio {
-                                        width: 100%;
-                                        display: block;
                                         position: relative;
-                                        padding-left: 25px;
-                                        margin: 0;
-                                        cursor: pointer;
-                                        font-size: 14px;
-                                        -webkit-user-select: none;
-                                        -moz-user-select: none;
-                                        -ms-user-select: none;
-                                        user-select: none;
-                                        color: $text-grey;
+                                        margin-bottom: 0;
+                                        vertical-align: middle;
+                                        line-height: normal;
+                                        display: flex;
+                                        //align-items: center;
+                                        // white-space: nowrap;
+                                        // text-overflow: ellipsis;
+                                        // overflow: hidden;
+                                        align-items: flex-start;
+                                        overflow: visible;
+                                        white-space: normal;
+                                        text-overflow: unset;
+                                        padding: 0;
 
                                         input {
                                             position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 100%;
                                             opacity: 0;
                                             cursor: pointer;
 
                                             &:checked {
                                                 ~ {
                                                     .checkmark {
-                                                        border: 1px solid $text_light_yellow;
+                                                        border-color: $text_light_yellow;
 
                                                         &:after {
-                                                            display: block;
+                                                            opacity: 1;
                                                         }
                                                     }
                                                 }
@@ -2618,28 +3164,95 @@ ngb-datepicker {
                                         }
 
                                         .checkmark {
-                                            position: absolute;
-                                            top: 4px;
-                                            left: 0;
-                                            height: 14px;
-                                            width: 14px;
-                                            background-color: transparent;
+                                            width: 20px;
+                                            min-width: 20px;
+                                            height: 20px;
+                                            display: flex;
                                             border: 1px solid $text-grey;
-                                            border-radius: 50%;
+                                            vertical-align: middle;
+                                            margin-right: 11px;
+                                            position: relative;
+                                            top: 0;
+                                            align-items: center;
+                                            justify-content: center;
 
                                             &:after {
                                                 content: "";
+                                                content: "";
                                                 position: absolute;
                                                 display: none;
-                                                top: 2px;
-                                                left: 2px;
-                                                width: 8px;
-                                                height: 8px;
+                                                top: auto;
+                                                left: auto;
+                                                width: 13.5px;
+                                                height: 13.5px;
                                                 border-radius: 50%;
                                                 background: $text_light_yellow;
                                             }
                                         }
+
+                                        p {
+                                            margin: 0;
+                                            text-overflow: ellipsis;
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                        }
                                     }
+
+                                    // .custom_radio {
+                                    //     width: 100%;
+                                    //     display: block;
+                                    //     position: relative;
+                                    //     padding-left: 25px;
+                                    //     margin: 0;
+                                    //     cursor: pointer;
+                                    //     font-size: 14px;
+                                    //     -webkit-user-select: none;
+                                    //     -moz-user-select: none;
+                                    //     -ms-user-select: none;
+                                    //     user-select: none;
+                                    //     color: $text-grey;
+
+                                    //     input {
+                                    //         position: absolute;
+                                    //         opacity: 0;
+                                    //         cursor: pointer;
+
+                                    //         &:checked {
+                                    //             ~ {
+                                    //                 .checkmark {
+                                    //                     border: 1px solid $text_light_yellow;
+
+                                    //                     &:after {
+                                    //                         display: block;
+                                    //                     }
+                                    //                 }
+                                    //             }
+                                    //         }
+                                    //     }
+
+                                    //     .checkmark {
+                                    //         position: absolute;
+                                    //         top: 4px;
+                                    //         left: 0;
+                                    //         height: 14px;
+                                    //         width: 14px;
+                                    //         background-color: transparent;
+                                    //         border: 1px solid $text-grey;
+                                    //         border-radius: 50%;
+
+                                    //         &:after {
+                                    //             content: "";
+                                    //             position: absolute;
+                                    //             display: none;
+                                    //             top: 2px;
+                                    //             left: 2px;
+                                    //             width: 8px;
+                                    //             height: 8px;
+                                    //             border-radius: 50%;
+                                    //             background: $text_light_yellow;
+                                    //         }
+                                    //     }
+                                    // }
 
                                     &:last-child {
                                         padding-bottom: 0;
@@ -2679,19 +3292,20 @@ ngb-datepicker {
                 width: 100%;
                 //border: 1px solid $box-border-color;
                 background: $background-white;
-                border-radius: 3px;
-                max-height: calc(100vh - 334px);
+                padding-top: 15px;
+                //border-radius: 3px;
+                //max-height: calc(100vh - 334px);
                 // overflow-y: auto;
                 // overflow-x: hidden;
 
                 .cmn_block {
-                    padding: 20px 15px;
-                    border-bottom: 1px solid $box-border-color;
+                    padding: 0 15px 15px;
+                    //border-bottom: 1px solid $box-border-color;
 
                     &:last-child {
-                        border: 1px solid #e0e2e5;
-                        background: $background-white;
-                        border-radius: 3px;
+                        //border: 1px solid #e0e2e5;
+                        //background: $background-white;
+                        border-radius: 10px;
                         border-top: none;
                     }
 
@@ -2815,20 +3429,27 @@ ngb-datepicker {
                         .accordion-group {
                             background: $background-white;
                             border: none;
-                            border-radius: 3px;
+                            border-radius: 35px;
+                            max-width: 100%;
 
                             .accordion-heading {
                                 padding: 0;
                                 outline: none;
 
+                                &.no_accordion {
+                                    &:after {
+                                        content: none;
+                                    }
+                                }
+
                                 .accordion-toggle {
                                     font-size: 16px;
                                     color: $text-black;
-                                    font-weight: 500;
+                                    font-weight: 600;
                                     width: 100%;
                                     display: block;
                                     outline: none;
-                                    padding: 20px 15px;
+                                    padding: 0px 15px 5px;
 
                                     // &:after {
                                     //     font-family: "FontAwesome";
@@ -2851,6 +3472,8 @@ ngb-datepicker {
                             // }
 
                             .accordion-body {
+                                border-radius: 35px;
+
                                 .block_cmn {
                                     width: 100%;
                                     padding: 15px 15px;
@@ -2905,6 +3528,22 @@ ngb-datepicker {
                             font-size: 16px;
                             font-weight: 500;
                             color: $text-black;
+
+                            &.title_h5 {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100%;
+                                align-items: center;
+
+                                .anchor_link {
+                                    color: $text_light_yellow;
+                                    font-size: 16px;
+
+                                    @include tab-view {
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
                         }
 
                         .view_more {
@@ -2935,10 +3574,14 @@ ngb-datepicker {
                                 vertical-align: middle;
                                 line-height: normal;
                                 display: flex;
-                                align-items: center;
-                                white-space: nowrap;
-                                text-overflow: ellipsis;
-                                overflow: hidden;
+                                //align-items: center;
+                                // white-space: nowrap;
+                                // text-overflow: ellipsis;
+                                // overflow: hidden;
+                                align-items: flex-start;
+                                overflow: visible;
+                                white-space: normal;
+                                text-overflow: unset;
 
                                 input {
                                     position: absolute;
@@ -2963,42 +3606,34 @@ ngb-datepicker {
                                 }
 
                                 .checkmark {
-                                    width: 14px;
-                                    min-width: 14px;
-                                    height: 14px;
-                                    display: inline-block;
+                                    width: 20px;
+                                    min-width: 20px;
+                                    height: 20px;
+                                    display: flex;
                                     border: 1px solid $text-grey;
                                     vertical-align: middle;
                                     margin-right: 11px;
                                     position: relative;
+                                    align-items: center;
+                                    justify-content: center;
 
                                     &:after {
                                         content: "";
+                                        content: "";
                                         position: absolute;
-                                        top: 1px;
-                                        -webkit-transform: translate(0, -50%);
-                                        -moz-transform: translate(0, -50%);
-                                        -ms-transform: translate(0, -50%);
-                                        -o-transform: translate(0, -50%);
-                                        transform: translate(0, -50%);
-                                        width: 6px;
-                                        height: 9px;
-                                        border-radius: 2px;
-                                        border: solid $text_light_yellow;
+                                        display: none;
+                                        top: auto;
+                                        left: auto;
+                                        width: 13.5px;
+                                        height: 13.5px;
+                                        border-radius: 50%;
+                                        background: $text_light_yellow;
                                         // border-top-width: medium;
                                         // border-right-width: medium;
                                         // border-bottom-width: medium;
                                         // border-left-width: medium;
-                                        border-width: 0 2px 2px 0;
-                                        transform: rotate(45deg);
-                                        -webkit-transform: rotate(45deg);
-                                        -ms-transform: rotate(45deg);
-                                        border-radius: 0px;
-                                        left: 0;
-                                        right: 0;
-                                        margin: 0 auto;
-                                        transition: all 0.2s;
-                                        opacity: 0;
+                                        //border-width: 0 2px 2px 0;
+
                                     }
                                 }
 
@@ -3032,7 +3667,8 @@ ngb-datepicker {
                         .ng-select-container {
                             border: none;
                             margin-bottom: 20px;
-                            height: 39px;
+                            height: 42px;
+                            overflow: visible;
 
                             &:hover {
                                 box-shadow: none;
@@ -3043,11 +3679,11 @@ ngb-datepicker {
                             padding: 0;
 
                             input {
-                                // border: 1px solid $box-border-color;
-                                border-bottom: 1px solid $box-border-color;
-                                // border-radius: 3px;
+                                border: 1px solid $box-border-color;
+                                //border-bottom: 1px solid $box-border-color;
+                                border-radius: 18px;
                                 width: 100%;
-                                height: 32px;
+                                height: 35px;
                                 padding: 0;
                                 //margin-bottom: 15px;
                                 font-size: 14px;
@@ -3123,41 +3759,76 @@ ngb-datepicker {
                 .accordion-group {
                     background: $background-white;
                     border: 1px solid $box-border-color;
-                    border-radius: 35px;
+                    //border-radius: 35px;
+                    max-width: 160px;
 
                     .accordion-heading {
-                        padding: 20px 15px;
+                        padding: 8px 15px;
                         display: flex;
                         align-items: center;
+                        cursor: pointer;
+
+                        @include tab-view {
+                            padding: 15px 25px 0;
+                        }
 
                         .accordion-toggle {
-                            font-size: 20px;
-                            color: $text-grey;
+                            font-size: 16px;
+                            color: $mid_gray_bg;
                             font-weight: 500;
                             width: 100%;
                             display: block;
+
+                            @include tab-view {
+                                font-size: 14px;
+                            }
                         }
 
                         &:after {
-                            font-family: 'FontAwesome';
-                            content: "\f054";
-                            float: right;
-                            color: $text-grey;
-                            font-weight: normal;
+                            position: relative;
+                            padding: 9px 5px;
+                            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg);
+                            background-position: right;
+                            background-repeat: no-repeat;
+                            background-size: 8px;
+                            content: "";
                             transition: 0.3s;
+                            right: 0;
+                            border: none;
+                            top: 0;
+                            transform: rotate(90deg);
                         }
 
                         .anchor_link {
                             color: $text_light_yellow;
                             font-size: 16px;
-                            margin-right: 10px;
+                            margin-right: 30px;
+
+                            @include tab-view {
+                                font-size: 12px;
+                                margin-right: 10px;
+                            }
                         }
                     }
 
                     &.active {
+                        border-radius: 10px;
+                        max-width: 100%;
+
                         .accordion-heading {
                             &:after {
-                                content: "\f078";
+                                content: "";
+                                position: relative;
+                                padding: 5px 9px;
+                                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 14px;
+                                transition: 0.3s;
+                                right: 0;
+                                border: none;
+                                top: 0;
+                                transform: rotate(-180deg);
                             }
                         }
                     }
@@ -3252,1512 +3923,6 @@ ngb-datepicker {
             @include tab-view {
                 margin: 10px 0 0 0;
                 width: 100%;
-            }
-        }
-    }
-
-    .result_listing {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-
-        @include tab-view {
-            justify-content: space-between;
-        }
-
-        &.hotel_listings {
-            .search_block {
-                width: 100%;
-                margin-bottom: 15px;
-
-                @include tab-view {
-                    width: 49%;
-                }
-
-                @media (max-width: 575px) {
-                    width: 100%;
-                }
-
-                .listing_block {
-                    width: 100%;
-                    background: $background-white;
-                    border-radius: 5px;
-                    //padding: 15px;
-                    overflow: hidden;
-
-                    @include tab-view {
-                        height: auto;
-                    }
-
-                    .row {
-                        align-items: center;
-                    }
-
-                    .block_main {
-                        padding: 0 15px 0 0;
-                        border-right: 2px dashed rgba(63, 48, 249, 0.2);
-                        margin-right: -15px;
-
-                        @include tab-view {
-                            padding: 0;
-                            border-right: 0;
-                            margin: 0;
-                        }
-
-                        .block_top {
-                            width: 100%;
-                            display: flex;
-                            flex-flow: column;
-
-                            .block_inner {
-                                display: flex;
-                                align-items: center;
-
-                                @include tab-view {
-                                    flex-wrap: wrap;
-                                }
-
-                                .block_im {
-                                    width: 100%;
-                                    display: flex;
-                                    flex-flow: column;
-                                    text-align: left;
-                                    height: 100%;
-
-                                    @include tab-view {
-                                        border-right: none;
-                                        padding: 0;
-                                    }
-
-                                    .hotel_list_img_wrp {
-                                        position: relative;
-                                        // background-size: cover;
-                                        // background-position: center center;
-                                        width: 100%;
-                                        height: 170px;
-
-                                        @include tab-view {
-                                            display: flex;
-                                            justify-content: center;
-                                        }
-
-                                        img {
-                                            max-width: 100%;
-                                            height: 100%;
-                                            object-fit: cover;
-                                            object-position: center;
-                                        }
-
-                                        .fav_sections {
-                                            position: absolute;
-                                            top: 10px;
-                                            left: 10px;
-                                            height: 20px;
-                                            width: 20px;
-
-                                            a {
-                                                background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
-                                                background-repeat: no-repeat;
-                                                padding: 0px 12px;
-                                            }
-                                        }
-                                    }
-                                }
-
-                                .block_detail_top {
-                                    display: flex;
-                                    flex-wrap: wrap;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                    padding: 0;
-
-                                    @include tab-view {
-                                        padding: 0;
-                                        margin: 15px 0 0;
-                                    }
-
-                                    .detail_info {
-                                        font-size: 12px;
-                                        color: $text-grey;
-                                        width: 100%;
-
-                                        h4 {
-                                            font-size: 20px;
-                                            color: $text-black;
-                                            font-weight: 600;
-                                            margin: 10px 0 5px;
-                                            max-width: 380px;
-                                            white-space: nowrap;
-                                            overflow: hidden;
-                                            text-overflow: ellipsis;
-                                            display: inline-block;
-                                            width: 100%;
-
-                                            @media (max-width: 767px) {
-                                                font-size: 16px;
-                                            }
-                                        }
-
-                                        span {
-                                            margin: 0;
-
-                                            &.adress_span {
-                                                max-width: 380px;
-                                                white-space: nowrap;
-                                                overflow: hidden;
-                                                text-overflow: ellipsis;
-                                                display: inline-block;
-                                                width: 100%;
-                                            }
-                                        }
-
-                                        .review_section_wrap {
-                                            display: flex;
-                                            justify-content: space-between;
-                                            align-items: center;
-                                            margin: 5px 0 10px;
-
-                                            .left_bar {
-                                                display: flex;
-
-                                                .rating_num {
-                                                    span {
-                                                        background-color: #1445f5;
-                                                        color: $text-white;
-                                                        font-size: 12px;
-                                                        width: 30px;
-                                                        height: 30px;
-                                                        display: flex;
-                                                        align-items: center;
-                                                        justify-content: center;
-                                                        border-radius: 5px;
-                                                    }
-                                                }
-
-                                                .stars_text {
-                                                    margin-left: 14px;
-
-                                                    .stars_rating {
-                                                        margin-top: 0px;
-                                                    }
-
-                                                    .review_num_text {
-                                                        a {
-                                                            font-size: 12px;
-                                                            color: $text-grey;
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            .ammin_listing {
-                                                display: flex;
-                                                align-items: center;
-
-                                                .amminities_list {
-                                                    font-size: 12px;
-                                                    text-transform: uppercase;
-                                                    color: #5a5a5a;
-                                                    font-weight: 500;
-                                                    margin-left: 20px;
-
-                                                    img {
-                                                        margin-right: 8px;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                &:last-child {
-                                    //margin: 20px 0 15px;
-                                    margin: 0;
-                                }
-                            }
-                        }
-
-                        .block_detail_btm {
-                            display: flex;
-                            align-items: center;
-                            justify-content: space-between;
-                            border-top: 1px solid $box-border-color;
-                            padding-top: 10px;
-                            margin-bottom: 10px;
-
-                            @include tab-view {
-                                flex-wrap: wrap;
-                                justify-content: center;
-                                padding-bottom: 10px;
-                                border-bottom: 1px solid $box-border-color;
-                                margin: 0 0 0px;
-                            }
-
-                            .show_detail {
-                                width: auto;
-
-                                a {
-                                    display: inline;
-                                    font-size: 14px;
-                                    font-weight: 500;
-                                    color: $primary-color;
-                                    position: relative;
-
-                                    img {
-                                        margin-right: 5px;
-                                    }
-
-                                    &:after {
-                                        content: "";
-                                        position: absolute;
-                                        left: 105%;
-                                        top: 50%;
-                                        width: 0;
-                                        height: 0;
-                                        border-top: 3px solid transparent;
-                                        border-bottom: 3px solid transparent;
-                                        border-left: 3px solid $primary-color;
-                                        transform: translate(-50%, -50%);
-                                    }
-                                }
-
-                                &.open_detail {
-                                    a {
-                                        &:after {
-                                            width: 0;
-                                            height: 0;
-                                            border-left: 3px solid transparent;
-                                            border-right: 3px solid transparent;
-                                            border-top: 3px solid $primary-color;
-                                            left: 105%;
-                                            top: 54%;
-                                        }
-                                    }
-                                }
-                            }
-
-                            .weekly_price_wrps {
-                                font-size: 12px;
-                                color: $text-grey;
-
-                                span {
-                                    color: $pink;
-                                    font-size: 20px;
-                                }
-                            }
-                        }
-                    }
-
-                    .block_price {
-                        width: 100%;
-                        text-align: center;
-                        padding: 0 15px;
-                        position: relative;
-                        z-index: 5;
-
-                        @include tab-view {
-                            border-left: none;
-                            padding: 15px 15px 0;
-                        }
-
-                        p {
-                            font-size: 14px;
-                            color: $text-black;
-                            margin: 0;
-                        }
-
-                        h6 {
-                            font-size: 24px;
-                            font-weight: 600;
-                            color: $text_blue;
-                            margin: 15px 0;
-                        }
-
-                        .show_detail {
-                            width: auto;
-                            display: flex;
-                            justify-content: center;
-
-                            a {
-                                display: flex;
-                                align-items: center;
-                                font-size: 12px;
-                                font-weight: 500;
-                                color: $primary-color;
-                                position: relative;
-
-                                img {
-                                    margin-right: 5px;
-                                }
-
-                                &::after {
-                                    content: "";
-                                    position: absolute;
-                                    left: 105%;
-                                    top: 50%;
-                                    width: 0;
-                                    height: 0;
-                                    border-top: 3px solid transparent;
-                                    border-bottom: 3px solid transparent;
-                                    border-left: 3px solid $primary-color;
-                                    transform: translate(-50%, -50%);
-                                }
-                            }
-                        }
-
-                        .block_inn_pr {
-                            width: 100%;
-                            display: flex;
-                            justify-content: space-around;
-                            align-items: center;
-
-                            .block {
-                                margin: 0 0 15px;
-
-                                p {
-                                    width: 100%;
-                                    margin: 0;
-                                    font-size: 12px;
-                                    font-weight: 300;
-                                    color: $text-grey;
-
-                                    &:first-child {
-                                        margin: 0 0 5px;
-                                    }
-
-                                    span {
-                                        font-size: 24px;
-                                        color: $primary-color;
-                                        font-weight: 600;
-                                    }
-                                }
-
-                                &:last-child {
-                                    p {
-                                        span {
-                                            font-size: 28px;
-                                            color: $text-blue;
-                                            font-weight: 600;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-
-                        .book_btn {
-                            display: inline-block;
-                            line-height: 38px;
-                            padding: 0 25px;
-                            font-size: 16px;
-                            color: $text-white;
-                            font-weight: 500;
-                            border-radius: 20px;
-                            background: $primary-color;
-                            position: relative;
-                            z-index: 9;
-                            overflow: hidden;
-                            margin-bottom: 10px;
-                            border: 1px solid $primary-color;
-
-                            &:before {
-                                content: "";
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 0%;
-                                background: $background-white;
-                                z-index: -1;
-                                transition: 0.8s;
-                                border-radius: 25px;
-                            }
-
-                            &:hover {
-                                color: $primary-color;
-
-                                &:before {
-                                    height: 37px;
-                                    width: 100%;
-                                }
-                            }
-                        }
-
-                        .partial_payment_info {
-                            display: block;
-                            margin: 10px 0 0;
-                            font-size: 12px;
-                            font-weight: 500;
-                            color: $primary-color;
-                        }
-
-                        &.block_pr {
-                            &:after {
-                                width: 66%;
-                                height: 190%;
-                                //                                background: $paytype_bg;
-                                content: "";
-                                position: absolute;
-                                top: -35%;
-                                right: 0;
-                                bottom: -20px;
-                                z-index: -1;
-                                border-bottom: 290px solid transparent;
-                                border-left: 52px solid $background-white;
-                                z-index: -1;
-
-                                @include tab-view {
-                                    top: 0;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .detail_info_show {
-                    width: 100%;
-                    background: $background-white;
-                    padding: 20px 15px;
-                    border-radius: 0 0 5px 5px;
-
-                    .card-body {
-                        margin: 15px 0 0;
-                        padding: 0px;
-
-                        @include tab-view {
-                            border: none;
-                            margin: 0;
-                        }
-
-                        .block_flight_info {
-                            @include tab-view {
-                                padding: 5px;
-                            }
-
-                            .tab_detail {
-                                display: flex;
-                                flex-flow: column;
-                                position: relative;
-
-                                .triangle_right {
-                                    position: absolute;
-                                    position: absolute;
-                                    top: 50%;
-                                    right: -1px;
-                                    transform: translateY(-50%);
-                                    z-index: 1;
-
-                                    &:after {
-                                        width: 0;
-                                        height: 0;
-                                        border-top: 10px solid transparent;
-                                        border-bottom: 10px solid transparent;
-                                        border-right: 10px solid $box-border-color;
-                                        position: absolute;
-                                        top: 50%;
-                                        right: 0;
-                                        transform: translateY(-50%);
-                                        content: "";
-                                    }
-
-                                    &:before {
-                                        width: 0;
-                                        height: 0;
-                                        border-top: 9px solid transparent;
-                                        border-bottom: 9px solid transparent;
-                                        border-right: 9px solid $background-white;
-                                        position: absolute;
-                                        top: 50%;
-                                        right: 0;
-                                        transform: translateY(-50%);
-                                        content: "";
-                                        z-index: 2;
-                                    }
-                                }
-
-                                .triangle_left {
-                                    position: absolute;
-                                    position: absolute;
-                                    top: 50%;
-                                    left: -1px;
-                                    transform: translateY(-50%);
-                                    z-index: 1;
-
-                                    &:after {
-                                        width: 0;
-                                        height: 0;
-                                        border-top: 10px solid transparent;
-                                        border-bottom: 10px solid transparent;
-                                        border-left: 10px solid $box-border-color;
-                                        position: absolute;
-                                        top: 50%;
-                                        left: 0;
-                                        transform: translateY(-50%);
-                                        content: "";
-                                    }
-
-                                    &:before {
-                                        width: 0;
-                                        height: 0;
-                                        border-top: 9px solid transparent;
-                                        border-bottom: 9px solid transparent;
-                                        border-left: 9px solid $background-white;
-                                        position: absolute;
-                                        top: 50%;
-                                        left: 0;
-                                        transform: translateY(-50%);
-                                        content: "";
-                                        z-index: 2;
-                                    }
-                                }
-
-                                &.flight_info_cnt {
-                                    padding: 20px 0;
-                                    max-height: 445px;
-                                    overflow-y: scroll;
-                                    overflow-x: hidden;
-                                    border: 1px solid $box-border-color;
-                                    border-radius: 10px;
-                                    margin: 0 0 10px;
-
-                                    @include tab-view {
-                                        padding: 15px;
-                                    }
-
-                                    .detail_top {
-                                        display: flex;
-                                        padding: 0 20px;
-                                        justify-content: space-between;
-                                        position: relative;
-
-                                        @include tab-view {
-                                            display: flex;
-                                            justify-content: center;
-                                            flex-wrap: wrap;
-                                        }
-
-                                        .flight_going {
-                                            font-size: 10px;
-                                            font-weight: 500;
-                                            color: $primary-color;
-                                            position: absolute;
-                                            top: 0;
-                                            right: 20px;
-
-                                            @include tab-view {
-                                                position: absolute;
-                                                top: 10px;
-                                                right: 10px;
-                                            }
-                                        }
-
-                                        .detail_inn_left {
-                                            display: flex;
-                                            padding: 0;
-                                            width: 100%;
-
-                                            @include tab-view {
-                                                flex-wrap: wrap;
-                                            }
-
-                                            .detail_left {
-                                                width: 10%;
-
-                                                @include tab-view {
-                                                    width: 100%;
-                                                    text-align: center;
-                                                }
-
-                                                img {
-                                                    object-fit: cover;
-                                                    height: auto;
-                                                    width: auto;
-                                                    padding-bottom: 4px;
-                                                    position: inherit;
-                                                    max-width: 40px;
-                                                    max-height: 40px;
-                                                }
-
-                                                p {
-                                                    font-size: 12px;
-                                                    font-weight: 400;
-                                                    color: $text-black;
-                                                    margin: 0 0 2px;
-                                                }
-
-                                                span {
-                                                    font-size: 12px;
-                                                    font-weight: 300;
-                                                    color: $text-grey;
-                                                }
-                                            }
-
-                                            .detail_right {
-                                                padding: 0 35px;
-                                                display: flex;
-                                                justify-content: flex-start;
-                                                align-items: center;
-                                                width: 90%;
-
-                                                @include tab-view {
-                                                    width: 100%;
-                                                    padding: 0;
-                                                    justify-content: center;
-                                                    flex-wrap: wrap;
-                                                    margin: 15px 0 0;
-                                                    flex-flow: column;
-                                                }
-
-                                                .flight_info_detail {
-                                                    text-align: right;
-                                                    width: 40%;
-
-                                                    @include tab-view {
-                                                        text-align: center;
-                                                        width: 100%;
-                                                    }
-
-                                                    h4 {
-                                                        font-size: 20px;
-                                                        font-weight: 600;
-                                                        color: $text-black;
-                                                        margin: 0 0 5px;
-
-                                                        span {
-                                                            font-weight: 400;
-                                                            margin: 0;
-                                                        }
-                                                    }
-
-                                                    span {
-                                                        font-size: 10px;
-                                                        font-weight: 500;
-                                                        color: $text-black;
-                                                        margin: 0 0 5px;
-                                                    }
-
-                                                    p {
-                                                        font-size: 10px;
-                                                        font-weight: 300;
-                                                        color: $text-grey;
-                                                        margin: 0;
-
-                                                        span {
-                                                            display: block;
-                                                            font-weight: 300;
-                                                            color: $text-grey;
-                                                        }
-                                                    }
-
-                                                    &:last-child {
-                                                        text-align: left;
-
-                                                        @include tab-view {
-                                                            text-align: center;
-                                                        }
-                                                    }
-                                                }
-
-                                                .flight_duration {
-                                                    width: 20%;
-                                                    padding: 0 20px;
-                                                    text-align: center;
-
-                                                    @include tab-view {
-                                                        padding: 15px 10px;
-                                                        margin: 0 auto;
-                                                        width: auto;
-                                                    }
-
-                                                    p {
-                                                        font-size: 12px;
-                                                        color: $text-grey;
-                                                        margin: 0;
-                                                    }
-
-                                                    .border-dot {
-                                                        width: 100%;
-                                                        position: relative;
-
-                                                        img {
-                                                            width: 100%;
-                                                        }
-                                                    }
-
-                                                    span {
-                                                        font-size: 12px;
-                                                        color: $text-grey;
-                                                        margin: 0;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    .flight_layover {
-                                        width: 100%;
-                                        text-align: center;
-                                        margin: 25px 0;
-                                        position: relative;
-
-                                        .layover_info {
-                                            width: auto;
-                                            display: inline-block;
-                                            text-align: center;
-                                            border-radius: 20px;
-                                            background: $bg-body;
-                                            padding: 5px 45px;
-                                            border: 1px solid $box-border-color;
-                                            font-size: 14px;
-                                            font-weight: 600;
-                                            color: $text-grey;
-                                            position: relative;
-                                            z-index: 2;
-
-                                            span {
-                                                color: $text-black;
-                                            }
-
-                                            @media (max-width: 767px) {
-                                                padding: 5px 10px;
-                                                font-size: 12px;
-                                                font-weight: 400;
-                                            }
-                                        }
-
-                                        &:before {
-                                            width: 100%;
-                                            height: 1px;
-                                            border: 1px dashed $border-blue-light;
-                                            position: absolute;
-                                            top: 50%;
-                                            left: 0;
-                                            content: "";
-                                            transform: translateY(-50%);
-                                        }
-                                    }
-
-                                    &:last-child {
-                                        margin: 5px 0 0;
-                                        position: relative;
-                                    }
-                                }
-
-                                &.fare_detail_cnt {
-                                    padding: 30px 30px 20px;
-                                    border: 1px solid $box-border-color;
-                                    border-radius: 10px;
-                                    max-height: 445px;
-                                    overflow-y: auto;
-                                    overflow-x: hidden;
-
-                                    @include tab-view {
-                                        padding: 15px;
-                                    }
-
-                                    ul {
-                                        width: 100%;
-                                        margin: 0 0 30px;
-                                        padding: 0;
-                                        list-style: none;
-                                        border: 1px solid $box-border-color;
-                                        border-radius: 3px;
-
-                                        li {
-                                            width: 100%;
-                                            display: flex;
-                                            justify-content: space-between;
-                                            padding: 10px 15px;
-                                            border-bottom: 1px solid $box-border-color;
-                                            font-size: 14px;
-                                            font-weight: 300;
-                                            color: $text-grey;
-
-                                            &.down_payment {
-                                                color: $text-blue;
-                                                font-weight: 500;
-                                            }
-
-                                            .detail {
-                                                color: $text-black;
-                                            }
-
-                                            span {
-                                                color: $text-black;
-                                                font-weight: 500;
-
-                                                &.down_value {
-                                                    color: $text-blue;
-                                                }
-                                            }
-
-                                            &:last-child {
-                                                border-bottom: none;
-                                                color: $text-black;
-                                            }
-
-                                            @media (max-width: 767px) {
-                                                padding: 10px;
-                                                flex-wrap: wrap;
-
-                                                span {
-                                                    width: 100%;
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    p {
-                                        font-size: 14px;
-                                        color: $text-grey;
-                                        font-weight: 300;
-                                        margin: 0;
-
-                                        span {
-                                            font-weight: 400;
-                                        }
-                                    }
-                                }
-
-                                &.baggage_rules_cnt {
-                                    padding: 20px;
-                                    flex-flow: column;
-                                    border: 1px solid $box-border-color;
-                                    border-radius: 10px;
-                                    max-height: 445px;
-                                    overflow-y: scroll;
-                                    overflow-x: hidden;
-
-                                    @include tab-view {
-                                        padding: 15px;
-                                        flex-flow: column;
-                                    }
-
-                                    .block_baggage {
-                                        width: 100%;
-                                        flex-flow: row;
-                                        display: flex;
-                                        margin: 0 0 15px 0;
-
-                                        @include tab-view {
-                                            flex-wrap: wrap;
-                                        }
-
-                                        .detail_left {
-                                            width: 10%;
-
-                                            @include tab-view {
-                                                width: 100%;
-                                                text-align: center;
-                                                margin: 0 0 10px;
-                                            }
-
-                                            .flight_ward {
-                                                font-size: 10px;
-                                                font-weight: 500;
-                                                color: $text-blue;
-                                            }
-
-                                            img {
-                                                object-fit: cover;
-                                                height: auto;
-                                                width: auto;
-                                                padding-bottom: 4px;
-                                                position: inherit;
-                                                max-width: 40px;
-                                                max-height: 40px;
-                                            }
-
-                                            p {
-                                                font-size: 12px;
-                                                font-weight: 300;
-                                                color: $text-black;
-                                                margin: 0 0 2px;
-                                            }
-
-                                            span {
-                                                font-size: 12px;
-                                                font-weight: 300;
-                                                color: $text-grey;
-                                            }
-                                        }
-
-                                        .detail_right {
-                                            width: 90%;
-                                            padding: 0 0 0 30px;
-
-                                            @include tab-view {
-                                                width: 100%;
-                                                padding: 0;
-                                            }
-
-                                            table {
-                                                border: 1px solid $box-border-color;
-                                                border-radius: 3px;
-
-                                                thead {
-                                                    tr {
-                                                        th {
-                                                            padding: 10px;
-                                                            font-size: 14px;
-                                                            font-weight: 400;
-                                                            color: $text-grey;
-                                                            background: $bg-light-grey;
-                                                            border: 1px solid $box-border-color;
-
-                                                            &:first-child {
-                                                                width: 100px;
-                                                            }
-
-                                                            &:last-child {
-                                                                width: 200px;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                                tbody {
-                                                    tr {
-                                                        td {
-                                                            padding: 10px;
-                                                            border: 1px solid $box-border-color;
-                                                            font-size: 14px;
-                                                            font-weight: 400;
-                                                            color: $text-black;
-                                                            vertical-align: top;
-                                                        }
-                                                    }
-                                                }
-
-                                                @media only screen and (max-width: 800px) {
-                                                    display: block;
-
-                                                    thead {
-                                                        display: block;
-
-                                                        tr {
-                                                            display: none;
-                                                        }
-                                                    }
-
-                                                    tbody {
-                                                        display: block;
-
-                                                        tr {
-                                                            display: block;
-
-                                                            td {
-                                                                display: block;
-                                                                border: none;
-                                                                border-bottom: 1px solid $box-border-color;
-                                                                position: relative;
-                                                                padding-top: 35px;
-                                                                white-space: normal;
-                                                                text-align: left;
-
-                                                                &:before {
-                                                                    position: absolute;
-                                                                    top: 10px;
-                                                                    left: 10px;
-                                                                    width: 100%;
-                                                                    padding-right: 10px;
-                                                                    white-space: nowrap;
-                                                                    text-align: left;
-                                                                    font-weight: bold;
-                                                                    content: attr(data-title);
-                                                                    color: $text-grey;
-                                                                    font-weight: 400;
-                                                                    font-size: 14px;
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            p {
-                                                font-size: 14px;
-                                                font-weight: 300;
-                                                color: $text-grey;
-                                                margin: 10px 0 0;
-                                            }
-                                        }
-
-                                        &.last {
-                                            margin: 0;
-                                        }
-                                    }
-                                }
-
-                                &.cancellation_rules_cnt {
-                                    padding: 20px;
-                                    flex-flow: column;
-                                    border: 1px solid $box-border-color;
-                                    border-radius: 10px;
-                                    max-height: 445px;
-                                    overflow-y: scroll;
-                                    overflow-x: hidden;
-
-                                    @include tab-view {
-                                        padding: 15px;
-                                    }
-
-                                    .rules_cnt_top {
-                                        display: flex;
-
-                                        @include tab-view {
-                                            flex-wrap: wrap;
-                                        }
-
-                                        .detail_left {
-                                            width: 10%;
-
-                                            @include tab-view {
-                                                width: 100%;
-                                                margin: 0 0 10px;
-                                            }
-
-                                            img {
-                                                object-fit: cover;
-                                                height: auto;
-                                                width: auto;
-                                                padding-bottom: 4px;
-                                                position: inherit;
-                                                max-width: 40px;
-                                                max-height: 40px;
-                                            }
-
-                                            p {
-                                                font-size: 12px;
-                                                font-weight: 300;
-                                                color: $text-black;
-                                                margin: 0 0 2px;
-                                            }
-
-                                            span {
-                                                font-size: 12px;
-                                                font-weight: 300;
-                                                color: $text-grey;
-                                            }
-                                        }
-
-                                        .detail_right {
-                                            width: 90%;
-                                            padding: 0 0 0 20px;
-
-                                            @include tab-view {
-                                                width: 100%;
-                                                padding: 0;
-                                            }
-
-                                            ul {
-                                                width: 100%;
-                                                display: flex;
-                                                flex-flow: row;
-                                                list-style: none;
-                                                margin: 0;
-                                                padding: 0;
-                                                border: 1px solid $box-border-color;
-                                                border-radius: 3px;
-                                                justify-content: space-between;
-                                                flex-wrap: wrap;
-
-                                                li {
-                                                    width: 100%;
-                                                    display: flex;
-                                                    justify-content: space-between;
-                                                    border-bottom: 1px solid $box-border-color;
-
-                                                    @include tab-view {
-                                                        flex-flow: column;
-                                                    }
-
-                                                    &:last-child {
-                                                        border-bottom: none;
-                                                    }
-
-                                                    div {
-                                                        padding: 10px 15px;
-                                                        font-weight: 400;
-                                                        color: $text-black;
-                                                        border-right: 1px solid $box-border-color;
-                                                        background: $bg-light-grey;
-
-                                                        &:first-child {
-                                                            width: 200px;
-                                                            font-size: 14px;
-                                                            font-weight: 300;
-                                                            color: $text-grey;
-
-                                                            @include tab-view {
-                                                                border-right: none;
-                                                                border-bottom: 1px solid $box-border-color;
-                                                                width: 100%;
-                                                            }
-                                                        }
-
-                                                        &:last-child {
-                                                            border-right: none;
-                                                            background: transparent;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    .rules_cnt_btm {
-                                        width: 100%;
-                                        margin: 30px 0 0;
-
-                                        span {
-                                            font-size: 14px;
-                                            font-weight: 400;
-                                            color: $text-black;
-                                            margin: 0 0 10px;
-                                            display: block;
-                                        }
-
-                                        ul {
-                                            width: 100%;
-                                            margin: 0;
-                                            padding: 0;
-                                            list-style-position: inside;
-
-                                            li {
-                                                margin-bottom: 5px;
-                                                font-size: 14px;
-                                                font-weight: 300;
-                                                color: $text-grey;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            .block_fllight_name {
-                                width: 100%;
-                                font-size: 16px;
-                                font-weight: 500;
-                                color: $text-black;
-
-                                @include tab-view {
-                                    font-size: 14px;
-                                }
-
-                                span {
-                                    color: $primary-color;
-
-                                    @include tab-view {
-                                        display: block;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        &.hotel_map_listings {
-            .search_block {
-                background-color: $background-white;
-                box-shadow: 1px 3px 4px #ccc;
-                margin-bottom: 10px;
-
-                .block_top {
-                    width: 100%;
-                    display: flex;
-                    flex-flow: column;
-
-                    .block_inner {
-                        display: block;
-
-                        @include tab-view {
-                            flex-wrap: wrap;
-                        }
-
-                        .block_im {
-                            width: 100%;
-                            display: flex;
-                            flex-flow: column;
-                            text-align: left;
-                            height: 100%;
-
-                            @include tab-view {
-                                border-right: none;
-                                padding: 0;
-                            }
-
-                            .hotel_list_img_wrp {
-                                position: relative;
-                                // background-size: cover;
-                                // background-position: center center;
-                                width: 100%;
-                                height: 170px;
-
-                                @include tab-view {
-                                    display: flex;
-                                    justify-content: center;
-                                }
-
-                                img {
-                                    max-width: 100%;
-                                    height: 100%;
-                                    object-fit: cover;
-                                    object-position: center;
-                                }
-
-                                .fav_sections {
-                                    position: absolute;
-                                    top: 10px;
-                                    right: 10px;
-                                    height: 20px;
-                                    width: 20px;
-
-                                    a {
-                                        background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
-                                        background-repeat: no-repeat;
-                                        padding: 0px 12px;
-                                    }
-                                }
-
-                                .review_section_wrap {
-                                    position: absolute;
-                                    top: 10px;
-                                    left: 10px;
-                                    display: flex;
-
-                                    .rating_num {
-                                        span {
-                                            background-color: #1445f5;
-                                            color: $text-white;
-                                            font-size: 12px;
-                                            width: 30px;
-                                            height: 30px;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            border-radius: 5px;
-                                            margin-right: 5px;
-                                        }
-                                    }
-
-                                    .stars_rating {
-                                        display: flex;
-
-                                        img {
-                                            object-fit: contain;
-                                            max-width: 24px;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        .block_detail_top {
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: space-between;
-                            align-items: center;
-                            padding: 0;
-
-                            @include tab-view {
-                                padding: 0;
-                                margin: 15px 0 0;
-                            }
-
-                            .detail_info {
-                                font-size: 12px;
-                                color: $text-grey;
-                                width: 100%;
-                                padding: 0 10px;
-
-                                .place_name {
-                                    display: flex;
-                                    justify-content: space-between;
-
-                                    .adress_span {
-                                        max-width: 140px;
-                                        white-space: nowrap;
-                                        overflow: hidden;
-                                        text-overflow: ellipsis;
-                                        display: inline-block;
-                                        width: 100%;
-                                    }
-
-                                    .ammin_listing {
-                                        display: flex;
-
-                                        .amminities_list {
-                                            margin-left: 5px;
-                                        }
-                                    }
-                                }
-
-                                h4 {
-                                    font-size: 16px;
-                                    color: $text-black;
-                                    font-weight: 600;
-                                    margin: 5px 0;
-                                    max-width: 380px;
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    display: inline-block;
-                                    width: 100%;
-
-                                    @media (max-width: 767px) {
-                                        font-size: 16px;
-                                    }
-                                }
-
-                                span {
-                                    margin: 5px 0 0;
-                                }
-
-                                .review_section_wrap {
-                                    display: flex;
-                                    justify-content: flex-start;
-                                    align-items: center;
-                                    margin: 5px 0 10px;
-
-                                    .rating_num {
-                                        span {
-                                            background-color: #1445f5;
-                                            color: $text-white;
-                                            font-size: 12px;
-                                            width: 30px;
-                                            height: 30px;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            border-radius: 5px;
-                                        }
-                                    }
-
-                                    .stars_text {
-                                        margin-left: 14px;
-
-                                        .stars_rating {
-                                            margin-top: 0;
-                                        }
-
-                                        .review_num_text {
-                                            a {
-                                                font-size: 12px;
-                                                color: $text-grey;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        &:last-child {
-                            //margin: 20px 0 15px;
-                            margin: 0;
-                        }
-
-                        .block_detail_btm {
-                            display: flex;
-                            align-items: center;
-                            justify-content: space-between;
-                            border-top: 1px solid $box-border-color;
-                            padding-top: 10px;
-
-                            @include tab-view {
-                                flex-wrap: wrap;
-                                justify-content: center;
-                                padding-bottom: 10px;
-                                border-bottom: 1px solid $box-border-color;
-                                margin: 0 0 0px;
-                            }
-
-                            .show_detail {
-                                width: auto;
-
-                                a {
-                                    display: inline;
-                                    font-size: 14px;
-                                    font-weight: 500;
-                                    color: $primary-color;
-                                    position: relative;
-
-                                    img {
-                                        margin-right: 5px;
-                                    }
-
-                                    &:after {
-                                        content: "";
-                                        position: absolute;
-                                        left: 105%;
-                                        top: 50%;
-                                        width: 0;
-                                        height: 0;
-                                        border-top: 3px solid transparent;
-                                        border-bottom: 3px solid transparent;
-                                        border-left: 3px solid $primary-color;
-                                        transform: translate(-50%, -50%);
-                                    }
-                                }
-
-                                &.open_detail {
-                                    a {
-                                        &:after {
-                                            width: 0;
-                                            height: 0;
-                                            border-left: 3px solid transparent;
-                                            border-right: 3px solid transparent;
-                                            border-top: 3px solid $primary-color;
-                                            left: 105%;
-                                            top: 54%;
-                                        }
-                                    }
-                                }
-                            }
-
-                            .ammin_listing {
-                                display: flex;
-                                align-items: center;
-
-                                .amminities_list {
-                                    font-size: 12px;
-                                    text-transform: uppercase;
-                                    color: #5a5a5a;
-                                    font-weight: 500;
-                                    margin-left: 20px;
-
-                                    img {
-                                        margin-right: 8px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .block_price {
-                    padding: 0 10px;
-
-                    .block_inn_pr {
-                        .block {
-                            display: flex;
-                            justify-content: space-between;
-                            margin: 5px 0;
-
-                            p {
-                                font-size: 12px;
-                                color: $text-grey;
-
-                                &span {
-                                    color: #1943ff;
-                                    font-size: 18px;
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
     }
@@ -4955,7 +4120,7 @@ ngb-datepicker {
                             width: 100%;
 
                             input {
-                                background-image: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) !important;
+                                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) !important;
                                 background-size: 20px;
                                 background-repeat: no-repeat;
                                 background-position: center right 15px;
@@ -4985,7 +4150,7 @@ ngb-datepicker {
                                 color: $text-black;
                                 font-weight: 600;
                                 padding: 0 15px;
-                                background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px no-repeat !important;
+                                background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center right 15px no-repeat !important;
 
                                 @media (max-width: 1199px) {
                                     font-size: 16px;
@@ -5091,7 +4256,7 @@ ngb-datepicker {
                                         right: 15px;
                                         top: 50%;
                                         transform: translateY(-50%);
-                                        background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
+                                        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_travellers-icon.svg) no-repeat;
                                         background-size: cover;
                                     }
 
@@ -5106,7 +4271,7 @@ ngb-datepicker {
                                         width: 14px;
                                         position: relative;
                                         margin-left: 20px;
-                                        background-image: url('http://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
+                                        background-image: url('https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg');
                                         background-position: right;
                                         background-repeat: no-repeat;
                                         background-size: 12px;
@@ -5253,7 +4418,7 @@ ngb-datepicker {
                                                     -webkit-appearance: none;
                                                     -moz-appearance: none;
                                                     appearance: none;
-                                                    background: url(http://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
+                                                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/dropdown-arrow-down.svg) center right 15px no-repeat !important;
 
                                                     &::after {
                                                         content: "";
@@ -6288,7 +5453,7 @@ ngb-datepicker {
                                             width: 20px;
 
                                             a {
-                                                background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
+                                                background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
                                                 background-repeat: no-repeat;
                                                 padding: 0px 12px;
                                             }
@@ -7432,7 +6597,7 @@ ngb-datepicker {
                                     width: 20px;
 
                                     a {
-                                        background-image: url("http://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
+                                        background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
                                         background-repeat: no-repeat;
                                         padding: 0px 12px;
                                     }

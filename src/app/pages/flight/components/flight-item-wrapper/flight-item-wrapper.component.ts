@@ -208,7 +208,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       });
     } else { */
 
-      if (this.cartItems && this.cartItems.length >= 5) {
+      if (this.cartItems && this.cartItems.length >= 10) {
         this.changeLoading.emit(false);
         this.maxCartValidation.emit(true)
       } else {

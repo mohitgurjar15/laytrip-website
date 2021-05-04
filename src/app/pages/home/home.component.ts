@@ -1,15 +1,15 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 import { GenericService } from '../../services/generic.service';
 import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HomeService } from '../../services/home.service';
 import { CartService } from '../../services/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CookiePolicyComponent, MODAL_TYPE } from '../cookie-policy/cookie-policy.component';
+import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   moduleId = 1;
   dealList = [];
   host:string='';
+  $tabName;
 
   constructor(
     private genericService: GenericService,
@@ -56,6 +57,16 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.openCookiePolicyPopup();
     }, 5000);
+
+    this.$tabName = this.homeService.getActiveTabName.subscribe(tabName=> {
+      if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){        
+        let tab : any = tabName;
+        if(tab == 'hotel'){
+          $('.hotel-tab').trigger('click');
+        }
+      }
+    });
+    this.$tabName.unsubscribe();
   }
 
   openCookiePolicyPopup() {
@@ -144,6 +155,7 @@ export class HomeComponent implements OnInit {
   }
 
   getDeal(moduleId) {
+    this.moduleId = moduleId;  
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
         this.dealList = response['data'];
@@ -155,9 +167,9 @@ export class HomeComponent implements OnInit {
   clickOnTab(tabName) {
     document.getElementById('home_banner').style.position = 'relative';
     document.getElementById('home_banner').style.width = '100%';
-    document.getElementById('home_banner').style.paddingBottom = '180px';
     if (tabName === 'flight') {
       this.getDeal(1);
+
 
       document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
@@ -166,8 +178,8 @@ export class HomeComponent implements OnInit {
       //   document.getElementById('login_btn').style.background = '#FC7E66';
       // }
     } else if (tabName === 'hotel') {
-      this.getDeal(2);
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
+      this.getDeal(3);
+      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
       // if (document.getElementById('login_btn')) {
@@ -176,7 +188,7 @@ export class HomeComponent implements OnInit {
     }
     else if (tabName === 'home-rentals') {
       this.getDeal(3);
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/hotel_home_banner.png)";
+      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
       // if (document.getElementById('login_btn')) {
@@ -191,8 +203,14 @@ export class HomeComponent implements OnInit {
   }
 
   setToString(newItem: string) {
-    this.toString = newItem;
-    this.homeService.setToString(newItem);
+    if(this.moduleId == 1){
+      this.toString = newItem;
+      this.homeService.setToString(newItem);
+    } else if(this.moduleId == 3) {
+      this.homeService.setLocationForHotel(newItem);
+    } else {
+
+    }
   }
 
 }

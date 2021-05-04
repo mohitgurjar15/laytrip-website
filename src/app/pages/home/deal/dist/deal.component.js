@@ -22,9 +22,9 @@ var DealComponent = /** @class */ (function () {
     DealComponent.prototype.ngAfterContentChecked = function () {
         this.list = this.dealList;
     };
-    DealComponent.prototype.btnDealClick = function (code) {
+    DealComponent.prototype.btnDealClick = function (item) {
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-        this.toString.emit(code);
+        this.toString.emit(item.title ? item : item.code);
     };
     __decorate([
         core_1.Output()

@@ -389,6 +389,7 @@
     "select_itinerary": "Please select itinerary",
     "error_messege_of_traveler_selection": "You can only select 1 Adult, 1 Child, 1 Infant",
     "clear_all": "Clear All",
+    "clear": "Clear",
     "decline": "Decline",
     "accept": "Accept",
     "error": "Error",

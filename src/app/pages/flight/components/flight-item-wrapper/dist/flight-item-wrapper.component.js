@@ -5,21 +5,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 exports.__esModule = true;
-exports.FlightItemWrapperComponent = void 0;
+exports.LaytripOkPopup = exports.FlightItemWrapperComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
-var animations_1 = require("@angular/animations");
 var moment = require("moment");
 var jwt_helper_1 = require("../../../../../app/_helpers/jwt.helper");
 var FlightItemWrapperComponent = /** @class */ (function () {
-    function FlightItemWrapperComponent(flightService, router, route, cookieService, commonFunction, genericService) {
+    function FlightItemWrapperComponent(flightService, router, route, cookieService, commonFunction, genericService, cartService, toastr, spinner, modalService) {
         this.flightService = flightService;
         this.router = router;
         this.route = route;
         this.cookieService = cookieService;
         this.commonFunction = commonFunction;
         this.genericService = genericService;
+        this.cartService = cartService;
+        this.toastr = toastr;
+        this.spinner = spinner;
+        this.modalService = modalService;
+        this.changeLoading = new core_1.EventEmitter;
+        this.maxCartValidation = new core_1.EventEmitter;
+        this.flightNotAvailable = new core_1.EventEmitter;
+        this.cartItems = [];
         this.animationState = 'out';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
@@ -39,8 +53,13 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         this.showFareDetails = 0;
         this.isRoundTrip = false;
         this.subcell = '$100';
+        this.isLoggedIn = false;
+        this.showTotalLayCredit = 0;
+        this._isLayCredit = false;
+        this.totalLayCredit = 0;
     }
     FlightItemWrapperComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var _currency = localStorage.getItem('_curr');
         this.currency = JSON.parse(_currency);
         this.flightList = this.flightDetails;
@@ -51,8 +70,36 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         else if (this.route.snapshot.queryParams['trip'] === 'oneway') {
             this.isRoundTrip = false;
         }
-        this.totalLaycredit();
+        //this.totalLaycredit();
         this.checkInstalmentAvalability();
+        this.checkUser();
+        this.cartService.getCartItems.subscribe(function (cartItems) {
+            _this.cartItems = cartItems;
+        });
+        setTimeout(function () { _this.loadJquery(); }, 3000);
+    };
+    FlightItemWrapperComponent.prototype.loadJquery = function () {
+        $("body").click(function () {
+            $(".code_name_m").hide();
+        });
+        $(".code_bt_m").click(function (e) {
+            e.stopPropagation();
+            $(this).siblings(".code_name_m").toggle();
+        });
+        $('.code_name_m').click(function (e) {
+            e.stopPropagation();
+        });
+    };
+    FlightItemWrapperComponent.prototype.ngDoCheck = function () {
+        // this.checkUser();
+    };
+    FlightItemWrapperComponent.prototype.checkUser = function () {
+        var userToken = jwt_helper_1.getLoginUserInfo();
+        this.isLoggedIn = false;
+        if (typeof userToken != 'undefined' && userToken.roleId != 7) {
+            localStorage.removeItem("_isSubscribeNow");
+            this.isLoggedIn = true;
+        }
     };
     FlightItemWrapperComponent.prototype.opened = function () {
     };
@@ -65,18 +112,19 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         });
     };
     FlightItemWrapperComponent.prototype.getCancellationPolicy = function (routeCode) {
-        var _this = this;
-        this.loadCancellationPolicy = true;
-        this.loadMoreCancellationPolicy = false;
-        this.errorMessage = '';
-        this.flightService.getCancellationPolicy(routeCode).subscribe(function (data) {
-            _this.cancellationPolicyArray = data.cancellation_policy.split('--');
-            _this.loadCancellationPolicy = false;
-            _this.cancellationPolicy = data;
-        }, function (err) {
-            _this.loadCancellationPolicy = false;
-            _this.errorMessage = err.message;
-        });
+        // this.loadCancellationPolicy = true;
+        // this.loadMoreCancellationPolicy = false;
+        // this.errorMessage = '';
+        // this.cancellationPolicyArray = [];
+        // this.cancellationPolicy = '';
+        // this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
+        //   this.cancellationPolicyArray = data.cancellation_policy.split('--')
+        //   this.loadCancellationPolicy = false;
+        //   this.cancellationPolicy = data;
+        // }, (err) => {
+        //   this.loadCancellationPolicy = false;
+        //   this.errorMessage = err.message;
+        // });
     };
     FlightItemWrapperComponent.prototype.toggleCancellationContent = function () {
         this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
@@ -114,24 +162,52 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         });
     };
     FlightItemWrapperComponent.prototype.bookNow = function (route) {
-        var itinerary = {
-            adult: this.route.snapshot.queryParams["adult"],
-            child: this.route.snapshot.queryParams["child"],
-            infant: this.route.snapshot.queryParams["infant"],
-            is_passport_required: route.is_passport_required
-        };
-        var lastSearchUrl = this.router.url;
-        this.cookieService.put('_prev_search', lastSearchUrl);
-        var dateNow = new Date();
-        dateNow.setMinutes(dateNow.getMinutes() + 10);
-        sessionStorage.setItem('_itinerary', JSON.stringify(itinerary));
-        sessionStorage.setItem('__route', JSON.stringify(route));
-        if (this.isInstalmentAvailable || this.totalLaycreditPoints > 0) {
-            this.router.navigate(["flight/payment/" + route.route_code]);
+        /* if (!this.isLoggedIn) {
+          const modalRef = this.modalService.open(LaytripOkPopup, {
+            centered: true,
+            keyboard: false,
+            backdrop: 'static'
+          });
+        } else { */
+        var _this = this;
+        if (this.cartItems && this.cartItems.length >= 10) {
+            this.changeLoading.emit(false);
+            this.maxCartValidation.emit(true);
         }
         else {
-            this.router.navigate(["flight/checkout/" + route.route_code]);
+            this.changeLoading.emit(true);
+            var itinerary = {
+                adult: this.route.snapshot.queryParams["adult"],
+                child: this.route.snapshot.queryParams["child"],
+                infant: this.route.snapshot.queryParams["infant"],
+                is_passport_required: route.is_passport_required
+            };
+            var lastSearchUrl = this.router.url;
+            this.cookieService.put('_prev_search', lastSearchUrl);
+            var dateNow = new Date();
+            dateNow.setMinutes(dateNow.getMinutes() + 10);
+            sessionStorage.setItem('_itinerary', JSON.stringify(itinerary));
+            var payload = {
+                module_id: 1,
+                route_code: route.route_code
+            };
+            //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
+            this.cartService.addCartItem(payload).subscribe(function (res) {
+                _this.changeLoading.emit(true);
+                if (res) {
+                    var newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] };
+                    _this.cartItems = __spreadArrays(_this.cartItems, [newItem]);
+                    _this.cartService.setCartItems(_this.cartItems);
+                    localStorage.setItem('$crt', JSON.stringify(_this.cartItems.length));
+                    _this.router.navigate(["cart/booking"]);
+                }
+            }, function (error) {
+                _this.changeLoading.emit(false);
+                //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+                _this.flightNotAvailable.emit(true);
+            });
         }
+        /* } */
     };
     FlightItemWrapperComponent.prototype.checkInstalmentAvalability = function () {
         var _this = this;
@@ -153,13 +229,24 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         }));
     };
     FlightItemWrapperComponent.prototype.ngOnChanges = function (changes) {
-        this.flightList = changes.flightDetails.currentValue;
-    };
-    FlightItemWrapperComponent.prototype.logAnimation = function (event) {
-        // console.log(event);
+        if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
+            this.flightList = changes.flightDetails.currentValue;
+        }
+        else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
+            this.filteredLabel = changes.filteredLabel.currentValue;
+        }
+        // this.flightList = changes.flightDetails.currentValue;
     };
     FlightItemWrapperComponent.prototype.ngOnDestroy = function () {
         this.subscriptions.forEach(function (sub) { return sub.unsubscribe(); });
+    };
+    FlightItemWrapperComponent.prototype.getDayDiff = function (arrivalDate, departureDate) {
+        var diff = moment(arrivalDate, "DD/MM/YYYY").diff(moment(departureDate, "DD/MM/YYYY"), 'days');
+        return diff;
+    };
+    FlightItemWrapperComponent.prototype.convertTime = function (time) {
+        var newTime = this.commonFunction.convertTime(time, 'h:mm A', 'h:mma');
+        return newTime.slice(0, -1);
     };
     __decorate([
         core_1.Input()
@@ -167,30 +254,38 @@ var FlightItemWrapperComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], FlightItemWrapperComponent.prototype, "filter");
+    __decorate([
+        core_1.Input()
+    ], FlightItemWrapperComponent.prototype, "filteredLabel");
+    __decorate([
+        core_1.Output()
+    ], FlightItemWrapperComponent.prototype, "changeLoading");
+    __decorate([
+        core_1.Output()
+    ], FlightItemWrapperComponent.prototype, "maxCartValidation");
+    __decorate([
+        core_1.Output()
+    ], FlightItemWrapperComponent.prototype, "flightNotAvailable");
     FlightItemWrapperComponent = __decorate([
         core_1.Component({
             selector: 'app-flight-item-wrapper',
             templateUrl: './flight-item-wrapper.component.html',
-            styleUrls: ['./flight-item-wrapper.component.scss'],
-            animations: [
-                animations_1.trigger('listAnimation', [
-                    animations_1.transition('* => *', [
-                        animations_1.query(':leave', [
-                            animations_1.stagger(10, [
-                                animations_1.animate('0.001s', animations_1.style({ opacity: 0 }))
-                            ])
-                        ], { optional: true }),
-                        animations_1.query(':enter', [
-                            animations_1.style({ opacity: 0 }),
-                            animations_1.stagger(50, [
-                                animations_1.animate('0.5s', animations_1.style({ opacity: 1 }))
-                            ])
-                        ], { optional: true })
-                    ])
-                ])
-            ]
+            styleUrls: ['./flight-item-wrapper.component.scss']
         })
     ], FlightItemWrapperComponent);
     return FlightItemWrapperComponent;
 }());
 exports.FlightItemWrapperComponent = FlightItemWrapperComponent;
+var LaytripOkPopup = /** @class */ (function () {
+    function LaytripOkPopup(modal) {
+        this.modal = modal;
+    }
+    LaytripOkPopup = __decorate([
+        core_1.Component({
+            selector: 'laytrip-ok-popup',
+            template: "<div class=\"modal-header\">\n      <h4 class=\"modal-title\">Warning</h4>\n    </div>\n    <div class=\"modal-body\">\n      <p>Please login to book flight</p>\n    </div>\n    <div class=\"modal-footer\">\n      <button type=\"button\" class=\"btn btn-light\" (click)=\"modal.close('Close click')\">OK</button>\n    </div>"
+        })
+    ], LaytripOkPopup);
+    return LaytripOkPopup;
+}());
+exports.LaytripOkPopup = LaytripOkPopup;

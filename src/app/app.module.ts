@@ -27,7 +27,7 @@ import { AuthGuard } from './guard/auth.guard';
     ElementsModule,
     FormsModule,
     ComponentsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
