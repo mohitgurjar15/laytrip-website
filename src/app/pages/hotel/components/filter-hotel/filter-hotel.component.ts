@@ -141,6 +141,9 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.loadJquery();
   }
 
+  closeModal() {
+    $('#filter_mob_modal').modal('hide');
+  }
   clearHotelSearch() {
     console.log('close')
     this.isHotelSearch = false;

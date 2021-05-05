@@ -173,6 +173,9 @@ export class HotelSearchComponent implements OnInit {
       });
     }
   }
+  closeModal() {
+    $('#filter_mob_modal').modal('hide');
+  }
 
   filterHotel(event) {
     setTimeout(() => {

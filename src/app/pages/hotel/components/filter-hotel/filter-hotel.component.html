@@ -90,7 +90,7 @@
 
               <form [formGroup]="partialPriceSlider" >
                 <div class="custom_range_slide">
-                  <p>{{ currency?.symbol }}{{partialPaymentValue  | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}}
+                  <p>{{ currency?.symbol }}{{partialPaymentValue  | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}} Weekly
                   </p>
                   <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue"
                     [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue"
@@ -218,7 +218,9 @@
   </div>
 </div>
 
-<div class="filter_main_wrapper responsive_mobile">
+
+  
+<div class="filter_main_wrapper responsive_mobile">  
   <div class="accordion block_shortby" id="accordion3">
     <div class="accordion-group">
       <!-- <div class="accordion-group" [ngClass]="{'active': is_open === true}"> -->
@@ -226,6 +228,10 @@
         <a class="accordion-toggle">
           Filters
         </a>
+        
+          <button type="button" class="close" (click)="closeModal()">
+            <img src="{{s3BucketUrl}}assets/images/icon/arrow_up_dropdown.svg" alt="Close Icon">
+          </button>
         <!-- <a class="anchor_link" (click)="resetFilter()"> {{'clear' | translate}}</a> -->
       </div>
       <div id="collapseThree" class="accordion-body collapse show">
@@ -307,7 +313,7 @@
                </div>
               <form [formGroup]="partialPriceSlider" class="custom_range_form_slider">
                 <div class="custom_range_slide">
-                  <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}}
+                  <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}} Weekly
                   </p>
                   <ng5-slider *ngIf="partialPaymentValue  && partialPaymentHighValue" [(value)]="partialPaymentValue"
                     [(highValue)]="partialPaymentHighValue" formControlName="partial_price"
