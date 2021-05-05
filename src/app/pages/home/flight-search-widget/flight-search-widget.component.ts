@@ -45,8 +45,8 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   flightDepartureMinDate;
   flightReturnMinDate;
-  customStartDateValidation = "2021-06-01";
-  customEndDateValidation = "2021-06-07";
+  customStartDateValidation = "2021-06-02";
+  customEndDateValidation = "2021-06-09";
   departureDate;
   returnDate : any = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
   totalPerson: number = 1;
@@ -158,11 +158,10 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.toSearch = airports[keys];
         this.flightSearchForm.controls.fromDestination.setValue('');
         this.fromSearch = [];
-
         if(!this.isRoundTrip){
-          this.departureDate = moment(this.customStartDateValidation).add(1, 'M').toDate();
+          // this.departureDate = moment(this.customStartDateValidation).add(31, 'days').toDate();
         } else {
-          this.rangeDates =[ moment(this.customStartDateValidation).add(1, 'M').toDate(), moment(this.customStartDateValidation).add(38, 'days').toDate()];
+          this.rangeDates =[ this.departureDate, moment(this.departureDate).add(7, 'days').toDate()];
           this.searchFlightInfo.arrival = this.toSearch.code;
         }
       }
@@ -181,6 +180,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   setFlightDepartureMinDate(){
     
     let  date = new Date();
+    
     var curretdate = moment().format();
     let  juneDate :any =  moment(this.customStartDateValidation).format('YYYY-MM-DD');
     

@@ -46,8 +46,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             format: 'MM/DD/YYYY',
             displayFormat: 'MM/DD/YYYY'
         };
-        this.customStartDateValidation = "2021-06-01";
-        this.customEndDateValidation = "2021-06-07";
+        this.customStartDateValidation = "2021-06-02";
+        this.customEndDateValidation = "2021-06-09";
         this.returnDate = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
         this.totalPerson = 1;
         this.calPrices = false;
@@ -131,10 +131,10 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.flightSearchForm.controls.fromDestination.setValue('');
                 _this.fromSearch = [];
                 if (!_this.isRoundTrip) {
-                    _this.departureDate = moment(_this.customStartDateValidation).add(1, 'M').toDate();
+                    // this.departureDate = moment(this.customStartDateValidation).add(31, 'days').toDate();
                 }
                 else {
-                    _this.rangeDates = [moment(_this.customStartDateValidation).add(1, 'M').toDate(), moment(_this.customStartDateValidation).add(38, 'days').toDate()];
+                    _this.rangeDates = [_this.departureDate, moment(_this.departureDate).add(7, 'days').toDate()];
                     _this.searchFlightInfo.arrival = _this.toSearch.code;
                 }
             }
