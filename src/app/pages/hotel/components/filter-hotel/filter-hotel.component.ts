@@ -321,7 +321,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
       filteredHotels = filteredHotels.filter(item => {
-        console.log(item.amenities.list,item.name)
         return this.amenitiesArray.every(r => item.amenities.list.includes(r));
       })
     }

@@ -1,11 +1,9 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {  NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from '../../../../services/hotel.service';
 import { environment } from '../../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { collect } from 'collect.js';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';

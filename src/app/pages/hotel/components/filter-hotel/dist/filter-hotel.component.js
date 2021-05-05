@@ -268,7 +268,6 @@ var FilterHotelComponent = /** @class */ (function () {
         /* Filter hotels amenities */
         if (this.amenitiesArray.length) {
             filteredHotels = filteredHotels.filter(function (item) {
-                console.log(item.amenities.list, item.name);
                 return _this.amenitiesArray.every(function (r) { return item.amenities.list.includes(r); });
             });
         }
