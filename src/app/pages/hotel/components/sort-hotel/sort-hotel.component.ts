@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { environment } from '../../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
@@ -15,6 +16,7 @@ export class SortHotelComponent implements OnInit {
   @Output() sortHotel = new EventEmitter<{ key: string, order: string }>();
   @Input() hotelDetails;
   locationName;
+  s3BucketUrl = environment.s3BucketUrl;
   sortType: string = 'lh_price';
   lowToHighToggle: boolean = false;
 
@@ -58,7 +60,9 @@ export class SortHotelComponent implements OnInit {
     this.sortType = name;
     this.sortHotel.emit({ key, order });
   }
-
+  closeModal() {
+    $('#sort_mob_modal').modal('hide');
+  }
   resetSorting(key, order) {
     this.sortType = 'lh_price';
     this.sortHotel.emit({ key, order });
