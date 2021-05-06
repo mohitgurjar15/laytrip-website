@@ -61,7 +61,8 @@
         .banner_text {
             width: auto;
             //margin-top: 60px;
-            margin-bottom: 135px;
+            //margin-bottom: 135px;
+            margin-bottom: 40px;
 
             @include tab-view{
                 margin-top: 0;
