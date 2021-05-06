@@ -380,7 +380,7 @@ var BookingComponent = /** @class */ (function () {
                     }
                     if (!this.inValidCartTravller.includes(i)) {
                         if (this.carts[i].type == 'flight') {
-                            message = " " + this.carts[i].module_info.departure_code + "- " + this.carts[i].module_info.arrival_code + " ,";
+                            message = " " + this.carts[i].module_info.departure_code + "-" + this.carts[i].module_info.arrival_code + " ,";
                         }
                         if (this.carts[i].type == 'hotel') {
                             message = " " + this.carts[i].module_info.hotel_name + " ,";
@@ -397,7 +397,7 @@ var BookingComponent = /** @class */ (function () {
                         }
                         if (!this.inValidCartTravller.includes(i)) {
                             if (this.carts[i].type == 'flight') {
-                                message = " " + this.carts[i].module_info.departure_code + "- " + this.carts[i].module_info.arrival_code + " ,";
+                                message = " " + this.carts[i].module_info.departure_code + "-" + this.carts[i].module_info.arrival_code + " ,";
                             }
                             if (this.carts[i].type == 'hotel') {
                                 message = " " + this.carts[i].module_info.title + " ,";
@@ -478,10 +478,10 @@ var BookingComponent = /** @class */ (function () {
         this.isSubmitted = true;
         if (this.cardToken == '') {
             if (this.validationErrorMessage == '') {
-                this.validationErrorMessage = " Please select credit card";
+                this.validationErrorMessage = " Please select a credit card";
             }
             else {
-                this.validationErrorMessage += " and please select credit card";
+                this.validationErrorMessage += " and please select a credit card";
             }
         }
         if (this.isValidTravelers && this.cardToken != '' && !this.isNotAvailableItinerary && this.isAllAlertClosed) {

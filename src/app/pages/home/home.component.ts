@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   isRoundTrip: boolean = false;
   countryCode: string;
   toString: string;
-  moduleId = 1;
+  moduleId = 3;
   dealList = [];
   host:string='';
   $tabName;
@@ -61,8 +61,8 @@ export class HomeComponent implements OnInit {
     this.$tabName = this.homeService.getActiveTabName.subscribe(tabName=> {
       if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){        
         let tab : any = tabName;
-        if(tab == 'hotel'){
-          $('.hotel-tab').trigger('click');
+        if(tab == 'flight'){
+          $('.flight-tab').trigger('click');
         }
       }
     });

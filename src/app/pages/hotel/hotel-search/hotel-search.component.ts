@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { HotelService } from '../../../services/hotel.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
+import { HomeService } from '../../../services/home.service';
 declare var $: any;
 
 @Component({
@@ -42,7 +42,8 @@ export class HotelSearchComponent implements OnInit {
     public commonFunction: CommonFunction,
     public router: Router,
     private cd: ChangeDetectorRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private homeService: HomeService,
 
   ) {
   }
@@ -208,5 +209,12 @@ export class HotelSearchComponent implements OnInit {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
     });
+  }
+
+  moduleTabClick(tabName) {
+    if (tabName == 'flight') {
+      this.homeService.setActiveTab(tabName)
+      this.router.navigate(['/']);
+    }
   }
 }

@@ -121,7 +121,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.homeService.removeToString('hotel');
 
       this.checkInDate = moment(this.route.snapshot.queryParams['check_in']).toDate();
-      this.checkInMinDate = this.customStartDateValidation ? moment(this.customStartDateValidation).toDate() : moment();
+      this.checkInMinDate = moment().add(31, 'days').toDate();
 
       this.checkOutDate = moment(this.route.snapshot.queryParams['check_out']).isValid() ? moment(this.route.snapshot.queryParams['check_out']).toDate() : moment(this.route.snapshot.queryParams['check_in']).add(1, 'days').toDate();
       this.checkOutMinDate = this.checkOutDate;

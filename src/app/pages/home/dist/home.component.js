@@ -25,7 +25,7 @@ var HomeComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
         this.isRoundTrip = false;
-        this.moduleId = 1;
+        this.moduleId = 3;
         this.dealList = [];
         this.host = '';
         this.renderer.addClass(document.body, 'bg_color');
@@ -46,8 +46,8 @@ var HomeComponent = /** @class */ (function () {
         this.$tabName = this.homeService.getActiveTabName.subscribe(function (tabName) {
             if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) {
                 var tab = tabName;
-                if (tab == 'hotel') {
-                    $('.hotel-tab').trigger('click');
+                if (tab == 'flight') {
+                    $('.flight-tab').trigger('click');
                 }
             }
         });

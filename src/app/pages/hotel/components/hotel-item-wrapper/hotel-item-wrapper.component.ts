@@ -161,6 +161,7 @@ export class HotelItemWrapperComponent implements OnInit {
       this.currentPage = 1;
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       this.hotelList = [...this.hotelListArray];
+      console.log("this.hotelListArray",this.hotelListArray)
       if (this.bounds) {
         this.checkMarkersInBounds(this.bounds)
       }
@@ -210,8 +211,7 @@ export class HotelItemWrapperComponent implements OnInit {
     }
 
     this.scrollLoading = true;
-    console.log("scrolled")
-    console.log(this.noOfDataToShowInitially, " <= ", this.hotelListArray.length)
+    
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.hotelDetails.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
