@@ -11,13 +11,14 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var moment = require("moment");
 var HotelSearchComponent = /** @class */ (function () {
-    function HotelSearchComponent(route, hotelService, commonFunction, router, cd, renderer) {
+    function HotelSearchComponent(route, hotelService, commonFunction, router, cd, renderer, homeService) {
         this.route = route;
         this.hotelService = hotelService;
         this.commonFunction = commonFunction;
         this.router = router;
         this.cd = cd;
         this.renderer = renderer;
+        this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.calenderPrices = [];
         this.loading = true;
@@ -160,6 +161,9 @@ var HotelSearchComponent = /** @class */ (function () {
             });
         }
     };
+    HotelSearchComponent.prototype.closeModal = function () {
+        $('#filter_mob_modal').modal('hide');
+    };
     HotelSearchComponent.prototype.filterHotel = function (event) {
         var _this = this;
         setTimeout(function () {
@@ -190,6 +194,12 @@ var HotelSearchComponent = /** @class */ (function () {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
             _this.router.navigate(["" + urlData.url], { queryParams: queryParams, queryParamsHandling: 'merge' });
         });
+    };
+    HotelSearchComponent.prototype.moduleTabClick = function (tabName) {
+        if (tabName == 'flight') {
+            this.homeService.setActiveTab(tabName);
+            this.router.navigate(['/']);
+        }
     };
     HotelSearchComponent = __decorate([
         core_1.Component({

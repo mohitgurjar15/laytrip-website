@@ -131,6 +131,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             _this.currentPage = 1;
             _this.hotelListArray = _this.hotelDetails.slice(0, _this.noOfDataToShowInitially);
             _this.hotelList = __spreadArrays(_this.hotelListArray);
+            console.log("this.hotelListArray", _this.hotelListArray);
             if (_this.bounds) {
                 _this.checkMarkersInBounds(_this.bounds);
             }
@@ -176,8 +177,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             return false;
         }
         this.scrollLoading = true;
-        console.log("scrolled");
-        console.log(this.noOfDataToShowInitially, " <= ", this.hotelListArray.length);
         setTimeout(function () {
             if (_this.noOfDataToShowInitially <= _this.hotelDetails.length) {
                 _this.noOfDataToShowInitially += _this.dataToLoad;

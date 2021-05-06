@@ -25,7 +25,8 @@
 
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-flight" data-toggle="tab" href="#flight" role="tab"
+                    
+                    <a class="nav-item nav-link flight-tab" id="nav-flight" data-toggle="tab" href="#flight" role="tab"
                         aria-selected="true" (click)="clickOnTab('flight')">
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg"
                             alt="Flight Icon" />
@@ -33,7 +34,7 @@
                             alt="Flight Icon" />
                         <!-- <span>{{'flight' | translate}}</span> -->
                     </a>
-                    <a class="nav-item nav-link hotel-tab"  id="nav-hotel" data-toggle="tab" href="#hotel" role="tab"
+                    <a class="nav-item nav-link hotel-tab active"  id="nav-hotel" data-toggle="tab" href="#hotel" role="tab"
                         aria-selected="false" (click)="clickOnTab('hotel')">
                         <!-- data-toggle="tab" href="#hotel" -->
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
@@ -66,11 +67,11 @@
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="nav-flight">
-                    <app-flight-search-widget></app-flight-search-widget>
-                </div>
-                <div class="tab-pane fade" id="hotel" role="tabpanel" aria-labelledby="nav-hotel">
+                <div class="tab-pane fade active show" id="hotel" role="tabpanel" aria-labelledby="nav-hotel">
                     <app-hotel-search-widget></app-hotel-search-widget>
+                </div>
+                <div class="tab-pane fade show " id="flight" role="tabpanel" aria-labelledby="nav-flight">
+                    <app-flight-search-widget></app-flight-search-widget>
                 </div>
                 <div class="tab-pane fade" id="accommodation" role="tabpanel" aria-labelledby="nav-accommodation">
                     <app-vacation-search-widget></app-vacation-search-widget>

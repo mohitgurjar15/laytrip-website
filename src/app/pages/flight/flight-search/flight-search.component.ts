@@ -397,10 +397,5 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     // window.location.reload();
   }
 
-  moduleTabClick(tabName) {
-    if (tabName == 'hotel') {
-      this.homeService.setActiveTab(tabName)
-      this.router.navigate(['/']);
-    }
-  }
+  
 }

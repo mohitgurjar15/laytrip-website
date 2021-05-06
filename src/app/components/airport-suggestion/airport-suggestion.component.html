@@ -13,7 +13,10 @@
                     <a href="#a" class="word_alpha">{{item.key}}</a>
                     <span class="linew_wrps">
                         <ng-conatiner *ngFor="let sub_item of item.value">
-                            <span class="line_names" (click)="selectAirport(sub_item)">
+                            <span class="line_names {{sub_item.code}}" (click)="selectAirport(sub_item)" *ngIf="sub_item.code == 'SCL' || sub_item.code == 'STI'">
+                                {{sub_item.city}}, {{sub_item.country}} ({{sub_item.code}})
+                            </span>
+                            <span class="line_names" (click)="selectAirport(sub_item)" *ngIf="sub_item.code != 'SCL' || sub_item.code != 'STI'">
                                 {{sub_item.city}} ({{sub_item.code}})
                             </span>
                         </ng-conatiner>

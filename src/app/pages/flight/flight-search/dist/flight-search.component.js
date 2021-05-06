@@ -359,12 +359,6 @@ var FlightSearchComponent = /** @class */ (function () {
         this.isFlightAvaibale = false;
         // window.location.reload();
     };
-    FlightSearchComponent.prototype.moduleTabClick = function (tabName) {
-        if (tabName == 'hotel') {
-            this.homeService.setActiveTab(tabName);
-            this.router.navigate(['/']);
-        }
-    };
     FlightSearchComponent = __decorate([
         core_1.Component({
             selector: 'app-flight-search',

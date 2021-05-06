@@ -18,16 +18,17 @@ var HotelSuggestionComponent = /** @class */ (function () {
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
         this.data = [];
+        this.defaultTempData = [];
         this.isShowDropDown = false;
         this.thisElementClicked = false;
     }
     HotelSuggestionComponent.prototype.ngOnInit = function () {
+        this.defaultTempData[0] = this.defaultItem;
     };
     HotelSuggestionComponent.prototype.searchLocation = function (event) {
         var notAllowedKey = [40, 38, 9, 37, 39];
         if (event.keyCode == 8) {
-            this.searchHotel(this.searchItem, 'back');
-            return;
+            this.searchHotelAfterBackspace(this.searchItem, 'backspace');
         }
         if ((this.searchItem.length == 0 && event.keyCode == 8)) {
             this.data = [];
@@ -52,24 +53,9 @@ var HotelSuggestionComponent = /** @class */ (function () {
             this.loading = false;
         }
     };
-    HotelSuggestionComponent.prototype.searchHotel = function (searchItem, keyboardEvent) {
+    HotelSuggestionComponent.prototype.searchHotel = function (searchItem) {
         var _this = this;
-        if (keyboardEvent === void 0) { keyboardEvent = ''; }
-        var tempData = [{
-                city: searchItem,
-                country: '',
-                hotel_id: '',
-                title: searchItem,
-                type: 'city',
-                geo_codes: {},
-                city_id: '',
-                objType: 'invalid'
-            }];
-        if (keyboardEvent == 'back') {
-            this.selectedHotel.emit(tempData[0]);
-            this.validateSearch.emit(true);
-            return;
-        }
+        searchItem = this.searchHotelAfterBackspace(searchItem, 'backspace');
         this.loading = true;
         var searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
         this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe(function (response) {
@@ -98,6 +84,25 @@ var HotelSuggestionComponent = /** @class */ (function () {
             _this.isShowDropDown = false;
         });
     };
+    HotelSuggestionComponent.prototype.searchHotelAfterBackspace = function (searchItem, keyboardEvent) {
+        if (keyboardEvent === void 0) { keyboardEvent = ''; }
+        if (keyboardEvent === 'backspace') {
+            var tempData = [{
+                    city: searchItem,
+                    country: '',
+                    hotel_id: '',
+                    title: searchItem,
+                    type: 'city',
+                    geo_codes: {},
+                    city_id: '',
+                    objType: 'invalid'
+                }];
+            this.selectedHotel.emit(tempData[0]);
+            searchItem = this.defaultItem.title;
+            this.validateSearch.emit(true);
+            return searchItem;
+        }
+    };
     HotelSuggestionComponent.prototype.selectHotelItem = function (item) {
         this.isShowDropDown = false;
         this.searchItem = item.title;
@@ -123,6 +128,9 @@ var HotelSuggestionComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], HotelSuggestionComponent.prototype, "searchItem");
+    __decorate([
+        core_1.Input()
+    ], HotelSuggestionComponent.prototype, "defaultItem");
     __decorate([
         core_1.HostListener('document:click')
     ], HotelSuggestionComponent.prototype, "clickOutside");
