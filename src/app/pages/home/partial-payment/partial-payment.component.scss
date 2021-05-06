@@ -25,6 +25,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-align: center;
         @include tab-view{
             font-size: 16px;
             margin: 15px 0;
