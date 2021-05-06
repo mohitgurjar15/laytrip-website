@@ -7,7 +7,7 @@
 //<!-- Start Partial Payment Section css -->
 .partial_payment {
 	//padding: 102px 0 0;
-	padding: 50px 0 35px;
+	padding: 10px 0 35px;
 	// background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/partial_payment_bg.webp) no-repeat;
 	// background-size: cover;
 	position: relative;
@@ -17,7 +17,19 @@
         padding: 15px 0 0 0;
         margin: 15px 0 0 0;
 	}
-
+    .pink_notification{
+        color: $pink;
+        font-size: 25px;
+        font-weight: 600;
+        margin: 15px 0 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include tab-view{
+            font-size: 16px;
+            margin: 15px 0;
+        }
+    }
 	.partial_payment_info {
         display: flex;
         justify-content: space-evenly;
