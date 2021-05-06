@@ -177,6 +177,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             return false;
         }
         this.scrollLoading = true;
+        console.log(this.noOfDataToShowInitially, this.hotelListArray.length, this.hotelDetails.length);
         setTimeout(function () {
             if (_this.noOfDataToShowInitially <= _this.hotelDetails.length) {
                 _this.noOfDataToShowInitially += _this.dataToLoad;

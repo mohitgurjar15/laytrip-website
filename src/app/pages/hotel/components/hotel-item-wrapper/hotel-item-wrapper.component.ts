@@ -205,13 +205,12 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   onScrollDown() {
-
     if (this.isMapView) {
       return false;
     }
 
     this.scrollLoading = true;
-    
+    console.log(this.noOfDataToShowInitially,this.hotelListArray.length,this.hotelDetails.length)
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.hotelDetails.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
@@ -223,8 +222,6 @@ export class HotelItemWrapperComponent implements OnInit {
         this.scrollLoading = false;
       }
     }, 1000);
-
-
   }
 
   closeWindow() {
