@@ -209,8 +209,7 @@ export class HotelItemWrapperComponent implements OnInit {
       return false;
     }
 
-    this.scrollLoading = true;
-    console.log(this.noOfDataToShowInitially,this.hotelListArray.length,this.hotelDetails.length)
+    this.scrollLoading = (this.hotelDetails.length != this.hotelListArray.length) ?  true : false;
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.hotelDetails.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
@@ -218,6 +217,7 @@ export class HotelItemWrapperComponent implements OnInit {
         this.hotelList = [...this.hotelListArray];
         this.scrollLoading = false;
       } else {
+        console.log('here')
         this.isFullListDisplayed = true;
         this.scrollLoading = false;
       }

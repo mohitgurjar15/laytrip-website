@@ -6,6 +6,8 @@ import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from 'src/app/services/home.service';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { encode } from 'punycode';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -218,16 +220,41 @@ export class HotelSearchWidgetComponent implements OnInit {
   changeGuestInfo(event) {
     this.searchHotelInfo.occupancies = event;
   }
+   fromBinary(encoded) {
+    var binary = atob(encoded)
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < bytes.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    return String.fromCharCode(...new Uint16Array(bytes.buffer));
+  }
+
+  toBinary(string) {
+    const codeUnits = new Uint16Array(string.length);
+    for (let i = 0; i < codeUnits.length; i++) {
+      codeUnits[i] = string.charCodeAt(i);
+    }
+    return btoa(String.fromCharCode(...new Uint8Array(codeUnits.buffer)));
+  }
 
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
-    let queryParams: any = {};
+    let queryParams: any = {};    
+    /* try {
+      queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
+
+    }catch(e) {
+
+      console.log(this.toBinary(this.searchHotelInfo.location.city))
+    } */
+
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
     queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
     // queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
+    
     queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
     queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
@@ -236,6 +263,8 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['hotel/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
+    } else {
+      console.log('here')
     }
   }
 

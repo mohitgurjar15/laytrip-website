@@ -1,12 +1,12 @@
 <div class="hotel_tab">
-  <h2 *ngIf="showCommingSoon == true">Coming soon</h2>
+  <h2 *ngIf="showCommingSoon">Coming soon</h2>
 
   <div class="tab_upper_content">
     <div class="travellers">
       <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)"></app-guest-info>
     </div>
   </div>
-  <form *ngIf="showCommingSoon == false" [formGroup]="hotelSearchForm" autocomplete="off" (ngSubmit)="searchHotels()">
+  <form *ngIf="!showCommingSoon" [formGroup]="hotelSearchForm" autocomplete="off" (ngSubmit)="searchHotels()">
     <div class="hotels_search">
       <ul class="hotels-grid oneway">
         <li class="grid_box first">

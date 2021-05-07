@@ -192,10 +192,32 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     HotelSearchWidgetComponent.prototype.changeGuestInfo = function (event) {
         this.searchHotelInfo.occupancies = event;
     };
+    HotelSearchWidgetComponent.prototype.fromBinary = function (encoded) {
+        var binary = atob(encoded);
+        var bytes = new Uint8Array(binary.length);
+        for (var i = 0; i < bytes.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+        return String.fromCharCode.apply(String, new Uint16Array(bytes.buffer));
+    };
+    HotelSearchWidgetComponent.prototype.toBinary = function (string) {
+        var codeUnits = new Uint16Array(string.length);
+        for (var i = 0; i < codeUnits.length; i++) {
+            codeUnits[i] = string.charCodeAt(i);
+        }
+        return btoa(String.fromCharCode.apply(String, new Uint8Array(codeUnits.buffer)));
+    };
     HotelSearchWidgetComponent.prototype.searchHotels = function () {
         var _this = this;
         this.hotelSearchFormSubmitted = true;
         var queryParams = {};
+        /* try {
+          queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
+    
+        }catch(e) {
+    
+          console.log(this.toBinary(this.searchHotelInfo.location.city))
+        } */
         queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
         queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
         // queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
@@ -209,6 +231,9 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
                 _this.router.navigate(['hotel/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
             });
+        }
+        else {
+            console.log('here');
         }
     };
     HotelSearchWidgetComponent.prototype.selectedHotel = function (event) {

@@ -176,8 +176,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         if (this.isMapView) {
             return false;
         }
-        this.scrollLoading = true;
-        console.log(this.noOfDataToShowInitially, this.hotelListArray.length, this.hotelDetails.length);
+        this.scrollLoading = (this.hotelDetails.length != this.hotelListArray.length) ? true : false;
         setTimeout(function () {
             if (_this.noOfDataToShowInitially <= _this.hotelDetails.length) {
                 _this.noOfDataToShowInitially += _this.dataToLoad;
@@ -186,6 +185,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                 _this.scrollLoading = false;
             }
             else {
+                console.log('here');
                 _this.isFullListDisplayed = true;
                 _this.scrollLoading = false;
             }
