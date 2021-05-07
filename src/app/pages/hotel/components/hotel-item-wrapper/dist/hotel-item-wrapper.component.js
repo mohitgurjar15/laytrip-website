@@ -84,7 +84,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             }
         }
         else {
-            console.log(this.hotelDetails[roomNumber].activeSlide, "---");
+            // console.log(this.hotelDetails[roomNumber].activeSlide, "---")
             if (this.hotelDetails[roomNumber].activeSlide > 1) {
                 this.hotelDetails[roomNumber].activeSlide -= 1;
             }
@@ -131,7 +131,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             _this.currentPage = 1;
             _this.hotelListArray = _this.hotelDetails.slice(0, _this.noOfDataToShowInitially);
             _this.hotelList = __spreadArrays(_this.hotelListArray);
-            console.log("this.hotelListArray", _this.hotelListArray);
             if (_this.bounds) {
                 _this.checkMarkersInBounds(_this.bounds);
             }
@@ -151,7 +150,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
     //   }
     // }
     HotelItemWrapperComponent.prototype.checkOnError = function (brokenImage) {
-        console.log(brokenImage);
         for (var i = 0; i < this.hotelDetails.length; i++) {
             this.hotelDetails[i].galleryImages = [];
             for (var _i = 0, _a = this.hotelDetails[i].images; _i < _a.length; _i++) {
@@ -185,7 +183,6 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                 _this.scrollLoading = false;
             }
             else {
-                console.log('here');
                 _this.isFullListDisplayed = true;
                 _this.scrollLoading = false;
             }

@@ -68,13 +68,13 @@ export class SortHotelComponent implements OnInit {
     this.sortHotel.emit({ key, order });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  /* ngOnChanges(changes: SimpleChanges) {
     if (changes['hotelDetails'].currentValue != 'undefined') {
       if (this.hotelDetails != 'undefined') {
         this.hotelDetails = changes['hotelDetails'].currentValue.hotels;
       }
     }
-  }
+  } */
 
   toggleLowToHigh() {
     this.lowToHighToggle = !this.lowToHighToggle;

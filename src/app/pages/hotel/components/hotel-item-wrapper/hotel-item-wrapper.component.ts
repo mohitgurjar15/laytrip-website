@@ -110,7 +110,7 @@ export class HotelItemWrapperComponent implements OnInit {
       }
     }
     else {
-      console.log(this.hotelDetails[roomNumber].activeSlide, "---")
+      // console.log(this.hotelDetails[roomNumber].activeSlide, "---")
       if (this.hotelDetails[roomNumber].activeSlide > 1) {
         this.hotelDetails[roomNumber].activeSlide -= 1;
       }
@@ -161,7 +161,6 @@ export class HotelItemWrapperComponent implements OnInit {
       this.currentPage = 1;
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       this.hotelList = [...this.hotelListArray];
-      console.log("this.hotelListArray",this.hotelListArray)
       if (this.bounds) {
         this.checkMarkersInBounds(this.bounds)
       }
@@ -184,7 +183,6 @@ export class HotelItemWrapperComponent implements OnInit {
   // }
 
   checkOnError(brokenImage) {
-    console.log(brokenImage);
     for (let i = 0; i < this.hotelDetails.length; i++) {
       this.hotelDetails[i].galleryImages = [];
       for (let image of this.hotelDetails[i].images) {
@@ -217,7 +215,6 @@ export class HotelItemWrapperComponent implements OnInit {
         this.hotelList = [...this.hotelListArray];
         this.scrollLoading = false;
       } else {
-        console.log('here')
         this.isFullListDisplayed = true;
         this.scrollLoading = false;
       }

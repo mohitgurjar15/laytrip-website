@@ -118,7 +118,7 @@ export class HotelSearchComponent implements OnInit {
 
       }
     }
-
+   
     this.hotelService.setHotels(this.hotelDetails)
   }
 
@@ -140,14 +140,13 @@ export class HotelSearchComponent implements OnInit {
   }
 
   sortByRatings(data, key, way) {
-    
     if (typeof data === "undefined") {
       return data;
     } else {
       return data.sort(function (a, b) {
         var x = a[key];
         var y = b[key];
-        if (way === 'ASC') {
+        if (way === 'ASC') {       
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }
         if (way === 'DESC') {

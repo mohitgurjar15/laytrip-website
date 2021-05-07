@@ -55,13 +55,13 @@ var SortHotelComponent = /** @class */ (function () {
         this.sortType = 'lh_price';
         this.sortHotel.emit({ key: key, order: order });
     };
-    SortHotelComponent.prototype.ngOnChanges = function (changes) {
-        if (changes['hotelDetails'].currentValue != 'undefined') {
-            if (this.hotelDetails != 'undefined') {
-                this.hotelDetails = changes['hotelDetails'].currentValue.hotels;
-            }
+    /* ngOnChanges(changes: SimpleChanges) {
+      if (changes['hotelDetails'].currentValue != 'undefined') {
+        if (this.hotelDetails != 'undefined') {
+          this.hotelDetails = changes['hotelDetails'].currentValue.hotels;
         }
-    };
+      }
+    } */
     SortHotelComponent.prototype.toggleLowToHigh = function () {
         this.lowToHighToggle = !this.lowToHighToggle;
     };
