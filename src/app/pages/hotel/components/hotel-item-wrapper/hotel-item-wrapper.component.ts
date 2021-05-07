@@ -131,7 +131,7 @@ export class HotelItemWrapperComponent implements OnInit {
         }
       });
     }
-    let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+    let hotelinfo = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['location'])));
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
     }

@@ -52,7 +52,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-
+    
     window.scroll(0, 0);
     sessionStorage.removeItem("__insMode")
     sessionStorage.removeItem("__islt")

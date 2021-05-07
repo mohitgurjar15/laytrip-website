@@ -40,7 +40,7 @@ var HotelSearchComponent = /** @class */ (function () {
     HotelSearchComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
         this.renderer.addClass(document.body, 'cms-bgColor');
-        var info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+        var info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
         var payload = {
             check_in: this.route.snapshot.queryParams['check_in'],
             check_out: this.route.snapshot.queryParams['check_out'],

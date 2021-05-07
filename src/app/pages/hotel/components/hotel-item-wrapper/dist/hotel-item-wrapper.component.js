@@ -103,7 +103,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                 }
             });
         }
-        var hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+        var hotelinfo = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['location'])));
         if (hotelinfo) {
             this.hotelName = hotelinfo.city;
         }

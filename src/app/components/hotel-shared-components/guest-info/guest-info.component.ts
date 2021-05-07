@@ -41,7 +41,7 @@ export class GuestInfoComponent implements OnInit {
   ngOnInit() {
     this.loadJquery();
     if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
-      const info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+      const info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
       if (info) {
         this.roomsGroup = info;
       }

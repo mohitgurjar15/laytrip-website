@@ -112,7 +112,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                     city_id: this.route.snapshot.queryParams['city_id']
                 };
             if (this.route.snapshot.queryParams['location']) {
-                info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+                info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['location'])));
                 this.searchHotelInfo.location = info;
                 if (info) {
                     this.fromDestinationInfo.title = info.title;
@@ -123,7 +123,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                 }
             }
             if (this.route.snapshot.queryParams['itenery']) {
-                info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+                info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
                 this.searchHotelInfo.occupancies = info;
             }
         }
@@ -210,7 +210,16 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     HotelSearchWidgetComponent.prototype.searchHotels = function () {
         var _this = this;
         this.hotelSearchFormSubmitted = true;
+        if ($('.hotel_desination').val() == '') {
+            this.validSearch = false;
+        }
         var queryParams = {};
+        var encode = encodeURIComponent(JSON.stringify(this.searchHotelInfo.location));
+        // var encode_bota = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location)));
+        // console.log(encode)
+        // console.log(encode_bota)
+        // console.log(atob(encode_bota))
+        // console.log(decodeURIComponent(atob(encode_bota)))
         /* try {
           queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
     
@@ -224,8 +233,8 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
         queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
         queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
-        queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
-        queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
+        queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
+        queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location)));
         if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
             this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {

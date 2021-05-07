@@ -30,7 +30,7 @@ var GuestInfoComponent = /** @class */ (function () {
     GuestInfoComponent.prototype.ngOnInit = function () {
         this.loadJquery();
         if (this.route && this.route.snapshot && this.route.snapshot.queryParams && this.route.snapshot.queryParams['itenery']) {
-            var info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+            var info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
             if (info) {
                 this.roomsGroup = info;
             }
@@ -50,9 +50,18 @@ var GuestInfoComponent = /** @class */ (function () {
     };
     GuestInfoComponent.prototype.clickout = function (event) {
         if (this.eRef.nativeElement.contains(event.target)) {
-            if ((event.target.nextSibling && typeof event.target.nextSibling.classList != 'undefined' && event.target.nextSibling.classList != null && event.target.nextSibling.classList[1] == 'panel_hide') ||
-                event.target.nextSibling && typeof event.currentTarget.nextSibling.classList != 'undefined' && event.currentTarget.nextSibling.classList != null && event.currentTarget.nextSibling.classList[1] == 'panel_hide' ||
-                typeof event.target.offsetParent.nextElementSibling.classList != 'undefined' && event.target.offsetParent.nextElementSibling.classList != null && event.target.offsetParent.nextElementSibling.classList[1] == 'panel_hide') {
+            if ((event.target.nextSibling &&
+                typeof event.target.nextSibling.classList != 'undefined' &&
+                event.target.nextSibling.classList != null &&
+                event.target.nextSibling.classList[1] == 'panel_hide') ||
+                event.currentTarget.nextSibling &&
+                    typeof event.currentTarget.nextSibling.classList != 'undefined' &&
+                    event.currentTarget.nextSibling.classList != null &&
+                    event.currentTarget.nextSibling.classList[1] == 'panel_hide' ||
+                event.target.offsetParent.nextElementSibling &&
+                    typeof event.target.offsetParent.nextElementSibling.classList != 'undefined' &&
+                    event.target.offsetParent.nextElementSibling.classList != null &&
+                    event.target.offsetParent.nextElementSibling.classList[1] == 'panel_hide') {
                 $("#add_child_open").hide();
                 this.openDrawer = false;
             }
@@ -72,14 +81,14 @@ var GuestInfoComponent = /** @class */ (function () {
     GuestInfoComponent.prototype.counter = function (i) {
         return new Array(i);
     };
-    GuestInfoComponent.prototype.addRoom = function (index) {
+    GuestInfoComponent.prototype.addRoom = function () {
         if (typeof this.roomsGroup.rooms == 'undefined' || this.roomsGroup.rooms < 9) {
             this.roomsGroup.rooms += 1;
             this.totalPerson = this.getTotalPerson();
             this.changeValue.emit(this.roomsGroup);
         }
     };
-    GuestInfoComponent.prototype.removeRoom = function (index) {
+    GuestInfoComponent.prototype.removeRoom = function () {
         if (this.roomsGroup.rooms > 1) {
             this.roomsGroup.rooms -= 1;
             this.changeValue.emit(this.roomsGroup);

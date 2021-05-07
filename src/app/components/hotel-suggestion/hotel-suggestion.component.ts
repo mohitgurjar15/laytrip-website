@@ -30,6 +30,7 @@ export class HotelSuggestionComponent implements OnInit {
   }
 
   searchLocation(event) {
+    //  console.log(this.searchItem.length,event.keyCode)
     let notAllowedKey = [40, 38, 9, 37, 39];
     if (event.keyCode == 8) {
       //this.searchHotelAfterBackspace(this.searchItem, 'backspace');
