@@ -153,6 +153,9 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   toggleInbound() {
     this.isShowinbound = !this.isShowinbound;
   }
+  closeModal() {
+    $('#filter_mob_modal1').modal('hide');
+  }
 
   loadJquery() {
     //Start REsponsive Fliter js

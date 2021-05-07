@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../../../environments/environment';
 declare var $: any;
 
 @Component({
@@ -13,6 +14,7 @@ export class SortFlightComponent implements OnInit {
   @Input() flightDetails;
   sortType:string='lh_price';
   departureCode:string='';
+  s3BucketUrl = environment.s3BucketUrl;
   arrivalCode:string='';
   lowToHighToggle : boolean = false;
 
@@ -55,6 +57,10 @@ export class SortFlightComponent implements OnInit {
     this.sortType=name;
     this.sortFlight.emit({ key , order })
   }
+  closeModal() {
+    $('#filter_mob_modal2').modal('hide');
+  }
+
 
   resetSorting(key,order){
     this.sortType='lh_price';
