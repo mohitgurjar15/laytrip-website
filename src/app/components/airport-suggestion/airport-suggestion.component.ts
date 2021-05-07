@@ -115,4 +115,15 @@ export class AirportSuggestionComponent implements OnInit {
     }
   }
 
+  isSuggestionWithCountry(code){
+    
+    if(code == 'SCL'){
+      return true;
+    } else if(code == 'STI'){
+      return true;
+    } else {
+      return false;
+
+    }
+  }
 }

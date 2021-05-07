@@ -214,19 +214,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             this.validSearch = false;
         }
         var queryParams = {};
-        var encode = encodeURIComponent(JSON.stringify(this.searchHotelInfo.location));
-        // var encode_bota = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location)));
-        // console.log(encode)
-        // console.log(encode_bota)
-        // console.log(atob(encode_bota))
-        // console.log(decodeURIComponent(atob(encode_bota)))
-        /* try {
-          queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
-    
-        }catch(e) {
-    
-          console.log(this.toBinary(this.searchHotelInfo.location.city))
-        } */
         queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
         queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
         // queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');

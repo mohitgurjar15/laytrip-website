@@ -243,20 +243,6 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.validSearch = false;
     }
     let queryParams: any = {};    
-    var encode = encodeURIComponent(JSON.stringify(this.searchHotelInfo.location));
-
-    // var encode_bota = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location)));
-    // console.log(encode)
-    // console.log(encode_bota)
-    // console.log(atob(encode_bota))
-    // console.log(decodeURIComponent(atob(encode_bota)))
-    /* try {
-      queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
-
-    }catch(e) {
-
-      console.log(this.toBinary(this.searchHotelInfo.location.city))
-    } */
 
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
     queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
@@ -267,6 +253,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     
     queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
     queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location)));
+    
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
 

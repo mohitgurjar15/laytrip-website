@@ -103,6 +103,17 @@ var AirportSuggestionComponent = /** @class */ (function () {
             localStorage.setItem('__to', event.code);
         }
     };
+    AirportSuggestionComponent.prototype.isSuggestionWithCountry = function (code) {
+        if (code == 'SCL') {
+            return true;
+        }
+        else if (code == 'STI') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
     __decorate([
         core_1.Input()
     ], AirportSuggestionComponent.prototype, "type");

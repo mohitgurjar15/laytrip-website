@@ -84,7 +84,7 @@ export class SigninComponent implements OnInit {
             if (this.guestUserId) {
               this.userService.mapGuestUser(this.guestUserId).subscribe((res: any) => {
                 localStorage.setItem('$cartOver', res.cartOverLimit);
-                let urlData = this.commonFunction.decodeUrl(this.router.url)
+                let urlData = this.commonFunction.decodeUrl(this.router.url);
                 this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
                   this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
                 });

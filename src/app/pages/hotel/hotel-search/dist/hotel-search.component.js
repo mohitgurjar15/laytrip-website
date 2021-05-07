@@ -183,14 +183,15 @@ var HotelSearchComponent = /** @class */ (function () {
     HotelSearchComponent.prototype.getHotelSearchDataByModify = function (event) {
         var _this = this;
         var urlData = this.commonFunction.decodeUrl(this.router.url);
+        console.log(urlData);
         var locations = { city: event.city, country: event.country };
         var queryParams = {};
         queryParams.check_in = moment(event.check_in).format('YYYY-MM-DD');
         queryParams.check_out = moment(event.check_out).format('YYYY-MM-DD');
         queryParams.latitude = parseFloat(event.latitude);
         queryParams.longitude = parseFloat(event.longitude);
-        queryParams.itenery = btoa(JSON.stringify(event.occupancies));
-        queryParams.location = btoa(JSON.stringify(locations));
+        queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(event.occupancies)));
+        queryParams.location = btoa(encodeURIComponent(JSON.stringify(locations)));
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
             _this.router.navigate(["" + urlData.url], { queryParams: queryParams, queryParamsHandling: 'merge' });
         });
