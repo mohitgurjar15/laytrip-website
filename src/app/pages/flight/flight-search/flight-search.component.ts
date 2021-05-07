@@ -175,7 +175,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.fullPageLoading = event;
   }
 
-
   getCalenderPrice(payload) {
 
     let departureDate = this.route.snapshot.queryParams['departure_date'];
