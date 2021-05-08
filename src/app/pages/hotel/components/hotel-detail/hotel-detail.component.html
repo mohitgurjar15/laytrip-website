@@ -365,12 +365,12 @@
   <div class="container">
     <div class="search_tab_icons_wrps">
       <a class="tab_anch flight hover-link" [routerLink]="['/']">
-        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" alt="Flight Icon" />
-        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_gray.svg" alt="Flight Icon" />
+        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_pink.svg" alt="Flight Icon" />
+        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" alt="Flight Icon" />
       </a>
       <a class="active tab_anch" style="pointer-events: none;">
-        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
-        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_gray.svg" alt="Hotel Icon" />
+        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg" alt="Hotel Icon" />
+        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
       </a>
       <a class="tab_anch" style="pointer-events: none;">
         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
@@ -457,8 +457,7 @@
 
           <div class="map_wrapper">
             <!-- iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" -->
-            <agm-map [latitude]="hotelDetails?.latitude"
-              [longitude]="hotelDetails?.longitude" [zoom]="12">
+            <agm-map [latitude]="hotelDetails?.latitude" [longitude]="hotelDetails?.longitude" [zoom]="12">
               <agm-marker
                 [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/map-pinfull.svg', scaledSize: {height: 80,width: 48}}"
                 [latitude]="hotelDetails?.hotelLocations?.latitude"
@@ -493,7 +492,9 @@
                           <div class="box_img">
                             <div class="block_im">
                               <div class="hotel_list_img_wrp">
-                                <ngb-carousel *ngIf="room.galleryImages.length" #maincarousel [showNavigationArrows]="room.galleryImages.length>1?true:false" [interval]="false" [showNavigationIndicators]="false" (slide)=onRoomSlide($event,index)>
+                                <ngb-carousel *ngIf="room.galleryImages.length" #maincarousel
+                                  [showNavigationArrows]="room.galleryImages.length>1?true:false" [interval]="false"
+                                  [showNavigationIndicators]="false" (slide)=onRoomSlide($event,index)>
                                   <ng-template ngbSlide *ngFor="let image of room.galleryImages">
                                     <div class="picsum-img-wrapper">
                                       <img src={{image.medium}}
@@ -503,10 +504,12 @@
                                 </ngb-carousel>
                                 <div class="slider_dots" *ngIf="room.galleryImages.length>1">
                                   <ng-container *ngFor="let k of [].constructor(room.dots); let j = index">
-                                    <span [ngClass]="{'active':room.activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
+                                    <span [ngClass]="{'active':room.activeSlide==j+1}"
+                                      (click)="changeSlide(j+1)"></span>
                                   </ng-container>
                                 </div>
-                                <img *ngIf="room.galleryImages.length==0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image"
+                                <img *ngIf="room.galleryImages.length==0"
+                                  src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image"
                                   class="blank_image_box">
                               </div>
                             </div>
@@ -554,7 +557,9 @@
                 <div class="mobile_box">
 
                   <div class="hotel_list_img_wrp">
-                    <ngb-carousel *ngIf="room.galleryImages.length" #maincarousel [showNavigationArrows]="room.galleryImages.length>1?true:false" [interval]="false" [showNavigationIndicators]="false" (slide)=onRoomSlide($event,index)>
+                    <ngb-carousel *ngIf="room.galleryImages.length" #maincarousel
+                      [showNavigationArrows]="room.galleryImages.length>1?true:false" [interval]="false"
+                      [showNavigationIndicators]="false" (slide)=onRoomSlide($event,index)>
                       <ng-template ngbSlide *ngFor="let image of room.galleryImages">
                         <div class="picsum-img-wrapper">
                           <img src={{image.medium}}
@@ -567,8 +572,8 @@
                         <span [ngClass]="{'active':room.activeSlide==j+1}" (click)="changeSlide(j+1)"></span>
                       </ng-container>
                     </div>
-                    <img *ngIf="room.galleryImages.length==0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image"
-                      class="blank_image_box">
+                    <img *ngIf="room.galleryImages.length==0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg"
+                      alt="blank image" class="blank_image_box">
                   </div>
                   <div class="middle_part">
                     <div class="detail_info">
@@ -688,8 +693,7 @@
       <div class="right_box_wrps desk_right">
 
         <div class="map_wrapper">
-          <agm-map [latitude]="hotelDetails?.latitude"
-            [longitude]="hotelDetails?.longitude" [zoom]="12">
+          <agm-map [latitude]="hotelDetails?.latitude" [longitude]="hotelDetails?.longitude" [zoom]="12">
             <!--               iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
  -->
             <agm-marker

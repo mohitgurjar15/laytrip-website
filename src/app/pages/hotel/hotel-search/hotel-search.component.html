@@ -3,16 +3,16 @@
 <div class="listing_main_box">
   <div class="search_tab_listing_wrapper">
     <div class="container">
-      <div class="search_tab_icons_wrps">       
-        <a class="tab_anch hover-link"  (click)="moduleTabClick('flight')">
-          <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg"
+      <div class="search_tab_icons_wrps">
+        <a class="tab_anch hover-link" (click)="moduleTabClick('flight')">
+          <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_pink.svg"
             alt="Flight Icon" />
-          <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_gray.svg"
+          <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg"
             alt="Flight Icon" />
         </a>
         <a class="active tab_anch" style="pointer-events: none;">
-          <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
-          <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_gray.svg" alt="Hotel Icon" />
+          <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg" alt="Hotel Icon" />
+          <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
         </a>
         <a class="tab_anch" style="pointer-events: none;">
           <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
@@ -107,20 +107,20 @@
                 </div>
               </div>
               <section class="modal fade comman_modal mobile_modals" id="sort_mob_modal" data-backdrop="static"
-              data-keyboard="false">
-              <div class="modal-dialog ">
-                <div class="modal-content mobile_content_bar">
-                  <div class="filter_cnt">
-                    <div class="filter_saidbar">
-                      <div class="filter_by">
-                        <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetailsMain">
-                        </app-sort-hotel>
+                data-keyboard="false">
+                <div class="modal-dialog ">
+                  <div class="modal-content mobile_content_bar">
+                    <div class="filter_cnt">
+                      <div class="filter_saidbar">
+                        <div class="filter_by">
+                          <app-sort-hotel (sortHotel)="sortHotels($event)" [hotelDetails]="hotelDetailsMain">
+                          </app-sort-hotel>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
               <!-- <div id="responsive_sortby_show" class="responsive_sortby_show" [ngClass]="{'sortByOpen' : sortByOpen}"
                 *ngIf="!loading && !isNotFound && errorMessage==''">
                 <div class="filter_popup">
