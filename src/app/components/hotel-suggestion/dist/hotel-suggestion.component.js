@@ -29,7 +29,7 @@ var HotelSuggestionComponent = /** @class */ (function () {
         //  console.log(this.searchItem.length,event.keyCode)
         var notAllowedKey = [40, 38, 9, 37, 39];
         if (event.keyCode == 8) {
-            //this.searchHotelAfterBackspace(this.searchItem, 'backspace');
+            // this.searchHotelAfterBackspace(this.searchItem, 'backspace');
         }
         if ((this.searchItem.length == 0 && event.keyCode == 8)) {
             this.data = [];
@@ -56,9 +56,7 @@ var HotelSuggestionComponent = /** @class */ (function () {
     };
     HotelSuggestionComponent.prototype.searchHotel = function (searchItem) {
         var _this = this;
-        //console.log("searchItem1",searchItem)
-        //searchItem = this.searchHotelAfterBackspace(searchItem, 'backspace');
-        //console.log("searchItem2",searchItem)
+        // searchItem = this.searchHotelAfterBackspace(searchItem, 'backspace');
         this.loading = true;
         var searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
         this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe(function (response) {

@@ -33,7 +33,7 @@ export class HotelSuggestionComponent implements OnInit {
     //  console.log(this.searchItem.length,event.keyCode)
     let notAllowedKey = [40, 38, 9, 37, 39];
     if (event.keyCode == 8) {
-      //this.searchHotelAfterBackspace(this.searchItem, 'backspace');
+      // this.searchHotelAfterBackspace(this.searchItem, 'backspace');
     }
     if ((this.searchItem.length == 0 && event.keyCode == 8)) {
       this.data = [];
@@ -61,9 +61,7 @@ export class HotelSuggestionComponent implements OnInit {
   }
 
   searchHotel(searchItem) {
-    //console.log("searchItem1",searchItem)
-    //searchItem = this.searchHotelAfterBackspace(searchItem, 'backspace');
-    //console.log("searchItem2",searchItem)
+    // searchItem = this.searchHotelAfterBackspace(searchItem, 'backspace');
     this.loading = true;
     const searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
     this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
