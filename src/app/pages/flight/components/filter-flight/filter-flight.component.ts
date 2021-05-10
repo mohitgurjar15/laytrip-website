@@ -99,16 +99,16 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       this.priceOptions.floor = this.priceValue;
       this.priceOptions.ceil = this.priceHighValue;
       parseInt(this.filterFlightDetails.price_range.max_price) ?
-        parseInt(this.filterFlightDetails.price_range.max_price) : 0;
+      parseInt(this.filterFlightDetails.price_range.max_price) : 0;
 
     }
     if (this.filterFlightDetails && this.filterFlightDetails.partial_payment_price_range) {
       this.partialPaymentValue =
-        this.filterFlightDetails.partial_payment_price_range.min_price ? Math.floor(this.filterFlightDetails.partial_payment_price_range.min_price) : 0;
+      this.filterFlightDetails.partial_payment_price_range.min_price ? Math.floor(this.filterFlightDetails.partial_payment_price_range.min_price) : 0;
       this.minPartialPaymentPrice = Math.floor(this.partialPaymentValue);
 
       this.partialPaymentHighValue =
-        this.filterFlightDetails.partial_payment_price_range.max_price ? Math.ceil(this.filterFlightDetails.partial_payment_price_range.max_price) : 0;
+      this.filterFlightDetails.partial_payment_price_range.max_price ? Math.ceil(this.filterFlightDetails.partial_payment_price_range.max_price) : 0;
       this.maxPartialPaymentPrice = Math.ceil(this.partialPaymentHighValue);
       this.partialPaymentOptions.floor = this.partialPaymentValue;
       this.partialPaymentOptions.ceil = this.partialPaymentHighValue;

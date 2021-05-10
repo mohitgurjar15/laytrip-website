@@ -119,6 +119,9 @@ var FilterFlightComponent = /** @class */ (function () {
     FilterFlightComponent.prototype.toggleInbound = function () {
         this.isShowinbound = !this.isShowinbound;
     };
+    FilterFlightComponent.prototype.closeModal = function () {
+        $('#filter_mob_modal1').modal('hide');
+    };
     FilterFlightComponent.prototype.loadJquery = function () {
         //Start REsponsive Fliter js
         $(".responsive_filter_btn").click(function () {
