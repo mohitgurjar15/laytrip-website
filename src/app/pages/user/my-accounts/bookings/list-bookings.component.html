@@ -418,7 +418,8 @@
                     <div class="tab-pane" [id]="'completed_item'+j"
                       [ngClass]="{'active':selectedCompletedTabNumber===j}">
                       <app-flights *ngIf="cartItem.moduleId==1" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (laytripCartId)="cancelCartIdRemove($event)" (upCommingloadingValue)="loadUpcomming($event)"></app-flights>
-                  
+                      <app-hotels  *ngIf="cartItem.moduleId==3" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-hotels>
+
                     </div>
                   </ng-container>
                 </div>
