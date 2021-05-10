@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.PagesRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var auth_guard_1 = require("../guard/auth.guard");
 var about_us_component_1 = require("./about-us/about-us.component");
 var cancellation_policy_component_1 = require("./cancellation-policy/cancellation-policy.component");
 var ccpa_component_1 = require("./ccpa/ccpa.component");
@@ -46,6 +47,7 @@ var routes = [
             },
             {
                 path: 'account',
+                canActivate: [auth_guard_1.AuthGuard],
                 loadChildren: function () { return Promise.resolve().then(function () { return require('./user/user.module'); }).then(function (m) { return m.UserModule; }); }
             },
             {

@@ -161,12 +161,12 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     //Start REsponsive Fliter js
 
     $(".responsive_filter_btn").click(function () {
-      $("#responsive_filter_show").slideDown("slow");
+      $("#responsive_filter_show").slideDown();
       $("body").addClass('overflow-hidden');
     });
 
     $(".filter_close > a").click(function () {
-      $("#responsive_filter_show").slideUp("slow");
+      $("#responsive_filter_show").slideUp();
       $("body").removeClass('overflow-hidden');
     });
     //Close REsponsive Fliter js

@@ -1,13 +1,13 @@
 <div class="filter_main_wrapper desk_ver">
     <div class="accordion block_shortby" id="accordion2">
-        <div class="accordion-group" [ngClass]="{'active': is_open === true}">
-            <div class="accordion-heading" (click)="toggleFilter()"  aria-expanded="true" data-parent="#accordion2" href="#collapseTwo">
+        <div class="accordion-group" [ngClass]="{'active': is_open}">
+            <div class="accordion-heading" (click)="toggleFilter()"  aria-expanded="true">
                 <a class="accordion-toggle">
                     Filters
                 </a>
                 <!-- <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> Clear</a> -->
             </div>
-            <div id="collapseTwo" class="accordion-body collapse" [ngClass]="{'show': is_open === true}">
+            <div id="collapseTwo" class="accordion-body collapse" [ngClass]="{'show': is_open}">
                 <div class="accordion-inner">
                     <div class="fliter_block">
                         <div class="cmn_block price">

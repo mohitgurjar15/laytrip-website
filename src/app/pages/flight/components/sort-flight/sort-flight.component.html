@@ -1,15 +1,15 @@
 <div class="filter_saidbar desktop_sort">
     <div class="short_by">
         <div class="accordion block_shortby" id="accordion">
-            <div class="accordion-group" [ngClass]="{'active': lowToHighToggle === true}">
-                <div class="accordion-heading" (click)="toggleLowToHigh()" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <div class="accordion-group {{lowToHighToggle}}" [ngClass]="{'active': lowToHighToggle === true}">
+                <div class="accordion-heading"  aria-expanded="true"  (click)="toggleLowToHigh()" >
                     <a class="accordion-toggle">
                         {{'sort_by' | translate}}
                     </a>
                     <!-- <a class="anchor_link" [hidden]="lowToHighToggle !== true"
                         (click)="resetSorting('selling_price','ASC')"> Clear</a> -->
                 </div>
-                <div id="collapseOne" class="accordion-body collapse" [ngClass]="{'show': lowToHighToggle === true}">
+                <div id="collapseOne" class="accordion-body collapse {{lowToHighToggle}}" [ngClass]="{'show': lowToHighToggle}">
                     <div class="accordion-inner">
                         <div class="block_cmn price">
                             <h5 class="title_h5">{{'price' | translate}}
