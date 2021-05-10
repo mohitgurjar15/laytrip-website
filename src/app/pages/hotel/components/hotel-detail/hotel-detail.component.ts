@@ -4,10 +4,10 @@ import { HotelService } from '../../../../services/hotel.service';
 import { environment } from '../../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { CommonFunction } from '../../../../_helpers/common-function';
 import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
 import { CartService } from '../../../../services/cart.service';
+import { HomeService } from '../../../../services/home.service';
 declare var $: any;
 
 
@@ -52,9 +52,8 @@ export class HotelDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
-    private toastr: ToastrService,
+    public homeService: HomeService,
     private router: Router,
-    private commonFunction: CommonFunction,
     private modalService: NgbModal,
     private cartService:CartService
   ) { }
@@ -279,6 +278,13 @@ export class HotelDetailComponent implements OnInit {
       if(this.hotelRoomArray[roomNumber].activeSlide>1){
         this.hotelRoomArray[roomNumber].activeSlide-=1;
       }
+    }
+  }
+
+  moduleTabClick(tabName) {
+    if (tabName == 'flight') {
+      this.homeService.setActiveTab(tabName)
+      this.router.navigate(['/']);
     }
   }
 }

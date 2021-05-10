@@ -19,12 +19,11 @@ var environment_1 = require("../../../../../environments/environment");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var hotel_policy_popup_component_1 = require("../hotel-policy-popup/hotel-policy-popup.component");
 var HotelDetailComponent = /** @class */ (function () {
-    function HotelDetailComponent(route, hotelService, toastr, router, commonFunction, modalService, cartService) {
+    function HotelDetailComponent(route, hotelService, homeService, router, modalService, cartService) {
         this.route = route;
         this.hotelService = hotelService;
-        this.toastr = toastr;
+        this.homeService = homeService;
         this.router = router;
-        this.commonFunction = commonFunction;
         this.modalService = modalService;
         this.cartService = cartService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -253,6 +252,12 @@ var HotelDetailComponent = /** @class */ (function () {
             if (this.hotelRoomArray[roomNumber].activeSlide > 1) {
                 this.hotelRoomArray[roomNumber].activeSlide -= 1;
             }
+        }
+    };
+    HotelDetailComponent.prototype.moduleTabClick = function (tabName) {
+        if (tabName == 'flight') {
+            this.homeService.setActiveTab(tabName);
+            this.router.navigate(['/']);
         }
     };
     __decorate([

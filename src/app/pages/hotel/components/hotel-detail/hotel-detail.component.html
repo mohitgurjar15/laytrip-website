@@ -364,7 +364,7 @@
 <div class="search_tab_listing_wrapper" *ngIf="!loading">
   <div class="container">
     <div class="search_tab_icons_wrps">
-      <a class="tab_anch flight hover-link" [routerLink]="['/']">
+      <a class="tab_anch flight hover-link" (click)="moduleTabClick('flight')">
         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_pink.svg" alt="Flight Icon" />
         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" alt="Flight Icon" />
       </a>
