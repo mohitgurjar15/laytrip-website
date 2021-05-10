@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
     this.host = window.location.host;
     this.getModules();
     this.loadJquery();
-    this.getDeal(this.moduleId);
     localStorage.removeItem('__from');
     localStorage.removeItem('__to');
     setTimeout(() => {
@@ -59,14 +58,26 @@ export class HomeComponent implements OnInit {
     }, 5000);
 
     this.$tabName = this.homeService.getActiveTabName.subscribe(tabName=> {
-      if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){        
+      if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){     
         let tab : any = tabName;
         if(tab == 'flight'){
+          this.moduleId = 1;
           $('.flight-tab').trigger('click');
+        } else if(tab == 'hotel') {
+          this.moduleId=3;
+          $('.hotel-tab').trigger('click');          
         }
       }
     });
+    //get deal with module id and also with active tab
+    this.getDeal(this.moduleId);
     this.$tabName.unsubscribe();
+    this.homeService.setActiveTab('');
+    this.homeService.getActiveTabName.subscribe(tabName=> {
+      console.log(tabName)
+      if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){  }
+      
+    });
   }
 
   openCookiePolicyPopup() {
@@ -199,7 +210,6 @@ export class HomeComponent implements OnInit {
 
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'bg_color');
-
   }
 
   setToString(newItem: string) {

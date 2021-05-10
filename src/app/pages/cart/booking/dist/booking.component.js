@@ -55,6 +55,7 @@ var BookingComponent = /** @class */ (function () {
         this.add_new_card = false;
         this.totalCard = 0;
         this.modules = [];
+        this.ismaxCartAdded = false;
         //this.totalLaycredit();
         this.getCountry();
     }
@@ -327,7 +328,14 @@ var BookingComponent = /** @class */ (function () {
     };
     BookingComponent.prototype.saveAndSearch = function () {
         var _this = this;
-        this.router.navigate(['/']);
+        this.ismaxCartAdded = false;
+        var totalCarts = localStorage.getItem('$crt');
+        if (totalCarts == 10) {
+            this.ismaxCartAdded = true;
+        }
+        else {
+            this.router.navigate(['/']);
+        }
         return false;
         this.validationErrorMessage = '';
         if (this.isValidTravelers) {
@@ -530,6 +538,9 @@ var BookingComponent = /** @class */ (function () {
     };
     BookingComponent.prototype.removeAllAlertError = function () {
         this.isAllAlertClosed = true;
+    };
+    BookingComponent.prototype.removeMaxCartAlertError = function () {
+        this.ismaxCartAdded = false;
     };
     __decorate([
         core_1.ViewChild(add_card_component_1.AddCardComponent, { static: false })

@@ -200,8 +200,13 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             this.previousInfoWindow = infoWindow;
         else {
             this.infoWindowOpened = infoWindow;
+            console.log(this.previousInfoWindow);
             if (this.previousInfoWindow != null) {
                 this.previousInfoWindow.close();
+            }
+            else {
+                infoWindow.close();
+                console.log('error');
             }
         }
         this.previousInfoWindow = infoWindow;

@@ -37,7 +37,6 @@ var HomeComponent = /** @class */ (function () {
         this.host = window.location.host;
         this.getModules();
         this.loadJquery();
-        this.getDeal(this.moduleId);
         localStorage.removeItem('__from');
         localStorage.removeItem('__to');
         setTimeout(function () {
@@ -47,11 +46,23 @@ var HomeComponent = /** @class */ (function () {
             if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) {
                 var tab = tabName;
                 if (tab == 'flight') {
+                    _this.moduleId = 1;
                     $('.flight-tab').trigger('click');
+                }
+                else if (tab == 'hotel') {
+                    _this.moduleId = 3;
+                    $('.hotel-tab').trigger('click');
                 }
             }
         });
+        //get deal with module id and also with active tab
+        this.getDeal(this.moduleId);
         this.$tabName.unsubscribe();
+        this.homeService.setActiveTab('');
+        this.homeService.getActiveTabName.subscribe(function (tabName) {
+            console.log(tabName);
+            if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) { }
+        });
     };
     HomeComponent.prototype.openCookiePolicyPopup = function () {
         if (!this.cookieService.get('__cke')) {

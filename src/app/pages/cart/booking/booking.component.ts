@@ -67,6 +67,8 @@ export class BookingComponent implements OnInit {
   add_new_card = false;
   totalCard: number = 0;
   modules = [];
+  ismaxCartAdded : boolean = false;
+
   constructor(
     private router: Router,
     private flightService: FlightService,
@@ -385,7 +387,13 @@ export class BookingComponent implements OnInit {
   }
 
   saveAndSearch() {
-    this.router.navigate(['/']);
+    this.ismaxCartAdded = false;
+    let totalCarts : any = localStorage.getItem('$crt');
+    if( totalCarts == 10){
+      this.ismaxCartAdded = true;
+    } else {
+      this.router.navigate(['/']);
+    }
     return false;
     this.validationErrorMessage = '';
     if (this.isValidTravelers) {
@@ -604,5 +612,8 @@ export class BookingComponent implements OnInit {
 
   removeAllAlertError() {
     this.isAllAlertClosed = true;
+  }
+  removeMaxCartAlertError() {
+    this.ismaxCartAdded = false;
   }
 }
