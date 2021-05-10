@@ -60,7 +60,6 @@ var HomeComponent = /** @class */ (function () {
         this.$tabName.unsubscribe();
         this.homeService.setActiveTab('');
         this.homeService.getActiveTabName.subscribe(function (tabName) {
-            console.log(tabName);
             if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) { }
         });
     };

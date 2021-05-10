@@ -27,6 +27,7 @@ export class PagesComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.router.url)
     this.checkUserValidate();
     document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
     this.lottieConfig = {
