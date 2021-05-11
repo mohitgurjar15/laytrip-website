@@ -230,15 +230,21 @@ export class HotelItemWrapperComponent implements OnInit {
     }
   }
 
-  displayHotelDetails(hotelId, infoWindow, type) {
+  openInfoWindow(infoWindow, gm) {
     infoWindow.open();
+  }
+
+  closeInfoWindow(infoWindow, gm) {
+    infoWindow.close();
+  }
+
+  displayHotelDetails(hotelId, infoWindow, type) {
     if (this.previousInfoWindow == null) {
-      this.infoWindowOpened = infoWindow;
+      infoWindow.open();
       this.previousInfoWindow = infoWindow;
     } else {
       this.infoWindowOpened = infoWindow;
       if (this.previousInfoWindow != null) {
-        console.log(this);
         this.previousInfoWindow.close();
         this.previousInfoWindow = null;
       }
