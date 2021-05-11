@@ -115,6 +115,10 @@ var routes = [
                 component: ccpa_component_1.CcpaComponent
             },
         ]
+    },
+    {
+        path: ':id',
+        component: pages_component_1.PagesComponent
     }
 ];
 var PagesRoutingModule = /** @class */ (function () {

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { GenericService } from '../services/generic.service';
 import { redirectToLogin } from '../_helpers/jwt.helper';
 
@@ -15,8 +15,11 @@ export class PagesComponent implements OnInit {
   constructor(
     private router: Router,
     private genericService: GenericService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    
   ) {
+    console.log(this.route.snapshot.params['id']    )
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Trigger when route change

@@ -7,10 +7,10 @@ const routes: Routes = [
     path: '', 
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) 
   },
-  { 
+  /* { 
     path: '**', 
     redirectTo: 'not-found' 
-  },
+  }, */
   {
     path : 'not-found',
     component : NotFoundComponent

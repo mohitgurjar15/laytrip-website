@@ -11,11 +11,13 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var jwt_helper_1 = require("../_helpers/jwt.helper");
 var PagesComponent = /** @class */ (function () {
-    function PagesComponent(router, genericService, cd) {
+    function PagesComponent(router, genericService, cd, route) {
         var _this = this;
         this.router = router;
         this.genericService = genericService;
         this.cd = cd;
+        this.route = route;
+        console.log(this.route.snapshot.params['id']);
         this.router.events.subscribe(function (event) {
             if (event instanceof router_1.NavigationStart) {
                 // Trigger when route change

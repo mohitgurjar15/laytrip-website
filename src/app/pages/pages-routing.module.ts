@@ -6,7 +6,6 @@ import { CancellationPolicyComponent } from './cancellation-policy/cancellation-
 import { CcpaComponent } from './ccpa/ccpa.component';
 import { CmsPagesComponent } from './cms-pages/cms-pages.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CovidPageComponent } from './covid-page/covid-page.component';
 import { DownloadAppComponent } from './download-app/download-app.component';
 import { FaqComponent } from './faq/faq.component';
@@ -107,7 +106,11 @@ const routes: Routes = [
                 path: 'ccpa',
                 component: CcpaComponent
             },
-        ]
+        ],
+    },
+    {
+        path: ':id',
+        component: PagesComponent
     }
 ];
 
