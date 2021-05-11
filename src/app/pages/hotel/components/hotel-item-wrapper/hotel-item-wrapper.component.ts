@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChildren, QueryList, ChangeDetectorRef, ViewChild, NgZone } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
@@ -79,7 +79,8 @@ export class HotelItemWrapperComponent implements OnInit {
     private commonFunction: CommonFunction,
     private genericService: GenericService,
     private hotelService: HotelService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private _zone: NgZone
   ) {
 
     this.galleryOptions = [
@@ -95,6 +96,7 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
+    // this.gm.nativeElement;
     this.carousel.toArray().forEach(el => {
     });
   }
@@ -230,15 +232,18 @@ export class HotelItemWrapperComponent implements OnInit {
 
   displayHotelDetails(hotelId, infoWindow, type) {
     infoWindow.open();
-    if (this.previousInfoWindow == null)
+    if (this.previousInfoWindow == null) {
+      this.infoWindowOpened = infoWindow;
       this.previousInfoWindow = infoWindow;
-    else {
+    } else {
       this.infoWindowOpened = infoWindow;
       if (this.previousInfoWindow != null) {
+        console.log(this);
         this.previousInfoWindow.close();
+        this.previousInfoWindow = null;
       }
     }
-    this.previousInfoWindow = infoWindow
+    this.previousInfoWindow = infoWindow;
 
     if (type === 'click') {
 
