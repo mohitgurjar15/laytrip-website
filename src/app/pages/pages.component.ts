@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { Event, NavigationStart, Router } from '@angular/router';
 import { GenericService } from '../services/generic.service';
 import { redirectToLogin } from '../_helpers/jwt.helper';
 
@@ -27,7 +27,6 @@ export class PagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.router.url)
     this.checkUserValidate();
     document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
     this.lottieConfig = {

@@ -19,9 +19,6 @@ var SortHotelComponent = /** @class */ (function () {
     }
     SortHotelComponent.prototype.ngOnInit = function () {
         if (this.route.snapshot.queryParams['location']) {
-            console.log(this.route.snapshot.queryParams);
-            console.log(this.route.snapshot.queryParams['location']);
-            console.log(atob(this.route.snapshot.queryParams['location']));
             var info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['location'])));
             if (info) {
                 this.locationName = info.city;

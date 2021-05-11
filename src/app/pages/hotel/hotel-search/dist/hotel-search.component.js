@@ -183,7 +183,6 @@ var HotelSearchComponent = /** @class */ (function () {
     HotelSearchComponent.prototype.getHotelSearchDataByModify = function (event) {
         var _this = this;
         var urlData = this.commonFunction.decodeUrl(this.router.url);
-        console.log(urlData);
         var locations = { city: event.city, country: event.country };
         var queryParams = {};
         queryParams.check_in = moment(event.check_in).format('YYYY-MM-DD');

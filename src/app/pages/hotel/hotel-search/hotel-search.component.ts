@@ -197,7 +197,6 @@ export class HotelSearchComponent implements OnInit {
 
   getHotelSearchDataByModify(event) {
     let urlData = this.commonFunction.decodeUrl(this.router.url);
-    console.log(urlData)
     let locations = { city: event.city, country: event.country };
     let queryParams: any = {};
     queryParams.check_in = moment(event.check_in).format('YYYY-MM-DD');
