@@ -17,7 +17,12 @@ var PagesComponent = /** @class */ (function () {
         this.genericService = genericService;
         this.cd = cd;
         this.route = route;
-        console.log(this.route.snapshot.params['id']);
+        if (this.route.snapshot.params['id']) {
+            this.checkValidAffiliated(this.route.snapshot.params['id']);
+        }
+        else {
+            console.log('here', this.route.snapshot.params);
+        }
         this.router.events.subscribe(function (event) {
             if (event instanceof router_1.NavigationStart) {
                 // Trigger when route change
@@ -33,6 +38,9 @@ var PagesComponent = /** @class */ (function () {
             autoplay: true,
             loop: true
         };
+    };
+    PagesComponent.prototype.checkValidAffiliated = function (affiliated_id) {
+        console.log(affiliated_id);
     };
     PagesComponent.prototype.checkUserValidate = function () {
         var token = localStorage.getItem('_lay_sess');

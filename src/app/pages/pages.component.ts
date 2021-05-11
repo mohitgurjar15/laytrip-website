@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
+import { cookieServiceFactory } from 'ngx-cookie';
 import { GenericService } from '../services/generic.service';
 import { redirectToLogin } from '../_helpers/jwt.helper';
 
@@ -19,7 +20,11 @@ export class PagesComponent implements OnInit {
     private route: ActivatedRoute,
     
   ) {
-    console.log(this.route.snapshot.params['id']    )
+    if(this.route.snapshot.params['id']){
+      this.checkValidAffiliated(this.route.snapshot.params['id'])
+    } else {
+      console.log('here',this.route.snapshot.params)
+    }
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Trigger when route change
@@ -39,6 +44,9 @@ export class PagesComponent implements OnInit {
     };
   }
 
+  checkValidAffiliated(affiliated_id){
+    console.log(affiliated_id)
+  }
   checkUserValidate() {
     var token = localStorage.getItem('_lay_sess');
     if (token) {
