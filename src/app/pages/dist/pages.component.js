@@ -44,7 +44,8 @@ var PagesComponent = /** @class */ (function () {
     PagesComponent.prototype.checkIsValidUser = function () {
         var _this = this;
         this.route.queryParams.subscribe(function (queryParams) {
-            if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']) {
+            if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']
+                && typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage') {
                 localStorage.setItem("referral_id", _this.route.snapshot.queryParams['utm_source']);
             }
             else {

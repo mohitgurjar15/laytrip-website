@@ -50,7 +50,9 @@ export class PagesComponent implements OnInit {
 
   checkIsValidUser() {
       this.route.queryParams.subscribe(queryParams => {
-      if(typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']){      
+      if(typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']
+      && typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
+      ){      
         localStorage.setItem("referral_id",this.route.snapshot.queryParams['utm_source'])
       }else {
         localStorage.removeItem("referral_id")
