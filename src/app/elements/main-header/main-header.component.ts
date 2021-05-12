@@ -126,7 +126,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.cartItems = cartItems;
         this.cartService.setCartItems(cartItems);
         if (cartItems) {
-          this.cartItemsCount = res.count;
+          this.cartItemsCount = res.data.length;
           localStorage.setItem('$crt', this.cartItemsCount);
         }
         this.calculateInstalment(cartItems);
