@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   
+
     this.signupForm = this.formBuilder.group({
       first_name: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]], //old patern: '^[a-zA-Z]+[a-zA-Z]{2,}$'
       last_name: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}')]],
@@ -115,7 +115,7 @@ export class SignupComponent implements OnInit {
     } else {
       if (this.commonFunction.isRefferal()) {
         let parms = this.commonFunction.getRefferalParms();
-        this.signupForm.get('referral_id').setValue(parms.utm_source ? parms.utm_source : '');
+        this.signupForm.controls.referral_id.setValue(parms.utm_source ? parms.utm_source : '');
       }
       this.userService.signup(this.signupForm.value).subscribe((data: any) => {
         this.emailForVerifyOtp = this.signupForm.value.email;

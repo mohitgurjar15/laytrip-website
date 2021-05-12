@@ -25,7 +25,7 @@ export class UserService {
   handleError(error) {
     let errorMessage = {};
     if (error.status == 0) {
-      return throwError({status:error.status, message: "API Server is not responding" });
+      return throwError({ status: error.status, message: "API Server is not responding" });
     }
     if (error.error instanceof ErrorEvent) {
       // client-side error
@@ -68,6 +68,7 @@ export class UserService {
       "device_token": "123abc#$%456",
       "app_version": "1.0",
       "os_version": "7.0",
+      "referral_id": formValue.referral_id ? formValue.referral_id : ''
     };
 
     return this.http.post(this.apiURL + 'v1/auth/signup', data)
@@ -109,22 +110,22 @@ export class UserService {
 
   deleteAccount(isRequireBackupFile) {
     const accessToken = localStorage.getItem('_lay_sess');
-  /*   const options = {
-      headers: {
-          Authorization: `Bearer ${accessToken}`,
-          
-      },
-    } */
+    /*   const options = {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            
+        },
+      } */
     const options = {
       headers: {
-        Authorization: `Bearer ${accessToken}`,          
+        Authorization: `Bearer ${accessToken}`,
       },
       body: {
         requireBackupFile: isRequireBackupFile
       }
     }
     console.log(options)
-    return this.http.delete( this.apiURL + 'v1/user/account/request', options)
+    return this.http.delete(this.apiURL + 'v1/user/account/request', options)
   }
 
   changePassword(data) {
@@ -147,7 +148,7 @@ export class UserService {
   getPreference() {
     return this.http.get(this.apiURL + 'v1/auth/preference', this.commonFunction.setHeaders());
   }
-  getBookings(pageNumber, limit,filterForm) {
+  getBookings(pageNumber, limit, filterForm) {
     let queryString = "";
     if (filterForm && filterForm != 'undefined') {
       if (filterForm.bookingId) {
@@ -167,7 +168,7 @@ export class UserService {
       `${this.apiURL}v1/booking/user-booking-list?module_id=1&limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders());
   }
 
-  getPaymentHistory(pageNumber, limit, filterForm,payment_status) {
+  getPaymentHistory(pageNumber, limit, filterForm, payment_status) {
 
     let queryString = "";
     if (filterForm && filterForm != 'undefined') {
@@ -220,23 +221,23 @@ export class UserService {
   addNewPoints(data) {
     return this.http.post(this.apiURL + 'v1/laytrip-point/add', data, this.commonFunction.setHeaders());
   }
-  
+
   subscribeNow(email) {
-    const data = {email:email};
+    const data = { email: email };
     return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
   }
-  
-  emailVeryfiy(email){
+
+  emailVeryfiy(email) {
     return this.http.get(`${this.apiURL}v1/auth/verify-email-id?email=${email}`, this.commonFunction.setHeaders())
   }
 
-  registerGuestUser(data){
-    
-    return this.http.post(`${this.apiURL}v1/auth/guest-user`,data)
+  registerGuestUser(data) {
+
+    return this.http.post(`${this.apiURL}v1/auth/guest-user`, data)
   }
 
-  mapGuestUser(guestUserId){
-    return this.http.patch(`${this.apiURL}v1/cart/map-guest-user/${guestUserId}`,{},this.commonFunction.setHeaders())
+  mapGuestUser(guestUserId) {
+    return this.http.patch(`${this.apiURL}v1/cart/map-guest-user/${guestUserId}`, {}, this.commonFunction.setHeaders())
   }
 }
 
