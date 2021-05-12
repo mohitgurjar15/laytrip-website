@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ViewChild, R
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MustMatch } from '../../../_helpers/must-match.validators';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -45,10 +45,21 @@ export class SignupComponent implements OnInit {
     public router: Router,
     public renderer: Renderer2,
     public commonFunction: CommonFunction,
-
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(queryParams => {
+      if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']
+        && typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
+      ) {
+        console.log(this.route.snapshot.queryParams['utm_source']);
+        localStorage.setItem("referral_id", this.route.snapshot.queryParams['utm_source'])
+      } else {
+        localStorage.removeItem("referral_id")
+      }
+      // do something with the query params
+    });
     this.signupForm = this.formBuilder.group({
       first_name: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]], //old patern: '^[a-zA-Z]+[a-zA-Z]{2,}$'
       last_name: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}')]],
@@ -56,6 +67,7 @@ export class SignupComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
       confirm_password: ['', Validators.required],
       checked: ['', Validators.required],
+      referral_id: [''],
     }, {
       validators: MustMatch('password', 'confirm_password'),
     });
@@ -95,7 +107,7 @@ export class SignupComponent implements OnInit {
       this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
     }
   }
- 
+
   captchaResponse(response: string) {
     this.isCaptchaValidated = true;
   }
@@ -111,7 +123,7 @@ export class SignupComponent implements OnInit {
       this.loading = false;
       return;
     } else {
-
+      this.signupForm.get('referral_id').setValue(this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : '');
       this.userService.signup(this.signupForm.value).subscribe((data: any) => {
         this.emailForVerifyOtp = this.signupForm.value.email;
         this.submitted = this.loading = false;
