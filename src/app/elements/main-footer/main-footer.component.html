@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="ftr_flex_row">
-                    <a [routerLink]="['/']" class="logo_w">
+                    <a [routerLink]="['/']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" class="logo_w">
                         <img src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Logo" />
                     </a>
                 </div>

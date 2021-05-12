@@ -87,7 +87,6 @@ var SigninComponent = /** @class */ (function () {
                     }
                 }
             }, function (error) {
-                console.log(error);
                 _this.submitted = _this.loading = false;
                 if (error.status == 406) {
                     _this.emailForVerifyOtp = _this.loginForm.value.email;
