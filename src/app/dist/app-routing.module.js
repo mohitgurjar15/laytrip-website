@@ -15,10 +15,10 @@ var routes = [
         path: '',
         loadChildren: function () { return Promise.resolve().then(function () { return require('./pages/pages.module'); }).then(function (m) { return m.PagesModule; }); }
     },
-    /* {
-      path: '**',
-      redirectTo: 'not-found'
-    }, */
+    {
+        path: '**',
+        redirectTo: 'not-found'
+    },
     {
         path: 'not-found',
         component: not_found_component_1.NotFoundComponent

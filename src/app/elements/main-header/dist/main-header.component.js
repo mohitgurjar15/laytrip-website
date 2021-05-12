@@ -236,7 +236,13 @@ var MainHeaderComponent = /** @class */ (function () {
     MainHeaderComponent.prototype.redirectToPayment = function () {
         this.cartItemsCount = JSON.parse(localStorage.getItem('$crt')) || 0;
         if (this.cartItemsCount > 0) {
-            this.router.navigate(["cart/booking"]);
+            if (this.commonFunction.isRefferal()) {
+                var parms = this.commonFunction.getRefferalParms();
+                this.router.navigate(["cart/booking"], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+            }
+            else {
+                this.router.navigate(["cart/booking"]);
+            }
         }
         else {
             this.openEmptyCartPopup();
