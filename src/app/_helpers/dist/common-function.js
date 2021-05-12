@@ -209,29 +209,11 @@ var CommonFunction = /** @class */ (function () {
     CommonFunction.prototype.convertTime = function (time, sourceFormat, targetFormat) {
         return moment(time, sourceFormat).format(targetFormat);
     };
-    CommonFunction.prototype.getRefferalCode = function () {
-        var _this = this;
-        this.route.queryParams.subscribe(function (queryParams) {
-            if ((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
-                && (typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage')) {
-                return _this.route.snapshot.queryParams['utm_source'];
-            }
-            else {
-                return {};
-            }
-        });
-    };
-    CommonFunction.prototype.checkIsRefferalUrl = function () {
-        this.route.queryParams.subscribe(function (queryParams) {
-            if ((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
-                && (typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage')) {
-                // console.log(true)
-                return true;
-            }
-            else {
-                return false;
-            }
-        });
+    CommonFunction.prototype.isRefferal = function () {
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source'] &&
+            this.route.snapshot.queryParams['utm_medium']) {
+            return this.route.snapshot.queryParams['utm_source'];
+        }
     };
     CommonFunction = __decorate([
         core_1.Injectable({

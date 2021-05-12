@@ -242,33 +242,15 @@ export class CommonFunction {
             event.preventDefault();
     }
 
-    convertTime(time,sourceFormat,targetFormat){
+    convertTime(time, sourceFormat, targetFormat) {
         return moment(time, sourceFormat).format(targetFormat)
     }
 
-    getRefferalCode() {
-        this.route.queryParams.subscribe(queryParams => {
-            
-            if((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
-            && (typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
-            )){
-                return  this.route.snapshot.queryParams['utm_source'];
-            } else {
-                return {};
-            }
-        });
-    }
-    checkIsRefferalUrl() {
-        this.route.queryParams.subscribe(queryParams => {            
-            if((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
-            && (typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
-            )){
-                // console.log(true)
-                return true;
-            } else {
-                return false;                            
-            }
-        });
+    isRefferal() {
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source'] &&
+            this.route.snapshot.queryParams['utm_medium']) {
+            return this.route.snapshot.queryParams['utm_source'];
+        }
     }
 }
 

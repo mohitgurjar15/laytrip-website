@@ -55,21 +55,21 @@
                                         [routerLink]="isRefferal() ? ['/about'] : ['/about']"
                                         [queryParams]="isRefferal() ? { lp: isRefferal() } : ''"
                                             [innerHTML]="'laytrip_info_page_title_3' | translate"></a> -->
-                                        <a  class="{{getRefferalCode()}}"
+                                        <a  class="{{commonFunction.isRefferal()}}"
                                         [routerLink]="['/about']"
-                                        [queryParams]="getRefferalCode() ? { utm_source: getRefferalCode() } : { utm_source: getRefferalCode() }"
+                                        [queryParams]="commonFunction.isRefferal() ? { utm_source: commonFunction.isRefferal() } : { utm_source: commonFunction.isRefferal() }"
                                             [innerHTML]="'laytrip_info_page_title_3' | translate"></a>
                                     </li>
                                     <li>
                                         <a [routerLink]="['/faq']"
-                                        [queryParams]="commonFunction.checkIsRefferalUrl() ? { utm_source: getRefferalCode() } : ''"
+                                        [queryParams]="commonFunction.isRefferal() ? { utm_source: commonFunction.isRefferal() } : ''"
 
                                             [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
                                     </li>
                                     <li>
                                         <a 
                                         [routerLink]="['/privacy-policy']"
-                                        [queryParams]="commonFunction.checkIsRefferalUrl() ? { utm_source: getRefferalCode() } : ''"
+                                        [queryParams]="commonFunction.isRefferal() ? { utm_source: commonFunction.isRefferal() } : ''"
                                         >Privacy</a>
                                     </li>
                                 </ul>
@@ -79,7 +79,7 @@
                                     <li>
                                         <a 
                                         [routerLink]="['/terms']"
-                                        [queryParams]="commonFunction.checkIsRefferalUrl() ? { utm_source: getRefferalCode() } : ''"
+                                        [queryParams]="commonFunction.isRefferal() ? { utm_source: commonFunction.isRefferal() } : ''"
                                         >Terms</a>
                                     </li>
                                     <li>
@@ -90,7 +90,7 @@
                                     <li>
                                         <a
                                         [routerLink]="['/ccpa']"
-                                        [queryParams]="commonFunction.checkIsRefferalUrl() ? { utm_source: getRefferalCode() } : ''"
+                                        [queryParams]="commonFunction.isRefferal() ? { utm_source: commonFunction.isRefferal() } : ''"
                                        >Do Not Sell</a>
                                     </li>
                                 </ul>
