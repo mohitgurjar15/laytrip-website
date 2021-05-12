@@ -70,6 +70,7 @@ export class MainFooterComponent implements OnInit {
 
   
   ngOnInit(): void {
+    console.log(this.commonFunction.isRefferal())
     this.getLangunages();
     this.getCurrencies();
     this.loadJquery();
@@ -199,4 +200,8 @@ export class MainFooterComponent implements OnInit {
             }
         });
     }
+
+   test(){
+     return {sd:'dfd',sdsd:'sdsd'}
+   } 
 }

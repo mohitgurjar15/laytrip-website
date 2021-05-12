@@ -58,6 +58,7 @@ var MainFooterComponent = /** @class */ (function () {
         this.countryCode = this.commonFunction.getUserCountry();
     }
     MainFooterComponent.prototype.ngOnInit = function () {
+        console.log(this.commonFunction.isRefferal());
         this.getLangunages();
         this.getCurrencies();
         this.loadJquery();
@@ -168,6 +169,9 @@ var MainFooterComponent = /** @class */ (function () {
                 return {};
             }
         });
+    };
+    MainFooterComponent.prototype.test = function () {
+        return { sd: 'dfd', sdsd: 'sdsd' };
     };
     MainFooterComponent = __decorate([
         core_1.Component({

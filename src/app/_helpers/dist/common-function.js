@@ -212,7 +212,16 @@ var CommonFunction = /** @class */ (function () {
     CommonFunction.prototype.isRefferal = function () {
         if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source'] &&
             this.route.snapshot.queryParams['utm_medium']) {
-            return this.route.snapshot.queryParams['utm_source'];
+            return true;
+        }
+    };
+    CommonFunction.prototype.getRefferalParms = function () {
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source'] &&
+            this.route.snapshot.queryParams['utm_medium']) {
+            return {
+                utm_source: this.route.snapshot.queryParams['utm_source'],
+                utm_medium: this.route.snapshot.queryParams['utm_medium']
+            };
         }
     };
     CommonFunction = __decorate([
