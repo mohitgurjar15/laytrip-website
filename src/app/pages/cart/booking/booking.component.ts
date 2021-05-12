@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 declare var $: any;
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { FlightService } from '../../../services/flight.service';
@@ -67,7 +67,7 @@ export class BookingComponent implements OnInit {
   add_new_card = false;
   totalCard: number = 0;
   modules = [];
-  ismaxCartAdded : boolean = false;
+  ismaxCartAdded: boolean = false;
 
   constructor(
     private router: Router,
@@ -77,7 +77,8 @@ export class BookingComponent implements OnInit {
     private checkOutService: CheckOutService,
     private cartService: CartService,
     private commonFunction: CommonFunction,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private route: ActivatedRoute,
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -388,8 +389,8 @@ export class BookingComponent implements OnInit {
 
   saveAndSearch() {
     this.ismaxCartAdded = false;
-    let totalCarts : any = localStorage.getItem('$crt');
-    if( totalCarts == 10){
+    let totalCarts: any = localStorage.getItem('$crt');
+    if (totalCarts == 10) {
       this.ismaxCartAdded = true;
     } else {
       if(this.commonFunction.isRefferal()){
@@ -444,7 +445,7 @@ export class BookingComponent implements OnInit {
     for (let i in Object.keys(this.travelerForm.controls)) {
       message = '';
       for (let j = 0; j < this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++) {
-        console.log(this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j] )
+        console.log(this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j])
         if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status == 'INVALID') {
 
 
@@ -594,12 +595,19 @@ export class BookingComponent implements OnInit {
         }
         let cartData = {
           cart_id: this.carts[i].id,
-          travelers: travelers
+          travelers: travelers,
+          referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
         }
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
+            let queryParamsNew: any = {};
             this.loading = false;
-            this.router.navigate(['/cart/checkout'])
+            if (this.commonFunction.isRefferal()) {
+              let parms = this.commonFunction.getRefferalParms();
+              this.router.navigate(['cart/checkout'], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+            } else {
+              this.router.navigate(['cart/checkout']);
+            }
           }
         });
       }
