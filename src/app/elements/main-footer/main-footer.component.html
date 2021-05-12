@@ -51,10 +51,6 @@
                             <div class="menu_grid">
                                 <ul>
                                     <li>
-                                        <!-- <a 
-                                        [routerLink]="isRefferal() ? ['/about'] : ['/about']"
-                                        [queryParams]="isRefferal() ? { lp: isRefferal() } : ''"
-                                            [innerHTML]="'laytrip_info_page_title_3' | translate"></a> -->
                                         <a 
                                         [routerLink]="['/about']"
                                         [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
