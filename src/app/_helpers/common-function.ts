@@ -250,7 +250,7 @@ export class CommonFunction {
         if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source'] &&
             this.route.snapshot.queryParams['utm_medium']) {
             return true
-        }
+        } 
     }
     getRefferalParms(){
         if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source'] &&

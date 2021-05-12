@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 declare var $: any;
 
@@ -15,7 +16,8 @@ export class EmptyCartComponent implements OnInit {
   constructor(
     private renderer: Renderer2,
     public router: Router,
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    public commonFunction: CommonFunction
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +31,13 @@ export class EmptyCartComponent implements OnInit {
   redirectToHome() {
     $('#cart_modal').modal('hide');
     this.activeModal.close();
-    this.router.navigate(['/']);
+    if(this.commonFunction.isRefferal()){
+      var parms = this.commonFunction.getRefferalParms();
+      this.router.navigate(['/'],{ queryParams : {utm_source:parms.utm_source,utm_medium:parms.utm_medium}});
+    } else {
+      this.router.navigate(['/']);
+    }
+
   }
 
   close() {
@@ -37,7 +45,12 @@ export class EmptyCartComponent implements OnInit {
     this.activeModal.close();
     let url = window.location.href;
     if (url.includes('cart/booking') || url.includes('cart/checkout')) {
-      this.router.navigate(['/']);
+      if(this.commonFunction.isRefferal()){
+        var parms = this.commonFunction.getRefferalParms();
+        this.router.navigate(['/'],{ queryParams : {utm_source:parms.utm_source,utm_medium:parms.utm_medium}});
+      } else {
+        this.router.navigate(['/']);
+      }
     }
   }
 }

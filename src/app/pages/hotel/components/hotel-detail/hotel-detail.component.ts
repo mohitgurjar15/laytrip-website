@@ -8,6 +8,7 @@ import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
 import { CartService } from '../../../../services/cart.service';
 import { HomeService } from '../../../../services/home.service';
+import { CommonFunction } from '../../../../_helpers/common-function';
 declare var $: any;
 
 
@@ -55,7 +56,8 @@ export class HotelDetailComponent implements OnInit {
     public homeService: HomeService,
     private router: Router,
     private modalService: NgbModal,
-    private cartService:CartService
+    private cartService:CartService,
+    private commonFunction:CommonFunction,
   ) { }
 
   ngOnInit() {
@@ -202,7 +204,13 @@ export class HotelDetailComponent implements OnInit {
           this.cartService.setCartItems(this.cartItems);
 
           localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-          this.router.navigate([`cart/booking`]);
+          
+          if(this.commonFunction.isRefferal()){
+            var parms = this.commonFunction.getRefferalParms();
+            this.router.navigate(['cart/booking'],{ queryParams : {utm_source:parms.utm_source,utm_medium:parms.utm_medium}});
+          } else {
+            this.router.navigate(['cart/booking']);
+          }
         }
       }, error => {
         this.addCartLoading=false;

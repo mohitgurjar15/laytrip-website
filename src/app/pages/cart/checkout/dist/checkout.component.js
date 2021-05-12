@@ -151,6 +151,7 @@ var CheckoutComponent = /** @class */ (function () {
         }
         this.$cartIdsubscription = this.cartService.getCartId.subscribe(function (cartId) {
             if (cartId > 0) {
+                console.log('88888888888888888');
                 _this.deleteCart(cartId);
             }
         });
@@ -252,13 +253,21 @@ var CheckoutComponent = /** @class */ (function () {
     };
     CheckoutComponent.prototype.deleteCart = function (cartId) {
         var _this = this;
+        console.log(cartId, 'sssssssssssssss');
         if (cartId == 0) {
             return;
         }
         this.loading = true;
         this.cartService.deleteCartItem(cartId).subscribe(function (res) {
             _this.loading = false;
-            _this.redirectTo('/cart/checkout');
+            console.log('here');
+            if (_this.commonFunction.isRefferal()) {
+                var parms = _this.commonFunction.getRefferalParms();
+                _this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+            }
+            else {
+                _this.redirectTo('/cart/checkout');
+            }
             var index = _this.carts.findIndex(function (x) { return x.id == cartId; });
             _this.carts.splice(index, 1);
             _this.cartPrices.splice(index, 1);
@@ -453,7 +462,13 @@ var CheckoutComponent = /** @class */ (function () {
                             }
                             else {
                                 console.log('fail', [res]);
-                                _this.router.navigate(['/cart/checkout']);
+                                if (_this.commonFunction.isRefferal()) {
+                                    var parms = _this.commonFunction.getRefferalParms();
+                                    _this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+                                }
+                                else {
+                                    _this.redirectTo('/cart/checkout');
+                                }
                             }
                         }, function (error) {
                             console.log(error);

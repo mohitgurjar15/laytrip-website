@@ -189,6 +189,7 @@ export class CheckoutComponent implements OnInit {
 
     this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
       if (cartId > 0) {
+        console.log('88888888888888888')
         this.deleteCart(cartId);
       }
     })
@@ -299,13 +300,21 @@ export class CheckoutComponent implements OnInit {
   }
 
   deleteCart(cartId) {
+    console.log(cartId,'sssssssssssssss')
     if (cartId == 0) {
       return;
     }
     this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
-      this.redirectTo('/cart/checkout');
+                
+      console.log('here')
+      if(this.commonFunction.isRefferal()){
+        var parms = this.commonFunction.getRefferalParms();
+        this.router.navigate(['/cart/checkout'],{skipLocationChange: true, queryParams : {utm_source:parms.utm_source,utm_medium:parms.utm_medium}});
+      } else {
+        this.redirectTo('/cart/checkout');
+      }
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1);
@@ -523,7 +532,12 @@ export class CheckoutComponent implements OnInit {
                 this.spreedly.lifeCycle(res);
               } else {
                 console.log('fail', [res]);
-                this.router.navigate(['/cart/checkout']);
+                if(this.commonFunction.isRefferal()){
+                  var parms = this.commonFunction.getRefferalParms();
+                  this.router.navigate(['/cart/checkout'],{skipLocationChange: true, queryParams : {utm_source:parms.utm_source,utm_medium:parms.utm_medium}});
+                } else {
+                  this.redirectTo('/cart/checkout');
+                }          
               }
             }, (error) => {
               console.log(error);

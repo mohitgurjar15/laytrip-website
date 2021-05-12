@@ -151,9 +151,13 @@
                                                             number :
                                                             '1.2-2'}}</span></p>
                                                 </div>
-                                            </div> <a class="book_btn anchor-tag"
-                                                [routerLink]="['/hotel/detail', item.id, item.bundle]"
-                                                [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">Select</a>
+                                            </div>
+                                             <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag"
+                                                [routerLink]="['/hotel/detail', item.id, item.bundle]"utm_medium
+                                                [queryParams]="{check_in:check_in,check_out:check_book_btnout,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">Select</a>
+                                             <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag"
+                                                [routerLink]="['/hotel/detail', item.id, item.bundle]"utm_medium
+                                                [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">Select</a>
 
                                         </div>
                                     </div>
@@ -238,9 +242,13 @@
                                                             number :
                                                             '1.2-2'}}</span></p>
                                                 </div>
-                                            </div> <a class="book_btn anchor-tag"
-                                                [routerLink]="['/hotel/detail', item.id, item.bundle]"
+                                            </div> 
+                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag"
+                                                [routerLink]="['/hotel/detail', item.id, item.bundle]"utm_medium
                                                 [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">Select</a>
+                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag"
+                                                [routerLink]="['/hotel/detail', item.id, item.bundle]"utm_medium
+                                                [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">Select</a>
                                             <p>Flexible Installments</p>
                                         </div>
                                     </div>

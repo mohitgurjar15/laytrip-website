@@ -70,7 +70,6 @@ export class MainFooterComponent implements OnInit {
 
   
   ngOnInit(): void {
-    console.log(this.commonFunction.isRefferal())
     this.getLangunages();
     this.getCurrencies();
     this.loadJquery();
@@ -187,21 +186,5 @@ export class MainFooterComponent implements OnInit {
   openShareModal() {
     this.modalService.open(ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true,backdrop: 'static',keyboard: false });
   }
-
-   getRefferalCode() {
-        this.route.queryParams.subscribe(queryParams => {
-            
-            if((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
-            ){
-              // console.log(this.route.snapshot.queryParams['utm_source'])
-                return  this.route.snapshot.queryParams['utm_source'];
-            } else {
-                return {};
-            }
-        });
-    }
-
-   test(){
-     return {sd:'dfd',sdsd:'sdsd'}
-   } 
+   
 }

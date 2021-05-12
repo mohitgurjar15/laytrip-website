@@ -58,7 +58,6 @@ var MainFooterComponent = /** @class */ (function () {
         this.countryCode = this.commonFunction.getUserCountry();
     }
     MainFooterComponent.prototype.ngOnInit = function () {
-        console.log(this.commonFunction.isRefferal());
         this.getLangunages();
         this.getCurrencies();
         this.loadJquery();
@@ -157,21 +156,6 @@ var MainFooterComponent = /** @class */ (function () {
     };
     MainFooterComponent.prototype.openShareModal = function () {
         this.modalService.open(share_social_media_component_1.ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true, backdrop: 'static', keyboard: false });
-    };
-    MainFooterComponent.prototype.getRefferalCode = function () {
-        var _this = this;
-        this.route.queryParams.subscribe(function (queryParams) {
-            if ((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])) {
-                // console.log(this.route.snapshot.queryParams['utm_source'])
-                return _this.route.snapshot.queryParams['utm_source'];
-            }
-            else {
-                return {};
-            }
-        });
-    };
-    MainFooterComponent.prototype.test = function () {
-        return { sd: 'dfd', sdsd: 'sdsd' };
     };
     MainFooterComponent = __decorate([
         core_1.Component({

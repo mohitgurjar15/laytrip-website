@@ -19,13 +19,14 @@ var environment_1 = require("../../../../../environments/environment");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var hotel_policy_popup_component_1 = require("../hotel-policy-popup/hotel-policy-popup.component");
 var HotelDetailComponent = /** @class */ (function () {
-    function HotelDetailComponent(route, hotelService, homeService, router, modalService, cartService) {
+    function HotelDetailComponent(route, hotelService, homeService, router, modalService, cartService, commonFunction) {
         this.route = route;
         this.hotelService = hotelService;
         this.homeService = homeService;
         this.router = router;
         this.modalService = modalService;
         this.cartService = cartService;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.hotelRoomArray = [];
         this.imageTemp = [];
@@ -186,7 +187,13 @@ var HotelDetailComponent = /** @class */ (function () {
                     _this.cartItems = __spreadArrays(_this.cartItems, [newItem]);
                     _this.cartService.setCartItems(_this.cartItems);
                     localStorage.setItem('$crt', JSON.stringify(_this.cartItems.length));
-                    _this.router.navigate(["cart/booking"]);
+                    if (_this.commonFunction.isRefferal()) {
+                        var parms = _this.commonFunction.getRefferalParms();
+                        _this.router.navigate(['cart/booking'], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+                    }
+                    else {
+                        _this.router.navigate(['cart/booking']);
+                    }
                 }
             }, function (error) {
                 _this.addCartLoading = false;
