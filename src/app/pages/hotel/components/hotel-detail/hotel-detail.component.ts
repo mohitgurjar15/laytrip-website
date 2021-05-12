@@ -292,7 +292,12 @@ export class HotelDetailComponent implements OnInit {
   moduleTabClick(tabName) {
     if (tabName == 'flight') {
       this.homeService.setActiveTab(tabName)
-      this.router.navigate(['/']);
+      if(this.commonFunction.isRefferal()){
+        var parms = this.commonFunction.getRefferalParms();
+        this.router.navigate(['/'],{ queryParams : {utm_source:parms.utm_source,utm_medium:parms.utm_medium}});
+      } else {
+        this.router.navigate(['/']);
+      }
     }
   }
 }

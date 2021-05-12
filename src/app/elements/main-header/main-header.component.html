@@ -190,9 +190,9 @@
             <img data-toggle="popover" title="Covid-19" data-placement="bottom" data-trigger=""
                 data-content="Covid-19 description" src="{{s3BucketUrl}}assets/images/info_icon_laytrip.svg"
                 alt="Info Image">
-            COVID-19 Travel <a [routerLink]="['/covid-19']" [innerHTML]="'read_more' | translate"
-                *ngIf="isCovidPage"></a> <span class="desk_span"> | Per <a [routerLink]="['/terms']">Terms</a>, bookings not yet available to residents of California, Florida, Illinois and Washington.</span>
-            <span class="mob_span">Per <a [routerLink]="['/terms']">Terms</a>, bookings not yet available to residents of CA, FL, IL, WA.</span>
+            COVID-19 Travel <a [routerLink]="['/covid-19']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" [innerHTML]="'read_more' | translate"
+                *ngIf="isCovidPage"></a> <span class="desk_span"> | Per <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>, bookings not yet available to residents of California, Florida, Illinois and Washington.</span>
+            <span class="mob_span">Per <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>, bookings not yet available to residents of CA, FL, IL, WA.</span>
         </span>
     </div>
 </section>

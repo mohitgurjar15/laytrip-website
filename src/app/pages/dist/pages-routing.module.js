@@ -116,11 +116,6 @@ var routes = [
         path: '',
         component: pages_component_1.PagesComponent,
         children: childComponents
-    },
-    {
-        path: ':id',
-        component: pages_component_1.PagesComponent,
-        children: childComponents
     }
 ];
 var PagesRoutingModule = /** @class */ (function () {

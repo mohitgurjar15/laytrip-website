@@ -110,12 +110,7 @@ const routes: Routes = [
         path: '',
         component: PagesComponent,
         children: childComponents,
-    },
-    {
-        path: ':id',
-        component: PagesComponent,
-        children: childComponents    
-    } 
+    }
 ];
 
 @NgModule({
