@@ -246,14 +246,27 @@ export class CommonFunction {
         return moment(time, sourceFormat).format(targetFormat)
     }
 
-    isRefferal() {
+    getRefferalCode() {
         this.route.queryParams.subscribe(queryParams => {
+            
             if((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
             && (typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
             )){
-                return this.route.snapshot.queryParams['utm_source'];
+                return  this.route.snapshot.queryParams['utm_source'];
             } else {
-                console.log('error')
+                return {};
+            }
+        });
+    }
+    checkIsRefferalUrl() {
+        this.route.queryParams.subscribe(queryParams => {            
+            if((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
+            && (typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
+            )){
+                // console.log(true)
+                return true;
+            } else {
+                return false;                            
             }
         });
     }

@@ -7,6 +7,7 @@ import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonFunction } from '../../_helpers/common-function';
 import { GenericService } from '../../services/generic.service';
+import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -24,19 +25,18 @@ export class MainFooterComponent implements OnInit {
   isCurrencySet: boolean = false;
   countryCode: string = '';
   selectedCurrency: Currency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' }
-  isReferral='';
 
   constructor(private modalService: NgbModal,
     public translate: TranslateService,
     private commonFunction: CommonFunction,
     private renderer: Renderer2,
     private genericService: GenericService,
+    public route :ActivatedRoute
   ) {
 
     this.countryCode = this.commonFunction.getUserCountry();
     let _langunage = localStorage.getItem('_lang');
     let _currency = localStorage.getItem('_curr');
-    this.isReferral = localStorage.getItem('referral_id') ? localStorage.getItem('referral_id') : '';
 
     if (_langunage) {
       try {
@@ -186,4 +186,17 @@ export class MainFooterComponent implements OnInit {
   openShareModal() {
     this.modalService.open(ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true,backdrop: 'static',keyboard: false });
   }
+
+   getRefferalCode() {
+        this.route.queryParams.subscribe(queryParams => {
+            
+            if((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
+            ){
+              // console.log(this.route.snapshot.queryParams['utm_source'])
+                return  this.route.snapshot.queryParams['utm_source'];
+            } else {
+                return {};
+            }
+        });
+    }
 }

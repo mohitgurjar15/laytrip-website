@@ -209,7 +209,7 @@ var CommonFunction = /** @class */ (function () {
     CommonFunction.prototype.convertTime = function (time, sourceFormat, targetFormat) {
         return moment(time, sourceFormat).format(targetFormat);
     };
-    CommonFunction.prototype.isRefferal = function () {
+    CommonFunction.prototype.getRefferalCode = function () {
         var _this = this;
         this.route.queryParams.subscribe(function (queryParams) {
             if ((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
@@ -217,7 +217,19 @@ var CommonFunction = /** @class */ (function () {
                 return _this.route.snapshot.queryParams['utm_source'];
             }
             else {
-                console.log('error');
+                return {};
+            }
+        });
+    };
+    CommonFunction.prototype.checkIsRefferalUrl = function () {
+        this.route.queryParams.subscribe(function (queryParams) {
+            if ((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
+                && (typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage')) {
+                // console.log(true)
+                return true;
+            }
+            else {
+                return false;
             }
         });
     };
