@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonFunction } from 'src/app/_helpers/common-function';
 import { CartService } from '../../../services/cart.service';
 // import { BookService } from 'src/app/services/book.service';
 
@@ -20,7 +21,8 @@ export class BookComponent implements OnInit {
     private route: ActivatedRoute,
     // private bookService: BookService,
     private router: Router,
-    private cartService:CartService
+    private cartService: CartService,
+    public commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
@@ -28,25 +30,30 @@ export class BookComponent implements OnInit {
     this.transaction_token = this.route.snapshot.queryParamMap.get('transaction_token');
     this.cartService.getCartItems.subscribe(data => {
       if (data.length > 0) {
-        this.carts=data;
+        this.carts = data;
       }
     })
 
-    this.cartService.getCartPrice.subscribe(data=>{
-      this.cartPrices=data;
+    this.cartService.getCartPrice.subscribe(data => {
+      this.cartPrices = data;
     })
 
     this.bookFlight();
   }
 
   bookFlight() {
-    let bookingData = {
+    let queryParam: any = {};
+    let bookingData: any = {
       uuid: this.uuid,
-      transaction_token: this.transaction_token
+      transaction_token: this.transaction_token,
     };
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      bookingData.referral_id = parms.utm_source ? parms.utm_source : '';
+    }
     this.bookingRequest = JSON.parse(sessionStorage.getItem('__cbk'))
-    this.bookingRequest.uuid=this.uuid;
-    this.bookingRequest.transaction_token=this.transaction_token;
+    this.bookingRequest.uuid = this.uuid;
+    this.bookingRequest.transaction_token = this.transaction_token;
 
 
     // this.bookService.bookFlight(bookingData).subscribe((res: any) => {
@@ -80,8 +87,14 @@ export class BookComponent implements OnInit {
       this.cartService.setCartPrices(this.cartPrices)
 
       localStorage.setItem('$crt', failedItem.length || 0);
-
-      this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        this.router.navigate([`/cart/confirm/${result.laytripCartId}`], { queryParams: queryParam })
+      } else {
+        this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
+      }
     })
   }
 }

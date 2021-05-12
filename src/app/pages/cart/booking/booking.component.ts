@@ -294,7 +294,15 @@ export class BookingComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.router.navigate(['/flight/checkout']);
+    let queryParam: any = {};
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      this.router.navigate(['/flight/checkout'], { queryParams: queryParam });
+    } else {
+      this.router.navigate(['/flight/checkout']);
+    }
   }
 
   ngOnDestroy() {
@@ -341,8 +349,17 @@ export class BookingComponent implements OnInit {
   }
 
   redirectTo(uri: string) {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate([uri]));
+    let queryParam: any = {};
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate([uri], { queryParams: queryParam }));
+    } else {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate([uri]));
+    }
   }
 
   deleteCart(cartId) {
@@ -393,9 +410,9 @@ export class BookingComponent implements OnInit {
     if (totalCarts == 10) {
       this.ismaxCartAdded = true;
     } else {
-      if(this.commonFunction.isRefferal()){
+      if (this.commonFunction.isRefferal()) {
         var parms = this.commonFunction.getRefferalParms();
-        this.router.navigate(['/'],{queryParams: {utm_source:parms.utm_source,utm_medium:parms.utm_medium}});
+        this.router.navigate(['/'], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
       } else {
         this.router.navigate(['/']);
       }

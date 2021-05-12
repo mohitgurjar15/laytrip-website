@@ -18,44 +18,44 @@ export class HistoryListComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() historyResult;
   @Input() payment_status;
-  list : any = [];
+  list: any = [];
   historys: [];
-  public filterData={};
-  filterInfo={};
+  public filterData = {};
+  filterInfo = {};
   item: any;
-  listLength=0;
-  pageSize =10;
-  page :1;
+  listLength = 0;
+  pageSize = 10;
+  page: 1;
   loading = true;
   perPageLimitConfig = [10, 25, 50, 100];
   limit: number;
   showPaginationBar: boolean = false;
-  pageNumber:number;
-  notFound=false;
-  activeBookings=[];
-  failedBookings=[];
+  pageNumber: number;
+  notFound = false;
+  activeBookings = [];
+  failedBookings = [];
   instalmentType;
 
   constructor(
-    private commonFunction:CommonFunction,
-    private flightCommonFunction :FlightCommonFunction,
+    private commonFunction: CommonFunction,
+    private flightCommonFunction: FlightCommonFunction,
     private userService: UserService,
     public router: Router
-    
+
   ) {
-    this.instalmentType=InstalmentType
-   }
+    this.instalmentType = InstalmentType
+  }
 
   ngOnInit() {
-    this.page = 1;        
+    this.page = 1;
     this.limit = this.perPageLimitConfig[0];
     this.getPaymentHistory();
   }
 
-  
-  ngOnChanges(changes: SimpleChanges) {   
+
+  ngOnChanges(changes: SimpleChanges) {
     this.filterData = changes.historyResult.currentValue;
-    if(this.filterData){
+    if (this.filterData) {
       this.showPaginationBar = false;
       this.getPaymentHistory();
     }
@@ -64,40 +64,48 @@ export class HistoryListComponent implements OnInit {
   getPaymentHistory() {
     this.loading = true;
     this.filterInfo = null;
-    if(this.filterData != 'undefined'){     
+    if (this.filterData != 'undefined') {
       this.filterInfo = this.filterData;
     }
-    this.userService.getPaymentHistory(this.page, this.limit,this.filterInfo,this.payment_status).subscribe((res: any) => {
+    this.userService.getPaymentHistory(this.page, this.limit, this.filterInfo, this.payment_status).subscribe((res: any) => {
       // this.activeBooking = res.map 
-      this.list  = res.data;
-      
-        this.showPaginationBar = true;
-        this.listLength =res.total_result;
-        this.loading = this.notFound  = false;
+      this.list = res.data;
+
+      this.showPaginationBar = true;
+      this.listLength = res.total_result;
+      this.loading = this.notFound = false;
     }, err => {
       this.notFound = true;
       this.loading = this.showPaginationBar = false;
-    });   
-  }  
+    });
+  }
 
   pageChange(event) {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.showPaginationBar = false;
-    this.page = event;    
+    this.page = event;
     this.getPaymentHistory();
   }
 
   viewDetailClick(item) {
     this.item = item;
-    this.router.navigate(['/account/payment/detail/'+item.laytripBookingId]);
-  } 
-
-  dateConvert(date){
-    return this.commonFunction.convertDateFormat(new Date(date),"MM/DD/YYYY")
+    let queryParam: any = {};
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      this.router.navigate(['/account/payment/detail/' + item.laytripBookingId], { queryParams: queryParam });
+    } else {
+      this.router.navigate(['/account/payment/detail/' + item.laytripBookingId]);
+    }
   }
 
-  getPercentage1(value,totalValue,type){
-    let configValue:any = document.querySelector('.progress-bar');
+  dateConvert(date) {
+    return this.commonFunction.convertDateFormat(new Date(date), "MM/DD/YYYY")
+  }
+
+  getPercentage1(value, totalValue, type) {
+    let configValue: any = document.querySelector('.progress-bar');
     // configValue.style.left = setLeft();
     configValue.style.width = 24;
 
@@ -110,13 +118,13 @@ export class HistoryListComponent implements OnInit {
       return "left:"+Math.floor((value/totalValue)*100)+"%;";
     } */
   }
-  getPercentage(value,totalValue,type) {
-    if(type == 1){
-      return {'width' : (Math.floor((value/totalValue)*100)+2)+'%'};//"width:"+Math.floor((value/totalValue)*100)+"%;";
+  getPercentage(value, totalValue, type) {
+    if (type == 1) {
+      return { 'width': (Math.floor((value / totalValue) * 100) + 2) + '%' };//"width:"+Math.floor((value/totalValue)*100)+"%;";
     } else {
-      return {'left' : Math.floor((value/totalValue)*100)+'%'};
+      return { 'left': Math.floor((value / totalValue) * 100) + '%' };
     }
-    const styles = {'width' : '25%'};
+    const styles = { 'width': '25%' };
     return styles;
   }
 }

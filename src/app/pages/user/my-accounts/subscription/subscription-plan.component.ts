@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { environment } from '../../../../../environments/environment';
 import { Router } from '@angular/router';
+import { CommonFunction } from '../../../../_helpers/common-function';
 
 @Component({
   selector: 'app-subscription-plan',
@@ -17,11 +18,12 @@ export class SubscriptionPlanComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    public router: Router
+    public router: Router,
+    public commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.loading = true;
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
@@ -35,7 +37,15 @@ export class SubscriptionPlanComponent implements OnInit {
   }
 
   subscribeNow(planId) {
-    this.router.navigate(['/account/subscription', planId]);
+    let queryParam: any = {};
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      this.router.navigate(['/account/subscription', planId], { queryParams: queryParam });
+    } else {
+      this.router.navigate(['/account/subscription', planId]);
+    }
   }
 
 }

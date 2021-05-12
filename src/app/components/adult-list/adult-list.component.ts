@@ -4,6 +4,7 @@ import { GenericService } from '../../services/generic.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { CommonFunction } from '../../_helpers/common-function';
 
 @Component({
   selector: 'app-adult-list',
@@ -53,31 +54,32 @@ export class AdultListComponent implements OnInit {
     child: [],
     infant: []
   };
-  totalAdult=0;
-  countChild=0;
+  totalAdult = 0;
+  countChild = 0;
 
   constructor(
     private cookieService: CookieService,
     private genericService: GenericService,
     public router: Router,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    public commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
     this.checkUser();
     this.getCountry();
-    let _itinerary:any =  sessionStorage.getItem('_itinerary');
-    try{
+    let _itinerary: any = sessionStorage.getItem('_itinerary');
+    try {
       this._itinerary = _itinerary ? JSON.parse(_itinerary) : this._itinerary;
-    }catch(e){}
+    } catch (e) { }
 
     if (this.type == 'adult' && !this.isLoggedIn) {
       this.showAddAdultForm = true;
     }
   }
 
-  selectItinerary(event, traveler){
-   
+  selectItinerary(event, traveler) {
+
     let totalAdult = Number(this._itinerary.adult);
     let totalChild = Number(this._itinerary.child);
     let totalInfant = Number(this._itinerary.infant);
@@ -88,79 +90,79 @@ export class AdultListComponent implements OnInit {
           "firstName": traveler.firstName,
           "lastName": traveler.lastName,
           "email": traveler.email,
-          "user_type":traveler.user_type
+          "user_type": traveler.user_type
         };
         this._travelers.push(travelerData);
         this.cookieService.put("_travelers", JSON.stringify(this._travelers));
         if (this.adultCounter + 1 < totalAdult && traveler.user_type == 'adult') {
-          this.adultCounter++;            
+          this.adultCounter++;
           // this.checkBoxDisable = false;
-        }else{
-          if(this.adultCounter + 1 == totalAdult && traveler.user_type == 'adult'){
-            this.adultCounter++;       
+        } else {
+          if (this.adultCounter + 1 == totalAdult && traveler.user_type == 'adult') {
+            this.adultCounter++;
             // this.checkBoxDisable = true;                
           }
-        } 
-        
+        }
+
         if (this.childCounter + 1 < totalChild && traveler.user_type == 'child') {
-          this.childCounter++;            
+          this.childCounter++;
           // this.checkBoxDisable = false;
-        } else{
-          if(this.childCounter + 1 == totalChild && traveler.user_type == 'child'){
-            this.childCounter++;       
+        } else {
+          if (this.childCounter + 1 == totalChild && traveler.user_type == 'child') {
+            this.childCounter++;
             // this.checkBoxDisable = true;                
           }
-        } 
-        if (this.infantCounter + 1 < totalInfant && traveler.user_type == 'infant') {          
+        }
+        if (this.infantCounter + 1 < totalInfant && traveler.user_type == 'infant') {
           this.infantCounter++;
         } else {
-          if(this.infantCounter + 1 == totalInfant && traveler.user_type == 'infant'){              
-            this.infantCounter++;       
+          if (this.infantCounter + 1 == totalInfant && traveler.user_type == 'infant') {
+            this.infantCounter++;
           }
-        } 
-                
+        }
+
         if (traveler.user_type == 'adult') {
           this._itinerarySelection.adult.push(traveler.userId);
         } else if (traveler.user_type == 'child') {
           this._itinerarySelection.child.push(traveler.userId);
-        } else if(traveler.user_type == 'infant' ){
+        } else if (traveler.user_type == 'infant') {
           this._itinerarySelection.infant.push(traveler.userId);
-        } 
+        }
       } else {
-        
+
         // this.checkBoxDisable = false;
         this._travelers = this._travelers.filter(obj => obj.userId !== traveler.userId);
         this.cookieService.remove('_travelers');
         this.cookieService.put("_travelers", JSON.stringify(this._travelers));
         var cookieTrveller = JSON.parse(this.cookieService.get("_travelers"));
-        
-        var cookieAdults = []; 
+
+        var cookieAdults = [];
         var cookieChilds = [];
-        var cookieInfant = [];  
+        var cookieInfant = [];
         cookieTrveller.forEach(element => {
-          if(element.user_type == 'adult'){
+          if (element.user_type == 'adult') {
             cookieAdults.push(element.user_type);
-          } else if (element.user_type == 'child'){
-            cookieChilds.push(element.user_type);            
+          } else if (element.user_type == 'child') {
+            cookieChilds.push(element.user_type);
           } else {
             cookieInfant.push(element.user_type);
           }
         });
 
-        if (traveler.user_type == 'adult' ) {
-          
-          if((this.adultCounter >= totalAdult || this.adultCounter <= totalAdult) && cookieAdults.length + 1  <= totalAdult ){
+        if (traveler.user_type == 'adult') {
+
+          if ((this.adultCounter >= totalAdult || this.adultCounter <= totalAdult) && cookieAdults.length + 1 <= totalAdult) {
             this.adultCounter--;
           }
-          
+
           this._itinerarySelection.adult = this._itinerarySelection.adult.filter(obj => obj !== traveler.userId);
-        } else if (traveler.user_type == 'child' ) {
-          if((this.childCounter >= totalChild || this.childCounter <= totalChild) && cookieChilds.length + 1 <= totalChild ){
+        } else if (traveler.user_type == 'child') {
+          if ((this.childCounter >= totalChild || this.childCounter <= totalChild) && cookieChilds.length + 1 <= totalChild) {
             this.childCounter--;
           }
           this._itinerarySelection.child = this._itinerarySelection.child.filter(obj => obj !== traveler.userId);
-        } else if(traveler.user_type == 'infant' ){
-          if((this.infantCounter >= totalInfant || this.infantCounter <= totalInfant ) && cookieInfant.length + 1 <= totalInfant ){
+        } else if (traveler.user_type == 'infant') {
+          if ((this.infantCounter >= totalInfant || this.infantCounter <= totalInfant) && cookieInfant.length + 1 <= totalInfant) {
             this.infantCounter--;
           }
           this._itinerarySelection.infant = this._itinerarySelection.infant.filter(obj => obj !== traveler.userId);
@@ -169,7 +171,7 @@ export class AdultListComponent implements OnInit {
     }
     this._itinerarySelectionArray.emit(this._itinerarySelection);
   }
- 
+
 
   getRandomNumber(i: number) {
     let random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
@@ -188,7 +190,7 @@ export class AdultListComponent implements OnInit {
     this.containers = this.containers;
     if (this.travelers.length >= 0) {
       this.loader = false;
-      
+
     }
   }
 
@@ -212,52 +214,52 @@ export class AdultListComponent implements OnInit {
 
 
   pushTraveler(event) {
-    let travellerKeys = ["firstName","lastName","email","dob","gender"];
-    let _itinerary : any;
-    let _itineraryJson : any;
-     _itinerary =  sessionStorage.getItem('_itinerary');
-    try{
-    _itineraryJson  = JSON.parse(_itinerary);
-    
-    }catch(e){}
-    
+    let travellerKeys = ["firstName", "lastName", "email", "dob", "gender"];
+    let _itinerary: any;
+    let _itineraryJson: any;
+    _itinerary = sessionStorage.getItem('_itinerary');
+    try {
+      _itineraryJson = JSON.parse(_itinerary);
+
+    } catch (e) { }
+
     if (event.user_type === 'adult') {
 
       const index = this._adults.indexOf(event.userId, 0);
-      this._adults = this._adults.filter(item => item.userId != event.userId );  
+      this._adults = this._adults.filter(item => item.userId != event.userId);
 
-      this.showAddAdultForm = false;      
+      this.showAddAdultForm = false;
 
-      let adultTravellerKeys = ["firstName","lastName","email","dob","gender","countryCode","phoneNo"];
-      
-      if(_itineraryJson && _itineraryJson.is_passport_required) {
-         adultTravellerKeys = ["firstName","lastName","email","dob","gender","countryCode","phoneNo","passportNumber","passportExpiry"];        
+      let adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "countryCode", "phoneNo"];
+
+      if (_itineraryJson && _itineraryJson.is_passport_required) {
+        adultTravellerKeys = ["firstName", "lastName", "email", "dob", "gender", "countryCode", "phoneNo", "passportNumber", "passportExpiry"];
       }
-      
-      event.isComplete = this.checkObj(event,adultTravellerKeys);           
+
+      event.isComplete = this.checkObj(event, adultTravellerKeys);
       this._adults.push(event);
     } else if (event.user_type === 'child') {
 
-      this._childs = this._childs.filter(item => item.userId != event.userId );
-      event.isComplete = this.checkObj(event,travellerKeys);     
+      this._childs = this._childs.filter(item => item.userId != event.userId);
+      event.isComplete = this.checkObj(event, travellerKeys);
       this._childs.push(event);
       this.showAddChildForm = false;
 
     } else {
-      this._infants = this._infants.filter(item => item.userId != event.userId );
-      event.isComplete = this.checkObj(event,travellerKeys);     
+      this._infants = this._infants.filter(item => item.userId != event.userId);
+      event.isComplete = this.checkObj(event, travellerKeys);
       this._infants.push(event);
       this.showAddInfantForm = false;
     }
   }
 
-  checkObj(obj,travellerKeys) { 
+  checkObj(obj, travellerKeys) {
     let isComplete = true;
     const userStr = JSON.stringify(obj);
     JSON.parse(userStr, (key, value) => {
-      if(!value &&  travellerKeys.indexOf(key) !== -1){
-        return isComplete = false;                
-      }          
+      if (!value && travellerKeys.indexOf(key) !== -1) {
+        return isComplete = false;
+      }
     });
     return isComplete;
   }
@@ -268,7 +270,7 @@ export class AdultListComponent implements OnInit {
   }
 
   infantCollapseClick() {
-    this.infantCollapse = !this.infantCollapse;    
+    this.infantCollapse = !this.infantCollapse;
   }
 
   childCollapseClick() {
@@ -286,21 +288,29 @@ export class AdultListComponent implements OnInit {
           id: country.id,
           name: country.name,
           code: country.phonecode,
-          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
+          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
         }
       }),
         this.countries_code = data.map(country => {
           return {
             id: country.id,
-            name:country.phonecode+' ('+country.iso2+')',
-            code:country.phonecode,
-            country_name:country.name+ ' ' +country.phonecode,
-            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
+            name: country.phonecode + ' (' + country.iso2 + ')',
+            code: country.phonecode,
+            country_name: country.name + ' ' + country.phonecode,
+            flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
           }
         })
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
-        this.router.navigate(['/']);
+        let queryParam: any = {};
+        if (this.commonFunction.isRefferal()) {
+          let parms = this.commonFunction.getRefferalParms();
+          queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+          queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+          this.router.navigate(['/'], { queryParams: queryParam });
+        } else {
+          this.router.navigate(['/']);
+        }
       }
     });
   }

@@ -4,6 +4,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie';
 import { environment } from '../../../environments/environment';
 import * as moment from 'moment';
+import { CommonFunction } from '../../_helpers/common-function';
 
 export enum MODAL_TYPE {
   CLOSE,
@@ -24,6 +25,7 @@ export class CookiePolicyComponent implements OnInit {
     private modalService: NgbModal,
     private cookieService: CookieService,
     private router: Router,
+    private commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
@@ -42,7 +44,15 @@ export class CookiePolicyComponent implements OnInit {
 
   goToPrivacyPolicy() {
     this.activeModal.close({ STATUS: MODAL_TYPE.CLOSE });
-    this.router.navigate(['/privacy-policy']);
+    let queryParam: any = {};
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      this.router.navigate(['/privacy-policy'], { queryParams: queryParam });
+    } else {
+      this.router.navigate(['/privacy-policy'])
+    }
   }
 
 }

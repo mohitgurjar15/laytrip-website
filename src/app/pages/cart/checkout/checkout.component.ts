@@ -184,7 +184,15 @@ export class CheckoutComponent implements OnInit {
       this.priceSummary = JSON.parse(data)
     }
     catch (e) {
-      this.router.navigate(['/'])
+      let queryParam: any = {};
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        this.router.navigate(['/'], { queryParams: queryParam });
+      } else {
+        this.router.navigate(['/'])
+      }
     }
 
     this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
@@ -223,7 +231,15 @@ export class CheckoutComponent implements OnInit {
   sessionTimeout(event) {
     this.isSessionTimeOut = event;
     if (this.isSessionTimeOut && !this.isBookingRequest) {
-      this.router.navigate(['/cart/booking']);
+      let queryParam: any = {};
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        this.router.navigate(['/cart/booking'], { queryParams: queryParam });
+      } else {
+        this.router.navigate(['/cart/booking'])
+      }
     }
   }
 
@@ -295,23 +311,32 @@ export class CheckoutComponent implements OnInit {
   }
 
   redirectTo(uri: string) {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate([uri]));
+    let queryParam: any = {};
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate([uri], { queryParams: queryParam }));
+    } else {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate([uri]));
+    }
   }
 
   deleteCart(cartId) {
-    console.log(cartId,'sssssssssssssss')
+    console.log(cartId, 'sssssssssssssss')
     if (cartId == 0) {
       return;
     }
     this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
-                
+
       console.log('here')
-      if(this.commonFunction.isRefferal()){
+      if (this.commonFunction.isRefferal()) {
         var parms = this.commonFunction.getRefferalParms();
-        this.router.navigate(['/cart/checkout'],{skipLocationChange: true, queryParams : {utm_source:parms.utm_source,utm_medium:parms.utm_medium}});
+        this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
       } else {
         this.redirectTo('/cart/checkout');
       }
@@ -454,8 +479,8 @@ export class CheckoutComponent implements OnInit {
       this.isExcludedCountryError = false;
     }
   }
-  
-  removeValidationError(){
+
+  removeValidationError() {
     this.validationErrorMessage = '';
   }
 
@@ -532,12 +557,12 @@ export class CheckoutComponent implements OnInit {
                 this.spreedly.lifeCycle(res);
               } else {
                 console.log('fail', [res]);
-                if(this.commonFunction.isRefferal()){
+                if (this.commonFunction.isRefferal()) {
                   var parms = this.commonFunction.getRefferalParms();
-                  this.router.navigate(['/cart/checkout'],{skipLocationChange: true, queryParams : {utm_source:parms.utm_source,utm_medium:parms.utm_medium}});
+                  this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
                 } else {
                   this.redirectTo('/cart/checkout');
-                }          
+                }
               }
             }, (error) => {
               console.log(error);

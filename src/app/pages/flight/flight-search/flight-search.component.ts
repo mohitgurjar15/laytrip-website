@@ -200,8 +200,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   getSearchItem(event) {
-    console.log('getSearchItem')
-
     // TRIP is round-trip then call this API
     if (event.trip === 'roundtrip') {
       this.getFlightSearchDataForRoundTrip(event);
