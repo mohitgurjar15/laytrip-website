@@ -22,13 +22,15 @@
             <div class="row">
                 <div class="col-lg-12" [ngClass]="isMapView == true ? 'show-map' : 'hide-map'">
                     <agm-map #gm (mapClick)="closeWindow()" [latitude]="defaultLat" [longitude]="defaultLng"
-                        minZoom="2" [zoom]="10" (boundsChange)="checkMarkersInBounds($event)">
+                        [clickableIcons]="false" minZoom="2" [zoom]="10" (boundsChange)="checkMarkersInBounds($event)">
                         <agm-marker #marker *ngFor="let hotel of hotelListArray;let i = index;"
                             [latitude]="hotel.geocodes.latitude" [longitude]="hotel.geocodes.longitude"
                             [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/circle.svg', scaledSize: {height: 80,width: 48}}"
                             [label]="{text:getMapPrice(hotel), position:'relative',zIndex:'100', color: 'white',fontSize: '12px', class: 'mapLabel'}"
                             (markerClick)="displayHotelDetails(hotel.id,infoWindow, 'click')"
-                            (mouseOver)="displayHotelDetails(hotel.id,infoWindow, 'hover')" [zIndex]="i+1">
+                            (mouseOut)="closeInfoWindow(infoWindow, gm)" (mouseOver)="openInfoWindow(infoWindow, gm)"
+                            [zIndex]="i+1">
+                            <!-- (mouseOver)="displayHotelDetails(hotel.id,infoWindow, 'hover')" -->
                             <agm-info-window [disableAutoPan]="false" #infoWindow>
                                 <div>
                                     <p>{{hotel.name}}</p>

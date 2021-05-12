@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChildren, QueryList, ChangeDetectorRef, ViewChild, NgZone } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
@@ -79,7 +79,8 @@ export class HotelItemWrapperComponent implements OnInit {
     private commonFunction: CommonFunction,
     private genericService: GenericService,
     private hotelService: HotelService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private _zone: NgZone
   ) {
 
     this.galleryOptions = [
@@ -95,6 +96,7 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
+    // this.gm.nativeElement;
     this.carousel.toArray().forEach(el => {
     });
   }
@@ -207,7 +209,7 @@ export class HotelItemWrapperComponent implements OnInit {
       return false;
     }
 
-    this.scrollLoading = (this.hotelDetails.length != this.hotelListArray.length) ?  true : false;
+    this.scrollLoading = (this.hotelDetails.length != this.hotelListArray.length) ? true : false;
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.hotelDetails.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
@@ -228,22 +230,26 @@ export class HotelItemWrapperComponent implements OnInit {
     }
   }
 
-  displayHotelDetails(hotelId, infoWindow, type) {
-
+  openInfoWindow(infoWindow, gm) {
     infoWindow.open();
-    if (this.previousInfoWindow == null)
+  }
+
+  closeInfoWindow(infoWindow, gm) {
+    infoWindow.close();
+  }
+
+  displayHotelDetails(hotelId, infoWindow, type) {
+    if (this.previousInfoWindow == null) {
+      infoWindow.open();
       this.previousInfoWindow = infoWindow;
-    else {
+    } else {
       this.infoWindowOpened = infoWindow;
-      console.log(this.previousInfoWindow)
       if (this.previousInfoWindow != null) {
         this.previousInfoWindow.close();
-      } else {
-        infoWindow.close();
-        console.log('error')
+        this.previousInfoWindow = null;
       }
     }
-    this.previousInfoWindow = infoWindow
+    this.previousInfoWindow = infoWindow;
 
     if (type === 'click') {
 
