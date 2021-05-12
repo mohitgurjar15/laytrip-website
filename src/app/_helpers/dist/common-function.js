@@ -206,6 +206,17 @@ var CommonFunction = /** @class */ (function () {
         if ((k >= 33 && k <= 91) || k == 32 || k == 64 || (k >= 123 && k <= 126) || (k >= 92 && k <= 96))
             event.preventDefault();
     };
+    CommonFunction.prototype.convertTime = function (time, sourceFormat, targetFormat) {
+        return moment(time, sourceFormat).format(targetFormat);
+    };
+    CommonFunction.prototype.isRefferal = function () {
+        var _this = this;
+        this.route.queryParams.subscribe(function (queryParams) {
+            if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']) {
+                return _this.route.snapshot.queryParams['utm_source'];
+            }
+        });
+    };
     CommonFunction = __decorate([
         core_1.Injectable({
             providedIn: 'root'

@@ -39,7 +39,7 @@ var AppModule = /** @class */ (function () {
                 elements_module_1.ElementsModule,
                 forms_1.FormsModule,
                 components_module_1.ComponentsModule,
-                forms_1.ReactiveFormsModule,
+                forms_1.ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
                 core_2.TranslateModule.forRoot({
                     loader: {
                         provide: core_2.TranslateLoader,

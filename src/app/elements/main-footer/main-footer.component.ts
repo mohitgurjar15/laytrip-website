@@ -24,6 +24,7 @@ export class MainFooterComponent implements OnInit {
   isCurrencySet: boolean = false;
   countryCode: string = '';
   selectedCurrency: Currency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' }
+  isReferral='';
 
   constructor(private modalService: NgbModal,
     public translate: TranslateService,
@@ -35,6 +36,8 @@ export class MainFooterComponent implements OnInit {
     this.countryCode = this.commonFunction.getUserCountry();
     let _langunage = localStorage.getItem('_lang');
     let _currency = localStorage.getItem('_curr');
+    this.isReferral = localStorage.getItem('referral_id') ? localStorage.getItem('referral_id') : '';
+
     if (_langunage) {
       try {
         let _lang = JSON.parse(_langunage);
@@ -65,6 +68,7 @@ export class MainFooterComponent implements OnInit {
     this.countryCode = this.commonFunction.getUserCountry();
   }
 
+  
   ngOnInit(): void {
     this.getLangunages();
     this.getCurrencies();

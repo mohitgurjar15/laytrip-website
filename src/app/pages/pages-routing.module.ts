@@ -111,11 +111,10 @@ const routes: Routes = [
         component: PagesComponent,
         children: childComponents,
     },
-      {
+    {
         path: ':id',
         component: PagesComponent,
-        children: childComponents
-    
+        children: childComponents    
     } 
 ];
 

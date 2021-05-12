@@ -44,6 +44,7 @@ var ngx_countdown_1 = require("ngx-countdown");
 var ng_recaptcha_1 = require("ng-recaptcha");
 var terms_component_1 = require("./terms/terms.component");
 var ccpa_component_1 = require("./ccpa/ccpa.component");
+var apple_security_login_popup_component_1 = require("./user/apple-security-login-popup/apple-security-login-popup.component");
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -74,6 +75,7 @@ var PagesModule = /** @class */ (function () {
                 cms_pages_component_1.CmsPagesComponent,
                 terms_component_1.TermsComponent,
                 ccpa_component_1.CcpaComponent,
+                apple_security_login_popup_component_1.AppleSecurityLoginPopupComponent,
             ],
             imports: [
                 common_1.CommonModule,
@@ -82,7 +84,7 @@ var PagesModule = /** @class */ (function () {
                 ng_select_1.NgSelectModule,
                 core_2.TranslateModule,
                 components_module_1.ComponentsModule,
-                forms_1.ReactiveFormsModule,
+                forms_1.ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
                 forms_1.FormsModule,
                 // NG5 SLIDER
                 ng5_slider_1.Ng5SliderModule,
@@ -90,7 +92,7 @@ var PagesModule = /** @class */ (function () {
                 ngx_countdown_1.CountdownModule,
                 ng_recaptcha_1.RecaptchaModule
             ],
-            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, forgot_password_component_1.ForgotPasswordComponent, reset_password_component_1.ResetPasswordComponent],
+            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, forgot_password_component_1.ForgotPasswordComponent, reset_password_component_1.ResetPasswordComponent, apple_security_login_popup_component_1.AppleSecurityLoginPopupComponent],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]
         })
     ], PagesModule);

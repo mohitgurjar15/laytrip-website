@@ -25,9 +25,11 @@ var MainFooterComponent = /** @class */ (function () {
         this.isCurrencySet = false;
         this.countryCode = '';
         this.selectedCurrency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' };
+        this.isReferral = '';
         this.countryCode = this.commonFunction.getUserCountry();
         var _langunage = localStorage.getItem('_lang');
         var _currency = localStorage.getItem('_curr');
+        this.isReferral = localStorage.getItem('referral_id') ? localStorage.getItem('referral_id') : '';
         if (_langunage) {
             try {
                 var _lang = JSON.parse(_langunage);

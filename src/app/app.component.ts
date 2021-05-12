@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { getLoginUserInfo } from './_helpers/jwt.helper';
 import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
+import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,11 +21,27 @@ export class AppComponent {
     private cookieService:CookieService,
     private genericService:GenericService,
     private checkOutService:CheckOutService,
-    // private swPush: SwPush,
+    private route: ActivatedRoute,
+    private router: Router,
     private userService:UserService
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
+
+    /* this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        // Trigger when route change
+        if(this.route.snapshot.params['id']){
+          this.isValidateReferralId(this.route.snapshot.params['id'])
+        } else {
+          console.log('removed-app')
+          localStorage.removeItem("referral_id")
+        }
+        
+      }
+    }); */
+   
+
   }
 
   ngOnInit(){
@@ -32,12 +49,18 @@ export class AppComponent {
     if(token){
       // this.subscribeToNotifications()
     }
-
     this.registerGuestUser();
     this.setCountryBehaviour();
 
   }
 
+  isValidateReferralId(referral_id){
+    this.genericService.checkIsReferralUser(referral_id).subscribe((res: any) => {  
+      localStorage.setItem("referral_id",res.data.name)
+    }, err => {
+      localStorage.removeItem("referral_id")
+    });
+  }
 
   /* subscribeToNotifications() {
 

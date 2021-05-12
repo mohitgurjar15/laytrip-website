@@ -245,5 +245,13 @@ export class CommonFunction {
     convertTime(time,sourceFormat,targetFormat){
         return moment(time, sourceFormat).format(targetFormat)
     }
+
+    isRefferal() {
+        this.route.queryParams.subscribe(queryParams => {
+            if(typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']){
+                return this.route.snapshot.queryParams['utm_source'];
+            }
+        });
+    }
 }
 

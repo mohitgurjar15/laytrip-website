@@ -20,22 +20,18 @@ export class PagesComponent implements OnInit {
     private route: ActivatedRoute,
     
   ) {
-    if(this.route.snapshot.params['id']){
-      this.checkValidAffiliated(this.route.snapshot.params['id'])
-    } else {
-      console.log('here',this.route.snapshot.params)
-    }
+    
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Trigger when route change
-        this.checkUserValidate();
+        this.checkIsValidUser();        
       }
     });
 
   }
 
   ngOnInit() {
-    this.checkUserValidate();
+    this.checkIsValidUser();
     document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
     this.lottieConfig = {
       path: 'assets/lottie-json/flight/data.json',
@@ -44,10 +40,24 @@ export class PagesComponent implements OnInit {
     };
   }
 
-  checkValidAffiliated(affiliated_id){
-    console.log(affiliated_id)
+  isValidateReferralId(){
+    if(this.route.snapshot.queryParams['utm_source']){
+      localStorage.setItem("referral_id",this.route.snapshot.queryParams['utm_source'])     
+    } else {      
+      localStorage.removeItem("referral_id")
+    }
   }
-  checkUserValidate() {
+
+  checkIsValidUser() {
+      this.route.queryParams.subscribe(queryParams => {
+      if(typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']){      
+        localStorage.setItem("referral_id",this.route.snapshot.queryParams['utm_source'])
+      }else {
+        localStorage.removeItem("referral_id")
+      }
+      // do something with the query params
+    });
+     
     var token = localStorage.getItem('_lay_sess');
     if (token) {
       this.genericService.checkUserValidate(token).subscribe((res: any) => {
