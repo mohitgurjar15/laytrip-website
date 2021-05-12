@@ -248,10 +248,12 @@ export class CommonFunction {
 
     isRefferal() {
         this.route.queryParams.subscribe(queryParams => {
-            if(typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']
-            && typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
-            ){
+            if((typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source'])
+            && (typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
+            )){
                 return this.route.snapshot.queryParams['utm_source'];
+            } else {
+                console.log('error')
             }
         });
     }
