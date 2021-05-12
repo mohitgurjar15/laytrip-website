@@ -355,7 +355,7 @@ export class BookingComponent implements OnInit {
       queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
       queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-        this.router.navigate([uri], { queryParams: queryParam }));
+      this.router.navigate([uri], { queryParams: queryParam }));
     } else {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
         this.router.navigate([uri]));
