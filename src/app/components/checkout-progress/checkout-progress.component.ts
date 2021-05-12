@@ -19,7 +19,6 @@ export class CheckoutProgressComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private commonFunction: CommonFunction,
-
   ) { }
 
   ngOnInit() {

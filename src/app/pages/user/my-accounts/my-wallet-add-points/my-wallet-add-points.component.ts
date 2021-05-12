@@ -6,6 +6,7 @@ import { UserService } from '../../../../services/user.service';
 import { environment } from '../../../../../environments/environment';
 import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
 import { GenericService } from '../../../../services/generic.service';
+import { CommonFunction } from '../../../../_helpers/common-function';
 
 @Component({
   selector: 'app-my-wallet-add-points',
@@ -31,6 +32,7 @@ export class MyWalletAddPointsComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService,
     private genericService: GenericService,
+    public commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
@@ -38,7 +40,15 @@ export class MyWalletAddPointsComponent implements OnInit {
     this.currency = JSON.parse(_currency);
     this.userInfo = getLoginUserInfo();
     if (typeof this.userInfo.roleId === 'undefined') {
-      this.router.navigate(['/']);
+      let queryParam: any = {};
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        this.router.navigate(['/'], { queryParams: queryParam });
+      } else {
+        this.router.navigate(['/']);
+      }
     }
     this.getLayCreditInfo();
   }
@@ -75,7 +85,15 @@ export class MyWalletAddPointsComponent implements OnInit {
   }
 
   toggleCancellationPolicy() {
-    this.router.navigate(['cancellation-policy']);
+    let queryParam: any = {};
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      this.router.navigate(['cancellation-policy'], { queryParams: queryParam });
+    } else {
+      this.router.navigate(['cancellation-policy']);
+    }
   }
 
   addPoints() {
@@ -85,7 +103,15 @@ export class MyWalletAddPointsComponent implements OnInit {
       this.loading = false;
       this.getLayCreditInfo();
       // this.toastr.success(res.message, 'Points');
-      this.router.navigate(['/account/lay-credit-points']);
+      let queryParam: any = {};
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        this.router.navigate(['/account/lay-credit-points'], { queryParams: queryParam });
+      } else {
+        this.router.navigate(['/account/lay-credit-points']);
+      }
     }, (error: HttpErrorResponse) => {
       this.loading = false;
       // this.toastr.error(error.error.message);

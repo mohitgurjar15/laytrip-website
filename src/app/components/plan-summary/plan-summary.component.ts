@@ -1,6 +1,7 @@
 import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { CommonFunction } from '../../_helpers/common-function';
 
 @Component({
   selector: 'app-plan-summary',
@@ -16,6 +17,7 @@ export class PlanSummaryComponent implements OnInit, AfterContentChecked {
   validityDaysRange;
   constructor(
     public router: Router,
+    public commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
@@ -31,7 +33,15 @@ export class PlanSummaryComponent implements OnInit, AfterContentChecked {
   }
 
   toggleCancellationPolicy() {
-    this.router.navigate(['cancellation-policy']);
+    let queryParam: any = {};
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      this.router.navigate(['cancellation-policy'], { queryParams: queryParam });
+    } else {
+      this.router.navigate(['cancellation-policy']);
+    }
   }
 
 }

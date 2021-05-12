@@ -42,7 +42,6 @@ export class SocialLoginComponent implements OnInit {
 
   }
 
-
   ngOnInit() {
     this.route.queryParams.subscribe(queryParams => {
       if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']

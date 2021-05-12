@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonFunction } from '../../../_helpers/common-function';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -10,13 +11,22 @@ import { environment } from '../../../../environments/environment';
 export class PartialPaymentComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  constructor(    public router: Router
-    ) { }
+  constructor(public router: Router,
+    public commonFunction: CommonFunction,
+  ) { }
 
   ngOnInit() {
   }
 
-  redirectToAboutPage(){
-    this.router.navigate(['/about/']);
+  redirectToAboutPage() {
+    let queryParam: any = {};
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      this.router.navigate(['/about/'], { queryParams: queryParam });
+    } else {
+      this.router.navigate(['/about/']);
+    }
   }
 }

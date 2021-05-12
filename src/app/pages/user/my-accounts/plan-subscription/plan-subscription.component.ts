@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../services/user.service';
+import { CommonFunction } from '../../../../_helpers/common-function';
 
 @Component({
   selector: 'app-plan-subscription',
@@ -41,6 +42,7 @@ export class PlanSubscriptionComponent implements OnInit {
     public route: ActivatedRoute,
     private userService: UserService,
     private toastr: ToastrService,
+    public commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
@@ -50,7 +52,15 @@ export class PlanSubscriptionComponent implements OnInit {
     this.planId = this.route.snapshot.paramMap.get('id');
     this.userInfo = getLoginUserInfo();
     if (typeof this.userInfo.roleId == 'undefined') {
-      this.router.navigate(['/']);
+      let queryParam: any = {};
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        this.router.navigate(['/'], { queryParams: queryParam });
+      } else {
+        this.router.navigate(['/']);
+      }
     }
     const payload = { id: this.planId, currency: this.currency.id };
     this.userService.getSubscriptionPlanDetail(payload).subscribe((res: any) => {
@@ -89,7 +99,15 @@ export class PlanSubscriptionComponent implements OnInit {
         titleClass: 'custom_toastr_title',
         messageClass: 'custom_toastr_message',
       });
-      this.router.navigate(['/']);
+      let queryParam: any = {};
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        this.router.navigate(['/'], { queryParams: queryParam });
+      } else {
+        this.router.navigate(['/']);
+      }
     }, (error: HttpErrorResponse) => {
       this.loading = false;
       // this.toastr.error(error.error.message);

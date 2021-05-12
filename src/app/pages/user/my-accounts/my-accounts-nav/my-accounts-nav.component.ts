@@ -11,45 +11,53 @@ import { getUserDetails } from '../../../../_helpers/jwt.helper';
 })
 export class MyAccountsNavComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-  profile_pic : string = '';
-  _login_user_info : any =[];
+  profile_pic: string = '';
+  _login_user_info: any = [];
   isLoggedIn = false;
   expanded: boolean;
   expandedSecond: boolean;
   expandedThird: boolean;
 
-  
-  public defaultImage = this.s3BucketUrl+'assets/images/profile_laytrip.svg';
 
-  constructor( public router: Router,
+  public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
+
+  constructor(public router: Router,
     public commonFunction: CommonFunction,
-    ) { }
+  ) { }
 
   ngOnInit() {
   }
-  
-  ngDoCheck(){  
-    this._login_user_info =  getUserDetails(localStorage.getItem("_lay_sess"));
-    this.profile_pic = this._login_user_info.profilePic ? this._login_user_info.profilePic :'';
+
+  ngDoCheck() {
+    this._login_user_info = getUserDetails(localStorage.getItem("_lay_sess"));
+    this.profile_pic = this._login_user_info.profilePic ? this._login_user_info.profilePic : '';
     this.checkUser();
   }
 
   checkUser() {
     let userToken = localStorage.getItem('_lay_sess');
-    
-    if( userToken && userToken != 'undefined') { 
+
+    if (userToken && userToken != 'undefined') {
       this.isLoggedIn = true;
     }
   }
-  
-  ngOnDestroy() {}
-  
+
+  ngOnDestroy() { }
+
   onLoggedout() {
     this.isLoggedIn = false;
     localStorage.removeItem('_lay_sess');
-    this.router.navigate(['/']);
-  } 
-          
+    let queryParam: any = {};
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      this.router.navigate(['/'], { queryParams: queryParam });
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
+
   onToggleSubMenu(event) {
     this.expanded = !this.expanded;
     if (this.expanded) {

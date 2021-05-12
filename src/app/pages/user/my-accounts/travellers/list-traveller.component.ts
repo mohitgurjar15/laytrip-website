@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TravellerFormComponent } from './traveller-form/traveller-form.component';
 import { GenericService } from '../../../../services/generic.service';
 import { CookieService } from 'ngx-cookie';
+import { CommonFunction } from '../../../../_helpers/common-function';
 declare var $: any;
 
 @Component({
@@ -55,8 +56,8 @@ export class ListTravellerComponent implements OnInit {
     private toastr: ToastrService,
     private genericService: GenericService,
     private cookieService: CookieService,
-    private renderer: Renderer2
-
+    private renderer: Renderer2,
+    public commonFunction: CommonFunction,
   ) {
     this.isMasterSel = false;
   }
@@ -87,14 +88,14 @@ export class ListTravellerComponent implements OnInit {
   getTravelers() {
     this.travelerService.getTravelers().subscribe((res: any) => {
       // this.travelers = res.data;
-      
 
-      this.travelers  = res.data.filter(function(e){
-        if(e.roleId !=6 ){
+
+      this.travelers = res.data.filter(function (e) {
+        if (e.roleId != 6) {
           return e;
         }
       });
-      if(this.travelers.length == 0){
+      if (this.travelers.length == 0) {
         this.showNewForm = true;
       }
       this.loading = false;
@@ -107,7 +108,15 @@ export class ListTravellerComponent implements OnInit {
       this.loading = this.showPaginationBar = false;
       this.notFound = true;
       if (error.status === 401) {
-        this.router.navigate(['/']);
+        let queryParam: any = {};
+        if (this.commonFunction.isRefferal()) {
+          let parms = this.commonFunction.getRefferalParms();
+          queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
+          queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+          this.router.navigate(['/'], { queryParams: queryParam });
+        } else {
+          this.router.navigate(['/']);
+        }
       }
     });
   }
@@ -132,7 +141,7 @@ export class ListTravellerComponent implements OnInit {
 
   getCountry() {
     this.genericService.getCountry().subscribe((data: any) => {
-      this.countries =  data.map(country => {
+      this.countries = data.map(country => {
         return {
           id: country.id,
           name: country.name,
@@ -140,26 +149,26 @@ export class ListTravellerComponent implements OnInit {
           flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
         }
       });
-        this.countries_code = data.map(country => {
-          return {
-            id: country.id,
-            name: country.phonecode + ' (' + country.iso2 + ')',
-            countryCode: country.phonecode,
-            country_name: country.name + ' ' + country.phonecode,
-            flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg',
-            iso2: country.iso2
-          }
+      this.countries_code = data.map(country => {
+        return {
+          id: country.id,
+          name: country.phonecode + ' (' + country.iso2 + ')',
+          countryCode: country.phonecode,
+          country_name: country.name + ' ' + country.phonecode,
+          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg',
+          iso2: country.iso2
+        }
       });
       const filteredArr = this.countries_code.reduce((acc, current) => {
         const x = acc.find(item => item.countryCode == current.countryCode);
-        if (!x) {        
+        if (!x) {
           return acc.concat([current]);
         } else {
           return acc;
         }
       }, []);
       this.countries_code = [];
-      this.countries_code = filteredArr;  
+      this.countries_code = filteredArr;
 
       this.setUSCountryInFirstElement(this.countries);
 
@@ -170,18 +179,18 @@ export class ListTravellerComponent implements OnInit {
     });
   }
 
-  setUSCountryInFirstElement(countries){
-    var usCountryObj = countries.find(x=> x.id === 233);
-    var removedUsObj = countries.filter( obj => obj.id !== 233);
-    this.countries=[];
-    removedUsObj.sort(function(a, b) {
-      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);          
+  setUSCountryInFirstElement(countries) {
+    var usCountryObj = countries.find(x => x.id === 233);
+    var removedUsObj = countries.filter(obj => obj.id !== 233);
+    this.countries = [];
+    removedUsObj.sort(function (a, b) {
+      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
     });
-    removedUsObj.unshift(usCountryObj); 
-    this.countries = removedUsObj; 
+    removedUsObj.unshift(usCountryObj);
+    this.countries = removedUsObj;
 
   }
-  
+
   checkUncheckAll() {
     var checkboxes = document.getElementsByClassName('travelerCheckbox');
     for (var i = 0; i < checkboxes.length; i++) {
@@ -269,8 +278,8 @@ export class ListTravellerComponent implements OnInit {
   getTravellerIdFromChild(travelerId) {
     this.openDeleteModal('deleteContent', travelerId);
   }
-  
-  
+
+
   pushTraveler(traveler) {
     if (typeof traveler == 'string') {
       this.travelers = this.travelers.filter(obj => obj.userId !== traveler);
@@ -278,16 +287,16 @@ export class ListTravellerComponent implements OnInit {
       this.travelers = this.travelers.filter(obj => obj.userId !== traveler.userId);
       this.travelers.push(traveler)
     }
-    if(this.travelers.length == 0){
+    if (this.travelers.length == 0) {
       this.showNewForm = true;
     } else {
       this.showNewForm = false;
     }
     //For add class show in traveler tab 
-    this.travellerTabClass = traveler.userId; 
+    this.travellerTabClass = traveler.userId;
   }
 
-  showForm(){
+  showForm() {
     this.showNewForm = true;
   }
 
