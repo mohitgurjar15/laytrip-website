@@ -313,7 +313,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   hideFlightNotAvailable() {
     this.isFlightNotAvailable = false;
     this.flightUniqueCode = '';
-    window.location.reload();
   }
 
 }
