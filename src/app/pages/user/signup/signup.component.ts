@@ -49,17 +49,7 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(queryParams => {
-      if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']
-        && typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
-      ) {
-        console.log(this.route.snapshot.queryParams['utm_source']);
-        localStorage.setItem("referral_id", this.route.snapshot.queryParams['utm_source'])
-      } else {
-        localStorage.removeItem("referral_id")
-      }
-      // do something with the query params
-    });
+   
     this.signupForm = this.formBuilder.group({
       first_name: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]], //old patern: '^[a-zA-Z]+[a-zA-Z]{2,}$'
       last_name: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}')]],
@@ -123,7 +113,10 @@ export class SignupComponent implements OnInit {
       this.loading = false;
       return;
     } else {
-      this.signupForm.get('referral_id').setValue(this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : '');
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        this.signupForm.get('referral_id').setValue(parms.utm_source ? parms.utm_source : '');
+      }
       this.userService.signup(this.signupForm.value).subscribe((data: any) => {
         this.emailForVerifyOtp = this.signupForm.value.email;
         this.submitted = this.loading = false;

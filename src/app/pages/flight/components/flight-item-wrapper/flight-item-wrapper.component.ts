@@ -28,7 +28,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   @Output() changeLoading = new EventEmitter;
   @Output() maxCartValidation = new EventEmitter;
   @Output() removeFlight = new EventEmitter;
-  isFlightNotAvailable : boolean = false;
+  isFlightNotAvailable: boolean = false;
   cartItems = [];
 
   animationState = 'out';
@@ -81,7 +81,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   ngOnInit() {
-
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.flightList = this.flightDetails;
@@ -101,15 +100,15 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       this.cartItems = cartItems;
     })
 
-    setTimeout(()=>{this.loadJquery();},3000)
-    
+    setTimeout(() => { this.loadJquery(); }, 3000)
+
   }
 
   loadJquery() {
     $("body").click(function () {
       $(".code_name_m").hide();
     });
-    $(".code_bt_m").click(function (e){
+    $(".code_bt_m").click(function (e) {
       e.stopPropagation();
       $(this).siblings(".code_name_m").toggle();
     });
@@ -127,7 +126,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   checkUser() {
     let userToken = getLoginUserInfo();
     this.isLoggedIn = false;
-    if (typeof userToken!='undefined' &&  userToken.roleId!=7) {
+    if (typeof userToken != 'undefined' && userToken.roleId != 7) {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
     }
@@ -215,48 +214,55 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       });
     } else { */
 
-      if (this.cartItems && this.cartItems.length >= 10) {
-        this.changeLoading.emit(false);
-        this.maxCartValidation.emit(true)
-      } else {
+    if (this.cartItems && this.cartItems.length >= 10) {
+      this.changeLoading.emit(false);
+      this.maxCartValidation.emit(true)
+    } else {
+      this.changeLoading.emit(true);
+      const itinerary = {
+        adult: this.route.snapshot.queryParams["adult"],
+        child: this.route.snapshot.queryParams["child"],
+        infant: this.route.snapshot.queryParams["infant"],
+        is_passport_required: route.is_passport_required
+      };
+      let lastSearchUrl = this.router.url;
+      this.cookieService.put('_prev_search', lastSearchUrl);
+      const dateNow = new Date();
+      dateNow.setMinutes(dateNow.getMinutes() + 10);
+
+      sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
+
+      let payload = {
+        module_id: 1,
+        route_code: route.route_code,
+        referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
+      };
+      //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
+      this.cartService.addCartItem(payload).subscribe((res: any) => {
         this.changeLoading.emit(true);
-        const itinerary = {
-          adult: this.route.snapshot.queryParams["adult"],
-          child: this.route.snapshot.queryParams["child"],
-          infant: this.route.snapshot.queryParams["infant"],
-          is_passport_required: route.is_passport_required
-        };
-        let lastSearchUrl = this.router.url;
-        this.cookieService.put('_prev_search', lastSearchUrl);
-        const dateNow = new Date();
-        dateNow.setMinutes(dateNow.getMinutes() + 10);
+        let queryParamsNew: any = {};
+        if (res) {
+          let newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] }
+          this.cartItems = [...this.cartItems, newItem]
+          this.cartService.setCartItems(this.cartItems);
 
-        sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
-        
-        let payload = {
-          module_id: 1,
-          route_code: route.route_code
-        };
-        //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
-        this.cartService.addCartItem(payload).subscribe((res: any) => {
-          this.changeLoading.emit(true);
-          if (res) {
-            let newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] }
-            this.cartItems = [...this.cartItems, newItem]
-            this.cartService.setCartItems(this.cartItems);
-
-            localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-            this.router.navigate([`cart/booking`]);
+          localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+          if (this.commonFunction.isRefferal()) {
+            let parms = this.commonFunction.getRefferalParms();
+            this.router.navigate(['cart/booking'], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+          } else {
+            this.router.navigate(['cart/booking']);
           }
-        }, error => {
-          this.changeLoading.emit(false);
-          //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
-          this.isFlightNotAvailable = true;
-          this.flightUniqueCode = route.unique_code;
-          // this.isFlightNotAvailable.emit(true)
-        });
+        }
+      }, error => {
+        this.changeLoading.emit(false);
+        //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+        this.isFlightNotAvailable = true;
+        this.flightUniqueCode = route.unique_code;
+        // this.isFlightNotAvailable.emit(true)
+      });
 
-      }
+    }
     /* } */
   }
 
@@ -299,8 +305,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     return diff;
   }
 
-  convertTime(time){
-    let newTime =  this.commonFunction.convertTime(time,'h:mm A','h:mma')
+  convertTime(time) {
+    let newTime = this.commonFunction.convertTime(time, 'h:mm A', 'h:mma')
     return newTime.slice(0, -1)
   }
 

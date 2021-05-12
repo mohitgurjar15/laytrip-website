@@ -109,17 +109,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   ngOnInit(): void {
     // this.departureDate = moment(this.customStartDateValidation).toDate();
 
-    this.route.queryParams.subscribe(queryParams => {
-      if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']
-        && typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
-      ) {
-        localStorage.setItem("referral_id", this.route.snapshot.queryParams['utm_source'])
-      } else {
-        localStorage.removeItem("referral_id")
-      }
-      // do something with the query params
-    });
-
     if (new Date(this.customStartDateValidation) <= new Date()) {
       this.departureDate = moment().add('31', 'days').toDate();
     }
@@ -250,8 +239,11 @@ export class FlightSearchWidgetComponent implements OnInit {
     queryParams.adult = this.searchFlightInfo.adult;
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
-    queryParams.utm_source = this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : '';
-    queryParams.utm_medium = this.route.snapshot.queryParams['utm_medium'] ? this.route.snapshot.queryParams['utm_medium'] : '';
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+    }
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
