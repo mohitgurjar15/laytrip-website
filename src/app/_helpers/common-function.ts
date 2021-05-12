@@ -249,7 +249,10 @@ export class CommonFunction {
     isRefferal() {
         if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source'] &&
             this.route.snapshot.queryParams['utm_medium']) {
-            return this.route.snapshot.queryParams['utm_source'];
+            return {
+                utm_source: this.route.snapshot.queryParams['utm_source'],
+                utm_medium: this.route.snapshot.queryParams['utm_medium']
+            };
         }
     }
 }
