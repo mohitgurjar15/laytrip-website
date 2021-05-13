@@ -117,7 +117,7 @@
                                 </label>
                                 <div>
                                     {{'already_account' | translate }} <a class="hover-link" target="_blank"
-                                        [routerLink]="['/terms']"> {{'term_and_condition' | translate }}</a> {{'and_the'
+                                        [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" > {{'term_and_condition' | translate }}</a> {{'and_the'
                                     | translate }} <a class="hover-link" target="_blank"
                                         [routerLink]="['/privacy-policy']">{{'privacy_and_policy' | translate }}</a>
                                 </div>

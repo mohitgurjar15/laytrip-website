@@ -229,7 +229,20 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.cartItemsCount = '';
     this.cartService.setCartItems([]);
     this.loginGuestUser();
-    this.router.navigate(['/']);
+    if(this.commonFunction.isRefferal()){
+      var parms = this.commonFunction.getRefferalParms();
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(queryParams.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(queryParams.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate([`/`],{ queryParams : queryParams});
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   loadJquery() {

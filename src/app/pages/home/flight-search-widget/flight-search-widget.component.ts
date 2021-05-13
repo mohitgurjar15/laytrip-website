@@ -241,8 +241,14 @@ export class FlightSearchWidgetComponent implements OnInit {
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
+      
       queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-      queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      if(queryParams.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(queryParams.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
     }
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {

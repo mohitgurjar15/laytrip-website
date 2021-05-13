@@ -327,7 +327,7 @@
                                         </span>
                                         <span class="texts_rules">
                                             Non-refundable, non-transferable. Change policy reflected in Laytrip <a
-                                                [routerLink]="['/terms']">Terms</a> which apply.
+                                                [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" >Terms</a> which apply.
                                         </span>
 
                                     </div>
