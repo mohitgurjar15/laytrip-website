@@ -47,13 +47,13 @@ export class BookComponent implements OnInit {
       uuid: this.uuid,
       transaction_token: this.transaction_token,
     };
-    if (this.commonFunction.isRefferal()) {
-      let parms = this.commonFunction.getRefferalParms();
-      bookingData.referral_id = parms.utm_source ? parms.utm_source : '';
-    }
     this.bookingRequest = JSON.parse(sessionStorage.getItem('__cbk'))
     this.bookingRequest.uuid = this.uuid;
     this.bookingRequest.transaction_token = this.transaction_token;
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      this.bookingRequest.referral_id = parms.utm_source ? parms.utm_source : '';
+    }
 
 
     // this.bookService.bookFlight(bookingData).subscribe((res: any) => {
