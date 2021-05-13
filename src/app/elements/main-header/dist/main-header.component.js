@@ -325,7 +325,21 @@ var MainHeaderComponent = /** @class */ (function () {
     };
     MainHeaderComponent.prototype.redirectToHome = function () {
         $('#empty_modal').modal('hide');
-        this.router.navigate(['/']);
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            var queryParams = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (queryParams.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (queryParams.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(["/"], { queryParams: queryParams });
+        }
+        else {
+            this.router.navigate(['/']);
+        }
     };
     MainHeaderComponent.prototype.loginGuestUser = function () {
         var uuid = localStorage.getItem('__gst');

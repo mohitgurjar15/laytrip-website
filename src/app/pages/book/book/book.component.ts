@@ -42,7 +42,6 @@ export class BookComponent implements OnInit {
   }
 
   bookFlight() {
-    let queryParam: any = {};
     let bookingData: any = {
       uuid: this.uuid,
       transaction_token: this.transaction_token,
@@ -50,10 +49,12 @@ export class BookComponent implements OnInit {
     this.bookingRequest = JSON.parse(sessionStorage.getItem('__cbk'))
     this.bookingRequest.uuid = this.uuid;
     this.bookingRequest.transaction_token = this.transaction_token;
+    console.log('here')
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
       this.bookingRequest.referral_id = parms.utm_source ? parms.utm_source : '';
     }
+    console.log(this.bookingRequest)
 
 
     // this.bookService.bookFlight(bookingData).subscribe((res: any) => {
@@ -89,9 +90,15 @@ export class BookComponent implements OnInit {
       localStorage.setItem('$crt', failedItem.length || 0);
       if (this.commonFunction.isRefferal()) {
         let parms = this.commonFunction.getRefferalParms();
-        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        this.router.navigate([`/cart/confirm/${result.laytripCartId}`], { queryParams: queryParam })
+        var queryParams :any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if (queryParams.utm_medium) {
+            queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if (queryParams.utm_campaign) {
+            queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate([`/cart/confirm/${result.laytripCartId}`], { queryParams: queryParams })
       } else {
         this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
       }

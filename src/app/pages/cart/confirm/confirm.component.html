@@ -40,7 +40,7 @@
                 <p class="para">
                     Thank you for booking your travel with us! We will send you your airline, hotel and/or home
                     reservation numbers prior to your travel date. View your details anytime at <a
-                        [routerLink]="['/account/bookings']">My Bookings</a>.
+                        [routerLink]="['/account/bookings']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" >My Bookings</a>.
                 </p>
             </div>
             <div class="book_detailers" *ngIf="!loading && allBookingStatus">

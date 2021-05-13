@@ -61,7 +61,7 @@
                         <label class="custom_checkbox">
                             <input type="checkbox" (click)="acceptTermCondition($event)" >
                             <span class="checkmark"></span>
-                            I agree to your <a [routerLink]="['/privacy-policy']">Privacy Policy</a> and <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>, which include terms from Laytrip suppliers and travel partners.
+                            I agree to your <a [routerLink]="['/privacy-policy']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Privacy Policy</a> and <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>, which include terms from Laytrip suppliers and travel partners.
                         </label>
                         <label class="custom_checkbox">
                             <input type="checkbox"  (click)="acceptExcludedCountry($event)">
