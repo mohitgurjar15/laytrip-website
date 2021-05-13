@@ -24,18 +24,6 @@ var AppComponent = /** @class */ (function () {
         this.VAPID_PUBLIC_KEY = environment_1.environment.VAPID_PUBLIC_KEY;
         this.setUserOrigin();
         this.getUserLocationInfo();
-        /* this.router.events.subscribe((event: Event) => {
-          if (event instanceof NavigationStart) {
-            // Trigger when route change
-            if(this.route.snapshot.params['id']){
-              this.isValidateReferralId(this.route.snapshot.params['id'])
-            } else {
-              console.log('removed-app')
-              localStorage.removeItem("referral_id")
-            }
-            
-          }
-        }); */
     }
     AppComponent.prototype.ngOnInit = function () {
         var token = localStorage.getItem('_lay_sess');

@@ -33,26 +33,7 @@ var PagesComponent = /** @class */ (function () {
             loop: true
         };
     };
-    PagesComponent.prototype.isValidateReferralId = function () {
-        if (this.route.snapshot.queryParams['utm_source']) {
-            localStorage.setItem("referral_id", this.route.snapshot.queryParams['utm_source']);
-        }
-        else {
-            localStorage.removeItem("referral_id");
-        }
-    };
     PagesComponent.prototype.checkIsValidUser = function () {
-        var _this = this;
-        this.route.queryParams.subscribe(function (queryParams) {
-            if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']
-                && typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage') {
-                localStorage.setItem("referral_id", _this.route.snapshot.queryParams['utm_source']);
-            }
-            else {
-                localStorage.removeItem("referral_id");
-            }
-            // do something with the query params
-        });
         var token = localStorage.getItem('_lay_sess');
         if (token) {
             this.genericService.checkUserValidate(token).subscribe(function (res) {

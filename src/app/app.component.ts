@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { getLoginUserInfo } from './_helpers/jwt.helper';
 import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
-import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,7 @@ import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router'
 export class AppComponent {
   title = 'laytrip-website';
   readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
+  
   constructor(
     private cookieService:CookieService,
     private genericService:GenericService,
@@ -27,21 +28,6 @@ export class AppComponent {
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
-
-    /* this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationStart) {
-        // Trigger when route change
-        if(this.route.snapshot.params['id']){
-          this.isValidateReferralId(this.route.snapshot.params['id'])
-        } else {
-          console.log('removed-app')
-          localStorage.removeItem("referral_id")
-        }
-        
-      }
-    }); */
-   
-
   }
 
   ngOnInit(){
@@ -146,3 +132,5 @@ export class AppComponent {
   }
 
 }
+
+  

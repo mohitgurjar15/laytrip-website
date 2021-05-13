@@ -40,26 +40,8 @@ export class PagesComponent implements OnInit {
     };
   }
 
-  isValidateReferralId(){
-    if(this.route.snapshot.queryParams['utm_source']){
-      localStorage.setItem("referral_id",this.route.snapshot.queryParams['utm_source'])     
-    } else {      
-      localStorage.removeItem("referral_id")
-    }
-  }
-
   checkIsValidUser() {
-      this.route.queryParams.subscribe(queryParams => {
-      if(typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']
-      && typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
-      ){      
-        localStorage.setItem("referral_id",this.route.snapshot.queryParams['utm_source'])
-      }else {
-        localStorage.removeItem("referral_id")
-      }
-      // do something with the query params
-    });
-     
+           
     var token = localStorage.getItem('_lay_sess');
     if (token) {
       this.genericService.checkUserValidate(token).subscribe((res: any) => {

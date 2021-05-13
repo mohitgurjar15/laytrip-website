@@ -210,19 +210,25 @@ var CommonFunction = /** @class */ (function () {
         return moment(time, sourceFormat).format(targetFormat);
     };
     CommonFunction.prototype.isRefferal = function () {
-        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source'] &&
-            this.route.snapshot.queryParams['utm_medium']) {
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
             return true;
+        }
+        else {
+            return false;
         }
     };
     CommonFunction.prototype.getRefferalParms = function () {
-        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source'] &&
-            this.route.snapshot.queryParams['utm_medium']) {
-            return {
-                utm_source: this.route.snapshot.queryParams['utm_source'],
-                utm_medium: this.route.snapshot.queryParams['utm_medium']
-            };
+        var parms = {};
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
+            parms.utm_source = this.route.snapshot.queryParams['utm_source'];
         }
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_medium']) {
+            parms.utm_medium = this.route.snapshot.queryParams['utm_medium'];
+        }
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_campaign']) {
+            parms.utm_campaign = this.route.snapshot.queryParams['utm_campaign'];
+        }
+        return parms;
     };
     CommonFunction = __decorate([
         core_1.Injectable({
