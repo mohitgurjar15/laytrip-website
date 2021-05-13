@@ -73,6 +73,8 @@ export class HotelItemWrapperComponent implements OnInit {
   hotelCount: number = 0;
   previousHotelIndex: number = -1;
   @ViewChildren(NgbCarousel) carousel: QueryList<any>;
+  isMarkerClicked = false;
+  clickedHotelIndex;
 
   constructor(
     private route: ActivatedRoute,
@@ -230,29 +232,29 @@ export class HotelItemWrapperComponent implements OnInit {
     }
   }
 
-  openInfoWindow(infoWindow, gm) {
+  openInfoWindow(infoWindow) {
     infoWindow.open();
   }
 
-  closeInfoWindow(infoWindow, gm) {
+  closeInfoWindow(infoWindow) {
     infoWindow.close();
   }
 
   displayHotelDetails(hotelId, infoWindow, type) {
-    if (this.previousInfoWindow == null) {
-      infoWindow.open();
-      this.previousInfoWindow = infoWindow;
-    } else {
-      this.infoWindowOpened = infoWindow;
-      if (this.previousInfoWindow != null) {
-        this.previousInfoWindow.close();
-        this.previousInfoWindow = null;
-      }
-    }
-    this.previousInfoWindow = infoWindow;
+    // if (this.previousInfoWindow == null) {
+    //   infoWindow.open();
+    //   this.previousInfoWindow = infoWindow;
+    // } else {
+    //   this.infoWindowOpened = infoWindow;
+    //   if (this.previousInfoWindow != null) {
+    //     this.previousInfoWindow.close();
+    //     this.previousInfoWindow = null;
+    //   }
+    // }
+    // this.previousInfoWindow = infoWindow;
 
     if (type === 'click') {
-
+      this.isMarkerClicked = true;
       if (this.previousHotelIndex > -1) {
         let previousHotel = this.hotelListArray[0];
         //console.log(this.previousHotelIndex,previousHotel)
@@ -264,6 +266,7 @@ export class HotelItemWrapperComponent implements OnInit {
       if (hotelIndex >= 0) {
         this.hotelListArray.unshift(this.hotelListArray.splice(hotelIndex, 1)[0]);
         this.previousHotelIndex = hotelIndex;
+        this.clickedHotelIndex = hotelIndex;
       }
       /* else{
         let hotel = this.hotelList.find(hotel => hotel.id == hotelId);
@@ -316,6 +319,8 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   differentView(view) {
+    this.isMarkerClicked = false;
+    this.clickedHotelIndex = '';
     this.isMapView = (view !== 'listView');
     if (this.isMapView) {
       if (this.bounds) {
@@ -346,6 +351,8 @@ export class HotelItemWrapperComponent implements OnInit {
   pageChanged(page) {
     this.currentPage = page;
     window.scroll(0, 0);
+    this.isMarkerClicked = false;
+    this.clickedHotelIndex = '';
   }
 
   getMapPrice(hotel) {
@@ -353,19 +360,43 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   checkMarkersInBounds(bounds) {
-    this.bounds = bounds;
-    if (this.isMapView) {
-      this.hotelListArray = [];
-      for (let hotel of this.hotelList) {
-        let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
-        if (this.bounds.contains(hotelPosition)) {
-          this.hotelListArray.push(hotel)
-          //this.hotelDetails=[...this.hotelListArray]
-        }
+    if (this.isMarkerClicked && this.clickedHotelIndex) {
+      let hotelIndex = this.hotelListArray.findIndex(hotel => hotel.id == this.clickedHotelIndex);
+      if (hotelIndex >= 0) {
+        this.hotelListArray.unshift(this.hotelListArray.splice(hotelIndex, 1)[0]);
+        this.previousHotelIndex = hotelIndex;
+        this.clickedHotelIndex = hotelIndex;
       }
+    } else {
+      this.isMarkerClicked = false;
+      this.clickedHotelIndex = '';
+      this.bounds = bounds;
+      if (this.isMapView) {
+        this.hotelListArray = [];
+        for (let hotel of this.hotelList) {
+          let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
+          if (this.bounds.contains(hotelPosition)) {
+            this.hotelListArray.push(hotel)
+            //this.hotelDetails=[...this.hotelListArray]
+          }
+        }
 
-      this.hotelCount = this.hotelListArray.length;
+        this.hotelCount = this.hotelListArray.length;
+      }
     }
+    // this.bounds = bounds;
+    // if (this.isMapView) {
+    //   this.hotelListArray = [];
+    //   for (let hotel of this.hotelList) {
+    //     let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
+    //     if (this.bounds.contains(hotelPosition)) {
+    //       this.hotelListArray.push(hotel)
+    //       //this.hotelDetails=[...this.hotelListArray]
+    //     }
+    //   }
+
+    //   this.hotelCount = this.hotelListArray.length;
+    // }
 
   }
 
