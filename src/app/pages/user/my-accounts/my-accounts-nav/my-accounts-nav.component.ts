@@ -47,12 +47,17 @@ export class MyAccountsNavComponent implements OnInit {
   onLoggedout() {
     this.isLoggedIn = false;
     localStorage.removeItem('_lay_sess');
-    let queryParam: any = {};
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
-      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-      this.router.navigate(['/'], { queryParams: queryParam });
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate(['/'], { queryParams: queryParams });
     } else {
       this.router.navigate(['/']);
     }

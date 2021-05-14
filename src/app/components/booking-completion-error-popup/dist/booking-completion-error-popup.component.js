@@ -6,18 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.PartialPaymentComponent = void 0;
+exports.BookingCompletionErrorPopupComponent = void 0;
 var core_1 = require("@angular/core");
-var environment_1 = require("../../../../environments/environment");
-var PartialPaymentComponent = /** @class */ (function () {
-    function PartialPaymentComponent(router, commonFunction) {
+var environment_1 = require("../../../environments/environment");
+var BookingCompletionErrorPopupComponent = /** @class */ (function () {
+    function BookingCompletionErrorPopupComponent(activeModal, router, commonFunction) {
+        this.activeModal = activeModal;
         this.router = router;
         this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
     }
-    PartialPaymentComponent.prototype.ngOnInit = function () {
+    BookingCompletionErrorPopupComponent.prototype.ngOnInit = function () {
     };
-    PartialPaymentComponent.prototype.redirectToAboutPage = function () {
+    BookingCompletionErrorPopupComponent.prototype.returnToCart = function () {
         if (this.commonFunction.isRefferal()) {
             var parms = this.commonFunction.getRefferalParms();
             var queryParams = {};
@@ -28,19 +29,23 @@ var PartialPaymentComponent = /** @class */ (function () {
             if (parms.utm_campaign) {
                 queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
-            this.router.navigate(['/about/'], { queryParams: queryParams });
+            this.router.navigate(['/cart/booking'], { queryParams: queryParams });
         }
         else {
-            this.router.navigate(['/about/']);
+            this.router.navigate(['/cart/booking']);
         }
     };
-    PartialPaymentComponent = __decorate([
+    BookingCompletionErrorPopupComponent.prototype.close = function () {
+        this.activeModal.close();
+        //this.router.navigate(['/cart/booking']);
+    };
+    BookingCompletionErrorPopupComponent = __decorate([
         core_1.Component({
-            selector: 'app-partial-payment',
-            templateUrl: './partial-payment.component.html',
-            styleUrls: ['./partial-payment.component.scss']
+            selector: 'app-booking-completion-error-popup',
+            templateUrl: './booking-completion-error-popup.component.html',
+            styleUrls: ['./booking-completion-error-popup.component.scss']
         })
-    ], PartialPaymentComponent);
-    return PartialPaymentComponent;
+    ], BookingCompletionErrorPopupComponent);
+    return BookingCompletionErrorPopupComponent;
 }());
-exports.PartialPaymentComponent = PartialPaymentComponent;
+exports.BookingCompletionErrorPopupComponent = BookingCompletionErrorPopupComponent;

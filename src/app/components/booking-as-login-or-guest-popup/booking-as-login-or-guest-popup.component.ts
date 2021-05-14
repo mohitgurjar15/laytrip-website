@@ -35,12 +35,17 @@ export class BookingAsLoginOrGuestPopupComponent implements OnInit {
       $("#sign_in_modal").modal('show');
     } if (type == 'guest') {
       sessionStorage.setItem('__insMode', btoa('no-instalment'))
-      let queryParam: any = {};
       if (this.commonFunction.isRefferal()) {
         let parms = this.commonFunction.getRefferalParms();
-        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        this.router.navigate(['/flight/travelers', this.routeCode], { queryParams: queryParam });
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/flight/travelers', this.routeCode], { queryParams: queryParams });
       } else {
         this.router.navigate(['/flight/travelers', this.routeCode]);
       }

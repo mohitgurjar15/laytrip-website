@@ -40,12 +40,17 @@ export class MyWalletAddPointsComponent implements OnInit {
     this.currency = JSON.parse(_currency);
     this.userInfo = getLoginUserInfo();
     if (typeof this.userInfo.roleId === 'undefined') {
-      let queryParam: any = {};
       if (this.commonFunction.isRefferal()) {
         let parms = this.commonFunction.getRefferalParms();
-        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        this.router.navigate(['/'], { queryParams: queryParam });
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/'], { queryParams: queryParams });
       } else {
         this.router.navigate(['/']);
       }
@@ -85,12 +90,17 @@ export class MyWalletAddPointsComponent implements OnInit {
   }
 
   toggleCancellationPolicy() {
-    let queryParam: any = {};
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
-      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-      this.router.navigate(['cancellation-policy'], { queryParams: queryParam });
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate(['cancellation-policy'], { queryParams: queryParams });
     } else {
       this.router.navigate(['cancellation-policy']);
     }
@@ -103,12 +113,17 @@ export class MyWalletAddPointsComponent implements OnInit {
       this.loading = false;
       this.getLayCreditInfo();
       // this.toastr.success(res.message, 'Points');
-      let queryParam: any = {};
       if (this.commonFunction.isRefferal()) {
         let parms = this.commonFunction.getRefferalParms();
-        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        this.router.navigate(['/account/lay-credit-points'], { queryParams: queryParam });
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/account/lay-credit-points'], { queryParams: queryParams });
       } else {
         this.router.navigate(['/account/lay-credit-points']);
       }

@@ -44,10 +44,7 @@ export class SocialLoginComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(queryParams => {
-      if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']
-        && typeof queryParams['utm_medium'] != 'undefined' && queryParams['utm_medium'] == 'landingpage'
-      ) {
-        console.log(this.route.snapshot.queryParams['utm_source']);
+      if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']) {
         localStorage.setItem("referral_id", this.route.snapshot.queryParams['utm_source'])
       } else {
         localStorage.removeItem("referral_id")
@@ -64,7 +61,7 @@ export class SocialLoginComponent implements OnInit {
         let objApple = getUserDetails(userInfo.authorization.id_token);
         console.log(objApple, userInfo)
 
-        let jsonData = {
+        let jsonData :any = {
           "account_type": 3,
           "name": "",
           "email": objApple.email,
@@ -73,9 +70,11 @@ export class SocialLoginComponent implements OnInit {
           "device_model": "RNE-L22",
           "device_token": "123abc#$%456",
           "app_version": "1.0",
-          "os_version": "7.0",
-          "referral_id": this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
+          "os_version": "7.0"        
         };
+        if(this.route.snapshot.queryParams['utm_source']){
+          jsonData.referral_id = this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''; 
+        }
         this.userService.socialLogin(jsonData).subscribe((data: any) => {
           if (data.user_details) {
 

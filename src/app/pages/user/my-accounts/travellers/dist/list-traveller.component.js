@@ -12,7 +12,7 @@ var environment_1 = require("../../../../../environments/environment");
 var moment = require("moment");
 var traveller_form_component_1 = require("./traveller-form/traveller-form.component");
 var ListTravellerComponent = /** @class */ (function () {
-    function ListTravellerComponent(travelerService, router, modalService, toastr, genericService, cookieService, renderer) {
+    function ListTravellerComponent(travelerService, router, modalService, toastr, genericService, cookieService, renderer, commonFunction) {
         this.travelerService = travelerService;
         this.router = router;
         this.modalService = modalService;
@@ -20,6 +20,7 @@ var ListTravellerComponent = /** @class */ (function () {
         this.genericService = genericService;
         this.cookieService = cookieService;
         this.renderer = renderer;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
         this.closeResult = '';
@@ -78,7 +79,21 @@ var ListTravellerComponent = /** @class */ (function () {
             _this.loading = _this.showPaginationBar = false;
             _this.notFound = true;
             if (error.status === 401) {
-                _this.router.navigate(['/']);
+                if (_this.commonFunction.isRefferal()) {
+                    var parms = _this.commonFunction.getRefferalParms();
+                    var queryParams = {};
+                    queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                    if (parms.utm_medium) {
+                        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                    }
+                    if (parms.utm_campaign) {
+                        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                    }
+                    _this.router.navigate(['/'], { queryParams: queryParams });
+                }
+                else {
+                    _this.router.navigate(['/']);
+                }
             }
         });
     };
@@ -114,7 +129,8 @@ var ListTravellerComponent = /** @class */ (function () {
                     name: country.phonecode + ' (' + country.iso2 + ')',
                     countryCode: country.phonecode,
                     country_name: country.name + ' ' + country.phonecode,
-                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg',
+                    iso2: country.iso2
                 };
             });
             var filteredArr = _this.countries_code.reduce(function (acc, current) {

@@ -32,12 +32,17 @@ export class UserBenefitComponent implements OnInit {
     this.loading = true;
     if (this.userDetails.roleId == 6) {
       this.loading = false;
-      let queryParam: any = {};
       if (this.commonFunction.isRefferal()) {
         let parms = this.commonFunction.getRefferalParms();
-        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        this.router.navigate(['account/subscription'], { queryParams: queryParam });
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['account/subscription'], { queryParams: queryParams });
       } else {
         this.router.navigate(['account/subscription']);
       }

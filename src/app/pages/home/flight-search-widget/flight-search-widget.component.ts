@@ -243,13 +243,14 @@ export class FlightSearchWidgetComponent implements OnInit {
       let parms = this.commonFunction.getRefferalParms();
       
       queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-      if(queryParams.utm_medium){
+      if(parms.utm_medium){
         queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
       }
-      if(queryParams.utm_campaign){
+      if(parms.utm_campaign){
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
+    console.log(queryParams)
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));

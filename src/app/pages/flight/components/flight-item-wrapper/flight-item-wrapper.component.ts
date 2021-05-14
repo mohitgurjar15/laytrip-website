@@ -249,7 +249,15 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
           localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
           if (this.commonFunction.isRefferal()) {
             let parms = this.commonFunction.getRefferalParms();
-            this.router.navigate(['cart/booking'], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+            var queryParams: any = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if(parms.utm_medium){
+              queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if(parms.utm_campaign){
+              queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(['cart/booking'], { queryParams:queryParams });
           } else {
             this.router.navigate(['cart/booking']);
           }

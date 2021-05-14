@@ -294,12 +294,17 @@ export class BookingComponent implements OnInit {
   }
 
   handleSubmit() {
-    let queryParam: any = {};
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
-      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-      this.router.navigate(['/flight/checkout'], { queryParams: queryParam });
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate(['/flight/checkout'], { queryParams: queryParams });
     } else {
       this.router.navigate(['/flight/checkout']);
     }
@@ -349,13 +354,18 @@ export class BookingComponent implements OnInit {
   }
 
   redirectTo(uri: string) {
-    let queryParam: any = {};
     if (this.commonFunction.isRefferal()) {
-      let parms = this.commonFunction.getRefferalParms();
-      queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-      queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      let parms = this.commonFunction.getRefferalParms();      
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate([uri], { queryParams: queryParam }));
+      this.router.navigate([uri], { queryParams: queryParams }));
     } else {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
         this.router.navigate([uri]));
@@ -415,7 +425,15 @@ export class BookingComponent implements OnInit {
     } else {
       if (this.commonFunction.isRefferal()) {
         var parms = this.commonFunction.getRefferalParms();
-        this.router.navigate(['/'], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/'], { queryParams:queryParams });
       } else {
         this.router.navigate(['/']);
       }
@@ -620,11 +638,18 @@ export class BookingComponent implements OnInit {
         }
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
-            let queryParamsNew: any = {};
             this.loading = false;
             if (this.commonFunction.isRefferal()) {
               let parms = this.commonFunction.getRefferalParms();
-              this.router.navigate(['cart/checkout'], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+              var queryParams: any = {};
+              queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+              if(parms.utm_medium){
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+              }
+              if(parms.utm_campaign){
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+              }
+              this.router.navigate(['cart/checkout'], { queryParams: queryParams });
             } else {
               this.router.navigate(['cart/checkout']);
             }

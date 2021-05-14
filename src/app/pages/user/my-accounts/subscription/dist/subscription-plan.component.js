@@ -6,20 +6,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.FlightConfirmationComponent = void 0;
+exports.SubscriptionPlanComponent = void 0;
 var core_1 = require("@angular/core");
-var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
 var environment_1 = require("../../../../../environments/environment");
-var FlightConfirmationComponent = /** @class */ (function () {
-    function FlightConfirmationComponent(commonFunction, router) {
-        this.commonFunction = commonFunction;
+var SubscriptionPlanComponent = /** @class */ (function () {
+    function SubscriptionPlanComponent(userService, router, commonFunction) {
+        this.userService = userService;
         this.router = router;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.loading = false;
     }
-    FlightConfirmationComponent.prototype.ngOnInit = function () {
-        this.userData = jwt_helper_1.getLoginUserInfo();
+    SubscriptionPlanComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        window.scroll(0, 0);
+        this.loading = true;
+        var _currency = localStorage.getItem('_curr');
+        this.currency = JSON.parse(_currency);
+        this.userService.getSubscriptionList().subscribe(function (res) {
+            // console.log(res.data);
+            if (res && res.data) {
+                _this.subscriptionList = res.data;
+                _this.loading = false;
+            }
+        });
     };
-    FlightConfirmationComponent.prototype.backToHome = function () {
+    SubscriptionPlanComponent.prototype.subscribeNow = function (planId) {
         if (this.commonFunction.isRefferal()) {
             var parms = this.commonFunction.getRefferalParms();
             var queryParams = {};
@@ -30,22 +42,19 @@ var FlightConfirmationComponent = /** @class */ (function () {
             if (parms.utm_campaign) {
                 queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
-            this.router.navigate([''], { queryParams: queryParams });
+            this.router.navigate(['/account/subscription', planId], { queryParams: queryParams });
         }
         else {
-            this.router.navigate(['']);
+            this.router.navigate(['/account/subscription', planId]);
         }
     };
-    __decorate([
-        core_1.Input()
-    ], FlightConfirmationComponent.prototype, "bookingData");
-    FlightConfirmationComponent = __decorate([
+    SubscriptionPlanComponent = __decorate([
         core_1.Component({
-            selector: 'app-flight-confirmation',
-            templateUrl: './flight-confirmation.component.html',
-            styleUrls: ['./flight-confirmation.component.scss']
+            selector: 'app-subscription-plan',
+            templateUrl: './subscription-plan.component.html',
+            styleUrls: ['./subscription-plan.component.scss']
         })
-    ], FlightConfirmationComponent);
-    return FlightConfirmationComponent;
+    ], SubscriptionPlanComponent);
+    return SubscriptionPlanComponent;
 }());
-exports.FlightConfirmationComponent = FlightConfirmationComponent;
+exports.SubscriptionPlanComponent = SubscriptionPlanComponent;

@@ -255,8 +255,13 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location)));
     if(this.commonFunction.isRefferal()){
       var refferalParms =  this.commonFunction.getRefferalParms();
-      queryParams.utm_source = refferalParms.utm_source ; 
-      queryParams.utm_medium = refferalParms.utm_medium ; 
+      queryParams.utm_source = refferalParms.utm_source ? refferalParms.utm_source : '';
+      if(refferalParms.utm_medium){
+        queryParams.utm_medium = refferalParms.utm_medium ? refferalParms.utm_medium : '';
+      }
+      if(refferalParms.utm_campaign){
+        queryParams.utm_campaign = refferalParms.utm_campaign ? refferalParms.utm_campaign : '';
+      }
     }
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {

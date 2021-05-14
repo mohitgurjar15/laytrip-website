@@ -210,7 +210,15 @@ var FlightItemWrapperComponent = /** @class */ (function () {
                     localStorage.setItem('$crt', JSON.stringify(_this.cartItems.length));
                     if (_this.commonFunction.isRefferal()) {
                         var parms = _this.commonFunction.getRefferalParms();
-                        _this.router.navigate(['cart/booking'], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+                        var queryParams = {};
+                        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                        if (parms.utm_medium) {
+                            queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                        }
+                        if (parms.utm_campaign) {
+                            queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                        }
+                        _this.router.navigate(['cart/booking'], { queryParams: queryParams });
                     }
                     else {
                         _this.router.navigate(['cart/booking']);

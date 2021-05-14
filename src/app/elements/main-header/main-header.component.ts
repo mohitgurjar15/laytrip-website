@@ -233,10 +233,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       var parms = this.commonFunction.getRefferalParms();
       var queryParams: any = {};
       queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-      if(queryParams.utm_medium){
+      if(parms.utm_medium){
         queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
       }
-      if(queryParams.utm_campaign){
+      if(parms.utm_campaign){
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
       this.router.navigate([`/`],{ queryParams : queryParams});
@@ -288,7 +288,15 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if (this.cartItemsCount > 0) {
       if(this.commonFunction.isRefferal()){
         var parms = this.commonFunction.getRefferalParms();
-        this.router.navigate([`cart/booking`],{ queryParams : {utm_source:parms.utm_source,utm_medium:parms.utm_medium}});
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate([`cart/booking`],{ queryParams : queryParams});
       } else {
         this.router.navigate([`cart/booking`]);
       }
@@ -368,10 +376,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       var parms = this.commonFunction.getRefferalParms();
       var queryParams: any = {};
       queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-      if(queryParams.utm_medium){
+      if(parms.utm_medium){
         queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
       }
-      if(queryParams.utm_campaign){
+      if(parms.utm_campaign){
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
       this.router.navigate([`/`],{ queryParams : queryParams});

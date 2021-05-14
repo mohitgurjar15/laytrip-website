@@ -52,12 +52,17 @@ export class PlanSubscriptionComponent implements OnInit {
     this.planId = this.route.snapshot.paramMap.get('id');
     this.userInfo = getLoginUserInfo();
     if (typeof this.userInfo.roleId == 'undefined') {
-      let queryParam: any = {};
       if (this.commonFunction.isRefferal()) {
         let parms = this.commonFunction.getRefferalParms();
-        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        this.router.navigate(['/'], { queryParams: queryParam });
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/'], { queryParams: queryParams });
       } else {
         this.router.navigate(['/']);
       }
@@ -99,12 +104,17 @@ export class PlanSubscriptionComponent implements OnInit {
         titleClass: 'custom_toastr_title',
         messageClass: 'custom_toastr_message',
       });
-      let queryParam: any = {};
       if (this.commonFunction.isRefferal()) {
         let parms = this.commonFunction.getRefferalParms();
-        queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-        queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        this.router.navigate(['/'], { queryParams: queryParam });
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/'], { queryParams: queryParams });
       } else {
         this.router.navigate(['/']);
       }

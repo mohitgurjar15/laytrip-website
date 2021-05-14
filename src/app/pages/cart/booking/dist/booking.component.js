@@ -240,12 +240,17 @@ var BookingComponent = /** @class */ (function () {
         });
     };
     BookingComponent.prototype.handleSubmit = function () {
-        var queryParam = {};
         if (this.commonFunction.isRefferal()) {
             var parms = this.commonFunction.getRefferalParms();
-            queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-            queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-            this.router.navigate(['/flight/checkout'], { queryParams: queryParam });
+            var queryParams = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(['/flight/checkout'], { queryParams: queryParams });
         }
         else {
             this.router.navigate(['/flight/checkout']);
@@ -294,13 +299,18 @@ var BookingComponent = /** @class */ (function () {
     };
     BookingComponent.prototype.redirectTo = function (uri) {
         var _this = this;
-        var queryParam = {};
         if (this.commonFunction.isRefferal()) {
             var parms = this.commonFunction.getRefferalParms();
-            queryParam.utm_source = parms.utm_source ? parms.utm_source : '';
-            queryParam.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            var queryParams = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
-                return _this.router.navigate([uri], { queryParams: queryParam });
+                return _this.router.navigate([uri], { queryParams: queryParams });
             });
         }
         else {
@@ -357,7 +367,15 @@ var BookingComponent = /** @class */ (function () {
         else {
             if (this.commonFunction.isRefferal()) {
                 var parms = this.commonFunction.getRefferalParms();
-                this.router.navigate(['/'], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+                var queryParams = {};
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                if (parms.utm_medium) {
+                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                }
+                if (parms.utm_campaign) {
+                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+                this.router.navigate(['/'], { queryParams: queryParams });
             }
             else {
                 this.router.navigate(['/']);
@@ -546,11 +564,18 @@ var BookingComponent = /** @class */ (function () {
                 };
                 this_2.cartService.updateCart(cartData).subscribe(function (data) {
                     if (i === _this.carts.length - 1) {
-                        var queryParamsNew = {};
                         _this.loading = false;
                         if (_this.commonFunction.isRefferal()) {
                             var parms = _this.commonFunction.getRefferalParms();
-                            _this.router.navigate(['cart/checkout'], { queryParams: { utm_source: parms.utm_source, utm_medium: parms.utm_medium } });
+                            var queryParams = {};
+                            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                            if (parms.utm_medium) {
+                                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                            }
+                            if (parms.utm_campaign) {
+                                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                            }
+                            _this.router.navigate(['cart/checkout'], { queryParams: queryParams });
                         }
                         else {
                             _this.router.navigate(['cart/checkout']);

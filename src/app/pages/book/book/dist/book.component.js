@@ -41,12 +41,10 @@ var BookComponent = /** @class */ (function () {
         this.bookingRequest = JSON.parse(sessionStorage.getItem('__cbk'));
         this.bookingRequest.uuid = this.uuid;
         this.bookingRequest.transaction_token = this.transaction_token;
-        console.log('here');
         if (this.commonFunction.isRefferal()) {
             var parms = this.commonFunction.getRefferalParms();
             this.bookingRequest.referral_id = parms.utm_source ? parms.utm_source : '';
         }
-        console.log(this.bookingRequest);
         // this.bookService.bookFlight(bookingData).subscribe((res: any) => {
         //   console.log(res);
         //   if (res.status == 'complete') {
@@ -83,10 +81,10 @@ var BookComponent = /** @class */ (function () {
                 var parms = _this.commonFunction.getRefferalParms();
                 var queryParams = {};
                 queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-                if (queryParams.utm_medium) {
+                if (parms.utm_medium) {
                     queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
                 }
-                if (queryParams.utm_campaign) {
+                if (parms.utm_campaign) {
                     queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
                 }
                 _this.router.navigate(["/cart/confirm/" + result.laytripCartId], { queryParams: queryParams });

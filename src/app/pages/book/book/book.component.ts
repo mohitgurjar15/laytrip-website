@@ -49,13 +49,10 @@ export class BookComponent implements OnInit {
     this.bookingRequest = JSON.parse(sessionStorage.getItem('__cbk'))
     this.bookingRequest.uuid = this.uuid;
     this.bookingRequest.transaction_token = this.transaction_token;
-    console.log('here')
     if (this.commonFunction.isRefferal()) {
-      let parms = this.commonFunction.getRefferalParms();
+      let parms = this.commonFunction.getRefferalParms();      
       this.bookingRequest.referral_id = parms.utm_source ? parms.utm_source : '';
     }
-    console.log(this.bookingRequest)
-
 
     // this.bookService.bookFlight(bookingData).subscribe((res: any) => {
     //   console.log(res);
@@ -92,10 +89,10 @@ export class BookComponent implements OnInit {
         let parms = this.commonFunction.getRefferalParms();
         var queryParams :any = {};
         queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-        if (queryParams.utm_medium) {
+        if (parms.utm_medium) {
             queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
         }
-        if (queryParams.utm_campaign) {
+        if (parms.utm_campaign) {
             queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
         }
         this.router.navigate([`/cart/confirm/${result.laytripCartId}`], { queryParams: queryParams })
