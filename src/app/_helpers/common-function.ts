@@ -67,11 +67,12 @@ export class CommonFunction {
         if (accessToken) {
             reqData = {
                 headers: {
-                    Authorization: `Bearer ${accessToken}`
+                    Authorization: `Bearer ${accessToken}`,
+                    referral_id: this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``
                 },
-                referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
             };
         }
+        console.log(this.route.snapshot.queryParams['utm_source'])
         if (params) {
             let reqParams = {};
             Object.keys(params).map(k => {
