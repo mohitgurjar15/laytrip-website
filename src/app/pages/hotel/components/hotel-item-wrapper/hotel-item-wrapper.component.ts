@@ -207,7 +207,7 @@ export class HotelItemWrapperComponent implements OnInit {
       return false;
     }
 
-    this.scrollLoading = (this.hotelDetails.length != this.hotelListArray.length) ?  true : false;
+    this.scrollLoading = (this.hotelDetails.length != this.hotelListArray.length) ? true : false;
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.hotelDetails.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
@@ -229,18 +229,13 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   displayHotelDetails(hotelId, infoWindow, type) {
-
     infoWindow.open();
     if (this.previousInfoWindow == null)
       this.previousInfoWindow = infoWindow;
     else {
       this.infoWindowOpened = infoWindow;
-      console.log(this.previousInfoWindow)
       if (this.previousInfoWindow != null) {
         this.previousInfoWindow.close();
-      } else {
-        infoWindow.close();
-        console.log('error')
       }
     }
     this.previousInfoWindow = infoWindow
