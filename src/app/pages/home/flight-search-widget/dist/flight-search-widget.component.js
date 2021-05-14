@@ -107,6 +107,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 localStorage.setItem('__from', params['departure']);
                 localStorage.setItem('__to', params['arrival']);
                 _this.searchFlightInfo["class"] = params['class'];
+                _this.searchFlightInfo.adult = params['adult'];
+                _this.searchFlightInfo.child = params['child'];
+                _this.searchFlightInfo.infant = params['infant'];
                 _this.departureDate = moment(params['departure_date']).toDate();
                 // console.log(params['departure_date'], moment(params['departure_date']).format("YYYY-MM-DD"))
                 if (moment(_this.departureDate).format("YYYY-MM-DD") < _this.customStartDateValidation) {
@@ -121,6 +124,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             else {
                 _this.calPrices = false;
             }
+            console.log(_this.searchFlightInfo);
         });
         this.homeService.getToString.subscribe(function (toSearchString) {
             if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
@@ -181,6 +185,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.searchFlightInfo.child = event.child;
         this.searchFlightInfo.infant = event.infant;
         this.totalPerson = event.totalPerson;
+        console.log(this.searchFlightInfo);
         this.searchedValue.push({ key: 'travellers', value: event });
     };
     FlightSearchWidgetComponent.prototype.changeEconomyInfo = function (event) {
@@ -198,9 +203,10 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
         }
         queryParams["class"] = this.searchFlightInfo["class"] ? this.searchFlightInfo["class"] : 'Economy';
-        queryParams.adult = this.searchFlightInfo.adult;
+        queryParams.adult = this.searchFlightInfo.adult ? this.searchFlightInfo.adult : 1;
         queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
         queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
+        console.log(this.searchFlightInfo);
         if (this.commonFunction.isRefferal()) {
             var parms = this.commonFunction.getRefferalParms();
             queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
@@ -211,7 +217,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
         }
-        console.log(queryParams);
         if (this.searchFlightInfo && this.totalPerson &&
             this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
             localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
@@ -234,6 +239,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.departureDate = moment(date).toDate();
         this.returnDate = new Date(date);
         this.flightReturnMinDate = new Date(date);
+        console.log(this.searchFlightInfo);
     };
     FlightSearchWidgetComponent.prototype.swapAirport = function () {
         var temp = this.searchFlightInfo.departure;

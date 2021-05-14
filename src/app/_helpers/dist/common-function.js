@@ -59,7 +59,8 @@ var CommonFunction = /** @class */ (function () {
             reqData = {
                 headers: {
                     Authorization: "Bearer " + accessToken
-                }
+                },
+                referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
             };
         }
         if (params) {

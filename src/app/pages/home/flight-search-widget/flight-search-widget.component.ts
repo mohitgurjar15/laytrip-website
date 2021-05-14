@@ -135,6 +135,9 @@ export class FlightSearchWidgetComponent implements OnInit {
         localStorage.setItem('__to', params['arrival'])
 
         this.searchFlightInfo.class = params['class'];
+        this.searchFlightInfo.adult = params['adult'];
+        this.searchFlightInfo.child = params['child'];
+        this.searchFlightInfo.infant = params['infant'];
         this.departureDate = moment(params['departure_date']).toDate();
         // console.log(params['departure_date'], moment(params['departure_date']).format("YYYY-MM-DD"))
         if (moment(this.departureDate).format("YYYY-MM-DD") < this.customStartDateValidation) {
@@ -148,6 +151,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       } else {
         this.calPrices = false;
       }
+      console.log(this.searchFlightInfo)
     });
 
     this.homeService.getToString.subscribe(toSearchString => {
@@ -218,6 +222,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.searchFlightInfo.child = event.child;
     this.searchFlightInfo.infant = event.infant;
     this.totalPerson = event.totalPerson;
+    console.log(this.searchFlightInfo)
     this.searchedValue.push({ key: 'travellers', value: event });
   }
 
@@ -236,9 +241,10 @@ export class FlightSearchWidgetComponent implements OnInit {
       queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
     }
     queryParams.class = this.searchFlightInfo.class ? this.searchFlightInfo.class : 'Economy';
-    queryParams.adult = this.searchFlightInfo.adult;
+    queryParams.adult = this.searchFlightInfo.adult ? this.searchFlightInfo.adult : 1;
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
+    console.log(this.searchFlightInfo)
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
       
@@ -250,7 +256,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
-    console.log(queryParams)
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
@@ -277,6 +282,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.departureDate = moment(date).toDate();
     this.returnDate = new Date(date);
     this.flightReturnMinDate = new Date(date);
+    console.log(this.searchFlightInfo)
   }
 
 
