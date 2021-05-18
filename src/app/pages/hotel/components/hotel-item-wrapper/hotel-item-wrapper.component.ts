@@ -171,6 +171,17 @@ export class HotelItemWrapperComponent implements OnInit {
     });
   }
 
+  // carouselWithSwipe() {
+  //   $(document).ready(function () {
+  //     $(".mobile_carousel").swiperight(function () {
+  //       $(this).carousel('prev');
+  //     });
+  //     $(".mobile_carousel").swipeleft(function () {
+  //       $(this).carousel('next');
+  //     });
+  //   });
+  // }
+
   changeSlide(slideId) {
     console.log(slideId);
   }
@@ -241,6 +252,8 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   displayHotelDetails(hotelId, infoWindow, type) {
+    this.isMarkerClicked = false;
+    this.clickedHotelIndex = '';
     // if (this.previousInfoWindow == null) {
     //   infoWindow.open();
     //   this.previousInfoWindow = infoWindow;

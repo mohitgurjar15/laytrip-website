@@ -167,7 +167,7 @@
                                 <div class="mobile_box">
 
                                     <div class="hotel_list_img_wrp">
-                                        <ngb-carousel #carousel [interval]="false" [showNavigationIndicators]="false"
+                                        <ngb-carousel #carousel class="mobile_carousel" [interval]="false" [showNavigationIndicators]="false"
                                             [showNavigationArrows]="item.galleryImages.length > 0? true:false"
                                             (slide)=onSlide($event,blockIndex)>
                                             <ng-template ngbSlide
