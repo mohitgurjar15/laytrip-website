@@ -9,7 +9,6 @@ import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 declare var $: any;
 

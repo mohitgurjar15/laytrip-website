@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { throwError } from "rxjs";
+import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
 
@@ -11,6 +11,9 @@ import { CommonFunction } from '../_helpers/common-function';
 })
 
 export class FlightService {
+
+    private sortFilter = new BehaviorSubject([]);
+    getLastApplyedSortFilter = this.sortFilter.asObservable();
 
     constructor(
         private http: HttpClient,
@@ -200,5 +203,8 @@ export class FlightService {
         );
     }
 
+    setSortFilter(filter){
+        this.sortFilter.next(filter)
+    }
 
 }

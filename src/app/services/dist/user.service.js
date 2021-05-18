@@ -13,9 +13,10 @@ var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
 var moment = require("moment");
 var UserService = /** @class */ (function () {
-    function UserService(http, commonFunction) {
+    function UserService(http, commonFunction, route) {
         this.http = http;
         this.commonFunction = commonFunction;
+        this.route = route;
         this.apiURL = environment_1.environment.apiUrl;
     }
     UserService.prototype.handleError = function (error) {
@@ -34,7 +35,7 @@ var UserService = /** @class */ (function () {
         return rxjs_1.throwError(errorMessage);
     };
     UserService.prototype.socialLogin = function (data) {
-        return this.http.post(this.apiURL + 'v1/auth/social-login', data)
+        return this.http.post(this.apiURL + 'v1/auth/social-login', data, this.commonFunction.setWithoutLoginHeader())
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
     UserService.prototype.signin = function (jsonData) {
@@ -51,12 +52,13 @@ var UserService = /** @class */ (function () {
             "password": formValue.password,
             "confirm_password": formValue.confirm_password,
             "device_type": 1,
-            "device_model": "RNE-L22",
+            "device_model": navigator.appName,
             "device_token": "123abc#$%456",
-            "app_version": "1.0",
-            "os_version": "7.0"
+            "app_version": navigator.appVersion,
+            "os_version": navigator.platform,
+            "referral_id": formValue.referral_id ? formValue.referral_id : ''
         };
-        return this.http.post(this.apiURL + 'v1/auth/signup', data)
+        return this.http.post(this.apiURL + 'v1/auth/signup', data, this.commonFunction.setWithoutLoginHeader())
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
     UserService.prototype.verifyOtp = function (data) {

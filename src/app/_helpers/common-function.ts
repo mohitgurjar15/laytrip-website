@@ -72,15 +72,28 @@ export class CommonFunction {
                 },
             };
         }
-        console.log(this.route.snapshot.queryParams['utm_source'])
         if (params) {
             let reqParams = {};
             Object.keys(params).map(k => {
                 reqData.headers[k] = params[k];
             });
+            reqData.headers.referral_id = this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``;
             //reqData.headers = reqParams;
         }
         return reqData;
+    }
+
+    setWithoutLoginHeader(){
+        if(this.route.snapshot.queryParams['utm_source']){
+        return {
+            headers: {
+                referral_id: this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``
+            },
+
+        };
+        } else {
+        return {}
+        }
     }
 
     convertDateFormat(date, sourceFormat, languageCode = null) {

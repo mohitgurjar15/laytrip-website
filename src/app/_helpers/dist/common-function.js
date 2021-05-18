@@ -63,15 +63,27 @@ var CommonFunction = /** @class */ (function () {
                 }
             };
         }
-        console.log(this.route.snapshot.queryParams['utm_source']);
         if (params) {
             var reqParams = {};
             Object.keys(params).map(function (k) {
                 reqData.headers[k] = params[k];
             });
+            reqData.headers.referral_id = this.route.snapshot.queryParams['utm_source'] ? "" + this.route.snapshot.queryParams['utm_source'] : "";
             //reqData.headers = reqParams;
         }
         return reqData;
+    };
+    CommonFunction.prototype.setWithoutLoginHeader = function () {
+        if (this.route.snapshot.queryParams['utm_source']) {
+            return {
+                headers: {
+                    referral_id: this.route.snapshot.queryParams['utm_source'] ? "" + this.route.snapshot.queryParams['utm_source'] : ""
+                }
+            };
+        }
+        else {
+            return {};
+        }
     };
     CommonFunction.prototype.convertDateFormat = function (date, sourceFormat, languageCode) {
         if (languageCode === void 0) { languageCode = null; }

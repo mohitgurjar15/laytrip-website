@@ -5,6 +5,7 @@ import { throwError, Observable } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
 import * as moment from 'moment';
+import { ActivatedRoute } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private commonFunction: CommonFunction
+    private commonFunction: CommonFunction,
+    private route: ActivatedRoute
 
   ) {
 
@@ -39,7 +41,7 @@ export class UserService {
 
 
   socialLogin(data) {
-    return this.http.post(this.apiURL + 'v1/auth/social-login', data)
+    return this.http.post(this.apiURL + 'v1/auth/social-login', data,this.commonFunction.setWithoutLoginHeader())
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -55,6 +57,8 @@ export class UserService {
       );
   }
 
+
+
   signup(formValue) {
     let data = {
       "signup_via": "web",
@@ -64,14 +68,14 @@ export class UserService {
       "password": formValue.password,
       "confirm_password": formValue.confirm_password,
       "device_type": 1,
-      "device_model": "RNE-L22",
+      "device_model": navigator.appName,
       "device_token": "123abc#$%456",
-      "app_version": "1.0",
-      "os_version": "7.0",
+      "app_version": navigator.appVersion,
+      "os_version": navigator.platform,
       "referral_id": formValue.referral_id ? formValue.referral_id : ''
     };
-
-    return this.http.post(this.apiURL + 'v1/auth/signup', data)
+    
+    return this.http.post(this.apiURL + 'v1/auth/signup', data,this.commonFunction.setWithoutLoginHeader())
       .pipe(
         retry(1),
         catchError(this.handleError)

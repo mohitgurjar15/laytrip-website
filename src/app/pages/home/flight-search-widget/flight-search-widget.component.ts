@@ -151,7 +151,6 @@ export class FlightSearchWidgetComponent implements OnInit {
       } else {
         this.calPrices = false;
       }
-      console.log(this.searchFlightInfo)
     });
 
     this.homeService.getToString.subscribe(toSearchString => {
@@ -222,7 +221,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.searchFlightInfo.child = event.child;
     this.searchFlightInfo.infant = event.infant;
     this.totalPerson = event.totalPerson;
-    console.log(this.searchFlightInfo)
     this.searchedValue.push({ key: 'travellers', value: event });
   }
 
@@ -244,7 +242,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     queryParams.adult = this.searchFlightInfo.adult ? this.searchFlightInfo.adult : 1;
     queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
-    console.log(this.searchFlightInfo)
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
       
@@ -282,7 +279,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.departureDate = moment(date).toDate();
     this.returnDate = new Date(date);
     this.flightReturnMinDate = new Date(date);
-    console.log(this.searchFlightInfo)
   }
 
 
@@ -513,7 +509,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   searchAirport(event) {
-    console.log("event", event)
+    // console.log("event", event)
   }
 
   searchItem(data) {

@@ -46,9 +46,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public router: Router,
     public location: Location,
     public commonFunction: CommonFunction,
-    private spinner: NgxSpinnerService,
     private renderer: Renderer2,
-    private homeService: HomeService
   ) { }
 
   ngOnInit() {
@@ -249,6 +247,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   sortFlight(event) {
+    this.flightService.setSortFilter(event);
     let { key, order } = event;
     if (key === 'total_duration') {
       // this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);

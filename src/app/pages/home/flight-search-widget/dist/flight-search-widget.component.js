@@ -124,7 +124,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             else {
                 _this.calPrices = false;
             }
-            console.log(_this.searchFlightInfo);
         });
         this.homeService.getToString.subscribe(function (toSearchString) {
             if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
@@ -185,7 +184,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.searchFlightInfo.child = event.child;
         this.searchFlightInfo.infant = event.infant;
         this.totalPerson = event.totalPerson;
-        console.log(this.searchFlightInfo);
         this.searchedValue.push({ key: 'travellers', value: event });
     };
     FlightSearchWidgetComponent.prototype.changeEconomyInfo = function (event) {
@@ -206,7 +204,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         queryParams.adult = this.searchFlightInfo.adult ? this.searchFlightInfo.adult : 1;
         queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
         queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
-        console.log(this.searchFlightInfo);
         if (this.commonFunction.isRefferal()) {
             var parms = this.commonFunction.getRefferalParms();
             queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
@@ -239,7 +236,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.departureDate = moment(date).toDate();
         this.returnDate = new Date(date);
         this.flightReturnMinDate = new Date(date);
-        console.log(this.searchFlightInfo);
     };
     FlightSearchWidgetComponent.prototype.swapAirport = function () {
         var temp = this.searchFlightInfo.departure;
@@ -437,7 +433,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.thisElementClicked = true;
     };
     FlightSearchWidgetComponent.prototype.searchAirport = function (event) {
-        console.log("event", event);
+        // console.log("event", event)
     };
     FlightSearchWidgetComponent.prototype.searchItem = function (data) {
         if (data.type == 'fromSearch') {

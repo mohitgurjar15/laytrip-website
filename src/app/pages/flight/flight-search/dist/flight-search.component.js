@@ -11,15 +11,13 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var moment = require("moment");
 var FlightSearchComponent = /** @class */ (function () {
-    function FlightSearchComponent(route, flightService, router, location, commonFunction, spinner, renderer, homeService) {
+    function FlightSearchComponent(route, flightService, router, location, commonFunction, renderer) {
         this.route = route;
         this.flightService = flightService;
         this.router = router;
         this.location = location;
         this.commonFunction = commonFunction;
-        this.spinner = spinner;
         this.renderer = renderer;
-        this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = true;
         this.isNotFound = false;
@@ -174,7 +172,6 @@ var FlightSearchComponent = /** @class */ (function () {
         });
     };
     FlightSearchComponent.prototype.getSearchItem = function (event) {
-        console.log('getSearchItem');
         // TRIP is round-trip then call this API
         if (event.trip === 'roundtrip') {
             this.getFlightSearchDataForRoundTrip(event);
@@ -223,6 +220,7 @@ var FlightSearchComponent = /** @class */ (function () {
         this.renderer.removeClass(document.body, 'cms-bgColor');
     };
     FlightSearchComponent.prototype.sortFlight = function (event) {
+        this.flightService.setSortFilter(event);
         var key = event.key, order = event.order;
         if (key === 'total_duration') {
             // this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);

@@ -76,6 +76,7 @@ var HotelSearchComponent = /** @class */ (function () {
         });
     };
     HotelSearchComponent.prototype.sortHotels = function (event) {
+        console.log(event);
         this.hotelService.setSortFilter(event);
         var key = event.key, order = event.order;
         if (key === 'total') {
