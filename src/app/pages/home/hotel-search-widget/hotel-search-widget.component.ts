@@ -102,7 +102,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       },
     };
 
-    let host = window.location.origin;    
+    let host = window.location.origin;
     if (host.includes("staging")) {
       this.showCommingSoon = true;
     }
@@ -220,7 +220,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   changeGuestInfo(event) {
     this.searchHotelInfo.occupancies = event;
   }
-   fromBinary(encoded) {
+  fromBinary(encoded) {
     var binary = atob(encoded)
     const bytes = new Uint8Array(binary.length);
     for (let i = 0; i < bytes.length; i++) {
@@ -239,10 +239,10 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
-    if($('.hotel_desination').val() == ''){
+    if ($('.hotel_desination').val() == '') {
       this.validSearch = false;
     }
-    let queryParams: any = {};    
+    let queryParams: any = {};
 
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
     queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
@@ -250,10 +250,9 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
-    
+
     queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
-    queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location)));
-    
+    queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace('=', '');
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
 
