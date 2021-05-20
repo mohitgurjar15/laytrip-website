@@ -206,7 +206,7 @@ export class HotelSearchComponent implements OnInit {
     queryParams.latitude = parseFloat(event.latitude);
     queryParams.longitude = parseFloat(event.longitude);
     queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(event.occupancies)));
-    queryParams.location = btoa(encodeURIComponent(JSON.stringify(locations))).replace('=', '');
+    queryParams.location = btoa(encodeURIComponent(JSON.stringify(locations))).replace(/\=+$/, '');
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
     });

@@ -252,7 +252,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
 
     queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
-    queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace('=', '');
+    queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace(/\=+$/, '');
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
 
