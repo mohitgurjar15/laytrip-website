@@ -221,17 +221,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
         queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
         queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
-        queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location)));
-        if (this.commonFunction.isRefferal()) {
-            var refferalParms = this.commonFunction.getRefferalParms();
-            queryParams.utm_source = refferalParms.utm_source ? refferalParms.utm_source : '';
-            if (refferalParms.utm_medium) {
-                queryParams.utm_medium = refferalParms.utm_medium ? refferalParms.utm_medium : '';
-            }
-            if (refferalParms.utm_campaign) {
-                queryParams.utm_campaign = refferalParms.utm_campaign ? refferalParms.utm_campaign : '';
-            }
-        }
+        queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace('=', '');
         if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
             this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
