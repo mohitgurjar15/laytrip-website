@@ -17,7 +17,7 @@
                         <h4>{{'sign_in' | translate}}</h4>
                     </div>
                 </div>
-                <div class="modal_cnt">
+                <div class="modal_cnt" >
                     <div class="modalcnt_top">
                         <app-social-login (socialError)="socialError($event)"></app-social-login>
                         <div class="border_block"><span>Or</span></div>
@@ -88,7 +88,7 @@
                         <!-- <div class="border_block"><span>Or</span></div>
                         <app-social-login (socialError)="socialError($event)"></app-social-login> -->
                         <p>{{'do_not_have_an_account' | translate}}
-                            <a (click)="btnSignUpClick()" class="Google_tag_sign_up_btn signUp hover-link">{{'sign_up' | translate}}</a>
+                            <a (click)="btnSignUpClick()" class="signUp hover-link">{{'sign_up' | translate}}</a>
                         </p>
                         <div class="block_logo">
                             <img src="{{s3BucketUrl}}assets/images/dr_logo.svg" alt="Logo">
