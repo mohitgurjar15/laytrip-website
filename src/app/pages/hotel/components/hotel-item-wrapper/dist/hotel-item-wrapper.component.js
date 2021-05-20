@@ -185,7 +185,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
     HotelItemWrapperComponent.prototype.onScrollDown = function () {
         var _this = this;
         if (this.isMapView) {
-            // return false;
+            return false;
         }
         this.scrollLoading = (this.hotelDetails.length != this.hotelListArray.length) ? true : false;
         setTimeout(function () {
