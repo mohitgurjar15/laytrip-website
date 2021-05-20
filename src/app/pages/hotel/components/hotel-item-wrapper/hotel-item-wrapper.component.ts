@@ -164,7 +164,7 @@ export class HotelItemWrapperComponent implements OnInit {
       }
       this.hotelCount = this.hotelDetails.length;
       this.currentPage = 1;
-      this.noOfDataToShowInitially = this.hotelDetails.length;
+      // this.noOfDataToShowInitially = this.hotelDetails.length;
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       this.hotelList = [...this.hotelListArray];
       if (this.bounds) {
