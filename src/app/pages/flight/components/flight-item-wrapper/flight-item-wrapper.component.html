@@ -173,7 +173,7 @@
                             <button (click)="bookNow(item)">
                                 Select
                             </button>
-                            <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
+                            <div class="section_description no_flight" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                                 <span class="sec_text">This flight is no longer available.</span>
                                 <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img
                                         src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
