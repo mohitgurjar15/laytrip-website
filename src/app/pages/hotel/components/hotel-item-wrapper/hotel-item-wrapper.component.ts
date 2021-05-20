@@ -219,7 +219,7 @@ export class HotelItemWrapperComponent implements OnInit {
 
   onScrollDown() {
     if (this.isMapView) {
-      return false;
+      // return false;
     }
 
     this.scrollLoading = (this.hotelDetails.length != this.hotelListArray.length) ? true : false;
