@@ -31,11 +31,16 @@
                             (mouseOut)="closeInfoWindow(infoWindow, gm)" (mouseOver)="openInfoWindow(infoWindow, gm)"
                             [zIndex]="i+1">
                             <!-- (mouseOver)="displayHotelDetails(hotel.id,infoWindow, 'hover')" -->
-                            <agm-info-window [disableAutoPan]="false" #infoWindow>
+                            <!-- <agm-info-window [disableAutoPan]="false" #infoWindow>
                                 <div>
                                     <p>{{hotel.name}}</p>
                                 </div>
-                            </agm-info-window>
+                            </agm-info-window> -->
+                            <agm-snazzy-info-window [closeWhenOthersOpen]="true" [panOnOpen]="false" #infoWindow>
+                                <ng-template>
+                                    {{hotel.name}}
+                                </ng-template>
+                            </agm-snazzy-info-window>
                         </agm-marker>
                     </agm-map>
 
@@ -163,7 +168,8 @@
                                 <div class="mobile_box">
 
                                     <div class="hotel_list_img_wrp">
-                                        <ngb-carousel #carousel class="mobile_carousel" [interval]="false" [showNavigationIndicators]="false"
+                                        <ngb-carousel #carousel class="mobile_carousel" [interval]="false"
+                                            [showNavigationIndicators]="false"
                                             [showNavigationArrows]="item.galleryImages.length > 0? true:false"
                                             (slide)=onSlide($event,blockIndex)>
                                             <ng-template ngbSlide
