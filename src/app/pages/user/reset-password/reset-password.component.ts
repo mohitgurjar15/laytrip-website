@@ -160,7 +160,7 @@ export class ResetPasswordComponent implements OnInit {
 
   onOtpChange(event) {
     if (event.length == 6) {
-      this.otp = event;
+      // this.otp = event;
       this.resetForm.controls.otp.setValue(event);
       // this.ngOtpInputRef.setValue(event);
       this.otpLengthError = false;

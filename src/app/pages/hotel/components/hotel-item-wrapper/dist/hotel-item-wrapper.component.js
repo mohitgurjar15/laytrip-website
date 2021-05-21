@@ -132,6 +132,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
             }
             _this.hotelCount = _this.hotelDetails.length;
             _this.currentPage = 1;
+            // this.noOfDataToShowInitially = this.hotelDetails.length;
             _this.hotelListArray = _this.hotelDetails.slice(0, _this.noOfDataToShowInitially);
             _this.hotelList = __spreadArrays(_this.hotelListArray);
             if (_this.bounds) {
@@ -193,6 +194,7 @@ var HotelItemWrapperComponent = /** @class */ (function () {
                 _this.noOfDataToShowInitially += _this.dataToLoad;
                 _this.hotelListArray = _this.hotelDetails.slice(0, _this.noOfDataToShowInitially);
                 _this.hotelList = __spreadArrays(_this.hotelListArray);
+                _this.hotelCount = _this.hotelListArray.length;
                 _this.scrollLoading = false;
             }
             else {
@@ -208,10 +210,10 @@ var HotelItemWrapperComponent = /** @class */ (function () {
         }
     };
     HotelItemWrapperComponent.prototype.openInfoWindow = function (infoWindow) {
-        infoWindow.open();
+        infoWindow._openInfoWindow();
     };
     HotelItemWrapperComponent.prototype.closeInfoWindow = function (infoWindow) {
-        infoWindow.close();
+        infoWindow._closeInfoWindow();
     };
     HotelItemWrapperComponent.prototype.displayHotelDetails = function (hotelId, infoWindow, type) {
         this.isMarkerClicked = false;
