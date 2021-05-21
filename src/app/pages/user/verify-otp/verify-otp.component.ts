@@ -83,7 +83,7 @@ export class VerifyOtpComponent implements OnInit {
     this.otp = event;
     if (event.length == 6) {
       this.otpForm.controls.otp.setValue(event);
-      this.ngOtpInputRef.setValue(event);
+      // this.ngOtpInputRef.setValue(event);
     }
   }
 
@@ -119,7 +119,7 @@ export class VerifyOtpComponent implements OnInit {
   onSubmit() {
     this.submitted = this.loading = true;
     var otpValue = '';
-    let otps: any = this.ngOtpInputRef.otpForm.value;
+    let otps: any = this.otpForm.controls.otp.value;
     Object.values(otps).forEach((v) => {
       otpValue += v;
     });

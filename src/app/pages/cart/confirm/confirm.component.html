@@ -32,7 +32,7 @@
             </div>
 
 
-            <div class="header_bar" *ngIf="!loading && allBookingStatus">
+            <div id="{{ commonFunction.isRefferal() ? 'ga4_Landing_Booking_Confirm':'ga4_Booking_Confirm'}}"   class="header_bar" *ngIf="!loading && allBookingStatus">
                 <h3>
                     Booking Confirmed
                     <span class="b_num">Booking ID #{{cartDetails.laytripCartId}}</span>

@@ -24,7 +24,7 @@ export class HotelSearchComponent implements OnInit {
   hotelToken;
   isResetFilter: string = 'no';
   searchedValue = [];
-  filteredLabel : string = 'Price Low to High';
+  filteredLabel: string = 'Price Low to High';
 
   roomsGroup = [
     {
@@ -33,9 +33,9 @@ export class HotelSearchComponent implements OnInit {
       children: []
     }
   ];
-  filterOpen : boolean = false;
-  sortByOpen : boolean = false;
-  
+  filterOpen: boolean = false;
+  sortByOpen: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
@@ -59,7 +59,7 @@ export class HotelSearchComponent implements OnInit {
       latitude: this.route.snapshot.queryParams['latitude'],
       longitude: this.route.snapshot.queryParams['longitude'],
       city_id: this.route.snapshot.queryParams['city_id'],
-      rooms:info.rooms,
+      rooms: info.rooms,
       adults: info.adults,
       children: info.child,
       filter: true,
@@ -87,7 +87,7 @@ export class HotelSearchComponent implements OnInit {
     });
   }
 
-  
+
   sortHotels(event) {
 
     console.log(event)
@@ -104,23 +104,23 @@ export class HotelSearchComponent implements OnInit {
     } else if (key === 'rating') {
       if (order === 'ASC') {
         this.filteredLabel = 'Rating Lowest to Highest';
-        this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);        
-      } else if(order === 'DESC'){
+        this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
+      } else if (order === 'DESC') {
         this.filteredLabel = 'Rating Highest to Lowest';
         this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
       }
     } else if (key === 'name') {
-      
+
       if (order === 'ASC') {
         this.filteredLabel = 'Alphabetical A to Z';
         this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
-      }else if(order === 'DESC'){
+      } else if (order === 'DESC') {
         this.filteredLabel = 'Alphabetical Z to A';
         this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
 
       }
     }
-   
+
     this.hotelService.setHotels(this.hotelDetails)
   }
 
@@ -129,12 +129,12 @@ export class HotelSearchComponent implements OnInit {
       return data;
     } else {
       return data.sort(function (a, b) {
-        var x = a.secondary_start_price > 0 ?  a.secondary_start_price : a.selling[key];
-        var y = b.secondary_start_price > 0 ?  b.secondary_start_price : b.selling[key];
-        
-        if (way === 'ASC') {        
+        var x = a.secondary_start_price > 0 ? a.secondary_start_price : a.selling[key];
+        var y = b.secondary_start_price > 0 ? b.secondary_start_price : b.selling[key];
+
+        if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        } else if (way === 'DESC') {         
+        } else if (way === 'DESC') {
           return ((x > y) ? -1 : ((x < y) ? 1 : 0));
         }
       });
@@ -148,7 +148,7 @@ export class HotelSearchComponent implements OnInit {
       return data.sort(function (a, b) {
         var x = a[key];
         var y = b[key];
-        if (way === 'ASC') {       
+        if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }
         if (way === 'DESC') {
@@ -189,12 +189,12 @@ export class HotelSearchComponent implements OnInit {
   resetFilter() {
     this.isResetFilter = (new Date()).toString();
   }
-  
-  filterDrawerOpen(){
-   this.filterOpen = !this.filterOpen;
+
+  filterDrawerOpen() {
+    this.filterOpen = !this.filterOpen;
   }
-  sortByDrawerOpen(){
-   this.sortByOpen = !this.sortByOpen;
+  sortByDrawerOpen() {
+    this.sortByOpen = !this.sortByOpen;
   }
 
   getHotelSearchDataByModify(event) {
@@ -206,7 +206,7 @@ export class HotelSearchComponent implements OnInit {
     queryParams.latitude = parseFloat(event.latitude);
     queryParams.longitude = parseFloat(event.longitude);
     queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(event.occupancies)));
-    queryParams.location = btoa(encodeURIComponent(JSON.stringify(locations)));
+    queryParams.location = btoa(encodeURIComponent(JSON.stringify(locations))).replace(/\=+$/, '');
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
     });

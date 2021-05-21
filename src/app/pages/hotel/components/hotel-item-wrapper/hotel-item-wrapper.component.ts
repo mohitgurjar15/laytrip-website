@@ -10,6 +10,7 @@ import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from 'src/app/services/hotel.service';
 import { AgmInfoWindow } from '@agm/core';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { AgmSnazzyInfoWindow } from '@agm/snazzy-info-window';
 
 @Component({
   selector: 'app-hotel-item-wrapper',
@@ -163,6 +164,7 @@ export class HotelItemWrapperComponent implements OnInit {
       }
       this.hotelCount = this.hotelDetails.length;
       this.currentPage = 1;
+      // this.noOfDataToShowInitially = this.hotelDetails.length;
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       this.hotelList = [...this.hotelListArray];
       if (this.bounds) {
@@ -228,6 +230,7 @@ export class HotelItemWrapperComponent implements OnInit {
         this.noOfDataToShowInitially += this.dataToLoad;
         this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
         this.hotelList = [...this.hotelListArray];
+        this.hotelCount = this.hotelListArray.length;
         this.scrollLoading = false;
       } else {
         this.isFullListDisplayed = true;
@@ -244,11 +247,11 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   openInfoWindow(infoWindow) {
-    infoWindow.open();
+    infoWindow._openInfoWindow();
   }
 
   closeInfoWindow(infoWindow) {
-    infoWindow.close();
+    infoWindow._closeInfoWindow();
   }
 
   displayHotelDetails(hotelId, infoWindow, type) {
