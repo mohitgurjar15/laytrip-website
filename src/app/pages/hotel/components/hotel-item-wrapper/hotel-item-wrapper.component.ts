@@ -230,6 +230,7 @@ export class HotelItemWrapperComponent implements OnInit {
         this.noOfDataToShowInitially += this.dataToLoad;
         this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
         this.hotelList = [...this.hotelListArray];
+        this.hotelCount = this.hotelListArray.length;
         this.scrollLoading = false;
       } else {
         this.isFullListDisplayed = true;
