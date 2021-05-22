@@ -43,39 +43,49 @@
                 width: 100%;
                 padding: 0;
 
+                @include tab-view {
+                    align-items: flex-start;
+                }
+
                 &[aria-expanded="true"] {
                     &:after {
-                      content: "";
-                      padding: 5px 9px;
-                      margin-left: 10px;
-                      background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                      background-position: right;
-                      background-repeat: no-repeat;
-                      background-size: 12px;
-                      transition: 0.3s;
-                      position: absolute;
-                      right: 15px;
+                        content: "";
+                        padding: 5px 9px;
+                        margin-left: 10px;
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                        background-position: right;
+                        background-repeat: no-repeat;
+                        background-size: 12px;
+                        transition: 0.3s;
+                        position: absolute;
+                        right: 15px;
+
                         @include tab-view {
-                            right: 10px;                    
+                            right: 10px;
+                            position: relative;
+                            top: 10px;
                         }
                     }
                 }
 
                 &[aria-expanded="false"] {
                     &:after {
-                      padding: 5px 9px;
-                      margin-left: 10px;
-                      background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-                      background-position: right;
-                      background-repeat: no-repeat;
-                      background-size: 12px;
-                      content: "";
-                      transition: 0.3s;
-                      position: absolute;
-                      right: 15px;
-                      @include tab-view {
-                        right: 10px;                    
-                       }
+                        padding: 5px 9px;
+                        margin-left: 10px;
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                        background-position: right;
+                        background-repeat: no-repeat;
+                        background-size: 12px;
+                        content: "";
+                        transition: 0.3s;
+                        position: absolute;
+                        right: 15px;
+
+                        @include tab-view {
+                            right: 10px;
+                            position: relative;
+                            top: 10px;
+                        }
                     }
 
                 }
