@@ -1,6 +1,17 @@
 <!-- Start Deals section-->
 <section class="deal_sec">
-    <div class="container">
+    <swiper [slidesPerView]="3" [spaceBetween]="50" (swiper)="setThumbsSwiper($event)" [navigation]="{}"
+    [pagination]="{ clickable: true }" [scrollbar]="{ draggable: true }" [watchSlidesVisibility]="true"
+    [watchSlidesProgress]="true">
+    <ng-template swiperSlide>Slide 1</ng-template>
+    <ng-template swiperSlide>Slide 2</ng-template>
+    <ng-template swiperSlide>Slide 3</ng-template>
+    <ng-template swiperSlide>Slide 4</ng-template>
+    <ng-template swiperSlide>Slide 5</ng-template>
+    <ng-template swiperSlide>Slide 6</ng-template>
+</swiper>
+
+   <!--  <div class="container">
         <div class="row">
             <div class="deal_sec_wrapper" *ngIf="list.length <= 0">
                 <div class="deal_section_row">
@@ -30,7 +41,7 @@
             </div>
            
         </div>
-    </div>
+    </div> -->
 </section>
 <!-- Close Deals section-->
 

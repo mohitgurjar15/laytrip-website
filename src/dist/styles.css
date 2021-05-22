@@ -10727,6 +10727,10 @@ app-flight-search-bar .modify_search .flight_tab .tab-content .flight_search .fl
   width: calc(100% - -18%) !important;
 }
 
+.child_scrollbox .ng-scrollbar-layout .ng-scrollbar-layout .ng-scroll-view-container .ng-scroll-view {
+  width: calc(100% - -100%) !important;
+}
+
 .wrapper {
   position: relative;
   min-height: calc(100vh - 50px);
@@ -11257,10 +11261,10 @@ select:focus {
   display: flex;
   margin-top: 5px;
   font-size: 10px;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: flex-start;
 }
 .error_field .error_img {
-  margin-top: 3px;
   display: flex;
   max-width: 10px;
   margin-right: 5px;
@@ -11624,7 +11628,7 @@ select:focus {
   }
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section {
-  width: 110px;
+  width: 80px;
 }
 @media (max-width: 558px) {
   .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section {
@@ -11653,7 +11657,6 @@ select:focus {
   color: #8188ab;
   position: relative;
   padding: 0;
-  cursor: pointer;
   justify-content: flex-end;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section .search_area .class_sec_info span {
@@ -12513,6 +12516,9 @@ select:focus {
   justify-content: space-between;
   align-items: center;
   padding: 0 0 20px;
+}
+.search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block ul li:last-child {
+  padding: 0;
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block ul li .left {
   font-size: 10px;

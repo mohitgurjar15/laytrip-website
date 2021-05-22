@@ -1,11 +1,11 @@
 <div class="search_area">
     <!-- <label>{{ label }}</label> -->
     <div class="class_sec_info" id="add_class_sec"  (click)="toggleTraveller()">
-         {{flightClass}}
-        <div class="drop_aerrow">
-        </div>
+        Economy
+       <!--  <div class="drop_aerrow">
+        </div> -->
     </div>
-    <div class="class_sec_wrapper add_class_sec_open_" id="add_class_sec_open" [ngClass]="(showClass==true)?'panel_show':'panel_hide'" style="display: none;">
+    <!-- <div class="class_sec_wrapper add_class_sec_open_" id="add_class_sec_open" [ngClass]="(showClass==true)?'panel_show':'panel_hide'" style="display: none;">
         <div class="flight_cat">
             <ul>
                  <li><a class="active_cat hover-link" [ngClass]="{ 'active_cat' : flightClass === 'Economy' }" (click)="btnClickForChange({type: 'class', value: 'Economy'})">{{'economy_class' | translate}}</a></li>
@@ -14,5 +14,5 @@
                 <li style="pointer-events: none;"><a class="hover-link" [ngClass]="{ 'active_cat' : flightClass === 'First' }" (click)="btnClickForChange({type: 'class', value: 'First'})">{{'first_class' | translate}}</a></li>
             </ul>
         </div>
-    </div>
+    </div> -->
 </div>

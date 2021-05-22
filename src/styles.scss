@@ -1048,7 +1048,8 @@ select {
               }
 
               .class_section {
-                width: 110px;
+                //width: 110px;
+                width: 80px;
 
                 @include mobile-view {
                   width: 100px;
@@ -1077,7 +1078,7 @@ select {
                     color: $text-grey;
                     position: relative;
                     padding: 0;
-                    cursor: pointer;
+                    // cursor: pointer;
                     justify-content: flex-end;
 
                     span {

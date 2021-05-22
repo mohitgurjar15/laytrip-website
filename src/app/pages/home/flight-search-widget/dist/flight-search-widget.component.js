@@ -33,7 +33,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.moduleList = {};
         this.calenderPrices = [];
         this.switchBtnValue = false;
-        this.isRoundTrip = false;
+        this.isRoundTrip = true;
         this.flightSearchFormSubmitted = false;
         this.isCalenderPriceLoading = true;
         // DATE OF FROM_DESTINATION & TO_DESTINATION

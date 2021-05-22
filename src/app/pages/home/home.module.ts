@@ -21,6 +21,7 @@ import { HotelSearchWidgetComponent } from './hotel-search-widget/hotel-search-w
 import { VacationSearchWidgetComponent } from './vacation-search-widget/vacation-search-widget.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
+import { SwiperModule } from "swiper/angular";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component'
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     CalendarModule,
     NgxGalleryModule,
-    NgSelectModule
+    NgSelectModule,
+    SwiperModule
   ],
   exports: [
     FlightSearchWidgetComponent,

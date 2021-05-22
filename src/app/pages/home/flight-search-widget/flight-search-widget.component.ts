@@ -26,7 +26,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   moduleList: any = {};
   @Input() calenderPrices: any = [];
   switchBtnValue = false;
-  isRoundTrip: boolean = false;
+  isRoundTrip: boolean = true;
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted = false;
   isCalenderPriceLoading: boolean = true;

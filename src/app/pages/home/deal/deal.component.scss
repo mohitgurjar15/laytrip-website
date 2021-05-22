@@ -3,6 +3,7 @@
 @import "../../../../_hotel.scss";
 @import "../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import "~swiper/swiper-bundle";
 
 
 .deal_sec{
@@ -113,3 +114,20 @@
         }
     }
 }
+
+
+  .bg-yellow {
+    background-color: yellow;
+  }
+  .transition {
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .active-slide {
+    background-color: green;
+    color: #fff;
+  }
+  .bg-blue {
+    background-color: blue;
+    color: #fff;
+  }
+  
