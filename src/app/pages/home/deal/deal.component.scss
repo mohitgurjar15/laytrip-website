@@ -46,12 +46,14 @@
         .image_about_text{
             position: absolute;
             bottom: 15px;
+            display: flex;
+            align-items: center;
             @include mini-screen {
                 text-align: center;
             }
             button {
                 width: 100%;
-                height: 100%;
+                height: 40px;
                 padding: 10px 25px;
                 background: $background-white;
                 border-radius: 25px;
@@ -62,6 +64,7 @@
                 position: relative;
                 z-index: 9;
                 overflow: hidden;
+                line-height: 1px;
                 white-space: normal;
 
                 @include mini-screen {

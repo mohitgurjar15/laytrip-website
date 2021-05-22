@@ -7224,15 +7224,53 @@ agm-map {
         }
     }
 }
+
 .swiper-container {
     width: 100%;
-    height: 300px;
-    margin: 50px auto;
-  }
-  
-  .swiper-slide {
-    background: #f1f1f1;
-    color: #000;
-    text-align: center;
-    line-height: 300px;
-  }
+    height: 330px;
+    margin: 40px auto;
+
+    .swiper-button-prev {
+        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
+        background-repeat: no-repeat;
+        background-color: #ffffff;
+        border-radius: 50%;
+        padding: 14px;
+        background-position: center center;
+        background-size: 7px;
+        width: auto;
+        height: 20px;
+        &::after {
+            content: none;
+        }
+    }
+
+    .swiper-button-next {
+        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
+        background-repeat: no-repeat;
+        background-color: #ffffff;
+        border-radius: 50%;
+        padding: 14px;
+        background-position: center center;
+        background-size: 7px;
+        width: auto;
+        height: 20px;
+        &::after {
+            content: none;
+        }
+    }
+    .swiper-pagination{
+        .swiper-pagination-bullet{
+            &.swiper-pagination-bullet-active{
+                background-color: $pink;
+            }
+        } 
+    }
+}
+
+.swiper-slide {
+    background: transparent;
+    // color: #000;
+    // text-align: center;
+    // line-height: 300px;
+}
