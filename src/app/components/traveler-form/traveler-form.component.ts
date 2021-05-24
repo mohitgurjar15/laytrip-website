@@ -505,7 +505,10 @@ export class TravelerFormComponent implements OnInit {
           //this.checkOutService.setTravelers([this.myTravelers]);
           this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAsUntouched();
           this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
-        })
+        }, (error => {
+            this.cartService.setLoaderStatus(false);
+          })
+        );
       }
       else{
         this.travelerService.addAdult(data).subscribe((traveler: any) => {
