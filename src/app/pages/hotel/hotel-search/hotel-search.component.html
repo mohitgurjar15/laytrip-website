@@ -14,16 +14,16 @@
           <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg" alt="Hotel Icon" />
           <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
         </a>
-        <!-- <a class="tab_anch" style="pointer-events: none;">
+        <a *ngIf="!commonFunction.isRefferal()" class="tab_anch" style="pointer-events: none;">
           <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
             alt="Accommodation Icon" />
           <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_gray.svg"
             alt="Accommodation Icon" />
         </a>
-        <a class="tab_anch" style="pointer-events: none;">
+        <a class="tab_anch" style="pointer-events: none;" *ngIf="!commonFunction.isRefferal()" >
           <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_blue.svg" alt="car Icon" />
           <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_gray.svg" alt="car Icon" />
-        </a> -->
+        </a>
       </div>
       <div class="searchbar_box_common">
         <app-hotel-search-widget></app-hotel-search-widget>
