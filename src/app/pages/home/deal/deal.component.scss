@@ -50,6 +50,7 @@
             align-items: center;
             @include mini-screen {
                 text-align: center;
+                    margin: 5px;
             }
             button {
                 width: 100%;
@@ -68,13 +69,14 @@
                 white-space: normal;
 
                 @include mini-screen {
-                    width: 80%;
+                    width: 100%;
+                    height: auto;
+                    line-height: 25px;
                 }
                 
                 @include tab-view{
                     font-size: 14px;
                     padding: 8px 20px;
-                    width: 100%;
                 }
         
                 // &::before {

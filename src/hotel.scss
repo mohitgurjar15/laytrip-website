@@ -7230,6 +7230,10 @@ agm-map {
     height: 330px;
     margin: 0 auto;
 
+    @include tab-view{
+        margin: 0 15px;
+    }
+
     .swiper-button-prev {
         background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
         background-repeat: no-repeat;

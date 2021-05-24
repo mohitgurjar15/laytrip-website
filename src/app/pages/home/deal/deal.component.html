@@ -2,7 +2,7 @@
 <section class="deal_sec">
     <div class="container">
         <div class="row">
-            <swiper [slidesPerView]="3" [spaceBetween]="50" (swiper)="setThumbsSwiper($event)" [navigation]="{}"
+            <swiper [slidesPerView]="3" [spaceBetween]="50" (swiper)="setThumbsSwiper($event)" [breakpoints]="breakpoints" [navigation]="{}"
                 [pagination]="{ clickable: true }" [scrollbar]="{ draggable: true }" [watchSlidesVisibility]="true"
                 [watchSlidesProgress]="true" *ngIf="list.length > 0">
                 <ng-template swiperSlide *ngFor="let item of list;">

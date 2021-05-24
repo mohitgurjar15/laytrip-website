@@ -41,6 +41,12 @@ export class DealComponent implements OnInit {
   @Output() toString = new EventEmitter<string>();
   @Input()  dealList = [];
   list = [];
+  breakpoints = {
+    320: { slidesPerView: 1, spaceBetween: 10 },
+    520: { slidesPerView: 2, spaceBetween: 10 },
+    768: { slidesPerView: 3, spaceBetween: 40 },
+    1024: { slidesPerView: 3, spaceBetween: 40 }
+  };
   constructor(
     private homeService : HomeService
   ) {}
@@ -66,4 +72,14 @@ export class DealComponent implements OnInit {
   setThumbsSwiper(swiper) {
     this.thumbsSwiper = swiper;
   }
+  breakPointsToggle: boolean;
+  breakpointChange() {
+    this.breakPointsToggle = !this.breakPointsToggle;
+    this.breakpoints = {
+      320: { slidesPerView: 1, spaceBetween: 10 },
+      520: { slidesPerView: 2, spaceBetween: 10 },
+      768: { slidesPerView: 3, spaceBetween: 40 },
+      1024: { slidesPerView: this.breakPointsToggle ? 7 : 5, spaceBetween: 40 }
+    };
+  } 
 }
