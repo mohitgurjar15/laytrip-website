@@ -1,5 +1,28 @@
 <!-- Start Deals section-->
-<section class="deal_sec">
+
+<!-- deal section skeleton loader starts -->
+<section class="deal_sec" *ngIf="list.length <= 0">
+    <div class="container">
+        <div style="display: flex; width: 100%; justify-content: space-between;">
+            <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 32%; margin: 5px; border-radius: 20px;">
+            </div>
+            <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 32%; margin: 5px; border-radius: 20px;">
+            </div>
+            <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 32%; margin: 5px; border-radius: 20px;">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%; justify-content: center; align-items: center; margin: 10px 0;">
+            <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
+            </div>
+            <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
+            </div>
+            <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- deal section skeleton loader ends -->
+<section class="deal_sec" *ngIf="list.length > 0">
     <div class="container">
         <div class="row">
             <swiper [slidesPerView]="3" [spaceBetween]="50" (swiper)="setThumbsSwiper($event)"
@@ -57,26 +80,3 @@
 </section> -->
 <!-- Close Deals section-->
 
-
-<!-- deal section skeleton loader starts -->
-<section class="deal_sec">
-    <div class="container">
-        <div style="display: flex; width: 100%; justify-content: space-between;">
-            <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 32%; margin: 5px; border-radius: 20px;">
-            </div>
-            <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 32%; margin: 5px; border-radius: 20px;">
-            </div>
-            <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 32%; margin: 5px; border-radius: 20px;">
-            </div>
-        </div>
-        <div style="display: flex; width: 100%; justify-content: center; align-items: center; margin: 10px 0;">
-            <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
-            </div>
-            <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
-            </div>
-            <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
-            </div>
-        </div>
-    </div>
-</section>
-<!-- deal section skeleton loader ends -->
