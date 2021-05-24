@@ -480,7 +480,9 @@ var TravelerFormComponent = /** @class */ (function () {
                     //this.checkOutService.setTravelers([this.myTravelers]);
                     _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAsUntouched();
                     _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].disable();
-                });
+                }, (function (error) {
+                    _this.cartService.setLoaderStatus(false);
+                }));
             }
             else {
                 this.travelerService.addAdult(data).subscribe(function (traveler) {
