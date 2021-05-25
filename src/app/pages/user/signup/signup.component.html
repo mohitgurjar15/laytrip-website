@@ -27,7 +27,7 @@
                                 <input type="text" formControlName="first_name"
                                     [ngClass]="{'error': submitted && !signupForm.controls.first_name.valid}"
                                    maxlength="25" tabindex="11" placeholder="{{'first_name' | translate}}"
-                                    (keypress)="commonFunction.preventNumberInput($event)">
+                                    (keypress)="commonFunction.preventNumberInput($event)" class="signupfn">
                                 <div class="error_text" *ngIf="submitted">
                                     <div
                                         *ngIf="signupForm.controls.first_name.errors && signupForm.controls.first_name.errors.required">
@@ -41,7 +41,7 @@
                                 <input type="text" formControlName="last_name"
                                     [ngClass]="{'error': submitted && !signupForm.controls.last_name.valid}"
                                     maxlength="25" tabindex="12" placeholder="{{'last_name' | translate}}"
-                                    (keypress)="commonFunction.preventNumberInput($event)">
+                                    (keypress)="commonFunction.preventNumberInput($event)" class="signupln">
                                 <div class="error_text" *ngIf="submitted">
                                     <div
                                         *ngIf="signupForm.controls.last_name.errors && signupForm.controls.last_name.errors.required">
@@ -56,7 +56,7 @@
                             <div class="text_field">
                                 <input #email type="email" (input)="checkEmailExist($event.target.value)"
                                     [ngClass]="{'error': submitted && !signupForm.controls.email.valid}"
-                                    formControlName="email" maxlength="50" tabindex="13"
+                                    formControlName="email" maxlength="50" tabindex="13" class="signupem"
                                     placeholder="{{'email' | translate}}">
                                 <div class="error_text" *ngIf="submitted">
                                     <div

@@ -9,6 +9,7 @@ import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { TravelerService } from 'src/app/services/traveler.service';
 
 declare var $: any;
 
@@ -42,7 +43,9 @@ export class SigninComponent implements OnInit {
     private userService: UserService,
     public router: Router,
     public commonFunction: CommonFunction,
+    public travelerService: TravelerService,
     private renderer: Renderer2,
+
   ) { }
 
 
@@ -128,6 +131,14 @@ export class SigninComponent implements OnInit {
     this.apiError = error;
   }
 
+  getTravelers() {
+    this.travelerService.getTravelers().subscribe((res: any) => {
+      $('.signupfn').val(res.data[0].firstName ? res.data[0].firstName : '');
+      $('.signupln').val(res.data[0].lastName ? res.data[0].lastName : '');
+      $('.signupem').val(res.data[0].email ? res.data[0].email : '');
+    })
+  }
+
   closeModal() {
     this.apiError = '';
     this.submitted = false;
@@ -138,7 +149,9 @@ export class SigninComponent implements OnInit {
     this.loginForm.reset();
   }
 
+
   btnSignUpClick() {
+    this.getTravelers();
     this.submitted = false;
     Object.keys(this.loginForm.controls).forEach(key => {
       this.loginForm.get(key).markAsUntouched();
