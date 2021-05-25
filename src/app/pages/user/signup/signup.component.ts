@@ -49,7 +49,6 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.signupForm = this.formBuilder.group({
       first_name: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]], //old patern: '^[a-zA-Z]+[a-zA-Z]{2,}$'
       last_name: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}')]],
