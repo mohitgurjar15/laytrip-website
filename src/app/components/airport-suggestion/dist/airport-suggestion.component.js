@@ -69,14 +69,14 @@ var AirportSuggestionComponent = /** @class */ (function () {
                     });
                 }
                 airportArray = airportArray.sort(function (a, b) { return a.key.localeCompare(b.key); });
+                console.log(airportArray);
                 for (var i = 0; i < airportArray.length; i++) {
                     for (var j = 0; j < airportArray[i].value.length; j++) {
-                        if (airportArray[i].value[j].code != 'AMD') {
-                            airportArray[i].value[j].display_name = airportArray[i].value[j].city + "," + airportArray[i].value[j].country + ",(" + airportArray[i].value[j].code + ")," + airportArray[i].value[j].name;
-                        }
+                        airportArray[i].value[j].display_name = airportArray[i].value[j].city + "," + airportArray[i].value[j].country + ",(" + airportArray[i].value[j].code + ")," + airportArray[i].value[j].name;
                     }
                 }
                 _this.data = airportArray;
+                console.log(_this.data);
             }, function (error) {
                 _this.data = [];
                 _this.loading = false;

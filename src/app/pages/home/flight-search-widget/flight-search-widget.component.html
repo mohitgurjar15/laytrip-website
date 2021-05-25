@@ -70,14 +70,34 @@
                             <div class="flight_form"
                                 [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
                                 <div class="search_area">
-                                    <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'"
+                                    <!-- <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'"
                                         [id]="'fromSearch'" [label]="'from' | translate" placeHolder="From where?"
                                         [defaultSelected]="" [tabIndex]=1 [airport]=fromSearch
                                         [defaultCity]="" (changeValue)="destinationChangedValue($event)"
-                                        (click)="showAirportSuggestion('from')" (searchItem)="searchItem($event)">
-                                    </app-search-airport>
+                                        (click)="showAirportSuggestion('from')" 
+                                        (searchItem)="searchItem($event)"
+                                        >
+                                    </app-search-airport> -->
+                                    <div [formGroup]="flightSearchForm" class="lab_wrapper">
+                                        <label>{{label}}</label>
+                                        <ng-select formControlName="fromDestination" [loading]="false" id="{{fromSearch}}" [selectOnTab]="true" items="fromSearch"
+                                            bindLabel="display_name" bindValue="city" [clearable]="true" notFoundText="" [virtualScroll]="true"
+                                            [(ngModel)]="defaultCity" (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)"
+                                            (clear)="onRemove($event)" class="laytrip-input custom_inputs from_to_inputs" placeholder="{{ placeHolder }}"
+                                            [tabIndex]="tabIndex" [clearSearchOnAdd]="true" [clearOnBackspace]="true" [hideSelected]="false"
+                                            [searchable]="true">
+                                            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                                                <div [ngClass]="(item.parentId==0)?'parent':'child'">
+                                                    {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
+                                                </div>
+                                            </ng-template>
+                                            <ng-template ng-label-tmp let-item="item">
+                                                {{item.city}}, {{item.country}} ({{item.code}})
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
                                 </div>
-                                <app-airport-suggestion class="desk_suggetions" *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
+                                <app-airport-suggestion  class="desk_suggetions" *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
                             </div>
                             <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
                                 <a (click)="swapAirport()">

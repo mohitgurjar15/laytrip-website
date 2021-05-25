@@ -73,9 +73,11 @@ export class FlightSearchWidgetComponent implements OnInit {
       child: null,
       infant: null
     };
+  data = [];
+  searchItems : any;
 
   searchedValue = [];
-
+  searchedFlightData = [];
   constructor(
     private genericService: GenericService,
     public commonFunction: CommonFunction,
@@ -105,9 +107,20 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.rangeDates = [this.departureDate, this.returnDate];
 
   }
+  onChangeSearch(event) {
+    this.searchAirport(event.term);
+    this.searchItems  = {key : event.term,type : this.fromSearch};
+    // this.searchItem.emit({key : event.term,type : this.id})
+  }
+  selectedAirport: any = {};
 
+  onRemove(event) {
+    console.log("innnnn")
+    this.selectedAirport = {};
+  }
   ngOnInit(): void {
     // this.departureDate = moment(this.customStartDateValidation).toDate();
+   
 
     if (new Date(this.customStartDateValidation) <= new Date()) {
       this.departureDate = moment().add('31', 'days').toDate();
@@ -169,14 +182,23 @@ export class FlightSearchWidgetComponent implements OnInit {
         }
       }
     });
+    this.data[0] = this.fromSearch ? this.fromSearch : [];
+    if(Object.keys(this.fromSearch).length==0){
+      this.data=[];
+    }
+    console.log(this.data,this.fromSearch)
     //delete BehaviorSubject at the end
     this.homeService.removeToString('flight');
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
-
+    console.log(this.fromSearch)
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
+   /*  if (changes['airport']) {
+      this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
+      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+      //this.data=[];
+    } */
   }
 
 
@@ -542,5 +564,9 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
     this.searchFlightInfo.departure = this.fromSearch.code;
     this.searchFlightInfo.arrival = this.toSearch.code;
+  }
+
+  getflightSearchRoutes(event){
+    this.searchedFlightData = event; 
   }
 }

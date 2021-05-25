@@ -65,7 +65,10 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             child: null,
             infant: null
         };
+        this.data = [];
         this.searchedValue = [];
+        this.searchedFlightData = [];
+        this.selectedAirport = {};
         if (typeof this.fromSearch.city != 'undefined') {
             this.fromSearch['display_name'] = this.fromSearch.city + "," + this.fromSearch.country + ",(" + this.fromSearch.code + ")," + this.fromSearch.name;
             this.toSearch['display_name'] = this.toSearch.city + "," + this.toSearch.country + ",(" + this.toSearch.code + ")," + this.toSearch.name;
@@ -81,6 +84,15 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.countryCode = this.commonFunction.getUserCountry();
         this.rangeDates = [this.departureDate, this.returnDate];
     }
+    FlightSearchWidgetComponent.prototype.onChangeSearch = function (event) {
+        this.searchAirport(event.term);
+        this.searchItems = { key: event.term, type: this.fromSearch };
+        // this.searchItem.emit({key : event.term,type : this.id})
+    };
+    FlightSearchWidgetComponent.prototype.onRemove = function (event) {
+        console.log("innnnn");
+        this.selectedAirport = {};
+    };
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         // this.departureDate = moment(this.customStartDateValidation).toDate();
         var _this = this;
@@ -142,11 +154,22 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 }
             }
         });
+        this.data[0] = this.fromSearch ? this.fromSearch : [];
+        if (Object.keys(this.fromSearch).length == 0) {
+            this.data = [];
+        }
+        console.log(this.data, this.fromSearch);
         //delete BehaviorSubject at the end
         this.homeService.removeToString('flight');
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
+        console.log(this.fromSearch);
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
+        /*  if (changes['airport']) {
+           this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];
+           this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+           //this.data=[];
+         } */
     };
     FlightSearchWidgetComponent.prototype.setFlightDepartureMinDate = function () {
         var date = new Date();
@@ -464,6 +487,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.searchFlightInfo.arrival = this.toSearch.code;
+    };
+    FlightSearchWidgetComponent.prototype.getflightSearchRoutes = function (event) {
+        this.searchedFlightData = event;
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

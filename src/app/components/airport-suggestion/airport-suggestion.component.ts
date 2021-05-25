@@ -77,14 +77,14 @@ export class AirportSuggestionComponent implements OnInit {
           })
         }
         airportArray = airportArray.sort((a, b) => a.key.localeCompare(b.key));
+        console.log(airportArray)
         for(let i=0; i <airportArray.length; i++){
           for(let j=0; j<airportArray[i].value.length; j++){
-            if(airportArray[i].value[j].code != 'AMD'){
-              airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
-            }
+            airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
           }
         }
         this.data=airportArray;
+        console.log(this.data)
       },
         error => {
           this.data=[];
