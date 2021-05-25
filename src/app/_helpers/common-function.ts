@@ -89,7 +89,6 @@ export class CommonFunction {
             headers: {
                 referral_id: this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``
             },
-
         };
         } else {
         return {}

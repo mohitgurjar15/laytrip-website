@@ -62,23 +62,23 @@ var UserService = /** @class */ (function () {
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
     UserService.prototype.verifyOtp = function (data) {
-        return this.http.patch(this.apiURL + 'v1/auth/verify-otp', data)
+        return this.http.patch(this.apiURL + 'v1/auth/verify-otp', data, this.commonFunction.setWithoutLoginHeader())
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
     UserService.prototype.resendOtp = function (email) {
         var data = { "email": email };
-        return this.http.patch(this.apiURL + 'v1/auth/resend-otp', data)
+        return this.http.patch(this.apiURL + 'v1/auth/resend-otp', data, this.commonFunction.setWithoutLoginHeader())
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
     UserService.prototype.forgotPassword = function (formValue) {
         var data = {
             "email": typeof formValue.email != 'undefined' ? formValue.email : formValue
         };
-        return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
+        return this.http.post(this.apiURL + 'v1/auth/forgot-password', data, this.commonFunction.setWithoutLoginHeader())
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
     UserService.prototype.resetPassword = function (data) {
-        return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
+        return this.http.post(this.apiURL + 'v1/auth/reset-password', data, this.commonFunction.setWithoutLoginHeader());
     };
     UserService.prototype.deleteAccount = function (isRequireBackupFile) {
         var accessToken = localStorage.getItem('_lay_sess');

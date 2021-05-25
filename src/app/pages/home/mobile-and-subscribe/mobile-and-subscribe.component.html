@@ -56,7 +56,8 @@
     <section class="contact_us_upper_main">
         <div class="container">
             <div class="contect_text_wrapper">
-                <h3>Join Laytrip for Discounts to Your Favorite Destinations</h3>
+                <h3 *ngIf="!commonFunction.isRefferal()">Join Laytrip for Discounts to Your Favorite Destinations</h3>
+                <h3 *ngIf="commonFunction.isRefferal()">Get Notified of Dream Vacation Deals starting as low as $10/week</h3>
 
                 <div class="custom_input_wrapper">
                     <input type="email" formControlName="email" maxlength="40" (click)="changeEmail()"

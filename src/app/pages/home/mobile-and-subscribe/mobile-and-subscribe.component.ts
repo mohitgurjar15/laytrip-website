@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { CommonFunction } from 'src/app/_helpers/common-function';
 
 @Component({
   selector: 'app-mobile-and-subscribe',
@@ -22,6 +23,7 @@ export class MobileAndSubscribeComponent implements OnInit {
   errorMessage = '';
   constructor(
     private formBuilder: FormBuilder,
+    public commonFunction : CommonFunction,
     private userService: UserService,
     private toastr: ToastrService,
     private elementRef: ElementRef

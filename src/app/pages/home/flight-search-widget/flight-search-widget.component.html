@@ -18,7 +18,7 @@
         </li>
        
         <li class="nav-item class_resp desk_li">
-            <div class="class_section" [ngClass]="{'w_o_arrow': !commonFunction.isRefferal()}">
+            <div class="class_section" [ngClass]="{'w_o_arrow': commonFunction.isRefferal()}">
                 <app-flight-class (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
                 </app-flight-class>
             </div>
@@ -32,7 +32,7 @@
         </li>
         <ul class="mobile_ul">
             <li class="nav-item class_resp mobile_li">
-                <div class="class_section" [ngClass]="{'w_o_arrow': !commonFunction.isRefferal()}">
+                <div class="class_section" [ngClass]="{'w_o_arrow': commonFunction.isRefferal()}">
                     <!-- <app-flight-class [mobileView]="add_class_sec_open2" (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
                     </app-flight-class> -->
                     <app-flight-class (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">

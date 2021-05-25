@@ -11,8 +11,9 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../environments/environment");
 var MobileAndSubscribeComponent = /** @class */ (function () {
-    function MobileAndSubscribeComponent(formBuilder, userService, toastr, elementRef) {
+    function MobileAndSubscribeComponent(formBuilder, commonFunction, userService, toastr, elementRef) {
         this.formBuilder = formBuilder;
+        this.commonFunction = commonFunction;
         this.userService = userService;
         this.toastr = toastr;
         this.elementRef = elementRef;
@@ -78,7 +79,6 @@ var MobileAndSubscribeComponent = /** @class */ (function () {
                 _this.successMessage = data.message;
                 // this.toastr.success(data.message, '');
             }, function (error) {
-                console.log('sd');
                 _this.error = true;
                 _this.successMessage = '';
                 _this.submitted = _this.loading = _this.success = false;
