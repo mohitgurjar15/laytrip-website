@@ -7266,7 +7266,7 @@ agm-map {
     .swiper-pagination{
         .swiper-pagination-bullet{
             &.swiper-pagination-bullet-active{
-                background-color: $pink;
+                background-color: $active-tab-text; 
             }
         } 
     }
