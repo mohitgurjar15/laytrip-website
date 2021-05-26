@@ -40,6 +40,7 @@ var SearchAirportComponent = /** @class */ (function () {
             alternateLocation = localStorage.getItem('__from') || '';
         }
         this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe(function (response) {
+            _this.flightSearchRoute.emit(response);
             _this.data = response.map(function (res) {
                 _this.loading = false;
                 var searchRoute = {
@@ -51,7 +52,6 @@ var SearchAirportComponent = /** @class */ (function () {
                     display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
                     parentId: 0
                 };
-                _this.flightSearchRoute.emit(searchRoute);
                 return searchRoute;
             });
         }, function (error) {

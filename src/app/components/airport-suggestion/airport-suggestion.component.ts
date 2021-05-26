@@ -11,6 +11,7 @@ export class AirportSuggestionComponent implements OnInit {
 
   @Input() type:string;
   @Input() airport;
+  @Input() searchedFlightData;
   data:any=[];
   @Output() closeAirportSuggestion=new EventEmitter();
   @Output() changeValue = new EventEmitter<any>();
@@ -30,11 +31,14 @@ export class AirportSuggestionComponent implements OnInit {
   }
 
   ngOnChanges(change:SimpleChange){
-    
+    if(change['searchedFlightData']){
+      this.data=[];
+      this.data = this.searchedFlightData;
+    console.log(this.data)
+    }
   }
 
   getAirports(){
-
     let from = localStorage.getItem('__from') || '';
     let to = localStorage.getItem('__to') || '';
 
@@ -84,7 +88,6 @@ export class AirportSuggestionComponent implements OnInit {
           }
         }
         this.data=airportArray;
-        console.log(this.data)
       },
         error => {
           this.data=[];
@@ -123,7 +126,6 @@ export class AirportSuggestionComponent implements OnInit {
       return true;
     } else {
       return false;
-
     }
   }
 }

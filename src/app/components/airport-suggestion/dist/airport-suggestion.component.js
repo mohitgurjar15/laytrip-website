@@ -25,6 +25,11 @@ var AirportSuggestionComponent = /** @class */ (function () {
         this.closeAirportSuggestion.emit(type);
     };
     AirportSuggestionComponent.prototype.ngOnChanges = function (change) {
+        if (change['searchedFlightData']) {
+            this.data = [];
+            this.data = this.searchedFlightData;
+            console.log(this.data);
+        }
     };
     AirportSuggestionComponent.prototype.getAirports = function () {
         var _this = this;
@@ -76,7 +81,6 @@ var AirportSuggestionComponent = /** @class */ (function () {
                     }
                 }
                 _this.data = airportArray;
-                console.log(_this.data);
             }, function (error) {
                 _this.data = [];
                 _this.loading = false;
@@ -120,6 +124,9 @@ var AirportSuggestionComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], AirportSuggestionComponent.prototype, "airport");
+    __decorate([
+        core_1.Input()
+    ], AirportSuggestionComponent.prototype, "searchedFlightData");
     __decorate([
         core_1.Output()
     ], AirportSuggestionComponent.prototype, "closeAirportSuggestion");

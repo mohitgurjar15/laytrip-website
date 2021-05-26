@@ -59,6 +59,7 @@ export class SearchAirportComponent implements OnInit {
     }
 
     this.flightService.searchRoute(searchItem,isFromLocation,alternateLocation).subscribe((response: any) => {
+      this.flightSearchRoute.emit(response);
       this.data = response.map(res => {
         this.loading = false;
         var searchRoute = {
@@ -70,7 +71,7 @@ export class SearchAirportComponent implements OnInit {
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
           parentId: 0
         };
-        this.flightSearchRoute.emit(searchRoute);
+        
         return searchRoute;
       });
     },
