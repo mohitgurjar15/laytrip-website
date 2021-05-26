@@ -54,6 +54,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   midMinPrice: number;
   highMinPrice: number;
   calPrices = false;
+  routeSearch : boolean = false;
 
   currentMonth: string;
   currentYear: string;
@@ -547,5 +548,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   getflightSearchRoutes(event){   
     this.showFromAirportSuggestion = true;
     this.searchedFlightData = event; 
+    this.routeSearch = true; 
   }
 }

@@ -83,7 +83,7 @@ export class SearchAirportComponent implements OnInit {
 
   onChangeSearch(event) {
     this.searchAirport(event.term);
-    this.searchItem.emit({key : event.term,type : this.id})
+    // this.searchItem.emit({key : event.term,type : this.id})
   }
 
   selectEvent(event, index) {

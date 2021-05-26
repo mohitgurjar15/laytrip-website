@@ -81,7 +81,7 @@
                                     </app-search-airport>
                                 </div>
                                 <app-airport-suggestion  class="desk_suggetions" *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from' 
-                                (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)" [searchedFlightData]=searchedFlightData></app-airport-suggestion>
+                                (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)" [searchedFlightData]=searchedFlightData [routeSearch]="routeSearch"></app-airport-suggestion>
                             </div>
                             <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
                                 <a (click)="swapAirport()">
@@ -97,10 +97,10 @@
                                         [id]="'toSearch'" [label]="'to' | translate" placeHolder="Where to?"
                                         [defaultSelected]="" [tabIndex]=2 [airport]=toSearch [defaultCity]=""
                                         (changeValue)="destinationChangedValue($event)"
-                                        (click)="showAirportSuggestion('to')" (searchItem)="searchItem($event)">
+                                        (click)="showAirportSuggestion('to')" (flightSearchRoute)="getflightSearchRoutes($event)" (searchItem)="searchItem($event)">
                                     </app-search-airport>
                                 </div>
-                                <app-airport-suggestion class="desk_suggetions" *ngIf="showToAirportSuggestion" [airport]=toSearch type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>
+                                <app-airport-suggestion class="desk_suggetions" *ngIf="showToAirportSuggestion" [airport]=toSearch type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)" [searchedFlightData]=searchedFlightData (changeValue)="airportValueChange($event)"></app-airport-suggestion>
                             </div>
                             <div class="mobile_suggetions">
                                 <app-airport-suggestion *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)"></app-airport-suggestion>

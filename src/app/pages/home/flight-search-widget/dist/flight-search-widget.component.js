@@ -51,6 +51,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.returnDate = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
         this.totalPerson = 1;
         this.calPrices = false;
+        this.routeSearch = false;
         this.showFromAirportSuggestion = false;
         this.showToAirportSuggestion = false;
         this.thisElementClicked = false;
@@ -469,6 +470,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.getflightSearchRoutes = function (event) {
         this.showFromAirportSuggestion = true;
         this.searchedFlightData = event;
+        this.routeSearch = true;
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

@@ -60,7 +60,7 @@ var SearchAirportComponent = /** @class */ (function () {
     };
     SearchAirportComponent.prototype.onChangeSearch = function (event) {
         this.searchAirport(event.term);
-        this.searchItem.emit({ key: event.term, type: this.id });
+        // this.searchItem.emit({key : event.term,type : this.id})
     };
     SearchAirportComponent.prototype.selectEvent = function (event, index) {
         if (!event) {

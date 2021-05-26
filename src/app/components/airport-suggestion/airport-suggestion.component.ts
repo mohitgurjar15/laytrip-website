@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChange } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { environment } from '../../../environments/environment';
 
@@ -11,12 +11,15 @@ export class AirportSuggestionComponent implements OnInit {
 
   @Input() type:string;
   @Input() airport;
+  @Input() routeSearch;
   @Input() searchedFlightData;
   data:any=[];
   @Output() closeAirportSuggestion=new EventEmitter();
   @Output() changeValue = new EventEmitter<any>();
   s3BucketUrl = environment.s3BucketUrl;
   loading:boolean=false;
+  isType = false;
+  dataa;
   
   constructor(
     private flightService: FlightService,
@@ -29,14 +32,16 @@ export class AirportSuggestionComponent implements OnInit {
   closeAirportDropDown(type){
     this.closeAirportSuggestion.emit(type)
   }
-
-  ngOnChanges(change:SimpleChange){
+  
+  
+  ngOnChanges(changes: SimpleChanges) {
+   
     this.data=[];
-    if(change['searchedFlightData']){
-      this.loading=false;
+    if(changes['searchedFlightData']){
+      this.loading=this.isType = false;
     
       // this.data = this.searchedFlightData;
-      let opResult = this.groupByKey(change['searchedFlightData'].currentValue,'key')
+      let opResult = this.groupByKey(changes['searchedFlightData'].currentValue,'key')
       let airportArray=[];
   
       for (const [key, value] of Object.entries(opResult)) {
@@ -46,17 +51,20 @@ export class AirportSuggestionComponent implements OnInit {
         })
       }
       airportArray = airportArray.sort((a, b) => a.key.localeCompare(b.key));
-      console.log(airportArray)
       for(let i=0; i <airportArray.length; i++){
         for(let j=0; j<airportArray[i].value.length; j++){
           airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
         }
       }
       this.data=airportArray;
+      console.log(this.loading,this.data)
+    } else {
+      console.log('here')
     }
   }
 
   getAirports(){
+    this.data = [];
     let from = localStorage.getItem('__from') || '';
     let to = localStorage.getItem('__to') || '';
 
