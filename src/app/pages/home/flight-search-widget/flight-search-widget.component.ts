@@ -550,4 +550,9 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.searchedFlightData = event; 
     this.routeSearch = true; 
   }
+  getflightToSearchRoutes(event){   
+    this.showToAirportSuggestion = true;
+    this.searchedFlightData = event; 
+    this.routeSearch = true; 
+  }
 }

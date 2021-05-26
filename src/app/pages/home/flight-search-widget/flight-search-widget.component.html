@@ -97,7 +97,7 @@
                                         [id]="'toSearch'" [label]="'to' | translate" placeHolder="Where to?"
                                         [defaultSelected]="" [tabIndex]=2 [airport]=toSearch [defaultCity]=""
                                         (changeValue)="destinationChangedValue($event)"
-                                        (click)="showAirportSuggestion('to')" (flightSearchRoute)="getflightSearchRoutes($event)" (searchItem)="searchItem($event)">
+                                        (click)="showAirportSuggestion('to')" (flightSearchRoute)="getflightToSearchRoutes($event)" (searchItem)="searchItem($event)">
                                     </app-search-airport>
                                 </div>
                                 <app-airport-suggestion class="desk_suggetions" *ngIf="showToAirportSuggestion" [airport]=toSearch type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)" [searchedFlightData]=searchedFlightData (changeValue)="airportValueChange($event)"></app-airport-suggestion>

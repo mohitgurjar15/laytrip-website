@@ -472,6 +472,11 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.searchedFlightData = event;
         this.routeSearch = true;
     };
+    FlightSearchWidgetComponent.prototype.getflightToSearchRoutes = function (event) {
+        this.showToAirportSuggestion = true;
+        this.searchedFlightData = event;
+        this.routeSearch = true;
+    };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)
     ], FlightSearchWidgetComponent.prototype, "dateFilter");

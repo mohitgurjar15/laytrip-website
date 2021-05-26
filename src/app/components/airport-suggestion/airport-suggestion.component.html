@@ -1,4 +1,4 @@
-<div class="search_suggetion_main" >
+<div class="search_suggetion_main"  *ngIf="data.length > 0" > 
     <div class="close_btn">
         <button (click)="closeAirportDropDown(type)" type="button" class="close">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
@@ -7,7 +7,7 @@
     <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
         pointerEventsMethod="scrollbar">
         <span *ngIf="loading">Loading...</span>
-        <div class="suggtions_wrps_mn" *ngIf="data.length > 0">
+        <div class="suggtions_wrps_mn">
             <div class="suggtions">
                 <div class="sug_line_box" *ngFor="let item of data">
                     <a href="#a" class="word_alpha">{{item.key}}</a>
