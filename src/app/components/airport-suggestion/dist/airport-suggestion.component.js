@@ -25,10 +25,27 @@ var AirportSuggestionComponent = /** @class */ (function () {
         this.closeAirportSuggestion.emit(type);
     };
     AirportSuggestionComponent.prototype.ngOnChanges = function (change) {
+        this.data = [];
         if (change['searchedFlightData']) {
-            this.data = [];
-            this.data = this.searchedFlightData;
-            console.log(this.data);
+            this.loading = false;
+            // this.data = this.searchedFlightData;
+            var opResult = this.groupByKey(change['searchedFlightData'].currentValue, 'key');
+            var airportArray = [];
+            for (var _i = 0, _a = Object.entries(opResult); _i < _a.length; _i++) {
+                var _b = _a[_i], key = _b[0], value = _b[1];
+                airportArray.push({
+                    key: key,
+                    value: value
+                });
+            }
+            airportArray = airportArray.sort(function (a, b) { return a.key.localeCompare(b.key); });
+            console.log(airportArray);
+            for (var i = 0; i < airportArray.length; i++) {
+                for (var j = 0; j < airportArray[i].value.length; j++) {
+                    airportArray[i].value[j].display_name = airportArray[i].value[j].city + "," + airportArray[i].value[j].country + ",(" + airportArray[i].value[j].code + ")," + airportArray[i].value[j].name;
+                }
+            }
+            this.data = airportArray;
         }
     };
     AirportSuggestionComponent.prototype.getAirports = function () {

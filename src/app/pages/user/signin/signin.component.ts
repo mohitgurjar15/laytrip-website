@@ -32,7 +32,6 @@ export class SigninComponent implements OnInit {
   public userNotVerify: boolean = false;
   emailForVerifyOtp: string = '';
   guestUserId: string = '';
-
   @Input() pageData;
   @Input() resetRecaptcha;
   @Output() valueChange = new EventEmitter();
@@ -50,6 +49,7 @@ export class SigninComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required]]
@@ -131,14 +131,6 @@ export class SigninComponent implements OnInit {
     this.apiError = error;
   }
 
-  getTravelers() {
-    this.travelerService.getTravelers().subscribe((res: any) => {
-      $('.signupfn').val(res.data[0].firstName ? res.data[0].firstName : '');
-      $('.signupln').val(res.data[0].lastName ? res.data[0].lastName : '');
-      $('.signupem').val(res.data[0].email ? res.data[0].email : '');
-    })
-  }
-
   closeModal() {
     this.apiError = '';
     this.submitted = false;
@@ -151,7 +143,6 @@ export class SigninComponent implements OnInit {
 
 
   btnSignUpClick() {
-    this.getTravelers();
     this.submitted = false;
     Object.keys(this.loginForm.controls).forEach(key => {
       this.loginForm.get(key).markAsUntouched();
@@ -165,6 +156,8 @@ export class SigninComponent implements OnInit {
     }, 1500);
 
   }
+
+ 
 
   openOtpPage() {
     this.submitted = false;

@@ -31,10 +31,28 @@ export class AirportSuggestionComponent implements OnInit {
   }
 
   ngOnChanges(change:SimpleChange){
+    this.data=[];
     if(change['searchedFlightData']){
-      this.data=[];
-      this.data = this.searchedFlightData;
-    console.log(this.data)
+      this.loading=false;
+    
+      // this.data = this.searchedFlightData;
+      let opResult = this.groupByKey(change['searchedFlightData'].currentValue,'key')
+      let airportArray=[];
+  
+      for (const [key, value] of Object.entries(opResult)) {
+        airportArray.push({
+          key : key,
+          value : value
+        })
+      }
+      airportArray = airportArray.sort((a, b) => a.key.localeCompare(b.key));
+      console.log(airportArray)
+      for(let i=0; i <airportArray.length; i++){
+        for(let j=0; j<airportArray[i].value.length; j++){
+          airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
+        }
+      }
+      this.data=airportArray;
     }
   }
 
@@ -44,6 +62,7 @@ export class AirportSuggestionComponent implements OnInit {
 
     if(from=='' && to==''){
       this.loading=true;
+  
       this.flightService.searchAirports(this.type).subscribe((result:any)=>{
         this.loading=false;
         for(let i=0; i <result.length; i++){
