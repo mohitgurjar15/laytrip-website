@@ -36,6 +36,14 @@
                 @include mobile-view {
                     margin-right: 0;
                 }
+                &.pink{
+                    a{
+                        .step_text{
+                            color: $pink;
+                            font-weight: 500;
+                        }
+                    }
+                }
 
                 a {
                     padding-right: 50px;
@@ -45,6 +53,11 @@
                     @include mobile-view {
                         padding-right: 30px;
                         font-size: 10px;
+                    }
+
+                    .tick_icon{
+                        max-width: 25px;
+                        margin-right: 7px;
                     }
 
                     .step_num {

@@ -58,6 +58,19 @@ h3 {
             width: 20%;
         }
 
+        &.add_cart_li{
+            .cart_anch{
+                .tab_round_wrps{
+                    .tab_imgs_wrps{
+                        img{
+                            max-width: 24px;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+
         &::before {
             content: '';
             position: absolute;
@@ -328,6 +341,11 @@ h3 {
                     text-align: center;
                     min-width: 94px;
                     padding: 0 3px;
+                    &.pink{
+                        color: $pink;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
                 }
             }
 
