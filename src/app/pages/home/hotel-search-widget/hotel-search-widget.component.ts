@@ -126,6 +126,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.checkInMinDate = moment().add(31, 'days').toDate();
 
       this.checkOutDate = moment(this.route.snapshot.queryParams['check_out']).isValid() ? moment(this.route.snapshot.queryParams['check_out']).toDate() : moment(this.route.snapshot.queryParams['check_in']).add(1, 'days').toDate();
+      
       this.checkOutMinDate = this.checkOutDate;
       this.rangeDates = [this.checkInDate, this.checkOutDate];
 
@@ -246,7 +247,7 @@ export class HotelSearchWidgetComponent implements OnInit {
 
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
     queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
-    // queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
+    queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
