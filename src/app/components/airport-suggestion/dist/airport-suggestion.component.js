@@ -46,10 +46,9 @@ var AirportSuggestionComponent = /** @class */ (function () {
                 }
             }
             this.data = airportArray;
-            console.log(this.loading, this.data);
         }
         else {
-            console.log('here');
+            // console.log('here')
         }
     };
     AirportSuggestionComponent.prototype.getAirports = function () {
@@ -96,7 +95,6 @@ var AirportSuggestionComponent = /** @class */ (function () {
                     });
                 }
                 airportArray = airportArray.sort(function (a, b) { return a.key.localeCompare(b.key); });
-                console.log(airportArray);
                 for (var i = 0; i < airportArray.length; i++) {
                     for (var j = 0; j < airportArray[i].value.length; j++) {
                         airportArray[i].value[j].display_name = airportArray[i].value[j].city + "," + airportArray[i].value[j].country + ",(" + airportArray[i].value[j].code + ")," + airportArray[i].value[j].name;

@@ -56,7 +56,7 @@ export class FlightPriceSliderComponent implements OnInit {
     ]
   }
 
-  @Input() flexibleLoading: boolean = false;
+  @Input() flexibleLoading: boolean = true;
   @Input() dates = [];
 
   constructor(
@@ -140,7 +140,7 @@ export class FlightPriceSliderComponent implements OnInit {
     else {
       price = item.price
     }
-    return price;
+    return price > 0 ? price.toFixed(2) : 'Flights Unavailable';
   }
 
   getFlexibleArivalDate(date) {

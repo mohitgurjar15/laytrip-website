@@ -167,9 +167,9 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
+        this.dealDateValidation();
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
-        this.dealDateValidation();
         this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;
         this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = hotelInfo.long;
         this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = hotelInfo.city_id;
@@ -184,9 +184,10 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (moment(moment(this.customStartDateValidation).subtract(31, 'days')).diff(moment(), 'days') > 0) {
       this.searchHotelInfo.check_in = this.checkInDate = moment(this.customStartDateValidation).toDate();
     } else {
-      this.searchHotelInfo.check_in = this.checkInDate = moment().add(31, 'days').toDate();
-    }
+      this.searchHotelInfo.check_in = this.checkInDate = moment().add(91, 'days').toDate();
+    }        
     this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
+    this.rangeDates = [this.checkInDate, this.checkOutDate];
   }
 
   setHotelDate() {

@@ -95,7 +95,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
 
   getFlightSearchData(payload, tripType) {
-    this.loading = true;
+    this.loading = this.flexibleLoading = true;
     this.fullPageLoading = true;
     this.tripType = tripType;
     this.errorMessage = '';

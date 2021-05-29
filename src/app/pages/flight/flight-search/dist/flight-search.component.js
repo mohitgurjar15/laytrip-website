@@ -79,7 +79,7 @@ var FlightSearchComponent = /** @class */ (function () {
     // }
     FlightSearchComponent.prototype.getFlightSearchData = function (payload, tripType) {
         var _this = this;
-        this.loading = true;
+        this.loading = this.flexibleLoading = true;
         this.fullPageLoading = true;
         this.tripType = tripType;
         this.errorMessage = '';

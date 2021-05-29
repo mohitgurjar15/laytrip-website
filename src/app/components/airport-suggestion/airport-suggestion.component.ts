@@ -57,9 +57,8 @@ export class AirportSuggestionComponent implements OnInit {
         }
       }
       this.data=airportArray;
-      console.log(this.loading,this.data)
     } else {
-      console.log('here')
+      // console.log('here')
     }
   }
 
@@ -108,7 +107,6 @@ export class AirportSuggestionComponent implements OnInit {
           })
         }
         airportArray = airportArray.sort((a, b) => a.key.localeCompare(b.key));
-        console.log(airportArray)
         for(let i=0; i <airportArray.length; i++){
           for(let j=0; j<airportArray[i].value.length; j++){
             airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`

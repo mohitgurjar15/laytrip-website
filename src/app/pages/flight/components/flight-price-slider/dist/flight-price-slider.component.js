@@ -46,7 +46,7 @@ var FlightPriceSliderComponent = /** @class */ (function () {
                 }
             ]
         };
-        this.flexibleLoading = false;
+        this.flexibleLoading = true;
         this.dates = [];
         this.departureDate = this.route.snapshot.queryParams['departure_date'];
         this.departureDate = this.commonFunction.convertDateFormat(this.departureDate, 'YYYY-MM-DD');
@@ -113,7 +113,7 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         else {
             price = item.price;
         }
-        return price;
+        return price > 0 ? price.toFixed(2) : 'Flights Unavailable';
     };
     FlightPriceSliderComponent.prototype.getFlexibleArivalDate = function (date) {
         var startDate = moment(this.departureDate, 'MMM DD, YYYY');

@@ -162,12 +162,11 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.toSearch = airports[keys];
         this.flightSearchForm.controls.fromDestination.setValue('');
         this.fromSearch = [];
-        if (!this.isRoundTrip) {
-          // this.departureDate = moment(this.customStartDateValidation).add(31, 'days').toDate();
-        } else {
-          this.rangeDates = [this.departureDate, moment(this.departureDate).add(7, 'days').toDate()];
+        this.departureDate = moment().add(90, 'days').toDate();
+        if (this.isRoundTrip) {
+          this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
           this.searchFlightInfo.arrival = this.toSearch.code;
-        }
+        } 
       }
     });
     //delete BehaviorSubject at the end
