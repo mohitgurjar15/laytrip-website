@@ -261,6 +261,7 @@ export class CommonFunction {
     }
 
     isRefferal() {
+        // console.log("utm_source",this.route.snapshot.queryParams['utm_source'])
         if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
             return true
         }else {

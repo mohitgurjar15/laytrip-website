@@ -79,7 +79,7 @@ export class VacationSearchWidgetComponent implements OnInit {
     }
     
     this.route.queryParams.subscribe(params => {
-      if (Object.keys(params).length > 0) {
+      if (Object.keys(params).length > 2) {
         const info = JSON.parse(localStorage.getItem('_rental'));
         this.searchedValue = [];
         this.rentalForm.city = params.city;

@@ -11,10 +11,9 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../environments/environment");
 var AddCardComponent = /** @class */ (function () {
-    function AddCardComponent(genericService, formBuilder, toastr, spinner, commonFunction) {
+    function AddCardComponent(genericService, formBuilder, spinner, commonFunction) {
         this.genericService = genericService;
         this.formBuilder = formBuilder;
-        this.toastr = toastr;
         this.spinner = spinner;
         this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -204,7 +203,6 @@ var AddCardComponent = /** @class */ (function () {
         }
         // Tokenize!
         Spreedly.tokenizeCreditCard(options);
-        console.log("Submit payment");
         setTimeout(function () {
             _this.cardListChangeCount += _this.cardListChangeCount + 1;
             _this.emitCardListChange.emit(_this.cardListChangeCount);

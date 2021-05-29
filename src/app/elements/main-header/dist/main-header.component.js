@@ -93,7 +93,7 @@ var MainHeaderComponent = /** @class */ (function () {
         var _this = this;
         var live_availiblity = 'no';
         var url = window.location.href;
-        if (url.includes('cart/checkout') || url.includes('cart/checkout')) {
+        if (url.includes('cart/checkout')) {
             live_availiblity = 'yes';
         }
         this.cartService.getCartList(live_availiblity).subscribe(function (res) {
@@ -121,7 +121,7 @@ var MainHeaderComponent = /** @class */ (function () {
         var _this = this;
         var live_availiblity = 'no';
         var url = window.location.href;
-        if (url.includes('cart/checkout') || url.includes('cart/checkout')) {
+        if (url.includes('cart/checkout')) {
             live_availiblity = 'yes';
         }
         this.cartService.getCartList(live_availiblity).subscribe(function (res) {

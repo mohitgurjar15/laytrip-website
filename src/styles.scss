@@ -1977,6 +1977,13 @@ select {
 
           .class_section {
             width: 100%;
+            &.w_o_arrow {
+              width: 80px;
+
+              .drop_aerrow{
+                display: none;
+              }
+            }
 
             label {
               width: 100%;

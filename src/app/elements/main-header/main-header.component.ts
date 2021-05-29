@@ -116,7 +116,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
     let live_availiblity = 'no';
     let url = window.location.href;
-    if (url.includes('cart/checkout') || url.includes('cart/checkout')) {
+    if (url.includes('cart/checkout')) {
       live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
@@ -144,7 +144,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   updateCartSummary() {
     let live_availiblity = 'no';
     let url = window.location.href;
-    if (url.includes('cart/checkout') || url.includes('cart/checkout')) {
+    if (url.includes('cart/checkout')) {
       live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {

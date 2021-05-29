@@ -224,6 +224,7 @@ var CommonFunction = /** @class */ (function () {
         return moment(time, sourceFormat).format(targetFormat);
     };
     CommonFunction.prototype.isRefferal = function () {
+        // console.log("utm_source",this.route.snapshot.queryParams['utm_source'])
         if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
             return true;
         }

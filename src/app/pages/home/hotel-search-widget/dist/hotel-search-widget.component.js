@@ -109,7 +109,8 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                     longitude: this.route.snapshot.queryParams['longitude'],
                     check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
                     check_out: moment(this.checkOutDate).format('MM/DD/YYYY'),
-                    city_id: this.route.snapshot.queryParams['city_id']
+                    city_id: this.route.snapshot.queryParams['city_id'],
+                    hotel_id: this.route.snapshot.queryParams['hotel_id']
                 };
             if (this.route.snapshot.queryParams['location']) {
                 info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['location'])));
@@ -130,6 +131,8 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         else {
             this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
             this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id;
+            this.searchHotelInfo.hotel_id = this.fromDestinationInfo.hotel_id;
+            // this.searchHotelInfo.type = this.fromDestinationInfo.type;
             this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
             this.searchHotelInfo.location = this.fromDestinationInfo;
             this.searchHotelInfo.occupancies = this.selectedGuest;
@@ -220,6 +223,9 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
         queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
         queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
+        queryParams.hotel_id = this.searchHotelInfo.type == "hotel" ? parseFloat(this.searchHotelInfo.hotel_id) : '';
+        // queryParams.type = this.searchHotelInfo.type ? this.searchHotelInfo.type : '';
+        console.log(this.searchHotelInfo);
         queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
         queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace(/\=+$/, '');
         if (this.commonFunction.isRefferal()) {
@@ -243,14 +249,21 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         }
     };
     HotelSearchWidgetComponent.prototype.selectedHotel = function (event) {
+        if (event.type == 'city') {
+            this.searchHotelInfo.city_id = event.city_id;
+        }
+        else {
+            this.searchHotelInfo.hotel_id = event.hotel_id;
+        }
+        this.searchHotelInfo.type = event.type;
         this.searchHotelInfo.location = event;
-        this.searchHotelInfo.city_id = event.city_id;
         this.searchHotelInfo.latitude = event.geo_codes.lat;
         this.searchHotelInfo.longitude = event.geo_codes.long;
         if (event && event.city_id == '' && event.objType === 'invalid') {
             this.fromDestinationInfo = event;
             this.validateSearch(true);
         }
+        console.log(this.searchHotelInfo, event);
     };
     HotelSearchWidgetComponent.prototype.validateSearch = function (event) {
         this.validSearch = event;

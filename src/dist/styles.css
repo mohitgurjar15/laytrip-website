@@ -11628,7 +11628,13 @@ select:focus {
   }
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section {
+  width: 110px;
+}
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section.w_o_arrow {
   width: 80px;
+}
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section.w_o_arrow .drop_aerrow {
+  display: none;
 }
 @media (max-width: 558px) {
   .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section {
@@ -11657,6 +11663,7 @@ select:focus {
   color: #8188ab;
   position: relative;
   padding: 0;
+  cursor: pointer;
   justify-content: flex-end;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section .search_area .class_sec_info span {
@@ -12325,6 +12332,12 @@ select:focus {
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section {
   width: 100%;
+}
+.search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section.w_o_arrow {
+  width: 80px;
+}
+.search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section.w_o_arrow .drop_aerrow {
+  display: none;
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section label {
   width: 100%;

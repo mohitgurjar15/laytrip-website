@@ -70,6 +70,9 @@ var CheckoutComponent = /** @class */ (function () {
         this.isExcludedCountryError = false;
         this.lottieLoaderType = "";
         this.modules = [];
+        this.instalmentMode = 'instalment';
+        this.showPartialPayemntOption = true;
+        this.instalmentType = 'weekly';
         //this.totalLaycredit();
         this.getCountry();
         // this.openBookingCompletionErrorPopup();
@@ -141,28 +144,27 @@ var CheckoutComponent = /** @class */ (function () {
             _this.isCartEmpty = true;
             _this.cartLoading = false;
         });
-        try {
-            var data = sessionStorage.getItem('__islt');
-            data = atob(data);
-            this.priceSummary = JSON.parse(data);
+        /* try {
+          let data = sessionStorage.getItem('__islt');
+          data = atob(data);
+          this.priceSummary = JSON.parse(data)
         }
         catch (e) {
-            if (this.commonFunction.isRefferal()) {
-                var parms = this.commonFunction.getRefferalParms();
-                var queryParams = {};
-                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-                if (parms.utm_medium) {
-                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-                }
-                if (parms.utm_campaign) {
-                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
-                }
-                this.router.navigate(['/'], { queryParams: queryParams });
+          if (this.commonFunction.isRefferal()) {
+            let parms = this.commonFunction.getRefferalParms();
+            var queryParams : any = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if(parms.utm_medium){
+              queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
             }
-            else {
-                this.router.navigate(['/']);
+            if(parms.utm_campaign){
+              queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
-        }
+            this.router.navigate(['/'], { queryParams: queryParams });
+          } else {
+            this.router.navigate(['/'])
+          }
+        } */
         this.$cartIdsubscription = this.cartService.getCartId.subscribe(function (cartId) {
             if (cartId > 0) {
                 _this.deleteCart(cartId);
@@ -201,10 +203,10 @@ var CheckoutComponent = /** @class */ (function () {
                 if (parms.utm_campaign) {
                     queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
                 }
-                this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
+                this.router.navigate(['/cart/booking'], { queryParams: queryParams });
             }
             else {
-                this.router.navigate(['/cart/checkout']);
+                this.router.navigate(['/cart/booking']);
             }
         }
     };
@@ -578,7 +580,7 @@ var CheckoutComponent = /** @class */ (function () {
                 _this.priceSummary.remainingAmount = totalPrice - res.instalment_date[0].instalment_amount;
                 _this.priceSummary.totalAmount = totalPrice;
                 _this.priceSummary = Object.assign({}, _this.priceSummary);
-                _this.cd.detectChanges();
+                // this.cd.detectChanges();
             }
         }, function (err) {
         });
@@ -618,6 +620,21 @@ var CheckoutComponent = /** @class */ (function () {
     };
     CheckoutComponent.prototype.removeExculdedError = function () {
         this.isExcludedCountryError = false;
+    };
+    CheckoutComponent.prototype.selectInstalmentMode = function (instalmentMode) {
+        this.instalmentMode = instalmentMode;
+        this.showPartialPayemntOption = (this.instalmentMode == 'instalment') ? true : false;
+        sessionStorage.setItem('__insMode', btoa(this.instalmentMode));
+    };
+    CheckoutComponent.prototype.getInstalmentData = function (data) {
+        this.instalmentType = data.instalmentType;
+        //this.laycreditpoints = data.layCreditPoints;
+        this.priceSummary = data;
+        this.checkOutService.setPriceSummary(this.priceSummary);
+        sessionStorage.setItem('__islt', btoa(JSON.stringify(data)));
+    };
+    CheckoutComponent.prototype.redeemableLayCredit = function (event) {
+        this.redeemableLayPoints = event;
     };
     __decorate([
         core_1.ViewChild(add_card_component_1.AddCardComponent, { static: false })

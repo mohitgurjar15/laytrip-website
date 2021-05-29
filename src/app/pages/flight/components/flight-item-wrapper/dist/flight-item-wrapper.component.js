@@ -202,7 +202,6 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
             this.cartService.addCartItem(payload).subscribe(function (res) {
                 _this.changeLoading.emit(true);
-                var queryParamsNew = {};
                 if (res) {
                     var newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] };
                     _this.cartItems = __spreadArrays(_this.cartItems, [newItem]);

@@ -52,7 +52,7 @@ export class EmptyCartComponent implements OnInit {
     $('#cart_modal').modal('hide');
     this.activeModal.close();
     let url = window.location.href;
-    if (url.includes('cart/checkout') || url.includes('cart/checkout')) {
+    if (url.includes('cart/checkout')) {
       if(this.commonFunction.isRefferal()){
         var parms = this.commonFunction.getRefferalParms();
         var queryParams: any = {};

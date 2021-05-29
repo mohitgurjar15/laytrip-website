@@ -24,7 +24,7 @@
                     <form id="signup-form" [formGroup]="signupForm">
                         <div class="form_row">
                             <div class="text_field half">
-                                <input value="{{getValue()}}" type="text" formControlName="first_name"
+                                <input  type="text" formControlName="first_name"
                                     [ngClass]="{'error': submitted && !signupForm.controls.first_name.valid}"
                                    maxlength="25" tabindex="11" placeholder="{{'first_name' | translate}}"
                                     (keypress)="commonFunction.preventNumberInput($event)" class="signupfn">

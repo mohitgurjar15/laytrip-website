@@ -39,10 +39,10 @@
                                         </div>
                                         <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                             <div class="card-body">
-                                                <app-add-card totalCard="{{totalCard}}"
+                                               <!--  <app-add-card totalCard="{{totalCard}}"
                                                     (add_new_card)="closeNewCardPanel($event)"
                                                     (emitCardListChange)="getCardListChange($event)">
-                                                </app-add-card>
+                                                </app-add-card> -->
                                             </div>
                                         </div>
                                     </div>
@@ -55,6 +55,11 @@
                     <div class="payment_container">
                         <div class="payment_mode_wrapper">
                             <app-payment-mode-loader *ngIf="cartLoading"></app-payment-mode-loader>
+                            <app-payment-mode *ngIf="carts && carts.length" laycreditpoints="{{laycreditpoints}}"
+                                (selectInstalmentMode)="selectInstalmentMode($event)"
+                                (getInstalmentData)="getInstalmentData($event)"
+                                (redeemableLayCredit)="redeemableLayCredit($event)">
+                            </app-payment-mode>
                             <app-price-summary [priceSummary]="priceSummary" [cartPrices]="cartPrices">
                             </app-price-summary>
                         </div>
