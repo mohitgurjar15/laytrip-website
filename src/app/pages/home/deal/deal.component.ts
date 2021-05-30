@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { HomeService } from '../../../services/home.service';
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
@@ -38,6 +38,8 @@ export class DealComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Output() toString = new EventEmitter<string>();
   @Input()  dealList = [];
+  @HostListener('contextmenu', ['$event'])
+
   list = [];
   list2 = [];
   breakpoints = {
@@ -80,4 +82,5 @@ export class DealComponent implements OnInit {
       1024: { slidesPerView: this.breakPointsToggle ? 7 : 5, spaceBetween: 40 }
     };
   } 
+
 }

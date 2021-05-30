@@ -20,6 +20,9 @@ var CommonFunction = /** @class */ (function () {
     CommonFunction.prototype.closeModal = function (modelBox) {
         return modelBox = false;
     };
+    CommonFunction.prototype.onRightClickDisabled = function (event) {
+        event.preventDefault();
+    };
     CommonFunction.prototype.parseDateWithFormat = function (date) {
         if (date.departuredate) {
             return {

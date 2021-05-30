@@ -22,7 +22,7 @@
     </div>
 </section>
 <!-- deal section skeleton loader ends -->
-<section class="deal_sec" *ngIf="list.length > 0 && commonFunction.isRefferal()">
+<section class="deal_sec" *ngIf="list.length > 0 && commonFunction.isRefferal()"  (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
         <div class="row">
             <swiper [slidesPerView]="3" [loop]="true" [spaceBetween]="50" (swiper)="setThumbsSwiper($event)"
@@ -46,7 +46,7 @@
 <!-- End Deals section-->
 
 
-<section class="deal_sec" *ngIf="!commonFunction.isRefferal()">
+<section class="deal_sec" *ngIf="!commonFunction.isRefferal()"   (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
         <div class="row">
             <div class="deal_sec_wrapper" *ngIf="list.length <= 0">

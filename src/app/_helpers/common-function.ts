@@ -27,6 +27,9 @@ export class CommonFunction {
         return modelBox = false;
     }
 
+    onRightClickDisabled(event) {
+        event.preventDefault();
+    }
     parseDateWithFormat(date) {
         if (date.departuredate) {
             return {

@@ -53,6 +53,7 @@ export class BookComponent implements OnInit {
       let parms = this.commonFunction.getRefferalParms();      
       this.bookingRequest.referral_id = parms.utm_source ? parms.utm_source : '';
     }
+    console.log(this.bookingRequest)
 
     // this.bookService.bookFlight(bookingData).subscribe((res: any) => {
     //   console.log(res);

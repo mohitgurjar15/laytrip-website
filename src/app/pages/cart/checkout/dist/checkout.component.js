@@ -497,7 +497,7 @@ var CheckoutComponent = /** @class */ (function () {
                         }
                         _this.cartService.validate(_this.bookingRequest).subscribe(function (res) {
                             var transaction = res.transaction;
-                            var redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+                            var redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4202');
                             var queryParams = {};
                             if (_this.commonFunction.isRefferal()) {
                                 var parms = _this.commonFunction.getRefferalParms();
@@ -513,7 +513,7 @@ var CheckoutComponent = /** @class */ (function () {
                                 }
                             }
                             res.redirection = redirection;
-                            // console.log("res", res);
+                            console.log("res", res);
                             if (transaction.state == "succeeded") {
                                 // console.log('succeeded', [redirection]);
                                 window.location.href = redirection;

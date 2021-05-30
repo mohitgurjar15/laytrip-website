@@ -66,6 +66,9 @@ var DealComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], DealComponent.prototype, "dealList");
+    __decorate([
+        core_1.HostListener('contextmenu', ['$event'])
+    ], DealComponent.prototype, "list");
     DealComponent = __decorate([
         core_1.Component({
             selector: 'app-deal',

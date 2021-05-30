@@ -565,7 +565,7 @@ export class CheckoutComponent implements OnInit {
             this.cartService.validate(this.bookingRequest).subscribe((res: any) => {
               let transaction = res.transaction;
 
-              let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+              let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4202');
               
               var queryParams : any = {};
               if (this.commonFunction.isRefferal()) {
@@ -584,7 +584,7 @@ export class CheckoutComponent implements OnInit {
               } 
               res.redirection = redirection;
 
-              // console.log("res", res);
+              console.log("res", res);
               if (transaction.state == "succeeded") {
                 // console.log('succeeded', [redirection]);
                 window.location.href = redirection;
