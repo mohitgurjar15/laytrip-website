@@ -99,6 +99,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.fullPageLoading = true;
     this.tripType = tripType;
     this.errorMessage = '';
+    this.flightDetails = [];
+    this.dates = [];
+
     if (payload && tripType === 'roundtrip') {
       this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
@@ -109,6 +112,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.filterFlightDetails = res;
         }
       }, err => {
+        this.flightDetails = [];
         if (err && err.status === 404) {
           this.errorMessage = err.message;
         }
@@ -119,20 +123,23 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.fullPageLoading = false;
       });
-      this.dates = [];
-      this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe((res: any) => {
-        if (res) {
+      // if(this.flightDetails.length > 0){
+        this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe((res: any) => {
+          if (res) {
+            this.flexibleLoading = this.flexibleNotFound =false;
+            this.dates = res;
+          }
+        }, err => {
+          this.flexibleNotFound = true;
           this.flexibleLoading = false;
-          this.flexibleNotFound = false;
-          this.dates = res;
-        }
-      }, err => {
-        this.flexibleNotFound = true;
-        this.flexibleLoading = false;
-      });
+        });
+      /* } else {
+        this.flexibleLoading = this.flexibleNotFound =false;
+      } */
 
       this.getCalenderPrice(payload)
     } else {
+
       this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
           this.loading = false;
@@ -142,28 +149,29 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.filterFlightDetails = res;
         }
       }, err => {
-
+        this.loading = this.fullPageLoading= false;
         if (err.status == 422) {
           this.errorMessage = err.message;
         }
         else {
           this.isNotFound = true;
         }
-        this.loading = false;
-        this.fullPageLoading = false;
       });
-
-      this.dates = [];
-      this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
-        if (res && res.length) {
+      // console.log('hell')
+      // console.log(this.flightDetails.length)
+      // if(this.flightDetails.length > 0){
+        this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
+          if (res && res.length) {
+            this.flexibleLoading = this.flexibleNotFound = false;
+            this.dates = res;
+          }
+        }, err => {
+          this.flexibleNotFound = true;
           this.flexibleLoading = false;
-          this.flexibleNotFound = false;
-          this.dates = res;
-        }
-      }, err => {
-        this.flexibleNotFound = true;
-        this.flexibleLoading = false;
-      });
+        });
+      /* } else {
+        this.flexibleLoading = this.flexibleNotFound =false;
+      } */
 
       this.getCalenderPrice(payload);
     }

@@ -83,6 +83,8 @@ var FlightSearchComponent = /** @class */ (function () {
         this.fullPageLoading = true;
         this.tripType = tripType;
         this.errorMessage = '';
+        this.flightDetails = [];
+        this.dates = [];
         if (payload && tripType === 'roundtrip') {
             this.flightService.getRoundTripFlightSearchResult(payload).subscribe(function (res) {
                 if (res) {
@@ -93,6 +95,7 @@ var FlightSearchComponent = /** @class */ (function () {
                     _this.filterFlightDetails = res;
                 }
             }, function (err) {
+                _this.flightDetails = [];
                 if (err && err.status === 404) {
                     _this.errorMessage = err.message;
                 }
@@ -102,17 +105,19 @@ var FlightSearchComponent = /** @class */ (function () {
                 _this.loading = false;
                 _this.fullPageLoading = false;
             });
-            this.dates = [];
+            // if(this.flightDetails.length > 0){
             this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe(function (res) {
                 if (res) {
-                    _this.flexibleLoading = false;
-                    _this.flexibleNotFound = false;
+                    _this.flexibleLoading = _this.flexibleNotFound = false;
                     _this.dates = res;
                 }
             }, function (err) {
                 _this.flexibleNotFound = true;
                 _this.flexibleLoading = false;
             });
+            /* } else {
+              this.flexibleLoading = this.flexibleNotFound =false;
+            } */
             this.getCalenderPrice(payload);
         }
         else {
@@ -125,26 +130,29 @@ var FlightSearchComponent = /** @class */ (function () {
                     _this.filterFlightDetails = res;
                 }
             }, function (err) {
+                _this.loading = _this.fullPageLoading = false;
                 if (err.status == 422) {
                     _this.errorMessage = err.message;
                 }
                 else {
                     _this.isNotFound = true;
                 }
-                _this.loading = false;
-                _this.fullPageLoading = false;
             });
-            this.dates = [];
+            // console.log('hell')
+            // console.log(this.flightDetails.length)
+            // if(this.flightDetails.length > 0){
             this.flightService.getFlightFlexibleDates(payload).subscribe(function (res) {
                 if (res && res.length) {
-                    _this.flexibleLoading = false;
-                    _this.flexibleNotFound = false;
+                    _this.flexibleLoading = _this.flexibleNotFound = false;
                     _this.dates = res;
                 }
             }, function (err) {
                 _this.flexibleNotFound = true;
                 _this.flexibleLoading = false;
             });
+            /* } else {
+              this.flexibleLoading = this.flexibleNotFound =false;
+            } */
             this.getCalenderPrice(payload);
         }
     };
