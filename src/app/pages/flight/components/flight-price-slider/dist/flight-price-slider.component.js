@@ -116,7 +116,7 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         else {
             price = item.price;
         }
-        return price > 0 ? '$' + price.toFixed(2) : 'Flights Unavailable';
+        return { price: 'Flights Unavailable', className: 'price_unavailabe' };
     };
     FlightPriceSliderComponent.prototype.getFlexibleArivalDate = function (date) {
         var startDate = moment(this.departureDate, 'MMM DD, YYYY');
