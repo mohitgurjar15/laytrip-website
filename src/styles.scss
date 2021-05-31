@@ -944,6 +944,42 @@ select {
 
 //<!-- Close Coming Soon page css -->
 
+//<!-- home slider css -->
+.home_bg_slider {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column; 
+
+  .carousel {
+    border-radius: 0 !important;
+    .slide {
+      border-radius: 0 !important;
+      &:hover {
+        transform: scale(1);
+      }
+    }
+    .control {
+      &.prev {
+        opacity: 0.3;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+      &.next {
+        opacity: 0.3;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+//<!-- home slider css -->
+
 //<!--  Start Banner Section css -->
 .home_banner {
   .banner_inner {
@@ -1100,7 +1136,8 @@ select {
 
                   .search_area {
                     background-color: transparent;
-                    .class_sec_info{
+
+                    .class_sec_info {
                       cursor: default;
                     }
                   }
@@ -2014,7 +2051,8 @@ select {
 
               .search_area {
                 background-color: transparent;
-                .class_sec_info{
+
+                .class_sec_info {
                   cursor: default;
                 }
               }
