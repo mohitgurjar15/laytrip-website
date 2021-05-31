@@ -29,6 +29,41 @@ export class HomeComponent implements OnInit {
   dealList = [];
   host:string='';
   $tabName;
+  public slides = [
+    { 
+      src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/184974934.jpg?k=17803467e2d7dec840e47eccb1c9595f3b8890a51288e728188831acc4378f5d&o=",
+      location:{
+        from : {
+          airport_code : 'DEN'
+        },
+        to : {
+          airport_code : 'MIA'
+        }
+      }
+    },
+    { 
+      src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/101944574.jpg?k=afeb13ea4553e6dc4d0b2c01fafc85e6f80688a867080dfa7bb4ddd4577ea515&o=",
+      location:{
+        from : {
+          airport_code : 'LHR'
+        },
+        to : {
+          airport_code : 'JFK'
+        }
+      }
+    },
+    { 
+      src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/295130173.jpg?k=cb031d144f9c01c6c99271d9a8aa241a5bd8922613b9cec738f2c83ccd2776d6&o=",
+      location:{
+        from : {
+          airport_code : 'DXB'
+        },
+        to : {
+          airport_code : 'SYD'
+        }
+      }
+    }
+  ];
 
   constructor(
     private genericService: GenericService,
@@ -227,6 +262,9 @@ export class HomeComponent implements OnInit {
     } else {
 
     }
+  }
+  activeSlide(event){
+    
   }
 
 }

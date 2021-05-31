@@ -3,7 +3,12 @@
 @import "../../../_hotel.scss";
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
+.container {
+    display: block;
+    height: 500px;
+    width: 100%;
+    padding: 2em;
+  }
 //<!--  Start Banner Section css -->
 .home_banner {
     width: 100%;
