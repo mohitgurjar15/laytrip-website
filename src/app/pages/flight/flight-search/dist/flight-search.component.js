@@ -93,6 +93,21 @@ var FlightSearchComponent = /** @class */ (function () {
                     _this.isNotFound = false;
                     _this.flightDetails = res.items;
                     _this.filterFlightDetails = res;
+                    if (_this.flightDetails.length > 0) {
+                        _this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe(function (res) {
+                            if (res) {
+                                _this.flexibleLoading = _this.flexibleNotFound = false;
+                                _this.dates = res;
+                            }
+                        }, function (err) {
+                            _this.flexibleNotFound = true;
+                            _this.flexibleLoading = false;
+                        });
+                    }
+                    else {
+                        _this.isNotFound = true;
+                        _this.flexibleLoading = _this.flexibleNotFound = false;
+                    }
                 }
             }, function (err) {
                 _this.flightDetails = [];
@@ -105,19 +120,6 @@ var FlightSearchComponent = /** @class */ (function () {
                 _this.loading = false;
                 _this.fullPageLoading = false;
             });
-            // if(this.flightDetails.length > 0){
-            this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe(function (res) {
-                if (res) {
-                    _this.flexibleLoading = _this.flexibleNotFound = false;
-                    _this.dates = res;
-                }
-            }, function (err) {
-                _this.flexibleNotFound = true;
-                _this.flexibleLoading = false;
-            });
-            /* } else {
-              this.flexibleLoading = this.flexibleNotFound =false;
-            } */
             this.getCalenderPrice(payload);
         }
         else {
@@ -128,6 +130,21 @@ var FlightSearchComponent = /** @class */ (function () {
                     _this.isNotFound = false;
                     _this.flightDetails = res.items;
                     _this.filterFlightDetails = res;
+                    if (_this.flightDetails.length > 0) {
+                        _this.flightService.getFlightFlexibleDates(payload).subscribe(function (res) {
+                            if (res && res.length) {
+                                _this.flexibleLoading = _this.flexibleNotFound = false;
+                                _this.dates = res;
+                            }
+                        }, function (err) {
+                            _this.flexibleNotFound = true;
+                            _this.flexibleLoading = false;
+                        });
+                    }
+                    else {
+                        _this.isNotFound = true;
+                        _this.flexibleLoading = _this.flexibleNotFound = false;
+                    }
                 }
             }, function (err) {
                 _this.loading = _this.fullPageLoading = false;
@@ -138,21 +155,6 @@ var FlightSearchComponent = /** @class */ (function () {
                     _this.isNotFound = true;
                 }
             });
-            // console.log('hell')
-            // console.log(this.flightDetails.length)
-            // if(this.flightDetails.length > 0){
-            this.flightService.getFlightFlexibleDates(payload).subscribe(function (res) {
-                if (res && res.length) {
-                    _this.flexibleLoading = _this.flexibleNotFound = false;
-                    _this.dates = res;
-                }
-            }, function (err) {
-                _this.flexibleNotFound = true;
-                _this.flexibleLoading = false;
-            });
-            /* } else {
-              this.flexibleLoading = this.flexibleNotFound =false;
-            } */
             this.getCalenderPrice(payload);
         }
     };

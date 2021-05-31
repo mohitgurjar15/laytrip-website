@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, ViewChild, Renderer2, Input } from '@angular/core';
-declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -7,9 +6,6 @@ import { Location } from '@angular/common';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { NgxSpinnerService } from "ngx-spinner";
-import { HotelService } from '../../../services/hotel.service';
-import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -110,6 +106,20 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
+          if(this.flightDetails.length > 0){
+            this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe((res: any) => {
+              if (res) {
+                this.flexibleLoading = this.flexibleNotFound =false;
+                this.dates = res;
+              }
+            }, err => {
+              this.flexibleNotFound = true;
+              this.flexibleLoading = false;
+            });
+          } else {
+            this.isNotFound = true;
+            this.flexibleLoading = this.flexibleNotFound =false;
+          }
         }
       }, err => {
         this.flightDetails = [];
@@ -119,23 +129,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         else {
           this.isNotFound = true;
         }
-
         this.loading = false;
         this.fullPageLoading = false;
-      });
-      // if(this.flightDetails.length > 0){
-        this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe((res: any) => {
-          if (res) {
-            this.flexibleLoading = this.flexibleNotFound =false;
-            this.dates = res;
-          }
-        }, err => {
-          this.flexibleNotFound = true;
-          this.flexibleLoading = false;
-        });
-      /* } else {
-        this.flexibleLoading = this.flexibleNotFound =false;
-      } */
+      });  
 
       this.getCalenderPrice(payload)
     } else {
@@ -147,35 +143,35 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
-        }
+          if(this.flightDetails.length > 0){
+            this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
+              if (res && res.length) {
+                this.flexibleLoading = this.flexibleNotFound = false;
+                this.dates = res;
+              }
+            }, err => {
+              this.flexibleNotFound = true;
+              this.flexibleLoading = false;
+            });
+          } else {
+            this.isNotFound = true;
+            this.flexibleLoading = this.flexibleNotFound =false;
+          }
+       }     
       }, err => {
         this.loading = this.fullPageLoading= false;
         if (err.status == 422) {
           this.errorMessage = err.message;
-        }
-        else {
+        }else {
           this.isNotFound = true;
         }
       });
-      // console.log('hell')
-      // console.log(this.flightDetails.length)
-      // if(this.flightDetails.length > 0){
-        this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
-          if (res && res.length) {
-            this.flexibleLoading = this.flexibleNotFound = false;
-            this.dates = res;
-          }
-        }, err => {
-          this.flexibleNotFound = true;
-          this.flexibleLoading = false;
-        });
-      /* } else {
-        this.flexibleLoading = this.flexibleNotFound =false;
-      } */
+    
+     
 
       this.getCalenderPrice(payload);
     }
-  }
+  }  
 
   changeLoading(event) {
     this.fullPageLoading = event;
