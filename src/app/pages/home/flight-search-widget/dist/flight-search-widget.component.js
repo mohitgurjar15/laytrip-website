@@ -51,6 +51,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.returnDate = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
         this.totalPerson = 1;
         this.calPrices = false;
+        this.routeSearch = false;
         this.showFromAirportSuggestion = false;
         this.showToAirportSuggestion = false;
         this.thisElementClicked = false;
@@ -66,6 +67,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             infant: null
         };
         this.searchedValue = [];
+        this.searchedFlightData = [];
         if (typeof this.fromSearch.city != 'undefined') {
             this.fromSearch['display_name'] = this.fromSearch.city + "," + this.fromSearch.country + ",(" + this.fromSearch.code + ")," + this.fromSearch.name;
             this.toSearch['display_name'] = this.toSearch.city + "," + this.toSearch.country + ",(" + this.toSearch.code + ")," + this.toSearch.name;
@@ -133,11 +135,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 _this.toSearch = airports_1.airports[keys];
                 _this.flightSearchForm.controls.fromDestination.setValue('');
                 _this.fromSearch = [];
-                if (!_this.isRoundTrip) {
-                    // this.departureDate = moment(this.customStartDateValidation).add(31, 'days').toDate();
-                }
-                else {
-                    _this.rangeDates = [_this.departureDate, moment(_this.departureDate).add(7, 'days').toDate()];
+                _this.departureDate = moment().add(90, 'days').toDate();
+                if (_this.isRoundTrip) {
+                    _this.rangeDates = [_this.departureDate, moment().add(97, 'days').toDate()];
                     _this.searchFlightInfo.arrival = _this.toSearch.code;
                 }
             }
@@ -166,6 +166,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             this.departureDate = date;
             this.flightDepartureMinDate = date;
         }
+        this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
     };
     FlightSearchWidgetComponent.prototype.destinationChangedValue = function (event) {
         if (event && event.key && event.key === 'fromSearch') {
@@ -258,9 +259,13 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
         ;
         if (this.rangeDates[0] && this.rangeDates[1]) {
-            this.departureDate = this.rangeDates[0];
-            // this.flightDepartureMinDate = this.rangeDates[0];
+            var daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
             this.returnDate = this.rangeDates[1];
+            this.departureDate = this.rangeDates[0];
+            if (daysDiff == 0) {
+                this.returnDate = moment(this.rangeDates[0]).add(7, 'days').toDate();
+            }
+            // this.flightDepartureMinDate = this.rangeDates[0];
             this.rangeDates = [this.departureDate, this.returnDate];
         }
     };
@@ -464,6 +469,16 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.searchFlightInfo.arrival = this.toSearch.code;
+    };
+    FlightSearchWidgetComponent.prototype.getflightSearchRoutes = function (event) {
+        this.showFromAirportSuggestion = true;
+        this.searchedFlightData = event;
+        this.routeSearch = true;
+    };
+    FlightSearchWidgetComponent.prototype.getflightToSearchRoutes = function (event) {
+        this.showToAirportSuggestion = true;
+        this.searchedFlightData = event;
+        this.routeSearch = true;
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

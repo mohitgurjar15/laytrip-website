@@ -61,7 +61,7 @@ var VacationSearchWidgetComponent = /** @class */ (function () {
             this.showCommingSoon = true;
         }
         this.route.queryParams.subscribe(function (params) {
-            if (Object.keys(params).length > 0) {
+            if (Object.keys(params).length > 2) {
                 var info = JSON.parse(localStorage.getItem('_rental'));
                 _this.searchedValue = [];
                 _this.rentalForm.city = params.city;

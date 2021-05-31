@@ -240,7 +240,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
       this.cartService.addCartItem(payload).subscribe((res: any) => {
         this.changeLoading.emit(true);
-        let queryParamsNew: any = {};
         if (res) {
           let newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] }
           this.cartItems = [...this.cartItems, newItem]
@@ -257,9 +256,9 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
             if(parms.utm_campaign){
               queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
-            this.router.navigate(['cart/booking'], { queryParams:queryParams });
+            this.router.navigate(['cart/checkout'], { queryParams:queryParams });
           } else {
-            this.router.navigate(['cart/booking']);
+            this.router.navigate(['cart/checkout']);
           }
         }
       }, error => {

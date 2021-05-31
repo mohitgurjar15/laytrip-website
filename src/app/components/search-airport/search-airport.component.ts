@@ -22,6 +22,7 @@ export class SearchAirportComponent implements OnInit {
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
   @Output() searchItem = new EventEmitter<any>();
+  @Output() flightSearchRoute = new EventEmitter<any>();
   @Input() defaultCity: any;
   @Input() airport;
 
@@ -58,9 +59,10 @@ export class SearchAirportComponent implements OnInit {
     }
 
     this.flightService.searchRoute(searchItem,isFromLocation,alternateLocation).subscribe((response: any) => {
+      this.flightSearchRoute.emit(response);
       this.data = response.map(res => {
         this.loading = false;
-        return {
+        var searchRoute = {
           id: res.id,
           name: res.name,
           code: res.code,
@@ -69,6 +71,8 @@ export class SearchAirportComponent implements OnInit {
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
           parentId: 0
         };
+        
+        return searchRoute;
       });
     },
       error => {
@@ -79,8 +83,7 @@ export class SearchAirportComponent implements OnInit {
 
   onChangeSearch(event) {
     this.searchAirport(event.term);
-    console.log("event.term",event.term)
-    this.searchItem.emit({key : event.term,type : this.id})
+    // this.searchItem.emit({key : event.term,type : this.id})
   }
 
   selectEvent(event, index) {

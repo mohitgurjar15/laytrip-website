@@ -1,0 +1,8 @@
+.price_per_week_label {
+  font-size: 12px;
+}
+
+.price_unavailabe {
+  font-size: 9px !important;
+  line-height: 9px;
+}

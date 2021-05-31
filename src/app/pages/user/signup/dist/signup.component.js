@@ -13,7 +13,7 @@ var forms_1 = require("@angular/forms");
 var must_match_validators_1 = require("../../../_helpers/must-match.validators");
 var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
 var SignupComponent = /** @class */ (function () {
-    function SignupComponent(modalService, formBuilder, userService, router, renderer, commonFunction, route) {
+    function SignupComponent(modalService, formBuilder, userService, router, renderer, commonFunction, route, checkOutService) {
         this.modalService = modalService;
         this.formBuilder = formBuilder;
         this.userService = userService;
@@ -21,6 +21,7 @@ var SignupComponent = /** @class */ (function () {
         this.renderer = renderer;
         this.commonFunction = commonFunction;
         this.route = route;
+        this.checkOutService = checkOutService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.valueChange = new core_1.EventEmitter();
         this.submitted = false;
@@ -48,6 +49,20 @@ var SignupComponent = /** @class */ (function () {
             validators: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
         this.isCaptchaValidated = false;
+    };
+    SignupComponent.prototype.getValue = function () {
+        var _this = this;
+        if (this.commonFunction.isRefferal() && this.router.url.includes('/cart')) {
+            this.checkOutService.getTravelers.subscribe(function (travelers) {
+                var traveler = travelers;
+                if (typeof traveler != 'undefined' && traveler[0]) {
+                    _this.signupForm.controls.first_name.setValue(traveler[0].firstName ? traveler[0].firstName : '');
+                    _this.signupForm.controls.last_name.setValue(traveler[0].lastName ? traveler[0].lastName : '');
+                    _this.signupForm.controls.email.setValue(traveler[0].email ? traveler[0].email : '');
+                    return;
+                }
+            });
+        }
     };
     SignupComponent.prototype.openOtpPage = function () {
         var _this = this;

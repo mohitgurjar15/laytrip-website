@@ -29,10 +29,10 @@ var BookingCompletionErrorPopupComponent = /** @class */ (function () {
             if (parms.utm_campaign) {
                 queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
-            this.router.navigate(['/cart/booking'], { queryParams: queryParams });
+            this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
         }
         else {
-            this.router.navigate(['/cart/booking']);
+            this.router.navigate(['/cart/checkout']);
         }
     };
     BookingCompletionErrorPopupComponent.prototype.close = function () {

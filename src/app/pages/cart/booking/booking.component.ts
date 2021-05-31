@@ -377,13 +377,9 @@ export class BookingComponent implements OnInit {
       return;
     }
     this.loading = true;
-
-
-    
-
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
-      this.redirectTo('/cart/booking');
+      this.redirectTo('/cart/checkout');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1);

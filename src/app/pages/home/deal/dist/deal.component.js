@@ -33,21 +33,17 @@ var DealComponent = /** @class */ (function () {
         this.list = [];
         this.list2 = [];
         this.breakpoints = {
-            320: { slidesPerView: 1, spaceBetween: 10 },
-            520: { slidesPerView: 2, spaceBetween: 10 },
-            768: { slidesPerView: 3, spaceBetween: 40 },
-            1024: { slidesPerView: 3, spaceBetween: 40 }
+            320: { slidesPerView: 1, spaceBetween: 10, slidesPerGroup: 9 },
+            520: { slidesPerView: 2, spaceBetween: 10, slidesPerGroup: 5 },
+            768: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 },
+            1024: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 }
         };
+        this.slidesPerGroup = 3;
     }
     DealComponent.prototype.ngOnInit = function () {
     };
     DealComponent.prototype.ngAfterContentChecked = function () {
-        this.list2 = this.dealList; //JSON.parse('[{"title":"Miami Beach, Florida, United States","city":"Miami Beach","city_id":"800047419","state":"","country":"United States","type":"city","hotel_id":"","lat":"25.7903","long":"-80.1303","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909@2x-2974.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"},{"title":"Miami Beach, Florida, United States","city":"Miami Beach","city_id":"800047419","state":"","country":"United States","type":"city","hotel_id":"","lat":"25.7903","long":"-80.1303","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909@2x-2974.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"},{"title":"Miami Beach, Florida, United States","city":"Miami Beach","city_id":"800047419","state":"","country":"United States","type":"city","hotel_id":"","lat":"25.7903","long":"-80.1303","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909@2x-2974.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"}]');//this.dealList;
-        // console.log(this.dealList)
-        // this.list2 = JSON.parse('[{"code":"MIA","name":"Miami Intl. Arpt.","city":"Miami","country":"USA","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909-6106.png","key":"M"},{"code":"CUN","name":"Cancun Intl.","city":"Cancun","country":"Mexico","image":"https://api.staging.laytrip.com/static/deal2-8335.png","key":"C"}]');//this.dealList;
-        // console.log(this.dealList)
         this.list = this.dealList;
-        // console.log(this.list.length)
     };
     DealComponent.prototype.btnDealClick = function (item) {
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
@@ -59,10 +55,10 @@ var DealComponent = /** @class */ (function () {
     DealComponent.prototype.breakpointChange = function () {
         this.breakPointsToggle = !this.breakPointsToggle;
         this.breakpoints = {
-            320: { slidesPerView: 1, spaceBetween: 10 },
-            520: { slidesPerView: 2, spaceBetween: 10 },
-            768: { slidesPerView: 3, spaceBetween: 40 },
-            1024: { slidesPerView: this.breakPointsToggle ? 7 : 5, spaceBetween: 40 }
+            320: { slidesPerView: 1, spaceBetween: 10, slidesPerGroup: 9 },
+            520: { slidesPerView: 2, spaceBetween: 10, slidesPerGroup: 5 },
+            768: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 },
+            1024: { slidesPerView: this.breakPointsToggle ? 3 : 5, spaceBetween: 40, slidesPerGroup: 3 }
         };
     };
     __decorate([
@@ -71,6 +67,9 @@ var DealComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], DealComponent.prototype, "dealList");
+    __decorate([
+        core_1.HostListener('contextmenu', ['$event'])
+    ], DealComponent.prototype, "list");
     DealComponent = __decorate([
         core_1.Component({
             selector: 'app-deal',

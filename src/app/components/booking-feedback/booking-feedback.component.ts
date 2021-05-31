@@ -32,7 +32,7 @@ export class BookingFeedbackComponent implements OnInit {
   ngOnInit() {
     this.feedbackForm = this.formBuilder.group({
       rating: [''],
-      comment: ['', this.commonFunction.isRefferal() ? Validators.required : ''],
+      comment: ['', !this.commonFunction.isRefferal() ? Validators.required : ''],
     });
     this.bookingId = this.route.snapshot.paramMap.get('id');
   }

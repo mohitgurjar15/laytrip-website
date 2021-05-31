@@ -16,6 +16,7 @@ var SearchAirportComponent = /** @class */ (function () {
         this.cookieService = cookieService;
         this.changeValue = new core_1.EventEmitter();
         this.searchItem = new core_1.EventEmitter();
+        this.flightSearchRoute = new core_1.EventEmitter();
         this.selectedAirport = {};
         this.keyword = 'name';
         this.data = [];
@@ -39,9 +40,10 @@ var SearchAirportComponent = /** @class */ (function () {
             alternateLocation = localStorage.getItem('__from') || '';
         }
         this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe(function (response) {
+            _this.flightSearchRoute.emit(response);
             _this.data = response.map(function (res) {
                 _this.loading = false;
-                return {
+                var searchRoute = {
                     id: res.id,
                     name: res.name,
                     code: res.code,
@@ -50,6 +52,7 @@ var SearchAirportComponent = /** @class */ (function () {
                     display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
                     parentId: 0
                 };
+                return searchRoute;
             });
         }, function (error) {
             _this.loading = false;
@@ -57,8 +60,7 @@ var SearchAirportComponent = /** @class */ (function () {
     };
     SearchAirportComponent.prototype.onChangeSearch = function (event) {
         this.searchAirport(event.term);
-        console.log("event.term", event.term);
-        this.searchItem.emit({ key: event.term, type: this.id });
+        // this.searchItem.emit({key : event.term,type : this.id})
     };
     SearchAirportComponent.prototype.selectEvent = function (event, index) {
         if (!event) {
@@ -135,6 +137,9 @@ var SearchAirportComponent = /** @class */ (function () {
     __decorate([
         core_1.Output()
     ], SearchAirportComponent.prototype, "searchItem");
+    __decorate([
+        core_1.Output()
+    ], SearchAirportComponent.prototype, "flightSearchRoute");
     __decorate([
         core_1.Input()
     ], SearchAirportComponent.prototype, "defaultCity");

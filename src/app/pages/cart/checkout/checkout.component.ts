@@ -82,6 +82,10 @@ export class CheckoutComponent implements OnInit {
   isExcludedCountryError: boolean = false;
   lottieLoaderType = "";
   modules = [];
+  instalmentMode = 'instalment';
+  showPartialPayemntOption: boolean = true;
+  instalmentType: string = 'weekly'
+  redeemableLayPoints: number;
 
   constructor(
     private genericService: GenericService,
@@ -178,7 +182,7 @@ export class CheckoutComponent implements OnInit {
 
 
 
-    try {
+    /* try {
       let data = sessionStorage.getItem('__islt');
       data = atob(data);
       this.priceSummary = JSON.parse(data)
@@ -198,7 +202,7 @@ export class CheckoutComponent implements OnInit {
       } else {
         this.router.navigate(['/'])
       }
-    }
+    } */
 
     this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
       if (cartId > 0) {
@@ -561,7 +565,7 @@ export class CheckoutComponent implements OnInit {
             this.cartService.validate(this.bookingRequest).subscribe((res: any) => {
               let transaction = res.transaction;
 
-              let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+              let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4202');
               
               var queryParams : any = {};
               if (this.commonFunction.isRefferal()) {
@@ -580,7 +584,7 @@ export class CheckoutComponent implements OnInit {
               } 
               res.redirection = redirection;
 
-              // console.log("res", res);
+              console.log("res", res);
               if (transaction.state == "succeeded") {
                 // console.log('succeeded', [redirection]);
                 window.location.href = redirection;
@@ -645,7 +649,7 @@ export class CheckoutComponent implements OnInit {
         this.priceSummary.remainingAmount = totalPrice - res.instalment_date[0].instalment_amount;
         this.priceSummary.totalAmount = totalPrice;
         this.priceSummary = Object.assign({}, this.priceSummary);
-        this.cd.detectChanges();
+        // this.cd.detectChanges();
       }
 
     }, (err) => {
@@ -694,5 +698,25 @@ export class CheckoutComponent implements OnInit {
 
   removeExculdedError() {
     this.isExcludedCountryError = false;
+  }
+
+
+  selectInstalmentMode(instalmentMode) {
+    this.instalmentMode = instalmentMode;
+    this.showPartialPayemntOption = (this.instalmentMode == 'instalment') ? true : false
+    sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
+  }
+
+  getInstalmentData(data) {
+
+    this.instalmentType = data.instalmentType;
+    //this.laycreditpoints = data.layCreditPoints;
+    this.priceSummary = data;
+    this.checkOutService.setPriceSummary(this.priceSummary)
+    sessionStorage.setItem('__islt', btoa(JSON.stringify(data)))
+  }
+
+  redeemableLayCredit(event) {
+    this.redeemableLayPoints = event;
   }
 }

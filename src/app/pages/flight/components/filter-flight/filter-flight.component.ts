@@ -526,7 +526,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
       })
     } */
-    console.log(filterdFlights)
 
     this.flightService.getLastApplyedSortFilter.subscribe(filters=> {
       if(typeof filters != 'undefined' && Object.keys(filters).length > 0){  
@@ -562,7 +561,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
         }
       }
     });
-    console.log(filterdFlights)
     this.filterFlight.emit(filterdFlights);
   }
 

@@ -327,7 +327,7 @@ var BookingComponent = /** @class */ (function () {
         this.loading = true;
         this.cartService.deleteCartItem(cartId).subscribe(function (res) {
             _this.loading = false;
-            _this.redirectTo('/cart/booking');
+            _this.redirectTo('/cart/checkout');
             var index = _this.carts.findIndex(function (x) { return x.id == cartId; });
             _this.carts.splice(index, 1);
             _this.cartPrices.splice(index, 1);
