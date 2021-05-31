@@ -19,13 +19,13 @@
                     <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg"
                         alt="Hotel Icon" />
                 </a>
-                <a class="tab_anch" style="pointer-events: none;">
+                <a class="tab_anch" style="pointer-events: none;" *ngIf="!commonFunction.isRefferal()">
                     <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
                         alt="Accommodation Icon" />
                     <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_gray.svg"
                         alt="Accommodation Icon" />
                 </a>
-                <a class="tab_anch" style="pointer-events: none;">
+                <a class="tab_anch" style="pointer-events: none;" *ngIf="!commonFunction.isRefferal()">
                     <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_blue.svg"
                         alt="car Icon" />
                     <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_gray.svg"
@@ -166,7 +166,7 @@
 
                 </div>
                 <div class="col-lg-9">
-                    <app-flight-price-slider  [dates]="dates"
+                    <app-flight-price-slider  [dates]="dates" *ngIf="flightDetails.length > 0"
                         [flexibleLoading]="flexibleLoading">
                     </app-flight-price-slider>
                     <app-flight-item-wrapper (maxCartValidation)="maxCartValidation($event)"
