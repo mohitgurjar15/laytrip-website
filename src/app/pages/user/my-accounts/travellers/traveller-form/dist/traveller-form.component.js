@@ -12,6 +12,7 @@ var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../../../../environments/environment");
 var moment = require("moment");
 var custom_validators_1 = require("../../../../../_helpers/custom.validators");
+var phone_masking_helper_1 = require("../../../../../_helpers/phone-masking.helper");
 var TravellerFormComponent = /** @class */ (function () {
     function TravellerFormComponent(formBuilder, router, commonFunction, toastr, cookieService, travelerService, genericService, checkOutService, modalService) {
         this.formBuilder = formBuilder;
@@ -53,6 +54,10 @@ var TravellerFormComponent = /** @class */ (function () {
         };
         this.formEnable = false;
         this.submitted = false;
+        this.phoneNumberMask = {
+            format: '',
+            length: 0
+        };
     }
     TravellerFormComponent.prototype.ngOnInit = function () {
         // this.getCountry();
@@ -74,6 +79,10 @@ var TravellerFormComponent = /** @class */ (function () {
             passport_expiry: [''],
             passport_number: ['']
         }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });
+        this.travellerForm.controls.phone_no.setValidators([forms_1.Validators.minLength(phone_masking_helper_1.PHONE_NUMBER_MASK['+1'].length)]);
+        this.travellerForm.controls.phone_no.updateValueAndValidity();
+        this.phoneNumberMask.format = phone_masking_helper_1.PHONE_NUMBER_MASK['+1'].format;
+        this.phoneNumberMask.length = phone_masking_helper_1.PHONE_NUMBER_MASK['+1'].length;
         // this.travelerFormChange.emit(this.travellerForm);
         this.setUserTypeValidation();
         if (this.travellerId) {
@@ -139,6 +148,11 @@ var TravellerFormComponent = /** @class */ (function () {
             passport_number: this.travelerInfo.passportNumber ? this.travelerInfo.passportNumber : '',
             passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : ''
         });
+        var phoneFormat = phone_masking_helper_1.getPhoneFormat(this.travelerInfo.countryCode || '+1');
+        this.travellerForm.controls.phone_no.setValidators([forms_1.Validators.minLength(phoneFormat.length)]);
+        this.travellerForm.controls.phone_no.updateValueAndValidity();
+        this.phoneNumberMask.format = phoneFormat.format;
+        this.phoneNumberMask.length = phoneFormat.length;
         this.travellerForm.controls['country_id'].disable();
         this.travellerForm.controls['country_code'].disable();
         this.travellerForm.controls['gender'].disable();
@@ -187,6 +201,7 @@ var TravellerFormComponent = /** @class */ (function () {
         var _this = this;
         this.loadingValue.emit(true);
         this.submitted = true;
+        console.log(this.travellerForm);
         var controls = this.travellerForm.controls;
         if (this.travellerId) {
             this.validateDob(moment(this.travellerForm.controls.dob.value).format('MM-DD-YYYY'));
@@ -196,6 +211,11 @@ var TravellerFormComponent = /** @class */ (function () {
             Object.keys(controls).forEach(function (controlName) {
                 return controls[controlName].markAsTouched();
             });
+            var selectedCountry = phone_masking_helper_1.getPhoneFormat(this.travellerForm.controls['country_code'].value);
+            this.travellerForm.controls.phone_no.setValidators([forms_1.Validators.minLength(selectedCountry.length)]);
+            this.travellerForm.controls.phone_no.updateValueAndValidity();
+            this.phoneNumberMask.format = selectedCountry.format;
+            this.phoneNumberMask.length = selectedCountry.length;
             this.loadingValue.emit(false);
             return;
         }
@@ -239,7 +259,21 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.submitted = false;
                     // this.toastr.error(error.error.message, 'Traveler Update Error');
                     if (error.status === 401) {
-                        _this.router.navigate(['/']);
+                        if (_this.commonFunction.isRefferal()) {
+                            var parms = _this.commonFunction.getRefferalParms();
+                            var queryParams = {};
+                            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                            if (parms.utm_medium) {
+                                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                            }
+                            if (parms.utm_campaign) {
+                                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                            }
+                            _this.router.navigate(['/'], { queryParams: queryParams });
+                        }
+                        else {
+                            _this.router.navigate(['/']);
+                        }
                     }
                 });
             }
@@ -257,7 +291,21 @@ var TravellerFormComponent = /** @class */ (function () {
                     _this.submitted = false;
                     // this.toastr.error(error.error.message, 'Traveler Add Error');
                     if (error.status === 401) {
-                        _this.router.navigate(['/']);
+                        if (_this.commonFunction.isRefferal()) {
+                            var parms = _this.commonFunction.getRefferalParms();
+                            var queryParams = {};
+                            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                            if (parms.utm_medium) {
+                                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                            }
+                            if (parms.utm_campaign) {
+                                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                            }
+                            _this.router.navigate(['/'], { queryParams: queryParams });
+                        }
+                        else {
+                            _this.router.navigate(['/']);
+                        }
                     }
                 });
             }
@@ -333,7 +381,21 @@ var TravellerFormComponent = /** @class */ (function () {
             _this.travelerFormChange.emit(_this.userId);
         }, function (error) {
             if (error.status === 401) {
-                _this.router.navigate(['/']);
+                if (_this.commonFunction.isRefferal()) {
+                    var parms = _this.commonFunction.getRefferalParms();
+                    var queryParams = {};
+                    queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                    if (parms.utm_medium) {
+                        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                    }
+                    if (parms.utm_campaign) {
+                        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                    }
+                    _this.router.navigate(['/'], { queryParams: queryParams });
+                }
+                else {
+                    _this.router.navigate(['/']);
+                }
             }
             else {
             }
@@ -345,6 +407,13 @@ var TravellerFormComponent = /** @class */ (function () {
         this.travellerForm.controls['country_id'].enable();
         this.travellerForm.controls['country_code'].enable();
         this.travellerForm.controls['gender'].enable();
+    };
+    TravellerFormComponent.prototype.validateCountryWithPhoneNumber = function (event) {
+        var selectedCountry = phone_masking_helper_1.getPhoneFormat(this.travellerForm.controls['country_code'].value);
+        this.travellerForm.controls.phone_no.setValidators([forms_1.Validators.minLength(selectedCountry.length)]);
+        this.travellerForm.controls.phone_no.updateValueAndValidity();
+        this.phoneNumberMask.format = selectedCountry.format;
+        this.phoneNumberMask.length = selectedCountry.length;
     };
     __decorate([
         core_1.Input()

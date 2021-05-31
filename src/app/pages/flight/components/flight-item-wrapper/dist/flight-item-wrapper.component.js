@@ -196,17 +196,33 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             sessionStorage.setItem('_itinerary', JSON.stringify(itinerary));
             var payload = {
                 module_id: 1,
-                route_code: route.route_code
+                route_code: route.route_code,
+                referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
             };
             //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
             this.cartService.addCartItem(payload).subscribe(function (res) {
                 _this.changeLoading.emit(true);
+                var queryParamsNew = {};
                 if (res) {
                     var newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] };
                     _this.cartItems = __spreadArrays(_this.cartItems, [newItem]);
                     _this.cartService.setCartItems(_this.cartItems);
                     localStorage.setItem('$crt', JSON.stringify(_this.cartItems.length));
-                    _this.router.navigate(["cart/booking"]);
+                    if (_this.commonFunction.isRefferal()) {
+                        var parms = _this.commonFunction.getRefferalParms();
+                        var queryParams = {};
+                        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                        if (parms.utm_medium) {
+                            queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                        }
+                        if (parms.utm_campaign) {
+                            queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                        }
+                        _this.router.navigate(['cart/booking'], { queryParams: queryParams });
+                    }
+                    else {
+                        _this.router.navigate(['cart/booking']);
+                    }
                 }
             }, function (error) {
                 _this.changeLoading.emit(false);
@@ -260,7 +276,6 @@ var FlightItemWrapperComponent = /** @class */ (function () {
     FlightItemWrapperComponent.prototype.hideFlightNotAvailable = function () {
         this.isFlightNotAvailable = false;
         this.flightUniqueCode = '';
-        window.location.reload();
     };
     __decorate([
         core_1.Input()

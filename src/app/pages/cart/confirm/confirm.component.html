@@ -32,7 +32,7 @@
             </div>
 
 
-            <div class="header_bar" *ngIf="!loading && allBookingStatus">
+            <div id="{{ commonFunction.isRefferal() ? 'ga4_Landing_Booking_Confirm':'ga4_Booking_Confirm'}}"   class="header_bar" *ngIf="!loading && allBookingStatus">
                 <h3>
                     Booking Confirmed
                     <span class="b_num">Booking ID #{{cartDetails.laytripCartId}}</span>
@@ -40,7 +40,7 @@
                 <p class="para">
                     Thank you for booking your travel with us! We will send you your airline, hotel and/or home
                     reservation numbers prior to your travel date. View your details anytime at <a
-                        [routerLink]="['/account/bookings']">My Bookings</a>.
+                        [routerLink]="['/account/bookings']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" >My Bookings</a>.
                 </p>
             </div>
             <div class="book_detailers" *ngIf="!loading && allBookingStatus">
@@ -102,7 +102,7 @@
                 <div class="linking_wrapper">
                     <!-- <a href="javascript:void(0);">Customer Service</a>
                     <a [routerLink]="['/privacy-policy']">Privacy</a> -->
-                    <a [routerLink]="['/terms']">Terms</a>
+                    <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" >Terms</a>
                 </div>
                 <h3>Contact</h3>
                 <div class="linking_wrapper">

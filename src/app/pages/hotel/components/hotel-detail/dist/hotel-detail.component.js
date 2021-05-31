@@ -19,13 +19,14 @@ var environment_1 = require("../../../../../environments/environment");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var hotel_policy_popup_component_1 = require("../hotel-policy-popup/hotel-policy-popup.component");
 var HotelDetailComponent = /** @class */ (function () {
-    function HotelDetailComponent(route, hotelService, homeService, router, modalService, cartService) {
+    function HotelDetailComponent(route, hotelService, homeService, router, modalService, cartService, commonFunction) {
         this.route = route;
         this.hotelService = hotelService;
         this.homeService = homeService;
         this.router = router;
         this.modalService = modalService;
         this.cartService = cartService;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.hotelRoomArray = [];
         this.imageTemp = [];
@@ -186,7 +187,21 @@ var HotelDetailComponent = /** @class */ (function () {
                     _this.cartItems = __spreadArrays(_this.cartItems, [newItem]);
                     _this.cartService.setCartItems(_this.cartItems);
                     localStorage.setItem('$crt', JSON.stringify(_this.cartItems.length));
-                    _this.router.navigate(["cart/booking"]);
+                    if (_this.commonFunction.isRefferal()) {
+                        var parms = _this.commonFunction.getRefferalParms();
+                        var queryParams = {};
+                        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                        if (parms.utm_medium) {
+                            queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                        }
+                        if (parms.utm_campaign) {
+                            queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                        }
+                        _this.router.navigate(['cart/booking'], { queryParams: queryParams });
+                    }
+                    else {
+                        _this.router.navigate(['cart/booking']);
+                    }
                 }
             }, function (error) {
                 _this.addCartLoading = false;
@@ -257,7 +272,21 @@ var HotelDetailComponent = /** @class */ (function () {
     HotelDetailComponent.prototype.moduleTabClick = function (tabName) {
         if (tabName == 'flight') {
             this.homeService.setActiveTab(tabName);
-            this.router.navigate(['/']);
+            if (this.commonFunction.isRefferal()) {
+                var parms = this.commonFunction.getRefferalParms();
+                var queryParams = {};
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                if (parms.utm_medium) {
+                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                }
+                if (parms.utm_campaign) {
+                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+                this.router.navigate(['/'], { queryParams: queryParams });
+            }
+            else {
+                this.router.navigate(['/']);
+            }
         }
     };
     __decorate([

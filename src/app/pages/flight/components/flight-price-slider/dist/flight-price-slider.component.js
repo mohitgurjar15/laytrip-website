@@ -68,6 +68,9 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         if (changes['dates'].currentValue.length) {
             this.flipDates(this.dates);
         }
+        if (changes['flexibleLoading'].currentValue) {
+            console.log(this.flexibleLoading);
+        }
     };
     FlightPriceSliderComponent.prototype.flipDates = function (dates) {
         var _this = this;
@@ -113,7 +116,7 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         else {
             price = item.price;
         }
-        return price;
+        return { price: 'Flights Unavailable', className: 'price_unavailabe' };
     };
     FlightPriceSliderComponent.prototype.getFlexibleArivalDate = function (date) {
         var startDate = moment(this.departureDate, 'MMM DD, YYYY');

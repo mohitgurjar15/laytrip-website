@@ -178,7 +178,7 @@ export class TravellerFormComponent implements OnInit {
       passport_expiry: (this.travelerInfo.passportExpiry && this.travelerInfo.passportExpiry != 'Invalid date' && this.travelerInfo.passportExpiry != '') ? new Date(this.travelerInfo.passportExpiry) : '',
     });
 
-    let phoneFormat=getPhoneFormat(this.travelerInfo.countryCode || '+1');
+    let phoneFormat = getPhoneFormat(this.travelerInfo.countryCode || '+1');
     this.travellerForm.controls.phone_no.setValidators([Validators.minLength(phoneFormat.length)]);
     this.travellerForm.controls.phone_no.updateValueAndValidity();
     this.phoneNumberMask.format = phoneFormat.format;
@@ -291,7 +291,20 @@ export class TravellerFormComponent implements OnInit {
           this.submitted = false;
           // this.toastr.error(error.error.message, 'Traveler Update Error');
           if (error.status === 401) {
-            this.router.navigate(['/']);
+            if (this.commonFunction.isRefferal()) {
+              let parms = this.commonFunction.getRefferalParms();
+              var queryParams: any = {};
+              queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+              if(parms.utm_medium){
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+              }
+              if(parms.utm_campaign){
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+              }
+              this.router.navigate(['/'], { queryParams: queryParams });
+            } else {
+              this.router.navigate(['/']);
+            }
           }
         });
       } else {
@@ -310,7 +323,20 @@ export class TravellerFormComponent implements OnInit {
           this.submitted = false;
           // this.toastr.error(error.error.message, 'Traveler Add Error');
           if (error.status === 401) {
-            this.router.navigate(['/']);
+            if (this.commonFunction.isRefferal()) {
+              let parms = this.commonFunction.getRefferalParms();
+              var queryParams: any = {};
+              queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+              if(parms.utm_medium){
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+              }
+              if(parms.utm_campaign){
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+              } 
+              this.router.navigate(['/'], { queryParams: queryParams });
+            } else {
+              this.router.navigate(['/']);
+            }
           }
         });
 
@@ -393,7 +419,20 @@ export class TravellerFormComponent implements OnInit {
       this.travelerFormChange.emit(this.userId);
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
-        this.router.navigate(['/']);
+        if (this.commonFunction.isRefferal()) {
+          let parms = this.commonFunction.getRefferalParms();
+          var queryParams: any = {};
+          queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+          if(parms.utm_medium){
+            queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+          }
+          if(parms.utm_campaign){
+            queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+          }
+          this.router.navigate(['/'], { queryParams: queryParams });
+        } else {
+          this.router.navigate(['/']);
+        }
       } else {
 
       }

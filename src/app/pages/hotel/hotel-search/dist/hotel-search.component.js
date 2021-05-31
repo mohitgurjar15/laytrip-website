@@ -76,6 +76,7 @@ var HotelSearchComponent = /** @class */ (function () {
         });
     };
     HotelSearchComponent.prototype.sortHotels = function (event) {
+        console.log(event);
         this.hotelService.setSortFilter(event);
         var key = event.key, order = event.order;
         if (key === 'total') {
@@ -198,7 +199,21 @@ var HotelSearchComponent = /** @class */ (function () {
     HotelSearchComponent.prototype.moduleTabClick = function (tabName) {
         if (tabName == 'flight') {
             this.homeService.setActiveTab(tabName);
-            this.router.navigate(['/']);
+            if (this.commonFunction.isRefferal()) {
+                var parms = this.commonFunction.getRefferalParms();
+                var queryParams = {};
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                if (parms.utm_medium) {
+                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                }
+                if (parms.utm_campaign) {
+                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+                this.router.navigate(['/'], { queryParams: queryParams });
+            }
+            else {
+                this.router.navigate(['/']);
+            }
         }
     };
     HotelSearchComponent = __decorate([

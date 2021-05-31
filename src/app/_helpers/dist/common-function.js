@@ -58,7 +58,8 @@ var CommonFunction = /** @class */ (function () {
         if (accessToken) {
             reqData = {
                 headers: {
-                    Authorization: "Bearer " + accessToken
+                    Authorization: "Bearer " + accessToken,
+                    referral_id: this.route.snapshot.queryParams['utm_source'] ? "" + this.route.snapshot.queryParams['utm_source'] : ""
                 }
             };
         }
@@ -67,9 +68,22 @@ var CommonFunction = /** @class */ (function () {
             Object.keys(params).map(function (k) {
                 reqData.headers[k] = params[k];
             });
+            reqData.headers.referral_id = this.route.snapshot.queryParams['utm_source'] ? "" + this.route.snapshot.queryParams['utm_source'] : "";
             //reqData.headers = reqParams;
         }
         return reqData;
+    };
+    CommonFunction.prototype.setWithoutLoginHeader = function () {
+        if (this.route.snapshot.queryParams['utm_source']) {
+            return {
+                headers: {
+                    referral_id: this.route.snapshot.queryParams['utm_source'] ? "" + this.route.snapshot.queryParams['utm_source'] : ""
+                }
+            };
+        }
+        else {
+            return {};
+        }
     };
     CommonFunction.prototype.convertDateFormat = function (date, sourceFormat, languageCode) {
         if (languageCode === void 0) { languageCode = null; }
@@ -205,6 +219,30 @@ var CommonFunction = /** @class */ (function () {
         var k = event.charCode;
         if ((k >= 33 && k <= 91) || k == 32 || k == 64 || (k >= 123 && k <= 126) || (k >= 92 && k <= 96))
             event.preventDefault();
+    };
+    CommonFunction.prototype.convertTime = function (time, sourceFormat, targetFormat) {
+        return moment(time, sourceFormat).format(targetFormat);
+    };
+    CommonFunction.prototype.isRefferal = function () {
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    CommonFunction.prototype.getRefferalParms = function () {
+        var parms = {};
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
+            parms.utm_source = this.route.snapshot.queryParams['utm_source'];
+        }
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_medium']) {
+            parms.utm_medium = this.route.snapshot.queryParams['utm_medium'];
+        }
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_campaign']) {
+            parms.utm_campaign = this.route.snapshot.queryParams['utm_campaign'];
+        }
+        return parms;
     };
     CommonFunction = __decorate([
         core_1.Injectable({

@@ -13,7 +13,7 @@ var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var moment = require("moment");
 var add_card_component_1 = require("../../../components/add-card/add-card.component");
 var BookingComponent = /** @class */ (function () {
-    function BookingComponent(router, flightService, genericService, travelerService, checkOutService, cartService, commonFunction, cookieService) {
+    function BookingComponent(router, flightService, genericService, travelerService, checkOutService, cartService, commonFunction, cookieService, route) {
         this.router = router;
         this.flightService = flightService;
         this.genericService = genericService;
@@ -22,6 +22,7 @@ var BookingComponent = /** @class */ (function () {
         this.cartService = cartService;
         this.commonFunction = commonFunction;
         this.cookieService = cookieService;
+        this.route = route;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.progressStep = { step1: true, step2: false, step3: false, step4: false };
         this.isShowPaymentOption = true;
@@ -239,7 +240,21 @@ var BookingComponent = /** @class */ (function () {
         });
     };
     BookingComponent.prototype.handleSubmit = function () {
-        this.router.navigate(['/flight/checkout']);
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            var queryParams = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(['/flight/checkout'], { queryParams: queryParams });
+        }
+        else {
+            this.router.navigate(['/flight/checkout']);
+        }
     };
     BookingComponent.prototype.ngOnDestroy = function () {
         this.cartService.setCartTravelers({
@@ -284,9 +299,25 @@ var BookingComponent = /** @class */ (function () {
     };
     BookingComponent.prototype.redirectTo = function (uri) {
         var _this = this;
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
-            return _this.router.navigate([uri]);
-        });
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            var queryParams = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+                return _this.router.navigate([uri], { queryParams: queryParams });
+            });
+        }
+        else {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+                return _this.router.navigate([uri]);
+            });
+        }
     };
     BookingComponent.prototype.deleteCart = function (cartId) {
         var _this = this;
@@ -334,7 +365,21 @@ var BookingComponent = /** @class */ (function () {
             this.ismaxCartAdded = true;
         }
         else {
-            this.router.navigate(['/']);
+            if (this.commonFunction.isRefferal()) {
+                var parms = this.commonFunction.getRefferalParms();
+                var queryParams = {};
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                if (parms.utm_medium) {
+                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                }
+                if (parms.utm_campaign) {
+                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+                this.router.navigate(['/'], { queryParams: queryParams });
+            }
+            else {
+                this.router.navigate(['/']);
+            }
         }
         return false;
         this.validationErrorMessage = '';
@@ -514,12 +559,27 @@ var BookingComponent = /** @class */ (function () {
                 }
                 var cartData = {
                     cart_id: this_2.carts[i].id,
-                    travelers: travelers
+                    travelers: travelers,
+                    referral_id: this_2.route.snapshot.queryParams['utm_source'] ? this_2.route.snapshot.queryParams['utm_source'] : ''
                 };
                 this_2.cartService.updateCart(cartData).subscribe(function (data) {
                     if (i === _this.carts.length - 1) {
                         _this.loading = false;
-                        _this.router.navigate(['/cart/checkout']);
+                        if (_this.commonFunction.isRefferal()) {
+                            var parms = _this.commonFunction.getRefferalParms();
+                            var queryParams = {};
+                            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                            if (parms.utm_medium) {
+                                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                            }
+                            if (parms.utm_campaign) {
+                                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                            }
+                            _this.router.navigate(['cart/checkout'], { queryParams: queryParams });
+                        }
+                        else {
+                            _this.router.navigate(['cart/checkout']);
+                        }
                     }
                 });
             };

@@ -173,7 +173,7 @@
                             <button (click)="bookNow(item)">
                                 Select
                             </button>
-                            <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
+                            <div class="section_description no_flight" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                                 <span class="sec_text">This flight is no longer available.</span>
                                 <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img
                                         src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
@@ -284,7 +284,7 @@
 
                         <span class="texts_rules">
                             Non-refundable, non-transferable. Change policy reflected in Laytrip <a
-                                [routerLink]="['/terms']">Terms</a> which apply.
+                                [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" >Terms</a> which apply.
                         </span>
                     </div>
                 </div>

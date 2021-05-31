@@ -11,12 +11,13 @@ var core_1 = require("@angular/core");
 var share_social_media_component_1 = require("../../components/share-social-media/share-social-media.component");
 var environment_1 = require("../../../environments/environment");
 var MainFooterComponent = /** @class */ (function () {
-    function MainFooterComponent(modalService, translate, commonFunction, renderer, genericService) {
+    function MainFooterComponent(modalService, translate, commonFunction, renderer, genericService, route) {
         this.modalService = modalService;
         this.translate = translate;
         this.commonFunction = commonFunction;
         this.renderer = renderer;
         this.genericService = genericService;
+        this.route = route;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.langunages = [];
         this.selectedLanunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };

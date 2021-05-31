@@ -22,7 +22,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   shown = 'native';
   searchHotel ='';
   @ViewChild("scrollable", { static: true, read: ElementRef } as any)
-  @Output() sortHotel1 : any = new EventEmitter();
   scrollbar: ElementRef;
   contentWrapper: HTMLElement;
   @Input() hotelDetailsMain: any;

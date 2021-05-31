@@ -119,6 +119,14 @@
                 }
               ]
             },
+            "landingpage": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.landingpage.ts"
+                }
+              ]
+            },
             "varshil": {
               "fileReplacements": [
                 {
@@ -157,6 +165,9 @@
             },
             "mohit": {
               "browserTarget": "laytrip-website:build:mohit"
+            },
+            "landingpage": {
+              "browserTarget": "laytrip-website:build:landingpage"
             },
             "varshil": {
               "browserTarget": "laytrip-website:build:varshil"

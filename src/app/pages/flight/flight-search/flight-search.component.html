@@ -13,7 +13,7 @@
                     <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg"
                         alt="Flight Icon" />
                 </a>
-                <a class="tab_anch hover-link" [routerLink]="['/']">
+                <a class="tab_anch hover-link" [routerLink]="['/']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
                     <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg"
                         alt="Hotel Icon" />
                     <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg"
@@ -166,7 +166,7 @@
 
                 </div>
                 <div class="col-lg-9">
-                    <app-flight-price-slider *ngIf="dates && dates.length" [dates]="dates"
+                    <app-flight-price-slider  [dates]="dates"
                         [flexibleLoading]="flexibleLoading">
                     </app-flight-price-slider>
                     <app-flight-item-wrapper (maxCartValidation)="maxCartValidation($event)"

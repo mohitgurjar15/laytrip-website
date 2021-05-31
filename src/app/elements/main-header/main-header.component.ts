@@ -126,7 +126,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.cartItems = cartItems;
         this.cartService.setCartItems(cartItems);
         if (cartItems) {
-          this.cartItemsCount = res.count;
+          this.cartItemsCount = res.data.length;
           localStorage.setItem('$crt', this.cartItemsCount);
         }
         this.calculateInstalment(cartItems);
@@ -229,7 +229,20 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.cartItemsCount = '';
     this.cartService.setCartItems([]);
     this.loginGuestUser();
-    this.router.navigate(['/']);
+    if(this.commonFunction.isRefferal()){
+      var parms = this.commonFunction.getRefferalParms();
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate([`/`],{ queryParams : queryParams});
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   loadJquery() {
@@ -273,7 +286,20 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   redirectToPayment() {
     this.cartItemsCount = JSON.parse(localStorage.getItem('$crt')) || 0;
     if (this.cartItemsCount > 0) {
-      this.router.navigate([`cart/booking`]);
+      if(this.commonFunction.isRefferal()){
+        var parms = this.commonFunction.getRefferalParms();
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate([`cart/booking`],{ queryParams : queryParams});
+      } else {
+        this.router.navigate([`cart/booking`]);
+      }
     } else {
       this.openEmptyCartPopup();
     }
@@ -346,7 +372,20 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   redirectToHome() {
     $('#empty_modal').modal('hide');
-    this.router.navigate(['/']);
+    if(this.commonFunction.isRefferal()){
+      var parms = this.commonFunction.getRefferalParms();
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate([`/`],{ queryParams : queryParams});
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   loginGuestUser() {

@@ -86,6 +86,9 @@ export class FlightPriceSliderComponent implements OnInit {
     if (changes['dates'].currentValue.length) {
       this.flipDates(this.dates)
     }
+    if (changes['flexibleLoading'].currentValue) {
+      console.log(this.flexibleLoading)
+    }
   }
 
   flipDates(dates) {
@@ -140,7 +143,7 @@ export class FlightPriceSliderComponent implements OnInit {
     else {
       price = item.price
     }
-    return price;
+    return { price :  'Flights Unavailable', className :  'price_unavailabe'};
   }
 
   getFlexibleArivalDate(date) {

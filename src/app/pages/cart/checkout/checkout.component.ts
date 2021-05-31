@@ -184,7 +184,20 @@ export class CheckoutComponent implements OnInit {
       this.priceSummary = JSON.parse(data)
     }
     catch (e) {
-      this.router.navigate(['/'])
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        var queryParams : any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/'], { queryParams: queryParams });
+      } else {
+        this.router.navigate(['/'])
+      }
     }
 
     this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
@@ -222,7 +235,20 @@ export class CheckoutComponent implements OnInit {
   sessionTimeout(event) {
     this.isSessionTimeOut = event;
     if (this.isSessionTimeOut && !this.isBookingRequest) {
-      this.router.navigate(['/cart/booking']);
+      if (this.commonFunction.isRefferal()) {
+        var queryParams : any = {};
+        let parms = this.commonFunction.getRefferalParms();
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/cart/booking'], { queryParams: queryParams });
+      } else {
+        this.router.navigate(['/cart/booking'])
+      }
     }
   }
 
@@ -294,8 +320,22 @@ export class CheckoutComponent implements OnInit {
   }
 
   redirectTo(uri: string) {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate([uri]));
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      var queryParams : any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate([uri], { queryParams: queryParams }));
+    } else {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate([uri]));
+    }
   }
 
   deleteCart(cartId) {
@@ -305,7 +345,20 @@ export class CheckoutComponent implements OnInit {
     this.loading = true;
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
-      this.redirectTo('/cart/checkout');
+      if (this.commonFunction.isRefferal()) {
+        var parms = this.commonFunction.getRefferalParms();
+        var queryParams : any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: queryParams });
+      } else {
+        this.redirectTo('/cart/checkout');
+      }
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1);
@@ -445,8 +498,8 @@ export class CheckoutComponent implements OnInit {
       this.isExcludedCountryError = false;
     }
   }
-  
-  removeValidationError(){
+
+  removeValidationError() {
     this.validationErrorMessage = '';
   }
 
@@ -494,9 +547,8 @@ export class CheckoutComponent implements OnInit {
 
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
-
+            
             let browser_info = this.spreedly.browserInfo();
-            console.log(browser_info);
             this.bookingRequest.browser_info = browser_info;
             if (window.location.origin.includes("localhost")) {
               this.bookingRequest.site_url = 'https://demo.eztoflow.com';
@@ -510,20 +562,41 @@ export class CheckoutComponent implements OnInit {
               let transaction = res.transaction;
 
               let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+              
+              var queryParams : any = {};
+              if (this.commonFunction.isRefferal()) {
+                var parms = this.commonFunction.getRefferalParms();
+                redirection += redirection+parms.utm_source ? '&utm_source='+parms.utm_source : '';
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+
+                if(parms.utm_medium){
+                  queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                  redirection += redirection+parms.utm_medium ? '&utm_medium='+parms.utm_medium : '';
+                }
+                if(parms.utm_campaign){
+                  redirection += redirection+parms.utm_campaign ? '&utm_campaign='+parms.utm_campaign : '';
+                  queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+              } 
               res.redirection = redirection;
-              console.log("res", res);
+
+              // console.log("res", res);
               if (transaction.state == "succeeded") {
-                console.log('succeeded', [redirection]);
+                // console.log('succeeded', [redirection]);
                 window.location.href = redirection;
               } else if (transaction.state == "pending") {
 
-                console.log('pending', [res]);
+                // console.log('pending', [res]);
                 this.isBookingProgress = false;
                 this.challengePopUp = true;
                 this.spreedly.lifeCycle(res);
               } else {
                 console.log('fail', [res]);
-                this.router.navigate(['/cart/checkout']);
+                if (this.commonFunction.isRefferal()) {
+                  this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: queryParams });
+                } else {
+                  this.redirectTo('/cart/checkout');
+                }
               }
             }, (error) => {
               console.log(error);

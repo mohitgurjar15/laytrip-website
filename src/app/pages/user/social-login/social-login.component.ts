@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
@@ -36,14 +36,21 @@ export class SocialLoginComponent implements OnInit {
     public modalService: NgbModal,
     public location: Location,
     private authService: SocialAuthService,
-    private commonFunction: CommonFunction
-
+    private commonFunction: CommonFunction,
+    private route: ActivatedRoute,
   ) {
 
   }
 
-
   ngOnInit() {
+    this.route.queryParams.subscribe(queryParams => {
+      if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']) {
+        localStorage.setItem("referral_id", this.route.snapshot.queryParams['utm_source'])
+      } else {
+        localStorage.removeItem("referral_id")
+      }
+      // do something with the query params
+    });
     this.loadGoogleSdk();
     this.guestUserId = localStorage.getItem('__gst') || '';
 
@@ -54,7 +61,7 @@ export class SocialLoginComponent implements OnInit {
         let objApple = getUserDetails(userInfo.authorization.id_token);
         console.log(objApple, userInfo)
 
-        let jsonData = {
+        let jsonData :any = {
           "account_type": 3,
           "name": "",
           "email": objApple.email,
@@ -63,8 +70,11 @@ export class SocialLoginComponent implements OnInit {
           "device_model": "RNE-L22",
           "device_token": "123abc#$%456",
           "app_version": "1.0",
-          "os_version": "7.0"
+          "os_version": "7.0"        
         };
+        if(this.route.snapshot.queryParams['utm_source']){
+          jsonData.referral_id = this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''; 
+        }
         this.userService.socialLogin(jsonData).subscribe((data: any) => {
           if (data.user_details) {
 
@@ -116,7 +126,8 @@ export class SocialLoginComponent implements OnInit {
           "device_model": "RNE-L22",
           "device_token": "123abc#$%456",
           "app_version": "1.0",
-          "os_version": "7.0"
+          "os_version": "7.0",
+          "referral_id": this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
         };
         this.userService.socialLogin(jsonData).subscribe((data: any) => {
           if (data.user_details) {
@@ -210,7 +221,8 @@ export class SocialLoginComponent implements OnInit {
             "device_model": "Angular web",
             "device_token": "123abc#$%456",
             "app_version": "1.0",
-            "os_version": "7.0"
+            "os_version": "7.0",
+            "referral_id": this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
           };
 
           this.userService.socialLogin(jsonData).subscribe((data: any) => {

@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { throwError } from "rxjs";
 import {catchError,retry, } from 'rxjs/operators';
 import { CommonFunction } from "../_helpers/common-function";
+import { ActivatedRoute } from "@angular/router";
 
 
 @Injectable({
@@ -14,7 +15,9 @@ export class TravelerService{
   
     constructor(
         private http:HttpClient,
-        private commonFunction:CommonFunction
+        private commonFunction:CommonFunction,
+        public route:ActivatedRoute,
+
     ){
 
     }
@@ -23,7 +26,8 @@ export class TravelerService{
         const accessToken = localStorage.getItem('_lay_sess');
         const reqData = {
             headers: {
-                Authorization: `Bearer ${accessToken}`
+                Authorization: `Bearer ${accessToken}`,
+                referral_id: this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``
             },
         };
         if(params) {

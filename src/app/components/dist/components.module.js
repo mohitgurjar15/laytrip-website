@@ -51,7 +51,6 @@ var flight_class_component_1 = require("./flight-class/flight-class.component");
 var ngx_infinite_scroll_1 = require("ngx-infinite-scroll");
 var cart_item_component_1 = require("./cart-item/cart-item.component");
 var traveler_list_component_1 = require("./traveler-list/traveler-list.component");
-var my_traveler_component_1 = require("./my-traveler/my-traveler.component");
 var price_summary_component_1 = require("./price-summary/price-summary.component");
 var payment_mode_loader_component_1 = require("./payment-mode-loader/payment-mode-loader.component");
 var cart_component_1 = require("./cart/cart.component");
@@ -66,6 +65,8 @@ var delete_cartitem_confirmation_popup_component_1 = require("./delete-cartitem-
 var ngx_mask_1 = require("ngx-mask");
 var booking_completion_error_popup_component_1 = require("./booking-completion-error-popup/booking-completion-error-popup.component");
 var airport_suggestion_component_1 = require("./airport-suggestion/airport-suggestion.component");
+var hotel_cart_item_component_1 = require("../pages/hotel/components/hotel-cart-item/hotel-cart-item.component");
+var hotel_suggestion_component_1 = require("./hotel-suggestion/hotel-suggestion.component");
 var ComponentsModule = /** @class */ (function () {
     function ComponentsModule() {
     }
@@ -103,7 +104,6 @@ var ComponentsModule = /** @class */ (function () {
                 flight_class_component_1.FlightClassComponent,
                 cart_item_component_1.CartItemComponent,
                 traveler_list_component_1.TravelerListComponent,
-                my_traveler_component_1.MyTravelerComponent,
                 price_summary_component_1.PriceSummaryComponent,
                 payment_mode_loader_component_1.PaymentModeLoaderComponent,
                 cart_component_1.CartComponent,
@@ -113,12 +113,14 @@ var ComponentsModule = /** @class */ (function () {
                 empty_cart_component_1.EmptyCartComponent,
                 booking_completion_error_popup_component_1.BookingCompletionErrorPopupComponent,
                 airport_suggestion_component_1.AirportSuggestionComponent,
+                hotel_cart_item_component_1.HotelCartItemComponent,
+                hotel_suggestion_component_1.HotelSuggestionComponent
             ],
             imports: [
                 common_1.CommonModule,
                 ng_select_1.NgSelectModule,
                 forms_1.FormsModule,
-                forms_1.ReactiveFormsModule,
+                forms_1.ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
                 ng_bootstrap_1.NgbModule,
                 ngx_countdown_1.CountdownModule,
                 ng5_slider_1.Ng5SliderModule,
@@ -166,7 +168,6 @@ var ComponentsModule = /** @class */ (function () {
                 ngx_infinite_scroll_1.InfiniteScrollModule,
                 cart_item_component_1.CartItemComponent,
                 traveler_list_component_1.TravelerListComponent,
-                my_traveler_component_1.MyTravelerComponent,
                 price_summary_component_1.PriceSummaryComponent,
                 payment_mode_loader_component_1.PaymentModeLoaderComponent,
                 traveler_form_component_1.TravelerFormComponent,
@@ -179,7 +180,8 @@ var ComponentsModule = /** @class */ (function () {
                 delete_cartitem_confirmation_popup_component_1.DeleteCartitemConfirmationPopupComponent,
                 booking_completion_error_popup_component_1.BookingCompletionErrorPopupComponent,
                 airport_suggestion_component_1.AirportSuggestionComponent,
-                angular2_text_mask_1.TextMaskModule
+                angular2_text_mask_1.TextMaskModule,
+                hotel_suggestion_component_1.HotelSuggestionComponent
             ],
             providers: [common_1.DatePipe, ngx_spinner_1.NgxSpinnerService, ng_bootstrap_1.NgbActiveModal],
             entryComponents: [delete_cartitem_confirmation_popup_component_1.DeleteCartitemConfirmationPopupComponent, empty_cart_component_1.EmptyCartComponent, booking_completion_error_popup_component_1.BookingCompletionErrorPopupComponent],

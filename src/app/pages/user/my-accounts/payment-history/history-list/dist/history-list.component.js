@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.HistoryListComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../../environments/environment");
+var instalment_type_const_1 = require("../../../../../constant/instalment-type.const");
 var HistoryListComponent = /** @class */ (function () {
     function HistoryListComponent(commonFunction, flightCommonFunction, userService, router) {
         this.commonFunction = commonFunction;
@@ -28,6 +29,7 @@ var HistoryListComponent = /** @class */ (function () {
         this.notFound = false;
         this.activeBookings = [];
         this.failedBookings = [];
+        this.instalmentType = instalment_type_const_1.InstalmentType;
     }
     HistoryListComponent.prototype.ngOnInit = function () {
         this.page = 1;
@@ -67,7 +69,21 @@ var HistoryListComponent = /** @class */ (function () {
     };
     HistoryListComponent.prototype.viewDetailClick = function (item) {
         this.item = item;
-        this.router.navigate(['/account/payment/detail/' + item.laytripBookingId]);
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            var queryParams = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(['/account/payment/detail/' + item.laytripBookingId], { queryParams: queryParams });
+        }
+        else {
+            this.router.navigate(['/account/payment/detail/' + item.laytripBookingId]);
+        }
     };
     HistoryListComponent.prototype.dateConvert = function (date) {
         return this.commonFunction.convertDateFormat(new Date(date), "MM/DD/YYYY");

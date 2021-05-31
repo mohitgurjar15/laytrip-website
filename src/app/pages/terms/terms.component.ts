@@ -26,6 +26,19 @@ export class TermsComponent implements OnInit {
     this.loading = true;
     this.genericService.getCmsByPageType(pageType).subscribe((res: any) => {
       this.cmsData = res;
+      var concatUrl = '';
+      if (this.commonFunction.isRefferal()) {
+        var parms = this.commonFunction.getRefferalParms();
+        concatUrl = parms.utm_source ? '?utm_source='+parms.utm_source : '';
+        if (parms.utm_medium) {
+            concatUrl += parms.utm_medium ? '&utm_medium='+parms.utm_medium : '';
+        }
+        if (parms.utm_campaign) {
+            concatUrl += parms.utm_campaign ? '&utm_campaign='+parms.utm_campaign : '';
+        }
+      }
+      this.cmsData.enContent = res.enContent.replace('laytrip.com/', 'laytrip.com/'+concatUrl);
+      this.cmsData.enContent = res.enContent.replace('/privacy-policy', '/privacy-policy'+concatUrl);
       this.loading = false;
     });
   }

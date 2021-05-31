@@ -10,9 +10,10 @@ exports.SearchTripComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var SearchTripComponent = /** @class */ (function () {
-    function SearchTripComponent(formBuilder, router) {
+    function SearchTripComponent(formBuilder, router, commonFunction) {
         this.formBuilder = formBuilder;
         this.router = router;
+        this.commonFunction = commonFunction;
         this.submitted = false;
         this.isTripNotFound = false;
     }
@@ -29,7 +30,21 @@ var SearchTripComponent = /** @class */ (function () {
             return;
         }
         else {
-            this.router.navigate(['/account/trip/' + this.SearchTripForm.value.tripId]);
+            if (this.commonFunction.isRefferal()) {
+                var parms = this.commonFunction.getRefferalParms();
+                var queryParams = {};
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                if (parms.utm_medium) {
+                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                }
+                if (parms.utm_campaign) {
+                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+                this.router.navigate(['/account/trip/' + this.SearchTripForm.value.tripId], { queryParams: queryParams });
+            }
+            else {
+                this.router.navigate(['/account/trip/' + this.SearchTripForm.value.tripId]);
+            }
         }
     };
     SearchTripComponent = __decorate([

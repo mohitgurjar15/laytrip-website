@@ -147,7 +147,21 @@ var CheckoutComponent = /** @class */ (function () {
             this.priceSummary = JSON.parse(data);
         }
         catch (e) {
-            this.router.navigate(['/']);
+            if (this.commonFunction.isRefferal()) {
+                var parms = this.commonFunction.getRefferalParms();
+                var queryParams = {};
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                if (parms.utm_medium) {
+                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                }
+                if (parms.utm_campaign) {
+                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+                this.router.navigate(['/'], { queryParams: queryParams });
+            }
+            else {
+                this.router.navigate(['/']);
+            }
         }
         this.$cartIdsubscription = this.cartService.getCartId.subscribe(function (cartId) {
             if (cartId > 0) {
@@ -177,7 +191,21 @@ var CheckoutComponent = /** @class */ (function () {
     CheckoutComponent.prototype.sessionTimeout = function (event) {
         this.isSessionTimeOut = event;
         if (this.isSessionTimeOut && !this.isBookingRequest) {
-            this.router.navigate(['/cart/booking']);
+            if (this.commonFunction.isRefferal()) {
+                var queryParams = {};
+                var parms = this.commonFunction.getRefferalParms();
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                if (parms.utm_medium) {
+                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                }
+                if (parms.utm_campaign) {
+                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+                this.router.navigate(['/cart/booking'], { queryParams: queryParams });
+            }
+            else {
+                this.router.navigate(['/cart/booking']);
+            }
         }
     };
     CheckoutComponent.prototype.bookingTimerConfiguration = function () {
@@ -246,9 +274,25 @@ var CheckoutComponent = /** @class */ (function () {
     };
     CheckoutComponent.prototype.redirectTo = function (uri) {
         var _this = this;
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
-            return _this.router.navigate([uri]);
-        });
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            var queryParams = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+                return _this.router.navigate([uri], { queryParams: queryParams });
+            });
+        }
+        else {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+                return _this.router.navigate([uri]);
+            });
+        }
     };
     CheckoutComponent.prototype.deleteCart = function (cartId) {
         var _this = this;
@@ -258,7 +302,21 @@ var CheckoutComponent = /** @class */ (function () {
         this.loading = true;
         this.cartService.deleteCartItem(cartId).subscribe(function (res) {
             _this.loading = false;
-            _this.redirectTo('/cart/checkout');
+            if (_this.commonFunction.isRefferal()) {
+                var parms = _this.commonFunction.getRefferalParms();
+                var queryParams = {};
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                if (parms.utm_medium) {
+                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                }
+                if (parms.utm_campaign) {
+                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+                _this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: queryParams });
+            }
+            else {
+                _this.redirectTo('/cart/checkout');
+            }
             var index = _this.carts.findIndex(function (x) { return x.id == cartId; });
             _this.carts.splice(index, 1);
             _this.cartPrices.splice(index, 1);
@@ -428,7 +486,6 @@ var CheckoutComponent = /** @class */ (function () {
                 this_1.cartService.updateCart(cartData).subscribe(function (data) {
                     if (i === _this.carts.length - 1) {
                         var browser_info = _this.spreedly.browserInfo();
-                        console.log(browser_info);
                         _this.bookingRequest.browser_info = browser_info;
                         if (window.location.origin.includes("localhost")) {
                             _this.bookingRequest.site_url = 'https://demo.eztoflow.com';
@@ -439,21 +496,40 @@ var CheckoutComponent = /** @class */ (function () {
                         _this.cartService.validate(_this.bookingRequest).subscribe(function (res) {
                             var transaction = res.transaction;
                             var redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+                            var queryParams = {};
+                            if (_this.commonFunction.isRefferal()) {
+                                var parms = _this.commonFunction.getRefferalParms();
+                                redirection += redirection + parms.utm_source ? '&utm_source=' + parms.utm_source : '';
+                                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                                if (parms.utm_medium) {
+                                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                                    redirection += redirection + parms.utm_medium ? '&utm_medium=' + parms.utm_medium : '';
+                                }
+                                if (parms.utm_campaign) {
+                                    redirection += redirection + parms.utm_campaign ? '&utm_campaign=' + parms.utm_campaign : '';
+                                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                                }
+                            }
                             res.redirection = redirection;
-                            console.log("res", res);
+                            // console.log("res", res);
                             if (transaction.state == "succeeded") {
-                                console.log('succeeded', [redirection]);
+                                // console.log('succeeded', [redirection]);
                                 window.location.href = redirection;
                             }
                             else if (transaction.state == "pending") {
-                                console.log('pending', [res]);
+                                // console.log('pending', [res]);
                                 _this.isBookingProgress = false;
                                 _this.challengePopUp = true;
                                 _this.spreedly.lifeCycle(res);
                             }
                             else {
                                 console.log('fail', [res]);
-                                _this.router.navigate(['/cart/checkout']);
+                                if (_this.commonFunction.isRefferal()) {
+                                    _this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: queryParams });
+                                }
+                                else {
+                                    _this.redirectTo('/cart/checkout');
+                                }
                             }
                         }, function (error) {
                             console.log(error);

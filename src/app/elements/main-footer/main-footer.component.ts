@@ -7,6 +7,7 @@ import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonFunction } from '../../_helpers/common-function';
 import { GenericService } from '../../services/generic.service';
+import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -30,11 +31,13 @@ export class MainFooterComponent implements OnInit {
     private commonFunction: CommonFunction,
     private renderer: Renderer2,
     private genericService: GenericService,
+    public route :ActivatedRoute
   ) {
 
     this.countryCode = this.commonFunction.getUserCountry();
     let _langunage = localStorage.getItem('_lang');
     let _currency = localStorage.getItem('_curr');
+
     if (_langunage) {
       try {
         let _lang = JSON.parse(_langunage);
@@ -65,6 +68,7 @@ export class MainFooterComponent implements OnInit {
     this.countryCode = this.commonFunction.getUserCountry();
   }
 
+  
   ngOnInit(): void {
     this.getLangunages();
     this.getCurrencies();
@@ -182,4 +186,5 @@ export class MainFooterComponent implements OnInit {
   openShareModal() {
     this.modalService.open(ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true,backdrop: 'static',keyboard: false });
   }
+   
 }

@@ -6,6 +6,7 @@ import { UserService } from '../../../../services/user.service';
 import { environment } from '../../../../../environments/environment';
 import { getLoginUserInfo } from '../../../../_helpers/jwt.helper';
 import { GenericService } from '../../../../services/generic.service';
+import { CommonFunction } from '../../../../_helpers/common-function';
 
 @Component({
   selector: 'app-my-wallet-add-points',
@@ -31,6 +32,7 @@ export class MyWalletAddPointsComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService,
     private genericService: GenericService,
+    public commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
@@ -38,7 +40,20 @@ export class MyWalletAddPointsComponent implements OnInit {
     this.currency = JSON.parse(_currency);
     this.userInfo = getLoginUserInfo();
     if (typeof this.userInfo.roleId === 'undefined') {
-      this.router.navigate(['/']);
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/'], { queryParams: queryParams });
+      } else {
+        this.router.navigate(['/']);
+      }
     }
     this.getLayCreditInfo();
   }
@@ -75,7 +90,20 @@ export class MyWalletAddPointsComponent implements OnInit {
   }
 
   toggleCancellationPolicy() {
-    this.router.navigate(['cancellation-policy']);
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate(['cancellation-policy'], { queryParams: queryParams });
+    } else {
+      this.router.navigate(['cancellation-policy']);
+    }
   }
 
   addPoints() {
@@ -85,7 +113,20 @@ export class MyWalletAddPointsComponent implements OnInit {
       this.loading = false;
       this.getLayCreditInfo();
       // this.toastr.success(res.message, 'Points');
-      this.router.navigate(['/account/lay-credit-points']);
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/account/lay-credit-points'], { queryParams: queryParams });
+      } else {
+        this.router.navigate(['/account/lay-credit-points']);
+      }
     }, (error: HttpErrorResponse) => {
       this.loading = false;
       // this.toastr.error(error.error.message);

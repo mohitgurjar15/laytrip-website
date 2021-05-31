@@ -194,7 +194,7 @@ var TravelerFormComponent = /** @class */ (function () {
             for (var i = 0; i < this.cartItem.module_info.adult_count; i++) {
                 this.travelers["type" + this.cartNumber].cartId = this.cartId;
                 this.travelers["type" + this.cartNumber].adults.push(Object.assign({}, traveller_helper_1.travelersFileds.flight.adult));
-                this.travelers["type" + this.cartNumber].adults[i].email = (this.accountHolderEmail && i == 0) ? this.accountHolderEmail : '';
+                // this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
                 if (!this.cartItem.module_info.is_passport_required) {
                     delete this.travelers["type" + this.cartNumber].adults[i].passport_expiry;
                     delete this.travelers["type" + this.cartNumber].adults[i].passport_number;
@@ -227,7 +227,7 @@ var TravelerFormComponent = /** @class */ (function () {
             for (var i = 0; i < this.cartItem.module_info.input_data.num_rooms; i++) {
                 this.travelers["type" + this.cartNumber].cartId = this.cartId;
                 this.travelers["type" + this.cartNumber].adults.push(Object.assign({}, traveller_helper_1.travelersFileds.hotel.adult));
-                this.travelers["type" + this.cartNumber].adults[i].email = (this.accountHolderEmail && i == 0) ? this.accountHolderEmail : '';
+                // this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
                 if (i != 0) {
                     this.travelers["type" + this.cartNumber].adults[i].is_email_required = false;
                     this.travelers["type" + this.cartNumber].adults[i].is_phone_required = false;
@@ -250,7 +250,7 @@ var TravelerFormComponent = /** @class */ (function () {
             this_1.travelers["type" + this_1.cartNumber].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
             if (this_1.travelers["type" + this_1.cartNumber].adults[i].is_passport_required) {
                 this_1.travelers["type" + this_1.cartNumber].adults[i].passport_number = traveler.passportNumber;
-                this_1.travelers["type" + this_1.cartNumber].adults[i].passport_expiry = traveler.passportExpiry ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
+                this_1.travelers["type" + this_1.cartNumber].adults[i].passport_expiry = traveler.passportExpiry && traveler.passportExpiry != 'Invalid date' ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
             }
         };
         var this_1 = this;
@@ -604,7 +604,7 @@ var TravelerFormComponent = /** @class */ (function () {
             }
             if (this.travelers["type" + cartNumber].adults[traveler_number].is_passport_required) {
                 this.travelers["type" + cartNumber].adults[traveler_number].passport_number = traveler.passportNumber;
-                this.travelers["type" + cartNumber].adults[traveler_number].passport_expiry = traveler.passportExpiry ? "" + moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy') : '';
+                this.travelers["type" + cartNumber].adults[traveler_number].passport_expiry = traveler.passportExpiry && traveler.passportExpiry != 'Invalid date' ? "" + moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy') : '';
             }
             //return false;
             this.patch();

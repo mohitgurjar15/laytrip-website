@@ -174,4 +174,8 @@ export class GenericService {
   updateViaAppleLogin(data) {
     return this.http.put(`${environment.apiUrl}v1/auth/update/apple-user`, data, this.commonFunction.setHeaders())
   }
+  
+  checkIsReferralUser(referral_id) {
+    return this.http.get(`${environment.apiUrl}v1/landing-page/`+referral_id, this.commonFunction.setHeaders())
+  }
 }

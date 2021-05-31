@@ -107,6 +107,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 localStorage.setItem('__from', params['departure']);
                 localStorage.setItem('__to', params['arrival']);
                 _this.searchFlightInfo["class"] = params['class'];
+                _this.searchFlightInfo.adult = params['adult'];
+                _this.searchFlightInfo.child = params['child'];
+                _this.searchFlightInfo.infant = params['infant'];
                 _this.departureDate = moment(params['departure_date']).toDate();
                 // console.log(params['departure_date'], moment(params['departure_date']).format("YYYY-MM-DD"))
                 if (moment(_this.departureDate).format("YYYY-MM-DD") < _this.customStartDateValidation) {
@@ -198,9 +201,19 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
         }
         queryParams["class"] = this.searchFlightInfo["class"] ? this.searchFlightInfo["class"] : 'Economy';
-        queryParams.adult = this.searchFlightInfo.adult;
+        queryParams.adult = this.searchFlightInfo.adult ? this.searchFlightInfo.adult : 1;
         queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
         queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+        }
         if (this.searchFlightInfo && this.totalPerson &&
             this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
             localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
@@ -245,9 +258,13 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
         ;
         if (this.rangeDates[0] && this.rangeDates[1]) {
-            this.departureDate = this.rangeDates[0];
-            // this.flightDepartureMinDate = this.rangeDates[0];
+            var daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
             this.returnDate = this.rangeDates[1];
+            this.departureDate = this.rangeDates[0];
+            if (daysDiff == 0) {
+                this.returnDate = moment(this.rangeDates[0]).add(7, 'days').toDate();
+            }
+            // this.flightDepartureMinDate = this.rangeDates[0];
             this.rangeDates = [this.departureDate, this.returnDate];
         }
     };
@@ -420,7 +437,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.thisElementClicked = true;
     };
     FlightSearchWidgetComponent.prototype.searchAirport = function (event) {
-        console.log("event", event);
+        // console.log("event", event)
     };
     FlightSearchWidgetComponent.prototype.searchItem = function (data) {
         if (data.type == 'fromSearch') {

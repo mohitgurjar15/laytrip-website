@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Event, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
+import { cookieServiceFactory } from 'ngx-cookie';
 import { GenericService } from '../services/generic.service';
 import { redirectToLogin } from '../_helpers/jwt.helper';
 
@@ -15,19 +16,22 @@ export class PagesComponent implements OnInit {
   constructor(
     private router: Router,
     private genericService: GenericService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    
   ) {
+    
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Trigger when route change
-        this.checkUserValidate();
+        this.checkIsValidUser();        
       }
     });
 
   }
 
   ngOnInit() {
-    this.checkUserValidate();
+    this.checkIsValidUser();
     document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
     this.lottieConfig = {
       path: 'assets/lottie-json/flight/data.json',
@@ -36,7 +40,8 @@ export class PagesComponent implements OnInit {
     };
   }
 
-  checkUserValidate() {
+  checkIsValidUser() {
+           
     var token = localStorage.getItem('_lay_sess');
     if (token) {
       this.genericService.checkUserValidate(token).subscribe((res: any) => {

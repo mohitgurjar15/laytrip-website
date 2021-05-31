@@ -22,7 +22,6 @@ var FilterHotelComponent = /** @class */ (function () {
         this.isHotelSearch = false;
         this.shown = 'native';
         this.searchHotel = '';
-        this.sortHotel1 = new core_1.EventEmitter();
         this.filterHotel = new core_1.EventEmitter();
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.priceSlider = new forms_1.FormGroup({
@@ -457,9 +456,8 @@ var FilterHotelComponent = /** @class */ (function () {
         }
     };
     __decorate([
-        core_1.ViewChild("scrollable", { static: true, read: core_1.ElementRef }),
-        core_1.Output()
-    ], FilterHotelComponent.prototype, "sortHotel1");
+        core_1.ViewChild("scrollable", { static: true, read: core_1.ElementRef })
+    ], FilterHotelComponent.prototype, "scrollbar");
     __decorate([
         core_1.Input()
     ], FilterHotelComponent.prototype, "hotelDetailsMain");

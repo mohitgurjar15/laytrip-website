@@ -257,7 +257,6 @@ export class HotelItemWrapperComponent implements OnInit {
   displayHotelDetails(hotelId, infoWindow, type) {
     this.isMarkerClicked = false;
     this.clickedHotelIndex = '';
-
     // if (this.previousInfoWindow == null) {
     //   infoWindow.open();
     //   this.previousInfoWindow = infoWindow;

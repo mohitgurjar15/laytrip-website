@@ -8,6 +8,7 @@ import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
 import { CartService } from '../../../../services/cart.service';
 import { HomeService } from '../../../../services/home.service';
+import { CommonFunction } from '../../../../_helpers/common-function';
 declare var $: any;
 
 
@@ -55,7 +56,8 @@ export class HotelDetailComponent implements OnInit {
     public homeService: HomeService,
     private router: Router,
     private modalService: NgbModal,
-    private cartService:CartService
+    private cartService:CartService,
+    private commonFunction:CommonFunction,
   ) { }
 
   ngOnInit() {
@@ -202,7 +204,21 @@ export class HotelDetailComponent implements OnInit {
           this.cartService.setCartItems(this.cartItems);
 
           localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-          this.router.navigate([`cart/booking`]);
+          
+          if(this.commonFunction.isRefferal()){
+            var parms = this.commonFunction.getRefferalParms();
+            var queryParams: any = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if(parms.utm_medium){
+              queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if(parms.utm_campaign){
+              queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(['cart/booking'],{ queryParams :queryParams});
+          } else {
+            this.router.navigate(['cart/booking']);
+          }
         }
       }, error => {
         this.addCartLoading=false;
@@ -284,7 +300,20 @@ export class HotelDetailComponent implements OnInit {
   moduleTabClick(tabName) {
     if (tabName == 'flight') {
       this.homeService.setActiveTab(tabName)
-      this.router.navigate(['/']);
+      if(this.commonFunction.isRefferal()){
+        var parms = this.commonFunction.getRefferalParms();
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/'],{ queryParams : queryParams});
+      } else {
+        this.router.navigate(['/']);
+      }
     }
   }
 }

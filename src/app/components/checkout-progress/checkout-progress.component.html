@@ -1,10 +1,9 @@
-
 <section class="progress_breadcum_wrapper">
     <div class="container">
         <div class="prgrs_container">
             <div class="progress_bar_inner">
                 <div class="pr_steps_wrapper ">
-                    <a [routerLink]="['/cart/booking']" [ngClass]="{'current': progressStep.step1==true}">
+                    <a [routerLink]="['/cart/booking']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"  [ngClass]="{'current': progressStep.step1==true}">
                         <span class="step_num">1</span>
                         <span class="step_text">Booking</span>
                     </a>

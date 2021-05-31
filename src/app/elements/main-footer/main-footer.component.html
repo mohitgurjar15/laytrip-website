@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="ftr_flex_row">
-                    <a [routerLink]="['/']" class="logo_w">
+                    <a [routerLink]="['/']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" class="logo_w">
                         <img src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Logo" />
                     </a>
                 </div>
@@ -30,8 +30,7 @@
                                         <a class="dropdown-toggle hover-link" data-toggle="dropdown">
                                             <!-- <img src="{{selectedCurrency.flag}}" alt="Flag" /> {{ selectedCurrency.code
                                             }} -->
-                                            {{ selectedCurrency.code
-                                            }}
+                                            {{ selectedCurrency.code}}
                                             <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
@@ -52,22 +51,31 @@
                             <div class="menu_grid">
                                 <ul>
                                     <li>
-                                        <a [routerLink]="['/about']"
-                                            [innerHTML]="'laytrip_info_page_title_3' | translate"></a>
+                                        <a 
+                                        [routerLink]="['/about']"
+                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
+                                        [innerHTML]="'laytrip_info_page_title_3' | translate"></a>
                                     </li>
                                     <li>
                                         <a [routerLink]="['/faq']"
+                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
                                             [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
                                     </li>
                                     <li>
-                                        <a [routerLink]="['/privacy-policy']">Privacy</a>
+                                        <a 
+                                        [routerLink]="['/privacy-policy']"
+                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
+                                        >Privacy</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="menu_grid">
                                 <ul>
                                     <li>
-                                        <a [routerLink]="['/terms']">Terms</a>
+                                        <a 
+                                        [routerLink]="['/terms']"
+                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
+                                        >Terms</a>
                                     </li>
                                     <li>
                                         <a class="hover-link"
@@ -75,7 +83,10 @@
                                             data-toggle="modal" data-target="#contact_modal"></a>
                                     </li>
                                     <li>
-                                        <a [routerLink]="['/ccpa']">Do Not Sell</a>
+                                        <a
+                                        [routerLink]="['/ccpa']"
+                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
+                                       >Do Not Sell</a>
                                     </li>
                                 </ul>
                             </div>

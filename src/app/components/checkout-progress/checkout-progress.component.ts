@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 import { CartService } from '../../services/cart.service';
+import { CommonFunction } from '../../_helpers/common-function';
 
 @Component({
   selector: 'app-checkout-progress',
@@ -17,6 +18,7 @@ export class CheckoutProgressComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
+    private commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
