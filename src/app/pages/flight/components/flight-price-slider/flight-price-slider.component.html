@@ -31,9 +31,9 @@
                         <div class="block_top">
                             <p>{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}</p>
                         </div>
-                        <div class="block_btm">  
-                            <span>
-                                {{ getPrice(item)}}
+                        <div class="block_btm" >  
+                            <span class="{{ getPrice(item).className }}">
+                                {{ getPrice(item).price}}
                             </span>
                         </div>
                     </a>
@@ -47,8 +47,8 @@
                                 getFlexibleArivalDate(item.date,departure) }}</p>
                         </div>
                         <div class="block_btm">
-                            <span>
-                                {{ getPrice(item)}}
+                            <span class="{{ getPrice(item).className }}">
+                                {{ getPrice(item).price}}
                             </span>
                         </div>
                     </a>
