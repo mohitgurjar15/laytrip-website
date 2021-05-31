@@ -184,7 +184,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (moment(moment(this.customStartDateValidation).subtract(31, 'days')).diff(moment(), 'days') > 0) {
       this.searchHotelInfo.check_in = this.checkInDate = moment(this.customStartDateValidation).toDate();
     } else {
-      this.searchHotelInfo.check_in = this.checkInDate = moment().add(91, 'days').toDate();
+      this.searchHotelInfo.check_in = this.checkInDate = moment().add(90, 'days').toDate();
     }        
     this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
