@@ -43,11 +43,12 @@ export class DealComponent implements OnInit {
   list = [];
   list2 = [];
   breakpoints = {
-    320: { slidesPerView: 1, spaceBetween: 10 },
-    520: { slidesPerView: 2, spaceBetween: 10 },
-    768: { slidesPerView: 3, spaceBetween: 40 },
-    1024: { slidesPerView: 3, spaceBetween: 40 }
+    320: { slidesPerView: 1, spaceBetween: 10 ,slidesPerGroup: 9},
+    520: { slidesPerView: 2, spaceBetween: 10,slidesPerGroup: 5 },
+    768: { slidesPerView: 3, spaceBetween: 40,slidesPerGroup: 3 },
+    1024: { slidesPerView: 3, spaceBetween: 40 ,slidesPerGroup: 3}
   };
+  slidesPerGroup=3;
   constructor(
     private homeService : HomeService,
     private commonFunction : CommonFunction
@@ -76,10 +77,10 @@ export class DealComponent implements OnInit {
   breakpointChange() {
     this.breakPointsToggle = !this.breakPointsToggle;
     this.breakpoints = {
-      320: { slidesPerView: 1, spaceBetween: 10 },
-      520: { slidesPerView: 2, spaceBetween: 10 },
-      768: { slidesPerView: 3, spaceBetween: 40 },
-      1024: { slidesPerView: this.breakPointsToggle ? 3 : 5, spaceBetween: 40 }
+      320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup: 9 },
+      520: { slidesPerView: 2, spaceBetween: 10,slidesPerGroup: 5 },
+      768: {slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 },
+      1024: { slidesPerView: this.breakPointsToggle ? 3 : 5, spaceBetween: 40,slidesPerGroup: 3 }
     };
   } 
 
