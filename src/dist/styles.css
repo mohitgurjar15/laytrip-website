@@ -11631,7 +11631,19 @@ select:focus {
   width: 110px;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section.w_o_arrow {
-  width: 80px;
+  width: 88px;
+  display: flex;
+  align-items: center;
+  line-height: 32px;
+  border-radius: 16px;
+  padding: 0 8px;
+  border: 1px solid #8188ab;
+  background: #ffffff;
+  color: #8188ab;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.28px;
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section.w_o_arrow .drop_aerrow {
   display: none;
@@ -12334,7 +12346,22 @@ select:focus {
   width: 100%;
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section.w_o_arrow {
-  width: 80px;
+  width: 88px;
+  display: flex;
+  align-items: center;
+  line-height: 32px;
+  border-radius: 16px;
+  padding: 0 8px;
+  border: 1px solid #8188ab;
+  background: #ffffff;
+  color: #8188ab;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.28px;
+}
+.search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section.w_o_arrow .search_area {
+  background-color: transparent;
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section.w_o_arrow .drop_aerrow {
   display: none;

@@ -418,7 +418,7 @@ ng-scrollbar {
 .search_suggetion_main .suggtions_wrps_mn .suggtions {
   scroll-behavior: smooth;
   height: 100%;
-  max-height: 180px;
+  max-height: 270px;
   flex: auto;
   display: flex;
   flex-direction: column;

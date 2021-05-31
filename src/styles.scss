@@ -1084,7 +1084,20 @@ select {
                 width: 110px;
 
                 &.w_o_arrow {
-                  width: 80px;
+                  width: 88px;
+                  display: flex;
+                  align-items: center;
+                  line-height: 32px;
+                  border-radius: 16px;
+                  padding: 0 8px;
+                  border: 1px solid $text-grey;
+                  background: $text-white;
+                  color: $text-grey;
+                  text-decoration: none;
+                  font-size: 14px;
+                  font-weight: 500;
+                  letter-spacing: 0.28px;
+  
 
                   .drop_aerrow{
                     display: none;
@@ -1978,7 +1991,22 @@ select {
           .class_section {
             width: 100%;
             &.w_o_arrow {
-              width: 80px;
+              width: 88px;
+              display: flex;
+              align-items: center;
+              line-height: 32px;
+              border-radius: 16px;
+              padding: 0 8px;
+              border: 1px solid $text-grey;
+              background: $text-white;
+              color: $text-grey;
+              text-decoration: none;
+              font-size: 14px;
+              font-weight: 500;
+              letter-spacing: 0.28px;
+              .search_area{
+                background-color: transparent;
+              }
 
               .drop_aerrow{
                 display: none;
