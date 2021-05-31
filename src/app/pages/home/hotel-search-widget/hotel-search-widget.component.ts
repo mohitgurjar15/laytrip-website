@@ -101,7 +101,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         children: []
       },
     };
-
     let host = window.location.origin;
     if (host.includes("staging")) {
       this.showCommingSoon = true;
@@ -255,12 +254,12 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace(/\=+$/, '');
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
-      
+
       queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-      if(parms.utm_medium){
+      if (parms.utm_medium) {
         queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
       }
-      if(parms.utm_campaign){
+      if (parms.utm_campaign) {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
