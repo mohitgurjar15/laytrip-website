@@ -63,6 +63,7 @@
     "ngx-gallery": "^5.10.0",
     "ngx-infinite-scroll": "8.0.0",
     "ngx-mask": "^11.1.4",
+    "ngx-otp-input": "^0.9.0",
     "ngx-pagination": "^5.0.0",
     "ngx-scrollbar": "^4.2.0",
     "ngx-slick-carousel": "^0.5.1",

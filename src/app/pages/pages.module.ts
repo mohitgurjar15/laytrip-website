@@ -36,6 +36,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { TermsComponent } from './terms/terms.component';
 import { CcpaComponent } from './ccpa/ccpa.component';
 import { AppleSecurityLoginPopupComponent } from './user/apple-security-login-popup/apple-security-login-popup.component';
+import { NgxOtpInputModule } from 'ngx-otp-input';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { AppleSecurityLoginPopupComponent } from './user/apple-security-login-po
     Ng5SliderModule,
     NgOtpInputModule,
     CountdownModule,
-    RecaptchaModule
+    RecaptchaModule,
+    NgxOtpInputModule
   ],
   entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, ForgotPasswordComponent, ResetPasswordComponent, AppleSecurityLoginPopupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
