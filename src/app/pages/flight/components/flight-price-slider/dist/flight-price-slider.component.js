@@ -68,6 +68,9 @@ var FlightPriceSliderComponent = /** @class */ (function () {
         if (changes['dates'].currentValue.length) {
             this.flipDates(this.dates);
         }
+        if (changes['flexibleLoading'].currentValue) {
+            console.log(this.flexibleLoading);
+        }
     };
     FlightPriceSliderComponent.prototype.flipDates = function (dates) {
         var _this = this;

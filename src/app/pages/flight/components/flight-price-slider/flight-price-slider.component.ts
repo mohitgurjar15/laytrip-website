@@ -86,6 +86,9 @@ export class FlightPriceSliderComponent implements OnInit {
     if (changes['dates'].currentValue.length) {
       this.flipDates(this.dates)
     }
+    if (changes['flexibleLoading'].currentValue) {
+      console.log(this.flexibleLoading)
+    }
   }
 
   flipDates(dates) {
