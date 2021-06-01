@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
       src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/101944574.jpg?k=afeb13ea4553e6dc4d0b2c01fafc85e6f80688a867080dfa7bb4ddd4577ea515&o=",
       location:{
         from : {
-          airport_code : 'NYC'
+          airport_code : 'LAS'
         },
         to : {
           airport_code : 'MIA',
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
       src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/295130173.jpg?k=cb031d144f9c01c6c99271d9a8aa241a5bd8922613b9cec738f2c83ccd2776d6&o=",
       location:{
         from : {
-          airport_code : 'NYC'
+          airport_code : 'CUN'
         },
         to : {
           airport_code : 'CUN',
