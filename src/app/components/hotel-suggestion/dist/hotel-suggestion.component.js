@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.HotelSuggestionComponent = void 0;
 var core_1 = require("@angular/core");
-var environment_1 = require("src/environments/environment");
+var environment_1 = require("../../../environments/environment");
 var HotelSuggestionComponent = /** @class */ (function () {
-    function HotelSuggestionComponent(hotelService) {
+    function HotelSuggestionComponent(hotelService, homeService) {
         this.hotelService = hotelService;
+        this.homeService = homeService;
         this.selectedHotel = new core_1.EventEmitter();
         this.validateSearch = new core_1.EventEmitter();
         this.isValidSearch = true;
@@ -24,6 +25,14 @@ var HotelSuggestionComponent = /** @class */ (function () {
     }
     HotelSuggestionComponent.prototype.ngOnInit = function () {
         this.defaultTempData[0] = this.defaultItem;
+    };
+    HotelSuggestionComponent.prototype.ngOnChanges = function (changes) {
+        var _this = this;
+        this.homeService.getLocationForHotelDeal.subscribe(function (hotelInfo) {
+            if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
+                _this.searchItem = hotelInfo.title;
+            }
+        });
     };
     HotelSuggestionComponent.prototype.searchLocation = function (event) {
         //  console.log(this.searchItem.length,event.keyCode)

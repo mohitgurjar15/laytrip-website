@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, HostListener } from '@angular/core';
-import { HotelService } from 'src/app/services/hotel.service';
-import { environment } from 'src/environments/environment';
+import { HomeService } from '../../services/home.service';
+import { HotelService } from '../../services/hotel.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-hotel-suggestion',
@@ -22,11 +23,21 @@ export class HotelSuggestionComponent implements OnInit {
   thisElementClicked: boolean = false;
   $autoComplete;
   constructor(
-    private hotelService: HotelService
+    private hotelService: HotelService,
+    private homeService: HomeService,
+
   ) { }
 
   ngOnInit(): void {
     this.defaultTempData[0] = this.defaultItem;
+  }
+  
+  ngOnChanges(changes: SimpleChanges) {    
+    this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
+      if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {        
+        this.searchItem = hotelInfo.title;
+      }
+    });
   }
 
   searchLocation(event) {

@@ -43,10 +43,10 @@ export class DealComponent implements OnInit {
   list = [];
   list2 = [];
   breakpoints = {
-    320: { slidesPerView: 1, spaceBetween: 10 ,slidesPerGroup: 9},
-    520: { slidesPerView: 2, spaceBetween: 10,slidesPerGroup: 5 },
-    768: { slidesPerView: 3, spaceBetween: 40,slidesPerGroup: 3 },
-    1024: { slidesPerView: 3, spaceBetween: 40 ,slidesPerGroup: 3}
+    320: { slidesPerView: 1, spaceBetween: 10 ,slidesPerGroup: 10},
+    520: { slidesPerView: 2, spaceBetween: 10,slidesPerGroup: 2 },
+    768: { slidesPerView: 3, spaceBetween: 40,slidesPerGroup: 4 },
+    1024: { slidesPerView: 3, spaceBetween: 40 ,slidesPerGroup: 4}
   };
   slidesPerGroup=3;
   constructor(
@@ -63,9 +63,8 @@ export class DealComponent implements OnInit {
   }
 
   btnDealClick(item){
-  
     window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-    this.toString.emit(item.title ? item :item.code  );  
+    this.toString.emit(item.title ? item : item.code  );  
   }
 
 

@@ -25,10 +25,9 @@
 <section class="deal_sec" *ngIf="list.length > 0 && commonFunction.isRefferal()"  (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
         <div class="row">
-            <swiper [slidesPerView]="3" [loop]="true" [spaceBetween]="50" (swiper)="setThumbsSwiper($event)"
+            <swiper [loop]="true" [spaceBetween]="50" (swiper)="setThumbsSwiper($event)"
             [autoplay]="false"  [breakpoints]="breakpoints" [navigation]="{}" [pagination]="{ clickable: true }"
-            [slidesPerGroup]="3" [loop]="true"
-            [loopFillGroupWithBlank]="true"
+             [loop]="true"            
                 [watchSlidesVisibility]="true" [watchSlidesProgress]="true" *ngIf="list.length > 0">
                 <ng-template swiperSlide *ngFor="let item of list;">
 

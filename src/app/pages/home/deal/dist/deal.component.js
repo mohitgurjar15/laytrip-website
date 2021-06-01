@@ -33,10 +33,10 @@ var DealComponent = /** @class */ (function () {
         this.list = [];
         this.list2 = [];
         this.breakpoints = {
-            320: { slidesPerView: 1, spaceBetween: 10, slidesPerGroup: 9 },
-            520: { slidesPerView: 2, spaceBetween: 10, slidesPerGroup: 5 },
-            768: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 },
-            1024: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 }
+            320: { slidesPerView: 1, spaceBetween: 10, slidesPerGroup: 10 },
+            520: { slidesPerView: 2, spaceBetween: 10, slidesPerGroup: 2 },
+            768: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 4 },
+            1024: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 4 }
         };
         this.slidesPerGroup = 3;
     }
