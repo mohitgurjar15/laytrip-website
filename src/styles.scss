@@ -951,6 +951,11 @@ select {
   display: flex;
   flex-direction: column;
 
+  @include ipad-view{
+    height: 100vh;
+    min-height: 580px;
+  }
+
   .carousel {
     border-radius: 0 !important;
 
@@ -963,6 +968,11 @@ select {
     }
 
     .control {
+
+      @include tab-view{
+        display: none;
+      }
+      
       &.prev {
         opacity: 0.3;
 

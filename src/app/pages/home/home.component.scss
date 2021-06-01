@@ -91,7 +91,7 @@
 
         @include ipad-view {
             transform: translate(0%, 0%);
-            position: relative;
+            position: absolute;
             padding: 20px 0 70px;
             height: 100%;
         }
