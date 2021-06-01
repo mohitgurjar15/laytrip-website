@@ -25,10 +25,14 @@
 <section class="deal_sec" *ngIf="list.length > 0 && commonFunction.isRefferal()"  (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
         <div class="row">
-            <swiper [loop]="true" [spaceBetween]="50" (swiper)="setThumbsSwiper($event)"
-            [autoplay]="false"  [breakpoints]="breakpoints" [navigation]="{}" [pagination]="{ clickable: true }"
-             [loop]="true"            
-                [watchSlidesVisibility]="true" [watchSlidesProgress]="true" *ngIf="list.length > 0">
+            <swiper 
+            (swiper)="setThumbsSwiper($event)"
+             [breakpoints]="breakpoints"
+             [navigation]="{}" 
+             [pagination]="{ clickable: true }"
+             [slidesPerView]="1"
+             [spaceBetween]="10"        
+                *ngIf="list.length > 0">
                 <ng-template swiperSlide *ngFor="let item of list;">
 
                     <div class="deal_sec_inner">
