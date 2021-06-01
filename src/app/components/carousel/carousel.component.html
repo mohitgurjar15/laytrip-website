@@ -19,7 +19,5 @@
   </button>
 </div>
 <ul class="boolean_nav">
-  <li [ngClass]="{'active':currentSlide==0}"></li>
-  <li [ngClass]="{'active':currentSlide==1}"></li>
-  <li [ngClass]="{'active':currentSlide==2}"></li>
+  <li *ngFor="let slide of slides; let i = index" [ngClass]="{'active':currentSlide==i}"></li>
 </ul>

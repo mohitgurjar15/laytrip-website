@@ -30,15 +30,30 @@ export class HomeComponent implements OnInit {
   dealList = [];
   host:string='';
   $tabName;
+  currentSlide;
+
   public slides = [
     { 
       src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/184974934.jpg?k=17803467e2d7dec840e47eccb1c9595f3b8890a51288e728188831acc4378f5d&o=",
       location:{
         from : {
-          airport_code : 'DEN'
+          airport_code : 'NYC'
         },
         to : {
-          airport_code : 'MIA'
+          airport_code : 'LAS',
+          hotel_option:{
+            title: "Las Vegas, Nevada, United States",
+            city: "Las Vegas",
+            state: "Nevada",
+            country: "United States",
+            type: "city",
+            hotel_id: "",
+            city_id: "800049030",
+            geo_codes: {
+              lat: "36.1190",
+              long: "-115.1680"
+            }
+          }
         }
       }
     },
@@ -46,10 +61,23 @@ export class HomeComponent implements OnInit {
       src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/101944574.jpg?k=afeb13ea4553e6dc4d0b2c01fafc85e6f80688a867080dfa7bb4ddd4577ea515&o=",
       location:{
         from : {
-          airport_code : 'LHR'
+          airport_code : 'NYC'
         },
         to : {
-          airport_code : 'JFK'
+          airport_code : 'MIA',
+          hotel_option:{
+            title: "Miami Beach, Florida, United States",
+            city: "Miami Beach",
+            state: "Florida",
+            country: "United States",
+            type: "city",
+            hotel_id: "",
+            city_id: "800047419",
+            geo_codes: {
+              lat: "25.7903",
+              long: "-80.1303"
+            }
+          }
         }
       }
     },
@@ -57,10 +85,23 @@ export class HomeComponent implements OnInit {
       src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/295130173.jpg?k=cb031d144f9c01c6c99271d9a8aa241a5bd8922613b9cec738f2c83ccd2776d6&o=",
       location:{
         from : {
-          airport_code : 'DXB'
+          airport_code : 'NYC'
         },
         to : {
-          airport_code : 'SYD'
+          airport_code : 'CUN',
+          hotel_option:{
+            title: "Cancún, Mexico",
+            city: "Cancún",
+            state: "",
+            country: "Mexico",
+            type: "city",
+            hotel_id: "",
+            city_id: "800026864",
+            geo_codes: {
+              lat: "21.1613",
+              long: "-86.8341"
+            }
+          }
         }
       }
     }
@@ -85,6 +126,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.host = window.location.host;
+    this.currentSlide = this.slides[0];
     this.getModules();
     this.loadJquery();
     localStorage.removeItem('__from');
@@ -265,8 +307,9 @@ export class HomeComponent implements OnInit {
 
     }
   }
-  activeSlide(event){
-    
+  activeSlide(activeSlide){
+    console.log("activeSlide",activeSlide)
+    this.currentSlide=this.slides[activeSlide]
   }
 
 
