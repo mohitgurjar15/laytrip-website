@@ -946,19 +946,22 @@ select {
 
 //<!-- home slider css -->
 .home_bg_slider {
-  height: 100vh;
+  height: calc(100vh - 100px);
   width: 100%;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 
   .carousel {
     border-radius: 0 !important;
+
     .slide {
       border-radius: 0 !important;
+
       &:hover {
         transform: scale(1);
       }
     }
+
     .control {
       &.prev {
         opacity: 0.3;
@@ -967,6 +970,7 @@ select {
           opacity: 1;
         }
       }
+
       &.next {
         opacity: 0.3;
 
@@ -974,6 +978,33 @@ select {
           opacity: 1;
         }
       }
+    }
+
+  }
+
+  .boolean_nav {
+    z-index: 9999;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: 10px;
+    justify-content: center;
+    width: 100%;
+
+    li {
+      margin: 0 2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      padding: 0 !important;
+      background-color: $box-border-color;
+
+      &.active {
+        background-color: $primary-color;
+      }
+
     }
   }
 }

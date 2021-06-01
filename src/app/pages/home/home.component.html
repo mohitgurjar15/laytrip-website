@@ -1,5 +1,6 @@
 <!--  Start Banner Section-->
-<section class="home_banner" id="home_banner" [ngClass]="{'br_bnr':countryCode=='DR'}">
+<section class="home_banner " id="home_banner" [ngClass]="{'br_bnr':countryCode=='DR'}">
+    <!-- class name banner_bg -->
     <carousel class="home_bg_slider" (activeSlide)="activeSlide($event)" currentChangeCounter={{currentChangeCounter}} [slides]="slides"></carousel>
     <div class="container banner_inner">
         <div class="banner_text">
