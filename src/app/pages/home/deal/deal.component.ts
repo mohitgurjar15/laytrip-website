@@ -1,5 +1,4 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { HomeService } from '../../../services/home.service';
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
 
@@ -50,8 +49,7 @@ export class DealComponent implements OnInit {
   };
   slidesPerGroup=3;
   constructor(
-    private homeService : HomeService,
-    private commonFunction : CommonFunction
+    public commonFunction : CommonFunction
   ) {}
 
   ngOnInit() {

@@ -24,8 +24,7 @@ core_2["default"].use([
     core_2.Controller
 ]);
 var DealComponent = /** @class */ (function () {
-    function DealComponent(homeService, commonFunction) {
-        this.homeService = homeService;
+    function DealComponent(commonFunction) {
         this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.toString = new core_1.EventEmitter();
