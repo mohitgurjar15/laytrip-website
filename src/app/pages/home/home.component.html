@@ -1,7 +1,7 @@
 <!--  Start Banner Section-->
-<section class="home_banner " id="home_banner" [ngClass]="{'br_bnr':countryCode=='DR'}">
+<section class="home_banner " id="home_banner" [ngClass]="{'banner_bg':isRefferal==false}">
     <!-- class name banner_bg -->
-    <carousel class="home_bg_slider" (activeSlide)="activeSlide($event)" currentChangeCounter={{currentChangeCounter}} [slides]="slides"></carousel>
+    <carousel *ngIf="isRefferal==true" class="home_bg_slider" (activeSlide)="activeSlide($event)" currentChangeCounter={{currentChangeCounter}} [slides]="slides"></carousel>
     <div class="container banner_inner">
         <div class="banner_text">
             <div class="block_left" *ngIf="countryCode!='DR'">
@@ -59,10 +59,10 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade active show" id="hotel" role="tabpanel" aria-labelledby="nav-hotel">
-                    <app-hotel-search-widget></app-hotel-search-widget>
+                    <app-hotel-search-widget ></app-hotel-search-widget>
                 </div>
                 <div class="tab-pane fade show " id="flight" role="tabpanel" aria-labelledby="nav-flight">
-                    <app-flight-search-widget></app-flight-search-widget>
+                    <app-flight-search-widget [currentSlide]="currentSlide"></app-flight-search-widget>
                 </div>
                 <div class="tab-pane fade" id="accommodation" role="tabpanel" aria-labelledby="nav-accommodation">
                     <app-vacation-search-widget></app-vacation-search-widget>

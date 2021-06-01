@@ -25,6 +25,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   modules: Module[];
   moduleList: any = {};
   @Input() calenderPrices: any = [];
+  @Input() currentSlide;
   switchBtnValue = false;
   isRoundTrip: boolean = true;
   flightSearchForm: FormGroup;
@@ -176,7 +177,21 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
+    console.log("changes",changes)
+    if(typeof changes['currentSlide'].currentValue!=='undefined'){
+      if(this.commonFunction.isRefferal()){
+        this.currentSlide=changes['currentSlide'].currentValue;
+        this.fromSearch = airports[this.currentSlide.location.from.airport_code];
+        this.toSearch = airports[this.currentSlide.location.to.airport_code];
+        this.flightSearchForm.controls.fromDestination.setValue('');
+        this.fromSearch = [];
+        this.departureDate = moment().add(90, 'days').toDate();
+        if (this.isRoundTrip) {
+          this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
+          this.searchFlightInfo.arrival = this.toSearch.code;
+        }
+      }
+    }
   }
 
 

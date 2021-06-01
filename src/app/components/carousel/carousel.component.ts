@@ -53,7 +53,7 @@ export class CarouselComponent {
     var secondsSinceLastActivity = 0;
 
     //Five minutes. 60 x 5 = 300 seconds.
-    var maxInactivity = (4);
+    var maxInactivity = 4;
 
     //Setup the setInterval method to run
     //every second. 1000 milliseconds = 1 second.
@@ -66,11 +66,11 @@ export class CarouselComponent {
         return;
       }
       secondsSinceLastActivity++;
-      console.log(secondsSinceLastActivity + ' seconds since the user was last active');
+      //console.log(secondsSinceLastActivity + ' seconds since the user was last active');
       //if the user has been inactive or idle for longer
       //then the seconds specified in maxInactivity
       if(secondsSinceLastActivity > maxInactivity){
-          console.log('User has been inactive for more than ' + maxInactivity + ' seconds');
+          //console.log('User has been inactive for more than ' + maxInactivity + ' seconds');
           self.onNextClick();
           secondsSinceLastActivity = 0;
       }
