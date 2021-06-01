@@ -24,13 +24,13 @@
     //padding-bottom: 130px;
     z-index: 9;
 
-    &.banner_bg{
+    &.banner_bg {
         background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png) !important;
         background-repeat: no-repeat !important;
         background-size: cover !important;
         background-position: center center !important;
 
-        .banner_inner{
+        .banner_inner {
             bottom: 0;
             right: 0;
             left: 0;
@@ -57,18 +57,7 @@
     // 	left: 0;
     // 	content: '';
     // }
-    .home_bg_slider {
-        height: 100vh;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
 
-        .slide{
-            &:hover{
-                transform: scale(0);
-            }
-        }
-    }
 
     .banner_inner {
         // position: relative;
@@ -88,6 +77,11 @@
         z-index: 99;
         transform: translate(0%, -33%);
         //height: calc(100vh - 100px);
+
+        @include tab-max {
+            height: 100%;
+            transform: translate(0%, 27%);
+        }
 
         @include ipad-view {
             transform: translate(0%, 0%);

@@ -974,7 +974,7 @@ select {
       }
       
       &.prev {
-        opacity: 0.3;
+        opacity: 0;
 
         &:hover {
           opacity: 1;
@@ -982,7 +982,7 @@ select {
       }
 
       &.next {
-        opacity: 0.3;
+        opacity: 0;
 
         &:hover {
           opacity: 1;
