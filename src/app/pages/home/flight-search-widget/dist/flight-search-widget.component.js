@@ -147,6 +147,20 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
+        //home page image slider
+        if (typeof changes['currentSlide'].currentValue !== 'undefined') {
+            if (this.commonFunction.isRefferal()) {
+                this.currentSlide = changes['currentSlide'].currentValue;
+                this.fromSearch = airports_1.airports[this.currentSlide.location.from.airport_code];
+                this.toSearch = airports_1.airports[this.currentSlide.location.to.airport_code];
+                this.flightSearchForm.controls.fromDestination.setValue('');
+                this.departureDate = moment().add(90, 'days').toDate();
+                if (this.isRoundTrip) {
+                    this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
+                    this.searchFlightInfo.arrival = this.toSearch.code;
+                }
+            }
+        }
     };
     FlightSearchWidgetComponent.prototype.setFlightDepartureMinDate = function () {
         var date = new Date();
@@ -486,6 +500,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], FlightSearchWidgetComponent.prototype, "calenderPrices");
+    __decorate([
+        core_1.Input()
+    ], FlightSearchWidgetComponent.prototype, "currentSlide");
     __decorate([
         core_1.HostListener('document:click')
     ], FlightSearchWidgetComponent.prototype, "clickOutside");
