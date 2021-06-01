@@ -151,8 +151,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         if (typeof changes['currentSlide'].currentValue !== 'undefined') {
             if (this.commonFunction.isRefferal()) {
                 this.currentSlide = changes['currentSlide'].currentValue;
-                this.fromSearch = airports_1.airports[this.currentSlide.location.from.airport_code];
+                // this.fromSearch = airports[this.currentSlide.location.from.airport_code];
+                // this.fromSearch = {};
+                this.fromSearch = Object.assign({}, airports_1.airports[this.currentSlide.location.from.airport_code]);
+                // console.log('ngOnChanges flight W',this.fromSearch)
                 this.toSearch = airports_1.airports[this.currentSlide.location.to.airport_code];
+                this.searchFlightInfo.departure = this.fromSearch.code;
                 this.flightSearchForm.controls.fromDestination.setValue('');
                 this.departureDate = moment().add(90, 'days').toDate();
                 if (this.isRoundTrip) {
@@ -183,6 +187,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
     };
     FlightSearchWidgetComponent.prototype.destinationChangedValue = function (event) {
+        console.log('here');
         if (event && event.key && event.key === 'fromSearch') {
             this.fromSearch = event.value;
             this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });
@@ -488,6 +493,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.showFromAirportSuggestion = true;
         this.searchedFlightData = event;
         this.routeSearch = true;
+        console.log('sd');
     };
     FlightSearchWidgetComponent.prototype.getflightToSearchRoutes = function (event) {
         this.showToAirportSuggestion = true;

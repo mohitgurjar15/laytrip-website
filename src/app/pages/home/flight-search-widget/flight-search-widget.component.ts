@@ -182,8 +182,13 @@ export class FlightSearchWidgetComponent implements OnInit {
       if(this.commonFunction.isRefferal()){
         this.currentSlide=changes['currentSlide'].currentValue;
         
-        this.fromSearch = airports[this.currentSlide.location.from.airport_code];
+        // this.fromSearch = airports[this.currentSlide.location.from.airport_code];
+        // this.fromSearch = {};
+        this.fromSearch = Object.assign({},airports[this.currentSlide.location.from.airport_code]);
+
+        // console.log('ngOnChanges flight W',this.fromSearch)
         this.toSearch = airports[this.currentSlide.location.to.airport_code];
+        this.searchFlightInfo.departure = this.fromSearch.code;
         this.flightSearchForm.controls.fromDestination.setValue('');
         this.departureDate = moment().add(90, 'days').toDate();
         if (this.isRoundTrip) {
@@ -222,6 +227,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
 
   destinationChangedValue(event) {
+    console.log('here')
     if (event && event.key && event.key === 'fromSearch') {
       this.fromSearch = event.value;
       this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });
@@ -569,6 +575,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.showFromAirportSuggestion = true;
     this.searchedFlightData = event; 
     this.routeSearch = true; 
+    console.log('sd')
   }
   getflightToSearchRoutes(event){   
     this.showToAirportSuggestion = true;

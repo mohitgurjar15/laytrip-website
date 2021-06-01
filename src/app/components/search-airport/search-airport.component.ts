@@ -31,8 +31,7 @@ export class SearchAirportComponent implements OnInit {
   constructor(
     private flightService: FlightService,
     public cd: ChangeDetectorRef,
-    public cookieService: CookieService,
-    private homeService: HomeService
+    public cookieService: CookieService
   ) {
   }
 
@@ -133,16 +132,19 @@ export class SearchAirportComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['airport']) {
-      this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
-      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+   
+    if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
+      this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ?  changes['airport'].currentValue.city : '';     
+      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([],[changes['airport'].currentValue]) : [];
+      // this.cd.detectChanges();
+      console.log(this.inputName,this.data,this.defaultCity)
+
     }
-    console.log(changes,this.inputName)
-    if(this.inputName == 'toSearch'){
+/*     if(this.inputName == 'toSearch'){
       
 
     }
-    /* this.homeService.getToString.subscribe(toSearchString => {
+ */    /* this.homeService.getToString.subscribe(toSearchString => {
       if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
         this.data  = [];
         this.data = [airports[toSearchString]]

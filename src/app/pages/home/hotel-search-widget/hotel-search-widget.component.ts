@@ -1,13 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HomeService } from 'src/app/services/home.service';
-import { toBase64String } from '@angular/compiler/src/output/source_map';
-import { encode } from 'punycode';
+import { HomeService } from '../../../services/home.service';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -18,6 +16,7 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   @ViewChild('dateFilter', /* TODO: add static flag */ undefined) private dateFilter: any;
   s3BucketUrl = environment.s3BucketUrl;
+  @Input() currentSlide;
   countryCode: string;
   checkInDate = new Date();
   checkOutDate: any = new Date();
@@ -173,10 +172,25 @@ export class HotelSearchWidgetComponent implements OnInit {
         this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = hotelInfo.long;
         this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = hotelInfo.city_id;
         this.searchHotelInfo.location = this.fromDestinationInfo;
+
         this.validateSearch(true);
       }
     });
     this.homeService.removeToString('hotel');
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    //home page image slider
+    if(typeof changes['currentSlide'].currentValue!=='undefined'){
+      this.dealDateValidation();
+      this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
+      this.fromDestinationInfo.city = this.fromDestinationInfo.title = changes['currentSlide'].currentValue.location.to.hotel_option.title;
+      this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = changes['currentSlide'].currentValue.location.to.hotel_option.geo_codes.lat;
+      this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = changes['currentSlide'].currentValue.location.to.hotel_option.geo_codes.long;
+      this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = changes['currentSlide'].currentValue.location.to.hotel_option.city_id;
+      this.searchHotelInfo.location = this.fromDestinationInfo;
+      this.validateSearch(true);
+    }
   }
 
   dealDateValidation() {
@@ -243,6 +257,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   searchHotels() {
+    console.log($('.hotel_desination').val())
     this.hotelSearchFormSubmitted = true;
     if ($('.hotel_desination').val() == '') {
       this.validSearch = false;
@@ -278,7 +293,7 @@ export class HotelSearchWidgetComponent implements OnInit {
         this.router.navigate(['hotel/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
     } else {
-      console.log('here')
+      this.validSearch = false;
     }
   }
 
@@ -296,7 +311,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.fromDestinationInfo = event;
       this.validateSearch(true);
     }
-    console.log(this.searchHotelInfo,event)
+    // console.log(this.searchHotelInfo,event)
   }
 
   validateSearch(event) {

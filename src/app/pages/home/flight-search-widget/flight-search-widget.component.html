@@ -69,7 +69,7 @@
                         <li class="grid_box first">
                             <div class="flight_form"
                                 [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
-                                <div class="search_area mohit">
+                                <div class="search_area">
                                     <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'"
                                         [id]="'fromSearch'" [label]="'from' | translate" placeHolder="From where?"
                                         [defaultSelected]="" [tabIndex]=1 [airport]=fromSearch

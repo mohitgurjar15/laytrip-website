@@ -10,11 +10,10 @@ exports.SearchAirportComponent = void 0;
 var core_1 = require("@angular/core");
 // import { data } from './airport';
 var SearchAirportComponent = /** @class */ (function () {
-    function SearchAirportComponent(flightService, cd, cookieService, homeService) {
+    function SearchAirportComponent(flightService, cd, cookieService) {
         this.flightService = flightService;
         this.cd = cd;
         this.cookieService = cookieService;
-        this.homeService = homeService;
         this.changeValue = new core_1.EventEmitter();
         this.searchItem = new core_1.EventEmitter();
         this.flightSearchRoute = new core_1.EventEmitter();
@@ -105,21 +104,24 @@ var SearchAirportComponent = /** @class */ (function () {
         }
     };
     SearchAirportComponent.prototype.ngOnChanges = function (changes) {
-        if (changes['airport']) {
-            this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];
-            this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+        if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
+            this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : '';
+            this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([], [changes['airport'].currentValue]) : [];
+            // this.cd.detectChanges();
+            console.log(this.inputName, this.data, this.defaultCity);
         }
-        console.log(changes, this.inputName);
-        if (this.inputName == 'toSearch') {
-        }
-        /* this.homeService.getToString.subscribe(toSearchString => {
-          if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
-            this.data  = [];
-            this.data = [airports[toSearchString]]
-            this.defaultCity = airports[toSearchString].city
-            console.log(this.defaultCity)
-          }
-        }); */
+        /*     if(this.inputName == 'toSearch'){
+              
+        
+            }
+         */ /* this.homeService.getToString.subscribe(toSearchString => {
+             if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
+               this.data  = [];
+               this.data = [airports[toSearchString]]
+               this.defaultCity = airports[toSearchString].city
+               console.log(this.defaultCity)
+             }
+           }); */
     };
     __decorate([
         core_1.Input()
