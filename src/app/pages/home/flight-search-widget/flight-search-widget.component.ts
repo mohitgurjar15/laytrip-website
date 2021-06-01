@@ -321,13 +321,13 @@ export class FlightSearchWidgetComponent implements OnInit {
   selectReturnDateUpdate(date) {
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
-      this.dateFilter.hideOverlay();
+      this.dateFilter.hideOverlay(); 
     };
     if (this.rangeDates[0] && this.rangeDates[1]) {
-      let daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
+      // let daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
       this.returnDate = this.rangeDates[1];
       this.departureDate = this.rangeDates[0];
-      if (daysDiff == 0) {
+      if (!moment(this.rangeDates[1]).isAfter(moment(this.rangeDates[0]))) {
         this.returnDate = moment(this.rangeDates[0]).add(7, 'days').toDate();
       }
       // this.flightDepartureMinDate = this.rangeDates[0];

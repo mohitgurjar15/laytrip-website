@@ -24,8 +24,7 @@ core_2["default"].use([
     core_2.Controller
 ]);
 var DealComponent = /** @class */ (function () {
-    function DealComponent(homeService, commonFunction) {
-        this.homeService = homeService;
+    function DealComponent(commonFunction) {
         this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.toString = new core_1.EventEmitter();
@@ -33,12 +32,12 @@ var DealComponent = /** @class */ (function () {
         this.list = [];
         this.list2 = [];
         this.breakpoints = {
-            320: { slidesPerView: 1, spaceBetween: 10, slidesPerGroup: 9 },
-            520: { slidesPerView: 2, spaceBetween: 10, slidesPerGroup: 5 },
+            320: { slidesPerView: 1, spaceBetween: 10, slidesPerGroup: 1 },
+            520: { slidesPerView: 2, spaceBetween: 10, slidesPerGroup: 2 },
+            640: { slidesPerView: 3, spaceBetween: 20, slidesPerGroup: 3 },
             768: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 },
-            1024: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 }
+            1024: { slidesPerView: 3, spaceBetween: 30, slidesPerGroup: 3 }
         };
-        this.slidesPerGroup = 3;
     }
     DealComponent.prototype.ngOnInit = function () {
     };
@@ -51,15 +50,6 @@ var DealComponent = /** @class */ (function () {
     };
     DealComponent.prototype.setThumbsSwiper = function (swiper) {
         this.thumbsSwiper = swiper;
-    };
-    DealComponent.prototype.breakpointChange = function () {
-        this.breakPointsToggle = !this.breakPointsToggle;
-        this.breakpoints = {
-            320: { slidesPerView: 1, spaceBetween: 10, slidesPerGroup: 9 },
-            520: { slidesPerView: 2, spaceBetween: 10, slidesPerGroup: 5 },
-            768: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 },
-            1024: { slidesPerView: this.breakPointsToggle ? 3 : 5, spaceBetween: 40, slidesPerGroup: 3 }
-        };
     };
     __decorate([
         core_1.Output()

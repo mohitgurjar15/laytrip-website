@@ -101,7 +101,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         children: []
       },
     };
-
     let host = window.location.origin;
     if (host.includes("staging")) {
       this.showCommingSoon = true;
@@ -184,7 +183,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (moment(moment(this.customStartDateValidation).subtract(31, 'days')).diff(moment(), 'days') > 0) {
       this.searchHotelInfo.check_in = this.checkInDate = moment(this.customStartDateValidation).toDate();
     } else {
-      this.searchHotelInfo.check_in = this.checkInDate = moment().add(91, 'days').toDate();
+      this.searchHotelInfo.check_in = this.checkInDate = moment().add(90, 'days').toDate();
     }        
     this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
@@ -263,12 +262,12 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace(/\=+$/, '');
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
-      
+
       queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-      if(parms.utm_medium){
+      if (parms.utm_medium) {
         queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
       }
-      if(parms.utm_campaign){
+      if (parms.utm_campaign) {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
