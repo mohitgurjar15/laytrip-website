@@ -15,7 +15,7 @@
               [ngClass]="{'hotel-error': !validSearch && hotelSearchFormSubmitted}">
               <label for="">Destination</label>
               <app-hotel-suggestion [searchItem]="fromDestinationInfo.title" [defaultItem]="fromDestinationInfo" (selectedHotel)="selectedHotel($event)"
-                (validateSearch)="validateSearch($event)" (currentChangeCounter)="inputChangingCounter($event)"></app-hotel-suggestion>
+                (validateSearch)="validateSearch($event)" ></app-hotel-suggestion>
             </div>
           </div>
         </li>

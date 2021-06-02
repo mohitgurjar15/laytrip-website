@@ -91,6 +91,23 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     HotelSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
+        if (this.commonFunction.isRefferal()) {
+            setTimeout(function () {
+                _this.homeService.getSlideOffers.subscribe(function (currentSlide) {
+                    if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+                        var keys = currentSlide;
+                        _this.dealDateValidation();
+                        _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = '';
+                        _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = keys.location.to.hotel_option.title;
+                        _this.searchHotelInfo.latitude = _this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
+                        _this.searchHotelInfo.longitude = _this.fromDestinationInfo.geo_codes.long = keys.location.to.hotel_option.geo_codes.long;
+                        _this.searchHotelInfo.city_id = _this.fromDestinationInfo.city_id = keys.location.to.hotel_option.city_id;
+                        _this.searchHotelInfo.location = _this.fromDestinationInfo;
+                        _this.validateSearch(true);
+                    }
+                });
+            }, 3000);
+        }
         // this.checkInDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.checkInDate = moment().add('31', 'days').toDate();
@@ -155,16 +172,16 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     };
     HotelSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
         //home page image slider
-        if (typeof changes['currentSlide'].currentValue !== 'undefined') {
-            this.dealDateValidation();
-            this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
-            this.fromDestinationInfo.city = this.fromDestinationInfo.title = changes['currentSlide'].currentValue.location.to.hotel_option.title;
-            this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = changes['currentSlide'].currentValue.location.to.hotel_option.geo_codes.lat;
-            this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = changes['currentSlide'].currentValue.location.to.hotel_option.geo_codes.long;
-            this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = changes['currentSlide'].currentValue.location.to.hotel_option.city_id;
-            this.searchHotelInfo.location = this.fromDestinationInfo;
-            this.validateSearch(true);
-        }
+        /*  if(typeof changes['currentSlide'].currentValue!=='undefined'){
+           this.dealDateValidation();
+           this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
+           this.fromDestinationInfo.city = this.fromDestinationInfo.title = changes['currentSlide'].currentValue.location.to.hotel_option.title;
+           this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = changes['currentSlide'].currentValue.location.to.hotel_option.geo_codes.lat;
+           this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = changes['currentSlide'].currentValue.location.to.hotel_option.geo_codes.long;
+           this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = changes['currentSlide'].currentValue.location.to.hotel_option.city_id;
+           this.searchHotelInfo.location = this.fromDestinationInfo;
+           this.validateSearch(true);
+         } */
     };
     HotelSearchWidgetComponent.prototype.dealDateValidation = function () {
         if (moment(moment(this.customStartDateValidation).subtract(31, 'days')).diff(moment(), 'days') > 0) {
@@ -285,9 +302,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     HotelSearchWidgetComponent.prototype.validateSearch = function (event) {
         this.currentChangeCounter.emit(this.counterChangeVal += 1);
         this.validSearch = event;
-    };
-    HotelSearchWidgetComponent.prototype.inputChangingCounter = function (event) {
-        this.currentChangeCounter.emit(event);
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

@@ -86,8 +86,30 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.rangeDates = [this.departureDate, this.returnDate];
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
-        // this.departureDate = moment(this.customStartDateValidation).toDate();
         var _this = this;
+        if (this.commonFunction.isRefferal()) {
+            setTimeout(function () {
+                _this.homeService.getSlideOffers.subscribe(function (currentSlide) {
+                    if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+                        var slide = currentSlide;
+                        _this.fromSearch = Object.assign({}, airports_1.airports[slide.location.from.airport_code]);
+                        // console.log('ngOnChanges flight W',this.fromSearch)
+                        _this.toSearch = airports_1.airports[slide.location.to.airport_code];
+                        _this.fromSearch['display_name'] = _this.fromSearch.city + "," + _this.fromSearch.country + ",(" + _this.fromSearch.code + ")," + _this.fromSearch.name;
+                        _this.fromSearch['random'] = new Date();
+                        _this.toSearch['display_name'] = _this.toSearch.city + "," + _this.toSearch.country + ",(" + _this.toSearch.code + ")," + _this.toSearch.name;
+                        _this.searchFlightInfo.departure = _this.fromSearch.code;
+                        _this.flightSearchForm.controls.fromDestination.setValue('');
+                        _this.departureDate = moment().add(90, 'days').toDate();
+                        if (_this.isRoundTrip) {
+                            _this.rangeDates = [_this.departureDate, moment().add(97, 'days').toDate()];
+                            _this.searchFlightInfo.arrival = _this.toSearch.code;
+                        }
+                    }
+                });
+            }, 3000);
+        }
+        // this.departureDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.departureDate = moment().add('31', 'days').toDate();
         }
@@ -151,24 +173,26 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
         // console.log("widget changes",changes)
         //home page image slider
-        if (typeof changes['currentSlide'].currentValue !== 'undefined') {
-            if (this.commonFunction.isRefferal()) {
-                this.currentSlide = changes['currentSlide'].currentValue;
-                this.fromSearch = Object.assign({}, airports_1.airports[this.currentSlide.location.from.airport_code]);
-                // console.log('ngOnChanges flight W',this.fromSearch)
-                this.toSearch = airports_1.airports[this.currentSlide.location.to.airport_code];
-                this.fromSearch['display_name'] = this.fromSearch.city + "," + this.fromSearch.country + ",(" + this.fromSearch.code + ")," + this.fromSearch.name;
-                this.fromSearch['random'] = new Date();
-                this.toSearch['display_name'] = this.toSearch.city + "," + this.toSearch.country + ",(" + this.toSearch.code + ")," + this.toSearch.name;
-                this.searchFlightInfo.departure = this.fromSearch.code;
-                this.flightSearchForm.controls.fromDestination.setValue('');
-                this.departureDate = moment().add(90, 'days').toDate();
-                if (this.isRoundTrip) {
-                    this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
-                    this.searchFlightInfo.arrival = this.toSearch.code;
-                }
+        /* if(typeof changes['currentSlide'].currentValue!=='undefined'){
+          if(this.commonFunction.isRefferal()){
+            this.currentSlide=changes['currentSlide'].currentValue;
+            this.fromSearch = Object.assign({},airports[this.currentSlide.location.from.airport_code]);
+            // console.log('ngOnChanges flight W',this.fromSearch)
+            this.toSearch = airports[this.currentSlide.location.to.airport_code];
+          
+            this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
+            this.fromSearch['random'] = new Date();
+            this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+         
+            this.searchFlightInfo.departure = this.fromSearch.code;
+            this.flightSearchForm.controls.fromDestination.setValue('');
+            this.departureDate = moment().add(90, 'days').toDate();
+            if (this.isRoundTrip) {
+              this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
+              this.searchFlightInfo.arrival = this.toSearch.code;
             }
-        }
+          }
+        } */
     };
     FlightSearchWidgetComponent.prototype.setFlightDepartureMinDate = function () {
         var date = new Date();

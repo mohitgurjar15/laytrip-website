@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../../services/home.service';
+import { setInterval } from 'timers';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -109,6 +110,23 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    if(this.commonFunction.isRefferal()){
+      setTimeout(() => {
+        this.homeService.getSlideOffers.subscribe(currentSlide => {
+          if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+            let keys: any = currentSlide;
+            this.dealDateValidation();
+            this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
+            this.fromDestinationInfo.city = this.fromDestinationInfo.title = keys.location.to.hotel_option.title;
+            this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
+            this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = keys.location.to.hotel_option.geo_codes.long;
+            this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = keys.location.to.hotel_option.city_id;
+            this.searchHotelInfo.location = this.fromDestinationInfo;
+            this.validateSearch(true);
+          }
+        })
+      }, 3000);
+    }
     // this.checkInDate = moment(this.customStartDateValidation).toDate();
 
     if (new Date(this.customStartDateValidation) <= new Date()) {
@@ -182,7 +200,8 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     //home page image slider
-    if(typeof changes['currentSlide'].currentValue!=='undefined'){
+   
+   /*  if(typeof changes['currentSlide'].currentValue!=='undefined'){
       this.dealDateValidation();
       this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
       this.fromDestinationInfo.city = this.fromDestinationInfo.title = changes['currentSlide'].currentValue.location.to.hotel_option.title;
@@ -191,7 +210,8 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = changes['currentSlide'].currentValue.location.to.hotel_option.city_id;
       this.searchHotelInfo.location = this.fromDestinationInfo;
       this.validateSearch(true);
-    }
+    } */
+    
   }
 
   dealDateValidation() {
@@ -321,7 +341,5 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.validSearch = event;
   }
 
-  inputChangingCounter(event){
-    this.currentChangeCounter.emit(event)
-  }
+
 }

@@ -15,7 +15,9 @@ export class HomeService {
     getToString = this.toString.asObservable();
     getLocationForHotelDeal = this.fromDestinationInfo.asObservable();
     private tabName = new BehaviorSubject([]);
+    private sliderOffers = new BehaviorSubject([]);
     getActiveTabName = this.tabName.asObservable();
+    getSlideOffers = this.sliderOffers.asObservable();
 
     constructor(
         private http: HttpClient,
@@ -40,6 +42,10 @@ export class HomeService {
 
     setActiveTab(tabName){
         this.tabName.next(tabName)
+    }
+
+    setOffersData(offers){
+        this.sliderOffers.next(offers)
     }
 
     setToString(flightToCode) {

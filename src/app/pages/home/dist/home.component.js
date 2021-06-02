@@ -105,12 +105,19 @@ var HomeComponent = /** @class */ (function () {
         ];
         this.renderer.addClass(document.body, 'bg_color');
         this.countryCode = this.commonFunction.getUserCountry();
+        this.currentSlide = this.slides[0];
+        this.homeService.setOffersData(this.currentSlide);
+        /* this.homeService.getSlideOffers.subscribe(sliders => {
+          if (typeof sliders != 'undefined' && Object.keys(sliders).length > 0) {
+            let keys: any = sliders;
+            console.log(keys)
+          }
+        }) */
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
         this.host = window.location.host;
-        this.currentSlide = this.slides[0];
         this.getModules();
         this.loadJquery();
         localStorage.removeItem('__from');
@@ -274,6 +281,9 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.activeSlide = function (activeSlide) {
         this.currentSlide = this.slides[activeSlide];
+        this.homeService.setOffersData(this.currentSlide);
+        this.clickOnTab('hotel');
+        $('#nav-hotel').trigger('click');
     };
     HomeComponent.prototype.getCurrentChangeCounter = function (event) {
         this.currentChangeCounter = event;

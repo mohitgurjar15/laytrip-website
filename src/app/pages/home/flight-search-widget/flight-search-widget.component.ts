@@ -109,6 +109,30 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.commonFunction.isRefferal()){
+      setTimeout(() => {
+        this.homeService.getSlideOffers.subscribe(currentSlide => {
+          if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+            let slide: any = currentSlide;
+            this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);
+            // console.log('ngOnChanges flight W',this.fromSearch)
+            this.toSearch = airports[slide.location.to.airport_code];
+          
+            this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
+            this.fromSearch['random'] = new Date();
+            this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+         
+            this.searchFlightInfo.departure = this.fromSearch.code;
+            this.flightSearchForm.controls.fromDestination.setValue('');
+            this.departureDate = moment().add(90, 'days').toDate();
+            if (this.isRoundTrip) {
+              this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
+              this.searchFlightInfo.arrival = this.toSearch.code;
+            }
+          }
+        })
+      }, 3000);
+    }
     // this.departureDate = moment(this.customStartDateValidation).toDate();
 
     if (new Date(this.customStartDateValidation) <= new Date()) {
@@ -179,7 +203,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     // console.log("widget changes",changes)
     //home page image slider
-    if(typeof changes['currentSlide'].currentValue!=='undefined'){
+    /* if(typeof changes['currentSlide'].currentValue!=='undefined'){
       if(this.commonFunction.isRefferal()){
         this.currentSlide=changes['currentSlide'].currentValue;
         this.fromSearch = Object.assign({},airports[this.currentSlide.location.from.airport_code]);
@@ -198,7 +222,7 @@ export class FlightSearchWidgetComponent implements OnInit {
           this.searchFlightInfo.arrival = this.toSearch.code;
         }
       }
-    }
+    } */
   }
 
 

@@ -10,14 +10,15 @@ exports.CarouselComponent = void 0;
 var animations_1 = require("@angular/animations");
 var core_1 = require("@angular/core");
 var CarouselComponent = /** @class */ (function () {
-    function CarouselComponent() {
+    function CarouselComponent(homeService) {
+        /* setInterval(( )=>{
+          this.onNextClick()
+        },4000) */
+        this.homeService = homeService;
         this.currentChangeCounter = 0;
         this.activeSlide = new core_1.EventEmitter();
         this.previousChangeCounter = 0;
         this.currentSlide = 0;
-        /* setInterval(( )=>{
-          this.onNextClick()
-        },4000) */
         this.activityWatcher();
     }
     CarouselComponent.prototype.onPreviousClick = function () {

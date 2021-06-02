@@ -121,12 +121,21 @@ export class HomeComponent implements OnInit {
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
+    this.currentSlide = this.slides[0];
+
+    this.homeService.setOffersData(this.currentSlide);
+
+    /* this.homeService.getSlideOffers.subscribe(sliders => {
+      if (typeof sliders != 'undefined' && Object.keys(sliders).length > 0) {
+        let keys: any = sliders;
+        console.log(keys)
+      }
+    }) */
   }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.host = window.location.host;
-    this.currentSlide = this.slides[0];
     this.getModules();
     this.loadJquery();
     localStorage.removeItem('__from');
@@ -149,6 +158,7 @@ export class HomeComponent implements OnInit {
     });
     //get deal with module id and also with active tab
     this.getDeal(this.moduleId);
+    
     this.$tabName.unsubscribe();
     this.homeService.setActiveTab('');
     this.homeService.getActiveTabName.subscribe(tabName=> {
@@ -307,7 +317,11 @@ export class HomeComponent implements OnInit {
   }
   activeSlide(activeSlide){
     this.currentSlide=this.slides[activeSlide]
+    this.homeService.setOffersData(this.currentSlide);
+    this.clickOnTab('hotel');
+    $('#nav-hotel').trigger('click');
   }
+
   getCurrentChangeCounter(event){
     this.currentChangeCounter = event; 
   }

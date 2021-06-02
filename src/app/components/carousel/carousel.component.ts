@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChange } from '@angular/core';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'carousel',
@@ -26,12 +27,14 @@ export class CarouselComponent {
 
   currentSlide = 0;
 
-  constructor() {
+  constructor(public homeService:HomeService) {
 
     /* setInterval(( )=>{
       this.onNextClick()
     },4000) */
+
     this.activityWatcher();
+
   }
 
   onPreviousClick() {
