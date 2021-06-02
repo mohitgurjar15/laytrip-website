@@ -286,6 +286,9 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.currentChangeCounter.emit(this.counterChangeVal += 1);
         this.validSearch = event;
     };
+    HotelSearchWidgetComponent.prototype.inputChangingCounter = function (event) {
+        this.currentChangeCounter.emit(event);
+    };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)
     ], HotelSearchWidgetComponent.prototype, "dateFilter");

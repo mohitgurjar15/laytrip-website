@@ -40,6 +40,7 @@ var CarouselComponent = /** @class */ (function () {
         //every second. 1000 milliseconds = 1 second.
         var self = this;
         setInterval(function () {
+            // console.log(self.currentChangeCounter,self.previousChangeCounter)
             if (self.currentChangeCounter != self.previousChangeCounter) {
                 secondsSinceLastActivity = 0;
                 self.previousChangeCounter = self.currentChangeCounter;

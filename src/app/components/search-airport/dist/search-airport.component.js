@@ -103,12 +103,12 @@ var SearchAirportComponent = /** @class */ (function () {
         }
     };
     SearchAirportComponent.prototype.ngOnChanges = function (changes) {
+        console.log("changes search-air", changes);
         if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
             this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : '';
             this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([], [changes['airport'].currentValue]) : [];
-            // this.cd.checkNoChanges()
         }
-        console.log(this.inputName, this.data);
+        // console.log(this.inputName,this.data)
         /*     if(this.inputName == 'toSearch'){
               
         

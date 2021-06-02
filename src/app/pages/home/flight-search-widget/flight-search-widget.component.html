@@ -117,6 +117,7 @@
                                         [ngModelOptions]="{standalone: true}" flightDepartureMinDate
                                         [minDate]="flightDepartureMinDate" (onSelect)=selectDepartureDate($event)
                                         [readonlyInput]="true" (onMonthChange)="changeMonth($event)"
+                                        (onShow)="datePickerShow($event)"
                                         panelStyleClass="calender-responsive-view laytrip-cal-view"
                                         [readonlyInput]="true">
                                         <p-header class="calender-header" *ngIf="calPrices">
@@ -142,7 +143,7 @@
                                     <p-calendar *ngIf="isRoundTrip" dateFormat="M d, yy" #dateFilter inputId="range"
                                         selectionMode="range" [(ngModel)]="rangeDates"
                                         [ngModelOptions]="{standalone: true}" flightDepartureMinDate
-                                        [minDate]="flightDepartureMinDate"
+                                        [minDate]="flightDepartureMinDate" (onShow)="datePickerShow($event)"
                                         panelStyleClass="calender-responsive-view laytrip-cal-view round_trip_calender"
                                         [numberOfMonths]="2" (onSelect)=selectReturnDateUpdate($event) [readonlyInput]="true">
 

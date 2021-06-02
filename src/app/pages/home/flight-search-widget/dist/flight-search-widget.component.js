@@ -56,6 +56,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.showFromAirportSuggestion = false;
         this.showToAirportSuggestion = false;
         this.thisElementClicked = false;
+        this.counterChangeVal = 0;
         this.searchFlightInfo = {
             trip: 'oneway',
             departure: this.fromSearch.code,
@@ -69,7 +70,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         };
         this.searchedValue = [];
         this.searchedFlightData = [];
-        this.counterChangeVal = 0;
         if (typeof this.fromSearch.city != 'undefined') {
             this.fromSearch['display_name'] = this.fromSearch.city + "," + this.fromSearch.country + ",(" + this.fromSearch.code + ")," + this.fromSearch.name;
             this.toSearch['display_name'] = this.toSearch.city + "," + this.toSearch.country + ",(" + this.toSearch.code + ")," + this.toSearch.name;
@@ -86,9 +86,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.rangeDates = [this.departureDate, this.returnDate];
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.fromSearch = Object.assign({}, airports_1.airports[this.currentSlide.location.from.airport_code]);
         // this.departureDate = moment(this.customStartDateValidation).toDate();
+        var _this = this;
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.departureDate = moment().add('31', 'days').toDate();
         }
@@ -150,15 +149,17 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
+        // console.log("widget changes",changes)
         //home page image slider
         if (typeof changes['currentSlide'].currentValue !== 'undefined') {
             if (this.commonFunction.isRefferal()) {
                 this.currentSlide = changes['currentSlide'].currentValue;
-                // this.fromSearch = airports[this.currentSlide.location.from.airport_code];
-                // this.fromSearch = {};
                 this.fromSearch = Object.assign({}, airports_1.airports[this.currentSlide.location.from.airport_code]);
                 // console.log('ngOnChanges flight W',this.fromSearch)
                 this.toSearch = airports_1.airports[this.currentSlide.location.to.airport_code];
+                this.fromSearch['display_name'] = this.fromSearch.city + "," + this.fromSearch.country + ",(" + this.fromSearch.code + ")," + this.fromSearch.name;
+                this.fromSearch['random'] = new Date();
+                this.toSearch['display_name'] = this.toSearch.city + "," + this.toSearch.country + ",(" + this.toSearch.code + ")," + this.toSearch.name;
                 this.searchFlightInfo.departure = this.fromSearch.code;
                 this.flightSearchForm.controls.fromDestination.setValue('');
                 this.departureDate = moment().add(90, 'days').toDate();
@@ -259,6 +260,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.departureDate = moment(date).toDate();
         this.returnDate = new Date(date);
         this.flightReturnMinDate = new Date(date);
+        //for stop landing slider 
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
     };
     FlightSearchWidgetComponent.prototype.swapAirport = function () {
         var temp = this.searchFlightInfo.departure;
@@ -274,7 +277,11 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             localStorage.setItem('__to', this.toSearch.code);
         }
     };
+    FlightSearchWidgetComponent.prototype.datePickerShow = function (event) {
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
+    };
     FlightSearchWidgetComponent.prototype.selectReturnDateUpdate = function (date) {
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
         // this is only for closing date range picker, after selecting both dates
         if (this.rangeDates[1]) { // If second date is selected
             this.dateFilter.hideOverlay();

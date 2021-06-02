@@ -61,6 +61,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   showFromAirportSuggestion: boolean = false;
   showToAirportSuggestion: boolean = false;
   thisElementClicked: boolean = false;
+  counterChangeVal :number = 0;
 
   searchFlightInfo =
     {
@@ -108,7 +109,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fromSearch = Object.assign({},airports[this.currentSlide.location.from.airport_code]);
     // this.departureDate = moment(this.customStartDateValidation).toDate();
 
     if (new Date(this.customStartDateValidation) <= new Date()) {
@@ -177,16 +177,19 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    // console.log("widget changes",changes)
     //home page image slider
     if(typeof changes['currentSlide'].currentValue!=='undefined'){
       if(this.commonFunction.isRefferal()){
         this.currentSlide=changes['currentSlide'].currentValue;
-        
-        // this.fromSearch = airports[this.currentSlide.location.from.airport_code];
-        // this.fromSearch = {};
         this.fromSearch = Object.assign({},airports[this.currentSlide.location.from.airport_code]);
         // console.log('ngOnChanges flight W',this.fromSearch)
         this.toSearch = airports[this.currentSlide.location.to.airport_code];
+      
+        this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
+        this.fromSearch['random'] = new Date();
+        this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+     
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.flightSearchForm.controls.fromDestination.setValue('');
         this.departureDate = moment().add(90, 'days').toDate();
@@ -301,6 +304,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.departureDate = moment(date).toDate();
     this.returnDate = new Date(date);
     this.flightReturnMinDate = new Date(date);
+    //for stop landing slider 
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
   }
 
 
@@ -322,8 +327,12 @@ export class FlightSearchWidgetComponent implements OnInit {
       localStorage.setItem('__to', this.toSearch.code)
     }
   }
-
+  datePickerShow(event){
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
+  }
   selectReturnDateUpdate(date) {
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
+
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay(); 
@@ -570,7 +579,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.searchFlightInfo.arrival = this.toSearch.code;
   }
 
-  counterChangeVal :number = 0;
   getflightSearchRoutes(event){   
     this.showFromAirportSuggestion = true;
     this.searchedFlightData = event; 

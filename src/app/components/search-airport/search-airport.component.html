@@ -7,7 +7,7 @@
         [tabIndex]="tabIndex" [clearSearchOnAdd]="true" [clearOnBackspace]="true" [hideSelected]="false"
         [searchable]="true">
         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-            <div [ngClass]="(item.parentId==0)?'parent':'child'">
+            <div  [ngClass]="(item.parentId==0)?'parent':'child'">
                 {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
             </div>
         </ng-template>

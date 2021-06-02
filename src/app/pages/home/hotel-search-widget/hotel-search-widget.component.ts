@@ -320,4 +320,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.currentChangeCounter.emit(this.counterChangeVal += 1);
     this.validSearch = event;
   }
+
+  inputChangingCounter(event){
+    this.currentChangeCounter.emit(event)
+  }
 }

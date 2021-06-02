@@ -15,6 +15,7 @@ var HotelSuggestionComponent = /** @class */ (function () {
         this.homeService = homeService;
         this.selectedHotel = new core_1.EventEmitter();
         this.validateSearch = new core_1.EventEmitter();
+        this.currentChangeCounter = new core_1.EventEmitter();
         this.isValidSearch = true;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
@@ -22,6 +23,7 @@ var HotelSuggestionComponent = /** @class */ (function () {
         this.defaultTempData = [];
         this.isShowDropDown = false;
         this.thisElementClicked = false;
+        this.counter = 0;
     }
     HotelSuggestionComponent.prototype.ngOnInit = function () {
         this.defaultTempData[0] = this.defaultItem;
@@ -109,6 +111,8 @@ var HotelSuggestionComponent = /** @class */ (function () {
         this.thisElementClicked = false;
     };
     HotelSuggestionComponent.prototype.clickInside = function () {
+        this.counter += 1;
+        this.currentChangeCounter.emit(this.counter);
         this.isShowDropDown = true;
     };
     __decorate([
@@ -117,6 +121,9 @@ var HotelSuggestionComponent = /** @class */ (function () {
     __decorate([
         core_1.Output()
     ], HotelSuggestionComponent.prototype, "validateSearch");
+    __decorate([
+        core_1.Output()
+    ], HotelSuggestionComponent.prototype, "currentChangeCounter");
     __decorate([
         core_1.Input()
     ], HotelSuggestionComponent.prototype, "searchItem");

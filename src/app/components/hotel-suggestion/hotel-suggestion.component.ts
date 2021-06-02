@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, HostListener } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, HostListener, ViewChild } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { HotelService } from '../../services/hotel.service';
 import { environment } from '../../../environments/environment';
@@ -12,6 +12,7 @@ export class HotelSuggestionComponent implements OnInit {
 
   @Output() selectedHotel = new EventEmitter();
   @Output() validateSearch = new EventEmitter();
+  @Output() currentChangeCounter = new EventEmitter();
   isValidSearch: boolean = true;
   s3BucketUrl = environment.s3BucketUrl;
   loading: boolean = false;
@@ -119,9 +120,14 @@ export class HotelSuggestionComponent implements OnInit {
     }
     this.thisElementClicked = false;
   }
-
+  counter =0;
   @HostListener('click')
-  clickInside() {
+  clickInside() {   
+    this.counter+=1;
+    this.currentChangeCounter.emit(this.counter);
     this.isShowDropDown = true;
   }
+  
+
+
 }
