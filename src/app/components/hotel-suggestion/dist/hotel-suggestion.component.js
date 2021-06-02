@@ -35,11 +35,7 @@ var HotelSuggestionComponent = /** @class */ (function () {
         });
     };
     HotelSuggestionComponent.prototype.searchLocation = function (event) {
-        //  console.log(this.searchItem.length,event.keyCode)
         var notAllowedKey = [40, 38, 9, 37, 39];
-        if (event.keyCode == 8) {
-            // this.searchHotelAfterBackspace(this.searchItem, 'backspace');
-        }
         if ((this.searchItem.length == 0 && event.keyCode == 8)) {
             this.data = [];
             this.loading = false;
@@ -56,8 +52,14 @@ var HotelSuggestionComponent = /** @class */ (function () {
             if (this.loading) {
                 this.$autoComplete.unsubscribe();
             }
-            this.searchHotel(this.searchItem);
-            this.validateSearch.emit(false);
+            if (event.keyCode == 8) {
+                var item = this.searchItem.split(',');
+                this.searchHotel(item[0]);
+            }
+            else {
+                this.searchHotel(this.searchItem);
+                this.validateSearch.emit(false);
+            }
         }
         else {
             this.loading = false;
@@ -65,7 +67,6 @@ var HotelSuggestionComponent = /** @class */ (function () {
     };
     HotelSuggestionComponent.prototype.searchHotel = function (searchItem) {
         var _this = this;
-        // searchItem = this.searchHotelAfterBackspace(searchItem, 'backspace');
         this.loading = true;
         var searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
         this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe(function (response) {
@@ -93,26 +94,6 @@ var HotelSuggestionComponent = /** @class */ (function () {
             _this.loading = false;
             _this.isShowDropDown = false;
         });
-    };
-    HotelSuggestionComponent.prototype.searchHotelAfterBackspace = function (searchItem, keyboardEvent) {
-        if (keyboardEvent === void 0) { keyboardEvent = ''; }
-        if (keyboardEvent === 'backspace') {
-            var tempData = [{
-                    city: searchItem,
-                    country: '',
-                    hotel_id: '',
-                    title: searchItem,
-                    type: 'city',
-                    geo_codes: {},
-                    city_id: '',
-                    objType: 'invalid'
-                }];
-            this.selectedHotel.emit(tempData[0]);
-            searchItem = this.defaultItem.title;
-            this.validateSearch.emit(true);
-            console.log("searchItem3", searchItem);
-            return searchItem;
-        }
     };
     HotelSuggestionComponent.prototype.selectHotelItem = function (item) {
         this.isShowDropDown = false;

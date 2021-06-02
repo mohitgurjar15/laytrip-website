@@ -19,7 +19,6 @@
     }
   }
 }
-
 .child_scrollbox {
   .ng-scrollbar-layout {
     .ng-scrollbar-layout {
@@ -5872,4 +5871,11 @@ body {
 
 .red_underline {
   border-color: $error-color !important;
+}
+
+ngx-otp-input {
+  .inputStyles {
+    width: 64px !important;
+    height: 64px !important;
+  }
 }

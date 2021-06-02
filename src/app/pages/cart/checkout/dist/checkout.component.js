@@ -636,6 +636,12 @@ var CheckoutComponent = /** @class */ (function () {
     CheckoutComponent.prototype.redeemableLayCredit = function (event) {
         this.redeemableLayPoints = event;
     };
+    CheckoutComponent.prototype.selectCreditCard = function (data) {
+        this.cardToken = data;
+        this.cookieService.put("__cc", this.cardToken);
+        this.validationErrorMessage = '';
+        this.validateCartItems();
+    };
     __decorate([
         core_1.ViewChild(add_card_component_1.AddCardComponent, { static: false })
     ], CheckoutComponent.prototype, "addCardRef");

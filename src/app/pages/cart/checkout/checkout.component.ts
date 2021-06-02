@@ -719,4 +719,12 @@ export class CheckoutComponent implements OnInit {
   redeemableLayCredit(event) {
     this.redeemableLayPoints = event;
   }
+
+  selectCreditCard(data) {
+    this.cardToken = data;
+    this.cookieService.put("__cc", this.cardToken);
+    this.validationErrorMessage = '';
+    this.validateCartItems();
+  }
+
 }
