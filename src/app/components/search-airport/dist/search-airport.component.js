@@ -10,12 +10,14 @@ exports.SearchAirportComponent = void 0;
 var core_1 = require("@angular/core");
 // import { data } from './airport';
 var SearchAirportComponent = /** @class */ (function () {
-    function SearchAirportComponent(flightService, cd, cookieService) {
+    function SearchAirportComponent(flightService, cd, cookieService, homeService) {
         this.flightService = flightService;
         this.cd = cd;
         this.cookieService = cookieService;
+        this.homeService = homeService;
         this.changeValue = new core_1.EventEmitter();
         this.searchItem = new core_1.EventEmitter();
+        this.flightSearchRoute = new core_1.EventEmitter();
         this.selectedAirport = {};
         this.keyword = 'name';
         this.data = [];
@@ -39,9 +41,10 @@ var SearchAirportComponent = /** @class */ (function () {
             alternateLocation = localStorage.getItem('__from') || '';
         }
         this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe(function (response) {
+            _this.flightSearchRoute.emit(response);
             _this.data = response.map(function (res) {
                 _this.loading = false;
-                return {
+                var searchRoute = {
                     id: res.id,
                     name: res.name,
                     code: res.code,
@@ -50,6 +53,7 @@ var SearchAirportComponent = /** @class */ (function () {
                     display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
                     parentId: 0
                 };
+                return searchRoute;
             });
         }, function (error) {
             _this.loading = false;
@@ -57,8 +61,7 @@ var SearchAirportComponent = /** @class */ (function () {
     };
     SearchAirportComponent.prototype.onChangeSearch = function (event) {
         this.searchAirport(event.term);
-        console.log("event.term", event.term);
-        this.searchItem.emit({ key: event.term, type: this.id });
+        // this.searchItem.emit({key : event.term,type : this.id})
     };
     SearchAirportComponent.prototype.selectEvent = function (event, index) {
         if (!event) {
@@ -105,8 +108,18 @@ var SearchAirportComponent = /** @class */ (function () {
         if (changes['airport']) {
             this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];
             this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
-            //this.data=[];
         }
+        console.log(changes, this.inputName);
+        if (this.inputName == 'toSearch') {
+        }
+        /* this.homeService.getToString.subscribe(toSearchString => {
+          if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
+            this.data  = [];
+            this.data = [airports[toSearchString]]
+            this.defaultCity = airports[toSearchString].city
+            console.log(this.defaultCity)
+          }
+        }); */
     };
     __decorate([
         core_1.Input()
@@ -136,11 +149,17 @@ var SearchAirportComponent = /** @class */ (function () {
         core_1.Output()
     ], SearchAirportComponent.prototype, "searchItem");
     __decorate([
+        core_1.Output()
+    ], SearchAirportComponent.prototype, "flightSearchRoute");
+    __decorate([
         core_1.Input()
     ], SearchAirportComponent.prototype, "defaultCity");
     __decorate([
         core_1.Input()
     ], SearchAirportComponent.prototype, "airport");
+    __decorate([
+        core_1.Input()
+    ], SearchAirportComponent.prototype, "inputName");
     SearchAirportComponent = __decorate([
         core_1.Component({
             selector: 'app-search-airport',

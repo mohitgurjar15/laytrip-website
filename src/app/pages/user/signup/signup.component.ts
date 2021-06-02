@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ViewChild, Renderer2, SimpleChange } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
@@ -9,6 +9,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { TravelerService } from 'src/app/services/traveler.service';
+import { CheckOutService } from 'src/app/services/checkout.service';
+import { hostname } from 'os';
 
 declare var $: any;
 
@@ -46,6 +49,7 @@ export class SignupComponent implements OnInit {
     public renderer: Renderer2,
     public commonFunction: CommonFunction,
     private route: ActivatedRoute,
+    private checkOutService: CheckOutService,
   ) { }
 
   ngOnInit() {
@@ -61,8 +65,22 @@ export class SignupComponent implements OnInit {
       validators: MustMatch('password', 'confirm_password'),
     });
     this.isCaptchaValidated = false;
-  }
 
+  }
+  
+  getValue(){
+    if(this.commonFunction.isRefferal() && this.router.url.includes('/cart')){
+      this.checkOutService.getTravelers.subscribe((travelers: any) => {   
+        var traveler = travelers;
+        if(typeof traveler!= 'undefined' && traveler[0] ){
+          this.signupForm.controls.first_name.setValue(traveler[0].firstName ? traveler[0].firstName : '');
+          this.signupForm.controls.last_name.setValue(traveler[0].lastName ? traveler[0].lastName : '');
+          this.signupForm.controls.email.setValue(traveler[0].email ? traveler[0].email : '');
+          return;
+        }         
+      });
+    }
+  }
   openOtpPage() {
     Object.keys(this.signupForm.controls).forEach(key => {
       this.signupForm.get(key).markAsUntouched();

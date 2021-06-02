@@ -197,10 +197,10 @@ var HotelDetailComponent = /** @class */ (function () {
                         if (parms.utm_campaign) {
                             queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
                         }
-                        _this.router.navigate(['cart/booking'], { queryParams: queryParams });
+                        _this.router.navigate(['cart/checkout'], { queryParams: queryParams });
                     }
                     else {
-                        _this.router.navigate(['cart/booking']);
+                        _this.router.navigate(['cart/checkout']);
                     }
                 }
             }, function (error) {

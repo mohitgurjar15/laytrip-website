@@ -166,7 +166,7 @@
 
                 </div>
                 <div class="col-lg-9">
-                    <app-flight-price-slider *ngIf="dates && dates.length" [dates]="dates"
+                    <app-flight-price-slider  [dates]="dates" *ngIf="flightDetails.length > 0"
                         [flexibleLoading]="flexibleLoading">
                     </app-flight-price-slider>
                     <app-flight-item-wrapper (maxCartValidation)="maxCartValidation($event)"

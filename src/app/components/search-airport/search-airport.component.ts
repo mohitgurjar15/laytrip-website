@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, Afte
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
-import { type } from 'os';
+import { airports } from '../../pages/flight/airports';
+import { HomeService } from 'src/app/services/home.service';
 // import { data } from './airport';
 
 
@@ -21,14 +22,17 @@ export class SearchAirportComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
-  @Output() searchItem = new EventEmitter<any>();
+  @Output() searchItem : any = new EventEmitter<any>();
+  @Output() flightSearchRoute = new EventEmitter<any>();
   @Input() defaultCity: any;
   @Input() airport;
+  @Input() inputName;
 
   constructor(
     private flightService: FlightService,
     public cd: ChangeDetectorRef,
-    public cookieService: CookieService
+    public cookieService: CookieService,
+    private homeService: HomeService
   ) {
   }
 
@@ -58,9 +62,10 @@ export class SearchAirportComponent implements OnInit {
     }
 
     this.flightService.searchRoute(searchItem,isFromLocation,alternateLocation).subscribe((response: any) => {
+      this.flightSearchRoute.emit(response);
       this.data = response.map(res => {
         this.loading = false;
-        return {
+        var searchRoute = {
           id: res.id,
           name: res.name,
           code: res.code,
@@ -69,6 +74,8 @@ export class SearchAirportComponent implements OnInit {
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
           parentId: 0
         };
+        
+        return searchRoute;
       });
     },
       error => {
@@ -79,8 +86,7 @@ export class SearchAirportComponent implements OnInit {
 
   onChangeSearch(event) {
     this.searchAirport(event.term);
-    console.log("event.term",event.term)
-    this.searchItem.emit({key : event.term,type : this.id})
+    // this.searchItem.emit({key : event.term,type : this.id})
   }
 
   selectEvent(event, index) {
@@ -127,12 +133,23 @@ export class SearchAirportComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
     if (changes['airport']) {
       this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
       this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
-      //this.data=[];
     }
+    console.log(changes,this.inputName)
+    if(this.inputName == 'toSearch'){
+      
+
+    }
+    /* this.homeService.getToString.subscribe(toSearchString => {
+      if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
+        this.data  = [];
+        this.data = [airports[toSearchString]]
+        this.defaultCity = airports[toSearchString].city
+        console.log(this.defaultCity)      
+      }
+    }); */
   }
 
 }

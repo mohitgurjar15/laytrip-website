@@ -20,6 +20,9 @@ var CommonFunction = /** @class */ (function () {
     CommonFunction.prototype.closeModal = function (modelBox) {
         return modelBox = false;
     };
+    CommonFunction.prototype.onRightClickDisabled = function (event) {
+        event.preventDefault();
+    };
     CommonFunction.prototype.parseDateWithFormat = function (date) {
         if (date.departuredate) {
             return {
@@ -224,6 +227,7 @@ var CommonFunction = /** @class */ (function () {
         return moment(time, sourceFormat).format(targetFormat);
     };
     CommonFunction.prototype.isRefferal = function () {
+        // console.log("utm_source",this.route.snapshot.queryParams['utm_source'])
         if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
             return true;
         }

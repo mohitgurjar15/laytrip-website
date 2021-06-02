@@ -32,8 +32,8 @@
         </li>
        
     </ng-container>
-    <li class="add_cart_li">
-        <a href="#" class="cart_anch">
+    <li class="add_cart_li" *ngIf="totalCarts < 10">
+        <a (click)="saveAndSearch()"  class="cart_anch hover-link" >
             <span class="tab_round_wrps">
                 <span class="tab_imgs_wrps">
                     <img src="{{s3BucketUrl}}assets/images/plus-circle-round.svg" alt="Flight icon" />

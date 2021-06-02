@@ -116,13 +116,6 @@ var SigninComponent = /** @class */ (function () {
     SigninComponent.prototype.socialError = function (error) {
         this.apiError = error;
     };
-    SigninComponent.prototype.getTravelers = function () {
-        this.travelerService.getTravelers().subscribe(function (res) {
-            $('.signupfn').val(res.data[0].firstName ? res.data[0].firstName : '');
-            $('.signupln').val(res.data[0].lastName ? res.data[0].lastName : '');
-            $('.signupem').val(res.data[0].email ? res.data[0].email : '');
-        });
-    };
     SigninComponent.prototype.closeModal = function () {
         var _this = this;
         this.apiError = '';
@@ -135,7 +128,6 @@ var SigninComponent = /** @class */ (function () {
     };
     SigninComponent.prototype.btnSignUpClick = function () {
         var _this = this;
-        this.getTravelers();
         this.submitted = false;
         Object.keys(this.loginForm.controls).forEach(function (key) {
             _this.loginForm.get(key).markAsUntouched();

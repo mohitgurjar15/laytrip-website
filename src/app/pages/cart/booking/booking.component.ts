@@ -377,13 +377,9 @@ export class BookingComponent implements OnInit {
       return;
     }
     this.loading = true;
-
-
-    
-
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
-      this.redirectTo('/cart/booking');
+      this.redirectTo('/cart/checkout');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1);
@@ -415,51 +411,6 @@ export class BookingComponent implements OnInit {
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
       }
     });
-  }
-
-  saveAndSearch() {
-    this.ismaxCartAdded = false;
-    let totalCarts: any = localStorage.getItem('$crt');
-    if (totalCarts == 10) {
-      this.ismaxCartAdded = true;
-    } else {
-      if (this.commonFunction.isRefferal()) {
-        var parms = this.commonFunction.getRefferalParms();
-        var queryParams: any = {};
-        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-        if(parms.utm_medium){
-          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        }
-        if(parms.utm_campaign){
-          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
-        }
-        this.router.navigate(['/'], { queryParams:queryParams });
-      } else {
-        this.router.navigate(['/']);
-      }
-    }
-    return false;
-    this.validationErrorMessage = '';
-    if (this.isValidTravelers) {
-      this.loading = true;
-      for (let i = 0; i < this.carts.length; i++) {
-        let data = this.travelerForm.controls[`type${i}`].value.adults;
-        let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
-        let cartData = {
-          cart_id: this.carts[i].id,
-          travelers: travelers
-        }
-        this.cartService.updateCart(cartData).subscribe(data => {
-          if (i === this.carts.length - 1) {
-            this.loading = false;
-            this.router.navigate(['/'])
-          }
-        });
-      }
-    }
-    else {
-      this.validateCartItems();
-    }
   }
 
   selectCreditCard(data) {
@@ -671,7 +622,8 @@ export class BookingComponent implements OnInit {
   removeAllAlertError() {
     this.isAllAlertClosed = true;
   }
-  removeMaxCartAlertError() {
-    this.ismaxCartAdded = false;
+  
+  cartValueChanged(event) {
+    this.ismaxCartAdded = event;
   }
 }

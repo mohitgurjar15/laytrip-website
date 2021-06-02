@@ -202,7 +202,6 @@ var FlightItemWrapperComponent = /** @class */ (function () {
             //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
             this.cartService.addCartItem(payload).subscribe(function (res) {
                 _this.changeLoading.emit(true);
-                var queryParamsNew = {};
                 if (res) {
                     var newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] };
                     _this.cartItems = __spreadArrays(_this.cartItems, [newItem]);
@@ -218,10 +217,10 @@ var FlightItemWrapperComponent = /** @class */ (function () {
                         if (parms.utm_campaign) {
                             queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
                         }
-                        _this.router.navigate(['cart/booking'], { queryParams: queryParams });
+                        _this.router.navigate(['cart/checkout'], { queryParams: queryParams });
                     }
                     else {
-                        _this.router.navigate(['cart/booking']);
+                        _this.router.navigate(['cart/checkout']);
                     }
                 }
             }, function (error) {

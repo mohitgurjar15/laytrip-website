@@ -30,19 +30,19 @@ body #fc_frame {
   border-radius: 10px;
 }
 
-.modal_otp_block .modal-body .form_row .text_field ng-otp-input .ng-star-inserted {
+.modal_otp_block .modal-body .form_row .text_field ngx-otp-input .ng-star-inserted {
   width: 100%;
   min-height: auto !important;
   display: flex;
   justify-content: center;
 }
-.modal_otp_block .modal-body .form_row .text_field ng-otp-input .ng-star-inserted input {
+.modal_otp_block .modal-body .form_row .text_field ngx-otp-input .ng-star-inserted input {
   border-radius: 50%;
   font-size: 27px;
   color: #878787;
 }
 @media (max-width: 558px) {
-  .modal_otp_block .modal-body .form_row .text_field ng-otp-input .ng-star-inserted input {
+  .modal_otp_block .modal-body .form_row .text_field ngx-otp-input .ng-star-inserted input {
     width: 36px !important;
     height: 36px !important;
     margin: 0 4px;
@@ -54,19 +54,19 @@ body #fc_frame {
   border-radius: 10px;
 }
 
-.resetpass_modal_block .modal-body .form_row .text_field ng-otp-input .ng-star-inserted {
+.resetpass_modal_block .modal-body .form_row .text_field ngx-otp-input .ng-star-inserted {
   width: 100%;
   min-height: auto !important;
   display: flex;
   justify-content: center;
 }
-.resetpass_modal_block .modal-body .form_row .text_field ng-otp-input .ng-star-inserted input {
+.resetpass_modal_block .modal-body .form_row .text_field ngx-otp-input .ng-star-inserted input {
   border-radius: 50%;
   font-size: 27px;
   color: #878787;
 }
 @media (max-width: 558px) {
-  .resetpass_modal_block .modal-body .form_row .text_field ng-otp-input .ng-star-inserted input {
+  .resetpass_modal_block .modal-body .form_row .text_field ngx-otp-input .ng-star-inserted input {
     width: 36px !important;
     height: 36px !important;
     margin: 0 4px;

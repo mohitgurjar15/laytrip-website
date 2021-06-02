@@ -49,7 +49,7 @@
                             alt="Flight Icon">
                         <!-- <span>{{'hotel' | translate}}</span> -->
                     </a>
-                    <a *ngIf="!commonFunction.isRefferal()" class="nav-item nav-link " style="pointer-events: none;" id="nav-accommodation" data-toggle="tab"
+                    <a *ngIf="!isRefferal" class="nav-item nav-link " style="pointer-events: none;" id="nav-accommodation" data-toggle="tab"
                         href="#accommodation" role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
                             alt="Accommodation Icon" />
@@ -59,7 +59,7 @@
                             alt="Flight Icon">
                         <!-- <span>{{'home_rental' | translate}}</span> -->
                     </a>
-                    <a *ngIf="!commonFunction.isRefferal()" class="nav-item nav-link" style="pointer-events: none;" id="nav-accommodation" data-toggle="tab"
+                    <a *ngIf="!isRefferal" class="nav-item nav-link" style="pointer-events: none;" id="nav-accommodation" data-toggle="tab"
                         href="#Car" role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_blue.svg"
                             alt="car Icon" />

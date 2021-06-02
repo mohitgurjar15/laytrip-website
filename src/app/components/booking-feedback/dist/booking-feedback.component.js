@@ -28,7 +28,7 @@ var BookingFeedbackComponent = /** @class */ (function () {
     BookingFeedbackComponent.prototype.ngOnInit = function () {
         this.feedbackForm = this.formBuilder.group({
             rating: [''],
-            comment: ['', this.commonFunction.isRefferal() ? forms_1.Validators.required : '']
+            comment: ['', !this.commonFunction.isRefferal() ? forms_1.Validators.required : '']
         });
         this.bookingId = this.route.snapshot.paramMap.get('id');
     };

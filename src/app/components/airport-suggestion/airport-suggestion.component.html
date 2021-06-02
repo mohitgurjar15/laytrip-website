@@ -1,4 +1,4 @@
-<div class="search_suggetion_main" >
+<div class="search_suggetion_main"  *ngIf="data.length > 0" > 
     <div class="close_btn">
         <button (click)="closeAirportDropDown(type)" type="button" class="close">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
