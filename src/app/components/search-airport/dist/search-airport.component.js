@@ -104,11 +104,24 @@ var SearchAirportComponent = /** @class */ (function () {
         }
     };
     SearchAirportComponent.prototype.ngOnChanges = function (changes) {
-        if (changes['airport']) {
-            this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];
-            this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
-            //this.data=[];
+        if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
+            this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : '';
+            this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue].slice() : [];
+            // this.cd.detectChanges();
+            console.log(this.inputName, this.data, this.defaultCity);
         }
+        /*     if(this.inputName == 'toSearch'){
+              
+        
+            }
+         */ /* this.homeService.getToString.subscribe(toSearchString => {
+             if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
+               this.data  = [];
+               this.data = [airports[toSearchString]]
+               this.defaultCity = airports[toSearchString].city
+               console.log(this.defaultCity)
+             }
+           }); */
     };
     __decorate([
         core_1.Input()
@@ -146,6 +159,9 @@ var SearchAirportComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], SearchAirportComponent.prototype, "airport");
+    __decorate([
+        core_1.Input()
+    ], SearchAirportComponent.prototype, "inputName");
     SearchAirportComponent = __decorate([
         core_1.Component({
             selector: 'app-search-airport',

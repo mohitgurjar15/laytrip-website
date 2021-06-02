@@ -177,14 +177,19 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes",changes)
+    //home page image slider
     if(typeof changes['currentSlide'].currentValue!=='undefined'){
       if(this.commonFunction.isRefferal()){
         this.currentSlide=changes['currentSlide'].currentValue;
-        this.fromSearch = airports[this.currentSlide.location.from.airport_code];
+        
+        // this.fromSearch = airports[this.currentSlide.location.from.airport_code];
+        // this.fromSearch = {};
+        this.fromSearch = Object.assign({},airports[this.currentSlide.location.from.airport_code]);
+
+        // console.log('ngOnChanges flight W',this.fromSearch)
         this.toSearch = airports[this.currentSlide.location.to.airport_code];
+        this.searchFlightInfo.departure = this.fromSearch.code;
         this.flightSearchForm.controls.fromDestination.setValue('');
-        this.fromSearch = [];
         this.departureDate = moment().add(90, 'days').toDate();
         if (this.isRoundTrip) {
           this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
@@ -222,6 +227,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
 
   destinationChangedValue(event) {
+    console.log('here')
     if (event && event.key && event.key === 'fromSearch') {
       this.fromSearch = event.value;
       this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });
@@ -321,13 +327,13 @@ export class FlightSearchWidgetComponent implements OnInit {
   selectReturnDateUpdate(date) {
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
-      this.dateFilter.hideOverlay();
+      this.dateFilter.hideOverlay(); 
     };
     if (this.rangeDates[0] && this.rangeDates[1]) {
-      let daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
+      // let daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
       this.returnDate = this.rangeDates[1];
       this.departureDate = this.rangeDates[0];
-      if (daysDiff == 0) {
+      if (!moment(this.rangeDates[1]).isAfter(moment(this.rangeDates[0]))) {
         this.returnDate = moment(this.rangeDates[0]).add(7, 'days').toDate();
       }
       // this.flightDepartureMinDate = this.rangeDates[0];
@@ -569,6 +575,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.showFromAirportSuggestion = true;
     this.searchedFlightData = event; 
     this.routeSearch = true; 
+    console.log('sd')
   }
   getflightToSearchRoutes(event){   
     this.showToAirportSuggestion = true;

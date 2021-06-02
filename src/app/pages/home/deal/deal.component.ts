@@ -1,5 +1,4 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { HomeService } from '../../../services/home.service';
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
 
@@ -43,15 +42,15 @@ export class DealComponent implements OnInit {
   list = [];
   list2 = [];
   breakpoints = {
-    320: { slidesPerView: 1, spaceBetween: 10 ,slidesPerGroup: 9},
-    520: { slidesPerView: 2, spaceBetween: 10,slidesPerGroup: 5 },
-    768: { slidesPerView: 3, spaceBetween: 40,slidesPerGroup: 3 },
-    1024: { slidesPerView: 3, spaceBetween: 40 ,slidesPerGroup: 3}
+    320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup:1 },
+    520: { slidesPerView: 2, spaceBetween: 10 ,slidesPerGroup:2},
+    640: { slidesPerView: 3, spaceBetween: 20 ,slidesPerGroup:3},
+    768: { slidesPerView: 3, spaceBetween: 40 ,slidesPerGroup:3},
+    1024: { slidesPerView: 3, spaceBetween: 30 ,slidesPerGroup:3}
   };
-  slidesPerGroup=3;
+
   constructor(
-    private homeService : HomeService,
-    private commonFunction : CommonFunction
+    public commonFunction : CommonFunction
   ) {}
 
   ngOnInit() {
@@ -63,9 +62,8 @@ export class DealComponent implements OnInit {
   }
 
   btnDealClick(item){
-  
     window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-    this.toString.emit(item.title ? item :item.code  );  
+    this.toString.emit(item.title ? item : item.code  );  
   }
 
 
@@ -74,14 +72,15 @@ export class DealComponent implements OnInit {
     this.thumbsSwiper = swiper;
   }
   breakPointsToggle: boolean;
-  breakpointChange() {
+ /*  breakpointChange() {
     this.breakPointsToggle = !this.breakPointsToggle;
     this.breakpoints = {
-      320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup: 9 },
-      520: { slidesPerView: 2, spaceBetween: 10,slidesPerGroup: 5 },
-      768: {slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 },
-      1024: { slidesPerView: this.breakPointsToggle ? 3 : 5, spaceBetween: 40,slidesPerGroup: 3 }
+      320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup:1 },
+      520: { slidesPerView: 2, spaceBetween: 10 ,slidesPerGroup:3},
+      640: {slidesPerView: 3, spaceBetween: 40,slidesPerGroup:3 },
+      768: {slidesPerView: 3, spaceBetween: 40,slidesPerGroup:3},
+      1024: { slidesPerView: this.breakPointsToggle ? 3 : 5, spaceBetween: 40 ,slidesPerGroup:3}
     };
-  } 
+  }  */
 
 }

@@ -28,7 +28,7 @@ export class MainFooterComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
     public translate: TranslateService,
-    private commonFunction: CommonFunction,
+    public commonFunction: CommonFunction,
     private renderer: Renderer2,
     private genericService: GenericService,
     public route :ActivatedRoute
