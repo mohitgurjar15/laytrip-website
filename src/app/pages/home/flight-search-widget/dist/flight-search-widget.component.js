@@ -30,6 +30,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.flightService = flightService;
         this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.currentChangeCounter = new core_1.EventEmitter();
         this.moduleList = {};
         this.calenderPrices = [];
         this.switchBtnValue = false;
@@ -68,6 +69,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         };
         this.searchedValue = [];
         this.searchedFlightData = [];
+        this.counterChangeVal = 0;
         if (typeof this.fromSearch.city != 'undefined') {
             this.fromSearch['display_name'] = this.fromSearch.city + "," + this.fromSearch.country + ",(" + this.fromSearch.code + ")," + this.fromSearch.name;
             this.toSearch['display_name'] = this.toSearch.city + "," + this.toSearch.country + ",(" + this.toSearch.code + ")," + this.toSearch.name;
@@ -494,7 +496,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.showFromAirportSuggestion = true;
         this.searchedFlightData = event;
         this.routeSearch = true;
-        console.log('sd');
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
     };
     FlightSearchWidgetComponent.prototype.getflightToSearchRoutes = function (event) {
         this.showToAirportSuggestion = true;
@@ -504,6 +506,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)
     ], FlightSearchWidgetComponent.prototype, "dateFilter");
+    __decorate([
+        core_1.Output()
+    ], FlightSearchWidgetComponent.prototype, "currentChangeCounter");
     __decorate([
         core_1.Input()
     ], FlightSearchWidgetComponent.prototype, "calenderPrices");

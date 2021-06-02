@@ -104,7 +104,6 @@ export class CarouselComponent {
   }
 
   ngOnChanges(change:SimpleChange){
-    console.log(change)
     if(typeof change['currentChangeCounter'].currentValue!='undefined'){
       this.currentChangeCounter=change['currentChangeCounter'].currentValue;
       this.previousChangeCounter=change['currentChangeCounter'].previousValue;

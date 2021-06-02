@@ -20,6 +20,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.homeService = homeService;
         this.cd = cd;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.currentChangeCounter = new core_1.EventEmitter();
         this.checkInDate = new Date();
         this.checkOutDate = new Date();
         this.maxDate = {};
@@ -62,6 +63,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.showCommingSoon = false;
         this.customStartDateValidation = "2021-06-02";
         this.customEndDateValidation = "2021-06-03";
+        this.counterChangeVal = 0;
         this.hotelSearchForm = this.fb.group({
             fromDestination: ['', [forms_1.Validators.required]]
         });
@@ -281,6 +283,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         // console.log(this.searchHotelInfo,event)
     };
     HotelSearchWidgetComponent.prototype.validateSearch = function (event) {
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
         this.validSearch = event;
     };
     __decorate([
@@ -289,6 +292,9 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], HotelSearchWidgetComponent.prototype, "currentSlide");
+    __decorate([
+        core_1.Output()
+    ], HotelSearchWidgetComponent.prototype, "currentChangeCounter");
     HotelSearchWidgetComponent = __decorate([
         core_1.Component({
             selector: 'app-hotel-search-widget',

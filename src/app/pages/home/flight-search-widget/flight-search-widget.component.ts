@@ -1,5 +1,4 @@
-import { Component, HostListener, Input, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
-declare var $: any;
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Module } from '../../../model/module.model';
 import { environment } from '../../../../environments/environment';
@@ -10,7 +9,6 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { HomeService } from '../../../services/home.service';
-import { cookieServiceFactory } from 'ngx-cookie';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -22,6 +20,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @ViewChild('dateFilter', /* TODO: add static flag */ undefined) private dateFilter: any;
   rangeDates: Date[];
+  @Output() currentChangeCounter = new EventEmitter();
   modules: Module[];
   moduleList: any = {};
   @Input() calenderPrices: any = [];
@@ -571,11 +570,13 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.searchFlightInfo.arrival = this.toSearch.code;
   }
 
+  counterChangeVal :number = 0;
   getflightSearchRoutes(event){   
     this.showFromAirportSuggestion = true;
     this.searchedFlightData = event; 
     this.routeSearch = true; 
-    console.log('sd')
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
+
   }
   getflightToSearchRoutes(event){   
     this.showToAirportSuggestion = true;

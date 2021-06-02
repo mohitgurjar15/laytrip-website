@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   host:string='';
   $tabName;
   currentSlide;
-
+  currentChangeCounter;
   public slides = [
     { 
       src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/184974934.jpg?k=17803467e2d7dec840e47eccb1c9595f3b8890a51288e728188831acc4378f5d&o=",
@@ -309,6 +309,9 @@ export class HomeComponent implements OnInit {
   }
   activeSlide(activeSlide){
     this.currentSlide=this.slides[activeSlide]
+  }
+  getCurrentChangeCounter(event){
+    this.currentChangeCounter = event; 
   }
 
 

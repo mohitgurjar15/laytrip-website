@@ -54,7 +54,7 @@ export class HotelSuggestionComponent implements OnInit {
       //this.selectedHotel.emit({})
       this.validateSearch.emit(false);
       return;
-    }
+    } 
 
     if (!notAllowedKey.includes(event.keyCode)) {
       this.isShowDropDown = this.searchItem.length > 0 ? true : false;

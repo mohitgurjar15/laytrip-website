@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, Output, SimpleChanges, ViewChild ,EventEmitter} from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
@@ -18,6 +18,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Input() currentSlide;
   countryCode: string;
+  @Output() currentChangeCounter = new EventEmitter();
   checkInDate = new Date();
   checkOutDate: any = new Date();
   rangeDates: Date[];
@@ -314,7 +315,9 @@ export class HotelSearchWidgetComponent implements OnInit {
     // console.log(this.searchHotelInfo,event)
   }
 
-  validateSearch(event) {
+  counterChangeVal :number = 0;
+  validateSearch(event) {    
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
     this.validSearch = event;
   }
 }

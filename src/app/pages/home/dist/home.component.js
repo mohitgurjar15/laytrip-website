@@ -277,6 +277,9 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.activeSlide = function (activeSlide) {
         this.currentSlide = this.slides[activeSlide];
     };
+    HomeComponent.prototype.getCurrentChangeCounter = function (event) {
+        this.currentChangeCounter = event;
+    };
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'app-home',
