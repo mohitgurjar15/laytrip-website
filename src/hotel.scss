@@ -7242,8 +7242,13 @@ agm-map {
         background-size: 20px;
         width: auto;
         height: 20px;
+        opacity: 0;
+        transition: 1s;
         &::after {
             content: none;
+        }
+        &:hover {
+            opacity: 1;
         }
     }
 
@@ -7255,8 +7260,13 @@ agm-map {
         background-size: 20px;
         width: auto;
         height: 20px;
+        opacity: 0;
+        transition: 1s;
         &::after {
             content: none;
+        }
+        &:hover {
+            opacity: 1;
         }
     }
     .swiper-pagination{
