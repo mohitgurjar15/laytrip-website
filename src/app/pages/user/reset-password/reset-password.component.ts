@@ -8,6 +8,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { MustMatch } from '../../../_helpers/must-match.validators';
 import { optValidation } from '../../../_helpers/custom.validators';
 import { CountdownComponent } from 'ngx-countdown';
+import { NgxOtpInputConfig } from 'ngx-otp-input';
 
 declare var $: any;
 
@@ -37,15 +38,24 @@ export class ResetPasswordComponent implements OnInit {
   passFieldTextType: boolean;
   isResend: boolean = false;
   otp: number = 0;
-  config = {
-    allowNumbersOnly: true,
-    length: 6,
+  // config = {
+  //   allowNumbersOnly: true,
+  //   length: 6,
+  //   isPasswordInput: false,
+  //   disableAutoFocus: false,
+  //   placeholder: '',
+  //   inputStyles: {
+  //     'width': '64px',
+  //     'height': '64px'
+  //   }
+  // };
+  config: NgxOtpInputConfig = {
+    otpLength: 6,
+    autofocus: false,
+    numericInputMode: true,
     isPasswordInput: false,
-    disableAutoFocus: false,
-    placeholder: '',
-    inputStyles: {
-      'width': '64px',
-      'height': '64px'
+    classList: {
+      input: 'inputStyles'
     }
   };
   configCountDown: any = { leftTime: 60, demand: false };

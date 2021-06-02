@@ -20,7 +20,8 @@
         <form [formGroup]="otpForm" *ngIf="!otpVerified">
             <div class="form_row">
                 <div class="text_field">
-                    <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+                    <ngx-otp-input #ngOtpInput (otpChange)="onOtpChange($event)" [config]="config"></ngx-otp-input>
+                    <!-- <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input> -->
                     <div
                         *ngIf="otpLengthError || otpForm.hasError('otpsError') && ( otpForm.controls.otp.touched || submitted)">
                         <p class="error_text">{{'otp_touched_validation' | translate}}</p>
