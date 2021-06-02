@@ -19,7 +19,6 @@ export class AirportSuggestionComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   loading:boolean=false;
   isType = false;
-  dataa;
   
   constructor(
     private flightService: FlightService,
@@ -35,7 +34,6 @@ export class AirportSuggestionComponent implements OnInit {
   
   
   ngOnChanges(changes: SimpleChanges) {
-   
     this.data=[];
     if(changes['searchedFlightData']){
       this.loading=this.isType = false;

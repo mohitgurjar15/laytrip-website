@@ -109,6 +109,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fromSearch = Object.assign({},airports[this.currentSlide.location.from.airport_code]);
     // this.departureDate = moment(this.customStartDateValidation).toDate();
 
     if (new Date(this.customStartDateValidation) <= new Date()) {
@@ -185,7 +186,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         // this.fromSearch = airports[this.currentSlide.location.from.airport_code];
         // this.fromSearch = {};
         this.fromSearch = Object.assign({},airports[this.currentSlide.location.from.airport_code]);
-
         // console.log('ngOnChanges flight W',this.fromSearch)
         this.toSearch = airports[this.currentSlide.location.to.airport_code];
         this.searchFlightInfo.departure = this.fromSearch.code;

@@ -41,7 +41,6 @@ export class SearchAirportComponent implements OnInit {
   loading = false;
 
   ngOnInit() {
-
     this.data[0] = this.airport ? this.airport : [];
     if(Object.keys(this.airport).length==0){
       this.data=[];
@@ -49,7 +48,6 @@ export class SearchAirportComponent implements OnInit {
   }
 
   searchAirport(searchItem) {
-    
     this.loading = true;
     let isFromLocation=this.id=='fromSearch'?'yes':'no';
     let alternateLocation='';
@@ -110,7 +108,6 @@ export class SearchAirportComponent implements OnInit {
   }
 
   onRemove(event) {
-    console.log("innnnn")
     this.selectedAirport = {};
   }
 
@@ -135,11 +132,13 @@ export class SearchAirportComponent implements OnInit {
    
     if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
       this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ?  changes['airport'].currentValue.city : '';     
-      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue].slice() : [];
-      // this.cd.detectChanges();
-      console.log(this.inputName,this.data,this.defaultCity)
-
+      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([],[changes['airport'].currentValue]) : [];
+      // this.cd.checkNoChanges()
+      
     }
+    console.log(this.inputName,this.data)
+
+
 /*     if(this.inputName == 'toSearch'){
       
 

@@ -84,8 +84,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.rangeDates = [this.departureDate, this.returnDate];
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
-        // this.departureDate = moment(this.customStartDateValidation).toDate();
         var _this = this;
+        this.fromSearch = Object.assign({}, airports_1.airports[this.currentSlide.location.from.airport_code]);
+        // this.departureDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.departureDate = moment().add('31', 'days').toDate();
         }

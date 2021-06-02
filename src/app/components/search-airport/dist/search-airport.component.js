@@ -85,7 +85,6 @@ var SearchAirportComponent = /** @class */ (function () {
         }
     };
     SearchAirportComponent.prototype.onRemove = function (event) {
-        console.log("innnnn");
         this.selectedAirport = {};
     };
     SearchAirportComponent.prototype.setDefaultAirport = function () {
@@ -106,10 +105,10 @@ var SearchAirportComponent = /** @class */ (function () {
     SearchAirportComponent.prototype.ngOnChanges = function (changes) {
         if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
             this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : '';
-            this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue].slice() : [];
-            // this.cd.detectChanges();
-            console.log(this.inputName, this.data, this.defaultCity);
+            this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([], [changes['airport'].currentValue]) : [];
+            // this.cd.checkNoChanges()
         }
+        console.log(this.inputName, this.data);
         /*     if(this.inputName == 'toSearch'){
               
         
