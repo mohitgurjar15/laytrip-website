@@ -46,7 +46,6 @@ export class SearchAirportComponent implements OnInit {
   }
 
   searchAirport(searchItem) {
-    
     this.loading = true;
     let isFromLocation=this.id=='fromSearch'?'yes':'no';
     let alternateLocation='';
