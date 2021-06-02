@@ -15493,3 +15493,8 @@ body.modal-open .site_header.fixed-top {
 .red_underline {
   border-color: #ff0000 !important;
 }
+
+ngx-otp-input .inputStyles {
+  width: 64px !important;
+  height: 64px !important;
+}
