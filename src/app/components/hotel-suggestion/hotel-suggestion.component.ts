@@ -41,11 +41,7 @@ export class HotelSuggestionComponent implements OnInit {
   }
 
   searchLocation(event) {
-    //  console.log(this.searchItem.length,event.keyCode)
     let notAllowedKey = [40, 38, 9, 37, 39];
-    if (event.keyCode == 8) {
-      // this.searchHotelAfterBackspace(this.searchItem, 'backspace');
-    }
     if ((this.searchItem.length == 0 && event.keyCode == 8)) {
       this.data = [];
       this.loading = false;
@@ -55,7 +51,6 @@ export class HotelSuggestionComponent implements OnInit {
       this.validateSearch.emit(false);
       return;
     }
-
     if (!notAllowedKey.includes(event.keyCode)) {
       this.isShowDropDown = this.searchItem.length > 0 ? true : false;
       this.isValidSearch = this.searchItem.length > 0 ? true : false;
@@ -63,8 +58,13 @@ export class HotelSuggestionComponent implements OnInit {
       if (this.loading) {
         this.$autoComplete.unsubscribe();
       }
-      this.searchHotel(this.searchItem);
-      this.validateSearch.emit(false);
+      if (event.keyCode == 8) {
+        let item = this.searchItem.split(',');
+        this.searchHotel(item[0]);
+      } else {
+        this.searchHotel(this.searchItem);
+        this.validateSearch.emit(false);
+      }
     }
     else {
       this.loading = false;
@@ -72,7 +72,6 @@ export class HotelSuggestionComponent implements OnInit {
   }
 
   searchHotel(searchItem) {
-    // searchItem = this.searchHotelAfterBackspace(searchItem, 'backspace');
     this.loading = true;
     const searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
     this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
@@ -103,27 +102,6 @@ export class HotelSuggestionComponent implements OnInit {
       }
     );
   }
-
-  searchHotelAfterBackspace(searchItem, keyboardEvent = '') {
-    if (keyboardEvent === 'backspace') {
-      let tempData = [{
-        city: searchItem,
-        country: '',
-        hotel_id: '',
-        title: searchItem,
-        type: 'city',
-        geo_codes: {},
-        city_id: '',
-        objType: 'invalid'
-      }];
-      this.selectedHotel.emit(tempData[0]);
-      searchItem = this.defaultItem.title;
-      this.validateSearch.emit(true);
-      console.log("searchItem3",searchItem)
-      return searchItem;
-    }
-  }
-
 
   selectHotelItem(item) {
     this.isShowDropDown = false;
