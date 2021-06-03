@@ -20,13 +20,11 @@ var environment_1 = require("../../../../environments/environment");
 var airports_1 = require("../../flight/airports");
 var moment = require("moment");
 var FlightSearchWidgetComponent = /** @class */ (function () {
-    function FlightSearchWidgetComponent(genericService, commonFunction, fb, router, route, renderer, flightService, homeService) {
-        this.genericService = genericService;
+    function FlightSearchWidgetComponent(commonFunction, fb, router, route, flightService, homeService) {
         this.commonFunction = commonFunction;
         this.fb = fb;
         this.router = router;
         this.route = route;
-        this.renderer = renderer;
         this.flightService = flightService;
         this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -107,7 +105,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                         }
                     }
                 });
-            }, 3000);
+            });
         }
         // this.departureDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {

@@ -161,10 +161,7 @@ export class HomeComponent implements OnInit {
     
     this.$tabName.unsubscribe();
     this.homeService.setActiveTab('');
-    this.homeService.getActiveTabName.subscribe(tabName=> {
-      if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){  }
-      
-    });
+  
 
     this.isRefferal = this.commonFunction.isRefferal();
   }
@@ -315,6 +312,7 @@ export class HomeComponent implements OnInit {
       this.homeService.setLocationForHotel(newItem);
     } 
   }
+  
   activeSlide(activeSlide){
     this.currentSlide=this.slides[activeSlide]
     this.homeService.setOffersData(this.currentSlide);

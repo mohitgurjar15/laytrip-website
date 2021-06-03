@@ -142,9 +142,6 @@ var HomeComponent = /** @class */ (function () {
         this.getDeal(this.moduleId);
         this.$tabName.unsubscribe();
         this.homeService.setActiveTab('');
-        this.homeService.getActiveTabName.subscribe(function (tabName) {
-            if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) { }
-        });
         this.isRefferal = this.commonFunction.isRefferal();
     };
     HomeComponent.prototype.openCookiePolicyPopup = function () {

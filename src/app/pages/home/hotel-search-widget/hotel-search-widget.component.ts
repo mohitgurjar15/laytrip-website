@@ -125,7 +125,7 @@ export class HotelSearchWidgetComponent implements OnInit {
             this.validateSearch(true);
           }
         })
-      }, 3000);
+      });
     }
     // this.checkInDate = moment(this.customStartDateValidation).toDate();
 

@@ -79,12 +79,10 @@ export class FlightSearchWidgetComponent implements OnInit {
   searchedValue = [];
   searchedFlightData = [];
   constructor(
-    private genericService: GenericService,
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
     private route: ActivatedRoute,
-    private renderer: Renderer2,
     private flightService: FlightService,
     private homeService: HomeService
   ) {
@@ -131,7 +129,7 @@ export class FlightSearchWidgetComponent implements OnInit {
             }
           }
         })
-      }, 3000);
+      });
     }
     // this.departureDate = moment(this.customStartDateValidation).toDate();
 

@@ -106,7 +106,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                         _this.validateSearch(true);
                     }
                 });
-            }, 3000);
+            });
         }
         // this.checkInDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
