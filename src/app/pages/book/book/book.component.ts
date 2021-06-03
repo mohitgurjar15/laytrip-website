@@ -56,7 +56,7 @@ export class BookComponent implements OnInit {
 
     this.cartService.verifyAuth(this.transaction_token).subscribe((authRes: any) => {
 
-      if(authRes.status==true){
+      if(authRes.success==true){
         this.cartService.bookCart(this.bookingRequest).subscribe((result: any) => {
           let successItem = result.carts.filter(cart => {
             if (cart.status == 1) {
