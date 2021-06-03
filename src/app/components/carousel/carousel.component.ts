@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChange } from '@angular/core';
 import { HomeService } from 'src/app/services/home.service';
-
+declare var $: any;
 @Component({
   selector: 'carousel',
   templateUrl: './carousel.component.html',
@@ -38,40 +38,38 @@ export class CarouselComponent {
   }
 
   onPreviousClick() {
+    
     const previous = this.currentSlide - 1;
     this.currentSlide = previous < 0 ? this.slides.length - 1 : previous;
+    $("#slide"+this.currentSlide).attr('src', $("#slide"+this.currentSlide).attr('data'))
+    $("#slide"+this.currentSlide).removeAttr('data')
     this.activeSlide.emit(this.currentSlide)
   }
   
   onNextClick() {
     const next = this.currentSlide + 1;
     this.currentSlide = next === this.slides.length ? 0 : next;
+    let slide ="#slide_"+this.currentSlide;
+    $("#slide_2").attr('src', $("#slide_2").attr('data'))
+    $("#slide_2").removeAttr('data')
     this.activeSlide.emit(this.currentSlide)
   }
 
   activityWatcher(){
 
-    //The number of seconds that have passed
-    //since the user was active.
     var secondsSinceLastActivity = 0;
 
-    //Five minutes. 60 x 5 = 300 seconds.
     var maxInactivity = 4;
 
-    //Setup the setInterval method to run
-    //every second. 1000 milliseconds = 1 second.
     let self=this;
     setInterval(function(){
-      // console.log(self.currentChangeCounter,self.previousChangeCounter)
       if(self.currentChangeCounter!=self.previousChangeCounter){ 
         secondsSinceLastActivity=0;
         self.previousChangeCounter=self.currentChangeCounter;
         return;
       }
       secondsSinceLastActivity++;
-      //console.log(secondsSinceLastActivity + ' seconds since the user was last active');
-      //if the user has been inactive or idle for longer
-      //then the seconds specified in maxInactivity
+      
       if(secondsSinceLastActivity > maxInactivity){
           //console.log('User has been inactive for more than ' + maxInactivity + ' seconds');
           self.onNextClick();
@@ -79,23 +77,13 @@ export class CarouselComponent {
       }
     }, 1000);
 
-    //The function that will be called whenever a user is active
-    /* function activity(){
-        //reset the secondsSinceLastActivity variable
-        //back to 0
-        secondsSinceLastActivity = 0;
-    } */
+    
 
-    //An array of DOM events that should be interpreted as
-    //user activity.
+    
     var activityEvents = [
         
     ];
-    /* var activityEvents = [
-      'scroll'
-    ]; */
-
-    //add these events to the document.
+    
     //register the activity function as the listener parameter.
     activityEvents.forEach(function(eventName) {
         document.addEventListener(eventName, ()=>{
