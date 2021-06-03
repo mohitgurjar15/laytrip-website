@@ -26,6 +26,8 @@ var SearchAirportComponent = /** @class */ (function () {
         this.data[0] = this.airport ? this.airport : [];
         if (Object.keys(this.airport).length == 0) {
             this.data = [];
+            // this.data[0]=[];
+            console.log(this.data);
         }
     };
     SearchAirportComponent.prototype.searchAirport = function (searchItem) {

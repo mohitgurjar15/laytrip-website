@@ -195,7 +195,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     //delete BehaviorSubject at the end
     this.homeService.removeToString('flight');
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
-
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -314,10 +314,10 @@ export class HomeComponent implements OnInit {
   }
   
   activeSlide(activeSlide){
-    this.currentSlide=this.slides[activeSlide]
-    this.homeService.setOffersData(this.currentSlide);
     this.clickOnTab('hotel');
     $('#nav-hotel').trigger('click');
+    this.currentSlide=this.slides[activeSlide]
+    this.homeService.setOffersData(this.currentSlide);
   }
 
   getCurrentChangeCounter(event){

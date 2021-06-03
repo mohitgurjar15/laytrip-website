@@ -277,10 +277,10 @@ var HomeComponent = /** @class */ (function () {
         }
     };
     HomeComponent.prototype.activeSlide = function (activeSlide) {
-        this.currentSlide = this.slides[activeSlide];
-        this.homeService.setOffersData(this.currentSlide);
         this.clickOnTab('hotel');
         $('#nav-hotel').trigger('click');
+        this.currentSlide = this.slides[activeSlide];
+        this.homeService.setOffersData(this.currentSlide);
     };
     HomeComponent.prototype.getCurrentChangeCounter = function (event) {
         this.currentChangeCounter = event;
