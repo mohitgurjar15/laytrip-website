@@ -54,51 +54,66 @@ export class BookComponent implements OnInit {
       this.bookingRequest.referral_id = parms.utm_source ? parms.utm_source : '';
     }
 
-    // this.bookService.bookFlight(bookingData).subscribe((res: any) => {
-    //   console.log(res);
-    //   if (res.status == 'complete') {
-    //     this.router.navigateByUrl('/book/confirmation',{ skipLocationChange: false })
-    //   } else {
-    //     this.router.navigateByUrl('/book/failure',{ skipLocationChange: false })
-    //   }
-    // });
+    this.cartService.verifyAuth(this.transaction_token).subscribe((authRes: any) => {
 
-    this.cartService.bookCart(this.bookingRequest).subscribe((result: any) => {
-      let successItem = result.carts.filter(cart => {
-        if (cart.status == 1) {
-          return { cart_id: cart.id }
-        }
-      });
-      let failedItem = result.carts.filter(cart => {
-        if (cart.status == 2) {
-          return { car_id: cart.id }
-        }
-      });
-
-      let index
-      for (let item of successItem) {
-        index = this.carts.findIndex(x => x.id == item.cart_id)
-        this.carts.splice(index, 1)
-        this.cartPrices.splice(index, 1)
+      if(authRes.status==true){
+        this.cartService.bookCart(this.bookingRequest).subscribe((result: any) => {
+          let successItem = result.carts.filter(cart => {
+            if (cart.status == 1) {
+              return { cart_id: cart.id }
+            }
+          });
+          let failedItem = result.carts.filter(cart => {
+            if (cart.status == 2) {
+              return { car_id: cart.id }
+            }
+          });
+    
+          let index
+          for (let item of successItem) {
+            index = this.carts.findIndex(x => x.id == item.cart_id)
+            this.carts.splice(index, 1)
+            this.cartPrices.splice(index, 1)
+          }
+          this.cartService.setCartItems(this.carts);
+          this.cartService.setCartPrices(this.cartPrices)
+    
+          localStorage.setItem('$crt', failedItem.length || 0);
+          if (this.commonFunction.isRefferal()) {
+            let parms = this.commonFunction.getRefferalParms();
+            var queryParams :any = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate([`/cart/confirm/${result.laytripCartId}`], { queryParams: queryParams })
+          } else {
+            this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
+          }
+        })
       }
-      this.cartService.setCartItems(this.carts);
-      this.cartService.setCartPrices(this.cartPrices)
-
-      localStorage.setItem('$crt', failedItem.length || 0);
-      if (this.commonFunction.isRefferal()) {
-        let parms = this.commonFunction.getRefferalParms();
-        var queryParams :any = {};
-        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-        if (parms.utm_medium) {
-            queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      else{
+        if (this.commonFunction.isRefferal()) {
+          let parms = this.commonFunction.getRefferalParms();
+          var queryParams :any = {};
+          queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+          if (parms.utm_medium) {
+              queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+          }
+          if (parms.utm_campaign) {
+              queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+          }
+          this.router.navigate([`/cart/checkout`], { queryParams: queryParams })
+        } else {
+          this.router.navigate([`/cart/checkout`])
         }
-        if (parms.utm_campaign) {
-            queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
-        }
-        this.router.navigate([`/cart/confirm/${result.laytripCartId}`], { queryParams: queryParams })
-      } else {
-        this.router.navigate([`/cart/confirm/${result.laytripCartId}`])
       }
-    })
+      
+    })    
+
+    
   }
 }

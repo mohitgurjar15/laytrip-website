@@ -176,6 +176,14 @@ export class CartService {
       );
   }
 
+  verifyAuth(transactionToken) {
+    
+    return this.http.get(`${environment.apiUrl}v1/payment/verify-auth/${transactionToken}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   setPaymentOptions(paymentOptions){
     localStorage.setItem('__pm_inf',btoa(JSON.stringify(paymentOptions)))
     this.paymentOptions.next(paymentOptions)
