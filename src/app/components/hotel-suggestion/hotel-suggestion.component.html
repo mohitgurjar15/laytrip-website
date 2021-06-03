@@ -1,5 +1,7 @@
-<input class="hotel_desination"  [(ngModel)]="searchItem"  (keyup)="searchLocation($event)" placeholder="Enter city or hotel" >
-<div class="search_suggetion_main" *ngIf="isShowDropDown">
+<input class="hotel_desination"  [(ngModel)]="searchItem"  (keyup)="searchLocation($event)" 
+(focus)="onFocus($event)"  (focusout)="focusOut($event)"
+placeholder="Enter city or hotel" >
+<div class="search_suggetion_main" *ngIf="isShowDropDown" >
     <!-- <div class="close_btn">
         <button (click)="closeHotelSuggestion()" type="button" class="close">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">

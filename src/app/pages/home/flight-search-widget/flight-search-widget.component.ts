@@ -62,6 +62,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   showToAirportSuggestion: boolean = false;
   thisElementClicked: boolean = false;
   counterChangeVal :number = 0;
+  isDatePickerOpen : boolean = false;
+  progressInterval;
 
   searchFlightInfo =
     {
@@ -586,5 +588,23 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.showToAirportSuggestion = true;
     this.searchedFlightData = event; 
     this.routeSearch = true; 
+  }
+
+
+  datepickerShow(){
+    this.isDatePickerOpen = true;  
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.isDatePickerOpen){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000);   
+    }
+  }
+  
+  datepickerClose(){      
+    this.isDatePickerOpen = false;
   }
 }

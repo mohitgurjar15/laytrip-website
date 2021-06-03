@@ -6,7 +6,6 @@ import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../../services/home.service';
-import { setInterval } from 'timers';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -57,6 +56,8 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     ],
   };
+  progressInterval;
+  
   selectedGuest =
     {
       rooms: 1,
@@ -70,6 +71,8 @@ export class HotelSearchWidgetComponent implements OnInit {
   showCommingSoon: boolean = false;
   customStartDateValidation = "2021-06-02";
   customEndDateValidation = "2021-06-03";
+
+  isDatePickerOpen : boolean = false;
 
   constructor(
     public commonFunction: CommonFunction,
@@ -324,6 +327,26 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.currentChangeCounter.emit(this.counterChangeVal += 1);
     this.validSearch = event;
   }
-
+  
+  counterValueChanged(event) {  
+    this.currentChangeCounter.emit(event);
+  }
+  
+  datepickerShow(){
+    this.isDatePickerOpen = true;  
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.isDatePickerOpen){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000);   
+    }
+  }
+  
+  datepickerClose(){      
+    this.isDatePickerOpen = false;
+  }
 
 }

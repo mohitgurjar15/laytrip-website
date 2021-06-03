@@ -3,7 +3,7 @@
 
   <div class="tab_upper_content">
     <div class="travellers">
-      <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)"></app-guest-info>
+      <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)" (currentChangeCounter)="counterValueChanged($event)"></app-guest-info>
     </div>
   </div>
   <form *ngIf="!showCommingSoon" [formGroup]="hotelSearchForm" autocomplete="off" (ngSubmit)="searchHotels()">
@@ -15,7 +15,7 @@
               [ngClass]="{'hotel-error': !validSearch && hotelSearchFormSubmitted}">
               <label for="">Destination</label>
               <app-hotel-suggestion [searchItem]="fromDestinationInfo.title" [defaultItem]="fromDestinationInfo" (selectedHotel)="selectedHotel($event)"
-                (validateSearch)="validateSearch($event)" ></app-hotel-suggestion>
+                (validateSearch)="validateSearch($event)" (currentChangeCounter)="counterValueChanged($event)"></app-hotel-suggestion>
             </div>
           </div>
         </li>
@@ -26,7 +26,7 @@
               <p-calendar [appendTo]="body" #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range"
                 [(ngModel)]="rangeDates" [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
                 panelStyleClass="calender-responsive-view round_trip_calender laytrip-cal-view" [numberOfMonths]="2"
-                (onSelect)=selectCheckInDateUpdate($event) [readonlyInput]="true">
+                (onSelect)=selectCheckInDateUpdate($event) [readonlyInput]="true" (onShow)="datepickerShow($event)"  (onClose)="datepickerClose($event)">
               </p-calendar>
             </div>
           </div>

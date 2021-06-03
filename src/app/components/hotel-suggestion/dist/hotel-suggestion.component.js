@@ -10,9 +10,10 @@ exports.HotelSuggestionComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var HotelSuggestionComponent = /** @class */ (function () {
-    function HotelSuggestionComponent(hotelService, homeService) {
+    function HotelSuggestionComponent(hotelService, homeService, commonFunction) {
         this.hotelService = hotelService;
         this.homeService = homeService;
+        this.commonFunction = commonFunction;
         this.selectedHotel = new core_1.EventEmitter();
         this.validateSearch = new core_1.EventEmitter();
         this.currentChangeCounter = new core_1.EventEmitter();
@@ -23,6 +24,8 @@ var HotelSuggestionComponent = /** @class */ (function () {
         this.defaultTempData = [];
         this.isShowDropDown = false;
         this.thisElementClicked = false;
+        this.isInputFocus = false;
+        this.counterChangeVal = 0;
         this.counter = 0;
     }
     HotelSuggestionComponent.prototype.ngOnInit = function () {
@@ -37,6 +40,7 @@ var HotelSuggestionComponent = /** @class */ (function () {
         });
     };
     HotelSuggestionComponent.prototype.searchLocation = function (event) {
+        console.log('onKeyUp');
         var notAllowedKey = [40, 38, 9, 37, 39];
         if ((this.searchItem.length == 0 && event.keyCode == 8)) {
             this.data = [];
@@ -114,6 +118,23 @@ var HotelSuggestionComponent = /** @class */ (function () {
         this.counter += 1;
         this.currentChangeCounter.emit(this.counter);
         this.isShowDropDown = true;
+    };
+    HotelSuggestionComponent.prototype.onFocus = function () {
+        var _this = this;
+        this.isInputFocus = true;
+        if (this.commonFunction.isRefferal()) {
+            this.progressInterval = setInterval(function () {
+                if (_this.isInputFocus) {
+                    _this.currentChangeCounter.emit(_this.counterChangeVal += 1);
+                }
+                else {
+                    clearInterval(_this.progressInterval);
+                }
+            }, 1000);
+        }
+    };
+    HotelSuggestionComponent.prototype.focusOut = function () {
+        this.isInputFocus = false;
     };
     __decorate([
         core_1.Output()

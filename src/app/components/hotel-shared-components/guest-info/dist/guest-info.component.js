@@ -14,6 +14,7 @@ var GuestInfoComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.eRef = eRef;
         this.changeValue = new core_1.EventEmitter();
+        this.currentChangeCounter = new core_1.EventEmitter();
         this.totalRoom = [];
         this.errorMessage = '';
         this.openDrawer = false;
@@ -25,6 +26,7 @@ var GuestInfoComponent = /** @class */ (function () {
             child: 0,
             children: []
         };
+        this.counterChangeVal = 0;
         this.countryCode = this.commonFunction.getUserCountry();
     }
     GuestInfoComponent.prototype.ngOnInit = function () {
@@ -76,7 +78,18 @@ var GuestInfoComponent = /** @class */ (function () {
         }
     };
     GuestInfoComponent.prototype.toggleDrawer = function () {
+        var _this = this;
         this.openDrawer = !this.openDrawer;
+        if (this.commonFunction.isRefferal()) {
+            this.progressInterval = setInterval(function () {
+                if (_this.openDrawer) {
+                    _this.currentChangeCounter.emit(_this.counterChangeVal += 1);
+                }
+                else {
+                    clearInterval(_this.progressInterval);
+                }
+            }, 1000);
+        }
     };
     GuestInfoComponent.prototype.counter = function (i) {
         return new Array(i);
@@ -154,6 +167,9 @@ var GuestInfoComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], GuestInfoComponent.prototype, "label");
+    __decorate([
+        core_1.Output()
+    ], GuestInfoComponent.prototype, "currentChangeCounter");
     __decorate([
         core_1.HostListener('document:click', ['$event'])
     ], GuestInfoComponent.prototype, "clickout");

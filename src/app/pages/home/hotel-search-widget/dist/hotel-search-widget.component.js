@@ -63,6 +63,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.showCommingSoon = false;
         this.customStartDateValidation = "2021-06-02";
         this.customEndDateValidation = "2021-06-03";
+        this.isDatePickerOpen = false;
         this.counterChangeVal = 0;
         this.hotelSearchForm = this.fb.group({
             fromDestination: ['', [forms_1.Validators.required]]
@@ -289,6 +290,26 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     HotelSearchWidgetComponent.prototype.validateSearch = function (event) {
         this.currentChangeCounter.emit(this.counterChangeVal += 1);
         this.validSearch = event;
+    };
+    HotelSearchWidgetComponent.prototype.counterValueChanged = function (event) {
+        this.currentChangeCounter.emit(event);
+    };
+    HotelSearchWidgetComponent.prototype.datepickerShow = function () {
+        var _this = this;
+        this.isDatePickerOpen = true;
+        if (this.commonFunction.isRefferal()) {
+            this.progressInterval = setInterval(function () {
+                if (_this.isDatePickerOpen) {
+                    _this.currentChangeCounter.emit(_this.counterChangeVal += 1);
+                }
+                else {
+                    clearInterval(_this.progressInterval);
+                }
+            }, 1000);
+        }
+    };
+    HotelSearchWidgetComponent.prototype.datepickerClose = function () {
+        this.isDatePickerOpen = false;
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

@@ -55,6 +55,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.showToAirportSuggestion = false;
         this.thisElementClicked = false;
         this.counterChangeVal = 0;
+        this.isDatePickerOpen = false;
         this.searchFlightInfo = {
             trip: 'oneway',
             departure: this.fromSearch.code,
@@ -508,6 +509,23 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.showToAirportSuggestion = true;
         this.searchedFlightData = event;
         this.routeSearch = true;
+    };
+    FlightSearchWidgetComponent.prototype.datepickerShow = function () {
+        var _this = this;
+        this.isDatePickerOpen = true;
+        if (this.commonFunction.isRefferal()) {
+            this.progressInterval = setInterval(function () {
+                if (_this.isDatePickerOpen) {
+                    _this.currentChangeCounter.emit(_this.counterChangeVal += 1);
+                }
+                else {
+                    clearInterval(_this.progressInterval);
+                }
+            }, 1000);
+        }
+    };
+    FlightSearchWidgetComponent.prototype.datepickerClose = function () {
+        this.isDatePickerOpen = false;
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)

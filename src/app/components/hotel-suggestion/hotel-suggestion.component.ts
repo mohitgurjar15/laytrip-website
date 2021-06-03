@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, HostList
 import { HomeService } from '../../services/home.service';
 import { HotelService } from '../../services/hotel.service';
 import { environment } from '../../../environments/environment';
+import { CommonFunction } from '../../_helpers/common-function';
 
 @Component({
   selector: 'app-hotel-suggestion',
@@ -23,9 +24,14 @@ export class HotelSuggestionComponent implements OnInit {
   isShowDropDown: boolean = false;
   thisElementClicked: boolean = false;
   $autoComplete;
+  isInputFocus : boolean = false;
+  progressInterval;
+  counterChangeVal=0;
+
   constructor(
     private hotelService: HotelService,
     private homeService: HomeService,
+    private commonFunction: CommonFunction,
 
   ) { }
 
@@ -43,6 +49,7 @@ export class HotelSuggestionComponent implements OnInit {
   }
 
   searchLocation(event) {
+    console.log('onKeyUp')
     let notAllowedKey = [40, 38, 9, 37, 39];
     if ((this.searchItem.length == 0 && event.keyCode == 8)) {
       this.data = [];
@@ -127,6 +134,23 @@ export class HotelSuggestionComponent implements OnInit {
     this.counter+=1;
     this.currentChangeCounter.emit(this.counter);
     this.isShowDropDown = true;
+  }
+  
+  onFocus(){
+    this.isInputFocus = true;
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.isInputFocus){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000);
+    }
+  }
+
+  focusOut(){
+    this.isInputFocus = false;
   }
   
 
