@@ -510,6 +510,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.searchedFlightData = event;
         this.routeSearch = true;
     };
+    FlightSearchWidgetComponent.prototype.counterValueChanged = function (event) {
+        this.currentChangeCounter.emit(event);
+    };
     FlightSearchWidgetComponent.prototype.datepickerShow = function () {
         var _this = this;
         this.isDatePickerOpen = true;

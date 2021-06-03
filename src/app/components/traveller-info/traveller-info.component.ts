@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, HostListener, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { cookieServiceFactory } from 'ngx-cookie';
 import { CommonFunction } from '../../_helpers/common-function';
 declare var $: any;
 

@@ -590,7 +590,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.routeSearch = true; 
   }
 
-
+  counterValueChanged(event) {  
+    this.currentChangeCounter.emit(event);
+  }
+  
   datepickerShow(){
     this.isDatePickerOpen = true;  
     if(this.commonFunction.isRefferal()){
@@ -603,7 +606,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       }, 1000);   
     }
   }
-  
+
   datepickerClose(){      
     this.isDatePickerOpen = false;
   }
