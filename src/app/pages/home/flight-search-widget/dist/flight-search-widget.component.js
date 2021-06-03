@@ -87,28 +87,21 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.fromSearch = [];
-        if (this.commonFunction.isRefferal()) {
-            setTimeout(function () {
-                _this.homeService.getSlideOffers.subscribe(function (currentSlide) {
-                    if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
-                        var slide = currentSlide;
-                        _this.fromSearch = Object.assign({}, airports_1.airports[slide.location.from.airport_code]);
-                        // console.log('ngOnChanges flight W',this.fromSearch)
-                        _this.toSearch = airports_1.airports[slide.location.to.airport_code];
-                        _this.fromSearch['display_name'] = _this.fromSearch.city + "," + _this.fromSearch.country + ",(" + _this.fromSearch.code + ")," + _this.fromSearch.name;
-                        _this.fromSearch['random'] = new Date();
-                        _this.toSearch['display_name'] = _this.toSearch.city + "," + _this.toSearch.country + ",(" + _this.toSearch.code + ")," + _this.toSearch.name;
-                        _this.searchFlightInfo.departure = _this.fromSearch.code;
-                        _this.flightSearchForm.controls.fromDestination.setValue('');
-                        _this.departureDate = moment().add(90, 'days').toDate();
-                        if (_this.isRoundTrip) {
-                            _this.rangeDates = [_this.departureDate, moment().add(97, 'days').toDate()];
-                            _this.searchFlightInfo.arrival = _this.toSearch.code;
-                        }
+        this.homeService.getSlideOffers.subscribe(function (currentSlide) {
+            if (_this.commonFunction.isRefferal()) {
+                if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+                    var slide = currentSlide;
+                    _this.fromSearch = Object.assign({}, airports_1.airports[slide.location.from.airport_code]);
+                    _this.toSearch = airports_1.airports[slide.location.to.airport_code];
+                    _this.searchFlightInfo.departure = _this.fromSearch.code;
+                    _this.departureDate = moment().add(90, 'days').toDate();
+                    if (_this.isRoundTrip) {
+                        _this.rangeDates = [_this.departureDate, moment().add(97, 'days').toDate()];
+                        _this.searchFlightInfo.arrival = _this.toSearch.code;
                     }
-                });
-            });
-        }
+                }
+            }
+        });
         // this.departureDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.departureDate = moment().add('31', 'days').toDate();
