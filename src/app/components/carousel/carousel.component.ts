@@ -28,21 +28,20 @@ export class CarouselComponent {
   currentSlide = 0;
 
   constructor(public homeService:HomeService) {
-
-    /* setInterval(( )=>{
-      this.onNextClick()
-    },4000) */
-
     this.activityWatcher();
-
   }
+
+  
 
   onPreviousClick() {
     
     const previous = this.currentSlide - 1;
     this.currentSlide = previous < 0 ? this.slides.length - 1 : previous;
-    $("#slide"+this.currentSlide).attr('src', $("#slide"+this.currentSlide).attr('data'))
-    $("#slide"+this.currentSlide).removeAttr('data')
+    let slide ="#slide_"+this.currentSlide;
+    $(document).ready(function(){
+      $(slide).attr('src', $(slide).attr('data'))
+      $(slide).removeAttr('data')
+    })
     this.activeSlide.emit(this.currentSlide)
   }
   
@@ -50,8 +49,10 @@ export class CarouselComponent {
     const next = this.currentSlide + 1;
     this.currentSlide = next === this.slides.length ? 0 : next;
     let slide ="#slide_"+this.currentSlide;
-    $("#slide_2").attr('src', $("#slide_2").attr('data'))
-    $("#slide_2").removeAttr('data')
+    $(document).ready(function(){
+      $(slide).attr('src', $(slide).attr('data'))
+      $(slide).removeAttr('data')
+    })
     this.activeSlide.emit(this.currentSlide)
   }
 
