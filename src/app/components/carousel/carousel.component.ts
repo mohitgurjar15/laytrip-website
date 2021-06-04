@@ -72,7 +72,6 @@ export class CarouselComponent {
       secondsSinceLastActivity++;
       
       if(secondsSinceLastActivity > maxInactivity){
-          //console.log('User has been inactive for more than ' + maxInactivity + ' seconds');
           self.onNextClick();
           secondsSinceLastActivity = 0;
       }

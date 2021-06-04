@@ -1,18 +1,25 @@
 <!-- carousel -->
 <div class="carousel">
   <ng-container *ngFor="let slide of slides; let i = index">
-    <img [id]="'slide_'+i"
-      *ngIf="i === currentSlide && i==0"
-      [src]="slide.src"
-      class="slide"
-      @carouselAnimation
+    <img
+    *ngIf="i === currentSlide "
+    [src]="slide.src"
+    class="slide slide_{{i}}"
+    @carouselAnimation
     />
-    <img [id]="'slide_'+i"
+    <!-- 
+      *ngIf="i === currentSlide && i==0"
+      [id]="'slide_'+i"
+      #sliderImage
+ --> 
+  <!--   <img
+     [id]="'slide_'+i"
       *ngIf="i === currentSlide && i>0"
       attr.data.src={{slide.src}}
-      class="slide"
+      class="slide slide_{{i}}"
       @carouselAnimation
-    />
+      #sliderImage
+    /> -->
   </ng-container>
   
 
