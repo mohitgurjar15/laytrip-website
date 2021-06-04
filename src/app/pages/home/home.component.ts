@@ -143,6 +143,7 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.openCookiePolicyPopup();
     }, 5000);
+    this.homeService.setOffersData(this.currentSlide);
 
     this.$tabName = this.homeService.getActiveTabName.subscribe(tabName=> {
       if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){     
@@ -298,6 +299,10 @@ export class HomeComponent implements OnInit {
       //   document.getElementById('login_btn').style.background = '#FF00BC';
       // }
     }
+    if(this.commonFunction.isRefferal()){
+      this.homeService.setOffersData(this.currentSlide);
+    }
+
   }
 
   ngOnDestroy() {

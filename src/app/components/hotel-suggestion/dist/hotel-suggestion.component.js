@@ -36,6 +36,7 @@ var HotelSuggestionComponent = /** @class */ (function () {
         this.homeService.getLocationForHotelDeal.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
                 _this.searchItem = hotelInfo.title;
+                console.log(_this.searchItem);
             }
         });
     };

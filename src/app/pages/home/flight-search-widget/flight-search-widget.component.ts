@@ -116,11 +116,12 @@ export class FlightSearchWidgetComponent implements OnInit {
           if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
             let slide: any = currentSlide;
             this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
-            this.toSearch = airports[slide.location.to.airport_code];          
+            this.toSearch =  Object.assign({},airports[slide.location.to.airport_code]);          
             this.searchFlightInfo.departure = this.fromSearch.code;
             this.departureDate = moment().add(90, 'days').toDate();
             if (this.isRoundTrip) {
-              this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
+              this.returnDate =  moment().add(97, 'days').toDate();
+              this.rangeDates = [this.departureDate, this.returnDate];
               this.searchFlightInfo.arrival = this.toSearch.code;
             }
           }
@@ -245,6 +246,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   searchFlights() {
+  
     this.flightSearchFormSubmitted = true;
     let queryParams: any = {};
     queryParams.trip = this.isRoundTrip ? 'roundtrip' : 'oneway';

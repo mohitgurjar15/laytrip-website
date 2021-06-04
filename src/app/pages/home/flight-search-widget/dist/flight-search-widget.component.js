@@ -92,11 +92,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
                     var slide = currentSlide;
                     _this.fromSearch = Object.assign({}, airports_1.airports[slide.location.from.airport_code]);
-                    _this.toSearch = airports_1.airports[slide.location.to.airport_code];
+                    _this.toSearch = Object.assign({}, airports_1.airports[slide.location.to.airport_code]);
                     _this.searchFlightInfo.departure = _this.fromSearch.code;
                     _this.departureDate = moment().add(90, 'days').toDate();
                     if (_this.isRoundTrip) {
-                        _this.rangeDates = [_this.departureDate, moment().add(97, 'days').toDate()];
+                        _this.returnDate = moment().add(97, 'days').toDate();
+                        _this.rangeDates = [_this.departureDate, _this.returnDate];
                         _this.searchFlightInfo.arrival = _this.toSearch.code;
                     }
                 }

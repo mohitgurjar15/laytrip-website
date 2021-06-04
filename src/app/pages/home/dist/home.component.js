@@ -31,7 +31,7 @@ var HomeComponent = /** @class */ (function () {
         this.host = '';
         this.slides = [
             {
-                src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/184974934.jpg?k=17803467e2d7dec840e47eccb1c9595f3b8890a51288e728188831acc4378f5d&o=",
+                src: "https://static.toiimg.com/photo/76420840.cms",
                 location: {
                     from: {
                         airport_code: 'NYC'
@@ -55,7 +55,7 @@ var HomeComponent = /** @class */ (function () {
                 }
             },
             {
-                src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/101944574.jpg?k=afeb13ea4553e6dc4d0b2c01fafc85e6f80688a867080dfa7bb4ddd4577ea515&o=",
+                src: "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png",
                 location: {
                     from: {
                         airport_code: 'NYC'
@@ -79,7 +79,7 @@ var HomeComponent = /** @class */ (function () {
                 }
             },
             {
-                src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/295130173.jpg?k=cb031d144f9c01c6c99271d9a8aa241a5bd8922613b9cec738f2c83ccd2776d6&o=",
+                src: "http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg",
                 location: {
                     from: {
                         airport_code: 'NYC'
@@ -125,6 +125,7 @@ var HomeComponent = /** @class */ (function () {
         setTimeout(function () {
             _this.openCookiePolicyPopup();
         }, 5000);
+        this.homeService.setOffersData(this.currentSlide);
         this.$tabName = this.homeService.getActiveTabName.subscribe(function (tabName) {
             if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) {
                 var tab = tabName;
@@ -262,6 +263,9 @@ var HomeComponent = /** @class */ (function () {
             // if (document.getElementById('login_btn')) {
             //   document.getElementById('login_btn').style.background = '#FF00BC';
             // }
+        }
+        if (this.commonFunction.isRefferal()) {
+            this.homeService.setOffersData(this.currentSlide);
         }
     };
     HomeComponent.prototype.ngOnDestroy = function () {

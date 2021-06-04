@@ -31,8 +31,6 @@ export class CarouselComponent {
     this.activityWatcher();
   }
 
-  
-
   onPreviousClick() {
     
     const previous = this.currentSlide - 1;

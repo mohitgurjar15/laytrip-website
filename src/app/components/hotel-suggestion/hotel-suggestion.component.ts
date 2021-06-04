@@ -40,9 +40,11 @@ export class HotelSuggestionComponent implements OnInit {
   }
   
   ngOnChanges(changes: SimpleChanges) {    
+    
     this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {        
         this.searchItem = hotelInfo.title;
+        console.log(this.searchItem)
       }
     });
     

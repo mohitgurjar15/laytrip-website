@@ -11,9 +11,6 @@ var animations_1 = require("@angular/animations");
 var core_1 = require("@angular/core");
 var CarouselComponent = /** @class */ (function () {
     function CarouselComponent(homeService) {
-        /* setInterval(( )=>{
-          this.onNextClick()
-        },4000) */
         this.homeService = homeService;
         this.currentChangeCounter = 0;
         this.activeSlide = new core_1.EventEmitter();
@@ -24,16 +21,21 @@ var CarouselComponent = /** @class */ (function () {
     CarouselComponent.prototype.onPreviousClick = function () {
         var previous = this.currentSlide - 1;
         this.currentSlide = previous < 0 ? this.slides.length - 1 : previous;
-        // $("#slide"+this.currentSlide).attr('src', $("#slide"+this.currentSlide).attr('data'))
-        // $("#slide"+this.currentSlide).removeAttr('data')
+        var slide = "#slide_" + this.currentSlide;
+        $(document).ready(function () {
+            $(slide).attr('src', $(slide).attr('data'));
+            $(slide).removeAttr('data');
+        });
         this.activeSlide.emit(this.currentSlide);
     };
     CarouselComponent.prototype.onNextClick = function () {
         var next = this.currentSlide + 1;
         this.currentSlide = next === this.slides.length ? 0 : next;
-        // let slide ="#slide_"+this.currentSlide;
-        // $("#slide_2").attr('src', $("#slide_2").attr('data'))
-        // $("#slide_2").removeAttr('data')
+        var slide = "#slide_" + this.currentSlide;
+        $(document).ready(function () {
+            $(slide).attr('src', $(slide).attr('data'));
+            $(slide).removeAttr('data');
+        });
         this.activeSlide.emit(this.currentSlide);
     };
     CarouselComponent.prototype.activityWatcher = function () {
@@ -48,7 +50,6 @@ var CarouselComponent = /** @class */ (function () {
             }
             secondsSinceLastActivity++;
             if (secondsSinceLastActivity > maxInactivity) {
-                //console.log('User has been inactive for more than ' + maxInactivity + ' seconds');
                 self.onNextClick();
                 secondsSinceLastActivity = 0;
             }

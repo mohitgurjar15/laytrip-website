@@ -120,6 +120,7 @@ export class HotelSearchWidgetComponent implements OnInit {
           this.dealDateValidation();
           this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
           this.fromDestinationInfo.city = this.fromDestinationInfo.title = keys.location.to.hotel_option.title;
+          // console.log(this.fromDestinationInfo.title)
           this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
           this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = keys.location.to.hotel_option.geo_codes.long;
           this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = keys.location.to.hotel_option.city_id;
