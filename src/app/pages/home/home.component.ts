@@ -301,7 +301,6 @@ export class HomeComponent implements OnInit {
       // }
     }
     if(this.commonFunction.isRefferal()){
-      this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
       this.homeService.setOffersData(this.currentSlide);
     }
 
@@ -321,10 +320,14 @@ export class HomeComponent implements OnInit {
   }
   
   activeSlide(activeSlide){
+    this.homeService.removeToString('hotel');
+    this.homeService.removeToString('flight');
+
     this.clickOnTab('hotel');
     $('#nav-hotel').trigger('click');
     this.currentSlide=this.slides[activeSlide]
     this.homeService.setOffersData(this.currentSlide);
+    this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
   }
 
   getCurrentChangeCounter(event){

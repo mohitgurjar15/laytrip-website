@@ -268,7 +268,6 @@ var HomeComponent = /** @class */ (function () {
             // }
         }
         if (this.commonFunction.isRefferal()) {
-            this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
             this.homeService.setOffersData(this.currentSlide);
         }
     };
@@ -285,10 +284,13 @@ var HomeComponent = /** @class */ (function () {
         }
     };
     HomeComponent.prototype.activeSlide = function (activeSlide) {
+        this.homeService.removeToString('hotel');
+        this.homeService.removeToString('flight');
         this.clickOnTab('hotel');
         $('#nav-hotel').trigger('click');
         this.currentSlide = this.slides[activeSlide];
         this.homeService.setOffersData(this.currentSlide);
+        this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
     };
     HomeComponent.prototype.getCurrentChangeCounter = function (event) {
         this.currentChangeCounter = event;
