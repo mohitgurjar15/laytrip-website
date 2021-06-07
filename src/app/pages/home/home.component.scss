@@ -60,6 +60,7 @@
                     p {
                         text-shadow: 0px 3px 6px #00000029;
                         margin-bottom: 1rem;
+                        max-width: 530px;
                     }
                 }
             }
@@ -121,8 +122,8 @@
             //margin-top: 60px;
             //margin-bottom: 135px;
             margin-bottom: 70px;
-            
-            max-width: 560px;
+            display: inline-block;
+            max-width: 760px;
 
             @include tab-view {
                 margin: 0 15px 15px;
@@ -144,7 +145,8 @@
                     top: 0;
                     left: 0;
                     background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/blurbackgrond.svg");
-                    background-position: right;
+                    background-position: center;
+                    background-size: cover;
                     background-repeat: no-repeat;
                     opacity: 0.46;
                 }
@@ -204,7 +206,7 @@
             }
 
             p {
-                max-width: 530px;
+                max-width: 560px;
                 color: $text-white;
                 font-size: 25px;
                 line-height: 32px;
@@ -215,6 +217,7 @@
                 @include tab-view {
                     font-size: 14px;
                     padding: 0 15px;
+                    line-height: 18px;
                 }
 
                 // @media(max-width: 599px) {
