@@ -945,7 +945,10 @@ select {
 
 //<!-- home slider css -->
 .home_bg_slider {
-  height: calc(100vh - 100px);
+  //height: calc(100vh - 100px);
+  height: 100vh;
+  min-height: 610px;
+  max-height: 650px;
   width: 100%;
   display: flex;
   flex-direction: column;
