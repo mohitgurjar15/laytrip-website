@@ -91,7 +91,7 @@ var HomeComponent = /** @class */ (function () {
                         hotel_option: {
                             title: "Cancún, Mexico",
                             city: "Cancún",
-                            banner: "Cancún",
+                            banner: "Cancun",
                             state: "",
                             country: "Mexico",
                             type: "city",
