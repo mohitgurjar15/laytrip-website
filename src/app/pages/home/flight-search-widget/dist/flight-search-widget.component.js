@@ -258,7 +258,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
         ;
         if (this.rangeDates[0] && this.rangeDates[1]) {
-            var daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
+            // let daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
             this.returnDate = this.rangeDates[1];
             this.departureDate = this.rangeDates[0];
             if (!moment(this.rangeDates[1]).isAfter(moment(this.rangeDates[0]))) {

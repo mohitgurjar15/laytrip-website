@@ -51,7 +51,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     public translate: TranslateService,
     public modalService: NgbModal,
     public router: Router,
-    private commonFunction: CommonFunction,
+    public commonFunction: CommonFunction,
     public cd: ChangeDetectorRef,
     private cartService: CartService,
     private cookieService: CookieService,
