@@ -29,8 +29,90 @@ var HomeComponent = /** @class */ (function () {
         this.moduleId = 3;
         this.dealList = [];
         this.host = '';
+        this.slides = [
+            {
+                src: "https://static.toiimg.com/photo/76420840.cms",
+                location: {
+                    from: {
+                        airport_code: 'NYC'
+                    },
+                    to: {
+                        airport_code: 'LAS',
+                        hotel_option: {
+                            title: "Las Vegas, Nevada, United States",
+                            city: "Las Vegas",
+                            state: "Nevada",
+                            country: "United States",
+                            type: "city",
+                            hotel_id: "",
+                            city_id: "800049030",
+                            geo_codes: {
+                                lat: "36.1190",
+                                long: "-115.1680"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                src: "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png",
+                location: {
+                    from: {
+                        airport_code: 'NYC'
+                    },
+                    to: {
+                        airport_code: 'MIA',
+                        hotel_option: {
+                            title: "Miami Beach, Florida, United States",
+                            city: "Miami Beach",
+                            state: "Florida",
+                            country: "United States",
+                            type: "city",
+                            hotel_id: "",
+                            city_id: "800047419",
+                            geo_codes: {
+                                lat: "25.7903",
+                                long: "-80.1303"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                src: "http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg",
+                location: {
+                    from: {
+                        airport_code: 'NYC'
+                    },
+                    to: {
+                        airport_code: 'CUN',
+                        hotel_option: {
+                            title: "Cancún, Mexico",
+                            city: "Cancún",
+                            state: "",
+                            country: "Mexico",
+                            type: "city",
+                            hotel_id: "",
+                            city_id: "800026864",
+                            geo_codes: {
+                                lat: "21.1613",
+                                long: "-86.8341"
+                            }
+                        }
+                    }
+                }
+            }
+        ];
         this.renderer.addClass(document.body, 'bg_color');
         this.countryCode = this.commonFunction.getUserCountry();
+        this.currentSlide = this.slides[0];
+        this.homeService.setOffersData(this.currentSlide);
+        /* this.homeService.getSlideOffers.subscribe(sliders => {
+          if (typeof sliders != 'undefined' && Object.keys(sliders).length > 0) {
+            let keys: any = sliders;
+            console.log(keys)
+          }
+        }) */
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -43,6 +125,7 @@ var HomeComponent = /** @class */ (function () {
         setTimeout(function () {
             _this.openCookiePolicyPopup();
         }, 5000);
+        this.homeService.setOffersData(this.currentSlide);
         this.$tabName = this.homeService.getActiveTabName.subscribe(function (tabName) {
             if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) {
                 var tab = tabName;
@@ -60,9 +143,6 @@ var HomeComponent = /** @class */ (function () {
         this.getDeal(this.moduleId);
         this.$tabName.unsubscribe();
         this.homeService.setActiveTab('');
-        this.homeService.getActiveTabName.subscribe(function (tabName) {
-            if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) { }
-        });
         this.isRefferal = this.commonFunction.isRefferal();
     };
     HomeComponent.prototype.openCookiePolicyPopup = function () {
@@ -184,6 +264,9 @@ var HomeComponent = /** @class */ (function () {
             //   document.getElementById('login_btn').style.background = '#FF00BC';
             // }
         }
+        if (this.commonFunction.isRefferal()) {
+            this.homeService.setOffersData(this.currentSlide);
+        }
     };
     HomeComponent.prototype.ngOnDestroy = function () {
         this.renderer.removeClass(document.body, 'bg_color');
@@ -196,6 +279,15 @@ var HomeComponent = /** @class */ (function () {
         else if (this.moduleId == 3) {
             this.homeService.setLocationForHotel(newItem);
         }
+    };
+    HomeComponent.prototype.activeSlide = function (activeSlide) {
+        this.clickOnTab('hotel');
+        $('#nav-hotel').trigger('click');
+        this.currentSlide = this.slides[activeSlide];
+        this.homeService.setOffersData(this.currentSlide);
+    };
+    HomeComponent.prototype.getCurrentChangeCounter = function (event) {
+        this.currentChangeCounter = event;
     };
     HomeComponent = __decorate([
         core_1.Component({

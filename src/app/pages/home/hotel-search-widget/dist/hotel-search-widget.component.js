@@ -20,6 +20,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.homeService = homeService;
         this.cd = cd;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.currentChangeCounter = new core_1.EventEmitter();
         this.checkInDate = new Date();
         this.checkOutDate = new Date();
         this.maxDate = {};
@@ -62,6 +63,8 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.showCommingSoon = false;
         this.customStartDateValidation = "2021-06-02";
         this.customEndDateValidation = "2021-06-03";
+        this.isDatePickerOpen = false;
+        this.counterChangeVal = 0;
         this.hotelSearchForm = this.fb.group({
             fromDestination: ['', [forms_1.Validators.required]]
         });
@@ -89,6 +92,21 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     HotelSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
+        this.homeService.getSlideOffers.subscribe(function (currentSlide) {
+            if (_this.commonFunction.isRefferal()) {
+                if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+                    var keys = currentSlide;
+                    _this.dealDateValidation();
+                    _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = '';
+                    _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = keys.location.to.hotel_option.title;
+                    _this.searchHotelInfo.latitude = _this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
+                    _this.searchHotelInfo.longitude = _this.fromDestinationInfo.geo_codes.long = keys.location.to.hotel_option.geo_codes.long;
+                    _this.searchHotelInfo.city_id = _this.fromDestinationInfo.city_id = keys.location.to.hotel_option.city_id;
+                    _this.searchHotelInfo.location = _this.fromDestinationInfo;
+                    _this.validateSearch(true);
+                }
+            }
+        });
         // this.checkInDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.checkInDate = moment().add('31', 'days').toDate();
@@ -213,6 +231,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     };
     HotelSearchWidgetComponent.prototype.searchHotels = function () {
         var _this = this;
+        console.log($('.hotel_desination').val());
         this.hotelSearchFormSubmitted = true;
         if ($('.hotel_desination').val() == '') {
             this.validSearch = false;
@@ -246,7 +265,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             });
         }
         else {
-            console.log('here');
+            this.validSearch = false;
         }
     };
     HotelSearchWidgetComponent.prototype.selectedHotel = function (event) {
@@ -264,14 +283,41 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             this.fromDestinationInfo = event;
             this.validateSearch(true);
         }
-        console.log(this.searchHotelInfo, event);
+        // console.log(this.searchHotelInfo,event)
     };
     HotelSearchWidgetComponent.prototype.validateSearch = function (event) {
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
         this.validSearch = event;
+    };
+    HotelSearchWidgetComponent.prototype.counterValueChanged = function (event) {
+        this.currentChangeCounter.emit(event);
+    };
+    HotelSearchWidgetComponent.prototype.datepickerShow = function () {
+        var _this = this;
+        this.isDatePickerOpen = true;
+        if (this.commonFunction.isRefferal()) {
+            this.progressInterval = setInterval(function () {
+                if (_this.isDatePickerOpen) {
+                    _this.currentChangeCounter.emit(_this.counterChangeVal += 1);
+                }
+                else {
+                    clearInterval(_this.progressInterval);
+                }
+            }, 1000);
+        }
+    };
+    HotelSearchWidgetComponent.prototype.datepickerClose = function () {
+        this.isDatePickerOpen = false;
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)
     ], HotelSearchWidgetComponent.prototype, "dateFilter");
+    __decorate([
+        core_1.Input()
+    ], HotelSearchWidgetComponent.prototype, "currentSlide");
+    __decorate([
+        core_1.Output()
+    ], HotelSearchWidgetComponent.prototype, "currentChangeCounter");
     HotelSearchWidgetComponent = __decorate([
         core_1.Component({
             selector: 'app-hotel-search-widget',

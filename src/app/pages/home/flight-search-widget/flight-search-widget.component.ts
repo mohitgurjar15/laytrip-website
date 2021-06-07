@@ -1,5 +1,4 @@
-import { Component, HostListener, Input, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
-declare var $: any;
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Module } from '../../../model/module.model';
 import { environment } from '../../../../environments/environment';
@@ -10,7 +9,6 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { HomeService } from '../../../services/home.service';
-import { cookieServiceFactory } from 'ngx-cookie';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -22,9 +20,11 @@ export class FlightSearchWidgetComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @ViewChild('dateFilter', /* TODO: add static flag */ undefined) private dateFilter: any;
   rangeDates: Date[];
+  @Output() currentChangeCounter = new EventEmitter();
   modules: Module[];
   moduleList: any = {};
   @Input() calenderPrices: any = [];
+  @Input() currentSlide;
   switchBtnValue = false;
   isRoundTrip: boolean = true;
   flightSearchForm: FormGroup;
@@ -61,6 +61,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   showFromAirportSuggestion: boolean = false;
   showToAirportSuggestion: boolean = false;
   thisElementClicked: boolean = false;
+  counterChangeVal :number = 0;
+  isDatePickerOpen : boolean = false;
+  progressInterval;
 
   searchFlightInfo =
     {
@@ -78,12 +81,10 @@ export class FlightSearchWidgetComponent implements OnInit {
   searchedValue = [];
   searchedFlightData = [];
   constructor(
-    private genericService: GenericService,
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
     private route: ActivatedRoute,
-    private renderer: Renderer2,
     private flightService: FlightService,
     private homeService: HomeService
   ) {
@@ -108,6 +109,25 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fromSearch = [];
+    
+    this.homeService.getSlideOffers.subscribe(currentSlide => {
+        if(this.commonFunction.isRefferal()){
+          if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+            let slide: any = currentSlide;
+            this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
+            this.toSearch =  Object.assign({},airports[slide.location.to.airport_code]);          
+            this.searchFlightInfo.departure = this.fromSearch.code;
+            this.departureDate = moment().add(90, 'days').toDate();
+            if (this.isRoundTrip) {
+              this.returnDate =  moment().add(97, 'days').toDate();
+              this.rangeDates = [this.departureDate, this.returnDate];
+              this.searchFlightInfo.arrival = this.toSearch.code;
+            }
+          }
+        } 
+      })
+    
     // this.departureDate = moment(this.customStartDateValidation).toDate();
 
     if (new Date(this.customStartDateValidation) <= new Date()) {
@@ -172,13 +192,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     //delete BehaviorSubject at the end
     this.homeService.removeToString('flight');
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
-
   }
-
-  ngOnChanges(changes: SimpleChanges) {
-
-  }
-
 
   setFlightDepartureMinDate() {
 
@@ -207,6 +221,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
 
   destinationChangedValue(event) {
+    console.log('here')
     if (event && event.key && event.key === 'fromSearch') {
       this.fromSearch = event.value;
       this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });
@@ -231,6 +246,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   searchFlights() {
+  
     this.flightSearchFormSubmitted = true;
     let queryParams: any = {};
     queryParams.trip = this.isRoundTrip ? 'roundtrip' : 'oneway';
@@ -281,6 +297,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.departureDate = moment(date).toDate();
     this.returnDate = new Date(date);
     this.flightReturnMinDate = new Date(date);
+    //for stop landing slider 
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
   }
 
 
@@ -302,8 +320,12 @@ export class FlightSearchWidgetComponent implements OnInit {
       localStorage.setItem('__to', this.toSearch.code)
     }
   }
-
+  datePickerShow(event){
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
+  }
   selectReturnDateUpdate(date) {
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
+
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay(); 
@@ -554,10 +576,33 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.showFromAirportSuggestion = true;
     this.searchedFlightData = event; 
     this.routeSearch = true; 
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
+
   }
   getflightToSearchRoutes(event){   
     this.showToAirportSuggestion = true;
     this.searchedFlightData = event; 
     this.routeSearch = true; 
+  }
+
+  counterValueChanged(event) {  
+    this.currentChangeCounter.emit(event);
+  }
+  
+  datepickerShow(){
+    this.isDatePickerOpen = true;  
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.isDatePickerOpen){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000);   
+    }
+  }
+
+  datepickerClose(){      
+    this.isDatePickerOpen = false;
   }
 }

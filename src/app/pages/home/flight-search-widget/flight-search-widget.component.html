@@ -26,7 +26,7 @@
         <li class="nav-item travellers_resp desk_li">
             <div class="travellers">
                 <app-traveller-info domid="desk_traveller" label="{{'travellers_and_class' | translate}}"
-                    (changeValue)="changeTravellerInfo($event)">
+                    (changeValue)="changeTravellerInfo($event)"   (currentChangeCounter)="counterValueChanged($event)">
                 </app-traveller-info>
             </div>
         </li>
@@ -42,7 +42,7 @@
             <li class="nav-item travellers_resp mobile_li">
                 <div class="travellers">
                     <app-traveller-info domid="mobile_traveller" label="{{'travellers_and_class' | translate}}"
-                        (changeValue)="changeTravellerInfo($event)">
+                        (changeValue)="changeTravellerInfo($event)"  (currentChangeCounter)="counterValueChanged($event)">
                     </app-traveller-info>
                 </div>
             </li>
@@ -69,7 +69,7 @@
                         <li class="grid_box first">
                             <div class="flight_form"
                                 [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
-                                <div class="search_area mohit">
+                                <div class="search_area">
                                     <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'"
                                         [id]="'fromSearch'" [label]="'from' | translate" placeHolder="From where?"
                                         [defaultSelected]="" [tabIndex]=1 [airport]=fromSearch
@@ -77,6 +77,7 @@
                                         (click)="showAirportSuggestion('from')" [inputName]="'fromSearch'"
                                         (searchItem)="searchItem($event)" 
                                         (flightSearchRoute)="getflightSearchRoutes($event)"
+                                        (currentChangeCounter)="counterValueChanged($event)"
                                         >
                                     </app-search-airport>
                                 </div>
@@ -97,7 +98,8 @@
                                         [id]="'toSearch'" [label]="'to' | translate" placeHolder="Where to?"
                                         [defaultSelected]="" [tabIndex]=2 [airport]=toSearch [defaultCity]=""
                                         (changeValue)="destinationChangedValue($event)" [inputName]="'toSearch'"
-                                        (click)="showAirportSuggestion('to')" (flightSearchRoute)="getflightToSearchRoutes($event)" (searchItem)="searchItem($event)">
+                                        (click)="showAirportSuggestion('to')" (flightSearchRoute)="getflightToSearchRoutes($event)" (searchItem)="searchItem($event)"
+                                        (currentChangeCounter)="counterValueChanged($event)">
                                     </app-search-airport>
                                 </div>
                                 <app-airport-suggestion class="desk_suggetions" *ngIf="showToAirportSuggestion" [airport]=toSearch type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)" [searchedFlightData]=searchedFlightData (changeValue)="airportValueChange($event)"></app-airport-suggestion>
@@ -117,8 +119,9 @@
                                         [ngModelOptions]="{standalone: true}" flightDepartureMinDate
                                         [minDate]="flightDepartureMinDate" (onSelect)=selectDepartureDate($event)
                                         [readonlyInput]="true" (onMonthChange)="changeMonth($event)"
+                                        (onShow)="datePickerShow($event)"
                                         panelStyleClass="calender-responsive-view laytrip-cal-view"
-                                        [readonlyInput]="true">
+                                        [readonlyInput]="true" (onShow)="datepickerShow($event)"  (onClose)="datepickerClose($event)">
                                         <p-header class="calender-header" *ngIf="calPrices">
                                             <p *ngIf="isCalenderPriceLoading">We are retrieving monthly prices...</p>
                                             <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
@@ -142,9 +145,9 @@
                                     <p-calendar *ngIf="isRoundTrip" dateFormat="M d, yy" #dateFilter inputId="range"
                                         selectionMode="range" [(ngModel)]="rangeDates"
                                         [ngModelOptions]="{standalone: true}" flightDepartureMinDate
-                                        [minDate]="flightDepartureMinDate"
+                                        [minDate]="flightDepartureMinDate" (onShow)="datePickerShow($event)"
                                         panelStyleClass="calender-responsive-view laytrip-cal-view round_trip_calender"
-                                        [numberOfMonths]="2" (onSelect)=selectReturnDateUpdate($event) [readonlyInput]="true">
+                                        [numberOfMonths]="2" (onSelect)=selectReturnDateUpdate($event) [readonlyInput]="true" (onShow)="datepickerShow($event)"  (onClose)="datepickerClose($event)">
 
                                     </p-calendar>
                                 </div>

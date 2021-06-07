@@ -127,6 +127,7 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onSubmit() {
+
     this.submitted = this.loading = true;
     var otpValue = '';
     let otps: any = this.otpForm.controls.otp.value;

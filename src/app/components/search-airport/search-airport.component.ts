@@ -2,9 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, Afte
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
-import { airports } from '../../pages/flight/airports';
-import { HomeService } from 'src/app/services/home.service';
-// import { data } from './airport';
+import { CommonFunction } from '../../_helpers/common-function';
 
 
 @Component({
@@ -27,12 +25,16 @@ export class SearchAirportComponent implements OnInit {
   @Input() defaultCity: any;
   @Input() airport;
   @Input() inputName;
+  @Output() currentChangeCounter = new EventEmitter();
+  progressInterval;
+  counterChangeVal=0;
+  isInputFocus : boolean = false;
 
   constructor(
     private flightService: FlightService,
     public cd: ChangeDetectorRef,
     public cookieService: CookieService,
-    private homeService: HomeService
+    public commonFunction: CommonFunction,
   ) {
   }
 
@@ -42,7 +44,6 @@ export class SearchAirportComponent implements OnInit {
   loading = false;
 
   ngOnInit() {
-
     this.data[0] = this.airport ? this.airport : [];
     if(Object.keys(this.airport).length==0){
       this.data=[];
@@ -110,7 +111,6 @@ export class SearchAirportComponent implements OnInit {
   }
 
   onRemove(event) {
-    console.log("innnnn")
     this.selectedAirport = {};
   }
 
@@ -132,23 +132,26 @@ export class SearchAirportComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['airport']) {
-      this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
-      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
-    }
-    console.log(changes,this.inputName)
-    if(this.inputName == 'toSearch'){
-      
-
-    }
-    /* this.homeService.getToString.subscribe(toSearchString => {
-      if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
-        this.data  = [];
-        this.data = [airports[toSearchString]]
-        this.defaultCity = airports[toSearchString].city
-        console.log(this.defaultCity)      
-      }
-    }); */
+    if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
+      this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ?  changes['airport'].currentValue.city : [];     
+      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([],[changes['airport'].currentValue]) : [];
+    }    
   }
 
+  onFocus(){
+    this.isInputFocus = true;
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.isInputFocus){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000); 
+    }
+  }
+ 
+  onClose(event){
+    this.isInputFocus = false;
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, HostListener, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { cookieServiceFactory } from 'ngx-cookie';
 import { CommonFunction } from '../../_helpers/common-function';
 declare var $: any;
 
@@ -11,6 +12,7 @@ declare var $: any;
 export class TravellerInfoComponent implements OnInit {
 
   @Output() changeValue = new EventEmitter<any>();
+  @Output() currentChangeCounter = new EventEmitter();
   @Input() label;
   @Input() domid;
 
@@ -23,6 +25,8 @@ export class TravellerInfoComponent implements OnInit {
   errorMessage:string='';
   countryCode:string;
   showTraveller:boolean=false;
+  progressInterval;
+  counterChangeVal=0;
 
   travellerInfo = {
     adult: 0,
@@ -48,60 +52,14 @@ export class TravellerInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadJquery();
     this.totalPerson = this.adultValue + this.childValue + this.infantValue;
     this.travelerLabel = this.totalPerson > 1 ? 'Travelers' : 'Traveler';
-  }
-
-  loadJquery() {
-   /*  $("body").click(function () {
-      $(".add_traveler__open").hide();
-    }); */
-
-  //  /*  $(".add_traveler_").click(function (e) {
-  //     console.log(e)
-  //       // e.stopPropagation();
-  //       if((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') || 
-  //       (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')
-  //       ) {          
-  //         $(".add_traveler__open").hide();
-  //       } else {
-  //         $(".add_traveler__open").show();          
-  //       /*   if(e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide'){            
-  //           $(".add_traveler__open").hide();
-  //         }  else {
-  //           $(".add_traveler__open").show();          
-  //         } */ 
-  //       }
-  //     $(".add_class_sec_open_").hide();
-  //   }); */
-
-   /*  $('.add_traveler__open').click(
-      function (e) {
-        // e.stopPropagation();
-      }
-    ); */
-
   }
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if(this.eRef.nativeElement.contains(event.target)) {      
       $(".add_class_sec_open_").hide();
-
-      /* if(
-
-        // (event.target.nextSibling.classList != '' && typeof event.target.nextSibling.classList != 'undefined' &&  event.target.nextSibling.classList[2] == 'panel_hide') || 
-      
-    //  (event.currentTarget.nextSibling.classList != null &&  typeof event.currentTarget.nextSibling.classList != 'undefined'&&   event.currentTarget.nextSibling.classList[1] == 'panel_hide') ||
-      
-      ( event.target.offsetParent.nextElementSibling.classList != null && typeof event.target.offsetParent.nextElementSibling.classList != 'undefined' && event.target.offsetParent.nextElementSibling.classList[2] == 'panel_hide')
-            
-      ) {    
-        this.showTraveller = false;
-      }  else {        
-        this.showTraveller = true;
-      }  */     
     } else {
       this.showTraveller = false;
     }
@@ -110,6 +68,15 @@ export class TravellerInfoComponent implements OnInit {
   toggleTraveller(){
     $(".add_class_sec_open_").hide();
     this.showTraveller=!this.showTraveller;
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.showTraveller){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000); 
+    }
   }
 
  

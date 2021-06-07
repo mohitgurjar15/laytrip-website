@@ -30,6 +30,82 @@ export class HomeComponent implements OnInit {
   dealList = [];
   host:string='';
   $tabName;
+  currentSlide;
+  currentChangeCounter;
+  public slides = [
+    { 
+      src: "https://static.toiimg.com/photo/76420840.cms",
+      location:{
+        from : {
+          airport_code : 'NYC'
+        },
+        to : {
+          airport_code : 'LAS',
+          hotel_option:{
+            title: "Las Vegas, Nevada, United States",
+            city: "Las Vegas",
+            state: "Nevada",
+            country: "United States",
+            type: "city",
+            hotel_id: "",
+            city_id: "800049030",
+            geo_codes: {
+              lat: "36.1190",
+              long: "-115.1680"
+            }
+          }
+        }
+      }
+    },
+    { 
+      src: "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png",
+      location:{
+        from : {
+          airport_code : 'NYC'
+        },
+        to : {
+          airport_code : 'MIA',
+          hotel_option:{
+            title: "Miami Beach, Florida, United States",
+            city: "Miami Beach",
+            state: "Florida",
+            country: "United States",
+            type: "city",
+            hotel_id: "",
+            city_id: "800047419",
+            geo_codes: {
+              lat: "25.7903",
+              long: "-80.1303"
+            }
+          }
+        }
+      }
+    },
+    { 
+      src: "http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg",
+      location:{
+        from : {
+          airport_code : 'NYC'
+        },
+        to : {
+          airport_code : 'CUN',
+          hotel_option:{
+            title: "Cancún, Mexico",
+            city: "Cancún",
+            state: "",
+            country: "Mexico",
+            type: "city",
+            hotel_id: "",
+            city_id: "800026864",
+            geo_codes: {
+              lat: "21.1613",
+              long: "-86.8341"
+            }
+          }
+        }
+      }
+    }
+  ];
 
   constructor(
     private genericService: GenericService,
@@ -45,6 +121,16 @@ export class HomeComponent implements OnInit {
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
+    this.currentSlide = this.slides[0];
+
+    this.homeService.setOffersData(this.currentSlide);
+
+    /* this.homeService.getSlideOffers.subscribe(sliders => {
+      if (typeof sliders != 'undefined' && Object.keys(sliders).length > 0) {
+        let keys: any = sliders;
+        console.log(keys)
+      }
+    }) */
   }
 
   ngOnInit(): void {
@@ -57,6 +143,7 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.openCookiePolicyPopup();
     }, 5000);
+    this.homeService.setOffersData(this.currentSlide);
 
     this.$tabName = this.homeService.getActiveTabName.subscribe(tabName=> {
       if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){     
@@ -72,12 +159,10 @@ export class HomeComponent implements OnInit {
     });
     //get deal with module id and also with active tab
     this.getDeal(this.moduleId);
+    
     this.$tabName.unsubscribe();
     this.homeService.setActiveTab('');
-    this.homeService.getActiveTabName.subscribe(tabName=> {
-      if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){  }
-      
-    });
+  
 
     this.isRefferal = this.commonFunction.isRefferal();
   }
@@ -214,6 +299,10 @@ export class HomeComponent implements OnInit {
       //   document.getElementById('login_btn').style.background = '#FF00BC';
       // }
     }
+    if(this.commonFunction.isRefferal()){
+      this.homeService.setOffersData(this.currentSlide);
+    }
+
   }
 
   ngOnDestroy() {
@@ -227,6 +316,17 @@ export class HomeComponent implements OnInit {
     } else if(this.moduleId == 3) {
       this.homeService.setLocationForHotel(newItem);
     } 
+  }
+  
+  activeSlide(activeSlide){
+    this.clickOnTab('hotel');
+    $('#nav-hotel').trigger('click');
+    this.currentSlide=this.slides[activeSlide]
+    this.homeService.setOffersData(this.currentSlide);
+  }
+
+  getCurrentChangeCounter(event){
+    this.currentChangeCounter = event; 
   }
 
 

@@ -943,6 +943,83 @@ select {
 
 //<!-- Close Coming Soon page css -->
 
+//<!-- home slider css -->
+.home_bg_slider {
+  height: calc(100vh - 100px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include ipad-view{
+    height: 100vh;
+    min-height: 580px;
+  }
+
+  .carousel {
+    border-radius: 0 !important;
+
+    .slide {
+      border-radius: 0 !important;
+
+      &:hover {
+        transform: scale(1);
+      }
+    }
+
+    .control {
+
+      @include tab-view{
+        display: none;
+      }
+      
+      &.prev {
+        opacity: 0;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &.next {
+        opacity: 0;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+  }
+
+  .boolean_nav {
+    z-index: 9;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: 10px;
+    justify-content: center;
+    width: 100%;
+
+    li {
+      margin: 0 2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      padding: 0 !important;
+      background-color: $box-border-color;
+
+      &.active {
+        background-color: $primary-color;
+      }
+
+    }
+  }
+}
+
+//<!-- home slider css -->
+
 //<!--  Start Banner Section css -->
 .home_banner {
   .banner_inner {
@@ -1099,7 +1176,8 @@ select {
 
                   .search_area {
                     background-color: transparent;
-                    .class_sec_info{
+
+                    .class_sec_info {
                       cursor: default;
                     }
                   }
@@ -2013,7 +2091,8 @@ select {
 
               .search_area {
                 background-color: transparent;
-                .class_sec_info{
+
+                .class_sec_info {
                   cursor: default;
                 }
               }

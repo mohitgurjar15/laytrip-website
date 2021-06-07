@@ -1,5 +1,7 @@
 <!--  Start Banner Section-->
-<section class="home_banner" id="home_banner" [ngClass]="{'br_bnr':countryCode=='DR'}">
+<section class="home_banner " id="home_banner" [ngClass]="{'banner_bg':isRefferal==false}">
+    <!-- class name banner_bg -->
+    <carousel *ngIf="isRefferal==true" class="home_bg_slider" (activeSlide)="activeSlide($event)" currentChangeCounter={{currentChangeCounter}} [slides]="slides"></carousel>
     <div class="container banner_inner">
         <div class="banner_text">
             <div class="block_left" *ngIf="countryCode!='DR'">
@@ -7,24 +9,13 @@
                     <h2 [innerHTML]="'flight_main_title' | translate"></h2>
                     <img class="" src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Flight Icon" />!
                 </span>
-                <!-- <p>{{'flight_second_title' | translate}}</p> -->
                 <p>Book Flights and Hotels on layaway now! <br> Customized payment plans. No credit checks. No interest
                     charges.</p>
             </div>
-
-            <!-- <div class="block_right" *ngIf="countryCode=='DR'">
-                <img src="{{s3BucketUrl}}assets/images/dominican_republic__logo.svg?var=1.0.0" alt="Dominican Republic">
-                <span>Dominican Republic has it all</span>
-            </div> -->
         </div>
 
 
         <div class="banner_tab">
-            <div class="block_dr_text" *ngIf="countryCode=='DR'">
-                Dominican Republic has it all, get it with Installment payments
-                <span>República Dominicana lo tiene todo, consíguelo con pagos flexibles</span>
-            </div>
-
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 
@@ -36,18 +27,15 @@
                             alt="Flight Icon" />
                         <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_gray.svg"
                             alt="Flight Icon" />
-                        <!-- <span>{{'flight' | translate}}</span> -->
                     </a>
                     <a class="nav-item nav-link hotel-tab active" id="nav-hotel" data-toggle="tab" href="#hotel"
                         role="tab" aria-selected="false" (click)="clickOnTab('hotel')">
-                        <!-- data-toggle="tab" href="#hotel" -->
                         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg"
                             alt="Hotel Icon" />
                         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg"
                             alt="Hotel Icon" />
                         <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_gray.svg"
                             alt="Flight Icon">
-                        <!-- <span>{{'hotel' | translate}}</span> -->
                     </a>
                     <a *ngIf="!isRefferal" class="nav-item nav-link " style="pointer-events: none;" id="nav-accommodation" data-toggle="tab"
                         href="#accommodation" role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
@@ -57,7 +45,6 @@
                             alt="Accommodation Icon" />
                         <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_gray.svg"
                             alt="Flight Icon">
-                        <!-- <span>{{'home_rental' | translate}}</span> -->
                     </a>
                     <a *ngIf="!isRefferal" class="nav-item nav-link" style="pointer-events: none;" id="nav-accommodation" data-toggle="tab"
                         href="#Car" role="tab" aria-selected="false" (click)="clickOnTab('home-rentals')">
@@ -67,32 +54,24 @@
                             alt="car Icon" />
                         <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_gray.svg"
                             alt="Flight Icon">
-                        <!-- <span>{{'home_rental' | translate}}</span> -->
                     </a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade active show" id="hotel" role="tabpanel" aria-labelledby="nav-hotel">
-                    <app-hotel-search-widget></app-hotel-search-widget>
+                    <app-hotel-search-widget  (currentChangeCounter)=getCurrentChangeCounter($event)></app-hotel-search-widget>
                 </div>
                 <div class="tab-pane fade show " id="flight" role="tabpanel" aria-labelledby="nav-flight">
-                    <app-flight-search-widget></app-flight-search-widget>
+                    <app-flight-search-widget  (currentChangeCounter)=getCurrentChangeCounter($event)></app-flight-search-widget>
                 </div>
                 <div class="tab-pane fade" id="accommodation" role="tabpanel" aria-labelledby="nav-accommodation">
-                    <app-vacation-search-widget></app-vacation-search-widget>
+                   <!--  <app-vacation-search-widget></app-vacation-search-widget> -->
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="stripper" *ngIf="countryCode=='DR'">
-    <div class="container">
-        <div class="row">
-            <p>Spring Break special deals <span>/ Precios especiales por Semana Santa</span></p>
-        </div>
-    </div>
-</section>
 
 <!--  Close Banner Section-->
 <!-- <app-featured-city ></app-featured-city> -->

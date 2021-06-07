@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, HostListener } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, HostListener, ViewChild } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { HotelService } from '../../services/hotel.service';
 import { environment } from '../../../environments/environment';
+import { CommonFunction } from '../../_helpers/common-function';
 
 @Component({
   selector: 'app-hotel-suggestion',
@@ -12,6 +13,7 @@ export class HotelSuggestionComponent implements OnInit {
 
   @Output() selectedHotel = new EventEmitter();
   @Output() validateSearch = new EventEmitter();
+  @Output() currentChangeCounter = new EventEmitter();
   isValidSearch: boolean = true;
   s3BucketUrl = environment.s3BucketUrl;
   loading: boolean = false;
@@ -22,9 +24,14 @@ export class HotelSuggestionComponent implements OnInit {
   isShowDropDown: boolean = false;
   thisElementClicked: boolean = false;
   $autoComplete;
+  isInputFocus : boolean = false;
+  progressInterval;
+  counterChangeVal=0;
+
   constructor(
     private hotelService: HotelService,
     private homeService: HomeService,
+    private commonFunction: CommonFunction,
 
   ) { }
 
@@ -33,11 +40,14 @@ export class HotelSuggestionComponent implements OnInit {
   }
   
   ngOnChanges(changes: SimpleChanges) {    
+    
     this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {        
         this.searchItem = hotelInfo.title;
       }
     });
+    console.log(changes )
+    
   }
 
   searchLocation(event) {
@@ -50,7 +60,8 @@ export class HotelSuggestionComponent implements OnInit {
       //this.selectedHotel.emit({})
       this.validateSearch.emit(false);
       return;
-    }
+    } 
+
     if (!notAllowedKey.includes(event.keyCode)) {
       this.isShowDropDown = this.searchItem.length > 0 ? true : false;
       this.isValidSearch = this.searchItem.length > 0 ? true : false;
@@ -118,9 +129,31 @@ export class HotelSuggestionComponent implements OnInit {
     }
     this.thisElementClicked = false;
   }
-
+  counter =0;
   @HostListener('click')
-  clickInside() {
+  clickInside() {   
+    this.counter+=1;
+    this.currentChangeCounter.emit(this.counter);
     this.isShowDropDown = true;
   }
+  
+  onFocus(){
+    this.isInputFocus = true;
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.isInputFocus){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000);
+    }
+  }
+
+  focusOut(){
+    this.isInputFocus = false;
+  }
+  
+
+
 }
