@@ -5,7 +5,11 @@
     <div class="container banner_inner">
         <div class="banner_text">
             <div class="block_left" *ngIf="countryCode!='DR'">
-                <span class="banner_text_span">
+                <span class="banner_text_span" *ngIf="isRefferal">
+                    <h2>$9.99 NY to {{banner_city_name}} Now!</h2>
+                    <!-- <img class="" src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Flight Icon" />! -->
+                </span>
+                <span class="banner_text_span" *ngIf="!isRefferal">
                     <h2 [innerHTML]="'flight_main_title' | translate"></h2>
                     <img class="" src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Flight Icon" />!
                 </span>

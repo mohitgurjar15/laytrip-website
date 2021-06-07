@@ -11,7 +11,7 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var cookie_policy_component_1 = require("../cookie-policy/cookie-policy.component");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(genericService, commonFunction, fb, router, cd, renderer, homeService, cartService, modalService, cookieService) {
+    function HomeComponent(genericService, commonFunction, fb, router, cd, renderer, homeService, modalService, cookieService) {
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.fb = fb;
@@ -19,7 +19,6 @@ var HomeComponent = /** @class */ (function () {
         this.cd = cd;
         this.renderer = renderer;
         this.homeService = homeService;
-        this.cartService = cartService;
         this.modalService = modalService;
         this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -29,6 +28,7 @@ var HomeComponent = /** @class */ (function () {
         this.moduleId = 3;
         this.dealList = [];
         this.host = '';
+        this.banner_city_name = 'Miami';
         this.slides = [
             {
                 src: "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/miami.png",
@@ -41,6 +41,7 @@ var HomeComponent = /** @class */ (function () {
                         hotel_option: {
                             title: "Miami Beach, Florida, United States",
                             city: "Miami Beach",
+                            banner: "Miami",
                             state: "Florida",
                             country: "United States",
                             type: "city",
@@ -65,6 +66,7 @@ var HomeComponent = /** @class */ (function () {
                         hotel_option: {
                             title: "Las Vegas, Nevada, United States",
                             city: "Las Vegas",
+                            banner: "Las Vegas",
                             state: "Nevada",
                             country: "United States",
                             type: "city",
@@ -89,6 +91,7 @@ var HomeComponent = /** @class */ (function () {
                         hotel_option: {
                             title: "Cancún, Mexico",
                             city: "Cancún",
+                            banner: "Cancún",
                             state: "",
                             country: "Mexico",
                             type: "city",
@@ -220,7 +223,6 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.getDeal = function (moduleId) {
         var _this = this;
-        console.log(this.s3BucketUrl);
         this.moduleId = moduleId;
         this.homeService.getDealList(moduleId).subscribe(function (response) {
             if (_this.moduleId == 1 && _this.commonFunction.isRefferal()) {
@@ -266,6 +268,7 @@ var HomeComponent = /** @class */ (function () {
             // }
         }
         if (this.commonFunction.isRefferal()) {
+            this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
             this.homeService.setOffersData(this.currentSlide);
         }
     };

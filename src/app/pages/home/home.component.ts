@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   $tabName;
   currentSlide;
   currentChangeCounter;
+  banner_city_name = 'Miami';
   public slides = [
     { 
       src: "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/miami.png",
@@ -44,6 +45,7 @@ export class HomeComponent implements OnInit {
           hotel_option:{
             title: "Miami Beach, Florida, United States",
             city: "Miami Beach",
+            banner: "Miami",
             state: "Florida",
             country: "United States",
             type: "city",
@@ -68,6 +70,7 @@ export class HomeComponent implements OnInit {
           hotel_option:{
             title: "Las Vegas, Nevada, United States",
             city: "Las Vegas",
+            banner: "Las Vegas",
             state: "Nevada",
             country: "United States",
             type: "city",
@@ -92,6 +95,7 @@ export class HomeComponent implements OnInit {
           hotel_option:{
             title: "Cancún, Mexico",
             city: "Cancún",
+            banner: "Cancún",
             state: "",
             country: "Mexico",
             type: "city",
@@ -115,7 +119,6 @@ export class HomeComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private renderer: Renderer2,
     private homeService: HomeService,
-    private cartService: CartService,
     public modalService: NgbModal,
     private cookieService: CookieService,
   ) {
@@ -161,9 +164,7 @@ export class HomeComponent implements OnInit {
     this.getDeal(this.moduleId);
     
     this.$tabName.unsubscribe();
-    this.homeService.setActiveTab('');
-  
-
+    this.homeService.setActiveTab('');  
     this.isRefferal = this.commonFunction.isRefferal();
   }
 
@@ -253,7 +254,6 @@ export class HomeComponent implements OnInit {
   }
 
   getDeal(moduleId) {
-    console.log(this.s3BucketUrl)
     this.moduleId = moduleId;  
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
@@ -301,6 +301,7 @@ export class HomeComponent implements OnInit {
       // }
     }
     if(this.commonFunction.isRefferal()){
+      this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
       this.homeService.setOffersData(this.currentSlide);
     }
 
