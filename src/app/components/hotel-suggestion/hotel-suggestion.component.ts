@@ -46,7 +46,6 @@ export class HotelSuggestionComponent implements OnInit {
         this.searchItem = hotelInfo.title;
       }
     });
-    console.log(changes )
     
   }
 

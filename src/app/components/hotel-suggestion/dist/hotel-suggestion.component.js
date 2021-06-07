@@ -38,7 +38,6 @@ var HotelSuggestionComponent = /** @class */ (function () {
                 _this.searchItem = hotelInfo.title;
             }
         });
-        console.log(changes);
     };
     HotelSuggestionComponent.prototype.searchLocation = function (event) {
         var notAllowedKey = [40, 38, 9, 37, 39];

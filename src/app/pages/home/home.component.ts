@@ -34,31 +34,7 @@ export class HomeComponent implements OnInit {
   currentChangeCounter;
   public slides = [
     { 
-      src: "https://static.toiimg.com/photo/76420840.cms",
-      location:{
-        from : {
-          airport_code : 'NYC'
-        },
-        to : {
-          airport_code : 'LAS',
-          hotel_option:{
-            title: "Las Vegas, Nevada, United States",
-            city: "Las Vegas",
-            state: "Nevada",
-            country: "United States",
-            type: "city",
-            hotel_id: "",
-            city_id: "800049030",
-            geo_codes: {
-              lat: "36.1190",
-              long: "-115.1680"
-            }
-          }
-        }
-      }
-    },
-    { 
-      src: "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png",
+      src: "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/miami.png",
       location:{
         from : {
           airport_code : 'NYC'
@@ -82,7 +58,31 @@ export class HomeComponent implements OnInit {
       }
     },
     { 
-      src: "http://d2q1prebf1m2s9.cloudfront.net/assets/images/banner1.svg",
+      src: "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/lasvegas.png",
+      location:{
+        from : {
+          airport_code : 'NYC'
+        },
+        to : {
+          airport_code : 'LAS',
+          hotel_option:{
+            title: "Las Vegas, Nevada, United States",
+            city: "Las Vegas",
+            state: "Nevada",
+            country: "United States",
+            type: "city",
+            hotel_id: "",
+            city_id: "800049030",
+            geo_codes: {
+              lat: "36.1190",
+              long: "-115.1680"
+            }
+          }
+        }
+      }
+    },
+    { 
+      src: "http://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/cancun.png",
       location:{
         from : {
           airport_code : 'NYC'
@@ -253,13 +253,14 @@ export class HomeComponent implements OnInit {
   }
 
   getDeal(moduleId) {
+    console.log(this.s3BucketUrl)
     this.moduleId = moduleId;  
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
         if(this.moduleId == 1 && this.commonFunction.isRefferal()){
-          this.dealList = JSON.parse('[{"code":"MIA","name":"Miami Intl. Arpt.","city":"Miami","country":"USA","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909-6106.png","key":"M"},{"code":"CUN","name":"Cancun Intl.","city":"Cancun","country":"Mexico","image":"https://api.staging.laytrip.com/static/deal2-8335.png","key":"C"},{"code":"MIA","name":"Miami Intl. Arpt.","city":"Miami","country":"USA","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909-6106.png","key":"M"},{"code":"CUN","name":"Cancun Intl.","city":"Cancun","country":"Mexico","image":"https://api.staging.laytrip.com/static/deal2-8335.png","key":"C"},{"code":"MIA","name":"Miami Intl. Arpt.","city":"Miami","country":"USA","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909-6106.png","key":"M"},{"code":"CUN","name":"Cancun Intl.","city":"Cancun","country":"Mexico","image":"https://api.staging.laytrip.com/static/deal2-8335.png","key":"C"},{"code":"MIA","name":"Miami Intl. Arpt.","city":"Miami","country":"USA","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909-6106.png","key":"M"},{"code":"CUN","name":"Cancun Intl.","city":"Cancun","country":"Mexico","image":"https://api.staging.laytrip.com/static/deal2-8335.png","key":"C"}]');          
+          this.dealList = JSON.parse('[{"code":"PUJ","name":"Punta Cana Intl.","city":"Punta Cana","country":"Dominican Republic","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/puntacana.png""key":"P"},{"code":"TPA","name":"Tampa Intl.","city":"Tampa","country":"USA","key":"T","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/puntacana.png"},{"code":"CUN","name":"Cancun Intl.","city":"Cancun","country":"Mexico","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/cancun.png""key":"C"},{"code":"MCO","name":"Orlando Intl.","city":"Orlando","country":"USA","key":"O","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/orlando.png"},{"code":"LAS","name":"Mc Carran Intl","city":"Las Vegas","country":"USA","key":"L","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/lasvegas.png"},{"code":"DEN","name":"Denver Intl.","city":"Denver","country":"USA","key":"D","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/denver.png"},{"code":"MIA","name":"Miami Intl. Arpt.","city":"Miami","country":"USA","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/miami.png""key":"M"},{"code":"CUN","name":"Tulum","city":"Tulum","country":"Mexico","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/tulum.png""key":"C"}]');          
         } else if(this.moduleId == 3 && this.commonFunction.isRefferal()){
-          this.dealList = JSON.parse('[{"title":"Miami Beach, Florida, United States","city":"Miami Beach","city_id":"800047419","state":"","country":"United States","type":"city","hotel_id":"","lat":"25.7903","long":"-80.1303","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909@2x-2974.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"},{"title":"Miami Beach, Florida, United States","city":"Miami Beach","city_id":"800047419","state":"","country":"United States","type":"city","hotel_id":"","lat":"25.7903","long":"-80.1303","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909@2x-2974.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"},{"title":"Miami Beach, Florida, United States","city":"Miami Beach","city_id":"800047419","state":"","country":"United States","type":"city","hotel_id":"","lat":"25.7903","long":"-80.1303","image":"https://api.staging.laytrip.com/static/shutterstock_1512437909@2x-2974.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://api.staging.laytrip.com/static/shutterstock_1471070054@2x-010f1.png"}]');          
+           this.dealList = JSON.parse('[{"title":"Punta Cana, Dominican Republic","city":"Punta Cana","state":"","country":"Dominican Republic","type":"city","hotel_id":"","city_id":"800013751","lat":"18.6149","long":"-68.3884","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/puntacana.png"},{"title":"Tampa, Florida, United States","city":"Tampa","state":"Florida","country":"United States","type":"city","hotel_id":"","city_id":"800047518","lat":"27.9472","long":"-82.4586","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/tampa.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/cancun.png"},{"title":"Orlando, Florida, United States","city":"Orlando","state":"Florida","country":"United States","type":"city","hotel_id":"","city_id":"800047448","lat":"28.5353","long":"-81.3833","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/orlando.png"},{"title":"Las Vegas, Nevada, United States","city":"Las Vegas","state":"Nevada","country":"United States","type":"city","hotel_id":"","city_id":"800049030","lat":"36.1190","long":"-115.1680","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/lasvegas.png"},{"title":"Denver City, Texas, United States","city":"Denver City","state":"Texas","country":"United States","type":"city","hotel_id":"","city_id":"800098479","lat":"32.9644","long":"-102.8290","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/denver.png"},{"title":"Miami Beach, Florida, United States","city":"Miami Beach","city_id":"800047419","state":"","country":"United States","type":"city","hotel_id":"","lat":"25.7903","long":"-80.1303","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/miami.png"},{"title":"Tulum, Quintana Roo, Mexico","city":"Tulum","state":"Quintana Roo","country":"Mexico","type":"city","hotel_id":"","city_id":"800026663","lat":"20.2107","long":"-87.4630","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/tulum.png"}]');          
         } else {
           this.dealList = response['data'];
         }
