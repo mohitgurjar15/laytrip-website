@@ -106,20 +106,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
-          if(this.flightDetails.length > 0){
-            this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe((res: any) => {
-              if (res) {
-                this.flexibleLoading = this.flexibleNotFound =false;
-                this.dates = res;
-              }
-            }, err => {
-              this.flexibleNotFound = true;
-              this.flexibleLoading = false;
-            });
-          } else {
+          if(this.flightDetails.length == 0){
             this.isNotFound = true;
-            this.flexibleLoading = this.flexibleNotFound =false;
-          }
+          }         
         }
       }, err => {
         this.flightDetails = [];
@@ -131,8 +120,17 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         }
         this.loading = false;
         this.fullPageLoading = false;
-      });  
+      });
 
+      this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe((res: any) => {
+        if (res) {
+          this.flexibleLoading = this.flexibleNotFound =false;
+          this.dates = res;
+        }
+      }, err => {
+        this.flexibleNotFound = true;
+        this.flexibleLoading = false;
+      });
       this.getCalenderPrice(payload)
     } else {
 
@@ -143,20 +141,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
-          if(this.flightDetails.length > 0){
-            this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
-              if (res && res.length) {
-                this.flexibleLoading = this.flexibleNotFound = false;
-                this.dates = res;
-              }
-            }, err => {
-              this.flexibleNotFound = true;
-              this.flexibleLoading = false;
-            });
-          } else {
+          if(this.flightDetails.length == 0){
             this.isNotFound = true;
-            this.flexibleLoading = this.flexibleNotFound =false;
-          }
+          } 
        }     
       }, err => {
         this.loading = this.fullPageLoading= false;
@@ -167,7 +154,15 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         }
       });
     
-     
+      this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
+        if (res && res.length) {
+          this.flexibleLoading = this.flexibleNotFound = false;
+          this.dates = res;
+        }
+      }, err => {
+        this.flexibleNotFound = true;
+        this.flexibleLoading = false;
+      });
 
       this.getCalenderPrice(payload);
     }

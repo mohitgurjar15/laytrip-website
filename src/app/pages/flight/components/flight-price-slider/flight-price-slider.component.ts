@@ -143,7 +143,7 @@ export class FlightPriceSliderComponent implements OnInit {
     else {
       price = item.price
     }
-    return { price :  'Flights Unavailable', className :  'price_unavailabe'};
+    return { price : price > 0 ? '$'+price.toFixed(2) : 'Flights Unavailable', className : price > 0 ? 'price_availabe' : 'price_unavailabe'};
   }
 
   getFlexibleArivalDate(date) {
