@@ -36,12 +36,11 @@ var HotelSuggestionComponent = /** @class */ (function () {
         this.homeService.getLocationForHotelDeal.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
                 _this.searchItem = hotelInfo.title;
-                console.log(_this.searchItem);
             }
         });
+        console.log(changes);
     };
     HotelSuggestionComponent.prototype.searchLocation = function (event) {
-        console.log('onKeyUp');
         var notAllowedKey = [40, 38, 9, 37, 39];
         if ((this.searchItem.length == 0 && event.keyCode == 8)) {
             this.data = [];

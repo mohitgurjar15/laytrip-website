@@ -99,7 +99,6 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                     _this.dealDateValidation();
                     _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = '';
                     _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = keys.location.to.hotel_option.title;
-                    // console.log(this.fromDestinationInfo.title)
                     _this.searchHotelInfo.latitude = _this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
                     _this.searchHotelInfo.longitude = _this.fromDestinationInfo.geo_codes.long = keys.location.to.hotel_option.geo_codes.long;
                     _this.searchHotelInfo.city_id = _this.fromDestinationInfo.city_id = keys.location.to.hotel_option.city_id;

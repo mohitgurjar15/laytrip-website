@@ -44,14 +44,13 @@ export class HotelSuggestionComponent implements OnInit {
     this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {        
         this.searchItem = hotelInfo.title;
-        console.log(this.searchItem)
       }
     });
+    console.log(changes )
     
   }
 
   searchLocation(event) {
-    console.log('onKeyUp')
     let notAllowedKey = [40, 38, 9, 37, 39];
     if ((this.searchItem.length == 0 && event.keyCode == 8)) {
       this.data = [];
