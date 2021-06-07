@@ -42,6 +42,9 @@
             .banner_text {
                 .block_left {
                     padding: 0;
+                    @include tab-view {
+                        padding: 0;
+                    }
                     &::before {
                         content: '';
                         position: relative;
@@ -122,15 +125,16 @@
             max-width: 560px;
 
             @include tab-view {
-                margin-top: 0;
-                margin-bottom: 15px;
+                margin: 0 15px 15px;
             }
 
             .block_left {
                 width: 100%;
                 position: relative;
                 padding: 15px;
-
+                @include tab-view {
+                    padding: 10px;
+                }
                 &::before {
                     content: '';
                     width: 100%;
