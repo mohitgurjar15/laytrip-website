@@ -98,4 +98,17 @@ export class CarouselComponent {
       this.previousChangeCounter=change['currentChangeCounter'].previousValue;
     }
   }
+
+  booletsClick(isCurrentSlideClick,currentSlide,i){
+    if(isCurrentSlideClick){
+      return;
+    } else if(currentSlide>i){
+      console.log('less')
+      this.onPreviousClick();
+    }else if(currentSlide<i){
+      console.log('greater')
+      this.onNextClick();
+    }
+
+  }
 }

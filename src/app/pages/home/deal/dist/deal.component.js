@@ -34,9 +34,9 @@ var DealComponent = /** @class */ (function () {
         this.breakpoints = {
             320: { slidesPerView: 1, spaceBetween: 10, slidesPerGroup: 1 },
             520: { slidesPerView: 2, spaceBetween: 10, slidesPerGroup: 2 },
-            640: { slidesPerView: 3, spaceBetween: 20, slidesPerGroup: 3 },
-            768: { slidesPerView: 3, spaceBetween: 40, slidesPerGroup: 3 },
-            1024: { slidesPerView: 3, spaceBetween: 30, slidesPerGroup: 3 }
+            640: { slidesPerView: 2, spaceBetween: 20, slidesPerGroup: 2 },
+            768: { slidesPerView: 2, spaceBetween: 40, slidesPerGroup: 2 },
+            1024: { slidesPerView: 2, spaceBetween: 30, slidesPerGroup: 2 }
         };
     }
     DealComponent.prototype.ngOnInit = function () {

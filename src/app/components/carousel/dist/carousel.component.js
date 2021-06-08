@@ -68,6 +68,19 @@ var CarouselComponent = /** @class */ (function () {
             this.previousChangeCounter = change['currentChangeCounter'].previousValue;
         }
     };
+    CarouselComponent.prototype.booletsClick = function (isCurrentSlideClick, currentSlide, i) {
+        if (isCurrentSlideClick) {
+            return;
+        }
+        else if (currentSlide > i) {
+            console.log('less');
+            this.onPreviousClick();
+        }
+        else if (currentSlide < i) {
+            console.log('greater');
+            this.onNextClick();
+        }
+    };
     __decorate([
         core_1.Input()
     ], CarouselComponent.prototype, "slides");
