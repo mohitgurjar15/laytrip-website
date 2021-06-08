@@ -87,8 +87,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.fromSearch = [];
-        this.homeService.getSlideOffers.subscribe(function (currentSlide) {
-            if (_this.commonFunction.isRefferal()) {
+        if (this.commonFunction.isRefferal()) {
+            this.homeService.getSlideOffers.subscribe(function (currentSlide) {
                 if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
                     var slide = currentSlide;
                     _this.fromSearch = Object.assign({}, airports_1.airports[slide.location.from.airport_code]);
@@ -101,8 +101,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                         _this.searchFlightInfo.arrival = _this.toSearch.code;
                     }
                 }
-            }
-        });
+            });
+        }
         // this.departureDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.departureDate = moment().add('31', 'days').toDate();

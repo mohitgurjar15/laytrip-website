@@ -116,6 +116,7 @@ export class AddCardComponent implements OnInit {
 
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
+        console.log(error)
         if (error["attribute"]) {
           $("#error_message").text("error");
           if (error["attribute"] == 'month' || error["attribute"] == 'year') {
@@ -124,7 +125,12 @@ export class AddCardComponent implements OnInit {
           }
           $("#" + error["attribute"]).show();
           Spreedly.setStyle(error["attribute"], "border-bottom: 2px solid #ff0000;");
-        } else {
+        } else if(error['status'] == 402){
+          $('#cardError').show();
+          let errorMessage = document.getElementById('cardErrorMessage');
+          errorMessage.innerHTML = "You have entered wrong credit card details.";
+
+        }else {
           $("#full_name").css("border-bottom", "2px solid #d6d6d6");
           $("#month-year").css("border-bottom", "2px solid #d6d6d6");
           Spreedly.setStyle(error["attribute"], "border-bottom: 2px solid #d6d6d6;");

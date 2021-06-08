@@ -111,8 +111,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   ngOnInit(): void {
     this.fromSearch = [];
     
-    this.homeService.getSlideOffers.subscribe(currentSlide => {
-        if(this.commonFunction.isRefferal()){
+    if(this.commonFunction.isRefferal()){
+      this.homeService.getSlideOffers.subscribe(currentSlide => {
           if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
             let slide: any = currentSlide;
             this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
@@ -125,8 +125,8 @@ export class FlightSearchWidgetComponent implements OnInit {
               this.searchFlightInfo.arrival = this.toSearch.code;
             }
           }
-        } 
-      })
+        })
+      } 
     
     // this.departureDate = moment(this.customStartDateValidation).toDate();
 

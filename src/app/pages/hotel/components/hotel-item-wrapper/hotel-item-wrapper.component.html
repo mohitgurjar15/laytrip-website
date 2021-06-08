@@ -100,8 +100,13 @@
                                                             <div class="block_detail_top">
                                                                 <div class="detail_info">
                                                                     <!-- <h4>{{item?.name}}</h4> -->
-                                                                    <a href="#">{{item?.name}}</a>
-                                                                    <span class="adress_span">
+                                                                    <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag"
+                                                                    [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium
+                                                                    [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">{{item?.name}}</a>
+                                                                        <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag"
+                                                                            [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium
+                                                                            [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{item?.name}}</a>
+                                                                                        <span class="adress_span">
 
                                                                         {{item?.full_address}}
                                                                     </span>
@@ -201,7 +206,12 @@
                                     <div class="middle_part">
                                         <div class="detail_info">
                                             <!-- <h4>{{item?.name}}</h4> -->
-                                            <a href="#">{{item?.name}}</a>
+                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag"
+                                                [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium
+                                                [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">{{item?.name}}</a>
+                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag"
+                                                [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium
+                                                [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{item?.name}}</a>
                                             <span class="adress_span">
 
                                                 {{item?.full_address}}
