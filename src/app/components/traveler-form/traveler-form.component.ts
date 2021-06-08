@@ -469,7 +469,6 @@ export class TravelerFormComponent implements OnInit {
 
 
   saveTraveler(cartNumber, traveler_number) {
-
     if (this.travelerForm.invalid) {
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_submitted = true;
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
@@ -518,7 +517,7 @@ export class TravelerFormComponent implements OnInit {
             this.cartService.setLoaderStatus(false)
             if (traveler) {
               this.travelers[`type${cartNumber}`].adults[traveler_number].type = traveler.user_type;
-  
+
               this.travelers[`type${cartNumber}`].adults[traveler_number].userId = traveler.userId;
               this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
               this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
@@ -532,8 +531,8 @@ export class TravelerFormComponent implements OnInit {
                 this.travelers[`type${cartNumber}`].adults[traveler_number].passport_number = traveler.passportNumber;
                 this.travelers[`type${cartNumber}`].adults[traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy');
               }
-  
-  
+
+
               this.travelers[`type${cartNumber}`].adults[traveler_number].module = this.cartItem.type;
               if ((this.cartItem.type == 'flight' && traveler.user_type == 'adult') || (this.cartItem.type == 'hotel' && traveler_number == 0)) {
                 this.travelers[`type${cartNumber}`].adults[traveler_number].is_email_required = true;
@@ -543,26 +542,24 @@ export class TravelerFormComponent implements OnInit {
                 this.travelers[`type${cartNumber}`].adults[traveler_number].is_email_required = false;
                 this.travelers[`type${cartNumber}`].adults[traveler_number].is_phone_required = false;
               }
-  
+
               if (traveler.user_type == 'adult') { this.isAdultTravller = true; }
               if (traveler.user_type == 'child') { this.isChildTravller = true; }
               if (traveler.user_type == 'infant') { this.isInfantTravller = true; }
               this.checkOutService.setTravelers([...this.myTravelers, traveler]);
               console.log("llll", this.travelers)
               this.patch();
-  
+
               this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAsUntouched();
               this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
             }
           }, error => {
             this.cartService.setLoaderStatus(false)
             if (error.status == 409) {
-  
+
             }
           })
         }
-  
-  
       }
     }
 
@@ -621,7 +618,6 @@ export class TravelerFormComponent implements OnInit {
   selectTraveler(travlerId, traveler_number, cartNumber) {
     let traveler = this.myTravelers.find(x => x.userId == travlerId)
     if (traveler && Object.keys(traveler).length > 0) {
-      console.log(cartNumber, traveler_number)
       //this.travelers[`type${cartNumber}`].adults[traveler_number].module = traveler.module;
       this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
       this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
@@ -660,15 +656,13 @@ export class TravelerFormComponent implements OnInit {
   checkMaximumMinimum(event, dobValue, cartNumber, traveler_number) {
     // CHECK MAXIMUM OR MINIMUM DATE OF BIRTH
     let traveler = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
-
     if (
       moment(dobValue)
-        .isAfter(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMinDate).format('MM/DD/YYYY')) &&
-      moment(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMaxDate).format('MM/DD/YYYY'))
-        .isBefore(dobValue)) {
-      this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
-    } else {
+        .isBetween(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMinDate).format('YYYY-MM-DD'),
+          moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMaxDate).format('YYYY-MM-DD'))) {
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = true;
+    } else {
+      this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
     }
     this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.first_name;
     this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.last_name;

@@ -95,11 +95,11 @@ export class AddCardComponent implements OnInit {
     Spreedly.on('ready', function (frame) {
       Spreedly.setPlaceholder("number", "000 000 0000");
       Spreedly.setPlaceholder("cvv", "Enter CVV No.");
-      Spreedly.setFieldType("cvv", "text");
       Spreedly.setFieldType('number', 'text');
+      Spreedly.setFieldType('cvv', 'text');
       // Spreedly.setNumberFormat('maskedFormat');
       Spreedly.setStyle('number', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
-      Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border: none; padding-top: .96em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
+      Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .96em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
     });
 
     Spreedly.on('errors', function (errors) {
@@ -109,14 +109,20 @@ export class AddCardComponent implements OnInit {
       if ($("#full_name").val() == "") {
         $("#first_name").show();
         $("#full_name").css("border-bottom", "2px solid #ff0000");
+      } else {
+        $("#full_name").css("border-bottom", "2px solid #d6d6d6");
       }
       if ($("#month-year").val() == "") {
         $("#month").show();
         $("#month-year").css("border-bottom", "2px solid #ff0000");
+      } else {
+        $("#month-year").css("border-bottom", "2px solid #d6d6d6");
       }
 
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
+        var errorBorder = "2px solid #ff0000";
+        // console.log(error["attribute"]);
         if (error["attribute"]) {
           $("#error_message").text("error");
           if (error["attribute"] == 'month' || error["attribute"] == 'year') {
@@ -126,9 +132,22 @@ export class AddCardComponent implements OnInit {
           $("#" + error["attribute"]).show();
           Spreedly.setStyle(error["attribute"], "border-bottom: 2px solid #ff0000;");
         } else {
+          console.log(error["attribute"]);
           $("#full_name").css("border-bottom", "2px solid #d6d6d6");
           $("#month-year").css("border-bottom", "2px solid #d6d6d6");
           Spreedly.setStyle(error["attribute"], "border-bottom: 2px solid #d6d6d6;");
+        }
+      }
+    });
+
+    Spreedly.on('fieldEvent', function (name, event, activeElement, inputData) {
+      if (event == 'input') {
+        if (inputData["validNumber"]) {
+          Spreedly.setStyle('number', "border-bottom: 2px solid #d6d6d6;");
+          $("#number").hide();
+          $("#error_message").text("");
+        } else {
+          Spreedly.setStyle('number', "border-bottom: 2px solid #ff0000;");
         }
       }
     });
@@ -207,9 +226,11 @@ export class AddCardComponent implements OnInit {
   submitPaymentForm() {
     var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
+    var normalBorder = "2px solid #d6d6d6";
     for (var i = 0; i < paymentMethodFields.length; i++) {
       var field = paymentMethodFields[i];
       var fieldEl = (<HTMLInputElement>document.getElementById(field));
+      fieldEl.style.borderBottom = normalBorder;
 
       if (fieldEl.id === 'month-year') {
         let value = fieldEl.value;
@@ -249,6 +270,13 @@ export class AddCardComponent implements OnInit {
   }
 
   closeNewCardPanel() {
+    $('#cardError').hide();
+    Spreedly.reload();
+    $(".credit_card_error").hide();
+    $("#full_name").css("border-bottom", "2px solid #d6d6d6");
+    $("#month-year").css("border-bottom", "2px solid #d6d6d6");
+    // Spreedly.removeHandlers();
+    $("#payment-form")[0].reset();
     this.add_new_card.emit(false);
   }
 
