@@ -283,6 +283,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   toggleOnewayRoundTrip(type) {
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
+
     if (type === 'roundtrip') {
       this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
       this.rangeDates = [this.departureDate, this.returnDate];

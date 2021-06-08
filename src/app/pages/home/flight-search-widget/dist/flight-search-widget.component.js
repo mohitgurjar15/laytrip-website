@@ -241,6 +241,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
     };
     FlightSearchWidgetComponent.prototype.toggleOnewayRoundTrip = function (type) {
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
         if (type === 'roundtrip') {
             this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
             this.rangeDates = [this.departureDate, this.returnDate];
