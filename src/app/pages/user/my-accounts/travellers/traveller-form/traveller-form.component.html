@@ -146,7 +146,7 @@
                         Enter expiration date.</small>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps">
+            <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps country_selection">
                 <label for="">{{'nationality' |translate}}*</label>
                 <ng-select [ngClass]="{'input-error' : (submitted && travellerForm.controls.country_id.errors)}"
                     [readonly]="formEnable" tabindex="{{travellerId}}" class="ng-customClass" [items]="countries"
