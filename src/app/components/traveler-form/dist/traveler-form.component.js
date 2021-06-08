@@ -446,92 +446,97 @@ var TravelerFormComponent = /** @class */ (function () {
     };
     TravelerFormComponent.prototype.saveTraveler = function (cartNumber, traveler_number) {
         var _this = this;
-        this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = true;
-        //console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.email.validator({} as AbstractControl),"save")
-        //return false;
-        this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAllAsTouched();
-        if (this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].status == 'VALID') {
-            var data = this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value;
-            if (this.cartItem.type == 'hotel') {
-                data.is_primary_traveler = traveler_number == 0 ? true : false;
-                data.module_id = 3;
-                delete data.country_id;
-                delete data.dob;
-            }
-            else {
-                data.dob = moment(this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
-            }
-            if (this.travelers["type" + cartNumber].adults[traveler_number].is_passport_required) {
-                data.passport_number = this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value.passport_number;
-                data.passport_expiry = moment(this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
-            }
-            this.cartService.setLoaderStatus(true);
-            var userId = this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value.userId;
-            if (userId) {
-                if (traveler_number == 0 && this.accountHolderEmail) {
-                    data.email = this.accountHolderEmail;
+        if (this.travelerForm.invalid) {
+            this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = true;
+            this.travelers["type" + cartNumber].adults[traveler_number].is_valid_date = false;
+            this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAllAsTouched();
+        }
+        else {
+            this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = true;
+            //console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.email.validator({} as AbstractControl),"save")
+            //return false;
+            // this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched();
+            if (this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].status == 'VALID') {
+                var data = this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value;
+                if (this.cartItem.type == 'hotel') {
+                    data.is_primary_traveler = traveler_number == 0 ? true : false;
+                    data.module_id = 3;
+                    delete data.country_id;
+                    delete data.dob;
                 }
-                //Edit
-                this.travelerService.updateAdult(data, userId).subscribe(function (traveler) {
-                    _this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = false;
-                    _this.cartService.setLoaderStatus(false);
-                    var index = _this.myTravelers.findIndex(function (x) { return x.userId == traveler.userId; });
-                    _this.myTravelers[index] = traveler;
-                    //this.checkOutService.setTravelers([this.myTravelers]);
-                    _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAsUntouched();
-                    _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].disable();
-                }, (function (error) {
-                    _this.cartService.setLoaderStatus(false);
-                }));
-            }
-            else {
-                this.travelerService.addAdult(data).subscribe(function (traveler) {
-                    _this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = false;
-                    _this.cartService.setLoaderStatus(false);
-                    if (traveler) {
-                        _this.travelers["type" + cartNumber].adults[traveler_number].type = traveler.user_type;
-                        _this.travelers["type" + cartNumber].adults[traveler_number].userId = traveler.userId;
-                        _this.travelers["type" + cartNumber].adults[traveler_number].first_name = traveler.firstName;
-                        _this.travelers["type" + cartNumber].adults[traveler_number].last_name = traveler.lastName;
-                        _this.travelers["type" + cartNumber].adults[traveler_number].gender = traveler.gender;
-                        _this.travelers["type" + cartNumber].adults[traveler_number].email = traveler.email;
-                        _this.travelers["type" + cartNumber].adults[traveler_number].country_code = traveler.countryCode;
-                        _this.travelers["type" + cartNumber].adults[traveler_number].phone_no = traveler.phoneNo;
-                        _this.travelers["type" + cartNumber].adults[traveler_number].country_id = traveler.country != null ? traveler.country.id : '';
-                        _this.travelers["type" + cartNumber].adults[traveler_number].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
-                        if (_this.travelers["type" + cartNumber].adults[traveler_number].is_passport_required) {
-                            _this.travelers["type" + cartNumber].adults[traveler_number].passport_number = traveler.passportNumber;
-                            _this.travelers["type" + cartNumber].adults[traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy');
-                        }
-                        _this.travelers["type" + cartNumber].adults[traveler_number].module = _this.cartItem.type;
-                        if ((_this.cartItem.type == 'flight' && traveler.user_type == 'adult') || (_this.cartItem.type == 'hotel' && traveler_number == 0)) {
-                            _this.travelers["type" + cartNumber].adults[traveler_number].is_email_required = true;
-                            _this.travelers["type" + cartNumber].adults[traveler_number].is_phone_required = true;
-                        }
-                        else {
-                            _this.travelers["type" + cartNumber].adults[traveler_number].is_email_required = false;
-                            _this.travelers["type" + cartNumber].adults[traveler_number].is_phone_required = false;
-                        }
-                        if (traveler.user_type == 'adult') {
-                            _this.isAdultTravller = true;
-                        }
-                        if (traveler.user_type == 'child') {
-                            _this.isChildTravller = true;
-                        }
-                        if (traveler.user_type == 'infant') {
-                            _this.isInfantTravller = true;
-                        }
-                        _this.checkOutService.setTravelers(__spreadArrays(_this.myTravelers, [traveler]));
-                        console.log("llll", _this.travelers);
-                        _this.patch();
+                else {
+                    data.dob = moment(this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
+                }
+                if (this.travelers["type" + cartNumber].adults[traveler_number].is_passport_required) {
+                    data.passport_number = this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value.passport_number;
+                    data.passport_expiry = moment(this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
+                }
+                this.cartService.setLoaderStatus(true);
+                var userId = this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value.userId;
+                if (userId) {
+                    if (traveler_number == 0 && this.accountHolderEmail) {
+                        data.email = this.accountHolderEmail;
+                    }
+                    //Edit
+                    this.travelerService.updateAdult(data, userId).subscribe(function (traveler) {
+                        _this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = false;
+                        _this.cartService.setLoaderStatus(false);
+                        var index = _this.myTravelers.findIndex(function (x) { return x.userId == traveler.userId; });
+                        _this.myTravelers[index] = traveler;
+                        //this.checkOutService.setTravelers([this.myTravelers]);
                         _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAsUntouched();
                         _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].disable();
-                    }
-                }, function (error) {
-                    _this.cartService.setLoaderStatus(false);
-                    if (error.status == 409) {
-                    }
-                });
+                    });
+                }
+                else {
+                    this.travelerService.addAdult(data).subscribe(function (traveler) {
+                        _this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = false;
+                        _this.cartService.setLoaderStatus(false);
+                        if (traveler) {
+                            _this.travelers["type" + cartNumber].adults[traveler_number].type = traveler.user_type;
+                            _this.travelers["type" + cartNumber].adults[traveler_number].userId = traveler.userId;
+                            _this.travelers["type" + cartNumber].adults[traveler_number].first_name = traveler.firstName;
+                            _this.travelers["type" + cartNumber].adults[traveler_number].last_name = traveler.lastName;
+                            _this.travelers["type" + cartNumber].adults[traveler_number].gender = traveler.gender;
+                            _this.travelers["type" + cartNumber].adults[traveler_number].email = traveler.email;
+                            _this.travelers["type" + cartNumber].adults[traveler_number].country_code = traveler.countryCode;
+                            _this.travelers["type" + cartNumber].adults[traveler_number].phone_no = traveler.phoneNo;
+                            _this.travelers["type" + cartNumber].adults[traveler_number].country_id = traveler.country != null ? traveler.country.id : '';
+                            _this.travelers["type" + cartNumber].adults[traveler_number].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
+                            if (_this.travelers["type" + cartNumber].adults[traveler_number].is_passport_required) {
+                                _this.travelers["type" + cartNumber].adults[traveler_number].passport_number = traveler.passportNumber;
+                                _this.travelers["type" + cartNumber].adults[traveler_number].passport_expiry = moment(traveler.passportExpiry, "YYYY-MM-DD").format('MMM DD, yy');
+                            }
+                            _this.travelers["type" + cartNumber].adults[traveler_number].module = _this.cartItem.type;
+                            if ((_this.cartItem.type == 'flight' && traveler.user_type == 'adult') || (_this.cartItem.type == 'hotel' && traveler_number == 0)) {
+                                _this.travelers["type" + cartNumber].adults[traveler_number].is_email_required = true;
+                                _this.travelers["type" + cartNumber].adults[traveler_number].is_phone_required = true;
+                            }
+                            else {
+                                _this.travelers["type" + cartNumber].adults[traveler_number].is_email_required = false;
+                                _this.travelers["type" + cartNumber].adults[traveler_number].is_phone_required = false;
+                            }
+                            if (traveler.user_type == 'adult') {
+                                _this.isAdultTravller = true;
+                            }
+                            if (traveler.user_type == 'child') {
+                                _this.isChildTravller = true;
+                            }
+                            if (traveler.user_type == 'infant') {
+                                _this.isInfantTravller = true;
+                            }
+                            _this.checkOutService.setTravelers(__spreadArrays(_this.myTravelers, [traveler]));
+                            console.log("llll", _this.travelers);
+                            _this.patch();
+                            _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAsUntouched();
+                            _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].disable();
+                        }
+                    }, function (error) {
+                        _this.cartService.setLoaderStatus(false);
+                        if (error.status == 409) {
+                        }
+                    });
+                }
             }
         }
     };

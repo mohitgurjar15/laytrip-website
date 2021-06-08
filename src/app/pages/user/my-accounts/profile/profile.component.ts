@@ -263,7 +263,8 @@ export class ProfileComponent implements OnInit {
         address: res.address,
         home_airport: res.airportInfo.code ? res.airportInfo.city+' ('+ res.airportInfo.code+')' : null,
         country_id: res.country.name ? res.country.name : 'United States',
-        state_id: res.state.name ? res.state.name : null,
+        // state_id: res.state.name ? res.state.name : null,
+        state_id: res.state.id ? res.state.id : null,
         // passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
         // passport_number: res.passportNumber
       });
