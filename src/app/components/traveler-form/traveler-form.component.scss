@@ -281,7 +281,7 @@
 
         &[aria-expanded="true"] {
           &:after {
-            content: '';
+            content: "";
             background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow_up.svg);
             background-position: center;
             background-repeat: no-repeat;
@@ -294,7 +294,7 @@
 
         &[aria-expanded="false"] {
           &:after {
-            content: '';
+            content: "";
             background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow.svg);
             background-position: center;
             background-repeat: no-repeat;
@@ -887,3 +887,5 @@
 .hide_section {
   display: none !important;
 }
+
+

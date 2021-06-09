@@ -93,7 +93,7 @@
 
                       <div class="gender_anchers gender_selection">
                         <label for="">Gender*</label>
-                        <ng-select [searchable]="false" [selectOnTab]="true" formControlName="gender"
+                        <ng-select [searchable]="false" [selectOnTab]="true" formControlName="gender" [tabIndex]="x"
                           [clearable]="false" placeholder="Select Gender"
                           [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.gender.errors}">
                           <ng-option value="M">Male</ng-option>
@@ -207,7 +207,8 @@
                     </div>
 
 
-                    <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps country_selection" *ngIf="cartItem.type=='flight'">
+                    <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps country_selection"
+                      *ngIf="cartItem.type=='flight'">
                       <label for="">{{traveler.controls.is_passport_required.value ? 'Country of Issue*' :
                         'Country*'}}</label>
                       <ng-select [clearable]="false" [items]="countries" bindLabel="name" bindValue="id" tabindex="10"
