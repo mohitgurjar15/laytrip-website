@@ -33,7 +33,8 @@
             <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory">
                 <label for="">{{'gender' |translate}}*</label>
                 <div class="gender_anchers gender_selection">
-                    <ng-select [searchable]="false" [selectOnTab]="true" [ngClass]="{'input-error' : (submitted && travellerForm.controls.gender.errors)}"
+                    <ng-select [searchable]="false" [selectOnTab]="true"
+                        [ngClass]="{'input-error' : (submitted && travellerForm.controls.gender.errors)}"
                         [readonly]="formEnable" formControlName="gender" [clearable]="false"
                         placeholder="Select Gender">
                         <ng-option value="M">Male</ng-option>
@@ -98,7 +99,8 @@
                     <small
                         *ngIf="!travellerForm.hasError('phoneAndPhoneCodeError') && (travellerForm.controls.phone_no.errors.minlength)"
                         class="error_field">
-                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Minimum {{phoneNumberMask.length}} characters.</small>
+                        <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Minimum
+                        {{phoneNumberMask.length}} characters.</small>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult" [ngClass]="{'mandetory_wrps':submitted}">

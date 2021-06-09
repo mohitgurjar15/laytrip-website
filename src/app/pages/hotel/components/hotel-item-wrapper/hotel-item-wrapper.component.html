@@ -28,7 +28,7 @@
                             [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/circle.svg', scaledSize: {height: 80,width: 48}}"
                             [label]="{text:getMapPrice(hotel), position:'relative',zIndex:'100', color: 'white',fontSize: '12px', class: 'mapLabel'}"
                             (markerClick)="displayHotelDetails(hotel.id,infoWindow, 'click')"
-                            (mouseOut)="closeInfoWindow(infoWindow, gm)" (mouseOver)="openInfoWindow(infoWindow, gm)"
+                            (mouseMove)="closeInfoWindow(infoWindow, gm)" (mouseOver)="openInfoWindow(infoWindow, gm)"
                             [zIndex]="i+1">
                             <!-- (mouseOver)="displayHotelDetails(hotel.id,infoWindow, 'hover')" -->
                             <!-- <agm-info-window [disableAutoPan]="false" #infoWindow>
