@@ -171,7 +171,7 @@
                         </span>
                         <span class="cta_btn">
                             <button (click)="bookNow(item)">
-                                Select
+                                Add to cart
                             </button>
                             <div class="section_description no_flight" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                                 <span class="sec_text">This flight is no longer available.</span>
@@ -189,7 +189,7 @@
                         </span>
                         <span class="cta_btn">
                             <button (click)="bookNow(item)">
-                                Select
+                                Add to cart
                             </button>
                             <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                                 <span class="sec_text">This flight is no longer available.</span>
