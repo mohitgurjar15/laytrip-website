@@ -551,9 +551,15 @@ var BookingComponent = /** @class */ (function () {
     BookingComponent.prototype.cartValueChanged = function (event) {
         this.ismaxCartAdded = event;
     };
+    BookingComponent.prototype.clickOutside = function () {
+        console.log('here');
+    };
     __decorate([
         core_1.ViewChild(add_card_component_1.AddCardComponent, { static: false })
     ], BookingComponent.prototype, "addCardRef");
+    __decorate([
+        core_1.HostListener('document:click')
+    ], BookingComponent.prototype, "clickOutside");
     BookingComponent = __decorate([
         core_1.Component({
             selector: 'app-booking',

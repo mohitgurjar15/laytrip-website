@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 declare var $: any;
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
@@ -625,5 +625,10 @@ export class BookingComponent implements OnInit {
   
   cartValueChanged(event) {
     this.ismaxCartAdded = event;
+  }
+
+  @HostListener('document:click')
+  clickOutside() {
+   console.log('here')
   }
 }

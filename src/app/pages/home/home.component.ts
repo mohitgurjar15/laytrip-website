@@ -331,6 +331,4 @@ export class HomeComponent implements OnInit {
   getCurrentChangeCounter(event){
     this.currentChangeCounter = event; 
   }
-
-
 }
