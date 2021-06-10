@@ -53,7 +53,6 @@ export class SortFlightComponent implements OnInit {
   }
 
   sortFlightData(key,order,name){
-
     this.sortType=name;
     this.sortFlight.emit({ key , order })
   }
