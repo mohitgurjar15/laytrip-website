@@ -669,6 +669,16 @@ agm-map {
                                         padding: 0px 21px;
                                         font-size: 12px;
                                         margin-bottom: 0;
+
+                                        @include tab-view {
+                                            padding: 0;
+                                            margin-bottom: 2px;
+                                            width: 82px;
+                                            height: 32px;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                        }
                                     }
 
                                     p {
