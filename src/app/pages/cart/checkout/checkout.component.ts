@@ -171,6 +171,7 @@ export class CheckoutComponent implements OnInit {
         this.carts.push(cart);
         this.cartPrices.push(price)
       }
+      // console.log(this.cartPrices)
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
 
@@ -249,9 +250,9 @@ export class CheckoutComponent implements OnInit {
         if(parms.utm_campaign){
           queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
         }
-        this.router.navigate(['/cart/booking'], { queryParams: queryParams });
+        this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
       } else {
-        this.router.navigate(['/cart/booking'])
+        this.router.navigate(['/cart/checkout'])
       }
     }
   }

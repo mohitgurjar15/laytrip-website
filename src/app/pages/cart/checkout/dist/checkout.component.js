@@ -138,6 +138,7 @@ var CheckoutComponent = /** @class */ (function () {
                 _this.carts.push(cart);
                 _this.cartPrices.push(price);
             }
+            // console.log(this.cartPrices)
             _this.cartService.setCartItems(_this.carts);
             _this.cartService.setCartPrices(_this.cartPrices);
         }, function (error) {
@@ -203,10 +204,10 @@ var CheckoutComponent = /** @class */ (function () {
                 if (parms.utm_campaign) {
                     queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
                 }
-                this.router.navigate(['/cart/booking'], { queryParams: queryParams });
+                this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
             }
             else {
-                this.router.navigate(['/cart/booking']);
+                this.router.navigate(['/cart/checkout']);
             }
         }
     };

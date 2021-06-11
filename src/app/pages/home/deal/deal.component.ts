@@ -40,7 +40,6 @@ export class DealComponent implements OnInit {
   @HostListener('contextmenu', ['$event'])
 
   list = [];
-  list2 = [];
   breakpoints = {
     320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup:1 },
     520: { slidesPerView: 2, spaceBetween: 10 ,slidesPerGroup:2},
@@ -58,7 +57,8 @@ export class DealComponent implements OnInit {
   
   
   ngAfterContentChecked(){    
-    this.list = this.dealList;
+    this.list = this.dealList;  list2 = [];
+
   }
 
   btnDealClick(item){
@@ -71,16 +71,6 @@ export class DealComponent implements OnInit {
   setThumbsSwiper(swiper) {
     this.thumbsSwiper = swiper;
   }
-  breakPointsToggle: boolean;
- /*  breakpointChange() {
-    this.breakPointsToggle = !this.breakPointsToggle;
-    this.breakpoints = {
-      320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup:1 },
-      520: { slidesPerView: 2, spaceBetween: 10 ,slidesPerGroup:3},
-      640: {slidesPerView: 3, spaceBetween: 40,slidesPerGroup:3 },
-      768: {slidesPerView: 3, spaceBetween: 40,slidesPerGroup:3},
-      1024: { slidesPerView: this.breakPointsToggle ? 3 : 5, spaceBetween: 40 ,slidesPerGroup:3}
-    };
-  }  */
+
 
 }
