@@ -207,7 +207,6 @@ export class AddCardComponent implements OnInit {
 
         },
         error: function (error) {
-          console.log(error);
           if (error && error.status !== 406) {
             let errorMessage = document.getElementById('cardErrorMessage');
             $('#main_loader').hide();

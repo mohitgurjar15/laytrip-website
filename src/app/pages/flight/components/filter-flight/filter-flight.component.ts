@@ -638,7 +638,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       return data;
     }
     else {
-      //console.log("data",key,way,data)
       return data.sort(function (a, b) {
         let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY h:mm A').format("X");
         let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY h:mm A').format("X");
