@@ -151,9 +151,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 var keys = toSearchString;
                 localStorage.setItem('__to', keys);
                 // this.toSearch = null;   
+                _this.fromSearch = airports_1.airports['NYC'];
+                _this.searchFlightInfo.departure = _this.fromSearch.code;
                 _this.toSearch = airports_1.airports[keys];
-                _this.flightSearchForm.controls.fromDestination.setValue('');
-                _this.fromSearch = [];
                 _this.departureDate = moment().add(90, 'days').toDate();
                 if (_this.isRoundTrip) {
                     _this.rangeDates = [_this.departureDate, moment().add(97, 'days').toDate()];
@@ -192,7 +192,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
     };
     FlightSearchWidgetComponent.prototype.destinationChangedValue = function (event) {
-        console.log('here');
         if (event && event.key && event.key === 'fromSearch') {
             this.fromSearch = event.value;
             this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });

@@ -13,7 +13,7 @@ var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var moment = require("moment");
 var add_card_component_1 = require("../../../components/add-card/add-card.component");
 var CheckoutComponent = /** @class */ (function () {
-    function CheckoutComponent(genericService, travelerService, checkOutService, cartService, cookieService, cd, router, commonFunction, route, modalService, spreedly) {
+    function CheckoutComponent(genericService, travelerService, checkOutService, cartService, cookieService, cd, router, commonFunction, spreedly, eRef) {
         this.genericService = genericService;
         this.travelerService = travelerService;
         this.checkOutService = checkOutService;
@@ -22,9 +22,8 @@ var CheckoutComponent = /** @class */ (function () {
         this.cd = cd;
         this.router = router;
         this.commonFunction = commonFunction;
-        this.route = route;
-        this.modalService = modalService;
         this.spreedly = spreedly;
+        this.eRef = eRef;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.progressStep = { step1: true, step2: true };
         this.isShowPaymentOption = true;
@@ -138,6 +137,7 @@ var CheckoutComponent = /** @class */ (function () {
                 _this.carts.push(cart);
                 _this.cartPrices.push(price);
             }
+            // console.log(this.cartPrices)
             _this.cartService.setCartItems(_this.carts);
             _this.cartService.setCartPrices(_this.cartPrices);
         }, function (error) {
@@ -203,10 +203,10 @@ var CheckoutComponent = /** @class */ (function () {
                 if (parms.utm_campaign) {
                     queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
                 }
-                this.router.navigate(['/cart/booking'], { queryParams: queryParams });
+                this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
             }
             else {
-                this.router.navigate(['/cart/booking']);
+                this.router.navigate(['/cart/checkout']);
             }
         }
     };
@@ -645,9 +645,22 @@ var CheckoutComponent = /** @class */ (function () {
         this.validationErrorMessage = '';
         this.validateCartItems();
     };
+    CheckoutComponent.prototype.clickOutside = function (event) {
+        var insideClassArray = ['btn_pay_book', 'modal fade comman_modal signin_modal'];
+        if (insideClassArray.indexOf(event.target.className) > -1) {
+            this.validationErrorMessage = '';
+            console.log('yes');
+        }
+        else {
+            console.log('no');
+        }
+    };
     __decorate([
         core_1.ViewChild(add_card_component_1.AddCardComponent, { static: false })
     ], CheckoutComponent.prototype, "addCardRef");
+    __decorate([
+        core_1.HostListener('document:click', ['$event'])
+    ], CheckoutComponent.prototype, "clickOutside");
     CheckoutComponent = __decorate([
         core_1.Component({
             selector: 'app-checkout',

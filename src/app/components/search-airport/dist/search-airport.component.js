@@ -66,6 +66,7 @@ var SearchAirportComponent = /** @class */ (function () {
         // this.searchItem.emit({key : event.term,type : this.id})
     };
     SearchAirportComponent.prototype.selectEvent = function (event, index) {
+        console.log(event);
         if (!event) {
             this.placeHolder = this.placeHolder;
         }
@@ -86,6 +87,7 @@ var SearchAirportComponent = /** @class */ (function () {
             localStorage.setItem('__to', this.selectedAirport.code);
             this.changeValue.emit({ key: 'toSearch', value: event });
         }
+        this.cd.detectChanges();
     };
     SearchAirportComponent.prototype.onRemove = function (event) {
         this.selectedAirport = {};

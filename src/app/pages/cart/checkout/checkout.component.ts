@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild,ElementRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
@@ -13,7 +13,6 @@ import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { SpreedlyService } from '../../../services/spreedly.service';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export interface CartItem {
 
@@ -96,9 +95,8 @@ export class CheckoutComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private router: Router,
     private commonFunction: CommonFunction,
-    private route: ActivatedRoute,
-    private modalService: NgbModal,
     private spreedly: SpreedlyService,
+    private eRef: ElementRef
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -171,6 +169,7 @@ export class CheckoutComponent implements OnInit {
         this.carts.push(cart);
         this.cartPrices.push(price)
       }
+      // console.log(this.cartPrices)
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
 
@@ -249,9 +248,9 @@ export class CheckoutComponent implements OnInit {
         if(parms.utm_campaign){
           queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
         }
-        this.router.navigate(['/cart/booking'], { queryParams: queryParams });
+        this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
       } else {
-        this.router.navigate(['/cart/booking'])
+        this.router.navigate(['/cart/checkout'])
       }
     }
   }
@@ -730,4 +729,14 @@ export class CheckoutComponent implements OnInit {
     this.validateCartItems();
   }
 
+  @HostListener('document:click', ['$event'])
+  clickOutside(event) {
+    let insideClassArray = ['btn_pay_book','modal fade comman_modal signin_modal'];
+    if(insideClassArray.indexOf(event.target.className) > -1 ) {
+      this.validationErrorMessage = '';
+      console.log('yes')
+    } else {
+      console.log('no')
+    }
+  }
 }

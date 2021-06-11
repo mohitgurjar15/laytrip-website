@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.BookingFeedbackComponent = void 0;
 var core_1 = require("@angular/core");
-var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../environments/environment");
 var BookingFeedbackComponent = /** @class */ (function () {
     function BookingFeedbackComponent(formBuilder, flightService, route, commonFunction) {
@@ -28,7 +27,7 @@ var BookingFeedbackComponent = /** @class */ (function () {
     BookingFeedbackComponent.prototype.ngOnInit = function () {
         this.feedbackForm = this.formBuilder.group({
             rating: [''],
-            comment: ['', !this.commonFunction.isRefferal() ? forms_1.Validators.required : '']
+            comment: ['']
         });
         this.bookingId = this.route.snapshot.paramMap.get('id');
     };

@@ -90,6 +90,8 @@ export class SearchAirportComponent implements OnInit {
   }
 
   selectEvent(event, index) {
+        console.log(event)
+
     if (!event) {
       this.placeHolder = this.placeHolder;
     }
@@ -108,6 +110,7 @@ export class SearchAirportComponent implements OnInit {
       localStorage.setItem('__to',this.selectedAirport.code)
       this.changeValue.emit({ key: 'toSearch', value: event });
     }
+    this.cd.detectChanges();
   }
 
   onRemove(event) {

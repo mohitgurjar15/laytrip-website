@@ -47,7 +47,7 @@
             </swiper>
 
             <p class="terms_txt">
-                *Limited time new bookings offer only. May end at any time. Must be booked with start date at least 90 calendar days after booking date. Cannot be combined with any other sale or promotion. Discount applies to available fares on laytrip.com, <a href="">Terms</a> and other booking process restrictions apply.
+                *Limited time new bookings offer only. May end at any time. Must be booked with start date at least 90 calendar days after booking date. Cannot be combined with any other sale or promotion. Discount applies to available fares on laytrip.com, <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a> and other booking process restrictions apply.
             </p>
         </div>
     </div>
