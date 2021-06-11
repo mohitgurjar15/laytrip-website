@@ -26,6 +26,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   @Input() calenderPrices: any = [];
   @Input() currentSlide;
   switchBtnValue = false;
+  @Input() currentTabName : string = 'hotel';
   isRoundTrip: boolean = true;
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted = false;
@@ -111,6 +112,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   ngOnInit(): void {
     this.fromSearch = [];
     
+
     if(this.commonFunction.isRefferal()){
       this.homeService.getSlideOffers.subscribe(currentSlide => {
           if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
@@ -194,6 +196,12 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    //if tab changed then show round-trip default || get tabname with change value 
+    if(changes['currentTabName'] && changes['currentTabName'].currentValue != 'undefined'){
+      this.isRoundTrip = true;    
+    }
+  }
   setFlightDepartureMinDate() {
 
     let date = new Date();

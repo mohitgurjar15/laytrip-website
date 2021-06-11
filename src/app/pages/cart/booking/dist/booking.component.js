@@ -355,6 +355,9 @@ var BookingComponent = /** @class */ (function () {
                 }
                 localStorage.setItem('$crt', JSON.stringify(_this.carts.length));
             }
+            else {
+                //do something
+            }
         });
     };
     BookingComponent.prototype.selectCreditCard = function (data) {

@@ -40,7 +40,6 @@ var CartComponent = /** @class */ (function () {
     };
     CartComponent.prototype.saveAndSearch = function () {
         var totalCarts = localStorage.getItem('$crt');
-        console.log(totalCarts);
         if (totalCarts == 10) {
             this.ismaxCartAdded.emit(true);
         }
@@ -62,7 +61,6 @@ var CartComponent = /** @class */ (function () {
                 this.router.navigate(['/']);
             }
         }
-        return false;
         /*  this.validationErrorMessage = '';
          if (this.isValidTravelers) {
            this.loading = true;

@@ -409,6 +409,8 @@ export class BookingComponent implements OnInit {
           this.isCartEmpty = true;
         }
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
+      }else {
+        //do something
       }
     });
   }

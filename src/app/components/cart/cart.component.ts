@@ -46,7 +46,6 @@ export class CartComponent implements OnInit {
   
   saveAndSearch() {
     let totalCarts: any = localStorage.getItem('$crt');
-    console.log(totalCarts)
 
     if (totalCarts == 10) {
       this.ismaxCartAdded.emit(true);
@@ -67,7 +66,6 @@ export class CartComponent implements OnInit {
         this.router.navigate(['/']);
       }
     }
-    return false;
    /*  this.validationErrorMessage = '';
     if (this.isValidTravelers) {
       this.loading = true;

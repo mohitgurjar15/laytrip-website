@@ -23,7 +23,7 @@ var HomeComponent = /** @class */ (function () {
         this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
-        this.isRoundTrip = false;
+        this.currentTabName = 'hotel';
         this.isRefferal = false;
         this.moduleId = 3;
         this.dealList = [];
@@ -213,14 +213,6 @@ var HomeComponent = /** @class */ (function () {
         }, function (error) {
         });
     };
-    HomeComponent.prototype.toggleOnewayRoundTrip = function (type) {
-        if (type === 'roundtrip') {
-            this.isRoundTrip = true;
-        }
-        else {
-            this.isRoundTrip = false;
-        }
-    };
     HomeComponent.prototype.getDeal = function (moduleId) {
         var _this = this;
         this.moduleId = moduleId;
@@ -238,6 +230,7 @@ var HomeComponent = /** @class */ (function () {
         });
     };
     HomeComponent.prototype.clickOnTab = function (tabName) {
+        this.currentTabName = tabName;
         document.getElementById('home_banner').style.position = 'relative';
         document.getElementById('home_banner').style.width = '100%';
         if (tabName === 'flight') {
@@ -285,6 +278,7 @@ var HomeComponent = /** @class */ (function () {
         }
     };
     HomeComponent.prototype.activeSlide = function (activeSlide) {
+        this.currentTabName = 'hotel';
         this.homeService.removeToString('flight');
         this.homeService.removeToString('hotel');
         $('#nav-hotel').trigger('click');

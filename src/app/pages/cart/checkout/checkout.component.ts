@@ -386,12 +386,15 @@ export class CheckoutComponent implements OnInit {
       this.loading = false;
       if (error.status == 404) {
         let index = this.carts.findIndex(x => x.id == cartId);
+        
         this.carts.splice(index, 1);
         this.cartService.setCartItems(this.carts);
         if (this.carts.length == 0) {
           this.isCartEmpty = true;
         }
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
+      }else {
+        //do something
       }
     });
   }

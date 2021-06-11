@@ -32,6 +32,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.moduleList = {};
         this.calenderPrices = [];
         this.switchBtnValue = false;
+        this.currentTabName = 'hotel';
         this.isRoundTrip = true;
         this.flightSearchFormSubmitted = false;
         this.isCalenderPriceLoading = true;
@@ -163,6 +164,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         //delete BehaviorSubject at the end
         this.homeService.removeToString('flight');
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
+    };
+    FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
+        //if tab changed then show round-trip default || get tabname with change value 
+        if (changes['currentTabName'] && changes['currentTabName'].currentValue != 'undefined') {
+            this.isRoundTrip = true;
+        }
     };
     FlightSearchWidgetComponent.prototype.setFlightDepartureMinDate = function () {
         var date = new Date();
@@ -537,6 +544,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], FlightSearchWidgetComponent.prototype, "currentSlide");
+    __decorate([
+        core_1.Input()
+    ], FlightSearchWidgetComponent.prototype, "currentTabName");
     __decorate([
         core_1.HostListener('document:click')
     ], FlightSearchWidgetComponent.prototype, "clickOutside");

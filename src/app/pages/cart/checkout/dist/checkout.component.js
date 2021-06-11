@@ -347,6 +347,9 @@ var CheckoutComponent = /** @class */ (function () {
                 }
                 localStorage.setItem('$crt', JSON.stringify(_this.carts.length));
             }
+            else {
+                //do something
+            }
         });
     };
     CheckoutComponent.prototype.validateCartItems = function () {

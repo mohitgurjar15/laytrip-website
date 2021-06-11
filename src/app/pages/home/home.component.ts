@@ -1,17 +1,16 @@
 import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { environment } from '../../../environments/environment';
-declare var $: any;
 import { GenericService } from '../../services/generic.service';
 import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HomeService } from '../../services/home.service';
-import { CartService } from '../../services/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
 import { CookieService } from 'ngx-cookie';
 
+declare var $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,7 +21,7 @@ export class HomeComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   modules: Module[];
   moduleList: any = {};
-  isRoundTrip: boolean = false;
+  currentTabName: string = 'hotel';
   isRefferal: boolean = false;
   countryCode: string;
   toString: string;
@@ -243,13 +242,6 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  toggleOnewayRoundTrip(type) {    
-    if (type === 'roundtrip') {
-      this.isRoundTrip = true;
-    } else {
-      this.isRoundTrip = false;
-    }
-  }
 
   getDeal(moduleId) {
     this.moduleId = moduleId;  
@@ -268,12 +260,11 @@ export class HomeComponent implements OnInit {
   }
 
   clickOnTab(tabName) {
+    this.currentTabName = tabName;
     document.getElementById('home_banner').style.position = 'relative';
     document.getElementById('home_banner').style.width = '100%';
     if (tabName === 'flight') {
       this.getDeal(1);
-
-
       document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
@@ -318,6 +309,7 @@ export class HomeComponent implements OnInit {
   }
   
   activeSlide(activeSlide){
+    this.currentTabName = 'hotel';
     this.homeService.removeToString('flight');
     this.homeService.removeToString('hotel');
     $('#nav-hotel').trigger('click');

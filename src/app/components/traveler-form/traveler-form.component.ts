@@ -117,6 +117,7 @@ export class TravelerFormComponent implements OnInit {
   isChildTravller: boolean = true;
   isInfantTravller: boolean = true;
   accountHolderEmail: string = '';
+  is_invalid_date = false;
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -653,6 +654,17 @@ export class TravelerFormComponent implements OnInit {
   }
 
   checkMaximumMinimum(event, dobValue, cartNumber, traveler_number) {
+    // let date;
+    // if (dobValue) {
+    //   date = moment(dobValue, 'YYYY-MM-DD');
+    // }
+    // if (!date.isValid()) {
+    //   this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
+    //   this.is_invalid_date = true;
+    // } else {
+    //   this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = true;
+    //   this.is_invalid_date = false;
+    // }
     // CHECK MAXIMUM OR MINIMUM DATE OF BIRTH
     let traveler = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
     if (
@@ -663,6 +675,7 @@ export class TravelerFormComponent implements OnInit {
     } else {
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
     }
+    console.log(this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date);
     this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.first_name;
     this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.last_name;
     this.travelers[`type${cartNumber}`].adults[traveler_number].email = traveler.email;

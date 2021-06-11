@@ -84,7 +84,7 @@ export class PaymentModeComponent implements OnInit {
 
     this.cartService.getCartPrice.subscribe(cartPrices=>{
       this.cartPrices = cartPrices;
-      console.log("this.cartPrices",this.cartPrices)
+      // console.log("this.cartPrices",this.cartPrices)
       this.getTotalPrice();
       if(this.instalmentRequest.checkin_date){
 
@@ -286,7 +286,7 @@ export class PaymentModeComponent implements OnInit {
 
     if(type=='instalment' && !this.instalmentAvavible){
 
-      console.log("this.cartPricesLLLL",this.cartPrices)
+      // console.log("this.cartPricesLLLL",this.cartPrices)
 
       if(this.cartPrices.length>1){
 

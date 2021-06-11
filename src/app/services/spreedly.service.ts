@@ -24,7 +24,7 @@ export class SpreedlyService {
   ) {
     this.genericService.getPaymentDetails().subscribe((result:any)=>{
       this.environmentKey = result.credentials.environment;
-      console.log("this.environmentKey",this.environmentKey)
+      // console.log("this.environmentKey",this.environmentKey)
     })
    }
 
@@ -49,7 +49,7 @@ export class SpreedlyService {
     let transaction = res.transaction;
 
     let accessToken = localStorage.getItem('_lay_sess');
-    console.log("this.environmentKey12",this.environmentKey)
+    // console.log("this.environmentKey12",this.environmentKey)
     env.init(environment, accessToken, res.redirection);
 
     var lifecycle = new Spreedly.ThreeDS.Lifecycle({
@@ -90,7 +90,7 @@ export class SpreedlyService {
       redirect_url: res.redirection,
       // The challenge url that is loaded when there is no challenge form
     };
-    console.log("transactionData",transactionData)
+    // console.log("transactionData",transactionData)
     lifecycle.start(transactionData);
   }
 
