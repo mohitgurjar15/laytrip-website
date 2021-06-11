@@ -525,7 +525,7 @@ export class TravelerFormComponent implements OnInit {
             this.cartService.setLoaderStatus(false)
             if (traveler) {
               this.travelers[`type${cartNumber}`].adults[traveler_number].type = traveler.user_type;
-
+ 
               this.travelers[`type${cartNumber}`].adults[traveler_number].userId = traveler.userId;
               this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
               this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
