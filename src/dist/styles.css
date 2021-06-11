@@ -10920,6 +10920,10 @@ a:hover {
   }
 }
 
+.country_selection .ng-select.ng-select-disabled .ng-select-container {
+  background-color: #ffffff;
+}
+
 .dobs_account .form-control {
   border-radius: 0;
   border: none;

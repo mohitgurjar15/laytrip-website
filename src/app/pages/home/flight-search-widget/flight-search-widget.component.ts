@@ -229,7 +229,6 @@ export class FlightSearchWidgetComponent implements OnInit {
 
 
   destinationChangedValue(event) {
-    console.log('here')
     if (event && event.key && event.key === 'fromSearch') {
       this.fromSearch = event.value;
       this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });

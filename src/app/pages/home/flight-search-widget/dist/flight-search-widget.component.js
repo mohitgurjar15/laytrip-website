@@ -192,7 +192,6 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
     };
     FlightSearchWidgetComponent.prototype.destinationChangedValue = function (event) {
-        console.log('here');
         if (event && event.key && event.key === 'fromSearch') {
             this.fromSearch = event.value;
             this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });

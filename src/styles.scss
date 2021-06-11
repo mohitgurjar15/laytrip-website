@@ -261,6 +261,15 @@ a {
       }
     }
   }
+} 
+.country_selection {
+  .ng-select {
+    &.ng-select-disabled {
+      .ng-select-container {
+        background-color: $background-white;
+      }
+    }
+  }
 }
 .dobs_account {
   .form-control {

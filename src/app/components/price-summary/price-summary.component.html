@@ -6,7 +6,7 @@
       <ng-container *ngFor="let item of cartPrices">
         <div class="pay_listing" *ngIf="item.type=='flight'">
           <span>{{item.location}}
-            <span class="purple_trvl">(Two Travelers)</span>
+            <span class="purple_trvl"><!-- (Two Travelers) --></span>
           </span>
           <span>${{item.selling_price | number : '1.2-2'}}</span>
         </div>
