@@ -122,7 +122,6 @@ export class BookingComponent implements OnInit {
           cart.old_module_info = {
             selling_price: items.data[i].oldModuleInfo[0].selling_price
           };
-
           price.selling_price = items.data[i].moduleInfo[0].selling_price;
           price.departure_date = items.data[i].moduleInfo[0].departure_date;
           price.start_price = items.data[i].moduleInfo[0].start_price;
@@ -135,6 +134,7 @@ export class BookingComponent implements OnInit {
             selling_price: items.data[i].oldModuleInfo[0].selling.total
           };
 
+          price.total_night = items.data[i].moduleInfo[0].input_data.num_nights;
           price.type = items.data[i].type;
           price.price_break_down = items.data[i].moduleInfo[0].selling;
           price.mandatory_fee_details = items.data[i].moduleInfo[0].mandatory_fee_details;

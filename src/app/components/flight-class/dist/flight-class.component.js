@@ -14,9 +14,11 @@ var FlightClassComponent = /** @class */ (function () {
         this.commonFunction = commonFunction;
         this.changeValue = new core_1.EventEmitter();
         this.showClass = false;
+        this.isRefferal = false;
     }
     FlightClassComponent.prototype.ngOnInit = function () {
         this.loadJquery();
+        this.isRefferal = this.commonFunction.isRefferal();
     };
     FlightClassComponent.prototype.loadJquery = function () {
         $("body").click(function () {

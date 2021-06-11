@@ -30,7 +30,6 @@ var DealComponent = /** @class */ (function () {
         this.toString = new core_1.EventEmitter();
         this.dealList = [];
         this.list = [];
-        this.list2 = [];
         this.breakpoints = {
             320: { slidesPerView: 1, spaceBetween: 10, slidesPerGroup: 1 },
             520: { slidesPerView: 2, spaceBetween: 10, slidesPerGroup: 2 },

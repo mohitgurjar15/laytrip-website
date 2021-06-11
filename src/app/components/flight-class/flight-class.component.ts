@@ -13,12 +13,15 @@ export class FlightClassComponent implements OnInit {
 
   @Input() flightClass;
   showClass: boolean = false;
+  isRefferal: boolean = false;
 
   constructor(private eRef: ElementRef, public commonFunction: CommonFunction
     ) { }
 
   ngOnInit() {
     this.loadJquery();
+    this.isRefferal = this.commonFunction.isRefferal();
+
   }
 
   loadJquery() {

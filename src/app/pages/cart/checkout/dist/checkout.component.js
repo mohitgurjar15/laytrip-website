@@ -127,6 +127,7 @@ var CheckoutComponent = /** @class */ (function () {
                         selling_price: items.data[i].oldModuleInfo[0].selling.total
                     };
                     price.type = items.data[i].type;
+                    price.total_night = items.data[i].moduleInfo[0].input_data.num_nights;
                     price.price_break_down = items.data[i].moduleInfo[0].selling;
                     price.mandatory_fee_details = items.data[i].moduleInfo[0].mandatory_fee_details;
                     price.selling_price = items.data[i].moduleInfo[0].selling.total;
@@ -137,7 +138,6 @@ var CheckoutComponent = /** @class */ (function () {
                 _this.carts.push(cart);
                 _this.cartPrices.push(price);
             }
-            // console.log(this.cartPrices)
             _this.cartService.setCartItems(_this.carts);
             _this.cartService.setCartPrices(_this.cartPrices);
         }, function (error) {
