@@ -155,7 +155,10 @@ var MainFooterComponent = /** @class */ (function () {
         }
     };
     MainFooterComponent.prototype.openShareModal = function () {
-        this.modalService.open(share_social_media_component_1.ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true, backdrop: 'static', keyboard: false });
+        this.modalService.open(share_social_media_component_1.ShareSocialMediaComponent, { windowClass: 'share_modal',
+            centered: true,
+            //  backdrop: 'static',
+            keyboard: false });
     };
     MainFooterComponent = __decorate([
         core_1.Component({

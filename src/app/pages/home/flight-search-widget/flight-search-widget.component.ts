@@ -111,8 +111,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   ngOnInit(): void {
     this.fromSearch = [];
-    
-
+  
     if(this.commonFunction.isRefferal()){
       this.homeService.getSlideOffers.subscribe(currentSlide => {
           if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
@@ -181,9 +180,10 @@ export class FlightSearchWidgetComponent implements OnInit {
         let keys: any = toSearchString;
         localStorage.setItem('__to', keys)
         // this.toSearch = null;   
+
+        this.fromSearch = airports['NYC'];
+        this.searchFlightInfo.departure = this.fromSearch.code;
         this.toSearch = airports[keys];
-        this.flightSearchForm.controls.fromDestination.setValue('');
-        this.fromSearch = [];
         this.departureDate = moment().add(90, 'days').toDate();
         if (this.isRoundTrip) {
           this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];

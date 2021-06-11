@@ -188,7 +188,8 @@ export class SigninComponent implements OnInit {
       this.renderer.addClass(document.body, 'modal-open');
     }, 1500);
     this.modalService.open(ForgotPasswordComponent, {
-      windowClass: 'forgot_window', centered: true, backdrop: 'static',
+      windowClass: 'forgot_window', centered: true,
+      // backdrop: 'static',
       keyboard: false
     });
   }

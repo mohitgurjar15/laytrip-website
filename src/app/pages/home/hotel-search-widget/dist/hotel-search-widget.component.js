@@ -97,7 +97,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                 if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
                     var keys = currentSlide;
                     _this.dealDateValidation();
-                    _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = '';
+                    // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
                     _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = keys.location.to.hotel_option.title;
                     _this.searchHotelInfo.latitude = _this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
                     _this.searchHotelInfo.longitude = _this.fromDestinationInfo.geo_codes.long = keys.location.to.hotel_option.geo_codes.long;
@@ -158,7 +158,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
                 _this.dealDateValidation();
-                _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = '';
+                // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
                 _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = hotelInfo.title;
                 _this.searchHotelInfo.latitude = _this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;
                 _this.searchHotelInfo.longitude = _this.fromDestinationInfo.geo_codes.long = hotelInfo.long;

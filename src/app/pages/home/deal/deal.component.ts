@@ -40,6 +40,7 @@ export class DealComponent implements OnInit {
   @HostListener('contextmenu', ['$event'])
 
   list = [];
+  list2 = [];
   breakpoints = {
     320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup:1 },
     520: { slidesPerView: 2, spaceBetween: 10 ,slidesPerGroup:2},
@@ -57,8 +58,7 @@ export class DealComponent implements OnInit {
   
   
   ngAfterContentChecked(){    
-    this.list = this.dealList;  list2 = [];
-
+    this.list = this.dealList;
   }
 
   btnDealClick(item){

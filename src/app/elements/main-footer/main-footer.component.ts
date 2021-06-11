@@ -184,7 +184,10 @@ export class MainFooterComponent implements OnInit {
   }
 
   openShareModal() {
-    this.modalService.open(ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true,backdrop: 'static',keyboard: false });
+    this.modalService.open(ShareSocialMediaComponent, { windowClass: 'share_modal',
+     centered: true,
+    //  backdrop: 'static',
+     keyboard: false });
   }
    
 }

@@ -75,7 +75,7 @@
                             By purchasing this booking, I confirm that I am not a resident of CA, FL, IL or WA.
                         </label>
                         <div class="cta_btn_wrapper">
-                            <button [ngClass]="{'btn':isTermConditionAccepted==false || isExcludedCountryAccepted==false}" [disabled]="!isTermConditionAccepted || !isExcludedCountryAccepted" (click)="bookFlight()">Pay and Book</button>
+                            <button class="btn_pay_book" [ngClass]="{'btn':isTermConditionAccepted==false || isExcludedCountryAccepted==false}" [disabled]="!isTermConditionAccepted || !isExcludedCountryAccepted" (click)="bookFlight()">Pay and Book</button>
                         </div>
                     </div>
                     <div class="error_wrapper">
