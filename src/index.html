@@ -12,7 +12,7 @@
   <meta http-equiv="Expires" content="-1" />
   <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
   <meta http-equiv="Pragma" content="no-cache" />
-  <meta property= “fb:app_id” content="933948490440237" />
+  <meta property=“fb:app_id” content="933948490440237" />
   <title>Laytrip - Layaway Travel for Everyone</title>
   <base href="/">
   <link rel="stylesheet"
@@ -63,11 +63,14 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1976d2">
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-TQPF2N5');</script>
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TQPF2N5');</script>
   <!-- End Google Tag Manager -->
 </head>
 
@@ -107,7 +110,7 @@
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-6Q6CPSPBTH');
-   }
+  }
   var urlPath = window.location.pathname.split('/');
   var lottieModule = 'hotel';
   if (urlPath.includes('flight')) {
@@ -116,32 +119,36 @@
 </script>
 <!-- Facebook Pixel Code -->
 <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
+  !function (f, b, e, v, n, t, s) {
+    if (f.fbq) return; n = f.fbq = function () {
+      n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+    };
+    if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+    n.queue = []; t = b.createElement(e); t.async = !0;
+    t.src = v; s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s)
+  }(window, document, 'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '933948490440237');
   fbq('track', 'PageView');
 </script>
 <noscript>
-  <img height="1" width="1" style="display:none" 
-       src="https://www.facebook.com/tr?id=933948490440237&ev=PageView&noscript=1"/>
+  <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=933948490440237&ev=PageView&noscript=1" />
 </noscript>
 <!-- End Facebook Pixel Code -->
+
 <body>
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQPF2N5"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQPF2N5" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- End Google Tag Manager (noscript) -->
   <div class="loader_full_page" id="loader_full_page">
-    <div id="lottie">  
-      <lottie-player id="index-lottie" style="width: 250px; height: 200px;" class="animation_player"
-        src="" background="transparent" speed="1" loop autoplay>
+    <div id="lottie">
+      <lottie-player id="index-lottie" style="width: 250px; height: 200px;" class="animation_player" src=""
+        background="transparent" speed="1" loop autoplay>
       </lottie-player>
     </div>
   </div>
@@ -151,5 +158,5 @@
 
   <app-root></app-root>
 </body>
-  
+
 </html>
