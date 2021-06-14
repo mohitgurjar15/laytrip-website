@@ -135,7 +135,7 @@ export class HotelSearchBarComponent implements OnInit {
   }
 
   dateChange(type, direction) {
-    console.log('date change');
+    // console.log('date change');
   }
 
   checkInDateUpdate(date) {
@@ -190,7 +190,7 @@ export class HotelSearchBarComponent implements OnInit {
   }
 
   modifyHotelSearch() {
-    console.log(this.searchHotelInfo);
+    // console.log(this.searchHotelInfo);
     if (this.searchHotelInfo && this.searchHotelInfo.latitude &&
       this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in &&

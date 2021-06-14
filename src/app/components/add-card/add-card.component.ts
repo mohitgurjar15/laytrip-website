@@ -123,7 +123,6 @@ export class AddCardComponent implements OnInit {
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
         var errorBorder = "2px solid #ff0000";
-        // console.log(error["attribute"]);
         if (error["attribute"]) {
           $("#error_message").text("error");
           if (error["attribute"] == 'month' || error["attribute"] == 'year') {
@@ -133,7 +132,6 @@ export class AddCardComponent implements OnInit {
           $("#" + error["attribute"]).show();
           Spreedly.setStyle(error["attribute"], "border-bottom: 2px solid #ff0000;");
         } else {
-          console.log(error["attribute"]);
           $("#full_name").css("border-bottom", "2px solid #d6d6d6");
           $("#month-year").css("border-bottom", "2px solid #d6d6d6");
           Spreedly.setStyle(error["attribute"], "border-bottom: 2px solid #d6d6d6;");

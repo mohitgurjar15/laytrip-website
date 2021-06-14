@@ -115,7 +115,6 @@ export class HotelItemWrapperComponent implements OnInit {
       }
     }
     else {
-      // console.log(this.hotelDetails[roomNumber].activeSlide, "---")
       if (this.hotelDetails[roomNumber].activeSlide > 1) {
         this.hotelDetails[roomNumber].activeSlide -= 1;
       }
@@ -194,7 +193,6 @@ export class HotelItemWrapperComponent implements OnInit {
   //     for (let image of this.hotelDetails[i].images) {
   //       this.hotelDetails[i].galleryImages.splice(brokenImage, 1);
   //       this.cd.detectChanges();
-  //       console.log(this.hotelDetails[i].galleryImages);
   //     }
   //   }
   // }

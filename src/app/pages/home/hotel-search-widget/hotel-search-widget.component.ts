@@ -270,7 +270,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         this.router.navigate(['hotel/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
     } else {
-      console.log('here')
     }
   }
 

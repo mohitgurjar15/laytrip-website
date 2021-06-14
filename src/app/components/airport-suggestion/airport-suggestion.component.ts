@@ -103,7 +103,6 @@ export class AirportSuggestionComponent implements OnInit {
 	 }
 
   selectAirport(event){
-    console.log(event);
     this.closeAirportSuggestion.emit(this.type)
     if(this.type=='from'){
 

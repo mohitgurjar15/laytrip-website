@@ -59,7 +59,6 @@ export class TravellerInfoComponent implements OnInit {
     }); */
 
   //  /*  $(".add_traveler_").click(function (e) {
-  //     console.log(e)
   //       // e.stopPropagation();
   //       if((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') || 
   //       (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')

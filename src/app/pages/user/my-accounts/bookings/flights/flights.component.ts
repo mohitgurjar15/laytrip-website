@@ -45,7 +45,6 @@ export class FlightsComponent implements OnInit {
   }
 
   cancelCartIdRemove(event){
-    // console.log(event)
     this.laytripCartId.emit(event);  
   }
 

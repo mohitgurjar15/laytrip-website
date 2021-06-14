@@ -13,7 +13,7 @@ export class HotelNotFoundComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.s3BucketUrl)
+    // console.log(this.s3BucketUrl)
   }
 
 }

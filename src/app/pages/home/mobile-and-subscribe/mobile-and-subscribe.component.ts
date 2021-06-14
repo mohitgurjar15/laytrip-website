@@ -29,10 +29,8 @@ export class MobileAndSubscribeComponent implements OnInit {
 
   // @HostListener('click', ['$event.target'])
   // public onClick(target) {
-  //   console.log('OUTSIDE:::::');
   //   const clickedInside = this.elementRef.nativeElement.contains(target);
   //   if (!clickedInside) {
-  //     console.log('OUTSIDE:::::');
   //     // this.clickOutside.emit();
   //   }
   // }

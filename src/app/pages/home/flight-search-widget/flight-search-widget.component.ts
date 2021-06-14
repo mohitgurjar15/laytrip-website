@@ -139,7 +139,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.child = params['child'];
         this.searchFlightInfo.infant = params['infant'];
         this.departureDate = moment(params['departure_date']).toDate();
-        // console.log(params['departure_date'], moment(params['departure_date']).format("YYYY-MM-DD"))
         if (moment(this.departureDate).format("YYYY-MM-DD") < this.customStartDateValidation) {
           // this.router.navigate(['/flight/flight-not-found'])
         }

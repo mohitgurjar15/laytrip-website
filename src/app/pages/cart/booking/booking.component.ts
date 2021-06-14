@@ -198,7 +198,6 @@ export class BookingComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    console.log(event, "------");
     //this.totalCard = event;
   }
 
@@ -207,7 +206,6 @@ export class BookingComponent implements OnInit {
   }
 
   closeNewCardPanel(event) {
-    console.log("Event", event)
     this.add_new_card = event;
   }
 

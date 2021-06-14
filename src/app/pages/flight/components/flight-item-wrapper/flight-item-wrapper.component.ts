@@ -202,9 +202,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   bookNow(route) {
     this.removeFlight.emit(this.flightUniqueCode);
     this.isFlightNotAvailable = false;
-    /*  console.log(this.flightListArray)
+    /*  
     this.flightListArray = this.flightListArray.filter(obj => obj.unique_code !== this.flightUniqueCode);
-    console.log(this.flightListArray)
  */
     /* if (!this.isLoggedIn) {
       const modalRef = this.modalService.open(LaytripOkPopup, {

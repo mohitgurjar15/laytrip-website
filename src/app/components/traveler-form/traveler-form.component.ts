@@ -117,6 +117,7 @@ export class TravelerFormComponent implements OnInit {
   isChildTravller: boolean = true;
   isInfantTravller: boolean = true;
   accountHolderEmail: string = '';
+  is_invalid_date = false;
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -131,8 +132,6 @@ export class TravelerFormComponent implements OnInit {
     if (this.userInfo.roleId != 7) {
       this.accountHolderEmail = this.userInfo.email;
     }
-    //console.log("this.accountHolderEmail",this.userInfo,this.accountHolderEmail)
-
   }
 
   ngOnInit() {
@@ -469,10 +468,10 @@ export class TravelerFormComponent implements OnInit {
 
   saveTraveler(cartNumber, traveler_number) {
     this.travelers[`type${cartNumber}`].adults[traveler_number].is_submitted = true;
-    //console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.email.validator({} as AbstractControl),"save")
     //return false;
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
-    if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID' && this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date) {
+    if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID' &&
+      this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date && !this.is_invalid_date) {
       let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
       if (this.cartItem.type == 'hotel') {
         data.is_primary_traveler = traveler_number == 0 ? true : false;
@@ -640,19 +639,28 @@ export class TravelerFormComponent implements OnInit {
   checkMaximumMinimum(event, dobValue, cartNumber, traveler_number) {
     // CHECK MAXIMUM OR MINIMUM DATE OF BIRTH
     let traveler = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
-
-    if (
-      moment(dobValue)
-        .isBetween(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMinDate).format('YYYY-MM-DD'),
-          moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMaxDate).format('YYYY-MM-DD'))) {
-      this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = true;
-      this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].setErrors(null);
-      this.patch();
+    let dateTemp = moment(dobValue, 'MM/DD/YYYY');
+    if (dateTemp.isValid()) {
+      this.is_invalid_date = false;
+      if (
+        moment(dobValue)
+          .isBetween(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMinDate).format('YYYY-MM-DD'),
+            moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMaxDate).format('YYYY-MM-DD'))) {
+        this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = true;
+        this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].setErrors(null);
+        this.patch();
+      } else {
+        this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
+        this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].setErrors({ 'invalid': true });
+        this.patch();
+      }
     } else {
+      this.is_invalid_date = true;
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
       this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].setErrors({ 'invalid': true });
       this.patch();
     }
+    console.log(this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date);
     this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.first_name;
     this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.last_name;
     this.travelers[`type${cartNumber}`].adults[traveler_number].email = traveler.email;
@@ -661,7 +669,7 @@ export class TravelerFormComponent implements OnInit {
     this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no = traveler.phone_no;
     this.travelers[`type${cartNumber}`].adults[traveler_number].country_code = traveler.country_code || '+1';
     this.travelers[`type${cartNumber}`].adults[traveler_number].country_id = traveler.country_id != null ? traveler.country_id : '';
-    if (this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date === false) {
+    if (this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date === false || this.is_invalid_date) {
       this.travelers[`type${cartNumber}`].adults[traveler_number].dob = dobValue;
       this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].setErrors({ 'invalid': true });
       this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].updateValueAndValidity();
@@ -684,8 +692,6 @@ export class TravelerFormComponent implements OnInit {
   }
 
   validateCountryWithPhoneNumber(event, cartNumber, traveler_number): void {
-
-    //console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.phone_no,"======")
     this.setPhoneNumberFormat(event.phonecode, cartNumber, traveler_number);
   }
 

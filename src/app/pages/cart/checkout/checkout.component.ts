@@ -580,18 +580,14 @@ export class CheckoutComponent implements OnInit {
               } 
               res.redirection = redirection;
 
-              // console.log("res", res);
               if (transaction.state == "succeeded") {
-                // console.log('succeeded', [redirection]);
                 window.location.href = redirection;
               } else if (transaction.state == "pending") {
 
-                // console.log('pending', [res]);
                 this.isBookingProgress = false;
                 this.challengePopUp = true;
                 this.spreedly.lifeCycle(res);
               } else {
-                console.log('fail', [res]);
                 if (this.commonFunction.isRefferal()) {
                   this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: queryParams });
                 } else {
@@ -662,7 +658,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    console.log(event);
     //this.totalCard = event;
   }
 

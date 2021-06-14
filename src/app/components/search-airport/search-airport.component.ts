@@ -78,7 +78,6 @@ export class SearchAirportComponent implements OnInit {
 
   onChangeSearch(event) {
     this.searchAirport(event.term);
-    console.log("event.term",event.term)
     this.searchItem.emit({key : event.term,type : this.id})
   }
 
@@ -104,7 +103,6 @@ export class SearchAirportComponent implements OnInit {
   }
 
   onRemove(event) {
-    console.log("innnnn")
     this.selectedAirport = {};
   }
 
