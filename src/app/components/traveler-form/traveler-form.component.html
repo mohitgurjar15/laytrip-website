@@ -169,18 +169,20 @@
                       </div>
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && !traveler.controls.is_valid_date.value"
                         class="error">
-                        <small class="error_field" *ngIf="traveler.controls.type.value === 'adult' && !is_invalid_date">
+                        <small class="error_field"
+                          *ngIf="(traveler.controls.type.value === 'adult') && !(traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate)">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Adult
                           is age 18+.</small>
                         <small class="error_field"
-                          *ngIf="traveler.controls.type.value === 'child'  && !is_invalid_date">
+                          *ngIf="(traveler.controls.type.value === 'child') && !(traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate)">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Child
                           is age 2-18.</small>
                         <small class="error_field"
-                          *ngIf="traveler.controls.type.value === 'infant'  && !is_invalid_date">
+                          *ngIf="(traveler.controls.type.value === 'infant') && !(traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate)">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Infant
                           is age 0-2.</small>
-                        <small class="error_field" *ngIf="is_invalid_date">
+                        <small class="error_field"
+                          *ngIf="traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter
                           valid date of birth.</small>
                       </div>

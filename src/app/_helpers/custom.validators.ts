@@ -73,3 +73,37 @@ export class WhiteSpaceValidator {
   }
 
 }
+
+
+// export function checkValidDate(type = '') {
+//   return (form: FormGroup): { [key: string]: any } => {
+//     if (!form.value.dob) {
+//       return { invalidDate: true };
+//     } else {
+//       let dateTemp = moment(form.value.dob, 'MM/DD/YYYY');
+//       let today = new Date();
+//       if (dateTemp.isValid()) {
+//         // && !moment(dateTemp).isAfter(moment(today).format('MM/DD/YYYY'))
+//         return null;
+//       } else {
+//         return { invalidDate: true };
+//       }
+//     }
+//   };
+// }
+
+export function checkValidDate(type = '') {
+  return (control: AbstractControl): { [key: string]: any } => {
+    if (!control.value) {
+      return { invalidDate: true };
+    } else {
+      let dateTemp = moment(control.value, 'MM/DD/YYYY');
+      let today = new Date();
+      if (dateTemp.isValid() && !moment(dateTemp).isAfter(moment(today).format('MM/DD/YYYY'))) {
+        return;
+      } else {
+        return { invalidDate: true };
+      }
+    }
+  };
+}
