@@ -980,11 +980,19 @@ select {
     .control {
 
       @include tab-view{
-        display: none;
+        //display: none;
+        display: block;
+      }
+
+      .arrow{
+        @include tab-view{
+          border: none;
+        }
       }
       
       &.prev {
         opacity: 0;
+
 
         &:hover {
           opacity: 1;

@@ -57,9 +57,7 @@ export class CarouselComponent {
   activityWatcher(){
 
     var secondsSinceLastActivity = 0;
-
     var maxInactivity = 4;
-
     let self=this;
     setInterval(function(){
       if(self.currentChangeCounter!=self.previousChangeCounter){ 
@@ -70,17 +68,11 @@ export class CarouselComponent {
       secondsSinceLastActivity++;
       
       if(secondsSinceLastActivity > maxInactivity){
-          self.onNextClick();
+          //self.onNextClick();
           secondsSinceLastActivity = 0;
       }
     }, 1000);
-
-    
-
-    
-    var activityEvents = [
-        
-    ];
+    var activityEvents = [];
     
     //register the activity function as the listener parameter.
     activityEvents.forEach(function(eventName) {
@@ -88,8 +80,6 @@ export class CarouselComponent {
           secondsSinceLastActivity = 0;
         }, true);
     });
-
-
   }
 
   ngOnChanges(change:SimpleChange){
@@ -109,6 +99,17 @@ export class CarouselComponent {
       console.log('greater')
       this.onNextClick();
     }
+  }
 
+  onSwipe(evt) {
+    const direction = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+    //const y = Math.abs(evt.deltaY) > 40 ? (evt.deltaY > 0 ? 'down' : 'up') : '';
+    console.log(`${direction}`,evt.deltaX);
+    if(direction=='left'){
+      this.onNextClick();
+    }
+    if(direction=='right'){
+      this.onPreviousClick();
+    }
   }
 }
