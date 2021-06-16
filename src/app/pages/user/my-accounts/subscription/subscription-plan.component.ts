@@ -28,7 +28,6 @@ export class SubscriptionPlanComponent implements OnInit {
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.userService.getSubscriptionList().subscribe((res: any) => {
-      // console.log(res.data);
       if (res && res.data) {
         this.subscriptionList = res.data;
         this.loading = false;

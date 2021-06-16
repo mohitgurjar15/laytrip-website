@@ -405,7 +405,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   getCheckinDate(module_Info,type){
     let checkinDate;
-    //console.log(module_Info)
     if(type=='flight'){
       checkinDate = moment(module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
     }

@@ -80,6 +80,7 @@ export class AddCardComponent implements OnInit {
     });
     this.genericService.getPaymentDetails().subscribe((result: any) => {
       this.envKey = result.credentials.environment;
+      this.saveCardLoader = false;
       this.spreedlySdk();
     });
     $('#cardError').hide();
@@ -121,7 +122,6 @@ export class AddCardComponent implements OnInit {
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
         var errorBorder = "2px solid #ff0000";
-        // console.log(error["attribute"]);
         if (error["attribute"]) {
           $("#error_message").text("error");
           if (error["attribute"] == 'month' || error["attribute"] == 'year') {
@@ -204,7 +204,6 @@ export class AddCardComponent implements OnInit {
           $("#payment-form")[0].reset();
           Spreedly.reload();
           var cardTokenNew = obj.cardToken;
-
         },
         error: function (error) {
           if (error && error.status !== 406) {
@@ -214,7 +213,6 @@ export class AddCardComponent implements OnInit {
             $('#new_card').show();
             errorMessage.innerHTML = error.responseJSON.message;
           }
-
           // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
       });
@@ -226,6 +224,7 @@ export class AddCardComponent implements OnInit {
   }
 
   submitPaymentForm() {
+    this.saveCardLoader = true;
     var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
     var normalBorder = "2px solid #d6d6d6";
@@ -254,6 +253,7 @@ export class AddCardComponent implements OnInit {
     setTimeout(() => {
       this.cardListChangeCount += this.cardListChangeCount + 1;
       this.emitCardListChange.emit(this.cardListChangeCount);
+      this.saveCardLoader = false;
     }, 5000)
 
   }
@@ -280,6 +280,7 @@ export class AddCardComponent implements OnInit {
     // Spreedly.removeHandlers();
     $("#payment-form")[0].reset();
     this.add_new_card.emit(false);
+    this.saveCardLoader = false;
   }
 
   ngOnDestroy() {

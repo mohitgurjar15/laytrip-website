@@ -51,7 +51,6 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.rentalListArray = this.rentalDetails;
-    console.log(this.rentalListArray);
     this.userInfo = getLoginUserInfo();
   }
 

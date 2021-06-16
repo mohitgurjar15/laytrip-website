@@ -84,7 +84,6 @@ export class PaymentModeComponent implements OnInit {
 
     this.cartService.getCartPrice.subscribe(cartPrices=>{
       this.cartPrices = cartPrices;
-      // console.log("this.cartPrices",this.cartPrices)
       this.getTotalPrice();
       if(this.instalmentRequest.checkin_date){
 
@@ -227,7 +226,6 @@ export class PaymentModeComponent implements OnInit {
 
   getCheckinDate(module_Info,type){
     let checkinDate;
-    //console.log(module_Info)
     if(type=='flight'){
       checkinDate = moment(module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
     }
@@ -285,8 +283,6 @@ export class PaymentModeComponent implements OnInit {
   togglePaymentMode(type){
 
     if(type=='instalment' && !this.instalmentAvavible){
-
-      // console.log("this.cartPricesLLLL",this.cartPrices)
 
       if(this.cartPrices.length>1){
 

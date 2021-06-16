@@ -198,7 +198,6 @@ export class BookingComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    console.log(event, "------");
     //this.totalCard = event;
   }
 
@@ -207,7 +206,6 @@ export class BookingComponent implements OnInit {
   }
 
   closeNewCardPanel(event) {
-    console.log("Event", event)
     this.add_new_card = event;
   }
 
@@ -436,7 +434,6 @@ export class BookingComponent implements OnInit {
     for (let i in Object.keys(this.travelerForm.controls)) {
       message = '';
       for (let j = 0; j < this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++) {
-        console.log(this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j])
         if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status == 'INVALID') {
 
 

@@ -49,7 +49,6 @@ export class CartPriceSummaryComponent implements OnInit {
   }
  
   setLoopNumber(loopNumber){
-    // console.log(loopNumber)
     this.cartDueLoopNum = loopNumber;
     return loopNumber;
   }

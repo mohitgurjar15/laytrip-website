@@ -93,7 +93,7 @@
 
                       <div class="gender_anchers gender_selection">
                         <label for="">Gender*</label>
-                        <ng-select [searchable]="false" [selectOnTab]="true" formControlName="gender" [tabIndex]="x"
+                        <ng-select [searchable]="false" [selectOnTab]="true" formControlName="gender"
                           [clearable]="false" placeholder="Select Gender"
                           [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.gender.errors}">
                           <ng-option value="M">Male</ng-option>
@@ -169,15 +169,22 @@
                       </div>
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && !traveler.controls.is_valid_date.value"
                         class="error">
-                        <small class="error_field" *ngIf="traveler.controls.type.value === 'adult'">
+                        <small class="error_field"
+                          *ngIf="(traveler.controls.type.value === 'adult') && !(traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate)">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Adult
                           is age 18+.</small>
-                        <small class="error_field" *ngIf="traveler.controls.type.value === 'child'">
+                        <small class="error_field"
+                          *ngIf="(traveler.controls.type.value === 'child') && !(traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate)">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Child
                           is age 2-18.</small>
-                        <small class="error_field" *ngIf="traveler.controls.type.value === 'infant'">
+                        <small class="error_field"
+                          *ngIf="(traveler.controls.type.value === 'infant') && !(traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate)">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Infant
                           is age 0-2.</small>
+                        <small class="error_field"
+                          *ngIf="traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate">
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter
+                          valid date of birth.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"

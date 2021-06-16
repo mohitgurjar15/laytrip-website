@@ -128,7 +128,6 @@ export class UserService {
         requireBackupFile: isRequireBackupFile
       }
     }
-    console.log(options)
     return this.http.delete(this.apiURL + 'v1/user/account/request', options)
   }
 
