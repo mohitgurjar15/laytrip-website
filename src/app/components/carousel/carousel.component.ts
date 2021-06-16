@@ -18,14 +18,26 @@ declare var $: any;
     ])
   ]
 })
-export class CarouselComponent {
+export class CarouselComponent  implements OnInit{
 
   @Input() slides;
   @Input() currentChangeCounter=0;
+  @Input() swipeDirection:string='';
   @Output() activeSlide=new EventEmitter();
   previousChangeCounter=0;
 
   currentSlide = 0;
+
+  ngOnInit() {
+    this.homeService.getSwipeSlide.subscribe((direction)=>{
+      if(direction=='left'){
+        this.onPreviousClick();
+      }
+      if(direction=='right'){
+        this.onNextClick();
+      }
+    })
+  }
 
   constructor(public homeService:HomeService) {
     this.activityWatcher();
@@ -83,7 +95,7 @@ export class CarouselComponent {
   }
 
   ngOnChanges(change:SimpleChange){
-    if(typeof change['currentChangeCounter'].currentValue!='undefined'){
+    if(typeof change['currentChangeCounter']!='undefined'){
       this.currentChangeCounter=change['currentChangeCounter'].currentValue;
       this.previousChangeCounter=change['currentChangeCounter'].previousValue;
     }
@@ -93,23 +105,9 @@ export class CarouselComponent {
     if(isCurrentSlideClick){
       return;
     } else if(currentSlide>i){
-      console.log('less')
       this.onPreviousClick();
     }else if(currentSlide<i){
-      console.log('greater')
       this.onNextClick();
-    }
-  }
-
-  onSwipe(evt) {
-    const direction = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
-    //const y = Math.abs(evt.deltaY) > 40 ? (evt.deltaY > 0 ? 'down' : 'up') : '';
-    console.log(`${direction}`,evt.deltaX);
-    if(direction=='left'){
-      this.onNextClick();
-    }
-    if(direction=='right'){
-      this.onPreviousClick();
     }
   }
 }

@@ -322,4 +322,9 @@ export class HomeComponent implements OnInit {
   getCurrentChangeCounter(event){
     this.currentChangeCounter = event; 
   }
+
+  onSwipe(evt) {
+    const direction = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+    this.homeService.setSwipeSlideDirection(direction)
+  }
 }

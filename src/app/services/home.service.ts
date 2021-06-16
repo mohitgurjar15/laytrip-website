@@ -5,7 +5,6 @@ import { catchError } from "rxjs/operators";
 import { environment } from '../../environments/environment';
 import { CommonFunction } from "../_helpers/common-function";
 
-
 @Injectable({
     providedIn: 'root',
   })
@@ -18,6 +17,9 @@ export class HomeService {
     private sliderOffers = new BehaviorSubject([]);
     getActiveTabName = this.tabName.asObservable();
     getSlideOffers = this.sliderOffers.asObservable();
+
+    private swipeSlide : any = new BehaviorSubject({});
+    getSwipeSlide = this.swipeSlide.asObservable();
 
     constructor(
         private http: HttpClient,
@@ -76,4 +78,8 @@ export class HomeService {
             
         }
     }   
+
+    setSwipeSlideDirection(direction){
+        this.swipeSlide.next(direction)
+    }
 }

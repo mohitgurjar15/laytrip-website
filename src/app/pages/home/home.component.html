@@ -1,7 +1,7 @@
 <!--  Start Banner Section-->
-<section class="home_banner " id="home_banner" [ngClass]="{'banner_bg':isRefferal==false}">
+<section (swipe)="onSwipe($event)" class="home_banner " id="home_banner" [ngClass]="{'banner_bg':isRefferal==false}">
     <!-- class name banner_bg -->
-    <carousel *ngIf="isRefferal==true" class="home_bg_slider" (activeSlide)="activeSlide($event)" currentChangeCounter={{currentChangeCounter}} [slides]="slides"></carousel>
+    <carousel *ngIf="isRefferal==true" class="home_bg_slider" (activeSlide)="activeSlide($event)" currentChangeCounter={{currentChangeCounter}} [slides]="slides" ></carousel>
     <div class="container banner_inner">
         <div class="banner_text">
             <div class="block_left" *ngIf="countryCode!='DR'">
