@@ -60,14 +60,6 @@ import { AirportSuggestionComponent } from './airport-suggestion/airport-suggest
 import { HotelCartItemComponent } from '../pages/hotel/components/hotel-cart-item/hotel-cart-item.component';
 import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.component';
 import { CarouselComponent } from './carousel/carousel.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import * as Hammer from 'hammerjs';
-import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-export class MyHammerConfig extends HammerGestureConfig {
-  overrides = <any> {
-    swipe: { direction: Hammer.DIRECTION_ALL },
-  };
-}
 @NgModule({
   declarations: [
     SearchAirportComponent,
@@ -183,10 +175,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     HotelSuggestionComponent,
     CarouselComponent
   ],
-  providers: [DatePipe, NgxSpinnerService, NgbActiveModal, {
-    provide: HAMMER_GESTURE_CONFIG,
-    useClass: MyHammerConfig,
-  }],
+  providers: [DatePipe, NgxSpinnerService, NgbActiveModal],
   entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
