@@ -23,6 +23,7 @@
     // height: calc(100vh - 55px);
     //padding-bottom: 130px;
     z-index: 9;
+    touch-action: pan-y !important;
 
     &.banner_bg {
         background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png) !important;
