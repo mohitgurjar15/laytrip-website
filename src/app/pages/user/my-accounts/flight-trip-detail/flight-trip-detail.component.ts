@@ -33,7 +33,6 @@ export class FlightTripDetailComponent implements OnInit {
   getBookingDetails() {
     this.flightService.getFlightBookingDetails(this.bookingId).subscribe((res: any) => {
       this.bookingResult.booking_details = res;
-      console.log("this.bookingResult",this.bookingResult)
       this.instalmentMode = this.bookingResult.booking_details.bookingType==1 ?'instalment':'no-instalment'
       this.isTripDetailloading = true;
       this.isTripNotFound = this.bookingLoader = false;

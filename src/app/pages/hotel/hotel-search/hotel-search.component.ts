@@ -91,8 +91,6 @@ export class HotelSearchComponent implements OnInit {
 
 
   sortHotels(event) {
-
-    console.log(event)
     this.hotelService.setSortFilter(event);
     let { key, order } = event;
     if (key === 'total') {

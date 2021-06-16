@@ -171,10 +171,8 @@ export class GuestInfoComponent implements OnInit {
   }
 
   changeChildAge(age, index) {
-    /*  console.log(age, index)
-     this.roomsGroup.children[index].push(parseInt(age));
-     this.changeValue.emit(this.roomsGroup);
-     console.log(this.roomsGroup) */
+     /*this.roomsGroup.children[index].push(parseInt(age));
+     this.changeValue.emit(this.roomsGroup);*/
   }
 
   toggleChildDropDown(index) {

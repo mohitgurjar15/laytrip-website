@@ -234,7 +234,6 @@ export class HomeComponent implements OnInit {
         response.data.forEach(module => {
           this.moduleList[module.name] = module.status;
         });
-        // console.log(this.moduleList);
       },
       (error) => {
 
