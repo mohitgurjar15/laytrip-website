@@ -17,7 +17,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 export interface CartItem {
 
   type: string;
-  module_info: {},
+  module_info: {},r
 }
 
 @Component({
@@ -544,7 +544,7 @@ export class CheckoutComponent implements OnInit {
           }
           this.travelerService.updateAdult(data[k], data[k].userId).subscribe((traveler: any) => {
 
-          })
+          });
         }
         let cartData = {
           cart_id: this.carts[i].id,
@@ -725,14 +725,14 @@ export class CheckoutComponent implements OnInit {
     this.validateCartItems();
   }
 
-  @HostListener('document:click', ['$event'])
-  clickOutside(event) {
-    let insideClassArray = ['btn_pay_book','modal fade comman_modal signin_modal'];
-    if(insideClassArray.indexOf(event.target.className) > -1 ) {
-      this.validationErrorMessage = '';
-      console.log('yes')
-    } else {
-      console.log('no')
-    }
-  }
+  // @HostListener('document:click', ['$event'])
+  // clickOutside(event) {
+  //   let insideClassArray = ['btn_pay_book','modal fade comman_modal signin_modal'];
+  //   if(insideClassArray.indexOf(event.target.className) > -1 ) {
+  //     this.validationErrorMessage = '';
+  //     console.log('yes')
+  //   } else {
+  //     console.log('no')
+  //   }
+  // }
 }
