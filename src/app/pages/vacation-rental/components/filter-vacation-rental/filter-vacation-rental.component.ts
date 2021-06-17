@@ -118,7 +118,7 @@ export class FilterVacationRentalComponent implements OnInit, OnDestroy {
     if (sheight > 10 && swidth < 991) {
       $('#responsive_filter').slideDown("slow");
     }
-    $(".responsive_filter_btn").click(function () {
+    /* $(".responsive_filter_btn").click(function () {
       $("#responsive_filter_show").slideDown("slow");
       $("body").addClass('overflow-hidden');
     });
@@ -126,7 +126,7 @@ export class FilterVacationRentalComponent implements OnInit, OnDestroy {
     $(".filter_close > a").click(function () {
       $("#responsive_filter_show").slideUp("slow");
       $("body").removeClass('overflow-hidden');
-    });
+    }); */
     //Close REsponsive Fliter js
 
     // Start filter Shortby js
