@@ -35,9 +35,9 @@ export class CarouselComponent  implements OnInit{
       }
       if(direction=='right'){
         this.onNextClick();
-      }
+      }   
     })
-  }
+  } 
 
   constructor(public homeService:HomeService) {
     this.activityWatcher();
