@@ -165,15 +165,15 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   loadJquery() {
     //Start REsponsive Fliter js
 
-    $(".responsive_filter_btn").click(function () {
-      $("#responsive_filter_show").slideDown();
-      $("body").addClass('overflow-hidden');
-    });
+    // $(".responsive_filter_btn").click(function () {
+    //   $("#responsive_filter_show").slideDown();
+    //   $("body").addClass('overflow-hidden');
+    // });
 
-    $(".filter_close > a").click(function () {
-      $("#responsive_filter_show").slideUp();
-      $("body").removeClass('overflow-hidden');
-    });
+    // $(".filter_close > a").click(function () {
+    //   $("#responsive_filter_show").slideUp();
+    //   $("body").removeClass('overflow-hidden');
+    // });
     //Close REsponsive Fliter js
 
     // Start filter Shortby js
