@@ -8,7 +8,12 @@
           <span>{{item.location}}
             <span class="purple_trvl"><!-- (Two Travelers) --></span>
           </span>
-          <span>${{item.selling_price | number : '1.2-2'}}</span>
+          <span>
+            <span class="old_price">
+              ${{item.selling_price | number : '1.2-2'}}
+            </span>
+            ${{item.selling_price | number : '1.2-2'}}
+          </span>
         </div>
       </ng-container>
     </div>
@@ -22,7 +27,12 @@
                 {{item.location}} ({{item.total_night || 0 }} Nights x ${{item.price_break_down.sub_total/item.total_night | number : '1.2-2'}})
               </p>
             </span>
-            <span>${{item.price_break_down.sub_total | number : '1.2-2'}}</span>
+            <span>
+              <span class="old_price">
+                ${{item.price_break_down.sub_total | number : '1.2-2'}}
+              </span>
+              ${{item.price_break_down.sub_total | number : '1.2-2'}}
+            </span>
           </div>
           <div class="pay_listing hotel_line" >
             <span>
@@ -31,7 +41,10 @@
               </p>
               <a data-toggle="modal" data-target="#tax_fee_modal" class="tax_accor_btn">Taxes and Fees</a>
             </span>
-            <span>${{item.price_break_down.taxes | number : '1.2-2'}}</span>
+            <span>
+              <span class="old_price">${{item.price_break_down.taxes | number : '1.2-2'}}</span>
+              ${{item.price_break_down.taxes | number : '1.2-2'}}
+            </span>
           </div>
 
           <ng-container *ngIf="item.mandatory_fee_details.is_prepaid">
@@ -41,7 +54,12 @@
                   {{price.name}} (Included in total price)
                 </p>
               </span>
-              <span>${{price.price | number : '1.2-2'}}</span>
+              <span>
+                <span class="old_price">
+                  ${{price.price | number : '1.2-2'}}
+                </span>
+                ${{price.price | number : '1.2-2'}}
+              </span>
             </div>
           </ng-container>
 
@@ -52,7 +70,12 @@
                   {{price.name}} (Pay at Property)
                 </p>
               </span>
-              <span>${{price.price | number : '1.2-2'}}</span>
+              <span>
+                <span class="old_price">
+                  ${{price.price | number : '1.2-2'}}
+                </span>
+                ${{price.price | number : '1.2-2'}}
+              </span>
             </div>
           </ng-container>
           

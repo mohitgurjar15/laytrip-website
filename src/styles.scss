@@ -966,6 +966,10 @@ select {
     min-height: 580px;
   }
 
+  @include tab-view{
+    min-height: 710px;
+  }
+
   .carousel {
     border-radius: 0 !important;
 

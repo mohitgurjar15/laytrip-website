@@ -150,6 +150,13 @@
           overflow: hidden;
           text-overflow: ellipsis;
           padding-right: 15px;
+          flex: 5;
+        }
+        &:last-child{
+          flex: 1;
+          .old_price{
+            padding-right: 5px;
+          }
         }
       }
 
