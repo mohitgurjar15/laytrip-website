@@ -37,15 +37,15 @@ export class SortHotelComponent implements OnInit {
   }
 
   loadJquery() {
-    /* $(".responsive_sort_btn").click(function () {
-      $("#responsive_sortby_show").slideDown();
-      $("body").addClass('overflow-hidden');
-    });
+    // $(".responsive_sort_btn").click(function () {
+    //   $("#responsive_sortby_show").slideDown();
+    //   $("body").addClass('overflow-hidden');
+    // });
 
-    $(".filter_close > a").click(function () {
-      $("#responsive_sortby_show").slideUp();
-      $("body").removeClass('overflow-hidden');
-    }); */
+    // $(".filter_close > a").click(function () {
+    //   $("#responsive_sortby_show").slideUp();
+    //   $("body").removeClass('overflow-hidden');
+    // });
     // Start filter Shortby js
     $(document).on('show', '#accordion', function (e) {
       $(e.target).prev('.accordion-heading').addClass('accordion-opened');
