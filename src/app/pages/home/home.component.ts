@@ -9,6 +9,7 @@ import { HomeService } from '../../services/home.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
 import { CookieService } from 'ngx-cookie';
+import { PreloadingService } from '../../preloading.service';
 
 declare var $: any;
 @Component({
@@ -121,6 +122,7 @@ export class HomeComponent implements OnInit {
     private homeService: HomeService,
     public modalService: NgbModal,
     private cookieService: CookieService,
+    public preLoadService : PreloadingService
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
@@ -173,6 +175,9 @@ export class HomeComponent implements OnInit {
         console.log(deals)
       
       }
+    });
+    this.preLoadService.getLandingPageData.subscribe(res=>{
+        console.log("res",res)
     });
   }
 

@@ -19,7 +19,7 @@ import { LandingPageData } from './landing-page-data.model';
 export class AppComponent {
   title = 'laytrip-website';
   readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
-  LandingPageDataModel : LandingPageData;
+  LandingPageDataModel;
   constructor(
     private cookieService:CookieService,
     private genericService:GenericService,
@@ -31,8 +31,8 @@ export class AppComponent {
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
-    this.LandingPageDataModel = this.preLoadService.getLandingPageData();
-    console.log(this.LandingPageDataModel)
+    // this.LandingPageDataModel = this.preLoadService.getLandingPageData();
+    // console.log("app.ts",this.LandingPageDataModel)
   }
 
   ngOnInit(){
@@ -42,7 +42,7 @@ export class AppComponent {
     }
     this.registerGuestUser();
     this.setCountryBehaviour();
-
+  
   }
 
   isValidateReferralId(referral_id){
