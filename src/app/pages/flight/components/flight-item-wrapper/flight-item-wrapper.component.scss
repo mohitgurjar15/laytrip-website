@@ -21,15 +21,16 @@
 
     &.no_flight{
         transform: translate(0, 0) !important;
+        right: 0;
     }
 
     @include tab-view{
         bottom: 0;
         right: 0;
     }
-    .sec_text{
-       // padding-right: 15px;
-    }
+    // .sec_text{
+    //   padding-right: 15px;
+    // }
     a{
         cursor: pointer;
         width: 20px !important;

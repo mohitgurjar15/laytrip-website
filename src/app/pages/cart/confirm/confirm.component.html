@@ -4,7 +4,7 @@
 
 <div class="conf_main_wrapper">
     <div class="container">
-        
+
         <div class="conf_container">
 
             <div *ngIf="loading">
@@ -32,7 +32,8 @@
             </div>
 
 
-            <div id="{{ commonFunction.isRefferal() ? 'ga4_Landing_Booking_Confirm':'ga4_Booking_Confirm'}}"   class="header_bar" *ngIf="!loading && allBookingStatus">
+            <div id="{{ commonFunction.isRefferal() ? 'ga4_Landing_Booking_Confirm':'ga4_Booking_Confirm'}}"
+                class="header_bar" *ngIf="!loading && allBookingStatus">
                 <h3>
                     Booking Confirmed
                     <span class="b_num">Booking ID #{{cartDetails.laytripCartId}}</span>
@@ -40,26 +41,36 @@
                 <p class="para">
                     Thank you for booking your travel with us! We will send you your airline, hotel and/or home
                     reservation numbers prior to your travel date. View your details anytime at <a
-                        [routerLink]="['/account/bookings']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" >My Bookings</a>.
+                        [routerLink]="['/account/bookings']"
+                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">My
+                        Bookings</a>.
                 </p>
             </div>
             <div class="book_detailers" *ngIf="!loading && allBookingStatus">
                 <h3>Details</h3>
                 <ng-container *ngFor="let booking of cartDetails.booking">
-                    <div class="detail_liners" *ngIf="booking.moduleId==1 && (booking.bookingStatus==0 || booking.bookingStatus==1)">
+                    <div class="detail_liners"
+                        *ngIf="booking.moduleId==1 && (booking.bookingStatus==0 || booking.bookingStatus==1)">
                         <span class="lefts">Flight</span>
                         <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==1">
                             {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
                             {{commonFunction.convertDateFormat(booking.moduleInfo[0].departure_date,'DD/MM/YYYY')}}
+                            <span class="off_label">$100 off</span>
                         </span>
                         <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==2">
                             {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
                             {{commonFunction.convertDateFormat(booking.moduleInfo[0].departure_date,'DD/MM/YYYY')}}-{{commonFunction.convertDateFormat(booking.moduleInfo[0].arrival_date,'DD/MM/YYYY')}}
+                            <span class="off_label">$100 off</span>
                         </span>
                     </div>
-                    <div class="detail_liners" *ngIf="booking.moduleId==3 && (booking.bookingStatus==0 || booking.bookingStatus==1)" >
+                    <div class="detail_liners"
+                        *ngIf="booking.moduleId==3 && (booking.bookingStatus==0 || booking.bookingStatus==1)">
                         <span class="lefts">Hotel</span>
-                        <span class="rights">{{booking.moduleInfo[0].hotel_name}} {{commonFunction.convertDateFormat(booking.moduleInfo[0].input_data.check_in,'YYYY-MM-DD')}}</span>
+                        <span class="rights">{{booking.moduleInfo[0].hotel_name}}
+                            {{commonFunction.convertDateFormat(booking.moduleInfo[0].input_data.check_in,'YYYY-MM-DD')}}
+                            <span class="off_label">$100 off</span>
+                        </span>
+
                     </div>
                 </ng-container>
 
@@ -88,21 +99,33 @@
                 </div>
                 <div class="detail_liners">
                     <span class="lefts">Total Price</span>
-                    <span class="rights">${{cartDetails.totalAmount | number : '1.2-2'}}</span>
+                    <span class="rights">
+                        <span class="dashed_price">
+                            ${{cartDetails.totalAmount | number : '1.2-2'}}
+                        </span>
+                        <span class="new_price">
+                            ${{cartDetails.totalAmount | number : '1.2-2'}}
+                        </span>
+                    </span>
                 </div>
                 <div class="detail_liners" *ngIf="cartDetails.cartInstallments.length">
                     <span class="lefts">Total Paid</span>
-                    <span class="rights">${{ cartDetails.paidAmount | number : '1.2-2'}} <span *ngIf="cartDetails.cardDetail"> {{ cardType[cartDetails?.cardDetail?.cardType]}} ending in {{cartDetails?.cardDetail?.cardDigits}}</span> </span>
+                    <span class="rights">${{ cartDetails.paidAmount | number : '1.2-2'}} <span
+                            *ngIf="cartDetails.cardDetail"> {{ cardType[cartDetails?.cardDetail?.cardType]}} ending in
+                            {{cartDetails?.cardDetail?.cardDigits}}</span> </span>
                 </div>
                 <div class="detail_liners" *ngIf="cartDetails.cartInstallments.length==0">
                     <span class="lefts">Total Paid</span>
-                    <span class="rights">${{ cartDetails.totalAmount | number : '1.2-2'}} <span *ngIf="cartDetails.cardDetail"> {{ cardType[cartDetails?.cardDetail?.cardType]}} ending in {{cartDetails?.cardDetail?.cardDigits}}</span> </span>
+                    <span class="rights">${{ cartDetails.totalAmount | number : '1.2-2'}} <span
+                            *ngIf="cartDetails.cardDetail"> {{ cardType[cartDetails?.cardDetail?.cardType]}} ending in
+                            {{cartDetails?.cardDetail?.cardDigits}}</span> </span>
                 </div>
                 <h3>Policies</h3>
                 <div class="linking_wrapper">
                     <!-- <a href="javascript:void(0);">Customer Service</a>
                     <a [routerLink]="['/privacy-policy']">Privacy</a> -->
-                    <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" >Terms</a>
+                    <a [routerLink]="['/terms']"
+                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>
                 </div>
                 <h3>Contact</h3>
                 <div class="linking_wrapper">
@@ -113,6 +136,7 @@
     </div>
 </div>
 
-<app-booking-feedback *ngIf="anyBookingStatus" [hidden]="!isFeedbackPage" (feedbackValueChange)="feedbackValueChange($event)">
+<app-booking-feedback *ngIf="anyBookingStatus" [hidden]="!isFeedbackPage"
+    (feedbackValueChange)="feedbackValueChange($event)">
 </app-booking-feedback>
 <app-contact-us></app-contact-us>
