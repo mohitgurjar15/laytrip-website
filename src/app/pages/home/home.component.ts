@@ -110,6 +110,7 @@ export class HomeComponent implements OnInit {
     }
   ];
 
+  $landingPageData;
   constructor(
     private genericService: GenericService,
     public commonFunction: CommonFunction,
@@ -165,6 +166,14 @@ export class HomeComponent implements OnInit {
     this.$tabName.unsubscribe();
     this.homeService.setActiveTab('');  
     this.isRefferal = this.commonFunction.isRefferal();
+
+    this.$landingPageData = this.homeService.getLandingPageData.subscribe(landingPageData=> {
+      if(typeof landingPageData != 'undefined' && Object.keys(landingPageData).length > 0 ){     
+        let deals : any = landingPageData;
+        console.log(deals)
+      
+      }
+    });
   }
 
   openCookiePolicyPopup() {
@@ -246,6 +255,7 @@ export class HomeComponent implements OnInit {
     this.moduleId = moduleId;  
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
+        
         if(this.moduleId == 1 && this.commonFunction.isRefferal()){
           this.dealList = JSON.parse('[{"code":"PUJ","name":"Punta Cana Intl.","city":"Punta Cana","country":"Dominican Republic","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/puntacana.png","key":"P"},{"code":"TPA","name":"Tampa Intl.","city":"Tampa","country":"USA","key":"T","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/puntacana.png"},{"code":"CUN","name":"Cancun Intl.","city":"Cancun","country":"Mexico","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/cancun.png","key":"C"},{"code":"MCO","name":"Orlando Intl.","city":"Orlando","country":"USA","key":"O","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/orlando.png"},{"code":"LAS","name":"Mc Carran Intl","city":"Las Vegas","country":"USA","key":"L","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/lasvegas.png"},{"code":"DEN","name":"Denver Intl.","city":"Denver","country":"USA","key":"D","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/denver.png"},{"code":"MIA","name":"Miami Intl. Arpt.","city":"Miami","country":"USA","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/miami.png","key":"M"},{"code":"TUY","name":"Tulum","city":"Tulum","country":"Mexico","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/tulum.png","key":"C"}]');          
         } else if(this.moduleId == 3 && this.commonFunction.isRefferal()){

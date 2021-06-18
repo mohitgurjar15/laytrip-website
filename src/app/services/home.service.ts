@@ -21,6 +21,10 @@ export class HomeService {
     private swipeSlide : any = new BehaviorSubject({});
     getSwipeSlide = this.swipeSlide.asObservable();
 
+    private landingPageData : any = new BehaviorSubject({});
+    getLandingPageData = this.landingPageData.asObservable();
+
+
     constructor(
         private http: HttpClient,
         private commonFunction: CommonFunction
@@ -46,6 +50,10 @@ export class HomeService {
         this.tabName.next(tabName)
     }
 
+    setLandingPageData(data){
+        console.log('here')
+        this.landingPageData.next(data)
+    }
     setOffersData(offers){
         this.sliderOffers.next(offers)
     }
