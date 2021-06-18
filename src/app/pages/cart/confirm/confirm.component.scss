@@ -30,9 +30,10 @@
 .conf_main_wrapper {
     padding: 15px 0;
 
-    @include tab-view{
+    @include tab-view {
         padding: 15px 0 0;
     }
+
     .back_cta_btn {
         a {
             color: $active-tab-text;
@@ -118,6 +119,32 @@
                 .rights {
                     color: $mid_gray_bg;
                     flex: 2;
+
+                    .off_label {
+                        // display: flex;
+                        background-color: #1CD304;
+                        font-size: 9px;
+                        line-height: 11px;
+                        color: $text-white;
+                        border-radius: 26px;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        padding: 3px 7px;
+                        min-width: 50px;
+                        margin-left: 5px;
+                        height: 20px;
+                    }
+
+                    .dashed_price {
+                        text-decoration: line-through;
+                        color: $mid_gray_bg !important;
+                    }
+
+                    .new_price {
+                        color: #1CD304;
+                        font-weight: 600;
+                    }
                 }
             }
 
