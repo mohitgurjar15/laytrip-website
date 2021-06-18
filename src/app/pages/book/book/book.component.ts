@@ -49,6 +49,7 @@ export class BookComponent implements OnInit {
     this.bookingRequest = JSON.parse(sessionStorage.getItem('__cbk'))
     this.bookingRequest.uuid = this.uuid;
     this.bookingRequest.transaction_token = this.transaction_token;
+    this.bookingRequest.auth_log = 'Payment-authorise-card-1623906251061_fde84f87-53e6-407a-8012-0a9d808d52c1.json'
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();      
       this.bookingRequest.referral_id = parms.utm_source ? parms.utm_source : '';
