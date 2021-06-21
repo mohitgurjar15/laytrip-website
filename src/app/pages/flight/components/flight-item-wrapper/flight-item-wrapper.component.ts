@@ -321,25 +321,19 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.flightUniqueCode = '';
   }
 
-}
+  showDownPayment(offerData,downPaymentOption){
 
-@Component({
-  selector: 'laytrip-ok-popup',
-  template: `<div class="modal-header">
-      <h4 class="modal-title">Warning</h4>
-    </div>
-    <div class="modal-body">
-      <p>Please login to book flight</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">OK</button>
-    </div>`,
-})
+    if(offerData.applicable){
 
-export class LaytripOkPopup {
-
-  constructor(public modal: NgbActiveModal) {
+      if(typeof offerData.down_payment_options!='undefined' && offerData.down_payment_options[downPaymentOption].applicable){
+        return true;
+      }
+      return false;
+    }
+    return true;
   }
 }
+
+
 
 
