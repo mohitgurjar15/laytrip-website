@@ -524,7 +524,7 @@
                                     <!-- {{room.title}} -->
                                     <span class="wrapper_names">
                                       <span class="hotel_names">{{room.title}}</span>
-                                      <span class="off_label">$100 off</span>
+                                      <span class="off_label" *ngIf="commonFunction.isRefferal()">$100 off</span>
                                     </span>
                                   </h4>
                                   <span class="adress_span">
@@ -555,7 +555,7 @@
                           </p> -->
                           <p>From</p>
                           <p>
-                            <span class="dashed_price">
+                            <span class="dashed_price" *ngIf="commonFunction.isRefferal()">
                               {{ currency?.symbol }}100
                             </span>
                             <span>
@@ -598,7 +598,7 @@
                         <!-- {{room.title}} -->
                         <span class="wrapper_names">
                           <span class="hotel_names">{{room.title}}</span>
-                          <span class="off_label">$100 off</span>
+                          <span class="off_label" *ngIf="commonFunction.isRefferal()">$100 off</span>
                         </span>
                       </h4>
                       <span class="adress_span">
@@ -622,7 +622,7 @@
                           </p> -->
                           <p>From</p>
                           <p class="duel_prices">
-                            <span class="dashed_price">
+                            <span class="dashed_price" *ngIf="commonFunction.isRefferal()">
                               {{ currency?.symbol }}100
                             </span>
                             <span>

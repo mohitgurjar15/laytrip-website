@@ -28,9 +28,12 @@ export class BookComponent implements OnInit {
   ngOnInit() {
     this.uuid = this.route.snapshot.paramMap.get('uuid');
     this.transaction_token = this.route.snapshot.queryParamMap.get('transaction_token');
+
     this.cartService.getCartItems.subscribe(data => {
+      console.log("init Data", data)
       if (data.length > 0) {
         this.carts = data;
+        console.log("init", this.carts)
       }
     })
 
@@ -72,13 +75,18 @@ export class BookComponent implements OnInit {
           });
     
           let index
-          for (let item of successItem) {
+          console.log("successItem", successItem)
+          console.log("result.carts", result.carts)
+          console.log("this.carts", this.carts)
+          console.log("failedItem", failedItem)
+
+          /* for (let item of successItem) {
             index = this.carts.findIndex(x => x.id == item.cart_id)
             this.carts.splice(index, 1)
             this.cartPrices.splice(index, 1)
           }
           this.cartService.setCartItems(this.carts);
-          this.cartService.setCartPrices(this.cartPrices)
+          this.cartService.setCartPrices(this.cartPrices) */
     
           localStorage.setItem('$crt', failedItem.length || 0);
           if (this.commonFunction.isRefferal()) {

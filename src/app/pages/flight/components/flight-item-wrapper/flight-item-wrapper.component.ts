@@ -323,7 +323,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   showDownPayment(offerData,downPaymentOption){
 
-    if(offerData.applicable){
+    if (typeof offerData != 'undefined' && offerData.applicable) {
 
       if(typeof offerData.down_payment_options!='undefined' && offerData.down_payment_options[downPaymentOption].applicable){
         return true;
