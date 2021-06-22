@@ -40,6 +40,33 @@ var add_points_component_1 = require("./add-points/add-points.component");
 var redeem_laycredit_loader_component_1 = require("./redeem-laycredit-loader/redeem-laycredit-loader.component");
 var toaster_component_1 = require("./toaster/toaster.component");
 var share_social_media_component_1 = require("./share-social-media/share-social-media.component");
+var rental_info_component_1 = require("./rental-shared-components/rental-info/rental-info.component");
+// HOTEL SHARED COMPONENTS
+var guest_info_component_1 = require("./hotel-shared-components/guest-info/guest-info.component");
+var search_hotel_component_1 = require("./hotel-shared-components/search-hotel/search-hotel.component");
+var core_2 = require("@ngx-translate/core");
+var vacation_search_component_1 = require("./rental-shared-components/vacation-search/vacation-search.component");
+var ngx_scrollbar_1 = require("ngx-scrollbar");
+var flight_class_component_1 = require("./flight-class/flight-class.component");
+var ngx_infinite_scroll_1 = require("ngx-infinite-scroll");
+var cart_item_component_1 = require("./cart-item/cart-item.component");
+var traveler_list_component_1 = require("./traveler-list/traveler-list.component");
+var price_summary_component_1 = require("./price-summary/price-summary.component");
+var payment_mode_loader_component_1 = require("./payment-mode-loader/payment-mode-loader.component");
+var cart_component_1 = require("./cart/cart.component");
+var flight_cart_item_component_1 = require("../pages/flight/components/flight-cart-item/flight-cart-item.component");
+var cart_loader_component_1 = require("./cart-loader/cart-loader.component");
+var laytrip_loader_component_1 = require("./laytrip-loader/laytrip-loader.component");
+var ngx_spinner_1 = require("ngx-spinner");
+var empty_cart_component_1 = require("./empty-cart/empty-cart.component");
+var router_1 = require("@angular/router");
+var datepicker_1 = require("ngx-bootstrap/datepicker");
+var delete_cartitem_confirmation_popup_component_1 = require("./delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component");
+var ngx_mask_1 = require("ngx-mask");
+var booking_completion_error_popup_component_1 = require("./booking-completion-error-popup/booking-completion-error-popup.component");
+var airport_suggestion_component_1 = require("./airport-suggestion/airport-suggestion.component");
+var hotel_cart_item_component_1 = require("../pages/hotel/components/hotel-cart-item/hotel-cart-item.component");
+var hotel_suggestion_component_1 = require("./hotel-suggestion/hotel-suggestion.component");
 var ComponentsModule = /** @class */ (function () {
     function ComponentsModule() {
     }
@@ -67,13 +94,33 @@ var ComponentsModule = /** @class */ (function () {
                 add_points_component_1.AddPointsComponent,
                 redeem_laycredit_loader_component_1.RedeemLaycreditLoaderComponent,
                 toaster_component_1.ToasterComponent,
-                share_social_media_component_1.ShareSocialMediaComponent
+                share_social_media_component_1.ShareSocialMediaComponent,
+                delete_cartitem_confirmation_popup_component_1.DeleteCartitemConfirmationPopupComponent,
+                // HOTEL SHARED COMPONENT
+                guest_info_component_1.GuestInfoComponent,
+                search_hotel_component_1.SearchHotelComponent,
+                rental_info_component_1.RentalInfoComponent,
+                vacation_search_component_1.VacationSearchComponent,
+                flight_class_component_1.FlightClassComponent,
+                cart_item_component_1.CartItemComponent,
+                traveler_list_component_1.TravelerListComponent,
+                price_summary_component_1.PriceSummaryComponent,
+                payment_mode_loader_component_1.PaymentModeLoaderComponent,
+                cart_component_1.CartComponent,
+                flight_cart_item_component_1.FlightCartItemComponent,
+                cart_loader_component_1.CartLoaderComponent,
+                laytrip_loader_component_1.LaytripLoaderComponent,
+                empty_cart_component_1.EmptyCartComponent,
+                booking_completion_error_popup_component_1.BookingCompletionErrorPopupComponent,
+                airport_suggestion_component_1.AirportSuggestionComponent,
+                hotel_cart_item_component_1.HotelCartItemComponent,
+                hotel_suggestion_component_1.HotelSuggestionComponent
             ],
             imports: [
                 common_1.CommonModule,
                 ng_select_1.NgSelectModule,
                 forms_1.FormsModule,
-                forms_1.ReactiveFormsModule,
+                forms_1.ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
                 ng_bootstrap_1.NgbModule,
                 ngx_countdown_1.CountdownModule,
                 ng5_slider_1.Ng5SliderModule,
@@ -81,6 +128,13 @@ var ComponentsModule = /** @class */ (function () {
                 calendar_1.CalendarModule,
                 ng_lottie_1.LottieAnimationViewModule.forRoot(),
                 angular2_text_mask_1.TextMaskModule,
+                core_2.TranslateModule,
+                ngx_scrollbar_1.NgScrollbarModule,
+                ngx_infinite_scroll_1.InfiniteScrollModule,
+                ngx_spinner_1.NgxSpinnerModule,
+                router_1.RouterModule,
+                datepicker_1.BsDatepickerModule.forRoot(),
+                ngx_mask_1.NgxMaskModule.forRoot(),
             ],
             exports: [
                 search_airport_component_1.SearchAirportComponent,
@@ -103,9 +157,37 @@ var ComponentsModule = /** @class */ (function () {
                 add_points_component_1.AddPointsComponent,
                 redeem_laycredit_loader_component_1.RedeemLaycreditLoaderComponent,
                 toaster_component_1.ToasterComponent,
-                share_social_media_component_1.ShareSocialMediaComponent
+                share_social_media_component_1.ShareSocialMediaComponent,
+                guest_info_component_1.GuestInfoComponent,
+                search_hotel_component_1.SearchHotelComponent,
+                rental_info_component_1.RentalInfoComponent,
+                core_2.TranslateModule,
+                vacation_search_component_1.VacationSearchComponent,
+                ngx_scrollbar_1.NgScrollbarModule,
+                flight_class_component_1.FlightClassComponent,
+                ngx_infinite_scroll_1.InfiniteScrollModule,
+                cart_item_component_1.CartItemComponent,
+                traveler_list_component_1.TravelerListComponent,
+                price_summary_component_1.PriceSummaryComponent,
+                payment_mode_loader_component_1.PaymentModeLoaderComponent,
+                traveler_form_component_1.TravelerFormComponent,
+                cart_component_1.CartComponent,
+                cart_loader_component_1.CartLoaderComponent,
+                laytrip_loader_component_1.LaytripLoaderComponent,
+                ngx_spinner_1.NgxSpinnerModule,
+                empty_cart_component_1.EmptyCartComponent,
+                ng_lottie_1.LottieAnimationViewModule,
+                delete_cartitem_confirmation_popup_component_1.DeleteCartitemConfirmationPopupComponent,
+                booking_completion_error_popup_component_1.BookingCompletionErrorPopupComponent,
+                airport_suggestion_component_1.AirportSuggestionComponent,
+                angular2_text_mask_1.TextMaskModule,
+                hotel_suggestion_component_1.HotelSuggestionComponent
             ],
-            providers: [common_1.DatePipe]
+            providers: [common_1.DatePipe, ngx_spinner_1.NgxSpinnerService, ng_bootstrap_1.NgbActiveModal],
+            entryComponents: [delete_cartitem_confirmation_popup_component_1.DeleteCartitemConfirmationPopupComponent, empty_cart_component_1.EmptyCartComponent, booking_completion_error_popup_component_1.BookingCompletionErrorPopupComponent],
+            schemas: [
+                core_1.CUSTOM_ELEMENTS_SCHEMA
+            ]
         })
     ], ComponentsModule);
     return ComponentsModule;

@@ -1,6 +1,7 @@
 import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { CommonFunction } from '../../_helpers/common-function';
 
 @Component({
   selector: 'app-plan-summary',
@@ -16,6 +17,7 @@ export class PlanSummaryComponent implements OnInit, AfterContentChecked {
   validityDaysRange;
   constructor(
     public router: Router,
+    public commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
@@ -28,11 +30,23 @@ export class PlanSummaryComponent implements OnInit, AfterContentChecked {
       this.todayDate = moment().format("MM/DD/YYYY");
       this.validityDaysRange = this.todayDate + ' to ' + moment().add(this.planSummaryData.validityDays, 'days').format("MM/DD/YYYY");
     }
-    console.log(this.planSummaryData);
   }
 
   toggleCancellationPolicy() {
-    this.router.navigate(['cancellation-policy']);
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate(['cancellation-policy'], { queryParams: queryParams });
+    } else {
+      this.router.navigate(['cancellation-policy']);
+    }
   }
 
 }

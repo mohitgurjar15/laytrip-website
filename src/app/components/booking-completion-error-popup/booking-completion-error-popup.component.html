@@ -1,0 +1,28 @@
+<div class="booking_completion_error_block">
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal_top_block success_modal">
+            <img class="ic_suc" src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
+            <h4 class="modal-title suc_title" id="modal-basic-title">Booking Completion Error
+            </h4>
+            <span>Your Booking was not able to be fully completed. Some or all of your items may have remained in your
+                Cart. Return to Cart to try again.</span>
+        </div>
+        <div class="form_btn">
+            <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="returnToCart()">
+                Return to Cart
+            </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="modal_btm">
+            <div class="block_logo">
+                <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo">
+            </div>
+        </div>
+    </div>
+</div>

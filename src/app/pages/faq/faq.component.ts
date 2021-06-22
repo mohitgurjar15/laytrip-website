@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 declare var $: any;
+
 
 @Component({
   selector: 'app-faq',
@@ -16,9 +18,12 @@ export class FaqComponent implements OnInit {
 
   constructor(
     private genericService: GenericService,
+    private commonFunction: CommonFunction
+   
   ) { }
 
   ngOnInit() {
+    $('body').addClass('cms-bgColor');
     window.scroll(0,0);
     this.loadJquery();
     this.loading = true;
@@ -27,6 +32,8 @@ export class FaqComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  
 
   loadJquery() {
     $(document).ready(function () {
@@ -41,5 +48,6 @@ export class FaqComponent implements OnInit {
 
     });
   }
+
 
 }

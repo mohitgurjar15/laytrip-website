@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { throwError } from "rxjs";
 import {catchError,retry, } from 'rxjs/operators';
+import { CommonFunction } from "../_helpers/common-function";
+import { ActivatedRoute } from "@angular/router";
 
 
 @Injectable({
@@ -12,7 +14,10 @@ import {catchError,retry, } from 'rxjs/operators';
 export class TravelerService{
   
     constructor(
-        private http:HttpClient
+        private http:HttpClient,
+        private commonFunction:CommonFunction,
+        public route:ActivatedRoute,
+
     ){
 
     }
@@ -21,7 +26,8 @@ export class TravelerService{
         const accessToken = localStorage.getItem('_lay_sess');
         const reqData = {
             headers: {
-                Authorization: `Bearer ${accessToken}`
+                Authorization: `Bearer ${accessToken}`,
+                referral_id: this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``
             },
         };
         if(params) {
@@ -35,17 +41,24 @@ export class TravelerService{
     }
 
     getTravelers(){
+        return this.http.get(environment.apiUrl+'v1/traveler/list-traveler',this.setHeaders());
+    }
+
+    addAdult(data) {
         
-        return this.http.get(environment.apiUrl+'v1/traveler/list-traveler',this.setHeaders())
-        .pipe(
-            retry(1),
-            catchError(this.handleError)
-          );
+        if (data.guest_id) {
+            return this.http.post(`${environment.apiUrl}v1/traveler/save`, data);
+        } else {
+            return this.http.post(`${environment.apiUrl}v1/traveler/save`, data,this.commonFunction.setHeaders());
+        }
+    }
+
+    updateAdult(data, id) {
+        return this.http.put(`${environment.apiUrl}v1/traveler/${id}`, data, this.commonFunction.setHeaders());
     }
 
 
     handleError(error) { 
-        console.log("====",error);
         let errorMessage = {};
         if(error.status==0){
             console.log("API Server is not responding")

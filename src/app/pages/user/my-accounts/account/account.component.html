@@ -1,0 +1,122 @@
+<app-laytrip-loader [loading]="loading" [module]="'flight'"></app-laytrip-loader>
+
+<section class="account_part">
+    <div class="container">
+        <div class="row">
+            <!-- <div class="col-lg-3">
+                <app-my-accounts-nav></app-my-accounts-nav>
+            </div> -->
+            <div class="col-lg-12">
+                <app-profile (loadingValue)="getLoadingValue($event)"></app-profile>
+                <div class="traveller_detail_wrpper">
+                    <!-- <div class="title_bar">
+                        <h3>Traveler Details</h3>
+                        <span class="edit_btns">
+                            <a href="javascrip:void(0);">Add New</a>
+                        </span>
+                    </div>
+                    <div class="travel_detail_bg_wrps"> -->
+                    <app-list-traveller (loadingValue)="getLoadingValue($event)"></app-list-traveller>
+                    <!-- </div> -->
+                </div>
+                <div class="card_details_wrppers">
+                    <div class="title_bar">
+                        <h3>Payment Card Details</h3>
+                        <span class="edit_btns" [hidden]="totalCard === 0">
+                            <a class="anchor-tag" (click)="addNewCard()">Add New</a>
+                        </span>
+                    </div>
+                    <div class="booking_detail_bg_wrps">
+
+                        <div id="accordion" class="card_accordion">
+                            <div class="card">
+                                <app-card-list cardListChangeCount="{{cardListChangeCount}}"
+                                    ></app-card-list>
+                                <div class="new_card" [ngClass]="{'mt-0':add_new_card}"
+                                    [hidden]="!add_new_card && totalCard !== 0">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#collapseOne"
+                                            aria-controls="collapseOne" aria-expanded="true">
+                                            <span class="heade_wrps">
+                                                <img src="{{s3BucketUrl}}assets/images/card_gray.svg" alt="Card icon" />
+                                                New
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <app-add-card (emitCardListChange)="getCardListChange($event)"
+                                                totalCard="{{totalCard}}" (add_new_card)="closeNewCardPanel($event)">
+                                            </app-add-card>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="prefrence_main_wrapper">
+                    <div class="title_bar">
+                        <h3>Preferences</h3>
+                    </div>
+                    <app-preferances (loadingValue)="getLoadingValue($event)"></app-preferances>
+                </div>
+                <div class="security_main_wrapper">
+                    <div class="title_bar">
+                        <h3>Security</h3>
+                    </div>
+                    <div class="security_accord_wrppaer" [ngClass]="{'disabled': isSocialLogin}">
+                        <div id="secur_accordion" class="secur_accordion">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" href="#collapseSec"
+                                        aria-controls="collapseSec" aria-expanded="true">
+                                        Change Password
+                                    </a>
+                                </div>
+                                <div id="collapseSec" class="collapse show" data-parent="#secur_accordion">
+                                    <div class="card-body">
+                                        <app-change-password (loadingValue)="getLoadingValue($event)">
+                                        </app-change-password>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="delete_main_wrpper">
+                    <span class="edit_btns">
+                        <a class="hover-link" (click)="open(content)">Delete Account</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-template #content let-modal>
+    <div class="delete_account_block">
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="block_im">
+                <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
+            </div>
+            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete account?</span></h4>
+
+            <div class="cta_btn_wrps">
+                <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>
+                <button class="btn_yes" (click)=deleteAccount()>Yes</button>
+            </div>
+            <div class="footer_logo">
+                <a>
+                    <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
+                </a>
+            </div>
+        </div>
+    </div>
+</ng-template>

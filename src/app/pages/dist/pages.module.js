@@ -21,7 +21,6 @@ var signin_component_1 = require("./user/signin/signin.component");
 var social_login_component_1 = require("./user/social-login/social-login.component");
 var signup_component_1 = require("./user/signup/signup.component");
 var forgot_password_component_1 = require("./user/forgot-password/forgot-password.component");
-var auth_component_1 = require("./user/auth/auth.component");
 var forms_1 = require("@angular/forms");
 var verify_otp_component_1 = require("./user/verify-otp/verify-otp.component");
 var asterisk_mark_component_1 = require("../components/asterisk-mark/asterisk-mark.component");
@@ -37,6 +36,15 @@ var partial_payment_component_1 = require("./partial-payment/partial-payment.com
 var download_app_component_1 = require("./download-app/download-app.component");
 var coming_soon_component_1 = require("./coming-soon/coming-soon.component");
 var sso_login_component_1 = require("./sso-login/sso-login.component");
+var covid_page_component_1 = require("./covid-page/covid-page.component");
+var about_us_component_1 = require("./about-us/about-us.component");
+var cms_pages_component_1 = require("./cms-pages/cms-pages.component");
+var ng_otp_input_1 = require("ng-otp-input");
+var ngx_countdown_1 = require("ngx-countdown");
+var ng_recaptcha_1 = require("ng-recaptcha");
+var terms_component_1 = require("./terms/terms.component");
+var ccpa_component_1 = require("./ccpa/ccpa.component");
+var apple_security_login_popup_component_1 = require("./user/apple-security-login-popup/apple-security-login-popup.component");
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -51,7 +59,6 @@ var PagesModule = /** @class */ (function () {
                 signup_component_1.SignupComponent,
                 forgot_password_component_1.ForgotPasswordComponent,
                 verify_otp_component_1.VerifyOtpComponent,
-                auth_component_1.AuthComponent,
                 asterisk_mark_component_1.AsteriskMarkComponent,
                 reset_password_component_1.ResetPasswordComponent,
                 contact_us_component_1.ContactUsComponent,
@@ -63,6 +70,12 @@ var PagesModule = /** @class */ (function () {
                 download_app_component_1.DownloadAppComponent,
                 coming_soon_component_1.ComingSoonComponent,
                 sso_login_component_1.SsoLoginComponent,
+                covid_page_component_1.CovidPageComponent,
+                about_us_component_1.AboutUsComponent,
+                cms_pages_component_1.CmsPagesComponent,
+                terms_component_1.TermsComponent,
+                ccpa_component_1.CcpaComponent,
+                apple_security_login_popup_component_1.AppleSecurityLoginPopupComponent,
             ],
             imports: [
                 common_1.CommonModule,
@@ -71,12 +84,15 @@ var PagesModule = /** @class */ (function () {
                 ng_select_1.NgSelectModule,
                 core_2.TranslateModule,
                 components_module_1.ComponentsModule,
-                forms_1.ReactiveFormsModule,
+                forms_1.ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
                 forms_1.FormsModule,
                 // NG5 SLIDER
                 ng5_slider_1.Ng5SliderModule,
+                ng_otp_input_1.NgOtpInputModule,
+                ngx_countdown_1.CountdownModule,
+                ng_recaptcha_1.RecaptchaModule
             ],
-            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, auth_component_1.AuthComponent],
+            entryComponents: [signup_component_1.SignupComponent, signin_component_1.SigninComponent, verify_otp_component_1.VerifyOtpComponent, asterisk_mark_component_1.AsteriskMarkComponent, forgot_password_component_1.ForgotPasswordComponent, reset_password_component_1.ResetPasswordComponent, apple_security_login_popup_component_1.AppleSecurityLoginPopupComponent],
             schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]
         })
     ], PagesModule);

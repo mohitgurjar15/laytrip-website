@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HotelRoutingModule } from './hotel-routing.module';
 import { HotelSearchComponent } from './hotel-search/hotel-search.component';
 import { HotelLoaderComponent } from './components/hotel-loader/hotel-loader.component';
@@ -22,6 +22,7 @@ import { CookieModule } from 'ngx-cookie';
 import { CalendarModule } from 'primeng/calendar';
 // // AGM (ANGULAR GOOGLE MAP)
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 // NGX-GALLERY
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -30,7 +31,10 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { HelpersModule } from '../../_helpers/_helpers.module';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
-
+import { HotelPolicyPopupComponent } from './components/hotel-policy-popup/hotel-policy-popup.component';
+import { HomeModule } from '../home/home.module';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -46,6 +50,7 @@ import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
     // ClickOutSideDirective,
     HotelDetailComponent,
     HotelPaymentComponent,
+    HotelPolicyPopupComponent,
   ],
   imports: [
     CommonModule,
@@ -54,9 +59,10 @@ import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
     HelpersModule,
     ComponentsModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgbModule,
     NgSelectModule,
+    NgxSliderModule,
     CookieModule.forRoot(),
     CalendarModule,
     AgmCoreModule.forRoot({
@@ -64,13 +70,19 @@ import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
       apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
       libraries: ['places']
     }),
+    AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule,
     NgxGalleryModule,
+    HomeModule,
+    NgxPaginationModule,
+    NgbModule
   ],
   exports: [
     HotelLoaderComponent,
     HotelPopupLoaderComponent,
     HotelNotFoundComponent,
+    HomeModule
   ],
+  entryComponents: [HotelPolicyPopupComponent]
 })
 export class HotelModule { }

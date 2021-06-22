@@ -13,8 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { AuthGuard } from './guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,7 @@ import { environment } from '../environments/environment';
     ElementsModule,
     FormsModule,
     ComponentsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -39,23 +38,24 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     SocialLoginModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [
+  providers: [ 
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
-        autoLogin: true,
+        autoLogin: false,
         providers: [
           {
             id: AppleLoginProvider.PROVIDER_ID,
             provider: new AppleLoginProvider(
               'com.laytrip.laytrips'
             ),
-          }
-        ]
+          },
+        ] 
       } as SocialAuthServiceConfig,
-    }
+    },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

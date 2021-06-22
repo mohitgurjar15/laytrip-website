@@ -1,21 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FlightRoutingModule } from './flight-routing.module';
 import { FlightSearchComponent } from './flight-search/flight-search.component';
 import { SortFlightComponent } from './components/sort-flight/sort-flight.component';
 import { FilterFlightComponent } from './components/filter-flight/filter-flight.component';
 import { FlightPriceSliderComponent } from './components/flight-price-slider/flight-price-slider.component';
-import { FlightItemWrapperComponent } from './components/flight-item-wrapper/flight-item-wrapper.component';
+import { FlightItemWrapperComponent, LaytripOkPopup } from './components/flight-item-wrapper/flight-item-wrapper.component';
 import { FlightSearchBarComponent } from './components/flight-search-bar/flight-search-bar.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FlightNotFoundComponent } from './components/flight-not-found/flight-not-found.component';
-import { FlightTravelerComponent } from './flight-traveler/flight-traveler.component';
-import { FlightSummaryComponent } from './flight-summary/flight-summary.component';
 import { ComponentsModule } from '../../components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FlightCheckoutComponent } from './flight-checkout/flight-checkout.component';
 import { BookingSummaryLoaderComponent } from './components/booking-summary-loader/booking-summary-loader.component';
 import { FlightConfirmationComponent } from './components/flight-confirmation/flight-confirmation.component';
 import { CookieModule } from 'ngx-cookie';
@@ -26,7 +24,6 @@ import { FlightNotAvailableComponent } from './components/flight-not-available/f
 import { FlightSessionTimeOutComponent } from './components/flight-session-time-out/flight-session-time-out.component';
 import { BaggagePolicyPopupComponent } from './components/baggage-policy-popup/baggage-policy-popup.component';
 import { CancellationPolicyPopupComponent } from './components/cancellation-policy-popup/cancellation-policy-popup.component';
-import { FlightPaymentComponent } from './flight-payment/flight-payment.component';
 import { FlightSummaryLoaderComponent } from './components/flight-summary-loader/flight-summary-loader.component';
 import { FlightErrorComponent } from './components/flight-error/flight-error.component';
 import { PopupTermConditionComponent } from './components/popup-term-condition/popup-term-condition.component';
@@ -34,6 +31,9 @@ import { PopupLoaderComponent } from './components/popup-loader/popup-loader.com
 
 // HELPERS MODULE
 import { HelpersModule } from '../../_helpers/_helpers.module';
+import { HomeModule } from '../home/home.module';
+import { FlightCartItemComponent } from './components/flight-cart-item/flight-cart-item.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -42,11 +42,9 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
     FilterFlightComponent,
     FlightPriceSliderComponent,
     FlightItemWrapperComponent,
+    LaytripOkPopup,
     FlightSearchBarComponent,
     FlightNotFoundComponent,
-    FlightTravelerComponent,
-    FlightSummaryComponent,
-    FlightCheckoutComponent,
     BookingSummaryLoaderComponent,
     FlightConfirmationComponent,
     FlightBookingFailedComponent,
@@ -55,7 +53,6 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
     FlightSessionTimeOutComponent,
     BaggagePolicyPopupComponent,
     CancellationPolicyPopupComponent,
-    FlightPaymentComponent,
     FlightSummaryLoaderComponent,
     FlightErrorComponent,
     PopupTermConditionComponent,
@@ -65,14 +62,22 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
     CommonModule,
     FlightRoutingModule,
     Ng5SliderModule,
+    NgbModule,
     HelpersModule,
     ComponentsModule,
-    FormsModule, 
-    ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgSelectModule,
     CookieModule.forRoot(),
-    CalendarModule
+    CalendarModule,
+    HomeModule,
+    SlickCarouselModule
   ],
-  exports:[FlightLoaderComponent,FlightNotFoundComponent,FlightConfirmationComponent,FlightSummaryComponent]
+  exports: [
+    FlightLoaderComponent,
+    FlightNotFoundComponent,
+    FlightConfirmationComponent
+  ],
+  entryComponents: [LaytripOkPopup]
 })
 export class FlightModule { }

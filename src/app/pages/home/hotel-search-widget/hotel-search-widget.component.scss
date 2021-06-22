@@ -1,52 +1,362 @@
 @import "../../../../cstm-variable";
+@import "../../../../_cstm-variable.scss";
+@import "../../../../_cstm-components.scss";
+@import "../../../../_hotel.scss";
+@import "../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
 
 .hotel-error {
-    border: 1px solid red;
-    border-radius: 8px;
+  border: 1px solid red;
+  border-radius: 8px;
 }
+
 .date_form {
-    .autocomplete-container {
-        box-shadow: none !important;
-    }
+  .autocomplete-container {
+    box-shadow: none !important;
+  }
 }
 
 .disable-div {
-    cursor: not-allowed;
-    background-color: rgb(235, 235, 228) !important;
-    & input {
-        cursor: not-allowed !important;
-    }
+  cursor: not-allowed;
+  background-color: rgb(235, 235, 228) !important;
+
+  & input {
+    cursor: not-allowed !important;
+  }
 }
 
 .custom-day {
-    text-align: center;
-    padding: 0.185rem 0.25rem;
-    display: inline-block;
-    height: 2rem;
-    width: 2rem;
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
 }
 
 .custom-day.focused {
-    background-color: #e6e6e6;
+  background-color: #e6e6e6;
 }
 
 .custom-day.range,
 .custom-day:hover {
-    background-color: rgb(2, 117, 216);
-    color: white;
+  background-color: rgb(2, 117, 216);
+  color: white;
 }
 
 .custom-day.faded {
-    background-color: rgba(2, 117, 216, 0.5);
+  background-color: rgba(2, 117, 216, 0.5);
 }
 
 .form-group.hidden {
-    width: 0;
-    margin: 0;
-    border: none;
-    padding: 0;
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
 }
 
 .custom-day.day-disabled {
-    color: lightgrey !important;
+  color: lightgrey !important;
+}
+
+.tab_search_area {
+  ::ng-deep .laytrip-cal-view {
+    padding: 5px;
+    background-color: $bg-crad;
+    z-index: 999999 !important;
+
+    p-header {
+      &.calender-header {
+        padding: 0 10px;
+        margin-bottom: 5px;
+
+        p {
+          padding: 0;
+          margin-bottom: 2px;
+        }
+
+        .calender_header_wrapper {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin-bottom: 5px;
+
+          span {
+            font-size: 12px;
+            margin-right: 15px;
+            padding-left: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            &.green_var {
+              color: $bg-green;
+
+              &::before {
+                background-color: $bg-green;
+              }
+            }
+
+            &.yellow_var {
+              color: $text_light_yellow;
+
+              &::before {
+                background-color: $text_light_yellow;
+              }
+            }
+
+            &.red_var {
+              color: $error-color;
+
+              &::before {
+                background-color: $error-color;
+              }
+            }
+
+            &::before {
+              content: "";
+              height: 15px;
+              width: 15px;
+              border-radius: 50%;
+              position: absolute;
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .p-datepicker-group-container {
+      background-color: $background-white;
+      border-radius: 15px;
+
+      .p-datepicker-header {
+        padding: 0 0.5rem;
+        border-top-right-radius: 15px !important;
+        border-top-left-radius: 15px !important;
+
+        .p-datepicker-title {
+          @include tab-view {
+            font-size: 11px;
+            line-height: 10px;
+          }
+        }
+
+        .p-datepicker-next {
+          .p-datepicker-next-icon {
+            @include tab-view {
+              font-size: 11px;
+              line-height: 10px;
+            }
+          }
+        }
+
+        .p-datepicker-prev {
+          .p-datepicker-prev-icon {
+            @include tab-view {
+              font-size: 11px;
+              line-height: 10px;
+            }
+          }
+        }
+      }
+
+      @include mobile-view {
+        flex-flow: column;
+      }
+    }
+
+    input {
+      &.p-inputtext {
+        &:enabled {
+          &:focus {
+            box-shadow: none !important;
+          }
+        }
+      }
+    }
+
+    table {
+      margin: 0;
+
+      th {
+        font-size: 13px !important;
+        border-bottom: none !important;
+        font-weight: 600 !important;
+        text-align: center;
+      }
+
+      td {
+        padding: 0.1rem !important;
+
+        span {
+          width: 31px !important;
+          height: 31px !important;
+          font-size: 11px;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          border: none !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          color: $text-grey;
+          margin: 2px;
+          position: relative;
+
+          @include mini-screen {
+            width: 25px !important;
+            height: 25px !important;
+          }
+
+          // @include mobile-view {
+          //   width: 28px !important;
+          //   height: 28px !important;
+          // }
+
+          &:hover {
+            background: none !important;
+          }
+
+          &.p-highlight {
+            background: none !important;
+            font-weight: 500;
+            overflow: visible;
+
+            &::before {
+              content: "";
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+              background-color: $pink;
+              position: absolute;
+              top: -5px;
+            }
+          }
+
+          &.c_date {
+            border-radius: 50% !important;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+
+            &.green_date {
+              color: $bg-green;
+              background-color: $bg-green-light;
+
+              &:hover {
+                background-color: $bg-green-light !important;
+              }
+            }
+
+            &.yellow_date {
+              color: $text_light_yellow;
+              background-color: $bg-yellow-light;
+
+              &:hover {
+                background-color: $bg-yellow-light !important;
+              }
+            }
+
+            &.red_date {
+              color: $error-color;
+              background-color: $bg-red-light;
+
+              &:hover {
+                background-color: $bg-red-light !important;
+              }
+            }
+          }
+
+          &.calender_price {
+            font-size: 10px;
+            height: 15px;
+          }
+        }
+      }
+    }
+
+    &.round_trip_calender {
+      table {
+        th {
+          span {
+            @include mobile-view {
+              font-size: 12px;
+            }
+          }
+        }
+
+        td {
+          span {
+            height: 35px;
+            width: 35px;
+
+            @include mobile-view {
+              height: 24px;
+              width: 24px;
+              font-size: 10px;
+              margin: 0;
+            }
+
+            &.p-highlight {
+              color: $pink !important;
+              background-color: $bg-pink-light !important;
+              border-radius: 50% !important;
+
+              &:hover {
+                background-color: $bg-pink-light !important;
+              }
+
+              &::before {
+                content: "";
+                width: 0;
+                height: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.hotels-grid {
+  .grid_box {
+    &.first {
+      .hotel_where {
+        .search_area {
+          display: flex;
+          align-items: center;
+          height: 67px;
+          position: relative;
+
+          &.hotel-error {
+            border: 1px solid red;
+            border-radius: 8px;
+          }
+
+          @include tab-view {
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          label {
+            padding-right: 10px !important;
+            max-width: 80px !important;
+          }
+
+          app-hotel-suggestion {
+            width: 100%
+          }
+
+          input {
+            width: 84%
+          }
+        }
+      }
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import { BaseLoginProvider, SocialUser } from 'angularx-social-login';
+import { environment } from '../../../../environments/environment';
 
 declare let AppleID: any;
 
@@ -21,9 +22,9 @@ export class AppleLoginProvider extends BaseLoginProvider {
                 'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js',
                 () => {
                     AppleID.auth.init({
-                        clientId: 'com.laytrip.laytrips',
+                        clientId: 'com.laytripweb',
                         scope: 'name email',
-                        redirectURI: 'https://staging.laytrip.com/',
+                        redirectURI: window.location.origin,
                         state: '[ANYTHING]', // used to prevent CSFR
                         usePopup: true,
                     });
@@ -36,7 +37,7 @@ export class AppleLoginProvider extends BaseLoginProvider {
     public getLoginStatus(): Promise<SocialUser> {
         return new Promise((resolve, reject) => {
             // todo: implement
-            resolve();
+            resolve(void(0));
         });
     }
 
@@ -44,6 +45,8 @@ export class AppleLoginProvider extends BaseLoginProvider {
         return new Promise((resolve, reject) => {
             try {
                 const data = AppleID.auth.signIn();
+                console.log(data)
+
                 resolve(data);
             } catch (er) {
                 console.log(er);
@@ -54,7 +57,7 @@ export class AppleLoginProvider extends BaseLoginProvider {
     public signOut(revoke?: boolean): Promise<any> {
         return new Promise((resolve, reject) => {
             // AppleID doesnt have revoke method
-            resolve();
+            resolve(void(0));
         });
     }
 }

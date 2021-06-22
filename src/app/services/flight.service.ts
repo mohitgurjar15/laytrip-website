@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { throwError } from "rxjs";
+import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
 
@@ -11,6 +11,9 @@ import { CommonFunction } from '../_helpers/common-function';
 })
 
 export class FlightService {
+
+    private sortFilter = new BehaviorSubject([]);
+    getLastApplyedSortFilter = this.sortFilter.asObservable();
 
     constructor(
         private http: HttpClient,
@@ -22,6 +25,20 @@ export class FlightService {
 
     searchAirport(searchItem) {
         return this.http.get(`${environment.apiUrl}v1/flight/search-airport/${searchItem}`)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    searchRoute(searchItem,isFromLocation,alternateLocation=''){
+        return this.http.get(`${environment.apiUrl}v1/flight/route/search?search=${searchItem}&is_from_location=${isFromLocation}&alternet_location=${alternateLocation}`)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    searchAirports(type=''){
+        return this.http.get(`${environment.apiUrl}v1/flight/route/${type}`)
             .pipe(
                 catchError(this.handleError)
             );
@@ -93,19 +110,6 @@ export class FlightService {
             );
     }
 
-    updateAdult(data, id) {
-        return this.http.put(`${environment.apiUrl}v1/traveler/${id}`, data, this.commonFunction.setHeaders());
-    }
-
-    addAdult(data) {
-        let userToken = localStorage.getItem('_lay_sess');
-        if (userToken) {
-            return this.http.post(`${environment.apiUrl}v1/traveler/`, data, this.commonFunction.setHeaders());
-        } else {
-            return this.http.post(`${environment.apiUrl}v1/traveler/`, data);
-        }
-    }
-
     getFlightSearchResult(data) {
         let headers = {
             currency: 'USD',
@@ -123,6 +127,16 @@ export class FlightService {
             language: 'en'
         }
         const url = environment.apiUrl + `v1/flight/flexible-day-rate`;
+        return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
+            catchError(this.handleError)
+        );
+    }
+    getFlightFlexibleDatesRoundTrip(data) {
+        let headers = {
+            currency: 'USD',
+            language: 'en'
+        }
+        const url = environment.apiUrl + `v1/flight/flexible-day-rate-for-round-trip`;
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
             catchError(this.handleError)
         );
@@ -151,7 +165,7 @@ export class FlightService {
     }
 
     addFeedback(payload) {
-        return this.http.post(`${environment.apiUrl}v1/booking-feedback`, payload, this.commonFunction.setHeaders())
+        return this.http.post(`${environment.apiUrl}v1/laytrip-feedback/add-laytrip-feedback`, payload, this.commonFunction.setHeaders())
             .pipe(
                 catchError(this.handleError)
             );
@@ -184,8 +198,13 @@ export class FlightService {
 
     sendEmail(data) {
         const url = environment.apiUrl + `v1/booking/share-booking-detail`;
-        return this.http.post(url,data, this.commonFunction.setHeaders()).pipe(
+        return this.http.post(url, data, this.commonFunction.setHeaders()).pipe(
             catchError(this.handleError)
         );
     }
+
+    setSortFilter(filter){
+        this.sortFilter.next(filter)
+    }
+
 }

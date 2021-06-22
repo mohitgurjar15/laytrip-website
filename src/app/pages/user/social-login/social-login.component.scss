@@ -1,3 +1,47 @@
-.social-btn{
-    cursor: pointer;
+@import "../../../../_cstm-variable.scss";
+
+.social-btn {
+  cursor: pointer;
+}
+ul {
+  width: 100%;
+  list-style: none;
+  margin: 0 0 20px 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+
+  li {
+    width: auto;
+    padding: 0 13px;
+
+    a {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      line-height: 40px;
+      display: flex;
+      align-items: center;
+      border: 1px solid $box-border-color;
+      color: $social-text-red;
+      position: relative;
+
+      img {
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      @media (max-width: 991px) {
+        font-size: 0;
+        justify-content: center;
+
+        img {
+          margin: 0;
+        }
+      }
+    }
+  }
 }

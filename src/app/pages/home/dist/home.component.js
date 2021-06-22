@@ -9,90 +9,71 @@ exports.__esModule = true;
 exports.HomeComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
-var forms_1 = require("@angular/forms");
-var moment = require("moment");
+var cookie_policy_component_1 = require("../cookie-policy/cookie-policy.component");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(genericService, commonFunction, fb, router, cd) {
+    function HomeComponent(genericService, commonFunction, fb, router, cd, renderer, homeService, cartService, modalService, cookieService) {
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.fb = fb;
         this.router = router;
         this.cd = cd;
+        this.renderer = renderer;
+        this.homeService = homeService;
+        this.cartService = cartService;
+        this.modalService = modalService;
+        this.cookieService = cookieService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.moduleList = {};
-        this.switchBtnValue = false;
-        this.tempSwapData = {
-            leftSideValue: {},
-            rightSideValue: {}
-        };
-        this.swapped = [];
-        this.isSwap = false;
-        this.swapError = '';
         this.isRoundTrip = false;
-        this.locale = {
-            format: 'MM/DD/YYYY',
-            displayFormat: 'MM/DD/YYYY'
-        };
-        this.departureDate = new Date(moment().add(30, 'days').format("MM/DD/YYYY"));
-        this.returnDate = new Date(moment().add(37, 'days').format("MM/DD/YYYY"));
-        this.totalPerson = 1;
-        this.searchFlightInfo = {
-            trip: 'oneway',
-            departure: '',
-            arrival: '',
-            departure_date: moment().add(1, 'months').format("YYYY-MM-DD"),
-            arrival_date: '',
-            "class": '',
-            adult: 1,
-            child: null,
-            infant: null
-        };
-        this.searchedValue = [];
-        this.flightSearchForm = this.fb.group({
-            fromDestination: [[forms_1.Validators.required]],
-            toDestination: [[forms_1.Validators.required]],
-            departureDate: [[forms_1.Validators.required]],
-            returnDate: [[forms_1.Validators.required]]
-        });
-        //this.flightReturnMinDate = moment().add(30, 'days');
-        this.flightDepartureMinDate = new Date();
-        this.flightReturnMinDate = this.departureDate;
+        this.moduleId = 3;
+        this.dealList = [];
+        this.host = '';
+        this.renderer.addClass(document.body, 'bg_color');
+        this.countryCode = this.commonFunction.getUserCountry();
     }
     HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
         window.scrollTo(0, 0);
+        this.host = window.location.host;
         this.getModules();
         this.loadJquery();
+        localStorage.removeItem('__from');
+        localStorage.removeItem('__to');
+        setTimeout(function () {
+            _this.openCookiePolicyPopup();
+        }, 5000);
+        this.$tabName = this.homeService.getActiveTabName.subscribe(function (tabName) {
+            if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) {
+                var tab = tabName;
+                if (tab == 'flight') {
+                    _this.moduleId = 1;
+                    $('.flight-tab').trigger('click');
+                }
+                else if (tab == 'hotel') {
+                    _this.moduleId = 3;
+                    $('.hotel-tab').trigger('click');
+                }
+            }
+        });
+        //get deal with module id and also with active tab
+        this.getDeal(this.moduleId);
+        this.$tabName.unsubscribe();
+        this.homeService.setActiveTab('');
+        this.homeService.getActiveTabName.subscribe(function (tabName) {
+            if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) { }
+        });
+    };
+    HomeComponent.prototype.openCookiePolicyPopup = function () {
+        if (!this.cookieService.get('__cke')) {
+            this.modalService.open(cookie_policy_component_1.CookiePolicyComponent, {
+                windowClass: 'block_cookie_policy_main', centered: true, backdrop: 'static',
+                keyboard: false
+            });
+        }
+        else {
+        }
     };
     HomeComponent.prototype.loadJquery = function () {
-        $(".featured_slid").slick({
-            dots: false,
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            responsive: [
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
         // Start Featured List Js
         $(".deals_slid").slick({
             dots: false,
@@ -124,7 +105,16 @@ var HomeComponent = /** @class */ (function () {
             ]
         });
         // Close Featured List Js
+        $('[data-toggle="popover"]').popover();
     };
+    // ngAfterViewInit() {
+    //   $("#search_large_btn1, #search_large_btn2, #search_large_btn3").hover(
+    //     function () {
+    //       $('.norm_btn').toggleClass("d-none");
+    //       $('.hover_btn').toggleClass("show");
+    //     }
+    //   );
+    // }
     /**
      * Get All module like (hotel, flight & VR)
      */
@@ -138,62 +128,6 @@ var HomeComponent = /** @class */ (function () {
         }, function (error) {
         });
     };
-    HomeComponent.prototype.destinationChangedValue = function (event) {
-        if (event && event.key && event.key === 'fromSearch') {
-            this.fromDestinationCode = event.value.code;
-            this.searchedValue.push({ key: 'fromSearch', value: event.value });
-        }
-        else if (event && event.key && event.key === 'toSearch') {
-            this.toDestinationCode = event.value.code;
-            this.searchedValue.push({ key: 'toSearch', value: event.value });
-        }
-        this.searchFlightInfo.departure = this.fromDestinationCode;
-        this.searchFlightInfo.arrival = this.toDestinationCode;
-    };
-    HomeComponent.prototype.getDateWithFormat = function (date) {
-        this.searchFlightInfo.departure_date = this.commonFunction.parseDateWithFormat(date).departuredate;
-        // this.searchFlightInfo.arrival_date = this.commonFunction.parseDateWithFormat(date).returndate;
-    };
-    HomeComponent.prototype.getSwappedValue = function (event) {
-        if (event && event.key && event.key === 'fromSearch') {
-            this.tempSwapData.leftSideValue = event.value;
-        }
-        else if (event && event.key && event.key === 'toSearch') {
-            this.tempSwapData.rightSideValue = event.value;
-        }
-    };
-    HomeComponent.prototype.switchDestination = function () {
-    };
-    HomeComponent.prototype.changeTravellerInfo = function (event) {
-        this.searchFlightInfo.adult = event.adult;
-        this.searchFlightInfo.child = event.child;
-        this.searchFlightInfo.infant = event.infant;
-        this.searchFlightInfo["class"] = event["class"];
-        this.totalPerson = event.totalPerson;
-        this.searchedValue.push({ key: 'travellers', value: event });
-    };
-    HomeComponent.prototype.searchFlights = function () {
-        var queryParams = {};
-        queryParams.trip = this.isRoundTrip ? 'roundtrip' : 'oneway';
-        queryParams.departure = this.searchFlightInfo.departure;
-        queryParams.arrival = this.searchFlightInfo.arrival;
-        queryParams.departure_date = moment(this.departureDate).format('YYYY-MM-DD');
-        if (this.isRoundTrip === true) {
-            queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
-        }
-        queryParams["class"] = this.searchFlightInfo["class"] ? this.searchFlightInfo["class"] : 'Economy';
-        queryParams.adult = this.searchFlightInfo.adult;
-        queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
-        queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
-        if (this.searchFlightInfo && this.totalPerson &&
-            this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
-            localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
-            this.router.navigate(['flight/search'], {
-                queryParams: queryParams,
-                queryParamsHandling: 'merge'
-            });
-        }
-    };
     HomeComponent.prototype.toggleOnewayRoundTrip = function (type) {
         if (type === 'roundtrip') {
             this.isRoundTrip = true;
@@ -202,34 +136,57 @@ var HomeComponent = /** @class */ (function () {
             this.isRoundTrip = false;
         }
     };
-    HomeComponent.prototype.departureDateUpdate = function (date) {
-        this.returnDate = new Date(date);
-        this.flightReturnMinDate = new Date(date);
+    HomeComponent.prototype.getDeal = function (moduleId) {
+        var _this = this;
+        this.moduleId = moduleId;
+        this.homeService.getDealList(moduleId).subscribe(function (response) {
+            _this.dealList = response['data'];
+        }, function (error) {
+        });
     };
-    HomeComponent.prototype.dateChange = function (type, direction) {
-        if (type == 'departure') {
-            if (direction === 'previous') {
-                if (moment(this.departureDate).isAfter(moment(new Date()))) {
-                    this.departureDate = new Date(moment(this.departureDate).subtract(1, 'days').format('MM/DD/YYYY'));
-                }
-            }
-            else {
-                this.departureDate = new Date(moment(this.departureDate).add(1, 'days').format('MM/DD/YYYY'));
-                if (moment(this.departureDate).isAfter(this.returnDate)) {
-                    this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'));
-                }
-            }
-            this.flightReturnMinDate = new Date(this.departureDate);
+    HomeComponent.prototype.clickOnTab = function (tabName) {
+        document.getElementById('home_banner').style.position = 'relative';
+        document.getElementById('home_banner').style.width = '100%';
+        if (tabName === 'flight') {
+            this.getDeal(1);
+            document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
+            document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
+            document.getElementById('home_banner').style.backgroundSize = 'cover';
+            // if (document.getElementById('login_btn')) {
+            //   document.getElementById('login_btn').style.background = '#FC7E66';
+            // }
         }
-        if (type == 'arrival') {
-            if (direction === 'previous') {
-                if (moment(this.departureDate).isBefore(this.returnDate)) {
-                    this.returnDate = new Date(moment(this.returnDate).subtract(1, 'days').format('MM/DD/YYYY'));
-                }
-            }
-            else {
-                this.returnDate = new Date(moment(this.returnDate).add(1, 'days').format('MM/DD/YYYY'));
-            }
+        else if (tabName === 'hotel') {
+            this.getDeal(3);
+            document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
+            document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
+            document.getElementById('home_banner').style.backgroundSize = 'cover';
+            // if (document.getElementById('login_btn')) {
+            //   document.getElementById('login_btn').style.background = '#FF00BC';
+            // }
+        }
+        else if (tabName === 'home-rentals') {
+            this.getDeal(3);
+            document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
+            document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
+            document.getElementById('home_banner').style.backgroundSize = 'cover';
+            // if (document.getElementById('login_btn')) {
+            //   document.getElementById('login_btn').style.background = '#FF00BC';
+            // }
+        }
+    };
+    HomeComponent.prototype.ngOnDestroy = function () {
+        this.renderer.removeClass(document.body, 'bg_color');
+    };
+    HomeComponent.prototype.setToString = function (newItem) {
+        if (this.moduleId == 1) {
+            this.toString = newItem;
+            this.homeService.setToString(newItem);
+        }
+        else if (this.moduleId == 3) {
+            this.homeService.setLocationForHotel(newItem);
+        }
+        else {
         }
     };
     HomeComponent = __decorate([

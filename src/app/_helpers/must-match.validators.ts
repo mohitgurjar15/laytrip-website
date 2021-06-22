@@ -2,7 +2,6 @@ import { FormGroup } from '@angular/forms';
 
 // custom validator to check that two fields match
 export function MustMatch(controlName: string, matchingControlName: string) {
-    console.log('sds')
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
         const matchingControl = formGroup.controls[matchingControlName];

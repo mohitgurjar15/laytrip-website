@@ -1,0 +1,154 @@
+@import "../../../../_cstm-variable.scss";
+@import "../../../../_cstm-components.scss";
+@import "../../../../_hotel.scss";
+@import "../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.contact_us_upper_main {
+  //background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/footer-bg-new.png");
+  background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/footer_banner_new.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  padding: 30px 0;
+  min-height: 610px;
+  background-position: center center;
+  @include tab-view {
+    padding: 5px 0 45px;
+    min-height: 440px;
+    //background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/hollywood_mobile_banner.jpg");
+    background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/h_mobile_banner_01.jpg");
+  }
+  .contect_text_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 50px;
+    position: relative;
+    h3 {
+      color: $active-tab-text;
+      font-size: 30px;
+      font-weight: 600;
+      margin-bottom: 30px;
+
+      @include tab-view {
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 18px;
+      }
+    }
+    .custom_input_wrapper {
+      border: 3px solid $pink;
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 56px;
+      border-radius: 30px;
+
+      @include tab-view{
+        height: 44px;
+      }
+
+      input {
+        border: none;
+        padding: 15px 30px;
+        background-color: transparent;
+        font-size: 22px;
+        width: 100%;
+        font-style: normal;
+        &::placeholder {
+          color: $mid_gray_bg;
+          opacity: 1;
+          font-weight: 300;
+          font-style: italic;
+        }
+        
+        &:-ms-input-placeholder { 
+         color: $mid_gray_bg;
+         font-weight: 300;
+        }
+        
+        &::-ms-input-placeholder { 
+         color: $mid_gray_bg;
+         font-weight: 300;
+        }
+        @include tab-view {
+          font-size: 14px;
+          padding: 0 0 0 20px;
+          width: calc(100% - 85px);
+        }
+      }
+      button {
+        max-width: 193px;
+        width: 100%;
+        height: 53px;
+        background: $hotel-secondary-color;
+        border-radius: 0 25px 25px 0;
+        border: none;
+        border-left: 1px solid $hotel-secondary-color;
+        font-size: 26px;
+        color: $text-white;
+        transition: 0.3s;
+        position: relative;
+        z-index: 5;
+        overflow: hidden;
+        white-space: normal;
+        right: -1px;
+
+        @include tab-view {
+          max-width: 65px;
+          font-size: 14px;
+          height: 43px;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 0%;
+          background: $background-white;
+          z-index: -1;
+          transition: 0.8s;
+          border-radius: 0 0 50% 50%;
+        }
+
+        // &:hover {
+        //   border-left: 1px solid $hotel-secondary-color;
+        //   color: $hotel-secondary-color;
+        //   &:before {
+        //     height: 190%;
+        //   }
+        // }
+      }
+    }
+  }
+}
+
+.message_block {
+  max-width: 675px;
+  margin: 5px 0 0;
+  p {
+    font-size: 12px;
+    color: #fff;
+    font-weight: 400;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 0 0 5px;
+  }
+  .message_success {
+    //background: #28a745;
+    color: $pink;
+    background-color: transparent;
+    text-transform: none;
+  }
+  .message_error {
+    color: red;
+    background-color: transparent;
+    text-transform: none;
+    // background: #dc3545;
+  }
+}

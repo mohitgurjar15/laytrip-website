@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ComponentsModule } from '../components/components.module';
@@ -12,7 +12,6 @@ import { SigninComponent } from './user/signin/signin.component';
 import { SocialLoginComponent } from './user/social-login/social-login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
-import { AuthComponent } from './user/auth/auth.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { VerifyOtpComponent } from './user/verify-otp/verify-otp.component';
 import { AsteriskMarkComponent } from '../components/asterisk-mark/asterisk-mark.component';
@@ -29,6 +28,14 @@ import { DownloadAppComponent } from './download-app/download-app.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { SsoLoginComponent } from './sso-login/sso-login.component';
 import { CovidPageComponent } from './covid-page/covid-page.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { CmsPagesComponent } from './cms-pages/cms-pages.component';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { CountdownModule } from 'ngx-countdown';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { TermsComponent } from './terms/terms.component';
+import { CcpaComponent } from './ccpa/ccpa.component';
+import { AppleSecurityLoginPopupComponent } from './user/apple-security-login-popup/apple-security-login-popup.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +47,6 @@ import { CovidPageComponent } from './covid-page/covid-page.component';
     SignupComponent,
     ForgotPasswordComponent,
     VerifyOtpComponent,
-    AuthComponent,
     AsteriskMarkComponent,
     ResetPasswordComponent,
     ContactUsComponent,
@@ -53,6 +59,11 @@ import { CovidPageComponent } from './covid-page/covid-page.component';
     ComingSoonComponent,
     SsoLoginComponent,
     CovidPageComponent,
+    AboutUsComponent,
+    CmsPagesComponent,
+    TermsComponent,
+    CcpaComponent,
+    AppleSecurityLoginPopupComponent,
   ],
   imports: [
     CommonModule,
@@ -61,12 +72,15 @@ import { CovidPageComponent } from './covid-page/covid-page.component';
     NgSelectModule,
     TranslateModule,
     ComponentsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule,
     // NG5 SLIDER
     Ng5SliderModule,
+    NgOtpInputModule,
+    CountdownModule,
+    RecaptchaModule
   ],
-  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, AuthComponent],
+  entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, ForgotPasswordComponent, ResetPasswordComponent, AppleSecurityLoginPopupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagesModule { }

@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { throwError, Observable } from "rxjs";
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
 import * as moment from 'moment';
+import { ActivatedRoute } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private commonFunction: CommonFunction
+    private commonFunction: CommonFunction,
+    private route: ActivatedRoute
 
   ) {
 
@@ -25,7 +27,7 @@ export class UserService {
   handleError(error) {
     let errorMessage = {};
     if (error.status == 0) {
-      errorMessage = { message: "API Server is not responding" };
+      return throwError({ status: error.status, message: "API Server is not responding" });
     }
     if (error.error instanceof ErrorEvent) {
       // client-side error
@@ -39,7 +41,7 @@ export class UserService {
 
 
   socialLogin(data) {
-    return this.http.post(this.apiURL + 'v1/auth/social-login', data)
+    return this.http.post(this.apiURL + 'v1/auth/social-login', data,this.commonFunction.setWithoutLoginHeader())
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -55,19 +57,25 @@ export class UserService {
       );
   }
 
+
+
   signup(formValue) {
     let data = {
       "signup_via": "web",
+      "first_name": formValue.first_name,
+      "last_name": formValue.last_name,
       "email": formValue.email,
       "password": formValue.password,
       "confirm_password": formValue.confirm_password,
       "device_type": 1,
-      "device_model": "RNE-L22",
+      "device_model": navigator.appName,
       "device_token": "123abc#$%456",
-      "app_version": "1.0",
-      "os_version": "7.0",
+      "app_version": navigator.appVersion,
+      "os_version": navigator.platform,
+      "referral_id": formValue.referral_id ? formValue.referral_id : ''
     };
-    return this.http.post(this.apiURL + 'v1/auth/signup', data)
+    
+    return this.http.post(this.apiURL + 'v1/auth/signup', data,this.commonFunction.setWithoutLoginHeader())
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -92,7 +100,7 @@ export class UserService {
 
   forgotPassword(formValue) {
     let data = {
-      "email": formValue.email,
+      "email": typeof formValue.email != 'undefined' ? formValue.email : formValue,
     };
     return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
       .pipe(
@@ -103,17 +111,48 @@ export class UserService {
   resetPassword(data) {
     return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
   }
+
+  deleteAccount(isRequireBackupFile) {
+    const accessToken = localStorage.getItem('_lay_sess');
+    /*   const options = {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            
+        },
+      } */
+    const options = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: {
+        requireBackupFile: isRequireBackupFile
+      }
+    }
+    console.log(options)
+    return this.http.delete(this.apiURL + 'v1/user/account/request', options)
+  }
+
   changePassword(data) {
     return this.http.put(this.apiURL + 'v1/auth/change-password', data, this.commonFunction.setHeaders());
   }
+
   updateProfile(data) {
     return this.http.put(this.apiURL + 'v1/auth/profile', data, this.commonFunction.setHeaders());
+  }
+  updateProfileImage(data) {
+    return this.http.put(this.apiURL + 'v1/auth/profile/picture', data, this.commonFunction.setHeaders());
   }
   getProfile() {
     return this.http.get(this.apiURL + 'v1/auth/profile/', this.commonFunction.setHeaders());
   }
 
-  getBookings(pageNumber, limit,filterForm) {
+  changePreference(data) {
+    return this.http.put(this.apiURL + 'v1/auth/preference', data, this.commonFunction.setHeaders());
+  }
+  getPreference() {
+    return this.http.get(this.apiURL + 'v1/auth/preference', this.commonFunction.setHeaders());
+  }
+  getBookings(pageNumber, limit, filterForm) {
     let queryString = "";
     if (filterForm && filterForm != 'undefined') {
       if (filterForm.bookingId) {
@@ -130,10 +169,10 @@ export class UserService {
       }
     }
     return this.http.get(
-      `${this.apiURL}v1/booking/user-booking-list?limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders());
+      `${this.apiURL}v1/booking/user-booking-list?module_id=1&limit=${limit}&page_no=${pageNumber}${queryString}`, this.commonFunction.setHeaders());
   }
 
-  getPaymentHistory(pageNumber, limit, filterForm,payment_status) {
+  getPaymentHistory(pageNumber, limit, filterForm, payment_status) {
 
     let queryString = "";
     if (filterForm && filterForm != 'undefined') {
@@ -186,9 +225,23 @@ export class UserService {
   addNewPoints(data) {
     return this.http.post(this.apiURL + 'v1/laytrip-point/add', data, this.commonFunction.setHeaders());
   }
-  
+
   subscribeNow(email) {
-    const data = {email:email};
+    const data = { email: email };
     return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
   }
+
+  emailVeryfiy(email) {
+    return this.http.get(`${this.apiURL}v1/auth/verify-email-id?email=${email}`, this.commonFunction.setHeaders())
+  }
+
+  registerGuestUser(data) {
+
+    return this.http.post(`${this.apiURL}v1/auth/guest-user`, data)
+  }
+
+  mapGuestUser(guestUserId) {
+    return this.http.patch(`${this.apiURL}v1/cart/map-guest-user/${guestUserId}`, {}, this.commonFunction.setHeaders())
+  }
 }
+

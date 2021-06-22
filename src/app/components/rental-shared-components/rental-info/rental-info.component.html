@@ -1,5 +1,5 @@
 <div class="search_area">
-  <label>{{ label }}</label>
+  <!-- <label>{{ label }}</label> -->
   <div class="travel_info" id="rental_add_room" [ngClass]="{'dr_travel_info':countryCode=='DR'}">
     <span>{{ totalPerson }}</span> Guest <div class="drop_aerrow">
     </div>
@@ -43,7 +43,7 @@
               <span class="label_name">Child {{idx+1}} age</span>
               <select name="" id="{{id}}" #childAge (change)="changeChildAge(childAge.value,idx)">
                 <option value="" disabled>Select Age</option>
-                <option *ngFor='let in of counter(12) ;let i = index' value="{{i+1}}">{{i+1}}</option>
+                <option *ngFor='let in of counter(12);let i = index' value="{{i+1}}" [selected]="i === childAgeInfo[idx]-1">{{i+1}}</option>
               </select>
             </div>
           </div>

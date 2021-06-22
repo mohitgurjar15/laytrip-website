@@ -1,0 +1,15 @@
+.view_more {
+    cursor: pointer;
+}
+
+.anchor_link {
+    cursor: pointer;
+}
+
+ng-scrollbar {
+    --scrollbar-size: 5px;
+    --scrollbar-thumb-color: #ff66d6;
+    --scrollbar-thumb-hover-color: #ff00bc;
+    --scrollbar-border-radius: 15px;
+    // max-height: 300px;
+}

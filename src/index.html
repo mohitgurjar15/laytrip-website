@@ -3,68 +3,153 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex"/>
-  <title>Laytrip-Easy Bookings, Easy Payments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <!-- <meta name="robots" content="noindex" /> -->
+  <meta name="description"
+    content="Welcome to Laytrip! Layaway travel for everyone. Flights, hotels, home and car rentals.">
+  <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta property= “fb:app_id” content="933948490440237" />
+  <title>Laytrip - Layaway Travel for Everyone</title>
   <base href="/">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap"
+    type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    type="text/css" />
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU&amp;libraries=places" type="text/javascript"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU&amp;libraries=places"
+    type="text/javascript"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Q6CPSPBTH"></script>
 
   <style>
+    .custom_fc_frame {
+      right: 20px !important;
+      bottom: 20px !important;
 
+    }
+
+    .custom_fc_frame .d-hotline.h-btn {
+      border-radius: 50% !important;
+    }
+
+    .loader_full_page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      z-index: 99999;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+    }
+
+    @media (max-width: 768px) {
+      body #fc_frame.fc_open123 {
+        right: 0px !important;
+      }
+    }
   </style>
 
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1976d2">
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TQPF2N5');</script>
+  <!-- End Google Tag Manager -->
 </head>
 
-
-
-<!-- <script>
-    function initFreshChat() {
-      window.fcWidget.init({
-        token: "6035dcfa-d45a-4c1a-ba1f-2403638febe3",
-        host: "https://wchat.freshchat.com"
-      });
-    }
-    function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
-  </script> -->
 
 <script>
   function initFreshChat() {
     window.fcWidget.init({
       token: "dd6dc59e-c42a-4f79-8d30-c58c1ea2c51b",
-      host: "https://wchat.freshchat.com"
+      host: "https://wchat.freshchat.com",
+      config: {
+        cssNames: {
+          widget: "custom_fc_frame",
+          open: 'fc_open123',
+          expanded: 'fc_expanded123'
+        }
+      }
     });
-  }
-  function initialize(i, t) { var e; i.getElementById(t) ? initFreshChat() : ((e = i.createElement("script")).id = t, e.async = !0, e.src = "https://wchat.freshchat.com/js/widget.js", e.onload = initFreshChat, i.head.appendChild(e)) } function initiateCall() { initialize(document, "freshchat-js-sdk") } window.addEventListener ? window.addEventListener("load", initiateCall, !1) : window.attachEvent("load", initiateCall, !1);
-</script>
 
+    window.fcWidget.on("widget:opened", function (resp) {
+      console.log('Widget Opened');
+      $(".quick-footer-section").toggle()
+    });
+
+    window.fcWidget.on("widget:closed", function (resp) {
+      console.log('Widget Closed');
+      $(".quick-footer-section").toggle()
+    });
+
+  }
+
+
+  function initialize(i, t) { var e; i.getElementById(t) ? initFreshChat() : ((e = i.createElement("script")).id = t, e.async = !0, e.src = "https://wchat.freshchat.com/js/widget.js", e.onload = initFreshChat, i.head.appendChild(e)) } function initiateCall() { initialize(document, "freshchat-js-sdk") } window.addEventListener ? window.addEventListener("load", initiateCall, !1) : window.attachEvent("load", initiateCall, !1);
+
+  if (window.location.host == 'laytrip.com') {
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-6Q6CPSPBTH');
+   }
+  var urlPath = window.location.pathname.split('/');
+  var lottieModule = 'hotel';
+  if (urlPath.includes('flight')) {
+    lottieModule = 'flight';
+  }
+</script>
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '933948490440237');
+  fbq('track', 'PageView');
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none" 
+       src="https://www.facebook.com/tr?id=933948490440237&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
 <body>
-  <div id="page_loader">
-    <div class="loader_mian">
-      <div class="dot dot-1"></div>
-      <div class="dot dot-2"></div>
-      <div class="dot dot-3"></div>
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7"/>
-          </filter>
-        </defs>
-      </svg>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQPF2N5"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- End Google Tag Manager (noscript) -->
+  <div class="loader_full_page" id="loader_full_page">
+    <div id="lottie">  
+      <lottie-player id="index-lottie" style="width: 250px; height: 200px;" class="animation_player"
+        src="" background="transparent" speed="1" loop autoplay>
+      </lottie-player>
     </div>
   </div>
+  <script>
+    document.getElementById('index-lottie').src = '../assets/lottie-json/' + lottieModule + '/data.json';
+  </script>
 
   <app-root></app-root>
-
-
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
-
+  
 </html>

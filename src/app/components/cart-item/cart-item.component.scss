@@ -1,0 +1,224 @@
+@import '../../../cstm-variable';
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.section_description {
+    &.one {
+        transform: translate(10%, -10%);
+        max-width: 170px;
+        right: 0;
+
+        @include tab-view {
+            transform: translate(0%, -10%);
+        }
+    }
+
+    transform: translate(20%, 70%);
+    max-width: 240px;
+
+    &.price_descrip {
+        right: 0;
+        transform: translate(10%, 0);
+        top: 30px;
+    }
+}
+
+.inner_accordion_wrapper {
+    .panel-heading {
+        .panel-title {
+            margin: 0;
+
+            a {
+                font-weight: 600;
+                color: $text-black;
+                font-size: 16px;
+                border: none;
+                background-color: transparent;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 0;
+
+                &[aria-expanded="true"] {
+                    &:after {
+                      content: "";
+                      padding: 5px 9px;
+                      margin-left: 10px;
+                      background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                      background-position: right;
+                      background-repeat: no-repeat;
+                      background-size: 12px;
+                      transition: 0.3s;
+                      position: absolute;
+                      right: 15px;
+                        @include tab-view {
+                            right: 10px;                    
+                        }
+                    }
+                }
+
+                &[aria-expanded="false"] {
+                    &:after {
+                      padding: 5px 9px;
+                      margin-left: 10px;
+                      background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                      background-position: right;
+                      background-repeat: no-repeat;
+                      background-size: 12px;
+                      content: "";
+                      transition: 0.3s;
+                      position: absolute;
+                      right: 15px;
+                      @include tab-view {
+                        right: 10px;                    
+                       }
+                    }
+
+                }
+
+                .headerin_wrapper {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex: 1;
+                    padding-right: 20px;
+                    flex-direction: column;
+
+                    @include tab-view {
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                    }
+
+                    .headin_upper_wrparr {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        flex: 1;
+                        padding-right: 20px;
+                        width: 100%;
+
+                        @include tab-view {
+                            flex-direction: column;
+                            justify-content: flex-start;
+                            align-items: flex-start;
+                        }
+
+                        &.hotel_header_wrpper {
+                            align-items: flex-start;
+                            justify-content: flex-start;
+
+                            @include tab-view {
+                                flex-direction: row;
+                                padding: 0;
+                            }
+
+                            .header_name {
+                                .title_image {
+                                    border: 2px solid $blue-text-one;
+                                }
+                            }
+                        }
+
+                        .header_name {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 27px;
+                            position: relative;
+
+                            @include tab-view {
+                                font-size: 24px;
+                            }
+
+                            .title_image {
+                                border-radius: 50%;
+                                border: 2px solid $pink;
+                                padding: 5px;
+                                height: 38px;
+                                width: 38px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                margin-right: 15px;
+
+                                img {
+                                    width: 20px;
+                                }
+
+                                @include tab-view {
+                                    //display: none;
+                                }
+                            }
+
+                            .flight_routing_imgs {
+                                display: flex;
+                                flex-direction: column;
+                                padding: 0 20px;
+
+                                @include tab-view {
+                                    max-width: 110px;
+                                }
+                            }
+
+                        }
+
+                        .hotel_names_wrps {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-start;
+                            font-size: 27px;
+                            position: relative;
+                            flex-direction: column;
+
+                            .hotel_name {
+                                margin: 0;
+                                font-size: 27px;
+
+                                @include tab-view {
+                                    font-size: 24px;
+                                }
+                            }
+
+                            @include tab-view {
+                                font-size: 24px;
+                            }
+
+                            .header_date {
+                                font-size: 16px;
+                                font-weight: 400;
+                                color: $mid_gray_bg;
+                                margin-top: 5px;
+
+                                @include tab-view {
+                                    font-size: 12px;
+                                    margin-left: 0;
+                                }
+                            }
+                        }
+
+                        .header_date {
+                            font-size: 16px;
+                            font-weight: 400;
+
+                            @include tab-view {
+                                font-size: 12px;
+                                margin-left: 54px;
+                            }
+                        }
+                    }
+
+                    .alert_boxes {
+                        img {
+                            max-width: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

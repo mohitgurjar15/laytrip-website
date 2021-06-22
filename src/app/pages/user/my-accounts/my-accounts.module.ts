@@ -24,13 +24,17 @@ import { MyWalletComponent } from './my-wallet/my-wallet.component';
 import { SearchTripComponent } from './search-trip/search-trip.component';
 import { FlightTripDetailComponent } from './flight-trip-detail/flight-trip-detail.component';
 import { TripNotFoundComponent } from './trip-not-found/trip-not-found.component';
-import { TextMaskModule } from 'angular2-text-mask';
 import { ConfirmationModalComponent } from '../../../components/confirmation-modal/confirmation-modal.component';
 import { HomeRentalsComponent } from './bookings/home-rentals/home-rentals.component';
 import { PlanSubscriptionComponent } from './plan-subscription/plan-subscription.component';
 import { ComponentsModule } from '../../../components/components.module';
 import { MyWalletAddPointsComponent } from './my-wallet-add-points/my-wallet-add-points.component';
 import { SendEmailPopupComponent } from './bookings/send-email-popup/send-email-popup.component';
+import { AccountComponent } from './account/account.component';
+import { PreferancesComponent } from './preferances/preferances.component';
+import { BookingTravelerComponent } from './bookings/booking-traveler/booking-traveler.component';
+import { CartPriceSummaryComponent } from './bookings/cart-price-summary/cart-price-summary.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,7 @@ import { SendEmailPopupComponent } from './bookings/send-email-popup/send-email-
     ListPaymentHistoryComponent,
     HistoryListComponent,
     ViewHistoryComponent,
-    ChangePasswordComponent,
+    ChangePasswordComponent, 
     SubscriptionPlanComponent,
     AccountCardListComponent,
     CardActionFormComponent,
@@ -57,18 +61,22 @@ import { SendEmailPopupComponent } from './bookings/send-email-popup/send-email-
     PlanSubscriptionComponent,
     MyWalletAddPointsComponent,
     SendEmailPopupComponent,
+    AccountComponent,
+    PreferancesComponent,
+    BookingTravelerComponent,
+    CartPriceSummaryComponent,
   ],
   imports: [
     CommonModule,
     MyAccountsRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgSelectModule,
     NgbModule,
     CalendarModule,
     FlightModule,
-    TextMaskModule,
-    ComponentsModule
+    ComponentsModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [DatePipe, NgbActiveModal],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

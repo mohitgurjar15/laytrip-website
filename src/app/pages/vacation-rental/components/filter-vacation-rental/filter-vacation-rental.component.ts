@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, OnChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, OnChanges, SimpleChange, ViewChild, ElementRef } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,16 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './filter-vacation-rental.component.html',
   styleUrls: ['./filter-vacation-rental.component.scss']
 })
-export class FilterVacationRentalComponent implements OnInit,OnDestroy {
+export class FilterVacationRentalComponent implements OnInit, OnDestroy {
+
+  compact = false;
+  invertX = false;
+  invertY = false;
+  shown = 'native';
+
+  @ViewChild("scrollable", { static: true, read: ElementRef } as any)
+  scrollbar: ElementRef;
+  contentWrapper: HTMLElement;
 
   @Input() rentalFilterDetails: any;
   @Input() isResetFilter: string;
@@ -42,13 +51,15 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
   rentalname;
   currency;
   subscriptions: Subscription[] = [];
+  lowToHighToggleAmenities: boolean = false;
+  is_open: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
-  	this.currency = JSON.parse(this._currency);
+    this.currency = JSON.parse(this._currency);
 
-  	 if (this.rentalFilterDetails) {
+    if (this.rentalFilterDetails) {
       this.rentalFilterDetails.items.forEach(i => {
         this.homeData.push({ rentalName: i.property_name });
       });
@@ -77,27 +88,84 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
         this.amenities = this.rentalFilterDetails.amenties;
       }
     }
+    this.loadJquery();
 
   }
 
+  loadJquery() {
+    //Start REsponsive Fliter js
+    $(window).on("scroll", function () {
+      if ($(window).width() < 1200) {
+        if ($(this).scrollTop() < 10) {
+          $('#responsive_filter').slideUp("slow");
+        }
 
-   clearRentalSearch() {
-    this.rentalname = 'Search Home';
-    this.filterRental.emit(this.rentalFilterDetails.items);
+        if ($(this).scrollTop() > 10) {
+          $('#responsive_filter').slideDown("slow");
+        }
+
+        var scrollHeight = $(document).height();
+        var scrollPosition = $(window).height() + $(window).scrollTop();
+        if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+          $('#responsive_filter').slideUp("slow");
+        }
+      } else {
+        $('#responsive_filter').hide("slow");
+      }
+    });
+    var sheight = $(window).scrollTop();
+    var swidth = $(window).width();
+    if (sheight > 10 && swidth < 991) {
+      $('#responsive_filter').slideDown("slow");
+    }
+    $(".responsive_filter_btn").click(function () {
+      $("#responsive_filter_show").slideDown("slow");
+      $("body").addClass('overflow-hidden');
+    });
+
+    $(".filter_close > a").click(function () {
+      $("#responsive_filter_show").slideUp("slow");
+      $("body").removeClass('overflow-hidden');
+    });
+    //Close REsponsive Fliter js
+
+    // Start filter Shortby js
+    $(document).on('show', '#accordion-filteredtby', function (e) {
+      $(e.target).prev('.accordion-heading').addClass('accordion-opened');
+    });
+
+    $(document).on('hide', '#accordion-filteredtby', function (e) {
+      $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
+    });
+  }
+
+  toggleFilter() {
+    this.is_open = !this.is_open;
+  }
+
+  toggleLowToHighAmenities() {
+    this.lowToHighToggleAmenities = !this.lowToHighToggleAmenities;
+  }
+
+
+  clearRentalSearch() {
+    if (this.rentalname !== 'Search Home') {
+      this.rentalname = 'Search Home';
+      this.filterRental.emit(this.rentalFilterDetails.items);
+    }
   }
 
   searchRental() {
-    if (this.rentalname) {
+    if (this.rentalname !== 'Search Home') {
       this.filterRentals({ key: 'searchByRental', value: this.rentalname.rentalName });
     }
   }
 
-   ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-   filterRentalByPrice(key, name) {
-    console.log(key, name);
+  filterRentalByPrice(key, name) {
     if (key === 'total') {
       this.sortType = name;
     } else if (key === 'weekly') {
@@ -112,12 +180,12 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
     this.filterRentals({});
   }
 
-   filterByAmenities(event, value) {
+  filterByAmenities(event, value) {
     if (event.target.checked === true) {
-      this.amenities.push(value);
+      this.amenitiesArray.push(value);
     }
     else {
-      this.amenities = this.amenities.filter(item => {
+      this.amenitiesArray = this.amenitiesArray.filter(item => {
         return item !== value;
       });
     }
@@ -137,7 +205,9 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
       filteredRentals = filteredRentals.filter(item => {
-        //return this.amenitiesArray.includes(item.inbound_stop_count);
+        return this.amenitiesArray.some(r => item.amenities.includes(r));
+        // filteredRentals = filteredRentals.filter(item => {
+        //   return this.amenitiesArray.includes(item);
       })
     }
 
@@ -151,19 +221,45 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
     /* Filter by price total or weekly */
     if (this.sortType === 'total') {
       filteredRentals = filteredRentals.filter(item => {
-        
+
       });
     } else if (this.sortType === 'weekly') {
       filteredRentals = filteredRentals.filter(item => {
-      
+
       });
     }
     this.filterRental.emit(filteredRentals);
   }
 
-  
 
-   ngOnChanges(changes: SimpleChanges) {
+  resetFilter() {
+    this.minPrice = this.rentalFilterDetails.price_range.min_price;
+    this.maxPrice = this.rentalFilterDetails.price_range.max_price;
+
+    // Reset Price
+    this.priceSlider.reset({ price: [Math.floor(this.rentalFilterDetails.price_range.min_price), Math.ceil(this.rentalFilterDetails.price_range.max_price)] });
+
+    // Reset price by total or weekly
+    this.sortType = 'filter_total_price';
+
+    // Reset amenities
+    // if (typeof this.amenities != 'undefined' && this.amenities.length) {
+    //   this.amenities.forEach(element => {
+    //     return element.isChecked = false;
+    //   });
+    // }
+    if (this.amenitiesArray.length) {
+      return this.amenitiesArray = [];
+    }
+
+    // Reset hotel name search
+    this.rentalname = 'Search Home';
+
+    $("input:checkbox").prop('checked', false);
+    this.filterRentals({});
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
     if (changes['isResetFilter']) {
       this.isResetFilter = changes['isResetFilter'].currentValue;
       this.minPrice = this.rentalFilterDetails.price_range.min_price;
@@ -176,10 +272,13 @@ export class FilterVacationRentalComponent implements OnInit,OnDestroy {
       this.sortType = 'filter_total_price';
 
       // Reset amenities
-      if (typeof this.amenities != 'undefined' && this.amenities.length) {
-        this.amenities.forEach(element => {
-          return element.isChecked = false;
-        });
+      // if (typeof this.amenities != 'undefined' && this.amenities.length) {
+      //   this.amenities.forEach(element => {
+      //     return element.isChecked = false;
+      //   });
+      // }
+      if (this.amenitiesArray.length) {
+        return this.amenitiesArray = [];
       }
 
       // Reset hotel name search

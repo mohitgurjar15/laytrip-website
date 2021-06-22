@@ -1,0 +1,397 @@
+@import '../../../../../../cstm-variable';
+@import "../../../../../../_cstm-variable.scss";
+@import "../../../../../../_cstm-components.scss";
+@import "../../../../../../_hotel.scss";
+@import "../../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.card-body {
+    padding: 15px;
+
+    @include tab-view{
+        padding: 10px;
+    }
+
+    &.main_body {
+        border-top: 1px solid $grayed_border;
+        background-color: $background-white;
+        margin-top: -1px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .accordion_detailed_wrps {
+        border: 1px solid $grayed_border;
+        border-radius: 10px;
+        margin-bottom: 10px;
+
+        .card-body { 
+            padding: 15px; 
+
+            @include tab-view{
+                padding: 10px;
+            }
+
+            .cols_wrps {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                @include tab-view {
+                    align-items: flex-start;
+                    flex-direction: row;
+                }
+
+                .lines_cols {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    width: 100%;
+                    font-size: 20px;
+                    color: $mid_gray_bg;
+
+                    @include tab-view {
+                        font-size: 12px;
+                    }
+
+                    .colmns_w {
+                        @include tab-view {
+                            margin-bottom: 1px;
+                            &.timing_wrp {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+
+                    &:last-child {
+                        .colmns_w {
+                            @include tab-view {
+                                &:last-child {
+                                    margin-bottom: 0px;
+                                }
+                            }
+                        }
+                    }
+
+                    .line_shortname {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        color: $text-black;
+                        font-weight: 600;
+                        flex: 1;
+
+                        @include tab-view{
+                            font-size: 16px;
+                        }
+
+                        img {
+                            margin-right: 20px;
+
+                            @include tab-view {
+                                max-width: 18px;
+                                margin-right: 5px;
+                            }
+                        }
+
+                        .hrs_ {
+                            display: none;
+                            font-size: 18px;
+                            color: $mid_gray_bg;
+                            font-weight: 400;
+
+                            @include tab-view {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    .line_company_name {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        flex: 1;
+                        @include tab-view {
+                            margin-top: 5px;
+                        }
+                        .hrs_ {
+                            font-size: 18px;
+
+                            @include tab-view {
+                                //display: none;
+                                font-size: 10px;
+                                margin-top: 5px;
+                            }
+                        }
+                    }
+
+                    .fl_number {
+                        flex: 1;
+                        display: flex;
+                        align-items: center;
+
+                        .pink_stamp {
+                            width: 14px;
+                            height: 14px;
+                            background-color: $pink;
+                            border-radius: 50%;
+                            margin-right: 10px;
+
+                            @include tab-view {
+                                width: 8px;
+                                height: 8px;
+                            }
+                        }
+                        .blue_stamp{
+                            width: 14px;
+                            height: 14px;
+                            background-color: $blue-text;
+                            border-radius: 50%;
+                            margin-right: 10px;
+
+                            @include tab-view {
+                                width: 8px;
+                                height: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .change_plane_wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                // border-top: 1px dashed $text_light_yellow;
+                // border-bottom: 1px dashed $text_light_yellow;
+                // color: $text_light_yellow;
+                // filter: grayscale(90%);
+                border-top: 1px dashed $grayed_border;
+                border-bottom: 1px dashed $grayed_border;
+                color: $grayed_border;
+                padding: 10px 0;
+                margin: 40px 0;
+                .plane_wrps{
+                    flex: 5;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    @include mobile-sm-view{
+                        flex: 3;
+                    }
+                }
+                .hr_wrps{
+                    display: flex;
+                    justify-content: flex-end;
+                    flex: 1;
+                    font-size: 15px;
+                    @include tab-view {
+                        font-size: 10px;
+                    }
+                }
+                img {
+                    margin-right: 15px;
+                    @include mobile-sm-view{
+                        max-width: 24px;
+                    }
+                }
+
+                @include tab-view {
+                    margin: 10px 0;
+                    font-size: 14px;
+                    padding: 6px 0;
+                    .hr_wrps{
+                        font-size: 10px;
+                    }
+                }
+                @include mobile-sm-view{
+                    font-size: 11px;
+                }
+            }
+        }
+
+        &.w_return {
+            margin-top: 15px;
+        }
+        .total_hrs_wrps {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            color: $mid_gray_bg;
+            font-size: 18px;
+            margin: 5px 0;
+            padding: 0 15px;
+            @include tab-view{
+                padding: 0;
+                margin: 10px 0 0;
+            }
+    
+            &.cta_btns_wrps {
+                justify-content: space-between;
+                font-size: 15px;
+                padding: 0;
+                margin: 15px 0 40px;
+
+                @include tab-view{
+                    font-size: 12px;
+                    margin-top: 10px;
+                }
+
+                &:last-child{
+                    margin: 15px 0 0;
+                }
+                .ct_btns {
+                    a {
+                        background-color: transparent;
+                        color: $text_light_yellow;
+                        border: none;
+                        box-shadow: none;
+                        font-size: 15px;
+                        padding: 0;
+
+                        @include tab-view{
+                            font-size: 12px;
+                        }
+    
+                        // margin-right: 40px;
+                        &:last-child {
+                            margin: 0;
+                        }
+                    }
+                }
+    
+            }
+        }
+    }
+
+    .card_title_wrps{
+
+        .headin_upper_wrparr{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            margin-bottom: 20px;
+            width: 100%;
+            @include tab-view{
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+            .header_name{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 27px;
+                position: relative; 
+                font-weight: 500;
+                @include tab-view {
+                    font-size: 24px;
+                }
+                .title_image{
+                    border-radius: 50%;
+                    border: 2px solid $pink;
+                    padding: 5px;
+                    height: 38px;
+                    width: 38px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 15px;
+                    img{
+                        width: 24px;
+                    }
+                    @include tab-view{
+                        //display: none;
+                    }
+                }
+                .flight_routing_imgs{
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0 20px;
+                    @include tab-view{
+                        max-width: 110px;
+                    }
+                }
+                
+            }
+            .header_date{
+                font-size: 16px;
+                font-weight: 400;
+                @include tab-view {
+                    font-size: 12px;
+                    margin-left: 54px;
+                }
+            }
+        }
+    }
+
+    .sub_accordions {
+        margin-top: 15px;
+
+        .card-body {
+            padding: 0;
+        }
+    }
+
+    .dobs {
+        ::ng-deep .birth_date {
+
+            .p-inputtext {
+                border: none;
+            }
+
+            th {
+                font-size: 13px !important;
+                border-bottom: none !important;
+                font-weight: 600 !important;
+                text-align: center;
+            }
+
+            td {
+                padding: 0.1rem !important;
+
+                span {
+                    width: 35px;
+                    height: auto;
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    border: none !important;
+                    border-radius: 0 !important;
+                    box-shadow: none !important;
+                    color: $text-grey;
+                    margin: 1px;
+                    position: relative;
+
+                    @include mobile-view {
+                        width: 33px;
+                    }
+
+                    &:hover {
+                        background: none !important;
+                    }
+
+                    &.p-highlight {
+                        background: none !important;
+                        font-weight: 500;
+                        overflow: visible;
+
+                        &::before {
+                            content: "";
+                            width: 5px;
+                            height: 5px;
+                            border-radius: 50%;
+                            background-color: $pink;
+                            position: absolute;
+                            top: -5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

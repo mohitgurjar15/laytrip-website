@@ -1,0 +1,250 @@
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+;
+
+.section_header {
+    color: $active-tab-text;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.accordion_detailed_wrps {
+    border: 1px solid $grayed_border;
+    border-radius: 10px;
+
+    .card-body {
+        padding: 15px;
+        
+        @include tab-view{
+            padding: 10px;
+        }
+
+        .cols_wrps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            @include tab-view {
+                align-items: flex-start;
+                flex-direction: row;
+            }
+
+            .lines_cols {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                width: 100%;
+                font-size: 20px;
+                color: $mid_gray_bg;
+
+                @include tab-view {
+                    font-size: 14px;
+                }
+
+                .colmns_w {
+                    @include tab-view {
+                        margin-bottom: 1px;
+                    }
+                }
+
+                &:last-child {
+                    .colmns_w {
+                        @include tab-view {
+                            &:last-child {
+                                margin-bottom: 0px;
+                            }
+                        }
+                    }
+                }
+
+                .line_shortname {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    color: $text-black;
+                    font-weight: 600;
+                    flex: 1;
+
+                    @include tab-view {
+                        font-size: 16px;
+                    }
+
+                    img {
+                        margin-right: 20px;
+
+                        @include tab-view {
+                            max-width: 20px;
+                            margin-right: 5px;
+                        }
+                    }
+
+                    .hrs_ {
+                        display: none;
+                        font-size: 18px;
+                        color: $mid_gray_bg;
+                        font-weight: 400;
+
+                        @include tab-view {
+                            display: none;
+                        }
+                    }
+                }
+
+                .line_company_name {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex: 1;
+
+                    @include tab-view {
+                        margin-top: 5px;
+                    }
+
+                    .hrs_ {
+                        font-size: 18px;
+
+                        @include tab-view {
+                            //display: none;
+                            font-size: 10px;
+                        }
+                    }
+                }
+
+                .fl_number {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+
+                    .pink_stamp {
+                        width: 14px;
+                        height: 14px;
+                        background-color: $pink;
+                        border-radius: 50%;
+                        margin-right: 10px;
+
+                        @include tab-view {
+                            width: 8px;
+                            height: 8px;
+                            margin-right: 5px;
+                        }
+                    }
+                    .blue_stamp{
+                        width: 14px;
+                        height: 14px;
+                        background-color: $blue-text;
+                        border-radius: 50%;
+                        margin-right: 10px;
+
+                        @include tab-view {
+                            width: 8px;
+                            height: 8px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .change_plane_wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            // border-top: 1px dashed $text_light_yellow;
+            // border-bottom: 1px dashed $text_light_yellow;
+            // color: $text_light_yellow;
+            border-top: 1px dashed $grayed_border;
+            border-bottom: 1px dashed $grayed_border;
+            color: $grayed_border;
+            padding: 10px 0;
+            margin: 40px 0;
+
+            .plane_wrps {
+                flex: 5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .hr_wrps {
+                display: flex;
+                justify-content: flex-end;
+                flex: 1;
+                font-size: 15px;
+
+                @include tab-view {
+                    font-size: 10px;
+                }
+            }
+
+            img {
+                margin-right: 15px;
+            }
+
+            @include tab-view {
+                margin: 5px 0 10px 0;
+                font-size: 14px;
+                padding: 5px 0;
+            }
+        }
+    }
+
+    &:nth-child(2) {
+        margin-top: 15px;
+    }
+}
+
+.total_hrs_wrps {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: $mid_gray_bg;
+    font-size: 15px;
+    //margin: 10px 0 0;
+    margin: 10px 0 40px;
+    padding: 0;
+
+    &:last-child{
+        margin: 10px 0 0;
+    }
+
+    @include tab-view{
+        font-size: 10px;
+        margin: 10px 0 20px;
+    }
+
+    &.cta_btns_wrps {
+        justify-content: space-between;
+
+        .ct_btns {
+            button {
+                background-color: transparent;
+                color: $text_light_yellow;
+                border: none;
+                box-shadow: none;
+                font-size: 15px;
+                padding: 0;
+                @include tab-view{
+                    font-size: 12px;
+                }
+
+                // margin-right: 40px;
+                &:last-child {
+                    margin: 0;
+                }
+            }
+        }
+
+    }
+}
+
+.sub_accordions {
+    margin-top: 15px;
+
+    .card-body {
+        padding: 0;
+    }
+}

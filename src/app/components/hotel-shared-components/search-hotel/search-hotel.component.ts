@@ -26,11 +26,11 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
   loading = false;
   data = [];
   itemIconArray = {
-    hotel: `${this.s3BucketUrl}assets/images/icon/hotel.png`,
-    city: `${this.s3BucketUrl}assets/images/icon/city.png`,
-    airport: `${this.s3BucketUrl}assets/images/icon/airport.png`,
-    region: `${this.s3BucketUrl}assets/images/icon/region.png`,
-    poi: `${this.s3BucketUrl}assets/images/icon/poi.png`,
+    hotel: `${this.s3BucketUrl}assets/images/hotels/hotel.svg`,
+    city: `${this.s3BucketUrl}assets/images/hotels/city.svg`,
+    airport: `${this.s3BucketUrl}assets/images/hotels/airport.svg`,
+    region: `${this.s3BucketUrl}assets/images/hotels/region.svg`,
+    poi: `${this.s3BucketUrl}assets/images/hotels/poi.svg`,
   };
   recentSearchInfo = [];
   isShowRecentSearch = true;
@@ -54,23 +54,7 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
         geo_codes: this.defaultSelected.geo_codes,
       });
     }
-    if (localStorage.getItem('_hotel_recent')) {
-      this.recentSearchInfo = JSON.parse(localStorage.getItem('_hotel_recent'));
-      this.data = this.recentSearchInfo.map(item => {
-        return {
-          city: item.city,
-          country: item.country,
-          hotel_id: null,
-          title: item.title,
-          type: item.type,
-          geo_codes: item.geo_codes,
-          recentSearches: 'Recent Searches',
-          isRecentSearch: true
-        }
-      });
-    } else {
-      console.log('no');
-    }
+    
   }
 
   ngDocheck() {
@@ -123,15 +107,15 @@ export class SearchHotelComponent implements OnInit, AfterViewChecked {
     this.defaultSelected = event;
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });
-      if (this.recentSearchInfo && this.recentSearchInfo.length < 3) {
-        this.recentSearchInfo.push(event);
-        localStorage.setItem('_hotel_recent', JSON.stringify(this.recentSearchInfo));
-      }
     }
   }
 
   onRemove(event) {
     this.selectedHotel = {};
     this.defaultSelected = this.defaultSelectedTemp;
+  }
+
+  onAuxClick(event) {
+    console.log("auxclick - button",  event);
   }
 }

@@ -10,15 +10,17 @@ exports.ListTravellerComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../../../environments/environment");
 var moment = require("moment");
-var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var traveller_form_component_1 = require("./traveller-form/traveller-form.component");
 var ListTravellerComponent = /** @class */ (function () {
-    function ListTravellerComponent(travelerService, router, modalService, toastr, genericService) {
+    function ListTravellerComponent(travelerService, router, modalService, toastr, genericService, cookieService, renderer, commonFunction) {
         this.travelerService = travelerService;
         this.router = router;
         this.modalService = modalService;
         this.toastr = toastr;
         this.genericService = genericService;
+        this.cookieService = cookieService;
+        this.renderer = renderer;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.travelers = [];
         this.closeResult = '';
@@ -31,9 +33,19 @@ var ListTravellerComponent = /** @class */ (function () {
         this.perPageLimitConfig = [10, 25, 50, 100];
         this.pageSize = 10;
         this.showPaginationBar = false;
+        this.showNewForm = false;
+        this.traveller = [];
+        this.loadingValue = new core_1.EventEmitter();
+        this.travellerTabClass = '';
         this.isMasterSel = false;
     }
     ListTravellerComponent.prototype.ngOnInit = function () {
+        var location = this.cookieService.get('__loc');
+        try {
+            this.location = JSON.parse(location);
+        }
+        catch (e) {
+        }
         window.scroll(0, 0);
         this.getCountry();
         this.pageNumber = 1;
@@ -48,8 +60,16 @@ var ListTravellerComponent = /** @class */ (function () {
     };
     ListTravellerComponent.prototype.getTravelers = function () {
         var _this = this;
-        this.travelerService.getTravelers().subscribe(function (data) {
-            _this.travelers = data.data;
+        this.travelerService.getTravelers().subscribe(function (res) {
+            // this.travelers = res.data;
+            _this.travelers = res.data.filter(function (e) {
+                if (e.roleId != 6) {
+                    return e;
+                }
+            });
+            if (_this.travelers.length == 0) {
+                _this.showNewForm = true;
+            }
             _this.loading = false;
             _this.showPaginationBar = true;
             if (_this.travelers.length === 0) {
@@ -59,45 +79,28 @@ var ListTravellerComponent = /** @class */ (function () {
             _this.loading = _this.showPaginationBar = false;
             _this.notFound = true;
             if (error.status === 401) {
-                _this.router.navigate(['/']);
+                if (_this.commonFunction.isRefferal()) {
+                    var parms = _this.commonFunction.getRefferalParms();
+                    var queryParams = {};
+                    queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                    if (parms.utm_medium) {
+                        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                    }
+                    if (parms.utm_campaign) {
+                        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                    }
+                    _this.router.navigate(['/'], { queryParams: queryParams });
+                }
+                else {
+                    _this.router.navigate(['/']);
+                }
             }
         });
     };
     ListTravellerComponent.prototype.calculateAge = function (birthdate) {
         return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years') + " yrs, " : "";
     };
-    ListTravellerComponent.prototype.getGender = function (type) {
-        if (type == 'M')
-            return 'Male';
-        if (type == 'F')
-            return 'Female';
-        if (type == 'N')
-            return 'Non Binary';
-    };
-    ListTravellerComponent.prototype.ngDoCheck = function () {
-        // this.getTravelers();
-    };
-    ListTravellerComponent.prototype.ngOnChanges = function (changes) {
-        console.log('sds', changes);
-    };
-    ListTravellerComponent.prototype.openTravellerModal = function (content, userId, traveler) {
-        var _this = this;
-        if (userId === void 0) { userId = ''; }
-        if (traveler === void 0) { traveler = ''; }
-        this.modalReference = this.modalService.open(traveller_form_component_1.TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal', centered: true });
-        this.modalReference.componentInstance.travellerId = userId;
-        this.modalReference.componentInstance.travelerInfo = traveler;
-        this.modalReference.componentInstance.countries = this.countries;
-        this.modalReference.componentInstance.countries_code = this.countries_code;
-        this.modalReference.componentInstance.travelersChanges.subscribe(function ($e) {
-            var index = _this.travelers.indexOf($e.userId, 0);
-            if (index) {
-                _this.travelers = _this.travelers.filter(function (item) { return item.userId != $e.userId; });
-            }
-            _this.travelers.push($e);
-        });
-    };
-    ListTravellerComponent.prototype.deleteTravellerModal = function (content, userId) {
+    ListTravellerComponent.prototype.openDeleteModal = function (content, userId) {
         var _this = this;
         if (userId === void 0) { userId = ''; }
         this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
@@ -106,45 +109,8 @@ var ListTravellerComponent = /** @class */ (function () {
             _this.closeResult = "Closed with: " + result;
         }, function (reason) {
             // this.getTravelers();
-            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
-            console.log(_this.closeResult);
+            // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
-    };
-    ListTravellerComponent.prototype.getDismissReason = function (reason) {
-        if (reason === ng_bootstrap_1.ModalDismissReasons.ESC) {
-            return 'by pressing ESC';
-        }
-        else if (reason === ng_bootstrap_1.ModalDismissReasons.BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        }
-        else {
-            return "with: " + reason;
-        }
-    };
-    ListTravellerComponent.prototype.pushTraveler = function (event) {
-        console.log("event", event);
-    };
-    ListTravellerComponent.prototype.deleteTraveller = function () {
-        var _this = this;
-        this.travelerService["delete"](this.userId).subscribe(function (data) {
-            _this.getTravelers();
-            if (data.message) {
-                _this.toastr.success('Traveler deleted successfully.', 'Success');
-            }
-            else {
-                _this.toastr.error(data.message, 'Failure');
-            }
-        }, function (error) {
-            if (error.status === 401) {
-                _this.toastr.error(error.error.errorMsg, 'Error');
-                _this.router.navigate(['/']);
-            }
-            else {
-                _this.getTravelers();
-                _this.toastr.error(error.error.errorMsg, 'Error');
-            }
-        });
-        this.modalReference.close();
     };
     ListTravellerComponent.prototype.getCountry = function () {
         var _this = this;
@@ -153,31 +119,53 @@ var ListTravellerComponent = /** @class */ (function () {
                 return {
                     id: country.id,
                     name: country.name,
-                    code: country.phonecode,
+                    countryCode: country.phonecode,
                     flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
-            }),
-                _this.countries_code = data.map(function (country) {
-                    return {
-                        id: country.id,
-                        name: country.phonecode + ' (' + country.iso2 + ')',
-                        code: country.phonecode,
-                        country_name: country.name + ' ' + country.phonecode,
-                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-                    };
-                });
+            });
+            _this.countries_code = data.map(function (country) {
+                return {
+                    id: country.id,
+                    name: country.phonecode + ' (' + country.iso2 + ')',
+                    countryCode: country.phonecode,
+                    country_name: country.name + ' ' + country.phonecode,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg',
+                    iso2: country.iso2
+                };
+            });
+            var filteredArr = _this.countries_code.reduce(function (acc, current) {
+                var x = acc.find(function (item) { return item.countryCode == current.countryCode; });
+                if (!x) {
+                    return acc.concat([current]);
+                }
+                else {
+                    return acc;
+                }
+            }, []);
+            _this.countries_code = [];
+            _this.countries_code = filteredArr;
+            _this.setUSCountryInFirstElement(_this.countries);
         }, function (error) {
             if (error.status === 401) {
                 _this.router.navigate(['/']);
             }
         });
     };
+    ListTravellerComponent.prototype.setUSCountryInFirstElement = function (countries) {
+        var usCountryObj = countries.find(function (x) { return x.id === 233; });
+        var removedUsObj = countries.filter(function (obj) { return obj.id !== 233; });
+        this.countries = [];
+        removedUsObj.sort(function (a, b) {
+            return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
+        });
+        removedUsObj.unshift(usCountryObj);
+        this.countries = removedUsObj;
+    };
     ListTravellerComponent.prototype.checkUncheckAll = function () {
         var checkboxes = document.getElementsByClassName('travelerCheckbox');
         for (var i = 0; i < checkboxes.length; i++) {
             this.travelers[i].isSelected = this.isMasterSel;
         }
-        console.log(this.travelers);
         this.getCheckedItemList();
     };
     ListTravellerComponent.prototype.isAllSelected = function () {
@@ -194,6 +182,89 @@ var ListTravellerComponent = /** @class */ (function () {
         }
         this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
     };
+    ListTravellerComponent.prototype.submitTravellerForm = function () {
+        var _this = this;
+        this.loadingValue.emit(true);
+        var formData = this.childComponent.travellerForm;
+        if (formData.invalid) {
+            Object.keys(formData.controls).forEach(function (controlName) {
+                return formData.controls[controlName].markAsTouched();
+            });
+            this.loadingValue.emit(false);
+            return;
+        }
+        else {
+            var country_id = formData.value.country_id.id;
+            if (!Number(country_id)) {
+                if (this.traveller.country) {
+                    country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
+                }
+                else {
+                    country_id = 233;
+                }
+            }
+            var jsonData = {
+                first_name: formData.value.firstName,
+                last_name: formData.value.lastName,
+                dob: typeof formData.value.dob === 'object' ? moment(formData.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(formData.value.dob, '/')).format('YYYY-MM-DD'),
+                gender: formData.value.gender ? formData.value.gender : 'M',
+                country_id: country_id ? country_id : '',
+                passport_expiry: typeof formData.value.passport_expiry === 'object' ? moment(formData.value.passport_expiry).format('YYYY-MM-DD') : null,
+                passport_number: formData.value.passport_number,
+                country_code: formData.value.country_code ? formData.value.country_code : '',
+                phone_no: formData.value.phone_no
+            };
+            var emailObj = { email: formData.value.email ? formData.value.email : '' };
+            this.travelerService.addAdult(jsonData).subscribe(function (data) {
+                _this.getTravelers();
+                _this.childComponent.travellerForm.reset();
+                _this.loadingValue.emit(false);
+            }, function (error) {
+                _this.loadingValue.emit(false);
+                if (error.status === 401) {
+                    _this.router.navigate(['/']);
+                }
+                else {
+                }
+            });
+        }
+    };
+    ListTravellerComponent.prototype.stringToDate = function (string, saprator) {
+        var dateArray = string.split(saprator);
+        return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
+    };
+    ListTravellerComponent.prototype.getLoadingValue = function (event) {
+        this.loadingValue.emit(event ? event : false);
+    };
+    ListTravellerComponent.prototype.getTravellerIdFromChild = function (travelerId) {
+        this.openDeleteModal('deleteContent', travelerId);
+    };
+    ListTravellerComponent.prototype.pushTraveler = function (traveler) {
+        if (typeof traveler == 'string') {
+            this.travelers = this.travelers.filter(function (obj) { return obj.userId !== traveler; });
+        }
+        else {
+            this.travelers = this.travelers.filter(function (obj) { return obj.userId !== traveler.userId; });
+            this.travelers.push(traveler);
+        }
+        if (this.travelers.length == 0) {
+            this.showNewForm = true;
+        }
+        else {
+            this.showNewForm = false;
+        }
+        //For add class show in traveler tab 
+        this.travellerTabClass = traveler.userId;
+    };
+    ListTravellerComponent.prototype.showForm = function () {
+        this.showNewForm = true;
+    };
+    __decorate([
+        core_1.ViewChild(traveller_form_component_1.TravellerFormComponent, { static: false })
+    ], ListTravellerComponent.prototype, "childComponent");
+    __decorate([
+        core_1.Output()
+    ], ListTravellerComponent.prototype, "loadingValue");
     ListTravellerComponent = __decorate([
         core_1.Component({
             selector: 'app-list-traveller',

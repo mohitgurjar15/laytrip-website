@@ -1,0 +1,108 @@
+<section class="block_cms_page_main page_about">
+  <div class="page_topbanner">
+    <img src="{{s3BucketUrl}}assets/images/cms_page_banner.png" alt="Banner Image">
+  </div>
+  <div class="block_cms_cnt">
+    <div class="container">
+      <div class="row">
+        <div class="page_back_link">
+          <a class="hover-link" (click)="commonFunction.goBack()"><img style="margin-right: 5px;" src="{{s3BucketUrl}}assets/images/icon/ic_back.svg" alt=""> Back</a>
+        </div> 
+
+        <div class="col-lg-12 about_page_cmn" *ngIf="loading">
+          <div class="block_cmspage_comman cms_laytrip">
+            <h3 class="fb_animation w-25" style="margin-bottom: 60px;"></h3>
+            <div class="detail_wpr d-block">
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-0"></p>
+            </div>
+            <h5 class="fb_animation w-50 mb-2"></h5>
+            <div class="detail_wpr d-block">
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-0"></p>
+            </div>
+            <h5 class="fb_animation w-50 mb-2"></h5>
+            <div class="detail_wpr d-block">
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-0"></p>
+            </div>
+            <h5 class="fb_animation w-50 mb-2"></h5>
+            <div class="detail_wpr d-block">
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-0"></p>
+            </div>
+            <h5 class="fb_animation w-50 mb-2"></h5>
+            <div class="detail_wpr d-block">
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-0"></p>
+            </div>
+            <h5 class="fb_animation w-50 mb-2"></h5>
+            <div class="detail_wpr d-block">
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-2"></p>
+              <p class="fb_animation w-100 mb-0"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 about_page_cmn" *ngIf="!loading">
+          <div class="block_cmspage_comman cms_laytrip"  [innerHtml]="cmsData.enContent">
+
+          </div>
+          <!-- <div class="block_cmspage_comman cms_laytrip">
+            <aside>
+              <h3>
+                Why Laytrip?
+              </h3>
+              <div class="detail_wpr">
+                <p class="para_detail">
+                  Laytrip is an emerging online travel agency that strives to provide an easy, inspiring and affordable
+                  platform for all. To all the dreamers who await new adventures, to all the doers who are already packing
+                  their bags with passion and thrill and to all the travellers who are always on the go - Laytrip is the
+                  perfect getaway for the next best destination!
+                </p>
+              </div>
+            </aside>
+            <h3>
+              Below are the ways we want you to enjoy while using Laytrip:
+            </h3>
+            <br>
+            <h5>Afford your travel</h5>
+            <p class="para_detail">We want to help you easily afford your trip. Our buy now pay later option is centered
+              around providing the most efficient way of paying for travelling at the cheapest price. We work hard to
+              determine the most efficient dates for you to book your travel and make suggestions to you in real time.
+              <br><a href="">Read more about our partial payments plan</a>
+            </p>
+            <br>
+            <h5>Get inspired</h5>
+            <p class="para_detail">With our community of travellers and TripFluencers you can easily explore popular
+              destinations all around the world and get insights about particular cities. Browse through thousands of
+              reviews from certified tripfluencers, read their blogs and check-out pictures to get inspired to book your
+              next trip! <br> <a href="">Check-out our explore page</a></p>
+            <br>
+            <h5>Inspire others</h5>
+            <p class="para_detail">Become a TripFluencer and share your experiences and thoughts with the public while
+              travelling with Laytrip. Tripluencers not only inspire the community of travellers but also get more
+              benefits.<br> <a href=""> Learn more about tripfluencers</a></p>
+            <br>
+            <h5>Earn points and get discounts</h5>
+            <p class="para_detail">With every friend that signs up with your personal URL - you earn laytrip points which
+              accumulate on your account and can be used to reduce your booking total, make new bookings, or give laytrip
+              points as gifts. If you want more out of your points, become a subscribed user and track all the referral
+              points you earn through your friends and friends of friends. Another option, become a certified
+              TripFluencer! Go on trips though Laytrip and share your experiences with your social media audience. You
+              will earn more points if you are a TripFluencer and will have access to some of our exclusive features.<br>
+              <a href="">Read more about our Points System and Referral Program</a>
+            </p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -12,7 +12,8 @@ export const getUserDetails = (token) => {
 }
 
 export const redirectToLogin = () => {
-    localStorage.setItem('_lay_sess', "");
+    localStorage.removeItem('_lay_sess');
+    localStorage.removeItem('$crt');
     window.location.href = '/';
 }
 

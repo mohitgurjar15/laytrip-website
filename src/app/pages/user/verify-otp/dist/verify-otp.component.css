@@ -1,0 +1,436 @@
+/*--------------------------- Color variations ----------------------*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+.ng-select.laytrip-input {
+  padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input .ng-dropdown-panel {
+  top: 100%;
+  background: #ffffff;
+  left: 0;
+  width: 480px;
+}
+@media (max-width: 767px) {
+  .ng-select.laytrip-input .ng-dropdown-panel {
+    width: 410px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input .ng-dropdown-panel {
+    width: 100%;
+  }
+}
+.ng-select.laytrip-input .ng-input input {
+  padding: 0;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0 15px;
+}
+.ng-select.laytrip-input .ng-select-container span.ng-arrow-wrapper span.ng-arrow {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 16px !important;
+  color: red !important;
+}
+.ng-select.laytrip-input .ng-select-opened .ng-select-container {
+  z-index: 0 !important;
+}
+.ng-select.laytrip-input .ng-select-container {
+  border: none !important;
+  height: 100%;
+  min-height: 0px !important;
+  display: block;
+}
+.ng-select.laytrip-input .ng-select-container:hover {
+  box-shadow: none !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container {
+  padding-left: 0px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input {
+  padding: 0 15px;
+  top: 0;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input input {
+  padding-left: 0px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-value {
+  padding: 5px 0px 0 15px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ng-select.laytrip-input .ng-select-container .ng-clear-wrapper {
+  padding: 0 0px 0px 5px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-clear-wrapper .ng-clear {
+  font-size: 17px !important;
+  color: red !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-arrow-wrapper .ng-arrow {
+  display: none !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel {
+  border: none !important;
+  box-shadow: none !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-select-bottom {
+  border-top-color: #fff !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items {
+  max-height: 255px;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 3px 3px 3px 10px !important;
+  font-size: 14px;
+  font-weight: normal;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
+  padding: 5px 5px 5px 30px;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background-position: left center;
+  color: #012178;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+  padding: 5px 5px 5px 50px !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background-position: left 25px center;
+  color: #808080;
+}
+.ng-select.ng-customClass .ng-select-container {
+  height: 100%;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  border-radius: 0;
+}
+.ng-select.ng-customClass .ng-select-container:hover {
+  box-shadow: none;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container {
+  height: auto;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-value {
+  height: auto;
+  font-size: 14px;
+  color: #000000;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-input {
+  height: auto;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-input input {
+  height: auto !important;
+  border: none !important;
+}
+
+.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+  box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-bar {
+  background: #d8d8d8;
+  height: 3px;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #F826C1;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  width: 13px;
+  height: 13px;
+  top: auto;
+  /* to remove the default positioning */
+  top: -6px;
+  background-color: #fff;
+  border: 1px solid #F826C1;
+  border-radius: 50%;
+  outline: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer:after {
+  display: none;
+}
+
+.redeem_laypoint .ng5-slider .ng5-slider-bubble {
+  display: none;
+}
+
+.custom_range_slide p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8188ab;
+}
+.custom_range_slide .ng5-slider {
+  margin: 15px 0;
+}
+.custom_range_slide .ng5-slider .ng5-slider-bubble {
+  bottom: 14px;
+  width: 100%;
+  padding: 0;
+  height: auto;
+  border: none;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8188ab;
+  display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-limit {
+  font-weight: bold;
+  color: #F826C1;
+  display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-tick.ng5-slider-selected {
+  background: #F826C1;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
+  height: 22px !important;
+  margin-top: -3px !important;
+  margin-bottom: 2px !important;
+}
+
+.calender_price {
+  font-size: 9px;
+  color: #012178;
+}
+
+.search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right {
+  width: 100% !important;
+}
+.search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right table {
+  width: 100% !important;
+}
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right {
+  width: 100% !important;
+}
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right table {
+  width: 100% !important;
+}
+
+.anchor-tag {
+  cursor: pointer;
+}
+
+.hotel_tab .hotels_search .hotels-grid .grid_box.secound label {
+  justify-content: flex-start !important;
+}
+
+.custom-z-index {
+  z-index: 99999 !important;
+}
+
+.ui-progressbar {
+  height: 2em !important;
+  text-align: left !important;
+  overflow: hidden !important;
+}
+
+.ui-progressbar .ui-progressbar-value {
+  margin: -1px !important;
+  height: 100% !important;
+}
+
+.ui-progressbar .ui-progressbar-overlay {
+  background: url("data:image/gif;base64,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") !important;
+  height: 100% !important;
+  filter: alpha(opacity=25) !important;
+  /* support: IE8 */
+  opacity: 0.25 !important;
+}
+
+.ui-progressbar-indeterminate .ui-progressbar-value {
+  background-image: none !important;
+}
+
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+.modal_otp_block .modal-header {
+  justify-content: center;
+  border: none;
+  padding: 0px 20px 0;
+  flex-flow: column;
+  align-items: center;
+}
+.modal_otp_block .modal-header .close {
+  opacity: 1;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.modal_otp_block .modal-header .close img {
+  width: 12px;
+}
+.modal_otp_block .modal-body {
+  width: 100%;
+  padding: 45px 20px 20px;
+}
+@media (max-width: 768px) {
+  .modal_otp_block .modal-body {
+    flex: revert;
+  }
+}
+.modal_otp_block .modal-body .modal_top_block {
+  margin: 0 0 26px;
+  text-align: center;
+}
+.modal_otp_block .modal-body .modal_top_block .ic_suc {
+  margin: 0 0 15px;
+}
+.modal_otp_block .modal-body .modal_top_block h4 {
+  font-size: 23px;
+  line-height: 28px;
+  font-weight: 500;
+  color: #0043ff;
+  text-align: center;
+  max-width: 370px;
+  margin: 0 auto;
+}
+.modal_otp_block .modal-body .modal_top_block h4.suc_title {
+  margin: 15px auto 0;
+}
+@media (max-width: 768px) {
+  .modal_otp_block .modal-body .modal_top_block h4 {
+    max-width: 100%;
+  }
+}
+.modal_otp_block .modal-body .form_row {
+  width: 100%;
+}
+.modal_otp_block .modal-body .form_row .text_field {
+  width: 100%;
+}
+.modal_otp_block .modal-body .form_row .text_field ng-otp-input {
+  width: 100%;
+  display: flex;
+}
+.modal_otp_block .modal-body .form_row .text_field ng-otp-input .ng-star-inserted .wrapper {
+  display: flex;
+  justify-content: center;
+}
+.modal_otp_block .modal-body .form_row .text_field .error_text {
+  width: 100%;
+  color: #ff0000;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 5px 0 0;
+  text-align: center;
+}
+.modal_otp_block .modal-body .resend_otp_code {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0 25px;
+}
+.modal_otp_block .modal-body .resend_otp_code div {
+  font-size: 12px;
+  color: #707070;
+}
+.modal_otp_block .modal-body .resend_otp_code div .count-down {
+  padding-right: 3px;
+}
+.modal_otp_block .modal-body .resend_otp_code .resendSpinner {
+  margin-right: 5px;
+}
+.modal_otp_block .modal-body .resend_otp_code .hover-link p {
+  margin: 0;
+  font-size: 12px;
+  color: #0043ff;
+}
+.modal_otp_block .modal-body .resend_otp_code .hover-link.disable_link {
+  cursor: default;
+}
+.modal_otp_block .modal-body .resend_otp_code .hover-link.disable_link p {
+  color: #707070;
+}
+.modal_otp_block .modal-body .form_btn {
+  width: 100%;
+  text-align: center;
+}
+.modal_otp_block .modal-body .form_btn button {
+  width: 100%;
+  height: 40px;
+  padding: 0px 25px;
+  background: #F826C1;
+  border-radius: 25px;
+  border: 1px solid #F826C1;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+}
+.modal_otp_block .modal-body .form_btn button::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 100%;
+  height: 0%;
+  background: #ffffff;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 25px;
+}
+.modal_otp_block .modal-body .form_btn button:hover {
+  border: 1px solid #F826C1;
+  color: #F826C1;
+}
+.modal_otp_block .modal-body .form_btn button:hover:before {
+  height: calc(100% - 2px);
+  width: calc(100% - 2px);
+}
+.modal_otp_block .modal-body .block_api_error {
+  max-width: max-content;
+  width: 100%;
+  margin: 13px auto 0;
+  padding: 5px 20px;
+  font-size: 12px;
+  color: #ff7272;
+  background: rgba(255, 114, 114, 0.15);
+  border-radius: 25px;
+  text-align: center;
+}
+.modal_otp_block .modal-footer {
+  padding: 0 20px 25px;
+  border: 0;
+  margin: 0;
+}
+.modal_otp_block .modal-footer .modal_btm {
+  width: 100%;
+}
+.modal_otp_block .modal-footer .modal_btm .block_logo {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 0;
+}
+.modal_otp_block .modal-footer .modal_btm .block_logo img {
+  height: 22px;
+}

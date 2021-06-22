@@ -10,7 +10,7 @@ const routes: Routes = [
     component: HotelSearchComponent,
   },
   {
-    path: 'detail/:id',
+    path: 'detail/:id/:token',
     component: HotelDetailComponent,
   },
   // {

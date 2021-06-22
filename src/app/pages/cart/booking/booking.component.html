@@ -1,0 +1,112 @@
+<app-laytrip-loader [loading]="loading" [module]="lottieLoaderType"></app-laytrip-loader>
+<app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
+<section class="payment_mode_main_wrapper flight {{lottieLoaderType}}">
+    <div class="container" *ngIf="!isCartEmpty">
+        <form>
+            <div class="row">
+                <div class="col-lg-7">
+                    <h3>Your Bookings</h3>
+                    <div class="booking_detail_bg_wrps">
+                        <app-cart *ngIf="carts && carts.length" [carts]="carts"></app-cart>
+                        <app-cart-loader *ngIf="cartLoading"></app-cart-loader>
+                    </div>
+                    <div class="card_details_wrppers">
+                        <div class="title_bar">
+                            <h3>Payment Card Details</h3>
+                            <span class="edit_btns" [hidden]="totalCard === 0">
+                                <a class="anchor-tag" (click)="addNewCard()">Add New</a>
+                            </span>
+                        </div>
+                        <div class="booking_detail_bg_wrps">
+                            <div id="accordion-card" class="card_accordion">
+                                <div class="card">
+                                    <app-card-list cardListChangeCount="{{cardListChangeCount}}"
+                                        (selectCreditCard)="selectCreditCard($event)"
+                                         cardToken={{cardToken}}>
+                                    </app-card-list>
+                                    <div id="new_card" class="new_card" [ngClass]="{'mt-0':add_new_card}"
+                                        [hidden]="!add_new_card && totalCard !== 0">
+                                        <div class="card-header">
+                                            <!-- <a class="card-link" data-toggle="collapse" href="#collapseOne"
+                                            aria-controls="collapseOne" aria-expanded="true">
+                                        </a> -->
+                                            <a class="card-link" data-toggle="collapse" href="#collapseOne"
+                                                aria-controls="collapseOne" aria-expanded="true">
+                                                <span class="heade_wrps">
+                                                    <img src="{{s3BucketUrl}}assets/images/card_gray.svg"
+                                                        alt="Card icon" />
+                                                    New
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <app-add-card (emitCardListChange)="getCardListChange($event)"
+                                                    totalCard="{{totalCard}}"
+                                                    (add_new_card)="closeNewCardPanel($event)">
+                                                </app-add-card>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="payment_container">
+                        <div class="payment_mode_wrapper">
+                            <app-payment-mode-loader *ngIf="cartLoading"></app-payment-mode-loader>
+                            <app-payment-mode *ngIf="carts && carts.length" laycreditpoints="{{laycreditpoints}}"
+                                (selectInstalmentMode)="selectInstalmentMode($event)"
+                                (getInstalmentData)="getInstalmentData($event)"
+                                (redeemableLayCredit)="redeemableLayCredit($event)">
+                            </app-payment-mode>
+                            <app-price-summary [priceSummary]="priceSummary" [cartPrices]="cartPrices">
+                            </app-price-summary>
+                        </div>
+                        <div class="cta_btn_wrapper">
+                            <!-- <button [disabled]="!isValidData" (click)="handleSubmit()">Continue to Payment</button> -->
+                            <button (click)="continueToCheckout()">Continue to Checkout</button>
+                            <button (click)="saveAndSearch()" class="trans_btn">
+                                <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="Search icon"
+                                    class="pink_search" />
+                                <!-- <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="Search icon"
+                                    class="white_search" /> -->
+                                <!-- Save and Add More Travel  -->
+                                Save & Add Flights or Hotels
+                            </button>
+
+
+                        </div>
+
+                    </div>
+                    <div class="error_wrapper">
+                        <div class="section_description" *ngIf="validationErrorMessage">
+                            <span class="sec_text">{{validationErrorMessage}}.</span>
+                            <a (click)="removeValidationError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                    alt="Close"></a>
+                        </div>
+                        <div class="section_description" *ngIf="isNotAvailableItinerary">
+                            <span class="sec_text">{{notAvailableError}}.</span>
+                            <a (click)="removeNotAvailableError()"><img
+                                    src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+                        </div>
+                        <div class="section_description" *ngIf="!isAllAlertClosed">
+                            <span class="sec_text">{{alertErrorMessage}}</span>
+                            <a (click)="removeAllAlertError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                    alt="Close"></a>
+                        </div>
+                        <div class="section_description" *ngIf="ismaxCartAdded">
+                            <span class="sec_text">10 item cart maximum, please checkout and start another cart if you require more than 10.</span>
+                            <a (click)="removeMaxCartAlertError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                    alt="Close"></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <app-empty-cart *ngIf="isCartEmpty"></app-empty-cart>
+</section>

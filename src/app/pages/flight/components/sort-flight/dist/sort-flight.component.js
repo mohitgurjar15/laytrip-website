@@ -23,6 +23,16 @@ var SortFlightComponent = /** @class */ (function () {
         this.loadJquery();
     };
     SortFlightComponent.prototype.loadJquery = function () {
+        //Start REsponsive Fliter js
+        $(".responsive_sort_btn").click(function () {
+            $("#responsive_sortby_show").slideDown("slow");
+            $("body").addClass('overflow-hidden');
+        });
+        $(".filter_close > a").click(function () {
+            $("#responsive_sortby_show").slideUp("slow");
+            $("body").removeClass('overflow-hidden');
+        });
+        //Close REsponsive Fliter js
         // Start filter Shortby js
         $(document).on('show', '#accordion', function (e) {
             $(e.target).prev('.accordion-heading').addClass('accordion-opened');
@@ -35,7 +45,7 @@ var SortFlightComponent = /** @class */ (function () {
         this.sortType = name;
         this.sortFlight.emit({ key: key, order: order });
     };
-    SortFlightComponent.prototype.resetFilter = function (key, order) {
+    SortFlightComponent.prototype.resetSorting = function (key, order) {
         this.sortType = 'lh_price';
         this.sortFlight.emit({ key: key, order: order });
     };

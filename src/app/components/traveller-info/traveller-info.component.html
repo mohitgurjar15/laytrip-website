@@ -1,22 +1,23 @@
 <div class="search_area">
-    <label>{{ label }}</label>
-    <div class="travel_info" id="add_traveler" [ngClass]="{'dr_travel_info':countryCode=='DR'}">
-        <span>{{ totalPerson }}</span> {{'traveler' | translate}}
-        <div class="drop_aerrow">
+    <!-- <label>{{ label }}</label> -->
+    <div class="travel_info add_traveler_" [id]="domid" (click)="toggleTraveller()" [ngClass]="{'dr_travel_info':countryCode=='DR'}">
+        <span>{{ totalPerson }}</span> <!-- {{'traveler' | translate}} --> {{ travelerLabel }}
+        <div class="drop_aerrow" >
         </div>
     </div>
-    <span>{{ class }}</span>
-    <div class="traveller_add_block" id="add_traveler_open" style="display: none;">
+    <div class="traveller_add_block add_traveler__open {{showTraveller}}" id="add_traveler_open"  [ngClass]="(showTraveller==true)?'panel_show':'panel_hide'">
         <ul>
             <li>
                 <div class="left">
                     <span>{{'adult' | translate}}</span> (12+ {{'years' | translate}})
                 </div>
                 <div class="right">
-                    <input type='button' value='-' class='qtyminus' field='quantity' [disabled]="adultValue === 1 && adultValue > 0" [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }" (click)="btnClickForChange({type: 'minus',label: 'adult', value: adultValue})"
-                    />
-                    <input type='text' name='quantity' value='{{ adultValue }}' class='qty' />
-                    <input type='button' value='+' class='qtyplus' field='quantity' (click)="btnClickForChange({type: 'plus',label: 'adult', value: adultValue})" />
+                    <!-- <input type='button' value='-' class='qtyminus' field='quantity' [disabled]="adultValue === 1 && adultValue > 0" [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }" (click)="btnClickForChange({type: 'minus',label: 'adult', value: adultValue})"
+                    />  -->
+                    <button class="qtyminus" [disabled]="adultValue === 1 && adultValue > 0" [ngClass]="{ 'un_active' : adultValue === 1 && adultValue > 0 }" (click)="btnClickForChange({type: 'minus',label: 'adult', value: adultValue})">-</button>
+                    <input type='text' name='quantity' value='{{ adultValue }}' class='qty' readonly/>
+                    <button class="qtyplus" (click)="btnClickForChange({type: 'plus',label: 'adult', value: adultValue})">+</button>
+                    <!-- <input type='button' value='+' class='qtyplus' field='quantity' (click)="btnClickForChange({type: 'plus',label: 'adult', value: adultValue})" /> -->
                 </div>
             </li>
             <li>
@@ -24,9 +25,11 @@
                     <span>{{'child' | translate}}</span> (2-12 {{'years' | translate}})
                 </div>
                 <div class="right">
-                    <input type='button' value='-' class='qtyminus' field='quantity' [ngClass]="{ 'disable_btn' : childValue === 0 }" [disabled]="childValue === 0" (click)="btnClickForChange({type: 'minus',label: 'child', value: childValue})" />
-                    <input type='text' name='quantity' value='{{ childValue }}' class='qty' />
-                    <input type='button' value='+' class='qtyplus' field='quantity' (click)="btnClickForChange({type: 'plus',label: 'child', value: childValue})" />
+                    <!-- <input type='button' value='-' class='qtyminus' field='quantity' [ngClass]="{ 'disable_btn' : childValue === 0 }" [disabled]="childValue === 0" (click)="btnClickForChange({type: 'minus',label: 'child', value: childValue})" /> -->
+                    <button class="qtyminus" [ngClass]="{ 'disable_btn' : childValue === 0 }" [disabled]="childValue === 0" (click)="btnClickForChange({type: 'minus',label: 'child', value: childValue})">-</button>
+                    <input readonly type='text' name='quantity' value='{{ childValue }}' class='qty' />
+                    <!-- <input type='button' value='+' class='qtyplus' field='quantity' (click)="btnClickForChange({type: 'plus',label: 'child', value: childValue})" /> -->
+                    <button class="qtyplus" (click)="btnClickForChange({type: 'plus',label: 'child', value: childValue})" >+</button>
                 </div>
             </li>
             <li>
@@ -34,21 +37,16 @@
                     <span>{{'infant' | translate}}</span> ({{'below' | translate}} 2 {{'years' | translate}})
                 </div>
                 <div class="right">
-                    <input type='button' value='-' class='qtyminus' field='quantity' [ngClass]="{ 'disable_btn' : infantValue === 0 }" [disabled]="infantValue === 0" (click)="btnClickForChange({type: 'minus',label: 'infant', value: infantValue})" />
-                    <input type='text' name='quantity' value='{{ infantValue }}' class='qty' />
-                    <input type='button' value='+' class='qtyplus' field='quantity' (click)="btnClickForChange({type: 'plus',label: 'infant', value: infantValue})" />
+                    <!-- <input type='button' value='-' class='qtyminus' field='quantity' [ngClass]="{ 'disable_btn' : infantValue === 0 }" [disabled]="infantValue === 0" (click)="btnClickForChange({type: 'minus',label: 'infant', value: infantValue})" /> -->
+                    <button class="qtyminus" field='quantity' [ngClass]="{ 'disable_btn' : infantValue === 0 }" [disabled]="infantValue === 0" (click)="btnClickForChange({type: 'minus',label: 'infant', value: infantValue})" >-</button>
+                    <input readonly type='text' name='quantity' value='{{ infantValue }}' class='qty' />
+                    <!-- <input type='button' value='+' class='qtyplus' field='quantity' (click)="btnClickForChange({type: 'plus',label: 'infant', value: infantValue})" /> -->
+                    <button class="qtyplus" (click)="btnClickForChange({type: 'plus',label: 'infant', value: infantValue})">+</button>
                 </div>
             </li>
-            <li class="traveler_error">
+            <li class="traveler_error" *ngIf="errorMessage.length>0">
                 {{errorMessage}}
             </li>
         </ul>
-        <div class="flight_cat">
-            <ul>
-                <li><a class="active_cat hover-link" [ngClass]="{ 'active_cat' : class === 'Economy' }" (click)="btnClickForChange({type: 'class', value: 'Economy'})">{{'economy_class' | translate}}</a></li>
-                <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'Business' }" (click)="btnClickForChange({type: 'class', value: 'Business'})">{{'business_class' | translate}}</a></li>
-                <li><a class="hover-link" [ngClass]="{ 'active_cat' : class === 'First' }" (click)="btnClickForChange({type: 'class', value: 'First'})">{{'first_class' | translate}}</a></li>
-            </ul>
-        </div>
     </div>
 </div>

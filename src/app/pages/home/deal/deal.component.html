@@ -2,153 +2,60 @@
 <section class="deal_sec">
     <div class="container">
         <div class="row">
-            <div class="section_title">
-                <h2>
-                    Deals <span>For You</span>
-                </h2>
-                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its
+            <div class="deal_sec_wrapper" *ngIf="list.length <= 0">
+                <div class="deal_section_row">
+                    <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
+                        <div class="image_about_text">
+                            <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="deal_section_row">
+                    <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
+                        <div class="image_about_text">
+                            <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="deal_listing">
-                <div class="deals_slid slider">
-                    <div>
-                        <div class="deal_block">
-                            <a href="javascript:void(0);">
-                                <img src="{{s3BucketUrl}}assets/images/deal-1.webp" alt="Deal Image" />
-                                <div class="info_top">
-                                    <div class="start_label">Starts from</div>
-                                    <div class="start_price"><span>$35</span>/week</div>
-                                </div>
-                                <div class="box_overlay"></div>
-                                <div class="deal_info">
-                                    <h3>Carnival Hotel</h3>
-                                    <p>Las Vegas, United States</p>
-                                    <div class="rating_price">
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price">
-                                        <div class="reg_price">
-                                            <span>$230</span> /night
-                                        </div>
-                                        <div class="offer_price">
-                                            <div class="price_label">Offer price</div>
-                                            <div class="price_day"><span>$210</span>/night</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+            <div class="deal_sec_wrapper" *ngIf="list.length > 0">
+                <div class="deal_section_row"  *ngFor="let item of list;">
+                    <div class="deal_sec_inner">
+                        <img [src]="item?.image" alt="Deal Image" />
+                        <div class="image_about_text">
+                            <button (click)="btnDealClick(item)">Find Deals to {{item?.city}}</button>
                         </div>
                     </div>
-                    <div>
-                        <div class="deal_block">
-                            <a href="javascript:void(0);">
-                                <img src="{{s3BucketUrl}}assets/images/deal-2.webp" alt="Deal Image" />
-                                <div class="info_top">
-                                    <div class="start_label">Starts from</div>
-                                    <div class="start_price"><span>$35</span>/week</div>
-                                </div>
-                                <div class="box_overlay"></div>
-                                <div class="deal_info">
-                                    <h3>Carnival Hotel</h3>
-                                    <p>Las Vegas, United States</p>
-                                    <div class="rating_price">
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price">
-                                        <div class="reg_price">
-                                            <span>$230</span> /night
-                                        </div>
-                                        <div class="offer_price">
-                                            <div class="price_label">Offer price</div>
-                                            <div class="price_day"><span>$210</span>/night</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</section>
+<!-- Close Deals section-->
+
+
+<!-- deal section skeleton loader starts -->
+<!-- <section class="deal_sec">
+    <div class="container">
+        <div class="row">
+            <div class="deal_sec_wrapper">
+                <div class="deal_section_row">
+                    <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
+                        <div class="image_about_text">
+                            <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
                         </div>
                     </div>
-                    <div>
-                        <div class="deal_block">
-                            <a href="javascript:void(0);">
-                                <img src="{{s3BucketUrl}}assets/images/deal-3.webp" alt="Deal Image" />
-                                <div class="info_top">
-                                    <div class="start_label">Starts from</div>
-                                    <div class="start_price"><span>$35</span>/week</div>
-                                </div>
-                                <div class="box_overlay"></div>
-                                <div class="deal_info">
-                                    <h3>Carnival Hotel</h3>
-                                    <p>Las Vegas, United States</p>
-                                    <div class="rating_price">
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price">
-                                        <div class="reg_price">
-                                            <span>$230</span> /night
-                                        </div>
-                                        <div class="offer_price">
-                                            <div class="price_label">Offer price</div>
-                                            <div class="price_day"><span>$210</span>/night</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="deal_block">
-                            <a href="javascript:void(0);">
-                                <img src="{{s3BucketUrl}}assets/images/deal-1.webp" alt="Deal Image" />
-                                <div class="info_top">
-                                    <div class="start_label">Starts from</div>
-                                    <div class="start_price"><span>$35</span>/week</div>
-                                </div>
-                                <div class="box_overlay"></div>
-                                <div class="deal_info">
-                                    <h3>Carnival Hotel</h3>
-                                    <p>Las Vegas, United States</p>
-                                    <div class="rating_price">
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="price">
-                                        <div class="reg_price">
-                                            <span>$230</span> /night
-                                        </div>
-                                        <div class="offer_price">
-                                            <div class="price_label">Offer price</div>
-                                            <div class="price_day"><span>$210</span>/night</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                </div>
+                <div class="deal_section_row">
+                    <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
+                        <div class="image_about_text">
+                            <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-<!-- Close Deals section-->
+</section> -->
+<!-- deal section skeleton loader ends -->

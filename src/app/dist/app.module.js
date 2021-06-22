@@ -19,8 +19,10 @@ var forms_1 = require("@angular/forms");
 var elements_module_1 = require("./elements/elements.module");
 var components_module_1 = require("./components/components.module");
 var animations_1 = require("@angular/platform-browser/animations");
-var state_module_1 = require("./state/state.module");
 var ngx_toastr_1 = require("ngx-toastr");
+var angularx_social_login_1 = require("angularx-social-login");
+var apple_provider_1 = require("./pages/user/social-login/apple.provider");
+var auth_guard_1 = require("./guard/auth.guard");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -37,7 +39,7 @@ var AppModule = /** @class */ (function () {
                 elements_module_1.ElementsModule,
                 forms_1.FormsModule,
                 components_module_1.ComponentsModule,
-                forms_1.ReactiveFormsModule,
+                forms_1.ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
                 core_2.TranslateModule.forRoot({
                     loader: {
                         provide: core_2.TranslateLoader,
@@ -46,10 +48,24 @@ var AppModule = /** @class */ (function () {
                     }
                 }),
                 animations_1.BrowserAnimationsModule,
-                state_module_1.StateModule,
-                ngx_toastr_1.ToastrModule.forRoot()
+                ngx_toastr_1.ToastrModule.forRoot(),
+                angularx_social_login_1.SocialLoginModule,
             ],
-            providers: [],
+            providers: [
+                {
+                    provide: 'SocialAuthServiceConfig',
+                    useValue: {
+                        autoLogin: false,
+                        providers: [
+                            {
+                                id: apple_provider_1.AppleLoginProvider.PROVIDER_ID,
+                                provider: new apple_provider_1.AppleLoginProvider('com.laytrip.laytrips')
+                            },
+                        ]
+                    }
+                },
+                auth_guard_1.AuthGuard
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

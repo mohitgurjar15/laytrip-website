@@ -1,61 +1,45 @@
 <div class="hotel_tab">
+  <h2 *ngIf="showCommingSoon">Coming soon</h2>
 
-  <h2 *ngIf="showCommingSoon">
-    Coming soon
-  </h2>
-
-  <form *ngIf="!showCommingSoon" [formGroup]="hotelSearchForm" novalidate autocomplete="off"
-    (ngSubmit)="searchHotels()">
+  <div class="tab_upper_content">
+    <div class="travellers">
+      <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)"></app-guest-info>
+    </div>
+  </div>
+  <form *ngIf="!showCommingSoon" [formGroup]="hotelSearchForm" autocomplete="off" (ngSubmit)="searchHotels()">
     <div class="hotels_search">
       <ul class="hotels-grid oneway">
         <li class="grid_box first">
           <div class="hotel_where">
-            <div class="search_area">
-              <app-search-hotel [form]="hotelSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'"
-                [label]="'DESTINATION'" [placeHolder]=defaultCity [defaultSelected]=fromDestinationInfo [tabIndex]=1
-                [defaultCity]=defaultCity (changeValue)="destinationChangedValue($event)">
-              </app-search-hotel>
+            <div class="search_area {{!validSearch && hotelSearchFormSubmitted}}"
+              [ngClass]="{'hotel-error': !validSearch && hotelSearchFormSubmitted}">
+              <label for="">Destination</label>
+              <app-hotel-suggestion [searchItem]="fromDestinationInfo.title" [defaultItem]="fromDestinationInfo" (selectedHotel)="selectedHotel($event)"
+                (validateSearch)="validateSearch($event)"></app-hotel-suggestion>
             </div>
           </div>
         </li>
         <li class="grid_box secound">
-          <div class="date_form"
-            [ngClass]="{'hotel-error': hotelSearchFormSubmitted && hotelSearchForm.controls.fromDestination.errors && hotelSearchForm.controls.fromDestination.errors.required==true}">
-            <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
-              <label>Check In-Check Out</label>
-              <p-calendar #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates"
-                [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
-                panelStyleClass="calender-responsive-view" [numberOfMonths]="2" (onSelect)=checkInDateUpdate($event) [readonlyInput]="true">
+          <div class="date_form">
+            <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+              <!-- <label>Check In-Check Out</label> -->
+              <p-calendar [appendTo]="body" #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range"
+                [(ngModel)]="rangeDates" [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
+                panelStyleClass="calender-responsive-view round_trip_calender laytrip-cal-view" [numberOfMonths]="2"
+                (onSelect)=selectCheckInDateUpdate($event) [readonlyInput]="true">
               </p-calendar>
-              <div class="prev-next">
-                <a (click)="dateChange('checkIn','previous')">Prev</a>
-                <a (click)="dateChange('checkIn','next')">Next</a>
-              </div>
             </div>
           </div>
-          <!-- <div class="date_to">
-            <div class="search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
-              <label>Check OUT</label>
-              <p-calendar inputId="basic" [(ngModel)]="checkOutDate" [ngModelOptions]="{standalone: true}"
-                checkOutMinDate [minDate]="checkOutMinDate" [readonlyInput]="true" (onSelect)=checkOutDateUpdate($event)
-                panelStyleClass="calender-responsive-view">
-              </p-calendar>
-              <div class="prev-next">
-                <a (click)="dateChange('checkOut','previous')">Prev</a>
-                <a (click)="dateChange('checkOut','next')">Next</a>
-              </div>
-            </div>
-          </div> -->
         </li>
         <li class="grid_box third">
-          <div class="travellers">
-            <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)"></app-guest-info>
+          <div class="serch_btn">
+            <button id="search_large_btn2">
+              <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="search_icon" class="norm_btn" />
+              <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="search_icon" class="hover_btn" />
+            </button>
           </div>
         </li>
       </ul>
-      <div class="serch_btn">
-        <button>Search Hotels <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow" /></button>
-      </div>
     </div>
   </form>
 </div>

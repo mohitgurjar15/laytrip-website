@@ -1,0 +1,80 @@
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.block_cms_page_main {
+  font-family: "Poppins", sans-serif;
+  &.page_trems {
+    padding: 0 0 70px;
+
+    @include tab-view {
+      padding: 0 0 20px;
+    }
+
+    .page_topbanner {
+      margin: 0 0 25px;
+      width: 100%;
+
+      img {
+        width: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+        -o-object-position: center;
+        object-position: center;
+
+        @include tab-view {
+          max-height: 52px;
+        }
+      }
+    }
+
+    .block_cms_cnt {
+      width: 100%;
+
+      .page_back_link {
+        margin-bottom: 30px;
+
+        @include tab-view {
+          margin-left: 15px;
+        }
+
+        a {
+          color: $active-tab-text;
+          font-size: 15px;
+          font-weight: 500;
+        }
+      }
+
+      .block_cmspage_comman {
+        max-width: 760px;
+        margin: 0 auto;
+        box-shadow: none;
+        padding: 0;
+
+        h3 {
+          color: $blue-text;
+          font-size: 34px;
+          font-weight: 500;
+          margin-bottom: 30px;
+
+          @include tab-view {
+            font-size: 24px;
+          }
+        }
+
+        p {
+          font-size: 18px;
+          line-height: 26px;
+          color: $mid_gray_bg;
+          margin: 0;
+
+          @include tab-view {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}

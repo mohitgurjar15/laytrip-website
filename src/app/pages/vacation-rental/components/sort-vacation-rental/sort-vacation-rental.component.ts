@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
@@ -8,15 +8,25 @@ declare var $: any;
   styleUrls: ['./sort-vacation-rental.component.scss']
 })
 export class SortVacationRentalComponent implements OnInit {
-  
+
+  @ViewChild("scrollable", { static: true, read: ElementRef } as any)
+  scrollbar: ElementRef;
+  contentWrapper: HTMLElement;
   @Output() sortRental = new EventEmitter<{ key: string, order: string }>();
   @Input() rentalDetails;
   sortType: string = 'lh_price';
   lowToHighToggle: boolean = false;
+  locationName;
+  
+  constructor(private route: ActivatedRoute) { 
 
-  constructor() { }
+  }
 
   ngOnInit() {
+     const info = JSON.parse(localStorage.getItem('_rental'));
+      if (info) {
+        this.locationName = info.city;
+    }
   	this.loadJquery();
   }
 
@@ -32,7 +42,6 @@ export class SortVacationRentalComponent implements OnInit {
   }
 
   sortRentalData(key, order, name) {
-  	console.log(key,order,name);
     this.sortType = name;
     this.sortRental.emit({ key, order });
   }

@@ -9,32 +9,49 @@ exports.__esModule = true;
 exports.AppComponent = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
+var environment_1 = require("../environments/environment");
+var uuid_1 = require("uuid");
+var jwt_helper_1 = require("./_helpers/jwt.helper");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(cookieService, genericService, swPush) {
+    function AppComponent(cookieService, genericService, checkOutService, route, router, userService) {
         this.cookieService = cookieService;
         this.genericService = genericService;
-        this.swPush = swPush;
+        this.checkOutService = checkOutService;
+        this.route = route;
+        this.router = router;
+        this.userService = userService;
         this.title = 'laytrip-website';
-        this.VAPID_PUBLIC_KEY = "BL6lEBuIL5QndQkV6pP-r1za33NJQ0u9fj2SWplSfk3ZmKj5i7Kcyq9C1simRWRxfgHXQHF_8zFDYO8jv6ljF68";
+        this.VAPID_PUBLIC_KEY = environment_1.environment.VAPID_PUBLIC_KEY;
         this.setUserOrigin();
         this.getUserLocationInfo();
     }
     AppComponent.prototype.ngOnInit = function () {
         var token = localStorage.getItem('_lay_sess');
         if (token) {
-            this.subscribeToNotifications();
+            // this.subscribeToNotifications()
         }
+        this.registerGuestUser();
+        this.setCountryBehaviour();
     };
-    AppComponent.prototype.subscribeToNotifications = function () {
-        var _this = this;
-        this.swPush.requestSubscription({
-            serverPublicKey: this.VAPID_PUBLIC_KEY
-        })
-            .then(function (sub) {
-            //console.log(JSON.stringify(sub),'here') 
-            return _this.genericService.addPushSubscriber(JSON.stringify(sub)).subscribe();
-        })["catch"](function (err) { return console.error("Could not subscribe to notifications", err); });
+    AppComponent.prototype.isValidateReferralId = function (referral_id) {
+        this.genericService.checkIsReferralUser(referral_id).subscribe(function (res) {
+            localStorage.setItem("referral_id", res.data.name);
+        }, function (err) {
+            localStorage.removeItem("referral_id");
+        });
     };
+    /* subscribeToNotifications() {
+  
+      this.swPush.requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY
+    })
+    .then(sub =>   this.genericService.addPushSubscriber(sub).subscribe()
+      )
+    .catch(
+      
+    );
+    
+    } */
     AppComponent.prototype.setUserOrigin = function () {
         var host = window.location.origin;
         if (host.includes("dr.")) {
@@ -70,7 +87,29 @@ var AppComponent = /** @class */ (function () {
             }
         }
     };
-    AppComponent.prototype.checkUserValidate = function () {
+    AppComponent.prototype.registerGuestUser = function () {
+        var user = jwt_helper_1.getLoginUserInfo();
+        if (!user.roleId || user.roleId == 7) {
+            var __gst = localStorage.getItem('__gst');
+            if (!__gst) {
+                var uuid = uuid_1.v4();
+                localStorage.setItem('__gst', uuid);
+                this.userService.registerGuestUser({ guest_id: uuid }).subscribe(function (result) {
+                    localStorage.setItem("_lay_sess", result.accessToken);
+                });
+            }
+            else {
+                this.userService.registerGuestUser({ guest_id: __gst }).subscribe(function (result) {
+                    localStorage.setItem("_lay_sess", result.accessToken);
+                });
+            }
+        }
+    };
+    AppComponent.prototype.setCountryBehaviour = function () {
+        var _this = this;
+        this.genericService.getCountry().subscribe(function (res) {
+            _this.checkOutService.setCountries(res);
+        });
     };
     AppComponent = __decorate([
         core_1.Component({

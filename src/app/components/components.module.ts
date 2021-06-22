@@ -13,7 +13,7 @@ import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { AddCardComponent } from './add-card/add-card.component';
 import { TravelerFormComponent } from './traveler-form/traveler-form.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-page-overlay-loader.component';
@@ -39,7 +39,26 @@ import { SearchHotelComponent } from './hotel-shared-components/search-hotel/sea
 import { TranslateModule } from '@ngx-translate/core';
 import { VacationSearchComponent } from './rental-shared-components/vacation-search/vacation-search.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-
+import { FlightClassComponent } from './flight-class/flight-class.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { CartItemComponent } from './cart-item/cart-item.component';
+import { TravelerListComponent } from './traveler-list/traveler-list.component';
+import { PriceSummaryComponent } from './price-summary/price-summary.component';
+import { PaymentModeLoaderComponent } from './payment-mode-loader/payment-mode-loader.component';
+import { CartComponent } from './cart/cart.component';
+import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-item/flight-cart-item.component';
+import { CartLoaderComponent } from './cart-loader/cart-loader.component';
+import { LaytripLoaderComponent } from './laytrip-loader/laytrip-loader.component';
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+import { EmptyCartComponent } from './empty-cart/empty-cart.component';
+import { RouterModule } from '@angular/router';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { DeleteCartitemConfirmationPopupComponent } from './delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { BookingCompletionErrorPopupComponent } from './booking-completion-error-popup/booking-completion-error-popup.component';
+import { AirportSuggestionComponent } from './airport-suggestion/airport-suggestion.component';
+import { HotelCartItemComponent } from '../pages/hotel/components/hotel-cart-item/hotel-cart-item.component';
+import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.component';
 
 
 @NgModule({
@@ -66,18 +85,33 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     RedeemLaycreditLoaderComponent,
     ToasterComponent,
     ShareSocialMediaComponent,
+    DeleteCartitemConfirmationPopupComponent,
 
     // HOTEL SHARED COMPONENT
     GuestInfoComponent,
     SearchHotelComponent,
     RentalInfoComponent,
-    VacationSearchComponent
+    VacationSearchComponent,
+    FlightClassComponent,
+    CartItemComponent,
+    TravelerListComponent,
+    PriceSummaryComponent,
+    PaymentModeLoaderComponent,
+    CartComponent,
+    FlightCartItemComponent,
+    CartLoaderComponent,
+    LaytripLoaderComponent,
+    EmptyCartComponent,
+    BookingCompletionErrorPopupComponent,
+    AirportSuggestionComponent,
+    HotelCartItemComponent,
+    HotelSuggestionComponent
   ],
   imports: [
     CommonModule,
     NgSelectModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgbModule,
     CountdownModule,
     Ng5SliderModule,
@@ -86,7 +120,12 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     LottieAnimationViewModule.forRoot(),
     TextMaskModule,
     TranslateModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule,
+    RouterModule,
+    BsDatepickerModule.forRoot(),
+    NgxMaskModule.forRoot(),
   ],
   exports: [
     SearchAirportComponent,
@@ -115,9 +154,31 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     RentalInfoComponent,
     TranslateModule,
     VacationSearchComponent,
-    NgScrollbarModule
+    NgScrollbarModule,
+    FlightClassComponent,
+    InfiniteScrollModule,
+    CartItemComponent,
+    TravelerListComponent,
+    PriceSummaryComponent,
+    PaymentModeLoaderComponent,
+    TravelerFormComponent,
+    CartComponent,
+    CartLoaderComponent,
+    LaytripLoaderComponent,
+    NgxSpinnerModule,
+    EmptyCartComponent,
+    LottieAnimationViewModule,
+    DeleteCartitemConfirmationPopupComponent,
+    BookingCompletionErrorPopupComponent,
+    AirportSuggestionComponent,
+    TextMaskModule,
+    HotelSuggestionComponent
   ],
-  providers: [DatePipe],
-
+  providers: [DatePipe, NgxSpinnerService, NgbActiveModal],
+  entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class ComponentsModule { }
+

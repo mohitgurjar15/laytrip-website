@@ -4,181 +4,1682 @@
 @import "../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+.section_description {
+    //transform: translate(-60%, -70%);
+    transform: translate(-100%, -50%);
+    max-width: 240px;
+    right: 0;
+    position: fixed;
+}
+
 agm-map {
     height: 100%;
     width: 100%;
 }
-.hotel_detail_sidebar{
-    .section_title{
-        color: $dark_text_blue_header;
-        font-size: 20px;
-        font-weight: 600;
-        text-align: left;
+
+.search_tab_listing_wrapper {
+    padding-top: 30px;
+    display: flex;
+    width: 100%;
+    margin-top: 0;
+    position: relative;
+
+    .container {
         padding: 0;
-    }
-    .display_wrapper{
-        background-color: $background-white;
-        border: 1px solid #E0E2E5;
 
-        .detail_display{
-            position: relative;
-            width: 100%;
-            &::after{
-                content: '';
-                background: transparent linear-gradient(270deg, #FC7E66 0%, #012178 100%) 0% 0% no-repeat padding-box;
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 93%;
-                width: 100%;
-                opacity: 0.8;
-            }
-            .display_text{
-                position: absolute;
-                z-index: 9;
-                left: 0;
-                top: 0;
-                text-align: center;
-                width: 100%;
-                height: 100%;
-                color: $text-white;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                h2{
-                    font-size: 24px;
-                    font-weight: 600;
-                }
-                span{
-                    padding-right: 10px;
-                    margin-left: 5px;
-                    position: relative;
-                    font-size: 14px;
-                    font-weight: 600;
-
-                    &::after{
-                        content: '';
-                        height: 20px;
-                        width: 1px;
-                        background-color: $background-white;
-                        position: absolute;
-                        right: 2px;
-                    }
-                    &:last-child{
-                        padding-right: 0;
-                        &::after{
-                            width: 0;
-                        }
-                    }
-                }
-            }
-            img{
-                max-width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-            }
-        }
-        .display_daterange_wrapper{
+        @include tab-view {
             padding: 15px;
-            .display_daterange{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                border: 1px solid $text-grey;
-                border-radius: 5px;
-
-                .datewrapper{
-                    border-right: 1px solid $text-grey;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    flex: 1;
-                    padding: 10px;
-
-                    label{
-                        color: $text-grey;
-                        font-size: 10px;
-                        margin-bottom: 3px;
-                    }
-                    span{
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        font-size: 14px;
-                        font-weight: 600;
-                        img{
-                            max-width: 20px;
-                        }
-                    }
-                    &:last-child{
-                        border-right: 0;
-                    }
-                }
-            }
         }
     }
-    .fare_detail_wrapper{
-        background-color: $background-white;
-        border: 1px solid #E0E2E5;
-        padding: 15px;
-        margin-top: 10px;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
 
-        .fare_section{
-            .fare_title{
-                color: $text-grey;
-                font-size: 14px;
-                padding: 5px 0;
-                display: block;
-            }
-            .fare_listing{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 5px 0;
-                span{
-                    color: $text-black;
-                    font-size: 14px;
-                    span{
-                        color: $text-grey;
-                    }
-                }
-                &:last-child{
-                    border-bottom: 2px dashed $border-blue-light;
-                    padding-bottom: 10px;
-                }
-            }
-            &:first-child{
-                .fare_title{
-                    padding-top: 0;
-                }
-            }
-            &:last-child{
-                .fare_listing{
-                    &:last-child{
-                        border-bottom: none;
-                        padding-bottom: 0;
-                    }
-                }
-            }
-        }
+    &::before {
+        content: '';
+        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/cms_page_banner.png);
+        background-position: top;
+        background-repeat: no-repeat;
+        height: 160px;
+        width: 100%;
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        -o-object-fit: cover;
+        object-fit: cover;
+        -o-object-position: center;
+        object-position: center;
     }
-    .fare_total_wrapper{
-        padding: 15px;
+
+    .search_tab_icons_wrps {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: $primary-color;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        span{
-            color: $text-white;
+        margin-bottom: 25px;
+
+        .tab_anch {
+            padding: 20px 30px 20px 30px;
+            background: $box-border-color;
+            border: none;
             font-size: 14px;
-            &:last-child{
-                font-weight: bold;
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 23px;
+            height: 69px;
+            width: 69px;
+
+            @include tab-view {
+                height: 51px;
+                width: 51px;
+                margin-right: 20px;
+                padding: 0;
+                background-color: transparent;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                img {
+                    max-width: 51px;
+                }
+            }
+
+            .active-icon {
+                display: none;
+            }
+
+            &.active {
+                //background: $primary-color;
+
+                .active-icon {
+                    display: block;
+                }
+
+                .default-icon {
+                    display: none;
+                }
             }
         }
+    }
+
+    .searchbar_box_common {
+        position: relative;
     }
 }
+
+.search_result {
+    &.hotels {
+        @include tab-view {
+            padding: 5px 0 10px;
+        }
+
+        .container {
+            @include tab-view {
+                padding: 15px;
+            }
+        }
+
+        .common_title_wrps {
+            font-size: 20px;
+            color: $text-black;
+            margin: 0 0 5px 0;
+            font-weight: 600;
+
+            @include tab-view {
+                font-size: 14px;
+            }
+        }
+
+        .title_name_wrapper {
+            display: flex;
+            margin-bottom: 15px;
+
+            h5 {
+                font-size: 26px;
+                color: $text-black;
+                margin: 0 0 5px 0;
+
+                @include tab-view {
+                    font-size: 20px;
+                }
+            }
+
+            .add_wrpper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: $text_grey_dark;
+                font-size: 16px;
+                line-height: 25px;
+
+                @include tab-view {
+                    font-size: 12px;
+                    line-height: 16px;
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .hotel_stars {
+                    min-width: 80px;
+
+                    img {
+                        margin-left: 3px;
+                    }
+
+                    @include tab-view {
+                        margin-top: 10px;
+                    }
+                }
+            }
+
+            .col_left {
+                display: flex;
+                flex-direction: column;
+                flex: 5;
+                padding-right: 20px;
+            }
+
+            .col_right {
+                display: flex;
+                flex: 2;
+                align-items: flex-end;
+                padding-left: 20px;
+                justify-content: flex-end;
+                max-width: 314px;
+
+                @include tab-view {
+                    align-items: flex-start;
+                    justify-content: flex-end;
+                }
+            }
+        }
+
+        .detail_box_wrpr {
+            display: flex;
+
+            @include tab-view {
+                flex-direction: column;
+            }
+
+            .left_box_wrps {
+                display: flex;
+                flex-direction: column;
+                flex: 5;
+                padding-right: 20px;
+
+
+                .main_slider_big {
+                    position: relative;
+
+                    .slider_dots {
+                        z-index: 9999;
+                        padding: 0;
+                        margin: 0;
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        bottom: 10px;
+                        justify-content: center;
+                        width: 100%;
+
+                        span {
+                            margin: 0 2px;
+                            width: 6px;
+                            height: 6px;
+                            border-radius: 50%;
+                            padding: 1px;
+                            background-color: rgba(255, 255, 255, 0.6);
+
+                            &::marker {
+                                display: none;
+                                color: transparent;
+                            }
+
+                            &.active {
+                                background-color: $background-white;
+                            }
+                        }
+                    }
+                }
+
+
+                @include tab-view {
+                    flex: auto;
+                    padding-right: 0;
+                    width: 100%;
+                }
+
+                .section_description {
+                    @include tab-view {
+                        transform: translate(-35%, -40%);
+                        bottom: 0;
+                        position: fixed;
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            .right_box_wrps {
+                display: flex;
+                flex-direction: column;
+                flex: 2;
+                padding-left: 20px;
+                max-width: 314px;
+
+                &.desk_right {
+                    @include ipad-view {
+                        display: none;
+                    }
+                }
+
+                &.mobile_right {
+                    display: none;
+
+                    @include ipad-view {
+                        display: flex;
+                    }
+                }
+
+                @include ipad-view {
+                    flex: auto;
+                    padding-left: 0;
+                    width: 100%;
+                    max-width: 100%;
+                }
+
+                .map_wrapper {
+                    height: 384px;
+                    width: 100%;
+
+                    @include ipad-view {
+                        height: 205px;
+                    }
+                }
+            }
+        }
+
+        .description_wrpper {
+            margin-top: 25px;
+
+            .upper_descrip {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 5px;
+
+                .common_title_wrps {
+                    @include tab-view {
+                        margin: 0;
+                    }
+                }
+
+                .cta_link {
+                    font-size: 15px;
+                    color: $text_light_yellow;
+                    margin-top: 10px;
+                    display: flex;
+
+                    @include tab-view {
+                        font-size: 12px;
+                        margin: 0;
+                    }
+                }
+            }
+
+            p {
+                color: $mid_gray_bg;
+                font-size: 18px;
+                line-height: 26px;
+
+                @include tab-view {
+                    font-size: 12px;
+                    line-height: 20px;
+                }
+            }
+        }
+
+        .room_list_wrp {
+            margin-top: 25px;
+
+            .search_block {
+                width: 100%;
+                margin-bottom: 15px;
+                border: 1px solid $box-border-color;
+                border-radius: 10px;
+
+                .listing_block {
+                    width: 100%;
+                    background: $background-white;
+                    border-radius: 10px;
+                    overflow: hidden;
+
+                    .listing_inner_box_wrppr {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
+
+                        .box_left {
+                            display: flex;
+                            flex: 7;
+
+                            @include tab-view {
+                                width: 80%;
+                            }
+
+                            .box_img {
+                                display: flex;
+                                flex: 2;
+
+                                .block_main {
+                                    @include tab-view {
+                                        width: 100%;
+                                    }
+                                }
+
+                            }
+
+                            .box_info {
+                                padding: 0 15px;
+                                display: flex;
+                                flex: 3;
+                                flex-direction: column;
+                                height: 100%;
+                                min-height: 170px;
+                                justify-content: space-between;
+                            }
+                        }
+
+                        .box_right {
+                            flex: 2;
+                            display: flex;
+                        }
+
+                        .desktop_box {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            width: 100%;
+
+                            @include tab-view {
+                                display: none;
+                            }
+                        }
+
+                        .mobile_box {
+                            display: none;
+
+                            @include tab-view {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100%;
+                            }
+
+                            .hotel_list_img_wrp {
+                                display: flex;
+                                min-width: 127px;
+                                /* height: 140px; */
+                                flex: 1;
+                                z-index: 9;
+                                position: relative;
+
+                                ngx-gallery {
+                                    @include tab-view {
+                                        min-height: 135px;
+                                    }
+                                }
+
+                                .slider_dots {
+                                    z-index: 9999;
+                                    padding: 0;
+                                    margin: 0;
+                                    position: absolute;
+                                    display: flex;
+                                    align-items: center;
+                                    bottom: 10px;
+                                    justify-content: center;
+                                    width: 100%;
+
+                                    span {
+                                        margin: 0 2px;
+                                        width: 6px;
+                                        height: 6px;
+                                        border-radius: 50%;
+                                        padding: 1px;
+                                        background-color: rgba(255, 255, 255, 0.6);
+
+                                        &::marker {
+                                            display: none;
+                                            color: transparent;
+                                        }
+
+                                        &.active {
+                                            background-color: $background-white;
+                                        }
+                                    }
+                                }
+
+                                .carousel {
+                                    &.slide {
+                                        height: 100%;
+                                    }
+                                }
+
+                                @include tab-view {
+                                    display: flex;
+                                    justify-content: center;
+                                }
+
+                                img {
+                                    max-width: 100%;
+                                    width: 100%;
+                                    height: 100%;
+                                    -o-object-fit: cover;
+                                    object-fit: cover;
+                                    -o-object-position: center;
+                                    object-position: center;
+                                    border-radius: 10px;
+                                    min-height: 170px;
+                                    min-width: 252px;
+                                    max-height: 170px;
+
+                                    @include tab-view {
+                                        // min-width: 127px;
+                                        // max-height: 100%;
+                                        min-width: 127px;
+                                        max-height: 120px;
+                                        min-height: 120px;
+                                    }
+
+                                    &.blank_image_box {
+                                        width: 252px;
+                                        border-radius: 10px;
+                                        height: 100%;
+                                        min-width: 252px;
+
+                                        @include tab-view {
+                                            width: 100%;
+                                            min-width: 100%;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .middle_part {
+                                display: flex;
+                                flex-direction: column;
+                                flex: 2;
+                                justify-content: space-between;
+                                width: 100%;
+
+                                .detail_info {
+                                    padding: 10px 5px 5px;
+                                    word-break: break-word;
+                                    line-height: 14px;
+
+                                    h4 {
+                                        font-size: 12px;
+                                        display: -moz-box;
+                                        /* Mozilla */
+                                        display: -webkit-box;
+                                        /* WebKit */
+                                        display: box;
+                                        /* As specified */
+                                        -webkit-line-clamp: 3;
+                                        -moz-box-orient: vertical;
+                                        /* Mozilla */
+                                        -webkit-box-orient: vertical;
+                                        /* WebKit */
+                                        box-orient: vertical;
+                                        /* As specified */
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+
+                                        @include tab-view {
+                                            margin: 0;
+                                        }
+                                    }
+
+                                    .adress_span {
+                                        font-size: 10px;
+                                        line-height: 13px;
+                                        color: $mid_gray_bg;
+                                        display: -moz-box;
+                                        /* Mozilla */
+                                        display: -webkit-box;
+                                        /* WebKit */
+                                        display: box;
+                                        /* As specified */
+                                        -webkit-line-clamp: 3;
+                                        -moz-box-orient: vertical;
+                                        /* Mozilla */
+                                        -webkit-box-orient: vertical;
+                                        /* WebKit */
+                                        box-orient: vertical;
+                                        /* As specified */
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                    }
+
+                                    .review_section_wrap {
+                                        img {
+                                            width: 12px;
+                                        }
+                                    }
+                                }
+
+                                .show_detail {
+
+                                    .hotel_anchor {
+                                        color: $active-tab-text;
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        width: 68px;
+                                        position: relative;
+                                        padding-right: 15px;
+                                        display: flex;
+                                        align-items: center;
+
+                                        @include tab-view {
+                                            font-size: 11px;
+                                            margin: 0 auto 10px;
+                                        }
+
+                                        &[aria-expanded="true"] {
+                                            color: $mid_gray_bg;
+
+                                            &:after {
+                                                content: "";
+                                                // position: absolute;
+                                                padding: 5px 9px;
+                                                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                                background-position: right;
+                                                background-repeat: no-repeat;
+                                                background-size: 11px;
+                                                transition: 0.3s;
+                                                right: 0;
+                                                top: 5px;
+                                                border: none;
+                                            }
+                                        }
+
+                                        &[aria-expanded="false"] {
+                                            color: $active-tab-text;
+
+                                            &:after {
+                                                // position: absolute;
+                                                padding: 5px 9px;
+                                                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                                                background-position: right;
+                                                background-repeat: no-repeat;
+                                                background-size: 11px;
+                                                content: "";
+                                                transition: 0.3s;
+                                                right: 0;
+                                                top: 5px;
+                                                border: none;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .thrd_part {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                flex: 1;
+
+                                .block_price {
+                                    padding: 0 5px;
+
+                                    .block_inn_pr {
+                                        .block {
+                                            @include tab-view {
+                                                margin-bottom: 5px;
+                                            }
+
+                                            &:last-child {
+                                                p {
+                                                    span {
+                                                        font-size: 16px;
+                                                    }
+                                                }
+                                            }
+
+                                            p {
+                                                flex-direction: column;
+                                                font-size: 7px;
+
+                                                @include tab-view {
+                                                    line-height: 14px;
+                                                }
+
+                                                &:first-child {
+                                                    margin: 0;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .book_btn {
+                                        line-height: 30px;
+                                        padding: 0px 21px;
+                                        font-size: 12px;
+                                        margin-bottom: 0;
+                                    }
+
+                                    p {
+                                        margin: 0;
+                                        color: $text-grey;
+                                        font-size: 7px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @include tab-view {
+                        height: auto;
+                    }
+
+                    .row {
+                        align-items: center;
+                    }
+
+                    .block_main {
+                        padding: 0 15px 0 0;
+                        margin-right: -15px;
+                        width: 100%;
+
+                        @include tab-view {
+                            padding: 0;
+                            border-right: 0;
+                            margin: 0;
+                        }
+
+                        .block_top {
+                            width: 100%;
+                            display: flex;
+                            flex-flow: column;
+
+                            .block_inner {
+                                display: flex;
+                                align-items: center;
+
+                                @include tab-view {
+                                    flex-wrap: wrap;
+                                }
+
+                                .block_im {
+                                    width: 100%;
+                                    display: flex;
+                                    flex-flow: column;
+                                    text-align: left;
+                                    height: 100%;
+
+                                    @include tab-view {
+                                        border-right: none;
+                                        padding: 0;
+                                    }
+
+                                    .hotel_list_img_wrp {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 170px;
+                                        z-index: 9;
+
+                                        @include tab-view {
+                                            display: flex;
+                                            justify-content: center;
+                                        }
+
+                                        .slider_dots {
+                                            z-index: 9999;
+                                            padding: 0;
+                                            margin: 0;
+                                            position: absolute;
+                                            display: flex;
+                                            align-items: center;
+                                            bottom: 10px;
+                                            justify-content: center;
+                                            width: 100%;
+
+                                            span {
+                                                margin: 0 2px;
+                                                width: 6px;
+                                                height: 6px;
+                                                border-radius: 50%;
+                                                padding: 1px;
+                                                background-color: rgba(255, 255, 255, 0.6);
+
+                                                &::marker {
+                                                    display: none;
+                                                    color: transparent;
+                                                }
+
+                                                &.active {
+                                                    background-color: $background-white;
+                                                }
+                                            }
+                                        }
+
+                                        .carousel {
+                                            &.slide {
+                                                height: 100%;
+                                            }
+                                        }
+
+                                        img {
+                                            max-width: 100%;
+                                            width: 100%;
+                                            height: 100%;
+                                            -o-object-fit: cover;
+                                            object-fit: cover;
+                                            -o-object-position: center;
+                                            object-position: center;
+                                            border-radius: 10px;
+                                            min-height: 170px;
+                                            min-width: 252px;
+                                            max-height: 170px;
+
+                                            @include tab-view {
+                                                min-width: 127px;
+                                                max-height: 100%;
+                                            }
+
+                                            &.blank_image_box {
+                                                width: 252px;
+                                                border-radius: 10px;
+                                                height: 100%;
+                                                min-width: 252px;
+
+                                                @include tab-view {
+                                                    width: 100%;
+                                                    min-width: 100%;
+                                                }
+                                            }
+                                        }
+
+                                        .fav_sections {
+                                            position: absolute;
+                                            top: 10px;
+                                            left: 10px;
+                                            height: 20px;
+                                            width: 20px;
+
+                                            a {
+                                                background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
+                                                background-repeat: no-repeat;
+                                                padding: 0px 12px;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .block_detail_top {
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    padding: 0;
+
+                                    @include tab-view {
+                                        padding: 0;
+                                        margin: 15px 0 0;
+                                    }
+
+                                    .detail_info {
+                                        font-size: 12px;
+                                        color: $text-grey;
+                                        width: 100%;
+
+                                        h4 {
+                                            font-size: 16px;
+                                            color: $text-black;
+                                            font-weight: 600;
+                                            margin: 10px 0 5px;
+                                            max-width: 270px;
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            display: inline-block;
+                                            width: 100%;
+
+                                            @media (max-width: 767px) {
+                                                font-size: 16px;
+                                            }
+                                        }
+
+                                        span {
+                                            margin: 0;
+
+                                            &.adress_span {
+                                                display: inline-block;
+                                                width: 100%;
+                                                color: $mid_gray_bg;
+                                            }
+                                        }
+
+                                        .review_section_wrap {
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            margin: 5px 0 10px;
+
+                                            .left_bar {
+                                                display: flex;
+
+                                                .rating_num {
+                                                    span {
+                                                        background-color: #1445f5;
+                                                        color: $text-white;
+                                                        font-size: 12px;
+                                                        width: 30px;
+                                                        height: 30px;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        justify-content: center;
+                                                        border-radius: 5px;
+                                                    }
+                                                }
+
+                                                .stars_text {
+                                                    //margin-left: 14px;
+
+                                                    .stars_rating {
+                                                        margin-top: 0px;
+                                                    }
+
+                                                    .review_num_text {
+                                                        a {
+                                                            font-size: 12px;
+                                                            color: $text-grey;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            .ammin_listing {
+                                                display: flex;
+                                                align-items: center;
+
+                                                .amminities_list {
+                                                    font-size: 12px;
+                                                    text-transform: uppercase;
+                                                    color: #5a5a5a;
+                                                    font-weight: 500;
+                                                    margin-left: 20px;
+
+                                                    img {
+                                                        margin-right: 8px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                &:last-child {
+                                    //margin: 20px 0 15px;
+                                    margin: 0;
+                                }
+                            }
+                        }
+
+                        .block_detail_btm {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            //border-top: 1px solid $box-border-color;
+                            padding-top: 10px;
+                            margin-bottom: 10px;
+
+                            @include tab-view {
+                                flex-wrap: wrap;
+                                justify-content: center;
+                                padding-bottom: 10px;
+                                //border-bottom: 1px solid $box-border-color;
+                                margin: 0 0 0px;
+                            }
+
+                            .show_detail {
+
+                                .hotel_anchor {
+                                    color: $active-tab-text;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    width: 68px;
+                                    position: relative;
+                                    padding-right: 15px;
+                                    display: flex;
+                                    align-items: center;
+
+                                    &[aria-expanded="true"] {
+                                        color: $mid_gray_bg;
+
+                                        &:after {
+                                            content: "";
+                                            position: absolute;
+                                            padding: 5px 9px;
+                                            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                            background-position: right;
+                                            background-repeat: no-repeat;
+                                            background-size: 11px;
+                                            transition: 0.3s;
+                                            right: 0;
+                                            top: 5px;
+                                            border: none;
+                                        }
+                                    }
+
+                                    &[aria-expanded="false"] {
+                                        color: $active-tab-text;
+
+                                        &:after {
+                                            position: absolute;
+                                            padding: 5px 9px;
+                                            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                                            background-position: right;
+                                            background-repeat: no-repeat;
+                                            background-size: 11px;
+                                            content: "";
+                                            transition: 0.3s;
+                                            right: 0;
+                                            top: 5px;
+                                            border: none;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .weekly_price_wrps {
+                                font-size: 12px;
+                                color: $text-grey;
+
+                                span {
+                                    color: $pink;
+                                    font-size: 20px;
+                                }
+                            }
+                        }
+                    }
+
+                    .block_price {
+                        width: 100%;
+                        text-align: center;
+                        padding: 0 15px;
+                        position: relative;
+                        z-index: 5;
+
+                        @include tab-view {
+                            border-left: none;
+                            padding: 15px 15px 0;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            color: $text-black;
+                            margin: 0;
+                        }
+
+                        h6 {
+                            font-size: 24px;
+                            font-weight: 600;
+                            color: $text_blue;
+                            margin: 15px 0;
+                        }
+
+                        .show_detail {
+                            width: auto;
+                            display: flex;
+                            justify-content: center;
+
+                            a {
+                                display: flex;
+                                align-items: center;
+                                font-size: 12px;
+                                font-weight: 500;
+                                color: $primary-color;
+                                position: relative;
+
+                                img {
+                                    margin-right: 5px;
+                                }
+
+                                &::after {
+                                    content: "";
+                                    position: absolute;
+                                    left: 105%;
+                                    top: 50%;
+                                    width: 0;
+                                    height: 0;
+                                    border-top: 3px solid transparent;
+                                    border-bottom: 3px solid transparent;
+                                    border-left: 3px solid $primary-color;
+                                    transform: translate(-50%, -50%);
+                                }
+                            }
+                        }
+
+                        .block_inn_pr {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-around;
+                            align-items: center;
+
+                            .block {
+                                margin: 0 0 15px;
+
+
+                                p {
+                                    width: 100%;
+                                    margin: 0;
+                                    font-size: 10px;
+                                    font-weight: 300;
+                                    color: $pink;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+
+                                    &:first-child {
+                                        margin: 0 0 5px;
+                                        color: $text-grey;
+                                    }
+
+                                    span {
+                                        font-size: 24px;
+                                        color: $pink;
+                                        font-weight: 600;
+                                    }
+                                }
+
+                                &:last-child {
+                                    p {
+                                        span {
+                                            font-size: 24px;
+                                            color: $pink;
+                                            font-weight: 600;
+                                            margin: 0 4px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+
+                        .book_btn {
+                            display: inline-block;
+                            line-height: 38px;
+                            padding: 0 25px;
+                            font-size: 16px;
+                            color: $text-white;
+                            font-weight: 500;
+                            border-radius: 20px;
+                            background: $primary-color;
+                            position: relative;
+                            z-index: 9;
+                            overflow: hidden;
+                            margin-bottom: 10px;
+                            border: 1px solid $primary-color;
+                        }
+
+                        .partial_payment_info {
+                            display: block;
+                            margin: 10px 0 0;
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: $primary-color;
+                        }
+
+                        &.block_pr {}
+                    }
+                }
+
+                .detail_info_show {
+                    width: 100%;
+                    background: $background-white;
+                    padding: 20px 15px;
+                    border-radius: 10px;
+
+                    @include tab-view {
+                        padding: 10px;
+                    }
+
+                    .card-body {
+                        border: 1px solid $box-border-color;
+                        border-radius: 10px;
+                        padding: 15px;
+                        //margin-top: 15px;
+
+                        @include tab-view {
+                            //border: none;
+                            margin: 0;
+                            padding: 10px;
+                        }
+
+                        .io_ru_wrps {
+                            display: flex;
+                            justify-content: space-between;
+
+                            @include tab-view {
+                                flex-direction: column;
+                            }
+
+                            .installment_wprs {
+                                flex: 2;
+                                padding-right: 50px;
+
+                                @include tab-view {
+                                    padding-right: 0px;
+                                }
+
+                                .type_lines {
+                                    border-bottom: 1px solid $box-border-color;
+                                    padding-bottom: 15px;
+                                    font-size: 12px;
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    margin-bottom: 15px;
+
+
+                                    @include tab-view {
+                                        flex-direction: column;
+                                        padding-bottom: 6px;
+                                        margin-bottom: 6px;
+                                        font-size: 10px;
+                                    }
+
+                                    &:nth-child(4) {
+                                        border: none;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+
+                                    .titles {
+                                        font-weight: 600;
+                                        color: $text-black;
+                                        margin-right: 0px;
+                                        flex: 2;
+                                        min-width: 140px;
+                                    }
+
+                                    .texts {
+                                        font-weight: 500;
+                                        color: $mid_gray_bg;
+                                        flex: 5;
+
+                                        @include tab-view {
+                                            font-weight: 400;
+                                        }
+                                    }
+
+                                }
+
+                                .notifi_text {
+                                    font-weight: 400;
+                                    color: $active-tab-text;
+                                    font-size: 10px;
+                                    margin-top: 15px;
+                                    display: flex;
+                                    justify-content: flex-start;
+
+                                    @include tab-view {
+                                        margin-top: 10px;
+                                    }
+
+                                    &.desk_notifi {
+                                        @include tab-view {
+                                            display: none;
+                                        }
+                                    }
+
+                                    &.mobile_notifi {
+                                        display: none;
+
+                                        @include tab-view {
+                                            display: block;
+                                            margin-bottom: 5px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .rules_wrps {
+                                flex: 1;
+                                max-width: 188px;
+                                display: flex;
+                                flex-direction: column;
+
+                                @include tab-view {
+                                    padding-top: 5px;
+                                    max-width: 100%;
+                                    flex-direction: row;
+                                }
+
+                                .heads {
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    color: $text-black;
+
+                                    @include tab-view {
+                                        min-width: 60px;
+                                        flex: 1;
+                                        font-size: 10px;
+                                    }
+
+                                    img {
+                                        max-width: 15px;
+                                        margin-right: 5px;
+                                    }
+                                }
+
+                                .texts_rules {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: $grayed_border;
+                                    margin-top: 15px;
+                                    line-height: 14px;
+                                    overflow-y: auto;
+                                    max-height: 150px;
+
+                                    a {
+                                        text-decoration: underline;
+                                    }
+
+                                    @include tab-view {
+                                        margin-top: 0;
+                                    }
+                                }
+                            }
+                        }
+
+                        .full_desk_not {
+                            @include tab-view {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .price_wrpper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            float: right;
+
+            small {
+                color: $mid_gray_bg;
+                font-size: 10px;
+
+                @include tab-view {
+                    font-size: 7px;
+                }
+
+                &.desk_small {
+                    @include tab-view {
+                        display: none;
+                    }
+                }
+
+                &.mobile_small {
+                    display: none;
+
+                    @include tab-view {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                    }
+                }
+            }
+
+            span {
+                color: $pink;
+                font-size: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                @include tab-view {
+                    flex-direction: column;
+                    font-size: 7px;
+                    color: $mid_gray_bg;
+                }
+
+                .big_font {
+                    font-size: 24px;
+                    margin: 0 3px;
+                    font-weight: 600;
+
+                    @include tab-view {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: $pink;
+                        line-height: 15px;
+                    }
+                }
+            }
+        }
+
+        .amenities_wrpper {
+            margin-top: 25px;
+
+            ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+
+                li {
+                    color: $text_grey_dark;
+                    font-size: 18px;
+                    margin-top: 3px;
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+
+                    &::before {
+                        content: '';
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/arrow_right_circle.svg);
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        padding: 0px 10px;
+                        margin-right: 5px;
+                        display: flex;
+                        height: 20px;
+                        width: 22px;
+                        margin-top: 2px;
+
+                        @include tab-view {
+                            height: 14px;
+                            width: 14px;
+                            margin-top: 3px;
+                            background-size: 14px;
+                        }
+                    }
+
+                    @include tab-view {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            .cta_link {
+                font-size: 15px;
+                color: $text_light_yellow;
+                margin-top: 10px;
+                display: flex;
+
+                @include tab-view {
+                    font-size: 12px;
+                }
+            }
+        }
+
+    }
+}
+
+
+// .hotel_detail_sidebar {
+//     .section_title {
+//         color: $dark_text_blue_header;
+//         font-size: 20px;
+//         font-weight: 600;
+//         text-align: left;
+//         padding: 0;
+//     }
+//     .display_wrapper {
+//         background-color: $background-white;
+//         border: 1px solid #e0e2e5;
+
+//         .detail_display {
+//             position: relative;
+//             width: 100%;
+//             &::after {
+//                 content: "";
+//                 background: transparent linear-gradient(270deg, #fc7e66 0%, #012178 100%) 0% 0% no-repeat padding-box;
+//                 position: absolute;
+//                 top: 0;
+//                 left: 0;
+//                 height: 93%;
+//                 width: 100%;
+//                 opacity: 0.8;
+//             }
+//             .display_text {
+//                 position: absolute;
+//                 z-index: 9;
+//                 left: 0;
+//                 top: 0;
+//                 text-align: center;
+//                 width: 100%;
+//                 height: 100%;
+//                 color: $text-white;
+//                 display: flex;
+//                 flex-direction: column;
+//                 justify-content: center;
+//                 h2 {
+//                     font-size: 24px;
+//                     font-weight: 600;
+//                 }
+//                 span {
+//                     padding-right: 10px;
+//                     margin-left: 5px;
+//                     position: relative;
+//                     font-size: 14px;
+//                     font-weight: 600;
+
+//                     &::after {
+//                         content: "";
+//                         height: 20px;
+//                         width: 1px;
+//                         background-color: $background-white;
+//                         position: absolute;
+//                         right: 2px;
+//                     }
+//                     &:last-child {
+//                         padding-right: 0;
+//                         &::after {
+//                             width: 0;
+//                         }
+//                     }
+//                 }
+//             }
+//             img {
+//                 max-width: 100%;
+//                 height: 100%;
+//                 object-fit: cover;
+//                 object-position: center;
+//             }
+//         }
+//         .display_daterange_wrapper {
+//             padding: 15px;
+//             .display_daterange {
+//                 display: flex;
+//                 justify-content: space-between;
+//                 align-items: center;
+//                 border: 1px solid $text-grey;
+//                 border-radius: 5px;
+
+//                 .datewrapper {
+//                     border-right: 1px solid $text-grey;
+//                     display: flex;
+//                     flex-direction: column;
+//                     justify-content: center;
+//                     flex: 1;
+//                     padding: 10px;
+
+//                     label {
+//                         color: $text-grey;
+//                         font-size: 10px;
+//                         margin-bottom: 3px;
+//                     }
+//                     span {
+//                         display: flex;
+//                         justify-content: space-between;
+//                         align-items: center;
+//                         font-size: 14px;
+//                         font-weight: 600;
+//                         img {
+//                             max-width: 20px;
+//                         }
+//                     }
+//                     &:last-child {
+//                         border-right: 0;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     .fare_detail_wrapper {
+//         background-color: $background-white;
+//         border: 1px solid #e0e2e5;
+//         padding: 15px;
+//         margin-top: 10px;
+//         border-top-left-radius: 5px;
+//         border-top-right-radius: 5px;
+
+//         .fare_section {
+//             .fare_title {
+//                 color: $text-grey;
+//                 font-size: 14px;
+//                 padding: 5px 0;
+//                 display: block;
+//             }
+//             .fare_listing {
+//                 display: flex;
+//                 justify-content: space-between;
+//                 align-items: center;
+//                 padding: 5px 0;
+//                 a {
+//                     color: $text-lightblue !important;
+//                     cursor: pointer;
+//                 }
+//                 span {
+//                     color: $text-black;
+//                     font-size: 14px;
+//                     span {
+//                         color: $text-grey;
+//                     }
+//                 }
+//                 &:last-child {
+//                     border-bottom: 2px dashed $border-blue-light;
+//                     padding-bottom: 10px;
+//                 }
+//             }
+//             &:first-child {
+//                 .fare_title {
+//                     padding-top: 0;
+//                 }
+//             }
+//             &:last-child {
+//                 .fare_listing {
+//                     &:last-child {
+//                         border-bottom: none;
+//                         padding-bottom: 0;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     .fare_total_wrapper {
+//         padding: 15px;
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         background-color: $primary-color;
+//         border-bottom-left-radius: 5px;
+//         border-bottom-right-radius: 5px;
+//         span {
+//             color: $text-white;
+//             font-size: 14px;
+//             &:last-child {
+//                 font-weight: bold;
+//             }
+//         }
+//     }
+// }
+// .hotel_detail_slider {
+//     .slider_main_contain {
+//         z-index: 10000;
+//     }
+// }
+
+// .hotel_detail_tabs {
+//     margin-bottom: 10px;
+// }
+
+// .result_listing {
+//     &.hotel_listings {
+//         .section_title {
+//             color: $text-grey;
+//             font-weight: 600;
+//             font-size: 16px;
+//             margin: 10px 0;
+//             text-align: left;
+//             padding: 0;
+//         }
+//         .search_block {
+//             .listing_block {
+//                 .block_detail {
+//                     .block_detail_top {
+//                         .detail_info {
+//                             .refen_tag {
+//                                 display: flex;
+//                                 margin-bottom: 10px;
+//                                 padding-bottom: 10px;
+//                                 border-bottom: 1px solid #e0e2e5;
+//                                 span {
+//                                     background-color: $bg-green;
+//                                     color: $text-white;
+//                                     border-radius: 5px;
+//                                     padding: 5px 15px;
+//                                     font-size: 10px;
+//                                 }
+//                                 .refundable {
+//                                     background-color: $bg-green;
+//                                 }
+//                                 .non-refundable {
+//                                     background-color: $error-color;
+//                                 }
+//                             }
+//                             .review_section_wrap {
+//                                 .right_bar {
+//                                     display: flex;
+//                                     flex-direction: column;
+//                                     width: 100%;
+//                                     .amminities_list {
+//                                         margin-left: 0;
+//                                         img {
+//                                             margin-right: 10px;
+//                                             max-width: 18px;
+//                                         }
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//                 .right_sectiond_price {
+//                     max-width: 175px;
+//                     @include tab-view {
+//                         max-width: 100%;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// .dataLoading {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: 100%;
+//     font-size: 25px;
+//     margin-bottom: 0.5rem;
+// }

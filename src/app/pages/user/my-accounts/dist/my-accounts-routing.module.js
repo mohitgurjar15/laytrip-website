@@ -22,10 +22,11 @@ var list_traveller_component_1 = require("./travellers/list-traveller.component"
 var plan_subscription_component_1 = require("./plan-subscription/plan-subscription.component");
 var view_history_component_1 = require("./payment-history/view-history/view-history.component");
 var my_wallet_add_points_component_1 = require("./my-wallet-add-points/my-wallet-add-points.component");
+var account_component_1 = require("./account/account.component");
 var routes = [
     {
         path: '',
-        component: profile_component_1.ProfileComponent
+        component: account_component_1.AccountComponent
     },
     {
         path: 'profile',

@@ -1,0 +1,82 @@
+@import '../../../../../cstm-variable';
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.form_row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media(max-width: 767px) {
+        flex-wrap: wrap;
+    }
+    &.common_row{
+        border-bottom: 1px solid $box-border-color;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+    label{
+        margin-bottom: 10px;
+        color: $mid_gray_bg;
+        font-size: 16px;
+        font-weight: 600;
+        flex: 1;
+        margin: 0;
+        @include tab-view {
+            font-size: 14px;
+        }
+    }
+    .text_field{
+        input{
+            &[type=checkbox]{
+                height: 0;
+                width: 0;
+                visibility: hidden;
+                display: none;
+            }
+            &:checked + label {
+                background: $background-white;
+                border: 3px solid $grayed_border;
+                &::after{
+                    left: calc(100% - 5px);
+                    transform: translateX(-100%);
+                    background: $background-white;
+                    border: 3px solid $grayed_border;
+                }
+            }
+        }
+        
+        label {
+            cursor: not-allowed;
+            text-indent: -9999px;
+            width: 40px;
+            height: 26px;
+            background: $background-white;
+            border: 3px solid $grayed_border;
+            display: flex;
+            border-radius: 25px;
+            position: relative;
+            &::after{
+                content: '';
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                width: 12px;
+                height: 12px;
+                background: $background-white;
+                border: 3px solid $grayed_border;
+                border-radius: 50%;
+                transition: 0.3s;
+            }
+        }
+    }
+    &.last_row{
+        @include tab-view{
+            margin-bottom: 0;
+        }
+    }
+} 

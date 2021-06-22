@@ -11,19 +11,29 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../environments/environment");
 var ContactUsComponent = /** @class */ (function () {
-    function ContactUsComponent(formBuilder, toastr, genericService, commonFunction, cookieService) {
+    function ContactUsComponent(formBuilder, toastr, genericService, commonFunction, cookieService, cd) {
         this.formBuilder = formBuilder;
         this.toastr = toastr;
         this.genericService = genericService;
         this.commonFunction = commonFunction;
         this.cookieService = cookieService;
+        this.cd = cd;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
-        this.countries_code = [];
+        this.messageLenght = 0;
+        this.submitted = false;
+        this.fileUploadErrorMessage = '';
+        this.errorMessage = '';
+        this.fileNotAllow = '';
+        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+        this.image = '';
+        this.pdfIcon = this.s3BucketUrl + 'assets/images/pdf.jpeg';
+        this.imageFileError = false;
+        this.attatchmentFiles = [];
+        this.files = [];
     }
     ContactUsComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
-        this.getCountry();
         var location = this.cookieService.get('__loc');
         try {
             this.location = JSON.parse(location);
@@ -31,52 +41,135 @@ var ContactUsComponent = /** @class */ (function () {
         catch (e) { }
         this.contactUsForm = this.formBuilder.group({
             name: ['', [forms_1.Validators.required]],
-            country_code: [''],
-            phone_no: [''],
+            file: [''],
             email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             message: ['', [forms_1.Validators.required]]
         });
     };
-    ContactUsComponent.prototype.getCountry = function () {
-        var _this = this;
-        this.genericService.getCountry().subscribe(function (data) {
-            _this.countries_code = data.map(function (country) {
-                return {
-                    id: country.id,
-                    name: country.phonecode + ' (' + country.iso2 + ')',
-                    code: country.phonecode,
-                    country_name: country.name + ' ' + country.phonecode,
-                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-                };
-            });
-            if (_this.location) {
-                var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
-                _this.contactUsForm.controls.country_code.setValue(countryCode.country_name);
-            }
-        });
-    };
-    ContactUsComponent.prototype.onSubmit = function (formValue) {
+    ContactUsComponent.prototype.onSubmit = function (data) {
         var _this = this;
         this.loading = true;
+        this.submitted = true;
         if (this.contactUsForm.invalid) {
+            this.submitted = true;
             Object.keys(this.contactUsForm.controls).forEach(function (key) {
                 _this.contactUsForm.get(key).markAsTouched();
             });
             this.loading = false;
             return;
         }
-        if (formValue.country_code) {
-            formValue.country_code = formValue.country_code.id;
+        var formdata = new FormData();
+        formdata.append("name", this.contactUsForm.value.name);
+        formdata.append("email", this.contactUsForm.value.email);
+        formdata.append("message", this.contactUsForm.value.message);
+        for (var i = 0; i < this.files.length; i++) {
+            formdata.append("file", this.files[i]);
         }
-        this.genericService.createEnquiry(formValue).subscribe(function (res) {
-            _this.loading = false;
-            _this.toastr.success(res.message, 'Success');
+        this.genericService.createEnquiry(formdata).subscribe(function (res) {
+            $('#contact_modal').modal('hide');
+            _this.loading = _this.submitted = false;
+            _this.contactUsForm.reset();
+            _this.attatchmentFiles = _this.files = [];
+            _this.errorMessage = '';
+            _this.toastr.show(res.message, '', {
+                toastClass: 'custom_toastr',
+                titleClass: 'custom_toastr_title',
+                messageClass: 'custom_toastr_message'
+            });
             _this.ngOnInit();
         }, (function (error) {
+            _this.submitted = false;
             _this.loading = false;
-            _this.toastr.error(error.message, 'Error');
+            _this.toastr.show(error.message, '', {
+                toastClass: 'custom_toastr',
+                titleClass: 'custom_toastr_title',
+                messageClass: 'custom_toastr_message'
+            });
         }));
     };
+    ContactUsComponent.prototype.setMessageLenght = function (value) {
+        this.messageLenght = value.toString().length;
+    };
+    ContactUsComponent.prototype.closeModal = function () {
+        var _this = this;
+        this.messageLenght = 0;
+        this.submitted = false;
+        Object.keys(this.contactUsForm.controls).forEach(function (key) {
+            _this.contactUsForm.get(key).markAsUntouched();
+        });
+        this.contactUsForm.reset();
+        this.attatchmentFiles = [];
+        this.errorMessage = '';
+    };
+    ContactUsComponent.prototype.documentFileChange = function (event) {
+        var _this = this;
+        console.log(event);
+        this.errorMessage = '';
+        if (this.attatchmentFiles.length >= 5) {
+            $("#contact_modal").scrollTop(100);
+            this.errorMessage = 'Maximum upload of 5 files';
+            return;
+        }
+        if (event.target.files && event.target.files) {
+            var reader_1 = new FileReader();
+            this.fileUploadErrorMessage = '';
+            this.imageFileError = false;
+            var fileList_1 = event.target.files;
+            var fileSize = Math.floor(fileList_1[0].size / 1000);
+            this.image = '';
+            if (fileList_1[0] && (fileList_1[0].type == 'image/jpg' ||
+                fileList_1[0].type == 'image/jpeg' ||
+                fileList_1[0].type == 'image/png' ||
+                fileList_1[0].type == 'application/pdf')) {
+                if (fileSize > 10000) {
+                    this.imageFileError = true;
+                    this.fileUploadErrorMessage = 'Maximum file size is 10MB.';
+                }
+                var sameFile = this.attatchmentFiles.filter(function (file) {
+                    if (file.fullFileName == fileList_1[0].name) {
+                        return true;
+                    }
+                });
+                if (sameFile.length > 0) {
+                    this.errorMessage = 'File already uploaded, Please try with different.';
+                    return;
+                }
+                reader_1.readAsDataURL(event.target.files[0]);
+                reader_1.onload = function (_event) {
+                    _this.defaultImage = '';
+                    _this.image = fileList_1[0].type == 'application/pdf' ? _this.pdfIcon : reader_1.result;
+                    _this.fileName = fileList_1[0].name;
+                    _this.cd.markForCheck();
+                    var attatchData = {
+                        image: _this.image ? _this.image : _this.defaultImage,
+                        errorMsg: _this.imageFileError ? _this.fileUploadErrorMessage : '',
+                        fullFileName: _this.fileName,
+                        fileName: _this.fileName.split(/\.(?=[^\.]+$)/)[0],
+                        extension: _this.fileName.split(/\.(?=[^\.]+$)/)[1],
+                        is_error: _this.imageFileError
+                    };
+                    _this.attatchmentFiles.push(attatchData);
+                };
+                this.files.push(event.target.files[0]);
+            }
+            else {
+                this.imageFileError = true;
+                this.errorMessage = 'Only .jpg, .jpeg, .png and .pdf files are allowed.';
+                // this.attatchmentFiles.push(attatchData);
+            }
+        }
+        else {
+            this.errorMessage = 'Something went wrong, Please try again.';
+        }
+    };
+    ContactUsComponent.prototype.removeAttatchedFile = function (i, filename) {
+        this.attatchmentFiles.splice(i, 1);
+        this.files = this.files.filter(function (obj) { return obj.name !== filename; });
+        this.errorMessage = '';
+    };
+    __decorate([
+        core_1.ViewChild('fileInput', { static: false })
+    ], ContactUsComponent.prototype, "fileInput");
     ContactUsComponent = __decorate([
         core_1.Component({
             selector: 'app-contact-us',

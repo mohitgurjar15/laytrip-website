@@ -1,15 +1,16 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
-import { SocialAuthService, SocialUser } from 'angularx-social-login';
+import { SocialAuthService } from 'angularx-social-login';
 import { AppleLoginProvider } from './apple.provider';
 declare var $: any;
 import { getUserDetails } from '../../../_helpers/jwt.helper';
-import { ToastrService } from 'ngx-toastr';
+import { CommonFunction } from '../../../_helpers/common-function';
+declare const gapi: any;
 
 @Component({
   selector: 'app-social-login',
@@ -25,6 +26,9 @@ export class SocialLoginComponent implements OnInit {
   loading: boolean = false;
   google_loading: boolean = false;
   apple_loading: boolean = false;
+  @ViewChild('loginRef', { static: true }) loginElement: ElementRef;
+  auth2: any;
+  guestUserId: string = '';
 
   constructor(
     private userService: UserService,
@@ -32,106 +36,148 @@ export class SocialLoginComponent implements OnInit {
     public modalService: NgbModal,
     public location: Location,
     private authService: SocialAuthService,
-    private toastr: ToastrService
+    private commonFunction: CommonFunction,
+    private route: ActivatedRoute,
+  ) {
 
-  ) { }
-
-  @ViewChild('loginRef', { static: true }) loginElement: ElementRef;
-  auth2: any;
+  }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(queryParams => {
+      if (typeof queryParams['utm_source'] != 'undefined' && queryParams['utm_source']) {
+        localStorage.setItem("referral_id", this.route.snapshot.queryParams['utm_source'])
+      } else {
+        localStorage.removeItem("referral_id")
+      }
+      // do something with the query params
+    });
     this.loadGoogleSdk();
+    this.guestUserId = localStorage.getItem('__gst') || '';
+
     this.loadFacebookSdk();
     // APPLE LOGIN RESPONSE 
     this.authService.authState.subscribe((userInfo: any) => {
       if (userInfo) {
         let objApple = getUserDetails(userInfo.authorization.id_token);
-        let jsonData = {
-          "account_type": 1, 
-          "name": '',
+        console.log(objApple, userInfo)
+
+        let jsonData :any = {
+          "account_type": 3,
+          "name": "",
           "email": objApple.email,
           "social_account_id": userInfo.authorization.code,
           "device_type": 1,
           "device_model": "RNE-L22",
           "device_token": "123abc#$%456",
           "app_version": "1.0",
-          "os_version": "7.0"
+          "os_version": "7.0"        
         };
+        if(this.route.snapshot.queryParams['utm_source']){
+          jsonData.referral_id = this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''; 
+        }
         this.userService.socialLogin(jsonData).subscribe((data: any) => {
           if (data.user_details) {
+
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
             document.getElementById('navbarNav').click();
             this.router.url;
+
+            if (this.guestUserId) {
+              this.userService.mapGuestUser(this.guestUserId).subscribe((res: any) => {
+                localStorage.setItem('$cartOver', res.cartOverLimit);
+                let urlData = this.commonFunction.decodeUrl(this.router.url)
+                this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                  this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+                });
+              })
+            }
+            else {
+              let urlData = this.commonFunction.decodeUrl(this.router.url)
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+              });
+            }
+
+
           }
         }, (error: HttpErrorResponse) => {
-         
           this.socialError.emit(error.message);
-          this.toastr.error(error.message, 'SignIn Error');
+          // this.toastr.error(error.message, 'SignIn Error');
         });
       }
     });
   }
 
-  loadGoogleSdk() {
-    window['googleSDKLoaded'] = () => {
-      window['gapi'].load('auth2', () => {
-        this.auth2 = window['gapi'].auth2.init({
-          client_id: environment.google_client_id,
-          cookiepolicy: 'single_host_origin',
-          scope: 'profile email'
-        });
-        this.googleLogin();
-      });
-    }
 
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { return; }
-      js = d.createElement(s); js.id = id;
-      js.src = "https://apis.google.com/js/platform.js?onload=googleSDKLoaded";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'google-jssdk'));
-
-  }
-
-
-  googleLogin() {
-    this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
+  public googleLogin(element) {
+    // GOOGLE LOGIN
+    this.auth2.attachClickHandler(element, {},
       (googleUser) => {
-        this.google_loading = true;
-
+        this.socialError.emit('');
         let profile = googleUser.getBasicProfile();
-
-        // YOUR CODE HERE
+        var name = profile.getName().split(" ");
         let jsonData = {
-          "account_type": 1,
-          "name": profile.getName(),
+          "account_type": 2,
+          "name": name[0] ? name[0] : name,
           "email": profile.getEmail(),
           "social_account_id": profile.getId(),
           "device_type": 1,
           "device_model": "RNE-L22",
           "device_token": "123abc#$%456",
           "app_version": "1.0",
-          "os_version": "7.0"
+          "os_version": "7.0",
+          "referral_id": this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
         };
         this.userService.socialLogin(jsonData).subscribe((data: any) => {
           if (data.user_details) {
             this.google_loading = false;
             localStorage.setItem("_lay_sess", data.user_details.access_token);
             $('#sign_in_modal').modal('hide');
+            $('#sign_up_modal').modal('hide');
             this.router.url;
+            if (this.guestUserId) {
+              this.userService.mapGuestUser(this.guestUserId).subscribe(res => {
+                let urlData = this.commonFunction.decodeUrl(this.router.url)
+                this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                  this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+                });
+              })
+            }
+            else {
+              let urlData = this.commonFunction.decodeUrl(this.router.url)
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+              });
+            }
+
             document.getElementById('navbarNav').click();
           }
         }, (error: HttpErrorResponse) => {
           this.google_loading = false;
           this.socialError.emit(error.message);
         });
+
       }, (error) => {
+        console.log(error)
+        this.socialError.emit('');
         this.google_loading = false;
-        this.socialError.emit('Authentication failed.');
-        // this.toastr.error("Something went wrong!", 'SignIn Error');
       });
+  }
+
+  ngAfterViewInit() {
+    this.loadGoogleSdk();
+  }
+
+  loadGoogleSdk() {
+    gapi.load('auth2', () => {
+      this.auth2 = gapi.auth2.init({
+        client_id: environment.google_client_id,
+        cookiepolicy: 'single_host_origin',
+        scope: 'profile email'
+      });
+      this.googleLogin(this.loginElement.nativeElement);
+    });
   }
 
   loadFacebookSdk() {
@@ -159,23 +205,24 @@ export class SocialLoginComponent implements OnInit {
   }
 
   fbLogin() {
+    this.socialError.emit('');
     this.loading = true;
     window['FB'].login((response) => {
       if (response.authResponse) {
-
         window['FB'].api('/me', {
           fields: 'last_name, first_name, email'
         }, (userInfo) => {
           let jsonData = {
             "account_type": 1,
-            "name": userInfo.first_name + ' ' + userInfo.last_name,
+            "name": userInfo.first_name,
             "email": userInfo.email ? userInfo.email : '',
             "social_account_id": userInfo.id,
             "device_type": 1,
             "device_model": "Angular web",
             "device_token": "123abc#$%456",
             "app_version": "1.0",
-            "os_version": "7.0"
+            "os_version": "7.0",
+            "referral_id": this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
           };
 
           this.userService.socialLogin(jsonData).subscribe((data: any) => {
@@ -183,25 +230,43 @@ export class SocialLoginComponent implements OnInit {
             if (data.user_details) {
               localStorage.setItem("_lay_sess", data.user_details.access_token);
               $('#sign_in_modal').modal('hide');
+              $('#sign_up_modal').modal('hide');
               this.test = true;
               document.getElementById('navbarNav').click();
               this.router.url;
+
+              if (this.guestUserId) {
+                this.userService.mapGuestUser(this.guestUserId).subscribe(res => {
+                  let urlData = this.commonFunction.decodeUrl(this.router.url)
+                  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                    this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+                  });
+                })
+              }
+              else {
+                let urlData = this.commonFunction.decodeUrl(this.router.url)
+                this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                  this.router.navigate([`${urlData.url}`], { queryParams: urlData.params })
+                });
+              }
             }
           }, (error: HttpErrorResponse) => {
             this.loading = false;
             this.socialError.emit(error.message);
-            this.toastr.error(error.message, 'SignIn Error');
+            // this.toastr.error(error.message, 'SignIn Error');
           });
         });
       } else {
+        this.socialError.emit('');
         this.loading = false;
-        this.socialError.emit('Authentication failed.');
         // this.toastr.error("Something went wrong!", 'SignIn Error');
       }
     }, { scope: 'email' });
   }
 
   loginWithApple(): void {
+    this.socialError.emit('');
     this.authService.signIn(AppleLoginProvider.PROVIDER_ID);
   }
+
 }

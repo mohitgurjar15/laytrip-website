@@ -1,0 +1,111 @@
+@import '../../../cstm-variable';
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.cartempty_main_wrapper{
+    background-color: $background-white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 0 0;
+    @include tab-view{
+        padding: 15px 0;
+    }
+    .inner_wrppar{
+        max-width: 472px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        .cart_img_wrpper{
+            img{
+                max-width: 80px;
+            }
+            margin-bottom: 10px;
+        }
+        .cart_msg{
+            color: $blue-text;
+            font-size: 32px;
+            margin: 0 0 10px;
+            @include tab-view{
+                font-size: 18px;
+            }
+        }
+        .cta_btn_wrps{
+            padding: 10px;
+            width: 100%;
+            button{
+                max-width: 472px;
+                width: 100%;
+                height: 40px;
+                padding: 10px 25px;
+                background: $hotel-secondary-color;
+                border-radius: 25px;
+                border: 1px solid $hotel-secondary-color;
+                font-size: 14px;
+                color: $text-white;
+                transition: 0.3s;
+                position: relative;
+                z-index: 9;
+                overflow: hidden;
+                white-space: normal;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    border: 1px solid $hotel-secondary-color;
+                    color: $text-white;
+                    background:  $hotel-secondary-color;
+                }
+                &:focus{
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+            
+        }
+        .footer_logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 5px;
+            a{
+                img{
+                    height: 23px;
+                }
+            }
+        }
+    }
+}
+.block_contact_us_main{
+    padding: 0;
+}
+.modal-dialog {
+  max-width: 514px;
+  width: 96%;
+  
+  .modal-content {
+      border-radius: 10px;
+    .modal_title {
+        .close {
+          position: absolute;
+          right: 20px;
+          top: 16px;
+          z-index: 9;
+          cursor: pointer;
+          img{
+              max-width: 12px;
+          }
+        }
+      }
+    .cart_modal_wrp {
+      padding: 32px 20px;
+    }
+  }
+}

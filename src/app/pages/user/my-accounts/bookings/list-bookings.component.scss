@@ -1,13 +1,820 @@
+@import "../../../../../_cstm-variable.scss";
+@import "../../../../../_cstm-components.scss";
+@import "../../../../../_hotel.scss";
+@import "../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
 .account_part {
-	.account_cnt_main.booking_main {
-		.block_filter_payment {
-			.filter_form {
-				.form_row {
-					.form_field.booking-id {
-						width: 100%;
-					}
-				}
-			}
-		}
-	}
+    .account_cnt_main.booking_main {
+        .block_filter_payment {
+            .filter_form {
+                .form_row {
+                    .form_field.booking-id {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+::ng-deep .calender-price-view {
+    //width: 340px;
+    min-width: 340px !important;
+
+    .p-datepicker-calendar-container {
+        .p-datepicker-calendar {
+            tbody {
+                tr {
+                    td {
+                        .p-ripple {
+                            display: flex;
+                            flex-flow: column;
+                            width: auto;
+                            height: auto;
+                            border-radius: 0;
+                            background: transparent;
+
+                            &:hover {
+                                background: transparent;
+
+                                .c_date {
+                                    background: #F826C1;
+                                }
+                            }
+
+                            &.p-highlight {
+                                background: transparent !important;
+
+                                .c_date {
+                                    background: #F826C1;
+                                }
+                            }
+                        }
+
+                        .c_date {
+                            display: block;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            background: #2196F3;
+                            padding: 5px;
+                            text-align: center;
+                            line-height: 20px;
+                            color: #fff !important;
+                        }
+
+                        .calender_price {
+                            display: block;
+                            margin-top: 3px;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+.mob_view {
+    display: none;
+
+    @include tab-view {
+        display: flex;
+    }
+}
+
+.l_view {
+    display: flex;
+    width: 100%;
+
+    @include tab-view {
+        display: none;
+    }
+}
+
+.head_bookin {
+    flex-direction: column;
+    width: 100%;
+
+    .booking_bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.card_mob_head {
+    width: 100%;
+
+    .card_head_container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .header_bar {
+            display: flex;
+        }
+
+        .header_lower_wrper {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-top: 5px;
+
+            .payment_bar_wrps {
+                width: 100%;
+                max-width: 300px;
+                margin: 8px 6px 0 6px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: flex-start;
+
+                .progress {
+                    height: 5px;
+                    border-radius: 25px;
+                    width: 100%;
+
+                    .progress-bar {
+                        background-color: $pink;
+                    }
+                }
+
+                .payment_status {
+                    font-size: 12px;
+                    color: $pink;
+                    margin-top: 10px;
+                    align-items: center;
+                    display: flex;
+                    justify-content: center;
+
+                    @include tab-view {
+                        font-size: 10px;
+                    }
+
+                    img {
+                        max-width: 15px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+
+            .pricer_wrp {
+                .pink_price {
+                    font-size: 16px;
+                    color: $pink;
+                    font-weight: 600;
+                }
+
+
+                .status {
+                    color: $mid_gray_bg;
+                    font-size: 12px;
+                    font-weight: 400;
+                    text-align: left;
+                }
+
+                &:last-child {
+                    .status {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.booking_whole_wrapper {
+    background-color: $background-white;
+    position: relative;
+    min-height: calc(100vh - 110px);
+    padding-top: 50px;
+
+    @include tab-view {
+        padding-top: 25px;
+    }
+
+    .booking_inner_container {
+        max-width: 680px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+
+        .search_wrapper {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            input {
+                border-radius: 18px;
+                border: 1px solid $box-border-color;
+                font-size: 14px;
+                color: $grayed_border;
+                font-weight: 400;
+                height: 35px;
+                padding-left: 40px;
+                background-image: url('https://d2q1prebf1m2s9.cloudfront.net/assets/images/search_gray.svg');
+                background-position: 10px 8px;
+                background-size: 17px;
+                background-repeat: no-repeat;
+
+                @include tab-view {
+                    width: 100%;
+                }
+            }
+        }
+
+        h3 {
+            color: $blue-text;
+            font-size: 34px;
+            margin-bottom: 5px;
+            margin: 25px 0 15px;
+
+            @include tab-view {
+                font-size: 24px;
+            }
+        }
+
+        .no_data_found {
+            font-size: 12px;
+            margin: 15px 0 35px;
+            padding: 0;
+            color: $grayed_border;
+        }
+
+        .accordion_up_wrapper {
+            margin-bottom: 15px;
+
+            #accordion_upcoming,
+            #accordion_completed {
+                .card {
+                    border-radius: 10px;
+                    border: 1px solid $box-border-color;
+                    margin-top: 15px;
+
+                    @include tab-view {
+                        margin-top: 10px;
+                    }
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+
+                    .card-header {
+                        margin: 0;
+                        background-color: $background-white;
+                        border-radius: 10px;
+                        padding: 15px;
+                        border-bottom: none;
+
+                        a {
+                            font-weight: 600;
+                            color: $text-black;
+                            font-size: 16px;
+                            border: none;
+                            background-color: transparent;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-start;
+                            width: 100%;
+                            padding: 0;
+
+                            &[aria-expanded="true"] {
+                                &:after {
+                                    content: "";
+                                    position: relative;
+                                    padding: 5px 9px;
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 14px;
+                                    transition: 0.3s;
+                                    right: 0;
+                                    border: none;
+
+                                    @include tab-view {
+                                        top: 20px;
+                                        right: 10px;
+                                        position: absolute;
+                                    }
+                                }
+                            }
+
+                            &[aria-expanded="false"] {
+                                &:after {
+                                    position: relative;
+                                    padding: 5px 9px;
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 14px;
+                                    content: "";
+                                    transition: 0.3s;
+                                    right: 0;
+                                    border: none;
+
+                                    @include tab-view {
+                                        top: 20px;
+                                        right: 10px;
+                                        position: absolute;
+                                    }
+                                }
+                            }
+
+                            .header_image {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                font-size: 27px;
+                                position: relative;
+
+                                .title_image {
+                                    padding: 5px;
+                                    height: 39px;
+                                    width: 39px;
+                                    margin-right: 15px;
+                                    position: relative;
+                                    background-color: $grayed_border;
+                                    border-radius: 50%;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+
+                                    img {
+                                        width: auto;
+                                    }
+
+                                    .cart_count {
+                                        position: absolute;
+                                        color: $background-white;
+                                        background-color: $pink;
+                                        border-radius: 50%;
+                                        font-size: 10px;
+                                        font-weight: 100;
+                                        top: 0px;
+                                        right: -8px;
+                                        height: 16px;
+                                        width: 16px;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                    }
+
+                                    @include tab-view {
+                                        height: 37px;
+                                        width: 37px;
+                                    }
+                                }
+
+                                .flight_routing_imgs {
+                                    display: flex;
+                                    flex-direction: column;
+                                    padding: 0 20px;
+
+                                    @include tab-view {
+                                        max-width: 110px;
+                                    }
+                                }
+
+                            }
+
+                            .headerin_wrapper {
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: center;
+                                padding-right: 20px;
+                                flex: 1;
+
+                                @include tab-view {
+                                    flex-direction: column;
+                                    justify-content: flex-start;
+                                    align-items: flex-start;
+                                }
+
+                                .header_second_sec {
+                                    display: flex;
+                                    flex-direction: column;
+                                    width: 100%;
+                                    max-width: 455px;
+                                    margin: 0 auto;
+
+                                    .header_upper_wrper {
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                        margin-bottom: 5px;
+
+                                        .book_id {
+                                            color: $grayed_border;
+                                            font-size: 12px;
+                                        }
+
+                                        .header_name {
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            max-width: 100px;
+
+                                            @include tab-view {
+                                                font-size: 14px;
+                                                max-width: 120px;
+                                            }
+                                        }
+
+                                        .date_head {
+                                            @include tab-view {
+                                                font-size: 10px;
+                                            }
+                                        }
+                                    }
+
+                                    .header_lower_wrper {
+                                        display: flex;
+                                        justify-content: space-around;
+                                        //align-items: center;
+                                        text-align: center;
+
+                                        .payment_bar_wrps {
+                                            width: 100%;
+                                            max-width: 300px;
+                                            margin: 0 10px;
+                                            padding-top: 12px;
+
+                                            .progress {
+                                                height: 5px;
+                                                border-radius: 25px;
+
+                                                .progress-bar {
+                                                    background-color: $pink;
+                                                }
+                                            }
+
+                                            .payment_status {
+                                                font-size: 12px;
+                                                color: $pink;
+                                                margin-top: 10px;
+                                                align-items: center;
+                                                display: flex;
+                                                justify-content: center;
+
+                                                img {
+                                                    max-width: 15px;
+                                                    margin-right: 10px;
+                                                }
+                                            }
+                                        }
+
+                                        .pricer_wrp {
+                                            .pink_price {
+                                                font-size: 19px;
+                                                color: $pink;
+                                                font-weight: 600;
+                                            }
+
+                                            .status {
+                                                color: $mid_gray_bg;
+                                                font-size: 12px;
+                                                font-weight: 400;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .header_date {
+                                    font-size: 16px;
+                                    font-weight: 400;
+                                }
+                            }
+                        }
+                    }
+
+                    .accordion_data {
+                        padding: 15px;
+                        border-top: 1px solid $box-border-color;
+                        background-color: $tab-bg-gray;
+
+                        @include tab-view {
+                            padding: 10px;
+                        }
+
+                        .booking_tab_header {
+                            border-bottom: none;
+                            position: relative;
+                            z-index: 9;
+                        
+                            li {
+                                z-index: -99;
+                                margin-left: 0;
+                                position: relative;
+                                justify-content: center;
+                                display: flex;
+                                flex: auto;
+                                max-width: 131px;
+                                align-items: center;
+                                border-bottom: 1px solid $box-border-color;
+                                border-right: 1px solid $box-border-color;
+                                border-top-right-radius: 10px;
+                                border-top: 1px solid $box-border-color;
+                                @include ipad-view{
+                                    max-width: 20%;
+                                }
+                                @include tab-view{
+                                    max-width: 20%;
+                                    width: 20%;
+                                }
+                        
+                                &::before {
+                                    content: '';
+                                    position: absolute;
+                                    height: 1px;
+                                    border-top: 1px solid $box-border-color;
+                                    width: 8px;
+                                    top: -1px;
+                                    left: -7px;
+                                }
+                        
+                                &:nth-child(6) {
+                                    border-left: 1px solid $box-border-color;
+                                    &::before {
+                                        width: 0;
+                                    }           
+                                }
+                                
+                                 &:nth-child(5){
+                                    &::after {
+                                        @include tab-view{
+                                            content: '';
+                                            position: absolute;
+                                            height: 10px;
+                                            border-top: 1px solid $box-border-color;
+                                            width: 1px;
+                                            top: -2px;
+                                            right: -1px;
+                                        }
+                                    } 
+                                }
+                        
+                                &:nth-child(n + 6) {
+                                    border-top: none;                                   
+                                    border-bottom: none;
+                                    
+                                }
+                        
+                                &.active {
+                                    max-width: 187px;
+                                    top: 0;
+                                    position: relative;
+                                    padding: 0;
+                                    overflow: visible;
+                                    background-color: $background-white;
+                                    z-index: 999;
+                                    border-bottom: none;
+                                    &::before {
+                                        border: none;
+                                    }
+                                    @include tab-view{
+                                        max-width: 20%;
+                                        width: 20%;
+                                        border-top-left-radius: 10px;
+                                    }
+                                }
+                        
+                                &:first-child {
+                                    margin-left: 0;
+                                    z-index: 9;
+                                    border-top-left-radius: 10px;
+                                    border-top-right-radius: 10px;
+                                    border-left: 1px solid $box-border-color;
+                        
+                                    &::before {
+                                        border: none;
+                                    }
+                        
+                                    a {
+                                        border-top-left-radius: 10px;
+                                        border-top-right-radius: 0px;
+                        
+                                        &::before {
+                                            border: none;
+                                        }
+                        
+                                        &.active {
+                                            border-top-right-radius: 10px;
+                        
+                                            @include tab-view {
+                                                top: 1px;
+                                            }
+                                        }
+                                    }
+                                }
+                        
+                                &:last-child {
+                                    border-right: 1px solid $box-border-color;
+                                    border-top-right-radius: 10px;
+                        
+                                    a {
+                                        border-top-right-radius: 10px;
+                                    }
+                                }
+                        
+                                a {
+                                    background-color: transparent;
+                                    border-left: 0;
+                                    position: relative;
+                                    display: flex;
+                                    width: 100%;
+                                    align-items: center;
+                                    justify-content: center;
+                                    max-width: 110px;
+                                    z-index: 9999;
+                                    padding: 10px 0px;
+                                    transition: none;
+                        
+                                    @include tab-view {
+                                        top: 3px;
+                                        padding: 10px 14px;
+                                        width: auto;
+                                    }
+                        
+                                    .tab_round_wrps {
+                                        color: $mid_gray_bg;
+                                        font-size: 12px;
+                                        display: flex;
+                                        justify-content: space-around;
+                                        align-items: center;
+                                        flex-direction: column;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        width: 100%;
+                        
+                                        @include tab-view {
+                                            .tab_txt_head {
+                                                display: none;
+                                            }
+                                        }
+                        
+                                        .tab_imgs_wrps {
+                                            .alrt_img {
+                                                margin-left: 5px;
+                                                max-width: 15px;
+                                            }
+                        
+                                            img {
+                                                margin-bottom: 5px;
+                                            }
+                                        }
+                        
+                                        .tab_txt_head {
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            width: 100%;
+                                            //margin-left: 5px;
+                                            text-align: center;
+                                            min-width: 94px;
+                                            padding: 0 3px;
+                                        }
+                                    }
+                        
+                                    &.active {                        
+                                        background-color: $background-white;
+                                        border-top-left-radius: 10px;
+                                        border-top-right-radius: 10px;
+                                        border-bottom: none;
+                                        border: 1px solid $box-border-color;
+                                        border-bottom: none;
+                                        width: 190px;
+                                        margin: 0;
+                                        max-width: 100%;
+                                        top: -7px;
+                                        padding: 0;
+                                        height: 63px;
+                        
+                                        &::before {
+                                            border: none;
+                                        }
+                        
+                                        @include tab-view {
+                                            // width: 67px;
+                                            max-width: 100%;
+                                            width: 100%;
+                                            height: 45px;
+                                            display: flex;
+                                            justify-content: center;
+                                            top: -4px !important;
+                                            border: none;
+                                        }
+                        
+                                        .tab_round_wrps {
+                                            //width: 186px;
+                                            width: 166px;
+                                            border: 2px solid $pink;
+                                            border-radius: 25px;
+                                            padding: 0 10px;
+                                            color: $text-black;
+                                            font-weight: 600;
+                                            font-size: 18px;
+                                            flex-direction: row;
+                                            height: 50px;
+                        
+                                            &.hotel_tab_round_wrps {
+                                                border: 2px solid $blue-text-one;
+                        
+                                                @include tab-view {
+                                                    border: none;
+                                                    padding: 0;
+                                                    width: auto;
+                        
+                                                    .tab_txt_head {
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+                        
+                                            @include tab-view {
+                                                border: none;
+                                                padding: 0;
+                                                width: auto;
+                        
+                                                .tab_txt_head {
+                                                    display: none;
+                                                }
+                                            }
+                        
+                                            .tab_txt_head {
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                width: 100%;
+                                                min-width: 94px;
+                                            }
+                        
+                                            img {
+                                                margin-bottom: 0;
+                                            }
+                                        }
+                                    }
+                                }
+                        
+                            }
+                        }
+
+                        .main_tab_content {
+                            background-color: $background-white;
+                            border-bottom-left-radius: 10px;
+                            border-bottom-right-radius: 10px;
+                        }
+                    }
+                }
+            }
+
+            #accordion_completed {
+                .card {
+                    .card-header {
+                        a {
+                            align-items: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.loader_wrapper {
+    .loader_card {
+        background-color: $background-white;
+        border-radius: 10px;
+        padding: 15px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        border: 1px solid $box-border-color;
+        margin-bottom: 10px;
+
+        .cart_round {
+            span {
+                padding: 5px;
+                height: 39px;
+                width: 39px;
+                margin-right: 15px;
+                position: relative;
+                border-radius: 50%;
+                display: flex;
+            }
+        }
+
+        .cart_details {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-left: 50px;
+        }
+    }
 }

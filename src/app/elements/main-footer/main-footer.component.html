@@ -4,86 +4,111 @@
         <div class="container">
             <div class="row">
                 <div class="ftr_flex_row">
+                    <a [routerLink]="['/']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" class="logo_w">
+                        <img src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Logo" />
+                    </a>
+                </div>
+                <div class="ftr_flex_row">
                     <div class="col-lg-3">
                         <div class="ftr_info">
-                            <a [routerLink]="['/']">
-                                <img src="{{s3BucketUrl}}assets/images/footer_logo.svg" alt="Logo" />
-                            </a>
-                            <p>{{'laytrip_info_page_title_1_description' | translate}}</p>
-
-                            <!-- <div class="company_contact">
-                                <h5>Reach Us</h5>
-                                <ul>
-                                    <li><a href="mailto:support@laytrip.com"><i class="fa fa-envelope"
-                                                aria-hidden="true"></i>
-                                            support@laytrip.com</a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i> +00
-                                            000 000 0000</a></li>
-                                </ul>
-                            </div> -->
+                            <p>Layaway travel for everyone</p>
+                            <div class="footer_cta_dropdown">
+                                <div class="cta_drop_wrp">
+                                    <div class="dropdown cus_drop">
+                                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">
+                                            {{ selectedLanunage.name }}
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li *ngFor="let langunage of langunages"><a
+                                                    (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cta_drop_wrp">
+                                    <div class="dropdown cus_drop">
+                                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">
+                                            <!-- <img src="{{selectedCurrency.flag}}" alt="Flag" /> {{ selectedCurrency.code
+                                            }} -->
+                                            {{ selectedCurrency.code}}
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li *ngFor="let currency of currencies">
+                                                <a class="hover-link" (click)="changeCurrency(currency)">
+                                                    <!-- <img src="{{currency.flag}}" alt="" /> {{ currency.code }} -->
+                                                    {{ currency.code }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="ftr_menu">
                             <div class="menu_grid">
-                                <h5>{{'laytrip_info_page_title_2' | translate}}</h5>
-                                <ul>
-                                    <ul>
-                                        <li><a href="mailto:support@laytrip.com"><i class="fa fa-envelope"
-                                                    aria-hidden="true"></i>
-                                                support@laytrip.com</a></li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-phone" aria-hidden="true"></i> +00
-                                                000 000 0000</a></li>
-                                    </ul>
-                                </ul>
-                            </div>
-
-                            <div class="menu_grid">
-                                <h5>{{'laytrip_info_page_title_3' | translate}}</h5>
                                 <ul>
                                     <li>
-                                        <a [routerLink]="['/why-laytrip']" [innerHTML]="'laytrip_info_page_title_3_description_1' | translate"></a>
+                                        <a 
+                                        [routerLink]="['/about']"
+                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
+                                        [innerHTML]="'laytrip_info_page_title_3' | translate"></a>
                                     </li>
-                                    <!-- <li><a href="javascript:void(0);">Media and News</a></li> -->
-                                    <!-- <li><a href="javascript:void(0);">Download the App</a></li>
-                                    <li><a href="javascript:void(0);">Media and News</a></li> -->
                                     <li>
-                                        <a [routerLink]="['/download-app']" [innerHTML]="'laytrip_info_page_title_3_description_2' | translate"></a>
+                                        <a [routerLink]="['/faq']"
+                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
+                                            [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                        [routerLink]="['/privacy-policy']"
+                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
+                                        >Privacy</a>
                                     </li>
                                 </ul>
                             </div>
-                            <!-- <div class="menu_grid">
-                                <h5>Partners</h5>
+                            <div class="menu_grid">
                                 <ul>
-                                    <li><a href="javascript:void(0);">Become a Partner</a></li>
-                                    <li><a href="javascript:void(0);">Membership options</a></li>
-                                    <li><a [routerLink]="['/partial-payment']">Partial Payment Travelling</a></li>
+                                    <li>
+                                        <a 
+                                        [routerLink]="['/terms']"
+                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
+                                        >Terms</a>
+                                    </li>
+                                    <li>
+                                        <a class="hover-link"
+                                            [innerHTML]="'laytrip_info_page_title_4_description_2' | translate"
+                                            data-toggle="modal" data-target="#contact_modal"></a>
+                                    </li>
+                                    <li>
+                                        <a
+                                        [routerLink]="['/ccpa']"
+                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
+                                       >Do Not Sell</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="menu_grid">
-                                <h5>Explore</h5>
                                 <ul>
-                                    <li><a href="javascript:void(0);">Flights</a></li>
-                                    <li><a href="javascript:void(0);">Hotels</a></li>
-                                    <li><a href="javascript:void(0);">Home Rentals</a></li>
-                                    <li><a href="javascript:void(0);">Special Deals</a></li>
+                                    <li class="share_li">
+                                        <a (click)="openShareModal()">Share</a>
+                                    </li>
                                 </ul>
-                            </div> -->
-                            <div class="menu_grid">
-                                <h5>{{'laytrip_info_page_title_4' | translate}}</h5>
-                                <ul>
+                                <h5>Get our App</h5>
+                                <ul class="footer_down_links">
                                     <li>
-                                        <a [routerLink]="['/faq']" [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
+                                        <a class="hover-link">
+                                            <img src="{{s3BucketUrl}}assets/images/app_store_footer.svg" alt="App Store"
+                                                title="App Store">
+                                        </a>
                                     </li>
                                     <li>
-                                        <a [routerLink]="['/contact-us']" [innerHTML]="'laytrip_info_page_title_4_description_2' | translate"></a>
-                                    </li>
-                                    <!-- <li><a [routerLink]="['/cancellation-policy']">Booking and Cancellation Policies</a>
-                                    </li> -->
-                                    <!-- <li><a [routerLink]="['/privacy-policy']">Privacy</a></li> -->
-                                    <!-- <li><a href="javascript:void(0);">Terms</a></li> -->
-                                    <li>
-                                        <a [routerLink]="['/account/search-trip']" [innerHTML]="'laytrip_info_page_title_4_description_3' | translate"></a>
+                                        <a class="hover-link">
+                                            <img src="{{s3BucketUrl}}assets/images/playstore_footer.svg"
+                                                alt="Play Store" title="playstore">
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -102,10 +127,19 @@
     </div>
 </section>
 <!-- Close Footer Section -->
-<div class="block_share">
-    <a href="javascript:void(0);" (click)="openShare()"> <img src="{{s3BucketUrl}}assets/images/icon/ic_share.svg" alt="Share"> </a>
-</div>
-
-<a id="back_to_top" title="Back to top">
-    <img src="{{s3BucketUrl}}assets/images/icon/backtotop.svg" alt="Back to top">
-</a>
+<!-- <div class="quick-footer-section">
+    <div class="block_share">
+        <a class="hover-link" (click)="openShareModal()"> <img src="{{s3BucketUrl}}assets/images/export.svg"
+                alt="Share">             
+            <span class="hover_label">Share</span>
+        </a>
+        <a class="hover-link" (click)="openShareModal()"> <img src="{{s3BucketUrl}}assets/images/icon/ic_share.svg"
+                alt="Share">
+            <span class="hover_label">Share</span>
+        </a>
+    </div>
+   <a id="back_to_top" title="Back to top">
+        <img src="{{s3BucketUrl}}assets/images/icon/backtotop.svg" alt="Back to top">
+    </a> 
+</div> -->
+<app-contact-us></app-contact-us>

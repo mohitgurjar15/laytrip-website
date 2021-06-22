@@ -1,9 +1,122 @@
-#back_to_top{
-    bottom: 160px;
-}
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
 /* .site_footer .footer_top .ftr_flex_row .ftr_menu .menu_grid{
     width: 33% !important;
 } */
-.block_share{
-    bottom: 100px;
+.quick-footer-section {
+  position: fixed;
+  right: 24px;
+  display: flex;
+  bottom: 100px;
+  flex-direction: column;
+  z-index: 999;
+
+  @include mobile-view {
+    right: 5px !important;
+  }
+
+  .block_share {
+    .hover-link {
+      position: relative;
+      transition: 0.3s;
+
+      &:hover {
+        .hover_label {
+          display: flex;
+        }
+      }
+
+      .hover_label {
+        position: absolute;
+        color: $text-black;
+        font-size: 12px;
+        font-weight: 600;
+        bottom: 5px;
+        left: -15px;
+        height: 21px;
+        display: none;
+        align-items: center;
+        justify-content: flex-start;
+        border-radius: 6px;
+        background-color: $tab-bg-gray;
+        padding: 0 5px;
+
+      }
+    }
+  }
+}
+
+.footer_cta_dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 40px;
+
+  @include tab-view {
+    justify-content: center;
+    margin-top: 17px;
+  }
+
+  .cta_drop_wrp {
+    font-size: 14px;
+    color: $text-grey;
+    font-weight: 400;
+    margin-right: 30px;
+
+    @include tab-view {
+      margin: 0;
+      width: 95px;
+    }
+
+    ul {
+      &.dropdown-menu {
+        padding: 0;
+
+        li {
+          a {
+            color: $background-blue;
+            margin: 0;
+            padding: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.menu_grid {
+  .share_li{
+    padding: 0 0 10px !important;
+    a{
+      cursor: pointer;
+    }
+  }
+  .footer_down_links {
+    li {
+      width: auto !important;
+      padding: 0 0 10px;
+      display: inline-block;
+      margin: 0 15px 0 0;
+    }
+  }
+}
+
+.ftr_flex_row {
+  .logo_w {
+    padding: 0 15px;
+
+    img {
+      height: 40px;
+      margin-bottom: 3px;
+    }
+
+    @include tab-view {
+      margin: 0px auto 10px;
+    }
+  }
 }

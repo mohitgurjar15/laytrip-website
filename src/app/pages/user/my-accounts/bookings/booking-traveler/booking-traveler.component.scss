@@ -1,0 +1,973 @@
+@import "../../../../../../cstm-variable";
+@import "../../../../../../_cstm-variable.scss";
+@import "../../../../../../_cstm-components.scss";
+@import "../../../../../../_hotel.scss";
+@import "../../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
+.accordion_bookings {
+    .card {
+        border: 1px solid $grayed_border;
+        border-radius: 10px;
+        margin-bottom: 15px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &.traveller_card_accr {
+            .card-header {
+                &.tr_card_header {
+                    display: flex;
+
+                    .card-link {
+                        flex: 1;
+
+                        &.card_link_max{
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: block;
+                            padding-right: 10px;
+                        }
+
+                        &.new_link {
+                            flex: 2;
+                            margin: 0;
+                        }
+                    }
+                }
+
+                @include tab-view {
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .card-header {
+            border: none;
+            background-color: transparent;
+            padding: 15px;
+
+            .card-link {
+                font-weight: 600;
+                color: $text-black;
+                font-size: 16px;
+                border: none;
+                background-color: transparent;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 0;
+
+                &[aria-expanded="true"] {
+                    &:after {
+                        content: "";
+                        position: relative;
+                        padding: 5px 9px;
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                        background-position: right;
+                        background-repeat: no-repeat;
+                        background-size: 14px;
+                        transition: 0.3s;
+                        right: 0;
+                        border: none;
+                        top: 5px;
+
+                        @include tab-view {
+                            position: absolute;
+                            right: 0;
+                            height: 12px;
+                        }
+                    }
+                }
+
+                &[aria-expanded="false"] {
+                    &:after {
+                        position: relative;
+                        padding: 5px 9px;
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                        background-position: right;
+                        background-repeat: no-repeat;
+                        background-size: 14px;
+                        content: "";
+                        transition: 0.3s;
+                        right: 0;
+                        border: none;
+                        top: 5px;
+
+                        @include tab-view {
+                            position: absolute;
+                            right: 0;
+                            height: 12px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .card-body {
+            padding: 15px;
+
+            @include tab-view {
+                padding: 10px;
+            }
+
+            .sub_cat_wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+                flex-wrap: wrap;
+
+                //margin: 0 0 15px 0;
+                .add_btn_lined {
+                    color: $text_light_yellow;
+                    border: 1px solid $text_light_yellow;
+                    background-color: $background-white;
+                    border-radius: 5px;
+                    font-size: 12px;
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 20px;
+                    padding: 0 10px;
+                    position: relative;
+                    margin-bottom: 15px;
+
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+
+                    &:last-child {
+                        //margin: 0;
+                    }
+
+                    .close_icon {
+                        position: absolute;
+                        top: -10px;
+                        right: -10px;
+                        border: 1px solid $text_light_yellow;
+                        width: 20px;
+                        border-radius: 50%;
+                        background-color: $background-white;
+
+                        i {
+                            color: $text_light_yellow;
+                        }
+                    }
+                }
+            }
+
+            .common_form {
+                label {
+                    color: $mid_gray_bg;
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+
+                input {
+                    border: none;
+                    border-radius: 0;
+                    border-bottom: 2px solid $box-border-color;
+                    font-size: 14px;
+                    padding: 8px 0;
+                    background-color: $background-white;
+
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+
+                select {
+                    border: none;
+                    border-radius: 0;
+                    border-bottom: 2px solid $box-border-color;
+                    font-size: 14px;
+                    padding: 8px 0;
+
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+
+                .dobs {
+                    input {
+                        border-bottom: 2px solid $box-border-color !important;
+                    }
+                }
+
+                .nation_wrps {
+                    ng-select {
+                        .ng-input {
+                            &[aria-expanded="true"] {
+                                &:after {
+                                    content: "";
+                                    position: relative;
+                                    padding: 5px 9px;
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 10px;
+                                    transition: 0.3s;
+                                    right: 8px;
+                                    border: none;
+                                    top: 5px;
+
+                                    @include tab-view {
+                                        position: absolute;
+                                        right: 0;
+                                        height: 12px;
+                                    }
+                                }
+                            }
+
+                            &[aria-expanded="false"] {
+                                &:after {
+                                    position: relative;
+                                    padding: 5px 9px;
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 10px;
+                                    content: "";
+                                    transition: 0.3s;
+                                    right: 8px;
+                                    border: none;
+                                    top: 5px;
+
+                                    @include tab-view {
+                                        position: absolute;
+                                        right: 0;
+                                        height: 12px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .mb-sm-10 {
+                    margin-bottom: 10px;
+
+                    &.telephone_wrps {
+                        .tel_span {
+                            border-bottom: 2px solid $box-border-color;
+                            display: flex;
+                            position: relative;
+                            bottom: 2px;
+
+                            input {
+                                border-bottom: none;
+
+                                &:first-child {
+                                    width: 30px;
+                                }
+                            }
+                        }
+                    }
+
+                    &.dobs {
+                        input {
+                            // background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+                            // background-size: 20px;
+                            background-image: none;
+                            border: none;
+
+                            @include tab-view {
+                                background-image: none;
+                            }
+                        }
+                    }
+
+                    .gender_anchers {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+
+                        a {
+                            &.active {
+                                color: $text_light_yellow;
+                            }
+
+                            color: $mid_gray_bg;
+                            font-size: 14px;
+                            padding: 0 25px 0 0;
+
+                            &:hover {
+                                color: $text_light_yellow;
+                                text-decoration: none;
+                            }
+
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .accordion_addn {
+                margin-top: 20px;
+
+                .card {
+                    border: none;
+
+                    .card-header {
+                        border: none;
+                        background-color: transparent;
+                        padding: 0;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+
+                        @include tab-view {
+                            flex-direction: column;
+                        }
+
+                        .heade_wrps {
+                            color: $text-black;
+                            font-size: 16px;
+                            font-weight: 500;
+                            // margin-right: 15px;
+                            flex: 1;
+
+                            @include tab-view {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100%;
+                                margin: 0;
+                            }
+
+                            .responsive_anch {
+                                display: none;
+
+                                @include tab-view {
+                                    font-weight: 600;
+                                    color: $text-black;
+                                    font-size: 16px;
+                                    border: none;
+                                    background-color: transparent;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    padding: 0;
+
+                                    &[aria-expanded="true"] {
+                                        &:after {
+                                            font-family: 'FontAwesome';
+                                            content: "\f077";
+                                            color: $text-grey;
+                                            font-weight: normal;
+                                            transition: 0.3s;
+                                            right: 0;
+                                        }
+                                    }
+
+                                    &[aria-expanded="false"] {
+                                        &:after {
+                                            font-family: 'FontAwesome';
+                                            content: "\f078";
+                                            color: $text-grey;
+                                            font-weight: normal;
+                                            transition: 0.3s;
+                                            right: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .addon_anchor {
+                            font-weight: 600;
+                            color: $text-black;
+                            font-size: 16px;
+                            border: none;
+                            background-color: transparent;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 0;
+
+                            &[aria-expanded="true"] {
+                                &:after {
+                                    content: "";
+                                    position: relative;
+                                    padding: 5px 9px;
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 14px;
+                                    transition: 0.3s;
+                                    right: 0;
+                                    border: none;
+                                    top: 5px;
+
+                                    @include tab-view {
+                                        position: absolute;
+                                        right: 0;
+                                        height: 12px;
+                                    }
+                                }
+                            }
+
+                            &[aria-expanded="false"] {
+                                &:after {
+                                    position: relative;
+                                    padding: 5px 9px;
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 14px;
+                                    content: "";
+                                    transition: 0.3s;
+                                    right: 0;
+                                    border: none;
+                                    top: 5px;
+
+                                    @include tab-view {
+                                        position: absolute;
+                                        right: 0;
+                                        height: 12px;
+                                    }
+                                }
+                            }
+
+                            @include tab-view {
+                                display: none;
+                            }
+                        }
+
+                        #addon_tab {
+                            flex-direction: row;
+                            flex-wrap: nowrap;
+                            flex: auto;
+
+                            // flex: 2;
+                            @include tab-view {
+                                flex-wrap: wrap;
+                                margin: 5px 0;
+                                width: 100%;
+                                justify-content: flex-start;
+                                display: flex;
+                            }
+
+                            li {
+                                margin-right: 5px;
+                                flex: 1;
+                                display: flex;
+                                text-align: center;
+
+                                @include tab-view {
+                                    margin-bottom: 5px;
+                                    flex: 1;
+
+                                    &:first-child {
+                                        margin-left: 0;
+                                    }
+                                }
+
+                                a {
+                                    background-color: $background-white;
+                                    // color: #E4E4E4;
+                                    // border: 1px solid #E4E4E4;
+                                    color: $text_grey_dark;
+                                    border: 1px solid $text_grey_dark;
+                                    border-radius: 8px;
+                                    font-size: 12px;
+                                    width: 100%;
+                                    justify-content: center;
+                                    align-items: center;
+
+                                    br {
+                                        display: none;
+                                    }
+
+                                    @include tab-view {
+                                        margin: 0;
+                                        font-size: 9px;
+                                        padding: 5px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        height: 100%;
+
+                                        br {
+                                            display: flex;
+                                        }
+                                    }
+
+                                    &.active {
+                                        color: $text_grey_dark;
+                                        border: 1px solid $text_grey_dark;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .card-body {
+                        padding: 0;
+                        margin-top: 15px;
+
+                        @include tab-view {
+                            margin: 0;
+                        }
+
+                        .addon_listins_wrps {
+                            display: flex;
+                            justify-content: flex-end;
+                            width: 100%;
+
+                            .fake_span {
+                                flex: 1;
+                                max-width: 100px;
+
+                                @include tab-view {
+                                    display: none;
+                                }
+                            }
+
+                            @include tab-view {
+                                justify-content: flex-start;
+                            }
+
+                            .addon_btn_drop {
+                                background-color: $background-white;
+                                color: $mid_gray_bg;
+                                border: 1px solid $mid_gray_bg;
+                                border-radius: 8px;
+                                font-size: 13px;
+                                margin: 0;
+                                width: 100%;
+                                padding: 6px 10px;
+                                position: relative;
+                                display: flex;
+                                flex: 2;
+                                justify-content: center;
+
+                                &:focus {
+                                    outline: none;
+                                    box-shadow: none;
+                                }
+
+                                &:hover {
+                                    outline: none;
+                                    box-shadow: none;
+                                }
+
+                                &[aria-expanded="true"] {
+                                    &:after {
+                                        font-family: 'FontAwesome';
+                                        content: "\f077";
+                                        color: $text-grey;
+                                        font-weight: normal;
+                                        transition: 0.3s;
+                                        right: 10px;
+                                        position: absolute;
+                                    }
+                                }
+
+                                &[aria-expanded="false"] {
+                                    &:after {
+                                        font-family: 'FontAwesome';
+                                        content: "\f078";
+                                        color: $text-grey;
+                                        font-weight: normal;
+                                        transition: 0.3s;
+                                        right: 10px;
+                                        position: absolute;
+                                    }
+                                }
+
+                                @include tab-view {
+                                    margin-right: 0;
+                                    text-align: center;
+                                    align-items: center;
+                                    display: flex;
+                                    font-size: 10px;
+                                }
+                            }
+
+                            .dropdownList {
+                                li {
+                                    button {
+                                        border: none;
+
+                                        @include tab-view {
+                                            padding: 5px;
+                                            font-size: 12px;
+                                            white-space: normal;
+                                        }
+
+                                        &:focus {
+                                            outline: none;
+                                            box-shadow: none;
+                                        }
+
+                                        &:hover {
+                                            outline: none;
+                                            box-shadow: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .bottom_cta_btn {
+        margin: 15px 0 10px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        .hover-link {
+            background-color: transparent;
+            color: $text_light_yellow;
+            border: none;
+            box-shadow: none;
+            font-size: 15px;
+            padding: 0;
+
+            @include tab-view {
+                font-size: 12px;
+            }
+
+        }
+    }
+}
+.delete_account_block  {
+    &.cancel_booking{
+
+        .modal-header {
+        justify-content: center;
+        border: none;
+        padding: 25px;
+    
+        .close {
+            opacity: 1;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+    
+            img {
+            width: 12px;
+            }
+    
+            @include mobile-view {
+            top: 15px;
+            right: 15px;
+            }
+        }
+        }
+    
+        .modal-body {
+        width: 100%;
+        padding: 0px 15px 20px;
+    
+        @include tab-view {
+            height: 100%;
+            justify-content: center;
+            display: flex;
+            flex-flow: column;
+        }
+    
+        .block_im {
+            margin: 0 auto 15px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            img{
+                @include tab-view{
+                    max-width: 50px;
+                }
+            }
+        }
+    
+        h4 {
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 400;
+            color: $mid_gray_bg;
+            padding: 0px 0px 15px;
+            text-align: center;
+    
+            // span {
+            //   display: block;
+            // }
+    
+            @include tab-view {
+            font-size: 12px;
+            text-align: center;
+            }
+    
+            @include mobile-view {
+            font-size: 12px;
+            line-height: 16px;
+            text-align: center;
+            }
+
+            a{
+                text-decoration: underline;
+            }
+        }
+    
+        .check {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 0 0 30px;
+    
+            .custom_checkbox {
+            position: relative;
+            margin-bottom: 0;
+            vertical-align: middle;
+            line-height: normal;
+            display: inline;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 400;
+            color: $mid_gray_bg;
+            text-transform: none;
+    
+            input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+    
+                &:checked {
+                ~ {
+                    .checkmark {
+                    border-color: $blue-text-one;
+    
+                    &:after {
+                        opacity: 1;
+                    }
+                    }
+                }
+                }
+            }
+    
+            .checkmark {
+                width: 14px;
+                min-width: 14px;
+                height: 14px;
+                display: inline-block;
+                border: 1px solid $blue-text-one;
+                vertical-align: middle;
+                margin-right: 11px;
+                position: relative;
+    
+                &:after {
+                content: "";
+                position: absolute;
+                top: 1px;
+                -webkit-transform: translate(0, -50%);
+                -moz-transform: translate(0, -50%);
+                -ms-transform: translate(0, -50%);
+                -o-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+                width: 4px;
+                height: 8px;
+                border-radius: 2px;
+                border: solid $blue-text-one;
+                border-width: 0 1px 1px 0;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                border-radius: 0px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                transition: all 0.2s;
+                opacity: 0;
+                }
+            }
+            }
+        }
+    
+        // ul {
+        //   width: 100%;
+        //   display: flex;
+        //   justify-content: center;
+        //   margin: 0;
+        //   padding: 0 0 30px;
+        //   list-style: none;
+    
+        //   li {
+        //     width: auto;
+        //     margin: 0 25px;
+    
+        //     @include mobile-view {
+        //       margin: 0 10px;
+        //     }
+    
+        //     button {
+        //       width: 151px;
+        //       height: 40px;
+        //       padding: 0px 25px;
+        //       background: $hotel-secondary-color;
+        //       border-radius: 25px;
+        //       border: 1px solid $hotel-secondary-color;
+        //       font-size: 14px;
+        //       font-weight: 500;
+        //       color: $text-white;
+        //       transition: 0.3s;
+        //       position: relative;
+        //       z-index: 9;
+        //       overflow: hidden;
+        //       white-space: normal;
+    
+        //       &.btn_no {
+        //         border: 1px solid $feedback_text-clr;
+        //         color: $feedback_text-clr;
+        //         background: $background-white;
+    
+        //         // &:hover {
+        //         //   background: transparent;
+        //         //   color: $text-white;
+        //         // }
+        //       }
+    
+        //       &.btn_yes {
+        //         border: 1px solid $primary-color;
+        //         color: $text-white;
+        //         background: $primary-color;
+    
+        //         // &:hover {
+        //         //   background: transparent;
+        //         //   color: $text-white;
+        //         // }
+        //       }
+    
+        //       &::before {
+        //         content: "";
+        //         position: absolute;
+        //         top: 2px;
+        //         left: 2px;
+        //         width: 100%;
+        //         height: 0%;
+        //         background: $pink_clr;
+        //         z-index: -1;
+        //         transition: 0.8s;
+        //         border-radius: 25px;
+        //       }
+    
+        //       // &:hover {
+        //       //   border: 1px solid $hotel-secondary-color;
+        //       //   color: $text-white;
+    
+        //       //   &:before {
+        //       //     height: calc(100% - 4px);
+        //       //     width: calc(100% - 4px);
+        //       //   }
+        //       // }
+    
+        //       &.btn_disable {
+        //         cursor: default;
+        //       }
+    
+        //       @include mobile-view {
+        //         width: 135px;
+        //       }
+        //     }
+        //   }
+        // }
+    
+        .cta_btn_wrps {
+            padding: 10px;
+            width: 100%;
+            display: flex;
+
+            @include tab-view{
+                padding: 0;
+            }
+    
+            button {
+            max-width: 472px;
+            width: 100%;
+            height: 40px;
+            padding: 10px 25px;
+            background: $hotel-secondary-color;
+            border-radius: 25px;
+            border: 1px solid $hotel-secondary-color;
+            font-size: 14px;
+            color: $text-white;
+            transition: 0.3s;
+            position: relative;
+            z-index: 9;
+            overflow: hidden;
+            white-space: normal;
+            display: flex;
+            margin: 0 10px;
+            align-items: center;
+            justify-content: center;
+
+            @include tab-view{
+                font-size: 13px;
+                height: auto;
+                padding: 9px 5px;
+            }
+    
+            &:hover {
+                border: 1px solid $hotel-secondary-color;
+                color: $text-white;
+                background: $hotel-secondary-color;
+            }
+    
+            &:focus {
+                outline: none;
+                box-shadow: none;
+            }
+            }
+        }
+    
+        .footer_logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 10px;
+    
+            img {
+            max-width: 62px;
+            height: 23px;
+            }
+        }
+        }
+    
+        .modal-footer {
+        padding: 0 20px 25px;
+        border: 0;
+        margin: 0;
+    
+        .modal_btm {
+            width: 100%;
+    
+            .block_logo {
+            width: 100%;
+            text-align: center;
+            margin: 0 0 0;
+    
+            img {
+                height: 22px;
+            }
+            }
+        }
+        }
+    }
+  }
+  

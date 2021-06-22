@@ -1,3 +1,4 @@
+@import "../../../../../_hotel.scss";
 .anchor_link {
     cursor: pointer;
 }
@@ -8,4 +9,51 @@ ng-scrollbar {
     --scrollbar-thumb-hover-color: #ff00bc;
     --scrollbar-border-radius: 15px;
     max-height: 300px;
+}
+
+
+.desktop_sort{
+	@include ipad-view{
+		display: none;
+	}
+}
+.mobile_sort{
+	display: none;
+	@include ipad-view{
+		display: block;
+	}
+}
+.filter_saidbar{
+	&.mobile_sort{
+		.short_by{
+			.block_shortby{ 
+				margin-top: 0;
+				.accordion-group{
+					max-width: 100%;
+					.accordion-heading{
+						&::after{
+							background-image: none;
+							// margin-left: 15px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+h5{
+	&.title_h5{
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		align-items: center;
+		.anchor_link{
+			color: $text_light_yellow;
+			font-size: 16px;
+
+			@include tab-view {
+				font-size: 12px;
+			}
+		}
+	}
 }

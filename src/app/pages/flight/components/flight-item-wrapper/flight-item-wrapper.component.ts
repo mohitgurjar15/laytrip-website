@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
@@ -9,39 +9,32 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
-import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
+import { getLoginUserInfo, getUserDetails } from '../../../../../app/_helpers/jwt.helper';
+import { CartService } from '../../../../services/cart.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-flight-item-wrapper',
   templateUrl: './flight-item-wrapper.component.html',
   styleUrls: ['./flight-item-wrapper.component.scss'],
-  animations: [
-    trigger('listAnimation', [
-      transition('* => *', [ // each time the binding value changes
-        query(':leave', [
-          stagger(10, [
-            animate('0.001s', style({ opacity: 0 }))
-          ])
-        ], { optional: true }),
-        query(':enter', [
-          style({ opacity: 0 }),
-          stagger(50, [
-            animate('0.5s', style({ opacity: 1 }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ],
 })
 export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   @Input() flightDetails;
   @Input() filter;
+  @Input() filteredLabel;
+  @Output() changeLoading = new EventEmitter;
+  @Output() maxCartValidation = new EventEmitter;
+  @Output() removeFlight = new EventEmitter;
+  isFlightNotAvailable: boolean = false;
+  cartItems = [];
 
   animationState = 'out';
   flightList;
   s3BucketUrl = environment.s3BucketUrl;
-  public defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+  public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
   flightListArray = [];
   currency;
 
@@ -54,35 +47,42 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   routeCode = [];
   baggageDetails;
   cancellationPolicy;
-  cancellationPolicyArray=[];
-  loadMoreCancellationPolicy:boolean=false;
+  cancellationPolicyArray = [];
+  loadMoreCancellationPolicy: boolean = false;
   errorMessage;
-  loadBaggageDetails:boolean = true;
-  loadCancellationPolicy:boolean=false;
-  isInstalmentAvailable=false;
+  loadBaggageDetails: boolean = true;
+  loadCancellationPolicy: boolean = false;
+  isInstalmentAvailable = false;
   userInfo;
-  totalLaycreditPoints:number=0;
-  showFareDetails:number=0;
-
+  totalLaycreditPoints: number = 0;
+  showFareDetails: number = 0;
+  flightUniqueCode;
   isRoundTrip = false;
 
   subcell = '$100';
+  isLoggedIn = false;
+  userDetails;
+  showTotalLayCredit = 0;
+  _isLayCredit = false;
+  totalLayCredit = 0;
 
   constructor(
     private flightService: FlightService,
     private router: Router,
     private route: ActivatedRoute,
     private cookieService: CookieService,
-    private commonFunction:CommonFunction,
-    private genericService:GenericService
+    private commonFunction: CommonFunction,
+    private genericService: GenericService,
+    private cartService: CartService,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService,
+    public modalService: NgbModal,
   ) {
-   }
+  }
 
   ngOnInit() {
-
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    console.log('sds',this.showFlightDetails);
     this.flightList = this.flightDetails;
     this.userInfo = getLoginUserInfo();
 
@@ -92,9 +92,44 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       this.isRoundTrip = false;
     }
 
-    this.totalLaycredit();
+    //this.totalLaycredit();
     this.checkInstalmentAvalability();
+    this.checkUser();
 
+    this.cartService.getCartItems.subscribe(cartItems => {
+      this.cartItems = cartItems;
+    })
+
+    setTimeout(() => { this.loadJquery(); }, 3000)
+
+  }
+
+  loadJquery() {
+    $("body").click(function () {
+      $(".code_name_m").hide();
+    });
+    $(".code_bt_m").click(function (e) {
+      e.stopPropagation();
+      $(this).siblings(".code_name_m").toggle();
+    });
+    $('.code_name_m').click(
+      function (e) {
+        e.stopPropagation();
+      }
+    );
+  }
+
+  ngDoCheck() {
+    // this.checkUser();
+  }
+
+  checkUser() {
+    let userToken = getLoginUserInfo();
+    this.isLoggedIn = false;
+    if (typeof userToken != 'undefined' && userToken.roleId != 7) {
+      localStorage.removeItem("_isSubscribeNow");
+      this.isLoggedIn = true;
+    }
   }
 
   opened() {
@@ -110,21 +145,23 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
   getCancellationPolicy(routeCode) {
 
-    this.loadCancellationPolicy=true;
-    this.loadMoreCancellationPolicy=false;
-    this.errorMessage='';
-    this.flightService.getCancellationPolicy(routeCode).subscribe((data:any) => {
-      this.cancellationPolicyArray = data.cancellation_policy.split('--')
-      this.loadCancellationPolicy=false;
-      this.cancellationPolicy = data;
-    }, (err) => {
-      this.loadCancellationPolicy=false;
-      this.errorMessage = err.message;
-    });
+    // this.loadCancellationPolicy = true;
+    // this.loadMoreCancellationPolicy = false;
+    // this.errorMessage = '';
+    // this.cancellationPolicyArray = [];
+    // this.cancellationPolicy = '';
+    // this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
+    //   this.cancellationPolicyArray = data.cancellation_policy.split('--')
+    //   this.loadCancellationPolicy = false;
+    //   this.cancellationPolicy = data;
+    // }, (err) => {
+    //   this.loadCancellationPolicy = false;
+    //   this.errorMessage = err.message;
+    // });
   }
 
-  toggleCancellationContent(){
-    this.loadMoreCancellationPolicy=!this.loadMoreCancellationPolicy;
+  toggleCancellationContent() {
+    this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
   }
 
   ngAfterContentChecked() {
@@ -134,19 +171,19 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     });
   }
 
-  showDetails(index,flag=null) {
+  showDetails(index, flag = null) {
     if (typeof this.showFlightDetails[index] === 'undefined') {
       this.showFlightDetails[index] = true;
     } else {
       this.showFlightDetails[index] = !this.showFlightDetails[index];
     }
 
-    if(flag=='true'){
-      this.showFareDetails=1;
+    if (flag == 'true') {
+      this.showFareDetails = 1;
     }
-    else{
-      
-      this.showFareDetails=0;
+    else {
+
+      this.showFareDetails = 0;
     }
 
     this.showFlightDetails = this.showFlightDetails.map((item, i) => {
@@ -155,67 +192,156 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   closeFlightDetail() {
-    
-    this.showFareDetails=0;
+
+    this.showFareDetails = 0;
     this.showFlightDetails = this.showFlightDetails.map(item => {
       return false;
     });
   }
 
   bookNow(route) {
- 
-    const itinerary = {
-      adult: this.route.snapshot.queryParams["adult"],
-      child: this.route.snapshot.queryParams["child"],
-      infant: this.route.snapshot.queryParams["infant"],
-      is_passport_required : route.is_passport_required
-    };
-    let lastSearchUrl=this.router.url;
-    this.cookieService.put('_prev_search', lastSearchUrl);
-    const dateNow = new Date();
-    dateNow.setMinutes(dateNow.getMinutes() + 10);
-    
-    sessionStorage.setItem('_itinerary',JSON.stringify(itinerary))
-    sessionStorage.setItem('__route',JSON.stringify(route));
-    console.log("this.isInstalmentAvailable",this.isInstalmentAvailable)
-    if(this.isInstalmentAvailable || this.totalLaycreditPoints>0){
-      this.router.navigate([`flight/payment/${route.route_code}`]);
-    } else{
-      this.router.navigate([`flight/travelers/${route.route_code}`]);
-    }   
+    this.removeFlight.emit(this.flightUniqueCode);
+    this.isFlightNotAvailable = false;
+    /*  console.log(this.flightListArray)
+    this.flightListArray = this.flightListArray.filter(obj => obj.unique_code !== this.flightUniqueCode);
+    console.log(this.flightListArray)
+ */
+    /* if (!this.isLoggedIn) {
+      const modalRef = this.modalService.open(LaytripOkPopup, {
+        centered: true,
+        keyboard: false,
+        backdrop: 'static'
+      });
+    } else { */
+
+    if (this.cartItems && this.cartItems.length >= 10) {
+      this.changeLoading.emit(false);
+      this.maxCartValidation.emit(true)
+    } else {
+      this.changeLoading.emit(true);
+      const itinerary = {
+        adult: this.route.snapshot.queryParams["adult"],
+        child: this.route.snapshot.queryParams["child"],
+        infant: this.route.snapshot.queryParams["infant"],
+        is_passport_required: route.is_passport_required
+      };
+      let lastSearchUrl = this.router.url;
+      this.cookieService.put('_prev_search', lastSearchUrl);
+      const dateNow = new Date();
+      dateNow.setMinutes(dateNow.getMinutes() + 10);
+
+      sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
+
+      let payload = {
+        module_id: 1,
+        route_code: route.route_code,
+        referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
+      };
+      //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
+      this.cartService.addCartItem(payload).subscribe((res: any) => {
+        this.changeLoading.emit(true);
+        let queryParamsNew: any = {};
+        if (res) {
+          let newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] }
+          this.cartItems = [...this.cartItems, newItem]
+          this.cartService.setCartItems(this.cartItems);
+
+          localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+          if (this.commonFunction.isRefferal()) {
+            let parms = this.commonFunction.getRefferalParms();
+            var queryParams: any = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if(parms.utm_medium){
+              queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if(parms.utm_campaign){
+              queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(['cart/booking'], { queryParams:queryParams });
+          } else {
+            this.router.navigate(['cart/booking']);
+          }
+        }
+      }, error => {
+        this.changeLoading.emit(false);
+        //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+        this.isFlightNotAvailable = true;
+        this.flightUniqueCode = route.unique_code;
+        // this.isFlightNotAvailable.emit(true)
+      });
+
+    }
+    /* } */
   }
 
-  checkInstalmentAvalability(){
-    let instalmentRequest={
+  checkInstalmentAvalability() {
+    let instalmentRequest = {
       checkin_date: this.route.snapshot.queryParams['departure_date'],
       booking_date: moment().format("YYYY-MM-DD")
     }
-    this.genericService.getInstalemntsAvailability(instalmentRequest).subscribe((res:any)=>{
-      if(res.instalment_availability){
+    this.genericService.getInstalemntsAvailability(instalmentRequest).subscribe((res: any) => {
+      if (res.instalment_availability) {
         this.isInstalmentAvailable = res.instalment_availability;
       }
     })
   }
 
-  totalLaycredit(){
-    this.genericService.getAvailableLaycredit().subscribe((res:any)=>{
-      this.totalLaycreditPoints=res.total_available_points;
-    },(error=>{
+  totalLaycredit() {
+    this.genericService.getAvailableLaycredit().subscribe((res: any) => {
+      this.totalLaycreditPoints = res.total_available_points;
+    }, (error => {
 
     }))
   }
 
 
-  ngOnChanges(changes:SimpleChanges){
-    
-    this.flightList=changes.flightDetails.currentValue;
-  }
-
-  logAnimation(event) {
-    console.log(event);
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
+      this.flightList = changes.flightDetails.currentValue;
+    } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
+      this.filteredLabel = changes.filteredLabel.currentValue;
+    }
+    // this.flightList = changes.flightDetails.currentValue;
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+
+  getDayDiff(arrivalDate, departureDate) {
+    let diff = moment(arrivalDate, "DD/MM/YYYY").diff(moment(departureDate, "DD/MM/YYYY"), 'days')
+    return diff;
+  }
+
+  convertTime(time) {
+    let newTime = this.commonFunction.convertTime(time, 'h:mm A', 'h:mma')
+    return newTime.slice(0, -1)
+  }
+
+  hideFlightNotAvailable() {
+    this.isFlightNotAvailable = false;
+    this.flightUniqueCode = '';
+  }
+
 }
+
+@Component({
+  selector: 'laytrip-ok-popup',
+  template: `<div class="modal-header">
+      <h4 class="modal-title">Warning</h4>
+    </div>
+    <div class="modal-body">
+      <p>Please login to book flight</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">OK</button>
+    </div>`,
+})
+
+export class LaytripOkPopup {
+
+  constructor(public modal: NgbActiveModal) {
+  }
+}
+
+

@@ -1,0 +1,166 @@
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.block_cms_page_main {
+  &.page_about {
+    padding: 0 0 70px;
+
+    @include tab-view{
+      padding: 0 0 20px;
+    }
+    .page_topbanner {
+      margin: 0 0 25px;
+      width: 100%;
+      img {
+        width: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+        -o-object-position: center;
+        object-position: center;
+
+        @include tab-view {
+          max-height: 52px;
+        }
+      }
+    }
+
+    .block_cms_cnt {
+      width: 100%;
+      .page_back_link {
+        margin-bottom: 30px;
+        margin-left: 15px;
+        a {
+          color: $active-tab-text;
+          font-size: 15px;
+          font-weight: 500;
+        }
+      }
+      .block_cmspage_comman {
+        max-width: 760px;
+        margin: 0 auto;
+        box-shadow: none;
+        padding: 0;
+      }
+      .about_page_cmn {
+        .block_cmspage_comman {
+          @include tab-view {
+            padding: 0;
+          }
+          h3 {
+            color: $blue-text;
+            font-size: 34px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            @include tab-view {
+              font{
+              font-size: 24px;
+              line-height: 1;
+            }
+            }
+          }
+        }
+        h3 {
+          color: $blue-text;
+          font-size: 34px;
+          font-weight: 500;
+          margin-bottom: 30px;
+          @include tab-view {
+            font-size: 24px;
+            line-height: 1;
+          }
+        }
+        .detail_wpr {
+          display: flex;
+          margin-bottom: 30px;
+          @include tab-view {
+            span {
+              display: none;
+            }
+          }
+          p{
+            @include tab-view {
+              font-size: 14px;
+              line-height: 24px;
+            }
+          }
+        }
+        .para_detail {
+          font-size: 18px;
+          color: $mid_gray_bg;
+          margin-bottom: 20px;
+          a {
+            color: $primary-color;
+            text-decoration: none;
+          }
+        }
+        h5 {
+          color: $text-black;
+          font-size: 26px;
+          font-weight: 500;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+}
+
+.block_about_us {
+  width: 100%;
+  padding: 60px 0 30px;
+
+  .block_covid_cnt {
+    width: 100%;
+
+    .block_cnt {
+      width: 100%;
+      margin: 0 0 30px;
+
+      h2 {
+        width: 100%;
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 700;
+        color: $text-black;
+      }
+
+      p {
+        width: 100%;
+        margin-bottom: 15px;
+        font-size: 14px;
+        font-weight: 400;
+        color: $text-black;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        a {
+          color: $text-blue;
+        }
+
+        span {
+          a {
+            font-weight: 500;
+            color: $text-black;
+          }
+        }
+      }
+      .detail_wpr {
+        span {
+          img {
+            @include tab-view {
+              display: none;
+            }
+          }
+        }
+      }
+
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,146 @@
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+.flight_form {
+  position: relative;
+}
+
+.laytrip-input {
+  width: 100%;
+  border: none;
+  height: 30px;
+  margin-bottom: 0px;
+  font-size: 20px;
+  color: #8188ab;
+  font-weight: 600;
+}
+
+.item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.item-list .item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 12px 0px 0px;
+  border-bottom: 1px solid #d6d6d6;
+  margin-left: 15px;
+}
+.item-list .item .item-left {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.item-list .item .item-left p {
+  font-size: 14px;
+  margin: 0;
+  color: #000000;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.item-list .item .item-left p:last-child {
+  font-size: 10px;
+  color: #8188ab;
+  margin: 2px 0 0;
+}
+.item-list .item .item-left .item-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #012178;
+}
+.item-list .item .item-right p {
+  width: 35px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+}
+
+.disable-div {
+  cursor: not-allowed;
+  background-color: #ebebe4 !important;
+}
+.disable-div input {
+  cursor: not-allowed !important;
+}
+
+.disable-btn {
+  cursor: not-allowed;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.first .search_area {
+  padding: 5px 0 !important;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .date_form {
+  position: relative;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .date_to {
+  position: relative;
+  height: 100%;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
+  width: 100%;
+  left: 0;
+  position: relative;
+}
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input.date_icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/calender-icon.svg) no-repeat;
+  background-position: center right 15px;
+}
+
+.disable_return_date {
+  height: 100%;
+}
+.disable_return_date p {
+  padding: 0 15px;
+  margin: 0;
+  font-size: 16px;
+  color: #8188ab;
+  cursor: pointer;
+  line-height: normal;
+}
+
+::ng-deep .calender-price-view {
+  min-width: 340px !important;
+}
+::ng-deep .calender-price-view .ui-state-active {
+  background-color: #012178 !important;
+}
+::ng-deep .calender-price-view .ui-state-active .calender_price {
+  color: #fff !important;
+}
+
+.calender-header {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.form-group.hidden {
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+}

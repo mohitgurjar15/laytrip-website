@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, retry, } from 'rxjs/operators';
 import { CommonFunction } from '../_helpers/common-function';
 
@@ -13,13 +13,27 @@ export class HotelService {
 
     headers = {
         currency: 'USD',
-        language: 'en'
+        language: 'en',
+        token: ``,
     }
     constructor(
         private http: HttpClient,
         private commonFunction: CommonFunction
     ) {
 
+    }
+
+    private hotels = new BehaviorSubject([]);
+    private sortFilter = new BehaviorSubject([]);
+    getHotels = this.hotels.asObservable();
+    getSortFilter = this.sortFilter.asObservable();
+
+    setHotels(hotels){
+        this.hotels.next(hotels)
+    }
+
+    setSortFilter(filter){
+        this.sortFilter.next(filter)
     }
 
     searchHotels(data) {
@@ -43,9 +57,17 @@ export class HotelService {
             );
     }
 
-    getHotelDetail(id) {
-        console.log(id);
+    getHotelDetail(id, token) {
+        this.headers.token = `${token}`;
         return this.http.post(`${environment.apiUrl}v1/hotel/detail`, { hotel_id: id }, this.commonFunction.setHeaders(this.headers))
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    getRoomDetails(id, token) {
+        //this.headers.token = `${token}`;
+        return this.http.post(`${environment.apiUrl}v1/hotel/rooms`, { hotel_id: id, bundle:token }, this.commonFunction.setHeaders(this.headers))
             .pipe(
                 catchError(this.handleError)
             );

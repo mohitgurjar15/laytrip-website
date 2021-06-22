@@ -1,5 +1,371 @@
-input.ng-invalid.ng-touched {
-  border-bottom: 1px solid #f4516c !important;
+@charset "UTF-8";
+/*--------------------------- Color variations ----------------------*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+app-search-airport .ng-select.laytrip-input .ng-dropdown-panel {
+  display: none !important;
+}
+
+.ng-select.laytrip-input {
+  padding: 0 15px 0 0;
+}
+.ng-select.laytrip-input.ng-select-disabled:focus {
+  outline: none;
+}
+.ng-select.laytrip-input .ng-dropdown-panel {
+  top: 100%;
+  background: #ffffff;
+  left: 0;
+  width: 480px;
+}
+@media (max-width: 767px) {
+  .ng-select.laytrip-input .ng-dropdown-panel {
+    width: 410px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input .ng-dropdown-panel {
+    width: 100%;
+  }
+}
+.ng-select.laytrip-input .ng-input input {
+  padding: 0;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0 15px;
+}
+.ng-select.laytrip-input .ng-select-container span.ng-arrow-wrapper span.ng-arrow {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 16px !important;
+  color: red !important;
+}
+.ng-select.laytrip-input .ng-select-opened .ng-select-container {
+  z-index: 0 !important;
+}
+.ng-select.laytrip-input .ng-select-container {
+  border: none !important;
+  height: 100%;
+  min-height: 0px !important;
+  display: block;
+}
+.ng-select.laytrip-input .ng-select-container:hover {
+  box-shadow: none !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container {
+  padding-left: 0px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input {
+  padding: 0 15px;
+  top: 0;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-input input {
+  padding-left: 0px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-value-container .ng-value {
+  padding: 5px 0px 0 15px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ng-select.laytrip-input .ng-select-container .ng-clear-wrapper {
+  padding: 0 0px 0px 5px !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-clear-wrapper .ng-clear {
+  font-size: 17px !important;
+  color: red !important;
+}
+.ng-select.laytrip-input .ng-select-container .ng-arrow-wrapper .ng-arrow {
+  display: none !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel {
+  border: none !important;
+  box-shadow: none !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-select-bottom {
+  border-top-color: #fff !important;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items {
+  max-height: 255px;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 3px 3px 3px 10px !important;
+  font-size: 14px;
+  font-weight: normal;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .parent {
+  padding: 5px 5px 5px 30px;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_dropdown_flight.svg) no-repeat;
+  background-position: left center;
+  color: #012178;
+}
+.ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+  padding: 5px 5px 5px 50px !important;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dropdown-arrow-right.svg) no-repeat;
+  background-position: left 25px center;
+  color: #808080;
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input .ng-dropdown-panel .ng-dropdown-panel-items .child {
+    padding: 5px 5px 5px 24px !important;
+    background-position: left 5px center;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 3px 0 0 0;
+  max-width: 275px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+@media (max-width: 768px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 175px;
+  }
+}
+@media (max-width: 480px) {
+  .ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-value {
+    max-width: 215px;
+  }
+}
+.ng-select.laytrip-input.custom_inputs .ng-select-container .ng-value-container .ng-input {
+  padding-left: 0;
+}
+.ng-select.ng-customClass .ng-select-container {
+  height: 100%;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  border-radius: 0;
+}
+.ng-select.ng-customClass .ng-select-container:hover {
+  box-shadow: none;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container {
+  height: auto;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-value {
+  height: auto;
+  font-size: 14px;
+  color: #000000;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-input {
+  height: auto;
+}
+.ng-select.ng-customClass .ng-select-container .ng-value-container .ng-input input {
+  height: auto !important;
+  border: none !important;
+}
+.ng-select.from_to_inputs .ng-input input {
+  padding: 0;
+}
+.ng-select.from_to_inputs .ng-select-container {
+  display: flex;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container {
+  width: 100%;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-value {
+  padding: 0 !important;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-value-container .ng-placeholder {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ng-select.from_to_inputs .ng-select-container .ng-clear-wrapper {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  span {
+      position: absolute;
+      top: 0;
+      right: 0;
+  } */
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-value {
+  width: 44px;
+}
+.ng-select.country_code .ng-select-container .ng-value-container .ng-arrow-wrapper .ng-arrow {
+  top: -4px;
+}
+.ng-select.account_telephone_n .ng-select-container .ng-value-container .ng-value {
+  color: #878787;
+  font-size: 16px;
+}
+
+.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+  box-shadow: inset 0 1px 1px transparent, 0 0 0 3px transparent !important;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-bar {
+  background: #d8d8d8;
+  height: 3px;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  width: 13px;
+  height: 13px;
+  top: auto;
+  /* to remove the default positioning */
+  top: -6px;
+  background-color: #fff;
+  border-radius: 50%;
+  outline: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer:after {
+  display: none;
+}
+
+.redeem_laypoint .ng5-slider .ng5-slider-bubble {
+  display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-selection {
+  background: #ffaa00;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-pointer {
+  border: 1px solid #ffaa00;
+  background-color: #ffaa00;
+  width: 16px;
+  height: 16px;
+  top: -7px;
+}
+
+.custom_range_slide p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8188ab;
+}
+.custom_range_slide .ng5-slider {
+  margin: 15px 0;
+}
+.custom_range_slide .ng5-slider .ng5-slider-bubble {
+  bottom: 14px;
+  width: 100%;
+  padding: 0;
+  height: auto;
+  border: none;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8188ab;
+  display: none;
+}
+
+.custom_range_slide .ng5-slider .ng5-slider-limit {
+  font-weight: bold;
+  display: none;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.secound .search_area input {
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/dr/dr_calender-icon.svg) center left 15px no-repeat !important;
+}
+
+.modify_search .flight_tab .tab-content .flight_search .flight-grid .grid_box.third .travellers .search_area .travel_info {
+  height: 22px !important;
+  margin-top: -3px !important;
+  margin-bottom: 2px !important;
+}
+
+.calender_price {
+  font-size: 9px;
+  color: #012178;
+}
+
+.search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right {
+  width: 100% !important;
+}
+.search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right table {
+  width: 100% !important;
+}
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right {
+  width: 100% !important;
+}
+.search_result .result_listing.roundtrip_list .search_block .detail_info_show .tab-content .card-body .tab_detail.baggage_rules_cnt .detail_right table {
+  width: 100% !important;
+}
+
+.anchor-tag {
+  cursor: pointer;
+}
+
+.hotel_tab .hotels_search .hotels-grid .grid_box.secound label {
+  justify-content: flex-start !important;
+}
+
+.custom-z-index {
+  z-index: 99999 !important;
+}
+
+.ui-progressbar {
+  height: 2em !important;
+  text-align: left !important;
+  overflow: hidden !important;
+}
+
+.ui-progressbar .ui-progressbar-value {
+  margin: -1px !important;
+  height: 100% !important;
+}
+
+.ui-progressbar .ui-progressbar-overlay {
+  background: url("data:image/gif;base64,R0lGODlhKAAoAIABAAAAAP///yH/C05FVFNDQVBFMi4wAwEAAAAh+QQJAQABACwAAAAAKAAoAAACkYwNqXrdC52DS06a7MFZI+4FHBCKoDeWKXqymPqGqxvJrXZbMx7Ttc+w9XgU2FB3lOyQRWET2IFGiU9m1frDVpxZZc6bfHwv4c1YXP6k1Vdy292Fb6UkuvFtXpvWSzA+HycXJHUXiGYIiMg2R6W459gnWGfHNdjIqDWVqemH2ekpObkpOlppWUqZiqr6edqqWQAAIfkECQEAAQAsAAAAACgAKAAAApSMgZnGfaqcg1E2uuzDmmHUBR8Qil95hiPKqWn3aqtLsS18y7G1SzNeowWBENtQd+T1JktP05nzPTdJZlR6vUxNWWjV+vUWhWNkWFwxl9VpZRedYcflIOLafaa28XdsH/ynlcc1uPVDZxQIR0K25+cICCmoqCe5mGhZOfeYSUh5yJcJyrkZWWpaR8doJ2o4NYq62lAAACH5BAkBAAEALAAAAAAoACgAAAKVDI4Yy22ZnINRNqosw0Bv7i1gyHUkFj7oSaWlu3ovC8GxNso5fluz3qLVhBVeT/Lz7ZTHyxL5dDalQWPVOsQWtRnuwXaFTj9jVVh8pma9JjZ4zYSj5ZOyma7uuolffh+IR5aW97cHuBUXKGKXlKjn+DiHWMcYJah4N0lYCMlJOXipGRr5qdgoSTrqWSq6WFl2ypoaUAAAIfkECQEAAQAsAAAAACgAKAAAApaEb6HLgd/iO7FNWtcFWe+ufODGjRfoiJ2akShbueb0wtI50zm02pbvwfWEMWBQ1zKGlLIhskiEPm9R6vRXxV4ZzWT2yHOGpWMyorblKlNp8HmHEb/lCXjcW7bmtXP8Xt229OVWR1fod2eWqNfHuMjXCPkIGNileOiImVmCOEmoSfn3yXlJWmoHGhqp6ilYuWYpmTqKUgAAIfkECQEAAQAsAAAAACgAKAAAApiEH6kb58biQ3FNWtMFWW3eNVcojuFGfqnZqSebuS06w5V80/X02pKe8zFwP6EFWOT1lDFk8rGERh1TTNOocQ61Hm4Xm2VexUHpzjymViHrFbiELsefVrn6XKfnt2Q9G/+Xdie499XHd2g4h7ioOGhXGJboGAnXSBnoBwKYyfioubZJ2Hn0RuRZaflZOil56Zp6iioKSXpUAAAh+QQJAQABACwAAAAAKAAoAAACkoQRqRvnxuI7kU1a1UU5bd5tnSeOZXhmn5lWK3qNTWvRdQxP8qvaC+/yaYQzXO7BMvaUEmJRd3TsiMAgswmNYrSgZdYrTX6tSHGZO73ezuAw2uxuQ+BbeZfMxsexY35+/Qe4J1inV0g4x3WHuMhIl2jXOKT2Q+VU5fgoSUI52VfZyfkJGkha6jmY+aaYdirq+lQAACH5BAkBAAEALAAAAAAoACgAAAKWBIKpYe0L3YNKToqswUlvznigd4wiR4KhZrKt9Upqip61i9E3vMvxRdHlbEFiEXfk9YARYxOZZD6VQ2pUunBmtRXo1Lf8hMVVcNl8JafV38aM2/Fu5V16Bn63r6xt97j09+MXSFi4BniGFae3hzbH9+hYBzkpuUh5aZmHuanZOZgIuvbGiNeomCnaxxap2upaCZsq+1kAACH5BAkBAAEALAAAAAAoACgAAAKXjI8By5zf4kOxTVrXNVlv1X0d8IGZGKLnNpYtm8Lr9cqVeuOSvfOW79D9aDHizNhDJidFZhNydEahOaDH6nomtJjp1tutKoNWkvA6JqfRVLHU/QUfau9l2x7G54d1fl995xcIGAdXqMfBNadoYrhH+Mg2KBlpVpbluCiXmMnZ2Sh4GBqJ+ckIOqqJ6LmKSllZmsoq6wpQAAAh+QQJAQABACwAAAAAKAAoAAAClYx/oLvoxuJDkU1a1YUZbJ59nSd2ZXhWqbRa2/gF8Gu2DY3iqs7yrq+xBYEkYvFSM8aSSObE+ZgRl1BHFZNr7pRCavZ5BW2142hY3AN/zWtsmf12p9XxxFl2lpLn1rseztfXZjdIWIf2s5dItwjYKBgo9yg5pHgzJXTEeGlZuenpyPmpGQoKOWkYmSpaSnqKileI2FAAACH5BAkBAAEALAAAAAAoACgAAAKVjB+gu+jG4kORTVrVhRlsnn2dJ3ZleFaptFrb+CXmO9OozeL5VfP99HvAWhpiUdcwkpBH3825AwYdU8xTqlLGhtCosArKMpvfa1mMRae9VvWZfeB2XfPkeLmm18lUcBj+p5dnN8jXZ3YIGEhYuOUn45aoCDkp16hl5IjYJvjWKcnoGQpqyPlpOhr3aElaqrq56Bq7VAAAOw==") !important;
+  height: 100% !important;
+  filter: alpha(opacity=25) !important;
+  /* support: IE8 */
+  opacity: 0.25 !important;
+}
+
+.ui-progressbar-indeterminate .ui-progressbar-value {
+  background-image: none !important;
+}
+
+/*--------------------------- Color variations ----------------------*/
+:root {
+  --z-distance: $item-width / 7.63;
+  --from-left: 1;
+  --mobile-bkp: $mobile-bkp;
+}
+
+/*------------- color variables ------------*/
+/*------------- color variables ------------*/
+/*----------------- responsive variations -----------------*/
+/*----------------- responsive variations -----------------*/
+.ng-customClass.country_code {
+  width: 85px;
 }
 
 .account_part .account_cnt_main .update_info .update_info_right .form_row .form_field .phone_no .code .dropdown {
@@ -21,4 +387,3530 @@ input.ng-invalid.ng-touched {
 
 ::ng-deep .calender-passport-expiry {
   min-width: 300px !important;
+}
+
+::ng-deep .calender-price-view {
+  min-width: 340px !important;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple {
+  display: flex;
+  flex-flow: column;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple:hover {
+  background: transparent;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple:hover .c_date {
+  background: #f826c1;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple.p-highlight {
+  background: transparent !important;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .p-ripple.p-highlight .c_date {
+  background: #f826c1;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .c_date {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #2196f3;
+  padding: 5px;
+  text-align: center;
+  line-height: 20px;
+  color: #fff !important;
+}
+::ng-deep .calender-price-view .p-datepicker-calendar-container .p-datepicker-calendar tbody tr td .calender_price {
+  display: block;
+  margin-top: 3px;
+}
+
+.dobs_account input.p-inputtext {
+  border: none;
+}
+.dobs_account ::ng-deep .birth_date .p-inputtext {
+  border: none;
+}
+.dobs_account ::ng-deep .birth_date th {
+  font-size: 13px !important;
+  border-bottom: none !important;
+  font-weight: 600 !important;
+  text-align: center;
+}
+.dobs_account ::ng-deep .birth_date td {
+  padding: 0.1rem !important;
+}
+.dobs_account ::ng-deep .birth_date td span {
+  width: 35px;
+  height: auto;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: #8188ab;
+  margin: 1px;
+  position: relative;
+}
+@media (max-width: 558px) {
+  .dobs_account ::ng-deep .birth_date td span {
+    width: 33px;
+  }
+}
+.dobs_account ::ng-deep .birth_date td span:hover {
+  background: none !important;
+}
+.dobs_account ::ng-deep .birth_date td span.p-highlight {
+  background: none !important;
+  font-weight: 500;
+  overflow: visible;
+}
+.dobs_account ::ng-deep .birth_date td span.p-highlight::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #F826C1;
+  position: absolute;
+  top: -5px;
+}
+
+.error_profile {
+  display: flex;
+  position: relative;
+  padding-bottom: 5px;
+  margin-top: -5px;
+}
+.error_profile .fake_div {
+  flex: 1;
+}
+@media (max-width: 768px) {
+  .error_profile .fake_div {
+    display: none;
+  }
+}
+.error_profile .error_field_new {
+  flex: 2;
+  color: #ff0000;
+  display: flex;
+  font-size: 10px;
+  align-items: flex-start;
+}
+.error_profile .error_field_new .error_img_new {
+  margin-top: 3px;
+  display: flex;
+  max-width: 10px;
+  margin-right: 5px;
+}
+
+.account_cnt_main {
+  width: 100%;
+  background: #ffffff;
+  padding: 30px 30px 0;
+}
+@media (max-width: 991px) {
+  .account_cnt_main {
+    margin: 20px 0;
+    height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .account_cnt_main {
+    padding: 10px 0 0 0;
+    margin-bottom: 0;
+  }
+}
+.account_cnt_main .update_info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 655px;
+  margin: 0 auto;
+}
+@media (max-width: 991px) {
+  .account_cnt_main .update_info {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main .update_info .update_profile {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.account_cnt_main .update_info .update_profile span {
+  width: 120px;
+  height: 120px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #d6d6d6;
+  position: relative;
+  border: 3px solid #d6d6d6;
+}
+.account_cnt_main .update_info .update_profile span img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@media (max-width: 991px) {
+  .account_cnt_main .update_info .update_profile span {
+    width: 80px;
+    height: 80px;
+  }
+  .account_cnt_main .update_info .update_profile span img {
+    width: 72px;
+    height: 72px;
+  }
+}
+.account_cnt_main .update_info .update_profile .update_profile_btn {
+  width: 100%;
+  margin: 15px 0 0;
+}
+.account_cnt_main .update_info .update_profile .update_profile_btn button {
+  background-color: transparent;
+  color: #ffaa00;
+  border: none;
+  box-shadow: none;
+  font-size: 16px;
+  padding: 0;
+  text-align: right;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .update_profile .update_profile_btn button {
+    font-size: 12px;
+  }
+}
+.account_cnt_main .update_info .update_profile .update_profile_btn button img {
+  margin-right: 10px;
+}
+.account_cnt_main .update_info .form_row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main .update_info .form_row.common_row {
+  border-bottom: 1px solid #d6d6d6;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+.account_cnt_main .update_info .form_row.common_row.error_main_class {
+  border-color: #ff0000;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 4px;
+  }
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main {
+    flex-direction: row;
+    padding-bottom: 11px;
+  }
+}
+.account_cnt_main .update_info .form_row.common_row.address_main label {
+  display: flex;
+  flex-direction: column;
+}
+.account_cnt_main .update_info .form_row.common_row.address_main label span {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main label span {
+    min-height: 25px;
+  }
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main label br {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main .address_box {
+    width: 73%;
+    flex-direction: column;
+    height: auto;
+    position: relative;
+    z-index: 9;
+  }
+}
+.account_cnt_main .update_info .form_row.common_row.address_main .address_box .inputs_com {
+  padding: 0;
+}
+.account_cnt_main .update_info .form_row.common_row.address_main .address_box .inputs_com::placeholder {
+  color: #878787;
+  opacity: 1;
+  /* Firefox */
+  font-weight: 400;
+}
+.account_cnt_main .update_info .form_row.common_row.address_main .address_box .inputs_com:-ms-input-placeholder {
+  color: #878787;
+  font-weight: 400;
+}
+.account_cnt_main .update_info .form_row.common_row.address_main .address_box .inputs_com::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #878787;
+  font-weight: 400;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main .address_box .inputs_com {
+    min-height: 25px;
+    max-height: 25px;
+  }
+}
+.account_cnt_main .update_info .form_row.common_row.address_main .address_box .address_ng {
+  min-height: 40px;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.common_row.address_main .address_box .address_ng {
+    min-height: 25px;
+  }
+}
+.account_cnt_main .update_info .form_row.title_row {
+  justify-content: space-between;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row.title_row .edit_btns {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+}
+.account_cnt_main .update_info .form_row.ar_field .text_field {
+  width: 100%;
+}
+.account_cnt_main .update_info .form_row.ar_field .text_field.airport_dropdown {
+  position: relative;
+}
+.account_cnt_main .update_info .form_row h3 {
+  color: #1445f5;
+  font-size: 34px;
+  margin-bottom: 5px;
+  margin: 25px 0 15px;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row h3 {
+    font-size: 24px;
+    margin: 25px 0 24px;
+  }
+}
+.account_cnt_main .update_info .form_row .edit_btns a {
+  background-color: transparent;
+  color: #ffaa00;
+  box-shadow: none;
+  font-size: 16px;
+  padding: 0;
+  text-align: right;
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row .edit_btns a {
+    font-size: 12px;
+  }
+}
+.account_cnt_main .update_info .form_row label {
+  margin-bottom: 10px;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 600;
+  flex: 1;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row label {
+    font-size: 14px;
+  }
+}
+.account_cnt_main .update_info .form_row .text_field {
+  flex: 2;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row .text_field {
+    height: 30px;
+    display: flex;
+  }
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers a {
+  color: #878787;
+  font-size: 14px;
+  padding: 0 25px 0 0;
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers a.active {
+  color: #ffaa00;
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers a:hover {
+  color: #ffaa00;
+  text-decoration: none;
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers a:focus {
+  outline: none;
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a {
+  color: #878787;
+  font-size: 16px;
+  padding: 0 25px 0 0;
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a.active {
+  color: #ffaa00;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a {
+    font-size: 14px;
+  }
+}
+.account_cnt_main .update_info .form_row .text_field .gender_anchers_notEnable a:focus {
+  outline: none;
+}
+.account_cnt_main .update_info .form_row .text_field .tel_span {
+  display: flex;
+  position: relative;
+  bottom: 2px;
+}
+.account_cnt_main .update_info .form_row .text_field .tel_span input {
+  border-bottom: none;
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row .text_field .tel_span input {
+    top: 3px;
+  }
+}
+.account_cnt_main .update_info .form_row .text_field .tel_span input:first-child {
+  width: 55px;
+}
+.account_cnt_main .update_info .form_row input {
+  width: 100%;
+  background: transparent;
+  height: 40px;
+  border: none;
+  font-size: 16px;
+  color: #878787;
+  position: relative;
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .account_cnt_main .update_info .form_row input {
+    height: 30px;
+    font-size: 14px;
+  }
+}
+.account_cnt_main .update_info .form_row input:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+.account_cnt_main .update_info .form_row input.birth_date {
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background-position: right center;
+  padding: 0 !important;
+  border: none;
+}
+.account_cnt_main .update_info .form_row textarea {
+  width: 100%;
+  background: transparent;
+  max-height: 70px;
+  resize: none;
+  border: none;
+  font-size: 16px;
+  color: #878787;
+  position: relative;
+}
+.account_cnt_main .update_info .form_row textarea:focus {
+  border: none;
+  outline: none;
+}
+.account_cnt_main .update_info .form_row .phone_no {
+  width: 100%;
+  display: flex;
+}
+.account_cnt_main .update_info .form_row .phone_no .code {
+  margin-right: 10px;
+}
+.account_cnt_main .update_info .form_row .phone_no .code a {
+  line-height: 40px;
+  font-size: 14px;
+  color: #000000;
+}
+.account_cnt_main .update_info .form_row .phone_no .code .dropdown-menu {
+  padding: 0;
+}
+.account_cnt_main .update_info .form_row .phone_no .code .dropdown-menu li {
+  padding: 0 10px;
+}
+.account_cnt_main .update_info .form_row .phone_no .code .dropdown-menu li a {
+  line-height: 30px;
+}
+.account_cnt_main .update_info .form_row .phone_no .number {
+  width: 100%;
+}
+.account_cnt_main .update_info .form_row .field_inn {
+  margin-bottom: 30px;
+}
+.account_cnt_main .update_info .form_row .field_inn .error_text {
+  width: 100%;
+  color: #ff0000;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 5px 0 0;
+}
+.account_cnt_main .update_info .form_row .field_inn:last-child {
+  margin-bottom: 0;
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field {
+  position: relative;
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field.custom-select {
+  height: 40px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d6d6d6;
+  background: transparent;
+  padding: 0;
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field.custom-select select {
+  display: none;
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field.custom-select .select-selected {
+  background-color: transparent;
+  line-height: 40px;
+  font-size: 14px;
+  color: #000000;
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field.custom-select .select-selected:after {
+  position: absolute;
+  content: "";
+  top: 17px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+  border-color: #8188ab transparent transparent transparent;
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field.custom-select .select-selected.select-arrow-active:after {
+  border-color: transparent transparent #8188ab transparent;
+  top: 11px;
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field.custom-select .select-items {
+  position: absolute;
+  background-color: #8188ab;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field.custom-select .select-items div {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  color: #ffffff;
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field.custom-select .select-items div:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field.custom-select .select-items div.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.account_cnt_main .update_info .form_row .field_inn .text_field.custom-select .select-items.select-hide {
+  display: none;
+}
+.account_cnt_main .update_info .form_row .select_gender {
+  margin: 0;
+}
+.account_cnt_main .update_info .form_row .select_gender ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+@media (max-width: 1199px) {
+  .account_cnt_main .update_info .form_row .select_gender ul {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 575px) {
+  .account_cnt_main .update_info .form_row .select_gender ul {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main .update_info .form_row .select_gender ul li {
+  width: auto;
+  margin: 0 10px 0 0;
+  text-align: center;
+}
+@media (max-width: 1199px) {
+  .account_cnt_main .update_info .form_row .select_gender ul li {
+    margin: 0 10px 10px 0;
+  }
+}
+.account_cnt_main .update_info .form_row .select_gender ul li a {
+  width: 90px;
+  text-align: center;
+  padding: 10px;
+  display: inline-block;
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 15px;
+}
+.account_cnt_main .update_info .form_row .select_gender ul li a .gender_type {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #d6d6d6;
+  position: relative;
+}
+.account_cnt_main .update_info .form_row .select_gender ul li a .gender_type img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.account_cnt_main .update_info .form_row .select_gender ul li a .gender_type img.active-icon {
+  display: none;
+}
+.account_cnt_main .update_info .form_row .select_gender ul li a span {
+  display: block;
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #8188ab;
+}
+.account_cnt_main .update_info .form_row .select_gender ul li a.active_gender {
+  border-color: #1943ff;
+  border-radius: 15px;
+  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.1);
+}
+.account_cnt_main .update_info .form_row .select_gender ul li a.active_gender .gender_type {
+  background: #1943ff;
+}
+.account_cnt_main .update_info .form_row .select_gender ul li a.active_gender .gender_type img.active-icon {
+  display: block;
+}
+.account_cnt_main .update_info .form_row .select_gender ul li a.active_gender .gender_type img.default-icon {
+  display: none;
+}
+.account_cnt_main .update_info .form_row .select_gender ul li a.active_gender span {
+  color: #1943ff;
+}
+.account_cnt_main .update_info .form_row .select_gender ul li:last-child {
+  margin: 0;
+}
+.account_cnt_main .update_info .form_row .form_field {
+  margin: 0 0 25px;
+}
+.account_cnt_main .update_info .form_row .form_field label {
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #8188ab;
+  font-weight: 400;
+}
+.account_cnt_main .update_info .form_row .form_field label sup {
+  color: #ff0000;
+}
+.account_cnt_main .update_info .form_row .form_field .text_field {
+  width: 100%;
+}
+.account_cnt_main .update_info .form_row .form_field .text_field .error_text {
+  width: 100%;
+  color: #ff0000;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 5px 0 0;
+}
+.account_cnt_main .update_info .form_row .form_field .custom_listing {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.account_cnt_main .update_info .form_row .form_field .custom_listing li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 80px 0 0;
+  align-items: center;
+  color: #8188ab;
+  font-size: 14px;
+  font-weight: 300;
+}
+@media (max-width: 575px) {
+  .account_cnt_main .update_info .form_row .form_field .custom_listing li {
+    padding: 0 30px 0 0;
+  }
+}
+.account_cnt_main .update_info .form_row .form_field .custom_listing li .custom_radio {
+  width: 100%;
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin: 0;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #8188ab;
+  font-weight: 300;
+}
+.account_cnt_main .update_info .form_row .form_field .custom_listing li .custom_radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.account_cnt_main .update_info .form_row .form_field .custom_listing li .custom_radio input:checked ~ .checkmark {
+  border: 1px solid #F826C1;
+}
+.account_cnt_main .update_info .form_row .form_field .custom_listing li .custom_radio input:checked ~ .checkmark:after {
+  display: block;
+}
+.account_cnt_main .update_info .form_row .form_field .custom_listing li .custom_radio .checkmark {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  background-color: transparent;
+  border: 1px solid #8188ab;
+  border-radius: 50%;
+}
+.account_cnt_main .update_info .form_row .form_field .custom_listing li .custom_radio .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: 2px;
+  left: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #F826C1;
+}
+.account_cnt_main .update_info .update_location_detail {
+  width: 100%;
+}
+.account_cnt_main .update_info .update_location_detail .section_title {
+  width: 100%;
+  margin-bottom: 30px;
+  padding: 0;
+}
+.account_cnt_main .update_info .update_location_detail .section_title h4 {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  padding: 15px 30px;
+  background: #fafafa;
+  margin: 0;
+  text-align: left;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update {
+  width: 100%;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 991px) {
+  .account_cnt_main .update_info .update_location_detail .detail_update .form_row {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck {
+  width: 31%;
+}
+@media (max-width: 991px) {
+  .account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+@media (max-width: 767px) {
+  .account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn {
+  width: 100%;
+  margin-bottom: 30px;
+}
+@media (max-width: 991px) {
+  .account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn {
+    width: 48%;
+  }
+}
+@media (max-width: 767px) {
+  .account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn {
+    width: 100%;
+  }
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn label {
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #8188ab;
+  font-weight: 400;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn label sup {
+  color: #ff0000;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .error_text {
+  width: 100%;
+  color: #ff0000;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 5px 0 0;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field {
+  width: 100%;
+  position: relative;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field input {
+  width: 100%;
+  background: transparent;
+  height: 40px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d6d6d6;
+  font-size: 14px;
+  color: #000000;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field input:placeholder {
+  color: #d6d6d6;
+  -webkit-text-fill-color: #d6d6d6;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field input:focus {
+  border-bottom: 1px solid #1943ff;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field input.birth_date {
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background-position: right center;
+  padding: 0 !important;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field .error_text {
+  width: 100%;
+  color: #ff0000;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 5px 0 0;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select {
+  height: 40px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d6d6d6;
+  background: transparent;
+  padding: 0;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select select {
+  display: none;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select .select-selected {
+  background-color: transparent;
+  line-height: 40px;
+  font-size: 14px;
+  color: #000000;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select .select-selected:after {
+  position: absolute;
+  content: "";
+  top: 17px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+  border-color: #8188ab transparent transparent transparent;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select .select-selected.select-arrow-active:after {
+  border-color: transparent transparent #8188ab transparent;
+  top: 11px;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select .select-items {
+  position: absolute;
+  background-color: #8188ab;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select .select-items div {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  color: #ffffff;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select .select-items div:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select .select-items div.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck .field_inn .text_field.custom-select .select-items.select-hide {
+  display: none;
+}
+.account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck.half {
+  width: 49%;
+}
+@media (max-width: 991px) {
+  .account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck.half .field_inn {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  .account_cnt_main .update_info .update_location_detail .detail_update .form_row .field_bolck.half {
+    width: 100%;
+  }
+}
+.account_cnt_main.booking_main {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+.account_cnt_main.booking_main .block_booking_list {
+  width: 100%;
+}
+.account_cnt_main.booking_main .block_booking_list .nav-tabs {
+  display: none;
+}
+@media (min-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs {
+    display: flex;
+    background-color: transparent;
+    border: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a {
+    width: auto;
+    padding: 12px 40px;
+    text-align: center;
+    background: #1943ff;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    border-radius: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a img {
+    margin-right: 15px;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a .default-icon {
+    display: block;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a .active-icon {
+    display: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a .disabled-icon {
+    display: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active {
+    border: none;
+    background: #ffffff;
+    color: #1943ff;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active .active-icon {
+    display: block;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active .default-icon {
+    display: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.active .default-icon {
+    display: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled {
+    background: #707070;
+    color: #323233;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled .active-icon {
+    display: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled .disabled-icon {
+    display: block;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a.disabled .default-icon {
+    display: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a:hover {
+    border: none;
+    background: #ffffff;
+    color: #1943ff;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a:hover .active-icon {
+    display: block;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li a:hover .default-icon {
+    display: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li:first-child a {
+    border-radius: 20px 0 0 0;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li:first-child a:before {
+    display: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .nav-tabs li:last-child a {
+    border-radius: 0 20px 0 0;
+  }
+}
+@media (min-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card {
+    border: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-header {
+    display: none;
+  }
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .collapse {
+    display: block;
+  }
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list .tab-content .tab-pane {
+    opacity: 1;
+    margin: 0 0 15px;
+    border: 1px solid #d6d6d6;
+  }
+  .account_cnt_main.booking_main .block_booking_list .tab-content .tab-pane .card-header {
+    border-bottom: 1px solid transparent;
+    background: #ffffff;
+  }
+  .account_cnt_main.booking_main .block_booking_list .tab-content .tab-pane .card-header h5 {
+    font-size: 16px;
+  }
+  .account_cnt_main.booking_main .block_booking_list .tab-content .tab-pane .card-header h5 a {
+    width: 100%;
+    display: inline-block;
+    color: #8188ab;
+  }
+  .account_cnt_main.booking_main .block_booking_list .tab-content .tab-pane:last-child {
+    margin: 0;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card {
+  border-radius: 0;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body {
+  padding: 25px 30px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body {
+    padding: 20px;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result {
+  padding: 0;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing {
+  width: 100%;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block {
+  border: 1px solid #d6d6d6;
+  border-radius: 5px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+  margin: 0 0 15px;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info {
+  width: 100%;
+  margin: 0 0 15px;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul {
+  width: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul {
+    flex-flow: column;
+    text-align: center;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul li {
+  padding: 0 40px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8188ab;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul li:last-child {
+  padding: 0;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul li span {
+  color: #000000;
+  padding: 0 0 0 5px;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul li {
+    padding: 0 0 10px 0;
+  }
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info ul li span {
+    font-size: 12px;
+    display: block;
+    padding: 0;
+    word-break: break-word;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info span.complete {
+  font-size: 16px;
+  color: #119300;
+  font-weight: 500;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info span.refund {
+  font-size: 16px;
+  color: #ff0000;
+  font-weight: 500;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info .block_cancle {
+  width: 100%;
+  text-align: center;
+  line-height: 28px;
+  display: flex;
+  flex-flow: column;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info .block_cancle a {
+  padding: 4px 10px;
+  border-radius: 5px;
+  background: #00bffd;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_booking_info .block_cancle {
+    padding: 15px 0 0;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_detail.noborder {
+  border: none;
+  padding: 0;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_main {
+  padding-left: 0;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .listing_block .block_main .block_top .block_inner .block_im {
+  padding-left: 0;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block:last-child {
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block:last-child {
+    margin: 0 0 15px;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .search_block .detail_info_show .nav-tabs li a:before {
+  display: none;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .detail_info_show .tab-content .card-body {
+  box-shadow: none;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .search_result .result_listing.one_way_list.roundtrip_list .detail_info_show .tab-content .card-body.noborder {
+  border: none;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available {
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available img {
+  width: 120px;
+}
+.account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available h5 {
+  font-size: 40px;
+  color: #fc7e66;
+  font-weight: 600;
+  margin: 30px 0 0;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available {
+    padding: 20px;
+  }
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available img {
+    width: 150px;
+  }
+  .account_cnt_main.booking_main .block_booking_list .tab-content .card .card-body .block_booking_list_inner .block_nobooking_available h5 {
+    font-size: 20px;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li a {
+  background: #ebf9fe;
+  color: #8188ab;
+  padding: 15px 35px;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li a.active {
+  background: #00aeef;
+  color: #ffffff;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li a::before {
+  width: 1px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background: #d8d4fe;
+  content: "";
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li:first-child a {
+  border-radius: 5px 0 0 0;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li:first-child a:before {
+  display: none;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .nav-tabs li:last-child a {
+  border-radius: 0 5px 0 0;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content {
+  position: relative;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body {
+  padding: 30px 20px;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .block_search {
+  width: 200px;
+  position: absolute;
+  top: -50px;
+  right: 0;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .block_search .block_serach_inner {
+  width: 100%;
+  position: relative;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .block_search .block_serach_inner input {
+  width: 100%;
+  height: 50px;
+  background: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0 50px 0 10px;
+  border: 1px solid #d6d6d6;
+  font-size: 14px;
+  color: #8188ab;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .block_search .block_serach_inner .search_icon {
+  width: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .block_search .block_serach_inner .search_icon button {
+  background: transparent;
+  border: none;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 20px 0 10px;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .block_search {
+    position: relative;
+    top: 0;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing {
+  width: 100%;
+  border-radius: 5px;
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+  margin: 0 0 15px;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing:last-child {
+  margin: 0;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top {
+  padding: 5px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d6d6d6;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left {
+  width: auto;
+  padding: 15px 0;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul {
+    justify-content: center;
+  }
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li {
+  margin: 0 15px 0 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: #8188ab;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li span {
+  color: #0045ff;
+  font-weight: 600;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li:last-child {
+  margin: 0;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li:last-child span {
+  color: #000000;
+  font-weight: 600;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li .progress {
+  width: 140px;
+  height: 8px;
+  background: #d6d6d6;
+  position: relative;
+  overflow: visible;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li .progress .progress-bar {
+  background: #1943ff;
+  border-radius: 4px;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li .progress .progress_dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0px 2px 6px rgba(252, 126, 102, 0.15);
+  background: #1943ff;
+  position: absolute;
+  top: 50%;
+  left: auto;
+  transform: translateY(-50%);
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li .progress {
+    margin: 10px auto;
+  }
+}
+@media (max-width: 360px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li .progress {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left ul li {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+  }
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_left {
+    width: 100%;
+    margin: 0 0 20px;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_right {
+  width: 210px;
+  padding: 6px 15px;
+  display: flex;
+  align-items: center;
+  background: #1943ff;
+  border-radius: 8px;
+  margin: 0 0 0 50px;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_right p {
+  font-size: 10px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_right p span {
+  font-size: 14px;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_right .pay_status a {
+  width: auto;
+  background: #ffffff;
+  padding: 2px 7px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #00bffd;
+  white-space: nowrap;
+  border-radius: 5px;
+  margin: 0 0 0 25px;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_top .list_right {
+    margin: 0;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block {
+  padding: 0 20px;
+  border-left: 2px dashed rgba(63, 48, 249, 0.2);
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:first-child {
+  border-left: none;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:first-child {
+    padding-top: 0;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child {
+  width: 20%;
+  padding-left: 30px;
+  text-align: center;
+  border-left: none;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child span {
+  padding: 3px 20px;
+  border: 1px solid #d6d6d6;
+  border-radius: 5px;
+  background: #fedd00;
+  display: block;
+  margin: 0 0 5px;
+  font-size: 10px;
+  color: #ffffff;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child span {
+    display: inline-block;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #00aeef;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child a {
+    display: block;
+  }
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child {
+    width: 100%;
+    margin: 20px 0 0;
+  }
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block:last-child {
+    border: none;
+    margin: 0;
+    padding-bottom: 0;
+  }
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block ul li {
+  padding: 0 0 10px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #8188ab;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block ul li span {
+  color: #000000;
+  display: block;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block ul li:last-child {
+  padding: 0;
+}
+.account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block ul li.fb_medium {
+  font-size: 14px;
+  font-weight: 600;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block ul li {
+    text-align: center;
+  }
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_booking_list.block_payment_list .tab-content .card .card-body .block_pay_list_inner .pay_listing .list_btm .grid_block {
+    width: 100%;
+    padding: 15px;
+    border-left: none;
+    border-bottom: 2px dashed rgba(63, 48, 249, 0.2);
+  }
+}
+.account_cnt_main.booking_main .block_filter_payment {
+  width: 100%;
+  border-radius: 5px;
+  background: #ffffff;
+  padding: 20px 20px 0 20px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+  margin: 0 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_filter_payment {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form {
+  width: 100%;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_filter_payment .filter_form {
+    width: 100%;
+  }
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_filter_payment .filter_form .form_row {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field {
+  width: 48%;
+  margin: 0 0 20px;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field {
+    width: 100%;
+  }
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8188ab;
+  margin: 0 0 10px;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field label sup {
+  color: #ff0000;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .custom_listing {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .custom_listing li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 80px 0 0;
+  align-items: center;
+  color: #8188ab;
+  font-size: 14px;
+  font-weight: 300;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .custom_listing li .custom_radio {
+  width: 100%;
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin: 0;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #8188ab;
+  font-weight: 300;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .custom_listing li .custom_radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .custom_listing li .custom_radio input:checked ~ .checkmark {
+  border: 1px solid #fc7e66;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .custom_listing li .custom_radio input:checked ~ .checkmark:after {
+  display: block;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .custom_listing li .custom_radio .checkmark {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  background-color: transparent;
+  border: 1px solid #8188ab;
+  border-radius: 50%;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .custom_listing li .custom_radio .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: 2px;
+  left: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fc7e66;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field input {
+  width: 100%;
+  background: transparent;
+  height: 40px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d6d6d6;
+  font-size: 14px;
+  color: #000000;
+  position: relative;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field input:focus {
+  border-bottom: 1px solid #1943ff;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field input.birth_date {
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+  background-position: right center;
+  padding: 0 !important;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field input:placeholder {
+  color: #d6d6d6;
+  -webkit-text-fill-color: #d6d6d6;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field.custom-select {
+  height: 40px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d6d6d6;
+  background: transparent;
+  padding: 0;
+  position: relative;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field.custom-select select {
+  display: none;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field.custom-select .select-selected {
+  background-color: transparent;
+  line-height: 40px;
+  font-size: 14px;
+  color: #000000;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field.custom-select .select-selected:after {
+  position: absolute;
+  content: "";
+  top: 17px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+  border-color: #8188ab transparent transparent transparent;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field.custom-select .select-selected.select-arrow-active:after {
+  border-color: transparent transparent #8188ab transparent;
+  top: 11px;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field.custom-select .select-items {
+  position: absolute;
+  background-color: #8188ab;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field.custom-select .select-items div {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  color: #ffffff;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field.custom-select .select-items div:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field.custom-select .select-items div.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field.custom-select .select-items.select-hide {
+  display: none;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field .phone_no {
+  width: 100%;
+  display: flex;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field .phone_no .code {
+  border-bottom: 1px solid #d6d6d6;
+  margin-right: 10px;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field .phone_no .code a {
+  line-height: 40px;
+  font-size: 14px;
+  color: #000000;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field .phone_no .code .dropdown-menu {
+  padding: 0;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field .phone_no .code .dropdown-menu li {
+  padding: 0 10px;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_form .form_row .form_field .text_field .phone_no .code .dropdown-menu li a {
+  line-height: 30px;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn {
+  width: 300px;
+  margin: 0 0 20px 50px;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_filter_payment .filter_btn {
+    width: 100%;
+    text-align: right;
+    margin-left: 0;
+  }
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn ul {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: column;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_filter_payment .filter_btn ul {
+    flex-flow: row;
+  }
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn ul li {
+  margin: 0 0 20px;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_filter_payment .filter_btn ul li {
+    margin: 0 15px 0 0;
+  }
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn ul li:last-child {
+  margin: 0;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn button {
+  width: 100%;
+  padding: 11px 25px;
+  background: #1943ff;
+  border-radius: 8px;
+  border: 1px solid #1943ff;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn button.disabled {
+  background: #707070;
+  border: 1px solid #707070;
+  color: #323233;
+  pointer-events: none;
+  cursor: default;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #fc7e66;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn button:hover {
+  border-color: #fc7e66;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn button:hover:before {
+  height: 190%;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.booking_main .block_filter_payment .filter_btn button {
+    width: 200px;
+  }
+}
+@media (max-width: 575px) {
+  .account_cnt_main.booking_main .block_filter_payment .filter_btn button {
+    width: 117px;
+    padding: 8px 25px;
+    font-size: 14px;
+  }
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn button.btn_reset {
+  background: #8188ab;
+  border-color: #8188ab;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn button.btn_reset.disabled {
+  background: #707070;
+  border: 1px solid #707070;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn button.btn_reset:hover {
+  border-color: #fc7e66;
+}
+.account_cnt_main.booking_main .block_filter_payment .filter_btn button.btn_reset:hover:before {
+  height: 190%;
+}
+.account_cnt_main.booking_main .pay_modal_cnt {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top {
+  position: relative;
+  margin: 0 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #8188ab;
+  margin: 0;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top p span {
+  color: #000000;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top a {
+  line-height: 22px;
+  background: #8188ab;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #ffffff;
+  display: inline-block;
+  padding: 0 20px;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #fc7e66;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top a:hover {
+  border-color: #fc7e66;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_top a:hover:before {
+  height: 190%;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner {
+  width: 100%;
+  padding: 0 0 30px;
+  position: relative;
+  z-index: 9;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .block_title {
+  width: 100%;
+  padding: 15px 30px;
+  background: #fafafa;
+  margin: 0 0 20px;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .block_title h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li {
+  width: 100%;
+  padding: 0 0 15px;
+  display: flex;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li {
+    flex-flow: column;
+  }
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li span {
+  min-width: 225px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  margin: 0;
+  display: inline-block;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #8188ab;
+  margin: 0;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li p a {
+  color: #00aeef;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul li:last-child {
+  padding: 0;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul.block_contact {
+  display: flex;
+  margin: 10px 0 30px;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul.block_contact li {
+  width: auto;
+  padding: 0 50px 0 0;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul.block_contact li a {
+  font-size: 20px;
+  font-weight: 500;
+  color: #00aeef;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_left ul.block_contact li a i {
+  margin: 0 10px 0 0;
+  color: #8188ab;
+  font-size: 16px;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_right .list_right {
+  width: 210px;
+  padding: 6px 15px;
+  display: flex;
+  align-items: center;
+  background: #1943ff;
+  border-radius: 8px;
+  margin: 0 0 0 50px;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_right .list_right {
+    margin: 30px 0 0;
+  }
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_right .list_right p {
+  font-size: 10px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_right .list_right p span {
+  font-size: 14px;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info .detail_info_right .list_right .pay_status {
+  width: auto;
+  background: #ffffff;
+  padding: 2px 7px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #00bffd;
+  white-space: nowrap;
+  border-radius: 5px;
+  margin: 0 0 0 25px;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_info {
+    flex-flow: column;
+  }
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table {
+  width: 100%;
+  border: 1px solid #d6d6d6;
+  border-radius: 3px;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table thead tr th {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8188ab;
+  text-align: center;
+  border: 1px solid #d6d6d6;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table thead tr th:first-child {
+  width: 100px;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table thead tr th:last-child {
+  width: 200px;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td {
+  padding: 10px;
+  border: 1px solid #d6d6d6;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  text-align: center;
+  vertical-align: top;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td span.status_paid {
+  color: #19dd00;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td span.status_pending {
+  color: #fedd00;
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td:last-child {
+  width: 400px;
+  max-width: 100%;
+}
+@media only screen and (max-width: 800px) {
+  .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table {
+    display: block;
+  }
+  .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table thead {
+    display: block;
+  }
+  .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table thead tr {
+    display: none;
+  }
+  .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody {
+    display: block;
+  }
+  .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr {
+    display: block;
+  }
+  .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td {
+    display: block;
+    border: none;
+    border-bottom: 1px solid #d6d6d6;
+    position: relative;
+    padding-top: 35px;
+    white-space: normal;
+    text-align: left;
+  }
+  .account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner .pay_detail_tbl table tbody tr td:before {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    content: attr(data-title);
+    color: #8188ab;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}
+.account_cnt_main.booking_main .pay_modal_cnt .pay_modal_btm .block_inner:last-child {
+  padding: 0;
+}
+.account_cnt_main .block_card_list_main {
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.account_cnt_main .block_card_list_main .block_no_card_available {
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+}
+.account_cnt_main .block_card_list_main .block_no_card_available img {
+  width: 120px;
+}
+.account_cnt_main .block_card_list_main .block_no_card_available h5 {
+  font-size: 40px;
+  color: #fc7e66;
+  font-weight: 600;
+  margin: 30px 0 0;
+}
+@media (max-width: 767px) {
+  .account_cnt_main .block_card_list_main .block_no_card_available {
+    padding: 20px;
+  }
+  .account_cnt_main .block_card_list_main .block_no_card_available img {
+    width: 150px;
+  }
+  .account_cnt_main .block_card_list_main .block_no_card_available h5 {
+    font-size: 20px;
+  }
+}
+.account_cnt_main .block_card_list_main .block_card_list {
+  width: 320px;
+  max-width: 100%;
+  margin: 0 30px 25px 0;
+  background: #f9fafc;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+}
+@media (max-width: 480px) {
+  .account_cnt_main .block_card_list_main .block_card_list {
+    margin-right: 0;
+  }
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_top .block_card_bank {
+  width: auto;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_top .block_card_bank img {
+  width: 35px;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_top .block_card_bank span {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: #8188ab;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_top .block_card_action {
+  width: auto;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_top .block_card_action ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_top .block_card_action ul li {
+  padding: 0 0 0 20px;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_top .block_card_action ul li a {
+  font-size: 16px;
+  color: #8188ab;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_number {
+  margin: 25px 0 30px;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_number ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_number ul li {
+  padding: 0 0 0 10px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #000000;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_number ul li:first-child {
+  padding: 0;
+}
+@media (max-width: 480px) {
+  .account_cnt_main .block_card_list_main .block_card_list .block_card_number ul li {
+    font-size: 17px;
+  }
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_btm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_btm .block_name {
+  font-size: 10px;
+  font-weight: 500;
+  color: #8188ab;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_btm .block_name span {
+  font-size: 14px;
+  display: block;
+  color: #000000;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_btm .block_expiry {
+  font-size: 10px;
+  font-weight: 500;
+  color: #8188ab;
+}
+.account_cnt_main .block_card_list_main .block_card_list .block_card_btm .block_expiry span {
+  font-size: 14px;
+  display: block;
+  color: #000000;
+}
+.account_cnt_main .block_card_list_main .block_add_card {
+  width: 100%;
+}
+.account_cnt_main .block_card_list_main .block_add_card a {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00aeef;
+}
+.account_cnt_main.co_traveller {
+  padding: 0;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .custom_checkbox {
+  position: relative;
+  margin-bottom: 0;
+  vertical-align: middle;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8188ab;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .custom_checkbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .custom_checkbox input:checked ~ .checkmark {
+  border-color: #F826C1;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .custom_checkbox input:checked ~ .checkmark:after {
+  opacity: 1;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .custom_checkbox .checkmark {
+  width: 14px;
+  min-width: 14px;
+  height: 14px;
+  display: inline-block;
+  border: 1px solid #8188ab;
+  vertical-align: middle;
+  margin-right: 11px;
+  position: relative;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .custom_checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  width: 6px;
+  height: 9px;
+  border-radius: 2px;
+  border: solid #F826C1;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-width: medium;
+  border-left-width: medium;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  border-radius: 0px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transition: all 0.2s;
+  opacity: 0;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-bottom: 1px solid #d6d6d6;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_top {
+    padding: 20px;
+  }
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_top a {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00aeef;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_top a {
+    font-size: 12px;
+  }
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm {
+  width: 100%;
+  padding: 30px;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm {
+    padding: 20px;
+  }
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm .block_no_traveller {
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm .block_no_traveller img {
+  width: 100px;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm .block_no_traveller h5 {
+  font-size: 40px;
+  color: #fc7e66;
+  font-weight: 600;
+  margin: 30px 0 0;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm .block_no_traveller {
+    padding: 20px;
+  }
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm .block_no_traveller img {
+    width: 150px;
+  }
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm .block_no_traveller h5 {
+    font-size: 20px;
+  }
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  margin: 0 0 15px;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li:last-child {
+  margin: 0;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .custom_checkbox {
+  margin: 20px 0 0;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  margin: 0 0 0 15px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+}
+@media (max-width: 575px) {
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list {
+    margin: 0;
+    padding: 10px;
+  }
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_block .traveller_name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_block .traveller_name {
+    font-size: 14px;
+  }
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_block .traveller_name span {
+  font-size: 14px;
+  font-weight: 400;
+  color: #F826C1;
+  padding: 0 0 0 10px;
+}
+@media (max-width: 480px) {
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_block .traveller_name {
+    font-size: 12px;
+  }
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_block .traveller_name span {
+    font-size: 12px;
+  }
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_block .traveller_age {
+  font-size: 14px;
+  font-weight: 400;
+  color: #8188ab;
+}
+@media (max-width: 480px) {
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_block .traveller_age {
+    font-size: 12px;
+  }
+}
+@media (max-width: 575px) {
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_action {
+    margin-left: 15px;
+  }
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_action ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_action ul li {
+  padding: 0 0 0 20px;
+  margin: 0;
+}
+.account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_action ul li a {
+  font-size: 16px;
+  color: #8188ab;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_action ul li {
+    padding: 0 0 0 10px;
+  }
+  .account_cnt_main.co_traveller .block_co_traveller_main .block_traveller_btm ul li .traveller_list .list_action ul li:first-child {
+    padding-left: 0;
+  }
+}
+.account_cnt_main .block_setting_main .block_setting {
+  width: 100%;
+  padding: 0 0 30px;
+}
+.account_cnt_main .block_setting_main .block_setting .block_title {
+  width: 100%;
+  padding: 15px 30px;
+  background: #fafafa;
+  margin: 0 0 30px;
+}
+.account_cnt_main .block_setting_main .block_setting .block_title h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+.account_cnt_main .block_setting_main .block_setting .block_cnt {
+  width: 100%;
+}
+.account_cnt_main .block_setting_main .block_setting .block_cnt ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.account_cnt_main .block_setting_main .block_setting .block_cnt ul li {
+  width: 33.33%;
+  padding: 0 0 20px;
+}
+@media (max-width: 991px) {
+  .account_cnt_main .block_setting_main .block_setting .block_cnt ul li {
+    width: 50%;
+  }
+}
+@media (max-width: 575px) {
+  .account_cnt_main .block_setting_main .block_setting .block_cnt ul li {
+    width: 100%;
+  }
+}
+.account_cnt_main .block_setting_main .block_setting .block_cnt ul li .custom_checkbox {
+  position: relative;
+  margin-bottom: 0;
+  vertical-align: middle;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8188ab;
+}
+.account_cnt_main .block_setting_main .block_setting .block_cnt ul li .custom_checkbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.account_cnt_main .block_setting_main .block_setting .block_cnt ul li .custom_checkbox input:checked ~ .checkmark {
+  border-color: #F826C1;
+}
+.account_cnt_main .block_setting_main .block_setting .block_cnt ul li .custom_checkbox input:checked ~ .checkmark:after {
+  opacity: 1;
+}
+.account_cnt_main .block_setting_main .block_setting .block_cnt ul li .custom_checkbox .checkmark {
+  width: 14px;
+  min-width: 14px;
+  height: 14px;
+  display: inline-block;
+  border: 1px solid #8188ab;
+  vertical-align: middle;
+  margin-right: 11px;
+  position: relative;
+}
+.account_cnt_main .block_setting_main .block_setting .block_cnt ul li .custom_checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  width: 6px;
+  height: 9px;
+  border-radius: 2px;
+  border: solid #F826C1;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-width: medium;
+  border-left-width: medium;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  border-radius: 0px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transition: all 0.2s;
+  opacity: 0;
+}
+.account_cnt_main.change_password {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.account_cnt_main.change_password .block_change_password {
+  border-radius: 5px;
+  background: #ffffff;
+  padding: 30px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+  margin: 0 0 30px;
+}
+.account_cnt_main.change_password .block_change_password .block_title {
+  width: 100%;
+  padding: 15px 30px;
+  background: #fafafa;
+  margin: 0 0 30px;
+}
+.account_cnt_main.change_password .block_change_password .block_title h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+.account_cnt_main.change_password .block_change_password .block_form {
+  width: 100%;
+  padding: 0 25px;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.change_password .block_change_password .block_form {
+    padding: 0 10px;
+  }
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row {
+  width: 100%;
+  display: flex;
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row .form_field {
+  width: 50%;
+  margin: 0 0 30px;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.change_password .block_change_password .block_form .form_row .form_field {
+    width: 100%;
+  }
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row .form_field label {
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #8188ab;
+  font-weight: 400;
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row .form_field label sup {
+  color: #ff0000;
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row .form_field .text_field input {
+  width: 100%;
+  background: transparent;
+  height: 40px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d6d6d6;
+  font-size: 14px;
+  color: #000000;
+  position: relative;
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row .form_field .text_field input:focus {
+  border-bottom: 1px solid #1943ff;
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row .form_field .text_field input:placeholder {
+  color: #d6d6d6;
+  -webkit-text-fill-color: #d6d6d6;
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row .form_field .text_field input.error {
+  border-color: #ff0000;
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row .form_field .text_field .error_text {
+  width: 100%;
+  color: #ff0000;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 5px 0 0;
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row .form_field .text_field.pass_show {
+  position: relative;
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row .form_field .text_field.pass_show .ptxt {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  z-index: 1;
+  color: #8188ab;
+  margin-top: -10px;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+.account_cnt_main.change_password .block_change_password .block_form .form_row:last-child .form_field {
+  margin: 0;
+}
+.account_cnt_main.change_password .form_btn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.account_cnt_main.change_password .form_btn button {
+  width: auto;
+  padding: 0 30px;
+  height: 48px;
+  background: #1943ff;
+  border-radius: 8px;
+  border: 1px solid #1943ff;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+  display: flex;
+  align-items: center;
+}
+.account_cnt_main.change_password .form_btn button img {
+  margin-left: 40px;
+  height: 20px;
+}
+.account_cnt_main.change_password .form_btn button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #fc7e66;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.account_cnt_main.change_password .form_btn button:hover {
+  border-color: #fc7e66;
+}
+.account_cnt_main.change_password .form_btn button:hover:before {
+  height: 190%;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.change_password .form_btn button {
+    display: inline-flex;
+  }
+}
+.account_cnt_main.ac_notifications {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+.account_cnt_main.ac_notifications .block_notification_main {
+  width: 100%;
+}
+.account_cnt_main.ac_notifications .block_notification_main .nav-tabs {
+  display: none;
+}
+@media (min-width: 768px) {
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs {
+    display: flex;
+    background-color: transparent;
+    border: none;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a {
+    width: auto;
+    padding: 12px 40px;
+    text-align: center;
+    background: #1943ff;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    border-radius: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a img {
+    margin-right: 15px;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a .notifiy_simbol {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #F826C1;
+    margin: -1px 0 0 5px;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a .default-icon {
+    display: block;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a .active-icon {
+    display: none;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a.active {
+    border: none;
+    background: #ffffff;
+    color: #1943ff;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a.active .active-icon {
+    display: block;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a.active .default-icon {
+    display: none;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a:hover {
+    border: none;
+    background: #ffffff;
+    color: #1943ff;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a:hover .active-icon {
+    display: block;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li a:hover .default-icon {
+    display: none;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li:first-child a {
+    border-radius: 20px 0 0 0;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li:first-child a:before {
+    display: none;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .nav-tabs li:last-child a {
+    border-radius: 0 20px 0 0;
+  }
+}
+@media (min-width: 768px) {
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .card {
+    border: none;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-header {
+    display: none;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .card .collapse {
+    display: block;
+  }
+}
+@media (max-width: 767px) {
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .tab-pane {
+    display: block;
+    opacity: 1;
+    margin: 0 0 15px;
+    border: 1px solid #d6d6d6;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .tab-pane .card-header {
+    border-bottom: 1px solid transparent;
+    background: #ffffff;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .tab-pane .card-header h5 {
+    font-size: 16px;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .tab-pane .card-header h5 a {
+    width: 100%;
+    display: inline-block;
+    color: #8188ab;
+  }
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .tab-pane:last-child {
+    margin: 0;
+  }
+}
+.account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body {
+  padding: 25px 30px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+}
+@media (max-width: 480px) {
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body {
+    padding: 20px 15px;
+  }
+}
+.account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #d6d6d6;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+  border-radius: 5px;
+  margin: 0 0 15px;
+  display: flex;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_list_left {
+  width: 140px;
+  padding: 2px 0 0 30px;
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  color: #F826C1;
+}
+.account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_list_left img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_list_left {
+    margin: 0 0 10px;
+  }
+}
+.account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_list_right {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_list_right .block_right_inner p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  margin: 0 0 5px;
+}
+.account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_list_right .block_right_inner span {
+  font-size: 14px;
+  font-weight: 400;
+  color: #8188ab;
+}
+.account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_list_right .block_right_inner:last-child {
+  padding: 0;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_list_right .block_right_inner {
+    width: 100%;
+    padding: 10px 0;
+  }
+}
+@media (max-width: 767px) {
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_list_right {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 575px) {
+  .account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_list_right {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main.ac_notifications .block_notification_main .tab-content .card .card-body .block_notification .block_list:last-child {
+  margin: 0;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points {
+  width: 100%;
+  padding: 30px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+  margin: 0 0 30px;
+  background: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points {
+    flex-flow: column;
+  }
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul {
+  width: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 480px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul {
+    flex-wrap: wrap;
+  }
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li {
+  width: 200px;
+  height: 88px;
+  padding: 22px 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/point_bg_pink.svg) no-repeat;
+  background-size: cover;
+  margin: 0;
+  margin: 0 30px 0 0;
+  position: relative;
+}
+@media (max-width: 480px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li {
+    width: 300px;
+    margin: 0 0 20px 0;
+    background-position: bottom center;
+  }
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+  transform: translateY(-50%) rotate(-90deg);
+  position: absolute;
+  top: 50%;
+  left: 7px;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li .block_point {
+  padding: 0 0 0 30px;
+  font-size: 10px;
+  color: #ffffff;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_info ul li .block_point p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add {
+    margin: 20px 0 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add a {
+  border: 1px solid #d6d6d6;
+  border-radius: 15px;
+  padding: 10px 15px;
+  display: inline-block;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add a .add_point_im {
+  text-align: center;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add a .add_point_im span {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #d6d6d6;
+  position: relative;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add a .add_point_im span img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_laycredit_points .block_points_add a span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8188ab;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .nav-tabs li a {
+  background: #ebf9fe;
+  color: #8188ab;
+  padding: 15px 70px;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .nav-tabs li a.active {
+  background: #00aeef;
+  color: #ffffff;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .nav-tabs li:first-child a {
+  border-radius: 5px 0 0 0;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .nav-tabs li:first-child a:before {
+  display: none;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .nav-tabs li:last-child a {
+  border-radius: 0 5px 0 0;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available {
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available img {
+  width: 120px;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available h5 {
+  font-size: 40px;
+  color: #fc7e66;
+  font-weight: 600;
+  margin: 30px 0 0;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available {
+    padding: 20px;
+  }
+  .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available img {
+    width: 150px;
+  }
+  .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_nocard_available h5 {
+    font-size: 20px;
+  }
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list {
+  padding: 25px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list {
+    flex-flow: column;
+  }
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point {
+  width: 40%;
+  font-size: 16px;
+  color: #F826C1;
+  font-weight: 600;
+  display: flex;
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point img {
+  margin: 0 5px 0 0;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point {
+    width: 100%;
+    padding-bottom: 15px;
+    justify-content: center;
+  }
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  padding-left: 30px;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info {
+    width: 100%;
+    padding: 0;
+  }
+}
+@media (max-width: 480px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info {
+    flex-flow: column;
+  }
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info .block_point_left {
+  width: 40%;
+}
+@media (max-width: 480px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info .block_point_left {
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: center;
+  }
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info .block_point_right {
+  width: 40%;
+  text-align: right;
+}
+@media (max-width: 480px) {
+  .account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info .block_point_right {
+    width: 100%;
+    text-align: center;
+  }
+}
+.account_cnt_main.ac_notifications.ac_mywallet .block_notification_main .tab-content .card .card-body .block_notification .block_list .block_point_info .block_point_right span {
+  width: 100%;
+  color: #8188ab;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan {
+  border-radius: 5px;
+  background: #ffffff;
+  padding: 30px;
+  box-shadow: 3px 4px 10px rgba(202, 209, 222, 0.35);
+  margin: 0 0 30px;
+}
+@media (max-width: 480px) {
+  .account_cnt_main.subscription_plan .block_subscription_plan {
+    padding: 20px;
+  }
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .block_title {
+  width: 100%;
+  padding: 15px 30px;
+  background: #fafafa;
+  margin: 0 0 30px;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .block_title h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main {
+  width: 100%;
+  margin: 10px 0 30px;
+  display: flex;
+  justify-content: center;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block {
+  width: 50%;
+  border-radius: 15px;
+  box-shadow: 0px 3px 6px rgba(2, 33, 119, 0.25);
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block {
+    width: 70%;
+  }
+}
+@media (max-width: 480px) {
+  .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block {
+    width: 100%;
+  }
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_top {
+  width: 100%;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/Subscription_top_bg.svg) no-repeat;
+  background-size: 100%;
+  padding: 55px 0 85px;
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 15px 15px 0 0;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_top {
+    padding: 45px 0 75px;
+    font-size: 26px;
+  }
+}
+@media (max-width: 767px) {
+  .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_top {
+    padding: 55px 0 70px;
+    font-size: 26px;
+  }
+}
+@media (max-width: 575px) {
+  .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_top {
+    padding: 45px 0 55px;
+    font-size: 26px;
+    background-size: cover;
+    background-position: bottom center;
+  }
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm {
+  width: 100%;
+  padding: 20px 0 0;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm h6 {
+  text-align: center;
+  font-size: 39px;
+  font-weight: 400;
+  padding: 0 0 10px;
+  margin: 0 15px 25px;
+  color: #022177;
+  border-bottom: 2px solid #4d639f;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm h6 span {
+  font-size: 23px;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm h6 {
+    font-size: 30px;
+  }
+  .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm h6 span {
+    font-size: 16px;
+  }
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm ul {
+  width: 100%;
+  margin: 0;
+  padding: 0 15px;
+  list-style: none;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm ul li {
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  padding: 0 0 0 30px;
+  position: relative;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm ul li:before {
+  font-family: "FontAwesome";
+  content: "";
+  float: right;
+  color: #119300;
+  font-weight: normal;
+  position: absolute;
+  top: -2px;
+  left: 0;
+  font-size: 18px;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm .btn_subscription {
+  width: 100%;
+  border-radius: 0 0 15px 15px;
+  height: 62px;
+  overflow: hidden;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm .btn_subscription a {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  line-height: 62px;
+  padding: 0 25px;
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 400;
+  border-radius: 0 0 15px 15px;
+  background: #F826C1;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm .btn_subscription a:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #1943ff;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm .btn_subscription a:hover {
+  border-color: #1943ff;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm .btn_subscription a:hover:before {
+  height: 190%;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm .btn_subscription a {
+    font-size: 14px;
+    line-height: 50px;
+    padding: 0 15px;
+  }
+}
+@media (max-width: 575px) {
+  .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_block .block_btm .btn_subscription {
+    height: 50px;
+  }
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_im {
+  margin: 0 0 0 -30px;
+}
+.account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_im img {
+  height: 100%;
+}
+@media (max-width: 767px) {
+  .account_cnt_main.subscription_plan .block_subscription_plan .subscription_block_main .subscription_im {
+    display: none;
+  }
+}
+.account_cnt_main.search_trip {
+  padding: 30px;
+}
+.account_cnt_main.search_trip .block_search_trip {
+  border-radius: 5px;
+  background: #ffffff;
+}
+.account_cnt_main.search_trip .block_search_trip .block_title {
+  width: 100%;
+  padding: 15px 30px;
+  background: #fafafa;
+  margin: 0 0 30px;
+}
+.account_cnt_main.search_trip .block_search_trip .block_title h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block {
+  width: 100%;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.search_trip .block_search_trip .search_block form {
+    flex-flow: column;
+  }
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_field {
+  width: 50%;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.search_trip .block_search_trip .search_block form .search_field {
+    width: 100%;
+  }
+}
+@media (max-width: 575px) {
+  .account_cnt_main.search_trip .block_search_trip .search_block form .search_field {
+    width: 100%;
+  }
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_field label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8188ab;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_field input {
+  width: 100%;
+  background: transparent;
+  height: 40px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d6d6d6;
+  font-size: 14px;
+  color: #000000;
+  position: relative;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_field input:focus {
+  border-bottom: 1px solid #1943ff;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_field input:placeholder {
+  color: #d6d6d6;
+  -webkit-text-fill-color: #d6d6d6;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_field input.error {
+  border-color: #ff0000;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_btn {
+  margin-left: 30px;
+}
+@media (max-width: 575px) {
+  .account_cnt_main.search_trip .block_search_trip .search_block form .search_btn {
+    width: 100%;
+    margin: 20px 0 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_btn button {
+  width: auto;
+  padding: 0 30px;
+  height: 48px;
+  background: #1943ff;
+  border-radius: 8px;
+  border: 1px solid #1943ff;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  transition: 0.3s;
+  position: relative;
+  z-index: 9;
+  overflow: hidden;
+  white-space: normal;
+  display: flex;
+  align-items: center;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_btn button img {
+  margin-left: 40px;
+  height: 20px;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_btn button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #fc7e66;
+  z-index: -1;
+  transition: 0.8s;
+  border-radius: 0 0 50% 50%;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_btn button:hover {
+  border-color: #fc7e66;
+}
+.account_cnt_main.search_trip .block_search_trip .search_block form .search_btn button:hover:before {
+  height: 190%;
+}
+@media (max-width: 991px) {
+  .account_cnt_main.search_trip .block_search_trip .search_block form .search_btn button {
+    display: inline-flex;
+  }
+}
+
+ng-scrollbar {
+  --scrollbar-padding: 25px 0 0 5px !important;
+}
+
+.search_suggetion_main {
+  border: 1px solid #d6d6d6;
+  background-color: #ffffff;
+  border-radius: 10px;
+  color: #878787;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 15px;
+  position: absolute;
+  margin-top: 15px;
+  width: 100%;
+  z-index: 999;
+}
+.search_suggetion_main .close_btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 999;
+}
+@media (max-width: 768px) {
+  .search_suggetion_main .close_btn {
+    right: 30px;
+  }
+}
+.search_suggetion_main .close_btn button {
+  cursor: pointer;
+}
+.search_suggetion_main .close_btn button img {
+  max-width: 9px;
+}
+.search_suggetion_main .close_btn button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.search_suggetion_main .suggtions_wrps_mn {
+  display: flex;
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions {
+  scroll-behavior: smooth;
+  height: 100%;
+  max-height: 180px;
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box {
+  margin-bottom: 10px;
+  float: left;
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box:last-child {
+  margin-bottom: 0;
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box:last-child .linew_wrps ng-conatiner:last-child .line_names {
+  margin-bottom: 0;
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .word_alpha {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+  width: 25px;
+  float: left;
+}
+@media (max-width: 768px) {
+  .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .word_alpha {
+    font-size: 14px;
+  }
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps {
+  float: left;
+}
+@media (max-width: 768px) {
+  .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps {
+    font-size: 12px;
+  }
+}
+.search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps .line_names {
+  margin-bottom: 10px;
+  display: flex;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .search_suggetion_main .suggtions_wrps_mn .suggtions .sug_line_box .linew_wrps .line_names {
+    font-size: 12px;
+  }
+}
+.search_suggetion_main .alphabets_wrps {
+  flex: 1;
+  display: none;
+  position: fixed;
+  flex-direction: column;
+  align-items: flex-end;
+  right: 50px;
+  margin-top: 20px;
+}
+@media (max-width: 768px) {
+  .search_suggetion_main .alphabets_wrps {
+    display: none;
+  }
+}
+.search_suggetion_main .alphabets_wrps a {
+  font-size: 6px;
+  color: #bababa;
+  padding: 0;
+  width: 10px;
+  text-transform: capitalize;
 }

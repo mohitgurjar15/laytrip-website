@@ -20,23 +20,24 @@ var ChangePasswordComponent = /** @class */ (function () {
         this.submitted = false;
         this.loading = false;
         this.apiError = '';
+        this.loadingValue = new core_1.EventEmitter();
     }
     ChangePasswordComponent.prototype.ngOnInit = function () {
         this.changePasswordForm = this.formBuilder.group({
             old_password: ['', [forms_1.Validators.required]],
             password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
-            confirm_password: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]]
+            confirm_password: ['', [forms_1.Validators.required]]
         }, {
             validator: must_match_validators_1.MustMatch('password', 'confirm_password')
         });
-        console.log(this.changePasswordForm);
     };
     ChangePasswordComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.submitted = this.loading = true;
+        this.loadingValue.emit(true);
+        this.submitted = true;
         if (this.changePasswordForm.invalid) {
+            this.loadingValue.emit(false);
             this.submitted = true;
-            this.loading = false;
             return;
         }
         else {
@@ -46,13 +47,23 @@ var ChangePasswordComponent = /** @class */ (function () {
                 confirm_password: this.changePasswordForm.value.confirm_password
             };
             this.userService.changePassword(jsonFromData).subscribe(function (data) {
-                _this.submitted = _this.loading = false;
+                _this.loadingValue.emit(false);
                 _this.changePasswordForm.reset();
-                _this.toastr.success("Your password has been updated successfully!", 'Password Updated');
+                _this.toastr.show('Your password has been updated successfully!', 'Password Updated', {
+                    toastClass: 'custom_toastr',
+                    titleClass: 'custom_toastr_title',
+                    messageClass: 'custom_toastr_message'
+                });
+                _this.submitted = false;
             }, function (error) {
+                _this.submitted = false;
                 _this.apiError = error.message;
-                _this.submitted = _this.loading = false;
-                _this.toastr.error(error.error.message, 'Error Change Password');
+                _this.loadingValue.emit(false);
+                _this.toastr.show(error.error.message, 'Error Change Password', {
+                    toastClass: 'custom_toastr',
+                    titleClass: 'custom_toastr_title',
+                    messageClass: 'custom_toastr_message'
+                });
             });
         }
     };
@@ -67,6 +78,9 @@ var ChangePasswordComponent = /** @class */ (function () {
             this.oldPassFieldTextType = !this.oldPassFieldTextType;
         }
     };
+    __decorate([
+        core_1.Output()
+    ], ChangePasswordComponent.prototype, "loadingValue");
     ChangePasswordComponent = __decorate([
         core_1.Component({
             selector: 'app-change-password',

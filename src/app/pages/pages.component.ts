@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
+import { cookieServiceFactory } from 'ngx-cookie';
 import { GenericService } from '../services/generic.service';
 import { redirectToLogin } from '../_helpers/jwt.helper';
 
@@ -10,33 +11,44 @@ import { redirectToLogin } from '../_helpers/jwt.helper';
 })
 export class PagesComponent implements OnInit {
 
+  public lottieConfig: any;
+
   constructor(
     private router: Router,
     private genericService: GenericService,
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    
+  ) {
+    
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        // Trigger when route change
+        this.checkIsValidUser();        
+      }
+    });
 
-    ) {
-      this.router.events.subscribe((event: Event) => {
-        if (event instanceof NavigationStart) {
-            // Trigger when route change
-            this.checkUserValidate();
-        }
-      });
-   }
-
-  ngOnInit() {   
-    this.checkUserValidate(); 
-    document.getElementById('page_loader').style.display = 'block' ? 'none' : 'block';
   }
 
-  checkUserValidate(){
+  ngOnInit() {
+    this.checkIsValidUser();
+    document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
+    this.lottieConfig = {
+      path: 'assets/lottie-json/flight/data.json',
+      autoplay: true,
+      loop: true
+    };
+  }
+
+  checkIsValidUser() {
+           
     var token = localStorage.getItem('_lay_sess');
-    if(token){
-      this.genericService.checkUserValidate(token).subscribe((res: any) => {        
+    if (token) {
+      this.genericService.checkUserValidate(token).subscribe((res: any) => {
       }, err => {
         redirectToLogin();
       });
-
     }
   }
-  
+
 }

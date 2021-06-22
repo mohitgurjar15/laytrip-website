@@ -35,18 +35,26 @@ export class RentalInfoComponent implements OnInit {
   constructor( 
   	private route: ActivatedRoute,
     private commonFunction:CommonFunction){
-    this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 2;
+    this.adultValue = parseInt(this.route.snapshot.queryParams['adult_count']) ? parseInt(this.route.snapshot.queryParams['adult_count']) : 2;
     this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
     //this.childAgeInfo = info.number_and_children_ages;
     // this.childData=[{
     //   children:[1]
     // }]
     // this.childAgeInfo=[5];
+   
     this.totalPerson = this.adultValue + this.childValue;
   	  this.countryCode = this.commonFunction.getUserCountry()
     }
 
   ngOnInit() {
+    const info = JSON.parse(localStorage.getItem('_rental'));
+    if(this.childValue  == 0){
+       this.childAgeInfo;
+    }else{
+      this.childAgeInfo=info.number_and_children_ages;
+      this.childData[0].children=info.number_and_children_ages;
+    }
   	this.loadJquery();
   }
 
@@ -129,7 +137,6 @@ $('#rental_add_room_open').click(
           oc.children.push(1);
         }
       });
-     console.log(this.childData);
     }
     
     this.totalPerson = this.adultValue + this.childValue;
@@ -148,14 +155,12 @@ $('#rental_add_room_open').click(
     //   oc.children.push(parseInt(age));
     // });
      const index=this.childAgeInfo.hasOwnProperty(id);
-     console.log(index);
      if(index == true){
        this.childAgeInfo[id]=parseInt(age);
      }
      else{
        this.childAgeInfo.push(parseInt(age));
      }
-    console.log(this.childAgeInfo);
   }
 
 }

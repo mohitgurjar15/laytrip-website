@@ -1,9 +1,8 @@
 <div class="view_btn_wrapper">
-    <div>
+    <div class="home-counter-wrapper">
         <div class="block_result_found">
-            <p>{{rentalDetails.length}} Home Rentals found from</p>
-            <!-- <span>{{rentalDetails[0].city}}</span>  -->
-            <span></span>
+            <p>{{rentalDetails?.length}} Home Rentals found from</p>
+            <span>{{rentalDetails[0]?.city}}</span>
         </div>
     </div>
     <div>
@@ -17,7 +16,8 @@
         </button>
     </div>
 </div>
-<div class="result_listing home_listings" [hidden]="isMapView">
+<div class="result_listing home_listings" [hidden]="isMapView" *ngIf="rentalListArray.length"
+    (clickOutside)="closeHomeDetail()">
     <div class="search_block" *ngFor="let item of rentalListArray; let blockIndex = index;">
         <div class="listing_block">
             <div class="row">
@@ -27,14 +27,13 @@
                             <div class="block_inner">
                                 <div class="col-md-4 col-lg-4 px-0">
                                     <div class="block_im">
-                                        <div class="home_list_img_wrp"
-                                            style="background-image: url('http://mobileimg.priceline.com/htlimg/43/43469/thumbnail-300.jpg');">
-                                            <img src="{{item?.display_image || defaultImage }}" alt="Airlines Logo"
-                                                onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                        <div class="home_list_img_wrp">
+                                            <!-- <img src="{{item?.display_image || defaultImage }}" alt="Airlines Logo"
+                                                onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';"> -->
                                             <!-- <span class="fav_sections">
                         <a href="javascript:void(0);" class="heart_blank"></a>
                         </span> -->
-                                            <!--  <img src="assets/images/hotels/hotels01.png" alt="Hotel image"> -->
+                                            <img src="{{item?.display_image}}" alt="Hotel image">
                                         </div>
                                     </div>
                                 </div>
@@ -43,8 +42,10 @@
                                         <div class="block_detail_top">
                                             <div class="detail_info">
                                                 <h4>{{ item?.property_name }}</h4>
-                                                <span><img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
-                                                        alt="Map pin">{{ item?.city }}</span>
+                                                <span class="adress_span">
+                                                    <img src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
+                                                        alt="Map pin"> {{ item?.city }}
+                                                </span>
                                                 <div class="review_section_wrap" style="visibility: hidden;">
                                                     <div class="rating_num">
                                                         <span>
@@ -73,25 +74,18 @@
                                         </div>
                                     </div>
                                     <div class="block_detail_btm">
-                                        <div class="show_detail">
-                                            <a href="javascript:void(0);" class="show_more_detail"> <img
+                                        <div class="show_detail"
+                                            [ngClass]="{'open_detail':showHomeDetails[blockIndex]}">
+                                            <a href="javascript:void(0);" class="show_more_detail"
+                                                (click)="showDetails(blockIndex)"> <img
                                                     src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
                                                     alt="Information Icon"> Fare Details </a>
                                         </div>
                                         <div class="ammin_listing">
-                                            <!-- <div class="amminities_list">
-                          {{item.amenties}}
-                        </div> -->
                                             <div class="amminities_list">
-                                                <img src="{{s3BucketUrl}}assets/images/hotels/wifi_icon.svg" alt="">
-                                                WIFI
+                                                <img *ngFor="let icon of item.fixed_amenities"
+                                                    [src]="amenitiesObject[icon]" alt="">
                                             </div>
-                                            <!-- <div class="amminities_list">
-                          <img src="assets/images/hotels/cup_icon.svg" alt=""> breakfast
-                        </div>
-                        <div class="amminities_list">
-                          <img src="assets/images/hotels/tv_icon.svg" alt=""> TV
-                        </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -101,15 +95,25 @@
                 </div>
                 <div class="col-md-3 px-0">
                     <div class="block_price block_pr">
-                        <div class="block_inn_pr">
+                        <!--  <div class="block_inn_pr">
                             <div class="block">
                                 <p>Room Starts from</p>
-                                <p><span>{{currency?.symbol}}{{item?.selling_price}}</span> /week</p>
+                                <p><span>{{currency?.symbol}}{{item?.selling_price}}</span></p>
+                            </div>
+                        </div> -->
+                        <div class="block_inn_pr">
+                            <div class="block" *ngIf="item.secondary_start_price > 0">
+                                <p>Room Starts from</p>
+                                <p><span>{{ currency?.symbol }}{{item?.secondary_start_price}}</span> /week</p>
+                            </div>
+                            <div class="block" *ngIf="item.secondary_start_price === 0">
+                                <p><span>{{ currency?.symbol }}{{item?.selling_price}}</span></p>
                             </div>
                         </div>
-                        <a class="book_btn" href="flight-add-passenger.html">Select</a>
-                        <div class="show_detail">
-                            <a href="javascript:void(0);" class="show_more_detail"> <img
+                        <a class="book_btn anchor-tag"
+                            (click)="redirectToDetail(item.property_id,item.latitude,item.longintude)">Select</a>
+                        <div class="show_detail anchor-tag">
+                            <a (click)="showDetails(blockIndex,'true')" class="show_more_detail"> <img
                                     src="{{s3BucketUrl}}assets/images/icon/ic_info.svg"
                                     alt="Information Icon">{{'payment_plan_detail' | translate}}</a>
                         </div>
@@ -117,7 +121,41 @@
                 </div>
             </div>
         </div>
-        <div class="detail_info_show" style="display: none;">
+        <div class="detail_info_show" [attr.id]="blockIndex" *ngIf="showHomeDetails[blockIndex] === true">
+            <div class="card-body">
+                <div class="block_home_info">
+                    <div class="tab_detail fare_detail_cnt">
+                        <div class="triangle_right"></div>
+                        <ul>
+                            <li>Base Fare <span>{{ currency?.symbol
+                                    }}{{item?.selling_price}}</span></li>
+                            <li>Total Fare <span>{{ currency?.symbol
+                                    }}{{item?.selling_price}}</span></li>
+                        </ul>
+                        <div class="triangle_left"></div>
+                        <ul *ngIf="item.instalment_details.instalment_available">
+                            <li class="down_payment">
+                                {{'down_payment' | translate}}
+                                <span class="down_value">{{ currency?.symbol }}{{ item?.start_price | number :
+                                    '1.2-2'}}</span>
+                            </li>
+                            <ng-container
+                                *ngFor="let instalment of item.instalment_details.instalment_date; let i = index">
+                                <li *ngIf="i>0">
+                                    <div class="detail"> {{i}} {{'installment' | translate}}
+                                        <p>{{
+                                            commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD')}}
+                                        </p>
+                                    </div> <span>{{ currency?.symbol }}{{instalment.instalment_amount}}</span>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- <div class="detail_info_show" style="display: none;">
             <div class="card-body">
                 <div class="block_flight_info">
                     <div class="tab_detail fare_detail_cnt">
@@ -136,22 +174,25 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
-<div class="result_listing home_map_listings" [hidden]="!isMapView">
+<div class="result_listing home_map_listings" [hidden]="!isMapView" *ngIf="rentalListArray.length">
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-8" style="height: 200px; width: 200px;">
-                <agm-map [latitude]='lat' [longitude]='long' [zoom]='zoom' [usePanning]='true'>
-                    <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng"
-                        (mouseOver)="onMouseOver(infoWindow, $event)" (mouseOut)="onMouseOut(infoWindow, $event)">
+                <agm-map #gm [latitude]='rentalListArray[0]?.latitude' [longitude]='rentalListArray[0]?.longintude'
+                    [zoom]='zoom' [usePanning]='true'>
+                    <agm-marker *ngFor="let marker of rentalListArray" [latitude]="marker?.latitude"
+                        [longitude]="marker.longintude" (mouseOver)="infoWindowAction(infoWindow, $event, 'open')"
+                        (mouseOut)="infoWindowAction(infoWindow, $event, 'close')"
+                        (markerClick)="infoWindowAction(marker.property_id, $event, 'click')">
                         <agm-info-window [disableAutoPan]="false" #infoWindow>
                             <!-- <div>
-                                <img src="{{marker?.dis_image || defaultImage }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                <img src="{{marker?.dis_image || defaultImage }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                 </div> -->
                             <div>
-                                {{marker.label}}
+                                {{marker?.property_name}}
                             </div>
                         </agm-info-window>
                     </agm-marker>
@@ -159,50 +200,54 @@
 
                 <!--  <div id="map"></div> -->
             </div>
-            <div class="col-lg-4 pl-0">
-                <div class="search_block" *ngFor="let item of rentalListArray">
-                    <div class="listing_block">
-                        <div class="block_main">
-                            <div class="block_top">
-                                <div class="block_inner">
-                                    <div class="">
-                                        <div class="block_im">
-                                            <div class="home_list_img_wrp"
-                                                style="background-image: url('http://mobileimg.priceline.com/htlimg/43/43469/thumbnail-300.jpg');">
-                                                <img src="{{item?.display_image || defaultImage }}" alt="Airlines Logo"
-                                                    onerror="this.onerror=null;this.src='http://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+            <div class="col-lg-4 pl-0" style="max-height: 560px; overflow-y: auto;">
+                <ng-container *ngFor="let item of rentalListArray">
+                    <div class="search_block" [attr.id]="item.property_id"
+                        [ngClass]="{'selected-home':showMapDetails[item.property_id]}"
+                        (click)="redirectToDetail(item.property_id,item.latitude,item.longintude)">
+                        <div class="listing_block anchor-tag hover-anchor-tag">
+                            <div class="block_main">
+                                <div class="block_top">
+                                    <div class="block_inner">
+                                        <div class="">
+                                            <div class="block_im">
+                                                <div class="home_list_img_wrp">
+                                                    <img src="{{item?.display_image || defaultImage }}"
+                                                        alt="Airlines Logo"
+                                                        onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="">
-                                        <div class="block_detail">
-                                            <div class="block_detail_top">
-                                                <div class="detail_info">
-                                                    <h4>{{ item?.property_name }}</h4>
-                                                    <span><img
-                                                            src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
-                                                            alt="Map pin">{{ item?.city }}</span>
-                                                    <div class="review_section_wrap" style="visibility: hidden;">
-                                                        <div class="rating_num">
-                                                            <span>
-                                                                5.0
-                                                            </span>
-                                                        </div>
-                                                        <div class="stars_text">
-                                                            <div class="stars_rating">
-                                                                <img src="assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars">
-                                                                <img src="assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars">
-                                                                <img src="assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars">
-                                                                <img src="assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars">
-                                                                <img src="assets/images/hotels/rating_stars.svg"
-                                                                    alt="Stars">
+                                        <div class="">
+                                            <div class="block_detail">
+                                                <div class="block_detail_top">
+                                                    <div class="detail_info">
+                                                        <h4>{{ item?.property_name }}</h4>
+                                                        <span><img
+                                                                src="{{s3BucketUrl}}assets/images/hotels/map_pin_gray.svg"
+                                                                alt="Map pin"> {{ item?.city }}</span>
+                                                        <div class="review_section_wrap" style="display: none;">
+                                                            <div class="rating_num">
+                                                                <span>
+                                                                    5.0
+                                                                </span>
                                                             </div>
-                                                            <div class="review_num_text">
-                                                                <a href="javascript:void(0);">3204 Reviews</a>
+                                                            <div class="stars_text">
+                                                                <div class="stars_rating">
+                                                                    <img src="assets/images/hotels/rating_stars.svg"
+                                                                        alt="Stars">
+                                                                    <img src="assets/images/hotels/rating_stars.svg"
+                                                                        alt="Stars">
+                                                                    <img src="assets/images/hotels/rating_stars.svg"
+                                                                        alt="Stars">
+                                                                    <img src="assets/images/hotels/rating_stars.svg"
+                                                                        alt="Stars">
+                                                                    <img src="assets/images/hotels/rating_stars.svg"
+                                                                        alt="Stars">
+                                                                </div>
+                                                                <div class="review_num_text">
+                                                                    <a href="javascript:void(0);">3204 Reviews</a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -212,17 +257,17 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="block_price block_pr">
-                            <div class="block_inn_pr">
-                                <div class="block">
-                                    <p>Room Starts from</p>
-                                    <p><span>{{ currency?.symbol }}{{item?.selling_price}}</span> /week</p>
+                            <div class="block_price block_pr">
+                                <div class="block_inn_pr">
+                                    <div class="block">
+                                        <p>Room Starts from</p>
+                                        <p><span>{{ currency?.symbol }}{{item?.selling_price}}</span></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>

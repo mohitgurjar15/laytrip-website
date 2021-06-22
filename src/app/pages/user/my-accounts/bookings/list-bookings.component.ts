@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AccountService } from '../../../../services/account.service';
+import { CartService } from '../../../../services/cart.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-list-bookings',
@@ -11,71 +13,127 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ListBookingsComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-  filterForm: FormGroup;
-  loading = false;
-  flightLists = [];
-  perPageLimitConfig=[10,25,50,100];
-  pageNumber:number;
-  limit:number;
-  modules:[];
-  result:any;
-  endDate;
-  startMinDate= new Date();
- 
+  upComingloading = false;
+  upComingbookings = [];
+  upComingbookingsForFilter = [];
+  completeLoading = false;
+  completeBookings = [];
+  completeBookingsForFilter = [];
+  selectedInCompletedTabNumber: number = 0;
+  selectedCompletedTabNumber: number = 0;
+  cartItemsCount: number = 0;
+  searchTextLength = 0;
+
+  searchText = '';
 
   constructor(
     private userService: UserService,
+    private accountService: AccountService,
     private commonFunction: CommonFunction,
-    private formBuilder: FormBuilder
+    private cartService: CartService,
+    private renderer: Renderer2
+
   ) { }
 
   ngOnInit() {
-    // this.loading = true;
-    this.pageNumber=1;
-    this.limit=this.perPageLimitConfig[0];
-    this.getModule();
+    this.getIncomplteBooking();
+    this.getComplteBooking();
+    this.renderer.addClass(document.body, 'cms-bgColor');
 
-    this.filterForm = this.formBuilder.group({
-      bookingId: [''],
-      start_date: [''],
-      end_date: [''],
-      module: [''],
+  }
+
+  getIncomplteBooking(search = '') {
+    this.upComingloading = true;
+    this.accountService.getIncomplteBooking(search).subscribe((res: any) => {
+      this.upComingbookings = res.data;
+      this.upComingbookingsForFilter = res.data;
+      this.upComingloading = false;
+    }, err => {
+
+      this.upComingloading = false;
+      this.upComingbookings = [];
     });
   }
 
-  getModule(){
-    this.userService.getModules(this.pageNumber, this.limit).subscribe((res: any) => {
-      this.modules  = res.data.map(function (module) {
-        if(module.status == true){
-          return {
-            id:module.id,
-            name:module.name.toUpperCase()
-          } 
-          /* this.modules.push({
-            id:module.id,
-            name:module.name.toUpperCase()
-          }); */
+  getComplteBooking(search = '') {
+    this.completeLoading = true;
+    this.accountService.getComplteBooking(search).subscribe((res: any) => {
+      this.completeBookings = res.data;
+      this.completeBookingsForFilter = res.data;
+      this.completeLoading = false;
+    }, err => {
+      this.completeLoading = false;
+      this.completeBookings = [];
+    });
+  }
+
+  filterBooking(items, searchValue) {
+    let result = [];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].laytripCartId.toLowerCase().toString().includes(searchValue)) {
+        result.push(items[i]);
+      }
+      for (let j = 0; j < items[i].booking.length; j++) {
+
+        if(items[i].booking[j].moduleId==1){
+          if (items[i].booking[j].moduleInfo[0].departure_code.toLowerCase().toString().includes(searchValue) ||
+            items[i].booking[j].moduleInfo[0].arrival_code.toLowerCase().toString().includes(searchValue) ||
+            items[i].booking[j].moduleInfo[0].airline_name.toLowerCase().toString().includes(searchValue) ||
+            items[i].booking[j].moduleInfo[0].departure_info.city.toLowerCase().toString().includes(searchValue) ||
+            items[i].booking[j].moduleInfo[0].arrival_info.city.toLowerCase().toString().includes(searchValue)
+          ) {
+            result.push(items[i]);
+          }
         }
-      });
-      console.log(this.modules)
-   }, err => {
-    
-   }); 
+        if(items[i].booking[j].moduleId==3){
+          if (items[i].booking[j].moduleInfo[0].hotel_name.toLowerCase().toString().includes(searchValue) ||
+            items[i].booking[j].moduleInfo[0].title.toLowerCase().toString().includes(searchValue)
+          ) {
+            result.push(items[i]);
+          }
+        }
+        
+      }
+    }
+    return result;
   }
 
-  getFlightResult() {
-    this.result = this.filterForm.value;
-     this.loading = true;
+  searchBooking(searchValue: any) {
+    this.searchTextLength = searchValue.length;
+    if (this.searchTextLength > 0) {
+      // UPCOMING BOOKING
+      this.upComingbookings = this.filterBooking(this.upComingbookingsForFilter, searchValue.toLowerCase().toString());
+      // COMPLETED BOOKING
+      this.completeBookings = this.filterBooking(this.completeBookingsForFilter, searchValue.toLowerCase().toString());
+    } else {
+      this.upComingbookings = [...this.upComingbookingsForFilter];
+      this.completeBookings = [...this.completeBookingsForFilter];
+    }
   }
 
-  startDateUpdate(date) {
-    this.endDate = new Date(date)
+  selectInCompletedTab(cartNumber) {
+    this.selectedInCompletedTabNumber = cartNumber;
+    this.cartService.setCartNumber(cartNumber);
   }
 
-
-  reset() {
-    this.ngOnInit();
-    this.getFlightResult();
+  selectCompletedTab(cartNumber) {
+    this.selectedCompletedTabNumber = cartNumber;
+    this.cartService.setCartNumber(cartNumber);
   }
 
+  getProgressPercentage(value, totalValue) {
+    return { 'width': Math.floor((value / totalValue) * 100) + '%' };
+  }
+
+  cancelCartIdRemove(event) {
+    var filterData = this.upComingbookings.filter(function (obj) {
+      return obj.laytripCartId != event
+    });
+    this.upComingbookings = [];
+    this.upComingbookings = filterData;
+  }
+
+  loadUpcomming(event) {
+    this.upComingloading = event;
+  }
 }

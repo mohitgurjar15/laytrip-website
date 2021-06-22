@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 import { TravelerService } from '../../../../services/traveler.service';
@@ -7,8 +7,9 @@ import * as moment from 'moment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { TravellerFormComponent } from './traveller-form/traveller-form.component';
-import { ThrowStmt } from '@angular/compiler';
 import { GenericService } from '../../../../services/generic.service';
+import { CookieService } from 'ngx-cookie';
+import { CommonFunction } from '../../../../_helpers/common-function';
 declare var $: any;
 
 @Component({
@@ -16,6 +17,7 @@ declare var $: any;
   templateUrl: './list-traveller.component.html',
   styleUrls: ['./list-traveller.component.scss']
 })
+
 export class ListTravellerComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   travelers = [];
@@ -28,168 +30,153 @@ export class ListTravellerComponent implements OnInit {
   dataPassToChild: any = null;
   modalReference: any;
   notFound = false;
-  perPageLimitConfig=[10,25,50,100];
-  pageNumber:1;
-  limit:number;
-  pageSize=10;
+  perPageLimitConfig = [10, 25, 50, 100];
+  pageNumber: 1;
+  limit: number;
+  pageSize = 10;
   showPaginationBar: boolean = false;
-  isMasterSel:boolean;
-  categoryList:any;
-  checkedCategoryList:any;
+  showNewForm: boolean = false;
+  isMasterSel: boolean;
+  categoryList: any;
+  checkedCategoryList: any;
   selectedAll: any;
   selectedAllSecondname: any;
   name: any;
+  // @ViewChild('child',{static:false}) childCompopnent: any;
+  @ViewChild(TravellerFormComponent, { static: false }) childComponent: TravellerFormComponent;
+  location;
+  traveller: any = [];
+  @Output() loadingValue = new EventEmitter<boolean>();
+  travellerTabClass = '';
 
   constructor(
     public travelerService: TravelerService,
     public router: Router,
     public modalService: NgbModal,
     private toastr: ToastrService,
-    private genericService: GenericService
-
-
+    private genericService: GenericService,
+    private cookieService: CookieService,
+    private renderer: Renderer2,
+    public commonFunction: CommonFunction,
   ) {
     this.isMasterSel = false;
-
-   }
+  }
 
 
   ngOnInit() {
-    window.scroll(0,0);
+    let location: any = this.cookieService.get('__loc');
+    try {
+      this.location = JSON.parse(location);
+    }
+    catch (e) {
+    }
+    window.scroll(0, 0);
     this.getCountry();
-    this.pageNumber=1;
-    this.limit=this.perPageLimitConfig[0];
-  
+    this.pageNumber = 1;
+    this.limit = this.perPageLimitConfig[0];
+
     this.loading = true;
     this.getTravelers();
     this.getCheckedItemList();
   }
+
   pageChange(event) {
     this.loading = false;
-    this.pageNumber = event;    
+    this.pageNumber = event;
   }
 
   getTravelers() {
-    this.travelerService.getTravelers().subscribe((data: any) => {
-      this.travelers = data.data;
+    this.travelerService.getTravelers().subscribe((res: any) => {
+      // this.travelers = res.data;
+
+
+      this.travelers = res.data.filter(function (e) {
+        if (e.roleId != 6) {
+          return e;
+        }
+      });
+      if (this.travelers.length == 0) {
+        this.showNewForm = true;
+      }
       this.loading = false;
-      this.showPaginationBar =true;
-      if(this.travelers.length === 0){
+      this.showPaginationBar = true;
+      if (this.travelers.length === 0) {
         this.notFound = true;
       }
     }, (error: HttpErrorResponse) => {
 
-      this.loading  = this.showPaginationBar =false;
+      this.loading = this.showPaginationBar = false;
       this.notFound = true;
       if (error.status === 401) {
-        this.router.navigate(['/']);
+        if (this.commonFunction.isRefferal()) {
+          let parms = this.commonFunction.getRefferalParms();
+          var queryParams: any = {};
+          queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+          if(parms.utm_medium){
+            queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+          }
+          if(parms.utm_campaign){
+            queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+          }
+          this.router.navigate(['/'], { queryParams: queryParams });
+        } else {
+          this.router.navigate(['/']);
+        }
       }
     });
   }
 
   calculateAge(birthdate: any) {
-    return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years')+" yrs, ":"";
+    return moment().diff(birthdate, 'years') ? moment().diff(birthdate, 'years') + " yrs, " : "";
   }
 
-  getGender(type) {
-    if (type == 'M')
-      return 'Male';
-    if (type == 'F')
-      return 'Female';
-    if (type == 'N')
-      return 'Non Binary';
-  }
-
-  ngDoCheck() {
-    // this.getTravelers();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('sds', changes)
-  }
-
-
-  openTravellerModal(content, userId = '',traveler='') {
-    this.modalReference = this.modalService.open(TravellerFormComponent, { windowClass: 'cmn_add_edit_modal add_traveller_modal',centered: true });
-    (<TravellerFormComponent>this.modalReference.componentInstance).travellerId = userId;
-    (<TravellerFormComponent>this.modalReference.componentInstance).travelerInfo = traveler;
-    (<TravellerFormComponent>this.modalReference.componentInstance).countries = this.countries;
-    (<TravellerFormComponent>this.modalReference.componentInstance).countries_code = this.countries_code;
-    this.modalReference.componentInstance.travelersChanges.subscribe(($e) => {
-      const index = this.travelers.indexOf($e.userId, 0);
-      if(index){
-        this.travelers = this.travelers.filter(item => item.userId != $e.userId );            
-      }
-      this.travelers.push($e);
-    })
-  }
-
-  deleteTravellerModal(content, userId = '') {
-    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal',centered: true });
+  openDeleteModal(content, userId = '') {
+    this.modalReference = this.modalService.open(content, { windowClass: 'cmn_delete_modal', centered: true });
     this.userId = userId;
     this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       // this.getTravelers();
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      console.log(this.closeResult)
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
 
-  pushTraveler(event) {
-    console.log("event", event)
-  }
 
-  deleteTraveller() {
 
-    this.travelerService.delete(this.userId).subscribe((data: any) => {
-      this.getTravelers();
-      if (data.message) {
-        this.toastr.success('Traveler deleted successfully.', 'Success');
-      } else {
-        this.toastr.error(data.message, 'Failure');
-      }
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.toastr.error(error.error.errorMsg, 'Error');
-        this.router.navigate(['/']);
-      } else {
-        this.getTravelers();
-        this.toastr.error(error.error.errorMsg, 'Error');
-      }
-    });
-    this.modalReference.close();
-  }
- 
   getCountry() {
     this.genericService.getCountry().subscribe((data: any) => {
       this.countries = data.map(country => {
         return {
           id: country.id,
           name: country.name,
-          code: country.phonecode,
-          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
+          countryCode: country.phonecode,
+          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
         }
-      }),
-        this.countries_code = data.map(country => {
-          return {
-            id: country.id,
-            name: country.phonecode+' ('+country.iso2+')',
-            code:country.phonecode,
-            country_name:country.name+ ' ' +country.phonecode,
-            flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
-          }
-        });
+      });
+      this.countries_code = data.map(country => {
+        return {
+          id: country.id,
+          name: country.phonecode + ' (' + country.iso2 + ')',
+          countryCode: country.phonecode,
+          country_name: country.name + ' ' + country.phonecode,
+          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg',
+          iso2: country.iso2
+        }
+      });
+      const filteredArr = this.countries_code.reduce((acc, current) => {
+        const x = acc.find(item => item.countryCode == current.countryCode);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+      this.countries_code = [];
+      this.countries_code = filteredArr;
+
+      this.setUSCountryInFirstElement(this.countries);
+
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
         this.router.navigate(['/']);
@@ -197,29 +184,125 @@ export class ListTravellerComponent implements OnInit {
     });
   }
 
+  setUSCountryInFirstElement(countries) {
+    var usCountryObj = countries.find(x => x.id === 233);
+    var removedUsObj = countries.filter(obj => obj.id !== 233);
+    this.countries = [];
+    removedUsObj.sort(function (a, b) {
+      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
+    });
+    removedUsObj.unshift(usCountryObj);
+    this.countries = removedUsObj;
+
+  }
+
   checkUncheckAll() {
     var checkboxes = document.getElementsByClassName('travelerCheckbox');
     for (var i = 0; i < checkboxes.length; i++) {
-      this.travelers[i].isSelected = this.isMasterSel;      
+      this.travelers[i].isSelected = this.isMasterSel;
     }
-    console.log( this.travelers)
     this.getCheckedItemList();
   }
-  
+
   isAllSelected() {
-    this.isMasterSel = this.travelers.every(function(item:any) {
+    this.isMasterSel = this.travelers.every(function (item: any) {
       return item.isSelected == true;
     });
     this.getCheckedItemList();
   }
 
-  getCheckedItemList(){
+  getCheckedItemList() {
     this.checkedCategoryList = [];
     for (var i = 0; i < this.travelers.length; i++) {
-      if(this.travelers[i].isSelected)
-      this.checkedCategoryList.push(this.travelers[i]);
+      if (this.travelers[i].isSelected)
+        this.checkedCategoryList.push(this.travelers[i]);
     }
     this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
   }
-  
+
+  submitTravellerForm() {
+    this.loadingValue.emit(true);
+
+
+    var formData = this.childComponent.travellerForm;
+
+
+    if (formData.invalid) {
+      Object.keys(formData.controls).forEach(controlName =>
+        formData.controls[controlName].markAsTouched()
+      );
+      this.loadingValue.emit(false);
+      return;
+    } else {
+      let country_id = formData.value.country_id.id;
+      if (!Number(country_id)) {
+        if (this.traveller.country) {
+          country_id = (this.traveller.country.id) ? this.traveller.country.id : '';
+        } else {
+          country_id = 233;
+        }
+      }
+
+      let jsonData = {
+        first_name: formData.value.firstName,
+        last_name: formData.value.lastName,
+        dob: typeof formData.value.dob === 'object' ? moment(formData.value.dob).format('YYYY-MM-DD') : moment(this.stringToDate(formData.value.dob, '/')).format('YYYY-MM-DD'),
+        gender: formData.value.gender ? formData.value.gender : 'M',
+        country_id: country_id ? country_id : '',
+        passport_expiry: typeof formData.value.passport_expiry === 'object' ? moment(formData.value.passport_expiry).format('YYYY-MM-DD') : null,
+        passport_number: formData.value.passport_number,
+        country_code: formData.value.country_code ? formData.value.country_code : '',
+        phone_no: formData.value.phone_no,
+      };
+      let emailObj = { email: formData.value.email ? formData.value.email : '' };
+
+      this.travelerService.addAdult(jsonData).subscribe((data: any) => {
+        this.getTravelers();
+        this.childComponent.travellerForm.reset();
+        this.loadingValue.emit(false);
+      }, (error: HttpErrorResponse) => {
+        this.loadingValue.emit(false);
+        if (error.status === 401) {
+          this.router.navigate(['/']);
+        } else {
+        }
+      });
+    }
+  }
+
+  stringToDate(string, saprator) {
+    let dateArray = string.split(saprator);
+    return new Date(dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]);
+  }
+
+  getLoadingValue(event) {
+    this.loadingValue.emit(event ? event : false);
+  }
+
+
+  getTravellerIdFromChild(travelerId) {
+    this.openDeleteModal('deleteContent', travelerId);
+  }
+
+
+  pushTraveler(traveler) {
+    if (typeof traveler == 'string') {
+      this.travelers = this.travelers.filter(obj => obj.userId !== traveler);
+    } else {
+      this.travelers = this.travelers.filter(obj => obj.userId !== traveler.userId);
+      this.travelers.push(traveler)
+    }
+    if (this.travelers.length == 0) {
+      this.showNewForm = true;
+    } else {
+      this.showNewForm = false;
+    }
+    //For add class show in traveler tab 
+    this.travellerTabClass = traveler.userId;
+  }
+
+  showForm() {
+    this.showNewForm = true;
+  }
+
 }

@@ -1,5 +1,5 @@
 <!-- Start Our Mobile App Section-->
-<section class="our_mobile_apps">
+<!-- <section class="our_mobile_apps">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -25,11 +25,11 @@
                         <p>{{'mobile_page_get_nearly_update' | translate}}</p>
                         <div class="subscription">
                             <form [formGroup]="subscribeForm" (ngSubmit)="subscribeNow()">
-                                <input type="email" formControlName="email" maxlength="40" tabindex="1" placeholder="{{ 'mobile_page_subscribe_email_placeholder' | translate}}" />
+                                <input type="email" formControlName="email" maxlength="40" tabindex="1" placeholder="{{ 'mobile_page_subscribe_email_placeholder' | translate}}" /> -->
 
-                                <!--                                 <button (click)="subscribeNow()">Subscribe Now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+<!--                                 <button (click)="subscribeNow()">Subscribe Now <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
  -->
-                                <button type="submit"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'mobil_page_subscribe_now_button' | translate}} <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
+<!-- <button type="submit"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{'mobil_page_subscribe_now_button' | translate}} <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></button>
                             </form>
                             <div *ngIf="(submitted  || subscribeForm.controls.email.touched) && subscribeForm.controls.email.errors" class="focus-input100 login-error">
                                 <div *ngIf="subscribeForm.controls.email.errors.required" class="text-danger">{{'mobile_page_subscribe_email_touched_validation' | translate}}
@@ -48,5 +48,46 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- Close Our Mobile App Section-->
+
+<!-- start contect us section -->
+<form [formGroup]="subscribeForm" (ngSubmit)="subscribeNow()">
+    <section class="contact_us_upper_main">
+        <div class="container">
+            <div class="contect_text_wrapper">
+                <h3>Join Laytrip for Discounts to Your Favorite Destinations</h3>
+
+                <div class="custom_input_wrapper">
+                    <input type="email" formControlName="email" maxlength="40" (click)="changeEmail()"
+                        placeholder="{{ 'mobile_page_subscribe_email_placeholder' | translate}}">
+                    <!-- <button>Join</button> -->
+                    <button type="submit"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                        Join</button>
+                </div>
+                <!-- <div *ngIf="(submitted || subscribeForm.controls.email.touched) && subscribeForm.controls.email.errors"
+                    class="focus-input100 message_block">
+                    <p *ngIf="subscribeForm.controls.email.errors.required" class="message_error">
+                        {{'mobile_page_subscribe_email_touched_validation' | translate}}
+                    </p>
+                    <p *ngIf="subscribeForm.controls.email.errors.pattern" class="message_error">
+                        {{'email_invalid_validation' | translate}}
+                    </p> 
+                </div> -->
+                <div *ngIf="submitted" class="focus-input100 message_block">
+                    <p *ngIf="subscribeForm.controls.email.errors && subscribeForm.controls.email.errors.required" class="message_error">
+                        {{'mobile_page_subscribe_email_touched_validation' | translate}}
+                    </p>
+                    <p *ngIf="subscribeForm.controls.email.errors && subscribeForm.controls.email.errors.pattern" class="message_error">
+                        {{'email_invalid_validation' | translate}}
+                    </p>
+                </div>
+                <div class="message_block" *ngIf="success || error">
+                    <p class="message_success" *ngIf="success">{{successMessage}}</p>
+                    <p class="message_error" *ngIf="error">{{errorMessage}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+<!-- end contect us section -->

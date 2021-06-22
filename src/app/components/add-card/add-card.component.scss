@@ -1,15 +1,36 @@
-@import './../../../cstm-variable';
+@import "../../../cstm-variable";
+@import "../../../_cstm-variable.scss";
+@import "../../../_cstm-components.scss";
+@import "../../../_hotel.scss";
+@import "../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-.card_field{
+.card_field {
     width: 100%;
     border-bottom: 1px solid $box-border-color;
     height: 40px;
     line-height: 40px;
     padding-top: 10px;
 
-    &:focus{
+    &:focus {
         border-bottom: 1px solid $primary-color;
     }
+}
+
+.section_description {
+    width: 240px;
+    &.one {
+        transform: translate(10%, -10%);
+        max-width: 170px;
+        right: 0;
+    }
+    &.cvv_description{
+        @include tab-view{
+            transform: translate(0%, 12%);
+        }
+    }
+    transform: translate(-32%, 12%);
+    max-width: 240px;
 }
 
 /* .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn input {
@@ -30,3 +51,217 @@
     display: flex;
     align-items: center;
 } */
+
+/* Basic Layout
+---------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+.add_card_block {
+    label {
+        color: $mid_gray_bg;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    input {
+        border: none;
+        border-radius: 0;
+        border-bottom: 2px solid $box-border-color;
+        font-size: 14px;
+        padding: 8px 0;
+        width: 100%;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+    select {
+        border: none;
+        border-radius: 0;
+        border-bottom: 2px solid $box-border-color;
+        font-size: 14px;
+        padding: 8px 0;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+    .mb-sm-10 {
+        @include tab-view {
+            margin-bottom: 5px;
+    padding: 0;
+        }
+    }
+    .form-row{
+        &.margin_top{
+            margin-top: 10px;
+            @include tab-view{
+                margin-top: 0;
+            }
+        }
+    }
+    .iframe_wrapper {
+        height: 38px;
+        margin-top: 1px;
+    }
+    .cvv_wrapper {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        input {
+            // background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
+            //     no-repeat;
+            // background-size: 20px;
+        }
+    }
+    .save_btn_wrps {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        // flex-direction: column;
+        height: 100%;
+        @include tab-view{
+            justify-content: space-between;
+        }
+        a {
+            background-color: transparent;
+            color: $text_light_yellow;
+            border: none;
+            box-shadow: none;
+            font-size: 16px;
+            padding: 0;
+            text-align: right;
+
+            @include tab-view{
+                font-size: 12px;
+                
+            }
+        }
+        .button {
+            background-color: transparent;
+            color: $text_light_yellow;
+            border: none;
+            box-shadow: none;
+            font-size: 16px;
+            padding: 0;
+            text-align: right;
+            pointer-events: all;
+
+            &:first-child{
+                @include tab-view{
+                    text-align: left;
+                } 
+            }
+            @include tab-view{
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+#errors,
+#message {
+    color: red;
+    margin: 1em 0;
+    line-height: 1.5;
+}
+
+.accordion_cardss {
+    margin: 15px 15px 0px 15px !important;
+    .card {
+        border: 1px solid $grayed_border;
+        border-radius: 10px;
+        margin-top: 20px;
+        &:first-child {
+            margin-top: 0;
+        }
+        &.current_selected_card {
+            border: 2px solid #ffaa00 !important;
+        }
+        .card-header {
+            border: none;
+            background-color: transparent;
+            padding: 15px;
+            a {
+                font-weight: 600;
+                color: $text-black;
+                font-size: 16px;
+                border: none;
+                background-color: transparent;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 0;
+
+                &[aria-expanded="true"] {
+                    &:after {
+                        font-family: "FontAwesome";
+                        content: "\f077";
+                        color: $text-grey;
+                        font-weight: normal;
+                        transition: 0.3s;
+                        right: 0;
+                    }
+                }
+                &[aria-expanded="false"] {
+                    &:after {
+                        font-family: "FontAwesome";
+                        content: "\f078";
+                        color: $text-grey;
+                        font-weight: normal;
+                        transition: 0.3s;
+                        right: 0;
+                    }
+                }
+                .heade_wrps {
+                    img {
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+        .card-body {
+            padding: 15px;
+            .card_headbar {
+                color: $mid_gray_bg;
+                font-size: 12px;
+            }
+            .card_texter {
+                color: $text-black;
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 22px;
+                span {
+                    font-weight: 500;
+                }
+            }
+            .save_btn_wrps {
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-end;
+                flex-direction: column;
+                height: 100%;
+                @include tab-view{
+                    justify-content: space-between;
+                }
+                a {
+                    background-color: transparent;
+                    color: $text_light_yellow;
+                    border: none;
+                    box-shadow: none;
+                    font-size: 16px;
+                    padding: 0;
+                    @include tab-view{
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.custom-w-26 {
+    width: 26% !important;
+}

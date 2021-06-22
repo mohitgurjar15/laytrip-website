@@ -13,15 +13,16 @@ var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
 var moment = require("moment");
 var UserService = /** @class */ (function () {
-    function UserService(http, commonFunction) {
+    function UserService(http, commonFunction, route) {
         this.http = http;
         this.commonFunction = commonFunction;
+        this.route = route;
         this.apiURL = environment_1.environment.apiUrl;
     }
     UserService.prototype.handleError = function (error) {
         var errorMessage = {};
         if (error.status == 0) {
-            errorMessage = { message: "API Server is not responding" };
+            return rxjs_1.throwError({ status: error.status, message: "API Server is not responding" });
         }
         if (error.error instanceof ErrorEvent) {
             // client-side error
@@ -34,7 +35,7 @@ var UserService = /** @class */ (function () {
         return rxjs_1.throwError(errorMessage);
     };
     UserService.prototype.socialLogin = function (data) {
-        return this.http.post(this.apiURL + 'v1/auth/social-login', data)
+        return this.http.post(this.apiURL + 'v1/auth/social-login', data, this.commonFunction.setWithoutLoginHeader())
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
     UserService.prototype.signin = function (jsonData) {
@@ -45,16 +46,19 @@ var UserService = /** @class */ (function () {
     UserService.prototype.signup = function (formValue) {
         var data = {
             "signup_via": "web",
+            "first_name": formValue.first_name,
+            "last_name": formValue.last_name,
             "email": formValue.email,
             "password": formValue.password,
             "confirm_password": formValue.confirm_password,
             "device_type": 1,
-            "device_model": "RNE-L22",
+            "device_model": navigator.appName,
             "device_token": "123abc#$%456",
-            "app_version": "1.0",
-            "os_version": "7.0"
+            "app_version": navigator.appVersion,
+            "os_version": navigator.platform,
+            "referral_id": formValue.referral_id ? formValue.referral_id : ''
         };
-        return this.http.post(this.apiURL + 'v1/auth/signup', data)
+        return this.http.post(this.apiURL + 'v1/auth/signup', data, this.commonFunction.setWithoutLoginHeader())
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
     };
     UserService.prototype.verifyOtp = function (data) {
@@ -68,7 +72,7 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.forgotPassword = function (formValue) {
         var data = {
-            "email": formValue.email
+            "email": typeof formValue.email != 'undefined' ? formValue.email : formValue
         };
         return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
             .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
@@ -76,14 +80,42 @@ var UserService = /** @class */ (function () {
     UserService.prototype.resetPassword = function (data) {
         return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
     };
+    UserService.prototype.deleteAccount = function (isRequireBackupFile) {
+        var accessToken = localStorage.getItem('_lay_sess');
+        /*   const options = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                
+            },
+          } */
+        var options = {
+            headers: {
+                Authorization: "Bearer " + accessToken
+            },
+            body: {
+                requireBackupFile: isRequireBackupFile
+            }
+        };
+        console.log(options);
+        return this.http["delete"](this.apiURL + 'v1/user/account/request', options);
+    };
     UserService.prototype.changePassword = function (data) {
         return this.http.put(this.apiURL + 'v1/auth/change-password', data, this.commonFunction.setHeaders());
     };
     UserService.prototype.updateProfile = function (data) {
         return this.http.put(this.apiURL + 'v1/auth/profile', data, this.commonFunction.setHeaders());
     };
+    UserService.prototype.updateProfileImage = function (data) {
+        return this.http.put(this.apiURL + 'v1/auth/profile/picture', data, this.commonFunction.setHeaders());
+    };
     UserService.prototype.getProfile = function () {
         return this.http.get(this.apiURL + 'v1/auth/profile/', this.commonFunction.setHeaders());
+    };
+    UserService.prototype.changePreference = function (data) {
+        return this.http.put(this.apiURL + 'v1/auth/preference', data, this.commonFunction.setHeaders());
+    };
+    UserService.prototype.getPreference = function () {
+        return this.http.get(this.apiURL + 'v1/auth/preference', this.commonFunction.setHeaders());
     };
     UserService.prototype.getBookings = function (pageNumber, limit, filterForm) {
         var queryString = "";
@@ -101,7 +133,7 @@ var UserService = /** @class */ (function () {
                 queryString += (filterForm.end_date) ? '&end_date=' + moment(filterForm.end_date).format("YYYY-MM-DD") : '';
             }
         }
-        return this.http.get(this.apiURL + "v1/booking/user-booking-list?limit=" + limit + "&page_no=" + pageNumber + queryString, this.commonFunction.setHeaders());
+        return this.http.get(this.apiURL + "v1/booking/user-booking-list?module_id=1&limit=" + limit + "&page_no=" + pageNumber + queryString, this.commonFunction.setHeaders());
     };
     UserService.prototype.getPaymentHistory = function (pageNumber, limit, filterForm, payment_status) {
         var queryString = "";
@@ -148,6 +180,15 @@ var UserService = /** @class */ (function () {
     UserService.prototype.subscribeNow = function (email) {
         var data = { email: email };
         return this.http.post(this.apiURL + 'v1/news-letters/subscribe', data);
+    };
+    UserService.prototype.emailVeryfiy = function (email) {
+        return this.http.get(this.apiURL + "v1/auth/verify-email-id?email=" + email, this.commonFunction.setHeaders());
+    };
+    UserService.prototype.registerGuestUser = function (data) {
+        return this.http.post(this.apiURL + "v1/auth/guest-user", data);
+    };
+    UserService.prototype.mapGuestUser = function (guestUserId) {
+        return this.http.patch(this.apiURL + "v1/cart/map-guest-user/" + guestUserId, {}, this.commonFunction.setHeaders());
     };
     UserService = __decorate([
         core_1.Injectable({

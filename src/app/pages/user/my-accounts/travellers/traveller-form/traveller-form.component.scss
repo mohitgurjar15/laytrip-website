@@ -1,34 +1,482 @@
+@import "../../../../../../cstm-variable";
+@import "../../../../../../_cstm-variable.scss";
+@import "../../../../../../_cstm-components.scss";
+@import "../../../../../../_hotel.scss";
+@import "../../../../../../_dr_home_variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+.ng-customClass.country_code {
+  width: 90px;
+}
+
 .cmn_add_edit_modal {
-	.modal-dialog {
-		.modal-content {
-			.modal-body {
-				.add_card_form {
-					.form_row {
-						.form_field.half {
-							.text_field {
-								.phone_no {
-									.code {
-                                        .dropdown{
-                                            width: 150px;
-                                        }
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+  .modal-dialog {
+    .modal-content {
+      .modal-body {
+        .add_card_form {
+          .form_row {
+            .form_field.half {
+              .text_field {
+                .phone_no {
+                  .code {
+                    .dropdown {
+                      width: 150px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-.img_country_code{
-	border-radius: 3px;
+.img_country_code {
+  border-radius: 3px;
 }
-::ng-deep .calender-passport-expiry{
-    min-width: 100% !important;  
+::ng-deep .calender-passport-expiry {
+  min-width: 100% !important;
 }
 
-.cmn_add_edit_modal .modal-dialog .modal-content .modal-body .add_card_form .form_row .form_field .text_field.custom-select{
-	border-bottom: 1px solid #E0E2E5;		
+.cmn_add_edit_modal
+  .modal-dialog
+  .modal-content
+  .modal-body
+  .add_card_form
+  .form_row
+  .form_field
+  .text_field.custom-select {
+  border-bottom: 1px solid #e0e2e5;
+}
+
+::ng-deep .calender-price-view {
+  //width: 340px;
+  min-width: 340px !important;
+
+  .p-datepicker-calendar-container {
+    .p-datepicker-calendar {
+      tbody {
+        tr {
+          td {
+            .p-ripple {
+              display: flex;
+              flex-flow: column;
+              width: auto;
+              height: auto;
+              border-radius: 0;
+              background: transparent;
+
+              &:hover {
+                background: transparent;
+                .c_date {
+                  background: #f826c1;
+                }
+              }
+              &.p-highlight {
+                background: transparent !important;
+                .c_date {
+                  background: #f826c1;
+                }
+              }
+            }
+
+            .c_date {
+              display: block;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              background: #2196f3;
+              padding: 5px;
+              text-align: center;
+              line-height: 20px;
+              color: #fff !important;
+            }
+            .calender_price {
+              display: block;
+              margin-top: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.dobs_account {
+  input {
+    &.p-inputtext {
+      border: none;
+    }
+  }
+
+  ::ng-deep .birth_date {
+    .p-inputtext {
+      border: none;
+    }
+
+    th {
+      font-size: 13px !important;
+      border-bottom: none !important;
+      font-weight: 600 !important;
+      text-align: center;
+    }
+
+    td {
+      padding: 0.1rem !important;
+
+      span {
+        width: 35px;
+        height: auto;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        color: $text-grey;
+        margin: 1px;
+        position: relative;
+
+        @include mobile-view {
+          width: 33px;
+        }
+
+        &:hover {
+          background: none !important;
+        }
+
+        &.p-highlight {
+          background: none !important;
+          font-weight: 500;
+          overflow: visible;
+
+          &::before {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: $pink;
+            position: absolute;
+            top: -5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.common_form {
+  label {
+    color: $mid_gray_bg;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  input {
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid $box-border-color;
+    font-size: 14px;
+    padding: 8px 0;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  select {
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid $box-border-color;
+    font-size: 14px;
+    padding: 8px 0;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  .nation_wrps {
+    ng-select {
+      .ng-input {
+        &[aria-expanded="true"] {
+          &:after {
+            content: "";
+            position: relative;
+            padding: 5px 9px;
+            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: 10px;
+            transition: 0.3s;
+            right: 8px;
+            border: none;
+            top: 5px;
+            @include tab-view {
+              position: absolute;
+              right: 0;
+              height: 12px;
+            }
+          }
+        }
+        &[aria-expanded="false"] {
+          &:after {
+            position: relative;
+            padding: 5px 9px;
+            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: 10px;
+            content: "";
+            transition: 0.3s;
+            right: 8px;
+            border: none;
+            top: 5px;
+            @include tab-view {
+              position: absolute;
+              right: 0;
+              height: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .mb-sm-10 {
+    margin-bottom: 10px;
+    &.telephone_wrps {
+      .tel_span {
+        border-bottom: 2px solid $box-border-color;
+        display: flex;
+        position: relative;
+        bottom: 2px;
+
+        &.error_border {
+          border-color: $error-color !important;
+        }
+        input {
+          border-bottom: none;
+          &:first-child {
+            width: 30px;
+          }
+        }
+      }
+    }
+    &.dobs {
+      input {
+        // background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+        background-image: none;
+
+        background-size: 20px;
+        border: none;
+      }
+      .form-control {
+        border-bottom: 2px solid $box-border-color !important;
+        /* &.ng-touched {
+          &.ng-invalid {
+            border-color: $error-color !important;
+          }
+        } */
+        &.input-error {
+          border-color: $error-color !important;
+        }
+      }
+    }
+    &.expiry_date {
+      input {
+        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
+          no-repeat;
+        background-size: 20px;
+        border: none;
+      }
+    }
+    .gender_anchers {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      top: -2px;
+      a {
+        &.active {
+          color: $text_light_yellow;
+        }
+        color: $mid_gray_bg;
+        font-size: 14px;
+        padding: 0 25px 0 0;
+        &:hover {
+          color: $text_light_yellow;
+          text-decoration: none;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+      ng-select {
+        width: 100%;
+        padding: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        position: relative;
+        background-color: $background-white;
+        top: -1px;
+      }
+    }
+  }
+  .edit_btns {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      background-color: transparent;
+      color: $text_light_yellow;
+      box-shadow: none;
+      font-size: 14px;
+      padding: 0;
+      border: none;
+      text-align: right;
+      text-decoration: none;
+
+      @include tab-view {
+        font-size: 12px;
+      }
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
+    &.duel_buttons {
+      justify-content: space-between;
+    }
+  }
+}
+.delete_account_block {
+  .modal-header {
+    justify-content: center;
+    border: none;
+
+    .close {
+      opacity: 1;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      img {
+        width: 12px;
+      }
+
+      @include mobile-view {
+        top: 15px;
+        right: 15px;
+      }
+    }
+  }
+
+  .modal-body {
+    width: 100%;
+    padding: 0px;
+    margin: 0;
+
+    @include tab-view {
+      height: 100%;
+      justify-content: center;
+      display: flex;
+      flex-flow: column;
+    }
+
+    .block_im {
+      margin: 0 auto 15px;
+      width: 85px;
+    }
+    .name_traveller {
+    }
+    h4 {
+      font-size: 32px;
+      line-height: 40px;
+      font-weight: 500;
+      color: $active-tab-text;
+      padding: 0px 0px 15px;
+      text-align: center;
+
+      @include tab-view {
+        font-size: 24px;
+        text-align: center;
+      }
+
+      @include mobile-view {
+        font-size: 20px;
+        line-height: 26px;
+        text-align: center;
+      }
+    }
+
+    .cta_btn_wrps {
+      padding: 10px;
+      width: 100%;
+      display: flex;
+
+      button {
+        max-width: 472px;
+        width: 100%;
+        height: 40px;
+        padding: 10px 25px;
+        background: $hotel-secondary-color;
+        border-radius: 25px;
+        border: 1px solid $hotel-secondary-color;
+        font-size: 14px;
+        color: $text-white;
+        transition: 0.3s;
+        position: relative;
+        z-index: 9;
+        overflow: hidden;
+        white-space: normal;
+        display: flex;
+        margin: 0 10px;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          border: 1px solid $hotel-secondary-color;
+          color: $text-white;
+          background: $hotel-secondary-color;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+    }
+
+    .footer_logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 10px;
+
+      img {
+        max-width: 62px;
+        height: 23px;
+      }
+    }
+  }
+
+  .modal-footer {
+    padding: 0 20px 25px;
+    border: 0;
+    margin: 0;
+
+    .modal_btm {
+      width: 100%;
+
+      .block_logo {
+        width: 100%;
+        text-align: center;
+        margin: 0 0 0;
+
+        img {
+          height: 22px;
+        }
+      }
+    }
+  }
 }

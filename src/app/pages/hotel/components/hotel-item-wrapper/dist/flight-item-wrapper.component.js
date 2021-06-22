@@ -22,7 +22,7 @@ var FlightItemWrapperComponent = /** @class */ (function () {
         this.genericService = genericService;
         this.animationState = 'out';
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
-        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
         this.flightListArray = [];
         this.subscriptions = [];
         this.flightDetailIdArray = [];
@@ -42,7 +42,6 @@ var FlightItemWrapperComponent = /** @class */ (function () {
     FlightItemWrapperComponent.prototype.ngOnInit = function () {
         var _currency = localStorage.getItem('_curr');
         this.currency = JSON.parse(_currency);
-        console.log('sds', this.showFlightDetails);
         this.flightList = this.flightDetails;
         this.userInfo = jwt_helper_1.getLoginUserInfo();
         if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {

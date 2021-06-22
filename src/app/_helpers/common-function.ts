@@ -1,7 +1,10 @@
+import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
-
+import { getLoginUserInfo } from './jwt.helper';
+import { v4 as uuidv4 } from 'uuid';
+import { ActivatedRoute, Router } from '@angular/router';
 @Injectable({
     providedIn: 'root',
 })
@@ -9,7 +12,13 @@ import { CookieService } from 'ngx-cookie';
 export class CommonFunction {
 
     constructor(
-        private cookieService: CookieService
+        private cookieService: CookieService,
+        private _location: Location,
+        private router: Router,
+        private route: ActivatedRoute
+
+
+
     ) {
 
     }
@@ -29,9 +38,16 @@ export class CommonFunction {
         }
     }
     validateNumber(e: any) {
-        console.log('sd')
         let input = String.fromCharCode(e.charCode);
         const reg = /^[0-9]*$/;
+
+        if (!reg.test(input)) {
+            e.preventDefault();
+        }
+    }
+    validatePhoneCode(e: any) {
+        let input = String.fromCharCode(e.charCode);
+        const reg = /^[0-9+]*$/;
 
         if (!reg.test(input)) {
             e.preventDefault();
@@ -51,7 +67,8 @@ export class CommonFunction {
         if (accessToken) {
             reqData = {
                 headers: {
-                    Authorization: `Bearer ${accessToken}`
+                    Authorization: `Bearer ${accessToken}`,
+                    referral_id: this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``
                 },
             };
         }
@@ -60,15 +77,29 @@ export class CommonFunction {
             Object.keys(params).map(k => {
                 reqData.headers[k] = params[k];
             });
+            reqData.headers.referral_id = this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``;
             //reqData.headers = reqParams;
         }
         return reqData;
     }
 
+    setWithoutLoginHeader(){
+        if(this.route.snapshot.queryParams['utm_source']){
+        return {
+            headers: {
+                referral_id: this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``
+            },
+
+        };
+        } else {
+        return {}
+        }
+    }
+
     convertDateFormat(date, sourceFormat, languageCode = null) {
 
         if (languageCode == null) {
-            return moment(date, sourceFormat).format('MM/DD/YYYY')
+            return moment(date, sourceFormat).format('MMM DD, YYYY')
         }
         return date;
     }
@@ -76,6 +107,11 @@ export class CommonFunction {
     convertDateYYYYMMDD(date, sourceFormat) {
 
         return moment(date, sourceFormat).format('YYYY-MM-DD')
+
+    }
+    convertDateMMDDYYYY(date, sourceFormat) {
+
+        return moment(date, sourceFormat).format('MM/DD/YYYY')
 
     }
     dateFormat(languageCode = null) {
@@ -166,6 +202,84 @@ export class CommonFunction {
         catch (e) {
             return '';
         }
+    }
+
+    goBack() {
+        this._location.back();
+    }
+
+    convertFlotToDecimal(floatNumber) {
+        return Math.round(floatNumber);
+    }
+
+    getGuestUser() {
+
+        let userDetails = getLoginUserInfo();
+        if (!userDetails.roleId || userDetails.roleId == 7) {
+
+            let guestuserId = localStorage.getItem('__gst')
+            if (guestuserId) {
+                return guestuserId
+            }
+            else {
+                return '';
+            }
+        }
+        else {
+            return '';
+        }
+    }
+
+    convertCustomDateFormat(date, sourceFormat, destFormat, languageCode = null) {
+
+        if (languageCode == null) {
+            return moment(date, sourceFormat).format(destFormat)
+        }
+        return date;
+    }
+
+    preventNumberInput(event: any) {
+        var a = [];
+        var k = event.which;
+
+        for (let i = 48; i < 58; i++)
+            a.push(i);
+
+        if ((a.indexOf(k) >= 0))
+            event.preventDefault();
+    }
+
+    preventSpecialCharacter(event: any) {
+        var a = [];
+        var k = event.charCode;
+
+        if ((k >= 33 && k <= 91) || k == 32 || k == 64 || (k >= 123 && k <= 126) || (k >= 92 && k <= 96))
+            event.preventDefault();
+    }
+
+    convertTime(time, sourceFormat, targetFormat) {
+        return moment(time, sourceFormat).format(targetFormat)
+    }
+
+    isRefferal() {
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
+            return true
+        }else {
+            return false;
+        } 
+    }
+    getRefferalParms(){
+        var parms : any = {};
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
+            parms.utm_source = this.route.snapshot.queryParams['utm_source'];
+        } 
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_medium']) {
+            parms.utm_medium = this.route.snapshot.queryParams['utm_medium'];
+        } 
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_campaign']) {
+            parms.utm_campaign =  this.route.snapshot.queryParams['utm_campaign'];
+        } 
+        return parms;
     }
 }
 

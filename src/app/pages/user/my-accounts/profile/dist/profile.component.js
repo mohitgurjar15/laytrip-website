@@ -13,77 +13,98 @@ var forms_1 = require("@angular/forms");
 var custom_validators_1 = require("../../../../_helpers/custom.validators");
 var moment = require("moment");
 var jwt_helper_1 = require("../../../../_helpers/jwt.helper");
+var phone_masking_helper_1 = require("src/app/_helpers/phone-masking.helper");
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(formBuilder, userService, genericService, router, commonFunctoin, toastr, cookieService) {
+    function ProfileComponent(formBuilder, userService, genericService, router, commonFunction, toastr, cookieService, flightService, checkOutService) {
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.genericService = genericService;
         this.router = router;
-        this.commonFunctoin = commonFunctoin;
+        this.commonFunction = commonFunction;
         this.toastr = toastr;
         this.cookieService = cookieService;
+        this.flightService = flightService;
+        this.checkOutService = checkOutService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
-        this.submitted = false;
+        // submitted = false;
         this.loading = true;
-        this.countries = [];
-        this.languages = [];
-        this.currencies = [];
-        this.countries_code = [];
-        this.stateList = [];
+        this.airportLoading = false;
+        this.loadingValue = new core_1.EventEmitter();
         this.minDate = {};
         this.maxDate = {};
+        this.data = [];
+        this.airportData = [];
         this.is_gender = true;
-        this.is_type = 'M';
+        this.gender_type = 'M';
         this.imageFile = '';
         this.imageFileError = false;
         this.imageErrorMsg = 'Image is required';
         this.image = '';
-        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
+        this.defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
         this.file = '';
         this.isFile = true;
         this.profile_pic = false;
         this.fileError = false;
         this.fileErrorMsg = 'File is required';
         this.selectResponse = {};
-        this.dobMinDate = new Date();
+        this.dobMinDate = new Date(moment().subtract(16, 'years').format("MM/DD/YYYY"));
         this.dobMaxDate = moment();
         this.locale = {
             format: 'DD/MM/YYYY',
             displayFormat: 'DD/MM/YYYY'
         };
+        this.isFormControlEnable = false;
+        this.loadingDeparture = false;
+        this.departureAirport = {};
+        this.arrivalAirport = {};
+        this.countries = [];
+        this.countries_code = [];
+        this.stateList = [];
+        this.dateYeaMask = {
+            guide: false,
+            showMask: false,
+            mask: [
+                /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/
+            ]
+        };
+        this.submitted = false;
+        this.type = 'form';
+        this.hmPlaceHolder = 'Select home airport';
+        this.closeAirportSuggestion = true;
+        this.phoneNumberMask = {
+            format: '',
+            length: 0
+        };
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        this.getAirports();
+        this.loadingValue.emit(true);
         window.scroll(0, 0);
-        this.getCountry();
-        this.getLanguages();
-        this.getCurrencies();
         var location = this.cookieService.get('__loc');
         try {
             this.location = JSON.parse(location);
         }
         catch (e) { }
         this.profileForm = this.formBuilder.group({
-            title: ['mr'],
-            first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-            country_id: [typeof this.location != 'undefined' && this.location.country.name ? this.location.country.name : ''],
-            dob: ['', forms_1.Validators.required],
-            country_code: [''],
-            phone_no: [''],
+            first_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+            last_name: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+            dob: ['', [forms_1.Validators.required, forms_1.Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
+            country_code: ['', [forms_1.Validators.required]],
+            phone_no: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]],
             address: [''],
-            email: [''],
-            zip_code: [''],
-            state_id: [''],
-            city_name: [''],
+            email: ['', [forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
             gender: ['M'],
             profile_pic: [''],
-            currency_id: [''],
-            address2: [''],
-            language_id: [''],
             passport_expiry: [''],
-            passport_number: ['']
-        }, { validator: custom_validators_1.phoneAndPhoneCodeValidation('adult') });
+            passport_number: [''],
+            home_airport: [''],
+            city: [''],
+            state_id: [''],
+            country_id: [''],
+            zip_code: ['']
+        }, { validators: custom_validators_1.phoneAndPhoneCodeValidation() });
         this.getProfileInfo();
+        this.getCountry();
     };
     ProfileComponent.prototype.getCountry = function () {
         var _this = this;
@@ -92,68 +113,71 @@ var ProfileComponent = /** @class */ (function () {
                 return {
                     id: country.id,
                     name: country.name,
+                    countryCode: country.phonecode,
                     flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
                 };
-            }),
-                _this.countries_code = data.map(function (country) {
-                    return {
-                        id: country.id,
-                        name: country.phonecode + ' (' + country.iso2 + ')',
-                        code: country.phonecode,
-                        country_name: country.name + ' ' + country.phonecode,
-                        flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
-                    };
-                });
-            if (_this.location) {
-                var countryCode = _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0];
-                _this.profileForm.controls.country_code.setValue(countryCode.country_name);
-            }
-        }, function (error) {
-            if (error.status === 401) {
-                _this.router.navigate(['/']);
-            }
+            });
+            var countries_code = data.map(function (country) {
+                return {
+                    id: country.id,
+                    name: country.phonecode + ' (' + country.iso2 + ')',
+                    countryCode: country.phonecode,
+                    country_name: country.name + ' ' + country.phonecode,
+                    flag: _this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
+                };
+            });
+            var filteredArr = countries_code.reduce(function (acc, current) {
+                var x = acc.find(function (item) { return item.countryCode == current.countryCode; });
+                if (!x) {
+                    return acc.concat([current]);
+                }
+                else {
+                    return acc;
+                }
+            }, []);
+            _this.countries_code = filteredArr;
+            _this.setUSCountryInFirstElement(_this.countries);
         });
     };
     ProfileComponent.prototype.getStates = function (countryId) {
         var _this = this;
-        this.profileForm.controls.state_id.setValue([]);
+        this.profileForm.controls.state_id.setValue('');
         this.genericService.getStates(countryId.id).subscribe(function (data) {
             _this.stateList = data;
         }, function (error) {
             if (error.status === 401) {
-                _this.router.navigate(['/']);
+                localStorage.setItem('userToken', "");
+                _this.router.navigate(['/login']);
             }
         });
     };
-    ProfileComponent.prototype.getLanguages = function () {
-        var _this = this;
-        this.genericService.getAllLangunage().subscribe(function (data) {
-            _this.languages = data.data;
-        }, function (error) {
-            if (error.status === 401) {
-                _this.router.navigate(['/']);
-            }
+    ProfileComponent.prototype.setUSCountryInFirstElement = function (countries) {
+        var usCountryObj = countries.find(function (x) { return x.id === 233; });
+        var removedUsObj = countries.filter(function (obj) { return obj.id !== 233; });
+        this.countries = [];
+        removedUsObj.sort(function (a, b) {
+            return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
         });
+        removedUsObj.unshift(usCountryObj);
+        this.countries = removedUsObj;
     };
-    ProfileComponent.prototype.getCurrencies = function () {
-        var _this = this;
-        this.genericService.getCurrencies().subscribe(function (data) {
-            _this.currencies = data.data;
-        }, function (error) {
-            if (error.status === 401) {
-                _this.router.navigate(['/']);
+    ProfileComponent.prototype.selectGender = function (event, type) {
+        if (this.isFormControlEnable) {
+            this.is_gender = true;
+            if (type == 'M') {
+                this.gender_type = 'M';
             }
-        });
-    };
-    ProfileComponent.prototype.clickGender = function (event, type) {
-        this.is_gender = true;
-        this.is_type = 'M';
-        if (type == 'F') {
-            this.is_type = 'F';
+            else if (type == 'F') {
+                this.gender_type = 'F';
+            }
+            else if (type == 'O') {
+                this.gender_type = 'O';
+            }
         }
     };
-    ProfileComponent.prototype.onFileSelect = function (event) {
+    ProfileComponent.prototype.uploadImageFile = function (event) {
         var _this = this;
+        this.imageFileError = false;
         this.imageFile = event.target.files[0];
         //file type validation check
         if (!custom_validators_1.validateImageFile(this.imageFile.name)) {
@@ -164,8 +188,8 @@ var ProfileComponent = /** @class */ (function () {
         //file size validation max=10
         if (!custom_validators_1.fileSizeValidator(event.target.files[0])) {
             this.imageFileError = true;
-            this.imageErrorMsg = 'Please select file up to 2mb size';
-            this.toastr.error(this.imageErrorMsg, 'Profile Error');
+            this.imageErrorMsg = 'Maximum file size is 5MB.';
+            // this.toastr.error(this.imageErrorMsg, 'Profile Error');
             return;
         }
         //file render
@@ -174,32 +198,37 @@ var ProfileComponent = /** @class */ (function () {
         reader.onload = function (_event) {
             _this.image = reader.result;
         };
-        this.imageFileError = false;
+        if (!this.imageFileError) {
+            this.imageFileError = false;
+            this.loadingValue.emit(true);
+            var formdata = new FormData();
+            var imgfile = '';
+            if (this.imageFile) {
+                imgfile = this.imageFile;
+                formdata.append("profile_pic", imgfile);
+                this.userService.updateProfileImage(formdata).subscribe(function (data) {
+                    // this.submitted = false;
+                    _this.loadingValue.emit(false);
+                    localStorage.setItem("_lay_sess", data.token);
+                    // this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
+                }, function (error) {
+                    _this.loadingValue.emit(false);
+                    // this.submitted = false;
+                    // this.toastr.error(error.error.message, 'Profile Error');
+                });
+            }
+        }
     };
     ProfileComponent.prototype.getProfileInfo = function () {
         var _this = this;
         this.userService.getProfile().subscribe(function (res) {
-            _this.loading = false;
+            _this.loadingValue.emit(false);
             _this.image = res.profilePic;
             _this.selectResponse = res;
-            _this.is_type = res.gender ? res.gender : 'M';
-            _this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
-            if (typeof _this.location != 'undefined' || typeof res.country.id != 'undefined') {
-                var country = res.country.id ? res.country : _this.location.country;
-                if (typeof country != 'undefined')
-                    _this.getStates(country);
-            }
-            var countryCode = '';
-            if (typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode) {
-                countryCode = _this.countries_code.filter(function (item) { return item.id == res.countryCode; })[0];
-            }
-            else {
-                countryCode = typeof _this.location != 'undefined' ? _this.countries_code.filter(function (item) { return item.id == _this.location.country.id; })[0] : '';
-            }
-            var countryName = '';
-            if (typeof _this.location != 'undefined') {
-                countryName = _this.location.country.name;
-            }
+            _this.gender_type = res.gender ? res.gender : 'M';
+            var countryId = { id: res.country.id ? res.country.id : 233 };
+            _this.getStates(countryId);
+            _this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
             _this.profileForm.patchValue({
                 first_name: res.firstName,
                 last_name: res.lastName,
@@ -207,38 +236,49 @@ var ProfileComponent = /** @class */ (function () {
                 gender: res.gender ? res.gender : 'M',
                 zip_code: res.zipCode,
                 title: res.title ? res.title : 'mr',
-                dob: res.dob ? moment(res.dob).format('MM/DD/YYYY') : '',
-                country_code: countryCode,
+                dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? _this.commonFunction.convertDateMMDDYYYY(res.dob, 'YYYY-MM-DD') : '',
+                country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
                 phone_no: res.phoneNo,
-                country_id: res.country.name ? res.country.name : countryName,
-                state_id: res.state.name,
-                city_name: res.cityName,
+                city: res.cityName,
                 address: res.address,
-                language_id: res.preferredLanguage.name,
-                currency_id: res.preferredCurrency.code,
-                profile_pic: res.profilePic,
-                passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MM/DD/YYYY') : '',
-                passport_number: res.passportNumber
+                home_airport: res.airportInfo.code ? res.airportInfo.city + ' (' + res.airportInfo.code + ')' : null,
+                country_id: res.country.name ? res.country.name : 'United States',
+                state_id: res.state.name ? res.state.name : null
             });
+            _this.profileForm.controls['home_airport'].disable();
+            _this.profileForm.controls['country_code'].disable();
+            _this.profileForm.controls['country_id'].disable();
+            _this.profileForm.controls['state_id'].disable();
+            var phoneFormat = phone_masking_helper_1.getPhoneFormat(res.countryCode || '+1');
+            _this.profileForm.controls.phone_no.setValidators([forms_1.Validators.minLength(phoneFormat.length)]);
+            _this.profileForm.controls.phone_no.updateValueAndValidity();
+            _this.phoneNumberMask.format = phoneFormat.format;
+            _this.phoneNumberMask.length = phoneFormat.length;
         }, function (error) {
-            _this.loading = false;
+            _this.loadingValue.emit(false);
             if (error.status === 401) {
                 jwt_helper_1.redirectToLogin();
             }
             else {
-                _this.toastr.error(error.message, 'Profile Error');
+                _this.toastr.show(error.message, 'Profile Error', {
+                    toastClass: 'custom_toastr',
+                    titleClass: 'custom_toastr_title',
+                    messageClass: 'custom_toastr_message'
+                });
             }
         });
     };
     ProfileComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.submitted = this.loading = true;
-        if (this.profileForm.controls.gender.errors && this.is_gender) {
-            this.profileForm.controls.gender.setValue(this.is_type);
-        }
+        this.submitted = true;
+        var controls = this.profileForm.controls;
+        this.loadingValue.emit(true);
         if (this.profileForm.invalid) {
             this.submitted = true;
-            this.loading = false;
+            Object.keys(controls).forEach(function (controlName) {
+                return controls[controlName].markAsTouched();
+            });
+            this.loadingValue.emit(false);
             //scroll top if any error 
             var scrollToTop_1 = window.setInterval(function () {
                 var pos = window.pageYOffset;
@@ -256,68 +296,188 @@ var ProfileComponent = /** @class */ (function () {
             var imgfile = '';
             if (this.imageFile) {
                 imgfile = this.imageFile;
-                formdata.append("profile_pic", imgfile);
+                // formdata.append("profile_pic",imgfile);
             }
-            formdata.append("title", this.profileForm.value.title);
+            // formdata.append("title",'mr');
             formdata.append("first_name", this.profileForm.value.first_name);
             formdata.append("last_name", this.profileForm.value.last_name);
             formdata.append("email", this.profileForm.value.email);
-            formdata.append("city_name", this.profileForm.value.city_name);
-            formdata.append("zip_code", this.profileForm.value.zip_code);
-            formdata.append("address", this.profileForm.value.address);
-            formdata.append("address1", this.profileForm.value.address);
+            formdata.append("home_airport", this.departureAirport.code ? this.departureAirport.code : '');
             formdata.append("phone_no", this.profileForm.value.phone_no);
-            formdata.append("gender", this.is_type);
-            formdata.append("passport_number", this.profileForm.value.passport_number);
-            formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-            formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') : '');
-            if (typeof this.profileForm.value.country_id === 'string') {
-                if (this.selectResponse.country.id) {
-                    formdata.append("country_id", this.selectResponse.country.id);
-                }
-                else {
-                    formdata.append("country_id", this.location.country.id);
-                }
+            formdata.append("gender", this.gender_type ? this.gender_type : 'M');
+            formdata.append("city_name", this.profileForm.value.city);
+            formdata.append("address", this.profileForm.value.address);
+            if (typeof this.profileForm.value.country_id == 'object') {
+                formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : 233);
             }
             else {
-                formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
+                formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
             }
-            if (typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
-                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
-            }
-            else {
+            if (typeof this.profileForm.value.state_id == 'string') {
                 formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
             }
-            console.log(typeof this.profileForm.value.country_code);
-            if (typeof (this.profileForm.value.country_code) === 'object') {
-                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '');
+            else {
+                formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
+            }
+            if (typeof (this.profileForm.value.country_code) != 'object') {
+                formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
             }
             else {
-                formdata.append("country_code", this.selectResponse.countryCode);
+                formdata.append("country_code", this.selectResponse.countryCode ? this.selectResponse.countryCode : '');
             }
-            if (!Number.isInteger(Number(this.profileForm.value.language_id))) {
-                formdata.append("language_id", this.selectResponse.preferredLanguage.id ? this.selectResponse.preferredLanguage.id : '');
-            }
-            else {
-                formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id : '');
-            }
-            if (!Number.isInteger(Number(this.profileForm.value.currency_id))) {
-                formdata.append("currency_id", this.selectResponse.preferredCurrency.id ? this.selectResponse.preferredCurrency.id : '');
-            }
-            else {
-                formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id : '');
-            }
+            formdata.append("zip_code", this.profileForm.value.zip_code ? this.profileForm.value.zip_code : this.selectResponse.zipCode);
+            formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? this.commonFunction.convertDateYYYYMMDD(this.profileForm.value.dob, 'MM/DD/YYYY') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+            this.isFormControlEnable = false;
+            this.profileForm.controls['home_airport'].disable();
+            this.profileForm.controls['country_code'].disable();
+            this.profileForm.controls['country_id'].disable();
+            this.profileForm.controls['state_id'].disable();
             this.userService.updateProfile(formdata).subscribe(function (data) {
-                _this.submitted = _this.loading = false;
+                _this.submitted = false;
+                _this.loadingValue.emit(false);
                 localStorage.setItem("_lay_sess", data.token);
-                _this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
-                // this.router.navigate(['/']);      
+                // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
             }, function (error) {
-                _this.submitted = _this.loading = false;
-                _this.toastr.error(error.error.message, 'Profile Error');
+                _this.loadingValue.emit(false);
+                _this.submitted = false;
+                // this.toastr.error(error.error.message, 'Profile Error');
             });
         }
     };
+    ProfileComponent.prototype.enableFormControlInputs = function (event) {
+        this.isFormControlEnable = true;
+        this.profileForm.controls['home_airport'].enable();
+        this.profileForm.controls['country_code'].enable();
+        this.profileForm.controls['country_id'].enable();
+        this.profileForm.controls['state_id'].enable();
+    };
+    ProfileComponent.prototype.onRemove = function (event, item) {
+        if (item.key === 'fromSearch') {
+            this.departureAirport = Object.create(null);
+        }
+        else if (item.key === 'toSearch') {
+            this.arrivalAirport = Object.create(null);
+        }
+    };
+    ProfileComponent.prototype.searchAirportDeparture = function (searchItem) {
+        var _this = this;
+        this.loadingDeparture = true;
+        this.closeAirportSuggestion = false;
+        this.data = [];
+        this.flightService.searchAirport(searchItem.target.value).subscribe(function (response) {
+            _this.data = response.map(function (res) {
+                _this.loadingDeparture = false;
+                return {
+                    key: res.code.charAt(0),
+                    value: [{
+                            id: res.id,
+                            name: res.name,
+                            code: res.code,
+                            city: res.city,
+                            country: res.country,
+                            display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
+                            parentId: res.parentId
+                        }]
+                };
+            });
+        }, function (error) {
+            _this.closeAirportSuggestion = true;
+            _this.loadingDeparture = false;
+        });
+    };
+    ProfileComponent.prototype.selectEvent = function (event, item) {
+        if (event && event.code && item.key === 'fromSearch') {
+            // this.home_airport = event.code;
+            // this.departureAirport=event;
+            // this.searchedValue.push({ key: 'fromSearch', value: event });
+        }
+    };
+    ProfileComponent.prototype.getAirports = function () {
+        var _this = this;
+        var from = localStorage.getItem('__from') || '';
+        var to = localStorage.getItem('__to') || '';
+        if (from == '' && to == '') {
+            this.airportLoading = true;
+            this.flightService.searchAirports(this.type).subscribe(function (result) {
+                _this.airportLoading = false;
+                for (var i = 0; i < result.length; i++) {
+                    for (var j = 0; j < result[i].value.length; j++) {
+                        result[i].value[j].display_name = result[i].value[j].city + "," + result[i].value[j].country + ",(" + result[i].value[j].code + ")," + result[i].value[j].name;
+                    }
+                }
+                _this.airportData = result;
+            }, function (error) {
+                _this.airportLoading = false;
+                _this.airportData = [];
+            });
+        }
+        else {
+            var isFromLocation = this.type == 'from' ? 'yes' : 'no';
+            var alternateLocation = '';
+            if (this.type == 'from') {
+                alternateLocation = localStorage.getItem('__to') || '';
+            }
+            else {
+                alternateLocation = localStorage.getItem('__from') || '';
+            }
+            this.airportLoading = true;
+            this.flightService.searchRoute('', isFromLocation, alternateLocation).subscribe(function (response) {
+                _this.airportLoading = false;
+                var opResult = _this.groupByKey(response, 'key');
+                var airportArray = [];
+                for (var _i = 0, _a = Object.entries(opResult); _i < _a.length; _i++) {
+                    var _b = _a[_i], key = _b[0], value = _b[1];
+                    airportArray.push({
+                        key: key,
+                        value: value
+                    });
+                }
+                airportArray = airportArray.sort(function (a, b) { return a.key.localeCompare(b.key); });
+                for (var i = 0; i < airportArray.length; i++) {
+                    for (var j = 0; j < airportArray[i].value.length; j++) {
+                        airportArray[i].value[j].display_name = airportArray[i].value[j].city + "," + airportArray[i].value[j].country + ",(" + airportArray[i].value[j].code + ")," + airportArray[i].value[j].name;
+                    }
+                }
+                _this.airportData = airportArray;
+            }, function (error) {
+                _this.airportData = [];
+                _this.airportLoading = false;
+            });
+        }
+    };
+    ProfileComponent.prototype.groupByKey = function (array, key) {
+        return array
+            .reduce(function (hash, obj) {
+            var _a;
+            if (obj[key] === undefined)
+                return hash;
+            return Object.assign(hash, (_a = {}, _a[obj[key]] = (hash[obj[key]] || []).concat(obj), _a));
+        }, {});
+    };
+    ProfileComponent.prototype.closeAirportDropDown = function (type) {
+        this.closeAirportSuggestion = true;
+    };
+    ProfileComponent.prototype.selectAirport = function (event) {
+        if (event.parentId != 0) {
+            this.profileForm.controls.home_airport.setValue(event.city + ' (' + event.code + ')');
+        }
+        else {
+            this.profileForm.controls.home_airport.setValue(event.city + ' International (' + event.code + ')');
+        }
+        this.closeAirportSuggestion = true;
+        this.hmPlaceHolder = '';
+        this.departureAirport.code = event.code;
+    };
+    ProfileComponent.prototype.validateCountryWithPhoneNumber = function (event) {
+        var selectedCountry = phone_masking_helper_1.getPhoneFormat(this.profileForm.controls['country_code'].value);
+        this.profileForm.controls.phone_no.setValidators([forms_1.Validators.minLength(selectedCountry.length)]);
+        this.profileForm.controls.phone_no.updateValueAndValidity();
+        this.phoneNumberMask.format = selectedCountry.format;
+        this.phoneNumberMask.length = selectedCountry.length;
+    };
+    __decorate([
+        core_1.Output()
+    ], ProfileComponent.prototype, "loadingValue");
     ProfileComponent = __decorate([
         core_1.Component({
             selector: 'app-profile',

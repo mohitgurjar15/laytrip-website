@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked, SimpleChanges } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
+import { type } from 'os';
 // import { data } from './airport';
 
 
@@ -10,7 +11,7 @@ import { CookieService } from 'ngx-cookie';
   templateUrl: './search-airport.component.html',
   styleUrls: ['./search-airport.component.scss']
 })
-export class SearchAirportComponent implements OnInit, AfterViewChecked {
+export class SearchAirportComponent implements OnInit {
 
   @Input() label: string;
   @Input() tabIndex: number;
@@ -20,11 +21,9 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   @Input() form: FormGroup;
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
-  @Input() defaultCity: string;
+  @Output() searchItem = new EventEmitter<any>();
+  @Input() defaultCity: any;
   @Input() airport;
-  defaultSelectedTemp;
-  airportDefaultDestValue;
-  departureAirport;
 
   constructor(
     private flightService: FlightService,
@@ -39,21 +38,26 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   loading = false;
 
   ngOnInit() {
-    this.defaultSelectedTemp = this.defaultSelected;
-    this.setDefaultAirport();
-    this.data[0] = this.airport;
-  }
 
-  ngDocheck() {
-  }
-
-  ngAfterViewChecked() {
-
+    this.data[0] = this.airport ? this.airport : [];
+    if(Object.keys(this.airport).length==0){
+      this.data=[];
+    }
   }
 
   searchAirport(searchItem) {
+    
     this.loading = true;
-    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+    let isFromLocation=this.id=='fromSearch'?'yes':'no';
+    let alternateLocation='';
+    if(this.id=='fromSearch'){
+      alternateLocation=localStorage.getItem('__to') || '';
+    }
+    else{
+      alternateLocation=localStorage.getItem('__from') || '';
+    }
+
+    this.flightService.searchRoute(searchItem,isFromLocation,alternateLocation).subscribe((response: any) => {
       this.data = response.map(res => {
         this.loading = false;
         return {
@@ -63,7 +67,7 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
           city: res.city,
           country: res.country,
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
-          parentId: res.parentId
+          parentId: 0
         };
       });
     },
@@ -74,28 +78,35 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
   }
 
   onChangeSearch(event) {
-    if (event.term.length > 2) {
-      this.searchAirport(event.term);
-    }
+    this.searchAirport(event.term);
+    console.log("event.term",event.term)
+    this.searchItem.emit({key : event.term,type : this.id})
   }
 
   selectEvent(event, index) {
     if (!event) {
       this.placeHolder = this.placeHolder;
-      this.defaultSelected = this.defaultSelected;
     }
-    //this.selectedAirport = event;
-    this.defaultSelected = event;
+    if(typeof event=='undefined'){
+      if (index === 'fromSearch') {
+        localStorage.removeItem('__from')
+      } else if (index === 'toSearch') {
+        localStorage.removeItem('__to')
+      }
+    }
+    this.selectedAirport = event;
     if (event && index && index === 'fromSearch') {
       this.changeValue.emit({ key: 'fromSearch', value: event });
+      localStorage.setItem('__from',this.selectedAirport.code)
     } else if (event && index && index === 'toSearch') {
+      localStorage.setItem('__to',this.selectedAirport.code)
       this.changeValue.emit({ key: 'toSearch', value: event });
     }
   }
 
   onRemove(event) {
+    console.log("innnnn")
     this.selectedAirport = {};
-    this.defaultSelected = this.defaultSelectedTemp;
   }
 
   setDefaultAirport() {
@@ -114,4 +125,14 @@ export class SearchAirportComponent implements OnInit, AfterViewChecked {
 
     }
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+
+    if (changes['airport']) {
+      this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
+      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
+      //this.data=[];
+    }
+  }
+
 }

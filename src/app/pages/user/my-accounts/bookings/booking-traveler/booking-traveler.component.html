@@ -1,0 +1,177 @@
+<div id="accordion_Bookings" class="accordion_bookings"
+    *ngIf="(travelers | json) != '{}' && (moduleInfo | json) != '{}' ">
+    <div class="card traveller_card_accr" *ngFor="let traveler of travelers;let i = index; let last = last;">
+        <div class="card-header tr_card_header {{last}}" >
+            <a class="card-link card_link_max" *ngIf="moduleId == 1">
+                {{i == 0 ?'Primary Traveler':getUserType(traveler)}} 
+            </a>
+            <a class="card-link card_link_max" *ngIf="moduleId == 3">
+                {{ moduleInfo[0].title }} 
+            </a>
+            <a class="card-link new_link">
+                {{ traveler.travelerInfo.firstName || '' | titlecase}} {{ traveler.travelerInfo.lastName || '' | titlecase }}
+            </a>
+        </div>
+        <div class="collapse show">
+            <div class="card-body">
+                <div class="common_form">
+                    <!--Flight Module Start-->
+                    <div class="form-row" *ngIf="moduleId == 1">
+                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                            <label for="">First Name*</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.firstName}}"
+                                disabled>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                            <label for="">Last Name*</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.lastName}}"
+                                disabled>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 mb-sm-10">
+                            <label for="">Gender*</label>
+                            <input type="text" class="form-control"
+                                placeholder="{{getGender(traveler.travelerInfo.gender)}}" disabled>
+
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="checkIsChild(traveler.travelerInfo.dob)">
+                            <label for="">Email*</label>
+                            <input type="email" class="form-control" placeholder="{{traveler.travelerInfo.email}}" disabled>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="traveler.travelerInfo.user_type == 'adult'" >
+                            <label for="">Telephone*</label>
+                            <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.countryCode != 'null' ? getPhoneNoInMaskFormat(traveler.travelerInfo.phoneNo,traveler.travelerInfo.countryCode): '' }}"
+                                disabled>
+                        </div>
+                        <div class="col dobs col-md-4 mb-sm-10">
+                            <label for="">Date of Birth*</label>
+                            <input type="text" class="form-control"
+                                placeholder="{{ traveler.travelerInfo.dob && traveler.travelerInfo.dob != ''  ? commonFunction.convertCustomDateFormat(traveler.travelerInfo.dob,'YYYY-MM-DD','MM/DD/YYYY') : ''}}"
+                                disabled>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4" 
+                            *ngIf="traveler.travelerInfo.user_type == 'adult' &&  traveler.is_passport_required && checkIsChild(traveler.travelerInfo.dob) ">
+                            <label for="">{{'passport_number'| translate}}</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.passportNumber}}"
+                                disabled>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label for="">Country of Issue *</label>
+                            <input type="text" class="form-control" 
+                                placeholder="{{traveler.travelerInfo.countryId ? getContryName(traveler.travelerInfo.countryId) : ''}}"
+                                disabled>
+                        </div>
+                    </div>
+                    <!--Flight Module End-->
+                    <!--Hotel Module Start-->
+                    <div class="form-row" *ngIf="moduleId == 3">
+                        <div class="col-sm-12 col-md-6 mb-sm-10">
+                            <label for="">First Name*</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.firstName}}"
+                                disabled>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-sm-10">
+                            <label for="">Last Name*</label>
+                            <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.lastName}}"
+                                disabled>
+                        </div>                        
+                        <div class="col-sm-12 col-md-6 mb-sm-10 " *ngIf="i == 0 ">
+                            <label for="">Email*</label>
+                            <input type="email" class="form-control" placeholder="{{traveler.travelerInfo.email}}" disabled>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-sm-10" *ngIf="i == 0 " >
+                            <label for="">Telephone*</label>
+                            <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.countryCode != 'null' ? getPhoneNoInMaskFormat(traveler.travelerInfo.phoneNo,traveler.travelerInfo.countryCode): '' }}"
+                                disabled>
+                        </div>                       
+                    </div>
+                    <!--Hotel Module End-->
+                </div>
+
+                <div id="accordion_add" class="accordion_addn" *ngIf="moduleId == 1">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="heade_wrps">
+                                Add-Ons
+                                <a href="javascript:void(0);" class="addon_anchor responsive_anch">
+                                </a>
+                            </span>
+                            <ul class="nav nav-pills" id="addon_tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="baggage-tab" data-toggle="tab" href="#baggage"
+                                        role="tab" aria-controls="baggage" aria-selected="true">Baggage <br>Included</a>
+                                </li>
+                                <li class="nav-item disabled_addon" role="presentation">
+                                    <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding" role="tab"
+                                        aria-controls="boarding" aria-selected="false">Priority
+                                        <br>Boarding</a>
+                                </li>
+                                <li class="nav-item disabled_addon" role="presentation">
+                                    <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance"
+                                        role="tab" aria-controls="insurance" aria-selected="false">Insurance</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="add_acord" class="collapse show">
+                            <div class="card-body">
+                                <div class="tab-content" id="addon_tabContent">
+                                    <div class="tab-pane fade show active" id="baggage" role="tabpanel"
+                                        aria-labelledby="baggage-tab">
+                                        <div class="addon_listins_wrps">
+                                            <span class="fake_span"></span>
+                                            <button class="addon_btn_drop" (click)="$event.preventDefault()">
+                                               <!--  {{formatBaggageDescription(moduleInfo[0]?.routes[0]?.stops[0]?.cabin_baggage,
+                                                moduleInfo[0]?.routes[0]?.stops[0]?.checkin_baggage)}} -->
+                                                Some baggage may be included, provider rules apply.                                                
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="boarding" role="tabpanel"
+                                        aria-labelledby="boarding-tab">
+                                        Cabin bag upto Standard Baggage
+                                    </div>
+                                    <div class="tab-pane fade" id="insurance" role="tabpanel"
+                                        aria-labelledby="insurance-tab">
+                                        Cabin bag upto Standard Baggage
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_cta_btn" *ngIf="last == true && (bookingStatus == 0 || bookingStatus == 1)">
+            <a class="hover-link"  (click)="open(content,laytrip_cart_id)">
+              Cancel Booking
+            </a>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="delete_account_block cancel_booking">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="block_im">
+          <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
+        </div>
+        <h4 class="modal-title" id="modal-basic-title">Canceling this item will cancel all items you purchased under this Booking ID, and per our <a target="_blank" [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" >Terms</a>, there are no refunds.</h4>
+
+        <div class="cta_btn_wrps">
+          <button class="btn_no" (click)="cancelBooking()">Cancel Booking</button>
+          <button class="btn_yes" (click)="openChat()">Customer Service</button>
+        </div>
+        <div class="footer_logo">
+          <a>
+            <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-template>

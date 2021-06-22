@@ -15,15 +15,23 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { VacationNotFoundComponent } from './components/vacation-not-found/vacation-not-found.component';
 import { ComponentsModule } from '../../components/components.module';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { VacationDetailComponent } from './components/vacation-detail/vacation-detail.component';
+import { NgxGalleryModule } from 'ngx-gallery';
+import { VacationPopupLoaderComponent } from './components/vacation-popup-loader/vacation-popup-loader.component';
+import { HomeModule } from '../home/home.module';
+
+// HELPERS MODULE
+import { HelpersModule } from '../../_helpers/_helpers.module';
 
 @NgModule({
-  declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent],
+  declarations: [VacationRentalSearchComponent, VacationRentalSearchBarComponent, SortVacationRentalComponent, FilterVacationRentalComponent, VacationItemWrapperComponent, VacationLoaderComponent, VacationNotFoundComponent, VacationDetailComponent, VacationPopupLoaderComponent],
   imports: [
     CommonModule,
     VacationRentalRoutingModule,
     CalendarModule,
     FormsModule, 
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgSelectModule,
     Ng5SliderModule,
     ComponentsModule,
@@ -32,7 +40,14 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
       apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
       libraries: ['places']
     }),
+    AgmJsMarkerClustererModule,
+    NgxGalleryModule,
+    HomeModule,
+    HelpersModule
   ],
   //schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports : [
+    HomeModule
+  ]
 })
 export class VacationRentalModule { }

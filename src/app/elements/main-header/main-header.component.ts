@@ -1,15 +1,19 @@
-import { Component, OnInit, DoCheck,  ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output, ViewChild, SimpleChanges } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
-import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { environment } from '../../../environments/environment';
-import { Currency, CurrencyModel } from '../../model/currency.model';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
-import { AuthComponent } from '../../pages/user/auth/auth.component';
 import { CommonFunction } from '../../_helpers/common-function';
+import { CartService } from '../../services/cart.service';
+import * as moment from 'moment';
+import { CookieService } from 'ngx-cookie';
+import { UserService } from '../../services/user.service';
+import { EmptyCartComponent } from '../../components/empty-cart/empty-cart.component';
+import { AppleSecurityLoginPopupComponent, MODAL_TYPE } from '../../pages/user/apple-security-login-popup/apple-security-login-popup.component';
 declare var $: any;
+import {installmentType} from '../../_helpers/generic.helper';
 
 @Component({
   selector: 'app-main-header',
@@ -18,196 +22,227 @@ declare var $: any;
 })
 export class MainHeaderComponent implements OnInit, DoCheck {
 
-  @ViewChild(MainHeaderComponent, { static: false }) headerComponent: MainHeaderComponent;
-
   s3BucketUrl = environment.s3BucketUrl;
-  langunages: Langunage[] = [];
-  selectedLanunage: Langunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
-  isLanunageSet: boolean = false;
-  defaultImage = this.s3BucketUrl + 'assets/images/profile_im.svg';
-
-  currencies: Currency[] = [];
-  selectedCurrency: Currency = { id: 0, country: '', code: '', symbol: '', status: false, flag: '' }
-  isCurrencySet: boolean = false;
+  defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
   isLoggedIn = false;
   totalLayCredit = 0;
   showTotalLayCredit = 0;
   userDetails;
   username;
   _isLayCredit = false;
-  countryCode:string='';
+  countryCode: string;
+  isCovidPage = true;
+  cartItems;
+  cartItemsCount;
+  installmentAmount: number;
+  totalAmount: number;
+  fullPageLoading = false;
+  modalRef;
+  guestUserId: string = '';
+  cartOverLimit;
+  isOpenAppleLoginPopup = false;
+  paymentType:string='';
+  instalmentType:string='weekly';
+  installmentOptions;
+  paymentInfo;
 
   constructor(
     private genericService: GenericService,
     public translate: TranslateService,
     public modalService: NgbModal,
     public router: Router,
-    private commonFunction:CommonFunction,
-    private renderer: Renderer2
+    private commonFunction: CommonFunction,
+    public cd: ChangeDetectorRef,
+    private cartService: CartService,
+    private cookieService: CookieService,
+    private userService: UserService
   ) {
-
-    this.countryCode = this.commonFunction.getUserCountry();
-    let _langunage = localStorage.getItem('_lang');
-    let _currency = localStorage.getItem('_curr');
-    if (_langunage) {
-      try {
-        let _lang = JSON.parse(_langunage);
-        this.selectedLanunage = _lang;
-        translate.setDefaultLang(this.selectedLanunage.iso_1Code);
-        this.isLanunageSet = true;
-        this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
-      } catch (error) {
-        this.isLanunageSet = false;
-        translate.setDefaultLang('en');
-      }
-    } else {
-      translate.setDefaultLang('en');
-    }
-
-    if (_currency) {
-
-      try {
-        let _curr = JSON.parse(_currency);
-        this.selectedCurrency = _curr;
-        this.isCurrencySet = true;
-      }
-      catch (error) {
-        this.isCurrencySet = false;
-      }
-    }
-
-    this.countryCode = this.commonFunction.getUserCountry();
-    
   }
 
   ngOnInit(): void {
     this.checkUser();
-    this.getLangunages();
-    this.getCurrencies();
     this.loadJquery();
     //this.getUserLocationInfo();
     if (this.isLoggedIn) {
-      if (this.userDetails.roleId != 7) {
-        this.totalLaycredit();
-      }
+      this.totalLaycredit();
     }
+    this.getCartList();
+    this.installmentOptions=installmentType;
+
+    this.cartService.getCartItems.subscribe(data => {
+      if (data.length > 0) {
+        this.updateCartSummary()
+      }
+    })
+    this.countryCode = this.commonFunction.getUserCountry();
+
+    this.cartService.getPaymentOptions.subscribe((data:any)=>{
+      if(Object.keys(data).length>0){
+        this.paymentInfo=data;
+        if(data.paymentType=='instalment'){
+          this.paymentType='instalment';
+          this.instalmentType=data.instalmentType;
+          this.installmentAmount=data.instalments.instalment_date[1].instalment_amount;
+        }
+        else{
+          this.paymentType='no-instalment';
+          this.instalmentType='';
+        }
+      }
+      else{
+        try{
+          let data:any=localStorage.getItem("__pm_inf");
+          data = atob(data);
+          data=JSON.parse(data);
+          this.paymentInfo=data;
+          if(data.paymentType=='instalment'){
+            this.paymentType='instalment';
+            this.instalmentType=data.instalmentType;
+            this.installmentAmount=data.instalments.instalment_date[1].instalment_amount;
+          }
+          else{
+            this.paymentType='no-instalment';
+            this.instalmentType='';
+          }
+        }
+        catch(e){
+          this.paymentInfo={};
+        }
+      }
+    })
   }
-  
+
+  getCartList() {
+
+    let live_availiblity = 'no';
+    let url = window.location.href;
+    if (url.includes('cart/booking') || url.includes('cart/checkout')) {
+      live_availiblity = 'yes';
+    }
+    this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
+      if (res) {
+        // SET CART ITEMS IN CART SERVICE
+        let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0], type : item.type } });
+        this.cartItems = cartItems;
+        this.cartService.setCartItems(cartItems);
+        if (cartItems) {
+          this.cartItemsCount = res.data.length;
+          localStorage.setItem('$crt', this.cartItemsCount);
+        }
+        this.calculateInstalment(cartItems);
+        // this.cd.detectChanges();
+      }
+    }, (error) => {
+      if (error && error.status === 404) {
+        this.cartItems = [];
+        this.cartItemsCount = 0;
+        localStorage.setItem('$crt', this.cartItemsCount);
+      }
+    });
+  }
+
+  updateCartSummary() {
+    let live_availiblity = 'no';
+    let url = window.location.href;
+    if (url.includes('cart/booking') || url.includes('cart/checkout')) {
+      live_availiblity = 'yes';
+    }
+    this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
+      if (res) {
+        // SET CART ITEMS IN CART SERVICE
+        let cartItems = res.data.map(item => { 
+          return { id: item.id, module_Info: item.moduleInfo[0],type : item.type } 
+        });
+        this.calculateInstalment(cartItems);
+        this.cd.detectChanges();
+      }
+    }, (error) => {
+      if (error && error.status === 404) {
+
+      }
+    });
+  }
 
   ngDoCheck() {
     this.checkUser();
-    // this.userDetails = getLoginUserInfo();
-    // this.totalLaycredit();
-  }
-
-  ngOnChanges() {
-    // this.totalLaycredit();
-  }
-  /**
-   * change user lanunage
-   * @param langunage 
-   */
-  changeLangunage(langunage: Langunage) {
-
-    if (JSON.stringify(langunage) != JSON.stringify(this.selectedLanunage)) {
-      this.selectedLanunage = langunage;
-      localStorage.setItem("_lang", JSON.stringify(langunage))
-      this.renderer.removeClass(document.body, `en_lang`);
-      this.renderer.removeClass(document.body, `es_lang`);
-      this.renderer.removeClass(document.body, `it_lang`);
-      this.translate.use(langunage.iso_1Code);
-      this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
+    this.cartOverLimit = JSON.parse(localStorage.getItem('$cartOver'));
+    this.cd.detectChanges();
+    let host = window.location.href;
+    this.isCovidPage = true;
+    if (host.includes("covid-19")) {
+      this.isCovidPage = false;
     }
-  }
-
-  /**
-   * Get all langunages
-   */
-  getLangunages() {
-    this.genericService.getAllLangunage().subscribe(
-      (response: LangunageModel) => {
-        this.langunages = response.data.filter(lang => lang.active == true);
-        if (!this.isLanunageSet) {
-          this.isLanunageSet = true;
-          this.selectedLanunage = this.langunages[0];
-          localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
-        }
-        else {
-          let find = this.langunages.find(langunage => langunage.id == this.selectedLanunage.id)
-          if (!find) {
-            this.isLanunageSet = true;
-            this.selectedLanunage = this.langunages[0];
-            localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
-          }
-        }
-      },
-      (error) => {
+    this.cartService.getCartItems.subscribe((res: any) => {
+      try {
+        this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
+      }
+      catch (e) {
 
       }
-    )
-  }
+    });
 
-  /**
-   * Get all currencies
-   */
-  getCurrencies() {
-
-    this.genericService.getCurrencies().subscribe(
-      (response: CurrencyModel) => {
-
-        this.currencies = response.data.filter(currency => currency.status == true);
-        for (let i = 0; i < this.currencies.length; i++) {
-          this.currencies[i].flag = `${this.s3BucketUrl}assets/images/icon/${this.currencies[i].code}.svg`;
-        }
-        if (!this.isCurrencySet) {
-
-          this.isCurrencySet = true;
-          this.selectedCurrency = this.currencies[0];
-
-          localStorage.setItem("_curr", JSON.stringify(this.currencies[0]))
-        }
-        else {
-          let find = this.currencies.find(currency => currency.id == this.selectedCurrency.id)
-          if (!find) {
-            this.isCurrencySet = true;
-            this.selectedCurrency = this.currencies[0];
-            localStorage.setItem("_curr", JSON.stringify(this.currencies[0]))
-          }
-        }
-      },
-      (error) => {
-
-      }
-    )
-  }
-
-  changeCurrency(currency: Currency) {
-    if (JSON.stringify(currency) != JSON.stringify(this.selectedCurrency)) {
-      this.selectedCurrency = currency;
-      localStorage.setItem("_curr", JSON.stringify(currency))
-    }
   }
 
   checkUser() {
-    let userToken = localStorage.getItem('_lay_sess');
-
+    this.userDetails = getLoginUserInfo();
     this.isLoggedIn = false;
-    if (userToken && userToken != 'undefined' && userToken != 'null') {
+    if (Object.keys(this.userDetails).length && this.userDetails.roleId != 7) {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
-      this.userDetails = getLoginUserInfo();
-      if (this.userDetails.roleId != 7 && !this._isLayCredit ) {
-        this.totalLaycredit();
+      if (typeof this.userDetails.email != 'undefined' && this.userDetails.email != '') {
+        var name = this.userDetails.email.substring(0, this.userDetails.email.lastIndexOf("@"));
+        var domain = this.userDetails.email.substring(this.userDetails.email.lastIndexOf("@") + 1);
       }
+      this.username = this.userDetails.firstName ? this.userDetails.firstName : name;
+      if (!this._isLayCredit) {
+        this.totalLaycredit();
+        this.getCartList();
+      }
+
       this.showTotalLayCredit = this.totalLayCredit;
+      if (this.userDetails && this.userDetails.requireToupdate) {
+        if (!this.isOpenAppleLoginPopup) {
+          this.openAppleSecurityLogin();
+          this.isOpenAppleLoginPopup = true;
+        }
+      }
     }
   }
+
+  openAppleSecurityLogin() {
+    const modalRef = this.modalService.open(AppleSecurityLoginPopupComponent, {
+      windowClass: 'apple_security_login_block', centered: true, backdrop: 'static',
+      keyboard: false
+    }).result.then((result) => {
+      
+    });
+  }
+
 
   onLoggedout() {
     this.isLoggedIn = this._isLayCredit = false;
     this.showTotalLayCredit = 0;
     localStorage.removeItem('_lay_sess');
-    this.router.navigate(['/']);
+    localStorage.removeItem('$crt');
+    localStorage.removeItem('$cartOver');
+    this.cookieService.remove('__cc');
+    this.cartItemsCount = '';
+    this.cartService.setCartItems([]);
+    this.loginGuestUser();
+    if(this.commonFunction.isRefferal()){
+      var parms = this.commonFunction.getRefferalParms();
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate([`/`],{ queryParams : queryParams});
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   loadJquery() {
@@ -237,14 +272,157 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.genericService.getAvailableLaycredit().subscribe((res: any) => {
       this.totalLayCredit = res.total_available_points;
     }, (error => {
-      if(error.status == 406){
+      if (error.status == 406) {
         redirectToLogin();
       }
     }))
   }
 
   openSignModal() {
-    const modalRef = this.modalService.open(AuthComponent);
     $('#sign_in_modal').modal('show');
+    $("#signin-form").trigger("reset");
+  }
+
+  redirectToPayment() {
+    this.cartItemsCount = JSON.parse(localStorage.getItem('$crt')) || 0;
+    if (this.cartItemsCount > 0) {
+      if(this.commonFunction.isRefferal()){
+        var parms = this.commonFunction.getRefferalParms();
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate([`cart/booking`],{ queryParams : queryParams});
+      } else {
+        this.router.navigate([`cart/booking`]);
+      }
+    } else {
+      this.openEmptyCartPopup();
+    }
+  }
+
+  openEmptyCartPopup() {
+    this.modalService.open(EmptyCartComponent, {
+      centered: true, backdrop: 'static',
+      keyboard: false
+    });
+  }
+
+  calculateInstalment(cartPrices) {
+    let totalPrice = 0;
+    let checkinDate;
+    if (cartPrices && cartPrices.length > 0) {
+      checkinDate = this.getCheckinDate(cartPrices[0].module_Info,cartPrices[0].type)
+      for (let i = 0; i < cartPrices.length; i++) {
+        totalPrice += this.getPrice(cartPrices[i].module_Info,cartPrices[i].type);
+        if (i == 0) {
+          continue;
+        }
+        if (moment(checkinDate).isAfter(moment(this.getCheckinDate(cartPrices[i].module_Info,cartPrices[i].type)))) {
+          checkinDate = this.getCheckinDate(cartPrices[i].module_Info,cartPrices[i].type);
+        }
+      }
+    }
+
+    this.totalAmount = totalPrice;
+    let instalmentRequest = {
+      instalment_type: this.paymentInfo.instalmentType || "weekly",
+      checkin_date: checkinDate,
+      booking_date: moment().format("YYYY-MM-DD"),
+      amount: totalPrice,
+      additional_amount: 0,
+      selected_down_payment: this.paymentInfo.selectedDownPayment || 0
+    }
+    this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
+      if (res.instalment_available) {
+        this.installmentAmount = res.instalment_date[1].instalment_amount;
+      }
+      else {
+        this.installmentAmount = 0;
+      }
+    }, (err) => {
+      this.installmentAmount = 0;
+    })
+  }
+
+  emptyCart() {
+    $('#empty_modal').modal('hide');
+    this.fullPageLoading = true;
+
+    this.genericService.emptyCart().subscribe((res: any) => {
+      if (res) {
+        this.fullPageLoading = false;
+        this.cartItems = [];
+        this.cartItemsCount = 0;
+        localStorage.setItem('$crt', this.cartItemsCount);
+        localStorage.removeItem('$cartOver');
+        this.cartService.setCartItems(this.cartItems);
+        this.redirectToHome();
+      }
+    });
+  }
+
+  closeModal() {
+    $('#empty_modal').modal('hide');
+  }
+
+  redirectToHome() {
+    $('#empty_modal').modal('hide');
+    if(this.commonFunction.isRefferal()){
+      var parms = this.commonFunction.getRefferalParms();
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate([`/`],{ queryParams : queryParams});
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
+
+  loginGuestUser() {
+    let uuid = localStorage.getItem('__gst')
+    this.userService.registerGuestUser({ guest_id: uuid }).subscribe((result: any) => {
+      localStorage.setItem("_lay_sess", result.accessToken)
+    })
+  }
+
+  closeCartMaximum() {
+    localStorage.removeItem('$cartOver');
+  }
+
+  imgError() {
+    return  this.userDetails.profilePic = '';
+  }
+
+  getCheckinDate(module_Info,type){
+    let checkinDate;
+    //console.log(module_Info)
+    if(type=='flight'){
+      checkinDate = moment(module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+    }
+    else if(type=='hotel'){
+      checkinDate = moment(module_Info.input_data.check_in, "YYYY-MM-DD'").format("YYYY-MM-DD");
+    }
+    return checkinDate;
+  }
+
+  getPrice(module_Info,type){
+    let price;
+    if(type=='flight'){
+      price = module_Info.selling_price;
+    }
+    else if(type=='hotel'){
+      price = module_Info.selling.total;
+    }
+    return price;
   }
 }

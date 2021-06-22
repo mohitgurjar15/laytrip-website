@@ -12,13 +12,13 @@ export function validateImageFile(name: String) {
   }
 }
 
-export function fileSizeValidator(file) {
-
+export function fileSizeValidator(file,maxSizeValidation=5000) {
+  
+  console.log(size,maxSizeValidation);
   var size = Math.floor(file.size / 1000);
-  if (size <= 2000) {
+  if (size <= maxSizeValidation) {
     return true;
-  }
-  else {
+  }else {
     return false;
   }
 }
@@ -33,9 +33,8 @@ export function phoneCodeAndPhoneValidation() {
 }
 
 export function optValidation() {
-
   return (form: FormGroup): { [key: string]: any } => {
-    return (!form.value.otp1 || !form.value.otp2 || !form.value.otp3 || !form.value.otp4 || !form.value.otp5 || !form.value.otp6)
+    return (!form.value.otp || form.value.otp.length != 6)
       ? { otpsError: true }
       : null;
   };
@@ -43,8 +42,8 @@ export function optValidation() {
 
 export function phoneAndPhoneCodeValidation(type='') {
   return (form: FormGroup): { [key: string]: any } => {
-    if(type == 'adult'){
-      if(!form.value.phone_no){
+    // if(type == 'adult'){
+      if(!form.value.phone_no ){
         return {phoneAndPhoneCodeError: true};
       } if(!form.value.phone_no){      
         return {phoneAndPhoneCodeError: true};
@@ -53,9 +52,9 @@ export function phoneAndPhoneCodeValidation(type='') {
       } else {
         return null;
       }
-    } else {
+    /* } else {
       return null;
-    }
+    } */
    
   };
 }
@@ -74,3 +73,4 @@ export class WhiteSpaceValidator {
   }
 
 } 
+

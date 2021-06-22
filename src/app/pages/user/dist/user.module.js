@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
 var user_routing_module_1 = require("./user-routing.module");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var UserModule = /** @class */ (function () {
     function UserModule() {
     }
@@ -21,6 +22,7 @@ var UserModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 forms_1.FormsModule,
                 user_routing_module_1.UserRoutingModule,
+                ng_bootstrap_1.NgbModule,
             ],
             declarations: []
         })

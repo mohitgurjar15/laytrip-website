@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
-import { validateImageFile,fileSizeValidator, phoneAndPhoneCodeValidation,WhiteSpaceValidator } from '../../../../_helpers/custom.validators';
+import { validateImageFile, fileSizeValidator, phoneAndPhoneCodeValidation } from '../../../../_helpers/custom.validators';
 import { GenericService } from '../../../../services/generic.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie';
 import { redirectToLogin } from '../../../../_helpers/jwt.helper';
+import { FlightService } from '../../../../services/flight.service';
+import { CheckOutService } from '../../../../services/checkout.service';
+import { getPhoneFormat } from 'src/app/_helpers/phone-masking.helper';
 
 @Component({
   selector: 'app-profile',
@@ -21,255 +24,291 @@ export class ProfileComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   profileForm: FormGroup;
-  submitted = false;
+  // submitted = false;
   loading = true;
-  countries: any = [];
-  languages: any = [];
-  currencies: any = [];
-  countries_code: any = [];
-  stateList: any = [];  
+  airportLoading = false;
+  @Output() loadingValue = new EventEmitter<boolean>();
   minDate: any = {};
   maxDate: any = {};
+  data = [];
+  airportData = [];
   public startDate: Date;
   is_gender: boolean = true;
-  is_type: string = 'M';
-  public imageFile:any  = '';
+  gender_type: string = 'M';
+  public imageFile: any = '';
   public imageFileError = false;
   public imageErrorMsg: string = 'Image is required';
   image: any = '';
-  public defaultImage = this.s3BucketUrl+'assets/images/profile_im.svg';
-  public file:any  = '';
-  public isFile  = true;
+  public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
+  public file: any = '';
+  public isFile = true;
   public profile_pic = false;
-  public fileError      = false;
+  public fileError = false;
   public fileErrorMsg: string = 'File is required';
   selectResponse: any = {};
-  seletedDob :any;
-
-  dobMinDate= new Date();
+  seletedDob: any;
+  dobMinDate = new Date(moment().subtract(16, 'years').format("MM/DD/YYYY"))
   location;
   dobMaxDate: moment.Moment = moment();
   locale = {
     format: 'DD/MM/YYYY',
     displayFormat: 'DD/MM/YYYY'
   };
+  isFormControlEnable: boolean = false;
+  loadingDeparture = false;
+  departureAirport: any = {};
+  arrivalAirport: any = {}
+  home_airport;
+  countries = [];
+  countries_code = [];
+  stateList = [];
+  dateYeaMask = {
+    guide: false,
+    showMask: false,
+    mask: [
+      /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+  };
+  submitted : boolean = false;
+  type = 'form';
+  hmPlaceHolder = 'Select home airport';
+  closeAirportSuggestion = true;
+  phoneNumberMask = {
+    format: '',
+    length: 0
+  };
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService : UserService,
-    private genericService : GenericService,
-    public router: Router,  
-    public commonFunctoin: CommonFunction,  
+    private userService: UserService,
+    private genericService: GenericService,
+    public router: Router,
+    public commonFunction: CommonFunction,
     private toastr: ToastrService,
     private cookieService: CookieService,
+    private flightService: FlightService,
+    private checkOutService: CheckOutService,
+  ) { }
 
-    ) {}
- 
   ngOnInit() {
-    window.scroll(0,0);
-    this.getCountry();
-    this.getLanguages();
-    this.getCurrencies();    
-   
-    let location:any = this.cookieService.get('__loc');
-    try{
+    this.getAirports();
+    this.loadingValue.emit(true);
+    window.scroll(0, 0);
+
+    let location: any = this.cookieService.get('__loc');
+    try {
       this.location = JSON.parse(location);
-    }catch(e){}
-    
+    } catch (e) { }
 
     this.profileForm = this.formBuilder.group({
-        title: ['mr'],
-        first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-        last_name: ['', [Validators.required,Validators.pattern('^[a-zA-Z]+[a-zA-Z]{2,}$')]],
-        country_id: [typeof this.location != 'undefined' && this.location.country.name ? this.location.country.name : ''],
-        dob: ['', Validators.required],
-        country_code: [''],
-        phone_no: [''],
-        address: [''],
-        email: [''],
-        zip_code: [''],
-        state_id: [''],
-        city_name: [''],
-        gender: ['M'],
-        profile_pic: [''],      
-        currency_id: [''],      
-        address2: [''],      
-        language_id: [''],      
-        passport_expiry: [''],      
-        passport_number: [''],      
-      }, { validator: phoneAndPhoneCodeValidation('adult') });
+      first_name: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+      last_name: ['', [Validators.required, Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
+      dob: ['', [Validators.required, Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]],
+      country_code: ['', [Validators.required]],
+      phone_no: ['', [Validators.required, Validators.minLength(10)]],
+      address: [''],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
+      gender: ['M'],
+      profile_pic: [''],
+      passport_expiry: [''],
+      passport_number: [''],
+      home_airport: [''],
+      city: [''],
+      state_id: [''],
+      country_id: [''],
+      zip_code: [''],
 
-         
-      this.getProfileInfo(); 
+    }, { validators: phoneAndPhoneCodeValidation() });
+
+    this.getProfileInfo();
+    this.getCountry();
   }
-
-
-
 
   getCountry() {
     this.genericService.getCountry().subscribe((data: any) => {
-      this.countries = data.map(country=>{
-          return {
-              id:country.id,
-              name:country.name,
-              flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
-          } 
-      }),
-      this.countries_code = data.map(country=>{
+      this.countries = data.map(country => {
         return {
           id: country.id,
-          name: country.phonecode+' ('+country.iso2+')',
-          code:country.phonecode,
-          country_name:country.name+ ' ' +country.phonecode,
-          flag: this.s3BucketUrl+'assets/images/icon/flag/'+ country.iso3.toLowerCase()+'.jpg'
+          name: country.name,
+          countryCode: country.phonecode,
+          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
         }
       });
-      if(this.location){
-        const countryCode = this.countries_code.filter(item => item.id == this.location.country.id)[0];
-        this.profileForm.controls.country_code.setValue(countryCode.country_name);
-      }      
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
-      }
+      var countries_code = data.map(country => {
+        return {
+          id: country.id,
+          name: country.phonecode + ' (' + country.iso2 + ')',
+          countryCode: country.phonecode,
+          country_name: country.name + ' ' + country.phonecode,
+          flag: this.s3BucketUrl + 'assets/images/icon/flag/' + country.iso3.toLowerCase() + '.jpg'
+        }
+      });
+      const filteredArr = countries_code.reduce((acc, current) => {
+        const x = acc.find(item => item.countryCode == current.countryCode);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+      this.countries_code = filteredArr;
+      this.setUSCountryInFirstElement(this.countries);
+
     });
   }
 
   getStates(countryId) {
-    this.profileForm.controls.state_id.setValue([]);
+    this.profileForm.controls.state_id.setValue('');
     this.genericService.getStates(countryId.id).subscribe((data: any) => {
       this.stateList = data;
     }, (error: HttpErrorResponse) => {
       if (error.status === 401) {
-        this.router.navigate(['/']);
+        localStorage.setItem('userToken', "");
+        this.router.navigate(['/login']);
       }
     });
   }
 
-  getLanguages() {
-    this.genericService.getAllLangunage().subscribe((data: any) => {
-      this.languages = data.data;
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
-      }
+  setUSCountryInFirstElement(countries) {
+    var usCountryObj = countries.find(x => x.id === 233);
+    var removedUsObj = countries.filter(obj => obj.id !== 233);
+    this.countries = [];
+    removedUsObj.sort(function (a, b) {
+      return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
     });
+    removedUsObj.unshift(usCountryObj);
+    this.countries = removedUsObj;
   }
 
-  getCurrencies() {
-    this.genericService.getCurrencies().subscribe((data: any) => {
-      this.currencies = data.data;
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
+  selectGender(event, type) {
+
+    if (this.isFormControlEnable) {
+      this.is_gender = true;
+      if (type == 'M') {
+        this.gender_type = 'M';
+      } else if (type == 'F') {
+        this.gender_type = 'F';
+      } else if (type == 'O') {
+        this.gender_type = 'O';
       }
-    });
-  }
-
-  clickGender(event,type){
-    this.is_gender = true; 
-    this.is_type = 'M';      
-    if(type =='F'){
-      this.is_type = 'F';        
-    } 
+    }
   }
 
 
-  onFileSelect(event) {    
+  uploadImageFile(event) {
+    this.imageFileError = false;
     this.imageFile = event.target.files[0];
     //file type validation check
     if (!validateImageFile(this.imageFile.name)) {
-        this.imageFileError = true;
-        this.imageErrorMsg = 'Only image are allowed';
-        return;
+      this.imageFileError = true;
+      this.imageErrorMsg = 'Only image are allowed';
+      return;
     }
-    
+
     //file size validation max=10
-    if(!fileSizeValidator(event.target.files[0])){
-        this.imageFileError = true;
-        this.imageErrorMsg = 'Please select file up to 2mb size';
-        this.toastr.error(this.imageErrorMsg, 'Profile Error');
-        return;
+    if (!fileSizeValidator(event.target.files[0])) {
+      this.imageFileError = true;
+      this.imageErrorMsg = 'Maximum file size is 5MB.';
+      // this.toastr.error(this.imageErrorMsg, 'Profile Error');
+      return;
     }
     //file render
     var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]); 
+    reader.readAsDataURL(event.target.files[0]);
     reader.onload = (_event) => {
-      this.image = reader.result; 
+      this.image = reader.result;
     }
-    this.imageFileError = false;
+    if (!this.imageFileError) {
+      this.imageFileError = false;
+      this.loadingValue.emit(true);
+      let formdata = new FormData();
+      let imgfile = '';
+      if (this.imageFile) {
+        imgfile = this.imageFile;
+        formdata.append("profile_pic", imgfile);
+        this.userService.updateProfileImage(formdata).subscribe((data: any) => {
+          // this.submitted = false;
+          this.loadingValue.emit(false);
+          localStorage.setItem("_lay_sess", data.token);
+          // this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
+        }, (error: HttpErrorResponse) => {
+          this.loadingValue.emit(false);
+          // this.submitted = false;
+          // this.toastr.error(error.error.message, 'Profile Error');
+        });
+      }
+    }
   }
 
   getProfileInfo() {
-    this.userService.getProfile().subscribe((res:any)=> {
-      this.loading = false;   
+    this.userService.getProfile().subscribe((res: any) => {
+
+      this.loadingValue.emit(false);
       this.image = res.profilePic;
       this.selectResponse = res;
-
-      this.is_type = res.gender ? res.gender :'M';
-      this.seletedDob = moment(res.dobm).format("DD/MM/YYYY");
-      if(typeof this.location != 'undefined' || typeof res.country.id != 'undefined'){
-        const country = res.country.id ? res.country : this.location.country;
-        if(typeof country != 'undefined')              
-        this.getStates(country);
-      }
-
-      let  countryCode  = '';
-      if(typeof res.countryCode != 'undefined' && typeof res.countryCode == 'string' && res.countryCode){
-        countryCode = this.countries_code.filter(item => item.id == res.countryCode)[0];
-      } else {
-         countryCode = typeof this.location != 'undefined' ? this.countries_code.filter(item => item.id == this.location.country.id)[0] : '';      
-      }
-      let countryName = '';
-      if(typeof this.location != 'undefined'){
-        countryName = this.location.country.name;
-      }
-      this.profileForm.patchValue({      
-          first_name: res.firstName,
-          last_name: res.lastName,
-          email: res.email,
-          gender  : res.gender ? res.gender : 'M',        
-          zip_code  : res.zipCode,        
-          title  : res.title ? res.title : 'mr',        
-          dob  : res.dob ? moment(res.dob).format('MM/DD/YYYY'):'',        
-          country_code : countryCode,        
-          phone_no  : res.phoneNo,        
-          country_id: res.country.name ? res.country.name :countryName,
-          state_id: res.state.name,       
-          city_name  : res.cityName,        
-          address  : res.address,  
-          language_id : res.preferredLanguage.name,     
-          currency_id : res.preferredCurrency.code,     
-          profile_pic: res.profilePic, 
-          passport_expiry:  res.passportExpiry ? moment(res.passportExpiry).format('MM/DD/YYYY') : '', 
-          passport_number: res.passportNumber  
+      this.gender_type = res.gender ? res.gender : 'M';
+      var countryId = { id: res.country.id ? res.country.id : 233 };
+      this.getStates(countryId);
+      this.data = Object.keys(res.airportInfo).length > 0 ? [res.airportInfo] : [];
+      this.profileForm.patchValue({
+        first_name: res.firstName,
+        last_name: res.lastName,
+        email: res.email,
+        gender: res.gender ? res.gender : 'M',
+        zip_code: res.zipCode,
+        title: res.title ? res.title : 'mr',
+        dob: (res.dob != 'undefined' && res.dob != '' && res.dob) ? this.commonFunction.convertDateMMDDYYYY(res.dob, 'YYYY-MM-DD') : '',
+        country_code: (res.countryCode != 'undefined' && res.countryCode != '') ? res.countryCode : '+1',
+        phone_no: res.phoneNo,
+        city: res.cityName,
+        address: res.address,
+        home_airport: res.airportInfo.code ? res.airportInfo.city+' ('+ res.airportInfo.code+')' : null,
+        country_id: res.country.name ? res.country.name : 'United States',
+        state_id: res.state.name ? res.state.name : null,
+        // passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
+        // passport_number: res.passportNumber
       });
+      this.profileForm.controls['home_airport'].disable();
+      this.profileForm.controls['country_code'].disable();
+      this.profileForm.controls['country_id'].disable();
+      this.profileForm.controls['state_id'].disable();
+      let phoneFormat=getPhoneFormat(res.countryCode || '+1');
+      this.profileForm.controls.phone_no.setValidators([Validators.minLength(phoneFormat.length)]);
+      this.profileForm.controls.phone_no.updateValueAndValidity();
+      this.phoneNumberMask.format = phoneFormat.format;
+      this.phoneNumberMask.length = phoneFormat.length;
 
     }, (error: HttpErrorResponse) => {
-      this.loading = false;   
+      this.loadingValue.emit(false);
       if (error.status === 401) {
-         redirectToLogin();
+        redirectToLogin();
       } else {
-        this.toastr.error(error.message, 'Profile Error');
+        this.toastr.show(error.message, 'Profile Error', {
+          toastClass: 'custom_toastr',
+          titleClass: 'custom_toastr_title',
+          messageClass: 'custom_toastr_message',
+        });
       }
     });
   }
 
+
   onSubmit() {
-    this.submitted = this.loading = true;
-    if(this.profileForm.controls.gender.errors && this.is_gender){
-      this.profileForm.controls.gender.setValue(this.is_type);
-    }
+    this.submitted = true;
+    const controls = this.profileForm.controls;
+    this.loadingValue.emit(true);
     if (this.profileForm.invalid) {
-      this.submitted = true;      
-      this.loading = false;
+      this.submitted = true;
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
+      this.loadingValue.emit(false);
       //scroll top if any error 
       let scrollToTop = window.setInterval(() => {
         let pos = window.pageYOffset;
         if (pos > 0) {
-            window.scrollTo(0, pos - 20); // how far to scroll on each step
+          window.scrollTo(0, pos - 20); // how far to scroll on each step
         } else {
-            window.clearInterval(scrollToTop);
+          window.clearInterval(scrollToTop);
         }
       }, 16);
       return;
@@ -277,63 +316,199 @@ export class ProfileComponent implements OnInit {
       let formdata = new FormData();
 
       let imgfile = '';
-      if(this.imageFile){
+      if (this.imageFile) {
         imgfile = this.imageFile;
-        formdata.append("profile_pic",imgfile);
+        // formdata.append("profile_pic",imgfile);
       }
-      formdata.append("title",this.profileForm.value.title);
-      formdata.append("first_name",this.profileForm.value.first_name);
-      formdata.append("last_name",this.profileForm.value.last_name);
-      formdata.append("email",this.profileForm.value.email);      
-      formdata.append("city_name",this.profileForm.value.city_name);
-      formdata.append("zip_code",this.profileForm.value.zip_code);
-      formdata.append("address",this.profileForm.value.address);
-      formdata.append("address1",this.profileForm.value.address);
-      formdata.append("phone_no",this.profileForm.value.phone_no);
-      formdata.append("gender",this.is_type);
-      formdata.append("passport_number",this.profileForm.value.passport_number);
-      formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? moment(this.profileForm.value.dob).format('YYYY-MM-DD') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
-      formdata.append("passport_expiry", typeof this.profileForm.value.passport_expiry === 'object' ? moment(this.profileForm.value.passport_expiry).format('YYYY-MM-DD') :'');
-      if(typeof this.profileForm.value.country_id === 'string'){
-        if(this.selectResponse.country.id){
-          formdata.append("country_id", this.selectResponse.country.id);
-        } else {
-          formdata.append("country_id", this.location.country.id);
-        }
+      // formdata.append("title",'mr');
+      formdata.append("first_name", this.profileForm.value.first_name);
+      formdata.append("last_name", this.profileForm.value.last_name);
+      formdata.append("email", this.profileForm.value.email);
+      formdata.append("home_airport",   this.departureAirport.code ?  this.departureAirport.code : '');
+      formdata.append("phone_no", this.profileForm.value.phone_no);
+      formdata.append("gender", this.gender_type ? this.gender_type : 'M');
+      formdata.append("city_name", this.profileForm.value.city);
+      formdata.append("address", this.profileForm.value.address);
+      if (typeof this.profileForm.value.country_id == 'object') {
+        formdata.append("country_id", this.profileForm.value.country_id.id ? this.profileForm.value.country_id.id : 233);
       } else {
-        formdata.append("country_id", this.profileForm.value.country_id ? this.profileForm.value.country_id.id : '');
+        formdata.append("country_id", this.selectResponse.country.id ? this.selectResponse.country.id : 233);
+      }
+      if (typeof this.profileForm.value.state_id == 'string') {
+        formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
+      } else {
+        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
+      }
+      if (typeof (this.profileForm.value.country_code) != 'object') {
+        formdata.append("country_code", this.profileForm.value.country_code ? this.profileForm.value.country_code : '');
+      } else {
+        formdata.append("country_code", this.selectResponse.countryCode ? this.selectResponse.countryCode : '');
       }
 
-      if(typeof this.profileForm.value.state_id === 'string' && isNaN(this.profileForm.value.state_id)) {
-        formdata.append("state_id", this.selectResponse.state.id ? this.selectResponse.state.id : '');
-      } else{
-        formdata.append("state_id", this.profileForm.value.state_id ? this.profileForm.value.state_id : '');
-      }
-      console.log(typeof this.profileForm.value.country_code)
-      if(typeof(this.profileForm.value.country_code) === 'object'){     
-        formdata.append("country_code",this.profileForm.value.country_code ? this.profileForm.value.country_code.id : '' );
-      } else {
-        formdata.append("country_code", this.selectResponse.countryCode);
-      } 
-      if(!Number.isInteger(Number(this.profileForm.value.language_id))) {
-        formdata.append("language_id", this.selectResponse.preferredLanguage.id ?  this.selectResponse.preferredLanguage.id :'');        
-      } else {
-        formdata.append("language_id", this.profileForm.value.language_id ? this.profileForm.value.language_id :'');
-      }
-      if(!Number.isInteger(Number(this.profileForm.value.currency_id))){
-        formdata.append("currency_id", this.selectResponse.preferredCurrency.id ?this.selectResponse.preferredCurrency.id :'');
-      } else {
-        formdata.append("currency_id", this.profileForm.value.currency_id ? this.profileForm.value.currency_id :'');
-      }         
+      formdata.append("zip_code", this.profileForm.value.zip_code ? this.profileForm.value.zip_code : this.selectResponse.zipCode);
+      formdata.append("dob", typeof this.profileForm.value.dob === 'object' ? this.commonFunction.convertDateYYYYMMDD(this.profileForm.value.dob, 'MM/DD/YYYY') : moment(this.profileForm.value.dob).format('YYYY-MM-DD'));
+
+      this.isFormControlEnable = false;
+      this.profileForm.controls['home_airport'].disable();
+      this.profileForm.controls['country_code'].disable();
+      this.profileForm.controls['country_id'].disable();
+      this.profileForm.controls['state_id'].disable();
+
       this.userService.updateProfile(formdata).subscribe((data: any) => {
-        this.submitted = this.loading = false; 
+        this.submitted = false;
+        this.loadingValue.emit(false);
         localStorage.setItem("_lay_sess", data.token);
-        this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
-        // this.router.navigate(['/']);      
+        // this.toastr.success("Profile has been updated successfully!", 'Profile Updated');
       }, (error: HttpErrorResponse) => {
-        this.submitted = this.loading = false;
-        this.toastr.error(error.error.message, 'Profile Error');
+        this.loadingValue.emit(false);
+        this.submitted = false;
+        // this.toastr.error(error.error.message, 'Profile Error');
       });
     }
   }
+
+  enableFormControlInputs(event) {
+    this.isFormControlEnable = true;
+    this.profileForm.controls['home_airport'].enable();
+    this.profileForm.controls['country_code'].enable();
+    this.profileForm.controls['country_id'].enable();
+    this.profileForm.controls['state_id'].enable();
+  }
+
+  onRemove(event, item) {
+    if (item.key === 'fromSearch') {
+      this.departureAirport = Object.create(null);
+    } else if (item.key === 'toSearch') {
+      this.arrivalAirport = Object.create(null);
+    }
+  }
+
+  searchAirportDeparture(searchItem) {
+    this.loadingDeparture =   true;
+    this.closeAirportSuggestion  =  false;
+
+    this.data = [];
+    this.flightService.searchAirport(searchItem.target.value).subscribe((response: any) => {
+      this.data = response.map(res => {
+        this.loadingDeparture = false;
+        return { 
+          key :res.code.charAt(0),
+          value : [{
+            id: res.id,
+            name: res.name,
+            code: res.code,
+            city: res.city,
+            country: res.country,
+            display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
+            parentId: res.parentId
+          }]
+        };
+      });
+    },
+      error => {
+        this.closeAirportSuggestion  =  true;
+        this.loadingDeparture = false;
+      }
+    );
+  }
+
+
+  selectEvent(event, item) {
+
+    if (event && event.code && item.key === 'fromSearch') {
+      // this.home_airport = event.code;
+      // this.departureAirport=event;
+      // this.searchedValue.push({ key: 'fromSearch', value: event });
+    }
+  }
+
+  getAirports(){
+
+    let from = localStorage.getItem('__from') || '';
+    let to = localStorage.getItem('__to') || '';
+
+    if(from=='' && to==''){
+      this.airportLoading=true;
+      this.flightService.searchAirports(this.type).subscribe((result:any)=>{
+        this.airportLoading=false;
+        for(let i=0; i <result.length; i++){
+          for(let j=0; j<result[i].value.length; j++){
+            result[i].value[j].display_name = `${result[i].value[j].city},${ result[i].value[j].country},(${result[i].value[j].code}),${ result[i].value[j].name}`
+          }
+        }
+        this.airportData=result;
+      },error=>{
+        this.airportLoading=false;
+        this.airportData=[];
+      })
+    }
+    else{
+      let isFromLocation=this.type=='from'?'yes':'no';
+      let alternateLocation='';
+      if(this.type=='from'){
+        alternateLocation=localStorage.getItem('__to') || '';
+      }
+      else{
+        alternateLocation=localStorage.getItem('__from') || '';
+      }
+      this.airportLoading=true;
+      this.flightService.searchRoute('',isFromLocation,alternateLocation).subscribe((response: any) => {
+        this.airportLoading=false;
+        let opResult = this.groupByKey(response,'key')
+        let airportArray=[];
+		
+        for (const [key, value] of Object.entries(opResult)) {
+          airportArray.push({
+            key : key,
+            value : value
+          })
+        }
+        airportArray = airportArray.sort((a, b) => a.key.localeCompare(b.key));
+        for(let i=0; i <airportArray.length; i++){
+          for(let j=0; j<airportArray[i].value.length; j++){
+            airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
+          }
+        }
+        this.airportData=airportArray;
+        
+      },
+      error => {
+        this.airportData=[];
+        this.airportLoading=false;
+      }
+      );
+    }
+  }
+
+  groupByKey(array, key) {
+		return array
+		  .reduce((hash, obj) => {
+			if(obj[key] === undefined) return hash; 
+			return Object.assign(hash, { [obj[key]]:( hash[obj[key]] || [] ).concat(obj)})
+		  }, {})
+	 }
+    
+  closeAirportDropDown(type){
+    this.closeAirportSuggestion = true;
+  }
+
+  selectAirport(event){
+    if(event.parentId != 0){
+      this.profileForm.controls.home_airport.setValue(event.city +' ('+ event.code+')' );
+    } else {
+      this.profileForm.controls.home_airport.setValue(event.city +' International ('+ event.code+')' );
+    }
+    this.closeAirportSuggestion = true;
+    this.hmPlaceHolder = '';
+    this.departureAirport.code = event.code;
+  }
+
+  validateCountryWithPhoneNumber(event: any): void {
+    let selectedCountry = getPhoneFormat(this.profileForm.controls['country_code'].value);
+    this.profileForm.controls.phone_no.setValidators([Validators.minLength(selectedCountry.length)]);
+    this.profileForm.controls.phone_no.updateValueAndValidity();
+    this.phoneNumberMask.format = selectedCountry.format;
+    this.phoneNumberMask.length = selectedCountry.length;
+  }
+  
 }

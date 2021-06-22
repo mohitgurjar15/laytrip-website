@@ -1,0 +1,103 @@
+<div class="panel-group inner_accordion_wrapper" id="accordion">
+  <div class="section_description one" *ngIf="!cartItem.is_available">
+    <span class="sec_text">This booking is no longer available. Click “x” to delete to be able to proceed to
+      Checkout.</span>
+    <a (click)="deleteCart(cartItem.id)"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <!-- Flight -->
+        <ng-container *ngIf="cartItem.type=='flight'">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true"
+            aria-controls="collapse1">
+            <span class="headerin_wrapper">
+              <div class="headin_upper_wrparr">
+                <span class="header_name">
+                  <span class="title_image">
+                    <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
+                  </span>
+                  {{cartItem.module_info?.departure_code}}
+                  <span class="flight_routing_imgs" *ngIf="cartItem.module_info?.routes?.length > 1">
+                    <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
+                    <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f_return.svg" alt="" class="route_image" />
+                  </span>
+                  <span class="flight_routing_imgs" *ngIf="cartItem.module_info?.routes?.length === 1">
+                    <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
+                  </span>
+                  {{cartItem.module_info?.arrival_code}}
+
+                  <!-- <div class="section_description price_descrip" *ngIf="priceFluctuationAmount!=0">
+                    <span class="sec_text">The price for this booking has {{ priceFluctuationAmount > 0 ? 'increased' :
+                      'decreased' }} from ${{cartItem.old_module_info.selling_price}} to
+                      ${{cartItem.module_info.selling_price}}.</span>
+                    <a href="javascript:void(0)" (click)="closePricePopup(cartItem.id)"><img
+                        src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+                  </div> -->
+                </span>
+                <span *ngIf="cartItem.module_info.routes.length==2"
+                  class="header_date">{{commonFunction.convertDateFormat(cartItem.module_info?.departure_date,'DD/MM/YYYY')}}
+                  - {{commonFunction.convertDateFormat(cartItem.module_info?.arrival_date,'DD/MM/YYYY')}}</span>
+                <span *ngIf="cartItem.module_info.routes.length==1"
+                  class="header_date">{{commonFunction.convertDateFormat(cartItem.module_info?.departure_date,'DD/MM/YYYY')}}</span>
+              </div>
+              <span class="alert_boxes" *ngIf="!cartItem.is_available">
+                <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Alert image">
+              </span>
+            </span>
+          </a>
+        </ng-container>
+
+        <!-- Hotel -->
+        <ng-container *ngIf="cartItem.type=='hotel'">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true"
+            aria-controls="collapse1" class="hotel_anchor">
+            <span class="headerin_wrapper">
+              <div class="headin_upper_wrparr hotel_header_wrpper">
+                <span class="header_name">
+                  <span class="title_image">
+                    <img src="{{s3BucketUrl}}assets/images/icon/bed_line_blue.svg" alt="hotel icon" />
+                  </span>
+
+                  <!-- <span class="flight_routing_imgs" *ngIf="cartItem.module_info?.routes?.length === 1">
+                    <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
+                  </span>
+                  {{cartItem.module_info?.arrival_code}} -->
+
+                  <!-- <div class="section_description price_descrip" *ngIf="priceFluctuationAmount!=0">
+                    <span class="sec_text">The price for this booking has {{ priceFluctuationAmount > 0 ? 'increased' :
+                      'decreased' }} from ${{cartItem.old_module_info.selling_price}} to
+                      ${{cartItem.module_info.selling_price}}.</span>
+                    <a href="javascript:void(0)" (click)="closePricePopup(cartItem.id)"><img
+                        src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+                  </div> -->
+                </span>
+                <div class="hotel_names_wrps">
+
+                  <h6 class="hotel_name">
+                    {{ cartItem.module_info.hotel_name }}
+                  </h6>
+                  <span class="header_date">{{cartItem.module_info.full_address}}</span>
+                </div>
+
+              </div>
+              <!-- <span class="alert_boxes" *ngIf="!cartItem.is_available">
+                <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Alert image">
+              </span> -->
+            </span>
+          </a>
+        </ng-container>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in pannel_cont_wrapper show">
+      <div class="panel-body">
+        <ng-container *ngIf="cartItem.type=='flight'">
+          <app-flight-cart-item cartNumber={{cartNumber}} [cartItem]="cartItem"></app-flight-cart-item>
+        </ng-container>
+        <ng-container *ngIf="cartItem.type=='hotel'">
+          <app-hotel-cart-item cartNumber={{cartNumber}} [cartItem]="cartItem"></app-hotel-cart-item>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
