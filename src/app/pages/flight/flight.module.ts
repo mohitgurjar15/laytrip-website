@@ -7,7 +7,7 @@ import { FlightSearchComponent } from './flight-search/flight-search.component';
 import { SortFlightComponent } from './components/sort-flight/sort-flight.component';
 import { FilterFlightComponent } from './components/filter-flight/filter-flight.component';
 import { FlightPriceSliderComponent } from './components/flight-price-slider/flight-price-slider.component';
-import { FlightItemWrapperComponent, LaytripOkPopup } from './components/flight-item-wrapper/flight-item-wrapper.component';
+import { FlightItemWrapperComponent } from './components/flight-item-wrapper/flight-item-wrapper.component';
 import { FlightSearchBarComponent } from './components/flight-search-bar/flight-search-bar.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FlightNotFoundComponent } from './components/flight-not-found/flight-not-found.component';
@@ -42,7 +42,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     FilterFlightComponent,
     FlightPriceSliderComponent,
     FlightItemWrapperComponent,
-    LaytripOkPopup,
     FlightSearchBarComponent,
     FlightNotFoundComponent,
     BookingSummaryLoaderComponent,
@@ -78,6 +77,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     FlightNotFoundComponent,
     FlightConfirmationComponent
   ],
-  entryComponents: [LaytripOkPopup]
+  entryComponents: []
 })
 export class FlightModule { }
