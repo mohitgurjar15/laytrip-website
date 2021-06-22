@@ -10,6 +10,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
 import { CookieService } from 'ngx-cookie';
 import { PreloadingService } from '../../preloading.service';
+import { LANDING_PAGE } from 'src/app/landing-page.config';
+import * as jwt_decode from "jwt-decode";
 
 declare var $: any;
 @Component({
@@ -33,83 +35,7 @@ export class HomeComponent implements OnInit {
   currentSlide;
   currentChangeCounter;
   banner_city_name = 'Miami';
-  public slides = [
-    { 
-      src: "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/miami.png",
-      location:{
-        from : {
-          airport_code : 'NYC'
-        },
-        to : {
-          airport_code : 'MIA',
-          hotel_option:{
-            title: "Miami Beach, Florida, United States",
-            city: "Miami Beach",
-            banner: "Miami",
-            state: "Florida",
-            country: "United States",
-            type: "city",
-            hotel_id: "",
-            city_id: "800047419",
-            geo_codes: {
-              lat: "25.7903",
-              long: "-80.1303"
-            }
-          }
-        }
-      }
-    },
-    { 
-      src: "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/lasvegas.png",
-      location:{
-        from : {
-          airport_code : 'NYC'
-        },
-        to : {
-          airport_code : 'LAS',
-          hotel_option:{
-            title: "Las Vegas, Nevada, United States",
-            city: "Las Vegas",
-            banner: "Las Vegas",
-            state: "Nevada",
-            country: "United States",
-            type: "city",
-            hotel_id: "",
-            city_id: "800049030",
-            geo_codes: {
-              lat: "36.1190",
-              long: "-115.1680"
-            }
-          }
-        }
-      }
-    },
-    { 
-      src: "http://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/cancun.png",
-      location:{
-        from : {
-          airport_code : 'NYC'
-        },
-        to : {
-          airport_code : 'CUN',
-          hotel_option:{
-            title: "Cancún, Mexico",
-            city: "Cancún",
-            banner: "Cancun",
-            state: "",
-            country: "Mexico",
-            type: "city",
-            hotel_id: "",
-            city_id: "800026864",
-            geo_codes: {
-              lat: "21.1613",
-              long: "-86.8341"
-            }
-          }
-        }
-      }
-    }
-  ];
+  slides;
 
   $landingPageData;
   constructor(
@@ -126,21 +52,17 @@ export class HomeComponent implements OnInit {
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
-    this.currentSlide = this.slides[0];
-
+    this.$landingPageData = jwt_decode(localStorage.getItem('__LP_DATA'), "secret");
+    this.slides = this.$landingPageData.slides;
+    this.currentSlide = this.$landingPageData.slides[0];
     this.homeService.setOffersData(this.currentSlide);
 
-    /* this.homeService.getSlideOffers.subscribe(sliders => {
-      if (typeof sliders != 'undefined' && Object.keys(sliders).length > 0) {
-        let keys: any = sliders;
-        console.log(keys)
-      }
-    }) */
   }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.host = window.location.host;
+    this.isRefferal = this.commonFunction.isRefferal();
     this.getModules();
     this.loadJquery();
     localStorage.removeItem('__from');
@@ -162,23 +84,11 @@ export class HomeComponent implements OnInit {
         }
       }
     });
+    this.$tabName.unsubscribe();
+
     //get deal with module id and also with active tab
     this.getDeal(this.moduleId);
-    
-    this.$tabName.unsubscribe();
-    this.homeService.setActiveTab('');  
-    this.isRefferal = this.commonFunction.isRefferal();
-
-    this.$landingPageData = this.homeService.getLandingPageData.subscribe(landingPageData=> {
-      if(typeof landingPageData != 'undefined' && Object.keys(landingPageData).length > 0 ){     
-        let deals : any = landingPageData;
-        console.log(deals)
-      
-      }
-    });
-    this.preLoadService.getLandingPageData.subscribe(res=>{
-        console.log("res",res)
-    });
+    this.homeService.setActiveTab('');
   }
 
   openCookiePolicyPopup() {
@@ -257,15 +167,13 @@ export class HomeComponent implements OnInit {
 
 
   getDeal(moduleId) {
-    this.moduleId = moduleId;  
+    this.moduleId = moduleId;
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
-        
         if(this.moduleId == 1 && this.commonFunction.isRefferal()){
-          //let DealsDala= LANDING_PAGE['AS-410'].deals.flight;
-          this.dealList = JSON.parse('[{"code":"PUJ","name":"Punta Cana Intl.","city":"Punta Cana","country":"Dominican Republic","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/puntacana.png","key":"P"},{"code":"TPA","name":"Tampa Intl.","city":"Tampa","country":"USA","key":"T","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/puntacana.png"},{"code":"CUN","name":"Cancun Intl.","city":"Cancun","country":"Mexico","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/cancun.png","key":"C"},{"code":"MCO","name":"Orlando Intl.","city":"Orlando","country":"USA","key":"O","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/orlando.png"},{"code":"LAS","name":"Mc Carran Intl","city":"Las Vegas","country":"USA","key":"L","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/lasvegas.png"},{"code":"DEN","name":"Denver Intl.","city":"Denver","country":"USA","key":"D","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/denver.png"},{"code":"MIA","name":"Miami Intl. Arpt.","city":"Miami","country":"USA","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/miami.png","key":"M"},{"code":"TUY","name":"Tulum","city":"Tulum","country":"Mexico","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/tulum.png","key":"C"}]');          
-        } else if(this.moduleId == 3 && this.commonFunction.isRefferal()){
-           this.dealList = JSON.parse('[{"title":"Punta Cana, Dominican Republic","city":"Punta Cana","state":"","country":"Dominican Republic","type":"city","hotel_id":"","city_id":"800013751","lat":"18.6149","long":"-68.3884","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/puntacana.png"},{"title":"Tampa, Florida, United States","city":"Tampa","state":"Florida","country":"United States","type":"city","hotel_id":"","city_id":"800047518","lat":"27.9472","long":"-82.4586","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/tampa.png"},{"title":"Cancún, Mexico","city":"Cancún","city_id":"800026864","state":"","country":"Mexico","type":"city","hotel_id":"","lat":"21.1613","long":"-86.8341","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/cancun.png"},{"title":"Orlando, Florida, United States","city":"Orlando","state":"Florida","country":"United States","type":"city","hotel_id":"","city_id":"800047448","lat":"28.5353","long":"-81.3833","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/orlando.png"},{"title":"Las Vegas, Nevada, United States","city":"Las Vegas","state":"Nevada","country":"United States","type":"city","hotel_id":"","city_id":"800049030","lat":"36.1190","long":"-115.1680","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/lasvegas.png"},{"title":"Denver City, Texas, United States","city":"Denver","state":"Texas","country":"United States","type":"city","hotel_id":"","city_id":"800098479","lat":"32.9644","long":"-102.8290","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/denver.png"},{"title":"Miami Beach, Florida, United States","city":"Miami Beach","city_id":"800047419","state":"","country":"United States","type":"city","hotel_id":"","lat":"25.7903","long":"-80.1303","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/miami.png"},{"title":"Tulum, Quintana Roo, Mexico","city":"Tulum","state":"Quintana Roo","country":"Mexico","type":"city","hotel_id":"","city_id":"800026663","lat":"20.2107","long":"-87.4630","image":"https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/tulum.png"}]');          
+          this.dealList = this.$landingPageData.deals.flight;
+        } else if (this.moduleId == 3 && this.commonFunction.isRefferal()) {
+          this.dealList = this.$landingPageData.deals.hotel;
         } else {
           this.dealList = response['data'];
         }
@@ -275,6 +183,7 @@ export class HomeComponent implements OnInit {
   }
 
   clickOnTab(tabName) {
+    this.dealList = [];
     this.currentTabName = tabName;
     document.getElementById('home_banner').style.position = 'relative';
     document.getElementById('home_banner').style.width = '100%';
@@ -314,7 +223,8 @@ export class HomeComponent implements OnInit {
     this.renderer.removeClass(document.body, 'bg_color');
   }
 
-  setToString(newItem: string) {
+  fetchWidgetDeal(newItem: string) {
+    console.log(newItem)
     if(this.moduleId == 1){
       this.toString = newItem;
       this.homeService.setToString(newItem);
@@ -324,13 +234,16 @@ export class HomeComponent implements OnInit {
   }
   
   activeSlide(activeSlide){
+    console.log(activeSlide)
     this.currentTabName = 'hotel';
-    this.homeService.removeToString('flight');
-    this.homeService.removeToString('hotel');
-    $('#nav-hotel').trigger('click');
-    this.clickOnTab('hotel');
+    if (this.moduleId != 3) {
+      this.homeService.removeToString('flight');
+      this.homeService.removeToString('hotel');
+      $('#nav-hotel').trigger('click');
+      this.clickOnTab('hotel');
+    }
 
-    this.currentSlide=this.slides[activeSlide]
+    this.currentSlide = this.$landingPageData.slides[activeSlide];
     this.homeService.setOffersData(this.currentSlide);
     this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
   }

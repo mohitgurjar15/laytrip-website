@@ -9,7 +9,6 @@ import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PreloadingService } from './preloading.service';
-import { LandingPageData } from './landing-page-data.model';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +18,7 @@ import { LandingPageData } from './landing-page-data.model';
 export class AppComponent {
   title = 'laytrip-website';
   readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
-  LandingPageDataModel;
+
   constructor(
     private cookieService:CookieService,
     private genericService:GenericService,
@@ -31,8 +30,7 @@ export class AppComponent {
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
-    // this.LandingPageDataModel = this.preLoadService.getLandingPageData();
-    // console.log("app.ts",this.LandingPageDataModel)
+
   }
 
   ngOnInit(){

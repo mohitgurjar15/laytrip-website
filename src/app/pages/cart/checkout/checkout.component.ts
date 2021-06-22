@@ -1,5 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild,ElementRef } from '@angular/core';
-declare var $: any;
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { GenericService } from '../../../services/generic.service';
@@ -8,11 +7,14 @@ import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from '../../../services/cart.service';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { SpreedlyService } from '../../../services/spreedly.service';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SessionExpiredComponent } from '../session-expired/session-expired.component';
+declare var $: any;
 
 export interface CartItem {
 
@@ -87,6 +89,7 @@ export class CheckoutComponent implements OnInit {
   redeemableLayPoints: number;
 
   constructor(
+    public modalService: NgbModal,
     private genericService: GenericService,
     private travelerService: TravelerService,
     private checkOutService: CheckOutService,
@@ -96,7 +99,6 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private commonFunction: CommonFunction,
     private spreedly: SpreedlyService,
-    private eRef: ElementRef
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -239,20 +241,10 @@ export class CheckoutComponent implements OnInit {
   sessionTimeout(event) {
     this.isSessionTimeOut = event;
     if (this.isSessionTimeOut && !this.isBookingRequest) {
-      if (this.commonFunction.isRefferal()) {
-        var queryParams : any = {};
-        let parms = this.commonFunction.getRefferalParms();
-        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-        if(parms.utm_medium){
-          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        }
-        if(parms.utm_campaign){
-          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
-        }
-        this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
-      } else {
-        this.router.navigate(['/cart/checkout'])
-      }
+      this.modalService.open(SessionExpiredComponent, {
+        windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
+        keyboard: false
+      });
     }
   }
 

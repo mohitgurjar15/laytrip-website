@@ -128,8 +128,6 @@ export class FlightSearchWidgetComponent implements OnInit {
           }
         })
       } 
-    
-    // this.departureDate = moment(this.customStartDateValidation).toDate();
 
     if (new Date(this.customStartDateValidation) <= new Date()) {
       this.departureDate = moment().add('31', 'days').toDate();

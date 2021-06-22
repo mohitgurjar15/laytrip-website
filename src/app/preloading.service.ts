@@ -1,16 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map } from "rxjs/operators";
-import { LANDING_PAGE } from "./landing-page.config";
-import { LandingPageData } from "./landing-page-data.model";
-import { HomeService } from "./services/home.service";
 import { BehaviorSubject } from "rxjs";
+import { LANDING_PAGE } from "./landing-page.config";
+import { HomeService } from "./services/home.service";
+import * as jwt_encode from "jwt-encode";
 
 @Injectable()
 export class PreloadingService {
 
-    // private ladingPageData :any= null;
-    private landingPageData : any = new BehaviorSubject({});
+    public landingPageData: any = new BehaviorSubject<any>({});
     
     getLandingPageData = this.landingPageData.asObservable();
 
@@ -21,38 +19,14 @@ export class PreloadingService {
 
     }
 
-    /*public  getLandingPageData()  {
-        return this.ladingPageData;
-    }*/
-
     load(): Promise<any> {
+        const encode = require('jwt-encode');
+        localStorage.setItem('__LP_DATA', "")
         return new Promise((resolve, reject) => {
-          this.http.get('https://api.icndb.com/jokes/random').subscribe((response: any) => {
-                
-             // this.ladingPageData = LANDING_PAGE['AS-410'];
-              this.landingPageData.next(LANDING_PAGE['AS-410']);
-
-                console.log("this.ladingPageData",this.landingPageData)
-              resolve(true);
+            this.http.get('https://api.icndb.com/jokes/random').subscribe((response: any) => {
+                localStorage.setItem('__LP_DATA', encode(LANDING_PAGE['AS-410'], 'secret'))
+                resolve(true);
+            });
         });
-      });
     }
-    /*load() {      
-       return new Promise((resolve, reject) => {
-            this.http
-                .get('https://api.icndb.com/jokes/random')
-                .map(res => {
-                    this.ladingPageData = LANDING_PAGE['AS-410'];
-                    // this.homeService.setLandingPageData(LANDING_PAGE['AS-410']);
-
-                }).subscribe(response => {
-                    // console.log('here')
-                      console.log("subscribe",response)
-                       // this.homeService.setLandingPageData(LANDING_PAGE['AS-410']);
-
-                    // this.ladingPageData = response['value'];
-                    resolve(true);
-                })
-        })
-    }*/
 }

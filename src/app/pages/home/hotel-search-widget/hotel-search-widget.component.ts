@@ -116,6 +116,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.homeService.getSlideOffers.subscribe(currentSlide => {
       if(this.commonFunction.isRefferal()){
         if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+
           let keys: any = currentSlide;
           this.dealDateValidation();
           // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
@@ -187,6 +188,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
         this.dealDateValidation();
+        console.log("hotelInfo", hotelInfo)
         // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
         this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;

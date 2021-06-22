@@ -64,10 +64,8 @@ export class AirportSuggestionComponent implements OnInit {
     this.data = [];
     let from = localStorage.getItem('__from') || '';
     let to = localStorage.getItem('__to') || '';
-
     if(from=='' && to==''){
-      this.loading=true;
-  
+      this.loading = true;
       this.flightService.searchAirports(this.type).subscribe((result:any)=>{
         this.loading=false;
         for(let i=0; i <result.length; i++){

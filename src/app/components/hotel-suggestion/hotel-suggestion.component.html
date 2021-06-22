@@ -1,5 +1,5 @@
 <input class="hotel_desination"  [(ngModel)]="searchItem"  (keyup)="searchLocation($event)" 
-(focus)="onFocus($event)"  (focusout)="focusOut($event)"
+(focus)="onFocus()"  (focusout)="focusOut()"
 placeholder="Enter city or hotel" >
 <div class="search_suggetion_main" *ngIf="isShowDropDown" >
     <!-- <div class="close_btn">

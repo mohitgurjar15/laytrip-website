@@ -55,7 +55,7 @@ export class HomeService {
         this.landingPageData.next(data)
     }
     setOffersData(offers){
-        this.sliderOffers.next(offers)
+        this.sliderOffers.next(offers);
     }
 
     setToString(flightToCode) {

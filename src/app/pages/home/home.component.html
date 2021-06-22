@@ -84,6 +84,6 @@
 <app-last-min-hotel-deal *ngIf="countryCode==='DR'"></app-last-min-hotel-deal>
 <app-partial-payment></app-partial-payment>
 
-<app-deal [dealList]="dealList" (toString)="setToString($event)"></app-deal>
+<app-deal [dealList]="dealList" [moduleId]="moduleId" (toString)="fetchWidgetDeal($event)"></app-deal>
 
 <app-mobile-and-subscribe></app-mobile-and-subscribe>

@@ -80,8 +80,8 @@ export class CarouselComponent  implements OnInit{
       secondsSinceLastActivity++;
       
       if(secondsSinceLastActivity > maxInactivity){
-          //self.onNextClick();
-          secondsSinceLastActivity = 0;
+        self.onNextClick();
+        secondsSinceLastActivity = 0;
       }
     }, 1000);
     var activityEvents = [];

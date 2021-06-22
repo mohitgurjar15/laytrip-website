@@ -37,6 +37,7 @@ export class DealComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   @Output() toString = new EventEmitter<string>();
   @Input()  dealList = [];
+  @Input() moduleId = 3;
   @HostListener('contextmenu', ['$event'])
 
   list = [];
@@ -58,7 +59,6 @@ export class DealComponent implements OnInit {
   
   ngAfterContentChecked(){    
     this.list = this.dealList;
-  
   }
 
   btnDealClick(item){

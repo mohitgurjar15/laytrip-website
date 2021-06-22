@@ -60,7 +60,6 @@ export class SearchAirportComponent implements OnInit {
     else{
       alternateLocation=localStorage.getItem('__from') || '';
     }
-
     this.flightService.searchRoute(searchItem,isFromLocation,alternateLocation).subscribe((response: any) => {
       this.flightSearchRoute.emit(response);
       this.data = response.map(res => {
@@ -90,8 +89,6 @@ export class SearchAirportComponent implements OnInit {
   }
 
   selectEvent(event, index) {
-        console.log(event)
-
     if (!event) {
       this.placeHolder = this.placeHolder;
     }

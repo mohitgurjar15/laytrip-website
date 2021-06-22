@@ -16,10 +16,14 @@ import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
 import { AuthGuard } from './guard/auth.guard';
 import { PreloadingService } from './preloading.service';
 
-export function jokesProviderFactory(provider: PreloadingService) {
+/* export function jokesProviderFactory(provider: PreloadingService) {
   return () => provider.load();
+} */
+export function jokesProviderFactory(catService: PreloadingService) {
+  return (): Promise<any> => {
+    return catService.load();
+  }
 }
-
 @NgModule({
   declarations: [
     AppComponent,
