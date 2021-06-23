@@ -12,6 +12,7 @@ import { CartService } from '../../../services/cart.service';
 export class BookComponent implements OnInit {
 
   transaction_token: string;
+  auth_url: string;
   uuid: string;
   bookingRequest;
   carts;
@@ -28,12 +29,10 @@ export class BookComponent implements OnInit {
   ngOnInit() {
     this.uuid = this.route.snapshot.paramMap.get('uuid');
     this.transaction_token = this.route.snapshot.queryParamMap.get('transaction_token');
-
+    this.auth_url = this.route.snapshot.queryParamMap.get('auth_url') ? this.route.snapshot.queryParamMap.get('auth_url') : '';
     this.cartService.getCartItems.subscribe(data => {
-      console.log("init Data", data)
       if (data.length > 0) {
         this.carts = data;
-        console.log("init", this.carts)
       }
     })
 
@@ -52,12 +51,11 @@ export class BookComponent implements OnInit {
     this.bookingRequest = JSON.parse(sessionStorage.getItem('__cbk'))
     this.bookingRequest.uuid = this.uuid;
     this.bookingRequest.transaction_token = this.transaction_token;
-    this.bookingRequest.auth_log = 'Payment-authorise-card-1623906251061_fde84f87-53e6-407a-8012-0a9d808d52c1.json'
+    this.bookingRequest.auth_url = this.auth_url;//'Payment-authorise-card-1623906251061_fde84f87-53e6-407a-8012-0a9d808d52c1.json'
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();      
       this.bookingRequest.referral_id = parms.utm_source ? parms.utm_source : '';
     }
-    console.log(this.bookingRequest)
 
     this.cartService.verifyAuth(this.transaction_token).subscribe((authRes: any) => {
 
@@ -75,10 +73,7 @@ export class BookComponent implements OnInit {
           });
     
           let index
-          console.log("successItem", successItem)
-          console.log("result.carts", result.carts)
-          console.log("this.carts", this.carts)
-          console.log("failedItem", failedItem)
+          
 
           /* for (let item of successItem) {
             index = this.carts.findIndex(x => x.id == item.cart_id)

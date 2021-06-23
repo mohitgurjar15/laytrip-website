@@ -188,7 +188,6 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
         this.dealDateValidation();
-        console.log("hotelInfo", hotelInfo)
         // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
         this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;
@@ -266,7 +265,6 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   searchHotels() {
-    console.log($('.hotel_desination').val())
     this.hotelSearchFormSubmitted = true;
     if ($('.hotel_desination').val() == '') {
       this.validSearch = false;
@@ -281,7 +279,6 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
     queryParams.hotel_id = this.searchHotelInfo.type == "hotel" ? parseFloat(this.searchHotelInfo.hotel_id) : '';
     // queryParams.type = this.searchHotelInfo.type ? this.searchHotelInfo.type : '';
-    console.log(this.searchHotelInfo)
     queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
     queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace(/\=+$/, '');
     if (this.commonFunction.isRefferal()) {
@@ -320,7 +317,6 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.fromDestinationInfo = event;
       this.validateSearch(true);
     }
-    // console.log(this.searchHotelInfo,event)
   }
 
   counterChangeVal :number = 0;

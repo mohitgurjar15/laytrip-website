@@ -55,12 +55,12 @@
                         <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==1">
                             {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
                             {{commonFunction.convertDateFormat(booking.moduleInfo[0].departure_date,'DD/MM/YYYY')}}
-                            <span class="off_label">$100 off</span>
+                            <span *ngIf="commonFunction.isRefferal()" class="off_label">$100 off</span>
                         </span>
                         <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==2">
                             {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
                             {{commonFunction.convertDateFormat(booking.moduleInfo[0].departure_date,'DD/MM/YYYY')}}-{{commonFunction.convertDateFormat(booking.moduleInfo[0].arrival_date,'DD/MM/YYYY')}}
-                            <span class="off_label">$100 off</span>
+                            <span class="off_label" *ngIf="commonFunction.isRefferal()">$100 off</span>
                         </span>
                     </div>
                     <div class="detail_liners"
@@ -68,9 +68,8 @@
                         <span class="lefts">Hotel</span>
                         <span class="rights">{{booking.moduleInfo[0].hotel_name}}
                             {{commonFunction.convertDateFormat(booking.moduleInfo[0].input_data.check_in,'YYYY-MM-DD')}}
-                            <span class="off_label">$100 off</span>
+                            <span class="off_label" *ngIf="commonFunction.isRefferal()">$100 off</span>
                         </span>
-
                     </div>
                 </ng-container>
 
@@ -99,13 +98,16 @@
                 </div>
                 <div class="detail_liners">
                     <span class="lefts">Total Price</span>
-                    <span class="rights">
+                    <span class="rights" *ngIf="commonFunction.isRefferal()" >
                         <span class="dashed_price">
                             ${{cartDetails.totalAmount | number : '1.2-2'}}
                         </span>
                         <span class="new_price">
                             ${{cartDetails.totalAmount | number : '1.2-2'}}
                         </span>
+                    </span>
+                    <span class="rights" *ngIf="!commonFunction.isRefferal()">
+                        ${{cartDetails.totalAmount | number : '1.2-2'}}                                            
                     </span>
                 </div>
                 <div class="detail_liners" *ngIf="cartDetails.cartInstallments.length">
