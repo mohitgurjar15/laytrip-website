@@ -49,7 +49,7 @@ import { CartComponent } from './cart/cart.component';
 import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-item/flight-cart-item.component';
 import { CartLoaderComponent } from './cart-loader/cart-loader.component';
 import { LaytripLoaderComponent } from './laytrip-loader/laytrip-loader.component';
-import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+//import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { EmptyCartComponent } from './empty-cart/empty-cart.component';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -122,7 +122,7 @@ import { CarouselComponent } from './carousel/carousel.component';
     TranslateModule,
     NgScrollbarModule,
     InfiniteScrollModule,
-    NgxSpinnerModule,
+    //NgxSpinnerModule,
     RouterModule,
     BsDatepickerModule.forRoot(),
     NgxMaskModule.forRoot()
@@ -165,7 +165,7 @@ import { CarouselComponent } from './carousel/carousel.component';
     CartComponent,
     CartLoaderComponent,
     LaytripLoaderComponent,
-    NgxSpinnerModule,
+    //NgxSpinnerModule,
     EmptyCartComponent,
     LottieAnimationViewModule,
     DeleteCartitemConfirmationPopupComponent,
@@ -175,7 +175,8 @@ import { CarouselComponent } from './carousel/carousel.component';
     HotelSuggestionComponent,
     CarouselComponent
   ],
-  providers: [DatePipe, NgxSpinnerService, NgbActiveModal],
+  providers: [DatePipe, //NgxSpinnerService, 
+    NgbActiveModal],
   entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

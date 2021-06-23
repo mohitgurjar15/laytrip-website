@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSpinnerService } from 'ngx-spinner';
+//import { NgxSpinnerService } from 'ngx-spinner';
 //import { MODAL_TYPE } from '../../../../components/confirmation-modal/confirmation-modal.component';
 import { DeleteCartitemConfirmationPopupComponent,MODAL_TYPE } from '../../../../components/delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
 
@@ -32,7 +32,7 @@ export class HotelCartItemComponent implements OnInit {
     private cartService: CartService,
     public cd: ChangeDetectorRef,
     public router: Router,
-    private spinner: NgxSpinnerService,
+    //private spinner: NgxSpinnerService,
     private modalService: NgbModal,
   ) { }
 

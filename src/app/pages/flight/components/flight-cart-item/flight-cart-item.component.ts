@@ -4,7 +4,7 @@ import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../services/generic.service';
 import { CartService } from '../../../../services/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+//import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteCartitemConfirmationPopupComponent, MODAL_TYPE } from '../../../../components/delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
 
@@ -30,7 +30,7 @@ export class FlightCartItemComponent implements OnInit {
     private cartService: CartService,
     public cd: ChangeDetectorRef,
     public router: Router,
-    private spinner: NgxSpinnerService,
+    //private spinner: NgxSpinnerService,
     private modalService: NgbModal,
   ) { }
 

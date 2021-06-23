@@ -12,7 +12,7 @@ import * as moment from 'moment'
 import { getLoginUserInfo, getUserDetails } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+//import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -75,7 +75,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private genericService: GenericService,
     private cartService: CartService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService,
+    //private spinner: NgxSpinnerService,
     public modalService: NgbModal,
   ) {
   }
