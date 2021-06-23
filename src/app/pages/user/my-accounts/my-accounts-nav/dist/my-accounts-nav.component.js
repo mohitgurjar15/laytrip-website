@@ -37,7 +37,21 @@ var MyAccountsNavComponent = /** @class */ (function () {
     MyAccountsNavComponent.prototype.onLoggedout = function () {
         this.isLoggedIn = false;
         localStorage.removeItem('_lay_sess');
-        this.router.navigate(['/']);
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            var queryParams = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(['/'], { queryParams: queryParams });
+        }
+        else {
+            this.router.navigate(['/']);
+        }
     };
     MyAccountsNavComponent.prototype.onToggleSubMenu = function (event) {
         this.expanded = !this.expanded;

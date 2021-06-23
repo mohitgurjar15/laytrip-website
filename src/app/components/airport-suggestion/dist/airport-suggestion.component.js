@@ -17,6 +17,7 @@ var AirportSuggestionComponent = /** @class */ (function () {
         this.changeValue = new core_1.EventEmitter();
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
+        this.isType = false;
     }
     AirportSuggestionComponent.prototype.ngOnInit = function () {
         this.getAirports();
@@ -24,10 +25,35 @@ var AirportSuggestionComponent = /** @class */ (function () {
     AirportSuggestionComponent.prototype.closeAirportDropDown = function (type) {
         this.closeAirportSuggestion.emit(type);
     };
-    AirportSuggestionComponent.prototype.ngOnChanges = function (change) {
+    AirportSuggestionComponent.prototype.ngOnChanges = function (changes) {
+        this.data = [];
+        if (changes['searchedFlightData']) {
+            this.loading = this.isType = false;
+            // this.data = this.searchedFlightData;
+            var opResult = this.groupByKey(changes['searchedFlightData'].currentValue, 'key');
+            var airportArray = [];
+            for (var _i = 0, _a = Object.entries(opResult); _i < _a.length; _i++) {
+                var _b = _a[_i], key = _b[0], value = _b[1];
+                airportArray.push({
+                    key: key,
+                    value: value
+                });
+            }
+            airportArray = airportArray.sort(function (a, b) { return a.key.localeCompare(b.key); });
+            for (var i = 0; i < airportArray.length; i++) {
+                for (var j = 0; j < airportArray[i].value.length; j++) {
+                    airportArray[i].value[j].display_name = airportArray[i].value[j].city + "," + airportArray[i].value[j].country + ",(" + airportArray[i].value[j].code + ")," + airportArray[i].value[j].name;
+                }
+            }
+            this.data = airportArray;
+        }
+        else {
+            // console.log('here')
+        }
     };
     AirportSuggestionComponent.prototype.getAirports = function () {
         var _this = this;
+        this.data = [];
         var from = localStorage.getItem('__from') || '';
         var to = localStorage.getItem('__to') || '';
         if (from == '' && to == '') {
@@ -71,9 +97,7 @@ var AirportSuggestionComponent = /** @class */ (function () {
                 airportArray = airportArray.sort(function (a, b) { return a.key.localeCompare(b.key); });
                 for (var i = 0; i < airportArray.length; i++) {
                     for (var j = 0; j < airportArray[i].value.length; j++) {
-                        if (airportArray[i].value[j].code != 'AMD') {
-                            airportArray[i].value[j].display_name = airportArray[i].value[j].city + "," + airportArray[i].value[j].country + ",(" + airportArray[i].value[j].code + ")," + airportArray[i].value[j].name;
-                        }
+                        airportArray[i].value[j].display_name = airportArray[i].value[j].city + "," + airportArray[i].value[j].country + ",(" + airportArray[i].value[j].code + ")," + airportArray[i].value[j].name;
                     }
                 }
                 _this.data = airportArray;
@@ -103,12 +127,29 @@ var AirportSuggestionComponent = /** @class */ (function () {
             localStorage.setItem('__to', event.code);
         }
     };
+    AirportSuggestionComponent.prototype.isSuggestionWithCountry = function (code) {
+        if (code == 'SCL') {
+            return true;
+        }
+        else if (code == 'STI') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
     __decorate([
         core_1.Input()
     ], AirportSuggestionComponent.prototype, "type");
     __decorate([
         core_1.Input()
     ], AirportSuggestionComponent.prototype, "airport");
+    __decorate([
+        core_1.Input()
+    ], AirportSuggestionComponent.prototype, "routeSearch");
+    __decorate([
+        core_1.Input()
+    ], AirportSuggestionComponent.prototype, "searchedFlightData");
     __decorate([
         core_1.Output()
     ], AirportSuggestionComponent.prototype, "closeAirportSuggestion");

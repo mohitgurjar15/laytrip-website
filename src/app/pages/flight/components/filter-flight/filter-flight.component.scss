@@ -45,6 +45,7 @@ h5{
 				.accordion-heading{
 					&::after{
 						background-image: none;
+						content: none;
 					}
 				}
 			}

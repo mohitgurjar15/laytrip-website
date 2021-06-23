@@ -16,10 +16,11 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { SpreedlyService } from '../../services/spreedly.service';
 import { BookModule } from '../book/book.module';
+import { SessionExpiredComponent } from './session-expired/session-expired.component';
 
 
 @NgModule({
-  declarations: [BookingComponent, CheckoutComponent, ConfirmComponent],
+  declarations: [BookingComponent, CheckoutComponent, ConfirmComponent, SessionExpiredComponent],
   imports: [
     CommonModule,
     CartRoutingModule,
@@ -36,6 +37,7 @@ import { BookModule } from '../book/book.module';
     BookModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [SpreedlyService]
+  providers: [SpreedlyService],
+  entryComponents: [SessionExpiredComponent]
 })
 export class CartModule { }

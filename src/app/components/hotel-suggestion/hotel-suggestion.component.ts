@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, HostListener } from '@angular/core';
-import { HotelService } from 'src/app/services/hotel.service';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, HostListener, ViewChild } from '@angular/core';
+import { HomeService } from '../../services/home.service';
+import { HotelService } from '../../services/hotel.service';
+import { environment } from '../../../environments/environment';
+import { CommonFunction } from '../../_helpers/common-function';
 
 @Component({
   selector: 'app-hotel-suggestion',
@@ -11,6 +13,7 @@ export class HotelSuggestionComponent implements OnInit {
 
   @Output() selectedHotel = new EventEmitter();
   @Output() validateSearch = new EventEmitter();
+  @Output() currentChangeCounter = new EventEmitter();
   isValidSearch: boolean = true;
   s3BucketUrl = environment.s3BucketUrl;
   loading: boolean = false;
@@ -21,19 +24,34 @@ export class HotelSuggestionComponent implements OnInit {
   isShowDropDown: boolean = false;
   thisElementClicked: boolean = false;
   $autoComplete;
+  isInputFocus : boolean = false;
+  progressInterval;
+  counterChangeVal=0;
+
   constructor(
-    private hotelService: HotelService
+    private hotelService: HotelService,
+    private homeService: HomeService,
+    private commonFunction: CommonFunction,
+
   ) { }
 
   ngOnInit(): void {
     this.defaultTempData[0] = this.defaultItem;
   }
+  
+  ngOnChanges(changes: SimpleChanges) {    
+    
+    /* this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
+      
+      if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {        
+        this.searchItem = hotelInfo.title;
+      }
+    }); */
+    
+  }
 
   searchLocation(event) {
     let notAllowedKey = [40, 38, 9, 37, 39];
-    if (event.keyCode == 8) {
-      this.searchHotelAfterBackspace(this.searchItem, 'backspace');
-    }
     if ((this.searchItem.length == 0 && event.keyCode == 8)) {
       this.data = [];
       this.loading = false;
@@ -42,7 +60,7 @@ export class HotelSuggestionComponent implements OnInit {
       //this.selectedHotel.emit({})
       this.validateSearch.emit(false);
       return;
-    }
+    } 
 
     if (!notAllowedKey.includes(event.keyCode)) {
       this.isShowDropDown = this.searchItem.length > 0 ? true : false;
@@ -51,8 +69,13 @@ export class HotelSuggestionComponent implements OnInit {
       if (this.loading) {
         this.$autoComplete.unsubscribe();
       }
-      this.searchHotel(this.searchItem);
-      this.validateSearch.emit(false);
+      if (event.keyCode == 8) {
+        let item = this.searchItem.split(',');
+        this.searchHotel(item[0]);
+      } else {
+        this.searchHotel(this.searchItem);
+        this.validateSearch.emit(false);
+      }
     }
     else {
       this.loading = false;
@@ -60,7 +83,6 @@ export class HotelSuggestionComponent implements OnInit {
   }
 
   searchHotel(searchItem) {
-    searchItem = this.searchHotelAfterBackspace(searchItem, 'backspace');
     this.loading = true;
     const searchedData = { term: searchItem.replace(/(^\s+|\s+$)/g, "") };
     this.$autoComplete = this.hotelService.searchHotels(searchedData).subscribe((response: any) => {
@@ -92,26 +114,6 @@ export class HotelSuggestionComponent implements OnInit {
     );
   }
 
-  searchHotelAfterBackspace(searchItem, keyboardEvent = '') {
-    if (keyboardEvent === 'backspace') {
-      let tempData = [{
-        city: searchItem,
-        country: '',
-        hotel_id: '',
-        title: searchItem,
-        type: 'city',
-        geo_codes: {},
-        city_id: '',
-        objType: 'invalid'
-      }];
-      this.selectedHotel.emit(tempData[0]);
-      searchItem = this.defaultItem.title;
-      this.validateSearch.emit(true);
-      return searchItem;
-    }
-  }
-
-
   selectHotelItem(item) {
     this.isShowDropDown = false;
     this.searchItem = item.title;
@@ -127,9 +129,32 @@ export class HotelSuggestionComponent implements OnInit {
     }
     this.thisElementClicked = false;
   }
+  counter = 0;
 
   @HostListener('click')
-  clickInside() {
+  clickInside() {   
+    this.counter+=1;
+    this.currentChangeCounter.emit(this.counter);
     this.isShowDropDown = true;
   }
+  
+  onFocus(){
+    this.isInputFocus = true;
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.isInputFocus){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000);
+    }
+  }
+
+  focusOut(){
+    this.isInputFocus = false;
+  }
+  
+
+
 }

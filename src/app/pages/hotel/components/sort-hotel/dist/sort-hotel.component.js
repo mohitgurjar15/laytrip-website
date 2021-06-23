@@ -8,16 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.SortHotelComponent = void 0;
 var core_1 = require("@angular/core");
+var environment_1 = require("../../../../../environments/environment");
 var SortHotelComponent = /** @class */ (function () {
     function SortHotelComponent(route) {
         this.route = route;
         this.sortHotel = new core_1.EventEmitter();
+        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.sortType = 'lh_price';
         this.lowToHighToggle = false;
     }
     SortHotelComponent.prototype.ngOnInit = function () {
         if (this.route.snapshot.queryParams['location']) {
-            var info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+            var info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['location'])));
             if (info) {
                 this.locationName = info.city;
             }
@@ -46,17 +48,20 @@ var SortHotelComponent = /** @class */ (function () {
         this.sortType = name;
         this.sortHotel.emit({ key: key, order: order });
     };
+    SortHotelComponent.prototype.closeModal = function () {
+        $('#sort_mob_modal').modal('hide');
+    };
     SortHotelComponent.prototype.resetSorting = function (key, order) {
         this.sortType = 'lh_price';
         this.sortHotel.emit({ key: key, order: order });
     };
-    SortHotelComponent.prototype.ngOnChanges = function (changes) {
-        if (changes['hotelDetails'].currentValue != 'undefined') {
-            if (this.hotelDetails != 'undefined') {
-                this.hotelDetails = changes['hotelDetails'].currentValue.hotels;
-            }
+    /* ngOnChanges(changes: SimpleChanges) {
+      if (changes['hotelDetails'].currentValue != 'undefined') {
+        if (this.hotelDetails != 'undefined') {
+          this.hotelDetails = changes['hotelDetails'].currentValue.hotels;
         }
-    };
+      }
+    } */
     SortHotelComponent.prototype.toggleLowToHigh = function () {
         this.lowToHighToggle = !this.lowToHighToggle;
     };

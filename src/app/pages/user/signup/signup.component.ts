@@ -1,14 +1,17 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ViewChild, Renderer2, SimpleChange } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MustMatch } from '../../../_helpers/must-match.validators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { TravelerService } from 'src/app/services/traveler.service';
+import { CheckOutService } from 'src/app/services/checkout.service';
+import { hostname } from 'os';
 
 declare var $: any;
 
@@ -45,7 +48,8 @@ export class SignupComponent implements OnInit {
     public router: Router,
     public renderer: Renderer2,
     public commonFunction: CommonFunction,
-
+    private route: ActivatedRoute,
+    private checkOutService: CheckOutService,
   ) { }
 
   ngOnInit() {
@@ -56,12 +60,27 @@ export class SignupComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d]).*$')]],
       confirm_password: ['', Validators.required],
       checked: ['', Validators.required],
+      referral_id: [''],
     }, {
       validators: MustMatch('password', 'confirm_password'),
     });
     this.isCaptchaValidated = false;
-  }
 
+  }
+  
+  getValue(){
+    if(this.commonFunction.isRefferal() && this.router.url.includes('/cart')){
+      this.checkOutService.getTravelers.subscribe((travelers: any) => {   
+        var traveler = travelers;
+        if(typeof traveler!= 'undefined' && traveler[0] ){
+          this.signupForm.controls.first_name.setValue(traveler[0].firstName ? traveler[0].firstName : '');
+          this.signupForm.controls.last_name.setValue(traveler[0].lastName ? traveler[0].lastName : '');
+          this.signupForm.controls.email.setValue(traveler[0].email ? traveler[0].email : '');
+          return;
+        }         
+      });
+    }
+  }
   openOtpPage() {
     Object.keys(this.signupForm.controls).forEach(key => {
       this.signupForm.get(key).markAsUntouched();
@@ -95,7 +114,7 @@ export class SignupComponent implements OnInit {
       this.cnfPassFieldTextType = !this.cnfPassFieldTextType;
     }
   }
- 
+
   captchaResponse(response: string) {
     this.isCaptchaValidated = true;
   }
@@ -111,7 +130,10 @@ export class SignupComponent implements OnInit {
       this.loading = false;
       return;
     } else {
-
+      if (this.commonFunction.isRefferal()) {
+        let parms = this.commonFunction.getRefferalParms();
+        this.signupForm.controls.referral_id.setValue(parms.utm_source ? parms.utm_source : '');
+      }
       this.userService.signup(this.signupForm.value).subscribe((data: any) => {
         this.emailForVerifyOtp = this.signupForm.value.email;
         this.submitted = this.loading = false;

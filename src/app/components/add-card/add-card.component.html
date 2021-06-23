@@ -42,13 +42,19 @@
                     <label class="spf-field-group spf-verification_value">CVV</label>
                     <div id="spreedly-cvv" class="iframe_wrapper">
                     </div>
+                    <div class="error">
+                        <small class="error_field credit_card_error" id="cvv_number" style="display:none">
+                            <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
+                            Enter valid cvv.</small>
+                    </div>
                 </div>
                 <div class="col-sm-12 col-md-4">
                     <div class="save_btn_wrps">
                         <input type="button" class="button" value="Close" (click)="closeNewCardPanel()"
                             [hidden]="totalCard === 0">
-                        <input [disabled]="saveCardLoader" [ngClass]="{'disabled':saveCardLoader}" type="submit" id="submit_button" class="button" value="Save">
-                     </div>
+                        <input [disabled]="saveCardLoader" [ngClass]="{'disabled':saveCardLoader}" type="submit"
+                            id="submit_button" class="button" value="Save">
+                    </div>
                     <div class="section_description cvv_description" id="cardError">
                         <span class="sec_text pt-1 pr-1" id="cardErrorMessage"></span>
                         <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"

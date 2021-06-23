@@ -13,12 +13,12 @@ var environment_1 = require("../environments/environment");
 var uuid_1 = require("uuid");
 var jwt_helper_1 = require("./_helpers/jwt.helper");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(cookieService, genericService, checkOutService, 
-    // private swPush: SwPush,
-    userService) {
+    function AppComponent(cookieService, genericService, checkOutService, route, router, userService) {
         this.cookieService = cookieService;
         this.genericService = genericService;
         this.checkOutService = checkOutService;
+        this.route = route;
+        this.router = router;
         this.userService = userService;
         this.title = 'laytrip-website';
         this.VAPID_PUBLIC_KEY = environment_1.environment.VAPID_PUBLIC_KEY;
@@ -32,6 +32,13 @@ var AppComponent = /** @class */ (function () {
         }
         this.registerGuestUser();
         this.setCountryBehaviour();
+    };
+    AppComponent.prototype.isValidateReferralId = function (referral_id) {
+        this.genericService.checkIsReferralUser(referral_id).subscribe(function (res) {
+            localStorage.setItem("referral_id", res.data.name);
+        }, function (err) {
+            localStorage.removeItem("referral_id");
+        });
     };
     /* subscribeToNotifications() {
   

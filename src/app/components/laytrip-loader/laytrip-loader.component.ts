@@ -1,5 +1,5 @@
 import { Component, Input, OnInit} from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
+//import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-laytrip-loader',
@@ -13,7 +13,7 @@ export class LaytripLoaderComponent implements OnInit {
   @Input() module;
 
   constructor(
-    private spinner: NgxSpinnerService,
+    //private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {

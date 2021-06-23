@@ -37,9 +37,14 @@ h5{
 				margin-top: 0;
 				.accordion-group{
 					.accordion-heading{
+						// &::after{
+						// 	background-image: none;
+						// 	margin-left: 15px;
+							
+						// }
 						&::after{
 							background-image: none;
-							margin-left: 15px;
+							content: none;
 						}
 					}
 				}

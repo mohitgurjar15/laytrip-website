@@ -12,15 +12,18 @@ var environment_1 = require("../../environments/environment");
 var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
 var TravelerService = /** @class */ (function () {
-    function TravelerService(http) {
+    function TravelerService(http, commonFunction, route) {
         this.http = http;
+        this.commonFunction = commonFunction;
+        this.route = route;
     }
     TravelerService.prototype.setHeaders = function (params) {
         if (params === void 0) { params = ''; }
         var accessToken = localStorage.getItem('_lay_sess');
         var reqData = {
             headers: {
-                Authorization: "Bearer " + accessToken
+                Authorization: "Bearer " + accessToken,
+                referral_id: this.route.snapshot.queryParams['utm_source'] ? "" + this.route.snapshot.queryParams['utm_source'] : ""
             }
         };
         if (params) {
@@ -33,11 +36,20 @@ var TravelerService = /** @class */ (function () {
         return reqData;
     };
     TravelerService.prototype.getTravelers = function () {
-        return this.http.get(environment_1.environment.apiUrl + 'v1/traveler/list-traveler', this.setHeaders())
-            .pipe(operators_1.retry(1), operators_1.catchError(this.handleError));
+        return this.http.get(environment_1.environment.apiUrl + 'v1/traveler/list-traveler', this.setHeaders());
+    };
+    TravelerService.prototype.addAdult = function (data) {
+        if (data.guest_id) {
+            return this.http.post(environment_1.environment.apiUrl + "v1/traveler/save", data);
+        }
+        else {
+            return this.http.post(environment_1.environment.apiUrl + "v1/traveler/save", data, this.commonFunction.setHeaders());
+        }
+    };
+    TravelerService.prototype.updateAdult = function (data, id) {
+        return this.http.put(environment_1.environment.apiUrl + "v1/traveler/" + id, data, this.commonFunction.setHeaders());
     };
     TravelerService.prototype.handleError = function (error) {
-        console.log("====", error);
         var errorMessage = {};
         if (error.status == 0) {
             console.log("API Server is not responding");

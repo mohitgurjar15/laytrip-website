@@ -11,20 +11,21 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var jwt_helper_1 = require("../_helpers/jwt.helper");
 var PagesComponent = /** @class */ (function () {
-    function PagesComponent(router, genericService, cd) {
+    function PagesComponent(router, genericService, cd, route) {
         var _this = this;
         this.router = router;
         this.genericService = genericService;
         this.cd = cd;
+        this.route = route;
         this.router.events.subscribe(function (event) {
             if (event instanceof router_1.NavigationStart) {
                 // Trigger when route change
-                _this.checkUserValidate();
+                _this.checkIsValidUser();
             }
         });
     }
     PagesComponent.prototype.ngOnInit = function () {
-        this.checkUserValidate();
+        this.checkIsValidUser();
         document.getElementById('loader_full_page').style.display = 'block' ? 'none' : 'block';
         this.lottieConfig = {
             path: 'assets/lottie-json/flight/data.json',
@@ -32,7 +33,7 @@ var PagesComponent = /** @class */ (function () {
             loop: true
         };
     };
-    PagesComponent.prototype.checkUserValidate = function () {
+    PagesComponent.prototype.checkIsValidUser = function () {
         var token = localStorage.getItem('_lay_sess');
         if (token) {
             this.genericService.checkUserValidate(token).subscribe(function (res) {

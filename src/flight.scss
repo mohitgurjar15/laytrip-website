@@ -607,12 +607,18 @@
                     left: -25px;
                     background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_prev.svg) no-repeat;
                     background-position: center;
+                    &::before{
+                        content: none;
+                    }
                 }
 
                 &.slick-next {
                     right: -25px;
                     background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg) no-repeat;
                     background-position: center;
+                    &::before{
+                        content: none;
+                    }
                 }
             }
 
@@ -1442,22 +1448,22 @@
 
             &.active {
                 border-radius: 10px;
-                // .accordion-heading {
-                // 	&:after {
-                // 		content: "";
-                // 		position: relative;
-                // 		padding: 5px 9px;
-                // 		background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-                // 		background-position: right;
-                // 		background-repeat: no-repeat;
-                // 		background-size: 14px;
-                // 		transition: 0.3s;
-                // 		right: 0;
-                // 		border: none;
-                // 		top: 0;
-                // 		transform: rotate(-180deg);
-                // 	}
-                // }
+                    .accordion-heading {
+                        &:after {
+                            content: "";
+                            position: relative;
+                            padding: 5px 9px;
+                            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                            background-position: right;
+                            background-repeat: no-repeat;
+                            background-size: 14px;
+                            transition: 0.3s;
+                            right: 0;
+                            border: none;
+                            top: 0;
+                            transform: rotate(-180deg);
+                        }
+                    }
             }
 
             .accordion-body {

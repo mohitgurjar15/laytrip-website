@@ -20,20 +20,20 @@ var environment_1 = require("../../../../environments/environment");
 var airports_1 = require("../../flight/airports");
 var moment = require("moment");
 var FlightSearchWidgetComponent = /** @class */ (function () {
-    function FlightSearchWidgetComponent(genericService, commonFunction, fb, router, route, renderer, flightService, homeService) {
-        this.genericService = genericService;
+    function FlightSearchWidgetComponent(commonFunction, fb, router, route, flightService, homeService) {
         this.commonFunction = commonFunction;
         this.fb = fb;
         this.router = router;
         this.route = route;
-        this.renderer = renderer;
         this.flightService = flightService;
         this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.currentChangeCounter = new core_1.EventEmitter();
         this.moduleList = {};
         this.calenderPrices = [];
         this.switchBtnValue = false;
-        this.isRoundTrip = false;
+        this.currentTabName = 'hotel';
+        this.isRoundTrip = true;
         this.flightSearchFormSubmitted = false;
         this.isCalenderPriceLoading = true;
         // DATE OF FROM_DESTINATION & TO_DESTINATION
@@ -51,9 +51,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.returnDate = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
         this.totalPerson = 1;
         this.calPrices = false;
+        this.routeSearch = false;
         this.showFromAirportSuggestion = false;
         this.showToAirportSuggestion = false;
         this.thisElementClicked = false;
+        this.counterChangeVal = 0;
+        this.isDatePickerOpen = false;
         this.searchFlightInfo = {
             trip: 'oneway',
             departure: this.fromSearch.code,
@@ -66,6 +69,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             infant: null
         };
         this.searchedValue = [];
+        this.searchedFlightData = [];
         if (typeof this.fromSearch.city != 'undefined') {
             this.fromSearch['display_name'] = this.fromSearch.city + "," + this.fromSearch.country + ",(" + this.fromSearch.code + ")," + this.fromSearch.name;
             this.toSearch['display_name'] = this.toSearch.city + "," + this.toSearch.country + ",(" + this.toSearch.code + ")," + this.toSearch.name;
@@ -82,8 +86,25 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.rangeDates = [this.departureDate, this.returnDate];
     }
     FlightSearchWidgetComponent.prototype.ngOnInit = function () {
-        // this.departureDate = moment(this.customStartDateValidation).toDate();
         var _this = this;
+        this.fromSearch = [];
+        if (this.commonFunction.isRefferal()) {
+            this.homeService.getSlideOffers.subscribe(function (currentSlide) {
+                if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+                    var slide = currentSlide;
+                    _this.fromSearch = Object.assign({}, airports_1.airports[slide.location.from.airport_code]);
+                    _this.toSearch = Object.assign({}, airports_1.airports[slide.location.to.airport_code]);
+                    _this.searchFlightInfo.departure = _this.fromSearch.code;
+                    _this.departureDate = moment().add(90, 'days').toDate();
+                    if (_this.isRoundTrip) {
+                        _this.returnDate = moment().add(97, 'days').toDate();
+                        _this.rangeDates = [_this.departureDate, _this.returnDate];
+                        _this.searchFlightInfo.arrival = _this.toSearch.code;
+                    }
+                }
+            });
+        }
+        // this.departureDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.departureDate = moment().add('31', 'days').toDate();
         }
@@ -107,6 +128,9 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 localStorage.setItem('__from', params['departure']);
                 localStorage.setItem('__to', params['arrival']);
                 _this.searchFlightInfo["class"] = params['class'];
+                _this.searchFlightInfo.adult = params['adult'];
+                _this.searchFlightInfo.child = params['child'];
+                _this.searchFlightInfo.infant = params['infant'];
                 _this.departureDate = moment(params['departure_date']).toDate();
                 // console.log(params['departure_date'], moment(params['departure_date']).format("YYYY-MM-DD"))
                 if (moment(_this.departureDate).format("YYYY-MM-DD") < _this.customStartDateValidation) {
@@ -127,14 +151,12 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
                 var keys = toSearchString;
                 localStorage.setItem('__to', keys);
                 // this.toSearch = null;   
+                _this.fromSearch = airports_1.airports['NYC'];
+                _this.searchFlightInfo.departure = _this.fromSearch.code;
                 _this.toSearch = airports_1.airports[keys];
-                _this.flightSearchForm.controls.fromDestination.setValue('');
-                _this.fromSearch = [];
-                if (!_this.isRoundTrip) {
-                    // this.departureDate = moment(this.customStartDateValidation).add(31, 'days').toDate();
-                }
-                else {
-                    _this.rangeDates = [_this.departureDate, moment(_this.departureDate).add(7, 'days').toDate()];
+                _this.departureDate = moment().add(90, 'days').toDate();
+                if (_this.isRoundTrip) {
+                    _this.rangeDates = [_this.departureDate, moment().add(97, 'days').toDate()];
                     _this.searchFlightInfo.arrival = _this.toSearch.code;
                 }
             }
@@ -144,6 +166,10 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
     };
     FlightSearchWidgetComponent.prototype.ngOnChanges = function (changes) {
+        //if tab changed then show round-trip default || get tabname with change value 
+        if (changes['currentTabName'] && changes['currentTabName'].currentValue != 'undefined') {
+            this.isRoundTrip = true;
+        }
     };
     FlightSearchWidgetComponent.prototype.setFlightDepartureMinDate = function () {
         var date = new Date();
@@ -163,6 +189,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             this.departureDate = date;
             this.flightDepartureMinDate = date;
         }
+        this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
     };
     FlightSearchWidgetComponent.prototype.destinationChangedValue = function (event) {
         if (event && event.key && event.key === 'fromSearch') {
@@ -198,9 +225,19 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             queryParams.arrival_date = moment(this.returnDate).format('YYYY-MM-DD');
         }
         queryParams["class"] = this.searchFlightInfo["class"] ? this.searchFlightInfo["class"] : 'Economy';
-        queryParams.adult = this.searchFlightInfo.adult;
+        queryParams.adult = this.searchFlightInfo.adult ? this.searchFlightInfo.adult : 1;
         queryParams.child = this.searchFlightInfo.child ? this.searchFlightInfo.child : 0;
         queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+        }
         if (this.searchFlightInfo && this.totalPerson &&
             this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
             localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
@@ -210,6 +247,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         }
     };
     FlightSearchWidgetComponent.prototype.toggleOnewayRoundTrip = function (type) {
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
         if (type === 'roundtrip') {
             this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
             this.rangeDates = [this.departureDate, this.returnDate];
@@ -223,6 +261,8 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.departureDate = moment(date).toDate();
         this.returnDate = new Date(date);
         this.flightReturnMinDate = new Date(date);
+        //for stop landing slider 
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
     };
     FlightSearchWidgetComponent.prototype.swapAirport = function () {
         var temp = this.searchFlightInfo.departure;
@@ -238,16 +278,24 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
             localStorage.setItem('__to', this.toSearch.code);
         }
     };
+    FlightSearchWidgetComponent.prototype.datePickerShow = function (event) {
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
+    };
     FlightSearchWidgetComponent.prototype.selectReturnDateUpdate = function (date) {
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
         // this is only for closing date range picker, after selecting both dates
         if (this.rangeDates[1]) { // If second date is selected
             this.dateFilter.hideOverlay();
         }
         ;
         if (this.rangeDates[0] && this.rangeDates[1]) {
-            this.departureDate = this.rangeDates[0];
-            // this.flightDepartureMinDate = this.rangeDates[0];
+            // let daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
             this.returnDate = this.rangeDates[1];
+            this.departureDate = this.rangeDates[0];
+            if (!moment(this.rangeDates[1]).isAfter(moment(this.rangeDates[0]))) {
+                this.returnDate = moment(this.rangeDates[0]).add(7, 'days').toDate();
+            }
+            // this.flightDepartureMinDate = this.rangeDates[0];
             this.rangeDates = [this.departureDate, this.returnDate];
         }
     };
@@ -420,7 +468,7 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.thisElementClicked = true;
     };
     FlightSearchWidgetComponent.prototype.searchAirport = function (event) {
-        console.log("event", event);
+        // console.log("event", event)
     };
     FlightSearchWidgetComponent.prototype.searchItem = function (data) {
         if (data.type == 'fromSearch') {
@@ -452,12 +500,52 @@ var FlightSearchWidgetComponent = /** @class */ (function () {
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.searchFlightInfo.arrival = this.toSearch.code;
     };
+    FlightSearchWidgetComponent.prototype.getflightSearchRoutes = function (event) {
+        this.showFromAirportSuggestion = true;
+        this.searchedFlightData = event;
+        this.routeSearch = true;
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
+    };
+    FlightSearchWidgetComponent.prototype.getflightToSearchRoutes = function (event) {
+        this.showToAirportSuggestion = true;
+        this.searchedFlightData = event;
+        this.routeSearch = true;
+    };
+    FlightSearchWidgetComponent.prototype.counterValueChanged = function (event) {
+        this.currentChangeCounter.emit(event);
+    };
+    FlightSearchWidgetComponent.prototype.datepickerShow = function () {
+        var _this = this;
+        this.isDatePickerOpen = true;
+        if (this.commonFunction.isRefferal()) {
+            this.progressInterval = setInterval(function () {
+                if (_this.isDatePickerOpen) {
+                    _this.currentChangeCounter.emit(_this.counterChangeVal += 1);
+                }
+                else {
+                    clearInterval(_this.progressInterval);
+                }
+            }, 1000);
+        }
+    };
+    FlightSearchWidgetComponent.prototype.datepickerClose = function () {
+        this.isDatePickerOpen = false;
+    };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)
     ], FlightSearchWidgetComponent.prototype, "dateFilter");
     __decorate([
+        core_1.Output()
+    ], FlightSearchWidgetComponent.prototype, "currentChangeCounter");
+    __decorate([
         core_1.Input()
     ], FlightSearchWidgetComponent.prototype, "calenderPrices");
+    __decorate([
+        core_1.Input()
+    ], FlightSearchWidgetComponent.prototype, "currentSlide");
+    __decorate([
+        core_1.Input()
+    ], FlightSearchWidgetComponent.prototype, "currentTabName");
     __decorate([
         core_1.HostListener('document:click')
     ], FlightSearchWidgetComponent.prototype, "clickOutside");

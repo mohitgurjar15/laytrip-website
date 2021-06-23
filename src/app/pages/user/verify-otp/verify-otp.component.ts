@@ -9,6 +9,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { optValidation } from '../../../_helpers/custom.validators';
 import { CountdownComponent } from 'ngx-countdown';
+import { NgxOtpInputConfig } from 'ngx-otp-input';
 declare var $: any;
 
 @Component({
@@ -32,15 +33,24 @@ export class VerifyOtpComponent implements OnInit {
   @Input() isUserNotVerify: boolean = false;
   @Input() isSignup: boolean = false;
   apiError: string = '';
-  config = {
-    allowNumbersOnly: true,
-    length: 6,
+  // config = {
+  //   allowNumbersOnly: true,
+  //   length: 6,
+  //   isPasswordInput: false,
+  //   disableAutoFocus: false,
+  //   placeholder: '',
+  //   inputStyles: {
+  //     'width': '64px',
+  //     'height': '64px'
+  //   }
+  // };
+  config: NgxOtpInputConfig = {
+    otpLength: 6,
+    autofocus: false,
+    numericInputMode: true,
     isPasswordInput: false,
-    disableAutoFocus: false,
-    placeholder: '',
-    inputStyles: {
-      'width': '64px',
-      'height': '64px'
+    classList: {
+      input: 'inputStyles'
     }
   };
   isResend: boolean = false;
@@ -69,7 +79,7 @@ export class VerifyOtpComponent implements OnInit {
     setTimeout(() => {
       this.isResend = true;
     }, 60000);
- 
+
     this.guestUserId = localStorage.getItem('__gst') || '';
   }
 
@@ -83,7 +93,7 @@ export class VerifyOtpComponent implements OnInit {
     this.otp = event;
     if (event.length == 6) {
       this.otpForm.controls.otp.setValue(event);
-      this.ngOtpInputRef.setValue(event);
+      // this.ngOtpInputRef.setValue(event);
     }
   }
 
@@ -117,9 +127,10 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onSubmit() {
+
     this.submitted = this.loading = true;
     var otpValue = '';
-    let otps: any = this.ngOtpInputRef.otpForm.value;
+    let otps: any = this.otpForm.controls.otp.value;
     Object.values(otps).forEach((v) => {
       otpValue += v;
     });

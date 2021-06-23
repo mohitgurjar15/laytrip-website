@@ -1,13 +1,13 @@
 <app-laytrip-loader [loading]="loading" [module]="lottieLoaderType"></app-laytrip-loader>
 <app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
-<section class="payment_mode_main_wrapper flight {{lottieLoaderType}}">
+<section class="payment_mode_main_wrapper flight">
     <div class="container" *ngIf="!isCartEmpty">
         <form>
             <div class="row">
                 <div class="col-lg-7">
                     <h3>Your Bookings</h3>
                     <div class="booking_detail_bg_wrps">
-                        <app-cart *ngIf="carts && carts.length" [carts]="carts"></app-cart>
+                        <app-cart *ngIf="carts && carts.length" (maxCartValidation)="cartValueChanged($event)" [carts]="carts"></app-cart>
                         <app-cart-loader *ngIf="cartLoading"></app-cart-loader>
                     </div>
                     <div class="card_details_wrppers">
@@ -73,7 +73,8 @@
                                     class="pink_search" />
                                 <!-- <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="Search icon"
                                     class="white_search" /> -->
-                                Save and Add More Travel 
+                                <!-- Save and Add More Travel  -->
+                                Save & Add Flights or Hotels
                             </button>
 
 
@@ -94,6 +95,11 @@
                         <div class="section_description" *ngIf="!isAllAlertClosed">
                             <span class="sec_text">{{alertErrorMessage}}</span>
                             <a (click)="removeAllAlertError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
+                                    alt="Close"></a>
+                        </div>
+                        <div class="section_description" *ngIf="ismaxCartAdded">
+                            <span class="sec_text">10 item cart maximum, please checkout and start another cart if you require more than 10.</span>
+                            <a (click)="removeMaxCartAlertError()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
                                     alt="Close"></a>
                         </div>
                     </div>

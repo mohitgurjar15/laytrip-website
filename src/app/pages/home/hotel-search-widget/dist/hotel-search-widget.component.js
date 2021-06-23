@@ -20,6 +20,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.homeService = homeService;
         this.cd = cd;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.currentChangeCounter = new core_1.EventEmitter();
         this.checkInDate = new Date();
         this.checkOutDate = new Date();
         this.maxDate = {};
@@ -62,6 +63,8 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
         this.showCommingSoon = false;
         this.customStartDateValidation = "2021-06-02";
         this.customEndDateValidation = "2021-06-03";
+        this.isDatePickerOpen = false;
+        this.counterChangeVal = 0;
         this.hotelSearchForm = this.fb.group({
             fromDestination: ['', [forms_1.Validators.required]]
         });
@@ -89,6 +92,21 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     HotelSearchWidgetComponent.prototype.ngOnInit = function () {
         var _this = this;
         window.scrollTo(0, 0);
+        this.homeService.getSlideOffers.subscribe(function (currentSlide) {
+            if (_this.commonFunction.isRefferal()) {
+                if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+                    var keys = currentSlide;
+                    _this.dealDateValidation();
+                    // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
+                    _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = keys.location.to.hotel_option.title;
+                    _this.searchHotelInfo.latitude = _this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
+                    _this.searchHotelInfo.longitude = _this.fromDestinationInfo.geo_codes.long = keys.location.to.hotel_option.geo_codes.long;
+                    _this.searchHotelInfo.city_id = _this.fromDestinationInfo.city_id = keys.location.to.hotel_option.city_id;
+                    _this.searchHotelInfo.location = _this.fromDestinationInfo;
+                    _this.validateSearch(true);
+                }
+            }
+        });
         // this.checkInDate = moment(this.customStartDateValidation).toDate();
         if (new Date(this.customStartDateValidation) <= new Date()) {
             this.checkInDate = moment().add('31', 'days').toDate();
@@ -98,7 +116,7 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             // this.$dealLocatoin.unsubscribe();  
             this.homeService.removeToString('hotel');
             this.checkInDate = moment(this.route.snapshot.queryParams['check_in']).toDate();
-            this.checkInMinDate = this.customStartDateValidation ? moment(this.customStartDateValidation).toDate() : moment();
+            this.checkInMinDate = moment().add(31, 'days').toDate();
             this.checkOutDate = moment(this.route.snapshot.queryParams['check_out']).isValid() ? moment(this.route.snapshot.queryParams['check_out']).toDate() : moment(this.route.snapshot.queryParams['check_in']).add(1, 'days').toDate();
             this.checkOutMinDate = this.checkOutDate;
             this.rangeDates = [this.checkInDate, this.checkOutDate];
@@ -109,10 +127,11 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                     longitude: this.route.snapshot.queryParams['longitude'],
                     check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
                     check_out: moment(this.checkOutDate).format('MM/DD/YYYY'),
-                    city_id: this.route.snapshot.queryParams['city_id']
+                    city_id: this.route.snapshot.queryParams['city_id'],
+                    hotel_id: this.route.snapshot.queryParams['hotel_id']
                 };
             if (this.route.snapshot.queryParams['location']) {
-                info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+                info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['location'])));
                 this.searchHotelInfo.location = info;
                 if (info) {
                     this.fromDestinationInfo.title = info.title;
@@ -123,22 +142,24 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
                 }
             }
             if (this.route.snapshot.queryParams['itenery']) {
-                info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+                info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
                 this.searchHotelInfo.occupancies = info;
             }
         }
         else {
             this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
             this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id;
+            this.searchHotelInfo.hotel_id = this.fromDestinationInfo.hotel_id;
+            // this.searchHotelInfo.type = this.fromDestinationInfo.type;
             this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
             this.searchHotelInfo.location = this.fromDestinationInfo;
             this.searchHotelInfo.occupancies = this.selectedGuest;
         }
         this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
-                _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = '';
-                _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = hotelInfo.title;
                 _this.dealDateValidation();
+                // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
+                _this.fromDestinationInfo.city = _this.fromDestinationInfo.title = hotelInfo.title;
                 _this.searchHotelInfo.latitude = _this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;
                 _this.searchHotelInfo.longitude = _this.fromDestinationInfo.geo_codes.long = hotelInfo.long;
                 _this.searchHotelInfo.city_id = _this.fromDestinationInfo.city_id = hotelInfo.city_id;
@@ -153,9 +174,10 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
             this.searchHotelInfo.check_in = this.checkInDate = moment(this.customStartDateValidation).toDate();
         }
         else {
-            this.searchHotelInfo.check_in = this.checkInDate = moment().add(31, 'days').toDate();
+            this.searchHotelInfo.check_in = this.checkInDate = moment().add(90, 'days').toDate();
         }
         this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
+        this.rangeDates = [this.checkInDate, this.checkOutDate];
     };
     HotelSearchWidgetComponent.prototype.setHotelDate = function () {
         var curretdate = moment().format();
@@ -192,41 +214,110 @@ var HotelSearchWidgetComponent = /** @class */ (function () {
     HotelSearchWidgetComponent.prototype.changeGuestInfo = function (event) {
         this.searchHotelInfo.occupancies = event;
     };
+    HotelSearchWidgetComponent.prototype.fromBinary = function (encoded) {
+        var binary = atob(encoded);
+        var bytes = new Uint8Array(binary.length);
+        for (var i = 0; i < bytes.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+        return String.fromCharCode.apply(String, new Uint16Array(bytes.buffer));
+    };
+    HotelSearchWidgetComponent.prototype.toBinary = function (string) {
+        var codeUnits = new Uint16Array(string.length);
+        for (var i = 0; i < codeUnits.length; i++) {
+            codeUnits[i] = string.charCodeAt(i);
+        }
+        return btoa(String.fromCharCode.apply(String, new Uint8Array(codeUnits.buffer)));
+    };
     HotelSearchWidgetComponent.prototype.searchHotels = function () {
         var _this = this;
+        console.log($('.hotel_desination').val());
         this.hotelSearchFormSubmitted = true;
+        if ($('.hotel_desination').val() == '') {
+            this.validSearch = false;
+        }
         var queryParams = {};
         queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
         queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
-        // queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
+        queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
         queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
         queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
         queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
-        queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
-        queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
+        queryParams.hotel_id = this.searchHotelInfo.type == "hotel" ? parseFloat(this.searchHotelInfo.hotel_id) : '';
+        // queryParams.type = this.searchHotelInfo.type ? this.searchHotelInfo.type : '';
+        console.log(this.searchHotelInfo);
+        queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
+        queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace(/\=+$/, '');
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+        }
         if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
             this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
                 _this.router.navigate(['hotel/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
             });
         }
+        else {
+            this.validSearch = false;
+        }
     };
     HotelSearchWidgetComponent.prototype.selectedHotel = function (event) {
+        if (event.type == 'city') {
+            this.searchHotelInfo.city_id = event.city_id;
+        }
+        else {
+            this.searchHotelInfo.hotel_id = event.hotel_id;
+        }
+        this.searchHotelInfo.type = event.type;
         this.searchHotelInfo.location = event;
-        this.searchHotelInfo.city_id = event.city_id;
         this.searchHotelInfo.latitude = event.geo_codes.lat;
         this.searchHotelInfo.longitude = event.geo_codes.long;
         if (event && event.city_id == '' && event.objType === 'invalid') {
             this.fromDestinationInfo = event;
             this.validateSearch(true);
         }
+        // console.log(this.searchHotelInfo,event)
     };
     HotelSearchWidgetComponent.prototype.validateSearch = function (event) {
+        this.currentChangeCounter.emit(this.counterChangeVal += 1);
         this.validSearch = event;
+    };
+    HotelSearchWidgetComponent.prototype.counterValueChanged = function (event) {
+        this.currentChangeCounter.emit(event);
+    };
+    HotelSearchWidgetComponent.prototype.datepickerShow = function () {
+        var _this = this;
+        this.isDatePickerOpen = true;
+        if (this.commonFunction.isRefferal()) {
+            this.progressInterval = setInterval(function () {
+                if (_this.isDatePickerOpen) {
+                    _this.currentChangeCounter.emit(_this.counterChangeVal += 1);
+                }
+                else {
+                    clearInterval(_this.progressInterval);
+                }
+            }, 1000);
+        }
+    };
+    HotelSearchWidgetComponent.prototype.datepickerClose = function () {
+        this.isDatePickerOpen = false;
     };
     __decorate([
         core_1.ViewChild('dateFilter', /* TODO: add static flag */ undefined)
     ], HotelSearchWidgetComponent.prototype, "dateFilter");
+    __decorate([
+        core_1.Input()
+    ], HotelSearchWidgetComponent.prototype, "currentSlide");
+    __decorate([
+        core_1.Output()
+    ], HotelSearchWidgetComponent.prototype, "currentChangeCounter");
     HotelSearchWidgetComponent = __decorate([
         core_1.Component({
             selector: 'app-hotel-search-widget',

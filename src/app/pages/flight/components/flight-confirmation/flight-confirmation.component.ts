@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 export class FlightConfirmationComponent implements OnInit {
 
   constructor(
-    private commonFunction:CommonFunction,
-    public router:Router
+    private commonFunction: CommonFunction,
+    public router: Router
   ) { }
   userData;
   s3BucketUrl = environment.s3BucketUrl;
@@ -22,8 +22,20 @@ export class FlightConfirmationComponent implements OnInit {
   ngOnInit() {
     this.userData = getLoginUserInfo();
   }
-  backToHome(){
-    this.router.navigate([''])
+  backToHome() {
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate([''], { queryParams: queryParams });
+    } else {
+      this.router.navigate([''])
+    }
   }
-
 }

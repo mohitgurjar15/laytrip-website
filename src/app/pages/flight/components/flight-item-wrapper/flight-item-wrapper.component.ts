@@ -12,7 +12,7 @@ import * as moment from 'moment'
 import { getLoginUserInfo, getUserDetails } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+//import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -27,7 +27,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   @Input() filteredLabel;
   @Output() changeLoading = new EventEmitter;
   @Output() maxCartValidation = new EventEmitter;
-  @Output() flightNotAvailable = new EventEmitter;
+  @Output() removeFlight = new EventEmitter;
+  isFlightNotAvailable: boolean = false;
   cartItems = [];
 
   animationState = 'out';
@@ -55,7 +56,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   userInfo;
   totalLaycreditPoints: number = 0;
   showFareDetails: number = 0;
-
+  flightUniqueCode;
   isRoundTrip = false;
 
   subcell = '$100';
@@ -74,13 +75,12 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private genericService: GenericService,
     private cartService: CartService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService,
+    //private spinner: NgxSpinnerService,
     public modalService: NgbModal,
   ) {
   }
 
   ngOnInit() {
-
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.flightList = this.flightDetails;
@@ -100,15 +100,15 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       this.cartItems = cartItems;
     })
 
-    setTimeout(()=>{this.loadJquery();},3000)
-    
+    setTimeout(() => { this.loadJquery(); }, 3000)
+
   }
 
   loadJquery() {
     $("body").click(function () {
       $(".code_name_m").hide();
     });
-    $(".code_bt_m").click(function (e){
+    $(".code_bt_m").click(function (e) {
       e.stopPropagation();
       $(this).siblings(".code_name_m").toggle();
     });
@@ -126,7 +126,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   checkUser() {
     let userToken = getLoginUserInfo();
     this.isLoggedIn = false;
-    if (typeof userToken!='undefined' &&  userToken.roleId!=7) {
+    if (typeof userToken != 'undefined' && userToken.roleId != 7) {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
     }
@@ -200,6 +200,11 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   }
 
   bookNow(route) {
+    this.removeFlight.emit(this.flightUniqueCode);
+    this.isFlightNotAvailable = false;
+    /*  
+    this.flightListArray = this.flightListArray.filter(obj => obj.unique_code !== this.flightUniqueCode);
+ */
     /* if (!this.isLoggedIn) {
       const modalRef = this.modalService.open(LaytripOkPopup, {
         centered: true,
@@ -208,46 +213,62 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       });
     } else { */
 
-      if (this.cartItems && this.cartItems.length >= 10) {
-        this.changeLoading.emit(false);
-        this.maxCartValidation.emit(true)
-      } else {
+    if (this.cartItems && this.cartItems.length >= 10) {
+      this.changeLoading.emit(false);
+      this.maxCartValidation.emit(true)
+    } else {
+      this.changeLoading.emit(true);
+      const itinerary = {
+        adult: this.route.snapshot.queryParams["adult"],
+        child: this.route.snapshot.queryParams["child"],
+        infant: this.route.snapshot.queryParams["infant"],
+        is_passport_required: route.is_passport_required
+      };
+      let lastSearchUrl = this.router.url;
+      this.cookieService.put('_prev_search', lastSearchUrl);
+      const dateNow = new Date();
+      dateNow.setMinutes(dateNow.getMinutes() + 10);
+
+      sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
+
+      let payload = {
+        module_id: 1,
+        route_code: route.route_code,
+        referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
+      };
+      //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
+      this.cartService.addCartItem(payload).subscribe((res: any) => {
         this.changeLoading.emit(true);
-        const itinerary = {
-          adult: this.route.snapshot.queryParams["adult"],
-          child: this.route.snapshot.queryParams["child"],
-          infant: this.route.snapshot.queryParams["infant"],
-          is_passport_required: route.is_passport_required
-        };
-        let lastSearchUrl = this.router.url;
-        this.cookieService.put('_prev_search', lastSearchUrl);
-        const dateNow = new Date();
-        dateNow.setMinutes(dateNow.getMinutes() + 10);
+        if (res) {
+          let newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] }
+          this.cartItems = [...this.cartItems, newItem]
+          this.cartService.setCartItems(this.cartItems);
 
-        sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
-        
-        let payload = {
-          module_id: 1,
-          route_code: route.route_code
-        };
-        //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
-        this.cartService.addCartItem(payload).subscribe((res: any) => {
-          this.changeLoading.emit(true);
-          if (res) {
-            let newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] }
-            this.cartItems = [...this.cartItems, newItem]
-            this.cartService.setCartItems(this.cartItems);
-
-            localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-            this.router.navigate([`cart/booking`]);
+          localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
+          if (this.commonFunction.isRefferal()) {
+            let parms = this.commonFunction.getRefferalParms();
+            var queryParams: any = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if(parms.utm_medium){
+              queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if(parms.utm_campaign){
+              queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(['cart/checkout'], { queryParams:queryParams });
+          } else {
+            this.router.navigate(['cart/checkout']);
           }
-        }, error => {
-          this.changeLoading.emit(false);
-          //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
-          this.flightNotAvailable.emit(true)
-        });
+        }
+      }, error => {
+        this.changeLoading.emit(false);
+        //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+        this.isFlightNotAvailable = true;
+        this.flightUniqueCode = route.unique_code;
+        // this.isFlightNotAvailable.emit(true)
+      });
 
-      }
+    }
     /* } */
   }
 
@@ -290,29 +311,29 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     return diff;
   }
 
-  convertTime(time){
-    let newTime =  this.commonFunction.convertTime(time,'h:mm A','h:mma')
+  convertTime(time) {
+    let newTime = this.commonFunction.convertTime(time, 'h:mm A', 'h:mma')
     return newTime.slice(0, -1)
   }
-}
 
-@Component({
-  selector: 'laytrip-ok-popup',
-  template: `<div class="modal-header">
-      <h4 class="modal-title">Warning</h4>
-    </div>
-    <div class="modal-body">
-      <p>Please login to book flight</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">OK</button>
-    </div>`,
-})
+  hideFlightNotAvailable() {
+    this.isFlightNotAvailable = false;
+    this.flightUniqueCode = '';
+  }
 
-export class LaytripOkPopup {
+  showDownPayment(offerData,downPaymentOption){
 
-  constructor(public modal: NgbActiveModal) {
+    if (typeof offerData != 'undefined' && offerData.applicable) {
+
+      if(typeof offerData.down_payment_options!='undefined' && offerData.down_payment_options[downPaymentOption].applicable){
+        return true;
+      }
+      return false;
+    }
+    return true;
   }
 }
+
+
 
 

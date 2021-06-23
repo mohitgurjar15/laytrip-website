@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, ViewChild, Renderer2, Input } from '@angular/core';
-declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -7,9 +6,6 @@ import { Location } from '@angular/common';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { NgxSpinnerService } from "ngx-spinner";
-import { HotelService } from '../../../services/hotel.service';
-import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -46,13 +42,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public router: Router,
     public location: Location,
     public commonFunction: CommonFunction,
-    private spinner: NgxSpinnerService,
     private renderer: Renderer2,
-    private homeService: HomeService
   ) { }
 
   ngOnInit() {
-
+    
     window.scroll(0, 0);
     sessionStorage.removeItem("__insMode")
     sessionStorage.removeItem("__islt")
@@ -97,10 +91,13 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
 
   getFlightSearchData(payload, tripType) {
-    this.loading = true;
+    this.loading = this.flexibleLoading = true;
     this.fullPageLoading = true;
     this.tripType = tripType;
     this.errorMessage = '';
+    this.flightDetails = [];
+    this.dates = [];
+
     if (payload && tripType === 'roundtrip') {
       this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
@@ -109,32 +106,34 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
+          if(this.flightDetails.length == 0){
+            this.isNotFound = true;
+          }         
         }
       }, err => {
+        this.flightDetails = [];
         if (err && err.status === 404) {
           this.errorMessage = err.message;
         }
         else {
           this.isNotFound = true;
         }
-
         this.loading = false;
         this.fullPageLoading = false;
       });
-      this.dates = [];
+
       this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe((res: any) => {
         if (res) {
-          this.flexibleLoading = false;
-          this.flexibleNotFound = false;
+          this.flexibleLoading = this.flexibleNotFound =false;
           this.dates = res;
         }
       }, err => {
         this.flexibleNotFound = true;
         this.flexibleLoading = false;
       });
-
       this.getCalenderPrice(payload)
     } else {
+
       this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
           this.loading = false;
@@ -142,24 +141,22 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
-        }
+          if(this.flightDetails.length == 0){
+            this.isNotFound = true;
+          } 
+       }     
       }, err => {
-
+        this.loading = this.fullPageLoading= false;
         if (err.status == 422) {
           this.errorMessage = err.message;
-        }
-        else {
+        }else {
           this.isNotFound = true;
         }
-        this.loading = false;
-        this.fullPageLoading = false;
       });
-
-      this.dates = [];
+    
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
         if (res && res.length) {
-          this.flexibleLoading = false;
-          this.flexibleNotFound = false;
+          this.flexibleLoading = this.flexibleNotFound = false;
           this.dates = res;
         }
       }, err => {
@@ -169,12 +166,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
       this.getCalenderPrice(payload);
     }
-  }
+  }  
 
   changeLoading(event) {
     this.fullPageLoading = event;
   }
-
 
   getCalenderPrice(payload) {
 
@@ -201,8 +197,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   getSearchItem(event) {
-    console.log('getSearchItem')
-
     // TRIP is round-trip then call this API
     if (event.trip === 'roundtrip') {
       this.getFlightSearchDataForRoundTrip(event);
@@ -252,6 +246,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   sortFlight(event) {
+    this.flightService.setSortFilter(event);
     let { key, order } = event;
     if (key === 'total_duration') {
       // this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
@@ -293,8 +288,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       }
     }
-    // console.log("After Key:",key,this.flightDetails)
-
   }
 
 
@@ -338,7 +331,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       return data;
     }
     else {
-      //console.log("data",key,way,data)
       return data.sort(function (a, b) {
         let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY h:mm A').format("X");
         let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY h:mm A').format("X");
@@ -387,8 +379,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.isCartFull = false;
   }
 
-  flightNotAvailable(data) {
-    // this.isFlightAvaibale = data;
+  removeNotAvailabeflight(data) {
+    this.flightDetails = this.flightDetails.filter(obj => obj.unique_code !== data);    
+    this.isFlightAvaibale = data;
   }
 
   hideFlightNotAvailable() {
@@ -396,10 +389,5 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     // window.location.reload();
   }
 
-  moduleTabClick(tabName) {
-    if (tabName == 'hotel') {
-      this.homeService.setActiveTab(tabName)
-      this.router.navigate(['/']);
-    }
-  }
+  
 }

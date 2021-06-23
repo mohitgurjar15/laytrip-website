@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../../../environments/environment';
 declare var $: any;
 
 @Component({
@@ -13,6 +14,7 @@ export class SortFlightComponent implements OnInit {
   @Input() flightDetails;
   sortType:string='lh_price';
   departureCode:string='';
+  s3BucketUrl = environment.s3BucketUrl;
   arrivalCode:string='';
   lowToHighToggle : boolean = false;
 
@@ -30,15 +32,15 @@ export class SortFlightComponent implements OnInit {
   loadJquery() {
     //Start REsponsive Fliter js
     
-    $(".responsive_sort_btn").click(function () {
-      $("#responsive_sortby_show").slideDown("slow");
-      $("body").addClass('overflow-hidden');
-    });
+    // $(".responsive_sort_btn").click(function () {
+    //   $("#responsive_sortby_show").slideDown("slow");
+    //   $("body").addClass('overflow-hidden');
+    // });
 
-    $(".filter_close > a").click(function () {
-      $("#responsive_sortby_show").slideUp("slow");
-      $("body").removeClass('overflow-hidden');
-    });
+    // $(".filter_close > a").click(function () {
+    //   $("#responsive_sortby_show").slideUp("slow");
+    //   $("body").removeClass('overflow-hidden');
+    // });
     //Close REsponsive Fliter js
     // Start filter Shortby js
     $(document).on('show', '#accordion', function (e) {
@@ -51,10 +53,13 @@ export class SortFlightComponent implements OnInit {
   }
 
   sortFlightData(key,order,name){
-
     this.sortType=name;
     this.sortFlight.emit({ key , order })
   }
+  closeModal() {
+    $('#filter_mob_modal2').modal('hide');
+  }
+
 
   resetSorting(key,order){
     this.sortType='lh_price';

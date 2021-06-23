@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { HotelService } from '../../../services/hotel.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
+import { HomeService } from '../../../services/home.service';
 declare var $: any;
 
 @Component({
@@ -24,7 +24,7 @@ export class HotelSearchComponent implements OnInit {
   hotelToken;
   isResetFilter: string = 'no';
   searchedValue = [];
-  filteredLabel : string = 'Price Low to High';
+  filteredLabel: string = 'Price Low to High';
 
   roomsGroup = [
     {
@@ -33,16 +33,17 @@ export class HotelSearchComponent implements OnInit {
       children: []
     }
   ];
-  filterOpen : boolean = false;
-  sortByOpen : boolean = false;
-  
+  filterOpen: boolean = false;
+  sortByOpen: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
     public commonFunction: CommonFunction,
     public router: Router,
     private cd: ChangeDetectorRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private homeService: HomeService,
 
   ) {
   }
@@ -51,14 +52,16 @@ export class HotelSearchComponent implements OnInit {
     window.scroll(0, 0);
     this.renderer.addClass(document.body, 'cms-bgColor');
 
-    let info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+    let info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
     let payload = {
       check_in: this.route.snapshot.queryParams['check_in'],
       check_out: this.route.snapshot.queryParams['check_out'],
       latitude: this.route.snapshot.queryParams['latitude'],
       longitude: this.route.snapshot.queryParams['longitude'],
       city_id: this.route.snapshot.queryParams['city_id'],
-      rooms:info.rooms,
+      hotel_id: this.route.snapshot.queryParams['hotel_id'],
+      // type: this.route.snapshot.queryParams['type'],
+      rooms: info.rooms,
       adults: info.adults,
       children: info.child,
       filter: true,
@@ -86,7 +89,7 @@ export class HotelSearchComponent implements OnInit {
     });
   }
 
-  
+
   sortHotels(event) {
     this.hotelService.setSortFilter(event);
     let { key, order } = event;
@@ -101,17 +104,17 @@ export class HotelSearchComponent implements OnInit {
     } else if (key === 'rating') {
       if (order === 'ASC') {
         this.filteredLabel = 'Rating Lowest to Highest';
-        this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);        
-      } else if(order === 'DESC'){
+        this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
+      } else if (order === 'DESC') {
         this.filteredLabel = 'Rating Highest to Lowest';
         this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
       }
     } else if (key === 'name') {
-      
+
       if (order === 'ASC') {
         this.filteredLabel = 'Alphabetical A to Z';
         this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
-      }else if(order === 'DESC'){
+      } else if (order === 'DESC') {
         this.filteredLabel = 'Alphabetical Z to A';
         this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
 
@@ -126,12 +129,12 @@ export class HotelSearchComponent implements OnInit {
       return data;
     } else {
       return data.sort(function (a, b) {
-        var x = a.secondary_start_price > 0 ?  a.secondary_start_price : a.selling[key];
-        var y = b.secondary_start_price > 0 ?  b.secondary_start_price : b.selling[key];
-        
-        if (way === 'ASC') {        
+        var x = a.secondary_start_price > 0 ? a.secondary_start_price : a.selling[key];
+        var y = b.secondary_start_price > 0 ? b.secondary_start_price : b.selling[key];
+
+        if (way === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        } else if (way === 'DESC') {         
+        } else if (way === 'DESC') {
           return ((x > y) ? -1 : ((x < y) ? 1 : 0));
         }
       });
@@ -139,7 +142,6 @@ export class HotelSearchComponent implements OnInit {
   }
 
   sortByRatings(data, key, way) {
-    
     if (typeof data === "undefined") {
       return data;
     } else {
@@ -173,6 +175,9 @@ export class HotelSearchComponent implements OnInit {
       });
     }
   }
+  closeModal() {
+    $('#filter_mob_modal').modal('hide');
+  }
 
   filterHotel(event) {
     setTimeout(() => {
@@ -184,12 +189,12 @@ export class HotelSearchComponent implements OnInit {
   resetFilter() {
     this.isResetFilter = (new Date()).toString();
   }
-  
-  filterDrawerOpen(){
-   this.filterOpen = !this.filterOpen;
+
+  filterDrawerOpen() {
+    this.filterOpen = !this.filterOpen;
   }
-  sortByDrawerOpen(){
-   this.sortByOpen = !this.sortByOpen;
+  sortByDrawerOpen() {
+    this.sortByOpen = !this.sortByOpen;
   }
 
   getHotelSearchDataByModify(event) {
@@ -200,10 +205,30 @@ export class HotelSearchComponent implements OnInit {
     queryParams.check_out = moment(event.check_out).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(event.latitude);
     queryParams.longitude = parseFloat(event.longitude);
-    queryParams.itenery = btoa(JSON.stringify(event.occupancies));
-    queryParams.location = btoa(JSON.stringify(locations));
+    queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(event.occupancies)));
+    queryParams.location = btoa(encodeURIComponent(JSON.stringify(locations))).replace(/\=+$/, '');
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([`${urlData.url}`], { queryParams: queryParams, queryParamsHandling: 'merge' });
     });
+  }
+
+  moduleTabClick(tabName) {
+    if (tabName == 'flight') {
+      this.homeService.setActiveTab(tabName);
+      if (this.commonFunction.isRefferal()) {
+        var parms = this.commonFunction.getRefferalParms();
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if (parms.utm_medium) {
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if (parms.utm_campaign) {
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/'], { queryParams: queryParams });
+      } else {
+        this.router.navigate(['/']);
+      }
+    }
   }
 }

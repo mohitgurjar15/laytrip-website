@@ -20,7 +20,9 @@ var HomeService = /** @class */ (function () {
         this.getToString = this.toString.asObservable();
         this.getLocationForHotelDeal = this.fromDestinationInfo.asObservable();
         this.tabName = new rxjs_1.BehaviorSubject([]);
+        this.sliderOffers = new rxjs_1.BehaviorSubject([]);
         this.getActiveTabName = this.tabName.asObservable();
+        this.getSlideOffers = this.sliderOffers.asObservable();
     }
     HomeService.prototype.handleError = function (error) {
         var errorMessage = {};
@@ -39,6 +41,9 @@ var HomeService = /** @class */ (function () {
     };
     HomeService.prototype.setActiveTab = function (tabName) {
         this.tabName.next(tabName);
+    };
+    HomeService.prototype.setOffersData = function (offers) {
+        this.sliderOffers.next(offers);
     };
     HomeService.prototype.setToString = function (flightToCode) {
         this.toString.next(flightToCode);

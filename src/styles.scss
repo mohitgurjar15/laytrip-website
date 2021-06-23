@@ -19,17 +19,18 @@
     }
   }
 }
-.child_scrollbox{
+.child_scrollbox {
   .ng-scrollbar-layout {
-    .ng-scrollbar-layout{
-        .ng-scroll-view-container{
-            .ng-scroll-view{
-              width: calc(100% - -100%) !important;
-            }
+    .ng-scrollbar-layout {
+      .ng-scroll-view-container {
+        .ng-scroll-view {
+          width: calc(100% - -100%) !important;
         }
+      }
     }
-}  
+  }
 }
+
 .wrapper {
   position: relative;
   min-height: calc(100vh - 50px);
@@ -95,41 +96,49 @@ a {
       }
     }
   }
+
   &.expiry_date {
     .p-calendar {
       @include tab-view {
         width: 100%;
       }
     }
+
     input {
-      background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
-        center right 15px no-repeat;
+      background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
       background-size: 20px;
       border: none;
     }
   }
 }
+
 .drop_down_mandetory {
   .gender_selection {
     border: none;
+
     .ng-select {
       &.input-error {
         .ng-select-container {
           border-color: $error-color !important;
         }
       }
+
       .ng-select-container {
         border-bottom: 2px solid $box-border-color;
         min-height: 38px;
         border-radius: 0;
+
         .ng-value-container {
           padding: 0;
+
           .ng-input {
             padding: 0;
           }
         }
+
         .ng-arrow-wrapper {
           padding: 0;
+
           .ng-arrow {
             padding: 5px 9px;
             background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
@@ -144,7 +153,8 @@ a {
           }
         }
       }
-      &.ng-select-opened > .ng-select-container {
+
+      &.ng-select-opened>.ng-select-container {
         .ng-arrow {
           padding: 5px 9px;
           background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -164,6 +174,7 @@ a {
           }
         }
       }
+
       /* &.ng-touched {
         &.ng-invalid {
           .ng-select-container{
@@ -175,36 +186,45 @@ a {
         border-color: $error-color !important;
       }
     }
+
     .error_img {
       top: 35px !important;
       right: 35px !important;
     }
   }
 }
+
 .gender_selection {
   border-bottom: 2px solid $box-border-color;
+
   .ng-select {
     &.input-error {
       .ng-select-container {
         border-color: $error-color !important;
       }
     }
+
     &.ng-select-disabled {
       .ng-select-container {
         background-color: $background-white;
       }
     }
+
     .ng-select-container {
       border: none;
       min-height: 34px;
+
       .ng-value-container {
         padding: 0;
+
         .ng-input {
           padding: 0;
         }
       }
+
       .ng-arrow-wrapper {
         padding: 0;
+
         .ng-arrow {
           padding: 5px 9px;
           background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
@@ -219,7 +239,8 @@ a {
         }
       }
     }
-    &.ng-select-opened > .ng-select-container {
+
+    &.ng-select-opened>.ng-select-container {
       .ng-arrow {
         padding: 5px 9px;
         background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -237,6 +258,15 @@ a {
           right: 0;
           height: 12px;
         }
+      }
+    }
+  }
+}
+.country_selection {
+  .ng-select {
+    &.ng-select-disabled {
+      .ng-select-container {
+        background-color: $background-white;
       }
     }
   }
@@ -266,25 +296,34 @@ a {
       }
     }
   }
+
   &.expiry_date {
     .p-calendar {
       @include tab-view {
         width: 100%;
       }
+
       input {
-        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
-          center right 0 no-repeat !important;
+        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0 no-repeat !important;
         background-size: 20px !important;
         border: none;
       }
     }
   }
 }
+
 .block_cookie_policy_main {
   .modal-content {
     border-radius: 10px;
   }
 }
+
+.block_session_expired_main {
+  .modal-content {
+    border-radius: 10px;
+  }
+}
+
 .ar_field {
   .ng-select {
     &.ng-select-disabled {
@@ -301,6 +340,7 @@ a {
 
         .ng-value-container {
           height: 40px;
+
           @include tab-view {
             font-size: 30px;
           }
@@ -309,6 +349,7 @@ a {
             padding: 0;
             font-size: 16px;
             color: $mid_gray_bg;
+
             @include tab-view {
               font-size: 14px;
             }
@@ -324,6 +365,7 @@ a {
             font-weight: 400;
             color: $mid_gray_bg;
             position: relative;
+
             @include tab-view {
               font-size: 14px;
             }
@@ -332,6 +374,7 @@ a {
           .ng-input {
             padding: 0;
             top: 7px;
+
             @include tab-view {
               font-size: 14px;
             }
@@ -345,11 +388,13 @@ a {
     }
   }
 }
+
 .iframe_wrapper {
   &#spreedly-cvv {
     border-bottom: 2px solid $box-border-color;
   }
 }
+
 // discription popup
 .section_description {
   border: 1px solid $pink;
@@ -475,7 +520,7 @@ textarea:focus:-ms-input-placeholder {
       }
     }
 
-    &.ng-select-opened > .ng-select-container {
+    &.ng-select-opened>.ng-select-container {
       .ng-arrow {
         padding: 5px 9px;
         background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -544,7 +589,7 @@ textarea:focus:-ms-input-placeholder {
         }
       }
 
-      &.ng-select-opened > .ng-select-container {
+      &.ng-select-opened>.ng-select-container {
         .ng-arrow {
           padding: 5px 9px;
           background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -603,6 +648,7 @@ select {
 
 .mandetory_wrps {
   .form-control {
+
     /* &.ng-touched {
       &.ng-invalid {
         border-color: $error-color !important;
@@ -612,6 +658,7 @@ select {
       border-color: $error-color !important;
     }
   }
+
   /* .ng-touched {
     &.ng-invalid {
       border-color: $error-color !important;
@@ -640,10 +687,10 @@ select {
   font-size: 10px;
   // align-items: flex-start;
   align-items: center;
-    justify-content: flex-start;
+  justify-content: flex-start;
 
   .error_img {
-   // margin-top: 3px;
+    // margin-top: 3px;
     display: flex;
     max-width: 10px;
     margin-right: 5px;
@@ -674,8 +721,7 @@ select {
 .coming_soon {
   width: 100%;
   height: 100vh;
-  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/coming_soon_bg.webp)
-    no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/coming_soon_bg.webp) no-repeat;
   background-size: cover;
   position: relative;
 
@@ -911,6 +957,98 @@ select {
 
 //<!-- Close Coming Soon page css -->
 
+//<!-- home slider css -->
+.home_bg_slider {
+  //height: calc(100vh - 100px);
+  height: 100vh;
+  min-height: 610px;
+  max-height: 650px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include ipad-view{
+    height: 100vh;
+    min-height: 580px;
+  }
+
+  @include tab-view{
+    min-height: 710px;
+  }
+
+  .carousel {
+    border-radius: 0 !important;
+
+    .slide {
+      border-radius: 0 !important;
+
+      &:hover {
+        transform: scale(1);
+      }
+    }
+
+    .control {
+
+      @include tab-view{
+        //display: none;
+        display: block;
+      }
+
+      .arrow{
+        @include tab-view{
+          border: none;
+        }
+      }
+      
+      &.prev {
+        opacity: 0;
+
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &.next {
+        opacity: 0;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+  }
+
+  .boolean_nav {
+    z-index: 9;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: 10px;
+    justify-content: center;
+    width: 100%;
+
+    li {
+      margin: 0 2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      padding: 0 !important;
+      background-color: $box-border-color;
+
+      &.active {
+        background-color: $primary-color;
+      }
+
+    }
+  }
+}
+
+//<!-- home slider css -->
+
 //<!--  Start Banner Section css -->
 .home_banner {
   .banner_inner {
@@ -1049,6 +1187,34 @@ select {
 
               .class_section {
                 width: 110px;
+
+                &.w_o_arrow {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  line-height: 32px;
+                  border-radius: 16px;
+                  padding: 0 8px;
+                  border: 1px solid $text-grey;
+                  background: $text-white;
+                  color: $text-grey;
+                  text-decoration: none;
+                  font-size: 14px;
+                  font-weight: 500;
+                  letter-spacing: 0.28px;
+
+                  .search_area {
+                    background-color: transparent;
+
+                    .class_sec_info {
+                      cursor: default;
+                    }
+                  }
+
+                  .drop_aerrow {
+                    display: none;
+                  }
+                }
 
                 @include mobile-view {
                   width: 100px;
@@ -1474,6 +1640,7 @@ select {
                           }
                         }
                       }
+
                       label {
                         width: 100%;
                         margin-bottom: 0px;
@@ -1615,8 +1782,7 @@ select {
                           color: $text-black;
                           font-weight: 600;
                           padding: 0 15px 0 70px;
-                          background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
-                            center left 15px no-repeat !important;
+                          background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
 
                           @media (max-width: 575px) {
                             .calender-responsive-view {
@@ -1937,6 +2103,34 @@ select {
           .class_section {
             width: 100%;
 
+            &.w_o_arrow {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              line-height: 32px;
+              border-radius: 16px;
+              padding: 0 8px;
+              border: 1px solid $text-grey;
+              background: $text-white;
+              color: $text-grey;
+              text-decoration: none;
+              font-size: 14px;
+              font-weight: 500;
+              letter-spacing: 0.28px;
+
+              .search_area {
+                background-color: transparent;
+
+                .class_sec_info {
+                  cursor: default;
+                }
+              }
+
+              .drop_aerrow {
+                display: none;
+              }
+            }
+
             label {
               width: 100%;
               margin-bottom: 0px;
@@ -1963,8 +2157,8 @@ select {
                 cursor: pointer;
 
                 @include tab-view {
-                  padding-left: 0;
-                  margin-right: 10px;
+                  padding: 0 13px;
+                  margin-right: 0;
                 }
 
                 span {
@@ -2225,6 +2419,10 @@ select {
                     align-items: center;
                     padding: 0 0 20px;
 
+                    &:last-child {
+                      padding: 0;
+                    }
+
                     .left {
                       font-size: 10px;
                       font-weight: 400;
@@ -2299,7 +2497,7 @@ select {
             margin: 0 5px 5px 0;
 
             &.class_resp {
-              width: 120px;
+              // width: 120px;
             }
 
             &.travellers_resp {
@@ -2379,6 +2577,7 @@ select {
                     border: 1px solid $box-border-color;
                     border-radius: 8px;
                     background: $background-white;
+
                     @include tab-view {
                       padding: 6px 0;
                     }
@@ -2494,8 +2693,7 @@ select {
                       color: $text-black;
                       font-weight: 600;
                       padding: 0 0 0 60px;
-                      background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
-                        center left 15px no-repeat !important;
+                      background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center left 15px no-repeat !important;
 
                       @media (max-width: 575px) {
                         .calender-responsive-view {
@@ -2653,11 +2851,9 @@ select {
   padding: 100px 0px 100px;
   background: $background-white;
 
-  @media (max-width: 1199px) {
-  }
+  @media (max-width: 1199px) {}
 
-  @media (max-width: 767px) {
-  }
+  @media (max-width: 767px) {}
 
   .featured_list {
     width: 100%;
@@ -2697,12 +2893,9 @@ select {
             &:after {
               width: 100%;
               height: 35%;
-              background: linear-gradient(
-                  180deg,
+              background: linear-gradient(180deg,
                   $gradient-white 0%,
-                  $gradient-blue 100%
-                )
-                0% 0% no-repeat;
+                  $gradient-blue 100%) 0% 0% no-repeat;
               position: absolute;
               bottom: 0;
               left: 0;
@@ -2863,8 +3056,7 @@ select {
 .user_benefits {
   width: 100%;
   padding: 100px 0;
-  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/user_benefits_bg.webp)
-    no-repeat;
+  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/user_benefits_bg.webp) no-repeat;
   background-size: cover;
   background-attachment: fixed;
   position: relative;
@@ -2879,8 +3071,7 @@ select {
     position: absolute;
     top: 0;
     left: 0;
-    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/gradient_bg-im.svg)
-      no-repeat;
+    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/gradient_bg-im.svg) no-repeat;
     background-size: cover;
     content: "";
   }
@@ -3354,6 +3545,7 @@ select {
     width: 100%;
     padding: 50px 0 30px;
     background: $background-blue;
+
     @include tab-view {
       padding: 40px 0 25px;
     }
@@ -3373,9 +3565,11 @@ select {
           text-align: center;
           margin-bottom: 30px;
         }
+
         @include tab-view {
           margin-bottom: 20px;
         }
+
         a {
           width: auto;
           display: inline-block;
@@ -3482,6 +3676,7 @@ select {
             //width: 100%;
             //}
           }
+
           @include tab-view {
             margin-bottom: 0;
           }
@@ -3492,6 +3687,7 @@ select {
             color: $box-border-color;
             font-weight: 600;
             margin: 0 0 15px;
+
             @include tab-view {
               margin: 30px 0 15px;
               font-size: 12px;
@@ -3516,10 +3712,12 @@ select {
                 font-size: 14px;
                 color: $box-border-color;
                 font-weight: 600;
+
                 //opacity: 0.7;
                 @include tab-view {
                   font-size: 12px;
                 }
+
                 &:hover {
                   color: $pink;
                   opacity: 1;
@@ -3529,6 +3727,7 @@ select {
               &:last-child {
                 padding: 0;
                 margin: 0;
+
                 @include tab-view {
                   padding: 0 0 20px;
                 }
@@ -3809,9 +4008,11 @@ select {
 .block_contact_us_main {
   width: 100%;
   padding: 50px 0;
+
   .modal-content {
     border-radius: 10px;
   }
+
   .block_contact_inner {
     width: 100%;
     padding: 40px 15px;
@@ -3903,8 +4104,7 @@ select {
                 }
 
                 &.birth_date {
-                  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
-                    no-repeat;
+                  background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
                   background-position: right center;
                 }
               }
@@ -3978,14 +4178,12 @@ select {
                         width: 0;
                         height: 0;
                         border: 4px solid transparent;
-                        border-color: $text-grey transparent transparent
-                          transparent;
+                        border-color: $text-grey transparent transparent transparent;
                       }
 
                       &.select-arrow-active {
                         &:after {
-                          border-color: transparent transparent $text-grey
-                            transparent;
+                          border-color: transparent transparent $text-grey transparent;
                           top: 11px;
                         }
                       }
@@ -4002,8 +4200,7 @@ select {
                       div {
                         padding: 8px 16px;
                         border: 1px solid transparent;
-                        border-color: transparent transparent rgba(0, 0, 0, 0.1)
-                          transparent;
+                        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
                         cursor: pointer;
                         user-select: none;
                         font-size: 14px;
@@ -4709,8 +4906,7 @@ select {
                   }
 
                   &.birth_date {
-                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
-                      no-repeat;
+                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
                     background-position: right center;
                   }
 
@@ -4771,14 +4967,12 @@ select {
                       width: 0;
                       height: 0;
                       border: 4px solid transparent;
-                      border-color: $text-grey transparent transparent
-                        transparent;
+                      border-color: $text-grey transparent transparent transparent;
                     }
 
                     &.select-arrow-active {
                       &:after {
-                        border-color: transparent transparent $text-grey
-                          transparent;
+                        border-color: transparent transparent $text-grey transparent;
                         top: 11px;
                       }
                     }
@@ -4795,8 +4989,7 @@ select {
                     div {
                       padding: 8px 16px;
                       border: 1px solid transparent;
-                      border-color: transparent transparent rgba(0, 0, 0, 0.1)
-                        transparent;
+                      border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
                       cursor: pointer;
                       user-select: none;
                       font-size: 14px;
@@ -5316,6 +5509,7 @@ select {
   }
 
   &.block_covid_19 {
+
     // h3 {
     //   color: $blue-text;
     //   font-size: 34px;
@@ -5509,6 +5703,7 @@ select {
     @include tab-view {
       padding: 0 0 70px;
     }
+
     .page_topbanner {
       margin: 0 0 25px;
       width: 100%;
@@ -5568,6 +5763,7 @@ select {
           font {
             font-size: 18px;
             font-family: "Poppins", sans-serif;
+
             @include tab-view {
               font-size: 14px;
             }
@@ -5704,4 +5900,11 @@ body {
 
 .red_underline {
   border-color: $error-color !important;
+}
+
+ngx-otp-input {
+  .inputStyles {
+    width: 64px !important;
+    height: 64px !important;
+  }
 }

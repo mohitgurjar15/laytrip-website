@@ -15,9 +15,21 @@ var FlightService = /** @class */ (function () {
     function FlightService(http, commonFunction) {
         this.http = http;
         this.commonFunction = commonFunction;
+        this.sortFilter = new rxjs_1.BehaviorSubject([]);
+        this.getLastApplyedSortFilter = this.sortFilter.asObservable();
     }
     FlightService.prototype.searchAirport = function (searchItem) {
         return this.http.get(environment_1.environment.apiUrl + "v1/flight/search-airport/" + searchItem)
+            .pipe(operators_1.catchError(this.handleError));
+    };
+    FlightService.prototype.searchRoute = function (searchItem, isFromLocation, alternateLocation) {
+        if (alternateLocation === void 0) { alternateLocation = ''; }
+        return this.http.get(environment_1.environment.apiUrl + "v1/flight/route/search?search=" + searchItem + "&is_from_location=" + isFromLocation + "&alternet_location=" + alternateLocation)
+            .pipe(operators_1.catchError(this.handleError));
+    };
+    FlightService.prototype.searchAirports = function (type) {
+        if (type === void 0) { type = ''; }
+        return this.http.get(environment_1.environment.apiUrl + "v1/flight/route/" + type)
             .pipe(operators_1.catchError(this.handleError));
     };
     FlightService.prototype.airRevalidate = function (routeCode) {
@@ -110,7 +122,7 @@ var FlightService = /** @class */ (function () {
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(operators_1.catchError(this.handleError));
     };
     FlightService.prototype.addFeedback = function (payload) {
-        return this.http.post(environment_1.environment.apiUrl + "v1/booking-feedback", payload, this.commonFunction.setHeaders())
+        return this.http.post(environment_1.environment.apiUrl + "v1/laytrip-feedback/add-laytrip-feedback", payload, this.commonFunction.setHeaders())
             .pipe(operators_1.catchError(this.handleError));
     };
     FlightService.prototype.getFlightBookingDetails = function (bookingId) {
@@ -132,6 +144,9 @@ var FlightService = /** @class */ (function () {
     FlightService.prototype.sendEmail = function (data) {
         var url = environment_1.environment.apiUrl + "v1/booking/share-booking-detail";
         return this.http.post(url, data, this.commonFunction.setHeaders()).pipe(operators_1.catchError(this.handleError));
+    };
+    FlightService.prototype.setSortFilter = function (filter) {
+        this.sortFilter.next(filter);
     };
     FlightService = __decorate([
         core_1.Injectable({

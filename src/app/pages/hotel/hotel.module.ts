@@ -22,6 +22,7 @@ import { CookieModule } from 'ngx-cookie';
 import { CalendarModule } from 'primeng/calendar';
 // // AGM (ANGULAR GOOGLE MAP)
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 // NGX-GALLERY
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -33,7 +34,7 @@ import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
 import { HotelPolicyPopupComponent } from './components/hotel-policy-popup/hotel-policy-popup.component';
 import { HomeModule } from '../home/home.module';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { NgxPaginationModule } from 'ngx-pagination';
+//import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -69,10 +70,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
       apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
       libraries: ['places']
     }),
+    AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule,
     NgxGalleryModule,
     HomeModule,
-    NgxPaginationModule,
+    //NgxPaginationModule,
     NgbModule
   ],
   exports: [

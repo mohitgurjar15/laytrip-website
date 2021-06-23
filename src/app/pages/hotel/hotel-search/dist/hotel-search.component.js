@@ -11,13 +11,14 @@ var core_1 = require("@angular/core");
 var environment_1 = require("../../../../environments/environment");
 var moment = require("moment");
 var HotelSearchComponent = /** @class */ (function () {
-    function HotelSearchComponent(route, hotelService, commonFunction, router, cd, renderer) {
+    function HotelSearchComponent(route, hotelService, commonFunction, router, cd, renderer, homeService) {
         this.route = route;
         this.hotelService = hotelService;
         this.commonFunction = commonFunction;
         this.router = router;
         this.cd = cd;
         this.renderer = renderer;
+        this.homeService = homeService;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.calenderPrices = [];
         this.loading = true;
@@ -39,13 +40,15 @@ var HotelSearchComponent = /** @class */ (function () {
     HotelSearchComponent.prototype.ngOnInit = function () {
         window.scroll(0, 0);
         this.renderer.addClass(document.body, 'cms-bgColor');
-        var info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+        var info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
         var payload = {
             check_in: this.route.snapshot.queryParams['check_in'],
             check_out: this.route.snapshot.queryParams['check_out'],
             latitude: this.route.snapshot.queryParams['latitude'],
             longitude: this.route.snapshot.queryParams['longitude'],
             city_id: this.route.snapshot.queryParams['city_id'],
+            hotel_id: this.route.snapshot.queryParams['hotel_id'],
+            // type: this.route.snapshot.queryParams['type'],
             rooms: info.rooms,
             adults: info.adults,
             children: info.child,
@@ -75,6 +78,7 @@ var HotelSearchComponent = /** @class */ (function () {
         });
     };
     HotelSearchComponent.prototype.sortHotels = function (event) {
+        console.log(event);
         this.hotelService.setSortFilter(event);
         var key = event.key, order = event.order;
         if (key === 'total') {
@@ -160,6 +164,9 @@ var HotelSearchComponent = /** @class */ (function () {
             });
         }
     };
+    HotelSearchComponent.prototype.closeModal = function () {
+        $('#filter_mob_modal').modal('hide');
+    };
     HotelSearchComponent.prototype.filterHotel = function (event) {
         var _this = this;
         setTimeout(function () {
@@ -185,11 +192,31 @@ var HotelSearchComponent = /** @class */ (function () {
         queryParams.check_out = moment(event.check_out).format('YYYY-MM-DD');
         queryParams.latitude = parseFloat(event.latitude);
         queryParams.longitude = parseFloat(event.longitude);
-        queryParams.itenery = btoa(JSON.stringify(event.occupancies));
-        queryParams.location = btoa(JSON.stringify(locations));
+        queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(event.occupancies)));
+        queryParams.location = btoa(encodeURIComponent(JSON.stringify(locations))).replace(/\=+$/, '');
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
             _this.router.navigate(["" + urlData.url], { queryParams: queryParams, queryParamsHandling: 'merge' });
         });
+    };
+    HotelSearchComponent.prototype.moduleTabClick = function (tabName) {
+        if (tabName == 'flight') {
+            this.homeService.setActiveTab(tabName);
+            if (this.commonFunction.isRefferal()) {
+                var parms = this.commonFunction.getRefferalParms();
+                var queryParams = {};
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                if (parms.utm_medium) {
+                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                }
+                if (parms.utm_campaign) {
+                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+                this.router.navigate(['/'], { queryParams: queryParams });
+            }
+            else {
+                this.router.navigate(['/']);
+            }
+        }
     };
     HotelSearchComponent = __decorate([
         core_1.Component({

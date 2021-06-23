@@ -54,11 +54,11 @@
           <div class="block_feedback_form">
             <div class="feedback_comment">
               <textarea formControlName="comment" placeholder="Comments"></textarea>
-              <div *ngIf="(submitted  || feedbackForm.controls.comment.touched) && feedbackForm.controls.comment.errors"
+              <!-- <div *ngIf="(submitted  || feedbackForm.controls.comment.touched) && feedbackForm.controls.comment.errors"
                 class="focus-input100 login-error" style="text-align: left;">
                 <div *ngIf="feedbackForm.controls.comment.errors.required" class="text-danger">Please add your comments.
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="feedback_btn">
               <button type="submit"> <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>&nbsp;Submit </button>

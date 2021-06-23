@@ -324,11 +324,11 @@
 .modal_otp_block .modal-body .form_row .text_field {
   width: 100%;
 }
-.modal_otp_block .modal-body .form_row .text_field ng-otp-input {
+.modal_otp_block .modal-body .form_row .text_field ngx-otp-input {
   width: 100%;
   display: flex;
 }
-.modal_otp_block .modal-body .form_row .text_field ng-otp-input .ng-star-inserted .wrapper {
+.modal_otp_block .modal-body .form_row .text_field ngx-otp-input .ng-star-inserted .wrapper {
   display: flex;
   justify-content: center;
 }

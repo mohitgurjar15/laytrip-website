@@ -10727,6 +10727,10 @@ app-flight-search-bar .modify_search .flight_tab .tab-content .flight_search .fl
   width: calc(100% - -18%) !important;
 }
 
+.child_scrollbox .ng-scrollbar-layout .ng-scrollbar-layout .ng-scroll-view-container .ng-scroll-view {
+  width: calc(100% - -100%) !important;
+}
+
 .wrapper {
   position: relative;
   min-height: calc(100vh - 50px);
@@ -10914,6 +10918,10 @@ a:hover {
     right: 0;
     height: 12px;
   }
+}
+
+.country_selection .ng-select.ng-select-disabled .ng-select-container {
+  background-color: #ffffff;
 }
 
 .dobs_account .form-control {
@@ -11257,10 +11265,10 @@ select:focus {
   display: flex;
   margin-top: 5px;
   font-size: 10px;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: flex-start;
 }
 .error_field .error_img {
-  margin-top: 3px;
   display: flex;
   max-width: 10px;
   margin-right: 5px;
@@ -11503,6 +11511,69 @@ select:focus {
   }
 }
 
+.home_bg_slider {
+  height: 100vh;
+  min-height: 610px;
+  max-height: 650px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 991px) {
+  .home_bg_slider {
+    height: 100vh;
+    min-height: 580px;
+  }
+}
+.home_bg_slider .carousel {
+  border-radius: 0 !important;
+}
+.home_bg_slider .carousel .slide {
+  border-radius: 0 !important;
+}
+.home_bg_slider .carousel .slide:hover {
+  transform: scale(1);
+}
+@media (max-width: 768px) {
+  .home_bg_slider .carousel .control {
+    display: none;
+  }
+}
+.home_bg_slider .carousel .control.prev {
+  opacity: 0;
+}
+.home_bg_slider .carousel .control.prev:hover {
+  opacity: 1;
+}
+.home_bg_slider .carousel .control.next {
+  opacity: 0;
+}
+.home_bg_slider .carousel .control.next:hover {
+  opacity: 1;
+}
+.home_bg_slider .boolean_nav {
+  z-index: 9;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 10px;
+  justify-content: center;
+  width: 100%;
+}
+.home_bg_slider .boolean_nav li {
+  margin: 0 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  padding: 0 !important;
+  background-color: #d6d6d6;
+}
+.home_bg_slider .boolean_nav li.active {
+  background-color: #1943ff;
+}
+
 .home_banner .banner_inner .banner_text {
   width: auto;
 }
@@ -11625,6 +11696,30 @@ select:focus {
 }
 .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section {
   width: 110px;
+}
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section.w_o_arrow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  line-height: 32px;
+  border-radius: 16px;
+  padding: 0 8px;
+  border: 1px solid #8188ab;
+  background: #ffffff;
+  color: #8188ab;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.28px;
+}
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section.w_o_arrow .search_area {
+  background-color: transparent;
+}
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section.w_o_arrow .search_area .class_sec_info {
+  cursor: default;
+}
+.home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section.w_o_arrow .drop_aerrow {
+  display: none;
 }
 @media (max-width: 558px) {
   .home_banner .banner_inner .banner_tab .tab-content .flight_tab .nav-tabs li .class_section {
@@ -12323,6 +12418,30 @@ select:focus {
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section {
   width: 100%;
 }
+.search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section.w_o_arrow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  line-height: 32px;
+  border-radius: 16px;
+  padding: 0 8px;
+  border: 1px solid #8188ab;
+  background: #ffffff;
+  color: #8188ab;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.28px;
+}
+.search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section.w_o_arrow .search_area {
+  background-color: transparent;
+}
+.search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section.w_o_arrow .search_area .class_sec_info {
+  cursor: default;
+}
+.search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section.w_o_arrow .drop_aerrow {
+  display: none;
+}
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section label {
   width: 100%;
   margin-bottom: 0px;
@@ -12349,8 +12468,8 @@ select:focus {
 }
 @media (max-width: 768px) {
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section .search_area .class_sec_info {
-    padding-left: 0;
-    margin-right: 10px;
+    padding: 0 13px;
+    margin-right: 0;
   }
 }
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .class_section .search_area .class_sec_info span {
@@ -12514,6 +12633,9 @@ select:focus {
   align-items: center;
   padding: 0 0 20px;
 }
+.search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block ul li:last-child {
+  padding: 0;
+}
 .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li .travellers .search_area .traveller_add_block ul li .left {
   font-size: 10px;
   font-weight: 400;
@@ -12573,9 +12695,6 @@ select:focus {
   }
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li {
     margin: 0 5px 5px 0;
-  }
-  .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li.class_resp {
-    width: 120px;
   }
   .search_tab_listing_wrapper .searchbar_box_common .flight_tab .nav-tabs li.travellers_resp {
     width: 48%;
@@ -15437,4 +15556,9 @@ body.modal-open .site_header.fixed-top {
 
 .red_underline {
   border-color: #ff0000 !important;
+}
+
+ngx-otp-input .inputStyles {
+  width: 64px !important;
+  height: 64px !important;
 }

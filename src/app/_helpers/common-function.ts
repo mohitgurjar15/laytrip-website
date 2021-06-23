@@ -27,6 +27,9 @@ export class CommonFunction {
         return modelBox = false;
     }
 
+    onRightClickDisabled(event) {
+        event.preventDefault();
+    }
     parseDateWithFormat(date) {
         if (date.departuredate) {
             return {
@@ -67,7 +70,8 @@ export class CommonFunction {
         if (accessToken) {
             reqData = {
                 headers: {
-                    Authorization: `Bearer ${accessToken}`
+                    Authorization: `Bearer ${accessToken}`,
+                    referral_id: this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``
                 },
             };
         }
@@ -76,9 +80,22 @@ export class CommonFunction {
             Object.keys(params).map(k => {
                 reqData.headers[k] = params[k];
             });
+            reqData.headers.referral_id = this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``;
             //reqData.headers = reqParams;
         }
         return reqData;
+    }
+
+    setWithoutLoginHeader(){
+        if(this.route.snapshot.queryParams['utm_source']){
+        return {
+            headers: {
+                referral_id: this.route.snapshot.queryParams['utm_source'] ? `${this.route.snapshot.queryParams['utm_source']}` : ``
+            },
+        };
+        } else {
+        return {}
+        }
     }
 
     convertDateFormat(date, sourceFormat, languageCode = null) {
@@ -242,8 +259,30 @@ export class CommonFunction {
             event.preventDefault();
     }
 
-    convertTime(time,sourceFormat,targetFormat){
+    convertTime(time, sourceFormat, targetFormat) {
         return moment(time, sourceFormat).format(targetFormat)
+    }
+
+    isRefferal() {
+        // console.log("utm_source",this.route.snapshot.queryParams['utm_source'])
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
+            return true
+        }else {
+            return false;
+        } 
+    }
+    getRefferalParms(){
+        var parms : any = {};
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_source']) {
+            parms.utm_source = this.route.snapshot.queryParams['utm_source'];
+        } 
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_medium']) {
+            parms.utm_medium = this.route.snapshot.queryParams['utm_medium'];
+        } 
+        if (this.route.snapshot.queryParams && this.route.snapshot.queryParams['utm_campaign']) {
+            parms.utm_campaign =  this.route.snapshot.queryParams['utm_campaign'];
+        } 
+        return parms;
     }
 }
 
