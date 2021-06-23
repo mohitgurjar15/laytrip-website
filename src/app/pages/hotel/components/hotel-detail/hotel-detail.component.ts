@@ -149,7 +149,7 @@ export class HotelDetailComponent implements OnInit {
           country_name: res.hotel.address.country_name,
           rating: res.hotel.rating,
           review_rating: res.hotel.review_rating,
-          description: res.hotel.description,
+          description: this.formatLongText(res.hotel.description),
           amenities: res.hotel.amenities,
           hotelLocations: res.hotel.geocodes,
           latitude : parseFloat(res.hotel.geocodes.latitude),
@@ -176,6 +176,26 @@ export class HotelDetailComponent implements OnInit {
       this.loading = false;
       this.isNotFound=true;  
     });
+  }
+
+  formatLongText(text: string) {
+    if(text.endsWith(".")) 
+      text += " ";
+    else
+      text += ". ";
+    let tokens: string[] = text.split(". ");
+    let result: string = "";
+    let offset: number = 0;
+
+    for(let i: number = 0; i < tokens.length; i++) {
+      if((result.length - offset) >= 100) {
+        result += "<br><br>";
+        offset = result.length;
+      }
+      result += tokens[i] + ".";
+    }
+
+    return result;
   }
 
   counter(i: any) {
