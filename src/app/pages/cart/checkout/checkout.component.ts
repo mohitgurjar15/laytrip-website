@@ -562,7 +562,10 @@ export class CheckoutComponent implements OnInit {
 
               let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
               
-              var queryParams : any = {};
+              redirection += res.auth_url ? '&auth_url='+res.auth_url : '';
+              
+              var queryParams: any = {};
+              
               if (this.commonFunction.isRefferal()) {
                 var parms = this.commonFunction.getRefferalParms();
                 redirection += redirection+parms.utm_source ? '&utm_source='+parms.utm_source : '';

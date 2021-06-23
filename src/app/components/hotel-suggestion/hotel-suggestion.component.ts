@@ -41,11 +41,12 @@ export class HotelSuggestionComponent implements OnInit {
   
   ngOnChanges(changes: SimpleChanges) {    
     
-    this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
+    /* this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
+      
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {        
         this.searchItem = hotelInfo.title;
       }
-    });
+    }); */
     
   }
 
@@ -128,7 +129,8 @@ export class HotelSuggestionComponent implements OnInit {
     }
     this.thisElementClicked = false;
   }
-  counter =0;
+  counter = 0;
+
   @HostListener('click')
   clickInside() {   
     this.counter+=1;
