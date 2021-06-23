@@ -521,21 +521,47 @@ agm-map {
 
                                     h4 {
                                         font-size: 12px;
-                                        display: -moz-box;
-                                        /* Mozilla */
-                                        display: -webkit-box;
-                                        /* WebKit */
-                                        display: box;
-                                        /* As specified */
-                                        -webkit-line-clamp: 3;
-                                        -moz-box-orient: vertical;
-                                        /* Mozilla */
-                                        -webkit-box-orient: vertical;
-                                        /* WebKit */
-                                        box-orient: vertical;
-                                        /* As specified */
-                                        overflow: hidden;
-                                        text-overflow: ellipsis;
+                                        width: 100%;
+
+                                        .wrapper_names {
+                                            display: flex;
+                                            width: 100%;
+
+                                            .hotel_names {
+                                                display: -moz-box;
+                                                /* Mozilla */
+                                                display: -webkit-box;
+                                                /* WebKit */
+                                                display: box;
+                                                /* As specified */
+                                                -webkit-line-clamp: 3;
+                                                -moz-box-orient: vertical;
+                                                /* Mozilla */
+                                                -webkit-box-orient: vertical;
+                                                /* WebKit */
+                                                box-orient: vertical;
+                                                /* As specified */
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                width: 100%;
+                                            }
+
+                                            .off_label {
+                                                display: flex;
+                                                background-color: #1CD304;
+                                                font-size: 9px;
+                                                line-height: 11px;
+                                                color: $text-white;
+                                                border-radius: 26px;
+                                                align-items: center;
+                                                justify-content: center;
+                                                text-align: center;
+                                                padding: 3px 3px;
+                                                min-width: 50px;
+                                                margin-left: 5px;
+                                                height: 20px;
+                                            }
+                                        }
 
                                         @include tab-view {
                                             margin: 0;
@@ -653,6 +679,18 @@ agm-map {
                                                 flex-direction: column;
                                                 font-size: 7px;
 
+                                                &.duel_prices {
+                                                    flex-direction: row;
+
+                                                    span {
+                                                        margin: 0;
+
+                                                        &:last-child {
+                                                            margin-left: 3px;
+                                                        }
+                                                    }
+                                                }
+
                                                 @include tab-view {
                                                     line-height: 14px;
                                                 }
@@ -669,6 +707,16 @@ agm-map {
                                         padding: 0px 21px;
                                         font-size: 12px;
                                         margin-bottom: 0;
+
+                                        @include tab-view {
+                                            padding: 0;
+                                            margin: 3px auto;
+                                            width: 82px;
+                                            height: 32px;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                        }
                                     }
 
                                     p {
@@ -848,7 +896,37 @@ agm-map {
                                             display: inline-block;
                                             width: 100%;
 
-                                            @media (max-width: 767px) {
+                                            .wrapper_names {
+                                                display: flex;
+                                                width: 100%;
+                                                align-items: center;
+                                                justify-content: flex-start;
+
+                                                .hotel_names {
+                                                    white-space: nowrap;
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    display: inline-block;
+                                                    // width: 100%;
+                                                }
+
+                                                .off_label {
+                                                    display: flex;
+                                                    background-color: #1CD304;
+                                                    font-size: 12px;
+                                                    line-height: 15px;
+                                                    color: $text-white;
+                                                    border-radius: 26px;
+                                                    align-items: center;
+                                                    justify-content: center;
+                                                    text-align: center;
+                                                    padding: 7px 6px;
+                                                    min-width: 60px;
+                                                    margin-left: 5px;
+                                                }
+                                            }
+
+                                            @include tab-view {
                                                 font-size: 16px;
                                             }
                                         }
@@ -1084,6 +1162,10 @@ agm-map {
                                     align-items: center;
                                     justify-content: center;
 
+                                    &.installment_type {
+                                        color: $mid_gray_bg;
+                                    }
+
                                     &:first-child {
                                         margin: 0 0 5px;
                                         color: $text-grey;
@@ -1093,6 +1175,11 @@ agm-map {
                                         font-size: 24px;
                                         color: $pink;
                                         font-weight: 600;
+
+                                        &.dashed_price {
+                                            text-decoration: line-through;
+                                            color: $mid_gray_bg !important;
+                                        }
                                     }
                                 }
 
@@ -1134,7 +1221,7 @@ agm-map {
                             color: $primary-color;
                         }
 
-                        &.block_pr {}
+                        // &.block_pr {}
                     }
                 }
 

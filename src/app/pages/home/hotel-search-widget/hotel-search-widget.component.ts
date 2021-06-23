@@ -1,11 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, Output, SimpleChanges, ViewChild ,EventEmitter} from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HomeService } from 'src/app/services/home.service';
+import { HomeService } from '../../../services/home.service';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -16,7 +16,9 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   @ViewChild('dateFilter', /* TODO: add static flag */ undefined) private dateFilter: any;
   s3BucketUrl = environment.s3BucketUrl;
+  @Input() currentSlide;
   countryCode: string;
+  @Output() currentChangeCounter = new EventEmitter();
   checkInDate = new Date();
   checkOutDate: any = new Date();
   rangeDates: Date[];
@@ -54,6 +56,8 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     ],
   };
+  progressInterval;
+  
   selectedGuest =
     {
       rooms: 1,
@@ -67,6 +71,8 @@ export class HotelSearchWidgetComponent implements OnInit {
   showCommingSoon: boolean = false;
   customStartDateValidation = "2021-06-02";
   customEndDateValidation = "2021-06-03";
+
+  isDatePickerOpen : boolean = false;
 
   constructor(
     public commonFunction: CommonFunction,
@@ -99,8 +105,7 @@ export class HotelSearchWidgetComponent implements OnInit {
         children: []
       },
     };
-
-    let host = window.location.origin;    
+    let host = window.location.origin;
     if (host.includes("staging")) {
       this.showCommingSoon = true;
     }
@@ -108,6 +113,23 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.homeService.getSlideOffers.subscribe(currentSlide => {
+      if(this.commonFunction.isRefferal()){
+        if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+
+          let keys: any = currentSlide;
+          this.dealDateValidation();
+          // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
+          this.fromDestinationInfo.city = this.fromDestinationInfo.title = keys.location.to.hotel_option.title;          
+          this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
+          this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = keys.location.to.hotel_option.geo_codes.long;
+          this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = keys.location.to.hotel_option.city_id;
+          this.searchHotelInfo.location = this.fromDestinationInfo;
+          this.validateSearch(true);
+        }
+      }
+    });
+    
     // this.checkInDate = moment(this.customStartDateValidation).toDate();
 
     if (new Date(this.customStartDateValidation) <= new Date()) {
@@ -121,9 +143,10 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.homeService.removeToString('hotel');
 
       this.checkInDate = moment(this.route.snapshot.queryParams['check_in']).toDate();
-      this.checkInMinDate = this.customStartDateValidation ? moment(this.customStartDateValidation).toDate() : moment();
+      this.checkInMinDate = moment().add(31, 'days').toDate();
 
       this.checkOutDate = moment(this.route.snapshot.queryParams['check_out']).isValid() ? moment(this.route.snapshot.queryParams['check_out']).toDate() : moment(this.route.snapshot.queryParams['check_in']).add(1, 'days').toDate();
+      
       this.checkOutMinDate = this.checkOutDate;
       this.rangeDates = [this.checkInDate, this.checkOutDate];
 
@@ -135,9 +158,11 @@ export class HotelSearchWidgetComponent implements OnInit {
         check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
         check_out: moment(this.checkOutDate).format('MM/DD/YYYY'),
         city_id: this.route.snapshot.queryParams['city_id'],
+        hotel_id: this.route.snapshot.queryParams['hotel_id'],
+        // type: this.route.snapshot.queryParams['type'],
       };
       if (this.route.snapshot.queryParams['location']) {
-        info = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+        info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['location'])));
         this.searchHotelInfo.location = info;
         if (info) {
           this.fromDestinationInfo.title = info.title;
@@ -148,25 +173,28 @@ export class HotelSearchWidgetComponent implements OnInit {
         }
       }
       if (this.route.snapshot.queryParams['itenery']) {
-        info = JSON.parse(atob(this.route.snapshot.queryParams['itenery']));
+        info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
         this.searchHotelInfo.occupancies = info;
       }
     } else {
       this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
       this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id;
+      this.searchHotelInfo.hotel_id = this.fromDestinationInfo.hotel_id;
+      // this.searchHotelInfo.type = this.fromDestinationInfo.type;
       this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long;
       this.searchHotelInfo.location = this.fromDestinationInfo;
       this.searchHotelInfo.occupancies = this.selectedGuest;
     }
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
-        this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
-        this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
         this.dealDateValidation();
+        // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
+        this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
         this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;
         this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = hotelInfo.long;
         this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = hotelInfo.city_id;
         this.searchHotelInfo.location = this.fromDestinationInfo;
+
         this.validateSearch(true);
       }
     });
@@ -177,9 +205,10 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (moment(moment(this.customStartDateValidation).subtract(31, 'days')).diff(moment(), 'days') > 0) {
       this.searchHotelInfo.check_in = this.checkInDate = moment(this.customStartDateValidation).toDate();
     } else {
-      this.searchHotelInfo.check_in = this.checkInDate = moment().add(31, 'days').toDate();
-    }
+      this.searchHotelInfo.check_in = this.checkInDate = moment().add(90, 'days').toDate();
+    }        
     this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
+    this.rangeDates = [this.checkInDate, this.checkOutDate];
   }
 
   setHotelDate() {
@@ -218,30 +247,70 @@ export class HotelSearchWidgetComponent implements OnInit {
   changeGuestInfo(event) {
     this.searchHotelInfo.occupancies = event;
   }
+  fromBinary(encoded) {
+    var binary = atob(encoded)
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < bytes.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    return String.fromCharCode(...new Uint16Array(bytes.buffer));
+  }
+
+  toBinary(string) {
+    const codeUnits = new Uint16Array(string.length);
+    for (let i = 0; i < codeUnits.length; i++) {
+      codeUnits[i] = string.charCodeAt(i);
+    }
+    return btoa(String.fromCharCode(...new Uint8Array(codeUnits.buffer)));
+  }
 
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
+    if ($('.hotel_desination').val() == '') {
+      this.validSearch = false;
+    }
     let queryParams: any = {};
+
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
     queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
-    // queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
+    queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
     queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
-    queryParams.itenery = btoa(JSON.stringify(this.searchHotelInfo.occupancies));
-    queryParams.location = btoa(JSON.stringify(this.searchHotelInfo.location));
+    queryParams.hotel_id = this.searchHotelInfo.type == "hotel" ? parseFloat(this.searchHotelInfo.hotel_id) : '';
+    // queryParams.type = this.searchHotelInfo.type ? this.searchHotelInfo.type : '';
+    queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
+    queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace(/\=+$/, '');
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if (parms.utm_medium) {
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if (parms.utm_campaign) {
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+    }
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
 
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['hotel/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
       });
+    } else {
+      this.validSearch = false;
     }
   }
 
   selectedHotel(event) {
+    if(event.type == 'city'){
+      this.searchHotelInfo.city_id = event.city_id;
+    } else {
+      this.searchHotelInfo.hotel_id = event.hotel_id;      
+    }
+    this.searchHotelInfo.type = event.type;      
     this.searchHotelInfo.location = event;
-    this.searchHotelInfo.city_id = event.city_id;
     this.searchHotelInfo.latitude = event.geo_codes.lat;
     this.searchHotelInfo.longitude = event.geo_codes.long;
     if (event && event.city_id == '' && event.objType === 'invalid') {
@@ -250,7 +319,31 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
-  validateSearch(event) {
+  counterChangeVal :number = 0;
+  validateSearch(event) {    
+    this.currentChangeCounter.emit(this.counterChangeVal += 1);
     this.validSearch = event;
   }
+  
+  counterValueChanged(event) {  
+    this.currentChangeCounter.emit(event);
+  }
+  
+  datepickerShow(){
+    this.isDatePickerOpen = true;  
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.isDatePickerOpen){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000);   
+    }
+  }
+  
+  datepickerClose(){      
+    this.isDatePickerOpen = false;
+  }
+
 }

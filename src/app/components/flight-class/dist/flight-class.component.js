@@ -9,37 +9,36 @@ exports.__esModule = true;
 exports.FlightClassComponent = void 0;
 var core_1 = require("@angular/core");
 var FlightClassComponent = /** @class */ (function () {
-    function FlightClassComponent(eRef) {
+    function FlightClassComponent(eRef, commonFunction) {
         this.eRef = eRef;
+        this.commonFunction = commonFunction;
         this.changeValue = new core_1.EventEmitter();
         this.showClass = false;
+        this.isRefferal = false;
     }
     FlightClassComponent.prototype.ngOnInit = function () {
         this.loadJquery();
+        this.isRefferal = this.commonFunction.isRefferal();
     };
     FlightClassComponent.prototype.loadJquery = function () {
-        /* $("body").click(function () {
-          $(".add_class_sec_open_").hide();
-        });
-    
-        $(".class_sec_info").click(function (e) {
-          e.stopPropagation();
-          if((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') ||
-          (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')
-          ){
+        $("body").click(function () {
             $(".add_class_sec_open_").hide();
-          } else {
-            $(".add_class_sec_open_").show();
-          }
-    
-          $(".add_traveler__open").hide();
         });
-    
-        $('.add_class_sec_open_').click(
-          function (e) {
+        $(".class_sec_info").click(function (e) {
             e.stopPropagation();
-          }
-        ); */
+            console.log(e.target);
+            if ((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') ||
+                (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')) {
+                $(".add_class_sec_open_").hide();
+            }
+            else {
+                $(".add_class_sec_open_").show();
+            }
+            $(".add_traveler__open").hide();
+        });
+        $('.add_class_sec_open_').click(function (e) {
+            e.stopPropagation();
+        });
     };
     FlightClassComponent.prototype.clickout = function (event) {
         if (this.eRef.nativeElement.contains(event.target)) {

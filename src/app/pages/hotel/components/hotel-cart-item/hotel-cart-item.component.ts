@@ -51,7 +51,6 @@ export class HotelCartItemComponent implements OnInit {
       windowClass: 'delete_cart_item_block', centered: true, backdrop: 'static',
       keyboard: false
     }).result.then((result) => {
-      console.log(result.STATUS," === ",MODAL_TYPE.DELETE)
       if (result.STATUS === MODAL_TYPE.DELETE) {
         this.deleteCart(cartId);
       }

@@ -2,8 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, Afte
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
-import { type } from 'os';
-// import { data } from './airport';
+import { CommonFunction } from '../../_helpers/common-function';
 
 
 @Component({
@@ -21,14 +20,21 @@ export class SearchAirportComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() controlName: FormControl;
   @Output() changeValue = new EventEmitter<any>();
-  @Output() searchItem = new EventEmitter<any>();
+  @Output() searchItem : any = new EventEmitter<any>();
+  @Output() flightSearchRoute = new EventEmitter<any>();
   @Input() defaultCity: any;
   @Input() airport;
+  @Input() inputName;
+  @Output() currentChangeCounter = new EventEmitter();
+  progressInterval;
+  counterChangeVal=0;
+  isInputFocus : boolean = false;
 
   constructor(
     private flightService: FlightService,
     public cd: ChangeDetectorRef,
-    public cookieService: CookieService
+    public cookieService: CookieService,
+    public commonFunction: CommonFunction,
   ) {
   }
 
@@ -38,7 +44,6 @@ export class SearchAirportComponent implements OnInit {
   loading = false;
 
   ngOnInit() {
-
     this.data[0] = this.airport ? this.airport : [];
     if(Object.keys(this.airport).length==0){
       this.data=[];
@@ -46,7 +51,6 @@ export class SearchAirportComponent implements OnInit {
   }
 
   searchAirport(searchItem) {
-    
     this.loading = true;
     let isFromLocation=this.id=='fromSearch'?'yes':'no';
     let alternateLocation='';
@@ -56,11 +60,11 @@ export class SearchAirportComponent implements OnInit {
     else{
       alternateLocation=localStorage.getItem('__from') || '';
     }
-
     this.flightService.searchRoute(searchItem,isFromLocation,alternateLocation).subscribe((response: any) => {
+      this.flightSearchRoute.emit(response);
       this.data = response.map(res => {
         this.loading = false;
-        return {
+        var searchRoute = {
           id: res.id,
           name: res.name,
           code: res.code,
@@ -69,6 +73,8 @@ export class SearchAirportComponent implements OnInit {
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
           parentId: 0
         };
+        
+        return searchRoute;
       });
     },
       error => {
@@ -79,8 +85,7 @@ export class SearchAirportComponent implements OnInit {
 
   onChangeSearch(event) {
     this.searchAirport(event.term);
-    console.log("event.term",event.term)
-    this.searchItem.emit({key : event.term,type : this.id})
+    // this.searchItem.emit({key : event.term,type : this.id})
   }
 
   selectEvent(event, index) {
@@ -102,10 +107,10 @@ export class SearchAirportComponent implements OnInit {
       localStorage.setItem('__to',this.selectedAirport.code)
       this.changeValue.emit({ key: 'toSearch', value: event });
     }
+    this.cd.detectChanges();
   }
 
   onRemove(event) {
-    console.log("innnnn")
     this.selectedAirport = {};
   }
 
@@ -127,12 +132,26 @@ export class SearchAirportComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
-    if (changes['airport']) {
-      this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];     
-      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
-      //this.data=[];
-    }
+    if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
+      this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ?  changes['airport'].currentValue.city : [];     
+      this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([],[changes['airport'].currentValue]) : [];
+    }    
   }
 
+  onFocus(){
+    this.isInputFocus = true;
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.isInputFocus){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000); 
+    }
+  }
+ 
+  onClose(event){
+    this.isInputFocus = false;
+  }
 }

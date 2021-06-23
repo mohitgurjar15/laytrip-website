@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -14,7 +14,16 @@ import { ToastrModule } from 'ngx-toastr';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
 import { AuthGuard } from './guard/auth.guard';
+import { PreloadingService } from './preloading.service';
 
+/* export function jokesProviderFactory(provider: PreloadingService) {
+  return () => provider.load();
+} */
+export function jokesProviderFactory(catService: PreloadingService) {
+  return (): Promise<any> => {
+    return catService.load();
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +64,13 @@ import { AuthGuard } from './guard/auth.guard';
         ] 
       } as SocialAuthServiceConfig,
     },
-    AuthGuard
+    AuthGuard,
+    PreloadingService,
+    { 
+      provide: APP_INITIALIZER, 
+      useFactory: jokesProviderFactory,
+      deps: [PreloadingService], multi: true
+    } 
   ],
   bootstrap: [AppComponent]
 })

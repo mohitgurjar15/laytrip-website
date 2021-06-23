@@ -109,7 +109,6 @@ export class BookingTravelerComponent implements OnInit {
   }
 
   checkIsChild(dob){
-    // console.log(dob);
     var adult12YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     var child2YrPastDate = moment().subtract(12, 'years').format("YYYY-MM-DD");
     var travellerDob = moment(dob).format('YYYY-MM-DD');

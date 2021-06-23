@@ -22,7 +22,6 @@ var FilterHotelComponent = /** @class */ (function () {
         this.isHotelSearch = false;
         this.shown = 'native';
         this.searchHotel = '';
-        this.sortHotel1 = new core_1.EventEmitter();
         this.filterHotel = new core_1.EventEmitter();
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.priceSlider = new forms_1.FormGroup({
@@ -105,8 +104,10 @@ var FilterHotelComponent = /** @class */ (function () {
         }
         this.loadJquery();
     };
+    FilterHotelComponent.prototype.closeModal = function () {
+        $('#filter_mob_modal').modal('hide');
+    };
     FilterHotelComponent.prototype.clearHotelSearch = function () {
-        console.log('close');
         this.isHotelSearch = false;
         this.hotelname = 'Search';
         $('.searchHotelName').val('');
@@ -268,7 +269,6 @@ var FilterHotelComponent = /** @class */ (function () {
         /* Filter hotels amenities */
         if (this.amenitiesArray.length) {
             filteredHotels = filteredHotels.filter(function (item) {
-                console.log(item.amenities.list, item.name);
                 return _this.amenitiesArray.every(function (r) { return item.amenities.list.includes(r); });
             });
         }
@@ -302,15 +302,14 @@ var FilterHotelComponent = /** @class */ (function () {
         this.hotelService.getSortFilter.subscribe(function (hotelInfo) {
             if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
                 var sortFilter = hotelInfo;
-                console.log(sortFilter.key);
                 if (sortFilter.key == 'rating') {
-                    filteredHotels = _this.ratingSortFilter(filteredHotels, sortFilter.order, sortFilter.key);
+                    filteredHotels = _this.ratingSortFilter(filteredHotels, sortFilter.key, sortFilter.order);
                 }
                 else if (sortFilter.key == 'name') {
-                    filteredHotels = _this.sortByHotelName(filteredHotels, sortFilter.order, sortFilter.key);
+                    filteredHotels = _this.sortByHotelName(filteredHotels, sortFilter.key, sortFilter.order);
                 }
                 else if (sortFilter.key == 'total') {
-                    filteredHotels = _this.sortPriceJSON(filteredHotels, sortFilter.order, sortFilter.key);
+                    filteredHotels = _this.sortPriceJSON(filteredHotels, sortFilter.key, sortFilter.order);
                 }
             }
         });
@@ -410,7 +409,7 @@ var FilterHotelComponent = /** @class */ (function () {
             }
         }
     };
-    FilterHotelComponent.prototype.ratingSortFilter = function (filteredHotels, order, key) {
+    FilterHotelComponent.prototype.ratingSortFilter = function (filteredHotels, key, order) {
         return filteredHotels.sort(function (a, b) {
             var x = a[key];
             var y = b[key];
@@ -422,7 +421,7 @@ var FilterHotelComponent = /** @class */ (function () {
             }
         });
     };
-    FilterHotelComponent.prototype.sortByHotelName = function (data, key, way) {
+    FilterHotelComponent.prototype.sortByHotelName = function (data, key, order) {
         if (typeof data === "undefined") {
             return data;
         }
@@ -430,16 +429,16 @@ var FilterHotelComponent = /** @class */ (function () {
             return data.sort(function (a, b) {
                 var x = a.name.toLowerCase();
                 var y = b.name.toLowerCase();
-                if (way === 'ASC') {
+                if (order === 'ASC') {
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 }
-                if (way === 'DESC') {
+                if (order === 'DESC') {
                     return ((x > y) ? -1 : ((x < y) ? 1 : 0));
                 }
             });
         }
     };
-    FilterHotelComponent.prototype.sortPriceJSON = function (data, key, way) {
+    FilterHotelComponent.prototype.sortPriceJSON = function (data, key, order) {
         if (typeof data === "undefined") {
             return data;
         }
@@ -447,19 +446,18 @@ var FilterHotelComponent = /** @class */ (function () {
             return data.sort(function (a, b) {
                 var x = a.secondary_start_price > 0 ? a.secondary_start_price : a.selling[key];
                 var y = b.secondary_start_price > 0 ? b.secondary_start_price : b.selling[key];
-                if (way === 'ASC') {
+                if (order === 'ASC') {
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 }
-                else if (way === 'DESC') {
+                else if (order === 'DESC') {
                     return ((x > y) ? -1 : ((x < y) ? 1 : 0));
                 }
             });
         }
     };
     __decorate([
-        core_1.ViewChild("scrollable", { static: true, read: core_1.ElementRef }),
-        core_1.Output()
-    ], FilterHotelComponent.prototype, "sortHotel1");
+        core_1.ViewChild("scrollable", { static: true, read: core_1.ElementRef })
+    ], FilterHotelComponent.prototype, "scrollbar");
     __decorate([
         core_1.Input()
     ], FilterHotelComponent.prototype, "hotelDetailsMain");

@@ -8,11 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.UserBenefitComponent = void 0;
 var core_1 = require("@angular/core");
-var jwt_helper_1 = require("src/app/_helpers/jwt.helper");
+var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var environment_1 = require("../../../../environments/environment");
 var UserBenefitComponent = /** @class */ (function () {
-    function UserBenefitComponent(router) {
+    function UserBenefitComponent(router, commonFunction) {
         this.router = router;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.loading = false;
     }
@@ -26,7 +27,21 @@ var UserBenefitComponent = /** @class */ (function () {
         this.loading = true;
         if (this.userDetails.roleId == 6) {
             this.loading = false;
-            this.router.navigate(['account/subscription']);
+            if (this.commonFunction.isRefferal()) {
+                var parms = this.commonFunction.getRefferalParms();
+                var queryParams = {};
+                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                if (parms.utm_medium) {
+                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                }
+                if (parms.utm_campaign) {
+                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                }
+                this.router.navigate(['account/subscription'], { queryParams: queryParams });
+            }
+            else {
+                this.router.navigate(['account/subscription']);
+            }
         }
         else if (this.userDetails.roleId == 7 || !this.userDetails.roleId) {
             this.loading = false;

@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.PaymentModeComponent = void 0;
 var core_1 = require("@angular/core");
 var moment = require("moment");
+var environment_1 = require("../../../environments/environment");
 var PaymentModeComponent = /** @class */ (function () {
     function PaymentModeComponent(genericService, commonFunction, toastr, cartService) {
         this.genericService = genericService;
@@ -22,6 +23,7 @@ var PaymentModeComponent = /** @class */ (function () {
         this.priceData = [];
         this.showFullPartialPayOption = true;
         this.isShowPartialPaymentDetails = true;
+        this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.instalmentRequest = {
             instalment_type: "weekly",
             checkin_date: '',
@@ -35,7 +37,6 @@ var PaymentModeComponent = /** @class */ (function () {
         this.additionalAmount = 0;
         this.totalLaycreditPoints = 0;
         this.instalmentAvavible = false;
-        this.payNowPrice = 0;
         this.weeklyInstalment = 0;
         this.biWeeklyInstalment = 0;
         this.montlyInstalment = 0;
@@ -50,11 +51,14 @@ var PaymentModeComponent = /** @class */ (function () {
         this.isBelowMinimumInstallment = false;
         this.isLayCreditLoading = false;
         this.isPaymentCalulcatorLoading = false;
+        this.show30DayMinValidation = false;
+        this.showPartialAndFullPaymentMixValidation = false;
     }
     PaymentModeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.cartService.getCartPrice.subscribe(function (cartPrices) {
             _this.cartPrices = cartPrices;
+            // console.log("this.cartPrices",this.cartPrices)
             _this.getTotalPrice();
             if (_this.instalmentRequest.checkin_date) {
                 _this.instalmentRequest.amount = _this.sellingPrice;
@@ -77,6 +81,7 @@ var PaymentModeComponent = /** @class */ (function () {
         this.genericService.getInstalemnts(this.instalmentRequest).subscribe(function (res) {
             _this.instalments = res;
             if (_this.instalments.instalment_available == true) {
+                _this.instalmentAvavible = true;
                 if (type1 != null && type1 == 'down-payment') {
                     _this.downPayments = _this.instalments.down_payment;
                     _this.redeemableLayCredit.emit(_this.sellingPrice);
@@ -87,7 +92,7 @@ var PaymentModeComponent = /** @class */ (function () {
                 }
                 if (_this.instalments.instalment_date[1].instalment_amount < 5 && type3 == null) {
                     if (_this.paymentType == 'instalment') {
-                        _this.toastr.warning(_this.minimumPriceValidationError, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
+                        //  this.toastr.warning(this.minimumPriceValidationError, 'Warning',{positionClass:'toast-top-center',easeTime:1000});
                         _this.togglePaymentMode('no-instalment');
                     }
                     _this.isBelowMinimumInstallment = true;
@@ -100,19 +105,52 @@ var PaymentModeComponent = /** @class */ (function () {
                     } */
                 }
                 _this.remainingAmount = _this.sellingPrice - _this.instalments.instalment_date[0].instalment_amount;
+                _this.getInstalmentData.emit({
+                    layCreditPoints: _this.laycreditpoints,
+                    instalmentType: _this.instalmentType,
+                    instalments: _this.instalments,
+                    remainingAmount: _this.remainingAmount,
+                    totalAmount: _this.sellingPrice,
+                    paymentType: _this.paymentType,
+                    selectedDownPayment: _this.selectedDownPaymentIndex
+                });
+                _this.cartService.setPaymentOptions({
+                    layCreditPoints: _this.laycreditpoints,
+                    instalmentType: _this.instalmentType,
+                    instalments: _this.instalments,
+                    remainingAmount: _this.remainingAmount,
+                    totalAmount: _this.sellingPrice,
+                    paymentType: _this.paymentType,
+                    selectedDownPayment: _this.selectedDownPaymentIndex
+                });
             }
-            _this.getInstalmentData.emit({
-                layCreditPoints: _this.laycreditpoints,
-                instalmentType: _this.instalmentType,
-                instalments: _this.instalments,
-                remainingAmount: _this.remainingAmount,
-                totalAmount: _this.sellingPrice
-            });
+            else {
+                _this.instalmentAvavible = false;
+                _this.paymentType = 'no-instalment';
+                _this.getInstalmentData.emit({
+                    layCreditPoints: _this.laycreditpoints,
+                    instalmentType: _this.instalmentType,
+                    instalments: _this.instalments,
+                    remainingAmount: _this.sellingPrice,
+                    totalAmount: _this.sellingPrice,
+                    paymentType: _this.paymentType,
+                    selectedDownPayment: _this.selectedDownPaymentIndex
+                });
+                _this.cartService.setPaymentOptions({
+                    layCreditPoints: _this.laycreditpoints,
+                    instalmentType: _this.instalmentType,
+                    instalments: _this.instalments,
+                    remainingAmount: _this.remainingAmount,
+                    totalAmount: _this.sellingPrice,
+                    paymentType: _this.paymentType,
+                    selectedDownPayment: _this.selectedDownPaymentIndex
+                });
+            }
         }, function (err) {
         });
     };
     PaymentModeComponent.prototype.ngOnChanges = function (changes) {
-        if (changes['laycreditpoints']) {
+        if (changes && changes['laycreditpoints']) {
             this.laycreditpoints = Number(changes['laycreditpoints'].currentValue);
             this.instalmentRequest.additional_amount = this.laycreditpoints;
             this.calculateInstalment('down-payment', null);
@@ -122,10 +160,7 @@ var PaymentModeComponent = /** @class */ (function () {
           this.instalmentRequest.amount= changes['priceData'].currentValue[0].selling_price;
         } */
     };
-    PaymentModeComponent.prototype.getPayNowAmount = function () {
-    };
     PaymentModeComponent.prototype.getTotalPrice = function () {
-        //this.sellingPrice=this.priceData[0].selling_price;
         var totalPrice = 0;
         if (this.cartPrices.length > 0) {
             var checkinDate = moment(this.cartPrices[0].departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
@@ -145,9 +180,22 @@ var PaymentModeComponent = /** @class */ (function () {
                 instalmentType: this.instalmentType,
                 instalments: this.instalments,
                 remainingAmount: this.remainingAmount,
-                totalAmount: this.sellingPrice
+                totalAmount: this.sellingPrice,
+                paymentType: this.paymentType,
+                selectedDownPayment: this.selectedDownPaymentIndex
             });
         }
+    };
+    PaymentModeComponent.prototype.getCheckinDate = function (module_Info, type) {
+        var checkinDate;
+        //console.log(module_Info)
+        if (type == 'flight') {
+            checkinDate = moment(module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
+        }
+        else if (type == 'hotel') {
+            checkinDate = moment(module_Info.input_data.check_in, "YYYY-MM-DD'").format("YYYY-MM-DD");
+        }
+        return checkinDate;
     };
     PaymentModeComponent.prototype.convertToNumber = function (number) {
         return Number(number);
@@ -161,7 +209,6 @@ var PaymentModeComponent = /** @class */ (function () {
         this.genericService.getAllInstalemnts(this.instalmentRequest).subscribe(function (res) {
             _this.isPaymentCalulcatorLoading = false;
             if (res.instalment_available == true) {
-                _this.instalmentAvavible = true;
                 _this.weeklyInstalment = res.weekly_instalments[1].instalment_amount;
                 _this.biWeeklyInstalment = res.biweekly_instalments[1].instalment_amount;
                 _this.montlyInstalment = res.monthly_instalments[1].instalment_amount;
@@ -190,10 +237,34 @@ var PaymentModeComponent = /** @class */ (function () {
      * @param type ['instalment','no-instalment']
      */
     PaymentModeComponent.prototype.togglePaymentMode = function (type) {
-        if (type == 'instalment' && this.isBelowMinimumInstallment) {
+        if (type == 'instalment' && !this.instalmentAvavible) {
+            // console.log("this.cartPricesLLLL",this.cartPrices)
+            if (this.cartPrices.length > 1) {
+                var checkBelow30DayBooking = this.cartPrices.findIndex(function (cart) { return cart.start_price == 0; });
+                if (checkBelow30DayBooking !== -1) {
+                    this.showPartialAndFullPaymentMixValidation = true;
+                }
+                else {
+                    this.show30DayMinValidation = true;
+                }
+            }
+            else {
+                this.show30DayMinValidation = true;
+            }
             return;
         }
         this.paymentType = type;
+        var paymentInfo = {
+            layCreditPoints: this.laycreditpoints,
+            instalmentType: this.instalmentType,
+            instalments: this.instalments,
+            remainingAmount: this.sellingPrice,
+            totalAmount: this.sellingPrice,
+            paymentType: this.paymentType,
+            selectedDownPayment: this.selectedDownPaymentIndex
+        };
+        this.getInstalmentData.emit(paymentInfo);
+        this.cartService.setPaymentOptions(paymentInfo);
     };
     /**
      *
@@ -202,6 +273,12 @@ var PaymentModeComponent = /** @class */ (function () {
     PaymentModeComponent.prototype.togglePaymentFrequency = function (type) {
         this.instalmentRequest.instalment_type = type;
         this.instalmentType = type;
+        /* let paymentInfo={
+          instalment_type : this.instalmentType,
+          payment_type : this.paymentType,
+          down_payment : this.selectedDownPaymentIndex
+        }
+        this.cartService.setPaymentOptions(paymentInfo); */
         this.calculateInstalment('down-payment', 'redeemable_point', 'set-default-down-payment');
         this.getAllInstalment();
     };
@@ -217,6 +294,12 @@ var PaymentModeComponent = /** @class */ (function () {
         //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][index]);
         this.calculateInstalment();
         this.getAllInstalment();
+        /* let paymentInfo={
+          instalment_type : this.instalmentType,
+          payment_type : this.paymentType,
+          down_payment : this.selectedDownPaymentIndex
+        }
+        this.cartService.setPaymentOptions(paymentInfo); */
     };
     PaymentModeComponent.prototype.applyLaycredit = function (laycreditpoints) {
         this.laycreditpoints = laycreditpoints;
@@ -231,7 +314,9 @@ var PaymentModeComponent = /** @class */ (function () {
                 instalmentType: this.instalmentType,
                 instalments: this.instalments,
                 remainingAmount: this.remainingAmount,
-                totalAmount: this.sellingPrice
+                totalAmount: this.sellingPrice,
+                paymentType: this.paymentType,
+                selectedDownPayment: this.selectedDownPaymentIndex
             });
         }
     };
@@ -244,6 +329,12 @@ var PaymentModeComponent = /** @class */ (function () {
         }, (function (error) {
             _this.isLayCreditLoading = false;
         }));
+    };
+    PaymentModeComponent.prototype.hideBelow30DayMinError = function () {
+        this.show30DayMinValidation = false;
+    };
+    PaymentModeComponent.prototype.hidePartialAndFullPaymentMixError = function () {
+        this.showPartialAndFullPaymentMixValidation = false;
     };
     __decorate([
         core_1.Output()

@@ -14,12 +14,13 @@ var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var verify_otp_component_1 = require("../verify-otp/verify-otp.component");
 var forgot_password_component_1 = require("../forgot-password/forgot-password.component");
 var SigninComponent = /** @class */ (function () {
-    function SigninComponent(modalService, formBuilder, userService, router, commonFunction, renderer) {
+    function SigninComponent(modalService, formBuilder, userService, router, commonFunction, travelerService, renderer) {
         this.modalService = modalService;
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.router = router;
         this.commonFunction = commonFunction;
+        this.travelerService = travelerService;
         this.renderer = renderer;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.signUpModal = false;
@@ -87,7 +88,6 @@ var SigninComponent = /** @class */ (function () {
                     }
                 }
             }, function (error) {
-                console.log(error);
                 _this.submitted = _this.loading = false;
                 if (error.status == 406) {
                     _this.emailForVerifyOtp = _this.loginForm.value.email;
@@ -170,7 +170,8 @@ var SigninComponent = /** @class */ (function () {
             _this.renderer.addClass(document.body, 'modal-open');
         }, 1500);
         this.modalService.open(forgot_password_component_1.ForgotPasswordComponent, {
-            windowClass: 'forgot_window', centered: true, backdrop: 'static',
+            windowClass: 'forgot_window', centered: true,
+            // backdrop: 'static',
             keyboard: false
         });
     };

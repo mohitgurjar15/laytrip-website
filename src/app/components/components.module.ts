@@ -59,8 +59,7 @@ import { BookingCompletionErrorPopupComponent } from './booking-completion-error
 import { AirportSuggestionComponent } from './airport-suggestion/airport-suggestion.component';
 import { HotelCartItemComponent } from '../pages/hotel/components/hotel-cart-item/hotel-cart-item.component';
 import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.component';
-
-
+import { CarouselComponent } from './carousel/carousel.component';
 @NgModule({
   declarations: [
     SearchAirportComponent,
@@ -105,7 +104,8 @@ import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.co
     BookingCompletionErrorPopupComponent,
     AirportSuggestionComponent,
     HotelCartItemComponent,
-    HotelSuggestionComponent
+    HotelSuggestionComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
@@ -125,7 +125,7 @@ import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.co
     NgxSpinnerModule,
     RouterModule,
     BsDatepickerModule.forRoot(),
-    NgxMaskModule.forRoot(),
+    NgxMaskModule.forRoot()
   ],
   exports: [
     SearchAirportComponent,
@@ -172,7 +172,8 @@ import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.co
     BookingCompletionErrorPopupComponent,
     AirportSuggestionComponent,
     TextMaskModule,
-    HotelSuggestionComponent
+    HotelSuggestionComponent,
+    CarouselComponent
   ],
   providers: [DatePipe, NgxSpinnerService, NgbActiveModal],
   entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent],

@@ -30,8 +30,6 @@ export class HotelsComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if(typeof changes['cartItem'].currentValue!='undefined'){
       this.cartItem=changes['cartItem'].currentValue; 
-      console.log(this.cartItem) 
-
       this.laytrip_cart_id=changes['laytrip_cart_id'].currentValue;
     }
   } 
@@ -43,7 +41,6 @@ export class HotelsComponent implements OnInit {
   }
 
   cancelCartIdRemove(event){
-    // console.log(event)
     this.laytripCartId.emit(event);  
   }
 

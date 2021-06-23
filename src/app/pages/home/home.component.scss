@@ -4,18 +4,70 @@
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+.container {
+    display: block;
+    height: 500px;
+    width: 100%;
+    padding: 2em;
+}
+
 //<!--  Start Banner Section css -->
 .home_banner {
     width: 100%;
     position: relative;
     //background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/flight-tab-new-bg.svg) !important;
-    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png) !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-position: center center !important;
+    // background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png) !important;
+    // background-repeat: no-repeat !important;
+    // background-size: cover !important;
+    // background-position: center center !important;
     // height: calc(100vh - 55px);
     //padding-bottom: 130px;
     z-index: 9;
+    touch-action: pan-y !important;
+
+    &.banner_bg {
+        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png) !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        background-position: center center !important;
+
+        .banner_inner {
+            bottom: 0;
+            right: 0;
+            left: 0;
+            padding: 80px 0 50px;
+            transform: translate(0px, 0px);
+            position: relative;
+            height: 100%;
+
+            .banner_text {
+                .block_left {
+                    padding: 0;
+                    @include tab-view {
+                        padding: 0;
+                    }
+                    &::before {
+                        content: '';
+                        position: relative;
+                        z-index: 0;
+                        background-image: none;
+                    }
+
+                    h2 {
+                        text-shadow: 0px 3px 6px #00000029;
+                        font-weight: 400;
+                        
+                    }
+
+                    p {
+                        text-shadow: 0px 3px 6px #00000029;
+                        margin-bottom: 1rem;
+                        max-width: 530px;
+                    }
+                }
+            }
+        }
+    }
 
     @include ipad-view {
         //padding-bottom: 60px;
@@ -34,6 +86,7 @@
     // 	content: '';
     // }
 
+
     .banner_inner {
         // position: relative;
         // top: 170px;
@@ -45,15 +98,23 @@
         right: 0;
         left: 0;
         //padding: 130px 0 50px;
-        padding: 80px 0 50px;
+        //padding: 80px 0 50px;
+        padding: 95px 0 50px;
         // transform: translate(0%, 28%);
         //transform: translate(0%, 0%);
-
+        position: absolute;
+        z-index: 99;
+        transform: translate(0%, -33%);
         //height: calc(100vh - 100px);
+
+        @include tab-max {
+            height: 100%;
+            transform: translate(0%, 27%);
+        }
 
         @include ipad-view {
             transform: translate(0%, 0%);
-            position: relative;
+            position: absolute;
             padding: 20px 0 70px;
             height: 100%;
         }
@@ -61,11 +122,36 @@
         .banner_text {
             width: auto;
             //margin-top: 60px;
-            margin-bottom: 135px;
+            //margin-bottom: 135px;
+            margin-bottom: 70px;
+            display: inline-block;
+            max-width: 760px;
 
-            @include tab-view{
-                margin-top: 0;
-                margin-bottom: 15px;
+            @include tab-view {
+                margin: 0 15px 15px;
+            }
+
+            .block_left {
+                width: 100%;
+                position: relative;
+                padding: 15px;
+                @include tab-view {
+                    padding: 10px 0;
+                }
+                &::before {
+                    content: '';
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: -1;
+                    top: 0;
+                    left: 0;
+                    background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/blurbackgrond.svg");
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    opacity: 0.46;
+                }
             }
 
             .banner_text_span {
@@ -89,7 +175,7 @@
                 font-size: 50px;
                 color: $text-white;
                 font-weight: 400;
-                margin-right: 10px;
+               // margin-right: 10px;
 
                 @include tab-view {
                     font-size: 27px;
@@ -100,8 +186,10 @@
             h2 {
                 font-size: 50px;
                 color: $text-white;
-                font-weight: 400;
+                font-weight: 600;
                 margin-right: 10px;
+                //line-height: 76px;
+                text-shadow: 0px 3px 6px #00000029;
 
                 span {
                     color: $primary-color;
@@ -120,17 +208,23 @@
             }
 
             p {
-                font-size: 29px;
+                max-width: 630px;
                 color: $text-white;
+                font-size: 25px;
+                line-height: 32px;
+                text-shadow: 0px 3px 6px #000000C3;
+                letter-spacing: 0.5px;
+                margin: 0;
 
-                @media(max-width: 767px) {
-                    font-size: 19px;
+                @include tab-view {
+                    font-size: 14px;
                     padding: 0 15px;
+                    line-height: 18px;
                 }
 
-                @media(max-width: 599px) {
-                    font-size: 17px;
-                }
+                // @media(max-width: 599px) {
+                //     font-size: 17px;
+                // }
             }
         }
 
@@ -209,7 +303,7 @@
                     // }
 
                     &.active {
-                       // background: $active-tab-text;
+                        // background: $active-tab-text;
                         //color: $background-white;
 
                         .active-icon {
@@ -353,7 +447,7 @@
     }
 }
 
-.disable_mod{
+.disable_mod {
     pointer-events: none;
 }
 

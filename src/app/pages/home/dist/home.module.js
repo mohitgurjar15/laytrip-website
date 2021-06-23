@@ -11,7 +11,6 @@ var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var home_routing_module_1 = require("./home-routing.module");
 var home_component_1 = require("./home.component");
-var core_2 = require("@ngx-translate/core");
 var components_module_1 = require("../../components/components.module");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var deal_component_1 = require("./deal/deal.component");
@@ -22,6 +21,15 @@ var mobile_and_subscribe_component_1 = require("./mobile-and-subscribe/mobile-an
 var partial_payment_component_1 = require("./partial-payment/partial-payment.component");
 var forms_1 = require("@angular/forms");
 var calendar_1 = require("primeng/calendar");
+var last_min_hotel_deal_component_1 = require("./last-min-hotel-deal/last-min-hotel-deal.component");
+var dr_adventure_component_1 = require("./dr-adventure/dr-adventure.component");
+var ngx_gallery_1 = require("ngx-gallery");
+var flight_search_widget_component_1 = require("./flight-search-widget/flight-search-widget.component");
+var hotel_search_widget_component_1 = require("./hotel-search-widget/hotel-search-widget.component");
+var vacation_search_widget_component_1 = require("./vacation-search-widget/vacation-search-widget.component");
+var ng_select_1 = require("@ng-select/ng-select");
+var cookie_policy_component_1 = require("../cookie-policy/cookie-policy.component");
+var angular_1 = require("swiper/angular");
 var HomeModule = /** @class */ (function () {
     function HomeModule() {
     }
@@ -35,17 +43,33 @@ var HomeModule = /** @class */ (function () {
                 user_benefit_component_1.UserBenefitComponent,
                 mobile_and_subscribe_component_1.MobileAndSubscribeComponent,
                 partial_payment_component_1.PartialPaymentComponent,
+                last_min_hotel_deal_component_1.LastMinHotelDealComponent,
+                dr_adventure_component_1.DrAdventureComponent,
+                flight_search_widget_component_1.FlightSearchWidgetComponent,
+                hotel_search_widget_component_1.HotelSearchWidgetComponent,
+                vacation_search_widget_component_1.VacationSearchWidgetComponent,
+                cookie_policy_component_1.CookiePolicyComponent
             ],
             imports: [
                 common_1.CommonModule,
                 home_routing_module_1.HomeRoutingModule,
-                core_2.TranslateModule,
                 components_module_1.ComponentsModule,
                 ng_bootstrap_1.NgbModule,
                 forms_1.FormsModule,
-                forms_1.ReactiveFormsModule,
-                calendar_1.CalendarModule
-            ]
+                forms_1.ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
+                calendar_1.CalendarModule,
+                ngx_gallery_1.NgxGalleryModule,
+                ng_select_1.NgSelectModule,
+                angular_1.SwiperModule
+            ],
+            exports: [
+                flight_search_widget_component_1.FlightSearchWidgetComponent,
+                hotel_search_widget_component_1.HotelSearchWidgetComponent,
+                vacation_search_widget_component_1.VacationSearchWidgetComponent
+            ],
+            schemas: [
+                core_1.CUSTOM_ELEMENTS_SCHEMA
+            ], entryComponents: [cookie_policy_component_1.CookiePolicyComponent]
         })
     ], HomeModule);
     return HomeModule;

@@ -56,7 +56,6 @@ export class AddGuestCardComponent implements OnInit {
   }
 
   expiryDateUpdate(event){
-    //console.log("event",this.expiryDate)
     this.cardDetails.expiry=moment(this.expiryDate).format('MM/YYYY');
     this.emitGuestCardDetails.emit(this.cardDetails);
   }

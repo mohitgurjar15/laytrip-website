@@ -1,15 +1,14 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {  NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from '../../../../services/hotel.service';
 import { environment } from '../../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { collect } from 'collect.js';
-import { CommonFunction } from '../../../../_helpers/common-function';
 import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
 import { CartService } from '../../../../services/cart.service';
+import { HomeService } from '../../../../services/home.service';
+import { CommonFunction } from '../../../../_helpers/common-function';
 declare var $: any;
 
 
@@ -54,11 +53,11 @@ export class HotelDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
-    private toastr: ToastrService,
+    public homeService: HomeService,
     private router: Router,
-    private commonFunction: CommonFunction,
     private modalService: NgbModal,
-    private cartService:CartService
+    private cartService:CartService,
+    private commonFunction:CommonFunction,
   ) { }
 
   ngOnInit() {
@@ -205,7 +204,21 @@ export class HotelDetailComponent implements OnInit {
           this.cartService.setCartItems(this.cartItems);
 
           localStorage.setItem('$crt', JSON.stringify(this.cartItems.length));
-          this.router.navigate([`cart/booking`]);
+          
+          if(this.commonFunction.isRefferal()){
+            var parms = this.commonFunction.getRefferalParms();
+            var queryParams: any = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if(parms.utm_medium){
+              queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if(parms.utm_campaign){
+              queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(['cart/checkout'],{ queryParams :queryParams});
+          } else {
+            this.router.navigate(['cart/checkout']);
+          }
         }
       }, error => {
         this.addCartLoading=false;
@@ -280,6 +293,26 @@ export class HotelDetailComponent implements OnInit {
     else{
       if(this.hotelRoomArray[roomNumber].activeSlide>1){
         this.hotelRoomArray[roomNumber].activeSlide-=1;
+      }
+    }
+  }
+
+  moduleTabClick(tabName) {
+    if (tabName == 'flight') {
+      this.homeService.setActiveTab(tabName)
+      if(this.commonFunction.isRefferal()){
+        var parms = this.commonFunction.getRefferalParms();
+        var queryParams: any = {};
+        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+        if(parms.utm_medium){
+          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+        }
+        if(parms.utm_campaign){
+          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+        }
+        this.router.navigate(['/'],{ queryParams : queryParams});
+      } else {
+        this.router.navigate(['/']);
       }
     }
   }

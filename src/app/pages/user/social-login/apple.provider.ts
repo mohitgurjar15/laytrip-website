@@ -45,8 +45,6 @@ export class AppleLoginProvider extends BaseLoginProvider {
         return new Promise((resolve, reject) => {
             try {
                 const data = AppleID.auth.signIn();
-                console.log(data)
-
                 resolve(data);
             } catch (er) {
                 console.log(er);

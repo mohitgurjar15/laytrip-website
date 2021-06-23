@@ -22,7 +22,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   shown = 'native';
   searchHotel ='';
   @ViewChild("scrollable", { static: true, read: ElementRef } as any)
-  @Output() sortHotel1 : any = new EventEmitter();
   scrollbar: ElementRef;
   contentWrapper: HTMLElement;
   @Input() hotelDetailsMain: any;
@@ -141,8 +140,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.loadJquery();
   }
 
+  closeModal() {
+    $('#filter_mob_modal').modal('hide');
+  }
   clearHotelSearch() {
-    console.log('close')
     this.isHotelSearch = false;
     this.hotelname = 'Search';
     $('.searchHotelName').val('');
@@ -321,7 +322,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     /* Filter hotels amenities */
     if (this.amenitiesArray.length) {
       filteredHotels = filteredHotels.filter(item => {
-        console.log(item.amenities.list,item.name)
         return this.amenitiesArray.every(r => item.amenities.list.includes(r));
       })
     }
@@ -357,13 +357,13 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     this.hotelService.getSortFilter.subscribe(hotelInfo=> {
       if(typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0){  
         var sortFilter :any = hotelInfo; 
-        console.log(sortFilter.key)
+
         if(sortFilter.key == 'rating'){        
-          filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.order,sortFilter.key);
+          filteredHotels = this.ratingSortFilter(filteredHotels,sortFilter.key,sortFilter.order);
         } else if(sortFilter.key == 'name'){
-          filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.order,sortFilter.key);
+          filteredHotels = this.sortByHotelName(filteredHotels,sortFilter.key,sortFilter.order);
         } else if(sortFilter.key == 'total'){
-          filteredHotels = this.sortPriceJSON(filteredHotels,sortFilter.order,sortFilter.key);
+          filteredHotels = this.sortPriceJSON(filteredHotels,sortFilter.key,sortFilter.order);
         }
       }      
     })
@@ -482,7 +482,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   
-  ratingSortFilter(filteredHotels,order,key){
+  ratingSortFilter(filteredHotels,key,order){
     return filteredHotels.sort(function (a, b) {
       var x = a[key];
       var y = b[key];
@@ -494,34 +494,34 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       }
     });
   }
-  sortByHotelName(data, key, way) {
 
+  sortByHotelName(data, key, order) {
     if (typeof data === "undefined") {
       return data;
     } else {
       return data.sort(function (a, b) {
         var x = a.name.toLowerCase();
         var y = b.name.toLowerCase();
-        if (way === 'ASC') {
+        if (order === 'ASC') {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         }
-        if (way === 'DESC') {
+        if (order === 'DESC') {
           return ((x > y) ? -1 : ((x < y) ? 1 : 0));
         }
       });
     }
   }
 
-  sortPriceJSON(data, key, way) {
+  sortPriceJSON(data, key, order) {
     if (typeof data === "undefined") {
       return data;
     } else {
       return data.sort(function (a, b) {
         var x = a.secondary_start_price > 0 ?  a.secondary_start_price : a.selling[key];
         var y = b.secondary_start_price > 0 ?  b.secondary_start_price : b.selling[key];
-        if (way === 'ASC') {        
+        if (order === 'ASC') {        
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        } else if (way === 'DESC') {         
+        } else if (order === 'DESC') {         
           return ((x > y) ? -1 : ((x < y) ? 1 : 0));
         }
       });

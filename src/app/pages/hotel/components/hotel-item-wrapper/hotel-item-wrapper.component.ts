@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChildren, QueryList, ChangeDetectorRef, ViewChild, NgZone } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +10,7 @@ import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from 'src/app/services/hotel.service';
 import { AgmInfoWindow } from '@agm/core';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { AgmSnazzyInfoWindow } from '@agm/snazzy-info-window';
 
 @Component({
   selector: 'app-hotel-item-wrapper',
@@ -73,13 +74,16 @@ export class HotelItemWrapperComponent implements OnInit {
   hotelCount: number = 0;
   previousHotelIndex: number = -1;
   @ViewChildren(NgbCarousel) carousel: QueryList<any>;
+  isMarkerClicked = false;
+  clickedHotelIndex;
 
   constructor(
     private route: ActivatedRoute,
     private commonFunction: CommonFunction,
     private genericService: GenericService,
     private hotelService: HotelService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private _zone: NgZone
   ) {
 
     this.galleryOptions = [
@@ -95,6 +99,7 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
+    // this.gm.nativeElement;
     this.carousel.toArray().forEach(el => {
     });
   }
@@ -110,7 +115,6 @@ export class HotelItemWrapperComponent implements OnInit {
       }
     }
     else {
-      console.log(this.hotelDetails[roomNumber].activeSlide, "---")
       if (this.hotelDetails[roomNumber].activeSlide > 1) {
         this.hotelDetails[roomNumber].activeSlide -= 1;
       }
@@ -131,7 +135,7 @@ export class HotelItemWrapperComponent implements OnInit {
         }
       });
     }
-    let hotelinfo = JSON.parse(atob(this.route.snapshot.queryParams['location']));
+    let hotelinfo = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['location'])));
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
     }
@@ -159,6 +163,7 @@ export class HotelItemWrapperComponent implements OnInit {
       }
       this.hotelCount = this.hotelDetails.length;
       this.currentPage = 1;
+      // this.noOfDataToShowInitially = this.hotelDetails.length;
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       this.hotelList = [...this.hotelListArray];
       if (this.bounds) {
@@ -166,6 +171,17 @@ export class HotelItemWrapperComponent implements OnInit {
       }
     });
   }
+
+  // carouselWithSwipe() {
+  //   $(document).ready(function () {
+  //     $(".mobile_carousel").swiperight(function () {
+  //       $(this).carousel('prev');
+  //     });
+  //     $(".mobile_carousel").swipeleft(function () {
+  //       $(this).carousel('next');
+  //     });
+  //   });
+  // }
 
   changeSlide(slideId) {
     console.log(slideId);
@@ -177,13 +193,11 @@ export class HotelItemWrapperComponent implements OnInit {
   //     for (let image of this.hotelDetails[i].images) {
   //       this.hotelDetails[i].galleryImages.splice(brokenImage, 1);
   //       this.cd.detectChanges();
-  //       console.log(this.hotelDetails[i].galleryImages);
   //     }
   //   }
   // }
 
   checkOnError(brokenImage) {
-    console.log(brokenImage);
     for (let i = 0; i < this.hotelDetails.length; i++) {
       this.hotelDetails[i].galleryImages = [];
       for (let image of this.hotelDetails[i].images) {
@@ -204,27 +218,23 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   onScrollDown() {
-
     if (this.isMapView) {
       return false;
     }
 
-    this.scrollLoading = true;
-    console.log("scrolled")
-    console.log(this.noOfDataToShowInitially, " <= ", this.hotelListArray.length)
+    this.scrollLoading = (this.hotelDetails.length != this.hotelListArray.length) ? true : false;
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.hotelDetails.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
         this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
         this.hotelList = [...this.hotelListArray];
+        this.hotelCount = this.hotelListArray.length;
         this.scrollLoading = false;
       } else {
         this.isFullListDisplayed = true;
         this.scrollLoading = false;
       }
     }, 1000);
-
-
   }
 
   closeWindow() {
@@ -234,21 +244,31 @@ export class HotelItemWrapperComponent implements OnInit {
     }
   }
 
-  displayHotelDetails(hotelId, infoWindow, type) {
+  openInfoWindow(infoWindow) {
+    infoWindow._openInfoWindow();
+  }
 
-    infoWindow.open();
-    if (this.previousInfoWindow == null)
-      this.previousInfoWindow = infoWindow;
-    else {
-      this.infoWindowOpened = infoWindow;
-      if (this.previousInfoWindow != null) {
-        this.previousInfoWindow.close();
-      }
-    }
-    this.previousInfoWindow = infoWindow
+  closeInfoWindow(infoWindow) {
+    infoWindow._closeInfoWindow();
+  }
+
+  displayHotelDetails(hotelId, infoWindow, type) {
+    this.isMarkerClicked = false;
+    this.clickedHotelIndex = '';
+    // if (this.previousInfoWindow == null) {
+    //   infoWindow.open();
+    //   this.previousInfoWindow = infoWindow;
+    // } else {
+    //   this.infoWindowOpened = infoWindow;
+    //   if (this.previousInfoWindow != null) {
+    //     this.previousInfoWindow.close();
+    //     this.previousInfoWindow = null;
+    //   }
+    // }
+    // this.previousInfoWindow = infoWindow;
 
     if (type === 'click') {
-
+      this.isMarkerClicked = true;
       if (this.previousHotelIndex > -1) {
         let previousHotel = this.hotelListArray[0];
         //console.log(this.previousHotelIndex,previousHotel)
@@ -260,6 +280,7 @@ export class HotelItemWrapperComponent implements OnInit {
       if (hotelIndex >= 0) {
         this.hotelListArray.unshift(this.hotelListArray.splice(hotelIndex, 1)[0]);
         this.previousHotelIndex = hotelIndex;
+        this.clickedHotelIndex = hotelIndex;
       }
       /* else{
         let hotel = this.hotelList.find(hotel => hotel.id == hotelId);
@@ -312,6 +333,8 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   differentView(view) {
+    this.isMarkerClicked = false;
+    this.clickedHotelIndex = '';
     this.isMapView = (view !== 'listView');
     if (this.isMapView) {
       if (this.bounds) {
@@ -342,6 +365,8 @@ export class HotelItemWrapperComponent implements OnInit {
   pageChanged(page) {
     this.currentPage = page;
     window.scroll(0, 0);
+    this.isMarkerClicked = false;
+    this.clickedHotelIndex = '';
   }
 
   getMapPrice(hotel) {
@@ -349,19 +374,43 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   checkMarkersInBounds(bounds) {
-    this.bounds = bounds;
-    if (this.isMapView) {
-      this.hotelListArray = [];
-      for (let hotel of this.hotelList) {
-        let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
-        if (this.bounds.contains(hotelPosition)) {
-          this.hotelListArray.push(hotel)
-          //this.hotelDetails=[...this.hotelListArray]
-        }
+    if (this.isMarkerClicked && this.clickedHotelIndex) {
+      let hotelIndex = this.hotelListArray.findIndex(hotel => hotel.id == this.clickedHotelIndex);
+      if (hotelIndex >= 0) {
+        this.hotelListArray.unshift(this.hotelListArray.splice(hotelIndex, 1)[0]);
+        this.previousHotelIndex = hotelIndex;
+        this.clickedHotelIndex = hotelIndex;
       }
+    } else {
+      this.isMarkerClicked = false;
+      this.clickedHotelIndex = '';
+      this.bounds = bounds;
+      if (this.isMapView) {
+        this.hotelListArray = [];
+        for (let hotel of this.hotelList) {
+          let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
+          if (this.bounds.contains(hotelPosition)) {
+            this.hotelListArray.push(hotel)
+            //this.hotelDetails=[...this.hotelListArray]
+          }
+        }
 
-      this.hotelCount = this.hotelListArray.length;
+        this.hotelCount = this.hotelListArray.length;
+      }
     }
+    // this.bounds = bounds;
+    // if (this.isMapView) {
+    //   this.hotelListArray = [];
+    //   for (let hotel of this.hotelList) {
+    //     let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
+    //     if (this.bounds.contains(hotelPosition)) {
+    //       this.hotelListArray.push(hotel)
+    //       //this.hotelDetails=[...this.hotelListArray]
+    //     }
+    //   }
+
+    //   this.hotelCount = this.hotelListArray.length;
+    // }
 
   }
 

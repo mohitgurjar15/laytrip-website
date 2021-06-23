@@ -66,7 +66,6 @@ export class AccountCardListComponent implements OnInit {
     (<ConfirmationModalComponent>modalRef.componentInstance).data = options;
     modalRef.result.then(result => {
       if (result.STATUS === MODAL_TYPE.YES) {
-        console.log(result);
         // this.userService.deleteCard().subscribe((res: any) => {
         //   if (res && res.message) {
         //     this.toastr.success('Card deleted successfully.', 'Success');

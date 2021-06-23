@@ -71,7 +71,6 @@ export class CardActionFormComponent implements OnInit {
       Spreedly.transferFocus("number");
       // Spreedly.setNumberFormat("maskedFormat");
       this.disabledSavecardbutton = false;
-      console.log('this.disabledSavecardbutton', this.disabledSavecardbutton);
     });
 
     Spreedly.on('paymentMethod', function (token, pmData) {
@@ -79,21 +78,16 @@ export class CardActionFormComponent implements OnInit {
       var tokenField = document.getElementById('payment_method_token');
       tokenField.setAttribute('value', token);
       this.token = token;
-      // console.log(this.cardForm.controls.payment_method_token.value);
       // this.cardForm.controls.payment_method_token.setValue(token);
-      console.log("this.token", token);
-      // console.log(pmData);
       let cardData = {
         card_type: pmData.card_type,
         card_holder_name: pmData.full_name,
         card_token: pmData.token,
         card_last_digit: pmData.last_four_digits
       };
-      console.log(cardData);
       this.saveCard(cardData)
       //this.submitPaymentForm(cardData);
       //var masterForm = document.getElementById('payment-form') as HTMLFormElement;
-      // console.log(masterForm);
       //masterForm.submit();
       // this.saveCard(cardData);
       // this.cardAddFormElement.nativeElement.submit();

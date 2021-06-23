@@ -11,10 +11,9 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../environments/environment");
 var AddCardComponent = /** @class */ (function () {
-    function AddCardComponent(genericService, formBuilder, toastr, spinner, commonFunction) {
+    function AddCardComponent(genericService, formBuilder, spinner, commonFunction) {
         this.genericService = genericService;
         this.formBuilder = formBuilder;
-        this.toastr = toastr;
         this.spinner = spinner;
         this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -82,11 +81,11 @@ var AddCardComponent = /** @class */ (function () {
         Spreedly.on('ready', function (frame) {
             Spreedly.setPlaceholder("number", "000 000 0000");
             Spreedly.setPlaceholder("cvv", "Enter CVV No.");
-            Spreedly.setFieldType("cvv", "text");
             Spreedly.setFieldType('number', 'text');
+            Spreedly.setFieldType('cvv', 'text');
             // Spreedly.setNumberFormat('maskedFormat');
             Spreedly.setStyle('number', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
-            Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border: none; padding-top: .96em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
+            Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .96em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
         });
         Spreedly.on('errors', function (errors) {
             $(".credit_card_error").hide();
@@ -95,12 +94,20 @@ var AddCardComponent = /** @class */ (function () {
                 $("#first_name").show();
                 $("#full_name").css("border-bottom", "2px solid #ff0000");
             }
+            else {
+                $("#full_name").css("border-bottom", "2px solid #d6d6d6");
+            }
             if ($("#month-year").val() == "") {
                 $("#month").show();
                 $("#month-year").css("border-bottom", "2px solid #ff0000");
             }
+            else {
+                $("#month-year").css("border-bottom", "2px solid #d6d6d6");
+            }
             for (var i = 0; i < errors.length; i++) {
                 var error = errors[i];
+                var errorBorder = "2px solid #ff0000";
+                // console.log(error["attribute"]);
                 if (error["attribute"]) {
                     $("#error_message").text("error");
                     if (error["attribute"] == 'month' || error["attribute"] == 'year') {
@@ -110,10 +117,27 @@ var AddCardComponent = /** @class */ (function () {
                     $("#" + error["attribute"]).show();
                     Spreedly.setStyle(error["attribute"], "border-bottom: 2px solid #ff0000;");
                 }
+                else if (error['status'] == 402) {
+                    $('#cardError').show();
+                    var errorMessage = document.getElementById('cardErrorMessage');
+                    errorMessage.innerHTML = "You have entered wrong credit card details.";
+                }
                 else {
                     $("#full_name").css("border-bottom", "2px solid #d6d6d6");
                     $("#month-year").css("border-bottom", "2px solid #d6d6d6");
                     Spreedly.setStyle(error["attribute"], "border-bottom: 2px solid #d6d6d6;");
+                }
+            }
+        });
+        Spreedly.on('fieldEvent', function (name, event, activeElement, inputData) {
+            if (event == 'input') {
+                if (inputData["validNumber"]) {
+                    Spreedly.setStyle('number', "border-bottom: 2px solid #d6d6d6;");
+                    $("#number").hide();
+                    $("#error_message").text("");
+                }
+                else {
+                    Spreedly.setStyle('number', "border-bottom: 2px solid #ff0000;");
                 }
             }
         });
@@ -185,9 +209,11 @@ var AddCardComponent = /** @class */ (function () {
     AddCardComponent.prototype.submitPaymentForm = function () {
         var _this = this;
         var paymentMethodFields = ['full_name', 'month-year'], options = {};
+        var normalBorder = "2px solid #d6d6d6";
         for (var i = 0; i < paymentMethodFields.length; i++) {
             var field = paymentMethodFields[i];
             var fieldEl = document.getElementById(field);
+            fieldEl.style.borderBottom = normalBorder;
             if (fieldEl.id === 'month-year') {
                 var value = fieldEl.value;
                 var values = value.split("/");
@@ -204,7 +230,6 @@ var AddCardComponent = /** @class */ (function () {
         }
         // Tokenize!
         Spreedly.tokenizeCreditCard(options);
-        console.log("Submit payment");
         setTimeout(function () {
             _this.cardListChangeCount += _this.cardListChangeCount + 1;
             _this.emitCardListChange.emit(_this.cardListChangeCount);
@@ -223,6 +248,13 @@ var AddCardComponent = /** @class */ (function () {
         }));
     };
     AddCardComponent.prototype.closeNewCardPanel = function () {
+        $('#cardError').hide();
+        Spreedly.reload();
+        $(".credit_card_error").hide();
+        $("#full_name").css("border-bottom", "2px solid #d6d6d6");
+        $("#month-year").css("border-bottom", "2px solid #d6d6d6");
+        // Spreedly.removeHandlers();
+        $("#payment-form")[0].reset();
         this.add_new_card.emit(false);
     };
     AddCardComponent.prototype.ngOnDestroy = function () {

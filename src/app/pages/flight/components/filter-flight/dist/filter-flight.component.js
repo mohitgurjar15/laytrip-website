@@ -12,8 +12,10 @@ var moment = require("moment");
 var environment_1 = require("../../../../../environments/environment");
 var forms_1 = require("@angular/forms");
 var FilterFlightComponent = /** @class */ (function () {
-    function FilterFlightComponent() {
+    function FilterFlightComponent(flightService, flightSearchComponent) {
         var _this = this;
+        this.flightService = flightService;
+        this.flightSearchComponent = flightSearchComponent;
         this.filterFlight = new core_1.EventEmitter();
         this.showMinAirline = 4;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
@@ -119,14 +121,17 @@ var FilterFlightComponent = /** @class */ (function () {
     FilterFlightComponent.prototype.toggleInbound = function () {
         this.isShowinbound = !this.isShowinbound;
     };
+    FilterFlightComponent.prototype.closeModal = function () {
+        $('#filter_mob_modal1').modal('hide');
+    };
     FilterFlightComponent.prototype.loadJquery = function () {
         //Start REsponsive Fliter js
         $(".responsive_filter_btn").click(function () {
-            $("#responsive_filter_show").slideDown("slow");
+            $("#responsive_filter_show").slideDown();
             $("body").addClass('overflow-hidden');
         });
         $(".filter_close > a").click(function () {
-            $("#responsive_filter_show").slideUp("slow");
+            $("#responsive_filter_show").slideUp();
             $("body").removeClass('overflow-hidden');
         });
         //Close REsponsive Fliter js
@@ -401,6 +406,46 @@ var FilterFlightComponent = /** @class */ (function () {
     
           })
         } */
+        this.flightService.getLastApplyedSortFilter.subscribe(function (filters) {
+            if (typeof filters != 'undefined' && Object.keys(filters).length > 0) {
+                var sortFilter = filters;
+                if (sortFilter.key === 'total_duration') {
+                    if (sortFilter.order === 'ASC') {
+                        filterdFlights = _this.sortByDuration(filterdFlights, sortFilter.key, sortFilter.order);
+                    }
+                    else if (sortFilter.order === 'DESC') {
+                        filterdFlights = _this.sortByDuration(filterdFlights, sortFilter.key, sortFilter.order);
+                    }
+                }
+                else if (sortFilter.key === 'arrival') {
+                    // this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
+                    if (sortFilter.order === 'ASC') {
+                        filterdFlights = _this.sortByArrival(filterdFlights, sortFilter.key, sortFilter.order);
+                    }
+                    else if (sortFilter.order === 'DESC') {
+                        filterdFlights = _this.sortByArrival(filterdFlights, sortFilter.key, sortFilter.order);
+                    }
+                }
+                else if (sortFilter.key === 'departure') {
+                    // this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, sortFilter.key, order);
+                    if (sortFilter.order === 'ASC') {
+                        filterdFlights = _this.sortByDeparture(filterdFlights, sortFilter.key, sortFilter.order);
+                    }
+                    else if (sortFilter.order === 'DESC') {
+                        filterdFlights = _this.sortByDeparture(filterdFlights, sortFilter.key, sortFilter.order);
+                    }
+                }
+                else {
+                    // filterdFlights = this.sortJSON(this.filterFlightDetails.items, sortFilter.key, sortFilter.order);
+                    if (sortFilter.order === 'ASC') {
+                        filterdFlights = _this.sortJSON(filterdFlights, sortFilter.key, sortFilter.order);
+                    }
+                    else if (sortFilter.order === 'DESC') {
+                        filterdFlights = _this.sortJSON(filterdFlights, sortFilter.key, sortFilter.order);
+                    }
+                }
+            }
+        });
         this.filterFlight.emit(filterdFlights);
     };
     FilterFlightComponent.prototype.ngOnChanges = function (changes) {
@@ -429,6 +474,75 @@ var FilterFlightComponent = /** @class */ (function () {
             }
             $("input:checkbox").prop('checked', false);
             this.filterFlights();
+        }
+    };
+    FilterFlightComponent.prototype.sortJSON = function (data, key, way) {
+        if (typeof data === "undefined") {
+            return data;
+        }
+        else {
+            return data.sort(function (a, b) {
+                var x = a[key];
+                var y = b[key];
+                if (way === 'ASC') {
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                }
+                if (way === 'DESC') {
+                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                }
+            });
+        }
+    };
+    FilterFlightComponent.prototype.sortByDuration = function (data, key, way) {
+        if (typeof data === "undefined") {
+            return data;
+        }
+        else {
+            return data.sort(function (a, b) {
+                var x = moment(a.arrival_date + " " + a.arrival_time, 'DD/MM/YYYY h:mm A').diff(moment(a.departure_date + " " + a.departure_time, 'DD/MM/YYYY hh:mm A'), 'seconds');
+                var y = moment(b.arrival_date + " " + b.arrival_time, 'DD/MM/YYYY h:mm A').diff(moment(b.departure_date + " " + b.departure_time, 'DD/MM/YYYY hh:mm A'), 'seconds');
+                if (way === 'ASC') {
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                }
+                if (way === 'DESC') {
+                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                }
+            });
+        }
+    };
+    FilterFlightComponent.prototype.sortByArrival = function (data, key, way) {
+        if (typeof data === "undefined") {
+            return data;
+        }
+        else {
+            //console.log("data",key,way,data)
+            return data.sort(function (a, b) {
+                var x = moment(a.arrival_date + " " + a.arrival_time, 'DD/MM/YYYY h:mm A').format("X");
+                var y = moment(b.arrival_date + " " + b.arrival_time, 'DD/MM/YYYY h:mm A').format("X");
+                if (way === 'ASC') {
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                }
+                if (way === 'DESC') {
+                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                }
+            });
+        }
+    };
+    FilterFlightComponent.prototype.sortByDeparture = function (data, key, way) {
+        if (typeof data === "undefined") {
+            return data;
+        }
+        else {
+            return data.sort(function (a, b) {
+                var x = moment(a.departure_date + " " + a.departure_time, 'DD/MM/YYYY h:mm A').format("X");
+                var y = moment(b.departure_date + " " + b.departure_time, 'DD/MM/YYYY h:mm A').format("X");
+                if (way === 'ASC') {
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                }
+                if (way === 'DESC') {
+                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                }
+            });
         }
     };
     __decorate([

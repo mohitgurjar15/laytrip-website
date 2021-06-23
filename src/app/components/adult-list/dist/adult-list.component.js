@@ -10,11 +10,12 @@ exports.AdultListComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("../../../environments/environment");
 var AdultListComponent = /** @class */ (function () {
-    function AdultListComponent(cookieService, genericService, router, cd) {
+    function AdultListComponent(cookieService, genericService, router, cd, commonFunction) {
         this.cookieService = cookieService;
         this.genericService = genericService;
         this.router = router;
         this.cd = cd;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.adultsCount = new core_1.EventEmitter();
         this._itinerarySelectionArray = new core_1.EventEmitter();
@@ -271,7 +272,21 @@ var AdultListComponent = /** @class */ (function () {
                 });
         }, function (error) {
             if (error.status === 401) {
-                _this.router.navigate(['/']);
+                if (_this.commonFunction.isRefferal()) {
+                    var parms = _this.commonFunction.getRefferalParms();
+                    var queryParams = {};
+                    queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                    if (parms.utm_medium) {
+                        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                    }
+                    if (parms.utm_campaign) {
+                        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                    }
+                    _this.router.navigate(['/'], { queryParams: queryParams });
+                }
+                else {
+                    _this.router.navigate(['/']);
+                }
             }
         });
     };

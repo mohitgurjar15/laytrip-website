@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
+import { FlightService } from '../../../../services/flight.service';
+import { FlightSearchComponent } from '../../flight-search/flight-search.component';
 
 
 @Component({
@@ -83,6 +85,9 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
 
   constructor(
+    private flightService: FlightService,
+    public flightSearchComponent : FlightSearchComponent
+
   ) { }
 
   ngOnInit() {
@@ -99,16 +104,16 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       this.priceOptions.floor = this.priceValue;
       this.priceOptions.ceil = this.priceHighValue;
       parseInt(this.filterFlightDetails.price_range.max_price) ?
-        parseInt(this.filterFlightDetails.price_range.max_price) : 0;
+      parseInt(this.filterFlightDetails.price_range.max_price) : 0;
 
     }
     if (this.filterFlightDetails && this.filterFlightDetails.partial_payment_price_range) {
       this.partialPaymentValue =
-        this.filterFlightDetails.partial_payment_price_range.min_price ? Math.floor(this.filterFlightDetails.partial_payment_price_range.min_price) : 0;
+      this.filterFlightDetails.partial_payment_price_range.min_price ? Math.floor(this.filterFlightDetails.partial_payment_price_range.min_price) : 0;
       this.minPartialPaymentPrice = Math.floor(this.partialPaymentValue);
 
       this.partialPaymentHighValue =
-        this.filterFlightDetails.partial_payment_price_range.max_price ? Math.ceil(this.filterFlightDetails.partial_payment_price_range.max_price) : 0;
+      this.filterFlightDetails.partial_payment_price_range.max_price ? Math.ceil(this.filterFlightDetails.partial_payment_price_range.max_price) : 0;
       this.maxPartialPaymentPrice = Math.ceil(this.partialPaymentHighValue);
       this.partialPaymentOptions.floor = this.partialPaymentValue;
       this.partialPaymentOptions.ceil = this.partialPaymentHighValue;
@@ -153,19 +158,22 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   toggleInbound() {
     this.isShowinbound = !this.isShowinbound;
   }
+  closeModal() {
+    $('#filter_mob_modal1').modal('hide');
+  }
 
   loadJquery() {
     //Start REsponsive Fliter js
 
-    $(".responsive_filter_btn").click(function () {
-      $("#responsive_filter_show").slideDown("slow");
-      $("body").addClass('overflow-hidden');
-    });
+    // $(".responsive_filter_btn").click(function () {
+    //   $("#responsive_filter_show").slideDown();
+    //   $("body").addClass('overflow-hidden');
+    // });
 
-    $(".filter_close > a").click(function () {
-      $("#responsive_filter_show").slideUp("slow");
-      $("body").removeClass('overflow-hidden');
-    });
+    // $(".filter_close > a").click(function () {
+    //   $("#responsive_filter_show").slideUp();
+    //   $("body").removeClass('overflow-hidden');
+    // });
     //Close REsponsive Fliter js
 
     // Start filter Shortby js
@@ -519,6 +527,40 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       })
     } */
 
+    this.flightService.getLastApplyedSortFilter.subscribe(filters=> {
+      if(typeof filters != 'undefined' && Object.keys(filters).length > 0){  
+        var sortFilter :any = filters;
+         if (sortFilter.key === 'total_duration') {
+          if (sortFilter.order === 'ASC') {
+            filterdFlights = this.sortByDuration(filterdFlights, sortFilter.key, sortFilter.order);
+          } else if (sortFilter.order === 'DESC') {
+            filterdFlights = this.sortByDuration(filterdFlights, sortFilter.key, sortFilter.order);
+          }
+        } else if (sortFilter.key === 'arrival') {
+          // this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
+          if (sortFilter.order === 'ASC') {
+            filterdFlights = this.sortByArrival(filterdFlights, sortFilter.key, sortFilter.order);
+          } else if (sortFilter.order === 'DESC') {
+            filterdFlights = this.sortByArrival(filterdFlights, sortFilter.key, sortFilter.order);
+          }
+        } else if (sortFilter.key === 'departure') {
+          // this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, sortFilter.key, order);
+          if (sortFilter.order === 'ASC') {
+            filterdFlights = this.sortByDeparture(filterdFlights, sortFilter.key, sortFilter.order);
+          } else if (sortFilter.order === 'DESC') {
+            filterdFlights = this.sortByDeparture(filterdFlights, sortFilter.key, sortFilter.order);
+          }
+        }
+        else {
+          // filterdFlights = this.sortJSON(this.filterFlightDetails.items, sortFilter.key, sortFilter.order);
+          if (sortFilter.order === 'ASC') {
+            filterdFlights = this.sortJSON(filterdFlights, sortFilter.key, sortFilter.order);
+          } else if (sortFilter.order === 'DESC') {
+            filterdFlights = this.sortJSON(filterdFlights, sortFilter.key, sortFilter.order);
+          }
+        }
+      }
+    });
     this.filterFlight.emit(filterdFlights);
   }
 
@@ -553,6 +595,78 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
       $("input:checkbox").prop('checked', false);
       this.filterFlights();
+    }
+  }
+
+  sortJSON(data, key, way) {
+    if (typeof data === "undefined") {
+      return data;
+    } else {
+      return data.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
+
+  sortByDuration(data, key, way) {
+    if (typeof data === "undefined") {
+      return data;
+    }
+    else {
+      return data.sort(function (a, b) {
+        let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY h:mm A').diff(moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
+        let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY h:mm A').diff(moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY hh:mm A'), 'seconds')
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
+
+  sortByArrival(data, key, way) {
+    if (typeof data === "undefined") {
+      return data;
+    }
+    else {
+      return data.sort(function (a, b) {
+        let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY h:mm A').format("X");
+        let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY h:mm A').format("X");
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
+    }
+  }
+
+  sortByDeparture(data, key, way) {
+    if (typeof data === "undefined") {
+      return data;
+    }
+    else {
+      return data.sort(function (a, b) {
+
+        let x = moment(`${a.departure_date} ${a.departure_time}`, 'DD/MM/YYYY h:mm A').format("X");
+        let y = moment(`${b.departure_date} ${b.departure_time}`, 'DD/MM/YYYY h:mm A').format("X");
+        if (way === 'ASC') {
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (way === 'DESC') {
+          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+      });
     }
   }
 }

@@ -15,7 +15,12 @@ var GenericService = /** @class */ (function () {
     function GenericService(http, commonFunction) {
         this.http = http;
         this.commonFunction = commonFunction;
+        this.cardItems = new rxjs_1.BehaviorSubject([]);
+        this.getCardItems = this.cardItems.asObservable();
     }
+    GenericService.prototype.setCardItems = function (cardItems) {
+        this.cardItems.next(cardItems);
+    };
     GenericService.prototype.getAllLangunage = function () {
         return this.http.get(environment_1.environment.apiUrl + "v1/language")
             .pipe(operators_1.catchError(this.handleError));
@@ -35,6 +40,9 @@ var GenericService = /** @class */ (function () {
     GenericService.prototype.getCardlist = function () {
         return this.http.get(environment_1.environment.apiUrl + "v1/payment", this.commonFunction.setHeaders())
             .pipe(operators_1.catchError(this.handleError));
+    };
+    GenericService.prototype.makeDefaultCard = function (data) {
+        return this.http.put(environment_1.environment.apiUrl + "v1/payment/default-card/" + data.card_id, {}, this.commonFunction.setHeaders());
     };
     GenericService.prototype.deleteCard = function (id) {
         return this.http["delete"](environment_1.environment.apiUrl + "v1/payment/" + id, this.commonFunction.setHeaders())
@@ -96,7 +104,6 @@ var GenericService = /** @class */ (function () {
         return this.http.get(environment_1.environment.apiUrl + 'v1/auth/validate-user/' + token);
     };
     GenericService.prototype.addPushSubscriber = function (data) {
-        console.log(data, data.endpoint, 'here');
         var notificationData = {
             "end_point": data.endpoint,
             "auth_keys": data.keys.auth,
@@ -108,6 +115,15 @@ var GenericService = /** @class */ (function () {
     GenericService.prototype.getAllInstalemnts = function (data) {
         return this.http.post(environment_1.environment.apiUrl + "v1/instalment/calculate-all-instalment", data)
             .pipe(operators_1.catchError(this.handleError));
+    };
+    GenericService.prototype.getPaymentDetails = function () {
+        return this.http.get(environment_1.environment.apiUrl + "v1/payment/details", this.commonFunction.setHeaders());
+    };
+    GenericService.prototype.updateViaAppleLogin = function (data) {
+        return this.http.put(environment_1.environment.apiUrl + "v1/auth/update/apple-user", data, this.commonFunction.setHeaders());
+    };
+    GenericService.prototype.checkIsReferralUser = function (referral_id) {
+        return this.http.get(environment_1.environment.apiUrl + "v1/landing-page/" + referral_id, this.commonFunction.setHeaders());
     };
     GenericService = __decorate([
         core_1.Injectable({

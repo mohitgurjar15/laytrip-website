@@ -1,5 +1,73 @@
 <!-- Start Deals section-->
-<section class="deal_sec">
+
+<!-- deal section skeleton loader starts -->
+<section class="deal_sec" *ngIf="!list.length  && commonFunction.isRefferal()">
+    <div class="container">
+        <div style="display: flex; width: 100%; justify-content: space-between;">
+            <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 48%; margin: 5px; border-radius: 20px;">
+            </div>
+            <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 48%; margin: 5px; border-radius: 20px;">
+            </div>
+            <!-- <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 32%; margin: 5px; border-radius: 20px;">
+            </div> -->
+        </div>
+        <div style="display: flex; width: 100%; justify-content: center; align-items: center; margin: 10px 0;">
+            <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
+            </div>
+            <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
+            </div>
+            <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
+            </div>
+            <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- deal section skeleton loader ends -->
+<section class="deal_sec" *ngIf="list.length > 0 && commonFunction.isRefferal()"  (contextmenu)="commonFunction.onRightClickDisabled($event)">
+    <div class="container">
+        <div class="row">
+            <swiper 
+            (swiper)="setThumbsSwiper($event)"
+             [breakpoints]="breakpoints"
+             [navigation]="true" 
+             [pagination]="{ clickable: true }"
+             [slidesPerView]="1"
+             [spaceBetween]="10"        
+                *ngIf="list.length > 0">
+                <ng-template swiperSlide *ngFor="let item of list;">
+                    
+                    <div class="deal_sec_inner" *ngIf="moduleId == 1">
+                        <img [src]="item?.to?.image" alt="Deal Image" />
+                        <div class="image_about_text">
+                            <button (click)="btnDealClick(item?.to)">Find Deals to {{item?.to?.city}}</button>
+                            </div>
+                            </div>
+                            <div class="deal_sec_inner" *ngIf="moduleId == 3">
+                                <img [src]="item?.location?.image" alt="Deal Image" />
+                                <div class="image_about_text">
+                                    <button (click)="btnDealClick(item?.location)">Find Deals to {{item?.location?.city}}</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+
+            <p class="terms_txt">
+                This offer is available for a limited time only and must be booked by [*] for travel with a trip start date at least 90
+                calendar days after the date of the travel booking. Offer valid for new bookings only and cannot be combined with any
+                other sale or promotion. Discount applies to fares that are otherwise available for booking on laytrip.com. Laytrip’s
+                standard <a [routerLink]="['/terms']"
+                    [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms of Use</a> apply, and
+                additional restrictions may be applicable as shown during the booking of the travel product.
+                <!-- *Limited time new bookings offer only. May end at any time. Must be booked with start date at least 90 calendar days after booking date. Cannot be combined with any other sale or promotion. Discount applies to available fares on laytrip.com, <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a> and other booking process restrictions apply. -->
+            </p>
+        </div>
+    </div>
+</section>
+<!-- End Deals section-->
+
+
+<section class="deal_sec" *ngIf="!commonFunction.isRefferal()"   (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
         <div class="row">
             <div class="deal_sec_wrapper" *ngIf="list.length <= 0">
@@ -34,28 +102,3 @@
 </section>
 <!-- Close Deals section-->
 
-
-<!-- deal section skeleton loader starts -->
-<!-- <section class="deal_sec">
-    <div class="container">
-        <div class="row">
-            <div class="deal_sec_wrapper">
-                <div class="deal_section_row">
-                    <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
-                        <div class="image_about_text">
-                            <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="deal_section_row">
-                    <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
-                        <div class="image_about_text">
-                            <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-<!-- deal section skeleton loader ends -->

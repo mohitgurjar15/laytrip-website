@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { getLoginUserInfo } from './_helpers/jwt.helper';
 import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PreloadingService } from './preloading.service';
 
 @Component({
   selector: 'app-root',
@@ -16,15 +18,19 @@ import { CheckOutService } from './services/checkout.service';
 export class AppComponent {
   title = 'laytrip-website';
   readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
+
   constructor(
     private cookieService:CookieService,
     private genericService:GenericService,
     private checkOutService:CheckOutService,
-    // private swPush: SwPush,
-    private userService:UserService
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService:UserService,
+    public preLoadService : PreloadingService
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
+
   }
 
   ngOnInit(){
@@ -32,12 +38,18 @@ export class AppComponent {
     if(token){
       // this.subscribeToNotifications()
     }
-
     this.registerGuestUser();
     this.setCountryBehaviour();
-
+  
   }
 
+  isValidateReferralId(referral_id){
+    this.genericService.checkIsReferralUser(referral_id).subscribe((res: any) => {  
+      localStorage.setItem("referral_id",res.data.name)
+    }, err => {
+      localStorage.removeItem("referral_id")
+    });
+  }
 
   /* subscribeToNotifications() {
 
@@ -123,3 +135,5 @@ export class AppComponent {
   }
 
 }
+
+  

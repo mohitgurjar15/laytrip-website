@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 declare var $: any;
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { FlightService } from '../../../services/flight.service';
@@ -67,6 +67,8 @@ export class BookingComponent implements OnInit {
   add_new_card = false;
   totalCard: number = 0;
   modules = [];
+  ismaxCartAdded: boolean = false;
+
   constructor(
     private router: Router,
     private flightService: FlightService,
@@ -75,7 +77,8 @@ export class BookingComponent implements OnInit {
     private checkOutService: CheckOutService,
     private cartService: CartService,
     private commonFunction: CommonFunction,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private route: ActivatedRoute,
   ) {
     //this.totalLaycredit();
     this.getCountry();
@@ -119,7 +122,6 @@ export class BookingComponent implements OnInit {
           cart.old_module_info = {
             selling_price: items.data[i].oldModuleInfo[0].selling_price
           };
-
           price.selling_price = items.data[i].moduleInfo[0].selling_price;
           price.departure_date = items.data[i].moduleInfo[0].departure_date;
           price.start_price = items.data[i].moduleInfo[0].start_price;
@@ -132,6 +134,7 @@ export class BookingComponent implements OnInit {
             selling_price: items.data[i].oldModuleInfo[0].selling.total
           };
 
+          price.total_night = items.data[i].moduleInfo[0].input_data.num_nights;
           price.type = items.data[i].type;
           price.price_break_down = items.data[i].moduleInfo[0].selling;
           price.mandatory_fee_details = items.data[i].moduleInfo[0].mandatory_fee_details;
@@ -195,7 +198,6 @@ export class BookingComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    console.log(event, "------");
     //this.totalCard = event;
   }
 
@@ -204,7 +206,6 @@ export class BookingComponent implements OnInit {
   }
 
   closeNewCardPanel(event) {
-    console.log("Event", event)
     this.add_new_card = event;
   }
 
@@ -291,7 +292,20 @@ export class BookingComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.router.navigate(['/flight/checkout']);
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate(['/flight/checkout'], { queryParams: queryParams });
+    } else {
+      this.router.navigate(['/flight/checkout']);
+    }
   }
 
   ngOnDestroy() {
@@ -338,8 +352,22 @@ export class BookingComponent implements OnInit {
   }
 
   redirectTo(uri: string) {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate([uri]));
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();      
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([uri], { queryParams: queryParams }));
+    } else {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate([uri]));
+    }
   }
 
   deleteCart(cartId) {
@@ -347,10 +375,9 @@ export class BookingComponent implements OnInit {
       return;
     }
     this.loading = true;
-
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
-      this.redirectTo('/cart/booking');
+      this.redirectTo('/cart/checkout');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1);
@@ -380,34 +407,10 @@ export class BookingComponent implements OnInit {
           this.isCartEmpty = true;
         }
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
+      }else {
+        //do something
       }
     });
-  }
-
-  saveAndSearch() {
-    this.router.navigate(['/']);
-    return false;
-    this.validationErrorMessage = '';
-    if (this.isValidTravelers) {
-      this.loading = true;
-      for (let i = 0; i < this.carts.length; i++) {
-        let data = this.travelerForm.controls[`type${i}`].value.adults;
-        let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
-        let cartData = {
-          cart_id: this.carts[i].id,
-          travelers: travelers
-        }
-        this.cartService.updateCart(cartData).subscribe(data => {
-          if (i === this.carts.length - 1) {
-            this.loading = false;
-            this.router.navigate(['/'])
-          }
-        });
-      }
-    }
-    else {
-      this.validateCartItems();
-    }
   }
 
   selectCreditCard(data) {
@@ -431,7 +434,6 @@ export class BookingComponent implements OnInit {
     for (let i in Object.keys(this.travelerForm.controls)) {
       message = '';
       for (let j = 0; j < this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++) {
-        console.log(this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j] )
         if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status == 'INVALID') {
 
 
@@ -440,7 +442,7 @@ export class BookingComponent implements OnInit {
           }
           if (!this.inValidCartTravller.includes(i)) {
             if (this.carts[i].type == 'flight') {
-              message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+              message = ` ${this.carts[i].module_info.departure_code}-${this.carts[i].module_info.arrival_code} ,`;
             }
             if (this.carts[i].type == 'hotel') {
               message = ` ${this.carts[i].module_info.hotel_name} ,`;
@@ -460,7 +462,7 @@ export class BookingComponent implements OnInit {
             }
             if (!this.inValidCartTravller.includes(i)) {
               if (this.carts[i].type == 'flight') {
-                message = ` ${this.carts[i].module_info.departure_code}- ${this.carts[i].module_info.arrival_code} ,`;
+                message = ` ${this.carts[i].module_info.departure_code}-${this.carts[i].module_info.arrival_code} ,`;
               }
               if (this.carts[i].type == 'hotel') {
                 message = ` ${this.carts[i].module_info.title} ,`;
@@ -550,10 +552,10 @@ export class BookingComponent implements OnInit {
 
     if (this.cardToken == '') {
       if (this.validationErrorMessage == '') {
-        this.validationErrorMessage = ` Please select credit card`;
+        this.validationErrorMessage = ` Please select a credit card`;
       }
       else {
-        this.validationErrorMessage += ` and please select credit card`;
+        this.validationErrorMessage += ` and please select a credit card`;
       }
     }
 
@@ -581,12 +583,26 @@ export class BookingComponent implements OnInit {
         }
         let cartData = {
           cart_id: this.carts[i].id,
-          travelers: travelers
+          travelers: travelers,
+          referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
         }
         this.cartService.updateCart(cartData).subscribe(data => {
           if (i === this.carts.length - 1) {
             this.loading = false;
-            this.router.navigate(['/cart/checkout'])
+            if (this.commonFunction.isRefferal()) {
+              let parms = this.commonFunction.getRefferalParms();
+              var queryParams: any = {};
+              queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+              if(parms.utm_medium){
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+              }
+              if(parms.utm_campaign){
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+              }
+              this.router.navigate(['cart/checkout'], { queryParams: queryParams });
+            } else {
+              this.router.navigate(['cart/checkout']);
+            }
           }
         });
       }
@@ -604,5 +620,14 @@ export class BookingComponent implements OnInit {
 
   removeAllAlertError() {
     this.isAllAlertClosed = true;
+  }
+  
+  cartValueChanged(event) {
+    this.ismaxCartAdded = event;
+  }
+
+  @HostListener('document:click')
+  clickOutside() {
+   console.log('here')
   }
 }

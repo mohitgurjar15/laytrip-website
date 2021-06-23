@@ -13,8 +13,6 @@ export class FlightCommonFunction {
       ) { }
     
     getPaymentStartDate(bookingInstalments) {
-        // console.log(moment(date).format('MM/DD/YYYY'))
-        
         if (bookingInstalments[1]) {
             const date = new Date(bookingInstalments[0].instalmentDate);
             return this.commonFunction.convertDateFormat(date, 'MM/DD/YYYY');

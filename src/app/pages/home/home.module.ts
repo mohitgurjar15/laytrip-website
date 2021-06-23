@@ -21,7 +21,14 @@ import { HotelSearchWidgetComponent } from './hotel-search-widget/hotel-search-w
 import { VacationSearchWidgetComponent } from './vacation-search-widget/vacation-search-widget.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
-
+import { SwiperModule } from "swiper/angular";
+import * as Hammer from 'hammerjs';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any> {
+    swipe: { direction: Hammer.DIRECTION_ALL ,velocity: 0.1},
+  };
+}
 @NgModule({
   declarations: [
     HomeComponent,
@@ -47,13 +54,18 @@ import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component'
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     CalendarModule,
     NgxGalleryModule,
-    NgSelectModule
+    NgSelectModule,
+    SwiperModule
   ],
   exports: [
     FlightSearchWidgetComponent,
     HotelSearchWidgetComponent,
     VacationSearchWidgetComponent
   ],
+  providers: [{
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: MyHammerConfig,
+  }],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ], entryComponents: [CookiePolicyComponent]

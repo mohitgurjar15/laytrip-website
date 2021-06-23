@@ -13,7 +13,7 @@ var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var moment = require("moment");
 var add_card_component_1 = require("../../../components/add-card/add-card.component");
 var BookingComponent = /** @class */ (function () {
-    function BookingComponent(router, flightService, genericService, travelerService, checkOutService, cartService, commonFunction, cookieService) {
+    function BookingComponent(router, flightService, genericService, travelerService, checkOutService, cartService, commonFunction, cookieService, route) {
         this.router = router;
         this.flightService = flightService;
         this.genericService = genericService;
@@ -22,6 +22,7 @@ var BookingComponent = /** @class */ (function () {
         this.cartService = cartService;
         this.commonFunction = commonFunction;
         this.cookieService = cookieService;
+        this.route = route;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.progressStep = { step1: true, step2: false, step3: false, step4: false };
         this.isShowPaymentOption = true;
@@ -55,6 +56,7 @@ var BookingComponent = /** @class */ (function () {
         this.add_new_card = false;
         this.totalCard = 0;
         this.modules = [];
+        this.ismaxCartAdded = false;
         //this.totalLaycredit();
         this.getCountry();
     }
@@ -105,6 +107,7 @@ var BookingComponent = /** @class */ (function () {
                     cart.old_module_info = {
                         selling_price: items.data[i].oldModuleInfo[0].selling.total
                     };
+                    price.total_night = items.data[i].moduleInfo[0].input_data.num_nights;
                     price.type = items.data[i].type;
                     price.price_break_down = items.data[i].moduleInfo[0].selling;
                     price.mandatory_fee_details = items.data[i].moduleInfo[0].mandatory_fee_details;
@@ -238,7 +241,21 @@ var BookingComponent = /** @class */ (function () {
         });
     };
     BookingComponent.prototype.handleSubmit = function () {
-        this.router.navigate(['/flight/checkout']);
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            var queryParams = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigate(['/flight/checkout'], { queryParams: queryParams });
+        }
+        else {
+            this.router.navigate(['/flight/checkout']);
+        }
     };
     BookingComponent.prototype.ngOnDestroy = function () {
         this.cartService.setCartTravelers({
@@ -283,9 +300,25 @@ var BookingComponent = /** @class */ (function () {
     };
     BookingComponent.prototype.redirectTo = function (uri) {
         var _this = this;
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
-            return _this.router.navigate([uri]);
-        });
+        if (this.commonFunction.isRefferal()) {
+            var parms = this.commonFunction.getRefferalParms();
+            var queryParams = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if (parms.utm_medium) {
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+            }
+            if (parms.utm_campaign) {
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+            }
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+                return _this.router.navigate([uri], { queryParams: queryParams });
+            });
+        }
+        else {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+                return _this.router.navigate([uri]);
+            });
+        }
     };
     BookingComponent.prototype.deleteCart = function (cartId) {
         var _this = this;
@@ -295,7 +328,7 @@ var BookingComponent = /** @class */ (function () {
         this.loading = true;
         this.cartService.deleteCartItem(cartId).subscribe(function (res) {
             _this.loading = false;
-            _this.redirectTo('/cart/booking');
+            _this.redirectTo('/cart/checkout');
             var index = _this.carts.findIndex(function (x) { return x.id == cartId; });
             _this.carts.splice(index, 1);
             _this.cartPrices.splice(index, 1);
@@ -323,37 +356,10 @@ var BookingComponent = /** @class */ (function () {
                 }
                 localStorage.setItem('$crt', JSON.stringify(_this.carts.length));
             }
-        });
-    };
-    BookingComponent.prototype.saveAndSearch = function () {
-        var _this = this;
-        this.router.navigate(['/']);
-        return false;
-        this.validationErrorMessage = '';
-        if (this.isValidTravelers) {
-            this.loading = true;
-            var _loop_1 = function (i) {
-                var data = this_1.travelerForm.controls["type" + i].value.adults;
-                var travelers = data.map(function (traveler) { return { traveler_id: traveler.userId }; });
-                var cartData = {
-                    cart_id: this_1.carts[i].id,
-                    travelers: travelers
-                };
-                this_1.cartService.updateCart(cartData).subscribe(function (data) {
-                    if (i === _this.carts.length - 1) {
-                        _this.loading = false;
-                        _this.router.navigate(['/']);
-                    }
-                });
-            };
-            var this_1 = this;
-            for (var i = 0; i < this.carts.length; i++) {
-                _loop_1(i);
+            else {
+                //do something
             }
-        }
-        else {
-            this.validateCartItems();
-        }
+        });
     };
     BookingComponent.prototype.selectCreditCard = function (data) {
         this.cardToken = data;
@@ -380,7 +386,7 @@ var BookingComponent = /** @class */ (function () {
                     }
                     if (!this.inValidCartTravller.includes(i)) {
                         if (this.carts[i].type == 'flight') {
-                            message = " " + this.carts[i].module_info.departure_code + "- " + this.carts[i].module_info.arrival_code + " ,";
+                            message = " " + this.carts[i].module_info.departure_code + "-" + this.carts[i].module_info.arrival_code + " ,";
                         }
                         if (this.carts[i].type == 'hotel') {
                             message = " " + this.carts[i].module_info.hotel_name + " ,";
@@ -397,7 +403,7 @@ var BookingComponent = /** @class */ (function () {
                         }
                         if (!this.inValidCartTravller.includes(i)) {
                             if (this.carts[i].type == 'flight') {
-                                message = " " + this.carts[i].module_info.departure_code + "- " + this.carts[i].module_info.arrival_code + " ,";
+                                message = " " + this.carts[i].module_info.departure_code + "-" + this.carts[i].module_info.arrival_code + " ,";
                             }
                             if (this.carts[i].type == 'hotel') {
                                 message = " " + this.carts[i].module_info.title + " ,";
@@ -478,17 +484,17 @@ var BookingComponent = /** @class */ (function () {
         this.isSubmitted = true;
         if (this.cardToken == '') {
             if (this.validationErrorMessage == '') {
-                this.validationErrorMessage = " Please select credit card";
+                this.validationErrorMessage = " Please select a credit card";
             }
             else {
-                this.validationErrorMessage += " and please select credit card";
+                this.validationErrorMessage += " and please select a credit card";
             }
         }
         if (this.isValidTravelers && this.cardToken != '' && !this.isNotAvailableItinerary && this.isAllAlertClosed) {
             this.loading = true;
             this.travelerForm.enable();
-            var _loop_2 = function (i) {
-                var data = this_2.travelerForm.controls["type" + i].value.adults;
+            var _loop_1 = function (i) {
+                var data = this_1.travelerForm.controls["type" + i].value.adults;
                 /*  */
                 var travelers = [];
                 for (var k = 0; k < data.length; k++) {
@@ -501,23 +507,38 @@ var BookingComponent = /** @class */ (function () {
                     if (data[k].passport_expiry) {
                         data[k].passport_expiry = moment(data[k].passport_expiry, "MM/DD/YYYY").format("YYYY-MM-DD");
                     }
-                    this_2.travelerService.updateAdult(data[k], data[k].userId).subscribe(function (traveler) {
+                    this_1.travelerService.updateAdult(data[k], data[k].userId).subscribe(function (traveler) {
                     });
                 }
                 var cartData = {
-                    cart_id: this_2.carts[i].id,
-                    travelers: travelers
+                    cart_id: this_1.carts[i].id,
+                    travelers: travelers,
+                    referral_id: this_1.route.snapshot.queryParams['utm_source'] ? this_1.route.snapshot.queryParams['utm_source'] : ''
                 };
-                this_2.cartService.updateCart(cartData).subscribe(function (data) {
+                this_1.cartService.updateCart(cartData).subscribe(function (data) {
                     if (i === _this.carts.length - 1) {
                         _this.loading = false;
-                        _this.router.navigate(['/cart/checkout']);
+                        if (_this.commonFunction.isRefferal()) {
+                            var parms = _this.commonFunction.getRefferalParms();
+                            var queryParams = {};
+                            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+                            if (parms.utm_medium) {
+                                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                            }
+                            if (parms.utm_campaign) {
+                                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+                            }
+                            _this.router.navigate(['cart/checkout'], { queryParams: queryParams });
+                        }
+                        else {
+                            _this.router.navigate(['cart/checkout']);
+                        }
                     }
                 });
             };
-            var this_2 = this;
+            var this_1 = this;
             for (var i = 0; i < this.carts.length; i++) {
-                _loop_2(i);
+                _loop_1(i);
             }
         }
     };
@@ -531,9 +552,18 @@ var BookingComponent = /** @class */ (function () {
     BookingComponent.prototype.removeAllAlertError = function () {
         this.isAllAlertClosed = true;
     };
+    BookingComponent.prototype.cartValueChanged = function (event) {
+        this.ismaxCartAdded = event;
+    };
+    BookingComponent.prototype.clickOutside = function () {
+        console.log('here');
+    };
     __decorate([
         core_1.ViewChild(add_card_component_1.AddCardComponent, { static: false })
     ], BookingComponent.prototype, "addCardRef");
+    __decorate([
+        core_1.HostListener('document:click')
+    ], BookingComponent.prototype, "clickOutside");
     BookingComponent = __decorate([
         core_1.Component({
             selector: 'app-booking',

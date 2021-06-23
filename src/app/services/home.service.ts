@@ -5,7 +5,6 @@ import { catchError } from "rxjs/operators";
 import { environment } from '../../environments/environment';
 import { CommonFunction } from "../_helpers/common-function";
 
-
 @Injectable({
     providedIn: 'root',
   })
@@ -15,7 +14,16 @@ export class HomeService {
     getToString = this.toString.asObservable();
     getLocationForHotelDeal = this.fromDestinationInfo.asObservable();
     private tabName = new BehaviorSubject([]);
+    private sliderOffers = new BehaviorSubject([]);
     getActiveTabName = this.tabName.asObservable();
+    getSlideOffers = this.sliderOffers.asObservable();
+
+    private swipeSlide : any = new BehaviorSubject({});
+    getSwipeSlide = this.swipeSlide.asObservable();
+
+    private landingPageData : any = new BehaviorSubject({});
+    getLandingPageData = this.landingPageData.asObservable();
+
 
     constructor(
         private http: HttpClient,
@@ -40,6 +48,14 @@ export class HomeService {
 
     setActiveTab(tabName){
         this.tabName.next(tabName)
+    }
+
+    setLandingPageData(data){
+        console.log('here')
+        this.landingPageData.next(data)
+    }
+    setOffersData(offers){
+        this.sliderOffers.next(offers);
     }
 
     setToString(flightToCode) {
@@ -70,4 +86,8 @@ export class HomeService {
             
         }
     }   
+
+    setSwipeSlideDirection(direction){
+        this.swipeSlide.next(direction)
+    }
 }

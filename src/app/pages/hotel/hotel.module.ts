@@ -22,6 +22,7 @@ import { CookieModule } from 'ngx-cookie';
 import { CalendarModule } from 'primeng/calendar';
 // // AGM (ANGULAR GOOGLE MAP)
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 // NGX-GALLERY
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -69,6 +70,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
       apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
       libraries: ['places']
     }),
+    AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule,
     NgxGalleryModule,
     HomeModule,
