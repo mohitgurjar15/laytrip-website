@@ -24,15 +24,33 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU&amp;libraries=places"
       type="text/javascript"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Q6CPSPBTH"></script>
-
+    <script>
+      if (window.location.host == 'laytrip.com') {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-6Q6CPSPBTH');
+      }
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+          'gtm.start':
+            new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-TQPF2N5');</script>
+    <!-- End Google Tag Manager -->
+    
     <style>
       .custom_fc_frame {
         right: 20px !important;
         bottom: 20px !important;
 
       }
-
       .custom_fc_frame .d-hotline.h-btn {
         border-radius: 50% !important;
       }
@@ -61,13 +79,14 @@
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1976d2">
-    <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TQPF2N5');</script>
-    <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180984175-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || []; 
+      function gtag2() { dataLayer.push(arguments); }
+      gtag2('js', new Date());  
+      gtag2('config', 'UA-180984175-1');
+  </script>
   </head>
   <script>
     function initFreshChat() {
@@ -98,12 +117,7 @@
 
     function initialize(i, t) { var e; i.getElementById(t) ? initFreshChat() : ((e = i.createElement("script")).id = t, e.async = !0, e.src = "https://wchat.freshchat.com/js/widget.js", e.onload = initFreshChat, i.head.appendChild(e)) } function initiateCall() { initialize(document, "freshchat-js-sdk") } window.addEventListener ? window.addEventListener("load", initiateCall, !1) : window.attachEvent("load", initiateCall, !1);
 
-    if (window.location.host == 'laytrip.com') {
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'G-6Q6CPSPBTH');
-    }
+
     var urlPath = window.location.pathname.split('/');
     var lottieModule = 'hotel';
     if (urlPath.includes('flight')) {
