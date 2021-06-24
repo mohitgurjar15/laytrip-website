@@ -453,10 +453,11 @@
             <h3 class="common_title_wrps">Description</h3>
             <!-- <a href="javascript:void(0);" class="cta_link hover-link">User Reviews</a> -->
           </span>
-          <p [innerHTML]="hotelDetails.description"></p>
+          <p id="hotel_desc" class="desc_col" [innerHTML]="hotelDetails.description"></p>
+          <button class="read_more" (click)="toggleDesc()">Read more</button>
         </div>
-        <div class="right_box_wrps mobile_right">
 
+        <div class="right_box_wrps mobile_right">
           <div class="map_wrapper">
             <!-- iconUrl="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" -->
             <agm-map #dm [latitude]="hotelDetails?.latitude" [longitude]="hotelDetails?.longitude" minZoom="2"
