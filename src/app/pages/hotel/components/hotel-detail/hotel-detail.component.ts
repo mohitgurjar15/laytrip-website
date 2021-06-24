@@ -178,21 +178,22 @@ export class HotelDetailComponent implements OnInit {
     });
   }
 
-  formatLongText(text: string) {
-    if(text.endsWith(".")) 
-      text += " ";
-    else
-      text += ". ";
-    let tokens: string[] = text.split(". ");
+  // Author: xavier | 2021/6/23 @ 2:30pm
+  // Description: Break long text into paragraphs.
+  //              Takes into account empty text and text without periods.
+  formatLongText(data: any) {
+    const maxLength = 150;
+    const text: string = data == null ? "" : data; // null-coalescing operator not yet supported :(
+    const tokens: string[] = text.split(".");
     let result: string = "";
     let offset: number = 0;
 
     for(let i: number = 0; i < tokens.length; i++) {
-      if((result.length - offset) >= 100) {
+      if((result.length - offset) >= maxLength) {
         result += "<br><br>";
         offset = result.length;
       }
-      result += tokens[i] + ".";
+      if(tokens[i].length > 0) result += tokens[i] + ".";
     }
 
     return result;
