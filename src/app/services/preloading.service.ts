@@ -1,9 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-
-import { environment } from '../../environments/environment';
-import { HomeService } from "./home.service";
 import { LANDING_PAGE } from "../landing-page.config";
 import { Router } from "@angular/router";
 
@@ -16,11 +13,8 @@ export class PreloadingService {
 
     constructor(
         private http: HttpClient,
-        private homeService: HomeService,
         private router: Router
-        ) {
-
-    }
+        ) { }
 
     load(): Promise<any> {
         const encode = require('jwt-encode');
@@ -28,11 +22,9 @@ export class PreloadingService {
 
         return new Promise((resolve, reject) => {
             this.http.get('https://api.staging.laytrip.com/v1/landing-page/AS-411').subscribe((response: any) => {
-                localStorage.setItem('__LP_DATA', encode(LANDING_PAGE['AS-410'], 'secret'))
+                localStorage.setItem('__LP_DATA', encode(LANDING_PAGE['AS-410'], 'secret'));
                 resolve(true);
-            }, err => {                
-                resolve(false);
-            },);
+            });
         });
     }
 }
