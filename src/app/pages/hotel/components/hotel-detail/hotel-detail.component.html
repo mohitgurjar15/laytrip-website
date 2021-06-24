@@ -650,40 +650,49 @@
                       <span class="titles">
                         Installment Option 1
                       </span>
-                      <span class="texts" *ngIf="room.start_price>0">
+                      <span class="texts" *ngIf="room.start_price>0 && showDownPayment(room?.offer_data,0)==true">
                         ${{room.start_price | number : '1.2-2'}} downpayment and {{room.no_of_weekly_installment}}
                         weekly installments of
                         ${{room.secondary_start_price | number : '1.2-2'}}
                       </span>
-                      <span class="texts" *ngIf="room.start_price==0">
+                      <span class="texts" *ngIf="room.start_price==0 && showDownPayment(room?.offer_data,0)==true">
                         Flights within 30 days of travel not available in installments
+                      </span>
+                      <span class="texts" *ngIf="showDownPayment(room?.offer_data,0)==false">
+                        NA
                       </span>
                     </div>
                     <div class="type_lines">
                       <span class="titles">
                         Installment Option 2
                       </span>
-                      <span class="texts" *ngIf="room.start_price>0">
+                      <span class="texts" *ngIf="room.start_price>0 && showDownPayment(room?.offer_data,1)==true">
                         ${{room.second_down_payment | number : '1.2-2'}} downpayment and
                         {{room.no_of_weekly_installment_2}} bi-weekly installments of
                         ${{room.secondary_start_price_2 | number : '1.2-2'}}
                       </span>
-                      <span class="texts" *ngIf="room.start_price==0">
+                      <span class="texts" *ngIf="room.start_price==0 && showDownPayment(room?.offer_data,1)==true">
                         Flights within 30 days of travel not available in installments
+                      </span>
+                      <span class="texts" *ngIf="showDownPayment(room?.offer_data,1)==false">
+                        NA
                       </span>
                     </div>
                     <div class="type_lines">
                       <span class="titles">
                         Installment Option 3
                       </span>
-                      <span class="texts" *ngIf="room.start_price>0">
+                      <span class="texts" *ngIf="room.start_price>0 && showDownPayment(room?.offer_data,2)==true">
                         ${{room.third_down_payment | number : '1.2-2'}} downpayment and
                         {{room.no_of_weekly_installment_3}} monthly installments of
                         ${{room.secondary_start_price_3 |
                         number : '1.2-2'}}
                       </span>
-                      <span class="texts" *ngIf="room.start_price==0">
+                      <span class="texts" *ngIf="room.start_price==0 && showDownPayment(room?.offer_data,2)==true">
                         Flights within 30 days of travel not available in installments
+                      </span>
+                      <span class="texts" *ngIf="showDownPayment(room?.offer_data,2)==false">
+                        NA
                       </span>
                     </div>
                     <div class="type_lines">
@@ -693,11 +702,11 @@
                       <span class="texts">
                         ${{room.night_rate | number : '1.2-2'}} including taxes and fees
                       </span>
-                      <div class="notifi_text mobile_notifi">
+                      <div class="notifi_text mobile_notifi" *ngIf="showDownPayment(room?.offer_data,1)==false">
                         More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                       </div>
                     </div>
-                    <div class="full_desk_not">
+                    <div class="full_desk_not" *ngIf="showDownPayment(room?.offer_data,1)==false">
                       <div class="notifi_text">
                         More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                       </div>

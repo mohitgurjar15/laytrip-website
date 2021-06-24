@@ -1,9 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { LANDING_PAGE } from "./landing-page.config";
-import { HomeService } from "./services/home.service";
-import * as jwt_encode from "jwt-encode";
+
+import { environment } from '../../environments/environment';
+import { HomeService } from "./home.service";
+import { LANDING_PAGE } from "../landing-page.config";
 
 @Injectable()
 export class PreloadingService {
@@ -22,11 +23,16 @@ export class PreloadingService {
     load(): Promise<any> {
         const encode = require('jwt-encode');
         localStorage.setItem('__LP_DATA', "")
+
         return new Promise((resolve, reject) => {
-            this.http.get('https://api.icndb.com/jokes/random').subscribe((response: any) => {
+            this.http.get('https://api.staging.laytrip.com/v1/landing-page/AS-411').subscribe((response: any) => {
+                console.log('here')
                 localStorage.setItem('__LP_DATA', encode(LANDING_PAGE['AS-410'], 'secret'))
                 resolve(true);
-            });
+            }, err => {
+                console.log('error')
+                localStorage.setItem('__LP_DATA','')
+            },);
         });
     }
 }

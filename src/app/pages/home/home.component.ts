@@ -9,7 +9,7 @@ import { HomeService } from '../../services/home.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
 import { CookieService } from 'ngx-cookie';
-import { PreloadingService } from '../../preloading.service';
+import { PreloadingService } from '../../services/preloading.service';
 import { LANDING_PAGE } from 'src/app/landing-page.config';
 import * as jwt_decode from "jwt-decode";
 
@@ -234,7 +234,6 @@ export class HomeComponent implements OnInit {
   }
   
   activeSlide(activeSlide){
-    console.log(activeSlide)
     this.currentTabName = 'hotel';
     if (this.moduleId != 3) {
       this.homeService.removeToString('flight');

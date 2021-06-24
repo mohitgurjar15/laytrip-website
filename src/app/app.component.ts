@@ -8,7 +8,7 @@ import { getLoginUserInfo } from './_helpers/jwt.helper';
 import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PreloadingService } from './preloading.service';
+import { PreloadingService } from './services/preloading.service';
 
 @Component({
   selector: 'app-root',

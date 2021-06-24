@@ -316,4 +316,16 @@ export class HotelDetailComponent implements OnInit {
       }
     }
   }
+
+  showDownPayment(offerData, downPaymentOption) {
+
+    if (typeof offerData != 'undefined' && offerData.applicable) {
+
+      if (typeof offerData.down_payment_options != 'undefined' && offerData.down_payment_options[downPaymentOption].applicable) {
+        return true;
+      }
+      return false;
+    }
+    return true;
+  }
 }
