@@ -250,7 +250,7 @@ export class CheckoutComponent implements OnInit {
 
   bookingTimerConfiguration() {
     this.bookingTimerConfig = Object.assign({}, {
-      leftTime: 30,
+      leftTime: 600,
       format: 'm:s'
     });
   }
