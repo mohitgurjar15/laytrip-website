@@ -193,7 +193,7 @@ export class HotelDetailComponent implements OnInit {
         result += "<br><br>";
         offset = result.length;
       }
-      if(tokens[i].length > 0) result += tokens[i] + ".";
+      if(tokens[i].length > 0) result += `${tokens[i]}.`;
     }
 
     return result;
