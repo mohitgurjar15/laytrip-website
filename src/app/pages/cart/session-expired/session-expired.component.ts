@@ -23,6 +23,7 @@ export class SessionExpiredComponent implements OnInit {
   }
 
   refresh() {
+    this.activeModal.dismiss();
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
       var queryParams: any = {};
@@ -33,7 +34,6 @@ export class SessionExpiredComponent implements OnInit {
       if (parms.utm_campaign) {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
-      this.activeModal.dismiss();
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       this.router.navigate(['cart/checkout'], { queryParams: queryParams }));
     } else {
