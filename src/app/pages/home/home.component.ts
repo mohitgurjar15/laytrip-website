@@ -52,9 +52,11 @@ export class HomeComponent implements OnInit {
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
-    this.$landingPageData = jwt_decode(localStorage.getItem('__LP_DATA'), "secret");
-    this.slides = this.$landingPageData.slides;
-    this.currentSlide = this.$landingPageData.slides[0];
+    if (sessionStorage.getItem('__LP_DATA')) {
+      this.$landingPageData = jwt_decode(sessionStorage.getItem('__LP_DATA'), "secret");
+      this.slides = this.$landingPageData.slides;
+      this.currentSlide = this.$landingPageData.slides[0];
+    }
     this.homeService.setOffersData(this.currentSlide);
 
   }

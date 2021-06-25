@@ -9,6 +9,7 @@ import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PreloadingService } from './services/preloading.service';
+import { CommonFunction } from './_helpers/common-function';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { PreloadingService } from './services/preloading.service';
 export class AppComponent {
   title = 'laytrip-website';
   readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
+  encode = require('jwt-encode');
 
   constructor(
     private cookieService:CookieService,
@@ -26,11 +28,10 @@ export class AppComponent {
     private route: ActivatedRoute,
     private router: Router,
     private userService:UserService,
-    public preLoadService : PreloadingService
+    public preLoadService : PreloadingService,
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
-
   }
 
   ngOnInit() {
@@ -42,25 +43,21 @@ export class AppComponent {
     this.registerGuestUser();
     this.setCountryBehaviour();
     this.preloadLandingPageData();
-  
   }
 
   utm_source ='';
   preloadLandingPageData() {
     
-    this.route.queryParams.subscribe(parms  => {
-      this.utm_source = parms['utm_source'];
-    });
-
-    console.log(this.utm_source)
-    if (this.utm_source) {
-      this.preLoadService.getLandingPageDetails(this.utm_source).subscribe((res: any) => {
-        console.log(res)  
-      }, err => {
-        
-      });      
-    }
-
+    this.route.queryParams.subscribe(parms => {
+      if (parms['utm_source']) {
+        this.preLoadService.getLandingPageDetails(parms['utm_source']).subscribe((res: any) => {
+          sessionStorage.setItem('__LP_DATA', this.encode(res.config, 'secret'))
+        }, err => {
+          localStorage.removeItem('__LP_DATA')
+          this.router.navigate(['/']);
+        });
+      } 
+    });    
   }
 
   isValidateReferralId(referral_id){

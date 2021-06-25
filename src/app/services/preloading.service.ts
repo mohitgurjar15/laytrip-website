@@ -21,7 +21,7 @@ export class PreloadingService {
 
     }
 
-    load(): Promise<any> {
+    /* load(): Promise<any> {
         const encode = require('jwt-encode');
         localStorage.setItem('__LP_DATA', "")
         return new Promise((resolve, reject) => {
@@ -32,9 +32,9 @@ export class PreloadingService {
                 console.log('error')
             });
         });
-    }
+    } */
 
     getLandingPageDetails(id) {
-        return this.http.get(`${environment.apiUrl}landing-page/` + id, this.commonFunction.setHeaders())
+        return this.http.get(`${environment.apiUrl}v1/landing-page/` + id, this.commonFunction.setHeaders())
     }
 }
