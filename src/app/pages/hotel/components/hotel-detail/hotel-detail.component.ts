@@ -186,6 +186,11 @@ export class HotelDetailComponent implements OnInit {
 
   selectRoom(roomInfo) {
     
+    this.modalService.open(DiscountedBookingAlertComponent, {
+      windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
+      keyboard: false
+    });
+    return;
    
      if (this.cartItems && this.cartItems.length >= 10) {
       this.addCartLoading=false;
