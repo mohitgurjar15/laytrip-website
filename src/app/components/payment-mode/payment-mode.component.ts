@@ -151,9 +151,6 @@ export class PaymentModeComponent implements OnInit {
           }
           else{
             this.isBelowMinimumInstallment=false;
-            /* if(type3!=null && type3=='min-instal'){
-              this.minimumInstallmentValidation();
-            } */
           }
           
           this.remainingAmount = this.sellingPrice - this.instalments.instalment_date[0].instalment_amount;
@@ -237,7 +234,7 @@ export class PaymentModeComponent implements OnInit {
           }
         }
         this.sellingPrice=totalPrice;
-        this.instalmentRequest.custom_down_payment=downpayment;
+        this.instalmentRequest.custom_down_payment=downpayment?downpayment:null;
         this.instalmentRequest.checkin_date= checkinDate;
         this.getInstalmentData.emit({
           layCreditPoints :this.laycreditpoints,
@@ -372,12 +369,6 @@ export class PaymentModeComponent implements OnInit {
     //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][index]);
     this.calculateInstalment();
     this.getAllInstalment();
-    /* let paymentInfo={
-      instalment_type : this.instalmentType,
-      payment_type : this.paymentType,
-      down_payment : this.selectedDownPaymentIndex
-    }
-    this.cartService.setPaymentOptions(paymentInfo); */
   }
 
   applyLaycredit(laycreditpoints){
@@ -425,7 +416,6 @@ export class PaymentModeComponent implements OnInit {
       }
       return false;
     }
-
     return true;
   }
   showPaymentFrequency(type){
