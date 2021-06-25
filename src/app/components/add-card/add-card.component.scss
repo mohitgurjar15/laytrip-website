@@ -4,14 +4,12 @@
 @import "../../../_hotel.scss";
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 .card_field {
     width: 100%;
     border-bottom: 1px solid $box-border-color;
     height: 40px;
     line-height: 40px;
     padding-top: 10px;
-
     &:focus {
         border-bottom: 1px solid $primary-color;
     }
@@ -24,14 +22,16 @@
         max-width: 170px;
         right: 0;
     }
-    &.cvv_description{
-        @include tab-view{
+    &.cvv_description {
+        @include tab-view {
             transform: translate(0%, 12%);
         }
     }
-    transform: translate(-32%, 12%);
+    transform: translate(-32%,
+    12%);
     max-width: 240px;
 }
+
 
 /* .detail_info_main.payment_info .detail_info_left .block_payment .block_pay_info .block_card_select .block_detail .add_card_block .form_btn input {
     width: auto;
@@ -52,8 +52,10 @@
     align-items: center;
 } */
 
+
 /* Basic Layout
 ---------------------------------------------------------------- */
+
 * {
     box-sizing: border-box;
 }
@@ -90,13 +92,13 @@
     .mb-sm-10 {
         @include tab-view {
             margin-bottom: 5px;
-    padding: 0;
+            padding: 0;
         }
     }
-    .form-row{
-        &.margin_top{
+    .form-row {
+        &.margin_top {
             margin-top: 10px;
-            @include tab-view{
+            @include tab-view {
                 margin-top: 0;
             }
         }
@@ -121,7 +123,7 @@
         align-items: flex-end;
         // flex-direction: column;
         height: 100%;
-        @include tab-view{
+        @include tab-view {
             justify-content: space-between;
         }
         a {
@@ -132,10 +134,8 @@
             font-size: 16px;
             padding: 0;
             text-align: right;
-
-            @include tab-view{
+            @include tab-view {
                 font-size: 12px;
-                
             }
         }
         .button {
@@ -147,13 +147,12 @@
             padding: 0;
             text-align: right;
             pointer-events: all;
-
-            &:first-child{
-                @include tab-view{
+            &:first-child {
+                @include tab-view {
                     text-align: left;
-                } 
+                }
             }
-            @include tab-view{
+            @include tab-view {
                 font-size: 12px;
             }
         }
@@ -194,27 +193,26 @@
                 align-items: center;
                 width: 100%;
                 padding: 0;
-
-                &[aria-expanded="true"] {
-                    &:after {
-                        font-family: "FontAwesome";
-                        content: "\f077";
-                        color: $text-grey;
-                        font-weight: normal;
-                        transition: 0.3s;
-                        right: 0;
-                    }
-                }
-                &[aria-expanded="false"] {
-                    &:after {
-                        font-family: "FontAwesome";
-                        content: "\f078";
-                        color: $text-grey;
-                        font-weight: normal;
-                        transition: 0.3s;
-                        right: 0;
-                    }
-                }
+                // &[aria-expanded="true"] {
+                //     &:after {
+                //         font-family: "FontAwesome";
+                //         content: "\f077";
+                //         color: $text-grey;
+                //         font-weight: normal;
+                //         transition: 0.3s;
+                //         right: 0;
+                //     }
+                // }
+                // &[aria-expanded="false"] {
+                //     &:after {
+                //         font-family: "FontAwesome";
+                //         content: "\f078";
+                //         color: $text-grey;
+                //         font-weight: normal;
+                //         transition: 0.3s;
+                //         right: 0;
+                //     }
+                // }
                 .heade_wrps {
                     img {
                         margin-right: 15px;
@@ -243,7 +241,7 @@
                 align-items: flex-end;
                 flex-direction: column;
                 height: 100%;
-                @include tab-view{
+                @include tab-view {
                     justify-content: space-between;
                 }
                 a {
@@ -253,7 +251,7 @@
                     box-shadow: none;
                     font-size: 16px;
                     padding: 0;
-                    @include tab-view{
+                    @include tab-view {
                         font-size: 12px;
                     }
                 }

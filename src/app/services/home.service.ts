@@ -51,7 +51,6 @@ export class HomeService {
     }
 
     setLandingPageData(data){
-        console.log('here')
         this.landingPageData.next(data)
     }
     setOffersData(offers){

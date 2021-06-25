@@ -302,15 +302,17 @@
                                                             '1.2-2'}}</span> weekly
                                                     </p> -->
                                                     <p>From</p>
-                                                    <p class="duel_prices">
-                                                        <span *ngIf="commonFunction.isRefferal()" class="dashed_price">
-                                                            {{ currency?.symbol }}100
+                                                    <p class="duel_prices"  *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
+                                                        <span class="dashed_price">
+                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                         <span>
-                                                            {{ currency?.symbol }}{{item?.secondary_start_price
-                                                            |
-                                                            number :
-                                                            '1.2-2'}}
+                                                            {{ currency?.symbol }}{{item?.discounted_secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                    </p>
+                                                    <p *ngIf="!item.offer_data.applicable">
+                                                        <span>
+                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                     </p>
                                                     <p class="installment_type">Weekly Installments</p>
