@@ -178,7 +178,7 @@ export class HotelDetailComponent implements OnInit {
     });    
   }
 
-  // Author: xavier | 2021/6/24 @ 1:23pm
+  // Author: xavier | 2021/6/24 @ 4:23pm
   // Description: Toggle description expand/collapse
   toggleDesc() {
     let el = $("#hotel_desc");
@@ -187,7 +187,7 @@ export class HotelDetailComponent implements OnInit {
       el.data("isExpanded", 0);
     } else {
       el.toggleClass('desc_col desc_exp', 450);
-      $(".read_more").animate({opacity: "0"}, 450);     
+      $(".read_more").animate({opacity: "0"}, 450);
       el.data("isExpanded", 1);
     }
   }
