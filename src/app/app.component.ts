@@ -9,6 +9,7 @@ import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PreloadingService } from './services/preloading.service';
+import { CommonFunction } from './_helpers/common-function';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,6 @@ export class AppComponent {
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
-
   }
 
   ngOnInit() {
@@ -43,7 +43,6 @@ export class AppComponent {
     this.registerGuestUser();
     this.setCountryBehaviour();
     this.preloadLandingPageData();
-  
   }
 
   utm_source ='';
@@ -58,11 +57,7 @@ export class AppComponent {
           this.router.navigate(['/']);
         });
       } 
-    });
-
-
-
-    
+    });    
   }
 
   isValidateReferralId(referral_id){
