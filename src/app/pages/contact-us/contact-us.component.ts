@@ -125,7 +125,6 @@ export class ContactUsComponent implements OnInit {
   }
 
   documentFileChange(event: any) {
-    console.log(event)
     this.errorMessage = '';
     if(this.attatchmentFiles.length >= 5){
       $("#contact_modal").scrollTop(100);      

@@ -1,12 +1,14 @@
-<input class="hotel_desination"  [(ngModel)]="searchItem" (keyup)="searchLocation($event)"  >
-<div class="search_suggetion_main" *ngIf="isShowDropDown">
+<input class="hotel_desination"  [(ngModel)]="searchItem"  (keyup)="searchLocation($event)" 
+(focus)="onFocus()"  (focusout)="focusOut()"
+placeholder="Enter city or hotel" >
+<div class="search_suggetion_main" *ngIf="isShowDropDown" >
     <!-- <div class="close_btn">
         <button (click)="closeHotelSuggestion()" type="button" class="close">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
         </button>
     </div> -->
     <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
-        pointerEventsMethod="scrollbar">
+        pointerEventsMethod="scrollbar" >
         <span *ngIf="loading">Loading...</span>
         <div class="suggtions_wrps_mn">
             <div class="suggtions">

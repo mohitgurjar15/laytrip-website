@@ -8,6 +8,7 @@ import { getLoginUserInfo } from './_helpers/jwt.helper';
 import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PreloadingService } from './preloading.service';
 
 @Component({
   selector: 'app-root',
@@ -17,17 +18,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AppComponent {
   title = 'laytrip-website';
   readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
-  
+
   constructor(
     private cookieService:CookieService,
     private genericService:GenericService,
     private checkOutService:CheckOutService,
     private route: ActivatedRoute,
     private router: Router,
-    private userService:UserService
+    private userService:UserService,
+    public preLoadService : PreloadingService
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
+
   }
 
   ngOnInit(){
@@ -37,7 +40,7 @@ export class AppComponent {
     }
     this.registerGuestUser();
     this.setCountryBehaviour();
-
+  
   }
 
   isValidateReferralId(referral_id){
@@ -130,6 +133,7 @@ export class AppComponent {
       this.checkOutService.setCountries(res);
     })
   }
+
 
 }
 

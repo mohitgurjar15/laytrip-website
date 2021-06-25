@@ -30,15 +30,24 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.isUserNotVerify = false;
         this.isSignup = false;
         this.apiError = '';
+        // config = {
+        //   allowNumbersOnly: true,
+        //   length: 6,
+        //   isPasswordInput: false,
+        //   disableAutoFocus: false,
+        //   placeholder: '',
+        //   inputStyles: {
+        //     'width': '64px',
+        //     'height': '64px'
+        //   }
+        // };
         this.config = {
-            allowNumbersOnly: true,
-            length: 6,
+            otpLength: 6,
+            autofocus: false,
+            numericInputMode: true,
             isPasswordInput: false,
-            disableAutoFocus: false,
-            placeholder: '',
-            inputStyles: {
-                'width': '64px',
-                'height': '64px'
+            classList: {
+                input: 'inputStyles'
             }
         };
         this.isResend = false;
@@ -66,7 +75,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         this.otp = event;
         if (event.length == 6) {
             this.otpForm.controls.otp.setValue(event);
-            this.ngOtpInputRef.setValue(event);
+            // this.ngOtpInputRef.setValue(event);
         }
     };
     VerifyOtpComponent.prototype.resendOtp = function () {
@@ -100,7 +109,7 @@ var VerifyOtpComponent = /** @class */ (function () {
         var _this = this;
         this.submitted = this.loading = true;
         var otpValue = '';
-        var otps = this.ngOtpInputRef.otpForm.value;
+        var otps = this.otpForm.controls.otp.value;
         Object.values(otps).forEach(function (v) {
             otpValue += v;
         });

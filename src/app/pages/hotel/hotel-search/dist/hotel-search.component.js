@@ -47,6 +47,8 @@ var HotelSearchComponent = /** @class */ (function () {
             latitude: this.route.snapshot.queryParams['latitude'],
             longitude: this.route.snapshot.queryParams['longitude'],
             city_id: this.route.snapshot.queryParams['city_id'],
+            hotel_id: this.route.snapshot.queryParams['hotel_id'],
+            // type: this.route.snapshot.queryParams['type'],
             rooms: info.rooms,
             adults: info.adults,
             children: info.child,
@@ -191,7 +193,7 @@ var HotelSearchComponent = /** @class */ (function () {
         queryParams.latitude = parseFloat(event.latitude);
         queryParams.longitude = parseFloat(event.longitude);
         queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(event.occupancies)));
-        queryParams.location = btoa(encodeURIComponent(JSON.stringify(locations)));
+        queryParams.location = btoa(encodeURIComponent(JSON.stringify(locations))).replace(/\=+$/, '');
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
             _this.router.navigate(["" + urlData.url], { queryParams: queryParams, queryParamsHandling: 'merge' });
         });

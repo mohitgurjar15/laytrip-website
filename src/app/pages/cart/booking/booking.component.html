@@ -1,13 +1,13 @@
 <app-laytrip-loader [loading]="loading" [module]="lottieLoaderType"></app-laytrip-loader>
 <app-checkout-progress [progressStep]="progressStep"></app-checkout-progress>
-<section class="payment_mode_main_wrapper flight {{lottieLoaderType}}">
+<section class="payment_mode_main_wrapper flight">
     <div class="container" *ngIf="!isCartEmpty">
         <form>
             <div class="row">
                 <div class="col-lg-7">
                     <h3>Your Bookings</h3>
                     <div class="booking_detail_bg_wrps">
-                        <app-cart *ngIf="carts && carts.length" [carts]="carts"></app-cart>
+                        <app-cart *ngIf="carts && carts.length" (maxCartValidation)="cartValueChanged($event)" [carts]="carts"></app-cart>
                         <app-cart-loader *ngIf="cartLoading"></app-cart-loader>
                     </div>
                     <div class="card_details_wrppers">

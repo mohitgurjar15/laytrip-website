@@ -13,7 +13,7 @@ var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var moment = require("moment");
 var add_card_component_1 = require("../../../components/add-card/add-card.component");
 var CheckoutComponent = /** @class */ (function () {
-    function CheckoutComponent(genericService, travelerService, checkOutService, cartService, cookieService, cd, router, commonFunction, route, modalService, spreedly) {
+    function CheckoutComponent(genericService, travelerService, checkOutService, cartService, cookieService, cd, router, commonFunction, spreedly, eRef) {
         this.genericService = genericService;
         this.travelerService = travelerService;
         this.checkOutService = checkOutService;
@@ -22,9 +22,8 @@ var CheckoutComponent = /** @class */ (function () {
         this.cd = cd;
         this.router = router;
         this.commonFunction = commonFunction;
-        this.route = route;
-        this.modalService = modalService;
         this.spreedly = spreedly;
+        this.eRef = eRef;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
         this.progressStep = { step1: true, step2: true };
         this.isShowPaymentOption = true;
@@ -70,6 +69,9 @@ var CheckoutComponent = /** @class */ (function () {
         this.isExcludedCountryError = false;
         this.lottieLoaderType = "";
         this.modules = [];
+        this.instalmentMode = 'instalment';
+        this.showPartialPayemntOption = true;
+        this.instalmentType = 'weekly';
         //this.totalLaycredit();
         this.getCountry();
         // this.openBookingCompletionErrorPopup();
@@ -125,6 +127,7 @@ var CheckoutComponent = /** @class */ (function () {
                         selling_price: items.data[i].oldModuleInfo[0].selling.total
                     };
                     price.type = items.data[i].type;
+                    price.total_night = items.data[i].moduleInfo[0].input_data.num_nights;
                     price.price_break_down = items.data[i].moduleInfo[0].selling;
                     price.mandatory_fee_details = items.data[i].moduleInfo[0].mandatory_fee_details;
                     price.selling_price = items.data[i].moduleInfo[0].selling.total;
@@ -141,28 +144,27 @@ var CheckoutComponent = /** @class */ (function () {
             _this.isCartEmpty = true;
             _this.cartLoading = false;
         });
-        try {
-            var data = sessionStorage.getItem('__islt');
-            data = atob(data);
-            this.priceSummary = JSON.parse(data);
+        /* try {
+          let data = sessionStorage.getItem('__islt');
+          data = atob(data);
+          this.priceSummary = JSON.parse(data)
         }
         catch (e) {
-            if (this.commonFunction.isRefferal()) {
-                var parms = this.commonFunction.getRefferalParms();
-                var queryParams = {};
-                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-                if (parms.utm_medium) {
-                    queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-                }
-                if (parms.utm_campaign) {
-                    queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
-                }
-                this.router.navigate(['/'], { queryParams: queryParams });
+          if (this.commonFunction.isRefferal()) {
+            let parms = this.commonFunction.getRefferalParms();
+            var queryParams : any = {};
+            queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+            if(parms.utm_medium){
+              queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
             }
-            else {
-                this.router.navigate(['/']);
+            if(parms.utm_campaign){
+              queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
-        }
+            this.router.navigate(['/'], { queryParams: queryParams });
+          } else {
+            this.router.navigate(['/'])
+          }
+        } */
         this.$cartIdsubscription = this.cartService.getCartId.subscribe(function (cartId) {
             if (cartId > 0) {
                 _this.deleteCart(cartId);
@@ -201,10 +203,10 @@ var CheckoutComponent = /** @class */ (function () {
                 if (parms.utm_campaign) {
                     queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
                 }
-                this.router.navigate(['/cart/booking'], { queryParams: queryParams });
+                this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
             }
             else {
-                this.router.navigate(['/cart/booking']);
+                this.router.navigate(['/cart/checkout']);
             }
         }
     };
@@ -344,6 +346,9 @@ var CheckoutComponent = /** @class */ (function () {
                     _this.isCartEmpty = true;
                 }
                 localStorage.setItem('$crt', JSON.stringify(_this.carts.length));
+            }
+            else {
+                //do something
             }
         });
     };
@@ -495,7 +500,7 @@ var CheckoutComponent = /** @class */ (function () {
                         }
                         _this.cartService.validate(_this.bookingRequest).subscribe(function (res) {
                             var transaction = res.transaction;
-                            var redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+                            var redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4202');
                             var queryParams = {};
                             if (_this.commonFunction.isRefferal()) {
                                 var parms = _this.commonFunction.getRefferalParms();
@@ -511,7 +516,7 @@ var CheckoutComponent = /** @class */ (function () {
                                 }
                             }
                             res.redirection = redirection;
-                            // console.log("res", res);
+                            console.log("res", res);
                             if (transaction.state == "succeeded") {
                                 // console.log('succeeded', [redirection]);
                                 window.location.href = redirection;
@@ -578,7 +583,7 @@ var CheckoutComponent = /** @class */ (function () {
                 _this.priceSummary.remainingAmount = totalPrice - res.instalment_date[0].instalment_amount;
                 _this.priceSummary.totalAmount = totalPrice;
                 _this.priceSummary = Object.assign({}, _this.priceSummary);
-                _this.cd.detectChanges();
+                // this.cd.detectChanges();
             }
         }, function (err) {
         });
@@ -619,9 +624,43 @@ var CheckoutComponent = /** @class */ (function () {
     CheckoutComponent.prototype.removeExculdedError = function () {
         this.isExcludedCountryError = false;
     };
+    CheckoutComponent.prototype.selectInstalmentMode = function (instalmentMode) {
+        this.instalmentMode = instalmentMode;
+        this.showPartialPayemntOption = (this.instalmentMode == 'instalment') ? true : false;
+        sessionStorage.setItem('__insMode', btoa(this.instalmentMode));
+    };
+    CheckoutComponent.prototype.getInstalmentData = function (data) {
+        this.instalmentType = data.instalmentType;
+        //this.laycreditpoints = data.layCreditPoints;
+        this.priceSummary = data;
+        this.checkOutService.setPriceSummary(this.priceSummary);
+        sessionStorage.setItem('__islt', btoa(JSON.stringify(data)));
+    };
+    CheckoutComponent.prototype.redeemableLayCredit = function (event) {
+        this.redeemableLayPoints = event;
+    };
+    CheckoutComponent.prototype.selectCreditCard = function (data) {
+        this.cardToken = data;
+        this.cookieService.put("__cc", this.cardToken);
+        this.validationErrorMessage = '';
+        this.validateCartItems();
+    };
+    CheckoutComponent.prototype.clickOutside = function (event) {
+        var insideClassArray = ['btn_pay_book', 'modal fade comman_modal signin_modal'];
+        if (insideClassArray.indexOf(event.target.className) > -1) {
+            this.validationErrorMessage = '';
+            console.log('yes');
+        }
+        else {
+            console.log('no');
+        }
+    };
     __decorate([
         core_1.ViewChild(add_card_component_1.AddCardComponent, { static: false })
     ], CheckoutComponent.prototype, "addCardRef");
+    __decorate([
+        core_1.HostListener('document:click', ['$event'])
+    ], CheckoutComponent.prototype, "clickOutside");
     CheckoutComponent = __decorate([
         core_1.Component({
             selector: 'app-checkout',

@@ -165,15 +165,15 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   loadJquery() {
     //Start REsponsive Fliter js
 
-    $(".responsive_filter_btn").click(function () {
-      $("#responsive_filter_show").slideDown();
-      $("body").addClass('overflow-hidden');
-    });
+    // $(".responsive_filter_btn").click(function () {
+    //   $("#responsive_filter_show").slideDown();
+    //   $("body").addClass('overflow-hidden');
+    // });
 
-    $(".filter_close > a").click(function () {
-      $("#responsive_filter_show").slideUp();
-      $("body").removeClass('overflow-hidden');
-    });
+    // $(".filter_close > a").click(function () {
+    //   $("#responsive_filter_show").slideUp();
+    //   $("body").removeClass('overflow-hidden');
+    // });
     //Close REsponsive Fliter js
 
     // Start filter Shortby js
@@ -526,7 +526,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
       })
     } */
-    console.log(filterdFlights)
 
     this.flightService.getLastApplyedSortFilter.subscribe(filters=> {
       if(typeof filters != 'undefined' && Object.keys(filters).length > 0){  
@@ -562,7 +561,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
         }
       }
     });
-    console.log(filterdFlights)
     this.filterFlight.emit(filterdFlights);
   }
 
@@ -640,7 +638,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       return data;
     }
     else {
-      //console.log("data",key,way,data)
       return data.sort(function (a, b) {
         let x = moment(`${a.arrival_date} ${a.arrival_time}`, 'DD/MM/YYYY h:mm A').format("X");
         let y = moment(`${b.arrival_date} ${b.arrival_time}`, 'DD/MM/YYYY h:mm A').format("X");

@@ -5,10 +5,10 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 
 const routes: Routes = [
-  {
+ /*  {
     path: 'booking',
     component: BookingComponent,
-  },
+  }, */
   {
     path: 'checkout',
     component: CheckoutComponent,

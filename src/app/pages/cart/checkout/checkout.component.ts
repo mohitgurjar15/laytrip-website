@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { GenericService } from '../../../services/generic.service';
@@ -8,17 +7,19 @@ import { CheckOutService } from '../../../services/checkout.service';
 import { CartService } from '../../../services/cart.service';
 import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { SpreedlyService } from '../../../services/spreedly.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SessionExpiredComponent } from '../session-expired/session-expired.component';
+declare var $: any;
 
 export interface CartItem {
 
   type: string;
-  module_info: {},
+  module_info: {},r
 }
 
 @Component({
@@ -82,8 +83,13 @@ export class CheckoutComponent implements OnInit {
   isExcludedCountryError: boolean = false;
   lottieLoaderType = "";
   modules = [];
+  instalmentMode = 'instalment';
+  showPartialPayemntOption: boolean = true;
+  instalmentType: string = 'weekly'
+  redeemableLayPoints: number;
 
   constructor(
+    public modalService: NgbModal,
     private genericService: GenericService,
     private travelerService: TravelerService,
     private checkOutService: CheckOutService,
@@ -92,8 +98,6 @@ export class CheckoutComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private router: Router,
     private commonFunction: CommonFunction,
-    private route: ActivatedRoute,
-    private modalService: NgbModal,
     private spreedly: SpreedlyService,
   ) {
     //this.totalLaycredit();
@@ -157,6 +161,7 @@ export class CheckoutComponent implements OnInit {
           };
 
           price.type = items.data[i].type;
+          price.total_night = items.data[i].moduleInfo[0].input_data.num_nights;
           price.price_break_down = items.data[i].moduleInfo[0].selling;
           price.mandatory_fee_details = items.data[i].moduleInfo[0].mandatory_fee_details;
           price.selling_price = items.data[i].moduleInfo[0].selling.total;
@@ -165,6 +170,7 @@ export class CheckoutComponent implements OnInit {
           price.location = items.data[i].moduleInfo[0].hotel_name;
         }
         this.carts.push(cart);
+
         this.cartPrices.push(price)
       }
       this.cartService.setCartItems(this.carts)
@@ -178,7 +184,7 @@ export class CheckoutComponent implements OnInit {
 
 
 
-    try {
+    /* try {
       let data = sessionStorage.getItem('__islt');
       data = atob(data);
       this.priceSummary = JSON.parse(data)
@@ -198,7 +204,7 @@ export class CheckoutComponent implements OnInit {
       } else {
         this.router.navigate(['/'])
       }
-    }
+    } */
 
     this.$cartIdsubscription = this.cartService.getCartId.subscribe(cartId => {
       if (cartId > 0) {
@@ -235,20 +241,10 @@ export class CheckoutComponent implements OnInit {
   sessionTimeout(event) {
     this.isSessionTimeOut = event;
     if (this.isSessionTimeOut && !this.isBookingRequest) {
-      if (this.commonFunction.isRefferal()) {
-        var queryParams : any = {};
-        let parms = this.commonFunction.getRefferalParms();
-        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-        if(parms.utm_medium){
-          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        }
-        if(parms.utm_campaign){
-          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
-        }
-        this.router.navigate(['/cart/booking'], { queryParams: queryParams });
-      } else {
-        this.router.navigate(['/cart/booking'])
-      }
+      this.modalService.open(SessionExpiredComponent, {
+        windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
+        keyboard: false
+      });
     }
   }
 
@@ -382,12 +378,15 @@ export class CheckoutComponent implements OnInit {
       this.loading = false;
       if (error.status == 404) {
         let index = this.carts.findIndex(x => x.id == cartId);
+        
         this.carts.splice(index, 1);
         this.cartService.setCartItems(this.carts);
         if (this.carts.length == 0) {
           this.isCartEmpty = true;
         }
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
+      }else {
+        //do something
       }
     });
   }
@@ -537,7 +536,7 @@ export class CheckoutComponent implements OnInit {
           }
           this.travelerService.updateAdult(data[k], data[k].userId).subscribe((traveler: any) => {
 
-          })
+          });
         }
         let cartData = {
           cart_id: this.carts[i].id,
@@ -563,7 +562,10 @@ export class CheckoutComponent implements OnInit {
 
               let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
               
-              var queryParams : any = {};
+              redirection += res.auth_url ? '&auth_url='+res.auth_url : '';
+              
+              var queryParams: any = {};
+              
               if (this.commonFunction.isRefferal()) {
                 var parms = this.commonFunction.getRefferalParms();
                 redirection += redirection+parms.utm_source ? '&utm_source='+parms.utm_source : '';
@@ -580,18 +582,14 @@ export class CheckoutComponent implements OnInit {
               } 
               res.redirection = redirection;
 
-              // console.log("res", res);
               if (transaction.state == "succeeded") {
-                // console.log('succeeded', [redirection]);
                 window.location.href = redirection;
               } else if (transaction.state == "pending") {
 
-                // console.log('pending', [res]);
                 this.isBookingProgress = false;
                 this.challengePopUp = true;
                 this.spreedly.lifeCycle(res);
               } else {
-                console.log('fail', [res]);
                 if (this.commonFunction.isRefferal()) {
                   this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: queryParams });
                 } else {
@@ -645,7 +643,7 @@ export class CheckoutComponent implements OnInit {
         this.priceSummary.remainingAmount = totalPrice - res.instalment_date[0].instalment_amount;
         this.priceSummary.totalAmount = totalPrice;
         this.priceSummary = Object.assign({}, this.priceSummary);
-        this.cd.detectChanges();
+        // this.cd.detectChanges();
       }
 
     }, (err) => {
@@ -662,7 +660,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    console.log(event);
     //this.totalCard = event;
   }
 
@@ -695,4 +692,42 @@ export class CheckoutComponent implements OnInit {
   removeExculdedError() {
     this.isExcludedCountryError = false;
   }
+
+
+  selectInstalmentMode(instalmentMode) {
+    this.instalmentMode = instalmentMode;
+    this.showPartialPayemntOption = (this.instalmentMode == 'instalment') ? true : false
+    sessionStorage.setItem('__insMode', btoa(this.instalmentMode))
+  }
+
+  getInstalmentData(data) {
+
+    this.instalmentType = data.instalmentType;
+    //this.laycreditpoints = data.layCreditPoints;
+    this.priceSummary = data;
+    this.checkOutService.setPriceSummary(this.priceSummary)
+    sessionStorage.setItem('__islt', btoa(JSON.stringify(data)))
+  }
+
+  redeemableLayCredit(event) {
+    this.redeemableLayPoints = event;
+  }
+
+  selectCreditCard(data) {
+    this.cardToken = data;
+    this.cookieService.put("__cc", this.cardToken);
+    this.validationErrorMessage = '';
+    this.validateCartItems();
+  }
+
+  // @HostListener('document:click', ['$event'])
+  // clickOutside(event) {
+  //   let insideClassArray = ['btn_pay_book','modal fade comman_modal signin_modal'];
+  //   if(insideClassArray.indexOf(event.target.className) > -1 ) {
+  //     this.validationErrorMessage = '';
+  //     console.log('yes')
+  //   } else {
+  //     console.log('no')
+  //   }
+  // }
 }

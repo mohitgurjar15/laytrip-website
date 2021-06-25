@@ -6,7 +6,8 @@
           <div class="card" *ngFor="let traveler of travelerForm.get('type'+y+'.adults')['controls']; let x = index;">
             <div class="card-header custom_header" (click)="selectTravelerNumber($event,cartNumber,x)">
               <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+y+x" aria-expanded="true">
-                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" *ngIf="cartItem.type=='flight'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"
+                  *ngIf="cartItem.type=='flight'">
                   <defs></defs>
                   <path class="a"
                     d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
@@ -16,27 +17,32 @@
                     <path id="bed" d="M.866,2a.866.866,0,0,1,.866.866V4.944h2.54a4.279,4.279,0,0,1,4.175,3.37h9.446a4.276,4.276,0,0,1,4.271,4.271v5.108a.866.866,0,0,1-1.732,0v-2.54H1.732v2.54a.866.866,0,0,1-1.732,0V2.866A.866.866,0,0,1,.866,2ZM4.271,6.676H1.732V8.314H6.645A2.543,2.543,0,0,0,4.271,6.676Zm16.161,6.747v-.837a2.542,2.542,0,0,0-2.54-2.54H1.732v3.377Zm0,0" transform="translate(0 -2)" fill="#BABABA"/>
                   </svg>
                 </span> -->
-                  <span class="tr_type" *ngIf="cartItem.type=='flight'">
-                    {{x==0 && cartItem.type=='flight' ?'Primary Traveler':travlerLabels['en'][traveler.controls.type.value]}}
-                  </span>
-                  <span class="tr_type hotel_type_name" *ngIf="cartItem.type=='hotel'">
-                    {{cartItem.module_info.title }}
-                  </span>
-                  <!-- <span class="tr_type mob_names {{travelerItem.value.adults[x].userId}}" [ngClass]="{'hide_section':travelerItem.value.adults[x].userId==''}">
+                <span class="tr_type" *ngIf="cartItem.type=='flight'">
+                  {{x==0 && cartItem.type=='flight' ?'Primary
+                  Traveler':travlerLabels['en'][traveler.controls.type.value]}}
+                </span>
+                <span class="tr_type hotel_type_name" *ngIf="cartItem.type=='hotel'">
+                  {{cartItem.module_info.title }}
+                </span>
+                <!-- <span class="tr_type mob_names {{travelerItem.value.adults[x].userId}}" [ngClass]="{'hide_section':travelerItem.value.adults[x].userId==''}">
                     {{x==0?'Primary Traveler':travlerLabels['en'][traveler.controls.type.value]}}
                   </span> -->
-  
-  
-                  <span class="trv_name hide_section" *ngIf="cartItem.type=='flight'">
-                    {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
-                    +travelerItem.value.adults[x].last_name:'' | titlecase}}
-                  </span>
-                
-                
+
+
+                <span class="trv_name hide_section" *ngIf="cartItem.type=='flight'">
+                  {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
+                  +travelerItem.value.adults[x].last_name:'' | titlecase}}
+                </span>
+
+
               </a>
-              <a [ngClass]="{'hotel_travller': cartItem.type=='hotel'}" *ngIf="(traveler.controls.type.value=='adult' && isAdultTravller) || (traveler.controls.type.value=='child' && isChildTravller) || (traveler.controls.type.value=='infant' && isInfantTravller)" class="dropdown-toggle traveler_drop_down"
-                data-toggle="dropdown" aria-expanded="false">Saved Travelers</a>
-              <ul *ngIf="(traveler.controls.type.value=='adult' && isAdultTravller) || (traveler.controls.type.value=='child' && isChildTravller) || (traveler.controls.type.value=='infant' && isInfantTravller)" class="dropdown-menu options_name">
+              <a [ngClass]="{'hotel_travller': cartItem.type=='hotel'}"
+                *ngIf="(traveler.controls.type.value=='adult' && isAdultTravller) || (traveler.controls.type.value=='child' && isChildTravller) || (traveler.controls.type.value=='infant' && isInfantTravller)"
+                class="dropdown-toggle traveler_drop_down" data-toggle="dropdown" aria-expanded="false">Saved
+                Travelers</a>
+              <ul
+                *ngIf="(traveler.controls.type.value=='adult' && isAdultTravller) || (traveler.controls.type.value=='child' && isChildTravller) || (traveler.controls.type.value=='infant' && isInfantTravller)"
+                class="dropdown-menu options_name">
                 <ng-container *ngFor="let user of myTravelers">
                   <li (click)='selectTraveler(user.userId,x,cartNumber)'
                     *ngIf="user.user_type==traveler.controls.type.value && traveler.roleId!=7">
@@ -49,10 +55,12 @@
 
                 <div [formGroupName]="x" class="common_form">
                   <div class="form-row">
-                    <div class="col-sm-12  mb-sm-10 mandetory_wrps" [ngClass]="(travelerItem.value.adults[x].module=='flight')?'col-md-4':'col-md-6'">
+                    <div class="col-sm-12  mb-sm-10 mandetory_wrps"
+                      [ngClass]="(travelerItem.value.adults[x].module=='flight')?'col-md-4':'col-md-6'">
                       <label for="">First Name*</label>
                       <input type="text" class="form-control" formControlName="first_name" tabindex={{x}}
-                        (keypress)="commonFunction.preventNumberInput($event)" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.first_name.errors}">
+                        (keypress)="commonFunction.preventNumberInput($event)"
+                        [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.first_name.errors}">
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.first_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.first_name.errors.required" class="error_field">
@@ -64,58 +72,73 @@
                           {{'first_name_string_validation' | translate}} </small>
                       </div>
                     </div>
-                    <div class="col-sm-12  mb-sm-10 mandetory_wrps" [ngClass]="(travelerItem.value.adults[x].module=='flight')?'col-md-4':'col-md-6'">
+                    <div class="col-sm-12  mb-sm-10 mandetory_wrps"
+                      [ngClass]="(travelerItem.value.adults[x].module=='flight')?'col-md-4':'col-md-6'">
                       <label for="">Last Name*</label>
                       <input type="text" class="form-control" formControlName="last_name" tabindex={{x}}
-                        (keypress)="commonFunction.preventNumberInput($event)" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.last_name.errors}" >
+                        (keypress)="commonFunction.preventNumberInput($event)"
+                        [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.last_name.errors}">
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.last_name.errors"
                         class="error">
                         <small *ngIf="traveler.controls.last_name.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter last name.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter
+                          last name.</small>
                         <small *ngIf="traveler.controls.last_name.errors.pattern" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                           {{'last_name_string_validation' | translate}} </small>
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory" *ngIf="cartItem.type=='flight'">
-                      
+                    <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory"
+                      *ngIf="cartItem.type=='flight'">
+
                       <div class="gender_anchers gender_selection">
                         <label for="">Gender*</label>
-                        <ng-select [searchable]="false" [selectOnTab]="true" formControlName="gender" [clearable]="false" placeholder="Select Gender" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.gender.errors}">
+                        <ng-select [searchable]="false" [selectOnTab]="true" formControlName="gender"
+                          [clearable]="false" placeholder="Select Gender"
+                          [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.gender.errors}">
                           <ng-option value="M">Male</ng-option>
                           <ng-option value="F">Female</ng-option>
                           <ng-option value="O">Other</ng-option>
                         </ng-select>
-                        <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.gender.errors" class="error">
+                        <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.gender.errors"
+                          class="error">
                           <small *ngIf="traveler.controls.gender.errors.required" class="error_field">
                             <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
                               class="error_img">Select gender.</small>
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="col-sm-12  mb-sm-10 mandetory_wrps"
-                      *ngIf="traveler.controls.is_email_required.value==true && (traveler.controls.type.value=='' || traveler.controls.type.value=='adult')" [ngClass]="(travelerItem.value.adults[x].module=='flight')?'col-md-4':'col-md-6'">
+                      *ngIf="traveler.controls.is_email_required.value==true && (traveler.controls.type.value=='' || traveler.controls.type.value=='adult')"
+                      [ngClass]="(travelerItem.value.adults[x].module=='flight')?'col-md-4':'col-md-6'">
                       <label for="">Email*</label>
-                      <input [readonly]="accountHolderEmail && x==0"  type="email" class="form-control" formControlName="email" tabindex={{x}} [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.email.errors}">
-                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.email.errors" class="error">
+                      <input [readonly]="accountHolderEmail && x==0" type="email" class="form-control"
+                        formControlName="email" tabindex={{x}}
+                        [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.email.errors}">
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.email.errors"
+                        class="error">
                         <small *ngIf="traveler.controls.email.errors.required" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter email address.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter
+                          email address.</small>
                         <small *ngIf="traveler.controls.email.errors.pattern" class="error_field">
-                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter valid email address.</small>
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter
+                          valid email address.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 telephone_wrps mandetory_wrps"
-                      *ngIf="traveler.controls.is_phone_required.value==true && (traveler.controls.type.value=='' || traveler.controls.type.value=='adult')" [ngClass]="(travelerItem.value.adults[x].module=='flight')?'col-md-4':'col-md-6'">
+                      *ngIf="traveler.controls.is_phone_required.value==true && (traveler.controls.type.value=='' || traveler.controls.type.value=='adult')"
+                      [ngClass]="(travelerItem.value.adults[x].module=='flight')?'col-md-4':'col-md-6'">
                       <label for="">{{ 'phone_no' | translate}}*</label>
                       <span class="tel_span"
-                      [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.phone_no.errors}">
+                        [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.phone_no.errors}">
                         <ng-select class="ng-customClass country_code" [items]="phoneCodelist" bindLabel="phonecode"
                           [tabIndex]="x" bindValue="phonecode" formControlName="country_code" [clearable]="false"
                           (change)="validateCountryWithPhoneNumber($event,cartNumber,x)">
                         </ng-select>
-                        <input type="text" mask="{{travelerItem.value.adults[x].phone_no_format}}" class="form-control" maxlength="20"
-                          formControlName="phone_no" tabindex={{x}} [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.phone_no.errors}">
+                        <input type="text" mask="{{travelerItem.value.adults[x].phone_no_format}}" class="form-control"
+                          maxlength="20" formControlName="phone_no" tabindex={{x}}
+                          [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.phone_no.errors}">
                       </span>
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.phone_no.errors"
                         class="error">
@@ -124,15 +147,19 @@
                           Enter phone number.</small>
                         <small *ngIf="traveler.controls.phone_no.errors.minlength" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error"
-                            class="error_img">Minimum {{travelerItem.value.adults[x].phone_no_length}} characters.</small>
+                            class="error_img">Minimum {{travelerItem.value.adults[x].phone_no_length}}
+                          characters.</small>
                       </div>
                     </div>
-                    <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps" *ngIf="cartItem.type=='flight'">
+                    <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps"
+                      *ngIf="cartItem.type=='flight'">
                       <label for="">{{'dob' | translate}}*</label>
                       <input #dobText placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}}
                         [textMask]="dateYeaMask" formControlName="dob"
-                        (blur)="checkMaximumMinimum($event, dobText.value, cartNumber, x)" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.dob.errors}">
-                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.dob.errors" class="error">
+                        (blur)="checkMaximumMinimum($event, dobText.value, cartNumber, x)"
+                        [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.dob.errors}">
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.dob.errors"
+                        class="error">
                         <small *ngIf="traveler.controls.dob.errors.required" class="error_field">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                           Enter date of birth.</small>
@@ -140,22 +167,31 @@
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
                           Enter valid date of birth.</small>
                       </div>
-                      <div *ngIf="travelerItem.value.adults[x].is_submitted && !traveler.controls.is_valid_date.value" class="error">
-                        <small class="error_field" *ngIf="traveler.controls.type.value === 'adult'">
+                      <div *ngIf="travelerItem.value.adults[x].is_submitted && !traveler.controls.is_valid_date.value"
+                        class="error">
+                        <small class="error_field"
+                          *ngIf="(traveler.controls.type.value === 'adult') && !(traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate)">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Adult
-                          is age 12+.</small>
-                        <small class="error_field" *ngIf="traveler.controls.type.value === 'child'">
+                          is age 18+.</small>
+                        <small class="error_field"
+                          *ngIf="(traveler.controls.type.value === 'child') && !(traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate)">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Child
-                          is age 2-12.</small>
-                        <small class="error_field" *ngIf="traveler.controls.type.value === 'infant'">
+                          is age 2-18.</small>
+                        <small class="error_field"
+                          *ngIf="(traveler.controls.type.value === 'infant') && !(traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate)">
                           <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Infant
                           is age 0-2.</small>
+                        <small class="error_field"
+                          *ngIf="traveler.controls.dob.errors && traveler.controls.dob.errors.invalidDate">
+                          <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">Enter
+                          valid date of birth.</small>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps"
                       *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_number') && traveler.controls.is_passport_required.value">
                       <label for="">Passport number*</label>
-                      <input type="text" class="form-control" formControlName="passport_number" tabindex={{x}} [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.passport_number.errors}">
+                      <input type="text" class="form-control" formControlName="passport_number" tabindex={{x}}
+                        [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.passport_number.errors}">
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.passport_number.errors"
                         class="error">
                         <small *ngIf="traveler.controls.passport_number.errors.required" class="error_field">
@@ -167,7 +203,8 @@
                       *ngIf="travelerItem.value?.adults[x].hasOwnProperty('passport_expiry') && traveler.controls.is_passport_required.value">
                       <label for="">Expiration*</label>
                       <input type="text" class="form-control" bsDatepicker formControlName="passport_expiry"
-                        tabindex={{x}} [bsConfig]="bsConfig" [minDate]="passPortMinDate" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.passport_expiry.errors}">
+                        tabindex={{x}} [bsConfig]="bsConfig" [minDate]="passPortMinDate"
+                        [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.passport_expiry.errors}">
                       <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.passport_expiry.errors"
                         class="error">
                         <small *ngIf="traveler.controls.passport_expiry.errors.required" class="error_field">
@@ -177,7 +214,8 @@
                     </div>
 
 
-                    <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps" *ngIf="cartItem.type=='flight'">
+                    <div class="col-sm-12 col-md-4 nation_wrps mandetory_wrps country_selection"
+                      *ngIf="cartItem.type=='flight'">
                       <label for="">{{traveler.controls.is_passport_required.value ? 'Country of Issue*' :
                         'Country*'}}</label>
                       <ng-select [clearable]="false" [items]="countries" bindLabel="name" bindValue="id" tabindex="10"
@@ -237,12 +275,15 @@
                   </div>
                 </div>
 
-                <span class="edit_btns duel_buttons" >
+                <span class="edit_btns duel_buttons">
                   <span class="remove_wrps">
-                    <button class="hover-link" (click)="deleteTraveler(cartNumber,x)" [ngClass]="{'disabled': !traveler.touched }">Delete</button>
+                    <button class="hover-link" (click)="deleteTraveler(cartNumber,x)"
+                      [ngClass]="{'disabled': !traveler.touched }">Delete</button>
                   </span>
-                  <button (click)="editTraveler(cartNumber,x)" [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }"  class="hover-link">Edit</button>
-                  <button (click)="saveTraveler(cartNumber,x)" [ngClass]="{'disabled': !traveler.touched }" class="hover-link">Save</button>
+                  <button (click)="editTraveler(cartNumber,x)"
+                    [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }" class="hover-link">Edit</button>
+                  <button (click)="saveTraveler(cartNumber,x)" [ngClass]="{'disabled': !traveler.touched }"
+                    class="hover-link">Save</button>
                 </span>
               </div>
             </div>

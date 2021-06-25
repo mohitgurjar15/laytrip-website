@@ -12,7 +12,7 @@ import * as moment from 'moment'
 import { getLoginUserInfo, getUserDetails } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+//import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -75,7 +75,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private genericService: GenericService,
     private cartService: CartService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService,
+    //private spinner: NgxSpinnerService,
     public modalService: NgbModal,
   ) {
   }
@@ -202,9 +202,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   bookNow(route) {
     this.removeFlight.emit(this.flightUniqueCode);
     this.isFlightNotAvailable = false;
-    /*  console.log(this.flightListArray)
+    /*  
     this.flightListArray = this.flightListArray.filter(obj => obj.unique_code !== this.flightUniqueCode);
-    console.log(this.flightListArray)
  */
     /* if (!this.isLoggedIn) {
       const modalRef = this.modalService.open(LaytripOkPopup, {
@@ -240,7 +239,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
       this.cartService.addCartItem(payload).subscribe((res: any) => {
         this.changeLoading.emit(true);
-        let queryParamsNew: any = {};
         if (res) {
           let newItem = { id: res.data.id, module_Info: res.data.moduleInfo[0] }
           this.cartItems = [...this.cartItems, newItem]
@@ -257,9 +255,9 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
             if(parms.utm_campaign){
               queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
-            this.router.navigate(['cart/booking'], { queryParams:queryParams });
+            this.router.navigate(['cart/checkout'], { queryParams:queryParams });
           } else {
-            this.router.navigate(['cart/booking']);
+            this.router.navigate(['cart/checkout']);
           }
         }
       }, error => {
@@ -323,25 +321,19 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.flightUniqueCode = '';
   }
 
-}
+  showDownPayment(offerData,downPaymentOption){
 
-@Component({
-  selector: 'laytrip-ok-popup',
-  template: `<div class="modal-header">
-      <h4 class="modal-title">Warning</h4>
-    </div>
-    <div class="modal-body">
-      <p>Please login to book flight</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">OK</button>
-    </div>`,
-})
+    if (typeof offerData != 'undefined' && offerData.applicable) {
 
-export class LaytripOkPopup {
-
-  constructor(public modal: NgbActiveModal) {
+      if(typeof offerData.down_payment_options!='undefined' && offerData.down_payment_options[downPaymentOption].applicable){
+        return true;
+      }
+      return false;
+    }
+    return true;
   }
 }
+
+
 
 

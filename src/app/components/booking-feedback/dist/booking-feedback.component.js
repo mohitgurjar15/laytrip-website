@@ -8,49 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.BookingFeedbackComponent = void 0;
 var core_1 = require("@angular/core");
-var forms_1 = require("@angular/forms");
 var environment_1 = require("../../../environments/environment");
 var BookingFeedbackComponent = /** @class */ (function () {
-    function BookingFeedbackComponent(formBuilder, flightService, toastr) {
+    function BookingFeedbackComponent(formBuilder, flightService, route, commonFunction) {
         this.formBuilder = formBuilder;
         this.flightService = flightService;
-        this.toastr = toastr;
+        this.route = route;
+        this.commonFunction = commonFunction;
         this.s3BucketUrl = environment_1.environment.s3BucketUrl;
+        this.bookingId = '';
         this.submitted = false;
         this.is_rating = true;
         this.loading = false;
         this.ratingValue = 5;
-        this._rating = 'Excllent';
+        this._rating = '';
         this.feedbackValueChange = new core_1.EventEmitter();
     }
     BookingFeedbackComponent.prototype.ngOnInit = function () {
         this.feedbackForm = this.formBuilder.group({
             rating: [''],
-            comment: ['', forms_1.Validators.required]
+            comment: ['']
         });
-    };
-    BookingFeedbackComponent.prototype.onSubmit = function () {
-        var _this = this;
-        this.loading = true;
-        if (this.feedbackForm.invalid) {
-            this.submitted = true;
-            this.loading = false;
-            return;
-        }
-        else {
-            var jsonData = {
-                booking_id: this.bookingId,
-                rating: this.ratingValue,
-                message: this.feedbackForm.value.comment
-            };
-            this.flightService.addFeedback(jsonData).subscribe(function (data) {
-                _this.feedbackValueChange.emit(true);
-                _this.loading = false;
-            }, function (error) {
-                _this.loading = false;
-                _this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
-            });
-        }
+        this.bookingId = this.route.snapshot.paramMap.get('id');
     };
     BookingFeedbackComponent.prototype.selectRating = function (event, rating) {
         if (rating == 'Terrible') {
@@ -74,12 +53,35 @@ var BookingFeedbackComponent = /** @class */ (function () {
             this._rating = 'Excllent';
         }
     };
-    BookingFeedbackComponent.prototype.close = function () {
-        this.feedbackValueChange.emit(true);
+    BookingFeedbackComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.loading = true;
+        if (this.feedbackForm.invalid) {
+            this.submitted = true;
+            this.loading = false;
+            return;
+        }
+        else {
+            var jsonData = {
+                booking_id: this.bookingId,
+                rating: this.ratingValue,
+                message: this.feedbackForm.value.comment
+            };
+            this.flightService.addFeedback(jsonData).subscribe(function (data) {
+                localStorage.setItem('$bkg', _this.bookingId);
+                // this.feedbackValueChange.emit(true);
+                _this.close();
+                _this.loading = false;
+            }, function (error) {
+                _this.loading = false;
+                // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
+            });
+        }
     };
-    __decorate([
-        core_1.Input()
-    ], BookingFeedbackComponent.prototype, "bookingId");
+    BookingFeedbackComponent.prototype.close = function () {
+        var payload = { isModalOpen: false };
+        this.feedbackValueChange.emit(payload);
+    };
     __decorate([
         core_1.Output()
     ], BookingFeedbackComponent.prototype, "feedbackValueChange");

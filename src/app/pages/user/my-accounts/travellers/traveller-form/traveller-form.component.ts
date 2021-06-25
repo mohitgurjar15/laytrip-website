@@ -232,7 +232,6 @@ export class TravellerFormComponent implements OnInit {
   onSubmit() {
     this.loadingValue.emit(true);
     this.submitted = true;
-    console.log(this.travellerForm)
     const controls = this.travellerForm.controls;
     if (this.travellerId) {
       this.validateDob(moment(this.travellerForm.controls.dob.value).format('MM-DD-YYYY'));

@@ -25,7 +25,6 @@ var HotelsComponent = /** @class */ (function () {
     HotelsComponent.prototype.ngOnChanges = function (changes) {
         if (typeof changes['cartItem'].currentValue != 'undefined') {
             this.cartItem = changes['cartItem'].currentValue;
-            console.log(this.cartItem);
             this.laytrip_cart_id = changes['laytrip_cart_id'].currentValue;
         }
     };

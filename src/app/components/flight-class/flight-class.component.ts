@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, Input } from '@angular/core';
+import { CommonFunction } from 'src/app/_helpers/common-function';
 declare var $: any;
 
 @Component({
@@ -12,20 +13,25 @@ export class FlightClassComponent implements OnInit {
 
   @Input() flightClass;
   showClass: boolean = false;
+  isRefferal: boolean = false;
 
-  constructor(private eRef: ElementRef) { }
+  constructor(private eRef: ElementRef, public commonFunction: CommonFunction
+    ) { }
 
   ngOnInit() {
     this.loadJquery();
+    this.isRefferal = this.commonFunction.isRefferal();
+
   }
 
   loadJquery() {
-    /* $("body").click(function () {
+     $("body").click(function () {
       $(".add_class_sec_open_").hide();
     });
 
     $(".class_sec_info").click(function (e) {
       e.stopPropagation();
+      console.log(e.target)
       if((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') || 
       (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')
       ){         
@@ -41,7 +47,7 @@ export class FlightClassComponent implements OnInit {
       function (e) {
         e.stopPropagation();
       }
-    ); */
+    ); 
  
   }
 

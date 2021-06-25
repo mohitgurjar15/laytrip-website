@@ -13,7 +13,7 @@ export class GuestInfoComponent implements OnInit {
 
   @Output() changeValue = new EventEmitter<any>();
   @Input() label;
-
+  @Output() currentChangeCounter = new EventEmitter();
   totalRoom = [];
   errorMessage = '';
   openDrawer: boolean = false;
@@ -30,6 +30,9 @@ export class GuestInfoComponent implements OnInit {
     ;
   totalPerson: number;
   selectedChildAge;
+  progressInterval;
+  counterChangeVal=0;
+
   constructor(
     private route: ActivatedRoute,
     private commonFunction: CommonFunction,
@@ -95,6 +98,15 @@ export class GuestInfoComponent implements OnInit {
 
   toggleDrawer() {
     this.openDrawer = !this.openDrawer;
+    if(this.commonFunction.isRefferal()){
+      this.progressInterval = setInterval(() => {
+        if(this.openDrawer){
+          this.currentChangeCounter.emit(this.counterChangeVal += 1);
+        } else {
+          clearInterval(this.progressInterval);
+        }
+      }, 1000); 
+    }
   }
 
   counter(i) {
@@ -159,10 +171,8 @@ export class GuestInfoComponent implements OnInit {
   }
 
   changeChildAge(age, index) {
-    /*  console.log(age, index)
-     this.roomsGroup.children[index].push(parseInt(age));
-     this.changeValue.emit(this.roomsGroup);
-     console.log(this.roomsGroup) */
+     /*this.roomsGroup.children[index].push(parseInt(age));
+     this.changeValue.emit(this.roomsGroup);*/
   }
 
   toggleChildDropDown(index) {

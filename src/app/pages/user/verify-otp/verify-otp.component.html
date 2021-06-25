@@ -1,7 +1,7 @@
 <div class="modal_otp_block">
     <div class="modal-header">
 
-        <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
+        <button type="button" *ngIf="!otpVerified" class="close" aria-label="Close" (click)="activeModal.close()">
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
         </button>
     </div>
@@ -20,7 +20,8 @@
         <form [formGroup]="otpForm" *ngIf="!otpVerified">
             <div class="form_row">
                 <div class="text_field">
-                    <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+                    <ngx-otp-input #ngOtpInput (otpChange)="onOtpChange($event)" [config]="config"></ngx-otp-input>
+                    <!-- <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input> -->
                     <div
                         *ngIf="otpLengthError || otpForm.hasError('otpsError') && ( otpForm.controls.otp.touched || submitted)">
                         <p class="error_text">{{'otp_touched_validation' | translate}}</p>
@@ -51,7 +52,12 @@
             </div>
 
         </form>
-
+        
+        <div class="form_btn"  *ngIf="otpVerified">
+            <button type="button" (click)="activeModal.close()" class="btn btn-accent btn-block btn-flat b-r-10">
+               Done
+            </button>
+        </div>
     </div>
     <div class="modal-footer">
         <div class="modal_btm">

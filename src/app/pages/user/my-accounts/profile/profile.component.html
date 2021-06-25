@@ -4,7 +4,7 @@
             <div class="form_row">
                 <div class="update_profile">
                     <span>
-                        <img  accept="image/*"class="img-rounded" src="{{image || defaultImage}}" alt="Profile Image">
+                        <img accept="image/*" class="img-rounded" src="{{image || defaultImage}}" alt="Profile Image">
                     </span>
                     <small class="error_field" *ngIf="imageFileError">{{imageErrorMsg}}</small>
                     <div class="update_profile_btn">
@@ -34,8 +34,7 @@
                         (keypress)="commonFunction.preventNumberInput($event)">
                 </div>
             </div>
-            <div *ngIf="submitted && profileForm.controls.first_name.errors"
-                class="error error_profile">
+            <div *ngIf="submitted && profileForm.controls.first_name.errors" class="error error_profile">
                 <div class="fake_div"></div>
                 <small *ngIf="profileForm.controls.first_name.errors.required" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
@@ -53,8 +52,7 @@
                         tabindex="2" (keypress)="commonFunction.preventNumberInput($event)">
                 </div>
             </div>
-            <div *ngIf="(isFormControlEnable ) && profileForm.controls.last_name.errors"
-                class="error error_profile">
+            <div *ngIf="(isFormControlEnable ) && profileForm.controls.last_name.errors" class="error error_profile">
                 <div class="fake_div"></div>
                 <small *ngIf="submitted && profileForm.controls.last_name.errors.required" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
@@ -75,8 +73,7 @@
 
                 </div>
             </div>
-            <div class="error error_profile"
-                *ngIf="profileForm.controls.email.errors">
+            <div class="error error_profile" *ngIf="profileForm.controls.email.errors">
                 <div class="fake_div"></div>
                 <small *ngIf="profileForm.controls.email.errors.required" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
@@ -88,11 +85,9 @@
             <div class="form_row common_row ar_field">
                 <label>Home Airport</label>
                 <div class="text_field airport_dropdown">
-                    <input
-                        [readonly]="(!isFormControlEnable)"
-                        type="text" placeholder=" {{hmPlaceHolder}}" (keyup)="searchAirportDeparture($event)" formControlName="home_airport"
-                        tabindex="3">
-                     <!-- <ng-select [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="code"
+                    <input [readonly]="(!isFormControlEnable)" type="text" placeholder=" {{hmPlaceHolder}}"
+                        (keyup)="searchAirportDeparture($event)" formControlName="home_airport" tabindex="3">
+                    <!-- <ng-select [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="code"
                         [clearable]="false" minTermLength="3" notFoundText="" [virtualScroll]="true"
                         formControlName="home_airport" [ngModelOptions]="{standalone: true}"
                         (clear)="onRemove($event,{key: 'fromSearch'})" (search)="changeSearchDeparture($event)"
@@ -107,17 +102,17 @@
                             {{item.city}}
                         </ng-template>
                     </ng-select>  -->
-                   <!--  <span *ngIf="departureAirport?.code"> {{ departureAirport?.country}} ({{ departureAirport?.code }})</span>
+                    <!--  <span *ngIf="departureAirport?.code"> {{ departureAirport?.country}} ({{ departureAirport?.code }})</span>
                     <span *ngIf="!departureAirport?.code"></span> -->
 
-                    <div class="search_suggetion_main" *ngIf="!closeAirportSuggestion" >
+                    <div class="search_suggetion_main" *ngIf="!closeAirportSuggestion">
                         <div class="close_btn">
                             <button (click)="closeAirportDropDown(type)" type="button" class="close">
                                 <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
                             </button>
                         </div>
-                        <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
-                            pointerEventsMethod="scrollbar">
+                        <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable
+                            track="all" pointerEventsMethod="scrollbar">
                             <span *ngIf="loadingDeparture">Loading...</span>
                             <div class="suggtions_wrps_mn">
                                 <div class="suggtions">
@@ -125,10 +120,12 @@
                                         <!-- <a href="#a" class="word_alpha">{{item.key}} </a> -->
                                         <span class="linew_wrps">
                                             <ng-conatiner *ngFor="let sub_item of item.value">
-                                                <span *ngIf="sub_item.parentId == 0" class="line_names"  (click)="selectAirport(sub_item)">
+                                                <span *ngIf="sub_item.parentId == 0" class="line_names"
+                                                    (click)="selectAirport(sub_item)">
                                                     {{sub_item.city}} International ({{sub_item.code}})
                                                 </span>
-                                                <span *ngIf="sub_item.parentId != 0" class="line_names"  (click)="selectAirport(sub_item)">
+                                                <span *ngIf="sub_item.parentId != 0" class="line_names"
+                                                    (click)="selectAirport(sub_item)">
                                                     {{sub_item.city}} ({{sub_item.code}})
                                                 </span>
                                             </ng-conatiner>
@@ -180,8 +177,9 @@
                             bindLabel="countryCode" tabindex="5" bindValue="countryCode" [clearable]="false"
                             formControlName="country_code" (change)="validateCountryWithPhoneNumber($event)">
                         </ng-select>
-                        <input [readonly]="!isFormControlEnable" mask="{{phoneNumberMask.format}}" placeholder="(000) 000-0000"
-                            type="text" tabindex="6" class="form-control" maxlength="14" formControlName="phone_no">
+                        <input [readonly]="!isFormControlEnable" mask="{{phoneNumberMask.format}}"
+                            placeholder="(000) 000-0000" type="text" tabindex="6" class="form-control" maxlength="14"
+                            formControlName="phone_no">
                     </span>
 
                 </div>
@@ -190,8 +188,7 @@
                 *ngIf="submitted && (profileForm.controls.phone_no.errors ||profileForm.hasError('phoneAndPhoneCodeError'))">
                 <div class="fake_div"></div>
                 <small class="error_field_new" *ngIf="profileForm.hasError('phoneAndPhoneCodeError')">
-                    <img
-                        src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
                     {{'phone_touched_validation' |
                     translate}}</small>
                 <small
@@ -203,8 +200,8 @@
                 [ngClass]="{'error_main_class':  submitted && profileForm.controls.dob.errors}">
                 <label>{{'dob' | translate}}<sup>*</sup></label>
                 <div class="text_field">
-                    <input type="text" formControlName="dob" tabindex="7" placeholder="MM/DD/YYYY" [readonly]="!isFormControlEnable"
-                        [textMask]="dateYeaMask">
+                    <input type="text" formControlName="dob" tabindex="7" placeholder="MM/DD/YYYY"
+                        [readonly]="!isFormControlEnable" [textMask]="dateYeaMask">
                     <!-- <p-calendar [disabled]="!isFormControlEnable" dateFormat="mm/dd/yy" class="form-control"
                         panelStyleClass="birth_date" inputId="basic" tabindex="9" formControlName="dob"
                         [maxDate]="dobMinDate" [readonlyInput]="true" [yearNavigator]="true" [monthNavigator]="true"
@@ -213,14 +210,14 @@
                     </p-calendar> -->
                 </div>
             </div>
-            <div *ngIf="submitted &&  profileForm.controls.dob.errors"
-                class="error error_profile">
+            <div *ngIf="submitted &&  profileForm.controls.dob.errors" class="error error_profile">
                 <div class="fake_div"></div>
                 <small *ngIf="profileForm.controls.dob.errors.required" class="error_field_new">
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
                     {{'dob_touched_validation' | translate}}</small>
                 <small *ngIf="profileForm.controls.dob.errors.pattern" class="error_field_new">
-                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">Enter valid date of Birth.</small>
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">Enter
+                    valid date of Birth.</small>
             </div>
             <!-- <div *ngIf="profileForm.controls.dob.errors"
                 class="error error_profile">
@@ -261,8 +258,9 @@
                     <input tabindex="9" [readonly]="!isFormControlEnable" maxlength="50" type="text" class="inputs_com"
                         formControlName="city" placeholder="City">
                     <ng-select tabindex="10" [clearable]="false" [readonly]="!isFormControlEnable" class="address_ng"
-                        clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id" placeholder="Select State">
-                        <ng-option *ngFor="let state of stateList" value="{{state.id}}">{{state.name}}</ng-option>
+                        clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id"
+                        placeholder="Select State">
+                        <ng-option *ngFor="let state of stateList" [value]="state.id">{{state.name}}</ng-option>
                     </ng-select>
                     <input tabindex="11" [readonly]="!isFormControlEnable" maxlength="8" type="text" class="inputs_com"
                         formControlName="zip_code" placeholder="Zip Code">

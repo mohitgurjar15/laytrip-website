@@ -28,7 +28,7 @@ export class MainFooterComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
     public translate: TranslateService,
-    private commonFunction: CommonFunction,
+    public commonFunction: CommonFunction,
     private renderer: Renderer2,
     private genericService: GenericService,
     public route :ActivatedRoute
@@ -184,7 +184,10 @@ export class MainFooterComponent implements OnInit {
   }
 
   openShareModal() {
-    this.modalService.open(ShareSocialMediaComponent, { windowClass: 'share_modal', centered: true,backdrop: 'static',keyboard: false });
+    this.modalService.open(ShareSocialMediaComponent, { windowClass: 'share_modal',
+     centered: true,
+    //  backdrop: 'static',
+     keyboard: false });
   }
    
 }

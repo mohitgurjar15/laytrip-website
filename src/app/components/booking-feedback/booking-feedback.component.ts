@@ -3,8 +3,8 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlightService } from '../../services/flight.service';
 import { environment } from '../../../environments/environment';
-import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
+import { CommonFunction } from 'src/app/_helpers/common-function';
 
 @Component({
   selector: 'app-booking-feedback',
@@ -19,20 +19,20 @@ export class BookingFeedbackComponent implements OnInit {
   is_rating = true;
   loading = false;
   ratingValue = 5;
-  _rating = '';
+  _rating = 'Excllent';
   @Output() feedbackValueChange = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
     private flightService: FlightService,
-    private toastr: ToastrService,
     private route: ActivatedRoute,
+    private commonFunction: CommonFunction,
   ) { }
 
   ngOnInit() {
     this.feedbackForm = this.formBuilder.group({
       rating: [''],
-      comment: ['', Validators.required],
+      comment: [''],
     });
     this.bookingId = this.route.snapshot.paramMap.get('id');
   }

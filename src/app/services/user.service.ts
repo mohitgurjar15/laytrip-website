@@ -83,7 +83,7 @@ export class UserService {
   }
 
   verifyOtp(data) {
-    return this.http.patch(this.apiURL + 'v1/auth/verify-otp', data)
+    return this.http.patch(this.apiURL + 'v1/auth/verify-otp', data,this.commonFunction.setWithoutLoginHeader())
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -91,7 +91,7 @@ export class UserService {
   }
   resendOtp(email) {
     let data = { "email": email };
-    return this.http.patch(this.apiURL + 'v1/auth/resend-otp', data)
+    return this.http.patch(this.apiURL + 'v1/auth/resend-otp', data,this.commonFunction.setWithoutLoginHeader())
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -102,14 +102,14 @@ export class UserService {
     let data = {
       "email": typeof formValue.email != 'undefined' ? formValue.email : formValue,
     };
-    return this.http.post(this.apiURL + 'v1/auth/forgot-password', data)
+    return this.http.post(this.apiURL + 'v1/auth/forgot-password', data,this.commonFunction.setWithoutLoginHeader())
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
   resetPassword(data) {
-    return this.http.post(this.apiURL + 'v1/auth/reset-password', data);
+    return this.http.post(this.apiURL + 'v1/auth/reset-password', data,this.commonFunction.setWithoutLoginHeader());
   }
 
   deleteAccount(isRequireBackupFile) {
@@ -128,7 +128,6 @@ export class UserService {
         requireBackupFile: isRequireBackupFile
       }
     }
-    console.log(options)
     return this.http.delete(this.apiURL + 'v1/user/account/request', options)
   }
 

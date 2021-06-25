@@ -59,6 +59,8 @@ export class HotelSearchComponent implements OnInit {
       latitude: this.route.snapshot.queryParams['latitude'],
       longitude: this.route.snapshot.queryParams['longitude'],
       city_id: this.route.snapshot.queryParams['city_id'],
+      hotel_id: this.route.snapshot.queryParams['hotel_id'],
+      // type: this.route.snapshot.queryParams['type'],
       rooms: info.rooms,
       adults: info.adults,
       children: info.child,
@@ -89,8 +91,6 @@ export class HotelSearchComponent implements OnInit {
 
 
   sortHotels(event) {
-
-    console.log(event)
     this.hotelService.setSortFilter(event);
     let { key, order } = event;
     if (key === 'total') {
@@ -215,17 +215,17 @@ export class HotelSearchComponent implements OnInit {
   moduleTabClick(tabName) {
     if (tabName == 'flight') {
       this.homeService.setActiveTab(tabName);
-      if(this.commonFunction.isRefferal()){
+      if (this.commonFunction.isRefferal()) {
         var parms = this.commonFunction.getRefferalParms();
         var queryParams: any = {};
         queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-        if(parms.utm_medium){
+        if (parms.utm_medium) {
           queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
         }
-        if(parms.utm_campaign){
+        if (parms.utm_campaign) {
           queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
         }
-        this.router.navigate(['/'],{ queryParams : queryParams});
+        this.router.navigate(['/'], { queryParams: queryParams });
       } else {
         this.router.navigate(['/']);
       }

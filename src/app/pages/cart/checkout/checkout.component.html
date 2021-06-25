@@ -23,6 +23,7 @@
                             <div id="accordion-card" class="card_accordion">
                                 <div class="card">
                                     <app-card-list cardListChangeCount="{{cardListChangeCount}}"
+                                    (selectCreditCard)="selectCreditCard($event)"
                                          cardToken={{cardToken}}>
                                     </app-card-list>
                                     <div id="new_card" class="new_card" [ngClass]="{'mt-0':add_new_card}"
@@ -55,6 +56,11 @@
                     <div class="payment_container">
                         <div class="payment_mode_wrapper">
                             <app-payment-mode-loader *ngIf="cartLoading"></app-payment-mode-loader>
+                            <app-payment-mode *ngIf="carts && carts.length" laycreditpoints="{{laycreditpoints}}"
+                                (selectInstalmentMode)="selectInstalmentMode($event)"
+                                (getInstalmentData)="getInstalmentData($event)"
+                                (redeemableLayCredit)="redeemableLayCredit($event)">
+                            </app-payment-mode>
                             <app-price-summary [priceSummary]="priceSummary" [cartPrices]="cartPrices">
                             </app-price-summary>
                         </div>
@@ -69,7 +75,7 @@
                             By purchasing this booking, I confirm that I am not a resident of CA, FL, IL or WA.
                         </label>
                         <div class="cta_btn_wrapper">
-                            <button [ngClass]="{'btn':isTermConditionAccepted==false || isExcludedCountryAccepted==false}" [disabled]="!isTermConditionAccepted || !isExcludedCountryAccepted" (click)="bookFlight()">Pay and Book</button>
+                            <button class="btn_pay_book" [ngClass]="{'btn':isTermConditionAccepted==false || isExcludedCountryAccepted==false}" [disabled]="!isTermConditionAccepted || !isExcludedCountryAccepted" (click)="bookFlight()">Pay and Book</button>
                         </div>
                     </div>
                     <div class="error_wrapper">

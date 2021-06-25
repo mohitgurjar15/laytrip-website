@@ -30,12 +30,13 @@ import { SsoLoginComponent } from './sso-login/sso-login.component';
 import { CovidPageComponent } from './covid-page/covid-page.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CmsPagesComponent } from './cms-pages/cms-pages.component';
-import { NgOtpInputModule } from 'ng-otp-input';
+//import { NgOtpInputModule } from 'ng-otp-input';
 import { CountdownModule } from 'ngx-countdown';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { TermsComponent } from './terms/terms.component';
 import { CcpaComponent } from './ccpa/ccpa.component';
 import { AppleSecurityLoginPopupComponent } from './user/apple-security-login-popup/apple-security-login-popup.component';
+import { NgxOtpInputModule } from 'ngx-otp-input';
 
 @NgModule({
   declarations: [
@@ -76,9 +77,10 @@ import { AppleSecurityLoginPopupComponent } from './user/apple-security-login-po
     FormsModule,
     // NG5 SLIDER
     Ng5SliderModule,
-    NgOtpInputModule,
+    //NgOtpInputModule,
     CountdownModule,
-    RecaptchaModule
+    RecaptchaModule,
+    NgxOtpInputModule
   ],
   entryComponents: [SignupComponent, SigninComponent, VerifyOtpComponent, AsteriskMarkComponent, ForgotPasswordComponent, ResetPasswordComponent, AppleSecurityLoginPopupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,4 +1,5 @@
 import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
+import * as moment from 'moment';
 
 export function validateImageFile(name: String) {
 
@@ -12,13 +13,12 @@ export function validateImageFile(name: String) {
   }
 }
 
-export function fileSizeValidator(file,maxSizeValidation=5000) {
-  
-  console.log(size,maxSizeValidation);
+export function fileSizeValidator(file, maxSizeValidation = 5000) {
+
   var size = Math.floor(file.size / 1000);
   if (size <= maxSizeValidation) {
     return true;
-  }else {
+  } else {
     return false;
   }
 }
@@ -40,37 +40,70 @@ export function optValidation() {
   };
 }
 
-export function phoneAndPhoneCodeValidation(type='') {
+export function phoneAndPhoneCodeValidation(type = '') {
   return (form: FormGroup): { [key: string]: any } => {
     // if(type == 'adult'){
-      if(!form.value.phone_no ){
-        return {phoneAndPhoneCodeError: true};
-      } if(!form.value.phone_no){      
-        return {phoneAndPhoneCodeError: true};
-      } else if(!form.value.phone_no || !form.value.country_code){
-        return {phoneAndPhoneCodeError: true};      
-      } else {
-        return null;
-      }
+    if (!form.value.phone_no) {
+      return { phoneAndPhoneCodeError: true };
+    } if (!form.value.phone_no) {
+      return { phoneAndPhoneCodeError: true };
+    } else if (!form.value.phone_no || !form.value.country_code) {
+      return { phoneAndPhoneCodeError: true };
+    } else {
+      return null;
+    }
     /* } else {
       return null;
     } */
-   
+
   };
 }
 
 export class WhiteSpaceValidator {
 
-  static cannotContainSpace(control: AbstractControl) : ValidationErrors | null {
+  static cannotContainSpace(control: AbstractControl): ValidationErrors | null {
 
-      if((control.value as string).indexOf(' ') >= 0){
+    if ((control.value as string).indexOf(' ') >= 0) {
 
-          return {cannotContainSpace: true}
+      return { cannotContainSpace: true }
 
-      }
-      return null;
+    }
+    return null;
 
   }
 
-} 
+}
 
+
+// export function checkValidDate(type = '') {
+//   return (form: FormGroup): { [key: string]: any } => {
+//     if (!form.value.dob) {
+//       return { invalidDate: true };
+//     } else {
+//       let dateTemp = moment(form.value.dob, 'MM/DD/YYYY');
+//       let today = new Date();
+//       if (dateTemp.isValid()) {
+//         // && !moment(dateTemp).isAfter(moment(today).format('MM/DD/YYYY'))
+//         return null;
+//       } else {
+//         return { invalidDate: true };
+//       }
+//     }
+//   };
+// }
+
+export function checkValidDate(type = '') {
+  return (control: AbstractControl): { [key: string]: any } => {
+    if (!control.value) {
+      return { invalidDate: true };
+    } else {
+      let dateTemp = moment(control.value, 'MM/DD/YYYY');
+      let today = new Date();
+      if (dateTemp.isValid() && !moment(dateTemp).isAfter(moment(today).format('MM/DD/YYYY'))) {
+        return;
+      } else {
+        return { invalidDate: true };
+      }
+    }
+  };
+}

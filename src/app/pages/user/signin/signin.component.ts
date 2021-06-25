@@ -9,6 +9,7 @@ import { getLoginUserInfo } from '../../../_helpers/jwt.helper';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { TravelerService } from 'src/app/services/traveler.service';
 
 declare var $: any;
 
@@ -31,7 +32,6 @@ export class SigninComponent implements OnInit {
   public userNotVerify: boolean = false;
   emailForVerifyOtp: string = '';
   guestUserId: string = '';
-
   @Input() pageData;
   @Input() resetRecaptcha;
   @Output() valueChange = new EventEmitter();
@@ -42,11 +42,14 @@ export class SigninComponent implements OnInit {
     private userService: UserService,
     public router: Router,
     public commonFunction: CommonFunction,
+    public travelerService: TravelerService,
     private renderer: Renderer2,
+
   ) { }
 
 
   ngOnInit() {
+
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.]+[a-z]{2,4}$')]],
       password: ['', [Validators.required]]
@@ -138,6 +141,7 @@ export class SigninComponent implements OnInit {
     this.loginForm.reset();
   }
 
+
   btnSignUpClick() {
     this.submitted = false;
     Object.keys(this.loginForm.controls).forEach(key => {
@@ -152,6 +156,8 @@ export class SigninComponent implements OnInit {
     }, 1500);
 
   }
+
+ 
 
   openOtpPage() {
     this.submitted = false;
@@ -182,7 +188,8 @@ export class SigninComponent implements OnInit {
       this.renderer.addClass(document.body, 'modal-open');
     }, 1500);
     this.modalService.open(ForgotPasswordComponent, {
-      windowClass: 'forgot_window', centered: true, backdrop: 'static',
+      windowClass: 'forgot_window', centered: true,
+      // backdrop: 'static',
       keyboard: false
     });
   }

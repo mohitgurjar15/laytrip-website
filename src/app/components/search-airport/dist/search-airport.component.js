@@ -8,14 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.SearchAirportComponent = void 0;
 var core_1 = require("@angular/core");
-// import { data } from './airport';
 var SearchAirportComponent = /** @class */ (function () {
-    function SearchAirportComponent(flightService, cd, cookieService) {
+    function SearchAirportComponent(flightService, cd, cookieService, commonFunction) {
         this.flightService = flightService;
         this.cd = cd;
         this.cookieService = cookieService;
+        this.commonFunction = commonFunction;
         this.changeValue = new core_1.EventEmitter();
         this.searchItem = new core_1.EventEmitter();
+        this.flightSearchRoute = new core_1.EventEmitter();
+        this.currentChangeCounter = new core_1.EventEmitter();
+        this.counterChangeVal = 0;
+        this.isInputFocus = false;
         this.selectedAirport = {};
         this.keyword = 'name';
         this.data = [];
@@ -39,9 +43,10 @@ var SearchAirportComponent = /** @class */ (function () {
             alternateLocation = localStorage.getItem('__from') || '';
         }
         this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe(function (response) {
+            _this.flightSearchRoute.emit(response);
             _this.data = response.map(function (res) {
                 _this.loading = false;
-                return {
+                var searchRoute = {
                     id: res.id,
                     name: res.name,
                     code: res.code,
@@ -50,6 +55,7 @@ var SearchAirportComponent = /** @class */ (function () {
                     display_name: res.city + "," + res.country + ",(" + res.code + ")," + res.name,
                     parentId: 0
                 };
+                return searchRoute;
             });
         }, function (error) {
             _this.loading = false;
@@ -57,10 +63,10 @@ var SearchAirportComponent = /** @class */ (function () {
     };
     SearchAirportComponent.prototype.onChangeSearch = function (event) {
         this.searchAirport(event.term);
-        console.log("event.term", event.term);
-        this.searchItem.emit({ key: event.term, type: this.id });
+        // this.searchItem.emit({key : event.term,type : this.id})
     };
     SearchAirportComponent.prototype.selectEvent = function (event, index) {
+        console.log(event);
         if (!event) {
             this.placeHolder = this.placeHolder;
         }
@@ -81,9 +87,9 @@ var SearchAirportComponent = /** @class */ (function () {
             localStorage.setItem('__to', this.selectedAirport.code);
             this.changeValue.emit({ key: 'toSearch', value: event });
         }
+        this.cd.detectChanges();
     };
     SearchAirportComponent.prototype.onRemove = function (event) {
-        console.log("innnnn");
         this.selectedAirport = {};
     };
     SearchAirportComponent.prototype.setDefaultAirport = function () {
@@ -102,11 +108,27 @@ var SearchAirportComponent = /** @class */ (function () {
         }
     };
     SearchAirportComponent.prototype.ngOnChanges = function (changes) {
-        if (changes['airport']) {
+        if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
             this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];
-            this.data = Object.keys(changes['airport'].currentValue).length > 0 ? [changes['airport'].currentValue] : [];
-            //this.data=[];
+            this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([], [changes['airport'].currentValue]) : [];
         }
+    };
+    SearchAirportComponent.prototype.onFocus = function () {
+        var _this = this;
+        this.isInputFocus = true;
+        if (this.commonFunction.isRefferal()) {
+            this.progressInterval = setInterval(function () {
+                if (_this.isInputFocus) {
+                    _this.currentChangeCounter.emit(_this.counterChangeVal += 1);
+                }
+                else {
+                    clearInterval(_this.progressInterval);
+                }
+            }, 1000);
+        }
+    };
+    SearchAirportComponent.prototype.onClose = function (event) {
+        this.isInputFocus = false;
     };
     __decorate([
         core_1.Input()
@@ -136,11 +158,20 @@ var SearchAirportComponent = /** @class */ (function () {
         core_1.Output()
     ], SearchAirportComponent.prototype, "searchItem");
     __decorate([
+        core_1.Output()
+    ], SearchAirportComponent.prototype, "flightSearchRoute");
+    __decorate([
         core_1.Input()
     ], SearchAirportComponent.prototype, "defaultCity");
     __decorate([
         core_1.Input()
     ], SearchAirportComponent.prototype, "airport");
+    __decorate([
+        core_1.Input()
+    ], SearchAirportComponent.prototype, "inputName");
+    __decorate([
+        core_1.Output()
+    ], SearchAirportComponent.prototype, "currentChangeCounter");
     SearchAirportComponent = __decorate([
         core_1.Component({
             selector: 'app-search-airport',

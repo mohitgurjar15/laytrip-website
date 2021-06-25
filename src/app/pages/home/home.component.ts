@@ -1,17 +1,19 @@
 import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { environment } from '../../../environments/environment';
-declare var $: any;
 import { GenericService } from '../../services/generic.service';
 import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HomeService } from '../../services/home.service';
-import { CartService } from '../../services/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
 import { CookieService } from 'ngx-cookie';
+import { PreloadingService } from '../../preloading.service';
+import { LANDING_PAGE } from 'src/app/landing-page.config';
+import * as jwt_decode from "jwt-decode";
 
+declare var $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,14 +24,20 @@ export class HomeComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   modules: Module[];
   moduleList: any = {};
-  isRoundTrip: boolean = false;
+  currentTabName: string = 'hotel';
+  isRefferal: boolean = false;
   countryCode: string;
   toString: string;
   moduleId = 3;
   dealList = [];
   host:string='';
   $tabName;
+  currentSlide;
+  currentChangeCounter;
+  banner_city_name = 'Miami';
+  slides;
 
+  $landingPageData;
   constructor(
     private genericService: GenericService,
     public commonFunction: CommonFunction,
@@ -38,17 +46,23 @@ export class HomeComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private renderer: Renderer2,
     private homeService: HomeService,
-    private cartService: CartService,
     public modalService: NgbModal,
     private cookieService: CookieService,
+    public preLoadService : PreloadingService
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
+    this.$landingPageData = jwt_decode(localStorage.getItem('__LP_DATA'), "secret");
+    this.slides = this.$landingPageData.slides;
+    this.currentSlide = this.$landingPageData.slides[0];
+    this.homeService.setOffersData(this.currentSlide);
+
   }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.host = window.location.host;
+    this.isRefferal = this.commonFunction.isRefferal();
     this.getModules();
     this.loadJquery();
     localStorage.removeItem('__from');
@@ -56,6 +70,7 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.openCookiePolicyPopup();
     }, 5000);
+    this.homeService.setOffersData(this.currentSlide);
 
     this.$tabName = this.homeService.getActiveTabName.subscribe(tabName=> {
       if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){     
@@ -69,14 +84,11 @@ export class HomeComponent implements OnInit {
         }
       }
     });
+    this.$tabName.unsubscribe();
+
     //get deal with module id and also with active tab
     this.getDeal(this.moduleId);
-    this.$tabName.unsubscribe();
     this.homeService.setActiveTab('');
-    this.homeService.getActiveTabName.subscribe(tabName=> {
-      if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){  }
-      
-    });
   }
 
   openCookiePolicyPopup() {
@@ -146,7 +158,6 @@ export class HomeComponent implements OnInit {
         response.data.forEach(module => {
           this.moduleList[module.name] = module.status;
         });
-        // console.log(this.moduleList);
       },
       (error) => {
 
@@ -155,32 +166,29 @@ export class HomeComponent implements OnInit {
   }
 
 
-
-  toggleOnewayRoundTrip(type) {
-    if (type === 'roundtrip') {
-      this.isRoundTrip = true;
-    } else {
-      this.isRoundTrip = false;
-    }
-  }
-
   getDeal(moduleId) {
-    this.moduleId = moduleId;  
+    this.moduleId = moduleId;
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
-        this.dealList = response['data'];
+        if(this.moduleId == 1 && this.commonFunction.isRefferal()){
+          this.dealList = this.$landingPageData.deals.flight;
+        } else if (this.moduleId == 3 && this.commonFunction.isRefferal()) {
+          this.dealList = this.$landingPageData.deals.hotel;
+        } else {
+          this.dealList = response['data'];
+        }
       }, (error) => {
 
       });
   }
 
   clickOnTab(tabName) {
+    this.dealList = [];
+    this.currentTabName = tabName;
     document.getElementById('home_banner').style.position = 'relative';
     document.getElementById('home_banner').style.width = '100%';
     if (tabName === 'flight') {
       this.getDeal(1);
-
-
       document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
       document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
       document.getElementById('home_banner').style.backgroundSize = 'cover';
@@ -205,21 +213,47 @@ export class HomeComponent implements OnInit {
       //   document.getElementById('login_btn').style.background = '#FF00BC';
       // }
     }
+    if(this.commonFunction.isRefferal()){
+      this.currentChangeCounter += this.currentChangeCounter;
+      this.homeService.setOffersData(this.currentSlide);
+    }
   }
 
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'bg_color');
   }
 
-  setToString(newItem: string) {
+  fetchWidgetDeal(newItem: string) {
+    console.log(newItem)
     if(this.moduleId == 1){
       this.toString = newItem;
       this.homeService.setToString(newItem);
     } else if(this.moduleId == 3) {
       this.homeService.setLocationForHotel(newItem);
-    } else {
-
+    } 
+  }
+  
+  activeSlide(activeSlide){
+    console.log(activeSlide)
+    this.currentTabName = 'hotel';
+    if (this.moduleId != 3) {
+      this.homeService.removeToString('flight');
+      this.homeService.removeToString('hotel');
+      $('#nav-hotel').trigger('click');
+      this.clickOnTab('hotel');
     }
+
+    this.currentSlide = this.$landingPageData.slides[activeSlide];
+    this.homeService.setOffersData(this.currentSlide);
+    this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
   }
 
+  getCurrentChangeCounter(event){
+    this.currentChangeCounter = event; 
+  }
+
+  onSwipe(evt) {
+    const direction = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+    this.homeService.setSwipeSlideDirection(direction)
+  }
 }

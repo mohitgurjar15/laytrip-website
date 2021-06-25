@@ -49,7 +49,7 @@ import { CartComponent } from './cart/cart.component';
 import { FlightCartItemComponent } from '../pages/flight/components/flight-cart-item/flight-cart-item.component';
 import { CartLoaderComponent } from './cart-loader/cart-loader.component';
 import { LaytripLoaderComponent } from './laytrip-loader/laytrip-loader.component';
-import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+//import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { EmptyCartComponent } from './empty-cart/empty-cart.component';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -59,8 +59,7 @@ import { BookingCompletionErrorPopupComponent } from './booking-completion-error
 import { AirportSuggestionComponent } from './airport-suggestion/airport-suggestion.component';
 import { HotelCartItemComponent } from '../pages/hotel/components/hotel-cart-item/hotel-cart-item.component';
 import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.component';
-
-
+import { CarouselComponent } from './carousel/carousel.component';
 @NgModule({
   declarations: [
     SearchAirportComponent,
@@ -105,7 +104,8 @@ import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.co
     BookingCompletionErrorPopupComponent,
     AirportSuggestionComponent,
     HotelCartItemComponent,
-    HotelSuggestionComponent
+    HotelSuggestionComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
@@ -122,10 +122,10 @@ import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.co
     TranslateModule,
     NgScrollbarModule,
     InfiniteScrollModule,
-    NgxSpinnerModule,
+    //NgxSpinnerModule,
     RouterModule,
     BsDatepickerModule.forRoot(),
-    NgxMaskModule.forRoot(),
+    NgxMaskModule.forRoot()
   ],
   exports: [
     SearchAirportComponent,
@@ -165,16 +165,18 @@ import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.co
     CartComponent,
     CartLoaderComponent,
     LaytripLoaderComponent,
-    NgxSpinnerModule,
+    //NgxSpinnerModule,
     EmptyCartComponent,
     LottieAnimationViewModule,
     DeleteCartitemConfirmationPopupComponent,
     BookingCompletionErrorPopupComponent,
     AirportSuggestionComponent,
     TextMaskModule,
-    HotelSuggestionComponent
+    HotelSuggestionComponent,
+    CarouselComponent
   ],
-  providers: [DatePipe, NgxSpinnerService, NgbActiveModal],
+  providers: [DatePipe, //NgxSpinnerService, 
+    NgbActiveModal],
   entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 declare var $: any;
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
@@ -122,7 +122,6 @@ export class BookingComponent implements OnInit {
           cart.old_module_info = {
             selling_price: items.data[i].oldModuleInfo[0].selling_price
           };
-
           price.selling_price = items.data[i].moduleInfo[0].selling_price;
           price.departure_date = items.data[i].moduleInfo[0].departure_date;
           price.start_price = items.data[i].moduleInfo[0].start_price;
@@ -135,6 +134,7 @@ export class BookingComponent implements OnInit {
             selling_price: items.data[i].oldModuleInfo[0].selling.total
           };
 
+          price.total_night = items.data[i].moduleInfo[0].input_data.num_nights;
           price.type = items.data[i].type;
           price.price_break_down = items.data[i].moduleInfo[0].selling;
           price.mandatory_fee_details = items.data[i].moduleInfo[0].mandatory_fee_details;
@@ -198,7 +198,6 @@ export class BookingComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    console.log(event, "------");
     //this.totalCard = event;
   }
 
@@ -207,7 +206,6 @@ export class BookingComponent implements OnInit {
   }
 
   closeNewCardPanel(event) {
-    console.log("Event", event)
     this.add_new_card = event;
   }
 
@@ -377,13 +375,9 @@ export class BookingComponent implements OnInit {
       return;
     }
     this.loading = true;
-
-
-    
-
     this.cartService.deleteCartItem(cartId).subscribe((res: any) => {
       this.loading = false;
-      this.redirectTo('/cart/booking');
+      this.redirectTo('/cart/checkout');
       let index = this.carts.findIndex(x => x.id == cartId);
       this.carts.splice(index, 1);
       this.cartPrices.splice(index, 1);
@@ -413,53 +407,10 @@ export class BookingComponent implements OnInit {
           this.isCartEmpty = true;
         }
         localStorage.setItem('$crt', JSON.stringify(this.carts.length));
+      }else {
+        //do something
       }
     });
-  }
-
-  saveAndSearch() {
-    this.ismaxCartAdded = false;
-    let totalCarts: any = localStorage.getItem('$crt');
-    if (totalCarts == 10) {
-      this.ismaxCartAdded = true;
-    } else {
-      if (this.commonFunction.isRefferal()) {
-        var parms = this.commonFunction.getRefferalParms();
-        var queryParams: any = {};
-        queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-        if(parms.utm_medium){
-          queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-        }
-        if(parms.utm_campaign){
-          queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
-        }
-        this.router.navigate(['/'], { queryParams:queryParams });
-      } else {
-        this.router.navigate(['/']);
-      }
-    }
-    return false;
-    this.validationErrorMessage = '';
-    if (this.isValidTravelers) {
-      this.loading = true;
-      for (let i = 0; i < this.carts.length; i++) {
-        let data = this.travelerForm.controls[`type${i}`].value.adults;
-        let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
-        let cartData = {
-          cart_id: this.carts[i].id,
-          travelers: travelers
-        }
-        this.cartService.updateCart(cartData).subscribe(data => {
-          if (i === this.carts.length - 1) {
-            this.loading = false;
-            this.router.navigate(['/'])
-          }
-        });
-      }
-    }
-    else {
-      this.validateCartItems();
-    }
   }
 
   selectCreditCard(data) {
@@ -483,7 +434,6 @@ export class BookingComponent implements OnInit {
     for (let i in Object.keys(this.travelerForm.controls)) {
       message = '';
       for (let j = 0; j < this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++) {
-        console.log(this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j])
         if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls[`type${i}`]['controls'].adults.controls[j].status == 'INVALID') {
 
 
@@ -671,7 +621,13 @@ export class BookingComponent implements OnInit {
   removeAllAlertError() {
     this.isAllAlertClosed = true;
   }
-  removeMaxCartAlertError() {
-    this.ismaxCartAdded = false;
+  
+  cartValueChanged(event) {
+    this.ismaxCartAdded = event;
+  }
+
+  @HostListener('document:click')
+  clickOutside() {
+   console.log('here')
   }
 }

@@ -51,7 +51,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     public translate: TranslateService,
     public modalService: NgbModal,
     public router: Router,
-    private commonFunction: CommonFunction,
+    public commonFunction: CommonFunction,
     public cd: ChangeDetectorRef,
     private cartService: CartService,
     private cookieService: CookieService,
@@ -116,7 +116,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
     let live_availiblity = 'no';
     let url = window.location.href;
-    if (url.includes('cart/booking') || url.includes('cart/checkout')) {
+    if (url.includes('cart/checkout')) {
       live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
@@ -144,7 +144,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   updateCartSummary() {
     let live_availiblity = 'no';
     let url = window.location.href;
-    if (url.includes('cart/booking') || url.includes('cart/checkout')) {
+    if (url.includes('cart/checkout')) {
       live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
@@ -296,9 +296,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         if(parms.utm_campaign){
           queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
         }
-        this.router.navigate([`cart/booking`],{ queryParams : queryParams});
+        this.router.navigate([`cart/checkout`],{ queryParams : queryParams});
       } else {
-        this.router.navigate([`cart/booking`]);
+        this.router.navigate([`cart/checkout`]);
       }
     } else {
       this.openEmptyCartPopup();
@@ -405,7 +405,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   getCheckinDate(module_Info,type){
     let checkinDate;
-    //console.log(module_Info)
     if(type=='flight'){
       checkinDate = moment(module_Info.departure_date, "DD/MM/YYYY'").format("YYYY-MM-DD");
     }

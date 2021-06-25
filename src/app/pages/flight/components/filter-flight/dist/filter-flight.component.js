@@ -406,7 +406,6 @@ var FilterFlightComponent = /** @class */ (function () {
     
           })
         } */
-        console.log(filterdFlights);
         this.flightService.getLastApplyedSortFilter.subscribe(function (filters) {
             if (typeof filters != 'undefined' && Object.keys(filters).length > 0) {
                 var sortFilter = filters;
@@ -447,7 +446,6 @@ var FilterFlightComponent = /** @class */ (function () {
                 }
             }
         });
-        console.log(filterdFlights);
         this.filterFlight.emit(filterdFlights);
     };
     FilterFlightComponent.prototype.ngOnChanges = function (changes) {

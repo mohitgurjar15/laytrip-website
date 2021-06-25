@@ -372,13 +372,13 @@
         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg" alt="Hotel Icon" />
         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
       </a>
-      <a class="tab_anch" style="pointer-events: none;">
+      <a class="tab_anch" style="pointer-events: none;" *ngIf="!commonFunction.isRefferal()">
         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
           alt="Accommodation Icon" />
         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_gray.svg"
           alt="Accommodation Icon" />
       </a>
-      <a class="tab_anch" style="pointer-events: none;">
+      <a class="tab_anch" style="pointer-events: none;" *ngIf="!commonFunction.isRefferal()">
         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_blue.svg" alt="car Icon" />
         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_gray.svg" alt="car Icon" />
       </a>
@@ -520,7 +520,13 @@
                             <div class="block_detail">
                               <div class="block_detail_top">
                                 <div class="detail_info">
-                                  <h4>{{room.title}}</h4>
+                                  <h4>
+                                    <!-- {{room.title}} -->
+                                    <span class="wrapper_names">
+                                      <span class="hotel_names">{{room.title}}</span>
+                                      <span class="off_label" *ngIf="commonFunction.isRefferal()">$100 off</span>
+                                    </span>
+                                  </h4>
                                   <span class="adress_span">
                                     Sleeps {{room.occupancy}}
                                   </span>
@@ -544,14 +550,24 @@
                     <div class="block_price block_pr">
                       <div class="block_inn_pr">
                         <div class="block" *ngIf="room.start_price>0">
-                          <p>Flexible Installments</p>
+                          <!-- <p>Flexible Installments</p>
                           <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
+                          </p> -->
+                          <p>From</p>
+                          <p>
+                            <span class="dashed_price" *ngIf="commonFunction.isRefferal()">
+                              {{ currency?.symbol }}100
+                            </span>
+                            <span>
+                              {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
+                            </span>
                           </p>
+                          <p class="installment_type">Weekly Installments</p>
                         </div>
                         <div class="block" *ngIf="room.start_price==0">
                           <p>Full Payment <span>${{ room.selling.total | number : '1.2-2' }}</span></p>
                         </div>
-                      </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">Select</a>
+                      </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">Add to cart</a>
                     </div>
                   </div>
                 </div>
@@ -578,7 +594,13 @@
                   </div>
                   <div class="middle_part">
                     <div class="detail_info">
-                      <h4>{{room.title}}</h4>
+                      <h4>
+                        <!-- {{room.title}} -->
+                        <span class="wrapper_names">
+                          <span class="hotel_names">{{room.title}}</span>
+                          <span class="off_label" *ngIf="commonFunction.isRefferal()">$100 off</span>
+                        </span>
+                      </h4>
                       <span class="adress_span">
                         Sleeps {{room.occupancy}}
                       </span>
@@ -596,14 +618,24 @@
                     <div class="block_price block_pr">
                       <div class="block_inn_pr">
                         <div class="block" *ngIf="room.start_price>0">
-                          <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
+                          <!-- <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
+                          </p> -->
+                          <p>From</p>
+                          <p class="duel_prices">
+                            <span class="dashed_price" *ngIf="commonFunction.isRefferal()">
+                              {{ currency?.symbol }}100
+                            </span>
+                            <span>
+                              {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
+                            </span>
                           </p>
+                          <p class="installment_type">Weekly Installments</p>
                         </div>
                         <div class="block" *ngIf="room.start_price==0">
                           <p>Full Payment <span>${{ room.selling.total | number : '1.2-2' }}</span></p>
                         </div>
-                      </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">Select</a>
-                      <p>Flexible Installments</p>
+                      </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">Add to cart</a>
+                      <!-- <p>Flexible Installments</p> -->
                     </div>
                   </div>
                 </div>
@@ -677,8 +709,9 @@
                       <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> Rules
                     </span>
                     <span class="texts_rules">
-                      Non-refundable, non-transferable. Change policy reflected in Laytrip <a
-                        [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" >Terms</a> which apply.
+                      Non-refundable, non-transferable. Change policy reflected in Laytrip <a [routerLink]="['/terms']"
+                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>
+                      which apply.
                     </span>
 
                   </div>

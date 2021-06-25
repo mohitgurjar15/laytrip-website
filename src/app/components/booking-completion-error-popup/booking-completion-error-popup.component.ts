@@ -22,6 +22,8 @@ export class BookingCompletionErrorPopupComponent implements OnInit {
   }
 
   returnToCart() {
+    this.activeModal.close();
+
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
       var queryParams: any = {};
@@ -32,15 +34,28 @@ export class BookingCompletionErrorPopupComponent implements OnInit {
       if(parms.utm_campaign){
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
-      this.router.navigate(['/cart/booking'], { queryParams: queryParams });
+      this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
     } else {
-      this.router.navigate(['/cart/booking']);
+      this.router.navigate(['/cart/checkout']);
     }
   }
 
   close() {
     this.activeModal.close();
-    //this.router.navigate(['/cart/booking']);
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+      var queryParams: any = {};
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if(parms.utm_medium){
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if(parms.utm_campaign){
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+      this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
+    } else {
+      this.router.navigate(['/cart/checkout']);
+    }
   }
 
 }
