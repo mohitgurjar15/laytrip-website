@@ -78,12 +78,22 @@ export class PaymentModeComponent implements OnInit {
   isPaymentCalulcatorLoading:boolean=false;
   show30DayMinValidation:boolean=false;
   showPartialAndFullPaymentMixValidation:boolean=false;
+  isOfferData:boolean=false;
+  offerData;
 
 
   ngOnInit(){
 
     this.cartService.getCartPrice.subscribe(cartPrices=>{
       this.cartPrices = cartPrices;
+      this.isOfferData=this.cartPrices[0].is_offer_data;
+      if(this.isOfferData){
+         this.offerData = this.commonFunction.getOfferData();
+
+         if(!this.offerData.applicable){
+            this.isOfferData=false;
+         }
+      }
       this.getTotalPrice();
       if(this.instalmentRequest.checkin_date){
 
@@ -389,5 +399,25 @@ export class PaymentModeComponent implements OnInit {
 
   hidePartialAndFullPaymentMixError(){
     this.showPartialAndFullPaymentMixValidation=false;
+  }
+
+  showDownPaymentOption(down_payment_option){
+    if(typeof this.offerData!='undefined' && this.offerData.applicable){
+      if(this.offerData.down_payment_options[down_payment_option].applicable){
+        return true;
+      }
+      return false;
+    }
+
+    return true;
+  }
+  showPaymentFrequency(type){
+    if(typeof this.offerData!='undefined' && this.offerData.applicable){
+      if(this.offerData.payment_frequency_options[type].applicable){
+        return true;
+      }
+      return false;
+    }
+    return true;
   }
 }

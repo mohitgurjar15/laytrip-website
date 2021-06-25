@@ -133,6 +133,7 @@ export class CheckoutComponent implements OnInit {
         cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         cart.is_available = items.data[i].is_available;
+        price.is_offer_data = false;
 
         this.modules.push(items.data[i].type);
         if (this.modules.some(x => x === "flight")) {
