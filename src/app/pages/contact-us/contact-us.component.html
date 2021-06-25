@@ -1,5 +1,4 @@
-<section class="block_contact_us_main modal fade comman_modal" id="contact_modal" data-backdrop="static"
-    data-keyboard="false">
+<section class="block_contact_us_main modal fade comman_modal" id="contact_modal" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="contact_modal_wrp">
@@ -13,11 +12,9 @@
                     <form [formGroup]="contactUsForm" novalidate (ngSubmit)="onSubmit(contactUsForm.value)">
                         <div class="form_row">
                             <div class="text_field">
-                                <input type="text" formControlName="name" maxlength="30" tabindex="11"
-                                    placeholder="{{'full_name_placeholder' | translate}}">
+                                <input type="text" formControlName="name" maxlength="30" tabindex="11" placeholder="{{'full_name_placeholder' | translate}}">
                                 <div *ngIf="submitted" class="focus-input100 login-error">
-                                    <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.errors.required"
-                                        class="text-danger">
+                                    <div *ngIf="contactUsForm.controls.name.errors && contactUsForm.controls.name.errors.required" class="text-danger">
                                         {{'full_name_touched_validation' | translate}}
                                     </div>
                                 </div>
@@ -25,15 +22,12 @@
                         </div>
                         <div class="form_row">
                             <div class="text_field">
-                                <input type="email" formControlName="email" maxlength="50" tabindex="12"
-                                    placeholder="{{'email_placeholder' | translate}}">
+                                <input type="email" formControlName="email" maxlength="50" tabindex="12" placeholder="{{'email_placeholder' | translate}}">
                                 <div *ngIf="submitted">
-                                    <div *ngIf="contactUsForm.controls.email.errors && contactUsForm.controls.email.errors.required"
-                                        class="text-danger">
+                                    <div *ngIf="contactUsForm.controls.email.errors && contactUsForm.controls.email.errors.required" class="text-danger">
                                         {{'email_touched_validation' | translate}}
                                     </div>
-                                    <div *ngIf="contactUsForm.controls.email.errors && contactUsForm.controls.email.errors.pattern"
-                                        class="text-danger">
+                                    <div *ngIf="contactUsForm.controls.email.errors && contactUsForm.controls.email.errors.pattern" class="text-danger">
                                         {{'email_invalid_validation' | translate}}
                                     </div>
                                 </div>
@@ -41,21 +35,17 @@
                         </div>
                         <div class="form_row mb-0">
                             <div class="text_field text_area_wrps">
-                                <textarea (keyup)="setMessageLenght($event.target.value)"
-                                    (keypress)="setMessageLenght($event.target.value)" formControlName="message"
-                                    maxlength="1000" tabindex="13" rows="5"
-                                    placeholder="{{'messege_placeholder' | translate}}">
+                                <textarea (keyup)="setMessageLenght($event.target.value)" (keypress)="setMessageLenght($event.target.value)" formControlName="message" maxlength="1000" tabindex="13" rows="5" placeholder="{{'messege_placeholder' | translate}}">
                                 </textarea>
                                 <div class="block_btm_msg">
                                     <div>
                                         <div *ngIf="submitted">
-                                            <div *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.errors.required"
-                                                class="text-danger">
+                                            <div *ngIf="contactUsForm.controls.message.errors && contactUsForm.controls.message.errors.required" class="text-danger">
                                                 {{'messege_touched_validation' | translate}}
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="word_counter">{{messageLenght}}/1000</span>
+                                    <span class="word_counter">{{messageLength}}/1000</span>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +70,7 @@
                                     <div class="listing_lines_wrps" *ngFor="let attatchment of attatchmentFiles; let i = index">
                                         <div class="uploaded_list">
                                             <img [src]="attatchment.image || defaultImage" alt="" />
- 
+
                                             <div class="fileName">
                                                 <h5>{{ attatchment.fileName }}</h5>
                                                 <span class="extension">.{{ attatchment.extension}}</span>
