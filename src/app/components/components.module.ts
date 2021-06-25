@@ -60,6 +60,7 @@ import { AirportSuggestionComponent } from './airport-suggestion/airport-suggest
 import { HotelCartItemComponent } from '../pages/hotel/components/hotel-cart-item/hotel-cart-item.component';
 import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { DiscountedBookingAlertComponent } from './discounted-booking-alert/discounted-booking-alert.component';
 @NgModule({
   declarations: [
     SearchAirportComponent,
@@ -105,7 +106,8 @@ import { CarouselComponent } from './carousel/carousel.component';
     AirportSuggestionComponent,
     HotelCartItemComponent,
     HotelSuggestionComponent,
-    CarouselComponent
+    CarouselComponent,
+    DiscountedBookingAlertComponent
   ],
   imports: [
     CommonModule,
@@ -177,7 +179,7 @@ import { CarouselComponent } from './carousel/carousel.component';
   ],
   providers: [DatePipe, //NgxSpinnerService, 
     NgbActiveModal],
-  entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent],
+  entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent, DiscountedBookingAlertComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ]

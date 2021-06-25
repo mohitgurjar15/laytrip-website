@@ -5,6 +5,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../services/cart.service';
 import { environment } from '../../../environments/environment';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-payment-mode',
@@ -30,8 +31,8 @@ export class PaymentModeComponent implements OnInit {
   constructor(
     private genericService:GenericService,
     private commonFunction:CommonFunction,
-    private toastr: ToastrService,
-    private cartService:CartService
+    private cartService:CartService,
+    private homeService:HomeService
   ) {
    }
   
@@ -47,7 +48,8 @@ export class PaymentModeComponent implements OnInit {
     booking_date: moment().format("YYYY-MM-DD"),
     amount: 0,
     additional_amount: 0,
-    selected_down_payment:0
+    selected_down_payment:0,
+    custom_down_payment:null
   }
   instalments;
   allInstalments;
@@ -78,13 +80,33 @@ export class PaymentModeComponent implements OnInit {
   isPaymentCalulcatorLoading:boolean=false;
   show30DayMinValidation:boolean=false;
   showPartialAndFullPaymentMixValidation:boolean=false;
+  isOfferData:boolean=false;
+  offerData;
 
 
   ngOnInit(){
 
     this.cartService.getCartPrice.subscribe(cartPrices=>{
       this.cartPrices = cartPrices;
-      this.getTotalPrice();
+      this.isOfferData=this.cartPrices[0].is_offer_data;
+      if(this.isOfferData){
+         this.homeService.getLandingPageData.subscribe(data=>{
+           if(data){
+            this.offerData =data;
+            if(!this.offerData.applicable){
+              this.isOfferData=false;
+            }
+           }
+           else{
+            this.isOfferData=false;
+           }
+            this.getTotalPrice();
+          })
+      }
+      else{
+
+        this.getTotalPrice();
+      }
       if(this.instalmentRequest.checkin_date){
 
         this.instalmentRequest.amount = this.sellingPrice;
@@ -198,11 +220,15 @@ export class PaymentModeComponent implements OnInit {
   getTotalPrice(){
     
     let totalPrice=0;
+    let downpayment=0;
     if(this.cartPrices.length>0){
         let checkinDate = moment(this.cartPrices[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
 
         for(let i=0; i < this.cartPrices.length; i++){
           totalPrice+=this.cartPrices[i].selling_price;
+          if(this.isOfferData && this.offerData.down_payment_options[0].applicable){
+            downpayment+=this.offerData.down_payment_options[0].amount;
+          }
           if(i==0){
             continue;
           }
@@ -211,6 +237,7 @@ export class PaymentModeComponent implements OnInit {
           }
         }
         this.sellingPrice=totalPrice;
+        this.instalmentRequest.custom_down_payment=downpayment;
         this.instalmentRequest.checkin_date= checkinDate;
         this.getInstalmentData.emit({
           layCreditPoints :this.laycreditpoints,
@@ -389,5 +416,25 @@ export class PaymentModeComponent implements OnInit {
 
   hidePartialAndFullPaymentMixError(){
     this.showPartialAndFullPaymentMixValidation=false;
+  }
+
+  showDownPaymentOption(down_payment_option){
+    if(typeof this.offerData!='undefined' && this.offerData.applicable){
+      if(this.offerData.down_payment_options[down_payment_option].applicable){
+        return true;
+      }
+      return false;
+    }
+
+    return true;
+  }
+  showPaymentFrequency(type){
+    if(typeof this.offerData!='undefined' && this.offerData.applicable){
+      if(this.offerData.payment_frequency_options[type].applicable){
+        return true;
+      }
+      return false;
+    }
+    return true;
   }
 }

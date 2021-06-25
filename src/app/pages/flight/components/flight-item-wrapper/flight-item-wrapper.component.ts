@@ -14,6 +14,7 @@ import { CartService } from '../../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 //import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -261,6 +262,12 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
           }
         }
       }, error => {
+        if (error.status == 409 && this.commonFunction.isRefferal()) {
+          this.modalService.open(DiscountedBookingAlertComponent, {
+            windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
+            keyboard: false
+          });
+        }
         this.changeLoading.emit(false);
         //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
         this.isFlightNotAvailable = true;
