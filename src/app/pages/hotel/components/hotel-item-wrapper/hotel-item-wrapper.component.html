@@ -243,8 +243,9 @@
                                                 [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">
                                                 <span class="wrapper_names">
                                                     <span class="hotel_names">{{item?.name}}</span>
-
-                                                    <span class="off_label" *ngIf="commonFunction.isRefferal()">$100 off</span>
+                                                    <span class="off_label"
+                                                        *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}}
+                                                        off</span>               
                                                 </span>
                                             </a>
                                             <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag"
@@ -252,8 +253,9 @@
                                                 [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">
                                                 <span class="wrapper_names">
                                                     <span class="hotel_names">{{item?.name}}</span>
-
-                                                    <span class="off_label" *ngIf="commonFunction.isRefferal()">$100 off</span>
+                                                    <span class="off_label"
+                                                        *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}}
+                                                    off</span>
                                                 </span>
                                             </a>
                                             <span class="adress_span">

@@ -524,8 +524,10 @@
                                     <!-- {{room.title}} -->
                                     <span class="wrapper_names">
                                       <span class="hotel_names">{{room.title}}</span>
-                                      <span class="off_label" *ngIf="commonFunction.isRefferal()">$100 off</span>
-                                    </span>
+                                        <span class="off_label"
+                                          *ngIf="room?.offer_data.applicable && room?.offer_data.discount.applicable">${{room?.offer_data.discount.amount}}
+                                          off</span>                              
+                                      </span>
                                   </h4>
                                   <span class="adress_span">
                                     Sleeps {{room.occupancy}}
@@ -603,7 +605,9 @@
                         <!-- {{room.title}} -->
                         <span class="wrapper_names">
                           <span class="hotel_names">{{room.title}}</span>
-                          <span class="off_label" *ngIf="room.offer_data.applicable">$100 off</span>
+                          <span class="off_label"
+                            *ngIf="room?.offer_data.applicable && room?.offer_data.discount.applicable">${{room?.offer_data.discount.amount}}
+                            off</span>
                         </span>
                       </h4>
                       <span class="adress_span">
