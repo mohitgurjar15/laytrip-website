@@ -628,6 +628,5 @@ export class BookingComponent implements OnInit {
 
   @HostListener('document:click')
   clickOutside() {
-   console.log('here')
   }
 }
