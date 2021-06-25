@@ -93,6 +93,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     if (typeof this.fromSearch.city != 'undefined') {
       this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
       this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+      
     }
     this.flightSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],

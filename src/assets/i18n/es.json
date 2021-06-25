@@ -378,7 +378,7 @@
     "pay_and_complete_booking": "Pagar y completar la reserva",
     "apply_laycredit": "Apply 30 of your Laytrip Points",
     "use_laycredi_in_booking_info_message_1": "Utilice Laycredit para esta reserva. Tiene",
-    "use_laycredi_in_booking_info_message_2": "Laycredits en su billetera.",
+    "use_laycredi_in_booking_info_message_2": "en su billetera.",
     "dicounted_price": "Precio descontado",
     "laycredit": "Laycredits",
     "session_timeout": "Hora de término de la sesión",
@@ -413,7 +413,6 @@
     "password_reset": "Restablecimiento de contraseña",
     "requested_a_password_reset_for_user_account": "Recibió este correo electrónico porque solicitó un restablecimiento de contraseña para su cuenta de usuario en laytrip.",
     "disregard_this_email": "Si no solicitó este cambio, puede ignorar este correo electrónico; aún no hemos restablecido su contraseña.",
-
     "travellers_and_class": "VIAJEROS Y CLASE",
     "travelling_on": "Viajando en",
     "send_email": "Envie correo eléctronico",
