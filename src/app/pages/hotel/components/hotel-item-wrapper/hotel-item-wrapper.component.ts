@@ -10,7 +10,7 @@ import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from 'src/app/services/hotel.service';
 import { AgmInfoWindow } from '@agm/core';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
-import { AgmSnazzyInfoWindow } from '@agm/snazzy-info-window';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-hotel-item-wrapper',
@@ -83,7 +83,7 @@ export class HotelItemWrapperComponent implements OnInit {
     private genericService: GenericService,
     private hotelService: HotelService,
     public cd: ChangeDetectorRef,
-    private _zone: NgZone
+    private homeService:HomeService
   ) {
 
     this.galleryOptions = [
@@ -97,6 +97,8 @@ export class HotelItemWrapperComponent implements OnInit {
     this.location = this.route.snapshot.queryParams['location']
     this.city_id = this.route.snapshot.queryParams['city_id']
   }
+
+  
 
   ngAfterViewInit(): void {
     // this.gm.nativeElement;
