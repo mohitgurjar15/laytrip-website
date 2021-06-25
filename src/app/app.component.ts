@@ -9,8 +9,7 @@ import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PreloadingService } from './services/preloading.service';
-import { CommonFunction } from './_helpers/common-function';
-
+import { HomeService } from './services/home.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,7 +18,7 @@ import { CommonFunction } from './_helpers/common-function';
 export class AppComponent {
   title = 'laytrip-website';
   readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
-  encode = require('jwt-encode');
+  $lpData;
 
   constructor(
     private cookieService:CookieService,
@@ -29,6 +28,7 @@ export class AppComponent {
     private router: Router,
     private userService:UserService,
     public preLoadService : PreloadingService,
+    private homeService:HomeService
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
@@ -51,10 +51,13 @@ export class AppComponent {
     this.route.queryParams.subscribe(parms => {
       if (parms['utm_source']) {
         this.preLoadService.getLandingPageDetails(parms['utm_source']).subscribe((res: any) => {
-          sessionStorage.setItem('__LP_DATA', this.encode(res.config, 'secret'))
+          this.$lpData =this.homeService.setLandingPageData(res.config)
         }, err => {
-          localStorage.removeItem('__LP_DATA')
-          this.router.navigate(['/']);
+          /* console.log("errr",err)
+          if(this.$lpData){
+            this.$lpData.unsubscribe();
+          } */
+          window.location.href='/';
         });
       } 
     });    

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, throwError } from "rxjs";
+import { BehaviorSubject, Subject, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { environment } from '../../environments/environment';
 import { CommonFunction } from "../_helpers/common-function";
@@ -88,5 +88,26 @@ export class HomeService {
 
     setSwipeSlideDirection(direction){
         this.swipeSlide.next(direction)
+    }
+
+    getOfferData(){
+        var offerData = new Subject<any>();
+        if(!this.commonFunction.isRefferal()){
+            offerData.next({
+                applicable: false
+            })
+        }
+        this.getLandingPageData.subscribe(data=>{
+            if(data){
+                offerData.next(data)
+            }
+            else{
+                offerData.next({
+                    applicable: false
+                })
+            }
+        })
+        return offerData.asObservable();
+
     }
 }
