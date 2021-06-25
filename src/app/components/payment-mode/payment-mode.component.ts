@@ -47,7 +47,8 @@ export class PaymentModeComponent implements OnInit {
     booking_date: moment().format("YYYY-MM-DD"),
     amount: 0,
     additional_amount: 0,
-    selected_down_payment:0
+    selected_down_payment:0,
+    custom_down_payment:null
   }
   instalments;
   allInstalments;
@@ -208,11 +209,15 @@ export class PaymentModeComponent implements OnInit {
   getTotalPrice(){
     
     let totalPrice=0;
+    let downpayment=0;
     if(this.cartPrices.length>0){
         let checkinDate = moment(this.cartPrices[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
 
         for(let i=0; i < this.cartPrices.length; i++){
           totalPrice+=this.cartPrices[i].selling_price;
+          if(this.isOfferData && this.offerData.down_payment_options[0].applicable){
+            downpayment+=this.offerData.down_payment_options[0].amount;
+          }
           if(i==0){
             continue;
           }
@@ -221,6 +226,7 @@ export class PaymentModeComponent implements OnInit {
           }
         }
         this.sellingPrice=totalPrice;
+        this.instalmentRequest.custom_down_payment=downpayment;
         this.instalmentRequest.checkin_date= checkinDate;
         this.getInstalmentData.emit({
           layCreditPoints :this.laycreditpoints,
