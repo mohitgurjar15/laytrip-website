@@ -372,7 +372,11 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   getMapPrice(hotel) {
-    return `$${Math.floor(hotel.secondary_start_price)}`
+    if (hotel.offer_data.applicable) {
+      return `$${Math.floor(hotel.discounted_secondary_start_price)}`
+    } else {
+      return `$${Math.floor(hotel.secondary_start_price)}`      
+    }
   }
 
   checkMarkersInBounds(bounds) {
