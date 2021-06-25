@@ -33,14 +33,34 @@ export class AppComponent {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
+
     let token = localStorage.getItem('_lay_sess');
     if(token){
       // this.subscribeToNotifications()
     }
     this.registerGuestUser();
     this.setCountryBehaviour();
+    this.preloadLandingPageData();
   
+  }
+
+  utm_source ='';
+  preloadLandingPageData() {
+    
+    this.route.queryParams.subscribe(parms  => {
+      this.utm_source = parms['utm_source'];
+    });
+
+    console.log(this.utm_source)
+    if (this.utm_source) {
+      this.preLoadService.getLandingPageDetails(this.utm_source).subscribe((res: any) => {
+        console.log(res)  
+      }, err => {
+        
+      });      
+    }
+
   }
 
   isValidateReferralId(referral_id){

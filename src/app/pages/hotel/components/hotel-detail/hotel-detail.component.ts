@@ -9,6 +9,7 @@ import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-po
 import { CartService } from '../../../../services/cart.service';
 import { HomeService } from '../../../../services/home.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
+import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
 declare var $: any;
 
 
@@ -185,6 +186,7 @@ export class HotelDetailComponent implements OnInit {
 
   selectRoom(roomInfo) {
     
+   
      if (this.cartItems && this.cartItems.length >= 10) {
       this.addCartLoading=false;
       this.isCartFull=true;
@@ -222,6 +224,12 @@ export class HotelDetailComponent implements OnInit {
         }
       }, error => {
         this.addCartLoading=false;
+        if (error.status == 409 && this.commonFunction.isRefferal()) {
+          this.modalService.open(DiscountedBookingAlertComponent, {
+            windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
+            keyboard: false
+          });
+        }
       });
 
     }
