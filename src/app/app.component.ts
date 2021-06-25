@@ -18,6 +18,7 @@ import { PreloadingService } from './services/preloading.service';
 export class AppComponent {
   title = 'laytrip-website';
   readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
+  encode = require('jwt-encode');
 
   constructor(
     private cookieService:CookieService,
@@ -26,7 +27,7 @@ export class AppComponent {
     private route: ActivatedRoute,
     private router: Router,
     private userService:UserService,
-    public preLoadService : PreloadingService
+    public preLoadService : PreloadingService,
   ){
     this.setUserOrigin();
     this.getUserLocationInfo();
@@ -48,19 +49,20 @@ export class AppComponent {
   utm_source ='';
   preloadLandingPageData() {
     
-    this.route.queryParams.subscribe(parms  => {
-      this.utm_source = parms['utm_source'];
+    this.route.queryParams.subscribe(parms => {
+      if (parms['utm_source']) {
+        this.preLoadService.getLandingPageDetails(parms['utm_source']).subscribe((res: any) => {
+          sessionStorage.setItem('__LP_DATA', this.encode(res.config, 'secret'))
+        }, err => {
+          localStorage.removeItem('__LP_DATA')
+          this.router.navigate(['/']);
+        });
+      } 
     });
 
-    console.log(this.utm_source)
-    if (this.utm_source) {
-      this.preLoadService.getLandingPageDetails(this.utm_source).subscribe((res: any) => {
-        console.log(res)  
-      }, err => {
-        
-      });      
-    }
 
+
+    
   }
 
   isValidateReferralId(referral_id){
