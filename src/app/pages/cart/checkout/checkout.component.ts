@@ -133,8 +133,8 @@ export class CheckoutComponent implements OnInit {
         cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         cart.is_available = items.data[i].is_available;
-        //price.is_offer_data = items.cartIsPromotional;
-        price.is_offer_data = true;
+        price.is_offer_data = items.cartIsPromotional;
+        price.offer_data = items.data[i].moduleInfo[0].offer_data;
 
         this.modules.push(items.data[i].type);
         if (this.modules.some(x => x === "flight")) {
@@ -154,6 +154,7 @@ export class CheckoutComponent implements OnInit {
           price.start_price = items.data[i].moduleInfo[0].start_price;
           price.type = items.data[i].type;
           price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
+          price.discounted_selling_price = items.data[i].moduleInfo[0].discounted_selling_price;
         }
         else if (items.data[i].type == 'hotel') {
 

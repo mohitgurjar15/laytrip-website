@@ -10,15 +10,15 @@
               <!-- (Two Travelers) -->
             </span>
           </span>
-          <span class="price_wrps" *ngIf="commonFunction.isRefferal()">
+          <span class="price_wrps" *ngIf="item.offer_data.applicable">
             <span class="old_price">
               ${{item.selling_price | number : '1.2-2'}}
             </span>
             <span class="new_price">
-              ${{item.selling_price | number : '1.2-2'}}
+              ${{item.discounted_selling_price | number : '1.2-2'}}
             </span>
           </span>
-          <span *ngIf="!commonFunction.isRefferal()">${{item.selling_price | number : '1.2-2'}}</span>
+          <span  *ngIf="!item.offer_data.applicable">${{item.selling_price | number : '1.2-2'}}</span>
         </div>
       </ng-container>
     </div>
