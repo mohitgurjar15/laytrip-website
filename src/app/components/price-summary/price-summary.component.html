@@ -33,15 +33,15 @@
                 ${{item.price_break_down.sub_total/item.total_night | number : '1.2-2'}})
               </p>
             </span>
-            <span class="price_wrps" *ngIf="commonFunction.isRefferal()">
+            <span class="price_wrps" *ngIf="item.offer_data.applicable">
               <span class="old_price">
                 ${{item.price_break_down.sub_total | number : '1.2-2'}}
               </span>
               <span class="new_price">
-                ${{item.price_break_down.sub_total | number : '1.2-2'}}
+                ${{item.discounted_selling_price | number : '1.2-2'}}
               </span>
             </span>
-            <span *ngIf="!commonFunction.isRefferal()">${{item.price_break_down.sub_total | number : '1.2-2'}}</span>
+            <span *ngIf="!item.offer_data.applicable">${{item.price_break_down.sub_total | number : '1.2-2'}}</span>
           </div>
           <div class="pay_listing hotel_line">
             <span>

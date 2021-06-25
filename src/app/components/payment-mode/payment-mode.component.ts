@@ -88,7 +88,6 @@ export class PaymentModeComponent implements OnInit {
 
     this.cartService.getCartPrice.subscribe(cartPrices=>{
       this.cartPrices = cartPrices;
-      console.log("this.cartPrices",this.cartPrices)
       this.isOfferData=this.cartPrices[0].is_offer_data;
       if(this.isOfferData){
          this.homeService.getLandingPageData.subscribe(data=>{

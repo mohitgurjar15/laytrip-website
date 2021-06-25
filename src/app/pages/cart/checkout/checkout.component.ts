@@ -171,6 +171,8 @@ export class CheckoutComponent implements OnInit {
           price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in, "YYYY-MM-DD").format('DD/MM/YYYY');
           price.start_price = 0;
           price.location = items.data[i].moduleInfo[0].hotel_name;
+          price.discounted_selling_price = items.data[i].moduleInfo[0].selling.discounted_sub_total;
+
         }
         this.carts.push(cart);
 

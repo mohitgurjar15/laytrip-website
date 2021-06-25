@@ -65,7 +65,6 @@ export class AddCardComponent implements OnInit {
   constructor(
     private genericService: GenericService,
     private formBuilder: FormBuilder,
-    //private spinner: NgxSpinnerService,
     public commonFunction: CommonFunction,
   ) { }
 

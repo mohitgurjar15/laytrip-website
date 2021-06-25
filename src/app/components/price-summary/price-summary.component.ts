@@ -27,7 +27,7 @@ export class PriceSummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    console.log("cartPrices,", this.cartPrices)
   }
 
   closeModal() {
