@@ -554,10 +554,15 @@
                           <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
                           </p> -->
                           <p>From</p>
-                          <p>
-                            <span class="dashed_price" *ngIf="commonFunction.isRefferal()">
-                              {{ currency?.symbol }}100
+                          <p *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
+                            <span class="dashed_price" >
+                              {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
                             </span>
+                            <span>
+                              {{ currency?.symbol }}{{room.discounted_secondary_start_price | number : '1.2-2'}}
+                            </span>
+                          </p>
+                          <p *ngIf="!room.offer_data.applicable">
                             <span>
                               {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
                             </span>
@@ -598,7 +603,7 @@
                         <!-- {{room.title}} -->
                         <span class="wrapper_names">
                           <span class="hotel_names">{{room.title}}</span>
-                          <span class="off_label" *ngIf="commonFunction.isRefferal()">$100 off</span>
+                          <span class="off_label" *ngIf="room.offer_data.applicable">$100 off</span>
                         </span>
                       </h4>
                       <span class="adress_span">
@@ -621,10 +626,15 @@
                           <!-- <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
                           </p> -->
                           <p>From</p>
-                          <p class="duel_prices">
-                            <span class="dashed_price" *ngIf="commonFunction.isRefferal()">
-                              {{ currency?.symbol }}100
+                          <p class="duel_prices" *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
+                            <span class="dashed_price">
+                              {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
                             </span>
+                            <span>
+                              {{ currency?.symbol }}{{room.discounted_secondary_start_price | number : '1.2-2'}}
+                            </span>
+                          </p>
+                          <p class="duel_prices"  *ngIf="!room.offer_data.applicable">
                             <span>
                               {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
                             </span>
@@ -702,11 +712,11 @@
                       <span class="texts">
                         ${{room.night_rate | number : '1.2-2'}} including taxes and fees
                       </span>
-                      <div class="notifi_text mobile_notifi" *ngIf="showDownPayment(room?.offer_data,1)==false">
+                      <div class="notifi_text mobile_notifi" *ngIf="!room?.offer_data.applicable">
                         More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                       </div>
                     </div>
-                    <div class="full_desk_not" *ngIf="showDownPayment(room?.offer_data,1)==false">
+                    <div class="full_desk_not" *ngIf="!room?.offer_data.applicable">
                       <div class="notifi_text">
                         More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                       </div>
