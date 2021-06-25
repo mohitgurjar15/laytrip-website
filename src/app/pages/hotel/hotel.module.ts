@@ -34,7 +34,7 @@ import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
 import { HotelPolicyPopupComponent } from './components/hotel-policy-popup/hotel-policy-popup.component';
 import { HomeModule } from '../home/home.module';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { NgxPaginationModule } from 'ngx-pagination';
+//import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -74,7 +74,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AgmJsMarkerClustererModule,
     NgxGalleryModule,
     HomeModule,
-    NgxPaginationModule,
+    //NgxPaginationModule,
     NgbModule
   ],
   exports: [

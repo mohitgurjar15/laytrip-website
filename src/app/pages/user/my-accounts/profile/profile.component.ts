@@ -12,7 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie';
 import { redirectToLogin } from '../../../../_helpers/jwt.helper';
 import { FlightService } from '../../../../services/flight.service';
-import { CheckOutService } from '../../../../services/checkout.service';
 import { getPhoneFormat } from 'src/app/_helpers/phone-masking.helper';
 
 @Component({
@@ -86,7 +85,6 @@ export class ProfileComponent implements OnInit {
     private toastr: ToastrService,
     private cookieService: CookieService,
     private flightService: FlightService,
-    private checkOutService: CheckOutService,
   ) { }
 
   ngOnInit() {
