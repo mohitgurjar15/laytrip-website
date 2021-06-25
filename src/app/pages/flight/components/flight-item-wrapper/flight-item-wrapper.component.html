@@ -272,11 +272,11 @@
                             <span class="texts">
                                 ${{item.selling_price | number : '1.2-2'}} including taxes and fees
                             </span>
-                            <div class="notifi_text mobile_notifi" *ngIf="item.start_price>0">
+                            <div class="notifi_text mobile_notifi" *ngIf="item.start_price>0 && item?.offer_data.applicable == false">
                                 More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose Select.
                             </div>
                         </div>
-                        <div class="full_desk_not" *ngIf="item.start_price>0">
+                        <div class="full_desk_not" *ngIf="item.start_price>0 && item?.offer_data.applicable == false">
                             <div class="notifi_text">
                                 More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose Select.
                             </div>
