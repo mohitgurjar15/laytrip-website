@@ -30,7 +30,7 @@
       <div class="flex_center_wrapper" *ngIf="paymentType=='instalment' && instalmentAvavible">
         <button *ngIf="showDownPaymentOption(0)==true" type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==0}"
           (click)="toggleDownPayment(0)">${{downPayments[0] | number : '1.2-2' }}
-          <span class="min_text">Minimum</span>
+          <span class="min_text" *ngIf="!isOfferData" >Minimum</span>
         </button>
         <button *ngIf="showDownPaymentOption(1)==true" type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==1}"
           (click)="toggleDownPayment(1)">${{downPayments[1] | number : '1.2-2' }}</button>
@@ -52,7 +52,7 @@
           number : '1.2-2' }}</button>
       </div>
 
-      <small *ngIf="paymentType=='instalment'" class="pay_alerts">All items in cart will be billed together as one plan of either Weekly or Bi-Weekly or Monthly payments.</small>
+      <small *ngIf="paymentType=='instalment' && !isOfferData" class="pay_alerts">All items in cart will be billed together as one plan of either Weekly or Bi-Weekly or Monthly payments.</small>
     </div> 
   </div>
 </div>

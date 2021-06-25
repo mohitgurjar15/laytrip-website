@@ -349,7 +349,7 @@
                                             <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,0)==true">
                                                 ${{item.start_price | number : '1.2-2'}} downpayment and
                                                 {{item.no_of_weekly_installment}} weekly installments of
-                                                ${{item.secondary_start_price |
+                                                ${{item.discounted_secondary_start_price |
                                                 number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,0)==true">

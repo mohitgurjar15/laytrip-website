@@ -667,7 +667,7 @@
                       <span class="texts" *ngIf="room.start_price>0 && showDownPayment(room?.offer_data,0)==true">
                         ${{room.start_price | number : '1.2-2'}} downpayment and {{room.no_of_weekly_installment}}
                         weekly installments of
-                        ${{room.secondary_start_price | number : '1.2-2'}}
+                        ${{room.discounted_secondary_start_price | number : '1.2-2'}}
                       </span>
                       <span class="texts" *ngIf="room.start_price==0 && showDownPayment(room?.offer_data,0)==true">
                         Flights within 30 days of travel not available in installments
