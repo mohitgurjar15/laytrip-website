@@ -5,6 +5,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../services/cart.service';
 import { environment } from '../../../environments/environment';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-payment-mode',
@@ -30,8 +31,8 @@ export class PaymentModeComponent implements OnInit {
   constructor(
     private genericService:GenericService,
     private commonFunction:CommonFunction,
-    private toastr: ToastrService,
-    private cartService:CartService
+    private cartService:CartService,
+    private homeService:HomeService
   ) {
    }
   
@@ -89,13 +90,23 @@ export class PaymentModeComponent implements OnInit {
       this.cartPrices = cartPrices;
       this.isOfferData=this.cartPrices[0].is_offer_data;
       if(this.isOfferData){
-         this.offerData = this.commonFunction.getOfferData();
-
-         if(!this.offerData.applicable){
+         this.homeService.getLandingPageData.subscribe(data=>{
+           if(data){
+            this.offerData =data;
+            if(!this.offerData.applicable){
+              this.isOfferData=false;
+            }
+           }
+           else{
             this.isOfferData=false;
-         }
+           }
+            this.getTotalPrice();
+          })
       }
-      this.getTotalPrice();
+      else{
+
+        this.getTotalPrice();
+      }
       if(this.instalmentRequest.checkin_date){
 
         this.instalmentRequest.amount = this.sellingPrice;

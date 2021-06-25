@@ -10,8 +10,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
 import { CookieService } from 'ngx-cookie';
 import { PreloadingService } from '../../services/preloading.service';
-import { LANDING_PAGE } from 'src/app/landing-page.config';
-import * as jwt_decode from "jwt-decode";
 
 declare var $: any;
 @Component({
@@ -52,11 +50,15 @@ export class HomeComponent implements OnInit {
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
-    if (sessionStorage.getItem('__LP_DATA')) {
-      this.$landingPageData = jwt_decode(sessionStorage.getItem('__LP_DATA'), "secret");
-      this.slides = this.$landingPageData.slides;
-      this.currentSlide = this.$landingPageData.slides[0];
-    }
+    this.homeService.getLandingPageData.subscribe(data=>{
+        try{
+          this.$landingPageData = data;
+          this.slides = this.$landingPageData.slides;
+          this.currentSlide = this.$landingPageData.slides[0];
+        }
+        catch(e){
+        }
+    })
     this.homeService.setOffersData(this.currentSlide);
 
   }

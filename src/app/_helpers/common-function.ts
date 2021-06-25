@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
 import { getLoginUserInfo } from './jwt.helper';
-import { v4 as uuidv4 } from 'uuid';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as jwt_decode from "jwt-decode";
 @Injectable({
     providedIn: 'root',
 })
@@ -17,9 +15,6 @@ export class CommonFunction {
         private _location: Location,
         private router: Router,
         private route: ActivatedRoute
-
-
-
     ) {
 
     }
@@ -286,22 +281,6 @@ export class CommonFunction {
         return parms;
     }
 
-    getOfferData(){
-        if(!this.isRefferal()){
-            return {
-                applicable: false
-            }
-        }
-
-        let offerData = sessionStorage.getItem('__LP_DATA');
-        try{
-            return jwt_decode(offerData);
-        }
-        catch(e){
-            return {
-                applicable: false
-            }
-        }
-    }
+    
 }
 
