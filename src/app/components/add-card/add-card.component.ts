@@ -3,7 +3,6 @@ declare var Spreedly: any;
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 //import { NgxSpinnerService } from 'ngx-spinner';
 declare var $: any;
-import { ToastrService } from 'ngx-toastr';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
@@ -29,8 +28,8 @@ export class AddCardComponent implements OnInit {
   cardError: string = "";
   cardData;
   locale = {
-    format: 'MM/YYYY',
-    displayFormat: 'MM/YYYY'
+    format: 'MM/YY',
+    displayFormat: 'MM/YY'
   };
   saveCardLoader: boolean = false;
   expiryMinDate = new Date();
@@ -59,7 +58,7 @@ export class AddCardComponent implements OnInit {
     guide: false,
     showMask: false,
     mask: [
-      /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+      /\d/, /\d/, '/', /\d/, /\d/]
   };
 
   constructor(
@@ -116,7 +115,8 @@ export class AddCardComponent implements OnInit {
         $("#month-year").css("border-bottom", "2px solid #ff0000");
       } else {
         $("#month-year").css("border-bottom", "2px solid #d6d6d6");
-      }
+      } 
+      console.log("errors",errors)
 
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];

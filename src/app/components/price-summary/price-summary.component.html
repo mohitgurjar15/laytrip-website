@@ -38,7 +38,7 @@
                 ${{item.price_break_down.sub_total | number : '1.2-2'}}
               </span>
               <span class="new_price">
-                ${{item.discounted_selling_price | number : '1.2-2'}}
+                ${{item.price_break_down.discounted_sub_total | number : '1.2-2'}}
               </span>
             </span>
             <span *ngIf="!item.offer_data.applicable">${{item.price_break_down.sub_total | number : '1.2-2'}}</span>
@@ -50,13 +50,13 @@
               </p>
               <a data-toggle="modal" data-target="#tax_fee_modal" class="tax_accor_btn">Taxes and Fees</a>
             </span>
-            <span class="price_wrps" *ngIf="commonFunction.isRefferal()">
+            <!-- <span class="price_wrps" *ngIf="commonFunction.isRefferal()">
               <span class="old_price">${{item.price_break_down.taxes | number : '1.2-2'}}</span>
               <span class="new_price">
                 ${{item.price_break_down.taxes | number : '1.2-2'}}
               </span>
-            </span>
-            <span *ngIf="!commonFunction.isRefferal()">${{item.price_break_down.taxes | number : '1.2-2'}}</span>
+            </span> -->
+            <span >${{item.price_break_down.taxes | number : '1.2-2'}}</span>
           </div>
 
           <ng-container *ngIf="item.mandatory_fee_details.is_prepaid">
@@ -66,15 +66,15 @@
                   {{price.name}} (Included in total price)
                 </p>
               </span>
-              <span class="price_wrps" *ngIf="commonFunction.isRefferal()">
+              <!-- <span class="price_wrps" *ngIf="commonFunction.isRefferal()">
                 <span class="old_price">
                   ${{price.price | number : '1.2-2'}}
                 </span>
                 <span class="new_price">
                   ${{price.price | number : '1.2-2'}}
                 </span>
-              </span>
-              <span *ngIf="!commonFunction.isRefferal()">${{item.price | number : '1.2-2'}}</span>
+              </span> -->
+              <span>${{item.price | number : '1.2-2'}}</span>
             </div>
           </ng-container>
 
@@ -85,15 +85,15 @@
                   {{price.name}} (Pay at Property)
                 </p>
               </span>
-              <span class="price_wrps" *ngIf="commonFunction.isRefferal()">
+              <!-- <span class="price_wrps" *ngIf="commonFunction.isRefferal()">
                 <span class="old_price">
                   ${{price.price | number : '1.2-2'}}
                 </span>
                 <span class="new_price">
                   ${{price.price | number : '1.2-2'}}
                 </span>
-              </span>
-              <span *ngIf="!commonFunction.isRefferal()">${{price.price | number : '1.2-2'}}</span>
+              </span> -->
+              <span >${{price.price | number : '1.2-2'}}</span>
             </div>
           </ng-container>
         </div>
@@ -102,8 +102,10 @@
 
     <div class="pay_listing total_amm_blue">
       <span>Total Purchases</span>
+      
       <span *ngIf="typeOf(priceSummary.instalments)!='undefined'" class="">${{priceSummary.totalAmount | number :
         '1.2-2'}}</span>
+
     </div>
     <!-- Start -->
     <div class="pay_list_wrper">

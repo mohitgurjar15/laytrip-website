@@ -222,9 +222,18 @@ export class PaymentModeComponent implements OnInit {
         let checkinDate = moment(this.cartPrices[0].departure_date,"DD/MM/YYYY'").format("YYYY-MM-DD");
 
         for(let i=0; i < this.cartPrices.length; i++){
-          totalPrice+=this.cartPrices[i].selling_price;
+          
           if(this.isOfferData && this.offerData.down_payment_options[0].applicable){
             downpayment+=this.offerData.down_payment_options[0].amount;
+          }
+          if (this.isOfferData && this.cartPrices[i].type == 'flight') {
+            totalPrice += this.cartPrices[i].discounted_selling_price;
+          } else if (this.isOfferData && this.cartPrices[i].type == 'hotel') {
+            totalPrice += this.cartPrices[i].price_break_down.discounted_total;
+          } else if (this.cartPrices[i].type == 'flight') {
+            totalPrice += this.cartPrices[i].selling_price;
+          } else if (this.cartPrices[i].type == 'hotel') {
+            totalPrice += this.cartPrices[i].price_break_down.total;
           }
           if(i==0){
             continue;
