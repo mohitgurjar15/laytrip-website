@@ -14,6 +14,7 @@ import { SpreedlyService } from '../../../services/spreedly.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionExpiredComponent } from '../session-expired/session-expired.component';
+import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
 declare var $: any;
 
 export interface CartItem {
@@ -124,6 +125,7 @@ export class CheckoutComponent implements OnInit {
       }
       this.cartLoading = false;
       let cart: any;
+      let nonPromoConflictCartIds=[];
       let price: any;
       for (let i = 0; i < items.data.length; i++) {
         cart = {};
@@ -174,12 +176,23 @@ export class CheckoutComponent implements OnInit {
           price.discounted_selling_price = items.data[i].moduleInfo[0].selling.discounted_sub_total;
 
         }
+        if (items.data[i].is_conflict) {
+          nonPromoConflictCartIds.push( items.data[i].id );
+        }
         this.carts.push(cart);
-
-        this.cartPrices.push(price)
+        this.cartPrices.push(price)        
       }
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
+      if (nonPromoConflictCartIds.length > 0) {
+        /* this.modalService.open(DiscountedBookingAlertComponent, {
+          windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
+          keyboard: false
+        }); */
+        this.cartService.deleteConflictedCartItem(nonPromoConflictCartIds).subscribe((items: any) => {
+          console.log('removed');
+        });
+      }
 
 
     }, error => {

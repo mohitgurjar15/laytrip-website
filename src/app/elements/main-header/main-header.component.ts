@@ -35,7 +35,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   cartItems;
   cartItemsCount;
   installmentAmount: number;
-  totalAmount: number;
+  totalAmount: number = 0;
   fullPageLoading = false;
   modalRef;
   guestUserId: string = '';
@@ -126,7 +126,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.cartItems = cartItems;
         this.cartService.setCartItems(cartItems);
         if (cartItems) {
-          this.cartItemsCount = res.data.length;
+          this.cartItemsCount = res.count;
           localStorage.setItem('$crt', this.cartItemsCount);
         }
         this.calculateInstalment(cartItems);
@@ -327,7 +327,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         }
       }
     }
-
     this.totalAmount = totalPrice;
     let instalmentRequest = {
       instalment_type: this.paymentInfo.instalmentType || "weekly",

@@ -188,4 +188,26 @@ export class CartService {
     localStorage.setItem('__pm_inf',btoa(JSON.stringify(paymentOptions)))
     this.paymentOptions.next(paymentOptions)
   }
+
+  headers = {
+    currency: 'USD',
+    language: 'en'
+  };
+  
+  deleteConflictedCartItem(ids) {
+    const accessToken = localStorage.getItem('_lay_sess');
+    const options = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: {
+        'id': ids
+      }
+    }
+  
+    return this.http.delete(`${environment.apiUrl}v1/cart/delete-conflicted-cart-item`, options)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }
