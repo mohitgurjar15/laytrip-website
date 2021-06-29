@@ -183,7 +183,7 @@ export class HotelDetailComponent implements OnInit {
   toggleDesc() {
     let el = $("#hotel_desc");
     if(el.data("isExpanded")) {
-      el.toggleClass('desc_exp desc_col', 450);      
+      el.toggleClass('desc_exp desc_col', 450);
       el.data("isExpanded", 0);
     } else {
       el.toggleClass('desc_col desc_exp', 450);
@@ -197,7 +197,7 @@ export class HotelDetailComponent implements OnInit {
   //              Takes into account empty text and text without periods.
   formatLongText(data: any) {
     const maxLength = 150;
-    const text: string = data == null ? "" : data; // null-coalescing operator not yet supported :(
+    const text: string = data == null ? "" : data; // null-coalescing operator not yet supported
     const tokens: string[] = text.split(".");
     let result: string = "";
     let offset: number = 0;
