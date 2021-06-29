@@ -46,9 +46,10 @@ export class PaymentModeComponent implements OnInit {
     instalment_type: "weekly",
     checkin_date: '',
     booking_date: moment().format("YYYY-MM-DD"),
-    amount: 0,
+    amount : '0.00',
     additional_amount: 0,
     selected_down_payment:0,
+    down_payment:0,
     custom_down_payment:null
   }
   instalments;
@@ -109,7 +110,7 @@ export class PaymentModeComponent implements OnInit {
       }
       if(this.instalmentRequest.checkin_date){
 
-        this.instalmentRequest.amount = this.sellingPrice;
+        this.instalmentRequest.amount = this.sellingPrice.toFixed(2);
         this.totalLaycredit();
         this.getAllInstalment('set-default-down-payment');
         this.calculateInstalment('down-payment',null);
@@ -280,9 +281,9 @@ export class PaymentModeComponent implements OnInit {
     this.genericService.getAllInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.isPaymentCalulcatorLoading=false;
         if(res.instalment_available==true){
-          this.weeklyInstalment   = res.weekly_instalments[1].instalment_amount;
-          this.biWeeklyInstalment = res.biweekly_instalments[1].instalment_amount;
-          this.montlyInstalment   = res.monthly_instalments[1].instalment_amount;
+          this.weeklyInstalment   = res.weekly_instalments[1].instalment_amount.toFixed(2);
+          this.biWeeklyInstalment = res.biweekly_instalments[1].instalment_amount.toFixed(2);
+          this.montlyInstalment = res.monthly_instalments[1].instalment_amount.toFixed(2);
 
           if(type1!=null && type1=='set-default-down-payment'){
             this.defaultDownPayments.weekly = res.weekly_down_payment;

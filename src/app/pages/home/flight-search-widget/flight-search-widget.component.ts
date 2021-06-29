@@ -120,7 +120,7 @@ export class FlightSearchWidgetComponent implements OnInit {
             this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
             this.toSearch =  Object.assign({},airports[slide.location.to.airport_code]);          
             this.searchFlightInfo.departure = this.fromSearch.code;
-            this.departureDate = moment().add(90, 'days').toDate();
+            this.departureDate = moment().add(91, 'days').toDate();
             if (this.isRoundTrip) {
               this.returnDate =  moment().add(97, 'days').toDate();
               this.rangeDates = [this.departureDate, this.returnDate];

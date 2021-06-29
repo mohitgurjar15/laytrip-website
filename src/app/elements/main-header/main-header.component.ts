@@ -334,6 +334,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       booking_date: moment().format("YYYY-MM-DD"),
       amount: totalPrice,
       additional_amount: 0,
+      down_payment: 0,
       selected_down_payment: this.paymentInfo.selectedDownPayment || 0
     }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {

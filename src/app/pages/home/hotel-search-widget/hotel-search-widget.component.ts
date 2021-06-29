@@ -115,10 +115,10 @@ export class HotelSearchWidgetComponent implements OnInit {
     window.scrollTo(0, 0);
     this.homeService.getSlideOffers.subscribe(currentSlide => {
       if(this.commonFunction.isRefferal()){
+        this.dealDateValidation();
         if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
 
           let keys: any = currentSlide;
-          this.dealDateValidation();
           // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
           this.fromDestinationInfo.city = this.fromDestinationInfo.title = keys.location.to.hotel_option.title;          
           this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
@@ -132,10 +132,10 @@ export class HotelSearchWidgetComponent implements OnInit {
     
     // this.checkInDate = moment(this.customStartDateValidation).toDate();
 
-    if (new Date(this.customStartDateValidation) <= new Date()) {
+/*     if (new Date(this.customStartDateValidation) <= new Date()) {
       this.checkInDate = moment().add('31', 'days').toDate();
     }
-
+ */
     this.countryCode = this.commonFunction.getUserCountry();
 
     if (this.route && this.route.snapshot.queryParams['check_in']) {
@@ -205,7 +205,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (moment(moment(this.customStartDateValidation).subtract(31, 'days')).diff(moment(), 'days') > 0) {
       this.searchHotelInfo.check_in = this.checkInDate = moment(this.customStartDateValidation).toDate();
     } else {
-      this.searchHotelInfo.check_in = this.checkInDate = moment().add(90, 'days').toDate();
+      this.searchHotelInfo.check_in = this.checkInDate = moment().add(91, 'days').toDate();
     }        
     this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
