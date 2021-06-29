@@ -58,6 +58,7 @@ export class PriceSummaryComponent implements OnInit {
     }
     this.insatllmentAmount = 0;
     if (typeof changes['priceSummary'].currentValue != 'undefined') {
+
       if ($('#flight_list_wrper').text() == "") {
         $('#flight_list_wrper').remove();
       }

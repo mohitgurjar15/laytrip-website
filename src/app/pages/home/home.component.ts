@@ -60,7 +60,6 @@ export class HomeComponent implements OnInit {
         }
     })
     this.homeService.setOffersData(this.currentSlide);
-
   }
 
   ngOnInit(): void {
@@ -228,7 +227,6 @@ export class HomeComponent implements OnInit {
   }
 
   fetchWidgetDeal(newItem: string) {
-    console.log(newItem)
     if(this.moduleId == 1){
       this.toString = newItem;
       this.homeService.setToString(newItem);
@@ -239,12 +237,12 @@ export class HomeComponent implements OnInit {
   
   activeSlide(activeSlide){
     this.currentTabName = 'hotel';
-    if (this.moduleId != 3) {
+    /* if (this.moduleId != 3) {
       this.homeService.removeToString('flight');
       this.homeService.removeToString('hotel');
       $('#nav-hotel').trigger('click');
       this.clickOnTab('hotel');
-    }
+    } */
 
     this.currentSlide = this.$landingPageData.slides[activeSlide];
     this.homeService.setOffersData(this.currentSlide);

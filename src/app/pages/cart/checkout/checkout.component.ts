@@ -185,10 +185,10 @@ export class CheckoutComponent implements OnInit {
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
       if (nonPromoConflictCartIds.length > 0) {
-        /* this.modalService.open(DiscountedBookingAlertComponent, {
+        this.modalService.open(DiscountedBookingAlertComponent, {
           windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
           keyboard: false
-        }); */
+        });
         this.cartService.deleteConflictedCartItem(nonPromoConflictCartIds).subscribe((items: any) => {
           console.log('removed');
         });
@@ -521,6 +521,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   bookFlight() {
+    console.log('here')
     this.isBookingRequest = true;
     this.validationErrorMessage = '';
     this.validateCartItems();
@@ -650,12 +651,12 @@ export class CheckoutComponent implements OnInit {
       instalment_type: this.priceSummary.instalmentType,
       checkin_date: checkinDate,
       booking_date: moment().format("YYYY-MM-DD"),
-      amount: totalPrice,
+      amount: totalPrice.toFixed(2),
       additional_amount: 0,
+      down_payment: 0,
       selected_down_payment: this.priceSummary.selectedDownPayment
     }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
-
       if (res.instalment_available == true) {
         this.priceSummary.instalments = res;
         this.priceSummary.remainingAmount = totalPrice - res.instalment_date[0].instalment_amount;
