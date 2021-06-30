@@ -1,7 +1,6 @@
 <div class="pay_summery_wrapper" *ngIf="typeOf(priceSummary)!=='undefined'">
   <h3>Payment Summary</h3>
   <div class="pay_sum_inner">
-
     <div class="pay_list_wrper" id="flight_list_wrper">
       <ng-container *ngFor="let item of cartPrices">
         <div class="pay_listing" *ngIf="item.type=='flight'">
@@ -10,7 +9,7 @@
               <!-- (Two Travelers) -->
             </span>
           </span>
-          <span class="price_wrps" *ngIf="item.offer_data.applicable">
+          <span class="price_wrps d-flex justify-content-between text-right" *ngIf="item.offer_data.applicable">
             <span class="old_price">
               ${{item.selling_price | number : '1.2-2'}}
             </span>
@@ -38,7 +37,7 @@
               </p>
             </span>
             <span class="price_wrps" *ngIf="item.offer_data.applicable">
-              <span class="old_price">
+              <span class="old_price justify-content-end">
                 ${{item.price_break_down.sub_total | number : '1.2-2'}}
               </span>
               <span class="new_price">
