@@ -51,7 +51,7 @@
                             {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
                             {{commonFunction.convertDateFormat(booking.moduleInfo[0].departure_date,'DD/MM/YYYY')}}
                             <span class="off_label"
-                                *ngIf="booking.moduleInfo[0]?.offer_data.applicable">${{booking.moduleInfo[0]?.offer_data.discount.amount}}
+                                *ngIf="booking.moduleInfo[0]?.offer_data?.applicable">${{booking.moduleInfo[0]?.offer_data.discount.amount}}
                                 off</span>
                         </span>
                         <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==2">
