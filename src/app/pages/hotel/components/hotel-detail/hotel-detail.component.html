@@ -413,8 +413,12 @@
       <div class="col_right" *ngIf="hotelRoomArray.length">
         <div class="price_wrpper">
           <small class="desk_small">Flexible Installments</small>
-          <span>
-            From <span class="big_font">${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}}</span>
+          <span *ngIf="hotelRoomArray[0]?.offer_data.applicable && hotelRoomArray[0]?.offer_data.discount.applicable">
+            From <span class="big_font" >${{hotelRoomArray[0].discounted_secondary_start_price | number : '1.2-2'}}</span>            
+            weekly
+          </span>
+          <span *ngIf="!hotelRoomArray[0].offer_data.applicable">
+            From <span class="big_font" >${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}}</span>            
             weekly
           </span>
           <small class="mobile_small">Flexible Installments</small>
@@ -556,9 +560,9 @@
                           <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
                           </p> -->
                           <p>From</p>
-                          <p *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
-                            <span class="dashed_price" >
-                              {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
+                          <p *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">                            
+                            <span class="dashed_price" *ngIf="room?.secondary_start_price >= room?.discounted_secondary_start_price">
+                              {{ currency?.symbol }}{{room?.secondary_start_price | number :'1.2-2'}}
                             </span>
                             <span>
                               {{ currency?.symbol }}{{room.discounted_secondary_start_price | number : '1.2-2'}}
@@ -665,9 +669,9 @@
                         Installment Option 1
                       </span>
                       <span class="texts" *ngIf="room.start_price>0 && showDownPayment(room?.offer_data,0)==true">
-                        ${{room.start_price | number : '1.2-2'}} downpayment and {{room.no_of_weekly_installment}}
-                        weekly installments of
-                        ${{room.discounted_secondary_start_price | number : '1.2-2'}}
+                        ${{room.start_price | number : '1.2-2'}} downpayment and
+                        {{ room?.offer_data.applicable ?  room.discounted_no_of_weekly_installment : room.no_of_weekly_installment }} weekly installments of ${{room.discounted_secondary_start_price | number : '1.2-2'}}
+
                       </span>
                       <span class="texts" *ngIf="room.start_price==0 && showDownPayment(room?.offer_data,0)==true">
                         Flights within 30 days of travel not available in installments
@@ -709,12 +713,15 @@
                         Not Available
                       </span>
                     </div>
-                    <div class="type_lines">
+                    <div class="type_lines">    
                       <span class="titles">
                         Average Nightly Rate
                       </span>
-                      <span class="texts">
-                        ${{room.night_rate | number : '1.2-2'}} including taxes and fees
+                      <span class="texts" *ngIf="room?.offer_data.applicable">
+                        ${{room?.selling?.discounted_avg_night_price | number : '1.2-2'}} including taxes and fees
+                      </span>
+                      <span class="texts" *ngIf="!room?.offer_data.applicable">
+                        ${{room?.night_rate | number : '1.2-2'}} including taxes and fees
                       </span>
                       <div class="notifi_text mobile_notifi" *ngIf="!room?.offer_data.applicable">
                         More Weekly, Bi-Weekly and Monthly plan options on Booking screen.

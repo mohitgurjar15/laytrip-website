@@ -18,7 +18,7 @@
               ${{item.discounted_selling_price | number : '1.2-2'}}
             </span>
           </span>
-          <span  *ngIf="!item.offer_data.applicable">${{item.selling_price | number : '1.2-2'}}</span>
+          <span *ngIf="!item.offer_data.applicable">${{item.selling_price | number : '1.2-2'}}</span>
         </div>
       </ng-container>
     </div>
@@ -28,7 +28,11 @@
         <div class="hotel-listing-line">
           <div class="pay_listing hotel_line">
             <span>
-              <p>
+              <p *ngIf="item.offer_data.applicable">
+                {{item.location}} ({{item.total_night || 0 }} Nights x
+                ${{item.price_break_down.discounted_sub_total/item.total_night | number : '1.2-2'}})
+              </p>
+              <p *ngIf="!item.offer_data.applicable">
                 {{item.location}} ({{item.total_night || 0 }} Nights x
                 ${{item.price_break_down.sub_total/item.total_night | number : '1.2-2'}})
               </p>
@@ -56,14 +60,14 @@
                 ${{item.price_break_down.taxes | number : '1.2-2'}}
               </span>
             </span> -->
-            <span >${{item.price_break_down.taxes | number : '1.2-2'}}</span>
+            <span>${{item.price_break_down.taxes | number : '1.2-2'}}</span>
           </div>
 
           <ng-container *ngIf="item.mandatory_fee_details.is_prepaid">
-            <div class="pay_listing hotel_line" *ngFor="let price of item.mandatory_fee_details.prepaid_break_dwon">
+            <div class="pay_listing hotel_line" *ngFor="let item of item.mandatory_fee_details.prepaid_break_dwon">
               <span>
                 <p>
-                  {{price.name}} (Included in total price)
+                  {{item.name}} (Included in total price)
                 </p>
               </span>
               <!-- <span class="price_wrps" *ngIf="commonFunction.isRefferal()">
@@ -79,10 +83,10 @@
           </ng-container>
 
           <ng-container *ngIf="item.mandatory_fee_details.is_postpaid">
-            <div class="pay_listing hotel_line" *ngFor="let price of item.mandatory_fee_details.postpaid_break_dwon">
+            <div class="pay_listing hotel_line" *ngFor="let item of item.mandatory_fee_details.postpaid_break_dwon">
               <span>
                 <p>
-                  {{price.name}} (Pay at Property)
+                  {{item.name}} (Pay at Property)
                 </p>
               </span>
               <!-- <span class="price_wrps" *ngIf="commonFunction.isRefferal()">
@@ -93,7 +97,7 @@
                   ${{price.price | number : '1.2-2'}}
                 </span>
               </span> -->
-              <span >${{price.price | number : '1.2-2'}}</span>
+              <span>${{item.price | number : '1.2-2'}}</span>
             </div>
           </ng-container>
         </div>
@@ -102,7 +106,7 @@
 
     <div class="pay_listing total_amm_blue">
       <span>Total Purchases</span>
-      
+
       <span *ngIf="typeOf(priceSummary.instalments)!='undefined'" class="">${{priceSummary.totalAmount | number :
         '1.2-2'}}</span>
 
@@ -122,9 +126,11 @@
     <div class="pay_listing total_amm_blue bb_none">
       <span>Total Due Now</span>
       <span
-        *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0" class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount
+        *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0"
+        class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount
         | number : '1.2-2'}}</span>
-      <span *ngIf="priceSummary?.paymentType=='no-instalment'" class="">${{priceSummary.totalAmount | number : '1.2-2'}}</span>
+      <span *ngIf="priceSummary?.paymentType=='no-instalment'" class="">${{priceSummary.totalAmount | number :
+        '1.2-2'}}</span>
     </div>
     <!-- End -->
     <div class="price_accordion" id="price_collapse" *ngIf="priceSummary?.paymentType=='instalment'">
