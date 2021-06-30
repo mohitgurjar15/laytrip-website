@@ -18,7 +18,7 @@
               ${{item.discounted_selling_price | number : '1.2-2'}}
             </span>
           </span>
-          <span  *ngIf="!item.offer_data.applicable">${{item.selling_price | number : '1.2-2'}}</span>
+          <span *ngIf="!item.offer_data.applicable">${{item.selling_price | number : '1.2-2'}}</span>
         </div>
       </ng-container>
     </div>
@@ -60,7 +60,7 @@
                 ${{item.price_break_down.taxes | number : '1.2-2'}}
               </span>
             </span> -->
-            <span >${{item.price_break_down.taxes | number : '1.2-2'}}</span>
+            <span>${{item.price_break_down.taxes | number : '1.2-2'}}</span>
           </div>
 
           <ng-container *ngIf="item.mandatory_fee_details.is_prepaid">
@@ -97,7 +97,7 @@
                   ${{price.price | number : '1.2-2'}}
                 </span>
               </span> -->
-              <span >${{item.price | number : '1.2-2'}}</span>
+              <span>${{item.price | number : '1.2-2'}}</span>
             </div>
           </ng-container>
         </div>
@@ -106,7 +106,7 @@
 
     <div class="pay_listing total_amm_blue">
       <span>Total Purchases</span>
-      
+
       <span *ngIf="typeOf(priceSummary.instalments)!='undefined'" class="">${{priceSummary.totalAmount | number :
         '1.2-2'}}</span>
 
@@ -126,9 +126,11 @@
     <div class="pay_listing total_amm_blue bb_none">
       <span>Total Due Now</span>
       <span
-        *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0" class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount
+        *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0"
+        class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount
         | number : '1.2-2'}}</span>
-      <span *ngIf="priceSummary?.paymentType=='no-instalment'" class="">${{priceSummary.totalAmount | number : '1.2-2'}}</span>
+      <span *ngIf="priceSummary?.paymentType=='no-instalment'" class="">${{priceSummary.totalAmount | number :
+        '1.2-2'}}</span>
     </div>
     <!-- End -->
     <div class="price_accordion" id="price_collapse" *ngIf="priceSummary?.paymentType=='instalment'">
