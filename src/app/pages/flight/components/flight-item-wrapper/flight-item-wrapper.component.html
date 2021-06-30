@@ -1,6 +1,6 @@
 <div class="routing_main_wrps" id="routing_main_wrps">
     <h3 class="shorting_label" *ngIf="flightListArray.length">{{filteredLabel}}</h3>
-    <div [ngClass]="{'pt-3':!isRoundTrip}" class="one_way card_box" *ngFor="let item of flightListArray; let i = index;">
+    <div  class="one_way card_box" *ngFor="let item of flightListArray; let i = index;">
         <div class="card_iinner">
             <div class="main_left_side">
                 <div class="common_wrper" *ngFor="let route of item.routes; let lastroute = last">
@@ -125,7 +125,7 @@
             </div>
         </div>
 
-        <div class="right_side">
+        <div class="right_side" [ngClass]="{'pt-3':!isRoundTrip}">
             <div class="fl_fares">
                 <ng-container *ngIf="item.secondary_start_price>0">
                     <span class="fare_type desk_fare">
@@ -172,7 +172,7 @@
         </ng-container>
     </div>
 </div>
-<span class="off_label">$20 off</span>
+<span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}} off</span>
 </div>
 <!-- <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
             <span class="sec_text">This flight is no longer available.</span>
