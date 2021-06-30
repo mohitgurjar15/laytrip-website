@@ -133,13 +133,14 @@
         <div class="fl_fares">
           <ng-container *ngIf="item.secondary_start_price>0">
             <span class="fare_type desk_fare">
-              Flexible Installments
+              From
             </span>
             <span class="total_pr">
-              From
-              <span class="big-num">
-                ${{item.secondary_start_price | number : '1.2-2'}}
-              </span> weekly
+              <span class="dashed_price"> $5.84 </span>
+              <span class="big-num">${{item.secondary_start_price | number : '1.2-2'}}</span>
+            </span>
+            <span class="fare_type desk_fare">
+              weekly Installments
             </span>
             <span class="cta_btn">
               <button (click)="bookNow(item)">
