@@ -102,20 +102,7 @@ export class CarouselComponent  implements OnInit{
     }
   }
 
-  booletsClick(isCurrentSlideClick,currentSlide,i){
-    if(isCurrentSlideClick){
-      return;
-    } else if(currentSlide>i){
-      this.onPreviousClick();
-    }else if(currentSlide<i){
-      this.onNextClick();
-    }
-  }
-
-  demoClick(i,slides){
-    console.log(i,'Clicked')
-    console.log(slides)
-    // const next = this.currentSlide + 1;
+  booletsClick(i,slides){
     this.currentSlide = i;
     let slide ="#slide_"+this.currentSlide;
     $(document).ready(function(){
