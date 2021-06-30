@@ -412,13 +412,15 @@
       </div>
       <div class="col_right" *ngIf="hotelRoomArray.length">
         <div class="price_wrpper">
-          <small class="desk_small">Flexible Installments</small>
+          <!-- <small class="desk_small">Flexible Installments</small> -->
+          <small class="desk_small">From</small>
           <span *ngIf="hotelRoomArray[0]?.offer_data.applicable && hotelRoomArray[0]?.offer_data.discount.applicable">
-            From <span class="big_font" >${{hotelRoomArray[0].discounted_secondary_start_price | number : '1.2-2'}}</span>            
-            weekly
+            <span class="big_font dashed_price"> $5.84 </span> 
+            <span class="big_font">${{hotelRoomArray[0].discounted_secondary_start_price | number : '1.2-2'}}</span>
           </span>
+          <small class="desk_small">Weekly Installments</small>
           <span *ngIf="!hotelRoomArray[0].offer_data.applicable">
-            From <span class="big_font" >${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}}</span>            
+            From <span class="big_font">${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}}</span>
             weekly
           </span>
           <small class="mobile_small">Flexible Installments</small>
@@ -528,10 +530,10 @@
                                     <!-- {{room.title}} -->
                                     <span class="wrapper_names">
                                       <span class="hotel_names">{{room.title}}</span>
-                                        <span class="off_label"
-                                          *ngIf="room?.offer_data.applicable && room?.offer_data.discount.applicable">${{room?.offer_data.discount.amount}}
-                                          off</span>                              
-                                      </span>
+                                      <span class="off_label"
+                                        *ngIf="room?.offer_data.applicable && room?.offer_data.discount.applicable">${{room?.offer_data.discount.amount}}
+                                        off</span>
+                                    </span>
                                   </h4>
                                   <span class="adress_span">
                                     Sleeps {{room.occupancy}}
@@ -560,8 +562,9 @@
                           <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
                           </p> -->
                           <p>From</p>
-                          <p *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">                            
-                            <span class="dashed_price" *ngIf="room?.secondary_start_price >= room?.discounted_secondary_start_price">
+                          <p *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
+                            <span class="dashed_price"
+                              *ngIf="room?.secondary_start_price >= room?.discounted_secondary_start_price">
                               {{ currency?.symbol }}{{room?.secondary_start_price | number :'1.2-2'}}
                             </span>
                             <span>
@@ -634,7 +637,8 @@
                           <!-- <p>From <span>${{room.secondary_start_price | number : '1.2-2'}}</span> weekly
                           </p> -->
                           <p>From</p>
-                          <p class="duel_prices" *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
+                          <p class="duel_prices"
+                            *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
                             <span class="dashed_price">
                               {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
                             </span>
@@ -642,7 +646,7 @@
                               {{ currency?.symbol }}{{room.discounted_secondary_start_price | number : '1.2-2'}}
                             </span>
                           </p>
-                          <p class="duel_prices"  *ngIf="!room.offer_data.applicable">
+                          <p class="duel_prices" *ngIf="!room.offer_data.applicable">
                             <span>
                               {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
                             </span>
@@ -670,7 +674,8 @@
                       </span>
                       <span class="texts" *ngIf="room.start_price>0 && showDownPayment(room?.offer_data,0)==true">
                         ${{room.start_price | number : '1.2-2'}} downpayment and
-                        {{ room?.offer_data.applicable ?  room.discounted_no_of_weekly_installment : room.no_of_weekly_installment }} weekly installments of ${{room.discounted_secondary_start_price | number : '1.2-2'}}
+                        {{ room?.offer_data.applicable ?  room.discounted_no_of_weekly_installment : room.no_of_weekly_installment }}
+                        weekly installments of ${{room.discounted_secondary_start_price | number : '1.2-2'}}
 
                       </span>
                       <span class="texts" *ngIf="room.start_price==0 && showDownPayment(room?.offer_data,0)==true">
@@ -713,7 +718,7 @@
                         Not Available
                       </span>
                     </div>
-                    <div class="type_lines">    
+                    <div class="type_lines">
                       <span class="titles">
                         Average Nightly Rate
                       </span>

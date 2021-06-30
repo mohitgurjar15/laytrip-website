@@ -133,10 +133,10 @@
         <div class="fl_fares">
           <ng-container *ngIf="item.secondary_start_price>0">
             <span class="fare_type desk_fare">
-              From
+              From 
             </span>
-            <span class="total_pr">
-              <span class="dashed_price"> $5.84 </span>
+            <span class="total_pr d-flex flex-row">
+              <span class="dashed_price"> $5.84 </span> 
               <span class="big-num">${{item.secondary_start_price | number : '1.2-2'}}</span>
             </span>
             <span class="fare_type desk_fare">
