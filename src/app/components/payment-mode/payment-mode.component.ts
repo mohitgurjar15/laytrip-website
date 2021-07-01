@@ -164,8 +164,6 @@ export class PaymentModeComponent implements OnInit {
             paymentType:this.paymentType,
             selectedDownPayment:this.selectedDownPaymentIndex
           });
-          console.log("this.instalments-1", this.instalments)
-
           this.cartService.setPaymentOptions({
             layCreditPoints :this.laycreditpoints,
             instalmentType: this.instalmentType,
@@ -188,7 +186,6 @@ export class PaymentModeComponent implements OnInit {
             paymentType:this.paymentType,
             selectedDownPayment:this.selectedDownPaymentIndex
           })
-          console.log("this.instalments-2", this.instalments)
 
           this.cartService.setPaymentOptions({
             layCreditPoints :this.laycreditpoints,
@@ -347,7 +344,6 @@ export class PaymentModeComponent implements OnInit {
       selectedDownPayment:this.selectedDownPaymentIndex
     }
     this.getInstalmentData.emit(paymentInfo)
-    console.log("this.instalments-3", this.instalments)
 
     this.cartService.setPaymentOptions(paymentInfo);
   }

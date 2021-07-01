@@ -45,7 +45,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   instalmentType:string='weekly';
   installmentOptions;
   paymentInfo;
-
+  cartIsPromotional: boolean = false;
   constructor(
     private genericService: GenericService,
     public translate: TranslateService,
@@ -127,6 +127,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.cartService.setCartItems(cartItems);
         if (cartItems) {
           this.cartItemsCount = res.count;
+          this.cartIsPromotional = res.cartIsPromotional;
           localStorage.setItem('$crt', this.cartItemsCount);
         }
         this.calculateInstalment(cartItems);
@@ -313,6 +314,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   calculateInstalment(cartPrices) {
+    console.log("cartPrices",cartPrices)
     let totalPrice = 0;
     let checkinDate;
     if (cartPrices && cartPrices.length > 0) {
@@ -335,7 +337,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       amount: totalPrice,
       additional_amount: 0,
       down_payment: 0,
-      selected_down_payment: this.paymentInfo.selectedDownPayment || 0
+      selected_down_payment: this.paymentInfo.selectedDownPayment || 0,
+      custom_down_payment: this.cartIsPromotional ? 9.99 : 0
     }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available) {

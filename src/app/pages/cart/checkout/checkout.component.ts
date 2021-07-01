@@ -190,7 +190,7 @@ export class CheckoutComponent implements OnInit {
           keyboard: false
         });
         this.cartService.deleteConflictedCartItem(nonPromoConflictCartIds).subscribe((items: any) => {
-          console.log('removed');
+          this.redirectTo('/cart/checkout');
         });
       }
 
