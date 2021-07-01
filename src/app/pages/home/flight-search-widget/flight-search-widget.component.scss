@@ -9,17 +9,21 @@
   border: 1px solid red;
   border-radius: 8px;
 }
-.desk_suggetions{
-  @include tab-view{
+
+.desk_suggetions {
+  @include tab-view {
     display: none;
   }
 }
-.mobile_suggetions{
+
+.mobile_suggetions {
   display: none;
-  @include tab-view{
+
+  @include tab-view {
     display: block;
   }
 }
+
 .flight_form {
   .autocomplete-container {
     box-shadow: none !important;
@@ -251,19 +255,20 @@ a:hover {
 
     &.round_trip_calender {
       table {
-        th{
-          span{
-            @include mobile-view{
+        th {
+          span {
+            @include mobile-view {
               font-size: 12px;
             }
           }
         }
+
         td {
           span {
             height: 35px;
             width: 35px;
 
-            @include mobile-view{
+            @include mobile-view {
               height: 24px;
               width: 24px;
               font-size: 10px;
@@ -398,4 +403,34 @@ a:hover {
   @include tab-view {
     display: none !important;
   }
+}
+
+
+.tab_flight_top {
+  .nav {
+    &:first-child {
+      flex: 1;
+    }
+
+    &:nth-child(2) {
+      flex: 3;
+      margin-left: 30px;
+
+      @include ipad-view {
+        flex: 1;
+        margin-left: -60px;
+      }
+
+      @include mobile-view {
+        margin-left: 0;
+      }
+    }
+    @include mobile-view {
+      flex-wrap: nowrap !important;
+    } 
+  }
+
+  @include mobile-view {
+    flex-wrap: wrap;
+  } 
 }
