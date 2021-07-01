@@ -19,7 +19,7 @@ export class PreloadingService {
 
     }
 
-    load(): Promise<any> {
+    /* load(): Promise<any> {
         const encode = require('jwt-encode');
         localStorage.setItem('__LP_DATA', "")
         return new Promise((resolve, reject) => {
@@ -28,5 +28,5 @@ export class PreloadingService {
                 resolve(true);
             });
         });
-    }
+    } */
 }

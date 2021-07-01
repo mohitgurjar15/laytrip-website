@@ -19,11 +19,11 @@ import { PreloadingService } from './preloading.service';
 /* export function jokesProviderFactory(provider: PreloadingService) {
   return () => provider.load();
 } */
-export function jokesProviderFactory(catService: PreloadingService) {
+/* export function jokesProviderFactory(catService: PreloadingService) {
   return (): Promise<any> => {
     return catService.load();
   }
-}
+} */
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,11 +66,11 @@ export function jokesProviderFactory(catService: PreloadingService) {
     },
     AuthGuard,
     PreloadingService,
-    { 
+   /*  { 
       provide: APP_INITIALIZER, 
       useFactory: jokesProviderFactory,
       deps: [PreloadingService], multi: true
-    } 
+    }  */
   ],
   bootstrap: [AppComponent]
 })

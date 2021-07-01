@@ -9,6 +9,7 @@ import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PreloadingService } from './preloading.service';
+import { LANDING_PAGE } from './landing-page.config';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +34,11 @@ export class AppComponent {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
+    const encode = require('jwt-encode');
+
+    localStorage.setItem('__LP_DATA', encode(LANDING_PAGE['AS-410'], 'secret'))
+
     let token = localStorage.getItem('_lay_sess');
     if(token){
       // this.subscribeToNotifications()
