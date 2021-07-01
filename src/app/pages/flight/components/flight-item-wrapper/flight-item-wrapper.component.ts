@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 //import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -78,6 +79,8 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     private toastr: ToastrService,
     //private spinner: NgxSpinnerService,
     public modalService: NgbModal,
+    private decimalPipe: DecimalPipe
+
   ) {
   }
 
@@ -338,6 +341,10 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
       return false;
     }
     return true;
+  }
+
+  transformDecimal(num) {
+    return this.decimalPipe.transform(num, '1.2-2');
   }
 }
 

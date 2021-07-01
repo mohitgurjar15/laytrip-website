@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FlightRoutingModule } from './flight-routing.module';
@@ -77,6 +77,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     FlightNotFoundComponent,
     FlightConfirmationComponent
   ],
-  entryComponents: []
+  entryComponents: [],
+  providers:[DecimalPipe]
 })
 export class FlightModule { }
