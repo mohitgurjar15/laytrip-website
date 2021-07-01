@@ -133,7 +133,7 @@
               From
             </span>
                     <span class="total_pr d-flex flex-row">
-              <span *ngIf="item?.offer_data?.applicable === true" class="dashed_price"> ${{item.secondary_start_price | number : '1.2-2'}} </span>
+              <span *ngIf="item?.offer_data?.applicable === true && item.offer_data.applicable === true" class="dashed_price"> ${{item.secondary_start_price | number : '1.2-2'}} </span>
                     <span class="big-num">${{item.discounted_secondary_start_price | number : '1.2-2'}}</span>
                     </span>
                     <span class="fare_type desk_fare">
