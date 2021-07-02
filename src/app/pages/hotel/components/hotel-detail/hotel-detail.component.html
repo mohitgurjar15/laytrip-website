@@ -378,17 +378,17 @@
 </section>
 <!-- Close Search Result section -->
 <div class="search_tab_listing_wrapper" *ngIf="!loading">
-  <div class="container">
-    <div class="search_tab_icons_wrps">
-      <a class="tab_anch flight hover-link" (click)="moduleTabClick('flight')">
-        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_pink.svg" alt="Flight Icon" />
-        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" alt="Flight Icon" />
-      </a>
-      <a class="active tab_anch" style="pointer-events: none;">
-        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg" alt="Hotel Icon" />
-        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
-      </a>
-      <!-- <a class="tab_anch" style="pointer-events: none;" *ngIf="!commonFunction.isRefferal()">
+    <div class="container">
+        <div class="search_tab_icons_wrps">
+            <a class="tab_anch flight hover-link" (click)="moduleTabClick('flight')">
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_pink.svg" alt="Flight Icon" />
+                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" alt="Flight Icon" />
+            </a>
+            <a class="active tab_anch" style="pointer-events: none;">
+                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg" alt="Hotel Icon" />
+                <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
+            </a>
+            <!-- <a class="tab_anch" style="pointer-events: none;" *ngIf="!commonFunction.isRefferal()">
         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
           alt="Accommodation Icon" />
         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_gray.svg"
@@ -398,11 +398,11 @@
         <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_blue.svg" alt="car Icon" />
         <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_gray.svg" alt="car Icon" />
       </a> -->
+        </div>
+        <div class="searchbar_box_common">
+            <app-hotel-search-widget></app-hotel-search-widget>
+        </div>
     </div>
-    <div class="searchbar_box_common">
-        <app-hotel-search-widget></app-hotel-search-widget>
-    </div>
-</div>
 </div>
 <app-hotel-not-found *ngIf="isNotFound && hotelRoomArray.length==0"></app-hotel-not-found>
 
@@ -633,7 +633,7 @@
                           </p> -->
                                                     <p>From</p>
                                                     <p class="duel_prices" *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
-                                                        <span class="dashed_price">
+                                                        <span class="dashed_price" *ngIf="room?.secondary_start_price > room?.discounted_secondary_start_price">
                               {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
                             </span>
                                                         <span>
