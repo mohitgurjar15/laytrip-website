@@ -566,7 +566,7 @@
                           </p> -->
                                                     <p>From</p>
                                                     <p *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
-                                                        <span class="dashed_price" *ngIf="room?.secondary_start_price >= room?.discounted_secondary_start_price">
+                                                        <span class="dashed_price" *ngIf="room?.secondary_start_price > room?.discounted_secondary_start_price">
                               {{ currency?.symbol }}{{room?.secondary_start_price | number :'1.2-2'}}
                             </span>
                                                         <span>
