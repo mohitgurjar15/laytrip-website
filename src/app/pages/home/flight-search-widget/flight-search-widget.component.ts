@@ -115,8 +115,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   
     if(this.commonFunction.isRefferal()){
       this.homeService.getSlideOffers.subscribe(currentSlide => {
-          if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
-            let slide: any = currentSlide;
+        if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+          let slide: any = currentSlide;
             this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
             this.toSearch =  Object.assign({},airports[slide.location.to.airport_code]);          
             this.searchFlightInfo.departure = this.fromSearch.code;
@@ -175,14 +175,14 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     this.homeService.getToString.subscribe(toSearchString => {
       if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
-        let keys: any = toSearchString;
+        let keys: any = toSearchString;        
         localStorage.setItem('__to', keys)
         // this.toSearch = null;   
 
         this.fromSearch = airports['NYC'];
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.toSearch = airports[keys];
-        this.departureDate = moment().add(90, 'days').toDate();
+        this.departureDate = moment().add(91, 'days').toDate();
         if (this.isRoundTrip) {
           this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
           this.searchFlightInfo.arrival = this.toSearch.code;
@@ -482,6 +482,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   getMinPrice(prices) {
+    console.log(prices)
     if (prices.length > 0) {
       let values = prices.map(function (v) {
         if (v.secondary_start_price > 0) {

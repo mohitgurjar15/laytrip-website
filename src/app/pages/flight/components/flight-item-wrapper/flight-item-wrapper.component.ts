@@ -265,13 +265,14 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
           }
         }
       }, error => {
+        this.changeLoading.emit(false);
         if (error.status == 409 && this.commonFunction.isRefferal()) {
           this.modalService.open(DiscountedBookingAlertComponent, {
             windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
             keyboard: false
           });
+          return;
         }
-        this.changeLoading.emit(false);
         //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
         this.isFlightNotAvailable = true;
         this.flightUniqueCode = route.unique_code;

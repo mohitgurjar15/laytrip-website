@@ -114,7 +114,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.homeService.getSlideOffers.subscribe(currentSlide => {
-      if(this.commonFunction.isRefferal()){
+      if (this.commonFunction.isRefferal()) {        
         this.dealDateValidation();
         if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
 
@@ -188,6 +188,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
         this.dealDateValidation();
+
+
         // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
         this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;

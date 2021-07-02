@@ -55,11 +55,11 @@ export class HomeComponent implements OnInit {
           this.$landingPageData = data;
           this.slides = this.$landingPageData.slides;
           this.currentSlide = this.$landingPageData.slides[0];
+          this.homeService.setOffersData(this.currentSlide);
         }
         catch(e){
         }
-    })
-    this.homeService.setOffersData(this.currentSlide);
+      })
   }
 
   ngOnInit(): void {

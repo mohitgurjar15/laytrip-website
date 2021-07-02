@@ -314,7 +314,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   calculateInstalment(cartPrices) {
-    console.log("cartPrices",cartPrices)
     let totalPrice = 0;
     let checkinDate;
     if (cartPrices && cartPrices.length > 0) {
