@@ -117,7 +117,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       this.homeService.getSlideOffers.subscribe(currentSlide => {
         if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
           let slide: any = currentSlide;
-            this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
+          this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
             this.toSearch =  Object.assign({},airports[slide.location.to.airport_code]);          
             this.searchFlightInfo.departure = this.fromSearch.code;
             this.departureDate = moment().add(91, 'days').toDate();
@@ -189,6 +189,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         } 
       }
     });
+    console.log(this.toSearch)
     //delete BehaviorSubject at the end
     this.homeService.removeToString('flight');
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
@@ -482,7 +483,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   getMinPrice(prices) {
-    console.log(prices)
     if (prices.length > 0) {
       let values = prices.map(function (v) {
         if (v.secondary_start_price > 0) {
