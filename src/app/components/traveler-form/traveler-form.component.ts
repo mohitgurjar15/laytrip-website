@@ -249,12 +249,12 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
       this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
       this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
-      this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender;
+      this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender || '';
       this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
-      this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode;
-      this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo;
+      this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode || '';
+      this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo || '';
       this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
-      this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
+      this.travelers[`type${this.cartNumber}`].adults[i].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY'):'';
       if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
         this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
         this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry && traveler.passportExpiry != 'Invalid date' ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
@@ -478,6 +478,9 @@ export class TravelerFormComponent implements OnInit {
         data.module_id = 3;
         delete data.country_id;
         delete data.dob;
+        delete data.gender;
+        delete data.passport_number;
+        delete data.passport_expiry;
       }
       else {
         data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
