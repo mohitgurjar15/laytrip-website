@@ -50,17 +50,15 @@ export class HomeComponent implements OnInit {
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
-    this.homeService.getLandingPageData.subscribe(data=>{
-        try{
-          this.$landingPageData = data;
-          this.slides = this.$landingPageData.slides;
-          this.currentSlide = this.$landingPageData.slides[0];
-        }
-        catch(e){
-        }
-      console.log
-      })
-      this.homeService.setOffersData(this.currentSlide);
+    this.homeService.getLandingPageData.subscribe(data => {
+      try {
+        this.$landingPageData = data;
+        this.slides = this.$landingPageData.slides;
+        this.currentSlide = this.$landingPageData.slides[0];
+      } catch (e) {
+      }
+    });
+    this.homeService.setOffersData(this.currentSlide);
   }
 
   ngOnInit(): void {

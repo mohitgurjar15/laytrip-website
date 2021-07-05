@@ -116,10 +116,18 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.homeService.getSlideOffers.subscribe(currentSlide => {
       if (this.commonFunction.isRefferal()) {        
         this.dealDateValidation();
+        if (typeof currentSlide == 'undefined') {
+          //Condition apply when page is init first time and by default show miami
+          this.fromDestinationInfo.city = this.fromDestinationInfo.title = 'Miami Beach, Florida, United States';
+          this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = 25.7903;
+          this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = -80.1303;
+          this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = 800047419;
+          this.searchHotelInfo.location = this.fromDestinationInfo;
+          this.validateSearch(true);
+        }
         if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
 
           let keys: any = currentSlide;
-          // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
           this.fromDestinationInfo.city = this.fromDestinationInfo.title = keys.location.to.hotel_option.title;          
           this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
           this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = keys.location.to.hotel_option.geo_codes.long;

@@ -196,7 +196,7 @@ export class TravelerFormComponent implements OnInit {
       for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
         this.travelers[`type${this.cartNumber}`].cartId = this.cartId
         this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
-        // this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
+         this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
         if (!this.cartItem.module_info.is_passport_required) {
           delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
           delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
