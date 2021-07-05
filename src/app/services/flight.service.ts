@@ -15,6 +15,9 @@ export class FlightService {
     private sortFilter = new BehaviorSubject([]);
     getLastApplyedSortFilter = this.sortFilter.asObservable();
 
+    private flights = new BehaviorSubject([]);
+    getFlights = this.flights.asObservable();
+
     constructor(
         private http: HttpClient,
         private commonFunction: CommonFunction
@@ -22,6 +25,9 @@ export class FlightService {
 
     }
 
+    setFlights(flights){
+        this.flights.next(flights)
+    }
 
     searchAirport(searchItem) {
         return this.http.get(`${environment.apiUrl}v1/flight/search-airport/${searchItem}`)
