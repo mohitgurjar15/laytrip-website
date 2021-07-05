@@ -503,7 +503,7 @@ export class TravelerFormComponent implements OnInit {
           this.myTravelers[index] = traveler;
           //this.checkOutService.setTravelers([this.myTravelers]);
           this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAsUntouched();
-          this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
+          //this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
         })
       }
       else {
@@ -540,7 +540,7 @@ export class TravelerFormComponent implements OnInit {
             this.checkOutService.setTravelers([...this.myTravelers, traveler]);
             this.patch();
             this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAsUntouched();
-            this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
+            //this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
           }
         }, error => {
           this.cartService.setLoaderStatus(false)
@@ -634,7 +634,7 @@ export class TravelerFormComponent implements OnInit {
       //this.setPhoneNumberFormat(this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code,cartNumber,traveler_number)
     }
 
-    this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
+    //this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
     this.checkOutService.emitTravelersformData(this.travelerForm);
     this.cd.detectChanges();
   }
