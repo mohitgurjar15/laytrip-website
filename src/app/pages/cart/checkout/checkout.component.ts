@@ -521,7 +521,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   bookFlight() {
-    console.log('here')
     this.isBookingRequest = true;
     this.validationErrorMessage = '';
     this.validateCartItems();
@@ -529,6 +528,8 @@ export class CheckoutComponent implements OnInit {
       $('#sign_in_modal').modal('show');
       return false;
     }
+    console.log("this.travelerForm",this.travelerForm)
+    //return false;
 
     let carts = this.carts.map(cart => { return { cart_id: cart.id } })
     this.bookingRequest.card_token = this.cardToken;

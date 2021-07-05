@@ -236,7 +236,7 @@ export class AddCardComponent implements OnInit {
         let value = fieldEl.value;
         let values = value.split("/");
         options['month'] = values[0];
-        options['year'] = values[1];
+        options['year'] = '20'+values[1];
       }
       else {
         // add value to options

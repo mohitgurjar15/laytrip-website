@@ -189,7 +189,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         } 
       }
     });
-    console.log(this.toSearch)
     //delete BehaviorSubject at the end
     this.homeService.removeToString('flight');
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
