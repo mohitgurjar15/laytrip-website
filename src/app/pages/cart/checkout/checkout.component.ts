@@ -528,7 +528,7 @@ export class CheckoutComponent implements OnInit {
       $('#sign_in_modal').modal('show');
       return false;
     }
-    console.log("this.travelerForm",this.travelerForm)
+    //console.log("this.travelerForm",this.travelerForm)
     //return false;
 
     let carts = this.carts.map(cart => { return { cart_id: cart.id } })

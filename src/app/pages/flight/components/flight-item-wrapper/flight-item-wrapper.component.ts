@@ -106,6 +106,16 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
     setTimeout(() => { this.loadJquery(); }, 3000)
 
+    this.flightService.getFlights.subscribe(data=>{
+
+      if(data.length){
+        this.flightDetails=data;
+      }
+      else{
+        this.flightDetails=[];
+      }
+    })
+
   }
 
   loadJquery() {
@@ -206,16 +216,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   bookNow(route) {
     this.removeFlight.emit(this.flightUniqueCode);
     this.isFlightNotAvailable = false;
-    /*  
-    this.flightListArray = this.flightListArray.filter(obj => obj.unique_code !== this.flightUniqueCode);
- */
-    /* if (!this.isLoggedIn) {
-      const modalRef = this.modalService.open(LaytripOkPopup, {
-        centered: true,
-        keyboard: false,
-        backdrop: 'static'
-      });
-    } else { */
 
     if (this.cartItems && this.cartItems.length >= 10) {
       this.changeLoading.emit(false);
@@ -305,8 +305,9 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log("changes.flightDetails",changes)
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
-      this.flightDetails = changes.flightDetails.currentValue;
+      //this.flightDetails = changes.flightDetails.currentValue;
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
       this.filteredLabel = changes.filteredLabel.currentValue;
     }

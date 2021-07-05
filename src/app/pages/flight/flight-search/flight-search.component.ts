@@ -110,7 +110,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           if(this.flightDetails.length == 0){
             this.isNotFound = true;
             console.log("this.isNotFound 2",this.isNotFound)
-          }         
+          } 
+          this.flightService.setFlights(this.flightDetails)       
         }
       }, err => {
         this.flightDetails = [];
@@ -144,6 +145,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
+          this.flightService.setFlights(this.flightDetails)
           if(this.flightDetails.length == 0){
             this.isNotFound = true;
           } 
@@ -291,6 +293,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       }
     }
+    this.flightService.setFlights(this.flightDetails)
   }
 
 
@@ -368,6 +371,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   filterFlight(event) {
     this.flightDetails = event;
+    this.flightService.setFlights(this.flightDetails)
   }
 
   resetFilter() {
