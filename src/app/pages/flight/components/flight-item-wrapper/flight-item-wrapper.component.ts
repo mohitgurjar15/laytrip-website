@@ -24,7 +24,7 @@ import { DecimalPipe } from '@angular/common';
 })
 export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
-  @Input() flightDetails;
+  flightDetails;
   @Input() filter;
   @Input() filteredLabel;
   @Output() changeLoading = new EventEmitter;
@@ -107,7 +107,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     setTimeout(() => { this.loadJquery(); }, 3000)
 
     this.flightService.getFlights.subscribe(data=>{
-
       if(data.length){
         this.flightDetails=data;
       }

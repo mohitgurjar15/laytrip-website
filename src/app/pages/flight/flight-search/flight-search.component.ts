@@ -293,7 +293,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       }
     }
-    this.flightService.setFlights(this.flightDetails)
+    //this.flightService.setFlights(this.flightDetails)
   }
 
 
@@ -371,7 +371,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   filterFlight(event) {
     this.flightDetails = event;
-    this.flightService.setFlights(this.flightDetails)
+    //this.flightService.setFlights(this.flightDetails)
   }
 
   resetFilter() {
