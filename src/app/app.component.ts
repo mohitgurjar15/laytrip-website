@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { getLoginUserInfo } from './_helpers/jwt.helper';
 import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PreloadingService } from './services/preloading.service';
 import { HomeService } from './services/home.service';
 @Component({
@@ -25,7 +25,6 @@ export class AppComponent {
     private genericService:GenericService,
     private checkOutService:CheckOutService,
     private route: ActivatedRoute,
-    private router: Router,
     private userService:UserService,
     public preLoadService : PreloadingService,
     private homeService:HomeService
