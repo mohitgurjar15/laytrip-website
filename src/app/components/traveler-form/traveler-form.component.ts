@@ -232,7 +232,7 @@ export class TravelerFormComponent implements OnInit {
       for (let i = 0; i < this.cartItem.module_info.input_data.num_rooms; i++) {
         this.travelers[`type${this.cartNumber}`].cartId = this.cartId
         this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.hotel.adult));
-        // this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
+        this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
         if (i != 0) {
           this.travelers[`type${this.cartNumber}`].adults[i].is_email_required = false;
           this.travelers[`type${this.cartNumber}`].adults[i].is_phone_required = false;

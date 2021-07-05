@@ -418,11 +418,19 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   getPrice(module_Info,type){
     let price;
-    if(type=='flight'){
-      price = module_Info.selling_price;
+    if (type == 'flight') {
+      if (this.commonFunction.isRefferal() && module_Info.offer_data && module_Info.offer_data.applicable ) {        
+        price = module_Info.discounted_selling_price;
+      } else {        
+        price = module_Info.selling_price;
+      }
     }
     else if(type=='hotel'){
-      price = module_Info.selling.total;
+      if (this.commonFunction.isRefferal() && module_Info.offer_data && module_Info.offer_data.applicable) {
+        price = module_Info.discounted_selling_price;
+      } else {
+        price = module_Info.selling.total;
+      }
     }
     return price;
   }
