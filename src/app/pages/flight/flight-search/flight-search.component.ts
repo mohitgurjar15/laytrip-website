@@ -97,17 +97,19 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
     this.flightDetails = [];
     this.dates = [];
-
+    console.log("payload",payload)
     if (payload && tripType === 'roundtrip') {
       this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
           this.loading = false;
           this.fullPageLoading = false;
           this.isNotFound = false;
+          console.log("this.isNotFound 1",this.isNotFound)
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
           if(this.flightDetails.length == 0){
             this.isNotFound = true;
+            console.log("this.isNotFound 2",this.isNotFound)
           }         
         }
       }, err => {
@@ -117,6 +119,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         }
         else {
           this.isNotFound = true;
+          console.log("this.isNotFound 3",this.isNotFound)
         }
         this.loading = false;
         this.fullPageLoading = false;

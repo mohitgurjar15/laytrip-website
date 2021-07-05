@@ -1,6 +1,6 @@
 <div class="routing_main_wrps" id="routing_main_wrps">
-    <h3 class="shorting_label" *ngIf="flightListArray.length">{{filteredLabel}}</h3>
-    <div class="one_way card_box" *ngFor="let item of flightListArray; let i = index;">
+    <h3 class="shorting_label" *ngIf="flightDetails.length">{{filteredLabel}}</h3>
+    <div class="one_way card_box" *ngFor="let item of flightDetails; let i = index;">
         <div class="card_iinner">
             <div class="main_left_side">
                 <div class="common_wrper" *ngFor="let route of item.routes; let lastroute = last">
@@ -268,4 +268,4 @@
 </div>
 </div>
 
-<app-flight-not-found *ngIf="!flightListArray.length"></app-flight-not-found>
+<app-flight-not-found *ngIf="!flightDetails.length"></app-flight-not-found>
