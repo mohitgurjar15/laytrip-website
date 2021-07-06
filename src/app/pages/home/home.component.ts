@@ -50,16 +50,15 @@ export class HomeComponent implements OnInit {
   ) {
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
-    this.homeService.getLandingPageData.subscribe(data=>{
-        try{
-          this.$landingPageData = data;
-          this.slides = this.$landingPageData.slides;
-          this.currentSlide = this.$landingPageData.slides[0];
-          this.homeService.setOffersData(this.currentSlide);
-        }
-        catch(e){
-        }
-      })
+    this.homeService.getLandingPageData.subscribe(data => {
+      try {
+        this.$landingPageData = data;
+        this.slides = this.$landingPageData.slides;
+        this.currentSlide = this.$landingPageData.slides[0];
+      } catch (e) {
+      }
+    });
+    this.homeService.setOffersData(this.currentSlide);
   }
 
   ngOnInit(): void {
@@ -192,26 +191,26 @@ export class HomeComponent implements OnInit {
     document.getElementById('home_banner').style.width = '100%';
     if (tabName === 'flight') {
       this.getDeal(1);
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
-      document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
-      document.getElementById('home_banner').style.backgroundSize = 'cover';
+      // document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
+      // document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
+      // document.getElementById('home_banner').style.backgroundSize = 'cover';
       // if (document.getElementById('login_btn')) {
       //   document.getElementById('login_btn').style.background = '#FC7E66';
       // }
     } else if (tabName === 'hotel') {
       this.getDeal(3);
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
-      document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
-      document.getElementById('home_banner').style.backgroundSize = 'cover';
+      // document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
+      // document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
+      // document.getElementById('home_banner').style.backgroundSize = 'cover';
       // if (document.getElementById('login_btn')) {
       //   document.getElementById('login_btn').style.background = '#FF00BC';
       // }
     }
     else if (tabName === 'home-rentals') {
       this.getDeal(3);
-      document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
-      document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
-      document.getElementById('home_banner').style.backgroundSize = 'cover';
+      // document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
+      // document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
+      // document.getElementById('home_banner').style.backgroundSize = 'cover';
       // if (document.getElementById('login_btn')) {
       //   document.getElementById('login_btn').style.background = '#FF00BC';
       // }

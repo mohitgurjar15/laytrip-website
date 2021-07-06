@@ -22,9 +22,9 @@ import { DecimalPipe } from '@angular/common';
   templateUrl: './flight-item-wrapper.component.html',
   styleUrls: ['./flight-item-wrapper.component.scss'],
 })
-export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, OnDestroy {
+export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
-  @Input() flightDetails;
+  flightDetails;
   @Input() filter;
   @Input() filteredLabel;
   @Output() changeLoading = new EventEmitter;
@@ -34,10 +34,10 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   cartItems = [];
 
   animationState = 'out';
-  flightList;
+  //flightList;
   s3BucketUrl = environment.s3BucketUrl;
   public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
-  flightListArray = [];
+  //flightListArray = [];
   currency;
 
   subscriptions: Subscription[] = [];
@@ -87,7 +87,7 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   ngOnInit() {
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    this.flightList = this.flightDetails;
+    //this.flightListArray = this.flightDetails;
     this.userInfo = getLoginUserInfo();
 
     if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
@@ -105,6 +105,15 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     })
 
     setTimeout(() => { this.loadJquery(); }, 3000)
+
+    this.flightService.getFlights.subscribe(data=>{
+      if(data.length){
+        this.flightDetails=data;
+      }
+      else{
+        this.flightDetails=[];
+      }
+    })
 
   }
 
@@ -168,12 +177,12 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
     this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
   }
 
-  ngAfterContentChecked() {
+  /* ngAfterContentChecked() {
     this.flightListArray = this.flightList;
     this.flightListArray.forEach(item => {
       this.flightDetailIdArray.push(item.route_code);
     });
-  }
+  } */
 
   showDetails(index, flag = null) {
     if (typeof this.showFlightDetails[index] === 'undefined') {
@@ -206,16 +215,6 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
   bookNow(route) {
     this.removeFlight.emit(this.flightUniqueCode);
     this.isFlightNotAvailable = false;
-    /*  
-    this.flightListArray = this.flightListArray.filter(obj => obj.unique_code !== this.flightUniqueCode);
- */
-    /* if (!this.isLoggedIn) {
-      const modalRef = this.modalService.open(LaytripOkPopup, {
-        centered: true,
-        keyboard: false,
-        backdrop: 'static'
-      });
-    } else { */
 
     if (this.cartItems && this.cartItems.length >= 10) {
       this.changeLoading.emit(false);
@@ -305,8 +304,9 @@ export class FlightItemWrapperComponent implements OnInit, AfterContentChecked, 
 
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log("changes.flightDetails",changes)
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
-      this.flightList = changes.flightDetails.currentValue;
+      //this.flightDetails = changes.flightDetails.currentValue;
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
       this.filteredLabel = changes.filteredLabel.currentValue;
     }

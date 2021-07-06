@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { getLoginUserInfo } from './_helpers/jwt.helper';
 import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PreloadingService } from './services/preloading.service';
 import { HomeService } from './services/home.service';
 @Component({
@@ -25,38 +25,32 @@ export class AppComponent {
     private genericService:GenericService,
     private checkOutService:CheckOutService,
     private route: ActivatedRoute,
-    private router: Router,
     private userService:UserService,
     public preLoadService : PreloadingService,
     private homeService:HomeService
-  ){
+  ) {
+    this.preloadLandingPageData();
     this.setUserOrigin();
     this.getUserLocationInfo();
   }
 
   ngOnInit() {
-
     let token = localStorage.getItem('_lay_sess');
     if(token){
       // this.subscribeToNotifications()
     }
     this.registerGuestUser();
-    this.setCountryBehaviour();
-    this.preloadLandingPageData();
+    this.setCountryBehaviour();   
   }
 
   utm_source ='';
-  preloadLandingPageData() {
-    
+  preloadLandingPageData() {    
     this.route.queryParams.subscribe(parms => {
       if (parms['utm_source']) {
         this.preLoadService.getLandingPageDetails(parms['utm_source']).subscribe((res: any) => {
-          this.$lpData =this.homeService.setLandingPageData(res.config)
+        this.$lpData =this.homeService.setLandingPageData(res.config)
         }, err => {
-          /* console.log("errr",err)
-          if(this.$lpData){
-            this.$lpData.unsubscribe();
-          } */
+          this.homeService.setLandingPageData({});          
           window.location.href='/';
         });
       } 
