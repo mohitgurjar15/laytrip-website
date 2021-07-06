@@ -60,7 +60,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   showFareDetails: number = 0;
   flightUniqueCode;
   isRoundTrip = false;
-
+  noOfDataToShowInitially = 25;
   subcell = '$100';
   isLoggedIn = false;
   userDetails;
@@ -108,7 +108,10 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
     this.flightService.getFlights.subscribe(data=>{
       if(data.length){
-        this.flightDetails=data;
+        this.flightDetails = data;
+        console.log(this.flightDetails)
+        this.flightDetails = this.flightDetails.slice(0, this.noOfDataToShowInitially);
+        console.log(this.flightDetails)
       }
       else{
         this.flightDetails=[];
