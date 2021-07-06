@@ -67,7 +67,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   showTotalLayCredit = 0;
   _isLayCredit = false;
   totalLayCredit = 0;
-
+  flightItems;
   constructor(
     private flightService: FlightService,
     private router: Router,
@@ -108,10 +108,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
     this.flightService.getFlights.subscribe(data=>{
       if(data.length){
-        this.flightDetails = data;
-        console.log(this.flightDetails)
-        this.flightDetails = this.flightDetails.slice(0, this.noOfDataToShowInitially);
-        console.log(this.flightDetails)
+        this.flightItems = data;
+        this.flightDetails = data.slice(0, this.noOfDataToShowInitially);        
       }
       else{
         this.flightDetails=[];
@@ -349,6 +347,28 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   transformDecimal(num) {
     return this.decimalPipe.transform(num, '1.2-2');
+  }
+
+  scrollLoading: boolean = false;
+  dataToLoad = 25;
+  onScrollDown() {
+    /* if (this.isMapView) {
+      return false;
+    }
+ */
+    this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
+    setTimeout(() => {
+      if (this.noOfDataToShowInitially <= this.flightDetails.length) {
+        this.noOfDataToShowInitially += this.dataToLoad;
+        this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+        // this.hotelList = [...this.flightDetails];
+        // this.hotelCount = this.flightDetails.length;
+        this.scrollLoading = false;
+      } else {
+        // this.isFullListDisplayed = true;
+        this.scrollLoading = false;
+      }
+    }, 1000);
   }
 }
 
