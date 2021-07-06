@@ -28,34 +28,29 @@ export class AppComponent {
     private userService:UserService,
     public preLoadService : PreloadingService,
     private homeService:HomeService
-  ){
+  ) {
+    this.preloadLandingPageData();
     this.setUserOrigin();
     this.getUserLocationInfo();
   }
 
   ngOnInit() {
-
     let token = localStorage.getItem('_lay_sess');
     if(token){
       // this.subscribeToNotifications()
     }
     this.registerGuestUser();
-    this.setCountryBehaviour();
-    this.preloadLandingPageData();
+    this.setCountryBehaviour();   
   }
 
   utm_source ='';
-  preloadLandingPageData() {
-    
+  preloadLandingPageData() {    
     this.route.queryParams.subscribe(parms => {
       if (parms['utm_source']) {
         this.preLoadService.getLandingPageDetails(parms['utm_source']).subscribe((res: any) => {
-          this.$lpData =this.homeService.setLandingPageData(res.config)
+        this.$lpData =this.homeService.setLandingPageData(res.config)
         }, err => {
-          /* console.log("errr",err)
-          if(this.$lpData){
-            this.$lpData.unsubscribe();
-          } */
+          this.homeService.setLandingPageData({});          
           window.location.href='/';
         });
       } 
