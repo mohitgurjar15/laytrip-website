@@ -232,7 +232,6 @@ export class HomeComponent implements OnInit {
     } else if(this.moduleId == 3) {
       this.homeService.setLocationForHotel(newItem);
     } 
-    console.log(newItem)
   }
   
   activeSlide(activeSlide){
