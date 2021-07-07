@@ -91,6 +91,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    console.log(this.filterFlightDetails.items)
     this.currency = JSON.parse(this._currency);
 
     if (this.filterFlightDetails && this.filterFlightDetails.price_range) {
@@ -382,13 +383,18 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
    */
   filterFlights() {
     let filterdFlights = this.filterFlightDetails.items;
-
     /* Filter flight based on min & max price */
     if (this.minPrice && this.maxPrice) {
 
       filterdFlights = filterdFlights.filter(item => {
 
-        return item.selling_price >= this.minPrice && item.selling_price <= this.maxPrice;
+        if(item.offer_data.applicable){
+          return item.discounted_selling_price >= this.minPrice && item.discounted_selling_price <= this.maxPrice;
+        }
+        else{
+          return item.selling_price >= this.minPrice && item.selling_price <= this.maxPrice;
+        }
+
       })
     }
 
@@ -404,8 +410,12 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     if (this.minPartialPaymentPrice && this.maxPartialPaymentPrice) {
 
       filterdFlights = filterdFlights.filter(item => {
-
-        return item.secondary_start_price >= this.minPartialPaymentPrice && item.secondary_start_price <= this.maxPartialPaymentPrice;
+        if(item.offer_data.applicable){
+          return item.discounted_secondary_start_price >= this.minPartialPaymentPrice && item.discounted_secondary_start_price <= this.maxPartialPaymentPrice;
+        }
+        else{
+          return item.secondary_start_price >= this.minPartialPaymentPrice && item.secondary_start_price <= this.maxPartialPaymentPrice;
+        }
       })
     }
 
