@@ -91,7 +91,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log(this.filterFlightDetails.items)
     this.currency = JSON.parse(this._currency);
 
     if (this.filterFlightDetails && this.filterFlightDetails.price_range) {
