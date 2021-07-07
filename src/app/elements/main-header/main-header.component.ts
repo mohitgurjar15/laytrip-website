@@ -59,7 +59,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   ) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    console.log('inint')
+
     this.checkUser();
     this.loadJquery();
     //this.getUserLocationInfo();
@@ -113,7 +115,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   getCartList() {
-
+    console.log('here')
     let live_availiblity = 'no';
     let url = window.location.href;
     if (url.includes('cart/checkout')) {
@@ -315,6 +317,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   calculateInstalment(cartPrices) {
+    console.log(cartPrices)
     let totalPrice = 0;
     let checkinDate;
     if (cartPrices && cartPrices.length > 0) {
@@ -329,7 +332,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         }
       }
     }
-    this.totalAmount = totalPrice;
+    console.log(totalPrice)
+    this.totalAmount = totalPrice ? totalPrice : 0;
     let instalmentRequest = {
       instalment_type: this.paymentInfo.instalmentType || "weekly",
       checkin_date: checkinDate,
@@ -428,11 +432,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     }
     else if(type=='hotel'){
       if (this.commonFunction.isRefferal() && module_Info.offer_data && module_Info.offer_data.applicable) {
-        price = module_Info.discounted_selling_price;
+        price = module_Info.selling.discounted_total;
       } else {
         price = module_Info.selling.total;
       }
     }
+    console.log(type,price)
     return price;
   }
 }

@@ -68,6 +68,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   _isLayCredit = false;
   totalLayCredit = 0;
   flightItems;
+  scrollLoading: boolean = false;
+  dataToLoad = 25;
   constructor(
     private flightService: FlightService,
     private router: Router,
@@ -131,10 +133,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         e.stopPropagation();
       }
     );
-  }
-
-  ngDoCheck() {
-    // this.checkUser();
   }
 
   checkUser() {
@@ -349,23 +347,16 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     return this.decimalPipe.transform(num, '1.2-2');
   }
 
-  scrollLoading: boolean = false;
-  dataToLoad = 25;
+
   onScrollDown() {
-    /* if (this.isMapView) {
-      return false;
-    }
- */
+  
     this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.flightDetails.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
-        this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-        // this.hotelList = [...this.flightDetails];
-        // this.hotelCount = this.flightDetails.length;
+        this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);      
         this.scrollLoading = false;
       } else {
-        // this.isFullListDisplayed = true;
         this.scrollLoading = false;
       }
     }, 1000);
