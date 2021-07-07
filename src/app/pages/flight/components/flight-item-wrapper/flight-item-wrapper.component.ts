@@ -107,8 +107,10 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       this.cartItems = cartItems;
     })
 
-    setTimeout(() => { this.loadJquery(); }, 3000)
-
+    // setTimeout(() => { 
+    //   this.loadJquery(); 
+    // }, 3000)
+    this.loadJquery(); 
     this.flightService.getFlights.subscribe(data=>{
       if(data.length){
         this.flightItems = data;
