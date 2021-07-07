@@ -42,7 +42,12 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   value: number = 19;
   options: Options = {
     floor: 0,
-    ceil: 19
+    ceil: 19,
+    showSelectionBar: true,
+    selectionBarGradient: {
+      from: '#FFAA00',
+      to: '#FFAA00'
+    }
   };
   rating_number: any = 0;
 
