@@ -35,6 +35,17 @@ export class FlightService {
                 catchError(this.handleError)
             );
     }
+    searchAirportAvailabilityAssure(requestParams) {
+        let headers = {
+            currency: 'USD',
+            language: 'en'
+        }
+
+        return this.http.post(`${environment.apiUrl}v1/flight/availability-assure/`, requestParams, this.commonFunction.setHeaders(headers))
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
 
     searchRoute(searchItem,isFromLocation,alternateLocation=''){
         return this.http.get(`${environment.apiUrl}v1/flight/route/search?search=${searchItem}&is_from_location=${isFromLocation}&alternet_location=${alternateLocation}`)

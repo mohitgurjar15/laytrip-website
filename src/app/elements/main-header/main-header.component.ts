@@ -60,7 +60,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    console.log('inint')
 
     this.checkUser();
     this.loadJquery();
@@ -115,7 +114,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   getCartList() {
-    console.log('here')
     let live_availiblity = 'no';
     let url = window.location.href;
     if (url.includes('cart/checkout')) {
@@ -129,7 +127,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.cartService.setCartItems(cartItems);
         if (cartItems) {
           this.cartItemsCount = res.count;
-          console.log(this.cartItemsCount)
           this.cartIsPromotional = res.cartIsPromotional;
           localStorage.setItem('$crt', this.cartItemsCount);
         }
@@ -317,7 +314,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   calculateInstalment(cartPrices) {
-    console.log(cartPrices)
     let totalPrice = 0;
     let checkinDate;
     if (cartPrices && cartPrices.length > 0) {
@@ -332,7 +328,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         }
       }
     }
-    console.log(totalPrice)
     this.totalAmount = totalPrice ? totalPrice : 0;
     let instalmentRequest = {
       instalment_type: this.paymentInfo.instalmentType || "weekly",
@@ -437,7 +432,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         price = module_Info.selling.total;
       }
     }
-    console.log(type,price)
     return price;
   }
 }

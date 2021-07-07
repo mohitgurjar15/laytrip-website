@@ -1,19 +1,17 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
 import { FlightService } from '../../../../services/flight.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
-import { getLoginUserInfo, getUserDetails } from '../../../../../app/_helpers/jwt.helper';
+import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
-//import { NgxSpinnerService } from 'ngx-spinner';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
 import { DecimalPipe } from '@angular/common';
 
@@ -60,7 +58,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   showFareDetails: number = 0;
   flightUniqueCode;
   isRoundTrip = false;
-  noOfDataToShowInitially = 25;
+  noOfDataToShowInitially = 20;
   subcell = '$100';
   isLoggedIn = false;
   userDetails;
@@ -69,7 +67,10 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   totalLayCredit = 0;
   flightItems;
   scrollLoading: boolean = false;
-  dataToLoad = 25;
+  dataToLoad = 20;
+  checkedAirUniqueCodes = [];
+
+
   constructor(
     private flightService: FlightService,
     private router: Router,
@@ -111,13 +112,37 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.flightService.getFlights.subscribe(data=>{
       if(data.length){
         this.flightItems = data;
-        this.flightDetails = data.slice(0, this.noOfDataToShowInitially);        
+        this.flightDetails = data.slice(0, this.noOfDataToShowInitially);
+        let requestParams = { revalidateDto: []};
+        
+        this.flightDetails.forEach(element => {
+          requestParams.revalidateDto.push({
+            route_code: element.route_code,
+            unique_code: element.unique_code
+          })
+        });
+        this.setAirportAvailability(requestParams);
       }
       else{
         this.flightDetails=[];
       }
     })
 
+  }
+
+  setAirportAvailability(requestParams) {   
+    this.flightService.searchAirportAvailabilityAssure(requestParams).subscribe(data => {
+      let temp;
+      for (let i = 0; i < this.flightDetails.length; i++) {
+        // this.checkedAirUniqueCodes.push(this.flightDetails[i].unique_code);
+        temp = data[this.flightDetails[i].unique_code];
+        if (Object.keys(temp).length) {
+          this.flightDetails[i].availability = temp.availability;
+        } else {
+          this.flightDetails[i].availability = 'no';
+        }
+      }
+    });
   }
 
   loadJquery() {
@@ -303,7 +328,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes.flightDetails",changes)
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
       //this.flightDetails = changes.flightDetails.currentValue;
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
@@ -349,12 +373,23 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   onScrollDown() {
-  
     this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.flightDetails.length) {
+        let requestParams = { revalidateDto: [] };
         this.noOfDataToShowInitially += this.dataToLoad;
-        this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);      
+        this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+        this.flightDetails.forEach(element => {
+          if (!this.checkedAirUniqueCodes.includes(element.unique_code)) {
+            console.log('ij')
+            requestParams.revalidateDto.push({
+              route_code: element.route_code,
+              unique_code: element.unique_code
+            })
+          }        
+        });
+        console.log(this.flightDetails)
+        this.setAirportAvailability(requestParams)
         this.scrollLoading = false;
       } else {
         this.scrollLoading = false;

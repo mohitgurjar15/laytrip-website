@@ -135,13 +135,6 @@
             <span class="fare_type desk_fare">
               From
             </span>
-<<<<<<< HEAD
-                    <span class="total_pr d-flex flex-row justify-content-center">
-                    <span *ngIf="item?.offer_data?.applicable === true && item.secondary_start_price > item.discounted_secondary_start_price" class="dashed_price"> ${{item.secondary_start_price | number : '1.2-2'}} </span>
-                    <span class="big-num">${{item.offer_data.applicable === true ? transformDecimal(item.discounted_secondary_start_price) : transformDecimal(item.secondary_start_price) }}</span>
-                    </span>
-                    <span class="fare_type desk_fare">
-=======
             <span class="total_pr d-flex flex-row">
               <span
                 *ngIf="item?.offer_data?.applicable === true && item.secondary_start_price > item.discounted_secondary_start_price"
@@ -150,13 +143,12 @@
                 class="big-num">${{item.offer_data.applicable === true ? transformDecimal(item.discounted_secondary_start_price) : transformDecimal(item.secondary_start_price) }}</span>
             </span>
             <span class="fare_type desk_fare">
->>>>>>> 17c89b3d69d56ff673a0dacfb82421a2764209c8
               weekly Installments
             </span>
             <span class="cta_btn">
-              <button (click)="bookNow(item)" class="confirm_availability">Add to cart</button>
-              <button class="pending_availability"></button>
-              <button class="no_availability">Add to cart</button>
+              <button (click)="bookNow(item)" [ngClass]="{'confirm_availability' : item.availability =='yes','pending_availability' : item.availability =='pending','no_availability' : item.availability =='no'} ">Add to cart</button>
+              <!-- <button class="pending_availability"></button>
+              <button class="no_availability">Add to cart</button> -->
               <div class="section_description no_flight" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                 <span class="sec_text">This flight is no longer available.</span>
                 <a (click)="hideFlightNotAvailable()" href="javascript:void(0);">
@@ -232,12 +224,7 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
 <div *ngIf="scrollLoading" class="scrollLoading_wrapper">
   <i class="fa fa-spinner fa-spin pink_spinner"></i>
 </div>
 <app-flight-not-found *ngIf="!flightDetails.length"></app-flight-not-found>
-=======
-
-<app-flight-not-found *ngIf="!flightDetails.length"></app-flight-not-found>
->>>>>>> 17c89b3d69d56ff673a0dacfb82421a2764209c8
