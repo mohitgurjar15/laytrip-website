@@ -718,7 +718,7 @@
 
       .right_side {
         flex: 1;
-        justify-content: space-between;
+        justify-content: center;
         display: flex;
         align-items: center;
 
@@ -780,6 +780,7 @@
               font-weight: 600;
               text-decoration: line-through;
               color: #878787 !important;
+
               @include tab-view {
                 font-size: 16px;
               }
