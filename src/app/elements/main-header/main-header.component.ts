@@ -127,6 +127,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         this.cartService.setCartItems(cartItems);
         if (cartItems) {
           this.cartItemsCount = res.count;
+          console.log(this.cartItemsCount)
           this.cartIsPromotional = res.cartIsPromotional;
           localStorage.setItem('$crt', this.cartItemsCount);
         }
@@ -227,7 +228,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     localStorage.removeItem('$crt');
     localStorage.removeItem('$cartOver');
     this.cookieService.remove('__cc');
-    this.cartItemsCount = '';
+    this.cartItemsCount = 0;
     this.cartService.setCartItems([]);
     this.loginGuestUser();
     if(this.commonFunction.isRefferal()){
