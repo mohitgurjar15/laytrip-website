@@ -142,10 +142,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       let temp;
       for (let i = 0; i < this.flightDetails.length; i++) {
         temp = data[this.flightDetails[i].unique_code] ? data[this.flightDetails[i].unique_code] : {};
-        if (Object.keys(temp).length && !this.checkedAirUniqueCodes.includes(this.flightDetails[i].unique_code)) {
+        if (Object.keys(temp).length) {
           this.flightDetails[i].availability = temp.availability;
-        } else {
-          this.flightDetails[i].availability = 'no';
         }
         //this.checkedAirUniqueCodes.push(this.flightDetails[i].unique_code);
       }
