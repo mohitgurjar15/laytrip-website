@@ -116,7 +116,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         this.flightItems = data;
         this.flightDetails = data.slice(0, this.noOfDataToShowInitially);
         
-        this.setAirportAvailability();
+        // this.setAirportAvailability();
       }
       else{
         this.flightDetails=[];
@@ -414,7 +414,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         //Create new req param from i.e. 21 to 40
         
         
-        this.setAirportAvailability()
+        // this.setAirportAvailability()
         this.scrollLoading = false;
       } else {
         this.scrollLoading = false;
