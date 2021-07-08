@@ -125,7 +125,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   }
 
-  setAirportAvailability() {
+  setAirportAvailabilityOld() {
+
     let requestParams = { revalidateDto: [] };
     
     this.flightDetails.forEach(element => {
@@ -145,9 +146,34 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         if (Object.keys(temp).length) {
           this.flightDetails[i].availability = temp.availability;
         }
-        //this.checkedAirUniqueCodes.push(this.flightDetails[i].unique_code);
       }
     });
+  }
+
+  setAirportAvailability() {
+
+    for(let element of this.flightDetails){
+      let requestParams = { revalidateDto: [] };
+      if (!this.checkedAirUniqueCodes.includes(element.unique_code)) {
+        requestParams.revalidateDto.push({
+          route_code: element.route_code,
+          unique_code: element.unique_code
+        })
+        this.checkedAirUniqueCodes.push(element.unique_code);
+      }
+  
+      this.flightService.searchAirportAvailabilityAssure(requestParams).subscribe(data => {
+        let temp;
+        for (let i = 0; i < this.flightDetails.length; i++) {
+          temp = data[this.flightDetails[i].unique_code] ? data[this.flightDetails[i].unique_code] : {};
+          if (Object.keys(temp).length) {
+            this.flightDetails[i].availability = temp.availability;
+          }
+        }
+      });
+    }
+    
+    
   }
 
   loadJquery() {
