@@ -425,6 +425,21 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       }
     }, 1000);
   }
+
+  showButton(availability) {
+    switch (availability) {
+      case 'no':
+        return 'Unavailable';
+        break;
+      case 'pending':
+        return '';
+        break;
+    
+      default:
+        return 'Add to cart';
+        break;
+    }
+  }
 }
 
 

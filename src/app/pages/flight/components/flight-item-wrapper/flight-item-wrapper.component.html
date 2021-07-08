@@ -146,7 +146,7 @@
               weekly Installments
             </span>
             <span class="cta_btn">
-              <button (click)="bookNow(item)" [ngClass]="{'confirm_availability' : item.availability =='yes','pending_availability' : item.availability =='pending','no_availability' : item.availability =='no'} ">Add to cart</button>
+              <button (click)="bookNow(item)" [ngClass]="{'confirm_availability' : item.availability =='yes','pending_availability' : item.availability =='pending','no_availability' : item.availability =='no'} ">{{ showButton(item.availability)}}</button>
               <!-- <button class="pending_availability"></button>
               <button class="no_availability">Add to cart</button> -->
               <div class="section_description no_flight" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
