@@ -118,6 +118,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         let requestParams = { revalidateDto: []};
         
         this.flightDetails.forEach(element => {
+          // this.checkedAirUniqueCodes.push(element.unique_code);
+
           requestParams.revalidateDto.push({
             route_code: element.route_code,
             unique_code: element.unique_code
@@ -136,7 +138,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.flightService.searchAirportAvailabilityAssure(requestParams).subscribe(data => {
       let temp;
       for (let i = 0; i < this.flightDetails.length; i++) {
-        // this.checkedAirUniqueCodes.push(this.flightDetails[i].unique_code);
+        this.checkedAirUniqueCodes.push(this.flightDetails[i].unique_code);
         temp = data[this.flightDetails[i].unique_code];
         if (Object.keys(temp).length) {
           this.flightDetails[i].availability = temp.availability;
@@ -381,16 +383,19 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         let requestParams = { revalidateDto: [] };
         this.noOfDataToShowInitially += this.dataToLoad;
         this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+        console.log(this.checkedAirUniqueCodes)
         this.flightDetails.forEach(element => {
           if (!this.checkedAirUniqueCodes.includes(element.unique_code)) {
-            console.log('ij')
             requestParams.revalidateDto.push({
               route_code: element.route_code,
               unique_code: element.unique_code
             })
-          }        
+            console.log('yes')
+          } else {
+            
+            console.log('no')
+          }       
         });
-        console.log(this.flightDetails)
         this.setAirportAvailability(requestParams)
         this.scrollLoading = false;
       } else {
