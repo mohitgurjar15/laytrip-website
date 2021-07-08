@@ -115,17 +115,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       if(data.length){
         this.flightItems = data;
         this.flightDetails = data.slice(0, this.noOfDataToShowInitially);
-        let requestParams = { revalidateDto: []};
         
-        this.flightDetails.forEach(element => {
-          // this.checkedAirUniqueCodes.push(element.unique_code);
-
-          requestParams.revalidateDto.push({
-            route_code: element.route_code,
-            unique_code: element.unique_code
-          })
-        });
-        this.setAirportAvailability(requestParams);
+        this.setAirportAvailability();
       }
       else{
         this.flightDetails=[];
@@ -134,17 +125,28 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   }
 
-  setAirportAvailability(requestParams) {   
+  setAirportAvailability() {
+    let requestParams = { revalidateDto: [] };
+    
+    this.flightDetails.forEach(element => {
+      if (!this.checkedAirUniqueCodes.includes(element.unique_code)) {
+        requestParams.revalidateDto.push({
+          route_code: element.route_code,
+          unique_code: element.unique_code
+        })
+      }
+    });
+
     this.flightService.searchAirportAvailabilityAssure(requestParams).subscribe(data => {
       let temp;
       for (let i = 0; i < this.flightDetails.length; i++) {
-        this.checkedAirUniqueCodes.push(this.flightDetails[i].unique_code);
-        temp = data[this.flightDetails[i].unique_code];
-        if (Object.keys(temp).length) {
+        temp = data[this.flightDetails[i].unique_code] ? data[this.flightDetails[i].unique_code] : {};
+        if (Object.keys(temp).length && !this.checkedAirUniqueCodes.includes(this.flightDetails[i].unique_code)) {
           this.flightDetails[i].availability = temp.availability;
         } else {
           this.flightDetails[i].availability = 'no';
         }
+        this.checkedAirUniqueCodes.push(this.flightDetails[i].unique_code);
       }
     });
   }
@@ -380,23 +382,14 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.flightDetails.length) {
+        
         let requestParams = { revalidateDto: [] };
         this.noOfDataToShowInitially += this.dataToLoad;
         this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-        console.log(this.checkedAirUniqueCodes)
-        this.flightDetails.forEach(element => {
-          if (!this.checkedAirUniqueCodes.includes(element.unique_code)) {
-            requestParams.revalidateDto.push({
-              route_code: element.route_code,
-              unique_code: element.unique_code
-            })
-            console.log('yes')
-          } else {
-            
-            console.log('no')
-          }       
-        });
-        this.setAirportAvailability(requestParams)
+        //Create new req param from i.e. 21 to 40
+        
+        
+        this.setAirportAvailability()
         this.scrollLoading = false;
       } else {
         this.scrollLoading = false;
