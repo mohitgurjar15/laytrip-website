@@ -168,9 +168,12 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
           temp = data[this.flightDetails[i].unique_code] ? data[this.flightDetails[i].unique_code] : {};
           if (Object.keys(temp).length) {
             this.flightDetails[i].availability = temp.availability;
+            this.flightDetails[i].route_code = temp.route_code;
+            this.flightDetails[i].log_file = temp.log_file;
           }
         }
       });
+      console.log(this.flightDetails)
     }
     
     
@@ -292,6 +295,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       let payload = {
         module_id: 1,
         route_code: route.route_code,
+        log_file: route.log_file ? route.log_file : '',
         referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
       };
       //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
