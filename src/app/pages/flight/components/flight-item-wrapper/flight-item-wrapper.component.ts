@@ -134,6 +134,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
           route_code: element.route_code,
           unique_code: element.unique_code
         })
+        this.checkedAirUniqueCodes.push(element.unique_code);
       }
     });
 
@@ -146,7 +147,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         } else {
           this.flightDetails[i].availability = 'no';
         }
-        this.checkedAirUniqueCodes.push(this.flightDetails[i].unique_code);
+        //this.checkedAirUniqueCodes.push(this.flightDetails[i].unique_code);
       }
     });
   }
