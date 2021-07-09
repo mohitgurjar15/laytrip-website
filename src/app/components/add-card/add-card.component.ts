@@ -175,34 +175,10 @@ export class AddCardComponent implements OnInit {
         headers: { Authorization: `Bearer ${localStorage.getItem('_lay_sess')}` },
         data: cardData,
         success: function (obj) {
-          // this.emitNewCard.emit(obj);
           $('#main_loader').hide();
 
-          let s3BucketUrl = 'https://d2q1prebf1m2s9.cloudfront.net/';
-          var cardObject = {
-            visa: `${s3BucketUrl}assets/images/card_visa.svg`,
-            master: `${s3BucketUrl}assets/images/master_cards_img.svg`,
-            american_express: `${s3BucketUrl}assets/images/card_amex.svg`,
-            discover: `${s3BucketUrl}assets/images/card_discover.svg`,
-            dankort: `${s3BucketUrl}assets/images/card_dankort.svg`,
-            maestro: `${s3BucketUrl}assets/images/card_maestro.svg`,
-            jcb: `${s3BucketUrl}assets/images/card_jcb.svg`,
-            diners_club: `${s3BucketUrl}assets/images/card_dinners_club.svg`,
-          }
-
-          var cardType = {
-            visa: 'Visa',
-            master: 'Mastercard',
-            american_express: 'American Express',
-            discover: 'Discover',
-            dankort: 'Dankort',
-            maestro: 'Maestro',
-            jcb: 'JCB',
-            diners_club: 'Diners Club',
-          }
           $("#payment-form")[0].reset();
           Spreedly.reload();
-          var cardTokenNew = obj.cardToken;
         },
         error: function (error) {
           if (error && error.status !== 406) {
@@ -212,7 +188,6 @@ export class AddCardComponent implements OnInit {
             $('#new_card').show();
             errorMessage.innerHTML = error.responseJSON.message;
           }
-          // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
       });
     });
@@ -242,9 +217,7 @@ export class AddCardComponent implements OnInit {
         // add value to options
         options[field] = fieldEl.value;
       }
-      if (options[field]) {
-        // this.changeLoading.emit(false);
-      }
+      
     }
     // Tokenize!
     Spreedly.tokenizeCreditCard(options);
@@ -265,7 +238,6 @@ export class AddCardComponent implements OnInit {
       this.saveCardLoader = false;
     }, (error => {
       this.saveCardLoader = false;
-      // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
     })
     );
   }
