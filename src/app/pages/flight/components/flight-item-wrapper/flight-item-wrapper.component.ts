@@ -168,12 +168,12 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
           temp = data[this.flightDetails[i].unique_code] ? data[this.flightDetails[i].unique_code] : {};
           if (Object.keys(temp).length) {
             this.flightDetails[i].availability = temp.availability;
-            this.flightDetails[i].route_code = temp.route_code;
-            this.flightDetails[i].log_file = temp.log_file;
-          }
+            this.flightDetails[i].log_file = temp.availability == "yes" ? temp.log_file : '';
+            this.flightDetails[i].route_code = temp.availability == "yes" && typeof (temp.route_code) != 'undefined' && temp.route_code ? temp.route_code : this.flightDetails[i].route_code;
+          } 
         }
       });
-      console.log(this.flightDetails)
+      // console.log(this.flightDetails)
     }
     
     
@@ -291,7 +291,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       dateNow.setMinutes(dateNow.getMinutes() + 10);
 
       sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
-
       let payload = {
         module_id: 1,
         route_code: route.route_code,
@@ -331,10 +330,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
           });
           return;
         }
-        //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
         this.isFlightNotAvailable = true;
         this.flightUniqueCode = route.unique_code;
-        // this.isFlightNotAvailable.emit(true)
       });
 
     }

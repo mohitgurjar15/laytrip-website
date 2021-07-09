@@ -1,4 +1,4 @@
-<div class="routing_main_wrps" id="routing_main_wrps" infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollDown()">
+<div class="routing_main_wrps" id="routing_main_wrps">
   <h3 class="shorting_label" *ngIf="flightDetails.length">{{filteredLabel}}</h3>
   <div class="one_way card_box" *ngFor="let item of flightDetails; let i = index;">
     <div class="card_iinner">
@@ -224,6 +224,8 @@
     </div>
   </div>
 </div>
+<br>
+<a style="color: blue;" (click)="onScrollDown($event)" *ngIf="flightItems.length > flightDetails.length" class="hover-link" >Load More</a>
 <div *ngIf="scrollLoading" class="scrollLoading_wrapper">
   <i class="fa fa-spinner fa-spin pink_spinner"></i>
 </div>
