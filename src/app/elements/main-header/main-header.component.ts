@@ -120,7 +120,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
-      console.log('header')
       
       if (res) {
         // SET CART ITEMS IN CART SERVICE
@@ -316,11 +315,16 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   calculateInstalment(cartPrices) {
+    console.log(cartPrices)
     let totalPrice = 0;
+    let downpayment = 0;
     let checkinDate;
     if (cartPrices && cartPrices.length > 0) {
       checkinDate = this.getCheckinDate(cartPrices[0].module_Info,cartPrices[0].type)
       for (let i = 0; i < cartPrices.length; i++) {
+        if (this.cartIsPromotional && cartPrices[i].module_Info.offer_data.down_payment_options[0].applicable) {
+          downpayment += cartPrices[i].module_Info.offer_data.down_payment_options[0].amount;
+        }
         totalPrice += this.getPrice(cartPrices[i].module_Info,cartPrices[i].type);
         if (i == 0) {
           continue;
@@ -331,7 +335,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     }
     this.totalAmount = totalPrice ? totalPrice : 0;
-    console.log("this.totalAmount",this.totalAmount)
     let instalmentRequest = {
       instalment_type: this.paymentInfo.instalmentType || "weekly",
       checkin_date: checkinDate,
@@ -340,8 +343,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       additional_amount: 0,
       down_payment: 0,
       selected_down_payment: this.paymentInfo.selectedDownPayment || 0,
-      custom_down_payment: this.cartIsPromotional ? 9.99 : 0
+      custom_down_payment: this.cartIsPromotional ? downpayment : 0
     }
+    console.log("downpayment",downpayment)
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available) {
         this.installmentAmount = res.instalment_date[1].instalment_amount ? res.instalment_date[1].instalment_amount : 0;
