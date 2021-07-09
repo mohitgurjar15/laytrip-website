@@ -149,6 +149,7 @@ export class HotelItemWrapperComponent implements OnInit {
 
     this.hotelService.getHotels.subscribe(result => {
       this.hotelDetails = result;
+      console.log('item wrap',this.hotelDetails.hotels)
       for (let i = 0; i < this.hotelDetails.length; i++) {
         this.hotelDetails[i].galleryImages = [];
         for (let image of this.hotelDetails[i].images) {
