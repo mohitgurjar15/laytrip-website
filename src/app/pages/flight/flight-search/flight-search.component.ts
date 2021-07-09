@@ -48,10 +48,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     
     window.scroll(0, 0);
+    let payload: any = {};
     sessionStorage.removeItem("__insMode")
     sessionStorage.removeItem("__islt")
     this.renderer.addClass(document.body, 'cms-bgColor');
-    let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
       if (params && params.trip === 'roundtrip') {
@@ -78,6 +78,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       }
       this.getFlightSearchData(payload, params.trip);
     });
+
   }
 
   // ngAfterViewInit() {
@@ -91,6 +92,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
 
   getFlightSearchData(payload, tripType) {
+    this.flightService.setSortFilter({ key: "selling_price", order: "ASC" });
+
     this.loading = this.flexibleLoading = true;
     this.fullPageLoading = true;
     this.tripType = tripType;
@@ -107,7 +110,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.filterFlightDetails = res;
           if(this.flightDetails.length == 0){
             this.isNotFound = true;
-          } 
+          }
           this.flightService.setFlights(this.flightDetails)       
         }
       }, err => {

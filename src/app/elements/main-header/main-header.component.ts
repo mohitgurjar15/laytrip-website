@@ -41,7 +41,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   guestUserId: string = '';
   cartOverLimit;
   isOpenAppleLoginPopup = false;
-  paymentType:string='';
+  paymentType: string ='weekly';
   instalmentType:string='weekly';
   installmentOptions;
   paymentInfo;
@@ -345,7 +345,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       selected_down_payment: this.paymentInfo.selectedDownPayment || 0,
       custom_down_payment: this.cartIsPromotional ? downpayment : 0
     }
-    console.log("downpayment",downpayment)
+
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available) {
         this.installmentAmount = res.instalment_date[1].instalment_amount ? res.instalment_date[1].instalment_amount : 0;

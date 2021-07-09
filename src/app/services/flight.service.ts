@@ -223,7 +223,7 @@ export class FlightService {
         );
     }
 
-    setSortFilter(filter){
+    setSortFilter(filter){        
         this.sortFilter.next(filter)
     }
 
