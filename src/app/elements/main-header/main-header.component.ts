@@ -120,15 +120,17 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
+      console.log('header')
+      
       if (res) {
         // SET CART ITEMS IN CART SERVICE
         let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0], type : item.type } });
         this.cartItems = cartItems;
         this.cartService.setCartItems(cartItems);
-        if (cartItems) {
+        if (cartItems) {          
           this.cartItemsCount = res.count;
           this.cartIsPromotional = res.cartIsPromotional;
-          localStorage.setItem('$crt', this.cartItemsCount);
+          localStorage.setItem('$crt', this.cartItemsCount);          
         }
         this.calculateInstalment(cartItems);
         // this.cd.detectChanges();
@@ -173,14 +175,15 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if (host.includes("covid-19")) {
       this.isCovidPage = false;
     }
-    this.cartService.getCartItems.subscribe((res: any) => {
+    this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
+    this.installmentAmount = JSON.parse(localStorage.getItem('$installmentAmount'));
+   /*  this.cartService.getCartItems.subscribe((res: any) => {
       try {
-        this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
       }
       catch (e) {
 
       }
-    });
+    }); */
 
   }
 
@@ -329,6 +332,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     }
     this.totalAmount = totalPrice ? totalPrice : 0;
+    console.log("this.totalAmount",this.totalAmount)
     let instalmentRequest = {
       instalment_type: this.paymentInfo.instalmentType || "weekly",
       checkin_date: checkinDate,
@@ -341,7 +345,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available) {
-        this.installmentAmount = res.instalment_date[1].instalment_amount;
+        this.installmentAmount = res.instalment_date[1].instalment_amount ? res.instalment_date[1].instalment_amount : 0;
       }
       else {
         this.installmentAmount = 0;
@@ -417,21 +421,22 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   getPrice(module_Info,type){
-    let price;
+    let price : any = 0;
     if (type == 'flight') {
       if (this.commonFunction.isRefferal() && module_Info.offer_data && module_Info.offer_data.applicable ) {        
-        price = module_Info.discounted_selling_price;
+        price = module_Info.discounted_selling_price ? module_Info.discounted_selling_price : 0;
       } else {        
-        price = module_Info.selling_price;
+        price = module_Info.selling_price ? module_Info.selling_price : 0;
       }
     }
     else if(type=='hotel'){
       if (this.commonFunction.isRefferal() && module_Info.offer_data && module_Info.offer_data.applicable) {
-        price = module_Info.selling.discounted_total;
+        price = module_Info.selling.discounted_total ? module_Info.selling.discounted_total : 0;
       } else {
-        price = module_Info.selling.total;
+        price = module_Info.selling.total ? module_Info.selling.total: 0;
       }
     }
+    localStorage.setItem("$installmentAmount", price)
     return price;
   }
 }
