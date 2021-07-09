@@ -40,7 +40,6 @@ export class CmsPagesComponent implements OnInit {
       this.loading = false;
     },(err)=>{
       this.router.navigate(['/not-found'])
-      // this.isPaymentCalulcatorLoading=false;
     })
   }
 

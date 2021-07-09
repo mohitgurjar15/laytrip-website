@@ -1,60 +1,32 @@
 <section class="block_dominican_republic">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-9">
-        <div class="block_left_title">
-          <h2>Ready for an adventure? <span>Dominican Republic has it all!</span></h2>
-          <p class="extra-heading">¿Listo para la aventura? ¡República Dominicana lo tiene todo!</p>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-9">
+                <div class="block_left_title">
+                    <h2>Ready for an adventure? <span>Dominican Republic has it all!</span></h2>
+                    <p class="extra-heading">¿Listo para la aventura? ¡República Dominicana lo tiene todo!</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="block_right_logo">
+                    <img src="{{s3BucketUrl}}assets/images/dominican_republic__logo.svg?var=1.0.0" alt="Dominican Republic">
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="block_right_logo">
-          <img src="{{s3BucketUrl}}assets/images/dominican_republic__logo.svg?var=1.0.0" alt="Dominican Republic">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="block_dominican_republic_list">
+                    <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="block_btn">
+                    <a class="btn_dr_home" [routerLink]="['/coming-soon']">Click to find the best prices <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="block_dominican_republic_list">
-            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
-
-          <!-- <ul>
-            <li>
-              <a href="javascript:void(0);">
-                <img src="{{s3BucketUrl}}assets/images/im-1.webp" alt="Image">
-              </a>
-            </li>
-            <li class="mt-45">
-              <a href="javascript:void(0);">
-                <img src="{{s3BucketUrl}}assets/images/im-2.webp" alt="Image">
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">
-                <img src="{{s3BucketUrl}}assets/images/im-3.webp" alt="Image">
-              </a>
-            </li>
-            <li class="mt-45">
-              <a href="javascript:void(0);">
-                <img src="{{s3BucketUrl}}assets/images/im-4.webp" alt="Image">
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0);">
-                <img src="{{s3BucketUrl}}assets/images/im-5.webp" alt="Image">
-              </a>
-            </li>
-          </ul> -->
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="block_btn">
-          <a class="btn_dr_home" [routerLink]="['/coming-soon']">Click to find the best prices <img src="{{s3BucketUrl}}assets/images/icon/right-arrow.svg" alt="Right Arrow"></a>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </section>

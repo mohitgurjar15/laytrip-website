@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { environment } from '../../../environments/environment';
 
@@ -38,7 +38,6 @@ export class AirportSuggestionComponent implements OnInit {
     if(changes['searchedFlightData']){
       this.loading=this.isType = false;
     
-      // this.data = this.searchedFlightData;
       let opResult = this.groupByKey(changes['searchedFlightData'].currentValue,'key')
       let airportArray=[];
   
@@ -55,9 +54,7 @@ export class AirportSuggestionComponent implements OnInit {
         }
       }
       this.data=airportArray;
-    } else {
-      // console.log('here')
-    }
+    } 
   }
 
   getAirports(){

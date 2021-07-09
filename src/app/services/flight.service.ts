@@ -123,7 +123,7 @@ export class FlightService {
         }
         const url = environment.apiUrl + `v1/flight/search-oneway-flight`;
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
-            retry(2),
+            retry(1),
             catchError(this.handleError)
         );
         
@@ -168,7 +168,7 @@ export class FlightService {
         }
         const url = environment.apiUrl + `v1/flight/search-roundtrip-flight`;
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
-            retry(2),
+            retry(1),
             catchError(this.handleError)
         );
     }

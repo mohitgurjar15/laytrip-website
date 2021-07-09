@@ -5,14 +5,11 @@
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
         </button>
     </div>
-    <div class="modal-body" >
+    <div class="modal-body">
         <div class="modal_top_block">
-            <img *ngIf="otpVerified" class="ic_suc" src="{{s3BucketUrl}}assets/images/icon/ic_success_new.svg"
-                alt="success">
-            <h4 *ngIf="otpVerified && (isSignup || isUserNotVerify)" class="modal-title suc_title"
-                id="{{ commonFunction.isRefferal() ? 'ga4_landing_welcome_user':'ga4_welcome_user'}}">{{'signup_sucessfully_title' | translate}}</h4>
-            <h4 *ngIf="otpVerified && !isSignup && !isUserNotVerify" class="modal-title suc_title"
-                id="modal-basic-title">{{'password_reset_sucessfully_title' | translate}}</h4>
+            <img *ngIf="otpVerified" class="ic_suc" src="{{s3BucketUrl}}assets/images/icon/ic_success_new.svg" alt="success">
+            <h4 *ngIf="otpVerified && (isSignup || isUserNotVerify)" class="modal-title suc_title" id="{{ commonFunction.isRefferal() ? 'ga4_landing_welcome_user':'ga4_welcome_user'}}">{{'signup_sucessfully_title' | translate}}</h4>
+            <h4 *ngIf="otpVerified && !isSignup && !isUserNotVerify" class="modal-title suc_title" id="modal-basic-title">{{'password_reset_sucessfully_title' | translate}}</h4>
 
             <h4 class="modal-title" *ngIf="!otpVerified" id="modal-basic-title">{{'sign_up_otp_title' | translate}}</h4>
         </div>
@@ -21,9 +18,7 @@
             <div class="form_row">
                 <div class="text_field">
                     <ngx-otp-input #ngOtpInput (otpChange)="onOtpChange($event)" [config]="config"></ngx-otp-input>
-                    <!-- <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input> -->
-                    <div
-                        *ngIf="otpLengthError || otpForm.hasError('otpsError') && ( otpForm.controls.otp.touched || submitted)">
+                    <div *ngIf="otpLengthError || otpForm.hasError('otpsError') && ( otpForm.controls.otp.touched || submitted)">
                         <p class="error_text">{{'otp_touched_validation' | translate}}</p>
                     </div>
 
@@ -36,8 +31,7 @@
                 </div>
                 <div class="d-flex align-items-center">
                     <i class="fa fa-spinner fa-spin resendSpinner" *ngIf="spinner"></i>
-                    <a class="text-right hover-link" [ngClass]="isResend ? '' : 'disable_link'" *ngIf="!otpVerified"
-                        (click)="resendOtp()">
+                    <a class="text-right hover-link" [ngClass]="isResend ? '' : 'disable_link'" *ngIf="!otpVerified" (click)="resendOtp()">
                         <p>{{'resend_code' | translate}} </p>
                     </a>
                 </div>
@@ -52,8 +46,8 @@
             </div>
 
         </form>
-        
-        <div class="form_btn"  *ngIf="otpVerified">
+
+        <div class="form_btn" *ngIf="otpVerified">
             <button type="button" (click)="activeModal.close()" class="btn btn-accent btn-block btn-flat b-r-10">
                Done
             </button>

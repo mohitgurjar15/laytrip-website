@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChildren, QueryList, ChangeDetectorRef, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
@@ -165,7 +165,6 @@ export class HotelItemWrapperComponent implements OnInit {
       }
       this.hotelCount = this.hotelDetails.length;
       this.currentPage = 1;
-      // this.noOfDataToShowInitially = this.hotelDetails.length;
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       this.hotelList = [...this.hotelListArray];
       if (this.bounds) {
@@ -174,30 +173,9 @@ export class HotelItemWrapperComponent implements OnInit {
     });
   }
 
-  // carouselWithSwipe() {
-  //   $(document).ready(function () {
-  //     $(".mobile_carousel").swiperight(function () {
-  //       $(this).carousel('prev');
-  //     });
-  //     $(".mobile_carousel").swipeleft(function () {
-  //       $(this).carousel('next');
-  //     });
-  //   });
-  // }
-
   changeSlide(slideId) {
     console.log(slideId);
   }
-
-  // checkOnError(brokenImage) {
-  //   for (let i = 0; i < this.hotelDetails.length; i++) {
-  //     this.hotelDetails[i].galleryImages = [];
-  //     for (let image of this.hotelDetails[i].images) {
-  //       this.hotelDetails[i].galleryImages.splice(brokenImage, 1);
-  //       this.cd.detectChanges();
-  //     }
-  //   }
-  // }
 
   checkOnError(brokenImage) {
     for (let i = 0; i < this.hotelDetails.length; i++) {
@@ -257,24 +235,10 @@ export class HotelItemWrapperComponent implements OnInit {
   displayHotelDetails(hotelId, infoWindow, type) {
     this.isMarkerClicked = false;
     this.clickedHotelIndex = '';
-    // if (this.previousInfoWindow == null) {
-    //   infoWindow.open();
-    //   this.previousInfoWindow = infoWindow;
-    // } else {
-    //   this.infoWindowOpened = infoWindow;
-    //   if (this.previousInfoWindow != null) {
-    //     this.previousInfoWindow.close();
-    //     this.previousInfoWindow = null;
-    //   }
-    // }
-    // this.previousInfoWindow = infoWindow;
-
     if (type === 'click') {
       this.isMarkerClicked = true;
       if (this.previousHotelIndex > -1) {
         let previousHotel = this.hotelListArray[0];
-        //console.log(this.previousHotelIndex,previousHotel)
-        //this.hotelListArray.splice(this.previousHotelIndex+1, 0, previousHotel);
         this.hotelListArray = this.move(this.hotelListArray, 0, this.previousHotelIndex)
       }
 
@@ -284,10 +248,6 @@ export class HotelItemWrapperComponent implements OnInit {
         this.previousHotelIndex = hotelIndex;
         this.clickedHotelIndex = hotelIndex;
       }
-      /* else{
-        let hotel = this.hotelList.find(hotel => hotel.id == hotelId);
-        this.hotelListArray.unshift(hotel)
-      } */
     }
 
   }
@@ -397,28 +357,12 @@ export class HotelItemWrapperComponent implements OnInit {
           let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
           if (this.bounds.contains(hotelPosition)) {
             this.hotelListArray.push(hotel)
-            //this.hotelDetails=[...this.hotelListArray]
           }
         }
 
         this.hotelCount = this.hotelListArray.length;
       }
     }
-    
-    // this.bounds = bounds;
-    // if (this.isMapView) {
-    //   this.hotelListArray = [];
-    //   for (let hotel of this.hotelList) {
-    //     let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
-    //     if (this.bounds.contains(hotelPosition)) {
-    //       this.hotelListArray.push(hotel)
-    //       //this.hotelDetails=[...this.hotelListArray]
-    //     }
-    //   }
-
-    //   this.hotelCount = this.hotelListArray.length;
-    // }
-
   }
   
   showDownPayment(offerData, downPaymentOption) {

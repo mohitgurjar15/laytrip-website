@@ -12,18 +12,8 @@
                                 <li>
                                     <p class="fb_animation w-100 mb-0"></p>
                                 </li>
-                                <!--  <li>
-                                    <p class="fb_animation w-100 mb-0"></p>
-                                </li> -->
                             </ul>
                             <ul *ngIf="travellerPoints">
-                                <!-- <li>
-                                    <span>Current</span>
-                                    <div class="block_point">
-                                        Laycredit points
-                                        <p>{{travellerPoints.total_available_points | number : '1.2-2'  || 0}}</p>
-                                    </div>
-                                </li> -->
                                 <li>
                                     <span>{{'total' | translate}}</span>
                                     <div class="block_point">
@@ -104,7 +94,6 @@
                                             </div>
                                             <div class="pagination_main">
                                                 <div class="pagination_result">
-                                                    <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
                                                 </div>
                                                 <div class="pagination_list">
                                                     <ngb-pagination *ngIf="showPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalItems" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5" [rotate]="true" (pageChange)="pageChange($event)">
@@ -183,7 +172,6 @@
                                             </div>
                                             <div class="pagination_main">
                                                 <div class="pagination_result">
-                                                    <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
                                                 </div>
                                                 <div class="pagination_list">
                                                     <ngb-pagination *ngIf="showReedemPaginationBar" class="d-flex justify-content-end" [collectionSize]="totalReedemItems" [(page)]="page2" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5" [rotate]="true" (pageChange)="reedemPageChange($event)">

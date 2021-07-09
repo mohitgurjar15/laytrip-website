@@ -106,7 +106,6 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
     TranslateModule,
     NgScrollbarModule,
     InfiniteScrollModule,
-    //NgxSpinnerModule,
     RouterModule,
     BsDatepickerModule.forRoot(),
     NgxMaskModule.forRoot()
@@ -140,7 +139,6 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
     CartComponent,
     CartLoaderComponent,
     LaytripLoaderComponent,
-    //NgxSpinnerModule,
     EmptyCartComponent,
     LottieAnimationViewModule,
     DeleteCartitemConfirmationPopupComponent,
@@ -150,7 +148,7 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
     HotelSuggestionComponent,
     CarouselComponent
   ],
-  providers: [DatePipe, //NgxSpinnerService, 
+  providers: [DatePipe, 
     NgbActiveModal],
   entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent, DiscountedBookingAlertComponent],
   schemas: [

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { VacationRentalService } from '../../../services/vacation-rental.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './vacation-search.component.html',
   styleUrls: ['./vacation-search.component.scss']
 })
-export class VacationSearchComponent implements OnInit, AfterViewChecked {
+export class VacationSearchComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
   @Input() label: string;
@@ -62,13 +62,6 @@ export class VacationSearchComponent implements OnInit, AfterViewChecked {
       });
     } else {
     }
-
-  }
-
-  ngDocheck() {
-  }
-
-  ngAfterViewChecked() {
 
   }
 
