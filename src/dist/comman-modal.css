@@ -5,13 +5,6 @@
   --mobile-bkp: $mobile-bkp;
 }
 
-/*--------------------------- Color variations ----------------------*/
-:root {
-  --z-distance: $item-width / 7.63;
-  --from-left: 1;
-  --mobile-bkp: $mobile-bkp;
-}
-
 /*------------- color variables ------------*/
 /*------------- color variables ------------*/
 /*----------------- responsive variations -----------------*/
