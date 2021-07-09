@@ -176,7 +176,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       this.isCovidPage = false;
     }
     this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
-    this.installmentAmount = JSON.parse(localStorage.getItem('$installmentAmount'));
    /*  this.cartService.getCartItems.subscribe((res: any) => {
       try {
       }
@@ -421,7 +420,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   getPrice(module_Info,type){
-    let price : any = 0;
+    let price = 0;
     if (type == 'flight') {
       if (this.commonFunction.isRefferal() && module_Info.offer_data && module_Info.offer_data.applicable ) {        
         price = module_Info.discounted_selling_price ? module_Info.discounted_selling_price : 0;
@@ -436,7 +435,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         price = module_Info.selling.total ? module_Info.selling.total: 0;
       }
     }
-    localStorage.setItem("$installmentAmount", price)
     return price;
   }
 }
