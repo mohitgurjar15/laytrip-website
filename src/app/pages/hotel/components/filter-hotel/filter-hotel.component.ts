@@ -116,13 +116,13 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         this.maxPrice = this.priceHighValue;
 
         this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
-        this.priceOptions.ceil = this.priceHighValue;
+        this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
 
         if (this.hotelDetailsMain.filter_objects && this.hotelDetailsMain.filter_objects.secondary_price && this.hotelDetailsMain.filter_objects.secondary_price.min && this.hotelDetailsMain.filter_objects.secondary_price.max) {
-        this.partialPriceSlider.controls.partial_price.setValue([Math.floor(this.partialPaymentValue), Math.ceil(this.partialPaymentHighValue)]);
+          this.partialPriceSlider.controls.partial_price.setValue([Math.floor(this.partialPaymentValue), Math.ceil(this.partialPaymentHighValue)]);
           
           this.partialPaymentOptions.floor = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
-          this.partialPaymentOptions.ceil = this.hotelDetailsMain.filter_objects.secondary_price.max;
+          this.partialPaymentOptions.ceil = this.hotelDetailsMain.filter_objects.secondary_price.max;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
         }
 
         this.amenities = this.hotelDetailsMain.filter_objects.ameneties;
@@ -152,7 +152,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   onBlurMethod(event){      
-    }
+  }
 
   counter(i: any) {
     return new Array(i);
@@ -277,13 +277,24 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     /* Filter hotel, based on min & max price */
     if (this.minPrice && this.maxPrice) {
       filteredHotels = filteredHotels.filter(item => {
-        return item.selling.total >= this.minPrice && item.selling.total <= this.maxPrice;
+        if(item.offer_data.applicable){
+          return  item.selling.discounted_total >= this.minPrice && item.selling.discounted_total <= this.maxPrice;
+        }
+        else{
+          return item.selling.total >= this.minPrice && item.selling.total <= this.maxPrice;
+        }
       })
     }
+    
     /* Filter hotel, based on min & max price Payment Price*/
     if (this.minPartialPaymentPrice && this.maxPartialPaymentPrice) {
       filteredHotels = filteredHotels.filter(item => {
-        return item.secondary_start_price >= this.minPartialPaymentPrice && item.secondary_start_price <= this.maxPartialPaymentPrice;
+        if(item.offer_data.applicable){
+          return item.discounted_secondary_start_price >= this.minPartialPaymentPrice && item.discounted_secondary_start_price <= this.maxPartialPaymentPrice;
+        }
+        else{
+          return item.secondary_start_price >= this.minPartialPaymentPrice && item.secondary_start_price <= this.maxPartialPaymentPrice;
+        }
       })
     }
 
