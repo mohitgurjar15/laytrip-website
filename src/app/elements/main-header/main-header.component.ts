@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output, ViewChild, SimpleChanges } from '@angular/core';
+import { Component, OnInit, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,7 +11,7 @@ import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
 import { UserService } from '../../services/user.service';
 import { EmptyCartComponent } from '../../components/empty-cart/empty-cart.component';
-import { AppleSecurityLoginPopupComponent, MODAL_TYPE } from '../../pages/user/apple-security-login-popup/apple-security-login-popup.component';
+import { AppleSecurityLoginPopupComponent } from '../../pages/user/apple-security-login-popup/apple-security-login-popup.component';
 declare var $: any;
 import {installmentType} from '../../_helpers/generic.helper';
 
@@ -41,7 +41,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   guestUserId: string = '';
   cartOverLimit;
   isOpenAppleLoginPopup = false;
-  paymentType: string ='weekly';
+  paymentType: string ='';
   instalmentType:string='weekly';
   installmentOptions;
   paymentInfo;
@@ -69,18 +69,18 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     }
     this.getCartList();
     this.installmentOptions=installmentType;
-
     this.cartService.getCartItems.subscribe(data => {
       if (data.length > 0) {
         this.updateCartSummary()
       }
-    })
+    });
+
     this.countryCode = this.commonFunction.getUserCountry();
 
-    this.cartService.getPaymentOptions.subscribe((data:any)=>{
+    this.cartService.getPaymentOptions.subscribe((data: any) => {
       if(Object.keys(data).length>0){
         this.paymentInfo=data;
-        if(data.paymentType=='instalment'){
+        if (data.paymentType == 'instalment') {
           this.paymentType='instalment';
           this.instalmentType=data.instalmentType;
           this.installmentAmount=data.instalments.instalment_date[1].instalment_amount;
@@ -89,24 +89,27 @@ export class MainHeaderComponent implements OnInit, DoCheck {
           this.paymentType='no-instalment';
           this.instalmentType='';
         }
-      }
-      else{
+      } else {
+
         try{
           let data:any=localStorage.getItem("__pm_inf");
           data = atob(data);
           data=JSON.parse(data);
-          this.paymentInfo=data;
+          this.paymentInfo = data;
+         
           if(data.paymentType=='instalment'){
             this.paymentType='instalment';
             this.instalmentType=data.instalmentType;
             this.installmentAmount=data.instalments.instalment_date[1].instalment_amount;
+          } else {
+            if (this.installmentAmount > 0) {
+              this.paymentType='instalment';
+             } else {              
+              this.paymentType='no-instalment';
+              this.instalmentType='';
+            }
           }
-          else{
-            this.paymentType='no-instalment';
-            this.instalmentType='';
-          }
-        }
-        catch(e){
+        }catch (e) {
           this.paymentInfo={};
         }
       }
@@ -309,16 +312,14 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   openEmptyCartPopup() {
     this.modalService.open(EmptyCartComponent, {
-      centered: true, backdrop: 'static',
+      centered: true,
+      windowClass: 'share_modal',
       keyboard: false
     });
   }
 
   calculateInstalment(cartPrices) {
-    console.log(cartPrices)
-    let totalPrice = 0;
-    let downpayment = 0;
-    let checkinDate;
+    let totalPrice = 0; let downpayment = 0; let checkinDate;
     if (cartPrices && cartPrices.length > 0) {
       checkinDate = this.getCheckinDate(cartPrices[0].module_Info,cartPrices[0].type)
       for (let i = 0; i < cartPrices.length; i++) {
@@ -349,12 +350,14 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available) {
         this.installmentAmount = res.instalment_date[1].instalment_amount ? res.instalment_date[1].instalment_amount : 0;
-      }
-      else {
+        this.paymentType = 'instalment';        
+      } else {
         this.installmentAmount = 0;
+        this.paymentType = 'no-instalment';
       }
     }, (err) => {
       this.installmentAmount = 0;
+      this.paymentType = 'no-instalment';
     })
   }
 

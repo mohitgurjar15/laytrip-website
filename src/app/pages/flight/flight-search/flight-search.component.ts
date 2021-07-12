@@ -92,6 +92,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
 
   getFlightSearchData(payload, tripType) {
+    this.filteredLabel = "Price Low to High";
     this.flightService.setSortFilter({ key: "selling_price", order: "ASC" });
 
     this.loading = this.flexibleLoading = true;
@@ -170,6 +171,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
       this.getCalenderPrice(payload);
     }
+    this.filteredLabel = "Price Low to High";
   }  
 
   changeLoading(event) {
