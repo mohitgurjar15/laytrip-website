@@ -513,19 +513,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       })
     }
 
-<<<<<<< HEAD
-    /* if (this.inBoundStops.length) {
-      filterdFlights = filterdFlights.filter(item => {
-
-        return this.inBoundStops.includes(item.inbound_stop_count);
-
-      })
-    } */
-
-    this.flightService.getLastApplyedSortFilter.subscribe(filters => {
-=======
     this.flightService.getLastApplyedSortFilter.subscribe(filters=> {
->>>>>>> ad4f1a3ab16150d97a948a715586003b7165faae
       if(typeof filters != 'undefined' && Object.keys(filters).length > 0){  
         var sortFilter :any = filters;
         
