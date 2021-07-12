@@ -47,7 +47,6 @@ export class FlightSearchBarComponent implements OnInit {
   placeHolder2 = 'Los Angeles';
   defaultSelected = 'NY, United States';
 
-  // tslint:disable-next-line: quotemark
   totalPerson: number = 1;
 
   airportDefaultDestValue;
@@ -230,8 +229,6 @@ export class FlightSearchBarComponent implements OnInit {
       this.arrivalAirport=Object.create(null);
     }
   }
-
-  
 
   changeTravellerInfo(event) {
     this.searchFlightInfo.adult = event.adult;

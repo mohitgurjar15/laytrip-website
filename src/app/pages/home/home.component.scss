@@ -3,7 +3,6 @@
 @import "../../../_hotel.scss";
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 .container {
     display: block;
     height: 500px;
@@ -15,22 +14,13 @@
 .home_banner {
     width: 100%;
     position: relative;
-    //background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/flight-tab-new-bg.svg) !important;
-    // background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png) !important;
-    // background-repeat: no-repeat !important;
-    // background-size: cover !important;
-    // background-position: center center !important;
-    // height: calc(100vh - 55px);
-    //padding-bottom: 130px;
     z-index: 9;
     touch-action: pan-y !important;
-
     &.banner_bg {
         background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/lay_banner.png) !important;
         background-repeat: no-repeat !important;
         background-size: cover !important;
         background-position: center center !important;
-
         .banner_inner {
             bottom: 0;
             right: 0;
@@ -39,7 +29,6 @@
             transform: translate(0px, 0px);
             position: relative;
             height: 100%;
-
             .banner_text {
                 .block_left {
                     padding: 0;
@@ -52,7 +41,6 @@
                         z-index: 0;
                         background-image: none;
                     }
-
                     h2 {
                         text-shadow: 0px 3px 6px #00000029;
                         font-weight: 400;
@@ -60,7 +48,6 @@
                             padding: 0;
                         }
                     }
-
                     p {
                         text-shadow: 0px 3px 6px #00000029;
                         margin-bottom: 1rem;
@@ -68,75 +55,42 @@
                         @media (max-width: 374px) {
                             font-size: 13px;
                             padding: 0;
-                          }
+                        }
                     }
                 }
             }
         }
     }
-
     @include ipad-view {
         //padding-bottom: 60px;
         height: 100%;
     }
-
-    // height: calc(100vh - 95px);
-
-    // &:before {
-    // 	width: 100%;
-    // 	height: 180px;
-    // 	background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/banner_bottom.svg) repeat-x;
-    // 	position: absolute;
-    // 	bottom: 0;
-    // 	left: 0;
-    // 	content: '';
-    // }
-
-
     .banner_inner {
-        // position: relative;
-        // top: 170px;
-        // left: 0;
-        // transform: none;
-        // padding: 0;
-        //position: absolute;
         bottom: 0;
         right: 0;
         left: 0;
-        //padding: 130px 0 50px;
-        //padding: 80px 0 50px;
         padding: 95px 0 50px;
-        // transform: translate(0%, 28%);
-        //transform: translate(0%, 0%);
         position: absolute;
         z-index: 99;
         transform: translate(0%, -33%);
-        //height: calc(100vh - 100px);
-
         @include tab-max {
             height: 100%;
             transform: translate(0%, 27%);
         }
-
         @include ipad-view {
             transform: translate(0%, 0%);
             position: absolute;
             padding: 20px 0 70px;
             height: 100%;
         }
-
         .banner_text {
             width: auto;
-            //margin-top: 60px;
-            //margin-bottom: 135px;
             margin-bottom: 70px;
             display: inline-block;
             max-width: 760px;
-
             @include tab-view {
                 margin: 0 15px 15px;
             }
-
             .block_left {
                 width: 100%;
                 position: relative;
@@ -159,17 +113,14 @@
                     opacity: 0.46;
                 }
             }
-
             .banner_text_span {
                 display: flex;
                 justify-content: flex-start;
                 line-height: 70px;
-
                 img {
                     max-width: 150px;
                     max-height: 70px;
                     height: 70px;
-
                     @include tab-view {
                         max-width: 110px;
                         bottom: 0px;
@@ -177,42 +128,33 @@
                         position: relative;
                     }
                 }
-
                 font-size: 50px;
                 color: $text-white;
                 font-weight: 400;
-               // margin-right: 10px;
-
                 @include tab-view {
                     font-size: 27px;
                     line-height: 33px;
                 }
             }
-
             h2 {
                 font-size: 50px;
                 color: $text-white;
                 font-weight: 600;
                 margin-right: 10px;
-                //line-height: 76px;
                 text-shadow: 0px 3px 6px #00000029;
-
                 span {
                     color: $primary-color;
                     font-weight: 700;
                 }
-
                 @media(max-width: 767px) {
                     font-size: 30px;
                     padding: 0 0 0 15px;
                     margin-right: 8px;
                 }
-
                 @media(max-width: 575px) {
                     font-size: 27px;
                 }
             }
-
             p {
                 max-width: 630px;
                 color: $text-white;
@@ -221,40 +163,32 @@
                 text-shadow: 0px 3px 6px #000000C3;
                 letter-spacing: 0.5px;
                 margin: 0;
-
                 @include tab-view {
                     font-size: 14px;
                     padding: 0 15px;
                     line-height: 18px;
                 }
-
                 // @media(max-width: 599px) {
                 //     font-size: 17px;
                 // }
             }
         }
-
         .banner_tab {
             width: 100%;
             padding: 30px 0 0;
-
             @include tab-view {
                 padding: 40px 10px 10px;
             }
-
             .nav-tabs {
                 border: none;
                 display: inline-flex;
                 flex-wrap: nowrap;
-
                 @include tab-view {
                     //padding: 0 15px;
                 }
-
                 @media(max-width: 480px) {
                     display: inline-flex;
                 }
-
                 a {
                     padding: 20px 30px 20px 30px;
                     background: $bg-grey-light;
@@ -271,93 +205,73 @@
                     margin-right: 23px;
                     height: 69px;
                     width: 69px;
-
                     @include tab-view {
                         height: 51px;
                         width: 51px;
                         margin-right: 20px;
                         padding: 0;
                         background-color: transparent;
-
                         &:last-child {
                             margin-right: 0;
                         }
-
                         img {
                             max-width: 51px;
                         }
                     }
-
                     .default-icon {
                         display: block;
                     }
-
                     .active-icon {
                         display: none;
                     }
-
                     .disabled-icon {
                         display: none;
                     }
-
                     // &:first-child {
                     // 	border-radius: 20px 0 0 0;
                     // }
-
                     // &:last-child {
                     // 	border-radius: 0 20px 0 0;
                     // }
-
                     &.active {
                         // background: $active-tab-text;
                         //color: $background-white;
-
                         .active-icon {
                             display: block;
                         }
-
                         .disabled-icon {
                             display: none;
                         }
-
                         .default-icon {
                             display: none;
                         }
                     }
-
                     &.disabled {
                         background: $text_grey_dark;
                         color: $disabled-text;
-
                         .active-icon {
                             display: none;
                         }
-
                         .disabled-icon {
                             display: block;
                         }
-
                         .default-icon {
                             display: none;
                         }
                     }
-
                     @media(max-width: 767px) {
                         padding: 20px;
                     }
-
                     @media(max-width: 480px) {
                         img {
                             margin-right: 0;
                         }
-
                         span {
                             display: none;
                         }
                     }
                 }
             }
-
             .tab-content {
                 margin-top: 25px;
                 width: 100%;
@@ -365,23 +279,18 @@
                 background: $background-white;
                 border-radius: 10px;
                 box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-
                 @include tab-view {
                     margin-top: 15px;
                 }
-
                 .flight_tab {
                     width: 100%;
-
                     .nav-tabs {
                         width: 100%;
                         border: none;
                         margin-bottom: 20px;
-
                         li {
                             display: inline-block;
                             margin: 0 20px 0 0;
-
                             a {
                                 display: flex;
                                 align-items: center;
@@ -395,54 +304,43 @@
                                 font-size: 14px;
                                 font-weight: 500;
                                 letter-spacing: 0.28px;
-
                                 img {
                                     margin-right: 5px;
                                     width: 18px;
                                     height: 18px;
                                 }
-
                                 .active-icon {
                                     display: none;
                                 }
-
                                 &.active {
                                     color: $pink_clr;
                                     background: $bg_tab_active;
                                     border: 1px solid $border_tab_active;
-
                                     .active-icon {
                                         display: block;
                                     }
-
                                     .default-icon {
                                         display: none;
                                     }
                                 }
-
                                 @media(max-width: 480px) {
                                     font-size: 10px;
-
                                     span {
                                         display: inline-block;
                                     }
                                 }
                             }
                         }
-
                         @media(max-width: 480px) {
                             flex-wrap: wrap;
-
                             li {
                                 margin: 0 5px 5px 0;
-
                                 &:last-child {
                                     margin: 0;
                                 }
                             }
                         }
                     }
-
                     .tab-content {
                         box-shadow: none;
                         padding: 0;
@@ -462,12 +360,10 @@
         -webkit-transform: translateY(-50px);
         transform: translateY(-50px);
     }
-
     50% {
         -webkit-transform: translateY(0);
         transform: translateY(0);
     }
-
     100% {
         -webkit-transform: translateY(-50px);
         transform: translateY(-50px);
@@ -479,12 +375,10 @@
         -webkit-transform: translateY(-50px);
         transform: translateY(-50px);
     }
-
     50% {
         -webkit-transform: translateY(0);
         transform: translateY(0);
     }
-
     100% {
         -webkit-transform: translateY(-50px);
         transform: translateY(-50px);

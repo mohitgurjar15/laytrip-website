@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -21,7 +20,6 @@ export class DownloadAppComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -41,10 +39,8 @@ export class DownloadAppComponent implements OnInit {
       this.userService.subscribeNow(this.subscribeForm.value.email).subscribe((data: any) => {
         this.submitted = this.loading = false;
         this.success = true;
-        // this.toastr.success(data.message, 'Subscribed Successful');
       }, (error: HttpErrorResponse) => {
         this.submitted = this.loading = this.success = false;
-        // this.toastr.error(error.error.message, 'Subscribed Error');
       });
     }
   }

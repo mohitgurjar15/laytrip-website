@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HotelDetailComponent } from './components/hotel-detail/hotel-detail.component';
-import { HotelPaymentComponent } from './hotel-payment/hotel-payment.component';
 import { HotelSearchComponent } from './hotel-search/hotel-search.component';
 
 const routes: Routes = [
@@ -12,19 +11,7 @@ const routes: Routes = [
   {
     path: 'detail/:id/:token',
     component: HotelDetailComponent,
-  },
-  // {
-  //   path: 'travelers/:rc',
-  //   component: FlightTravelerComponent,
-  // },
-  {
-    path: 'payment/:rc',
-    component: HotelPaymentComponent,
-  },
-  // {
-  //   path: 'checkout/:rc',
-  //   component: FlightCheckoutComponent,
-  // }
+  }
 ];
 
 @NgModule({

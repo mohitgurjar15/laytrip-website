@@ -37,12 +37,6 @@ export class RentalInfoComponent implements OnInit {
     private commonFunction:CommonFunction){
     this.adultValue = parseInt(this.route.snapshot.queryParams['adult_count']) ? parseInt(this.route.snapshot.queryParams['adult_count']) : 2;
     this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
-    //this.childAgeInfo = info.number_and_children_ages;
-    // this.childData=[{
-    //   children:[1]
-    // }]
-    // this.childAgeInfo=[5];
-   
     this.totalPerson = this.adultValue + this.childValue;
   	  this.countryCode = this.commonFunction.getUserCountry()
     }
@@ -151,9 +145,6 @@ $('#rental_add_room_open').click(
   }
 
    changeChildAge(age,id) {
-    // this.childAgeInfo.forEach((oc) => {
-    //   oc.children.push(parseInt(age));
-    // });
      const index=this.childAgeInfo.hasOwnProperty(id);
      if(index == true){
        this.childAgeInfo[id]=parseInt(age);

@@ -5,7 +5,6 @@ import { GenericService } from '../../services/generic.service';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
-import { fileSizeValidator} from '../../_helpers/custom.validators';
 
 declare var $: any;
 
@@ -182,7 +181,6 @@ export class ContactUsComponent implements OnInit {
         this.imageFileError = true;
        
         this.errorMessage = 'Only .jpg, .jpeg, .png and .pdf files are allowed.'; 
-        // this.attatchmentFiles.push(attatchData);
       }     
     } else {
       this.errorMessage = 'Something went wrong, Please try again.'; 

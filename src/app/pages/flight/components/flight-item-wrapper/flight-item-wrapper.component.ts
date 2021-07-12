@@ -32,10 +32,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   cartItems = [];
 
   animationState = 'out';
-  //flightList;
   s3BucketUrl = environment.s3BucketUrl;
   public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
-  //flightListArray = [];
   currency;
 
   subscriptions: Subscription[] = [];
@@ -80,7 +78,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     private genericService: GenericService,
     private cartService: CartService,
     private toastr: ToastrService,
-    //private spinner: NgxSpinnerService,
     public modalService: NgbModal,
     private decimalPipe: DecimalPipe
 
@@ -90,7 +87,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    //this.flightListArray = this.flightDetails;
     this.userInfo = getLoginUserInfo();
 
     if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
@@ -99,17 +95,12 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       this.isRoundTrip = false;
     }
 
-    //this.totalLaycredit();
     this.checkInstalmentAvalability();
     this.checkUser();
 
     this.cartService.getCartItems.subscribe(cartItems => {
       this.cartItems = cartItems;
     })
-
-    // setTimeout(() => { 
-    //   this.loadJquery(); 
-    // }, 3000)
     this.loadJquery(); 
     this.flightService.getFlights.subscribe(data=>{
       if(data.length){
@@ -200,9 +191,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     }
   }
 
-  opened() {
-  }
-
   getBaggageDetails(routeCode) {
     this.loadBaggageDetails = true;
     this.flightService.getBaggageDetails(routeCode).subscribe(data => {
@@ -211,33 +199,10 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     });
   }
 
-  getCancellationPolicy(routeCode) {
-
-    // this.loadCancellationPolicy = true;
-    // this.loadMoreCancellationPolicy = false;
-    // this.errorMessage = '';
-    // this.cancellationPolicyArray = [];
-    // this.cancellationPolicy = '';
-    // this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
-    //   this.cancellationPolicyArray = data.cancellation_policy.split('--')
-    //   this.loadCancellationPolicy = false;
-    //   this.cancellationPolicy = data;
-    // }, (err) => {
-    //   this.loadCancellationPolicy = false;
-    //   this.errorMessage = err.message;
-    // });
-  }
 
   toggleCancellationContent() {
     this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
   }
-
-  /* ngAfterContentChecked() {
-    this.flightListArray = this.flightList;
-    this.flightListArray.forEach(item => {
-      this.flightDetailIdArray.push(item.route_code);
-    });
-  } */
 
   showDetails(index, flag = null) {
     if (typeof this.showFlightDetails[index] === 'undefined') {
@@ -294,7 +259,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         route_code: route.route_code,
         referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
       };
-      //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
       this.cartService.addCartItem(payload).subscribe((res: any) => {
         this.changeLoading.emit(true);
         if (res) {
@@ -327,14 +291,11 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
           });
           return;
         }
-        //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
         this.isFlightNotAvailable = true;
         this.flightUniqueCode = route.unique_code;
-        // this.isFlightNotAvailable.emit(true)
       });
 
     }
-    /* } */
   }
 
   checkInstalmentAvalability() {
@@ -360,11 +321,9 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
-      //this.flightDetails = changes.flightDetails.currentValue;
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
       this.filteredLabel = changes.filteredLabel.currentValue;
     }
-    // this.flightList = changes.flightDetails.currentValue;
   }
 
   ngOnDestroy(): void {

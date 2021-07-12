@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import * as moment from 'moment';
 import { CheckOutService } from '../../../../../services/checkout.service';
-import { GenericService } from '../../../../../services/generic.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../../../environments/environment';
 import { AccountService } from '../../../../../services/account.service';
@@ -156,13 +155,10 @@ export class BookingTravelerComponent implements OnInit {
 
 
   cancelBooking(){
-    // this.upCommingloadingValue.emit(true);
     this.accountService.cancelBooking(this.bookingId).subscribe((data: any) => {
       this.laytripCartId.emit(this.bookingId);
-      // this.upCommingloadingValue.emit(false);
       this.modalService.dismissAll();
     }, (error: HttpErrorResponse) => {
-      // this.upCommingloadingValue.emit(false);
       this.modalService.dismissAll();
     });
   }

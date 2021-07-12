@@ -98,7 +98,6 @@ export class AccountComponent implements OnInit {
         messageClass: 'custom_toastr_message',
       });
       if (error.status == 401) {
-        // redirectToLogin();
       }
     });
   }
@@ -111,7 +110,6 @@ export class AccountComponent implements OnInit {
   }
 
   totalNumberOfcard(event) {
-    //this.totalCard = event;
   }
 
   ngOnDestroy() {
@@ -127,7 +125,6 @@ export class AccountComponent implements OnInit {
   }
 
   getCardListChange(data) {
-    //this.add_new_card = false;
     this.cardListChangeCount = data;
   }
 }

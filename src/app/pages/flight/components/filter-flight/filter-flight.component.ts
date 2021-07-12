@@ -116,8 +116,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       this.maxPartialPaymentPrice = Math.ceil(this.partialPaymentHighValue);
       this.partialPaymentOptions.floor = this.partialPaymentValue;
       this.partialPaymentOptions.ceil = this.partialPaymentHighValue;
-
-      //this.partialPriceSlider.controls.partial_price.setValue([Math.floor(this.partialPaymentValue), Math.ceil(this.partialPaymentHighValue)])
       this.partialPriceSlider.controls.partial_price.setValue(this.partialPaymentValue, this.partialPaymentHighValue)
     }
     if (this.filterFlightDetails && this.filterFlightDetails.arrival_time_slot || this.filterFlightDetails
@@ -162,18 +160,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   }
 
   loadJquery() {
-    //Start REsponsive Fliter js
-
-    // $(".responsive_filter_btn").click(function () {
-    //   $("#responsive_filter_show").slideDown();
-    //   $("body").addClass('overflow-hidden');
-    // });
-
-    // $(".filter_close > a").click(function () {
-    //   $("#responsive_filter_show").slideUp();
-    //   $("body").removeClass('overflow-hidden');
-    // });
-    //Close REsponsive Fliter js
 
     // Start filter Shortby js
     $(document).on('show', '#accordion2', function (e) {
@@ -527,6 +513,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       })
     }
 
+<<<<<<< HEAD
     /* if (this.inBoundStops.length) {
       filterdFlights = filterdFlights.filter(item => {
 
@@ -536,6 +523,9 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     } */
 
     this.flightService.getLastApplyedSortFilter.subscribe(filters => {
+=======
+    this.flightService.getLastApplyedSortFilter.subscribe(filters=> {
+>>>>>>> ad4f1a3ab16150d97a948a715586003b7165faae
       if(typeof filters != 'undefined' && Object.keys(filters).length > 0){  
         var sortFilter :any = filters;
         
@@ -546,14 +536,12 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
             filterdFlights = this.sortByDuration(filterdFlights, sortFilter.key, sortFilter.order);
           }
         } else if (sortFilter.key === 'arrival') {
-          // this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
           if (sortFilter.order === 'ASC') {
             filterdFlights = this.sortByArrival(filterdFlights, sortFilter.key, sortFilter.order);
           } else if (sortFilter.order === 'DESC') {
             filterdFlights = this.sortByArrival(filterdFlights, sortFilter.key, sortFilter.order);
           }
         } else if (sortFilter.key === 'departure') {
-          // this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, sortFilter.key, order);
           if (sortFilter.order === 'ASC') {
             filterdFlights = this.sortByDeparture(filterdFlights, sortFilter.key, sortFilter.order);
           } else if (sortFilter.order === 'DESC') {
@@ -561,7 +549,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
           }
         }
         else {
-          // filterdFlights = this.sortJSON(this.filterFlightDetails.items, sortFilter.key, sortFilter.order);
           if (sortFilter.order === 'ASC') {
             filterdFlights = this.sortJSON(filterdFlights, sortFilter.key, sortFilter.order);
           } else if (sortFilter.order === 'DESC') {

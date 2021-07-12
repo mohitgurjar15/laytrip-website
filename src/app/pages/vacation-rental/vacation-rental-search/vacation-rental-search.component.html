@@ -1,35 +1,29 @@
-<!-- <app-vacation-rental-search-bar (searchBarInfo)="getSearchItem($event)"></app-vacation-rental-search-bar> -->
 <div class="search_tab_listing_wrapper">
-  <div class="container">
-      <div class="searchbar_box_common">
-          <app-vacation-search-widget></app-vacation-search-widget>
-      </div>
-  </div>
-</div>
-<app-vacation-loader *ngIf="loading" ></app-vacation-loader>
-<app-vacation-popup-loader *ngIf="loading"></app-vacation-popup-loader>
-<app-vacation-not-found *ngIf="isNotFound" ></app-vacation-not-found>
-<section class="search_result home_rental" *ngIf="!loading && !isNotFound && errorMessage==''">
-   <div class="container pl-0 pr-0">
-   <div class="row">
-      <div class="col-lg-3">
-       <div class="sticky-top left_side_bar">
-       <app-sort-vacation-rental (sortRental)="sortRentals($event)" [rentalDetails]="rentalDetails"></app-sort-vacation-rental>
-       <div class="filter_saidbar">
-            <div class="filter_by d-none d-lg-block">
-              <!-- <div class="block_inn">
-                <h4>Filter By</h4>
-                <a class="anchor_link" (click)="resetFilter()">Reset</a>
-              </div> -->
-                <app-filter-vacation-rental *ngIf="rentalFilterDetails" [rentalFilterDetails]="rentalFilterDetails" (filterRental)="filterRental($event)"
-                isResetFilter={{isResetFilter}}></app-filter-vacation-rental>  
-            </div>
-          </div>  
-      </div>
+    <div class="container">
+        <div class="searchbar_box_common">
+            <app-vacation-search-widget></app-vacation-search-widget>
+        </div>
     </div>
-       <div class="col-lg-9">
-        <app-vacation-item-wrapper *ngIf="rentalDetails" [rentalDetails]="rentalDetails"></app-vacation-item-wrapper>
-      </div>
-   </div>
 </div>
+<app-vacation-loader *ngIf="loading"></app-vacation-loader>
+<app-vacation-popup-loader *ngIf="loading"></app-vacation-popup-loader>
+<app-vacation-not-found *ngIf="isNotFound"></app-vacation-not-found>
+<section class="search_result home_rental" *ngIf="!loading && !isNotFound && errorMessage==''">
+    <div class="container pl-0 pr-0">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-top left_side_bar">
+                    <app-sort-vacation-rental (sortRental)="sortRentals($event)" [rentalDetails]="rentalDetails"></app-sort-vacation-rental>
+                    <div class="filter_saidbar">
+                        <div class="filter_by d-none d-lg-block">
+                            <app-filter-vacation-rental *ngIf="rentalFilterDetails" [rentalFilterDetails]="rentalFilterDetails" (filterRental)="filterRental($event)" isResetFilter={{isResetFilter}}></app-filter-vacation-rental>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <app-vacation-item-wrapper *ngIf="rentalDetails" [rentalDetails]="rentalDetails"></app-vacation-item-wrapper>
+            </div>
+        </div>
+    </div>
 </section>
