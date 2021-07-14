@@ -343,6 +343,37 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   hideFlightNotAvailable() {
     this.isFlightNotAvailable = false;
     this.flightUniqueCode = '';
+    // let queryParams: any = {};
+    const queryParams : any = {
+      trip: this.route.snapshot.queryParams['trip'],
+      departure: this.route.snapshot.queryParams['departure'],
+      arrival: this.route.snapshot.queryParams['arrival'],     
+      departure_date: this.route.snapshot.queryParams['departure_date'],
+      class: this.route.snapshot.queryParams['class'] ? this.route.snapshot.queryParams['class'] : 'Economy',
+      adult: this.route.snapshot.queryParams['adult'],
+      child: this.route.snapshot.queryParams['child'] ? this.route.snapshot.queryParams['child'] : 0,
+      infant: this.route.snapshot.queryParams['infant'] ? this.route.snapshot.queryParams['infant'] : 0
+    };
+    if (queryParams.trip == 'roundtrip') {
+      queryParams.arrival_date = this.route.snapshot.queryParams['arrival_date'];
+    }
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if (parms.utm_medium) {
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if (parms.utm_campaign) {
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+    }
+   
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
+    });
+    
+
   }
 
   showDownPayment(offerData,downPaymentOption){
