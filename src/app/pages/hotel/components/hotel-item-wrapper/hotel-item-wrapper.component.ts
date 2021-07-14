@@ -71,6 +71,7 @@ export class HotelItemWrapperComponent implements OnInit {
   itenery: string = '';
   location: string = '';
   city_id: string = '';
+  city_name: string = '';
   hotelCount: number = 0;
   previousHotelIndex: number = -1;
   @ViewChildren(NgbCarousel) carousel: QueryList<any>;
@@ -96,6 +97,7 @@ export class HotelItemWrapperComponent implements OnInit {
     this.itenery = this.route.snapshot.queryParams['itenery']
     this.location = this.route.snapshot.queryParams['location']
     this.city_id = this.route.snapshot.queryParams['city_id']
+    this.city_name = this.route.snapshot.queryParams['city_name']
   }
 
   
@@ -149,7 +151,6 @@ export class HotelItemWrapperComponent implements OnInit {
 
     this.hotelService.getHotels.subscribe(result => {
       this.hotelDetails = result;
-      console.log('item wrap',this.hotelDetails.hotels)
       for (let i = 0; i < this.hotelDetails.length; i++) {
         this.hotelDetails[i].galleryImages = [];
         for (let image of this.hotelDetails[i].images) {
