@@ -97,7 +97,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
     this.flightDetails = [];
     this.dates = [];
-    console.log("payload",payload)
     if (payload && tripType === 'roundtrip') {
       this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {

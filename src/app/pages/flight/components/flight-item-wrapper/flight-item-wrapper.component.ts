@@ -104,11 +104,14 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       this.cartItems = cartItems;
     })
 
-    setTimeout(() => { this.loadJquery(); }, 3000)
-
+    // setTimeout(() => { 
+    //   this.loadJquery(); 
+    // }, 3000)
+    this.loadJquery(); 
     this.flightService.getFlights.subscribe(data=>{
       if(data.length){
         this.flightDetails=data;
+        
       }
       else{
         this.flightDetails=[];
@@ -304,7 +307,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes.flightDetails",changes)
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
       //this.flightDetails = changes.flightDetails.currentValue;
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
