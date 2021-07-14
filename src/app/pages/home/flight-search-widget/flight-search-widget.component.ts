@@ -569,7 +569,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.currentChangeCounter.emit(this.counterChangeVal += 1);
 
   }
-  getflightToSearchRoutes(event){   
+  getflightToSearchRoutes(event) {
     this.showToAirportSuggestion = true;
     this.searchedFlightData = event; 
     this.routeSearch = true; 

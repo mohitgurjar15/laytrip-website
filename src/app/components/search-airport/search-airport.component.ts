@@ -50,17 +50,24 @@ export class SearchAirportComponent implements OnInit {
     }
   }
 
-  searchAirport(searchItem) {
+
+  onChangeSearch(event) {
+    // this.searchRoute(event.term);
+    this.searchAirport(event.term);
+  }
+
+  searchRoute(searchItem) {
     this.loading = true;
-    let isFromLocation=this.id=='fromSearch'?'yes':'no';
-    let alternateLocation='';
-    if(this.id=='fromSearch'){
-      alternateLocation=localStorage.getItem('__to') || '';
+    let isFromLocation = this.id == 'fromSearch' ? 'yes' : 'no';
+    let alternateLocation = '';
+    if (this.id == 'fromSearch') {
+      alternateLocation = localStorage.getItem('__to') || '';
     }
-    else{
-      alternateLocation=localStorage.getItem('__from') || '';
+    else {
+      alternateLocation = localStorage.getItem('__from') || '';
     }
-    this.flightService.searchRoute(searchItem,isFromLocation,alternateLocation).subscribe((response: any) => {
+    this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe((response: any) => {
+      console.log(response)
       this.flightSearchRoute.emit(response);
       this.data = response.map(res => {
         this.loading = false;
@@ -73,7 +80,7 @@ export class SearchAirportComponent implements OnInit {
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
           parentId: 0
         };
-        
+
         return searchRoute;
       });
     },
@@ -83,8 +90,45 @@ export class SearchAirportComponent implements OnInit {
     );
   }
 
-  onChangeSearch(event) {
-    this.searchAirport(event.term);
+  onInputClick() {
+    //data if set null if it is set in from search.
+    if (this.id == 'toSearch') {
+      this.flightSearchRoute.emit({});
+      this.data = [];
+    }
+  }
+
+  searchAirport(searchItem) {
+    console.log(this.id)
+    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+      
+      /* this.flightSearchRoute.emit(response); */
+      this.data = response.map(res => {
+        if (localStorage.getItem('__from') != res.code) {
+          this.flightSearchRoute.emit(response);
+          this.loading = false;
+          var searchRoute = {
+            id: res.id,
+            name: res.name,
+            code: res.code,
+            city: res.city,
+            country: res.country,
+            display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
+            parentId: 0
+          };
+
+          return searchRoute;
+        } else {
+          console.log(localStorage.getItem('__from'), res.code)
+
+          console.log('here')
+        }
+      });
+    },
+      error => {
+        this.loading = false;
+      }
+    );
   }
 
   selectEvent(event, index) {
