@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ViewChild, Renderer2, SimpleChange } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../../environments/environment';
-import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MustMatch } from '../../../_helpers/must-match.validators';
@@ -9,9 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { VerifyOtpComponent } from '../verify-otp/verify-otp.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { CommonFunction } from '../../../_helpers/common-function';
-import { TravelerService } from 'src/app/services/traveler.service';
 import { CheckOutService } from 'src/app/services/checkout.service';
-import { hostname } from 'os';
 
 declare var $: any;
 
@@ -125,7 +123,6 @@ export class SignupComponent implements OnInit {
       Object.keys(this.signupForm.controls).forEach(key => {
         this.signupForm.get(key).markAsTouched();
       });
-      // this.signupForm.reset();
       this.submitted = true;
       this.loading = false;
       return;

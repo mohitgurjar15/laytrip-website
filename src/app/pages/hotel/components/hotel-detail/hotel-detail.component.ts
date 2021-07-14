@@ -2,7 +2,6 @@ import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 import { HotelService } from '../../../../services/hotel.service';
 import { environment } from '../../../../../environments/environment';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
@@ -76,53 +75,6 @@ export class HotelDetailComponent implements OnInit {
     this.cartService.getCartItems.subscribe(cartItems => {
       this.cartItems = cartItems;
     })
-
-   /*  this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
-      this.loading = false;
-      if (res && res.data && res.data.hotel) {
-        this.hotelDetails = {
-          name: res.data.hotel.name,
-          city_name: res.data.hotel.address.city_name,
-          address: res.data.hotel.full_address,
-          state_code: res.data.hotel.address.state_code,
-          country_name: res.data.hotel.address.country_name,
-          rating: res.data.hotel.rating,
-          review_rating: res.data.hotel.review_rating,
-          description: res.data.hotel.description,
-          amenities: res.data.hotel.amenities,
-          hotelLocations: res.data.hotel.geocodes,
-          hotelReviews: res.data.hotel.reviews,
-          thumbnail: res.data.hotel.thumbnail
-        };
-        if (res.data.hotel.images) {
-
-          res.data.hotel.images.forEach(imageUrl => {
-            this.imageTemp.push({
-              small: `${imageUrl}`,
-              medium: `${imageUrl}`,
-              big: `${imageUrl}`,
-              description: `${this.hotelDetails.name}`
-            });
-            this.galleryImages = this.imageTemp;
-          });
-
-        }
-        occupancies = collect(res.data.details.occupancies);
-        this.roomSummary.roomDetail.checkIn = res.data.details.check_in;
-        this.roomSummary.roomDetail.checkOut = res.data.details.check_out;
-        if (res.data.details && res.data.details.occupancies && res.data.details.occupancies.length) {
-          this.roomSummary.roomDetail.totalRoom = occupancies.count();
-          this.roomSummary.roomDetail.totalAdults = occupancies.sum('adults');
-          this.roomSummary.roomDetail.totalChildren = occupancies.flatMap((value) => value['children']).count();
-        }
-      }
-      else{
-        this.isNotFound=true;  
-      }
-    }, error => {
-      this.isNotFound=true;
-      this.loading = false;
-    }); */
     this.loading = true;
     this.hotelService.getRoomDetails(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
       this.loading = false;
@@ -139,9 +91,7 @@ export class HotelDetailComponent implements OnInit {
             }
             this.hotelRoomArray[i].dots = this.hotelRoomArray[i].galleryImages.length>5 ? 5 :this.hotelRoomArray[i].galleryImages.length;
             this.hotelRoomArray[i].activeSlide = 1;
-        }
-        //this.roomSummary.hotelInfo = res.data[0];
-        
+        }        
         this.hotelDetails = {
           name: res.hotel.name,
           city_name: res.hotel.address.city_name,
@@ -189,7 +139,6 @@ export class HotelDetailComponent implements OnInit {
      if (this.cartItems && this.cartItems.length >= 10) {
       this.addCartLoading=false;
       this.isCartFull=true;
-      //this.maxCartValidation.emit(true)
     } else {
       this.addCartLoading=true;
       
@@ -268,7 +217,6 @@ export class HotelDetailComponent implements OnInit {
     if(type=='less'){
       target.scrollIntoView({behavior: 'smooth', block: "start",inline: 'nearest'});
     }
-    //document.getElementsByClassName('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   ngAfterViewInit(): void {

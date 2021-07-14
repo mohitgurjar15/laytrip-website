@@ -1,14 +1,9 @@
 <div [formGroup]="form">
     <label>{{label}}</label>
-    <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}"  [selectOnTab]="true" [items]="data"
-         groupBy="recentSearches" bindLabel="display_name" bindValue="city" [(ngModel)]="defaultSelected.city" [clearable]="false" minTermLength="3"
-        notFoundText="" [virtualScroll]="true" (search)="onChangeSearch($event)" loadingText=""
-        (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input-new"
-        placeholder="{{ placeHolder }}" [tabIndex]="tabIndex">
-        <!-- [(ngModel)]="defaultSelected" -->
+    <ng-select [formControlName]="controlName" [loading]="loading" id="{{id}}" [selectOnTab]="true" [items]="data" groupBy="recentSearches" bindLabel="display_name" bindValue="city" [(ngModel)]="defaultSelected.city" [clearable]="false" minTermLength="3"
+        notFoundText="" [virtualScroll]="true" (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input-new" placeholder="{{ placeHolder }}" [tabIndex]="tabIndex">
         <ng-template ng-label-tmp let-item="item">
             <div class="hotel-parent">
-                <!-- <img height="15" width="15" [src]="item.thumbnail" /> -->
                 <div class="sub-parent">{{item.city}}</div>
             </div>
         </ng-template>
@@ -19,5 +14,4 @@
             </div>
         </ng-template>
     </ng-select>
-    <!-- <span *ngIf="defaultSelected">{{ defaultSelected.city }}, {{defaultSelected.country}}</span> -->
 </div>

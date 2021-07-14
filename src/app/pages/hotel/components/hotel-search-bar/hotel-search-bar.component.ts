@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -6,7 +6,7 @@ import * as moment from 'moment';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { HotelService } from '../../../../services/hotel.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgbCalendar, NgbDate, NgbDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../../../_helpers/ngbDateCustomParserFormatter';
 
 @Component({
@@ -25,7 +25,6 @@ export class HotelSearchBarComponent implements OnInit {
   loading = false;
   data = [];
   placeHolder1 = 'New York';
-  // tslint:disable-next-line: quotemark
   totalPerson: number = 1;
   destinationHotel: any = {};
   checkInDate = new Date();
@@ -190,7 +189,6 @@ export class HotelSearchBarComponent implements OnInit {
   }
 
   modifyHotelSearch() {
-    // console.log(this.searchHotelInfo);
     if (this.searchHotelInfo && this.searchHotelInfo.latitude &&
       this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in &&

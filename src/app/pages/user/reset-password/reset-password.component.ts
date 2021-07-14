@@ -38,17 +38,6 @@ export class ResetPasswordComponent implements OnInit {
   passFieldTextType: boolean;
   isResend: boolean = false;
   otp: number = 0;
-  // config = {
-  //   allowNumbersOnly: true,
-  //   length: 6,
-  //   isPasswordInput: false,
-  //   disableAutoFocus: false,
-  //   placeholder: '',
-  //   inputStyles: {
-  //     'width': '64px',
-  //     'height': '64px'
-  //   }
-  // };
   config: NgxOtpInputConfig = {
     otpLength: 6,
     autofocus: false,
@@ -170,9 +159,7 @@ export class ResetPasswordComponent implements OnInit {
 
   onOtpChange(event) {
     if (event.length == 6) {
-      // this.otp = event;
       this.resetForm.controls.otp.setValue(event);
-      // this.ngOtpInputRef.setValue(event);
       this.otpLengthError = false;
     } else {
       this.otpLengthError = true;

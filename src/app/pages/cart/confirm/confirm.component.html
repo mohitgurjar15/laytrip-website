@@ -96,7 +96,7 @@
                 </div>
                 <div class="detail_liners">
                     <span class="lefts">Total Price</span>
-                    <span class="rights" *ngIf="commonFunction.isRefferal()">
+                    <span class="rights" *ngIf="cartDetails.booking[0].isPromotional">
                         <span class="dashed_price">
                             ${{cartDetails.actualAmount | number : '1.2-2'}}
                         </span>
@@ -104,7 +104,7 @@
                             ${{cartDetails.totalAmount | number : '1.2-2'}}
                         </span>
                     </span>
-                    <span class="rights" *ngIf="!commonFunction.isRefferal()">
+                    <span class="rights" *ngIf="!cartDetails.booking[0].isPromotional">
                         ${{cartDetails.totalAmount | number : '1.2-2'}}                                            
                     </span>
                 </div>

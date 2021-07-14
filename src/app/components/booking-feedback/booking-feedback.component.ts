@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { FlightService } from '../../services/flight.service';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
@@ -71,12 +71,10 @@ export class BookingFeedbackComponent implements OnInit {
       };
       this.flightService.addFeedback(jsonData).subscribe((data: any) => {
         localStorage.setItem('$bkg', this.bookingId);
-        // this.feedbackValueChange.emit(true);
         this.close();
         this.loading = false;
       }, (error: HttpErrorResponse) => {
         this.loading = false;
-        // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
       });
     }
   }

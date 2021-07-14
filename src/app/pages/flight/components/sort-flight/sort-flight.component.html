@@ -2,12 +2,10 @@
     <div class="short_by">
         <div class="accordion block_shortby" id="accordion">
             <div class="accordion-group {{lowToHighToggle}}" [ngClass]="{'active': lowToHighToggle === true}">
-                <div class="accordion-heading"  aria-expanded="true"  (click)="toggleLowToHigh()" >
+                <div class="accordion-heading" aria-expanded="true" (click)="toggleLowToHigh()">
                     <a class="accordion-toggle">
                         {{'sort_by' | translate}}
                     </a>
-                    <!-- <a class="anchor_link" [hidden]="lowToHighToggle !== true"
-                        (click)="resetSorting('selling_price','ASC')"> Clear</a> -->
                 </div>
                 <div id="collapseOne" class="accordion-body collapse {{lowToHighToggle}}" [ngClass]="{'show': lowToHighToggle}">
                     <div class="accordion-inner">
@@ -94,7 +92,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 <div class="filter_saidbar mobile_sort">
     <div class="short_by">
@@ -107,8 +105,6 @@
                     <button type="button" class="close" (click)="closeModal()">
                         <img src="{{s3BucketUrl}}assets/images/icon/arrow_up_dropdown.svg" alt="Close Icon">
                       </button>
-                    <!-- <a class="anchor_link" 
-                        (click)="resetSorting('selling_price','ASC')"> Clear</a> -->
                 </div>
                 <div id="collapseTwo" class="accordion-body collapse show">
                     <div class="accordion-inner">
@@ -195,5 +191,4 @@
             </div>
         </div>
     </div>
-</div> 
- 
+</div>
