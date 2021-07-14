@@ -58,8 +58,8 @@
                                                                 <ngb-carousel #carousel [interval]="false" [showNavigationIndicators]="false" [showNavigationArrows]="item.galleryImages.length > 0? true:false" (slide)=onSlide($event,blockIndex)>
                                                                     <ng-template ngbSlide *ngFor="let image of item.galleryImages; let imageIndex = index" [id]="imageIndex">
                                                                         <div class="picsum-img-wrapper">
-                                                                            <img #sliderimage *ngIf="imageIndex==0" attr.data.src={{image.small}} src={{image.small}} onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
-                                                                            <img #sliderimage [class]="'ngb-slide-'+imageIndex+'-'+blockIndex" *ngIf="imageIndex!=0" attr.data.src={{image.small}} onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                                                                            <img #sliderimage *ngIf="imageIndex==0" attr.data.src={{image.small}} src={{image.small}} onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';" alt="Hotel View">
+                                                                            <img #sliderimage [class]="'ngb-slide-'+imageIndex+'-'+blockIndex" *ngIf="imageIndex!=0" attr.data.src={{image.small}} onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';" alt="Hotel View">
                                                                         </div>
                                                                     </ng-template>
                                                                 </ngb-carousel>
@@ -79,29 +79,22 @@
                                                                     <!-- <h4>{{item?.name}}</h4> -->
                                                                     <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">
                                                                         <span class="wrapper_names">
-                                                                            <span
-                                                                                class="hotel_names">{{item?.name}}</span>
+                                                                            <span class="hotel_names">{{item?.name}}</span>
                                                                         </span>
                                                                     </a>
                                                                     <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">
                                                                         <span class="wrapper_names">
-                                                                            <span
-                                                                                class="hotel_names">{{item?.name}}</span>
-
-                                                                        <span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}} off</span>
+                                                                            <span class="hotel_names">{{item?.name}}</span>
+                                                                            <span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}} off</span>
                                                                         </span>
                                                                     </a>
-                                                                    <span class="adress_span">
-
-                                                                        {{item?.full_address}}
-                                                                    </span>
+                                                                    <span class="adress_span">{{item?.full_address}}</span>
                                                                     <div class="review_section_wrap">
                                                                         <div class="left_bar">
                                                                             <div class="stars_text">
                                                                                 <div class="stars_rating {{item.rating}}">
                                                                                     <img class="filled" src="{{s3BucketUrl}}assets/images/icon/star_filled.svg" alt="filled Stars Icon" *ngFor='let in of counter(item.rating)'>
                                                                                     <img class="blank" src="{{s3BucketUrl}}assets/images/icon/star_blank.svg" alt="blank Stars Icon" *ngFor='let in of counter(5 - item.rating)'>
-
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -171,8 +164,8 @@
                                         <ngb-carousel #carousel class="mobile_carousel" [interval]="false" [showNavigationIndicators]="false" [showNavigationArrows]="item.galleryImages.length > 0? true:false" (slide)=onSlide($event,blockIndex)>
                                             <ng-template ngbSlide *ngFor="let image of item.galleryImages; let imageIndex = index" [id]="imageIndex">
                                                 <div class="picsum-img-wrapper">
-                                                    <img #sliderimage *ngIf="imageIndex==0" attr.data.src={{image.small}} src={{image.small}} onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
-                                                    <img #sliderimage [class]="'ngb-slide-'+imageIndex+'-'+blockIndex" *ngIf="imageIndex!=0" attr.data.src={{image.small}} onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';">
+                                                    <img #sliderimage *ngIf="imageIndex==0" attr.data.src={{image.small}} src={{image.small}} onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';" alt="Hotel View" >
+                                                    <img #sliderimage [class]="'ngb-slide-'+imageIndex+'-'+blockIndex" *ngIf="imageIndex!=0" attr.data.src={{image.small}} onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/default_img.svg';" alt="Hotel View"> 
                                                 </div>
                                             </ng-template>
                                         </ngb-carousel>
