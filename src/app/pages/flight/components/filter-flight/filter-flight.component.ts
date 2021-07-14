@@ -91,8 +91,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.currency = JSON.parse(this._currency);
-
+    this.currency = JSON.parse(this._currency);    
     if (this.filterFlightDetails && this.filterFlightDetails.price_range) {
       // FOR FILTER FLIGHT - PRICE & PARTIAL PRICE
       this.priceValue = this.filterFlightDetails.price_range.min_price ? Math.floor(this.filterFlightDetails.price_range.min_price) : 0;
@@ -517,6 +516,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
     this.flightService.getLastApplyedSortFilter.subscribe(filters=> {
       if(typeof filters != 'undefined' && Object.keys(filters).length > 0){  
         var sortFilter :any = filters;
+        
          if (sortFilter.key === 'total_duration') {
           if (sortFilter.order === 'ASC') {
             filterdFlights = this.sortByDuration(filterdFlights, sortFilter.key, sortFilter.order);

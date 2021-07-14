@@ -120,6 +120,7 @@ export class CheckoutComponent implements OnInit {
 
     this.cartLoading = true;
     this.cartService.getCartList('yes').subscribe((items: any) => {
+     
       if (items && items.data && items.data.length) {
         this.bookingTimerConfiguration();
       }
@@ -180,8 +181,9 @@ export class CheckoutComponent implements OnInit {
           nonPromoConflictCartIds.push( items.data[i].id );
         }
         this.carts.push(cart);
-        this.cartPrices.push(price)        
+        this.cartPrices.push(price)       
       }
+      localStorage.setItem('$crt', items.count ? items.count :0);
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
       if (nonPromoConflictCartIds.length > 0) {
