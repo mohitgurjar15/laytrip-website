@@ -31,34 +31,17 @@ export class ViewHistoryComponent implements OnInit {
     this.getPaytmentDetailView();
   }
 
-/*   ngOnChanges(changes:SimpleChanges){
-    this.list = changes.item.currentValue;
-    if(this.list){
-      this.currencySymbol =  this.list.currency2.symbol ? this.list.currency2.symbol : '$';
-    }
-    if(this.list &&  this.list != 'undefined' ){
-    }
-  }
- */  
-
   getPaytmentDetailView(){
     this.loader = true;
     var filterData = {bookingId : this.id};
 
     this.userService.getPaymentHistory(1, 1,filterData,'').subscribe((res: any) => {
-      // this.activeBooking = res.map 
       this.list  = res.data;
       this.loader = false;
       this.currencySymbol =  this.list[0].currency2.symbol ? this.list[0].currency2.symbol : '$';
-    
-        /* this.showPaginationBar = true;
-        this.listLength =res.total_result;
-        this.loading = this.notFound  = false; */
     }, err => {
       this.loader = false;
-     /*  this.notFound = true;
-      this.loading = this.showPaginationBar = false; */
-    });   
+     });   
   }
   dateConvert(date){
     return this.commonFunction.convertDateFormat(new Date(date),"MM/DD/YYYY")

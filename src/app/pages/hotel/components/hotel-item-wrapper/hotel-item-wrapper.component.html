@@ -24,12 +24,6 @@
                     <agm-map #gm (mapClick)="closeWindow()" [latitude]="defaultLat" [longitude]="defaultLng" [clickableIcons]="false" minZoom="2" [zoom]="10" (boundsChange)="checkMarkersInBounds($event)">
                         <agm-marker #marker *ngFor="let hotel of hotelListArray;let i = index;" [latitude]="hotel.geocodes.latitude" [longitude]="hotel.geocodes.longitude" [iconUrl]="{url:s3BucketUrl+'assets/images/hotels/circle.svg', scaledSize: {height: 80,width: 48}}" [label]="{text:getMapPrice(hotel), position:'relative',zIndex:'100', color: 'white',fontSize: '12px', class: 'mapLabel'}"
                             (markerClick)="displayHotelDetails(hotel.id,infoWindow, 'click')" (mouseMove)="closeInfoWindow(infoWindow, gm)" (mouseOver)="openInfoWindow(infoWindow, gm)" [zIndex]="i+1">
-                            <!-- (mouseOver)="displayHotelDetails(hotel.id,infoWindow, 'hover')" -->
-                            <!-- <agm-info-window [disableAutoPan]="false" #infoWindow>
-                                <div>
-                                    <p>{{hotel.name}}</p>
-                                </div>
-                            </agm-info-window> -->
                             <agm-snazzy-info-window [closeWhenOthersOpen]="true" [showCloseButton]="false" [panOnOpen]="false" #infoWindow>
                                 <ng-template>
                                     {{hotel.name}}
@@ -51,10 +45,6 @@
                                                     <div class="box_img">
                                                         <div class="block_im">
                                                             <div class="hotel_list_img_wrp">
-                                                                <!-- <ngx-gallery *ngIf="item.galleryImages.length > 0" [options]="galleryOptions"
-                                                                    [images]="item.galleryImages"></ngx-gallery>
-            
-                                                                <img *ngIf="item.galleryImages.length == 0" src="{{s3BucketUrl}}assets/images/hotels/default_img.svg" alt="blank image" class="blank_image_box"> -->
                                                                 <ngb-carousel #carousel [interval]="false" [showNavigationIndicators]="false" [showNavigationArrows]="item.galleryImages.length > 0? true:false" (slide)=onSlide($event,blockIndex)>
                                                                     <ng-template ngbSlide *ngFor="let image of item.galleryImages; let imageIndex = index" [id]="imageIndex">
                                                                         <div class="picsum-img-wrapper">
@@ -76,7 +66,6 @@
                                                         <div class="block_detail">
                                                             <div class="block_detail_top">
                                                                 <div class="detail_info">
-                                                                    <!-- <h4>{{item?.name}}</h4> -->
                                                                     <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">
                                                                         <span class="wrapper_names">
                                                                             <span
@@ -131,12 +120,6 @@
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
                                                 <div class="block" *ngIf="item.secondary_start_price > 0">
-                                                    <!-- <p>Flexible Installments</p>
-                                                    <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price |
-                                                            number :
-                                                            '1.2-2'}}</span> weekly
-                                                    </p> -->
-
                                                     <p>From</p>
                                                     <p *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
                                                         <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
@@ -184,7 +167,6 @@
                                     </div>
                                     <div class="middle_part">
                                         <div class="detail_info">
-                                            <!-- <h4>{{item?.name}}</h4> -->
                                             <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">
                                                 <span class="wrapper_names">
                                                     <span class="hotel_names">{{item?.name}}</span>
@@ -217,10 +199,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="show_detail" [ngClass]="{'open_detail':showHotelDetails[blockIndex]}">
-                                            <a class="show_more_detail anchor-tag" (click)="showDetails(blockIndex)">
-                                                Details </a>
-                                        </div> -->
                                         <span [id]="'accordion_infos1'+blockIndex" class="show_detail">
                                             <a data-toggle="collapse" data-parent="#full_hotel_listing"
                                                 [href]="'#collapse'+blockIndex" aria-expanded="false"
@@ -233,11 +211,6 @@
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
                                                 <div class="block" *ngIf="item.secondary_start_price > 0">
-
-                                                    <!-- <p>From <span>{{ currency?.symbol }}{{item?.secondary_start_price |
-                                                            number :
-                                                            '1.2-2'}}</span> weekly
-                                                    </p> -->
                                                     <p>From</p>
                                                     <p class="duel_prices" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
                                                         <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
@@ -262,7 +235,6 @@
                                             </div>
                                             <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id}">Select</a>
                                             <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">Select</a>
-                                            <!-- <p>Flexible Installments</p> -->
                                         </div>
                                     </div>
                                 </div>
@@ -364,9 +336,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <pagination-controls class="hotel-pagination" autoHide="true" (pageChange)="pageChanged($event)">
-    </pagination-controls> -->
     <div *ngIf="scrollLoading" class="scrollLoading_wrapper">
         <i class="fa fa-spinner fa-spin pink_spinner"></i>
     </div>

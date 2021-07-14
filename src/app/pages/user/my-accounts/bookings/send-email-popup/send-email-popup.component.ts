@@ -81,13 +81,11 @@ export class SendEmailPopupComponent implements OnInit {
        });
       this.flightService.sendEmail(payload).subscribe((data: any) => {
         this.submitted = this.loading = false;
-        // this.toastr.success(data.message, 'Success');
         this.emailForm.reset();
         this.activeModal.close();
       }, (error: HttpErrorResponse) => {
         this.apiError = error.message;
         this.submitted = this.loading = false;
-        // this.toastr.error(error.message, 'Error Send Email');
       });
     }
   }

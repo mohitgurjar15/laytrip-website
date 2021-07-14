@@ -1,12 +1,9 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy, Input } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
 import { VacationRentalService } from '../../../../services/vacation-rental.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CookieService } from 'ngx-cookie';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
-import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CommonFunction } from '../../../../_helpers/common-function';
 
@@ -69,20 +66,6 @@ export class VacationItemWrapperComponent implements OnInit, AfterContentChecked
        this.isMapView = true;
     }
   }
-
-  // onMouseOver(infoWindow, gm) {
-
-  //   if (gm.lastOpen != null) {
-  //     gm.lastOpen.close();
-  //   }
-
-  //   gm.lastOpen = infoWindow;
-
-  //   infoWindow.open();
-  // }
-  // onMouseOut(infoWindow, gm) {
-  //   infoWindow.close();
-  // }
 
   infoWindowAction(template, event, action) {
     if (action === 'open') {

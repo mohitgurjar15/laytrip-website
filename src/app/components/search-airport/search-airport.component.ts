@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
@@ -85,7 +85,6 @@ export class SearchAirportComponent implements OnInit {
 
   onChangeSearch(event) {
     this.searchAirport(event.term);
-    // this.searchItem.emit({key : event.term,type : this.id})
   }
 
   selectEvent(event, index) {
@@ -119,11 +118,6 @@ export class SearchAirportComponent implements OnInit {
       let location: any = this.cookieService.get('__loc');
       location = JSON.parse(location);
       if (typeof location.airport !== 'undefined') {
-        /* location.airport.display_name = `${location.city},${location.country},(${location.code}),${location.name}`,
-        this.data[0] = location.airport;
-        this.airportDefaultDestValue = this.data[0].city;
-        this.defaultSelected='';
-        this.selectedAirport = this.data[0]; */
       }
     }
     catch (error) {

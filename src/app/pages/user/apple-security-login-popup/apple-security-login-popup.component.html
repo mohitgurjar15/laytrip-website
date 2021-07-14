@@ -1,8 +1,5 @@
 <div class="apple_security_login_block">
     <div class="modal-header">
-        <!-- <button type="button" class="close" aria-label="Close" (click)="close()">
-            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-        </button> -->
     </div>
     <div class="modal-body">
         <div class="modal_top_block success_modal">
@@ -12,39 +9,30 @@
             <div class="form_wrps">
                 <div class="duel_input">
                     <div class="w-50 mr-2">
-                        <input type="text" formControlName="first_name" placeholder="{{'first_name' | translate}}"
-                            tabindex="1" (keypress)="commonFunction.preventNumberInput($event)">
+                        <input type="text" formControlName="first_name" placeholder="{{'first_name' | translate}}" tabindex="1" (keypress)="commonFunction.preventNumberInput($event)">
                         <div *ngIf="submitted" class="focus-input100 login-error">
-                            <p *ngIf="appleLoginForm.controls.first_name.errors && appleLoginForm.controls.first_name.errors.required"
-                                class="error_text">
+                            <p *ngIf="appleLoginForm.controls.first_name.errors && appleLoginForm.controls.first_name.errors.required" class="error_text">
                                 {{'first_name_touched_validation' | translate}}</p>
-                            <p *ngIf="appleLoginForm.controls.first_name.errors && appleLoginForm.controls.first_name.errors.pattern"
-                                class="error_text">
+                            <p *ngIf="appleLoginForm.controls.first_name.errors && appleLoginForm.controls.first_name.errors.pattern" class="error_text">
                                 {{'first_name_string_validation' | translate}}</p>
                         </div>
                     </div>
                     <div class="w-50 mr-2">
-                        <input type="text" formControlName="last_name" placeholder="{{'last_name' | translate}}"
-                            tabindex="2" (keypress)="commonFunction.preventNumberInput($event)">
+                        <input type="text" formControlName="last_name" placeholder="{{'last_name' | translate}}" tabindex="2" (keypress)="commonFunction.preventNumberInput($event)">
                         <div *ngIf="submitted" class="focus-input100 login-error">
-                            <p *ngIf="appleLoginForm.controls.last_name.errors && appleLoginForm.controls.last_name.errors.required"
-                                class="error_text">
+                            <p *ngIf="appleLoginForm.controls.last_name.errors && appleLoginForm.controls.last_name.errors.required" class="error_text">
                                 {{'last_name_touched_validation' | translate}}</p>
-                            <p *ngIf="appleLoginForm.controls.last_name.errors && appleLoginForm.controls.last_name.errors.pattern"
-                                class="error_text">
+                            <p *ngIf="appleLoginForm.controls.last_name.errors && appleLoginForm.controls.last_name.errors.pattern" class="error_text">
                                 {{'last_name_string_validation' | translate}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="single_input">
-                    <input type="email" formControlName="email" maxlength="50" tabindex="3"
-                        placeholder="{{'email_placeholder' | translate}}">
+                    <input type="email" formControlName="email" maxlength="50" tabindex="3" placeholder="{{'email_placeholder' | translate}}">
                     <div *ngIf="submitted">
-                        <p *ngIf="appleLoginForm.controls.email.errors && appleLoginForm.controls.email.errors.required"
-                            class="error_text">
+                        <p *ngIf="appleLoginForm.controls.email.errors && appleLoginForm.controls.email.errors.required" class="error_text">
                             {{'email_touched_validation' | translate}}</p>
-                        <p *ngIf="appleLoginForm.controls.email.errors && appleLoginForm.controls.email.errors.pattern"
-                            class="error_text">
+                        <p *ngIf="appleLoginForm.controls.email.errors && appleLoginForm.controls.email.errors.pattern" class="error_text">
                             {{'email_invalid_validation' | translate}}</p>
                     </div>
                 </div>
