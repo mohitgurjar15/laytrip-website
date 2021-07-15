@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@
 import { GenericService } from '../../services/generic.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../_helpers/common-function';
-import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../services/cart.service';
 import { environment } from '../../../environments/environment';
 import { HomeService } from 'src/app/services/home.service';
@@ -46,7 +45,7 @@ export class PaymentModeComponent implements OnInit {
     instalment_type: "weekly",
     checkin_date: '',
     booking_date: moment().format("YYYY-MM-DD"),
-    amount : '0.00',
+    amount : 0.00,
     additional_amount: 0,
     selected_down_payment:0,
     down_payment:0,
@@ -110,7 +109,7 @@ export class PaymentModeComponent implements OnInit {
       }
       if(this.instalmentRequest.checkin_date){
 
-        this.instalmentRequest.amount = this.sellingPrice.toFixed(2);
+        this.instalmentRequest.amount = this.sellingPrice;
         this.totalLaycredit();
         this.getAllInstalment('set-default-down-payment');
         this.calculateInstalment('down-payment',null);
@@ -136,19 +135,16 @@ export class PaymentModeComponent implements OnInit {
           }
 
           if(type2!=null && type2=='redeemable_point' && this.sellingPrice){
-            //Below line commented for temporary reason
-            //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][this.selectedDownPaymentIndex]);
+           
           }
 
           if(this.instalments.instalment_date[1].instalment_amount<5 && type3==null){
             
             if(this.paymentType=='instalment'){
 
-            //  this.toastr.warning(this.minimumPriceValidationError, 'Warning',{positionClass:'toast-top-center',easeTime:1000});
              this.togglePaymentMode('no-instalment');
             }
             this.isBelowMinimumInstallment=true;
-           // this.minimumInstallmentValidation();
           }
           else{
             this.isBelowMinimumInstallment=false;
@@ -209,10 +205,6 @@ export class PaymentModeComponent implements OnInit {
       this.calculateInstalment('down-payment',null);
       this.getAllInstalment();
     }
-
-    /* if(changes['priceData']){
-      this.instalmentRequest.amount= changes['priceData'].currentValue[0].selling_price;
-    } */
   }
 
   getTotalPrice(){
@@ -356,12 +348,6 @@ export class PaymentModeComponent implements OnInit {
 
     this.instalmentRequest.instalment_type=type;
     this.instalmentType=type;
-    /* let paymentInfo={
-      instalment_type : this.instalmentType,
-      payment_type : this.paymentType,
-      down_payment : this.selectedDownPaymentIndex
-    }
-    this.cartService.setPaymentOptions(paymentInfo); */
     this.calculateInstalment('down-payment','redeemable_point','set-default-down-payment');
     this.getAllInstalment();
   }
@@ -373,7 +359,6 @@ export class PaymentModeComponent implements OnInit {
   toggleDownPayment(index){
 
     this.selectedDownPaymentIndex=index;
-    //this.instalmentRequest.down_payment= this.downPayments[index];
     this.instalmentRequest.selected_down_payment= this.selectedDownPaymentIndex;
     //Below line commented for temporary reason
     //this.redeemableLayCredit.emit(this.sellingPrice-this.defaultDownPayments[this.instalmentType][index]);

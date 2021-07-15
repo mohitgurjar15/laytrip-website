@@ -7,10 +7,10 @@
                         <span class="title_image">
                             <img src="{{s3BucketUrl}}assets/images/icon/bed_line_blue.svg" alt="Hotel icon" />
                         </span>
-                        <div class="hotel_dets">
-                            <span class="hotel_name">{{cartItem.moduleInfo[0].hotel_name}}</span>
-                            <span class="hotel_address">{{cartItem.moduleInfo[0].address.address_line_one}}</span>
-                        </div>
+                    <div class="hotel_dets">
+                        <span class="hotel_name">{{cartItem.moduleInfo[0].hotel_name}}</span>
+                        <span class="hotel_address">{{cartItem.moduleInfo[0].address.address_line_one}}</span>
+                    </div>
                     </span>
                 </a>
             </div>
@@ -23,46 +23,32 @@
                                 <div class="col_boxs desk_box">
                                     <span>
                                         Check In
-                                    </span>
-                                    {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_in,'YYYY-MM-DD')
-                                    }}
+                                    </span> {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_in,'YYYY-MM-DD') }}
                                 </div>
                                 <div class="col_boxs desk_box">
                                     <span>
                                         Check Out
-                                    </span>
-                                    {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_out,'YYYY-MM-DD')
-                                    }}
+                                    </span> {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_out,'YYYY-MM-DD') }}
                                 </div>
                                 <div class="col_boxs desk_box">
-                                    {{cartItem.moduleInfo[0].input_data.num_nights}}
-                                    {{cartItem.moduleInfo[0].input_data.num_nights>1 ? 'Nights':'Night'}},
-                                    {{cartItem.moduleInfo[0].input_data.num_rooms}}
-                                    {{cartItem.moduleInfo[0].input_data.num_rooms >1
-                                    ? 'Rooms' : 'Room'}}
+                                    {{cartItem.moduleInfo[0].input_data.num_nights}} {{cartItem.moduleInfo[0].input_data.num_nights>1 ? 'Nights':'Night'}}, {{cartItem.moduleInfo[0].input_data.num_rooms}} {{cartItem.moduleInfo[0].input_data.num_rooms >1 ? 'Rooms' : 'Room'}}
                                 </div>
                                 <div class="responsive_boxes">
                                     <div>
                                         <div class="col_boxs">
                                             <span>
                                                 Check In
-                                            </span>
-                                            {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_in,'YYYY-MM-DD')
-                                            }}
+                                            </span> {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_in,'YYYY-MM-DD') }}
                                         </div>
                                         <div class="col_boxs">
                                             <span>
                                                 Check Out
-                                            </span>
-                                            {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_out,'YYYY-MM-DD')
-                                            }}
+                                            </span> {{commonFunction.convertDateFormat(cartItem.moduleInfo[0].input_data.check_out,'YYYY-MM-DD') }}
                                         </div>
                                     </div>
                                     <div class="col_boxs">
-                                        {{cartItem.moduleInfo[0].input_data.num_nights}}
-                                        {{cartItem.moduleInfo[0].input_data.num_nights>1 ? 'Nights':'Night'}} <br>
-                                        {{cartItem.moduleInfo[0].input_data.num_rooms}}
-                                        {{cartItem.moduleInfo[0].input_data.num_rooms >1 ? 'Rooms' : 'Room'}}
+                                        {{cartItem.moduleInfo[0].input_data.num_nights}} {{cartItem.moduleInfo[0].input_data.num_nights>1 ? 'Nights':'Night'}} <br> {{cartItem.moduleInfo[0].input_data.num_rooms}} {{cartItem.moduleInfo[0].input_data.num_rooms
+                                        >1 ? 'Rooms' : 'Room'}}
                                     </div>
                                 </div>
                             </div>
@@ -75,16 +61,10 @@
                                     </ng-container>
                                 </span>
                             </div>
-                           <!--  <div class="cta_btn_wrps">
-                                <a href="javascript:void(0);">
-                                    Delete
-                                </a>
-                            </div> -->
                         </div>
                     </div>
 
-                    <app-booking-traveler [cartItem]="cartItem" [laytrip_cart_id]="laytrip_cart_id"
-                        [isPassportRequired]="false" (laytripCartId)="cancelCartIdRemove($event)">
+                    <app-booking-traveler [cartItem]="cartItem" [laytrip_cart_id]="laytrip_cart_id" [isPassportRequired]="false" (laytripCartId)="cancelCartIdRemove($event)">
                     </app-booking-traveler>
                 </div>
             </div>

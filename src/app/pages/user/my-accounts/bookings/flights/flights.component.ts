@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import { environment } from '../../../../../../environments/environment';
-import * as moment from 'moment';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AccountService } from 'src/app/services/account.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({

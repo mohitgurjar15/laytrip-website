@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, HostListener, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Key } from 'protractor';
 import { CommonFunction } from '../../../_helpers/common-function';
 declare var $: any;
 
@@ -31,7 +30,7 @@ export class GuestInfoComponent implements OnInit {
   totalPerson: number;
   selectedChildAge;
   progressInterval;
-  counterChangeVal=0;
+  counterChangeVal = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -59,9 +58,7 @@ export class GuestInfoComponent implements OnInit {
 
 
     $(document).on("click", ".child_sub_drop", function (e) {
-      // e.stopPropagation();
       $(this).siblings(".child_su_drop_op").show();
-      //$("#child_su_drop_op").css('display', 'flex');
     })
 
   }
@@ -77,9 +74,9 @@ export class GuestInfoComponent implements OnInit {
         typeof event.currentTarget.nextSibling.classList != 'undefined' &&
         event.currentTarget.nextSibling.classList != null &&
         event.currentTarget.nextSibling.classList[1] == 'panel_hide' ||
-        event.target.offsetParent.nextElementSibling && 
-        typeof event.target.offsetParent.nextElementSibling.classList != 'undefined' && 
-        event.target.offsetParent.nextElementSibling.classList != null && 
+        event.target.offsetParent.nextElementSibling &&
+        typeof event.target.offsetParent.nextElementSibling.classList != 'undefined' &&
+        event.target.offsetParent.nextElementSibling.classList != null &&
         event.target.offsetParent.nextElementSibling.classList[1] == 'panel_hide'
 
       ) {
@@ -98,14 +95,14 @@ export class GuestInfoComponent implements OnInit {
 
   toggleDrawer() {
     this.openDrawer = !this.openDrawer;
-    if(this.commonFunction.isRefferal()){
+    if (this.commonFunction.isRefferal()) {
       this.progressInterval = setInterval(() => {
-        if(this.openDrawer){
+        if (this.openDrawer) {
           this.currentChangeCounter.emit(this.counterChangeVal += 1);
         } else {
           clearInterval(this.progressInterval);
         }
-      }, 1000); 
+      }, 1000);
     }
   }
 
@@ -127,34 +124,25 @@ export class GuestInfoComponent implements OnInit {
       this.changeValue.emit(this.roomsGroup);
       this.totalPerson = this.getTotalPerson();
     }
-    /*   if(this.roomsGroup.length > 1){
-        this.roomsGroup.splice(index, 1);
-        this.totalPerson = this.getTotalPerson();
-        this.changeValue.emit(this.roomsGroup);
-      } */
   }
 
   addRemovePerson(item) {
     // FOR ADULT
     if (item && item.type === 'plus' && item.label === 'adult') {
-      // this.roomsGroup[item.id].adults += 1;
       this.roomsGroup.adults += 1;
       this.totalPerson = this.getTotalPerson();
     } else if (item && item.type === 'minus' && item.label === 'adult') {
-      // this.roomsGroup[item.id].adults -= 1;
       this.roomsGroup.adults -= 1;
       this.totalPerson = this.getTotalPerson();
     }
     // FOR CHILD
     if (item && item.type === 'plus' && item.label === 'child') {
-      // this.roomsGroup[item.id].child.push(1);
       this.roomsGroup.child += 1;
       this.roomsGroup.children.push({ type: 'child', is_show: false, age: 0 })
       this.totalPerson = this.getTotalPerson();
     } else if (item && item.type === 'minus' && item.label === 'child') {
       this.roomsGroup.children.pop();
       this.roomsGroup.child -= 1;
-      // this.roomsGroup[item.id].children.pop();
       this.totalPerson = this.getTotalPerson();
     }
     this.changeValue.emit(this.roomsGroup);
@@ -163,16 +151,7 @@ export class GuestInfoComponent implements OnInit {
 
   getTotalPerson() {
     let total = 0;
-/*     for (let data of this.roomsGroup) {
-      total += data.adults + data.child.length;
-      total += data.adults + data.child;
-    }
- */    return this.roomsGroup.adults + this.roomsGroup.child;
-  }
-
-  changeChildAge(age, index) {
-     /*this.roomsGroup.children[index].push(parseInt(age));
-     this.changeValue.emit(this.roomsGroup);*/
+    return this.roomsGroup.adults + this.roomsGroup.child;
   }
 
   toggleChildDropDown(index) {

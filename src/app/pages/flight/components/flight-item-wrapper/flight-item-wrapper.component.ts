@@ -1,19 +1,17 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
 import { FlightService } from '../../../../services/flight.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
-import { getLoginUserInfo, getUserDetails } from '../../../../../app/_helpers/jwt.helper';
+import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
-//import { NgxSpinnerService } from 'ngx-spinner';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
 import { DecimalPipe } from '@angular/common';
 
@@ -34,10 +32,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   cartItems = [];
 
   animationState = 'out';
-  //flightList;
   s3BucketUrl = environment.s3BucketUrl;
   public defaultImage = this.s3BucketUrl + 'assets/images/profile_laytrip.svg';
-  //flightListArray = [];
   currency;
 
   subscriptions: Subscription[] = [];
@@ -60,13 +56,18 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   showFareDetails: number = 0;
   flightUniqueCode;
   isRoundTrip = false;
-
+  noOfDataToShowInitially = 20;
   subcell = '$100';
   isLoggedIn = false;
   userDetails;
   showTotalLayCredit = 0;
   _isLayCredit = false;
   totalLayCredit = 0;
+  flightItems;
+  scrollLoading: boolean = false;
+  dataToLoad = 20;
+  checkedAirUniqueCodes = [];
+
 
   constructor(
     private flightService: FlightService,
@@ -77,7 +78,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     private genericService: GenericService,
     private cartService: CartService,
     private toastr: ToastrService,
-    //private spinner: NgxSpinnerService,
     public modalService: NgbModal,
     private decimalPipe: DecimalPipe
 
@@ -87,7 +87,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-    //this.flightListArray = this.flightDetails;
     this.userInfo = getLoginUserInfo();
 
     if (this.route.snapshot.queryParams['trip'] === 'roundtrip') {
@@ -96,25 +95,76 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       this.isRoundTrip = false;
     }
 
-    //this.totalLaycredit();
     this.checkInstalmentAvalability();
     this.checkUser();
 
     this.cartService.getCartItems.subscribe(cartItems => {
       this.cartItems = cartItems;
     })
-
-    setTimeout(() => { this.loadJquery(); }, 3000)
-
+    this.loadJquery(); 
     this.flightService.getFlights.subscribe(data=>{
       if(data.length){
-        this.flightDetails=data;
+        this.flightItems = data;
+        this.flightDetails = data.slice(0, this.noOfDataToShowInitially);
+        
+        // this.setAirportAvailability();
       }
       else{
         this.flightDetails=[];
       }
     })
 
+  }
+
+  setAirportAvailabilityOld() {
+
+    let requestParams = { revalidateDto: [] };
+    
+    this.flightDetails.forEach(element => {
+      if (!this.checkedAirUniqueCodes.includes(element.unique_code)) {
+        requestParams.revalidateDto.push({
+          route_code: element.route_code,
+          unique_code: element.unique_code
+        })
+        this.checkedAirUniqueCodes.push(element.unique_code);
+      }
+    });
+
+    this.flightService.searchAirportAvailabilityAssure(requestParams).subscribe(data => {
+      let temp;
+      for (let i = 0; i < this.flightDetails.length; i++) {
+        temp = data[this.flightDetails[i].unique_code] ? data[this.flightDetails[i].unique_code] : {};
+        if (Object.keys(temp).length) {
+          this.flightDetails[i].availability = temp.availability;
+        }
+      }
+    });
+  }
+
+  setAirportAvailability() {
+
+    for(let element of this.flightDetails){
+      let requestParams = { revalidateDto: [] };
+      if (!this.checkedAirUniqueCodes.includes(element.unique_code)) {
+        requestParams.revalidateDto.push({
+          route_code: element.route_code,
+          unique_code: element.unique_code
+        })
+        this.checkedAirUniqueCodes.push(element.unique_code);
+      }
+  
+      this.flightService.searchAirportAvailabilityAssure(requestParams).subscribe(data => {
+        let temp;
+        for (let i = 0; i < this.flightDetails.length; i++) {
+          temp = data[this.flightDetails[i].unique_code] ? data[this.flightDetails[i].unique_code] : {};
+          if (Object.keys(temp).length) {
+            this.flightDetails[i].availability = temp.availability;
+          }
+        }
+      });
+    }
+    
+    
   }
 
   loadJquery() {
@@ -132,10 +182,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngDoCheck() {
-    // this.checkUser();
-  }
-
   checkUser() {
     let userToken = getLoginUserInfo();
     this.isLoggedIn = false;
@@ -143,9 +189,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       localStorage.removeItem("_isSubscribeNow");
       this.isLoggedIn = true;
     }
-  }
-
-  opened() {
   }
 
   getBaggageDetails(routeCode) {
@@ -156,33 +199,10 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     });
   }
 
-  getCancellationPolicy(routeCode) {
-
-    // this.loadCancellationPolicy = true;
-    // this.loadMoreCancellationPolicy = false;
-    // this.errorMessage = '';
-    // this.cancellationPolicyArray = [];
-    // this.cancellationPolicy = '';
-    // this.flightService.getCancellationPolicy(routeCode).subscribe((data: any) => {
-    //   this.cancellationPolicyArray = data.cancellation_policy.split('--')
-    //   this.loadCancellationPolicy = false;
-    //   this.cancellationPolicy = data;
-    // }, (err) => {
-    //   this.loadCancellationPolicy = false;
-    //   this.errorMessage = err.message;
-    // });
-  }
 
   toggleCancellationContent() {
     this.loadMoreCancellationPolicy = !this.loadMoreCancellationPolicy;
   }
-
-  /* ngAfterContentChecked() {
-    this.flightListArray = this.flightList;
-    this.flightListArray.forEach(item => {
-      this.flightDetailIdArray.push(item.route_code);
-    });
-  } */
 
   showDetails(index, flag = null) {
     if (typeof this.showFlightDetails[index] === 'undefined') {
@@ -239,7 +259,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         route_code: route.route_code,
         referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
       };
-      //payload.guest_id = !this.isLoggedIn?this.commonFunction.getGuestUser():'';
       this.cartService.addCartItem(payload).subscribe((res: any) => {
         this.changeLoading.emit(true);
         if (res) {
@@ -272,14 +291,11 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
           });
           return;
         }
-        //this.toastr.warning(error.message, 'Warning', { positionClass: 'toast-top-center', easeTime: 1000 });
         this.isFlightNotAvailable = true;
         this.flightUniqueCode = route.unique_code;
-        // this.isFlightNotAvailable.emit(true)
       });
 
     }
-    /* } */
   }
 
   checkInstalmentAvalability() {
@@ -304,13 +320,10 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes.flightDetails",changes)
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
-      //this.flightDetails = changes.flightDetails.currentValue;
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
       this.filteredLabel = changes.filteredLabel.currentValue;
     }
-    // this.flightList = changes.flightDetails.currentValue;
   }
 
   ngOnDestroy(): void {
@@ -330,6 +343,37 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   hideFlightNotAvailable() {
     this.isFlightNotAvailable = false;
     this.flightUniqueCode = '';
+    // let queryParams: any = {};
+    const queryParams : any = {
+      trip: this.route.snapshot.queryParams['trip'],
+      departure: this.route.snapshot.queryParams['departure'],
+      arrival: this.route.snapshot.queryParams['arrival'],     
+      departure_date: this.route.snapshot.queryParams['departure_date'],
+      class: this.route.snapshot.queryParams['class'] ? this.route.snapshot.queryParams['class'] : 'Economy',
+      adult: this.route.snapshot.queryParams['adult'],
+      child: this.route.snapshot.queryParams['child'] ? this.route.snapshot.queryParams['child'] : 0,
+      infant: this.route.snapshot.queryParams['infant'] ? this.route.snapshot.queryParams['infant'] : 0
+    };
+    if (queryParams.trip == 'roundtrip') {
+      queryParams.arrival_date = this.route.snapshot.queryParams['arrival_date'];
+    }
+    if (this.commonFunction.isRefferal()) {
+      let parms = this.commonFunction.getRefferalParms();
+
+      queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+      if (parms.utm_medium) {
+        queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+      }
+      if (parms.utm_campaign) {
+        queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+      }
+    }
+   
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
+    });
+    
+
   }
 
   showDownPayment(offerData,downPaymentOption){
@@ -346,6 +390,26 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   transformDecimal(num) {
     return this.decimalPipe.transform(num, '1.2-2');
+  }
+
+
+  onScrollDown() {
+    this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
+    setTimeout(() => {
+      if (this.noOfDataToShowInitially <= this.flightDetails.length) {
+        
+        let requestParams = { revalidateDto: [] };
+        this.noOfDataToShowInitially += this.dataToLoad;
+        this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+        //Create new req param from i.e. 21 to 40
+        
+        
+        // this.setAirportAvailability()
+        this.scrollLoading = false;
+      } else {
+        this.scrollLoading = false;
+      }
+    }, 1000);
   }
 }
 

@@ -48,10 +48,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     
     window.scroll(0, 0);
+    let payload: any = {};
     sessionStorage.removeItem("__insMode")
     sessionStorage.removeItem("__islt")
     this.renderer.addClass(document.body, 'cms-bgColor');
-    let payload: any = {};
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
       if (params && params.trip === 'roundtrip') {
@@ -78,6 +78,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       }
       this.getFlightSearchData(payload, params.trip);
     });
+
   }
 
   // ngAfterViewInit() {
@@ -91,26 +92,26 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
 
   getFlightSearchData(payload, tripType) {
+    this.filteredLabel = "Price Low to High";
+    this.flightService.setSortFilter({ key: "selling_price", order: "ASC" });
+
     this.loading = this.flexibleLoading = true;
     this.fullPageLoading = true;
     this.tripType = tripType;
     this.errorMessage = '';
     this.flightDetails = [];
     this.dates = [];
-    console.log("payload",payload)
     if (payload && tripType === 'roundtrip') {
       this.flightService.getRoundTripFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
           this.loading = false;
           this.fullPageLoading = false;
           this.isNotFound = false;
-          console.log("this.isNotFound 1",this.isNotFound)
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
           if(this.flightDetails.length == 0){
             this.isNotFound = true;
-            console.log("this.isNotFound 2",this.isNotFound)
-          } 
+          }
           this.flightService.setFlights(this.flightDetails)       
         }
       }, err => {
@@ -120,7 +121,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         }
         else {
           this.isNotFound = true;
-          console.log("this.isNotFound 3",this.isNotFound)
         }
         this.loading = false;
         this.fullPageLoading = false;
@@ -171,6 +171,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
       this.getCalenderPrice(payload);
     }
+    this.filteredLabel = "Price Low to High";
   }  
 
   changeLoading(event) {

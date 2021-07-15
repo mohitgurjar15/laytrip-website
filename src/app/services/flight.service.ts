@@ -35,6 +35,17 @@ export class FlightService {
                 catchError(this.handleError)
             );
     }
+    searchAirportAvailabilityAssure(requestParams) {
+        let headers = {
+            currency: 'USD',
+            language: 'en'
+        }
+
+        return this.http.post(`${environment.apiUrl}v1/flight/availability-assure/`, requestParams, this.commonFunction.setHeaders(headers))
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
 
     searchRoute(searchItem,isFromLocation,alternateLocation=''){
         return this.http.get(`${environment.apiUrl}v1/flight/route/search?search=${searchItem}&is_from_location=${isFromLocation}&alternet_location=${alternateLocation}`)
@@ -123,7 +134,7 @@ export class FlightService {
         }
         const url = environment.apiUrl + `v1/flight/search-oneway-flight`;
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
-            retry(2),
+            retry(1),
             catchError(this.handleError)
         );
         
@@ -168,7 +179,7 @@ export class FlightService {
         }
         const url = environment.apiUrl + `v1/flight/search-roundtrip-flight`;
         return this.http.post(url, data, this.commonFunction.setHeaders(headers)).pipe(
-            retry(2),
+            retry(1),
             catchError(this.handleError)
         );
     }
@@ -212,7 +223,7 @@ export class FlightService {
         );
     }
 
-    setSortFilter(filter){
+    setSortFilter(filter){        
         this.sortFilter.next(filter)
     }
 

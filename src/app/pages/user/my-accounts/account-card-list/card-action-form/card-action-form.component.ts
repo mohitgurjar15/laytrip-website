@@ -78,7 +78,6 @@ export class CardActionFormComponent implements OnInit {
       var tokenField = document.getElementById('payment_method_token');
       tokenField.setAttribute('value', token);
       this.token = token;
-      // this.cardForm.controls.payment_method_token.setValue(token);
       let cardData = {
         card_type: pmData.card_type,
         card_holder_name: pmData.full_name,
@@ -86,11 +85,6 @@ export class CardActionFormComponent implements OnInit {
         card_last_digit: pmData.last_four_digits
       };
       this.saveCard(cardData)
-      //this.submitPaymentForm(cardData);
-      //var masterForm = document.getElementById('payment-form') as HTMLFormElement;
-      //masterForm.submit();
-      // this.saveCard(cardData);
-      // this.cardAddFormElement.nativeElement.submit();
     });
   }
 
@@ -119,13 +113,11 @@ export class CardActionFormComponent implements OnInit {
   saveCard(cardData) {
     this.saveCardLoader = true;
     this.genericService.saveCard(cardData).subscribe((res: any) => {
-      // this.cardForm.reset();
       this.saveCardLoader = false;
       const result = 'SAVE';
       this.activeModal.close(result);
     }, (error => {
       this.saveCardLoader = false;
-      // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
     })
     );
   }

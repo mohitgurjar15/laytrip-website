@@ -61,8 +61,6 @@ export class VacationSearchWidgetComponent implements OnInit {
 
     this.rentalSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
-      // check_in_date: [[Validators.required]],
-      // check_out_date: [[Validators.required]],
     });
 
     this.rentalCheckInMinDate = new Date();
@@ -120,8 +118,6 @@ export class VacationSearchWidgetComponent implements OnInit {
 
   //Date Change
   rentalDateUpdate(date) {
-    //this.rentalForm.check_out_date = new Date(date)
-    //this.rentalCheckoutMinDate = new Date(date)
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();
     };
@@ -205,7 +201,6 @@ export class VacationSearchWidgetComponent implements OnInit {
   changeRentalInfo(event) {
     this.rentalForm.adult_count = event.adult;
     this.rentalForm.child = event.child;
-    //this.rentalForm.number_and_children_ages = event.child_age[0].children;
     this.rentalForm.number_and_children_ages = event.child_age;
     this.totalPerson = event.totalPerson;
   }
@@ -249,10 +244,6 @@ export class VacationSearchWidgetComponent implements OnInit {
     queryParams.display_name = this.rentalForm.display_name;
     queryParams.country = this.rentalForm.country;
     localStorage.setItem('_rental', JSON.stringify(queryParams));
-    // this.router.navigate(['vacation-rental/search'], {
-    //   queryParams: queryParams,
-    //   queryParamsHandling: 'merge'
-    // });
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['vacation-rental/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
     });

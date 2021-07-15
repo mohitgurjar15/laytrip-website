@@ -13,19 +13,12 @@ export class LaytripLoaderComponent implements OnInit {
   @Input() module;
 
   constructor(
-    //private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
     
 
     var lottie_path = '';
-    /* 
-    this.lottieConfig = {
-      path: lottie_path,
-      autoplay: true,
-      loop: true
-    }; */
   }
 
 }

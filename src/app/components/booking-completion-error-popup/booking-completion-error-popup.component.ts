@@ -42,7 +42,7 @@ export class BookingCompletionErrorPopupComponent implements OnInit {
 
   close() {
     this.activeModal.close();
-    if (this.commonFunction.isRefferal()) {
+    /* if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
       var queryParams: any = {};
       queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
@@ -55,7 +55,7 @@ export class BookingCompletionErrorPopupComponent implements OnInit {
       this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
     } else {
       this.router.navigate(['/cart/checkout']);
-    }
+    } */
   }
 
 }

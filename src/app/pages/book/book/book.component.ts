@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonFunction } from 'src/app/_helpers/common-function';
 import { CartService } from '../../../services/cart.service';
-// import { BookService } from 'src/app/services/book.service';
 
 @Component({
   selector: 'app-book',
@@ -20,7 +19,6 @@ export class BookComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    // private bookService: BookService,
     private router: Router,
     private cartService: CartService,
     public commonFunction: CommonFunction,
@@ -73,16 +71,6 @@ export class BookComponent implements OnInit {
           });
     
           let index
-          
-
-          /* for (let item of successItem) {
-            index = this.carts.findIndex(x => x.id == item.cart_id)
-            this.carts.splice(index, 1)
-            this.cartPrices.splice(index, 1)
-          }
-          this.cartService.setCartItems(this.carts);
-          this.cartService.setCartPrices(this.cartPrices) */
-    
           localStorage.setItem('$crt', failedItem.length || 0);
           if (this.commonFunction.isRefferal()) {
             let parms = this.commonFunction.getRefferalParms();
