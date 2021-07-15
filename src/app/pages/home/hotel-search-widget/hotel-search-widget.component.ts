@@ -57,24 +57,18 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     ],
   };
-  progressInterval;
-  
-  selectedGuest =
-    {
-      rooms: 1,
-      adults: 1,
-      child: 0,
-      children: []
-    }
-    ;
+  progressInterval;  
+  selectedGuest = {
+    rooms: 1,
+    adults: 1,
+    child: 0,
+    children: []
+  };
   $dealLocatoin;
 
   showCommingSoon: boolean = false;
-  customStartDateValidation = "2021-06-02";
-  customEndDateValidation = "2021-06-03";
-
   isDatePickerOpen : boolean = false;
-
+  isRefferal = this.commonFunction.isRefferal();
   constructor(
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
@@ -84,15 +78,15 @@ export class HotelSearchWidgetComponent implements OnInit {
     public cd: ChangeDetectorRef
 
   ) {
+
     this.hotelSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
     });
 
-    this.setHotelDate();
-    this.checkOutMinDate = this.checkInDate;
-
+    this.checkInDate = this.checkInMinDate = this.checkOutMinDate= moment().add(2, 'days').toDate(); 
     this.checkOutDate = moment(this.checkInDate).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
+    
     this.searchHotelInfo =
     {
       latitude: null,
@@ -146,7 +140,8 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.homeService.removeToString('hotel');
 
       this.checkInDate = moment(this.route.snapshot.queryParams['check_in']).toDate();
-      this.checkInMinDate = moment().add(31, 'days').toDate();
+      
+      this.checkInMinDate = this.isRefferal ? moment().add(31, 'days').toDate() : moment().add(2, 'days').toDate();
       this.checkOutDate = moment(this.route.snapshot.queryParams['check_out']).isValid() ? moment(this.route.snapshot.queryParams['check_out']).toDate() : moment(this.route.snapshot.queryParams['check_in']).add(1, 'days').toDate();
       
       this.checkOutMinDate = this.checkOutDate;
@@ -207,31 +202,14 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   dealDateValidation() {
-    if (moment(moment(this.customStartDateValidation).subtract(31, 'days')).diff(moment(), 'days') > 0) {
-      this.searchHotelInfo.check_in = this.checkInDate = moment(this.customStartDateValidation).toDate();
+    if (!this.commonFunction.isRefferal()) {
+      this.searchHotelInfo.check_in = this.checkInDate = moment().add(2, 'days').toDate();
     } else {
       this.searchHotelInfo.check_in = this.checkInDate = moment().add(91, 'days').toDate();
     }        
     this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
-  }
-
-  setHotelDate() {
-    var curretdate = moment().format();
-    let customStartDate: any = moment(this.customStartDateValidation).format('YYYY-MM-DD');
-    let daysDiff = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
-
-    if (curretdate < customStartDate && daysDiff > 30) {
-      this.checkInDate = moment(customStartDate).toDate();
-      this.checkInMinDate = this.checkInDate;
-    } else if (daysDiff < 30) {
-      this.checkInDate = moment(curretdate).add(31, 'days').toDate();
-      this.checkInMinDate = this.checkInDate;
-    } else {
-      this.checkInDate = moment(curretdate).add(31, 'days').toDate();
-      this.checkInMinDate = this.checkInDate;
-    }
-  }
+  } 
 
   selectCheckInDateUpdate(date) {
     // this is only for closing date range picker, after selecting both dates
