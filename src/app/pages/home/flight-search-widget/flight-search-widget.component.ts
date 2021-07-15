@@ -42,8 +42,10 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   flightDepartureMinDate;
   flightReturnMinDate;
+  customStartDateValidation = "2021-06-02";
+  customEndDateValidation = "2021-06-09";
   departureDate;
-  returnDate;
+  returnDate: any = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
   totalPerson: number = 1;
   lowMinPrice: number;
   midMinPrice: number;
@@ -122,9 +124,12 @@ export class FlightSearchWidgetComponent implements OnInit {
             }
           }
         })
-    } 
+      } 
 
-   
+    if (new Date(this.customStartDateValidation) <= new Date()) {
+      this.departureDate = moment().add('31', 'days').toDate();
+    }
+
     window.scrollTo(0, 0);
     this.countryCode = this.commonFunction.getUserCountry();
     if (this.calenderPrices.length == 0) {
@@ -149,7 +154,8 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.child = params['child'];
         this.searchFlightInfo.infant = params['infant'];
         this.departureDate = moment(params['departure_date']).toDate();
-       
+        if (moment(this.departureDate).format("YYYY-MM-DD") < this.customStartDateValidation) {
+        } 
         this.currentMonth = moment(this.departureDate).format("MM");
         this.currentYear = moment(this.departureDate).format("YYYY");
         this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
@@ -163,6 +169,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
         let keys: any = toSearchString;        
         localStorage.setItem('__to', keys)
+
         this.fromSearch = airports['NYC'];
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.toSearch = airports[keys];
@@ -170,11 +177,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         if (this.isRoundTrip) {
           this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
           this.searchFlightInfo.arrival = this.toSearch.code;
-        }
-        if (!this.commonFunction.isRefferal()) {
-          this.departureDate = moment().add(2, 'days').toDate();
-          this.rangeDates = [this.departureDate, moment().add(9, 'days').toDate()];          
-        }
+        } 
       }
     });
     //delete BehaviorSubject at the end
@@ -188,15 +191,29 @@ export class FlightSearchWidgetComponent implements OnInit {
       this.isRoundTrip = true;    
     }
   }
-
   setFlightDepartureMinDate() {
-    if (!this.commonFunction.isRefferal()) {
-      this.departureDate = this.flightDepartureMinDate = moment().add(2, 'days').toDate();;    
-      this.returnDate = moment(this.departureDate).add(7, 'days').toDate();      
+
+    let date = new Date();
+
+    var curretdate = moment().format();
+    let juneDate: any = moment(this.customStartDateValidation).format('YYYY-MM-DD');
+
+    let daysDiffFromCurToJune = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
+
+    date.setDate(date.getDate() + 31);
+
+    if (curretdate < juneDate && daysDiffFromCurToJune > 31) {
+      this.flightDepartureMinDate = moment(juneDate).toDate();
+      this.departureDate = this.flightDepartureMinDate;
+    } else if (daysDiffFromCurToJune < 31) {
+      this.flightDepartureMinDate = date;
+      this.departureDate = date;
     } else {
-      this.departureDate = this.flightDepartureMinDate = moment().add(91, 'days').toDate();;    
-      this.returnDate = moment(this.departureDate).add(97, 'days').toDate();      
+      this.departureDate = date;
+      this.flightDepartureMinDate = date;
     }
+    this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
+
   }
 
 
@@ -356,6 +373,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   changeMonth(event) {
 
     var currentDate = new Date();
+    // 1 June validation apply
+    let juneDate: any = moment(this.customStartDateValidation).format('YYYY-MM-DD');
+
     this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
 
     this.route.queryParams.subscribe(params => {
@@ -397,6 +417,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
         var GivenDate = new Date(endDate);
 
+        if (startDate >= juneDate) { //june calendar validation        
           if (GivenDate > currentDate || currentDate < new Date(startDate)) {
             this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
             this.isCalenderPriceLoading = this.calPrices = true;
@@ -410,7 +431,8 @@ export class FlightSearchWidgetComponent implements OnInit {
             });
           } else {
             this.calPrices = this.isCalenderPriceLoading = false;
-          }      
+          }
+        }
       }
     }
   }
@@ -547,7 +569,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.currentChangeCounter.emit(this.counterChangeVal += 1);
 
   }
-  getflightToSearchRoutes(event){   
+  getflightToSearchRoutes(event) {
     this.showToAirportSuggestion = true;
     this.searchedFlightData = event; 
     this.routeSearch = true; 

@@ -102,10 +102,10 @@ export class SearchAirportComponent implements OnInit {
     console.log(this.id)
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
       
-      this.flightSearchRoute.emit(response);
       /* this.flightSearchRoute.emit(response); */
       this.data = response.map(res => {
         if (localStorage.getItem('__from') != res.code) {
+          this.flightSearchRoute.emit(response);
           this.loading = false;
           var searchRoute = {
             id: res.id,
@@ -119,7 +119,9 @@ export class SearchAirportComponent implements OnInit {
 
           return searchRoute;
         } else {
-         
+          console.log(localStorage.getItem('__from'), res.code)
+
+          console.log('here')
         }
       });
     },
