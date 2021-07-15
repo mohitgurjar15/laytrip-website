@@ -45,7 +45,7 @@ export class PaymentModeComponent implements OnInit {
     instalment_type: "weekly",
     checkin_date: '',
     booking_date: moment().format("YYYY-MM-DD"),
-    amount : '0.00',
+    amount : 0.00,
     additional_amount: 0,
     selected_down_payment:0,
     down_payment:0,
@@ -109,7 +109,7 @@ export class PaymentModeComponent implements OnInit {
       }
       if(this.instalmentRequest.checkin_date){
 
-        this.instalmentRequest.amount = this.sellingPrice.toFixed(2);
+        this.instalmentRequest.amount = this.sellingPrice;
         this.totalLaycredit();
         this.getAllInstalment('set-default-down-payment');
         this.calculateInstalment('down-payment',null);

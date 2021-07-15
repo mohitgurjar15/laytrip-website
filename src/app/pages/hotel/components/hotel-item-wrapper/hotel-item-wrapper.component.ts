@@ -71,6 +71,7 @@ export class HotelItemWrapperComponent implements OnInit {
   itenery: string = '';
   location: string = '';
   city_id: string = '';
+  city_name: string = '';
   hotelCount: number = 0;
   previousHotelIndex: number = -1;
   @ViewChildren(NgbCarousel) carousel: QueryList<any>;
@@ -96,6 +97,7 @@ export class HotelItemWrapperComponent implements OnInit {
     this.itenery = this.route.snapshot.queryParams['itenery']
     this.location = this.route.snapshot.queryParams['location']
     this.city_id = this.route.snapshot.queryParams['city_id']
+    this.city_name = this.route.snapshot.queryParams['city_name']
   }
 
   
