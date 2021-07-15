@@ -163,6 +163,9 @@ export class HotelSearchWidgetComponent implements OnInit {
         city_name: this.route.snapshot.queryParams['city_name'],
         hotel_id: this.route.snapshot.queryParams['hotel_id'],
       };
+      if (this.route.snapshot.queryParams['hotel_name']) {
+        this.searchHotelInfo.hotel_name  = this.route.snapshot.queryParams['hotel_name'];
+      }
       if (this.route.snapshot.queryParams['location']) {
         info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['location'])));
         this.searchHotelInfo.location = info;
@@ -277,7 +280,9 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
     queryParams.city_name = this.searchHotelInfo.city.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-')
-;
+    if (this.searchHotelInfo.hotel_name) {
+      queryParams.hotel_name = this.searchHotelInfo.hotel_name;      
+    }
     queryParams.hotel_id = this.searchHotelInfo.type == "hotel" ? parseFloat(this.searchHotelInfo.hotel_id) : '';
     queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
     queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace(/\=+$/, '');

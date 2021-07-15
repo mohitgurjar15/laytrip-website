@@ -314,7 +314,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     this.modalService.open(EmptyCartComponent, {
       centered: true,
       windowClass: 'share_modal',
-      keyboard: false
+      keyboard: false,
+      // backdrop: 'static'
     });
   }
 
