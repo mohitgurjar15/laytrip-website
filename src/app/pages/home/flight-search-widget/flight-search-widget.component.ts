@@ -77,6 +77,8 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   searchedValue = [];
   searchedFlightData = [];
+  isRefferal = this.commonFunction.isRefferal();
+
   constructor(
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
@@ -98,7 +100,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       returnDate: [[Validators.required]]
     });
 
-    this.setFlightDepartureMinDate();
+    this.setFlightWidgetDefaultDate();
 
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
@@ -126,10 +128,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         })
       } 
 
-    if (new Date(this.customStartDateValidation) <= new Date()) {
-      this.departureDate = moment().add('31', 'days').toDate();
-    }
-
+  
     window.scrollTo(0, 0);
     this.countryCode = this.commonFunction.getUserCountry();
     if (this.calenderPrices.length == 0) {
@@ -191,28 +190,13 @@ export class FlightSearchWidgetComponent implements OnInit {
       this.isRoundTrip = true;    
     }
   }
-  setFlightDepartureMinDate() {
 
-    let date = new Date();
+  setFlightWidgetDefaultDate() {
 
-    var curretdate = moment().format();
-    let juneDate: any = moment(this.customStartDateValidation).format('YYYY-MM-DD');
-
-    let daysDiffFromCurToJune = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
-
-    date.setDate(date.getDate() + 31);
-
-    if (curretdate < juneDate && daysDiffFromCurToJune > 31) {
-      this.flightDepartureMinDate = moment(juneDate).toDate();
-      this.departureDate = this.flightDepartureMinDate;
-    } else if (daysDiffFromCurToJune < 31) {
-      this.flightDepartureMinDate = date;
-      this.departureDate = date;
-    } else {
-      this.departureDate = date;
-      this.flightDepartureMinDate = date;
-    }
-    this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
+    this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() :moment().add(2, 'days').toDate();
+    this.departureDate = this.flightDepartureMinDate;
+    
+    this.returnDate = this.isRefferal ? moment(this.departureDate).add(97, 'days').toDate() : moment(this.departureDate).add(9, 'days').toDate();
 
   }
 
