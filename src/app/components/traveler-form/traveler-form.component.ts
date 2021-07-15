@@ -15,6 +15,8 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
 import { getPhoneFormat } from 'src/app/_helpers/phone-masking.helper';
 import { checkValidDate } from 'src/app/_helpers/custom.validators';
+import { TypeScriptEmitter } from '@angular/compiler';
+import { SpreedlyService } from 'src/app/services/spreedly.service';
 
 @Component({
   selector: 'app-traveler-form',
@@ -275,6 +277,8 @@ export class TravelerFormComponent implements OnInit {
 
     this.checkOutService.emitTravelersformData(this.travelerForm);
     //this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
+
+    //this.setupGTMEventHandlers();
   }
 
   loadJquery() {
@@ -685,6 +689,4 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no_length = phoneFormat.length;
     }
   }
-
-
 }
