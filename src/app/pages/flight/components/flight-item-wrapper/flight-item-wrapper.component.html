@@ -1,4 +1,4 @@
-<div class="routing_main_wrps" id="routing_main_wrps" infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollDown()">
+<div class="routing_main_wrps" id="routing_main_wrps" >
   <h3 class="shorting_label" *ngIf="flightDetails.length">{{filteredLabel}}</h3>
   <div class="one_way card_box" *ngFor="let item of flightDetails; let i = index;">
     <div class="card_iinner">
@@ -135,7 +135,7 @@
             <span class="fare_type desk_fare">
               From
             </span>
-            <span class="total_pr d-flex flex-row">
+            <span class="total_pr d-flex flex-row justify-content-center">
               <span
                 *ngIf="item?.offer_data?.applicable === true && item.secondary_start_price > item.discounted_secondary_start_price"
                 class="dashed_price"> ${{item.secondary_start_price | number : '1.2-2'}} </span>
@@ -143,7 +143,7 @@
                 class="big-num">${{item.offer_data.applicable === true ? transformDecimal(item.discounted_secondary_start_price) : transformDecimal(item.secondary_start_price) }}</span>
             </span>
             <span class="fare_type desk_fare">
-              weekly Installments
+              weekly
             </span>
             <span class="cta_btn">
               <!-- <button (click)="bookNow(item)" [ngClass]="{'confirm_availability' : item.availability =='yes','pending_availability' : item.availability =='pending','no_availability' : item.availability =='no'} ">Add to cart</button> -->
