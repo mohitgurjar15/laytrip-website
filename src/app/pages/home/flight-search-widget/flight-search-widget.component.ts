@@ -42,10 +42,8 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   flightDepartureMinDate;
   flightReturnMinDate;
-  customStartDateValidation = "2021-06-02";
-  customEndDateValidation = "2021-06-09";
   departureDate;
-  returnDate: any = new Date(moment(this.customEndDateValidation).format("MM/DD/YYYY"));
+  returnDate;
   totalPerson: number = 1;
   lowMinPrice: number;
   midMinPrice: number;
@@ -100,7 +98,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       returnDate: [[Validators.required]]
     });
 
-    this.setFlightWidgetDefaultDate();
+    this.setDefaultDate();
 
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
@@ -153,8 +151,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.child = params['child'];
         this.searchFlightInfo.infant = params['infant'];
         this.departureDate = moment(params['departure_date']).toDate();
-        if (moment(this.departureDate).format("YYYY-MM-DD") < this.customStartDateValidation) {
-        } 
+        
         this.currentMonth = moment(this.departureDate).format("MM");
         this.currentYear = moment(this.departureDate).format("YYYY");
         this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
@@ -191,7 +188,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
 
-  setFlightWidgetDefaultDate() {
+  setDefaultDate() {
 
     this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() :moment().add(2, 'days').toDate();
     this.departureDate = this.flightDepartureMinDate;
@@ -358,8 +355,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     var currentDate = new Date();
     // 1 June validation apply
-    let juneDate: any = moment(this.customStartDateValidation).format('YYYY-MM-DD');
-
+    
     this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
 
     this.route.queryParams.subscribe(params => {
@@ -399,24 +395,22 @@ export class FlightSearchWidgetComponent implements OnInit {
           end_date: endDate
         }
 
-        var GivenDate = new Date(endDate);
+        var GivenDate = new Date(endDate);       
+        if (GivenDate > currentDate || currentDate < new Date(startDate)) {
+          this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
+          this.isCalenderPriceLoading = this.calPrices = true;
 
-        if (startDate >= juneDate) { //june calendar validation        
-          if (GivenDate > currentDate || currentDate < new Date(startDate)) {
-            this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
-            this.isCalenderPriceLoading = this.calPrices = true;
-
-            this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
-              this.calenderPrices = [...this.calenderPrices, ...res];
-              this.isCalenderPriceLoading = false;
-            }, err => {
-              this.calPrices = false;
-              this.isCalenderPriceLoading = false;
-            });
-          } else {
-            this.calPrices = this.isCalenderPriceLoading = false;
-          }
+          this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
+            this.calenderPrices = [...this.calenderPrices, ...res];
+            this.isCalenderPriceLoading = false;
+          }, err => {
+            this.calPrices = false;
+            this.isCalenderPriceLoading = false;
+          });
+        } else {
+          this.calPrices = this.isCalenderPriceLoading = false;
         }
+        
       }
     }
   }
