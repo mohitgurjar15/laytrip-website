@@ -53,7 +53,9 @@ export class SearchAirportComponent implements OnInit {
 
   onChangeSearch(event) {
     // this.searchRoute(event.term);
-    this.searchAirport(event.term);
+    if (event.term.length > 2) {
+      this.searchAirport(event.term);      
+    }
   }
 
   searchRoute(searchItem) {

@@ -290,7 +290,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
             keyboard: false
           });
           return;
-        }
+        } 
         this.isFlightNotAvailable = true;
         this.flightUniqueCode = route.unique_code;
       });
