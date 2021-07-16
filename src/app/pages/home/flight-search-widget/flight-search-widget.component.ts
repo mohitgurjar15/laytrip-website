@@ -475,6 +475,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   showAirportSuggestion(type) {
     this.showFromAirportSuggestion = false;
     this.showToAirportSuggestion = false;
+    console.log(type)
     if (type == 'from') {
       this.showFromAirportSuggestion = true;
     }
@@ -484,7 +485,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   closeAirportSuggestion(type) {
-
+    console.log(type)
     if (type == 'from') {
       this.showFromAirportSuggestion = false;
     }

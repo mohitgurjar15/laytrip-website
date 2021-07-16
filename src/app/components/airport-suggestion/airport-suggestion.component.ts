@@ -35,9 +35,9 @@ export class AirportSuggestionComponent implements OnInit {
   
   ngOnChanges(changes: SimpleChanges) {
     this.data=[];
-    if(changes['searchedFlightData']){
+    if (changes['searchedFlightData'] && Object.keys(changes['searchedFlightData'].currentValue).length > 0 ) {
       this.loading=this.isType = false;
-    
+      
       let opResult = this.groupByKey(changes['searchedFlightData'].currentValue,'key')
       let airportArray=[];
   
@@ -53,8 +53,9 @@ export class AirportSuggestionComponent implements OnInit {
           airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
         }
       }
-      this.data=airportArray;
-    } 
+      this.data = airportArray;
+      console.log(this.data.length)
+    }
   }
 
   getAirports() {
