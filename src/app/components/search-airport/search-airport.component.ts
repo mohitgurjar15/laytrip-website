@@ -98,7 +98,7 @@ export class SearchAirportComponent implements OnInit {
   }
 
   searchAirport(searchItem) {
-    console.log(this.id)
+    // console.log(this.id)
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
       
       this.flightSearchRoute.emit(response);
