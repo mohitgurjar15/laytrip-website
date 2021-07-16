@@ -14,7 +14,6 @@ import { SpreedlyService } from '../../../services/spreedly.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionExpiredComponent } from '../session-expired/session-expired.component';
-import { clearTimeout } from 'timers';
 declare var $: any;
 
 export interface CartItem {
@@ -762,8 +761,8 @@ export class CheckoutComponent implements OnInit {
 
         if(forms[frmIdx].type >= Types.SavedTraveler) {
           inputs[i].addEventListener("click", e => {
-            const fIdx: number = +inputs[i].getAttribute("tIndex");
-            const travsPerForm: number = inputs.length / this.gtmTravelersCount;
+            //const fIdx: number = +inputs[i].getAttribute("tIndex");
+            //const travsPerForm: number = inputs.length / this.gtmTravelersCount;
             //alert(`Selected saved Traveler #${i % travsPerForm + 1} as Traveler #${Math.floor(i / travsPerForm) + 1}`);
             window['dataLayer'].push({'event': 'personal_info_selected'});
             // Force re-attach of event listeners to re-rendered traveler list
