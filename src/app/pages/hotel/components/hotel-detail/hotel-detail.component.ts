@@ -100,7 +100,7 @@ export class HotelDetailComponent implements OnInit {
           country_name: res.hotel.address.country_name,
           rating: res.hotel.rating,
           review_rating: res.hotel.review_rating,
-          description: res.hotel.description,
+          description: this.formatLongText(res.hotel.description),
           amenities: res.hotel.amenities,
           hotelLocations: res.hotel.geocodes,
           latitude : parseFloat(res.hotel.geocodes.latitude),
@@ -126,7 +126,42 @@ export class HotelDetailComponent implements OnInit {
     }, error => {
       this.loading = false;
       this.isNotFound=true;  
-    });
+    });    
+  }
+
+  // Author: xavier | 2021/6/24 @ 4:23pm
+  // Description: Toggle description expand/collapse
+  toggleDesc() {
+    let el = $("#hotel_desc");
+    if(el.data("isExpanded")) {
+      el.toggleClass('desc_exp desc_col', 450);
+      el.data("isExpanded", 0);
+    } else {
+      el.toggleClass('desc_col desc_exp', 450);
+      $(".read_more").animate({opacity: "0"}, 450);
+      el.data("isExpanded", 1);
+    }
+  }
+
+  // Author: xavier | 2021/6/23 @ 2:30pm
+  // Description: Break long text into paragraphs.
+  //              Takes into account empty text and text without periods.
+  formatLongText(data: any) {
+    const maxLength = 150;
+    const text: string = data == null ? "" : data; // null-coalescing operator not yet supported
+    const tokens: string[] = text.split(".");
+    let result: string = "";
+    let offset: number = 0;
+
+    for(let i: number = 0; i < tokens.length; i++) {
+      if((result.length - offset) >= maxLength) {
+        result += "<br><br>";
+        offset = result.length;
+      }
+      if(tokens[i].length > 0) result += `${tokens[i]}.`;
+    }
+
+    return result;
   }
 
   counter(i: any) {
