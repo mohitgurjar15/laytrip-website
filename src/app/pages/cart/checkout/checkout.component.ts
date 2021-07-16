@@ -802,7 +802,7 @@ export class CheckoutComponent implements OnInit {
 
               if(forms[fIdx].state == States.New) { // User started filling form
                 //alert(`Started Filling ${forms[fIdx].type == Types.Traveler ? `Traveller #${fIdx + 1}` : "Credit Card"}`);
-                window['dataLayer'].push({'event': 'personal_info_started'});
+                window['dataLayer'].push({'event': forms[fIdx].type == Types.Traveler ? 'personal_info_started' : 'cc_info_started'});
                 forms[fIdx].state = States.Started;
               } else {
                 let isFinished: boolean = true;
@@ -816,7 +816,7 @@ export class CheckoutComponent implements OnInit {
                 if(isFinished && forms[fIdx].state == States.Started) { // User finished filling form
                   forms[fIdx].state = States.Finished;
                   //alert(`Finished Filling ${forms[fIdx].type == Types.Traveler ? `Traveller #${fIdx + 1}` : "Credit Card"}`);
-                  window['dataLayer'].push({'event': 'personal_info_finished'});
+                  window['dataLayer'].push({'event': forms[fIdx].type == Types.Traveler ? 'personal_info_finished' : 'cc_info_finished'});
                 } else {
                   forms[fIdx].state = States.Started;
                   //alert(`Editing ${forms[fIdx].type == Types.Traveler ? `Traveller #${fIdx + 1}` : "Credit Card"}`);
