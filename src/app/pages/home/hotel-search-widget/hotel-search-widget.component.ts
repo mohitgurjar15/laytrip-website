@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../../services/home.service';
+import { BsDaterangepickerInlineConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -311,6 +312,8 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
   
   datepickerShow(){
+    //this.refreshHighlights();
+
     this.isDatePickerOpen = true;  
     if(this.commonFunction.isRefferal()){
       this.progressInterval = setInterval(() => {
@@ -327,4 +330,77 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.isDatePickerOpen = false;
   }
 
+  // Author: xavier | 2021/6/28 @ 8:45pm
+  // Description: Preliminary support to color-code dates on calendar
+  // refreshHighlights() {
+  //   const red =     "#FF6961";
+  //   const yellow =  "#D7D75F";
+  //   const green =   "#77DD77";
+  //   const alpha =   "80";
+  //   const highlighDateRanges: {from: Date, to: Date, color: string}[] = [
+  //     {from: new Date(2021, 8-1,  3), to: new Date(2021, 8-1, 11), color: `${red}${alpha}`},
+  //     {from: new Date(2021, 8-1, 12), to: new Date(2021, 8-1, 15), color: `${yellow}${alpha}`},
+  //     {from: new Date(2021, 8-1, 16), to: new Date(2021, 8-1, 19), color: `${green}${alpha}`}
+  //   ];
+
+  //   // ==================
+
+  //   // Convert month name to month number
+  //   const stringToMonth = (mon: string): number => {
+  //     const d = Date.parse(mon + "1, 2012");
+  //     if(!isNaN(d)) return new Date(d).getMonth();
+  //     return -1;
+  //   }
+
+  //   // Create a list of all visible calendars (numberOfMonths)
+  //   const ym: HTMLDivElement[] = $("div.p-datepicker-title");
+  //   const cals: {year: number, month: number}[] = [];
+  //   for(let i = 0; i < ym.length; i++) {
+  //     cals.push({year: Number(ym[i].innerText.slice(-4)),
+  //                month: stringToMonth(ym[i].innerText.slice(0, -4))
+  //               });
+  //   }
+
+  //   // Refresh the highlist (call this same function) whenever
+  //   // the user moves backwards or forwards in the calendar
+  //   const btns: HTMLButtonElement[] = $(".p-datepicker-header").find("button");
+  //   for(let i = 0; i < btns.length; i++) {
+  //     btns[i].removeEventListener("click",  e => this.refreshHighlights());
+  //     btns[i].addEventListener("click",  e => this.refreshHighlights());
+  //   }
+
+  //   // Create a list of every single day in the calendar(s)
+  //   const days: HTMLSpanElement[] = $(".p-datepicker-calendar").find("span");
+
+  //   // Cycle through all the days in the calendar and see if they appear
+  //   // inside one of the ranges defined highlighDateRanges array
+  //   let calIndex: number = 0;
+  //   let isFirst: boolean = true;
+  //   for(let i: number = 0; i < days.length; i++) {
+  //     // Find start of first month
+  //     if(Number(days[i].innerText) == 1) {
+  //       for(let j: number = i; j < days.length; j++) {
+  //         if(Number(days[j].innerText) == 1) {
+  //           if(isFirst)
+  //             isFirst = false;
+  //           else
+  //             if(++calIndex >= 2) return;
+  //         }
+
+  //         const testDate: Date = new Date(cals[calIndex].year, 
+  //                                         cals[calIndex].month, 
+  //                                         Number(`${days[j].innerText}`));
+  //         highlighDateRanges.forEach(d => {
+  //           if((testDate >= d.from) && (testDate <= d.to)) {
+  //             days[j].setAttribute("style",
+  //               "border-radius: 8px ! important;" + 
+  //               "color: black;" + 
+  //               "background-color: " + d.color
+  //             );
+  //           }
+  //         });
+  //       }
+  //     }
+  //   }
+  // }
 }

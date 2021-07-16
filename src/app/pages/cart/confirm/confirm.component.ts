@@ -69,9 +69,7 @@ export class ConfirmComponent implements OnInit {
       }
     }, error => {
       this.loading = false;
-    })
-
-    
+    })    
   }
 
   feedbackValueChange(event) {
@@ -87,5 +85,12 @@ export class ConfirmComponent implements OnInit {
     }).result.then((result) => {
 
     });
+  }
+
+  // Author: xavier | 2021/7/13
+  // Description: Report total purchase amount back to GTM
+  ngAfterViewInit() {
+    //alert(this.cartDetails.totalAmount);
+    window['dataLayer'].push({'event': this.cartDetails.totalAmount});
   }
 }

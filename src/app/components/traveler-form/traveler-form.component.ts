@@ -679,6 +679,4 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no_length = phoneFormat.length;
     }
   }
-
-
 }

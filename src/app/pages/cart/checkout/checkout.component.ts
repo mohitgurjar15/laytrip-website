@@ -752,4 +752,118 @@ export class CheckoutComponent implements OnInit {
   //     console.log('no')
   //   }
   // }
+
+  // Author: xavier | 2021/7/12
+  // Description: Monitor activity while the user fills out the forms and report activity back to GTM
+  ngAfterViewInit() {
+    this.setupGTMEventHandlers();
+  }
+
+  gtmTravelersCount: number = 0;
+  setupGTMEventHandlers() {
+    enum States { // Forms states
+      New = 0,
+      Started = 1,
+      Finished = 2
+    }
+
+    enum Types { // Forms types (traveler applies to both hoteles and flights)
+      Traveler = 0,
+      CreditCard = 1,
+      SavedTraveler = 2,
+      SavedCreditcard = 3
+    }
+
+    // Attach an event handler to each text field
+    const setupHandlers = (frmIdx: number): void => {
+      const inputs: HTMLElement[] = forms[frmIdx].inputs;
+      for(let i: number = 0; i < inputs.length; i++) {
+        if(inputs[i].getAttribute("tIndex") == frmIdx.toString()) continue;
+        inputs[i].setAttribute("tIndex", frmIdx.toString());
+
+        if(forms[frmIdx].type >= Types.SavedTraveler) {
+          inputs[i].addEventListener("click", e => {
+            //const fIdx: number = +inputs[i].getAttribute("tIndex");
+            //const travsPerForm: number = inputs.length / this.gtmTravelersCount;
+            //alert(`Selected saved Traveler #${i % travsPerForm + 1} as Traveler #${Math.floor(i / travsPerForm) + 1}`);
+            window['dataLayer'].push({'event': 'personal_info_selected'});
+            // Force re-attach of event listeners to re-rendered traveler list
+            inputs[i].removeAttribute("tIndex");
+            this.setupGTMEventHandlers();
+          });
+        } else {
+          inputs[i].addEventListener("focusout", e => {
+            const fIdx: number = +inputs[i].getAttribute("tIndex");
+            const lastValue: string = inputs[i].getAttribute("lastValue");
+            const value: string = forms[fIdx].type <= Types.CreditCard ? (inputs[i] as HTMLInputElement).value : "n/a";
+
+            if(value != "" && lastValue != value) { // Prevent re-triggering when the value hasn't changed
+              inputs[i].setAttribute("lastValue", value);
+
+              if(forms[fIdx].state == States.New) { // User started filling form
+                //alert(`Started Filling ${forms[fIdx].type == Types.Traveler ? `Traveller #${fIdx + 1}` : "Credit Card"}`);
+                window['dataLayer'].push({'event': 'personal_info_started'});
+                forms[fIdx].state = States.Started;
+              } else {
+                let isFinished: boolean = true;
+                for(let j: number = 0; j < forms[fIdx].inputs.length; j++) {
+                  if((forms[fIdx].inputs[j] as HTMLInputElement).value == "") {
+                    isFinished = false;
+                    break;
+                  }
+                }
+
+                if(isFinished && forms[fIdx].state == States.Started) { // User finished filling form
+                  forms[fIdx].state = States.Finished;
+                  //alert(`Finished Filling ${forms[fIdx].type == Types.Traveler ? `Traveller #${fIdx + 1}` : "Credit Card"}`);
+                  window['dataLayer'].push({'event': 'personal_info_finished'});
+                } else {
+                  forms[fIdx].state = States.Started;
+                  //alert(`Editing ${forms[fIdx].type == Types.Traveler ? `Traveller #${fIdx + 1}` : "Credit Card"}`);
+                }
+              }
+            }
+          });
+        }
+      }
+    }
+
+    let x: number = 0;
+    let y: number = 0;
+    let forms: { type: Types, state: States, inputs: HTMLElement[] }[] = [];
+
+    // Scan all fields from all possible travelers' forms
+    for(let y = 0; y < 10; y++) { // Cart items
+      for(let x = 0; x < 10; x++) { // Travelers forms
+        const el: any = $(`#adult_collapse${y}${x}`);
+        if(el.length == 0) break;
+
+        forms.push({ type: Types.Traveler, state: States.New, inputs: el.find(":text, input[type=email]").not('[role="combobox"]') });
+        setupHandlers(forms.length - 1);
+      }
+    }
+    this.gtmTravelersCount = forms.length;
+
+    if(forms.length == 0) { // Page is still loading components
+      setTimeout(() => this.setupGTMEventHandlers(), 500);
+      return;
+    }
+
+    // Add fields from the Credit Card fields
+    forms.push({ type: Types.CreditCard, state: States.New, inputs: [$('#full_name')[0], $('#month-year')[0]] as HTMLInputElement[] });
+    setupHandlers(forms.length - 1);
+
+    // Add saved travelers
+    const savedTravelers: HTMLLIElement[] = $('ul[class*="dropdown-menu options_name"]').find("li");
+    if(savedTravelers.length > 0) {
+      forms.push({ type: Types.SavedTraveler, state: States.New, inputs: savedTravelers });
+      setupHandlers(forms.length - 1);
+    }
+
+    // Reattach events when switching items inside cart
+    const scTabs: HTMLAnchorElement[] = $('.booking_tab_header').find('a');
+    for(let i = 0; i < scTabs.length - 1; i++) {
+      scTabs[i].addEventListener("click", e => this.setupGTMEventHandlers());
+    }
+  }
 }
