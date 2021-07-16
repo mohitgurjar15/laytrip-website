@@ -14,16 +14,16 @@ import { ToastrModule } from 'ngx-toastr';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { AppleLoginProvider } from './pages/user/social-login/apple.provider';
 import { AuthGuard } from './guard/auth.guard';
-import { PreloadingService } from './preloading.service';
+import { PreloadingService } from './services/preloading.service';
+import { ActivatedRoute } from '@angular/router';
 
-/* export function jokesProviderFactory(provider: PreloadingService) {
-  return () => provider.load();
-} */
-export function jokesProviderFactory(catService: PreloadingService) {
-  return (): Promise<any> => {
-    return catService.load();
+
+/* export function preloadProvider(preLoadService: PreloadingService) {
+   return (): Promise<any> => {
+    
+    return preLoadService.load();
   }
-}
+} */
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,11 +66,12 @@ export function jokesProviderFactory(catService: PreloadingService) {
     },
     AuthGuard,
     PreloadingService,
-    { 
+    /* { 
       provide: APP_INITIALIZER, 
-      useFactory: jokesProviderFactory,
-      deps: [PreloadingService], multi: true
-    } 
+      useFactory: preloadProvider,
+      deps: [PreloadingService],
+      multi: true
+    }  */
   ],
   bootstrap: [AppComponent]
 })

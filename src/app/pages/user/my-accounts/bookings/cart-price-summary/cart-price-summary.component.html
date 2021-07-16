@@ -1,4 +1,4 @@
-<div class="price_listing_wrpper"  *ngIf="(cartItem | json) != '[]'">
+<div class="price_listing_wrpper" *ngIf="(cartItem | json) != '[]'">
     <div class="total_p_wrp bb">
         <div class="left_sec">
             Total Purchases
@@ -23,30 +23,6 @@
             <span class="fake_paid_markss">
             </span>
         </div>
-        <!-- <div class="line_desc">
-            <div class="left_sec">
-                Add-on Baggage
-            </div>
-            <div class="right_sec">
-                $180
-            </div>
-        </div>
-        <div class="line_desc">
-            <div class="left_sec">
-                Add-on Baggage
-            </div>
-            <div class="right_sec">
-                $180
-            </div>
-        </div> 
-        <div class="total_p_wrp">
-            <div class="left_sec">
-                Downpayment
-            </div>
-            <div class="right_sec">
-                ${{cartItem.cartInstallments[0]?.amount}}
-            </div>
-        </div>-->
         <div class="listing_accordion">
             <div id="accordion_listing">
                 <div class="card">
@@ -55,39 +31,21 @@
                             {{cartItem?.cartInstallments?.length -1 }} {{installmentType[cartItem.installmentType]}} Installments of ${{cartItem?.cartInstallments[1]?.amount | number : '1.2-2'}}
                         </a>
                     </div>
-                    <div id="listing_descrip" class="collapse show"Paid data-parent="#accordion_listing">
+                    <div id="listing_descrip" class="collapse show" Paid data-parent="#accordion_listing">
                         <div class="card-body">
                             <ng-container *ngFor="let installment of cartItem.cartInstallments | slice:1;let i = index ;">
                                 <div class="line_desc paid_clr" [ngClass]="{'paid_clr' : (installment.instalmentStatus), 'due_clr' : (  installment.dueInstallment && !installment.instalmentStatus),'' : (  !installment.dueInstallment && !installment.instalmentStatus) }">
                                     <div class="left_sec">
-                                       #{{i+1}} {{ installment.instalmentStatus ? 'Paid' : 'Due'}}  {{commonFunction.convertCustomDateFormat(installment.instalmentDate,'YYYY-MM-DD','MMM D, YYYY')}} 
+                                        #{{i+1}} {{ installment.instalmentStatus ? 'Paid' : 'Due'}} {{commonFunction.convertCustomDateFormat(installment.instalmentDate,'YYYY-MM-DD','MMM D, YYYY')}}
                                     </div>
                                     <div class="right_sec">
-                                        ${{ installment.amount  | number : '1.2-2' }}
+                                        ${{ installment.amount | number : '1.2-2' }}
                                     </div>
                                     <span class="paid_markss">
                                         <i class="fa fa-check-circle-o" aria-hidden="true" *ngIf="installment.instalmentStatus"></i>
                                     </span>
                                 </div>
                             </ng-container>
-                            <!-- <div class="line_desc due_clr">
-                                <div class="left_sec">
-                                    Add-on Baggage
-                                </div>
-                                <div class="right_sec">
-                                    $180
-                                </div>
-                                <span class="paid_markss"></span>
-                            </div>
-                            <div class="line_desc">
-                                <div class="left_sec">
-                                    Add-on Baggage
-                                </div>
-                                <div class="right_sec">
-                                    $180
-                                </div>
-                                <span class="paid_markss"></span>
-                            </div> -->
                             <div class="total_p_wrp">
                                 <div class="left_sec">
                                     Total Installments

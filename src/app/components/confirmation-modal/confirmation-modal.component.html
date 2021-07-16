@@ -1,36 +1,19 @@
-<!-- <div class="modal-header justify-content-center border-0" *ngIf="options.title">
-  <h4 class="modal-title">{{options.title}}</h4>
-</div>
-<div class="modal-body mt-3">
-  <div class="row" *ngIf="options.message">
-    <div class="col col-md-12 justify-content-center d-flex">
-      <i class="fa fa-exclamation-circle pr-4 pt-1 fa-2x"></i>
-      <h5>{{ options.message }}</h5>
-    </div>
-  </div>
-</div>
-<div class="modal-footer border-0 justify-content-center mb-3">
-  <button type="button" class="btn btn-outline-secondary" (click)="cancel()">Cancel</button>
-  <button type="button" class="btn mr-4" [ngClass]="options.type === 'DELETE' ? 'btn-danger' : 'btn-success'"
-    (click)="changeStatus(options.type)">{{ options.button_text }}</button>
-</div> -->
-
 <div class="modal-header">
-  <div class="block_title">
-    <h4>{{data.header}}</h4>
-  </div>
-  <button type="button" class="close" (click)="close()">
+    <div class="block_title">
+        <h4>{{data.header}}</h4>
+    </div>
+    <button type="button" class="close" (click)="close()">
     <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
   </button>
 </div>
 <div class="modal-body">
-  <div class="modal_btm">
-    <p>{{data.message}}</p>
-  </div>
+    <div class="modal_btm">
+        <p>{{data.message}}</p>
+    </div>
 </div>
 <div class="modal-footer">
-  <div class="form_btn">
-    <button type="button" class="btn_no" (click)="close()">No</button>
-    <button type="button" (click)="okClick()">Yes</button>
-  </div>
+    <div class="form_btn">
+        <button type="button" class="btn_no" (click)="close()">No</button>
+        <button type="button" (click)="okClick()">Yes</button>
+    </div>
 </div>

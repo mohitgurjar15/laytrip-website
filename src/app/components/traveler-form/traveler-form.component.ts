@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, SimpleChanges, ChangeDetectorRef, ElementRef, ViewChild, ViewChildren } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from '@angular/forms';
+import { Component, OnInit, Input, SimpleChanges, ChangeDetectorRef} from '@angular/core';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
@@ -196,7 +196,7 @@ export class TravelerFormComponent implements OnInit {
       for (let i = 0; i < this.cartItem.module_info.adult_count; i++) {
         this.travelers[`type${this.cartNumber}`].cartId = this.cartId
         this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.flight.adult));
-        // this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
+         this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
         if (!this.cartItem.module_info.is_passport_required) {
           delete this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry;
           delete this.travelers[`type${this.cartNumber}`].adults[i].passport_number;
@@ -232,7 +232,7 @@ export class TravelerFormComponent implements OnInit {
       for (let i = 0; i < this.cartItem.module_info.input_data.num_rooms; i++) {
         this.travelers[`type${this.cartNumber}`].cartId = this.cartId
         this.travelers[`type${this.cartNumber}`].adults.push(Object.assign({}, travelersFileds.hotel.adult));
-        // this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
+        this.travelers[`type${this.cartNumber}`].adults[i].email=(this.accountHolderEmail && i==0)?this.accountHolderEmail:'';
         if (i != 0) {
           this.travelers[`type${this.cartNumber}`].adults[i].is_email_required = false;
           this.travelers[`type${this.cartNumber}`].adults[i].is_phone_required = false;
@@ -249,12 +249,12 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
       this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
       this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
-      this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender;
+      this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender || '';
       this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
-      this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode;
-      this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo;
+      this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode || '';
+      this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo || '';
       this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
-      this.travelers[`type${this.cartNumber}`].adults[i].dob = moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY');
+      this.travelers[`type${this.cartNumber}`].adults[i].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY'):'';
       if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
         this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
         this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry && traveler.passportExpiry != 'Invalid date' ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
@@ -274,9 +274,6 @@ export class TravelerFormComponent implements OnInit {
     })
 
     this.checkOutService.emitTravelersformData(this.travelerForm);
-    //this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
-
-    //this.setupGTMEventHandlers();
   }
 
   loadJquery() {
@@ -325,7 +322,6 @@ export class TravelerFormComponent implements OnInit {
 
   patch() {
     for (let i = 0; i < Object.keys(this.travelers).length; i++) {
-      //this.travelerForm.controls[`type${i}`]['controls'].cartId.setValue(this.travelers[`type${i}`].cartId);
       let control: any = <FormArray>this.travelerForm.get(`type${i}.adults`);
       control.controls = [];
       this.travelers[`type${i}`].adults.forEach((x, i) => {
@@ -480,6 +476,9 @@ export class TravelerFormComponent implements OnInit {
         data.module_id = 3;
         delete data.country_id;
         delete data.dob;
+        delete data.gender;
+        delete data.passport_number;
+        delete data.passport_expiry;
       }
       else {
         data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
@@ -500,9 +499,7 @@ export class TravelerFormComponent implements OnInit {
           this.cartService.setLoaderStatus(false);
           let index = this.myTravelers.findIndex(x => x.userId == traveler.userId)
           this.myTravelers[index] = traveler;
-          //this.checkOutService.setTravelers([this.myTravelers]);
           this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAsUntouched();
-          this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
         })
       }
       else {
@@ -539,7 +536,6 @@ export class TravelerFormComponent implements OnInit {
             this.checkOutService.setTravelers([...this.myTravelers, traveler]);
             this.patch();
             this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAsUntouched();
-            this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
           }
         }, error => {
           this.cartService.setLoaderStatus(false)
@@ -552,7 +548,6 @@ export class TravelerFormComponent implements OnInit {
 
   deleteTraveler(cartNumber, traveler_number) {
 
-    //let traveler = { traveler_number: traveler_number };
     this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = "";
     this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = "";
     if (this.accountHolderEmail == '' || traveler_number != 0) {
@@ -603,7 +598,6 @@ export class TravelerFormComponent implements OnInit {
   selectTraveler(travlerId, traveler_number, cartNumber) {
     let traveler = this.myTravelers.find(x => x.userId == travlerId)
     if (traveler && Object.keys(traveler).length > 0) {
-      //this.travelers[`type${cartNumber}`].adults[traveler_number].module = traveler.module;
       this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
       this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
       this.travelers[`type${cartNumber}`].adults[traveler_number].email = (this.accountHolderEmail && traveler_number == 0) ? this.accountHolderEmail : traveler.email;
@@ -630,10 +624,8 @@ export class TravelerFormComponent implements OnInit {
       }
       //return false;
       this.patch();
-      //this.setPhoneNumberFormat(this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code,cartNumber,traveler_number)
     }
 
-    this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
     this.checkOutService.emitTravelersformData(this.travelerForm);
     this.cd.detectChanges();
   }

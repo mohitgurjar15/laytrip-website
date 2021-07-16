@@ -1,57 +1,30 @@
 <app-laytrip-loader [loading]="fullPageLoading" [module]="'flight'">
 </app-laytrip-loader>
-<!-- <div class="page_topbanner">
-    <img src="{{s3BucketUrl}}assets/images/cms_page_banner.png" alt="Banner Image">
-</div> -->
 <div class="listing_main_box">
     <div class="search_tab_listing_wrapper">
         <div class="container">
             <div class="search_tab_icons_wrps">
                 <a class="active tab_anch">
-                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_pink.svg"
-                        alt="Flight Icon" />
-                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg"
-                        alt="Flight Icon" />
+                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_pink.svg" alt="Flight Icon" />
+                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" alt="Flight Icon" />
                 </a>
-                <a class="tab_anch hover-link" [routerLink]="['/']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
-                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg"
-                        alt="Hotel Icon" />
-                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg"
-                        alt="Hotel Icon" />
+                <a class="tab_anch hover-link" [routerLink]="['/']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
+                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg" alt="Hotel Icon" />
+                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
                 </a>
-                <!-- <a class="tab_anch" style="pointer-events: none;" *ngIf="!commonFunction.isRefferal()">
-                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_blue.svg"
-                        alt="Accommodation Icon" />
-                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/house_d_gray.svg"
-                        alt="Accommodation Icon" />
-                </a>
-                <a class="tab_anch" style="pointer-events: none;" *ngIf="!commonFunction.isRefferal()">
-                    <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_blue.svg"
-                        alt="car Icon" />
-                    <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/car_d_gray.svg"
-                        alt="car Icon" />
-                </a> -->
             </div>
             <div class="searchbar_box_common">
                 <div class="section_description" *ngIf="isCartFull">
                     <span class="sec_text">10 items cart maximum, please Checkout and start another Cart if you require
                         more than 10.</span>
-                    <a (click)="hideMaxCartValidation()" href="javascript:void(0);"><img
-                            src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
+                    <a (click)="hideMaxCartValidation()" href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                 </div>
-                <!--   <div class="section_description" *ngIf="isFlightAvaibale">
-                    <span class="sec_text">This flight is no longer available.</span>
-                    <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img
-                            src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
-                </div> -->
-
                 <app-flight-search-widget [calenderPrices]="calenderPrices"></app-flight-search-widget>
             </div>
         </div>
     </div>
 
     <app-flight-loader *ngIf="loading"></app-flight-loader>
-    <!-- <app-popup-loader *ngIf="loading"></app-popup-loader> -->
 
     <app-flight-not-found *ngIf="isNotFound"></app-flight-not-found>
     <app-flight-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-flight-error>
@@ -62,78 +35,45 @@
                 <div class="col-lg-3 left_m">
                     <div class="filter_saidbar">
                         <div class="filter_by desktop_ver">
-                            <!-- <div class="block_inn">
-                            <h4>{{'filter_by' | translate}}</h4>
-                            <a class="anchor_link" (click)="resetFilter()">{{'reset' | translate}}</a>
-                        </div> -->
-                            <app-filter-flight [filterFlightDetails]="filterFlightDetails"
-                                (filterFlight)="filterFlight($event)" isResetFilter={{isResetFilter}}>
+                            <app-filter-flight [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)" isResetFilter={{isResetFilter}}>
                             </app-filter-flight>
                         </div>
                         <!-- For responsive -->
                         <div class="filter_responsive flight" id="responsive_filter">
                             <div class="btn_filter">
-                                <!-- <a href="javascript:void(0)" class="responsive_filter_btn">Filters</a> -->
-                                <a data-toggle="modal" data-target="#filter_mob_modal1"
-                                    class="responsive_filter_btn">Filters</a>
+                                <a data-toggle="modal" data-target="#filter_mob_modal1" class="responsive_filter_btn">Filters</a>
                             </div>
                         </div>
-                        <section class="modal fade comman_modal mobile_modals" id="filter_mob_modal1"
-                            data-backdrop="static" data-keyboard="false">
+                        <section class="modal fade comman_modal mobile_modals" id="filter_mob_modal1" data-backdrop="static" data-keyboard="false">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content mobile_content_bar">
                                     <div class="filter_cnt">
                                         <div class="filter_saidbar">
                                             <div class="filter_by">
-                                                <app-filter-flight [filterFlightDetails]="filterFlightDetails"
-                                                    (filterFlight)="filterFlight($event)"></app-filter-flight>
+                                                <app-filter-flight [filterFlightDetails]="filterFlightDetails" (filterFlight)="filterFlight($event)"></app-filter-flight>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        <!-- <div id="responsive_filter_show" class="responsive_filter_show"
-                            *ngIf="!loading && !isNotFound && errorMessage==''">
-                            <div class="filter_popup">
-                                <div class="filter_head_popup">
-                                    <div class="filter_close">
-                                        <a href="javascript:void(0)">
-                                            <img src="{{s3BucketUrl}}assets/images/icon/arrow_up_dropdown.svg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="filter_cnt">
-                                    <div class="filter_saidbar">
-                                        <div class="filter_by">
-                                            <app-filter-flight [filterFlightDetails]="filterFlightDetails"
-                                                (filterFlight)="filterFlight($event)"></app-filter-flight>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="desk_versort">
                             <app-sort-flight (sortFlight)="sortFlight($event)" [flightDetails]="flightDetails">
                             </app-sort-flight>
                         </div>
                         <div class="sortby_responsive flight" id="responsive_filter">
                             <div class="btn_sort">
-                                <!-- <a href="javascript:void(0)" class="responsive_sort_btn">Sort By
-                                </a> -->
                                 <a data-toggle="modal" data-target="#filter_mob_modal2" class="responsive_sort_btn">Sort
                                     By</a>
                             </div>
                         </div>
-                        <section class="modal fade comman_modal mobile_modals" id="filter_mob_modal2"
-                            data-backdrop="static" data-keyboard="false">
+                        <section class="modal fade comman_modal mobile_modals" id="filter_mob_modal2" data-backdrop="static" data-keyboard="false">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content mobile_content_bar">
                                     <div class="filter_cnt">
                                         <div class="filter_saidbar">
                                             <div class="filter_by">
-                                                <app-sort-flight (sortFlight)="sortFlight($event)"
-                                                    [flightDetails]="flightDetails">
+                                                <app-sort-flight (sortFlight)="sortFlight($event)" [flightDetails]="flightDetails">
                                                 </app-sort-flight>
                                             </div>
                                         </div>
@@ -141,37 +81,13 @@
                                 </div>
                             </div>
                         </section>
-                        <!-- <div id="responsive_sortby_show" class="responsive_sortby_show"
-                            *ngIf="!loading && !isNotFound && errorMessage==''">
-                            <div class="filter_popup">
-                                <div class="filter_head_popup">
-                                    <div class="filter_close">
-                                        <a href="javascript:void(0)">
-                                            <img src="{{s3BucketUrl}}assets/images/icon/arrow_up_dropdown.svg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="filter_cnt">
-                                    <div class="filter_saidbar">
-                                        <div class="filter_by">
-                                            <app-sort-flight (sortFlight)="sortFlight($event)"
-                                                [flightDetails]="flightDetails">
-                                            </app-sort-flight>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
 
                 </div>
                 <div class="col-lg-9">
-                    <app-flight-price-slider  [dates]="dates" *ngIf="flightDetails.length > 0"
-                        [flexibleLoading]="flexibleLoading">
+                    <app-flight-price-slider [dates]="dates" *ngIf="flightDetails.length > 0" [flexibleLoading]="flexibleLoading">
                     </app-flight-price-slider>
-                    <app-flight-item-wrapper (maxCartValidation)="maxCartValidation($event)"
-                        (removeFlight)="removeNotAvailabeflight($event)" [flightDetails]="flightDetails"
-                        (changeLoading)="changeLoading($event)" filteredLabel="{{filteredLabel}}">
+                    <app-flight-item-wrapper (maxCartValidation)="maxCartValidation($event)" (removeFlight)="removeNotAvailabeflight($event)" (changeLoading)="changeLoading($event)" filteredLabel="{{filteredLabel}}">
                     </app-flight-item-wrapper>
                 </div>
             </div>

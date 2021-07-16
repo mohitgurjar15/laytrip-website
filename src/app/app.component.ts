@@ -7,9 +7,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { getLoginUserInfo } from './_helpers/jwt.helper';
 import { UserService } from './services/user.service';
 import { CheckOutService } from './services/checkout.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PreloadingService } from './preloading.service';
-
+import { ActivatedRoute } from '@angular/router';
+import { PreloadingService } from './services/preloading.service';
+import { HomeService } from './services/home.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,29 +18,43 @@ import { PreloadingService } from './preloading.service';
 export class AppComponent {
   title = 'laytrip-website';
   readonly VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
+  $lpData;
 
   constructor(
     private cookieService:CookieService,
     private genericService:GenericService,
     private checkOutService:CheckOutService,
     private route: ActivatedRoute,
-    private router: Router,
     private userService:UserService,
-    public preLoadService : PreloadingService
-  ){
+    public preLoadService : PreloadingService,
+    private homeService:HomeService
+  ) {
+    this.preloadLandingPageData();
     this.setUserOrigin();
     this.getUserLocationInfo();
-
   }
 
-  ngOnInit(){
+  ngOnInit() {
     let token = localStorage.getItem('_lay_sess');
     if(token){
       // this.subscribeToNotifications()
     }
     this.registerGuestUser();
-    this.setCountryBehaviour();
-  
+    this.setCountryBehaviour();   
+  }
+
+  utm_source ='';
+  preloadLandingPageData() {    
+    this.route.queryParams.subscribe(parms => {
+      if (parms['utm_source']) {
+        this.preLoadService.getLandingPageDetails(parms['utm_source']).subscribe((res: any) => {
+        this.$lpData =this.homeService.setLandingPageData(res.config)
+        }, err => {
+          this.homeService.setLandingPageData({});          
+          window.location.href='/';
+        });
+      } 
+    });    
   }
 
   isValidateReferralId(referral_id){

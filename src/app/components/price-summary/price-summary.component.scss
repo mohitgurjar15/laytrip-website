@@ -4,459 +4,387 @@
 @import "../../../_hotel.scss";
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
-
 .pay_summery_wrapper {
-  margin-top: 25px;
-
-  h3 {
-    color: $blue-text;
-    font-size: 34px;
-    margin-bottom: 10px;
-
-    @include tab-view {
-      font-size: 24px;
-    }
-  }
-
-  .pay_sum_inner {
-    border-radius: 15px;
-    border: 1px solid $feedback_text-clr;
-
-    @include tab-view {
-      border-radius: 10px;
-    }
-
-    .pay_list_wrper {
-      padding: 15px;
-
-      &.hotel_pay_list_wrper {
-        &:nth-child(n + 2) {
-          border-top: 1px solid $feedback_text-clr;
+    margin-top: 25px;
+    h3 {
+        color: $blue-text;
+        font-size: 34px;
+        margin-bottom: 10px;
+        @include tab-view {
+            font-size: 24px;
         }
-      }
-
-      .hotel-listing-line {
-        &:last-child {
-          .pay_listing {
-            &:last-child {
-              margin-bottom: 0px;
+    }
+    .pay_sum_inner {
+        border-radius: 15px;
+        border: 1px solid $feedback_text-clr;
+        @include tab-view {
+            border-radius: 10px;
+        }
+        .pay_list_wrper {
+            padding: 15px;
+            &.hotel_pay_list_wrper {
+                &:nth-child(n+2) {
+                    border-top: 1px solid $feedback_text-clr;
+                }
             }
-          }
-        }
-
-        .pay_listing {
-          &:last-child {
-            margin-bottom: 10px;
-          }
-        }
-      }
-
-      @include tab-view {
-        padding: 10px;
-      }
-
-      /* &:nth-child(2) {
+            .hotel-listing-line {
+                &:last-child {
+                    .pay_listing {
+                        &:last-child {
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
+                .pay_listing {
+                    &:last-child {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+            @include tab-view {
+                padding: 10px;
+            }
+            /* &:nth-child(2) {
         border-top: 1px solid $feedback_text-clr;
       } */
-
-      .pay_listing {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: $text-black;
-        font-size: 16px;
-        margin-bottom: 10px;
-
-        &.total_amm_blue {
-          color: $active-tab-text;
-          font-weight: 500;
-          margin: 0;
-        }
-
-        span {
-          &:first-child {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            padding-right: 15px;
-          }
-
-          .purple_trvl {
-            // color: #94218f;
-            font-weight: 500;
-          }
-        }
-
-        @include tab-view {
-          font-size: 14px;
-        }
-
-        &:last-child {
-          margin: 0;
-        }
-      }
-
-      .grayed_text {
-        color: $mid_gray_bg;
-        font-size: 10px;
-      }
-    }
-
-    .pay_listing {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: $text-black;
-      font-size: 16px;
-      margin-bottom: 10px;
-
-      &.hotel_line {
-        span {
-          display: flex;
-
-          &:first-child {
-            p {
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              margin: 0;
+            .pay_listing {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: $text-black;
+                font-size: 16px;
+                margin-bottom: 10px;
+                &.total_amm_blue {
+                    color: $active-tab-text;
+                    font-weight: 500;
+                    margin: 0;
+                }
+                span {
+                    &:first-child {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        padding-right: 15px;
+                    }
+                    .purple_trvl {
+                        // color: #94218f;
+                        font-weight: 500;
+                    }
+                }
+                @include tab-view {
+                    font-size: 14px;
+                }
+                &:last-child {
+                    margin: 0;
+                }
             }
-
-            a {
-              &.tax_accor_btn {
-                color: $txt_clr_blue;
-                margin-left: 3px;
-                cursor: pointer;
-              }
+            .grayed_text {
+                color: $mid_gray_bg;
+                font-size: 10px;
             }
-          }
         }
-      }
-
-      &.total_amm_blue {
-        color: $active-tab-text;
-        font-weight: 500;
-        margin: 0;
-        padding: 15px;
-        border-top: 1px solid $feedback_text-clr;
-        border-bottom: 1px solid $feedback_text-clr;
-
-        &.bb_none {
-          border-bottom: none;
-        }
-      }
-
-      span {
-        &:first-child {
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          padding-right: 15px;
-          // flex: 5;
-          width: 67%;
-        }
-
-        &.price_wrps {
-          // flex: 1;
-          width: 33%;
-
-          .old_price {
-            padding-right: 5px;
-            width: 50%;
-            text-decoration: line-through;
-            color: $mid_gray_bg !important;
-          }
-
-          .new_price {
-            width: 50%;
-            color: #1CD304;
-            font-weight: 600;
-          }
-        }
-      }
-
-      @include tab-view {
-        font-size: 14px;
-      }
-
-      &:last-child {
-        margin: 0;
-      }
-    }
-
-    .price_accordion {
-      .card {
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border: none;
-
-        .card-header {
-          background-color: transparent;
-          border: none;
-          border-top: 1px solid $feedback_text-clr;
-          padding: 15px 5px 15px 15px;
-
-          @include tab-view {
-            padding: 15px 5px 5px 15px;
-          }
-
-          .card_header_btn {
-            color: $text-grey;
-            font-size: 16px;
-            border: none;
-            background-color: transparent;
+        .pay_listing {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 100%;
-            padding: 0 10px 0 0;
-
-            @include tab-view {
-              font-size: 14px;
-              text-align: left;
-            }
-
-            .close_text {
-              display: none;
-            }
-
-            &[aria-expanded="true"] {
-              &:after {
-                content: "";
-                //position: relative;
-                padding: 5px 9px;
-                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                background-position: right;
-                background-repeat: no-repeat;
-                background-size: 14px;
-                transition: 0.3s;
-                right: 0;
-                border: none;
-                top: 5px;
-
-                @include tab-view {
-                  // position: relative;
-                  // right: 0;
-                  // height: 12px;
+            color: $text-black;
+            font-size: 16px;
+            margin-bottom: 10px;
+            &.hotel_line {
+                span {
+                    display: flex;
+                    &:first-child {
+                        p {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            margin: 0;
+                        }
+                        a {
+                            &.tax_accor_btn {
+                                color: $txt_clr_blue;
+                                margin-left: 3px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
                 }
-              }
             }
-
-            &[aria-expanded="false"] {
-              color: $active-tab-text;
-
-              .close_text {
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-                padding-right: 15px;
-              }
-
-              .open_text {
-                display: none;
-              }
-
-              &:after {
-                //position: relative;
-                padding: 5px 9px;
-                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-                background-position: right;
-                background-repeat: no-repeat;
-                background-size: 14px;
-                content: "";
-                transition: 0.3s;
-                right: 0;
-                border: none;
-                top: 5px;
-
-                @include tab-view {
-                  // position: relative;
-                  // right: 0;
-                  // height: 12px;
+            &.total_amm_blue {
+                color: $active-tab-text;
+                font-weight: 500;
+                margin: 0;
+                padding: 15px;
+                border-top: 1px solid $feedback_text-clr;
+                border-bottom: 1px solid $feedback_text-clr;
+                &.bb_none {
+                    border-bottom: none;
                 }
-              }
             }
-          }
-        }
-
-        .card-body {
-          padding: 0 15px 0 15px;
-
-          .pay_sap_setions {
-            &:first-child {
-              h3 {
-                margin-top: 0;
-              }
-            }
-
-            h3 {
-              color: $text-grey;
-              font-size: 16px;
-              margin-top: 25px;
-              margin-bottom: 10px;
-
-              @include tab-view {
-                font-size: 16px;
-              }
-            }
-
-            .due_details {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              color: $text-black;
-              font-size: 16px;
-
-              span {
-                @include tab-view {
-                  &:first-child {
-
-                    flex: 90%;
-                  }
-
-                  &:last-child {
-                    flex: 1;
-                  }
+            span {
+                &:first-child {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    padding-right: 15px;
+                    // flex: 5;
+                    width: 67%;
                 }
-
                 &.price_wrps {
-                  // flex: 1;
-                  width: 33%;
-
-                  .old_price {
-                    padding-right: 5px;
-                    width: 50%;
-                  }
-
-                  .new_price {
-                    width: 50%;
-                  }
+                    // flex: 1;
+                    width: 33%;
+                    .old_price {
+                        padding-right: 5px;
+                        width: 50%;
+                        text-decoration: line-through;
+                        color: $mid_gray_bg !important;
+                    }
+                    .new_price {
+                        width: 50%;
+                        color: #1CD304;
+                        font-weight: 600;
+                        justify-content: flex-end;
+                    }
                 }
-              }
-
-              &:last-child {
-                @include tab-view {
-                  margin-bottom: 0;
-                }
-              }
-
-              @include tab-view {
+            }
+            @include tab-view {
                 font-size: 14px;
-                margin-bottom: 5px;
-              }
             }
-          }
+            &:last-child {
+                margin: 0;
+            }
         }
-
-        .total_amm_blue {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          font-size: 16px;
-          color: $active-tab-text;
-          font-weight: 500;
-          margin-top: 10px;
-          padding: 15px;
-          border-top: 1px solid $feedback_text-clr;
-
-          .price_wrps {
-            // flex: 1;
-            width: 33%;
-
-            .old_price {
-              padding-right: 5px;
-              width: 50%;
+        .price_accordion {
+            .card {
+                border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border: none;
+                .card-header {
+                    background-color: transparent;
+                    border: none;
+                    border-top: 1px solid $feedback_text-clr;
+                    padding: 15px 5px 15px 15px;
+                    @include tab-view {
+                        padding: 15px 5px 5px 15px;
+                    }
+                    .card_header_btn {
+                        color: $text-grey;
+                        font-size: 16px;
+                        border: none;
+                        background-color: transparent;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
+                        padding: 0 10px 0 0;
+                        @include tab-view {
+                            font-size: 14px;
+                            text-align: left;
+                        }
+                        .close_text {
+                            display: none;
+                        }
+                        &[aria-expanded="true"] {
+                            &:after {
+                                content: "";
+                                //position: relative;
+                                padding: 5px 9px;
+                                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 14px;
+                                transition: 0.3s;
+                                right: 0;
+                                border: none;
+                                top: 5px;
+                                @include tab-view {
+                                    // position: relative;
+                                    // right: 0;
+                                    // height: 12px;
+                                }
+                            }
+                        }
+                        &[aria-expanded="false"] {
+                            color: $active-tab-text;
+                            .close_text {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100%;
+                                padding-right: 15px;
+                            }
+                            .open_text {
+                                display: none;
+                            }
+                            &:after {
+                                //position: relative;
+                                padding: 5px 9px;
+                                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 14px;
+                                content: "";
+                                transition: 0.3s;
+                                right: 0;
+                                border: none;
+                                top: 5px;
+                                @include tab-view {
+                                    // position: relative;
+                                    // right: 0;
+                                    // height: 12px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .card-body {
+                    padding: 0 15px 0 15px;
+                    .pay_sap_setions {
+                        &:first-child {
+                            h3 {
+                                margin-top: 0;
+                            }
+                        }
+                        h3 {
+                            color: $text-grey;
+                            font-size: 16px;
+                            margin-top: 25px;
+                            margin-bottom: 10px;
+                            @include tab-view {
+                                font-size: 16px;
+                            }
+                        }
+                        .due_details {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            color: $text-black;
+                            font-size: 16px;
+                            span {
+                                @include tab-view {
+                                    &:first-child {
+                                        flex: 90%;
+                                    }
+                                    &:last-child {
+                                        flex: 1;
+                                    }
+                                }
+                                &.price_wrps {
+                                    // flex: 1;
+                                    width: 33%;
+                                    .old_price {
+                                        padding-right: 5px;
+                                        width: 50%;
+                                    }
+                                    .new_price {
+                                        width: 50%;
+                                    }
+                                }
+                            }
+                            &:last-child {
+                                @include tab-view {
+                                    margin-bottom: 0;
+                                }
+                            }
+                            @include tab-view {
+                                font-size: 14px;
+                                margin-bottom: 5px;
+                            }
+                        }
+                    }
+                }
+                .total_amm_blue {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-size: 16px;
+                    color: $active-tab-text;
+                    font-weight: 500;
+                    margin-top: 10px;
+                    padding: 15px;
+                    border-top: 1px solid $feedback_text-clr;
+                    .price_wrps {
+                        // flex: 1;
+                        width: 33%;
+                        .old_price {
+                            padding-right: 5px;
+                            width: 50%;
+                        }
+                        .new_price {
+                            width: 50%;
+                        }
+                    }
+                    @include tab-view {
+                        font-size: 14px;
+                    }
+                }
             }
-
-            .new_price {
-              width: 50%;
-            }
-          }
-
-          @include tab-view {
-            font-size: 14px;
-          }
         }
-      }
     }
-  }
 }
 
 .section_description {
-  transform: translate(-17%, 0%);
-  max-width: 240px;
-
-  // &.second_pop{
-  //   transform: translate(-17%, 40%);
-  // }
-  &.total_price_popup {
-    @include tab-view {
-      transform: translate(13%, 0%);
+    transform: translate(-17%, 0%);
+    max-width: 240px;
+    // &.second_pop{
+    //   transform: translate(-17%, 40%);
+    // }
+    &.total_price_popup {
+        @include tab-view {
+            transform: translate(13%, 0%);
+        }
     }
-  }
 }
 
 .block_tax_fee_main {
-  .modal-content {
-    padding: 15px;
-    border-radius: 10px;
-
-    .modal_title {
-      position: absolute;
-      right: 20px;
-
-      img {
-        max-width: 12px;
-      }
+    .modal-content {
+        padding: 15px;
+        border-radius: 10px;
+        .modal_title {
+            position: absolute;
+            right: 20px;
+            img {
+                max-width: 12px;
+            }
+        }
+        .tax_fee_modal_wrp {
+            .title_box {
+                color: $active-tab-text;
+                font-weight: 500;
+                font-size: 32px;
+                margin: 10px auto;
+                text-align: center;
+                @include tab-view {
+                    font-size: 29px;
+                }
+            }
+            .fee_msg {
+                padding: 20px;
+                @include tab-view {
+                    padding: 5px;
+                }
+                p {
+                    &.para_fees {
+                        font-size: 12px;
+                        // max-height: 218px;
+                        margin: 0;
+                        scroll-behavior: smooth;
+                        // @include tab-view {
+                        //   max-height: 205px;
+                        // }
+                    }
+                }
+            }
+            .logo_wrpper_footer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+                img {
+                    max-width: 62px;
+                }
+            }
+        }
     }
-
-    .tax_fee_modal_wrp {
-      .title_box {
-        color: $active-tab-text;
-        font-weight: 500;
-        font-size: 32px;
-        margin: 10px auto;
-        text-align: center;
-
-        @include tab-view {
-          font-size: 29px;
-        }
-      }
-
-      .fee_msg {
-        padding: 20px;
-
-        @include tab-view {
-          padding: 5px;
-        }
-
-        p {
-          &.para_fees {
-            font-size: 12px;
-            // max-height: 218px;
-            margin: 0;
-            scroll-behavior: smooth;
-
-            // @include tab-view {
-            //   max-height: 205px;
-            // }
-          }
-        }
-      }
-
-      .logo_wrpper_footer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 10px;
-
-        img {
-          max-width: 62px;
-        }
-      }
-    }
-  }
 }

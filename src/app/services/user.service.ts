@@ -113,13 +113,7 @@ export class UserService {
   }
 
   deleteAccount(isRequireBackupFile) {
-    const accessToken = localStorage.getItem('_lay_sess');
-    /*   const options = {
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-            
-        },
-      } */
+    const accessToken = localStorage.getItem('_lay_sess');   
     const options = {
       headers: {
         Authorization: `Bearer ${accessToken}`,

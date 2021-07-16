@@ -12,7 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie';
 import { redirectToLogin } from '../../../../_helpers/jwt.helper';
 import { FlightService } from '../../../../services/flight.service';
-import { CheckOutService } from '../../../../services/checkout.service';
 import { getPhoneFormat } from 'src/app/_helpers/phone-masking.helper';
 
 @Component({
@@ -86,7 +85,6 @@ export class ProfileComponent implements OnInit {
     private toastr: ToastrService,
     private cookieService: CookieService,
     private flightService: FlightService,
-    private checkOutService: CheckOutService,
   ) { }
 
   ngOnInit() {
@@ -226,15 +224,11 @@ export class ProfileComponent implements OnInit {
         imgfile = this.imageFile;
         formdata.append("profile_pic", imgfile);
         this.userService.updateProfileImage(formdata).subscribe((data: any) => {
-          // this.submitted = false;
           this.loadingValue.emit(false);
           localStorage.setItem("_lay_sess", data.token);
-          // this.toastr.success("Profile picture updated successfully!", 'Profile Updated');
         }, (error: HttpErrorResponse) => {
           this.loadingValue.emit(false);
-          // this.submitted = false;
-          // this.toastr.error(error.error.message, 'Profile Error');
-        });
+          });
       }
     }
   }
@@ -263,11 +257,8 @@ export class ProfileComponent implements OnInit {
         address: res.address,
         home_airport: res.airportInfo.code ? res.airportInfo.city+' ('+ res.airportInfo.code+')' : null,
         country_id: res.country.name ? res.country.name : 'United States',
-        // state_id: res.state.name ? res.state.name : null,
         state_id: res.state.id ? res.state.id : null,
-        // passport_expiry: res.passportExpiry ? moment(res.passportExpiry).format('MMM d, yy') : '',
-        // passport_number: res.passportNumber
-      });
+       });
       this.profileForm.controls['home_airport'].disable();
       this.profileForm.controls['country_code'].disable();
       this.profileForm.controls['country_id'].disable();
@@ -319,9 +310,7 @@ export class ProfileComponent implements OnInit {
       let imgfile = '';
       if (this.imageFile) {
         imgfile = this.imageFile;
-        // formdata.append("profile_pic",imgfile);
       }
-      // formdata.append("title",'mr');
       formdata.append("first_name", this.profileForm.value.first_name);
       formdata.append("last_name", this.profileForm.value.last_name);
       formdata.append("email", this.profileForm.value.email);
@@ -417,10 +406,7 @@ export class ProfileComponent implements OnInit {
   selectEvent(event, item) {
 
     if (event && event.code && item.key === 'fromSearch') {
-      // this.home_airport = event.code;
-      // this.departureAirport=event;
-      // this.searchedValue.push({ key: 'fromSearch', value: event });
-    }
+     }
   }
 
   getAirports(){

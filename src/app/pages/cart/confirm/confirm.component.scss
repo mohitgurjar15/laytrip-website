@@ -3,20 +3,16 @@
 @import "../../../../_hotel.scss";
 @import "../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 .page_topbanner {
     display: flex;
     width: 100%;
-
     @include tab-view {
         height: 63px;
         position: relative;
         margin-top: 40px;
     }
-
     img {
         width: 100%;
-
         @include tab-view {
             height: 100%;
             -o-object-fit: cover;
@@ -29,35 +25,28 @@
 
 .conf_main_wrapper {
     padding: 15px 0;
-
     @include tab-view {
         padding: 15px 0 0;
     }
-
     .back_cta_btn {
         a {
             color: $active-tab-text;
         }
     }
-
     .conf_container {
         max-width: 653px;
         margin: 10px auto 30px;
-
         .header_bar {
             h3 {
                 color: $active-tab-text;
                 font-size: 34px;
                 margin-bottom: 15px;
-
                 @include tab-view {
                     font-size: 24px;
                 }
-
                 .b_num {
                     color: $text-black;
                     font-size: 20px;
-
                     @include tab-view {
                         font-size: 18px;
                         display: flex;
@@ -66,32 +55,26 @@
                     }
                 }
             }
-
             p {
                 font-size: 20px;
                 color: $mid_gray_bg;
-
                 @include tab-view {
                     font-size: 14px;
                 }
-
                 a {
                     color: $txt_clr_blue;
                 }
             }
         }
-
         .book_detailers {
             h3 {
                 color: $active-tab-text;
                 font-size: 34px;
                 margin: 25px 0 15px;
-
                 @include tab-view {
                     font-size: 24px;
                 }
             }
-
             .detail_liners {
                 font-size: 16px;
                 border-bottom: 1px solid $box-border-color;
@@ -99,32 +82,25 @@
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-
                 @include tab-view {
                     font-size: 14px;
                     align-items: flex-start;
                     flex-direction: column;
                 }
-
                 .lefts {
                     color: $text-black;
                     flex: 1;
-
                     @include tab-view {
                         font-weight: 500;
                     }
-
                 }
-
                 .rights {
                     color: $mid_gray_bg;
                     flex: 2;
-
                     .off_label {
                         // display: flex;
                         background-color: #1CD304;
                         font-size: 9px;
-                        line-height: 11px;
                         color: $text-white;
                         border-radius: 26px;
                         align-items: center;
@@ -134,30 +110,26 @@
                         min-width: 50px;
                         margin-left: 5px;
                         height: 20px;
+                        display: inline-block;
                     }
-
                     .dashed_price {
                         text-decoration: line-through;
                         color: $mid_gray_bg !important;
                     }
-
                     .new_price {
                         color: #1CD304;
                         font-weight: 600;
                     }
                 }
             }
-
             .linking_wrapper {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-
                 a {
                     color: $txt_clr_blue;
                     font-size: 20px;
                     margin-bottom: 10px;
-
                     @include tab-view {
                         font-size: 18px;
                     }

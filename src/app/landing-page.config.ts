@@ -86,7 +86,7 @@ export const LANDING_PAGE={
               },
               {
                 from :{ "code":"NYC","name":"All Airports","city":"New York","country":"USA","key":"N"},
-                to :  { "code": "TPA","name": "Tampa Intl.","city": "Tampa","country": "USA","key": "T","image": "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/puntacana-2.jpeg"}
+                to: { "code": "TPA", "name": "Tampa Intl.", "city": "Tampa", "country": "USA", "key": "T", "image": "https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_deals/tampa-2.jpeg"}
               },
               {
                 from :{ "code":"NYC","name":"All Airports","city":"New York","country":"USA","key":"N"},

@@ -36,12 +36,9 @@ export class HotelPopupLoaderComponent implements OnInit {
         var val = progressbar.progressbar("value") || 0;
         progressbar.progressbar("value", val + 2);
         if (val < 99) {
-          // setTimeout(progress, 80);
         }
       }
-      // setTimeout(progress, 2000);
     });
-    //Close popup page loader Js
   }
 
 

@@ -25,7 +25,6 @@ export class CardListComponent implements OnInit {
   cardLoader: boolean = true;
   cards = []
   @Output() selectCreditCard = new EventEmitter();
-  //@Output() totalNumberOfcard = new EventEmitter();
   @Input() newCard;
   @Input() cardToken: string = '';
   @Input() cardListChangeCount: number = 0;
@@ -65,17 +64,14 @@ export class CardListComponent implements OnInit {
         }
       }
       this.genericService.setCardItems(this.cards)
-      //this.totalNumberOfcard.emit(1)
     }, (error) => {
       this.cards = [];
       this.genericService.setCardItems(this.cards)
       this.cardLoader = false;
-      //this.totalNumberOfcard.emit(0);
     });
   }
 
   selectCard(cardToken) {
-    // $('#card_list_accodrio').children('div').toggleClass('current_selected_card');
     this.cardToken = cardToken;
     this.selectCreditCard.emit(cardToken);
   }
@@ -167,6 +163,4 @@ export class CardListComponent implements OnInit {
       }
     });
   }
-
-
 }

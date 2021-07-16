@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, HostListener } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { HotelService } from '../../services/hotel.service';
 import { environment } from '../../../environments/environment';
@@ -40,14 +40,7 @@ export class HotelSuggestionComponent implements OnInit {
   }
   
   ngOnChanges(changes: SimpleChanges) {    
-    
-    /* this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
-      
-      if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {        
-        this.searchItem = hotelInfo.title;
-      }
-    }); */
-    
+
   }
 
   searchLocation(event) {
@@ -57,7 +50,6 @@ export class HotelSuggestionComponent implements OnInit {
       this.loading = false;
       this.isShowDropDown = this.searchItem.length > 0 ? true : false;
       this.isValidSearch = this.searchItem.length > 0 ? true : false;
-      //this.selectedHotel.emit({})
       this.validateSearch.emit(false);
       return;
     } 
@@ -154,7 +146,4 @@ export class HotelSuggestionComponent implements OnInit {
   focusOut(){
     this.isInputFocus = false;
   }
-  
-
-
 }

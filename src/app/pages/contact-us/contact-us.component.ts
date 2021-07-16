@@ -5,7 +5,6 @@ import { GenericService } from '../../services/generic.service';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie';
-import { fileSizeValidator} from '../../_helpers/custom.validators';
 
 declare var $: any;
 
@@ -21,7 +20,7 @@ export class ContactUsComponent implements OnInit {
   contactUsForm: FormGroup;
   loading = false;
   location;
-  messageLenght = 0;
+  messageLength = 0;
   submitted = false;
   fileUploadErrorMessage = '';
   errorMessage = '';
@@ -91,6 +90,7 @@ export class ContactUsComponent implements OnInit {
       this.contactUsForm.reset();
       this.attatchmentFiles = this.files= [];
       this.errorMessage = '';
+      this.messageLength = 0;
       this.toastr.show(res.message, '', {
         toastClass: 'custom_toastr',
         titleClass: 'custom_toastr_title',
@@ -109,11 +109,11 @@ export class ContactUsComponent implements OnInit {
   }
 
   setMessageLenght(value) {
-    this.messageLenght = value.toString().length;
+    this.messageLength = value.toString().length;
   }
 
   closeModal() {
-    this.messageLenght=0;
+    this.messageLength=0;
     this.submitted = false;
     Object.keys(this.contactUsForm.controls).forEach(key => {
       this.contactUsForm.get(key).markAsUntouched();
@@ -181,7 +181,6 @@ export class ContactUsComponent implements OnInit {
         this.imageFileError = true;
        
         this.errorMessage = 'Only .jpg, .jpeg, .png and .pdf files are allowed.'; 
-        // this.attatchmentFiles.push(attatchData);
       }     
     } else {
       this.errorMessage = 'Something went wrong, Please try again.'; 

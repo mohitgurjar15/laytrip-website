@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChildren, QueryList, ChangeDetectorRef, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { HotelService } from 'src/app/services/hotel.service';
 import { AgmInfoWindow } from '@agm/core';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
-import { AgmSnazzyInfoWindow } from '@agm/snazzy-info-window';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-hotel-item-wrapper',
@@ -71,6 +71,7 @@ export class HotelItemWrapperComponent implements OnInit {
   itenery: string = '';
   location: string = '';
   city_id: string = '';
+  city_name: string = '';
   hotelCount: number = 0;
   previousHotelIndex: number = -1;
   @ViewChildren(NgbCarousel) carousel: QueryList<any>;
@@ -83,7 +84,7 @@ export class HotelItemWrapperComponent implements OnInit {
     private genericService: GenericService,
     private hotelService: HotelService,
     public cd: ChangeDetectorRef,
-    private _zone: NgZone
+    private homeService:HomeService
   ) {
 
     this.galleryOptions = [
@@ -96,7 +97,10 @@ export class HotelItemWrapperComponent implements OnInit {
     this.itenery = this.route.snapshot.queryParams['itenery']
     this.location = this.route.snapshot.queryParams['location']
     this.city_id = this.route.snapshot.queryParams['city_id']
+    this.city_name = this.route.snapshot.queryParams['city_name']
   }
+
+  
 
   ngAfterViewInit(): void {
     // this.gm.nativeElement;
@@ -163,7 +167,6 @@ export class HotelItemWrapperComponent implements OnInit {
       }
       this.hotelCount = this.hotelDetails.length;
       this.currentPage = 1;
-      // this.noOfDataToShowInitially = this.hotelDetails.length;
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       this.hotelList = [...this.hotelListArray];
       if (this.bounds) {
@@ -172,30 +175,9 @@ export class HotelItemWrapperComponent implements OnInit {
     });
   }
 
-  // carouselWithSwipe() {
-  //   $(document).ready(function () {
-  //     $(".mobile_carousel").swiperight(function () {
-  //       $(this).carousel('prev');
-  //     });
-  //     $(".mobile_carousel").swipeleft(function () {
-  //       $(this).carousel('next');
-  //     });
-  //   });
-  // }
-
   changeSlide(slideId) {
     console.log(slideId);
   }
-
-  // checkOnError(brokenImage) {
-  //   for (let i = 0; i < this.hotelDetails.length; i++) {
-  //     this.hotelDetails[i].galleryImages = [];
-  //     for (let image of this.hotelDetails[i].images) {
-  //       this.hotelDetails[i].galleryImages.splice(brokenImage, 1);
-  //       this.cd.detectChanges();
-  //     }
-  //   }
-  // }
 
   checkOnError(brokenImage) {
     for (let i = 0; i < this.hotelDetails.length; i++) {
@@ -255,24 +237,10 @@ export class HotelItemWrapperComponent implements OnInit {
   displayHotelDetails(hotelId, infoWindow, type) {
     this.isMarkerClicked = false;
     this.clickedHotelIndex = '';
-    // if (this.previousInfoWindow == null) {
-    //   infoWindow.open();
-    //   this.previousInfoWindow = infoWindow;
-    // } else {
-    //   this.infoWindowOpened = infoWindow;
-    //   if (this.previousInfoWindow != null) {
-    //     this.previousInfoWindow.close();
-    //     this.previousInfoWindow = null;
-    //   }
-    // }
-    // this.previousInfoWindow = infoWindow;
-
     if (type === 'click') {
       this.isMarkerClicked = true;
       if (this.previousHotelIndex > -1) {
         let previousHotel = this.hotelListArray[0];
-        //console.log(this.previousHotelIndex,previousHotel)
-        //this.hotelListArray.splice(this.previousHotelIndex+1, 0, previousHotel);
         this.hotelListArray = this.move(this.hotelListArray, 0, this.previousHotelIndex)
       }
 
@@ -282,10 +250,6 @@ export class HotelItemWrapperComponent implements OnInit {
         this.previousHotelIndex = hotelIndex;
         this.clickedHotelIndex = hotelIndex;
       }
-      /* else{
-        let hotel = this.hotelList.find(hotel => hotel.id == hotelId);
-        this.hotelListArray.unshift(hotel)
-      } */
     }
 
   }
@@ -370,7 +334,11 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   getMapPrice(hotel) {
-    return `$${Math.floor(hotel.secondary_start_price)}`
+    if (hotel.offer_data.applicable) {
+      return `$${Math.floor(hotel.discounted_secondary_start_price)}`
+    } else {
+      return `$${Math.floor(hotel.secondary_start_price)}`      
+    }
   }
 
   checkMarkersInBounds(bounds) {
@@ -391,27 +359,23 @@ export class HotelItemWrapperComponent implements OnInit {
           let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
           if (this.bounds.contains(hotelPosition)) {
             this.hotelListArray.push(hotel)
-            //this.hotelDetails=[...this.hotelListArray]
           }
         }
 
         this.hotelCount = this.hotelListArray.length;
       }
     }
-    // this.bounds = bounds;
-    // if (this.isMapView) {
-    //   this.hotelListArray = [];
-    //   for (let hotel of this.hotelList) {
-    //     let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
-    //     if (this.bounds.contains(hotelPosition)) {
-    //       this.hotelListArray.push(hotel)
-    //       //this.hotelDetails=[...this.hotelListArray]
-    //     }
-    //   }
-
-    //   this.hotelCount = this.hotelListArray.length;
-    // }
-
   }
+  
+  showDownPayment(offerData, downPaymentOption) {
 
+    if (typeof offerData != 'undefined' && offerData.applicable) {
+
+      if (typeof offerData.down_payment_options != 'undefined' && offerData.down_payment_options[downPaymentOption].applicable) {
+        return true;
+      }
+      return false;
+    }
+    return true;
+  }
 }

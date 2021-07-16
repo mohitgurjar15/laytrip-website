@@ -1,9 +1,7 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, OnChanges, SimpleChange, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
-import * as moment from 'moment';
-import { environment } from '../../../../../environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -118,16 +116,6 @@ export class FilterVacationRentalComponent implements OnInit, OnDestroy {
     if (sheight > 10 && swidth < 991) {
       $('#responsive_filter').slideDown("slow");
     }
-    // $(".responsive_filter_btn").click(function () {
-    //   $("#responsive_filter_show").slideDown("slow");
-    //   $("body").addClass('overflow-hidden');
-    // });
-
-    // $(".filter_close > a").click(function () {
-    //   $("#responsive_filter_show").slideUp("slow");
-    //   $("body").removeClass('overflow-hidden');
-    // });
-    //Close REsponsive Fliter js
 
     // Start filter Shortby js
     $(document).on('show', '#accordion-filteredtby', function (e) {
@@ -206,8 +194,6 @@ export class FilterVacationRentalComponent implements OnInit, OnDestroy {
     if (this.amenitiesArray.length) {
       filteredRentals = filteredRentals.filter(item => {
         return this.amenitiesArray.some(r => item.amenities.includes(r));
-        // filteredRentals = filteredRentals.filter(item => {
-        //   return this.amenitiesArray.includes(item);
       })
     }
 
@@ -241,13 +227,6 @@ export class FilterVacationRentalComponent implements OnInit, OnDestroy {
 
     // Reset price by total or weekly
     this.sortType = 'filter_total_price';
-
-    // Reset amenities
-    // if (typeof this.amenities != 'undefined' && this.amenities.length) {
-    //   this.amenities.forEach(element => {
-    //     return element.isChecked = false;
-    //   });
-    // }
     if (this.amenitiesArray.length) {
       return this.amenitiesArray = [];
     }
@@ -272,11 +251,6 @@ export class FilterVacationRentalComponent implements OnInit, OnDestroy {
       this.sortType = 'filter_total_price';
 
       // Reset amenities
-      // if (typeof this.amenities != 'undefined' && this.amenities.length) {
-      //   this.amenities.forEach(element => {
-      //     return element.isChecked = false;
-      //   });
-      // }
       if (this.amenitiesArray.length) {
         return this.amenitiesArray = [];
       }

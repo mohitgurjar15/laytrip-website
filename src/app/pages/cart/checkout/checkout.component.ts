@@ -14,6 +14,7 @@ import { SpreedlyService } from '../../../services/spreedly.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionExpiredComponent } from '../session-expired/session-expired.component';
+import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
 declare var $: any;
 
 export interface CartItem {
@@ -119,11 +120,13 @@ export class CheckoutComponent implements OnInit {
 
     this.cartLoading = true;
     this.cartService.getCartList('yes').subscribe((items: any) => {
+     
       if (items && items.data && items.data.length) {
         this.bookingTimerConfiguration();
       }
       this.cartLoading = false;
       let cart: any;
+      let nonPromoConflictCartIds=[];
       let price: any;
       for (let i = 0; i < items.data.length; i++) {
         cart = {};
@@ -133,6 +136,8 @@ export class CheckoutComponent implements OnInit {
         cart.travelers = items.data[i].travelers;
         cart.id = items.data[i].id;
         cart.is_available = items.data[i].is_available;
+        price.is_offer_data = items.cartIsPromotional;
+        price.offer_data = items.data[i].moduleInfo[0].offer_data;
 
         this.modules.push(items.data[i].type);
         if (this.modules.some(x => x === "flight")) {
@@ -152,6 +157,7 @@ export class CheckoutComponent implements OnInit {
           price.start_price = items.data[i].moduleInfo[0].start_price;
           price.type = items.data[i].type;
           price.location = `${items.data[i].moduleInfo[0].departure_code}-${items.data[i].moduleInfo[0].arrival_code}`
+          price.discounted_selling_price = items.data[i].moduleInfo[0].discounted_selling_price;
         }
         else if (items.data[i].type == 'hotel') {
 
@@ -168,13 +174,27 @@ export class CheckoutComponent implements OnInit {
           price.departure_date = moment(items.data[i].moduleInfo[0].input_data.check_in, "YYYY-MM-DD").format('DD/MM/YYYY');
           price.start_price = 0;
           price.location = items.data[i].moduleInfo[0].hotel_name;
+          price.discounted_selling_price = items.data[i].moduleInfo[0].selling.discounted_sub_total;
+
+        }
+        if (items.data[i].is_conflict) {
+          nonPromoConflictCartIds.push( items.data[i].id );
         }
         this.carts.push(cart);
-
-        this.cartPrices.push(price)
+        this.cartPrices.push(price)       
       }
+      localStorage.setItem('$crt', items.count ? items.count :0);
       this.cartService.setCartItems(this.carts)
       this.cartService.setCartPrices(this.cartPrices);
+      if (nonPromoConflictCartIds.length > 0) {
+        this.modalService.open(DiscountedBookingAlertComponent, {
+          windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
+          keyboard: false
+        });
+        this.cartService.deleteConflictedCartItem(nonPromoConflictCartIds).subscribe((items: any) => {
+          this.redirectTo('/cart/checkout');
+        });
+      }
 
 
     }, error => {
@@ -510,6 +530,8 @@ export class CheckoutComponent implements OnInit {
       $('#sign_in_modal').modal('show');
       return false;
     }
+    //console.log("this.travelerForm",this.travelerForm)
+    //return false;
 
     let carts = this.carts.map(cart => { return { cart_id: cart.id } })
     this.bookingRequest.card_token = this.cardToken;
@@ -632,12 +654,12 @@ export class CheckoutComponent implements OnInit {
       instalment_type: this.priceSummary.instalmentType,
       checkin_date: checkinDate,
       booking_date: moment().format("YYYY-MM-DD"),
-      amount: totalPrice,
+      amount: totalPrice.toFixed(2),
       additional_amount: 0,
+      down_payment: 0,
       selected_down_payment: this.priceSummary.selectedDownPayment
     }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
-
       if (res.instalment_available == true) {
         this.priceSummary.instalments = res;
         this.priceSummary.remainingAmount = totalPrice - res.instalment_date[0].instalment_amount;

@@ -52,17 +52,6 @@ export class CartItemComponent implements OnInit {
 
       if(this.cartItem.old_module_info.selling_price!=this.cartItem.module_info.selling_price){
         this.priceFluctuationAmount = this.cartItem.module_info.selling_price - this.cartItem.old_module_info.selling_price;
-        /* let indexExist = this.cartAlerts.findIndex(x=>x.id==this.cartItem.id);
-
-        if(indexExist==-1){
-          this.cartAlerts.push({
-            type : 'price_change',
-            name : `${this.cartItem.module_info.departure_code}-${this.cartItem.module_info.arrival_code}`,
-            id : this.cartItem.id
-          })
-          localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
-        } */
-        
       }
       this.cd.detectChanges();
     }

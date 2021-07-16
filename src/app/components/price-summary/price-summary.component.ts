@@ -27,7 +27,7 @@ export class PriceSummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    // console.log("priceSummary,", this.priceSummary)
   }
 
   closeModal() {
@@ -35,15 +35,6 @@ export class PriceSummaryComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    /* 
-    if (typeof changes['cartPrices']!='undefined') {
-      let isFlight = this.cartPrices.find(x=>{return x.type==='flight'});
-      if(isFlight){
-        this.flightCount=1;
-      }
-    } */
-
-
     try {
       let cartAlerts = localStorage.getItem("__alrt")
       if (cartAlerts) {
@@ -58,6 +49,7 @@ export class PriceSummaryComponent implements OnInit {
     }
     this.insatllmentAmount = 0;
     if (typeof changes['priceSummary'].currentValue != 'undefined') {
+
       if ($('#flight_list_wrper').text() == "") {
         $('#flight_list_wrper').remove();
       }
@@ -72,16 +64,6 @@ export class PriceSummaryComponent implements OnInit {
           if (this.priceSummary.instalments.instalment_date[1].instalment_amount != this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length - 1].instalment_amount) {
 
             this.installmentVartion = this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length - 1].instalment_amount - this.priceSummary.instalments.instalment_date[1].instalment_amount;
-            /* if(this.installmentVartion>0){
-              let indexExist = this.cartAlerts.findIndex(x=>x.type=="installment_vartion");
-              if(indexExist==-1){
-                this.cartAlerts.push({
-                  type : 'installment_vartion',
-                  id : -1
-                })
-              }
-              localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
-            } */
           }
         }
       }
@@ -90,26 +72,5 @@ export class PriceSummaryComponent implements OnInit {
 
   typeOf(value) {
     return typeof value;
-  }
-
-  closeInstallmentVartion(id) {
-    /* try{
-      let cartAlerts = localStorage.getItem("__alrt")
-      if(cartAlerts){
-        this.cartAlerts= JSON.parse(cartAlerts)
-        let index = this.cartAlerts.findIndex(x=>x.id==id)
-        this.cartAlerts.splice(index,1)
-      }
-      else{
-        this.cartAlerts=[]
-      }
-    }
-    catch(e){
-      this.cartAlerts=[];
-    }
-    
-    localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts)) */
-    this.installmentVartion = 0;
-
   }
 }

@@ -1,27 +1,8 @@
-<!-- <div id="accordion">
-
-    <div class="card"  *ngFor="let card of cards">
-      <div class="card-header">
-        <a class="card-link" data-toggle="collapse" href="#collapse_item">
-            {{card.cardType | titlecase}} Card ****{{card.cardDigits}}
-        </a>
-      </div>
-      <div id="collapse_item" class="collapse show" data-parent="#accordion">
-        <div class="card-body">
-            {{ card.cardHolderName }}
-        </div>
-      </div>
-    </div>
-  </div> -->
-
 <div id="card-list" *ngIf="cards.length">
-    <div id="card_list_accodrio" class="accordion_cardss anchor-tag" *ngFor="let card of cards; let blockIndex = index;"
-        (click)="selectCard(card.cardToken)">
-        <div class="card" [attr.id]="blockIndex"
-            [ngClass]='{"current_selected_card": cardToken === card.cardToken && origin!=="/account"}'>
+    <div id="card_list_accodrio" class="accordion_cardss anchor-tag" *ngFor="let card of cards; let blockIndex = index;" (click)="selectCard(card.cardToken)">
+        <div class="card" [attr.id]="blockIndex" [ngClass]='{"current_selected_card": cardToken === card.cardToken && origin!=="/account"}'>
             <div class="card-header">
-                <a data-toggle="collapse" data-parent="#accordion" href="#card{{blockIndex}}" aria-expanded="false"
-                    aria-controls="collapse11" class="d-flex justify-content-start">
+                <a data-toggle="collapse" data-parent="#accordion" href="#card{{blockIndex}}" aria-expanded="false" aria-controls="collapse11" class="d-flex justify-content-start">
                     <span class="heade_wrps">
                         <img [src]="cardObject[card.cardType]" alt="Card icon" />
                         <div class="card_hedr">
@@ -38,8 +19,6 @@
                     </span>
                 </a>
             </div>
-            <!-- <div id="card{{blockIndex}}" class="collapse"
-                [ngClass]='{"show":origin=="/cart/booking" && cardToken === card.cardToken}' data-parent="#accordion"> -->
             <div id="card{{blockIndex}}" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                     <div class="form-row">
@@ -92,8 +71,7 @@
                                 <a class="hover-link" (click)="openDeleteModal(content,card)">Delete</a>
                                 <div class="section_description" id="delete_card_desc" *ngIf="is_open_popup">
                                     <span class="sec_text">You must have one default credit card selected.</span>
-                                    <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
-                                            alt="Close"></a>
+                                    <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                                 </div>
                             </div>
                         </div>
@@ -128,14 +106,6 @@
                     <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
                 </a>
             </div>
-            <!-- <ul>
-                <li>
-                    <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>
-                </li>
-                <li>
-                    <button class="btn_yes" (click)=deleteCreditCard()>Yes</button>
-                </li>
-            </ul> -->
         </div>
     </div>
 </ng-template>

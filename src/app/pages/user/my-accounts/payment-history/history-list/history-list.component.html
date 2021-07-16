@@ -67,8 +67,6 @@
                         <div class="progress">
                             <div class="progress-bar" [ngStyle]="getPercentage(item.paidAmount,item.totalAmount,1)"></div>
                             <div class="progress_dot" [ngStyle]="getPercentage(item.paidAmount,item.totalAmount,2)"></div>
-                            <!-- <div class="progress-bar"  style="width: 25%;" ></div>
-                            <div class="progress_dot" style="left: 23%;"></div> -->
                         </div>
                     </li>
                     <li>{{'total_remaining' | translate}}: <span>${{ (item.totalAmount-item.paidAmount)  | number : '1.2-2' }}</span></li>
@@ -114,12 +112,9 @@
 
 <div class="pagination_main" *ngIf="showPaginationBar">
     <div class="pagination_result">
-        <!-- <p>Showing 1 to {{pageSize}} of {{travelers.length}} Results</p> -->
     </div>
     <div class="pagination_list">
         <ngb-pagination class="d-flex justify-content-end" [collectionSize]="listLength" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true" [maxSize]="5" [rotate]="true" (pageChange)="pageChange($event)">
         </ngb-pagination>
     </div>
 </div>
-
-<!-- <app-view-history  [item]="item"></app-view-history> -->

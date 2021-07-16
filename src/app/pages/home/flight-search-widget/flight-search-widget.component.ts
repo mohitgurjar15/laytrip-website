@@ -1,10 +1,9 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Module } from '../../../model/module.model';
 import { environment } from '../../../../environments/environment';
 import { airports } from '../../flight/airports';
 import * as moment from 'moment';
-import { GenericService } from '../../../services/generic.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
@@ -31,12 +30,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted = false;
   isCalenderPriceLoading: boolean = true;
-  // DATE OF FROM_DESTINATION & TO_DESTINATION
-  //fromSearch : any = airports['JFK'];
   fromSearch: any = {};
   countryCode: string;
   monthYearArr = [];
-  //toSearch:any = airports['PUJ'];
   toSearch: any = {};
 
   locale = {
@@ -93,6 +89,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     if (typeof this.fromSearch.city != 'undefined') {
       this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
       this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
+      
     }
     this.flightSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
@@ -114,12 +111,12 @@ export class FlightSearchWidgetComponent implements OnInit {
   
     if(this.commonFunction.isRefferal()){
       this.homeService.getSlideOffers.subscribe(currentSlide => {
-          if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
-            let slide: any = currentSlide;
-            this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
+        if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+          let slide: any = currentSlide;
+          this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
             this.toSearch =  Object.assign({},airports[slide.location.to.airport_code]);          
             this.searchFlightInfo.departure = this.fromSearch.code;
-            this.departureDate = moment().add(90, 'days').toDate();
+            this.departureDate = moment().add(91, 'days').toDate();
             if (this.isRoundTrip) {
               this.returnDate =  moment().add(97, 'days').toDate();
               this.rangeDates = [this.departureDate, this.returnDate];
@@ -146,8 +143,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.calPrices = true;
         this.fromSearch = airports[params['departure']];
         this.toSearch = airports[params['arrival']];
-        //this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
-        //this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.searchFlightInfo.arrival = this.toSearch.code;
         this.toggleOnewayRoundTrip(params['trip']);
@@ -160,11 +155,9 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.infant = params['infant'];
         this.departureDate = moment(params['departure_date']).toDate();
         if (moment(this.departureDate).format("YYYY-MM-DD") < this.customStartDateValidation) {
-          // this.router.navigate(['/flight/flight-not-found'])
         }
         this.currentMonth = moment(this.departureDate).format("MM");
         this.currentYear = moment(this.departureDate).format("YYYY");
-        // this.returnDate = new Date(params['arrival_date']);
         this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
         this.rangeDates = [this.departureDate, this.returnDate];
       } else {
@@ -174,14 +167,13 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     this.homeService.getToString.subscribe(toSearchString => {
       if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
-        let keys: any = toSearchString;
+        let keys: any = toSearchString;        
         localStorage.setItem('__to', keys)
-        // this.toSearch = null;   
 
         this.fromSearch = airports['NYC'];
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.toSearch = airports[keys];
-        this.departureDate = moment().add(90, 'days').toDate();
+        this.departureDate = moment().add(91, 'days').toDate();
         if (this.isRoundTrip) {
           this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
           this.searchFlightInfo.arrival = this.toSearch.code;
@@ -337,13 +329,11 @@ export class FlightSearchWidgetComponent implements OnInit {
       this.dateFilter.hideOverlay(); 
     };
     if (this.rangeDates[0] && this.rangeDates[1]) {
-      // let daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
       this.returnDate = this.rangeDates[1];
       this.departureDate = this.rangeDates[0];
       if (!moment(this.rangeDates[1]).isAfter(moment(this.rangeDates[0]))) {
         this.returnDate = moment(this.rangeDates[0]).add(7, 'days').toDate();
       }
-      // this.flightDepartureMinDate = this.rangeDates[0];
       this.rangeDates = [this.departureDate, this.returnDate];
     }
   }
@@ -352,8 +342,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   getPrice(d, m, y) {
 
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
-    // this.currentMonth = m.toString().length == 1 ? '0' + m : m;
-    // this.currentYear = y;
     let month: any = parseInt(m) + 1;
     let day = d.toString().length == 1 ? '0' + d : d;
     month = month.toString().length == 1 ? '0' + month : month;
@@ -540,10 +528,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   @HostListener('click')
   clickInside() {
     this.thisElementClicked = true;
-  }
-
-  searchAirport(event) {
-    // console.log("event", event)
   }
 
   searchItem(data) {

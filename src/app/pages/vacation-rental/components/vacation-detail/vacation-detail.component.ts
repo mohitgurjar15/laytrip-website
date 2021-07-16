@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { VacationRentalService } from '../../../../services/vacation-rental.service';
 import { environment } from '../../../../../environments/environment';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';

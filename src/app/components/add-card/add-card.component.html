@@ -1,13 +1,11 @@
 <form [formGroup]="cardForm" id="payment-form" class="spf-form" (ngSubmit)="submitPaymentForm()">
     <div class="add_card_block ">
         <div class="form_row">
-            <!-- <input type="hidden" formControlName="payment_method_token" id="payment_method_token"> -->
             <input type="hidden" name="payment_method_token" id="payment_method_token">
             <div class="form-row">
                 <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps" style="margin-top: 1px;">
                     <label for="">Cardholder Name*</label>
-                    <input type="text" id="full_name" class="form-control" placeholder="Name on Card"
-                        (keypress)="commonFunction.preventNumberInput($event)">
+                    <input type="text" id="full_name" class="form-control" placeholder="Name on Card" (keypress)="commonFunction.preventNumberInput($event)">
                     <div class="error">
                         <small class="error_field credit_card_error" id="first_name" style="display:none">
                             <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">
@@ -29,8 +27,7 @@
                 <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps">
                     <label>Expiration*</label>
                     <div class="cvv_wrapper">
-                        <input type="text" class="spf-input-text spf-exp" id="month-year" placeholder="MM/YYYY"
-                            [textMask]="dateYeaMask">
+                        <input type="text" class="spf-input-text spf-exp" id="month-year" placeholder="MM/YY" [textMask]="dateYeaMask">
                     </div>
                     <div class="error">
                         <small class="error_field credit_card_error month_year_error" id="month" style="display:none">
@@ -50,15 +47,12 @@
                 </div>
                 <div class="col-sm-12 col-md-4">
                     <div class="save_btn_wrps">
-                        <input type="button" class="button" value="Close" (click)="closeNewCardPanel()"
-                            [hidden]="totalCard === 0">
-                        <input [disabled]="saveCardLoader" [ngClass]="{'disabled':saveCardLoader}" type="submit"
-                            id="submit_button" class="button" value="Save">
+                        <input type="button" class="button" value="Close" (click)="closeNewCardPanel()" [hidden]="totalCard === 0">
+                        <input [disabled]="saveCardLoader" [ngClass]="{'disabled':saveCardLoader}" type="submit" id="submit_button" class="button" value="Save">
                     </div>
                     <div class="section_description cvv_description" id="cardError">
                         <span class="sec_text pt-1 pr-1" id="cardErrorMessage"></span>
-                        <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg"
-                                alt="Close"></a>
+                        <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                     </div>
                 </div>
                 <div id="error_message" style="display: none;"></div>

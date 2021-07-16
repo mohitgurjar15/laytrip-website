@@ -1,3 +1,4 @@
+import { SliderLabelDirective } from '@angular-slider/ngx-slider/slider-label.directive';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChange } from '@angular/core';
 import { HomeService } from 'src/app/services/home.service';
@@ -101,13 +102,13 @@ export class CarouselComponent  implements OnInit{
     }
   }
 
-  booletsClick(isCurrentSlideClick,currentSlide,i){
-    if(isCurrentSlideClick){
-      return;
-    } else if(currentSlide>i){
-      this.onPreviousClick();
-    }else if(currentSlide<i){
-      this.onNextClick();
-    }
+  booletsClick(i,slides){
+    this.currentSlide = i;
+    let slide ="#slide_"+this.currentSlide;
+    $(document).ready(function(){
+      $(slide).attr('src', $(slide).attr('data'))
+      $(slide).removeAttr('data')
+    })
+    this.activeSlide.emit(this.currentSlide)
   }
 }

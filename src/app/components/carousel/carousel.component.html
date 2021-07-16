@@ -1,31 +1,20 @@
 <!-- carousel -->
 <div class="carousel">
-  <ng-container *ngFor="let slide of slides; let i = index">
-    <img  [id]="'slide_'+i"
-    *ngIf="i === currentSlide && i==0"
-    [src]="slide.src"
-    class="slide"
-    @carouselAnimation
-    />
-    
-    <img 
-     [id]="'slide_'+i"
-      *ngIf="i === currentSlide && i>0"
-      attr.data.src={{slide.src}}
-      class="slide"
-      @carouselAnimation
-    />
-  </ng-container>
-  
+    <ng-container *ngFor="let slide of slides; let i = index">
+        <img [id]="'slide_'+i" *ngIf="i === currentSlide && i==0" [src]="slide.src" class="slide" @carouselAnimation />
 
-  <!-- controls -->
-  <button class="control prev" (click)="onPreviousClick()">
+        <img [id]="'slide_'+i" *ngIf="i === currentSlide && i>0" attr.data.src={{slide.src}} class="slide" @carouselAnimation />
+    </ng-container>
+
+
+    <!-- controls -->
+    <button class="control prev" (click)="onPreviousClick()">
     <span class="arrow left"></span>
   </button>
-  <button class="control next" (click)="onNextClick()">
+    <button class="control next" (click)="onNextClick()">
     <span class="arrow right"></span>
   </button>
 </div>
 <ul class="boolean_nav">
-  <li *ngFor="let slide of slides; let i = index" [ngClass]="{'active':currentSlide==i}" (click)="booletsClick(currentSlide==i,currentSlide,i)"></li>
+    <li *ngFor="let slide of slides; let i = index" [ngClass]="{'active':currentSlide==i}" (click)="booletsClick(i,slide)"></li>
 </ul>

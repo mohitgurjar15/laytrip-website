@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 declare var $: any;
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
@@ -119,14 +119,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
 
         if (this.hotelDetailsMain.filter_objects && this.hotelDetailsMain.filter_objects.secondary_price && this.hotelDetailsMain.filter_objects.secondary_price.min && this.hotelDetailsMain.filter_objects.secondary_price.max) {
-          // this.priceValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
-          // this.priceHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
-          // this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
-          
-          
-          // this.priceOptions.floor = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
-          // this.priceOptions.ceil = this.priceHighValue;//this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
-          
           this.partialPriceSlider.controls.partial_price.setValue([Math.floor(this.partialPaymentValue), Math.ceil(this.partialPaymentHighValue)]);
           
           this.partialPaymentOptions.floor = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
@@ -160,11 +152,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   onBlurMethod(event){      
-    // $('.searchHotelName').val(event.target.value);
-    // this.searchHotel = event.target.textContent ? event.target.textContent : '';
-    // if (event.target.value) 
-    // this.filterHotels({ key: 'searchByHotelName', value:this.searchHotel})
-    // this.isHotelSearch = false;
   }
 
   counter(i: any) {
@@ -176,18 +163,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   }
 
   loadJquery() {
-    //Start REsponsive Fliter js
-    /* $(".responsive_filter_btn").click(function () {
-      $("#responsive_filter_show").slideDown();
-      $("body").addClass('overflow-hidden');
-    });
-
-    $(".filter_close > a").click(function () {
-      $("#responsive_filter_show").slideUp();
-      $("body").removeClass('overflow-hidden');
-    }); */
-    //Close REsponsive Fliter js
-
     // Start filter Shortby js
     $(document).on('show', '#accordion3', function (e) {
       $(e.target).prev('.accordion-heading').addClass('accordion-opened');
@@ -302,13 +277,24 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     /* Filter hotel, based on min & max price */
     if (this.minPrice && this.maxPrice) {
       filteredHotels = filteredHotels.filter(item => {
-        return item.selling.total >= this.minPrice && item.selling.total <= this.maxPrice;
+        if(item.offer_data.applicable){
+          return  item.selling.discounted_total >= this.minPrice && item.selling.discounted_total <= this.maxPrice;
+        }
+        else{
+          return item.selling.total >= this.minPrice && item.selling.total <= this.maxPrice;
+        }
       })
     }
+    
     /* Filter hotel, based on min & max price Payment Price*/
     if (this.minPartialPaymentPrice && this.maxPartialPaymentPrice) {
       filteredHotels = filteredHotels.filter(item => {
-        return item.secondary_start_price >= this.minPartialPaymentPrice && item.secondary_start_price <= this.maxPartialPaymentPrice;
+        if(item.offer_data.applicable){
+          return item.discounted_secondary_start_price >= this.minPartialPaymentPrice && item.discounted_secondary_start_price <= this.maxPartialPaymentPrice;
+        }
+        else{
+          return item.secondary_start_price >= this.minPartialPaymentPrice && item.secondary_start_price <= this.maxPartialPaymentPrice;
+        }
       })
     }
 
@@ -409,42 +395,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
     $('.searchHotelName').val('')
     $("input:checkbox").prop('checked', false);
   }
-
-  // ngOnChanges(changes: SimpleChanges) {
-  //   if (changes['isResetFilter']) {
-  //     this.isResetFilter = changes['isResetFilter'].currentValue;
-  //     this.minPrice = this.hotelDetailsMain.filter_objects.price.min;
-  //     this.maxPrice = this.hotelDetailsMain.filter_objects.price.max;
-  //     // Reset Price
-  //     this.priceSlider.reset({ price: [Math.floor(this.hotelDetailsMain.filter_objects.price.min), Math.ceil(this.hotelDetailsMain.filter_objects.price.max)] });
-
-  //     // Reset price by total or weekly
-  //     this.sortType = 'filter_total_price';
-
-  //     // Reset ratings
-  //     if (this.ratingArray && this.ratingArray.length) {
-  //       this.ratingArray = [];
-  //       this.filterHotels({});
-  //     }
-
-  //     // Reset amenities
-  //     if (this.amenitiesArray && this.amenitiesArray.length) {
-  //       this.amenitiesArray = [];
-  //       this.filterHotels({});
-  //     }
-
-  //     // Reset policy
-  //     if (this.policyArray && this.policyArray.length) {
-  //       this.policyArray = [];
-  //       this.filterHotels({});
-  //     }
-
-  //     // Reset hotel name search
-  //     this.hotelname = 'Search Hotel';
-
-  //     $("input:checkbox").prop('checked', false);
-  //   }
-  // }
 
   toggleLowToHighRating() {
     this.lowToHighToggleRating = !this.lowToHighToggleRating;

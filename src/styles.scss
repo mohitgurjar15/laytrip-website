@@ -1217,7 +1217,7 @@ select {
                 }
 
                 @include mobile-view {
-                  width: 100px;
+                  width: 80px; 
                 }
 
                 label {
@@ -1243,7 +1243,7 @@ select {
                     color: $text-grey;
                     position: relative;
                     padding: 0;
-                    cursor: pointer;
+                    //cursor: pointer;
                     justify-content: flex-end;
 
                     span {
@@ -2154,7 +2154,7 @@ select {
                 color: $text-grey;
                 position: relative;
                 padding: 0 10px;
-                cursor: pointer;
+                //cursor: pointer;
 
                 @include tab-view {
                   padding: 0 13px;
