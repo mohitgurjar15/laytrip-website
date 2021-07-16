@@ -608,6 +608,9 @@ agm-map {
                                             align-items: center;
                                             justify-content: center;
                                         }
+                                        @include mobile-xxsm-view {
+                                            font-size: 10px;
+                                        }
                                     }
                                     p {
                                         margin: 0;
