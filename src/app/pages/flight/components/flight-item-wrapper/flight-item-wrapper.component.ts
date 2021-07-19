@@ -104,10 +104,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.loadJquery(); 
     this.flightService.getFlights.subscribe(data=>{
       if(data.length){
-        this.flightItems = data;
-        this.flightDetails = data.slice(0, this.noOfDataToShowInitially);
-        
-        // this.setAirportAvailability();
+        this.flightDetails = this.flightItems = data;            
       }
       else{
         this.flightDetails=[];
@@ -139,32 +136,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         }
       }
     });
-  }
-
-  setAirportAvailability() {
-
-    for(let element of this.flightDetails){
-      let requestParams = { revalidateDto: [] };
-      if (!this.checkedAirUniqueCodes.includes(element.unique_code)) {
-        requestParams.revalidateDto.push({
-          route_code: element.route_code,
-          unique_code: element.unique_code
-        })
-        this.checkedAirUniqueCodes.push(element.unique_code);
-      }
-  
-      this.flightService.searchAirportAvailabilityAssure(requestParams).subscribe(data => {
-        let temp;
-        for (let i = 0; i < this.flightDetails.length; i++) {
-          temp = data[this.flightDetails[i].unique_code] ? data[this.flightDetails[i].unique_code] : {};
-          if (Object.keys(temp).length) {
-            this.flightDetails[i].availability = temp.availability;
-          }
-        }
-      });
-    }
-    
-    
   }
 
   loadJquery() {
@@ -344,7 +315,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.isFlightNotAvailable = false;
     this.flightUniqueCode = '';
     // let queryParams: any = {};
-    const queryParams : any = {
+    /* const queryParams : any = {
       trip: this.route.snapshot.queryParams['trip'],
       departure: this.route.snapshot.queryParams['departure'],
       arrival: this.route.snapshot.queryParams['arrival'],     
@@ -371,7 +342,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
    
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
-    });
+    }); */
     
 
   }
@@ -401,10 +372,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         let requestParams = { revalidateDto: [] };
         this.noOfDataToShowInitially += this.dataToLoad;
         this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-        //Create new req param from i.e. 21 to 40
-        
-        
-        // this.setAirportAvailability()
         this.scrollLoading = false;
       } else {
         this.scrollLoading = false;
