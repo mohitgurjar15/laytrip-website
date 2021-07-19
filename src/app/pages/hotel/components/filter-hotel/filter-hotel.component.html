@@ -64,7 +64,7 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- <div class="cmn_block price">
+                        <div class="cmn_block price">
                             <div class="block_top_in">
                                 <h5>Distance</h5>
                             </div>
@@ -76,7 +76,7 @@
                                     <ng5-slider [(value)]="value" [options]="options" formControlName="distance" (userChangeEnd)="fliterByDistance($event)"></ng5-slider>
                                 </div>
                             </form>
-                        </div> -->
+                        </div>
 
                         <div class="cmn_block pad_no">
                             <div class="accordion block_shortby inner_accodeions" id="accordion-starrates">
@@ -225,6 +225,19 @@
                                     <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}} Weekly
                                     </p>
                                     <ng5-slider *ngIf="partialPaymentValue  && partialPaymentHighValue" [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" formControlName="partial_price" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)"></ng5-slider>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="cmn_block price">
+                            <div class="block_top_in">
+                                <h5>Distance</h5>
+                            </div>
+
+                            <form [formGroup]="distanceSlider">
+                                <div class="custom_range_slide">
+                                    <p>{{distance}} Miles
+                                    </p>
+                                    <ng5-slider [(value)]="value" [options]="options" formControlName="distance" (userChangeEnd)="fliterByDistance($event)"></ng5-slider>
                                 </div>
                             </form>
                         </div>
