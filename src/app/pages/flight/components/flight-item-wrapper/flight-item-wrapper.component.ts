@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
 import { DecimalPipe } from '@angular/common';
+import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -204,6 +205,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   }
 
   bookNow(route) {
+    console.log(route)
     this.removeFlight.emit(this.flightUniqueCode);
     this.isFlightNotAvailable = false;
 
@@ -228,7 +230,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       let payload = {
         module_id: 1,
         route_code: route.route_code,
-        referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : ''
+        referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : '',
+        searchData: { departure: route.departure_code, arrival: route.arrival_code, checkInDate: route.departure_date}
       };
       this.cartService.addCartItem(payload).subscribe((res: any) => {
         this.changeLoading.emit(true);
@@ -255,13 +258,20 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         }
       }, error => {
         this.changeLoading.emit(false);
+       /*  if (error.status == 406) {          
+          this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
+            windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
+            keyboard: false
+          });
+          return;
+        } else */
         if (error.status == 409 && this.commonFunction.isRefferal()) {
           this.modalService.open(DiscountedBookingAlertComponent, {
             windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
             keyboard: false
           });
           return;
-        } 
+        }
         this.isFlightNotAvailable = true;
         this.flightUniqueCode = route.unique_code;
       });

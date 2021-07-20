@@ -131,7 +131,7 @@
 
       <div class="right_side" [ngClass]="{'pt-3':!isRoundTrip}">
         <div class="fl_fares">
-          <ng-container *ngIf="item.secondary_start_price>0">
+          <ng-container *ngIf="item.is_installment_available">
             <span class="fare_type desk_fare">
               From
             </span>
@@ -159,7 +159,7 @@
             </span>
             <span class="fare_type mobile_fare">Flexible Installments</span>
           </ng-container>
-          <ng-container *ngIf="item.secondary_start_price==0">
+          <ng-container *ngIf="!item.is_installment_available">
             <span class="fare_type">Full Payment</span>
             <span class="cta_btn">
               <button (click)="bookNow(item)">Add to cart</button>
