@@ -231,7 +231,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         module_id: 1,
         route_code: route.route_code,
         referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : '',
-        searchData: { departure: route.departure_code, arrival: route.arrival_code, checkInDate: route.departure_date}
+        // searchData: { departure: route.departure_code, arrival: route.arrival_code, checkInDate: route.departure_date}
       };
       this.cartService.addCartItem(payload).subscribe((res: any) => {
         this.changeLoading.emit(true);
@@ -364,6 +364,16 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       if(typeof offerData.down_payment_options!='undefined' && offerData.down_payment_options[downPaymentOption].applicable){
         return true;
       }
+      return false;
+    }
+    return true;
+  }
+
+  checkInDateInstallmentValidation(departureDate) {
+    var currentDate = moment().add(2,'days').format("DD/MM/YYYY");
+    var departure = moment(departureDate, 'DD/MM/YYYY').format('DD/MM/YYYY');
+    // console.log(this.getDayDiff(departure, currentDate), currentDate)
+    if (this.getDayDiff(departure, currentDate) > 30) {
       return false;
     }
     return true;

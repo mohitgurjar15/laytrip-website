@@ -305,11 +305,11 @@
                                             <span class="texts" *ngIf="!item?.offer_data.applicable">
                                                 ${{item?.night_rate | number : '1.2-2'}} including taxes and fees
                                             </span>
-                                            <div class="notifi_text mobile_notifi" *ngIf="item?.offer_data.applicable == false">
+                                            <div class="notifi_text mobile_notifi" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">
                                                 More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                                             </div>
                                         </div>
-                                        <div class="full_desk_not" *ngIf="item?.offer_data.applicable == false">
+                                        <div class="full_desk_not" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">
                                             <div class="notifi_text">
                                                 More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                                             </div>
