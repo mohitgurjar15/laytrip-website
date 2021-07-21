@@ -650,6 +650,7 @@
                         color: $pink;
                         display: flex;
                         align-items: center;
+                        justify-content: center;
                         @include tab-view {
                             flex-direction: column;
                             line-height: 16px;
