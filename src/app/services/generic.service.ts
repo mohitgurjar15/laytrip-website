@@ -53,6 +53,13 @@ export class GenericService {
       );
   }
 
+  addCard(cardData) {
+    return this.http.post(`${environment.apiUrl}v1/payment`, cardData, this.commonFunction.setHeaders())
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   getCardlist() {
 
     return this.http.get(`${environment.apiUrl}v1/payment`, this.commonFunction.setHeaders())

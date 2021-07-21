@@ -25,6 +25,7 @@ export class AccountComponent implements OnInit {
   cardListChangeCount: number = 0;
   add_new_card = false;
   totalCard: number = 0;
+  newCard;
 
   constructor(
     private modalService: NgbModal,
@@ -126,5 +127,11 @@ export class AccountComponent implements OnInit {
 
   getCardListChange(data) {
     this.cardListChangeCount = data;
+  }
+
+  emitNewCard(data){
+
+    console.log("this.data",data)
+    this.newCard= data;
   }
 }

@@ -89,6 +89,7 @@ export class CardListComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log("changes",changes)
     if (typeof changes['newCard'] !== 'undefined') {
       if (typeof this.newCard !== 'undefined') {
         this.cards.push(this.newCard);

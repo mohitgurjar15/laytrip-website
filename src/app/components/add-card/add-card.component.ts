@@ -68,6 +68,7 @@ export class AddCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.totalCard = JSON.parse(this.totalCard);
     this.cardForm = this.formBuilder.group({
       first_name: ['', Validators.required],
@@ -85,6 +86,7 @@ export class AddCardComponent implements OnInit {
   }
 
   spreedlySdk() {
+    let self= this;
     Spreedly.init(this.envKey, {
       'numberEl': 'spreedly-number',
       'cvvEl': 'spreedly-cvv',
@@ -157,6 +159,7 @@ export class AddCardComponent implements OnInit {
     Spreedly.on('paymentMethod', function (token, pmData) {
       var tokenField = document.getElementById("payment_method_token");
       tokenField.setAttribute("value", token);
+      //self.saveCardLoader=true;
       //this.token = token;
       $('#main_loader').show();
       $(".credit_card_error").hide();
@@ -169,7 +172,11 @@ export class AddCardComponent implements OnInit {
         card_last_digit: pmData.last_four_digits,
         card_meta: pmData
       };
-      $.ajax({
+      self.cardData =cardData;
+      self.saveCard(cardData);
+      console.log("this.cardData",self.cardData)
+      
+      /* $.ajax({
         url: `${environment.apiUrl}v1/payment`,
         method: 'POST',
         headers: { Authorization: `Bearer ${localStorage.getItem('_lay_sess')}` },
@@ -212,9 +219,8 @@ export class AddCardComponent implements OnInit {
             $('#new_card').show();
             errorMessage.innerHTML = error.responseJSON.message;
           }
-          // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
         }
-      });
+      }); */
     });
   }
 
@@ -223,7 +229,7 @@ export class AddCardComponent implements OnInit {
   }
 
   submitPaymentForm() {
-    this.saveCardLoader = true;
+    //this.saveCardLoader = true;
     var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
     var normalBorder = "2px solid #d6d6d6";
@@ -248,23 +254,34 @@ export class AddCardComponent implements OnInit {
     }
     // Tokenize!
     Spreedly.tokenizeCreditCard(options);
+    console.log(this.cardData,"=================")
 
-    setTimeout(() => {
+    /* setTimeout(() => {
       this.cardListChangeCount += this.cardListChangeCount + 1;
       this.emitCardListChange.emit(this.cardListChangeCount);
       this.saveCardLoader = false;
-    }, 5000)
+    }, 5000) */
 
   }
 
   saveCard(cardData) {
-    this.saveCardLoader = true;
-    this.genericService.saveCard(cardData).subscribe((res: any) => {
+    //this.saveCardLoader = true;
+    this.genericService.addCard(cardData).subscribe((res: any) => {
       //this.cardForm.reset();
       this.emitNewCard.emit(res);
-      this.saveCardLoader = false;
+      /* this.cardListChangeCount += this.cardListChangeCount + 1;
+      this.emitCardListChange.emit(this.cardListChangeCount); */
+      $('#main_loader').hide();
+      $("#payment-form")[0].reset();
+      Spreedly.reload();
     }, (error => {
-      this.saveCardLoader = false;
+      $('#main_loader').hide();
+      if (error && error.status !== 406) {
+        let errorMessage = document.getElementById('cardErrorMessage');
+        $('#cardError').show();
+        $('#new_card').show();
+        errorMessage.innerHTML = error.message;
+      }
       // this.toastr.error(error.message, 'Error', { positionClass: 'toast-top-center', easeTime: 1000 });
     })
     );
@@ -279,7 +296,7 @@ export class AddCardComponent implements OnInit {
     // Spreedly.removeHandlers();
     $("#payment-form")[0].reset();
     this.add_new_card.emit(false);
-    this.saveCardLoader = false;
+    //this.saveCardLoader = false;
   }
 
   ngOnDestroy() {
