@@ -45,7 +45,7 @@
                             </div>
                             <form [formGroup]="priceSlider">
                                 <div class="custom_range_slide">
-                                    <p>{{ currency?.symbol }}{{priceValue | number : '1.2-2'}} - {{ currency?.symbol }}{{priceHighValue | number : '1.2-2'}}</p>
+                                    <p>{{ currency?.symbol }}{{priceValue | number : '1.0-0'}} - {{ currency?.symbol }}{{priceHighValue | number : '1.0-0'}}</p>
                                     <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue" [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions" (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
                                 </div>
                             </form>
@@ -58,7 +58,7 @@
 
                             <form [formGroup]="partialPriceSlider">
                                 <div class="custom_range_slide">
-                                    <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}} Weekly
+                                    <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.0-0'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.0-0'}} Weekly
                                     </p>
                                     <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue" [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" formControlName="partial_price" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)"></ng5-slider>
                                 </div>
@@ -211,7 +211,7 @@
                             </div>
                             <form [formGroup]="priceSlider">
                                 <div class="custom_range_slide">
-                                    <p>{{ currency?.symbol }}{{priceValue | number : '1.2-2'}} - {{ currency?.symbol }}{{priceHighValue | number : '1.2-2'}}</p>
+                                    <p>{{ currency?.symbol }}{{priceValue | number : '1.0-0'}} - {{ currency?.symbol }}{{priceHighValue | number : '1.0-0'}}</p>
                                     <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue" [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions" (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
                                 </div>
                             </form>
@@ -222,7 +222,7 @@
                             </div>
                             <form [formGroup]="partialPriceSlider" class="custom_range_form_slider">
                                 <div class="custom_range_slide">
-                                    <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}} Weekly
+                                    <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.0-0'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.0-0'}} Weekly
                                     </p>
                                     <ng5-slider *ngIf="partialPaymentValue  && partialPaymentHighValue" [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" formControlName="partial_price" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)"></ng5-slider>
                                 </div>
