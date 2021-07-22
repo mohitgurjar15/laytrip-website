@@ -43,7 +43,7 @@ export class BookingCompletionErrorPopupComponent implements OnInit {
       this.router.navigate(['/cart/checkout']);
     }
   }
-
+ 
   close() {
     this.activeModal.close();
     //Check if single booing confirm then stay on confirm page
