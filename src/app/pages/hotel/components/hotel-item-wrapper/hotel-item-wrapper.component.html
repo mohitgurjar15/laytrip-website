@@ -136,7 +136,7 @@
                                                     </p>
                                                     <p class="installment_type">Weekly Installments</p>
                                                 </div>
-                                                <div class="block" *ngIf="!item.is_installment_available">
+                                                <div class="block mb-0" *ngIf="!item.is_installment_available">
                                                     <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total |
                                                             number :
                                                             '1.2-2'}}</span></p>
