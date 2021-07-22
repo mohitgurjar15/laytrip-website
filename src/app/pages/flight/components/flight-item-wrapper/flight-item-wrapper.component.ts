@@ -372,7 +372,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   checkInDateInstallmentValidation(departureDate) {
     var currentDate = moment().add(2,'days').format("DD/MM/YYYY");
     var departure = moment(departureDate, 'DD/MM/YYYY').format('DD/MM/YYYY');
-    // console.log(this.getDayDiff(departure, currentDate), currentDate)
     if (this.getDayDiff(departure, currentDate) > 30) {
       return false;
     }
