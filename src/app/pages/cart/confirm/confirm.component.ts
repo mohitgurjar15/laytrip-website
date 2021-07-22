@@ -28,7 +28,7 @@ export class ConfirmComponent implements OnInit {
     private route: ActivatedRoute,
     private cartService: CartService,
     public commonFunction: CommonFunction,
-    private modalService: NgbModal,
+    public modalService: NgbModal,
   ) {
     this.bookingId = this.route.snapshot.paramMap.get('id');
   }
@@ -55,17 +55,17 @@ export class ConfirmComponent implements OnInit {
       this.cartDetails = res;
       let allBookingStatus=[];
       for(let i=0; i <this.cartDetails.booking.length; i ++){
-        if(this.cartDetails.booking[i].bookingStatus==2){
+        if (this.cartDetails.booking[i].bookingStatus == 2) {
           this.anyBookingStatus=false;
           allBookingStatus.push('failed')
         }
       }
-      if(this.anyBookingStatus==false){
-        this.openBookingCompletionErrorPopup();
-      }
-
       if(allBookingStatus.length==this.cartDetails.booking.length){
         this.allBookingStatus=false;
+      }
+      console.log(this.allBookingStatus)
+      if(this.anyBookingStatus==false){
+        this.openBookingCompletionErrorPopup();
       }
     }, error => {
       this.loading = false;
@@ -79,12 +79,11 @@ export class ConfirmComponent implements OnInit {
   }
 
   openBookingCompletionErrorPopup() {
-    this.modalService.open(BookingCompletionErrorPopupComponent, {
+    const modalRef = this.modalService.open(BookingCompletionErrorPopupComponent, {
       windowClass: 'booking_completion_error_block', centered: true, backdrop: 'static',
       keyboard: false
-    }).result.then((result) => {
-
     });
+    (<BookingCompletionErrorPopupComponent>modalRef.componentInstance).isSingleBooingConfirmedFromCart = this.allBookingStatus;
   }
 
   ngAfterViewInit() {

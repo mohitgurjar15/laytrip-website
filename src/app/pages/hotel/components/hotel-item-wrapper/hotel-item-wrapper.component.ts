@@ -337,7 +337,7 @@ export class HotelItemWrapperComponent implements OnInit {
     if (hotel.offer_data.applicable) {
       return `$${Math.floor(hotel.discounted_secondary_start_price)}`
     } else {
-      return `$${Math.floor(hotel.secondary_start_price)}`      
+      return hotel.is_installment_available ? `$${Math.floor(hotel.secondary_start_price)}` : `$${Math.floor(hotel.selling.total)}`;
     }
   }
 
