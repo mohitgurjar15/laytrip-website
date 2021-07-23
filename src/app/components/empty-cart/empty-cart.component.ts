@@ -21,6 +21,7 @@ export class EmptyCartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    localStorage.setItem('$crt', '0');
     $('#cart_modal').modal('show');
     this.renderer.addClass(document.body, 'cms-bgColor');
   }

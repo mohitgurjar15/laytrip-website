@@ -277,8 +277,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
     queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
     queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
-    queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
-    queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
+    queryParams.x_coordinate = parseFloat(this.searchHotelInfo.latitude);
+    queryParams.y_coordinate = parseFloat(this.searchHotelInfo.longitude);
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
     queryParams.city_name = this.searchHotelInfo.city.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-')
     if (this.searchHotelInfo.hotel_name) {
