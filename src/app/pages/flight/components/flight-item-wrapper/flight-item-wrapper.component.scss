@@ -712,7 +712,8 @@
                                 max-width: 100px;
                                 margin-bottom: 0;
                             }
-                            @include mobile-xxsm-view {
+                            @include mobile-sm-view {
+                                padding: 0 5px;
                                 font-size: 10px;
                             }
                             &:focus {

@@ -87,10 +87,28 @@ export class ConfirmComponent implements OnInit {
     });
   }
 
-  // Author: xavier | 2021/7/13
-  // Description: Report total purchase amount back to GTM
   ngAfterViewInit() {
-    //alert(this.cartDetails.totalAmount);
-    window['dataLayer'].push({'event': this.cartDetails.totalAmount});
+    this.setupGTMEventHandlers();
+  }
+
+  // Author: xavier | 2021/7/16
+  // Description: Report total purchase amount back to GTM
+  setupGTMEventHandlers() {
+    let details = $('.detail_liners');
+    if(details.length == 0) {
+      setTimeout(() => this.setupGTMEventHandlers(), 500);
+      return;
+    }
+
+    for(let i = 0; i < details.length; i++) {
+      if(details[i].innerText.indexOf("Total Price") > -1) {
+        let spans: HTMLSpanElement[] = details.eq(i).find('span');
+        let totalStr: string = spans[spans.length - 1].innerText;
+        let totalNum: number = (+totalStr.replace(/[^0-9]/g, '')) / 100.0;
+        window['dataLayer'].push({'event': 'revenue', 'total_amount': totalNum});
+
+        break;
+      }
+    }
   }
 }
