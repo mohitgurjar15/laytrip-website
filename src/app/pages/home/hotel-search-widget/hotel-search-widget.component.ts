@@ -151,8 +151,8 @@ export class HotelSearchWidgetComponent implements OnInit {
       let info;
       this.searchHotelInfo =
       {
-        latitude: this.route.snapshot.queryParams['latitude'],
-        longitude: this.route.snapshot.queryParams['longitude'],
+        latitude: this.route.snapshot.queryParams['x_coordinate'],
+        longitude: this.route.snapshot.queryParams['y_coordinate'],
         check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
         check_out: moment(this.checkOutDate).format('MM/DD/YYYY'),
         city_id: this.route.snapshot.queryParams['city_id'],
@@ -244,7 +244,7 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
-    if ($('.hotel_desination').val() == '') {
+    if (this.fromDestinationInfo.title.length == 0) {
       this.validSearch = false;
     }
     let queryParams: any = {};
@@ -273,6 +273,7 @@ export class HotelSearchWidgetComponent implements OnInit {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
+    console.log(this.searchHotelInfo)
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
 

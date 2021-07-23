@@ -92,8 +92,8 @@ export class HotelItemWrapperComponent implements OnInit {
     ];
     this.check_in = this.route.snapshot.queryParams['check_in']
     this.check_out = this.route.snapshot.queryParams['check_out']
-    this.latitude = this.route.snapshot.queryParams['latitude']
-    this.longitude = this.route.snapshot.queryParams['longitude']
+    this.latitude = this.route.snapshot.queryParams['x_coordinate']
+    this.longitude = this.route.snapshot.queryParams['y_coordinate']
     this.itenery = this.route.snapshot.queryParams['itenery']
     this.location = this.route.snapshot.queryParams['location']
     this.city_id = this.route.snapshot.queryParams['city_id']
@@ -146,8 +146,8 @@ export class HotelItemWrapperComponent implements OnInit {
 
 
     this.userInfo = getLoginUserInfo();
-    this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
-    this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
+    this.defaultLat = parseFloat(this.route.snapshot.queryParams['x_coordinate']);
+    this.defaultLng = parseFloat(this.route.snapshot.queryParams['y_coordinate']);
 
     this.hotelService.getHotels.subscribe(result => {
       this.hotelDetails = result;
