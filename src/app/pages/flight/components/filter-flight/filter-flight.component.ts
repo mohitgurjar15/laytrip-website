@@ -129,6 +129,13 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       this.flightStops = this.filterFlightDetails.stop_data;
 
     }
+    //For inbound if min price is less
+    if (this.filterFlightDetails && this.filterFlightDetails.inbound_stop_data) {
+      var inbound_stop_data = this.filterFlightDetails.inbound_stop_data;
+      if (inbound_stop_data.two_and_two_plus_stop.min_price < this.flightStops.two_and_two_plus_stop.min_price) {
+        this.flightStops.two_and_two_plus_stop.min_price = inbound_stop_data.two_and_two_plus_stop.min_price;
+      }
+    }
     if (this.filterFlightDetails && this.filterFlightDetails.airline_list) {
       // FOR FLIGHT AIRLINE - AIRLINE
       this.airLineCount = this.filterFlightDetails.airline_list.length + 1;
