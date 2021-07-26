@@ -154,7 +154,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
        }     
       }, err => {
         this.loading = this.fullPageLoading= false;
-        // this.isNotFound = true;
+        this.isNotFound = true;
         if (err.status == 422) {
           this.errorMessage = err.message;
         } else if (err && err.status === 406) {
