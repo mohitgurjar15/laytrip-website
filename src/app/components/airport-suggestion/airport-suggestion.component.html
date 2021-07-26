@@ -10,7 +10,7 @@
             <div class="suggtions">
                 <div class="sug_line_box" *ngFor="let item of data">
                     <a href="#a" class="word_alpha">{{item.key}}</a>
-                    <span class="linew_wrps">
+                  <span class="linew_wrps">
                         <ng-conatiner *ngFor="let sub_item of item.value">
                             <span class="line_names {{sub_item.code}}" (click)="selectAirport(sub_item)" *ngIf="isSuggestionWithCountry(sub_item.code)">
                                 {{sub_item.city}}, {{sub_item.country}} ({{sub_item.code}})

@@ -49,11 +49,13 @@ export class AirportSuggestionComponent implements OnInit {
       }
       airportArray = airportArray.sort((a, b) => a.key.localeCompare(b.key));
       for(let i=0; i <airportArray.length; i++){
-        for(let j=0; j<airportArray[i].value.length; j++){
-          airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
-        }
+        airportArray[i].value.display_name = `${airportArray[i].value.city},${airportArray[i].value.country},(${airportArray[i].value.code}),${airportArray[i].value.name}`
+        // for(let j=0; j<airportArray[i].value.length; j++){
+          // airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
+        // }
       }
-      this.data=airportArray;
+      this.data = airportArray;
+      console.log(this.data)
     } 
   }
 
@@ -65,15 +67,19 @@ export class AirportSuggestionComponent implements OnInit {
       this.loading = true;
       this.flightService.searchAirports(this.type).subscribe((result:any)=>{
         this.loading=false;
-        for(let i=0; i <result.length; i++){
+        /* for(let i=0; i <result.length; i++){
           for(let j=0; j<result[i].value.length; j++){
             if(result[i].value[j].code != 'AMD'){
               result[i].value[j].display_name = `${result[i].value[j].city},${ result[i].value[j].country},(${result[i].value[j].code}),${ result[i].value[j].name}`
             }
           }
+        } */
+        for (let i = 0; i < result.length; i++) {
+          result[i].display_name = `${result[i].city},${result[i].country},(${result[i].code}),${result[i].name}`
         }
         this.data=result;
-      },error=>{
+        console.log(this.data)
+      }, error => {
         this.loading=false;
         this.data=[];
       })
