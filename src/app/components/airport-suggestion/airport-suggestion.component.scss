@@ -111,6 +111,19 @@ ng-scrollbar {
                         margin-bottom: 10px;
                         display: flex;
                         cursor: pointer;
+                        flex-direction: column;
+
+                        .airport_names{
+                            ul{
+                                list-style: none;
+                                padding-left: 15px;
+                                li{
+                                    @include tab-view {
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+                        }
 
                         // &:last-child{
                         //     margin-bottom: 0;
