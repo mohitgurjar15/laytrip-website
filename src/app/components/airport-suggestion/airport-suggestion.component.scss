@@ -124,7 +124,7 @@ ng-scrollbar {
                                 li {
                                     margin: 5px 0 0;
                                     font-size: 12px;
-                                    
+
                                     // text-overflow: ellipsis; 
                                     // white-space: nowrap; 
                                     // width: 75%; 
@@ -145,7 +145,7 @@ ng-scrollbar {
                                     }
 
                                     @include tab-view {
-                                        font-size: 12px;
+                                        font-size: 10px;
                                     }
                                 }
                             }
