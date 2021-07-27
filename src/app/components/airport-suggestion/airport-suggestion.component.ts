@@ -25,7 +25,7 @@ export class AirportSuggestionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAirports();
+    // this.getAirports();
   }
 
   closeAirportDropDown(type){
@@ -47,7 +47,7 @@ export class AirportSuggestionComponent implements OnInit {
     } 
   }
 
-  getAirports(){
+  getAirports() {
     this.data = [];
     let from = localStorage.getItem('__from') || '';
     let to = localStorage.getItem('__to') || '';

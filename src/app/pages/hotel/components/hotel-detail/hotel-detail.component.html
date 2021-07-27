@@ -420,15 +420,18 @@
             <div class="col_right align-self-center" *ngIf="hotelRoomArray.length">
                 <div class="price_wrpper">
                     <small>From</small>
-                    <span *ngIf="hotelRoomArray[0]?.offer_data.applicable && hotelRoomArray[0]?.offer_data.discount.applicable" class="flex-row">
-            <span *ngIf="hotelRoomArray[0].secondary_start_price > hotelRoomArray[0].discounted_secondary_start_price"
-              class="big_font dashed_price"> ${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}} </span>
-                    <span class="big_font">${{hotelRoomArray[0].discounted_secondary_start_price | number : '1.2-2'}}</span>
+                    <span *ngIf="hotelRoomArray[0]?.offer_data.applicable && hotelRoomArray[0]?.offer_data.discount.applicable" class="flex-row">                    
+                        <span *ngIf="hotelRoomArray[0].secondary_start_price > hotelRoomArray[0].   discounted_secondary_start_price"
+                        class="big_font dashed_price"> ${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}}
+                        </span>
+                        <span class="big_font">${{hotelRoomArray[0].discounted_secondary_start_price | number : '1.2-2'}}</span>
                     </span>
+                    
                     <span *ngIf="!hotelRoomArray[0].offer_data.applicable">
-            <span class="big_font">${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}}</span>
+                        <span class="big_font">${{ (hotelRoomArray[0].is_installment_available ? hotelRoomArray[0].secondary_start_price  : hotelRoomArray[0]?.selling.total) | number : '1.2-2' }}</span>                        
                     </span>
-                    <small>Weekly Installments</small>
+
+                    <small>{{hotelRoomArray[0].is_installment_available ? 'Weekly Installments':'Full Payment' }}</small>
                 </div>
             </div>
         </div>
@@ -696,11 +699,11 @@
                                             <span class="texts" *ngIf="!room?.offer_data.applicable">
                         ${{room?.night_rate | number : '1.2-2'}} including taxes and fees
                       </span>
-                                            <div class="notifi_text mobile_notifi" *ngIf="!room?.offer_data.applicable">
+                                            <div class="notifi_text mobile_notifi" *ngIf="room?.is_installment_available &&  !room?.offer_data.applicable">
                                                 More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                                             </div>
                                         </div>
-                                        <div class="full_desk_not" *ngIf="!room?.offer_data.applicable">
+                                        <div class="full_desk_not" *ngIf="room?.is_installment_available && !room?.offer_data.applicable">
                                             <div class="notifi_text">
                                                 More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
                                             </div>

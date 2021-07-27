@@ -52,6 +52,7 @@ import { HotelCartItemComponent } from '../pages/hotel/components/hotel-cart-ite
 import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { DiscountedBookingAlertComponent } from './discounted-booking-alert/discounted-booking-alert.component';
+import { CartInventoryNotmatchErrorPopupComponent } from './cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 @NgModule({
   declarations: [
     SearchAirportComponent,
@@ -89,7 +90,8 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
     HotelCartItemComponent,
     HotelSuggestionComponent,
     CarouselComponent,
-    DiscountedBookingAlertComponent
+    DiscountedBookingAlertComponent,
+    CartInventoryNotmatchErrorPopupComponent
   ],
   imports: [
     CommonModule,
@@ -150,7 +152,7 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
   ],
   providers: [DatePipe, 
     NgbActiveModal],
-  entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent, DiscountedBookingAlertComponent],
+  entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent, DiscountedBookingAlertComponent, CartInventoryNotmatchErrorPopupComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ]

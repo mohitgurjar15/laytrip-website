@@ -53,8 +53,10 @@ export class SearchAirportComponent implements OnInit {
 
 
   onChangeSearch(event) {
-    this.searchRoute(event.term);
-    // this.searchAirport(event.term);
+     if (event.term.length > 2) {
+      this.searchRoute(event.term);
+      // this.searchAirport(event.term);      
+    } 
   }
 
   searchRoute(searchItem) {
@@ -94,10 +96,10 @@ export class SearchAirportComponent implements OnInit {
   searchAirport(searchItem) {
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
       
-      this.flightSearchRoute.emit(response);
       /* this.flightSearchRoute.emit(response); */
       this.data = response.map(res => {
         if (localStorage.getItem('__from') != res.code) {
+          this.flightSearchRoute.emit(response);
           this.loading = false;
           var searchRoute = {
             id: res.id,
@@ -111,7 +113,9 @@ export class SearchAirportComponent implements OnInit {
 
           return searchRoute;
         } else {
-         
+          console.log(localStorage.getItem('__from'), res.code)
+
+          console.log('here')
         }
       });
     },
