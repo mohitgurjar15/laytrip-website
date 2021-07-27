@@ -90,7 +90,6 @@ export class AirportSuggestionComponent implements OnInit {
   }
 
   selectAirport(event) {
-    console.log(event, this.type)
     this.closeAirportSuggestion.emit(this.type)
     if(this.type=='from'){
       this.changeValue.emit({ key: 'fromSearch', value: event });

@@ -48,7 +48,6 @@ export class SearchAirportComponent implements OnInit {
     if(Object.keys(this.airport).length==0){
       this.data=[];
     }
-    console.log(this.data)
   }
 
 
@@ -85,6 +84,8 @@ export class SearchAirportComponent implements OnInit {
       });
     },
       error => {
+        this.flightSearchRoute.emit([]);
+        this.data = [];
         this.loading = false;
       }
     );
