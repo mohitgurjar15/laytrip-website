@@ -25,7 +25,7 @@ export class AirportSuggestionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.getAirports();
+    this.getAirports();
   }
 
   closeAirportDropDown(type){

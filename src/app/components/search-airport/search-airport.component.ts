@@ -48,7 +48,6 @@ export class SearchAirportComponent implements OnInit {
     if(Object.keys(this.airport).length==0){
       this.data=[];
     }
-    console.log(this.data)
   }
 
 
