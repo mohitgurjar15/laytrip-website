@@ -27,7 +27,7 @@ ng-scrollbar {
     z-index: 999;
     //max-height: 186px;
 
-    @include tab-view{
+    @include tab-view {
         //max-height: 265px;
     }
 
@@ -37,12 +37,13 @@ ng-scrollbar {
         right: 15px;
         z-index: 999;
 
-        @include tab-view{
+        @include tab-view {
             right: 30px;
         }
 
         button {
             cursor: pointer;
+
             img {
                 max-width: 9px;
             }
@@ -56,6 +57,7 @@ ng-scrollbar {
 
     .suggtions_wrps_mn {
         display: flex;
+
         .suggtions {
             scroll-behavior: smooth;
             height: 100%;
@@ -72,12 +74,13 @@ ng-scrollbar {
                 margin-bottom: 10px;
                 float: left;
 
-                &:last-child{
+                &:last-child {
                     margin-bottom: 0;
-                    .linew_wrps{
-                        ng-conatiner{
-                            &:last-child{
-                                .line_names{
+
+                    .linew_wrps {
+                        ng-conatiner {
+                            &:last-child {
+                                .line_names {
                                     margin-bottom: 0;
                                 }
                             }
@@ -89,7 +92,7 @@ ng-scrollbar {
                     font-size: 18px;
                     font-weight: 500;
                     color: $text-black;
-                    width: 25px;    
+                    width: 25px;
                     float: left;
 
                     @include tab-view {
@@ -113,11 +116,28 @@ ng-scrollbar {
                         cursor: pointer;
                         flex-direction: column;
 
-                        .airport_names{
-                            ul{
+                        .airport_names {
+                            ul {
                                 list-style: none;
-                                padding-left: 15px;
-                                li{
+                                padding-left: 0;
+
+                                li {
+                                    margin: 5px 0 0;
+
+                                    // &:last-child {
+                                    //     margin-bottom: 0;
+                                    // }
+
+                                    &::before {
+                                        content: '';
+                                        position: relative;
+                                        padding: 0 10px;
+                                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/summary_flight_ic.svg);
+                                        background-position: center;
+                                        background-repeat: no-repeat;
+                                        background-size: 24px;
+                                    }
+
                                     @include tab-view {
                                         font-size: 12px;
                                     }
@@ -136,6 +156,7 @@ ng-scrollbar {
             }
         }
     }
+
     .alphabets_wrps {
 
         flex: 1;
@@ -146,7 +167,7 @@ ng-scrollbar {
         right: 50px;
         margin-top: 20px;
 
-        @include tab-view{
+        @include tab-view {
             display: none;
         }
 
