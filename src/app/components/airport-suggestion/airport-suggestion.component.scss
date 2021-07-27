@@ -118,6 +118,11 @@ ng-scrollbar {
                                 list-style: none;
                                 padding-left: 15px;
                                 li{
+
+                                    &::before{
+                                        content: '';
+                                        
+                                    }
                                     @include tab-view {
                                         font-size: 12px;
                                     }
