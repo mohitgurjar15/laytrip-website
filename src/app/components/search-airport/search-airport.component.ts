@@ -149,6 +149,9 @@ export class SearchAirportComponent implements OnInit {
   onRemove(event) {
     this.selectedAirport = {};
   }
+  onInputClick(event) {
+    // this.selectedAirport = {};
+  }
 
   setDefaultAirport() {
     try {
