@@ -35,25 +35,15 @@ export class AirportSuggestionComponent implements OnInit {
   
   ngOnChanges(changes: SimpleChanges) {
     this.data=[];
-    if(changes['searchedFlightData']){
+    let airportArray=[];
+    if (changes['searchedFlightData'].currentValue){
       this.loading=this.isType = false;
-    
-      let opResult = this.groupByKey(changes['searchedFlightData'].currentValue,'key')
-      let airportArray=[];
   
-      for (const [key, value] of Object.entries(opResult)) {
-        airportArray.push({
-          key : key,
-          value : value
-        })
+      airportArray = changes['searchedFlightData'].currentValue;
+      for(let i=0; i < airportArray.length; i++){
+        airportArray[i].display_name = `${airportArray[i].city},${airportArray[i].country},(${airportArray[i].code}),${airportArray[i].name}`     
       }
-      airportArray = airportArray.sort((a, b) => a.key.localeCompare(b.key));
-      for(let i=0; i <airportArray.length; i++){
-        for(let j=0; j<airportArray[i].value.length; j++){
-          airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
-        }
-      }
-      this.data=airportArray;
+      this.data = airportArray;
     } 
   }
 
@@ -64,16 +54,12 @@ export class AirportSuggestionComponent implements OnInit {
     if(from=='' && to==''){
       this.loading = true;
       this.flightService.searchAirports(this.type).subscribe((result:any)=>{
-        this.loading=false;
-        for(let i=0; i <result.length; i++){
-          for(let j=0; j<result[i].value.length; j++){
-            if(result[i].value[j].code != 'AMD'){
-              result[i].value[j].display_name = `${result[i].value[j].city},${ result[i].value[j].country},(${result[i].value[j].code}),${ result[i].value[j].name}`
-            }
-          }
+        this.loading=false;       
+        for (let i = 0; i < result.length; i++) {
+          result[i].display_name = `${result[i].city},${result[i].country},(${result[i].code}),${result[i].name}`
         }
         this.data=result;
-      },error=>{
+      }, error => {
         this.loading=false;
         this.data=[];
       })
@@ -90,22 +76,10 @@ export class AirportSuggestionComponent implements OnInit {
       this.loading=true;
       this.flightService.searchRoute('',isFromLocation,alternateLocation).subscribe((response: any) => {
         this.loading=false;
-        let opResult = this.groupByKey(response,'key')
-        let airportArray=[];
-		
-        for (const [key, value] of Object.entries(opResult)) {
-          airportArray.push({
-            key : key,
-            value : value
-          })
+        for (let i = 0; i < response.length; i++){
+          response[i].display_name = `${response[i].city},${response[i].country},(${response[i].code}),${ response[i].name}`
         }
-        airportArray = airportArray.sort((a, b) => a.key.localeCompare(b.key));
-        for(let i=0; i <airportArray.length; i++){
-          for(let j=0; j<airportArray[i].value.length; j++){
-            airportArray[i].value[j].display_name = `${airportArray[i].value[j].city},${ airportArray[i].value[j].country},(${airportArray[i].value[j].code}),${ airportArray[i].value[j].name}`
-          }
-        }
-        this.data=airportArray;
+        this.data = response;
       },
         error => {
           this.data=[];
@@ -115,18 +89,10 @@ export class AirportSuggestionComponent implements OnInit {
     }
   }
 
-  groupByKey(array, key) {
-		return array
-		  .reduce((hash, obj) => {
-			if(obj[key] === undefined) return hash; 
-			return Object.assign(hash, { [obj[key]]:( hash[obj[key]] || [] ).concat(obj)})
-		  }, {})
-	 }
-
-  selectAirport(event){
+  selectAirport(event) {
+    console.log(event, this.type)
     this.closeAirportSuggestion.emit(this.type)
     if(this.type=='from'){
-
       this.changeValue.emit({ key: 'fromSearch', value: event });
       localStorage.setItem('__from',event.code)
     }

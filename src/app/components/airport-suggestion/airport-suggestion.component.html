@@ -1,48 +1,3 @@
-<!-- <div class="search_suggetion_main" *ngIf="data.length > 0">
-    <div class="close_btn">
-        <button (click)="closeAirportDropDown(type)" type="button" class="close">
-            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-        </button>
-    </div>
-    <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all" pointerEventsMethod="scrollbar">
-        <span *ngIf="loading">Loading...</span>
-        <div class="suggtions_wrps_mn">
-            <div class="suggtions">
-                <div class="sug_line_box" *ngFor="let item of data">
-                    <a href="#a" class="word_alpha">{{item.key}}</a>
-                    <span class="linew_wrps">
-                        <ng-conatiner *ngFor="let sub_item of item.value">
-                            <span class="line_names {{sub_item.code}}" (click)="selectAirport(sub_item)" *ngIf="isSuggestionWithCountry(sub_item.code)">
-                                {{sub_item.city}}, {{sub_item.country}} ({{sub_item.code}})
-
-                                 <span class="airport_names">
-                                <ul>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                </ul>
-                            </span>
-                            </span>
-                    <span class="line_names {{sub_item.code}}" (click)="selectAirport(sub_item)" *ngIf="!isSuggestionWithCountry(sub_item.code)">
-                                {{sub_item.city}} ({{sub_item.code}})
-                            </span>
-                    </ng-conatiner>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </ng-scrollbar>
-</div> -->
-
 <div class="search_suggetion_main">
     <div class="close_btn">
         <button (click)="closeAirportDropDown(type)" type="button" class="close">
@@ -51,50 +6,38 @@
     </div>
     <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
         pointerEventsMethod="scrollbar">
-        <!-- <span *ngIf="loading">Loading...</span> -->
+         <span *ngIf="loading">Loading...</span> 
         <div class="suggtions_wrps_mn">
             <div class="suggtions">
                 <div class="sug_line_box">
                     <!-- <a href="#a" class="word_alpha">{{item.key}}</a> -->
                     <span class="linew_wrps">
-                        <span class="line_names ">
-                            Ahmedabad State
-                            <span class="airport_names">
-                                <ul>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                </ul>
-                            </span>
-                        </span>
-                        <span class="line_names ">
-                            Ahmedabad State
-                            <span class="airport_names">
-                                <ul>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                    <li>
-                                        SVBP
-                                    </li>
-                                </ul>
-                            </span>
-                        </span>
+                        <ng-conatiner *ngFor="let item of data">
+                            <span class="line_names" (click)="selectAirport(item)" *ngIf="isSuggestionWithCountry(item.code)">
+                            {{item.city}}, {{item.country}} ({{item.code}})
+                                <span class="airport_names">
+                                    <ul>
+                                        <ng-conatiner *ngFor="let sub_item of item.child">
+                                            <li  (click)="selectAirport(sub_item)" >                                        
+                                                {{sub_item.name}} ({{sub_item.code}})
+                                            </li>
+                                        </ng-conatiner>                                    
+                                    </ul>
+                                </span>
+                            </span>                        
+                            <span class="line_names" (click)="selectAirport(item)" *ngIf="!isSuggestionWithCountry(item.code)">
+                            {{item.city}} ({{item.code}})
+                                <span class="airport_names">
+                                    <ul>
+                                        <ng-conatiner *ngFor="let sub_item of item.child">
+                                            <li (click)="selectAirport(sub_item)" >                                        
+                                                {{sub_item.name}} ({{sub_item.code}})
+                                            </li>
+                                        </ng-conatiner>                                    
+                                    </ul>
+                                </span>
+                            </span>                        
+                        </ng-conatiner>                                               
                     </span>
                 </div>
             </div>
