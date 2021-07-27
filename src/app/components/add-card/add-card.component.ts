@@ -118,8 +118,8 @@ export class AddCardComponent implements OnInit {
       } else {
         $("#month-year").css("border-bottom", "2px solid #d6d6d6");
       } 
-      console.log("errors",errors)
-
+      //self.saveCardLoader = false;
+      console.log("errors",self.saveCardLoader)
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
         var errorBorder = "2px solid #ff0000";
@@ -229,6 +229,7 @@ export class AddCardComponent implements OnInit {
   }
 
   submitPaymentForm() {
+    console.log("submitPaymentForm")
     //this.saveCardLoader = true;
     var paymentMethodFields = ['full_name', 'month-year'],
       options = {};
@@ -265,9 +266,10 @@ export class AddCardComponent implements OnInit {
   }
 
   saveCard(cardData) {
-    //this.saveCardLoader = true;
+    
     this.genericService.addCard(cardData).subscribe((res: any) => {
       //this.cardForm.reset();
+      //this.saveCardLoader = false;
       this.emitNewCard.emit(res);
       /* this.cardListChangeCount += this.cardListChangeCount + 1;
       this.emitCardListChange.emit(this.cardListChangeCount); */
@@ -276,6 +278,7 @@ export class AddCardComponent implements OnInit {
       Spreedly.reload();
     }, (error => {
       $('#main_loader').hide();
+      this.saveCardLoader = false;
       if (error && error.status !== 406) {
         let errorMessage = document.getElementById('cardErrorMessage');
         $('#cardError').show();
