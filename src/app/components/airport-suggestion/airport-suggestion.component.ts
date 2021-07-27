@@ -54,7 +54,9 @@ export class AirportSuggestionComponent implements OnInit {
     if(from=='' && to==''){
       this.loading = true;
       this.flightService.searchAirports(this.type).subscribe((result:any)=>{
-        this.loading=false;       
+        this.loading = false;
+        result.sort((a, b) => a.name.localeCompare(b.name))
+
         for (let i = 0; i < result.length; i++) {
           result[i].display_name = `${result[i].city},${result[i].country},(${result[i].code}),${result[i].name}`
         }
@@ -90,7 +92,6 @@ export class AirportSuggestionComponent implements OnInit {
   }
 
   selectAirport(event) {
-    console.log(event, this.type)
     this.closeAirportSuggestion.emit(this.type)
     if(this.type=='from'){
       this.changeValue.emit({ key: 'fromSearch', value: event });

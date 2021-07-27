@@ -86,6 +86,8 @@ export class SearchAirportComponent implements OnInit {
       });
     },
       error => {
+        this.flightSearchRoute.emit([]);
+        this.data = [];
         this.loading = false;
       }
     );
