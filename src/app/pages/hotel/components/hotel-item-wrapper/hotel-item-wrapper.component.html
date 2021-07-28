@@ -134,7 +134,7 @@
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">Weekly Installments</p>
+                                                    <p class="installment_type">Installments</p>
                                                 </div>
                                                 <div class="block mb-0" *ngIf="!item.is_installment_available">
                                                     <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total |
@@ -225,7 +225,7 @@
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">Weekly Installments</p>
+                                                    <p class="installment_type">Installments</p>
                                                 </div>
                                                 <div class="block" *ngIf="!item.is_installment_available">
                                                     <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total |
