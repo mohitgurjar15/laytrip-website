@@ -55,8 +55,6 @@ export class AirportSuggestionComponent implements OnInit {
       this.loading = true;
       this.flightService.searchAirports(this.type).subscribe((result:any)=>{
         this.loading = false;
-        result.sort((a, b) => a.name.localeCompare(b.name))
-
         for (let i = 0; i < result.length; i++) {
           result[i].display_name = `${result[i].city},${result[i].country},(${result[i].code}),${result[i].name}`
         }

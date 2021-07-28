@@ -155,7 +155,7 @@ export class HotelDetailComponent implements OnInit {
     let offset: number = 0;
     for(let i: number = 0; i < tokens.length; i++) {
       if((result.length - offset) >= maxLength) {
-        result += "<br><br>";
+        // result += "<br><br>";
         offset = result.length;
       }
       if(tokens[i].length > 0) result += `${tokens[i]}.`;
