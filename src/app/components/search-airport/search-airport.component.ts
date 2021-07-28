@@ -86,18 +86,13 @@ export class SearchAirportComponent implements OnInit {
       });
     },
       error => {
+        this.flightSearchRoute.emit([]);
+        this.data = [];
         this.loading = false;
       }
     );
   }
 
-  onInputClick() {
-    // data if set null if it is set in from search.
-    if (this.id == 'toSearch') {
-      this.flightSearchRoute.emit({});
-      this.data = [];
-    }
-  }
 
   searchAirport(searchItem) {
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
@@ -173,7 +168,7 @@ export class SearchAirportComponent implements OnInit {
     if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
       this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ?  changes['airport'].currentValue.city : [];     
       this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([],[changes['airport'].currentValue]) : [];
-    }    
+    }
   }
 
   onFocus(){
