@@ -93,6 +93,13 @@ export class SearchAirportComponent implements OnInit {
     );
   }
 
+  onInputClick() {
+    // data if set null if it is set in from search.
+    if (this.id == 'toSearch') {
+      this.flightSearchRoute.emit({});
+      this.data = [];
+    }
+  }
 
   searchAirport(searchItem) {
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
