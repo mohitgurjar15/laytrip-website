@@ -52,10 +52,10 @@ export class SearchAirportComponent implements OnInit {
 
 
   onChangeSearch(event) {
-    // this.searchRoute(event.term);
-    if (event.term.length > 2) {
+     if (event.term.length > 2) {
+      // this.searchRoute(event.term);
       this.searchAirport(event.term);      
-    }
+    } 
   }
 
   searchRoute(searchItem) {
@@ -158,6 +158,7 @@ export class SearchAirportComponent implements OnInit {
   onRemove(event) {
     this.selectedAirport = {};
   }
+ 
 
   setDefaultAirport() {
     try {

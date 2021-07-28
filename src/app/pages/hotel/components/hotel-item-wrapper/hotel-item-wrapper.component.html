@@ -134,12 +134,14 @@
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">Weekly Installments</p>
+                                                    <p class="installment_type">Installments</p>
                                                 </div>
                                                 <div class="block mb-0" *ngIf="!item.is_installment_available">
-                                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total |
+                                                    <p> <span>{{ currency?.symbol }}{{item?.selling?.total |
                                                             number :
-                                                            '1.2-2'}}</span></p>
+                                                            '1.2-2'}}</span>
+                                                            Full Payment
+                                                        </p>
                                                 </div>
                                             </div>
                                             <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">Select</a>
@@ -225,12 +227,14 @@
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">Weekly Installments</p>
+                                                    <p class="installment_type">Installments</p>
                                                 </div>
                                                 <div class="block" *ngIf="!item.is_installment_available">
-                                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total |
-                                                            number :
-                                                            '1.2-2'}}</span></p>
+                                                    <p><span>{{ currency?.symbol }}{{item?.selling?.total |
+                                                        number :
+                                                        '1.2-2'}}</span>
+                                                        Full Payment 
+                                                        </p>
                                                 </div>
                                             </div>
                                             <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">Select</a>

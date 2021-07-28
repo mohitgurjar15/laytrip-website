@@ -153,7 +153,6 @@ export class HotelDetailComponent implements OnInit {
     const tokens: string[] = text.split(".");
     let result: string = "";
     let offset: number = 0;
-
     for(let i: number = 0; i < tokens.length; i++) {
       if((result.length - offset) >= maxLength) {
         result += "<br><br>";

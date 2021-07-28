@@ -160,10 +160,10 @@
             <span class="fare_type mobile_fare">Flexible Installments</span>
           </ng-container>
           <ng-container *ngIf="!item.is_installment_available">
-            <span class="fare_type">Full Payment</span>
             <span class="total_pr">
               <span class="big-num">${{item.selling_price | number : '1.2-2'}} </span>
             </span>
+            <span class="fare_type">Full Payment</span>
             <span class="cta_btn">
               <button (click)="bookNow(item)">Add to cart</button>
               <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
