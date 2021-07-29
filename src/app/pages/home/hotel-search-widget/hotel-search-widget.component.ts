@@ -251,7 +251,7 @@ export class HotelSearchWidgetComponent implements OnInit {
 
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
     queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
-    queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
+    // queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
     queryParams.x_coordinate = parseFloat(this.searchHotelInfo.latitude);
     queryParams.y_coordinate = parseFloat(this.searchHotelInfo.longitude);
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
@@ -273,7 +273,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
-    console.log(this.searchHotelInfo)
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
 

@@ -329,10 +329,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     let date = `${day}/${month}/${y}`;
     let price: any = this.calenderPrices.find((d: any) => d.date == date);
     if (price) {
-      if (price.secondary_start_price > 0) {
+      if (price.start_price > 0) {
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
-      return `$${price.price.toFixed(2)}`;
+      // return `$${price.price.toFixed(2)}`;
     }
   }
 
@@ -344,10 +344,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     let price: any = this.calenderPrices.find((d: any) => d.date == date);
     if (price) {
 
-      if (price.secondary_start_price > 0) {
+      if (price.start_price > 0) {
         return `${price.flag}`;
       }
-      return `${price.flag}`;
+      // return `${price.flag}`;
     }
   }
 
@@ -449,19 +449,19 @@ export class FlightSearchWidgetComponent implements OnInit {
   getMinPrice(prices) {
     if (prices.length > 0) {
       let values = prices.map(function (v) {
-        if (v.secondary_start_price > 0) {
+        if (v.start_price > 0) {
           if (v.secondary_start_price < 5) {
             return '$5.00';
           }
           return v.secondary_start_price;
-        } else {
+        } /* else {
           if (v.price < 5) {
             return '$5.00';
           }
           return v.price;
-        }
+        } */
       });
-      return Math.min.apply(null, values);
+      return Math.min.apply(null, values) ? Math.min.apply(null, values) : 0;
     } else {
       return 0;
     }

@@ -119,7 +119,7 @@
                                     <div class="box_right">
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
-                                                <div class="block" *ngIf="item.is_installment_available">
+                                                <!-- <div class="block" *ngIf="item.is_installment_available">
                                                     <p>From</p>
                                                     <p *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
                                                         <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
@@ -142,9 +142,32 @@
                                                             '1.2-2'}}</span>
                                                             Full Payment
                                                         </p>
+                                                </div> -->
+                                                <div class="block" *ngIf="item.secondary_start_price > 0">
+                                                    <p>From</p>
+                                                    <p class="duel_prices" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
+                                                        <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
+                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                        <span>
+                                                            {{ currency?.symbol }}{{item?.discounted_secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                    </p>
+                                                    <p *ngIf="!item.offer_data.applicable">
+                                                        <span>
+                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                    </p>
+                                                    <p class="installment_type">Weekly</p>
                                                 </div>
+                                                <div class="block mb-0" *ngIf="item.secondary_start_price === 0">
+                                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total |
+                                                                                                            number :
+                                                                                                            '1.2-2'}}</span></p>
+                                                </div>
+
                                             </div>
-                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">Select</a>
+                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,x_coordinate:latitude,y_coordinate:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">Select</a>
                                             <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">Select</a>
 
                                         </div>
@@ -212,7 +235,7 @@
                                     <div class="thrd_part">
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
-                                                <div class="block" *ngIf="item.is_installment_available">
+                                                <!-- <div class="block" *ngIf="item.is_installment_available">
                                                     <p>From</p>
                                                     <p class="duel_prices" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
                                                         <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
@@ -235,7 +258,30 @@
                                                         '1.2-2'}}</span>
                                                         Full Payment 
                                                         </p>
+                                                </div> -->
+                                                <div class="block" *ngIf="item.secondary_start_price > 0">
+                                                    <p>From</p>
+                                                    <p *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
+                                                        <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
+                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                        <span>
+                                                            {{ currency?.symbol }}{{item?.discounted_secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                    </p>
+                                                    <p *ngIf="!item.offer_data.applicable">
+                                                        <span>
+                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                    </p>
+                                                    <p class="installment_type">Weekly</p>
                                                 </div>
+                                                <div class="block" *ngIf="item.secondary_start_price === 0">
+                                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total |
+                                                                                                            number :
+                                                                                                            '1.2-2'}}</span></p>
+                                                </div>
+
                                             </div>
                                             <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">Select</a>
                                             <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">Select</a>
