@@ -436,9 +436,8 @@
                         <span class="big_font">${{hotelRoomArray[0].discounted_secondary_start_price | number : '1.2-2'}}</span>
                     </span>
                     <span *ngIf="!hotelRoomArray[0].offer_data.applicable">
-                        <span class="big_font">${{hotelRoomArray[0].secondary_start_price > 0 ? hotelRoomArray[0].secondary_start_price : hotelRoomArray[0].selling.total | number : '1.2-2'}}</span>
+                        <span class="big_font">${{ (hotelRoomArray[0].secondary_start_price > 0 ? hotelRoomArray[0].secondary_start_price : hotelRoomArray[0].selling.total) | number : '1.2-2'}}</span>
                     </span>
-
                     <small>{{hotelRoomArray[0].secondary_start_price > 0 ? 'Weekly':'Full Payment' }}</small>
                 </div>
             </div>
