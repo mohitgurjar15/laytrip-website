@@ -27,7 +27,7 @@
     <app-flight-loader *ngIf="loading"></app-flight-loader>
 
     <app-flight-not-found *ngIf="isNotFound"></app-flight-not-found>
-    <app-flight-error *ngIf="errorMessage" errorMessage={{errorMessage}}></app-flight-error>
+    <app-flight-error *ngIf="errorMessage" errorMessage={{errorMessage}} statusCode={{statusCode}}></app-flight-error>
 
     <section class="search_result flight" *ngIf="!loading && !isNotFound && errorMessage==''">
         <div class="container">
