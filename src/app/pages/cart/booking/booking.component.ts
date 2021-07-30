@@ -13,7 +13,6 @@ import { FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { AddCardComponent } from '../../../components/add-card/add-card.component';
 import { CommonFunction } from '../../../_helpers/common-function';
-
 export interface CartItem {
 
   type: string;
@@ -438,7 +437,7 @@ export class BookingComponent implements OnInit {
 
 
           if (this.validationErrorMessage == '') {
-            this.validationErrorMessage = 'Complete required fields in Traveler Details for'
+            this.validationErrorMessage = ' fields in Traveler Details for'
           }
           if (!this.inValidCartTravller.includes(i)) {
             if (this.carts[i].type == 'flight') {

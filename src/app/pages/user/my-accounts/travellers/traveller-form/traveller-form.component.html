@@ -142,12 +142,12 @@
             <span class="remove_wrps">
                 <button type="button" *ngIf="!travellerId" class="hover-link "
                     [ngClass]="{'disabled':  (!travellerForm.touched) }"
-                    (click)="removeTraveller(deleteContent)">Delete</button>
+                    (click)="removeTraveller(deleteContent)">{{'delete' | translate}}</button>
                 <button type="button" class="hover-link" *ngIf="travellerId"
-                    (click)="removeTraveller(deleteContent,travellerId)">Delete</button>
+                    (click)="removeTraveller(deleteContent,travellerId)">{{'delete' | translate}}</button>
             </span>
-        <button (click)="disabledForm()" class="hover-link" [ngClass]="{'disabled': !travellerId }">Edit</button>
-        <button (click)="onSubmit()" class="hover-link" [ngClass]="{'disabled': !travellerForm.touched }">Save</button>
+        <button (click)="disabledForm()" class="hover-link" [ngClass]="{'disabled': !travellerId }">{{'edit' | translate}}</button>
+        <button (click)="onSubmit()" class="hover-link" [ngClass]="{'disabled': !travellerForm.touched }">{{'save' | translate}}</button>
         </span>
     </div>
 
@@ -166,12 +166,11 @@
             </div>
             <!--             <h4 class="name_traveller">Delete Co - Traveler</h4>
  -->
-            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete this traveler?</span>
-            </h4>
+            <h4 class="modal-title" id="modal-basic-title" [innerHTML]="'delete_traveler_confirmation' | translate"></h4>
 
             <div class="cta_btn_wrps">
-                <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>
-                <button class="btn_yes" (click)=deleteTravellerData()>Yes</button>
+                <button class="btn_no" (click)="modal.dismiss('Cross click')">{{'cancel' | translate}}</button>
+                <button class="btn_yes" (click)=deleteTravellerData()>{{'yes' | translate}}</button>
             </div>
             <div class="footer_logo">
                 <a>

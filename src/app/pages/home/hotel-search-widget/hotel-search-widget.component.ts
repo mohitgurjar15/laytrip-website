@@ -356,7 +356,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.isDatePickerOpen = false;
   }
 
-  // Author: xavier | 2021/6/28 @ 8:45pm
+  // Author: xavier | 2021/6/28
   // Description: Preliminary support to color-code dates on calendar
   // refreshHighlights() {
   //   const red =     "#FF6961";

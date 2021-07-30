@@ -44,6 +44,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   paymentType: string ='';
   instalmentType:string='weekly';
   installmentOptions;
+  userLang: string = "en";
   paymentInfo;
   cartIsPromotional: boolean = false;
   constructor(
@@ -75,6 +76,9 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     });
 
+    // Author: xavier | 2021/7/28
+    // Description: To support localized installment types
+    this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     this.countryCode = this.commonFunction.getUserCountry();
 
     this.cartService.getPaymentOptions.subscribe((data: any) => {

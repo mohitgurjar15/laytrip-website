@@ -1,18 +1,20 @@
 <span class="mob_line"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
-    {{hotelCount}} {{hotelCount > 1 ? 'Hotels' : 'Hotel'}}
-    found in {{hotelName}}</span>
+    {{'found_in_prefix' | translate}}
+    {{hotelCount}} {{(hotelCount > 1 ? 'hotels' : 'hotel') | translate}}
+    {{'found_in_suffix' | translate}} {{hotelName}}1232</span>
 <div class="top_wrapper_box">
     <h3 class="shorting_label">{{filteredLabel}}</h3>
     <span class="desk_line"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
-        {{hotelCount}} {{hotelCount > 1 ? 'Hotels' : 'Hotel'}}
-        found in {{hotelName}}</span>
+        {{'found_in_prefix' | translate}}
+        {{hotelCount}} {{(hotelCount > 1 ? 'hotels' : 'hotel') | translate}}
+        {{'found_in_suffix' | translate}} {{hotelName}}</span>
     <button class="list_v_btn" (click)="differentView('listView')" [hidden]="!isMapView">
         <img src="{{s3BucketUrl}}assets/images/icon/list_y.svg" alt="List view">
-        List
+        {{'list_vm' | translate}}
     </button>
     <button *ngIf="hotelListArray.length > 0" class="map_v_btn" (click)="differentView('mapView')" [hidden]="isMapView">
         <img src="{{s3BucketUrl}}assets/images/icon/map_.svg" alt="map view">
-        Map
+        {{'map_vm' | translate}}
     </button>
 </div>
 
@@ -105,7 +107,7 @@
                                                                     [href]="'#collapse'+blockIndex"
                                                                     aria-expanded="false" aria-controls="collapse1"
                                                                     class="hotel_anchor">
-                                                                    Details
+                                                                    {{'details' | translate}}
                                                                 </a>
                                                             </span>
                                                         </div>
@@ -120,7 +122,7 @@
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
                                                 <div class="block" *ngIf="item.secondary_start_price > 0">
-                                                    <p>From</p>
+                                                    <p>{{'from' |translate}}</p>
                                                     <p *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
                                                         <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
@@ -134,16 +136,16 @@
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">Weekly Installments</p>
+                                                    <p class="installment_type">{{'weekly_installments' | translate}}</p>
                                                 </div>
                                                 <div class="block" *ngIf="item.secondary_start_price === 0">
-                                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total |
+                                                    <p>{{'full_payment' | translate}} <span>{{ currency?.symbol }}{{item?.selling?.total |
                                                             number :
                                                             '1.2-2'}}</span></p>
                                                 </div>
                                             </div>
-                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">Select</a>
-                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">Select</a>
+                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">{{'select' | translate}}</a>
+                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{'select' | translate}}</a>
 
                                         </div>
                                     </div>
@@ -203,7 +205,7 @@
                                             <a data-toggle="collapse" data-parent="#full_hotel_listing"
                                                 [href]="'#collapse'+blockIndex" aria-expanded="false"
                                                 aria-controls="collapse1" class="hotel_anchor">
-                                                Details
+                                                {{'details' | translate}}
                                             </a>
                                         </span>
                                     </div>
@@ -211,7 +213,7 @@
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
                                                 <div class="block" *ngIf="item.secondary_start_price > 0">
-                                                    <p>From</p>
+                                                    <p>{{'from' | translate}}</p>
                                                     <p class="duel_prices" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
                                                         <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
@@ -225,16 +227,16 @@
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">Weekly Installments</p>
+                                                    <p class="installment_type">{{'weekly_installments' | translate}}</p>
                                                 </div>
                                                 <div class="block" *ngIf="item.secondary_start_price === 0">
-                                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total |
+                                                    <p>{{'full_payment' | translate}} <span>{{ currency?.symbol }}{{item?.selling?.total |
                                                             number :
                                                             '1.2-2'}}</span></p>
                                                 </div>
                                             </div>
-                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">Select</a>
-                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">Select</a>
+                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">{{'select' | translate}}</a>
+                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{'select' | translate}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -247,13 +249,12 @@
                                     <div class="installment_wprs">
                                         <div class="type_lines">
                                             <span class="titles">
-                                                Installment Option 1
+                                                {{'installment_option' | translate}} 1
                                             </span>
                                             <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,0)==true">
-                                                ${{item.start_price | number : '1.2-2'}} downpayment and
-                                                {{ item?.offer_data.applicable ?  item.discounted_no_of_weekly_installment : item.no_of_weekly_installment }} weekly installments of
-                                                ${{item.discounted_secondary_start_price |
-                                                number : '1.2-2'}}
+                                                ${{item.start_price | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                                {{ item?.offer_data.applicable ? item.discounted_no_of_weekly_installment : item.no_of_weekly_installment }}
+                                                {{'po_weekly_installments' | translate}} ${{item.discounted_secondary_start_price | number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,0)==true">
                                                 Hotels within 30 days of travel not available in installments
@@ -264,11 +265,11 @@
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">
-                                                Installment Option 2
+                                                {{'installment_option' | translate}} 2
                                             </span>
                                             <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,1)==true">
-                                                ${{item.second_down_payment | number : '1.2-2'}} downpayment and
-                                                {{item.no_of_weekly_installment_2}} bi-weekly installments of
+                                                ${{item.second_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                                {{item.no_of_weekly_installment_2}} {{'po_bi_weekly_installments' | translate}}
                                                 ${{item.secondary_start_price_2 | number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,1)==true">
@@ -280,13 +281,12 @@
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">
-                                                Installment Option 3
+                                                {{'installment_option' | translate}} 3
                                             </span>
                                             <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,2)==true">
-                                                ${{item.third_down_payment | number : '1.2-2'}} downpayment and
-                                                {{item.no_of_weekly_installment_3}} monthly installments of
-                                                ${{item.secondary_start_price_3 |
-                                                number : '1.2-2'}}
+                                                ${{item.third_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                                {{item.no_of_weekly_installment_3}} {{(item.no_of_weekly_installment_3==1?'po_monthly_installments':'po_monthly_installments_p') | translate}}
+                                                ${{item.secondary_start_price_3 | number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,2)==true">
                                                 Hotels within 30 days of travel not available in installments
@@ -297,21 +297,21 @@
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">
-                                                Average Nightly Rate
+                                                {{'average_nightly_rate' | translate}}
                                             </span>
                                             <span class="texts" *ngIf="item?.offer_data.applicable">
-                                                ${{item?.selling?.discounted_avg_night_price | number : '1.2-2'}} including taxes and fees
+                                                ${{item?.selling?.discounted_avg_night_price | number : '1.2-2'}} {{'including_taxes_fees' | translate}}
                                             </span>
                                             <span class="texts" *ngIf="!item?.offer_data.applicable">
-                                                ${{item?.night_rate | number : '1.2-2'}} including taxes and fees
+                                                ${{item?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' | translate}}
                                             </span>
                                             <div class="notifi_text mobile_notifi" *ngIf="item?.offer_data.applicable == false">
-                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
+                                                {{'more_payment_options' | translate}}
                                             </div>
                                         </div>
                                         <div class="full_desk_not" *ngIf="item?.offer_data.applicable == false">
                                             <div class="notifi_text">
-                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
+                                                {{'more_payment_options' | translate}}
                                             </div>
                                         </div>
                                     </div>
@@ -321,10 +321,9 @@
                                             <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> Rules
                                         </span>
                                         <span class="texts_rules">
-                                            Non-refundable, non-transferable. Change policy reflected in Laytrip <a
-                                                [routerLink]="['/terms']"
-                                                [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>
-                                            which apply.
+                                            {{'rules_1' | translate}} <a [routerLink]="['/terms']"
+                                            [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>
+                                            {{'rules_2' | translate}}
                                         </span>
 
                                     </div>

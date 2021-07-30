@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, HostListener, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonFunction } from '../../_helpers/common-function';
+import { TranslateService } from '@ngx-translate/core';
 declare var $: any;
 
 @Component({
@@ -39,7 +40,8 @@ export class TravellerInfoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private commonFunction:CommonFunction,
-    private eRef: ElementRef
+    private eRef: ElementRef,
+    private translate: TranslateService
   ) {
     this.adultValue = parseInt(this.route.snapshot.queryParams['adult']) ? parseInt(this.route.snapshot.queryParams['adult']) : 1;
     this.childValue = parseInt(this.route.snapshot.queryParams['child']) ? parseInt(this.route.snapshot.queryParams['child']) : 0;
@@ -52,12 +54,12 @@ export class TravellerInfoComponent implements OnInit {
 
   ngOnInit() {
     this.totalPerson = this.adultValue + this.childValue + this.infantValue;
-    this.travelerLabel = this.totalPerson > 1 ? 'Travelers' : 'Traveler';
+    this.setTravelerLabel();
   }
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if(this.eRef.nativeElement.contains(event.target)) {      
+    if(this.eRef.nativeElement.contains(event.target)) {
       $(".add_class_sec_open_").hide();
     } else {
       this.showTraveller = false;
@@ -146,7 +148,7 @@ export class TravellerInfoComponent implements OnInit {
 
     
     this.totalPerson = this.adultValue + this.childValue + this.infantValue;
-    this.travelerLabel = this.totalPerson > 1 ? 'Travelers' : 'Traveler';
+    this.setTravelerLabel();
 
     if (item && item.type === 'class' && item.value) {
       this.travellerInfo.class = item.value;
@@ -161,5 +163,13 @@ export class TravellerInfoComponent implements OnInit {
       totalPerson: this.totalPerson
     };
     this.changeValue.emit(this.travellerInfo);
+  }
+
+  // Author: xavier | 2021/7/26
+  // Description: Update traverller label using the appropiate translation key
+  setTravelerLabel() {
+    this.translate.
+      get(this.totalPerson > 1 ? 'travelers' : 'traveler').
+      subscribe((res: string) => this.travelerLabel = res);
   }
 }

@@ -49,8 +49,8 @@
                   placeholder="Search Home" [clearable]="false" [selectOnTab]="true">
                 </ng-select>
                 <div class="search_btns">
-                  <a (click)="clearRentalSearch()">Clear</a>
-                  <a (click)="searchRental()">Search</a>
+                  <a (click)="clearRentalSearch()">{{'clear' | translate}}</a>
+                  <a (click)="searchRental()">{{'search' | translate}}</a>
                 </div>
               </div>
             </div>

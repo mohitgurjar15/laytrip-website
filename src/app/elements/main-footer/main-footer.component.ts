@@ -121,7 +121,8 @@ export class MainFooterComponent implements OnInit {
   getLangunages() {
     this.genericService.getAllLangunage().subscribe(
       (response: LangunageModel) => {
-        this.langunages = response.data.filter(lang => lang.active == true);
+        //this.langunages = response.data.filter(lang => lang.active == true);
+        this.langunages = response.data.filter(lang => lang.iso_1Code == "en" || lang.iso_1Code == "es");
         if (!this.isLanunageSet) {
           this.isLanunageSet = true;
           this.selectedLanunage = this.langunages[0];

@@ -50,7 +50,7 @@
                         <li class="grid_box first">
                             <div class="flight_form" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
                                 <div class="search_area">
-                                    <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'" [label]="'from' | translate" placeHolder="From where?" [defaultSelected]="" [tabIndex]=1 [airport]=fromSearch [defaultCity]="" (changeValue)="destinationChangedValue($event)"
+                                    <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'" [label]="'from' | translate" placeHolder="{{'from_where' | translate}}" [defaultSelected]="" [tabIndex]=1 [airport]=fromSearch [defaultCity]="" (changeValue)="destinationChangedValue($event)"
                                         (click)="showAirportSuggestion('from')" [inputName]="'fromSearch'" (searchItem)="searchItem($event)" (flightSearchRoute)="getflightSearchRoutes($event)" (currentChangeCounter)="counterValueChanged($event)">
                                     </app-search-airport>
                                 </div>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="flight_to" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
                                 <div class="search_area">
-                                    <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'" [id]="'toSearch'" [label]="'to' | translate" placeHolder="Where to?" [defaultSelected]="" [tabIndex]=2 [airport]=toSearch [defaultCity]="" (changeValue)="destinationChangedValue($event)"
+                                    <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'" [id]="'toSearch'" [label]="'to' | translate" placeHolder="{{'where_to' | translate}}" [defaultSelected]="" [tabIndex]=2 [airport]=toSearch [defaultCity]="" (changeValue)="destinationChangedValue($event)"
                                         [inputName]="'toSearch'" (click)="showAirportSuggestion('to')" (flightSearchRoute)="getflightToSearchRoutes($event)" (searchItem)="searchItem($event)" (currentChangeCounter)="counterValueChanged($event)">
                                     </app-search-airport>
                                 </div>

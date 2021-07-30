@@ -2,7 +2,7 @@
     <div class="card traveller_card_accr" *ngFor="let traveler of travelers;let i = index; let last = last;">
         <div class="card-header tr_card_header {{last}}">
             <a class="card-link card_link_max" *ngIf="moduleId == 1">
-                {{i == 0 ?'Primary Traveler':getUserType(traveler)}} 
+                {{i == 0 ?('primary_traveler' | translate):getUserType(traveler)}} 
             </a>
             <a class="card-link card_link_max" *ngIf="moduleId == 3">
                 {{ moduleInfo[0].title }} 
@@ -17,11 +17,11 @@
                     <!--Flight Module Start-->
                     <div class="form-row" *ngIf="moduleId == 1">
                         <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">First Name*</label>
+                            <label for="">{{'first_name' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.firstName}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
-                            <label for="">Last Name*</label>
+                            <label for="">{{'first_name' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.lastName}}" disabled>
                         </div>
 
@@ -31,15 +31,15 @@
 
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="checkIsChild(traveler.travelerInfo.dob)">
-                            <label for="">Email*</label>
+                            <label for="">{{'email' | translate}}*</label>
                             <input type="email" class="form-control" placeholder="{{traveler.travelerInfo.email}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="traveler.travelerInfo.user_type == 'adult'">
-                            <label for="">Telephone*</label>
+                            <label for="">{{'phone_no' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.countryCode != 'null' ? getPhoneNoInMaskFormat(traveler.travelerInfo.phoneNo,traveler.travelerInfo.countryCode): '' }}" disabled>
                         </div>
                         <div class="col dobs col-md-4 mb-sm-10">
-                            <label for="">Date of Birth*</label>
+                            <label for="">{{'dob' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.dob && traveler.travelerInfo.dob != ''  ? commonFunction.convertCustomDateFormat(traveler.travelerInfo.dob,'YYYY-MM-DD','MM/DD/YYYY') : ''}}" disabled>
                         </div>
 
@@ -48,7 +48,7 @@
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.passportNumber}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-4">
-                            <label for="">Country of Issue *</label>
+                            <label for="">{{'nationality' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.countryId ? getContryName(traveler.travelerInfo.countryId) : ''}}" disabled>
                         </div>
                     </div>
@@ -56,19 +56,19 @@
                     <!--Hotel Module Start-->
                     <div class="form-row" *ngIf="moduleId == 3">
                         <div class="col-sm-12 col-md-6 mb-sm-10">
-                            <label for="">First Name*</label>
+                            <label for="">{{'first_name' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.firstName}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-6 mb-sm-10">
-                            <label for="">Last Name*</label>
+                            <label for="">{{'last_name' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{traveler.travelerInfo.lastName}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-6 mb-sm-10 " *ngIf="i == 0 ">
-                            <label for="">Email*</label>
+                            <label for="">{{'email' | translate}}*</label>
                             <input type="email" class="form-control" placeholder="{{traveler.travelerInfo.email}}" disabled>
                         </div>
                         <div class="col-sm-12 col-md-6 mb-sm-10" *ngIf="i == 0 ">
-                            <label for="">Telephone*</label>
+                            <label for="">{{'phone_no' | translate}}*</label>
                             <input type="text" class="form-control" placeholder="{{ traveler.travelerInfo.countryCode != 'null' ? getPhoneNoInMaskFormat(traveler.travelerInfo.phoneNo,traveler.travelerInfo.countryCode): '' }}" disabled>
                         </div>
                     </div>
@@ -79,20 +79,19 @@
                     <div class="card">
                         <div class="card-header">
                             <span class="heade_wrps">
-                                Add-Ons
+                                {{'add_ons' | translate}}
                                 <a href="javascript:void(0);" class="addon_anchor responsive_anch">
                                 </a>
                             </span>
                             <ul class="nav nav-pills" id="addon_tab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="baggage-tab" data-toggle="tab" href="#baggage" role="tab" aria-controls="baggage" aria-selected="true">Baggage <br>Included</a>
+                                    <a class="nav-link active" id="baggage-tab" data-toggle="tab" href="#baggage" role="tab" aria-controls="baggage" aria-selected="true" [innerHTML]="'add_on_1' | translate"></a>
                                 </li>
                                 <li class="nav-item disabled_addon" role="presentation">
-                                    <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding" role="tab" aria-controls="boarding" aria-selected="false">Priority
-                                        <br>Boarding</a>
+                                    <a class="nav-link" id="boarding-tab" data-toggle="tab" href="#boarding" role="tab" aria-controls="boarding" aria-selected="false" [innerHTML]="'add_on_2' | translate"></a>
                                 </li>
                                 <li class="nav-item disabled_addon" role="presentation">
-                                    <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance" role="tab" aria-controls="insurance" aria-selected="false">Insurance</a>
+                                    <a class="nav-link" id="insurance-tab" data-toggle="tab" href="#insurance" role="tab" aria-controls="insurance" aria-selected="false" [innerHTML]="'add_on_3' | translate"></a>
                                 </li>
                             </ul>
                         </div>
@@ -103,7 +102,7 @@
                                         <div class="addon_listins_wrps">
                                             <span class="fake_span"></span>
                                             <button class="addon_btn_drop" (click)="$event.preventDefault()">
-                                                Some baggage may be included, provider rules apply.                                                
+                                                {{'add_on_disclaimer' | translate}}
                                             </button>
                                         </div>
                                     </div>

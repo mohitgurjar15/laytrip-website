@@ -15,7 +15,15 @@ export class CartPriceSummaryComponent implements OnInit {
   totalInstallmentAmount : any = 0;
 
   constructor(public commonFunction:CommonFunction) {
-    this.installmentType= installmentType.en;
+    // Author: xavier | 2021/7/28
+    // Description: Translates installment type
+    const lang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    switch(lang) {
+      case "es":
+        this.installmentType = installmentType.es;
+      default:
+        this.installmentType = installmentType.en;
+    }
    }
 
   ngOnInit(): void { 

@@ -3,7 +3,7 @@
         <div class="accordion-group" [ngClass]="{'active': is_open}">
             <div class="accordion-heading" (click)="toggleFilter()" aria-expanded="true">
                 <a class="accordion-toggle">
-                    Filters
+                    {{'filters' | translate}}
                 </a>
                 <!-- <a class="anchor_link" [hidden]="is_open !== true" (click)="resetFilter()"> Clear</a> -->
             </div>
@@ -12,8 +12,8 @@
                     <div class="fliter_block">
                         <div class="cmn_block price">
                             <div class="block_top_in">
-                                <h5 class="title_h5">Total Price
-                                    <a class="anchor_link" (click)="resetFilter()"> Clear</a>
+                                <h5 class="title_h5">{{'total_price' | translate}}
+                                    <a class="anchor_link" (click)="resetFilter()">{{'clear' | translate}}</a>
                                 </h5>
                             </div>
                             <form [formGroup]="priceSlider">
@@ -26,11 +26,11 @@
                         </div>
                         <div class="cmn_block partial_payment_price" *ngIf="partialPaymentValue>0">
                             <div class="block_top_in">
-                                <h5>Installment Amount</h5>
+                                <h5>{{'installment_amount' | translate}}</h5>
                             </div>
                             <form [formGroup]="partialPriceSlider">
                                 <div class="custom_range_slide">
-                                    <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol }}{{partialPaymentHighValue}} Weekly</p>
+                                    <p>{{ currency?.symbol }}{{partialPaymentValue}} - {{ currency?.symbol }}{{partialPaymentHighValue}} {{'weekly' | translate}}</p>
                                     <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue" [(value)]="partialPaymentValue" formControlName="partial_price" [(highValue)]="partialPaymentHighValue" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)">
                                     </ng5-slider>
                                 </div>
@@ -52,7 +52,7 @@
                                                             <input type="checkbox"
                                                                 (click)="filterByDepartureStop($event,0)">
                                                             <span class="checkmark"></span>
-                                                            Non-stop
+                                                            {{'non_stop' | translate}}
                                                         </label>
                                                         <span>{{ currency?.symbol }}{{ flightStops?.non_stop?.min_price
                                                             | number : '1.2-2'}}</span>
@@ -72,7 +72,7 @@
                                                             <input type="checkbox"
                                                                 (click)="filterByDepartureStop($event,2)">
                                                             <span class="checkmark"></span>
-                                                            2+ Stops
+                                                            2+ {{'stops' | translate}}
                                                         </label>
                                                         <span>{{ currency?.symbol }}{{
                                                             flightStops?.two_and_two_plus_stop?.min_price | number :
@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="block_cmn arrival_to">
                                                 <div class="block_top_in">
-                                                    <h5>Arrival in {{ arrivalTimeSlotCityName }}</h5>
+                                                    <h5>{{'arrival_in' | translate}} {{ arrivalTimeSlotCityName }}</h5>
                                                 </div>
                                                 <ul>
                                                     <li *ngIf="arrivalTimeSlot.first_slot.min_price !== null && arrivalTimeSlot.first_slot.min_price !== 0">
@@ -133,7 +133,7 @@
                                             </div>
                                             <div class="block_cmn departure_to">
                                                 <div class="block_top_in">
-                                                    <h5>Departure from {{ departureTimeSlotCityName }}
+                                                    <h5>{{'departure_from' | translate}} {{ departureTimeSlotCityName }}
                                                     </h5>
                                                 </div>
                                                 <ul>
@@ -195,7 +195,7 @@
                                         <div class="accordion-inner">
                                             <div class="block_cmn arrival_to">
                                                 <div class="block_top_in">
-                                                    <h5>Arrival in {{ departureTimeSlotCityName}}</h5>
+                                                    <h5>{{'arrival_in' | translate}} {{ departureTimeSlotCityName}}</h5>
                                                 </div>
                                                 <ul>
                                                     <li *ngIf="filterFlightDetails.inbound_arrival_time_slot.first_slot.min_price !== null && filterFlightDetails.inbound_arrival_time_slot.first_slot.min_price !== 0">
@@ -246,7 +246,7 @@
                                             </div>
                                             <div class="block_cmn departure_to">
                                                 <div class="block_top_in">
-                                                    <h5>Departure from {{ arrivalTimeSlotCityName }}
+                                                    <h5>{{'departure_from' | translate}} {{ arrivalTimeSlotCityName }}
                                                     </h5>
                                                 </div>
                                                 <ul>
@@ -350,7 +350,7 @@
                         <div class="cmn_block price">
                             <div class="block_top_in">
                                 <h5 class="title_h5">Total Price
-                                    <a class="anchor_link" (click)="resetFilter()"> Clear</a>
+                                    <a class="anchor_link" (click)="resetFilter()">{{'clear' | translate}}</a>
                                 </h5>
                             </div>
                             <form [formGroup]="priceSlider">
@@ -390,7 +390,7 @@
                                                             <input type="checkbox"
                                                                 (click)="filterByDepartureStop($event,0)">
                                                             <span class="checkmark"></span>
-                                                            Non-stop
+                                                            {{'no_stop' | translate}}
                                                         </label>
                                                         <span>{{ currency?.symbol }}{{ flightStops?.non_stop?.min_price
                                                             | number : '1.2-2'}}</span>

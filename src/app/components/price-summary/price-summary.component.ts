@@ -19,11 +19,15 @@ export class PriceSummaryComponent implements OnInit {
   installmentType;
   cartAlerts = [];
   flightCount: number = 0;
-
+  userLang: string = "en";
+  
   constructor(
-    private commonFunction: CommonFunction
+    private commonFunction: CommonFunction,
   ) {
-    this.installmentType = installmentType.en;
+    // Author: xavier | 2021/7/28
+    // Description: To support localized installment types
+    this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    this.installmentType = installmentType;
   }
 
   ngOnInit(): void {

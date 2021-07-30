@@ -7,16 +7,16 @@
             </app-booking-timer>
             <div class="row">
                 <div class="col-lg-7">
-                    <h3>Your Bookings</h3>
+                    <h3>{{'your_bookings' | translate}}</h3>
                     <div class="booking_detail_bg_wrps">
                         <app-cart *ngIf="carts && carts.length" [carts]="carts"></app-cart>
                         <app-cart-loader *ngIf="cartLoading"></app-cart-loader>
                     </div>
                     <div class="card_details_wrppers">
                         <div class="title_bar">
-                            <h3>Payment Card Details</h3>
+                            <h3>{{'payment_card_details' | translate}}</h3>
                             <span class="edit_btns" [hidden]="totalCard === 0">
-                                <a class="anchor-tag" (click)="addNewCard()">Add New</a>
+                                <a class="anchor-tag" (click)="addNewCard()">{{'add_new_card' | translate}}</a>
                             </span>
                         </div>
                         <div class="booking_detail_bg_wrps">
@@ -34,7 +34,7 @@
                                                 <span class="heade_wrps">
                                                     <img src="{{s3BucketUrl}}assets/images/card_gray.svg"
                                                         alt="Card icon" />
-                                                    New
+                                                        {{'new' | translate}}
                                                 </span>
                                             </a>
                                         </div>
@@ -67,15 +67,15 @@
                         <label class="custom_checkbox">
                             <input type="checkbox" (click)="acceptTermCondition($event)" >
                             <span class="checkmark"></span>
-                            I agree to your <a [routerLink]="['/privacy-policy']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Privacy Policy</a> and <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>, which include terms from Laytrip suppliers and travel partners.
+                            {{'checkout_privacy_terms_1' | translate}} <a [routerLink]="['/privacy-policy']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'privacy_and_policy' | translate | titlecase}}</a> {{'checkout_privacy_terms_2' | translate}} <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate | titlecase}}</a>{{'checkout_privacy_terms_3' | translate}}
                         </label>
                         <label class="custom_checkbox">
                             <input type="checkbox"  (click)="acceptExcludedCountry($event)">
                             <span class="checkmark"></span>
-                            By purchasing this booking, I confirm that I am not a resident of CA, FL, IL or WA.
+                            {{'not_resident_of' | translate}}
                         </label>
                         <div class="cta_btn_wrapper">
-                            <button class="btn_pay_book" [ngClass]="{'btn':isTermConditionAccepted==false || isExcludedCountryAccepted==false}" [disabled]="!isTermConditionAccepted || !isExcludedCountryAccepted" (click)="bookFlight()">Pay and Book</button>
+                            <button class="btn_pay_book" [ngClass]="{'btn':isTermConditionAccepted==false || isExcludedCountryAccepted==false}" [disabled]="!isTermConditionAccepted || !isExcludedCountryAccepted" (click)="bookFlight()">{{'pay_and_book' | translate}}</button>
                         </div>
                     </div>
                     <div class="error_wrapper">

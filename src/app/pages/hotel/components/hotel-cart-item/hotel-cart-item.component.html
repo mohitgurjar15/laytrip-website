@@ -3,27 +3,27 @@
         <div class="hotel_upper_inner">
             <div class="col_boxs desk_box">
                 <span>
-                    Check In
+                    {{'check_in' | translate}}
                 </span> {{commonFunction.convertDateFormat(cartItem.module_info.input_data.check_in,'YYYY-MM-DD') }}
             </div>
             <div class="col_boxs desk_box">
                 <span>
-                    Check Out
+                    {{'check_out' | translate}}
                 </span> {{commonFunction.convertDateFormat(cartItem.module_info.input_data.check_out,'YYYY-MM-DD') }}
             </div>
             <div class="col_boxs desk_box">
-                {{cartItem.module_info.input_data.num_nights}} {{cartItem.module_info.input_data.num_nights>1 ? 'Nights':'Night'}}, {{cartItem.module_info.input_data.num_rooms}} {{cartItem.module_info.input_data.num_rooms >1 ? 'Rooms' : 'Room'}}
+                {{cartItem.module_info.input_data.num_nights}} {{(cartItem.module_info.input_data.num_nights>1?'nights':'night') | translate}}, {{cartItem.module_info.input_data.num_rooms}} {{(cartItem.module_info.input_data.num_rooms>1?'rooms':'room') | translate}}
             </div>
             <div class="responsive_boxes">
                 <div>
                     <div class="col_boxs">
                         <span>
-                            Check In
+                            {{'check_in' | translate}}
                         </span> {{commonFunction.convertDateFormat(cartItem.module_info.input_data.check_in,'YYYY-MM-DD') }}
                     </div>
                     <div class="col_boxs">
                         <span>
-                            Check Out
+                            {{'check_out' | translate}}
                         </span> {{commonFunction.convertDateFormat(cartItem.module_info.input_data.check_out,'YYYY-MM-DD') }}
                     </div>
                 </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="cta_btn_wrps">
             <a href="javascript:void(0);" (click)="openDeleteConfirmationPopup(cartItem.id)">
-                Delete
+                {{'delete' | translate}}
             </a>
         </div>
     </div>
