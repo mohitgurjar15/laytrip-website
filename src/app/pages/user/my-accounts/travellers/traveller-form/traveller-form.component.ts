@@ -252,7 +252,6 @@ export class TravellerFormComponent implements OnInit {
           country_id = 233;//this.location.country.id;
         }
       }
-      console.log(typeof this.travellerForm.value.dob, this.travellerForm.value.dob)
       let jsonData = {
         first_name: this.travellerForm.value.firstName,
         last_name: this.travellerForm.value.lastName,
@@ -263,6 +262,7 @@ export class TravellerFormComponent implements OnInit {
         passport_number: this.travellerForm.value.passport_number,
         country_code: this.travellerForm.value.country_code ? this.travellerForm.value.country_code : '',
         phone_no: this.travellerForm.value.phone_no,
+        module_id: 1
       };
       let emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
 

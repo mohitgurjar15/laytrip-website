@@ -84,7 +84,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       fromDestination: ['', [Validators.required]],
     });
 
-    this.checkInDate = this.checkInMinDate = this.checkOutMinDate= moment().add(2, 'days').toDate(); 
+    this.checkInDate = this.checkInMinDate = this.checkOutMinDate= moment().add(31, 'days').toDate(); 
     this.checkOutDate = moment(this.checkInDate).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
     
@@ -142,7 +142,7 @@ export class HotelSearchWidgetComponent implements OnInit {
 
       this.checkInDate = moment(this.route.snapshot.queryParams['check_in']).toDate();
       
-      this.checkInMinDate = this.isRefferal ? moment().add(31, 'days').toDate() : moment().add(2, 'days').toDate();
+      this.checkInMinDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(31, 'days').toDate();
       this.checkOutDate = moment(this.route.snapshot.queryParams['check_out']).isValid() ? moment(this.route.snapshot.queryParams['check_out']).toDate() : moment(this.route.snapshot.queryParams['check_in']).add(1, 'days').toDate();
       
       this.checkOutMinDate = this.checkOutDate;
@@ -203,7 +203,8 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   dealDateValidation() {
-    this.searchHotelInfo.check_in = this.checkInDate = this.checkInMinDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
+    console.log(moment().add(31, 'days').toDate())
+    this.searchHotelInfo.check_in = this.checkInDate = this.checkInMinDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(31, 'days').toDate();
      
     this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
