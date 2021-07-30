@@ -252,6 +252,7 @@ export class TravellerFormComponent implements OnInit {
           country_id = 233;//this.location.country.id;
         }
       }
+      console.log(typeof this.travellerForm.value.dob, this.travellerForm.value.dob)
       let jsonData = {
         first_name: this.travellerForm.value.firstName,
         last_name: this.travellerForm.value.lastName,
