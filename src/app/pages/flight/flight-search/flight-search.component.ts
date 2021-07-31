@@ -33,7 +33,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   fullPageLoading: any = false;
   isCartFull: boolean = false;
   isFlightAvaibale: boolean = false;
-
+  statusCode='';
   filteredLabel = 'Price Low to High';
 
   constructor(
@@ -121,8 +121,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         if (err && err.status === 404) {
           this.errorMessage = err.message;
         } else if (err && err.status === 406) {
+          this.statusCode = err.status;
           this.errorMessage = err.message;
-        }else {
+        } else {
           this.isNotFound = true;
         }
       });
@@ -158,8 +159,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         if (err.status == 422) {
           this.errorMessage = err.message;
         } else if (err && err.status === 406) {
+          this.statusCode = err.status;
           this.errorMessage = err.message;
-        }else {
+        } else {
           this.isNotFound = true;
         }
       });
