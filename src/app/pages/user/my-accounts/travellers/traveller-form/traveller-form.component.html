@@ -80,7 +80,7 @@
             </div>
             <div class="col-sm-12 col-md-4 mb-sm-10" *ngIf="isAdult" [ngClass]="{'mandetory_wrps':submitted}">
                 <label for="">{{'email' |translate}}*</label>
-                <input [ngClass]="{'input-error' : (submitted && travellerForm.controls.email.errors)}" [readonly]="formEnable" tabindex="{{travellerId}}" [readonly]="traveller.email && traveller.email != 'undefined' && traveller.email != ''" type="email" class="form-control"
+                <input [ngClass]="{'input-error' : (submitted && travellerForm.controls.email.errors)}" tabindex="{{travellerId}}" [readonly]="traveller.email && traveller.email != 'undefined' && traveller.email != ''" type="email" class="form-control"
                     formControlName="email">
                 <div *ngIf="submitted" [ngClass]="{'error':submitted}">
                     <small *ngIf="travellerForm.controls.email.errors && travellerForm.controls.email.errors.required" class="error_field">

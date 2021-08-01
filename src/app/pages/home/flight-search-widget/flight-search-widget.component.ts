@@ -173,9 +173,9 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.fromSearch = airports['NYC'];
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.toSearch = airports[keys];
-        this.departureDate = moment().add(91, 'days').toDate();
+        this.departureDate = this.commonFunction.isRefferal() ?  moment().add(91, 'days').toDate() : moment().add(31, 'days').toDate();
         if (this.isRoundTrip) {
-          this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
+          this.rangeDates = [this.departureDate, this.commonFunction.isRefferal() ? moment().add(97, 'days').toDate() : moment().add(37, 'days').toDate()];
           this.searchFlightInfo.arrival = this.toSearch.code;
         } 
       }
