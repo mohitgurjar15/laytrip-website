@@ -18,7 +18,7 @@
 <div class="price_by_date" *ngIf="dates.length > 0 && !flexibleLoading">
     <label>{{'flexible_date' | translate}} <span
             *ngIf="dates[0].secondary_start_price && dates[0].secondary_start_price >0"
-            class="price_per_week_label"></span></label>
+            class="price_per_week_label"></span><span *ngIf="flexibleInstallmentLength == 0">Full Price</span></label>
     <div class="price_day_slider">
 
         <ngx-slick-carousel  

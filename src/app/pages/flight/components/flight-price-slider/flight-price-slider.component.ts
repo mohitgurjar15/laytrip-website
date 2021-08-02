@@ -63,6 +63,7 @@ export class FlightPriceSliderComponent implements OnInit {
 
   @Input() flexibleLoading: boolean = false;
   @Input() dates = [];
+  flexibleInstallmentLength = 0;
 
   constructor(
     private commonFunction: CommonFunction,
@@ -102,7 +103,8 @@ export class FlightPriceSliderComponent implements OnInit {
 
   flipDates(dates) {
     let result = []
-    let sourceIndex = dates.findIndex(date => { return moment(date.date, "DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] })
+    let sourceIndex = dates.findIndex(date => { return moment(date.date, "DD/MM/YYYY").format("YYYY-MM-DD") === this.route.snapshot.queryParams['departure_date'] });
+
     let targetIndex = 3;
     if (window.screen.width <= 600) {
       targetIndex = 1;
@@ -121,15 +123,8 @@ export class FlightPriceSliderComponent implements OnInit {
     this.dates = this.dates.filter(function (element) {
       return element !== undefined;
     });
-  }
 
-  rotateArray1(dates, k) {
-
-    for (let i = 0; i < k; i++) {
-      dates.unshift(dates.pop());
-    }
-
-    return dates;
+    this.flexibleInstallmentLength =  this.dates.filter(date => date.isPriceInInstallment == true).length;
   }
 
   arrayRotate(arr, count) {
@@ -179,24 +174,20 @@ export class FlightPriceSliderComponent implements OnInit {
 
   next(dates) {
     if (this.trip == 'oneway') {
-
-      this.slickModal.slickNext();
-
       var payload = {
         source_location: this.departure,
         destination_location: this.arrival,
-        departure_date: moment(dates.slice(-1)[0].date).format('YYYY-MM-DD'),
+        departure_date: moment(dates.slice(-1)[0].date,'DD/MM/YYYY').format('YYYY-MM-DD'),
         flight_class: this.class,
         adult_count: this.adult,
         child_count: this.child,
         infant_count: this.infant,
-        request_date: moment(dates.slice(-1)[0].date).add(1, 'days').format('YYYY-MM-DD'),
+        request_date: moment(dates.slice(-1)[0].date, 'DD/MM/YYYY').add(1, 'days').format('YYYY-MM-DD'),
       };
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
         if (res) {
           this.dates.push(res[0]);
-
-          console.log(this.dates)
+          this.slickModal.slickNext();
         }
       }, err => {
 
