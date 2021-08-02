@@ -20,10 +20,7 @@
             *ngIf="dates[0].secondary_start_price && dates[0].secondary_start_price >0"
             class="price_per_week_label"></span><span *ngIf="flexibleInstallmentLength == 0">Full Price</span></label>
     <div class="price_day_slider">
-
-        <ngx-slick-carousel  
-         (breakpoint)="breakpoint($event)"
-                         class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+        <ngx-slick-carousel (breakpoint)="breakpoint($event)" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
             <div ngxSlickItem *ngFor="let item of dates" class="inner">
                 <div class="slid_block" *ngIf="trip =='oneway'">
                     <a [routerLink]="['/flight/search']" [queryParams]="{trip:trip,departure:departure,arrival:arrival,departure_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),class:class,adult:adult,child:child,infant:infant,utm_source:commonFunction.isRefferal()? commonFunction.getRefferalParms().utm_source : '', utm_medium:commonFunction.isRefferal()? commonFunction.getRefferalParms().utm_medium : ''}"
@@ -38,14 +35,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="slid_block" *ngIf="trip =='oneway' && singleFlexLoader">
-                    <div class="block_top fb_animation" >
-                        <p></p>
-                    </div>
-                    <div class="block_btm fb_animation">
-                        <span></span>
-                    </div>
-                </div>
+                
                 <div class="slid_block" *ngIf="trip =='roundtrip'">
                     <a [routerLink]="['/flight/search']" [queryParams]="{trip:trip,departure:departure,arrival:arrival,departure_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),arrival_date:commonFunction.convertDateYYYYMMDD(item.arrival_date,'DD/MM/YYYY'),class:class,adult:adult,child:child,infant:infant,utm_source:commonFunction.isRefferal()? commonFunction.getRefferalParms().utm_source : '', utm_medium:commonFunction.isRefferal()? commonFunction.getRefferalParms().utm_medium : ''}"
                         [ngClass]="{'selected':departureDate==commonFunction.convertDateFormat(item.date,'DD/MM/YYYY'),'disabled':checkDateValidation(item.date)}">
@@ -56,6 +46,18 @@
                             <span class="{{ getPrice(item).className }}">
                                 {{ getPrice(item).price}}
                             </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="inner" *ngIf="trip =='oneway' && singleFlexLoader">
+                <div class="slid_block">
+                    <a href="#">
+                        <div class="block_top fb_animation" >
+                            <p></p>
+                        </div>
+                        <div class="block_btm fb_animation">
+                            <span></span>
                         </div>
                     </a>
                 </div>
