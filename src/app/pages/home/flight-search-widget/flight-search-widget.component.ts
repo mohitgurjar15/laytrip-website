@@ -344,10 +344,14 @@ export class FlightSearchWidgetComponent implements OnInit {
     let price: any = this.calenderPrices.find((d: any) => d.date == date);
     if (price) {
 
-      if (price.start_price > 0) {
+      if (price.start_price > 0 && price.isPriceInInstallment) {
         return `${price.flag}`;
+      } else {
+        return 'full_payment';
       }
       // return `${price.flag}`;
+    } else {
+      // console.log('no')
     }
   }
 

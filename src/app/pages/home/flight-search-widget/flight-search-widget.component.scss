@@ -242,6 +242,14 @@ a:hover {
                 background-color: $bg-red-light !important;
               }
             }
+            &.full_payment_date {
+              color: #F826C1;
+              background-color: $bg-pink-light;
+
+              &:hover {
+                background-color: $bg-pink-light !important;
+              }
+            }
           }
 
           &.calender_price {

@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonFunction } from '../../../../_helpers/common-function';
 declare var $: any;
 import * as moment from 'moment'
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { FlightService } from 'src/app/services/flight.service';
 
 @Component({
   selector: 'app-flight-price-slider',
@@ -10,6 +12,7 @@ import * as moment from 'moment'
   styleUrls: ['./flight-price-slider.component.scss']
 })
 export class FlightPriceSliderComponent implements OnInit {
+  @ViewChild('slickModal', { static: false }) slickModal: SlickCarouselComponent;
 
   flexibleNotFound: boolean = false;
   departureDate: string;
@@ -25,6 +28,8 @@ export class FlightPriceSliderComponent implements OnInit {
 
   slideConfig = {
     dots: false,
+    arrows: false,
+    autoplay:false,
     infinite: true,
     speed: 300,
     slidesToShow: 7,
@@ -61,7 +66,9 @@ export class FlightPriceSliderComponent implements OnInit {
 
   constructor(
     private commonFunction: CommonFunction,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private flightService: FlightService
+
   ) {
     this.departureDate = this.route.snapshot.queryParams['departure_date'];
     this.departureDate = this.commonFunction.convertDateFormat(this.departureDate, 'YYYY-MM-DD')
@@ -90,6 +97,8 @@ export class FlightPriceSliderComponent implements OnInit {
       console.log(this.flexibleLoading)
     } */
   }
+ 
+ 
 
   flipDates(dates) {
     let result = []
@@ -143,7 +152,7 @@ export class FlightPriceSliderComponent implements OnInit {
     else {
       price = item.price
     }
-    return { price : price > 0 ? '$'+price.toFixed(2) : 'Flights Unavailable', className : price > 0 ? 'price_availabe' : 'price_unavailabe'};
+    return { price: price > 0 ? '$' + price.toFixed(2) : 'Flights Unavailable', className: price > 0 ? 'price_availabe' : 'price_unavailabe' };
   }
 
   getFlexibleArivalDate(date) {
@@ -162,6 +171,38 @@ export class FlightPriceSliderComponent implements OnInit {
     } else {
       return false;
     }
-
   }
+
+  prev() {
+    this.slickModal.slickPrev();
+  }
+
+  next(dates) {
+    if (this.trip == 'oneway') {
+
+      this.slickModal.slickNext();
+
+      var payload = {
+        source_location: this.departure,
+        destination_location: this.arrival,
+        departure_date: moment(dates.slice(-1)[0].date).format('YYYY-MM-DD'),
+        flight_class: this.class,
+        adult_count: this.adult,
+        child_count: this.child,
+        infant_count: this.infant,
+        request_date: moment(dates.slice(-1)[0].date).add(1, 'days').format('YYYY-MM-DD'),
+      };
+      this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
+        if (res) {
+          this.dates.push(res[0]);
+
+          console.log(this.dates)
+        }
+      }, err => {
+
+      });
+    }
+    
+  }
+
 }

@@ -94,7 +94,7 @@
                                         </p-header>
 
                                         <ng-template pTemplate="date" let-date>
-                                            <span class="c_date" [ngClass]="{'green_date': getPriceClass(date.day,date.month,date.year)=='low', 'yellow_date': getPriceClass(date.day,date.month,date.year)=='medium', 'red_date': getPriceClass(date.day,date.month,date.year)=='high'}">{{date.day}}</span>
+                                            <span class="c_date" [ngClass]="{'green_date': getPriceClass(date.day,date.month,date.year)=='low', 'yellow_date': getPriceClass(date.day,date.month,date.year)=='medium', 'red_date': getPriceClass(date.day,date.month,date.year)=='high','full_payment_date': getPriceClass(date.day,date.month,date.year)=='full_payment'}">{{date.day}}</span>
                                             <span class="calender_price">{{ getPrice(date.day,date.month,date.year)
                                                 }}</span>
                                         </ng-template>
