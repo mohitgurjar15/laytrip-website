@@ -16,7 +16,7 @@
                                 </h5>
                             </div>
                             <div class="searchbar_box">
-                                <input (blur)="onBlurMethod($event)" type="text" class="searchHotelName" placeholder="Search" tabindex="3" (keyup)="searchHotelName($event)" value="{{searchHotel}}">
+                                <input (blur)="onBlurMethod($event)" type="text" class="searchHotelName" placeholder="{{'search' | translate}}" tabindex="3" (keyup)="searchHotelName($event)" value="{{searchHotel}}">
 
                                 <div class="search_suggetion_main" *ngIf="isHotelSearch">
                                     <div class="close_btn">
@@ -182,7 +182,7 @@
                                 </h5>
                             </div>
                             <div class="searchbar_box">
-                                <input type="text" placeholder="Search" tabindex="3" class="searchHotelName" (keyup)="searchHotelName($event)" value="{{searchHotel}}">
+                                <input type="text" placeholder="{{'search' | translate}}" tabindex="3" class="searchHotelName" (keyup)="searchHotelName($event)" value="{{searchHotel}}">
 
                                 <div class="search_suggetion_main" *ngIf="isHotelSearch">
                                     <div class="close_btn">

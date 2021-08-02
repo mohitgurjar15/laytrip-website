@@ -107,10 +107,10 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="boarding" role="tabpanel" aria-labelledby="boarding-tab">
-                                        Cabin bag upto Standard Baggage
+                                        {{'cabin_bag' | translate}}
                                     </div>
                                     <div class="tab-pane fade" id="insurance" role="tabpanel" aria-labelledby="insurance-tab">
-                                        Cabin bag upto Standard Baggage
+                                        {{'cabin_bag' | translate}}
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
         </div>
         <div class="bottom_cta_btn" *ngIf="last == true && (bookingStatus == 0 || bookingStatus == 1)">
             <a class="hover-link" (click)="open(content,laytrip_cart_id)">
-              Cancel Booking
+              {{'cancel_booking_title' | translate}}
             </a>
         </div>
     </div>
@@ -138,12 +138,11 @@
             <div class="block_im">
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
             </div>
-            <h4 class="modal-title" id="modal-basic-title">Canceling this item will cancel all items you purchased under this Booking ID, and per our <a target="_blank" [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>, there are
-                no refunds.</h4>
+            <h4 class="modal-title" id="modal-basic-title">{{'cancel_booking_1' | translate}} <a target="_blank" [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'cancel_booking_2' | translate}}</h4>
 
             <div class="cta_btn_wrps">
-                <button class="btn_no" (click)="cancelBooking()">Cancel Booking</button>
-                <button class="btn_yes" (click)="openChat()">Customer Service</button>
+                <button class="btn_no" (click)="cancelBooking()">{{'cancel_booking_title' | translate}}</button>
+                <button class="btn_yes" (click)="openChat()">{{'customer_service' | translate}}</button>
             </div>
             <div class="footer_logo">
                 <a>
