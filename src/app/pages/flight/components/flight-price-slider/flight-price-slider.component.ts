@@ -172,32 +172,54 @@ export class FlightPriceSliderComponent implements OnInit {
     this.slickModal.slickPrev();
   }
 
-  singleFlexLoader: boolean = false;
-  next(dates) {
-    this.slickModal.slickNext();
-    this.singleFlexLoader = true;
-    if (this.trip == 'oneway') {
-      var payload = {
-        source_location: this.departure,
-        destination_location: this.arrival,
-        departure_date: moment(dates.slice(-1)[0].date,'DD/MM/YYYY').format('YYYY-MM-DD'),
-        flight_class: this.class,
-        adult_count: this.adult,
-        child_count: this.child,
-        infant_count: this.infant,
-        request_date: moment(dates.slice(-1)[0].date, 'DD/MM/YYYY').add(1, 'days').format('YYYY-MM-DD'),
-      };
-      this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
-        if (res) {
-          this.singleFlexLoader = false;
-          this.dates.push(res[0]);
-          
-        }
-      }, err => {
-        this.singleFlexLoader = false;
-      });
+  next() {
+    let requestDate = moment(this.dates.slice(-1)[0].date,'DD/MM/YYYY').add('+1','days').format('YYYY-MM-DD');
+    let index = this.dates.findIndex(x=>x.date ==requestDate);
+    if(index==-1){
+      console.log(this.dates,"one",requestDate)
+      this.dates.push({
+        date: moment(requestDate, 'YYYY-MM-DD').format("DD/MM/YYYY"),
+        isPriceInInstallment: false,
+        net_rate: 0,
+        price: 0,
+        secondary_start_price: 0,
+        selling_price: 0,
+        start_price: 0,
+        unique_code: "e04c8d3f03413a15df6396523886e1b8"
+      })
+      console.log(this.dates,"two")
+      this.slickModal.slickNext();
+      
+      //this.singleFlexLoader = true;
+      if (this.trip == 'oneway') {
+        var payload = {
+          source_location: this.departure,
+          destination_location: this.arrival,
+          departure_date: moment(this.dates.slice(-1)[0].date,'DD/MM/YYYY').format('YYYY-MM-DD'),
+          flight_class: this.class,
+          adult_count: this.adult,
+          child_count: this.child,
+          infant_count: this.infant,
+          request_date: requestDate,
+        };
+        this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
+          if (res) {
+            //this.singleFlexLoader = false;
+            let index = this.dates.findIndex(x=>x.date == res[0].date);
+            this.dates[index] = res[0];
+            this.dates.sort(function(a, b) {
+              var c:any = new Date(a.date);
+              var d:any = new Date(b.date);
+              return c-d;
+            });
+            //this.dates.push(res[0]);
+            console.log(this.dates,"three",index)
+          }
+        }, err => {
+          //this.singleFlexLoader = false;
+        });
+      }
     }
-    
   }
 
 }
