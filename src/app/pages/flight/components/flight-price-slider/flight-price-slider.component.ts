@@ -64,6 +64,8 @@ export class FlightPriceSliderComponent implements OnInit {
   @Input() flexibleLoading: boolean = false;
   @Input() dates = [];
   flexibleInstallmentLength = 0;
+  singleFlexLoader: boolean = false;
+
 
   constructor(
     private commonFunction: CommonFunction,
@@ -172,11 +174,12 @@ export class FlightPriceSliderComponent implements OnInit {
     this.slickModal.slickPrev();
   }
 
-  singleFlexLoader: boolean = false;
   next(dates) {
-    this.slickModal.slickNext();
-    this.singleFlexLoader = true;
     if (this.trip == 'oneway') {
+      this.singleFlexLoader = true;
+      setTimeout(() => {
+        this.slickModal.slickNext();
+      }, 1000);
       var payload = {
         source_location: this.departure,
         destination_location: this.arrival,
@@ -190,8 +193,8 @@ export class FlightPriceSliderComponent implements OnInit {
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
         if (res) {
           this.singleFlexLoader = false;
-          this.dates.push(res[0]);
-          
+          // this.slickModal.slickNext();
+          this.dates.push(res[0]);          
         }
       }, err => {
         this.singleFlexLoader = false;

@@ -18,7 +18,7 @@
 <div class="price_by_date" *ngIf="dates.length > 0 && !flexibleLoading">
     <label>{{'flexible_date' | translate}} <span
             *ngIf="dates[0].secondary_start_price && dates[0].secondary_start_price >0"
-            class="price_per_week_label"></span><span *ngIf="flexibleInstallmentLength == 0">Full Price</span></label>
+            class="price_per_week_label"></span><span class="pink_txt" *ngIf="flexibleInstallmentLength == 0">Full Price</span></label>
     <div class="price_day_slider">
         <ngx-slick-carousel (breakpoint)="breakpoint($event)" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
             <div ngxSlickItem *ngFor="let item of dates" class="inner">
@@ -50,7 +50,7 @@
                     </a>
                 </div>
             </div>
-            <div class="inner" *ngIf="trip =='oneway' && singleFlexLoader">
+            <div class="inner"  ngxSlickItem *ngIf="trip =='oneway' && singleFlexLoader">
                 <div class="slid_block">
                     <a href="#">
                         <div class="block_top fb_animation" >
