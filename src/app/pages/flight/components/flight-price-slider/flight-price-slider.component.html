@@ -18,9 +18,10 @@
 <div class="price_by_date" *ngIf="dates.length > 0 && !flexibleLoading">
     <label>{{'flexible_date' | translate}} <span
             *ngIf="dates[0].secondary_start_price && dates[0].secondary_start_price >0"
-            class="price_per_week_label"></span><span class="pink_txt" *ngIf="flexibleInstallmentLength == 0">Full Price</span></label>
+            class="price_per_week_label"></span>
+            <span class="pink_txt pl-2" *ngIf="flexibleFullPaymentLength > 0">(Full Prices)</span></label>
     <div class="price_day_slider">
-        <ngx-slick-carousel (breakpoint)="breakpoint($event)" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
             <div ngxSlickItem *ngFor="let item of dates" class="inner">
                 <div class="slid_block" *ngIf="trip =='oneway'">
                     <a [routerLink]="['/flight/search']" [queryParams]="{trip:trip,departure:departure,arrival:arrival,departure_date:commonFunction.convertDateYYYYMMDD(item.date,'DD/MM/YYYY'),class:class,adult:adult,child:child,infant:infant,utm_source:commonFunction.isRefferal()? commonFunction.getRefferalParms().utm_source : '', utm_medium:commonFunction.isRefferal()? commonFunction.getRefferalParms().utm_medium : ''}"
@@ -64,6 +65,6 @@
             </div>
         </ngx-slick-carousel>
         <button class="btn-arrow btn-prev" (click)="prev()">prev</button>
-        <button class="btn-arrow btn-next" (click)="next(dates)">next</button>
+        <button class="btn-arrow btn-next" [ngClass]="{'disabled': trip =='oneway' && singleFlexLoader}" (click)="next(dates)">next</button>
     </div>
 </div>

@@ -195,7 +195,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
     endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
     if (!moment().isBefore(startDate)) {
-      startDate = moment().format("YYYY-MM-DD")
+      startDate = moment().add(2,'days').format("YYYY-MM-DD")
     }
 
     payload.start_date = startDate;

@@ -63,7 +63,7 @@ export class FlightPriceSliderComponent implements OnInit {
 
   @Input() flexibleLoading: boolean = false;
   @Input() dates = [];
-  flexibleInstallmentLength = 0;
+  flexibleFullPaymentLength = 0;
   singleFlexLoader: boolean = false;
 
 
@@ -126,7 +126,7 @@ export class FlightPriceSliderComponent implements OnInit {
       return element !== undefined;
     });
 
-    this.flexibleInstallmentLength =  this.dates.filter(date => date.isPriceInInstallment == true).length;
+    this.flexibleFullPaymentLength = this.dates.filter(date => date.isPriceInInstallment == false).length;
   }
 
   arrayRotate(arr, count) {

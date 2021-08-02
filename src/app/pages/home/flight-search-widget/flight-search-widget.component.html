@@ -90,7 +90,7 @@
                                                 <span class="green_var" [hidden]="getPriceLabel('lowMinPrice') == 0">${{getPriceLabel('lowMinPrice')}}</span>
                                                 <span class="yellow_var" [hidden]="getPriceLabel('midMinPrice') == 0">${{getPriceLabel('midMinPrice')}}</span>
                                                 <span class="red_var" [hidden]="getPriceLabel('highMinPrice') == 0">${{getPriceLabel('highMinPrice')}}</span>
-                                                <span class="full_payment_label">Full Prices</span>
+                                                <span class="full_payment_label" *ngIf="calendersFullPaymentLength > 0 && !isRoundTrip">Full Prices</span>
                                             </div>
                                         </p-header>
 
