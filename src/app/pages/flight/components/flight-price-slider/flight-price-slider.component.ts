@@ -172,7 +172,10 @@ export class FlightPriceSliderComponent implements OnInit {
     this.slickModal.slickPrev();
   }
 
+  singleFlexLoader: boolean = false;
   next(dates) {
+    this.slickModal.slickNext();
+    this.singleFlexLoader = true;
     if (this.trip == 'oneway') {
       var payload = {
         source_location: this.departure,
@@ -186,11 +189,12 @@ export class FlightPriceSliderComponent implements OnInit {
       };
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
         if (res) {
+          this.singleFlexLoader = false;
           this.dates.push(res[0]);
-          this.slickModal.slickNext();
+          
         }
       }, err => {
-
+        this.singleFlexLoader = false;
       });
     }
     
