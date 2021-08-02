@@ -505,6 +505,11 @@
       font-weight: 500;
       color: $text-grey;
       margin: 0 0 5px;
+      span{
+        &.pink_txt{
+          color: $pink;
+        }
+      }
     }
 
     .price_day_slider {
