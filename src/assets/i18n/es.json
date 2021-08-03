@@ -10,7 +10,7 @@
     "password_touched_validation": "Introduce tu contraseña",
     "email_exist_validation": "Tu correo electrónico ya existe.",
     "email_invalid_validation": "Por favor ingrese una dirección de correo electrónico válida.",
-    "invalid_login_credentials": "¡Credenciales de acceso invalidos! Introduce la dirección de correo electrónico y la contraseña correctas.",
+    "invalid_login_credentials": "¡Credenciales de acceso inválidos! Introduce la dirección de correo electrónico y la contraseña correctas.",
     "account_disable": "Su cuenta ha sido inhabilitada. Póngase en contacto con la persona del administrador.",
     "log_in": "Iniciar sesión",
     "sign_in": "Inicia Sesión",
@@ -638,7 +638,7 @@
     "add_on_3": "Seguro",
     "add_on_disclaimer": "Es posible que se incluya algo de equipaje, se aplican las reglas del proveedor",
     "primary_traveler": "Viajero Principal",
-    "upcoming": "Próximo",
+    "upcoming": "Próxima",
     "no_upcomning": "No hay Próximas Reservas",
     "next_payment": "Próximo Pago",
     "past_due": "Vencido",
@@ -655,7 +655,7 @@
     "downpayment": "Pago Inicial",
     "ending_in": "terminada en",
     "top_banner_info_1": "Según los ",
-    "top_banner_info_2":", las reservas aún no están disponibles para los residentes de California, Florida, Illinois y Washington.",
-    "top_banner_info_3":", las reservas aún no están disponibles para los residentes de CA, FL, IL y WA.",
+    "top_banner_info_2":", las reservas aún no están disponibles para los residentes de California, Florida, Illinois o Washington.",
+    "top_banner_info_3":", las reservas aún no están disponibles para los residentes de CA, FL, IL o WA.",
     "covid_travel": "COVID-19 Travel"
 }
