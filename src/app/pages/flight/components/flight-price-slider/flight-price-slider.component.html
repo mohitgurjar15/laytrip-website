@@ -29,10 +29,13 @@
                         <div class="block_top" >
                             <p>{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}</p>
                         </div>
-                        <div class="block_btm">
+                        <div class="block_btm" *ngIf="item.net_rate>0">
                             <span class="{{ getPrice(item).className }}" [ngClass]="{'full_payment' : item.isPriceInInstallment == false}">
                                 {{ getPrice(item).price}}
                             </span>
+                        </div>
+                        <div class="block_btm fb_animation" *ngIf="item.net_rate==0">
+                            <span></span>
                         </div>
                     </a>
                 </div>
@@ -50,21 +53,9 @@
                         </div>
                     </a>
                 </div>
-            </div>
-            <div class="inner"  ngxSlickItem *ngIf="trip =='oneway' && singleFlexLoader">
-                <div class="slid_block">
-                    <a href="#">
-                        <div class="block_top fb_animation" >
-                            <p></p>
-                        </div>
-                        <div class="block_btm fb_animation">
-                            <span></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            </div>            
         </ngx-slick-carousel>
         <button class="btn-arrow btn-prev" (click)="prev()">prev</button>
-        <button class="btn-arrow btn-next" [ngClass]="{'disabled': trip =='oneway' && singleFlexLoader}" (click)="next(dates)">next</button>
+        <button class="btn-arrow btn-next" (click)="next()">next</button>
     </div>
 </div>
