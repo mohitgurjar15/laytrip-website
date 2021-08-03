@@ -378,6 +378,11 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       }
     }, 1000);
   }
+
+  // Author: xavier | 2021/8/3
+  // Description: Dummy function to prevent a javscript error when clicking the Details link
+  getCancellationPolicy(route_code) {
+  }
 }
 
 
