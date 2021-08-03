@@ -118,10 +118,11 @@ export class FlightSearchWidgetComponent implements OnInit {
             this.toSearch =  Object.assign({},airports[slide.location.to.airport_code]);          
             this.searchFlightInfo.departure = this.fromSearch.code;
             this.departureDate = moment().add(91, 'days').toDate();
+            this.searchFlightInfo.arrival = this.toSearch.code;
+
             if (this.isRoundTrip) {
               this.returnDate =  moment().add(97, 'days').toDate();
               this.rangeDates = [this.departureDate, this.returnDate];
-              this.searchFlightInfo.arrival = this.toSearch.code;
             }
           }
         })
@@ -173,9 +174,10 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.toSearch = airports[keys];
         this.departureDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
+        this.searchFlightInfo.arrival = this.toSearch.code;
+
         if (this.isRoundTrip) {
           this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(97, 'days').toDate() : moment().add(9, 'days').toDate()];
-          this.searchFlightInfo.arrival = this.toSearch.code;
         } 
       }
     });
