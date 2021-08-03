@@ -175,7 +175,7 @@ export class FlightPriceSliderComponent implements OnInit {
     let index = this.dates.findIndex(x => x.date == requestDate);
     var begin = moment(requestDate).format("YYYY-MM-DD");
     var end = moment().add(2, 'days').format("YYYY-MM-DD");
-    
+    console.log("index::",index,"!moment(begin).isSameOrBefore(end):::",moment(begin).isSameOrBefore(end),index == -1 && !moment(begin).isSameOrBefore(end),begin,end)
     if (index == -1 && !moment(begin).isSameOrBefore(end)) {
       this.dates.unshift({
         date: moment(requestDate, 'YYYY-MM-DD').format("DD/MM/YYYY"),
@@ -206,10 +206,10 @@ export class FlightPriceSliderComponent implements OnInit {
             let index = this.dates.findIndex(x => x.date == res[0].date);
             console.log(index)
             this.dates[index] = res[0];
-            this.dates.sort(function (a, b) {
-              var c: any = new Date(a.date);
-              var d: any = new Date(b.date);
-              return c - d;
+            this.dates.sort(function(a, b){
+              var aa = a.date.split('/').reverse().join(),
+                  bb = b.date.split('/').reverse().join();
+              return aa < bb ? -1 : (aa > bb ? 1 : 0);
             });
 
             //this.dates.push(res[0]);
@@ -256,10 +256,10 @@ export class FlightPriceSliderComponent implements OnInit {
             //this.singleFlexLoader = false;
             let index = this.dates.findIndex(x=>x.date == res[0].date);
             this.dates[index] = res[0];
-            this.dates.sort(function(a, b) {
-              var c:any = new Date(a.date);
-              var d:any = new Date(b.date);
-              return c-d;
+            this.dates.sort(function(a, b){
+              var aa = a.date.split('/').reverse().join(),
+                  bb = b.date.split('/').reverse().join();
+              return aa < bb ? -1 : (aa > bb ? 1 : 0);
             });
             //this.dates.push(res[0]);
             console.log(this.dates,"three",index)
