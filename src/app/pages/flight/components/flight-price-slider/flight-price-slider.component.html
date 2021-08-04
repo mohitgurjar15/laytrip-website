@@ -19,7 +19,7 @@
     <label>{{'flexible_date' | translate}} <span
             *ngIf="dates[0].secondary_start_price && dates[0].secondary_start_price >0"
             class="price_per_week_label"></span>
-            <span class="pink_txt pl-2" *ngIf="flexibleFullPaymentLength > 0">(Full Prices)</span></label>
+            <span class="pink_txt pl-2" *ngIf="flexibleFullPaymentLength > 0">Full Prices</span></label>
     <div class="price_day_slider">
         <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
             <div ngxSlickItem *ngFor="let item of dates" class="inner">

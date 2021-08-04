@@ -511,6 +511,16 @@
       span {
         &.pink_txt {
           color: $pink;
+          display: flex;
+          align-items: center;
+          &::before {
+            content: "";
+            background: $pink;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            margin-right: 8px;
+          }
         }
       }
     }
@@ -583,8 +593,9 @@
               }
 
               .block_btm {
+                background: $text-white;
                 span {
-                  color: $text-white !important;
+                  color: $text-white;
                 }
               }
             }
