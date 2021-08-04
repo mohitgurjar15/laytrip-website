@@ -257,8 +257,6 @@ export class FlightSearchWidgetComponent implements OnInit {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
-    console.log(this.searchFlightInfo , this.totalPerson ,
-      this.departureDate , this.searchFlightInfo.departure , this.searchFlightInfo.arrival)
     if (this.searchFlightInfo && this.totalPerson &&
       this.departureDate && this.searchFlightInfo.departure && this.searchFlightInfo.arrival) {
       localStorage.setItem('_fligh', JSON.stringify(this.searchedValue));
@@ -410,7 +408,7 @@ export class FlightSearchWidgetComponent implements OnInit {
           end_date: endDate
         }
 
-        var GivenDate = new Date(endDate);       
+        var GivenDate = new Date(endDate);
         if (GivenDate > currentDate || currentDate < new Date(startDate)) {
           this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
           this.isCalenderPriceLoading = this.calPrices = true;
@@ -421,17 +419,18 @@ export class FlightSearchWidgetComponent implements OnInit {
 
             //get calender installemnt length
             this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
-            console.log(this.calendersFullPaymentLength)
           }, err => {
             this.calPrices = false;
             this.isCalenderPriceLoading = false;
           });
         } else {
           this.calPrices = this.isCalenderPriceLoading = false;
-        }
-        
-      }
-    }
+        }      
+      } else {
+        //get calender installemnt length
+        this.calendersFullPaymentLength =  this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
+       }
+    } 
   }
 
 

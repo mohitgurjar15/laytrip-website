@@ -47,7 +47,7 @@
                             <p>{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}<br>{{ getFlexibleArivalDate(item.date,departure) }}</p>
                         </div>
                         <div class="block_btm">
-                            <span class="{{ getPrice(item).className }}">
+                            <span class="{{ getPrice(item).className }}" [ngClass]="{'full_payment' : item.isPriceInInstallment == false}">
                                 {{ getPrice(item).price}}
                             </span>
                         </div>
@@ -55,7 +55,7 @@
                 </div>
             </div>            
         </ngx-slick-carousel>
-        <button class="btn-arrow btn-prev" [ngClass]="{'disabled':singleFlexLoader}" (click)="prev()">prev</button>
-        <button class="btn-arrow btn-next" [ngClass]="{'disabled':singleFlexLoader}" (click)="next()">next</button>
+        <!-- <button class="btn-arrow btn-prev" [ngClass]="{'disabled':singleFlexLoader}" (click)="prev()">prev</button>
+        <button class="btn-arrow btn-next" [ngClass]="{'disabled':singleFlexLoader}" (click)="next()">next</button> -->
     </div>
 </div>
