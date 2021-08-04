@@ -26,7 +26,8 @@ export const travelersFileds = {
             passport_number: '',
             passport_expiry: '',
             checkout_date: new Date(),
-            is_submitted:false
+            is_submitted:false,
+            is_active:false
         },
         child: {
             module : 'flight',
@@ -47,7 +48,8 @@ export const travelersFileds = {
             passport_number: '',
             passport_expiry: '',
             checkout_date: new Date(),
-            is_submitted:false
+            is_submitted:false,
+            is_active:false
         },
         infant: {
             module : 'flight',
@@ -65,7 +67,8 @@ export const travelersFileds = {
             dob: '',
             country_id: '',
             gender: '',
-            is_submitted:false
+            is_submitted:false,
+            is_active:false
         }
     },
     hotel:{
@@ -90,7 +93,8 @@ export const travelersFileds = {
             is_submitted:false,
             passport_number: '',
             passport_expiry: '',
-            is_passport_required:false
+            is_passport_required:false,
+            is_active:false
         }
     }
 }

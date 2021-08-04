@@ -12,21 +12,21 @@
                                     d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
                                 </svg>
                                 <span class="tr_type" *ngIf="cartItem.type=='flight'">
-                                    {{x==0 && cartItem.type=='flight' ?'Primary
-                                    Traveler':travlerLabels['en'][traveler.controls.type.value]}}
-                                    </span>
-                                                    <span class="tr_type hotel_type_name" *ngIf="cartItem.type=='hotel'">
-                                    {{cartItem.module_info.title }}
-                                    </span>
-                                                    <span class="trv_name hide_section" *ngIf="cartItem.type=='flight'">
-                                    {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
-                                    +travelerItem.value.adults[x].last_name:'' | titlecase}}
+                                {{x==0 && cartItem.type=='flight' ?'Primary
+                                Traveler':travlerLabels['en'][traveler.controls.type.value]}}
+                                </span>
+                                <span class="tr_type hotel_type_name" *ngIf="cartItem.type=='hotel'">
+                                {{cartItem.module_info.title }}
+                                </span>
+                                <span class="trv_name hide_section" *ngIf="cartItem.type=='flight'">
+                                {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
+                                +travelerItem.value.adults[x].last_name:'' | titlecase}}
                                 </span>
                             </a>
                            <!--  -->
                            <!--  -->
                         </div>
-                        <div [id]="'adult_collapse'+y+x" [attr.aria-labelledby]="'heading'+y+x" [ngClass]="{'show':x==0}" class="collapse" data-parent="#accordion">
+                        <div [id]="'adult_collapse'+y+x" [attr.aria-labelledby]="'heading'+y+x" [ngClass]="{'show':travelerItem.value.adults[x].is_active}" class="collapse" data-parent="#accordion">
                             <div class="card-body">
 
                                 <div [formGroupName]="x" class="common_form">
