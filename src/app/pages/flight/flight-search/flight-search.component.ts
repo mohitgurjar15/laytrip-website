@@ -44,7 +44,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public location: Location,
     public commonFunction: CommonFunction,
     private renderer: Renderer2,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) { }
 
   ngOnInit() {    
@@ -387,7 +387,14 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   filterFlight(event) {
     this.flightDetails = event;
-    this.flightService.setFlights(this.flightDetails)
+    this.flightService.setFlights(this.flightDetails);
+
+    // Author: xavier | 2021/7/29
+    // Description: Temporary hack to force Angular to refresh the flights search results.
+    //              Hopefully Suresh will come up with a better solution.
+    let tmp = this.filteredLabel;
+    this.filteredLabel = (String)((new Date()).getMilliseconds());
+    setTimeout(() => this.filteredLabel = tmp, 100);
   }
 
   resetFilter() {
