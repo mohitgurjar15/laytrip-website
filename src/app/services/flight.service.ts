@@ -30,7 +30,7 @@ export class FlightService {
     }
 
     searchAirport(searchItem) {
-        return this.http.get(`${environment.apiUrl}v1/flight/search-airport/${searchItem}`)
+        return this.http.get(`${environment.apiUrl}v1/flight/mobile/search-airport/${searchItem}`)
             .pipe(
                 catchError(this.handleError)
             );
