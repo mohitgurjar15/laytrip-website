@@ -661,5 +661,10 @@
     "top_banner_info_1": "Per ",
     "top_banner_info_2": ", bookings not yet available to residents of California, Florida, Illinois and Washington.",
     "top_banner_info_3": ", bookings not yet available to residents of CA, FL, IL, WA.",
-    "covid_travel": "COVID-19 Travel"
+    "covid_travel": "COVID-19 Travel",
+    "processing_booking_1": "We are Processing<br>Your Booking",
+    "processing_booking_2": "Please do not press the Back Button, close your browser or click Pay and Book again. Wait for your Booking Confirmation screen to appear.",
+    "booking_error_1": "Booking Completion Error",
+    "booking_error_2": "Your Booking was not able to be fully completed. Some or all of your items may have remained in your Cart. Return to Cart to try again.",
+    "booking_error_3": "Return to Cart"
  }

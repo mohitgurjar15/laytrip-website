@@ -113,7 +113,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     });
 
     // Author: xavier | 2021/8/3
-    // Description: Increase the height of the "Addto Cart" buttons to fit spanish translation
+    // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
     let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     if(userLang === 'es') {
       $(document).ready(function() {
