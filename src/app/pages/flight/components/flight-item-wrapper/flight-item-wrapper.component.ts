@@ -10,7 +10,6 @@ import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
-import { ToastrService } from 'ngx-toastr';
 import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
 import { DecimalPipe } from '@angular/common';
@@ -68,7 +67,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   scrollLoading: boolean = false;
   dataToLoad = 20;
   checkedAirUniqueCodes = [];
-
+  isRefferal=this.commonFunction.isRefferal();
 
   constructor(
     private flightService: FlightService,
@@ -78,7 +77,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     private commonFunction: CommonFunction,
     private genericService: GenericService,
     private cartService: CartService,
-    private toastr: ToastrService,
     public modalService: NgbModal,
     private decimalPipe: DecimalPipe
 
@@ -357,11 +355,13 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   }
 
-  showDownPayment(offerData,downPaymentOption){
+  showDownPayment(offerData,downPaymentOption,isInstallmentTypeAvailable){
 
     if (typeof offerData != 'undefined' && offerData.applicable) {
 
       if(typeof offerData.down_payment_options!='undefined' && offerData.down_payment_options[downPaymentOption].applicable){
+        return true;
+      } else if(!this.isRefferal && isInstallmentTypeAvailable){
         return true;
       }
       return false;
