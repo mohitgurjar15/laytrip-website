@@ -282,15 +282,35 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[0].passport_expiry = traveler.passportExpiry && traveler.passportExpiry != 'Invalid date' ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
       }
     }
-      
+    
     this.patch();
     this.cartService.setCartTravelers(this.travelers);
     this.cd.detectChanges();
 
-
     this.travelerForm.valueChanges.subscribe(value => {
+      if (typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number] !== 'undefined') {
+        if (this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status == 'VALID') {
+          let data = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value;
+          data.dob = moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob).format("YYYY-MM-DD");
+          data.passport_number = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.passport_number;
+          data.passport_expiry = moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.passport_expiry).format("YYYY-MM-DD");
+          let userId = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.userId;
+          console.log(data,this.traveler_number)
+          if (userId) {
+            //Edit
+          }
+          else {
+            //Add
+            
+          }
+        }
+      }
       this.checkOutService.emitTravelersformData(this.travelerForm);
     })
+
+    /* this.travelerForm.valueChanges.subscribe(value => {
+      this.checkOutService.emitTravelersformData(this.travelerForm);
+    }) */
 
     this.cartService.getSelectedCart.subscribe(cartNumber => {
       this.cartNumber = cartNumber;
@@ -431,7 +451,6 @@ export class TravelerFormComponent implements OnInit {
     
     this.traveler_number = traveler_number;
     this.travelers[`type${cartNumber}`].adults[traveler_number].is_active = !this.travelers[`type${cartNumber}`].adults[traveler_number].is_active;
-    console.log("this.travelers",this.travelerForm);
     let userId = this.travelers[`type${cartNumber}`].adults[traveler_number].userId;
     $(document).on("click", ".card-header", function () {
       if ($(this).find('.card-link').hasClass('collapsed')) {
@@ -520,8 +539,8 @@ export class TravelerFormComponent implements OnInit {
 
         this.travelers[`type${cartNumber}`].adults[j].is_active = false;
       } 
-      console.log("this.travelers",this.travelers)
       this.travelers[`type${cartNumber}`].adults[traveler_number+1].is_active = true;
+      this.traveler_number = traveler_number+1;
       this.patch();
       if (userId) {
         if (traveler_number == 0 && this.accountHolderEmail) {
@@ -603,27 +622,6 @@ export class TravelerFormComponent implements OnInit {
     this.checkOutService.emitTravelersformData(this.travelerForm);
   }
 
-  editTravelerNotinUse(cartNumber, traveler_number) {
-    this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAllAsTouched()
-    if (this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].status == 'VALID') {
-      this.cartService.setLoaderStatus(true);
-      let data = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
-      data.dob = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
-      data.passport_number = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_number;
-      data.passport_expiry = moment(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.passport_expiry).format("YYYY-MM-DD");
-      let userId = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value.userId;
-      if (userId) {
-        //Edit
-        this.travelerService.updateAdult(data, userId).subscribe((traveler: any) => {
-          this.cartService.setLoaderStatus(false);
-          let index = this.myTravelers.findIndex(x => x.userId == traveler.userId)
-          this.myTravelers[index] = traveler;
-
-        })
-      }
-      this.checkOutService.emitTravelersformData(this.travelerForm);
-    }
-  }
 
   editTraveler(cartNumber, traveler_number) {
     this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].enable()
