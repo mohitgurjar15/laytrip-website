@@ -124,7 +124,7 @@ export class PaymentModeComponent implements OnInit {
    * @param type2 => To calculate redeemable point
    */
   calculateInstalment(type1=null,type2=null,type3=null){
-    
+    console.log(this.instalmentRequest)
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
         if(this.instalments.instalment_available==true){

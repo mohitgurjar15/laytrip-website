@@ -116,6 +116,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         }
       }, err => {
         this.flightDetails = [];
+        this.loading = this.fullPageLoading = false;
+        
         if (err && err.status === 404) {
           this.errorMessage = err.message;
         } else if (err && err.status === 406) {
@@ -124,8 +126,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         } else {
           this.isNotFound = true;
         }
-        this.loading = false;
-        this.fullPageLoading = false;
       });
 
       this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe((res: any) => {
@@ -134,6 +134,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.dates = res;
         }
       }, err => {
+
         this.flexibleNotFound = true;
         this.flexibleLoading = false;
       });
@@ -154,6 +155,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
        }     
       }, err => {
         this.loading = this.fullPageLoading= false;
+        // this.isNotFound = true;
         if (err.status == 422) {
           this.errorMessage = err.message;
         } else if (err && err.status === 406) {
@@ -193,7 +195,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
     endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
     if (!moment().isBefore(startDate)) {
-      startDate = moment().format("YYYY-MM-DD")
+      startDate = moment().add(2,'days').format("YYYY-MM-DD")
     }
 
     payload.start_date = startDate;

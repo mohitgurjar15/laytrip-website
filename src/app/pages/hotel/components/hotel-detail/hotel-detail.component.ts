@@ -9,6 +9,7 @@ import { CartService } from '../../../../services/cart.service';
 import { HomeService } from '../../../../services/home.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
+import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 declare var $: any;
 
 
@@ -152,7 +153,6 @@ export class HotelDetailComponent implements OnInit {
     const tokens: string[] = text.split(".");
     let result: string = "";
     let offset: number = 0;
-
     for(let i: number = 0; i < tokens.length; i++) {
       if((result.length - offset) >= maxLength) {
         result += "<br><br>";
@@ -206,8 +206,14 @@ export class HotelDetailComponent implements OnInit {
           }
         }
       }, error => {
-        this.addCartLoading=false;
-        if (error.status == 409 && this.commonFunction.isRefferal()) {
+        this.addCartLoading = false;
+        /* if (error.status == 406) {
+          this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
+            windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
+            keyboard: false
+          });
+        } else */
+          if (error.status == 409 && this.commonFunction.isRefferal()) {
           this.modalService.open(DiscountedBookingAlertComponent, {
             windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
             keyboard: false

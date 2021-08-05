@@ -111,7 +111,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currency = JSON.parse(this._currency);
-
     if (this.hotelDetailsMain) {
       this.hotelDetailsMain.hotels.forEach(i => {
         this.hotelNamesArray.push({ hotelName: i.name });
@@ -122,7 +121,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         this.priceValue = this.hotelDetailsMain.filter_objects.price.min ? this.hotelDetailsMain.filter_objects.price.min : 0;
         this.priceHighValue = this.hotelDetailsMain.filter_objects.price.max ? this.hotelDetailsMain.filter_objects.price.max : 0;
         this.priceSlider.controls.price.setValue([Math.floor(this.priceValue), Math.ceil(this.priceHighValue)]);
-
         this.partialPaymentValue = this.hotelDetailsMain.filter_objects.secondary_price.min ? this.hotelDetailsMain.filter_objects.secondary_price.min : 0;
         this.partialPaymentHighValue = this.hotelDetailsMain.filter_objects.secondary_price.max ? this.hotelDetailsMain.filter_objects.secondary_price.max : 0;
 
@@ -326,7 +324,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       filteredHotels = filteredHotels.filter(item => {
         return this.distance >= item.distance;
       })
-      console.log(filteredHotels)
+      // console.log(filteredHotels)
     }
     /* Filter hotels ratings */
     if (this.ratingArray.length) {
@@ -370,10 +368,10 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         }
       });
     }
+    console.log('hereok')
     this.hotelService.getSortFilter.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
-        var sortFilter: any = hotelInfo;
-
+        var sortFilter: any = hotelInfo;        
         if (sortFilter.key == 'rating') {
           filteredHotels = this.ratingSortFilter(filteredHotels, sortFilter.key, sortFilter.order);
         } else if (sortFilter.key == 'name') {

@@ -59,13 +59,13 @@ export class PriceSummaryComponent implements OnInit {
           this.insatllmentAmount += this.priceSummary.instalments.instalment_date[i].instalment_amount
         }
 
-        if (this.priceSummary.instalments.instalment_date.length > 2) {
+        /* if (this.priceSummary.instalments.instalment_date.length > 2) {
 
           if (this.priceSummary.instalments.instalment_date[1].instalment_amount != this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length - 1].instalment_amount) {
 
             this.installmentVartion = this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length - 1].instalment_amount - this.priceSummary.instalments.instalment_date[1].instalment_amount;
           }
-        }
+        } */
       }
     }
   }

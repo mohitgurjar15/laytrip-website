@@ -20,7 +20,7 @@ declare var $: any;
 export interface CartItem {
 
   type: string;
-  module_info: {},r
+  module_info: {},
 }
 
 @Component({

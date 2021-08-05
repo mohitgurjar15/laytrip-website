@@ -176,7 +176,7 @@ export class HotelItemWrapperComponent implements OnInit {
   }
 
   changeSlide(slideId) {
-    console.log(slideId);
+    // console.log(slideId);
   }
 
   checkOnError(brokenImage) {
