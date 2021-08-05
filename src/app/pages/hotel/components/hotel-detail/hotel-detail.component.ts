@@ -131,7 +131,24 @@ export class HotelDetailComponent implements OnInit {
     }, error => {
       this.loading = false;
       this.isNotFound=true;  
-    });    
+    }); 
+    
+    // Author: xavier | 2021/8/5
+    // Description: Format the "Add to Cart" buttons to fit spanish translation
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(userLang === 'es') {
+      $(document).ready(function() {
+        function fixButtons() {
+          let els = $("a[class*='book_btn anchor-tag']");
+          if(els.length == 0) {
+            setTimeout(fixButtons, 100);
+          } else {
+            els.css({'line-height': '20px'});
+          }
+        }
+        fixButtons();
+      });
+    }
   }
 
   // Author: xavier | 2021/6/24

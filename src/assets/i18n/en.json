@@ -554,6 +554,7 @@
     "flight_not_available": "This flight is no longer available.",
     "flexible_installments": "Flexible Installments",
     "flights_30_days": "Flights within 30 days of travel not available in installments",
+    "hotels_30_days": "Hotels within 30 days of travel not available in installments",
     "not_available": "Not Available",
     "choose_how_pay": "Choose How You Pay",
     "pay_book_price": "Pay and Book at this pricing before time runs out.",
@@ -666,5 +667,7 @@
     "processing_booking_2": "Please do not press the Back Button, close your browser or click Pay and Book again. Wait for your Booking Confirmation screen to appear.",
     "booking_error_1": "Booking Completion Error",
     "booking_error_2": "Your Booking was not able to be fully completed. Some or all of your items may have remained in your Cart. Return to Cart to try again.",
-    "booking_error_3": "Return to Cart"
+    "booking_error_3": "Return to Cart",
+    "full_prices": "Full Prices",
+    "retrieving_monthly_prices": "We are retrieving monthly prices..."
  }

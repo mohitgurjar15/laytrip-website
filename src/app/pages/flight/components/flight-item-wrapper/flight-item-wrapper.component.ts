@@ -118,7 +118,10 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     if(userLang === 'es') {
       $(document).ready(function() {
-        $('.cta_btn').find('button').css({'height': '50px', 'line-height': '20px'});
+        $('.cta_btn').find('button').css({
+          'height': '50px', 
+          'line-height': '20px'
+        });
       });
     }
   }

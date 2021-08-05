@@ -85,19 +85,18 @@
                                     <p-calendar class="comon_pcale" *ngIf="!isRoundTrip" dateFormat="M d, yy" inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=selectDepartureDate($event)
                                         [readonlyInput]="true" (onMonthChange)="changeMonth($event)" (onShow)="datePickerShow($event)" panelStyleClass="calender-responsive-view laytrip-cal-view" [readonlyInput]="true" (onShow)="datepickerShow($event)" (onClose)="datepickerClose($event)">
                                         <p-header class="calender-header" *ngIf="calPrices">
-                                            <p *ngIf="isCalenderPriceLoading">We are retrieving monthly prices...</p>
+                                            <p *ngIf="isCalenderPriceLoading">{{'retrieving_monthly_prices' | translate}}</p>
                                             <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
                                                 <span class="green_var" [hidden]="getPriceLabel('lowMinPrice') == 0">${{getPriceLabel('lowMinPrice')}}</span>
                                                 <span class="yellow_var" [hidden]="getPriceLabel('midMinPrice') == 0">${{getPriceLabel('midMinPrice')}}</span>
                                                 <span class="red_var" [hidden]="getPriceLabel('highMinPrice') == 0">${{getPriceLabel('highMinPrice')}}</span>
-                                                <span class="full_payment_label" *ngIf="calendersFullPaymentLength > 0 && !isRoundTrip">Full Prices</span>
+                                                <span class="full_payment_label" *ngIf="calendersFullPaymentLength > 0 && !isRoundTrip">{{'full_prices' | translate}}</span>
                                             </div>
                                         </p-header>
 
                                         <ng-template pTemplate="date" let-date>
                                             <span class="c_date" [ngClass]="{'green_date': getPriceClass(date.day,date.month,date.year)=='low', 'yellow_date': getPriceClass(date.day,date.month,date.year)=='medium', 'red_date': getPriceClass(date.day,date.month,date.year)=='high','full_payment_date': getPriceClass(date.day,date.month,date.year)=='full_payment'}">{{date.day}}</span>
-                                            <span class="calender_price">{{ getPrice(date.day,date.month,date.year)
-                                                }}</span>
+                                            <span class="calender_price">{{ getPrice(date.day,date.month,date.year) }}</span>
                                         </ng-template>
                                     </p-calendar>
 

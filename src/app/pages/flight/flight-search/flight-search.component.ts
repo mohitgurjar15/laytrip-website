@@ -7,6 +7,7 @@ import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { TranslateService } from '@ngx-translate/core';
+declare var $: any;
 
 @Component({
   selector: 'app-flight-search',
@@ -397,10 +398,26 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     let tmp = this.filteredLabel;
     this.filteredLabel = (String)((new Date()).getMilliseconds());
     setTimeout(() => this.filteredLabel = tmp, 100);
+    this.adjustAddToCartButton();
   }
 
   resetFilter() {
     this.isResetFilter = (new Date()).toString();
+    this.adjustAddToCartButton();
+  }
+
+  // Author: xavier | 2021/8/5
+  // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
+  adjustAddToCartButton() {
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(userLang === 'es') {
+      setTimeout(() => {
+        $('.cta_btn').find('button').css({
+          'height': '50px', 
+          'line-height': '20px'
+        });
+      }, 250);
+    }
   }
 
   maxCartValidation(data) {
