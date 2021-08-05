@@ -430,6 +430,8 @@ export class TravelerFormComponent implements OnInit {
   selectTravelerNumber(event, cartNumber, traveler_number) {
     
     this.traveler_number = traveler_number;
+    this.travelers[`type${cartNumber}`].adults[traveler_number].is_active = !this.travelers[`type${cartNumber}`].adults[traveler_number].is_active;
+    console.log("this.travelers",this.travelerForm);
     let userId = this.travelers[`type${cartNumber}`].adults[traveler_number].userId;
     $(document).on("click", ".card-header", function () {
       if ($(this).find('.card-link').hasClass('collapsed')) {

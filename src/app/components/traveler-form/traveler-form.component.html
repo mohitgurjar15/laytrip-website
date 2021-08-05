@@ -4,8 +4,8 @@
             <div formArrayName="adults">
                 <div id="accordion" class="accordion_bookings">
                     <div class="card" *ngFor="let traveler of travelerForm.get('type'+y+'.adults')['controls']; let x = index;let last = last;">
-                        <div class="card-header custom_header"  [id]="'heading'+y+x"  (click)="selectTravelerNumber($event,cartNumber,x)">
-                            <a class="card-link" data-toggle="collapse" [href]="'#adult_collapse'+y+x" aria-expanded="true" [attr.aria-controls]="'#adult_collapse'+y+x">
+                        <div class="card-header custom_header">
+                            <a class="card-link" data-toggle="collapse" href="javascript:void(0)" aria-expanded="true" [attr.aria-controls]="'#adult_collapse'+y+x">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" *ngIf="cartItem.type=='flight'">
                                 <defs></defs>
                                 <path class="a"
@@ -22,11 +22,12 @@
                                 {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
                                 +travelerItem.value.adults[x].last_name:'' | titlecase}}
                                 </span>
+                                <span *ngIf="traveler.status=='VALID' && !travelerItem.value.adults[x].is_active" (click)="selectTravelerNumber($event,cartNumber,x)">Edit</span>
                             </a>
                            <!--  -->
                            <!--  -->
                         </div>
-                        <div [id]="'adult_collapse'+y+x" [attr.aria-labelledby]="'heading'+y+x" [ngClass]="{'show':travelerItem.value.adults[x].is_active}" class="collapse" data-parent="#accordion">
+                        <div  [ngClass]="{'show':travelerItem.value.adults[x].is_active}" class="collapse" >
                             <div class="card-body">
 
                                 <div [formGroupName]="x" class="common_form">
