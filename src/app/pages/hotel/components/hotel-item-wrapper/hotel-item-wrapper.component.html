@@ -121,8 +121,8 @@
                                     <div class="box_right">
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
-                                                <div class="block" *ngIf="item.secondary_start_price > 0">
-                                                    <p>{{'from' |translate}}</p>
+                                                <!-- <div class="block" *ngIf="item.is_installment_available">
+                                                    <p>From</p>
                                                     <p *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
                                                         <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
@@ -136,17 +136,41 @@
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">{{'weekly_installments' | translate}}</p>
+                                                    <p class="installment_type">Installments</p>
                                                 </div>
-                                                <div class="block" *ngIf="item.secondary_start_price === 0">
-                                                    <p>{{'full_payment' | translate}} <span>{{ currency?.symbol }}{{item?.selling?.total |
+                                                <div class="block mb-0" *ngIf="!item.is_installment_available">
+                                                    <p> <span>{{ currency?.symbol }}{{item?.selling?.total |
                                                             number :
-                                                            '1.2-2'}}</span></p>
+                                                            '1.2-2'}}</span>
+                                                            Full Payment
+                                                        </p>
+                                                </div> -->
+                                                <div class="block" *ngIf="item.secondary_start_price > 0">
+                                                    <p>{{'from' |translate}}</p>
+                                                    <p class="duel_prices" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
+                                                        <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
+                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                        <span>
+                                                            {{ currency?.symbol }}{{item?.discounted_secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                    </p>
+                                                    <p *ngIf="!item.offer_data.applicable">
+                                                        <span>
+                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                    </p>
+                                                    <p class="installment_type">{{'weekly' |translate}}</p>
                                                 </div>
-                                            </div>
-                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">{{'select' | translate}}</a>
-                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{'select' | translate}}</a>
+                                                <div class="block mb-0" *ngIf="item.secondary_start_price === 0">
+                                                    <p>{{'full_payment' |translate}} <span>{{ currency?.symbol }}{{item?.selling?.total |
+                                                                                                            number :
+                                                                                                            '1.2-2'}}</span></p>
+                                                </div>
 
+                                            </div>
+                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,x_coordinate:latitude,y_coordinate:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">{{'select' |translate}}</a>
+                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{'select' |translate}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -173,14 +197,14 @@
                                                 <span class="wrapper_names">
                                                     <span class="hotel_names">{{item?.name}}</span>
                                                 <span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}}
-                                                        off</span>
+                                                    {{'off' | translate}}</span>
                                                 </span>
                                             </a>
                                             <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">
                                                 <span class="wrapper_names">
                                                     <span class="hotel_names">{{item?.name}}</span>
                                                 <span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}}
-                                                    off</span>
+                                                    {{'off' | translate}}</span>
                                                 </span>
                                             </a>
                                             <span class="adress_span">
@@ -212,8 +236,8 @@
                                     <div class="thrd_part">
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
-                                                <div class="block" *ngIf="item.secondary_start_price > 0">
-                                                    <p>{{'from' | translate}}</p>
+                                                <!-- <div class="block" *ngIf="item.is_installment_available">
+                                                    <p>From</p>
                                                     <p class="duel_prices" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
                                                         <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
@@ -227,13 +251,38 @@
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">{{'weekly_installments' | translate}}</p>
+                                                    <p class="installment_type">Installments</p>
+                                                </div>
+                                                <div class="block" *ngIf="!item.is_installment_available">
+                                                    <p><span>{{ currency?.symbol }}{{item?.selling?.total |
+                                                        number :
+                                                        '1.2-2'}}</span>
+                                                        Full Payment 
+                                                        </p>
+                                                </div> -->
+                                                <div class="block" *ngIf="item.secondary_start_price > 0">
+                                                    <p>{{'from' | translate}}</p>
+                                                    <p *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
+                                                        <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
+                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                        <span>
+                                                            {{ currency?.symbol }}{{item?.discounted_secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                    </p>
+                                                    <p *ngIf="!item.offer_data.applicable">
+                                                        <span>
+                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
+                                                        </span>
+                                                    </p>
+                                                    <p class="installment_type">Weekly</p>
                                                 </div>
                                                 <div class="block" *ngIf="item.secondary_start_price === 0">
                                                     <p>{{'full_payment' | translate}} <span>{{ currency?.symbol }}{{item?.selling?.total |
-                                                            number :
-                                                            '1.2-2'}}</span></p>
+                                                                                                            number :
+                                                                                                            '1.2-2'}}</span></p>
                                                 </div>
+
                                             </div>
                                             <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">{{'select' | translate}}</a>
                                             <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{'select' | translate}}</a>
@@ -305,11 +354,11 @@
                                             <span class="texts" *ngIf="!item?.offer_data.applicable">
                                                 ${{item?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' | translate}}
                                             </span>
-                                            <div class="notifi_text mobile_notifi" *ngIf="item?.offer_data.applicable == false">
+                                            <div class="notifi_text mobile_notifi" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">
                                                 {{'more_payment_options' | translate}}
                                             </div>
                                         </div>
-                                        <div class="full_desk_not" *ngIf="item?.offer_data.applicable == false">
+                                        <div class="full_desk_not" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">
                                             <div class="notifi_text">
                                                 {{'more_payment_options' | translate}}
                                             </div>
@@ -318,7 +367,7 @@
 
                                     <div class="rules_wrps">
                                         <span class="heads">
-                                            <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> Rules
+                                            <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> {{'rules' | translate}}
                                         </span>
                                         <span class="texts_rules">
                                             {{'rules_1' | translate}} <a [routerLink]="['/terms']"

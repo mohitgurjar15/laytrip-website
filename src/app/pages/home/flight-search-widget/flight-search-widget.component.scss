@@ -9,13 +9,12 @@
   border: 1px solid red;
   border-radius: 8px;
 }
-
-/* .desk_suggetions {
+/* 
+.desk_suggetions {
   @include tab-view {
     display: none;
   }
 }
-
 .mobile_suggetions {
   display: none;
 
@@ -116,6 +115,13 @@ a:hover {
 
               &::before {
                 background-color: $error-color;
+              }
+            }
+            &.full_payment_label{
+              color: $pink;
+
+              &::before {
+                background-color: $pink;
               }
             }
 
@@ -241,6 +247,14 @@ a:hover {
 
               &:hover {
                 background-color: $bg-red-light !important;
+              }
+            }
+            &.full_payment_date {
+              color: #F826C1;
+              background-color: $bg-pink-light;
+
+              &:hover {
+                background-color: $bg-pink-light !important;
               }
             }
           }

@@ -77,6 +77,7 @@ export class HotelSearchComponent implements OnInit {
     this.errorMessage = '';
     this.hotelService.getHotelSearchResult(payload).subscribe((res: any) => {
       this.hotelDetails = res.data.hotels;
+      this.hotelDetails = this.sortPriceJSON(this.hotelDetails, 'total', 'ASC')
       this.hotelService.setHotels(this.hotelDetails)
       this.hotelDetailsMain = res.data;
       this.hotelToken = res.data.details.token;
@@ -129,7 +130,7 @@ export class HotelSearchComponent implements OnInit {
 
       }
     }
-
+    
     this.hotelService.setHotels(this.hotelDetails)
   }
 

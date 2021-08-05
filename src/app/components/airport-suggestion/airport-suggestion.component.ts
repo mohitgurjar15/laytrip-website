@@ -47,14 +47,14 @@ export class AirportSuggestionComponent implements OnInit {
     } 
   }
 
-  getAirports(){
+  getAirports() {
     this.data = [];
     let from = localStorage.getItem('__from') || '';
     let to = localStorage.getItem('__to') || '';
     if(from=='' && to==''){
       this.loading = true;
       this.flightService.searchAirports(this.type).subscribe((result:any)=>{
-        this.loading=false;       
+        this.loading = false;
         for (let i = 0; i < result.length; i++) {
           result[i].display_name = `${result[i].city},${result[i].country},(${result[i].code}),${result[i].name}`
         }

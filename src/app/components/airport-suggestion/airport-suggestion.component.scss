@@ -124,6 +124,8 @@ ng-scrollbar {
                                 li {
                                     margin: 5px 0 0;
                                     font-size: 12px;
+                                    display: flex;
+                                    align-items: center;
 
                                     // text-overflow: ellipsis; 
                                     // white-space: nowrap; 
@@ -137,11 +139,12 @@ ng-scrollbar {
                                     &::before {
                                         content: '';
                                         position: relative;
-                                        padding: 0 10px;
+                                        padding: 8px 10px;
                                         background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/summary_flight_ic.svg);
                                         background-position: center;
                                         background-repeat: no-repeat;
                                         background-size: 24px;
+                                        top: 1px;
                                     }
 
                                     @include tab-view {

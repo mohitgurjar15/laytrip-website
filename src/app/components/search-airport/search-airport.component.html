@@ -2,7 +2,7 @@
     <label class="{{data|json}}">{{label}}</label>
     <ng-select [formControlName]="controlName" [loading]="false" id="{{id}}" [selectOnTab]="true" [items]="data"
         bindLabel="display_name" bindValue="city" [clearable]="true" notFoundText="" [virtualScroll]="true"
-        [(ngModel)]="defaultCity" (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)"
+        [(ngModel)]="defaultCity" (click)="onInputClick()" (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)"
         (clear)="onRemove($event)" class="laytrip-input custom_inputs from_to_inputs" placeholder="{{ placeHolder }}"
         [tabIndex]="tabIndex" [clearSearchOnAdd]="true" [clearOnBackspace]="true" [hideSelected]="false"
         [searchable]="true" (focus)="onFocus()" (close)="onClose($event)">

@@ -128,8 +128,8 @@
       </div>
 
       <div class="right_side" [ngClass]="{'pt-3':!isRoundTrip}">
-        <div class="fl_fares">
-          <ng-container *ngIf="item.secondary_start_price>0">
+        <div class="fl_fares {{item?.unique_code}}">
+          <!-- <ng-container *ngIf="item.is_installment_available">
             <span class="fare_type desk_fare">
               {{'from' | translate}}
             </span>
@@ -142,6 +142,46 @@
             </span>
             <span class="fare_type desk_fare">
               {{'weekly' | translate | lowercase}}
+            </span>
+            <span class="cta_btn">             
+              <button  (click)="bookNow(item)" >Add to cart</button>
+              <div class="section_description no_flight " *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
+                <span class="sec_text">This flight is no longer available.</span>
+                <a (click)="hideFlightNotAvailable()" href="javascript:void(0);">
+                  <img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close">
+                </a>
+              </div>
+            </span>
+            <span class="fare_type mobile_fare">Flexible Installments</span>
+          </ng-container>
+          <ng-container *ngIf="!item.is_installment_available">
+            <span class="total_pr">
+              <span class="big-num">${{item.selling_price | number : '1.2-2'}} </span>
+            </span>
+            <span class="fare_type">Full Payment</span>
+            <span class="cta_btn">
+              <button (click)="bookNow(item)">Add to cart</button>
+              <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
+                <span class="sec_text">This flight is no longer available.</span>
+                <a (click)="hideFlightNotAvailable()" href="javascript:void(0);">
+                  <img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close">
+                </a>
+              </div>
+            </span>
+          </ng-container> -->
+          <ng-container *ngIf="item.secondary_start_price>0">
+            <span class="fare_type desk_fare">
+              From
+            </span>
+            <span class="total_pr d-flex flex-row justify-content-center">
+              <span
+                *ngIf="item?.offer_data?.applicable === true && item.secondary_start_price > item.discounted_secondary_start_price"
+                class="dashed_price"> ${{item.secondary_start_price | number : '1.2-2'}} </span>
+              <span class="big-num">${{item.offer_data.applicable === true ?
+                transformDecimal(item.discounted_secondary_start_price) : transformDecimal(item.secondary_start_price) }}</span>
+            </span>
+            <span class="fare_type desk_fare">
+              weekly
             </span>
             <span class="cta_btn">
               <!-- <button (click)="bookNow(item)" [ngClass]="{'confirm_availability' : item.availability =='yes','pending_availability' : item.availability =='pending','no_availability' : item.availability =='no'} ">Add to cart</button> -->
@@ -159,6 +199,9 @@
           </ng-container>
           <ng-container *ngIf="item.secondary_start_price==0">
             <span class="fare_type">{{'full_payment' | translate}}</span>
+            <span class="total_pr">
+              <span class="big-num">${{item.selling_price | number : '1.2-2'}} </span>
+            </span>
             <span class="cta_btn">
               <button (click)="bookNow(item)">{{'add_to_cart' | translate}}</button>
               <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
@@ -168,10 +211,9 @@
                 </a>
               </div>
             </span>
-            <span class="total_pr">
-              <span class="big-num">${{item.selling_price | number : '1.2-2'}} </span>
-            </span>
+            
           </ng-container>
+
         </div>
       </div>
       <span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}} {{'off' | translate}}</span>
@@ -188,30 +230,85 @@
           <div class="installment_wprs">
             <div class="type_lines">
               <span class="titles">{{'installment_option' | translate}} 1</span>
-              <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,0)==true">${{item.start_price | number : '1.2-2'}} {{'po_downpayment' | translate}} {{item.no_of_weekly_installment}} {{'po_weekly_installments' | translate}} ${{item.offer_data.applicable === true ? transformDecimal(item.discounted_secondary_start_price) : transformDecimal(item.secondary_start_price) }}</span>
-              <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,0)==true">{{'flights_30_days' | translate}}</span>
-              <span class="texts" *ngIf="showDownPayment(item?.offer_data,0)==false">{{'not_available' | translate}}</span>
+              <!-- <span class="texts" *ngIf="item.is_installment_available && showDownPayment(item?.offer_data,0)==true">${{item.start_price | number : '1.2-2'}} downpayment and {{item.no_of_weekly_installment}} weekly installments of ${{item.offer_data.applicable === true ? transformDecimal(item.discounted_secondary_start_price) : transformDecimal(item.secondary_start_price) }}</span>
+              <span class="texts" *ngIf="!item.is_installment_available && showDownPayment(item?.offer_data,0)==true && checkInDateInstallmentValidation(item.departure_date)">Flights within 30 days of travel not available in installments</span>
+              <span class="texts" *ngIf="!item.is_installment_available && showDownPayment(item?.offer_data,0)==true && !checkInDateInstallmentValidation(item.departure_date)">Instalment plan isn’t available for this itinerary</span>
+              <span class="texts" *ngIf="showDownPayment(item?.offer_data,0)==false">Not Available</span> -->
+            <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,0)==true">
+              ${{item.start_price | number : '1.2-2'}} {{'po_downpayment' | translate}}
+              {{ item?.offer_data.applicable ?  item.discounted_no_of_weekly_installment : item.no_of_weekly_installment }} {{'po_weekly_installments' | translate}}
+              {{'installments_of' | translate}}
+              ${{item.discounted_secondary_start_price |
+              number : '1.2-2'}}
+            </span>
+            <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,0)==true">
+              {{'flights_30_days' | translate}}
+            </span>
+            <span class="texts" *ngIf="showDownPayment(item?.offer_data,0)==false">
+              {{'not_available' | translate}}
+            </span>
+
             </div>
             <div class="type_lines">
               <span class="titles">{{'installment_option' | translate}} 2</span>
-              <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,1)==true">${{item.second_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}} {{item.no_of_weekly_installment_2}} {{'po_bi_weekly_installments' | translate}} ${{item.secondary_start_price_2 | number : '1.2-2'}}</span>
-              <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,1)==true">{{'flights_30_days' | translate}}</span>
-              <span class="texts" *ngIf="showDownPayment(item?.offer_data,1)==false">{{'not_available' | translate}}</span>
+              <!-- <span class="texts" *ngIf="item.is_installment_available && showDownPayment(item?.offer_data,1)==true"> ${{item.second_down_payment | number : '1.2-2'}} downpayment and {{item.no_of_weekly_installment_2}} bi-weekly installments of ${{item.secondary_start_price_2 | number : '1.2-2'}} </span>
+              <span class="texts" *ngIf="!item.is_installment_available && showDownPayment(item?.offer_data,1)==true && checkInDateInstallmentValidation(item.departure_date)">Flights within 30 days of travel not available in installments</span>
+              <span class="texts"
+                *ngIf="!item.is_installment_available && showDownPayment(item?.offer_data,1)==true && !checkInDateInstallmentValidation(item.departure_date)">Instalment
+                plan isn’t available for this itinerary</span>
+              <span class="texts" *ngIf="showDownPayment(item?.offer_data,1)==false">Not Available</span> -->
+              <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,1)==true">
+                ${{item.second_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                {{item.no_of_weekly_installment_2}} {{'bi_weekly' | translate}} {{'installments_of' | translate}}
+                ${{item.secondary_start_price_2 | number : '1.2-2'}}
+              </span>
+              <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,1)==true">
+                {{'flights_30_days' | translate}}
+              </span>
+              <span class="texts" *ngIf="showDownPayment(item?.offer_data,1)==false">
+                {{'not_available' | translate}}
+              </span>
+
             </div>
             <div class="type_lines">
-              <span class="titles">{{'installment_option' | translate}} 3 </span>
-              <span class="texts" *ngIf="item.start_price>0 &&  showDownPayment(item?.offer_data,2)==true">${{item.third_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}} {{item.no_of_weekly_installment_3}} {{(item.no_of_weekly_installment_3==1?'po_monthly_installments':'po_monthly_installments_p') | translate}} ${{item.secondary_start_price_3 | number : '1.2-2'}}</span>
-              <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,2)==true">{{'flights_30_days' | translate}}</span>
-              <span class="texts" *ngIf="showDownPayment(item?.offer_data,2)==false">{{'not_available' | translate}}</span>
+              <span class="titles">{{'installment_option' | translate}} 3</span>
+              <!-- <span class="texts" *ngIf="item.is_installment_available &&  showDownPayment(item?.offer_data,2)==true"> ${{item.third_down_payment | number : '1.2-2'}} downpayment and {{item.no_of_weekly_installment_3}} monthly installments of ${{item.secondary_start_price_3 | number : '1.2-2'}}</span>
+              <span class="texts" *ngIf="!item.is_installment_available && showDownPayment(item?.offer_data,2)==true && checkInDateInstallmentValidation(item.departure_date)"> Flights within 30 days of travel not available in installments </span>
+              <span class="texts"
+                *ngIf="!item.is_installment_available && showDownPayment(item?.offer_data,2)==true && !checkInDateInstallmentValidation(item.departure_date)">Instalment
+                plan isn’t available for this itinerary</span>
+              <span class="texts" *ngIf="showDownPayment(item?.offer_data,2)==false"> Not Available </span> -->
+              <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,2)==true">
+                ${{item.third_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                {{item.no_of_weekly_installment_3}} {{'monthly' | translate}} {{'installments_of' | translate}}
+                ${{item.secondary_start_price_3 |
+                number : '1.2-2'}}
+              </span>
+              <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,2)==true">
+                {{'flights_30_days' | translate}}
+              </span>
+              <span class="texts" *ngIf="showDownPayment(item?.offer_data,2)==false">
+                {{'not_available' | translate}}
+              </span>
+
             </div>
             <div class="type_lines">
               <span class="titles">{{'full_payment' | translate}}</span>
               <span class="texts"> ${{item.offer_data.applicable === true ? transformDecimal(item.discounted_selling_price) : transformDecimal(item.selling_price) }} {{'including_taxes_fees' | translate}}</span>
-              <div class="notifi_text mobile_notifi" *ngIf="item.start_price>0 && item?.offer_data.applicable == false">{{'more_payment_options' | translate}}</div>
+              <!-- <div class="notifi_text mobile_notifi" *ngIf="item.is_installment_available && item?.offer_data.applicable == false"> More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose Select.</div> -->
+                <div class="notifi_text mobile_notifi" *ngIf="item?.offer_data.applicable == false && item.start_price > 0">
+                  {{'more_payment_options' | translate}}
+                </div>
             </div>
-            <div class="full_desk_not" *ngIf="item.start_price>0 && item?.offer_data.applicable == false">
-              <div class="notifi_text">{{'more_payment_options' | translate}}</div>
+            <!-- <div class="full_desk_not" *ngIf="item.is_installment_available && item?.offer_data.applicable == false">
+              <div class="notifi_text">More Weekly, Bi-Weekly and Monthly plan options on Booking screen after you choose Select.</div>
+            </div> -->
+            <div class="full_desk_not" *ngIf="item?.offer_data.applicable == false && item.start_price > 0">
+              <div class="notifi_text">
+                {{'more_payment_options' | translate}}
+              </div>
             </div>
+
           </div>
           <div class="rules_wrps">
             <span class="heads"><img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="">{{'rules' | translate}}</span>
