@@ -39,7 +39,7 @@ export class FlightService {
         let headers = {
             currency: 'USD',
             language: 'en'
-        }
+        } 
 
         return this.http.post(`${environment.apiUrl}v1/flight/availability-assure/`, requestParams, this.commonFunction.setHeaders(headers))
             .pipe(
