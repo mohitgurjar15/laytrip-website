@@ -5,3 +5,25 @@
     font-size: 9px !important;
     line-height: 9px;
 }
+.full_payment{
+    color: #F826C1 !important;
+}
+
+.price_day_slider{
+    .btn-arrow{
+        position: absolute;
+        top: 50%;
+        border: none;
+        background: transparent url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) no-repeat center center;
+        font-size: 0;
+        padding: 10px 15px;
+        &.btn-prev{
+            left: 0;
+            transform: translate(0, -50%) rotate(90deg);
+        }
+        &.btn-next{
+            right: 0;
+            transform: translate(0, -50%) rotate(270deg);
+        }
+    }
+}

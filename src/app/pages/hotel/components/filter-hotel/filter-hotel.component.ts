@@ -324,7 +324,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       filteredHotels = filteredHotels.filter(item => {
         return this.distance >= item.distance;
       })
-      console.log(filteredHotels)
+      // console.log(filteredHotels)
     }
     /* Filter hotels ratings */
     if (this.ratingArray.length) {

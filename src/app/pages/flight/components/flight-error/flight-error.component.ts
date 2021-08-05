@@ -9,6 +9,7 @@ import { environment } from '../../../../../environments/environment';
 export class FlightErrorComponent implements OnInit {
 
   @Input() errorMessage:string;
+  @Input() statusCode;
   s3BucketUrl = environment.s3BucketUrl;
   constructor() { }
 

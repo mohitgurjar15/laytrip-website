@@ -90,11 +90,12 @@
                                                 <span class="green_var" [hidden]="getPriceLabel('lowMinPrice') == 0">${{getPriceLabel('lowMinPrice')}}</span>
                                                 <span class="yellow_var" [hidden]="getPriceLabel('midMinPrice') == 0">${{getPriceLabel('midMinPrice')}}</span>
                                                 <span class="red_var" [hidden]="getPriceLabel('highMinPrice') == 0">${{getPriceLabel('highMinPrice')}}</span>
+                                                <span class="full_payment_label" *ngIf="calendersFullPaymentLength > 0 && !isRoundTrip">Full Prices</span>
                                             </div>
                                         </p-header>
 
                                         <ng-template pTemplate="date" let-date>
-                                            <span class="c_date" [ngClass]="{'green_date': getPriceClass(date.day,date.month,date.year)=='low', 'yellow_date': getPriceClass(date.day,date.month,date.year)=='medium', 'red_date': getPriceClass(date.day,date.month,date.year)=='high'}">{{date.day}}</span>
+                                            <span class="c_date" [ngClass]="{'green_date': getPriceClass(date.day,date.month,date.year)=='low', 'yellow_date': getPriceClass(date.day,date.month,date.year)=='medium', 'red_date': getPriceClass(date.day,date.month,date.year)=='high','full_payment_date': getPriceClass(date.day,date.month,date.year)=='full_payment'}">{{date.day}}</span>
                                             <span class="calender_price">{{ getPrice(date.day,date.month,date.year)
                                                 }}</span>
                                         </ng-template>
