@@ -131,7 +131,7 @@
 
       <div class="right_side" [ngClass]="{'pt-3':!isRoundTrip}">
         <div class="fl_fares {{item?.unique_code}}">
-          <!-- <ng-container *ngIf="item.is_installment_available">
+          <ng-container *ngIf="item.is_installment_available">
             <span class="fare_type desk_fare">
               From
             </span>
@@ -170,8 +170,8 @@
                 </a>
               </div>
             </span>
-          </ng-container> -->
-          <ng-container *ngIf="item.secondary_start_price>0">
+          </ng-container>
+          <!-- <ng-container *ngIf="item.secondary_start_price>0">
             <span class="fare_type desk_fare">
               From
             </span>
@@ -185,11 +185,11 @@
             <span class="fare_type desk_fare">
               weekly
             </span>
-            <span class="cta_btn">
+            <span class="cta_btn"> -->
               <!-- <button (click)="bookNow(item)" [ngClass]="{'confirm_availability' : item.availability =='yes','pending_availability' : item.availability =='pending','no_availability' : item.availability =='no'} ">Add to cart</button> -->
               <!-- <button class="pending_availability"></button>
                         <button class="no_availability">Add to cart</button> -->
-              <button (click)="bookNow(item)">Add to cart</button>
+              <!-- <button (click)="bookNow(item)">Add to cart</button>
               <div class="section_description no_flight" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                 <span class="sec_text">This flight is no longer available.</span>
                 <a (click)="hideFlightNotAvailable()" href="javascript:void(0);">
@@ -214,7 +214,7 @@
               </div>
             </span>
             
-          </ng-container>
+          </ng-container> -->
 
         </div>
       </div>

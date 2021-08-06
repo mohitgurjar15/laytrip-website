@@ -359,9 +359,14 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
     if (typeof offerData != 'undefined' && offerData.applicable) {
 
-      if(typeof offerData.down_payment_options!='undefined' && offerData.down_payment_options[downPaymentOption].applicable){
+      if (typeof offerData.down_payment_options != 'undefined' && offerData.down_payment_options[downPaymentOption].applicable) {
         return true;
-      } else if(!this.isRefferal && isInstallmentTypeAvailable){
+      } else if (!this.isRefferal && isInstallmentTypeAvailable) {
+        return true;
+      }
+      return false;
+    } else {
+      if (!this.isRefferal && isInstallmentTypeAvailable) {
         return true;
       }
       return false;
