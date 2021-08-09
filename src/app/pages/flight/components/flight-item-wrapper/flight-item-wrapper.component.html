@@ -199,7 +199,7 @@
                 {{item.no_of_weekly_installment_2}} bi-weekly installments of
                 ${{item.secondary_start_price_2 | number : '1.2-2'}}
               </span>
-                    <span class="texts" *ngIf="item.is_installment_available && item.start_price==0 && showDownPayment(item?.offer_data,1,item.payment_config.isBiWeeklyInstallmentAvailable)==true">
+                    <span class="texts" *ngIf="item.is_installment_available && item.secondary_start_price_2==0 && showDownPayment(item?.offer_data,1,item.payment_config.isBiWeeklyInstallmentAvailable)==true">
                 Flights within 30 days of travel not available in installments
               </span>
                     <span class="texts" *ngIf="!item.is_installment_available  || showDownPayment(item?.offer_data,1,item.payment_config.isBiWeeklyInstallmentAvailable)==false">
@@ -216,7 +216,7 @@
                 ${{item.secondary_start_price_3 |
                 number : '1.2-2'}}
               </span>
-                    <span class="texts" *ngIf="item.is_installment_available &&  item.start_price==0 && showDownPayment(item?.offer_data,2,item.payment_config.isMonthlyInstallmentAvailable)==true">
+                    <span class="texts" *ngIf="item.is_installment_available &&  item.secondary_start_price_3==0 && showDownPayment(item?.offer_data,2,item.payment_config.isMonthlyInstallmentAvailable)==true">
                 Flights within 30 days of travel not available in installments
               </span>
                     <span class="texts" *ngIf="!item.is_installment_available || showDownPayment(item?.offer_data,2,item.payment_config.isMonthlyInstallmentAvailable)==false">
