@@ -403,36 +403,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  getFlightPrice(item){
-    if(item.offer_data.applicable){
-      if(item.payment_config.isWeeklyInstallmentAvailable){
-        return item.offer_data.payment_frequency_options.weekly.applicable ? item.discounted_secondary_start_price : item.secondary_start_price;
-      } else if(item.payment_config.isBiWeeklyInstallmentAvailable){
-        return item.offer_data.payment_frequency_options.biweekly.applicable ? item.discounted_secondary_start_price :  item.secondary_start_price_2;      
-      } else if(item.payment_config.isMonthlyInstallmentAvailable){
-        return item.offer_data.payment_frequency_options.monthly.applicable ? item.discounted_secondary_start_price :  item.secondary_start_price_3;    
-      }
-    } else {
-      if(item.payment_config.isWeeklyInstallmentAvailable){
-        return  item.secondary_start_price;
-      } else if(item.payment_config.isBiWeeklyInstallmentAvailable){
-        return  item.secondary_start_price_2;      
-      } else if(item.payment_config.isMonthlyInstallmentAvailable){
-        return  item.secondary_start_price_3;    
-      }
-  
-    }
-  }
-
-  getFlightFareTypeLabel(item){
-    if(item.payment_config.isWeeklyInstallmentAvailable){
-      return 'Weekly';
-    } else if(item.payment_config.isBiWeeklyInstallmentAvailable){
-      return 'Bi-Weekly';   
-    } else if(item.payment_config.isMonthlyInstallmentAvailable){
-      return 'Monthly';   
-    }
-  }
 }
 
 
