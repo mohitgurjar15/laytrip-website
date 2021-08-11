@@ -11,7 +11,7 @@
                 <div class="ftr_flex_row">
                     <div class="col-lg-3">
                         <div class="ftr_info">
-                            <p>Layaway travel for everyone</p>
+                            <p>{{'flight_second_title' | translate}}</p>
                             <div class="footer_cta_dropdown">
                                 <div class="cta_drop_wrp">
                                     <div class="dropdown cus_drop">
@@ -59,13 +59,13 @@
                                     <li>
                                         <a [routerLink]="['/faq']"
                                         [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                                            [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
+                                        [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
                                     </li>
                                     <li>
                                         <a 
                                         [routerLink]="['/privacy-policy']"
                                         [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                                        >Privacy</a>
+                                        [innerHTML]="'laytrip_info_page_title_4_description_5' | translate"></a>
                                     </li>
                                 </ul>
                             </div>
@@ -75,7 +75,7 @@
                                         <a 
                                         [routerLink]="['/terms']"
                                         [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                                        >Terms</a>
+                                        [innerHTML]="'laytrip_info_page_title_4_description_6' | translate"></a>
                                     </li>
                                     <li>
                                         <a class="hover-link"
@@ -93,10 +93,10 @@
                             <div class="menu_grid">
                                 <ul>
                                     <li class="share_li">
-                                        <a (click)="openShareModal()">Share</a>
+                                        <a (click)="openShareModal()" [innerHTML]="'laytrip_info_page_title_4_description_7' | translate"></a>
                                     </li>
                                 </ul>
-                                <h5>Follow Us</h5>
+                                <h5>{{'laytrip_info_page_title_4_description_8' | translate}}</h5>
                                 <ul class="footer_down_links">
                                     <li>
                                         <a target="_blank" target="_blank" href="https://www.instagram.com/laytrip_travel/" class="hover-link">

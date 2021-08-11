@@ -1,7 +1,7 @@
 <!-- Start Partial Payment Section-->
 <section class="partial_payment">
     <div class="container">
-        <span class="pink_notification">Book early and save! Get your price guaranteed on all layaway plans.</span>
+        <span class="pink_notification">{{'pink_notification' | translate}}</span>
         <div class="row">
             <div class="partial_payment_info">
                 <div class="partial_info_sections">
@@ -9,8 +9,8 @@
                         <div class="pay_type_img_wrap">
                             <img src="{{s3BucketUrl}}assets/images/calendarPay.svg" alt="calendarPay">
                         </div>
-                        <div class="pay_title">Installment Payment Plans</div>
-                        <p>Book now, pay most of your itinerary later</p>
+                        <div class="pay_title" [innerHTML]="'pink_msg1' | translate"></div>
+                        <p>{{'pink_msg1_1' | translate}}</p>
                     </div>
                 </div>
                 <div class="partial_info_sections">
@@ -18,8 +18,8 @@
                         <div class="pay_type_img_wrap">
                             <img src="{{s3BucketUrl}}assets/images/credit-cardPay.svg" alt="credit-cardPay">
                         </div>
-                        <div class="pay_title">No Interest<br> No Credit Check</div>
-                        <p>Anyone can book travel</p>
+                        <div class="pay_title" [innerHTML]="'pink_msg2' | translate"></div>
+                        <p>{{'pink_msg2_1' | translate}}</p>
                     </div>
                 </div>
                 <div class="partial_info_sections">
@@ -27,14 +27,14 @@
                         <div class="pay_type_img_wrap">
                             <img src="{{s3BucketUrl}}assets/images/pcPay.svg" alt="pcPay">
                         </div>
-                        <div class="pay_title">One-stop Travel</div>
-                        <p>Book everything on Laytrip</p>
+                        <div class="pay_title" [innerHTML]="'pink_msg3' | translate"></div>
+                        <p>{{'pink_msg3_1' | translate}}</p>
                     </div>
                 </div>
             </div>
             <div class="cta_extra_btn_wrapper">
                 <button (click)="redirectToAboutPage()">
-                    Learn More
+                    {{'installment_info_page_learn_more' | translate}}
                 </button>
             </div>
         </div>

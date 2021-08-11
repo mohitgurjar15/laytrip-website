@@ -14,11 +14,9 @@
                         <div class="cart_img_wrpper">
                             <img src="{{s3BucketUrl}}assets/images/empty_cart_big.svg" alt="empty cart image">
                         </div>
-                        <div class="cart_msg">
-                            Oops! <br> Your Cart is Empty
-                        </div>
+                        <div class="cart_msg" [innerHTML]="'empty_cart_msg' | translate"></div>
                         <div class="cta_btn_wrps">
-                            <button (click)="redirectToHome()">Search Travel</button>
+                            <button (click)="redirectToHome()">{{'search_travel' | translate}}</button>
                         </div>
                         <div class="footer_logo">
                             <a >

@@ -1,23 +1,23 @@
 <div *ngIf="!isPaymentCalulcatorLoading">
-  <h3>Choose How You Pay</h3>
+  <h3>{{'choose_how_pay' | translate}}</h3>
   <div class="payment_accordion">
     <div class="payment_mode_header" >
       <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':paymentType=='instalment'}"
-        [disabled]="isBelowMinimumInstallment" (click)="togglePaymentMode('instalment')">Installments</button>
+        [disabled]="isBelowMinimumInstallment" (click)="togglePaymentMode('instalment')">{{'installments' | translate}}</button>
 
       <div class="section_description" *ngIf="show30DayMinValidation">
-        <span class="sec_text">Installments not available under 30 days before travel.</span>
+        <span class="sec_text">{{'installments_30_days' | translate}}</span>
         <a (click)="hideBelow30DayMinError()" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
       </div>
  
       <div class="section_description second_pop" *ngIf="showPartialAndFullPaymentMixValidation">
-        <span class="sec_text">Your first booking is less than 30 days before travel. This booking and any additional bookings in this checkout will not be available in installments.</span>
+        <span class="sec_text">{{'bookings_first_30_days' | translate}}</span>
         <a (click)="hidePartialAndFullPaymentMixError()" ><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
       </div>
 
       
       <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':paymentType=='no-instalment'}"
-        (click)="togglePaymentMode('no-instalment')">Full Payment</button>
+        (click)="togglePaymentMode('no-instalment')">{{'full_payment' | translate}}</button>
     </div>
 
     <div class="inner_accordion">
@@ -26,11 +26,11 @@
 
       <app-redeem-laycredit redeemableLayPoints={{sellingPrice}} sellingPrice={{sellingPrice}}
         (applyLaycredit)="applyLaycredit($event)" [totalLaycreditPoints]="totalLaycreditPoints"></app-redeem-laycredit>
-      <h3 *ngIf="paymentType=='instalment' && instalmentAvavible">Downpayment Options</h3>
+      <h3 *ngIf="paymentType=='instalment' && instalmentAvavible">{{'downpayment_options' | translate}}</h3>
       <div class="flex_center_wrapper" *ngIf="paymentType=='instalment' && instalmentAvavible">
         <button *ngIf="showDownPaymentOption(0)==true" type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==0}"
           (click)="toggleDownPayment(0)">${{downPayments[0] | number : '1.2-2' }}
-          <span class="min_text" *ngIf="!isOfferData" >Minimum</span>
+          <span class="min_text" *ngIf="!isOfferData">{{'minimum' | translate}}</span>
         </button>
         <button *ngIf="showDownPaymentOption(1)==true" type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':selectedDownPaymentIndex==1}"
           (click)="toggleDownPayment(1)">${{downPayments[1] | number : '1.2-2' }}</button>
@@ -38,21 +38,21 @@
           (click)="toggleDownPayment(2)">${{downPayments[2] | number : '1.2-2' }}</button>
       </div>
 
-      <h3 *ngIf="paymentType=='instalment' && instalmentAvavible">Installment Payment Options</h3>
+      <h3 *ngIf="paymentType=='instalment' && instalmentAvavible">{{'installment_options' | translate}}</h3>
       <div class="flex_center_wrapper" *ngIf="paymentType=='instalment' && instalmentAvavible">
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='weekly', 'disabled' : showPaymentFrequency('weekly') === false }"
           (click)="togglePaymentFrequency('weekly')" [disabled]="weeklyInstalment < 5">
-          <span> Weekly</span> ${{ showPaymentFrequency('weekly')?weeklyInstalment:0 | number : '1.2-2'  }}</button>
+          <span>{{'weekly' | translate}}</span> ${{ showPaymentFrequency('weekly')?weeklyInstalment:0 | number : '1.2-2'  }}</button>
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='biweekly', 'disabled' : showPaymentFrequency('biweekly') === false}"
           (click)="togglePaymentFrequency('biweekly')" [disabled]="biWeeklyInstalment < 5">
-          <span>Bi-Weekly</span> ${{showPaymentFrequency('biweekly')?biWeeklyInstalment:0 | number : '1.2-2' }}</button>
+          <span>{{'bi_weekly' | translate}}</span> ${{showPaymentFrequency('biweekly')?biWeeklyInstalment:0 | number : '1.2-2' }}</button>
         <button type="button" class="btn_accrodion" [ngClass]="{'current_active_btn':instalmentType=='monthly', 'disabled' : showPaymentFrequency('monthly') === false}"
           (click)="togglePaymentFrequency('monthly')" [disabled]="montlyInstalment < 5">
-          <span>Monthly</span> ${{ showPaymentFrequency('monthly')?montlyInstalment:0 |
+          <span>{{'monthly' | translate}}</span> ${{ showPaymentFrequency('monthly')?montlyInstalment:0 |
           number : '1.2-2' }}</button>
       </div>
 
-      <small *ngIf="paymentType=='instalment' && !isOfferData" class="pay_alerts">All items in cart will be billed together as one plan of either Weekly or Bi-Weekly or Monthly payments.</small>
+      <small *ngIf="paymentType=='instalment' && !isOfferData" class="pay_alerts">{{'bill_items_info' | translate}}</small>
     </div> 
   </div>
 </div>

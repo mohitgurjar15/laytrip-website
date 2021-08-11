@@ -9,6 +9,8 @@ import { CartService } from '../../../../services/cart.service';
 import { HomeService } from '../../../../services/home.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { translateAmenities } from '../../../../_helpers/generic.helper';
 import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 declare var $: any;
 
@@ -60,6 +62,7 @@ export class HotelDetailComponent implements OnInit {
     private modalService: NgbModal,
     private cartService:CartService,
     private commonFunction:CommonFunction,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -102,7 +105,7 @@ export class HotelDetailComponent implements OnInit {
           country_name: res.hotel.address.country_name,
           rating: res.hotel.rating,
           review_rating: res.hotel.review_rating,
-          description: this.formatLongText(res.hotel.description),
+          description: res.hotel.description,
           amenities: res.hotel.amenities,
           hotelLocations: res.hotel.geocodes,
           latitude : parseFloat(res.hotel.geocodes.latitude),
@@ -110,6 +113,7 @@ export class HotelDetailComponent implements OnInit {
           hotelReviews: res.hotel.reviews,
           thumbnail: res.hotel.thumbnail
         };
+        this.translateHotelData();
         if (res.hotel.images.length) {
 
           res.hotel.images.forEach(imageUrl => {
@@ -128,10 +132,27 @@ export class HotelDetailComponent implements OnInit {
     }, error => {
       this.loading = false;
       this.isNotFound=true;  
-    });    
+    }); 
+    
+    // Author: xavier | 2021/8/5
+    // Description: Format the "Add to Cart" buttons to fit spanish translation
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(userLang === 'es') {
+      $(document).ready(function() {
+        function fixButtons() {
+          let els = $("a[class*='book_btn anchor-tag']");
+          if(els.length == 0) {
+            setTimeout(fixButtons, 100);
+          } else {
+            els.css({'line-height': '20px'});
+          }
+        }
+        fixButtons();
+      });
+    }
   }
 
-  // Author: xavier | 2021/6/24 @ 4:23pm
+  // Author: xavier | 2021/6/24
   // Description: Toggle description expand/collapse
   toggleDesc() {
     let el = $("#hotel_desc");
@@ -145,7 +166,7 @@ export class HotelDetailComponent implements OnInit {
     }
   }
 
-  // Author: xavier | 2021/6/23 @ 2:30pm
+  // Author: xavier | 2021/6/23
   // Description: Break long text into paragraphs.
   //              Takes into account empty text and text without periods.
   formatLongText(data: any) {
@@ -163,6 +184,59 @@ export class HotelDetailComponent implements OnInit {
     }
 
     return result;
+  }
+
+  // Author: xavier | 2021/7/27
+  // Description: Translates hotel's description using Google's translation API.
+  translateHotelData() {
+    // For debugging purposes only, so we don't keep calling Google's API.
+    //this.hotelDetails.description = this.formatLongText(this.hotelDetails.description);
+    //return;
+
+    const lang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(lang == "en") {
+      this.hotelDetails.description = this.formatLongText(this.hotelDetails.description);
+      return;
+    }
+
+    let body = new HttpParams();
+    body = body.set('q', this.hotelDetails.description)
+               .set('source', 'en')
+               .set('target', lang)
+               .set('format', 'text')
+               .set('model', 'nmt')
+               .set('key', 'AIzaSyAM2IBT7FXhbv1NFqqVEdYkFDTyqPUhmR8');
+
+    class gApiResp { 
+      data: {
+        translations: {
+          translatedText: string[],
+          detectedSourceLanguage: string,
+          model: string
+        }[];
+      }
+    }
+    
+    // Translate Description
+    this.http
+      .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      .subscribe(
+        res => this.hotelDetails.description = this.formatLongText(res.data.translations[0].translatedText)
+      );
+
+    // Translate Ammenities
+    for(let i = 0; i < this.hotelDetails.amenities.list.length; i++) {
+      this.hotelDetails.amenities.list[i] = translateAmenities(this.hotelDetails.amenities.list[i]);
+      // body = body.set('q', this.hotelDetails.amenities.list[i]);
+      // this.http
+      // .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      // .subscribe(
+      //   res => {
+      //     this.hotelDetails.amenities.list[i] = res.data.translations[0].translatedText;
+      //   }
+      // );
+    }
+    
   }
 
   counter(i: any) {

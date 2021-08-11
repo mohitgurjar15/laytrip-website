@@ -7,14 +7,12 @@
     <div class="modal-body">
         <div class="modal_top_block success_modal">
             <img class="ic_suc" src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
-            <h4 class="modal-title suc_title" id="modal-basic-title">Booking Completion Error
-            </h4>
-            <span>Your Booking was not able to be fully completed. Some or all of your items may have remained in your
-                Cart. Return to Cart to try again.</span>
+            <h4 class="modal-title suc_title" id="modal-basic-title">{{'booking_error_1' | translate}}</h4>
+            <span>{{'booking_error_2' | translate}}</span>
         </div>
         <div class="form_btn">
             <button type="submit" class="btn btn-accent btn-block btn-flat b-r-10" (click)="returnToCart()">
-                Return to Cart
+                {{'booking_error_3' | translate}}
             </button>
         </div>
     </div>

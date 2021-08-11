@@ -12,7 +12,7 @@
                 <li class="grid_box first">
                     <div class="hotel_where">
                         <div class="search_area {{!validSearch && hotelSearchFormSubmitted}}" [ngClass]="{'hotel-error': !validSearch && hotelSearchFormSubmitted}">
-                            <label for="">Destination</label>
+                            <label for="">{{'destination_search' | translate}}</label>
                             <app-hotel-suggestion [searchItem]="fromDestinationInfo.title" [defaultItem]="fromDestinationInfo" (selectedHotel)="selectedHotel($event)" (validateSearch)="validateSearch($event)" (currentChangeCounter)="counterValueChanged($event)"></app-hotel-suggestion>
                         </div>
                     </div>

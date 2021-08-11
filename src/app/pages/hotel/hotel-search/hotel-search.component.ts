@@ -5,6 +5,7 @@ import { HotelService } from '../../../services/hotel.service';
 import { CommonFunction } from '../../../_helpers/common-function';
 import * as moment from 'moment';
 import { HomeService } from '../../../services/home.service';
+import { TranslateService } from '@ngx-translate/core';
 declare var $: any;
 
 @Component({
@@ -44,7 +45,7 @@ export class HotelSearchComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private renderer: Renderer2,
     private homeService: HomeService,
-
+    private translate: TranslateService
   ) {
   }
 
@@ -68,6 +69,7 @@ export class HotelSearchComponent implements OnInit {
       filter: true,
     };
     this.getHotelSearchData(payload);
+    this.setFilteredLabel('filter_1');
   }
 
   getHotelSearchData(payload) {
@@ -97,27 +99,33 @@ export class HotelSearchComponent implements OnInit {
     let { key, order } = event;
     if (key === 'total') {
       if (order === 'ASC') {
-        this.filteredLabel = 'Price Lowest to Highest';
+        //this.filteredLabel = 'Price Lowest to Highest';
+        this.setFilteredLabel('filter_1');
         this.hotelDetails = this.sortPriceJSON(this.hotelDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Price Highest to Lowest';
+        //this.filteredLabel = 'Price Highest to Lowest';
+        this.setFilteredLabel('filter_2');
         this.hotelDetails = this.sortPriceJSON(this.hotelDetails, key, order);
       }
     } else if (key === 'rating') {
       if (order === 'ASC') {
-        this.filteredLabel = 'Rating Lowest to Highest';
+        //this.filteredLabel = 'Rating Lowest to Highest';
+        this.setFilteredLabel('filter_3');
         this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Rating Highest to Lowest';
+        //this.filteredLabel = 'Rating Highest to Lowest';
+        this.setFilteredLabel('filter_4');
         this.hotelDetails = this.sortByRatings(this.hotelDetails, key, order);
       }
     } else if (key === 'name') {
 
       if (order === 'ASC') {
-        this.filteredLabel = 'Alphabetical A to Z';
+        //this.filteredLabel = 'Alphabetical A to Z';
+        this.setFilteredLabel('filter_5');
         this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Alphabetical Z to A';
+        //this.filteredLabel = 'Alphabetical Z to A';
+        this.setFilteredLabel('filter_6');
         this.hotelDetails = this.sortByHotelName(this.hotelDetails, key, order);
 
       }
@@ -232,5 +240,13 @@ export class HotelSearchComponent implements OnInit {
         this.router.navigate(['/']);
       }
     }
+  }
+
+  // Author: xavier | 2021/7/27
+  // Description: Update filtered label using the appropiate translation key
+  setFilteredLabel(rscId: string){
+    this.translate.
+      get(rscId).
+      subscribe((res: string) => this.filteredLabel = res);
   }
 }

@@ -1,5 +1,5 @@
 <div class="pay_summery_wrapper" *ngIf="typeOf(priceSummary)!=='undefined'">
-    <h3>Payment Summary</h3>
+    <h3>{{'payment_summary' | translate}}</h3>
     <div class="pay_sum_inner">
         <div class="pay_list_wrper" id="flight_list_wrper">
             <ng-container *ngFor="let item of cartPrices">
@@ -81,7 +81,7 @@
         </ng-container>
 
         <div class="pay_listing total_amm_blue">
-            <span>Total Purchases</span>
+            <span>{{'total_purchases' | translate}}</span>
 
             <span *ngIf="typeOf(priceSummary.instalments)!='undefined'" class="">${{priceSummary.totalAmount | number :
         '1.2-2'}}</span>
@@ -90,16 +90,16 @@
         <!-- Start -->
         <div class="pay_list_wrper">
             <div class="pay_listing" *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0">
-                <span>Booking Downpayment</span>
+                <span>{{'booking_downpayment' | translate}}</span>
                 <span class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
             </div>
             <div class="pay_listing">
-                <span>Applied Laytrip Points</span>
+                <span>{{'applied_points' | translate}}</span>
                 <span class="">-${{priceSummary.layCreditPoints | number : '1.2-2' }} </span>
             </div>
         </div>
         <div class="pay_listing total_amm_blue bb_none">
-            <span>Total Due Now</span>
+            <span>{{'total_due' | translate}}</span>
             <span *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0" class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount
         | number : '1.2-2'}}</span>
             <span *ngIf="priceSummary?.paymentType=='no-instalment'" class="">${{priceSummary.totalAmount | number :
@@ -113,12 +113,11 @@
             <span class="open_text">
               {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
               priceSummary.instalments?.instalment_date?.length-1 : 0 }}
-              {{installmentType[priceSummary.instalmentType]}}
-              Installments of ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount |
-              number : '1.2-2'}}
+              {{ installmentType[userLang][priceSummary.instalmentType] }}
+              {{'installments_of' | translate}} ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount | number : '1.2-2'}}
             </span>
             <span class="close_text">
-              <span>Total Installments</span>
+                <span>{{'total_installments' | translate}}</span>
               <span class="">${{insatllmentAmount | number : '1.2-2' }}</span>
             </span>
           </button>
@@ -127,14 +126,14 @@
                     <div class="card-body">
                         <div class="pay_sap_setions" *ngIf="typeOf(priceSummary.instalments)!='undefined'">
                             <div class="due_details" *ngFor="let instalment of priceSummary.instalments.instalment_date | slice:1; let i = index;">
-                                <span>#{{i+1}} Due {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
+                                <span>#{{i+1}} {{'due' | translate}} {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
                                 <span class="">${{instalment.instalment_amount |
                   number : '1.2-2'}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="total_amm_blue">
-                        <span>Total Installments</span>
+                        <span>{{'total_installments' | translate}}</span>
                         <span class="">${{insatllmentAmount | number : '1.2-2' }}</span>
                     </div>
                 </div>
@@ -155,7 +154,7 @@
             <div class="tax_fee_modal_wrp">
                 <div class="inner_wrppar">
                     <div class="title_box">
-                        Taxes & Fees
+                        {{'taxes_fees' | translate}}
                     </div>
                     <div class="fee_msg">
                         <p class="para_fees">
