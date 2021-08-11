@@ -31,13 +31,13 @@
                     <div class="deal_sec_inner" *ngIf="moduleId == 1">
                         <img [src]="item?.to?.image" alt="Deal Image" />
                         <div class="image_about_text">
-                            <button (click)="btnDealClick(item?.to)">Find Deals to {{item?.to?.city}}</button>
+                            <button (click)="btnDealClick(item?.to)">{{item?.to?.city}}</button>
                         </div>
                     </div>
                     <div class="deal_sec_inner" *ngIf="moduleId == 3">
                         <img [src]="item?.location?.image" alt="Deal Image" />
                         <div class="image_about_text">
-                            <button (click)="btnDealClick(item?.location)">Find Deals to {{item?.location?.city}}</button>
+                            <button (click)="btnDealClick(item?.location)">{{item?.location?.city}}</button>
                         </div>
                     </div>
                 </ng-template>
@@ -78,7 +78,7 @@
                     <div class="deal_sec_inner">
                         <img [src]="item?.image" alt="Deal Image" />
                         <div class="image_about_text">
-                            <button (click)="btnDealClick(item)">Find Deals to {{item?.city}}</button>
+                            <button (click)="btnDealClick(item)">{{'find_deals' | translate}} {{item?.city}}</button>
                         </div>
                     </div>
                 </div>

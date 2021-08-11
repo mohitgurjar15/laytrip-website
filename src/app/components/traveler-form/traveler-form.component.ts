@@ -118,6 +118,8 @@ export class TravelerFormComponent implements OnInit {
   isChildTravller: boolean = true;
   isInfantTravller: boolean = true;
   accountHolderEmail: string = '';
+  userLang: string = "en";
+
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -137,6 +139,10 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     this.loadJquery();
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
+
+    // Author: xavier | 2021/7/30
+    // Description: To support localized installment types
+    this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
 
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({

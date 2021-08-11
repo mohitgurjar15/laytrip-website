@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form_field half">
-                    <label>{{'cvv' | translate}}</label>
+                    <label>{{'cvv' | translate}}*</label>
                     <div class="text_field">
                         <input type="text" tabindex="5" placeholder="{{'cvv_placeholder' | translate}}" formControlName="card_cvv" [textMask]="cvvNoMask">
                         <div *ngIf="cardActionForm.controls.card_cvv.errors && cardActionForm.controls.card_cvv.touched">

@@ -6,7 +6,7 @@ import { environment } from '../../../../../environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HotelService } from '../../../../services/hotel.service';
 import { HotelSearchComponent } from '../../hotel-search/hotel-search.component';
-
+import { translateAmenities } from '../../../../_helpers/generic.helper';
 
 @Component({
   selector: 'app-filter-hotel',
@@ -101,16 +101,18 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
   lowToHighToggleRating: boolean = false;
   lowToHighToggleAmenities: boolean = false;
   is_open: boolean = false;
+  translateAmenities;
 
   constructor(
     private eRef: ElementRef,
     private hotelService: HotelService,
-    public hotelSearchComp: HotelSearchComponent
-
+    public hotelSearchComp: HotelSearchComponent,
   ) { }
 
   ngOnInit() {
     this.currency = JSON.parse(this._currency);
+    this.translateAmenities = translateAmenities;
+
     if (this.hotelDetailsMain) {
       this.hotelDetailsMain.hotels.forEach(i => {
         this.hotelNamesArray.push({ hotelName: i.name });
@@ -509,5 +511,4 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       });
     }
   }
-
 }

@@ -1,7 +1,7 @@
 <div class="title_bar">
-    <h3>Traveler Details</h3>
+    <h3>{{'traveler_detail' | translate}}</h3>
     <span class="edit_btns">
-        <a class="hover-link" (click)="showForm()" *ngIf="!showNewForm">Add New</a>
+        <a class="hover-link" (click)="showForm()" *ngIf="!showNewForm">{{'add_new' | translate}}</a>
     </span>
 </div>
 <div class="travel_detail_bg_wrps">
@@ -16,7 +16,7 @@
                                     <defs></defs>
                                     <path class="a"
                                         d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
-                                </svg> New
+                                </svg> {{'new_m' | translate}}
                             </a>
                         </div>
                         <div id="new_traveller_form" class="collapse show" data-parent="#travller_new_accordion_inner">

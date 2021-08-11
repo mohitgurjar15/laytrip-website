@@ -13,12 +13,14 @@ import { CartService } from '../../../../services/cart.service';
 import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
 import { DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 
 @Component({
   selector: 'app-flight-item-wrapper',
   templateUrl: './flight-item-wrapper.component.html',
   styleUrls: ['./flight-item-wrapper.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
@@ -100,7 +102,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.cartService.getCartItems.subscribe(cartItems => {
       this.cartItems = cartItems;
     })
-    this.loadJquery(); 
+    this.loadJquery();
     this.flightService.getFlights.subscribe(data=>{
       if(data.length){
         this.flightDetails = this.flightItems = data;            
@@ -108,8 +110,19 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       else{
         this.flightDetails=[];
       }
-    })
+    });
 
+    // Author: xavier | 2021/8/3
+    // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(userLang === 'es') {
+      $(document).ready(function() {
+        $('.cta_btn').find('button').css({
+          'height': '50px', 
+          'line-height': '20px'
+        });
+      });
+    }
   }
 
   setAirportAvailabilityOld() {
@@ -402,7 +415,9 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       }
     }, 1000);
   }
-
+  getCancellationPolicy(route_code) {
+    return "#";
+  }
 }
 
 

@@ -1,18 +1,20 @@
 <span class="mob_line"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
-    {{hotelCount}} {{hotelCount > 1 ? 'Hotels' : 'Hotel'}}
-    found in {{hotelName}}</span>
+    {{'found_in_prefix' | translate}}
+    {{hotelCount}} {{(hotelCount > 1 ? 'hotels' : 'hotel') | translate}}
+    {{'found_in_suffix' | translate}} {{hotelName}}1232</span>
 <div class="top_wrapper_box">
     <h3 class="shorting_label">{{filteredLabel}}</h3>
     <span class="desk_line"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
-        {{hotelCount}} {{hotelCount > 1 ? 'Hotels' : 'Hotel'}}
-        found in {{hotelName}}</span>
+        {{'found_in_prefix' | translate}}
+        {{hotelCount}} {{(hotelCount > 1 ? 'hotels' : 'hotel') | translate}}
+        {{'found_in_suffix' | translate}} {{hotelName}}</span>
     <button class="list_v_btn" (click)="differentView('listView')" [hidden]="!isMapView">
         <img src="{{s3BucketUrl}}assets/images/icon/list_y.svg" alt="List view">
-        List
+        {{'list_vm' | translate}}
     </button>
     <button *ngIf="hotelListArray.length > 0" class="map_v_btn" (click)="differentView('mapView')" [hidden]="isMapView">
         <img src="{{s3BucketUrl}}assets/images/icon/map_.svg" alt="map view">
-        Map
+        {{'map_vm' | translate}}
     </button>
 </div>
 
@@ -105,7 +107,7 @@
                                                                     [href]="'#collapse'+blockIndex"
                                                                     aria-expanded="false" aria-controls="collapse1"
                                                                     class="hotel_anchor">
-                                                                    Details
+                                                                    {{'details' | translate}}
                                                                 </a>
                                                             </span>
                                                         </div>
@@ -120,7 +122,7 @@
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
                                                 <div class="block" *ngIf="item.is_installment_available">
-                                                    <p>From</p>
+                                                    <p>{{'from' |translate}}</p>
                                                     <p class="duel_prices">
                                                         <span class="dashed_price" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable && item?.secondary_start_price > item?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
@@ -134,12 +136,12 @@
                                                 <div class="block mb-0" *ngIf="!item.is_installment_available">
                                                     <p> <span>{{ currency?.symbol }}{{item?.selling?.total |
                                                             number :
-                                                            '1.2-2'}}</span> Full Payment
+                                                            '1.2-2'}}</span> {{'full_payment' |translate}}
                                                     </p>
                                                 </div>
                                             </div>
-                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,x_coordinate:latitude,y_coordinate:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">Select</a>
-                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">Select</a>
+                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,x_coordinate:latitude,y_coordinate:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">{{'select' |translate}}</a>
+                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{'select' |translate}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -165,14 +167,14 @@
                                                 <span class="wrapper_names">
                                                     <span class="hotel_names">{{item?.name}}</span>
                                                 <span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}}
-                                                        off</span>
+                                                    {{'off' | translate}}</span>
                                                 </span>
                                             </a>
                                             <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">
                                                 <span class="wrapper_names">
                                                     <span class="hotel_names">{{item?.name}}</span>
                                                 <span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}}
-                                                    off</span>
+                                                    {{'off' | translate}}</span>
                                                 </span>
                                             </a>
                                             <span class="adress_span">
@@ -197,7 +199,7 @@
                                             <a data-toggle="collapse" data-parent="#full_hotel_listing"
                                                 [href]="'#collapse'+blockIndex" aria-expanded="false"
                                                 aria-controls="collapse1" class="hotel_anchor">
-                                                Details
+                                                {{'details' | translate}}
                                             </a>
                                         </span>
                                     </div>
@@ -205,7 +207,7 @@
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
                                                 <div class="block" *ngIf="item.is_installment_available">
-                                                    <p>From</p>
+                                                    <p>{{'from' | translate}}</p>
                                                     <p class="duel_prices">
                                                         <span class="dashed_price" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable && item?.secondary_start_price > item?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
@@ -240,14 +242,14 @@
                                                     <p class="installment_type">Weekly</p>
                                                 </div>
                                                 <div class="block" *ngIf="item.secondary_start_price === 0">
-                                                    <p>Full Payment <span>{{ currency?.symbol }}{{item?.selling?.total |
+                                                    <p>{{'full_payment' | translate}} <span>{{ currency?.symbol }}{{item?.selling?.total |
                                                                                                             number :
                                                                                                             '1.2-2'}}</span></p>
                                                 </div> -->
 
                                             </div>
-                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">Select</a>
-                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">Select</a>
+                                            <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">{{'select' | translate}}</a>
+                                            <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{'select' | translate}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -260,11 +262,11 @@
                                     <div class="installment_wprs">
                                         <div class="type_lines">
                                             <span class="titles">
-                                                Installment Option 1
+                                                {{'installment_option' | translate}} 1
                                             </span>
                                             <span class="texts" *ngIf="item.is_installment_available && item.payment_object.weekly">
-                                                ${{item.start_price | number : '1.2-2'}} downpayment and
-                                                {{ item.payment_object['weekly'].installment_count }} weekly installments of
+                                                ${{item.start_price | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                                {{ item.payment_object['weekly'].installment_count }} {{'po_weekly_installments' | translate}}
                                                 ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="item.is_installment_available && !item.payment_object.weekly">
@@ -276,11 +278,11 @@
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">
-                                                Installment Option 2
+                                                {{'installment_option' | translate}} 2
                                             </span>
                                             <span class="texts" *ngIf="item.is_installment_available && item.payment_object.biweekly">
-                                                ${{item.second_down_payment | number : '1.2-2'}} downpayment and
-                                                {{item.payment_object['biweekly'].installment_count}} bi-weekly installments of
+                                                ${{item.second_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                                {{item.payment_object['biweekly'].installment_count}}{{'po_bi_weekly_installments' | translate}}
                                                 ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="item.is_installment_available && !item.payment_object.biweekly">
@@ -292,11 +294,11 @@
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">
-                                                Installment Option 3
+                                                {{'installment_option' | translate}} 3
                                             </span>
                                             <span class="texts" *ngIf="item.is_installment_available && item.payment_object.monthly">
-                                                ${{item.third_down_payment | number : '1.2-2'}} downpayment and
-                                                {{item.payment_object['monthly'].installment_count }} monthly installments of
+                                                ${{item.third_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                                {{item.payment_object['monthly'].installment_count }} {{po_monthly_installments | translate }}
                                                 ${{item.payment_object['monthly'].installment |
                                                 number : '1.2-2'}}
                                             </span>
@@ -309,34 +311,33 @@
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">
-                                                Average Nightly Rate
+                                                {{'average_nightly_rate' | translate}}
                                             </span>
                                             <span class="texts" *ngIf="item?.offer_data.applicable">
-                                                ${{item?.selling?.discounted_avg_night_price | number : '1.2-2'}} including taxes and fees
+                                                ${{item?.selling?.discounted_avg_night_price | number : '1.2-2'}} {{'including_taxes_fees' | translate}}
                                             </span>
                                             <span class="texts" *ngIf="!item?.offer_data.applicable">
-                                                ${{item?.night_rate | number : '1.2-2'}} including taxes and fees
+                                                ${{item?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' | translate}}
                                             </span>
                                             <div class="notifi_text mobile_notifi" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">
-                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
+                                                {{'more_payment_options' | translate}}
                                             </div>
                                         </div>
                                         <div class="full_desk_not" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">
                                             <div class="notifi_text">
-                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
+                                                {{'more_payment_options' | translate}}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="rules_wrps">
                                         <span class="heads">
-                                            <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> Rules
+                                            <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> {{'rules' | translate}}
                                         </span>
                                         <span class="texts_rules">
-                                            Non-refundable, non-transferable. Change policy reflected in Laytrip <a
-                                                [routerLink]="['/terms']"
-                                                [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>
-                                            which apply.
+                                            {{'rules_1' | translate}} <a [routerLink]="['/terms']"
+                                            [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>
+                                            {{'rules_2' | translate}}
                                         </span>
 
                                     </div>

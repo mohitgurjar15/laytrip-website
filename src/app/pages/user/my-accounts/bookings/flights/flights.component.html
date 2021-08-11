@@ -69,7 +69,7 @@
                 </div>
                 <div class="total_hrs_wrps cta_btns_wrps" *ngIf="(cartItem | json) != '{}'">
                     <span class="ct_btns">
-            </span> Duration {{cartItem?.moduleInfo[0]?.routes[0]?.duration}}
+            </span> {{'duration' | translate}} {{cartItem?.moduleInfo[0]?.routes[0]?.duration}}
                 </div>
 
                 <ng-container *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                     <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
-                        <span class="ct_btns"></span> Duration {{cartItem?.moduleInfo[0]?.routes[1]?.duration}}
+                        <span class="ct_btns"></span> {{'duration' | translate}}tion {{cartItem?.moduleInfo[0]?.routes[1]?.duration}}
                     </div>
                 </ng-container>
 
