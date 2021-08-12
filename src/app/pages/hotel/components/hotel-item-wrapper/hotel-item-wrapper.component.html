@@ -121,53 +121,24 @@
                                     <div class="box_right">
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
-                                                <!-- <div class="block" *ngIf="item.is_installment_available">
-                                                    <p>From</p>
-                                                    <p *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
-                                                        <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
+                                                <div class="block" *ngIf="item.is_installment_available">
+                                                    <p>{{'from' |translate}}</p>
+                                                    <p class="duel_prices">
+                                                        <span class="dashed_price" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable && item?.secondary_start_price > item?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                         <span>
-                                                            {{ currency?.symbol }}{{item?.discounted_secondary_start_price | number :'1.2-2'}}
+                                                            {{ currency?.symbol }}{{ (item?.offer_data.applicable ? item?.discounted_secondary_start_price : item?.payment_object[item.payment_object.installment_type].installment)  | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p *ngIf="!item.offer_data.applicable">
-                                                        <span>
-                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
-                                                        </span>
-                                                    </p>
-                                                    <p class="installment_type">Installments</p>
+                                                    <p class="installment_type">{{(item?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : item.payment_object.installment_type) | titlecase}}</p>
                                                 </div>
                                                 <div class="block mb-0" *ngIf="!item.is_installment_available">
                                                     <p> <span>{{ currency?.symbol }}{{item?.selling?.total |
                                                             number :
-                                                            '1.2-2'}}</span>
-                                                            Full Payment
-                                                        </p>
-                                                </div> -->
-                                                <div class="block" *ngIf="item.secondary_start_price > 0">
-                                                    <p>{{'from' |translate}}</p>
-                                                    <p class="duel_prices" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
-                                                        <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
-                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
-                                                        </span>
-                                                        <span>
-                                                            {{ currency?.symbol }}{{item?.discounted_secondary_start_price | number :'1.2-2'}}
-                                                        </span>
+                                                            '1.2-2'}}</span> {{'full_payment' |translate}}
                                                     </p>
-                                                    <p *ngIf="!item.offer_data.applicable">
-                                                        <span>
-                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
-                                                        </span>
-                                                    </p>
-                                                    <p class="installment_type">{{'weekly' |translate}}</p>
                                                 </div>
-                                                <div class="block mb-0" *ngIf="item.secondary_start_price === 0">
-                                                    <p>{{'full_payment' |translate}} <span>{{ currency?.symbol }}{{item?.selling?.total |
-                                                                                                            number :
-                                                                                                            '1.2-2'}}</span></p>
-                                                </div>
-
                                             </div>
                                             <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,x_coordinate:latitude,y_coordinate:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">{{'select' |translate}}</a>
                                             <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{'select' |translate}}</a>
@@ -175,7 +146,6 @@
                                     </div>
                                 </div>
                                 <div class="mobile_box">
-
                                     <div class="hotel_list_img_wrp">
                                         <ngb-carousel #carousel class="mobile_carousel" [interval]="false" [showNavigationIndicators]="false" [showNavigationArrows]="item.galleryImages.length > 0? true:false" (slide)=onSlide($event,blockIndex)>
                                             <ng-template ngbSlide *ngFor="let image of item.galleryImages; let imageIndex = index" [id]="imageIndex">
@@ -236,53 +206,24 @@
                                     <div class="thrd_part">
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
-                                                <!-- <div class="block" *ngIf="item.is_installment_available">
-                                                    <p>From</p>
-                                                    <p class="duel_prices" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
-                                                        <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
+                                                <div class="block" *ngIf="item.is_installment_available">
+                                                    <p>{{'from' | translate}}</p>
+                                                    <p class="duel_prices">
+                                                        <span class="dashed_price" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable && item?.secondary_start_price > item?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                         <span>
-                                                            {{ currency?.symbol }}{{item?.discounted_secondary_start_price | number :'1.2-2'}}
+                                                            {{ currency?.symbol }}{{ item?.offer_data.applicable ? item?.discounted_secondary_start_price : item?.payment_object[item.payment_object.installment_type].installment  | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p *ngIf="!item.offer_data.applicable">
-                                                        <span>
-                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
-                                                        </span>
-                                                    </p>
-                                                    <p class="installment_type">Installments</p>
+                                                    <p class="installment_type">{{ (item?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : item.payment_object.installment_type) | titlecase}}</p>
                                                 </div>
                                                 <div class="block" *ngIf="!item.is_installment_available">
                                                     <p><span>{{ currency?.symbol }}{{item?.selling?.total |
                                                         number :
-                                                        '1.2-2'}}</span>
-                                                        Full Payment 
-                                                        </p>
-                                                </div> -->
-                                                <div class="block" *ngIf="item.secondary_start_price > 0">
-                                                    <p>{{'from' | translate}}</p>
-                                                    <p *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">
-                                                        <span class="dashed_price" *ngIf="item?.secondary_start_price > item?.discounted_secondary_start_price">
-                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
-                                                        </span>
-                                                        <span>
-                                                            {{ currency?.symbol }}{{item?.discounted_secondary_start_price | number :'1.2-2'}}
-                                                        </span>
+                                                        '1.2-2'}}</span> {{'full_payment' | translate}}
                                                     </p>
-                                                    <p *ngIf="!item.offer_data.applicable">
-                                                        <span>
-                                                            {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
-                                                        </span>
-                                                    </p>
-                                                    <p class="installment_type">Weekly</p>
-                                                </div>
-                                                <div class="block" *ngIf="item.secondary_start_price === 0">
-                                                    <p>{{'full_payment' | translate}} <span>{{ currency?.symbol }}{{item?.selling?.total |
-                                                                                                            number :
-                                                                                                            '1.2-2'}}</span></p>
-                                                </div>
-
+                                                </div>                                               
                                             </div>
                                             <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">{{'select' | translate}}</a>
                                             <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">{{'select' | translate}}</a>
@@ -300,48 +241,49 @@
                                             <span class="titles">
                                                 {{'installment_option' | translate}} 1
                                             </span>
-                                            <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,0)==true">
+                                            <span class="texts" *ngIf="item.is_installment_available && item.payment_object.weekly">
                                                 ${{item.start_price | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                                {{ item?.offer_data.applicable ? item.discounted_no_of_weekly_installment : item.no_of_weekly_installment }}
-                                                {{'po_weekly_installments' | translate}} ${{item.discounted_secondary_start_price | number : '1.2-2'}}
+                                                {{ item.payment_object['weekly'].installment_count }} {{'po_weekly_installments' | translate}}
+                                                ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,0)==true">
-                                                Hotels within 30 days of travel not available in installments
+                                            <span class="texts" *ngIf="item.is_installment_available && !item.payment_object.weekly">
+                                                {{'hotels_30_days' | translate}}
                                             </span>
-                                            <span class="texts" *ngIf="showDownPayment(item?.offer_data,0)==false">
-                                                Not Available
+                                            <span class="texts" *ngIf="!item.is_installment_available">
+                                                {{'not_available' | translate}}
                                             </span>
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">
                                                 {{'installment_option' | translate}} 2
                                             </span>
-                                            <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,1)==true">
+                                            <span class="texts" *ngIf="item.is_installment_available && item.payment_object.biweekly">
                                                 ${{item.second_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                                {{item.no_of_weekly_installment_2}} {{'po_bi_weekly_installments' | translate}}
-                                                ${{item.secondary_start_price_2 | number : '1.2-2'}}
+                                                {{item.payment_object['biweekly'].installment_count}}{{'po_bi_weekly_installments' | translate}}
+                                                ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,1)==true">
-                                                Hotels within 30 days of travel not available in installments
+                                            <span class="texts" *ngIf="item.is_installment_available && !item.payment_object.biweekly">
+                                                {{'hotels_30_days' | translate}}
                                             </span>
-                                            <span class="texts" *ngIf="showDownPayment(item?.offer_data,1)==false">
-                                                Not Available
+                                            <span class="texts" *ngIf="!item.is_installment_available">
+                                                {{'not_available' | translate}}
                                             </span>
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">
                                                 {{'installment_option' | translate}} 3
                                             </span>
-                                            <span class="texts" *ngIf="item.start_price>0 && showDownPayment(item?.offer_data,2)==true">
+                                            <span class="texts" *ngIf="item.is_installment_available && item.payment_object.monthly">
                                                 ${{item.third_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                                {{item.no_of_weekly_installment_3}} {{(item.no_of_weekly_installment_3==1?'po_monthly_installments':'po_monthly_installments_p') | translate}}
-                                                ${{item.secondary_start_price_3 | number : '1.2-2'}}
+                                                {{item.payment_object['monthly'].installment_count }} {{po_monthly_installments | translate }}
+                                                ${{item.payment_object['monthly'].installment |
+                                                number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="item.start_price==0 && showDownPayment(item?.offer_data,2)==true">
-                                                Hotels within 30 days of travel not available in installments
+                                            <span class="texts" *ngIf="item.is_installment_available && !item.payment_object.monthly">
+                                                {{'hotels_30_days' | translate}}
                                             </span>
-                                            <span class="texts" *ngIf="showDownPayment(item?.offer_data,2)==false">
-                                                Not Available
+                                            <span class="texts" *ngIf="!item.is_installment_available">
+                                                {{'not_available' | translate}}
                                             </span>
                                         </div>
                                         <div class="type_lines">

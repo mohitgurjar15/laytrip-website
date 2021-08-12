@@ -25,7 +25,7 @@ export class AirportSuggestionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAirports();
+    // this.getAirports();
   }
 
   closeAirportDropDown(type){
@@ -35,16 +35,19 @@ export class AirportSuggestionComponent implements OnInit {
   
   ngOnChanges(changes: SimpleChanges) {
     this.data=[];
-    let airportArray=[];
-    if (changes['searchedFlightData'].currentValue){
+    if (changes['searchedFlightData'] && Object.keys(changes['searchedFlightData'].currentValue).length > 0 ) {
       this.loading=this.isType = false;
+      
+      let opResult = this.groupByKey(changes['searchedFlightData'].currentValue,'key')
+      let airportArray=[];
   
       airportArray = changes['searchedFlightData'].currentValue;
       for(let i=0; i < airportArray.length; i++){
         airportArray[i].display_name = `${airportArray[i].city},${airportArray[i].country},(${airportArray[i].code}),${airportArray[i].name}`     
       }
       this.data = airportArray;
-    } 
+      console.log(this.data.length)
+    }
   }
 
   getAirports() {
@@ -88,6 +91,14 @@ export class AirportSuggestionComponent implements OnInit {
       );
     }
   }
+
+  groupByKey(array, key) {
+		return array
+		  .reduce((hash, obj) => {
+			if(obj[key] === undefined) return hash; 
+			return Object.assign(hash, { [obj[key]]:( hash[obj[key]] || [] ).concat(obj)})
+		  }, {})
+	 }
 
   selectAirport(event) {
     this.closeAirportSuggestion.emit(this.type)

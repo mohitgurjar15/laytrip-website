@@ -14,10 +14,13 @@ export const installmentType={
 // Author: xavier | 2021/7/29
 // Description: Temporary workaround to avoid calling Google's Translate API
 export function translateAmenities(title: string) {
-    for(let i = 0; i < amenitiesTranslations.length; i++) {
-        if(amenitiesTranslations[i].en == title) {
-        return amenitiesTranslations[i].es;
-        }
+    let __lang : any = localStorage.getItem('_lang');
+    if(__lang.iso_1Code == 'es'){
+        for(let i = 0; i < amenitiesTranslations.length; i++) {
+            if(amenitiesTranslations[i].en == title) {
+                return amenitiesTranslations[i].es;
+            }
+        }    
     }
     return title;
 }

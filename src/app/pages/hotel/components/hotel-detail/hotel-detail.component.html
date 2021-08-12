@@ -406,13 +406,13 @@
                     <span class="hotel_address">
                         {{hotelDetails.address}}
                     </span>
-                            <span class="hotel_stars">
+                <span class="hotel_stars">
                         <ng-container *ngIf="hotelDetails?.rating">
-                        <img *ngFor="let in of counter(hotelDetails?.rating)" class="filled"
-                            src="{{s3BucketUrl}}assets/images/icon/star_filled.svg" alt="filled Stars Icon">
+                            <img *ngFor="let in of counter(hotelDetails?.rating)" class="filled"
+                                src="{{s3BucketUrl}}assets/images/icon/star_filled.svg" alt="filled Stars Icon">
                         </ng-container>
                         <img *ngFor="let in of counter(5-hotelDetails?.rating)" class="blank"
-                        src="{{s3BucketUrl}}assets/images/icon/star_blank.svg" alt="blank Stars Icon">
+                            src="{{s3BucketUrl}}assets/images/icon/star_blank.svg" alt="blank Stars Icon">
                     </span>
                 </span>
             </div>
@@ -429,17 +429,19 @@
                     <span *ngIf="!hotelRoomArray[0].offer_data.applicable">
                         <span class="big_font">${{ (hotelRoomArray[0].is_installment_available ? hotelRoomArray[0].secondary_start_price  : hotelRoomArray[0]?.selling.total) | number : '1.2-2' }}</span>                        
                     </span> -->
-                    <span *ngIf="hotelRoomArray[0]?.offer_data.applicable && hotelRoomArray[0]?.offer_data.discount.applicable"
-                        class="flex-row">
-                        <span *ngIf="hotelRoomArray[0].secondary_start_price > hotelRoomArray[0].discounted_secondary_start_price"
-                            class="big_font dashed_price"> ${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}} </span>
-                        <span class="big_font">${{hotelRoomArray[0].discounted_secondary_start_price | number : '1.2-2'}}</span>
+                    <span *ngIf="hotelRoomArray[0].is_installment_available" class="flex-row">
+                        <span
+                            *ngIf="hotelRoomArray[0].offer_data.applicable && (hotelRoomArray[0].secondary_start_price > hotelRoomArray[0].discounted_secondary_start_price)"
+                            class="big_font dashed_price"> ${{hotelRoomArray[0].secondary_start_price | number :
+                            '1.2-2'}} </span>
+                    <span class="big_font">${{ (hotelRoomArray[0].offer_data.applicable ? hotelRoomArray[0].discounted_secondary_start_price :  hotelRoomArray[0].payment_object[hotelRoomArray[0].payment_object.installment_type].installment) | number : '1.2-2'}}</span>
                     </span>
-                    <span *ngIf="!hotelRoomArray[0].offer_data.applicable">
-                        <span class="big_font">${{ (hotelRoomArray[0].secondary_start_price > 0 ? hotelRoomArray[0].secondary_start_price : hotelRoomArray[0].selling.total) | number : '1.2-2'}}</span>
+                    <span *ngIf="!hotelRoomArray[0].is_installment_available">
+                        <span class="big_font">${{  hotelRoomArray[0].selling.total | number : '1.2-2'}}</span>
                     </span>
-                    <small>{{(hotelRoomArray[0].secondary_start_price > 0 ? 'weekly':'full_payment') | translate }}</small>
+                    <small>{{(hotelRoomArray[0].is_installment_available ? (hotelRoomArray[0]?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : hotelRoomArray[0].payment_object.installment_type) : 'full_payment' | translate ) | titlecase}}</small>
                 </div>
+                
             </div>
         </div>
         <div class="detail_box_wrpr">
@@ -459,13 +461,14 @@
                     </div>
                 </div>
                 <div class="section_description" *ngIf="isCartFull">
-                    <span class="sec_text">10 items cart maximum, please Checkout and start another Cart if you require more than 10.</span>
+                    <span class="sec_text">10 items cart maximum, please Checkout and start another Cart if you
+                        require more than 10.</span>
                     <a (click)="removeCartFullError()" href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                 </div>
                 <div class="description_wrpper">
                     <span class="upper_descrip">
-            <h3 class="common_title_wrps">{{'description' | translate}}</h3>
-          </span>
+                        <h3 class="common_title_wrps">{{'description' | translate}}</h3>
+                    </span>
                     <p [innerHTML]="hotelDetails.description"></p>
                 </div>
                 <div class="right_box_wrps mobile_right">
@@ -484,8 +487,10 @@
                                 <li *ngIf="showMoreAmenties">{{amenity | titlecase}}</li>
                             </ng-container>
                         </ul>
-                        <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target1,'more')" class="cta_link hover-link">{{'more' |translate}}</a>
-                        <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target1,'less')" class="cta_link hover-link">{{'less' |translate}}</a>
+                        <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target1,'more')" class="cta_link hover-link">{{'more'
+                            |translate}}</a>
+                        <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target1,'less')" class="cta_link hover-link">{{'less'
+                            |translate}}</a>
                     </div>
                 </div>
                 <div class="room_list_wrp" id="full_hotel_listing">
@@ -524,21 +529,28 @@
                                                                 <div class="detail_info">
                                                                     <h4>
                                                                         <span class="wrapper_names">
-                                                                        <span class="hotel_names">{{room.title}}</span>
-                                                                        <span class="off_label" *ngIf="room?.offer_data.applicable && room?.offer_data.discount.applicable">${{room?.offer_data.discount.amount}} {{'off' | translate}}</span>
+                                                                            <span
+                                                                                class="hotel_names">{{room.title}}</span>
+                                                                        <span class="off_label" *ngIf="room?.offer_data.applicable && room?.offer_data.discount.applicable">${{room?.offer_data.discount.amount}}
+                                                                                {{'off' | translate}}</span>
                                                                         </span>
                                                                     </h4>
-                                                                    <span class="adress_span">{{ (room.occupancy==1?'sleep':'sleeps') | translate }} {{room.occupancy}}</span>
+                                                                    <span class="adress_span">{{
+                                                                        (room.occupancy==1?'sleep':'sleeps') |
+                                                                        translate }} {{room.occupancy}}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="block_detail_btm">
                                                             <span [id]="'accordion_infos1'+index" class="show_detail">
-                                <a data-toggle="collapse" data-parent="#full_hotel_listing" [href]="'#collapse1'+index"
-                                  aria-expanded="false" aria-controls="collapse1" class="hotel_anchor">
-                                  {{'details' | translate}}
-                                </a>
-                              </span>
+                                                                <a data-toggle="collapse"
+                                                                    data-parent="#full_hotel_listing"
+                                                                    [href]="'#collapse1'+index"
+                                                                    aria-expanded="false" aria-controls="collapse1"
+                                                                    class="hotel_anchor">
+                                                                    {{'details' | translate}}
+                                                                </a>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -548,25 +560,30 @@
                                     <div class="box_right">
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
-                                                <div class="block" *ngIf="room.start_price>0">
+                                                <div class="block" *ngIf="room.is_installment_available">
                                                     <p>{{'from' | translate}}</p>
                                                     <p *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
                                                         <span class="dashed_price" *ngIf="room?.secondary_start_price > room?.discounted_secondary_start_price">
-                              {{ currency?.symbol }}{{room?.secondary_start_price | number :'1.2-2'}}
-                            </span>
+                                                            {{ currency?.symbol }}{{room?.secondary_start_price |
+                                                            number :'1.2-2'}}
+                                                        </span>
                                                         <span>
-                              {{ currency?.symbol }}{{room.discounted_secondary_start_price | number : '1.2-2'}}
-                            </span>
+                                                            {{ currency?.symbol }}{{(room.offer_data.applicable ? room.discounted_secondary_start_price :  room.payment_object[room.payment_object.installment_type].installment) | number : '1.2-2'}}
+                                                        </span>
                                                     </p>
+
                                                     <p *ngIf="!room.offer_data.applicable">
                                                         <span>
-                              {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
-                            </span>
+                                                            {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
+                                                        </span>
                                                     </p>
-                                                    <p class="installment_type">{{'weekly' | translate}}</p>
+                                                    <p class="installment_type">{{ (room?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : room?.payment_object.installment_type) | titlecase }}</p>
+
                                                 </div>
-                                                <div class="block mb-0" *ngIf="room.start_price==0">
-                                                    <p>{{'full_payment' | translate}} <span>${{ room.selling.total | number : '1.2-2' }}</span></p>
+                                                
+                                                <div class="block mb-0" *ngIf="!room.is_installment_available">
+                                                    <p> <span>${{ room.selling.total |
+                                                            number : '1.2-2' }}</span>{{'full_payment' | translate}}</p>
                                                 </div>
                                             </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">{{'add_to_cart' | translate}}</a>
                                         </div>
@@ -593,46 +610,45 @@
                                         <div class="detail_info">
                                             <h4>
                                                 <span class="wrapper_names">
-                          <span class="hotel_names">{{room.title}}</span>
+                                                    <span class="hotel_names">{{room.title}}</span>
                                                 <span class="off_label" *ngIf="room?.offer_data.applicable && room?.offer_data.discount.applicable">${{room?.offer_data.discount.amount}}
-                            off</span>
+                                                        off</span>
                                                 </span>
                                             </h4>
                                             <span class="adress_span">
-                        {{ (room.occupancy==1?'sleep':'sleeps') | translate }} {{room.occupancy}} {{room.occupancy}}
-                      </span>
+                                                {{ (room.occupancy==1?'sleep':'sleeps') | translate }}
+                                                {{room.occupancy}} {{room.occupancy}}
+                                            </span>
 
                                         </div>
 
                                         <span [id]="'accordion_infos1'+index" class="show_detail">
-                      <a data-toggle="collapse" data-parent="#full_hotel_listing" [href]="'#collapse1'+index"
-                        aria-expanded="false" aria-controls="collapse1" class="hotel_anchor">
-                        {{'details' | translate}}
-                      </a>
-                    </span>
+                                            <a data-toggle="collapse" data-parent="#full_hotel_listing"
+                                                [href]="'#collapse1'+index" aria-expanded="false"
+                                                aria-controls="collapse1" class="hotel_anchor">
+                                                {{'details' | translate}}
+                                            </a>
+                                        </span>
                                     </div>
                                     <div class="thrd_part">
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
-                                                <div class="block" *ngIf="room.start_price>0">
+                                                <div class="block" *ngIf="room.is_installment_available">
                                                     <p>{{'from' | translate}}</p>
-                                                    <p class="duel_prices" *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
-                                                        <span class="dashed_price" *ngIf="room?.secondary_start_price > room?.discounted_secondary_start_price">
-                              {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
-                            </span>
+                                                    <p class="duel_prices" >
+                                                        <span class="dashed_price" *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable && room?.secondary_start_price > room?.discounted_secondary_start_price">
+                                                            {{ currency?.symbol }}{{room.secondary_start_price |
+                                                            number : '1.2-2'}}
+                                                        </span>
                                                         <span>
-                              {{ currency?.symbol }}{{room.discounted_secondary_start_price | number : '1.2-2'}}
-                            </span>
+                                                            {{ currency?.symbol }}{{(room.offer_data.applicable ? room.discounted_secondary_start_price :  room.payment_object[room.payment_object.installment_type].installment) | number : '1.2-2'}}
+                                                        </span>
                                                     </p>
-                                                    <p class="duel_prices" *ngIf="!room.offer_data.applicable">
-                                                        <span>
-                              {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
-                            </span>
-                                                    </p>
-                                                    <p class="installment_type">{{'weekly' | translate}}</p>
+                                                    <p class="installment_type">{{ (room?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : room?.payment_object.installment_type) | titlecase }}</p>
                                                 </div>
-                                                <div class="block" *ngIf="room.start_price==0">
-                                                    <p>{{'full_payment' | translate}} <span>${{ room.selling.total | number : '1.2-2' }}</span></p>
+                                                <div class="block" *ngIf="!room.is_installment_available">
+                                                    <p> <span>${{ room.selling.total |
+                                                            number : '1.2-2' }}</span>{{'full_payment' | translate}}</p>
                                                 </div>
                                             </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">{{'add_to_cart' | translate}}</a>
                                         </div>
@@ -649,31 +665,31 @@
                                             <span class="titles">
                                                 {{'installment_option' | translate}} 1
                                             </span>
-                                            <span class="texts" *ngIf="room.start_price>0 && showDownPayment(room?.offer_data,0)==true">
+                                            <span class="texts" *ngIf="room.is_installment_available && room.payment_object.weekly">
                                                 ${{room.start_price | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                                {{ room?.offer_data.applicable ? room.discounted_no_of_weekly_installment : room.no_of_weekly_installment }}
-                                                {{'po_weekly_installments' | translate}} ${{room.discounted_secondary_start_price | number : '1.2-2'}}
+                                                {{ room.payment_object['weekly'].installment_count }} {{'po_weekly_installments' | translate}}
+                                                ${{ room.payment_object['weekly'].installment | number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="room.start_price==0 && showDownPayment(room?.offer_data,0)==true">
+                                            <span class="texts" *ngIf="room.is_installment_available && !room.payment_object.weekly">
                                                 {{'hotels_30_days' | translate}}
                                             </span>
-                                            <span class="texts" *ngIf="showDownPayment(room?.offer_data,0)==false">
+                                            <span class="texts" *ngIf="!room.is_installment_available">
                                                 {{'not_available' | translate}}
                                             </span>
                                         </div>
-                                        <div class="type_lines">
+                                        <div class="type_lines">                                        
                                             <span class="titles">
                                                 {{'installment_option' | translate}} 2
                                             </span>
-                                            <span class="texts" *ngIf="room.start_price>0 && showDownPayment(room?.offer_data,1)==true">
+                                            <span class="texts" *ngIf="room.is_installment_available && room.payment_object.biweekly">
                                                 ${{room.second_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                                {{room.no_of_weekly_installment_2}} {{'po_bi_weekly_installments' | translate}}
-                                                ${{room.secondary_start_price_2 | number : '1.2-2'}}
+                                                {{room.payment_object['biweekly'].installment_count}} {{'po_bi_weekly_installments' | translate}}
+                                                ${{room.payment_object['biweekly'].installment | number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="room.start_price==0 && showDownPayment(room?.offer_data,1)==true">
+                                            <span class="texts" *ngIf="room.is_installment_available && !room.payment_object.biweekly">
                                                 {{'hotels_30_days' | translate}}
                                             </span>
-                                            <span class="texts" *ngIf="showDownPayment(room?.offer_data,1)==false">
+                                            <span class="texts" *ngIf="!room.is_installment_available">
                                                 {{'not_available' | translate}}
                                             </span>
                                         </div>
@@ -681,15 +697,16 @@
                                             <span class="titles">
                                                 {{'installment_option' | translate}} 3
                                             </span>
-                                            <span class="texts" *ngIf="room.start_price>0 && showDownPayment(room?.offer_data,2)==true">
+                                            <span class="texts" *ngIf="room.is_installment_available && room.payment_object.monthly">
                                                 ${{room.third_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                                {{room.no_of_weekly_installment_3}} {{(room.no_of_weekly_installment_3==1?'po_monthly_installments':'po_monthly_installments_p') | translate}}
-                                                ${{room.secondary_start_price_3 | number : '1.2-2'}}
+                                                {{room.payment_object['monthly'].installment_count }} {{po_monthly_installments | translate }}
+                                                ${{room.payment_object['monthly'].installment |
+                                                number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="room.start_price==0 && showDownPayment(room?.offer_data,2)==true">
+                                            <span class="texts" *ngIf="room.is_installment_available && !room.payment_object.monthly">
                                                 {{'hotels_30_days' | translate}}
                                             </span>
-                                            <span class="texts" *ngIf="showDownPayment(room?.offer_data,2)==false">
+                                            <span class="texts" *ngIf="!room.is_installment_available">
                                                 {{'not_available' | translate}}
                                             </span>
                                         </div>
@@ -698,24 +715,19 @@
                                                 {{'average_nightly_rate' | translate}}
                                             </span>
                                             <span class="texts" *ngIf="room?.offer_data.applicable">
-                                                ${{room?.selling?.discounted_avg_night_price | number : '1.2-2'}} {{'including_taxes_fees' | translate}}
+                                                ${{room?.selling?.discounted_avg_night_price | number : '1.2-2'}}
+                                                {{'including_taxes_fees' | translate}}
                                             </span>
                                             <span class="texts" *ngIf="!room?.offer_data.applicable">
-                                                ${{room?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' | translate}}
+                                                ${{room?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' |
+                                                translate}}
                                             </span>
-                                            <!-- <div class="notifi_text mobile_notifi" *ngIf="room?.is_installment_available &&  !room?.offer_data.applicable">
-                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
-                                            </div> -->
-                                            <div class="notifi_text mobile_notifi" *ngIf="!room?.offer_data.applicable && room?.start_price > 0">
+                                            <div class="notifi_text mobile_notifi" *ngIf="room?.is_installment_available && !room?.offer_data.applicable">
                                                 {{'more_payment_options' | translate}}
                                             </div>
                                         </div>
-                                        <!-- <div class="full_desk_not" *ngIf="room?.is_installment_available && !room?.offer_data.applicable">
-                                            <div class="notifi_text">
-                                                More Weekly, Bi-Weekly and Monthly plan options on Booking screen.
-                                            </div>
-                                        </div> -->
-                                        <div class="full_desk_not" *ngIf="!room?.offer_data.applicable && room?.start_price > 0">
+                                     
+                                        <div class="full_desk_not" *ngIf="room?.is_installment_available && !room?.offer_data.applicable">
                                             <div class="notifi_text">
                                                 {{'more_payment_options' | translate}}
                                             </div>
@@ -724,11 +736,13 @@
 
                                     <div class="rules_wrps">
                                         <span class="heads">
-                                            <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> {{'rules' | translate}}
+                                            <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt="">
+                                            {{'rules' | translate}}
                                         </span>
                                         <span class="texts_rules">
                                             {{'rules_1' | translate}} <a [routerLink]="['/terms']"
-                                            [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>
+                                                [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms'
+                                                | translate}}</a>
                                             {{'rules_2' | translate}}
                                         </span>
                                     </div>
@@ -753,8 +767,10 @@
                             <li *ngIf="showMoreAmenties">{{amenity | titlecase}}</li>
                         </ng-container>
                     </ul>
-                    <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'more')" class="cta_link hover-link">{{'more' |translate}}</a>
-                    <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'less')" class="cta_link hover-link">{{'less' |translate}}</a>
+                    <a *ngIf="!showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'more')" class="cta_link hover-link">{{'more'
+                        |translate}}</a>
+                    <a *ngIf="showMoreAmenties && hotelDetails?.amenities?.list.length>10" (click)="toggleAmenities(target,'less')" class="cta_link hover-link">{{'less'
+                        |translate}}</a>
                 </div>
             </div>
         </div>

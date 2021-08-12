@@ -53,8 +53,8 @@ export class SearchAirportComponent implements OnInit {
 
   onChangeSearch(event) {
      if (event.term.length > 2) {
-      this.searchRoute(event.term);
-      // this.searchAirport(event.term);      
+      // this.searchRoute(event.term);
+      this.searchAirport(event.term);      
     } 
   }
 
@@ -93,6 +93,13 @@ export class SearchAirportComponent implements OnInit {
     );
   }
 
+  onInputClick() {
+    // data if set null if it is set in from search.
+    if (this.id == 'toSearch') {
+      this.flightSearchRoute.emit({});
+      this.data = [];
+    }
+  }
 
   searchAirport(searchItem) {
     this.flightService.searchAirport(searchItem).subscribe((response: any) => {
@@ -151,9 +158,7 @@ export class SearchAirportComponent implements OnInit {
   onRemove(event) {
     this.selectedAirport = {};
   }
-  onInputClick() {
-    // this.selectedAirport = {};
-  }
+
 
   setDefaultAirport() {
     try {
