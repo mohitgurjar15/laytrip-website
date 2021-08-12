@@ -176,7 +176,7 @@ export class FlightPriceSliderComponent implements OnInit {
     var begin = moment(requestDate).format("YYYY-MM-DD");
     var end = moment().add(2, 'days').format("YYYY-MM-DD");
     // console.log("Begin:",begin,"End:",end,moment(begin).isSameOrBefore(end))
-    if (index == -1 && !moment(begin).isSameOrBefore(end)) {
+    if (index == -1 && moment(begin).isSameOrBefore(end)) {
       /* this.dates.unshift({
         date: moment(requestDate, 'YYYY-MM-DD').format("DD/MM/YYYY"),
         isPriceInInstallment: false,
