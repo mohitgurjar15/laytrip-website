@@ -11,7 +11,7 @@
     "email_exist_validation": "Tu correo electrónico ya existe.",
     "email_invalid_validation": "Por favor ingresa una dirección de correo electrónico válida.",
     "invalid_login_credentials": "¡Credenciales de acceso inválidos! Introduce la dirección de correo electrónico y la contraseña correctas.",
-    "account_disable": "Su cuenta ha sido inhabilitada. Póngase en contacto con la persona del administrador.",
+    "account_disable": "Tu cuenta ha sido inhabilitada. Favor de ponerte en contacto con customerservice@laytrip.com.",
     "log_in": "Iniciar sesión",
     "sign_in": "Inicia Sesión",
     "sign_in_to_continue": "Por favor inicie sesión para continuar",
@@ -560,7 +560,7 @@
     "pay_book_price": "Realiza la reserva a este precio antes de que acabe el tiempo.",
     "installments": "Cuotas",
     "installments_30_days": "Pagos en cuotas no disponibles con menos de 30 días antes del viaje.",
-    "bookings_first_30_days": "Su primera reserva es en menos de 30 días antes del viaje. Esta reserva y cualquier reserva adicional en este pago no estarán disponibles en cuotas.",
+    "bookings_first_30_days": "Tu primera reserva es en menos de 30 días antes del viaje. Esta reserva y cualquier reserva adicional en este pago no estarán disponibles en cuotas.",
     "downpayment_options": "Opciones de pago inicial",
     "minimum": "Mínimo",
     "bill_items_info": "Todos los artículos en el carrito se facturarán juntos como un plan de pagos semanales, quincenales o mensuales.",
@@ -669,5 +669,6 @@
     "booking_error_2": "La reserva no se pudo completar existosamente. Es posible que algunos o todos los artículos hayan quedado en el carrito. Regresa al carrito para volver a intentarlo.",
     "booking_error_3": "Regresar al Carrito",
     "full_prices": "Precios Totales",
-    "retrieving_monthly_prices": "Adquiriendo precios mensuales..."
+    "retrieving_monthly_prices": "Adquiriendo precios mensuales...",
+    "attach": "Adjuntar"
 }

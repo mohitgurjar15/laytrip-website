@@ -669,5 +669,6 @@
     "booking_error_2": "Your Booking was not able to be fully completed. Some or all of your items may have remained in your Cart. Return to Cart to try again.",
     "booking_error_3": "Return to Cart",
     "full_prices": "Full Prices",
-    "retrieving_monthly_prices": "We are retrieving monthly prices..."
+    "retrieving_monthly_prices": "We are retrieving monthly prices...",
+    "attach": "Attach"
  }
