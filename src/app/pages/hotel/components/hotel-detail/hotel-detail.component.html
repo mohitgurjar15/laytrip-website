@@ -439,7 +439,7 @@
                     <span *ngIf="!hotelRoomArray[0].is_installment_available">
                         <span class="big_font">${{  hotelRoomArray[0].selling.total | number : '1.2-2'}}</span>
                     </span>
-                    <small>{{(hotelRoomArray[0].is_installment_available ? (hotelRoomArray[0]?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : hotelRoomArray[0].payment_object.installment_type) : 'Full Payment') | titlecase}}</small>
+                    <small>{{(hotelRoomArray[0].is_installment_available ? (hotelRoomArray[0]?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : hotelRoomArray[0].payment_object.installment_type) : 'full_payment' | translate ) | titlecase}}</small>
                 </div>
                 
             </div>
@@ -687,10 +687,10 @@
                                                 ${{room.payment_object['biweekly'].installment | number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="room.is_installment_available && !room.payment_object.biweekly">
-                                                Hotels within 30 days of travel not available in installments
+                                                {{'hotels_30_days' | translate}}
                                             </span>
                                             <span class="texts" *ngIf="!room.is_installment_available">
-                                                Not Available
+                                                {{'not_available' | translate}}
                                             </span>
                                         </div>
                                         <div class="type_lines">
@@ -704,10 +704,10 @@
                                                 number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="room.is_installment_available && !room.payment_object.monthly">
-                                                Hotels within 30 days of travel not available in installments
+                                                {{'hotels_30_days' | translate}}
                                             </span>
                                             <span class="texts" *ngIf="!room.is_installment_available">
-                                                Not Available
+                                                {{'not_available' | translate}}
                                             </span>
                                         </div>
                                         <div class="type_lines">
