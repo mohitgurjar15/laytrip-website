@@ -432,14 +432,13 @@
                     <span *ngIf="hotelRoomArray[0].is_installment_available" class="flex-row">
                         <span
                             *ngIf="hotelRoomArray[0].offer_data.applicable && (hotelRoomArray[0].secondary_start_price > hotelRoomArray[0].discounted_secondary_start_price)"
-                            class="big_font dashed_price"> ${{hotelRoomArray[0].secondary_start_price | number :
-                            '1.2-2'}} </span>
+                            class="big_font dashed_price"> ${{hotelRoomArray[0].secondary_start_price | number : '1.2-2'}} </span>
                     <span class="big_font">${{ (hotelRoomArray[0].offer_data.applicable ? hotelRoomArray[0].discounted_secondary_start_price :  hotelRoomArray[0].payment_object[hotelRoomArray[0].payment_object.installment_type].installment) | number : '1.2-2'}}</span>
                     </span>
                     <span *ngIf="!hotelRoomArray[0].is_installment_available">
                         <span class="big_font">${{  hotelRoomArray[0].selling.total | number : '1.2-2'}}</span>
                     </span>
-                    <small>{{(hotelRoomArray[0].is_installment_available ? (hotelRoomArray[0]?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : hotelRoomArray[0].payment_object.installment_type) : 'full_payment' | translate ) | titlecase}}</small>
+                    <small>{{(hotelRoomArray[0]?.is_installment_available ? hotelRoomArray[0].payment_object.installment_type : 'full_payment') | translate}}</small>
                 </div>
                 
             </div>
@@ -461,15 +460,15 @@
                     </div>
                 </div>
                 <div class="section_description" *ngIf="isCartFull">
-                    <span class="sec_text">10 items cart maximum, please Checkout and start another Cart if you
-                        require more than 10.</span>
+                    <span class="sec_text">{{'max_10_items' | translate}}</span>
                     <a (click)="removeCartFullError()" href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                 </div>
                 <div class="description_wrpper">
                     <span class="upper_descrip">
                         <h3 class="common_title_wrps">{{'description' | translate}}</h3>
                     </span>
-                    <p [innerHTML]="hotelDetails.description"></p>
+                    <p id="hotel_desc" class="desc_col" [innerHTML]="hotelDetails.description"></p>
+                    <button class="read_more" (click)="toggleDesc()">{{'read_more_1' | translate}}</button>
                 </div>
                 <div class="right_box_wrps mobile_right">
 
@@ -577,7 +576,7 @@
                                                             {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">{{ (room?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : room?.payment_object.installment_type) | titlecase }}</p>
+                                                    <p class="installment_type">{{ room?.payment_object.installment_type | translate }}</p>
 
                                                 </div>
                                                 
@@ -644,7 +643,7 @@
                                                             {{ currency?.symbol }}{{(room.offer_data.applicable ? room.discounted_secondary_start_price :  room.payment_object[room.payment_object.installment_type].installment) | number : '1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">{{ (room?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : room?.payment_object.installment_type) | titlecase }}</p>
+                                                    <p class="installment_type">{{ room?.payment_object.installment_type | translate }}</p>
                                                 </div>
                                                 <div class="block" *ngIf="!room.is_installment_available">
                                                     <p> <span>${{ room.selling.total |

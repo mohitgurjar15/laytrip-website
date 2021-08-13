@@ -61,6 +61,7 @@
     "covid_title": "Viajar durante COVID-19",
     "covid_description": "Ten en cuenta nuestras políticas de cancelación y reembolso",
     "read_more": "<a>Leer más</a>",
+    "read_more_1": "Leer Más",
     "flight": "Vuelo",
     "hotel": "Hotel",
     "hotels": "Hoteles",
@@ -572,7 +573,7 @@
     "total_due": "Total a pagar ahora",
     "total_installments": "Total de cuotas",
     "taxes_fees": "Impuestos y tarifas",
-    "search_city_hotel": "Ingrese ciudad u hotel",
+    "search_city_hotel": "Ingresa ciudad u hotel",
     "share": "Comparte",
     "empty_cart_msg": "Tu carrito esta vacío",
     "search_travel": "Buscar viajes",
@@ -670,5 +671,8 @@
     "booking_error_3": "Regresar al Carrito",
     "full_prices": "Precios Totales",
     "retrieving_monthly_prices": "Adquiriendo precios mensuales...",
-    "attach": "Adjuntar"
+    "attach": "Adjuntar",
+    "now": "Ahora",
+    "promo_421_1": "Reserva Vuelos y Hoteles desde",
+    "promo_421_2": "con pagos a plazos con un inicial de $9.99 y $20 de descuento en planes de pago semanales"
 }
