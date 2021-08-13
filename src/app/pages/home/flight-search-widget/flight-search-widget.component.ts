@@ -384,7 +384,12 @@ export class FlightSearchWidgetComponent implements OnInit {
       let month = event.month;
       month = month.toString().length == 1 ? '0' + month : month;
       let monthYearName = `${month}-${event.year}`;
-
+      // if (!this.isRoundTrip && moment(moment(currCalYYMM, "YYYY-MM")).diff(moment().format( "YYYY-MM"), 'days') < 0) {//&& moment().format('MM') <= this.currentMonth
+      //   let month = event.month;
+      //   month = month.toString().length == 1 ? '0' + month : month;
+      //   let monthYearName = `${month}-${event.year}`;
+      
+      //   if (moment(calLastYYMM, "YYYY-MM").diff(moment(currCalYYMM, "YYYY-MM"), 'days') > 0 && this.calPrices) {
       if (!this.monthYearArr.includes(monthYearName) && this.calPrices) {
         this.monthYearArr.push(monthYearName);
         let startDate: any = moment([event.year, event.month - 1]);
