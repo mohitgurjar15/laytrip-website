@@ -657,7 +657,16 @@ export class CheckoutComponent implements OnInit {
       amount: totalPrice.toFixed(2),
       additional_amount: 0,
       down_payment: 0,
-      selected_down_payment: this.priceSummary.selectedDownPayment
+      selected_down_payment: this.priceSummary.selectedDownPayment,
+      is_down_payment_in_percentage: true,
+      down_payment_option : []
+    }
+    
+    let checkInDiff = moment(moment(instalmentRequest.checkin_date,'YYYY-MM-DD')).diff(moment().format("YYYY-MM-DD"),'days');
+    if(checkInDiff > 30){          
+      instalmentRequest.down_payment_option = [40,50,60];
+    } else if(checkInDiff > 90){
+      instalmentRequest.down_payment_option = [20,30,40];
     }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available == true) {

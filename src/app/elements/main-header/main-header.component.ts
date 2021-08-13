@@ -349,9 +349,16 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       additional_amount: 0,
       down_payment: 0,
       selected_down_payment: this.paymentInfo.selectedDownPayment || 0,
-      custom_down_payment: this.cartIsPromotional ? downpayment : 0
+      custom_down_payment: this.cartIsPromotional ? downpayment : 0,
+      down_payment_option : [],
+      is_down_payment_in_percentage: true,
     }
-
+    let checkInDiff = moment(moment(instalmentRequest.checkin_date,'YYYY-MM-DD')).diff(moment().format("YYYY-MM-DD"),'days');
+      if(checkInDiff > 30){          
+        instalmentRequest.down_payment_option = [40,50,60];
+      } else if(checkInDiff > 90){
+        instalmentRequest.down_payment_option = [20,30,40];
+      }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available) {
         this.installmentAmount = res.instalment_date[1].instalment_amount ? res.instalment_date[1].instalment_amount : 0;
