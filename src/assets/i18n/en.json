@@ -61,6 +61,7 @@
     "covid_title": "Travelling during COVID-19",
     "covid_description": "Please be advised on our cancellation and refund policies",
     "read_more": "<a>read more</a>",
+    "read_more_1": "Read More",
     "flight": "Flight",
     "hotel": "Hotel",
     "hotels": "Hotels",
@@ -591,7 +592,7 @@
     "new_f": "New",
     "new_m": "New",
     "save_and_add": "Save & Add Flights or Hotels",
-    "max_10_items": "10 item cart maximum, please checkout and start another cart if you require more than 10.",
+    "max_10_items": "10 items cart maximum, please Checkout and start another Cart if you require more than 10.",
     "cc_cardholder": "Cardholder Name",
     "cc_cardholder_ph_1": "Name on Card",
     "cc_cardholder_ph_2": "Enter cardholder name",
@@ -669,5 +670,21 @@
     "booking_error_2": "Your Booking was not able to be fully completed. Some or all of your items may have remained in your Cart. Return to Cart to try again.",
     "booking_error_3": "Return to Cart",
     "full_prices": "Full Prices",
-    "retrieving_monthly_prices": "We are retrieving monthly prices..."
+    "retrieving_monthly_prices": "We are retrieving monthly prices...",
+    "attach": "Attach",
+    "now": "Now",
+    "promo_421_1": "Book Flights and Hotels from",
+    "promo_421_2": "on layaway for $9.99 down and a $20 discount on weekly layaway payment plans",
+    "inc_total_price": "Included in total price",
+    "pay_at_property": "Pay at Property",
+    "taxes_fees_info": [
+                       "The Taxes and Fees line item covers applicable taxes owed for your hotel reservation, including, without limitation, sales and use tax, occupancy tax, room tax, excise tax, value added tax, government imposed service fees or other fees not paid directly",
+                       "to the taxing authorities but required by law, and/or other similar taxes, as well as in certain jurisdictions, tax owed on amounts retained as compensation for services. This Taxes and Fees line item varies based on a number",
+                       "of factors including, without limitation, the tax rate and hotel location, the type of booking, the amount paid to the hotel and profit retained as compensation for services. Hotels may charge daily resort or destination fees,",
+                       "energy surcharges, newspaper delivery fees, in-room safe fees, tourism fees, housekeeping fees, parking charges, minibar charges, phone calls, room service or movie rentals, etc. These charges you pay to the hotel directly.",
+                       "Your payment card will be required at check in as security for these charges. Contact your hotel directly to ask about fees."
+                       ],
+    "apply_lt_points": "Apply your Laytrip Points",
+    "promo_421_legal_1": "*Limited time new bookings only. Must be booked with start date at least 90 calendar days after booking date. Cannot be combined with any other promotion. Discount applies to available bookings on",
+    "promo_421_legal_2": "and other booking process restrictions apply."
  }

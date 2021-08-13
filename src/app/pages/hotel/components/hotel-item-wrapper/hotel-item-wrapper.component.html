@@ -131,7 +131,7 @@
                                                             {{ currency?.symbol }}{{ (item?.offer_data.applicable ? item?.discounted_secondary_start_price : item?.payment_object[item.payment_object.installment_type].installment)  | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">{{(item?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : item.payment_object.installment_type) | titlecase}}</p>
+                                                    <p class="installment_type">{{(item?.payment_object.installment_type == 'biweekly' ? ('bi-weekly' | translate) : item.payment_object.installment_type) | titlecase}}</p>
                                                 </div>
                                                 <div class="block mb-0" *ngIf="!item.is_installment_available">
                                                     <p> <span>{{ currency?.symbol }}{{item?.selling?.total |
@@ -216,7 +216,7 @@
                                                             {{ currency?.symbol }}{{ item?.offer_data.applicable ? item?.discounted_secondary_start_price : item?.payment_object[item.payment_object.installment_type].installment  | number :'1.2-2'}}
                                                         </span>
                                                     </p>
-                                                    <p class="installment_type">{{ (item?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : item.payment_object.installment_type) | titlecase}}</p>
+                                                    <p class="installment_type">{{ (item?.payment_object.installment_type == 'biweekly' ? ('bi_weekly' | translate) : item.payment_object.installment_type) | titlecase}}</p>
                                                 </div>
                                                 <div class="block" *ngIf="!item.is_installment_available">
                                                     <p><span>{{ currency?.symbol }}{{item?.selling?.total |

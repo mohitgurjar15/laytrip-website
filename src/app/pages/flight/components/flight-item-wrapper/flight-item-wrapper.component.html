@@ -57,8 +57,7 @@
                             <span class="hh_mm">{{route.duration}}</span>
                             <ng-container *ngIf="route.stops.length>1">
                                 <span class="lyovr_txt" *ngFor="let stop of route.stops | slice:1; let laststop = last">{{stop?.departure_info?.code}}
-                                    Plane
-                                    Change {{stop?.layover_duration}}</span>
+                                    {{'plane_change' | translate}} {{stop?.layover_duration}}</span>
                             </ng-container>
                         </div>
                     </div>
@@ -137,7 +136,7 @@
         <div class="right_side" [ngClass]="{'pt-3':!isRoundTrip}">
             <div class="fl_fares {{item?.unique_code}}">
                 <ng-container *ngIf="item.is_installment_available">
-                    <span class="fare_type desk_fare">From</span>
+                    <span class="fare_type desk_fare">{{'from' | translate}}</span>
                     <span class="total_pr d-flex flex-row justify-content-center">
                             <span
                                 *ngIf="item?.offer_data?.applicable === true && item.secondary_start_price > item.discounted_secondary_start_price"
@@ -145,9 +144,7 @@
                     <span class="big-num">${{
                                 item.payment_object[item.payment_object.installment_type].installment}}</span>
                     </span>
-                    <span class="fare_type desk_fare">{{item.payment_object.installment_type == 'biweekly' ?
-                            'bi-weekly' :
-                            item.payment_object.installment_type | titlecase}}</span>
+                    <span class="fare_type desk_fare">{{item.payment_object.installment_type | translate}}</span>
                     <span class="cta_btn">
                             <button (click)="bookNow(item)">{{'add_to_cart' | translate}}</button>
                             <div class="section_description no_flight "
@@ -158,7 +155,7 @@
                     </a>
             </div>
             </span>
-            <span class="fare_type mobile_fare">Flexible Installments</span>
+            <span class="fare_type mobile_fare">{{'flexible_installments' | translate}}</span>
             </ng-container>
             <ng-container *ngIf="!item.is_installment_available">
                 <span class="total_pr">

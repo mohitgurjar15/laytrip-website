@@ -11,11 +11,11 @@ export const installmentType={
     }
 }
 
-// Author: xavier | 2021/7/29
+// Author: xavier | 2021/7/29 | 2021/8/13
 // Description: Temporary workaround to avoid calling Google's Translate API
 export function translateAmenities(title: string) {
-    let __lang : any = localStorage.getItem('_lang');
-    if(__lang.iso_1Code == 'es'){
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(userLang == 'es'){
         for(let i = 0; i < amenitiesTranslations.length; i++) {
             if(amenitiesTranslations[i].en == title) {
                 return amenitiesTranslations[i].es;
