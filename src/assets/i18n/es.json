@@ -674,5 +674,15 @@
     "attach": "Adjuntar",
     "now": "Ahora",
     "promo_421_1": "Reserva Vuelos y Hoteles desde",
-    "promo_421_2": "con pagos a plazos con un inicial de $9.99 y $20 de descuento en planes de pago semanales"
+    "promo_421_2": "con pagos a plazos con un inicial de $9.99 y $20 de descuento en planes de pago semanales",
+    "inc_total_price": "Incluido en el precio total",
+    "pay_at_property": "Pagar en el local",
+    "taxes_fees_info": [
+                       "La línea de impuestos y tarifas cubre los impuestos aplicables adeudados por su reserva de hotel, incluidos, entre otros, impuestos sobre las ventas y el uso, impuestos sobre la ocupación, impuestos sobre la habitación, impuestos especiales, impuestos sobre el valor agregado, tarifas de servicio impuestas por el gobierno u otras tarifas no pagadas directamente.",
+                       "a las autoridades fiscales pero requerido por la ley, y / u otros impuestos similares, así como en ciertas jurisdicciones, el impuesto adeudado sobre los montos retenidos como compensación por los servicios. Este elemento de línea de impuestos y tarifas varía según un número",
+                       "de factores que incluyen, entre otros, la tasa impositiva y la ubicación del hotel, el tipo de reserva, el monto pagado al hotel y las ganancias retenidas como compensación por los servicios. Los hoteles pueden cobrar tarifas diarias de resort o destino,",
+                       "recargos por energía, gastos de envío de periódicos, gastos de caja fuerte en la habitación, gastos de turismo, gastos de limpieza, gastos de estacionamiento, gastos de minibar, llamadas telefónicas, servicio de habitaciones o alquiler de películas, etc. Estos gastos se pagan directamente al hotel.",
+                       "Se requerirá su tarjeta de pago al momento del check in como garantía para estos cargos. Comuníquese directamente con su hotel para preguntar sobre tarifas."
+                       ],
+    "apply_lt_points": "Aplica tus Puntos Laytrip"
 }

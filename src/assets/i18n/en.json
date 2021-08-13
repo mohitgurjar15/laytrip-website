@@ -674,5 +674,15 @@
     "attach": "Attach",
     "now": "Now",
     "promo_421_1": "Book Flights and Hotels from",
-    "promo_421_2": "on layaway for $9.99 down and a $20 discount on weekly layaway payment plans"
+    "promo_421_2": "on layaway for $9.99 down and a $20 discount on weekly layaway payment plans",
+    "inc_total_price": "Included in total price",
+    "pay_at_property": "Pay at Property",
+    "taxes_fees_info": [
+                       "The Taxes and Fees line item covers applicable taxes owed for your hotel reservation, including, without limitation, sales and use tax, occupancy tax, room tax, excise tax, value added tax, government imposed service fees or other fees not paid directly",
+                       "to the taxing authorities but required by law, and/or other similar taxes, as well as in certain jurisdictions, tax owed on amounts retained as compensation for services. This Taxes and Fees line item varies based on a number",
+                       "of factors including, without limitation, the tax rate and hotel location, the type of booking, the amount paid to the hotel and profit retained as compensation for services. Hotels may charge daily resort or destination fees,",
+                       "energy surcharges, newspaper delivery fees, in-room safe fees, tourism fees, housekeeping fees, parking charges, minibar charges, phone calls, room service or movie rentals, etc. These charges you pay to the hotel directly.",
+                       "Your payment card will be required at check in as security for these charges. Contact your hotel directly to ask about fees."
+                       ],
+    "apply_lt_points": "Apply your Laytrip Points"
  }

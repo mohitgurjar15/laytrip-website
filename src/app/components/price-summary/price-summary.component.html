@@ -50,7 +50,7 @@
               <p>
                 {{item.location}}
               </p>
-              <a data-toggle="modal" data-target="#tax_fee_modal" class="tax_accor_btn">Taxes and Fees</a>
+              <a data-toggle="modal" data-target="#tax_fee_modal" class="tax_accor_btn">{{'taxes_fees' | translate}}</a>
             </span>
                         <span>${{item.price_break_down.taxes | number : '1.2-2'}}</span>
                     </div>
@@ -59,7 +59,7 @@
                         <div class="pay_listing hotel_line" *ngFor="let item of item.mandatory_fee_details.prepaid_break_dwon">
                             <span>
                 <p>
-                  {{item.name}} (Included in total price)
+                  {{item.name}} ({{'inc_total_price' | translate}})
                 </p>
               </span>
                             <span>${{item.price | number : '1.2-2'}}</span>
@@ -70,7 +70,7 @@
                         <div class="pay_listing hotel_line" *ngFor="let item of item.mandatory_fee_details.postpaid_break_dwon">
                             <span>
                 <p>
-                  {{item.name}} (Pay at Property)
+                  {{item.name}} ({{'pay_at_property' | translate}})
                 </p>
               </span>
                             <span>${{item.price | number : '1.2-2'}}</span>
@@ -158,11 +158,7 @@
                     </div>
                     <div class="fee_msg">
                         <p class="para_fees">
-                            The Taxes and Fees line item covers applicable taxes owed for your hotel reservation, including, without limitation, sales and use tax, occupancy tax, room tax, excise tax, value added tax, government imposed service fees or other fees not paid directly
-                            to the taxing authorities but required by law, and/or other similar taxes, as well as in certain jurisdictions, tax owed on amounts retained as compensation for services. This Taxes and Fees line item varies based on a number
-                            of factors including, without limitation, the tax rate and hotel location, the type of booking, the amount paid to the hotel and profit retained as compensation for services. Hotels may charge daily resort or destination fees,
-                            energy surcharges, newspaper delivery fees, in-room safe fees, tourism fees, housekeeping fees, parking charges, minibar charges, phone calls, room service or movie rentals, etc. These charges you pay to the hotel directly.
-                            Your payment card will be required at check in as security for these charges. Contact your hotel directly to ask about fees.
+                            {{ 'taxes_fees_info' | translate }}
                         </p>
                     </div>
                     <div class="logo_wrpper_footer">
