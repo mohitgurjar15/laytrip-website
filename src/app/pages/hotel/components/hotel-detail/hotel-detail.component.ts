@@ -250,11 +250,7 @@ export class HotelDetailComponent implements OnInit {
             this.hotelRoomArray[i].title = titles_translated[i].trim();
           }
         }
-      );
-    // for(let i = 0; i < this.hotelRoomArray.length; i++) {
-    //   this.hotelRoomArray[i].title = 
-    // }
-    
+      );    
   }
 
   counter(i: any) {
