@@ -221,7 +221,7 @@ export class HotelDetailComponent implements OnInit {
     this.http
       .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
       .subscribe(
-        res => this.hotelDetails.description = this.formatLongText(res.data.translations[0].translatedText)
+        res => this.hotelDetails.description = this.formatLongText(res.data.translations[0].translatedText) + '<br><span class="tx_google">Traducido por Google</span>'
       );
 
     // Translate Ammenities
