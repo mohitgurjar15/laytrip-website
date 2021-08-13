@@ -44,9 +44,8 @@
             </swiper>
 
             <p class="terms_txt">
-                *Limited time new bookings only. Must be booked with start date at least 90 calendar days after booking date. Cannot be combined with any other promotion. Discount applies to available bookings on <a target="_blank" [routerLink]="['/']"
-                    [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">laytrip.com</a>. <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a> and other booking
-                process restrictions apply.
+                {{'promo_421_legal_1' | translate}} <a target="_blank" [routerLink]="['/']"
+                    [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">laytrip.com</a>. <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate | titlecase}}</a> {{'promo_421_legal_2' | translate}}
             </p>
         </div>
     </div>

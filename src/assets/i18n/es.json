@@ -684,5 +684,7 @@
                        "recargos por energía, gastos de envío de periódicos, gastos de caja fuerte en la habitación, gastos de turismo, gastos de limpieza, gastos de estacionamiento, gastos de minibar, llamadas telefónicas, servicio de habitaciones o alquiler de películas, etc. Estos gastos se pagan directamente al hotel.",
                        "Se requerirá su tarjeta de pago al momento del check in como garantía para estos cargos. Comuníquese directamente con su hotel para preguntar sobre tarifas."
                        ],
-    "apply_lt_points": "Aplica tus Puntos Laytrip"
+    "apply_lt_points": "Aplica tus Puntos Laytrip",
+    "promo_421_legal_1": "*Solo nuevas reservas por tiempo limitado. Debe reservarse con fecha inicial de al menos 90 días después de la fecha de reserva. No acumulable con ninguna otra promoción. El descuento se aplica a las reservas disponibles en",
+    "promo_421_legal_2": "y otras restricciones se aplicarán al proceso de reserva."
 }
