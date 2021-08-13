@@ -236,6 +236,24 @@ export class HotelDetailComponent implements OnInit {
       //   }
       // );
     }
+
+    // Translate Rooms' descriptions
+    let titles: any = this.hotelRoomArray.map(room => room.title).join(" | ");
+    body = body.set('q', titles);
+    this.http
+      .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      .subscribe(
+        res => {
+          titles = res.data.translations[0].translatedText;
+          let titles_translated: string[] = titles.split("|");
+          for(let i: number = 0; i < titles_translated.length; i++) {
+            this.hotelRoomArray[i].title = titles_translated[i].trim();
+          }
+        }
+      );
+    // for(let i = 0; i < this.hotelRoomArray.length; i++) {
+    //   this.hotelRoomArray[i].title = 
+    // }
     
   }
 
