@@ -469,6 +469,7 @@
                     </span>
                     <p id="hotel_desc" class="desc_col" [innerHTML]="hotelDetails.description"></p>
                     <button class="read_more" (click)="toggleDesc()">{{'read_more_1' | translate}}</button>
+                    <p *ngIf="isTranslatedByGoogle" class="tx_by_google">Traducido por Google</p>
                 </div>
                 <div class="right_box_wrps mobile_right">
 

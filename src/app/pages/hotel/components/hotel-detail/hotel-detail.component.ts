@@ -12,6 +12,7 @@ import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-b
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { translateAmenities } from '../../../../_helpers/generic.helper';
 import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
+import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
 declare var $: any;
 
 
@@ -53,6 +54,8 @@ export class HotelDetailComponent implements OnInit {
   isNotFound:boolean=false;
   isCartFull:boolean=false;
   isRefferal = this.commonFunction.isRefferal();
+
+  isTranslatedByGoogle:boolean = false;
   
   constructor(
     private route: ActivatedRoute,
@@ -221,7 +224,10 @@ export class HotelDetailComponent implements OnInit {
     this.http
       .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
       .subscribe(
-        res => this.hotelDetails.description = this.formatLongText(res.data.translations[0].translatedText) + '<br><span class="tx_google">Traducido por Google</span>'
+        res => {
+          this.hotelDetails.description = this.formatLongText(res.data.translations[0].translatedText);
+          this.isTranslatedByGoogle = true;
+        }
       );
 
     // Translate Ammenities
@@ -250,7 +256,26 @@ export class HotelDetailComponent implements OnInit {
             this.hotelRoomArray[i].title = titles_translated[i].trim();
           }
         }
-      );    
+      );
+
+      this.colorizeGoogleLogo();
+  }
+
+  // Author: xavier | 2021/8/13
+  // Description: Temporary solution until 1C uploads a suitable Google image.
+  colorizeGoogleLogo() {
+    let colors: string[] = ["#4285f4", "#ea4335", "#fbb405", "#4285f4", "#34a853", "#ea4335"];
+    let el: HTMLParagraphElement = $(".tx_by_google")[0];
+    if(el == null) {
+      setTimeout(() => this.colorizeGoogleLogo(), 500);
+      return;
+    }
+    let gt: string = el.innerHTML;
+    let cgt: string = gt.substring(0, 14);
+    for(let i: number = 14; i < gt.length; i++) {
+      cgt += `<span style="color: ${colors[i - 14]}">${gt[i]}</span>`;
+    }
+    $(".tx_by_google")[0].innerHTML = cgt;
   }
 
   counter(i: any) {
