@@ -559,24 +559,19 @@
                                     </div>
                                     <div class="box_right">
                                         <div class="block_price block_pr">
-                                            <div class="block_inn_pr">
+                                            <div class="block_inn_pr mohit">
                                                 <div class="block" *ngIf="room.is_installment_available">
                                                     <p>{{'from' | translate}}</p>
-                                                    <p *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable">
-                                                        <span class="dashed_price" *ngIf="room?.secondary_start_price > room?.discounted_secondary_start_price">
+                                                    <p>
+                                                        <span class="dashed_price" *ngIf="room.offer_data.applicable && room?.secondary_start_price > room?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{room?.secondary_start_price |
                                                             number :'1.2-2'}}
                                                         </span>
                                                         <span>
-                                                            {{ currency?.symbol }}{{(room.offer_data.applicable ? room.discounted_secondary_start_price :  room.payment_object[room.payment_object.installment_type].installment) | number : '1.2-2'}}
+                                                            {{ currency?.symbol }}{{room.payment_object[room.payment_object.installment_type].installment | number : '1.2-2'}}
                                                         </span>
                                                     </p>
 
-                                                    <p *ngIf="!room.offer_data.applicable">
-                                                        <span>
-                                                            {{ currency?.symbol }}{{room.secondary_start_price | number : '1.2-2'}}
-                                                        </span>
-                                                    </p>
                                                     <p class="installment_type">{{ (room?.payment_object.installment_type == 'biweekly' ? 'Bi-Weekly' : room?.payment_object.installment_type) | titlecase }}</p>
 
                                                 </div>
@@ -670,10 +665,7 @@
                                                 {{ room.payment_object['weekly'].installment_count }} {{'po_weekly_installments' | translate}}
                                                 ${{ room.payment_object['weekly'].installment | number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="room.is_installment_available && !room.payment_object.weekly">
-                                                {{'hotels_30_days' | translate}}
-                                            </span>
-                                            <span class="texts" *ngIf="!room.is_installment_available">
+                                            <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.weekly">
                                                 {{'not_available' | translate}}
                                             </span>
                                         </div>
@@ -686,10 +678,7 @@
                                                 {{room.payment_object['biweekly'].installment_count}} {{'po_bi_weekly_installments' | translate}}
                                                 ${{room.payment_object['biweekly'].installment | number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="room.is_installment_available && !room.payment_object.biweekly">
-                                                {{'hotels_30_days' | translate}}
-                                            </span>
-                                            <span class="texts" *ngIf="!room.is_installment_available">
+                                            <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.biweekly">
                                                 {{'not_available' | translate}}
                                             </span>
                                         </div>
@@ -703,10 +692,7 @@
                                                 ${{room.payment_object['monthly'].installment |
                                                 number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="room.is_installment_available && !room.payment_object.monthly">
-                                                {{'hotels_30_days' | translate}}
-                                            </span>
-                                            <span class="texts" *ngIf="!room.is_installment_available">
+                                            <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.monthly">
                                                 {{'not_available' | translate}}
                                             </span>
                                         </div>
