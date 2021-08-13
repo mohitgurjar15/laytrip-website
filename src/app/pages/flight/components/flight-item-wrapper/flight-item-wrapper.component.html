@@ -141,7 +141,7 @@
                     <span class="total_pr d-flex flex-row justify-content-center">
                             <span
                                 *ngIf="item?.offer_data?.applicable === true && item.secondary_start_price > item.discounted_secondary_start_price"
-                                class="dashed_price"> ${{item.secondary_start_price | number : '1.2-2'}} </span>
+                                class="dashed_price"> ${{ item.payment_object[item.payment_object.installment_type].actual_installment | number : '1.2-2'}} </span>
                     <span class="big-num">${{
                                 item.payment_object[item.payment_object.installment_type].installment}}</span>
                     </span>
@@ -189,16 +189,12 @@
                 <div class="type_lines">
                     <span class="titles">{{'installment_option' | translate}} 1</span>
                     <span class="texts" *ngIf="item.is_installment_available && item.payment_object.weekly">
-                                ${{item.start_price | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                {{ item?.offer_data.applicable ? item.discounted_no_of_weekly_installment :
-                                item.no_of_weekly_installment }}  {{'po_weekly_installments' | translate}}
+                                ${{item.payment_object['weekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                {{ item.payment_object['weekly'].installment_count }}  {{'po_weekly_installments' | translate}}
                                 {{'installments_of' | translate}}
                                 ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
-                            </span>
-                    <span class="texts" *ngIf="item.is_installment_available  && !item.payment_object.weekly">
-                                 {{'flights_30_days' | translate}}
-                            </span>
-                    <span class="texts" *ngIf="!item.is_installment_available">
+                            </span>                   
+                    <span class="texts" *ngIf="!item.is_installment_available || !item.payment_object.weekly">
                       {{'not_available' | translate}}
                             </span>
 
@@ -206,14 +202,11 @@
                 <div class="type_lines">
                     <span class="titles">{{'installment_option' | translate}} 2</span>
                     <span class="texts" *ngIf="item.is_installment_available &&  item.payment_object.biweekly">
-                                ${{item.second_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                {{item.no_of_weekly_installment_2}} {{'bi_weekly' | translate}} {{'installments_of' | translate}}
+                                ${{item.payment_object['biweekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                {{ item.payment_object['biweekly'].installment_count}} {{'bi_weekly' | translate}} {{'installments_of' | translate}}
                                 ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}
                             </span>
-                    <span class="texts" *ngIf="item.is_installment_available  && !item.payment_object.biweekly">
-                                 {{'flights_30_days' | translate}}
-                            </span>
-                    <span class="texts" *ngIf="!item.is_installment_available">
+                    <span class="texts" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">
                       {{'not_available' | translate}}
                             </span>
 
@@ -222,15 +215,12 @@
                     <span class="titles">{{'installment_option' | translate}} 3 </span>
                     <span class="texts" *ngIf="item.is_installment_available && item.payment_object.monthly">
 
-                                ${{item.third_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                {{item.no_of_weekly_installment_3}} {{'monthly' | translate}} {{'installments_of' | translate}}
+                                ${{item.payment_object['monthly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                {{item.payment_object['monthly'].installment_count}} {{'monthly' | translate}} {{'installments_of' | translate}}
                                 ${{item.payment_object['monthly'].installment |
                                 number : '1.2-2'}}
                             </span>
-                    <span class="texts" *ngIf="item.is_installment_available &&  !item.payment_object.monthly">
-                                 {{'flights_30_days' | translate}}
-                            </span>
-                    <span class="texts" *ngIf="!item.is_installment_available"> {{'not_available' | translate}}
+                    <span class="texts" *ngIf="!item.is_installment_available || !item.payment_object.monthly"> {{'not_available' | translate}}
                             </span>
 
                 </div>

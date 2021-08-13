@@ -666,7 +666,7 @@
                                                 {{'installment_option' | translate}} 1
                                             </span>
                                             <span class="texts" *ngIf="room.is_installment_available && room.payment_object.weekly">
-                                                ${{room.start_price | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                                ${{room.payment_object['weekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
                                                 {{ room.payment_object['weekly'].installment_count }} {{'po_weekly_installments' | translate}}
                                                 ${{ room.payment_object['weekly'].installment | number : '1.2-2'}}
                                             </span>
@@ -682,7 +682,7 @@
                                                 {{'installment_option' | translate}} 2
                                             </span>
                                             <span class="texts" *ngIf="room.is_installment_available && room.payment_object.biweekly">
-                                                ${{room.second_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                                ${{room.payment_object['biweekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
                                                 {{room.payment_object['biweekly'].installment_count}} {{'po_bi_weekly_installments' | translate}}
                                                 ${{room.payment_object['biweekly'].installment | number : '1.2-2'}}
                                             </span>
@@ -698,7 +698,7 @@
                                                 {{'installment_option' | translate}} 3
                                             </span>
                                             <span class="texts" *ngIf="room.is_installment_available && room.payment_object.monthly">
-                                                ${{room.third_down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                                                ${{room.payment_object['monthly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
                                                 {{room.payment_object['monthly'].installment_count }} {{po_monthly_installments | translate }}
                                                 ${{room.payment_object['monthly'].installment |
                                                 number : '1.2-2'}}
