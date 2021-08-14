@@ -2198,8 +2198,8 @@ agm-map {
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                &:first-child {
-                                    margin: 0 0 5px;
+                                &:last-child,&:first-child {
+                                    margin: 0;
                                     color: $text-grey;
                                 }
                                 &.installment_type {
