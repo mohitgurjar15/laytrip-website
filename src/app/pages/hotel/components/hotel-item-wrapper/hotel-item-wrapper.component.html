@@ -133,11 +133,8 @@
                                                     </p>
                                                     <p class="installment_type">{{item?.payment_object.installment_type | translate}}</p>
                                                 </div>
-                                                <div class="block mb-0" *ngIf="!item.is_installment_available">
-                                                    <p> <span>{{ currency?.symbol }}{{item?.selling?.total |
-                                                            number :
-                                                            '1.2-2'}}</span>
-                                                    </p>
+                                                <div class="block" *ngIf="!item.is_installment_available">
+                                                    <p> <span>{{ currency?.symbol }}{{item?.selling?.total | number : '1.2-2'}}</span></p>
                                                     <p>{{'full_payment' |translate}}</p>
                                                 </div>
                                             </div>
