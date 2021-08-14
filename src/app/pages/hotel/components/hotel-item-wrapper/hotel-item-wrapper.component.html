@@ -136,8 +136,9 @@
                                                 <div class="block mb-0" *ngIf="!item.is_installment_available">
                                                     <p> <span>{{ currency?.symbol }}{{item?.selling?.total |
                                                             number :
-                                                            '1.2-2'}}</span> {{'full_payment' |translate}}
+                                                            '1.2-2'}}</span>
                                                     </p>
+                                                    <p>{{'full_payment' |translate}}</p>
                                                 </div>
                                             </div>
                                             <a *ngIf="!commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,x_coordinate:latitude,y_coordinate:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name}">{{'select' |translate}}</a>
