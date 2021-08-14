@@ -67,6 +67,17 @@
                                     {{'sign_in' | translate}}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <div class="cta_drop_wrp">
+                                    <div class="dropdown cus_drop">
+                                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">English<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:void(0);">English</a></li>
+                                            <li><a href="javascript:void(0);">Spanish</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
 
                             <li class="nav-item responsive_li" *ngIf="isLoggedIn && userDetails.roleId != 7">
                                 <div class="dropdown account_ddown account_prof">
@@ -120,6 +131,15 @@
                 </nav>
             </div>
             <div class="show_resposive">
+                <div class="cta_drop_wrp">
+                    <div class="dropdown cus_drop">
+                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">English<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="px-2 py-1 d-block" href="javascript:void(0);">English</a></li>
+                            <li><a class="px-2 py-1 d-block" href="javascript:void(0);">Spanish</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <a *ngIf="!isLoggedIn" class="nav-link login_btn_text hover-link" (click)="openSignModal()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
                         <defs></defs>

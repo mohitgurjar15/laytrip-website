@@ -15,21 +15,18 @@
                             <div class="footer_cta_dropdown">
                                 <div class="cta_drop_wrp">
                                     <div class="dropdown cus_drop">
-                                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">
-                                            {{ selectedLanunage.name }}
-                                            <span class="caret"></span>
-                                        </a>
+                                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">{{ selectedLanunage.name }}<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li *ngFor="let langunage of langunages"><a
-                                                    (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
+                                            <li *ngFor="let langunage of langunages">
+                                                <a (click)="changeLangunage(langunage)">{{ langunage.name }}</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="cta_drop_wrp">
                                     <div class="dropdown cus_drop">
                                         <a class="dropdown-toggle hover-link" data-toggle="dropdown">
-                                            <!-- <img src="{{selectedCurrency.flag}}" alt="Flag" /> {{ selectedCurrency.code
-                                            }} -->
+                                            <!-- <img src="{{selectedCurrency.flag}}" alt="Flag" /> {{ selectedCurrency.code}} -->
                                             {{ selectedCurrency.code}}
                                             <span class="caret"></span>
                                         </a>
