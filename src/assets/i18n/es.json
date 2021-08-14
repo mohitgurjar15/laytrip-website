@@ -559,7 +559,7 @@
     "choose_how_pay": "Elige tu forma de pago",
     "pay_book_price": "Realiza la reserva a este precio antes de que acabe el tiempo.",
     "installments": "Cuotas",
-    "installments_30_days": "Pagos en cuotas no disponibles con menos de 30 días antes del viaje.",
+    "installments_30_days": "Los plazos no están disponibles para este itinerario.",
     "bookings_first_30_days": "Tu primera reserva es en menos de 30 días antes del viaje. Esta reserva y cualquier reserva adicional en este pago no estarán disponibles en cuotas.",
     "downpayment_options": "Opciones de pago inicial",
     "minimum": "Mínimo",
