@@ -245,7 +245,7 @@
     "card_number": "Número de tarjeta",
     "cvv": "CVV",
     "expiry": "Expiración",
-    "cvv_placeholder": "Introduzca CVV no.",
+    "cvv_placeholder": "Introduce el no. de CVV",
     "first_name_touched_validation": "Por favor, ingresa su nombre de pila.",
     "last_name_touched_validation": "Por favor ingresa su apellido.",
     "checked_touched_validaion": "Indica que acepta los Términos y condiciones.",
