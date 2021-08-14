@@ -520,8 +520,7 @@
     "po_downpayment": "de depósito y",
     "po_weekly_installments": "pagos semanales de",
     "po_bi_weekly_installments": "pagos quincenales de",
-    "po_monthly_installments": "pago mensual de",
-    "po_monthly_installments_p": "pagos mensuales de",
+    "po_monthly_installments": "pagos mensuales de",
     "installments_of": "pagos de",
     "average_nightly_rate": "Precio medio por noche",
     "including_taxes_fees": "incluyendo impuestos y tarifas",
@@ -663,7 +662,7 @@
     "top_banner_info_1": "Según los ",
     "top_banner_info_2":", las reservas aún no están disponibles para los residentes de California, Florida, Illinois o Washington.",
     "top_banner_info_3":", las reservas aún no están disponibles para los residentes de CA, FL, IL o WA.",
-    "covid_travel": "COVID-19 Travel",
+    "covid_travel": "Viajando en tiempos de COVID-19",
     "processing_booking_1": "Estamos Procesando<br>Tu Reserva",
     "processing_booking_2": "No presione el botón Atrás, cierre su navegador o haga clic en Pagar y Reservar nuevamente. Espere a que aparezca la pantalla de confirmación de la reserva.",
     "booking_error_1": "Error Procesando La Reserva",
@@ -675,6 +674,7 @@
     "now": "Ahora",
     "promo_421_1": "Reserva Vuelos y Hoteles desde",
     "promo_421_2": "con pagos a plazos con un inicial de $9.99 y $20 de descuento en planes de pago semanales",
+    "promo_421_3": "¡",
     "inc_total_price": "Incluido en el precio total",
     "pay_at_property": "Pagar en el local",
     "taxes_fees_info": [
@@ -686,5 +686,6 @@
                        ],
     "apply_lt_points": "Aplica tus Puntos Laytrip",
     "promo_421_legal_1": "*Solo nuevas reservas por tiempo limitado. Debe reservarse con fecha inicial de al menos 90 días después de la fecha de reserva. No acumulable con ninguna otra promoción. El descuento se aplica a las reservas disponibles en",
-    "promo_421_legal_2": "y otras restricciones se aplicarán al proceso de reserva."
+    "promo_421_legal_2": "y otras restricciones se aplicarán al proceso de reserva.",
+    "billing_address": "Dirección de facturación"
 }

@@ -24,7 +24,7 @@
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4 mb-sm-10 desktop_carding">
                             <div class="card_headbar">
-                                Name on Card
+                                {{'cc_cardholder_ph_1' | translate}}
                             </div>
                             <div class="card_texter">
                                 {{ card.cardHolderName }}
@@ -34,7 +34,7 @@
                             <div class="cardin_main">
                                 <div class="cardin_inner">
                                     <div class="card_headbar">
-                                        Name on Card
+                                        {{'cc_cardholder_ph_1' | translate}}
                                     </div>
                                     <div class="card_texter">
                                         {{ card.cardHolderName }}
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="cardin_inner">
                                     <div class="card_headbar">
-                                        Expires
+                                        {{'expires' | translate}}
                                     </div>
                                     <div class="card_texter" *ngIf="card.cardMetaData!=null">
                                         {{convertExpiry(card.cardMetaData?.month, card.cardMetaData?.year)}}
@@ -52,7 +52,7 @@
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <div class="card_headbar">
-                                Billing Address
+                                {{'billing_address' | translate}}
                             </div>
                             <div class="card_texter">
                                 {{ card.cardHolderName }} <span> {{userInfo?.address}}</span>

@@ -213,9 +213,8 @@
                     <span class="texts" *ngIf="item.is_installment_available && item.payment_object.monthly">
 
                                 ${{item.payment_object['monthly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                {{item.payment_object['monthly'].installment_count}} {{'monthly' | translate}} {{'installments_of' | translate}}
-                                ${{item.payment_object['monthly'].installment |
-                                number : '1.2-2'}}
+                                {{ item.payment_object['monthly'].installment_count}} {{'monthly' | translate}} {{'installments_of' | translate}}
+                                ${{item.payment_object['monthly'].installment | number : '1.2-2'}}
                             </span>
                     <span class="texts" *ngIf="!item.is_installment_available || !item.payment_object.monthly"> {{'not_available' | translate}}
                             </span>

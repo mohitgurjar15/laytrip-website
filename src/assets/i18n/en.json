@@ -521,7 +521,6 @@
     "po_weekly_installments": "weekly installments of",
     "po_bi_weekly_installments": "bi-weekly installments of",
     "po_monthly_installments": "monthly installments of",
-    "po_monthly_installments_p": "monthly installments of",
     "installments_of": "Installments of",
     "average_nightly_rate": "Average nightly rate",
     "including_taxes_fees": "including taxes and fees",
@@ -675,6 +674,7 @@
     "now": "Now",
     "promo_421_1": "Book Flights and Hotels from",
     "promo_421_2": "on layaway for $9.99 down and a $20 discount on weekly layaway payment plans",
+    "promo_421_3": "",
     "inc_total_price": "Included in total price",
     "pay_at_property": "Pay at Property",
     "taxes_fees_info": [
@@ -686,5 +686,6 @@
                        ],
     "apply_lt_points": "Apply your Laytrip Points",
     "promo_421_legal_1": "*Limited time new bookings only. Must be booked with start date at least 90 calendar days after booking date. Cannot be combined with any other promotion. Discount applies to available bookings on",
-    "promo_421_legal_2": "and other booking process restrictions apply."
+    "promo_421_legal_2": "and other booking process restrictions apply.",
+    "billing_address": "Billing Address"
  }

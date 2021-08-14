@@ -110,12 +110,18 @@
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc" aria-expanded="true" aria-controls="instalment_acc">
-            <span class="open_text">
+            <span class="open_text" *ngIf="userLang!='es'">
               {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
               priceSummary.instalments?.instalment_date?.length-1 : 0 }}
               {{ installmentType[userLang][priceSummary.instalmentType] }}
               {{'installments_of' | translate}} ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount | number : '1.2-2'}}
             </span>
+            <span class="open_text" *ngIf="userLang=='es'">
+                {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
+                priceSummary.instalments?.instalment_date?.length-1 : 0 }}
+                Pagos {{ installmentType[userLang][priceSummary.instalmentType] }}es
+                de ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount | number : '1.2-2'}}
+              </span>
             <span class="close_text">
                 <span>{{'total_installments' | translate}}</span>
               <span class="">${{insatllmentAmount | number : '1.2-2' }}</span>

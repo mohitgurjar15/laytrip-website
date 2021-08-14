@@ -693,7 +693,7 @@
                                             </span>
                                             <span class="texts" *ngIf="room.is_installment_available && room.payment_object.monthly">
                                                 ${{room.payment_object['monthly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                                {{room.payment_object['monthly'].installment_count }} {{po_monthly_installments | translate }}
+                                                {{room.payment_object['monthly'].installment_count }} {{'po_monthly_installments' | translate }}
                                                 ${{room.payment_object['monthly'].installment |
                                                 number : '1.2-2'}}
                                             </span>
