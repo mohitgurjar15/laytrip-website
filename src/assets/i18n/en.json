@@ -559,7 +559,7 @@
     "choose_how_pay": "Choose How You Pay",
     "pay_book_price": "Pay and Book at this pricing before time runs out.",
     "installments": "Installments",
-    "installments_30_days": "Installments not available under 30 days before travel.",
+    "installments_30_days": "Installments are not available for this itinerary.",
     "bookings_first_30_days": "Your first booking is less than 30 days before travel. This booking and any additional bookings in this checkout will not be available in installments.",
     "downpayment_options": "Downpayment Options",
     "minimum": "Minimum",
