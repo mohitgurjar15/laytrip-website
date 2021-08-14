@@ -2198,7 +2198,7 @@ agm-map {
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                &:last-child {
+                                &:last-child,&:first-child {
                                     margin: 0 0 5px;
                                     color: $text-grey;
                                 }
