@@ -29,7 +29,7 @@
                     <div class="change_plane_wrapper" *ngIf="stop.is_layover">
                         <span class="plane_wrps">
               <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
-              Change Planes in {{stop?.layover_airport_name}}</span>
+              {{'change_planes' | translate}} {{stop?.layover_airport_name}}</span>
                         <span class="hr_wrps" *ngIf="stop?.is_layover">{{stop?.layover_duration}}</span>
                     </div>
                     <div class="cols_wrps">
@@ -59,7 +59,7 @@
                 </span>
                             </div>
                             <div class="fl_number colmns_w">
-                                <span class="pink_stamp"></span> Flight {{stop.airline}}-{{stop.flight_number}}
+                                <span class="pink_stamp"></span> {{'flight' | translate}} {{stop.airline}}-{{stop.flight_number}}
                             </div>
                             <div class="class_wrps colmns_w">
                                 {{stop.cabin_class}}
@@ -77,7 +77,7 @@
                         <div class="change_plane_wrapper" *ngIf="stop.is_layover">
                             <span class="plane_wrps">
                 <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
-                Change Planes in {{stop?.layover_airport_name}}</span>
+                {{'change_planes' | translate}} {{stop?.layover_airport_name}}</span>
                             <span class="hr_wrps" *ngIf="stop?.is_layover">{{stop?.layover_duration}}</span>
                         </div>
                         <div class="cols_wrps">
@@ -107,7 +107,7 @@
                   </span>
                                 </div>
                                 <div class="fl_number colmns_w">
-                                    <span class="blue_stamp"></span> Flight {{stop.airline}}-{{stop.flight_number}}
+                                    <span class="blue_stamp"></span> {{'flight' | translate}} {{stop.airline}}-{{stop.flight_number}}
                                 </div>
                                 <div class="class_wrps colmns_w">
                                     {{stop.cabin_class}}
