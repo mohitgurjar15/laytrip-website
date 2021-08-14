@@ -690,5 +690,7 @@
     "billing_address": "Dirección de facturación",
     "mix_cart_msg": "Las reservas con descuento no se pueden combinar con las reservas sin descuento. Finaliza la compra de tus reservas con descuento y luego podrás buscar reservas sin descuento.",
     "no_results_1": "No se encontró ningún resultado",
-    "no_results_2": "Ajusta los parámetros de la búsqueda e intenta de nuevo."
+    "no_results_2": "Ajusta los parámetros de la búsqueda e intenta de nuevo.",
+    "no_results_3": "Ajusta los parámetros de la búsqueda, incluyendo la habitación y el número de huéspedes, e intenta realizar la búsqueda de nuevo.",
+    "change_planes": "Cambiar de Avión en"
 }

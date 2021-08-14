@@ -38,7 +38,7 @@ export class FlightCartItemComponent implements OnInit {
     this.getCartList();
 
     // Author: xavier | 2021/8/13
-    // Description: Translate cabin class for each flight rout
+    // Description: Translate cabin class for each flight route
     if(this.cartItem.module_info != null) {
       for(let i: number = 0; i < this.cartItem.module_info.routes.length; i++) {
         const stops = this.cartItem.module_info.routes[i].stops;

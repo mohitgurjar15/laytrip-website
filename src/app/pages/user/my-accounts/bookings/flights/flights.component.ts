@@ -34,7 +34,7 @@ export class FlightsComponent implements OnInit {
       this.laytrip_cart_id=changes['laytrip_cart_id'].currentValue;
 
       // Author: xavier | 2021/8/13
-      // Description: Translate cabin class for each flight rout
+      // Description: Translate cabin class for each flight route
       if((this.cartItem != null) && (this.cartItem.moduleInfo[0] != null)) {
         for(let i: number = 0; i < this.cartItem.module_info[0].routes.length; i++) {
           const stops = this.cartItem.module_info[0].routes[i].stops;

@@ -691,5 +691,6 @@
     "mix_cart_msg": "Discounted bookings cannot be combined with non-discounted bookings. Checkout your discounted bookings then search for non-discounted bookings.",
     "no_results_1": "Oops! No Results Found",
     "no_results_2": "Please adjust your search parameters and try searching again.",
+    "no_results_3": "Please adjust your search parameters including your room and guest count and try searching again.",
     "change_planes": "Change Planes in"
  }
