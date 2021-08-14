@@ -221,8 +221,8 @@
                     <button class="hover-link" (click)="deleteTraveler(cartNumber,x)"
                       [ngClass]="{'disabled': !traveler.touched }">{{'delete' | translate}}</button>
                   </span>
-                                <button (click)="editTraveler(cartNumber,x)" [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }" class="hover-link">Edit</button>
-                                <button (click)="saveTraveler(cartNumber,x)" [ngClass]="{'disabled': !traveler.touched }" class="hover-link">Save</button>
+                                <button (click)="editTraveler(cartNumber,x)" [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }" class="hover-link">{{'edit' | translate}}</button>
+                                <button (click)="saveTraveler(cartNumber,x)" [ngClass]="{'disabled': !traveler.touched }" class="hover-link">{{'save' | translate}}</button>
                                 </span>
                             </div>
                         </div>
