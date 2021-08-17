@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../../services/home.service';
 import { BsDaterangepickerInlineConfig } from 'ngx-bootstrap/datepicker';
+import { CalendarTranslations } from '../../../_helpers/generic.helper';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -70,14 +71,15 @@ export class HotelSearchWidgetComponent implements OnInit {
   showCommingSoon: boolean = false;
   isDatePickerOpen : boolean = false;
   isRefferal = this.commonFunction.isRefferal();
+  cal_locale: any;
+
   constructor(
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
     public router: Router,
     private route: ActivatedRoute,
     private homeService: HomeService,
-    public cd: ChangeDetectorRef
-
+    public cd: ChangeDetectorRef,
   ) {
 
     this.hotelSearchForm = this.fb.group({
@@ -109,6 +111,9 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+
+    this.setCalendarLocale();
+
     this.homeService.getSlideOffers.subscribe(currentSlide => {
       if (this.commonFunction.isRefferal()) {        
         this.dealDateValidation();
@@ -328,6 +333,13 @@ export class HotelSearchWidgetComponent implements OnInit {
   
   datepickerClose(){      
     this.isDatePickerOpen = false;
+  }
+
+  // Author: xavier | 2021/8/17
+  // Description: Calenddar localization
+  setCalendarLocale() {
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    this.cal_locale = CalendarTranslations[userLang];
   }
 
   // Author: xavier | 2021/6/28

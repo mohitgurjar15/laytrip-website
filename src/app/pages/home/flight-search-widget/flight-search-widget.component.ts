@@ -8,6 +8,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { HomeService } from '../../../services/home.service';
+import { CalendarTranslations } from 'src/app/_helpers/generic.helper';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -77,6 +78,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   searchedFlightData = [];
   isRefferal = this.commonFunction.isRefferal();
   calendersFullPaymentLength = 0;
+
+  cal_locale;
   
   constructor(
     public commonFunction: CommonFunction,
@@ -109,6 +112,8 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   ngOnInit(): void {
     this.fromSearch = [];
+
+    this.setCalendarLocale();
   
     if(this.commonFunction.isRefferal()){
       this.homeService.getSlideOffers.subscribe(currentSlide => {
@@ -605,5 +610,12 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   datepickerClose(){      
     this.isDatePickerOpen = false;
+  }
+
+  // Author: xavier | 2021/8/17
+  // Description: Calenddar localization
+  setCalendarLocale() {
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    this.cal_locale = CalendarTranslations[userLang];
   }
 }

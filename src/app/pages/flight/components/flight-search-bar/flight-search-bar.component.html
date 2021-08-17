@@ -76,7 +76,7 @@
                                                 <div class="search_area">
                                                     <label>{{'departure' | translate}}</label>
                                                     <p-calendar inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=departureDateUpdate($event) [readonlyInput]="true" (onMonthChange)="changeMonth($event)"
-                                                        panelStyleClass="calender-price-view">
+                                                        panelStyleClass="calender-price-view" locale="cal_locale">
                                                         <p-header *ngIf="!isRoundTrip && isCalenderPriceLoading" class="calender-header">{{'retrieving_monthly_prices' | translate}}</p-header>
                                                         <ng-template pTemplate="date" let-date>
                                                             <span class="c_date">{{date.day}}</span>

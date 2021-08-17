@@ -42,3 +42,26 @@ const amenitiesTranslations: {en: string, es: string}[] = [
     {en: "Free Airport Shuttle",            es: "Transporte Gratuito al Aeropuerto"},
     {en: "Casino",                          es: "Casino"}
 ];
+
+export const CalendarTranslations = {
+    en: {
+            firstDayOfWeek: 0,
+            dayNames: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            dayNamesShort: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            dayNamesMin: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            today: 'Today',
+            clear: 'Clear',
+    },
+    es: {
+            firstDayOfWeek: 0,
+            dayNames: ['Lunes', 'Martes', 'Miércoles', 'Juves', 'Viernes', 'Sábado', 'Domingo'],
+            dayNamesShort: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'],
+            dayNamesMin: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'],
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            today: 'Hoy',
+            clear: 'Limpiar',
+    }
+};
