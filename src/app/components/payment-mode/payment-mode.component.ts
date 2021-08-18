@@ -133,27 +133,17 @@ export class PaymentModeComponent implements OnInit {
         this.instalments=res;
         if(this.instalments.instalment_available==true){
           this.instalmentAvavible=true;
+          
+          let checkFullPaymentItem = this.cartPrices.findIndex(cart=> cart.is_installment_available==false)
+          if(checkFullPaymentItem!=-1){
+            this.instalmentAvavible=false;
+            this.paymentType='no-instalment'
+          }
           if(type1!=null && type1=='down-payment'){
             this.downPayments=this.instalments.down_payment;
             this.redeemableLayCredit.emit(this.sellingPrice);
           }
 
-          if(type2!=null && type2=='redeemable_point' && this.sellingPrice){
-           
-          }
-
-          if(this.instalments.instalment_date[1].instalment_amount<5 && type3==null){
-            
-            if(this.paymentType=='instalment'){
-
-             this.togglePaymentMode('no-instalment');
-            }
-            this.isBelowMinimumInstallment=true;
-          }
-          else{
-            this.isBelowMinimumInstallment=false;
-          }
-          
           this.remainingAmount = this.sellingPrice - this.instalments.instalment_date[0].instalment_amount;
           let emitParms = {
             layCreditPoints :this.laycreditpoints,
@@ -314,11 +304,21 @@ export class PaymentModeComponent implements OnInit {
    */
   togglePaymentMode(type){
 
+    if(type=='instalment'){
+      let checkFullPaymentItem = this.cartPrices.findIndex(cart=> cart.is_installment_available==false)
+      if(checkFullPaymentItem!=-1){
+        this.show30DayMinValidation=true;
+        this.instalmentAvavible=false;
+        this.paymentType='no-instalment'
+        return;
+      }
+    }
     if(type=='instalment' && !this.instalmentAvavible){
 
       if(this.cartPrices.length>1){
 
         let checkBelow30DayBooking = this.cartPrices.findIndex(cart=> cart.start_price==0)
+        
         if(checkBelow30DayBooking!==-1){
           this.showPartialAndFullPaymentMixValidation=true;
         }
