@@ -172,7 +172,7 @@ export class FlightPriceSliderComponent implements OnInit {
     let index = this.dates.findIndex(x => x.date == requestDate);
     var begin = moment(requestDate).format("YYYY-MM-DD");
     var end = moment().add(2, 'days').format("YYYY-MM-DD");
-    // console.log("Begin:",begin,"End:",end,moment(begin).isSameOrBefore(end))
+    console.log("Begin:",begin,"End:",end,moment(begin).isSameOrBefore(end))
     if (index == -1 && moment(begin).isSameOrBefore(end)) {
       /* this.dates.unshift({
         date: moment(requestDate, 'YYYY-MM-DD').format("DD/MM/YYYY"),
@@ -184,7 +184,7 @@ export class FlightPriceSliderComponent implements OnInit {
         start_price: 0,
         unique_code: ""
       }); */
-      this.slickModal.slickPrev();
+      // this.slickModal.slickPrev();
       // console.log("prev")
       //this.singleFlexLoader = true;
       this.getFlexiableDate(requestDate,'prev')
@@ -207,7 +207,7 @@ export class FlightPriceSliderComponent implements OnInit {
         unique_code: "e04c8d3f03413a15df6396523886e1b8"
       }) */
       // console.log("next")
-      this.slickModal.slickNext();
+      // this.slickModal.slickNext();
       this.getFlexiableDate(requestDate,'next')
       //this.singleFlexLoader = true;
       
