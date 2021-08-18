@@ -692,5 +692,11 @@
     "no_results_1": "No se encontró ningún resultado",
     "no_results_2": "Ajusta los parámetros de la búsqueda e intenta de nuevo.",
     "no_results_3": "Ajusta los parámetros de la búsqueda, incluyendo la habitación y el número de huéspedes, e intenta realizar la búsqueda de nuevo.",
-    "change_planes": "Cambiar de Avión en"
+    "change_planes": "Cambiar de Avión en",
+    "feedback_1": "¿Cómo fue tu experiencia?",
+    "feedback_2": "Probre",
+    "feedback_3": "Regular",
+    "feedback_4": "Buena",
+    "feedback_5": "Muy Buena",
+    "feedback_6": "Excelente"
 }

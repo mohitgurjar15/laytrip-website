@@ -692,5 +692,11 @@
     "no_results_1": "Oops! No Results Found",
     "no_results_2": "Please adjust your search parameters and try searching again.",
     "no_results_3": "Please adjust your search parameters including your room and guest count and try searching again.",
-    "change_planes": "Change Planes in"
+    "change_planes": "Change Planes in",
+    "feedback_1": "How did we do?",
+    "feedback_2": "Poor",
+    "feedback_3": "Not Good",
+    "feedback_4": "Good",
+    "feedback_5": "Very Good",
+    "feedback_6": "Excellent"
  }
