@@ -128,7 +128,7 @@
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                         <span>
-                                                            {{ currency?.symbol }} {{ (item?.offer_data.applicable ? item?.discounted_secondary_start_price : item?.payment_object[item.payment_object.installment_type].installment)  | number :'1.2-2'}}
+                                                            {{ currency?.symbol }}{{ (item?.offer_data.applicable ? item?.discounted_secondary_start_price : item?.payment_object[item.payment_object.installment_type].installment)  | number :'1.2-2'}}
                                                         </span>
                                                     </p>
                                                     <p class="installment_type">{{item?.payment_object.installment_type | translate}}</p>
