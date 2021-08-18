@@ -121,9 +121,6 @@ export class SearchAirportComponent implements OnInit {
 
           return searchRoute;
         } else {
-          console.log(localStorage.getItem('__from'), res.code)
-
-          console.log('here')
         }
       });
     },

@@ -46,7 +46,6 @@ export class AirportSuggestionComponent implements OnInit {
         airportArray[i].display_name = `${airportArray[i].city},${airportArray[i].country},(${airportArray[i].code}),${airportArray[i].name}`     
       }
       this.data = airportArray;
-      console.log(this.data.length)
     }
   }
 
