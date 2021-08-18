@@ -17,7 +17,7 @@
                             {{item.city}}, {{item.country}} ({{item.code}})
                                 <span class="airport_names">
                                     <ul>
-                                        <ng-conatiner *ngFor="let sub_item of item.child">
+                                        <ng-conatiner *ngFor="let sub_item of item.sub_airport">
                                             <li  (click)="selectAirport(sub_item)" >                                        
                                                 {{sub_item.name}} ({{sub_item.code}})
                                             </li>
@@ -29,7 +29,7 @@
                             {{item.city}} ({{item.code}})
                                 <span class="airport_names">
                                     <ul>
-                                        <ng-conatiner *ngFor="let sub_item of item.child">
+                                        <ng-conatiner *ngFor="let sub_item of item.sub_airport">
                                             <li (click)="selectAirport(sub_item)" >                                        
                                                 {{sub_item.name}} ({{sub_item.code}})
                                             </li>
