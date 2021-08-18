@@ -427,7 +427,6 @@
     "update_preferences": "Puede actualizar sus preferencias o darse de baja de esta lista.",
     "visit_website": "Visita la página web",
     "contact_us": "Contacta con nosotras",
-    "privacy_polycy": "Política de privacidad",
     "welcome_on_board": "La bienvenida a bordo",
     "learn_more_about_option": "Más información Más información sobre las opciones",
     "welcome_to_laytrip": "Bienvenido a Laytrip",
@@ -698,5 +697,8 @@
     "feedback_3": "Regular",
     "feedback_4": "Buena",
     "feedback_5": "Muy Buena",
-    "feedback_6": "Excelente"
+    "feedback_6": "Excelente",
+    "cookie_policy": "Política de cookies",
+    "cookie_policy_info_1": "Al hacer clic en Aceptar o en un elemento u otro enlace en este sitio web, aceptas el uso de cookies y otras tecnologías para procesar tus datos, personalizar el contenido y la publicidad, proporcionar funciones y analizar el tráfico al sitio web. Compartimos información sobre su uso con nuestros socios confiables de redes sociales, publicidad y análisis. Ver nuestra ",
+    "cookie_policy_info_2": "para saber más."
 }
