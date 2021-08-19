@@ -23,7 +23,7 @@ export class AboutUsComponent implements OnInit {
       translate.onLangChange.subscribe(lang => {
         this.setLanguage();
       });
-    }
+  }
 
   ngOnInit() {
     $('body').addClass('cms-bgColor');
@@ -47,5 +47,4 @@ export class AboutUsComponent implements OnInit {
       this.loading = false;
     });
   }
-
 }
