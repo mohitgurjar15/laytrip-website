@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { HomeService } from '../../../services/home.service';
 import { CalendarTranslations } from 'src/app/_helpers/generic.helper';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -87,7 +88,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private flightService: FlightService,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private translate: TranslateService
   ) {
 
     if (typeof this.fromSearch.city != 'undefined') {
@@ -108,6 +110,9 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
 
+    translate.onLangChange.subscribe(lang => {
+      this.setCalendarLocale();
+    });
   }
 
   ngOnInit(): void {
@@ -615,7 +620,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   // Author: xavier | 2021/8/17
   // Description: Calenddar localization
   setCalendarLocale() {
-    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    let userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     this.cal_locale = CalendarTranslations[userLang];
   }
 }
