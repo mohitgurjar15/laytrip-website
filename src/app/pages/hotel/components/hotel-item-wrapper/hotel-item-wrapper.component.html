@@ -205,7 +205,7 @@
                                         <div class="block_price block_pr">
                                             <div class="block_inn_pr">
                                                 <div class="block" *ngIf="item.is_installment_available">
-                                                    <p>{{'from' | translate}}123</p>
+                                                    <p>{{'from' | translate}}</p>
                                                     <p class="duel_prices">
                                                         <span class="dashed_price" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable && item?.secondary_start_price > item?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{item?.secondary_start_price | number :'1.2-2'}}

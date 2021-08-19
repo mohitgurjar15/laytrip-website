@@ -269,13 +269,13 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         }
       }, error => {
         this.changeLoading.emit(false);
-       /*  if (error.status == 406) {          
+        if (error.status == 406) {          
           this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
             windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
             keyboard: false
           });
           return;
-        } else */
+        } 
         if (error.status == 409 && this.commonFunction.isRefferal()) {
           this.modalService.open(DiscountedBookingAlertComponent, {
             windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
