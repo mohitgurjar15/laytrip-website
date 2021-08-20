@@ -30,8 +30,6 @@
     "otp": "OTP",
     "new_password": "New Password",
     "confirm_password": "Confirm Password",
-    "new_password_placeholder": "Re-enter New Password",
-    "confirm_password_placeholder": "Enter Confirm Password",
     "new_password_touched_validation": "Enter new password.",
     "confirm_password_touched_validaion": "Enter re-enter new password.",
     "password_string_validation": "Must be at least 8 characters and contain 1 upper and 1 lower case letter, 1 number, 1 special character.",
@@ -264,8 +262,8 @@
     "dob_invalid_validation": "Enter valid date of birth.",
     "phone_touched_validation": "Enter phone number.",
     "select_nationality_touched_validation": "Please select your Country.",
-    "first_name_string_validation": "3-30 characters required.",
-    "last_name_string_validation": "3-30 characters required.",
+    "first_name_string_validation": "2-30 characters required.",
+    "last_name_string_validation": "2-30 characters required.",
     "laytrip_point": "Laytrip Points",
     "total": "Total",
     "avilable_laytrip_point": "Available laytrip points",
@@ -701,5 +699,6 @@
     "cookie_policy": "Cookie Policy",
     "cookie_policy_info_1": "By clicking Accept or an item or other link on this website, you agree to the use of cookies and other technologies to process your data, customize content and advertising, to provide features and to analyze traffic to the site. We share information about your use with our trusted social media, advertising and analytics partners. See our",
     "cookie_policy_info_2": "to learn more.",
-    "faqs": "FAQs"
+    "faqs": "FAQs",
+    "seconds_remaining": "Seconds Remaining"
  }
