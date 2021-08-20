@@ -547,14 +547,11 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
     this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
     this.bookingRequest.cart = carts;
-    console.log("bookingRequest",this.bookingRequest)
     //return false;
     sessionStorage.setItem('__cbk', JSON.stringify(this.bookingRequest))
     if (this.isValidTravelers && this.cardToken != '' && this.isAllAlertClosed && this.isTermConditionAccepted && this.isExcludedCountryAccepted) {
       this.isBookingProgress = true;
       window.scroll(0, 0);
-      console.log("I am in")
-      //return false;
       for (let i = 0; i < this.carts.length; i++) {
         let data = this.travelerForm.controls[`type${i}`].value.adults;
         //let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })

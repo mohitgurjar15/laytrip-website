@@ -29,6 +29,7 @@ export class SearchAirportComponent implements OnInit {
   progressInterval;
   counterChangeVal=0;
   isInputFocus : boolean = false;
+  $autoComplete;
 
   constructor(
     private flightService: FlightService,
@@ -54,6 +55,9 @@ export class SearchAirportComponent implements OnInit {
   onChangeSearch(event) {
      if (event.term.length > 2) {
       // this.searchRoute(event.term);
+      if(this.loading){
+        this.$autoComplete.unsubscribe();
+      }
       this.searchAirport(event.term);      
     } 
   }
@@ -102,7 +106,9 @@ export class SearchAirportComponent implements OnInit {
   }
 
   searchAirport(searchItem) {
-    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+    console.log("innaaa")
+    this.loading = true;
+    this.$autoComplete = this.flightService.searchAirport(searchItem).subscribe((response: any) => {
       
       /* this.flightSearchRoute.emit(response); */
       this.data = response.map(res => {
