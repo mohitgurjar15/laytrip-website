@@ -15,6 +15,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
 import { getPhoneFormat } from 'src/app/_helpers/phone-masking.helper';
 import { checkValidDate } from 'src/app/_helpers/custom.validators';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-traveler-form',
@@ -127,7 +128,8 @@ export class TravelerFormComponent implements OnInit {
     private checkOutService: CheckOutService,
     private cartService: CartService,
     private travelerService: TravelerService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private http: HttpClient
   ) {
     this.travlerLabels = travlerLabels;
     this.userInfo = getLoginUserInfo();
@@ -280,6 +282,8 @@ export class TravelerFormComponent implements OnInit {
     })
 
     this.checkOutService.emitTravelersformData(this.travelerForm);
+
+    this.translateHotelRoomDescription();
   }
 
   loadJquery() {
@@ -684,5 +688,36 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no_format = phoneFormat.format;
       this.travelers[`type${cartNumber}`].adults[traveler_number].phone_no_length = phoneFormat.length;
     }
+  }
+
+  // Author: xavier | 2021/8/18
+  // Description: Translates hotel's room description using Google's translation API.
+  translateHotelRoomDescription() {
+    const lang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(lang == "en" || this.cartItem.type != 'hotel') return;
+
+    let body = new HttpParams();
+    body = body.set('q', this.cartItem.module_info.title)
+               .set('source', 'en')
+               .set('target', lang)
+               .set('format', 'text')
+               .set('model', 'nmt')
+               .set('key', 'AIzaSyAM2IBT7FXhbv1NFqqVEdYkFDTyqPUhmR8');
+
+    class gApiResp { 
+      data: {
+        translations: {
+          translatedText: string[],
+          detectedSourceLanguage: string,
+          model: string
+        }[];
+      }
+    }
+
+    this.http
+      .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      .subscribe(
+        res => this.cartItem.module_info.title = res.data.translations[0].translatedText
+      );
   }
 }

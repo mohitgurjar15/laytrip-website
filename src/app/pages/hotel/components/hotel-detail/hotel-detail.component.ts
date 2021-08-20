@@ -192,10 +192,6 @@ export class HotelDetailComponent implements OnInit {
   // Author: xavier | 2021/7/27
   // Description: Translates hotel's description using Google's translation API.
   translateHotelData() {
-    // For debugging purposes only, so we don't keep calling Google's API.
-    //this.hotelDetails.description = this.formatLongText(this.hotelDetails.description);
-    //return;
-
     const lang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     if(lang == "en") {
       this.hotelDetails.description = this.formatLongText(this.hotelDetails.description);
@@ -321,12 +317,12 @@ export class HotelDetailComponent implements OnInit {
         }
       }, error => {
         this.addCartLoading = false;
-        /* if (error.status == 406) {
-          this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
-            windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
-            keyboard: false
-          });
-        } else */
+          if (error.status == 406) {
+            this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
+              windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
+              keyboard: false
+            });
+          } 
           if (error.status == 409 && this.commonFunction.isRefferal()) {
           this.modalService.open(DiscountedBookingAlertComponent, {
             windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
