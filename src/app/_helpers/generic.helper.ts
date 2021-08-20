@@ -45,7 +45,7 @@ const amenitiesTranslations: {en: string, es: string}[] = [
 
 export const CalendarTranslations = {
     en: {
-        firstDayOfWeek: 6,
+        firstDayOfWeek: 0,
         dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
@@ -55,7 +55,7 @@ export const CalendarTranslations = {
         clear: 'Clear',
     },
     es: {
-        firstDayOfWeek: 0,
+        firstDayOfWeek: 1,
         dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
         dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
         dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
