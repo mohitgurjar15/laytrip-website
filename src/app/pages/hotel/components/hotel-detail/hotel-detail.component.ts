@@ -192,10 +192,6 @@ export class HotelDetailComponent implements OnInit {
   // Author: xavier | 2021/7/27
   // Description: Translates hotel's description using Google's translation API.
   translateHotelData() {
-    // For debugging purposes only, so we don't keep calling Google's API.
-    //this.hotelDetails.description = this.formatLongText(this.hotelDetails.description);
-    //return;
-
     const lang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     if(lang == "en") {
       this.hotelDetails.description = this.formatLongText(this.hotelDetails.description);

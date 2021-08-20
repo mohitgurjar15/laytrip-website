@@ -427,7 +427,6 @@
     "update_preferences": "You can update your preferences or unsubscribe from this list.",
     "visit_website": "Visit website",
     "contact_us": "Contact us",
-    "privacy_polycy": "Privacy Policy",
     "welcome_on_board": "Welcome on board",
     "learn_more_about_option": "Learn more Learn more about the options",
     "welcome_to_laytrip": "Welcome to Laytrip",
@@ -692,5 +691,15 @@
     "no_results_1": "Oops! No Results Found",
     "no_results_2": "Please adjust your search parameters and try searching again.",
     "no_results_3": "Please adjust your search parameters including your room and guest count and try searching again.",
-    "change_planes": "Change Planes in"
+    "change_planes": "Change Planes in",
+    "feedback_1": "How did we do?",
+    "feedback_2": "Poor",
+    "feedback_3": "Not Good",
+    "feedback_4": "Good",
+    "feedback_5": "Very Good",
+    "feedback_6": "Excellent",
+    "cookie_policy": "Cookie Policy",
+    "cookie_policy_info_1": "By clicking Accept or an item or other link on this website, you agree to the use of cookies and other technologies to process your data, customize content and advertising, to provide features and to analyze traffic to the site. We share information about your use with our trusted social media, advertising and analytics partners. See our",
+    "cookie_policy_info_2": "to learn more.",
+    "faqs": "FAQs"
  }

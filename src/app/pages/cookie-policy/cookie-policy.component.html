@@ -7,14 +7,13 @@
     <div class="cookie_main_wrapper">
         <div class="inner_wrppar">
             <div class="cookie_header">
-                Cookie Policy
+                {{'cookie_policy' | translate}}
             </div>
             <div class="cookie_msg">
-                By clicking Accept or an item or other link on this website, you agree to the use of cookies and other technologies to process your data, customize content and advertising, to provide features and to analyze traffic to the site. We share information about
-                your use with our trusted social media, advertising and analytics partners. See <a class="anchor-tag" (click)="goToPrivacyPolicy()">Privacy</a> to learn more.
+                {{'cookie_policy_info_1' | translate}} <a class="anchor-tag" (click)="goToPrivacyPolicy()">{{'privacy_and_policy' | translate}}</a> {{'cookie_policy_info_2' | translate}}
             </div>
             <div class="cta_btn_wrps">
-                <button (click)="acceptCookiePolicy()">Accept</button>
+                <button (click)="acceptCookiePolicy()">{{'accept' | translate}}</button>
             </div>
             <div class="logo_wrpper_footer">
                 <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />
