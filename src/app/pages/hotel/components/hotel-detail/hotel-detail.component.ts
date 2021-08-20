@@ -321,12 +321,12 @@ export class HotelDetailComponent implements OnInit {
         }
       }, error => {
         this.addCartLoading = false;
-        /* if (error.status == 406) {
-          this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
-            windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
-            keyboard: false
-          });
-        } else */
+          if (error.status == 406) {
+            this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
+              windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
+              keyboard: false
+            });
+          } 
           if (error.status == 409 && this.commonFunction.isRefferal()) {
           this.modalService.open(DiscountedBookingAlertComponent, {
             windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
