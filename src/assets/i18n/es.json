@@ -129,7 +129,7 @@
     "country_code_placeholder": "Seleccionar código de país",
     "phone_no": "Teléfono",
     "messege": "Mensaje",
-    "messege_placeholder": "Ingresa su mensaje",
+    "messege_placeholder": "Ingresa tu mensaje",
     "messege_touched_validation": "Por favor ingresa el mensaje.",
     "success": "Éxito",
     "enquiry_created_successfully": "Consulta creada con éxito",
@@ -700,5 +700,6 @@
     "cookie_policy_info_1": "Al hacer clic en Aceptar o en un elemento u otro enlace en este sitio web, aceptas el uso de cookies y otras tecnologías para procesar tus datos, personalizar el contenido y la publicidad, proporcionar funciones y analizar el tráfico al sitio web. Compartimos información sobre su uso con nuestros socios confiables de redes sociales, publicidad y análisis. Ver nuestra ",
     "cookie_policy_info_2": "para saber más.",
     "faqs": "Preguntas Frecuentes",
-    "seconds_remaining": "Segundos Restantes"
+    "seconds_remaining": "Segundos Restantes",
+    "link_copied": "Enlace Copiado"
 }
