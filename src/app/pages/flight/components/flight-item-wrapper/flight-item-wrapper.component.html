@@ -1,4 +1,4 @@
-<div class="routing_main_wrps" id="routing_main_wrps">
+<div class="routing_main_wrps" id="routing_main_wrps" infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollDown()">
     <h3 class="shorting_label" *ngIf="flightDetails.length">{{filteredLabel}}</h3>
     <div class="one_way card_box" *ngFor="let item of flightDetails; let i = index;">
         <div class="card_iinner">

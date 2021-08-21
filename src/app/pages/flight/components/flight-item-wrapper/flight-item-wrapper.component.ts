@@ -111,6 +111,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         this.flightDetails=[];
       }
     });
+    this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+
 
     // Author: xavier | 2021/8/3
     // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
