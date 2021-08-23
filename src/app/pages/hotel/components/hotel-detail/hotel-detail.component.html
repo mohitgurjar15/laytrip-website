@@ -541,7 +541,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="block_detail_btm">
+                                                        <!-- <div class="block_detail_btm">
                                                             <span [id]="'accordion_infos1'+index" class="show_detail">
                                                                 <a data-toggle="collapse"
                                                                     data-parent="#full_hotel_listing"
@@ -551,7 +551,7 @@
                                                                     {{'details' | translate}}
                                                                 </a>
                                                             </span>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -564,8 +564,7 @@
                                                     <p>{{'from' | translate}}</p>
                                                     <p>
                                                         <span class="dashed_price" *ngIf="room.offer_data.applicable && room?.secondary_start_price > room?.discounted_secondary_start_price">
-                                                            {{ currency?.symbol }}{{room?.secondary_start_price |
-                                                            number :'1.2-2'}}
+                                                            {{ currency?.symbol }}{{room?.secondary_start_price | number :'1.2-2'}}
                                                         </span>
                                                         <span>
                                                             {{ currency?.symbol }}{{room.payment_object[room.payment_object.installment_type].installment | number : '1.2-2'}}
@@ -577,12 +576,11 @@
                                                 <div class="block mb-0" *ngIf="!room.is_installment_available">
                                                     <p class="flex-column"> <span>${{ room.selling.total | number : '1.2-2' }}</span>{{'full_payment' | translate}}</p>
                                                 </div>
-                                            </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">{{'add_to_cart' | translate}}</a>
+                                            </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mobile_box">
-
                                     <div class="hotel_list_img_wrp">
                                         <ngb-carousel *ngIf="room.galleryImages.length" #maincarousel [showNavigationArrows]="room.galleryImages.length>1?true:false" [interval]="false" [showNavigationIndicators]="false" (slide)=onRoomSlide($event,index)>
                                             <ng-template ngbSlide *ngFor="let image of room.galleryImages">
@@ -649,71 +647,56 @@
                             </div>
                         </div>
 
-                        <div [id]="'collapse1'+index" class="detail_info_show collapse">
+                        <div [id]="'collapse1'+index" class="detail_info_show collapse show">
                             <div class="card-body">
                                 <div class="io_ru_wrps">
                                     <div class="installment_wprs">
                                         <div class="type_lines">
-                                            <span class="titles">
-                                                {{'installment_option' | translate}} 1
-                                            </span>
+                                            <span class="titles">{{'installment_option' | translate}} 1</span>
                                             <span class="texts" *ngIf="room.is_installment_available && room.payment_object.weekly">
                                                 ${{room.payment_object['weekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
                                                 {{ room.payment_object['weekly'].installment_count }} {{'po_weekly_installments' | translate}}
                                                 ${{ room.payment_object['weekly'].installment | number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.weekly">
-                                                {{'not_available' | translate}}
-                                            </span>
+                                            <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.weekly">{{'not_available' | translate}}</span>
+                                            <div class="installment_add_cart checked">Add <img src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>
                                         <div class="type_lines">                                        
-                                            <span class="titles">
-                                                {{'installment_option' | translate}} 2
-                                            </span>
+                                            <span class="titles">{{'installment_option' | translate}} 2</span>
                                             <span class="texts" *ngIf="room.is_installment_available && room.payment_object.biweekly">
                                                 ${{room.payment_object['biweekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
                                                 {{room.payment_object['biweekly'].installment_count}} {{'po_bi_weekly_installments' | translate}}
                                                 ${{room.payment_object['biweekly'].installment | number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.biweekly">
-                                                {{'not_available' | translate}}
-                                            </span>
+                                            <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.biweekly">{{'not_available' | translate}}</span>
+                                            <div class="installment_add_cart">Add <img src="{{s3BucketUrl}}assets/images/icon/cart.svg" alt="cart"> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>
                                         <div class="type_lines">
-                                            <span class="titles">
-                                                {{'installment_option' | translate}} 3
-                                            </span>
+                                            <span class="titles">{{'installment_option' | translate}} 3</span>
                                             <span class="texts" *ngIf="room.is_installment_available && room.payment_object.monthly">
                                                 ${{room.payment_object['monthly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
                                                 {{room.payment_object['monthly'].installment_count }} {{'po_monthly_installments' | translate }}
                                                 ${{room.payment_object['monthly'].installment |
                                                 number : '1.2-2'}}
                                             </span>
-                                            <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.monthly">
-                                                {{'not_available' | translate}}
-                                            </span>
+                                            <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.monthly">{{'not_available' | translate}}</span>
+                                            <div class="installment_add_cart">Add <img src="{{s3BucketUrl}}assets/images/icon/cart.svg" alt="cart"> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>
                                         <div class="type_lines">
-                                            <span class="titles">
-                                                {{'average_nightly_rate' | translate}}
-                                            </span>
+                                            <span class="titles">{{'average_nightly_rate' | translate}}</span>
                                             <span class="texts" *ngIf="room?.offer_data.applicable">
                                                 ${{room?.selling?.discounted_avg_night_price | number : '1.2-2'}}
                                                 {{'including_taxes_fees' | translate}}
                                             </span>
                                             <span class="texts" *ngIf="!room?.offer_data.applicable">
-                                                ${{room?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' |
-                                                translate}}
+                                                ${{room?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' | translate}}
                                             </span>
-                                            <div class="notifi_text mobile_notifi" *ngIf="room?.is_installment_available && !room?.offer_data.applicable">
-                                                {{'more_payment_options' | translate}}
-                                            </div>
+                                            <div class="notifi_text mobile_notifi" *ngIf="room?.is_installment_available && !room?.offer_data.applicable">{{'more_payment_options' | translate}}</div>
+                                            <div class="installment_add_cart">Add <img src="{{s3BucketUrl}}assets/images/icon/cart.svg" alt="cart"> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>
                                      
                                         <div class="full_desk_not" *ngIf="room?.is_installment_available && !room?.offer_data.applicable">
-                                            <div class="notifi_text">
-                                                {{'more_payment_options' | translate}}
-                                            </div>
+                                            <div class="notifi_text">{{'more_payment_options' | translate}}</div>
                                         </div>
                                     </div>
 
