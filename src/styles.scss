@@ -5925,4 +5925,36 @@ ngx-otp-input {
       }
     }
   }
+  .home_banner {
+    .banner_inner {
+      .banner_tab {
+        .tab-content {
+          .flight_tab {
+            .nav-tabs {
+              li {
+                &.upper_li_2 {
+                  a {
+                    @include tab-view {
+                      width: auto;
+                      padding: 0 5px;
+                    }
+                  }
+                }
+              }
+              @include tab-view {
+                flex: auto;
+                &.nav {
+                  &:nth-child(2) {
+                    @include tab-view {
+                      margin-left: 0;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

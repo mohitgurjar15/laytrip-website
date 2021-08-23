@@ -495,10 +495,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       this.renderer.removeClass(document.body, `it_lang`);
       this.translate.use(langunage.iso_1Code);
       this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
-      const urlParameters = Object.assign({}, this.route.snapshot.queryParams); 
-      urlParameters.lang = this.selectedLanunage.iso_1Code;
+      // const urlParameters = Object.assign({}, this.route.snapshot.queryParams); 
+      // urlParameters.lang = this.selectedLanunage.iso_1Code;
 
-      this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
+      // this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
 
     }
   }
