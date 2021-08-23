@@ -81,6 +81,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   calendersFullPaymentLength = 0;
 
   cal_locale = CalendarTranslations["en"];
+  cal_loaded: boolean = true;
   
   constructor(
     public commonFunction: CommonFunction,
@@ -110,9 +111,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
 
-    translate.onLangChange.subscribe(lang => {
-      this.setCalendarLocale();
-    });
+    translate.onLangChange.subscribe(lang => this.setCalendarLocale());
   }
 
   ngOnInit(): void {
@@ -619,12 +618,18 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   // Author: xavier | 2021/8/17
   // Description: Calendar localization
+  // The input field does not refresh when changing the locale:
+  //  https://github.com/primefaces/primeng/issues/1706
+  // Probably a better approach?
+  //  https://github.com/primefaces/primeng/issues/5151#issuecomment-763918829
   setCalendarLocale() {
+    this.cal_loaded = false;
     let userLang = JSON.parse(localStorage.getItem('_lang'));
     if(userLang == null) {
       this.cal_locale = CalendarTranslations["en"];
     } else {
       this.cal_locale = CalendarTranslations[userLang.iso_1Code];
     }
+    setTimeout(() => this.cal_loaded = true, 0);
   }
 }

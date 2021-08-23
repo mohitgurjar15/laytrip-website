@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, Output, ViewChild ,EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild ,EventEmitter} from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
@@ -73,6 +73,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   isDatePickerOpen : boolean = false;
   isRefferal = this.commonFunction.isRefferal();
   cal_locale = CalendarTranslations["en"];
+  cal_loaded: boolean = true;
 
   constructor(
     public commonFunction: CommonFunction,
@@ -80,7 +81,6 @@ export class HotelSearchWidgetComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private homeService: HomeService,
-    public cd: ChangeDetectorRef,
     private translate: TranslateService
   ) {
 
@@ -341,13 +341,19 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   // Author: xavier | 2021/8/17
   // Description: Calendar localization
+  // The input field does not refresh when changing the locale:
+  //  https://github.com/primefaces/primeng/issues/1706
+  // Probably a better approach?
+  //  https://github.com/primefaces/primeng/issues/5151#issuecomment-763918829
   setCalendarLocale() {
+    this.cal_loaded = false;
     let userLang = JSON.parse(localStorage.getItem('_lang'));
     if(userLang == null) {
       this.cal_locale = CalendarTranslations["en"];
     } else {
       this.cal_locale = CalendarTranslations[userLang.iso_1Code];
     }
+    setTimeout(() => this.cal_loaded = true, 0);
   }
 
   // Author: xavier | 2021/6/28
