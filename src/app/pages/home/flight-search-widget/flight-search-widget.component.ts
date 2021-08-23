@@ -80,7 +80,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   isRefferal = this.commonFunction.isRefferal();
   calendersFullPaymentLength = 0;
 
-  cal_locale;
+  cal_locale = CalendarTranslations["en"];
   
   constructor(
     public commonFunction: CommonFunction,
@@ -620,7 +620,11 @@ export class FlightSearchWidgetComponent implements OnInit {
   // Author: xavier | 2021/8/17
   // Description: Calenddar localization
   setCalendarLocale() {
-    let userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
-    this.cal_locale = CalendarTranslations[userLang];
+    let userLang = JSON.parse(localStorage.getItem('_lang'));
+    if(userLang == null) {
+      this.cal_locale = CalendarTranslations["en"];
+    } else {
+      this.cal_locale = CalendarTranslations[userLang.iso_1Code];
+    }
   }
 }

@@ -71,7 +71,7 @@ export class FlightSearchBarComponent implements OnInit {
   departureAirport:any={};
   arrivalAirport :any={}
 
-  cal_locale;
+  cal_locale = CalendarTranslations["en"];
 
   constructor(
     public fb: FormBuilder,
@@ -399,7 +399,8 @@ export class FlightSearchBarComponent implements OnInit {
   // Author: xavier | 2021/8/17
   // Description: Calenddar localization
   setCalendarLocale() {
-    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    let userLang: any = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(userLang == null) userLang = "en";
     this.cal_locale = CalendarTranslations[userLang];
   }
 }

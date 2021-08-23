@@ -72,7 +72,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   showCommingSoon: boolean = false;
   isDatePickerOpen : boolean = false;
   isRefferal = this.commonFunction.isRefferal();
-  cal_locale: any;
+  cal_locale = CalendarTranslations["en"];
 
   constructor(
     public commonFunction: CommonFunction,
@@ -117,9 +117,6 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-
-    this.setCalendarLocale();
-
     this.homeService.getSlideOffers.subscribe(currentSlide => {
       if (this.commonFunction.isRefferal()) {        
         this.dealDateValidation();
@@ -211,6 +208,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     });
     this.homeService.removeToString('hotel');
+    this.setCalendarLocale();
   }
 
   dealDateValidation() {
@@ -344,8 +342,12 @@ export class HotelSearchWidgetComponent implements OnInit {
   // Author: xavier | 2021/8/17
   // Description: Calenddar localization
   setCalendarLocale() {
-    let userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
-    this.cal_locale = CalendarTranslations[userLang];
+    let userLang = JSON.parse(localStorage.getItem('_lang'));
+    if(userLang == null) {
+      this.cal_locale = CalendarTranslations["en"];
+    } else {
+      this.cal_locale = CalendarTranslations[userLang.iso_1Code];
+    }
   }
 
   // Author: xavier | 2021/6/28

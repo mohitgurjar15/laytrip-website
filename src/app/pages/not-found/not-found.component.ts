@@ -10,7 +10,6 @@ declare var $: any;
   styleUrls: ['./not-found.component.scss']
 })
 export class NotFoundComponent implements OnInit {
-
   s3BucketUrl = environment.s3BucketUrl;
   constructor(
     public router: Router,
@@ -23,6 +22,8 @@ export class NotFoundComponent implements OnInit {
 
   closeModal() {
     $('#not_found_modal').modal('hide');
+
+    // Wouldn't it be easier to just window.history.go(-1) ?
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
       var queryParams: any = {};
@@ -35,8 +36,7 @@ export class NotFoundComponent implements OnInit {
       }
       this.router.navigate(['/'], { queryParams: queryParams });
     } else {
-      this.router.navigate(['/'])
+      this.router.navigate(['/']);
     }
   }
-
 }
