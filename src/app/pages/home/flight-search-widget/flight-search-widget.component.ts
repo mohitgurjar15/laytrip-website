@@ -618,7 +618,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   // Author: xavier | 2021/8/17
-  // Description: Calenddar localization
+  // Description: Calendar localization
   setCalendarLocale() {
     let userLang = JSON.parse(localStorage.getItem('_lang'));
     if(userLang == null) {
