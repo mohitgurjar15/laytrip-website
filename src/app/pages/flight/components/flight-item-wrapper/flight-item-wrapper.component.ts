@@ -316,6 +316,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.installmentOption.payment_frequncy =payment_frequncy;
     this.installmentOption.down_payment =down_payment;
     this.installmentOption.payment_method =payment_method;
+    console.log(this.installmentOption)
   }
   checkInstalmentAvalability() {
     let instalmentRequest = {

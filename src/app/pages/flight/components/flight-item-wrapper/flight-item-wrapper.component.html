@@ -124,7 +124,7 @@
                     </span>
                     <span class="fare_type desk_fare">{{(item.payment_object.installment_type =='biweekly' ? 'Bi-Weekly' : item.payment_object.installment_type) | translate}}</span>
                     <span class="cta_btn">
-                            <button (click)="bookNow(item)">{{'add_to_cart' | translate}}</button>
+                            <button (click)="bookNow(item)">{{'checkout' | translate}}</button>
                             <div class="section_description no_flight" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                                 <span class="sec_text">{{'flight_not_available' | translate}}</span>
                     <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
@@ -174,8 +174,7 @@
                             </span>
                     <span class="texts" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">{{'not_available' | translate}}</span>
                     <div *ngIf="item.is_installment_available &&  item.payment_object.biweekly" [ngClass]="{'checked': item.selected_option === 'biweekly'}" class="installment_add_cart" (click)="checkCartButton(i,'biweekly',item.payment_object['biweekly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
-                        <i
-                            class="fa fa-check
+                        <i class="fa fa-check
                         " aria-hidden="true "></i>
                     </div>
                 </div>
@@ -188,8 +187,7 @@
                             </span>
                     <span class="texts " *ngIf="!item.is_installment_available || !item.payment_object.monthly "> {{'not_available' | translate}}</span>
                     <div *ngIf="item.is_installment_available && item.payment_object.monthly" [ngClass]="{'checked': item.selected_option === 'monthly'}" class="installment_add_cart" (click)="checkCartButton(i,'monthly',item.payment_object['monthly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
-                        <i
-                            class="fa fa-check " aria-hidden="true "></i>
+                        <i class="fa fa-check " aria-hidden="true "></i>
                     </div>
                 </div>
                 <div class="type_lines ">
