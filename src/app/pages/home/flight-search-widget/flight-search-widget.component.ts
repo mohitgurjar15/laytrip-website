@@ -118,7 +118,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   ngOnInit(): void {
     this.fromSearch = [];
 
-<<<<<<< HEAD
     if (this.commonFunction.isRefferal()) {
       this.homeService.getSlideOffers.subscribe(currentSlide => {
         if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
@@ -131,24 +130,6 @@ export class FlightSearchWidgetComponent implements OnInit {
             this.returnDate = moment().add(97, 'days').toDate();
             this.rangeDates = [this.departureDate, this.returnDate];
             this.searchFlightInfo.arrival = this.toSearch.code;
-=======
-    this.setCalendarLocale();
-  
-    if(this.commonFunction.isRefferal()){
-      this.homeService.getSlideOffers.subscribe(currentSlide => {
-        if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
-          let slide: any = currentSlide;
-          this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
-            this.toSearch =  Object.assign({},airports[slide.location.to.airport_code]);          
-            this.searchFlightInfo.departure = this.fromSearch.code;
-            this.departureDate = moment().add(91, 'days').toDate();
-            this.searchFlightInfo.arrival = this.toSearch.code;
-
-            if (this.isRoundTrip) {
-              this.returnDate =  moment().add(97, 'days').toDate();
-              this.rangeDates = [this.departureDate, this.returnDate];
-            }
->>>>>>> c312733aaa0df8ba66402f1bd240c7623083bdf4
           }
         }
       })
@@ -199,20 +180,11 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.fromSearch = airports['NYC'];
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.toSearch = airports[keys];
-<<<<<<< HEAD
         this.departureDate = moment().add(31, 'days').toDate();
         if (this.isRoundTrip) {
           this.rangeDates = [this.departureDate, moment().add(38, 'days').toDate()];
           this.searchFlightInfo.arrival = this.toSearch.code;
         }
-=======
-        this.departureDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
-        this.searchFlightInfo.arrival = this.toSearch.code;
-
-        if (this.isRoundTrip) {
-          this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(97, 'days').toDate() : moment().add(9, 'days').toDate()];
-        } 
->>>>>>> c312733aaa0df8ba66402f1bd240c7623083bdf4
       }
     });
     //delete BehaviorSubject at the end
@@ -233,27 +205,10 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   setDefaultDate() {
 
-<<<<<<< HEAD
-    date.setDate(date.getDate() + 2);
-
-    if (curretdate < juneDate && daysDiffFromCurToJune > 31) {
-      console.log('in junedate')
-      this.flightDepartureMinDate = moment(juneDate).toDate();
-      this.departureDate = this.flightDepartureMinDate;
-    } else if (daysDiffFromCurToJune < 31) {
-      this.flightDepartureMinDate = date;
-      this.departureDate = date;
-    } else {
-      this.departureDate = date;
-      this.flightDepartureMinDate = date;
-    }
-    this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
-=======
     this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() :moment().add(2, 'days').toDate();
     this.departureDate = this.flightDepartureMinDate;
     
     this.returnDate = this.isRefferal ? moment(this.departureDate).add(97, 'days').toDate() : moment(this.departureDate).add(9, 'days').toDate();
->>>>>>> c312733aaa0df8ba66402f1bd240c7623083bdf4
 
   }
 
