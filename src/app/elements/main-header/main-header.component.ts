@@ -63,7 +63,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     private cookieService: CookieService,
     private userService: UserService,
     private renderer: Renderer2,
-    public route :ActivatedRoute
+    public route :ActivatedRoute,
 
   ) {
     let _langunage = localStorage.getItem('_lang');
@@ -512,6 +512,16 @@ export class MainHeaderComponent implements OnInit, DoCheck {
           this.isLanunageSet = true;
           this.selectedLanunage = this.langunages[0];
           localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
+
+          // Author: xavier | 2021/8/24
+          // Description: Get languaje from browser
+          const bl = this.translate.getBrowserLang();
+          for(let i = 0; i < this.langunages.length; i++) {
+            if(this.langunages[i].iso_1Code == bl) {
+              this.selectedLanunage = this.langunages[i];
+              localStorage.setItem("_lang", JSON.stringify(this.langunages[i]));
+            }
+          }
         }
         else {
           let find = this.langunages.find(langunage => langunage.id == this.selectedLanunage.id)
