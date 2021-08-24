@@ -576,7 +576,7 @@
                                                 <div class="block mb-0" *ngIf="!room.is_installment_available">
                                                     <p class="flex-column"> <span>${{ room.selling.total | number : '1.2-2' }}</span>{{'full_payment' | translate}}</p>
                                                 </div>
-                                            </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">Checkout</a>
+                                            </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">{{'checkout' | translate}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -659,7 +659,8 @@
                                                 ${{ room.payment_object['weekly'].installment | number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.weekly">{{'not_available' | translate}}</span>
-                                            <div *ngIf="room.is_installment_available && room.payment_object.weekly" [ngClass]="{'checked': room.selected_option === 'weekly'}" (click)="checkCartButton(i,'weekly',room.payment_object['weekly'].down_payment,'installment')" class="installment_add_cart">Add <img src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"> <i class="fa fa-check" aria-hidden="true"></i></div>
+                                            <div *ngIf="room.is_installment_available && room.payment_object.weekly" [ngClass]="{'checked': room.selected_option === 'weekly'}" (click)="checkCartButton(index,'weekly',room.payment_object['weekly'].down_payment,'installment')" class="installment_add_cart">Add <img *ngIf="room.selected_option === 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="room.selected_option != 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg "
+                                                    alt="cart "> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">{{'installment_option' | translate}} 2</span>
@@ -669,7 +670,8 @@
                                                 ${{room.payment_object['biweekly'].installment | number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.biweekly">{{'not_available' | translate}}</span>
-                                            <div *ngIf="room.is_installment_available && room.payment_object.biweekly" [ngClass]="{'checked': room.selected_option === 'biweekly'}" (click)="checkCartButton(i,'biweekly',room.payment_object['biweekly'].down_payment,'installment')" class="installment_add_cart">Add <img src="{{s3BucketUrl}}assets/images/icon/cart.svg" alt="cart"> <i class="fa fa-check" aria-hidden="true"></i></div>
+                                            <div *ngIf="room.is_installment_available && room.payment_object.biweekly" [ngClass]="{'checked': room.selected_option === 'biweekly'}" (click)="checkCartButton(index,'biweekly',room.payment_object['biweekly'].down_payment,'installment')" class="installment_add_cart">Add <img *ngIf="room.selected_option === 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="room.selected_option != 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg "
+                                                    alt="cart "> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">{{'installment_option' | translate}} 3</span>
@@ -680,7 +682,8 @@
                                                 number : '1.2-2'}}
                                             </span>
                                             <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.monthly">{{'not_available' | translate}}</span>
-                                            <div *ngIf="room.is_installment_available && room.payment_object.monthly" [ngClass]="{'checked': room.selected_option === 'monthly'}" (click)="checkCartButton(i,'monthly',room.payment_object['monthly'].down_payment,'installment')" class="installment_add_cart">Add <img src="{{s3BucketUrl}}assets/images/icon/cart.svg" alt="cart"> <i class="fa fa-check" aria-hidden="true"></i></div>
+                                            <div *ngIf="room.is_installment_available && room.payment_object.monthly" [ngClass]="{'checked': room.selected_option === 'monthly'}" (click)="checkCartButton(index,'monthly',room.payment_object['monthly'].down_payment,'installment')" class="installment_add_cart">Add <img *ngIf="room.selected_option === 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="room.selected_option != 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg "
+                                                    alt="cart "> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">{{'average_nightly_rate' | translate}}</span>
@@ -692,7 +695,8 @@
                                                 ${{room?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' | translate}}
                                             </span>
                                             <div class="notifi_text mobile_notifi" *ngIf="room?.is_installment_available && !room?.offer_data.applicable">{{'more_payment_options' | translate}}</div>
-                                            <div *ngIf="room?.is_installment_available" [ngClass]="{'checked': room.selected_option === 'full'}" (click)="checkCartButton(i,'full',room.night_rate,'no-installment')" class="installment_add_cart">Add <img src="{{s3BucketUrl}}assets/images/icon/cart.svg" alt="cart"> <i class="fa fa-check" aria-hidden="true"></i></div>
+                                            <div [ngClass]="{'checked': room.selected_option === 'full'}" (click)="checkCartButton(index,'full',room.night_rate,'no-installment')" class="installment_add_cart">Add <img *ngIf="room.selected_option === 'full'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="room.selected_option != 'full'" src="{{s3BucketUrl}}assets/images/icon/cart.svg "
+                                                    alt="cart "> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>
 
                                         <div class="full_desk_not" *ngIf="room?.is_installment_available && !room?.offer_data.applicable">
@@ -701,7 +705,7 @@
                                     </div>
 
                                     <div class="rules_wrps">
-                                        <span class="heads">
+                                        <span class="heads"> 
                                             <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt="">
                                             {{'rules' | translate}}
                                         </span>
