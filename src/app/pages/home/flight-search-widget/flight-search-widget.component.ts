@@ -26,7 +26,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   @Input() calenderPrices: any = [];
   @Input() currentSlide;
   switchBtnValue = false;
-  @Input() currentTabName : string = 'hotel';
+  @Input() currentTabName: string = 'hotel';
   isRoundTrip: boolean = true;
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted = false;
@@ -55,15 +55,15 @@ export class FlightSearchWidgetComponent implements OnInit {
   midMinPrice: number;
   highMinPrice: number;
   calPrices = false;
-  routeSearch : boolean = false;
+  routeSearch: boolean = false;
 
   currentMonth: string;
   currentYear: string;
   showFromAirportSuggestion: boolean = false;
   showToAirportSuggestion: boolean = false;
   thisElementClicked: boolean = false;
-  counterChangeVal :number = 0;
-  isDatePickerOpen : boolean = false;
+  counterChangeVal: number = 0;
+  isDatePickerOpen: boolean = false;
   progressInterval;
 
   searchFlightInfo =
@@ -93,7 +93,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     if (typeof this.fromSearch.city != 'undefined') {
       this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
       this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
-      
+
     }
     this.flightSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
@@ -112,23 +112,23 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   ngOnInit(): void {
     this.fromSearch = [];
-  
-    if(this.commonFunction.isRefferal()){
+
+    if (this.commonFunction.isRefferal()) {
       this.homeService.getSlideOffers.subscribe(currentSlide => {
         if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
           let slide: any = currentSlide;
-          this.fromSearch = Object.assign({},airports[slide.location.from.airport_code]);            
-            this.toSearch =  Object.assign({},airports[slide.location.to.airport_code]);          
-            this.searchFlightInfo.departure = this.fromSearch.code;
-            this.departureDate = moment().add(91, 'days').toDate();
-            if (this.isRoundTrip) {
-              this.returnDate =  moment().add(97, 'days').toDate();
-              this.rangeDates = [this.departureDate, this.returnDate];
-              this.searchFlightInfo.arrival = this.toSearch.code;
-            }
+          this.fromSearch = Object.assign({}, airports[slide.location.from.airport_code]);
+          this.toSearch = Object.assign({}, airports[slide.location.to.airport_code]);
+          this.searchFlightInfo.departure = this.fromSearch.code;
+          this.departureDate = moment().add(91, 'days').toDate();
+          if (this.isRoundTrip) {
+            this.returnDate = moment().add(97, 'days').toDate();
+            this.rangeDates = [this.departureDate, this.returnDate];
+            this.searchFlightInfo.arrival = this.toSearch.code;
           }
-        })
-      } 
+        }
+      })
+    }
 
     if (new Date(this.customStartDateValidation) <= new Date()) {
       this.departureDate = moment().add('31', 'days').toDate();
@@ -175,18 +175,18 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     this.homeService.getToString.subscribe(toSearchString => {
       if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
-        let keys: any = toSearchString;        
+        let keys: any = toSearchString;
         localStorage.setItem('__to', keys)
         // this.toSearch = null;   
 
         this.fromSearch = airports['NYC'];
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.toSearch = airports[keys];
-        this.departureDate = moment().add(91, 'days').toDate();
+        this.departureDate = moment().add(31, 'days').toDate();
         if (this.isRoundTrip) {
-          this.rangeDates = [this.departureDate, moment().add(97, 'days').toDate()];
+          this.rangeDates = [this.departureDate, moment().add(38, 'days').toDate()];
           this.searchFlightInfo.arrival = this.toSearch.code;
-        } 
+        }
       }
     });
     //delete BehaviorSubject at the end
@@ -196,8 +196,8 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     //if tab changed then show round-trip default || get tabname with change value 
-    if(changes['currentTabName'] && changes['currentTabName'].currentValue != 'undefined'){
-      this.isRoundTrip = true;    
+    if (changes['currentTabName'] && changes['currentTabName'].currentValue != 'undefined') {
+      this.isRoundTrip = true;
     }
   }
   setFlightDepartureMinDate() {
@@ -209,9 +209,10 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     let daysDiffFromCurToJune = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
 
-    date.setDate(date.getDate() + 31);
+    date.setDate(date.getDate() + 2);
 
     if (curretdate < juneDate && daysDiffFromCurToJune > 31) {
+      console.log('in junedate')
       this.flightDepartureMinDate = moment(juneDate).toDate();
       this.departureDate = this.flightDepartureMinDate;
     } else if (daysDiffFromCurToJune < 31) {
@@ -251,7 +252,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   searchFlights() {
-  
+
     this.flightSearchFormSubmitted = true;
     let queryParams: any = {};
     queryParams.trip = this.isRoundTrip ? 'roundtrip' : 'oneway';
@@ -267,12 +268,12 @@ export class FlightSearchWidgetComponent implements OnInit {
     queryParams.infant = this.searchFlightInfo.infant ? this.searchFlightInfo.infant : 0;
     if (this.commonFunction.isRefferal()) {
       let parms = this.commonFunction.getRefferalParms();
-      
+
       queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-      if(parms.utm_medium){
+      if (parms.utm_medium) {
         queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
       }
-      if(parms.utm_campaign){
+      if (parms.utm_campaign) {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
@@ -327,7 +328,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       localStorage.setItem('__to', this.toSearch.code)
     }
   }
-  datePickerShow(event){
+  datePickerShow(event) {
     this.currentChangeCounter.emit(this.counterChangeVal += 1);
   }
   selectReturnDateUpdate(date) {
@@ -335,7 +336,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     // this is only for closing date range picker, after selecting both dates
     if (this.rangeDates[1]) { // If second date is selected
-      this.dateFilter.hideOverlay(); 
+      this.dateFilter.hideOverlay();
     };
     if (this.rangeDates[0] && this.rangeDates[1]) {
       // let daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
@@ -579,37 +580,37 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.searchFlightInfo.arrival = this.toSearch.code;
   }
 
-  getflightSearchRoutes(event){   
+  getflightSearchRoutes(event) {
     this.showFromAirportSuggestion = true;
-    this.searchedFlightData = event; 
-    this.routeSearch = true; 
+    this.searchedFlightData = event;
+    this.routeSearch = true;
     this.currentChangeCounter.emit(this.counterChangeVal += 1);
 
   }
-  getflightToSearchRoutes(event){   
+  getflightToSearchRoutes(event) {
     this.showToAirportSuggestion = true;
-    this.searchedFlightData = event; 
-    this.routeSearch = true; 
+    this.searchedFlightData = event;
+    this.routeSearch = true;
   }
 
-  counterValueChanged(event) {  
+  counterValueChanged(event) {
     this.currentChangeCounter.emit(event);
   }
-  
-  datepickerShow(){
-    this.isDatePickerOpen = true;  
-    if(this.commonFunction.isRefferal()){
+
+  datepickerShow() {
+    this.isDatePickerOpen = true;
+    if (this.commonFunction.isRefferal()) {
       this.progressInterval = setInterval(() => {
-        if(this.isDatePickerOpen){
+        if (this.isDatePickerOpen) {
           this.currentChangeCounter.emit(this.counterChangeVal += 1);
         } else {
           clearInterval(this.progressInterval);
         }
-      }, 1000);   
+      }, 1000);
     }
   }
 
-  datepickerClose(){      
+  datepickerClose() {
     this.isDatePickerOpen = false;
   }
 }

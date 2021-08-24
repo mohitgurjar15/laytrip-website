@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, Output, SimpleChanges, ViewChild ,EventEmitter} from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, Output, SimpleChanges, ViewChild, EventEmitter } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
@@ -57,7 +57,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     ],
   };
   progressInterval;
-  
+
   selectedGuest =
     {
       rooms: 1,
@@ -72,7 +72,8 @@ export class HotelSearchWidgetComponent implements OnInit {
   customStartDateValidation = "2021-06-02";
   customEndDateValidation = "2021-06-03";
 
-  isDatePickerOpen : boolean = false;
+  isDatePickerOpen: boolean = false;
+  dealIcon = false;
 
   constructor(
     public commonFunction: CommonFunction,
@@ -88,9 +89,10 @@ export class HotelSearchWidgetComponent implements OnInit {
     });
 
     this.setHotelDate();
+    var curretdate = moment().format();
+    this.checkInDate = moment(curretdate).add(2, 'days').toDate();
     this.checkOutMinDate = this.checkInDate;
-
-    this.checkOutDate = moment(this.checkInDate).add(1, 'days').toDate();
+    this.checkOutDate = moment(curretdate).add(3, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
     this.searchHotelInfo =
     {
@@ -114,7 +116,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.homeService.getSlideOffers.subscribe(currentSlide => {
-      if (this.commonFunction.isRefferal()) {        
+      if (this.commonFunction.isRefferal()) {
         this.dealDateValidation();
         if (typeof currentSlide == 'undefined') {
           //Condition apply when page is init first time and by default show miami
@@ -128,7 +130,7 @@ export class HotelSearchWidgetComponent implements OnInit {
         if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
 
           let keys: any = currentSlide;
-          this.fromDestinationInfo.city = this.fromDestinationInfo.title = keys.location.to.hotel_option.title;          
+          this.fromDestinationInfo.city = this.fromDestinationInfo.title = keys.location.to.hotel_option.title;
           this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = keys.location.to.hotel_option.geo_codes.lat;
           this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = keys.location.to.hotel_option.geo_codes.long;
           this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = keys.location.to.hotel_option.city_id;
@@ -137,13 +139,13 @@ export class HotelSearchWidgetComponent implements OnInit {
         }
       }
     });
-    
+
     // this.checkInDate = moment(this.customStartDateValidation).toDate();
 
-/*     if (new Date(this.customStartDateValidation) <= new Date()) {
-      this.checkInDate = moment().add('31', 'days').toDate();
-    }
- */
+    /*     if (new Date(this.customStartDateValidation) <= new Date()) {
+          this.checkInDate = moment().add('31', 'days').toDate();
+        }
+     */
     this.countryCode = this.commonFunction.getUserCountry();
 
     if (this.route && this.route.snapshot.queryParams['check_in']) {
@@ -154,7 +156,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.checkInMinDate = moment().add(31, 'days').toDate();
 
       this.checkOutDate = moment(this.route.snapshot.queryParams['check_out']).isValid() ? moment(this.route.snapshot.queryParams['check_out']).toDate() : moment(this.route.snapshot.queryParams['check_in']).add(1, 'days').toDate();
-      
+
       this.checkOutMinDate = this.checkOutDate;
       this.rangeDates = [this.checkInDate, this.checkOutDate];
 
@@ -196,8 +198,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.$dealLocatoin = this.homeService.getLocationForHotelDeal.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
         this.dealDateValidation();
-
-
+        this.dealIcon = true;
         // this.fromDestinationInfo.city = this.fromDestinationInfo.title = '';
         this.fromDestinationInfo.city = this.fromDestinationInfo.title = hotelInfo.title;
         this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = hotelInfo.lat;
@@ -212,11 +213,11 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   dealDateValidation() {
-    if (moment(moment(this.customStartDateValidation).subtract(31, 'days')).diff(moment(), 'days') > 0) {
+    if (moment(moment(this.customStartDateValidation).subtract(2, 'days')).diff(moment(), 'days') > 0) {
       this.searchHotelInfo.check_in = this.checkInDate = moment(this.customStartDateValidation).toDate();
     } else {
-      this.searchHotelInfo.check_in = this.checkInDate = moment().add(91, 'days').toDate();
-    }        
+      this.searchHotelInfo.check_in = this.checkInDate = moment().add(32, 'days').toDate();
+    }
     this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
   }
@@ -226,18 +227,20 @@ export class HotelSearchWidgetComponent implements OnInit {
     let customStartDate: any = moment(this.customStartDateValidation).format('YYYY-MM-DD');
     let daysDiff = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
 
+    let checkInMin = moment(curretdate).add(2, 'days').toDate()
     if (curretdate < customStartDate && daysDiff > 30) {
       this.checkInDate = moment(customStartDate).toDate();
-      this.checkInMinDate = this.checkInDate;
+      this.checkInMinDate = checkInMin;
     } else if (daysDiff < 30) {
       this.checkInDate = moment(curretdate).add(31, 'days').toDate();
-      this.checkInMinDate = this.checkInDate;
+      this.checkInMinDate = checkInMin;
       // this.departureDate = date; 
     } else {
       this.checkInDate = moment(curretdate).add(31, 'days').toDate();
-      this.checkInMinDate = this.checkInDate;
+      this.checkInMinDate = checkInMin;
       // this.flightDepartureMinDate =  date;
     }
+    console.log('this.checkInMinDate',this.checkInMinDate)
   }
 
   selectCheckInDateUpdate(date) {
@@ -245,10 +248,12 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (this.rangeDates[1]) { // If second date is selected
       this.dateFilter.hideOverlay();
     };
+    var curretdate = moment().format();
+
     let daysDiff = this.rangeDates[0] ? moment(this.rangeDates[1], "YYYY-MM-DD").diff(moment(this.rangeDates[0], "YYYY-MM-DD"), 'days') : 0;
     if (daysDiff == 0) {
       // this.checkInMinDate = moment(this.rangeDates[0],'YYYY-MM-DD').add(1,'days').toDate();
-      this.checkOutDate = moment(this.rangeDates[0]).add(1, 'days').toDate();
+      this.checkOutDate = moment(curretdate).add(1, 'days').toDate();
       this.rangeDates[1] = this.searchHotelInfo.check_out = this.checkOutDate;
     }
 
@@ -314,12 +319,13 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   selectedHotel(event) {
-    if(event.type == 'city'){
+    console.log('coming in selected hotel')
+    if (event.type == 'city') {
       this.searchHotelInfo.city_id = event.city_id;
     } else {
-      this.searchHotelInfo.hotel_id = event.hotel_id;      
+      this.searchHotelInfo.hotel_id = event.hotel_id;
     }
-    this.searchHotelInfo.type = event.type;      
+    this.searchHotelInfo.type = event.type;
     this.searchHotelInfo.location = event;
     this.searchHotelInfo.latitude = event.geo_codes.lat;
     this.searchHotelInfo.longitude = event.geo_codes.long;
@@ -329,30 +335,30 @@ export class HotelSearchWidgetComponent implements OnInit {
     }
   }
 
-  counterChangeVal :number = 0;
-  validateSearch(event) {    
+  counterChangeVal: number = 0;
+  validateSearch(event) {
     this.currentChangeCounter.emit(this.counterChangeVal += 1);
     this.validSearch = event;
   }
-  
-  counterValueChanged(event) {  
+
+  counterValueChanged(event) {
     this.currentChangeCounter.emit(event);
   }
-  
-  datepickerShow(){
-    this.isDatePickerOpen = true;  
-    if(this.commonFunction.isRefferal()){
+
+  datepickerShow() {
+    this.isDatePickerOpen = true;
+    if (this.commonFunction.isRefferal()) {
       this.progressInterval = setInterval(() => {
-        if(this.isDatePickerOpen){
+        if (this.isDatePickerOpen) {
           this.currentChangeCounter.emit(this.counterChangeVal += 1);
         } else {
           clearInterval(this.progressInterval);
         }
-      }, 1000);   
+      }, 1000);
     }
   }
-  
-  datepickerClose(){      
+
+  datepickerClose() {
     this.isDatePickerOpen = false;
   }
 

@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
   currentChangeCounter;
   banner_city_name = 'Miami';
   slides;
+  dealsFlag = false;
 
   $landingPageData;
   constructor(
@@ -226,10 +227,13 @@ export class HomeComponent implements OnInit {
   }
 
   fetchWidgetDeal(newItem: string) {
+    console.log('newItem',newItem)
     if(this.moduleId == 1){
+      this.dealsFlag = true
       this.toString = newItem;
       this.homeService.setToString(newItem);
     } else if(this.moduleId == 3) {
+      this.dealsFlag = true
       this.homeService.setLocationForHotel(newItem);
     } 
   }
