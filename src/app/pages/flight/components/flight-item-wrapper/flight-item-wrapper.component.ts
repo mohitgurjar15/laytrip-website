@@ -58,7 +58,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   showFareDetails: number = 0;
   flightUniqueCode;
   isRoundTrip = false;
-  noOfDataToShowInitially = 25;
+  noOfDataToShowInitially = 20;
   subcell = '$100';
   isLoggedIn = false;
   userDetails;
@@ -67,7 +67,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   totalLayCredit = 0;
   flightItems;
   scrollLoading: boolean = false;
-  dataToLoad = 25;
+  dataToLoad = 20;
   checkedAirUniqueCodes = [];
   isRefferal=this.commonFunction.isRefferal();
 
@@ -104,14 +104,14 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     })
     this.loadJquery();
     this.flightService.getFlights.subscribe(data=>{
+      this.flightDetails = this.flightItems =[];
       if(data.length){
-        this.flightDetails = this.flightItems = data;            
-      }
-      else{
-        this.flightDetails= this.flightItems =[];
+        this.flightItems = data;            
       }
     });
-    this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+
+    console.log(this.flightDetails.length)
+        this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
     console.log(this.flightDetails.length, this.flightItems.length)
 
     // Author: xavier | 2021/8/3
