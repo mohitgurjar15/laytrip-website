@@ -1,0 +1,24 @@
+<div class="modal-content">
+    <div class="modal_title">
+    </div>
+    <div class="session_expired_modal_wrp">
+        <div class="discounted_main_wrapper">
+            <div class="inner_wrppar">
+                <div class="cart_img_wrpper">
+                    <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Close Popup">
+                </div>
+                <div class="cart_msg discounted_alert_popup">
+                    Only full payment can’t be merge with installment payment.
+                </div>
+                <div class="cta_btn_wrps">
+                    <button (click)="close()">{{'close' | translate}}</button>
+                </div>
+                <div class="footer_logo">
+                    <a>
+                        <img alt="logo Icon" src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

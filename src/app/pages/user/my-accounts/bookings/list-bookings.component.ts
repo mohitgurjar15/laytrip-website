@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { environment } from '../../../../../environments/environment';

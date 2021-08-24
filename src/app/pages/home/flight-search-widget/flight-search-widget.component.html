@@ -1,203 +1,133 @@
 <div class="flight_tab">
-  <div class="tab_flight_top d-flex">
-    <ul class="nav nav-tabs">
-      <li class="nav-item upper_li_2">
-        <a class="nav-link" [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab" href="#Oneway"
-          (click)="toggleOnewayRoundTrip('roundtrip')">
-          <!-- <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon.svg" alt="Return Icon" />
-                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/return-icon-active_1.svg" alt="Return Icon" /> -->
-          <span>{{'round_trip' | translate}}</span>
-        </a>
-      </li>
-      <li class="nav-item upper_li">
-        <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab" href="#Oneway"
-          (click)="toggleOnewayRoundTrip('oneway')">
-          <!-- <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon.svg" alt="Oneway Icon" />
-                <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/oneway-icon-active_1.svg" alt="Oneway Icon" /> -->
-          <span>{{'oneway' | translate}}</span>
-        </a>
-      </li>
-    </ul>
-    <ul class="nav nav-tabs">
-      <li class="nav-item class_resp desk_li">
-        <div class="class_section">
-          <app-flight-class (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
-          </app-flight-class>
-        </div>
-      </li>
-      <li class="nav-item travellers_resp desk_li">
-        <div class="travellers">
-          <app-traveller-info domid="desk_traveller" label="{{'travellers_and_class' | translate}}"
-            (changeValue)="changeTravellerInfo($event)" (currentChangeCounter)="counterValueChanged($event)">
-          </app-traveller-info>
-        </div>
-      </li>
-      <ul class="mobile_ul">
-        <li class="nav-item class_resp mobile_li">
-          <div class="class_section">
-            <!-- <app-flight-class [mobileView]="add_class_sec_open2" (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
-                    </app-flight-class> -->
-            <app-flight-class (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
-            </app-flight-class>
-          </div>
-        </li>
-        <li class="nav-item travellers_resp mobile_li">
-          <div class="travellers">
-            <app-traveller-info domid="mobile_traveller" label="{{'travellers_and_class' | translate}}"
-              (changeValue)="changeTravellerInfo($event)" (currentChangeCounter)="counterValueChanged($event)">
-            </app-traveller-info>
-          </div>
-        </li>
-      </ul>
-      <!-- <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#Multi-city">
-              <img class="default-icon"
-                  src="{{s3BucketUrl}}assets/images/icon/multi-city-icon.svg"      res.airportInfo = {};
-
-                  alt="Multi City Icon" />
-              <img class="active-icon"
-                  src="{{s3BucketUrl}}assets/images/icon/multi-city-icon-active.svg"
-                  alt="Multi City Icon" />
-              <span>Multi city</span>
-          </a>
-      </li> -->
-    </ul>
-  </div>
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div id="Oneway" class="tab-pane active">
-      <form [formGroup]="flightSearchForm" novalidate autocomplete="off" (ngSubmit)="searchFlights()">
-        <div class="flight_search">
-          <ul class="flight-grid oneway">
-            <li class="grid_box first">
-              <div class="flight_form"
-                [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
-                <div class="search_area">
-                  <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'"
-                    [label]="'from' | translate" placeHolder="From where?" [defaultSelected]="" [tabIndex]=1
-                    [airport]=fromSearch [defaultCity]="" (changeValue)="destinationChangedValue($event)"
-                    (click)="showAirportSuggestion('from')" [inputName]="'fromSearch'" (searchItem)="searchItem($event)"
-                    (flightSearchRoute)="getflightSearchRoutes($event)"
-                    (currentChangeCounter)="counterValueChanged($event)">
-                  </app-search-airport>
-                </div>
-                <app-airport-suggestion class="desk_suggetions" *ngIf="showFromAirportSuggestion" [airport]=fromSearch
-                  type='from' (closeAirportSuggestion)="closeAirportSuggestion($event)"
-                  (changeValue)="airportValueChange($event)" [searchedFlightData]=searchedFlightData
-                  [routeSearch]="routeSearch"></app-airport-suggestion>
-              </div>
-              <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
-                <a (click)="swapAirport()">
-
-                  <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg" alt="Switch Image" />
+    <div class="tab_flight_top d-flex">
+        <ul class="nav nav-tabs">
+            <li class="nav-item upper_li_2">
+                <a class="nav-link" [ngClass]="{'active' : isRoundTrip === true}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('roundtrip')">
+                    <span>{{'round_trip' | translate}}</span>
                 </a>
-              </div>
-              <div class="flight_to"
-                [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
-                <div class="search_area">
-                  <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'" [id]="'toSearch'"
-                    [label]="'to' | translate" placeHolder="Where to?" [defaultSelected]="" [tabIndex]=2
-                    [airport]=toSearch [defaultCity]="" (changeValue)="destinationChangedValue($event)"
-                    [inputName]="'toSearch'" (click)="showAirportSuggestion('to')"
-                    (flightSearchRoute)="getflightToSearchRoutes($event)" (searchItem)="searchItem($event)"
-                    (currentChangeCounter)="counterValueChanged($event)">
-                  </app-search-airport>
-                </div>
-                <app-airport-suggestion class="desk_suggetions" *ngIf="showToAirportSuggestion" [airport]=toSearch
-                  type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)"
-                  [searchedFlightData]=searchedFlightData (changeValue)="airportValueChange($event)">
-                </app-airport-suggestion>
-              </div>
-              <div class="mobile_suggetions">
-                <app-airport-suggestion *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from'
-                  (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)">
-                </app-airport-suggestion>
-                <app-airport-suggestion *ngIf="showToAirportSuggestion" [airport]=toSearch type='to'
-                  (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)">
-                </app-airport-suggestion>
-              </div>
             </li>
-            <li class="grid_box secound">
-              <div class="date_form">
-                <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
-                  <!-- <label>{{'departure' | translate}}</label> -->
-                  <p-calendar class="comon_pcale" *ngIf="!isRoundTrip" dateFormat="M d, yy" inputId="basic"
-                    [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate
-                    [minDate]="flightDepartureMinDate" (onSelect)=selectDepartureDate($event) [readonlyInput]="true"
-                    (onMonthChange)="changeMonth($event)" (onShow)="datePickerShow($event)"
-                    panelStyleClass="calender-responsive-view laytrip-cal-view" [readonlyInput]="true"
-                    (onShow)="datepickerShow($event)" (onClose)="datepickerClose($event)">
-                    <p-header class="calender-header" *ngIf="calPrices">
-                      <p *ngIf="isCalenderPriceLoading">We are retrieving monthly prices...</p>
-                      <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
-                        <span class="green_var"
-                          [hidden]="getPriceLabel('lowMinPrice') == 0">${{getPriceLabel('lowMinPrice')}}</span>
-                        <span class="yellow_var"
-                          [hidden]="getPriceLabel('midMinPrice') == 0">${{getPriceLabel('midMinPrice')}}</span>
-                        <span class="red_var"
-                          [hidden]="getPriceLabel('highMinPrice') == 0">${{getPriceLabel('highMinPrice')}}</span>
-                      </div>
-                    </p-header>
-
-                    <ng-template pTemplate="date" let-date>
-                      <span class="c_date"
-                        [ngClass]="{'green_date': getPriceClass(date.day,date.month,date.year)=='low', 'yellow_date': getPriceClass(date.day,date.month,date.year)=='medium', 'red_date': getPriceClass(date.day,date.month,date.year)=='high'}">{{date.day}}</span>
-                      <span class="calender_price">{{ getPrice(date.day,date.month,date.year)
-                                                }}</span>
-                    </ng-template>
-                  </p-calendar>
-
-                  <p-calendar *ngIf="isRoundTrip" dateFormat="M d, yy" #dateFilter inputId="range" selectionMode="range"
-                    [(ngModel)]="rangeDates" [ngModelOptions]="{standalone: true}" flightDepartureMinDate
-                    [minDate]="flightDepartureMinDate" (onShow)="datePickerShow($event)"
-                    panelStyleClass="calender-responsive-view laytrip-cal-view round_trip_calender" [numberOfMonths]="2"
-                    (onSelect)=selectReturnDateUpdate($event) [readonlyInput]="true" (onShow)="datepickerShow($event)"
-                    (onClose)="datepickerClose($event)">
-
-                  </p-calendar>
+            <li class="nav-item upper_li">
+                <a class="nav-link" [ngClass]="{'active' : isRoundTrip === false}" data-toggle="tab" href="#Oneway" (click)="toggleOnewayRoundTrip('oneway')">
+                    <span>{{'oneway' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-tabs">
+            <li class="nav-item class_resp desk_li">
+                <div class="class_section">
+                    <app-flight-class (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
+                    </app-flight-class>
                 </div>
-              </div>
-              <!-- <div class="date_to">
-                                <div class="search_area disable_return_date" *ngIf="!isRoundTrip">
-                                    <label>{{'return' | translate}}</label>
-                                    <p (click)="toggleOnewayRoundTrip('roundtrip')">{{'tap_to_add_return_date' | translate}}</p>
+            </li>
+            <li class="nav-item travellers_resp desk_li">
+                <div class="travellers">
+                    <app-traveller-info domid="desk_traveller" label="{{'travellers_and_class' | translate}}" (changeValue)="changeTravellerInfo($event)" (currentChangeCounter)="counterValueChanged($event)">
+                    </app-traveller-info>
+                </div>
+            </li>
+            <ul class="mobile_ul">
+                <li class="nav-item class_resp mobile_li">
+                    <div class="class_section">
+                        <app-flight-class (changeValue)="changeEconomyInfo($event)" [flightClass]="searchFlightInfo.class">
+                        </app-flight-class>
+                    </div>
+                </li>
+                <li class="nav-item travellers_resp mobile_li">
+                    <div class="travellers">
+                        <app-traveller-info domid="mobile_traveller" label="{{'travellers_and_class' | translate}}" (changeValue)="changeTravellerInfo($event)" (currentChangeCounter)="counterValueChanged($event)">
+                        </app-traveller-info>
+                    </div>
+                </li>
+            </ul>
+        </ul>
+    </div>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="Oneway" class="tab-pane active">
+            <form [formGroup]="flightSearchForm" novalidate autocomplete="off" (ngSubmit)="searchFlights()">
+                <div class="flight_search">
+                    <ul class="flight-grid oneway">
+                        <li class="grid_box first">
+                            <div class="flight_form" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.fromDestination.errors && flightSearchForm.controls.fromDestination.errors.required==true}">
+                                <div class="search_area">
+                                    <app-search-airport [form]="flightSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch'" [label]="'from' | translate" placeHolder="{{'from_where' | translate}}" [defaultSelected]="" [tabIndex]=1 [airport]=fromSearch [defaultCity]="" (changeValue)="destinationChangedValue($event)"
+                                        (click)="showAirportSuggestion('from')" [inputName]="'fromSearch'" (searchItem)="searchItem($event)" (flightSearchRoute)="getflightSearchRoutes($event)" (currentChangeCounter)="counterValueChanged($event)">
+                                    </app-search-airport>
                                 </div>
+                                <app-airport-suggestion class="desk_suggetions" *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)" [searchedFlightData]=searchedFlightData
+                                    [routeSearch]="routeSearch"></app-airport-suggestion>
+                            </div>
+                            <div class="switch_btn" [ngClass]="{'dr_layout':countryCode=='DR'}">
+                                <a (click)="swapAirport()">
 
-                                <div class="search_area" *ngIf="isRoundTrip" [ngClass]="{'dr_search_area':countryCode=='DR'}">
-                                    <label>{{'return' | translate}}</label>
-                                    <p-calendar inputId="basic" [(ngModel)]="returnDate" [ngModelOptions]="{standalone: true}" flightReturnMinDate [minDate]="flightReturnMinDate" [readonlyInput]="true" panelStyleClass="calender-responsive-view">
-                                    </p-calendar> 
-                                    <div class="prev-next">
-                                        <a (click)="dateChange('arrival','previous')">{{'prev' | translate}}</a>
-                                        <a (click)="dateChange('arrival','next')">{{'next' | translate}}</a>
-                                    </div>
+                                    <img src="{{s3BucketUrl}}assets/images/icon/dr/dr_switch_btn.svg" alt="Switch Image" />
+                                </a>
+                            </div>
+                            <div class="flight_to" [ngClass]="{'flight-error': flightSearchFormSubmitted && flightSearchForm.controls.toDestination.errors && flightSearchForm.controls.toDestination.errors.required==true}">
+                                <div class="search_area">
+                                    <app-search-airport [form]="flightSearchForm" [controlName]="'toDestination'" [id]="'toSearch'" [label]="'to' | translate" placeHolder="{{'where_to' | translate}}" [defaultSelected]="" [tabIndex]=2 [airport]=toSearch [defaultCity]="" (changeValue)="destinationChangedValue($event)"
+                                        [inputName]="'toSearch'" (click)="showAirportSuggestion('to')" (flightSearchRoute)="getflightToSearchRoutes($event)" (searchItem)="searchItem($event)" (currentChangeCounter)="counterValueChanged($event)">
+                                    </app-search-airport>
                                 </div>
-
+                                <app-airport-suggestion class="desk_suggetions" *ngIf="showToAirportSuggestion" [airport]=toSearch type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)" [searchedFlightData]=searchedFlightData (changeValue)="airportValueChange($event)">
+                                </app-airport-suggestion>
+                            </div>
+                            <!-- <div class="mobile_suggetions">
+                                <app-airport-suggestion *ngIf="showFromAirportSuggestion" [airport]=fromSearch type='from' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)">
+                                </app-airport-suggestion>
+                                <app-airport-suggestion *ngIf="showToAirportSuggestion" [airport]=toSearch type='to' (closeAirportSuggestion)="closeAirportSuggestion($event)" (changeValue)="airportValueChange($event)">
+                                </app-airport-suggestion>
                             </div> -->
-            </li>
-            <li class="grid_box third">
+                        </li>
+                        <li class="grid_box secound">
+                            <div class="date_form">
+                                <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                                    <p-calendar class="comon_pcale" *ngIf="!isRoundTrip" dateFormat="M d, yy" inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=selectDepartureDate($event)
+                                        [readonlyInput]="true" (onMonthChange)="changeMonth($event)" (onShow)="datePickerShow($event)" panelStyleClass="calender-responsive-view laytrip-cal-view" [readonlyInput]="true" (onShow)="datepickerShow($event)" (onClose)="datepickerClose($event)" [locale]="cal_locale">
+                                        <p-header class="calender-header" *ngIf="calPrices">
+                                            <p *ngIf="isCalenderPriceLoading">{{'retrieving_monthly_prices' | translate}}</p>
+                                            <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading">
+                                                <span class="green_var" [hidden]="getPriceLabel('lowMinPrice') == 0">${{getPriceLabel('lowMinPrice')}}</span>
+                                                <span class="yellow_var" [hidden]="getPriceLabel('midMinPrice') == 0">${{getPriceLabel('midMinPrice')}}</span>
+                                                <span class="red_var" [hidden]="getPriceLabel('highMinPrice') == 0">${{getPriceLabel('highMinPrice')}}</span>
+                                                <span class="full_payment_label" *ngIf="calendersFullPaymentLength > 0 && !isRoundTrip">{{'full_prices' | translate}}</span>
+                                            </div>
+                                        </p-header>
 
-              <div class="serch_btn">
-                <button id="search_large_btn1">
+                                        <ng-template pTemplate="date" let-date>
+                                            <span class="c_date" [ngClass]="{'green_date': getPriceClass(date.day,date.month,date.year)=='low', 'yellow_date': getPriceClass(date.day,date.month,date.year)=='medium', 'red_date': getPriceClass(date.day,date.month,date.year)=='high','full_payment_date': getPriceClass(date.day,date.month,date.year)=='full_payment'}">{{date.day}}</span>
+                                            <span class="calender_price">{{ getPrice(date.day,date.month,date.year) }}</span>
+                                        </ng-template>
+                                    </p-calendar>
+
+                                    <p-calendar *ngIf="isRoundTrip" dateFormat="M d, yy" #dateFilter inputId="range" selectionMode="range" [(ngModel)]="rangeDates" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onShow)="datePickerShow($event)"
+                                        panelStyleClass="calender-responsive-view laytrip-cal-view round_trip_calender" [numberOfMonths]="2" (onSelect)=selectReturnDateUpdate($event) [readonlyInput]="true" (onShow)="datepickerShow($event)" (onClose)="datepickerClose($event)" [locale]="cal_locale">
+
+                                    </p-calendar>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="grid_box third">
+
+                            <div class="serch_btn">
+                                <button id="search_large_btn1">
                   <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="search_icon" class="norm_btn" />
-                  <!-- <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="search_icon" class="hover_btn" /> -->
                 </button>
-              </div>
-            </li>
-          </ul>
+                            </div>
+                        </li>
+                    </ul>
 
+                </div>
+            </form>
         </div>
-      </form>
+        <div id="Return" class="tab-pane fade"><br>
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </div>
+        <div id="Multi-city" class="tab-pane fade"><br>
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
     </div>
-    <div id="Return" class="tab-pane fade"><br>
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat.</p>
-    </div>
-    <div id="Multi-city" class="tab-pane fade"><br>
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-        rem aperiam.</p>
-    </div>
-  </div>
 </div>

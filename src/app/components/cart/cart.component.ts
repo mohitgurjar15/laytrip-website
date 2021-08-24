@@ -1,7 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewRef } from '@angular/core';
+import {  ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
 import { CommonFunction } from '../../_helpers/common-function';
 import { Router } from '@angular/router';
 
@@ -66,27 +65,6 @@ export class CartComponent implements OnInit {
         this.router.navigate(['/']);
       }
     }
-   /*  this.validationErrorMessage = '';
-    if (this.isValidTravelers) {
-      this.loading = true;
-      for (let i = 0; i < this.carts.length; i++) {
-        let data = this.travelerForm.controls[`type${i}`].value.adults;
-        let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
-        let cartData = {
-          cart_id: this.carts[i].id,
-          travelers: travelers
-        }
-        this.cartService.updateCart(cartData).subscribe(data => {
-          if (i === this.carts.length - 1) {
-            this.loading = false;
-            this.router.navigate(['/'])
-          }
-        });
-      }
-    }
-    else {
-      this.validateCartItems();
-    } */
   }
 
 }

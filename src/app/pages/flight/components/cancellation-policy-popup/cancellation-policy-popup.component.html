@@ -11,25 +11,6 @@
 
                 <div class="col-md-8">
                     <div class="block_modal_right">
-                        <!-- <div class="rules_cnt_top">
-                          <div class="detail_left">
-                              <img src="{{s3BucketUrl}}assets/images/airlines_logo.png" alt="Airlines Logo">
-                              <p>Indigo</p>
-                              <span>EWR - DEN</span>
-                          </div>
-                          <div class="detail_right">
-                              <ul>
-                                  <li class="first">
-                                      <div>Laytip Fess</div>
-                                      <div>$13e</div>
-                                  </li>
-                                  <li>
-                                      <div>Airline Fees</div>
-                                      <div>Refundable</div>
-                                  </li>
-                              </ul>
-                          </div>
-                      </div> -->
                         <div class="rules_cnt_btm">
                             <span>{{'term_and_condition' | translate}}</span>
                             <div class="w-100">
@@ -38,12 +19,6 @@
                                 <p class="fb_animation mb-2 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
                                 <p class="fb_animation mb-0 h-auto w-100" *ngIf="loadCancellationPolicy"></p>
                             </div>
-                            <!-- <ul>
-                              <li>It is a long established fact that a reader will be distracted by the readable content layout.</li>
-                              <li>It is a long established fact that a reader will be distracted by the readable content layout.</li>
-                              <li>It is a long established fact that a reader will be distracted by the readable content layout.</li>
-                              <li>It is a long established fact that a reader will be distracted by the readable content layout.</li>
-                          </ul> -->
                             <p *ngIf="!loadCancellationPolicy" [innerHtml]="cancellationPolicy"></p>
                         </div>
                     </div>

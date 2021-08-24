@@ -5,9 +5,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TravellerInfoComponent } from './traveller-info/traveller-info.component';
 import { CheckoutProgressComponent } from './checkout-progress/checkout-progress.component';
-import { AdultListComponent } from './adult-list/adult-list.component';
-import { ChildListComponent } from './child-list/child-list.component';
-import { InfantListComponent } from './infant-list/infant-list.component';
 import { BookingTimerComponent } from './booking-timer/booking-timer.component';
 import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { CardListComponent } from './card-list/card-list.component';
@@ -18,18 +15,13 @@ import { CountdownModule } from 'ngx-countdown';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FullPageOverlayLoaderComponent } from './full-page-overlay-loader/full-page-overlay-loader.component';
 import { CookieModule } from 'ngx-cookie';
-import { BookingEnquiryInfoComponent } from './booking-enquiry-info/booking-enquiry-info.component';
-import { AddGuestCardComponent } from './add-guest-card/add-guest-card.component';
 import { CalendarModule } from 'primeng/calendar';
 import { RedeemLaycreditComponent } from './redeem-laycredit/redeem-laycredit.component';
 import { BookingFeedbackComponent } from './booking-feedback/booking-feedback.component';
-import { BookingAsLoginOrGuestPopupComponent } from './booking-as-login-or-guest-popup/booking-as-login-or-guest-popup.component';
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { TextMaskModule } from 'angular2-text-mask';
 import { PlanSummaryComponent } from './plan-summary/plan-summary.component';
-import { AddPointsComponent } from './add-points/add-points.component';
 import { RedeemLaycreditLoaderComponent } from './redeem-laycredit-loader/redeem-laycredit-loader.component';
-import { ToasterComponent } from './toaster/toaster.component';
 import { ShareSocialMediaComponent } from './share-social-media/share-social-media.component';
 import { RentalInfoComponent } from './rental-shared-components/rental-info/rental-info.component';
 
@@ -42,7 +34,6 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FlightClassComponent } from './flight-class/flight-class.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CartItemComponent } from './cart-item/cart-item.component';
-import { TravelerListComponent } from './traveler-list/traveler-list.component';
 import { PriceSummaryComponent } from './price-summary/price-summary.component';
 import { PaymentModeLoaderComponent } from './payment-mode-loader/payment-mode-loader.component';
 import { CartComponent } from './cart/cart.component';
@@ -61,29 +52,22 @@ import { HotelCartItemComponent } from '../pages/hotel/components/hotel-cart-ite
 import { HotelSuggestionComponent } from './hotel-suggestion/hotel-suggestion.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { DiscountedBookingAlertComponent } from './discounted-booking-alert/discounted-booking-alert.component';
+import { CartInventoryNotmatchErrorPopupComponent } from './cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 @NgModule({
   declarations: [
     SearchAirportComponent,
     TravellerInfoComponent,
     CheckoutProgressComponent,
-    AdultListComponent,
-    ChildListComponent,
-    InfantListComponent,
     BookingTimerComponent,
     PaymentModeComponent,
     CardListComponent,
     AddCardComponent,
     TravelerFormComponent,
     FullPageOverlayLoaderComponent,
-    BookingEnquiryInfoComponent,
-    AddGuestCardComponent,
     RedeemLaycreditComponent,
     BookingFeedbackComponent,
-    BookingAsLoginOrGuestPopupComponent,
     PlanSummaryComponent,
-    AddPointsComponent,
     RedeemLaycreditLoaderComponent,
-    ToasterComponent,
     ShareSocialMediaComponent,
     DeleteCartitemConfirmationPopupComponent,
 
@@ -94,7 +78,6 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
     VacationSearchComponent,
     FlightClassComponent,
     CartItemComponent,
-    TravelerListComponent,
     PriceSummaryComponent,
     PaymentModeLoaderComponent,
     CartComponent,
@@ -107,7 +90,8 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
     HotelCartItemComponent,
     HotelSuggestionComponent,
     CarouselComponent,
-    DiscountedBookingAlertComponent
+    DiscountedBookingAlertComponent,
+    CartInventoryNotmatchErrorPopupComponent
   ],
   imports: [
     CommonModule,
@@ -124,7 +108,6 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
     TranslateModule,
     NgScrollbarModule,
     InfiniteScrollModule,
-    //NgxSpinnerModule,
     RouterModule,
     BsDatepickerModule.forRoot(),
     NgxMaskModule.forRoot()
@@ -133,23 +116,15 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
     SearchAirportComponent,
     TravellerInfoComponent,
     CheckoutProgressComponent,
-    AdultListComponent,
-    ChildListComponent,
-    InfantListComponent,
     BookingTimerComponent,
     PaymentModeComponent,
     CardListComponent,
     AddCardComponent,
     FullPageOverlayLoaderComponent,
-    BookingEnquiryInfoComponent,
-    AddGuestCardComponent,
     RedeemLaycreditComponent,
     BookingFeedbackComponent,
-    BookingAsLoginOrGuestPopupComponent,
     PlanSummaryComponent,
-    AddPointsComponent,
     RedeemLaycreditLoaderComponent,
-    ToasterComponent,
     ShareSocialMediaComponent,
     GuestInfoComponent,
     SearchHotelComponent,
@@ -160,14 +135,12 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
     FlightClassComponent,
     InfiniteScrollModule,
     CartItemComponent,
-    TravelerListComponent,
     PriceSummaryComponent,
     PaymentModeLoaderComponent,
     TravelerFormComponent,
     CartComponent,
     CartLoaderComponent,
     LaytripLoaderComponent,
-    //NgxSpinnerModule,
     EmptyCartComponent,
     LottieAnimationViewModule,
     DeleteCartitemConfirmationPopupComponent,
@@ -177,9 +150,9 @@ import { DiscountedBookingAlertComponent } from './discounted-booking-alert/disc
     HotelSuggestionComponent,
     CarouselComponent
   ],
-  providers: [DatePipe, //NgxSpinnerService, 
+  providers: [DatePipe, 
     NgbActiveModal],
-  entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent, DiscountedBookingAlertComponent],
+  entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent, DiscountedBookingAlertComponent, CartInventoryNotmatchErrorPopupComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ]

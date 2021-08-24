@@ -7,6 +7,7 @@ import { CommonFunction } from '../../../../_helpers/common-function';
 import { FlightService } from '../../../../services/flight.service';
 import { ActivatedRoute } from '@angular/router';
 import { airports } from '../../airports';
+import { CalendarTranslations } from 'src/app/_helpers/generic.helper';
 
 @Component({
   selector: 'app-flight-search-bar',
@@ -47,7 +48,6 @@ export class FlightSearchBarComponent implements OnInit {
   placeHolder2 = 'Los Angeles';
   defaultSelected = 'NY, United States';
 
-  // tslint:disable-next-line: quotemark
   totalPerson: number = 1;
 
   airportDefaultDestValue;
@@ -70,6 +70,8 @@ export class FlightSearchBarComponent implements OnInit {
 
   departureAirport:any={};
   arrivalAirport :any={}
+
+  cal_locale;
 
   constructor(
     public fb: FormBuilder,
@@ -141,6 +143,8 @@ export class FlightSearchBarComponent implements OnInit {
     this.searchFlightInfo.departure = this.route.snapshot.queryParams['departure'];
     this.searchFlightInfo.arrival = this.route.snapshot.queryParams['arrival'];
     this.searchFlightInfo.class = this.route.snapshot.queryParams['class'];
+
+    this.setCalendarLocale();
   }
 
   searchAirportDeparture(searchItem) {
@@ -230,8 +234,6 @@ export class FlightSearchBarComponent implements OnInit {
       this.arrivalAirport=Object.create(null);
     }
   }
-
-  
 
   changeTravellerInfo(event) {
     this.searchFlightInfo.adult = event.adult;
@@ -392,5 +394,12 @@ export class FlightSearchBarComponent implements OnInit {
     let tempCode = this.searchFlightInfo.departure;
     this.searchFlightInfo.departure = this.searchFlightInfo.arrival;
     this.searchFlightInfo.arrival = tempCode;
+  }
+
+  // Author: xavier | 2021/8/17
+  // Description: Calenddar localization
+  setCalendarLocale() {
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    this.cal_locale = CalendarTranslations[userLang];
   }
 }

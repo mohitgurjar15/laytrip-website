@@ -29,14 +29,6 @@ export class MobileAndSubscribeComponent implements OnInit {
     private elementRef: ElementRef
   ) { }
 
-  // @HostListener('click', ['$event.target'])
-  // public onClick(target) {
-  //   const clickedInside = this.elementRef.nativeElement.contains(target);
-  //   if (!clickedInside) {
-  //     // this.clickOutside.emit();
-  //   }
-  // }
-
   @HostListener('document:click', ['$event'])
   clickout(event) {
     this.submitted = false;
@@ -82,7 +74,6 @@ export class MobileAndSubscribeComponent implements OnInit {
         this.subscribeForm.markAsUntouched();
         this.subscribeForm.controls.email.setValue('');
         this.successMessage = data.message;
-        // this.toastr.success(data.message, '');
       }, (error: HttpErrorResponse) => {
         this.error = true;
         this.successMessage = '';
@@ -90,7 +81,6 @@ export class MobileAndSubscribeComponent implements OnInit {
         this.subscribeForm.controls.email.setValue('');
         this.subscribeForm.markAsUntouched();
         this.errorMessage = error.error.message;
-        // this.toastr.error(error.error.message, 'Subscribed Error');
       });
     }
   }

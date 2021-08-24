@@ -8,8 +8,6 @@
             </div>
             <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 48%; margin: 5px; border-radius: 20px;">
             </div>
-            <!-- <div class="fb_animation pb-5 pt-5" style="height: 285px; width: 32%; margin: 5px; border-radius: 20px;">
-            </div> -->
         </div>
         <div style="display: flex; width: 100%; justify-content: center; align-items: center; margin: 10px 0;">
             <div class="fb_animation pb-5 pt-5" style="height: 4px; width: 4px; margin: 5px; border-radius: 50%; min-height: 4px; padding: 5px !important;">
@@ -24,37 +22,30 @@
     </div>
 </section>
 <!-- deal section skeleton loader ends -->
-<section class="deal_sec" *ngIf="list.length > 0 && commonFunction.isRefferal()"  (contextmenu)="commonFunction.onRightClickDisabled($event)">
+<section class="deal_sec" *ngIf="list.length > 0 && commonFunction.isRefferal()" (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
         <div class="row">
-            <swiper 
-            (swiper)="setThumbsSwiper($event)"
-             [breakpoints]="breakpoints"
-             [navigation]="true" 
-             [pagination]="{ clickable: true }"
-             [slidesPerView]="1"
-             [spaceBetween]="10"        
-                *ngIf="list.length > 0">
+            <swiper (swiper)="setThumbsSwiper($event)" [breakpoints]="breakpoints" [navigation]="true" [pagination]="{ clickable: true }" [slidesPerView]="1" [spaceBetween]="10" *ngIf="list.length > 0">
                 <ng-template swiperSlide *ngFor="let item of list;">
-                    
+
                     <div class="deal_sec_inner" *ngIf="moduleId == 1">
                         <img [src]="item?.to?.image" alt="Deal Image" />
                         <div class="image_about_text">
-                            <button (click)="btnDealClick(item?.to)">Find Deals to {{item?.to?.city}}</button>
-                            </div>
-                            </div>
-                            <div class="deal_sec_inner" *ngIf="moduleId == 3">
-                                <img [src]="item?.location?.image" alt="Deal Image" />
-                                <div class="image_about_text">
-                                    <button (click)="btnDealClick(item?.location)">Find Deals to {{item?.location?.city}}</button>
+                            <button (click)="btnDealClick(item?.to)">{{item?.to?.city}}</button>
+                        </div>
+                    </div>
+                    <div class="deal_sec_inner" *ngIf="moduleId == 3">
+                        <img [src]="item?.location?.image" alt="Deal Image" />
+                        <div class="image_about_text">
+                            <button (click)="btnDealClick(item?.location)">{{item?.location?.city}}</button>
                         </div>
                     </div>
                 </ng-template>
             </swiper>
 
             <p class="terms_txt">
-                *Limited time new bookings only. Must be booked with start date at least 90 calendar days after booking date. Cannot be combined with any other promotion. Discount applies to available bookings on <a target="_blank" [routerLink]="['/']"
-                    [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">laytrip.com</a>. <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a> and other booking process restrictions apply.
+                {{'promo_421_legal_1' | translate}} <a target="_blank" [routerLink]="['/']"
+                    [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">laytrip.com</a>. <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate | titlecase}}</a> {{'promo_421_legal_2' | translate}}
             </p>
         </div>
     </div>
@@ -62,7 +53,7 @@
 <!-- End Deals section-->
 
 
-<section class="deal_sec" *ngIf="!commonFunction.isRefferal()"   (contextmenu)="commonFunction.onRightClickDisabled($event)">
+<section class="deal_sec" *ngIf="!commonFunction.isRefferal()" (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
         <div class="row">
             <div class="deal_sec_wrapper" *ngIf="list.length <= 0">
@@ -82,18 +73,17 @@
                 </div>
             </div>
             <div class="deal_sec_wrapper" *ngIf="list.length > 0">
-                <div class="deal_section_row"  *ngFor="let item of list;">
+                <div class="deal_section_row" *ngFor="let item of list;">
                     <div class="deal_sec_inner">
                         <img [src]="item?.image" alt="Deal Image" />
                         <div class="image_about_text">
-                            <button (click)="btnDealClick(item)">Find Deals to {{item?.city}}</button>
+                            <button (click)="btnDealClick(item)">{{'find_deals' | translate}} {{item?.city}}</button>
                         </div>
                     </div>
                 </div>
             </div>
-           
+
         </div>
     </div>
 </section>
 <!-- Close Deals section-->
-

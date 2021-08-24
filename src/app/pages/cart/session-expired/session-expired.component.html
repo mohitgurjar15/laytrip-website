@@ -11,7 +11,7 @@
                     <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="empty cart image">
                 </div>
                 <div class="cart_msg">
-                    Time expired for this booking. Refresh to continue.
+                    {{'session_expired' | translate}}
                 </div>
                 <div class="cta_btn_wrps">
                     <button (click)="refresh()">Refresh</button>

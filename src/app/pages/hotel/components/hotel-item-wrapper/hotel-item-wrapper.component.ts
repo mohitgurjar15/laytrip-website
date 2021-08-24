@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, OnDestroy, Input, SimpleChanges, ElementRef, ViewChildren, QueryList, ChangeDetectorRef, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
@@ -71,11 +71,13 @@ export class HotelItemWrapperComponent implements OnInit {
   itenery: string = '';
   location: string = '';
   city_id: string = '';
+  city_name: string = '';
   hotelCount: number = 0;
   previousHotelIndex: number = -1;
   @ViewChildren(NgbCarousel) carousel: QueryList<any>;
   isMarkerClicked = false;
   clickedHotelIndex;
+  isRefferal = this.commonFunction.isRefferal();
 
   constructor(
     private route: ActivatedRoute,
@@ -91,11 +93,12 @@ export class HotelItemWrapperComponent implements OnInit {
     ];
     this.check_in = this.route.snapshot.queryParams['check_in']
     this.check_out = this.route.snapshot.queryParams['check_out']
-    this.latitude = this.route.snapshot.queryParams['latitude']
-    this.longitude = this.route.snapshot.queryParams['longitude']
+    this.latitude = this.route.snapshot.queryParams['x_coordinate']
+    this.longitude = this.route.snapshot.queryParams['y_coordinate']
     this.itenery = this.route.snapshot.queryParams['itenery']
     this.location = this.route.snapshot.queryParams['location']
     this.city_id = this.route.snapshot.queryParams['city_id']
+    this.city_name = this.route.snapshot.queryParams['city_name']
   }
 
   
@@ -144,8 +147,8 @@ export class HotelItemWrapperComponent implements OnInit {
 
 
     this.userInfo = getLoginUserInfo();
-    this.defaultLat = parseFloat(this.route.snapshot.queryParams['latitude']);
-    this.defaultLng = parseFloat(this.route.snapshot.queryParams['longitude']);
+    this.defaultLat = parseFloat(this.route.snapshot.queryParams['x_coordinate']);
+    this.defaultLng = parseFloat(this.route.snapshot.queryParams['y_coordinate']);
 
     this.hotelService.getHotels.subscribe(result => {
       this.hotelDetails = result;
@@ -165,7 +168,7 @@ export class HotelItemWrapperComponent implements OnInit {
       }
       this.hotelCount = this.hotelDetails.length;
       this.currentPage = 1;
-      // this.noOfDataToShowInitially = this.hotelDetails.length;
+      
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       this.hotelList = [...this.hotelListArray];
       if (this.bounds) {
@@ -174,30 +177,9 @@ export class HotelItemWrapperComponent implements OnInit {
     });
   }
 
-  // carouselWithSwipe() {
-  //   $(document).ready(function () {
-  //     $(".mobile_carousel").swiperight(function () {
-  //       $(this).carousel('prev');
-  //     });
-  //     $(".mobile_carousel").swipeleft(function () {
-  //       $(this).carousel('next');
-  //     });
-  //   });
-  // }
-
   changeSlide(slideId) {
-    console.log(slideId);
+    // console.log(slideId);
   }
-
-  // checkOnError(brokenImage) {
-  //   for (let i = 0; i < this.hotelDetails.length; i++) {
-  //     this.hotelDetails[i].galleryImages = [];
-  //     for (let image of this.hotelDetails[i].images) {
-  //       this.hotelDetails[i].galleryImages.splice(brokenImage, 1);
-  //       this.cd.detectChanges();
-  //     }
-  //   }
-  // }
 
   checkOnError(brokenImage) {
     for (let i = 0; i < this.hotelDetails.length; i++) {
@@ -257,24 +239,10 @@ export class HotelItemWrapperComponent implements OnInit {
   displayHotelDetails(hotelId, infoWindow, type) {
     this.isMarkerClicked = false;
     this.clickedHotelIndex = '';
-    // if (this.previousInfoWindow == null) {
-    //   infoWindow.open();
-    //   this.previousInfoWindow = infoWindow;
-    // } else {
-    //   this.infoWindowOpened = infoWindow;
-    //   if (this.previousInfoWindow != null) {
-    //     this.previousInfoWindow.close();
-    //     this.previousInfoWindow = null;
-    //   }
-    // }
-    // this.previousInfoWindow = infoWindow;
-
     if (type === 'click') {
       this.isMarkerClicked = true;
       if (this.previousHotelIndex > -1) {
         let previousHotel = this.hotelListArray[0];
-        //console.log(this.previousHotelIndex,previousHotel)
-        //this.hotelListArray.splice(this.previousHotelIndex+1, 0, previousHotel);
         this.hotelListArray = this.move(this.hotelListArray, 0, this.previousHotelIndex)
       }
 
@@ -284,10 +252,6 @@ export class HotelItemWrapperComponent implements OnInit {
         this.previousHotelIndex = hotelIndex;
         this.clickedHotelIndex = hotelIndex;
       }
-      /* else{
-        let hotel = this.hotelList.find(hotel => hotel.id == hotelId);
-        this.hotelListArray.unshift(hotel)
-      } */
     }
 
   }
@@ -375,7 +339,7 @@ export class HotelItemWrapperComponent implements OnInit {
     if (hotel.offer_data.applicable) {
       return `$${Math.floor(hotel.discounted_secondary_start_price)}`
     } else {
-      return `$${Math.floor(hotel.secondary_start_price)}`      
+      return hotel.is_installment_available ? `$${Math.floor(hotel.secondary_start_price)}` : `$${Math.floor(hotel.selling.total)}`;
     }
   }
 
@@ -397,35 +361,21 @@ export class HotelItemWrapperComponent implements OnInit {
           let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
           if (this.bounds.contains(hotelPosition)) {
             this.hotelListArray.push(hotel)
-            //this.hotelDetails=[...this.hotelListArray]
           }
         }
 
         this.hotelCount = this.hotelListArray.length;
       }
     }
-    
-    // this.bounds = bounds;
-    // if (this.isMapView) {
-    //   this.hotelListArray = [];
-    //   for (let hotel of this.hotelList) {
-    //     let hotelPosition = { lat: parseFloat(hotel.geocodes.latitude), lng: parseFloat(hotel.geocodes.longitude) };
-    //     if (this.bounds.contains(hotelPosition)) {
-    //       this.hotelListArray.push(hotel)
-    //       //this.hotelDetails=[...this.hotelListArray]
-    //     }
-    //   }
-
-    //   this.hotelCount = this.hotelListArray.length;
-    // }
-
   }
   
-  showDownPayment(offerData, downPaymentOption) {
+  showDownPayment(offerData, downPaymentOption,isInstallmentTypeAvailable) {
 
     if (typeof offerData != 'undefined' && offerData.applicable) {
 
-      if (typeof offerData.down_payment_options != 'undefined' && offerData.down_payment_options[downPaymentOption].applicable) {
+      if (this.isRefferal && typeof offerData.down_payment_options != 'undefined' && offerData.down_payment_options[downPaymentOption].applicable) {
+        return true;
+      } else if(!this.isRefferal && isInstallmentTypeAvailable){
         return true;
       }
       return false;

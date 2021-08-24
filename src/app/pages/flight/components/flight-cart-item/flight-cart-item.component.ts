@@ -4,9 +4,9 @@ import { CommonFunction } from '../../../../_helpers/common-function';
 import { GenericService } from '../../../../services/generic.service';
 import { CartService } from '../../../../services/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
-//import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteCartitemConfirmationPopupComponent, MODAL_TYPE } from '../../../../components/delete-cartitem-confirmation-popup/delete-cartitem-confirmation-popup.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-flight-cart-item',
@@ -30,12 +30,26 @@ export class FlightCartItemComponent implements OnInit {
     private cartService: CartService,
     public cd: ChangeDetectorRef,
     public router: Router,
-    //private spinner: NgxSpinnerService,
     private modalService: NgbModal,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
     this.getCartList();
+
+    // Author: xavier | 2021/8/13
+    // Description: Translate cabin class for each flight route
+    if(this.cartItem.module_info != null) {
+      for(let i: number = 0; i < this.cartItem.module_info.routes.length; i++) {
+        const stops = this.cartItem.module_info.routes[i].stops;
+        for(let j: number = 0; j < stops.length; j++) {
+          const key: string = stops[j].cabin_class.toLowerCase() + "_class";
+          this.translate.
+              get(key).
+              subscribe((res: string) => stops[j].cabin_class = res);
+        }
+      }
+    }
   }
 
   getCartList() {

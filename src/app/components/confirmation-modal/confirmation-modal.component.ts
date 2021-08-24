@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../environments/environment';
 
 export enum MODAL_TYPE {

@@ -33,18 +33,7 @@ export class VerifyOtpComponent implements OnInit {
   @Input() isUserNotVerify: boolean = false;
   @Input() isSignup: boolean = false;
   apiError: string = '';
-  // config = {
-  //   allowNumbersOnly: true,
-  //   length: 6,
-  //   isPasswordInput: false,
-  //   disableAutoFocus: false,
-  //   placeholder: '',
-  //   inputStyles: {
-  //     'width': '64px',
-  //     'height': '64px'
-  //   }
-  // };
-  config: NgxOtpInputConfig = {
+ config: NgxOtpInputConfig = {
     otpLength: 6,
     autofocus: false,
     numericInputMode: true,
@@ -93,7 +82,6 @@ export class VerifyOtpComponent implements OnInit {
     this.otp = event;
     if (event.length == 6) {
       this.otpForm.controls.otp.setValue(event);
-      // this.ngOtpInputRef.setValue(event);
     }
   }
 

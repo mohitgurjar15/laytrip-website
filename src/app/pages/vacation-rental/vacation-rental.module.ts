@@ -14,7 +14,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { Ng5SliderModule } from 'ng5-slider';
 import { VacationNotFoundComponent } from './components/vacation-not-found/vacation-not-found.component';
 import { ComponentsModule } from '../../components/components.module';
-import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { VacationDetailComponent } from './components/vacation-detail/vacation-detail.component';
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -36,7 +36,6 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
     Ng5SliderModule,
     ComponentsModule,
     AgmCoreModule.forRoot({
-      // apiKey: 'AIzaSyB63siq6uISCHD-x3MkitGQogoz8n7jy7M',
       apiKey: 'AIzaSyB7Ws9zJ9ozVruSjF2N3pDVsqHF-h1QtBU',
       libraries: ['places']
     }),
@@ -45,7 +44,6 @@ import { HelpersModule } from '../../_helpers/_helpers.module';
     HomeModule,
     HelpersModule
   ],
-  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports : [
     HomeModule
   ]

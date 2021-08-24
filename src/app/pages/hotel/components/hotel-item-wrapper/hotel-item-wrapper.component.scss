@@ -3,7 +3,6 @@
 @import "../../../../../_hotel.scss";
 @import "../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 ::ng-deep .gm-style .gm-style-iw-c button {
     display: none !important;
 }
@@ -64,10 +63,8 @@ agm-map {
 // .hover-anchor-tag:hover {
 //     border: 1px solid #000 !important;
 // }
-
 .mob_line {
     display: none;
-
     @include tab-view {
         display: flex;
         justify-content: center;
@@ -75,7 +72,6 @@ agm-map {
         font-size: 12px;
         color: $text_grey_dark;
         font-weight: 500;
-
         img {
             margin-right: 3px;
             max-width: 10px;
@@ -91,38 +87,31 @@ agm-map {
     font-size: 16px;
     font-weight: 400;
     padding: 5px 0;
-
     @include tab-view {
         font-size: 14px;
         padding: 5px 10px;
     }
-
     .shorting_label {
         margin: 0;
         font-size: 16px;
         font-weight: 400;
-
         @include tab-view {
             font-size: 14px;
         }
     }
-
     .desk_line {
         @include tab-view {
             display: none;
         }
     }
-
     button {
         color: $text_light_yellow;
         border: none;
         background-color: transparent;
-
         &:hover {
             outline: none;
             box-shadow: none;
         }
-
         &:focus {
             outline: none;
             box-shadow: none;
@@ -135,71 +124,56 @@ agm-map {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-
     @include tab-view {
         display: none;
     }
 }
 
-
-
 .result_listing {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-
     @include tab-view {
         justify-content: space-between;
     }
-
     &.hotel_listings {
         @include tab-view {
             padding: 10px;
         }
-
         .search_block {
             width: 100%;
             margin-bottom: 15px;
             border: 1px solid $box-border-color;
             border-radius: 10px;
-
             @include tab-view {
                 width: 100%;
             }
-
             .listing_block {
                 width: 100%;
                 background: $background-white;
                 border-radius: 10px;
                 //padding: 15px;
                 overflow: hidden;
-
                 .listing_inner_box_wrppr {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     width: 100%;
-
                     .box_left {
                         display: flex;
                         flex: 7;
-
                         @include tab-view {
                             width: 80%;
                         }
-
                         .box_img {
                             display: flex;
                             flex: 2;
-
                             .block_main {
                                 @include tab-view {
                                     width: 100%;
                                 }
                             }
-
                         }
-
                         .box_info {
                             padding: 0 15px;
                             display: flex;
@@ -210,7 +184,6 @@ agm-map {
                             justify-content: space-between;
                         }
                     }
-
                     .box_right {
                         flex: 2;
                         display: flex;
@@ -223,50 +196,40 @@ agm-map {
                         justify-content: center;
                     }
                 }
-
                 @include tab-view {
                     height: auto;
                 }
-
                 .row {
                     align-items: center;
                 }
-
                 .block_main {
                     padding: 0 15px 0 0;
                     margin-right: -15px;
-
                     @include tab-view {
                         padding: 0;
                         border-right: 0;
                         margin: 0;
                     }
-
                     .block_top {
                         width: 100%;
                         display: flex;
                         flex-flow: column;
-
                         .block_inner {
                             display: flex;
                             align-items: center;
-
                             @include tab-view {
                                 flex-wrap: wrap;
                             }
-
                             .block_im {
                                 width: 100%;
                                 display: flex;
                                 flex-flow: column;
                                 text-align: left;
                                 height: 100%;
-
                                 @include tab-view {
                                     border-right: none;
                                     padding: 0;
                                 }
-
                                 .hotel_list_img_wrp {
                                     position: relative;
                                     // background-size: cover;
@@ -274,13 +237,11 @@ agm-map {
                                     width: 100%;
                                     height: 170px;
                                     z-index: 9;
-
                                     .carousel {
                                         &.slide {
                                             height: 100%;
                                         }
                                     }
-
                                     .slider_dots {
                                         z-index: 9999;
                                         padding: 0;
@@ -291,7 +252,6 @@ agm-map {
                                         bottom: 10px;
                                         justify-content: center;
                                         width: 100%;
-
                                         span {
                                             margin: 0 2px;
                                             width: 6px;
@@ -299,38 +259,31 @@ agm-map {
                                             border-radius: 50%;
                                             padding: 1px;
                                             background-color: rgba(255, 255, 255, 0.6);
-
                                             &::marker {
                                                 display: none;
                                                 color: transparent;
                                             }
-
                                             &.active {
                                                 background-color: $background-white;
                                             }
                                         }
                                     }
-
                                     @include tab-view {
                                         display: flex;
                                         justify-content: center;
                                     }
-
                                     img {
                                         &.blank_image_box {
                                             width: 270px;
                                             border-radius: 10px;
                                             height: 100%;
                                             min-width: 270px;
-
                                             @include tab-view {
                                                 width: 100%;
                                                 min-width: 100%;
                                             }
                                         }
                                     }
-
-
                                     img {
                                         max-width: 100%;
                                         width: 100%;
@@ -343,7 +296,6 @@ agm-map {
                                         min-height: 170px;
                                         min-width: 252px;
                                         max-height: 170px;
-
                                         @include tab-view {
                                             // min-width: 127px;
                                             // max-height: 100%;
@@ -352,14 +304,12 @@ agm-map {
                                             min-height: 120px;
                                         }
                                     }
-
                                     .fav_sections {
                                         position: absolute;
                                         top: 10px;
                                         left: 10px;
                                         height: 20px;
                                         width: 20px;
-
                                         a {
                                             background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
                                             background-repeat: no-repeat;
@@ -368,24 +318,20 @@ agm-map {
                                     }
                                 }
                             }
-
                             .block_detail_top {
                                 display: flex;
                                 flex-wrap: wrap;
                                 justify-content: space-between;
                                 align-items: center;
                                 padding: 0;
-
                                 @include tab-view {
                                     padding: 0;
                                     margin: 15px 0 0;
                                 }
-
                                 .detail_info {
                                     font-size: 12px;
                                     color: $text-grey;
                                     width: 100%;
-
                                     a {
                                         font-size: 16px;
                                         color: $text-black;
@@ -397,11 +343,9 @@ agm-map {
                                         // text-overflow: ellipsis;
                                         // display: inline-block;
                                         width: 100%;
-
                                         .wrapper_names {
                                             display: flex;
                                             width: 100%;
-
                                             .hotel_names {
                                                 white-space: nowrap;
                                                 overflow: hidden;
@@ -409,7 +353,6 @@ agm-map {
                                                 display: inline-block;
                                                 width: 100%;
                                             }
-
                                             .off_label {
                                                 display: flex;
                                                 background-color: #1CD304;
@@ -425,15 +368,12 @@ agm-map {
                                                 margin-left: 5px;
                                             }
                                         }
-
                                         @include tab-view {
                                             font-size: 16px;
                                         }
                                     }
-
                                     span {
                                         margin: 0;
-
                                         &.adress_span {
                                             // max-width: 380px;
                                             // white-space: nowrap;
@@ -443,16 +383,13 @@ agm-map {
                                             width: 100%;
                                         }
                                     }
-
                                     .review_section_wrap {
                                         display: flex;
                                         justify-content: space-between;
                                         align-items: center;
                                         margin: 5px 0 10px;
-
                                         .left_bar {
                                             display: flex;
-
                                             .rating_num {
                                                 span {
                                                     background-color: #1445f5;
@@ -466,18 +403,14 @@ agm-map {
                                                     border-radius: 5px;
                                                 }
                                             }
-
                                             .stars_text {
                                                 //margin-left: 14px;
-
                                                 .stars_rating {
                                                     margin-top: 0px;
-
                                                     img {
                                                         margin-right: 3px;
                                                     }
                                                 }
-
                                                 .review_num_text {
                                                     a {
                                                         font-size: 12px;
@@ -486,18 +419,15 @@ agm-map {
                                                 }
                                             }
                                         }
-
                                         .ammin_listing {
                                             display: flex;
                                             align-items: center;
-
                                             .amminities_list {
                                                 font-size: 12px;
                                                 text-transform: uppercase;
                                                 color: #5a5a5a;
                                                 font-weight: 500;
                                                 margin-left: 20px;
-
                                                 img {
                                                     margin-right: 8px;
                                                 }
@@ -506,14 +436,12 @@ agm-map {
                                     }
                                 }
                             }
-
                             &:last-child {
                                 //margin: 20px 0 15px;
                                 margin: 0;
                             }
                         }
                     }
-
                     .block_detail_btm {
                         display: flex;
                         align-items: center;
@@ -521,7 +449,6 @@ agm-map {
                         //border-top: 1px solid $box-border-color;
                         padding-top: 10px;
                         margin-bottom: 10px;
-
                         @include tab-view {
                             flex-wrap: wrap;
                             justify-content: center;
@@ -529,7 +456,6 @@ agm-map {
                             //border-bottom: 1px solid $box-border-color;
                             margin: 0 0 0px;
                         }
-
                         .show_detail {
                             // a {
                             //     font-size: 14px;
@@ -540,11 +466,9 @@ agm-map {
                             //     padding-right: 15px;
                             //     display: flex;
                             //     align-items: center;
-
                             //     img {
                             //         margin-right: 5px;
                             //     }
-
                             //     &:after {
                             //         content: "";
                             //         //position: absolute;
@@ -558,11 +482,9 @@ agm-map {
                             //         margin-left: 5px;
                             //     } 
                             // }
-
                             // &.open_detail {
                             //     a {
                             //         color: $mid_gray_bg;
-
                             //         &:after {
                             //             content: "";
                             //             //position: absolute;
@@ -586,10 +508,8 @@ agm-map {
                                 padding-right: 15px;
                                 display: flex;
                                 align-items: center;
-
                                 &[aria-expanded="true"] {
                                     color: $mid_gray_bg;
-
                                     &:after {
                                         content: "";
                                         position: absolute;
@@ -604,10 +524,8 @@ agm-map {
                                         border: none;
                                     }
                                 }
-
                                 &[aria-expanded="false"] {
                                     color: $active-tab-text;
-
                                     &:after {
                                         position: absolute;
                                         padding: 5px 9px;
@@ -624,11 +542,9 @@ agm-map {
                                 }
                             }
                         }
-
                         .weekly_price_wrps {
                             font-size: 12px;
                             color: $text-grey;
-
                             span {
                                 color: $pink;
                                 font-size: 20px;
@@ -636,37 +552,31 @@ agm-map {
                         }
                     }
                 }
-
                 .block_price {
                     width: 100%;
                     text-align: center;
                     padding: 0 15px;
                     position: relative;
                     z-index: 5;
-
                     @include tab-view {
                         border-left: none;
                         padding: 15px 15px 0;
                     }
-
                     p {
                         font-size: 14px;
                         color: $text-black;
                         margin: 0;
                     }
-
                     h6 {
                         font-size: 24px;
                         font-weight: 600;
                         color: $text_blue;
                         margin: 15px 0;
                     }
-
                     .show_detail {
                         width: auto;
                         display: flex;
                         justify-content: center;
-
                         a {
                             display: flex;
                             align-items: center;
@@ -674,11 +584,9 @@ agm-map {
                             font-weight: 500;
                             color: $primary-color;
                             position: relative;
-
                             img {
                                 margin-right: 5px;
                             }
-
                             &::after {
                                 content: "";
                                 position: absolute;
@@ -693,17 +601,13 @@ agm-map {
                             }
                         }
                     }
-
                     .block_inn_pr {
                         width: 100%;
                         display: flex;
                         justify-content: space-around;
                         align-items: center;
-
                         .block {
                             margin: 0 0 15px;
-
-
                             p {
                                 width: 100%;
                                 margin: 0;
@@ -713,19 +617,16 @@ agm-map {
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-
                                 &:first-child {
                                     margin: 0 0 5px;
                                     color: $text-grey;
                                 }
-
                                 span {
                                     font-size: 24px;
                                     color: $pink;
                                     font-weight: 600;
                                 }
                             }
-
                             &:last-child {
                                 p {
                                     span {
@@ -738,8 +639,6 @@ agm-map {
                             }
                         }
                     }
-
-
                     .book_btn {
                         display: inline-block;
                         line-height: 38px;
@@ -754,7 +653,6 @@ agm-map {
                         overflow: hidden;
                         margin-bottom: 10px;
                         border: 1px solid $primary-color;
-
                         // &:before {
                         //     content: "";
                         //     position: absolute;
@@ -767,17 +665,14 @@ agm-map {
                         //     transition: 0.8s;
                         //     border-radius: 25px;
                         // }
-
                         // &:hover {
                         //     color: $primary-color;
-
                         //     &:before {
                         //         height: 37px;
                         //         width: 100%;
                         //     }
                         // }
                     }
-
                     .partial_payment_info {
                         display: block;
                         margin: 10px 0 0;
@@ -785,7 +680,6 @@ agm-map {
                         font-weight: 500;
                         color: $primary-color;
                     }
-
                     &.block_pr {
                         // &:after {
                         //     width: 66%;
@@ -799,7 +693,6 @@ agm-map {
                         //     border-bottom: 290px solid transparent;
                         //     border-left: 52px solid $background-white;
                         //     z-index: -1;
-
                         //     @include tab-view {
                         //         top: 0;
                         //     }
@@ -807,45 +700,36 @@ agm-map {
                     }
                 }
             }
-
             .detail_info_show {
                 width: 100%;
                 background: $background-white;
                 padding: 20px 15px;
                 border-radius: 10px;
-
                 @include tab-view {
                     padding: 10px;
                 }
-
                 .card-body {
                     border: 1px solid $box-border-color;
                     border-radius: 10px;
                     padding: 15px;
                     //margin-top: 15px;
-
                     @include tab-view {
                         //border: none;
                         margin: 0;
                         padding: 10px;
                     }
-
                     .io_ru_wrps {
                         display: flex;
                         justify-content: space-between;
-
                         @include tab-view {
                             flex-direction: column;
                         }
-
                         .installment_wprs {
                             flex: 2;
                             padding-right: 50px;
-
                             @include tab-view {
                                 padding-right: 0px;
                             }
-
                             .type_lines {
                                 border-bottom: 1px solid $box-border-color;
                                 padding-bottom: 15px;
@@ -853,40 +737,32 @@ agm-map {
                                 display: flex;
                                 justify-content: flex-start;
                                 margin-bottom: 15px;
-
-
                                 @include tab-view {
                                     flex-direction: column;
                                     padding-bottom: 6px;
                                     margin-bottom: 6px;
                                     font-size: 10px;
                                 }
-
                                 &:nth-child(4) {
                                     border: none;
                                     margin: 0;
                                     padding: 0;
                                 }
-
                                 .titles {
                                     font-weight: 600;
                                     color: $text-black;
                                     margin-right: 0px;
                                     flex: 2;
                                 }
-
                                 .texts {
                                     font-weight: 500;
                                     color: $mid_gray_bg;
                                     flex: 5;
-
                                     @include tab-view {
                                         font-weight: 400;
                                     }
                                 }
-
                             }
-
                             .notifi_text {
                                 font-weight: 400;
                                 color: $active-tab-text;
@@ -894,20 +770,16 @@ agm-map {
                                 margin-top: 15px;
                                 display: flex;
                                 justify-content: flex-start;
-
                                 @include tab-view {
                                     margin-top: 10px;
                                 }
-
                                 &.desk_notifi {
                                     @include tab-view {
                                         display: none;
                                     }
                                 }
-
                                 &.mobile_notifi {
                                     display: none;
-
                                     @include tab-view {
                                         display: block;
                                         margin-bottom: 5px;
@@ -915,36 +787,30 @@ agm-map {
                                 }
                             }
                         }
-
                         .rules_wrps {
                             flex: 1;
                             max-width: 188px;
                             display: flex;
                             flex-direction: column;
-
                             @include tab-view {
                                 padding-top: 5px;
                                 max-width: 100%;
                                 flex-direction: row;
                             }
-
                             .heads {
                                 font-size: 14px;
                                 font-weight: 600;
                                 color: $text-black;
-
                                 @include tab-view {
                                     min-width: 60px;
                                     flex: 1;
                                     font-size: 10px;
                                 }
-
                                 img {
                                     max-width: 15px;
                                     margin-right: 5px;
                                 }
                             }
-
                             .texts_rules {
                                 font-size: 10px;
                                 font-weight: 400;
@@ -953,34 +819,28 @@ agm-map {
                                 line-height: 14px;
                                 overflow-y: auto;
                                 max-height: 150px;
-
                                 a {
                                     text-decoration: underline;
                                 }
-
                                 @include tab-view {
                                     margin-top: 0;
                                 }
                             }
                         }
                     }
-
                     .full_desk_not {
                         @include tab-view {
                             display: none;
                         }
                     }
-
                     // .block_flight_info {
                     //     @include tab-view {
                     //         padding: 5px;
                     //     }
-
                     //     .tab_detail {
                     //         display: flex;
                     //         flex-flow: column;
                     //         position: relative;
-
                     //         .triangle_right {
                     //             position: absolute;
                     //             position: absolute;
@@ -988,7 +848,6 @@ agm-map {
                     //             right: -1px;
                     //             transform: translateY(-50%);
                     //             z-index: 1;
-
                     //             &:after {
                     //                 width: 0;
                     //                 height: 0;
@@ -1001,7 +860,6 @@ agm-map {
                     //                 transform: translateY(-50%);
                     //                 content: "";
                     //             }
-
                     //             &:before {
                     //                 width: 0;
                     //                 height: 0;
@@ -1016,7 +874,6 @@ agm-map {
                     //                 z-index: 2;
                     //             }
                     //         }
-
                     //         .triangle_left {
                     //             position: absolute;
                     //             position: absolute;
@@ -1024,7 +881,6 @@ agm-map {
                     //             left: -1px;
                     //             transform: translateY(-50%);
                     //             z-index: 1;
-
                     //             &:after {
                     //                 width: 0;
                     //                 height: 0;
@@ -1037,7 +893,6 @@ agm-map {
                     //                 transform: translateY(-50%);
                     //                 content: "";
                     //             }
-
                     //             &:before {
                     //                 width: 0;
                     //                 height: 0;
@@ -1052,7 +907,6 @@ agm-map {
                     //                 z-index: 2;
                     //             }
                     //         }
-
                     //         &.flight_info_cnt {
                     //             padding: 20px 0;
                     //             max-height: 445px;
@@ -1061,23 +915,19 @@ agm-map {
                     //             border: 1px solid $box-border-color;
                     //             border-radius: 10px;
                     //             margin: 0 0 10px;
-
                     //             @include tab-view {
                     //                 padding: 15px;
                     //             }
-
                     //             .detail_top {
                     //                 display: flex;
                     //                 padding: 0 20px;
                     //                 justify-content: space-between;
                     //                 position: relative;
-
                     //                 @include tab-view {
                     //                     display: flex;
                     //                     justify-content: center;
                     //                     flex-wrap: wrap;
                     //                 }
-
                     //                 .flight_going {
                     //                     font-size: 10px;
                     //                     font-weight: 500;
@@ -1085,31 +935,25 @@ agm-map {
                     //                     position: absolute;
                     //                     top: 0;
                     //                     right: 20px;
-
                     //                     @include tab-view {
                     //                         position: absolute;
                     //                         top: 10px;
                     //                         right: 10px;
                     //                     }
                     //                 }
-
                     //                 .detail_inn_left {
                     //                     display: flex;
                     //                     padding: 0;
                     //                     width: 100%;
-
                     //                     @include tab-view {
                     //                         flex-wrap: wrap;
                     //                     }
-
                     //                     .detail_left {
                     //                         width: 10%;
-
                     //                         @include tab-view {
                     //                             width: 100%;
                     //                             text-align: center;
                     //                         }
-
                     //                         img {
                     //                             object-fit: cover;
                     //                             height: auto;
@@ -1119,28 +963,24 @@ agm-map {
                     //                             max-width: 40px;
                     //                             max-height: 40px;
                     //                         }
-
                     //                         p {
                     //                             font-size: 12px;
                     //                             font-weight: 400;
                     //                             color: $text-black;
                     //                             margin: 0 0 2px;
                     //                         }
-
                     //                         span {
                     //                             font-size: 12px;
                     //                             font-weight: 300;
                     //                             color: $text-grey;
                     //                         }
                     //                     }
-
                     //                     .detail_right {
                     //                         padding: 0 35px;
                     //                         display: flex;
                     //                         justify-content: flex-start;
                     //                         align-items: center;
                     //                         width: 90%;
-
                     //                         @include tab-view {
                     //                             width: 100%;
                     //                             padding: 0;
@@ -1149,83 +989,68 @@ agm-map {
                     //                             margin: 15px 0 0;
                     //                             flex-flow: column;
                     //                         }
-
                     //                         .flight_info_detail {
                     //                             text-align: right;
                     //                             width: 40%;
-
                     //                             @include tab-view {
                     //                                 text-align: center;
                     //                                 width: 100%;
                     //                             }
-
                     //                             h4 {
                     //                                 font-size: 20px;
                     //                                 font-weight: 600;
                     //                                 color: $text-black;
                     //                                 margin: 0 0 5px;
-
                     //                                 span {
                     //                                     font-weight: 400;
                     //                                     margin: 0;
                     //                                 }
                     //                             }
-
                     //                             span {
                     //                                 font-size: 10px;
                     //                                 font-weight: 500;
                     //                                 color: $text-black;
                     //                                 margin: 0 0 5px;
                     //                             }
-
                     //                             p {
                     //                                 font-size: 10px;
                     //                                 font-weight: 300;
                     //                                 color: $text-grey;
                     //                                 margin: 0;
-
                     //                                 span {
                     //                                     display: block;
                     //                                     font-weight: 300;
                     //                                     color: $text-grey;
                     //                                 }
                     //                             }
-
                     //                             &:last-child {
                     //                                 text-align: left;
-
                     //                                 @include tab-view {
                     //                                     text-align: center;
                     //                                 }
                     //                             }
                     //                         }
-
                     //                         .flight_duration {
                     //                             width: 20%;
                     //                             padding: 0 20px;
                     //                             text-align: center;
-
                     //                             @include tab-view {
                     //                                 padding: 15px 10px;
                     //                                 margin: 0 auto;
                     //                                 width: auto;
                     //                             }
-
                     //                             p {
                     //                                 font-size: 12px;
                     //                                 color: $text-grey;
                     //                                 margin: 0;
                     //                             }
-
                     //                             .border-dot {
                     //                                 width: 100%;
                     //                                 position: relative;
-
                     //                                 img {
                     //                                     width: 100%;
                     //                                 }
                     //                             }
-
                     //                             span {
                     //                                 font-size: 12px;
                     //                                 color: $text-grey;
@@ -1235,13 +1060,11 @@ agm-map {
                     //                     }
                     //                 }
                     //             }
-
                     //             .flight_layover {
                     //                 width: 100%;
                     //                 text-align: center;
                     //                 margin: 25px 0;
                     //                 position: relative;
-
                     //                 .layover_info {
                     //                     width: auto;
                     //                     display: inline-block;
@@ -1255,18 +1078,15 @@ agm-map {
                     //                     color: $text-grey;
                     //                     position: relative;
                     //                     z-index: 2;
-
                     //                     span {
                     //                         color: $text-black;
                     //                     }
-
                     //                     @media (max-width: 767px) {
                     //                         padding: 5px 10px;
                     //                         font-size: 12px;
                     //                         font-weight: 400;
                     //                     }
                     //                 }
-
                     //                 &:before {
                     //                     width: 100%;
                     //                     height: 1px;
@@ -1278,13 +1098,11 @@ agm-map {
                     //                     transform: translateY(-50%);
                     //                 }
                     //             }
-
                     //             &:last-child {
                     //                 margin: 5px 0 0;
                     //                 position: relative;
                     //             }
                     //         }
-
                     //         &.fare_detail_cnt {
                     //             padding: 30px 30px 20px;
                     //             border: 1px solid $box-border-color;
@@ -1292,11 +1110,9 @@ agm-map {
                     //             max-height: 445px;
                     //             overflow-y: auto;
                     //             overflow-x: hidden;
-
                     //             @include tab-view {
                     //                 padding: 15px;
                     //             }
-
                     //             ul {
                     //                 width: 100%;
                     //                 margin: 0 0 30px;
@@ -1304,7 +1120,6 @@ agm-map {
                     //                 list-style: none;
                     //                 border: 1px solid $box-border-color;
                     //                 border-radius: 3px;
-
                     //                 li {
                     //                     width: 100%;
                     //                     display: flex;
@@ -1314,53 +1129,43 @@ agm-map {
                     //                     font-size: 14px;
                     //                     font-weight: 300;
                     //                     color: $text-grey;
-
                     //                     &.down_payment {
                     //                         color: $text-blue;
                     //                         font-weight: 500;
                     //                     }
-
                     //                     .detail {
                     //                         color: $text-black;
                     //                     }
-
                     //                     span {
                     //                         color: $text-black;
                     //                         font-weight: 500;
-
                     //                         &.down_value {
                     //                             color: $text-blue;
                     //                         }
                     //                     }
-
                     //                     &:last-child {
                     //                         border-bottom: none;
                     //                         color: $text-black;
                     //                     }
-
                     //                     @media (max-width: 767px) {
                     //                         padding: 10px;
                     //                         flex-wrap: wrap;
-
                     //                         span {
                     //                             width: 100%;
                     //                         }
                     //                     }
                     //                 }
                     //             }
-
                     //             p {
                     //                 font-size: 14px;
                     //                 color: $text-grey;
                     //                 font-weight: 300;
                     //                 margin: 0;
-
                     //                 span {
                     //                     font-weight: 400;
                     //                 }
                     //             }
                     //         }
-
                     //         &.baggage_rules_cnt {
                     //             padding: 20px;
                     //             flex-flow: column;
@@ -1369,37 +1174,30 @@ agm-map {
                     //             max-height: 445px;
                     //             overflow-y: scroll;
                     //             overflow-x: hidden;
-
                     //             @include tab-view {
                     //                 padding: 15px;
                     //                 flex-flow: column;
                     //             }
-
                     //             .block_baggage {
                     //                 width: 100%;
                     //                 flex-flow: row;
                     //                 display: flex;
                     //                 margin: 0 0 15px 0;
-
                     //                 @include tab-view {
                     //                     flex-wrap: wrap;
                     //                 }
-
                     //                 .detail_left {
                     //                     width: 10%;
-
                     //                     @include tab-view {
                     //                         width: 100%;
                     //                         text-align: center;
                     //                         margin: 0 0 10px;
                     //                     }
-
                     //                     .flight_ward {
                     //                         font-size: 10px;
                     //                         font-weight: 500;
                     //                         color: $text-blue;
                     //                     }
-
                     //                     img {
                     //                         object-fit: cover;
                     //                         height: auto;
@@ -1409,34 +1207,28 @@ agm-map {
                     //                         max-width: 40px;
                     //                         max-height: 40px;
                     //                     }
-
                     //                     p {
                     //                         font-size: 12px;
                     //                         font-weight: 300;
                     //                         color: $text-black;
                     //                         margin: 0 0 2px;
                     //                     }
-
                     //                     span {
                     //                         font-size: 12px;
                     //                         font-weight: 300;
                     //                         color: $text-grey;
                     //                     }
                     //                 }
-
                     //                 .detail_right {
                     //                     width: 90%;
                     //                     padding: 0 0 0 30px;
-
                     //                     @include tab-view {
                     //                         width: 100%;
                     //                         padding: 0;
                     //                     }
-
                     //                     table {
                     //                         border: 1px solid $box-border-color;
                     //                         border-radius: 3px;
-
                     //                         thead {
                     //                             tr {
                     //                                 th {
@@ -1446,18 +1238,15 @@ agm-map {
                     //                                     color: $text-grey;
                     //                                     background: $bg-light-grey;
                     //                                     border: 1px solid $box-border-color;
-
                     //                                     &:first-child {
                     //                                         width: 100px;
                     //                                     }
-
                     //                                     &:last-child {
                     //                                         width: 200px;
                     //                                     }
                     //                                 }
                     //                             }
                     //                         }
-
                     //                         tbody {
                     //                             tr {
                     //                                 td {
@@ -1470,24 +1259,18 @@ agm-map {
                     //                                 }
                     //                             }
                     //                         }
-
                     //                         @media only screen and (max-width: 800px) {
                     //                             display: block;
-
                     //                             thead {
                     //                                 display: block;
-
                     //                                 tr {
                     //                                     display: none;
                     //                                 }
                     //                             }
-
                     //                             tbody {
                     //                                 display: block;
-
                     //                                 tr {
                     //                                     display: block;
-
                     //                                     td {
                     //                                         display: block;
                     //                                         border: none;
@@ -1496,7 +1279,6 @@ agm-map {
                     //                                         padding-top: 35px;
                     //                                         white-space: normal;
                     //                                         text-align: left;
-
                     //                                         &:before {
                     //                                             position: absolute;
                     //                                             top: 10px;
@@ -1516,7 +1298,6 @@ agm-map {
                     //                             }
                     //                         }
                     //                     }
-
                     //                     p {
                     //                         font-size: 14px;
                     //                         font-weight: 300;
@@ -1524,13 +1305,11 @@ agm-map {
                     //                         margin: 10px 0 0;
                     //                     }
                     //                 }
-
                     //                 &.last {
                     //                     margin: 0;
                     //                 }
                     //             }
                     //         }
-
                     //         &.cancellation_rules_cnt {
                     //             padding: 20px;
                     //             flex-flow: column;
@@ -1539,26 +1318,20 @@ agm-map {
                     //             max-height: 445px;
                     //             overflow-y: scroll;
                     //             overflow-x: hidden;
-
                     //             @include tab-view {
                     //                 padding: 15px;
                     //             }
-
                     //             .rules_cnt_top {
                     //                 display: flex;
-
                     //                 @include tab-view {
                     //                     flex-wrap: wrap;
                     //                 }
-
                     //                 .detail_left {
                     //                     width: 10%;
-
                     //                     @include tab-view {
                     //                         width: 100%;
                     //                         margin: 0 0 10px;
                     //                     }
-
                     //                     img {
                     //                         object-fit: cover;
                     //                         height: auto;
@@ -1568,30 +1341,25 @@ agm-map {
                     //                         max-width: 40px;
                     //                         max-height: 40px;
                     //                     }
-
                     //                     p {
                     //                         font-size: 12px;
                     //                         font-weight: 300;
                     //                         color: $text-black;
                     //                         margin: 0 0 2px;
                     //                     }
-
                     //                     span {
                     //                         font-size: 12px;
                     //                         font-weight: 300;
                     //                         color: $text-grey;
                     //                     }
                     //                 }
-
                     //                 .detail_right {
                     //                     width: 90%;
                     //                     padding: 0 0 0 20px;
-
                     //                     @include tab-view {
                     //                         width: 100%;
                     //                         padding: 0;
                     //                     }
-
                     //                     ul {
                     //                         width: 100%;
                     //                         display: flex;
@@ -1603,41 +1371,34 @@ agm-map {
                     //                         border-radius: 3px;
                     //                         justify-content: space-between;
                     //                         flex-wrap: wrap;
-
                     //                         li {
                     //                             width: 100%;
                     //                             display: flex;
                     //                             justify-content: space-between;
                     //                             border-bottom: 1px solid $box-border-color;
-
                     //                             @include tab-view {
                     //                                 flex-flow: column;
                     //                             }
-
                     //                             &:last-child {
                     //                                 border-bottom: none;
                     //                             }
-
                     //                             div {
                     //                                 padding: 10px 15px;
                     //                                 font-weight: 400;
                     //                                 color: $text-black;
                     //                                 border-right: 1px solid $box-border-color;
                     //                                 background: $bg-light-grey;
-
                     //                                 &:first-child {
                     //                                     width: 200px;
                     //                                     font-size: 14px;
                     //                                     font-weight: 300;
                     //                                     color: $text-grey;
-
                     //                                     @include tab-view {
                     //                                         border-right: none;
                     //                                         border-bottom: 1px solid $box-border-color;
                     //                                         width: 100%;
                     //                                     }
                     //                                 }
-
                     //                                 &:last-child {
                     //                                     border-right: none;
                     //                                     background: transparent;
@@ -1647,11 +1408,9 @@ agm-map {
                     //                     }
                     //                 }
                     //             }
-
                     //             .rules_cnt_btm {
                     //                 width: 100%;
                     //                 margin: 30px 0 0;
-
                     //                 span {
                     //                     font-size: 14px;
                     //                     font-weight: 400;
@@ -1659,13 +1418,11 @@ agm-map {
                     //                     margin: 0 0 10px;
                     //                     display: block;
                     //                 }
-
                     //                 ul {
                     //                     width: 100%;
                     //                     margin: 0;
                     //                     padding: 0;
                     //                     list-style-position: inside;
-
                     //                     li {
                     //                         margin-bottom: 5px;
                     //                         font-size: 14px;
@@ -1676,20 +1433,16 @@ agm-map {
                     //             }
                     //         }
                     //     }
-
                     //     .block_fllight_name {
                     //         width: 100%;
                     //         font-size: 16px;
                     //         font-weight: 500;
                     //         color: $text-black;
-
                     //         @include tab-view {
                     //             font-size: 14px;
                     //         }
-
                     //         span {
                     //             color: $primary-color;
-
                     //             @include tab-view {
                     //                 display: block;
                     //             }
@@ -1699,10 +1452,8 @@ agm-map {
                 }
             }
         }
-
         .mobile_box {
             display: none;
-
             @include tab-view {
                 display: flex;
                 justify-content: space-between;
@@ -1712,7 +1463,6 @@ agm-map {
                 //min-height: 150px;
                 min-height: 120px;
             }
-
             .hotel_list_img_wrp {
                 display: flex;
                 min-width: 127px;
@@ -1720,13 +1470,11 @@ agm-map {
                 flex: 1;
                 z-index: 9;
                 position: relative;
-
                 .carousel {
                     &.slide {
                         height: 100%;
                     }
                 }
-
                 .slider_dots {
                     z-index: 9999;
                     padding: 0;
@@ -1737,7 +1485,6 @@ agm-map {
                     bottom: 10px;
                     justify-content: center;
                     width: 100%;
-
                     span {
                         margin: 0 2px;
                         width: 6px;
@@ -1745,32 +1492,27 @@ agm-map {
                         border-radius: 50%;
                         padding: 1px;
                         background-color: rgba(255, 255, 255, 0.6);
-
                         &::marker {
                             display: none;
                             color: transparent;
                         }
-
                         &.active {
                             background-color: $background-white;
                         }
                     }
                 }
-
                 img {
                     &.blank_image_box {
                         width: 270px;
                         border-radius: 10px;
                         height: 100%;
                         min-width: 270px;
-
                         @include tab-view {
                             width: 100%;
                             min-width: 100%;
                         }
                     }
                 }
-
                 img {
                     max-width: 100%;
                     width: 100%;
@@ -1783,7 +1525,6 @@ agm-map {
                     min-height: 170px;
                     min-width: 252px;
                     max-height: 170px;
-
                     @include tab-view {
                         min-width: 127px;
                         //max-height: 100%;
@@ -1792,19 +1533,16 @@ agm-map {
                     }
                 }
             }
-
             .middle_part {
                 display: flex;
                 flex-direction: column;
                 flex: 2;
                 justify-content: space-between;
                 width: 100%;
-
                 .detail_info {
                     padding: 10px 5px 5px;
                     word-break: break-word;
                     line-height: 14px;
-
                     a {
                         font-size: 12px;
                         display: -moz-box;
@@ -1822,14 +1560,11 @@ agm-map {
                         /* As specified */
                         overflow: hidden;
                         text-overflow: ellipsis;
-
                         color: $text-black;
                         font-weight: 600;
-
                         .wrapper_names {
                             display: flex;
                             width: 100%;
-
                             .hotel_names {
                                 white-space: nowrap;
                                 overflow: hidden;
@@ -1837,7 +1572,6 @@ agm-map {
                                 display: inline-block;
                                 width: 100%;
                             }
-
                             .off_label {
                                 display: flex;
                                 background-color: #1CD304;
@@ -1854,7 +1588,6 @@ agm-map {
                             }
                         }
                     }
-
                     .adress_span {
                         font-size: 10px;
                         line-height: 13px;
@@ -1875,16 +1608,13 @@ agm-map {
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
-
                     .review_section_wrap {
                         img {
                             width: 12px;
                         }
                     }
                 }
-
                 .show_detail {
-
                     .hotel_anchor {
                         color: $active-tab-text;
                         font-size: 14px;
@@ -1894,15 +1624,12 @@ agm-map {
                         padding-right: 15px;
                         display: flex;
                         align-items: center;
-
                         @include tab-view {
                             font-size: 11px;
                             margin: 0 auto 10px;
                         }
-
                         &[aria-expanded="true"] {
                             color: $mid_gray_bg;
-
                             &:after {
                                 content: "";
                                 // position: absolute;
@@ -1917,10 +1644,8 @@ agm-map {
                                 border: none;
                             }
                         }
-
                         &[aria-expanded="false"] {
                             color: $active-tab-text;
-
                             &:after {
                                 // position: absolute;
                                 padding: 5px 9px;
@@ -1938,16 +1663,13 @@ agm-map {
                     }
                 }
             }
-
             .thrd_part {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 flex: 1;
-
                 .block_price {
                     padding: 0 5px;
-
                     .block_inn_pr {
                         .block {
                             &:last-child {
@@ -1957,25 +1679,21 @@ agm-map {
                                     }
                                 }
                             }
-
                             p {
                                 flex-direction: column;
                                 font-size: 7px;
-
                                 &:first-child {
                                     margin: 0;
                                 }
                             }
                         }
                     }
-
                     .book_btn {
                         line-height: 30px;
                         padding: 0px 21px;
                         font-size: 12px;
                         margin-bottom: 0;
                     }
-
                     p {
                         margin: 0;
                         color: $text-grey;
@@ -1985,22 +1703,18 @@ agm-map {
             }
         }
     }
-
     &.hotel_map_listings {
         @include tab-view {
             padding: 10px;
         }
-
         .show-map {
             margin-bottom: 20px;
         }
-
         .search_block {
             width: 100%;
             margin-bottom: 15px;
             border: 1px solid $box-border-color;
             border-radius: 10px;
-
             // &:first-child{
             //     margin-top: 20px;
             // }
@@ -2008,36 +1722,29 @@ agm-map {
                 //width: 49%;
                 width: 100%;
             }
-
             // @media (max-width: 575px) {
             //     width: 100%;
             // }
-
             .listing_block {
                 width: 100%;
                 background: $background-white;
                 border-radius: 10px;
                 //padding: 15px;
                 overflow: hidden;
-
                 .listing_inner_box_wrppr {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     width: 100%;
-
                     .box_left {
                         display: flex;
                         flex: 7;
-
                         .block_main {
                             width: 100%;
-
                             .box_img {
                                 display: flex;
                                 flex: 2;
                             }
-
                             .box_info {
                                 padding: 0 15px;
                                 display: flex;
@@ -2046,14 +1753,12 @@ agm-map {
                                 height: 100%;
                                 min-height: 170px;
                                 justify-content: space-between;
-
                                 @include mini-screen {
                                     max-width: 290px;
                                 }
                             }
                         }
                     }
-
                     .box_right {
                         flex: 2;
                         display: flex;
@@ -2065,53 +1770,41 @@ agm-map {
                         min-height: 170px;
                         justify-content: center;
                     }
-
-
                 }
-
                 @include tab-view {
                     height: auto;
                 }
-
                 .row {
                     align-items: center;
                 }
-
                 .block_main {
                     padding: 0 15px 0 0;
                     margin-right: -15px;
-
                     @include tab-view {
                         padding: 0;
                         border-right: 0;
                         margin: 0;
                     }
-
                     .block_top {
                         width: 100%;
                         display: flex;
                         flex-flow: column;
-
                         .block_inner {
                             display: flex;
                             align-items: center;
-
                             @include tab-view {
                                 flex-wrap: wrap;
                             }
-
                             .block_im {
                                 width: 100%;
                                 display: flex;
                                 flex-flow: column;
                                 text-align: left;
                                 height: 100%;
-
                                 @include tab-view {
                                     border-right: none;
                                     padding: 0;
                                 }
-
                                 .hotel_list_img_wrp {
                                     position: relative;
                                     // background-size: cover;
@@ -2119,13 +1812,11 @@ agm-map {
                                     width: 100%;
                                     height: 170px;
                                     z-index: 9;
-
                                     .carousel {
                                         &.slide {
                                             height: 100%;
                                         }
                                     }
-
                                     .slider_dots {
                                         z-index: 9999;
                                         padding: 0;
@@ -2136,7 +1827,6 @@ agm-map {
                                         bottom: 10px;
                                         justify-content: center;
                                         width: 100%;
-
                                         span {
                                             margin: 0 2px;
                                             width: 6px;
@@ -2144,37 +1834,31 @@ agm-map {
                                             border-radius: 50%;
                                             padding: 1px;
                                             background-color: rgba(255, 255, 255, 0.6);
-
                                             &::marker {
                                                 display: none;
                                                 color: transparent;
                                             }
-
                                             &.active {
                                                 background-color: $background-white;
                                             }
                                         }
                                     }
-
                                     @include tab-view {
                                         display: flex;
                                         justify-content: center;
                                     }
-
                                     img {
                                         &.blank_image_box {
                                             width: 270px;
                                             border-radius: 10px;
                                             height: 100%;
                                             min-width: 270px;
-
                                             @include tab-view {
                                                 width: 100%;
                                                 min-width: 100%;
                                             }
                                         }
                                     }
-
                                     img {
                                         max-width: 100%;
                                         width: 100%;
@@ -2187,7 +1871,6 @@ agm-map {
                                         min-height: 170px;
                                         min-width: 252px;
                                         max-height: 170px;
-
                                         @include tab-view {
                                             // min-width: 127px;
                                             // max-height: 100%;
@@ -2196,14 +1879,12 @@ agm-map {
                                             min-height: 120px;
                                         }
                                     }
-
                                     .fav_sections {
                                         position: absolute;
                                         top: 10px;
                                         left: 10px;
                                         height: 20px;
                                         width: 20px;
-
                                         a {
                                             background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/hotels/heart_blank.svg");
                                             background-repeat: no-repeat;
@@ -2212,24 +1893,20 @@ agm-map {
                                     }
                                 }
                             }
-
                             .block_detail_top {
                                 display: flex;
                                 flex-wrap: wrap;
                                 justify-content: space-between;
                                 align-items: center;
                                 padding: 0;
-
                                 @include tab-view {
                                     padding: 0;
                                     margin: 15px 0 0;
                                 }
-
                                 .detail_info {
                                     font-size: 12px;
                                     color: $text-grey;
                                     width: 100%;
-
                                     a {
                                         font-size: 16px;
                                         color: $text-black;
@@ -2242,13 +1919,11 @@ agm-map {
                                         // display: inline-block;
                                         display: flex;
                                         width: 100%;
-
                                         .wrapper_names {
                                             display: flex;
                                             width: 100%;
                                             justify-content: flex-start;
                                             align-items: center;
-
                                             .hotel_names {
                                                 white-space: nowrap;
                                                 overflow: hidden;
@@ -2256,7 +1931,6 @@ agm-map {
                                                 display: inline-block;
                                                 // width: 80%;
                                             }
-
                                             .off_label {
                                                 display: flex;
                                                 background-color: #1CD304;
@@ -2272,15 +1946,12 @@ agm-map {
                                                 margin-left: 5px;
                                             }
                                         }
-
                                         @media (max-width: 767px) {
                                             font-size: 16px;
                                         }
                                     }
-
                                     span {
                                         margin: 0;
-
                                         &.adress_span {
                                             // max-width: 380px;
                                             // white-space: nowrap;
@@ -2290,16 +1961,13 @@ agm-map {
                                             width: 100%;
                                         }
                                     }
-
                                     .review_section_wrap {
                                         display: flex;
                                         justify-content: space-between;
                                         align-items: center;
                                         margin: 5px 0 10px;
-
                                         .left_bar {
                                             display: flex;
-
                                             .rating_num {
                                                 span {
                                                     background-color: #1445f5;
@@ -2313,18 +1981,14 @@ agm-map {
                                                     border-radius: 5px;
                                                 }
                                             }
-
                                             .stars_text {
                                                 //margin-left: 14px;
-
                                                 .stars_rating {
                                                     margin-top: 0px;
-
                                                     img {
                                                         margin-right: 3px;
                                                     }
                                                 }
-
                                                 .review_num_text {
                                                     a {
                                                         font-size: 12px;
@@ -2333,18 +1997,15 @@ agm-map {
                                                 }
                                             }
                                         }
-
                                         .ammin_listing {
                                             display: flex;
                                             align-items: center;
-
                                             .amminities_list {
                                                 font-size: 12px;
                                                 text-transform: uppercase;
                                                 color: #5a5a5a;
                                                 font-weight: 500;
                                                 margin-left: 20px;
-
                                                 img {
                                                     margin-right: 8px;
                                                 }
@@ -2353,14 +2014,12 @@ agm-map {
                                     }
                                 }
                             }
-
                             &:last-child {
                                 //margin: 20px 0 15px;
                                 margin: 0;
                             }
                         }
                     }
-
                     .block_detail_btm {
                         display: flex;
                         align-items: center;
@@ -2368,7 +2027,6 @@ agm-map {
                         //border-top: 1px solid $box-border-color;
                         padding-top: 10px;
                         margin-bottom: 10px;
-
                         @include tab-view {
                             flex-wrap: wrap;
                             justify-content: center;
@@ -2376,7 +2034,6 @@ agm-map {
                             //border-bottom: 1px solid $box-border-color;
                             margin: 0 0 0px;
                         }
-
                         .show_detail {
                             // a {
                             //     font-size: 14px;
@@ -2387,11 +2044,9 @@ agm-map {
                             //     padding-right: 15px;
                             //     display: flex;
                             //     align-items: center;
-
                             //     img {
                             //         margin-right: 5px;
                             //     }
-
                             //     &:after {
                             //         content: "";
                             //         //position: absolute;
@@ -2405,11 +2060,9 @@ agm-map {
                             //         margin-left: 5px;
                             //     } 
                             // }
-
                             // &.open_detail {
                             //     a {
                             //         color: $mid_gray_bg;
-
                             //         &:after {
                             //             content: "";
                             //             //position: absolute;
@@ -2433,10 +2086,8 @@ agm-map {
                                 padding-right: 15px;
                                 display: flex;
                                 align-items: center;
-
                                 &[aria-expanded="true"] {
                                     color: $mid_gray_bg;
-
                                     &:after {
                                         content: "";
                                         position: absolute;
@@ -2451,10 +2102,8 @@ agm-map {
                                         border: none;
                                     }
                                 }
-
                                 &[aria-expanded="false"] {
                                     color: $active-tab-text;
-
                                     &:after {
                                         position: absolute;
                                         padding: 5px 9px;
@@ -2471,11 +2120,9 @@ agm-map {
                                 }
                             }
                         }
-
                         .weekly_price_wrps {
                             font-size: 12px;
                             color: $text-grey;
-
                             span {
                                 color: $pink;
                                 font-size: 20px;
@@ -2483,37 +2130,31 @@ agm-map {
                         }
                     }
                 }
-
                 .block_price {
                     width: 100%;
                     text-align: center;
                     padding: 0 15px;
                     position: relative;
                     z-index: 5;
-
                     @include tab-view {
                         border-left: none;
                         padding: 15px 15px 0;
                     }
-
                     p {
                         font-size: 14px;
                         color: $text-black;
                         margin: 0;
                     }
-
                     h6 {
                         font-size: 24px;
                         font-weight: 600;
                         color: $text_blue;
                         margin: 15px 0;
                     }
-
                     .show_detail {
                         width: auto;
                         display: flex;
                         justify-content: center;
-
                         a {
                             display: flex;
                             align-items: center;
@@ -2521,11 +2162,9 @@ agm-map {
                             font-weight: 500;
                             color: $primary-color;
                             position: relative;
-
                             img {
                                 margin-right: 5px;
                             }
-
                             &::after {
                                 content: "";
                                 position: absolute;
@@ -2540,20 +2179,16 @@ agm-map {
                             }
                         }
                     }
-
                     .block_inn_pr {
                         width: 100%;
                         display: flex;
                         justify-content: space-around;
                         align-items: center;
-
                         .block {
                             margin: 0 0 15px;
-
                             @include tab-view {
                                 margin: 0 0 5px;
                             }
-
                             p {
                                 width: 100%;
                                 margin: 0;
@@ -2563,28 +2198,23 @@ agm-map {
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-
-                                &:first-child {
+                                &:last-child,&:first-child {
                                     margin: 0 0 5px;
                                     color: $text-grey;
                                 }
-
                                 &.installment_type {
                                     color: $mid_gray_bg;
                                 }
-
                                 span {
                                     font-size: 24px;
                                     color: $pink;
                                     font-weight: 600;
-
                                     &.dashed_price {
                                         text-decoration: line-through;
                                         color: $mid_gray_bg !important;
                                     }
                                 }
                             }
-
                             &:last-child {
                                 p {
                                     span {
@@ -2597,8 +2227,6 @@ agm-map {
                             }
                         }
                     }
-
-
                     .book_btn {
                         display: inline-block;
                         line-height: 38px;
@@ -2613,7 +2241,6 @@ agm-map {
                         overflow: hidden;
                         margin-bottom: 10px;
                         border: 1px solid $primary-color;
-
                         // &:before {
                         //     content: "";
                         //     position: absolute;
@@ -2626,17 +2253,14 @@ agm-map {
                         //     transition: 0.8s;
                         //     border-radius: 25px;
                         // }
-
                         // &:hover {
                         //     color: $primary-color;
-
                         //     &:before {
                         //         height: 37px;
                         //         width: 100%;
                         //     }
                         // }
                     }
-
                     .partial_payment_info {
                         display: block;
                         margin: 10px 0 0;
@@ -2644,7 +2268,6 @@ agm-map {
                         font-weight: 500;
                         color: $primary-color;
                     }
-
                     &.block_pr {
                         // &:after {
                         //     width: 66%;
@@ -2658,7 +2281,6 @@ agm-map {
                         //     border-bottom: 290px solid transparent;
                         //     border-left: 52px solid $background-white;
                         //     z-index: -1;
-
                         //     @include tab-view {
                         //         top: 0;
                         //     }
@@ -2666,45 +2288,36 @@ agm-map {
                     }
                 }
             }
-
             .detail_info_show {
                 width: 100%;
                 background: $background-white;
                 padding: 20px 15px;
                 border-radius: 10px;
-
                 @include tab-view {
                     padding: 10px;
                 }
-
                 .card-body {
                     border: 1px solid $box-border-color;
                     border-radius: 10px;
                     padding: 15px;
                     //margin-top: 15px;
-
                     @include tab-view {
                         //border: none;
                         margin: 0;
                         padding: 10px;
                     }
-
                     .io_ru_wrps {
                         display: flex;
                         justify-content: space-between;
-
                         @include tab-view {
                             flex-direction: column;
                         }
-
                         .installment_wprs {
                             flex: 2;
                             padding-right: 50px;
-
                             @include tab-view {
                                 padding-right: 0px;
                             }
-
                             .type_lines {
                                 border-bottom: 1px solid $box-border-color;
                                 padding-bottom: 15px;
@@ -2712,40 +2325,32 @@ agm-map {
                                 display: flex;
                                 justify-content: flex-start;
                                 margin-bottom: 15px;
-
-
                                 @include tab-view {
                                     flex-direction: column;
                                     padding-bottom: 6px;
                                     margin-bottom: 6px;
                                     font-size: 10px;
                                 }
-
                                 &:nth-child(4) {
                                     border: none;
                                     margin: 0;
                                     padding: 0;
                                 }
-
                                 .titles {
                                     font-weight: 600;
                                     color: $text-black;
                                     margin-right: 0px;
                                     flex: 2;
                                 }
-
                                 .texts {
                                     font-weight: 500;
                                     color: $mid_gray_bg;
                                     flex: 5;
-
                                     @include tab-view {
                                         font-weight: 400;
                                     }
                                 }
-
                             }
-
                             .notifi_text {
                                 font-weight: 400;
                                 color: $active-tab-text;
@@ -2753,20 +2358,16 @@ agm-map {
                                 margin-top: 15px;
                                 display: flex;
                                 justify-content: flex-start;
-
                                 @include tab-view {
                                     margin-top: 10px;
                                 }
-
                                 &.desk_notifi {
                                     @include tab-view {
                                         display: none;
                                     }
                                 }
-
                                 &.mobile_notifi {
                                     display: none;
-
                                     @include tab-view {
                                         display: block;
                                         margin-bottom: 5px;
@@ -2774,36 +2375,30 @@ agm-map {
                                 }
                             }
                         }
-
                         .rules_wrps {
                             flex: 1;
                             max-width: 188px;
                             display: flex;
                             flex-direction: column;
-
                             @include tab-view {
                                 padding-top: 5px;
                                 max-width: 100%;
                                 flex-direction: row;
                             }
-
                             .heads {
                                 font-size: 14px;
                                 font-weight: 600;
                                 color: $text-black;
-
                                 @include tab-view {
                                     min-width: 60px;
                                     flex: 1;
                                     font-size: 10px;
                                 }
-
                                 img {
                                     max-width: 15px;
                                     margin-right: 5px;
                                 }
                             }
-
                             .texts_rules {
                                 font-size: 10px;
                                 font-weight: 400;
@@ -2812,34 +2407,28 @@ agm-map {
                                 line-height: 14px;
                                 overflow-y: auto;
                                 max-height: 150px;
-
                                 a {
                                     text-decoration: underline;
                                 }
-
                                 @include tab-view {
                                     margin-top: 0;
                                 }
                             }
                         }
                     }
-
                     .full_desk_not {
                         @include tab-view {
                             display: none;
                         }
                     }
-
                     // .block_flight_info {
                     //     @include tab-view {
                     //         padding: 5px;
                     //     }
-
                     //     .tab_detail {
                     //         display: flex;
                     //         flex-flow: column;
                     //         position: relative;
-
                     //         .triangle_right {
                     //             position: absolute;
                     //             position: absolute;
@@ -2847,7 +2436,6 @@ agm-map {
                     //             right: -1px;
                     //             transform: translateY(-50%);
                     //             z-index: 1;
-
                     //             &:after {
                     //                 width: 0;
                     //                 height: 0;
@@ -2860,7 +2448,6 @@ agm-map {
                     //                 transform: translateY(-50%);
                     //                 content: "";
                     //             }
-
                     //             &:before {
                     //                 width: 0;
                     //                 height: 0;
@@ -2875,7 +2462,6 @@ agm-map {
                     //                 z-index: 2;
                     //             }
                     //         }
-
                     //         .triangle_left {
                     //             position: absolute;
                     //             position: absolute;
@@ -2883,7 +2469,6 @@ agm-map {
                     //             left: -1px;
                     //             transform: translateY(-50%);
                     //             z-index: 1;
-
                     //             &:after {
                     //                 width: 0;
                     //                 height: 0;
@@ -2896,7 +2481,6 @@ agm-map {
                     //                 transform: translateY(-50%);
                     //                 content: "";
                     //             }
-
                     //             &:before {
                     //                 width: 0;
                     //                 height: 0;
@@ -2911,7 +2495,6 @@ agm-map {
                     //                 z-index: 2;
                     //             }
                     //         }
-
                     //         &.flight_info_cnt {
                     //             padding: 20px 0;
                     //             max-height: 445px;
@@ -2920,23 +2503,19 @@ agm-map {
                     //             border: 1px solid $box-border-color;
                     //             border-radius: 10px;
                     //             margin: 0 0 10px;
-
                     //             @include tab-view {
                     //                 padding: 15px;
                     //             }
-
                     //             .detail_top {
                     //                 display: flex;
                     //                 padding: 0 20px;
                     //                 justify-content: space-between;
                     //                 position: relative;
-
                     //                 @include tab-view {
                     //                     display: flex;
                     //                     justify-content: center;
                     //                     flex-wrap: wrap;
                     //                 }
-
                     //                 .flight_going {
                     //                     font-size: 10px;
                     //                     font-weight: 500;
@@ -2944,31 +2523,25 @@ agm-map {
                     //                     position: absolute;
                     //                     top: 0;
                     //                     right: 20px;
-
                     //                     @include tab-view {
                     //                         position: absolute;
                     //                         top: 10px;
                     //                         right: 10px;
                     //                     }
                     //                 }
-
                     //                 .detail_inn_left {
                     //                     display: flex;
                     //                     padding: 0;
                     //                     width: 100%;
-
                     //                     @include tab-view {
                     //                         flex-wrap: wrap;
                     //                     }
-
                     //                     .detail_left {
                     //                         width: 10%;
-
                     //                         @include tab-view {
                     //                             width: 100%;
                     //                             text-align: center;
                     //                         }
-
                     //                         img {
                     //                             object-fit: cover;
                     //                             height: auto;
@@ -2978,28 +2551,24 @@ agm-map {
                     //                             max-width: 40px;
                     //                             max-height: 40px;
                     //                         }
-
                     //                         p {
                     //                             font-size: 12px;
                     //                             font-weight: 400;
                     //                             color: $text-black;
                     //                             margin: 0 0 2px;
                     //                         }
-
                     //                         span {
                     //                             font-size: 12px;
                     //                             font-weight: 300;
                     //                             color: $text-grey;
                     //                         }
                     //                     }
-
                     //                     .detail_right {
                     //                         padding: 0 35px;
                     //                         display: flex;
                     //                         justify-content: flex-start;
                     //                         align-items: center;
                     //                         width: 90%;
-
                     //                         @include tab-view {
                     //                             width: 100%;
                     //                             padding: 0;
@@ -3008,83 +2577,68 @@ agm-map {
                     //                             margin: 15px 0 0;
                     //                             flex-flow: column;
                     //                         }
-
                     //                         .flight_info_detail {
                     //                             text-align: right;
                     //                             width: 40%;
-
                     //                             @include tab-view {
                     //                                 text-align: center;
                     //                                 width: 100%;
                     //                             }
-
                     //                             h4 {
                     //                                 font-size: 20px;
                     //                                 font-weight: 600;
                     //                                 color: $text-black;
                     //                                 margin: 0 0 5px;
-
                     //                                 span {
                     //                                     font-weight: 400;
                     //                                     margin: 0;
                     //                                 }
                     //                             }
-
                     //                             span {
                     //                                 font-size: 10px;
                     //                                 font-weight: 500;
                     //                                 color: $text-black;
                     //                                 margin: 0 0 5px;
                     //                             }
-
                     //                             p {
                     //                                 font-size: 10px;
                     //                                 font-weight: 300;
                     //                                 color: $text-grey;
                     //                                 margin: 0;
-
                     //                                 span {
                     //                                     display: block;
                     //                                     font-weight: 300;
                     //                                     color: $text-grey;
                     //                                 }
                     //                             }
-
                     //                             &:last-child {
                     //                                 text-align: left;
-
                     //                                 @include tab-view {
                     //                                     text-align: center;
                     //                                 }
                     //                             }
                     //                         }
-
                     //                         .flight_duration {
                     //                             width: 20%;
                     //                             padding: 0 20px;
                     //                             text-align: center;
-
                     //                             @include tab-view {
                     //                                 padding: 15px 10px;
                     //                                 margin: 0 auto;
                     //                                 width: auto;
                     //                             }
-
                     //                             p {
                     //                                 font-size: 12px;
                     //                                 color: $text-grey;
                     //                                 margin: 0;
                     //                             }
-
                     //                             .border-dot {
                     //                                 width: 100%;
                     //                                 position: relative;
-
                     //                                 img {
                     //                                     width: 100%;
                     //                                 }
                     //                             }
-
                     //                             span {
                     //                                 font-size: 12px;
                     //                                 color: $text-grey;
@@ -3094,13 +2648,11 @@ agm-map {
                     //                     }
                     //                 }
                     //             }
-
                     //             .flight_layover {
                     //                 width: 100%;
                     //                 text-align: center;
                     //                 margin: 25px 0;
                     //                 position: relative;
-
                     //                 .layover_info {
                     //                     width: auto;
                     //                     display: inline-block;
@@ -3114,18 +2666,15 @@ agm-map {
                     //                     color: $text-grey;
                     //                     position: relative;
                     //                     z-index: 2;
-
                     //                     span {
                     //                         color: $text-black;
                     //                     }
-
                     //                     @media (max-width: 767px) {
                     //                         padding: 5px 10px;
                     //                         font-size: 12px;
                     //                         font-weight: 400;
                     //                     }
                     //                 }
-
                     //                 &:before {
                     //                     width: 100%;
                     //                     height: 1px;
@@ -3137,13 +2686,11 @@ agm-map {
                     //                     transform: translateY(-50%);
                     //                 }
                     //             }
-
                     //             &:last-child {
                     //                 margin: 5px 0 0;
                     //                 position: relative;
                     //             }
                     //         }
-
                     //         &.fare_detail_cnt {
                     //             padding: 30px 30px 20px;
                     //             border: 1px solid $box-border-color;
@@ -3151,11 +2698,9 @@ agm-map {
                     //             max-height: 445px;
                     //             overflow-y: auto;
                     //             overflow-x: hidden;
-
                     //             @include tab-view {
                     //                 padding: 15px;
                     //             }
-
                     //             ul {
                     //                 width: 100%;
                     //                 margin: 0 0 30px;
@@ -3163,7 +2708,6 @@ agm-map {
                     //                 list-style: none;
                     //                 border: 1px solid $box-border-color;
                     //                 border-radius: 3px;
-
                     //                 li {
                     //                     width: 100%;
                     //                     display: flex;
@@ -3173,53 +2717,43 @@ agm-map {
                     //                     font-size: 14px;
                     //                     font-weight: 300;
                     //                     color: $text-grey;
-
                     //                     &.down_payment {
                     //                         color: $text-blue;
                     //                         font-weight: 500;
                     //                     }
-
                     //                     .detail {
                     //                         color: $text-black;
                     //                     }
-
                     //                     span {
                     //                         color: $text-black;
                     //                         font-weight: 500;
-
                     //                         &.down_value {
                     //                             color: $text-blue;
                     //                         }
                     //                     }
-
                     //                     &:last-child {
                     //                         border-bottom: none;
                     //                         color: $text-black;
                     //                     }
-
                     //                     @media (max-width: 767px) {
                     //                         padding: 10px;
                     //                         flex-wrap: wrap;
-
                     //                         span {
                     //                             width: 100%;
                     //                         }
                     //                     }
                     //                 }
                     //             }
-
                     //             p {
                     //                 font-size: 14px;
                     //                 color: $text-grey;
                     //                 font-weight: 300;
                     //                 margin: 0;
-
                     //                 span {
                     //                     font-weight: 400;
                     //                 }
                     //             }
                     //         }
-
                     //         &.baggage_rules_cnt {
                     //             padding: 20px;
                     //             flex-flow: column;
@@ -3228,37 +2762,30 @@ agm-map {
                     //             max-height: 445px;
                     //             overflow-y: scroll;
                     //             overflow-x: hidden;
-
                     //             @include tab-view {
                     //                 padding: 15px;
                     //                 flex-flow: column;
                     //             }
-
                     //             .block_baggage {
                     //                 width: 100%;
                     //                 flex-flow: row;
                     //                 display: flex;
                     //                 margin: 0 0 15px 0;
-
                     //                 @include tab-view {
                     //                     flex-wrap: wrap;
                     //                 }
-
                     //                 .detail_left {
                     //                     width: 10%;
-
                     //                     @include tab-view {
                     //                         width: 100%;
                     //                         text-align: center;
                     //                         margin: 0 0 10px;
                     //                     }
-
                     //                     .flight_ward {
                     //                         font-size: 10px;
                     //                         font-weight: 500;
                     //                         color: $text-blue;
                     //                     }
-
                     //                     img {
                     //                         object-fit: cover;
                     //                         height: auto;
@@ -3268,34 +2795,28 @@ agm-map {
                     //                         max-width: 40px;
                     //                         max-height: 40px;
                     //                     }
-
                     //                     p {
                     //                         font-size: 12px;
                     //                         font-weight: 300;
                     //                         color: $text-black;
                     //                         margin: 0 0 2px;
                     //                     }
-
                     //                     span {
                     //                         font-size: 12px;
                     //                         font-weight: 300;
                     //                         color: $text-grey;
                     //                     }
                     //                 }
-
                     //                 .detail_right {
                     //                     width: 90%;
                     //                     padding: 0 0 0 30px;
-
                     //                     @include tab-view {
                     //                         width: 100%;
                     //                         padding: 0;
                     //                     }
-
                     //                     table {
                     //                         border: 1px solid $box-border-color;
                     //                         border-radius: 3px;
-
                     //                         thead {
                     //                             tr {
                     //                                 th {
@@ -3305,18 +2826,15 @@ agm-map {
                     //                                     color: $text-grey;
                     //                                     background: $bg-light-grey;
                     //                                     border: 1px solid $box-border-color;
-
                     //                                     &:first-child {
                     //                                         width: 100px;
                     //                                     }
-
                     //                                     &:last-child {
                     //                                         width: 200px;
                     //                                     }
                     //                                 }
                     //                             }
                     //                         }
-
                     //                         tbody {
                     //                             tr {
                     //                                 td {
@@ -3329,24 +2847,18 @@ agm-map {
                     //                                 }
                     //                             }
                     //                         }
-
                     //                         @media only screen and (max-width: 800px) {
                     //                             display: block;
-
                     //                             thead {
                     //                                 display: block;
-
                     //                                 tr {
                     //                                     display: none;
                     //                                 }
                     //                             }
-
                     //                             tbody {
                     //                                 display: block;
-
                     //                                 tr {
                     //                                     display: block;
-
                     //                                     td {
                     //                                         display: block;
                     //                                         border: none;
@@ -3355,7 +2867,6 @@ agm-map {
                     //                                         padding-top: 35px;
                     //                                         white-space: normal;
                     //                                         text-align: left;
-
                     //                                         &:before {
                     //                                             position: absolute;
                     //                                             top: 10px;
@@ -3375,7 +2886,6 @@ agm-map {
                     //                             }
                     //                         }
                     //                     }
-
                     //                     p {
                     //                         font-size: 14px;
                     //                         font-weight: 300;
@@ -3383,13 +2893,11 @@ agm-map {
                     //                         margin: 10px 0 0;
                     //                     }
                     //                 }
-
                     //                 &.last {
                     //                     margin: 0;
                     //                 }
                     //             }
                     //         }
-
                     //         &.cancellation_rules_cnt {
                     //             padding: 20px;
                     //             flex-flow: column;
@@ -3398,26 +2906,20 @@ agm-map {
                     //             max-height: 445px;
                     //             overflow-y: scroll;
                     //             overflow-x: hidden;
-
                     //             @include tab-view {
                     //                 padding: 15px;
                     //             }
-
                     //             .rules_cnt_top {
                     //                 display: flex;
-
                     //                 @include tab-view {
                     //                     flex-wrap: wrap;
                     //                 }
-
                     //                 .detail_left {
                     //                     width: 10%;
-
                     //                     @include tab-view {
                     //                         width: 100%;
                     //                         margin: 0 0 10px;
                     //                     }
-
                     //                     img {
                     //                         object-fit: cover;
                     //                         height: auto;
@@ -3427,30 +2929,25 @@ agm-map {
                     //                         max-width: 40px;
                     //                         max-height: 40px;
                     //                     }
-
                     //                     p {
                     //                         font-size: 12px;
                     //                         font-weight: 300;
                     //                         color: $text-black;
                     //                         margin: 0 0 2px;
                     //                     }
-
                     //                     span {
                     //                         font-size: 12px;
                     //                         font-weight: 300;
                     //                         color: $text-grey;
                     //                     }
                     //                 }
-
                     //                 .detail_right {
                     //                     width: 90%;
                     //                     padding: 0 0 0 20px;
-
                     //                     @include tab-view {
                     //                         width: 100%;
                     //                         padding: 0;
                     //                     }
-
                     //                     ul {
                     //                         width: 100%;
                     //                         display: flex;
@@ -3462,41 +2959,34 @@ agm-map {
                     //                         border-radius: 3px;
                     //                         justify-content: space-between;
                     //                         flex-wrap: wrap;
-
                     //                         li {
                     //                             width: 100%;
                     //                             display: flex;
                     //                             justify-content: space-between;
                     //                             border-bottom: 1px solid $box-border-color;
-
                     //                             @include tab-view {
                     //                                 flex-flow: column;
                     //                             }
-
                     //                             &:last-child {
                     //                                 border-bottom: none;
                     //                             }
-
                     //                             div {
                     //                                 padding: 10px 15px;
                     //                                 font-weight: 400;
                     //                                 color: $text-black;
                     //                                 border-right: 1px solid $box-border-color;
                     //                                 background: $bg-light-grey;
-
                     //                                 &:first-child {
                     //                                     width: 200px;
                     //                                     font-size: 14px;
                     //                                     font-weight: 300;
                     //                                     color: $text-grey;
-
                     //                                     @include tab-view {
                     //                                         border-right: none;
                     //                                         border-bottom: 1px solid $box-border-color;
                     //                                         width: 100%;
                     //                                     }
                     //                                 }
-
                     //                                 &:last-child {
                     //                                     border-right: none;
                     //                                     background: transparent;
@@ -3506,11 +2996,9 @@ agm-map {
                     //                     }
                     //                 }
                     //             }
-
                     //             .rules_cnt_btm {
                     //                 width: 100%;
                     //                 margin: 30px 0 0;
-
                     //                 span {
                     //                     font-size: 14px;
                     //                     font-weight: 400;
@@ -3518,13 +3006,11 @@ agm-map {
                     //                     margin: 0 0 10px;
                     //                     display: block;
                     //                 }
-
                     //                 ul {
                     //                     width: 100%;
                     //                     margin: 0;
                     //                     padding: 0;
                     //                     list-style-position: inside;
-
                     //                     li {
                     //                         margin-bottom: 5px;
                     //                         font-size: 14px;
@@ -3535,20 +3021,16 @@ agm-map {
                     //             }
                     //         }
                     //     }
-
                     //     .block_fllight_name {
                     //         width: 100%;
                     //         font-size: 16px;
                     //         font-weight: 500;
                     //         color: $text-black;
-
                     //         @include tab-view {
                     //             font-size: 14px;
                     //         }
-
                     //         span {
                     //             color: $primary-color;
-
                     //             @include tab-view {
                     //                 display: block;
                     //             }
@@ -3558,10 +3040,8 @@ agm-map {
                 }
             }
         }
-
         .mobile_box {
             display: none;
-
             @include tab-view {
                 display: flex;
                 justify-content: space-between;
@@ -3570,13 +3050,11 @@ agm-map {
                 //min-height: 164px;
                 // min-height: 164\\20px;
             }
-
             agm-map {
                 @include tab-view {
                     max-height: 210px;
                 }
             }
-
             .hotel_list_img_wrp {
                 display: flex;
                 min-width: 127px;
@@ -3584,13 +3062,11 @@ agm-map {
                 flex: 1;
                 z-index: 9;
                 position: relative;
-
                 .carousel {
                     &.slide {
                         height: 100%;
                     }
                 }
-
                 .slider_dots {
                     z-index: 9999;
                     padding: 0;
@@ -3601,7 +3077,6 @@ agm-map {
                     bottom: 10px;
                     justify-content: center;
                     width: 100%;
-
                     span {
                         margin: 0 2px;
                         width: 6px;
@@ -3609,32 +3084,27 @@ agm-map {
                         border-radius: 50%;
                         padding: 1px;
                         background-color: rgba(255, 255, 255, 0.6);
-
                         &::marker {
                             display: none;
                             color: transparent;
                         }
-
                         &.active {
                             background-color: $background-white;
                         }
                     }
                 }
-
                 img {
                     &.blank_image_box {
                         width: 270px;
                         border-radius: 10px;
                         height: 100%;
                         min-width: 270px;
-
                         @include tab-view {
                             width: 100%;
                             min-width: 100%;
                         }
                     }
                 }
-
                 img {
                     max-width: 100%;
                     width: 100%;
@@ -3647,7 +3117,6 @@ agm-map {
                     min-height: 170px;
                     min-width: 252px;
                     max-height: 170px;
-
                     @include tab-view {
                         // min-width: 127px;
                         // max-height: 100%;
@@ -3657,31 +3126,24 @@ agm-map {
                     }
                 }
             }
-
             .middle_part {
                 display: flex;
                 flex-direction: column;
                 flex: 2;
                 justify-content: space-between;
                 width: 100%;
-
                 .detail_info {
                     padding: 10px 5px 5px;
                     word-break: break-word;
                     line-height: 14px;
                     margin-bottom: 3px;
-
                     a {
                         font-size: 12px;
-
-
                         color: $text-black;
                         font-weight: 600;
-
                         .wrapper_names {
                             display: flex;
                             width: 100%;
-
                             .hotel_names {
                                 display: -moz-box;
                                 /* Mozilla */
@@ -3700,7 +3162,6 @@ agm-map {
                                 text-overflow: ellipsis;
                                 width: 100%;
                             }
-
                             .off_label {
                                 display: flex;
                                 background-color: #1CD304;
@@ -3718,7 +3179,6 @@ agm-map {
                             }
                         }
                     }
-
                     .adress_span {
                         font-size: 10px;
                         line-height: 13px;
@@ -3739,16 +3199,13 @@ agm-map {
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
-
                     .review_section_wrap {
                         img {
                             width: 12px;
                         }
                     }
                 }
-
                 .show_detail {
-
                     .hotel_anchor {
                         color: $active-tab-text;
                         font-size: 14px;
@@ -3758,15 +3215,12 @@ agm-map {
                         padding-right: 15px;
                         display: flex;
                         align-items: center;
-
                         @include tab-view {
                             font-size: 11px;
                             margin: 0 auto 10px;
                         }
-
                         &[aria-expanded="true"] {
                             color: $mid_gray_bg;
-
                             &:after {
                                 content: "";
                                 //position: absolute;
@@ -3781,10 +3235,8 @@ agm-map {
                                 border: none;
                             }
                         }
-
                         &[aria-expanded="false"] {
                             color: $active-tab-text;
-
                             &:after {
                                 //position: absolute;
                                 padding: 5px 9px;
@@ -3802,16 +3254,13 @@ agm-map {
                     }
                 }
             }
-
             .thrd_part {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 flex: 1;
-
                 .block_price {
                     padding: 0 5px;
-
                     .block_inn_pr {
                         .block {
                             &:last-child {
@@ -3821,37 +3270,30 @@ agm-map {
                                     }
                                 }
                             }
-
                             p {
                                 flex-direction: column;
                                 font-size: 7px;
-
                                 &.duel_prices {
                                     flex-direction: row;
-
                                     span {
                                         margin: 0;
-
                                         &:last-child {
                                             margin-left: 3px;
                                         }
                                     }
                                 }
-
                                 &:first-child {
                                     margin: 0;
                                 }
                             }
                         }
                     }
-
                     .book_btn {
                         line-height: 30px;
                         padding: 0px 21px;
                         font-size: 12px;
                         margin-bottom: 0;
                     }
-
                     p {
                         margin: 0;
                         color: $text-grey;
@@ -3868,14 +3310,11 @@ agm-map {
 }
 
 .hotel-pagination /deep/ .ngx-pagination {
-
     @include tab-view {
         margin: 0;
         padding: 0;
     }
-
     .pagination-previous {
-
         @include tab-view {
             text-indent: -9999px;
             background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/left_small.svg);
@@ -3887,11 +3326,8 @@ agm-map {
             padding: 0px 10px;
             width: 30px;
         }
-
     }
-
     .pagination-next {
-
         @include tab-view {
             text-indent: -9999px;
             background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/right_small.svg);
@@ -3904,8 +3340,6 @@ agm-map {
             width: 30px;
         }
     }
-
-
     .current {
         background: #F826C1;
     }
@@ -3922,18 +3356,14 @@ agm-map {
 // slick slider css
 // $slick-btn-bg-color: #fff;
 // $slick-btn-txt-color: #000;
-
 // $slick-btn-txt-color__hover: #fff;
 // $slick-btn-bg-color__hover: #000;
-
 // $slick-opacity-on-hover: 1;
-
 // .slider {
 // 	background-size: cover;
 //   background-repeat: no-repeat;
 //   background-position: center center;
 // }
-
 // .slick-slide {
 // 	text-align:center;
 //   background-size: cover;
@@ -3942,21 +3372,19 @@ agm-map {
 // }
 
 /* SLICK: ARROWS */
+
 // .slick-custom-arrow {
 // 	position: absolute;
 // 	transform: translateY(-50%);
 // 	z-index:100;
 // 	padding:20px 16px;
-
 // 	background-color: $slick-btn-bg-color;
 // 	color:$slick-btn-txt-color;
-
 // 	&:hover {
 // 			cursor:pointer;
 // 			background-color: $slick-btn-bg-color__hover;
 // 			color:$slick-btn-txt-color__hover;
 // 	}
-
 // 	&-right {
 // 		right: 0;
 //   	top: 50%;
@@ -3968,6 +3396,7 @@ agm-map {
 // }
 
 /* SLICK: DOTS */
+
 // .slick-dots {
 // 	list-style: none;
 // 	margin: 0;
@@ -3978,7 +3407,6 @@ agm-map {
 // 	transform: translateX(-50%);
 // 	display:flex;
 // 	align-items:center; 
-
 // 	.slick-active {
 // 		button {
 // 			border: 0;
@@ -3987,17 +3415,13 @@ agm-map {
 // 			background-color:#ffffff;
 // 		}
 // 	}
-
 // 	li {
 // 		display:flex;
 // 		align-items:center; 
-
 // 		margin:0 4px;
 // 		padding:0;
-
 // 		height: 20px;
 //     width: 20px;
-
 // 		button {
 // 			background-color:rgba(255,255,255,0);
 // 			border: 1px solid #fff;
@@ -4009,24 +3433,17 @@ agm-map {
 // 			outline: none;
 // 			line-height: 0px;
 // 			font-size: 0px;
-
 // 			cursor: pointer;
-
 // 			&:hover, &:focus {
 //       	//background-color:$slick-btn-bg-color__hover;
 //      	}
-
 // 		}
 // 	}
-
-
 // }
-
 // slick slider css
 // .carousel_box {
 //     margin-left: 15%;
 //     margin-right: 15%;
-
 //     ul {
 //         &.slides {
 //             display: block;
@@ -4036,7 +3453,6 @@ agm-map {
 //             padding: 0;
 //             overflow: hidden;
 //             list-style: none;
-
 //             &* {
 //                 user-select: none;
 //                 -ms-user-select: none;
@@ -4045,14 +3461,11 @@ agm-map {
 //                 -webkit-user-select: none;
 //                 -webkit-touch-callout: none;
 //             }
-
 //             input {
 //                 display: none;
 //             }
-
 //             .slide-container {
 //                 display: block;
-
 //                 .slide-image {
 //                     display: block;
 //                     position: absolute;
@@ -4061,14 +3474,12 @@ agm-map {
 //                     top: 0;
 //                     opacity: 0;
 //                     transition: all .7s ease-in-out;
-
 //                     img {
 //                         width: auto;
 //                         min-width: 100%;
 //                         height: 100%;
 //                     }
 //                 }
-
 //                 .carousel-controls {
 //                     position: absolute;
 //                     top: 0;
@@ -4078,7 +3489,6 @@ agm-map {
 //                     font-size: 100px;
 //                     line-height: 600px;
 //                     color: #fff;
-
 //                     label {
 //                         display: none;
 //                         position: absolute;
@@ -4086,27 +3496,22 @@ agm-map {
 //                         opacity: 0;
 //                         transition: opacity .2s;
 //                         cursor: pointer;
-
 //                         &:hover {
 //                             opacity: 1;
 //                         }
 //                     }
-
 //                     .prev-slide {
 //                         width: 49%;
 //                         text-align: left;
 //                         left: 0;
 //                     }
-
 //                     .next-slide {
 //                         width: 49%;
 //                         text-align: right;
 //                         right: 0;
 //                     }
 //                 }
-
 //             }
-
 //             .carousel-dots {
 //                 position: absolute;
 //                 left: 0;
@@ -4114,7 +3519,6 @@ agm-map {
 //                 bottom: 20px;
 //                 z-index: 999;
 //                 text-align: center;
-
 //                 .carousel-dot {
 //                     display: inline-block;
 //                     width: 30px;
@@ -4128,21 +3532,17 @@ agm-map {
 //         }
 //     }
 // }
-
 // .slide-image:hover+.carousel-controls label {
 //     opacity: 0.5;
 // }
-
 // input:checked+.slide-container .slide-image {
 //     opacity: 1;
 //     transform: scale(1);
 //     transition: opacity 1s ease-in-out;
 // }
-
 // input:checked+.slide-container .carousel-controls label {
 //     display: block;
 // }
-
 // input#img-1:checked~.carousel-dots label#img-dot-1,
 // input#img-2:checked~.carousel-dots label#img-dot-2,
 // input#img-3:checked~.carousel-dots label#img-dot-3,
@@ -4151,8 +3551,6 @@ agm-map {
 // input#img-6:checked~.carousel-dots label#img-dot-6 {
 //     opacity: 1;
 // }
-
-
 // input:checked+.slide-container .nav label {
 //     display: block;
 // }

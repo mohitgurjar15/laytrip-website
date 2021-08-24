@@ -1,104 +1,42 @@
 <div class="search_area">
-  <div class="travel_info" id="add_child" (click)="toggleDrawer()">
-    <span>{{roomsGroup.rooms ? roomsGroup.rooms : 1 }}</span> {{roomsGroup.rooms == 1 ? 'Room': 'Rooms'}},
-    <span class="guest_num"> {{roomsGroup.adults + roomsGroup.child}}</span> {{roomsGroup.adults + roomsGroup.child == 1 ? 'Guest': 'Guests'}}
-    <div class="drop_aerrow"></div>
-  </div>
-
-  <div class="traveller_add_block" id="add_child_open {{openDrawer}}" [ngClass]="(openDrawer==true)?'panel_show':'panel_hide'">
-    <!-- 
-    <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
-      pointerEventsMethod="scrollbar"> -->
-    <div class="rooms_aloc">
-      <!-- <ul >
-          <li ><div class="left"> <span>Room</span>
-          </div>
-          <div class="right">
-            <button type='button' class='qtyminus' field='quantity'
-            [disabled]="(roomsGroup.rooms  === 1 && roomsGroup.rooms  > 0 )"
-            [ngClass]="{ 'un_active' : roomsGroup.rooms === 1 && roomsGroup.rooms > 0 }"
-            (click)="removeRoom(id)">-</button>
-            <input type='text' name='quantity' value='{{ roomsGroup.rooms ? roomsGroup.rooms : 1  }}' class='qty' readonly />
-            <button class='qtyplus' field='quantity' 
-            [disabled]="roomsGroup.rooms >= 9" 
-            [ngClass]="{ 'un_active' : roomsGroup.rooms >= 9 || roomsGroup.rooms == 9 }"
-            (click)="addRoom(id)">+</button>
-          </div>
-        </li>
-          
-        </ul> -->
-
-      <ul>
-        <li>
-          <div class="left"> <span>Room</span>
-          </div>
-          <div class="right">
-            <button type='button' class='qtyminus' field='quantity'
-              [disabled]="(roomsGroup.rooms  === 1 && roomsGroup.rooms  > 0 )"
-              [ngClass]="{ 'un_active' : roomsGroup.rooms === 1 && roomsGroup.rooms > 0 }"
-              (click)="removeRoom()">-</button>
-            <input type='text' name='quantity' value='{{ roomsGroup.rooms ? roomsGroup.rooms : 1  }}' class='qty'
-              readonly />
-            <button class='qtyplus' field='quantity' [disabled]="roomsGroup.rooms >= 9"
-              [ngClass]="{ 'un_active' : roomsGroup.rooms >= 9 || roomsGroup.rooms == 9 }"
-              (click)="addRoom()">+</button>
-          </div>
-        </li>
-        <li>
-          <div class="left"> <span>Adult</span>
-          </div>
-
-          <div class="right">
-            <button type='button' class='qtyminus un_active' field='quantity'
-              [disabled]="roomsGroup.adults === 1 && roomsGroup.adults > 0"
-              [ngClass]="{ 'un_active' : roomsGroup.adults === 1 && roomsGroup.adults > 0 }"
-              (click)="addRemovePerson({ type: 'minus',label: 'adult', value: roomsGroup.adults})">-</button>
-            <input type='text' name='quantity' value='{{ roomsGroup.adults }}' class='qty' readonly />
-            <button class='qtyplus' field='quantity' [ngClass]="{'un_active' : (roomsGroup.adults) === 28 }"
-              [disabled]="(roomsGroup.adults) === 28"
-              (click)="addRemovePerson({ type: 'plus',label: 'adult', value: roomsGroup.adults})">+</button>
-          </div>
-        </li>
-        <li>
-          <div class="left"> <span>Child</span>
-          </div>
-          <div class="right">
-            <button type='button' class='qtyminus' field='quantity' [ngClass]="{ 'un_active' : roomsGroup.child === 0}"
-              [disabled]="roomsGroup.child === 0"
-              (click)="addRemovePerson({ type: 'minus',label: 'child', value: roomsGroup.child})">-</button>
-            <input type='text' name='quantity' value='{{ roomsGroup.child === 0 ? 0 : roomsGroup.child }}' class='qty'
-              readonly />
-            <button type='button' class='qtyplus' field='quantity'
-              [ngClass]="{ 'un_active' : ((roomsGroup.child) === 8 || roomsGroup.child >= 8 )}"
-              [disabled]="((roomsGroup.child) === 8 || roomsGroup.child >= 8 )"
-              (click)="addRemovePerson({ type: 'plus',label: 'child', value: roomsGroup.child})">+</button>
-          </div>
-        </li>
-      </ul>
-
-        <!-- <div class="child_sel_wrapper" *ngIf="roomsGroup.child > 0">
-          <div class="child_boxes open" *ngFor="let child of roomsGroup.children;let idx = index">
-            <div class="left">
-              <span class="label_name">Child {{idx + 1}} Age</span>
-            </div>
-            <div class="right">
-              <div class="dropdown child_dropdown_wrapper">
-                <a class="child_sub_drop" (click)="toggleChildDropDown(idx)">
-                 {{ child.age }}
-                </a>
-                <div class="child_su_drop_op" *ngIf="child.is_show">
-                  <ng-scrollbar class="custom_scroll_suggetion child_scrollbox" barClass="scrollbar" customview="true"
-                    #scrollable track="all" pointerEventsMethod="scrollbar">
-                    <a *ngFor="let child of childAges;let x = index" class="dropdown-item"
-                       (click)="selectChildAge(idx,x)">{{x}}</a>
-                  </ng-scrollbar>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-      </div>
+    <div class="travel_info" id="add_child" (click)="toggleDrawer()">
+        <span>{{roomsGroup.rooms ? roomsGroup.rooms : 1 }}</span>{{(roomsGroup.rooms==1?'room':'rooms') | translate}},
+        <span class="guest_num"> {{roomsGroup.adults + roomsGroup.child}}</span> {{(roomsGroup.adults+roomsGroup.child==1?'guest_hotel':'guests_hotel') | translate}}
+        <div class="drop_aerrow"></div>
     </div>
-    <!-- </ng-scrollbar> -->
 
-  </div>
+    <div class="traveller_add_block" id="add_child_open {{openDrawer}}" [ngClass]="(openDrawer==true)?'panel_show':'panel_hide'">
+        <div class="rooms_aloc">
+            <ul>
+                <li>
+                    <div class="left"> <span>{{'room' | translate}}</span>
+                    </div>
+                    <div class="right">
+                        <button type='button' class='qtyminus' field='quantity' [disabled]="(roomsGroup.rooms  === 1 && roomsGroup.rooms  > 0 )" [ngClass]="{ 'un_active' : roomsGroup.rooms === 1 && roomsGroup.rooms > 0 }" (click)="removeRoom()">-</button>
+                        <input type='text' name='quantity' value='{{ roomsGroup.rooms ? roomsGroup.rooms : 1  }}' class='qty' readonly />
+                        <button class='qtyplus' field='quantity' [disabled]="roomsGroup.rooms >= 9" [ngClass]="{ 'un_active' : roomsGroup.rooms >= 9 || roomsGroup.rooms == 9 }" (click)="addRoom()">+</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="left"> <span>{{'adult' | translate}}</span>
+                    </div>
+
+                    <div class="right">
+                        <button type='button' class='qtyminus un_active' field='quantity' [disabled]="roomsGroup.adults === 1 && roomsGroup.adults > 0" [ngClass]="{ 'un_active' : roomsGroup.adults === 1 && roomsGroup.adults > 0 }" (click)="addRemovePerson({ type: 'minus',label: 'adult', value: roomsGroup.adults})">-</button>
+                        <input type='text' name='quantity' value='{{ roomsGroup.adults }}' class='qty' readonly />
+                        <button class='qtyplus' field='quantity' [ngClass]="{'un_active' : (roomsGroup.adults) === 28 }" [disabled]="(roomsGroup.adults) === 28" (click)="addRemovePerson({ type: 'plus',label: 'adult', value: roomsGroup.adults})">+</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="left"> <span>{{'child' | translate}}</span>
+                    </div>
+                    <div class="right">
+                        <button type='button' class='qtyminus' field='quantity' [ngClass]="{ 'un_active' : roomsGroup.child === 0}" [disabled]="roomsGroup.child === 0" (click)="addRemovePerson({ type: 'minus',label: 'child', value: roomsGroup.child})">-</button>
+                        <input type='text' name='quantity' value='{{ roomsGroup.child === 0 ? 0 : roomsGroup.child }}' class='qty' readonly />
+                        <button type='button' class='qtyplus' field='quantity' [ngClass]="{ 'un_active' : ((roomsGroup.child) === 8 || roomsGroup.child >= 8 )}" [disabled]="((roomsGroup.child) === 8 || roomsGroup.child >= 8 )" (click)="addRemovePerson({ type: 'plus',label: 'child', value: roomsGroup.child})">+</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

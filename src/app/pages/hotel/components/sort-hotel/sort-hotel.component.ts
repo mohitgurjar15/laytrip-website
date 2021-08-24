@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 declare var $: any;
@@ -32,20 +32,10 @@ export class SortHotelComponent implements OnInit {
         this.locationName = info.city;
       }
     }
-    //this.sortHotelData('total', 'ASC', 'lh_price');
     this.loadJquery();
   }
 
   loadJquery() {
-    // $(".responsive_sort_btn").click(function () {
-    //   $("#responsive_sortby_show").slideDown();
-    //   $("body").addClass('overflow-hidden');
-    // });
-
-    // $(".filter_close > a").click(function () {
-    //   $("#responsive_sortby_show").slideUp();
-    //   $("body").removeClass('overflow-hidden');
-    // });
     // Start filter Shortby js
     $(document).on('show', '#accordion', function (e) {
       $(e.target).prev('.accordion-heading').addClass('accordion-opened');
@@ -67,14 +57,6 @@ export class SortHotelComponent implements OnInit {
     this.sortType = 'lh_price';
     this.sortHotel.emit({ key, order });
   }
-
-  /* ngOnChanges(changes: SimpleChanges) {
-    if (changes['hotelDetails'].currentValue != 'undefined') {
-      if (this.hotelDetails != 'undefined') {
-        this.hotelDetails = changes['hotelDetails'].currentValue.hotels;
-      }
-    }
-  } */
 
   toggleLowToHigh() {
     this.lowToHighToggle = !this.lowToHighToggle;

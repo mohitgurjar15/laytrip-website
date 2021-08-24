@@ -4,991 +4,892 @@
 @import "../../../../../_hotel.scss";
 @import "../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 .search_result .result_listing.one_way_list .search_block .detail_info_show .tab-content .card-body .tab_detail.fare_detail_cnt p {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.section_description {
-  //transform: translate(-60%, -70%);
-  //transform: translate(-100%, -50%);
-  width: 240px;
-  right: 10px;
-  bottom: 10%;
-  position: absolute;
-
-  &.no_flight {
-    transform: translate(0, 0) !important;
-    right: 0;
-  }
-
-  @include tab-view {
-    bottom: 0;
-    right: 0;
-  }
-
-  // .sec_text{
-  //   padding-right: 15px;
-  // }
-  a {
-    cursor: pointer;
-    width: 20px !important;
-    position: absolute;
-    right: 0;
-  }
-}
-
-.view_more {
-  cursor: pointer;
-}
-
-.desktop_on {
-  @include tab-view {
-    display: none !important;
-  }
-}
-
-.mobile_views {
-  display: none;
-
-  &.comnn_wrspss {
-    flex-direction: column;
-    // align-items: center;
+    display: flex;
     justify-content: space-between;
-    height: 100%;
     width: 100%;
+}
 
-    .left_side {
-      max-width: 100% !important;
-    }
-  }
-
-  @include tab-view {
-    display: flex;
-  }
-
-  .center_side {
-    .stops_wr {
-      min-width: 55px;
-
-      .accordion_infos_1 {
-        .det_link {
-          width: 68px;
-          position: relative;
-          padding-right: 15px;
-          display: flex;
-          align-items: center
-        }
-      }
-    }
-  }
-
-  .layover_wrps {
-    flex-direction: column;
-    display: flex;
-    text-align: left;
-  }
-
-  .pipe_wrap {
-    display: flex;
-    //max-width: 45px;
-    width: 56%;
-    font-size: 8px;
-    padding: 0 15px;
-    color: $grayed_border;
-    min-width: 70px;
-
-    @include mobile-xsm-view {
-      width: 33.33%;
-      padding: 0 8px;
-    }
-
-    .pipe_line_wrps {
-      width: 100%;
-      margin-top: 5px;
-
-      .pine_line {
-        height: 1px;
-        width: 100%;
-        background-color: $grayed_border;
-        display: flex;
-      }
-
-      .stp_names {
-        display: flex;
-        padding-top: 3px;
-        text-align: center;
-
-        .t_name {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-
-          &::before {
-            content: '';
-            height: 7px;
-            width: 7px;
-            border-radius: 50%;
-            border: 1px solid $grayed_border;
-            background-color: $background-white;
-            position: absolute;
-            top: -7px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-        }
-
-        .n_stop {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-        }
-      }
-    }
-  }
-
-  .fl_timin {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    flex: 2;
-
-    @include tab-view {
-      flex-direction: row;
-      align-items: flex-start;
-      margin-top: 7px;
-    }
-
-    .hh_mm {
-      font-size: 14px;
-      font-weight: 600;
-      color: $text-black;
-
-      @include tab-view {
-        padding-right: 7px;
-        font-size: 10px;
-        min-width: 50px;
-        text-align: right;
-        width: 27%;
-      }
-
-      @include mobile-xsm-view {
-        padding-right: 5px;
-        width: 33.33%;
-      }
-    }
-
-    .lyovr_txt {
-      font-size: 12px;
-      font-weight: 500;
-      color: $mid_gray_bg;
-      margin-left: 5px;
-
-      @include tab-view {
-        font-size: 10px;
-        font-weight: 300;
-      }
-
-      @include mobile-xsm-view {
-        font-size: 8px;
-      }
-    }
-  }
-
-  .accordion_infos_1 {
+.scrollLoading_wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    .det_link {
-      color: $active-tab-text;
-      font-size: 9px;
-      margin-left: 45px;
-      font-weight: 500;
-      position: relative;
-      padding-right: 15px;
-      display: flex;
-      align-items: center;
-
-      &[aria-expanded="true"] {
-        color: $mid_gray_bg;
-
-        &:after {
-          content: "";
-          position: absolute;
-          padding: 5px 6px;
-          background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-          background-position: right;
-          background-repeat: no-repeat;
-          background-size: 8px;
-          transition: 0.3s;
-          right: 0;
-          border: none;
-          top: 2px;
-        }
-      }
-
-      &[aria-expanded="false"] {
-        color: $active-tab-text;
-
-        &:after {
-          position: absolute;
-          padding: 5px 6px;
-          background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
-          background-position: right;
-          background-repeat: no-repeat;
-          background-size: 8px;
-          content: "";
-          transition: 0.3s;
-          right: 0;
-          top: 2px;
-          border: none;
-        }
-      }
-    }
-  }
-
-  .upper_f_wrps {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 0 2px 0 0;
-
-    .fl_times {
-      &.duel_wrps {
-        flex-direction: column;
-        display: flex;
-        // width: auto;
-        width: 27%;
-        position: relative;
-        text-align: right;
-
-        @include mobile-xsm-view {
-          width: 33.33%;
-          text-align: right;
-        }
-
-        .fl_desitines {
-          font-weight: 400;
-          color: $mid_gray_bg;
-          font-size: 8px;
-          position: relative;
-          width: 100%;
-          margin-top: 2px;
-
-          // white-space: nowrap;
-          // overflow: hidden;
-          // text-overflow: ellipsis;
-          br {
-            display: none;
-          }
-
-          .code_bt_m {}
-
-          .code_name_m {
-            display: none;
-            position: absolute;
-            color: $text-black;
-            font-size: 8px;
-            font-weight: 600;
-            top: 13px;
-            right: 0;
-            align-items: center;
-            justify-content: flex-start;
-            border-radius: 6px;
-            background-color: $tab-bg-gray;
-            padding: 1px 6px;
-          }
-        }
-      }
-    }
-
-    .fl_desti {
-      &.duel_wrps {
-        flex-direction: column;
-        display: flex;
-        //width: auto;
-        width: 35%;
-        position: relative;
-
-        @include mobile-xsm-view {
-          width: 33.33%;
-        }
-
-        .fl_name {
-          font-size: 12px !important;
-          text-align: left !important;
-          margin: 0 !important;
-
-          @include mobile-xsm-view {
-            font-size: 10px !important;
-          }
-        }
-
-        .fl_name_inner {
-          font-weight: 400;
-          color: $mid_gray_bg;
-          font-size: 8px;
-          position: relative;
-          width: 100%;
-          margin-top: 2px;
-          // white-space: nowrap;
-          // overflow: hidden;
-          // text-overflow: ellipsis;
-        }
-
-        br {
-          display: none;
-        }
-
-        .code_bt_m {}
-
-        .code_name_m {
-          display: none;
-          position: absolute;
-          color: $text-black;
-          font-size: 8px;
-          font-weight: 600;
-          top: 13px;
-          left: 0;
-          align-items: center;
-          justify-content: flex-start;
-          border-radius: 6px;
-          background-color: $tab-bg-gray;
-          padding: 1px 6px;
-
-          &.active {
-            display: flex;
-          }
-        }
-      }
-    }
-  }
+    margin-top: 15px;
+    width: 100%;
+    font-size: 25px;
 }
 
-.routing_main_wrps {
-  .shorting_label {
-    font-size: 16px;
-    font-weight: 500;
-    color: $text-grey;
-    margin: 0 0 5px;
-  }
-
-  .card_box {
-    position: relative;
-    border: 1px solid $box-border-color;
-    border-radius: 10px;
-    padding: 15px 20px 10px;
-    margin-bottom: 20px;
-
+.section_description {
+    //transform: translate(-60%, -70%);
+    //transform: translate(-100%, -50%);
+    width: 240px;
+    right: 10px;
+    bottom: 10%;
+    position: absolute;
+    &.no_flight {
+        transform: translate(0, 0) !important;
+        right: 0;
+    }
     @include tab-view {
-      padding: 10px;
+        bottom: 0;
+        right: 0;
     }
-
-    @include mobile-xsm-view {
-      padding: 5px;
-      margin-bottom: 10px;
+    // .sec_text{
+    //   padding-right: 15px;
+    // }
+    a {
+        cursor: pointer;
+        width: 20px !important;
+        position: absolute;
+        right: 0;
     }
+}
 
-    &:last-child {
-      margin-bottom: 0;
+.view_more {
+    cursor: pointer;
+}
+
+.desktop_on {
+    @include tab-view {
+        display: none !important;
     }
+}
 
-    .card_iinner {
-      display: flex;
-      justify-content: space-between;
-
-      .main_left_side {
+.mobile_views {
+    display: none;
+    &.comnn_wrspss {
+        flex-direction: column;
+        // align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        width: 100%;
+        .left_side {
+            max-width: 100% !important;
+        }
+    }
+    @include tab-view {
+        display: flex;
+    }
+    .center_side {
+        .stops_wr {
+            min-width: 55px;
+            .accordion_infos_1 {
+                .det_link {
+                    width: 68px;
+                    position: relative;
+                    padding-right: 15px;
+                    display: flex;
+                    align-items: center
+                }
+            }
+        }
+    }
+    .layover_wrps {
+        flex-direction: column;
+        display: flex;
+        text-align: left;
+    }
+    .pipe_wrap {
+        display: flex;
+        //max-width: 45px;
+        width: 56%;
+        font-size: 8px;
+        padding: 0 15px;
+        color: $grayed_border;
+        min-width: 70px;
+        @include mobile-xsm-view {
+            width: 33.33%;
+            padding: 0 8px;
+        }
+        .pipe_line_wrps {
+            width: 100%;
+            margin-top: 5px;
+            .pine_line {
+                height: 1px;
+                width: 100%;
+                background-color: $grayed_border;
+                display: flex;
+            }
+            .stp_names {
+                display: flex;
+                padding-top: 3px;
+                text-align: center;
+                .t_name {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    &::before {
+                        content: '';
+                        height: 7px;
+                        width: 7px;
+                        border-radius: 50%;
+                        border: 1px solid $grayed_border;
+                        background-color: $background-white;
+                        position: absolute;
+                        top: -7px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+                .n_stop {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                }
+            }
+        }
+    }
+    .fl_timin {
         display: flex;
         flex-direction: column;
-        flex: 4;
-
-        .common_wrper {
-          display: flex;
-
-          &:nth-child(2) {
-            @include tab-view {
-              margin-top: 15px;
-            }
-          }
-
-          @include tab-view {
-            height: 100%;
-          }
-        }
-
-        .left_side {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-          max-width: 320px;
-
-          .flight_nams_wrps {
-            display: flex;
-            justify-content: space-between;
-
-            &:nth-child(2) {
-              margin-top: 10px;
-            }
-
-            &:nth-child(3) {
-              margin-top: 10px;
-            }
-
-            .fight_secs {
-              display: flex;
-              flex-direction: column;
-
-              &:first-child {
-                padding-right: 15px;
-                padding-top: 10px;
-                flex: 1;
-                max-width: 95px;
-
-                @include tab-view {
-                  max-width: 40px;
-                  padding: 0;
-                  margin-right: 15px;
-                }
-              }
-
-              &:last-child {
-                padding-top: 22px;
-                flex: 2;
-
-                @include tab-view {
-                  padding-top: 0;
-                }
-              }
-
-              img {
-                max-width: 55px;
-                margin: 0 auto;
-
-                @include tab-view {
-                  max-width: 36px;
-                }
-
-                @include mobile-sm-view {
-                  max-width: 29px;
-                }
-              }
-
-              .fl_name {
-                font-size: 10px;
-                font-weight: 600;
-                color: $text-black;
-                text-align: center;
-                margin-top: 3px;
-
-                @include tab-view {
-                  font-size: 8px;
-                }
-              }
-
-              .fl_num {
-                font-size: 9px;
-                font-weight: 500;
-                color: $mid_gray_bg;
-                text-align: center;
-                margin-top: 3px;
-
-                @include tab-view {
-                  font-size: 7px;
-                }
-              }
-
-              .fl_times {
-                font-size: 14px;
-                font-weight: 600;
-                color: $text-black;
-
-                @include tab-view {
-                  font-size: 12px;
-                }
-
-                @include mobile-xsm-view {
-                  font-size: 10px;
-                }
-              }
-
-              .fl_desti {
-                font-size: 12px;
-                font-weight: 400;
-                color: $mid_gray_bg;
-                position: relative;
-
-                .code_sp_d {
-                  position: relative;
-                  cursor: pointer;
-
-                  &:hover {
-                    .name_span_d {
-                      display: inline-block;
-                    }
-                  }
-
-                  .name_span_d {
-                    display: none;
-                    position: absolute;
-                    color: $text-black;
-                    font-size: 12px;
-                    font-weight: 500;
-                    top: 20px;
-                    left: 0;
-                    width: auto;
-                    margin: 0 auto;
-                    text-align: center;
-                    border-radius: 6px;
-                    background-color: $tab-bg-gray;
-                    padding: 1px 6px;
-                  }
-                }
-
-                .code_sp_d2 {
-                  position: relative;
-                  cursor: pointer;
-
-                  &:hover {
-                    .name_span_d2 {
-                      display: inline-block;
-                    }
-                  }
-
-                  .name_span_d2 {
-                    display: none;
-                    position: absolute;
-                    color: $text-black;
-                    font-size: 12px;
-                    font-weight: 500;
-                    top: 20px;
-                    left: 0;
-                    width: auto;
-                    margin: 0 auto;
-                    text-align: center;
-                    border-radius: 6px;
-                    background-color: $tab-bg-gray;
-                    padding: 1px 6px;
-                  }
-                }
-
-                @include tab-view {
-                  font-size: 8px;
-                }
-              }
-            }
-          }
-        }
-
-        .center_side {
-          flex: 1;
-          display: flex;
-          justify-content: space-between;
-          text-align: center;
-          padding-top: 22px;
-          font-size: 14px;
-          font-weight: 600;
-
-          .stops_wr {
-            max-width: 71px;
-            justify-content: space-between;
-            flex-direction: column;
-            display: flex;
-            flex: 1;
-
-            .stopages {
-              flex-direction: column;
-              display: flex;
-            }
-
-            .accordion_infos_1 {
-              .det_link {
-                width: 68px;
-                position: relative;
-                padding-right: 15px;
-                display: flex;
-                align-items: center
-              }
-            }
-
-            .accordion_infos {
-              margin-top: 5px;
-              display: flex;
-            }
-          }
-
-          .fl_type {
-            color: $text-black;
-          }
-
-          .stop_names {
-            font-size: 12px;
-            font-weight: 500;
-            color: $mid_gray_bg;
-          }
-
-          .fl_timin {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            flex: 2;
-
-            @include tab-view {
-              flex-direction: row;
-              align-items: center;
-            }
-
-            .hh_mm {
-              font-size: 14px;
-              font-weight: 600;
-              color: $text-black;
-
-              @include tab-view {
-                margin-right: 10px;
-                font-size: 11px;
-                min-width: 50px;
-              }
-            }
-
-            .lyovr_txt {
-              font-size: 12px;
-              font-weight: 500;
-              color: $mid_gray_bg;
-            }
-          }
-
-          .accordion_infos_1 {
-            .det_link {
-              color: $active-tab-text;
-
-              &[aria-expanded="true"] {
-                color: $mid_gray_bg;
-
-                &:after {
-                  content: "";
-                  position: absolute;
-                  padding: 5px 9px;
-                  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                  background-position: right;
-                  background-repeat: no-repeat;
-                  background-size: 11px;
-                  transition: 0.3s;
-                  right: 0;
-                  top: 5px;
-                  border: none;
-                }
-              }
-
-              &[aria-expanded="false"] {
-                color: $active-tab-text;
-
-                &:after {
-                  position: absolute;
-                  padding: 5px 9px;
-                  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
-                  background-position: right;
-                  background-repeat: no-repeat;
-                  background-size: 11px;
-                  content: "";
-                  transition: 0.3s;
-                  right: 0;
-                  top: 5px;
-                  border: none;
-                }
-              }
-            }
-          }
-        }
-      }
-
-      .right_side {
-        flex: 1;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-
-        .fl_fares {
-          display: flex;
-          flex-direction: column;
-          font-size: 10px;
-          font-weight: 400;
-          text-align: center;
-
-          @include tab-view {
-            min-width: 82px;
-          }
-
-          .fare_type {
-            color: $mid_gray_bg;
-
-            &.desk_fare {
-              @include tab-view {
-                //display: none;
-              }
-            }
-
-            &.mobile_fare {
-              display: none;
-
-              @include tab-view {
-                //display: flex;
-                font-size: 7px;
-                text-align: center;
-                margin-top: 5px;
-              }
-            }
-          }
-
-          .total_pr {
-            color: $pink;
-            display: flex;
-            align-items: center;
-
-            @include tab-view {
-              flex-direction: column;
-              line-height: 16px;
-            }
-
-            .big-num {
-              font-size: 24px;
-              margin: 0 3px;
-              font-weight: 600;
-
-              @include tab-view {
-                font-size: 16px;
-              }
-            }
-
-            .dashed_price {
-              font-size: 24px;
-              margin: 0 3px;
-              font-weight: 600;
-              text-decoration: line-through;
-              color: #878787 !important;
-
-              @include tab-view {
-                font-size: 16px;
-              }
-            }
-          }
-
-          .cta_btn {
-            position: relative;
-
-            button {
-              max-width: 113px;
-              width: 100%;
-              height: 32px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              background: $active-tab-text;
-              border-radius: 25px;
-              border: 1px solid $active-tab-text;
-              font-size: 16px;
-              color: $text-white;
-              transition: .3s;
-              position: relative;
-              z-index: 9;
-              overflow: hidden;
-              white-space: normal;
-              margin: 5px auto;
-
-              @include tab-view {
-                font-size: 12px;
-                max-width: 100px;
-                margin-bottom: 0;
-              }
-
-              &:focus {
-                outline: none;
-                box-shadow: none;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    .detail_accorrd {
-      border: 1px solid $box-border-color;
-      border-radius: 10px;
-      padding: 0;
-      margin-top: 15px;
-
-      .accordion_body {
-        padding: 15px;
-
+        text-align: center;
+        flex: 2;
         @include tab-view {
-          padding: 10px;
-        }
-      }
-
-      .io_ru_wrps {
-        display: flex;
-        justify-content: space-between;
-
-        @include tab-view {
-          flex-direction: column;
-        }
-
-        .installment_wprs {
-          flex: 2;
-          padding-right: 50px;
-
-          @include tab-view {
-            padding-right: 0px;
-          }
-
-          .type_lines {
-            border-bottom: 1px solid $box-border-color;
-            padding-bottom: 15px;
-            font-size: 12px;
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: 15px;
-
-            @include tab-view {
-              flex-direction: column;
-              padding-bottom: 6px;
-              margin-bottom: 6px;
-              font-size: 10px;
-            }
-
-            &:nth-child(4) {
-              border: none;
-              margin: 0;
-              padding: 0;
-            }
-
-            .titles {
-              font-weight: 600;
-              color: $text-black;
-              margin-right: 15px;
-              flex: 1;
-            }
-
-            .texts {
-              font-weight: 500;
-              color: $mid_gray_bg;
-              flex: 3;
-
-              @include tab-view {
-                font-weight: 400;
-              }
-            }
-          }
-        }
-
-        .rules_wrps {
-          flex: 1;
-          max-width: 188px;
-          display: flex;
-          flex-direction: column;
-
-          @include tab-view {
-            padding-top: 5px;
-            max-width: 100%;
             flex-direction: row;
-          }
-
-          .heads {
+            align-items: flex-start;
+            margin-top: 7px;
+        }
+        .hh_mm {
             font-size: 14px;
             font-weight: 600;
             color: $text-black;
-
             @include tab-view {
-              min-width: 60px;
-              flex: 1;
-              font-size: 10px;
+                padding-right: 7px;
+                font-size: 10px;
+                min-width: 50px;
+                text-align: right;
+                width: 27%;
             }
-
-            img {
-              max-width: 15px;
-              margin-right: 5px;
+            @include mobile-xsm-view {
+                padding-right: 5px;
+                width: 33.33%;
             }
-          }
-
-          .texts_rules {
-            font-size: 10px;
-            font-weight: 400;
-            color: $grayed_border;
-            margin-top: 15px;
-            line-height: 14px;
-            overflow-y: auto;
-            max-height: 150px;
-
-            a {
-              text-decoration: underline;
-            }
-
+        }
+        .lyovr_txt {
+            font-size: 12px;
+            font-weight: 500;
+            color: $mid_gray_bg;
+            margin-left: 5px;
             @include tab-view {
-              margin-top: 0;
+                font-size: 10px;
+                font-weight: 300;
             }
-          }
+            @include mobile-xsm-view {
+                font-size: 8px;
+            }
         }
-      }
-
-      .full_desk_not {
-        @include tab-view {
-          display: none;
-        }
-      }
-
-      .notifi_text {
-        font-weight: 400;
-        color: $active-tab-text;
-        font-size: 10px;
-        margin-top: 15px;
+    }
+    .accordion_infos_1 {
         display: flex;
-        justify-content: flex-start;
+        align-items: center;
+        justify-content: center;
+        .det_link {
+            color: $active-tab-text;
+            font-size: 9px;
+            margin-left: 45px;
+            font-weight: 500;
+            position: relative;
+            padding-right: 15px;
+            display: flex;
+            align-items: center;
+            &[aria-expanded="true"] {
+                color: $mid_gray_bg;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    padding: 5px 6px;
+                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                    background-position: right;
+                    background-repeat: no-repeat;
+                    background-size: 8px;
+                    transition: 0.3s;
+                    right: 0;
+                    border: none;
+                    top: 2px;
+                }
+            }
+            &[aria-expanded="false"] {
+                color: $active-tab-text;
+                &:after {
+                    position: absolute;
+                    padding: 5px 6px;
+                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                    background-position: right;
+                    background-repeat: no-repeat;
+                    background-size: 8px;
+                    content: "";
+                    transition: 0.3s;
+                    right: 0;
+                    top: 2px;
+                    border: none;
+                }
+            }
+        }
+    }
+    .upper_f_wrps {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        padding: 0 2px 0 0;
+        .fl_times {
+            &.duel_wrps {
+                flex-direction: column;
+                display: flex;
+                // width: auto;
+                width: 27%;
+                position: relative;
+                text-align: right;
+                @include mobile-xsm-view {
+                    width: 33.33%;
+                    text-align: right;
+                }
+                .fl_desitines {
+                    font-weight: 400;
+                    color: $mid_gray_bg;
+                    font-size: 8px;
+                    position: relative;
+                    width: 100%;
+                    margin-top: 2px;
+                    // white-space: nowrap;
+                    // overflow: hidden;
+                    // text-overflow: ellipsis;
+                    br {
+                        display: none;
+                    }
+                    .code_bt_m {}
+                    .code_name_m {
+                        display: none;
+                        position: absolute;
+                        color: $text-black;
+                        font-size: 8px;
+                        font-weight: 600;
+                        top: 13px;
+                        right: 0;
+                        align-items: center;
+                        justify-content: flex-start;
+                        border-radius: 6px;
+                        background-color: $tab-bg-gray;
+                        padding: 1px 6px;
+                    }
+                }
+            }
+        }
+        .fl_desti {
+            &.duel_wrps {
+                flex-direction: column;
+                display: flex;
+                //width: auto;
+                width: 35%;
+                position: relative;
+                @include mobile-xsm-view {
+                    width: 33.33%;
+                }
+                .fl_name {
+                    font-size: 12px !important;
+                    text-align: left !important;
+                    margin: 0 !important;
+                    @include mobile-xsm-view {
+                        font-size: 10px !important;
+                    }
+                }
+                .fl_name_inner {
+                    font-weight: 400;
+                    color: $mid_gray_bg;
+                    font-size: 8px;
+                    position: relative;
+                    width: 100%;
+                    margin-top: 2px;
+                    // white-space: nowrap;
+                    // overflow: hidden;
+                    // text-overflow: ellipsis;
+                }
+                br {
+                    display: none;
+                }
+                .code_bt_m {}
+                .code_name_m {
+                    display: none;
+                    position: absolute;
+                    color: $text-black;
+                    font-size: 8px;
+                    font-weight: 600;
+                    top: 13px;
+                    left: 0;
+                    align-items: center;
+                    justify-content: flex-start;
+                    border-radius: 6px;
+                    background-color: $tab-bg-gray;
+                    padding: 1px 6px;
+                    &.active {
+                        display: flex;
+                    }
+                }
+            }
+        }
+    }
+}
 
+.routing_main_wrps {
+    .shorting_label {
+        font-size: 16px;
+        font-weight: 500;
+        color: $text-grey;
+        margin: 0 0 5px;
+    }
+    .card_box {
+        position: relative;
+        border: 1px solid $box-border-color;
+        border-radius: 10px;
+        padding: 15px 20px 10px;
+        margin-bottom: 20px;
         @include tab-view {
-          margin-top: 10px;
+            padding: 10px;
         }
-
-        &.desk_notifi {
-          @include tab-view {
-            display: none;
-          }
+        @include mobile-xsm-view {
+            padding: 5px;
+            margin-bottom: 10px;
         }
-
-        &.mobile_notifi {
-          display: none;
-
-          @include tab-view {
-            display: block;
-            margin-bottom: 5px;
-          }
+        &:last-child {
+            margin-bottom: 0;
         }
-      }
+        .card_iinner {
+            display: flex;
+            justify-content: space-between;
+            .main_left_side {
+                display: flex;
+                flex-direction: column;
+                flex: 4;
+                .common_wrper {
+                    display: flex;
+                    &:nth-child(2) {
+                        @include tab-view {
+                            margin-top: 15px;
+                        }
+                    }
+                    @include tab-view {
+                        height: 100%;
+                    }
+                }
+                .left_side {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    max-width: 320px;
+                    .flight_nams_wrps {
+                        display: flex;
+                        justify-content: space-between;
+                        &:nth-child(2) {
+                            margin-top: 10px;
+                        }
+                        &:nth-child(3) {
+                            margin-top: 10px;
+                        }
+                        .fight_secs {
+                            display: flex;
+                            flex-direction: column;
+                            &:first-child {
+                                padding-right: 15px;
+                                padding-top: 10px;
+                                flex: 1;
+                                max-width: 95px;
+                                @include tab-view {
+                                    max-width: 40px;
+                                    padding: 0;
+                                    margin-right: 15px;
+                                }
+                            }
+                            &:last-child {
+                                padding-top: 22px;
+                                flex: 2;
+                                @include tab-view {
+                                    padding-top: 0;
+                                }
+                            }
+                            img {
+                                max-width: 55px;
+                                margin: 0 auto;
+                                @include tab-view {
+                                    max-width: 36px;
+                                }
+                                @include mobile-sm-view {
+                                    max-width: 29px;
+                                }
+                            }
+                            .fl_name {
+                                font-size: 10px;
+                                font-weight: 600;
+                                color: $text-black;
+                                text-align: center;
+                                margin-top: 3px;
+                                @include tab-view {
+                                    font-size: 8px;
+                                }
+                            }
+                            .fl_num {
+                                font-size: 9px;
+                                font-weight: 500;
+                                color: $mid_gray_bg;
+                                text-align: center;
+                                margin-top: 3px;
+                                @include tab-view {
+                                    font-size: 7px;
+                                }
+                            }
+                            .fl_times {
+                                font-size: 14px;
+                                font-weight: 600;
+                                color: $text-black;
+                                @include tab-view {
+                                    font-size: 12px;
+                                }
+                                @include mobile-xsm-view {
+                                    font-size: 10px;
+                                }
+                            }
+                            .fl_desti {
+                                font-size: 12px;
+                                font-weight: 400;
+                                color: $mid_gray_bg;
+                                position: relative;
+                                .code_sp_d {
+                                    position: relative;
+                                    cursor: pointer;
+                                    &:hover {
+                                        .name_span_d {
+                                            display: inline-block;
+                                        }
+                                    }
+                                    .name_span_d {
+                                        display: none;
+                                        position: absolute;
+                                        color: $text-black;
+                                        font-size: 12px;
+                                        font-weight: 500;
+                                        top: 20px;
+                                        left: 0;
+                                        width: auto;
+                                        margin: 0 auto;
+                                        text-align: center;
+                                        border-radius: 6px;
+                                        background-color: $tab-bg-gray;
+                                        padding: 1px 6px;
+                                    }
+                                }
+                                .code_sp_d2 {
+                                    position: relative;
+                                    cursor: pointer;
+                                    &:hover {
+                                        .name_span_d2 {
+                                            display: inline-block;
+                                        }
+                                    }
+                                    .name_span_d2 {
+                                        display: none;
+                                        position: absolute;
+                                        color: $text-black;
+                                        font-size: 12px;
+                                        font-weight: 500;
+                                        top: 20px;
+                                        left: 0;
+                                        width: auto;
+                                        margin: 0 auto;
+                                        text-align: center;
+                                        border-radius: 6px;
+                                        background-color: $tab-bg-gray;
+                                        padding: 1px 6px;
+                                    }
+                                }
+                                @include tab-view {
+                                    font-size: 8px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .center_side {
+                    flex: 1;
+                    display: flex;
+                    justify-content: space-between;
+                    text-align: center;
+                    padding-top: 22px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    .stops_wr {
+                        max-width: 71px;
+                        justify-content: space-between;
+                        flex-direction: column;
+                        display: flex;
+                        flex: 1;
+                        .stopages {
+                            flex-direction: column;
+                            display: flex;
+                        }
+                        .accordion_infos_1 {
+                            .det_link {
+                                width: 68px;
+                                position: relative;
+                                padding-right: 15px;
+                                display: flex;
+                                align-items: center
+                            }
+                        }
+                        .accordion_infos {
+                            margin-top: 5px;
+                            display: flex;
+                        }
+                    }
+                    .fl_type {
+                        color: $text-black;
+                    }
+                    .stop_names {
+                        font-size: 12px;
+                        font-weight: 500;
+                        color: $mid_gray_bg;
+                    }
+                    .fl_timin {
+                        display: flex;
+                        flex-direction: column;
+                        text-align: center;
+                        flex: 2;
+                        @include tab-view {
+                            flex-direction: row;
+                            align-items: center;
+                        }
+                        .hh_mm {
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: $text-black;
+                            @include tab-view {
+                                margin-right: 10px;
+                                font-size: 11px;
+                                min-width: 50px;
+                            }
+                        }
+                        .lyovr_txt {
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: $mid_gray_bg;
+                        }
+                    }
+                    .accordion_infos_1 {
+                        .det_link {
+                            color: $active-tab-text;
+                            &[aria-expanded="true"] {
+                                color: $mid_gray_bg;
+                                &:after {
+                                    content: "";
+                                    position: absolute;
+                                    padding: 5px 9px;
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 11px;
+                                    transition: 0.3s;
+                                    right: 0;
+                                    top: 5px;
+                                    border: none;
+                                }
+                            }
+                            &[aria-expanded="false"] {
+                                color: $active-tab-text;
+                                &:after {
+                                    position: absolute;
+                                    padding: 5px 9px;
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/blue_down.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 11px;
+                                    content: "";
+                                    transition: 0.3s;
+                                    right: 0;
+                                    top: 5px;
+                                    border: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .right_side {
+                flex: 1;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+                .fl_fares {
+                    display: flex;
+                    flex-direction: column;
+                    font-size: 10px;
+                    font-weight: 400;
+                    text-align: center;
+                    @include tab-view {
+                        min-width: 82px;
+                    }
+                    .fare_type {
+                        color: $mid_gray_bg;
+                        &.desk_fare {
+                            @include tab-view {
+                                //display: none;
+                            }
+                        }
+                        &.mobile_fare {
+                            display: none;
+                            @include tab-view {
+                                //display: flex;
+                                font-size: 7px;
+                                text-align: center;
+                                margin-top: 5px;
+                            }
+                        }
+                    }
+                    .total_pr {
+                        color: $pink;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        @include tab-view {
+                            flex-direction: column;
+                            line-height: 16px;
+                        }
+                        .big-num {
+                            font-size: 24px;
+                            margin: 0 3px;
+                            font-weight: 600;
+                            line-height: 35px;
+                            @include tab-view {
+                                font-size: 16px;
+                                line-height: normal;
+                            }
+                        }
+                        .dashed_price {
+                            font-size: 24px;
+                            margin: 0 3px;
+                            font-weight: 600;
+                            text-decoration: line-through;
+                            color: #878787 !important;
+                            @include tab-view {
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                    .cta_btn {
+                        position: relative;
+                        button {
+                            max-width: 113px;
+                            width: 100%;
+                            height: 32px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background: $active-tab-text;
+                            border-radius: 25px;
+                            border: 1px solid $active-tab-text;
+                            font-size: 16px;
+                            color: $text-white;
+                            transition: .3s;
+                            position: relative;
+                            z-index: 9;
+                            overflow: hidden;
+                            white-space: normal;
+                            margin: 5px auto;
+                            &.no_availability {
+                                pointer-events: none;
+                                cursor: not-allowed;
+                                background: $grayed_border;
+                                border-color: $grayed_border;
+                            }
+                            &.pending_availability {
+                                pointer-events: none;
+                                border: transparent;
+                                animation: placeHolderShimmer 1.25s linear infinite forwards;
+                                background: $fb-loader-bg;
+                                background: linear-gradient(to right, $fb-loader-colorone 8%, $fb-loader-colortwo 18%, $fb-loader-colorone 33%);
+                                background-size: 800px 104px;
+                            }
+                            @include tab-view {
+                                font-size: 12px;
+                                max-width: 100px;
+                                margin-bottom: 0;
+                            }
+                            @include mobile-sm-view {
+                                padding: 0 5px;
+                                font-size: 10px;
+                            }
+                            &:focus {
+                                outline: none;
+                                box-shadow: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .detail_accorrd {
+            border: 1px solid $box-border-color;
+            border-radius: 10px;
+            padding: 0;
+            margin-top: 15px;
+            .accordion_body {
+                padding: 15px;
+                @include tab-view {
+                    padding: 10px;
+                }
+            }
+            .io_ru_wrps {
+                display: flex;
+                justify-content: space-between;
+                @include tab-view {
+                    flex-direction: column;
+                }
+                .installment_wprs {
+                    flex: 2;
+                    padding-right: 50px;
+                    @include tab-view {
+                        padding-right: 0px;
+                    }
+                    .type_lines {
+                        border-bottom: 1px solid $box-border-color;
+                        padding-bottom: 15px;
+                        font-size: 12px;
+                        display: flex;
+                        justify-content: flex-start;
+                        margin-bottom: 15px;
+                        @include tab-view {
+                            flex-direction: column;
+                            padding-bottom: 6px;
+                            margin-bottom: 6px;
+                            font-size: 10px;
+                        }
+                        &:nth-child(4) {
+                            border: none;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        .titles {
+                            font-weight: 600;
+                            color: $text-black;
+                            margin-right: 15px;
+                            flex: 1;
+                        }
+                        .texts {
+                            font-weight: 500;
+                            color: $mid_gray_bg;
+                            flex: 3;
+                            @include tab-view {
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                }
+                .rules_wrps {
+                    flex: 1;
+                    max-width: 188px;
+                    display: flex;
+                    flex-direction: column;
+                    @include tab-view {
+                        padding-top: 5px;
+                        max-width: 100%;
+                        flex-direction: row;
+                    }
+                    .heads {
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: $text-black;
+                        @include tab-view {
+                            min-width: 60px;
+                            flex: 1;
+                            font-size: 10px;
+                        }
+                        img {
+                            max-width: 15px;
+                            margin-right: 5px;
+                        }
+                    }
+                    .texts_rules {
+                        font-size: 10px;
+                        font-weight: 400;
+                        color: $grayed_border;
+                        margin-top: 15px;
+                        line-height: 14px;
+                        overflow-y: auto;
+                        max-height: 150px;
+                        a {
+                            text-decoration: underline;
+                        }
+                        @include tab-view {
+                            margin-top: 0;
+                        }
+                    }
+                }
+            }
+            .full_desk_not {
+                @include tab-view {
+                    display: none;
+                }
+            }
+            .notifi_text {
+                font-weight: 400;
+                color: $active-tab-text;
+                font-size: 10px;
+                margin-top: 15px;
+                display: flex;
+                justify-content: flex-start;
+                @include tab-view {
+                    margin-top: 10px;
+                }
+                &.desk_notifi {
+                    @include tab-view {
+                        display: none;
+                    }
+                }
+                &.mobile_notifi {
+                    display: none;
+                    @include tab-view {
+                        display: block;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+        }
+        .off_label {
+            background-color: #1CD304;
+            font-size: 12px;
+            line-height: 15px;
+            color: #ffffff;
+            border-radius: 26px;
+            text-align: center;
+            padding: 7px 6px;
+            min-width: 60px;
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            @include tab-view {
+                padding: 2px 4px;
+                min-width: 50px;
+                font-size: 10px;
+            }
+        }
     }
+}
 
-    .off_label {
-      background-color: #1CD304;
-      font-size: 12px;
-      line-height: 15px;
-      color: #ffffff;
-      border-radius: 26px;
-      text-align: center;
-      padding: 7px 6px;
-      min-width: 60px;
-      position: absolute;
-      top: 3px;
-      right: 3px;
-
-      @include tab-view {
-        padding: 2px 4px;
-        min-width: 50px;
-        font-size: 10px;
-      }
+@-webkit-keyframes placeHolderShimmer {
+    0% {
+        background-position: -468px 0;
     }
-  }
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
 }

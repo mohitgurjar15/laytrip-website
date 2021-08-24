@@ -13,9 +13,13 @@ export class CartPriceSummaryComponent implements OnInit {
   cartDueLoopNum=0;
   installmentType;
   totalInstallmentAmount : any = 0;
+  userLang: string = "en";
 
   constructor(public commonFunction:CommonFunction) {
-    this.installmentType= installmentType.en;
+    // Author: xavier | 2021/7/28
+    // Description: Translates installment type
+    this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    this.installmentType = installmentType;
    }
 
   ngOnInit(): void { 

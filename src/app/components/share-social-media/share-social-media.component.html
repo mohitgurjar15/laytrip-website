@@ -1,36 +1,30 @@
-<!-- <div class="modal fade share_modal" id="share_modal">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content"> -->
 <div class="block_modal_main">
-  <div class="modal_title">
-    Share
-    <button type="button" class="close" (click)="close()">
+    <div class="modal_title">
+        {{'share' | translate}}
+        <button type="button" class="close" (click)="close()">
       <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
     </button>
-  </div>
-  <div class="modal_cnt">
-    <div class="share_i_wrapper">
-      <a  class="hover-link" (click)="share('Instagram')">
-        <img src="{{s3BucketUrl}}assets/images/icon/share_i/ig_i.svg" alt="Ig Icon">
-      </a>
-      <a  class="hover-link" (click)="share('Facebook')">
-        <img src="{{s3BucketUrl}}assets/images/icon/share_i/fb_i.svg" alt="Ig Icon">
-      </a>
-      <a  class="hover-link" (click)="share('Whatapp')">
-        <img src="{{s3BucketUrl}}assets/images/icon/share_i/w_i.svg" alt="Ig Icon">
-      </a>
-      <a  class="hover-link" (click)="copyToClipboard()">
-        <span *ngIf="isCopyText" class="copy_text">Link Copied</span>
-        <img src="{{s3BucketUrl}}assets/images/icon/share_i/link_i.svg" alt="Ig Icon">
-      </a>
     </div>
-    <div class="footer_logo">
-      <a>
-        <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
-      </a>
+    <div class="modal_cnt">
+        <div class="share_i_wrapper">
+            <a class="hover-link" (click)="share('Instagram')">
+                <img src="{{s3BucketUrl}}assets/images/icon/share_i/ig_i.svg" alt="Ig Icon">
+            </a>
+            <a class="hover-link" (click)="share('Facebook')">
+                <img src="{{s3BucketUrl}}assets/images/icon/share_i/fb_i.svg" alt="Ig Icon">
+            </a>
+            <a class="hover-link" (click)="share('Whatapp')">
+                <img src="{{s3BucketUrl}}assets/images/icon/share_i/w_i.svg" alt="Ig Icon">
+            </a>
+            <a class="hover-link" (click)="copyToClipboard()">
+                <span *ngIf="isCopyText" class="copy_text">{{'link_copied' | translate}}</span>
+                <img src="{{s3BucketUrl}}assets/images/icon/share_i/link_i.svg" alt="Ig Icon">
+            </a>
+        </div>
+        <div class="footer_logo">
+            <a>
+                <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
+            </a>
+        </div>
     </div>
-  </div>
 </div>
-<!--  </div>
-  </div>
-</div> -->

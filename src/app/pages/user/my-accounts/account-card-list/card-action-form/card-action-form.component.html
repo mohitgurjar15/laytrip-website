@@ -32,22 +32,10 @@
                 </div>
             </div>
             <div class="form_row">
-                <!-- <div class="form_field half">
-          <label>Name on Card<sup>*</sup></label>
-          <div class="text_field">
-            <input type="text" maxlength="20" tabindex="3" placeholder="Enter Name on Card" formControlName="card_name">
-            <div *ngIf="cardActionForm.controls.card_name.errors && cardActionForm.controls.card_name.touched">
-              <p *ngIf="cardActionForm.controls.card_name.errors.required" class="error_text">Please enter Name on
-                Card.
-              </p>
-            </div>
-          </div>
-        </div> -->
                 <div class="form_field half">
                     <label>{{'card_number' | translate}}<sup>*</sup></label>
                     <div class="text_field">
                         <input type="text" tabindex="4" placeholder="0000 0000 0000 0000 0000" formControlName="card_number" [textMask]="mask">
-                        <!-- [textMask]="mask" -->
                         <div *ngIf="cardActionForm.controls.card_number.errors && cardActionForm.controls.card_number.touched">
                             <p *ngIf="cardActionForm.controls.card_number.errors.required" class="error_text">{{'card_number_touched_validation' | translate}}
                             </p>
@@ -56,7 +44,7 @@
                 </div>
 
                 <div class="form_field half">
-                    <label>{{'cvv' | translate}}</label>
+                    <label>{{'cvv' | translate}}*</label>
                     <div class="text_field">
                         <input type="text" tabindex="5" placeholder="{{'cvv_placeholder' | translate}}" formControlName="card_cvv" [textMask]="cvvNoMask">
                         <div *ngIf="cardActionForm.controls.card_cvv.errors && cardActionForm.controls.card_cvv.touched">
@@ -78,8 +66,6 @@
                             <p *ngIf="cardActionForm.controls.card_expiry.errors.required" class="error_text">{{'card_expiry_date_touched_validation' | translate}}
                             </p>
                         </div>
-                        <!-- <input class="birth_date" type="text" maxlength="20" tabindex="4" placeholder="Dd/mm/yyyy"
-              formControlName="card_expiry"> -->
                     </div>
                 </div>
             </div>

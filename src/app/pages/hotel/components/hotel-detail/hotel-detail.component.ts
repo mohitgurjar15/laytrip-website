@@ -2,7 +2,6 @@ import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 import { HotelService } from '../../../../services/hotel.service';
 import { environment } from '../../../../../environments/environment';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HotelPolicyPopupComponent } from '../hotel-policy-popup/hotel-policy-popup.component';
@@ -10,6 +9,10 @@ import { CartService } from '../../../../services/cart.service';
 import { HomeService } from '../../../../services/home.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { translateAmenities } from '../../../../_helpers/generic.helper';
+import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
+import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
 declare var $: any;
 
 
@@ -50,7 +53,10 @@ export class HotelDetailComponent implements OnInit {
   addCartLoading:boolean=false;
   isNotFound:boolean=false;
   isCartFull:boolean=false;
+  isRefferal = this.commonFunction.isRefferal();
 
+  isTranslatedByGoogle:boolean = false;
+  
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
@@ -59,6 +65,7 @@ export class HotelDetailComponent implements OnInit {
     private modalService: NgbModal,
     private cartService:CartService,
     private commonFunction:CommonFunction,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -76,53 +83,6 @@ export class HotelDetailComponent implements OnInit {
     this.cartService.getCartItems.subscribe(cartItems => {
       this.cartItems = cartItems;
     })
-
-   /*  this.hotelService.getHotelDetail(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
-      this.loading = false;
-      if (res && res.data && res.data.hotel) {
-        this.hotelDetails = {
-          name: res.data.hotel.name,
-          city_name: res.data.hotel.address.city_name,
-          address: res.data.hotel.full_address,
-          state_code: res.data.hotel.address.state_code,
-          country_name: res.data.hotel.address.country_name,
-          rating: res.data.hotel.rating,
-          review_rating: res.data.hotel.review_rating,
-          description: res.data.hotel.description,
-          amenities: res.data.hotel.amenities,
-          hotelLocations: res.data.hotel.geocodes,
-          hotelReviews: res.data.hotel.reviews,
-          thumbnail: res.data.hotel.thumbnail
-        };
-        if (res.data.hotel.images) {
-
-          res.data.hotel.images.forEach(imageUrl => {
-            this.imageTemp.push({
-              small: `${imageUrl}`,
-              medium: `${imageUrl}`,
-              big: `${imageUrl}`,
-              description: `${this.hotelDetails.name}`
-            });
-            this.galleryImages = this.imageTemp;
-          });
-
-        }
-        occupancies = collect(res.data.details.occupancies);
-        this.roomSummary.roomDetail.checkIn = res.data.details.check_in;
-        this.roomSummary.roomDetail.checkOut = res.data.details.check_out;
-        if (res.data.details && res.data.details.occupancies && res.data.details.occupancies.length) {
-          this.roomSummary.roomDetail.totalRoom = occupancies.count();
-          this.roomSummary.roomDetail.totalAdults = occupancies.sum('adults');
-          this.roomSummary.roomDetail.totalChildren = occupancies.flatMap((value) => value['children']).count();
-        }
-      }
-      else{
-        this.isNotFound=true;  
-      }
-    }, error => {
-      this.isNotFound=true;
-      this.loading = false;
-    }); */
     this.loading = true;
     this.hotelService.getRoomDetails(`${this.hotelId}`, this.hotelToken).subscribe((res: any) => {
       this.loading = false;
@@ -139,9 +99,7 @@ export class HotelDetailComponent implements OnInit {
             }
             this.hotelRoomArray[i].dots = this.hotelRoomArray[i].galleryImages.length>5 ? 5 :this.hotelRoomArray[i].galleryImages.length;
             this.hotelRoomArray[i].activeSlide = 1;
-        }
-        //this.roomSummary.hotelInfo = res.data[0];
-        
+        }        
         this.hotelDetails = {
           name: res.hotel.name,
           city_name: res.hotel.address.city_name,
@@ -158,6 +116,7 @@ export class HotelDetailComponent implements OnInit {
           hotelReviews: res.hotel.reviews,
           thumbnail: res.hotel.thumbnail
         };
+        this.translateHotelData();
         if (res.hotel.images.length) {
 
           res.hotel.images.forEach(imageUrl => {
@@ -176,7 +135,143 @@ export class HotelDetailComponent implements OnInit {
     }, error => {
       this.loading = false;
       this.isNotFound=true;  
-    });
+    }); 
+    
+    // Author: xavier | 2021/8/5
+    // Description: Format the "Add to Cart" buttons to fit spanish translation
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(userLang === 'es') {
+      $(document).ready(function() {
+        function fixButtons() {
+          let els = $("a[class*='book_btn anchor-tag']");
+          if(els.length == 0) {
+            setTimeout(fixButtons, 100);
+          } else {
+            els.css({'line-height': '20px'});
+          }
+        }
+        fixButtons();
+      });
+    }
+  }
+
+  // Author: xavier | 2021/6/24
+  // Description: Toggle description expand/collapse
+  toggleDesc() {
+    let el = $("#hotel_desc");
+    if(el.data("isExpanded")) {
+      el.toggleClass('desc_exp desc_col', 450);
+      el.data("isExpanded", 0);
+    } else {
+      el.toggleClass('desc_col desc_exp', 450);
+      $(".read_more").animate({opacity: "0"}, 450);
+      el.data("isExpanded", 1);
+    }
+  }
+
+  // Author: xavier | 2021/6/23
+  // Description: Break long text into paragraphs.
+  //              Takes into account empty text and text without periods.
+  formatLongText(data: any) {
+    const maxLength = 150;
+    const text: string = data == null ? "" : data; // null-coalescing operator not yet supported
+    const tokens: string[] = text.split(".");
+    let result: string = "";
+    let offset: number = 0;
+    for(let i: number = 0; i < tokens.length; i++) {
+      if((result.length - offset) >= maxLength) {
+        result += "<br><br>";
+        offset = result.length;
+      }
+      if(tokens[i].length > 0) result += `${tokens[i]}.`;
+    }
+
+    return result;
+  }
+
+  // Author: xavier | 2021/7/27
+  // Description: Translates hotel's description using Google's translation API.
+  translateHotelData() {
+    const lang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(lang == "en") {
+      this.hotelDetails.description = this.formatLongText(this.hotelDetails.description);
+      return;
+    }
+
+    let body = new HttpParams();
+    body = body.set('q', this.hotelDetails.description)
+               .set('source', 'en')
+               .set('target', lang)
+               .set('format', 'text')
+               .set('model', 'nmt')
+               .set('key', 'AIzaSyAM2IBT7FXhbv1NFqqVEdYkFDTyqPUhmR8');
+
+    class gApiResp { 
+      data: {
+        translations: {
+          translatedText: string[],
+          detectedSourceLanguage: string,
+          model: string
+        }[];
+      }
+    }
+    
+    // Translate Description
+    this.http
+      .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      .subscribe(
+        res => {
+          this.hotelDetails.description = this.formatLongText(res.data.translations[0].translatedText);
+          this.isTranslatedByGoogle = true;
+        }
+      );
+
+    // Translate Ammenities
+    for(let i = 0; i < this.hotelDetails.amenities.list.length; i++) {
+      this.hotelDetails.amenities.list[i] = translateAmenities(this.hotelDetails.amenities.list[i]);
+      // body = body.set('q', this.hotelDetails.amenities.list[i]);
+      // this.http
+      // .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      // .subscribe(
+      //   res => {
+      //     this.hotelDetails.amenities.list[i] = res.data.translations[0].translatedText;
+      //   }
+      // );
+    }
+
+    // Translate Rooms' descriptions
+    let titles: any = this.hotelRoomArray.map(room => room.title).join(" | ");
+    body = body.set('q', titles);
+    this.http
+      .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      .subscribe(
+        res => {
+          titles = res.data.translations[0].translatedText;
+          let titles_translated: string[] = titles.split("|");
+          for(let i: number = 0; i < titles_translated.length; i++) {
+            this.hotelRoomArray[i].title = titles_translated[i].trim();
+          }
+        }
+      );
+
+      this.colorizeGoogleLogo();
+  }
+
+  // Author: xavier | 2021/8/13
+  // Description: Temporary solution until 1C uploads a suitable Google image.
+  colorizeGoogleLogo() {
+    let colors: string[] = ["#4285f4", "#ea4335", "#fbb405", "#4285f4", "#34a853", "#ea4335"];
+    let el: HTMLParagraphElement = $(".tx_by_google")[0];
+    if(el == null) {
+      setTimeout(() => this.colorizeGoogleLogo(), 500);
+      return;
+    }
+    let gt: string = el.innerHTML;
+    let cgt: string = gt.substring(0, 14);
+    for(let i: number = 14; i < gt.length; i++) {
+      cgt += `<span style="color: ${colors[i - 14]}">${gt[i]}</span>`;
+    }
+    $(".tx_by_google")[0].innerHTML = cgt;
   }
 
   counter(i: any) {
@@ -189,7 +284,6 @@ export class HotelDetailComponent implements OnInit {
      if (this.cartItems && this.cartItems.length >= 10) {
       this.addCartLoading=false;
       this.isCartFull=true;
-      //this.maxCartValidation.emit(true)
     } else {
       this.addCartLoading=true;
       
@@ -222,8 +316,14 @@ export class HotelDetailComponent implements OnInit {
           }
         }
       }, error => {
-        this.addCartLoading=false;
-        if (error.status == 409 && this.commonFunction.isRefferal()) {
+        this.addCartLoading = false;
+          if (error.status == 406) {
+            this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
+              windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
+              keyboard: false
+            });
+          } 
+          if (error.status == 409 && this.commonFunction.isRefferal()) {
           this.modalService.open(DiscountedBookingAlertComponent, {
             windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
             keyboard: false
@@ -268,7 +368,6 @@ export class HotelDetailComponent implements OnInit {
     if(type=='less'){
       target.scrollIntoView({behavior: 'smooth', block: "start",inline: 'nearest'});
     }
-    //document.getElementsByClassName('#target').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   ngAfterViewInit(): void {
@@ -324,11 +423,13 @@ export class HotelDetailComponent implements OnInit {
     }
   }
 
-  showDownPayment(offerData, downPaymentOption) {
+  showDownPayment(offerData, downPaymentOption,isInstallmentTypeAvailable) {
 
     if (typeof offerData != 'undefined' && offerData.applicable) {
 
       if (typeof offerData.down_payment_options != 'undefined' && offerData.down_payment_options[downPaymentOption].applicable) {
+        return true;
+      } else if(!this.isRefferal && isInstallmentTypeAvailable){
         return true;
       }
       return false;

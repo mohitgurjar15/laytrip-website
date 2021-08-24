@@ -1,434 +1,391 @@
 <div class="booking_whole_wrapper">
-  <div class="container">
-    <div class="booking_inner_container">
-      <div class="search_wrapper"
-        *ngIf="searchTextLength > 0 || (completeBookings.length  || upComingbookings.length )">
-        <input type="text" placeholder="Search" (input)="searchBooking($event.target.value)" />
-      </div>
-      <h3>
-        Upcoming
-      </h3>
-      <!-- no booking condition -->
-        <p *ngIf="!upComingbookings.length && !upComingloading" class="no_data_found">No Upcoming Bookings</p>
-      <!-- no booking condition -->
-      <!-- loader starts -->
-      <div class="loader_wrapper" *ngIf="upComingloading">
-        <div class="loader_card">
-          <div class="cart_round">
-            <span class="fb_animation"></span>
-          </div>
-          <div class="cart_details">
-            <div class="mb-2" style="display: flex;">
-              <div class="fb_animation w-100 pb-4 mb-2 mr-2"></div>
-              <div class="fb_animation w-100 pb-3 mb-2 mr-2"></div>
-              <div class="fb_animation w-100 pb-4 mb-2"></div>
+    <div class="container">
+        <div class="booking_inner_container">
+            <div class="search_wrapper" *ngIf="searchTextLength > 0 || (completeBookings.length  || upComingbookings.length )">
+                <input type="text" placeholder="{{'search' | translate}}" (input)="searchBooking($event.target.value)" />
             </div>
-            <div class="mb-1" style="display: flex;">
-              <div class="fb_animation w-25 pb-4 mb-1 mr-2"></div>
-              <div class="fb_animation w-100 pb-2 mb-1 mr-2"></div>
-              <div class="fb_animation w-25 pb-4 mb-1"></div>
+            <h3>{{'upcoming' | translate}}</h3>
+            <!-- no booking condition -->
+            <p *ngIf="!upComingbookings.length && !upComingloading" class="no_data_found">{{'no_upcomning' | translate}}</p>
+            <!-- no booking condition -->
+            <!-- loader starts -->
+            <div class="loader_wrapper" *ngIf="upComingloading">
+                <div class="loader_card">
+                    <div class="cart_round">
+                        <span class="fb_animation"></span>
+                    </div>
+                    <div class="cart_details">
+                        <div class="mb-2" style="display: flex;">
+                            <div class="fb_animation w-100 pb-4 mb-2 mr-2"></div>
+                            <div class="fb_animation w-100 pb-3 mb-2 mr-2"></div>
+                            <div class="fb_animation w-100 pb-4 mb-2"></div>
+                        </div>
+                        <div class="mb-1" style="display: flex;">
+                            <div class="fb_animation w-25 pb-4 mb-1 mr-2"></div>
+                            <div class="fb_animation w-100 pb-2 mb-1 mr-2"></div>
+                            <div class="fb_animation w-25 pb-4 mb-1"></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="fb_animation w-25 pb-3 mr-5"></div>
+                            <div class="fb_animation w-50 pb-2 mr-5"></div>
+                            <div class="fb_animation w-25 pb-3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="loader_card">
+                    <div class="cart_round">
+                        <span class="fb_animation"></span>
+                    </div>
+                    <div class="cart_details">
+                        <div class="mb-2" style="display: flex;">
+                            <div class="fb_animation w-100 pb-4 mb-2 mr-2"></div>
+                            <div class="fb_animation w-100 pb-3 mb-2 mr-2"></div>
+                            <div class="fb_animation w-100 pb-4 mb-2"></div>
+                        </div>
+                        <div class="mb-1" style="display: flex;">
+                            <div class="fb_animation w-25 pb-4 mb-1 mr-2"></div>
+                            <div class="fb_animation w-100 pb-2 mb-1 mr-2"></div>
+                            <div class="fb_animation w-25 pb-4 mb-1"></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="fb_animation w-25 pb-3 mr-5"></div>
+                            <div class="fb_animation w-50 pb-2 mr-5"></div>
+                            <div class="fb_animation w-25 pb-3"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div style="display: flex;">
-              <div class="fb_animation w-25 pb-3 mr-5"></div>
-              <div class="fb_animation w-50 pb-2 mr-5"></div>
-              <div class="fb_animation w-25 pb-3"></div>
-            </div>
-          </div>
-        </div>
-        <div class="loader_card">
-          <div class="cart_round">
-            <span class="fb_animation"></span>
-          </div>
-          <div class="cart_details">
-            <div class="mb-2" style="display: flex;">
-              <div class="fb_animation w-100 pb-4 mb-2 mr-2"></div>
-              <div class="fb_animation w-100 pb-3 mb-2 mr-2"></div>
-              <div class="fb_animation w-100 pb-4 mb-2"></div>
-            </div>
-            <div class="mb-1" style="display: flex;">
-              <div class="fb_animation w-25 pb-4 mb-1 mr-2"></div>
-              <div class="fb_animation w-100 pb-2 mb-1 mr-2"></div>
-              <div class="fb_animation w-25 pb-4 mb-1"></div>
-            </div>
-            <div style="display: flex;">
-              <div class="fb_animation w-25 pb-3 mr-5"></div>
-              <div class="fb_animation w-50 pb-2 mr-5"></div>
-              <div class="fb_animation w-25 pb-3"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- loader ends -->
-      <div class="accordion_up_wrapper" *ngIf="!upComingloading && upComingbookings.length">
-        <div id="accordion_upcoming">
-          <div class="card" *ngFor="let booking of upComingbookings; let i = index;">
-            <div class="card-header">
-              <a class="card-link" data-toggle="collapse" aria-expanded="false" [href]="'#upcoming'+i">
-                <div class="l_view">
-                  <span class="header_image">
+            <!-- loader ends -->
+            <div class="accordion_up_wrapper" *ngIf="!upComingloading && upComingbookings.length">
+                <div id="accordion_upcoming">
+                    <div class="card" *ngFor="let booking of upComingbookings; let i = index;">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" aria-expanded="false" [href]="'#upcoming'+i">
+                                <div class="l_view">
+                                    <span class="header_image">
                     <span class="title_image">
                       <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
                       <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
-                    </span>
-                  </span>
-                  <div class="headerin_wrapper">
-                    <div class="header_second_sec">
-                      <div class="header_upper_wrper">
-                        <div class="header_name" *ngIf="booking.booking[0].moduleId==1">
-                          {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
-                          {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
-                        </div>
-                        <div class="header_name" *ngIf="booking.booking[0].moduleId==3">
-                          {{ booking.booking[0]?.moduleInfo[0]?.hotel_name }}
-                        </div>
-                        <div class="book_id">
-                          Booking ID {{ booking.laytripCartId}}
-                        </div>
-                        <div class="date_head">
-                          {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
-                        </div>
-                      </div>
-                      <div class="header_lower_wrper" *ngIf="booking.cartInstallments?.length > 0">
-                        <div class="pricer_wrp">
-                          <span class="pink_price">
-                            ${{ booking.paidAmount | number : '1.2-2' }}
-                          </span>
-                          <div class="status">
-                            Paid
-                          </div>
-                        </div>
-                        <div class="payment_bar_wrps">
-                          <div class="progress"  >
-                            <div class="progress-bar" role="progressbar"
-                              [ngStyle]="getProgressPercentage(booking.paidAmount,booking.totalAmount)"
-                              aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                          <div class="payment_status" *ngIf="booking.booking[0].paymentStatus == 0">
-                          
-                           <img *ngIf="!booking.is_installation_on_track"  src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon">
-                            {{ booking.is_installation_on_track === true ?  'Next Payment '+ commonFunction.convertCustomDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD','MMM D, YYYY') : 'Past Due'}} 
-                         </div>
- 
-                        </div>
-                        <div class="pricer_wrp">
-                          <span class="pink_price">
-                            ${{ booking.totalAmount | number : '1.2-2' }}
-                          </span>
-                          <div class="status">
-                            Total
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="mob_view card_mob_head">
-                  <div class="card_head_container">
-                    <div class="header_bar">
-                      <span class="header_image">
+                                    </span>
+                                    </span>
+                                    <div class="headerin_wrapper">
+                                        <div class="header_second_sec">
+                                            <div class="header_upper_wrper">
+                                                <div class="header_name" *ngIf="booking.booking[0].moduleId==1">
+                                                    {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
+                                                </div>
+                                                <div class="header_name" *ngIf="booking.booking[0].moduleId==3">
+                                                    {{ booking.booking[0]?.moduleInfo[0]?.hotel_name }}
+                                                </div>
+                                                <div class="book_id">
+                                                    {{'booking_id' | translate}} {{ booking.laytripCartId}}
+                                                </div>
+                                                <div class="date_head">
+                                                    {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
+                                                </div>
+                                            </div>
+                                            <div class="header_lower_wrper" *ngIf="booking.cartInstallments?.length > 0">
+                                                <div class="pricer_wrp">
+                                                    <span class="pink_price">
+                                                        ${{ booking.paidAmount | number : '1.2-2' }}
+                                                    </span>
+                                                    <div class="status">
+                                                        {{'paid' | translate}}
+                                                    </div>
+                                                </div>
+                                                <div class="payment_bar_wrps">
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar" [ngStyle]="getProgressPercentage(booking.paidAmount,booking.totalAmount)" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <div class="payment_status" *ngIf="booking.booking[0].paymentStatus == 0">
+
+                                                        <img *ngIf="!booking.is_installation_on_track" src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"> {{ booking.is_installation_on_track === true ? ('next_payment' | translate) + ' ' + commonFunction.convertCustomDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD','MMM
+                                                        D, YYYY') : ('past_due' | translate)}}
+                                                    </div>
+
+                                                </div>
+                                                <div class="pricer_wrp">
+                                                    <span class="pink_price">
+                                                        ${{ booking.totalAmount | number : '1.2-2' }}
+                                                    </span>
+                                                    <div class="status">
+                                                        {{'total' | translate}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mob_view card_mob_head">
+                                    <div class="card_head_container">
+                                        <div class="header_bar">
+                                            <span class="header_image">
                         <span class="title_image">
                           <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
                           <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
-                        </span>
-                      </span>
-                      <div class="headerin_wrapper">
-                        <div class="header_second_sec">
-                          <div class="header_upper_wrper">
-                            <div class="head_bookin">
-                              <div class="booking_bar">
-                                <div class="header_name" *ngIf="booking.booking[0].moduleId==1">
-                                  {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
-                                  {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…'
-                                  :
-                                  ''}}
+                                            </span>
+                                            </span>
+                                            <div class="headerin_wrapper">
+                                                <div class="header_second_sec">
+                                                    <div class="header_upper_wrper">
+                                                        <div class="head_bookin">
+                                                            <div class="booking_bar">
+                                                                <div class="header_name" *ngIf="booking.booking[0].moduleId==1">
+                                                                    {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
+                                                                </div>
+                                                                <div class="header_name" *ngIf="booking.booking[0].moduleId==3">
+                                                                    {{ booking.booking[0]?.moduleInfo[0]?.hotel_name }}
+                                                                </div>
+                                                                <div class="date_head">
+                                                                    {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="book_id">
+                                                                {{'booking_id' | translate}} {{ booking.laytripCartId}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="header_lower_wrper" *ngIf="booking.cartInstallments?.length > 0">
+                                            <div class="pricer_wrp">
+                                                <span class="pink_price">
+                                                    ${{ booking.paidAmount | number : '1.2-2' }}
+                                                </span>
+                                                <div class="status">
+                                                    {{'paid' | translate}}
+                                                </div>
+                                            </div>
+                                            <div class="payment_bar_wrps">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" [ngStyle]="getProgressPercentage(booking.paidAmount,booking.totalAmount)" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="payment_status" *ngIf="booking.booking[0].paymentStatus == 0">
+                                                    <img *ngIf="!booking.is_installation_on_track" src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"> {{ booking.is_installation_on_track == true ? ('next_payment' | translate) + ' ' + commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ('past_due' | translate)}}
+                                                </div>
+                                            </div>
+                                            <div class="pricer_wrp">
+                                                <span class="pink_price">
+                                                    ${{ booking.totalAmount | number : '1.2-2' }}
+                                                </span>
+                                                <div class="status">
+                                                    {{'total' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="header_name" *ngIf="booking.booking[0].moduleId==3">
-                                  {{ booking.booking[0]?.moduleInfo[0]?.hotel_name }}
-                                </div>
-                                <div class="date_head">
-                                  {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
-                                </div>
-                              </div>
-                              <div class="book_id">
-                                Booking ID {{ booking.laytripCartId}}
-                              </div>
-                            </div>
-                          </div>
+                            </a>
                         </div>
-                      </div>
-                    </div>
-                    <div class="header_lower_wrper" *ngIf="booking.cartInstallments?.length > 0">
-                      <div class="pricer_wrp">
-                        <span class="pink_price">
-                          ${{ booking.paidAmount | number : '1.2-2' }}
-                        </span>
-                        <div class="status">
-                          Paid
-                        </div>
-                      </div>
-                      <div class="payment_bar_wrps">
-                        <div class="progress">
-                          <div class="progress-bar" role="progressbar"
-                            [ngStyle]="getProgressPercentage(booking.paidAmount,booking.totalAmount)" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <!-- <div class="payment_status">
-                          Next Payment {{ (booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
-                          commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
-                        </div> -->
-                        <div class="payment_status" *ngIf="booking.booking[0].paymentStatus == 0">
-                           <!-- {{ ( booking.is_installation_on_track === true && booking.nextInstallmentDate != '' && booking.nextInstallmentDate != null) ?
-                          'Next Payment'+commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : ''}}
-                           -->
-                          <img *ngIf="!booking.is_installation_on_track"  src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"
-                          > {{ booking.is_installation_on_track  == true ?  'Next Payment '+ commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD') : 'Past Due'}} 
-                        </div>
-                      </div>
-                      <div class="pricer_wrp">
-                        <span class="pink_price">
-                          ${{ booking.totalAmount | number : '1.2-2' }}
-                        </span>
-                        <div class="status">
-                          Total
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
 
-            <div [id]="'upcoming'+i" class="collapse " data-parent="#accordion_upcoming">
-              <div class="accordion_data"> 
+                        <div [id]="'upcoming'+i" class="collapse " data-parent="#accordion_upcoming">
+                            <div class="accordion_data">
 
 
-                <ul class="nav nav-tabs booking_tab_header">
-                  <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
-                    <li [ngClass]="{'active':selectedInCompletedTabNumber===j}">
-                      <ng-container  *ngIf="cartItem.moduleId==1">
-                        <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
-                        [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
-                        <span class="tab_round_wrps" *ngIf="cartItem.moduleId==1">
+                                <ul class="nav nav-tabs booking_tab_header">
+                                    <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
+                                        <li [ngClass]="{'active':selectedInCompletedTabNumber===j}">
+                                            <ng-container *ngIf="cartItem.moduleId==1">
+                                                <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link" [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
+                                                    <span class="tab_round_wrps" *ngIf="cartItem.moduleId==1">
                           <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                           <span
                             class="tab_txt_head">{{cartItem.moduleInfo[0].departure_code}}-{{cartItem.moduleInfo[0].arrival_code}}</span>
-                        </span>
-                      </a>
-                      </ng-container>
-                      <ng-container  *ngIf="cartItem.moduleId==3">
-                        <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
-                        [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
-                        <span class="tab_round_wrps hotel_tab_round_wrps" *ngIf="cartItem.moduleId==3">
+                                                    </span>
+                                                </a>
+                                            </ng-container>
+                                            <ng-container *ngIf="cartItem.moduleId==3">
+                                                <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link" [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
+                                                    <span class="tab_round_wrps hotel_tab_round_wrps" *ngIf="cartItem.moduleId==3">
                           <img src="{{s3BucketUrl}}assets/images/icon/bed_line_blue.svg" alt="Hotel icon" />
                           <span
                             class="tab_txt_head">{{cartItem.moduleInfo[0].hotel_name}}</span>
-                        </span>
-                      </a>
-                      </ng-container>
-                    </li>
-                  </ng-container>
-                </ul>
-              
+                                                    </span>
+                                                </a>
+                                            </ng-container>
+                                        </li>
+                                    </ng-container>
+                                </ul>
 
-                <div class="tab-content main_tab_content">
-                  <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
-                    <div class="tab-pane " [id]="'cart_item'+j"
-                      [ngClass]="{'show active':selectedInCompletedTabNumber == j }">
-                      <app-flights *ngIf="cartItem.moduleId==1" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-flights>
-                      <app-hotels  *ngIf="cartItem.moduleId==3" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-hotels>
+
+                                <div class="tab-content main_tab_content">
+                                    <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
+                                        <div class="tab-pane " [id]="'cart_item'+j" [ngClass]="{'show active':selectedInCompletedTabNumber == j }">
+                                            <app-flights *ngIf="cartItem.moduleId==1" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-flights>
+                                            <app-hotels *ngIf="cartItem.moduleId==3" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-hotels>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <app-cart-price-summary [cartItem]="booking"></app-cart-price-summary>
+                        </div>
                     </div>
-                  </ng-container>
                 </div>
-              </div>
-              <app-cart-price-summary [cartItem]="booking"></app-cart-price-summary>
             </div>
-          </div>
-        </div>
-      </div>
-      <h3>Completed</h3>
-      <!-- no booking condition -->
-      <p *ngIf="!completeBookings.length && !completeLoading" class="no_data_found">No Completed Bookings</p>
-      <!-- no booking condition -->
-      <!-- loader starts -->
-      <div class="loader_wrapper" *ngIf="completeLoading">
-        <div class="loader_card">
-          <div class="cart_round">
-            <span class="fb_animation"></span>
-          </div>
-          <div class="cart_details">
-            <div class="mb-2" style="display: flex;">
-              <div class="fb_animation w-100 pb-4 mb-2 mr-2"></div>
-              <div class="fb_animation w-100 pb-3 mb-2 mr-2"></div>
-              <div class="fb_animation w-100 pb-4 mb-2"></div>
-            </div>
-            <div class="mb-1" style="display: flex;">
-              <div class="fb_animation w-25 pb-4 mb-1 mr-2"></div>
-              <div class="fb_animation w-100 pb-2 mb-1 mr-2"></div>
-              <div class="fb_animation w-25 pb-4 mb-1"></div>
-            </div>
-            <div style="display: flex;">
-              <div class="fb_animation w-25 pb-3 mr-5"></div>
-              <div class="fb_animation w-50 pb-2 mr-5"></div>
-              <div class="fb_animation w-25 pb-3"></div>
-            </div>
-          </div>
-        </div>
-        <div class="loader_card">
-          <div class="cart_round">
-            <span class="fb_animation"></span>
-          </div>
-          <div class="cart_details">
-            <div class="mb-2" style="display: flex;">
-              <div class="fb_animation w-100 pb-4 mb-2 mr-2"></div>
-              <div class="fb_animation w-100 pb-3 mb-2 mr-2"></div>
-              <div class="fb_animation w-100 pb-4 mb-2"></div>
-            </div>
-            <div class="mb-1" style="display: flex;">
-              <div class="fb_animation w-25 pb-4 mb-1 mr-2"></div>
-              <div class="fb_animation w-100 pb-2 mb-1 mr-2"></div>
-              <div class="fb_animation w-25 pb-4 mb-1"></div>
-            </div>
-            <div style="display: flex;">
-              <div class="fb_animation w-25 pb-3 mr-5"></div>
-              <div class="fb_animation w-50 pb-2 mr-5"></div>
-              <div class="fb_animation w-25 pb-3"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- loader ends -->
-      <div class="accordion_up_wrapper" *ngIf="!completeLoading && completeBookings.length > 0 ">
-        <div id="accordion_completed">
-          <div class="card" *ngFor="let booking of completeBookings; let i = index;">
-            <div class="card-header">
-              <a class="card-link" data-toggle="collapse" aria-expanded="false" [href]="'#completed'+i">
-                <!-- <span class="header_image">
-                  <span class="title_image">
-                    <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
-                    <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
-                  </span>
-                </span>
-                <div class="headerin_wrapper">
-                  <div class="header_second_sec">
-                    <div class="header_upper_wrper">
-                      <div class="header_name">
-                        {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
-                        {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
-                      </div>
-                      <div class="book_id">
-                        Booking ID {{booking.laytripCartId}}
-                      </div>
-                      <div class="date_head">
-                        {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
-                      </div>
+            <h3>{{'completed' | translate}}</h3>
+            <!-- no booking condition -->
+            <p *ngIf="!completeBookings.length && !completeLoading" class="no_data_found">{{'no_completed' | translate}}</p>
+            <!-- no booking condition -->
+            <!-- loader starts -->
+            <div class="loader_wrapper" *ngIf="completeLoading">
+                <div class="loader_card">
+                    <div class="cart_round">
+                        <span class="fb_animation"></span>
                     </div>
-                  </div>
-                </div> -->
-                <div class="l_view">
-                  <span class="header_image">
+                    <div class="cart_details">
+                        <div class="mb-2" style="display: flex;">
+                            <div class="fb_animation w-100 pb-4 mb-2 mr-2"></div>
+                            <div class="fb_animation w-100 pb-3 mb-2 mr-2"></div>
+                            <div class="fb_animation w-100 pb-4 mb-2"></div>
+                        </div>
+                        <div class="mb-1" style="display: flex;">
+                            <div class="fb_animation w-25 pb-4 mb-1 mr-2"></div>
+                            <div class="fb_animation w-100 pb-2 mb-1 mr-2"></div>
+                            <div class="fb_animation w-25 pb-4 mb-1"></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="fb_animation w-25 pb-3 mr-5"></div>
+                            <div class="fb_animation w-50 pb-2 mr-5"></div>
+                            <div class="fb_animation w-25 pb-3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="loader_card">
+                    <div class="cart_round">
+                        <span class="fb_animation"></span>
+                    </div>
+                    <div class="cart_details">
+                        <div class="mb-2" style="display: flex;">
+                            <div class="fb_animation w-100 pb-4 mb-2 mr-2"></div>
+                            <div class="fb_animation w-100 pb-3 mb-2 mr-2"></div>
+                            <div class="fb_animation w-100 pb-4 mb-2"></div>
+                        </div>
+                        <div class="mb-1" style="display: flex;">
+                            <div class="fb_animation w-25 pb-4 mb-1 mr-2"></div>
+                            <div class="fb_animation w-100 pb-2 mb-1 mr-2"></div>
+                            <div class="fb_animation w-25 pb-4 mb-1"></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="fb_animation w-25 pb-3 mr-5"></div>
+                            <div class="fb_animation w-50 pb-2 mr-5"></div>
+                            <div class="fb_animation w-25 pb-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- loader ends -->
+            <div class="accordion_up_wrapper" *ngIf="!completeLoading && completeBookings.length > 0 ">
+                <div id="accordion_completed">
+                    <div class="card" *ngFor="let booking of completeBookings; let i = index;">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" aria-expanded="false" [href]="'#completed'+i">
+                                <div class="l_view">
+                                    <span class="header_image">
                     <span class="title_image">
                       <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
                       <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
-                    </span>
-                  </span>
-                  <div class="headerin_wrapper">
-                    <div class="header_second_sec">
-                      <div class="header_upper_wrper">
-                        <div class="header_name">
-                          {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
-                          {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
-                        </div>
-                        <div class="book_id">
-                          Booking ID {{ booking.laytripCartId}}
-                        </div>
-                        <div class="date_head">
-                          {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="mob_view card_mob_head">
-                  <div class="card_head_container">
-                    <div class="header_bar">
-                      <span class="header_image">
+                                    </span>
+                                    </span>
+                                    <div class="headerin_wrapper">
+                                        <div class="header_second_sec">
+                                            <div class="header_upper_wrper">
+                                                <div class="header_name" *ngIf="booking.booking[0].moduleId==1">
+                                                    {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
+                                                    {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
+                                                </div>
+                                                <div class="header_name" *ngIf="booking.booking[0].moduleId==3">
+                                                    {{ booking.booking[0]?.moduleInfo[0]?.hotel_name }}
+                                                </div>
+                                                <div class="book_id">
+                                                    {{'booking_id' | translate}} {{ booking.laytripCartId}}
+                                                </div>
+                                                <div class="date_head">
+                                                    {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mob_view card_mob_head">
+                                    <div class="card_head_container">
+                                        <div class="header_bar">
+                                            <span class="header_image">
                         <span class="title_image">
                           <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="Cart icon" />
                           <span class="cart_count">{{booking.booking.length ? booking.booking.length : 0}}</span>
-                        </span>
-                      </span>
-                      <div class="headerin_wrapper">
-                        <div class="header_second_sec">
-                          <div class="header_upper_wrper">
-                            <div class="head_bookin">
-                              <div class="booking_bar">
-                                <div class="header_name">
-                                  {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
-                                  {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…'
-                                  :
-                                  ''}}
+                                            </span>
+                                            </span>
+                                            <div class="headerin_wrapper">
+                                                <div class="header_second_sec">
+                                                    <div class="header_upper_wrper">
+                                                        <div class="head_bookin">
+                                                            <div class="booking_bar">
+                                                                <div class="header_name" *ngIf="booking.booking[0].moduleId==1">
+                                                                    {{ booking.booking[0]?.moduleInfo[0]?.departure_code }} to
+                                                                    {{booking.booking[0]?.moduleInfo[0]?.arrival_code}}{{booking.booking.length > 1 ? '…' : ''}}
+                                                                </div>
+                                                                <div class="header_name" *ngIf="booking.booking[0].moduleId==3">
+                                                                    {{ booking.booking[0]?.moduleInfo[0]?.hotel_name }}
+                                                                </div>
+                                                                <div class="date_head">
+                                                                    {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="book_id">
+                                                                {{'booking_id' | translate}} {{ booking.laytripCartId}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="date_head">
-                                  {{commonFunction.convertDateFormat(booking.checkInDate,'YYYY-MM-DD')}}
-                                </div>
-                              </div>
-                              <div class="book_id">
-                                Booking ID {{ booking.laytripCartId}}
-                              </div>
-                            </div>
-                          </div>
+                            </a>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div [id]="'completed'+i" class="collapse" data-parent="#accordion_completed">
-              <div class="accordion_data">
-                <ul class="nav nav-tabs booking_tab_header">
-                  <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
-                    <li [ngClass]="{'active':selectedInCompletedTabNumber===j}">                    
-                      <ng-container  *ngIf="cartItem.moduleId==1">
-                        <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
-                          [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
-                          <span class="tab_round_wrps" *ngIf="cartItem.moduleId==1">
+                        <div [id]="'completed'+i" class="collapse" data-parent="#accordion_completed">
+                            <div class="accordion_data">
+                                <ul class="nav nav-tabs booking_tab_header">
+                                    <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
+                                        <li [ngClass]="{'active':selectedInCompletedTabNumber===j}">
+                                            <ng-container *ngIf="cartItem.moduleId==1">
+                                                <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link" [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
+                                                    <span class="tab_round_wrps" *ngIf="cartItem.moduleId==1">
                             <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                             <span
                               class="tab_txt_head">{{cartItem.moduleInfo[0].departure_code}}-{{cartItem.moduleInfo[0].arrival_code}}</span>
-                          </span>
-                        </a>
-                      </ng-container>
-                      <ng-container  *ngIf="cartItem.moduleId==3">
-                        <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link"
-                          [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
-                          <span class="tab_round_wrps hotel_tab_round_wrps" *ngIf="cartItem.moduleId==3">
+                                                    </span>
+                                                </a>
+                                            </ng-container>
+                                            <ng-container *ngIf="cartItem.moduleId==3">
+                                                <a data-toggle="tab" [href]="'#cart_item'+j" class="nav-link" [ngClass]="{'active':selectedInCompletedTabNumber===j}" (click)="selectInCompletedTab(j)">
+                                                    <span class="tab_round_wrps hotel_tab_round_wrps" *ngIf="cartItem.moduleId==3">
                             <img src="{{s3BucketUrl}}assets/images/icon/bed_line_blue.svg" alt="Hotel icon" />
                             <span
                             class="tab_txt_head">{{cartItem.moduleInfo[0].hotel_name}}</span>
-                          </span>
-                        </a>
-                      </ng-container>
-                    </li>
-                </ng-container>
+                                                    </span>
+                                                </a>
+                                            </ng-container>
+                                        </li>
+                                    </ng-container>
 
-                </ul>
-                <div class="tab-content main_tab_content">
-                  <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
-                    <div class="tab-pane" [id]="'completed_item'+j"
-                      [ngClass]="{'active':selectedCompletedTabNumber===j}">
-                      <app-flights *ngIf="cartItem.moduleId==1" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (laytripCartId)="cancelCartIdRemove($event)" (upCommingloadingValue)="loadUpcomming($event)"></app-flights>
-                      <app-hotels  *ngIf="cartItem.moduleId==3" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-hotels>
+                                </ul>
+                                <div class="tab-content main_tab_content">
+                                    <ng-container *ngFor="let cartItem of booking.booking;let j = index;">
+                                        <div class="tab-pane" [id]="'completed_item'+j" [ngClass]="{'active':selectedCompletedTabNumber===j}">
+                                            <app-flights *ngIf="cartItem.moduleId==1" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (laytripCartId)="cancelCartIdRemove($event)" (upCommingloadingValue)="loadUpcomming($event)"></app-flights>
+                                            <app-hotels *ngIf="cartItem.moduleId==3" [laytrip_cart_id]="booking.laytripCartId" [cartItem]="cartItem" (upCommingloadingValue)="loadUpcomming($event)" (laytripCartId)="cancelCartIdRemove($event)"></app-hotels>
 
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <app-cart-price-summary [cartItem]="booking"></app-cart-price-summary>
+                        </div>
                     </div>
-                  </ng-container>
                 </div>
-              </div>
-              <app-cart-price-summary [cartItem]="booking"></app-cart-price-summary>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

@@ -192,29 +192,11 @@ export class HomeComponent implements OnInit {
     document.getElementById('home_banner').style.width = '100%';
     if (tabName === 'flight') {
       this.getDeal(1);
-      // document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/flight-tab-new-bg.svg) no-repeat";
-      // document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
-      // document.getElementById('home_banner').style.backgroundSize = 'cover';
-      // if (document.getElementById('login_btn')) {
-      //   document.getElementById('login_btn').style.background = '#FC7E66';
-      // }
     } else if (tabName === 'hotel') {
       this.getDeal(3);
-      // document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
-      // document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
-      // document.getElementById('home_banner').style.backgroundSize = 'cover';
-      // if (document.getElementById('login_btn')) {
-      //   document.getElementById('login_btn').style.background = '#FF00BC';
-      // }
     }
     else if (tabName === 'home-rentals') {
       this.getDeal(3);
-      // document.getElementById('home_banner').style.background = "url(" + this.s3BucketUrl + "assets/images/hotels/flight-tab-new-bg.svg)";
-      // document.getElementById('home_banner').style.backgroundRepeat = 'no-repeat';
-      // document.getElementById('home_banner').style.backgroundSize = 'cover';
-      // if (document.getElementById('login_btn')) {
-      //   document.getElementById('login_btn').style.background = '#FF00BC';
-      // }
     }
     if(this.commonFunction.isRefferal()){
       this.currentChangeCounter += this.currentChangeCounter;
@@ -240,13 +222,6 @@ export class HomeComponent implements OnInit {
   
   activeSlide(activeSlide){
     this.currentTabName = 'hotel';
-    /* if (this.moduleId != 3) {
-      this.homeService.removeToString('flight');
-      this.homeService.removeToString('hotel');
-      $('#nav-hotel').trigger('click');
-      this.clickOnTab('hotel');
-    } */
-
     this.currentSlide = this.$landingPageData.slides[activeSlide];
     this.homeService.setOffersData(this.currentSlide);
     this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';

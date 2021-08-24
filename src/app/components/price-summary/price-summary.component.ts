@@ -19,11 +19,15 @@ export class PriceSummaryComponent implements OnInit {
   installmentType;
   cartAlerts = [];
   flightCount: number = 0;
-
+  userLang: string = "en";
+  
   constructor(
-    private commonFunction: CommonFunction
+    private commonFunction: CommonFunction,
   ) {
-    this.installmentType = installmentType.en;
+    // Author: xavier | 2021/7/28
+    // Description: To support localized installment types
+    this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    this.installmentType = installmentType;
   }
 
   ngOnInit(): void {
@@ -35,15 +39,6 @@ export class PriceSummaryComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    /* 
-    if (typeof changes['cartPrices']!='undefined') {
-      let isFlight = this.cartPrices.find(x=>{return x.type==='flight'});
-      if(isFlight){
-        this.flightCount=1;
-      }
-    } */
-
-
     try {
       let cartAlerts = localStorage.getItem("__alrt")
       if (cartAlerts) {
@@ -68,49 +63,18 @@ export class PriceSummaryComponent implements OnInit {
           this.insatllmentAmount += this.priceSummary.instalments.instalment_date[i].instalment_amount
         }
 
-        if (this.priceSummary.instalments.instalment_date.length > 2) {
+        /* if (this.priceSummary.instalments.instalment_date.length > 2) {
 
           if (this.priceSummary.instalments.instalment_date[1].instalment_amount != this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length - 1].instalment_amount) {
 
             this.installmentVartion = this.priceSummary.instalments.instalment_date[this.priceSummary.instalments.instalment_date.length - 1].instalment_amount - this.priceSummary.instalments.instalment_date[1].instalment_amount;
-            /* if(this.installmentVartion>0){
-              let indexExist = this.cartAlerts.findIndex(x=>x.type=="installment_vartion");
-              if(indexExist==-1){
-                this.cartAlerts.push({
-                  type : 'installment_vartion',
-                  id : -1
-                })
-              }
-              localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
-            } */
           }
-        }
+        } */
       }
     }
   }
 
   typeOf(value) {
     return typeof value;
-  }
-
-  closeInstallmentVartion(id) {
-    /* try{
-      let cartAlerts = localStorage.getItem("__alrt")
-      if(cartAlerts){
-        this.cartAlerts= JSON.parse(cartAlerts)
-        let index = this.cartAlerts.findIndex(x=>x.id==id)
-        this.cartAlerts.splice(index,1)
-      }
-      else{
-        this.cartAlerts=[]
-      }
-    }
-    catch(e){
-      this.cartAlerts=[];
-    }
-    
-    localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts)) */
-    this.installmentVartion = 0;
-
   }
 }

@@ -28,7 +28,7 @@ export class ConfirmComponent implements OnInit {
     private route: ActivatedRoute,
     private cartService: CartService,
     public commonFunction: CommonFunction,
-    private modalService: NgbModal,
+    public modalService: NgbModal,
   ) {
     this.bookingId = this.route.snapshot.paramMap.get('id');
   }
@@ -55,23 +55,21 @@ export class ConfirmComponent implements OnInit {
       this.cartDetails = res;
       let allBookingStatus=[];
       for(let i=0; i <this.cartDetails.booking.length; i ++){
-        if(this.cartDetails.booking[i].bookingStatus==2){
+        if (this.cartDetails.booking[i].bookingStatus == 2) {
           this.anyBookingStatus=false;
           allBookingStatus.push('failed')
         }
       }
-      if(this.anyBookingStatus==false){
-        this.openBookingCompletionErrorPopup();
-      }
-
       if(allBookingStatus.length==this.cartDetails.booking.length){
         this.allBookingStatus=false;
       }
+      console.log(this.allBookingStatus)
+      if(this.anyBookingStatus==false){
+        this.openBookingCompletionErrorPopup();
+      }
     }, error => {
       this.loading = false;
-    })
-
-    
+    })    
   }
 
   feedbackValueChange(event) {
@@ -81,11 +79,35 @@ export class ConfirmComponent implements OnInit {
   }
 
   openBookingCompletionErrorPopup() {
-    this.modalService.open(BookingCompletionErrorPopupComponent, {
+    const modalRef = this.modalService.open(BookingCompletionErrorPopupComponent, {
       windowClass: 'booking_completion_error_block', centered: true, backdrop: 'static',
       keyboard: false
-    }).result.then((result) => {
-
     });
+    (<BookingCompletionErrorPopupComponent>modalRef.componentInstance).isSingleBooingConfirmedFromCart = this.allBookingStatus;
+  }
+
+  ngAfterViewInit() {
+    this.setupGTMEventHandlers();
+  }
+
+  // Author: xavier | 2021/7/16
+  // Description: Report total purchase amount back to GTM
+  setupGTMEventHandlers() {
+    let details = $('.detail_liners');
+    if(details.length == 0) {
+      setTimeout(() => this.setupGTMEventHandlers(), 500);
+      return;
+    }
+
+    for(let i = 0; i < details.length; i++) {
+      if(details[i].innerText.indexOf("Total Price") > -1) {
+        let spans: HTMLSpanElement[] = details.eq(i).find('span');
+        let totalStr: string = spans[spans.length - 1].innerText;
+        let totalNum: number = (+totalStr.replace(/[^0-9]/g, '')) / 100.0;
+        window['dataLayer'].push({'event': 'revenue', 'total_amount': totalNum});
+
+        break;
+      }
+    }
   }
 }

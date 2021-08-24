@@ -29,14 +29,14 @@
                             <li class="nav-item">
                                 <a [routerLink]="['/about']" 
                                 [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                                class="nav-link hover-link">About</a>
+                                class="nav-link hover-link">{{'laytrip_info_page_title_3' | translate}}</a>
                             </li>
 
                             <li class="nav-item disabled"
                                 *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'">
                                 <a class="nav-link hover-link" [routerLink]="['/account/lay-credit-points']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
                                     <span class="lay_points_dot" id="layPoints">{{showTotalLayCredit }}
-                                        Points</span>
+                                        {{'point' | translate}}</span>
                                 </a>
                             </li>
                             <li class="nav-item" [ngClass]="{'dr_pay':countryCode==='DR'}" *ngIf="countryCode==='DR'">
@@ -52,7 +52,7 @@
                                     <img *ngIf="countryCode!=='DR'" class="active-icon"
                                         src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg"
                                         alt="Credits Icon">
-                                    <span id="layPoints">{{showTotalLayCredit }}</span>
+                                    <span id="layPoints">{{showTotalLayCredit}}</span>
                                 </a>
                             </li>
 
@@ -67,6 +67,16 @@
                                     {{'sign_in' | translate}}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <div class="cta_drop_wrp">
+                                    <div class="dropdown cus_drop">
+                                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">{{ selectedLanunage.name }}<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li *ngFor="let langunage of langunages"><a href="javascript:void(0)" (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
 
                             <li class="nav-item responsive_li" *ngIf="isLoggedIn && userDetails.roleId != 7">
                                 <div class="dropdown account_ddown account_prof">
@@ -79,24 +89,23 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="hover-link" [routerLink]="['/account']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                                            >{{'my_account_header' |
-                                                translate}}</a></li>
-                                        <li><a [routerLink]="['/account/bookings']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">My Bookings</a></li>
+                                            >{{'my_account_header' | translate}}</a></li>
+                                        <li><a [routerLink]="['/account/bookings']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'my_bookings' | translate}}</a></li>
                                         <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'"
                                             class="disabled">
                                             <a class="nav-link hover-link "
                                                 [routerLink]="['/account/lay-credit-points']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
                                                 <span class="lay_points_dot ok" id="layPoints">
-                                                    Points</span>
+                                                    {{'point' | translate}}</span>
                                             </a>
                                         </li>
-                                        <li><a class="hover-link" (click)="onLoggedout()">Sign Out</a></li>
+                                        <li><a class="hover-link" (click)="onLoggedout()">{{'sign_out' | translate}}</a></li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item responsive_li">
                                 <div class="cart_section anchor-tag">
-                                    <span class="cart_i_wrapper">
+                                    <span class="cart_i_wrapper gur">
                                         <a (click)="redirectToPayment()">
                                             <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="">
                                             <span class="cart_count">{{cartItemsCount ? cartItemsCount : 0}}</span>
@@ -108,16 +117,12 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
                                 <ul class="dropdown-menu">
                                     <ng-container *ngIf="paymentType=='instalment'">
-
-                                        <li><a href="javascript:void(0);" class="gryd_txt">{{installmentOptions['en'][instalmentType]}}</a></li>
-                                        <li><a href="javascript:void(0);" class="bld_txt">${{installmentAmount | number :
-                                                    '1.2-2'}}</a></li>
+                                        <li><a href="javascript:void(0);" class="gryd_txt">{{installmentOptions[userLang][instalmentType]}}</a></li>
+                                        <li><a href="javascript:void(0);" class="bld_txt">${{installmentAmount | number : '1.2-2'}}</a></li>
                                     </ng-container>
-                                    <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
-                                    <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number :
-                                            '1.2-2'}}</a></li>
-                                    <li><a data-toggle="modal" data-target="#empty_modal" class="gryd_txt">Empty
-                                            Cart</a></li>
+                                    <li><a href="javascript:void(0);" class="gryd_txt">{{'total' | translate}}</a></li>
+                                    <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number : '1.2-2'}}</a></li>
+                                    <li><a data-toggle="modal" data-target="#empty_modal" class="gryd_txt">{{'empty_cart' | translate}}</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -125,13 +130,28 @@
                 </nav>
             </div>
             <div class="show_resposive">
+                <div class="cta_drop_wrp">
+                    <div class="dropdown cus_drop">
+                        <!-- <a class="dropdown-toggle hover-link" data-toggle="dropdown">English<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="px-2 py-1 d-block" href="javascript:void(0);">English</a></li>
+                            <li><a class="px-2 py-1 d-block" href="javascript:void(0);">Spanish</a></li>
+                        </ul> -->
+                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">{{ selectedLanunage.iso_1Code | uppercase }}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let langunage of langunages">
+                                <a class="px-2 py-1 d-block" (click)="changeLangunage(langunage)">{{ langunage.name }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <a *ngIf="!isLoggedIn" class="nav-link login_btn_text hover-link" (click)="openSignModal()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
                         <defs></defs>
                         <path class="a"
                             d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
                     </svg>
-                    Sign In
+                    {{'sign_in' | translate}}
                 </a>
                 <div class="dropdown account_ddown" *ngIf="isLoggedIn && userDetails.roleId != 7">
                     <span class="nav-link mobile_span dropdown-toggle hover-link" data-toggle="dropdown"
@@ -141,21 +161,19 @@
                     </span>
                     <ul class="dropdown-menu">
                         <li><a class="hover-link" [routerLink]="['/account']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                            >{{'my_account_header' |
-                                translate}}</a></li>
-                        <li><a [routerLink]="['/account/bookings']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">My Bookings</a></li>
+                            >{{'my_account_header' | translate}}</a></li>
+                        <li><a [routerLink]="['/account/bookings']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'my_bookings' | translate}}</a></li>
                         <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'"
                             class="disabled">
                             <a class="nav-link hover-link " [routerLink]="['/account/lay-credit-points']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
-                                <span class="lay_points_dot ok" id="layPoints">
-                                    Points</span>
+                                <span class="lay_points_dot ok" id="layPoints">{{'points' | translate}}</span>
                             </a>
                         </li>
-                        <li><a class="hover-link" (click)="onLoggedout()">Sign Out</a></li>
+                        <li><a class="hover-link" (click)="onLoggedout()">{{'sign_out' | translate}}</a></li>
                     </ul>
                 </div>
                 <div class="cart_section anchor-tag">
-                    <span class="cart_i_wrapper">
+                    <span class="cart_i_wrapper mohit">
                         <a (click)="redirectToPayment()">
                             <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="">
                             <span class="cart_count">{{cartItemsCount ? cartItemsCount : 0}}</span>
@@ -172,9 +190,9 @@
                             <li><a href="javascript:void(0);" class="bld_txt">${{installmentAmount | number : '1.2-2'}}</a>
                             </li>
                         </ng-container>
-                        <li><a href="javascript:void(0);" class="gryd_txt">Total</a></li>
+                        <li><a href="javascript:void(0);" class="gryd_txt">{{'total' | translate}}</a></li>
                         <li><a href="javascript:void(0);" class="bld_txt">${{totalAmount | number : '1.2-2'}}</a></li>
-                        <li><a data-toggle="modal" data-target="#empty_modal" class="gryd_txt">Empty Cart</a></li>
+                        <li><a data-toggle="modal" data-target="#empty_modal" class="gryd_txt">{{'empty_cart' | translate}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -190,9 +208,9 @@
             <img data-toggle="popover" title="Covid-19" data-placement="bottom" data-trigger=""
                 data-content="Covid-19 description" src="{{s3BucketUrl}}assets/images/info_icon_laytrip.svg"
                 alt="Info Image">
-            COVID-19 Travel <a [routerLink]="['/covid-19']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" [innerHTML]="'read_more' | translate"
-                *ngIf="isCovidPage"></a> <span class="desk_span"> | Per <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>, bookings not yet available to residents of California, Florida, Illinois and Washington.</span>
-            <span class="mob_span">Per <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Terms</a>, bookings not yet available to residents of CA, FL, IL, WA.</span>
+            {{'covid_travel' | translate}} <a [routerLink]="['/covid-19']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" [innerHTML]="'read_more' | translate"
+                *ngIf="isCovidPage"></a> <span class="desk_span"> | {{'top_banner_info_1' | translate}} <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'top_banner_info_2' | translate}}</span>
+            <span class="mob_span">{{'top_banner_info_1' | translate}} <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'top_banner_info_3' | translate}}</span>
         </span>
     </div>
 </section>
@@ -214,12 +232,10 @@
                         <div class="cart_img_wrpper">
                             <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="empty cart image">
                         </div>
-                        <div class="cart_msg">
-                            Are you sure you want to Empty Your Cart?
-                        </div>
+                        <div class="cart_msg">{{'empty_cart_confirmation' | translate}}</div>
                         <div class="cta_btn_wrps">
-                            <button (click)="closeModal()">Cancel</button>
-                            <button (click)="emptyCart()">Empty</button>
+                            <button (click)="closeModal()">{{'cancel' | translate}}</button>
+                            <button (click)="emptyCart()">{{'empty' | translate}}</button>
                         </div>
                         <div class="logo_wrpper_footer">
                             <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />

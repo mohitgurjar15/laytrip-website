@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, SimpleChanges, ChangeDetectorRef, ElementRef, ViewChild, ViewChildren } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from '@angular/forms';
+import { Component, OnInit, Input, SimpleChanges, ChangeDetectorRef} from '@angular/core';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
@@ -15,6 +15,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { getLoginUserInfo } from 'src/app/_helpers/jwt.helper';
 import { getPhoneFormat } from 'src/app/_helpers/phone-masking.helper';
 import { checkValidDate } from 'src/app/_helpers/custom.validators';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-traveler-form',
@@ -118,6 +119,8 @@ export class TravelerFormComponent implements OnInit {
   isChildTravller: boolean = true;
   isInfantTravller: boolean = true;
   accountHolderEmail: string = '';
+  userLang: string = "en";
+
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -125,7 +128,8 @@ export class TravelerFormComponent implements OnInit {
     private checkOutService: CheckOutService,
     private cartService: CartService,
     private travelerService: TravelerService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private http: HttpClient
   ) {
     this.travlerLabels = travlerLabels;
     this.userInfo = getLoginUserInfo();
@@ -137,6 +141,10 @@ export class TravelerFormComponent implements OnInit {
   ngOnInit() {
     this.loadJquery();
     this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
+
+    // Author: xavier | 2021/7/30
+    // Description: To support localized installment types
+    this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
 
     this.travelerForm = this.formBuilder.group({
       type0: this.formBuilder.group({
@@ -274,7 +282,8 @@ export class TravelerFormComponent implements OnInit {
     })
 
     this.checkOutService.emitTravelersformData(this.travelerForm);
-    //this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
+
+    this.translateHotelRoomDescription();
   }
 
   loadJquery() {
@@ -323,7 +332,6 @@ export class TravelerFormComponent implements OnInit {
 
   patch() {
     for (let i = 0; i < Object.keys(this.travelers).length; i++) {
-      //this.travelerForm.controls[`type${i}`]['controls'].cartId.setValue(this.travelers[`type${i}`].cartId);
       let control: any = <FormArray>this.travelerForm.get(`type${i}.adults`);
       control.controls = [];
       this.travelers[`type${i}`].adults.forEach((x, i) => {
@@ -501,9 +509,7 @@ export class TravelerFormComponent implements OnInit {
           this.cartService.setLoaderStatus(false);
           let index = this.myTravelers.findIndex(x => x.userId == traveler.userId)
           this.myTravelers[index] = traveler;
-          //this.checkOutService.setTravelers([this.myTravelers]);
           this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAsUntouched();
-          //this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
         })
       }
       else {
@@ -540,7 +546,6 @@ export class TravelerFormComponent implements OnInit {
             this.checkOutService.setTravelers([...this.myTravelers, traveler]);
             this.patch();
             this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].markAsUntouched();
-            //this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
           }
         }, error => {
           this.cartService.setLoaderStatus(false)
@@ -553,7 +558,6 @@ export class TravelerFormComponent implements OnInit {
 
   deleteTraveler(cartNumber, traveler_number) {
 
-    //let traveler = { traveler_number: traveler_number };
     this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = "";
     this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = "";
     if (this.accountHolderEmail == '' || traveler_number != 0) {
@@ -604,7 +608,6 @@ export class TravelerFormComponent implements OnInit {
   selectTraveler(travlerId, traveler_number, cartNumber) {
     let traveler = this.myTravelers.find(x => x.userId == travlerId)
     if (traveler && Object.keys(traveler).length > 0) {
-      //this.travelers[`type${cartNumber}`].adults[traveler_number].module = traveler.module;
       this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.firstName;
       this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.lastName;
       this.travelers[`type${cartNumber}`].adults[traveler_number].email = (this.accountHolderEmail && traveler_number == 0) ? this.accountHolderEmail : traveler.email;
@@ -631,10 +634,8 @@ export class TravelerFormComponent implements OnInit {
       }
       //return false;
       this.patch();
-      //this.setPhoneNumberFormat(this.travelers[`type${this.cartNumber}`].adults[traveler_number].country_code,cartNumber,traveler_number)
     }
 
-    //this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].disable()
     this.checkOutService.emitTravelersformData(this.travelerForm);
     this.cd.detectChanges();
   }
@@ -689,5 +690,34 @@ export class TravelerFormComponent implements OnInit {
     }
   }
 
+  // Author: xavier | 2021/8/18
+  // Description: Translates hotel's room description using Google's translation API.
+  translateHotelRoomDescription() {
+    const lang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(lang == "en" || this.cartItem.type != 'hotel') return;
 
+    let body = new HttpParams();
+    body = body.set('q', this.cartItem.module_info.title)
+               .set('source', 'en')
+               .set('target', lang)
+               .set('format', 'text')
+               .set('model', 'nmt')
+               .set('key', 'AIzaSyAM2IBT7FXhbv1NFqqVEdYkFDTyqPUhmR8');
+
+    class gApiResp { 
+      data: {
+        translations: {
+          translatedText: string[],
+          detectedSourceLanguage: string,
+          model: string
+        }[];
+      }
+    }
+
+    this.http
+      .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      .subscribe(
+        res => this.cartItem.module_info.title = res.data.translations[0].translatedText
+      );
+  }
 }

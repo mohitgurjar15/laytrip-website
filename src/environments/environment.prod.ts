@@ -7,3 +7,4 @@ export const environment = {
   siteUrl:'https://laytrip.com',
   VAPID_PUBLIC_KEY:'BLqKtvo8fc7ZHJ5m2j4RYbAoJJ6WtdUYNH38ZaStSIuecp1sCcrE7CFkFT266FCpeky4nBR5_yNgxygoLqE3jJ4'
 };
+ 

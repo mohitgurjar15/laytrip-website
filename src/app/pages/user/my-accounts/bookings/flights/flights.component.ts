@@ -1,11 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import { environment } from '../../../../../../environments/environment';
-import * as moment from 'moment';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AccountService } from 'src/app/services/account.service';
-import { HttpErrorResponse } from '@angular/common/http';
-
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-flights',
@@ -15,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class FlightsComponent implements OnInit {
 
   s3BucketUrl = environment.s3BucketUrl;
-  @Input() cartItem={};
+  @Input() cartItem: any={};
   @Input() laytrip_cart_id='';
   closeResult = '';
   bookingId = '';
@@ -26,7 +23,7 @@ export class FlightsComponent implements OnInit {
   constructor(
     private commonFunction: CommonFunction,
     private modalService: NgbModal,
-
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {}
@@ -35,6 +32,20 @@ export class FlightsComponent implements OnInit {
     if(typeof changes['cartItem'].currentValue!='undefined'){
       this.cartItem=changes['cartItem'].currentValue; 
       this.laytrip_cart_id=changes['laytrip_cart_id'].currentValue;
+
+      // Author: xavier | 2021/8/13
+      // Description: Translate cabin class for each flight route
+      if((this.cartItem != null) && (this.cartItem.moduleInfo[0] != null)) {
+        for(let i: number = 0; i < this.cartItem.module_info[0].routes.length; i++) {
+          const stops = this.cartItem.module_info[0].routes[i].stops;
+          for(let j: number = 0; j < stops.length; j++) {
+            const key: string = stops[j].cabin_class.toLowerCase() + "_class";
+            this.translate.
+                get(key).
+                subscribe((res: string) => stops[j].cabin_class = res);
+          }
+        }
+      }
     }
   } 
 

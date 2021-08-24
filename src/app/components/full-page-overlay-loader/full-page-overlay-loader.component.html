@@ -1,26 +1,10 @@
-<!-- Start page loader modal-->
-<!-- <div class="page_load">
-  <div class="page_load_inner">
-    <div class="page_laoding">
-      <lottie-animation-view [options]="lottieConfig" [width]="250" [height]="200">
-      </lottie-animation-view>
-      <h6> {{type}} <span>{{module}}</span></h6>
-      <div class="progress Loader_progressbar progress_loader">
-        <div class="progress-bar bg-custom progress-bar-striped progress-bar-animated" style="width:100%"></div>
-      </div>
-      <p *ngIf="description!=''">{{description}}</p>
-    </div>
-  </div>
-</div> -->
-<!-- Close page loader modal-->
-
 <div class="page_load">
-  <div class="page_load_inner">
-    <div class="page_laoding">
-      <h3>We are Processing<br>Your Booking</h3>
-      <p>Please do not press the Back Button, close your browser or click Pay and Book again. Wait for your Booking Confirmation screen to appear.</p>
-      <div class="footer_logo">
-        <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <div class="page_load_inner">
+        <div class="page_laoding">
+            <h3 [innerHTML]="'processing_booking_1' | translate"></h3>
+            <p>{{'processing_booking_2' | translate}}</p>
+            <div class="footer_logo">
+                <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       
       <symbol id="s--circle">
         <circle r="10" cx="20" cy="20"></circle>
@@ -65,10 +49,10 @@
         </g>
       </g>
   </svg>
-        <a >
-          <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
-        </a>
-      </div>
+                <a>
+                    <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="logo Icon">
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

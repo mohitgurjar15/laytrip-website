@@ -1,45 +1,40 @@
 <div class="hotel_tab">
-  <h2 *ngIf="showCommingSoon">Coming soon</h2>
+    <h2 *ngIf="showCommingSoon">Coming soon</h2>
 
-  <div class="tab_upper_content">
-    <div class="travellers">
-      <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)" (currentChangeCounter)="counterValueChanged($event)"></app-guest-info>
+    <div class="tab_upper_content">
+        <div class="travellers">
+            <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)" (currentChangeCounter)="counterValueChanged($event)"></app-guest-info>
+        </div>
     </div>
-  </div>
-  <form *ngIf="!showCommingSoon" [formGroup]="hotelSearchForm" autocomplete="off" (ngSubmit)="searchHotels()">
-    <div class="hotels_search">
-      <ul class="hotels-grid oneway">
-        <li class="grid_box first">
-          <div class="hotel_where">
-            <div class="search_area {{!validSearch && hotelSearchFormSubmitted}}"
-              [ngClass]="{'hotel-error': !validSearch && hotelSearchFormSubmitted}">
-              <label for="">Destination</label>
-              <app-hotel-suggestion [searchItem]="fromDestinationInfo.title" [defaultItem]="fromDestinationInfo" (selectedHotel)="selectedHotel($event)"
-                (validateSearch)="validateSearch($event)" (currentChangeCounter)="counterValueChanged($event)"></app-hotel-suggestion>
-            </div>
-          </div>
-        </li>
-        <li class="grid_box secound">
-          <div class="date_form">
-            <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
-              <!-- <label>Check In-Check Out</label> -->
-              <p-calendar [appendTo]="body" #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range"
-                [(ngModel)]="rangeDates" [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate"
-                panelStyleClass="calender-responsive-view round_trip_calender laytrip-cal-view" [numberOfMonths]="2"
-                (onSelect)=selectCheckInDateUpdate($event) [readonlyInput]="true" (onShow)="datepickerShow($event)"  (onClose)="datepickerClose($event)">
-              </p-calendar>
-            </div>
-          </div>
-        </li>
-        <li class="grid_box third">
-          <div class="serch_btn">
-            <button id="search_large_btn2">
+    <form *ngIf="!showCommingSoon" [formGroup]="hotelSearchForm" autocomplete="off" (ngSubmit)="searchHotels()">
+        <div class="hotels_search">
+            <ul class="hotels-grid oneway">
+                <li class="grid_box first">
+                    <div class="hotel_where">
+                        <div class="search_area {{!validSearch && hotelSearchFormSubmitted}}" [ngClass]="{'hotel-error': !validSearch && hotelSearchFormSubmitted}">
+                            <label for="">{{'destination_search' | translate}}</label>
+                            <app-hotel-suggestion [searchItem]="fromDestinationInfo.title" [defaultItem]="fromDestinationInfo" (selectedHotel)="selectedHotel($event)" (validateSearch)="validateSearch($event)" (currentChangeCounter)="counterValueChanged($event)"></app-hotel-suggestion>
+                        </div>
+                    </div>
+                </li>
+                <li class="grid_box secound">
+                    <div class="date_form">
+                        <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
+                            <p-calendar [appendTo]="body" #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range" [(ngModel)]="rangeDates" [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate" panelStyleClass="calender-responsive-view round_trip_calender laytrip-cal-view"
+                                [numberOfMonths]="2" (onSelect)=selectCheckInDateUpdate($event) [readonlyInput]="true" (onShow)="datepickerShow($event)" (onClose)="datepickerClose($event)" [locale]="cal_locale">
+                            </p-calendar>
+                        </div>
+                    </div>
+                </li>
+                <li class="grid_box third">
+                    <div class="serch_btn">
+                        <button id="search_large_btn2">
               <img src="{{s3BucketUrl}}assets/images/search_icon.svg" alt="search_icon" class="norm_btn" />
               <img src="{{s3BucketUrl}}assets/images/search_pink.svg" alt="search_icon" class="hover_btn" />
             </button>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
 </div>

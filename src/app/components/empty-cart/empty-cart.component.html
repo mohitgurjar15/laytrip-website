@@ -1,8 +1,8 @@
-<section class="block_contact_us_main modal fade comman_modal show" id="cart_modal" data-backdrop="static"
+<section class="block_contact_us_main modal fade comman_modal show" id="cart_modal"  data-backdrop="static" 
     data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content">
+
             <div class="modal_title">
                 <button type="button" class="close" (click)="close()">
                     <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
@@ -14,11 +14,9 @@
                         <div class="cart_img_wrpper">
                             <img src="{{s3BucketUrl}}assets/images/empty_cart_big.svg" alt="empty cart image">
                         </div>
-                        <div class="cart_msg">
-                            Oops! <br> Your Cart is Empty
-                        </div>
+                        <div class="cart_msg" [innerHTML]="'empty_cart_msg' | translate"></div>
                         <div class="cta_btn_wrps">
-                            <button (click)="redirectToHome()">Search Travel</button>
+                            <button (click)="redirectToHome()">{{'search_travel' | translate}}</button>
                         </div>
                         <div class="footer_logo">
                             <a >
@@ -28,6 +26,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+             </div>
+            </div>
 </section>

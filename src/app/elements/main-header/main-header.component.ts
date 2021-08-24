@@ -1,9 +1,9 @@
-import { Component, OnInit, DoCheck, Renderer2, ChangeDetectorRef, Output, ViewChild, SimpleChanges } from '@angular/core';
+import { Component, OnInit, DoCheck, ChangeDetectorRef, Renderer2 } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { CommonFunction } from '../../_helpers/common-function';
 import { CartService } from '../../services/cart.service';
@@ -11,9 +11,10 @@ import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
 import { UserService } from '../../services/user.service';
 import { EmptyCartComponent } from '../../components/empty-cart/empty-cart.component';
-import { AppleSecurityLoginPopupComponent, MODAL_TYPE } from '../../pages/user/apple-security-login-popup/apple-security-login-popup.component';
+import { AppleSecurityLoginPopupComponent } from '../../pages/user/apple-security-login-popup/apple-security-login-popup.component';
 declare var $: any;
 import {installmentType} from '../../_helpers/generic.helper';
+import { Langunage, LangunageModel } from 'src/app/model/langunage.model';
 
 @Component({
   selector: 'app-main-header',
@@ -41,10 +42,15 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   guestUserId: string = '';
   cartOverLimit;
   isOpenAppleLoginPopup = false;
-  paymentType:string='';
+  paymentType: string ='';
   instalmentType:string='weekly';
   installmentOptions;
+  userLang: string = "en";
   paymentInfo;
+  langunages: Langunage[] = [];
+  selectedLanunage: Langunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
+  isLanunageSet: boolean = false;
+  
   cartIsPromotional: boolean = false;
   constructor(
     private genericService: GenericService,
@@ -55,11 +61,30 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     public cd: ChangeDetectorRef,
     private cartService: CartService,
     private cookieService: CookieService,
-    private userService: UserService
+    private userService: UserService,
+    private renderer: Renderer2,
+    public route :ActivatedRoute
+
   ) {
+    let _langunage = localStorage.getItem('_lang');
+    if (_langunage) {
+      try {
+        let _lang = JSON.parse(_langunage);
+        this.selectedLanunage = _lang;
+        translate.setDefaultLang(this.selectedLanunage.iso_1Code);
+        this.isLanunageSet = true;
+        this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
+      } catch (error) {
+        this.isLanunageSet = false;
+        translate.setDefaultLang('en');
+      }
+    } else {
+      translate.setDefaultLang('en');
+    }
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getLangunages();
     this.checkUser();
     this.loadJquery();
     //this.getUserLocationInfo();
@@ -68,18 +93,21 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     }
     this.getCartList();
     this.installmentOptions=installmentType;
-
     this.cartService.getCartItems.subscribe(data => {
       if (data.length > 0) {
         this.updateCartSummary()
       }
-    })
+    });
+
+    // Author: xavier | 2021/7/28
+    // Description: To support localized installment types
+    this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     this.countryCode = this.commonFunction.getUserCountry();
 
-    this.cartService.getPaymentOptions.subscribe((data:any)=>{
+    this.cartService.getPaymentOptions.subscribe((data: any) => {
       if(Object.keys(data).length>0){
         this.paymentInfo=data;
-        if(data.paymentType=='instalment'){
+        if (data.paymentType == 'instalment') {
           this.paymentType='instalment';
           this.instalmentType=data.instalmentType;
           this.installmentAmount=data.instalments.instalment_date[1].instalment_amount;
@@ -88,24 +116,27 @@ export class MainHeaderComponent implements OnInit, DoCheck {
           this.paymentType='no-instalment';
           this.instalmentType='';
         }
-      }
-      else{
+      } else {
+
         try{
           let data:any=localStorage.getItem("__pm_inf");
           data = atob(data);
           data=JSON.parse(data);
-          this.paymentInfo=data;
+          this.paymentInfo = data;
+         
           if(data.paymentType=='instalment'){
             this.paymentType='instalment';
             this.instalmentType=data.instalmentType;
             this.installmentAmount=data.instalments.instalment_date[1].instalment_amount;
+          } else {
+            if (this.installmentAmount > 0) {
+              this.paymentType='instalment';
+             } else {              
+              this.paymentType='no-instalment';
+              this.instalmentType='';
+            }
           }
-          else{
-            this.paymentType='no-instalment';
-            this.instalmentType='';
-          }
-        }
-        catch(e){
+        }catch (e) {
           this.paymentInfo={};
         }
       }
@@ -113,22 +144,22 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   getCartList() {
-
     let live_availiblity = 'no';
     let url = window.location.href;
     if (url.includes('cart/checkout')) {
       live_availiblity = 'yes';
     }
     this.cartService.getCartList(live_availiblity).subscribe((res: any) => {
+      
       if (res) {
         // SET CART ITEMS IN CART SERVICE
         let cartItems = res.data.map(item => { return { id: item.id, module_Info: item.moduleInfo[0], type : item.type } });
         this.cartItems = cartItems;
         this.cartService.setCartItems(cartItems);
-        if (cartItems) {
+        if (cartItems) {          
           this.cartItemsCount = res.count;
           this.cartIsPromotional = res.cartIsPromotional;
-          localStorage.setItem('$crt', this.cartItemsCount);
+          localStorage.setItem('$crt', this.cartItemsCount);          
         }
         this.calculateInstalment(cartItems);
         // this.cd.detectChanges();
@@ -173,14 +204,14 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     if (host.includes("covid-19")) {
       this.isCovidPage = false;
     }
-    this.cartService.getCartItems.subscribe((res: any) => {
+    this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
+   /*  this.cartService.getCartItems.subscribe((res: any) => {
       try {
-        this.cartItemsCount = JSON.parse(localStorage.getItem('$crt'));
       }
       catch (e) {
 
       }
-    });
+    }); */
 
   }
 
@@ -227,7 +258,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     localStorage.removeItem('$crt');
     localStorage.removeItem('$cartOver');
     this.cookieService.remove('__cc');
-    this.cartItemsCount = '';
+    this.cartItemsCount = 0;
     this.cartService.setCartItems([]);
     this.loginGuestUser();
     if(this.commonFunction.isRefferal()){
@@ -308,17 +339,21 @@ export class MainHeaderComponent implements OnInit, DoCheck {
 
   openEmptyCartPopup() {
     this.modalService.open(EmptyCartComponent, {
-      centered: true, backdrop: 'static',
-      keyboard: false
+      centered: true,
+      windowClass: 'share_modal',
+      keyboard: false,
+      // backdrop: 'static'
     });
   }
 
   calculateInstalment(cartPrices) {
-    let totalPrice = 0;
-    let checkinDate;
+    let totalPrice = 0; let downpayment = 0; let checkinDate;
     if (cartPrices && cartPrices.length > 0) {
       checkinDate = this.getCheckinDate(cartPrices[0].module_Info,cartPrices[0].type)
       for (let i = 0; i < cartPrices.length; i++) {
+        if (this.cartIsPromotional && cartPrices[i].module_Info.offer_data.down_payment_options[0].applicable) {
+          downpayment += cartPrices[i].module_Info.offer_data.down_payment_options[0].amount;
+        }
         totalPrice += this.getPrice(cartPrices[i].module_Info,cartPrices[i].type);
         if (i == 0) {
           continue;
@@ -328,7 +363,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         }
       }
     }
-    this.totalAmount = totalPrice;
+    this.totalAmount = totalPrice ? totalPrice : 0;
     let instalmentRequest = {
       instalment_type: this.paymentInfo.instalmentType || "weekly",
       checkin_date: checkinDate,
@@ -337,17 +372,27 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       additional_amount: 0,
       down_payment: 0,
       selected_down_payment: this.paymentInfo.selectedDownPayment || 0,
-      custom_down_payment: this.cartIsPromotional ? 9.99 : 0
+      custom_down_payment: this.cartIsPromotional ? downpayment : 0,
+      down_payment_option : [],
+      is_down_payment_in_percentage: true,
     }
+    let checkInDiff = moment(moment(instalmentRequest.checkin_date,'YYYY-MM-DD')).diff(moment().format("YYYY-MM-DD"),'days');
+      if(checkInDiff > 30){          
+        instalmentRequest.down_payment_option = [40,50,60];
+      } else if(checkInDiff > 90){
+        instalmentRequest.down_payment_option = [20,30,40];
+      }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available) {
-        this.installmentAmount = res.instalment_date[1].instalment_amount;
-      }
-      else {
+        this.installmentAmount = res.instalment_date[1].instalment_amount ? res.instalment_date[1].instalment_amount : 0;
+        this.paymentType = 'instalment';        
+      } else {
         this.installmentAmount = 0;
+        this.paymentType = 'no-instalment';
       }
     }, (err) => {
       this.installmentAmount = 0;
+      this.paymentType = 'no-instalment';
     })
   }
 
@@ -417,21 +462,73 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   }
 
   getPrice(module_Info,type){
-    let price;
+    let price = 0;
     if (type == 'flight') {
       if (this.commonFunction.isRefferal() && module_Info.offer_data && module_Info.offer_data.applicable ) {        
-        price = module_Info.discounted_selling_price;
+        price = module_Info.discounted_selling_price ? module_Info.discounted_selling_price : 0;
       } else {        
-        price = module_Info.selling_price;
+        price = module_Info.selling_price ? module_Info.selling_price : 0;
       }
     }
     else if(type=='hotel'){
       if (this.commonFunction.isRefferal() && module_Info.offer_data && module_Info.offer_data.applicable) {
-        price = module_Info.discounted_selling_price;
+        price = module_Info.selling.discounted_total ? module_Info.selling.discounted_total : 0;
       } else {
-        price = module_Info.selling.total;
+        price = module_Info.selling.total ? module_Info.selling.total: 0;
       }
     }
     return price;
   }
+
+  
+  /**
+  * change user lanunage
+  * @param langunage 
+  */
+   changeLangunage(langunage: Langunage) {
+
+    if (JSON.stringify(langunage) != JSON.stringify(this.selectedLanunage)) {
+      this.selectedLanunage = langunage;
+      localStorage.setItem("_lang", JSON.stringify(langunage))
+      this.renderer.removeClass(document.body, `en_lang`);
+      this.renderer.removeClass(document.body, `es_lang`);
+      this.renderer.removeClass(document.body, `it_lang`);
+      this.translate.use(langunage.iso_1Code);
+      this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
+      // const urlParameters = Object.assign({}, this.route.snapshot.queryParams); 
+      // urlParameters.lang = this.selectedLanunage.iso_1Code;
+
+      // this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
+
+    }
+  }
+
+  /**
+   * Get all langunages
+   */
+  getLangunages() {
+    this.genericService.getAllLangunage().subscribe(
+      (response: LangunageModel) => {
+        this.langunages = response.data.filter(lang => lang.active == true);
+        //this.langunages = response.data.filter(lang => lang.iso_1Code == "en" || lang.iso_1Code == "es");
+        if (!this.isLanunageSet) {
+          this.isLanunageSet = true;
+          this.selectedLanunage = this.langunages[0];
+          localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
+        }
+        else {
+          let find = this.langunages.find(langunage => langunage.id == this.selectedLanunage.id)
+          if (!find) {
+            this.isLanunageSet = true;
+            this.selectedLanunage = this.langunages[0];
+            localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
+          }
+        }
+      },
+      (error) => {
+
+      }
+    )
+  }
+
 }

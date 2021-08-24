@@ -1,9 +1,9 @@
-<div class="price_listing_wrpper"  *ngIf="(cartItem | json) != '[]'">
+<div class="price_listing_wrpper" *ngIf="(cartItem | json) != '[]'">
     <div class="total_p_wrp bb">
         <div class="left_sec">
-            Total Purchases
+            {{'total_purchases' | translate}}
             <span>
-                Taxes and Fees Included
+                {{'taxes_fees_included' | translate}}
             </span>
         </div>
         <div class="right_sec">
@@ -15,7 +15,7 @@
     <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
         <div class="line_desc black_line_head">
             <div class="left_sec">
-                Booking Downpayment
+                {{'booking_downpayment' | translate}}
             </div>
             <div class="right_sec">
                 ${{cartItem?.cartInstallments[0]?.amount | number : '1.2-2' }}
@@ -23,74 +23,32 @@
             <span class="fake_paid_markss">
             </span>
         </div>
-        <!-- <div class="line_desc">
-            <div class="left_sec">
-                Add-on Baggage
-            </div>
-            <div class="right_sec">
-                $180
-            </div>
-        </div>
-        <div class="line_desc">
-            <div class="left_sec">
-                Add-on Baggage
-            </div>
-            <div class="right_sec">
-                $180
-            </div>
-        </div> 
-        <div class="total_p_wrp">
-            <div class="left_sec">
-                Downpayment
-            </div>
-            <div class="right_sec">
-                ${{cartItem.cartInstallments[0]?.amount}}
-            </div>
-        </div>-->
         <div class="listing_accordion">
             <div id="accordion_listing">
                 <div class="card">
                     <div class="card-header">
                         <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#listing_descrip">
-                            {{cartItem?.cartInstallments?.length -1 }} {{installmentType[cartItem.installmentType]}} Installments of ${{cartItem?.cartInstallments[1]?.amount | number : '1.2-2'}}
+                            {{cartItem?.cartInstallments?.length -1 }} {{installmentType[userLang][cartItem.installmentType]}} {{'installments_of' | translate}} ${{cartItem?.cartInstallments[1]?.amount | number : '1.2-2'}}
                         </a>
                     </div>
-                    <div id="listing_descrip" class="collapse show"Paid data-parent="#accordion_listing">
+                    <div id="listing_descrip" class="collapse show" Paid data-parent="#accordion_listing">
                         <div class="card-body">
                             <ng-container *ngFor="let installment of cartItem.cartInstallments | slice:1;let i = index ;">
                                 <div class="line_desc paid_clr" [ngClass]="{'paid_clr' : (installment.instalmentStatus), 'due_clr' : (  installment.dueInstallment && !installment.instalmentStatus),'' : (  !installment.dueInstallment && !installment.instalmentStatus) }">
                                     <div class="left_sec">
-                                       #{{i+1}} {{ installment.instalmentStatus ? 'Paid' : 'Due'}}  {{commonFunction.convertCustomDateFormat(installment.instalmentDate,'YYYY-MM-DD','MMM D, YYYY')}} 
+                                        #{{i+1}} {{ installment.instalmentStatus ? ('paid'|translate) : ('due'|translate)}} {{commonFunction.convertCustomDateFormat(installment.instalmentDate,'YYYY-MM-DD','MMM D, YYYY')}}
                                     </div>
                                     <div class="right_sec">
-                                        ${{ installment.amount  | number : '1.2-2' }}
+                                        ${{ installment.amount | number : '1.2-2' }}
                                     </div>
                                     <span class="paid_markss">
                                         <i class="fa fa-check-circle-o" aria-hidden="true" *ngIf="installment.instalmentStatus"></i>
                                     </span>
                                 </div>
                             </ng-container>
-                            <!-- <div class="line_desc due_clr">
-                                <div class="left_sec">
-                                    Add-on Baggage
-                                </div>
-                                <div class="right_sec">
-                                    $180
-                                </div>
-                                <span class="paid_markss"></span>
-                            </div>
-                            <div class="line_desc">
-                                <div class="left_sec">
-                                    Add-on Baggage
-                                </div>
-                                <div class="right_sec">
-                                    $180
-                                </div>
-                                <span class="paid_markss"></span>
-                            </div> -->
                             <div class="total_p_wrp">
                                 <div class="left_sec">
-                                    Total Installments
+                                    {{'total_installments' | translate}}
                                 </div>
                                 <div class="right_sec">
                                     ${{ totalInstallmentAmount || 0 | number : '1.2-2' }}

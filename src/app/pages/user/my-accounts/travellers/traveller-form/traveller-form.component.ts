@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../../environments/environment';
 import * as moment from 'moment';
@@ -126,12 +126,6 @@ export class TravellerFormComponent implements OnInit {
       }
     });
   }
-
-  /*  ngOnChanges(changes: SimpleChanges) {
-     this.checkOutService.getCountries.subscribe(res => {
-       this.countries = res;
-     });
-   } */
 
   getCountry() {
     this.genericService.getCountry().subscribe(res => {
@@ -268,6 +262,7 @@ export class TravellerFormComponent implements OnInit {
         passport_number: this.travellerForm.value.passport_number,
         country_code: this.travellerForm.value.country_code ? this.travellerForm.value.country_code : '',
         phone_no: this.travellerForm.value.phone_no,
+        module_id: 1
       };
       let emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
 

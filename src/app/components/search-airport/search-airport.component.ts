@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewChecked, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
@@ -29,6 +29,7 @@ export class SearchAirportComponent implements OnInit {
   progressInterval;
   counterChangeVal=0;
   isInputFocus : boolean = false;
+  $autoComplete;
 
   constructor(
     private flightService: FlightService,
@@ -50,17 +51,28 @@ export class SearchAirportComponent implements OnInit {
     }
   }
 
-  searchAirport(searchItem) {
+
+  onChangeSearch(event) {
+     if (event.term.length > 2) {
+      // this.searchRoute(event.term);
+      if(this.loading){
+        this.$autoComplete.unsubscribe();
+      }
+      this.searchAirport(event.term);      
+    } 
+  }
+
+  searchRoute(searchItem) {
     this.loading = true;
-    let isFromLocation=this.id=='fromSearch'?'yes':'no';
-    let alternateLocation='';
-    if(this.id=='fromSearch'){
-      alternateLocation=localStorage.getItem('__to') || '';
+    let isFromLocation = this.id == 'fromSearch' ? 'yes' : 'no';
+    let alternateLocation = '';
+    if (this.id == 'fromSearch') {
+      alternateLocation = localStorage.getItem('__to') || '';
     }
-    else{
-      alternateLocation=localStorage.getItem('__from') || '';
+    else {
+      alternateLocation = localStorage.getItem('__from') || '';
     }
-    this.flightService.searchRoute(searchItem,isFromLocation,alternateLocation).subscribe((response: any) => {
+    this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe((response: any) => {
       this.flightSearchRoute.emit(response);
       this.data = response.map(res => {
         this.loading = false;
@@ -73,19 +85,55 @@ export class SearchAirportComponent implements OnInit {
           display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
           parentId: 0
         };
-        
+
         return searchRoute;
+      });
+    },
+      error => {
+        this.flightSearchRoute.emit([]);
+        this.data = [];
+        this.loading = false;
+      }
+    );
+  }
+
+  onInputClick() {
+    // data if set null if it is set in from search.
+    if (this.id == 'toSearch') {
+      this.flightSearchRoute.emit({});
+      this.data = [];
+    }
+  }
+
+  searchAirport(searchItem) {
+    console.log("innaaa")
+    this.loading = true;
+    this.$autoComplete = this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+      
+      /* this.flightSearchRoute.emit(response); */
+      this.data = response.map(res => {
+        if (localStorage.getItem('__from') != res.code) {
+          this.flightSearchRoute.emit(response);
+          this.loading = false;
+          var searchRoute = {
+            id: res.id,
+            name: res.name,
+            code: res.code,
+            city: res.city,
+            country: res.country,
+            display_name: `${res.city},${res.country},(${res.code}),${res.name}`,
+            parentId: 0
+          };
+
+          return searchRoute;
+        } else {
+        }
       });
     },
       error => {
         this.loading = false;
       }
     );
-  }
-
-  onChangeSearch(event) {
-    this.searchAirport(event.term);
-    // this.searchItem.emit({key : event.term,type : this.id})
   }
 
   selectEvent(event, index) {
@@ -114,16 +162,12 @@ export class SearchAirportComponent implements OnInit {
     this.selectedAirport = {};
   }
 
+
   setDefaultAirport() {
     try {
       let location: any = this.cookieService.get('__loc');
       location = JSON.parse(location);
       if (typeof location.airport !== 'undefined') {
-        /* location.airport.display_name = `${location.city},${location.country},(${location.code}),${location.name}`,
-        this.data[0] = location.airport;
-        this.airportDefaultDestValue = this.data[0].city;
-        this.defaultSelected='';
-        this.selectedAirport = this.data[0]; */
       }
     }
     catch (error) {
@@ -135,7 +179,7 @@ export class SearchAirportComponent implements OnInit {
     if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
       this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ?  changes['airport'].currentValue.city : [];     
       this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([],[changes['airport'].currentValue]) : [];
-    }    
+    }
   }
 
   onFocus(){
