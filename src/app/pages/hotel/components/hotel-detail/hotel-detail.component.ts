@@ -54,6 +54,11 @@ export class HotelDetailComponent implements OnInit {
   isNotFound:boolean=false;
   isCartFull:boolean=false;
   isRefferal = this.commonFunction.isRefferal();
+  installmentOption = {
+    payment_method : '',
+    payment_frequncy :'',
+    down_payment:0
+  }
 
   isTranslatedByGoogle:boolean = false;
   
@@ -88,6 +93,17 @@ export class HotelDetailComponent implements OnInit {
       this.loading = false;
       if (res) {
         this.hotelRoomArray = res.data;
+        for(let i=0; i < this.hotelRoomArray.length; i++){
+          console.log('come in array')
+          if(this.hotelRoomArray[i].payment_object.weekly)
+          this.hotelRoomArray[i].selected_option='weekly';
+          else if(this.hotelRoomArray[i].payment_object.biweekly)
+            this.hotelRoomArray[i].selected_option='biweekly';
+          else if(this.hotelRoomArray[i].payment_object.monthly)
+            this.hotelRoomArray[i].selected_option='monthly';
+          else
+            this.hotelRoomArray[i].selected_option='full';
+        }  
         for(let i=0; i < this.hotelRoomArray.length; i++){
           this.hotelRoomArray[i].galleryImages=[];
             for(let image of this.hotelRoomArray[i].photos){
@@ -332,6 +348,15 @@ export class HotelDetailComponent implements OnInit {
       });
 
     }
+  }
+
+  checkCartButton(index,payment_frequncy,down_payment,payment_method){
+   
+    this.hotelRoomArray[index].selected_option = payment_frequncy;
+    this.installmentOption.payment_frequncy =payment_frequncy;
+    this.installmentOption.down_payment =down_payment;
+    this.installmentOption.payment_method =payment_method;
+    console.log(this.installmentOption)
   }
 
   openPolicyPopup(policyInfo, type) {

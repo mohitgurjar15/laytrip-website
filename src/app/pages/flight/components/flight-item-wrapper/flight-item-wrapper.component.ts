@@ -71,6 +71,12 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   checkedAirUniqueCodes = [];
   isRefferal=this.commonFunction.isRefferal();
 
+  installmentOption = {
+    payment_method : '',
+    payment_frequncy :'',
+    down_payment:0
+  };
+
   constructor(
     private flightService: FlightService,
     private router: Router,
@@ -104,15 +110,27 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     })
     this.loadJquery();
     this.flightService.getFlights.subscribe(data=>{
+      console.log("this.flightDetails")
       if(data.length){
-        this.flightDetails = this.flightItems = data;            
+        this.flightDetails = this.flightItems = data;      
+        for(let i=0; i < this.flightDetails.length; i++){
+          if(this.flightDetails[i].payment_object.weekly)
+            this.flightDetails[i].selected_option='weekly';
+          else if(this.flightDetails[i].payment_object.biweekly)
+            this.flightDetails[i].selected_option='biweekly';
+          else if(this.flightDetails[i].payment_object.monthly)
+            this.flightDetails[i].selected_option='monthly';
+          else
+            this.flightDetails[i].selected_option='full';
+        }      
       }
       else{
         this.flightDetails=[];
       }
     });
+    
     this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-
+    
 
     // Author: xavier | 2021/8/3
     // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
@@ -292,6 +310,14 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     }
   }
 
+  checkCartButton(index,payment_frequncy,down_payment,payment_method){
+   
+    this.flightDetails[index].selected_option = payment_frequncy;
+    this.installmentOption.payment_frequncy =payment_frequncy;
+    this.installmentOption.down_payment =down_payment;
+    this.installmentOption.payment_method =payment_method;
+    console.log(this.installmentOption)
+  }
   checkInstalmentAvalability() {
     let instalmentRequest = {
       checkin_date: this.route.snapshot.queryParams['departure_date'],
