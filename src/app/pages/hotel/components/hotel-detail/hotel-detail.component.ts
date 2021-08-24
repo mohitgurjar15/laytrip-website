@@ -366,7 +366,6 @@ export class HotelDetailComponent implements OnInit {
   }
 
   checkCartButton(index, payment_frequncy, down_payment, payment_method) {
-console.log(index, payment_frequncy, down_payment, payment_method)
     this.hotelRoomArray[index].selected_option = payment_frequncy;
     this.installmentOption.payment_frequncy = payment_frequncy;
     this.installmentOption.down_payment = down_payment;
