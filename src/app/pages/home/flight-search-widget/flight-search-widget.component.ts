@@ -373,7 +373,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       // console.log('no')
     }
   }
-
+  
   changeMonth(event) {
 
     var currentDate = new Date();
@@ -391,13 +391,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.currentMonth = event.month.toString().length == 1 ? '0' + event.month : event.month;
     this.currentYear = event.year;
     //&& moment().format('MM') <= this.currentMonth
-    let currYYMM = moment().format("YYYY-MM");
     let currCalYYMM = moment(this.currentMonth+'-'+this.currentYear,'MM-YY').add(1,'years').format("YYYY-MM");
     let calApplyDiff = moment(currCalYYMM, "YYYY-MM").diff(moment().format( "YYYY-MM"), 'days')
         
-    console.log(calApplyDiff )
     if (!this.isRoundTrip && (calApplyDiff > 0  || calApplyDiff <= 365)  ) {
-      console.log('clear')
       let month = event.month;
       month = month.toString().length == 1 ? '0' + month : month;
       let monthYearName = `${month}-${event.year}`;
@@ -455,7 +452,7 @@ export class FlightSearchWidgetComponent implements OnInit {
        }
     } 
   }
-
+  
 
   getPriceLabel(type) {
     this.isCalenderPriceLoading = true;

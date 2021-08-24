@@ -58,7 +58,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   showFareDetails: number = 0;
   flightUniqueCode;
   isRoundTrip = false;
-  noOfDataToShowInitially = 25;
+  noOfDataToShowInitially = 20;
   subcell = '$100';
   isLoggedIn = false;
   userDetails;
@@ -67,7 +67,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   totalLayCredit = 0;
   flightItems;
   scrollLoading: boolean = false;
-  dataToLoad = 25;
+  dataToLoad = 20;
   checkedAirUniqueCodes = [];
   isRefferal=this.commonFunction.isRefferal();
 
@@ -112,7 +112,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       }
     });
     this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-
+    console.log(this.flightDetails.length, this.flightItems.length)
 
     // Author: xavier | 2021/8/3
     // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
@@ -405,6 +405,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   onScrollDown() {
     this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
+    console.log(this.noOfDataToShowInitially, this.flightDetails.length, this.flightItems.length)
+
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.flightDetails.length) {
         
