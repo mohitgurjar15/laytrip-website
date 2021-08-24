@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, Output, ViewChild ,EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild ,EventEmitter} from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
@@ -72,7 +72,8 @@ export class HotelSearchWidgetComponent implements OnInit {
   showCommingSoon: boolean = false;
   isDatePickerOpen : boolean = false;
   isRefferal = this.commonFunction.isRefferal();
-  cal_locale: any;
+  cal_locale = CalendarTranslations["en"];
+  cal_loaded: boolean = true;
 
   constructor(
     public commonFunction: CommonFunction,
@@ -80,7 +81,6 @@ export class HotelSearchWidgetComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private homeService: HomeService,
-    public cd: ChangeDetectorRef,
     private translate: TranslateService
   ) {
 
@@ -117,9 +117,6 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-
-    this.setCalendarLocale();
-
     this.homeService.getSlideOffers.subscribe(currentSlide => {
       if (this.commonFunction.isRefferal()) {        
         this.dealDateValidation();
@@ -211,6 +208,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     });
     this.homeService.removeToString('hotel');
+    this.setCalendarLocale();
   }
 
   dealDateValidation() {
@@ -342,10 +340,20 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   // Author: xavier | 2021/8/17
-  // Description: Calenddar localization
+  // Description: Calendar localization
+  // The input field does not refresh when changing the locale:
+  //  https://github.com/primefaces/primeng/issues/1706
+  // Probably a better approach?
+  //  https://github.com/primefaces/primeng/issues/5151#issuecomment-763918829
   setCalendarLocale() {
-    let userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
-    this.cal_locale = CalendarTranslations[userLang];
+    this.cal_loaded = false;
+    let userLang = JSON.parse(localStorage.getItem('_lang'));
+    if(userLang == null) {
+      this.cal_locale = CalendarTranslations["en"];
+    } else {
+      this.cal_locale = CalendarTranslations[userLang.iso_1Code];
+    }
+    setTimeout(() => this.cal_loaded = true, 0);
   }
 
   // Author: xavier | 2021/6/28

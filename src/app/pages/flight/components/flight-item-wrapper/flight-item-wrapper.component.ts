@@ -58,7 +58,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   showFareDetails: number = 0;
   flightUniqueCode;
   isRoundTrip = false;
-  noOfDataToShowInitially = 20;
+  noOfDataToShowInitially = 25;
   subcell = '$100';
   isLoggedIn = false;
   userDetails;
@@ -67,7 +67,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   totalLayCredit = 0;
   flightItems;
   scrollLoading: boolean = false;
-  dataToLoad = 20;
+  dataToLoad = 25;
   checkedAirUniqueCodes = [];
   isRefferal=this.commonFunction.isRefferal();
 
@@ -108,7 +108,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         this.flightDetails = this.flightItems = data;            
       }
       else{
-        this.flightDetails=[];
+        this.flightDetails= this.flightItems =[];
       }
     });
     this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);

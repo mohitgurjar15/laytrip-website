@@ -701,5 +701,7 @@
     "cookie_policy_info_2": "para saber más.",
     "faqs": "Preguntas Frecuentes",
     "seconds_remaining": "Segundos Restantes",
-    "link_copied": "Enlace Copiado"
+    "link_copied": "Enlace Copiado",
+    "error404_1": "Error 404",
+    "error404_2": "Por favor regresa a la <a href='javascript:window.history.go(-1)'>página anterior</a> e intenta de nuevo"
 }
