@@ -25,6 +25,12 @@
                     </app-traveller-info>
                 </div>
             </li>
+            <li class="nav-item class_resp desk_li ml-2">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch_flight">
+                    <label class="custom-control-label" for="customSwitch_flight">Deals</label>
+                </div>
+            </li>
             <ul class="mobile_ul">
                 <li class="nav-item class_resp mobile_li">
                     <div class="class_section">
@@ -32,12 +38,19 @@
                         </app-flight-class>
                     </div>
                 </li>
-                <li class="nav-item travellers_resp mobile_li">
+                <li class="nav-item travellers_resp mobile_li deal_switch_mobile">
                     <div class="travellers">
                         <app-traveller-info domid="mobile_traveller" label="{{'travellers_and_class' | translate}}" (changeValue)="changeTravellerInfo($event)" (currentChangeCounter)="counterValueChanged($event)">
                         </app-traveller-info>
                     </div>
+                    <!-- <li class="nav-item class_resp desk_li ml-2"> -->
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch_flight">
+                            <label class="custom-control-label" for="customSwitch_flight">Deals</label>
+                        </div>
+                    <!-- </li> -->
                 </li>
+                
             </ul>
         </ul>
     </div>
