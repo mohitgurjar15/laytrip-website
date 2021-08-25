@@ -120,6 +120,9 @@
                 &.bb_none {
                     border-bottom: none;
                 }
+                @include tab-view{
+                    padding: 14px;
+                }
             }
             span {
                 &:first-child {
@@ -236,6 +239,9 @@
                             }
                         }
                     }
+                    @include tab-view{
+                        padding: 14px;
+                    }
                 }
                 .card-body {
                     padding: 0 15px 0 15px;
@@ -304,6 +310,7 @@
                             @include tab-view {
                                 font-size: 14px;
                                 margin-bottom: 5px;
+                                padding-bottom: 5px;
                             }
                         }
                     }
@@ -331,6 +338,7 @@
                     }
                     @include tab-view {
                         font-size: 14px;
+                        padding: 14px;
                     }
                 }
             }
