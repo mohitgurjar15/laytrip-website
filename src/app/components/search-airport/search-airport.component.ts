@@ -26,10 +26,13 @@ export class SearchAirportComponent implements OnInit {
   @Input() airport;
   @Input() inputName;
   @Output() currentChangeCounter = new EventEmitter();
+  @Output() dealStatusChange = new EventEmitter();
+
   progressInterval;
   counterChangeVal=0;
   isInputFocus : boolean = false;
   $autoComplete;
+  isDealIcon = false;
 
   constructor(
     private flightService: FlightService,
@@ -51,6 +54,11 @@ export class SearchAirportComponent implements OnInit {
     }
   }
 
+  onDealStatusChange(){
+    this.isDealIcon = !this.isDealIcon
+    this.dealStatusChange.emit(this.isDealIcon)
+  }
+
 
   onChangeSearch(event) {
      if (event.term.length > 2) {
@@ -58,7 +66,11 @@ export class SearchAirportComponent implements OnInit {
       if(this.loading){
         this.$autoComplete.unsubscribe();
       }
-      this.searchAirport(event.term);      
+      if(this.isDealIcon){
+        this.searchRoute(event.term)
+      }else{
+        this.searchAirport(event.term);      
+      }
     } 
   }
 
@@ -72,7 +84,8 @@ export class SearchAirportComponent implements OnInit {
     else {
       alternateLocation = localStorage.getItem('__from') || '';
     }
-    this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe((response: any) => {
+    console.log(alternateLocation)
+    this.$autoComplete = this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe((response: any) => {
       this.flightSearchRoute.emit(response);
       this.data = response.map(res => {
         this.loading = false;

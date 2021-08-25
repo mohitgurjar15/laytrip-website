@@ -73,6 +73,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   isDatePickerOpen : boolean = false;
   isRefferal = this.commonFunction.isRefferal();
   cal_locale: any;
+  isHotelIcon = true;
 
   constructor(
     public commonFunction: CommonFunction,
