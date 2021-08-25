@@ -104,15 +104,13 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     })
     this.loadJquery();
     this.flightService.getFlights.subscribe(data=>{
-      this.flightDetails = this.flightItems =[];
+      this.flightItems =[];
       if(data.length){
         this.flightItems = data;            
       }
     });
 
-    console.log(this.flightDetails.length)
-        this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-    console.log(this.flightDetails.length, this.flightItems.length)
+    this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
 
     // Author: xavier | 2021/8/3
     // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
@@ -405,19 +403,19 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   onScrollDown() {
     this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
-    console.log(this.noOfDataToShowInitially, this.flightDetails.length, this.flightItems.length)
 
     setTimeout(() => {
+      console.log('here')
       if (this.noOfDataToShowInitially <= this.flightDetails.length) {
-        
-        let requestParams = { revalidateDto: [] };
         this.noOfDataToShowInitially += this.dataToLoad;
         this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+        console.log(this.flightDetails)
         this.scrollLoading = false;
       } else {
         this.scrollLoading = false;
       }
-    }, 1000);
+    }, 2000);
+    console.log(this.scrollLoading)
   }
   getCancellationPolicy(route_code) {
     return "#";
