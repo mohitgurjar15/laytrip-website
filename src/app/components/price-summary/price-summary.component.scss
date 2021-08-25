@@ -114,7 +114,7 @@
                 color: $active-tab-text;
                 font-weight: 600;
                 margin: 0;
-                padding: 15px;
+                padding:23px 15px;
                 border-top: 1px dashed #d6d6d6;
                 border-bottom: 1px dashed #d6d6d6;
                 &.bb_none {
@@ -169,7 +169,7 @@
                     padding: 23px 14px;
                     margin-bottom: 21px;
                     .card_header_btn {
-                        color: $text-grey;
+                        color: $mid_gray_bg;
                         font-size: 16px;
                         border: none;
                         background-color: transparent;
@@ -281,6 +281,19 @@
                                         width: 50%;
                                     }
                                 }
+                                &.payment_due_date{
+                                    display: flex;
+                                    .due_date_ctn{
+                                        min-width: 142px;
+                                    }
+                                }
+                                .booking_type{
+                                    i{
+                                        padding: 0 6px;
+                                        font-size: 10px;
+                                        color: $mid_gray_bg;
+                                    }
+                                }
                             }
                             &:last-child {
                                 padding-bottom: 0;
@@ -303,7 +316,7 @@
                     color: $active-tab-text;
                     font-weight: 500;
                     margin-top: 10px;
-                    padding: 15px;
+                    padding:23px 15px;
                     border-top: 1px dashed #d6d6d6;
                     .price_wrps {
                         // flex: 1;

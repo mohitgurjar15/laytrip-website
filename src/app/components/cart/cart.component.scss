@@ -35,17 +35,33 @@ h3 {
             border-radius: 50px;
             font-size: 16px;
             color: #52575A;
-            max-width: 130px;
+            max-width: 131px;
             text-overflow: ellipsis;
             overflow-x: hidden;
             white-space: nowrap;
             font-weight: 600;
             .tab_imgs_wrps{
+                margin-right: 5px;
+                font-size: 14px;
                 img{
                     width: 14px;
                     height: 14px;
                     object-fit: contain;
                     margin-right: 5px;
+                }
+                @include tab-view{
+                    margin-right: 0;
+                }
+            }
+            .tab_txt_head{
+                @include tab-view{
+                    display: none;
+                }
+            }
+            @include tab-view{
+                padding: 8px 14px;
+                .tab_imgs_wrps{
+                    font-size: 16px;
                 }
             }
         }
@@ -60,6 +76,9 @@ h3 {
                 .tab_round_wrps{
                     .tab_imgs_wrps{
                         display: none;
+                        @include tab-view{
+                            display: flex;
+                        }
                     }
                     .tab_txt_head{
                         color: $active-tab-text;
