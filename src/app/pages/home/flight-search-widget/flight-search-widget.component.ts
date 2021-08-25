@@ -186,7 +186,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.arrival = this.toSearch.code;
 
         if (this.isRoundTrip) {
-          this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(97, 'days').toDate() : moment().add(9, 'days').toDate()];
+          this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(97, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate()];
         } 
       }
     });
@@ -208,10 +208,8 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   setDefaultDate() {
 
-    this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() :moment().add(2, 'days').toDate();
-    this.departureDate = this.flightDepartureMinDate;
-    
-    this.returnDate = this.isRefferal ? moment(this.departureDate).add(97, 'days').toDate() : moment(this.departureDate).add(9, 'days').toDate();
+    this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() :moment().add(2, 'days').toDate();     
+    this.returnDate = this.isRefferal ? moment(this.departureDate).add(97, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
 
   }
 
@@ -373,6 +371,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
   
+  timer=0;
   changeMonth(event) {
 
     var currentDate = new Date();

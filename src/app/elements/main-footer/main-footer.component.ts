@@ -68,10 +68,10 @@ export class MainFooterComponent implements OnInit {
     }
 
     this.countryCode = this.commonFunction.getUserCountry();
-    const urlParameters = Object.assign({}, this.route.snapshot.queryParams); 
-    urlParameters.lang = this.selectedLanunage.iso_1Code;
+    // const urlParameters = Object.assign({}, this.route.snapshot.queryParams); 
+    // urlParameters.lang = this.selectedLanunage.iso_1Code;
 
-    this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
+    // this.router.navigate([], { relativeTo: this.route});
   }
 
   
