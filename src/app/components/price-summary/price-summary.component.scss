@@ -45,8 +45,8 @@
                 padding: 10px;
             }
             /* &:nth-child(2) {
-        border-top: 1px solid $feedback_text-clr;
-      } */
+                border-top: 1px solid $feedback_text-clr;
+            } */
             .pay_listing {
                 display: flex;
                 align-items: center;
@@ -115,8 +115,8 @@
                 font-weight: 600;
                 margin: 0;
                 padding: 15px;
-                border-top: 1px solid $feedback_text-clr;
-                border-bottom: 1px solid $feedback_text-clr;
+                border-top: 1px dashed #d6d6d6;
+                border-bottom: 1px dashed #d6d6d6;
                 &.bb_none {
                     border-bottom: none;
                 }
@@ -164,11 +164,10 @@
                 .card-header {
                     background-color: transparent;
                     border: none;
-                    border-top: 1px solid $feedback_text-clr;
-                    padding: 15px 5px 15px 15px;
-                    @include tab-view {
-                        padding: 15px 5px 5px 15px;
-                    }
+                    border-top: 1px dashed #d6d6d6;
+                    border-bottom: 1px dashed #d6d6d6;
+                    padding: 23px 14px;
+                    margin-bottom: 21px;
                     .card_header_btn {
                         color: $text-grey;
                         font-size: 16px;
@@ -259,8 +258,9 @@
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
-                            color: $text-black;
-                            font-size: 16px;
+                            color: $mid_gray_bg;
+                            font-size: 14px;
+                            padding-bottom: 12px;
                             span {
                                 @include tab-view {
                                     &:first-child {
@@ -283,6 +283,7 @@
                                 }
                             }
                             &:last-child {
+                                padding-bottom: 0;
                                 @include tab-view {
                                     margin-bottom: 0;
                                 }
@@ -303,7 +304,7 @@
                     font-weight: 500;
                     margin-top: 10px;
                     padding: 15px;
-                    border-top: 1px solid $feedback_text-clr;
+                    border-top: 1px dashed #d6d6d6;
                     .price_wrps {
                         // flex: 1;
                         width: 33%;

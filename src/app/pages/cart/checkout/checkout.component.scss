@@ -11,6 +11,9 @@
             padding: 0;
         }
     }
+    .checkout_right_booking{
+        max-width: 653px;
+    }
     h3 {
         color: $text-black;
         font-size: 24px;
@@ -79,29 +82,18 @@
         }
     }
     .booking_detail_bg_wrps {
-        //background-color: $bg-body;
-        //border-radius: 5px;
         padding: 0;
         margin-bottom: 15px;
         .card_accordion {
             .card {
                 border: 1px solid $grayed_border;
                 border-radius: 10px;
-                //padding: 0;
                 padding: 15px 0 0 0;
-                @include tab-view {
-                    // padding: 0;
-                    padding: 15px 0 0 0;
-                }
                 .new_card {
                     border: 1px solid $box-border-color;
                     border-radius: 10px;
                     position: relative;
-                    // margin: 15px;
                     margin: 0 15px 15px;
-                    @include tab-view {
-                        margin: 0 15px 15px;
-                    }
                 }
                 .card-header {
                     border: none;
@@ -123,7 +115,6 @@
                         &[aria-expanded="true"] {
                             &:after {
                                 content: "";
-                                //position: relative;
                                 padding: 5px 9px;
                                 background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
                                 background-position: right;
@@ -135,7 +126,6 @@
                                 top: 5px;
                                 @include tab-view {
                                     position: relative;
-                                    right: 0;
                                     height: 12px;
                                 }
                             }
@@ -155,7 +145,6 @@
                                 top: 5px;
                                 @include tab-view {
                                     position: relative;
-                                    right: 0;
                                     height: 12px;
                                 }
                             }
@@ -216,12 +205,9 @@
             margin-top: 10px;
             vertical-align: middle;
             line-height: normal;
-            // display: flex;
-            // align-items: flex-start;
             font-size: 11px;
             a {
                 color: $txt_clr_blue;
-                // display: contents;
                 position: relative;
             }
             input {
@@ -267,10 +253,6 @@
                     height: 9px;
                     border-radius: 2px;
                     border: solid $text_light_yellow;
-                    // border-top-width: medium;
-                    // border-right-width: medium;
-                    // border-bottom-width: medium;
-                    // border-left-width: medium;
                     border-width: 0 2px 2px 0;
                     transform: rotate(45deg);
                     -webkit-transform: rotate(45deg);
@@ -327,12 +309,6 @@
                     transition: 0.8s;
                     border-radius: 0 0 50% 50%;
                 }
-                // &:hover {
-                //     color: $primary-color;
-                //     &:before {
-                //         height: 190%;
-                //     }
-                // }
                 &.trans_btn {
                     color: $pink;
                     background-color: transparent;
@@ -340,9 +316,6 @@
                     &::before {
                         background: $pink;
                     }
-                    // &:hover{
-                    //     color: $text-white;
-                    // }
                 }
                 .white_search {
                     display: none;
