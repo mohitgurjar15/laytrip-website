@@ -44,8 +44,8 @@ h3 {
                 margin-right: 5px;
                 font-size: 14px;
                 img{
-                    width: 14px;
-                    height: 14px;
+                    width: 18px;
+                    height: 18px;
                     object-fit: contain;
                     margin-right: 5px;
                 }
@@ -55,13 +55,17 @@ h3 {
             }
             .tab_txt_head{
                 @include tab-view{
-                    display: none;
+                    display: block;
+                    font-size: 12px;
                 }
             }
             @include tab-view{
-                padding: 8px 14px;
+                padding: 4px 14px;
+                text-align: center;
+                line-height: 12px;
                 .tab_imgs_wrps{
-                    font-size: 16px;
+                    font-size: 10px;
+                    line-height: 10px;
                 }
             }
         }
@@ -78,11 +82,20 @@ h3 {
                         display: none;
                         @include tab-view{
                             display: flex;
+                            img{
+                                margin-right: 0;
+                            }
                         }
                     }
                     .tab_txt_head{
                         color: $active-tab-text;
+                        @include tab-view{
+                            display: none;
+                        }
                     }
+                }
+                @include tab-view{
+                    padding: 4px 8px 4px 3px;
                 }
             }
         }
