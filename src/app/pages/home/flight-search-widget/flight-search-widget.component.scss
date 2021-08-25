@@ -452,6 +452,9 @@ a:hover {
 .custom-control.custom-switch{
   padding-left: 0;
   padding-right: 50px;
+  @include tab-view {
+    padding-right: 30px;
+  }
 }
 
 .custom-switch .custom-control-label {
