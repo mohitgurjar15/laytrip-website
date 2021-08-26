@@ -64,7 +64,7 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     private userService: UserService,
     private renderer: Renderer2,
     public route :ActivatedRoute,
-
+    
   ) {
     let _langunage = localStorage.getItem('_lang');
     if (_langunage) {
@@ -483,7 +483,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   * @param langunage 
   */
    changeLangunage(langunage: Langunage) {
-
     if (JSON.stringify(langunage) != JSON.stringify(this.selectedLanunage)) {
       this.selectedLanunage = langunage;
       localStorage.setItem("_lang", JSON.stringify(langunage))
@@ -496,7 +495,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       // urlParameters.lang = this.selectedLanunage.iso_1Code;
 
       // this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
-
     }
   }
 
@@ -514,12 +512,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
           localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
 
           // Author: xavier | 2021/8/24
-          // Description: Get languaje from browser
+          // Description: Get language from browser
           const bl = this.translate.getBrowserLang();
           for(let i = 0; i < this.langunages.length; i++) {
             if(this.langunages[i].iso_1Code == bl) {
-              this.selectedLanunage = this.langunages[i];
-              localStorage.setItem("_lang", JSON.stringify(this.langunages[i]));
+              this.changeLangunage(this.langunages[i]);
+              break;
             }
           }
         }
