@@ -2379,7 +2379,7 @@ agm-map {
                             display: flex;
                             flex-direction: column;
                             @include tab-view {
-                                padding-top: 5px;
+                                padding-top: 15px;
                                 max-width: 100%;
                                 flex-direction: row;
                             }

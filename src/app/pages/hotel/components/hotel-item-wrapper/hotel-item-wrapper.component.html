@@ -246,6 +246,12 @@
                                             <span class="texts" *ngIf="!item.is_installment_available || !item.payment_object.monthly">{{'not_available' | translate}}</span>
                                         </div>
                                         <div class="type_lines">
+                                            <span class="titles">Full Payment</span>
+                                            <span class="texts">
+                                                $300.54 including taxes and fees
+                                            </span>
+                                        </div>
+                                        <div class="type_lines">
                                             <span class="titles">{{'average_nightly_rate' | translate}}</span>
                                             <span class="texts" *ngIf="item?.offer_data.applicable">${{item?.selling?.discounted_avg_night_price | number : '1.2-2'}} {{'including_taxes_fees' | translate}}</span>
                                             <span class="texts" *ngIf="!item?.offer_data.applicable">${{item?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' | translate}}</span>
