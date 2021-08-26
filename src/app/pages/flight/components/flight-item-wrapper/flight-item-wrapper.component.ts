@@ -109,28 +109,14 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       this.cartItems = cartItems;
     })
     this.loadJquery();
-    this.flightService.getFlights.subscribe(data => {
-      console.log("this.flightDetails")
-      if (data.length) {
-        this.flightDetails = this.flightItems = data;
-        for (let i = 0; i < this.flightDetails.length; i++) {
-          if (this.flightDetails[i].payment_object.weekly)
-            this.flightDetails[i].selected_option = 'weekly';
-          else if (this.flightDetails[i].payment_object.biweekly)
-            this.flightDetails[i].selected_option = 'biweekly';
-          else if (this.flightDetails[i].payment_object.monthly)
-            this.flightDetails[i].selected_option = 'monthly';
-          else
-            this.flightDetails[i].selected_option = 'full';
-        }
-      }
-      else {
-        this.flightDetails = [];
+    this.flightService.getFlights.subscribe(data=>{
+      this.flightItems =[];
+      if(data.length){
+        this.flightItems = data;            
       }
     });
 
     this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-
 
     // Author: xavier | 2021/8/3
     // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
@@ -446,17 +432,19 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   onScrollDown() {
     this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
-    setTimeout(() => {
-      if (this.noOfDataToShowInitially <= this.flightDetails.length) {
 
-        let requestParams = { revalidateDto: [] };
+    setTimeout(() => {
+      console.log('here')
+      if (this.noOfDataToShowInitially <= this.flightDetails.length) {
         this.noOfDataToShowInitially += this.dataToLoad;
         this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+        console.log(this.flightDetails)
         this.scrollLoading = false;
       } else {
         this.scrollLoading = false;
       }
-    }, 1000);
+    }, 2000);
+    console.log(this.scrollLoading)
   }
   getCancellationPolicy(route_code) {
     return "#";

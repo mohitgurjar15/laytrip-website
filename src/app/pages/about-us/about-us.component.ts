@@ -20,9 +20,7 @@ export class AboutUsComponent implements OnInit {
     public commonFunction: CommonFunction,
     private translate: TranslateService
     ) { 
-      translate.onLangChange.subscribe(lang => {
-        this.setLanguage();
-      });
+      translate.onLangChange.subscribe(lang => this.setLanguage());
   }
 
   ngOnInit() {
