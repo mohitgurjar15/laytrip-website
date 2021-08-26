@@ -63,7 +63,8 @@
                                 (getInstalmentData)="getInstalmentData($event)"
                                 (redeemableLayCredit)="redeemableLayCredit($event)">
                             </app-payment-mode>
-                            <app-price-summary [priceSummary]="priceSummary" [cartPrices]="cartPrices">
+                            
+                            <app-price-summary *ngIf="carts.length" [installmentSummary]="installmentSummary" [priceSummary]="priceSummary" [cartPrices]="cartPrices">
                             </app-price-summary>
                         </div>
                         <label class="custom_checkbox">

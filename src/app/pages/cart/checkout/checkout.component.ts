@@ -88,6 +88,7 @@ export class CheckoutComponent implements OnInit {
   showPartialPayemntOption: boolean = true;
   instalmentType: string = 'weekly'
   redeemableLayPoints: number;
+  installmentSummary;
 
   constructor(
     public modalService: NgbModal,
@@ -128,6 +129,8 @@ export class CheckoutComponent implements OnInit {
       let cart: any;
       let nonPromoConflictCartIds=[];
       let price: any;
+      this.installmentSummary = items.price_summary;
+      console.log()
       for (let i = 0; i < items.data.length; i++) {
         cart = {};
         price = {}
