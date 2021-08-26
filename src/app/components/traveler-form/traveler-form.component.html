@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="col-sm-12 dobs col-md-4 mb-sm-10 dobs_account mandetory_wrps" *ngIf="cartItem.type=='flight'">
                                             <label for="">{{'dob' | translate}}*</label>
-                                            <input #dobText placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}} [textMask]="dateYeaMask" formControlName="dob" (blur)="checkMaximumMinimum($event, dobText.value, cartNumber, x)" [ngClass]="{'input-error':travelerItem.value.adults[x].is_submitted==true && traveler.controls.dob.errors}">
+                                            <input #dobText placeholder="MM/DD/YYYY" type="text" class="form-control" tabindex={{x}} [textMask]="dateYeaMask" formControlName="dob">
                                             <div *ngIf="travelerItem.value.adults[x].is_submitted && traveler.controls.dob.errors" class="error">
                                                 <small *ngIf="traveler.controls.dob.errors.required && !traveler.controls.dob.errors.pattern" class="error_field">
                                                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img">

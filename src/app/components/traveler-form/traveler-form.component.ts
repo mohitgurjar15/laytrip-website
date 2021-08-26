@@ -276,33 +276,14 @@ export class TravelerFormComponent implements OnInit {
     this.cartService.setCartTravelers(this.travelers);
 
     this.travelerForm.valueChanges.subscribe(value => {
-
+      console.log("I am in",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number])
       let data = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value;
       data.dob = moment(this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob).format("YYYY-MM-DD");
-
-      /* if(this.cartItem.type=='flight'){
-        if (
-          moment(data.dob)
-            .isBetween(moment(this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].dobMinDate).format('YYYY-MM-DD'),
-              moment(this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].dobMaxDate).format('YYYY-MM-DD')) &&
-          this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].controls['dob'].errors === null
-        ) {
-          console.log("true")
-          this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].is_valid_date = true;
-          this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].dob = data.dob;
-          //this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].controls['dob'].setErrors(null);
-          //this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].controls['dob'].updateValueAndValidity();
-        } else {
-          console.log("false")
-          this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].is_valid_date = false;
-          this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].dob = data.dob;
-          //this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].controls['dob'].setErrors({ 'incorrect': true });
-          //this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].controls['dob'].updateValueAndValidity();
-          return;
-        }
-        //this.patch();
-      } */
+      if(this.cartItem.type=='flight'){
+        this.checkMaximumMinimum(null, this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.dob, this.cartNumber, this.traveler_number)
+      }
       if (typeof this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number] !== 'undefined') {
+        console.log("this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status",this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status)
         if (this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].status == 'VALID' && this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].is_valid_date) {
           
           data.passport_number = this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].value.passport_number;
@@ -658,6 +639,7 @@ export class TravelerFormComponent implements OnInit {
 
   checkMaximumMinimum(event, dobValue, cartNumber, traveler_number) {
     // CHECK MAXIMUM OR MINIMUM DATE OF BIRTH
+    console.log(dobValue,"dobValue")
     let traveler = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
     console.log("Innn")
     if (
@@ -670,13 +652,13 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = true;
       this.travelers[`type${cartNumber}`].adults[traveler_number].dob = dobValue;
       this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].setErrors(null);
-      this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].updateValueAndValidity();
+      //this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].updateValueAndValidity();
     } else {
       console.log("false")
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
       this.travelers[`type${cartNumber}`].adults[traveler_number].dob = dobValue;
       this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].setErrors({ 'incorrect': true });
-      this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].updateValueAndValidity();
+      //this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].updateValueAndValidity();
     }
     /* this.travelers[`type${cartNumber}`].adults[traveler_number].first_name = traveler.first_name;
     this.travelers[`type${cartNumber}`].adults[traveler_number].last_name = traveler.last_name;
