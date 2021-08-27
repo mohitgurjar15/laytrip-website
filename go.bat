@@ -1,4 +1,7 @@
 @ECHO OFF
+REM Google's Translation API metrics:
+REM https://console.cloud.google.com/apis/api/translate.googleapis.com/metrics?authuser=1&project=prefab-backbone-301815
+
 REM Merge with master: https://stackoverflow.com/questions/34344034/git-pull-on-a-different-branch
 REM git fetch origin master:master
 REM git merge master

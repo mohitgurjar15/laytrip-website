@@ -99,9 +99,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       }
     });
 
-    // Author: xavier | 2021/7/28
-    // Description: To support localized installment types
-    this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     this.countryCode = this.commonFunction.getUserCountry();
 
     this.cartService.getPaymentOptions.subscribe((data: any) => {
@@ -495,10 +492,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       this.renderer.removeClass(document.body, `it_lang`);
       this.translate.use(langunage.iso_1Code);
       this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
-      const urlParameters = Object.assign({}, this.route.snapshot.queryParams); 
-      urlParameters.lang = this.selectedLanunage.iso_1Code;
+      // const urlParameters = Object.assign({}, this.route.snapshot.queryParams); 
+      // urlParameters.lang = this.selectedLanunage.iso_1Code;
 
-      this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
+      // this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
 
     }
   }
@@ -524,6 +521,10 @@ export class MainHeaderComponent implements OnInit, DoCheck {
             localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
           }
         }
+
+        // Author: xavier | 2021/7/28
+        // Description: To support localized installment types
+        this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
       },
       (error) => {
 

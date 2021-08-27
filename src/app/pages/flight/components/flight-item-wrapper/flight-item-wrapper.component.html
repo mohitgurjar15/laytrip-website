@@ -1,4 +1,4 @@
-<div class="routing_main_wrps" id="routing_main_wrps">
+<div class="routing_main_wrps" id="routing_main_wrps" infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScrollDown()">
     <h3 class="shorting_label" *ngIf="flightDetails.length">{{filteredLabel}}</h3>
     <div class="one_way card_box" *ngFor="let item of flightDetails; let i = index;">
         <div class="card_iinner">
@@ -13,9 +13,9 @@
                                     {{route.stops[0].flight_number}}</span>
                             </div>
                             <div class="fight_secs">
-                                <span class="fl_times">
                                     {{route.stops[0].departure_time}} -
                                     {{route.stops[route.stops.length-1].arrival_time}}
+                                <span class="fl_times">
                                     <span
                                         *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
                                 </span>
@@ -144,7 +144,7 @@
                     <span class="big-num">${{
                                 item.payment_object[item.payment_object.installment_type].installment}}</span>
                     </span>
-                    <span class="fare_type desk_fare">{{item.payment_object.installment_type | translate}}</span>
+                    <span class="fare_type desk_fare">{{(item.payment_object.installment_type =='biweekly' ? 'Bi-Weekly' : item.payment_object.installment_type) | translate}}</span>
                     <span class="cta_btn">
                             <button (click)="bookNow(item)">{{'add_to_cart' | translate}}</button>
                             <div class="section_description no_flight "

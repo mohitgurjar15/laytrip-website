@@ -72,7 +72,7 @@
                                     <div class="dropdown cus_drop">
                                         <a class="dropdown-toggle hover-link" data-toggle="dropdown">{{ selectedLanunage.name }}<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li *ngFor="let langunage of langunages"><a (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
+                                            <li *ngFor="let langunage of langunages"><a href="javascript:void(0)" (click)="changeLangunage(langunage)">{{ langunage.name }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -132,10 +132,16 @@
             <div class="show_resposive">
                 <div class="cta_drop_wrp">
                     <div class="dropdown cus_drop">
-                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">English<span class="caret"></span></a>
+                        <!-- <a class="dropdown-toggle hover-link" data-toggle="dropdown">English<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a class="px-2 py-1 d-block" href="javascript:void(0);">English</a></li>
                             <li><a class="px-2 py-1 d-block" href="javascript:void(0);">Spanish</a></li>
+                        </ul> -->
+                        <a class="dropdown-toggle hover-link" data-toggle="dropdown">{{ selectedLanunage.iso_1Code | uppercase }}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let langunage of langunages">
+                                <a class="px-2 py-1 d-block" (click)="changeLangunage(langunage)">{{ langunage.name }}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

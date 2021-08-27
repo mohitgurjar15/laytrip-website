@@ -572,12 +572,10 @@
                                                         </span>
                                                     </p>                                                   
                                                     <p class="installment_type">{{ room?.payment_object.installment_type | translate }}</p>
-
                                                 </div>
                                                 
                                                 <div class="block mb-0" *ngIf="!room.is_installment_available">
-                                                    <p> <span>${{ room.selling.total |
-                                                            number : '1.2-2' }}</span>{{'full_payment' | translate}}</p>
+                                                    <p class="flex-column"> <span>${{ room.selling.total | number : '1.2-2' }}</span>{{'full_payment' | translate}}</p>
                                                 </div>
                                             </div> <a class="book_btn anchor-tag" (click)="selectRoom(room)">{{'add_to_cart' | translate}}</a>
                                         </div>

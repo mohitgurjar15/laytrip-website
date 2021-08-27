@@ -29,7 +29,7 @@
                                     <div *ngIf="signupForm.controls.first_name.errors && signupForm.controls.first_name.errors.required">
                                         {{'first_name_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.first_name.errors && signupForm.controls.first_name.errors.pattern" class="error_text">
-                                        2-30 characters required and no spaces.</div>
+                                        {{'first_name_string_validation' | translate}}</div>
                                 </div>
                             </div>
                             <div class="text_field half">
@@ -38,7 +38,7 @@
                                     <div *ngIf="signupForm.controls.last_name.errors && signupForm.controls.last_name.errors.required">
                                         {{'last_name_touched_validation' | translate}}</div>
                                     <div *ngIf="signupForm.controls.last_name.errors && signupForm.controls.last_name.errors.pattern" class="error_text">
-                                        2-30 characters required and no spaces.</div>
+                                        {{'last_name_string_validation' | translate}}</div>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="text_field half pass_show">
-                                <input [ngClass]="{'error': submitted && !signupForm.controls.confirm_password.valid}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="15" placeholder="{{'new_password_placeholder' | translate}}">
+                                <input [ngClass]="{'error': submitted && !signupForm.controls.confirm_password.valid}" [type]="cnfPassFieldTextType ? 'text' : 'password'" formControlName="confirm_password" maxlength="50" tabindex="15" placeholder="{{'confirm_password' | translate}}">
                                 <span class="ptxt"><i id="cnfEye"
                                         [ngClass]="cnfPassFieldTextType ? 'fa fa-eye' : 'fa fa-eye-slash'"
                                         aria-hidden="true" (click)="toggleFieldTextType($event)"></i></span>
