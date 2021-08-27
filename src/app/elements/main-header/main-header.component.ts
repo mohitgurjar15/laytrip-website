@@ -509,14 +509,15 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         if (!this.isLanunageSet) {
           this.isLanunageSet = true;
           this.selectedLanunage = this.langunages[0];
-          localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
+          localStorage.setItem("_lang", JSON.stringify(this.langunages[0]));
 
           // Author: xavier | 2021/8/24
           // Description: Get language from browser
-          const bl = this.translate.getBrowserLang();
-          for(let i = 0; i < this.langunages.length; i++) {
+          const bl: string = this.translate.getBrowserLang();
+          for(let i: number = 0; i < this.langunages.length; i++) {
             if(this.langunages[i].iso_1Code == bl) {
-              this.changeLangunage(this.langunages[i]);
+              // Small delay to allow all components to load before changing the language
+              setTimeout(() => this.changeLangunage(this.langunages[i]), 500);
               break;
             }
           }

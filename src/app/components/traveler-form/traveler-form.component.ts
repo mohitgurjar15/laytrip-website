@@ -693,7 +693,7 @@ export class TravelerFormComponent implements OnInit {
   // Author: xavier | 2021/8/18
   // Description: Translates hotel's room description using Google's translation API.
   translateHotelRoomDescription() {
-    const lang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    const lang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     if(lang == "en" || this.cartItem.type != 'hotel') return;
 
     let body = new HttpParams();
