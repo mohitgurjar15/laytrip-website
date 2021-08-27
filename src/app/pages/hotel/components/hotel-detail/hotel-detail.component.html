@@ -391,7 +391,7 @@
             </a>
         </div>
         <div class="searchbar_box_common">
-            <app-hotel-search-widget></app-hotel-search-widget>
+            <app-hotel-search-widget [dealIcon]="hotelDealIcon"></app-hotel-search-widget>
         </div>
     </div>
 </div>
@@ -663,7 +663,9 @@
                                                     alt="cart "> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>
                                         <div class="type_lines">
-                                            <span class="titles">{{'installment_option' | translate}} 2</span>
+                                            <span class="titles">
+                                                {{'installment_option' | translate}} 2
+                                            </span>
                                             <span class="texts" *ngIf="room.is_installment_available && room.payment_object.biweekly">
                                                 ${{room.payment_object['biweekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
                                                 {{room.payment_object['biweekly'].installment_count}} {{'po_bi_weekly_installments' | translate}}

@@ -17,7 +17,8 @@ export class HomeService {
     private sliderOffers = new BehaviorSubject([]);
     getActiveTabName = this.tabName.asObservable();
     getSlideOffers = this.sliderOffers.asObservable();
-
+    private dealsToggle: any = new  BehaviorSubject({});
+    goToDealsToggle = this.dealsToggle.asObservable([])
     private swipeSlide : any = new BehaviorSubject({});
     getSwipeSlide = this.swipeSlide.asObservable();
 
@@ -59,6 +60,11 @@ export class HomeService {
 
     setToString(flightToCode) {
         this.toString.next(flightToCode)
+    }
+
+    setDeaslToggle(data){
+        this.dealsToggle.next(data)
+        console.log("data in service",typeof data,data)
     }
 
     setLocationForHotel(destinationInfo) {
