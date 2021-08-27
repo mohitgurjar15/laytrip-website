@@ -174,8 +174,8 @@
                             aria-hidden="true"></i></div>
                 </div>
                 <div class="type_lines">
-                    <span class="titles d-block d-md-none">{{'installment_option' | translate}} 2
-                        <span class="texts" *ngIf="item.is_installment_available &&  item.payment_object.biweekly">
+                    <span class="titles">{{'installment_option' | translate}} 2
+                        <span class="texts d-block d-md-none" *ngIf="item.is_installment_available &&  item.payment_object.biweekly">
                             ${{item.payment_object['biweekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
                             {{ item.payment_object['biweekly'].installment_count}} {{'bi_weekly' | translate}} {{'installments_of' | translate}}
                             ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}

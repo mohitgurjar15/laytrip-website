@@ -709,14 +709,10 @@
                                         </div>
                                         <div class="type_lines">
                                             <span class="titles">Full Payment
-                                                <span class="texts d-block d-md-none">
-                                                    $300.54 including taxes and fees
-                                                </span>
+                                                <span class="texts d-block d-md-none">$300.54 including taxes and fees</span>
                                             </span>
-                                            <span class="texts d-none d-md-block">
-                                                $300.54 including taxes and fees
-                                            </span>
-                                            <span class="texts" *ngIf="!room.is_installment_available || !room.payment_object.biweekly">{{'not_available' | translate}}</span>
+                                            <span class="texts d-none d-md-block">$300.54 including taxes and fees</span>
+                                            <!-- <span class="texts d-none d-md-block" *ngIf="!room.is_installment_available || !room.payment_object.biweekly">{{'not_available' | translate}}</span> -->
                                             <div *ngIf="room.is_installment_available && room.payment_object.biweekly" [ngClass]="{'checked': room.selected_option === 'biweekly'}" (click)="checkCartButton(index,'biweekly',room.payment_object['biweekly'].down_payment,'installment')" class="installment_add_cart">Add <img *ngIf="room.selected_option === 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="room.selected_option != 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg "
                                                     alt="cart "> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>

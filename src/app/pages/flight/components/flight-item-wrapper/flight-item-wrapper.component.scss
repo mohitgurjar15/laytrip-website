@@ -759,6 +759,7 @@
                         justify-content: flex-start;
                         margin-bottom: 5px;
                         align-items: center;
+                        min-height: 34px;
                         @include tab-view {
                             font-size: 10px;
                             align-items: flex-start;
