@@ -3,6 +3,7 @@ import { FlightService } from '../../services/flight.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { CommonFunction } from '../../_helpers/common-function';
+import { HomeService } from 'src/app/services/home.service';
 
 
 @Component({
@@ -26,7 +27,6 @@ export class SearchAirportComponent implements OnInit {
   @Input() airport;
   @Input() inputName;
   @Output() currentChangeCounter = new EventEmitter();
-  @Output() dealStatusChange = new EventEmitter();
 
   progressInterval;
   counterChangeVal=0;
@@ -39,6 +39,7 @@ export class SearchAirportComponent implements OnInit {
     public cd: ChangeDetectorRef,
     public cookieService: CookieService,
     public commonFunction: CommonFunction,
+    public homeService : HomeService
   ) {
   }
 
@@ -52,13 +53,10 @@ export class SearchAirportComponent implements OnInit {
     if(Object.keys(this.airport).length==0){
       this.data=[];
     }
+    this.homeService.goToDealsToggle.subscribe(data => {
+      this.isDealIcon = data == 'true' || data == true ? true:false;
+    })
   }
-
-  onDealStatusChange(){
-    this.isDealIcon = !this.isDealIcon
-    this.dealStatusChange.emit(this.isDealIcon)
-  }
-
 
   onChangeSearch(event) {
      if (event.term.length > 2) {
@@ -66,7 +64,7 @@ export class SearchAirportComponent implements OnInit {
       if(this.loading){
         this.$autoComplete.unsubscribe();
       }
-      if(this.isDealIcon){
+      if(this.isDealIcon === true){
         this.searchRoute(event.term)
       }else{
         this.searchAirport(event.term);      
@@ -84,6 +82,7 @@ export class SearchAirportComponent implements OnInit {
     else {
       alternateLocation = localStorage.getItem('__from') || '';
     }
+    alternateLocation = ''
     console.log(alternateLocation)
     this.$autoComplete = this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe((response: any) => {
       this.flightSearchRoute.emit(response);

@@ -391,7 +391,7 @@
             </a>
         </div>
         <div class="searchbar_box_common">
-            <app-hotel-search-widget></app-hotel-search-widget>
+            <app-hotel-search-widget [dealIcon]="hotelDealIcon"></app-hotel-search-widget>
         </div>
     </div>
 </div>
@@ -440,7 +440,7 @@
                     </span>
                     <small>{{(hotelRoomArray[0]?.is_installment_available ? hotelRoomArray[0].payment_object.installment_type : 'full_payment') | translate}}</small>
                 </div>
-                
+
             </div>
         </div>
         <div class="detail_box_wrpr">
@@ -570,10 +570,10 @@
                                                         <span>
                                                             {{ currency?.symbol }}{{room.payment_object[room.payment_object.installment_type].installment | number : '1.2-2'}}
                                                         </span>
-                                                    </p>                                                   
+                                                    </p>
                                                     <p class="installment_type">{{ room?.payment_object.installment_type | translate }}</p>
                                                 </div>
-                                                
+
                                                 <div class="block mb-0" *ngIf="!room.is_installment_available">
                                                     <p class="flex-column"> <span>${{ room.selling.total | number : '1.2-2' }}</span>{{'full_payment' | translate}}</p>
                                                 </div>
@@ -627,7 +627,7 @@
                                             <div class="block_inn_pr">
                                                 <div class="block" *ngIf="room.is_installment_available">
                                                     <p>{{'from' | translate}}</p>
-                                                    <p class="duel_prices" >
+                                                    <p class="duel_prices">
                                                         <span class="dashed_price" *ngIf="room.offer_data.applicable && room.offer_data.discount.applicable && room?.secondary_start_price > room?.discounted_secondary_start_price">
                                                             {{ currency?.symbol }}{{room.secondary_start_price |
                                                             number : '1.2-2'}}
@@ -666,7 +666,7 @@
                                                 {{'not_available' | translate}}
                                             </span>
                                         </div>
-                                        <div class="type_lines">                                        
+                                        <div class="type_lines">
                                             <span class="titles">
                                                 {{'installment_option' | translate}} 2
                                             </span>
@@ -709,7 +709,7 @@
                                                 {{'more_payment_options' | translate}}
                                             </div>
                                         </div>
-                                     
+
                                         <div class="full_desk_not" *ngIf="room?.is_installment_available && !room?.offer_data.applicable">
                                             <div class="notifi_text">
                                                 {{'more_payment_options' | translate}}

@@ -78,7 +78,7 @@ export class HotelItemWrapperComponent implements OnInit {
   isMarkerClicked = false;
   clickedHotelIndex;
   isRefferal = this.commonFunction.isRefferal();
-
+  hotelDealIcon = true
   constructor(
     private route: ActivatedRoute,
     private commonFunction: CommonFunction,
@@ -144,8 +144,9 @@ export class HotelItemWrapperComponent implements OnInit {
     if (hotelinfo) {
       this.hotelName = hotelinfo.city;
     }
-
-
+    let dealsIcon = this.route.snapshot.queryParams['dealsIcon']
+    this.hotelDealIcon = dealsIcon == 'true' || dealsIcon == true ? true : false;
+    this.homeService.setDeaslToggle(this.hotelDealIcon)
     this.userInfo = getLoginUserInfo();
     this.defaultLat = parseFloat(this.route.snapshot.queryParams['x_coordinate']);
     this.defaultLng = parseFloat(this.route.snapshot.queryParams['y_coordinate']);
