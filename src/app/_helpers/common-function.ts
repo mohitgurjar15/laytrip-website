@@ -16,12 +16,12 @@ export class CommonFunction {
         private router: Router,
         private route: ActivatedRoute
     ) {
-        // Author: xavier | 2021/8/24
+        // Author: xavier | 2021/8/27
         // Description: Set locale for date & time functions
-        // const lang = localStorage.getItem('_lang');
-        // if(lang != null) {
-        //     moment.locale(JSON.parse(lang).iso_1Code);
-        // }
+        const lang = localStorage.getItem('_lang');
+        if(lang != null) {
+            moment.locale(JSON.parse(lang).iso_1Code);
+        }
     }
 
     closeModal(modelBox) {
