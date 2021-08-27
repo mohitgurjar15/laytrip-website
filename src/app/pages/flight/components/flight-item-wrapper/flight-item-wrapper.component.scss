@@ -729,14 +729,14 @@
             }
         }
         .detail_accorrd {
-            border: 1px solid $box-border-color;
+            //border: 1px solid $box-border-color;
             border-radius: 10px;
             padding: 0;
             margin-top: 15px;
             .accordion_body {
-                padding: 15px;
+                padding: 15px 0;
                 @include tab-view {
-                    padding: 10px;
+                    padding: 10px 0;
                 }
             }
             .io_ru_wrps {
@@ -747,21 +747,20 @@
                 }
                 .installment_wprs {
                     flex: 2;
-                    padding-right: 50px;
+                    padding-right: 45px;
                     @include tab-view {
                         padding-right: 0px;
                     }
                     .type_lines {
-                        border-bottom: 1px solid $box-border-color;
-                        padding-bottom: 15px;
+                        //border-bottom: 1px solid $box-border-color;
+                        padding-bottom: 5px;
                         font-size: 12px;
                         display: flex;
                         justify-content: flex-start;
-                        margin-bottom: 15px;
+                        margin-bottom: 5px;
+                        align-items: center;
                         @include tab-view {
                             flex-direction: column;
-                            padding-bottom: 6px;
-                            margin-bottom: 6px;
                             font-size: 10px;
                         }
                         &:nth-child(4) {
@@ -770,24 +769,67 @@
                             padding: 0;
                         }
                         .titles {
-                            font-weight: 600;
+                            font-weight: 700;
                             color: $text-black;
-                            margin-right: 15px;
+                            margin-right: 13px;
                             flex: 1;
+                            font-size: 12px;
+                            max-width: 126px;
                         }
                         .texts {
-                            font-weight: 500;
+                            font-weight: 400;
                             color: $mid_gray_bg;
                             flex: 3;
-                            @include tab-view {
-                                font-weight: 400;
+                            font-size: 12px;
+                        }
+                        .installment_add_cart {
+                            padding: 7px 10px;
+                            background: #D6D6D6;
+                            border: 1px solid #D6D6D6;
+                            color: #878787;
+                            font-size: 12px;
+                            font-weight: 600;
+                            border-radius: 50px;
+                            display: flex;
+                            align-items: center;
+                            line-height: 13px;
+                            position: relative;
+                            cursor: pointer;
+                            .fa-check {
+                                display: none;
+                                position: absolute;
+                                top: -3px;
+                                right: -3px;
+                                background: #1CD304;
+                                width: 13px;
+                                height: 13px;
+                                border-radius: 50px;
+                                font-size: 7px;
+                                color: #fff;
+                            }
+                            img {
+                                max-width: 15px;
+                                max-height: 12px;
+                                object-fit: contain;
+                                margin-left: 3px;
+                            }
+                            &.checked {
+                                background: transparent;
+                                border: 1px solid #000;
+                                color: #000;
+                                cursor: default;
+                                .fa-check {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                }
                             }
                         }
                     }
                 }
                 .rules_wrps {
                     flex: 1;
-                    max-width: 188px;
+                    max-width: 180px;
                     display: flex;
                     flex-direction: column;
                     @include tab-view {
