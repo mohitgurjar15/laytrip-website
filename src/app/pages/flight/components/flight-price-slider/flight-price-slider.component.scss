@@ -26,6 +26,10 @@
         &.btn-prev {
             left: 0;
             transform: translate(0, -50%) rotate(90deg);
+            &.disabled_btn{
+                pointer-events: none;
+                opacity: 0.6;
+            }
         }
         &.btn-next {
             right: 0;
@@ -108,10 +112,11 @@ body {
         display: flex;
         border-left: 1px solid #e5e8eb;
         border-right: 1px solid #e5e8eb;
+        overflow-x: hidden;
         .slider_item {
             // border-left: 1px solid #e5e8eb;
             border-right: 1px solid #e5e8eb;
-            min-width: 14%;
+            min-width: 14.30%;
             transition: all 0.5s;
             .top_dates {
                 height: 34.5px;
@@ -141,12 +146,19 @@ body {
             &:last-child{
                 border-right: none;
             }
-            &.left_move {
-                transform: translate(-100%, 0);
+
+            @media (max-width:767px) {
+                min-width: 20.05%;
             }
-            &.right_move {
-                transform: translate(100%, 0);
+            @media (max-width:576px) {
+                min-width: 33.5%;
             }
+            // &.left_move {
+            //     transform: translate(-100%, 0);
+            // }
+            // &.right_move {
+            //     transform: translate(100%, 0);
+            // }
         }
     }
 }
