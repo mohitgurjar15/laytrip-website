@@ -62,6 +62,7 @@ export class HotelDetailComponent implements OnInit {
 
   isTranslatedByGoogle: boolean = false;
 
+  hotelDealIcon;
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
@@ -78,7 +79,9 @@ export class HotelDetailComponent implements OnInit {
     $('body').addClass('cms-bgColor');
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
-
+    let dealsIcon = this.route.snapshot.queryParams['dealsIcon']
+    this.hotelDealIcon = dealsIcon == 'true' || dealsIcon == true ? true : false;
+    this.homeService.setDeaslToggle(this.hotelDealIcon)
     this.route.params.subscribe(params => {
       if (params) {
         this.hotelId = params.id;

@@ -18,7 +18,10 @@
                     <span class="sec_text">{{'max_10_items' | translate}}</span>
                     <a (click)="hideMaxCartValidation()" href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                 </div>
-                <app-flight-search-widget [calenderPrices]="calenderPrices"></app-flight-search-widget>
+                <app-flight-search-widget *ngIf="fullPageLoading" [calenderPrices]="calenderPrices" [dealIcon]="dealIcon"></app-flight-search-widget>
+
+                <app-flight-search-widget *ngIf="!fullPageLoading" [calenderPrices]="calenderPrices" [dealIcon]="dealIcon"></app-flight-search-widget>
+                <!-- [dealIcon]="dealIcon" -->
             </div>
         </div>
     </div>

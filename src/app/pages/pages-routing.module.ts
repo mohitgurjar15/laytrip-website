@@ -17,7 +17,8 @@ import { SsoLoginComponent } from './sso-login/sso-login.component';
 import { TermsComponent } from './terms/terms.component';
 import { WhyLaytripComponent } from './why-laytrip/why-laytrip.component';
 
-const childComponents =  [
+
+const childComponents = [
     {
         path: '',
         loadChildren: () => import('./home/home.module').then(m => m.HomeModule)

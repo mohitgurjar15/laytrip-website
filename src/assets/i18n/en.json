@@ -701,5 +701,7 @@
     "cookie_policy_info_2": "to learn more.",
     "faqs": "FAQs",
     "seconds_remaining": "Seconds Remaining",
-    "link_copied": "Link Copied"
+    "link_copied": "Link Copied",
+    "error404_1": "404 Error",
+    "error404_2": "Please <a href='javascript:window.history.go(-1)'>Go Back</a> and try again"
  }
