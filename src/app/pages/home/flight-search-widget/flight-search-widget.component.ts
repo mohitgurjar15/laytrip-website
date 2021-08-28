@@ -399,84 +399,99 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
   
-  timer=0;
+  timer:number=0;
+  timerTimeStamp;
+  timerStart(){
+    this.timerTimeStamp = setTimeout(() => {
+      this.timer = 2;
+    }, 2000);
+  }
+  
+  timerStop(){
+    clearTimeout(this.timerTimeStamp);
+  }
+
   changeMonth(event) {
+    this.timerStart(); 
 
-    var currentDate = new Date();
-    // 1 June validation apply
+    if(this.timer == 2){
+      this.timer = 0;
+      this.timerStop();
+      this.timerStart();
 
-    this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
+      // Execution start
+      var currentDate = new Date();
+      // 1 June validation apply
 
-    this.route.queryParams.subscribe(params => {
-      this.calPrices = false;
-      if (Object.keys(params).length > 0) {
-        this.calPrices = true;
-      }
-    });
+      this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
 
-    this.currentMonth = event.month.toString().length == 1 ? '0' + event.month : event.month;
-    this.currentYear = event.year;
-    //&& moment().format('MM') <= this.currentMonth
-    let currCalYYMM = moment(this.currentMonth+'-'+this.currentYear,'MM-YY').add(1,'years').format("YYYY-MM");
-    let calApplyDiff = moment(currCalYYMM, "YYYY-MM").diff(moment().format( "YYYY-MM"), 'days')
+      this.route.queryParams.subscribe(params => {
+        this.calPrices = false;
+        if (Object.keys(params).length > 0) {
+          this.calPrices = true;
+        }
+      });
+
+      this.currentMonth = event.month.toString().length == 1 ? '0' + event.month : event.month;
+      this.currentYear = event.year;
+      let currCalYYMM = moment(this.currentMonth + '-' + this.currentYear, 'MM-YY').add(1, 'years').format("YYYY-MM");
+      let calApplyDiff = moment(currCalYYMM, "YYYY-MM").diff(moment().format("YYYY-MM"), 'days')
+
+      if (!this.isRoundTrip && (calApplyDiff > 0 || calApplyDiff <= 365)) {
+        let month = event.month;
+        month = month.toString().length == 1 ? '0' + month : month;
+        let monthYearName = `${month}-${event.year}`;
         
-    if (!this.isRoundTrip && (calApplyDiff > 0  || calApplyDiff <= 365)  ) {
-      let month = event.month;
-      month = month.toString().length == 1 ? '0' + month : month;
-      let monthYearName = `${month}-${event.year}`;
+        if (this.calPrices) {
+          this.monthYearArr.push(monthYearName);
+          let startDate: any = moment([event.year, event.month - 1]);
+          let endDate: any = moment(startDate).endOf('month');
 
-      // if (!this.isRoundTrip && moment(moment(currCalYYMM, "YYYY-MM")).diff(moment().format( "YYYY-MM"), 'days') < 0) {//&& moment().format('MM') <= this.currentMonth
-      //   let month = event.month;
-      //   month = month.toString().length == 1 ? '0' + month : month;
-      //   let monthYearName = `${month}-${event.year}`;
+          startDate = moment(startDate.toDate()).format("YYYY-MM-DD");
+          endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
 
-      //   if (moment(calLastYYMM, "YYYY-MM").diff(moment(currCalYYMM, "YYYY-MM"), 'days') > 0 && this.calPrices) {
-      if (this.calPrices) {
-        this.monthYearArr.push(monthYearName);
-        let startDate: any = moment([event.year, event.month - 1]);
-        let endDate: any = moment(startDate).endOf('month');
+          if (!moment().isBefore(startDate)) {
+            startDate = moment().add(2, 'days').format("YYYY-MM-DD");
+          }
 
-        startDate = moment(startDate.toDate()).format("YYYY-MM-DD");
-        endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
+          let payload = {
+            source_location: this.route.snapshot.queryParams['departure'],
+            destination_location: this.route.snapshot.queryParams['arrival'],
+            flight_class: this.route.snapshot.queryParams['class'],
+            adult_count: this.route.snapshot.queryParams['adult'],
+            child_count: this.route.snapshot.queryParams['child'],
+            infant_count: this.route.snapshot.queryParams['infant'],
+            start_date: startDate,
+            end_date: endDate
+          }
 
-        if (!moment().isBefore(startDate)) {
-          startDate = moment().add(2, 'days').format("YYYY-MM-DD");
-        }
+          var GivenDate = new Date(endDate);
+          if (GivenDate > currentDate || currentDate < new Date(startDate)) {
+            this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
+            this.isCalenderPriceLoading = this.calPrices = true;
 
-        let payload = {
-          source_location: this.route.snapshot.queryParams['departure'],
-          destination_location: this.route.snapshot.queryParams['arrival'],
-          flight_class: this.route.snapshot.queryParams['class'],
-          adult_count: this.route.snapshot.queryParams['adult'],
-          child_count: this.route.snapshot.queryParams['child'],
-          infant_count: this.route.snapshot.queryParams['infant'],
-          start_date: startDate,
-          end_date: endDate
-        }
+            this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
+              this.calenderPrices = [...this.calenderPrices, ...res];
+              this.isCalenderPriceLoading = false;
 
-        var GivenDate = new Date(endDate);
-        if (GivenDate > currentDate || currentDate < new Date(startDate)) {
-          this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
-          this.isCalenderPriceLoading = this.calPrices = true;
-
-          this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
-            this.calenderPrices = [...this.calenderPrices, ...res];
-            this.isCalenderPriceLoading = false;
-
-            //get calender installemnt length
-            this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
-          }, err => {
-            this.calPrices = false;
-            this.isCalenderPriceLoading = false;
-          });
+              //get calender installemnt length
+              this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
+            }, err => {
+              this.calPrices = false;
+              this.isCalenderPriceLoading = false;
+            });
+          } else {
+            this.calPrices = this.isCalenderPriceLoading = false;
+          }
         } else {
-          this.calPrices = this.isCalenderPriceLoading = false;
+          //get calender installemnt length
+          this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
         }
-      } else {
-        //get calender installemnt length
-        this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
       }
+    } else {
+      // this.timerStop();
     }
+    
   }
   
 
