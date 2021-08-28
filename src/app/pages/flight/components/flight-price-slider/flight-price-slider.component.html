@@ -24,7 +24,7 @@
         <div class="slider_box">
             <div class="slider_item" *ngFor="let item of dates">
                 <a href="javascript:void(0);"  *ngIf="trip =='oneway'">
-                    <div class="top_dates">{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}<span>Aug 17, 2021</span></div>
+                    <div class="top_dates">{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}</div>
                     <!-- <div class="top_dates">{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}<span>Aug 17, 2021</span></div> -->
                     <div class="btm_price">{{ getPrice(item).price}}</div>
                 </a>
