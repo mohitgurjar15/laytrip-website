@@ -159,7 +159,7 @@
           font-size: 12px;
         }
 
-        &[aria-expanded="true"] {
+        /* &[aria-expanded="true"] {
           &:after {
             content: "";
             padding: 5px 9px;
@@ -169,16 +169,12 @@
             background-repeat: no-repeat;
             background-size: 12px;
             transition: 0.3s;
-            //position: absolute;
             right: 15px;
           }
 
-          // .trv_name{
-          //   display: none;
-          // }
-        }
+        } */
 
-        &[aria-expanded="false"] {
+        /* &[aria-expanded="false"] {
           &:after {
             padding: 5px 9px;
             margin-left: 10px;
@@ -188,14 +184,9 @@
             background-size: 12px;
             content: "";
             transition: 0.3s;
-            //position: absolute;
             right: 15px;
           }
-
-          // .trv_name{
-          //   display: flex;
-          // }
-        }
+        } */
 
         .tr_type {
           flex: 1;
