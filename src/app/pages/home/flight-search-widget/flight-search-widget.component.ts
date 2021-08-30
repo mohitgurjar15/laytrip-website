@@ -221,7 +221,6 @@ export class FlightSearchWidgetComponent implements OnInit {
       //get calender installemnt length
       this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false).length;
     }
-    console.log("i am in 3",changes);
   }
 
   dealsToggle() {

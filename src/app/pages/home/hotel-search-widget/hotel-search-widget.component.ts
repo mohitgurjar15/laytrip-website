@@ -120,7 +120,6 @@ export class HotelSearchWidgetComponent implements OnInit {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.homeService.goToDealsToggle.subscribe(data => {
-      console.log('search widget with daata', data, typeof data)
       if ((typeof data === 'boolean' || typeof data === 'string') && typeof data != 'undefined') {
         if (typeof data === 'string') {
           if (data === 'true') {
@@ -132,19 +131,15 @@ export class HotelSearchWidgetComponent implements OnInit {
         if(typeof data === 'boolean'){
           this.isHotelDealIcon = data;
         }
-        console.log('this.isHotelDealIcon', this.isHotelDealIcon)
       }
     })
-    console.log("deals default",typeof this.dealIcon, this.dealIcon)
     this.setCalendarLocale();
     if (typeof this.dealIcon != 'undefined') {
       this.isHotelDealIcon = this.dealIcon;
-      console.log("ng search widget this.isHotelDealIcon", this.isHotelDealIcon)
     }
     this.setCalendarLocale();
     this.homeService.goToDealsToggle.subscribe(data => {
       if(typeof data === 'boolean' || typeof data === 'string'){
-        console.log(typeof data)
         if (typeof data === 'string') {
           if (data === 'true') {
             this.isHotelDealIcon = true;
@@ -155,7 +150,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         if(typeof data === 'boolean'){
           this.isHotelDealIcon = data;
         }
-        console.log('this.isHotelDealIcon',this.isHotelDealIcon)
       }
     })
     this.homeService.getSlideOffers.subscribe(currentSlide => {
@@ -254,7 +248,6 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   clickOnDealsIcon() {
     this.isHotelDealIcon = !this.isHotelDealIcon
-    console.log(this.isHotelDealIcon)
     this.homeService.setDeaslToggle(this.isHotelDealIcon)
     if (this.isHotelDealIcon === true) {
      //set condition of give flag refundable hotel
