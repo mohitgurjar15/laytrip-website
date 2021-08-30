@@ -117,7 +117,17 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     });
 
     this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-
+    for (let i = 0; i < this.flightDetails.length; i++) {
+      console.log('come in array')
+      if (this.flightDetails[i].payment_object.weekly)
+        this.flightDetails[i].selected_option = 'weekly';
+      else if (this.flightDetails[i].payment_object.biweekly)
+        this.flightDetails[i].selected_option = 'biweekly';
+      else if (this.flightDetails[i].payment_object.monthly)
+        this.flightDetails[i].selected_option = 'monthly';
+      else
+        this.flightDetails[i].selected_option = 'full';
+    }
     // Author: xavier | 2021/8/3
     // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
     let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
