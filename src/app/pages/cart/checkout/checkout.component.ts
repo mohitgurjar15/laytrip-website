@@ -552,6 +552,8 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.cart = carts;
     //return false;
     sessionStorage.setItem('__cbk', JSON.stringify(this.bookingRequest))
+    console.log("okk",this.travelerForm)
+    //return false;
     if (this.isValidTravelers && this.cardToken != '' && this.isAllAlertClosed && this.isTermConditionAccepted && this.isExcludedCountryAccepted) {
       this.isBookingProgress = true;
       window.scroll(0, 0);
@@ -568,9 +570,9 @@ export class CheckoutComponent implements OnInit {
           if (data[k].passport_expiry) {
             data[k].passport_expiry = moment(data[k].passport_expiry, "MM/DD/YYYY").format("YYYY-MM-DD")
           }
-          this.travelerService.updateAdult(data[k], data[k].userId).subscribe((traveler: any) => {
+          /* this.travelerService.updateAdult(data[k], data[k].userId).subscribe((traveler: any) => {
 
-          });
+          }); */
         }
         let cartData = {
           cart_id: this.carts[i].id,
@@ -578,66 +580,65 @@ export class CheckoutComponent implements OnInit {
         }
 
 
-        this.cartService.updateCart(cartData).subscribe(data => {
-          if (i === this.carts.length - 1) {
-            
-            let browser_info = this.spreedly.browserInfo();
-            this.bookingRequest.browser_info = browser_info;
-            if (window.location.origin.includes("localhost")) {
-              this.bookingRequest.site_url = 'https://demo.eztoflow.com';
-            }
-            else {
-              this.bookingRequest.site_url = window.location.origin;
-            }
-
-
-            this.cartService.validate(this.bookingRequest).subscribe((res: any) => {
-              let transaction = res.transaction;
-
-              let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
-              
-              redirection += res.auth_url ? '&auth_url='+res.auth_url : '';
-              
-              var queryParams: any = {};
-              
-              if (this.commonFunction.isRefferal()) {
-                var parms = this.commonFunction.getRefferalParms();
-                redirection += redirection+parms.utm_source ? '&utm_source='+parms.utm_source : '';
-                queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
-
-                if(parms.utm_medium){
-                  queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
-                  redirection += redirection+parms.utm_medium ? '&utm_medium='+parms.utm_medium : '';
-                }
-                if(parms.utm_campaign){
-                  redirection += redirection+parms.utm_campaign ? '&utm_campaign='+parms.utm_campaign : '';
-                  queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
-                }
-              } 
-              res.redirection = redirection;
-
-              if (transaction.state == "succeeded") {
-                window.location.href = redirection;
-              } else if (transaction.state == "pending") {
-
-                this.isBookingProgress = false;
-                this.challengePopUp = true;
-                this.spreedly.lifeCycle(res);
-              } else {
-                if (this.commonFunction.isRefferal()) {
-                  this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: queryParams });
-                } else {
-                  this.redirectTo('/cart/checkout');
-                }
-              }
-            }, (error) => {
-              console.log(error);
-            });
-
+        
+        
+          
+          let browser_info = this.spreedly.browserInfo();
+          this.bookingRequest.browser_info = browser_info;
+          if (window.location.origin.includes("localhost")) {
+            this.bookingRequest.site_url = 'https://demo.eztoflow.com';
           }
-        }, (error) => {
-          this.isBookingProgress = false;
-        });
+          else {
+            this.bookingRequest.site_url = window.location.origin;
+          }
+
+
+          this.cartService.validate(this.bookingRequest).subscribe((res: any) => {
+            let transaction = res.transaction;
+
+            let redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4200');
+            
+            redirection += res.auth_url ? '&auth_url='+res.auth_url : '';
+            
+            var queryParams: any = {};
+            
+            if (this.commonFunction.isRefferal()) {
+              var parms = this.commonFunction.getRefferalParms();
+              redirection += redirection+parms.utm_source ? '&utm_source='+parms.utm_source : '';
+              queryParams.utm_source = parms.utm_source ? parms.utm_source : '';
+
+              if(parms.utm_medium){
+                queryParams.utm_medium = parms.utm_medium ? parms.utm_medium : '';
+                redirection += redirection+parms.utm_medium ? '&utm_medium='+parms.utm_medium : '';
+              }
+              if(parms.utm_campaign){
+                redirection += redirection+parms.utm_campaign ? '&utm_campaign='+parms.utm_campaign : '';
+                queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
+              }
+            } 
+            res.redirection = redirection;
+
+            if (transaction.state == "succeeded") {
+              window.location.href = redirection;
+            } else if (transaction.state == "pending") {
+
+              this.isBookingProgress = false;
+              this.challengePopUp = true;
+              this.spreedly.lifeCycle(res);
+            } else {
+              if (this.commonFunction.isRefferal()) {
+                this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: queryParams });
+              } else {
+                this.redirectTo('/cart/checkout');
+              }
+            }
+          }, (error) => {
+            this.isBookingProgress = false;
+            console.log(error);
+          });
+
+        
+        
       }
     }
     else {
