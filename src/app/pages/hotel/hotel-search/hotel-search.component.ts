@@ -56,7 +56,6 @@ export class HotelSearchComponent implements OnInit {
     let info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
     this.hotelDealIcon = this.route.snapshot.queryParams['dealsIcon']
     //this.hotelDealIcon = false;
-    console.log(this.hotelDealIcon)
     this.homeService.setDeaslToggle(this.hotelDealIcon)
     let payload = {
       check_in: this.route.snapshot.queryParams['check_in'],
