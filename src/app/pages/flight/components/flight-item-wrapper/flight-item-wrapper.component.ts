@@ -24,7 +24,7 @@ import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/car
 })
 export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
-  flightDetails;
+  flightDetails = [];
   @Input() filter;
   @Input() filteredLabel;
   @Output() changeLoading = new EventEmitter;
@@ -116,9 +116,10 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       if(data.length){
         this.flightItems = data;            
       }
+      this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+
     });
 
-    this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
     for (let i = 0; i < this.flightDetails.length; i++) {
       console.log('come in array')
       if (this.flightDetails[i].payment_object.weekly)
