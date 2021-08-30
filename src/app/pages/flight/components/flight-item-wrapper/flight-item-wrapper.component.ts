@@ -120,7 +120,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
     this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
     for (let i = 0; i < this.flightDetails.length; i++) {
-      console.log('come in array')
       if (this.flightDetails[i].payment_object.weekly)
         this.flightDetails[i].selected_option = 'weekly';
       else if (this.flightDetails[i].payment_object.biweekly)
@@ -329,7 +328,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.installmentOption.payment_frequncy = payment_frequncy;
     this.installmentOption.down_payment = down_payment;
     this.installmentOption.payment_method = payment_method;
-    console.log(this.installmentOption)
   }
   checkInstalmentAvalability() {
     let instalmentRequest = {
