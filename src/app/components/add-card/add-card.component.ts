@@ -6,6 +6,7 @@ declare var $: any;
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-card',
@@ -65,6 +66,7 @@ export class AddCardComponent implements OnInit {
     private genericService: GenericService,
     private formBuilder: FormBuilder,
     public commonFunction: CommonFunction,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -90,14 +92,19 @@ export class AddCardComponent implements OnInit {
       'cvvEl': 'spreedly-cvv',
     });
 
-    Spreedly.on('ready', function (frame) {
-      Spreedly.setPlaceholder("number", "0000 0000 0000 0000");
-      Spreedly.setPlaceholder("cvv", "Enter CVV No.");
-      Spreedly.setFieldType('number', 'text');
-      Spreedly.setFieldType('cvv', 'text');
-      // Spreedly.setNumberFormat('maskedFormat');
-      Spreedly.setStyle('number', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
-      Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .96em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
+    this.translate.
+        get('cvv_placeholder').
+        subscribe((res: string) => {
+          Spreedly.on('ready', function (frame) {
+            Spreedly.setPlaceholder("number", "0000 0000 0000 0000");
+            Spreedly.setPlaceholder("cvv", res)
+            //Spreedly.setPlaceholder("cvv", "Enter CVV No.");
+            Spreedly.setFieldType('number', 'text');
+            Spreedly.setFieldType('cvv', 'text');
+            // Spreedly.setNumberFormat('maskedFormat');
+            Spreedly.setStyle('number', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .65em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
+            Spreedly.setStyle('cvv', 'width: 100%; border-radius: none; border-bottom: 2px solid #D6D6D6; padding-top: .96em ; padding-bottom: .5em; font-size: 14px;box-shadow: none;outline: none;border-radius: 0;');
+          });
     });
 
     Spreedly.on('errors', function (errors) {

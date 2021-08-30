@@ -1,5 +1,5 @@
 <div class="pay_summery_wrapper" *ngIf="typeOf(priceSummary)!=='undefined'">
-    <h3>Payment Summary</h3>
+    <h3>{{'payment_summary' | translate}}</h3>
     <div class="pay_sum_inner">
         <div class="pay_list_wrper" id="flight_list_wrper">
             <ng-container *ngFor="let item of cartPrices">
@@ -50,7 +50,7 @@
               <p>
                 {{item.location}}
               </p>
-              <a data-toggle="modal" data-target="#tax_fee_modal" class="tax_accor_btn">Taxes and Fees</a>
+              <a data-toggle="modal" data-target="#tax_fee_modal" class="tax_accor_btn">{{'taxes_fees' | translate}}</a>
             </span>
                         <span>${{item.price_break_down.taxes | number : '1.2-2'}}</span>
                     </div>
@@ -59,7 +59,7 @@
                         <div class="pay_listing hotel_line" *ngFor="let item of item.mandatory_fee_details.prepaid_break_dwon">
                             <span>
                 <p>
-                  {{item.name}} (Included in total price)
+                  {{item.name}} ({{'inc_total_price' | translate}})
                 </p>
               </span>
                             <span>${{item.price | number : '1.2-2'}}</span>
@@ -70,7 +70,7 @@
                         <div class="pay_listing hotel_line" *ngFor="let item of item.mandatory_fee_details.postpaid_break_dwon">
                             <span>
                 <p>
-                  {{item.name}} (Pay at Property)
+                  {{item.name}} ({{'pay_at_property' | translate}})
                 </p>
               </span>
                             <span>${{item.price | number : '1.2-2'}}</span>
@@ -81,7 +81,7 @@
         </ng-container>
 
         <div class="pay_listing total_amm_blue">
-            <span>Total Purchases</span>
+            <span>{{'total_purchases' | translate}}</span>
 
             <span *ngIf="typeOf(priceSummary.instalments)!='undefined'" class="">${{priceSummary.totalAmount | number :
         '1.2-2'}}</span>
@@ -90,16 +90,16 @@
         <!-- Start -->
         <div class="pay_list_wrper">
             <div class="pay_listing" *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0">
-                <span>Booking Downpayment</span>
+                <span>{{'booking_downpayment' | translate}}</span>
                 <span class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
             </div>
             <div class="pay_listing">
-                <span>Applied Laytrip Points</span>
+                <span>{{'applied_points' | translate}}</span>
                 <span class="">-${{priceSummary.layCreditPoints | number : '1.2-2' }} </span>
             </div>
         </div>
         <div class="pay_listing total_amm_blue bb_none">
-            <span>Total Due Now</span>
+            <span>{{'total_due' | translate}}</span>
             <span *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0" class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount
         | number : '1.2-2'}}</span>
             <span *ngIf="priceSummary?.paymentType=='no-instalment'" class="">${{priceSummary.totalAmount | number :
@@ -110,15 +110,20 @@
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc" aria-expanded="true" aria-controls="instalment_acc">
-            <span class="open_text">
+            <span class="open_text" *ngIf="userLang!='es'">
               {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
               priceSummary.instalments?.instalment_date?.length-1 : 0 }}
-              {{installmentType[priceSummary.instalmentType]}}
-              Installments of ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount |
-              number : '1.2-2'}}
+              {{ installmentType[userLang][priceSummary.instalmentType] }}
+              {{'installments_of' | translate}} ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount | number : '1.2-2'}}
             </span>
+            <span class="open_text" *ngIf="userLang=='es'">
+                {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
+                priceSummary.instalments?.instalment_date?.length-1 : 0 }}
+                Pagos {{ installmentType[userLang][priceSummary.instalmentType] }}es
+                de ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount | number : '1.2-2'}}
+              </span>
             <span class="close_text">
-              <span>Total Installments</span>
+                <span>{{'total_installments' | translate}}</span>
               <span class="">${{insatllmentAmount | number : '1.2-2' }}</span>
             </span>
           </button>
@@ -127,14 +132,14 @@
                     <div class="card-body">
                         <div class="pay_sap_setions" *ngIf="typeOf(priceSummary.instalments)!='undefined'">
                             <div class="due_details" *ngFor="let instalment of priceSummary.instalments.instalment_date | slice:1; let i = index;">
-                                <span>#{{i+1}} Due {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
+                                <span>#{{i+1}} {{'due' | translate}} {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
                                 <span class="">${{instalment.instalment_amount |
                   number : '1.2-2'}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="total_amm_blue">
-                        <span>Total Installments</span>
+                        <span>{{'total_installments' | translate}}</span>
                         <span class="">${{insatllmentAmount | number : '1.2-2' }}</span>
                     </div>
                 </div>
@@ -155,15 +160,11 @@
             <div class="tax_fee_modal_wrp">
                 <div class="inner_wrppar">
                     <div class="title_box">
-                        Taxes & Fees
+                        {{'taxes_fees' | translate}}
                     </div>
                     <div class="fee_msg">
                         <p class="para_fees">
-                            The Taxes and Fees line item covers applicable taxes owed for your hotel reservation, including, without limitation, sales and use tax, occupancy tax, room tax, excise tax, value added tax, government imposed service fees or other fees not paid directly
-                            to the taxing authorities but required by law, and/or other similar taxes, as well as in certain jurisdictions, tax owed on amounts retained as compensation for services. This Taxes and Fees line item varies based on a number
-                            of factors including, without limitation, the tax rate and hotel location, the type of booking, the amount paid to the hotel and profit retained as compensation for services. Hotels may charge daily resort or destination fees,
-                            energy surcharges, newspaper delivery fees, in-room safe fees, tourism fees, housekeeping fees, parking charges, minibar charges, phone calls, room service or movie rentals, etc. These charges you pay to the hotel directly.
-                            Your payment card will be required at check in as security for these charges. Contact your hotel directly to ask about fees.
+                            {{ 'taxes_fees_info' | translate }}
                         </p>
                     </div>
                     <div class="logo_wrpper_footer">

@@ -8,6 +8,8 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../../../services/flight.service';
 import { HomeService } from '../../../services/home.service';
+import { CalendarTranslations } from 'src/app/_helpers/generic.helper';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-flight-search-widget',
@@ -77,6 +79,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   searchedFlightData = [];
   isRefferal = this.commonFunction.isRefferal();
   calendersFullPaymentLength = 0;
+
+  cal_locale = CalendarTranslations["en"];
+  cal_loaded: boolean = true;
   
   constructor(
     public commonFunction: CommonFunction,
@@ -84,7 +89,8 @@ export class FlightSearchWidgetComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private flightService: FlightService,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private translate: TranslateService
   ) {
 
     if (typeof this.fromSearch.city != 'undefined') {
@@ -105,10 +111,13 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
 
+    translate.onLangChange.subscribe(lang => this.setCalendarLocale());
   }
 
   ngOnInit(): void {
     this.fromSearch = [];
+
+    this.setCalendarLocale();
   
     if(this.commonFunction.isRefferal()){
       this.homeService.getSlideOffers.subscribe(currentSlide => {
@@ -177,7 +186,7 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.arrival = this.toSearch.code;
 
         if (this.isRoundTrip) {
-          this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(97, 'days').toDate() : moment().add(9, 'days').toDate()];
+          this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(97, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate()];
         } 
       }
     });
@@ -199,10 +208,8 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   setDefaultDate() {
 
-    this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() :moment().add(2, 'days').toDate();
-    this.departureDate = this.flightDepartureMinDate;
-    
-    this.returnDate = this.isRefferal ? moment(this.departureDate).add(97, 'days').toDate() : moment(this.departureDate).add(9, 'days').toDate();
+    this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() :moment().add(2, 'days').toDate();     
+    this.returnDate = this.isRefferal ? moment(this.departureDate).add(97, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
 
   }
 
@@ -337,7 +344,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     month = month.toString().length == 1 ? '0' + month : month;
     let date = `${day}/${month}/${y}`;
     let price: any = this.calenderPrices.find((d: any) => d.date == date);
-    if (price) {
+    if (price && price.isPriceInInstallment ) {
       if (price.start_price > 0) {
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
@@ -363,7 +370,8 @@ export class FlightSearchWidgetComponent implements OnInit {
       // console.log('no')
     }
   }
-
+  
+  timer=0;
   changeMonth(event) {
 
     var currentDate = new Date();
@@ -380,12 +388,22 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     this.currentMonth = event.month.toString().length == 1 ? '0' + event.month : event.month;
     this.currentYear = event.year;
-    if (!this.isRoundTrip && moment().format('MM') <= this.currentMonth) {
+    //&& moment().format('MM') <= this.currentMonth
+    let currCalYYMM = moment(this.currentMonth+'-'+this.currentYear,'MM-YY').add(1,'years').format("YYYY-MM");
+    let calApplyDiff = moment(currCalYYMM, "YYYY-MM").diff(moment().format( "YYYY-MM"), 'days')
+        
+    if (!this.isRoundTrip && (calApplyDiff > 0  || calApplyDiff <= 365)  ) {
       let month = event.month;
       month = month.toString().length == 1 ? '0' + month : month;
       let monthYearName = `${month}-${event.year}`;
-
-      if (!this.monthYearArr.includes(monthYearName) && this.calPrices) {
+      
+      // if (!this.isRoundTrip && moment(moment(currCalYYMM, "YYYY-MM")).diff(moment().format( "YYYY-MM"), 'days') < 0) {//&& moment().format('MM') <= this.currentMonth
+      //   let month = event.month;
+      //   month = month.toString().length == 1 ? '0' + month : month;
+      //   let monthYearName = `${month}-${event.year}`;
+      
+      //   if (moment(calLastYYMM, "YYYY-MM").diff(moment(currCalYYMM, "YYYY-MM"), 'days') > 0 && this.calPrices) {
+      if  (this.calPrices) {
         this.monthYearArr.push(monthYearName);
         let startDate: any = moment([event.year, event.month - 1]);
         let endDate: any = moment(startDate).endOf('month');
@@ -432,7 +450,7 @@ export class FlightSearchWidgetComponent implements OnInit {
        }
     } 
   }
-
+  
 
   getPriceLabel(type) {
     this.isCalenderPriceLoading = true;
@@ -592,5 +610,22 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   datepickerClose(){      
     this.isDatePickerOpen = false;
+  }
+
+  // Author: xavier | 2021/8/17
+  // Description: Calendar localization
+  // The input field does not refresh when changing the locale:
+  //  https://github.com/primefaces/primeng/issues/1706
+  // Probably a better approach?
+  //  https://github.com/primefaces/primeng/issues/5151#issuecomment-763918829
+  setCalendarLocale() {
+    this.cal_loaded = false;
+    let userLang = JSON.parse(localStorage.getItem('_lang'));
+    if(userLang == null) {
+      this.cal_locale = CalendarTranslations["en"];
+    } else {
+      this.cal_locale = CalendarTranslations[userLang.iso_1Code];
+    }
+    setTimeout(() => this.cal_loaded = true, 0);
   }
 }

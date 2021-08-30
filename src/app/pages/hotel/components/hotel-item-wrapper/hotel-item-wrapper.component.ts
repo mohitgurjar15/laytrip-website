@@ -77,6 +77,7 @@ export class HotelItemWrapperComponent implements OnInit {
   @ViewChildren(NgbCarousel) carousel: QueryList<any>;
   isMarkerClicked = false;
   clickedHotelIndex;
+  isRefferal = this.commonFunction.isRefferal();
 
   constructor(
     private route: ActivatedRoute,
@@ -167,6 +168,7 @@ export class HotelItemWrapperComponent implements OnInit {
       }
       this.hotelCount = this.hotelDetails.length;
       this.currentPage = 1;
+      
       this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       this.hotelList = [...this.hotelListArray];
       if (this.bounds) {
@@ -367,11 +369,13 @@ export class HotelItemWrapperComponent implements OnInit {
     }
   }
   
-  showDownPayment(offerData, downPaymentOption) {
+  showDownPayment(offerData, downPaymentOption,isInstallmentTypeAvailable) {
 
     if (typeof offerData != 'undefined' && offerData.applicable) {
 
-      if (typeof offerData.down_payment_options != 'undefined' && offerData.down_payment_options[downPaymentOption].applicable) {
+      if (this.isRefferal && typeof offerData.down_payment_options != 'undefined' && offerData.down_payment_options[downPaymentOption].applicable) {
+        return true;
+      } else if(!this.isRefferal && isInstallmentTypeAvailable){
         return true;
       }
       return false;

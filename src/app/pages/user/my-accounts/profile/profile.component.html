@@ -9,18 +9,15 @@
                     <small class="error_field" *ngIf="imageFileError">{{imageErrorMsg}}</small>
                     <div class="update_profile_btn">
                         <input #hiddenfileinput style="display: none" type="file" accept="image/*;capture=camera" (change)="uploadImageFile($event)">
-                        <button #upload (click)="hiddenfileinput.click()">Edit</button>
+                        <button #upload (click)="hiddenfileinput.click()">{{'edit' | translate}}</button>
                     </div>
                 </div>
             </div>
             <div class="form_row title_row">
-                <h3>
-                    Account Details
-                </h3>
+                <h3>{{'account_details' | translate}}</h3>
                 <span class="edit_btns">
-                    <a class="hover-link" *ngIf="!isFormControlEnable" (click)="enableFormControlInputs()">Edit</a>
-                    <a class="hover-link" *ngIf="isFormControlEnable" (click)="onSubmit()">{{'save' |
-                        translate}}</a>
+                    <a class="hover-link" *ngIf="!isFormControlEnable" (click)="enableFormControlInputs()">{{'edit' | translate}}</a>
+                    <a class="hover-link" *ngIf="isFormControlEnable" (click)="onSubmit()">{{'save' | translate}}</a>
 
                 </span>
             </div>
@@ -72,7 +69,7 @@
                     {{'email_invalid_validation' | translate}}</small>
             </div>
             <div class="form_row common_row ar_field">
-                <label>Home Airport</label>
+                <label>{{'home_airport' | translate}}</label>
                 <div class="text_field airport_dropdown">
                     <input [readonly]="(!isFormControlEnable)" type="text" placeholder=" {{hmPlaceHolder}}" (keyup)="searchAirportDeparture($event)" formControlName="home_airport" tabindex="3">
                     <div class="search_suggetion_main" *ngIf="!closeAirportSuggestion">
@@ -168,40 +165,40 @@
                     <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
                     {{'dob_touched_validation' | translate}}</small>
                 <small *ngIf="profileForm.controls.dob.errors.pattern" class="error_field_new">
-                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">Enter
-                    valid date of Birth.</small>
+                    <img src="{{s3BucketUrl}}assets/images/icon/alert_tr.svg" alt="Error" class="error_img_new">
+                    {{'dob_invalid_validation' | translate}}</small>
             </div>
             <div class="form_row common_row">
                 <label>{{'gender' |translate}}<sup>*</sup></label>
                 <div class="text_field">
                     <div [ngClass]="{'gender_anchers' : isFormControlEnable , 'gender_anchers_notEnable' : !isFormControlEnable }">
-                        <a [ngClass]="{'active': (gender_type == 'M')}" class="hover-link" (click)="selectGender($event,'M')">Male</a>
-                        <a [ngClass]="{'active': (gender_type == 'F')}" (click)="selectGender($event,'F')" class="hover-link">Female</a>
-                        <a [ngClass]="{'active': (gender_type == 'O')}" (click)="selectGender($event,'O')" class="hover-link">Other</a>
+                        <a [ngClass]="{'active': (gender_type == 'M')}" class="hover-link" (click)="selectGender($event,'M')">{{'male' | translate}}</a>
+                        <a [ngClass]="{'active': (gender_type == 'F')}" (click)="selectGender($event,'F')" class="hover-link">{{'female' | translate}}</a>
+                        <a [ngClass]="{'active': (gender_type == 'O')}" (click)="selectGender($event,'O')" class="hover-link">{{'other' | translate}}</a>
                     </div>
                 </div>
 
             </div>
             <div class="form_row common_row address_main">
                 <label>
-                    <span>Street Address</span>
-                    <span>City</span>
-                    <span>State</span>
-                    <span>Zip</span>
-                    <span>Country</span>
+                    <span>{{'street_address' | translate}}</span>
+                    <span>{{'city' | translate}}</span>
+                    <span>{{'state' | translate}}</span>
+                    <span>{{'zip' | translate}}</span>
+                    <span>{{'country' | translate}}</span>
                 </label>
 
                 <div class="text_field address_box">
-                    <input [readonly]="!isFormControlEnable" tabindex="8" type="text" formControlName="address" placeholder="Street Address" class="inputs_com" maxlength="255">
-                    <input tabindex="9" [readonly]="!isFormControlEnable" maxlength="50" type="text" class="inputs_com" formControlName="city" placeholder="City">
-                    <ng-select tabindex="10" [clearable]="false" [readonly]="!isFormControlEnable" class="address_ng" clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id" placeholder="Select State">
+                    <input [readonly]="!isFormControlEnable" tabindex="8" type="text" formControlName="address" placeholder="{{'street_address' | translate}}" class="inputs_com" maxlength="255">
+                    <input tabindex="9" [readonly]="!isFormControlEnable" maxlength="50" type="text" class="inputs_com" formControlName="city" placeholder="{{'city' | translate}}">
+                    <ng-select tabindex="10" [clearable]="false" [readonly]="!isFormControlEnable" class="address_ng" clearSearchOnAdd="true" selectOnTab="true" formControlName="state_id" placeholder="{{'state' | translate}}">
                         <ng-option *ngFor="let state of stateList" [value]="state.id">{{state.name}}</ng-option>
                     </ng-select>
-                    <input tabindex="11" [readonly]="!isFormControlEnable" maxlength="8" type="text" class="inputs_com" formControlName="zip_code" placeholder="Zip Code">
+                    <input tabindex="11" [readonly]="!isFormControlEnable" maxlength="8" type="text" class="inputs_com" formControlName="zip_code" placeholder="{{'zip' | translate}}">
                     <ng-select [readonly]="!isFormControlEnable" tabindex="12" class="ng-customClass address_ng 2address_ng" [items]="countries" bindLabel="name" [selectOnTab]="true" formControlName="country_id" selectOnTab="true" (change)="getStates($event)" [clearable]="false">
                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                             <span class="ng-value-label">
-                                {{ item.name ? item.name : 'Select country' }} </span>
+                                {{ item.name ? item.name : 'country' | translate }} </span>
                             <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                         </ng-template>
                     </ng-select>

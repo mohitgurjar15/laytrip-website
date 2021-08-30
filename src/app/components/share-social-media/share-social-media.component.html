@@ -1,6 +1,6 @@
 <div class="block_modal_main">
     <div class="modal_title">
-        Share
+        {{'share' | translate}}
         <button type="button" class="close" (click)="close()">
       <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
     </button>
@@ -17,7 +17,7 @@
                 <img src="{{s3BucketUrl}}assets/images/icon/share_i/w_i.svg" alt="Ig Icon">
             </a>
             <a class="hover-link" (click)="copyToClipboard()">
-                <span *ngIf="isCopyText" class="copy_text">Link Copied</span>
+                <span *ngIf="isCopyText" class="copy_text">{{'link_copied' | translate}}</span>
                 <img src="{{s3BucketUrl}}assets/images/icon/share_i/link_i.svg" alt="Ig Icon">
             </a>
         </div>

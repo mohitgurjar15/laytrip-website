@@ -1,6 +1,10 @@
 export const environment = {
   production: false,
   name:'suresh',
+<<<<<<< HEAD
+=======
+  //apiUrl:'https://api.uat.staging.laytrip.com/',
+>>>>>>> 7ad93097e5830652151270003c1906c771b74dfb
   apiUrl:'http://localhost:4040/',
   s3BucketUrl:'http://localhost/laytrip-design-main/laytrip_ui/',
   fb_api_key:'402941427334423',

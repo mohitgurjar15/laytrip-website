@@ -104,5 +104,10 @@ export const travlerLabels = {
         adult: 'Adult',
         child: 'Child',
         infant: 'Infant'
+    },
+    es: {
+        adult: 'Adulto',
+        child: 'Niño',
+        infant: 'Infante'
     }
 }

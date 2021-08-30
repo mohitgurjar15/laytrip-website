@@ -29,6 +29,7 @@ export class SearchAirportComponent implements OnInit {
   progressInterval;
   counterChangeVal=0;
   isInputFocus : boolean = false;
+  $autoComplete;
 
   constructor(
     private flightService: FlightService,
@@ -53,8 +54,11 @@ export class SearchAirportComponent implements OnInit {
 
   onChangeSearch(event) {
      if (event.term.length > 2) {
-      this.searchRoute(event.term);
-      // this.searchAirport(event.term);      
+      // this.searchRoute(event.term);
+      if(this.loading){
+        this.$autoComplete.unsubscribe();
+      }
+      this.searchAirport(event.term);      
     } 
   }
 
@@ -93,9 +97,18 @@ export class SearchAirportComponent implements OnInit {
     );
   }
 
+  onInputClick() {
+    // data if set null if it is set in from search.
+    if (this.id == 'toSearch') {
+      this.flightSearchRoute.emit({});
+      this.data = [];
+    }
+  }
 
   searchAirport(searchItem) {
-    this.flightService.searchAirport(searchItem).subscribe((response: any) => {
+    console.log("innaaa")
+    this.loading = true;
+    this.$autoComplete = this.flightService.searchAirport(searchItem).subscribe((response: any) => {
       
       /* this.flightSearchRoute.emit(response); */
       this.data = response.map(res => {
@@ -114,9 +127,6 @@ export class SearchAirportComponent implements OnInit {
 
           return searchRoute;
         } else {
-          console.log(localStorage.getItem('__from'), res.code)
-
-          console.log('here')
         }
       });
     },
@@ -151,9 +161,7 @@ export class SearchAirportComponent implements OnInit {
   onRemove(event) {
     this.selectedAirport = {};
   }
-  onInputClick() {
-    // this.selectedAirport = {};
-  }
+
 
   setDefaultAirport() {
     try {

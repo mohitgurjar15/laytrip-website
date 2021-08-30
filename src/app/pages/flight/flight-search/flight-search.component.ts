@@ -6,6 +6,8 @@ import { Location } from '@angular/common';
 import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
+import { TranslateService } from '@ngx-translate/core';
+declare var $: any;
 
 @Component({
   selector: 'app-flight-search',
@@ -43,10 +45,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public location: Location,
     public commonFunction: CommonFunction,
     private renderer: Renderer2,
+    private translate: TranslateService,
   ) { }
 
-  ngOnInit() {
-    
+  ngOnInit() {    
     window.scroll(0, 0);
     let payload: any = {};
     sessionStorage.removeItem("__insMode")
@@ -78,7 +80,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       }
       this.getFlightSearchData(payload, params.trip);
     });
-
+    this.setFilteredLabel('filter_1');
   }
 
   // ngAfterViewInit() {
@@ -92,7 +94,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
 
   getFlightSearchData(payload, tripType) {
-    this.filteredLabel = "Price Low to High";
+    //this.filteredLabel = "Price Low to High";
+    this.setFilteredLabel('filter_1');
     this.flightService.setSortFilter({ key: "selling_price", order: "ASC" });
 
     this.loading = this.flexibleLoading = true;
@@ -178,7 +181,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
       this.getCalenderPrice(payload);
     }
-    this.filteredLabel = "Price Low to High";
+    //this.filteredLabel = "Price Low to High";
+    this.setFilteredLabel('filter_1');
   }  
 
   changeLoading(event) {
@@ -264,46 +268,53 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     if (key === 'total_duration') {
       // this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
-        this.filteredLabel = 'Duration Shortest to Longest';
+        //this.filteredLabel = 'Duration Shortest to Longest';
+        this.setFilteredLabel('filter_7');
         this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Duration Longest to Shortest';
+        //this.filteredLabel = 'Duration Longest to Shortest';
+        this.setFilteredLabel('filter_8');
         this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
       }
     }
     else if (key === 'arrival') {
       // this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
-        this.filteredLabel = 'Arrival Earliest to Latest';
+        //this.filteredLabel = 'Arrival Earliest to Latest';
+        this.setFilteredLabel('filter_9');
         this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Arrival Latest to Earliest';
+        //this.filteredLabel = 'Arrival Latest to Earliest';
+        this.setFilteredLabel('filter_10');
         this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
       }
     }
     else if (key === 'departure') {
       // this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
-        this.filteredLabel = 'Departure Earliest to Latest';
+        //this.filteredLabel = 'Departure Earliest to Latest';
+        this.setFilteredLabel('filter_11');
         this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Departure Latest to Earliest';
+        //this.filteredLabel = 'Departure Latest to Earliest';
+        this.setFilteredLabel('filter_12');
         this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
       }
     }
     else {
       // this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
-        this.filteredLabel = 'Price Low to High';
+        //this.filteredLabel = 'Price Low to High';
+        this.setFilteredLabel('filter_1');
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Price High to Low';
+        //this.filteredLabel = 'Price High to Low';
+        this.setFilteredLabel('filter_2');
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       }
     }
     this.flightService.setFlights(this.flightDetails)
   }
-
 
   sortJSON(data, key, way) {
     if (typeof data === "undefined") {
@@ -379,11 +390,34 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   filterFlight(event) {
     this.flightDetails = event;
-    this.flightService.setFlights(this.flightDetails)
+    this.flightService.setFlights(this.flightDetails);
+
+    // Author: xavier | 2021/7/29
+    // Description: Temporary hack to force Angular to refresh the flights search results.
+    //              Hopefully Suresh will come up with a better solution.
+    let tmp = this.filteredLabel;
+    this.filteredLabel = (String)((new Date()).getMilliseconds());
+    setTimeout(() => this.filteredLabel = tmp, 100);
+    this.adjustAddToCartButton();
   }
 
   resetFilter() {
     this.isResetFilter = (new Date()).toString();
+    this.adjustAddToCartButton();
+  }
+
+  // Author: xavier | 2021/8/5
+  // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
+  adjustAddToCartButton() {
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(userLang === 'es') {
+      setTimeout(() => {
+        $('.cta_btn').find('button').css({
+          'height': '50px', 
+          'line-height': '20px'
+        });
+      }, 250);
+    }
   }
 
   maxCartValidation(data) {
@@ -404,5 +438,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     // window.location.reload();
   }
 
-  
+  // Author: xavier | 2021/7/29
+  // Description: Update filtered label using the appropiate translation key
+  setFilteredLabel(rscId: string) {
+    this.translate.
+      get(rscId).
+      subscribe((res: string) => this.filteredLabel = res);
+  }  
 }

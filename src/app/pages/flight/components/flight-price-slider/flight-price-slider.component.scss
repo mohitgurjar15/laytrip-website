@@ -1,29 +1,103 @@
-.price_per_week_label{
+.price_per_week_label {
     font-size: 12px;
 }
-.price_unavailabe{
+
+.price_unavailabe {
+    color: #000000 !important;
     font-size: 9px !important;
     line-height: 9px;
 }
-.full_payment{
+.price_availabe{
+    color: #000000 !important;
+}
+.full_payment {
     color: #F826C1 !important;
 }
 
-.price_day_slider{
-    .btn-arrow{
+.price_day_slider {
+    .btn-arrow {
         position: absolute;
         top: 50%;
         border: none;
         background: transparent url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) no-repeat center center;
         font-size: 0;
         padding: 10px 15px;
-        &.btn-prev{
+        &.btn-prev {
             left: 0;
             transform: translate(0, -50%) rotate(90deg);
         }
-        &.btn-next{
+        &.btn-next {
             right: 0;
             transform: translate(0, -50%) rotate(270deg);
         }
     }
+}
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+.flexible_date{
+    position: relative;
+}
+.slider_box {
+	height: 100%;
+	white-space: nowrap;
+	font-size: 0;
+	transition: 0.8s;
+}
+.slider_box > * {
+    font-size: 1rem;
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
+    height: 100%;
+    width: 20%;
+}
+
+/* .slider_box {
+    max-width: 700px;
+    margin: 0 auto;
+    overflow-x: hidden;
+} */
+
+/* .slider_box .slider_item {
+    width: 20%;
+} */
+
+.prevNext {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    width: 100%;
+    height: 0;
+}
+
+.prevNext > div + div {
+    visibility: hidden; /* Hide all but first P/N container */
+}
+
+.prevNext a {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    line-height: 60px; /* If you want to place numbers */
+    text-align: center;
+    opacity: 0.7;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+}
+.prevNext a:hover {
+    opacity: 1;
+}
+.prevNext a + a {
+    left: auto;
+    right: 0;
 }

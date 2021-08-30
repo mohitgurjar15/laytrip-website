@@ -10,10 +10,10 @@
                             <div class="make_default_btn" [hidden]="card.isDefault">
                                 <a class="hover-link" (click)="makeDefaultCard(card.id)"><i
                                         class="fa fa-spinner fa-spin"
-                                        *ngIf="loading && cardIndex === card.id"></i>&nbsp;Make Default</a>
+                                        *ngIf="loading && cardIndex === card.id"></i>&nbsp;{{'make_default' | translate}}</a>
                             </div>
                             <div class="default_btn" [hidden]="!card.isDefault">
-                                <a class="">Default</a>
+                                <a class="">{{'default' | translate}}</a>
                             </div>
                         </div>
                     </span>
@@ -24,7 +24,7 @@
                     <div class="form-row">
                         <div class="col-sm-12 col-md-4 mb-sm-10 desktop_carding">
                             <div class="card_headbar">
-                                Name on Card
+                                {{'cc_cardholder_ph_1' | translate}}
                             </div>
                             <div class="card_texter">
                                 {{ card.cardHolderName }}
@@ -34,7 +34,7 @@
                             <div class="cardin_main">
                                 <div class="cardin_inner">
                                     <div class="card_headbar">
-                                        Name on Card
+                                        {{'cc_cardholder_ph_1' | translate}}
                                     </div>
                                     <div class="card_texter">
                                         {{ card.cardHolderName }}
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="cardin_inner">
                                     <div class="card_headbar">
-                                        Expires
+                                        {{'expires' | translate}}
                                     </div>
                                     <div class="card_texter" *ngIf="card.cardMetaData!=null">
                                         {{convertExpiry(card.cardMetaData?.month, card.cardMetaData?.year)}}
@@ -52,7 +52,7 @@
                         </div>
                         <div class="col-sm-12 col-md-4 mb-sm-10">
                             <div class="card_headbar">
-                                Billing Address
+                                {{'billing_address' | translate}}
                             </div>
                             <div class="card_texter">
                                 {{ card.cardHolderName }} <span> {{userInfo?.address}}</span>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-sm-12 col-md-2 mb-sm-10 desktop_carding">
                             <div class="card_headbar">
-                                Expires
+                                {{'expires' | translate}}
                             </div>
                             <div class="card_texter" *ngIf="card.cardMetaData!=null">
                                 {{convertExpiry(card.cardMetaData?.month, card.cardMetaData?.year)}}
@@ -68,9 +68,9 @@
                         </div>
                         <div class="col-sm-12 col-md-2 mb-sm-10">
                             <div class="save_btn_wrps">
-                                <a class="hover-link" (click)="openDeleteModal(content,card)">Delete</a>
+                                <a class="hover-link" (click)="openDeleteModal(content,card)">{{'delete' | translate}}</a>
                                 <div class="section_description" id="delete_card_desc" *ngIf="is_open_popup">
-                                    <span class="sec_text">You must have one default credit card selected.</span>
+                                    <span class="sec_text">{{'must_have_default_cc' | translate}}</span>
                                     <a (click)="closePopup()"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
                                 </div>
                             </div>
@@ -94,12 +94,11 @@
             <div class="block_im">
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Info Icon">
             </div>
-            <h4 class="modal-title" id="modal-basic-title">Are you sure <span>you want to delete this credit
-                    card?</span></h4>
+            <h4 class="modal-title" id="modal-basic-title" [innerHTML]="'delete_cc_confirmation' | translate"></h4>
             <div class="alert_box" *ngIf="deleteApiError.length > 0"> {{deleteApiError}} </div>
             <div class="cta_btn_wrps">
-                <button class="btn_no" (click)="modal.dismiss('Cross click')">Cancel</button>
-                <button class="btn_yes" (click)=deleteCreditCard()>Yes</button>
+                <button class="btn_no" (click)="modal.dismiss('Cross click')">{{'cancel' | translate}}</button>
+                <button class="btn_yes" (click)=deleteCreditCard()>{{'yes' | translate}}</button>
             </div>
             <div class="footer_logo">
                 <a>

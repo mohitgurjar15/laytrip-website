@@ -66,12 +66,10 @@ export class FlightPriceSliderComponent implements OnInit {
   flexibleFullPaymentLength = 0;
   singleFlexLoader: boolean = false;
 
-
   constructor(
     private commonFunction: CommonFunction,
     private route: ActivatedRoute,
     private flightService: FlightService
-
   ) {
     this.departureDate = this.route.snapshot.queryParams['departure_date'];
     this.departureDate = this.commonFunction.convertDateFormat(this.departureDate, 'YYYY-MM-DD')
@@ -136,20 +134,19 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   getPrice(item) {
-
     let price;
-    if (item.secondary_start_price > 0) {
-      if (item.secondary_start_price < 5) {
+    if (item.isPriceInInstallment) {
+      if (item.start_price < 5) {
         price = '5.00';
       }
       else {
-        price = item.secondary_start_price;
+        price = item.start_price;
       }
     }
     else {
-      price = item.price
+      price = item.selling_price;
     }
-    return { price: price > 0 ? '$' + price.toFixed(2) : 'Flights Unavailable', className: price > 0 ? 'price_availabe' : 'price_unavailabe' };
+    return { price: price > 0 ? '$' + parseFloat(price).toFixed(2) : 'Flights Unavailable', className: price > 0 && item.isPriceInInstallment ? 'price_availabe' : 'price_unavailabe' };
   }
 
   getFlexibleArivalDate(date) {
@@ -176,7 +173,7 @@ export class FlightPriceSliderComponent implements OnInit {
     var begin = moment(requestDate).format("YYYY-MM-DD");
     var end = moment().add(2, 'days').format("YYYY-MM-DD");
     // console.log("Begin:",begin,"End:",end,moment(begin).isSameOrBefore(end))
-    if (index == -1 && !moment(begin).isSameOrBefore(end)) {
+    if (index == -1 && moment(begin).isSameOrBefore(end)) {
       /* this.dates.unshift({
         date: moment(requestDate, 'YYYY-MM-DD').format("DD/MM/YYYY"),
         isPriceInInstallment: false,

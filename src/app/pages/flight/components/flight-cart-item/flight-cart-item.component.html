@@ -5,7 +5,7 @@
             <div class="change_plane_wrapper" *ngIf="stop.is_layover">
                 <span class="plane_wrps">
           <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
-          Change Planes in {{stop?.layover_airport_name}}</span>
+          {{'change_planes' | translate}} {{stop?.layover_airport_name}}</span>
                 <span class="hr_wrps">{{stop.layover_duration}}</span>
             </div>
             <div class="cols_wrps">
@@ -45,8 +45,8 @@
         <div class="total_hrs_wrps cta_btns_wrps">
             <span class="ct_btns">
         <button *ngIf="cartItem.module_info?.routes?.length === 1"
-          (click)="openDeleteConfirmationPopup(cartItem.id)">Delete</button>
-      </span> Duration {{cartItem.module_info?.routes[0]?.duration}}
+          (click)="openDeleteConfirmationPopup(cartItem.id)">{{'delete' | translate}}</button>
+      </span> {{'duration' | translate}} {{cartItem.module_info?.routes[0]?.duration}}
         </div>
 
         <ng-container *ngIf="cartItem.module_info?.routes?.length === 2">
@@ -54,7 +54,7 @@
                 <div class="change_plane_wrapper" *ngIf="stop.is_layover">
                     <span class="plane_wrps">
             <img src="{{s3BucketUrl}}assets/images/icon/planegray.svg" alt="" class="Pink filled Flight" />
-            Change Planes in {{stop?.layover_airport_name}}</span>
+            {{'change_planes' | translate}} {{stop?.layover_airport_name}}</span>
                     <span class="hr_wrps">{{stop.layover_duration}}</span>
                 </div>
                 <div class="cols_wrps">
@@ -93,8 +93,8 @@
             </div>
             <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem.module_info?.routes?.length === 2">
                 <span class="ct_btns">
-          <button (click)="openDeleteConfirmationPopup(cartItem.id)">Delete</button>
-        </span> Duration {{cartItem.module_info?.routes[1]?.duration}}
+          <button (click)="openDeleteConfirmationPopup(cartItem.id)">{{'delete' | translate}}</button>
+        </span> {{'duration' | translate}} {{cartItem.module_info?.routes[1]?.duration}}
             </div>
         </ng-container>
 

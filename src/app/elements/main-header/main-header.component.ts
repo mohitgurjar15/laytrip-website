@@ -1,9 +1,9 @@
-import { Component, OnInit, DoCheck, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, DoCheck, ChangeDetectorRef, Renderer2 } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { environment } from '../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { getLoginUserInfo, redirectToLogin } from '../../_helpers/jwt.helper';
 import { CommonFunction } from '../../_helpers/common-function';
 import { CartService } from '../../services/cart.service';
@@ -14,6 +14,7 @@ import { EmptyCartComponent } from '../../components/empty-cart/empty-cart.compo
 import { AppleSecurityLoginPopupComponent } from '../../pages/user/apple-security-login-popup/apple-security-login-popup.component';
 declare var $: any;
 import {installmentType} from '../../_helpers/generic.helper';
+import { Langunage, LangunageModel } from 'src/app/model/langunage.model';
 
 @Component({
   selector: 'app-main-header',
@@ -44,7 +45,12 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   paymentType: string ='';
   instalmentType:string='weekly';
   installmentOptions;
+  userLang: string = "en";
   paymentInfo;
+  langunages: Langunage[] = [];
+  selectedLanunage: Langunage = { id: 0, name: '', iso_1Code: '', iso_2Code: '', active: false };
+  isLanunageSet: boolean = false;
+  
   cartIsPromotional: boolean = false;
   constructor(
     private genericService: GenericService,
@@ -55,12 +61,30 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     public cd: ChangeDetectorRef,
     private cartService: CartService,
     private cookieService: CookieService,
-    private userService: UserService
+    private userService: UserService,
+    private renderer: Renderer2,
+    public route :ActivatedRoute
+
   ) {
+    let _langunage = localStorage.getItem('_lang');
+    if (_langunage) {
+      try {
+        let _lang = JSON.parse(_langunage);
+        this.selectedLanunage = _lang;
+        translate.setDefaultLang(this.selectedLanunage.iso_1Code);
+        this.isLanunageSet = true;
+        this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
+      } catch (error) {
+        this.isLanunageSet = false;
+        translate.setDefaultLang('en');
+      }
+    } else {
+      translate.setDefaultLang('en');
+    }
   }
 
   ngOnInit() {
-
+    this.getLangunages();
     this.checkUser();
     this.loadJquery();
     //this.getUserLocationInfo();
@@ -345,9 +369,16 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       additional_amount: 0,
       down_payment: 0,
       selected_down_payment: this.paymentInfo.selectedDownPayment || 0,
-      custom_down_payment: this.cartIsPromotional ? downpayment : 0
+      custom_down_payment: this.cartIsPromotional ? downpayment : 0,
+      down_payment_option : [],
+      is_down_payment_in_percentage: true,
     }
-
+    let checkInDiff = moment(moment(instalmentRequest.checkin_date,'YYYY-MM-DD')).diff(moment().format("YYYY-MM-DD"),'days');
+      if(checkInDiff > 30){          
+        instalmentRequest.down_payment_option = [40,50,60];
+      } else if(checkInDiff > 90){
+        instalmentRequest.down_payment_option = [20,30,40];
+      }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available) {
         this.installmentAmount = res.instalment_date[1].instalment_amount ? res.instalment_date[1].instalment_amount : 0;
@@ -445,4 +476,60 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     }
     return price;
   }
+
+  
+  /**
+  * change user lanunage
+  * @param langunage 
+  */
+   changeLangunage(langunage: Langunage) {
+
+    if (JSON.stringify(langunage) != JSON.stringify(this.selectedLanunage)) {
+      this.selectedLanunage = langunage;
+      localStorage.setItem("_lang", JSON.stringify(langunage))
+      this.renderer.removeClass(document.body, `en_lang`);
+      this.renderer.removeClass(document.body, `es_lang`);
+      this.renderer.removeClass(document.body, `it_lang`);
+      this.translate.use(langunage.iso_1Code);
+      this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
+      // const urlParameters = Object.assign({}, this.route.snapshot.queryParams); 
+      // urlParameters.lang = this.selectedLanunage.iso_1Code;
+
+      // this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
+
+    }
+  }
+
+  /**
+   * Get all langunages
+   */
+  getLangunages() {
+    this.genericService.getAllLangunage().subscribe(
+      (response: LangunageModel) => {
+        this.langunages = response.data.filter(lang => lang.active == true);
+        //this.langunages = response.data.filter(lang => lang.iso_1Code == "en" || lang.iso_1Code == "es");
+        if (!this.isLanunageSet) {
+          this.isLanunageSet = true;
+          this.selectedLanunage = this.langunages[0];
+          localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
+        }
+        else {
+          let find = this.langunages.find(langunage => langunage.id == this.selectedLanunage.id)
+          if (!find) {
+            this.isLanunageSet = true;
+            this.selectedLanunage = this.langunages[0];
+            localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
+          }
+        }
+
+        // Author: xavier | 2021/7/28
+        // Description: To support localized installment types
+        this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+      },
+      (error) => {
+
+      }
+    )
+  }
+
 }
