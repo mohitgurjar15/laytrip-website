@@ -124,8 +124,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.isNotFound = false;
          this.flightDetails = res.items;
           this.filterFlightDetails = res;
-          // this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-
           if (this.flightDetails.length == 0) {
             this.isNotFound = true;
           }
