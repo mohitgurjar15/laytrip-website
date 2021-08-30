@@ -36,7 +36,7 @@ export class HotelSearchComponent implements OnInit {
   ];
   filterOpen: boolean = false;
   sortByOpen: boolean = false;
-
+  hotelDealIcon = false;
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
@@ -54,6 +54,10 @@ export class HotelSearchComponent implements OnInit {
     this.renderer.addClass(document.body, 'cms-bgColor');
 
     let info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
+    this.hotelDealIcon = this.route.snapshot.queryParams['dealsIcon']
+    //this.hotelDealIcon = false;
+    console.log(this.hotelDealIcon)
+    this.homeService.setDeaslToggle(this.hotelDealIcon)
     let payload = {
       check_in: this.route.snapshot.queryParams['check_in'],
       check_out: this.route.snapshot.queryParams['check_out'],
@@ -130,7 +134,7 @@ export class HotelSearchComponent implements OnInit {
 
       }
     }
-    
+
     this.hotelService.setHotels(this.hotelDetails)
   }
 
@@ -244,7 +248,7 @@ export class HotelSearchComponent implements OnInit {
 
   // Author: xavier | 2021/7/27
   // Description: Update filtered label using the appropiate translation key
-  setFilteredLabel(rscId: string){
+  setFilteredLabel(rscId: string) {
     this.translate.
       get(rscId).
       subscribe((res: string) => this.filteredLabel = res);

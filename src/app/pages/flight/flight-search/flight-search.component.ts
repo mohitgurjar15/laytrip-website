@@ -7,6 +7,7 @@ import { FlightService } from '../../../services/flight.service';
 import * as moment from 'moment';
 import { CommonFunction } from '../../../_helpers/common-function';
 import { TranslateService } from '@ngx-translate/core';
+import { HomeService } from 'src/app/services/home.service';
 declare var $: any;
 
 @Component({
@@ -35,8 +36,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   fullPageLoading: any = false;
   isCartFull: boolean = false;
   isFlightAvaibale: boolean = false;
-  statusCode='';
+  statusCode = '';
   filteredLabel = 'Price Low to High';
+  dealIcon: any=false;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,16 +48,27 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public commonFunction: CommonFunction,
     private renderer: Renderer2,
     private translate: TranslateService,
-  ) { }
+    private homeService: HomeService
+  ) {
+    console.log("this.route.snapshot.queryParams['dealsIcon']", this.route.snapshot.queryParams)
+  }
 
-  ngOnInit() {    
+
+  ngOnInit() {
     window.scroll(0, 0);
     let payload: any = {};
     sessionStorage.removeItem("__insMode")
     sessionStorage.removeItem("__islt")
     this.renderer.addClass(document.body, 'cms-bgColor');
+
+    this.dealIcon = this.route.snapshot.queryParams['dealsIcon'];
+    this.dealIcon = this.dealIcon == 'true' || this.dealIcon == true ? true : false;
+    this.homeService.setDeaslToggle(this.dealIcon)
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
+      //this.dealIcon = this.flightSearchInfo.dealsIcon
+      //console.log("on listing dealIcon", this.dealIcon)
+
       if (params && params.trip === 'roundtrip') {
         payload = {
           source_location: params.departure,
@@ -110,17 +123,20 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.fullPageLoading = false;
           this.isNotFound = false;
-          this.flightDetails = res.items;
+          // this.flightDetails = res.items.slice(0, 25);
           this.filterFlightDetails = res;
-          if(this.flightDetails.length == 0){
+          // this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+
+          if (this.flightDetails.length == 0) {
             this.isNotFound = true;
           }
-          this.flightService.setFlights(this.flightDetails)       
+          this.flightService.setFlights(this.flightDetails)
         }
+        //this.homeService.setDeaslToggle(this.dealIcon)
       }, err => {
         this.flightDetails = [];
         this.loading = this.fullPageLoading = false;
-        
+
         if (err && err.status === 404) {
           this.errorMessage = err.message;
         } else if (err && err.status === 406) {
@@ -133,7 +149,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
       this.flightService.getFlightFlexibleDatesRoundTrip(payload).subscribe((res: any) => {
         if (res) {
-          this.flexibleLoading = this.flexibleNotFound =false;
+          this.flexibleLoading = this.flexibleNotFound = false;
           this.dates = res;
         }
       }, err => {
@@ -152,12 +168,13 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.flightDetails = res.items;
           this.filterFlightDetails = res;
           this.flightService.setFlights(this.flightDetails)
-          if(this.flightDetails.length == 0){
+          if (this.flightDetails.length == 0) {
             this.isNotFound = true;
-          } 
-       }     
+          }
+        }
+        //this.homeService.setDeaslToggle(this.dealIcon)
       }, err => {
-        this.loading = this.fullPageLoading= false;
+        this.loading = this.fullPageLoading = false;
         // this.isNotFound = true;
         if (err.status == 422) {
           this.errorMessage = err.message;
@@ -167,8 +184,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         } else {
           this.isNotFound = true;
         }
-      });
-    
+      }
+      );
+
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
         if (res && res.length) {
           this.flexibleLoading = this.flexibleNotFound = false;
@@ -183,7 +201,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     }
     //this.filteredLabel = "Price Low to High";
     this.setFilteredLabel('filter_1');
-  }  
+  }
 
   changeLoading(event) {
     this.fullPageLoading = event;
@@ -199,7 +217,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     startDate = moment(startDate.toDate()).format("YYYY-MM-DD")
     endDate = moment(endDate.toDate()).format("YYYY-MM-DD");
     if (!moment().isBefore(startDate)) {
-      startDate = moment().add(2,'days').format("YYYY-MM-DD")
+      startDate = moment().add(2, 'days').format("YYYY-MM-DD")
     }
 
     payload.start_date = startDate;
@@ -272,7 +290,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.setFilteredLabel('filter_7');
         this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
       } else if (order === 'DESC') {
-        //this.filteredLabel = 'Duration Longest to Shortest';
+        //this.filteredLabel = 'Duration Longest to Shortest';`
         this.setFilteredLabel('filter_8');
         this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
       }
@@ -313,6 +331,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       }
     }
+    console.log(this.flightDetails)
     this.flightService.setFlights(this.flightDetails)
   }
 
@@ -410,10 +429,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
   adjustAddToCartButton() {
     let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
-    if(userLang === 'es') {
+    if (userLang === 'es') {
       setTimeout(() => {
         $('.cta_btn').find('button').css({
-          'height': '50px', 
+          'height': '50px',
           'line-height': '20px'
         });
       }, 250);
@@ -429,7 +448,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   removeNotAvailabeflight(data) {
-    this.flightDetails = this.flightDetails.filter(obj => obj.unique_code !== data);    
+    this.flightDetails = this.flightDetails.filter(obj => obj.unique_code !== data);
     this.isFlightAvaibale = data;
   }
 
@@ -444,5 +463,5 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.translate.
       get(rscId).
       subscribe((res: string) => this.filteredLabel = res);
-  }  
+  }
 }
