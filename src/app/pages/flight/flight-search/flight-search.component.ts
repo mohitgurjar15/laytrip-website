@@ -123,8 +123,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.fullPageLoading = false;
           this.isNotFound = false;
-          this.flightDetails = res.items;
+          // this.flightDetails = res.items.slice(0, 25);
           this.filterFlightDetails = res;
+          // this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+
           if (this.flightDetails.length == 0) {
             this.isNotFound = true;
           }
@@ -288,7 +290,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.setFilteredLabel('filter_7');
         this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
       } else if (order === 'DESC') {
-        //this.filteredLabel = 'Duration Longest to Shortest';
+        //this.filteredLabel = 'Duration Longest to Shortest';`
         this.setFilteredLabel('filter_8');
         this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
       }
@@ -329,6 +331,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       }
     }
+    console.log(this.flightDetails)
     this.flightService.setFlights(this.flightDetails)
   }
 

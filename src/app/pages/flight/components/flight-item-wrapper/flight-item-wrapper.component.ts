@@ -112,7 +112,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     })
     this.loadJquery();
     this.flightService.getFlights.subscribe(data => {
-      this.flightItems =[];
+      this.flightItems = this.flightDetails = [];
       if (data.length) {
         this.flightItems = data;
         for (let i = 0; i < this.flightDetails.length; i++) {
@@ -130,8 +130,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         this.flightDetails = [];
       }
     });
-
-    this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
 
     this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
 
@@ -448,22 +446,24 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   onScrollDown() {
-    this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
+    if (this.flightDetails.length != 0){
+      this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
 
-    setTimeout(() => {
-      if (this.noOfDataToShowInitially <= this.flightDetails.length) {
+      setTimeout(() => {
+        if (this.noOfDataToShowInitially <= this.flightDetails.length) {
 
-        let requestParams = { revalidateDto: [] };
-        this.noOfDataToShowInitially += this.dataToLoad;
-        this.flightDetails = [];
-         this.flightDetails = [...this.flightItems.slice(0, this.noOfDataToShowInitially)];
-        //this.flightDetails.push(this.flightItems.slice(0, this.noOfDataToShowInitially))
-        this.cd.detectChanges();
-        this.scrollLoading = false;
-      } else {
-        this.scrollLoading = false;
-      }
-    }, 2000);
+          let requestParams = { revalidateDto: [] };
+          this.noOfDataToShowInitially += this.dataToLoad;
+          this.flightDetails = [...this.flightItems.slice(0, this.noOfDataToShowInitially)];
+          //this.flightDetails.push(this.flightItems.slice(0, this.noOfDataToShowInitially))
+          this.cd.detectChanges();
+          this.scrollLoading = false;
+        } else {
+          this.scrollLoading = false;
+        }
+      }, 2000);
+    }
+   
   }
   getCancellationPolicy(route_code) {
     return "#";

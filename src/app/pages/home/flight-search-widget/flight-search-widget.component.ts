@@ -84,7 +84,11 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   cal_locale = CalendarTranslations["en"];
   cal_loaded: boolean = true;
-
+  selectedMMYY = '';
+  lastSearchCalMMYY = '';
+  timer: number = 0;
+  timerTimeStamp;
+  
   constructor(
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
@@ -399,8 +403,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     }
   }
   
-  timer:number=0;
-  timerTimeStamp;
+
   timerStart(){
     this.timerTimeStamp = setTimeout(() => {
       this.timer = 2;
@@ -414,7 +417,12 @@ export class FlightSearchWidgetComponent implements OnInit {
   changeMonth(event) {
     this.timerStart(); 
 
-    if(this.timer == 2){
+    this.currentMonth = event.month.toString().length == 1 ? '0' + event.month : event.month;
+    this.currentYear = event.year;
+    let currCalYYMM = moment(this.currentMonth + '-' + this.currentYear, 'MM-YY').add(1, 'years').format("YYYY-MM");
+    let calApplyDiff = moment(currCalYYMM, "YYYY-MM").diff(moment().format("YYYY-MM"), 'days')
+    this.selectedMMYY = currCalYYMM; 
+    if (this.timer == -1 || this.timer == 2){
       this.timer = 0;
       this.timerStop();
       this.timerStart();
@@ -432,12 +440,10 @@ export class FlightSearchWidgetComponent implements OnInit {
         }
       });
 
-      this.currentMonth = event.month.toString().length == 1 ? '0' + event.month : event.month;
-      this.currentYear = event.year;
-      let currCalYYMM = moment(this.currentMonth + '-' + this.currentYear, 'MM-YY').add(1, 'years').format("YYYY-MM");
-      let calApplyDiff = moment(currCalYYMM, "YYYY-MM").diff(moment().format("YYYY-MM"), 'days')
-
+      
       if (!this.isRoundTrip && (calApplyDiff > 0 || calApplyDiff <= 365)) {
+        this.lastSearchCalMMYY = currCalYYMM;
+        console.log(this.selectedMMYY ,this.lastSearchCalMMYY )
         let month = event.month;
         month = month.toString().length == 1 ? '0' + month : month;
         let monthYearName = `${month}-${event.year}`;
@@ -529,7 +535,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   getMinPrice(prices) {
     if (prices.length > 0) {
       let values = prices.map(function (v) {
-        if (v.start_price > 0) {
+        if (v.start_price > 0 && v.isPriceInInstallment == true ) {
           if (v.secondary_start_price < 5) {
             return '$5.00';
           }
@@ -639,6 +645,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   datepickerShow() {
+    this.isCalenderPriceLoading = false;
+    this.timer=-1;
     this.isDatePickerOpen = true;
     if (this.commonFunction.isRefferal()) {
       this.progressInterval = setInterval(() => {
