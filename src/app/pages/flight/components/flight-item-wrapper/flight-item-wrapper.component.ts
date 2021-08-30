@@ -354,6 +354,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
+      console.log(changes.flightDetails.currentValue)
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
       this.filteredLabel = changes.filteredLabel.currentValue;
     }
