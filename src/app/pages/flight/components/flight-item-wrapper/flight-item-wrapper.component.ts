@@ -87,7 +87,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     public modalService: NgbModal,
     private decimalPipe: DecimalPipe,
-    private cd: ChangeDetectorRef,
+    private cd: ChangeDetectorRef
 
 
   ) {
@@ -117,8 +117,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         this.flightItems = data;            
       }
       this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-
     });
+
 
     for (let i = 0; i < this.flightDetails.length; i++) {
       console.log('come in array')
@@ -407,8 +407,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
     }); */
-
-
   }
 
   showDownPayment(offerData, downPaymentOption, isInstallmentTypeAvailable) {
@@ -445,16 +443,13 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   onScrollDown() {
-    if (this.flightDetails.length != 0){
+    if (this.flightDetails.length != 0) {
       this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
 
       setTimeout(() => {
         if (this.noOfDataToShowInitially <= this.flightDetails.length) {
-
-          let requestParams = { revalidateDto: [] };
           this.noOfDataToShowInitially += this.dataToLoad;
           this.flightDetails = [...this.flightItems.slice(0, this.noOfDataToShowInitially)];
-          //this.flightDetails.push(this.flightItems.slice(0, this.noOfDataToShowInitially))
           this.cd.detectChanges();
           this.scrollLoading = false;
         } else {
@@ -462,7 +457,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         }
       }, 2000);
     }
-   
   }
   getCancellationPolicy(route_code) {
     return "#";
