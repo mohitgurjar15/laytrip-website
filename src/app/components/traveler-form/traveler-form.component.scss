@@ -204,6 +204,12 @@
           }
         }
 
+        .edit_traveler_link{
+          font-size: 14px;
+          color: $active-tab-text;
+          font-weight: 500;
+        }
+
         .adult_countr {
           color: $grayed_border;
           font-weight: 500;
@@ -866,6 +872,22 @@
           justify-content: space-between;
           margin-top: 15px;
 
+          &.next_traveler{
+            justify-content: flex-end;
+
+            button{
+              color: $active-tab-text;
+              font-size: 16px;
+              font-weight: 600;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              i{
+                margin-left: 5px;
+                font-size: 11px;
+              }
+            }
+          }
           @include tab-view {
             margin-top: 10px;
           }
