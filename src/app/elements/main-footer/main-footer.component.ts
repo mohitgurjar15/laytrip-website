@@ -7,7 +7,7 @@ import { LangunageModel, Langunage } from '../../model/langunage.model';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonFunction } from '../../_helpers/common-function';
 import { GenericService } from '../../services/generic.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -31,7 +31,9 @@ export class MainFooterComponent implements OnInit {
     public commonFunction: CommonFunction,
     private renderer: Renderer2,
     private genericService: GenericService,
-    public route :ActivatedRoute
+    public route :ActivatedRoute,
+    public router :Router,
+    
   ) {
 
     this.countryCode = this.commonFunction.getUserCountry();
@@ -66,6 +68,10 @@ export class MainFooterComponent implements OnInit {
     }
 
     this.countryCode = this.commonFunction.getUserCountry();
+    // const urlParameters = Object.assign({}, this.route.snapshot.queryParams); 
+    // urlParameters.lang = this.selectedLanunage.iso_1Code;
+
+    // this.router.navigate([], { relativeTo: this.route});
   }
 
   
@@ -112,6 +118,11 @@ export class MainFooterComponent implements OnInit {
       this.renderer.removeClass(document.body, `it_lang`);
       this.translate.use(langunage.iso_1Code);
       this.renderer.addClass(document.body, `${this.selectedLanunage.iso_1Code}_lang`);
+      const urlParameters = Object.assign({}, this.route.snapshot.queryParams); 
+      urlParameters.lang = this.selectedLanunage.iso_1Code;
+
+      this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
+
     }
   }
 
@@ -122,6 +133,7 @@ export class MainFooterComponent implements OnInit {
     this.genericService.getAllLangunage().subscribe(
       (response: LangunageModel) => {
         this.langunages = response.data.filter(lang => lang.active == true);
+        //this.langunages = response.data.filter(lang => lang.iso_1Code == "en" || lang.iso_1Code == "es");
         if (!this.isLanunageSet) {
           this.isLanunageSet = true;
           this.selectedLanunage = this.langunages[0];

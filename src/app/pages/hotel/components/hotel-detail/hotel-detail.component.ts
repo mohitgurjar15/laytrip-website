@@ -9,6 +9,10 @@ import { CartService } from '../../../../services/cart.service';
 import { HomeService } from '../../../../services/home.service';
 import { CommonFunction } from '../../../../_helpers/common-function';
 import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { translateAmenities } from '../../../../_helpers/generic.helper';
+import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
+import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
 declare var $: any;
 
 
@@ -49,7 +53,10 @@ export class HotelDetailComponent implements OnInit {
   addCartLoading:boolean=false;
   isNotFound:boolean=false;
   isCartFull:boolean=false;
+  isRefferal = this.commonFunction.isRefferal();
 
+  isTranslatedByGoogle:boolean = false;
+  
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
@@ -58,6 +65,7 @@ export class HotelDetailComponent implements OnInit {
     private modalService: NgbModal,
     private cartService:CartService,
     private commonFunction:CommonFunction,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -100,7 +108,7 @@ export class HotelDetailComponent implements OnInit {
           country_name: res.hotel.address.country_name,
           rating: res.hotel.rating,
           review_rating: res.hotel.review_rating,
-          description: this.formatLongText(res.hotel.description),
+          description: res.hotel.description,
           amenities: res.hotel.amenities,
           hotelLocations: res.hotel.geocodes,
           latitude : parseFloat(res.hotel.geocodes.latitude),
@@ -108,6 +116,7 @@ export class HotelDetailComponent implements OnInit {
           hotelReviews: res.hotel.reviews,
           thumbnail: res.hotel.thumbnail
         };
+        this.translateHotelData();
         if (res.hotel.images.length) {
 
           res.hotel.images.forEach(imageUrl => {
@@ -126,10 +135,27 @@ export class HotelDetailComponent implements OnInit {
     }, error => {
       this.loading = false;
       this.isNotFound=true;  
-    });    
+    }); 
+    
+    // Author: xavier | 2021/8/5
+    // Description: Format the "Add to Cart" buttons to fit spanish translation
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(userLang === 'es') {
+      $(document).ready(function() {
+        function fixButtons() {
+          let els = $("a[class*='book_btn anchor-tag']");
+          if(els.length == 0) {
+            setTimeout(fixButtons, 100);
+          } else {
+            els.css({'line-height': '20px'});
+          }
+        }
+        fixButtons();
+      });
+    }
   }
 
-  // Author: xavier | 2021/6/24 @ 4:23pm
+  // Author: xavier | 2021/6/24
   // Description: Toggle description expand/collapse
   toggleDesc() {
     let el = $("#hotel_desc");
@@ -143,7 +169,7 @@ export class HotelDetailComponent implements OnInit {
     }
   }
 
-  // Author: xavier | 2021/6/23 @ 2:30pm
+  // Author: xavier | 2021/6/23
   // Description: Break long text into paragraphs.
   //              Takes into account empty text and text without periods.
   formatLongText(data: any) {
@@ -152,7 +178,6 @@ export class HotelDetailComponent implements OnInit {
     const tokens: string[] = text.split(".");
     let result: string = "";
     let offset: number = 0;
-
     for(let i: number = 0; i < tokens.length; i++) {
       if((result.length - offset) >= maxLength) {
         result += "<br><br>";
@@ -162,6 +187,91 @@ export class HotelDetailComponent implements OnInit {
     }
 
     return result;
+  }
+
+  // Author: xavier | 2021/7/27
+  // Description: Translates hotel's description using Google's translation API.
+  translateHotelData() {
+    const lang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    if(lang == "en") {
+      this.hotelDetails.description = this.formatLongText(this.hotelDetails.description);
+      return;
+    }
+
+    let body = new HttpParams();
+    body = body.set('q', this.hotelDetails.description)
+               .set('source', 'en')
+               .set('target', lang)
+               .set('format', 'text')
+               .set('model', 'nmt')
+               .set('key', 'AIzaSyAM2IBT7FXhbv1NFqqVEdYkFDTyqPUhmR8');
+
+    class gApiResp { 
+      data: {
+        translations: {
+          translatedText: string[],
+          detectedSourceLanguage: string,
+          model: string
+        }[];
+      }
+    }
+    
+    // Translate Description
+    this.http
+      .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      .subscribe(
+        res => {
+          this.hotelDetails.description = this.formatLongText(res.data.translations[0].translatedText);
+          this.isTranslatedByGoogle = true;
+        }
+      );
+
+    // Translate Ammenities
+    for(let i = 0; i < this.hotelDetails.amenities.list.length; i++) {
+      this.hotelDetails.amenities.list[i] = translateAmenities(this.hotelDetails.amenities.list[i]);
+      // body = body.set('q', this.hotelDetails.amenities.list[i]);
+      // this.http
+      // .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      // .subscribe(
+      //   res => {
+      //     this.hotelDetails.amenities.list[i] = res.data.translations[0].translatedText;
+      //   }
+      // );
+    }
+
+    // Translate Rooms' descriptions
+    let titles: any = this.hotelRoomArray.map(room => room.title).join(" | ");
+    body = body.set('q', titles);
+    this.http
+      .post<gApiResp>('https://translation.googleapis.com/language/translate/v2', body)
+      .subscribe(
+        res => {
+          titles = res.data.translations[0].translatedText;
+          let titles_translated: string[] = titles.split("|");
+          for(let i: number = 0; i < titles_translated.length; i++) {
+            this.hotelRoomArray[i].title = titles_translated[i].trim();
+          }
+        }
+      );
+
+      this.colorizeGoogleLogo();
+  }
+
+  // Author: xavier | 2021/8/13
+  // Description: Temporary solution until 1C uploads a suitable Google image.
+  colorizeGoogleLogo() {
+    let colors: string[] = ["#4285f4", "#ea4335", "#fbb405", "#4285f4", "#34a853", "#ea4335"];
+    let el: HTMLParagraphElement = $(".tx_by_google")[0];
+    if(el == null) {
+      setTimeout(() => this.colorizeGoogleLogo(), 500);
+      return;
+    }
+    let gt: string = el.innerHTML;
+    let cgt: string = gt.substring(0, 14);
+    for(let i: number = 14; i < gt.length; i++) {
+      cgt += `<span style="color: ${colors[i - 14]}">${gt[i]}</span>`;
+    }
+    $(".tx_by_google")[0].innerHTML = cgt;
   }
 
   counter(i: any) {
@@ -206,8 +316,14 @@ export class HotelDetailComponent implements OnInit {
           }
         }
       }, error => {
-        this.addCartLoading=false;
-        if (error.status == 409 && this.commonFunction.isRefferal()) {
+        this.addCartLoading = false;
+          if (error.status == 406) {
+            this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
+              windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
+              keyboard: false
+            });
+          } 
+          if (error.status == 409 && this.commonFunction.isRefferal()) {
           this.modalService.open(DiscountedBookingAlertComponent, {
             windowClass: 'block_session_expired_main', centered: true, backdrop: 'static',
             keyboard: false
@@ -307,11 +423,13 @@ export class HotelDetailComponent implements OnInit {
     }
   }
 
-  showDownPayment(offerData, downPaymentOption) {
+  showDownPayment(offerData, downPaymentOption,isInstallmentTypeAvailable) {
 
     if (typeof offerData != 'undefined' && offerData.applicable) {
 
       if (typeof offerData.down_payment_options != 'undefined' && offerData.down_payment_options[downPaymentOption].applicable) {
+        return true;
+      } else if(!this.isRefferal && isInstallmentTypeAvailable){
         return true;
       }
       return false;

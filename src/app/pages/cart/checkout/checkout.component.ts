@@ -20,7 +20,7 @@ declare var $: any;
 export interface CartItem {
 
   type: string;
-  module_info: {},r
+  module_info: {},
 }
 
 @Component({
@@ -138,7 +138,7 @@ export class CheckoutComponent implements OnInit {
         cart.is_available = items.data[i].is_available;
         price.is_offer_data = items.cartIsPromotional;
         price.offer_data = items.data[i].moduleInfo[0].offer_data;
-
+        price.is_installment_available = items.data[i].moduleInfo[0].is_installment_available;
         this.modules.push(items.data[i].type);
         if (this.modules.some(x => x === "flight")) {
           this.lottieLoaderType = "flight";
@@ -238,7 +238,7 @@ export class CheckoutComponent implements OnInit {
     })
 
     try {
-      this.cardToken = this.cookieService.get('__cc');
+      this.cardToken = this.cookieService.get('__cc') || '';
     }
     catch (e) {
       this.cardToken = '';
@@ -415,6 +415,14 @@ export class CheckoutComponent implements OnInit {
     this.validationErrorMessage = '';
     let message = '';
     this.inValidCartTravller = [];
+    if (this.cardToken == '') {
+      if (this.validationErrorMessage == '') {
+        this.validationErrorMessage = ` Please select a credit card`;
+      }
+      else {
+        this.validationErrorMessage += ` and please select a credit card`;
+      }
+    }
     for (let i in Object.keys(this.travelerForm.controls)) {
       message = '';
       for (let j = 0; j < this.travelerForm.controls[`type${i}`]['controls'].adults.controls.length; j++) {
@@ -539,6 +547,7 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.payment_type = this.priceSummary.paymentType;
     this.bookingRequest.instalment_type = this.priceSummary.instalmentType;
     this.bookingRequest.cart = carts;
+    //return false;
     sessionStorage.setItem('__cbk', JSON.stringify(this.bookingRequest))
     if (this.isValidTravelers && this.cardToken != '' && this.isAllAlertClosed && this.isTermConditionAccepted && this.isExcludedCountryAccepted) {
       this.isBookingProgress = true;
@@ -657,7 +666,16 @@ export class CheckoutComponent implements OnInit {
       amount: totalPrice.toFixed(2),
       additional_amount: 0,
       down_payment: 0,
-      selected_down_payment: this.priceSummary.selectedDownPayment
+      selected_down_payment: this.priceSummary.selectedDownPayment,
+      is_down_payment_in_percentage: true,
+      down_payment_option : []
+    }
+    
+    let checkInDiff = moment(moment(instalmentRequest.checkin_date,'YYYY-MM-DD')).diff(moment().format("YYYY-MM-DD"),'days');
+    if(checkInDiff > 30){          
+      instalmentRequest.down_payment_option = [40,50,60];
+    } else if(checkInDiff > 90){
+      instalmentRequest.down_payment_option = [20,30,40];
     }
     this.genericService.getInstalemnts(instalmentRequest).subscribe((res: any) => {
       if (res.instalment_available == true) {

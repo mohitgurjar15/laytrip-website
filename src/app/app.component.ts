@@ -10,6 +10,7 @@ import { CheckOutService } from './services/checkout.service';
 import { ActivatedRoute } from '@angular/router';
 import { PreloadingService } from './services/preloading.service';
 import { HomeService } from './services/home.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -27,7 +28,8 @@ export class AppComponent {
     private route: ActivatedRoute,
     private userService:UserService,
     public preLoadService : PreloadingService,
-    private homeService:HomeService
+    private homeService:HomeService,
+    private httpClient: HttpClient
   ) {
     this.preloadLandingPageData();
     this.setUserOrigin();

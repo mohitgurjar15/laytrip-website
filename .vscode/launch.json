@@ -9,7 +9,7 @@
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "url": "http://localhost:4200",
+            "url": "https://xfx.no-ip.org:4200",
             "webRoot": "${workspaceFolder}"
         },
         // {

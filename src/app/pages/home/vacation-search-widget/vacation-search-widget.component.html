@@ -17,7 +17,7 @@
                 <li class="grid_box first">
                     <div class="home_where" [ngClass]="{'homecheck-error':rentalSearchFormSubmitted&&  rentalSearchForm.controls.fromDestination.errors && rentalSearchForm.controls.fromDestination.errors.required==true}">
                         <div class="search_area">
-                            <app-vacation-search [form]="rentalSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch1'" [label]="'DESTINATION'" [placeHolder]=defaultCity [defaultSelected]=fromDestinationInfo [tabIndex]=1 [defaultCity]=defaultCity (changeValue)="destinationChangedValue($event)">
+                            <app-vacation-search [form]="rentalSearchForm" [controlName]="'fromDestination'" [id]="'fromSearch1'" [label]="'destination_search' | translate" [placeHolder]=defaultCity [defaultSelected]=fromDestinationInfo [tabIndex]=1 [defaultCity]=defaultCity (changeValue)="destinationChangedValue($event)">
                             </app-vacation-search>
                         </div>
                     </div>

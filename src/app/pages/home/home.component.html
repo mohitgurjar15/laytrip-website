@@ -6,15 +6,14 @@
         <div class="banner_text">
             <div class="block_left" *ngIf="countryCode!='DR'">
                 <span class="banner_text_span" *ngIf="isRefferal">
-                    <h2>$9.99 NY to {{banner_city_name}} Now!</h2>
+                    <h2>$9.99 NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_3' | translate}}{{'now' | translate}}!</h2>
                 </span>
                 <span class="banner_text_span" *ngIf="!isRefferal">
                     <h2 [innerHTML]="'flight_main_title' | translate"></h2>
                     <img class="" src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Flight Icon" />!
                 </span>
-                <p *ngIf="isRefferal">Book Flights and Hotels from NY to {{banner_city_name}} on layaway for $9.99 down and a $20 discount on weekly layaway payment plans.*</p>
-                <p *ngIf="!isRefferal">Book Flights and Hotels on layaway now! <br> Customized payment plans. No credit checks. No interest charges.
-                </p>
+                <p *ngIf="isRefferal">{{'promo_421_1' | translate}} NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_2' | translate}}.*</p>
+                <p *ngIf="!isRefferal" [innerHTML]="'flight_third_title' | translate"></p>
             </div>
         </div>
 

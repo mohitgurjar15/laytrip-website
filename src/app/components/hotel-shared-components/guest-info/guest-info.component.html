@@ -1,7 +1,7 @@
 <div class="search_area">
     <div class="travel_info" id="add_child" (click)="toggleDrawer()">
-        <span>{{roomsGroup.rooms ? roomsGroup.rooms : 1 }}</span> {{roomsGroup.rooms == 1 ? 'Room': 'Rooms'}},
-        <span class="guest_num"> {{roomsGroup.adults + roomsGroup.child}}</span> {{roomsGroup.adults + roomsGroup.child == 1 ? 'Guest': 'Guests'}}
+        <span>{{roomsGroup.rooms ? roomsGroup.rooms : 1 }}</span>{{(roomsGroup.rooms==1?'room':'rooms') | translate}},
+        <span class="guest_num"> {{roomsGroup.adults + roomsGroup.child}}</span> {{(roomsGroup.adults+roomsGroup.child==1?'guest_hotel':'guests_hotel') | translate}}
         <div class="drop_aerrow"></div>
     </div>
 
@@ -9,7 +9,7 @@
         <div class="rooms_aloc">
             <ul>
                 <li>
-                    <div class="left"> <span>Room</span>
+                    <div class="left"> <span>{{'room' | translate}}</span>
                     </div>
                     <div class="right">
                         <button type='button' class='qtyminus' field='quantity' [disabled]="(roomsGroup.rooms  === 1 && roomsGroup.rooms  > 0 )" [ngClass]="{ 'un_active' : roomsGroup.rooms === 1 && roomsGroup.rooms > 0 }" (click)="removeRoom()">-</button>
@@ -18,7 +18,7 @@
                     </div>
                 </li>
                 <li>
-                    <div class="left"> <span>Adult</span>
+                    <div class="left"> <span>{{'adult' | translate}}</span>
                     </div>
 
                     <div class="right">
@@ -28,7 +28,7 @@
                     </div>
                 </li>
                 <li>
-                    <div class="left"> <span>Child</span>
+                    <div class="left"> <span>{{'child' | translate}}</span>
                     </div>
                     <div class="right">
                         <button type='button' class='qtyminus' field='quantity' [ngClass]="{ 'un_active' : roomsGroup.child === 0}" [disabled]="roomsGroup.child === 0" (click)="addRemovePerson({ type: 'minus',label: 'child', value: roomsGroup.child})">-</button>

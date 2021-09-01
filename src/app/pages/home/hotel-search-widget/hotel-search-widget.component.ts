@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, Output, ViewChild ,EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild ,EventEmitter} from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../environments/environment';
 import { CommonFunction } from '../../../_helpers/common-function';
@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../../services/home.service';
 import { BsDaterangepickerInlineConfig } from 'ngx-bootstrap/datepicker';
+import { CalendarTranslations } from '../../../_helpers/generic.helper';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hotel-search-widget',
@@ -58,23 +60,20 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     ],
   };
-  progressInterval;
-  
-  selectedGuest =
-    {
-      rooms: 1,
-      adults: 1,
-      child: 0,
-      children: []
-    }
-    ;
+  progressInterval;  
+  selectedGuest = {
+    rooms: 1,
+    adults: 1,
+    child: 0,
+    children: []
+  };
   $dealLocatoin;
 
   showCommingSoon: boolean = false;
-  customStartDateValidation = "2021-06-02";
-  customEndDateValidation = "2021-06-03";
-
   isDatePickerOpen : boolean = false;
+  isRefferal = this.commonFunction.isRefferal();
+  cal_locale = CalendarTranslations["en"];
+  cal_loaded: boolean = true;
 
   constructor(
     public commonFunction: CommonFunction,
@@ -82,18 +81,17 @@ export class HotelSearchWidgetComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private homeService: HomeService,
-    public cd: ChangeDetectorRef
-
+    private translate: TranslateService
   ) {
+
     this.hotelSearchForm = this.fb.group({
       fromDestination: ['', [Validators.required]],
     });
 
-    this.setHotelDate();
-    this.checkOutMinDate = this.checkInDate;
-
+    this.checkInDate = this.checkInMinDate = this.checkOutMinDate= moment().add(2, 'days').toDate(); 
     this.checkOutDate = moment(this.checkInDate).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
+    
     this.searchHotelInfo =
     {
       latitude: null,
@@ -111,6 +109,10 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (host.includes("staging")) {
       this.showCommingSoon = true;
     }
+
+    translate.onLangChange.subscribe(lang => {
+      this.setCalendarLocale();
+    });
   }
 
   ngOnInit() {
@@ -147,7 +149,8 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.homeService.removeToString('hotel');
 
       this.checkInDate = moment(this.route.snapshot.queryParams['check_in']).toDate();
-      this.checkInMinDate = moment().add(31, 'days').toDate();
+      
+      this.checkInMinDate = this.isRefferal ? moment().add(31, 'days').toDate() : moment().add(2, 'days').toDate();
       this.checkOutDate = moment(this.route.snapshot.queryParams['check_out']).isValid() ? moment(this.route.snapshot.queryParams['check_out']).toDate() : moment(this.route.snapshot.queryParams['check_in']).add(1, 'days').toDate();
       
       this.checkOutMinDate = this.checkOutDate;
@@ -156,8 +159,8 @@ export class HotelSearchWidgetComponent implements OnInit {
       let info;
       this.searchHotelInfo =
       {
-        latitude: this.route.snapshot.queryParams['latitude'],
-        longitude: this.route.snapshot.queryParams['longitude'],
+        latitude: this.route.snapshot.queryParams['x_coordinate'],
+        longitude: this.route.snapshot.queryParams['y_coordinate'],
         check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
         check_out: moment(this.checkOutDate).format('MM/DD/YYYY'),
         city_id: this.route.snapshot.queryParams['city_id'],
@@ -205,34 +208,15 @@ export class HotelSearchWidgetComponent implements OnInit {
       }
     });
     this.homeService.removeToString('hotel');
+    this.setCalendarLocale();
   }
 
   dealDateValidation() {
-    if (moment(moment(this.customStartDateValidation).subtract(31, 'days')).diff(moment(), 'days') > 0) {
-      this.searchHotelInfo.check_in = this.checkInDate = moment(this.customStartDateValidation).toDate();
-    } else {
-      this.searchHotelInfo.check_in = this.checkInDate = moment().add(91, 'days').toDate();
-    }        
+    this.searchHotelInfo.check_in = this.checkInDate = this.checkInMinDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
+     
     this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
-  }
-
-  setHotelDate() {
-    var curretdate = moment().format();
-    let customStartDate: any = moment(this.customStartDateValidation).format('YYYY-MM-DD');
-    let daysDiff = moment(this.customStartDateValidation, "YYYY-MM-DD").diff(moment(curretdate, "YYYY-MM-DD"), 'days');
-
-    if (curretdate < customStartDate && daysDiff > 30) {
-      this.checkInDate = moment(customStartDate).toDate();
-      this.checkInMinDate = this.checkInDate;
-    } else if (daysDiff < 30) {
-      this.checkInDate = moment(curretdate).add(31, 'days').toDate();
-      this.checkInMinDate = this.checkInDate;
-    } else {
-      this.checkInDate = moment(curretdate).add(31, 'days').toDate();
-      this.checkInMinDate = this.checkInDate;
-    }
-  }
+  } 
 
   selectCheckInDateUpdate(date) {
     // this is only for closing date range picker, after selecting both dates
@@ -269,16 +253,16 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
-    if ($('.hotel_desination').val() == '') {
+    if (this.fromDestinationInfo.title.length == 0) {
       this.validSearch = false;
     }
     let queryParams: any = {};
 
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
     queryParams.check_out = moment(this.rangeDates[1]).isValid() ? moment(this.rangeDates[1]).format('YYYY-MM-DD') : moment(this.rangeDates[0]).add(1, 'days').format('YYYY-MM-DD');
-    queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
-    queryParams.latitude = parseFloat(this.searchHotelInfo.latitude);
-    queryParams.longitude = parseFloat(this.searchHotelInfo.longitude);
+    // queryParams.check_out = moment(this.rangeDates[1]).format('YYYY-MM-DD');
+    queryParams.x_coordinate = parseFloat(this.searchHotelInfo.latitude);
+    queryParams.y_coordinate = parseFloat(this.searchHotelInfo.longitude);
     queryParams.city_id = parseFloat(this.searchHotelInfo.city_id);
     queryParams.city_name = this.searchHotelInfo.city.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-')
     if (this.searchHotelInfo.hotel_name) {
@@ -355,7 +339,24 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.isDatePickerOpen = false;
   }
 
-  // Author: xavier | 2021/6/28 @ 8:45pm
+  // Author: xavier | 2021/8/17
+  // Description: Calendar localization
+  // The input field does not refresh when changing the locale:
+  //  https://github.com/primefaces/primeng/issues/1706
+  // Probably a better approach?
+  //  https://github.com/primefaces/primeng/issues/5151#issuecomment-763918829
+  setCalendarLocale() {
+    this.cal_loaded = false;
+    let userLang = JSON.parse(localStorage.getItem('_lang'));
+    if(userLang == null) {
+      this.cal_locale = CalendarTranslations["en"];
+    } else {
+      this.cal_locale = CalendarTranslations[userLang.iso_1Code];
+    }
+    setTimeout(() => this.cal_loaded = true, 0);
+  }
+
+  // Author: xavier | 2021/6/28
   // Description: Preliminary support to color-code dates on calendar
   // refreshHighlights() {
   //   const red =     "#FF6961";

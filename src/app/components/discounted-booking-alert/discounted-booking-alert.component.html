@@ -8,10 +8,10 @@
                     <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Close Popup">
                 </div>
                 <div class="cart_msg discounted_alert_popup">
-                    Discounted bookings cannot be combined with non-discounted bookings. Checkout your discounted bookings then search for non-discounted bookings.
+                    {{'mix_cart_msg' | translate}}
                 </div>
                 <div class="cta_btn_wrps">
-                    <button (click)="close()">Close</button>
+                    <button (click)="close()">{{'close' | translate}}</button>
                 </div>
                 <div class="footer_logo">
                     <a>

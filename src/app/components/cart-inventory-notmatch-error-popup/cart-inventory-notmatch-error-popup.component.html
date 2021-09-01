@@ -1,20 +1,17 @@
 <div class="modal-content">
-    <!--  <div class="modal_title">
-        <button type="button" class="close" (click)="close()">
-            <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-        </button>
-    </div> -->
+    <div class="modal_title">
+    </div>
     <div class="session_expired_modal_wrp">
-        <div class="session_expired_main_wrapper">
+        <div class="discounted_main_wrapper">
             <div class="inner_wrppar">
                 <div class="cart_img_wrpper">
-                    <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="empty cart image">
+                    <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Close Popup">
                 </div>
-                <div class="cart_msg">
-                    {{'session_expired' | translate}}
+                <div class="cart_msg discounted_alert_popup">
+                    Only full payment can’t be merge with installment payment.
                 </div>
                 <div class="cta_btn_wrps">
-                    <button (click)="refresh()">Refresh</button>
+                    <button (click)="close()">{{'close' | translate}}</button>
                 </div>
                 <div class="footer_logo">
                     <a>

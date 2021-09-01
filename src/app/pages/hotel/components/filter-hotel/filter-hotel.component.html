@@ -3,7 +3,7 @@
         <div class="accordion-group" [ngClass]="{'active': is_open === true}">
             <div class="accordion-heading" (click)="toggleFilter()">
                 <a class="accordion-toggle">
-          Filters
+          {{'filters' | translate}}
         </a>
             </div>
             <div id="collapseThree" class="accordion-body collapse" [ngClass]="{'show': is_open === true}">
@@ -11,12 +11,12 @@
                     <div class="fliter_block">
                         <div class="cmn_block">
                             <div class="block_top_in">
-                                <h5 class="title_h5">Hotel Name
+                                <h5 class="title_h5">{{'hotel_name' | translate}}
                                     <a class="anchor_link" (click)="resetFilter()"> {{'clear' | translate}}</a>
                                 </h5>
                             </div>
                             <div class="searchbar_box">
-                                <input (blur)="onBlurMethod($event)" type="text" class="searchHotelName" placeholder="Search" tabindex="3" (keyup)="searchHotelName($event)" value="{{searchHotel}}">
+                                <input (blur)="onBlurMethod($event)" type="text" class="searchHotelName" placeholder="{{'search' | translate}}" tabindex="3" (keyup)="searchHotelName($event)" value="{{searchHotel}}">
 
                                 <div class="search_suggetion_main" *ngIf="isHotelSearch">
                                     <div class="close_btn">
@@ -41,11 +41,11 @@
                         </div>
                         <div class="cmn_block price">
                             <div class="block_top_in">
-                                <h5>Total Price</h5>
+                                <h5>{{'total_price' |translate}}</h5>
                             </div>
                             <form [formGroup]="priceSlider">
                                 <div class="custom_range_slide">
-                                    <p>{{ currency?.symbol }}{{priceValue | number : '1.2-2'}} - {{ currency?.symbol }}{{priceHighValue | number : '1.2-2'}}</p>
+                                    <p>{{ currency?.symbol }}{{priceValue | number : '1.0-0'}} - {{ currency?.symbol }}{{priceHighValue | number : '1.0-0'}}</p>
                                     <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue" [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions" (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
                                 </div>
                             </form>
@@ -53,12 +53,12 @@
                         </div>
                         <div class="cmn_block price" *ngIf="partialPaymentValue > 0 && partialPaymentHighValue > 0">
                             <div class="block_top_in">
-                                <h5>Installment Amount</h5>
+                                <h5>{{'installment_amount' | translate}}</h5>
                             </div>
 
                             <form [formGroup]="partialPriceSlider">
                                 <div class="custom_range_slide">
-                                    <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}} Weekly
+                                    <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.0-0'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.0-0'}} Weekly
                                     </p>
                                     <ng5-slider *ngIf="partialPaymentValue && partialPaymentOptions && partialPaymentHighValue" [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" formControlName="partial_price" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)"></ng5-slider>
                                 </div>
@@ -82,7 +82,7 @@
                             <div class="accordion block_shortby inner_accodeions" id="accordion-starrates">
                                 <div class="accordion-group" [ngClass]="{'active': lowToHighToggleRating  === true}">
                                     <div class="accordion-heading no_accordion" (click)="toggleLowToHighRating()"> <a class="accordion-toggle">
-                      Star Ratings
+                      {{'star_ratings' | translate}}
                     </a> </div>
                                     <div id="collapseOutbound" class="accordion-body filter_acc ">
                                         <div class="accordion-inner">
@@ -132,7 +132,7 @@
                             <div class="accordion block_shortby inner_accodeions" id="accordion-amenities">
                                 <div class="accordion-group" [ngClass]="{'active': lowToHighToggleAmenities  === true}">
                                     <div class="accordion-heading no_accordion" (click)="toggleLowToHighAmenities()"> <a class="accordion-toggle">
-                      Amenities
+                      {{'amenities' | translate}}
                     </a> </div>
                                     <div id="collapseInbound" class="accordion-body filter_acc">
                                         <div class="accordion-inner">
@@ -142,7 +142,7 @@
                                                         <label class="custom_checkbox">
                               <input type="checkbox" value="{{item.title}}"
                                 (click)="filterByHotelAmenities($event,item.title)">
-                              <span class="checkmark"></span>{{item.title}}</label>
+                              <span class="checkmark"></span>{{translateAmenities(item.title)}}</label>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -165,7 +165,7 @@
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle">
-          Filters
+          {{'filters' | translate}}
         </a>
 
                 <button type="button" class="close" (click)="closeModal()">
@@ -177,12 +177,12 @@
                     <div class="fliter_block">
                         <div class="cmn_block">
                             <div class="block_top_in">
-                                <h5 class="title_h5">Hotel Name
+                                <h5 class="title_h5">{{'hotel_name' | translate}}
                                     <a class="anchor_link" (click)="resetFilter()"> {{'clear' | translate}}</a>
                                 </h5>
                             </div>
                             <div class="searchbar_box">
-                                <input type="text" placeholder="Search" tabindex="3" class="searchHotelName" (keyup)="searchHotelName($event)" value="{{searchHotel}}">
+                                <input type="text" placeholder="{{'search' | translate}}" tabindex="3" class="searchHotelName" (keyup)="searchHotelName($event)" value="{{searchHotel}}">
 
                                 <div class="search_suggetion_main" *ngIf="isHotelSearch">
                                     <div class="close_btn">
@@ -207,22 +207,22 @@
                         </div>
                         <div class="cmn_block price">
                             <div class="block_top_in">
-                                <h5>Total Price</h5>
+                                <h5>{{'total_price' | translate}}</h5>
                             </div>
                             <form [formGroup]="priceSlider">
                                 <div class="custom_range_slide">
-                                    <p>{{ currency?.symbol }}{{priceValue | number : '1.2-2'}} - {{ currency?.symbol }}{{priceHighValue | number : '1.2-2'}}</p>
+                                    <p>{{ currency?.symbol }}{{priceValue | number : '1.0-0'}} - {{ currency?.symbol }}{{priceHighValue | number : '1.0-0'}}</p>
                                     <ng5-slider *ngIf="priceValue && priceOptions && priceHighValue" [(value)]="priceValue" [(highValue)]="priceHighValue" formControlName="price" [options]="priceOptions" (userChangeEnd)="fliterByPrice($event)"></ng5-slider>
                                 </div>
                             </form>
                         </div>
                         <div class="cmn_block price" *ngIf="partialPaymentValue > 0 && partialPaymentHighValue > 0">
                             <div class="block_top_in">
-                                <h5>Installment Amount</h5>
+                                <h5>{{'installment_amount' | translate}}</h5>
                             </div>
                             <form [formGroup]="partialPriceSlider" class="custom_range_form_slider">
                                 <div class="custom_range_slide">
-                                    <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.2-2'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.2-2'}} Weekly
+                                    <p>{{ currency?.symbol }}{{partialPaymentValue | number : '1.0-0'}} - {{ currency?.symbol }}{{partialPaymentHighValue | number : '1.0-0'}} {{'weekly' | translate}}
                                     </p>
                                     <ng5-slider *ngIf="partialPaymentValue  && partialPaymentHighValue" [(value)]="partialPaymentValue" [(highValue)]="partialPaymentHighValue" formControlName="partial_price" [options]="partialPaymentOptions" (userChangeEnd)="fliterByPartialPayment($event)"></ng5-slider>
                                 </div>
@@ -246,7 +246,7 @@
                             <div class="accordion block_shortby inner_accodeions" id="accordion-starrates">
                                 <div class="accordion-group" [ngClass]="{'active': lowToHighToggleRating  === true}">
                                     <div class="accordion-heading no_accordion" (click)="toggleLowToHighRating()"> <a class="accordion-toggle">
-                      Star Ratings
+                      {{'star_ratings' | translate}}
                     </a> </div>
                                     <div id="collapseOutbound" class="accordion-body filter_acc ">
                                         <div class="accordion-inner">
@@ -282,7 +282,7 @@
                             <div class="accordion block_shortby inner_accodeions" id="accordion-amenities">
                                 <div class="accordion-group" [ngClass]="{'active': lowToHighToggleAmenities  === true}">
                                     <div class="accordion-heading no_accordion" (click)="toggleLowToHighAmenities()"> <a class="accordion-toggle">
-                      Amenities
+                      {{'amenities' | translate}}
                     </a> </div>
                                     <div id="collapseInbound" class="accordion-body filter_acc">
                                         <div class="accordion-inner">
@@ -292,7 +292,7 @@
                                                         <label class="custom_checkbox">
                               <input type="checkbox" value="{{item.title}}"
                                 (click)="filterByHotelAmenities($event,item.title)">
-                              <span class="checkmark"></span>{{item.title}}</label>
+                              <span class="checkmark"></span>{{translateAmenities(item.title)}}</label>
                                                     </li>
                                                 </ul>
                                             </div>

@@ -262,6 +262,7 @@ export class TravellerFormComponent implements OnInit {
         passport_number: this.travellerForm.value.passport_number,
         country_code: this.travellerForm.value.country_code ? this.travellerForm.value.country_code : '',
         phone_no: this.travellerForm.value.phone_no,
+        module_id: 1
       };
       let emailObj = { email: this.travellerForm.value.email ? this.travellerForm.value.email : '' };
 
