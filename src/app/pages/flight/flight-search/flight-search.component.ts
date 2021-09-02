@@ -123,10 +123,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.fullPageLoading = false;
           this.isNotFound = false;
-          // this.flightDetails = res.items.slice(0, 25);
+          this.flightDetails = res.items;
           this.filterFlightDetails = res;
-          // this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-
           if (this.flightDetails.length == 0) {
             this.isNotFound = true;
           }

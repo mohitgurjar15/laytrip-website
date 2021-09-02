@@ -166,11 +166,12 @@ export class HotelItemWrapperComponent implements OnInit {
         }
         this.hotelDetails[i].dots = this.hotelDetails[i].galleryImages.length > 5 ? 5 : this.hotelDetails[i].galleryImages.length;
         this.hotelDetails[i].activeSlide = 1;
+        this.hotelCount = this.hotelDetails.length;
+        this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
+
       }
-      this.hotelCount = this.hotelDetails.length;
       this.currentPage = 1;
       
-      this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
       this.hotelList = [...this.hotelListArray];
       if (this.bounds) {
         this.checkMarkersInBounds(this.bounds)

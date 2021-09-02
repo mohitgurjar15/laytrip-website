@@ -10,11 +10,11 @@ import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DiscountedBookingAlertComponent } from '../../../../components/discounted-booking-alert/discounted-booking-alert.component';
 import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
+import { CartInventoryNotmatchErrorPopupComponent } from '../../../../components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -24,7 +24,7 @@ import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/car
 })
 export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
-  flightDetails;
+  flightDetails = [];
   @Input() filter;
   @Input() filteredLabel;
   @Output() changeLoading = new EventEmitter;
@@ -88,8 +88,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     public modalService: NgbModal,
     private decimalPipe: DecimalPipe,
     private cd: ChangeDetectorRef,
-
-
   ) {
   }
 
@@ -116,9 +114,10 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       if(data.length){
         this.flightItems = data;            
       }
+      this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+
     });
 
-    this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
     for (let i = 0; i < this.flightDetails.length; i++) {
       if (this.flightDetails[i].payment_object.weekly)
         this.flightDetails[i].selected_option = 'weekly';
@@ -352,6 +351,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
+      console.log(changes.flightDetails.currentValue)
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
       this.filteredLabel = changes.filteredLabel.currentValue;
     }
@@ -460,11 +460,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     }
    
   }
+
   getCancellationPolicy(route_code) {
     return "#";
   }
 }
-
-
-
-
