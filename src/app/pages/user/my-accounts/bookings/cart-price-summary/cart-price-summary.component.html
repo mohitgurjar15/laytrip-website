@@ -1,47 +1,23 @@
 <div class="price_listing_wrpper" *ngIf="(cartItem | json) != '[]'">
 
-    <div class="booking_summary_sect">
-        <div class="summary_box">
+    <div class="booking_summary_sect" *ngFor="let item of cartItem.booking;">
+        <div class="summary_box" *ngIf="item.moduleId === 1">
             <div class="summary_item">
                 <div class="summary_type">
-                    JFK-MIA (Taxes and Fees Included)
+                    {{item.locationInfo.source_location}}-{{item.locationInfo.destination_location}} (Taxes and Fees Included)
                 </div>
                 <div class="summary_item_price">
-                    $100<sup>.89</sup>
-                </div>
-            </div>
-            <div class="summary_item">
-                <div class="summary_type">
-                    FLL-JFK (Taxes and Fees Included)
-                </div>
-                <div class="summary_item_price">
-                    $100<sup>.89</sup>
+                    ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
                 </div>
             </div>
         </div>
-        <div class="summary_box">
+        <div class="summary_box" *ngIf="item.moduleId === 3">
             <div class="summary_item">
                 <div class="summary_type">
-                    Marriott Miami (2 Nights x $100)
+                    {{item.moduleInfo[0].hotel_name}} ({{item.moduleInfo[0].input_data.num_nights}} {{item.moduleInfo[0].input_data.num_nights >1 ? 'Nights' : 'Night' }} x ${{item.totalAmount}})
                 </div>
                 <div class="summary_item_price">
-                    $100<sup>.89</sup>
-                </div>
-            </div>
-            <div class="summary_item">
-                <div class="summary_type">
-                    Marriott Miami <a href="javascript:void(0);"> Taxes and Fees</a> 
-                </div>
-                <div class="summary_item_price">
-                    $100<sup>.89</sup>
-                </div>
-            </div>
-            <div class="summary_item">
-                <div class="summary_type">
-                    Marriott Miami Resort Fee
-                </div>
-                <div class="summary_item_price">
-                    $100<sup>.89</sup>
+                    ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
                 </div>
             </div>
         </div>
@@ -51,7 +27,7 @@
                     Total Purchases
                 </div>
                 <div class="summary_item_price">
-                    $900<sup>.89</sup>
+                    ${{beforeDesimal(cartItem.totalAmount)}}<sup>.{{afterDesimal(cartItem.totalAmount)}}</sup>
                 </div>
             </div>
         </div>
@@ -69,7 +45,7 @@
                     Add-on Baggage
                 </div>
                 <div class="summary_item_price">
-                    $50<sup>.89</sup>
+                    $00<sup>.00</sup>
                 </div>
             </div>
             <div class="summary_item">
@@ -77,7 +53,7 @@
                     Applied Laytrip Points
                 </div>
                 <div class="summary_item_price">
-                    -$30<sup>.89</sup>
+                    ${{beforeDesimal(item.layCredit)}}<sup>.{{afterDesimal(item.layCredit)}}</sup>
                 </div>
             </div>
         </div>
@@ -112,7 +88,7 @@
                                             </div>
                                         </div>
                                         <div class="right_sec">
-                                            $50<sup>.89</sup>
+                                            ${{beforeDesimal(installment.amount)}}<sup>.{{afterDesimal(installment.amount)}}</sup>
                                             <!-- ${{ installment.amount | number : '1.2-2' }} -->
                                             <span class="paid_markss">
                                                 <i class="fa fa-check-circle" aria-hidden="true" *ngIf="installment.instalmentStatus"></i>
@@ -126,13 +102,13 @@
                 </div>
             </div>
         </div>
-        <div class="summary_box total_p_wrp">
+        <div class="summary_box total_p_wrp" *ngIf="(cartItem.cartInstallments | json) != '[]'">
             <div class="summary_item summary_item_total w-100">
                 <div class="summary_type">
                     {{'total_installments' | translate}}
                 </div>
                 <div class="summary_item_price">
-                    $700<sup>.89</sup>
+                    ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
                     <!-- ${{ totalInstallmentAmount || 0 | number : '1.2-2' }} -->
                     <span class="paid_markss">
                         <i class="fa fa-check-circle" aria-hidden="true"></i>
@@ -143,7 +119,7 @@
     </div>
 </div>
 
-    <!-- <div class="total_p_wrp bb">
+<!-- <div class="total_p_wrp bb">
         <div class="left_sec">
             {{'total_purchases' | translate}}
             <span>
@@ -156,7 +132,7 @@
         <span class="fake_paid_markss">
         </span>
     </div> -->
-   <!-- <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
+<!-- <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
          <div class="line_desc black_line_head">
             <div class="left_sec">
                 {{'booking_downpayment' | translate}}
