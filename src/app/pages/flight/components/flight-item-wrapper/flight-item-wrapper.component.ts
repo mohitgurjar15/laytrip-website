@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
@@ -11,10 +11,10 @@ import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
 import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
+import { DiscountedBookingAlertComponent } from '../../../../components/discounted-booking-alert/discounted-booking-alert.component';
 import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
+import { CartInventoryNotmatchErrorPopupComponent } from '../../../../components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -80,7 +80,9 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     private genericService: GenericService,
     private cartService: CartService,
     public modalService: NgbModal,
-    private decimalPipe: DecimalPipe
+    private decimalPipe: DecimalPipe,
+    private cd: ChangeDetectorRef
+
 
   ) {
   }
@@ -108,9 +110,9 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       if(data.length){
         this.flightItems = data;            
       }
+      this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
     });
 
-    this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
 
     // Author: xavier | 2021/8/3
     // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
@@ -402,21 +404,22 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   onScrollDown() {
-    this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
+    if (this.flightDetails.length != 0) {
+      this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
 
-    setTimeout(() => {
-      console.log('here')
-      if (this.noOfDataToShowInitially <= this.flightDetails.length) {
-        this.noOfDataToShowInitially += this.dataToLoad;
-        this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-        console.log(this.flightDetails)
-        this.scrollLoading = false;
-      } else {
-        this.scrollLoading = false;
-      }
-    }, 2000);
-    console.log(this.scrollLoading)
+      setTimeout(() => {
+        if (this.noOfDataToShowInitially <= this.flightDetails.length) {
+          this.noOfDataToShowInitially += this.dataToLoad;
+          this.flightDetails = [...this.flightItems.slice(0, this.noOfDataToShowInitially)];
+          this.cd.detectChanges();
+          this.scrollLoading = false;
+        } else {
+          this.scrollLoading = false;
+        }
+      }, 2000);
+    }
   }
+
   getCancellationPolicy(route_code) {
     return "#";
   }
