@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { MyAccountsRoutingModule } from './my-accounts-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { MyAccountsNavComponent } from './my-accounts-nav/my-accounts-nav.component';
@@ -78,7 +78,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ComponentsModule,
     NgxMaskModule.forRoot(),
   ],
-  providers: [DatePipe, NgbActiveModal],
+  providers: [DatePipe, NgbActiveModal,DecimalPipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [TravellerFormComponent, CardActionFormComponent, ConfirmationModalComponent, SendEmailPopupComponent]
 })

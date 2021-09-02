@@ -10,11 +10,11 @@ import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DiscountedBookingAlertComponent } from '../../../../components/discounted-booking-alert/discounted-booking-alert.component';
 import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
+import { CartInventoryNotmatchErrorPopupComponent } from '../../../../components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -88,8 +88,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     public modalService: NgbModal,
     private decimalPipe: DecimalPipe,
     private cd: ChangeDetectorRef,
-
-
   ) {
   }
 
@@ -464,11 +462,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     }
    
   }
+
   getCancellationPolicy(route_code) {
     return "#";
   }
 }
-
-
-
-

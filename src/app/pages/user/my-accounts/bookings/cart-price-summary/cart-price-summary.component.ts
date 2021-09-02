@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import {installmentType} from '../../../../../_helpers/generic.helper';
@@ -15,7 +16,9 @@ export class CartPriceSummaryComponent implements OnInit {
   totalInstallmentAmount : any = 0;
   userLang: string = "en";
 
-  constructor(public commonFunction:CommonFunction) {
+  constructor(public commonFunction:CommonFunction,
+    private decimalPipe: DecimalPipe
+    ) {
     // Author: xavier | 2021/7/28
     // Description: Translates installment type
     this.userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
@@ -23,6 +26,7 @@ export class CartPriceSummaryComponent implements OnInit {
    }
 
   ngOnInit(): void { 
+    console.log('cartItemt',this.cartItem)
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -57,5 +61,19 @@ export class CartPriceSummaryComponent implements OnInit {
     return loopNumber;
   }
 
+  beforeDesimal(value){
+    console.log(value)
+    value = this.transformDecimal(value)
+    return parseFloat(value.toString().split(".")[0]) == 0 ? "00" : parseFloat(value.toString().split(".")[0])
+  }
+
+  afterDesimal(value){
+    value = this.transformDecimal(value)
+    return parseFloat(value.toString().split(".")[1]) == 0 ? "00" : parseFloat(value.toString().split(".")[1])
+  }
+
+  transformDecimal(num) {
+    return this.decimalPipe.transform(num, '1.2-2');
+  }
   
 }

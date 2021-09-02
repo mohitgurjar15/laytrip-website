@@ -240,42 +240,47 @@ export class TravelerFormComponent implements OnInit {
     if (this.userInfo.roleId != 7 && this.cartItem.travelers.length==0) {
 
       let traveler = this.myTravelers.find(traveler => traveler.userId ==this.userInfo.user_id);
-      this.travelers[`type${this.cartNumber}`].adults[0].type = 'adult';
-      this.travelers[`type${this.cartNumber}`].adults[0].userId = traveler.userId;
-      this.travelers[`type${this.cartNumber}`].adults[0].first_name = traveler.firstName;
-      this.travelers[`type${this.cartNumber}`].adults[0].last_name = traveler.lastName;
-      this.travelers[`type${this.cartNumber}`].adults[0].gender = traveler.gender || '';
-      this.travelers[`type${this.cartNumber}`].adults[0].email = traveler.email;
-      this.travelers[`type${this.cartNumber}`].adults[0].country_code = traveler.countryCode || '';
-      this.travelers[`type${this.cartNumber}`].adults[0].phone_no = traveler.phoneNo || '';
-      this.travelers[`type${this.cartNumber}`].adults[0].country_id = traveler.country != null ? traveler.country.id : '';
-      this.travelers[`type${this.cartNumber}`].adults[0].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY'):'';
-      this.travelers[`type${this.cartNumber}`].adults[0].is_active=true;
-      if (this.travelers[`type${this.cartNumber}`].adults[0].is_passport_required) {
-        this.travelers[`type${this.cartNumber}`].adults[0].passport_number = traveler.passportNumber;
-        this.travelers[`type${this.cartNumber}`].adults[0].passport_expiry = traveler.passportExpiry && traveler.passportExpiry != 'Invalid date' ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
+      if(typeof traveler != 'undefined'){
+
+        this.travelers[`type${this.cartNumber}`].adults[0].type = 'adult';
+        this.travelers[`type${this.cartNumber}`].adults[0].userId = traveler.userId;
+        this.travelers[`type${this.cartNumber}`].adults[0].first_name = traveler.firstName;
+        this.travelers[`type${this.cartNumber}`].adults[0].last_name = traveler.lastName;
+        this.travelers[`type${this.cartNumber}`].adults[0].gender = traveler.gender || '';
+        this.travelers[`type${this.cartNumber}`].adults[0].email = traveler.email;
+        this.travelers[`type${this.cartNumber}`].adults[0].country_code = traveler.countryCode || '';
+        this.travelers[`type${this.cartNumber}`].adults[0].phone_no = traveler.phoneNo || '';
+        this.travelers[`type${this.cartNumber}`].adults[0].country_id = traveler.country != null ? traveler.country.id : '';
+        this.travelers[`type${this.cartNumber}`].adults[0].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY'):'';
+        this.travelers[`type${this.cartNumber}`].adults[0].is_active=true;
+        if (this.travelers[`type${this.cartNumber}`].adults[0].is_passport_required) {
+          this.travelers[`type${this.cartNumber}`].adults[0].passport_number = traveler.passportNumber;
+          this.travelers[`type${this.cartNumber}`].adults[0].passport_expiry = traveler.passportExpiry && traveler.passportExpiry != 'Invalid date' ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
+        }
+        let travelerData = this.travelers[`type${this.cartNumber}`].adults[0];
+        travelerData.cart_id = this.cartId;
+        travelerData.dob = traveler.dob ?traveler.dob:'';
+        this.createTraveler(travelerData,this.cartNumber,this.traveler_number);
       }
-      let travelerData = this.travelers[`type${this.cartNumber}`].adults[0];
-      travelerData.cart_id = this.cartId;
-      travelerData.dob = traveler.dob ?traveler.dob:'';
-      this.createTraveler(travelerData,this.cartNumber,this.traveler_number);
     }
 
     for (let i = 0; i < this.cartItem.travelers.length; i++) {
       let traveler = this.cartItem.travelers[i].traveler;
-      this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
-      this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
-      this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
-      this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
-      this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender || '';
-      this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
-      this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode || '';
-      this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo || '';
-      this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
-      this.travelers[`type${this.cartNumber}`].adults[i].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY'):'';
-      if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
-        this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
-        this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry && traveler.passportExpiry != 'Invalid date' ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
+      if (typeof traveler != 'undefined') {
+        this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
+        this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
+        this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;
+        this.travelers[`type${this.cartNumber}`].adults[i].last_name = traveler.lastName;
+        this.travelers[`type${this.cartNumber}`].adults[i].gender = traveler.gender || '';
+        this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
+        this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode || '';
+        this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo || '';
+        this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
+        this.travelers[`type${this.cartNumber}`].adults[i].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY'):'';
+        if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
+          this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
+          this.travelers[`type${this.cartNumber}`].adults[i].passport_expiry = traveler.passportExpiry && traveler.passportExpiry != 'Invalid date' ? moment(traveler.passportExpiry, "YYYY-MM-DD").format('MM/DD/YYYY') : '';
+        }
       }
     }
     
