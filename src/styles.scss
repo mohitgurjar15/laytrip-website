@@ -1581,6 +1581,10 @@ select {
 
                 &:last-child {
                   margin: 0;
+                  &.deal_switch_mobile{
+                    display: flex !important;
+                    justify-content: space-between;
+                  }
                 }
               }
             }

@@ -12,6 +12,7 @@ declare var $: any;
 export class PriceSummaryComponent implements OnInit {
 
   @Input() priceSummary;
+  @Input() installmentSummary;
   @Input() cartPrices = [];
   insatllmentAmount: number = 0;
   s3BucketUrl = environment.s3BucketUrl;

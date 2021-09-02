@@ -6,44 +6,46 @@
             <app-booking-timer (sessionTimeout)="sessionTimeout($event)" [config]="bookingTimerConfig">
             </app-booking-timer>
             <div class="row">
-                <div class="col-lg-7">
-                    <h3>{{'your_bookings' | translate}}</h3>
-                    <div class="booking_detail_bg_wrps">
-                        <app-cart *ngIf="carts && carts.length" [carts]="carts"></app-cart>
-                        <app-cart-loader *ngIf="cartLoading"></app-cart-loader>
-                    </div>
-                    <div class="card_details_wrppers">
-                        <div class="title_bar">
-                            <h3>{{'payment_card_details' | translate}}</h3>
-                            <span class="edit_btns" [hidden]="totalCard === 0">
-                                <a class="anchor-tag" (click)="addNewCard()">{{'add_new_card' | translate}}</a>
-                            </span>
-                        </div>
+                <div class="col-lg-8">
+                    <div class="checkout_right_booking">
+                        <h3>{{'your_bookings' | translate}}</h3>
                         <div class="booking_detail_bg_wrps">
-                            <div id="accordion-card" class="card_accordion">
-                                <div class="card">
-                                    <app-card-list cardListChangeCount="{{cardListChangeCount}}"
-                                    (selectCreditCard)="selectCreditCard($event)"
-                                         cardToken={{cardToken}}>
-                                    </app-card-list>
-                                    <div id="new_card" class="new_card" [ngClass]="{'mt-0':add_new_card}"
-                                        [hidden]="!add_new_card && totalCard !== 0">
-                                        <div class="card-header">
-                                            <a class="card-link" data-toggle="collapse" href="#collapseOne"
-                                                aria-controls="collapseOne" aria-expanded="true">
-                                                <span class="heade_wrps">
-                                                    <img src="{{s3BucketUrl}}assets/images/card_gray.svg"
-                                                        alt="Card icon" />
-                                                        {{'new_f' | translate}}
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                            <div class="card-body">
-                                                <app-add-card totalCard="{{totalCard}}"
-                                                    (add_new_card)="closeNewCardPanel($event)"
-                                                    (emitCardListChange)="getCardListChange($event)">
-                                                </app-add-card>
+                            <app-cart *ngIf="carts && carts.length" [carts]="carts"></app-cart>
+                            <app-cart-loader *ngIf="cartLoading"></app-cart-loader>
+                        </div>
+                        <div class="card_details_wrppers">
+                            <div class="title_bar">
+                                <h3>{{'payment_card_details' | translate}}</h3>
+                                <span class="edit_btns" [hidden]="totalCard === 0">
+                                    <a class="anchor-tag" (click)="addNewCard()">{{'add_new_card' | translate}}</a>
+                                </span>
+                            </div>
+                            <div class="booking_detail_bg_wrps">
+                                <div id="accordion-card" class="card_accordion">
+                                    <div class="card">
+                                        <app-card-list cardListChangeCount="{{cardListChangeCount}}"
+                                        (selectCreditCard)="selectCreditCard($event)"
+                                            cardToken={{cardToken}}>
+                                        </app-card-list>
+                                        <div id="new_card" class="new_card" [ngClass]="{'mt-0':add_new_card}"
+                                            [hidden]="!add_new_card && totalCard !== 0">
+                                            <div class="card-header">
+                                                <a class="card-link" data-toggle="collapse" href="#collapseOne"
+                                                    aria-controls="collapseOne" aria-expanded="true">
+                                                    <span class="heade_wrps">
+                                                        <img src="{{s3BucketUrl}}assets/images/card_gray.svg"
+                                                            alt="Card icon" />
+                                                            {{'new_f' | translate}}
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                                <div class="card-body">
+                                                    <app-add-card totalCard="{{totalCard}}"
+                                                        (add_new_card)="closeNewCardPanel($event)"
+                                                        (emitCardListChange)="getCardListChange($event)">
+                                                    </app-add-card>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-4">
                     <div class="payment_container">
                         <div class="payment_mode_wrapper">
                             <app-payment-mode-loader *ngIf="cartLoading"></app-payment-mode-loader>
@@ -61,7 +63,8 @@
                                 (getInstalmentData)="getInstalmentData($event)"
                                 (redeemableLayCredit)="redeemableLayCredit($event)">
                             </app-payment-mode>
-                            <app-price-summary [priceSummary]="priceSummary" [cartPrices]="cartPrices">
+                            
+                            <app-price-summary *ngIf="carts.length" [installmentSummary]="installmentSummary" [priceSummary]="priceSummary" [cartPrices]="cartPrices">
                             </app-price-summary>
                         </div>
                         <label class="custom_checkbox">

@@ -27,6 +27,7 @@ export class HotelSuggestionComponent implements OnInit {
   isInputFocus : boolean = false;
   progressInterval;
   counterChangeVal=0;
+  isDealIcon = false;
 
   constructor(
     private hotelService: HotelService,

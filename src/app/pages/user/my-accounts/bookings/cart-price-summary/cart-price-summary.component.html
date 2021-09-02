@@ -1,5 +1,149 @@
 <div class="price_listing_wrpper" *ngIf="(cartItem | json) != '[]'">
-    <div class="total_p_wrp bb">
+
+    <div class="booking_summary_sect">
+        <div class="summary_box">
+            <div class="summary_item">
+                <div class="summary_type">
+                    JFK-MIA (Taxes and Fees Included)
+                </div>
+                <div class="summary_item_price">
+                    $100<sup>.89</sup>
+                </div>
+            </div>
+            <div class="summary_item">
+                <div class="summary_type">
+                    FLL-JFK (Taxes and Fees Included)
+                </div>
+                <div class="summary_item_price">
+                    $100<sup>.89</sup>
+                </div>
+            </div>
+        </div>
+        <div class="summary_box">
+            <div class="summary_item">
+                <div class="summary_type">
+                    Marriott Miami (2 Nights x $100)
+                </div>
+                <div class="summary_item_price">
+                    $100<sup>.89</sup>
+                </div>
+            </div>
+            <div class="summary_item">
+                <div class="summary_type">
+                    Marriott Miami <a href="javascript:void(0);"> Taxes and Fees</a> 
+                </div>
+                <div class="summary_item_price">
+                    $100<sup>.89</sup>
+                </div>
+            </div>
+            <div class="summary_item">
+                <div class="summary_type">
+                    Marriott Miami Resort Fee
+                </div>
+                <div class="summary_item_price">
+                    $100<sup>.89</sup>
+                </div>
+            </div>
+        </div>
+        <div class="summary_box">
+            <div class="summary_item summary_item_total">
+                <div class="summary_type">
+                    Total Purchases
+                </div>
+                <div class="summary_item_price">
+                    $900<sup>.89</sup>
+                </div>
+            </div>
+        </div>
+        <div class="summary_box">
+            <div class="summary_item">
+                <div class="summary_type">
+                    Booking Downpayment
+                </div>
+                <div class="summary_item_price">
+                    $180<sup>.89</sup>
+                </div>
+            </div>
+            <div class="summary_item">
+                <div class="summary_type">
+                    Add-on Baggage
+                </div>
+                <div class="summary_item_price">
+                    $50<sup>.89</sup>
+                </div>
+            </div>
+            <div class="summary_item">
+                <div class="summary_type">
+                    Applied Laytrip Points
+                </div>
+                <div class="summary_item_price">
+                    -$30<sup>.89</sup>
+                </div>
+            </div>
+        </div>
+        <div class="summary_box">
+            <div class="summary_item summary_item_total">
+                <div class="summary_type">
+                    Downpayment
+                </div>
+                <div class="summary_item_price">
+                    $200<sup>.89</sup>
+                </div>
+            </div>
+        </div>
+        <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
+            <div class="listing_accordion">
+                <div id="accordion_listing">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#listing_descrip">
+                                {{cartItem?.cartInstallments?.length -1 }} {{installmentType[userLang][cartItem.installmentType]}} {{'installments_of' | translate}} ${{cartItem?.cartInstallments[1]?.amount | number : '1.2-2'}}
+                            </a>
+                        </div>
+                        <div id="listing_descrip" class="collapse show" Paid data-parent="#accordion_listing">
+                            <div class="card-body pb-0">
+                                <ng-container *ngFor="let installment of cartItem.cartInstallments | slice:1;let i = index ;">
+                                    <div class="line_desc paid_clr" [ngClass]="{'paid_clr' : (installment.instalmentStatus), 'due_clr' : (  installment.dueInstallment && !installment.instalmentStatus),'' : (  !installment.dueInstallment && !installment.instalmentStatus) }">
+                                        <div class="left_sec">
+                                            <span class="left_date">#{{i+1}} {{ installment.instalmentStatus ? ('paid'|translate) : ('due'|translate)}} {{commonFunction.convertCustomDateFormat(installment.instalmentDate,'YYYY-MM-DD','MMM D, YYYY')}}</span>
+                                            <div class="booking_type">
+                                                <i class="fa fa-bed" aria-hidden="true"></i>
+                                                <i class="fa fa-plane" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="right_sec">
+                                            $50<sup>.89</sup>
+                                            <!-- ${{ installment.amount | number : '1.2-2' }} -->
+                                            <span class="paid_markss">
+                                                <i class="fa fa-check-circle" aria-hidden="true" *ngIf="installment.instalmentStatus"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="summary_box total_p_wrp">
+            <div class="summary_item summary_item_total w-100">
+                <div class="summary_type">
+                    {{'total_installments' | translate}}
+                </div>
+                <div class="summary_item_price">
+                    $700<sup>.89</sup>
+                    <!-- ${{ totalInstallmentAmount || 0 | number : '1.2-2' }} -->
+                    <span class="paid_markss">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- <div class="total_p_wrp bb">
         <div class="left_sec">
             {{'total_purchases' | translate}}
             <span>
@@ -11,9 +155,9 @@
         </div>
         <span class="fake_paid_markss">
         </span>
-    </div>
-    <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
-        <div class="line_desc black_line_head">
+    </div> -->
+   <!-- <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
+         <div class="line_desc black_line_head">
             <div class="left_sec">
                 {{'booking_downpayment' | translate}}
             </div>
@@ -22,7 +166,7 @@
             </div>
             <span class="fake_paid_markss">
             </span>
-        </div>
+        </div> 
         <div class="listing_accordion">
             <div id="accordion_listing">
                 <div class="card">
@@ -61,4 +205,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
