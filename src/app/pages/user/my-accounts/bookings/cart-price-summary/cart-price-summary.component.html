@@ -1,22 +1,22 @@
 <div class="price_listing_wrpper" *ngIf="(cartItem | json) != '[]'">
 
-    <div class="booking_summary_sect" *ngFor="let item of cartItem.booking;">
-        <div class="summary_box" *ngIf="item.moduleId === 1">
-            <div class="summary_item">
-                <div class="summary_type">
+    <div class="booking_summary_sect">
+        <div class="summary_box">
+            <div class="summary_item" *ngFor="let item of cartItem.booking;let i = index ;">
+                <div class="summary_type" *ngIf="item.moduleId === 1">
                     {{item.locationInfo.source_location}}-{{item.locationInfo.destination_location}} (Taxes and Fees Included)
                 </div>
-                <div class="summary_item_price">
+                <div class="summary_item_price" *ngIf="item.moduleId === 1">
                     ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
                 </div>
             </div>
         </div>
-        <div class="summary_box" *ngIf="item.moduleId === 3">
-            <div class="summary_item">
-                <div class="summary_type">
+        <div class="summary_box">
+            <div class="summary_item" *ngFor="let item of cartItem.booking;let i = index ;">
+                <div class="summary_type" *ngIf="item.moduleId === 3">
                     {{item.moduleInfo[0].hotel_name}} ({{item.moduleInfo[0].input_data.num_nights}} {{item.moduleInfo[0].input_data.num_nights >1 ? 'Nights' : 'Night' }} x ${{item.totalAmount}})
                 </div>
-                <div class="summary_item_price">
+                <div class="summary_item_price" *ngIf="item.moduleId === 3">
                     ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
                 </div>
             </div>
@@ -34,7 +34,7 @@
         <div class="summary_box">
             <div class="summary_item">
                 <div class="summary_type">
-                    Booking Downpayment
+                    {{'booking_downpayment' | translate}}
                 </div>
                 <div class="summary_item_price">
                     $180<sup>.89</sup>
@@ -53,7 +53,7 @@
                     Applied Laytrip Points
                 </div>
                 <div class="summary_item_price">
-                    ${{beforeDesimal(item.layCredit)}}<sup>.{{afterDesimal(item.layCredit)}}</sup>
+                    $00<sup>.00</sup>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
                     {{'total_installments' | translate}}
                 </div>
                 <div class="summary_item_price">
-                    ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
+                    ${{beforeDesimal(cartItem.totalAmount)}}<sup>.{{afterDesimal(cartItem.totalAmount)}}</sup>
                     <!-- ${{ totalInstallmentAmount || 0 | number : '1.2-2' }} -->
                     <span class="paid_markss">
                         <i class="fa fa-check-circle" aria-hidden="true"></i>
