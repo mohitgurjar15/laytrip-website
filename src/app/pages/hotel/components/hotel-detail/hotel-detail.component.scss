@@ -1151,7 +1151,7 @@ agm-map {
                                         flex: 1;
                                         font-size: 12px;
                                         white-space: nowrap;
-                                        max-width: 128px;
+                                        min-width: 134px;
                                         @include tab-view{
                                             max-width: 100%;
                                             white-space: inherit;

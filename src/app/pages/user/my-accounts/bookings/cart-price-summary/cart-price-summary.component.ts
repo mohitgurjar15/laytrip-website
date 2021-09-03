@@ -26,7 +26,7 @@ export class CartPriceSummaryComponent implements OnInit {
    }
 
   ngOnInit(): void { 
-    console.log('cartItemt',this.cartItem)
+    console.log('cartItem',this.cartItem)
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -62,14 +62,13 @@ export class CartPriceSummaryComponent implements OnInit {
   }
 
   beforeDesimal(value){
-    console.log(value)
     value = this.transformDecimal(value)
-    return parseFloat(value.toString().split(".")[0]) == 0 ? "00" : parseFloat(value.toString().split(".")[0])
+    return (value.toString().split(".")[0]) == 0 ? "00" : (value.toString().split(".")[0])
   }
 
   afterDesimal(value){
     value = this.transformDecimal(value)
-    return parseFloat(value.toString().split(".")[1]) == 0 ? "00" : parseFloat(value.toString().split(".")[1])
+    return (value.toString().split(".")[1]) == 0 ? "00" : (value.toString().split(".")[1])
   }
 
   transformDecimal(num) {
