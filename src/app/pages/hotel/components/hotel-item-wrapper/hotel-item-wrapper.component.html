@@ -258,9 +258,9 @@
                                             <span class="texts" *ngIf="!item?.offer_data.applicable">${{item?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' | translate}}</span>
                                             <div class="notifi_text mobile_notifi" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">{{'more_payment_options' | translate}}</div>
                                         </div>
-                                        <div class="full_desk_not" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">
+                                        <!-- <div class="full_desk_not" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">
                                             <div class="notifi_text">{{'more_payment_options' | translate}}</div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="rules_wrps">

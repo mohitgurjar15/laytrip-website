@@ -708,10 +708,12 @@
                                                     alt="cart "> <i class="fa fa-check" aria-hidden="true"></i></div>
                                         </div>
                                         <div class="type_lines">
-                                            <span class="titles">{{'full_payment' | translate}} 
-                                                <span class="texts d-block d-md-none">${{room.payment_object.selling_price | number : '1.2-2'}} including taxes and fees</span>
+                                            <span class="titles">{{'full_payment' | translate}}
+                                                <span class="texts d-block d-md-none" *ngIf="!room?.offer_data.applicable">${{room?.selling?.total | number : '1.2-2'}} including taxes and fees</span>
+                                            <span class="texts d-block d-md-none" *ngIf="room?.offer_data.applicable">${{room?.selling?.discounted_total | number : '1.2-2'}} including taxes and fees</span>
                                             </span>
-                                            <span class="texts d-none d-md-block">${{room.payment_object.selling_price | number : '1.2-2'}} including taxes and fees</span>
+                                            <span class="texts d-none d-md-block" *ngIf="!room?.offer_data.applicable">${{room?.selling?.total | number : '1.2-2'}} including taxes and fees</span>
+                                            <span class="texts d-none d-md-block" *ngIf="room?.offer_data.applicable">${{room?.selling?.discounted_total | number : '1.2-2'}} including taxes and fees</span>
                                             <!-- <span class="texts d-none d-md-block" *ngIf="!room.is_installment_available || !room.payment_object.biweekly">{{'not_available' | translate}}</span> -->
                                             <div [ngClass]="{'checked': room.selected_option === 'full'}" (click)="checkCartButton(index,'full',room.night_rate,'no-installment')" class="installment_add_cart">Add <img *ngIf="room.selected_option === 'full'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="room.selected_option != 'full'" src="{{s3BucketUrl}}assets/images/icon/cart.svg "
                                                     alt="cart "> <i class="fa fa-check" aria-hidden="true"></i></div>
