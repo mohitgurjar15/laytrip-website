@@ -1,5 +1,125 @@
 <div class="price_listing_wrpper" *ngIf="(cartItem | json) != '[]'">
-    <div class="total_p_wrp bb">
+
+    <div class="booking_summary_sect">
+        <div class="summary_box">
+            <div class="summary_item" *ngFor="let item of cartItem.booking;let i = index ;">
+                <div class="summary_type" *ngIf="item.moduleId === 1">
+                    {{item.locationInfo.source_location}}-{{item.locationInfo.destination_location}} (Taxes and Fees Included)
+                </div>
+                <div class="summary_item_price" *ngIf="item.moduleId === 1">
+                    ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
+                </div>
+            </div>
+        </div>
+        <div class="summary_box">
+            <div class="summary_item" *ngFor="let item of cartItem.booking;let i = index ;">
+                <div class="summary_type" *ngIf="item.moduleId === 3">
+                    {{item.moduleInfo[0].hotel_name}} ({{item.moduleInfo[0].input_data.num_nights}} {{item.moduleInfo[0].input_data.num_nights >1 ? 'Nights' : 'Night' }} x ${{item.totalAmount}})
+                </div>
+                <div class="summary_item_price" *ngIf="item.moduleId === 3">
+                    ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
+                </div>
+            </div>
+        </div>
+        <div class="summary_box">
+            <div class="summary_item summary_item_total">
+                <div class="summary_type">
+                    Total Purchases
+                </div>
+                <div class="summary_item_price">
+                    ${{beforeDesimal(cartItem.totalAmount)}}<sup>.{{afterDesimal(cartItem.totalAmount)}}</sup>
+                </div>
+            </div>
+        </div>
+        <div class="summary_box">
+            <div class="summary_item">
+                <div class="summary_type">
+                    {{'booking_downpayment' | translate}}
+                </div>
+                <div class="summary_item_price">
+                    $180<sup>.89</sup>
+                </div>
+            </div>
+            <div class="summary_item">
+                <div class="summary_type">
+                    Add-on Baggage
+                </div>
+                <div class="summary_item_price">
+                    $00<sup>.00</sup>
+                </div>
+            </div>
+            <div class="summary_item">
+                <div class="summary_type">
+                    Applied Laytrip Points
+                </div>
+                <div class="summary_item_price">
+                    $00<sup>.00</sup>
+                </div>
+            </div>
+        </div>
+        <div class="summary_box" *ngIf="(cartItem.cartInstallments | json) != '[]'">
+            <div class="summary_item summary_item_total">
+                <div class="summary_type">
+                    Downpayment
+                </div>
+                <div class="summary_item_price">
+                    $200<sup>.89</sup>
+                </div>
+            </div>
+        </div>
+        <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
+            <div class="listing_accordion">
+                <div id="accordion_listing">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#listing_descrip">
+                                {{cartItem?.cartInstallments?.length -1 }} {{installmentType[userLang][cartItem.installmentType]}} {{'installments_of' | translate}} ${{cartItem?.cartInstallments[1]?.amount | number : '1.2-2'}}
+                            </a>
+                        </div>
+                        <div id="listing_descrip" class="collapse show" Paid data-parent="#accordion_listing">
+                            <div class="card-body pb-0">
+                                <ng-container *ngFor="let installment of cartItem.cartInstallments | slice:1;let i = index ;">
+                                    <div class="line_desc paid_clr" [ngClass]="{'paid_clr' : (installment.instalmentStatus), 'due_clr' : (  installment.dueInstallment && !installment.instalmentStatus),'' : (  !installment.dueInstallment && !installment.instalmentStatus) }">
+                                        <div class="left_sec">
+                                            <span class="left_date">#{{i+1}} {{ installment.instalmentStatus ? ('paid'|translate) : ('due'|translate)}} {{commonFunction.convertCustomDateFormat(installment.instalmentDate,'YYYY-MM-DD','MMM D, YYYY')}}</span>
+                                            <div class="booking_type">
+                                                <i class="fa fa-bed" aria-hidden="true"></i>
+                                                <i class="fa fa-plane" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="right_sec">
+                                            ${{beforeDesimal(installment.amount)}}<sup>.{{afterDesimal(installment.amount)}}</sup>
+                                            <!-- ${{ installment.amount | number : '1.2-2' }} -->
+                                            <span class="paid_markss">
+                                                <i class="fa fa-check-circle" aria-hidden="true" *ngIf="installment.instalmentStatus"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="summary_box total_p_wrp" *ngIf="(cartItem.cartInstallments | json) != '[]'">
+            <div class="summary_item summary_item_total w-100">
+                <div class="summary_type">
+                    {{'total_installments' | translate}}
+                </div>
+                <div class="summary_item_price">
+                    ${{beforeDesimal(cartItem.totalAmount)}}<sup>.{{afterDesimal(cartItem.totalAmount)}}</sup>
+                    <!-- ${{ totalInstallmentAmount || 0 | number : '1.2-2' }} -->
+                    <span class="paid_markss">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="total_p_wrp bb">
         <div class="left_sec">
             {{'total_purchases' | translate}}
             <span>
@@ -11,9 +131,9 @@
         </div>
         <span class="fake_paid_markss">
         </span>
-    </div>
-    <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
-        <div class="line_desc black_line_head">
+    </div> -->
+<!-- <div class="price_descrip" *ngIf="(cartItem.cartInstallments | json) != '[]'">
+         <div class="line_desc black_line_head">
             <div class="left_sec">
                 {{'booking_downpayment' | translate}}
             </div>
@@ -22,7 +142,7 @@
             </div>
             <span class="fake_paid_markss">
             </span>
-        </div>
+        </div> 
         <div class="listing_accordion">
             <div id="accordion_listing">
                 <div class="card">
@@ -61,4 +181,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->

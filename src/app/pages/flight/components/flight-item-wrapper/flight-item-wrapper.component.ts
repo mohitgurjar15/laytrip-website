@@ -10,11 +10,11 @@ import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DiscountedBookingAlertComponent } from '../../../../components/discounted-booking-alert/discounted-booking-alert.component';
 import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
+import { CartInventoryNotmatchErrorPopupComponent } from '../../../../components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -87,9 +87,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     public modalService: NgbModal,
     private decimalPipe: DecimalPipe,
-    private cd: ChangeDetectorRef
-
-
+    private cd: ChangeDetectorRef,
   ) {
   }
 
@@ -117,11 +115,10 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         this.flightItems = data;            
       }
       this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+
     });
 
-
     for (let i = 0; i < this.flightDetails.length; i++) {
-      console.log('come in array')
       if (this.flightDetails[i].payment_object.weekly)
         this.flightDetails[i].selected_option = 'weekly';
       else if (this.flightDetails[i].payment_object.biweekly)
@@ -330,7 +327,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.installmentOption.payment_frequncy = payment_frequncy;
     this.installmentOption.down_payment = down_payment;
     this.installmentOption.payment_method = payment_method;
-    console.log(this.installmentOption)
   }
   checkInstalmentAvalability() {
     let instalmentRequest = {
@@ -443,13 +439,16 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   onScrollDown() {
-    if (this.flightDetails.length != 0) {
+    if (this.flightDetails.length != 0){
       this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
 
       setTimeout(() => {
         if (this.noOfDataToShowInitially <= this.flightDetails.length) {
+
+          let requestParams = { revalidateDto: [] };
           this.noOfDataToShowInitially += this.dataToLoad;
           this.flightDetails = [...this.flightItems.slice(0, this.noOfDataToShowInitially)];
+          //this.flightDetails.push(this.flightItems.slice(0, this.noOfDataToShowInitially))
           this.cd.detectChanges();
           this.scrollLoading = false;
         } else {
@@ -457,12 +456,9 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         }
       }, 2000);
     }
+   
   }
   getCancellationPolicy(route_code) {
     return "#";
   }
 }
-
-
-
-
