@@ -114,20 +114,21 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       if(data.length){
         this.flightItems = data;            
       }
+      for (let i = 0; i < this.flightItems.length; i++) {
+        if (this.flightItems[i].payment_object.weekly)
+          this.flightItems[i].selected_option = 'weekly';
+        else if (this.flightItems[i].payment_object.biweekly)
+          this.flightItems[i].selected_option = 'biweekly';
+        else if (this.flightItems[i].payment_object.monthly)
+          this.flightItems[i].selected_option = 'monthly';
+        else
+          this.flightItems[i].selected_option = 'full';
+      }
       this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
 
     });
 
-    for (let i = 0; i < this.flightDetails.length; i++) {
-      if (this.flightDetails[i].payment_object.weekly)
-        this.flightDetails[i].selected_option = 'weekly';
-      else if (this.flightDetails[i].payment_object.biweekly)
-        this.flightDetails[i].selected_option = 'biweekly';
-      else if (this.flightDetails[i].payment_object.monthly)
-        this.flightDetails[i].selected_option = 'monthly';
-      else
-        this.flightDetails[i].selected_option = 'full';
-    }
+    
     // Author: xavier | 2021/8/3
     // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
     let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
