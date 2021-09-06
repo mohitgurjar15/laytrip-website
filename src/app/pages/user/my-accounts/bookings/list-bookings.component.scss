@@ -165,12 +165,6 @@
                     color: $pink;
                     font-weight: 600;
                 }
-                &.green_txt {
-                    .pink_price,
-                    .status {
-                        color: #1cd304;
-                    }
-                }
 
                 .status {
                     color: $mid_gray_bg;
@@ -486,6 +480,12 @@
                                                 color: $mid_gray_bg;
                                                 font-size: 12px;
                                                 font-weight: 400;
+                                            }
+                                            &.green_txt {
+                                                .pink_price,
+                                                .status {
+                                                    color: #1cd304;
+                                                }
                                             }
                                         }
                                     }
