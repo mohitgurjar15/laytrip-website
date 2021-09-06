@@ -794,7 +794,7 @@
                         }
                         .installment_add_cart {
                             padding: 7px 10px;
-                            background: #D6D6D6;
+                            background: transparent;
                             border: 1px solid #D6D6D6;
                             color: #878787;
                             font-size: 12px;
@@ -825,8 +825,8 @@
                             }
                             &.checked {
                                 background: transparent;
-                                border: 1px solid #000;
-                                color: #000;
+                                border: 1px solid $primary-color;
+                                color: $primary-color;
                                 cursor: default;
                                 .fa-check {
                                     display: flex;
