@@ -656,6 +656,7 @@
     "booking_thanks": "Thank you for booking your travel with us! We will send you your airline, hotel and/or home reservation numbers prior to your travel date. View your details any time at ",
     "downpayment": "Downpayment",
     "ending_in": "ending in",
+    "add_on_baggage": "Add-on Baggage",
     "top_banner_info_1": "Per ",
     "top_banner_info_2": ", bookings not yet available to residents of California, Florida, Illinois and Washington.",
     "top_banner_info_3": ", bookings not yet available to residents of CA, FL, IL, WA.",
@@ -675,12 +676,12 @@
     "inc_total_price": "Included in total price",
     "pay_at_property": "Pay at Property",
     "taxes_fees_info": [
-                       "The Taxes and Fees line item covers applicable taxes owed for your hotel reservation, including, without limitation, sales and use tax, occupancy tax, room tax, excise tax, value added tax, government imposed service fees or other fees not paid directly",
-                       "to the taxing authorities but required by law, and/or other similar taxes, as well as in certain jurisdictions, tax owed on amounts retained as compensation for services. This Taxes and Fees line item varies based on a number",
-                       "of factors including, without limitation, the tax rate and hotel location, the type of booking, the amount paid to the hotel and profit retained as compensation for services. Hotels may charge daily resort or destination fees,",
-                       "energy surcharges, newspaper delivery fees, in-room safe fees, tourism fees, housekeeping fees, parking charges, minibar charges, phone calls, room service or movie rentals, etc. These charges you pay to the hotel directly.",
-                       "Your payment card will be required at check in as security for these charges. Contact your hotel directly to ask about fees."
-                       ],
+        "The Taxes and Fees line item covers applicable taxes owed for your hotel reservation, including, without limitation, sales and use tax, occupancy tax, room tax, excise tax, value added tax, government imposed service fees or other fees not paid directly",
+        "to the taxing authorities but required by law, and/or other similar taxes, as well as in certain jurisdictions, tax owed on amounts retained as compensation for services. This Taxes and Fees line item varies based on a number",
+        "of factors including, without limitation, the tax rate and hotel location, the type of booking, the amount paid to the hotel and profit retained as compensation for services. Hotels may charge daily resort or destination fees,",
+        "energy surcharges, newspaper delivery fees, in-room safe fees, tourism fees, housekeeping fees, parking charges, minibar charges, phone calls, room service or movie rentals, etc. These charges you pay to the hotel directly.",
+        "Your payment card will be required at check in as security for these charges. Contact your hotel directly to ask about fees."
+    ],
     "apply_lt_points": "Apply your Laytrip Points",
     "promo_421_legal_1": "*Limited time new bookings only. Must be booked with start date at least 90 calendar days after booking date. Cannot be combined with any other promotion. Discount applies to available bookings on",
     "promo_421_legal_2": "and other booking process restrictions apply.",
@@ -704,4 +705,4 @@
     "link_copied": "Link Copied",
     "error404_1": "404 Error",
     "error404_2": "Please <a href='javascript:window.history.go(-1)'>Go Back</a> and try again"
- }
+}

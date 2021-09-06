@@ -24,7 +24,7 @@
         <div class="summary_box">
             <div class="summary_item summary_item_total">
                 <div class="summary_type">
-                    Total Purchases
+                    {{'total_purchases' | translate}}
                 </div>
                 <div class="summary_item_price">
                     ${{beforeDesimal(cartItem.totalAmount)}}<sup>.{{afterDesimal(cartItem.totalAmount)}}</sup>
@@ -42,7 +42,7 @@
             </div>
             <div class="summary_item">
                 <div class="summary_type">
-                    Add-on Baggage
+                    {{'add_on_baggage' | translate}}
                 </div>
                 <div class="summary_item_price">
                     $00<sup>.00</sup>
@@ -50,7 +50,7 @@
             </div>
             <div class="summary_item">
                 <div class="summary_type">
-                    Applied Laytrip Points
+                    {{'applied_points' | translate}}
                 </div>
                 <div class="summary_item_price">
                     $00<sup>.00</sup>
@@ -60,7 +60,7 @@
         <div class="summary_box" *ngIf="(cartItem.cartInstallments | json) != '[]'">
             <div class="summary_item summary_item_total">
                 <div class="summary_type">
-                    Downpayment
+                    {{'downpayment' | translate}}
                 </div>
                 <div class="summary_item_price">
                     $200<sup>.89</sup>

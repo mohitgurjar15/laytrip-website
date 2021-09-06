@@ -161,7 +161,7 @@
                             {{'installments_of' | translate}}
                             ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
                         </span>
-                        <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available || !item.payment_object.weekly">{{'not_available' | translate}}</span>
+                    <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available || !item.payment_object.weekly">{{'not_available' | translate}}</span>
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="item.is_installment_available && item.payment_object.weekly">
                         ${{item.payment_object['weekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
@@ -180,7 +180,7 @@
                             {{ item.payment_object['biweekly'].installment_count}} {{'bi_weekly' | translate}} {{'installments_of' | translate}}
                             ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}
                         </span>
-                        <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">{{'not_available' | translate}}</span>
+                    <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">{{'not_available' | translate}}</span>
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="item.is_installment_available &&  item.payment_object.biweekly">
                         ${{item.payment_object['biweekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
@@ -199,7 +199,7 @@
                             {{ item.payment_object['monthly'].installment_count}} {{'monthly' | translate}} {{'installments_of' | translate}}
                             ${{item.payment_object['monthly'].installment | number : '1.2-2'}}
                         </span>
-                        <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available || !item.payment_object.monthly "> {{'not_available' | translate}}</span>
+                    <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available || !item.payment_object.monthly "> {{'not_available' | translate}}</span>
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="item.is_installment_available && item.payment_object.monthly ">
                         ${{item.payment_object['monthly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
