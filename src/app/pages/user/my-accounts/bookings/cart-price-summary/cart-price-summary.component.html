@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="summary_box">
+        <div class="summary_box" [ngClass]="{'border-0':(cartItem.cartInstallments | json) == '[]'}">
             <div class="summary_item">
                 <div class="summary_type">
                     {{'booking_downpayment' | translate}}
