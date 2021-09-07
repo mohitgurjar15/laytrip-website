@@ -35,17 +35,18 @@ export class FlightsComponent implements OnInit {
 
       // Author: xavier | 2021/8/13
       // Description: Translate cabin class for each flight route
-      if((this.cartItem != null) && (this.cartItem.moduleInfo[0] != null)) {
-        for(let i: number = 0; i < this.cartItem.module_info[0].routes.length; i++) {
-          const stops = this.cartItem.module_info[0].routes[i].stops;
-          for(let j: number = 0; j < stops.length; j++) {
-            const key: string = stops[j].cabin_class.toLowerCase() + "_class";
-            this.translate.
-                get(key).
-                subscribe((res: string) => stops[j].cabin_class = res);
-          }
-        }
-      }
+      console.log(this.cartItem && this.cartItem.moduleInfo && this.cartItem.moduleInfo[0] &&  this.cartItem.moduleInfo[0] != null)
+      // if((this.cartItem != null) && (this.cartItem && this.cartItem.moduleInfo && this.cartItem.moduleInfo[0] &&  this.cartItem.moduleInfo[0] != null)) {
+      //   for(let i: number = 0; i < this.cartItem.module_info[0].routes.length; i++) {
+      //     const stops = this.cartItem.module_info[0].routes[i].stops;
+      //     for(let j: number = 0; j < stops.length; j++) {
+      //       const key: string = stops[j].cabin_class.toLowerCase() + "_class";
+      //       this.translate.
+      //           get(key).
+      //           subscribe((res: string) => stops[j].cabin_class = res);
+      //     }
+      //   }
+      // }
     }
   } 
 
