@@ -54,7 +54,6 @@ export class CartItemComponent implements OnInit {
       }
       this.cd.detectChanges();
     }
-    console.log('changes', changes)
   }
 
   closePricePopup(id) {
