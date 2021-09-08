@@ -1098,10 +1098,6 @@ select {
             border: none;
             margin-bottom: 20px;
 
-            @include tab-view {
-              margin-bottom: 0;
-            }
-
             li {
               display: inline-block;
               margin: 0 10px 0 0;
@@ -1183,7 +1179,7 @@ select {
               }
 
               .class_section {
-                width: 110px;
+                // width: 110px;
 
                 &.w_o_arrow {
                   width: 100%;
@@ -1565,7 +1561,8 @@ select {
             }
 
             @include tab-view {
-              flex-wrap: wrap;
+              flex-wrap: nowrap;
+              margin-bottom: 0;
 
               li {
                 margin: 0 5px 5px 0;
@@ -2493,7 +2490,9 @@ select {
         }
 
         @include tab-view {
-          flex-wrap: wrap;
+          // flex-wrap: wrap;
+          flex: inherit;
+          margin: 0;
 
           li {
             margin: 0 5px 5px 0;

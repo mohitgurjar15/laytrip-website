@@ -31,7 +31,7 @@ h3 {
             border-radius: 50px;
             font-size: 16px;
             color: #52575A;
-            max-width: 129px;
+            max-width: 130.5px;
             text-overflow: ellipsis;
             overflow-x: hidden;
             white-space: nowrap;
@@ -56,13 +56,14 @@ h3 {
                     overflow-x: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
-                    max-width: 50px;
+                    // max-width: 50px;
                 }
             }
             @include tab-view {
                 padding: 4px 14px;
                 text-align: center;
                 line-height: 12px;
+                width: 100%;
                 .tab_imgs_wrps {
                     font-size: 10px;
                     line-height: 10px;
@@ -98,6 +99,9 @@ h3 {
                     padding: 4px 8px 4px 3px;
                 }
             }
+        }
+        @include tab-view {
+            width: 20%;
         }
     }
 }
