@@ -218,12 +218,14 @@
                             aria-hidden="true "></i></div>
                 </div>
             </div>
-            <div class="rules_wrps ">
-                <span class="heads "><img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg " alt=" ">{{'rules' | translate}}</span>
-                <span class="texts_rules " *ngIf="!loadCancellationPolicy && errorMessage!='' ">{{ errorMessage}}</span>
-                <span class="texts_rules "> {{'rules_1' | translate}}
-                    <a [routerLink]="[ '/terms'] " [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : '' ">{{'terms' | translate}}</a>{{'rules_2' | translate}}.
-                </span>
+            <div class="rules_wrps">
+                <span class="heads"><img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="">
+                  {{'rules' | translate}}</span>
+                <span class="texts_rules" *ngIf="!loadCancellationPolicy && errorMessage!=''">{{ errorMessage
+                            }}</span>
+                <span class="texts_rules"> {{'rules_1' | translate}}
+                            <a [routerLink]="['/terms']"
+                                [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a> {{'rules_2' | translate}}.</span>
             </div>
         </div>
     </div>
