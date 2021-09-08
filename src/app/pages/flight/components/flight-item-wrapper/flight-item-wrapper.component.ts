@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 declare var $: any;
 import { environment } from '../../../../../environments/environment';
 import { Subscription } from 'rxjs';
@@ -10,11 +10,11 @@ import { GenericService } from '../../../../../app/services/generic.service';
 import * as moment from 'moment'
 import { getLoginUserInfo } from '../../../../../app/_helpers/jwt.helper';
 import { CartService } from '../../../../services/cart.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DiscountedBookingAlertComponent } from 'src/app/components/discounted-booking-alert/discounted-booking-alert.component';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DiscountedBookingAlertComponent } from '../../../../components/discounted-booking-alert/discounted-booking-alert.component';
 import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
+import { CartInventoryNotmatchErrorPopupComponent } from '../../../../components/cart-inventory-notmatch-error-popup/cart-inventory-notmatch-error-popup.component';
 
 @Component({
   selector: 'app-flight-item-wrapper',
@@ -24,7 +24,7 @@ import { CartInventoryNotmatchErrorPopupComponent } from 'src/app/components/car
 })
 export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
-  flightDetails;
+  flightDetails = [];
   @Input() filter;
   @Input() filteredLabel;
   @Output() changeLoading = new EventEmitter;
@@ -86,8 +86,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     private genericService: GenericService,
     private cartService: CartService,
     public modalService: NgbModal,
-    private decimalPipe: DecimalPipe
-
+    private decimalPipe: DecimalPipe,
+    private cd: ChangeDetectorRef,
   ) {
   }
 
@@ -109,30 +109,26 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       this.cartItems = cartItems;
     })
     this.loadJquery();
-    this.flightService.getFlights.subscribe(data => {
+    this.flightService.getFlights.subscribe(data=>{
       this.flightItems =[];
-      if (data.length) {
-        this.flightItems = data;
-        for (let i = 0; i < this.flightDetails.length; i++) {
-          if (this.flightDetails[i].payment_object.weekly)
-            this.flightDetails[i].selected_option = 'weekly';
-          else if (this.flightDetails[i].payment_object.biweekly)
-            this.flightDetails[i].selected_option = 'biweekly';
-          else if (this.flightDetails[i].payment_object.monthly)
-            this.flightDetails[i].selected_option = 'monthly';
-          else
-            this.flightDetails[i].selected_option = 'full';
-        }
+      if(data.length){
+        this.flightItems = data;            
       }
-      else {
-        this.flightDetails = [];
+      for (let i = 0; i < this.flightItems.length; i++) {
+        if (this.flightItems[i].payment_object.weekly)
+          this.flightItems[i].selected_option = 'weekly';
+        else if (this.flightItems[i].payment_object.biweekly)
+          this.flightItems[i].selected_option = 'biweekly';
+        else if (this.flightItems[i].payment_object.monthly)
+          this.flightItems[i].selected_option = 'monthly';
+        else
+          this.flightItems[i].selected_option = 'full';
       }
+      this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
+
     });
 
-    this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-
-    this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-
+    
     // Author: xavier | 2021/8/3
     // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
     let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
@@ -237,7 +233,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   }
 
   bookNow(route) {
-    console.log(route)
+
     this.removeFlight.emit(this.flightUniqueCode);
     this.isFlightNotAvailable = false;
 
@@ -259,7 +255,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
       sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
       let downPayment;
-      let paymentMethod ='installment';
+      let paymentMethod ='instalment';
       if (route.selected_option === 'weekly') {
         downPayment = route.payment_object['weekly'].down_payment
       } else if (route.selected_option === 'biweekly') {
@@ -268,7 +264,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         downPayment = route.payment_object['monthly'].down_payment
       }else if(route.selected_option === 'full') {
         downPayment = 0
-        paymentMethod = 'no-installment'
+        paymentMethod = 'no-instalment'
       }
       let payload = {
         module_id: 1,
@@ -332,7 +328,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.installmentOption.payment_frequncy = payment_frequncy;
     this.installmentOption.down_payment = down_payment;
     this.installmentOption.payment_method = payment_method;
-    console.log(this.installmentOption)
   }
   checkInstalmentAvalability() {
     let instalmentRequest = {
@@ -357,6 +352,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
+      console.log(changes.flightDetails.currentValue)
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
       this.filteredLabel = changes.filteredLabel.currentValue;
     }
@@ -408,8 +404,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['flight/search'], { queryParams: queryParams, queryParamsHandling: 'merge' });
     }); */
-
-
   }
 
   showDownPayment(offerData, downPaymentOption, isInstallmentTypeAvailable) {
@@ -446,28 +440,26 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   onScrollDown() {
-    this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
+    if (this.flightDetails.length != 0){
+      this.scrollLoading = (this.flightItems.length != this.flightDetails.length) ? true : false;
 
-    setTimeout(() => {
-      console.log('here')
-      if (this.noOfDataToShowInitially <= this.flightDetails.length) {
+      setTimeout(() => {
+        if (this.noOfDataToShowInitially <= this.flightDetails.length) {
 
-        let requestParams = { revalidateDto: [] };
-        this.noOfDataToShowInitially += this.dataToLoad;
-        this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-        console.log(this.flightDetails)
-        this.scrollLoading = false;
-      } else {
-        this.scrollLoading = false;
-      }
-    }, 2000);
-    console.log(this.scrollLoading)
+          let requestParams = { revalidateDto: [] };
+          this.noOfDataToShowInitially += this.dataToLoad;
+          this.flightDetails = [...this.flightItems.slice(0, this.noOfDataToShowInitially)];
+          //this.flightDetails.push(this.flightItems.slice(0, this.noOfDataToShowInitially))
+          this.cd.detectChanges();
+          this.scrollLoading = false;
+        } else {
+          this.scrollLoading = false;
+        }
+      }, 2000);
+    }
+   
   }
   getCancellationPolicy(route_code) {
     return "#";
   }
 }
-
-
-
-

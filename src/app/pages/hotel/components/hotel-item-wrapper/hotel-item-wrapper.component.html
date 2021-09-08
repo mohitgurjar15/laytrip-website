@@ -73,7 +73,7 @@
                                                                     <a *ngIf="commonFunction.isRefferal()" class="book_btn anchor-tag" [routerLink]="['/hotel/detail', item.id, item.bundle]" utm_medium [queryParams]="{check_in:check_in,check_out:check_out,latitude:latitude,longitude:longitude,itenery:itenery,location:location,city_id:city_id,city_name:city_name,hotel_name:item?.name,dealsIcon:hotelDealIcon,utm_source:commonFunction.getRefferalParms().utm_source,utm_medium:commonFunction.getRefferalParms().utm_medium}">
                                                                         <span class="wrapper_names">
                                                                             <span class="hotel_names">{{item?.name}}</span>
-                                                                            <span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}} off</span>
+                                                                        <span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}} off</span>
                                                                         </span>
                                                                     </a>
                                                                     <span class="adress_span">{{item?.full_address}}</span>
@@ -246,14 +246,21 @@
                                             <span class="texts" *ngIf="!item.is_installment_available || !item.payment_object.monthly">{{'not_available' | translate}}</span>
                                         </div>
                                         <div class="type_lines">
+                                            <span class="titles">{{'full_payment' | translate}}</span>
+                                            <span class="texts" *ngIf="!item?.offer_data.applicable">
+                                                ${{item?.selling?.total | number : '1.2-2'}} including taxes and fees
+                                            </span>
+                                            <span class="texts" *ngIf="item?.offer_data.applicable">${{item?.selling?.discounted_total | number : '1.2-2'}} {{'including_taxes_fees' | translate}}</span>
+                                        </div>
+                                        <div class="type_lines">
                                             <span class="titles">{{'average_nightly_rate' | translate}}</span>
                                             <span class="texts" *ngIf="item?.offer_data.applicable">${{item?.selling?.discounted_avg_night_price | number : '1.2-2'}} {{'including_taxes_fees' | translate}}</span>
                                             <span class="texts" *ngIf="!item?.offer_data.applicable">${{item?.night_rate | number : '1.2-2'}} {{'including_taxes_fees' | translate}}</span>
                                             <div class="notifi_text mobile_notifi" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">{{'more_payment_options' | translate}}</div>
                                         </div>
-                                        <div class="full_desk_not" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">
+                                        <!-- <div class="full_desk_not" *ngIf="item?.is_installment_available && !item?.offer_data.applicable">
                                             <div class="notifi_text">{{'more_payment_options' | translate}}</div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="rules_wrps">

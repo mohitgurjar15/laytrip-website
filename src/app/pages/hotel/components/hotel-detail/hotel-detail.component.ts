@@ -97,7 +97,6 @@ export class HotelDetailComponent implements OnInit {
       if (res) {
         this.hotelRoomArray = res.data;
         for (let i = 0; i < this.hotelRoomArray.length; i++) {
-          console.log('come in array')
           if (this.hotelRoomArray[i].payment_object.weekly)
             this.hotelRoomArray[i].selected_option = 'weekly';
           else if (this.hotelRoomArray[i].payment_object.biweekly)
@@ -306,7 +305,7 @@ export class HotelDetailComponent implements OnInit {
     } else {
       this.addCartLoading=true;
       let downPayment;
-      let paymentMethod ='installment';
+      let paymentMethod ='instalment';
       if (roomInfo.selected_option === 'weekly') {
         downPayment = roomInfo.payment_object['weekly'].down_payment
       } else if (roomInfo.selected_option === 'biweekly') {
@@ -315,7 +314,7 @@ export class HotelDetailComponent implements OnInit {
         downPayment = roomInfo.payment_object['monthly'].down_payment
       }else if(roomInfo.selected_option === 'full') {
         downPayment = 0
-        paymentMethod = 'no-installment'
+        paymentMethod = 'no-instalment'
       }
       let payload = {
         module_id: 3,
@@ -373,7 +372,6 @@ export class HotelDetailComponent implements OnInit {
     this.installmentOption.payment_frequncy = payment_frequncy;
     this.installmentOption.down_payment = down_payment;
     this.installmentOption.payment_method = payment_method;
-    console.log(this.installmentOption)
   }
 
   openPolicyPopup(policyInfo, type) {

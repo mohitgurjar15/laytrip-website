@@ -56,7 +56,11 @@ export class HotelSearchComponent implements OnInit {
     let info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
     this.hotelDealIcon = this.route.snapshot.queryParams['dealsIcon']
     //this.hotelDealIcon = false;
-    console.log(this.hotelDealIcon)
+    let refundable = 'no';
+    console.log('hotelDealIcon',this.hotelDealIcon)
+    if(this.hotelDealIcon === true || (typeof this.hotelDealIcon === 'string' &&  this.hotelDealIcon === 'true')){
+      refundable = 'yes'
+    }
     this.homeService.setDeaslToggle(this.hotelDealIcon)
     let payload = {
       check_in: this.route.snapshot.queryParams['check_in'],
@@ -71,6 +75,7 @@ export class HotelSearchComponent implements OnInit {
       adults: info.adults,
       children: info.child,
       filter: true,
+      is_refundable : refundable
     };
     this.getHotelSearchData(payload);
     this.setFilteredLabel('filter_1');

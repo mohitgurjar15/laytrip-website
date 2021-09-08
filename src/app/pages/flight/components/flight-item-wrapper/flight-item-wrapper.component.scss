@@ -19,6 +19,9 @@
     font-size: 25px;
 }
 
+.pink_spinner {
+    color: $pink !important;
+}
 .section_description {
     //transform: translate(-60%, -70%);
     //transform: translate(-100%, -50%);
@@ -759,15 +762,18 @@
                         justify-content: flex-start;
                         margin-bottom: 5px;
                         align-items: center;
+                        min-height: 34px;
                         @include tab-view {
-                            flex-direction: column;
                             font-size: 10px;
+                            align-items: flex-start;
+                            flex-flow: row;
+                            justify-content: space-between;
                         }
-                        &:nth-child(4) {
-                            border: none;
-                            margin: 0;
-                            padding: 0;
-                        }
+                        // &:nth-child(4) {
+                        //     border: none;
+                        //     margin: 0;
+                        //     padding: 0;
+                        // }
                         .titles {
                             font-weight: 700;
                             color: $text-black;
@@ -775,6 +781,10 @@
                             flex: 1;
                             font-size: 12px;
                             max-width: 126px;
+                            @include tab-view{
+                                max-width: 100%;
+                                white-space: inherit;
+                            }
                         }
                         .texts {
                             font-weight: 400;
@@ -784,7 +794,7 @@
                         }
                         .installment_add_cart {
                             padding: 7px 10px;
-                            background: #D6D6D6;
+                            background: transparent;
                             border: 1px solid #D6D6D6;
                             color: #878787;
                             font-size: 12px;
@@ -815,8 +825,8 @@
                             }
                             &.checked {
                                 background: transparent;
-                                border: 1px solid #000;
-                                color: #000;
+                                border: 1px solid $primary-color;
+                                color: $primary-color;
                                 cursor: default;
                                 .fa-check {
                                     display: flex;

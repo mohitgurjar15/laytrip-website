@@ -6,10 +6,10 @@
                 <div class="pay_listing" *ngIf="item.type=='flight'">
                     <span>{{item.location}}<span class="purple_trvl"></span></span>
                     <span class="price_wrps d-flex justify-content-between text-right" *ngIf="item.offer_data.applicable">
-                        <span class="old_price">${{item.selling_price | number : '1.2-2'}}</span>
-                        <span class="new_price">${{item.discounted_selling_price | number : '1.2-2'}}</span>
+                        <span class="old_price">${{beforeDesimal(item.selling_price)}}<sup>.{{afterDesimal(item.selling_price)}}</sup></span>
+                    <span class="new_price">${{beforeDesimal(item.discounted_selling_price)}}<sup>.{{afterDesimal(item.discounted_selling_price)}}</sup></span>
                     </span>
-                    <span *ngIf="!item.offer_data.applicable">${{item.selling_price | number : '1.2-2'}}</span>
+                    <span *ngIf="!item.offer_data.applicable">${{beforeDesimal(item.selling_price)}}<sup>.{{afterDesimal(item.selling_price)}}</sup></span>
                 </div>
             </ng-container>
         </div>
@@ -23,28 +23,28 @@
                         </span>
                         <span class="price_wrps" *ngIf="item.offer_data.applicable">
                             <span class="old_price justify-content-end">${{item.price_break_down.sub_total | number : '1.2-2'}}</span>
-                            <span class="new_price">${{item.price_break_down.discounted_sub_total | number : '1.2-2'}}</span>
+                        <span class="new_price d-block">${{beforeDesimal(item.price_break_down.discounted_sub_total)}}<sup>.{{afterDesimal(item.price_break_down.discounted_sub_total)}}</sup></span>
                         </span>
-                        <span *ngIf="!item.offer_data.applicable">${{item.price_break_down.sub_total | number : '1.2-2'}}</span>
+                        <span *ngIf="!item.offer_data.applicable" class="d-block">${{beforeDesimal(item.price_break_down.sub_total)}}<sup>.{{afterDesimal(item.price_break_down.sub_total)}}</sup></span>
                     </div>
                     <div class="pay_listing hotel_line">
                         <span>
                             <p>{{item.location}}</p>
                             <a data-toggle="modal" data-target="#tax_fee_modal" class="tax_accor_btn">{{'taxes_fees' | translate}}</a>
                         </span>
-                        <span>${{item.price_break_down.taxes | number : '1.2-2'}}</span>
+                        <span class="d-block">${{beforeDesimal(item.price_break_down.taxes)}}<sup>.{{afterDesimal(item.price_break_down.taxes)}}</sup></span>
                     </div>
                     <ng-container *ngIf="item.mandatory_fee_details.is_prepaid">
                         <div class="pay_listing hotel_line" *ngFor="let item of item.mandatory_fee_details.prepaid_break_dwon">
                             <span><p>{{item.name}} ({{'inc_total_price' | translate}})</p></span>
-                            <span>${{item.price | number : '1.2-2'}}</span>
+                            <span class="d-block">${{beforeDesimal(item.price)}}<sup>.{{afterDesimal(item.price)}}</sup></span>
                         </div>
                     </ng-container>
 
                     <ng-container *ngIf="item.mandatory_fee_details.is_postpaid">
                         <div class="pay_listing hotel_line" *ngFor="let item of item.mandatory_fee_details.postpaid_break_dwon">
                             <span><p>{{item.name}} ({{'pay_at_property' | translate}})</p></span>
-                            <span>${{item.price | number : '1.2-2'}}</span>
+                            <span class="d-block">${{beforeDesimal(item.price)}}<sup>.{{afterDesimal(item.price)}}</sup></span>
                         </div>
                     </ng-container>
                 </div>
@@ -52,23 +52,23 @@
         </ng-container>
         <div class="pay_listing total_amm_blue">
             <span>{{'total_purchases' | translate}}</span>
-            <span *ngIf="typeOf(installmentSummary)!='undefined'">${{installmentSummary.total_price | number : '1.2-2'}}</span>
+            <span *ngIf="typeOf(installmentSummary)!='undefined'">${{beforeDesimal(installmentSummary.total_price)}}<sup>.{{afterDesimal(installmentSummary.total_price)}}</sup></span>
         </div>
         <!-- Start -->
         <div class="pay_list_wrper">
-            <div class="pay_listing" *ngIf="priceSummary?.paymentType=='instalment' && typeOf(installmentSummary)!='undefined'">
+            <div class="pay_listing" *ngIf="installmentSummary.installment_dates.length && typeOf(installmentSummary)!='undefined'">
                 <span>{{'booking_downpayment' | translate}}</span>
-                <span class="">${{installmentSummary?.total_downpayment | number : '1.2-2'}}</span>
+                <span class="d-block">${{beforeDesimal(installmentSummary?.total_downpayment)}}<sup>.{{afterDesimal(installmentSummary?.total_downpayment)}}</sup></span>
             </div>
             <div class="pay_listing">
                 <span>{{'applied_points' | translate}}</span>
-                <span class="">-${{priceSummary.layCreditPoints | number : '1.2-2' }} </span>
+                <span class="">-${{beforeDesimal(priceSummary.layCreditPoints)}}<sup>.{{afterDesimal(priceSummary.layCreditPoints)}}</sup></span>
             </div>
         </div>
         <div class="pay_listing total_amm_blue bb_none">
             <span>{{'total_due' | translate}}</span>
-            <span *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0" class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
-            <span *ngIf="priceSummary?.paymentType=='no-instalment'" class="">${{priceSummary.totalAmount | number : '1.2-2'}}</span>
+            <span *ngIf="installmentSummary.installment_dates.length" class="">${{beforeDesimal(installmentSummary.total_downpayment)}}<sup>.{{afterDesimal(installmentSummary.total_downpayment)}}</sup></span>
+            <span *ngIf="!installmentSummary.installment_dates.length" class="">${{beforeDesimal(installmentSummary.total_price)}}<sup>.{{afterDesimal(installmentSummary.total_price)}}</sup></span>
         </div>
         <!-- End -->
         <div class="price_accordion" id="price_collapse" *ngIf="typeOf(installmentSummary)!='undefined'">
@@ -90,7 +90,7 @@
                         </span>
                         <span class="close_text">
                             <span>{{'total_installments' | translate}}</span>
-                            <span class="">${{insatllmentAmount | number : '1.2-2' }}</span>
+                            <span class="">${{beforeDesimal(insatllmentAmount)}}<sup>.{{afterDesimal(insatllmentAmount)}}</sup></span>
                         </span>
                     </button>
                 </div>
@@ -108,13 +108,13 @@
                                         </ng-container>
                                     </div>
                                 </span>
-                                <span class="">${{instalment.amount | number : '1.2-2'}}</span>
+                                <span class="">${{beforeDesimal(instalment.amount)}}<sup>.{{afterDesimal(instalment.amount)}}</sup></span>
                             </div>
                         </div>
                     </div>
                     <div class="total_amm_blue">
                         <span>{{'total_installments' | translate}}</span>
-                        <span class="">${{insatllmentAmount | number : '1.2-2' }}</span>
+                        <span class="">${{beforeDesimal(installmentSummary.remaining_amount)}}<sup>.{{afterDesimal(installmentSummary.remaining_amount)}}</sup></span>
                     </div>
                 </div>
             </div>
