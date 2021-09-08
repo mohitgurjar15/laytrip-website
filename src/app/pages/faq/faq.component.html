@@ -89,10 +89,16 @@
                                 <div class="block_top">
                                     <h6>{{'faqs' | translate}}</h6>
                                 </div>
-                                <div class="block_main_faq">
+                                <div class="block_main_faq" *ngIf="faqDetail.length">
                                     <div class="block_faq" *ngFor="let faqItem of faqData.faqs;let j=index">
                                         <h5>{{faqItem.question}}</h5>
                                         <p>{{faqItem.answer}}</p>
+                                    </div>
+                                </div>
+                                <div class="block_main_faq" *ngIf="!faqDetail.length">
+                                    <div class="block_faq">
+                                        <h5>No Faq Found.</h5>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>

@@ -271,8 +271,8 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         route_code: route.route_code,
         referral_id: this.route.snapshot.queryParams['utm_source'] ? this.route.snapshot.queryParams['utm_source'] : '',
         payment_method:paymentMethod,
-        payment_frequncy: route.selected_option !='full' ?  route.selected_option : '',
-        down_payment: downPayment
+        payment_frequency: route.selected_option !='full' ?  route.selected_option : '',
+        downpayment: downPayment
         // searchData: { departure: route.departure_code, arrival: route.arrival_code, checkInDate: route.departure_date}
       };
       console.log(payload)
