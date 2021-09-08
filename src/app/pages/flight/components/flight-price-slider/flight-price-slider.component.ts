@@ -171,11 +171,11 @@ export class FlightPriceSliderComponent implements OnInit {
   prev() {
     let requestDate = moment(this.dates[0].date, 'DD/MM/YYYY').subtract('1', 'days').format('YYYY-MM-DD');
     let index = this.dates.findIndex(x => x.date == requestDate);
-    var begin = moment(requestDate).format("YYYY-MM-DD");
-    var end = moment().add(2, 'days').format("YYYY-MM-DD");
-    console.log("Begin:",begin,"End:",end,moment(begin).isBefore(end))
-    this.transformValue+=100;
-    if (index == -1 && moment(begin).isBefore(end)) {
+    var begin = moment(requestDate);
+    var end = moment().add(2, 'days');
+    
+    if (index == -1 && (moment(begin).isAfter(end, 'days') || moment(begin).isSame(end, 'days')))  {
+      this.transformValue+=100;
       this.getFlexiableDate(requestDate,'prev')
     }
     
