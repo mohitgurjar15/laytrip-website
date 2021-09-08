@@ -25,6 +25,7 @@ export class FlightPriceSliderComponent implements OnInit {
   adult: number;
   child: number;
   infant: number;
+  transformValue:number=0;
 
   slideConfig = {
     dots: false,
@@ -172,21 +173,9 @@ export class FlightPriceSliderComponent implements OnInit {
     let index = this.dates.findIndex(x => x.date == requestDate);
     var begin = moment(requestDate).format("YYYY-MM-DD");
     var end = moment().add(2, 'days').format("YYYY-MM-DD");
-    console.log("Begin:",begin,"End:",end,moment(begin).isSameOrBefore(end))
-    if (index == -1 && moment(begin).isSameOrBefore(end)) {
-      /* this.dates.unshift({
-        date: moment(requestDate, 'YYYY-MM-DD').format("DD/MM/YYYY"),
-        isPriceInInstallment: false,
-        net_rate: 0,
-        price: 0,
-        secondary_start_price: 0,
-        selling_price: 0,
-        start_price: 0,
-        unique_code: ""
-      }); */
-      // this.slickModal.slickPrev();
-      // console.log("prev")
-      //this.singleFlexLoader = true;
+    console.log("Begin:",begin,"End:",end,moment(begin).isBefore(end))
+    this.transformValue+=100;
+    if (index == -1 && moment(begin).isBefore(end)) {
       this.getFlexiableDate(requestDate,'prev')
     }
     
@@ -196,21 +185,8 @@ export class FlightPriceSliderComponent implements OnInit {
     let requestDate = moment(this.dates.slice(-1)[0].date,'DD/MM/YYYY').add('+1','days').format('YYYY-MM-DD');
     let index = this.dates.findIndex(x=>x.date ==requestDate);
     if(index==-1){
-      /* this.dates.push({
-        date: moment(requestDate, 'YYYY-MM-DD').format("DD/MM/YYYY"),
-        isPriceInInstallment: false,
-        net_rate: 0,
-        price: 0,
-        secondary_start_price: 0,
-        selling_price: 0,
-        start_price: 0,
-        unique_code: "e04c8d3f03413a15df6396523886e1b8"
-      }) */
-      // console.log("next")
-      // this.slickModal.slickNext();
+      this.transformValue-=100;
       this.getFlexiableDate(requestDate,'next')
-      //this.singleFlexLoader = true;
-      
     }
   }
 

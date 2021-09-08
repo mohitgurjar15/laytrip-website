@@ -22,7 +22,7 @@
             <span class="pink_txt pl-2" *ngIf="flexibleFullPaymentLength > 0">{{'full_prices' | translate}}</span></label>
     <div class="price_day_slider">
         <div class="slider_box">
-            <div class="slider_item" *ngFor="let item of dates">
+            <div class="slider_item" *ngFor="let item of dates" [style.transform]="'translateX(' + transformValue + '%)'"             >
                 <a href="javascript:void(0);"  *ngIf="trip =='oneway'">
                     <div class="top_dates">{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}</div>
                     <!-- <div class="top_dates">{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}<span>Aug 17, 2021</span></div> -->
