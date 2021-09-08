@@ -240,7 +240,8 @@ export class TravelerFormComponent implements OnInit {
     if (this.userInfo.roleId != 7 && this.cartItem.travelers.length==0) {
 
       let traveler = this.myTravelers.find(traveler => traveler.userId ==this.userInfo.user_id);
-        if(typeof traveler != 'undefined'){
+      if(typeof traveler != 'undefined'){
+
         this.travelers[`type${this.cartNumber}`].adults[0].type = 'adult';
         this.travelers[`type${this.cartNumber}`].adults[0].userId = traveler.userId;
         this.travelers[`type${this.cartNumber}`].adults[0].first_name = traveler.firstName;
@@ -265,7 +266,7 @@ export class TravelerFormComponent implements OnInit {
 
     for (let i = 0; i < this.cartItem.travelers.length; i++) {
       let traveler = this.cartItem.travelers[i].traveler;
-      if(typeof traveler != 'undefined'){
+      if (typeof traveler != 'undefined') {
         this.travelers[`type${this.cartNumber}`].adults[i].type = traveler.user_type;
         this.travelers[`type${this.cartNumber}`].adults[i].userId = traveler.userId;
         this.travelers[`type${this.cartNumber}`].adults[i].first_name = traveler.firstName;

@@ -50,7 +50,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private homeService: HomeService
   ) {
-    console.log("this.route.snapshot.queryParams['dealsIcon']", this.route.snapshot.queryParams)
   }
 
 
@@ -123,7 +122,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.fullPageLoading = false;
           this.isNotFound = false;
-          this.flightDetails = res.items;
+         this.flightDetails = res.items;
           this.filterFlightDetails = res;
           if (this.flightDetails.length == 0) {
             this.isNotFound = true;
@@ -329,7 +328,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       }
     }
-    console.log(this.flightDetails)
     this.flightService.setFlights(this.flightDetails)
   }
 
