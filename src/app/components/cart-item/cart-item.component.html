@@ -28,9 +28,9 @@
                   - {{commonFunction.convertDateFormat(cartItem.module_info?.arrival_date,'DD/MM/YYYY')}}</span>
                         <span *ngIf="cartItem.module_info.routes.length==1" class="header_date">{{commonFunction.convertDateFormat(cartItem.module_info?.departure_date,'DD/MM/YYYY')}}</span>
         </div>
-        <span class="alert_boxes" *ngIf="!cartItem.is_available">
+        <!-- <span class="alert_boxes" *ngIf="!cartItem.is_available">
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Alert image">
-              </span>
+              </span> -->
         </span>
         </a>
         </ng-container>

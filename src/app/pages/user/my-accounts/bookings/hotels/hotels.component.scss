@@ -1,17 +1,22 @@
-@import '../../../../../../cstm-variable';
+@import "../../../../../../cstm-variable";
 @import "../../../../../../_cstm-variable.scss";
 @import "../../../../../../_cstm-components.scss";
 @import "../../../../../../_hotel.scss";
 @import "../../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-
 #hotel_accordions_booking {
     .card {
-        border: none;
+        border: 1px solid #D6D6D6;
+        border-radius: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom: 0;
+        padding-bottom: 0;
+        background: transparent;
 
         .card-header {
-            background-color: $background-white;
+            background-color: transparent;
             border: none;
             padding: 15px;
 
@@ -80,14 +85,14 @@
                         align-items: center;
                         margin-right: 15px;
 
-                        @include tab-view{
+                        @include tab-view {
                             margin-right: 5px;
                             width: 43.3px;
                         }
 
                         img {
                             width: 24px;
-                            @include tab-view{
+                            @include tab-view {
                                 width: 18px;
                             }
                         }
@@ -135,7 +140,7 @@
         }
 
         .custom_body_box {
-            padding: 0 15px 15px;
+            padding: 0 15px 0;
 
             .hotel_card {
                 &.hotel_card_wrps {
@@ -208,7 +213,7 @@
                                 }
 
                                 &::before {
-                                    content: '';
+                                    content: "";
                                     padding: 7.5px;
                                     border-radius: 50%;
                                     background-color: $pink;
@@ -258,10 +263,7 @@
             }
         }
     }
-
 }
-
-
 
 .sub_accordions {
     margin-top: 15px;

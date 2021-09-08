@@ -11,7 +11,7 @@ declare var $: any;
   styleUrls: ['./faq.component.scss'],
 })
 export class FaqComponent implements OnInit {
- 
+
   s3BucketUrl = environment.s3BucketUrl;
   loading = false;
   faqDetail;
@@ -19,12 +19,12 @@ export class FaqComponent implements OnInit {
   constructor(
     private genericService: GenericService,
     private commonFunction: CommonFunction
-   
+
   ) { }
 
   ngOnInit() {
     $('body').addClass('cms-bgColor');
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.loadJquery();
     this.loading = true;
     this.genericService.getFaqData().subscribe((res: any) => {
@@ -33,7 +33,7 @@ export class FaqComponent implements OnInit {
     });
   }
 
-  
+
 
   loadJquery() {
     $(document).ready(function () {

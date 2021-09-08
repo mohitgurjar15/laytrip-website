@@ -9,15 +9,12 @@
                             <div class="fight_secs  {{route.stops[0].airline_logo}}">
                                 <img src="{{ route.stops[0].airline_logo }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                 <span class="fl_name">{{route.stops[0].airline_name}}</span>
-                                <span class="fl_num">{{route.stops[0].airline}} -
-                                    {{route.stops[0].flight_number}}</span>
+                                <span class="fl_num">{{route.stops[0].airline}} - {{route.stops[0].flight_number}}</span>
                             </div>
                             <div class="fight_secs">
-                                    {{route.stops[0].departure_time}} -
-                                    {{route.stops[route.stops.length-1].arrival_time}}
+                                {{route.stops[0].departure_time}} - {{route.stops[route.stops.length-1].arrival_time}}
                                 <span class="fl_times">
-                                    <span
-                                        *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
+                                    <span *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
                                 </span>
                                 <span class="fl_desti">
                                     <span class="code_sp_d"> {{route.stops[0]?.departure_info?.code}}
@@ -25,8 +22,7 @@
                                 </span>
                                 -
                                 <span class="code_sp_d2"> {{route.stops[route.stops.length-1]?.arrival_info?.code}}
-                                        <span
-                                            class="name_span_d2">{{route.stops[route.stops.length-1]?.arrival_info?.city}}</span>
+                                        <span class="name_span_d2">{{route.stops[route.stops.length-1]?.arrival_info?.city}}</span>
                                 </span>
                                 </span>
                             </div>
@@ -46,18 +42,14 @@
                                     </ng-container>
                                 </span>
                             </div>
-                            <span [id]="'accordion_infos'+i" class="accordion_infos_1" *ngIf="lastroute">
-                                <a (click)="getCancellationPolicy(item.route_code)" class="det_link"
-                                    data-toggle="collapse" [attr.data-target]="'#detail_accorrd'+i"
-                                    [attr.aria-controls]="'#detail_accorrd'+i" aria-expanded="false"
-                                    [href]="'#detail_accorrd'+i">{{'details' | translate}}</a>
-                            </span>
+                            <!-- <span [id]="'accordion_infos'+i" class="accordion_infos_1" *ngIf="lastroute">
+                                <a (click)="getCancellationPolicy(item.route_code)" class="det_link" data-toggle="collapse" [attr.data-target]="'#detail_accorrd'+i" [attr.aria-controls]="'#detail_accorrd'+i" aria-expanded="false" [href]="'#detail_accorrd'+i">{{'details' | translate}}</a>
+                            </span> -->
                         </div>
                         <div class="fl_timin">
                             <span class="hh_mm">{{route.duration}}</span>
                             <ng-container *ngIf="route.stops.length>1">
-                                <span class="lyovr_txt" *ngFor="let stop of route.stops | slice:1; let laststop = last">{{stop?.departure_info?.code}}
-                                    {{'plane_change' | translate}} {{stop?.layover_duration}}</span>
+                                <span class="lyovr_txt" *ngFor="let stop of route.stops | slice:1; let laststop = last">{{stop?.departure_info?.code}} {{'plane_change' | translate}} {{stop?.layover_duration}}</span>
                             </ng-container>
                         </div>
                     </div>
@@ -68,15 +60,13 @@
                                     <div class="fight_secs {{route.stops[0].airline_logo}}">
                                         <img src="{{ route.stops[0].airline_logo || defaultImage }}" alt="Airlines Logo" onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';">
                                         <span class="fl_name">{{route.stops[0].airline_name}}</span>
-                                        <span class="fl_num">{{route.stops[0].airline}} -
-                                            {{route.stops[0].flight_number}}</span>
+                                        <span class="fl_num">{{route.stops[0].airline}} - {{route.stops[0].flight_number}}</span>
                                     </div>
                                     <div class="fight_secs">
                                         <div class="upper_f_wrps">
                                             <span class="fl_times duel_wrps">{{convertTime(route.stops[0].departure_time)}}
                                                 <span class="fl_desitines">
-                                                    <span
-                                                        class="code_bt_m">{{route.stops[0]?.departure_info?.code}}</span>
+                                                    <span class="code_bt_m">{{route.stops[0]?.departure_info?.code}}</span>
                                             <br>
                                             <span class="code_name_m">{{route.stops[0]?.departure_info?.city}}</span>
                                             </span>
@@ -86,19 +76,15 @@
                                                     <span class="pine_line"></span>
                                             <div class="stp_names">
                                                 <ng-container *ngIf="route.stops.length>1">
-                                                    <div class="t_name" *ngFor="let stop of route.stops | slice:1; let laststop = last">
-                                                        {{stop.departure_info.code}}</div>
+                                                    <div class="t_name" *ngFor="let stop of route.stops | slice:1; let laststop = last">{{stop.departure_info.code}}</div>
                                                 </ng-container>
                                                 <div class="n_stop" *ngIf="route.stops.length==1">Non Stop</div>
                                             </div>
                                         </div>
                                         </span>
                                         <span class="fl_desti duel_wrps">
-                                                <span
-                                                    class="fl_name">{{convertTime(route.stops[route.stops.length-1].arrival_time)
-                                                    }}
-                                                    <span
-                                                        *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
+                                                <span class="fl_name">{{convertTime(route.stops[route.stops.length-1].arrival_time)}}
+                                                    <span *ngIf="getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)">+{{getDayDiff(route.stops[route.stops.length-1].arrival_date,route.stops[0].departure_date)}}</span>
                                         </span>
                                         <div class="fl_name_inner">
                                             <span class="code_bt_m">{{route.stops[route.stops.length-1]?.arrival_info?.code}}</span>
@@ -112,9 +98,9 @@
                                         <div class="layover_wrps">
                                             <ng-container *ngIf="route.stops.length>1">
                                                 <span class="lyovr_txt" *ngFor="let stop of route.stops | slice:1; let laststop = last">
-                                                        {{stop?.departure_info?.code}} {{'plane_change' | translate}}
-                                                        {{stop?.layover_duration}}
-                                                    </span>
+                                                            {{stop?.departure_info?.code}} {{'plane_change' | translate}}
+                                                            {{stop?.layover_duration}}
+                                                        </span>
                                             </ng-container>
                                         </div>
                                     </div>
@@ -122,37 +108,26 @@
                             </div>
                         </div>
                     </div>
-                    <span [id]="'accordion_infos'+i" class="accordion_infos_1" *ngIf="lastroute">
-                            <a (click)="getCancellationPolicy(item.route_code)" class="det_link" data-toggle="collapse"
-                                [attr.data-target]="'#detail_accorrd'+i" [attr.aria-controls]="'#detail_accorrd'+i"
-                                aria-expanded="false" [href]="'#detail_accorrd'+i">
-                                {{'details' | translate}}
-                            </a>
-                        </span>
+                    <!-- <span [id]="'accordion_infos'+i" class="accordion_infos_1" *ngIf="lastroute">
+                            <a (click)="getCancellationPolicy(item.route_code)" class="det_link" data-toggle="collapse" [attr.data-target]="'#detail_accorrd'+i" [attr.aria-controls]="'#detail_accorrd'+i" aria-expanded="false" [href]="'#detail_accorrd'+i">{{'details' | translate}}</a>
+                        </span> -->
                 </div>
             </div>
         </div>
-
         <div class="right_side" [ngClass]="{'pt-3':!isRoundTrip}">
             <div class="fl_fares {{item?.unique_code}}">
                 <ng-container *ngIf="item.is_installment_available">
                     <span class="fare_type desk_fare">{{'from' | translate}}</span>
                     <span class="total_pr d-flex flex-row justify-content-center">
-                            <span
-                                *ngIf="item?.offer_data?.applicable === true && item.secondary_start_price > item.discounted_secondary_start_price"
-                                class="dashed_price"> ${{ item.payment_object[item.payment_object.installment_type].actual_installment | number : '1.2-2'}} </span>
-                    <span class="big-num">${{
-                                item.payment_object[item.payment_object.installment_type].installment}}</span>
+                            <span *ngIf="item?.offer_data?.applicable === true && item.secondary_start_price > item.discounted_secondary_start_price" class="dashed_price"> ${{ item.payment_object[item.payment_object.installment_type].actual_installment | number : '1.2-2'}} </span>
+                    <span class="big-num">${{item.payment_object[item.payment_object.installment_type].installment | number : '1.2-2' }}</span>
                     </span>
                     <span class="fare_type desk_fare">{{(item.payment_object.installment_type =='biweekly' ? 'Bi-Weekly' : item.payment_object.installment_type) | translate}}</span>
                     <span class="cta_btn">
-                            <button (click)="bookNow(item)">{{'add_to_cart' | translate}}</button>
-                            <div class="section_description no_flight "
-                                *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
+                            <button (click)="bookNow(item)">{{'checkout' | translate}}</button>
+                            <div class="section_description no_flight" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                                 <span class="sec_text">{{'flight_not_available' | translate}}</span>
-                    <a (click)="hideFlightNotAvailable()" href="javascript:void(0);">
-                        <img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close">
-                    </a>
+                    <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
             </div>
             </span>
             <span class="fare_type mobile_fare">{{'flexible_installments' | translate}}</span>
@@ -163,92 +138,99 @@
                 </span>
                 <span class="fare_type">{{'full_payment' | translate}}</span>
                 <span class="cta_btn">
-                            <button (click)="bookNow(item)">{{'add_to_cart' | translate}}</button>
-                            <div class="section_description"
-                                *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
+                            <button (click)="bookNow(item)">Checkout</button>
+                            <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                                 <span class="sec_text">{{'flight_not_available' | translate}}</span>
-                <a (click)="hideFlightNotAvailable()" href="javascript:void(0);">
-                    <img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close">
-                </a>
+                <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
         </div>
         </span>
         </ng-container>
     </div>
 </div>
-<span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}}
-  {{'off' | translate}}</span>
+<span class="off_label" *ngIf="item.offer_data.applicable && item.offer_data.discount.applicable">${{item.offer_data.discount.amount}} {{'off' | translate}}</span>
 </div>
-
-<div [id]="'detail_accorrd'+i" [attr.aria-labelledby]="'accordion_infos'+i" class="collapse detail_accorrd" data-parent="#routing_main_wrps">
+<div [id]="'detail_accorrd'+i" [attr.aria-labelledby]="'accordion_infos'+i" class="collapse detail_accorrd show" data-parent="#routing_main_wrps">
     <div class="accordion_body">
         <div class="io_ru_wrps">
             <div class="installment_wprs">
                 <div class="type_lines">
-                    <span class="titles">{{'installment_option' | translate}} 1</span>
-                    <span class="texts" *ngIf="item.is_installment_available && item.payment_object.weekly">
-                                ${{item.payment_object['weekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                {{ item.payment_object['weekly'].installment_count }}  {{'po_weekly_installments' | translate}}
-                                {{'installments_of' | translate}}
-                                ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
-                            </span>                   
-                    <span class="texts" *ngIf="!item.is_installment_available || !item.payment_object.weekly">
-                      {{'not_available' | translate}}
-                            </span>
-
+                    <span class="titles">{{'installment_option' | translate}} 1
+                        <span class="texts  d-block d-md-none" *ngIf="item.is_installment_available && item.payment_object.weekly">
+                            ${{item.payment_object['weekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                            {{ item.payment_object['weekly'].installment_count }}  {{'po_weekly_installments' | translate}}
+                            ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
+                        </span>
+                    <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available || !item.payment_object.weekly">{{'not_available' | translate}}</span>
+                    </span>
+                    <span class="texts d-none d-md-block" *ngIf="item.is_installment_available && item.payment_object.weekly">
+                        ${{item.payment_object['weekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                        {{ item.payment_object['weekly'].installment_count }}  {{'po_weekly_installments' | translate}}
+                        ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
+                    </span>
+                    <span class="texts d-none d-md-block" *ngIf="!item.is_installment_available || !item.payment_object.weekly">{{'not_available' | translate}}</span>
+                    <div *ngIf="item.is_installment_available && item.payment_object.weekly" class="installment_add_cart" [ngClass]="{'checked':item.selected_option === 'weekly'}" (click)="checkCartButton(i,'weekly',item.payment_object['weekly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart "> <i class="fa fa-check"
+                            aria-hidden="true"></i></div>
                 </div>
                 <div class="type_lines">
-                    <span class="titles">{{'installment_option' | translate}} 2</span>
-                    <span class="texts" *ngIf="item.is_installment_available &&  item.payment_object.biweekly">
-                                ${{item.payment_object['biweekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                {{ item.payment_object['biweekly'].installment_count}} {{'bi_weekly' | translate}} {{'installments_of' | translate}}
-                                ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}
-                            </span>
-                    <span class="texts" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">
-                      {{'not_available' | translate}}
-                            </span>
-
-                </div>
-                <div class="type_lines">
-                    <span class="titles">{{'installment_option' | translate}} 3 </span>
-                    <span class="texts" *ngIf="item.is_installment_available && item.payment_object.monthly">
-
-                                ${{item.payment_object['monthly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
-                                {{ item.payment_object['monthly'].installment_count}} {{'monthly' | translate}} {{'installments_of' | translate}}
-                                ${{item.payment_object['monthly'].installment | number : '1.2-2'}}
-                            </span>
-                    <span class="texts" *ngIf="!item.is_installment_available || !item.payment_object.monthly"> {{'not_available' | translate}}
-                            </span>
-
-                </div>
-                <div class="type_lines">
-                    <span class="titles"> {{'full_payment' | translate}} </span>
-                    <span class="texts"> ${{item.offer_data.applicable === true ?
-                                transformDecimal(item.discounted_selling_price) : transformDecimal(item.selling_price)
-                                }} {{'including_taxes_fees' | translate}}</span>
-                    <div class="notifi_text mobile_notifi" *ngIf="item.is_installment_available && item?.offer_data.applicable == false">
-                        {{'more_payment_options' | translate}}
+                    <span class="titles">{{'installment_option' | translate}} 2
+                        <span class="texts d-block d-md-none" *ngIf="item.is_installment_available &&  item.payment_object.biweekly">
+                            ${{item.payment_object['biweekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                            {{ item.payment_object['biweekly'].installment_count}} {{'bi_weekly' | translate}} {{'installments_of' | translate}}
+                            ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}
+                        </span>
+                    <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">{{'not_available' | translate}}</span>
+                    </span>
+                    <span class="texts d-none d-md-block" *ngIf="item.is_installment_available &&  item.payment_object.biweekly">
+                        ${{item.payment_object['biweekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                        {{ item.payment_object['biweekly'].installment_count}} {{'bi_weekly' | translate}} {{'installments_of' | translate}}
+                        ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}
+                    </span>
+                    <span class="texts d-none d-md-block" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">{{'not_available' | translate}}</span>
+                    <div *ngIf="item.is_installment_available &&  item.payment_object.biweekly" [ngClass]="{'checked': item.selected_option === 'biweekly'}" class="installment_add_cart" (click)="checkCartButton(i,'biweekly',item.payment_object['biweekly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
+                        <i class="fa fa-check" aria-hidden="true "></i>
                     </div>
-
                 </div>
-                <div class="full_desk_not" *ngIf="item.is_installment_available && item?.offer_data.applicable == false">
-                    <div class="notifi_text">{{'more_payment_options' | translate}}</div>
+                <div class="type_lines ">
+                    <span class="titles">{{'installment_option' | translate}} 3 
+                        <span class="texts  d-block d-md-none" *ngIf="item.is_installment_available && item.payment_object.monthly ">
+                            ${{item.payment_object['monthly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                            {{ item.payment_object['monthly'].installment_count}} {{'monthly' | translate}} {{'installments_of' | translate}}
+                            ${{item.payment_object['monthly'].installment | number : '1.2-2'}}
+                        </span>
+                    <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available || !item.payment_object.monthly "> {{'not_available' | translate}}</span>
+                    </span>
+                    <span class="texts d-none d-md-block" *ngIf="item.is_installment_available && item.payment_object.monthly ">
+                        ${{item.payment_object['monthly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
+                        {{ item.payment_object['monthly'].installment_count}} {{'monthly' | translate}} {{'installments_of' | translate}}
+                        ${{item.payment_object['monthly'].installment | number : '1.2-2'}}
+                    </span>
+                    <span class="texts d-none d-md-block" *ngIf="!item.is_installment_available || !item.payment_object.monthly "> {{'not_available' | translate}}</span>
+                    <div *ngIf="item.is_installment_available && item.payment_object.monthly" [ngClass]="{'checked': item.selected_option === 'monthly'}" class="installment_add_cart" (click)="checkCartButton(i,'monthly',item.payment_object['monthly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
+                        <i class="fa fa-check " aria-hidden="true "></i>
+                    </div>
+                </div>
+                <div class="type_lines ">
+                    <span class="titles"> {{'full_payment' | translate}} 
+                        <span class="texts d-block d-md-none"> ${{item.offer_data.applicable === true ? transformDecimal(item.discounted_selling_price) : transformDecimal(item.selling_price) }} {{'including_taxes_fees' | translate}}</span>
+                    </span>
+                    <span class="texts d-none d-md-block"> ${{item.offer_data.applicable === true ? transformDecimal(item.discounted_selling_price) : transformDecimal(item.selling_price) }} {{'including_taxes_fees' | translate}}</span>
+                    <div class="installment_add_cart " [ngClass]="{'checked': item.selected_option === 'full'}" (click)="checkCartButton(i,'full',item.selling_price,'no-installment')">Add <img *ngIf="item.selected_option === 'full'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'full'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart "><i class="fa fa-check "
+                            aria-hidden="true "></i></div>
                 </div>
             </div>
-            <div class="rules_wrps">
-                <span class="heads"><img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="">
-                  {{'rules' | translate}}</span>
-                <span class="texts_rules" *ngIf="!loadCancellationPolicy && errorMessage!=''">{{ errorMessage
-                            }}</span>
-                <span class="texts_rules"> {{'rules_1' | translate}}
-                            <a [routerLink]="['/terms']"
-                                [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a> {{'rules_2' | translate}}.</span>
+            <div class="rules_wrps ">
+                <span class="heads "><img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg " alt=" ">{{'rules' | translate}}</span>
+                <span class="texts_rules " *ngIf="!loadCancellationPolicy && errorMessage!='' ">{{ errorMessage}}</span>
+                <span class="texts_rules "> {{'rules_1' | translate}}
+                    <a [routerLink]="[ '/terms'] " [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : '' ">{{'terms' | translate}}</a>{{'rules_2' | translate}}.
+                </span>
             </div>
         </div>
     </div>
 </div>
 </div>
 </div>
-<div *ngIf="scrollLoading" class="scrollLoading_wrapper">
-    <i class="fa fa-spinner fa-spin pink_spinner"></i>
+<div *ngIf="scrollLoading " class="scrollLoading_wrapper ">
+    <i class="fa fa-spinner fa-spin pink_spinner "></i>
 </div>
 <app-flight-not-found *ngIf="!flightDetails.length"></app-flight-not-found>
