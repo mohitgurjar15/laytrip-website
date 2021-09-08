@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { CommonFunction } from '../../_helpers/common-function';
@@ -24,6 +25,7 @@ export class PriceSummaryComponent implements OnInit {
   
   constructor(
     private commonFunction: CommonFunction,
+    private decimalPipe: DecimalPipe
   ) {
     // Author: xavier | 2021/7/28
     // Description: To support localized installment types
@@ -77,5 +79,19 @@ export class PriceSummaryComponent implements OnInit {
 
   typeOf(value) {
     return typeof value;
+  }
+
+  beforeDesimal(value){
+    value = this.transformDecimal(value)
+    return (value.toString().split(".")[0]) == 0 ? "00" : (value.toString().split(".")[0])
+  }
+
+  afterDesimal(value){
+    value = this.transformDecimal(value)
+    return (value.toString().split(".")[1]) == 0 ? "00" : (value.toString().split(".")[1])
+  }
+
+  transformDecimal(num) {
+    return this.decimalPipe.transform(num, '1.2-2');
   }
 }

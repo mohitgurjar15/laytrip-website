@@ -13,32 +13,34 @@
                 </div>
             </div>
         </div>
-        <div *ngFor="let item of cartItem.booking;let i = index ;">
-            <div class="summary_box" *ngIf="item.moduleId === 3">
+        <div *ngFor="let items of cartItem.booking;let i = index ;">
+            <div class="summary_box" *ngIf="items.moduleId === 3">
                 <div class="summary_item">
                     <div class="summary_type">
-                        {{item.moduleInfo[0].hotel_name}} ({{item.moduleInfo[0].input_data.num_nights}} {{item.moduleInfo[0].input_data.num_nights >1 ? 'Nights' : 'Night' }} x ${{item.totalAmount}})
+                        {{items.moduleInfo[0].hotel_name}} ({{items.moduleInfo[0].input_data.num_nights}} {{items.moduleInfo[0].input_data.num_nights >1 ? 'Nights' : 'Night' }} x ${{items.totalAmount}})
                     </div>
                     <div class="summary_item_price">
-                        ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
+                        ${{beforeDesimal(items.totalAmount)}}<sup>.{{afterDesimal(items.totalAmount)}}</sup>
                     </div>
                 </div>
                 <div class="summary_item">
                     <div class="summary_type">
-                        {{item.moduleInfo[0].hotel_name}} <a href="javascript:void(0);">Taxes and Fees</a>
+                        {{items.moduleInfo[0].hotel_name}} <a href="javascript:void(0);">Taxes and Fees</a>
                     </div>
                     <div class="summary_item_price">
-                        ${{beforeDesimal(item.moduleInfo[0].selling.taxes)}}<sup>.{{afterDesimal(item.moduleInfo[0].selling.taxes)}}</sup>
+                        ${{beforeDesimal(items.moduleInfo[0].selling.taxes)}}<sup>.{{afterDesimal(items.moduleInfo[0].selling.taxes)}}</sup>
                     </div>
                 </div>
-                <div class="summary_item" *ngIf="item.moduleInfo[0].mandatory_fee_details.is_postpaid === true">
-                    <div class="summary_type">
-                        {{item.moduleInfo[0].hotel_name}} {{item.moduleInfo[0].mandatory_fee_details.postpaid_break_dwon[0].name}}
+                <ng-container *ngIf="items.moduleInfo[0].mandatory_fee_details.is_postpaid === true">
+                    <div class="summary_item" *ngFor="let item of items.moduleInfo[0].mandatory_fee_details.postpaid_break_dwon">
+                        <div class="summary_type">
+                            {{items.moduleInfo[0].hotel_name}} {{item.name}}
+                        </div>
+                        <div class="summary_item_price">
+                            ${{beforeDesimal(item.price)}}<sup>.{{afterDesimal(item.price)}}</sup>
+                        </div>
                     </div>
-                    <div class="summary_item_price">
-                        ${{beforeDesimal(item.moduleInfo[0].mandatory_fee_details.postpaid_break_dwon[0].price)}}<sup>.{{afterDesimal(item.moduleInfo[0].mandatory_fee_details.postpaid_break_dwon[0].price)}}</sup>
-                    </div>
-                </div>
+                </ng-container>
             </div>
         </div>
         <div class="summary_box">
@@ -57,7 +59,7 @@
                     {{'booking_downpayment' | translate}}
                 </div>
                 <div class="summary_item_price">
-                    $180<sup>.89</sup>
+                    ${{beforeDesimal(cartItem.totalDownpayment)}}<sup>.{{afterDesimal(cartItem.totalDownpayment)}}</sup>
                 </div>
             </div>
             <div class="summary_item">
