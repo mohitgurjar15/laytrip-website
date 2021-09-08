@@ -428,7 +428,6 @@ export class FlightSearchWidgetComponent implements OnInit {
       this.timer = 0;
       // this.timerStop();
       // this.timerStart();
-
       // Execution start
       var currentDate = new Date();
       // 1 June validation apply
