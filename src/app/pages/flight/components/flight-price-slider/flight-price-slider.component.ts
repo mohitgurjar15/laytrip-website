@@ -136,6 +136,7 @@ export class FlightPriceSliderComponent implements OnInit {
 
   getPrice(item) {
     let price;
+    let labelClass = 'price_availabe';
     if (item.isPriceInInstallment) {
       if (item.start_price < 5) {
         price = '5.00';
@@ -143,11 +144,12 @@ export class FlightPriceSliderComponent implements OnInit {
       else {
         price = item.start_price;
       }
-    }
-    else {
+    } else {
       price = item.selling_price;
+      labelClass = price > 0 ? 'full_payment' :'price_unavailabe';
     }
-    return { price: price > 0 ? '$' + parseFloat(price).toFixed(2) : 'Flights Unavailable', className: price > 0 && item.isPriceInInstallment ? 'price_availabe' : 'price_unavailabe' };
+    
+    return { price: price > 0 ? '$' + parseFloat(price).toFixed(2) : 'Flights Unavailable', className : labelClass};
   }
 
   getFlexibleArivalDate(date) {

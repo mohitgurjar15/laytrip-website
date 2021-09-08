@@ -5,6 +5,10 @@
         <div class="travellers">
             <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)" (currentChangeCounter)="counterValueChanged($event)"></app-guest-info>
         </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitch" [(ngModel)]="isHotelDealIcon" (click)="clickOnDealsIcon()">
+            <label class="custom-control-label" for="customSwitch">Deals</label>
+        </div>
     </div>
     <form *ngIf="!showCommingSoon" [formGroup]="hotelSearchForm" autocomplete="off" (ngSubmit)="searchHotels()">
         <div class="hotels_search">

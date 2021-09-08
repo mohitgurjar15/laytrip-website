@@ -4,168 +4,134 @@
         <div class="pay_list_wrper" id="flight_list_wrper">
             <ng-container *ngFor="let item of cartPrices">
                 <div class="pay_listing" *ngIf="item.type=='flight'">
-                    <span>{{item.location}}
-            <span class="purple_trvl">
-            </span>
-                    </span>
+                    <span>{{item.location}}<span class="purple_trvl"></span></span>
                     <span class="price_wrps d-flex justify-content-between text-right" *ngIf="item.offer_data.applicable">
-            <span class="old_price">
-              ${{item.selling_price | number : '1.2-2'}}
-            </span>
-                    <span class="new_price">
-              ${{item.discounted_selling_price | number : '1.2-2'}}
-            </span>
+                        <span class="old_price">${{beforeDesimal(item.selling_price)}}<sup>.{{afterDesimal(item.selling_price)}}</sup></span>
+                    <span class="new_price">${{beforeDesimal(item.discounted_selling_price)}}<sup>.{{afterDesimal(item.discounted_selling_price)}}</sup></span>
                     </span>
-                    <span *ngIf="!item.offer_data.applicable">${{item.selling_price | number : '1.2-2'}}</span>
+                    <span *ngIf="!item.offer_data.applicable">${{beforeDesimal(item.selling_price)}}<sup>.{{afterDesimal(item.selling_price)}}</sup></span>
                 </div>
             </ng-container>
         </div>
-
         <ng-container *ngFor="let item of cartPrices">
             <div class="pay_list_wrper hotel_pay_list_wrper" *ngIf="item.type=='hotel'">
                 <div class="hotel-listing-line">
                     <div class="pay_listing hotel_line">
                         <span>
-              <p *ngIf="item.offer_data.applicable">
-                {{item.location}} ({{item.total_night || 0 }} Nights x
-                ${{item.price_break_down.discounted_sub_total/item.total_night | number : '1.2-2'}})
-              </p>
-              <p *ngIf="!item.offer_data.applicable">
-                {{item.location}} ({{item.total_night || 0 }} Nights x
-                ${{item.price_break_down.sub_total/item.total_night | number : '1.2-2'}})
-              </p>
-            </span>
-                        <span class="price_wrps" *ngIf="item.offer_data.applicable">
-              <span class="old_price justify-content-end">
-                ${{item.price_break_down.sub_total | number : '1.2-2'}}
-              </span>
-                        <span class="new_price">
-                ${{item.price_break_down.discounted_sub_total | number : '1.2-2'}}
-              </span>
+                            <p *ngIf="item.offer_data.applicable">{{item.location}} ({{item.total_night || 0 }} Nights x ${{item.price_break_down.discounted_sub_total/item.total_night | number : '1.2-2'}})</p>
+                            <p *ngIf="!item.offer_data.applicable">{{item.location}} ({{item.total_night || 0 }} Nights x ${{item.price_break_down.sub_total/item.total_night | number : '1.2-2'}})</p>
                         </span>
-                        <span *ngIf="!item.offer_data.applicable">${{item.price_break_down.sub_total | number : '1.2-2'}}</span>
+                        <span class="price_wrps" *ngIf="item.offer_data.applicable">
+                            <span class="old_price justify-content-end">${{item.price_break_down.sub_total | number : '1.2-2'}}</span>
+                        <span class="new_price d-block">${{beforeDesimal(item.price_break_down.discounted_sub_total)}}<sup>.{{afterDesimal(item.price_break_down.discounted_sub_total)}}</sup></span>
+                        </span>
+                        <span *ngIf="!item.offer_data.applicable" class="d-block">${{beforeDesimal(item.price_break_down.sub_total)}}<sup>.{{afterDesimal(item.price_break_down.sub_total)}}</sup></span>
                     </div>
                     <div class="pay_listing hotel_line">
                         <span>
-              <p>
-                {{item.location}}
-              </p>
-              <a data-toggle="modal" data-target="#tax_fee_modal" class="tax_accor_btn">{{'taxes_fees' | translate}}</a>
-            </span>
-                        <span>${{item.price_break_down.taxes | number : '1.2-2'}}</span>
+                            <p>{{item.location}}</p>
+                            <a data-toggle="modal" data-target="#tax_fee_modal" class="tax_accor_btn">{{'taxes_fees' | translate}}</a>
+                        </span>
+                        <span class="d-block">${{beforeDesimal(item.price_break_down.taxes)}}<sup>.{{afterDesimal(item.price_break_down.taxes)}}</sup></span>
                     </div>
-
                     <ng-container *ngIf="item.mandatory_fee_details.is_prepaid">
                         <div class="pay_listing hotel_line" *ngFor="let item of item.mandatory_fee_details.prepaid_break_dwon">
-                            <span>
-                <p>
-                  {{item.name}} ({{'inc_total_price' | translate}})
-                </p>
-              </span>
-                            <span>${{item.price | number : '1.2-2'}}</span>
+                            <span><p>{{item.name}} ({{'inc_total_price' | translate}})</p></span>
+                            <span class="d-block">${{beforeDesimal(item.price)}}<sup>.{{afterDesimal(item.price)}}</sup></span>
                         </div>
                     </ng-container>
 
                     <ng-container *ngIf="item.mandatory_fee_details.is_postpaid">
                         <div class="pay_listing hotel_line" *ngFor="let item of item.mandatory_fee_details.postpaid_break_dwon">
-                            <span>
-                <p>
-                  {{item.name}} ({{'pay_at_property' | translate}})
-                </p>
-              </span>
-                            <span>${{item.price | number : '1.2-2'}}</span>
+                            <span><p>{{item.name}} ({{'pay_at_property' | translate}})</p></span>
+                            <span class="d-block">${{beforeDesimal(item.price)}}<sup>.{{afterDesimal(item.price)}}</sup></span>
                         </div>
                     </ng-container>
                 </div>
             </div>
         </ng-container>
-
         <div class="pay_listing total_amm_blue">
             <span>{{'total_purchases' | translate}}</span>
-
-            <span *ngIf="typeOf(priceSummary.instalments)!='undefined'" class="">${{priceSummary.totalAmount | number :
-        '1.2-2'}}</span>
-
+            <span *ngIf="typeOf(installmentSummary)!='undefined'">${{beforeDesimal(installmentSummary.total_price)}}<sup>.{{afterDesimal(installmentSummary.total_price)}}</sup></span>
         </div>
         <!-- Start -->
         <div class="pay_list_wrper">
-            <div class="pay_listing" *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0">
+            <div class="pay_listing" *ngIf="installmentSummary.installment_dates.length && typeOf(installmentSummary)!='undefined'">
                 <span>{{'booking_downpayment' | translate}}</span>
-                <span class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount | number : '1.2-2'}}</span>
+                <span class="d-block">${{beforeDesimal(installmentSummary?.total_downpayment)}}<sup>.{{afterDesimal(installmentSummary?.total_downpayment)}}</sup></span>
             </div>
             <div class="pay_listing">
                 <span>{{'applied_points' | translate}}</span>
-                <span class="">-${{priceSummary.layCreditPoints | number : '1.2-2' }} </span>
+                <span class="">-${{beforeDesimal(priceSummary.layCreditPoints)}}<sup>.{{afterDesimal(priceSummary.layCreditPoints)}}</sup></span>
             </div>
         </div>
         <div class="pay_listing total_amm_blue bb_none">
             <span>{{'total_due' | translate}}</span>
-            <span *ngIf="priceSummary?.paymentType=='instalment' && priceSummary.instalments?.instalment_date[0]?.instalment_amount > 0" class="">${{priceSummary.instalments?.instalment_date[0]?.instalment_amount
-        | number : '1.2-2'}}</span>
-            <span *ngIf="priceSummary?.paymentType=='no-instalment'" class="">${{priceSummary.totalAmount | number :
-        '1.2-2'}}</span>
+            <span *ngIf="installmentSummary.installment_dates.length" class="">${{beforeDesimal(installmentSummary.total_downpayment)}}<sup>.{{afterDesimal(installmentSummary.total_downpayment)}}</sup></span>
+            <span *ngIf="!installmentSummary.installment_dates.length" class="">${{beforeDesimal(installmentSummary.total_price)}}<sup>.{{afterDesimal(installmentSummary.total_price)}}</sup></span>
         </div>
         <!-- End -->
-        <div class="price_accordion" id="price_collapse" *ngIf="priceSummary?.paymentType=='instalment'">
+        <div class="price_accordion" id="price_collapse" *ngIf="typeOf(installmentSummary)!='undefined'">
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc" aria-expanded="true" aria-controls="instalment_acc">
-            <span class="open_text" *ngIf="userLang!='es'">
-              {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
-              priceSummary.instalments?.instalment_date?.length-1 : 0 }}
-              {{ installmentType[userLang][priceSummary.instalmentType] }}
-              {{'installments_of' | translate}} ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount | number : '1.2-2'}}
-            </span>
-            <span class="open_text" *ngIf="userLang=='es'">
-                {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
-                priceSummary.instalments?.instalment_date?.length-1 : 0 }}
-                Pagos {{ installmentType[userLang][priceSummary.instalmentType] }}es
-                de ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount | number : '1.2-2'}}
-              </span>
-            <span class="close_text">
-                <span>{{'total_installments' | translate}}</span>
-              <span class="">${{insatllmentAmount | number : '1.2-2' }}</span>
-            </span>
-          </button>
+                        <span class="open_text" *ngIf="userLang!='es'">
+                            Payment Plans
+                            <!-- {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
+                            priceSummary.instalments?.instalment_date?.length-1 : 0 }}
+                            {{ installmentType[userLang][priceSummary.instalmentType] }}
+                            {{'installments_of' | translate}} ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount | number : '1.2-2'}} -->
+                        </span>
+                        <span class="open_text" *ngIf="userLang=='es'">
+                            {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
+                            priceSummary.instalments?.instalment_date?.length-1 : 0 }}
+                            Pagos {{ installmentType[userLang][priceSummary.instalmentType] }}es
+                            de ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount | number : '1.2-2'}}
+                        </span>
+                        <span class="close_text">
+                            <span>{{'total_installments' | translate}}</span>
+                            <span class="">${{beforeDesimal(insatllmentAmount)}}<sup>.{{afterDesimal(insatllmentAmount)}}</sup></span>
+                        </span>
+                    </button>
                 </div>
                 <div id="instalment_acc" class="collapse show" aria-labelledby="headingOne" data-parent="#price_collapse">
                     <div class="card-body">
-                        <div class="pay_sap_setions" *ngIf="typeOf(priceSummary.instalments)!='undefined'">
-                            <div class="due_details" *ngFor="let instalment of priceSummary.instalments.instalment_date | slice:1; let i = index;">
-                                <span>#{{i+1}} {{'due' | translate}} {{commonFunction.convertDateFormat(instalment.instalment_date,'YYYY-MM-DD') }}</span>
-                                <span class="">${{instalment.instalment_amount |
-                  number : '1.2-2'}}</span>
+                        <div class="pay_sap_setions" *ngIf="typeOf(installmentSummary)!='undefined'">
+                            <div class="due_details" *ngFor="let instalment of installmentSummary.installment_dates; let i = index;">
+                                <span class="payment_due_date">
+                                    <div class="due_date_ctn">#{{i+1}} {{'due' | translate}} {{commonFunction.convertDateFormat(instalment.date,'YYYY-MM-DD') }}</div>
+                                    <div class="booking_type"> 
+                                        <ng-container *ngFor="let module of instalment.breakdown">
+
+                                            <i *ngIf="module.type=='flight'" class="fa fa-plane" aria-hidden="true"></i>
+                                            <i *ngIf="module.type=='hotel'" class="fa fa-bed" aria-hidden="true"></i>
+                                        </ng-container>
+                                    </div>
+                                </span>
+                                <span class="">${{beforeDesimal(instalment.amount)}}<sup>.{{afterDesimal(instalment.amount)}}</sup></span>
                             </div>
                         </div>
                     </div>
                     <div class="total_amm_blue">
                         <span>{{'total_installments' | translate}}</span>
-                        <span class="">${{insatllmentAmount | number : '1.2-2' }}</span>
+                        <span class="">${{beforeDesimal(installmentSummary.remaining_amount)}}<sup>.{{afterDesimal(installmentSummary.remaining_amount)}}</sup></span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 <section class="block_tax_fee_main modal fade comman_modal show" id="tax_fee_modal" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal_title">
-                <button type="button" class="close" (click)="closeModal()">
-          <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
-        </button>
+                <button type="button" class="close" (click)="closeModal()"><img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon"></button>
             </div>
             <div class="tax_fee_modal_wrp">
                 <div class="inner_wrppar">
-                    <div class="title_box">
-                        {{'taxes_fees' | translate}}
-                    </div>
+                    <div class="title_box">{{'taxes_fees' | translate}}</div>
                     <div class="fee_msg">
-                        <p class="para_fees">
-                            {{ 'taxes_fees_info' | translate }}
-                        </p>
+                        <p class="para_fees">{{ 'taxes_fees_info' | translate }}</p>
                     </div>
                     <div class="logo_wrpper_footer">
                         <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />

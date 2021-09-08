@@ -56,13 +56,13 @@
                             <p>{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}</p>
                         </div>
                         <div class="block_btm">
-                            <span  *ngIf="!singleFlexLoader" [ngClass]="{'price_availabe':item.isPriceInInstallment,'full_payment':!item.isPriceInInstallment}" >
+                            <span  class="{{ getPrice(item).className }}" *ngIf="!singleFlexLoader" >
                                 {{ getPrice(item).price}}
                             </span>
                         </div>
                         <div class="block_btm fb_animation" *ngIf="singleFlexLoader">
                             <span></span>
-                        </div>
+                        </div> 
                     </a>
                 </div>
 
@@ -73,7 +73,7 @@
                             <p>{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}<br>{{ getFlexibleArivalDate(item.date,departure) }}</p>
                         </div>
                         <div class="block_btm">
-                            <span  class="{{ getPrice(item).className }}" [ngClass]="{'price_availabe':item.isPriceInInstallment,'full_payment':!item.isPriceInInstallment}" >
+                            <span  class="{{ getPrice(item).className }}" >
                                 {{ getPrice(item).price}}
                             </span>
                         </div>

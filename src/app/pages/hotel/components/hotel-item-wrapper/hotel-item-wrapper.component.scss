@@ -2291,20 +2291,19 @@ agm-map {
             .detail_info_show {
                 width: 100%;
                 background: $background-white;
-                padding: 20px 15px;
+                padding: 10px 15px;
                 border-radius: 10px;
                 @include tab-view {
                     padding: 10px;
                 }
                 .card-body {
-                    border: 1px solid $box-border-color;
+                    //border: 1px solid $box-border-color;
                     border-radius: 10px;
-                    padding: 15px;
+                    padding: 8px 0;
                     //margin-top: 15px;
                     @include tab-view {
                         //border: none;
                         margin: 0;
-                        padding: 10px;
                     }
                     .io_ru_wrps {
                         display: flex;
@@ -2319,36 +2318,35 @@ agm-map {
                                 padding-right: 0px;
                             }
                             .type_lines {
-                                border-bottom: 1px solid $box-border-color;
-                                padding-bottom: 15px;
+                                //border-bottom: 1px solid $box-border-color;
+                                padding-bottom: 10px;
                                 font-size: 12px;
                                 display: flex;
                                 justify-content: flex-start;
-                                margin-bottom: 15px;
+                                margin-bottom: 10px;
                                 @include tab-view {
                                     flex-direction: column;
                                     padding-bottom: 6px;
                                     margin-bottom: 6px;
                                     font-size: 10px;
                                 }
-                                &:nth-child(4) {
-                                    border: none;
-                                    margin: 0;
-                                    padding: 0;
-                                }
+                                // &:nth-child(4) {
+                                //     border: none;
+                                //     margin: 0;
+                                //     padding: 0;
+                                // }
                                 .titles {
-                                    font-weight: 600;
+                                    font-weight: 700;
                                     color: $text-black;
-                                    margin-right: 0px;
-                                    flex: 2;
+                                    margin-right: 7px;
+                                    flex: 1;
+                                    font-size: 12px;
                                 }
                                 .texts {
-                                    font-weight: 500;
+                                    font-weight: 400;
                                     color: $mid_gray_bg;
-                                    flex: 5;
-                                    @include tab-view {
-                                        font-weight: 400;
-                                    }
+                                    flex: 3;
+                                    font-size: 12px;
                                 }
                             }
                             .notifi_text {
@@ -2381,7 +2379,7 @@ agm-map {
                             display: flex;
                             flex-direction: column;
                             @include tab-view {
-                                padding-top: 5px;
+                                padding-top: 15px;
                                 max-width: 100%;
                                 flex-direction: row;
                             }

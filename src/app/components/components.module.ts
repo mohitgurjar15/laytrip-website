@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { SearchAirportComponent } from './search-airport/search-airport.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -151,7 +151,7 @@ import { CartInventoryNotmatchErrorPopupComponent } from './cart-inventory-notma
     CarouselComponent
   ],
   providers: [DatePipe, 
-    NgbActiveModal],
+    NgbActiveModal,DecimalPipe],
   entryComponents: [DeleteCartitemConfirmationPopupComponent, EmptyCartComponent, BookingCompletionErrorPopupComponent, DiscountedBookingAlertComponent, CartInventoryNotmatchErrorPopupComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
