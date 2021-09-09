@@ -29,7 +29,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   @Input() currentSlide;
   switchBtnValue = false;
   @Input() currentTabName: string = 'hotel';
-  @Input() dealIcon:boolean=false;
+  @Input() dealIcon: boolean = false;
   isRoundTrip: boolean = true;
   flightSearchForm: FormGroup;
   flightSearchFormSubmitted = false;
@@ -38,6 +38,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   countryCode: string;
   monthYearArr = [];
   toSearch: any = {};
+  showRetivePriceText = false;
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -88,7 +89,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   lastSearchCalMMYY = '';
   timer: number = 0;
   timerTimeStamp;
-  
+
   constructor(
     public commonFunction: CommonFunction,
     public fb: FormBuilder,
@@ -130,7 +131,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.homeService.goToDealsToggle.subscribe(data => {
       this.dealIcon = (data == 'true' || data == true) ? true : false;
     })
-    
+
     this.setCalendarLocale();
     // if (typeof this.dealIcon != 'undefined') {
     //   this.dealIcon = (this.dealIcon == 'true' || this.dealIcon == true) ? true : false;
@@ -151,7 +152,7 @@ export class FlightSearchWidgetComponent implements OnInit {
           }
         }
       })
-      
+
     }
 
 
@@ -204,7 +205,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
         if (this.isRoundTrip) {
           this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(97, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate()];
-        } 
+        }
       }
     });
     //delete BehaviorSubject at the end
@@ -225,7 +226,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   dealsToggle() {
     this.dealIcon = !this.dealIcon
-    
+
     this.homeService.setDeaslToggle(this.dealIcon)
     if (this.dealIcon === true) {
       this.flightSearchForm.controls.fromDestination.setValue(null)
@@ -233,13 +234,13 @@ export class FlightSearchWidgetComponent implements OnInit {
       this.fromSearch = {}
       this.toSearch = {}
       this.searchFlightInfo.departure = '',
-      this.searchFlightInfo.arrival = ''
+        this.searchFlightInfo.arrival = ''
     }
   }
 
   setDefaultDate() {
 
-    this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() :moment().add(2, 'days').toDate();     
+    this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
     this.returnDate = this.isRefferal ? moment(this.departureDate).add(97, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
 
   }
@@ -375,7 +376,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     month = month.toString().length == 1 ? '0' + month : month;
     let date = `${day}/${month}/${y}`;
     let price: any = this.calenderPrices.find((d: any) => d.date == date);
-    if (price && price.isPriceInInstallment ) {
+    if (price && price.isPriceInInstallment) {
       if (price.start_price > 0) {
         return `$${price.secondary_start_price.toFixed(2)}`;
       }
@@ -401,30 +402,32 @@ export class FlightSearchWidgetComponent implements OnInit {
       // console.log('no')
     }
   }
-  
 
-  timerStart(){
+
+  timerStart() {
     this.timerTimeStamp = setTimeout(() => {
       this.timer = 2;
     }, 2000);
   }
-  
-  timerStop(){
+
+  timerStop() {
     clearTimeout(this.timerTimeStamp);
   }
 
   changeMonth(event) {
-    this.timerStart(); 
+    console.log('come in month change event')
+    // this.timerStart();
+    clearTimeout(this.timerTimeStamp);
+    this.timer = 0;
 
     this.currentMonth = event.month.toString().length == 1 ? '0' + event.month : event.month;
     this.currentYear = event.year;
     let currCalYYMM = moment(this.currentMonth + '-' + this.currentYear, 'MM-YY').add(1, 'years').format("YYYY-MM");
     let calApplyDiff = moment(currCalYYMM, "YYYY-MM").diff(moment().format("YYYY-MM"), 'days')
-    this.selectedMMYY = currCalYYMM; 
-    if (this.timer == -1 || this.timer == 2){
+    this.selectedMMYY = currCalYYMM;
       this.timer = 0;
-      this.timerStop();
-      this.timerStart();
+      // this.timerStop();
+      // this.timerStart();
 
       // Execution start
       var currentDate = new Date();
@@ -439,14 +442,14 @@ export class FlightSearchWidgetComponent implements OnInit {
         }
       });
 
-      
+
       if (!this.isRoundTrip && (calApplyDiff > 0 || calApplyDiff <= 365)) {
         this.lastSearchCalMMYY = currCalYYMM;
-        console.log(this.selectedMMYY ,this.lastSearchCalMMYY )
+        console.log(this.selectedMMYY, this.lastSearchCalMMYY)
         let month = event.month;
         month = month.toString().length == 1 ? '0' + month : month;
         let monthYearName = `${month}-${event.year}`;
-        
+
         if (this.calPrices) {
           this.monthYearArr.push(monthYearName);
           let startDate: any = moment([event.year, event.month - 1]);
@@ -475,30 +478,37 @@ export class FlightSearchWidgetComponent implements OnInit {
             this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
             this.isCalenderPriceLoading = this.calPrices = true;
 
-            this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
-              this.calenderPrices = [...this.calenderPrices, ...res];
-              this.isCalenderPriceLoading = false;
-
-              //get calender installemnt length
-              this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
-            }, err => {
-              this.calPrices = false;
-              this.isCalenderPriceLoading = false;
-            });
-          } else {
-            this.calPrices = this.isCalenderPriceLoading = false;
-          }
+            this.timerTimeStamp = setTimeout(() => {
+              this.timer = 2;
+              if(this.timer = 2){
+                this.showRetivePriceText = true;
+                this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
+                  this.calenderPrices = [...this.calenderPrices, ...res];
+                  this.isCalenderPriceLoading = false;
+                  this.showRetivePriceText = false
+    
+                  //get calender installemnt length
+                  this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
+                }, err => {
+                  this.calPrices = false;
+                  this.isCalenderPriceLoading = false;
+                });
+              } else {
+                this.calPrices = this.isCalenderPriceLoading = false;
+              }
+            }, 2000);
+           
+            }
+            
         } else {
           //get calender installemnt length
           this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
         }
       }
-    } else {
-      // this.timerStop();
-    }
-    
+   
+
   }
-  
+
 
   getPriceLabel(type) {
     this.isCalenderPriceLoading = true;
@@ -534,7 +544,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   getMinPrice(prices) {
     if (prices.length > 0) {
       let values = prices.map(function (v) {
-        if (v.start_price > 0 && v.isPriceInInstallment == true ) {
+        if (v.start_price > 0 && v.isPriceInInstallment == true) {
           if (v.secondary_start_price < 5) {
             return '$5.00';
           }
@@ -644,7 +654,7 @@ export class FlightSearchWidgetComponent implements OnInit {
 
   datepickerShow() {
     this.isCalenderPriceLoading = false;
-    this.timer=-1;
+    this.timer = -1;
     this.isDatePickerOpen = true;
     if (this.commonFunction.isRefferal()) {
       this.progressInterval = setInterval(() => {
@@ -670,7 +680,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   setCalendarLocale() {
     this.cal_loaded = false;
     let userLang = JSON.parse(localStorage.getItem('_lang'));
-    if(userLang == null) {
+    if (userLang == null) {
       this.cal_locale = CalendarTranslations["en"];
     } else {
       this.cal_locale = CalendarTranslations[userLang.iso_1Code];

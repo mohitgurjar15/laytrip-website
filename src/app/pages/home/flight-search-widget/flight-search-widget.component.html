@@ -98,9 +98,10 @@
                             <div class="date_form">
                                 <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                                     <p-calendar class="comon_pcale" *ngIf="!isRoundTrip && cal_loaded" dateFormat="M d, yy" inputId="basic" [(ngModel)]="departureDate" [ngModelOptions]="{standalone: true}" flightDepartureMinDate [minDate]="flightDepartureMinDate" (onSelect)=selectDepartureDate($event)
-                                        [readonlyInput]="true" (onMonthChange)="changeMonth($event)" (onShow)="datePickerShow($event)" panelStyleClass="calender-responsive-view laytrip-cal-view" [readonlyInput]="true" (onShow)="datepickerShow($event)" (onClose)="datepickerClose($event)" [locale]="cal_locale">
+                                        [readonlyInput]="true" (onMonthChange)="changeMonth($event)" (onShow)="datePickerShow($event)" panelStyleClass="calender-responsive-view laytrip-cal-view" [readonlyInput]="true" (onShow)="datepickerShow($event)" (onClose)="datepickerClose($event)"
+                                        [locale]="cal_locale">
                                         <p-header class="calender-header {{selectedMMYY + lastSearchCalMMYY}}" *ngIf="calPrices">
-                                            <p *ngIf="isCalenderPriceLoading">{{'retrieving_monthly_prices' | translate}}</p>
+                                            <p *ngIf="showRetivePriceText">{{'retrieving_monthly_prices' | translate}}</p>
                                             <div class="calender_header_wrapper" *ngIf="!isCalenderPriceLoading && (selectedMMYY == lastSearchCalMMYY)">
                                                 <span class="green_var" [hidden]="getPriceLabel('lowMinPrice') == 0">${{getPriceLabel('lowMinPrice')}}</span>
                                                 <span class="yellow_var" [hidden]="getPriceLabel('midMinPrice') == 0">${{getPriceLabel('midMinPrice')}}</span>

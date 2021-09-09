@@ -120,7 +120,7 @@
                     <span class="fare_type desk_fare">{{'from' | translate}}</span>
                     <span class="total_pr d-flex flex-row justify-content-center">
                             <span *ngIf="item?.offer_data?.applicable === true && item.secondary_start_price > item.discounted_secondary_start_price" class="dashed_price"> ${{ item.payment_object[item.payment_object.installment_type].actual_installment | number : '1.2-2'}} </span>
-                    <span class="big-num">${{item.payment_object[item.payment_object.installment_type].installment}}</span>
+                    <span class="big-num">${{item.payment_object[item.payment_object.installment_type].installment | number : '1.2-2' }}</span>
                     </span>
                     <span class="fare_type desk_fare">{{(item.payment_object.installment_type =='biweekly' ? 'Bi-Weekly' : item.payment_object.installment_type) | translate}}</span>
                     <span class="cta_btn">
@@ -158,15 +158,13 @@
                         <span class="texts  d-block d-md-none" *ngIf="item.is_installment_available && item.payment_object.weekly">
                             ${{item.payment_object['weekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
                             {{ item.payment_object['weekly'].installment_count }}  {{'po_weekly_installments' | translate}}
-                            {{'installments_of' | translate}}
                             ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
                         </span>
-                        <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available || !item.payment_object.weekly">{{'not_available' | translate}}</span>
+                    <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available || !item.payment_object.weekly">{{'not_available' | translate}}</span>
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="item.is_installment_available && item.payment_object.weekly">
                         ${{item.payment_object['weekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
                         {{ item.payment_object['weekly'].installment_count }}  {{'po_weekly_installments' | translate}}
-                        {{'installments_of' | translate}}
                         ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="!item.is_installment_available || !item.payment_object.weekly">{{'not_available' | translate}}</span>
@@ -180,7 +178,7 @@
                             {{ item.payment_object['biweekly'].installment_count}} {{'bi_weekly' | translate}} {{'installments_of' | translate}}
                             ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}
                         </span>
-                        <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">{{'not_available' | translate}}</span>
+                    <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">{{'not_available' | translate}}</span>
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="item.is_installment_available &&  item.payment_object.biweekly">
                         ${{item.payment_object['biweekly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
@@ -199,7 +197,7 @@
                             {{ item.payment_object['monthly'].installment_count}} {{'monthly' | translate}} {{'installments_of' | translate}}
                             ${{item.payment_object['monthly'].installment | number : '1.2-2'}}
                         </span>
-                        <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available || !item.payment_object.monthly "> {{'not_available' | translate}}</span>
+                    <span class="texts d-block d-md-none" *ngIf="!item.is_installment_available || !item.payment_object.monthly "> {{'not_available' | translate}}</span>
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="item.is_installment_available && item.payment_object.monthly ">
                         ${{item.payment_object['monthly'].down_payment | number : '1.2-2'}} {{'po_downpayment' | translate}}
@@ -220,12 +218,14 @@
                             aria-hidden="true "></i></div>
                 </div>
             </div>
-            <div class="rules_wrps ">
-                <span class="heads "><img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg " alt=" ">{{'rules' | translate}}</span>
-                <span class="texts_rules " *ngIf="!loadCancellationPolicy && errorMessage!='' ">{{ errorMessage}}</span>
-                <span class="texts_rules "> {{'rules_1' | translate}}
-                    <a [routerLink]="[ '/terms'] " [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : '' ">{{'terms' | translate}}</a>{{'rules_2' | translate}}.
-                </span>
+            <div class="rules_wrps">
+                <span class="heads"><img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="">
+                  {{'rules' | translate}}</span>
+                <span class="texts_rules" *ngIf="!loadCancellationPolicy && errorMessage!=''">{{ errorMessage
+                            }}</span>
+                <span class="texts_rules"> {{'rules_1' | translate}}
+                            <a [routerLink]="['/terms']"
+                                [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a> {{'rules_2' | translate}}.</span>
             </div>
         </div>
     </div>

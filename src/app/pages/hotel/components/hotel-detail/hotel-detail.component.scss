@@ -852,6 +852,17 @@ agm-map {
                                                 color: $mid_gray_bg;
                                             }
                                         }
+                                        .refundable_label{
+                                            margin-top: 8px;
+                                            font-weight: 500;
+                                            font-size: 12px;
+                                            line-height: normal;
+                                            color: #837F7F;
+                                            background: #E6E6E6;
+                                            padding:0 3px 2px 4px;
+                                            border-radius: 4px;
+                                            display: inline-block;
+                                        }
                                         .review_section_wrap {
                                             display: flex;
                                             justify-content: space-between;
@@ -1166,7 +1177,7 @@ agm-map {
                                     }
                                     .installment_add_cart{
                                         padding: 7px 10px;
-                                        background: #D6D6D6;
+                                        background: transparent;
                                         border: 1px solid #D6D6D6;
                                         color: #878787;
                                         font-size: 12px;
@@ -1197,8 +1208,8 @@ agm-map {
                                         }
                                         &.checked{
                                             background: transparent;
-                                            border: 1px solid #000;
-                                            color: #000;
+                                            border: 1px solid $primary-color;
+                                            color: $primary-color;
                                             cursor: default;
                                             .fa-check{
                                                 display: flex;

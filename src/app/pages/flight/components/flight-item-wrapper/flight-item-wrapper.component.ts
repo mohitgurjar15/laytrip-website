@@ -257,7 +257,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
       sessionStorage.setItem('_itinerary', JSON.stringify(itinerary))
       let downPayment;
-      let paymentMethod ='installment';
+      let paymentMethod ='instalment';
       if (route.selected_option === 'weekly') {
         downPayment = route.payment_object['weekly'].down_payment
       } else if (route.selected_option === 'biweekly') {
@@ -266,7 +266,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         downPayment = route.payment_object['monthly'].down_payment
       }else if(route.selected_option === 'full') {
         downPayment = 0
-        paymentMethod = 'no-installment'
+        paymentMethod = 'no-instalment'
       }
       let payload = {
         module_id: 1,

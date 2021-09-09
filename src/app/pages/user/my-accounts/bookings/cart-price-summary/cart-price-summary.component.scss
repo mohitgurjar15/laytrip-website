@@ -270,16 +270,18 @@
 }
 
 .booking_summary_sect{
-    padding-top: 15px;
+    padding-top: 16px;
     .summary_box{
         padding: 10px 15px;
         border-bottom: 1px dashed #d6d6d6;
-        &:first-child{
-            border-top: 1px dashed #d6d6d6;
-        }
+        // &:first-child{
+        //     border-top: 1px dashed #d6d6d6;
+        // }
         &:last-child{
             border-top: 1px dashed #d6d6d6;
-            border-bottom: 0;
+            &.total_p_wrp{
+                border-bottom: 0;
+            }
         }
         .summary_item{
             display: flex;

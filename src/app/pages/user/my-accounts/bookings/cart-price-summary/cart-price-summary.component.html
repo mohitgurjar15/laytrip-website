@@ -1,48 +1,70 @@
 <div class="price_listing_wrpper" *ngIf="(cartItem | json) != '[]'">
 
     <div class="booking_summary_sect">
-        <div class="summary_box">
-            <div class="summary_item" *ngFor="let item of cartItem.booking;let i = index ;">
-                <div class="summary_type" *ngIf="item.moduleId === 1">
-                    {{item.locationInfo.source_location}}-{{item.locationInfo.destination_location}} (Taxes and Fees Included)
-                </div>
-                <div class="summary_item_price" *ngIf="item.moduleId === 1">
-                    ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
+        <div *ngFor="let item of cartItem.booking;let i = index ;">
+            <div class="summary_box" *ngIf="item.moduleId === 1">
+                <div class="summary_item">
+                    <div class="summary_type">
+                        {{item.locationInfo.source_location}}-{{item.locationInfo.destination_location}} (Taxes and Fees Included)
+                    </div>
+                    <div class="summary_item_price">
+                        ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="summary_box">
-            <div class="summary_item" *ngFor="let item of cartItem.booking;let i = index ;">
-                <div class="summary_type" *ngIf="item.moduleId === 3">
-                    {{item.moduleInfo[0].hotel_name}} ({{item.moduleInfo[0].input_data.num_nights}} {{item.moduleInfo[0].input_data.num_nights >1 ? 'Nights' : 'Night' }} x ${{item.totalAmount}})
+        <div *ngFor="let items of cartItem.booking;let i = index ;">
+            <div class="summary_box" *ngIf="items.moduleId === 3">
+                <div class="summary_item">
+                    <div class="summary_type">
+                        {{items.moduleInfo[0].hotel_name}} ({{items.moduleInfo[0].input_data.num_nights}} {{items.moduleInfo[0].input_data.num_nights >1 ? 'Nights' : 'Night' }} x ${{items.totalAmount}})
+                    </div>
+                    <div class="summary_item_price">
+                        ${{beforeDesimal(items.totalAmount)}}<sup>.{{afterDesimal(items.totalAmount)}}</sup>
+                    </div>
                 </div>
-                <div class="summary_item_price" *ngIf="item.moduleId === 3">
-                    ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
+                <div class="summary_item">
+                    <div class="summary_type">
+                        {{items.moduleInfo[0].hotel_name}} <a href="javascript:void(0);">Taxes and Fees</a>
+                    </div>
+                    <div class="summary_item_price">
+                        ${{beforeDesimal(items.moduleInfo[0].selling.taxes)}}<sup>.{{afterDesimal(items.moduleInfo[0].selling.taxes)}}</sup>
+                    </div>
                 </div>
+                <ng-container *ngIf="items.moduleInfo[0].mandatory_fee_details.is_postpaid === true">
+                    <div class="summary_item" *ngFor="let item of items.moduleInfo[0].mandatory_fee_details.postpaid_break_dwon">
+                        <div class="summary_type">
+                            {{items.moduleInfo[0].hotel_name}} {{item.name}}
+                        </div>
+                        <div class="summary_item_price">
+                            ${{beforeDesimal(item.price)}}<sup>.{{afterDesimal(item.price)}}</sup>
+                        </div>
+                    </div>
+                </ng-container>
             </div>
         </div>
         <div class="summary_box">
             <div class="summary_item summary_item_total">
                 <div class="summary_type">
-                    Total Purchases
+                    {{'total_purchases' | translate}}
                 </div>
                 <div class="summary_item_price">
                     ${{beforeDesimal(cartItem.totalAmount)}}<sup>.{{afterDesimal(cartItem.totalAmount)}}</sup>
                 </div>
             </div>
         </div>
-        <div class="summary_box">
+        <div class="summary_box" [ngClass]="{'border-0':(cartItem.cartInstallments | json) == '[]'}">
             <div class="summary_item">
                 <div class="summary_type">
                     {{'booking_downpayment' | translate}}
                 </div>
                 <div class="summary_item_price">
-                    $180<sup>.89</sup>
+                    ${{beforeDesimal(cartItem.totalDownpayment)}}<sup>.{{afterDesimal(cartItem.totalDownpayment)}}</sup>
                 </div>
             </div>
             <div class="summary_item">
                 <div class="summary_type">
-                    Add-on Baggage
+                    {{'add_on_baggage' | translate}}
                 </div>
                 <div class="summary_item_price">
                     $00<sup>.00</sup>
@@ -50,7 +72,7 @@
             </div>
             <div class="summary_item">
                 <div class="summary_type">
-                    Applied Laytrip Points
+                    {{'applied_points' | translate}}
                 </div>
                 <div class="summary_item_price">
                     $00<sup>.00</sup>
@@ -60,10 +82,10 @@
         <div class="summary_box" *ngIf="(cartItem.cartInstallments | json) != '[]'">
             <div class="summary_item summary_item_total">
                 <div class="summary_type">
-                    Downpayment
+                    {{'total_due' | translate}}
                 </div>
                 <div class="summary_item_price">
-                    $200<sup>.89</sup>
+                    ${{beforeDesimal(cartItem.paidAmount)}}<sup>.{{afterDesimal(cartItem.paidAmount)}}</sup>
                 </div>
             </div>
         </div>
@@ -83,8 +105,10 @@
                                         <div class="left_sec">
                                             <span class="left_date">#{{i+1}} {{ installment.instalmentStatus ? ('paid'|translate) : ('due'|translate)}} {{commonFunction.convertCustomDateFormat(installment.instalmentDate,'YYYY-MM-DD','MMM D, YYYY')}}</span>
                                             <div class="booking_type">
-                                                <i class="fa fa-bed" aria-hidden="true"></i>
-                                                <i class="fa fa-plane" aria-hidden="true"></i>
+                                                <ng-container *ngFor="let item of installment.breakdown">
+                                                    <i *ngIf="item.type === 'hotel'" class="fa fa-bed" aria-hidden="true"></i>
+                                                    <i *ngIf="item.type === 'flight'" class="fa fa-plane" aria-hidden="true"></i>
+                                                </ng-container>
                                             </div>
                                         </div>
                                         <div class="right_sec">
