@@ -22,11 +22,11 @@ export class HomeComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   modules: Module[];
   moduleList: any = {};
-  currentTabName: string = 'hotel';
+  currentTabName: string = 'flight';
   isRefferal: boolean = false;
   countryCode: string;
   toString: string;
-  moduleId = 3;
+  moduleId = 1;
   dealList = [];
   host:string='';
   $tabName;
