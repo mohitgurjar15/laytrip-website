@@ -94,6 +94,8 @@ export class FlightPriceSliderComponent implements OnInit {
 
     if (changes['dates'].currentValue.length) {
       this.flipDates(this.dates)
+      //this.dates.unshift({"date":"09/10/2020","net_rate":30.15,"price":31.05,"unique_code":"4f4db0e337ddc6cd9057fad6a58b01e0","start_price":0,"secondary_start_price":0,"isPriceInInstallment":false,"selling_price":31.05})
+      //this.dates.push({"date":"07/10/2021","net_rate":30.15,"price":31.05,"unique_code":"4f4db0e337ddc6cd9057fad6a58b01e0","start_price":0,"secondary_start_price":0,"isPriceInInstallment":false,"selling_price":31.05})
     }
     /* if (changes['flexibleLoading'].currentValue) {
       console.log(this.flexibleLoading)
