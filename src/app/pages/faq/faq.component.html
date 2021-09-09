@@ -87,10 +87,10 @@
                         <div class="block_faq_info">
                             <div class="block_text">
                                 <div class="block_top">
-                                    <h6>{{'faqs' | translate}} {{faqDetail | json}}</h6>
+                                    <h6>{{'faqs' | translate}}</h6>
                                 </div>
                                 <div class="block_main_faq">
-                                    <div class="block_faq" *ngFor="let faqItem of faqDetail;let j=index">
+                                    <div class="block_faq" *ngFor="let faqItem of faqData;let j=index">
                                         <h5>{{faqItem.question}}</h5>
                                         <p>{{faqItem.answer}}</p>
                                     </div>

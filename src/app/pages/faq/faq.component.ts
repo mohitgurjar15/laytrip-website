@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
-import { error } from 'console';
+import { TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 declare var $: any;
-
 
 @Component({
   selector: 'app-faq',
@@ -17,32 +16,25 @@ export class FaqComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
   loading = false;
   faqDetail;
+  lenguage;
+  faqData = []
   noResult = false;
 
   constructor(
     private genericService: GenericService,
-    private commonFunction: CommonFunction
-
-  ) { }
+    private commonFunction: CommonFunction,
+    private translate: TranslateService
+  ) {
+    translate.onLangChange.subscribe(lang => this.setLanguage());
+  }
 
   ngOnInit() {
     $('body').addClass('cms-bgColor');
     window.scroll(0, 0);
     this.loadJquery();
     this.loading = true;
-    this.genericService.getFaqData().subscribe((res: any) => {
-      this.faqDetail = res.data;
-      this.loading = false;
-      this.noResult = false;
-    },(error:HttpErrorResponse)=>{
-      this.loading = false;
-      this.noResult = true;
-      console.log(this.noResult)
-    }
-    );
+    this.setLanguage();
   }
-
-
 
   loadJquery() {
     $(document).ready(function () {
@@ -58,5 +50,51 @@ export class FaqComponent implements OnInit {
     });
   }
 
-
+  setLanguage() {
+    const userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    this.loading = true;
+    this.genericService.getFaqData().subscribe((res: any) => {
+      this.faqDetail = res.data;
+      this.loading = false;
+      this.faqData = []
+      switch (userLang) {
+        case "es":
+          for (let i = 0; i < this.faqDetail.length; i++) {
+            for (let j = 0; j < this.faqDetail[i].faqMetas.length; j++) {
+              if (this.faqDetail[i].faqMetas[j].language.iso_1Code == "es") {
+                this.faqData.push({
+                  question: this.faqDetail[i].faqMetas[j].question,
+                  answer: this.faqDetail[i].faqMetas[j].answer
+                })
+              }
+            }
+          }
+          if (!this.faqData.length) {
+            this.noResult = true;
+            this.loading = false;
+          }
+          break;
+        default:
+          for (let i = 0; i < this.faqDetail.length; i++) {
+            for (let j = 0; j < this.faqDetail[i].faqMetas.length; j++) {
+              if (this.faqDetail[i].faqMetas[j].language.iso_1Code == "en") {
+                this.faqData.push({
+                  question: this.faqDetail[i].faqMetas[j].question,
+                  answer: this.faqDetail[i].faqMetas[j].answer
+                })
+              }
+            }
+          }
+          if (!this.faqData.length) {
+            this.noResult = true;
+            this.loading = false;
+          }
+          break;
+      }
+      this.loading = false;
+    }, (error: HttpErrorResponse) => {
+      this.noResult = true;
+      this.loading = false;
+    });
+  }
 }
