@@ -283,11 +283,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     if (key === 'total_duration') {
       // this.flightDetails = this.sortByDuration(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
-        this.filteredLabel = 'Duration Shortest to Longest';
+        // this.filteredLabel = 'Duration Shortest to Longest';
         this.setFilteredLabel('filter_7');
         this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Duration Longest to Shortest';
+        // this.filteredLabel = 'Duration Longest to Shortest';
         this.setFilteredLabel('filter_8');
         this.flightDetails = this.sortByDuration(this.flightDetails, key, order);
       }
@@ -295,11 +295,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     else if (key === 'arrival') {
       // this.flightDetails = this.sortByArrival(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
-        this.filteredLabel = 'Arrival Earliest to Latest';
+        // this.filteredLabel = 'Arrival Earliest to Latest';
         this.setFilteredLabel('filter_9');
         this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Arrival Latest to Earliest';
+        // this.filteredLabel = 'Arrival Latest to Earliest';
         this.setFilteredLabel('filter_10');
         this.flightDetails = this.sortByArrival(this.flightDetails, key, order);
       }
@@ -307,11 +307,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     else if (key === 'departure') {
       // this.flightDetails = this.sortByDeparture(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
-        this.filteredLabel = 'Departure Earliest to Latest';
+        // this.filteredLabel = 'Departure Earliest to Latest';
         this.setFilteredLabel('filter_11');
         this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Departure Latest to Earliest';
+        // this.filteredLabel = 'Departure Latest to Earliest';
         this.setFilteredLabel('filter_12');
         this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
       }
@@ -319,11 +319,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     else {
       // this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
       if (order === 'ASC') {
-        this.filteredLabel = 'Price Low to High';
+        // this.filteredLabel = 'Price Low to High';
         this.setFilteredLabel('filter_1');
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       } else if (order === 'DESC') {
-        this.filteredLabel = 'Price High to Low';
+        // this.filteredLabel = 'Price High to Low';
         this.setFilteredLabel('filter_2');
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       }
