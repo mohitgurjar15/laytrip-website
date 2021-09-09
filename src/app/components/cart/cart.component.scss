@@ -26,12 +26,13 @@ h3 {
     li {
         display: flex;
         align-items: center;
+        width: 20%;
         a {
             padding: 8px 20px;
             border-radius: 50px;
             font-size: 16px;
             color: #52575A;
-            max-width: 130.5px;
+            width: 100%;
             text-overflow: ellipsis;
             overflow-x: hidden;
             white-space: nowrap;

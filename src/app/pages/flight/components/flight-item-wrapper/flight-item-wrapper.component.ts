@@ -275,7 +275,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         downpayment: downPayment
         // searchData: { departure: route.departure_code, arrival: route.arrival_code, checkInDate: route.departure_date}
       };
-      console.log(payload)
       this.cartService.addCartItem(payload).subscribe((res: any) => {
         this.changeLoading.emit(true);
         if (res) {

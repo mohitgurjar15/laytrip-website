@@ -375,7 +375,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
   filterFlights() {
     let filterdFlights = this.filterFlightDetails.items;
     /* Filter flight based on min & max price */
-    console.log(this.minPrice && this.maxPrice, this.filterFlightDetails.items)
     if (this.minPrice && this.maxPrice) {
 
       filterdFlights = filterdFlights.filter(item => {
