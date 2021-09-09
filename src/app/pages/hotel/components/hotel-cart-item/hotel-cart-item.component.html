@@ -12,7 +12,8 @@
                 </span> {{commonFunction.convertDateFormat(cartItem.module_info.input_data.check_out,'YYYY-MM-DD') }}
             </div>
             <div class="col_boxs desk_box">
-                {{cartItem.module_info.input_data.num_nights}} {{(cartItem.module_info.input_data.num_nights>1?'nights':'night') | translate}}, {{cartItem.module_info.input_data.num_rooms}} {{(cartItem.module_info.input_data.num_rooms>1?'rooms':'room') | translate}}
+                <i class="fa fa-moon-o mr-1" aria-hidden="true"></i> {{cartItem.module_info.input_data.num_nights}} {{(cartItem.module_info.input_data.num_nights>1?'nights':'night') | translate}}, {{cartItem.module_info.input_data.num_rooms}} {{(cartItem.module_info.input_data.num_rooms>1?'rooms':'room')
+                | translate}}
             </div>
             <div class="responsive_boxes">
                 <div>
@@ -28,7 +29,8 @@
                     </div>
                 </div>
                 <div class="col_boxs">
-                    {{cartItem.module_info.input_data.num_nights}} {{cartItem.module_info.input_data.num_nights>1 ? 'Nights':'Night'}} <br> {{cartItem.module_info.input_data.num_rooms}} {{cartItem.module_info.input_data.num_rooms >1 ? 'Rooms' : 'Room'}}
+                    <i class="fa fa-moon-o mr-1" aria-hidden="true"></i> {{cartItem.module_info.input_data.num_nights}} {{cartItem.module_info.input_data.num_nights>1 ? 'Nights':'Night'}} <br> {{cartItem.module_info.input_data.num_rooms}} {{cartItem.module_info.input_data.num_rooms
+                    >1 ? 'Rooms' : 'Room'}}
                 </div>
             </div>
         </div>

@@ -43,7 +43,7 @@
         </a>
     </li>
 </ul>
-<ul class="nav nav-tabs booking_tab_header" *ngIf="totalCarts > 5">
+<ul class="nav nav-tabs booking_tab_header" *ngIf="totalCarts >= 5">
     <ng-container *ngFor="let cart of carts | slice:5 ;let i = index;">
         <li [ngClass]="{'active':selectedCart===i+5}">
             <ng-container *ngIf="cart.type=='flight'">

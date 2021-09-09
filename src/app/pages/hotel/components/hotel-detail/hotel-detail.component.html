@@ -606,9 +606,9 @@
                                             </h4>
                                             <span class="adress_span">
                                                 {{ (room.occupancy==1?'sleep':'sleeps') | translate }}
-                                                {{room.occupancy}} {{room.occupancy}}
+                                                {{room.occupancy}}
                                             </span>
-                                            <div class="refundable_label">Non Refundable</div>
+                                            <div *ngIf="room.is_refundable != 'true'" class="refundable_label">Non Refundable</div>
                                         </div>
 
                                         <!-- <span [id]="'accordion_infos1'+index" class="show_detail">

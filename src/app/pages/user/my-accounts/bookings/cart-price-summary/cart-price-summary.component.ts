@@ -26,7 +26,6 @@ export class CartPriceSummaryComponent implements OnInit {
    }
 
   ngOnInit(): void { 
-    console.log('cartItem',this.cartItem)
   }
 
   ngOnChanges(changes: SimpleChanges) {
