@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col_boxs">
-                    {{cartItem.module_info.input_data.num_nights}} {{cartItem.module_info.input_data.num_nights>1 ? 'Nights':'Night'}} <br> {{cartItem.module_info.input_data.num_rooms}} {{cartItem.module_info.input_data.num_rooms >1 ? 'Rooms' : 'Room'}}
+                    {{cartItem.module_info.input_data.num_nights}} {{(cartItem.module_info.input_data.num_nights>1 ? 'nights':'night') | translate}} <br> {{cartItem.module_info.input_data.num_rooms}} {{(cartItem.module_info.input_data.num_rooms >1 ? 'rooms' : 'room') | translate}}
                 </div>
             </div>
         </div>

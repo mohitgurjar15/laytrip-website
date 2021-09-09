@@ -1,7 +1,6 @@
 <div class="panel-group inner_accordion_wrapper" id="accordion">
     <div class="section_description one" *ngIf="!cartItem.is_available">
-        <span class="sec_text">This booking is no longer available. Click “x” to delete to be able to proceed to
-      Checkout.</span>
+        <span class="sec_text">{{'booking_not_avilable' | translate}}</span>
         <a (click)="deleteCart(cartItem.id)"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
     </div>
     <div class="panel panel-default">
