@@ -500,7 +500,7 @@
                     }
 
                     .accordion_data {
-                        padding: 0 15px;
+                        padding: 0 16.5px;
                         // border-top: 1px solid $box-border-color;
                         // background-color: $tab-bg-gray;
 
@@ -517,12 +517,13 @@
                             li {
                                 display: flex;
                                 align-items: center;
+                                width: 20%;
                                 a {
                                     padding: 8px 20px;
                                     border-radius: 50px;
                                     font-size: 16px;
                                     color: #52575a;
-                                    max-width: 129px;
+                                    width: 100%;
                                     text-overflow: ellipsis;
                                     overflow-x: hidden;
                                     white-space: nowrap;
@@ -548,7 +549,7 @@
                                         @include tab-view {
                                             display: block;
                                             font-size: 12px;
-                                            max-width: 55px;
+                                            // max-width: 55px;
                                             overflow: hidden;
                                             text-overflow: ellipsis;
                                         }
@@ -562,11 +563,18 @@
                                             line-height: 10px;
                                         }
                                     }
+                                    &:hover{
+                                        border-color: transparent;
+                                    }
                                 }
                                 &.active {
                                     a {
                                         background: #0043ff;
                                         color: #fff;
+                                        border-color: #0043ff;
+                                        &:hover{
+                                            border-color: #0043ff;
+                                        }
                                     }
                                 }
                                 &.add_cart_li {
