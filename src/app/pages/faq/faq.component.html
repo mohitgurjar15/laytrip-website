@@ -93,6 +93,13 @@
                                     <div class="block_faq" *ngFor="let faqItem of faqData;let j=index">
                                         <h5 *ngIf="languageId === faqItem.language_id">{{faqItem.question}}</h5>
                                         <p *ngIf="languageId === faqItem.language_id">{{faqItem.answer}}</p>
+
+                                    </div>
+                                </div>
+                                <div class="block_main_faq" *ngIf="!faqDetail.length">
+                                    <div class="block_faq">
+                                        <h5>No Faq Found.</h5>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>

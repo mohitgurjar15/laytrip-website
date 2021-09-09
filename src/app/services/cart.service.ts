@@ -121,6 +121,7 @@ export class CartService {
   }
 
   setCartNumber(cartNumber){
+    console.log('Z1zhjbLMHQj82GCjW6ZObkFzufQ',cartNumber)
     this.cartNumber.next(cartNumber);
   }
 

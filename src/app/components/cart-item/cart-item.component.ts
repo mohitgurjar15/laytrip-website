@@ -15,69 +15,68 @@ export class CartItemComponent implements OnInit {
   @Input() cartItem;
   @Input() travelers: [];
   @Input() cartNumber: number;
-  priceFluctuationAmount:number=0;
-  cartAlerts=[];
-  origin:string='';
+  priceFluctuationAmount: number = 0;
+  cartAlerts = [];
+  origin: string = '';
 
   constructor(
     public commonFunction: CommonFunction,
     private cd: ChangeDetectorRef,
-    private cartService:CartService
+    private cartService: CartService
   ) {
-   
-   }
+
+  }
 
   ngOnInit(): void {
 
-    this.origin= window.location.pathname;
+    this.origin = window.location.pathname;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
-    try{
+    try {
       let cartAlerts = localStorage.getItem("__alrt")
-      if(cartAlerts){
-        this.cartAlerts= JSON.parse(cartAlerts)
+      if (cartAlerts) {
+        this.cartAlerts = JSON.parse(cartAlerts)
       }
-      else{
-        this.cartAlerts=[]
+      else {
+        this.cartAlerts = []
       }
     }
-    catch(e){
-      this.cartAlerts=[];
+    catch (e) {
+      this.cartAlerts = [];
     }
-
+    
     if (changes && changes['cartItem']) {
       this.cartItem = changes['cartItem'].currentValue;
-
-      if(this.cartItem.old_module_info.selling_price!=this.cartItem.module_info.selling_price){
+      
+      if (this.cartItem.old_module_info.selling_price != this.cartItem.module_info.selling_price) {
         this.priceFluctuationAmount = this.cartItem.module_info.selling_price - this.cartItem.old_module_info.selling_price;
       }
       this.cd.detectChanges();
     }
   }
 
-  closePricePopup(id){
-    try{
+  closePricePopup(id) {
+    try {
       let cartAlerts = localStorage.getItem("__alrt")
-      if(cartAlerts){
-        this.cartAlerts= JSON.parse(cartAlerts)
-        let index = this.cartAlerts.findIndex(x=>x.id==id)
-        this.cartAlerts.splice(index,1)
+      if (cartAlerts) {
+        this.cartAlerts = JSON.parse(cartAlerts)
+        let index = this.cartAlerts.findIndex(x => x.id == id)
+        this.cartAlerts.splice(index, 1)
       }
-      else{
-        this.cartAlerts=[]
+      else {
+        this.cartAlerts = []
       }
     }
-    catch(e){
-      this.cartAlerts=[];
+    catch (e) {
+      this.cartAlerts = [];
     }
-    localStorage.setItem('__alrt',JSON.stringify(this.cartAlerts))
-    this.priceFluctuationAmount=0;
+    localStorage.setItem('__alrt', JSON.stringify(this.cartAlerts))
+    this.priceFluctuationAmount = 0;
   }
 
-  deleteCart(id){
+  deleteCart(id) {
     this.cartService.setCardId(id);
   }
-  
+
 }

@@ -57,7 +57,6 @@ export class HotelSearchComponent implements OnInit {
     this.hotelDealIcon = this.route.snapshot.queryParams['dealsIcon']
     //this.hotelDealIcon = false;
     let refundable = 'no';
-    console.log('hotelDealIcon',this.hotelDealIcon)
     if(this.hotelDealIcon === true || (typeof this.hotelDealIcon === 'string' &&  this.hotelDealIcon === 'true')){
       refundable = 'yes'
     }
