@@ -88,50 +88,7 @@
         align-items: flex-start !important;
         flex-direction: column;
         width: 100%;
-        padding: 0;
-
-        @include tab-view {
-          font-size: 12px;
-        }
-
-        /* &[aria-expanded="true"] {
-          &:after {
-            content: "";
-            padding: 5px 9px;
-            margin-left: 10px;
-            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-            background-position: right;
-            background-repeat: no-repeat;
-            background-size: 12px;
-            transition: 0.3s;
-            right: 15px;
-          }
-
-        } */
-
-        /* &[aria-expanded="false"] {
-          &:after {
-            padding: 5px 9px;
-            margin-left: 10px;
-            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-            background-position: right;
-            background-repeat: no-repeat;
-            background-size: 12px;
-            content: "";
-            transition: 0.3s;
-            right: 15px;
-          }
-        } */
-
-        .tr_type {
-          flex: 1;
-          margin-left: 15px;
-
-          &.hotel_type_name {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
+        ng-select {
             width: 100%;
         }
     }
