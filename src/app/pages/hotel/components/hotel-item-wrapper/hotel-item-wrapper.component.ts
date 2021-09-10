@@ -154,7 +154,6 @@ export class HotelItemWrapperComponent implements OnInit {
     this.hotelService.getHotels.subscribe(result => {
       this.hotelDetails = result;
       this.hotelListArray = []
-      console.log('item wrapper ',this.hotelDetails)
       for (let i = 0; i < this.hotelDetails.length; i++) {
         this.hotelDetails[i].galleryImages = [];
         for (let image of this.hotelDetails[i].images) {
@@ -166,17 +165,13 @@ export class HotelItemWrapperComponent implements OnInit {
             });
           }
         }
-        console.log('hotelDetails on after for',this.hotelDetails)
         this.hotelDetails[i].dots = this.hotelDetails[i].galleryImages.length > 5 ? 5 : this.hotelDetails[i].galleryImages.length;
         this.hotelDetails[i].activeSlide = 1;
         this.hotelCount = this.hotelDetails.length;
         this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-        console.log('hotelDetails on after for',this.hotelDetails)
       }
       this.currentPage = 1;
-      console.log('item wrapper in 2',this.hotelListArray)
       this.hotelList = [...this.hotelListArray];
-      console.log('item wrapper in 3',this.hotelList)
       if (this.bounds) {
         this.checkMarkersInBounds(this.bounds)
       }
