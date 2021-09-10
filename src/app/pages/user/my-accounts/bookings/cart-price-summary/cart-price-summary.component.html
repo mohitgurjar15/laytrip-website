@@ -5,7 +5,7 @@
             <div class="summary_box" *ngIf="item.moduleId === 1">
                 <div class="summary_item">
                     <div class="summary_type">
-                        {{item.locationInfo.source_location}}-{{item.locationInfo.destination_location}} ({{'taxes_fees_included' | translate}})
+                        <span>{{item.locationInfo.source_location}}-{{item.locationInfo.destination_location}} ({{'taxes_fees_included' | translate}})</span>
                     </div>
                     <div class="summary_item_price">
                         ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
@@ -17,7 +17,7 @@
             <div class="summary_box" *ngIf="items.moduleId === 3">
                 <div class="summary_item">
                     <div class="summary_type">
-                        {{items.moduleInfo[0].hotel_name}} ({{items.moduleInfo[0].input_data.num_nights}} {{(items.moduleInfo[0].input_data.num_nights >1 ? 'nights' : 'night') | translate }} x ${{items.totalAmount}})
+                        <span>{{items.moduleInfo[0].hotel_name}} ({{items.moduleInfo[0].input_data.num_nights}} {{(items.moduleInfo[0].input_data.num_nights >1 ? 'nights' : 'night') | translate }} x ${{items.totalAmount | number : '1.2-2'}})</span>
                     </div>
                     <div class="summary_item_price">
                         ${{beforeDesimal(items.totalAmount)}}<sup>.{{afterDesimal(items.totalAmount)}}</sup>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="summary_item">
                     <div class="summary_type">
-                        {{items.moduleInfo[0].hotel_name}} <a href="javascript:void(0);">{{'taxes_fees' | translate}}</a>
+                        <span>{{items.moduleInfo[0].hotel_name}}</span> <a data-toggle="modal" href="javascript:void(0);" data-target="#tax_fee_modal">{{'taxes_fees' | translate}}</a>
                     </div>
                     <div class="summary_item_price">
                         ${{beforeDesimal(items.moduleInfo[0].selling.taxes)}}<sup>.{{afterDesimal(items.moduleInfo[0].selling.taxes)}}</sup>
@@ -34,7 +34,7 @@
                 <ng-container *ngIf="items.moduleInfo[0].mandatory_fee_details.is_postpaid === true">
                     <div class="summary_item" *ngFor="let item of items.moduleInfo[0].mandatory_fee_details.postpaid_break_dwon">
                         <div class="summary_type">
-                            {{items.moduleInfo[0].hotel_name}} {{item.name}}
+                            <span>{{items.moduleInfo[0].hotel_name}} {{item.name}}</span>
                         </div>
                         <div class="summary_item_price">
                             ${{beforeDesimal(item.price)}}<sup>.{{afterDesimal(item.price)}}</sup>
@@ -95,7 +95,7 @@
                     <div class="card">
                         <div class="card-header">
                             <a class="card-link" data-toggle="collapse" aria-expanded="true" href="#listing_descrip">
-                                {{cartItem?.cartInstallments?.length -1 }} {{installmentType[userLang][cartItem.installmentType]}} {{'installments_of' | translate}} ${{cartItem?.cartInstallments[1]?.amount | number : '1.2-2'}}
+                                Payment Plan
                             </a>
                         </div>
                         <div id="listing_descrip" class="collapse show" Paid data-parent="#accordion_listing">
@@ -142,6 +142,26 @@
         </div>
     </div>
 </div>
+<section class="block_tax_fee_main modal fade comman_modal show" id="tax_fee_modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal_title">
+                <button type="button" class="close" (click)="closeModal()"><img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon"></button>
+            </div>
+            <div class="tax_fee_modal_wrp">
+                <div class="inner_wrppar">
+                    <div class="title_box">{{'taxes_fees' | translate}}</div>
+                    <div class="fee_msg">
+                        <p class="para_fees">{{ 'taxes_fees_info' | translate }}</p>
+                    </div>
+                    <div class="logo_wrpper_footer">
+                        <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- <div class="total_p_wrp bb">
         <div class="left_sec">

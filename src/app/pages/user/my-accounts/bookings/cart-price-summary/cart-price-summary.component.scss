@@ -88,6 +88,9 @@
                 align-items: center;
                 .left_date {
                     min-width: 170px;
+                    @include tab-view {
+                        min-width: 142px;
+                    }
                 }
                 .booking_type {
                     display: flex;
@@ -95,6 +98,9 @@
                     i {
                         padding: 0 6px;
                         font-size: 11px;
+                        @include tab-view {
+                            padding: 0 3px;
+                        }
                     }
                 }
             }
@@ -278,6 +284,75 @@
                 padding: 13px 5px;
                 .summary_item_price {
                     font-weight: 600;
+                }
+            }
+            .summary_type {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-right: 15px;
+                display: flex;
+                width: 75%;
+                span {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    margin: 0 5px 0 0;
+                }
+            }
+            @include tab-view {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.block_tax_fee_main {
+    .modal-content {
+        padding: 15px;
+        border-radius: 10px;
+        .modal_title {
+            position: absolute;
+            right: 20px;
+            img {
+                max-width: 12px;
+            }
+        }
+        .tax_fee_modal_wrp {
+            .title_box {
+                color: $active-tab-text;
+                font-weight: 500;
+                font-size: 32px;
+                margin: 10px auto;
+                text-align: center;
+                @include tab-view {
+                    font-size: 29px;
+                }
+            }
+            .fee_msg {
+                padding: 20px;
+                @include tab-view {
+                    padding: 5px;
+                }
+                p {
+                    &.para_fees {
+                        font-size: 12px;
+                        // max-height: 218px;
+                        margin: 0;
+                        scroll-behavior: smooth;
+                        // @include tab-view {
+                        //   max-height: 205px;
+                        // }
+                    }
+                }
+            }
+            .logo_wrpper_footer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+                img {
+                    max-width: 62px;
                 }
             }
         }
