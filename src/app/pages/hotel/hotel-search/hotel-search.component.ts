@@ -198,7 +198,6 @@ export class HotelSearchComponent implements OnInit {
   }
 
   filterHotel(event) {
-    console.log('filter on search',event)
     setTimeout(() => {
       this.hotelDetails = event;
       this.hotelService.setHotels(this.hotelDetails)

@@ -16,8 +16,6 @@ export class LaytripLoaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
-
     var lottie_path = '';
   }
 
