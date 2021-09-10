@@ -115,7 +115,7 @@
                     <div class="summary_box">
                         <div class="summary_item summary_item_total">
                             <div class="summary_type">
-                                {{'total_purchases' | translate}}   
+                                {{'total_purchases' | translate}}
                             </div>
                             <div class="summary_item_price">
                                 ${{beforeDesimal(cartDetails.totalAmount)}}<sup>.{{afterDesimal(cartDetails.totalAmount)}}</sup>
@@ -199,7 +199,7 @@
                                 {{'total_installments' | translate}}
                             </div>
                             <div class="summary_item_price">
-                                ${{beforeDesimal(cartDetails.totalAmount)}}<sup>.{{afterDesimal(cartDetails.totalAmount)}}</sup>
+                                ${{beforeDesimal(cartDetails.remainAmount)}}<sup>.{{afterDesimal(cartDetails.remainAmount)}}</sup>
                                 <!-- ${{ totalInstallmentAmount || 0 | number : '1.2-2' }} -->
                                 <!-- <span class="paid_markss">
                                     <i class="fa fa-check-circle d-none" aria-hidden="true"></i>
