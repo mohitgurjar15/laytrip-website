@@ -235,7 +235,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   }
 
   bookNow(route) {
-
     this.removeFlight.emit(this.flightUniqueCode);
     this.isFlightNotAvailable = false;
 
