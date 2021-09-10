@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import { environment } from '../../../../../../environments/environment';
-import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-flights',
@@ -26,29 +26,44 @@ export class FlightsComponent implements OnInit {
     private translate: TranslateService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.translateCabinClasses();
+  });
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if(typeof changes['cartItem'].currentValue!='undefined'){
       this.cartItem=changes['cartItem'].currentValue; 
       this.laytrip_cart_id=changes['laytrip_cart_id'].currentValue;
 
-      // Author: xavier | 2021/8/13
-      // Description: Translate cabin class for each flight route
-      console.log(this.cartItem && this.cartItem.moduleInfo && this.cartItem.moduleInfo[0] &&  this.cartItem.moduleInfo[0] != null)
-      // if((this.cartItem != null) && (this.cartItem && this.cartItem.moduleInfo && this.cartItem.moduleInfo[0] &&  this.cartItem.moduleInfo[0] != null)) {
-      //   for(let i: number = 0; i < this.cartItem.module_info[0].routes.length; i++) {
-      //     const stops = this.cartItem.module_info[0].routes[i].stops;
-      //     for(let j: number = 0; j < stops.length; j++) {
-      //       const key: string = stops[j].cabin_class.toLowerCase() + "_class";
-      //       this.translate.
-      //           get(key).
-      //           subscribe((res: string) => stops[j].cabin_class = res);
-      //     }
-      //   }
-      // }
+      this.translateCabinClasses();
     }
-  } 
+  }
+
+  // Author: xavier | 2021/8/13
+  // Description: Translate cabin class for each flight route
+  translateCabinClasses() {
+    //console.log(this.cartItem && this.cartItem.moduleInfo && this.cartItem.moduleInfo[0] && this.cartItem.moduleInfo[0] != null)
+    if((this.cartItem && this.cartItem.moduleInfo && this.cartItem.moduleInfo[0] != null)) {
+      for(let k: number = 0; k < this.cartItem.moduleInfo.length; k++) {
+        const module = this.cartItem.moduleInfo[k];
+        for(let i: number = 0; i < module.routes.length; i++) {
+          const stops = module.routes[i].stops;
+          for(let j: number = 0; j < stops.length; j++) {
+            let key: string;
+            if(stops[j].original_cabin_class) {
+              key = stops[j].original_cabin_class.toLowerCase() + "_class";
+            } else {
+              key = stops[j].cabin_class.toLowerCase() + "_class";
+              stops[j].original_cabin_class = stops[j].cabin_class;
+            }
+            stops[j].cabin_class = this.translate.instant(key);
+          }
+        }
+      }
+    }
+  }
 
   convertHHMM(time){
     time = time.replace(' AM','');
