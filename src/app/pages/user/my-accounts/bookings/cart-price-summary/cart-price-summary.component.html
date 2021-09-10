@@ -82,7 +82,7 @@
         <div class="summary_box" *ngIf="(cartItem.cartInstallments | json) != '[]'">
             <div class="summary_item summary_item_total">
                 <div class="summary_type">
-                    {{'total_due' | translate}}
+                    {{'total_paid' | translate}}
                 </div>
                 <div class="summary_item_price">
                     ${{beforeDesimal(cartItem.paidAmount)}}<sup>.{{afterDesimal(cartItem.paidAmount)}}</sup>
