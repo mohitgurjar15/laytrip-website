@@ -72,7 +72,7 @@
     </div>
 </section>
 
-<section class="block_cms_page_main faqpage" *ngIf="faqDetail && faqDetail.length">
+<section class="block_cms_page_main faqpage">
     <div class="page_topbanner">
         <img src="{{s3BucketUrl}}assets/images/cms_page_banner.png" alt="Banner Image">
     </div>
@@ -83,7 +83,7 @@
                     <div class="page_back_link">
                         <a class="hover-link" (click)="commonFunction.goBack()"><img style="margin-right: 5px;" src="{{s3BucketUrl}}assets/images/icon/ic_back.svg" alt=""> {{'back' | translate}}</a>
                     </div>
-                    <div class="block_cmspage_comman cms_faq">
+                    <div class="block_cmspage_comman cms_faq" *ngIf="!noResult">
                         <div class="block_faq_info">
                             <div class="block_text">
                                 <div class="block_top">
@@ -95,7 +95,16 @@
                                         <p *ngIf="languageId === faqItem.language_id">{{faqItem.answer}}</p>
                                     </div>
                                 </div>
-                                <div class="block_main_faq" *ngIf="!faqDetail.length">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block_cmspage_comman cms_faq" *ngIf="noResult">
+                        <div class="block_faq_info">
+                            <div class="block_text">
+                                <div class="block_top">
+                                    <h6>{{'faqs' | translate}}</h6>
+                                </div>
+                                <div class="block_main_faq">
                                     <div class="block_faq">
                                         <h5>No Faq Found.</h5>
                                         <p></p>

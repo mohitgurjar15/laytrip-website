@@ -3,6 +3,7 @@ import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
 declare var $: any;
 
 @Component({
@@ -17,6 +18,7 @@ export class FaqComponent implements OnInit {
   faqDetail;
   lenguage;
   faqData = []
+  noResult = false;
 
   constructor(
     private genericService: GenericService,
@@ -67,6 +69,10 @@ export class FaqComponent implements OnInit {
               }
             }
           }
+          if (!this.faqData.length) {
+            this.noResult = true;
+            this.loading = false;
+          }
           break;
         default:
           for (let i = 0; i < this.faqDetail.length; i++) {
@@ -79,8 +85,15 @@ export class FaqComponent implements OnInit {
               }
             }
           }
+          if (!this.faqData.length) {
+            this.noResult = true;
+            this.loading = false;
+          }
           break;
       }
+      this.loading = false;
+    }, (error: HttpErrorResponse) => {
+      this.noResult = true;
       this.loading = false;
     });
   }

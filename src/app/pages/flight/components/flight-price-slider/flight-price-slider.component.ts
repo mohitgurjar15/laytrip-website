@@ -5,6 +5,7 @@ declare var $: any;
 import * as moment from 'moment'
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { FlightService } from 'src/app/services/flight.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-flight-price-slider',
@@ -69,7 +70,8 @@ export class FlightPriceSliderComponent implements OnInit {
   constructor(
     private commonFunction: CommonFunction,
     private route: ActivatedRoute,
-    private flightService: FlightService
+    private flightService: FlightService,
+    private translate: TranslateService
   ) {
     this.departureDate = this.route.snapshot.queryParams['departure_date'];
     this.departureDate = this.commonFunction.convertDateFormat(this.departureDate, 'YYYY-MM-DD')
@@ -145,10 +147,14 @@ export class FlightPriceSliderComponent implements OnInit {
       }
     } else {
       price = item.selling_price;
-      labelClass = price > 0 ? 'full_payment' :'price_unavailabe';
+      labelClass = price > 0 ? 'full_payment' : 'price_unavailabe';
     }
+
+    // Author: xavier | 2021/9/8
+    // Description: Translate 'Flights Unavailable'
+    let msg: string = this.translate.instant('flights_unavailable');
     
-    return { price: price > 0 ? '$' + parseFloat(price).toFixed(2) : 'Flights Unavailable', className : labelClass};
+    return { price: price > 0 ? '$' + parseFloat(price).toFixed(2) : msg, className : labelClass};
   }
 
   getFlexibleArivalDate(date) {

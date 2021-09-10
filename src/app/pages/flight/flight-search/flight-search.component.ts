@@ -409,10 +409,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
     // Author: xavier | 2021/7/29
     // Description: Temporary hack to force Angular to refresh the flights search results.
-    //              Hopefully Suresh will come up with a better solution.
+    //              Hopefully OneClick will come up with a better solution.
     let tmp = this.filteredLabel;
-    this.filteredLabel = (String)((new Date()).getMilliseconds());
-    setTimeout(() => this.filteredLabel = tmp, 100);
+    tmp = tmp.endsWith(' ') ? tmp.trim() : tmp + ' ';
+    this.filteredLabel = tmp;
     this.adjustAddToCartButton();
   }
 

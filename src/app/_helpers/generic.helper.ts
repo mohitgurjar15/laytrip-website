@@ -55,7 +55,7 @@ export const CalendarTranslations = {
         clear: 'Clear',
     },
     es: {
-        firstDayOfWeek: 1,
+        firstDayOfWeek: 0,
         dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
         dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
         dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],

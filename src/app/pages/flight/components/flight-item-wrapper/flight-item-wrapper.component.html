@@ -138,7 +138,7 @@
                 </span>
                 <span class="fare_type">{{'full_payment' | translate}}</span>
                 <span class="cta_btn">
-                            <button (click)="bookNow(item)">Checkout</button>
+                            <button (click)="bookNow(item)">{{'checkout' | translate}}</button>
                             <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                                 <span class="sec_text">{{'flight_not_available' | translate}}</span>
                 <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
@@ -168,7 +168,7 @@
                         ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="!item.is_installment_available || !item.payment_object.weekly">{{'not_available' | translate}}</span>
-                    <div *ngIf="item.is_installment_available && item.payment_object.weekly" class="installment_add_cart" [ngClass]="{'checked':item.selected_option === 'weekly'}" (click)="checkCartButton(i,'weekly',item.payment_object['weekly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart "> <i class="fa fa-check"
+                    <div *ngIf="item.is_installment_available && item.payment_object.weekly" class="installment_add_cart" [ngClass]="{'checked':item.selected_option === 'weekly'}" (click)="checkCartButton(i,'weekly',item.payment_object['weekly'].down_payment,'installment')">{{'add' | translate}} <img *ngIf="item.selected_option === 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart "> <i class="fa fa-check"
                             aria-hidden="true"></i></div>
                 </div>
                 <div class="type_lines">
@@ -186,7 +186,7 @@
                         ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">{{'not_available' | translate}}</span>
-                    <div *ngIf="item.is_installment_available &&  item.payment_object.biweekly" [ngClass]="{'checked': item.selected_option === 'biweekly'}" class="installment_add_cart" (click)="checkCartButton(i,'biweekly',item.payment_object['biweekly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
+                    <div *ngIf="item.is_installment_available &&  item.payment_object.biweekly" [ngClass]="{'checked': item.selected_option === 'biweekly'}" class="installment_add_cart" (click)="checkCartButton(i,'biweekly',item.payment_object['biweekly'].down_payment,'installment')">{{'add' | translate}} <img *ngIf="item.selected_option === 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
                         <i class="fa fa-check" aria-hidden="true "></i>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
                         ${{item.payment_object['monthly'].installment | number : '1.2-2'}}
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="!item.is_installment_available || !item.payment_object.monthly "> {{'not_available' | translate}}</span>
-                    <div *ngIf="item.is_installment_available && item.payment_object.monthly" [ngClass]="{'checked': item.selected_option === 'monthly'}" class="installment_add_cart" (click)="checkCartButton(i,'monthly',item.payment_object['monthly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
+                    <div *ngIf="item.is_installment_available && item.payment_object.monthly" [ngClass]="{'checked': item.selected_option === 'monthly'}" class="installment_add_cart" (click)="checkCartButton(i,'monthly',item.payment_object['monthly'].down_payment,'installment')">{{'add' | translate}} <img *ngIf="item.selected_option === 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
                         <i class="fa fa-check " aria-hidden="true "></i>
                     </div>
                 </div>
@@ -214,10 +214,11 @@
                         <span class="texts d-block d-md-none"> ${{item.offer_data.applicable === true ? transformDecimal(item.discounted_selling_price) : transformDecimal(item.selling_price) }} {{'including_taxes_fees' | translate}}</span>
                     </span>
                     <span class="texts d-none d-md-block"> ${{item.offer_data.applicable === true ? transformDecimal(item.discounted_selling_price) : transformDecimal(item.selling_price) }} {{'including_taxes_fees' | translate}}</span>
-                    <div class="installment_add_cart " [ngClass]="{'checked': item.selected_option === 'full'}" (click)="checkCartButton(i,'full',item.selling_price,'no-installment')">Add <img *ngIf="item.selected_option === 'full'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'full'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart "><i class="fa fa-check "
+                    <div class="installment_add_cart " [ngClass]="{'checked': item.selected_option === 'full'}" (click)="checkCartButton(i,'full',item.selling_price,'no-installment')">{{'add' | translate}} <img *ngIf="item.selected_option === 'full'" src="{{s3BucketUrl}}assets/images/icon/cart-active.svg" alt="cart"><img *ngIf="item.selected_option != 'full'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart "><i class="fa fa-check "
                             aria-hidden="true "></i></div>
                 </div>
             </div>
+<<<<<<< HEAD
             <div class="rules_wrps">
                 <span class="heads"><img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg" alt="">
                   {{'rules' | translate}}</span>
@@ -226,6 +227,14 @@
                 <span class="texts_rules"> {{'rules_1' | translate}}
                             <a [routerLink]="['/terms']"
                                 [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a> {{'rules_2' | translate}}.</span>
+=======
+            <div class="rules_wrps ">
+                <span class="heads "><img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg " alt=" ">{{'rules' | translate}}</span>
+                <span class="texts_rules " *ngIf="!loadCancellationPolicy && errorMessage!='' ">{{ errorMessage}}</span>
+                <span class="texts_rules "> {{'rules_1' | translate}}
+                    <a [routerLink]="[ '/terms'] " [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : '' "> {{'terms' | translate}}</a> {{'rules_2' | translate}}.
+                </span>
+>>>>>>> 81bd2e51267b624e8ce25bf9a3a37d3dc03b977d
             </div>
         </div>
     </div>
