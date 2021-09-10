@@ -306,11 +306,11 @@ export class TravelerFormComponent implements OnInit {
             data.is_primary_traveler = this.traveler_number == 0 ? true : false;
             if (this.cartItem.type == 'hotel') {
               data.module_id = 3;
-              delete data.country_id;
+              /* delete data.country_id;
               delete data.dob;
               delete data.gender;
               delete data.passport_number;
-              delete data.passport_expiry;
+              delete data.passport_expiry; */
             }
             else {
               data.module_id = 1;
@@ -346,11 +346,11 @@ export class TravelerFormComponent implements OnInit {
     data.is_primary_traveler = traveler_number == 0 ? true : false;
     if (this.cartItem.type == 'hotel') {
       data.module_id = 3;
-      delete data.country_id;
+      /* delete data.country_id;
       delete data.dob;
       delete data.gender;
       delete data.passport_number;
-      delete data.passport_expiry;
+      delete data.passport_expiry; */
     }
     else {
       data.module_id = 1;
