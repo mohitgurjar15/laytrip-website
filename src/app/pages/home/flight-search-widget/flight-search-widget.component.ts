@@ -391,7 +391,6 @@ export class FlightSearchWidgetComponent implements OnInit {
     month = month.toString().length == 1 ? '0' + month : month;
     let date = `${day}/${month}/${y}`;
     let price: any = this.calenderPrices.find((d: any) => d.date == date);
-    console.log('price',price, ' ', d)
     if (price) {
 
       if (price.start_price > 0 && price.isPriceInInstallment) {
