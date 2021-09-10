@@ -4,17 +4,15 @@
 @import "../../../../../../_hotel.scss";
 @import "../../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 .price_listing_wrpper {
     background-color: $background-white;
     // padding-top: 15px;
     border-radius: 10px;
     border: 1px solid #d6d6d6;
-    margin: 0 15px 15px;
+    margin: 0 16.5px 15px;
     border-top: 0;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
-
     .total_p_wrp {
         // display: flex;
         // justify-content: space-between;
@@ -23,18 +21,14 @@
         // font-weight: 600;
         // padding: 10px 15px;
         // font-size: 16px;
-
         // @include tab-view {
         //     font-size: 14px;
         // }
-
         // &.bb {
         //     border-bottom: 1px solid $box-border-color;
-
         //     .left_sec {
         //         flex-direction: column;
         //         display: flex;
-
         //         span {
         //             color: $mid_gray_bg;
         //             font-size: 10px;
@@ -49,14 +43,12 @@
         //         }
         //     }
         // }
-
         // .left_sec {
         //     // flex: 1;
         //     @include tab-view {
         //         font-size: 14px;
         //     }
         // }
-
         .paid_markss {
             width: 21px;
             display: flex;
@@ -65,7 +57,6 @@
             margin-left: 7px;
         }
     }
-
     .price_descrip {
         .line_desc {
             display: flex;
@@ -79,15 +70,12 @@
             @include tab-view {
                 font-size: 14px;
             }
-
             &.paid_clr {
                 color: #1cd304;
             }
-
             &.due_clr {
                 color: $pink;
             }
-
             &.black_line_head {
                 .fake_paid_markss {
                     @include tab-view {
@@ -95,27 +83,25 @@
                     }
                 }
             }
-
             .left_sec {
                 display: flex;
                 align-items: center;
-                .left_date{
+                .left_date {
                     min-width: 170px;
                 }
                 .booking_type {
                     display: flex;
                     align-items: center;
-                    i{
+                    i {
                         padding: 0 6px;
-                        font-size: 11px; 
+                        font-size: 11px;
                     }
                 }
             }
-            .right_sec{
+            .right_sec {
                 display: flex;
                 align-items: center;
             }
-
             .paid_markss {
                 width: 14px;
                 display: flex;
@@ -125,19 +111,18 @@
                 font-size: 14px;
             }
         }
-
         .listing_accordion {
-            .card{
+            .card {
                 background: transparent;
                 border: none;
-                .card-header{
+                .card-header {
                     margin: 0;
                     background: transparent;
                     border-radius: 0;
                     padding: 23px 20px;
                     border-bottom: none;
                     border-bottom: 1px dashed #d6d6d6;
-                    a{
+                    a {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
@@ -169,8 +154,8 @@
                         }
                     }
                 }
-                #listing_descrip{
-                    .card-body{
+                #listing_descrip {
+                    .card-body {
                         padding: 20px;
                     }
                 }
@@ -183,14 +168,12 @@
             //         border-bottom-right-radius: 10px;
             //         border-top-right-radius: 0;
             //         border-top-left-radius: 0;
-
             //         .card-header {
             //             margin: 0;
             //             background-color: $background-white;
             //             border-radius: 10px;
             //             padding: 15px;
             //             border-bottom: none;
-
             //             a {
             //                 font-weight: 400;
             //                 color: $text-grey;
@@ -202,11 +185,9 @@
             //                 align-items: flex-start;
             //                 width: 100%;
             //                 padding: 0;
-
             //                 @include tab-view {
             //                     font-size: 14px;
             //                 }
-
             //                 &[aria-expanded="true"] {
             //                     &:after {
             //                         content: "";
@@ -220,7 +201,6 @@
             //                         right: 0;
             //                         border: none;
             //                         top: 5px;
-
             //                         // @include tab-view {
             //                         //     position: absolute;
             //                         //     right: 0;
@@ -228,7 +208,6 @@
             //                         // }
             //                     }
             //                 }
-
             //                 &[aria-expanded="false"] {
             //                     &:after {
             //                         position: relative;
@@ -242,7 +221,6 @@
             //                         right: 0;
             //                         border: none;
             //                         top: 5px;
-
             //                         // @include tab-view {
             //                         //     position: absolute;
             //                         //     right: 0;
@@ -252,7 +230,6 @@
             //                 }
             //             }
             //         }
-
             //         .card-body {
             //             padding: 0;
             //         }
@@ -260,7 +237,6 @@
             // }
         }
     }
-
     .fake_paid_markss {
         width: 31px;
     }
@@ -269,21 +245,21 @@
     }
 }
 
-.booking_summary_sect{
+.booking_summary_sect {
     padding-top: 16px;
-    .summary_box{
+    .summary_box {
         padding: 10px 15px;
         border-bottom: 1px dashed #d6d6d6;
         // &:first-child{
         //     border-top: 1px dashed #d6d6d6;
         // }
-        &:last-child{
+        &:last-child {
             border-top: 1px dashed #d6d6d6;
-            &.total_p_wrp{
+            &.total_p_wrp {
                 border-bottom: 0;
             }
         }
-        .summary_item{
+        .summary_item {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -291,17 +267,16 @@
             font-size: 16px;
             color: $mid_gray_bg;
             padding: 5px 5px 2px;
-            .summary_item_price{
+            .summary_item_price {
                 font-weight: 300;
                 display: flex;
                 align-items: center;
             }
-
-            &.summary_item_total{
+            &.summary_item_total {
                 color: #0B4BFF;
                 font-weight: 600;
                 padding: 13px 5px;
-                .summary_item_price{
+                .summary_item_price {
                     font-weight: 600;
                 }
             }

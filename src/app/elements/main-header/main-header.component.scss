@@ -3,7 +3,6 @@
 @import "../../../_hotel.scss";
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 //<!--  Start Header Section css -->
 .site_header {
     background: $background-white;
@@ -15,53 +14,43 @@
     -ms-transition: position 10s;
     -o-transition: position 10s;
     transition: all 0.5s ease;
-
     .container {
         position: relative;
     }
-
     @media (max-width: 991px) {
         padding: 10px 0;
     }
-
     &.fixed-top {
         position: fixed;
         z-index: 9999;
         height: auto !important;
         animation: smoothScroll 1s forwards;
     }
-
     @keyframes smoothScroll {
         0% {
             transform: translateY(-40px);
         }
-
         100% {
             transform: translateY(0px);
         }
     }
-
     .navbar {
         padding: 0;
-
         @media (max-width: 991px) {
             .navbar-toggler {
                 border-color: transparent;
                 padding: 0;
-
                 &[aria-expanded="true"] {
                     .line {
                         &:nth-child(2) {
                             opacity: 0;
                         }
-
                         &:nth-child(1) {
                             -webkit-transform: translateY(5px) rotate(45deg);
                             -ms-transform: translateY(5px) rotate(45deg);
                             -o-transform: translateY(5px) rotate(45deg);
                             transform: translateY(5px) rotate(45deg);
                         }
-
                         &:nth-child(3) {
                             -webkit-transform: translateY(-13px) rotate(-45deg);
                             -ms-transform: translateY(-13px) rotate(-45deg);
@@ -70,7 +59,6 @@
                         }
                     }
                 }
-
                 .navbar-toggler-icon {
                     // width: 30px;
                     // height: 30px;
@@ -78,7 +66,6 @@
                     // background-size: 100% 100%;
                     background-image: none !important;
                     width: 27px;
-
                     .line {
                         width: 100%;
                         height: 5px;
@@ -93,44 +80,37 @@
                 }
             }
         }
-
         .navbar-brand {
             padding: 6.5px 0;
             margin: 0;
-
             img {
                 height: 47px;
+                width: 100%;
+                max-width: 130px;
             }
-
             small {
                 &.beta_text {
                     color: $pink;
                     font-size: 14px;
                     position: relative;
                     top: -5px;
-
                     @include tab-view {
                         font-size: 10px;
                     }
                 }
             }
-
             @media (max-width: 991px) {
                 padding: 0;
-
                 img {
                     width: 90px;
                 }
             }
         }
-
         .site_menu {
             padding-left: 45px;
-
             @media (max-width: 1199px) {
                 padding-left: 25px;
             }
-
             @media (max-width: 991px) {
                 padding: 10px;
                 border-radius: 0 0 20px 20px;
@@ -142,36 +122,28 @@
                 z-index: 9;
                 box-shadow: 3px 4px 10px $shadow-color;
             }
-
             ul {
                 align-items: center;
-
                 .nav-item {
                     padding-right: 30px;
-
                     @media (max-width: 1199px) {
                         padding-right: 20px;
                     }
-
                     @media (max-width: 991px) {
                         width: 100%;
                         padding: 10px 15px;
                     }
-
                     a {
                         font-size: 14px;
                         color: $text-grey;
                         font-weight: 400;
                         padding: 0;
-
                         &:hover {
                             color: $pink;
                         }
-
                         @media (max-width: 1199px) {
                             font-size: 12px;
                         }
-
                         .lay_points_dot {
                             position: relative;
                             width: 100%;
@@ -182,7 +154,6 @@
                             padding: 5px;
                             align-items: center;
                             border-radius: 15px;
-
                             &::before {
                                 content: "";
                                 height: 18px;
@@ -194,28 +165,23 @@
                                 // top: 1px;
                                 border-radius: 50%;
                             }
-
                             @include ipad-view {
                                 max-width: 130px;
                             }
                         }
                     }
-
                     .dropdown-menu {
                         padding: 0;
                         min-width: 165px;
-
                         a {
                             padding: 10px;
                             color: $text-grey;
-
                             &:hover {
                                 background: $text-grey;
                                 color: $text-white;
                             }
                         }
                     }
-
                     .cart_section {
                         .cart_i_wrapper {
                             position: relative;
@@ -226,24 +192,19 @@
                             display: flex;
                             justify-content: center;
                             align-items: center;
-
                             @include tab-view {
                                 height: 30px;
                                 width: 30px;
                             }
-
                             a {
                                 display: flex;
-
                                 img {
                                     max-width: 16px;
                                     margin: 0;
-
                                     @include tab-view {
                                         max-width: 16px;
                                     }
                                 }
-
                                 .cart_count {
                                     position: absolute;
                                     color: $text-white;
@@ -257,7 +218,6 @@
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
-
                                     @include tab-view {
                                         font-size: 11px;
                                         top: 0px;
@@ -269,7 +229,6 @@
                             }
                         }
                     }
-
                     .account_prof {
                         a {
                             img {
@@ -287,53 +246,43 @@
                     }
                 }
             }
-
             .nav_left {
                 li {
                     padding: 0 15px 0 15px;
-
                     @media (max-width: 991px) {
                         width: 100%;
                         padding: 10px 15px;
                     }
-
                     a {
                         padding: 0;
                         color: $text-grey;
-
                         img {
                             margin-right: 5px;
-
                             &.active-icon {
                                 display: none;
                             }
                         }
-
                         &:hover {
                             img {
                                 &.active-icon {
                                     display: inline-block;
                                 }
-
                                 &.default-icon {
                                     display: none;
                                 }
                             }
                         }
-
                         &.active {
                             img {
                                 &.active-icon {
                                     display: inline-block;
                                 }
-
                                 &.default-icon {
                                     display: none;
                                 }
                             }
                         }
                     }
-
                     &:first-child {
                         a {
                             line-height: 30px;
@@ -345,7 +294,6 @@
                             position: relative;
                             z-index: 9;
                             overflow: hidden;
-
                             &::before {
                                 content: "";
                                 position: absolute;
@@ -358,19 +306,16 @@
                                 transition: 0.8s;
                                 border-radius: 0 0 50% 50%;
                             }
-
                             &:hover {
                                 &:before {
                                     height: 190%;
                                 }
                             }
                         }
-
                         @media (max-width: 991px) {
                             width: 100%;
                             padding: 10px 15px;
                             border: none;
-
                             a {
                                 width: auto;
                                 display: inline-block;
@@ -379,80 +324,64 @@
                     }
                 }
             }
-
             .nav_right {
                 li {
                     padding: 0 15px;
-
                     @media (max-width: 991px) {
                         width: 100%;
                         padding: 10px 15px;
                     }
-
                     &.cus_pad {
                         padding: 0 10px;
-
                         @media (max-width: 991px) {
                             padding: 10px 15px;
                         }
                     }
-
                     &.separator {
                         border-left: 1px solid $border-color;
                     }
-
                     a {
                         padding: 0;
-
                         img {
                             &.active-icon {
                                 display: none;
                             }
                         }
-
                         &:hover {
                             color: $pink;
-
                             img {
                                 &.active-icon {
                                     display: inline-block;
                                 }
-
                                 &.default-icon {
                                     display: none;
                                 }
                             }
                         }
-
                         &.active {
                             img {
                                 &.active-icon {
                                     display: inline-block;
                                 }
-
                                 &.default-icon {
                                     display: none;
                                 }
                             }
                         }
                     }
-
                     &.login_li {
                         border-left: 1px solid $border-color;
                         padding: 0px 0 0px 15px;
-
                         a {
                             font-size: 14px;
                             color: $text-grey;
                             font-weight: 400;
-
                             img {
                                 width: 30px;
                                 height: 30px;
                                 border-radius: 50%;
                                 margin: 0 5px 0 0;
                             }
-
                             &.login_btn_text {
                                 line-height: 30px;
                                 padding: 0 15px;
@@ -463,37 +392,28 @@
                                 position: relative;
                                 z-index: 9;
                                 overflow: hidden;
-
                                 -webkit-background-clip: text;
                                 -webkit-text-fill-color: transparent;
-                                background-image: linear-gradient(0deg,
-                                        $primary-color,
-                                        $primary-color 50%,
-                                        $pink_clr 50%);
+                                background-image: linear-gradient(0deg, $primary-color, $primary-color 50%, $pink_clr 50%);
                                 background-size: 100% 200%;
                                 background-position: 0% 0%;
-
                                 svg {
                                     fill: $pink_clr;
                                     max-width: 29px;
                                 }
-
                                 &:hover {
                                     color: $primary-color;
                                     transition: background 0.8s ease;
                                     background-position-y: -100%;
-
                                     svg {
                                         fill: $primary-color;
                                     }
                                 }
                             }
-
                             &:after {
                                 display: none;
                             }
                         }
-
                         .dropdown {
                             &.account_ddown {
                                 .dropdown-menu {
@@ -502,7 +422,6 @@
                                     top: 120%;
                                     border: 1px solid $box-border-color;
                                     border-radius: 5px;
-
                                     &:before {
                                         width: 0;
                                         height: 0;
@@ -515,7 +434,6 @@
                                         content: "";
                                         z-index: 2;
                                     }
-
                                     &:after {
                                         width: 0;
                                         height: 0;
@@ -527,27 +445,22 @@
                                         right: 19px;
                                         content: "";
                                     }
-
                                     li {
                                         border-bottom: 0px solid $box-border-color;
-
                                         &:first-child {
                                             a {
                                                 padding: 10px 10px 0px 10px;
                                             }
                                         }
-
                                         a {
                                             color: $text-grey;
                                             font-size: 14px;
                                             padding: 0 10px 10px 10px;
-
                                             &:hover {
                                                 color: $pink;
                                                 //background-color: $bg-body;
                                                 font-weight: 500;
                                             }
-
                                             .lay_points_dot {
                                                 position: relative;
                                                 width: 100%;
@@ -566,19 +479,15 @@
                                                 // }
                                             }
                                         }
-
                                         &:first-child {
                                             border-radius: 5px 5px 0 0;
-
                                             a {
                                                 border-radius: 5px 5px 0 0;
                                             }
                                         }
-
                                         &:last-child {
                                             border-radius: 0 0 5px 5px;
                                             border-bottom: none;
-
                                             a {
                                                 border-radius: 0 0 5px 5px;
                                             }
@@ -587,20 +496,17 @@
                                 }
                             }
                         }
-
                         @media (max-width: 991px) {
                             width: 100%;
                             padding: 10px 15px;
                             border: none;
                             display: none;
-
                             a {
                                 width: auto;
                                 display: inline-block;
                             }
                         }
                     }
-
                     .dropdown {
                         &.account_ddown {
                             a {
@@ -618,7 +524,6 @@
                                             right: 8px;
                                             border: none;
                                             top: 5px;
-
                                             @include tab-view {
                                                 position: absolute;
                                                 right: 0;
@@ -626,7 +531,6 @@
                                             }
                                         }
                                     }
-
                                     &[aria-expanded="false"] {
                                         &:after {
                                             position: relative;
@@ -640,7 +544,6 @@
                                             right: 8px;
                                             border: none;
                                             top: 5px;
-
                                             @include tab-view {
                                                 position: absolute;
                                                 right: 0;
@@ -650,7 +553,6 @@
                                     }
                                 }
                             }
-
                             .dropdown-menu {
                                 left: auto;
                                 right: 0;
@@ -658,7 +560,6 @@
                                 box-shadow: 0px 3px 6px #00000015;
                                 border: 1px solid #e4e4e4;
                                 border-radius: 10px;
-
                                 // &:before {
                                 // 	width: 0;
                                 // 	height: 0;
@@ -671,7 +572,6 @@
                                 // 	content: '';
                                 // 	z-index: 2;
                                 // }
-
                                 // &:after {
                                 // 	width: 0;
                                 // 	height: 0;
@@ -683,21 +583,17 @@
                                 // 	right: 19px;
                                 // 	content: '';
                                 // }
-
                                 li {
                                     border-bottom: 0px solid $box-border-color;
-
                                     a {
                                         color: $text-grey;
                                         font-size: 14px;
-
                                         &:hover {
                                             color: $pink;
                                             //background-color: $bg-body;
                                             background-color: $background-white;
                                             font-weight: 400;
                                         }
-
                                         .lay_points_dot {
                                             position: relative;
                                             width: 100%;
@@ -705,7 +601,6 @@
                                             display: flex;
                                             border: none;
                                             padding: 0;
-
                                             &::before {
                                                 content: "";
                                                 height: 18px;
@@ -719,19 +614,15 @@
                                             }
                                         }
                                     }
-
                                     &:first-child {
                                         border-radius: 5px 5px 0 0;
-
                                         a {
                                             border-radius: 5px 5px 0 0;
                                         }
                                     }
-
                                     &:last-child {
                                         border-radius: 0 0 5px 5px;
                                         border-bottom: none;
-
                                         a {
                                             border-radius: 0 0 5px 5px;
                                         }
@@ -740,14 +631,11 @@
                             }
                         }
                     }
-
                     &.cart_drop {
                         position: relative;
                         padding: 0 0 0 5px;
-
                         a {
                             cursor: pointer;
-
                             &.dropdown-toggle {
                                 &[aria-expanded="true"] {
                                     &:after {
@@ -762,7 +650,6 @@
                                         right: 15px;
                                         border: none;
                                         top: 5px;
-
                                         @include tab-view {
                                             position: absolute;
                                             right: 0;
@@ -770,7 +657,6 @@
                                         }
                                     }
                                 }
-
                                 &[aria-expanded="false"] {
                                     &:after {
                                         position: relative;
@@ -784,7 +670,6 @@
                                         right: 15px;
                                         border: none;
                                         top: 5px;
-
                                         @include tab-view {
                                             position: absolute;
                                             right: 0;
@@ -794,7 +679,6 @@
                                 }
                             }
                         }
-
                         .dropdown-menu {
                             &.show {
                                 left: auto;
@@ -810,20 +694,16 @@
                                 padding: 5px 0;
                                 -webkit-animation: fadeInUp 500ms;
                                 animation: fadeInUp 500ms;
-
                                 li {
                                     width: 100%;
                                     padding: 5px 10px;
-
                                     a {
                                         padding: 0;
                                         color: $mid_gray_bg;
                                         font-size: 16px;
-
                                         &:hover {
                                             background-color: transparent;
                                         }
-
                                         &.bld_txt {
                                             color: $active-tab-text;
                                             font-weight: 400;
@@ -833,22 +713,18 @@
                             }
                         }
                     }
-
                     @media (max-width: 991px) {
                         width: 100%;
                         padding: 10px 15px;
                         border: none;
-
                         &.responsive_li {
                             display: none;
                         }
-
                         a {
                             width: auto;
                             display: inline-block;
                         }
                     }
-
                     .dropdown {
                         &.cus_drop {
                             ul {
@@ -858,7 +734,6 @@
                                             padding: 0 5px 0 0;
                                         }
                                     }
-
                                     &:last-child {
                                         a {
                                             img {
@@ -871,21 +746,17 @@
                                 }
                             }
                         }
-
                         .dropdown-menu {
                             -webkit-animation: fadeInUp 500ms;
                             animation: fadeInUp 500ms;
-
                             li {
                                 padding: 0px;
                                 width: 100%;
                                 display: block;
-
                                 &:last-child {
                                     padding: 0px;
                                     border: none;
                                 }
-
                                 a {
                                     width: 100%;
                                     display: block;
@@ -894,16 +765,13 @@
                                     padding: 10px;
                                     border-radius: 0;
                                     line-height: normal;
-
                                     &:last-child {
                                         background: transparent;
                                         border-radius: 0;
-
                                         &:before {
                                             display: none;
                                         }
                                     }
-
                                     &:hover {
                                         background: $text-grey;
                                         color: $text-white;
@@ -916,31 +784,26 @@
             }
         }
     }
-
     .show_resposive {
         display: none;
         position: absolute;
         top: 5px;
         right: 15px;
         transform: translateY(0%);
-
         @media (max-width: 991px) {
             display: flex;
             align-items: center;
         }
-
         a {
             font-size: 14px;
             color: $text-grey;
             font-weight: 400;
-
             img {
                 width: 30px;
                 height: 30px;
                 border-radius: 50%;
                 margin: 0 5px 0 0;
             }
-
             &.login_btn_text {
                 line-height: 30px;
                 padding: 0 15px;
@@ -951,34 +814,28 @@
                 position: relative;
                 z-index: 9;
                 overflow: hidden;
-
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-image: linear-gradient(0deg, $primary-color, $primary-color 50%, $pink_clr 50%);
                 background-size: 100% 200%;
                 background-position: 0% 0%;
-
                 svg {
                     fill: $pink_clr;
                     max-width: 29px;
                 }
-
                 &:hover {
                     color: $primary-color;
                     transition: background 0.8s ease;
                     background-position-y: -100%;
-
                     svg {
                         fill: $primary-color;
                     }
                 }
             }
-
             &:after {
                 display: none;
             }
         }
-
         .dropdown {
             &.account_ddown {
                 .dropdown-menu {
@@ -992,28 +849,22 @@
                     border: 1px solid #e4e4e4;
                     min-width: 120px;
                     padding: 5px 0;
-
                     @include tab-view {
                         width: 130px;
                     }
-
                     li {
                         width: 100%;
                         padding: 5px 10px;
-
                         a {
                             padding: 0;
                             color: $mid_gray_bg;
                             font-size: 16px;
-
                             &:hover {
                                 background-color: transparent;
                             }
-
                             @include tab-view {
                                 font-size: 14px;
                             }
-
                             &.bld_txt {
                                 color: $active-tab-text;
                                 font-weight: 400;
@@ -1021,7 +872,6 @@
                         }
                     }
                 }
-
                 .mobile_span {
                     font-size: 14px;
                     color: $text-grey;
@@ -1029,13 +879,11 @@
                     font-weight: 400;
                     align-items: center;
                     padding-right: 5px;
-
                     @include tab-view {
                         font-size: 12px;
                         padding-top: 0;
                         padding-bottom: 0;
                     }
-
                     img {
                         max-width: 27px;
                         height: 27px;
@@ -1046,7 +894,6 @@
                         object-position: center;
                         margin-right: 5px;
                         border-radius: 50%;
-
                         @include tab-view {
                             max-width: 30px;
                             height: 30px;
@@ -1054,7 +901,6 @@
                             margin-right: 2px;
                         }
                     }
-
                     span {
                         @include tab-view {
                             white-space: nowrap;
@@ -1063,7 +909,6 @@
                             max-width: 55px;
                         }
                     }
-
                     &[aria-expanded="true"] {
                         &::after {
                             content: "";
@@ -1078,7 +923,6 @@
                             border: none;
                         }
                     }
-
                     &[aria-expanded="false"] {
                         &::after {
                             position: relative;
@@ -1096,10 +940,8 @@
                 }
             }
         }
-
         .cart_section {
             margin-left: 10px;
-
             .cart_i_wrapper {
                 position: relative;
                 background-color: $grayed_border;
@@ -1109,24 +951,19 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-
                 @include tab-view {
                     height: 30px;
                     width: 30px;
                 }
-
                 a {
                     display: flex;
-
                     img {
                         max-width: 16px;
                         margin: 0;
-
                         @include tab-view {
                             max-width: 16px;
                         }
                     }
-
                     .cart_count {
                         position: absolute;
                         color: $text-white;
@@ -1140,7 +977,6 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-
                         @include tab-view {
                             font-size: 11px;
                             top: 0px;
@@ -1152,16 +988,13 @@
                 }
             }
         }
-
         .cart_drop {
             position: relative;
             padding: 0 0 0px 10px;
             display: flex;
-
             .dropdown-toggle {
                 cursor: pointer;
                 display: flex;
-
                 &[aria-expanded="true"] {
                     &::after {
                         content: "";
@@ -1176,7 +1009,6 @@
                         border: none;
                     }
                 }
-
                 &[aria-expanded="false"] {
                     &::after {
                         position: relative;
@@ -1192,7 +1024,6 @@
                     }
                 }
             }
-
             .dropdown-menu {
                 &.show {
                     left: auto;
@@ -1207,20 +1038,16 @@
                     min-width: 120px;
                     padding: 5px 0;
                     transform: translate3d(-80px, 14px, 0px) !important;
-
                     li {
                         width: 100%;
                         padding: 5px 10px;
-
                         a {
                             padding: 0;
                             color: $mid_gray_bg;
                             font-size: 16px;
-
                             &:hover {
                                 background-color: transparent;
                             }
-
                             &.bld_txt {
                                 color: $active-tab-text;
                                 font-weight: 400;
@@ -1241,7 +1068,6 @@
 
 .mob_span {
     display: none;
-
     @include tab-view {
         display: flex;
         font-size: 8px !important;
@@ -1255,7 +1081,6 @@
         -webkit-transform: translate3d(0, 20px, 0);
         transform: translate3d(0, 20px, 0);
     }
-
     to {
         opacity: 1;
         -webkit-transform: none;
@@ -1269,7 +1094,6 @@
         -webkit-transform: translate3d(0, 20px, 0);
         transform: translate3d(0, 20px, 0);
     }
-
     to {
         opacity: 1;
         -webkit-transform: none;
@@ -1278,7 +1102,6 @@
 }
 
 //<!--  Close Header Section css -->
-
 .block_covid {
     width: 100%;
     //background: rgba(248, 38, 193, 0.8);
@@ -1286,17 +1109,14 @@
     position: relative;
     //z-index: 50;
     padding: 10px 0;
-
     span {
         font-size: 14px;
         font-weight: 400;
         color: $text-white;
-
         img {
             height: 20px;
             margin-right: 10px;
         }
-
         a {
             color: $text-white;
             font-weight: 500;
@@ -1344,41 +1164,33 @@
     text-align: center;
     padding: 10px 0 0;
     border-radius: 10px;
-
     @include tab-view {
         padding: 15px 0;
     }
-
     .inner_wrppar {
         padding: 20px;
         display: flex;
         align-items: center;
         flex-direction: column;
-
         .cart_img_wrpper {
             img {
                 max-width: 80px;
             }
-
             margin-bottom: 20px;
         }
-
         .cart_msg {
             color: $blue-text;
             font-size: 23px;
             margin-bottom: 5px;
             margin: 5px 0 15px;
-
             @include tab-view {
                 font-size: 18px;
             }
         }
-
         .cta_btn_wrps {
             display: flex;
             justify-content: space-between;
             width: 100%;
-
             button {
                 margin: 5px;
                 flex: 1;
@@ -1397,20 +1209,17 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-
                 &:hover {
                     border: 1px solid $hotel-secondary-color;
                     color: $text-white;
                     background: $hotel-secondary-color;
                 }
-
                 &:focus {
                     outline: none;
                     box-shadow: none;
                 }
             }
         }
-
         .logo_wrpper_footer {
             img {
                 height: 32px;
@@ -1427,12 +1236,10 @@
 .modal-dialog {
     max-width: 514px;
     width: 96%;
-
     .modal-content {
         max-width: 351px;
         margin: 0 auto;
         border-radius: 10px;
-
         .modal_title {
             .close {
                 position: absolute;
@@ -1440,13 +1247,11 @@
                 top: 16px;
                 z-index: 9;
                 cursor: pointer;
-
                 img {
                     max-width: 10px;
                 }
             }
         }
-
         .cart_modal_wrp {
             padding: 32px 20px;
         }
@@ -1459,7 +1264,6 @@
     right: 20%;
     top: 25%;
     position: fixed;
-
     a {
         width: 10px !important;
         margin-left: 10px;
