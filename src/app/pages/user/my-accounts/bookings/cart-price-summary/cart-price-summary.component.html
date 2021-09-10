@@ -17,7 +17,7 @@
             <div class="summary_box" *ngIf="items.moduleId === 3">
                 <div class="summary_item">
                     <div class="summary_type">
-                        <span>{{items.moduleInfo[0].hotel_name}} ({{items.moduleInfo[0].input_data.num_nights}} {{items.moduleInfo[0].input_data.num_nights >1 ? 'Nights' : 'Night' }} x ${{items.totalAmount}})</span>
+                        <span>{{items.moduleInfo[0].hotel_name}} ({{items.moduleInfo[0].input_data.num_nights}} {{items.moduleInfo[0].input_data.num_nights >1 ? 'Nights' : 'Night' }} x ${{items.totalAmount | number : '1.2-2'}})</span>
                     </div>
                     <div class="summary_item_price">
                         ${{beforeDesimal(items.totalAmount)}}<sup>.{{afterDesimal(items.totalAmount)}}</sup>
