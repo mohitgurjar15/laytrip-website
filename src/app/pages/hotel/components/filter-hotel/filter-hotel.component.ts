@@ -333,6 +333,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
       filteredHotels = filteredHotels.filter(item => {
         return this.ratingArray.includes(item.rating);
       });
+      console.log('filteredHotels',filteredHotels)
     }
 
     /* Filter hotels amenities */
@@ -370,7 +371,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         }
       });
     }
-    console.log('hereok')
     this.hotelService.getSortFilter.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
         var sortFilter: any = hotelInfo;        
@@ -382,6 +382,7 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
           filteredHotels = this.sortPriceJSON(filteredHotels, sortFilter.key, sortFilter.order);
         }
       }
+      console.log('filteredHotels rat',filteredHotels)
     })
     this.filterHotel.emit(filteredHotels);
   }

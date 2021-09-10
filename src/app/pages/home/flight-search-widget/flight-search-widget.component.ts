@@ -89,6 +89,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   lastSearchCalMMYY = '';
   timer: number = 0;
   timerTimeStamp;
+  isLangingPage = false
 
   constructor(
     public commonFunction: CommonFunction,
@@ -137,6 +138,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     //   this.dealIcon = (this.dealIcon == 'true' || this.dealIcon == true) ? true : false;
     // }
     if (this.commonFunction.isRefferal()) {
+      this.isLangingPage = true;
       this.homeService.getSlideOffers.subscribe(currentSlide => {
         if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
           let slide: any = currentSlide;

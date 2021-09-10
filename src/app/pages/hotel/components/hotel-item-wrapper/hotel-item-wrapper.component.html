@@ -4,7 +4,7 @@
     {{'found_in_suffix' | translate}} {{hotelName}}</span>
 <div class="top_wrapper_box">
     <h3 class="shorting_label">{{filteredLabel}}</h3>
-    <span class="desk_line"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
+    <span class="desk_line" *ngIf="hotelListArray.length > 0"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
         {{'found_in_prefix' | translate}}
         {{hotelCount}} {{(hotelCount > 1 ? 'hotels' : 'hotel') | translate}}
         {{'found_in_suffix' | translate}} {{hotelName}}</span>
