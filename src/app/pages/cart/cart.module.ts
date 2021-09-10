@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { CartRoutingModule } from './cart-routing.module';
 import { BookingComponent } from './booking/booking.component';
@@ -37,7 +37,7 @@ import { SessionExpiredComponent } from './session-expired/session-expired.compo
     BookModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [SpreedlyService],
+  providers: [SpreedlyService,DecimalPipe],
   entryComponents: [SessionExpiredComponent]
 })
 export class CartModule { }
