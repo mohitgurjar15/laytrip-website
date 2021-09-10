@@ -297,13 +297,9 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
-    console.log(this.fromDestinationInfo)
-    console.log(this.fromDestinationInfo.title.length)
-    console.log(this.validSearch)
     if (this.fromDestinationInfo.title.length == 0) {
       this.validSearch = false;
     }
-    console.log(this.validSearch)
     let queryParams: any = {};
 
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
@@ -332,13 +328,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
-    console.log('validSearch',this.validSearch)
-    console.log('searchHotelInfo',this.searchHotelInfo)
-    console.log('this.searchHotelInfo.latitude',this.searchHotelInfo.latitude)
-    console.log('this.searchHotelInfo.longitude',this.searchHotelInfo.longitude)
-    console.log('this.searchHotelInfo.check_in',this.searchHotelInfo.check_in)
-    console.log('this.searchHotelInfo.check_out',this.searchHotelInfo.check_out)
-    console.log('this.searchHotelInfo.occupancies',this.searchHotelInfo.occupancies)
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
 
