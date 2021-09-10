@@ -168,8 +168,8 @@
                         ${{ item.payment_object['weekly'].installment | number : '1.2-2'}}
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="!item.is_installment_available || !item.payment_object.weekly">{{'not_available' | translate}}</span>
-                    <div *ngIf="item.is_installment_available && item.payment_object.weekly" class="installment_add_cart" [ngClass]="{'checked':item.selected_option === 'weekly'}" (click)="checkCartButton(i,'weekly',item.payment_object['weekly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart_active.svg" alt="cart"><img *ngIf="item.selected_option != 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart "> <i class="fa fa-check"
-                            aria-hidden="true"></i></div>
+                    <div *ngIf="item.is_installment_available && item.payment_object.weekly" class="installment_add_cart" [ngClass]="{'checked':item.selected_option === 'weekly'}" (click)="checkCartButton(i,'weekly',item.payment_object['weekly'].down_payment,'installment')">{{'add' | translate}} <img *ngIf="item.selected_option === 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart_active.svg" alt="cart"><img *ngIf="item.selected_option != 'weekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg "
+                            alt="cart "> <i class="fa fa-check" aria-hidden="true"></i></div>
                 </div>
                 <div class="type_lines">
                     <span class="titles">{{'installment_option' | translate}} 2
@@ -186,7 +186,8 @@
                         ${{item.payment_object['biweekly'].installment | number : '1.2-2'}}
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="!item.is_installment_available ||  !item.payment_object.biweekly">{{'not_available' | translate}}</span>
-                    <div *ngIf="item.is_installment_available &&  item.payment_object.biweekly" [ngClass]="{'checked': item.selected_option === 'biweekly'}" class="installment_add_cart" (click)="checkCartButton(i,'biweekly',item.payment_object['biweekly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart_active.svg" alt="cart"><img *ngIf="item.selected_option != 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
+                    <div *ngIf="item.is_installment_available &&  item.payment_object.biweekly" [ngClass]="{'checked': item.selected_option === 'biweekly'}" class="installment_add_cart" (click)="checkCartButton(i,'biweekly',item.payment_object['biweekly'].down_payment,'installment')">{{'add' | translate}} <img *ngIf="item.selected_option === 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart_active.svg" alt="cart"><img *ngIf="item.selected_option != 'biweekly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg "
+                            alt="cart ">
                         <i class="fa fa-check" aria-hidden="true "></i>
                     </div>
                 </div>
@@ -205,7 +206,8 @@
                         ${{item.payment_object['monthly'].installment | number : '1.2-2'}}
                     </span>
                     <span class="texts d-none d-md-block" *ngIf="!item.is_installment_available || !item.payment_object.monthly "> {{'not_available' | translate}}</span>
-                    <div *ngIf="item.is_installment_available && item.payment_object.monthly" [ngClass]="{'checked': item.selected_option === 'monthly'}" class="installment_add_cart" (click)="checkCartButton(i,'monthly',item.payment_object['monthly'].down_payment,'installment')">Add <img *ngIf="item.selected_option === 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart_active.svg" alt="cart"><img *ngIf="item.selected_option != 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
+                    <div *ngIf="item.is_installment_available && item.payment_object.monthly" [ngClass]="{'checked': item.selected_option === 'monthly'}" class="installment_add_cart" (click)="checkCartButton(i,'monthly',item.payment_object['monthly'].down_payment,'installment')">{{'add' | translate}} <img *ngIf="item.selected_option === 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart_active.svg" alt="cart"><img *ngIf="item.selected_option != 'monthly'" src="{{s3BucketUrl}}assets/images/icon/cart.svg "
+                            alt="cart ">
                         <i class="fa fa-check " aria-hidden="true "></i>
                     </div>
                 </div>
@@ -214,8 +216,10 @@
                         <span class="texts d-block d-md-none"> ${{item.offer_data.applicable === true ? transformDecimal(item.discounted_selling_price) : transformDecimal(item.selling_price) }} {{'including_taxes_fees' | translate}}</span>
                     </span>
                     <span class="texts d-none d-md-block"> ${{item.offer_data.applicable === true ? transformDecimal(item.discounted_selling_price) : transformDecimal(item.selling_price) }} {{'including_taxes_fees' | translate}}</span>
-                    <div class="installment_add_cart " [ngClass]="{'checked': item.selected_option === 'full'}" (click)="checkCartButton(i,'full',item.selling_price,'no-installment')">Add <img *ngIf="item.selected_option === 'full'" src="{{s3BucketUrl}}assets/images/icon/cart_active.svg" alt="cart"><img *ngIf="item.selected_option != 'full'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart "><i class="fa fa-check "
-                            aria-hidden="true "></i></div>
+                    <div class="installment_add_cart " [ngClass]="{'checked': item.selected_option === 'full'}" (click)="checkCartButton(i,'full',item.selling_price,'no-installment')">{{'add' | translate}} <img *ngIf="item.selected_option === 'full'" src="{{s3BucketUrl}}assets/images/icon/cart_active.svg" alt="cart"><img *ngIf="item.selected_option != 'full'" src="{{s3BucketUrl}}assets/images/icon/cart.svg " alt="cart ">
+                        <i
+                            class="fa fa-check " aria-hidden="true "></i>
+                    </div>
                 </div>
             </div>
             <div class="rules_wrps ">
