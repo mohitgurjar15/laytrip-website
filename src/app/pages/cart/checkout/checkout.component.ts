@@ -601,7 +601,7 @@ export class CheckoutComponent implements OnInit {
             redirection += res.auth_url ? '&auth_url='+res.auth_url : '';
             
             var queryParams: any = {};
-            
+            return false;
             if (this.commonFunction.isRefferal()) {
               var parms = this.commonFunction.getRefferalParms();
               redirection += redirection+parms.utm_source ? '&utm_source='+parms.utm_source : '';
