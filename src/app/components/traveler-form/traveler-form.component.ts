@@ -317,7 +317,11 @@ export class TravelerFormComponent implements OnInit {
             }
             this.travelerService.updateAdult(data, userId).subscribe((traveler: any) => {
               this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].is_submitted = false;
-            })
+            }, error => {
+              if(error.status==404){
+                this.createTraveler(data,this.cartNumber,this.traveler_number)
+              }
+            }) 
           }
           else {
             //Add
