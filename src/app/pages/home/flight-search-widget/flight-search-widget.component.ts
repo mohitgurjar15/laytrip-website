@@ -415,8 +415,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   changeMonth(event) {
-    console.log('come in month change event')
     // this.timerStart();
+    this.showRetivePriceText = false;
     clearTimeout(this.timerTimeStamp);
     this.timer = 0;
 
@@ -428,7 +428,6 @@ export class FlightSearchWidgetComponent implements OnInit {
       this.timer = 0;
       // this.timerStop();
       // this.timerStart();
-
       // Execution start
       var currentDate = new Date();
       // 1 June validation apply

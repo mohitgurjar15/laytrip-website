@@ -20,11 +20,9 @@ export class FaqComponent implements OnInit {
 
   constructor(
     private genericService: GenericService,
-    private commonFunction: CommonFunction,
-    private translate: TranslateService
-  ) {
-    translate.onLangChange.subscribe(lang => this.setLanguage());
-  }
+    private commonFunction: CommonFunction
+
+  ) { }
 
   ngOnInit() {
     $('body').addClass('cms-bgColor');
@@ -33,6 +31,8 @@ export class FaqComponent implements OnInit {
     this.loading = true;
     this.setLanguage();
   }
+
+
 
   loadJquery() {
     $(document).ready(function () {
