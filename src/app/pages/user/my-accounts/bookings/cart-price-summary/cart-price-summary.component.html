@@ -5,7 +5,7 @@
             <div class="summary_box" *ngIf="item.moduleId === 1">
                 <div class="summary_item">
                     <div class="summary_type">
-                        <span>{{item.locationInfo.source_location}}-{{item.locationInfo.destination_location}} (Taxes and Fees Included)</span>
+                        <span>{{item.locationInfo.source_location}}-{{item.locationInfo.destination_location}} ({{'taxes_fees_included' | translate}})</span>
                     </div>
                     <div class="summary_item_price">
                         ${{beforeDesimal(item.totalAmount)}}<sup>.{{afterDesimal(item.totalAmount)}}</sup>
@@ -17,7 +17,7 @@
             <div class="summary_box" *ngIf="items.moduleId === 3">
                 <div class="summary_item">
                     <div class="summary_type">
-                        <span>{{items.moduleInfo[0].hotel_name}} ({{items.moduleInfo[0].input_data.num_nights}} {{items.moduleInfo[0].input_data.num_nights >1 ? 'Nights' : 'Night' }} x ${{items.totalAmount | number : '1.2-2'}})</span>
+                        <span>{{items.moduleInfo[0].hotel_name}} ({{items.moduleInfo[0].input_data.num_nights}} {{(items.moduleInfo[0].input_data.num_nights >1 ? 'nights' : 'night') | translate }} x ${{items.totalAmount | number : '1.2-2'}})</span>
                     </div>
                     <div class="summary_item_price">
                         ${{beforeDesimal(items.totalAmount)}}<sup>.{{afterDesimal(items.totalAmount)}}</sup>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="summary_item">
                     <div class="summary_type">
-                        <span>{{items.moduleInfo[0].hotel_name}}</span> <a data-toggle="modal" href="javascript:void(0);" data-target="#tax_fee_modal">Taxes and Fees</a>
+                        <span>{{items.moduleInfo[0].hotel_name}}</span> <a data-toggle="modal" href="javascript:void(0);" data-target="#tax_fee_modal">{{'taxes_fees' | translate}}</a>
                     </div>
                     <div class="summary_item_price">
                         ${{beforeDesimal(items.moduleInfo[0].selling.taxes)}}<sup>.{{afterDesimal(items.moduleInfo[0].selling.taxes)}}</sup>

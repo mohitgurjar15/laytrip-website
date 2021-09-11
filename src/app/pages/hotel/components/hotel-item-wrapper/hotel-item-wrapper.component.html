@@ -267,7 +267,11 @@
                                         <span class="heads">
                                             <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> {{'rules' | translate}}
                                         </span>
-                                        <span class="texts_rules">{{'rules_1' | translate}} <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}&nbsp;</a>{{'rules_2' | translate}}</span>
+                                        <span class="texts_rules">
+                                            {{'rules_1' | translate}} <a [routerLink]="['/terms']"
+                                            [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a> {{'rules_2' | translate}}
+                                        </span>
+
                                     </div>
                                 </div>
                             </div>

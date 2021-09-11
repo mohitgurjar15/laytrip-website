@@ -536,7 +536,7 @@
                                                                         </span>
                                                                     </h4>
                                                                     <span class="adress_span">{{ (room.occupancy==1?'sleep':'sleeps') | translate }} {{room.occupancy}}</span>
-                                                                    <div *ngIf="room.is_refundable != 'true'" class="refundable_label">Non Refundable</div>
+                                                                    <div *ngIf="room.is_refundable != 'true'" class="refundable_label">{{'non_refundable' | translate}}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -608,7 +608,7 @@
                                                 {{ (room.occupancy==1?'sleep':'sleeps') | translate }}
                                                 {{room.occupancy}}
                                             </span>
-                                            <div *ngIf="room.is_refundable != 'true'" class="refundable_label">Non Refundable</div>
+                                            <div *ngIf="room.is_refundable != 'true'" class="refundable_label">{{'non_refundable' | translate}}</div>
                                         </div>
 
                                         <!-- <span [id]="'accordion_infos1'+index" class="show_detail">
@@ -743,10 +743,8 @@
                                             {{'rules' | translate}}
                                         </span>
                                         <span class="texts_rules">
-                                            {{'rules_1' | translate}} <a [routerLink]="['/terms']"
-                                                [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms'
-                                                | translate}}</a>
-                                            {{'rules_2' | translate}}
+                                            {{'rules_1' | translate}}<a [routerLink]="['/terms']"
+                                                [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"> {{'terms' | translate}}</a> {{'rules_2' | translate}}
                                         </span>
                                     </div>
                                 </div>

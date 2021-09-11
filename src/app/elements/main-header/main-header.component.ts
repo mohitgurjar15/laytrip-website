@@ -63,8 +63,8 @@ export class MainHeaderComponent implements OnInit, DoCheck {
     private cookieService: CookieService,
     private userService: UserService,
     private renderer: Renderer2,
-    public route :ActivatedRoute
-
+    public route :ActivatedRoute,
+    
   ) {
     let _langunage = localStorage.getItem('_lang');
     if (_langunage) {
@@ -483,7 +483,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
   * @param langunage 
   */
    changeLangunage(langunage: Langunage) {
-
     if (JSON.stringify(langunage) != JSON.stringify(this.selectedLanunage)) {
       this.selectedLanunage = langunage;
       localStorage.setItem("_lang", JSON.stringify(langunage))
@@ -496,7 +495,6 @@ export class MainHeaderComponent implements OnInit, DoCheck {
       // urlParameters.lang = this.selectedLanunage.iso_1Code;
 
       // this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
-
     }
   }
 
@@ -511,7 +509,18 @@ export class MainHeaderComponent implements OnInit, DoCheck {
         if (!this.isLanunageSet) {
           this.isLanunageSet = true;
           this.selectedLanunage = this.langunages[0];
-          localStorage.setItem("_lang", JSON.stringify(this.langunages[0]))
+          localStorage.setItem("_lang", JSON.stringify(this.langunages[0]));
+
+          // Author: xavier | 2021/8/24
+          // Description: Get language from browser
+          const bl: string = this.translate.getBrowserLang();
+          for(let i: number = 0; i < this.langunages.length; i++) {
+            if(this.langunages[i].iso_1Code == bl) {
+              // Small delay to allow all components to load before changing the language
+              setTimeout(() => this.changeLangunage(this.langunages[i]), 500);
+              break;
+            }
+          }
         }
         else {
           let find = this.langunages.find(langunage => langunage.id == this.selectedLanunage.id)

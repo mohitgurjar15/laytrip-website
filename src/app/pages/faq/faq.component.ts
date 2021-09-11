@@ -22,7 +22,7 @@ export class FaqComponent implements OnInit {
 
   constructor(
     private genericService: GenericService,
-    private commonFunction: CommonFunction,
+    public commonFunction: CommonFunction,
     private translate: TranslateService
   ) {
     translate.onLangChange.subscribe(lang => this.setLanguage());

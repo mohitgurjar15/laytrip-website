@@ -112,9 +112,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.showCommingSoon = true;
     }
 
-    translate.onLangChange.subscribe(lang => {
-      this.setCalendarLocale();
-    });
+    translate.onLangChange.subscribe(lang => this.setCalendarLocale());
   }
 
   ngOnInit() {

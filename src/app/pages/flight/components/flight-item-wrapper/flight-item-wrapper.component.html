@@ -138,7 +138,7 @@
                 </span>
                 <span class="fare_type">{{'full_payment' | translate}}</span>
                 <span class="cta_btn">
-                            <button (click)="bookNow(item)">Checkout</button>
+                            <button (click)="bookNow(item)">{{'checkout' | translate}}</button>
                             <div class="section_description" *ngIf="isFlightNotAvailable && flightUniqueCode == item.unique_code">
                                 <span class="sec_text">{{'flight_not_available' | translate}}</span>
                 <a (click)="hideFlightNotAvailable()" href="javascript:void(0);"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
@@ -226,7 +226,7 @@
                 <span class="heads "><img src="{{s3BucketUrl}}assets/images/icon/pink_filled_flight.svg " alt=" ">{{'rules' | translate}}</span>
                 <span class="texts_rules " *ngIf="!loadCancellationPolicy && errorMessage!='' ">{{ errorMessage}}</span>
                 <span class="texts_rules "> {{'rules_1' | translate}}
-                    <a [routerLink]="[ '/terms'] " [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : '' ">{{'terms' | translate}}</a>{{'rules_2' | translate}}.
+                    <a [routerLink]="[ '/terms'] " [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : '' "> {{'terms' | translate}}</a> {{'rules_2' | translate}}.
                 </span>
             </div>
         </div>

@@ -65,7 +65,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   showTotalLayCredit = 0;
   _isLayCredit = false;
   totalLayCredit = 0;
-  flightItems;
+  flightItems = [];
   scrollLoading: boolean = false;
   dataToLoad = 20;
   checkedAirUniqueCodes = [];
@@ -104,11 +104,12 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
     this.checkInstalmentAvalability();
     this.checkUser();
+    this.loadJquery();
 
     this.cartService.getCartItems.subscribe(cartItems => {
       this.cartItems = cartItems;
     })
-    this.loadJquery();
+    
     this.flightService.getFlights.subscribe(data=>{
       this.flightItems =[];
       if(data.length){
@@ -125,13 +126,13 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
           this.flightItems[i].selected_option = 'full';
       }
       this.flightDetails = this.flightItems.slice(0, this.noOfDataToShowInitially);
-
+      
     });
 
     
     // Author: xavier | 2021/8/3
     // Description: Increase the height of the "Add to Cart" buttons to fit spanish translation
-    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    let userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code ? JSON.parse(localStorage.getItem('_lang')).iso_1Code : 'en';
     if (userLang === 'es') {
       $(document).ready(function () {
         $('.cta_btn').find('button').css({
@@ -140,6 +141,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
         });
       });
     }
+
   }
 
   setAirportAvailabilityOld() {
@@ -233,7 +235,6 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   }
 
   bookNow(route) {
-
     this.removeFlight.emit(this.flightUniqueCode);
     this.isFlightNotAvailable = false;
 
@@ -301,11 +302,11 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
       }, error => {
         this.changeLoading.emit(false);
         if (error.status == 406) {
-          this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
-            windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
-            keyboard: false
-          });
-          return;
+          // this.modalService.open(CartInventoryNotmatchErrorPopupComponent, {
+          //   windowClass: 'cart_inventory_not_match_error_main', centered: true, backdrop: 'static',
+          //   keyboard: false
+          // });
+          // return;
         }
         if (error.status == 409 && this.commonFunction.isRefferal()) {
           this.modalService.open(DiscountedBookingAlertComponent, {
@@ -350,8 +351,9 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
 
 
   ngOnChanges(changes: SimpleChanges) {
+
     if (changes && changes.flightDetails && changes.flightDetails.currentValue) {
-      console.log(changes.flightDetails.currentValue)
+      // console.log(changes.flightDetails.currentValue)
     } else if (changes && changes.filteredLabel && changes.filteredLabel.currentValue) {
       this.filteredLabel = changes.filteredLabel.currentValue;
     }

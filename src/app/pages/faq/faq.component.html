@@ -91,8 +91,8 @@
                                 </div>
                                 <div class="block_main_faq">
                                     <div class="block_faq" *ngFor="let faqItem of faqData;let j=index">
-                                        <h5>{{faqItem.question}}</h5>
-                                        <p>{{faqItem.answer}}</p>
+                                        <h5 *ngIf="languageId === faqItem.language_id">{{faqItem.question}}</h5>
+                                        <p *ngIf="languageId === faqItem.language_id">{{faqItem.answer}}</p>
                                     </div>
                                 </div>
                             </div>
