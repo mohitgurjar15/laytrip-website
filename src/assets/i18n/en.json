@@ -269,7 +269,7 @@
     "avilable_laytrip_point": "Available laytrip points",
     "tpo_up": "TOP UP",
     "redeemed": "REDEEMED",
-    "point": "Points",
+    "points": "Points",
     "laytrip_point_added": "Laytrip points added",
     "laytrip_point_reedeemed": "Laytrip points redeemed",
     "setting": "Settings",
@@ -708,5 +708,6 @@
     "non_refundable": "Non Refundable",
     "payment_plans": "Payment Plans",
     "booking_not_avilable": "This booking is no longer available. Click “x” to delete to be able to proceed to Checkout.",
-    "flights_unavailable": "Flights Unavailable"
+    "flights_unavailable": "Flights Unavailable",
+    "deals": "Deals"
 }
