@@ -129,10 +129,10 @@
         <div class="summary_box total_p_wrp" *ngIf="(cartItem.cartInstallments | json) != '[]'">
             <div class="summary_item summary_item_total w-100">
                 <div class="summary_type">
-                    {{'total_installments' | translate}}
+                    {{'total_installments' | translate}}123
                 </div>
                 <div class="summary_item_price">
-                    ${{beforeDesimal(cartItem.totalAmount)}}<sup>.{{afterDesimal(cartItem.totalAmount)}}</sup>
+                    ${{beforeDesimal(cartItem.totalInstallment)}}<sup>.{{afterDesimal(cartItem.totalInstallment)}}</sup>
                     <!-- ${{ totalInstallmentAmount || 0 | number : '1.2-2' }} -->
                     <span class="paid_markss">
                         <i class="fa fa-check-circle d-none" aria-hidden="true"></i>
