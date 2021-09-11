@@ -48,7 +48,8 @@ export class BookingTravelerComponent implements OnInit {
       this.travelers = changes['cartItem'].currentValue.travelers;          
       this.moduleInfo = changes['cartItem'].currentValue.moduleInfo;
       this.cartItem = changes['cartItem'].currentValue;
-      
+      this.travelers.sort((a,b) =>b.isPrimary - a.isPrimary)
+
 
       this.bookingStatus = changes['cartItem'].currentValue.bookingStatus;
       this.moduleId = changes['cartItem'].currentValue.moduleId;

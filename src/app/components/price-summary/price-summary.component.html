@@ -71,7 +71,7 @@
             <span *ngIf="!installmentSummary.installment_dates.length" class="">${{beforeDesimal(installmentSummary.total_price)}}<sup>.{{afterDesimal(installmentSummary.total_price)}}</sup></span>
         </div>
         <!-- End -->
-        <div class="price_accordion" id="price_collapse" *ngIf="typeOf(installmentSummary)!='undefined'">
+        <div class="price_accordion" id="price_collapse" *ngIf="installmentSummary.installment_dates.length">
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc" aria-expanded="true" aria-controls="instalment_acc">

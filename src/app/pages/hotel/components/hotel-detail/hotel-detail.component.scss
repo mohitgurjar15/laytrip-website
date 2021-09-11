@@ -549,6 +549,17 @@ agm-map {
                                         overflow: hidden;
                                         text-overflow: ellipsis;
                                     }
+                                    .refundable_label{
+                                        margin-top: 8px;
+                                        font-weight: 500;
+                                        font-size: 11px;
+                                        line-height: normal;
+                                        color: #837F7F;
+                                        background: #E6E6E6;
+                                        padding:0 3px 2px 4px;
+                                        border-radius: 4px;
+                                        display: inline-block;
+                                    }
                                     .review_section_wrap {
                                         img {
                                             width: 12px;

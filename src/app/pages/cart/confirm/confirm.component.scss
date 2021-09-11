@@ -138,3 +138,169 @@
         }
     }
 }
+
+.booking_summary_sect {
+    .summary_box {
+        padding: 10px 0;
+        border-bottom: 1px dashed #d6d6d6;
+        // &:first-child{
+        //     border-top: 1px dashed #d6d6d6;
+        // }
+        &:last-child {
+            border-top: 1px dashed #d6d6d6;
+            &.total_p_wrp {
+                border-bottom: 0;
+            }
+        }
+        .summary_item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            font-size: 16px;
+            color: $mid_gray_bg;
+            padding: 5px 5px 2px;
+            .summary_item_price {
+                font-weight: 300;
+                display: flex;
+                align-items: center;
+            }
+            &.summary_item_total {
+                color: #0B4BFF;
+                font-weight: 600;
+                padding: 13px 0;
+                .summary_item_price {
+                    font-weight: 600;
+                }
+            }
+            .summary_type {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-right: 15px;
+                display: flex;
+                width: 75%;
+                span {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    margin: 0 5px 0 0;
+                }
+            }
+            @include tab-view {
+                font-size: 14px;
+            }
+        }
+    }
+    .price_descrip {
+        .line_desc {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: $mid_gray_bg;
+            // padding: 5px 15px;
+            font-size: 16px;
+            font-weight: 400;
+            padding-bottom: 7px;
+            @include tab-view {
+                font-size: 14px;
+            }
+            &.paid_clr {
+                color: #1cd304;
+            }
+            &.due_clr {
+                color: $pink;
+            }
+            &.black_line_head {
+                .fake_paid_markss {
+                    @include tab-view {
+                        display: none;
+                    }
+                }
+            }
+            .left_sec {
+                display: flex;
+                align-items: center;
+                .left_date {
+                    min-width: 170px;
+                    @include tab-view {
+                        min-width: 142px;
+                    }
+                }
+                .booking_type {
+                    display: flex;
+                    align-items: center;
+                    i {
+                        padding: 0 6px;
+                        font-size: 11px;
+                        @include tab-view {
+                            padding: 0 3px;
+                        }
+                    }
+                }
+            }
+            .right_sec {
+                display: flex;
+                align-items: center;
+            }
+            .paid_markss {
+                width: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 7px;
+                font-size: 14px;
+            }
+        }
+        .listing_accordion {
+            .card {
+                background: transparent;
+                border: none;
+                .card-header {
+                    margin: 0;
+                    background: transparent;
+                    border-radius: 0;
+                    padding: 23px 0;
+                    border-bottom: none;
+                    border-bottom: 1px dashed #d6d6d6;
+                    a {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        font-weight: 400;
+                        font-size: 16px;
+                        color: $mid_gray_bg;
+                        &:after {
+                            content: "";
+                            position: relative;
+                            padding: 5px 9px;
+                            transition: 0.3s;
+                            border: none;
+                        }
+                        &[aria-expanded="true"] {
+                            &:after {
+                                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 14px;
+                            }
+                        }
+                        &[aria-expanded="false"] {
+                            &:after {
+                                background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                background-position: right;
+                                background-repeat: no-repeat;
+                                background-size: 14px;
+                            }
+                        }
+                    }
+                }
+                #listing_descrip {
+                    .card-body {
+                        padding: 20px 0;
+                    }
+                }
+            }
+        }
+    }
+}

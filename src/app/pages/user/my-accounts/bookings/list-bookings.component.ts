@@ -23,7 +23,8 @@ export class ListBookingsComponent implements OnInit {
   selectedCompletedTabNumber: number = 0;
   cartItemsCount: number = 0;
   searchTextLength = 0;
-
+  selectedBooking = []
+  selectedCompletedBooking = [];
   searchText = '';
 
   constructor(
@@ -46,6 +47,9 @@ export class ListBookingsComponent implements OnInit {
     this.upComingloading = true;
     this.accountService.getIncomplteBooking(search).subscribe((res: any) => {
       this.upComingbookings = res.data;
+      for (let i = 0; i < this.upComingbookings.length; i++) {
+        this.selectedBooking.push(0)
+      }
       this.upComingbookingsForFilter = res.data;
       this.upComingloading = false;
     }, err => {
@@ -59,6 +63,9 @@ export class ListBookingsComponent implements OnInit {
     this.completeLoading = true;
     this.accountService.getComplteBooking(search).subscribe((res: any) => {
       this.completeBookings = res.data;
+      for(let i=0;i<this.completeBookings.length;i++){
+        this.selectedCompletedBooking.push(0)
+      }
       this.completeBookingsForFilter = res.data;
       this.completeLoading = false;
     }, err => {
@@ -75,7 +82,7 @@ export class ListBookingsComponent implements OnInit {
       }
       for (let j = 0; j < items[i].booking.length; j++) {
 
-        if(items[i].booking[j].moduleId==1){
+        if (items[i].booking[j].moduleId == 1) {
           if (items[i].booking[j].moduleInfo[0].departure_code.toLowerCase().toString().includes(searchValue) ||
             items[i].booking[j].moduleInfo[0].arrival_code.toLowerCase().toString().includes(searchValue) ||
             items[i].booking[j].moduleInfo[0].airline_name.toLowerCase().toString().includes(searchValue) ||
@@ -85,14 +92,14 @@ export class ListBookingsComponent implements OnInit {
             result.push(items[i]);
           }
         }
-        if(items[i].booking[j].moduleId==3){
+        if (items[i].booking[j].moduleId == 3) {
           if (items[i].booking[j].moduleInfo[0].hotel_name.toLowerCase().toString().includes(searchValue) ||
             items[i].booking[j].moduleInfo[0].title.toLowerCase().toString().includes(searchValue)
           ) {
             result.push(items[i]);
           }
         }
-        
+
       }
     }
     return result;
@@ -111,12 +118,14 @@ export class ListBookingsComponent implements OnInit {
     }
   }
 
-  selectInCompletedTab(cartNumber) {
+  selectInCompletedTab(cartNumber, i) {
+    this.selectedBooking[i] = cartNumber
     this.selectedInCompletedTabNumber = cartNumber;
     this.cartService.setCartNumber(cartNumber);
   }
 
-  selectCompletedTab(cartNumber) {
+  selectCompletedTab(cartNumber,i) {
+    this.selectedCompletedBooking[i] = cartNumber;
     this.selectedCompletedTabNumber = cartNumber;
     this.cartService.setCartNumber(cartNumber);
   }

@@ -33,7 +33,6 @@ export class CartItemComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes', changes)
     try {
       let cartAlerts = localStorage.getItem("__alrt")
       if (cartAlerts) {
@@ -46,10 +45,10 @@ export class CartItemComponent implements OnInit {
     catch (e) {
       this.cartAlerts = [];
     }
-
+    
     if (changes && changes['cartItem']) {
       this.cartItem = changes['cartItem'].currentValue;
-
+      
       if (this.cartItem.old_module_info.selling_price != this.cartItem.module_info.selling_price) {
         this.priceFluctuationAmount = this.cartItem.module_info.selling_price - this.cartItem.old_module_info.selling_price;
       }

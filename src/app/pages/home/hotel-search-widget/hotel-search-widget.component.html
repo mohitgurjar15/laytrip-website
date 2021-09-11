@@ -5,7 +5,7 @@
         <div class="travellers">
             <app-guest-info label="GUEST" (changeValue)="changeGuestInfo($event)" (currentChangeCounter)="counterValueChanged($event)"></app-guest-info>
         </div>
-        <div class="custom-control custom-switch">
+        <div class="custom-control custom-switch" *ngIf="!isRefferal">
             <input type="checkbox" class="custom-control-input" id="customSwitch" [(ngModel)]="isHotelDealIcon" (click)="clickOnDealsIcon()">
             <label class="custom-control-label" for="customSwitch">{{'deals' | translate}}</label>
         </div>
@@ -25,8 +25,7 @@
                     <div class="date_form">
                         <div class="search_area tab_search_area" [ngClass]="{'dr_search_area':countryCode=='DR'}">
                             <p-calendar [appendTo]="body" #dateFilter inputId="range" dateFormat="M d, yy" selectionMode="range" [(ngModel)]="rangeDates" [ngModelOptions]="{standalone: true}" checkInMinDate [minDate]="checkInMinDate" panelStyleClass="calender-responsive-view round_trip_calender laytrip-cal-view"
-                                [numberOfMonths]="2" (onSelect)=selectCheckInDateUpdate($event) [readonlyInput]="true" (onShow)="datepickerShow($event)" (onClose)="datepickerClose($event)"
-                                [locale]="cal_locale" *ngIf="cal_loaded">
+                                [numberOfMonths]="2" (onSelect)=selectCheckInDateUpdate($event) [readonlyInput]="true" (onShow)="datepickerShow($event)" (onClose)="datepickerClose($event)" [locale]="cal_locale" *ngIf="cal_loaded">
                             </p-calendar>
                         </div>
                     </div>
