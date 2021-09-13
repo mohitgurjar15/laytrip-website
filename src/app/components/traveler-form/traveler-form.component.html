@@ -21,7 +21,7 @@
                                     {{travelerItem.value.adults[x].userId?travelerItem.value.adults[x].first_name + ' '
                                     +travelerItem.value.adults[x].last_name:'' | titlecase}}
                                 </span>
-                                <span class="edit_traveler_link" *ngIf="traveler.status=='VALID' && !travelerItem.value.adults[x].is_active" (click)="selectTravelerNumber($event,cartNumber,x)">Edit</span>
+                                <span class="edit_traveler_link" *ngIf="traveler.status=='VALID' && !travelerItem.value.adults[x].is_active" (click)="selectTravelerNumber($event,cartNumber,x)">{{'edit' | translate}}</span>
                             </a>
                             <a [ngClass]="{'hotel_travller': cartItem.type=='hotel'}" *ngIf="(traveler.controls.type.value=='adult' && isAdultTravller) || (traveler.controls.type.value=='child' && isChildTravller) || (traveler.controls.type.value=='infant' && isInfantTravller)"
                                 class="dropdown-toggle traveler_drop_down" data-toggle="dropdown" aria-expanded="false">{{'saved_travelers' | translate}}</a>
@@ -32,7 +32,7 @@
                                 </ng-container>
                             </ul>
                         </div>
-                        <div  [ngClass]="{'show':travelerItem.value.adults[x].is_active}" class="collapse" >
+                        <div [ngClass]="{'show':travelerItem.value.adults[x].is_active}" class="collapse">
                             <div class="card-body">
                                 <div [formGroupName]="x" class="common_form">
                                     <div class="form-row">
@@ -223,7 +223,7 @@
                                 <button (click)="editTraveler(cartNumber,x)" [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }" class="hover-link">Edit</button>
                                 <button (click)="saveTraveler(cartNumber,x)" [ngClass]="{'disabled': !traveler.touched }" class="hover-link">Save</button> -->
 
-                                <button *ngIf="!last" (click)="saveTraveler(cartNumber,x)"  class="hover-link">Next <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                <button *ngIf="!last" (click)="saveTraveler(cartNumber,x)" class="hover-link">{{'next' | translate}} <i class="fa fa-chevron-right" aria-hidden="true"></i>
                                 </button>
                                 </span>
                             </div>
