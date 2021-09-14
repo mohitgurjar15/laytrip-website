@@ -26,7 +26,7 @@ export const travelersFileds = {
             passport_number: '',
             passport_expiry: '',
             checkout_date: new Date(),
-            is_submitted:false,
+            is_submitted:true,
             is_active:false
         },
         child: {
@@ -48,7 +48,7 @@ export const travelersFileds = {
             passport_number: '',
             passport_expiry: '',
             checkout_date: new Date(),
-            is_submitted:false,
+            is_submitted:true,
             is_active:false
         },
         infant: {
@@ -90,7 +90,7 @@ export const travelersFileds = {
             phone_no_format: '(000) 000-0000',
             phone_no_length: '10',
             is_valid_date: true,
-            is_submitted:false,
+            is_submitted:true,
             passport_number: '',
             passport_expiry: '',
             is_passport_required:false,
