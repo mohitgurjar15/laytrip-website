@@ -82,7 +82,7 @@ export class SearchAirportComponent implements OnInit {
     else {
       alternateLocation = localStorage.getItem('__from') || '';
     }
-    alternateLocation = ''
+    // alternateLocation = ''
     console.log(alternateLocation)
     this.$autoComplete = this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe((response: any) => {
       this.flightSearchRoute.emit(response);
@@ -149,7 +149,6 @@ export class SearchAirportComponent implements OnInit {
   }
 
   selectEvent(event, index) {
-    console.log('hello run',event)
     if(typeof event === 'undefined'){
       if(index === 'fromSearch'){
       this.changeValue.emit({ key: 'fromSearch', value: event });
