@@ -97,7 +97,7 @@
                                                     <div class="progress">
                                                         <div class="progress-bar" role="progressbar" [ngStyle]="getProgressPercentage(booking.paidAmount,booking.totalAmount)" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
-                                                    <div class="payment_status" *ngIf="booking.booking[0].paymentStatus == 0">
+                                                    <div class="payment_status" *ngIf="booking.is_installation_on_track == true">
                                                         <img *ngIf="!booking.is_installation_on_track" src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"> {{ booking.is_installation_on_track === true ? ('next_payment' | translate) + ' '
                                                         + commonFunction.convertCustomDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD','MMM D, YYYY') : ('past_due' | translate)}}
                                                     </div>
@@ -159,7 +159,7 @@
                                                 <div class="progress">
                                                     <div class="progress-bar" role="progressbar" [ngStyle]="getProgressPercentage(booking.paidAmount,booking.totalAmount)" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
-                                                <div class="payment_status" *ngIf="booking.booking[0].paymentStatus == 0">
+                                                <div class="payment_status" *ngIf="booking.is_installation_on_track == true">
                                                     <img *ngIf="!booking.is_installation_on_track" src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Due icon"> {{ booking.is_installation_on_track == true ? ('next_payment' | translate) + ' ' + commonFunction.convertDateFormat(booking.nextInstallmentDate,'YYYY-MM-DD')
                                                     : ('past_due' | translate)}}
                                                 </div>
@@ -426,3 +426,24 @@
         </div>
     </div>
 </div>
+
+<section class="block_tax_fee_main modal fade comman_modal show" id="tax_fee_modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal_title">
+                <button type="button" class="close" (click)="closeModal()"><img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon"></button>
+            </div>
+            <div class="tax_fee_modal_wrp">
+                <div class="inner_wrppar">
+                    <div class="title_box">{{'taxes_fees' | translate}}</div>
+                    <div class="fee_msg">
+                        <p class="para_fees">{{ 'taxes_fees_info' | translate }}</p>
+                    </div>
+                    <div class="logo_wrpper_footer">
+                        <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -149,6 +149,19 @@ export class SearchAirportComponent implements OnInit {
   }
 
   selectEvent(event, index) {
+    console.log('hello run',event)
+    if(typeof event === 'undefined'){
+      if(index === 'fromSearch'){
+      this.changeValue.emit({ key: 'fromSearch', value: event });
+      localStorage.setItem('__from','')
+      }
+    }
+    if(typeof event === 'undefined'){
+      if(index === 'toSearch'){
+        localStorage.setItem('__to','')
+      this.changeValue.emit({ key: 'toSearch', value: event });
+      }
+    }
     if (!event) {
       this.placeHolder = this.placeHolder;
     }
@@ -171,6 +184,7 @@ export class SearchAirportComponent implements OnInit {
   }
 
   onRemove(event) {
+    console.log('removed')
     this.selectedAirport = {};
   }
 
