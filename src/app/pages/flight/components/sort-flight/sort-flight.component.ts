@@ -27,6 +27,22 @@ export class SortFlightComponent implements OnInit {
 
   ngOnInit() {
     this.loadJquery();
+    console.log(this.flightDetails)
+    let delta = [];
+    for(let item of this.flightDetails){
+      if(item.airline_name =='Delta'){
+        delta.push(item)
+      }
+    }
+    console.log(delta)
+    let flightDetails = []
+    if(delta.length){
+      console.log('coming in delta filter loop')
+      flightDetails = flightDetails.filter(item => {
+        return item.airline_name !='Delta'
+      })
+    }
+    console.log(flightDetails)
   }
 
   loadJquery() {

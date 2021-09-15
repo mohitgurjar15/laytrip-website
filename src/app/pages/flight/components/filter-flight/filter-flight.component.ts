@@ -396,6 +396,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
 
         return this.airLines.includes(item.airline);
       })
+      console.log(filterdFlights)
     }
 
     /* Filter flight based on min & max partial payment price */
