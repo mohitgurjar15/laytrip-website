@@ -38,7 +38,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   isFlightAvaibale: boolean = false;
   statusCode = '';
   filteredLabel = 'Price Low to High';
-  dealIcon: any=false;
+  dealIcon: any = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -122,7 +122,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.fullPageLoading = false;
           this.isNotFound = false;
-         this.flightDetails = res.items;
+          this.flightDetails = res.items;
           this.filterFlightDetails = res;
           if (this.flightDetails.length == 0) {
             this.isNotFound = true;
@@ -315,6 +315,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.setFilteredLabel('filter_12');
         this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
       }
+    } else if (key === 'relevant') {
+      this.setFilteredLabel('Relevance');
+      this.filteredLabel = 'Relevance';
+      this.flightDetails = this.sortByRelevant(this.flightDetails, key, order);
     }
     else {
       // this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
@@ -403,6 +407,31 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  sortByRelevant(data, key, way) {
+    let delta = [];
+    for (let item of data) {
+      if (item.airline_name == 'Delta') {
+        delta.push(item)
+      }
+    }
+    console.log(delta)
+    let flightDetails = []
+    if (delta.length) {
+      for (let item of data) {
+        if (item.airline_name != 'Delta') {
+          flightDetails.push(item)
+        }
+      }
+
+      for (let item of delta) {
+        flightDetails.push(item)
+      }
+      data = flightDetails
+      console.log(data)
+      return data;
+    }
+  }
+
   filterFlight(event) {
     this.flightDetails = event;
     this.flightService.setFlights(this.flightDetails);
@@ -460,5 +489,5 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       get(rscId).
       subscribe((res: string) => this.filteredLabel = res);
   }
-  
+
 }
