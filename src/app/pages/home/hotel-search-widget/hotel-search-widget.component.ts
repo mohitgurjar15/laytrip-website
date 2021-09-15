@@ -294,6 +294,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   }
 
   searchHotels() {
+    console.log(this.fromDestinationInfo.title)
     this.hotelSearchFormSubmitted = true;
     if (this.fromDestinationInfo.title.length == 0) {
       this.validSearch = false;
