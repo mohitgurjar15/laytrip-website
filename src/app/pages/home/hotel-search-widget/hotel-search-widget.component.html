@@ -7,7 +7,7 @@
         </div>
         <div class="custom-control custom-switch" *ngIf="!isRefferal">
             <input type="checkbox" class="custom-control-input" id="customSwitch" [(ngModel)]="isHotelDealIcon" (click)="clickOnDealsIcon()">
-            <label class="custom-control-label" for="customSwitch">Deals</label>
+            <label class="custom-control-label" for="customSwitch">{{'deals' | translate}}</label>
         </div>
     </div>
     <form *ngIf="!showCommingSoon" [formGroup]="hotelSearchForm" autocomplete="off" (ngSubmit)="searchHotels()">

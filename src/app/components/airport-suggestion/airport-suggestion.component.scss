@@ -4,13 +4,8 @@
 @import "../../../_hotel.scss";
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
-
-
 ng-scrollbar {
-
     --scrollbar-padding: 25px 0 0 5px !important;
-
 }
 
 .search_suggetion_main {
@@ -26,38 +21,30 @@ ng-scrollbar {
     width: 100%;
     z-index: 999;
     //max-height: 186px;
-
     @include tab-view {
         //max-height: 265px;
     }
-
     .close_btn {
         position: absolute;
         top: 10px;
         right: 15px;
         z-index: 999;
-
         @include tab-view {
             right: 30px;
         }
-
         button {
             cursor: pointer;
-
             img {
                 max-width: 9px;
             }
-
             &:focus {
                 outline: none;
                 box-shadow: none;
             }
         }
     }
-
     .suggtions_wrps_mn {
         display: flex;
-
         .suggtions {
             scroll-behavior: smooth;
             height: 100%;
@@ -66,17 +53,14 @@ ng-scrollbar {
             flex: auto;
             display: flex;
             flex-direction: column;
-
             .sug_line_box {
                 // display: flex;
                 // justify-content: flex-start;
                 // align-items: flex-start;
                 margin-bottom: 10px;
                 float: left;
-
                 &:last-child {
                     margin-bottom: 0;
-
                     .linew_wrps {
                         ng-conatiner {
                             &:last-child {
@@ -87,55 +71,46 @@ ng-scrollbar {
                         }
                     }
                 }
-
                 .word_alpha {
                     font-size: 18px;
                     font-weight: 500;
                     color: $text-black;
                     width: 25px;
                     float: left;
-
                     @include tab-view {
                         font-size: 14px;
                     }
                 }
-
                 .linew_wrps {
                     // display: flex;
                     // justify-content: flex-start;
                     // flex-direction: column;
                     float: left;
-
                     @include tab-view {
                         font-size: 12px;
                     }
-
                     .line_names {
                         margin-bottom: 10px;
                         display: flex;
                         cursor: pointer;
                         flex-direction: column;
-
+                        width: 275px;
                         .airport_names {
                             ul {
                                 list-style: none;
                                 padding-left: 0;
-
                                 li {
                                     margin: 5px 0 0;
                                     font-size: 12px;
                                     display: flex;
                                     align-items: center;
-
                                     // text-overflow: ellipsis; 
                                     // white-space: nowrap; 
                                     // width: 75%; 
                                     // overflow: hidden;
-
                                     // &:last-child {
                                     //     margin-bottom: 0;
                                     // }
-
                                     &::before {
                                         content: '';
                                         position: relative;
@@ -146,14 +121,12 @@ ng-scrollbar {
                                         background-size: 24px;
                                         top: 1px;
                                     }
-
                                     @include tab-view {
                                         font-size: 10px;
                                     }
                                 }
                             }
                         }
-
                         // &:last-child{
                         //     margin-bottom: 0;
                         // }
@@ -165,9 +138,7 @@ ng-scrollbar {
             }
         }
     }
-
     .alphabets_wrps {
-
         flex: 1;
         display: none;
         position: fixed;
@@ -175,11 +146,9 @@ ng-scrollbar {
         align-items: flex-end;
         right: 50px;
         margin-top: 20px;
-
         @include tab-view {
             display: none;
         }
-
         a {
             font-size: 6px;
             color: $grayed_border;

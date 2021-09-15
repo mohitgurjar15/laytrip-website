@@ -30,7 +30,7 @@
                     <!-- [checked]="dealsIcon === true ? checked : ''"  -->
                     <!-- [(ngModel)]="dealsIcon" -->
                     <input type="checkbox" class="custom-control-input" id="customSwitch_flight" [(ngModel)]="dealIcon" (click)="dealsToggle()">
-                    <label class="custom-control-label" for="customSwitch_flight">Deals</label>
+                    <label class="custom-control-label" for="customSwitch_flight">{{'deals' | translate}}</label>
                 </div>
             </li>
             <ul class="mobile_ul">
@@ -48,7 +48,7 @@
                     <!-- <li class="nav-item class_resp desk_li ml-2"> -->
                     <div class="custom-control custom-switch" *ngIf="!isRefferal">
                         <input type="checkbox" class="custom-control-input" id="customSwitch_flight" [(ngModel)]="dealIcon" (click)="dealsToggle()">
-                        <label class="custom-control-label" for="customSwitch_flight">Deals</label>
+                        <label class="custom-control-label" for="customSwitch_flight">{{'deals' | translate}}</label>
                     </div>
                     <!-- </li> -->
                 </li>
