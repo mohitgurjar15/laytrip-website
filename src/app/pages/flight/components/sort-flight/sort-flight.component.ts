@@ -10,38 +10,46 @@ declare var $: any;
 })
 export class SortFlightComponent implements OnInit {
 
-  @Output() sortFlight = new EventEmitter<{ key:string, order:string }>();
+  @Output() sortFlight = new EventEmitter<{ key: string, order: string }>();
   @Input() flightDetails;
-  sortType:string='lh_price';
-  departureCode:string='';
+  sortType: string = 'lh_price';
+  departureCode: string = '';
   s3BucketUrl = environment.s3BucketUrl;
-  arrivalCode:string='';
-  lowToHighToggle : boolean = false;
+  arrivalCode: string = '';
+  lowToHighToggle: boolean = false;
 
   constructor(
-    private route :ActivatedRoute
+    private route: ActivatedRoute
   ) {
-     this.departureCode = this.route.snapshot.queryParams['departure'];
-     this.arrivalCode = this.route.snapshot.queryParams['arrival'];
-   }
+    this.departureCode = this.route.snapshot.queryParams['departure'];
+    this.arrivalCode = this.route.snapshot.queryParams['arrival'];
+  }
 
   ngOnInit() {
     this.loadJquery();
-    console.log(this.flightDetails)
     let delta = [];
-    for(let item of this.flightDetails){
-      if(item.airline_name =='Delta'){
+    for (let item of this.flightDetails) {
+      if (item.airline_name == 'Delta') {
         delta.push(item)
       }
     }
     console.log(delta)
     let flightDetails = []
-    if(delta.length){
-      console.log('coming in delta filter loop')
-      flightDetails = flightDetails.filter(item => {
-        return item.airline_name !='Delta'
-      })
+    if (delta.length) {
+      for (let item of this.flightDetails) {
+        if (item.airline_name != 'Delta') {
+          flightDetails.push(item)
+        }
+      }
+
+      for (let item of delta) {
+        flightDetails.push(item)
+      }
+      this.flightDetails = flightDetails
+      console.log(this.flightDetails)
+      this.sortFlight.emit({key : 'relevant',order : 'DESC'})
     }
+
     console.log(flightDetails)
   }
 
@@ -56,29 +64,29 @@ export class SortFlightComponent implements OnInit {
     });
   }
 
-  sortFlightData(key,order,name){
-    this.sortType=name;
-    this.sortFlight.emit({ key , order })
+  sortFlightData(key, order, name) {
+    this.sortType = name;
+    this.sortFlight.emit({ key, order })
   }
   closeModal() {
     $('#filter_mob_modal2').modal('hide');
   }
 
 
-  resetSorting(key,order){
-    this.sortType='lh_price';
-    this.sortFlight.emit({ key , order })
+  resetSorting(key, order) {
+    this.sortType = 'lh_price';
+    this.sortFlight.emit({ key, order })
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['flightDetails'].currentValue!='undefined') {
-      if(this.flightDetails!='undefined'){
-        this.flightDetails=changes['flightDetails'].currentValue;
+    if (changes['flightDetails'].currentValue != 'undefined') {
+      if (this.flightDetails != 'undefined') {
+        this.flightDetails = changes['flightDetails'].currentValue;
       }
     }
   }
 
-  toggleLowToHigh(){
+  toggleLowToHigh() {
     this.lowToHighToggle = !this.lowToHighToggle;
   }
 }

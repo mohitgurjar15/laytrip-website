@@ -315,6 +315,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.setFilteredLabel('filter_12');
         this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
       }
+    }else if(key === 'relevant'){
+      this.setFilteredLabel('filter_12');
+      this.flightDetails = this.sortByRelevant(this.flightDetails,key,order);
     }
     else {
       // this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
@@ -400,6 +403,31 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           return ((x > y) ? -1 : ((x < y) ? 1 : 0));
         }
       });
+    }
+  }
+
+  sortByRelevant(data, key, way){
+    let delta = [];
+    for (let item of data) {
+      if (item.airline_name == 'Delta') {
+        delta.push(item)
+      }
+    }
+    console.log(delta)
+    let flightDetails = []
+    if (delta.length) {
+      for (let item of data) {
+        if (item.airline_name != 'Delta') {
+          flightDetails.push(item)
+        }
+      }
+
+      for (let item of delta) {
+        flightDetails.push(item)
+      }
+      data = flightDetails
+      console.log(data)
+      return data;
     }
   }
 
