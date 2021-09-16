@@ -10,7 +10,7 @@
                 <div id="collapseOne" class="accordion-body collapse {{lowToHighToggle}}" [ngClass]="{'show': lowToHighToggle}">
                     <div class="accordion-inner">
                         <div class="block_cmn price">
-                            <ul *ngIf="delta.length">
+                            <ul class="relevante_sort_new" *ngIf="delta.length">
                                 <li>
                                     <label class="custom_radio">{{'relevance' | translate}}
                                     <input type="radio" [checked]="sortType=='relevance'"
