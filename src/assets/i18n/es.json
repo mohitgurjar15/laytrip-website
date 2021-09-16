@@ -709,5 +709,7 @@
     "non_refundable": "No Reembolsable",
     "booking_not_avilable": "Esta reserva ya no está disponible. Haz clic en la “x” para borrarloy así proceder al Checkout.",
     "flights_unavailable": "Vuelos no Disponibles",
-    "deals": "Ofertas"
+    "deals": "Ofertas",
+    "email_notifications": "Notificaciones via Email",
+    "sms_notifications": "Notifications via mensajes de texto (SMS)"
 }

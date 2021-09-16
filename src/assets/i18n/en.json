@@ -709,5 +709,7 @@
     "non_refundable": "Non Refundable",
     "booking_not_avilable": "This booking is no longer available. Click “x” to delete to be able to proceed to Checkout.",
     "flights_unavailable": "Flights Unavailable",
-    "deals": "Deals"
+    "deals": "Deals",
+    "email_notifications": "Email Notifications",
+    "sms_notifications": "SMS Notifications"
 }
