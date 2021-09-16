@@ -1,6 +1,7 @@
 import { SliderLabelDirective } from '@angular-slider/ngx-slider/slider-label.directive';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChange } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HomeService } from 'src/app/services/home.service';
 declare var $: any;
 @Component({
@@ -26,10 +27,11 @@ export class CarouselComponent  implements OnInit{
   @Input() swipeDirection:string='';
   @Output() activeSlide=new EventEmitter();
   previousChangeCounter=0;
-
+  landingPageName;
   currentSlide = 0;
 
   ngOnInit() {
+    this.landingPageName = this.route.snapshot.queryParams['utm_source']
     this.homeService.getSwipeSlide.subscribe((direction)=>{
       if(direction=='left'){
         this.onPreviousClick();
@@ -40,8 +42,13 @@ export class CarouselComponent  implements OnInit{
     })
   } 
 
-  constructor(public homeService:HomeService) {
-    this.activityWatcher();
+  constructor(public homeService:HomeService,
+    private route: ActivatedRoute,
+    ) {
+    this.landingPageName = this.route.snapshot.queryParams['utm_source']
+    if(this.landingPageName === '421'){
+      this.activityWatcher();
+    }
   }
 
   onPreviousClick() {
