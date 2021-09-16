@@ -538,6 +538,7 @@
     "filter_10": "Arrival Latest to Earliest",
     "filter_11": "Departure Earliest to Latest",
     "filter_12": "Departure Latest to Earliest",
+    "filter_13": "Relevance",
     "filter_az": "A - Z",
     "filter_za": "Z - A",
     "ratings": "Ratings",
@@ -708,5 +709,6 @@
     "non_refundable": "Non Refundable",
     "booking_not_avilable": "This booking is no longer available. Click “x” to delete to be able to proceed to Checkout.",
     "flights_unavailable": "Flights Unavailable",
-    "deals": "Deals"
+    "deals": "Deals",
+    "relevance": "Relevance"
 }
