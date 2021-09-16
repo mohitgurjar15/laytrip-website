@@ -5,768 +5,771 @@
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 .ng-customClass.country_code {
-  //width: 150px;
-  .ng-input {
-    padding-left: 0;
-  }
+    //width: 150px;
+    .ng-input {
+        padding-left: 0;
+    }
 }
 
 .desk_names {
-  @include tab-view {
-    display: none;
-  }
+    @include tab-view {
+        display: none;
+    }
 }
 
 .mob_names {
-  display: none;
-  @include tab-view {
-    display: block;
-  }
+    display: none;
+    @include tab-view {
+        display: block;
+    }
 }
 
 .img_country_code {
-  border-radius: 3px;
+    border-radius: 3px;
 }
 
 ::ng-deep .calender-passport-expiry {
-  min-width: 300px !important;
+    min-width: 300px !important;
 }
 
 .dobs {
-  ::ng-deep .birth_date {
-    .p-inputtext {
-      border: none;
-    }
-    th {
-      font-size: 13px !important;
-      border-bottom: none !important;
-      font-weight: 600 !important;
-      text-align: center;
-    }
-    td {
-      padding: 0.1rem !important;
-      span {
-        width: 35px;
-        height: auto;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        border: none !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        color: $text-grey;
-        margin: 1px;
-        position: relative;
-        @include mobile-view {
-          width: 33px;
+     ::ng-deep .birth_date {
+        .p-inputtext {
+            border: none;
         }
-        &:hover {
-          background: none !important;
+        th {
+            font-size: 13px !important;
+            border-bottom: none !important;
+            font-weight: 600 !important;
+            text-align: center;
         }
-        &.p-highlight {
-          background: none !important;
-          font-weight: 500;
-          overflow: visible;
-          &::before {
-            content: "";
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background-color: $pink;
-            position: absolute;
-            top: -5px;
-          }
+        td {
+            padding: 0.1rem !important;
+            span {
+                width: 35px;
+                height: auto;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                color: $text-grey;
+                margin: 1px;
+                position: relative;
+                @include mobile-view {
+                    width: 33px;
+                }
+                &:hover {
+                    background: none !important;
+                }
+                &.p-highlight {
+                    background: none !important;
+                    font-weight: 500;
+                    overflow: visible;
+                    &::before {
+                        content: "";
+                        width: 5px;
+                        height: 5px;
+                        border-radius: 50%;
+                        background-color: $pink;
+                        position: absolute;
+                        top: -5px;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 .drop_down_mandetory {
-  .gender_anchers {
-    align-items: flex-start !important;
-    flex-direction: column;
-    width: 100%;
-    ng-select {
-      width: 100%;
-      margin-right: 30px;
-      flex: 3;
-      margin-left: 0;
-      max-width: 290px;
-    }
-  }
-  .adult_countr {
-    color: $grayed_border;
-    font-weight: 500;
-    flex: 2;
-  }
-}
-
-.accordion_bookings {
-  .card {
-    border: 1px solid $grayed_border;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    &:last-child {
-      margin-bottom: 0;
-    }
-    .card-header {
-      border: none;
-      background-color: transparent;
-      padding: 15px;
-      position: relative;
-      @include tab-view {
-        // &.custom_header {
-        //   padding: 15px 15px 0;
-        // }
-      }
-      svg {
-        fill: $grayed_border;
-      }
-      .hotel_svg {
-        border: 2px solid $grayed_border;
-        border-radius: 50%;
-        padding: 5px;
-        height: 38px;
-        width: 38px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 15px;
-      }
-      .card-link {
-        font-weight: 600;
-        color: $text-black;
-        font-size: 16px;
-        border: none;
-        background-color: transparent;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    .gender_anchers {
+        align-items: flex-start !important;
+        flex-direction: column;
         width: 100%;
-        padding: 0;
-        @include tab-view {
-          font-size: 12px;
-        }
-        .tr_type {
-          flex: 1;
-          margin-left: 15px;
-          &.hotel_type_name {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        ng-select {
             width: 100%;
             margin-right: 30px;
             flex: 3;
             margin-left: 0;
             max-width: 290px;
-          }
         }
-        .edit_traveler_link {
-          font-size: 14px;
-          color: $active-tab-text;
-          font-weight: 500;
-        }
-        .adult_countr {
-          color: $grayed_border;
-          font-weight: 500;
-          flex: 2;
-        }
-        .trv_name {
-          flex: 2;
-        }
-      }
-      .traveler_drop_down {
-        // position: relative;
-        // top: -32px;
-        // display: inline-block;
-        // margin: 0 auto;
-        // width: auto;
-        // white-space: nowrap;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-        // left: 50%;
-        // transform: translate(-60%, 5%);
-        position: absolute;
-        top: 6px;
-        margin: 0 auto;
-        width: auto;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        left: 36%;
-        transform: translate(0, 15%);
-        border: none;
-        cursor: pointer;
-        border-radius: 0;
-        //border-bottom: 2px solid $text_light_yellow;
-        font-size: 14px;
-        color: $text_light_yellow;
-        background-color: $background-white;
-        padding: 8px 20px 8px 10px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        align-items: center;
-        display: flex;
-        transition: 0.3s;
-        &.hotel_travller {
-          // position: relative;
-          // left: auto;
-          // padding: 0;
-          position: absolute;
-          padding: 0;
-          width: 140px;
-          top: 15px;
-          margin: 0;
-          transform: translateX(100%);
-          @include tab-view {
-            position: relative;
-            left: auto;
-            padding: 0;
-            transform: translateX(0);
-            top: 10px;
-          }
-        }
-        &[aria-expanded="true"] {
-          &:after {
-            content: "";
-            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow_up.svg);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 11px;
-            border: none;
-            height: 15px;
-            width: 15px;
-          }
-        }
-        &[aria-expanded="false"] {
-          &:after {
-            content: "";
-            background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow.svg);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 11px;
-            border: none;
-            height: 15px;
-            width: 15px;
-          }
-        }
-        &::after {
-          content: none;
-        }
-        @include tab-view {
-          position: relative;
-          top: 0;
-          left: 0;
-          margin: 0;
-          display: flex;
-          font-size: 12px;
-          width: 100%;
-          padding-left: 45px;
-          transform: translate(0px, 0px);
-        }
-        &:focus {
-          outline: none;
-          box-shadow: none;
-        }
-      }
-      .options_name {
-        background-color: $background-white;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
-        color: $text_light_yellow;
-        font-size: 12px;
-        padding: 2px 0;
-        cursor: pointer;
-        li {
-          padding: 4px 10px;
-        }
-      }
     }
-    .card-body {
-      padding: 0 15px 15px;
-      .sub_cat_wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100%;
-        flex-wrap: wrap;
-        //margin: 0 0 15px 0;
-        .add_btn_lined {
-          color: $text_light_yellow;
-          border: 1px solid $text_light_yellow;
-          background-color: $background-white;
-          border-radius: 5px;
-          font-size: 12px;
-          height: 35px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-right: 20px;
-          padding: 0 10px;
-          position: relative;
-          margin-bottom: 15px;
-          &:focus {
-            outline: none;
-            box-shadow: none;
-          }
-          &:hover {
-            color: $text-white;
-            background-color: $text_light_yellow;
-          }
-          &.active {
-            color: $text-white;
-            background-color: $text_light_yellow;
-          }
-          &:last-child {
-            //margin: 0;
-          }
-          .close_icon {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            border: 1px solid $text_light_yellow;
-            width: 20px;
-            border-radius: 50%;
-            background-color: $background-white;
-            i {
-              color: $text_light_yellow;
-            }
-          }
+    .adult_countr {
+        color: $grayed_border;
+        font-weight: 500;
+        flex: 2;
+    }
+}
+
+.accordion_bookings {
+    .card {
+        border: 1px solid $grayed_border;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        &:last-child {
+            margin-bottom: 0;
         }
-      }
-      .common_form {
-        label {
-          color: $mid_gray_bg;
-          font-size: 12px;
-          font-weight: 500;
-        }
-        input {
-          border: none;
-          border-radius: 0;
-          border-bottom: 2px solid $box-border-color;
-          font-size: 14px;
-          padding: 8px 0;
-          &:disabled {
-            background-color: $background-white;
-          }
-          &:focus {
-            outline: none;
-            box-shadow: none;
-          }
-        }
-        select {
-          border: none;
-          border-radius: 0;
-          border-bottom: 2px solid $box-border-color;
-          font-size: 14px;
-          padding: 8px 0;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-          background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-          background-position: right;
-          background-repeat: no-repeat;
-          background-size: 14px;
-          transition: 0.3s;
-          &:focus {
-            outline: none;
-            box-shadow: none;
-          }
-        }
-        .nation_wrps {
-          ng-select {
-            .ng-input {
-              &[aria-expanded="true"] {
-                &:after {
-                  content: "";
-                  position: relative;
-                  padding: 5px 9px;
-                  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                  background-position: right;
-                  background-repeat: no-repeat;
-                  background-size: 10px;
-                  transition: 0.3s;
-                  right: 8px;
-                  border: none;
-                  top: 5px;
-                  @include tab-view {
-                    position: absolute;
-                    right: 0;
-                    height: 12px;
-                  }
-                }
-              }
-              &[aria-expanded="false"] {
-                &:after {
-                  position: relative;
-                  padding: 5px 9px;
-                  background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-                  background-position: right;
-                  background-repeat: no-repeat;
-                  background-size: 10px;
-                  content: "";
-                  transition: 0.3s;
-                  right: 8px;
-                  border: none;
-                  top: 5px;
-                  @include tab-view {
-                    position: absolute;
-                    right: 0;
-                    height: 12px;
-                  }
-                }
-              }
-            }
-          }
-        }
-        .mb-sm-10 {
-          margin-bottom: 10px;
-          &.telephone_wrps {
-            .tel_span {
-              border-bottom: 2px solid $box-border-color;
-              display: flex;
-              position: relative;
-              bottom: 2px;
-              &.input-error {
-                border-color: $error-color !important;
-              }
-              input {
-                border-bottom: none;
-                &:first-child {
-                  width: 30px;
-                }
-              }
-            }
-          }
-          &.dobs {
-            input {
-              //background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
-              background-image: none;
-              background-size: 20px;
-              // border: none;
-              @include tab-view {
-                background-image: none;
-              }
-            }
-          }
-          .gender_anchers {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            a {
-              &.active {
-                color: $text_light_yellow;
-              }
-              color: $mid_gray_bg;
-              font-size: 14px;
-              padding: 0 25px 0 0;
-              &:hover {
-                color: $text_light_yellow;
-                text-decoration: none;
-              }
-              &:focus {
-                outline: none;
-              }
-            }
-          }
-        }
-      }
-      .accordion_addn {
-        margin-top: 20px;
-        .card {
-          border: none;
-          .card-header {
+        .card-header {
             border: none;
             background-color: transparent;
-            padding: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 15px;
+            position: relative;
             @include tab-view {
-              flex-direction: column;
+                // &.custom_header {
+                //   padding: 15px 15px 0;
+                // }
             }
-            .heade_wrps {
-              color: $text-black;
-              font-size: 16px;
-              font-weight: 500;
-              margin-right: 15px;
-              @include tab-view {
+            svg {
+                fill: $grayed_border;
+            }
+            .hotel_svg {
+                border: 2px solid $grayed_border;
+                border-radius: 50%;
+                padding: 5px;
+                height: 38px;
+                width: 38px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 15px;
+            }
+            .card-link {
+                font-weight: 600;
+                color: $text-black;
+                font-size: 16px;
+                border: none;
+                background-color: transparent;
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 width: 100%;
-                margin: 0;
-              }
-              .responsive_anch {
-                display: none;
+                padding: 0;
                 @include tab-view {
-                  font-weight: 600;
-                  color: $text-black;
-                  font-size: 16px;
-                  border: none;
-                  background-color: transparent;
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  padding: 0;
-                  // &[aria-expanded="true"] {
-                  //   &:after {
-                  //     content: "";
-                  //     padding: 5px 9px;
-                  //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-                  //     background-position: right;
-                  //     background-repeat: no-repeat;
-                  //     background-size: 12px;
-                  //     transition: 0.3s;
-                  //   }
-                  // }
-                  // &[aria-expanded="false"] {
-                  //   &:after {
-                  //     padding: 5px 9px;
-                  //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-                  //     background-position: right;
-                  //     background-repeat: no-repeat;
-                  //     background-size: 12px;
-                  //     content: "";
-                  //     transition: 0.3s;
-                  //   }
-                  // }
+                    font-size: 12px;
                 }
-              }
+                .tr_type {
+                    flex: 1;
+                    margin-left: 15px;
+                    &.hotel_type_name {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 100%;
+                        margin-right: 30px;
+                        flex: 3;
+                        margin-left: 0;
+                        max-width: 290px;
+                    }
+                }
+                .edit_traveler_link {
+                    font-size: 14px;
+                    color: $active-tab-text;
+                    font-weight: 500;
+                }
+                .adult_countr {
+                    color: $grayed_border;
+                    font-weight: 500;
+                    flex: 2;
+                }
+                .trv_name {
+                    flex: 2;
+                }
             }
-            .addon_anchor {
-              font-weight: 600;
-              color: $text-black;
-              font-size: 16px;
-              border: none;
-              background-color: transparent;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              padding: 0;
-              // &[aria-expanded="true"] {
-              //   &:after {
-              //     content: "";
-              //     padding: 5px 9px;
-              //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
-              //     background-position: right;
-              //     background-repeat: no-repeat;
-              //     background-size: 12px;
-              //     transition: 0.3s;
-              //   }
-              // }
-              // &[aria-expanded="false"] {
-              //   &:after {
-              //     padding: 5px 9px;
-              //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
-              //     background-position: right;
-              //     background-repeat: no-repeat;
-              //     background-size: 12px;
-              //     content: "";
-              //     transition: 0.3s;
-              //   }
-              // }
-              @include tab-view {
-                display: none;
-              }
-            }
-            #addon_tab {
-              flex-direction: row;
-              flex-wrap: nowrap;
-              flex: 2;
-              @include tab-view {
-                flex-wrap: wrap;
-                margin: 5px 0;
-                width: 100%;
-              }
-              li {
-                flex: 1;
-                &:first-child {
-                  a {
-                    margin-left: 0;
-                  }
-                }
-                &:last-child {
-                  a {
-                    margin-right: 0;
-                  }
-                }
-                @include tab-view {
-                  margin-left: 5px;
-                  margin-bottom: 5px;
-                  &:first-child {
-                    margin-left: 0;
-                  }
-                }
-                a {
-                  background-color: $background-white;
-                  // color: #e4e4e4;
-                  // border: 1px solid #e4e4e4;
-                  color: $text_grey_dark;
-                  border: 1px solid $text_grey_dark;
-                  border-radius: 8px;
-                  font-size: 12px;
-                  margin: 0 0 0 5px;
-                  padding: 10px;
-                  text-align: center;
-                  br {
-                    display: none;
-                  }
-                  @include tab-view {
+            .traveler_drop_down {
+                // position: relative;
+                // top: -32px;
+                // display: inline-block;
+                // margin: 0 auto;
+                // width: auto;
+                // white-space: nowrap;
+                // overflow: hidden;
+                // text-overflow: ellipsis;
+                // left: 50%;
+                // transform: translate(-60%, 5%);
+                position: absolute;
+                top: 6px;
+                margin: 0 auto;
+                width: auto;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                left: 36%;
+                transform: translate(0, 15%);
+                border: none;
+                cursor: pointer;
+                border-radius: 0;
+                //border-bottom: 2px solid $text_light_yellow;
+                font-size: 14px;
+                color: $text_light_yellow;
+                background-color: $background-white;
+                padding: 8px 20px 8px 10px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                align-items: center;
+                display: flex;
+                transition: 0.3s;
+                &.hotel_travller {
+                    // position: relative;
+                    // left: auto;
+                    // padding: 0;
+                    position: absolute;
+                    padding: 0;
+                    width: 140px;
+                    top: 15px;
                     margin: 0;
-                    font-size: 9px;
-                    padding: 5px;
+                    transform: translateX(100%);
+                    @include tab-view {
+                        position: relative;
+                        left: auto;
+                        padding: 0;
+                        transform: translateX(0);
+                        top: 10px;
+                    }
+                }
+                &[aria-expanded="true"] {
+                    &:after {
+                        content: "";
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow_up.svg);
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: 11px;
+                        border: none;
+                        height: 15px;
+                        width: 15px;
+                    }
+                }
+                &[aria-expanded="false"] {
+                    &:after {
+                        content: "";
+                        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/drop_arrow_yellow.svg);
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: 11px;
+                        border: none;
+                        height: 15px;
+                        width: 15px;
+                    }
+                }
+                &::after {
+                    content: none;
+                }
+                @include tab-view {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    margin: 0;
+                    display: flex;
+                    font-size: 12px;
+                    width: 100%;
+                    padding-left: 45px;
+                    transform: translate(0px, 0px);
+                }
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+            .options_name {
+                background-color: $background-white;
+                border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px;
+                color: $text_light_yellow;
+                font-size: 12px;
+                padding: 2px 0;
+                cursor: pointer;
+                li {
+                    padding: 4px 10px;
+                }
+            }
+        }
+        .card-body {
+            padding: 0 15px 15px;
+            .sub_cat_wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+                flex-wrap: wrap;
+                //margin: 0 0 15px 0;
+                .add_btn_lined {
+                    color: $text_light_yellow;
+                    border: 1px solid $text_light_yellow;
+                    background-color: $background-white;
+                    border-radius: 5px;
+                    font-size: 12px;
+                    height: 35px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    height: 100%;
-                    br {
-                      display: flex;
-                    }
-                  }
-                  &.active {
-                    color: $text_grey_dark;
-                    border: 1px solid $text_grey_dark;
-                  }
-                }
-              }
-            }
-          }
-          .card-body {
-            padding: 0;
-            margin-top: 15px;
-            @include tab-view {
-              margin-top: 5px;
-            }
-            .addon_listins_wrps {
-              display: flex;
-              justify-content: flex-end;
-              @include tab-view {
-                justify-content: flex-start;
-              }
-              .addon_btn_drop {
-                background-color: $background-white;
-                color: $mid_gray_bg;
-                border: 1px solid $mid_gray_bg;
-                border-radius: 8px;
-                font-size: 13px;
-                margin: 0;
-                width: 100%;
-                padding: 6px 10px;
-                position: relative;
-                max-width: 85%;
-                &:focus {
-                  outline: none;
-                  box-shadow: none;
-                }
-                &:hover {
-                  outline: none;
-                  box-shadow: none;
-                }
-                &[aria-expanded="true"] {
-                  &:after {
-                    font-family: "FontAwesome";
-                    content: "\f077";
-                    color: $text-grey;
-                    font-weight: normal;
-                    transition: 0.3s;
-                    right: 10px;
-                    position: absolute;
-                  }
-                }
-                &[aria-expanded="false"] {
-                  &:after {
-                    font-family: "FontAwesome";
-                    content: "\f078";
-                    color: $text-grey;
-                    font-weight: normal;
-                    transition: 0.3s;
-                    right: 10px;
-                    position: absolute;
-                  }
-                }
-                @include tab-view {
-                  margin-right: 0;
-                  text-align: center;
-                  align-items: center;
-                  display: flex;
-                  font-size: 10px;
-                }
-              }
-              .dropdownList {
-                li {
-                  button {
-                    border: none;
-                    @include tab-view {
-                      padding: 5px;
-                      font-size: 12px;
-                      white-space: normal;
-                    }
+                    margin-right: 20px;
+                    padding: 0 10px;
+                    position: relative;
+                    margin-bottom: 15px;
                     &:focus {
-                      outline: none;
-                      box-shadow: none;
+                        outline: none;
+                        box-shadow: none;
                     }
                     &:hover {
-                      outline: none;
-                      box-shadow: none;
+                        color: $text-white;
+                        background-color: $text_light_yellow;
                     }
-                  }
+                    &.active {
+                        color: $text-white;
+                        background-color: $text_light_yellow;
+                    }
+                    &:last-child {
+                        //margin: 0;
+                    }
+                    .close_icon {
+                        position: absolute;
+                        top: -10px;
+                        right: -10px;
+                        border: 1px solid $text_light_yellow;
+                        width: 20px;
+                        border-radius: 50%;
+                        background-color: $background-white;
+                        i {
+                            color: $text_light_yellow;
+                        }
+                    }
                 }
-              }
             }
-          }
-        }
-      }
-      .edit_btns {
-        display: flex;
-        justify-content: flex-end;
-        button {
-          background-color: transparent;
-          color: $text_light_yellow;
-          box-shadow: none;
-          font-size: 14px;
-          padding: 0;
-          border: none;
-          text-align: right;
-          text-decoration: none;
-          @include tab-view {
-            font-size: 12px;
-          }
-          &:focus {
-            outline: none;
-            box-shadow: none;
-          }
-        }
-        &.duel_buttons {
-          justify-content: space-between;
-          margin-top: 15px;
-          @include tab-view {
-            margin-top: 10px;
-          }
-        }
-        &.next_traveler {
-          justify-content: flex-end;
-
-          button {
-            color: $active-tab-text;
-            font-size: 16px;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            i {
-              margin-left: 5px;
-              font-size: 11px;
+            .common_form {
+                label {
+                    color: $mid_gray_bg;
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+                input {
+                    border: none;
+                    border-radius: 0;
+                    border-bottom: 2px solid $box-border-color;
+                    font-size: 14px;
+                    padding: 8px 0;
+                    &:disabled {
+                        background-color: $background-white;
+                    }
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+                select {
+                    border: none;
+                    border-radius: 0;
+                    border-bottom: 2px solid $box-border-color;
+                    font-size: 14px;
+                    padding: 8px 0;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                    background-position: right;
+                    background-repeat: no-repeat;
+                    background-size: 14px;
+                    transition: 0.3s;
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+                .nation_wrps {
+                    ng-select {
+                        .ng-input {
+                            &[aria-expanded="true"] {
+                                &:after {
+                                    content: "";
+                                    position: relative;
+                                    padding: 5px 9px;
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 10px;
+                                    transition: 0.3s;
+                                    right: 8px;
+                                    border: none;
+                                    top: 5px;
+                                    @include tab-view {
+                                        position: absolute;
+                                        right: 0;
+                                        height: 12px;
+                                    }
+                                }
+                            }
+                            &[aria-expanded="false"] {
+                                &:after {
+                                    position: relative;
+                                    padding: 5px 9px;
+                                    background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                    background-position: right;
+                                    background-repeat: no-repeat;
+                                    background-size: 10px;
+                                    content: "";
+                                    transition: 0.3s;
+                                    right: 8px;
+                                    border: none;
+                                    top: 5px;
+                                    @include tab-view {
+                                        position: absolute;
+                                        right: 0;
+                                        height: 12px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .mb-sm-10 {
+                    margin-bottom: 10px;
+                    &.telephone_wrps {
+                        .tel_span {
+                            border-bottom: 2px solid $box-border-color;
+                            display: flex;
+                            position: relative;
+                            bottom: 2px;
+                            &.input-error {
+                                border-color: $error-color !important;
+                            }
+                            input {
+                                border-bottom: none;
+                                &:first-child {
+                                    width: 30px;
+                                }
+                            }
+                        }
+                    }
+                    &.dobs {
+                        input {
+                            //background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px no-repeat;
+                            background-image: none;
+                            background-size: 20px;
+                            // border: none;
+                            @include tab-view {
+                                background-image: none;
+                            }
+                        }
+                    }
+                    .gender_anchers {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        a {
+                            &.active {
+                                color: $text_light_yellow;
+                            }
+                            color: $mid_gray_bg;
+                            font-size: 14px;
+                            padding: 0 25px 0 0;
+                            &:hover {
+                                color: $text_light_yellow;
+                                text-decoration: none;
+                            }
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+                    }
+                }
             }
-          }
+            .accordion_addn {
+                margin-top: 20px;
+                .card {
+                    border: none;
+                    .card-header {
+                        border: none;
+                        background-color: transparent;
+                        padding: 0;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        @include tab-view {
+                            flex-direction: column;
+                        }
+                        .heade_wrps {
+                            color: $text-black;
+                            font-size: 16px;
+                            font-weight: 500;
+                            margin-right: 15px;
+                            @include tab-view {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100%;
+                                margin: 0;
+                            }
+                            .responsive_anch {
+                                display: none;
+                                @include tab-view {
+                                    font-weight: 600;
+                                    color: $text-black;
+                                    font-size: 16px;
+                                    border: none;
+                                    background-color: transparent;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    padding: 0;
+                                    // &[aria-expanded="true"] {
+                                    //   &:after {
+                                    //     content: "";
+                                    //     padding: 5px 9px;
+                                    //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                                    //     background-position: right;
+                                    //     background-repeat: no-repeat;
+                                    //     background-size: 12px;
+                                    //     transition: 0.3s;
+                                    //   }
+                                    // }
+                                    // &[aria-expanded="false"] {
+                                    //   &:after {
+                                    //     padding: 5px 9px;
+                                    //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                                    //     background-position: right;
+                                    //     background-repeat: no-repeat;
+                                    //     background-size: 12px;
+                                    //     content: "";
+                                    //     transition: 0.3s;
+                                    //   }
+                                    // }
+                                }
+                            }
+                        }
+                        .addon_anchor {
+                            font-weight: 600;
+                            color: $text-black;
+                            font-size: 16px;
+                            border: none;
+                            background-color: transparent;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 0;
+                            // &[aria-expanded="true"] {
+                            //   &:after {
+                            //     content: "";
+                            //     padding: 5px 9px;
+                            //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
+                            //     background-position: right;
+                            //     background-repeat: no-repeat;
+                            //     background-size: 12px;
+                            //     transition: 0.3s;
+                            //   }
+                            // }
+                            // &[aria-expanded="false"] {
+                            //   &:after {
+                            //     padding: 5px 9px;
+                            //     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg);
+                            //     background-position: right;
+                            //     background-repeat: no-repeat;
+                            //     background-size: 12px;
+                            //     content: "";
+                            //     transition: 0.3s;
+                            //   }
+                            // }
+                            @include tab-view {
+                                display: none;
+                            }
+                        }
+                        #addon_tab {
+                            flex-direction: row;
+                            flex-wrap: nowrap;
+                            flex: 2;
+                            @include tab-view {
+                                flex-wrap: wrap;
+                                margin: 5px 0;
+                                width: 100%;
+                            }
+                            li {
+                                flex: 1;
+                                &:first-child {
+                                    a {
+                                        margin-left: 0;
+                                    }
+                                }
+                                &:last-child {
+                                    a {
+                                        margin-right: 0;
+                                    }
+                                }
+                                @include tab-view {
+                                    margin-left: 5px;
+                                    margin-bottom: 5px;
+                                    &:first-child {
+                                        margin-left: 0;
+                                    }
+                                }
+                                a {
+                                    background-color: $background-white;
+                                    // color: #e4e4e4;
+                                    // border: 1px solid #e4e4e4;
+                                    color: $text_grey_dark;
+                                    border: 1px solid $text_grey_dark;
+                                    border-radius: 8px;
+                                    font-size: 12px;
+                                    margin: 0 0 0 5px;
+                                    padding: 10px;
+                                    text-align: center;
+                                    height: 100%;
+                                    align-items: center;
+                                    display: flex;
+                                    justify-content: center;
+                                    br {
+                                        display: none;
+                                    }
+                                    @include tab-view {
+                                        margin: 0;
+                                        font-size: 9px;
+                                        padding: 5px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        height: 100%;
+                                        br {
+                                            display: flex;
+                                        }
+                                    }
+                                    &.active {
+                                        color: $text_grey_dark;
+                                        border: 1px solid $text_grey_dark;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .card-body {
+                        padding: 0;
+                        margin-top: 15px;
+                        @include tab-view {
+                            margin-top: 5px;
+                        }
+                        .addon_listins_wrps {
+                            display: flex;
+                            justify-content: flex-end;
+                            @include tab-view {
+                                justify-content: flex-start;
+                            }
+                            .addon_btn_drop {
+                                background-color: $background-white;
+                                color: $mid_gray_bg;
+                                border: 1px solid $mid_gray_bg;
+                                border-radius: 8px;
+                                font-size: 13px;
+                                margin: 0;
+                                width: 100%;
+                                padding: 6px 10px;
+                                position: relative;
+                                max-width: 85%;
+                                &:focus {
+                                    outline: none;
+                                    box-shadow: none;
+                                }
+                                &:hover {
+                                    outline: none;
+                                    box-shadow: none;
+                                }
+                                &[aria-expanded="true"] {
+                                    &:after {
+                                        font-family: "FontAwesome";
+                                        content: "\f077";
+                                        color: $text-grey;
+                                        font-weight: normal;
+                                        transition: 0.3s;
+                                        right: 10px;
+                                        position: absolute;
+                                    }
+                                }
+                                &[aria-expanded="false"] {
+                                    &:after {
+                                        font-family: "FontAwesome";
+                                        content: "\f078";
+                                        color: $text-grey;
+                                        font-weight: normal;
+                                        transition: 0.3s;
+                                        right: 10px;
+                                        position: absolute;
+                                    }
+                                }
+                                @include tab-view {
+                                    margin-right: 0;
+                                    text-align: center;
+                                    align-items: center;
+                                    display: flex;
+                                    font-size: 10px;
+                                }
+                            }
+                            .dropdownList {
+                                li {
+                                    button {
+                                        border: none;
+                                        @include tab-view {
+                                            padding: 5px;
+                                            font-size: 12px;
+                                            white-space: normal;
+                                        }
+                                        &:focus {
+                                            outline: none;
+                                            box-shadow: none;
+                                        }
+                                        &:hover {
+                                            outline: none;
+                                            box-shadow: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .edit_btns {
+                display: flex;
+                justify-content: flex-end;
+                button {
+                    background-color: transparent;
+                    color: $text_light_yellow;
+                    box-shadow: none;
+                    font-size: 14px;
+                    padding: 0;
+                    border: none;
+                    text-align: right;
+                    text-decoration: none;
+                    @include tab-view {
+                        font-size: 12px;
+                    }
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+                &.duel_buttons {
+                    justify-content: space-between;
+                    margin-top: 15px;
+                    @include tab-view {
+                        margin-top: 10px;
+                    }
+                }
+                &.next_traveler {
+                    justify-content: flex-end;
+                    button {
+                        color: $active-tab-text;
+                        font-size: 16px;
+                        font-weight: 600;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        i {
+                            margin-left: 5px;
+                            font-size: 11px;
+                        }
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 .hide_section {
-  display: none !important;
+    display: none !important;
 }
