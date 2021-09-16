@@ -47,8 +47,8 @@ export class SortFlightComponent implements OnInit {
       }
       this.flightDetails = flightDetails
       console.log(this.flightDetails)
-      this.sortFlight.emit({key : 'relevant',order : 'DESC'})
-      this.sortType ='relevant'
+      this.sortFlight.emit({key : 'relevance',order : 'DESC'})
+      this.sortType ='relevance'
     }
 
     console.log(flightDetails)
@@ -76,8 +76,13 @@ export class SortFlightComponent implements OnInit {
 
 
   resetSorting(key, order) {
-    this.sortType = 'lh_price';
-    this.sortFlight.emit({ key, order })
+    if(this.delta.length){
+      this.sortType = 'relevance';
+      this.sortFlight.emit({key : 'relevance',order : 'DESC'})
+    }else{
+      this.sortType = 'lh_price';
+      this.sortFlight.emit({ key, order })
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

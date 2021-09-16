@@ -12,9 +12,9 @@
                         <div class="block_cmn price">
                             <ul *ngIf="delta.length">
                                 <li>
-                                    <label class="custom_radio">Relevance
-                                    <input type="radio" [checked]="sortType=='relevant'"
-                                        (click)="sortFlightData('relevant','DESC','relevant')">
+                                    <label class="custom_radio">{{'relevance' | translate}}
+                                    <input type="radio" [checked]="sortType=='relevance'"
+                                        (click)="sortFlightData('relevance','DESC','relevance')">
                                     <span class="checkmark"></span>
                                 </label>
                                     <a class="anchor_link" (click)="resetSorting('selling_price','ASC')">{{'clear' | translate}}</a>
