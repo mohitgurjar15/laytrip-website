@@ -257,7 +257,14 @@ export class HotelSearchWidgetComponent implements OnInit {
 
 
   dealDateValidation() {
-      this.searchHotelInfo.check_in = this.checkInDate = this.checkInMinDate = this.isRefferal ? moment().add(this.landingPageName === 'sergio' ? 61 : 91, 'days').toDate() : moment().add(2, 'days').toDate();
+    this.homeService.getLandingPageData.subscribe(data => {
+      try {
+
+        this.searchHotelInfo.check_in = this.checkInDate = this.checkInMinDate = this.isRefferal ? moment().add(data.promotional.min_promotional_day, 'days').toDate() : moment().add(2, 'days').toDate();
+      } catch (e) {
+      }
+    });
+      // this.searchHotelInfo.check_in = this.checkInDate = this.checkInMinDate = this.isRefferal ? moment().add(this.landingPageName === 'sergio' ? 61 : 91, 'days').toDate() : moment().add(2, 'days').toDate();
 
       this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
       this.rangeDates = [this.checkInDate, this.checkOutDate];
@@ -299,7 +306,9 @@ export class HotelSearchWidgetComponent implements OnInit {
 
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
+    console.log(this.fromDestinationInfo)
     if (this.fromDestinationInfo.title.length == 0) {
+      console.log('in false')
       this.validSearch = false;
     }
     let queryParams: any = {};
@@ -330,6 +339,10 @@ export class HotelSearchWidgetComponent implements OnInit {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
+    console.log(this.searchHotelInfo)
+    console.log(this.validSearch)
+    console.log(this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
+      this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies)
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies) {
 
