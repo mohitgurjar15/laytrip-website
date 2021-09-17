@@ -73,16 +73,34 @@
                 </div>
             </div>
             <div class="deal_sec_wrapper" *ngIf="list.length > 0">
-                <div class="deal_section_row" *ngFor="let item of list;">
-                    <div class="deal_sec_inner">
-                        <img [src]="item?.image" alt="Deal Image" />
-                        <div class="image_about_text">
-                            <button (click)="btnDealClick(item)">{{'find_deals' | translate}} {{item?.city}}</button>
+                <div class="row justify-content-center">
+                    <div class="col-lg-4" *ngFor="let item of list;">
+                        <div class="deal_section_row">
+                            <div class="deal_sec_inner flight_deal"> <!--hotel_deal-->
+                                <div class="deal_header_img">
+                                    <div class="overflow-hidden h-100">
+                                        <img class="deal_img_new" [src]="item?.image" alt="Deal Image" />
+                                    </div>
+                                    <div class="deal_type_icn">
+                                        <i class="fa fa-plane" aria-hidden="true"></i> <!--fa-bed-->
+                                    </div>
+                                </div>
+                                <div class="deal_main_section">
+                                    <h3>{{item?.city}}</h3>
+                                    <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> Brazil {{item.code}} {{item.lat}}</p>
+                                    <div class="payment_option">
+                                        Payment options available:
+                                        <span>Weekly, bi-weekly or monthly</span>
+                                    </div>
+                                    <div class="image_about_text">
+                                        <button (click)="btnDealClick(item)">Find deal</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>

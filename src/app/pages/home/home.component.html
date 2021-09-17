@@ -14,27 +14,23 @@
                 </span>
                 <p *ngIf="isRefferal">{{'promo_421_1' | translate}} NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_2' | translate}}.*</p>
                 <p *ngIf="!isRefferal" [innerHTML]="'flight_third_title' | translate"></p>
+                <a href="javascript:void(0);" class="cstm_theme_btn_comman banner_new_btn">How it Works</a>
             </div>
         </div>
 
         <div class="banner_tab">
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-
                     <a class="nav-item nav-link flight-tab active" id="nav-flight" data-toggle="tab" href="#flight" role="tab" aria-selected="true" (click)="clickOnTab('flight')">
-                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_pink.svg" alt="Flight Icon" />
-                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_blue.svg" alt="Flight Icon" />
-                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/plane_d_gray.svg" alt="Flight Icon" />
+                        {{'flight' | translate}}
                     </a>
                     <a class="nav-item nav-link hotel-tab" id="nav-hotel" data-toggle="tab" href="#hotel" role="tab" aria-selected="false" (click)="clickOnTab('hotel')">
-                        <img class="active-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_pink.svg" alt="Hotel Icon" />
-                        <img class="default-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_blue.svg" alt="Hotel Icon" />
-                        <img class="disabled-icon" src="{{s3BucketUrl}}assets/images/icon/tab-icon/bed_d_gray.svg" alt="Flight Icon">
+                        {{'hotel' | translate}}
                     </a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade  show" id="hotel" role="tabpanel" aria-labelledby="nav-hotel">
+                <div class="tab-pane fade" id="hotel" role="tabpanel" aria-labelledby="nav-hotel">
                     <app-hotel-search-widget (currentChangeCounter)=getCurrentChangeCounter($event)></app-hotel-search-widget>
                 </div>
                 <div class="tab-pane fade active show " id="flight" role="tabpanel" aria-labelledby="nav-flight">
@@ -51,6 +47,7 @@
 <!--  Close Banner Section-->
 <app-dr-adventure *ngIf="countryCode==='DR'"></app-dr-adventure>
 <app-last-min-hotel-deal *ngIf="countryCode==='DR'"></app-last-min-hotel-deal>
+<app-landing-video></app-landing-video>
 <app-partial-payment></app-partial-payment>
 
 <app-deal [dealList]="dealList" [moduleId]="moduleId" (toString)="fetchWidgetDeal($event)"></app-deal>
