@@ -122,6 +122,9 @@
       font-weight: 600;
       line-height: normal;
       letter-spacing: 0.4px;
+      @include tab-view{
+        font-size: 18px;
+      }
     }
     h4{
       color: #fff;
@@ -136,6 +139,10 @@
       p{
         margin-bottom: 0;
       }
+      @include tab-view{
+        font-size: 24px;
+        margin-bottom: 30px;
+      }
     }
     .custom_input_wrapper{
       display: flex;
@@ -146,9 +153,13 @@
         padding: 8px 15px 8px 22px;
         border-radius: 20px;
         margin-right: 21px;
-        max-width: 100%;
         width: 354px;
+        max-width: 100%;
         box-shadow: none;
+        @include mobile-md-view{
+          max-width: 45%;
+          padding: 8px 10px;
+        }
       }
       button{
         padding:8px 28px;
