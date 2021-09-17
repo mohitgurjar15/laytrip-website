@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
     this.landingPageName = this.route.snapshot.queryParams['utm_source']
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
-    if (this.landingPageName === '421') {
       this.homeService.getLandingPageData.subscribe(data => {
         try {
           this.$landingPageData = data;
@@ -64,10 +63,6 @@ export class HomeComponent implements OnInit {
         } catch (e) {
         }
       });
-    } else if (this.landingPageName === 'sergio') {
-      this.slides = [{ src: 'https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/cancun.png' }]
-      this.currentSlide = 'https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/cancun.png'
-    }
 
     this.homeService.setOffersData(this.currentSlide);
   }
@@ -184,9 +179,9 @@ export class HomeComponent implements OnInit {
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
         if (this.moduleId == 1 && this.commonFunction.isRefferal()) {
-          this.dealList = this.landingPageName === '421' ? this.$landingPageData.deals.flight : [];
+          this.dealList =this.$landingPageData.deals.flight;
         } else if (this.moduleId == 3 && this.commonFunction.isRefferal()) {
-          this.dealList = this.landingPageName === '421' ?  this.$landingPageData.deals.hotel : [];
+          this.dealList = this.$landingPageData.deals.hotel;
           console.log(this.dealList)
         } else {
           this.dealList = response['data'];
@@ -229,16 +224,11 @@ export class HomeComponent implements OnInit {
   }
 
   activeSlide(activeSlide) {
-    if (this.landingPageName === '421') {
       this.currentTabName = 'hotel';
       this.currentSlide = this.$landingPageData.slides[activeSlide];
       this.homeService.setOffersData(this.currentSlide);
       this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
-    }else{
-      this.slides = [{ src: 'https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/cancun.png' }]
-      this.currentSlide = 'https://d2q1prebf1m2s9.cloudfront.net/assets/images/lp_banner/cancun.png'
-      this.homeService.setOffersData(this.currentSlide);
-    }
+    
   }
 
   getCurrentChangeCounter(event) {

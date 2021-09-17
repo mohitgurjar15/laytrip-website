@@ -141,7 +141,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     if (this.commonFunction.isRefferal()) {
       this.isLangingPage = true;
       this.homeService.getSlideOffers.subscribe(currentSlide => {
-        if(this.landingPageName === '421'){
+
         if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
           let slide: any = currentSlide;
           this.fromSearch = Object.assign({}, airports[slide.location.from.airport_code]);
@@ -155,18 +155,7 @@ export class FlightSearchWidgetComponent implements OnInit {
             this.rangeDates = [this.departureDate, this.returnDate];
           }
         }
-      }else if(this.landingPageName === 'sergio'){
-        this.fromSearch = [];
-          this.toSearch =[];
-          this.searchFlightInfo.departure = [];
-          this.departureDate = moment().add(60, 'days').toDate();
-          this.searchFlightInfo.arrival = this.toSearch.code;
 
-          if (this.isRoundTrip) {
-            this.returnDate = moment().add(67, 'days').toDate();
-            this.rangeDates = [this.departureDate, this.returnDate];
-          }
-      }
       })
 
     }
@@ -258,10 +247,10 @@ export class FlightSearchWidgetComponent implements OnInit {
     if (this.landingPageName === '421' || typeof this.landingPageName === 'undefined') {
       this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
       this.returnDate = this.isRefferal ? moment(this.departureDate).add(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
-    }else if(this.landingPageName === 'sergio') {
+    } else if (this.landingPageName === 'sergio') {
       this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(60, 'days').toDate() : moment().add(2, 'days').toDate();
       this.returnDate = this.isRefferal ? moment(this.departureDate).add(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
-  }
+    }
   }
   destinationChangedValue(event) {
     if (event && event.key && event.key === 'fromSearch') {

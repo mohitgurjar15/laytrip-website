@@ -154,7 +154,6 @@ export class HotelSearchWidgetComponent implements OnInit {
     })
     this.homeService.getSlideOffers.subscribe(currentSlide => {
       if (this.commonFunction.isRefferal()) {
-        if (this.landingPageName === '421') {
           this.dealDateValidation();
           if (typeof currentSlide == 'undefined') {
             //Condition apply when page is init first time and by default show miami
@@ -177,16 +176,7 @@ export class HotelSearchWidgetComponent implements OnInit {
             this.searchHotelInfo.location = this.fromDestinationInfo;
             this.validateSearch(true);
           }
-        }else if(this.landingPageName === 'sergio'){
-          this.dealDateValidation();
-          this.fromDestinationInfo.city = 'Miami Beach';
-          this.fromDestinationInfo.title = 'Miami Beach, Florida, United States';
-          this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat = 25.7903;
-          this.searchHotelInfo.longitude = this.fromDestinationInfo.geo_codes.long = -80.1303;
-          this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id = 800047419;
-          this.searchHotelInfo.location = this.fromDestinationInfo;
-          this.validateSearch(true);
-        }
+        
       }
     });
     this.countryCode = this.commonFunction.getUserCountry();

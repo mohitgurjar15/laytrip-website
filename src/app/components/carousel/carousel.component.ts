@@ -46,9 +46,7 @@ export class CarouselComponent  implements OnInit{
     private route: ActivatedRoute,
     ) {
     this.landingPageName = this.route.snapshot.queryParams['utm_source']
-    if(this.landingPageName === '421'){
       this.activityWatcher();
-    }
   }
 
   onPreviousClick() {
