@@ -33,7 +33,6 @@ export class SortFlightComponent implements OnInit {
         this.delta.push(item)
       }
     }
-    console.log(this.delta)
     let flightDetails = []
     if (this.delta.length) {
       for (let item of this.flightDetails) {
@@ -46,13 +45,10 @@ export class SortFlightComponent implements OnInit {
         flightDetails.push(item)
       }
       this.flightDetails = flightDetails
-      console.log(this.flightDetails)
       this.sortFlight.emit({key : 'relevance',order : 'DESC'})
       this.sortType ='relevance'
     }
 
-    console.log(flightDetails)
-    console.log('sortType',this.sortType)
   }
 
   loadJquery() {

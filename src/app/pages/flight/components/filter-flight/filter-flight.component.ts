@@ -152,7 +152,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
         this.arrivalTimeSlotCityName = element.arrival_info.city;
       });
     }
-    console.log("this.minPrice",this.minPrice)
     this.loadJquery();
   }
 
@@ -228,7 +227,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
    * @param event 
    */
   fliterByPrice(event) {
-    console.log(event.value)
     this.minPrice = event.value;
     this.maxPrice = event.highValue;
     this.filterFlights();
@@ -677,12 +675,10 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
         flightDetails.push(item)
       }
     }
-    console.log(delta)
     if (delta.length) {
       for (let item of delta) {
         flightDetails.push(item)
       }
-      console.log(flightDetails)
       return flightDetails;
     }
   }
