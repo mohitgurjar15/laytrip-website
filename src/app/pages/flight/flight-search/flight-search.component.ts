@@ -417,12 +417,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         flightDetails.push(item)
       }
     }
-    console.log(delta)
     if (delta.length) {
       for (let item of delta) {
         flightDetails.push(item)
       }
-      console.log(flightDetails)
       return flightDetails;
     }
   }
