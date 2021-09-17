@@ -26,6 +26,7 @@ export class FlightPriceSliderComponent implements OnInit {
   child: number;
   infant: number;
   transformValue:number=0;
+  minDate:string='';
 
   slideConfig = {
     dots: false,
@@ -100,6 +101,8 @@ export class FlightPriceSliderComponent implements OnInit {
     /* if (changes['flexibleLoading'].currentValue) {
       console.log(this.flexibleLoading)
     } */
+    //this.minDate=moment(this.dates[0].date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+
   }
  
  
@@ -173,13 +176,17 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   prev() {
+    
     let requestDate = moment(this.dates[0].date, 'DD/MM/YYYY').subtract('1', 'days').format('YYYY-MM-DD');
     let index = this.dates.findIndex(x => x.date == requestDate);
     var begin = moment(requestDate);
     var end = moment().add(2, 'days');
     
     if (index == -1 && (moment(begin).isAfter(end, 'days') || moment(begin).isSame(end, 'days')))  {
-      this.transformValue+=100;
+      /* if(moment(requestDate).isAfter(this.minDate)){
+        this.transformValue+=100;
+      } */
+      this.minDate = moment(this.minDate,'YYYY-MM-DD').subtract('1','days').format("YYYY-MM-DD");
       this.getFlexiableDate(requestDate,'prev')
     }
     
@@ -187,6 +194,8 @@ export class FlightPriceSliderComponent implements OnInit {
 
   next() {
     let requestDate = moment(this.dates.slice(-1)[0].date,'DD/MM/YYYY').add('+1','days').format('YYYY-MM-DD');
+    this.minDate = moment(this.minDate,'YYYY-MM-DD').add('+1','days').format("YYYY-MM-DD");
+    console.log("this.minDate",this.minDate)
     let index = this.dates.findIndex(x=>x.date ==requestDate);
     if(index==-1){
       this.transformValue-=100;
@@ -210,18 +219,10 @@ export class FlightPriceSliderComponent implements OnInit {
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
         if (res) {
           this.singleFlexLoader = false;
-          /* let index = this.dates.findIndex(x=>x.date == res[0].date);
-          this.dates[index] = res[0];
-          this.dates.sort(function(a, b){
-            var aa = a.date.split('/').reverse().join(),
-                bb = b.date.split('/').reverse().join();
-            return aa < bb ? -1 : (aa > bb ? 1 : 0);
-          }); */
           if(direction=='next'){
             this.dates.push(res[0]);
           }
           else{
-            // console.log("this.dates",this.dates)
             this.dates.unshift(res[0])
           }
         }
