@@ -538,7 +538,7 @@
     "filter_10": "Llegada de la más Tarde a la más Temprana",
     "filter_11": "Salida de la más Temprana a la más Tarde",
     "filter_12": "Salida de la más Tarde a la más Temprana",
-    "filter_13": "Relevancia",
+    "filter_13": "Ordenar por relevancia",
     "filter_az": "A - Z",
     "filter_za": "Z - A",
     "ratings": "Valoraciones",
@@ -710,5 +710,5 @@
     "payment_plans": "Planes de Pago",
     "booking_not_avilable": "Esta reserva ya no está disponible. Haz clic en la “x” para borrarloy así proceder al Checkout.",
     "flights_unavailable": "Vuelos no Disponibles",
-    "relevance": "Relevancia"
+    "relevance": "Ordenar por relevancia"
 }
