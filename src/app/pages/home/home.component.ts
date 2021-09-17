@@ -177,7 +177,6 @@ export class HomeComponent implements OnInit {
           this.dealList = this.$landingPageData.deals.flight;
         } else if (this.moduleId == 3 && this.commonFunction.isRefferal()) {
           this.dealList = this.$landingPageData.deals.hotel;
-          console.log(this.dealList)
         } else {
           this.dealList = response['data'];
         }

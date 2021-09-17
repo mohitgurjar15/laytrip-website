@@ -257,17 +257,11 @@ export class HotelSearchWidgetComponent implements OnInit {
 
 
   dealDateValidation() {
-    if (this.landingPageName === '421' || typeof this.landingPageName === 'undefined') {
-      this.searchHotelInfo.check_in = this.checkInDate = this.checkInMinDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
+      this.searchHotelInfo.check_in = this.checkInDate = this.checkInMinDate = this.isRefferal ? moment().add(this.landingPageName === 'sergio' ? 61 : 91, 'days').toDate() : moment().add(2, 'days').toDate();
 
       this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
       this.rangeDates = [this.checkInDate, this.checkOutDate];
-    } else if (this.landingPageName === 'sergio') {
-      this.searchHotelInfo.check_in = this.checkInDate = this.checkInMinDate = this.isRefferal ? moment().add(60, 'days').toDate() : moment().add(2, 'days').toDate();
-
-      this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
-      this.rangeDates = [this.checkInDate, this.checkOutDate];
-    }
+   
   }
 
   selectCheckInDateUpdate(date) {

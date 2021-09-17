@@ -118,7 +118,6 @@ export class SearchAirportComponent implements OnInit {
   }
 
   searchAirport(searchItem) {
-    console.log("innaaa")
     this.loading = true;
     this.$autoComplete = this.flightService.searchAirport(searchItem).subscribe((response: any) => {
       
