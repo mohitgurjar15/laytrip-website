@@ -370,7 +370,6 @@ export class FilterHotelComponent implements OnInit, OnDestroy {
         }
       });
     }
-    console.log('hereok')
     this.hotelService.getSortFilter.subscribe(hotelInfo => {
       if (typeof hotelInfo != 'undefined' && Object.keys(hotelInfo).length > 0) {
         var sortFilter: any = hotelInfo;        

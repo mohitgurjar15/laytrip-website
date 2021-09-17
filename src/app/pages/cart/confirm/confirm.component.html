@@ -4,9 +4,7 @@
 
 <div class="conf_main_wrapper">
     <div class="container">
-
         <div class="conf_container">
-
             <div *ngIf="loading">
                 <!-- loader for booking conf -->
                 <div class="fb_animation w-100 pb-4 mb-2"></div>
@@ -31,7 +29,6 @@
                 <!-- loader for booking conf -->
             </div>
 
-
             <div id="{{ commonFunction.isRefferal() ? 'ga4_Landing_Booking_Confirm':'ga4_Booking_Confirm'}}" class="header_bar" *ngIf="!loading && allBookingStatus">
                 <h3>
                     {{'booking_confirmed' | translate}}
@@ -49,9 +46,7 @@
                         <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==1">
                             {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
                             {{commonFunction.convertDateFormat(booking.moduleInfo[0].departure_date,'DD/MM/YYYY')}}
-                            <span class="off_label"
-                                *ngIf="booking.moduleInfo[0]?.offer_data?.applicable">${{booking.moduleInfo[0]?.offer_data.discount.amount}}
-                                off</span>
+                            <span class="off_label" *ngIf="booking.moduleInfo[0]?.offer_data?.applicable">${{booking.moduleInfo[0]?.offer_data.discount.amount}} off</span>
                         </span>
                         <span class="rights" *ngIf="booking.moduleInfo[0].routes.length==2">
                             {{booking.moduleInfo[0].departure_code}}-{{booking.moduleInfo[0].arrival_code}}
@@ -63,9 +58,7 @@
                         <span class="lefts">{{'hotel' | translate}}</span>
                         <span class="rights">{{booking.moduleInfo[0].hotel_name}}
                             {{commonFunction.convertDateFormat(booking.moduleInfo[0].input_data.check_in,'YYYY-MM-DD')}}
-                            <span class="off_label"
-                                *ngIf="booking.moduleInfo[0]?.offer_data.applicable">${{booking.moduleInfo[0]?.offer_data.discount.amount}}
-                                {{'off' | translate}}</span>
+                            <span class="off_label" *ngIf="booking.moduleInfo[0]?.offer_data.applicable">${{booking.moduleInfo[0]?.offer_data.discount.amount}} {{'off' | translate}}</span>
                         </span>
                     </div>
                 </ng-container>
@@ -83,7 +76,7 @@
                     <span class="rights">Avis Dec 9-11, 2021</span>
                 </div> -->
                 <h3>{{'payment' | translate}}</h3>
-                <div class="detail_liners" *ngIf="cartDetails.cartInstallments.length">
+                <!-- <div class="detail_liners" *ngIf="cartDetails.cartInstallments.length">
                     <span class="lefts">{{'downpayment' | translate}}</span>
                     <span class="rights">${{cartDetails.cartInstallments[0].amount | number : '1.2-2'}}</span>
                 </div>
@@ -117,7 +110,105 @@
                     <span class="rights">${{ cartDetails.totalAmount | number : '1.2-2'}} <span
                             *ngIf="cartDetails.cardDetail"> {{ cardType[cartDetails?.cardDetail?.cardType]}} {{'ending_in' | translate}}
                             {{cartDetails?.cardDetail?.cardDigits}}</span> </span>
+                </div> -->
+                <div class="booking_summary_sect">
+                    <div class="summary_box">
+                        <div class="summary_item summary_item_total">
+                            <div class="summary_type">
+                                {{'total_purchases' | translate}}
+                            </div>
+                            <div class="summary_item_price">
+                                ${{beforeDesimal(cartDetails.totalAmount)}}<sup>.{{afterDesimal(cartDetails.totalAmount)}}</sup>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="summary_box" [ngClass]="{'border-0':(cartDetails.cartInstallments | json) == '[]'}">
+                        <div class="summary_item">
+                            <div class="summary_type">
+                                {{'booking_downpayment' | translate}}
+                            </div>
+                            <div class="summary_item_price">
+                                ${{beforeDesimal(cartDetails.paidAmount)}}<sup>.{{afterDesimal(cartDetails.paidAmount)}}</sup>
+                            </div>
+                        </div>
+                        <div class="summary_item">
+                            <div class="summary_type">
+                                {{'add_on_baggage' | translate}}
+                            </div>
+                            <div class="summary_item_price">
+                                $00<sup>.00</sup>
+                            </div>
+                        </div>
+                        <div class="summary_item">
+                            <div class="summary_type">
+                                {{'applied_points' | translate}}
+                            </div>
+                            <div class="summary_item_price">
+                                $00<sup>.00</sup>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="summary_box" *ngIf="(cartDetails.cartInstallments | json) != '[]'">
+                        <div class="summary_item summary_item_total">
+                            <div class="summary_type">
+                                {{'total_paid' | translate}}
+                            </div>
+                            <div class="summary_item_price">
+                                ${{beforeDesimal(cartDetails.paidAmount)}}<sup>.{{afterDesimal(cartDetails.paidAmount)}}</sup>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price_descrip" *ngIf="(cartDetails.cartInstallments | json) != '[]'">
+                        <div class="listing_accordion">
+                            <div id="accordion_listing">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="card-link" href="javascript:void(0);">{{'payment_plans' | translate}}</a>
+                                    </div>
+                                    <div id="listing_descrip" class="collapse show" Paid data-parent="#accordion_listing">
+                                        <div class="card-body pb-0">
+                                            <ng-container *ngFor="let installment of cartDetails.cartInstallments | slice:1;let i = index ;">
+                                                <div class="line_desc paid_clr" [ngClass]="{'paid_clr' : (installment.instalmentStatus), 'due_clr' : (  installment.dueInstallment && !installment.instalmentStatus),'' : (  !installment.dueInstallment && !installment.instalmentStatus) }">
+                                                    <div class="left_sec">
+                                                        <span class="left_date">#{{i+1}} {{ installment.instalmentStatus ? ('paid'|translate) : ('due'|translate)}} {{commonFunction.convertCustomDateFormat(installment.instalmentDate,'YYYY-MM-DD','MMM D, YYYY')}}</span>
+                                                        <div class="booking_type">
+                                                            <ng-container *ngFor="let item of installment.breakdown">
+                                                                <i *ngIf="item.type === 'hotel'" class="fa fa-bed" aria-hidden="true"></i>
+                                                                <i *ngIf="item.type === 'flight'" class="fa fa-plane" aria-hidden="true"></i>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                    <div class="right_sec">
+                                                        ${{beforeDesimal(installment.amount)}}<sup>.{{afterDesimal(installment.amount)}}</sup>
+                                                        <!-- ${{ installment.amount | number : '1.2-2' }} -->
+                                                        <!-- <span class="paid_markss">
+                                                            <i class="fa fa-check-circle" aria-hidden="true" *ngIf="installment.instalmentStatus"></i>
+                                                        </span> -->
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="summary_box total_p_wrp" *ngIf="(cartDetails.cartInstallments | json) != '[]'">
+                        <div class="summary_item summary_item_total w-100">
+                            <div class="summary_type">
+                                {{'total_installments' | translate}}
+                            </div>
+                            <div class="summary_item_price">
+                                ${{beforeDesimal(cartDetails.remainAmount)}}<sup>.{{afterDesimal(cartDetails.remainAmount)}}</sup>
+                                <!-- ${{ totalInstallmentAmount || 0 | number : '1.2-2' }} -->
+                                <!-- <span class="paid_markss">
+                                    <i class="fa fa-check-circle d-none" aria-hidden="true"></i>
+                                </span> -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <h3>{{'policies' | translate}}</h3>
                 <div class="linking_wrapper">
                     <!-- <a href="javascript:void(0);">Customer Service</a>

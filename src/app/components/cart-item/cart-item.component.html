@@ -1,7 +1,6 @@
 <div class="panel-group inner_accordion_wrapper" id="accordion">
     <div class="section_description one" *ngIf="!cartItem.is_available">
-        <span class="sec_text">This booking is no longer available. Click “x” to delete to be able to proceed to
-      Checkout.</span>
+        <span class="sec_text">{{'booking_not_avilable' | translate}}</span>
         <a (click)="deleteCart(cartItem.id)"><img src="{{s3BucketUrl}}assets/images/close_pink.svg" alt="Close"></a>
     </div>
     <div class="panel panel-default">
@@ -28,9 +27,9 @@
                   - {{commonFunction.convertDateFormat(cartItem.module_info?.arrival_date,'DD/MM/YYYY')}}</span>
                         <span *ngIf="cartItem.module_info.routes.length==1" class="header_date">{{commonFunction.convertDateFormat(cartItem.module_info?.departure_date,'DD/MM/YYYY')}}</span>
         </div>
-        <span class="alert_boxes" *ngIf="!cartItem.is_available">
+        <!-- <span class="alert_boxes" *ngIf="!cartItem.is_available">
                 <img src="{{s3BucketUrl}}assets/images/alert_pink.svg" alt="Alert image">
-              </span>
+              </span> -->
         </span>
         </a>
         </ng-container>
@@ -52,7 +51,6 @@
                     </h6>
                     <span class="header_date">{{cartItem.module_info.full_address}}</span>
                 </div>
-
     </div>
     </span>
     </a>

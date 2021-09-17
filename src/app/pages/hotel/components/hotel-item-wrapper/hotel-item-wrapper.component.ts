@@ -153,6 +153,7 @@ export class HotelItemWrapperComponent implements OnInit {
 
     this.hotelService.getHotels.subscribe(result => {
       this.hotelDetails = result;
+      this.hotelListArray = []
       for (let i = 0; i < this.hotelDetails.length; i++) {
         this.hotelDetails[i].galleryImages = [];
         for (let image of this.hotelDetails[i].images) {
@@ -168,10 +169,8 @@ export class HotelItemWrapperComponent implements OnInit {
         this.hotelDetails[i].activeSlide = 1;
         this.hotelCount = this.hotelDetails.length;
         this.hotelListArray = this.hotelDetails.slice(0, this.noOfDataToShowInitially);
-
       }
       this.currentPage = 1;
-      
       this.hotelList = [...this.hotelListArray];
       if (this.bounds) {
         this.checkMarkersInBounds(this.bounds)

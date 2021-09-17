@@ -6,6 +6,7 @@ import { CommonFunction } from '../../../_helpers/common-function';
 import { cardType } from '../../../_helpers/card.helper';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookingCompletionErrorPopupComponent } from '../../../components/booking-completion-error-popup/booking-completion-error-popup.component';
+import { DecimalPipe } from '@angular/common';
 
 declare var $: any;
 
@@ -29,6 +30,7 @@ export class ConfirmComponent implements OnInit {
     private cartService: CartService,
     public commonFunction: CommonFunction,
     public modalService: NgbModal,
+    private decimalPipe: DecimalPipe
   ) {
     this.bookingId = this.route.snapshot.paramMap.get('id');
   }
@@ -109,5 +111,19 @@ export class ConfirmComponent implements OnInit {
         break;
       }
     }
+  }
+
+  beforeDesimal(value){
+    value = this.transformDecimal(value)
+    return (value.toString().split(".")[0]) == 0 ? "00" : (value.toString().split(".")[0])
+  }
+
+  afterDesimal(value){
+    value = this.transformDecimal(value)
+    return (value.toString().split(".")[1]) == 0 ? "00" : (value.toString().split(".")[1])
+  }
+
+  transformDecimal(num) {
+    return this.decimalPipe.transform(num, '1.2-2');
   }
 }

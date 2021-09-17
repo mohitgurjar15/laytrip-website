@@ -1,9 +1,8 @@
 <ul class="nav nav-tabs booking_tab_header">
     <ng-container *ngFor="let cart of carts;let i = index;">
-        <li [ngClass]="{'active':selectedCart===i}">
+        <li [ngClass]="{'active':selectedCart===i}" *ngIf="i < 5">
             <ng-container *ngIf="cart.type=='flight'">
-                <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]="{'active':selectedCart===i}"
-                    (click)="selectCart(i)">
+                <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]="{'active':selectedCart===i}" (click)="selectCart(i)">
                     <span class="tab_round_wrps">
                         <span class="tab_imgs_wrps">
                             <i aria-hidden="true" class="fa fa-plane"></i>
@@ -11,15 +10,14 @@
                             <img *ngIf="!cart.is_available && selectedCart!==i "
                                 src="{{s3BucketUrl}}assets/images/alert_pink.svg" class="alrt_img" alt="Alert image"> 
                         </span>
-                        <span class="tab_txt_head">{{cart.module_info.departure_code}} -
+                    <span class="tab_txt_head">{{cart.module_info.departure_code}} -
                             {{cart.module_info.arrival_code}}</span>
                     </span>
                 </a>
             </ng-container>
 
             <ng-container *ngIf="cart.type=='hotel'">
-                <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]="{'active':selectedCart===i}"
-                    (click)="selectCart(i)">
+                <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]="{'active':selectedCart===i}" (click)="selectCart(i)">
                     <span class="tab_round_wrps hotel_tab_round_wrps">
                         <span class="tab_imgs_wrps">
                             <i _ngcontent-serverapp-c18="" aria-hidden="true" class="fa fa-bed"></i>
@@ -27,20 +25,65 @@
                             <img *ngIf="!cart.is_available && selectedCart!==i "
                                 src="{{s3BucketUrl}}assets/images/alert_pink.svg" class="alrt_img" alt="Alert image"> 
                         </span>
-                        <span class="tab_txt_head">{{cart.module_info.hotel_name}}</span>
+                    <span class="tab_txt_head">{{cart.module_info.hotel_name}}</span>
                     </span>
                 </a>
             </ng-container>
         </li>
-       
     </ng-container>
-    <li class="add_cart_li" *ngIf="totalCarts < 10">
-        <a (click)="saveAndSearch()"  class="cart_anch hover-link" >
+
+    <li class="add_cart_li" *ngIf="totalCarts < 5">
+        <a (click)="saveAndSearch()" class="cart_anch hover-link">
             <span class="tab_round_wrps">
-                <span class="tab_imgs_wrps">
-                    <img src="{{s3BucketUrl}}assets/images/plus-circle-round.svg" alt="Flight icon" />
-                </span>
-                <span class="tab_txt_head pink">{{'add_travel' | translate}}</span>
+                    <span class="tab_imgs_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/plus-circle-round.svg" alt="Flight icon" />
+                    </span>
+            <span class="tab_txt_head pink">{{'add_travel' | translate}}</span>
+            </span>
+        </a>
+    </li>
+</ul>
+<ul class="nav nav-tabs booking_tab_header" *ngIf="totalCarts >= 5">
+    <ng-container *ngFor="let cart of carts | slice:5 ;let i = index;">
+        <li [ngClass]="{'active':selectedCart===i+5}">
+            <ng-container *ngIf="cart.type=='flight'">
+                <a data-toggle="tab" [href]="'#cart_item'+i" [ngClass]="{'active':selectedCart===i+5}" (click)="selectCart(i+5)">
+                    <span class="tab_round_wrps">
+                        <span class="tab_imgs_wrps">
+                            <i aria-hidden="true" class="fa fa-plane"></i>
+                            <!-- <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />-->
+                            <img *ngIf="!cart.is_available && selectedCart!==i "
+                                src="{{s3BucketUrl}}assets/images/alert_pink.svg" class="alrt_img" alt="Alert image"> 
+                        </span>
+                    <span class="tab_txt_head">{{cart.module_info.departure_code}} -
+                            {{cart.module_info.arrival_code}}</span>
+                    </span>
+                </a>
+            </ng-container>
+
+            <ng-container *ngIf="cart.type=='hotel'">
+                <a data-toggle="tab" [href]="'#cart_item'+i+5" [ngClass]="{'active':selectedCart===i+5}" (click)="selectCart(i+5)">
+                    <span class="tab_round_wrps hotel_tab_round_wrps">
+                        <span class="tab_imgs_wrps">
+                            <i _ngcontent-serverapp-c18="" aria-hidden="true" class="fa fa-bed"></i>
+                            <!-- <img src="{{s3BucketUrl}}assets/images/icon/bed_line_blue.svg" alt="Hotel icon" />-->
+                            <img *ngIf="!cart.is_available && selectedCart!==i "
+                                src="{{s3BucketUrl}}assets/images/alert_pink.svg" class="alrt_img" alt="Alert image"> 
+                        </span>
+                    <span class="tab_txt_head">{{cart.module_info.hotel_name}}</span>
+                    </span>
+                </a>
+            </ng-container>
+        </li>
+    </ng-container>
+
+    <li class="add_cart_li" *ngIf="totalCarts < 10">
+        <a (click)="saveAndSearch()" class="cart_anch hover-link">
+            <span class="tab_round_wrps">
+                    <span class="tab_imgs_wrps">
+                        <img src="{{s3BucketUrl}}assets/images/plus-circle-round.svg" alt="Flight icon" />
+                    </span>
+            <span class="tab_txt_head pink">{{'add_travel' | translate}}</span>
             </span>
         </a>
     </li>

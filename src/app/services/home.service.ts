@@ -64,7 +64,6 @@ export class HomeService {
 
     setDeaslToggle(data){
         this.dealsToggle.next(data)
-        console.log("data in service",typeof data,data)
     }
 
     setLocationForHotel(destinationInfo) {

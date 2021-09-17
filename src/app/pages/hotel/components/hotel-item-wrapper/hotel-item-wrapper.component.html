@@ -1,10 +1,10 @@
 <span class="mob_line"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
     {{'found_in_prefix' | translate}}
     {{hotelCount}} {{(hotelCount > 1 ? 'hotels' : 'hotel') | translate}}
-    {{'found_in_suffix' | translate}} {{hotelName}}1232</span>
+    {{'found_in_suffix' | translate}} {{hotelName}}</span>
 <div class="top_wrapper_box">
     <h3 class="shorting_label">{{filteredLabel}}</h3>
-    <span class="desk_line"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
+    <span class="desk_line" *ngIf="hotelListArray.length > 0"><img src="{{s3BucketUrl}}assets/images/icon/map-pin_gray.svg" alt="map pin">
         {{'found_in_prefix' | translate}}
         {{hotelCount}} {{(hotelCount > 1 ? 'hotels' : 'hotel') | translate}}
         {{'found_in_suffix' | translate}} {{hotelName}}</span>
@@ -177,11 +177,11 @@
                                             </div>
                                         </div>
                                         <span [id]="'accordion_infos1'+blockIndex" class="show_detail">
-                                            <a data-toggle="collapse" data-parent="#full_hotel_listing"
+                                            <!-- <a data-toggle="collapse" data-parent="#full_hotel_listing"
                                                 [href]="'#collapse'+blockIndex" aria-expanded="false"
                                                 aria-controls="collapse1" class="hotel_anchor">
                                                 {{'details' | translate}}
-                                            </a>
+                                            </a> -->
                                         </span>
                                     </div>
                                     <div class="thrd_part">
@@ -267,7 +267,11 @@
                                         <span class="heads">
                                             <img src="{{s3BucketUrl}}assets/images/icon/bed-pink.svg" alt=""> {{'rules' | translate}}
                                         </span>
-                                        <span class="texts_rules">{{'rules_1' | translate}} <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'rules_2' | translate}}</span>
+                                        <span class="texts_rules">
+                                            {{'rules_1' | translate}} <a [routerLink]="['/terms']"
+                                            [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a> {{'rules_2' | translate}}
+                                        </span>
+
                                     </div>
                                 </div>
                             </div>

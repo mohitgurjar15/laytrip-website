@@ -71,18 +71,12 @@
             <span *ngIf="!installmentSummary.installment_dates.length" class="">${{beforeDesimal(installmentSummary.total_price)}}<sup>.{{afterDesimal(installmentSummary.total_price)}}</sup></span>
         </div>
         <!-- End -->
-        <div class="price_accordion" id="price_collapse" *ngIf="typeOf(installmentSummary)!='undefined'">
+        <div class="price_accordion" id="price_collapse" *ngIf="installmentSummary.installment_dates.length">
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <button class="card_header_btn" type="button" data-toggle="collapse" data-target="#instalment_acc" aria-expanded="true" aria-controls="instalment_acc">
-                        <span class="open_text" *ngIf="userLang!='es'">
-                            Payment Plans
-                            <!-- {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
-                            priceSummary.instalments?.instalment_date?.length-1 : 0 }}
-                            {{ installmentType[userLang][priceSummary.instalmentType] }}
-                            {{'installments_of' | translate}} ${{priceSummary.instalments?.instalment_date[1]?.instalment_amount | number : '1.2-2'}} -->
-                        </span>
-                        <span class="open_text" *ngIf="userLang=='es'">
+                        <span class="open_text">{{'payment_plans' | translate}}</span>
+                        <span class="open_text" *ngIf="false">
                             {{priceSummary.instalments?.instalment_date?.length-1 > 0 ?
                             priceSummary.instalments?.instalment_date?.length-1 : 0 }}
                             Pagos {{ installmentType[userLang][priceSummary.instalmentType] }}es
@@ -90,7 +84,7 @@
                         </span>
                         <span class="close_text">
                             <span>{{'total_installments' | translate}}</span>
-                            <span class="">${{beforeDesimal(insatllmentAmount)}}<sup>.{{afterDesimal(insatllmentAmount)}}</sup></span>
+                            <span class="">${{beforeDesimal(installmentSummary.remaining_amount)}}<sup>.{{afterDesimal(installmentSummary.remaining_amount)}}</sup></span>
                         </span>
                     </button>
                 </div>

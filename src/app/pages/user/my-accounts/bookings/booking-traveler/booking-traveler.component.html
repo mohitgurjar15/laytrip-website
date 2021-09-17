@@ -123,9 +123,9 @@
     </div>
     <div *ngFor="let traveler of travelers;let i = index; let last = last;">
         <div class="bottom_cta_btn" *ngIf="last == true && (bookingStatus == 0 || bookingStatus == 1)">
-            <a class="hover-link" (click)="open(content,laytrip_cart_id)">
+            <!-- <a class="hover-link" (click)="open(content,laytrip_cart_id)">
           {{'cancel_booking_title' | translate}}
-        </a>
+        </a> -->
         </div>
     </div>
 </div>

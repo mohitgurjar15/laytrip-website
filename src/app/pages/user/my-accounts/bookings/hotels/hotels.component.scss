@@ -4,7 +4,6 @@
 @import "../../../../../../_hotel.scss";
 @import "../../../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 #hotel_accordions_booking {
     .card {
         border: 1px solid #D6D6D6;
@@ -14,18 +13,15 @@
         border-bottom: 0;
         padding-bottom: 0;
         background: transparent;
-
         .card-header {
             background-color: transparent;
             border: none;
             padding: 15px;
-
             .card-link {
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
                 width: 100%;
-
                 &[aria-expanded="true"] {
                     &:after {
                         content: "";
@@ -38,7 +34,6 @@
                         transition: 0.3s;
                         right: 0;
                         border: none;
-
                         @include tab-view {
                             top: 20px;
                             right: 10px;
@@ -46,7 +41,6 @@
                         }
                     }
                 }
-
                 &[aria-expanded="false"] {
                     &:after {
                         position: relative;
@@ -59,7 +53,6 @@
                         transition: 0.3s;
                         right: 0;
                         border: none;
-
                         @include tab-view {
                             top: 20px;
                             right: 10px;
@@ -67,13 +60,11 @@
                         }
                     }
                 }
-
                 .header_image {
                     display: flex;
                     justify-content: flex-start;
                     align-items: flex-start;
                     width: 96%;
-
                     .title_image {
                         border: 2px solid $blue-text-one;
                         border-radius: 50%;
@@ -84,12 +75,10 @@
                         justify-content: center;
                         align-items: center;
                         margin-right: 15px;
-
                         @include tab-view {
                             margin-right: 5px;
                             width: 43.3px;
                         }
-
                         img {
                             width: 24px;
                             @include tab-view {
@@ -97,7 +86,6 @@
                             }
                         }
                     }
-
                     .hotel_dets {
                         display: flex;
                         justify-content: center;
@@ -107,7 +95,6 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         width: 100%;
-
                         .hotel_name {
                             font-size: 27px;
                             color: $text-black;
@@ -116,12 +103,10 @@
                             overflow: hidden;
                             text-overflow: ellipsis;
                             width: 100%;
-
                             @include tab-view {
                                 font-size: 24px;
                             }
                         }
-
                         .hotel_address {
                             font-size: 16px;
                             color: $mid_gray_bg;
@@ -129,7 +114,6 @@
                             overflow: hidden;
                             text-overflow: ellipsis;
                             width: 100%;
-
                             @include tab-view {
                                 font-size: 12px;
                             }
@@ -138,61 +122,50 @@
                 }
             }
         }
-
         .custom_body_box {
             padding: 0 15px 0;
-
             .hotel_card {
                 &.hotel_card_wrps {
                     margin-bottom: 10px;
                 }
-
                 &.card {
                     border-radius: 10px;
                     border: 1px solid $grayed_border;
                     //margin-top: 10px;
-
                     // &:last-child{
                     //     margin-bottom: 0px;
                     // }
                     .card-body {
                         padding: 10px;
-
                         .hotel_upper_inner {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
                             margin-bottom: 10px;
-
                             .col_boxs {
                                 color: $mid_gray_bg;
                                 font-size: 16px;
-
                                 @include tab-view {
                                     font-size: 14px;
                                     display: flex;
+                                    align-items: baseline;
                                 }
-
                                 span {
                                     color: $text-black;
                                     font-weight: 600;
                                     margin-right: 5px;
-
                                     @include tab-view {
                                         min-width: 80px;
                                     }
                                 }
                             }
-
                             .desk_box {
                                 @include tab-view {
                                     display: none;
                                 }
                             }
-
                             .responsive_boxes {
                                 display: none;
-
                                 @include tab-view {
                                     display: flex;
                                     width: 100%;
@@ -200,18 +173,15 @@
                                 }
                             }
                         }
-
                         .hotel_lower_inner {
                             span {
                                 display: flex;
                                 align-items: flex-start;
                                 color: $mid_gray_bg;
                                 font-size: 16px;
-
                                 @include tab-view {
                                     font-size: 12px;
                                 }
-
                                 &::before {
                                     content: "";
                                     padding: 7.5px;
@@ -220,7 +190,6 @@
                                     display: flex;
                                     margin-right: 5px;
                                     margin-top: 3px;
-
                                     @include tab-view {
                                         padding: 4px;
                                         margin-top: 4px;
@@ -228,13 +197,11 @@
                                 }
                             }
                         }
-
                         .cta_btn_wrps {
                             display: flex;
                             justify-content: flex-start;
                             align-items: center;
                             margin-top: 10px;
-
                             a {
                                 background-color: transparent;
                                 color: $text_light_yellow;
@@ -242,16 +209,13 @@
                                 box-shadow: none;
                                 font-size: 15px;
                                 padding: 0;
-
                                 @include tab-view {
                                     font-size: 12px;
                                 }
-
                                 &:hover {
                                     outline: none;
                                     border: none;
                                 }
-
                                 &:focus {
                                     outline: none;
                                     border: none;
@@ -267,7 +231,6 @@
 
 .sub_accordions {
     margin-top: 15px;
-
     .card-body {
         padding: 0;
     }

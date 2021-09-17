@@ -14,9 +14,9 @@ export const installmentType={
 // Author: xavier | 2021/7/29 | 2021/8/13
 // Description: Temporary workaround to avoid calling Google's Translate API
 export function translateAmenities(title: string) {
-    const userLang = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    const userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     if(userLang == 'es'){
-        for(let i = 0; i < amenitiesTranslations.length; i++) {
+        for(let i: number = 0; i < amenitiesTranslations.length; i++) {
             if(amenitiesTranslations[i].en == title) {
                 return amenitiesTranslations[i].es;
             }
@@ -55,7 +55,7 @@ export const CalendarTranslations = {
         clear: 'Clear',
     },
     es: {
-        firstDayOfWeek: 1,
+        firstDayOfWeek: 0,
         dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
         dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
         dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],

@@ -112,9 +112,7 @@ export class HotelSearchWidgetComponent implements OnInit {
       this.showCommingSoon = true;
     }
 
-    translate.onLangChange.subscribe(lang => {
-      this.setCalendarLocale();
-    });
+    translate.onLangChange.subscribe(lang => this.setCalendarLocale());
   }
 
   ngOnInit() {
@@ -194,8 +192,8 @@ export class HotelSearchWidgetComponent implements OnInit {
       let info;
       this.searchHotelInfo =
       {
-        latitude: this.route.snapshot.queryParams['x_coordinate'],
-        longitude: this.route.snapshot.queryParams['y_coordinate'],
+        latitude: this.route.snapshot.queryParams['x_coordinate'] ? this.route.snapshot.queryParams['x_coordinate'] : this.route.snapshot.queryParams['latitude'],
+        longitude: this.route.snapshot.queryParams['y_coordinate'] ? this.route.snapshot.queryParams['y_coordinate'] : this.route.snapshot.queryParams['longitude'],
         check_in: moment(this.route.snapshot.queryParams['check_in']).format('MM/DD/YYYY'),
         check_out: moment(this.checkOutDate).format('MM/DD/YYYY'),
         city_id: this.route.snapshot.queryParams['city_id'],
@@ -312,6 +310,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (this.searchHotelInfo.hotel_name) {
       queryParams.hotel_name = this.searchHotelInfo.hotel_name;      
     }
+    queryParams.latitude = 
     queryParams.hotel_id = this.searchHotelInfo.type == "hotel" ? parseFloat(this.searchHotelInfo.hotel_id) : '';
     queryParams.itenery = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.occupancies)));
     queryParams.location = btoa(encodeURIComponent(JSON.stringify(this.searchHotelInfo.location))).replace(/\=+$/, '');
