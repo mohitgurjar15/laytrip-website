@@ -29,8 +29,13 @@ export class CarouselComponent  implements OnInit{
   previousChangeCounter=0;
   landingPageName;
   currentSlide = 0;
-
+showSlide = false;
   ngOnInit() {
+    if(typeof this.slides != 'undefined'){
+      this.showSlide = true
+    }else{
+      this.showSlide = false
+    }
     this.landingPageName = this.route.snapshot.queryParams['utm_source']
     this.homeService.getSwipeSlide.subscribe((direction)=>{
       if(direction=='left'){

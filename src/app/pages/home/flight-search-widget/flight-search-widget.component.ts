@@ -91,6 +91,8 @@ export class FlightSearchWidgetComponent implements OnInit {
   timerTimeStamp;
   isLangingPage = false
   landingPageName;
+  minConfigDay;
+  maxConfigDay;
 
   constructor(
     public commonFunction: CommonFunction,
@@ -147,17 +149,16 @@ export class FlightSearchWidgetComponent implements OnInit {
           this.fromSearch = Object.assign({}, airports[slide.location.from.airport_code]);
           this.toSearch = Object.assign({}, airports[slide.location.to.airport_code]);
           this.searchFlightInfo.departure = this.fromSearch.code;
-          this.departureDate = moment().add(91, 'days').toDate();
+          this.departureDate = moment().add(this.landingPageName === 'sergio' ? 61 : 91, 'days').toDate();
           this.searchFlightInfo.arrival = this.toSearch.code;
 
           if (this.isRoundTrip) {
-            this.returnDate = moment().add(97, 'days').toDate();
+            this.returnDate = moment().add(this.landingPageName === 'sergio' ? 67 : 97, 'days').toDate();
             this.rangeDates = [this.departureDate, this.returnDate];
           }
         }
 
       })
-
     }
 
 
@@ -205,14 +206,15 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.fromSearch = airports['NYC'];
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.toSearch = airports[keys];
-        this.departureDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
+        this.departureDate = this.isRefferal ? moment().add(this.landingPageName === 'sergio' ? 61 : 91, 'days').toDate() : moment().add(2, 'days').toDate();
         this.searchFlightInfo.arrival = this.toSearch.code;
 
         if (this.isRoundTrip) {
-          this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(97, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate()];
+          this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(this.landingPageName === 'sergio' ? 67 : 97, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate()];
         }
       }
     });
+
     //delete BehaviorSubject at the end
     this.homeService.removeToString('flight');
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
@@ -244,14 +246,10 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   setDefaultDate() {
-    if (this.landingPageName === '421' || typeof this.landingPageName === 'undefined') {
-      this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
+      this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(this.landingPageName === 'sergio' ? 61 : 91, 'days').toDate() : moment().add(2, 'days').toDate();
       this.returnDate = this.isRefferal ? moment(this.departureDate).add(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
-    } else if (this.landingPageName === 'sergio') {
-      this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(60, 'days').toDate() : moment().add(2, 'days').toDate();
-      this.returnDate = this.isRefferal ? moment(this.departureDate).add(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
-    }
   }
+
   destinationChangedValue(event) {
     if (event && event.key && event.key === 'fromSearch') {
       this.fromSearch = event.value;

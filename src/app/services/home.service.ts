@@ -25,7 +25,6 @@ export class HomeService {
     private landingPageData : any = new BehaviorSubject({});
     getLandingPageData = this.landingPageData.asObservable();
 
-
     constructor(
         private http: HttpClient,
         private commonFunction: CommonFunction
