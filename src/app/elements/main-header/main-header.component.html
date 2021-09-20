@@ -27,34 +27,24 @@
                                 <a [routerLink]="['/about']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" class="nav-link hover-link">{{'laytrip_info_page_title_3' | translate}}</a>
                             </li>
 
-                            <li class="nav-item disabled" *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'">
+                            <!-- <li class="nav-item disabled" *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'">
                                 <a class="nav-link hover-link" [routerLink]="['/account/lay-credit-points']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
                                     <span class="lay_points_dot" id="layPoints">{{showTotalLayCredit }}
                                         {{'point' | translate}}</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="nav-item" [ngClass]="{'dr_pay':countryCode==='DR'}" *ngIf="countryCode==='DR'">
                                 <a class="nav-link hover-link" [routerLink]="['/partial-payment']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'installment_payment' | translate}}</a>
                             </li>
-                            <li class="nav-item" *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode==='DR'">
+                            <!-- <li class="nav-item" *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode==='DR'">
                                 <a class="nav-link hover-link" [ngClass]="{'dr_coin': countryCode==='DR'}" [routerLink]="['/account/lay-credit-points']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
                                     <img *ngIf="countryCode!=='DR'" class="default-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits.svg" alt="Credits Icon">
                                     <img *ngIf="countryCode!=='DR'" class="active-icon" src="{{s3BucketUrl}}assets/images/icon/ic_Laycredits-active.svg" alt="Credits Icon">
                                     <span id="layPoints">{{showTotalLayCredit}}</span>
                                 </a>
-                            </li>
-
-                            <li class="nav-item login_li" *ngIf="!isLoggedIn || userDetails.roleId == 7">
-
-                                <a class="nav-link login_btn_text hover-link" id="login_btn" (click)="openSignModal()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
-                                        <defs></defs>
-                                        <path class="a"
-                                            d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
-                                    </svg> {{'sign_in' | translate}}
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            </li> -->
+                            
+                            <li class="nav-item login_li">
                                 <div class="cta_drop_wrp">
                                     <div class="dropdown cus_drop">
                                         <a class="dropdown-toggle hover-link" data-toggle="dropdown">{{ selectedLanunage.name }}<span class="caret"></span></a>
@@ -64,22 +54,32 @@
                                     </div>
                                 </div>
                             </li>
+                            <li class="nav-item" *ngIf="!isLoggedIn || userDetails.roleId == 7">
+                                <a class="nav-link cstm_theme_btn_comman header_signin_btn" id="login_btn" (click)="openSignModal()">
+                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
+                                        <defs></defs>
+                                        <path class="a"
+                                            d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
+                                    </svg>  -->
+                                    {{'sign_in' | translate}}
+                                </a>
+                            </li>
 
                             <li class="nav-item responsive_li" *ngIf="isLoggedIn && userDetails.roleId != 7">
                                 <div class="dropdown account_ddown account_prof">
                                     <a class="nav-link dropdown-toggle hover-link" data-toggle="dropdown" aria-expanded="false">
                                         <img src="{{userDetails.profilePic || defaultImage}}" onerror="this.onerror=null;this.src='https://d2q1prebf1m2s9.cloudfront.net/assets/images/profile_im.svg';" alt="Profile Image">
-                                        <span>{{username}}</span>
+                                        <span>Hi, {{username}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="hover-link" [routerLink]="['/account']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'my_account_header' | translate}}</a></li>
                                         <li><a [routerLink]="['/account/bookings']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'my_bookings' | translate}}</a></li>
-                                        <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'" class="disabled">
+                                        <!-- <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'" class="disabled">
                                             <a class="nav-link hover-link " [routerLink]="['/account/lay-credit-points']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
                                                 <span class="lay_points_dot ok" id="layPoints">
                                                     {{'point' | translate}}</span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li><a class="hover-link" (click)="onLoggedout()">{{'sign_out' | translate}}</a></li>
                                     </ul>
                                 </div>
@@ -90,7 +90,7 @@
                                         <a (click)="redirectToPayment()">
                                             <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="">
                                             <span class="cart_count">{{cartItemsCount ? cartItemsCount : 0}}</span>
-                                    </a>
+                                        </a>
                                     </span>
                                 </div>
                             </li>
@@ -111,6 +111,7 @@
                 </nav>
             </div>
             <div class="show_resposive">
+                <div><a [routerLink]="['/about']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" class="nav-link hover-link">{{'laytrip_info_page_title_3' | translate}}</a></div>
                 <div class="cta_drop_wrp">
                     <div class="dropdown cus_drop">
                         <!-- <a class="dropdown-toggle hover-link" data-toggle="dropdown">English<span class="caret"></span></a>
@@ -126,26 +127,26 @@
                         </ul>
                     </div>
                 </div>
-                <a *ngIf="!isLoggedIn" class="nav-link login_btn_text hover-link" (click)="openSignModal()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
+                <a *ngIf="!isLoggedIn" class="nav-link cstm_theme_btn_comman header_signin_btn" (click)="openSignModal()">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
                         <defs></defs>
-                        <path class="a"
-                            d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
-                    </svg> {{'sign_in' | translate}}
+                        <path class="a" d="M24.753,4.247A14.5,14.5,0,0,0,4.247,24.753,14.5,14.5,0,0,0,24.753,4.247ZM7.269,25.057a7.342,7.342,0,0,1,14.462,0,12.773,12.773,0,0,1-14.462,0ZM9.89,12.68a4.61,4.61,0,1,1,4.61,4.61A4.616,4.616,0,0,1,9.89,12.68ZM23.2,23.878a9.056,9.056,0,0,0-5.264-5.91,6.31,6.31,0,1,0-6.876,0A9.054,9.054,0,0,0,5.8,23.878a12.8,12.8,0,1,1,17.405,0Zm0,0" />
+                    </svg> -->
+                    {{'sign_in' | translate}}
                 </a>
                 <div class="dropdown account_ddown" *ngIf="isLoggedIn && userDetails.roleId != 7">
                     <span class="nav-link mobile_span dropdown-toggle hover-link" data-toggle="dropdown" aria-expanded="false">
                         <img src="{{userDetails.profilePic || defaultImage}}" alt="Profile Image">
-                        <span>{{userDetails.firstName}}</span>
+                        <span>Hi, {{userDetails.firstName}}</span>
                     </span>
                     <ul class="dropdown-menu">
                         <li><a class="hover-link" [routerLink]="['/account']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'my_account_header' | translate}}</a></li>
                         <li><a [routerLink]="['/account/bookings']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'my_bookings' | translate}}</a></li>
-                        <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'" class="disabled">
+                        <!-- <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'" class="disabled">
                             <a class="nav-link hover-link " [routerLink]="['/account/lay-credit-points']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
                                 <span class="lay_points_dot ok" id="layPoints">{{'points' | translate}}</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li><a class="hover-link" (click)="onLoggedout()">{{'sign_out' | translate}}</a></li>
                     </ul>
                 </div>

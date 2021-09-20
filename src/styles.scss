@@ -5113,3 +5113,28 @@ ngx-otp-input {
         }
     }
 }
+
+.cstm_theme_btn_comman{
+    font-size: 16px;
+    color: #fff !important;
+    font-family: $primary-font;
+    padding: 8px 34px;
+    background: #F726C0 !important;
+    border-radius: 50px;
+    font-weight: 600;
+    display: inline-block;
+    cursor: pointer;
+    &:hover{
+        color: #fff;
+    }
+    &.banner_new_btn{
+        margin-top: 24px;
+    }
+    &.header_signin_btn{
+        font-size: 14px;
+        padding: 5px 24px !important;
+        @include ipad-view{
+            padding: 5px 20px !important;
+        }
+    }
+}

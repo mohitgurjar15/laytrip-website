@@ -4,7 +4,6 @@
 @import "../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-
 .deal_sec {
     width: 100%;
     padding: 20px 0 55px;
@@ -21,20 +20,11 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        flex-flow: column;
         border-radius: 10px;
-        max-height: 300px;
-        height: 285px;
-        border-radius: 20px;
 
-        &:hover {
-            img {
-                transform: scale(1.1);
-            }
-        }
-
-        img {
+        .deal_img_new {
             width: 100%;
-            border-radius: 20px;
             transform: scale(1);
             transition: 1s;
             object-fit: cover;
@@ -45,74 +35,110 @@
             -o-object-position: center;
             object-position: center;
         }
+        &:hover {
+            .deal_img_new {
+                transform: scale(1.1);
+            }
+        }
 
         .image_about_text {
-            position: absolute;
-            bottom: 15px;
-            display: flex;
-            align-items: center;
-
-            @include mini-screen {
-                text-align: center;
-                margin: 5px;
-            }
-
+            text-align: center;
             button {
-                width: 100%;
-                height: 40px;
-                padding: 10px 25px;
-                background: $background-white;
-                border-radius: 25px;
-                border: 1px solid $background-white;
                 font-size: 17px;
                 color: $active-tab-text;
                 transition: 0.3s;
-                position: relative;
-                z-index: 9;
-                overflow: hidden;
-                line-height: 1px;
-                white-space: normal;
+                border: none;
+                padding: 8px 15px;
+                width: 100%;
+                max-width: 176px;
+                border-radius: 20px;
+            }
+        }
+        .deal_header_img {
+            position: relative;
+            width: 100%;
+            height: 214px;
+            .deal_type_icn {
+                position: absolute;
+                right: 43px;
+                bottom: -30%;
+                padding: 15px;
+                border-radius: 50%;
+                font-size: 30px;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 60px;
+                width: 60px;
+                transform: translate(0, -50%);
+                z-index: 99;
+            }
+        }
 
-                @include mini-screen {
-                    width: 100%;
-                    height: auto;
-                    line-height: 25px;
+        &.flight_deal {
+            .deal_header_img {
+                .deal_type_icn {
+                    background: #0046fe;
                 }
+            }
+            .image_about_text {
+                button {
+                    background: #0046fe;
+                    color: $text-white;
+                }
+            }
+        }
+        &.hotel_deal {
+            .deal_header_img {
+                .deal_type_icn {
+                    background: #f726c0;
+                }
+            }
+            .image_about_text {
+                button {
+                    background: #f726c0;
+                    color: $text-white;
+                }
+            }
+        }
+        .deal_main_section {
+            padding: 22px 44px 30px;
 
-                @include tab-view {
+            h3 {
+                font-size: 24px;
+                font-weight: 600;
+                margin-bottom: 0;
+                line-height: normal;
+                letter-spacing: 0.4px;
+                color: #000;
+            }
+            p {
+                color: $mid_gray_bg;
+                font-size: 16px;
+                font-weight: 400;
+                letter-spacing: 0.4px;
+                margin-bottom: 25px;
+            }
+            .payment_option {
+                padding: 7px 0;
+                font-size: 16px;
+                border-top: 0.4px solid #c8c8c8;
+                border-bottom: 0.4px solid #c8c8c8;
+                margin-bottom: 30px;
+                text-align: center;
+                color: $mid_gray_bg;
+                letter-spacing: 0.4px;
+                span {
+                    display: block;
                     font-size: 14px;
-                    padding: 8px 20px;
-                }
-
-                // &::before {
-                //     content: "";
-                //     position: absolute;
-                //     top: 0;
-                //     left: 0;
-                //     width: 100%;
-                //     height: 0%;
-                //     background: $background-white;
-                //     z-index: -1;
-                //     transition: 0.8s;
-                //     border-radius: 0 0 50% 50%;
-                // }
-
-                &:hover {
-                    border: 1px solid $active-tab-text;
-                    color: $active-tab-text;
-                    // &:before {
-                    //     height: 190%;
-                    // }
                 }
             }
         }
     }
 
     .deal_sec_wrapper {
-        display: flex;
         width: 100%;
-        justify-content: space-between;
-        padding: 10px 80px;
 
         @include tab-view {
             flex-direction: column;
@@ -120,9 +146,9 @@
         }
 
         .deal_section_row {
-            flex: 1;
-            margin: 15px 20px;
-
+            margin: 5px;
+            border: 0.5px solid $mid_gray_bg;
+            border-radius: 10px;
             .deal_sec_inner {
                 overflow: hidden;
                 position: relative;
@@ -130,20 +156,15 @@
                 width: 100%;
                 display: flex;
                 justify-content: center;
-                border-radius: 10px;
-                max-height: 300px;
-                height: 285px;
-                border-radius: 20px;
 
                 &:hover {
-                    img {
+                    .deal_img_new {
                         transform: scale(1.1);
                     }
                 }
 
-                img {
+                .deal_img_new {
                     width: 100%;
-                    border-radius: 20px;
                     transform: scale(1);
                     transition: 1s;
                     object-fit: cover;
@@ -156,60 +177,8 @@
                 }
 
                 .image_about_text {
-                    position: absolute;
-                    bottom: 15px;
-
-                    @include mini-screen {
-                        text-align: center;
-                    }
-
-                    button {
-                        width: 100%;
-                        height: 100%;
-                        padding: 10px 25px;
-                        background: $background-white;
-                        border-radius: 25px;
-                        border: 1px solid $background-white;
-                        font-size: 17px;
-                        color: $active-tab-text;
-                        transition: 0.3s;
-                        position: relative;
-                        z-index: 9;
-                        overflow: hidden;
-                        white-space: normal;
-                        line-height: initial;
-
-                        @include mini-screen {
-                            width: 80%;
-                        }
-
-                        @include tab-view {
-                            font-size: 14px;
-                            padding: 8px 20px;
-                            width: 100%;
-                        }
-
-                        // &::before {
-                        //     content: "";
-                        //     position: absolute;
-                        //     top: 0;
-                        //     left: 0;
-                        //     width: 100%;
-                        //     height: 0%;
-                        //     background: $background-white;
-                        //     z-index: -1;
-                        //     transition: 0.8s;
-                        //     border-radius: 0 0 50% 50%;
-                        // }
-
-                        &:hover {
-                            border: 1px solid $active-tab-text;
-                            color: $active-tab-text;
-                            // &:before {
-                            //     height: 190%;
-                            // }
-                        }
-                    }
+                    // position: absolute;
+                    // bottom: 15px;
                 }
             }
         }
@@ -219,25 +188,32 @@
         font-size: 12px;
         line-height: 15px;
         color: $mid_gray_bg;
-        text-align: center;
+        text-align: left;
         width: 100%;
         display: block;
         margin: 15px 0 0;
         padding: 0;
+        max-width: 750px;
 
-        @include tab-view{
+        @include tab-view {
             font-size: 8px;
             line-height: 11px;
             padding: 0 15px;
         }
 
         a {
-            color: #0C7BFF;
+            color: #0c7bff;
             text-decoration: none;
         }
     }
+    // .swiper-wrapper {
+    //     .swiper-slide {
+    //         .deal_section_row {
+    //             margin-bottom: 25px;
+    //         }
+    //     }
+    // }
 }
-
 
 .bg-yellow {
     background-color: yellow;

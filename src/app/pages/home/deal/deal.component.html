@@ -24,30 +24,71 @@
 <!-- deal section skeleton loader ends -->
 <section class="deal_sec" *ngIf="list.length > 0 && commonFunction.isRefferal()" (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
-        <div class="row">
+        <div class="deal_sec_wrapper">
+            <!-- <i class="swiper-button-prev-unique" role="button" aria-label="Previous slide"></i> -->
             <swiper (swiper)="setThumbsSwiper($event)" [breakpoints]="breakpoints" [navigation]="true" [pagination]="{ clickable: true }" [slidesPerView]="1" [spaceBetween]="10" *ngIf="list.length > 0">
                 <ng-template swiperSlide *ngFor="let item of list;">
-
-                    <div class="deal_sec_inner" *ngIf="moduleId == 1">
-                        <img [src]="item?.to?.image" alt="Deal Image" />
-                        <div class="image_about_text">
-                            <button (click)="btnDealClick(item?.to)">{{item?.to?.city}}</button>
+                    <div class="deal_section_row mb-5" *ngIf="moduleId == 1">
+                        <div class="deal_sec_inner flight_deal" >
+                            <div class="deal_header_img">
+                                <div class="overflow-hidden h-100">
+                                    <img class="deal_img_new" [src]="item?.to?.image" alt="Deal Image" />
+                                </div>
+                                <div class="deal_type_icn">
+                                    <i class="fa fa-plane" aria-hidden="true"></i> <!--fa-bed-->
+                                </div>
+                            </div>
+                            <div class="deal_main_section">
+                                <h3>{{item?.to?.city}}</h3>
+                                <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> Brazil {{item.code}} {{item.lat}}</p>
+                                <div class="payment_option">
+                                    Payment options available:
+                                    <span>Weekly, bi-weekly or monthly</span>
+                                </div>
+                                <div class="image_about_text">
+                                    <button (click)="btnDealClick(item?.to)">Find deal</button>
+                                </div>
+                            </div>
+                            <!-- <img [src]="item?.to?.image" alt="Deal Image" />
+                            <div class="image_about_text">
+                                <button (click)="btnDealClick(item?.to)">{{item?.to?.city}}</button>
+                            </div> -->
                         </div>
                     </div>
-                    <div class="deal_sec_inner" *ngIf="moduleId == 3">
-                        <img [src]="item?.location?.image" alt="Deal Image" />
-                        <div class="image_about_text">
-                            <button (click)="btnDealClick(item?.location)">{{item?.location?.city}}</button>
+                    <div class="deal_section_row" *ngIf="moduleId == 3">
+                        <div class="deal_sec_inner hotel_deal">
+                            <div class="deal_header_img">
+                                <div class="overflow-hidden h-100">
+                                    <img class="deal_img_new" [src]="item?.location?.image" alt="Deal Image" />
+                                </div>
+                                <div class="deal_type_icn">
+                                    <i class="fa fa-bed" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="deal_main_section">
+                                <h3>{{item?.location?.city}}</h3>
+                                <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> Brazil {{item.code}} {{item.lat}}</p>
+                                <div class="payment_option">
+                                    Payment options available:
+                                    <span>Weekly, bi-weekly or monthly</span>
+                                </div>
+                                <div class="image_about_text">
+                                    <button (click)="btnDealClick(item?.location)">Find deal</button>
+                                </div>
+                            </div>
+                            <!-- <img [src]="item?.location?.image" alt="Deal Image" />
+                            <div class="image_about_text">
+                                <button (click)="btnDealClick(item?.location)">{{item?.location?.city}}</button>
+                            </div> -->
                         </div>
                     </div>
                 </ng-template>
             </swiper>
-
-            <p class="terms_txt">
-                {{'promo_421_legal_1' | translate}} <a target="_blank" [routerLink]="['/']"
-                    [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">laytrip.com</a>. <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate | titlecase}}</a> {{'promo_421_legal_2' | translate}}
-            </p>
+            <!-- <i class="swiper-button-next-unique" role="button" aria-label="Next slide"></i> -->
         </div>
+            <p class="terms_txt">
+                {{'promo_421_legal_1' | translate}} <a target="_blank" [routerLink]="['/']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">laytrip.com</a>. <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate | titlecase}}</a> {{'promo_421_legal_2' | translate}}
+            </p>
     </div>
 </section>
 <!-- End Deals section-->
@@ -55,34 +96,50 @@
 
 <section class="deal_sec" *ngIf="!commonFunction.isRefferal()" (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
-        <div class="row">
-            <div class="deal_sec_wrapper" *ngIf="list.length <= 0">
-                <div class="deal_section_row">
-                    <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
-                        <div class="image_about_text">
-                            <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
-                        </div>
+        <div class="deal_sec_wrapper" *ngIf="list.length <= 0">
+            <div class="deal_section_row">
+                <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
+                    <div class="image_about_text">
+                        <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
                     </div>
                 </div>
-                <div class="deal_section_row">
-                    <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
-                        <div class="image_about_text">
-                            <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
+            </div>
+            <div class="deal_section_row">
+                <div class="deal_sec_inner fb_animation pb-5 pt-5 mb-3" style="height: 285px;">
+                    <div class="image_about_text">
+                        <button class="fb_animation" style="width: 180px; height: 40px; pointer-events: none;"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="deal_sec_wrapper" *ngIf="list.length > 0">
+            <div class="row justify-content-center">
+                <div class="col-lg-4" *ngFor="let item of list;">
+                    <div class="deal_section_row">
+                        <div class="deal_sec_inner flight_deal"> <!--hotel_deal-->
+                            <div class="deal_header_img">
+                                <div class="overflow-hidden h-100">
+                                    <img class="deal_img_new" [src]="item?.image" alt="Deal Image" />
+                                </div>
+                                <div class="deal_type_icn">
+                                    <i class="fa fa-plane" aria-hidden="true"></i> <!--fa-bed-->
+                                </div>
+                            </div>
+                            <div class="deal_main_section">
+                                <h3>{{item?.city}}</h3>
+                                <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> Brazil {{item.code}} {{item.lat}}</p>
+                                <div class="payment_option">
+                                    Payment options available:
+                                    <span>Weekly, bi-weekly or monthly</span>
+                                </div>
+                                <div class="image_about_text">
+                                    <button (click)="btnDealClick(item)">Find deal</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="deal_sec_wrapper" *ngIf="list.length > 0">
-                <div class="deal_section_row" *ngFor="let item of list;">
-                    <div class="deal_sec_inner">
-                        <img [src]="item?.image" alt="Deal Image" />
-                        <div class="image_about_text">
-                            <button (click)="btnDealClick(item)">{{'find_deals' | translate}} {{item?.city}}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
