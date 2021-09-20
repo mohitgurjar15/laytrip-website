@@ -22,12 +22,19 @@ export class CcpaComponent implements OnInit {
   ngOnInit(): void {
     $('body').addClass('cms-bgColor');
     window.scroll(0, 0);
+    const userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     const pageType = 'ccpa';
     this.loading = true;
     this.genericService.getCmsByPageType(pageType).subscribe((res: any) => {
-      this.cmsData = res;
+      switch(userLang) {
+        case "es":
+          this.cmsData = res.esContent;
+          break;
+        default:
+          this.cmsData = res.enContent;
+          break;
+      }
       this.loading = false;
     });
   }
-
 }
