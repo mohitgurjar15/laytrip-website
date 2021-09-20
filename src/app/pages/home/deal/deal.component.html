@@ -25,8 +25,8 @@
 <section class="deal_sec" *ngIf="list.length > 0 && commonFunction.isRefferal()" (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
         <div class="deal_sec_wrapper">
-            <!-- <i class="swiper-button-prev-unique" role="button" aria-label="Previous slide"></i> -->
-            <swiper (swiper)="setThumbsSwiper($event)" [breakpoints]="breakpoints" [navigation]="true" [pagination]="{ clickable: true }" [slidesPerView]="1" [spaceBetween]="10" *ngIf="list.length > 0">
+            <div class="swiper-button-prev" #prevEl></div>
+            <swiper (swiper)="setThumbsSwiper($event)" [breakpoints]="breakpoints" [navigation]="{ prevEl: prevEl, nextEl: nextEl }" [pagination]="{ clickable: true }" [slidesPerView]="1" [spaceBetween]="10" *ngIf="list.length > 0">
                 <ng-template swiperSlide *ngFor="let item of list;">
                     <div class="deal_section_row mb-5" *ngIf="moduleId == 1">
                         <div class="deal_sec_inner flight_deal" >
@@ -55,7 +55,7 @@
                             </div> -->
                         </div>
                     </div>
-                    <div class="deal_section_row" *ngIf="moduleId == 3">
+                    <div class="deal_section_row mb-5" *ngIf="moduleId == 3">
                         <div class="deal_sec_inner hotel_deal">
                             <div class="deal_header_img">
                                 <div class="overflow-hidden h-100">
@@ -84,7 +84,7 @@
                     </div>
                 </ng-template>
             </swiper>
-            <!-- <i class="swiper-button-next-unique" role="button" aria-label="Next slide"></i> -->
+           <div class="swiper-button-next" #nextEl></div>
         </div>
             <p class="terms_txt">
                 {{'promo_421_legal_1' | translate}} <a target="_blank" [routerLink]="['/']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">laytrip.com</a>. <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate | titlecase}}</a> {{'promo_421_legal_2' | translate}}

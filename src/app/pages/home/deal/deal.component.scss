@@ -73,6 +73,11 @@
                 width: 60px;
                 transform: translate(0, -50%);
                 z-index: 99;
+                @include ipad-view{
+                    right: 30px;
+                    width: 56px;
+                    height: 56px;
+                }
             }
         }
 
@@ -112,6 +117,9 @@
                 line-height: normal;
                 letter-spacing: 0.4px;
                 color: #000;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
             p {
                 color: $mid_gray_bg;
@@ -134,11 +142,30 @@
                     font-size: 14px;
                 }
             }
+
+            @include tab-view{
+                padding: 25px;
+                h3{
+                    font-size: 22px;
+                    line-height: 33px;
+                }
+                p{
+                    font-size: 12px;
+                }
+                .payment_option {
+                    font-size: 14px;
+                    span{
+                        font-size: 12px;
+                    }
+                }
+            }
         }
     }
 
     .deal_sec_wrapper {
         width: 100%;
+        position: relative;
+        overflow-x: visible;
 
         @include tab-view {
             flex-direction: column;
@@ -180,6 +207,62 @@
                     // position: absolute;
                     // bottom: 15px;
                 }
+            }
+        }
+
+        .swiper-button-prev {
+            background-image: url(src/assets/images/left_arrow.svg);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            width: 60px;
+            height: 60px;
+            opacity: 1;
+            transition: 1s;
+            left: -65px;
+            &::after {
+                content: none;
+            }
+            @media (max-width: 1245px) {
+                width: 45px;
+                height: 45px;
+                left: -45px;
+            }
+            @include tab-max{
+                width: 33px;
+                height: 33px;
+                left: -30px;
+            }
+            @include tab-view{
+                display: none;
+            }
+        }
+    
+        .swiper-button-next {
+            background-image: url(src/assets/images/right_arrow.svg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+            width: 60px;
+            height: 60px;
+            opacity: 1;
+            transition: 1s;
+            right: -65px;
+            &::after {
+                content: none;
+            }
+            @media (max-width: 1245px) {
+                width: 45px;
+                height: 45px;
+                right: -45px;
+            }
+            @include tab-max{
+                width: 33px;
+                height: 33px;
+                right: -30px;
+            }
+            @include tab-view{
+                display: none;
             }
         }
     }

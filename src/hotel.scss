@@ -7228,46 +7228,6 @@ agm-map {
 .swiper-container {
     width: 100%;
     margin: 0 auto;
-
-    @include tab-view{
-        margin: 0 15px;
-    }
-
-    .swiper-button-prev {
-        background-image: url(src/assets/images/left_arrow.svg);
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-        width: 60px;
-        height: 60px;
-        opacity: 1;
-        transition: 1s;
-        left: 0;
-        &::after {
-            content: none;
-        }
-        &:hover {
-            opacity: 1;
-        }
-    }
-
-    .swiper-button-next {
-        background-image: url(src/assets/images/right_arrow.svg);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-        width: 60px;
-        height: 60px;
-        opacity: 1;
-        transition: 1s;
-        right: -70px;
-        &::after {
-            content: none;
-        }
-        &:hover {
-            opacity: 1;
-        }
-    }
     .swiper-pagination{
         .swiper-pagination-bullet{
             &.swiper-pagination-bullet-active{
