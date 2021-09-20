@@ -221,6 +221,7 @@
         font-size: 40px;
         font-weight: 600;
         color: $text-white;
+        margin-bottom: 0;
         span{
             font-weight: 700;
             display: block;
@@ -231,10 +232,28 @@
         }
         @include tab-view{
             font-size: 24px;
+            span{
+                font-size: 20px;
+            }
+        }
+        @include mobile-view{
+            font-size: 20px;
+            span{
+                font-size: 16px;
+            }
         }
     }
     a{
         margin-top: 25px;
         min-width: 220px;
+        @include mobile-view{
+            margin-top: 17px;
+        }
+    }
+    @include tab-view{
+        padding: 60px 0;
+    }
+    @include mobile-view{
+        padding: 80px 0;
     }
 }

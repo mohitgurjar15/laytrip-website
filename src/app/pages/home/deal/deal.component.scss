@@ -4,7 +4,6 @@
 @import "../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-
 .deal_sec {
     width: 100%;
     padding: 20px 0 55px;
@@ -55,11 +54,11 @@
                 border-radius: 20px;
             }
         }
-        .deal_header_img{
+        .deal_header_img {
             position: relative;
             width: 100%;
             height: 214px;
-            .deal_type_icn{
+            .deal_type_icn {
                 position: absolute;
                 right: 43px;
                 bottom: -30%;
@@ -77,36 +76,36 @@
             }
         }
 
-        &.flight_deal{
-            .deal_header_img{
-                .deal_type_icn{
-                    background:#0046FE;
+        &.flight_deal {
+            .deal_header_img {
+                .deal_type_icn {
+                    background: #0046fe;
                 }
             }
             .image_about_text {
-                button{
-                    background:#0046FE;
+                button {
+                    background: #0046fe;
                     color: $text-white;
                 }
             }
         }
-        &.hotel_deal{
-            .deal_header_img{
-                .deal_type_icn{
-                    background:#F726C0;
+        &.hotel_deal {
+            .deal_header_img {
+                .deal_type_icn {
+                    background: #f726c0;
                 }
             }
             .image_about_text {
-                button{
-                    background:#F726C0;
+                button {
+                    background: #f726c0;
                     color: $text-white;
                 }
             }
         }
-        .deal_main_section{
+        .deal_main_section {
             padding: 22px 44px 30px;
 
-            h3{
+            h3 {
                 font-size: 24px;
                 font-weight: 600;
                 margin-bottom: 0;
@@ -114,23 +113,23 @@
                 letter-spacing: 0.4px;
                 color: #000;
             }
-            p{
+            p {
                 color: $mid_gray_bg;
                 font-size: 16px;
                 font-weight: 400;
                 letter-spacing: 0.4px;
                 margin-bottom: 25px;
             }
-            .payment_option{
+            .payment_option {
                 padding: 7px 0;
                 font-size: 16px;
-                border-top: 0.4px solid #C8C8C8;
-                border-bottom: 0.4px solid #C8C8C8;
+                border-top: 0.4px solid #c8c8c8;
+                border-bottom: 0.4px solid #c8c8c8;
                 margin-bottom: 30px;
                 text-align: center;
                 color: $mid_gray_bg;
                 letter-spacing: 0.4px;
-                span{
+                span {
                     display: block;
                     font-size: 14px;
                 }
@@ -189,25 +188,32 @@
         font-size: 12px;
         line-height: 15px;
         color: $mid_gray_bg;
-        text-align: center;
+        text-align: left;
         width: 100%;
         display: block;
         margin: 15px 0 0;
         padding: 0;
+        max-width: 750px;
 
-        @include tab-view{
+        @include tab-view {
             font-size: 8px;
             line-height: 11px;
             padding: 0 15px;
         }
 
         a {
-            color: #0C7BFF;
+            color: #0c7bff;
             text-decoration: none;
         }
     }
+    // .swiper-wrapper {
+    //     .swiper-slide {
+    //         .deal_section_row {
+    //             margin-bottom: 25px;
+    //         }
+    //     }
+    // }
 }
-
 
 .bg-yellow {
     background-color: yellow;

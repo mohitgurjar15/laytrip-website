@@ -7227,7 +7227,6 @@ agm-map {
 
 .swiper-container {
     width: 100%;
-    height: 330px;
     margin: 0 auto;
 
     @include tab-view{
@@ -7235,15 +7234,15 @@ agm-map {
     }
 
     .swiper-button-prev {
-        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/left_arrows.svg);
+        background-image: url(src/assets/images/left_arrow.svg);
         background-repeat: no-repeat;
-        padding: 14px;
+        background-size: contain;
         background-position: center center;
-        background-size: 20px;
-        width: auto;
-        height: 20px;
-        opacity: 0;
+        width: 60px;
+        height: 60px;
+        opacity: 1;
         transition: 1s;
+        left: 0;
         &::after {
             content: none;
         }
@@ -7253,15 +7252,15 @@ agm-map {
     }
 
     .swiper-button-next {
-        background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/right_arrows.svg);
+        background-image: url(src/assets/images/right_arrow.svg);
         background-repeat: no-repeat;
-        padding: 14px;
         background-position: center center;
-        background-size: 20px;
-        width: auto;
-        height: 20px;
-        opacity: 0;
+        background-size: contain;
+        width: 60px;
+        height: 60px;
+        opacity: 1;
         transition: 1s;
+        right: -70px;
         &::after {
             content: none;
         }

@@ -12,7 +12,8 @@ import SwiperCore, {
   Zoom,
   Autoplay,
   Thumbs,
-  Controller
+  Controller,
+  Swiper
 } from "swiper/core";
 
 // install Swiper components
@@ -43,10 +44,10 @@ export class DealComponent implements OnInit {
   list = [];
   breakpoints = {
     320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup:1 },
-    520: { slidesPerView: 2, spaceBetween: 10 ,slidesPerGroup:2},
-    640: { slidesPerView: 2, spaceBetween: 20 ,slidesPerGroup:2},
-    768: { slidesPerView: 2, spaceBetween: 40 ,slidesPerGroup:2},
-    1024: { slidesPerView: 2, spaceBetween: 30 ,slidesPerGroup:2}
+    520: { slidesPerView: 1, spaceBetween: 10 ,slidesPerGroup:2},
+    767: { slidesPerView: 2, spaceBetween: 20 ,slidesPerGroup:2},
+    991: { slidesPerView: 3, spaceBetween: 20 ,slidesPerGroup:2},
+    1024: { slidesPerView: 3, spaceBetween: 30 ,slidesPerGroup:2}
   };
 
   constructor(
@@ -54,6 +55,12 @@ export class DealComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    let carousel = new Swiper('.swiper-container', {
+      navigation: {
+        nextEl: '.swiper-button-next-unique',
+        prevEl: '.swiper-button-prev-unique'
+      }
+    });
   }
   
   
@@ -72,5 +79,6 @@ export class DealComponent implements OnInit {
     this.thumbsSwiper = swiper;
   }
 
+  
 
 }
