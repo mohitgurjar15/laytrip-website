@@ -307,8 +307,7 @@ export class HotelSearchWidgetComponent implements OnInit {
   searchHotels() {
     this.hotelSearchFormSubmitted = true;
     console.log(this.fromDestinationInfo)
-    if (this.fromDestinationInfo.title.length == 0) {
-      console.log('in false')
+    if (this.fromDestinationInfo.title.length == 0 && this.searchHotelInfo.location.title.length == 0) {
       this.validSearch = false;
     }
     let queryParams: any = {};
@@ -339,8 +338,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
-    console.log(this.searchHotelInfo)
-    console.log(this.validSearch)
     console.log(this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
       this.searchHotelInfo.check_in && this.searchHotelInfo.check_out && this.searchHotelInfo.occupancies)
     if (this.validSearch && this.searchHotelInfo && this.searchHotelInfo.latitude && this.searchHotelInfo.longitude &&
