@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GenericService } from '../../services/generic.service';
 import { CommonFunction } from '../../_helpers/common-function';
 import { environment } from '../../../environments/environment';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 declare var $: any;
 
 @Component({
@@ -11,27 +12,34 @@ declare var $: any;
 })
 export class CcpaComponent implements OnInit {
   s3BucketUrl = environment.s3BucketUrl;
-  cmsData;
+  cmsDataContent;
   loading = false;
 
   constructor(
     private genericService: GenericService,
-    public commonFunction: CommonFunction
-  ) { }
+    public commonFunction: CommonFunction,
+    private translate: TranslateService
+    ) { 
+      translate.onLangChange.subscribe(lang => this.setLanguage());
+  }
 
   ngOnInit(): void {
     $('body').addClass('cms-bgColor');
     window.scroll(0, 0);
+    this.setLanguage();
+  }
+
+  setLanguage() {
     const userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     const pageType = 'ccpa';
     this.loading = true;
     this.genericService.getCmsByPageType(pageType).subscribe((res: any) => {
       switch(userLang) {
         case "es":
-          this.cmsData = res.esContent;
+          this.cmsDataContent = res.esContent;
           break;
         default:
-          this.cmsData = res.enContent;
+          this.cmsDataContent = res.enContent;
           break;
       }
       this.loading = false;
