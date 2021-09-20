@@ -341,51 +341,116 @@
     }
 
     .search_tab_icons_wrps {
-        display: flex;
-        margin-bottom: 25px;
+        display: inline-flex;
+        margin-bottom: 0;
+        background: $bg-grey-light;
+        border-radius: 20px;
 
         .tab_anch {
-            padding: 20px 30px 20px 30px;
-            background: $box-border-color;
+            // padding: 20px 30px 20px 30px;
+            // background: $box-border-color;
+            // border: none;
+            // font-size: 14px;
+            // font-weight: 500;
+            // text-decoration: none;
+            // white-space: nowrap;
+            // border-radius: 50%;
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+            // margin-right: 23px;
+            // height: 69px;
+            // width: 69px;
+
+            // @include tab-view {
+            //     height: 51px;
+            //     width: 51px;
+            //     margin-right: 20px;
+            //     padding: 0;
+            //     background-color: transparent;
+
+            //     &:last-child {
+            //         margin-right: 0;
+            //     }
+
+            //     img {
+            //         max-width: 51px;
+            //     }
+            // }
+            // .active-icon {
+            //     display: none;
+            // }
+
+            // &.active {
+            //     //background: $primary-color;
+
+            //     .active-icon {
+            //         display: block;
+            //     }
+
+            //     .default-icon {
+            //         display: none;
+            //     }
+            // }
+            
+            padding: 8px 20px;
+            background: transparent;
             border: none;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 500;
+            color: #52575A;
             text-decoration: none;
             white-space: nowrap;
-            border-radius: 50%;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 23px;
-            height: 69px;
-            width: 69px;
-
+            position: relative;
             @include tab-view {
-                height: 51px;
-                width: 51px;
-                margin-right: 20px;
-                padding: 0;
-                background-color: transparent;
-
+                font-size: 14px;
                 &:last-child {
                     margin-right: 0;
                 }
-
                 img {
                     max-width: 51px;
                 }
             }
-            .active-icon {
-                display: none;
-            }
-
+            // &:first-child {
+            // 	border-radius: 20px 0 0 0;
+            // }
+            // &:last-child {
+            // 	border-radius: 0 20px 0 0;
+            // }
             &.active {
-                //background: $primary-color;
-
+                // background: $active-tab-text;
+                //color: $background-white;
                 .active-icon {
                     display: block;
                 }
-
+                .disabled-icon {
+                    display: none;
+                }
+                .default-icon {
+                    display: none;
+                }
+                &.flight-tab{
+                    background: $active-tab-text;
+                    color: $text-white;
+                }
+                &.hotel-tab{
+                    background: #F726C0;
+                    color: $text-white;
+                }
+            }
+            &.disabled {
+                background: $text_grey_dark;
+                color: $disabled-text;
+                .active-icon {
+                    display: none;
+                }
+                .disabled-icon {
+                    display: block;
+                }
                 .default-icon {
                     display: none;
                 }
