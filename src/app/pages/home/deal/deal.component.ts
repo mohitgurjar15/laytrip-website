@@ -45,8 +45,8 @@ export class DealComponent implements OnInit {
   breakpoints = {
     320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup:1 },
     520: { slidesPerView: 1, spaceBetween: 10 ,slidesPerGroup:2},
-    767: { slidesPerView: 2, spaceBetween: 20 ,slidesPerGroup:2},
-    991: { slidesPerView: 3, spaceBetween: 20 ,slidesPerGroup:2},
+    768: { slidesPerView: 2, spaceBetween: 20 ,slidesPerGroup:2},
+    992: { slidesPerView: 3, spaceBetween: 20 ,slidesPerGroup:2},
     1024: { slidesPerView: 3, spaceBetween: 30 ,slidesPerGroup:2}
   };
 
@@ -55,12 +55,12 @@ export class DealComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let carousel = new Swiper('.swiper-container', {
-      navigation: {
-        nextEl: '.swiper-button-next-unique',
-        prevEl: '.swiper-button-prev-unique'
-      }
-    });
+    let carousel = new Swiper('.deal_sec_wrapper', {
+    navigation: {
+      nextEl: '.swiper-button-next-unique',
+      prevEl: '.swiper-button-prev-unique'
+    }
+  });
   }
   
   

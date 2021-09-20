@@ -14,7 +14,7 @@
                 </span>
                 <p *ngIf="isRefferal">{{'promo_421_1' | translate}} NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_2' | translate}}.*</p>
                 <p *ngIf="!isRefferal" [innerHTML]="'flight_third_title' | translate"></p>
-                <a href="javascript:void(0);" class="cstm_theme_btn_comman banner_new_btn">How it Works</a>
+                <a href="javascript:void(0);" class="cstm_theme_btn_comman banner_new_btn" data-toggle="modal" data-target="#works_modal">How it Works</a>
             </div>
         </div>
 
@@ -53,3 +53,20 @@
 <app-deal [dealList]="dealList" [moduleId]="moduleId" (toString)="fetchWidgetDeal($event)"></app-deal>
 
 <app-mobile-and-subscribe></app-mobile-and-subscribe>
+
+<section class="block_contact_us_main modal fade comman_modal" id="works_modal" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="contact_modal_wrp">
+                <div class="modal_title">
+                    <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">
+                        <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
+                    </button>
+                </div>
+                <div class="modal_content text-center">
+                    <iframe src="https://www.youtube.com/embed/Ji7WcGuTABY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width: calc(100% - 10px); height: 100%; min-height: 350px; margin: 0 auto; display: inline-block;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
