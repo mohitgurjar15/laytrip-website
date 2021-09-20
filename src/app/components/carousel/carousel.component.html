@@ -8,13 +8,15 @@
 
 
     <!-- controls -->
-    <button class="control prev" (click)="onPreviousClick()">
+    <!-- <ng-container *ngIf="offerSlide.length > 1"> -->
+    <button *ngIf="slides && slides.length > 1" class="control prev" (click)="onPreviousClick()">
     <span class="arrow left"></span>
   </button>
-    <button class="control next" (click)="onNextClick()">
+    <button *ngIf="slides && slides.length > 1" class="control next" (click)="onNextClick()">
     <span class="arrow right"></span>
   </button>
+    <!-- </ng-container> -->
 </div>
-<ul class="boolean_nav">
+<ul *ngIf="slides && slides.length > 1" class="boolean_nav">
     <li *ngFor="let slide of slides; let i = index" [ngClass]="{'active':currentSlide==i}" (click)="booletsClick(i,slide)"></li>
 </ul>

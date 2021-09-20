@@ -207,7 +207,7 @@ export class HotelItemWrapperComponent implements OnInit {
       return false;
     }
 
-    this.scrollLoading = (this.hotelDetails.length != this.hotelListArray.length) ? true : false;
+    this.scrollLoading = (this.hotelDetails && this.hotelDetails.length != this.hotelListArray.length) ? true : false;
     setTimeout(() => {
       if (this.noOfDataToShowInitially <= this.hotelDetails.length) {
         this.noOfDataToShowInitially += this.dataToLoad;

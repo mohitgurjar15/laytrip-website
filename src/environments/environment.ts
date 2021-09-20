@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   name: 'default',
+  // apiUrl:'http://localhost:4040/',
   apiUrl:'https://api.adminredesign.laytrip.com/',
   s3BucketUrl: 'https://d2q1prebf1m2s9.cloudfront.net/',
   fb_api_key:'933948490440237',

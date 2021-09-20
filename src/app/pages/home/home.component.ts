@@ -4,7 +4,7 @@ import { GenericService } from '../../services/generic.service';
 import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../services/home.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
@@ -28,13 +28,13 @@ export class HomeComponent implements OnInit {
   toString: string;
   moduleId = 1;
   dealList = [];
-  host:string='';
+  host: string = '';
   $tabName;
   currentSlide;
   currentChangeCounter;
   banner_city_name = 'Miami';
   slides;
-
+  landingPageName;
   $landingPageData;
   constructor(
     private genericService: GenericService,
@@ -46,8 +46,10 @@ export class HomeComponent implements OnInit {
     private homeService: HomeService,
     public modalService: NgbModal,
     private cookieService: CookieService,
-    public preLoadService : PreloadingService
+    public preLoadService: PreloadingService,
+    private route: ActivatedRoute
   ) {
+    this.landingPageName = this.route.snapshot.queryParams['utm_source']
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
     this.homeService.getLandingPageData.subscribe(data => {
@@ -55,10 +57,10 @@ export class HomeComponent implements OnInit {
         this.$landingPageData = data;
         this.slides = this.$landingPageData.slides;
         this.currentSlide = this.$landingPageData.slides[0];
+        this.homeService.setOffersData(this.currentSlide);
       } catch (e) {
       }
     });
-    this.homeService.setOffersData(this.currentSlide);
   }
 
   ngOnInit(): void {
@@ -73,16 +75,15 @@ export class HomeComponent implements OnInit {
       this.openCookiePolicyPopup();
     }, 5000);
     this.homeService.setOffersData(this.currentSlide);
-
-    this.$tabName = this.homeService.getActiveTabName.subscribe(tabName=> {
-      if(typeof tabName != 'undefined' && Object.keys(tabName).length > 0 ){     
-        let tab : any = tabName;
-        if(tab == 'flight'){
+    this.$tabName = this.homeService.getActiveTabName.subscribe(tabName => {
+      if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) {
+        let tab: any = tabName;
+        if (tab == 'flight') {
           this.moduleId = 1;
           $('.flight-tab').trigger('click');
-        } else if(tab == 'hotel') {
-          this.moduleId=3;
-          $('.hotel-tab').trigger('click');          
+        } else if (tab == 'hotel') {
+          this.moduleId = 3;
+          $('.hotel-tab').trigger('click');
         }
       }
     });
@@ -172,7 +173,7 @@ export class HomeComponent implements OnInit {
     this.moduleId = moduleId;
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
-        if(this.moduleId == 1 && this.commonFunction.isRefferal()){
+        if (this.moduleId == 1 && this.commonFunction.isRefferal()) {
           this.dealList = this.$landingPageData.deals.flight;
         } else if (this.moduleId == 3 && this.commonFunction.isRefferal()) {
           this.dealList = this.$landingPageData.deals.hotel;
@@ -197,9 +198,10 @@ export class HomeComponent implements OnInit {
     else if (tabName === 'home-rentals') {
       this.getDeal(3);
     }
-    if(this.commonFunction.isRefferal()){
+    if (this.commonFunction.isRefferal()) {
       this.currentChangeCounter += this.currentChangeCounter;
       this.homeService.setOffersData(this.currentSlide);
+
     }
   }
 
@@ -208,27 +210,28 @@ export class HomeComponent implements OnInit {
   }
 
   fetchWidgetDeal(newItem: string) {
-    if(this.moduleId == 1){
+    if (this.moduleId == 1) {
       this.toString = newItem;
       this.homeService.setToString(newItem);
-    } else if(this.moduleId == 3) {
+    } else if (this.moduleId == 3) {
       this.homeService.setLocationForHotel(newItem);
-    } 
+    }
   }
-  
-  activeSlide(activeSlide){
+
+  activeSlide(activeSlide) {
     this.currentTabName = 'hotel';
     this.currentSlide = this.$landingPageData.slides[activeSlide];
     this.homeService.setOffersData(this.currentSlide);
     this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
+
   }
 
-  getCurrentChangeCounter(event){
-    this.currentChangeCounter = event; 
+  getCurrentChangeCounter(event) {
+    this.currentChangeCounter = event;
   }
 
   onSwipe(evt) {
-    const direction = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+    const direction = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left') : '';
     this.homeService.setSwipeSlideDirection(direction)
   }
 }

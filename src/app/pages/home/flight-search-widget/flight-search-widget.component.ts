@@ -90,6 +90,9 @@ export class FlightSearchWidgetComponent implements OnInit {
   timer: number = 0;
   timerTimeStamp;
   isLangingPage = false
+  landingPageName;
+  minConfigDay;
+  maxConfigDay;
 
   constructor(
     public commonFunction: CommonFunction,
@@ -100,7 +103,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     private homeService: HomeService,
     private translate: TranslateService
   ) {
-
+    this.landingPageName = this.route.snapshot.queryParams['utm_source']
     if (typeof this.fromSearch.city != 'undefined') {
       this.fromSearch['display_name'] = `${this.fromSearch.city},${this.fromSearch.country},(${this.fromSearch.code}),${this.fromSearch.name}`;
       this.toSearch['display_name'] = `${this.toSearch.city},${this.toSearch.country},(${this.toSearch.code}),${this.toSearch.name}`;
@@ -137,24 +140,58 @@ export class FlightSearchWidgetComponent implements OnInit {
     // if (typeof this.dealIcon != 'undefined') {
     //   this.dealIcon = (this.dealIcon == 'true' || this.dealIcon == true) ? true : false;
     // }
-    if (this.commonFunction.isRefferal()) {
-      this.isLangingPage = true;
-      this.homeService.getSlideOffers.subscribe(currentSlide => {
-        if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
-          let slide: any = currentSlide;
-          this.fromSearch = Object.assign({}, airports[slide.location.from.airport_code]);
-          this.toSearch = Object.assign({}, airports[slide.location.to.airport_code]);
-          this.searchFlightInfo.departure = this.fromSearch.code;
-          this.departureDate = moment().add(91, 'days').toDate();
-          this.searchFlightInfo.arrival = this.toSearch.code;
+    if (window.location.pathname == '/flight/search') {
+      //delete BehaviorSubject in the listing page
+      this.route.queryParams.subscribe(params => {
+        this.homeService.removeToString('flight');
 
-          if (this.isRoundTrip) {
-            this.returnDate = moment().add(97, 'days').toDate();
-            this.rangeDates = [this.departureDate, this.returnDate];
-          }
-        }
+        this.calPrices = true;
+        this.fromSearch = airports[params['departure']];
+        this.toSearch = airports[params['arrival']];
+        this.searchFlightInfo.departure = this.fromSearch.code;
+        this.searchFlightInfo.arrival = this.toSearch.code;
+        this.toggleOnewayRoundTrip(params['trip']);
+        localStorage.setItem('__from', params['departure'])
+        localStorage.setItem('__to', params['arrival'])
+
+        this.searchFlightInfo.class = params['class'];
+        this.searchFlightInfo.adult = params['adult'];
+        this.searchFlightInfo.child = params['child'];
+        this.searchFlightInfo.infant = params['infant'];
+        this.departureDate = moment(params['departure_date']).toDate();
+
+        this.currentMonth = moment(this.departureDate).format("MM");
+        this.currentYear = moment(this.departureDate).format("YYYY");
+        this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
+        this.rangeDates = [this.departureDate, this.returnDate];
       })
-
+    }else{
+      if (this.commonFunction.isRefferal()) {
+        this.isLangingPage = true;
+        this.homeService.getSlideOffers.subscribe(currentSlide => {
+  
+          if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
+            let slide: any = currentSlide;
+            this.fromSearch = Object.assign({}, airports[slide.location.from.airport_code]);
+            this.toSearch = Object.assign({}, airports[slide.location.to.airport_code]);
+            this.searchFlightInfo.departure = this.fromSearch.code;
+            this.homeService.getLandingPageData.subscribe(data => {
+              try {
+  
+                this.departureDate = this.isRefferal ? moment().add(data.promotional.min_promotional_day, 'days').toDate() : moment().add(2, 'days').toDate();
+              } catch (e) {
+              }
+            });
+            this.searchFlightInfo.arrival = this.toSearch.code;
+  
+            if (this.isRoundTrip) {
+              this.returnDate = moment().add(this.landingPageName === 'sergio' ? 67 : 97, 'days').toDate();
+              this.rangeDates = [this.departureDate, this.returnDate];
+            }
+          }
+  
+        })
+      }
     }
 
 
@@ -202,14 +239,22 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.fromSearch = airports['NYC'];
         this.searchFlightInfo.departure = this.fromSearch.code;
         this.toSearch = airports[keys];
-        this.departureDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
+        this.homeService.getLandingPageData.subscribe(data => {
+          try {
+
+            this.departureDate = this.isRefferal ? moment().add(data.promotional.min_promotional_day, 'days').toDate() : moment().add(2, 'days').toDate();
+            this.returnDate = this.isRefferal ? moment(this.departureDate).add(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
+          } catch (e) {
+          }
+        });
         this.searchFlightInfo.arrival = this.toSearch.code;
 
         if (this.isRoundTrip) {
-          this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(97, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate()];
+          this.rangeDates = [this.departureDate, this.isRefferal ? moment().add(this.landingPageName === 'sergio' ? 67 : 97, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate()];
         }
       }
     });
+
     //delete BehaviorSubject at the end
     this.homeService.removeToString('flight');
     this.lowMinPrice = this.midMinPrice = this.highMinPrice = 0;
@@ -241,9 +286,15 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   setDefaultDate() {
+    this.homeService.getLandingPageData.subscribe(data => {
+      try {
 
-    this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(91, 'days').toDate() : moment().add(2, 'days').toDate();
-    this.returnDate = this.isRefferal ? moment(this.departureDate).add(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
+        this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(data.promotional.min_promotional_day, 'days').toDate() : moment().add(2, 'days').toDate();
+        this.returnDate = this.isRefferal ? moment(this.departureDate).add(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
+      } catch (e) {
+      }
+    });
+
   }
 
   destinationChangedValue(event) {

@@ -3,9 +3,10 @@
     <section class="contact_us_upper_main">
         <div class="container">
             <div class="contect_text_wrapper">
-                <h3 *ngIf="!commonFunction.isRefferal()">{{'join_lt_1' | translate}}</h3>
-                <h3 *ngIf="commonFunction.isRefferal()">{{'join_lt_2' | translate}}</h3>
-
+                <div class="keep_touch">Keep in touch! </div>
+                <!-- <h3 *ngIf="!commonFunction.isRefferal()">{{'join_lt_1' | translate}}</h3>
+                <h3 *ngIf="commonFunction.isRefferal()">{{'join_lt_2' | translate}}</h3> -->
+                <h4>Join <span class="brand_name_contact">Laytrip</span> for discounts to your <p>favorite destinations.</p></h4>
                 <div class="custom_input_wrapper">
                     <input type="email" formControlName="email" maxlength="40" (click)="changeEmail()" placeholder="{{ 'mobile_page_subscribe_email_placeholder' | translate}}">
                     <button type="submit"><i class="fa fa-spinner fa-spin" *ngIf="loading"></i>{{'mobile_page_button_join' | translate}}</button>

@@ -24,6 +24,7 @@ import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component'
 import { SwiperModule } from "swiper/angular";
 import * as Hammer from 'hammerjs';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { LandingVideoComponent } from './landing-video/landing-video.component';
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
     swipe: { direction: Hammer.DIRECTION_ALL ,velocity: 0.1},
@@ -43,7 +44,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     FlightSearchWidgetComponent,
     HotelSearchWidgetComponent,
     VacationSearchWidgetComponent,
-    CookiePolicyComponent
+    CookiePolicyComponent,
+    LandingVideoComponent
   ],
   imports: [
     CommonModule,

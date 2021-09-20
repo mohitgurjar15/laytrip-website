@@ -152,7 +152,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
         this.arrivalTimeSlotCityName = element.arrival_info.city;
       });
     }
-    console.log("this.minPrice",this.minPrice)
     this.loadJquery();
   }
 

@@ -370,7 +370,7 @@
                         }
                     }
                     &.login_li {
-                        border-left: 1px solid $border-color;
+                        border-left: 1px solid $mid_gray_bg;
                         padding: 0px 0 0px 15px;
                         a {
                             font-size: 14px;
@@ -410,9 +410,9 @@
                                     }
                                 }
                             }
-                            &:after {
-                                display: none;
-                            }
+                            // &:after {
+                            //     display: none;
+                            // }
                         }
                         .dropdown {
                             &.account_ddown {
@@ -835,6 +835,9 @@
             &:after {
                 display: none;
             }
+            &.hover-link {
+                padding: 0.5rem;
+            }
         }
         .dropdown {
             &.account_ddown {
@@ -879,11 +882,6 @@
                     font-weight: 400;
                     align-items: center;
                     padding-right: 5px;
-                    @include tab-view {
-                        font-size: 12px;
-                        padding-top: 0;
-                        padding-bottom: 0;
-                    }
                     img {
                         max-width: 27px;
                         height: 27px;
@@ -936,6 +934,12 @@
                             right: 1px;
                             border: none;
                         }
+                    }
+                    @include tab-view {
+                        font-size: 12px;
+                        padding-top: 0;
+                        padding-bottom: 0;
+                        padding-left: 0;
                     }
                 }
             }
@@ -1057,6 +1061,10 @@
                 }
             }
         }
+        .cta_drop_wrp{
+            border-left: 1px solid #878787;
+        }
+        
     }
 }
 
