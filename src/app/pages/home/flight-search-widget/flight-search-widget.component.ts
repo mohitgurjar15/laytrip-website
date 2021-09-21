@@ -185,7 +185,7 @@ export class FlightSearchWidgetComponent implements OnInit {
             this.searchFlightInfo.arrival = this.toSearch.code;
   
             if (this.isRoundTrip) {
-              this.returnDate = moment().add(this.landingPageName === 'sergio' ? 67 : 97, 'days').toDate();
+              this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
               this.rangeDates = [this.departureDate, this.returnDate];
             }
           }
@@ -294,6 +294,7 @@ export class FlightSearchWidgetComponent implements OnInit {
       } catch (e) {
       }
     });
+
 
   }
 
@@ -496,7 +497,6 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     if (!this.isRoundTrip && (calApplyDiff > 0 || calApplyDiff <= 365)) {
       this.lastSearchCalMMYY = currCalYYMM;
-      console.log(this.selectedMMYY, this.lastSearchCalMMYY)
       let month = event.month;
       month = month.toString().length == 1 ? '0' + month : month;
       let monthYearName = `${month}-${event.year}`;

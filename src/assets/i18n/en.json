@@ -708,5 +708,9 @@
     "non_refundable": "Non Refundable",
     "payment_plans": "Payment Plans",
     "booking_not_avilable": "This booking is no longer available. Click “x” to delete to be able to proceed to Checkout.",
-    "flights_unavailable": "Flights Unavailable"
+    "flights_unavailable": "Flights Unavailable",
+    "flights": "Flights",
+    "find_deal": "Find Deals",
+    "payment_option_available": "Payment options available",
+    "weekly_bi_weekly_or_monthly": "Weekly, bi-weekly or monthly"
 }
