@@ -712,5 +712,7 @@
     "deals": "Ofertas",
     "email_notifications": "Notificaciones via Email",
     "sms_notifications": "Notifications via mensajes de texto (SMS)",
-    "relevance": "Relevancia"
+    "relevance": "Relevancia",
+    "loading": "Cargando...",
+    "please_wait_loading": "Por favor espera mientras buscamos las mejores ofertas"
 }

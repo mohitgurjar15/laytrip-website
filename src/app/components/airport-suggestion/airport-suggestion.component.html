@@ -5,7 +5,7 @@
         </button>
     </div>
     <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all" pointerEventsMethod="scrollbar">
-        <span *ngIf="loading">Loading...</span>
+        <span *ngIf="loading">{{'loading' | translate}}</span>
         <div class="suggtions_wrps_mn">
             <div class="suggtions">
                 <div class="sug_line_box">
