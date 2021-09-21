@@ -7,6 +7,7 @@ import { environment } from '../../../../../environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FlightService } from '../../../../services/flight.service';
 import { FlightSearchComponent } from '../../flight-search/flight-search.component';
+import { fileSizeValidator } from 'src/app/_helpers/custom.validators';
 
 
 @Component({
@@ -151,7 +152,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
         this.arrivalTimeSlotCityName = element.arrival_info.city;
       });
     }
-    console.log("this.minPrice",this.minPrice)
     this.loadJquery();
   }
 
@@ -227,7 +227,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
    * @param event 
    */
   fliterByPrice(event) {
-    console.log(event.value)
     this.minPrice = event.value;
     this.maxPrice = event.highValue;
     this.filterFlights();
@@ -544,6 +543,9 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
             filterdFlights = this.sortByDeparture(filterdFlights, sortFilter.key, sortFilter.order);
           }
         }
+        else if(sortFilter.key === 'relevance'){
+          filterdFlights = this.sortByRelevant(filterdFlights,sortFilter.key,'')
+        }
         else {
           if (sortFilter.order === 'ASC') {
             filterdFlights = this.sortJSON(filterdFlights, sortFilter.key, sortFilter.order);
@@ -659,6 +661,25 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
           return ((x > y) ? -1 : ((x < y) ? 1 : 0));
         }
       });
+    }
+  }
+
+  sortByRelevant(data, key, way) {
+    let delta = [];
+    let flightDetails = []
+    for (let item of data) {
+      if (item.airline_name == 'Delta') {
+        delta.push(item)
+      }
+      if (item.airline_name != 'Delta') {
+        flightDetails.push(item)
+      }
+    }
+    if (delta.length) {
+      for (let item of delta) {
+        flightDetails.push(item)
+      }
+      return flightDetails;
     }
   }
 }

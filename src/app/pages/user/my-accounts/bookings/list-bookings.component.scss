@@ -457,9 +457,9 @@
                                 align-items: center;
                                 width: 20%;
                                 a {
-                                    padding: 8px 20px;
+                                    padding: 8px 17px;
                                     border-radius: 50px;
-                                    font-size: 16px;
+                                    font-size: 14px;
                                     color: #52575a;
                                     width: 100%;
                                     text-overflow: ellipsis;
@@ -589,6 +589,58 @@
             flex-direction: column;
             width: 100%;
             margin-left: 50px;
+        }
+    }
+}
+
+.block_tax_fee_main {
+    .modal-content {
+        padding: 15px;
+        border-radius: 10px;
+        .modal_title {
+            position: absolute;
+            right: 20px;
+            img {
+                max-width: 12px;
+            }
+        }
+        .tax_fee_modal_wrp {
+            .title_box {
+                color: $active-tab-text;
+                font-weight: 500;
+                font-size: 32px;
+                margin: 10px auto;
+                text-align: center;
+                @include tab-view {
+                    font-size: 29px;
+                }
+            }
+            .fee_msg {
+                padding: 20px;
+                @include tab-view {
+                    padding: 5px;
+                }
+                p {
+                    &.para_fees {
+                        font-size: 12px;
+                        // max-height: 218px;
+                        margin: 0;
+                        scroll-behavior: smooth;
+                        // @include tab-view {
+                        //   max-height: 205px;
+                        // }
+                    }
+                }
+            }
+            .logo_wrpper_footer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+                img {
+                    max-width: 62px;
+                }
+            }
         }
     }
 }

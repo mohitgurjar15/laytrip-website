@@ -20,7 +20,7 @@
                         <span>{{items.moduleInfo[0].hotel_name}} ({{items.moduleInfo[0].input_data.num_nights}} {{(items.moduleInfo[0].input_data.num_nights >1 ? 'nights' : 'night') | translate }} x ${{items.totalAmount | number : '1.2-2'}})</span>
                     </div>
                     <div class="summary_item_price">
-                        ${{beforeDesimal(items.totalAmount)}}<sup>.{{afterDesimal(items.totalAmount)}}</sup>
+                        ${{beforeDesimal(items.moduleInfo[0].retail.sub_total)}}<sup>.{{afterDesimal(items.moduleInfo[0].retail.sub_total)}}</sup>
                     </div>
                 </div>
                 <div class="summary_item">
@@ -132,7 +132,7 @@
                     {{'total_installments' | translate}}
                 </div>
                 <div class="summary_item_price">
-                    ${{beforeDesimal(cartItem.totalAmount)}}<sup>.{{afterDesimal(cartItem.totalAmount)}}</sup>
+                    ${{beforeDesimal(cartItem.totalInstallment)}}<sup>.{{afterDesimal(cartItem.totalInstallment)}}</sup>
                     <!-- ${{ totalInstallmentAmount || 0 | number : '1.2-2' }} -->
                     <span class="paid_markss">
                         <i class="fa fa-check-circle d-none" aria-hidden="true"></i>
@@ -142,26 +142,7 @@
         </div>
     </div>
 </div>
-<section class="block_tax_fee_main modal fade comman_modal show" id="tax_fee_modal" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal_title">
-                <button type="button" class="close" (click)="closeModal()"><img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon"></button>
-            </div>
-            <div class="tax_fee_modal_wrp">
-                <div class="inner_wrppar">
-                    <div class="title_box">{{'taxes_fees' | translate}}</div>
-                    <div class="fee_msg">
-                        <p class="para_fees">{{ 'taxes_fees_info' | translate }}</p>
-                    </div>
-                    <div class="logo_wrpper_footer">
-                        <img src="{{s3BucketUrl}}assets/images/laytrip_logo_blue.svg" alt="Logo" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- <div class="total_p_wrp bb">
         <div class="left_sec">

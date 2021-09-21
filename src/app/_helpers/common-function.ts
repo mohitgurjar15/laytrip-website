@@ -207,6 +207,7 @@ export class CommonFunction {
     }
 
     goBack() {
+        console.log('cming')
         this._location.back();
     }
 

@@ -324,7 +324,6 @@
     "payment_plan_detail": "Payment plan details",
     "layover_of": "Layover of",
     "at": "at",
-    "payment_plans": "Payment Plans",
     "return_flight": "Return Flight",
     "flight_info": "Flight Info",
     "fare_detail": "Fare Details",
@@ -539,6 +538,7 @@
     "filter_10": "Arrival Latest to Earliest",
     "filter_11": "Departure Earliest to Latest",
     "filter_12": "Departure Latest to Earliest",
+    "filter_13": "Sort By Relevance",
     "filter_az": "A - Z",
     "filter_za": "Z - A",
     "ratings": "Ratings",
@@ -711,5 +711,6 @@
     "flights_unavailable": "Flights Unavailable",
     "deals": "Deals",
     "email_notifications": "Email Notifications",
-    "sms_notifications": "SMS Notifications"
+    "sms_notifications": "SMS Notifications",
+    "relevance": "Relevance"
 }

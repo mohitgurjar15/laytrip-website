@@ -3,7 +3,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CommonFunction } from '../../../../../_helpers/common-function';
 import {installmentType} from '../../../../../_helpers/generic.helper';
-declare var $: any;
+
 @Component({
   selector: 'app-cart-price-summary',
   templateUrl: './cart-price-summary.component.html',
@@ -60,10 +60,6 @@ export class CartPriceSummaryComponent implements OnInit {
   setLoopNumber(loopNumber){
     this.cartDueLoopNum = loopNumber;
     return loopNumber;
-  }
-
-  closeModal() {
-    $('#tax_fee_modal').modal('hide');
   }
 
   beforeDesimal(value){
