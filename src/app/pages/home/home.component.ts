@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
   banner_city_name = 'Miami';
   slides;
   landingPageName;
-
   $landingPageData;
   constructor(
     private genericService: GenericService,
@@ -53,18 +52,15 @@ export class HomeComponent implements OnInit {
     this.landingPageName = this.route.snapshot.queryParams['utm_source']
     this.renderer.addClass(document.body, 'bg_color');
     this.countryCode = this.commonFunction.getUserCountry();
-      this.homeService.getLandingPageData.subscribe(data => {
-        try {
-          this.$landingPageData = data;
-          console.log(data)
-          this.slides = this.$landingPageData.slides;
-          this.currentSlide = this.$landingPageData.slides[0];
-          console.log(this.currentSlide)
-        } catch (e) {
-        }
-      });
-
-    this.homeService.setOffersData(this.currentSlide);
+    this.homeService.getLandingPageData.subscribe(data => {
+      try {
+        this.$landingPageData = data;
+        this.slides = this.$landingPageData.slides;
+        this.currentSlide = this.$landingPageData.slides[0];
+        this.homeService.setOffersData(this.currentSlide);
+      } catch (e) {
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -79,7 +75,6 @@ export class HomeComponent implements OnInit {
       this.openCookiePolicyPopup();
     }, 5000);
     this.homeService.setOffersData(this.currentSlide);
-
     this.$tabName = this.homeService.getActiveTabName.subscribe(tabName => {
       if (typeof tabName != 'undefined' && Object.keys(tabName).length > 0) {
         let tab: any = tabName;
@@ -179,10 +174,9 @@ export class HomeComponent implements OnInit {
     this.homeService.getDealList(moduleId).subscribe(
       (response) => {
         if (this.moduleId == 1 && this.commonFunction.isRefferal()) {
-          this.dealList =this.$landingPageData.deals.flight;
+          this.dealList = this.$landingPageData.deals.flight;
         } else if (this.moduleId == 3 && this.commonFunction.isRefferal()) {
           this.dealList = this.$landingPageData.deals.hotel;
-          console.log(this.dealList)
         } else {
           this.dealList = response['data'];
         }
@@ -207,6 +201,7 @@ export class HomeComponent implements OnInit {
     if (this.commonFunction.isRefferal()) {
       this.currentChangeCounter += this.currentChangeCounter;
       this.homeService.setOffersData(this.currentSlide);
+
     }
   }
 
@@ -224,11 +219,11 @@ export class HomeComponent implements OnInit {
   }
 
   activeSlide(activeSlide) {
-      this.currentTabName = 'hotel';
-      this.currentSlide = this.$landingPageData.slides[activeSlide];
-      this.homeService.setOffersData(this.currentSlide);
-      this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
-    
+    this.currentTabName = 'hotel';
+    this.currentSlide = this.$landingPageData.slides[activeSlide];
+    this.homeService.setOffersData(this.currentSlide);
+    this.banner_city_name = this.currentSlide.location.to.hotel_option.banner ? this.currentSlide.location.to.hotel_option.banner : '';
+
   }
 
   getCurrentChangeCounter(event) {

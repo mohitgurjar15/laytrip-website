@@ -100,7 +100,7 @@
     "mobile_page_description_1": "Download the Mobile App",
     "mobile_page_description_2": "Access the app at the Android Google Play and on Apple App Store.",
     "mobile_page_get_nearly_update": "Be the first to get nearly updates",
-    "mobile_page_subscribe_email_placeholder": "Enter Your Email Address",
+    "mobile_page_subscribe_email_placeholder": "Enter your email address",
     "mobile_page_button_join": "Join",
     "mobile_page_subscribe_email_touched_validation": "Enter email.",
     "mobil_page_subscribe_now_button": "Subscribe Now",
@@ -708,5 +708,9 @@
     "non_refundable": "Non Refundable",
     "payment_plans": "Payment Plans",
     "booking_not_avilable": "This booking is no longer available. Click “x” to delete to be able to proceed to Checkout.",
-    "flights_unavailable": "Flights Unavailable"
+    "flights_unavailable": "Flights Unavailable",
+    "flights": "Flights",
+    "find_deal": "Find Deals",
+    "payment_option_available": "Payment options available",
+    "weekly_bi_weekly_or_monthly": "Weekly, bi-weekly or monthly"
 }

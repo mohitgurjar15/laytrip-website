@@ -65,6 +65,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.homeService.setDeaslToggle(this.dealIcon)
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
+      console.log('flightSearchInfo',this.flightSearchInfo)
       //this.dealIcon = this.flightSearchInfo.dealsIcon
       //console.log("on listing dealIcon", this.dealIcon)
 

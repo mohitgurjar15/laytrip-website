@@ -76,6 +76,7 @@ export class HotelSearchComponent implements OnInit {
       filter: true,
       is_refundable : refundable
     };
+    console.log('my payload',payload)
     this.getHotelSearchData(payload);
     this.setFilteredLabel('filter_1');
   }
