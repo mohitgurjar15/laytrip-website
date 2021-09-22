@@ -22,7 +22,7 @@
     </div>
 </section>
 <!-- deal section skeleton loader ends -->
-<section class="deal_sec" *ngIf="list.length > 0 && commonFunction.isRefferal()" (contextmenu)="commonFunction.onRightClickDisabled($event)">
+<section class="deal_sec" *ngIf="list.length > 0 " (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
         <div class="deal_sec_wrapper">
             <div class="swiper-button-prev" #prevEl></div>
@@ -32,7 +32,7 @@
                         <div class="deal_sec_inner flight_deal">
                             <div class="deal_header_img">
                                 <div class="overflow-hidden h-100">
-                                    <img class="deal_img_new" [src]="item?.to?.image" alt="Deal Image" />
+                                    <img class="deal_img_new" [src]="commonFunction.isRefferal() ? item?.to?.image : item.image" alt="Deal Image" />
                                 </div>
                                 <div class="deal_type_icn">
                                     <i class="fa fa-plane" aria-hidden="true"></i>
@@ -40,8 +40,8 @@
                                 </div>
                             </div>
                             <div class="deal_main_section">
-                                <h3>{{item?.to?.city}}</h3>
-                                <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> {{item?.to?.country}} {{item.code}} {{item.lat}}</p>
+                                <h3>{{commonFunction.isRefferal() ? item?.to?.city : item.city}}</h3>
+                                <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> {{commonFunction.isRefferal() ? item?.to?.country : item.country}}</p>
                                 <div class="payment_option">
                                     {{'payment_option_available' | translate}}:
                                     <span>{{'weekly_bi_weekly_or_monthly' | translate}}</span>
@@ -60,15 +60,15 @@
                         <div class="deal_sec_inner hotel_deal">
                             <div class="deal_header_img">
                                 <div class="overflow-hidden h-100">
-                                    <img class="deal_img_new" [src]="item?.location?.image" alt="Deal Image" />
+                                    <img class="deal_img_new" [src]="commonFunction.isRefferal() ? item?.location?.image : item.image" alt="Deal Image" />
                                 </div>
                                 <div class="deal_type_icn">
                                     <i class="fa fa-bed" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="deal_main_section">
-                                <h3>{{item?.location?.city}}</h3>
-                                <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> {{item?.location?.country}} {{item.code}} {{item.lat}}</p>
+                                <h3>{{ commonFunction.isRefferal() ? item?.location?.city : item?.city}}</h3>
+                                <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> {{commonFunction.isRefferal() ? item?.location?.country : item.country}}</p>
                                 <div class="payment_option">
                                     {{'payment_option_available' | translate}}:
                                     <span>{{'weekly_bi_weekly_or_monthly' | translate}}</span>
@@ -95,7 +95,7 @@
 <!-- End Deals section-->
 
 
-<section class="deal_sec" *ngIf="!commonFunction.isRefferal()" (contextmenu)="commonFunction.onRightClickDisabled($event)">
+<!-- <section class="deal_sec" *ngIf="!commonFunction.isRefferal()" (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
         <div class="deal_sec_wrapper" *ngIf="list.length <= 0">
             <div class="deal_section_row">
@@ -118,14 +118,14 @@
                 <div class="col-lg-4" *ngFor="let item of list;">
                     <div class="deal_section_row">
                         <div class="deal_sec_inner flight_deal">
-                            <!--hotel_deal-->
+                            
                             <div class="deal_header_img">
                                 <div class="overflow-hidden h-100">
                                     <img class="deal_img_new" [src]="item?.image" alt="Deal Image" />
                                 </div>
                                 <div class="deal_type_icn">
                                     <i class="fa fa-plane" aria-hidden="true"></i>
-                                    <!--fa-bed-->
+                                    
                                 </div>
                             </div>
                             <div class="deal_main_section">
@@ -145,5 +145,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
+<!--hotel_deal-->
+<!--fa-bed-->
 <!-- Close Deals section-->

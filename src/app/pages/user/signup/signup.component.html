@@ -90,7 +90,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                                 <div>
-                                    {{'already_account' | translate }} <a class="hover-link" target="_blank" [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"> {{'term_and_condition' | translate }}</a>                                    {{'and_the' | translate }} <a class="hover-link" target="_blank" [routerLink]="['/privacy-policy']">{{'privacy_and_policy' | translate }}</a>
+                                    {{'already_account' | translate }} <a class="hover-link" target="_blank" [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"> {{'term_and_condition' | translate }}</a>                                    {{'and_the' | translate }} <a class="hover-link" target="_blank" [routerLink]="['/privacy-policy']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'privacy_and_policy' | translate }}</a>
                                 </div>
                             </div>
                             <div *ngIf="submitted && !this.iAccept" class="error_text">

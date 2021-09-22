@@ -55,12 +55,14 @@ export class DealComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if(window.innerWidth > 360 && this.dealList.length >3){
       let carousel = new Swiper('.deal_sec_wrapper', {
         navigation: {
           nextEl: '.swiper-button-next-unique',
           prevEl: '.swiper-button-prev-unique'
         }
       });
+    }
    
   }
   
