@@ -43,7 +43,7 @@
                                     <span id="layPoints">{{showTotalLayCredit}}</span>
                                 </a>
                             </li> -->
-                            
+
                             <li class="nav-item login_li">
                                 <div class="cta_drop_wrp">
                                     <div class="dropdown cus_drop">
@@ -90,7 +90,7 @@
                                         <a (click)="redirectToPayment()">
                                             <img src="{{s3BucketUrl}}assets/images/icon/cart_icon.svg" alt="">
                                             <span class="cart_count">{{cartItemsCount ? cartItemsCount : 0}}</span>
-                                        </a>
+                                    </a>
                                     </span>
                                 </div>
                             </li>
@@ -186,9 +186,9 @@
             <img data-toggle="popover" title="Covid-19" data-placement="bottom" data-trigger=""
                 data-content="Covid-19 description" src="{{s3BucketUrl}}assets/images/info_icon_laytrip.svg"
                 alt="Info Image">
-            {{'covid_travel' | translate}} <a [routerLink]="['/covid-19']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" [innerHTML]="'read_more' | translate"
-                *ngIf="isCovidPage"></a> <span class="desk_span"> | {{'top_banner_info_1' | translate}} <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'top_banner_info_2' | translate}}</span>
-        <span class="mob_span">{{'top_banner_info_1' | translate}} <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'top_banner_info_3' | translate}}</span>
+            {{'covid_travel' | translate}} <a [routerLink]="['/covid-19']"  [queryParams]="commonFunction.isRefferal() ? commonFunction.getRefferalParms() : ''" [innerHTML]="'read_more' | translate"
+                ></a> <span class="desk_span"> | {{'top_banner_info_1' | translate}} <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal() ? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'top_banner_info_2' | translate}}</span>
+        <span class="mob_span">{{'top_banner_info_1' | translate}} <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal() ? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'top_banner_info_3' | translate}}</span>
         </span>
     </div>
 </section>
