@@ -5,15 +5,15 @@
     <div class="container banner_inner">
         <div class="banner_text">
             <div class="block_left" *ngIf="countryCode!='DR'">
-                <span class="banner_text_span" *ngIf="isRefferal && landingPageName != 'antinoty'">
+                <span class="banner_text_span" *ngIf="isRefferal && landingPageName != 'antinoti'">
                     <h2>$9.99 NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_3' | translate}}{{'now' | translate}}!</h2>
                 </span>
-                <span class="banner_text_span" *ngIf="!isRefferal || landingPageName === 'antinoty'">
+                <span class="banner_text_span" *ngIf="!isRefferal || landingPageName === 'antinoti'">
                     <h2 [innerHTML]="'flight_main_title' | translate"></h2>
                     <img class="" src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Flight Icon" />!
                 </span>
-                <p *ngIf="isRefferal && landingPageName != 'antinoty'">{{'promo_421_1' | translate}} NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_2' | translate}}.*</p>
-                <p *ngIf="!isRefferal || landingPageName === 'antinoty'" [innerHTML]="'flight_third_title' | translate"></p>
+                <p *ngIf="isRefferal && landingPageName != 'antinoti'">{{'promo_421_1' | translate}} NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_2' | translate}}.*</p>
+                <p *ngIf="!isRefferal || landingPageName === 'antinoti'" [innerHTML]="'flight_third_title' | translate"></p>
                 <a href="javascript:void(0);" class="cstm_theme_btn_comman banner_new_btn" data-toggle="modal" data-target="#works_modal">How it Works</a>
             </div>
         </div>
