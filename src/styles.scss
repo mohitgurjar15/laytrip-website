@@ -1244,7 +1244,7 @@ select {
                                         .drop_aerrow {
                                             width: 14px;
                                             position: relative;
-                                            margin-left: 20px;
+                                            margin-left: 10px;
                                             background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg");
                                             background-position: right;
                                             background-repeat: no-repeat;
@@ -3763,6 +3763,16 @@ select {
                     }
                 }
             }
+        }
+    }
+    &#works_modal{
+        .modal_title{
+            padding: 10px 5px;
+            font-size: 23px;
+            color: #0043ff;
+            text-transform: capitalize;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
     }
 }
