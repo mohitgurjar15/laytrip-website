@@ -4,22 +4,22 @@
 @import "../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-.video_section{
+.video_section {
     padding: 30px 0;
-    h3{
+    h3 {
         font-size: 40px;
         font-weight: 600;
         color: #000;
         margin-bottom: 22px;
         text-align: center;
-        @include tab-view{
+        @include tab-view {
             font-size: 24px;
         }
-        @include mobile-view{
+        @include mobile-view {
             font-size: 14px;
         }
     }
-    video{
+    video {
         max-width: 100%;
     }
 }
