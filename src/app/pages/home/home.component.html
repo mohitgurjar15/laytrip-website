@@ -1,5 +1,4 @@
 <!--  Start Banner Section-->
-<section class="main_banner_section_new">
 <section (swipe)="onSwipe($event)" class="home_banner " id="home_banner" [ngClass]="{'banner_bg':isRefferal==false}">
     <!-- class name banner_bg -->
     <carousel *ngIf="isRefferal==true && landingPageName" class="home_bg_slider" (activeSlide)="activeSlide($event)" currentChangeCounter={{currentChangeCounter}} [slides]="slides"></carousel>
@@ -41,23 +40,6 @@
             </div>
         </div>
     </div>
-</section>
-
-<section class="como_func_flight">
-    <div class="container">
-        <div class="row">
-            <div class="col-8">
-                <h3>Como funciona laytrip</h3>
-                <img class="infographic_img" src="assets/images/infographic.png" alt="infographic">
-            </div>
-            <div class="col-4">
-                <div class="sergios_img">
-                    <img src="assets/images/sergios.png" alt="Sergios">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 </section>
 
 <!--  Close Banner Section-->
