@@ -251,7 +251,8 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.searchFlightInfo.arrival = this.toSearch.code;
 
         if (this.isRoundTrip) {
-          this.rangeDates = [this.departureDate, this.isRefferal ? moment(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate()];
+          this.rangeDates = [this.departureDate, this.isRefferal ? moment(this.departureDate).add(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate()];
+          console.log(this.rangeDates)
         }
       }
     });
