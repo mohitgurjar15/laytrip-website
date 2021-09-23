@@ -19,11 +19,11 @@
 .accordion_cardss {
     margin: 15px 15px 0px 15px;
     &:first-child {
-        margin: 0 15px 15px 15px !important;
+        // margin: 0 15px 15px 15px !important;
     }
     @include tab-view {
         &:first-child {
-            margin: 0 15px 15px 15px !important;
+            // margin: 0 15px 15px 15px !important;
         }
     }
     &:last-child {

@@ -27,7 +27,7 @@
         transform: translate(0%, -90px);
         .banner_text {
             width: auto;
-            margin-bottom: 70px;
+            margin-bottom: 50px;
             display: inline-block;
             max-width: 760px;
             @include tab-view {
@@ -41,7 +41,7 @@
                     padding: 10px 0;
                 }
                 &::before {
-                    content: '';
+                    content: "";
                     width: 100%;
                     height: 100%;
                     position: absolute;
@@ -54,9 +54,12 @@
                     background-repeat: no-repeat;
                     opacity: 0.46;
                 }
-                &.noshadow_antinoti{
-                    &::before{
+                &.noshadow_antinoti {
+                    &::before {
                         display: none;
+                    }
+                    p {
+                        text-shadow: none;
                     }
                 }
             }
@@ -93,12 +96,12 @@
                     color: $primary-color;
                     font-weight: 700;
                 }
-                @media(max-width: 767px) {
+                @media (max-width: 767px) {
                     font-size: 30px;
                     padding: 0 0 0 15px;
                     margin-right: 8px;
                 }
-                @media(max-width: 575px) {
+                @media (max-width: 575px) {
                     font-size: 27px;
                 }
             }
@@ -107,7 +110,7 @@
                 color: $text-white;
                 font-size: 25px;
                 line-height: 32px;
-                text-shadow: 0px 3px 6px #000000C3;
+                text-shadow: 0px 3px 6px #000000c3;
                 letter-spacing: 0.5px;
                 margin: 0;
                 @include tab-view {
@@ -136,7 +139,7 @@
                 @include tab-view {
                     //padding: 0 15px;
                 }
-                @media(max-width: 480px) {
+                @media (max-width: 480px) {
                     display: inline-flex;
                 }
                 a {
@@ -145,7 +148,7 @@
                     border: none;
                     font-size: 16px;
                     font-weight: 500;
-                    color: #52575A;
+                    color: #52575a;
                     text-decoration: none;
                     white-space: nowrap;
                     border-radius: 20px;
@@ -180,12 +183,12 @@
                         .default-icon {
                             display: none;
                         }
-                        &.flight-tab{
+                        &.flight-tab {
                             background: $active-tab-text;
                             color: $text-white;
                         }
-                        &.hotel-tab{
-                            background: #F726C0;
+                        &.hotel-tab {
+                            background: #f726c0;
                             color: $text-white;
                         }
                     }
@@ -205,7 +208,7 @@
                     // @media(max-width: 767px) {
                     //     padding: 20px;
                     // }
-                    @media(max-width: 480px) {
+                    @media (max-width: 480px) {
                         img {
                             margin-right: 0;
                         }
@@ -223,7 +226,7 @@
                 border-radius: 10px;
                 box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
                 min-height: 154px;
-                
+
                 .flight_tab {
                     width: 100%;
                     .nav-tabs {
@@ -265,7 +268,7 @@
                                         display: none;
                                     }
                                 }
-                                @media(max-width: 480px) {
+                                @media (max-width: 480px) {
                                     font-size: 10px;
                                     span {
                                         display: inline-block;
@@ -273,7 +276,7 @@
                                 }
                             }
                         }
-                        @media(max-width: 480px) {
+                        @media (max-width: 480px) {
                             flex-wrap: wrap;
                             li {
                                 margin: 0 5px 5px 0;
@@ -321,7 +324,7 @@
                         padding: 0;
                     }
                     &::before {
-                        content: '';
+                        content: "";
                         position: relative;
                         z-index: 0;
                         background-image: none;
@@ -344,7 +347,7 @@
                     }
                 }
             }
-            @include ipad-view{
+            @include ipad-view {
                 padding: 30px 0 70px;
             }
         }
@@ -390,28 +393,3 @@
 }
 
 //<!--  Close Banner Section css -->
-
-
-.como_func_flight {
-    padding: 80px 0;
-    h3 {
-        font-size: 30px;
-        color: $pink;
-        font-weight: 500;
-        margin-bottom: 35px;
-    }
-    .infographic_img {
-        max-width: 100%;
-    }
-
-    .sergios_img {
-        position: relative;
-        height: 100%;
-        img {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            z-index: 9;
-        }
-    }
-}
