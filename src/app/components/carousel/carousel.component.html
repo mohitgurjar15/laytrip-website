@@ -1,13 +1,13 @@
 <!-- carousel -->
 <div class="carousel">
     <ng-container *ngFor="let slide of slides; let i = index">
-        <img [id]="'slide_'+i" *ngIf="i === currentSlide && i==0" [src]="slide.src" class="slide" @carouselAnimation />
+        <img [id]="'slide_'+i" *ngIf="i === currentSlide && i==0" [src]="slide.src" class="slide" [ngClass]="landingPageName === 'antinoti' ? 'sergio_banner_img':''" @carouselAnimation />
 
-        <img [id]="'slide_'+i" *ngIf="i === currentSlide && i>0" attr.data.src={{slide.src}} class="slide" @carouselAnimation />
+        <img [id]="'slide_'+i" *ngIf="i === currentSlide && i>0" attr.data.src={{slide.src}} class="slide" [ngClass]="landingPageName === 'antinoti' ? 'sergio_banner_img':''" @carouselAnimation />
         
     </ng-container>
-    <div class="brand_logo_antinoti">
-      <div class="container" *ngIf="landingPageName === 'antinoty'">
+    <div class="brand_logo_antinoti"  *ngIf="landingPageName === 'antinoti'">
+      <div class="container">
         <img src="{{s3BucketUrl}}src/assets/images/antinoti-logo.png" alt="antinoti-logo">
       </div>
     </div>

@@ -684,7 +684,7 @@
         "Your payment card will be required at check in as security for these charges. Contact your hotel directly to ask about fees."
     ],
     "apply_lt_points": "Apply your Laytrip Points",
-    "promo_421_legal_1": "*Limited time new bookings only. Must be booked with start date at least 90 calendar days after booking date. Cannot be combined with any other promotion. Discount applies to available bookings on",
+    "promo_421_legal_1": "*Limited time new bookings only. Must be booked with start date at least {{value}} calendar days after booking date. Cannot be combined with any other promotion. Discount applies to available bookings on",
     "promo_421_legal_2": "and other booking process restrictions apply.",
     "billing_address": "Billing Address",
     "mix_cart_msg": "Discounted bookings cannot be combined with non-discounted bookings. Checkout your discounted bookings then search for non-discounted bookings.",
