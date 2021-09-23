@@ -117,7 +117,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     });
 
     this.setDefaultDate();
-
+    this.flightDepartureMinDate = moment().add(2,'days').toDate()
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
@@ -292,7 +292,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.homeService.getLandingPageData.subscribe(data => {
       try {
 
-        this.departureDate = this.flightDepartureMinDate = this.isRefferal ? moment().add(data.promotional.min_promotional_day, 'days').toDate() : moment().add(2, 'days').toDate();
+        this.departureDate = this.isRefferal ? moment().add(data.promotional.min_promotional_day, 'days').toDate() : moment().add(2, 'days').toDate();
         this.returnDate = this.isRefferal ? moment(this.departureDate).add(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate();
       } catch (e) {
       }

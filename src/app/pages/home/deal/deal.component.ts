@@ -41,7 +41,7 @@ export class DealComponent implements OnInit {
   @Input()  dealList = [];
   @Input() moduleId = 3;
   @HostListener('contextmenu', ['$event'])
-  param={value : 15}
+  param={value : 30}
 
   list = [];
   breakpoints = {
