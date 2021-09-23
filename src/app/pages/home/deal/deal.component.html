@@ -24,8 +24,8 @@
 <!-- deal section skeleton loader ends -->
 <section class="deal_sec" *ngIf="list.length > 0 " (contextmenu)="commonFunction.onRightClickDisabled($event)">
     <div class="container">
-        <div class="deal_sec_wrapper">
-            <div class="swiper-button-prev" #prevEl></div>
+        <div class="deal_sec_wrapper" [ngClass]="{deal_center : list.length < 3 ,slider_pagination_hide_cls : list.length <= 3,slider_pagination_hide_cls_tab : list.length <= 2}">
+            <div class="swiper-button-prev" #prevEl [ngClass]="list.length <= 3 ? 'd-none':''"></div>
             <swiper (swiper)="setThumbsSwiper($event)" [breakpoints]="breakpoints" [navigation]="{ prevEl: prevEl, nextEl: nextEl }" [pagination]="{ clickable: true }" [slidesPerView]="1" [spaceBetween]="10" *ngIf="list.length > 0">
                 <ng-template swiperSlide *ngFor="let item of list;">
                     <div class="deal_section_row mb-5" *ngIf="moduleId == 1">
@@ -35,7 +35,8 @@
                                     <img class="deal_img_new" [src]="commonFunction.isRefferal() ? item?.to?.image : item.image" alt="Deal Image" />
                                 </div>
                                 <div class="deal_type_icn">
-                                    <i class="fa fa-plane" aria-hidden="true"></i>
+                                    <img src="{{s3BucketUrl}}assets/images/icons/flight_deals.svg" alt="Flight">
+                                    <!-- <i class="fa fa-plane" aria-hidden="true"></i> -->
                                     <!--fa-bed-->
                                 </div>
                             </div>
@@ -63,7 +64,8 @@
                                     <img class="deal_img_new" [src]="commonFunction.isRefferal() ? item?.location?.image : item.image" alt="Deal Image" />
                                 </div>
                                 <div class="deal_type_icn">
-                                    <i class="fa fa-bed" aria-hidden="true"></i>
+                                    <img src="{{s3BucketUrl}}assets/images/icons/hotel_deals.svg" alt="hotel">
+                                    <!-- <i class="fa fa-bed" aria-hidden="true"></i> -->
                                 </div>
                             </div>
                             <div class="deal_main_section">
@@ -85,7 +87,7 @@
                     </div>
                 </ng-template>
             </swiper>
-            <div class="swiper-button-next" #nextEl></div>
+            <div class="swiper-button-next" #nextEl [ngClass]="list.length <= 3 ? 'd-none':''"></div>
         </div>
         <p class="terms_txt">
             {{'promo_421_legal_1' | translate}} <a target="_blank" [routerLink]="['/']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">laytrip.com</a>. <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate | titlecase}}</a>            {{'promo_421_legal_2' | translate}}

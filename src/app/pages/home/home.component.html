@@ -4,7 +4,7 @@
     <carousel *ngIf="isRefferal==true && landingPageName" class="home_bg_slider" (activeSlide)="activeSlide($event)" currentChangeCounter={{currentChangeCounter}} [slides]="slides"></carousel>
     <div class="container banner_inner">
         <div class="banner_text">
-            <div class="block_left" *ngIf="countryCode!='DR'">
+            <div class="block_left" [ngClass]="landingPageName === 'antinoti'? 'noshadow_antinoti':''" *ngIf="countryCode!='DR'">
                 <span class="banner_text_span" *ngIf="isRefferal && landingPageName != 'antinoti'">
                     <h2>$9.99 NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_3' | translate}}{{'now' | translate}}!</h2>
                 </span>
