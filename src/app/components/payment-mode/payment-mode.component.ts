@@ -114,7 +114,7 @@ export class PaymentModeComponent implements OnInit {
         } else if(checkInDiff > 90){
           this.instalmentRequest.down_payment_option = [20,30,40];
         }
-        console.log("checkInDiff",checkInDiff,this.instalmentRequest)
+        // console.log("checkInDiff",checkInDiff,this.instalmentRequest)
         this.instalmentRequest.amount = this.sellingPrice;
         this.totalLaycredit();
         this.getAllInstalment('set-default-down-payment');
@@ -130,7 +130,7 @@ export class PaymentModeComponent implements OnInit {
    * @param type2 => To calculate redeemable point
    */
   calculateInstalment(type1=null,type2=null,type3=null){
-    console.log("this.instalmentRequest 2",this.instalmentRequest)
+    // console.log("this.instalmentRequest 2",this.instalmentRequest)
     this.genericService.getInstalemnts(this.instalmentRequest).subscribe((res:any)=>{
         this.instalments=res;
         if(this.instalments.instalment_available==true){
@@ -235,7 +235,7 @@ export class PaymentModeComponent implements OnInit {
         } else if(checkInDiff > 90){         
           this.instalmentRequest.down_payment_option = [20,30,40];
         }
-        console.log("this.instalmentRequest123",checkInDiff,this.instalmentRequest)
+        // console.log("this.instalmentRequest123",checkInDiff,this.instalmentRequest)
 
         this.getInstalmentData.emit({
           layCreditPoints :this.laycreditpoints,

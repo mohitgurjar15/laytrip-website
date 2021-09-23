@@ -154,7 +154,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     })
     this.homeService.getSlideOffers.subscribe(currentSlide => {
         if (this.commonFunction.isRefferal() && this.route && !this.route.snapshot.queryParams['check_in']) {
-          console.log('coming in ref')
+          // console.log('coming in ref')
           this.dealDateValidation();
           if (typeof currentSlide == 'undefined') {
             //Condition apply when page is init first time and by default show miami
@@ -183,7 +183,7 @@ export class HotelSearchWidgetComponent implements OnInit {
     this.countryCode = this.commonFunction.getUserCountry();
 
     if (this.route && this.route.snapshot.queryParams['check_in']) {
-      console.log('in route')
+      // console.log('in route')
       this.homeService.removeToString('hotel');
 
       this.checkInDate = moment(this.route.snapshot.queryParams['check_in']).toDate();
@@ -238,8 +238,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
         this.searchHotelInfo.occupancies = info;
       }
-      console.log('fromDesti in ref',this.fromDestinationInfo)
-      console.log('searchHotelInfo in ref',this.searchHotelInfo)
     } else {
       this.searchHotelInfo.latitude = this.fromDestinationInfo.geo_codes.lat;
       this.searchHotelInfo.city_id = this.fromDestinationInfo.city_id;
@@ -362,7 +360,6 @@ export class HotelSearchWidgetComponent implements OnInit {
         queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
       }
     }
-    console.log('this.searchHotelInfo', this.searchHotelInfo,this.validSearch)
     // console.log('this.searchHotelInfo.latitude', this.searchHotelInfo.latitude)
     // console.log('this.searchHotelInfo.longitude', this.searchHotelInfo.longitude)
     // console.log('this.searchHotelInfo.check_in', this.searchHotelInfo.check_in)

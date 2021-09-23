@@ -364,8 +364,8 @@ export class TravelerFormComponent implements OnInit {
     this.travelerService.addAdult(data).subscribe((traveler: any) => {
       this.travelers[`type${this.cartNumber}`].adults[this.traveler_number].is_submitted = false;
       //this.cartService.setLoaderStatus(false)
-      console.log("Actual data",data)
-      console.log("Saved data",traveler)
+      // console.log("Actual data",data)
+      // console.log("Saved data",traveler)
       if (traveler) {
         this.travelerForm.controls[`type${this.cartNumber}`]['controls'].adults.controls[this.traveler_number].controls['userId'].setValue(traveler.traveler.userId);
         this.travelers[`type${cartNumber}`].adults[traveler_number].userId = traveler.traveler.userId;
@@ -634,22 +634,22 @@ export class TravelerFormComponent implements OnInit {
 
   checkMaximumMinimum(event, dobValue, cartNumber, traveler_number) {
     // CHECK MAXIMUM OR MINIMUM DATE OF BIRTH
-    console.log(dobValue,"dobValue")
+    // console.log(dobValue,"dobValue")
     let traveler = this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].value;
-    console.log("Innn")
+    // console.log("Innn")
     if (
       moment(dobValue)
         .isBetween(moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMinDate).format('YYYY-MM-DD'),
           moment(this.travelers[`type${cartNumber}`].adults[traveler_number].dobMaxDate).format('YYYY-MM-DD')) &&
       this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].errors === null
     ) {
-      console.log("true")
+      // console.log("true")
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = true;
       this.travelers[`type${cartNumber}`].adults[traveler_number].dob =moment(dobValue,"YYYY-MM-DD").format("MM/DD/YYYY");
       this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].setErrors(null);
       //this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].updateValueAndValidity();
     } else {
-      console.log("false")
+      // console.log("false")
       this.travelers[`type${cartNumber}`].adults[traveler_number].is_valid_date = false;
       this.travelers[`type${cartNumber}`].adults[traveler_number].dob = moment(dobValue,"YYYY-MM-DD").format("MM/DD/YYYY");
       this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'].setErrors({ 'incorrect': true });
@@ -669,7 +669,7 @@ export class TravelerFormComponent implements OnInit {
       this.travelers[`type${cartNumber}`].adults[traveler_number].passport_expiry = traveler.passport_expiry ? `${moment(traveler.passport_expiry, "YYYY-MM-DD").format('MMM DD, yy')}` : '';
     } */
     //this.patch();
-    console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'],"=");
+    // console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls['dob'],"=");
     //this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.dob.markAsTouched();
   }
 

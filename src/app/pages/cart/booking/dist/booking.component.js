@@ -1,8 +1,12 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    else
+        for (var i = decorators.length - 1; i >= 0; i--)
+            if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
@@ -12,7 +16,7 @@ var environment_1 = require("../../../../environments/environment");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var moment = require("moment");
 var add_card_component_1 = require("../../../components/add-card/add-card.component");
-var BookingComponent = /** @class */ (function () {
+var BookingComponent = /** @class */ (function() {
     function BookingComponent(router, flightService, genericService, travelerService, checkOutService, cartService, commonFunction, cookieService, route) {
         this.router = router;
         this.flightService = flightService;
@@ -60,20 +64,19 @@ var BookingComponent = /** @class */ (function () {
         //this.totalLaycredit();
         this.getCountry();
     }
-    BookingComponent.prototype.ngOnInit = function () {
+    BookingComponent.prototype.ngOnInit = function() {
         var _this = this;
         window.scroll(0, 0);
         localStorage.removeItem("__alrt");
         this.userInfo = jwt_helper_1.getLoginUserInfo();
         if (this.userInfo && this.userInfo.roleId != 7) {
             this.getTravelers();
-        }
-        else {
+        } else {
             this.getTravelers();
             this.guestUserId = this.commonFunction.getGuestUser();
         }
         this.cartLoading = true;
-        this.cartService.getCartList('yes').subscribe(function (items) {
+        this.cartService.getCartList('yes').subscribe(function(items) {
             _this.cartLoading = false;
             var cart;
             var price;
@@ -85,10 +88,9 @@ var BookingComponent = /** @class */ (function () {
                 cart.id = items.data[i].id;
                 cart.is_available = items.data[i].is_available;
                 _this.modules.push(items.data[i].type);
-                if (_this.modules.some(function (x) { return x === "flight"; })) {
+                if (_this.modules.some(function(x) { return x === "flight"; })) {
                     _this.lottieLoaderType = "flight";
-                }
-                else {
+                } else {
                     _this.lottieLoaderType = "hotel";
                 }
                 if (items.data[i].type == 'flight') {
@@ -101,8 +103,7 @@ var BookingComponent = /** @class */ (function () {
                     price.start_price = items.data[i].moduleInfo[0].start_price;
                     price.type = items.data[i].type;
                     price.location = items.data[i].moduleInfo[0].departure_code + "-" + items.data[i].moduleInfo[0].arrival_code;
-                }
-                else if (items.data[i].type == 'hotel') {
+                } else if (items.data[i].type == 'hotel') {
                     cart.module_info = items.data[i].moduleInfo[0];
                     cart.old_module_info = {
                         selling_price: items.data[i].oldModuleInfo[0].selling.total
@@ -121,14 +122,14 @@ var BookingComponent = /** @class */ (function () {
             }
             _this.cartService.setCartItems(_this.carts);
             _this.cartService.setCartPrices(_this.cartPrices);
-        }, function (error) {
+        }, function(error) {
             _this.isCartEmpty = true;
             _this.cartLoading = false;
             _this.carts = [];
             _this.cartPrices = [];
             localStorage.setItem('$crt', '0');
         });
-        this.$cartIdsubscription = this.cartService.getCartId.subscribe(function (cartId) {
+        this.$cartIdsubscription = this.cartService.getCartId.subscribe(function(cartId) {
             if (cartId > 0) {
                 _this.deleteCart(cartId);
             }
@@ -136,11 +137,10 @@ var BookingComponent = /** @class */ (function () {
         try {
             this.cardToken = this.cookieService.get('__cc');
             this.cardToken = this.cardToken || '';
-        }
-        catch (e) {
+        } catch (e) {
             this.cardToken = '';
         }
-        this.checkOutService.getTravelerFormData.subscribe(function (travelerFrom) {
+        this.checkOutService.getTravelerFormData.subscribe(function(travelerFrom) {
             _this.isValidTravelers = travelerFrom.status === 'VALID' ? true : false;
             _this.travelerForm = travelerFrom;
             if (_this.carts.length && _this.isSubmitted) {
@@ -148,10 +148,10 @@ var BookingComponent = /** @class */ (function () {
                 _this.validateCartItems();
             }
         });
-        this.cartService.getLoaderStatus.subscribe(function (state) {
+        this.cartService.getLoaderStatus.subscribe(function(state) {
             _this.loading = state;
         });
-        this.genericService.getCardItems.subscribe(function (res) {
+        this.genericService.getCardItems.subscribe(function(res) {
             if (_this.totalCard != res.length) {
                 _this.totalCard = res.length;
                 _this.add_new_card = false;
@@ -159,88 +159,87 @@ var BookingComponent = /** @class */ (function () {
         });
         sessionStorage.setItem('__insMode', btoa(this.instalmentMode));
     };
-    BookingComponent.prototype.totalNumberOfcard = function (event) {
-        console.log(event, "------");
+    BookingComponent.prototype.totalNumberOfcard = function(event) {
+        // console.log(event, "------");
         //this.totalCard = event;
     };
-    BookingComponent.prototype.addNewCard = function () {
+    BookingComponent.prototype.addNewCard = function() {
         this.add_new_card = true;
     };
-    BookingComponent.prototype.closeNewCardPanel = function (event) {
-        console.log("Event", event);
+    BookingComponent.prototype.closeNewCardPanel = function(event) {
+        // console.log("Event", event);
         this.add_new_card = event;
     };
-    BookingComponent.prototype.ngAfterViewInit = function () {
+    BookingComponent.prototype.ngAfterViewInit = function() {
         this.userInfo = jwt_helper_1.getLoginUserInfo();
         if (this.userInfo && Object.keys(this.userInfo).length > 0) {
             this.getTravelers();
         }
     };
-    BookingComponent.prototype.totalLaycredit = function () {
+    BookingComponent.prototype.totalLaycredit = function() {
         var _this = this;
         this.isLayCreditLoading = true;
-        this.genericService.getAvailableLaycredit().subscribe(function (res) {
+        this.genericService.getAvailableLaycredit().subscribe(function(res) {
             _this.isLayCreditLoading = false;
             _this.totalLaycreditPoints = res.total_available_points;
-        }, (function (error) {
+        }, (function(error) {
             _this.isLayCreditLoading = false;
         }));
     };
-    BookingComponent.prototype.applyLaycredit = function (laycreditpoints) {
+    BookingComponent.prototype.applyLaycredit = function(laycreditpoints) {
         this.laycreditpoints = laycreditpoints;
         this.isShowPaymentOption = true;
         if (this.laycreditpoints >= this.sellingPrice) {
             this.isShowPaymentOption = false;
         }
     };
-    BookingComponent.prototype.getSellingPrice = function () {
+    BookingComponent.prototype.getSellingPrice = function() {
         var _this = this;
         var payLoad = {
             departure_date: moment(this.flightSummary[0].departure_date, 'DD/MM/YYYY').format("YYYY-MM-DD"),
             net_rate: this.flightSummary[0].net_rate
         };
-        this.flightService.getSellingPrice(payLoad).subscribe(function (res) {
+        this.flightService.getSellingPrice(payLoad).subscribe(function(res) {
             _this.priceData = res;
             _this.sellingPrice = _this.priceData[0].selling_price;
-        }, function (error) {
-        });
+        }, function(error) {});
     };
-    BookingComponent.prototype.selectInstalmentMode = function (instalmentMode) {
+    BookingComponent.prototype.selectInstalmentMode = function(instalmentMode) {
         this.instalmentMode = instalmentMode;
         this.showPartialPayemntOption = (this.instalmentMode == 'instalment') ? true : false;
         sessionStorage.setItem('__insMode', btoa(this.instalmentMode));
     };
-    BookingComponent.prototype.getInstalmentData = function (data) {
+    BookingComponent.prototype.getInstalmentData = function(data) {
         this.instalmentType = data.instalmentType;
         //this.laycreditpoints = data.layCreditPoints;
         this.priceSummary = data;
         this.checkOutService.setPriceSummary(this.priceSummary);
         sessionStorage.setItem('__islt', btoa(JSON.stringify(data)));
     };
-    BookingComponent.prototype.ngDoCheck = function () {
+    BookingComponent.prototype.ngDoCheck = function() {
         var userToken = localStorage.getItem('_lay_sess');
         this.userInfo = jwt_helper_1.getLoginUserInfo();
         if (userToken) {
             this.isLoggedIn = true;
         }
     };
-    BookingComponent.prototype.redeemableLayCredit = function (event) {
+    BookingComponent.prototype.redeemableLayCredit = function(event) {
         this.redeemableLayPoints = event;
     };
-    BookingComponent.prototype.getTravelers = function () {
+    BookingComponent.prototype.getTravelers = function() {
         var _this = this;
-        this.travelerService.getTravelers().subscribe(function (res) {
+        this.travelerService.getTravelers().subscribe(function(res) {
             //this.travelers=res.data;
             _this.checkOutService.setTravelers(res.data);
         });
     };
-    BookingComponent.prototype.getCountry = function () {
+    BookingComponent.prototype.getCountry = function() {
         var _this = this;
-        this.genericService.getCountry().subscribe(function (res) {
+        this.genericService.getCountry().subscribe(function(res) {
             _this.checkOutService.setCountries(res);
         });
     };
-    BookingComponent.prototype.handleSubmit = function () {
+    BookingComponent.prototype.handleSubmit = function() {
         if (this.commonFunction.isRefferal()) {
             var parms = this.commonFunction.getRefferalParms();
             var queryParams = {};
@@ -252,12 +251,11 @@ var BookingComponent = /** @class */ (function () {
                 queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
             this.router.navigate(['/flight/checkout'], { queryParams: queryParams });
-        }
-        else {
+        } else {
             this.router.navigate(['/flight/checkout']);
         }
     };
-    BookingComponent.prototype.ngOnDestroy = function () {
+    BookingComponent.prototype.ngOnDestroy = function() {
         this.cartService.setCartTravelers({
             type0: {
                 adults: []
@@ -298,7 +296,7 @@ var BookingComponent = /** @class */ (function () {
         this.$cartIdsubscription.unsubscribe();
         this.checkOutService.setTravelers([]);
     };
-    BookingComponent.prototype.redirectTo = function (uri) {
+    BookingComponent.prototype.redirectTo = function(uri) {
         var _this = this;
         if (this.commonFunction.isRefferal()) {
             var parms = this.commonFunction.getRefferalParms();
@@ -310,30 +308,29 @@ var BookingComponent = /** @class */ (function () {
             if (parms.utm_campaign) {
                 queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
-            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function() {
                 return _this.router.navigate([uri], { queryParams: queryParams });
             });
-        }
-        else {
-            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+        } else {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function() {
                 return _this.router.navigate([uri]);
             });
         }
     };
-    BookingComponent.prototype.deleteCart = function (cartId) {
+    BookingComponent.prototype.deleteCart = function(cartId) {
         var _this = this;
         if (cartId == 0) {
             return;
         }
         this.loading = true;
-        this.cartService.deleteCartItem(cartId).subscribe(function (res) {
+        this.cartService.deleteCartItem(cartId).subscribe(function(res) {
             _this.loading = false;
             _this.redirectTo('/cart/checkout');
-            var index = _this.carts.findIndex(function (x) { return x.id == cartId; });
+            var index = _this.carts.findIndex(function(x) { return x.id == cartId; });
             _this.carts.splice(index, 1);
             _this.cartPrices.splice(index, 1);
             localStorage.removeItem('$cartOver');
-            setTimeout(function () {
+            setTimeout(function() {
                 _this.cartService.setCartItems(_this.carts);
                 _this.cartService.setCartPrices(_this.cartPrices);
             }, 2000);
@@ -345,32 +342,31 @@ var BookingComponent = /** @class */ (function () {
             }
             localStorage.setItem('$crt', JSON.stringify(_this.carts.length));
             _this.cartService.setDeletedCartItem(index);
-        }, function (error) {
+        }, function(error) {
             _this.loading = false;
             if (error.status == 404) {
-                var index = _this.carts.findIndex(function (x) { return x.id == cartId; });
+                var index = _this.carts.findIndex(function(x) { return x.id == cartId; });
                 _this.carts.splice(index, 1);
                 _this.cartService.setCartItems(_this.carts);
                 if (_this.carts.length == 0) {
                     _this.isCartEmpty = true;
                 }
                 localStorage.setItem('$crt', JSON.stringify(_this.carts.length));
-            }
-            else {
+            } else {
                 //do something
             }
         });
     };
-    BookingComponent.prototype.selectCreditCard = function (data) {
+    BookingComponent.prototype.selectCreditCard = function(data) {
         this.cardToken = data;
         this.cookieService.put("__cc", this.cardToken);
         this.validationErrorMessage = '';
         this.validateCartItems();
     };
-    BookingComponent.prototype.removeValidationError = function () {
+    BookingComponent.prototype.removeValidationError = function() {
         this.validationErrorMessage = '';
     };
-    BookingComponent.prototype.validateCartItems = function () {
+    BookingComponent.prototype.validateCartItems = function() {
         this.validationErrorMessage = '';
         this.inValidCartTravller = [];
         /* if (!this.isValidTravelers) { */
@@ -379,7 +375,7 @@ var BookingComponent = /** @class */ (function () {
         for (var i in Object.keys(this.travelerForm.controls)) {
             message = '';
             for (var j = 0; j < this.travelerForm.controls["type" + i]['controls'].adults.controls.length; j++) {
-                console.log(this.travelerForm.controls["type" + i]['controls'].adults.controls[j]);
+                // console.log(this.travelerForm.controls["type" + i]['controls'].adults.controls[j]);
                 if (typeof this.carts[i] != 'undefined' && this.carts[i].is_available && this.travelerForm.controls["type" + i]['controls'].adults.controls[j].status == 'INVALID') {
                     if (this.validationErrorMessage == '') {
                         this.validationErrorMessage = 'Complete required fields in Traveler Details for';
@@ -464,20 +460,17 @@ var BookingComponent = /** @class */ (function () {
                       }
                     } */
                     this.isAllAlertClosed = false;
-                }
-                else {
+                } else {
                     this.isAllAlertClosed = true;
                 }
-            }
-            else {
+            } else {
                 this.isAllAlertClosed = true;
             }
-        }
-        catch (e) {
+        } catch (e) {
             this.isAllAlertClosed = true;
         }
     };
-    BookingComponent.prototype.continueToCheckout = function () {
+    BookingComponent.prototype.continueToCheckout = function() {
         var _this = this;
         this.validationErrorMessage = '';
         this.validateCartItems();
@@ -485,15 +478,14 @@ var BookingComponent = /** @class */ (function () {
         if (this.cardToken == '') {
             if (this.validationErrorMessage == '') {
                 this.validationErrorMessage = " Please select a credit card";
-            }
-            else {
+            } else {
                 this.validationErrorMessage += " and please select a credit card";
             }
         }
         if (this.isValidTravelers && this.cardToken != '' && !this.isNotAvailableItinerary && this.isAllAlertClosed) {
             this.loading = true;
             this.travelerForm.enable();
-            var _loop_1 = function (i) {
+            var _loop_1 = function(i) {
                 var data = this_1.travelerForm.controls["type" + i].value.adults;
                 /*  */
                 var travelers = [];
@@ -507,15 +499,14 @@ var BookingComponent = /** @class */ (function () {
                     if (data[k].passport_expiry) {
                         data[k].passport_expiry = moment(data[k].passport_expiry, "MM/DD/YYYY").format("YYYY-MM-DD");
                     }
-                    this_1.travelerService.updateAdult(data[k], data[k].userId).subscribe(function (traveler) {
-                    });
+                    this_1.travelerService.updateAdult(data[k], data[k].userId).subscribe(function(traveler) {});
                 }
                 var cartData = {
                     cart_id: this_1.carts[i].id,
                     travelers: travelers,
                     referral_id: this_1.route.snapshot.queryParams['utm_source'] ? this_1.route.snapshot.queryParams['utm_source'] : ''
                 };
-                this_1.cartService.updateCart(cartData).subscribe(function (data) {
+                this_1.cartService.updateCart(cartData).subscribe(function(data) {
                     if (i === _this.carts.length - 1) {
                         _this.loading = false;
                         if (_this.commonFunction.isRefferal()) {
@@ -529,8 +520,7 @@ var BookingComponent = /** @class */ (function () {
                                 queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
                             }
                             _this.router.navigate(['cart/checkout'], { queryParams: queryParams });
-                        }
-                        else {
+                        } else {
                             _this.router.navigate(['cart/checkout']);
                         }
                     }
@@ -542,21 +532,21 @@ var BookingComponent = /** @class */ (function () {
             }
         }
     };
-    BookingComponent.prototype.getCardListChange = function (data) {
+    BookingComponent.prototype.getCardListChange = function(data) {
         //this.add_new_card = false;
         this.cardListChangeCount = data;
     };
-    BookingComponent.prototype.removeNotAvailableError = function () {
+    BookingComponent.prototype.removeNotAvailableError = function() {
         this.isNotAvailableItinerary = false;
     };
-    BookingComponent.prototype.removeAllAlertError = function () {
+    BookingComponent.prototype.removeAllAlertError = function() {
         this.isAllAlertClosed = true;
     };
-    BookingComponent.prototype.cartValueChanged = function (event) {
+    BookingComponent.prototype.cartValueChanged = function(event) {
         this.ismaxCartAdded = event;
     };
-    BookingComponent.prototype.clickOutside = function () {
-        console.log('here');
+    BookingComponent.prototype.clickOutside = function() {
+        // console.log('here');
     };
     __decorate([
         core_1.ViewChild(add_card_component_1.AddCardComponent, { static: false })

@@ -31,7 +31,7 @@ export class FlightClassComponent implements OnInit {
 
     $(".class_sec_info").click(function (e) {
       e.stopPropagation();
-      console.log(e.target)
+      // console.log(e.target)
       if((e.target.nextSibling != null && e.target.nextSibling.classList[2] == 'panel_hide') || 
       (e.target.offsetParent.nextSibling != null && e.target.offsetParent.nextSibling.classList[2] == 'panel_hide')
       ){         

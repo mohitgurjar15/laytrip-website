@@ -1,14 +1,18 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    else
+        for (var i = decorators.length - 1; i >= 0; i--)
+            if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
 exports.SearchAirportComponent = void 0;
 var core_1 = require("@angular/core");
-var SearchAirportComponent = /** @class */ (function () {
+var SearchAirportComponent = /** @class */ (function() {
     function SearchAirportComponent(flightService, cd, cookieService, commonFunction) {
         this.flightService = flightService;
         this.cd = cd;
@@ -25,26 +29,25 @@ var SearchAirportComponent = /** @class */ (function () {
         this.data = [];
         this.loading = false;
     }
-    SearchAirportComponent.prototype.ngOnInit = function () {
+    SearchAirportComponent.prototype.ngOnInit = function() {
         this.data[0] = this.airport ? this.airport : [];
         if (Object.keys(this.airport).length == 0) {
             this.data = [];
         }
     };
-    SearchAirportComponent.prototype.searchAirport = function (searchItem) {
+    SearchAirportComponent.prototype.searchAirport = function(searchItem) {
         var _this = this;
         this.loading = true;
         var isFromLocation = this.id == 'fromSearch' ? 'yes' : 'no';
         var alternateLocation = '';
         if (this.id == 'fromSearch') {
             alternateLocation = localStorage.getItem('__to') || '';
-        }
-        else {
+        } else {
             alternateLocation = localStorage.getItem('__from') || '';
         }
-        this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe(function (response) {
+        this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe(function(response) {
             _this.flightSearchRoute.emit(response);
-            _this.data = response.map(function (res) {
+            _this.data = response.map(function(res) {
                 _this.loading = false;
                 var searchRoute = {
                     id: res.id,
@@ -57,24 +60,23 @@ var SearchAirportComponent = /** @class */ (function () {
                 };
                 return searchRoute;
             });
-        }, function (error) {
+        }, function(error) {
             _this.loading = false;
         });
     };
-    SearchAirportComponent.prototype.onChangeSearch = function (event) {
+    SearchAirportComponent.prototype.onChangeSearch = function(event) {
         this.searchAirport(event.term);
         // this.searchItem.emit({key : event.term,type : this.id})
     };
-    SearchAirportComponent.prototype.selectEvent = function (event, index) {
-        console.log(event);
+    SearchAirportComponent.prototype.selectEvent = function(event, index) {
+        // console.log(event);
         if (!event) {
             this.placeHolder = this.placeHolder;
         }
         if (typeof event == 'undefined') {
             if (index === 'fromSearch') {
                 localStorage.removeItem('__from');
-            }
-            else if (index === 'toSearch') {
+            } else if (index === 'toSearch') {
                 localStorage.removeItem('__to');
             }
         }
@@ -82,17 +84,16 @@ var SearchAirportComponent = /** @class */ (function () {
         if (event && index && index === 'fromSearch') {
             this.changeValue.emit({ key: 'fromSearch', value: event });
             localStorage.setItem('__from', this.selectedAirport.code);
-        }
-        else if (event && index && index === 'toSearch') {
+        } else if (event && index && index === 'toSearch') {
             localStorage.setItem('__to', this.selectedAirport.code);
             this.changeValue.emit({ key: 'toSearch', value: event });
         }
         this.cd.detectChanges();
     };
-    SearchAirportComponent.prototype.onRemove = function (event) {
+    SearchAirportComponent.prototype.onRemove = function(event) {
         this.selectedAirport = {};
     };
-    SearchAirportComponent.prototype.setDefaultAirport = function () {
+    SearchAirportComponent.prototype.setDefaultAirport = function() {
         try {
             var location = this.cookieService.get('__loc');
             location = JSON.parse(location);
@@ -103,31 +104,28 @@ var SearchAirportComponent = /** @class */ (function () {
                 this.defaultSelected='';
                 this.selectedAirport = this.data[0]; */
             }
-        }
-        catch (error) {
-        }
+        } catch (error) {}
     };
-    SearchAirportComponent.prototype.ngOnChanges = function (changes) {
+    SearchAirportComponent.prototype.ngOnChanges = function(changes) {
         if (changes['airport'] && typeof changes['airport'].currentValue != 'undefined') {
             this.defaultCity = Object.keys(changes['airport'].currentValue).length > 0 ? changes['airport'].currentValue.city : [];
             this.data = Object.keys(changes['airport'].currentValue).length > 0 ? Object.assign([], [changes['airport'].currentValue]) : [];
         }
     };
-    SearchAirportComponent.prototype.onFocus = function () {
+    SearchAirportComponent.prototype.onFocus = function() {
         var _this = this;
         this.isInputFocus = true;
         if (this.commonFunction.isRefferal()) {
-            this.progressInterval = setInterval(function () {
+            this.progressInterval = setInterval(function() {
                 if (_this.isInputFocus) {
                     _this.currentChangeCounter.emit(_this.counterChangeVal += 1);
-                }
-                else {
+                } else {
                     clearInterval(_this.progressInterval);
                 }
             }, 1000);
         }
     };
-    SearchAirportComponent.prototype.onClose = function (event) {
+    SearchAirportComponent.prototype.onClose = function(event) {
         this.isInputFocus = false;
     };
     __decorate([
