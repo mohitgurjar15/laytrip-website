@@ -54,6 +54,11 @@
                     background-repeat: no-repeat;
                     opacity: 0.46;
                 }
+                &.noshadow_antinoti{
+                    &::before{
+                        display: none;
+                    }
+                }
             }
             .banner_text_span {
                 display: flex;

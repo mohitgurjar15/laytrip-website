@@ -315,3 +315,32 @@
     background-color: blue;
     color: #fff;
 }
+
+::ng-deep{
+    .deal_center{
+        .swiper-wrapper{
+            justify-content: center;
+            @include ipad-view{
+                justify-content: inherit;
+            }
+        }
+    }
+    .slider_pagination_hide_cls{
+        .swiper-pagination{
+            display: none;
+
+            @include ipad-view{
+                display: block;
+            }
+        }
+    }
+    .slider_pagination_hide_cls_tab{
+        .swiper-pagination{
+            display: none;
+
+            @include tab-view{
+                display: block;
+            }
+        }
+    }
+}

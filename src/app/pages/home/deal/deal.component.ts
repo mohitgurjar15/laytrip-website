@@ -45,7 +45,7 @@ export class DealComponent implements OnInit {
   breakpoints = {
     320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup:1 },
     520: { slidesPerView: 1, spaceBetween: 10 ,slidesPerGroup:2},
-    768: { slidesPerView: 2, spaceBetween: 20 ,slidesPerGroup:2},
+    768: { slidesPerView: 2, spaceBetween: 15 ,slidesPerGroup:2},
     992: { slidesPerView: 3, spaceBetween: 20 ,slidesPerGroup:2},
     1024: { slidesPerView: 3, spaceBetween: 30 ,slidesPerGroup:2}
   };
