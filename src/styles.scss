@@ -867,19 +867,10 @@ select {
 //<!-- home slider css -->
 .home_bg_slider {
     //height: calc(100vh - 100px);
-    height: 100vh;
-    min-height: 610px;
-    max-height: 650px;
+    height: auto;
     width: 100%;
     display: flex;
     flex-direction: column;
-    @include ipad-view {
-        height: 100vh;
-        min-height: 580px;
-    }
-    @include tab-view {
-        min-height: 710px;
-    }
     .carousel {
         border-radius: 0 !important;
         .slide {
@@ -1244,7 +1235,7 @@ select {
                                         .drop_aerrow {
                                             width: 14px;
                                             position: relative;
-                                            margin-left: 20px;
+                                            margin-left: 10px;
                                             background-image: url("https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg");
                                             background-position: right;
                                             background-repeat: no-repeat;
@@ -3763,6 +3754,16 @@ select {
                     }
                 }
             }
+        }
+    }
+    &#works_modal{
+        .modal_title{
+            padding: 10px 5px;
+            font-size: 23px;
+            color: #0043ff;
+            text-transform: capitalize;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
     }
 }
