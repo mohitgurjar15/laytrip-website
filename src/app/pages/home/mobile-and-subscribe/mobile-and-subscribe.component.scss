@@ -84,6 +84,12 @@
           padding: 8px 10px;
           font-size: 14px;
         }
+
+        &:focus{
+          &::placeholder{
+            color: $mid_gray_bg;
+          }
+        }
       }
       button{
         padding:8px 28px;
