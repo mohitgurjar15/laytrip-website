@@ -109,7 +109,21 @@ ul {
 .slide {
   &.sergio_banner_img {
     object-position: center 25%;
-    min-height: 670px;
-    max-height: 670px;
+    min-height: 650px;
+    max-height: 650px;
+
+    @media screen and (max-width: 991px) {
+      min-height: 780px;
+      max-height: 780px;
+    }
+
+    @media screen and (max-width: 767px) {
+      min-height: 690px;
+      max-height: 690px;
+    }
+    @media screen and (max-width: 575px) {
+      min-height: 760px;
+      max-height: 760px;
+    }
   }
 }
