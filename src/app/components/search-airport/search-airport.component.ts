@@ -82,8 +82,8 @@ export class SearchAirportComponent implements OnInit {
     else {
       alternateLocation = localStorage.getItem('__from') || '';
     }
-    // alternateLocation = ''
-    console.log(alternateLocation)
+    alternateLocation = ''
+    // console.log(alternateLocation)
     this.$autoComplete = this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe((response: any) => {
       this.flightSearchRoute.emit(response);
       this.data = response.map(res => {

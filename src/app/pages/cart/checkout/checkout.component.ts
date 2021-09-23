@@ -130,7 +130,7 @@ export class CheckoutComponent implements OnInit {
       let nonPromoConflictCartIds=[];
       let price: any;
       this.installmentSummary = items.price_summary;
-      console.log()
+      // console.log()
       for (let i = 0; i < items.data.length; i++) {
         cart = {};
         price = {}
@@ -552,7 +552,7 @@ export class CheckoutComponent implements OnInit {
     this.bookingRequest.cart = carts;
     //return false;
     sessionStorage.setItem('__cbk', JSON.stringify(this.bookingRequest))
-    console.log("okk",this.travelerForm)
+    // console.log("okk",this.travelerForm)
     //return false;
     if (this.isValidTravelers && this.cardToken != '' && this.isAllAlertClosed && this.isTermConditionAccepted && this.isExcludedCountryAccepted) {
       this.isBookingProgress = true;
@@ -633,7 +633,7 @@ export class CheckoutComponent implements OnInit {
             }
           }, (error) => {
             this.isBookingProgress = false;
-            console.log(error);
+            // console.log(error);
           });
 
         

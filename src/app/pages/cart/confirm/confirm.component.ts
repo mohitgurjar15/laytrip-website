@@ -65,7 +65,7 @@ export class ConfirmComponent implements OnInit {
       if(allBookingStatus.length==this.cartDetails.booking.length){
         this.allBookingStatus=false;
       }
-      console.log(this.allBookingStatus)
+      // console.log(this.allBookingStatus)
       if(this.anyBookingStatus==false){
         this.openBookingCompletionErrorPopup();
       }

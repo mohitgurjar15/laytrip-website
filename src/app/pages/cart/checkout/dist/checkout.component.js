@@ -1,8 +1,12 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    else
+        for (var i = decorators.length - 1; i >= 0; i--)
+            if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
@@ -12,7 +16,7 @@ var environment_1 = require("../../../../environments/environment");
 var jwt_helper_1 = require("../../../_helpers/jwt.helper");
 var moment = require("moment");
 var add_card_component_1 = require("../../../components/add-card/add-card.component");
-var CheckoutComponent = /** @class */ (function () {
+var CheckoutComponent = /** @class */ (function() {
     function CheckoutComponent(genericService, travelerService, checkOutService, cartService, cookieService, cd, router, commonFunction, spreedly, eRef) {
         this.genericService = genericService;
         this.travelerService = travelerService;
@@ -76,20 +80,19 @@ var CheckoutComponent = /** @class */ (function () {
         this.getCountry();
         // this.openBookingCompletionErrorPopup();
     }
-    CheckoutComponent.prototype.ngOnInit = function () {
+    CheckoutComponent.prototype.ngOnInit = function() {
         var _this = this;
         window.scroll(0, 0);
         localStorage.removeItem("__alrt");
         this.userInfo = jwt_helper_1.getLoginUserInfo();
         if (this.userInfo && this.userInfo.roleId != 7) {
             this.getTravelers();
-        }
-        else {
+        } else {
             this.getTravelers();
             this.guestUserId = this.commonFunction.getGuestUser();
         }
         this.cartLoading = true;
-        this.cartService.getCartList('yes').subscribe(function (items) {
+        this.cartService.getCartList('yes').subscribe(function(items) {
             if (items && items.data && items.data.length) {
                 _this.bookingTimerConfiguration();
             }
@@ -104,10 +107,9 @@ var CheckoutComponent = /** @class */ (function () {
                 cart.id = items.data[i].id;
                 cart.is_available = items.data[i].is_available;
                 _this.modules.push(items.data[i].type);
-                if (_this.modules.some(function (x) { return x === "flight"; })) {
+                if (_this.modules.some(function(x) { return x === "flight"; })) {
                     _this.lottieLoaderType = "flight";
-                }
-                else {
+                } else {
                     _this.lottieLoaderType = "hotel";
                 }
                 if (items.data[i].type == 'flight') {
@@ -120,8 +122,7 @@ var CheckoutComponent = /** @class */ (function () {
                     price.start_price = items.data[i].moduleInfo[0].start_price;
                     price.type = items.data[i].type;
                     price.location = items.data[i].moduleInfo[0].departure_code + "-" + items.data[i].moduleInfo[0].arrival_code;
-                }
-                else if (items.data[i].type == 'hotel') {
+                } else if (items.data[i].type == 'hotel') {
                     cart.module_info = items.data[i].moduleInfo[0];
                     cart.old_module_info = {
                         selling_price: items.data[i].oldModuleInfo[0].selling.total
@@ -140,7 +141,7 @@ var CheckoutComponent = /** @class */ (function () {
             }
             _this.cartService.setCartItems(_this.carts);
             _this.cartService.setCartPrices(_this.cartPrices);
-        }, function (error) {
+        }, function(error) {
             _this.isCartEmpty = true;
             _this.cartLoading = false;
         });
@@ -165,32 +166,31 @@ var CheckoutComponent = /** @class */ (function () {
             this.router.navigate(['/'])
           }
         } */
-        this.$cartIdsubscription = this.cartService.getCartId.subscribe(function (cartId) {
+        this.$cartIdsubscription = this.cartService.getCartId.subscribe(function(cartId) {
             if (cartId > 0) {
                 _this.deleteCart(cartId);
             }
         });
-        this.checkOutService.getTravelerFormData.subscribe(function (travelerFrom) {
+        this.checkOutService.getTravelerFormData.subscribe(function(travelerFrom) {
             _this.isValidTravelers = travelerFrom.status === 'VALID' ? true : false;
             _this.travelerForm = travelerFrom;
         });
         try {
             this.cardToken = this.cookieService.get('__cc');
-        }
-        catch (e) {
+        } catch (e) {
             this.cardToken = '';
         }
-        this.cartService.getLoaderStatus.subscribe(function (state) {
+        this.cartService.getLoaderStatus.subscribe(function(state) {
             _this.loading = state;
         });
-        this.genericService.getCardItems.subscribe(function (res) {
+        this.genericService.getCardItems.subscribe(function(res) {
             if (_this.totalCard != res.length) {
                 _this.totalCard = res.length;
                 _this.add_new_card = false;
             }
         });
     };
-    CheckoutComponent.prototype.sessionTimeout = function (event) {
+    CheckoutComponent.prototype.sessionTimeout = function(event) {
         this.isSessionTimeOut = event;
         if (this.isSessionTimeOut && !this.isBookingRequest) {
             if (this.commonFunction.isRefferal()) {
@@ -204,32 +204,31 @@ var CheckoutComponent = /** @class */ (function () {
                     queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
                 }
                 this.router.navigate(['/cart/checkout'], { queryParams: queryParams });
-            }
-            else {
+            } else {
                 this.router.navigate(['/cart/checkout']);
             }
         }
     };
-    CheckoutComponent.prototype.bookingTimerConfiguration = function () {
+    CheckoutComponent.prototype.bookingTimerConfiguration = function() {
         this.bookingTimerConfig = Object.assign({}, {
             leftTime: 600,
             format: 'm:s'
         });
     };
-    CheckoutComponent.prototype.getTravelers = function () {
+    CheckoutComponent.prototype.getTravelers = function() {
         var _this = this;
-        this.travelerService.getTravelers().subscribe(function (res) {
+        this.travelerService.getTravelers().subscribe(function(res) {
             _this.checkOutService.setTravelers(res.data);
             _this.cd.detectChanges();
         });
     };
-    CheckoutComponent.prototype.getCountry = function () {
+    CheckoutComponent.prototype.getCountry = function() {
         var _this = this;
-        this.genericService.getCountry().subscribe(function (res) {
+        this.genericService.getCountry().subscribe(function(res) {
             _this.checkOutService.setCountries(res);
         });
     };
-    CheckoutComponent.prototype.ngOnDestroy = function () {
+    CheckoutComponent.prototype.ngOnDestroy = function() {
         this.cartService.setCartTravelers({
             type0: {
                 adults: []
@@ -270,11 +269,11 @@ var CheckoutComponent = /** @class */ (function () {
         this.$cartIdsubscription.unsubscribe();
         this.checkOutService.setTravelers([]);
     };
-    CheckoutComponent.prototype.getCardListChange = function (data) {
+    CheckoutComponent.prototype.getCardListChange = function(data) {
         //this.add_new_card = false;
         this.cardListChangeCount = data;
     };
-    CheckoutComponent.prototype.redirectTo = function (uri) {
+    CheckoutComponent.prototype.redirectTo = function(uri) {
         var _this = this;
         if (this.commonFunction.isRefferal()) {
             var parms = this.commonFunction.getRefferalParms();
@@ -286,23 +285,22 @@ var CheckoutComponent = /** @class */ (function () {
             if (parms.utm_campaign) {
                 queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
             }
-            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function() {
                 return _this.router.navigate([uri], { queryParams: queryParams });
             });
-        }
-        else {
-            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+        } else {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(function() {
                 return _this.router.navigate([uri]);
             });
         }
     };
-    CheckoutComponent.prototype.deleteCart = function (cartId) {
+    CheckoutComponent.prototype.deleteCart = function(cartId) {
         var _this = this;
         if (cartId == 0) {
             return;
         }
         this.loading = true;
-        this.cartService.deleteCartItem(cartId).subscribe(function (res) {
+        this.cartService.deleteCartItem(cartId).subscribe(function(res) {
             _this.loading = false;
             if (_this.commonFunction.isRefferal()) {
                 var parms = _this.commonFunction.getRefferalParms();
@@ -315,16 +313,15 @@ var CheckoutComponent = /** @class */ (function () {
                     queryParams.utm_campaign = parms.utm_campaign ? parms.utm_campaign : '';
                 }
                 _this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: queryParams });
-            }
-            else {
+            } else {
                 _this.redirectTo('/cart/checkout');
             }
-            var index = _this.carts.findIndex(function (x) { return x.id == cartId; });
+            var index = _this.carts.findIndex(function(x) { return x.id == cartId; });
             _this.carts.splice(index, 1);
             _this.cartPrices.splice(index, 1);
             localStorage.removeItem('$cartOver');
             _this.adjustPriceSummary();
-            setTimeout(function () {
+            setTimeout(function() {
                 _this.cartService.setCartItems(_this.carts);
                 _this.cartService.setCartPrices(_this.cartPrices);
             }, 2000);
@@ -336,23 +333,22 @@ var CheckoutComponent = /** @class */ (function () {
             }
             localStorage.setItem('$crt', JSON.stringify(_this.carts.length));
             _this.cartService.setDeletedCartItem(index);
-        }, function (error) {
+        }, function(error) {
             _this.loading = false;
             if (error.status == 404) {
-                var index = _this.carts.findIndex(function (x) { return x.id == cartId; });
+                var index = _this.carts.findIndex(function(x) { return x.id == cartId; });
                 _this.carts.splice(index, 1);
                 _this.cartService.setCartItems(_this.carts);
                 if (_this.carts.length == 0) {
                     _this.isCartEmpty = true;
                 }
                 localStorage.setItem('$crt', JSON.stringify(_this.carts.length));
-            }
-            else {
+            } else {
                 //do something
             }
         });
     };
-    CheckoutComponent.prototype.validateCartItems = function () {
+    CheckoutComponent.prototype.validateCartItems = function() {
         this.validationErrorMessage = '';
         var message = '';
         this.inValidCartTravller = [];
@@ -422,35 +418,30 @@ var CheckoutComponent = /** @class */ (function () {
                       }
                     } */
                     this.isAllAlertClosed = false;
-                }
-                else {
+                } else {
                     this.isAllAlertClosed = true;
                 }
-            }
-            else {
+            } else {
                 this.isAllAlertClosed = true;
             }
-        }
-        catch (e) {
+        } catch (e) {
             this.isAllAlertClosed = true;
         }
         if (!this.isTermConditionAccepted) {
             this.isTermConditionError = true;
-        }
-        else {
+        } else {
             this.isTermConditionError = false;
         }
         if (!this.isExcludedCountryAccepted) {
             this.isExcludedCountryError = true;
-        }
-        else {
+        } else {
             this.isExcludedCountryError = false;
         }
     };
-    CheckoutComponent.prototype.removeValidationError = function () {
+    CheckoutComponent.prototype.removeValidationError = function() {
         this.validationErrorMessage = '';
     };
-    CheckoutComponent.prototype.bookFlight = function () {
+    CheckoutComponent.prototype.bookFlight = function() {
         var _this = this;
         this.isBookingRequest = true;
         this.validationErrorMessage = '';
@@ -459,7 +450,7 @@ var CheckoutComponent = /** @class */ (function () {
             $('#sign_in_modal').modal('show');
             return false;
         }
-        var carts = this.carts.map(function (cart) { return { cart_id: cart.id }; });
+        var carts = this.carts.map(function(cart) { return { cart_id: cart.id }; });
         this.bookingRequest.card_token = this.cardToken;
         this.bookingRequest.selected_down_payment = this.priceSummary.selectedDownPayment;
         this.bookingRequest.payment_type = this.priceSummary.paymentType;
@@ -469,7 +460,7 @@ var CheckoutComponent = /** @class */ (function () {
         if (this.isValidTravelers && this.cardToken != '' && this.isAllAlertClosed && this.isTermConditionAccepted && this.isExcludedCountryAccepted) {
             this.isBookingProgress = true;
             window.scroll(0, 0);
-            var _loop_1 = function (i) {
+            var _loop_1 = function(i) {
                 var data = this_1.travelerForm.controls["type" + i].value.adults;
                 //let travelers = data.map(traveler => { return { traveler_id: traveler.userId } })
                 var travelers = [];
@@ -481,24 +472,22 @@ var CheckoutComponent = /** @class */ (function () {
                     if (data[k].passport_expiry) {
                         data[k].passport_expiry = moment(data[k].passport_expiry, "MM/DD/YYYY").format("YYYY-MM-DD");
                     }
-                    this_1.travelerService.updateAdult(data[k], data[k].userId).subscribe(function (traveler) {
-                    });
+                    this_1.travelerService.updateAdult(data[k], data[k].userId).subscribe(function(traveler) {});
                 }
                 var cartData = {
                     cart_id: this_1.carts[i].id,
                     travelers: travelers
                 };
-                this_1.cartService.updateCart(cartData).subscribe(function (data) {
+                this_1.cartService.updateCart(cartData).subscribe(function(data) {
                     if (i === _this.carts.length - 1) {
                         var browser_info = _this.spreedly.browserInfo();
                         _this.bookingRequest.browser_info = browser_info;
                         if (window.location.origin.includes("localhost")) {
                             _this.bookingRequest.site_url = 'https://demo.eztoflow.com';
-                        }
-                        else {
+                        } else {
                             _this.bookingRequest.site_url = window.location.origin;
                         }
-                        _this.cartService.validate(_this.bookingRequest).subscribe(function (res) {
+                        _this.cartService.validate(_this.bookingRequest).subscribe(function(res) {
                             var transaction = res.transaction;
                             var redirection = res.redirection.replace('https://demo.eztoflow.com', 'http://localhost:4202');
                             var queryParams = {};
@@ -516,31 +505,28 @@ var CheckoutComponent = /** @class */ (function () {
                                 }
                             }
                             res.redirection = redirection;
-                            console.log("res", res);
+                            // console.log("res", res);
                             if (transaction.state == "succeeded") {
                                 // console.log('succeeded', [redirection]);
                                 window.location.href = redirection;
-                            }
-                            else if (transaction.state == "pending") {
+                            } else if (transaction.state == "pending") {
                                 // console.log('pending', [res]);
                                 _this.isBookingProgress = false;
                                 _this.challengePopUp = true;
                                 _this.spreedly.lifeCycle(res);
-                            }
-                            else {
-                                console.log('fail', [res]);
+                            } else {
+                                // console.log('fail', [res]);
                                 if (_this.commonFunction.isRefferal()) {
                                     _this.router.navigate(['/cart/checkout'], { skipLocationChange: true, queryParams: queryParams });
-                                }
-                                else {
+                                } else {
                                     _this.redirectTo('/cart/checkout');
                                 }
                             }
-                        }, function (error) {
+                        }, function(error) {
                             console.log(error);
                         });
                     }
-                }, function (error) {
+                }, function(error) {
                     _this.isBookingProgress = false;
                 });
             };
@@ -548,12 +534,11 @@ var CheckoutComponent = /** @class */ (function () {
             for (var i = 0; i < this.carts.length; i++) {
                 _loop_1(i);
             }
-        }
-        else {
+        } else {
             this.isBookingProgress = false;
         }
     };
-    CheckoutComponent.prototype.adjustPriceSummary = function () {
+    CheckoutComponent.prototype.adjustPriceSummary = function() {
         var _this = this;
         var totalPrice = 0;
         var checkinDate;
@@ -577,7 +562,7 @@ var CheckoutComponent = /** @class */ (function () {
             additional_amount: 0,
             selected_down_payment: this.priceSummary.selectedDownPayment
         };
-        this.genericService.getInstalemnts(instalmentRequest).subscribe(function (res) {
+        this.genericService.getInstalemnts(instalmentRequest).subscribe(function(res) {
             if (res.instalment_available == true) {
                 _this.priceSummary.instalments = res;
                 _this.priceSummary.remainingAmount = totalPrice - res.instalment_date[0].instalment_amount;
@@ -585,73 +570,69 @@ var CheckoutComponent = /** @class */ (function () {
                 _this.priceSummary = Object.assign({}, _this.priceSummary);
                 // this.cd.detectChanges();
             }
-        }, function (err) {
-        });
+        }, function(err) {});
     };
-    CheckoutComponent.prototype.addNewCard = function () {
+    CheckoutComponent.prototype.addNewCard = function() {
         this.add_new_card = true;
     };
-    CheckoutComponent.prototype.closeNewCardPanel = function (event) {
+    CheckoutComponent.prototype.closeNewCardPanel = function(event) {
         this.add_new_card = event;
     };
-    CheckoutComponent.prototype.totalNumberOfcard = function (event) {
+    CheckoutComponent.prototype.totalNumberOfcard = function(event) {
         console.log(event);
         //this.totalCard = event;
     };
-    CheckoutComponent.prototype.acceptTermCondition = function (event) {
+    CheckoutComponent.prototype.acceptTermCondition = function(event) {
         if (event.target.checked) {
             this.isTermConditionAccepted = true;
             this.isTermConditionError = false;
-        }
-        else {
+        } else {
             this.isTermConditionAccepted = false;
             this.isTermConditionError = true;
         }
     };
-    CheckoutComponent.prototype.removeTermConditionError = function () {
+    CheckoutComponent.prototype.removeTermConditionError = function() {
         this.isTermConditionError = false;
     };
-    CheckoutComponent.prototype.acceptExcludedCountry = function (event) {
+    CheckoutComponent.prototype.acceptExcludedCountry = function(event) {
         if (event.target.checked) {
             this.isExcludedCountryAccepted = true;
             this.isExcludedCountryError = false;
-        }
-        else {
+        } else {
             this.isExcludedCountryAccepted = false;
             this.isExcludedCountryError = true;
         }
     };
-    CheckoutComponent.prototype.removeExculdedError = function () {
+    CheckoutComponent.prototype.removeExculdedError = function() {
         this.isExcludedCountryError = false;
     };
-    CheckoutComponent.prototype.selectInstalmentMode = function (instalmentMode) {
+    CheckoutComponent.prototype.selectInstalmentMode = function(instalmentMode) {
         this.instalmentMode = instalmentMode;
         this.showPartialPayemntOption = (this.instalmentMode == 'instalment') ? true : false;
         sessionStorage.setItem('__insMode', btoa(this.instalmentMode));
     };
-    CheckoutComponent.prototype.getInstalmentData = function (data) {
+    CheckoutComponent.prototype.getInstalmentData = function(data) {
         this.instalmentType = data.instalmentType;
         //this.laycreditpoints = data.layCreditPoints;
         this.priceSummary = data;
         this.checkOutService.setPriceSummary(this.priceSummary);
         sessionStorage.setItem('__islt', btoa(JSON.stringify(data)));
     };
-    CheckoutComponent.prototype.redeemableLayCredit = function (event) {
+    CheckoutComponent.prototype.redeemableLayCredit = function(event) {
         this.redeemableLayPoints = event;
     };
-    CheckoutComponent.prototype.selectCreditCard = function (data) {
+    CheckoutComponent.prototype.selectCreditCard = function(data) {
         this.cardToken = data;
         this.cookieService.put("__cc", this.cardToken);
         this.validationErrorMessage = '';
         this.validateCartItems();
     };
-    CheckoutComponent.prototype.clickOutside = function (event) {
+    CheckoutComponent.prototype.clickOutside = function(event) {
         var insideClassArray = ['btn_pay_book', 'modal fade comman_modal signin_modal'];
         if (insideClassArray.indexOf(event.target.className) > -1) {
             this.validationErrorMessage = '';
             console.log('yes');
-        }
-        else {
+        } else {
             console.log('no');
         }
     };
