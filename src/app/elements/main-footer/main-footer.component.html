@@ -12,7 +12,7 @@
                     <div class="col-lg-3">
                         <div class="ftr_info">
                             <p>{{'flight_second_title' | translate}}</p>
-                            <div class="footer_cta_dropdown">
+                            <div class="footer_cta_dropdown d-none">
                                 <!-- <div class="cta_drop_wrp">
                                     <div class="dropdown cus_drop">
                                         <a class="dropdown-toggle hover-link" data-toggle="dropdown">{{ selectedLanunage.name }}<span class="caret"></span></a>
@@ -75,9 +75,7 @@
                                         [innerHTML]="'laytrip_info_page_title_4_description_6' | translate"></a>
                                     </li>
                                     <li>
-                                        <a class="hover-link"
-                                            [innerHTML]="'laytrip_info_page_title_4_description_2' | translate"
-                                            data-toggle="modal" data-target="#contact_modal"></a>
+                                        <a class="hover-link" [innerHTML]="'laytrip_info_page_title_4_description_2' | translate" data-toggle="modal" data-target="#contact_modal"></a>
                                     </li>
                                     <li>
                                         <a
@@ -92,40 +90,45 @@
                                     <li class="share_li">
                                         <a (click)="openShareModal()" [innerHTML]="'laytrip_info_page_title_4_description_7' | translate"></a>
                                     </li>
-                                </ul>
-                                <h5>{{'laytrip_info_page_title_4_description_8' | translate}}</h5>
-                                <ul class="footer_down_links">
-                                    <li>
-                                        <a target="_blank" target="_blank" href="https://www.instagram.com/laytrip_travel/" class="hover-link">
-                                            <img src="{{s3BucketUrl}}assets/images/insta-i.svg" alt="IG"
-                                                title="Instagram">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a target="_blank" href="https://twitter.com/Laytrip_travel" class="hover-link">
-                                            <img src="{{s3BucketUrl}}assets/images/twitter-i.svg"
-                                                alt="twitter" title="Twitter">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a target="_blank" href="https://www.facebook.com/LaytripTravel" class="hover-link">
-                                            <img src="{{s3BucketUrl}}assets/images/fb-i.svg"
-                                                alt="fb" title="Facebook">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a  target="_blank" href="https://www.pinterest.com/Laytrip/" class="hover-link">
-                                            <img src="{{s3BucketUrl}}assets/images/pin-i.svg"
-                                                alt="Pi" title="Pinterest">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a target="_blank" href="https://www.linkedin.com/company/laytrip/mycompany/?viewAsMember=true" class="hover-link">
-                                            <img src="{{s3BucketUrl}}assets/images/ln-i.svg"
-                                                alt="Linkedin" title="Linkedin">
-                                        </a>
+                                    <li class="share_li">
+                                        <a class="hover-link"  data-toggle="modal" data-target="#contact_modal">Become a Tripfluencer</a>
                                     </li>
                                 </ul>
+                                <div class="d-flex flex-wrap mt-0 align-items-center">
+                                    <h5>{{'laytrip_info_page_title_4_description_8' | translate}}</h5>
+                                    <ul class="footer_down_links w-auto">
+                                        <li>
+                                            <a target="_blank" target="_blank" href="https://www.instagram.com/laytrip_travel/" class="hover-link">
+                                                <img src="{{s3BucketUrl}}assets/images/insta-i.svg" alt="IG"
+                                                    title="Instagram">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="https://twitter.com/Laytrip_travel" class="hover-link">
+                                                <img src="{{s3BucketUrl}}assets/images/twitter-i.svg"
+                                                    alt="twitter" title="Twitter">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="https://www.facebook.com/LaytripTravel" class="hover-link">
+                                                <img src="{{s3BucketUrl}}assets/images/fb-i.svg"
+                                                    alt="fb" title="Facebook">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a  target="_blank" href="https://www.pinterest.com/Laytrip/" class="hover-link">
+                                                <img src="{{s3BucketUrl}}assets/images/pin-i.svg"
+                                                    alt="Pi" title="Pinterest">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="https://www.linkedin.com/company/laytrip/mycompany/?viewAsMember=true" class="hover-link">
+                                                <img src="{{s3BucketUrl}}assets/images/ln-i.svg"
+                                                    alt="Linkedin" title="Linkedin">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

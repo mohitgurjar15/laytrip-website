@@ -27,7 +27,7 @@
         transform: translate(0%, -90px);
         .banner_text {
             width: auto;
-            margin-bottom: 70px;
+            margin-bottom: 50px;
             display: inline-block;
             max-width: 760px;
             @include tab-view {
@@ -57,6 +57,9 @@
                 &.noshadow_antinoti{
                     &::before{
                         display: none;
+                    }
+                    p{
+                        text-shadow: none;
                     }
                 }
             }

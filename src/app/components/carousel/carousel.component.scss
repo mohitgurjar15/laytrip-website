@@ -100,10 +100,16 @@ ul {
   position: absolute;
   bottom: 0;
   width: 100%;
+  img {
+    max-width: 150px;
+    padding: 20px 0;
+  }
 }
 
 .slide {
   &.sergio_banner_img {
     object-position: center 25%;
+    min-height: 670px;
+    max-height: 670px;
   }
 }
