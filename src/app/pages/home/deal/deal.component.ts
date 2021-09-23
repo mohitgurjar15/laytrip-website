@@ -73,6 +73,7 @@ export class DealComponent implements OnInit {
   }
 
   btnDealClick(item){
+    console.log('item===',item)
     window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
     this.toString.emit(item.title ? item : item.code  );  
   }
