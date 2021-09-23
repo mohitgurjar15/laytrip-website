@@ -210,6 +210,7 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   getFlexiableDate(requestDate,direction){
+    console.log(direction,"===")
     if (this.trip == 'oneway') {
       this.singleFlexLoader=true;
       var payload = {
@@ -235,6 +236,33 @@ export class FlightPriceSliderComponent implements OnInit {
       }, err => {
         this.singleFlexLoader = false;
       });
+    }
+    else{
+        this.singleFlexLoader=true;
+        var roundtripPayLoad = {
+          source_location: this.departure,
+          destination_location: this.route.snapshot.queryParams['arrival'],
+          departure_date: this.route.snapshot.queryParams['departure_date'],
+          arrival_date:this.route.snapshot.queryParams['arrival_date'],
+          flight_class: this.class,
+          adult_count: this.adult,
+          child_count: this.child,
+          infant_count: this.infant,
+          request_date: requestDate,
+        };
+        this.flightService.getFlightFlexibleDatesRoundTrip(roundtripPayLoad).subscribe((res: any) => {
+          if (res) {
+            this.singleFlexLoader = false;
+            if(direction=='next'){
+              this.dates.push(res[0]);
+            }
+            else{
+              this.dates.unshift(res[0])
+            }
+          }
+        }, err => {
+          this.singleFlexLoader = false;
+        });
     }
   }
 
