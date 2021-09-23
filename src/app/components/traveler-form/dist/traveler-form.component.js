@@ -1,11 +1,15 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    else
+        for (var i = decorators.length - 1; i >= 0; i--)
+            if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
+var __spreadArrays = (this && this.__spreadArrays) || function() {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
         for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
@@ -23,7 +27,7 @@ var traveller_helper_1 = require("../../_helpers/traveller.helper");
 var moment = require("moment");
 var jwt_helper_1 = require("src/app/_helpers/jwt.helper");
 var phone_masking_helper_1 = require("src/app/_helpers/phone-masking.helper");
-var TravelerFormComponent = /** @class */ (function () {
+var TravelerFormComponent = /** @class */ (function() {
     function TravelerFormComponent(formBuilder, router, commonFunction, checkOutService, cartService, travelerService, cd) {
         this.formBuilder = formBuilder;
         this.router = router;
@@ -120,7 +124,7 @@ var TravelerFormComponent = /** @class */ (function () {
         }
         //console.log("this.accountHolderEmail",this.userInfo,this.accountHolderEmail)
     }
-    TravelerFormComponent.prototype.ngOnInit = function () {
+    TravelerFormComponent.prototype.ngOnInit = function() {
         var _this = this;
         this.loadJquery();
         this.bsConfig = Object.assign({}, { dateInputFormat: 'MMM DD, YYYY', containerClass: 'theme-default', showWeekNumbers: false, adaptivePosition: true });
@@ -156,38 +160,34 @@ var TravelerFormComponent = /** @class */ (function () {
                 adults: this.formBuilder.array([])
             })
         });
-        this.checkOutService.getTravelers.subscribe(function (travelers) {
+        this.checkOutService.getTravelers.subscribe(function(travelers) {
             _this.myTravelers = travelers;
             if (_this.myTravelers.length == 0) {
                 _this.isAdultTravller = false;
                 _this.isChildTravller = false;
                 _this.isInfantTravller = false;
-            }
-            else {
-                var adult = _this.myTravelers.findIndex(function (x) { return x.user_type == 'adult'; });
+            } else {
+                var adult = _this.myTravelers.findIndex(function(x) { return x.user_type == 'adult'; });
                 if (adult != -1) {
                     _this.isAdultTravller = true;
-                }
-                else {
+                } else {
                     _this.isAdultTravller = false;
                 }
-                var child = _this.myTravelers.findIndex(function (x) { return x.user_type == 'child'; });
+                var child = _this.myTravelers.findIndex(function(x) { return x.user_type == 'child'; });
                 if (child != -1) {
                     _this.isChildTravller = true;
-                }
-                else {
+                } else {
                     _this.isChildTravller = false;
                 }
-                var infant = _this.myTravelers.findIndex(function (x) { return x.user_type == 'infant'; });
+                var infant = _this.myTravelers.findIndex(function(x) { return x.user_type == 'infant'; });
                 if (infant != -1) {
                     _this.isInfantTravller = true;
-                }
-                else {
+                } else {
                     _this.isInfantTravller = false;
                 }
             }
         });
-        this.cartService.getCartTravelers.subscribe(function (travelers) {
+        this.cartService.getCartTravelers.subscribe(function(travelers) {
             _this.travelers = travelers;
         });
         if (this.cartItem.type == 'flight') {
@@ -198,8 +198,7 @@ var TravelerFormComponent = /** @class */ (function () {
                 if (!this.cartItem.module_info.is_passport_required) {
                     delete this.travelers["type" + this.cartNumber].adults[i].passport_expiry;
                     delete this.travelers["type" + this.cartNumber].adults[i].passport_number;
-                }
-                else {
+                } else {
                     this.travelers["type" + this.cartNumber].adults[i].is_passport_required = true;
                 }
                 this.travelers["type" + this.cartNumber].adult = this.cartItem.module_info.adult_count;
@@ -211,8 +210,7 @@ var TravelerFormComponent = /** @class */ (function () {
                 if (!this.cartItem.module_info.is_passport_required) {
                     delete this.travelers["type" + this.cartNumber].adults[i].passport_expiry;
                     delete this.travelers["type" + this.cartNumber].adults[i].passport_number;
-                }
-                else {
+                } else {
                     this.travelers["type" + this.cartNumber].adults[i].is_passport_required = true;
                 }
                 this.cd.detectChanges();
@@ -236,8 +234,8 @@ var TravelerFormComponent = /** @class */ (function () {
                 this.cd.detectChanges();
             }
         }
-        var _loop_1 = function (i) {
-            var traveler = this_1.myTravelers.find(function (traveler) { return traveler.userId == _this.cartItem.travelers[i].userId; });
+        var _loop_1 = function(i) {
+            var traveler = this_1.myTravelers.find(function(traveler) { return traveler.userId == _this.cartItem.travelers[i].userId; });
             this_1.travelers["type" + this_1.cartNumber].adults[i].type = traveler.user_type;
             this_1.travelers["type" + this_1.cartNumber].adults[i].userId = traveler.userId;
             this_1.travelers["type" + this_1.cartNumber].adults[i].first_name = traveler.firstName;
@@ -260,61 +258,59 @@ var TravelerFormComponent = /** @class */ (function () {
         this.patch();
         this.cartService.setCartTravelers(this.travelers);
         this.cd.detectChanges();
-        this.travelerForm.valueChanges.subscribe(function (value) {
+        this.travelerForm.valueChanges.subscribe(function(value) {
             _this.checkOutService.emitTravelersformData(_this.travelerForm);
         });
-        this.cartService.getSelectedCart.subscribe(function (cartNumber) {
+        this.cartService.getSelectedCart.subscribe(function(cartNumber) {
             _this.cartNumber = cartNumber;
         });
         this.checkOutService.emitTravelersformData(this.travelerForm);
         //this.baggageDescription = this.formatBaggageDescription(this.cartItem.module_info.routes[0].stops[0].cabin_baggage, this.cartItem.module_info.routes[0].stops[0].checkin_baggage)
     };
-    TravelerFormComponent.prototype.loadJquery = function () {
-        $(document).on("click", ".card-header", function () {
+    TravelerFormComponent.prototype.loadJquery = function() {
+        $(document).on("click", ".card-header", function() {
             if ($(this).find('.card-link').hasClass('collapsed')) {
                 $(this).find('.traveler_drop_down').addClass('hide_section');
                 $(this).find('.mob_names').addClass('hide_section');
-            }
-            else {
+            } else {
                 $(this).find('.trv_name').addClass('hide_section');
                 $(this).find('.traveler_drop_down').removeClass('hide_section');
                 $(this).find('.mob_names').removeClass('hide_section');
             }
         });
     };
-    TravelerFormComponent.prototype.ngOnChanges = function (changes) {
+    TravelerFormComponent.prototype.ngOnChanges = function(changes) {
         var _this = this;
-        this.checkOutService.getCountries.subscribe(function (res) {
+        this.checkOutService.getCountries.subscribe(function(res) {
             _this.countries = res;
             _this.setUSCountryInFirstElement(_this.countries);
         });
     };
-    TravelerFormComponent.prototype.setUSCountryInFirstElement = function (countries) {
-        var usCountryObj = countries.find(function (x) { return x.id === 233; });
-        var removedUsObj = countries.filter(function (obj) { return obj.id !== 233; });
+    TravelerFormComponent.prototype.setUSCountryInFirstElement = function(countries) {
+        var usCountryObj = countries.find(function(x) { return x.id === 233; });
+        var removedUsObj = countries.filter(function(obj) { return obj.id !== 233; });
         this.phoneCodelist = [];
-        removedUsObj.sort(function (a, b) {
+        removedUsObj.sort(function(a, b) {
             return (a['name'].toLowerCase() > b['name'].toLowerCase()) ? 1 : ((a['name'].toLowerCase() < b['name'].toLowerCase()) ? -1 : 0);
         });
         removedUsObj.unshift(usCountryObj);
-        var filteredArr = removedUsObj.reduce(function (acc, current) {
-            var x = acc.find(function (item) { return item.phonecode == current.phonecode; });
+        var filteredArr = removedUsObj.reduce(function(acc, current) {
+            var x = acc.find(function(item) { return item.phonecode == current.phonecode; });
             if (!x) {
                 return acc.concat([current]);
-            }
-            else {
+            } else {
                 return acc;
             }
         }, []);
         this.phoneCodelist = filteredArr;
     };
-    TravelerFormComponent.prototype.patch = function () {
+    TravelerFormComponent.prototype.patch = function() {
         var _this = this;
-        var _loop_2 = function (i) {
+        var _loop_2 = function(i) {
             //this.travelerForm.controls[`type${i}`]['controls'].cartId.setValue(this.travelers[`type${i}`].cartId);
             var control = this_2.travelerForm.get("type" + i + ".adults");
             control.controls = [];
-            this_2.travelers["type" + i].adults.forEach(function (x, i) {
+            this_2.travelers["type" + i].adults.forEach(function(x, i) {
                 control.push(_this.patchValues(x, i));
             });
         };
@@ -323,7 +319,7 @@ var TravelerFormComponent = /** @class */ (function () {
             _loop_2(i);
         }
     };
-    TravelerFormComponent.prototype.patchValues = function (x, i) {
+    TravelerFormComponent.prototype.patchValues = function(x, i) {
         if (x.module == 'flight') {
             return this.formBuilder.group({
                 first_name: [x.first_name, [forms_1.Validators.required, forms_1.Validators.pattern('^(?! )(?!.* $)[a-zA-Z -]{2,}$')]],
@@ -375,13 +371,12 @@ var TravelerFormComponent = /** @class */ (function () {
             }, { updateOn: 'blur' });
         }
     };
-    TravelerFormComponent.prototype.submit = function (value) {
-    };
+    TravelerFormComponent.prototype.submit = function(value) {};
     /**
      *
      * @param type ['adult','child','infant']
      */
-    TravelerFormComponent.prototype.selectTravelerType = function (type, traveler_number) {
+    TravelerFormComponent.prototype.selectTravelerType = function(type, traveler_number) {
         this.travelers["type" + this.cartNumber].adults[traveler_number] = {};
         this.travelers["type" + this.cartNumber].adults[traveler_number].type = type;
         this.travelers["type" + this.cartNumber].adults[traveler_number].dobMinDate = traveller_helper_1.travelersFileds.flight[type].dobMinDate;
@@ -391,18 +386,17 @@ var TravelerFormComponent = /** @class */ (function () {
         this.travelers["type" + this.cartNumber].adults[traveler_number].passport_expiry = traveller_helper_1.travelersFileds.flight[type].passport_expiry;
         this.patch();
     };
-    TravelerFormComponent.prototype.selectTravelerNumber = function (event, cartNumber, traveler_number) {
+    TravelerFormComponent.prototype.selectTravelerNumber = function(event, cartNumber, traveler_number) {
         this.traveler_number = traveler_number;
         var userId = this.travelers["type" + cartNumber].adults[traveler_number].userId;
-        $(document).on("click", ".card-header", function () {
+        $(document).on("click", ".card-header", function() {
             if ($(this).find('.card-link').hasClass('collapsed')) {
                 $(this).find('.traveler_drop_down').addClass('hide_section');
                 $(this).find('.trv_name').removeClass('hide_section');
                 if (userId != "") {
                     $(this).find('.mob_names').addClass('hide_section');
                 }
-            }
-            else {
+            } else {
                 $(this).find('.trv_name').addClass('hide_section');
                 $(this).find('.traveler_drop_down').removeClass('hide_section');
                 if (userId != "") {
@@ -411,47 +405,42 @@ var TravelerFormComponent = /** @class */ (function () {
             }
         });
     };
-    TravelerFormComponent.prototype.formatBaggageDescription = function (cabbinBaggage, checkInBaggage) {
+    TravelerFormComponent.prototype.formatBaggageDescription = function(cabbinBaggage, checkInBaggage) {
         var cabbinBaggageWight;
         var checkInBaggageWight;
         var description = '';
         if (cabbinBaggage != "" && cabbinBaggage.includes("KG") == true) {
             cabbinBaggageWight = this.convertKgToLB(cabbinBaggage.replace("KG", ""));
             description = "Cabin bag upto " + cabbinBaggageWight + " lbs (" + cabbinBaggage + ")";
-        }
-        else if (cabbinBaggage != '') {
+        } else if (cabbinBaggage != '') {
             description = "Cabin bag upto " + cabbinBaggage;
         }
         if (checkInBaggage != "" && checkInBaggage.includes("KG") == true) {
             checkInBaggageWight = this.convertKgToLB(checkInBaggage.replace("KG", ""));
             if (description != '') {
                 description += " and checkin bag upto " + checkInBaggageWight + " lbs (" + checkInBaggage + ")";
-            }
-            else {
+            } else {
                 description += "checkin bag upto " + checkInBaggageWight + " lbs (" + checkInBaggage + ")";
             }
-        }
-        else if (checkInBaggage != '') {
+        } else if (checkInBaggage != '') {
             if (description != '') {
                 description += " and checkin bag upto " + checkInBaggage;
-            }
-            else {
+            } else {
                 description += "checkin bag upto " + checkInBaggage;
             }
         }
         return description;
     };
-    TravelerFormComponent.prototype.convertKgToLB = function (weight) {
+    TravelerFormComponent.prototype.convertKgToLB = function(weight) {
         return (2.20462 * Number(weight)).toFixed(2);
     };
-    TravelerFormComponent.prototype.saveTraveler = function (cartNumber, traveler_number) {
+    TravelerFormComponent.prototype.saveTraveler = function(cartNumber, traveler_number) {
         var _this = this;
         if (this.travelerForm.invalid) {
             this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = true;
             this.travelers["type" + cartNumber].adults[traveler_number].is_valid_date = false;
             this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAllAsTouched();
-        }
-        else {
+        } else {
             this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = true;
             //console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.email.validator({} as AbstractControl),"save")
             //return false;
@@ -463,8 +452,7 @@ var TravelerFormComponent = /** @class */ (function () {
                     data.module_id = 3;
                     delete data.country_id;
                     delete data.dob;
-                }
-                else {
+                } else {
                     data.dob = moment(this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value.dob, "MM/DD/YYYY").format("YYYY-MM-DD");
                 }
                 if (this.travelers["type" + cartNumber].adults[traveler_number].is_passport_required) {
@@ -478,18 +466,17 @@ var TravelerFormComponent = /** @class */ (function () {
                         data.email = this.accountHolderEmail;
                     }
                     //Edit
-                    this.travelerService.updateAdult(data, userId).subscribe(function (traveler) {
+                    this.travelerService.updateAdult(data, userId).subscribe(function(traveler) {
                         _this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = false;
                         _this.cartService.setLoaderStatus(false);
-                        var index = _this.myTravelers.findIndex(function (x) { return x.userId == traveler.userId; });
+                        var index = _this.myTravelers.findIndex(function(x) { return x.userId == traveler.userId; });
                         _this.myTravelers[index] = traveler;
                         //this.checkOutService.setTravelers([this.myTravelers]);
                         _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAsUntouched();
                         _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].disable();
                     });
-                }
-                else {
-                    this.travelerService.addAdult(data).subscribe(function (traveler) {
+                } else {
+                    this.travelerService.addAdult(data).subscribe(function(traveler) {
                         _this.travelers["type" + cartNumber].adults[traveler_number].is_submitted = false;
                         _this.cartService.setLoaderStatus(false);
                         if (traveler) {
@@ -511,8 +498,7 @@ var TravelerFormComponent = /** @class */ (function () {
                             if ((_this.cartItem.type == 'flight' && traveler.user_type == 'adult') || (_this.cartItem.type == 'hotel' && traveler_number == 0)) {
                                 _this.travelers["type" + cartNumber].adults[traveler_number].is_email_required = true;
                                 _this.travelers["type" + cartNumber].adults[traveler_number].is_phone_required = true;
-                            }
-                            else {
+                            } else {
                                 _this.travelers["type" + cartNumber].adults[traveler_number].is_email_required = false;
                                 _this.travelers["type" + cartNumber].adults[traveler_number].is_phone_required = false;
                             }
@@ -526,21 +512,20 @@ var TravelerFormComponent = /** @class */ (function () {
                                 _this.isInfantTravller = true;
                             }
                             _this.checkOutService.setTravelers(__spreadArrays(_this.myTravelers, [traveler]));
-                            console.log("llll", _this.travelers);
+                            // console.log("llll", _this.travelers);
                             _this.patch();
                             _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAsUntouched();
                             _this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].disable();
                         }
-                    }, function (error) {
+                    }, function(error) {
                         _this.cartService.setLoaderStatus(false);
-                        if (error.status == 409) {
-                        }
+                        if (error.status == 409) {}
                     });
                 }
             }
         }
     };
-    TravelerFormComponent.prototype.deleteTraveler = function (cartNumber, traveler_number) {
+    TravelerFormComponent.prototype.deleteTraveler = function(cartNumber, traveler_number) {
         //let traveler = { traveler_number: traveler_number };
         this.travelers["type" + cartNumber].adults[traveler_number].first_name = "";
         this.travelers["type" + cartNumber].adults[traveler_number].last_name = "";
@@ -561,7 +546,7 @@ var TravelerFormComponent = /** @class */ (function () {
         this.patch();
         this.checkOutService.emitTravelersformData(this.travelerForm);
     };
-    TravelerFormComponent.prototype.editTravelerNotinUse = function (cartNumber, traveler_number) {
+    TravelerFormComponent.prototype.editTravelerNotinUse = function(cartNumber, traveler_number) {
         var _this = this;
         this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAllAsTouched();
         if (this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].status == 'VALID') {
@@ -573,23 +558,23 @@ var TravelerFormComponent = /** @class */ (function () {
             var userId = this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value.userId;
             if (userId) {
                 //Edit
-                this.travelerService.updateAdult(data, userId).subscribe(function (traveler) {
+                this.travelerService.updateAdult(data, userId).subscribe(function(traveler) {
                     _this.cartService.setLoaderStatus(false);
-                    var index = _this.myTravelers.findIndex(function (x) { return x.userId == traveler.userId; });
+                    var index = _this.myTravelers.findIndex(function(x) { return x.userId == traveler.userId; });
                     _this.myTravelers[index] = traveler;
                 });
             }
             this.checkOutService.emitTravelersformData(this.travelerForm);
         }
     };
-    TravelerFormComponent.prototype.editTraveler = function (cartNumber, traveler_number) {
+    TravelerFormComponent.prototype.editTraveler = function(cartNumber, traveler_number) {
         this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].enable();
         this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].markAsTouched();
     };
-    TravelerFormComponent.prototype.selectTraveler = function (travlerId, traveler_number, cartNumber) {
-        var traveler = this.myTravelers.find(function (x) { return x.userId == travlerId; });
+    TravelerFormComponent.prototype.selectTraveler = function(travlerId, traveler_number, cartNumber) {
+        var traveler = this.myTravelers.find(function(x) { return x.userId == travlerId; });
         if (traveler && Object.keys(traveler).length > 0) {
-            console.log(cartNumber, traveler_number);
+            // console.log(cartNumber, traveler_number);
             //this.travelers[`type${cartNumber}`].adults[traveler_number].module = traveler.module;
             this.travelers["type" + cartNumber].adults[traveler_number].first_name = traveler.firstName;
             this.travelers["type" + cartNumber].adults[traveler_number].last_name = traveler.lastName;
@@ -604,8 +589,7 @@ var TravelerFormComponent = /** @class */ (function () {
             if ((this.cartItem.type == 'flight' && traveler.user_type == 'adult') || (this.cartItem.type == 'hotel' && traveler_number == 0)) {
                 this.travelers["type" + cartNumber].adults[traveler_number].is_email_required = true;
                 this.travelers["type" + cartNumber].adults[traveler_number].is_phone_required = true;
-            }
-            else {
+            } else {
                 this.travelers["type" + cartNumber].adults[traveler_number].is_email_required = false;
                 this.travelers["type" + cartNumber].adults[traveler_number].is_phone_required = false;
             }
@@ -621,16 +605,15 @@ var TravelerFormComponent = /** @class */ (function () {
         this.checkOutService.emitTravelersformData(this.travelerForm);
         this.cd.detectChanges();
     };
-    TravelerFormComponent.prototype.checkMaximumMinimum = function (event, dobValue, cartNumber, traveler_number) {
+    TravelerFormComponent.prototype.checkMaximumMinimum = function(event, dobValue, cartNumber, traveler_number) {
         // CHECK MAXIMUM OR MINIMUM DATE OF BIRTH
         var traveler = this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].value;
         if (moment(dobValue)
             .isAfter(moment(this.travelers["type" + cartNumber].adults[traveler_number].dobMinDate).format('MM/DD/YYYY')) &&
             moment(moment(this.travelers["type" + cartNumber].adults[traveler_number].dobMaxDate).format('MM/DD/YYYY'))
-                .isBefore(dobValue)) {
+            .isBefore(dobValue)) {
             this.travelers["type" + cartNumber].adults[traveler_number].is_valid_date = false;
-        }
-        else {
+        } else {
             this.travelers["type" + cartNumber].adults[traveler_number].is_valid_date = true;
         }
         this.travelers["type" + cartNumber].adults[traveler_number].first_name = traveler.first_name;
@@ -649,11 +632,11 @@ var TravelerFormComponent = /** @class */ (function () {
         this.patch();
         this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].controls.dob.markAsTouched();
     };
-    TravelerFormComponent.prototype.validateCountryWithPhoneNumber = function (event, cartNumber, traveler_number) {
+    TravelerFormComponent.prototype.validateCountryWithPhoneNumber = function(event, cartNumber, traveler_number) {
         //console.log(this.travelerForm.controls[`type${cartNumber}`]['controls'].adults.controls[traveler_number].controls.phone_no,"======")
         this.setPhoneNumberFormat(event.phonecode, cartNumber, traveler_number);
     };
-    TravelerFormComponent.prototype.setPhoneNumberFormat = function (phonecode, cartNumber, traveler_number) {
+    TravelerFormComponent.prototype.setPhoneNumberFormat = function(phonecode, cartNumber, traveler_number) {
         if (this.travelers["type" + cartNumber].adults[traveler_number].type == 'adult') {
             var phoneFormat = phone_masking_helper_1.getPhoneFormat(phonecode);
             this.travelerForm.controls["type" + cartNumber]['controls'].adults.controls[traveler_number].controls.phone_no.setValidators([forms_1.Validators.minLength(phoneFormat.length)]);

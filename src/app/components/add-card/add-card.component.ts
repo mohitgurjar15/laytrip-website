@@ -123,7 +123,7 @@ export class AddCardComponent implements OnInit {
       } else {
         $("#month-year").css("border-bottom", "2px solid #d6d6d6");
       } 
-      console.log("errors",errors)
+      // console.log("errors",errors)
 
       for (var i = 0; i < errors.length; i++) {
         var error = errors[i];
