@@ -90,7 +90,7 @@
             <div class="swiper-button-next" #nextEl [ngClass]="list.length <= 3 ? 'd-none':''"></div>
         </div>
         <p class="terms_txt">
-            {{'promo_421_legal_1' | translate}} <a target="_blank" [routerLink]="['/']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">laytrip.com</a>. <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate | titlecase}}</a>            {{'promo_421_legal_2' | translate}}
+            {{'promo_421_legal_1' | translate:param}} <a target="_blank" [routerLink]="['/']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">laytrip.com</a>. <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">{{'terms' | translate | titlecase}}</a>            {{'promo_421_legal_2' | translate}}
         </p>
     </div>
 </section>

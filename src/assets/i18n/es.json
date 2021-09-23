@@ -683,7 +683,7 @@
         "Se requerirá su tarjeta de pago al momento del check in como garantía para estos cargos. Comuníquese directamente con su hotel para preguntar sobre tarifas."
     ],
     "apply_lt_points": "Aplica tus Puntos Laytrip",
-    "promo_421_legal_1": "*Solo nuevas reservas por tiempo limitado. Debe reservarse con fecha inicial de al menos 90 días después de la fecha de reserva. No acumulable con ninguna otra promoción. El descuento se aplica a las reservas disponibles en",
+    "promo_421_legal_1": "*Solo nuevas reservas por tiempo limitado. Debe reservarse con fecha inicial de al menos {{value}} días después de la fecha de reserva. No acumulable con ninguna otra promoción. El descuento se aplica a las reservas disponibles en",
     "promo_421_legal_2": "y otras restricciones se aplicarán al proceso de reserva.",
     "billing_address": "Dirección de facturación",
     "mix_cart_msg": "Las reservas con descuento no se pueden combinar con las reservas sin descuento. Finaliza la compra de tus reservas con descuento y luego podrás buscar reservas sin descuento.",

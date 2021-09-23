@@ -15,6 +15,7 @@ import SwiperCore, {
   Controller,
   Swiper
 } from "swiper/core";
+import { HomeService } from 'src/app/services/home.service';
 
 // install Swiper components
 SwiperCore.use([
@@ -40,6 +41,7 @@ export class DealComponent implements OnInit {
   @Input()  dealList = [];
   @Input() moduleId = 3;
   @HostListener('contextmenu', ['$event'])
+  param={value : 15}
 
   list = [];
   breakpoints = {
@@ -51,10 +53,19 @@ export class DealComponent implements OnInit {
   };
 
   constructor(
-    public commonFunction : CommonFunction
+    public commonFunction : CommonFunction,
+    public homeService : HomeService
   ) {}
 
   ngOnInit() {
+    this.homeService.getLandingPageData.subscribe(data => {
+      console.log('coming getTo string')
+      try {
+        
+        this.param.value = data.promotional.min_promotional_day-1
+      } catch (e) {
+      }
+    });
     if(window.innerWidth > 360 && this.dealList.length >3){
       let carousel = new Swiper('.deal_sec_wrapper', {
         navigation: {
