@@ -8,7 +8,7 @@
     background: $background-white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
     position: relative;
-    z-index: 99;
+    z-index: 991;
     -webkit-transition: all 0.5s ease;
     -moz-transition: position 10s;
     -ms-transition: position 10s;
@@ -1115,7 +1115,7 @@
     //background: rgba(248, 38, 193, 0.8);
     background: rgba(248, 38, 193, 1);
     position: relative;
-    //z-index: 50;
+    z-index: 22;
     padding: 10px 0;
     span {
         font-size: 14px;
