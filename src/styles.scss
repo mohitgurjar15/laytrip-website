@@ -96,8 +96,7 @@ a {
             }
         }
         input {
-            background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 15px
-                no-repeat;
+            background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg) center right 15px no-repeat;
             background-size: 20px;
             border: none;
         }
@@ -139,7 +138,7 @@ a {
                     }
                 }
             }
-            &.ng-select-opened > .ng-select-container {
+            &.ng-select-opened>.ng-select-container {
                 .ng-arrow {
                     padding: 5px 9px;
                     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -214,7 +213,7 @@ a {
                 }
             }
         }
-        &.ng-select-opened > .ng-select-container {
+        &.ng-select-opened>.ng-select-container {
             .ng-arrow {
                 padding: 5px 9px;
                 background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -274,8 +273,7 @@ a {
                 width: 100%;
             }
             input {
-                background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg) center right 0
-                    no-repeat !important;
+                background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg) center right 0 no-repeat !important;
                 background-size: 20px !important;
                 border: none;
             }
@@ -412,17 +410,20 @@ input:focus:-moz-placeholder {
     color: transparent;
 }
 
+
 /* FF 4-18 */
 
 input:focus::-moz-placeholder {
     color: transparent;
 }
 
+
 /* FF 19+ */
 
 input:focus:-ms-input-placeholder {
     color: transparent;
 }
+
 
 /* IE 10+ */
 
@@ -434,17 +435,20 @@ textarea:focus:-moz-placeholder {
     color: transparent;
 }
 
+
 /* FF 4-18 */
 
 textarea:focus::-moz-placeholder {
     color: transparent;
 }
 
+
 /* FF 19+ */
 
 textarea:focus:-ms-input-placeholder {
     color: transparent;
 }
+
 
 /* IE 10+ */
 
@@ -479,7 +483,7 @@ textarea:focus:-ms-input-placeholder {
                 height: 12px;
             }
         }
-        &.ng-select-opened > .ng-select-container {
+        &.ng-select-opened>.ng-select-container {
             .ng-arrow {
                 padding: 5px 9px;
                 background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -540,7 +544,7 @@ textarea:focus:-ms-input-placeholder {
                     top: -5px;
                 }
             }
-            &.ng-select-opened > .ng-select-container {
+            &.ng-select-opened>.ng-select-container {
                 .ng-arrow {
                     padding: 5px 9px;
                     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -2335,8 +2339,7 @@ select {
                                             color: $text-black;
                                             font-weight: 600;
                                             padding: 0 0 0 60px;
-                                            background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
-                                                center left 15px no-repeat !important;
+                                            background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg) center left 15px no-repeat !important;
                                             @media (max-width: 575px) {
                                                 .calender-responsive-view {
                                                     right: 0 !important;
@@ -2470,10 +2473,8 @@ select {
     width: 100%;
     padding: 100px 0px 100px;
     background: $background-white;
-    @media (max-width: 1199px) {
-    }
-    @media (max-width: 767px) {
-    }
+    @media (max-width: 1199px) {}
+    @media (max-width: 767px) {}
     .featured_list {
         width: 100%;
         margin: 30px 0 0;
@@ -3165,7 +3166,7 @@ select {
                         margin-bottom: 0;
                         &:last-child {
                             width: 100%;
-                            .d-flex{
+                            .d-flex {
                                 justify-content: center;
                                 flex-flow: column;
                             }
@@ -3529,8 +3530,7 @@ select {
                                     border-bottom: 1px solid $primary-color;
                                 }
                                 &.birth_date {
-                                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
-                                        no-repeat;
+                                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
                                     background-position: right center;
                                 }
                             }
@@ -4214,8 +4214,7 @@ select {
                                         border-bottom: 1px solid $primary-color;
                                     }
                                     &.birth_date {
-                                        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
-                                            no-repeat;
+                                        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
                                         background-position: right center;
                                     }
                                     &:placeholder {
@@ -5172,7 +5171,7 @@ ngx-otp-input {
             padding: 5px 20px !important;
         }
     }
-    &:focus{
+    &:focus {
         outline: 0;
         box-shadow: none;
     }
