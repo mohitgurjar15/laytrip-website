@@ -48,7 +48,7 @@
                                     <span>{{'weekly_bi_weekly_or_monthly' | translate}}</span>
                                 </div>
                                 <div class="image_about_text">
-                                    <button (click)="btnDealClick(commonFunction.isRefferal() ? item?.to : item)">{{'find_deal' | translate}}</button>
+                                    <button (click)="btnDealClick(commonFunction.isRefferal() ? item : item)">{{'find_deal' | translate}}</button>
                                 </div>
                             </div>
                             <!-- <img [src]="item?.to?.image" alt="Deal Image" />

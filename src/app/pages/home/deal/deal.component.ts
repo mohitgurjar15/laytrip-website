@@ -48,8 +48,8 @@ export class DealComponent implements OnInit {
     320: { slidesPerView: 1, spaceBetween: 10,slidesPerGroup:1 },
     520: { slidesPerView: 1, spaceBetween: 10 ,slidesPerGroup:2},
     768: { slidesPerView: 2, spaceBetween: 15 ,slidesPerGroup:2},
-    992: { slidesPerView: 3, spaceBetween: 20 ,slidesPerGroup:2},
-    1024: { slidesPerView: 3, spaceBetween: 30 ,slidesPerGroup:2}
+    992: { slidesPerView: 3, spaceBetween: 20 ,slidesPerGroup:3},
+    1024: { slidesPerView: 3, spaceBetween: 30 ,slidesPerGroup:3}
   };
 
   constructor(
@@ -59,7 +59,6 @@ export class DealComponent implements OnInit {
 
   ngOnInit() {
     this.homeService.getLandingPageData.subscribe(data => {
-      console.log('coming getTo string')
       try {
         
         this.param.value = data.promotional.min_promotional_day-1
@@ -84,9 +83,8 @@ export class DealComponent implements OnInit {
   }
 
   btnDealClick(item){
-    console.log('item===',item)
     window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-    this.toString.emit(item.title ? item : item.code  );  
+    this.toString.emit(item);  
   }
 
 

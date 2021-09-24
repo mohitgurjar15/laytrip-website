@@ -117,7 +117,7 @@ export class FlightSearchWidgetComponent implements OnInit {
     });
 
     this.setDefaultDate();
-    this.flightDepartureMinDate = moment().add(2,'days').toDate()
+    this.flightDepartureMinDate = moment().add(2, 'days').toDate()
     this.flightReturnMinDate = this.departureDate;
     this.countryCode = this.commonFunction.getUserCountry();
     this.rangeDates = [this.departureDate, this.returnDate];
@@ -165,11 +165,11 @@ export class FlightSearchWidgetComponent implements OnInit {
         this.returnDate = params['arrival_date'] ? moment(params['arrival_date']).toDate() : new Date(moment(params['departure_date']).add(7, 'days').format('MM/DD/YYYY'));
         this.rangeDates = [this.departureDate, this.returnDate];
       })
-    }else{
+    } else {
       if (this.commonFunction.isRefferal()) {
         this.isLangingPage = true;
         this.homeService.getSlideOffers.subscribe(currentSlide => {
-  
+
           if (typeof currentSlide != 'undefined' && Object.keys(currentSlide).length > 0) {
             let slide: any = currentSlide;
             this.fromSearch = Object.assign({}, airports[slide.location.from.airport_code]);
@@ -177,19 +177,19 @@ export class FlightSearchWidgetComponent implements OnInit {
             this.searchFlightInfo.departure = this.fromSearch.code;
             this.homeService.getLandingPageData.subscribe(data => {
               try {
-  
+
                 this.departureDate = this.isRefferal ? moment().add(data.promotional.min_promotional_day, 'days').toDate() : moment().add(2, 'days').toDate();
               } catch (e) {
               }
             });
             this.searchFlightInfo.arrival = this.toSearch.code;
-  
+
             if (this.isRoundTrip) {
               this.returnDate = moment(this.departureDate).add(7, 'days').toDate();
               this.rangeDates = [this.departureDate, this.returnDate];
             }
           }
-  
+
         })
       }
     }
@@ -235,12 +235,18 @@ export class FlightSearchWidgetComponent implements OnInit {
       if (typeof toSearchString != 'undefined' && Object.keys(toSearchString).length > 0) {
         let keys: any = toSearchString;
         localStorage.setItem('__to', keys)
-
-        this.fromSearch = airports['NYC'];
+        if (toSearchString && toSearchString.from && toSearchString.from.code) {
+          this.fromSearch = airports[toSearchString.from.code];
+        } else {
+          this.fromSearch = airports['NYC'];
+        }
         this.searchFlightInfo.departure = this.fromSearch.code;
-        this.toSearch = airports[keys];
+        if(toSearchString && toSearchString.to && toSearchString.to.code){
+          this.toSearch = airports[keys.to.code];
+        }else{
+          this.toSearch = airports[keys.code]
+        }
         this.homeService.getLandingPageData.subscribe(data => {
-          console.log('coming getTo string')
           try {
 
             this.departureDate = this.isRefferal ? moment().add(data.promotional.min_promotional_day, 'days').toDate() : moment().add(2, 'days').toDate();
@@ -252,7 +258,6 @@ export class FlightSearchWidgetComponent implements OnInit {
 
         if (this.isRoundTrip) {
           this.rangeDates = [this.departureDate, this.isRefferal ? moment(this.departureDate).add(7, 'days').toDate() : moment(this.departureDate).add(7, 'days').toDate()];
-          console.log(this.rangeDates)
         }
       }
     });
@@ -288,7 +293,6 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   setDefaultDate() {
-    console.log('coming default')
     this.homeService.getLandingPageData.subscribe(data => {
       try {
 
