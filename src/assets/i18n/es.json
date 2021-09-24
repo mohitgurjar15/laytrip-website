@@ -714,5 +714,9 @@
     "flights": "Vuelos",
     "find_deal": "Buscar ofertas",
     "payment_option_available": "Opciones de pago disponibles",
-    "weekly_bi_weekly_or_monthly": "Semanal, quincenal o mensual"
+    "weekly_bi_weekly_or_monthly": "Semanal, quincenal o mensual",
+    "email_notifications": "Notificaciones via Email",
+    "sms_notifications": "Notifications via mensajes de texto (SMS)",
+    "loading": "Cargando...",
+    "please_wait_loading": "Por favor espera mientras buscamos las mejores ofertas"
 }

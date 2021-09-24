@@ -40,6 +40,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   filteredLabel = 'Price Low to High';
   dealIcon: any = false;
 
+  lastFilteredLabelKey: string = "filter_1"; // Default filter value; please update accordingly
+
   constructor(
     private route: ActivatedRoute,
     private flightService: FlightService,
@@ -48,8 +50,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public commonFunction: CommonFunction,
     private renderer: Renderer2,
     private translate: TranslateService,
-    private homeService: HomeService
+    private homeService: HomeService,
   ) {
+    translate.onLangChange.subscribe(lang => this.setFilteredLabel(this.lastFilteredLabelKey));
   }
 
 
@@ -415,12 +418,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         flightDetails.push(item)
       }
     }
-    console.log(delta)
     if (delta.length) {
       for (let item of delta) {
         flightDetails.push(item)
       }
-      console.log(flightDetails)
       return flightDetails;
     }
   }
@@ -477,10 +478,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   // Author: xavier | 2021/7/29
   // Description: Update filtered label using the appropiate translation key
-  setFilteredLabel(rscId: string) {
+  setFilteredLabel(key: string) {
+    this.lastFilteredLabelKey = key;
     this.translate.
-      get(rscId).
+      get(key).
       subscribe((res: string) => this.filteredLabel = res);
   }
-
 }

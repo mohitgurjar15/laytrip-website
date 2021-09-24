@@ -710,7 +710,6 @@
     "booking_not_avilable": "This booking is no longer available. Click “x” to delete to be able to proceed to Checkout.",
     "flights_unavailable": "Flights Unavailable",
     "deals": "Deals",
-    "relevance": "Relevance",
     "flights": "Flights",
     "find_deal": "Find Deals",
     "payment_option_available": "Payment options available",
@@ -719,5 +718,10 @@
     "discover_our_ambassadoer_program": "Discover our ambassador program",
     "keep_in_touch": "Keep in touch",
     "for_dicounts_to_you": "for discounts to your",
-    "favorite_destinations": "favorite destinations."
+    "favorite_destinations": "favorite destinations.",
+    "email_notifications": "Email Notifications",
+    "sms_notifications": "SMS Notifications",
+    "relevance": "Relevance",
+    "loading": "Loading...",
+    "please_wait_loading": "Please wait while we are loading the best deals for you"
 }

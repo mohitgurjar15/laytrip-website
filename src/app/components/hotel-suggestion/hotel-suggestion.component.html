@@ -1,7 +1,7 @@
 <input class="hotel_desination" [(ngModel)]="searchItem" (keyup)="searchLocation($event)" (focus)="onFocus()" (focusout)="focusOut()" placeholder="{{'search_city_hotel' | translate}}">
 <div class="search_suggetion_main" *ngIf="isShowDropDown && data.length > 0">
     <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all" pointerEventsMethod="scrollbar">
-        <span *ngIf="loading">Loading...</span>
+        <span *ngIf="loading">{{'loading' | translate}}</span>
         <div class="suggtions_wrps_mn">
             <div class="suggtions">
                 <div class="sug_line_box">
