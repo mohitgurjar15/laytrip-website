@@ -284,7 +284,8 @@ export class HotelSearchWidgetComponent implements OnInit {
     });
     // this.searchHotelInfo.check_in = this.checkInDate = this.checkInMinDate = this.isRefferal ? moment().add(this.landingPageName === 'sergio' ? 61 : 91, 'days').toDate() : moment().add(2, 'days').toDate();
 
-    this.searchHotelInfo.check_out = this.checkOutMinDate = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
+    this.checkOutMinDate = moment().add(2,'days').toDate();
+    this.searchHotelInfo.check_out  = this.checkOutDate = moment(this.searchHotelInfo.check_in).add(1, 'days').toDate();
     this.rangeDates = [this.checkInDate, this.checkOutDate];
 
   }
