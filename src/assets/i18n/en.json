@@ -712,7 +712,8 @@
     "deals": "Deals",
     "email_notifications": "Email Notifications",
     "sms_notifications": "SMS Notifications",
-    "relevance": "Relevance",
     "loading": "Loading...",
-    "please_wait_loading": "Please wait while we are loading the best deals for you"
+    "please_wait_loading": "Please wait while we are loading the best deals for you",
+    "relevance": "Relevance",
+    "payment_plans": "Payment Plans"
 }

@@ -65,7 +65,7 @@
                                         <div class="col-sm-12 col-md-4 mb-sm-10 mandetory_wrps drop_down_mandetory" *ngIf="cartItem.type=='flight'">
                                             <div class="gender_anchers gender_selection">
                                                 <label for="">{{'gender' | translate}}*</label>
-                                                <ng-select [searchable]="false" [selectOnTab]="true" formControlName="gender" [clearable]="false" placeholder="{{'gender_placeholder' | translate}}" [ngClass]="{'input-error':traveler.controls.gender.touched && traveler.controls.gender.errors}">
+                                                <ng-select #gender [tabIndex]="x" [searchable]="false" [selectOnTab]="true" formControlName="gender" [clearable]="false" placeholder="{{'gender_placeholder' | translate}}" [ngClass]="{'input-error':traveler.controls.gender.touched && traveler.controls.gender.errors}">
                                                     <ng-option value="M">{{'male' | translate}}</ng-option>
                                                     <ng-option value="F">{{'female' | translate}}</ng-option>
                                                     <ng-option value="O">{{'other' | translate}}</ng-option>
@@ -174,7 +174,7 @@
                                             <label for="">
                                                 {{(traveler.controls.is_passport_required.value?'nationality':'country') | translate}}*
                                             </label>
-                                            <ng-select [clearable]="false" [items]="countries" bindLabel="name" bindValue="id" tabindex="10" formControlName="country_id">
+                                            <ng-select [editableSearchTerm]="true" [clearable]="false" [items]="countries" bindLabel="name" bindValue="id" tabindex="10" formControlName="country_id">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -226,13 +226,6 @@
                                 </div>
 
                                 <span class="edit_btns duel_buttons next_traveler">
-                               <!--  <span class="remove_wrps">
-                                    <button class="hover-link" (click)="deleteTraveler(cartNumber,x)"
-                                    [ngClass]="{'disabled': !traveler.touched }">Delete</button>
-                                </span>
-                                <button (click)="editTraveler(cartNumber,x)" [ngClass]="{'disabled': !travelerItem.value.adults[x].userId }" class="hover-link">Edit</button>
-                                <button (click)="saveTraveler(cartNumber,x)" [ngClass]="{'disabled': !traveler.touched }" class="hover-link">Save</button> -->
-
                                 <button *ngIf="!last" (click)="saveTraveler(cartNumber,x)" class="hover-link">{{'next' | translate}} <i class="fa fa-chevron-right" aria-hidden="true"></i>
                                 </button>
                                 </span>
