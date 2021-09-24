@@ -1551,8 +1551,7 @@ select {
                                                     color: $text-black;
                                                     font-weight: 600;
                                                     padding: 0 15px 0 70px;
-                                                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_yellow.svg)
-                                                        center left 15px no-repeat !important;
+                                                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg) center left 15px no-repeat !important;
                                                     @media (max-width: 575px) {
                                                         .calender-responsive-view {
                                                             right: 0 !important;
@@ -5172,5 +5171,9 @@ ngx-otp-input {
         @include ipad-view {
             padding: 5px 20px !important;
         }
+    }
+    &:focus{
+        outline: 0;
+        box-shadow: none;
     }
 }
