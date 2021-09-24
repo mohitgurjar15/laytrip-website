@@ -275,7 +275,7 @@ export class TravelerFormComponent implements OnInit {
         this.travelers[`type${this.cartNumber}`].adults[i].email = traveler.email;
         this.travelers[`type${this.cartNumber}`].adults[i].country_code = traveler.countryCode || '';
         this.travelers[`type${this.cartNumber}`].adults[i].phone_no = traveler.phoneNo || '';
-        this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.country != null ? traveler.country.id : '';
+        this.travelers[`type${this.cartNumber}`].adults[i].country_id = traveler.countryId != null ? traveler.countryId : '';
         this.travelers[`type${this.cartNumber}`].adults[i].dob = traveler.dob ? moment(traveler.dob, "YYYY-MM-DD").format('MM/DD/YYYY'):'';
         if (this.travelers[`type${this.cartNumber}`].adults[i].is_passport_required) {
           this.travelers[`type${this.cartNumber}`].adults[i].passport_number = traveler.passportNumber;
