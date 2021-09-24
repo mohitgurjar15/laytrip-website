@@ -544,62 +544,6 @@
           //border-left: 1px solid #e5e8eb;
           border-right: 1px solid #e5e8eb;
           text-align: center;
-
-          a {
-            font-weight: 500;
-
-            .block_top {
-              //padding: 10px;
-              //background: $bg-tab-detail;
-              height: 34.5px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-bottom: 1px solid #e5e8eb;
-
-              p {
-                margin: 0;
-                font-size: 10px;
-                color: $text-grey;
-                text-transform: uppercase;
-              }
-            }
-
-            .block_btm {
-              //padding: 10px;
-              height: 34.5px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-
-              span {
-                margin: 0;
-                font-size: 14px;
-                color: $text-black;
-              }
-            }
-
-            &.selected {
-              background: $primary-color;
-              border-radius: 5px;
-
-              .block_top {
-                background: transparent;
-
-                p {
-                  color: $text-white;
-                  font-size: 12px;
-                }
-              }
-
-              .block_btm {
-                background: $text-white;
-                // span {
-                //   color: $text-white;
-                // }
-              }
-            }
-          }
         }
       }
 
@@ -647,6 +591,61 @@
         &.draggable {
           border-left: 1px solid #e5e8eb;
           border-right: 1px solid #e5e8eb;
+        }
+      }
+      .slider_item {
+        a {
+          font-weight: 500;
+          display: flex;
+          flex-flow: column;
+          width: 100%;
+
+          .top_dates {
+            height: 34.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #e5e8eb;
+
+            p {
+              margin: 0;
+              font-size: 10px;
+              color: $text-grey;
+              text-transform: uppercase;
+            }
+          }
+
+          .btm_price {
+            height: 34.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+              margin: 0;
+              font-size: 14px;
+              color: $text-black;
+            }
+          }
+
+          &.selected {
+            background: $primary-color;
+            border-radius: 5px;
+
+            .top_dates {
+              background: transparent;
+              color: $text-white !important;
+
+              span {
+                color: $text-white;
+                font-size: 12px;
+              }
+            }
+
+            .btm_price {
+              background: $text-white;
+            }
+          }
         }
       }
     }
