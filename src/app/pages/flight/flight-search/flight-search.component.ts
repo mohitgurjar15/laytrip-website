@@ -66,9 +66,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
       console.log('flightSearchInfo',this.flightSearchInfo)
-      //this.dealIcon = this.flightSearchInfo.dealsIcon
-      //console.log("on listing dealIcon", this.dealIcon)
-
       if (params && params.trip === 'roundtrip') {
         payload = {
           source_location: params.departure,
