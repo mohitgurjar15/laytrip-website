@@ -23,7 +23,7 @@
     <div class="price_day_slider">
         <div class="slider_box">
             <div class="slider_item" *ngFor="let item of dates" [style.transform]="'translateX(' + transformValue + '%)'" >
-                <a href="javascript:void(0);"  *ngIf="trip =='oneway'">
+                <a href="javascript:void(0);"  *ngIf="trip =='oneway'" [ngClass]="{'selected':departureDate==commonFunction.convertDateFormat(item.date,'DD/MM/YYYY'),'disabled':checkDateValidation(item.date)}">
                     <div class="top_dates">{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}</div>
                     <!-- <div class="top_dates">{{ commonFunction.convertDateFormat(item.date,'DD/MM/YYYY')}}<span>Aug 17, 2021</span></div> -->
                     <div class="btm_price">
