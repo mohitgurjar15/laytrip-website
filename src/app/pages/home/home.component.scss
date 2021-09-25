@@ -394,3 +394,103 @@
 }
 
 //<!--  Close Banner Section css -->
+
+.tripfluencer_modal {
+    .modal-header {
+        background: url(src/assets/images/tripfluencer_img.jpg) no-repeat;
+        background-size: cover;
+        min-height: 151px;
+    }
+    .tripfluencer_pop_ctn {
+        padding: 10px;
+        h3 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            margin-bottom: 3px;
+        }
+        p {
+            color: $mid_gray_bg;
+            font-size: 14px;
+            margin-bottom: 30px;
+            a {
+                color: #000;
+            }
+        }
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            .form-group {
+                width: 50%;
+                margin-bottom: 25px;
+                label {
+                    font-size: 12px;
+                    margin-bottom: 8px;
+                    color: $mid_gray_bg;
+                    sup {
+                        color: $pink_clr;
+                    }
+                }
+                input {
+                    font-size: 16px;
+                    color: $mid_gray_bg;
+                    border: none;
+                    border-radius: 0;
+                    padding: 0 0 6px 0;
+                    border-bottom: 1px solid $box-border-color;
+                }
+                &:first-child {
+                    padding-right: 10px;
+                }
+                &:nth-child(2) {
+                    padding-left: 10px;
+                }
+                @include mobile-view {
+                    padding: 0 !important;
+                    width: 100% !important;
+                }
+            }
+            p {
+                font-size: 12px;
+                margin-bottom: 26px;
+            }
+            .cstm_theme_btn_comman {
+                margin-right: 0;
+                margin-left: auto;
+                padding: 8px 10px;
+                max-width: 225px;
+                font-size: 16px;
+                font-weight: 600;
+                width: 100%;
+            }
+        }
+    }
+    .tripfluencer_thanks {
+        display: flex;
+        justify-content: center;
+        flex-flow: column;
+        align-items: center;
+        padding: 35px 10px;
+        h3 {
+            font-size: 24px;
+            color: $pink;
+            margin-bottom: 34px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            img {
+                width: 20px;
+                height: 20px;
+                margin-right: 7px;
+            }
+        }
+        .cstm_theme_btn_comman {
+            margin: 0 auto;
+            padding: 8px 10px;
+            max-width: 225px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
