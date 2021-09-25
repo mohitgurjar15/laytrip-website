@@ -26,6 +26,8 @@ export class FlightPriceSliderComponent implements OnInit {
   adult: number;
   child: number;
   infant: number;
+  transformValue:number=0;
+  minDate:string='';
 
   slideConfig = {
     dots: false,
@@ -95,10 +97,14 @@ export class FlightPriceSliderComponent implements OnInit {
 
     if (changes['dates'].currentValue.length) {
       this.flipDates(this.dates)
+      //this.dates.unshift({"date":"09/10/2020","net_rate":30.15,"price":31.05,"unique_code":"4f4db0e337ddc6cd9057fad6a58b01e0","start_price":0,"secondary_start_price":0,"isPriceInInstallment":false,"selling_price":31.05})
+      //this.dates.push({"date":"07/10/2021","net_rate":30.15,"price":31.05,"unique_code":"4f4db0e337ddc6cd9057fad6a58b01e0","start_price":0,"secondary_start_price":0,"isPriceInInstallment":false,"selling_price":31.05})
     }
     /* if (changes['flexibleLoading'].currentValue) {
       console.log(this.flexibleLoading)
     } */
+    //this.minDate=moment(this.dates[0].date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+
   }
  
  
@@ -176,25 +182,17 @@ export class FlightPriceSliderComponent implements OnInit {
   }
 
   prev() {
+    
     let requestDate = moment(this.dates[0].date, 'DD/MM/YYYY').subtract('1', 'days').format('YYYY-MM-DD');
     let index = this.dates.findIndex(x => x.date == requestDate);
-    var begin = moment(requestDate).format("YYYY-MM-DD");
-    var end = moment().add(2, 'days').format("YYYY-MM-DD");
-    // console.log("Begin:",begin,"End:",end,moment(begin).isSameOrBefore(end))
-    if (index == -1 && moment(begin).isSameOrBefore(end)) {
-      /* this.dates.unshift({
-        date: moment(requestDate, 'YYYY-MM-DD').format("DD/MM/YYYY"),
-        isPriceInInstallment: false,
-        net_rate: 0,
-        price: 0,
-        secondary_start_price: 0,
-        selling_price: 0,
-        start_price: 0,
-        unique_code: ""
-      }); */
-      this.slickModal.slickPrev();
-      // console.log("prev")
-      //this.singleFlexLoader = true;
+    var begin = moment(requestDate);
+    var end = moment().add(2, 'days');
+    
+    if (index == -1 && (moment(begin).isAfter(end, 'days') || moment(begin).isSame(end, 'days')))  {
+      /* if(moment(requestDate).isAfter(this.minDate)){
+        this.transformValue+=100;
+      } */
+      this.minDate = moment(this.minDate,'YYYY-MM-DD').subtract('1','days').format("YYYY-MM-DD");
       this.getFlexiableDate(requestDate,'prev')
     }
     
@@ -202,27 +200,17 @@ export class FlightPriceSliderComponent implements OnInit {
 
   next() {
     let requestDate = moment(this.dates.slice(-1)[0].date,'DD/MM/YYYY').add('+1','days').format('YYYY-MM-DD');
+    this.minDate = moment(this.minDate,'YYYY-MM-DD').add('+1','days').format("YYYY-MM-DD");
+    console.log("this.minDate",this.minDate)
     let index = this.dates.findIndex(x=>x.date ==requestDate);
     if(index==-1){
-      /* this.dates.push({
-        date: moment(requestDate, 'YYYY-MM-DD').format("DD/MM/YYYY"),
-        isPriceInInstallment: false,
-        net_rate: 0,
-        price: 0,
-        secondary_start_price: 0,
-        selling_price: 0,
-        start_price: 0,
-        unique_code: "e04c8d3f03413a15df6396523886e1b8"
-      }) */
-      // console.log("next")
-      this.slickModal.slickNext();
+      this.transformValue-=100;
       this.getFlexiableDate(requestDate,'next')
-      //this.singleFlexLoader = true;
-      
     }
   }
 
   getFlexiableDate(requestDate,direction){
+    console.log(direction,"===")
     if (this.trip == 'oneway') {
       this.singleFlexLoader=true;
       var payload = {
@@ -238,24 +226,43 @@ export class FlightPriceSliderComponent implements OnInit {
       this.flightService.getFlightFlexibleDates(payload).subscribe((res: any) => {
         if (res) {
           this.singleFlexLoader = false;
-          /* let index = this.dates.findIndex(x=>x.date == res[0].date);
-          this.dates[index] = res[0];
-          this.dates.sort(function(a, b){
-            var aa = a.date.split('/').reverse().join(),
-                bb = b.date.split('/').reverse().join();
-            return aa < bb ? -1 : (aa > bb ? 1 : 0);
-          }); */
           if(direction=='next'){
             this.dates.push(res[0]);
           }
           else{
-            // console.log("this.dates",this.dates)
             this.dates.unshift(res[0])
           }
         }
       }, err => {
         this.singleFlexLoader = false;
       });
+    }
+    else{
+        this.singleFlexLoader=true;
+        var roundtripPayLoad = {
+          source_location: this.departure,
+          destination_location: this.route.snapshot.queryParams['arrival'],
+          departure_date: this.route.snapshot.queryParams['departure_date'],
+          arrival_date:this.route.snapshot.queryParams['arrival_date'],
+          flight_class: this.class,
+          adult_count: this.adult,
+          child_count: this.child,
+          infant_count: this.infant,
+          request_date: requestDate,
+        };
+        this.flightService.getFlightFlexibleDatesRoundTrip(roundtripPayLoad).subscribe((res: any) => {
+          if (res) {
+            this.singleFlexLoader = false;
+            if(direction=='next'){
+              this.dates.push(res[0]);
+            }
+            else{
+              this.dates.unshift(res[0])
+            }
+          }
+        }, err => {
+          this.singleFlexLoader = false;
+        });
     }
   }
 

@@ -1,30 +1,19 @@
-.price_per_week_label {
-    font-size: 12px;
-}
-
-.price_unavailabe {
-    color: #000000 !important;
-    font-size: 9px !important;
-    line-height: 9px;
-}
-.price_availabe{
-    color: #000000 !important;
-}
-.full_payment {
-    color: #F826C1 !important;
-}
-
 .price_day_slider {
     .btn-arrow {
         position: absolute;
         top: 50%;
         border: none;
-        background: transparent url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) no-repeat center center;
+        background: transparent url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_dropdown.svg) no-repeat
+            center center;
         font-size: 0;
         padding: 10px 15px;
         &.btn-prev {
             left: 0;
             transform: translate(0, -50%) rotate(90deg);
+            &.disabled_btn{
+                pointer-events: none;
+                opacity: 0.6;
+            }
         }
         &.btn-next {
             right: 0;
@@ -40,14 +29,14 @@
 body {
     margin: 0;
 }
-.flexible_date{
+.flexible_date {
     position: relative;
 }
 .slider_box {
-	height: 100%;
-	white-space: nowrap;
-	font-size: 0;
-	transition: 0.8s;
+    height: 100%;
+    white-space: nowrap;
+    font-size: 0;
+    transition: 0.8s;
 }
 .slider_box > * {
     font-size: 1rem;
@@ -100,4 +89,77 @@ body {
 .prevNext a + a {
     left: auto;
     right: 0;
+}
+
+.price_day_slider {
+    .slider_box {
+        display: flex;
+        border-left: 1px solid #e5e8eb;
+        border-right: 1px solid #e5e8eb;
+        overflow-x: hidden;
+        .slider_item {
+            // border-left: 1px solid #e5e8eb;
+            border-right: 1px solid #e5e8eb;
+            min-width: 14.30%;
+            transition: all 0.5s;
+            .top_dates {
+                height: 34.5px;
+                border-bottom: 1px solid #e5e8eb;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: column;
+                margin: 0;
+                font-size: 10px;
+                font-weight: 600;
+                color: #8188ab;
+                text-transform: uppercase;
+            }
+            .btm_price {
+                height: 34.5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                font-size: 14px;
+                font-weight: 600;
+                color: #000;
+                &.full_payment_txt {
+                    color: #f826c1;
+                }
+            }
+            &:last-child{
+                border-right: none;
+            }
+
+            @media (max-width:767px) {
+                min-width: 20.05%;
+            }
+            @media (max-width:576px) {
+                min-width: 33.5%;
+            }
+            // &.left_move {
+            //     transform: translate(-100%, 0);
+            // }
+            // &.right_move {
+            //     transform: translate(100%, 0);
+            // }
+        }
+    }
+}
+
+.price_per_week_label {
+    font-size: 12px;
+}
+
+.price_unavailabe {
+    color: #000000 !important;
+    font-size: 9px !important;
+    line-height: 9px;
+}
+.price_availabe {
+    color: #000000 !important;
+}
+.full_payment {
+    color: #f826c1 !important;
 }
