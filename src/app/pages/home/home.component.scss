@@ -156,6 +156,7 @@
                     align-items: center;
                     justify-content: center;
                     position: relative;
+                    margin: 0;
                     @include tab-view {
                         font-size: 14px;
                         &:last-child {
