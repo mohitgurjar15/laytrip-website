@@ -507,9 +507,11 @@ export class FlightSearchWidgetComponent implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       this.calPrices = false;
-      if (Object.keys(params).length > 0) {
+      console.log('params',params)
+      if (params && params.departure && typeof params.departure != 'undefined') {
         this.calPrices = true;
       }
+      console.log('calPrices',this.calPrices)
     });
 
 

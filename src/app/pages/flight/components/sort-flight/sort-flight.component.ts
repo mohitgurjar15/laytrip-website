@@ -28,19 +28,16 @@ export class SortFlightComponent implements OnInit {
 
   ngOnInit() {
     this.loadJquery();
+    let flightDetails = []
     for (let item of this.flightDetails) {
       if (item.airline_name == 'Delta') {
         this.delta.push(item)
       }
-    }
-    let flightDetails = []
-    if (this.delta.length) {
-      for (let item of this.flightDetails) {
-        if (item.airline_name != 'Delta') {
-          flightDetails.push(item)
-        }
+      if (item.airline_name != 'Delta') {
+        flightDetails.push(item)
       }
-
+    }
+    if (this.delta.length) {
       for (let item of this.delta) {
         flightDetails.push(item)
       }
@@ -48,6 +45,7 @@ export class SortFlightComponent implements OnInit {
       this.sortFlight.emit({key : 'relevance',order : 'DESC'})
       this.sortType ='relevance'
     }
+    console.log('delta length',this.delta)
 
   }
 
