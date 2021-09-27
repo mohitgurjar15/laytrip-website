@@ -211,7 +211,6 @@ export class HomeComponent implements OnInit {
     if (this.commonFunction.isRefferal()) {
       this.currentChangeCounter += this.currentChangeCounter;
       this.homeService.setOffersData(this.currentSlide);
-
     }
   }
 
@@ -270,6 +269,7 @@ export class HomeComponent implements OnInit {
     this.showTripfluencerThankyou = false;
     this.tripfluencer.reset();
     const controls = this.tripfluencer.controls;
+    $('#trip_modal').modal('hide');
     Object.keys(controls).forEach(controlName =>
       controls[controlName].markAsUntouched()
     );
