@@ -68,7 +68,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.homeService.setDeaslToggle(this.dealIcon)
     this.route.queryParams.forEach(params => {
       this.flightSearchInfo = params;
-      console.log('flightSearchInfo', this.flightSearchInfo)
       if (params && params.trip === 'roundtrip') {
         payload = {
           source_location: params.departure,
@@ -157,7 +156,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       });
       this.getCalenderPrice(payload)
     } else {
-      console.log('on one way search')
       this.flightService.getFlightSearchResult(payload).subscribe((res: any) => {
         if (res) {
           this.loading = false;

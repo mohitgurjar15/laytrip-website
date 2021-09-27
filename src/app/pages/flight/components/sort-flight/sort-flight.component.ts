@@ -45,7 +45,6 @@ export class SortFlightComponent implements OnInit {
       this.sortFlight.emit({key : 'relevance',order : 'DESC'})
       this.sortType ='relevance'
     }
-    console.log('delta length',this.delta)
 
   }
 
