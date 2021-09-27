@@ -248,7 +248,6 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
         return airline != event.target.value;
       })
     }
-
     this.airlineList[index].isChecked = !this.airlineList[index].isChecked;
     this.filterFlights();
   }
@@ -679,7 +678,7 @@ export class FilterFlightComponent implements OnInit, OnDestroy {
       for (let item of delta) {
         flightDetails.push(item)
       }
-      return flightDetails;
     }
+    return flightDetails;
   }
 }

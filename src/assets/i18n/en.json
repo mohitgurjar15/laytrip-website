@@ -659,8 +659,8 @@
     "ending_in": "ending in",
     "add_on_baggage": "Add-on Baggage",
     "top_banner_info_1": "Per ",
-    "top_banner_info_2": ", bookings not yet available to residents of California, Florida, Illinois and Washington.",
-    "top_banner_info_3": ", bookings not yet available to residents of CA, FL, IL, WA.",
+    "top_banner_info_2": ", bookings not yet available to residents of California, Florida, Hawaii, Illinois and Washington.",
+    "top_banner_info_3": ", bookings not yet available to residents of CA, FL, HI, IL, WA.",
     "covid_travel": "COVID-19 Travel",
     "processing_booking_1": "We are Processing<br>Your Booking",
     "processing_booking_2": "Please do not press the Back Button, close your browser or click Pay and Book again. Wait for your Booking Confirmation screen to appear.",
@@ -721,7 +721,8 @@
     "favorite_destinations": "favorite destinations.",
     "email_notifications": "Email Notifications",
     "sms_notifications": "SMS Notifications",
-    "relevance": "Relevance",
     "loading": "Loading...",
-    "please_wait_loading": "Please wait while we are loading the best deals for you"
+    "please_wait_loading": "Please wait while we are loading the best deals for you",
+    "relevance": "Relevance",
+    "payment_plans": "Payment Plans"
 }

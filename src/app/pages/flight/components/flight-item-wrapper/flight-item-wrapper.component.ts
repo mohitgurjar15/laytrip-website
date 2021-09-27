@@ -112,7 +112,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
     
     this.flightService.getFlights.subscribe(data=>{
       this.flightItems =[];
-      if(data.length){
+      if(data && data.length){
         this.flightItems = data;            
       }
       for (let i = 0; i < this.flightItems.length; i++) {
