@@ -92,6 +92,7 @@ export class FlightItemWrapperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('coming in flight item wrapper')
     let _currency = localStorage.getItem('_curr');
     this.currency = JSON.parse(_currency);
     this.userInfo = getLoginUserInfo();

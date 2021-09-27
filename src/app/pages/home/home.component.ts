@@ -72,8 +72,8 @@ export class HomeComponent implements OnInit {
     window.scrollTo(0, 0);
     this.tripfluencer = this.formBuilder.group({
       name: ['', Validators.required],
-      social_name: ['', Validators.required],
       email: ['', [Validators.required,Validators.email]],
+      social_name: [''],
     });
     this.host = window.location.host;
     this.isRefferal = this.commonFunction.isRefferal();
@@ -211,7 +211,6 @@ export class HomeComponent implements OnInit {
     if (this.commonFunction.isRefferal()) {
       this.currentChangeCounter += this.currentChangeCounter;
       this.homeService.setOffersData(this.currentSlide);
-
     }
   }
 
@@ -248,6 +247,7 @@ export class HomeComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
     if(this.tripfluencer.invalid){
+      console.log(this.tripfluencer)
       return;
     }else{
       let json_Data = {
@@ -269,6 +269,7 @@ export class HomeComponent implements OnInit {
     this.showTripfluencerThankyou = false;
     this.tripfluencer.reset();
     const controls = this.tripfluencer.controls;
+    $('#trip_modal').modal('hide');
     Object.keys(controls).forEach(controlName =>
       controls[controlName].markAsUntouched()
     );
