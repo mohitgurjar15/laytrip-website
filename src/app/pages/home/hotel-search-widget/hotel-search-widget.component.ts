@@ -330,10 +330,10 @@ export class HotelSearchWidgetComponent implements OnInit {
     if (this.fromDestinationInfo.title.length == 0 && this.searchHotelInfo.location.title.length == 0) {
       this.validSearch = false;
     }
-    if(window.location.pathname == '/hotel/search'){
-      info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
-      this.searchHotelInfo.occupancies = info;
-    }
+    // if(window.location.pathname == '/hotel/search'){
+    //   info = JSON.parse(decodeURIComponent(atob(this.route.snapshot.queryParams['itenery'])));
+    //   this.searchHotelInfo.occupancies = info;
+    // }
     let queryParams: any = {};
 
     queryParams.check_in = moment(this.rangeDates[0]).format('YYYY-MM-DD');
