@@ -81,7 +81,10 @@
             <div class="modal-body">
                 <div class="tripfluencer_pop_ctn" *ngIf="!showTripfluencerThankyou">
                     <h3>Become a Tripfluencer!</h3>
-                    <p>Members of our ambassador program can earn rewards from Laytrip by sharing posts on social media during trips purchased with us… <a> <!--href="javascript:void(0);" data-toggle="modal" data-target="#sign_in_modal"--> Sign in to be first to know what’s all about!</a></p>
+                    <p>Members of our ambassador program can earn rewards from Laytrip by sharing posts on social media during trips purchased with us…
+                        <a>
+                            <!--href="javascript:void(0);" data-toggle="modal" data-target="#sign_in_modal"-->Sign in to be first to know what’s all about!</a>
+                    </p>
                     <form [formGroup]="tripfluencer" (ngSubmit)="onSubmit()">
                         <!-- #MyForm="ngForm" (submit)="submitForm()" [formGroup]="tripForm" -->
                         <div class="form-group">
@@ -106,7 +109,7 @@
                         </div>
                         <div class="form-group w-100">
                             <label>Social</label>
-                            <input type="text" class="form-control" formControlName="social_name" placeholder="Enter username" required>
+                            <input type="text" class="form-control" formControlName="social_name" placeholder="Enter username">
                             <!-- <div *ngIf="(submitted  || tripfluencer.controls.social_name.touched) && tripfluencer.controls.social_name.errors" class="focus-input100 login-error">
                                 <div *ngIf="tripfluencer.controls.social_name.errors.required" class="text-danger">Please enter social name.</div>
                                 <div *ngIf="tripfluencer.controls.social_name.errors.pattern" class="text-danger">Whitespace not allow at the beginning and end.</div>
@@ -118,7 +121,7 @@
                 </div>
                 <div class="tripfluencer_thanks" *ngIf="showTripfluencerThankyou">
                     <h3><img src="{{s3BucketUrl}}assets/images/tripfluencer_sent.svg" alt="Sent">Sent! Thank you for joining</h3>
-                    <a data-dismiss="modal" href="javascript:void(0);" class="cstm_theme_btn_comman">close</a>
+                    <a data-dismiss="modal" href="javascript:void(0);" (click)="closeModal()" class="cstm_theme_btn_comman">close</a>
                 </div>
             </div>
         </div>

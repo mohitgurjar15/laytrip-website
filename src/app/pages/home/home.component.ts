@@ -72,8 +72,8 @@ export class HomeComponent implements OnInit {
     window.scrollTo(0, 0);
     this.tripfluencer = this.formBuilder.group({
       name: ['', Validators.required],
-      social_name: [''],
       email: ['', [Validators.required,Validators.email]],
+      social_name: [''],
     });
     this.host = window.location.host;
     this.isRefferal = this.commonFunction.isRefferal();
@@ -248,6 +248,7 @@ export class HomeComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
     if(this.tripfluencer.invalid){
+      console.log(this.tripfluencer)
       return;
     }else{
       let json_Data = {
