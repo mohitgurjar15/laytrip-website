@@ -30,7 +30,7 @@
                             <!-- <li class="nav-item disabled" *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'">
                                 <a class="nav-link hover-link" [routerLink]="['/account/lay-credit-points']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
                                     <span class="lay_points_dot" id="layPoints">{{showTotalLayCredit }}
-                                        {{'point' | translate}}</span>
+                                        {{'points' | translate}}</span>
                                 </a>
                             </li> -->
                             <li class="nav-item" [ngClass]="{'dr_pay':countryCode==='DR'}" *ngIf="countryCode==='DR'">
@@ -77,7 +77,7 @@
                                         <!-- <li *ngIf="isLoggedIn && (userDetails.roleId==5 || userDetails.roleId==6) && countryCode!=='DR'" class="disabled">
                                             <a class="nav-link hover-link " [routerLink]="['/account/lay-credit-points']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">
                                                 <span class="lay_points_dot ok" id="layPoints">
-                                                    {{'point' | translate}}</span>
+                                                    {{'points' | translate}}</span>
                                             </a>
                                         </li> -->
                                         <li><a class="hover-link" (click)="onLoggedout()">{{'sign_out' | translate}}</a></li>

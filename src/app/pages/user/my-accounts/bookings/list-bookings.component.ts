@@ -5,6 +5,7 @@ import { environment } from '../../../../../environments/environment';
 import { AccountService } from '../../../../services/account.service';
 import { CartService } from '../../../../services/cart.service';
 import * as moment from 'moment';
+declare var $: any;
 
 @Component({
   selector: 'app-list-bookings',
@@ -144,5 +145,8 @@ export class ListBookingsComponent implements OnInit {
 
   loadUpcomming(event) {
     this.upComingloading = event;
+  }
+  closeModal() {
+    $('#tax_fee_modal').modal('hide');
   }
 }

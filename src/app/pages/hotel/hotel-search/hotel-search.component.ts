@@ -37,6 +37,9 @@ export class HotelSearchComponent implements OnInit {
   filterOpen: boolean = false;
   sortByOpen: boolean = false;
   hotelDealIcon = false;
+
+  lastFilteredLabelKey: string = "filter_1"; // Default filter value; please update accordingly
+
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,
@@ -47,6 +50,7 @@ export class HotelSearchComponent implements OnInit {
     private homeService: HomeService,
     private translate: TranslateService
   ) {
+    translate.onLangChange.subscribe(lang => this.setFilteredLabel(this.lastFilteredLabelKey));
   }
 
   ngOnInit() {
@@ -253,9 +257,10 @@ export class HotelSearchComponent implements OnInit {
 
   // Author: xavier | 2021/7/27
   // Description: Update filtered label using the appropiate translation key
-  setFilteredLabel(rscId: string) {
+  setFilteredLabel(key: string) {
+    this.lastFilteredLabelKey = key;
     this.translate.
-      get(rscId).
+      get(key).
       subscribe((res: string) => this.filteredLabel = res);
   }
 }

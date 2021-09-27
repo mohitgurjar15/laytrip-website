@@ -38,7 +38,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   isFlightAvaibale: boolean = false;
   statusCode = '';
   filteredLabel = 'Price Low to High';
-  dealIcon: any=false;
+  dealIcon: any = false;
+
+  lastFilteredLabelKey: string = "filter_1"; // Default filter value; please update accordingly
 
   constructor(
     private route: ActivatedRoute,
@@ -48,8 +50,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     public commonFunction: CommonFunction,
     private renderer: Renderer2,
     private translate: TranslateService,
-    private homeService: HomeService
+    private homeService: HomeService,
   ) {
+    translate.onLangChange.subscribe(lang => this.setFilteredLabel(this.lastFilteredLabelKey));
   }
 
 
@@ -120,7 +123,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.fullPageLoading = false;
           this.isNotFound = false;
-         this.flightDetails = res.items;
+          this.flightDetails = res.items;
           this.filterFlightDetails = res;
           if (this.flightDetails.length == 0) {
             this.isNotFound = true;
@@ -313,6 +316,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.setFilteredLabel('filter_12');
         this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
       }
+    } else if (key === 'relevance') {
+      this.setFilteredLabel('filter_13');
+      this.flightDetails = this.sortByRelevant(this.flightDetails, key, order);
     }
     else {
       // this.flightDetails = this.sortJSON(this.filterFlightDetails.items, key, order);
@@ -401,6 +407,25 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  sortByRelevant(data, key, way) {
+    let delta = [];
+    let flightDetails = []
+    for (let item of data) {
+      if (item.airline_name == 'Delta') {
+        delta.push(item)
+      }
+      if (item.airline_name != 'Delta') {
+        flightDetails.push(item)
+      }
+    }
+    if (delta.length) {
+      for (let item of delta) {
+        flightDetails.push(item)
+      }
+      return flightDetails;
+    }
+  }
+
   filterFlight(event) {
     this.flightDetails = event;
     this.flightService.setFlights(this.flightDetails);
@@ -453,10 +478,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   // Author: xavier | 2021/7/29
   // Description: Update filtered label using the appropiate translation key
-  setFilteredLabel(rscId: string) {
+  setFilteredLabel(key: string) {
+    this.lastFilteredLabelKey = key;
     this.translate.
-      get(rscId).
+      get(key).
       subscribe((res: string) => this.filteredLabel = res);
   }
-  
 }

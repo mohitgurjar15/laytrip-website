@@ -306,11 +306,20 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   destinationChangedValue(event) {
+    console.log('on desti',event)
     if (event && event.key && event.key === 'fromSearch') {
-      this.fromSearch = event.value;
+      if(typeof event.value != 'undefined'){
+        this.fromSearch = event.value;
+      }else{
+        this.fromSearch = []
+      }
       this.searchedValue.push({ key: 'fromSearch', value: this.fromSearch });
     } else if (event && event.key && event.key === 'toSearch') {
-      this.toSearch = event.value;
+      if(typeof event.value != 'undefined'){
+        this.toSearch = event.value;
+      }else{
+        this.toSearch = []
+      }
       this.searchedValue.push({ key: 'toSearch', value: this.toSearch });
     }
     this.searchFlightInfo.departure = this.fromSearch.code;
@@ -390,12 +399,13 @@ export class FlightSearchWidgetComponent implements OnInit {
 
 
   swapAirport() {
-
+    console.log('on depa',this.searchFlightInfo.departure)
+    console.log('on arri',this.searchFlightInfo.arrival)
     let temp = this.searchFlightInfo.departure;
-
+    console.log('departure', temp)
     this.searchFlightInfo.departure = this.searchFlightInfo.arrival;
     this.searchFlightInfo.arrival = temp;
-
+    console.log('arrial', temp)
 
     let tempAirport = this.fromSearch;
     this.fromSearch = this.toSearch;

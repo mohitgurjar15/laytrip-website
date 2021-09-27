@@ -248,7 +248,7 @@
                                         <div class="type_lines">
                                             <span class="titles">{{'full_payment' | translate}}</span>
                                             <span class="texts" *ngIf="!item?.offer_data.applicable">
-                                                ${{item?.selling?.total | number : '1.2-2'}} including taxes and fees
+                                                ${{item?.selling?.total | number : '1.2-2'}} {{'including_taxes_fees' | translate}}
                                             </span>
                                             <span class="texts" *ngIf="item?.offer_data.applicable">${{item?.selling?.discounted_total | number : '1.2-2'}} {{'including_taxes_fees' | translate}}</span>
                                         </div>

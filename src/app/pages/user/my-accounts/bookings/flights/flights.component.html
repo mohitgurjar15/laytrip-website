@@ -6,17 +6,17 @@
                     <span class="title_image">
                         <img src="{{s3BucketUrl}}assets/images/icon/tabicons/flight.svg" alt="Flight icon" />
                     </span> {{cartItem.moduleInfo[0]?.departure_code}}
-                    <span class="flight_routing_imgs" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 1">
+                <span class="flight_routing_imgs" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 1">
                         <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
                     </span> {{cartItem.moduleInfo[0]?.arrival_code}}
-                    <span class="flight_routing_imgs" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
+                <span class="flight_routing_imgs" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
                         <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f.svg" alt="" class="route_image" />
                         <img src="{{s3BucketUrl}}assets/images/icon/dashed_blue_f_return.svg" alt="" class="route_image" />
                     </span>
                 </span>
-                <span *ngIf="cartItem.moduleInfo[0].routes.length==2" class="header_date">{{commonFunction.convertDateFormat(cartItem.moduleInfo[0]?.departure_date,'DD/MM/YYYY')}}
-                    - {{commonFunction.convertDateFormat(cartItem.moduleInfo[0]?.arrival_date,'DD/MM/YYYY')}}</span>
-                <span *ngIf="cartItem.moduleInfo[0].routes.length==1" class="header_date">{{commonFunction.convertDateFormat(cartItem.moduleInfo[0]?.departure_date,'DD/MM/YYYY')}}</span>
+                <span *ngIf="cartItem.moduleInfo[0].routes.length==2" class="header_date">{{commonFunction.convertDateFormat(cartItem.checkInDate,'YYYY/MM/DD')}}
+                    - {{commonFunction.convertDateFormat(cartItem.checkOutDate,'YYYY/MM/DD')}}</span>
+                <span *ngIf="cartItem.moduleInfo[0].routes.length==1" class="header_date">{{commonFunction.convertDateFormat(cartItem.checkInDate,'YYYY/MM/DD')}}</span>
             </div>
         </div>
 
@@ -53,8 +53,7 @@
                                 </span>
                             </div>
                             <div class="fl_number colmns_w">
-                                <span class="pink_stamp"></span> {{'flight' | translate}}
-                                {{stop.airline}}-{{stop.flight_number}}
+                                <span class="pink_stamp"></span> {{'flight' | translate}} {{stop.airline}}-{{stop.flight_number}}
                             </div>
                             <div class="class_wrps colmns_w">
                                 {{stop.cabin_class}}
@@ -103,8 +102,7 @@
                                     </span>
                                 </div>
                                 <div class="fl_number colmns_w">
-                                    <span class="blue_stamp"></span> {{'flight' | translate}}
-                                    {{stop.airline}}-{{stop.flight_number}}
+                                    <span class="blue_stamp"></span> {{'flight' | translate}} {{stop.airline}}-{{stop.flight_number}}
                                 </div>
                                 <div class="class_wrps colmns_w">
                                     {{stop.cabin_class}}
@@ -113,15 +111,12 @@
                         </div>
                     </div>
                     <div class="total_hrs_wrps cta_btns_wrps" *ngIf="cartItem?.moduleInfo[0]?.routes?.length === 2">
-                        <span class="ct_btns"></span> {{'duration' | translate}}tion
-                        {{cartItem?.moduleInfo[0]?.routes[1]?.duration}}
+                        <span class="ct_btns"></span> {{'duration' | translate}} {{cartItem?.moduleInfo[0]?.routes[1]?.duration}}
                     </div>
                 </ng-container>
 
             </div>
         </div>
-        <app-booking-traveler [cartItem]="cartItem" [laytrip_cart_id]="laytrip_cart_id"
-            [isPassportRequired]="cartItem?.moduleInfo[0]?.routes.is_passport_required"
-            (laytripCartId)="cancelCartIdRemove($event)"></app-booking-traveler>
+        <app-booking-traveler [cartItem]="cartItem" [laytrip_cart_id]="laytrip_cart_id" [isPassportRequired]="cartItem?.moduleInfo[0]?.routes.is_passport_required" (laytripCartId)="cancelCartIdRemove($event)"></app-booking-traveler>
 
     </ng-container>
