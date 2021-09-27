@@ -182,13 +182,11 @@
 <!-- Covid-19 section start -->
 <section class="block_covid">
     <div class="container">
-        <span>
+        <span class="d-flex align-items-center">
             <img data-toggle="popover" title="Covid-19" data-placement="bottom" data-trigger=""
                 data-content="Covid-19 description" src="{{s3BucketUrl}}assets/images/info_icon_laytrip.svg"
                 alt="Info Image">
-            {{'covid_travel' | translate}} <a [routerLink]="['/covid-19']"  [queryParams]="commonFunction.isRefferal() ? commonFunction.getRefferalParms() : ''" [innerHTML]="'read_more' | translate"
-                ></a> <span class="desk_span"> | {{'top_banner_info_1' | translate}} <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal() ? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'top_banner_info_2' | translate}}</span>
-        <span class="mob_span">{{'top_banner_info_1' | translate}} <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal() ? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'top_banner_info_3' | translate}}</span>
+                <span class="">{{'covid_travel' | translate}} <a [routerLink]="['/covid-19']"  [queryParams]="commonFunction.isRefferal() ? commonFunction.getRefferalParms() : ''" [innerHTML]="'read_more' | translate"></a> <span class="desk_span"> | {{'top_banner_info_1' | translate}} <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal() ? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'top_banner_info_2' | translate}}</span><span class="mob_span">{{'top_banner_info_1' | translate}} <a [routerLink]="['/terms']"  [queryParams]="commonFunction.isRefferal() ? commonFunction.getRefferalParms() : ''">{{'terms' | translate}}</a>{{'top_banner_info_3' | translate}}</span></span>
         </span>
     </div>
 </section>
