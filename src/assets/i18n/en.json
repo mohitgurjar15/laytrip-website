@@ -715,6 +715,7 @@
     "payment_option_available": "Payment options available",
     "weekly_bi_weekly_or_monthly": "Weekly, bi-weekly or monthly",
     "become_tripfluencer": "Become a Tripfluencer!",
+    "become_tripfluencer_button": "Become a Tripfluencer",
     "discover_our_ambassadoer_program": "Discover our ambassador program",
     "keep_in_touch": "Keep in touch",
     "for_dicounts_to_you": "for discounts to your",
@@ -724,5 +725,18 @@
     "loading": "Loading...",
     "please_wait_loading": "Please wait while we are loading the best deals for you",
     "relevance": "Relevance",
-    "payment_plans": "Payment Plans"
+    "payment_plans": "Payment Plans",
+    "become_tripfluencer_1": "By clicking Send, I confirm that I want to receive information, updates and other communications about the program.",
+    "tripfluencer_email_touch_validate": "Please enter email.",
+    "send": "Send",
+    "thank_you_for_joining": "Sent! Thank you for joining",
+    "social": "Social",
+    "name": "Name",
+    "name_touched_validation": "Please enter name",
+    "white_space_not_allow": "Whitespace not allow at the beginning and end.",
+    "enter_username": "Enter username",
+    "enter_name": "Enter name",
+    "tripluencer_static_content": "Members of our ambassador program can earn rewards from Laytrip by sharing posts on social media during trips purchased with us…"
+
+
 }

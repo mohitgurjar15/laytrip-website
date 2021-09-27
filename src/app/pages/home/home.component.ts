@@ -70,6 +70,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.landingPageName = this.route.snapshot.queryParams['utm_source']
     this.tripfluencer = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required,Validators.email]],
