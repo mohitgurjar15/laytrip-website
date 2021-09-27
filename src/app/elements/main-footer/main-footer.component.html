@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="ftr_flex_row">
-                    <a [routerLink]="['/']"  [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" class="logo_w">
+                    <a [routerLink]="['/']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" class="logo_w">
                         <img src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Logo" />
                     </a>
                 </div>
@@ -48,40 +48,26 @@
                             <div class="menu_grid">
                                 <ul>
                                     <li>
-                                        <a 
-                                        [routerLink]="['/about']"
-                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                                        [innerHTML]="'laytrip_info_page_title_3' | translate"></a>
+                                        <a [routerLink]="['/about']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" [innerHTML]="'laytrip_info_page_title_3' | translate"></a>
                                     </li>
                                     <li>
-                                        <a [routerLink]="['/faq']"
-                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                                        [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
+                                        <a [routerLink]="['/faq']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" [innerHTML]="'laytrip_info_page_title_4_description_1' | translate"></a>
                                     </li>
                                     <li>
-                                        <a 
-                                        [routerLink]="['/privacy-policy']"
-                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                                        [innerHTML]="'laytrip_info_page_title_4_description_5' | translate"></a>
+                                        <a [routerLink]="['/privacy-policy']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" [innerHTML]="'laytrip_info_page_title_4_description_5' | translate"></a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="menu_grid">
                                 <ul>
                                     <li>
-                                        <a 
-                                        [routerLink]="['/terms']"
-                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                                        [innerHTML]="'laytrip_info_page_title_4_description_6' | translate"></a>
+                                        <a [routerLink]="['/terms']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''" [innerHTML]="'laytrip_info_page_title_4_description_6' | translate"></a>
                                     </li>
                                     <li>
                                         <a class="hover-link" [innerHTML]="'laytrip_info_page_title_4_description_2' | translate" data-toggle="modal" data-target="#contact_modal"></a>
                                     </li>
                                     <li>
-                                        <a
-                                        [routerLink]="['/ccpa']"
-                                        [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''"
-                                       >Do Not Sell</a>
+                                        <a [routerLink]="['/ccpa']" [queryParams]="commonFunction.isRefferal()? commonFunction.getRefferalParms() : ''">Do Not Sell</a>
                                     </li>
                                 </ul>
                             </div>
@@ -91,7 +77,7 @@
                                         <a (click)="openShareModal()" [innerHTML]="'laytrip_info_page_title_4_description_7' | translate"></a>
                                     </li>
                                     <li class="share_li">
-                                        <a class="hover-link"  data-toggle="modal" data-target="#trip_modal">Become a Tripfluencer</a>
+                                        <a class="hover-link" data-toggle="modal" data-target="#trip_modal">{{'become_tripfluencer_button' | translate}}</a>
                                     </li>
                                 </ul>
                                 <div class="d-flex flex-wrap mt-0 align-items-center">
@@ -99,32 +85,27 @@
                                     <ul class="footer_down_links w-auto">
                                         <li>
                                             <a target="_blank" target="_blank" href="https://www.instagram.com/laytrip_travel/" class="hover-link">
-                                                <img src="{{s3BucketUrl}}assets/images/insta-i.svg" alt="IG"
-                                                    title="Instagram">
+                                                <img src="{{s3BucketUrl}}assets/images/insta-i.svg" alt="IG" title="Instagram">
                                             </a>
                                         </li>
                                         <li>
                                             <a target="_blank" href="https://twitter.com/Laytrip_travel" class="hover-link">
-                                                <img src="{{s3BucketUrl}}assets/images/twitter-i.svg"
-                                                    alt="twitter" title="Twitter">
+                                                <img src="{{s3BucketUrl}}assets/images/twitter-i.svg" alt="twitter" title="Twitter">
                                             </a>
                                         </li>
                                         <li>
                                             <a target="_blank" href="https://www.facebook.com/LaytripTravel" class="hover-link">
-                                                <img src="{{s3BucketUrl}}assets/images/fb-i.svg"
-                                                    alt="fb" title="Facebook">
+                                                <img src="{{s3BucketUrl}}assets/images/fb-i.svg" alt="fb" title="Facebook">
                                             </a>
                                         </li>
                                         <li>
-                                            <a  target="_blank" href="https://www.pinterest.com/Laytrip/" class="hover-link">
-                                                <img src="{{s3BucketUrl}}assets/images/pin-i.svg"
-                                                    alt="Pi" title="Pinterest">
+                                            <a target="_blank" href="https://www.pinterest.com/Laytrip/" class="hover-link">
+                                                <img src="{{s3BucketUrl}}assets/images/pin-i.svg" alt="Pi" title="Pinterest">
                                             </a>
                                         </li>
                                         <li>
                                             <a target="_blank" href="https://www.linkedin.com/company/laytrip/mycompany/?viewAsMember=true" class="hover-link">
-                                                <img src="{{s3BucketUrl}}assets/images/ln-i.svg"
-                                                    alt="Linkedin" title="Linkedin">
+                                                <img src="{{s3BucketUrl}}assets/images/ln-i.svg" alt="Linkedin" title="Linkedin">
                                             </a>
                                         </li>
                                     </ul>
