@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
     window.scrollTo(0, 0);
     this.tripfluencer = this.formBuilder.group({
       name: ['', Validators.required],
-      social_name: ['', Validators.required],
+      social_name: [''],
       email: ['', [Validators.required,Validators.email]],
     });
     this.host = window.location.host;

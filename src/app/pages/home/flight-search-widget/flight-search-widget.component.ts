@@ -545,28 +545,28 @@ export class FlightSearchWidgetComponent implements OnInit {
         var GivenDate = new Date(endDate);
         if (GivenDate > currentDate || currentDate < new Date(startDate)) {
           this.lowMinPrice = this.highMinPrice = this.midMinPrice = 0;
-          this.isCalenderPriceLoading = this.calPrices = true;
-
-          this.timerTimeStamp = setTimeout(() => {
-            this.timer = 2;
-            if (this.timer = 2) {
-              this.showRetivePriceText = true;
-              this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
-                this.calenderPrices = [...this.calenderPrices, ...res];
-                this.isCalenderPriceLoading = false;
-                this.showRetivePriceText = false
-
-                //get calender installemnt length
-                this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
-              }, err => {
-                this.calPrices = false;
-                this.isCalenderPriceLoading = false;
-              });
-            } else {
-              this.calPrices = this.isCalenderPriceLoading = false;
-            }
-          }, 2000);
-
+          this.isCalenderPriceLoading = true;
+          if (window.location.pathname == '/flight/search'){
+            this.timerTimeStamp = setTimeout(() => {
+              this.timer = 2;
+              if (this.timer = 2) {
+                this.showRetivePriceText = true;
+                this.flightService.getFlightCalenderDate(payload).subscribe((res: any) => {
+                  this.calenderPrices = [...this.calenderPrices, ...res];
+                  this.isCalenderPriceLoading = false;
+                  this.showRetivePriceText = false
+                  this.calPrices = true;
+                  //get calender installemnt length
+                  this.calendersFullPaymentLength = this.calenderPrices.filter(item => item.isPriceInInstallment == false && this.currentMonth == moment(item.date, 'DD/MM/YYYY').format('MM')).length;
+                }, err => {
+                  this.calPrices = false;
+                  this.isCalenderPriceLoading = false;
+                });
+              } else {
+                this.calPrices = this.isCalenderPriceLoading = false;
+              }
+            }, 2000);
+          }
         }
 
       } else {
