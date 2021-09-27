@@ -485,6 +485,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   }
 
   changeMonth(event) {
+    console.log('event',event)
     // this.timerStart();
     this.showRetivePriceText = false;
     clearTimeout(this.timerTimeStamp);

@@ -69,3 +69,61 @@
         </div>
     </div>
 </section>
+
+
+<section class="tripfluencer_modal modal fade comman_modal" id="trip_modal" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button *ngIf="!showTripfluencerThankyou" type="button" class="close" data-dismiss="modal" (click)="closeModal()">
+                    <img src="{{s3BucketUrl}}assets/images/trip_close.svg" alt="Close Icon">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tripfluencer_pop_ctn">
+                    <h3>Become a Tripfluencer!</h3>
+                    <p>Members of our ambassador program can earn rewards from Laytrip by sharing posts on social media during trips purchased with us… <a> Sign in to be first to know what’s all about!</a></p>
+                    <form [formGroup]="tripfluencer" (ngSubmit)="onSubmit()" *ngIf="!showTripfluencerThankyou">
+                        <!-- #MyForm="ngForm" (submit)="submitForm()" [formGroup]="tripForm" -->
+                        <div class="form-group">
+                            <label>Name<sup>*</sup></label>
+                            <input type="text" class="form-control" formControlName="name" placeholder="Enter Name" required>
+                            <div *ngIf="(submitted  || tripfluencer.controls.name.touched) && tripfluencer.controls.name.errors" class="focus-input100 login-error">
+                                <div *ngIf="tripfluencer.controls.name.errors.required" class="text-danger">Please enter name.</div>
+                                <div *ngIf="tripfluencer.controls.name.errors.pattern" class="text-danger">Whitespace not allow at the beginning and end.</div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Social<sup>*</sup></label>
+                            <input type="text" class="form-control" formControlName="social_name" placeholder="Enter username" required>
+                            <div *ngIf="(submitted  || tripfluencer.controls.social_name.touched) && tripfluencer.controls.social_name.errors" class="focus-input100 login-error">
+                                <div *ngIf="tripfluencer.controls.social_name.errors.required" class="text-danger">Please enter social name.</div>
+                                <div *ngIf="tripfluencer.controls.social_name.errors.pattern" class="text-danger">Whitespace not allow at the beginning and end.</div>
+                            </div>
+                        </div>
+                        <div class="form-group w-100">
+                            <label>Email<sup>*</sup></label>
+                            <input type="email" class="form-control" formControlName="email" placeholder="Enter Email" required>
+                            <div *ngIf="(submitted  || tripfluencer.controls.email.touched) && tripfluencer.controls.email.errors" class="focus-input100 login-error error">
+                                <div *ngIf="tripfluencer.controls.email.errors.required" class="text-danger">
+                                    Please enter email.
+                                </div>
+                                <div *ngIf="tripfluencer.controls.email.errors.email" class="text-danger">
+                                    Please enter valid email address.
+                                </div>
+                            </div>
+                        </div>
+                        <p>By clicking Send, I confirm that I want to receive information, updates and other communications about the program.</p>
+                        <button class="btn cstm_theme_btn_comman">Send</button>
+                    </form>
+                </div>
+                <div class="tripfluencer_thanks" *ngIf="showTripfluencerThankyou">
+                    <!--d-none-->
+                    <h3><img src="{{s3BucketUrl}}assets/images/tripfluencer_sent.svg" alt="Sent">Sent! Thank you for joining</h3>
+                    <a data-dismiss="modal" href="javascript:void(0);" class="cstm_theme_btn_comman">close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -3,13 +3,14 @@ import { environment } from '../../../environments/environment';
 import { GenericService } from '../../services/generic.service';
 import { ModuleModel, Module } from '../../model/module.model';
 import { CommonFunction } from '../../_helpers/common-function';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../services/home.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiePolicyComponent } from '../cookie-policy/cookie-policy.component';
 import { CookieService } from 'ngx-cookie';
 import { PreloadingService } from '../../services/preloading.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 declare var $: any;
 @Component({
@@ -35,6 +36,9 @@ export class HomeComponent implements OnInit {
   banner_city_name = 'Miami';
   slides;
   landingPageName;
+  tripfluencer : FormGroup;
+  submitted = false;
+  showTripfluencerThankyou = false;
   $landingPageData;
   constructor(
     private genericService: GenericService,
@@ -47,7 +51,8 @@ export class HomeComponent implements OnInit {
     public modalService: NgbModal,
     private cookieService: CookieService,
     public preLoadService: PreloadingService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
   ) {
     this.landingPageName = this.route.snapshot.queryParams['utm_source']
     this.renderer.addClass(document.body, 'bg_color');
@@ -65,6 +70,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.tripfluencer = this.formBuilder.group({
+      name: ['', Validators.required],
+      social_name: ['', Validators.required],
+      email: ['', [Validators.required,Validators.email]],
+    });
     this.host = window.location.host;
     this.isRefferal = this.commonFunction.isRefferal();
     this.getModules();
@@ -233,5 +243,37 @@ export class HomeComponent implements OnInit {
   onSwipe(evt) {
     const direction = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left') : '';
     this.homeService.setSwipeSlideDirection(direction)
+  }
+
+  onSubmit(){
+    this.submitted = true;
+    if(this.tripfluencer.invalid){
+      return;
+    }else{
+      let json_Data = {
+        "name": this.tripfluencer.value.name,
+        "email": this.tripfluencer.value.email,
+        "social_user_name": this.tripfluencer.value.social_name
+      }
+      this.homeService.tripfluencerEnquiry(json_Data).subscribe((data: any) => {
+        this.showTripfluencerThankyou = true;
+        this.submitted = false;
+      }, (error: HttpErrorResponse) => {
+        this.submitted = false;
+      });
+    }
+  }
+
+  closeModal(){
+    this.submitted =false;
+    this.showTripfluencerThankyou = false;
+    this.tripfluencer.reset();
+    const controls = this.tripfluencer.controls;
+    Object.keys(controls).forEach(controlName =>
+      controls[controlName].markAsUntouched()
+    );
+    Object.keys(controls).forEach(controlName =>
+      controls[controlName].setValue('')
+    );
   }
 }
