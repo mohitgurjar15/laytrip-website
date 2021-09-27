@@ -106,7 +106,7 @@
                         </div>
                         <div class="form-group w-100">
                             <label>Social</label>
-                            <input type="text" class="form-control" formControlName="social_name" placeholder="Enter username" required>
+                            <input type="text" class="form-control" formControlName="social_name" placeholder="Enter username">
                             <!-- <div *ngIf="(submitted  || tripfluencer.controls.social_name.touched) && tripfluencer.controls.social_name.errors" class="focus-input100 login-error">
                                 <div *ngIf="tripfluencer.controls.social_name.errors.required" class="text-danger">Please enter social name.</div>
                                 <div *ngIf="tripfluencer.controls.social_name.errors.pattern" class="text-danger">Whitespace not allow at the beginning and end.</div>
@@ -118,7 +118,7 @@
                 </div>
                 <div class="tripfluencer_thanks" *ngIf="showTripfluencerThankyou">
                     <h3><img src="{{s3BucketUrl}}assets/images/tripfluencer_sent.svg" alt="Sent">Sent! Thank you for joining</h3>
-                    <a data-dismiss="modal" href="javascript:void(0);" class="cstm_theme_btn_comman">close</a>
+                    <a data-dismiss="modal" href="javascript:void(0);" class="cstm_theme_btn_comman" (click)="closeModal()">close</a>
                 </div>
             </div>
         </div>
