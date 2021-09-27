@@ -114,4 +114,8 @@ export class HomeService {
         return offerData.asObservable();
 
     }
+
+    tripfluencerEnquiry(data){
+        return this.http.post(`${environment.apiUrl}v1/enqiry/tripfluencer`, data);
+    }
 }

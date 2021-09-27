@@ -45,7 +45,8 @@
                                 <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> {{commonFunction.isRefferal() ? item?.to?.country : item.country}}</p>
                                 <div class="payment_option">
                                     {{'payment_option_available' | translate}}:
-                                    <span>{{'weekly_bi_weekly_or_monthly' | translate}}</span>
+                                    <span *ngIf="!commonFunction.isRefferal()">{{'weekly_bi_weekly_or_monthly' | translate}}</span>
+                                    <span *ngIf="commonFunction.isRefferal()">{{'weekly_installments' | translate}}</span>
                                 </div>
                                 <div class="image_about_text">
                                     <button (click)="btnDealClick(item)">{{'find_deal' | translate}}</button>
@@ -73,7 +74,8 @@
                                 <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> {{commonFunction.isRefferal() ? item?.location?.country : item.country}}</p>
                                 <div class="payment_option">
                                     {{'payment_option_available' | translate}}:
-                                    <span>{{'weekly_bi_weekly_or_monthly' | translate}}</span>
+                                    <span *ngIf="!commonFunction.isRefferal()">{{'weekly_bi_weekly_or_monthly' | translate}}</span>
+                                    <span *ngIf="commonFunction.isRefferal()">{{'weekly_installments' | translate}}</span>
                                 </div>
                                 <div class="image_about_text">
                                     <button (click)="btnDealClick(commonFunction.isRefferal() ? item?.location : item)">{{'find_deal' | translate}}</button>
@@ -135,7 +137,8 @@
                                 <p><img src="{{s3BucketUrl}}assets/images/map_location.svg" alt="map_location"> Brazil {{item.code}} {{item.lat}}</p>
                                 <div class="payment_option">
                                     {{'payment_option_available' | translate}}:
-                                    <span>{{'weekly_bi_weekly_or_monthly' | translate}}</span>
+                                    <span *ngIf="!commonFunction.isRefferal()">{{'weekly_bi_weekly_or_monthly' | translate}}</span>
+                                    <span *ngIf="commonFunction.isRefferal()">{{'weekly_installments' | translate}}</span>
                                 </div>
                                 <div class="image_about_text">
                                     <button (click)="btnDealClick(item)">{{'find_deal' | translate}}</button>
