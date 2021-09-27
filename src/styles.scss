@@ -96,7 +96,8 @@ a {
             }
         }
         input {
-            background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg) center right 15px no-repeat;
+            background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg) center right 15px
+                no-repeat;
             background-size: 20px;
             border: none;
         }
@@ -138,7 +139,7 @@ a {
                     }
                 }
             }
-            &.ng-select-opened>.ng-select-container {
+            &.ng-select-opened > .ng-select-container {
                 .ng-arrow {
                     padding: 5px 9px;
                     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -213,7 +214,7 @@ a {
                 }
             }
         }
-        &.ng-select-opened>.ng-select-container {
+        &.ng-select-opened > .ng-select-container {
             .ng-arrow {
                 padding: 5px 9px;
                 background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -273,7 +274,8 @@ a {
                 width: 100%;
             }
             input {
-                background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg) center right 0 no-repeat !important;
+                background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg) center right 0
+                    no-repeat !important;
                 background-size: 20px !important;
                 border: none;
             }
@@ -410,20 +412,17 @@ input:focus:-moz-placeholder {
     color: transparent;
 }
 
-
 /* FF 4-18 */
 
 input:focus::-moz-placeholder {
     color: transparent;
 }
 
-
 /* FF 19+ */
 
 input:focus:-ms-input-placeholder {
     color: transparent;
 }
-
 
 /* IE 10+ */
 
@@ -435,20 +434,17 @@ textarea:focus:-moz-placeholder {
     color: transparent;
 }
 
-
 /* FF 4-18 */
 
 textarea:focus::-moz-placeholder {
     color: transparent;
 }
 
-
 /* FF 19+ */
 
 textarea:focus:-ms-input-placeholder {
     color: transparent;
 }
-
 
 /* IE 10+ */
 
@@ -483,7 +479,7 @@ textarea:focus:-ms-input-placeholder {
                 height: 12px;
             }
         }
-        &.ng-select-opened>.ng-select-container {
+        &.ng-select-opened > .ng-select-container {
             .ng-arrow {
                 padding: 5px 9px;
                 background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -544,7 +540,7 @@ textarea:focus:-ms-input-placeholder {
                     top: -5px;
                 }
             }
-            &.ng-select-opened>.ng-select-container {
+            &.ng-select-opened > .ng-select-container {
                 .ng-arrow {
                     padding: 5px 9px;
                     background-image: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/arrow_up_dropdown.svg);
@@ -1555,7 +1551,8 @@ select {
                                                     color: $text-black;
                                                     font-weight: 600;
                                                     padding: 0 15px 0 70px;
-                                                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg) center left 15px no-repeat !important;
+                                                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg)
+                                                        center left 15px no-repeat !important;
                                                     @media (max-width: 575px) {
                                                         .calender-responsive-view {
                                                             right: 0 !important;
@@ -2339,7 +2336,8 @@ select {
                                             color: $text-black;
                                             font-weight: 600;
                                             padding: 0 0 0 60px;
-                                            background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg) center left 15px no-repeat !important;
+                                            background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/calender_new.svg)
+                                                center left 15px no-repeat !important;
                                             @media (max-width: 575px) {
                                                 .calender-responsive-view {
                                                     right: 0 !important;
@@ -2473,8 +2471,10 @@ select {
     width: 100%;
     padding: 100px 0px 100px;
     background: $background-white;
-    @media (max-width: 1199px) {}
-    @media (max-width: 767px) {}
+    @media (max-width: 1199px) {
+    }
+    @media (max-width: 767px) {
+    }
     .featured_list {
         width: 100%;
         margin: 30px 0 0;
@@ -3530,7 +3530,8 @@ select {
                                     border-bottom: 1px solid $primary-color;
                                 }
                                 &.birth_date {
-                                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                                    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
+                                        no-repeat;
                                     background-position: right center;
                                 }
                             }
@@ -4214,7 +4215,8 @@ select {
                                         border-bottom: 1px solid $primary-color;
                                     }
                                     &.birth_date {
-                                        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg) no-repeat;
+                                        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/ic_calendar.svg)
+                                            no-repeat;
                                         background-position: right center;
                                     }
                                     &:placeholder {
@@ -5146,6 +5148,38 @@ ngx-otp-input {
             }
         }
     }
+    // .routing_main_wrps {
+    //     .card_box {
+    //         .card_iinner {
+    //             .right_side {
+    //                 .fl_fares {
+    //                     .cta_btn {
+    //                         button {
+    //                             font-size: 13px !important;
+    //                             line-height: 15px !important;
+    //                             height: 32px !important;
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // .search_result.hotels {
+    //     .room_list_wrp {
+    //         .search_block {
+    //             .listing_block {
+    //                 .block_price {
+    //                     .book_btn {
+    //                         font-size: 13px !important;
+    //                         line-height: 15px !important;
+    //                         height: 32px !important;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 .cstm_theme_btn_comman {

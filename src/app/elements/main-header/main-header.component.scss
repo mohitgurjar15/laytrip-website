@@ -1077,9 +1077,7 @@
 .mob_span {
     display: none;
     @include tab-view {
-        display: flex;
-        font-size: 8px !important;
-        margin-left: 35px;
+       display: block;
     }
 }
 
@@ -1132,6 +1130,18 @@
             text-decoration: underline;
             margin: 0 2px;
         }
+        @include tab-view{
+            font-size: 12px;
+            .mob_span{
+                font-size: 9px;
+            }
+            img{
+                margin-right: 8px;
+            }
+        }
+    }
+    @include tab-view{
+        padding: 7px 0;
     }
 }
 
