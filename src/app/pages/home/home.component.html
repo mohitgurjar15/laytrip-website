@@ -14,7 +14,7 @@
                 </span>
                 <p *ngIf="isRefferal && landingPageName != 'antinoti'">{{'promo_421_1' | translate}} NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_2' | translate}}.*</p>
                 <p *ngIf="!isRefferal || landingPageName === 'antinoti'" [innerHTML]="'flight_third_title' | translate"></p>
-                <a href="javascript:void(0);" class="cstm_theme_btn_comman banner_new_btn" data-toggle="modal" data-target="#works_modal">How it Works</a>
+                <a href="javascript:void(0);" class="cstm_theme_btn_comman banner_new_btn" data-toggle="modal" data-target="#works_modal" [ngClass]="{'sergio_banner_btn' : landingPageName === 'antinoti'}">{{'installment_info_page_small_title' | translate}}</a>
             </div>
         </div>
         <div class="banner_tab">
@@ -80,7 +80,7 @@
             </div>
             <div class="modal-body">
                 <div class="tripfluencer_pop_ctn" *ngIf="!showTripfluencerThankyou">
-                    <h3>Become a Tripfluencer!</h3>
+                    <h3>{{'become_tripfluencer' | translate}}</h3>
                     <p>Members of our ambassador program can earn rewards from Laytrip by sharing posts on social media during trips purchased with us…
                         <a>
                             <!--href="javascript:void(0);" data-toggle="modal" data-target="#sign_in_modal"-->Sign in to be first to know what’s all about!</a>
@@ -96,14 +96,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Email<sup>*</sup></label>
-                            <input type="email" class="form-control" formControlName="email" placeholder="Enter email" required>
+                            <label>{{'email' | translate}}<sup>*</sup></label>
+                            <input type="email" class="form-control" formControlName="email" placeholder="{{'emai_Placeholder' | translate}}" required>
                             <div *ngIf="(submitted  || tripfluencer.controls.email.touched) && tripfluencer.controls.email.errors" class="focus-input100 login-error error">
                                 <div *ngIf="tripfluencer.controls.email.errors.required" class="text-danger">
                                     Please enter email.
                                 </div>
                                 <div *ngIf="tripfluencer.controls.email.errors.email" class="text-danger">
-                                    Please enter valid email address.
+                                    {{'email_invalid_validation' | translate}}
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="tripfluencer_thanks" *ngIf="showTripfluencerThankyou">
                     <h3><img src="{{s3BucketUrl}}assets/images/tripfluencer_sent.svg" alt="Sent">Sent! Thank you for joining</h3>
-                    <a data-dismiss="modal" href="javascript:void(0);" class="cstm_theme_btn_comman" (click)="closeModal()">Close</a>
+                    <a data-dismiss="modal" href="javascript:void(0);" class="cstm_theme_btn_comman" (click)="closeModal()">{{'close' | translate}}</a>
                 </div>
             </div>
         </div>

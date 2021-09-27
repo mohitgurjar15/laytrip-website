@@ -4,34 +4,31 @@
 @import "../../../_hotel.scss";
 @import "../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
-
-
 ng-scrollbar {
-
     --scrollbar-padding: 0 0 0 5px !important;
 }
 
-    input:focus::-webkit-input-placeholder {
-        color: $text-black;
-    }
+input:focus::-webkit-input-placeholder {
+    color: $text-black;
+}
 
-    input:focus:-moz-placeholder {
-        color: $text-black;
-    }
-
-    /* FF 4-18 */
-   input:focus::-moz-placeholder {
-        color: $text-black;
-    }
-
-    /* FF 19+ */
-    input:focus:-ms-input-placeholder {
-        color: $text-black;
-    }
+input:focus:-moz-placeholder {
+    color: $text-black;
+}
 
 
+/* FF 4-18 */
 
+input:focus::-moz-placeholder {
+    color: $text-black;
+}
+
+
+/* FF 19+ */
+
+input:focus:-ms-input-placeholder {
+    color: $text-black;
+}
 
 .search_suggetion_main {
     border: 1px solid $box-border-color;
@@ -48,7 +45,6 @@ ng-scrollbar {
     z-index: 9999;
     top: 90%;
     //max-height: 186px;
-
     @include tab-view {
         //max-height: 265px;
         margin: 0;
@@ -57,34 +53,27 @@ ng-scrollbar {
         top: 106%;
         width: 101%;
     }
-
     .close_btn {
         position: absolute;
         top: 10px;
         right: 15px;
         z-index: 999;
-
         @include tab-view {
             right: 10px;
         }
-
         button {
             cursor: pointer;
-
             img {
                 max-width: 9px;
             }
-
             &:focus {
                 outline: none;
                 box-shadow: none;
             }
         }
     }
-
     .suggtions_wrps_mn {
         display: flex;
-
         .suggtions {
             scroll-behavior: smooth;
             height: 100%;
@@ -93,23 +82,20 @@ ng-scrollbar {
             flex: auto;
             display: flex;
             flex-direction: column;
-
             .sug_line_box {
                 // display: flex;
                 // justify-content: flex-start;
                 // align-items: flex-start;
                 margin-bottom: 10px;
                 float: left;
-
                 &:last-child {
                     margin-bottom: 0;
-
                     .linew_wrps {
+                        width: 100%;
                         ng-conatiner {
                             &:last-child {
                                 .line_names {
                                     margin-bottom: 10px;
-
                                     &:last-child {
                                         margin-bottom: 0;
                                     }
@@ -118,30 +104,25 @@ ng-scrollbar {
                         }
                     }
                 }
-
                 .word_alpha {
                     font-size: 18px;
                     font-weight: 500;
                     color: $text-black;
                     width: 25px;
                     float: left;
-
                     @include tab-view {
                         font-size: 14px;
                     }
                 }
-
                 .linew_wrps {
                     // display: flex;
                     // justify-content: flex-start;
                     // flex-direction: column;
                     float: left;
                     padding: 0;
-
                     @include tab-view {
                         font-size: 12px;
                     }
-
                     .line_names {
                         margin-bottom: 10px;
                         display: flex;
@@ -149,7 +130,6 @@ ng-scrollbar {
                         font-size: 16px;
                         padding: 0;
                         line-height: 24px;
-
                         // &:last-child{
                         //     margin-bottom: 0;
                         // }
@@ -161,9 +141,7 @@ ng-scrollbar {
             }
         }
     }
-
     .alphabets_wrps {
-
         flex: 1;
         display: none;
         position: fixed;
@@ -171,11 +149,9 @@ ng-scrollbar {
         align-items: flex-end;
         right: 50px;
         margin-top: 20px;
-
         @include tab-view {
             display: none;
         }
-
         a {
             font-size: 6px;
             color: $grayed_border;
