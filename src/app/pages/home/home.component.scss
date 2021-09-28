@@ -396,10 +396,15 @@
 //<!--  Close Banner Section css -->
 
 .tripfluencer_modal {
+    padding-right: 0 !important;
+    .modal-dialog{
+        max-width: 580px;
+        margin: 0.5rem auto;
+    }
     .modal-header {
-        background: url(src/assets/images/tripfluencer_img.jpg) no-repeat;
+        background: url(src/assets/images/tripfluencer_img.jpg) no-repeat center;
         background-size: cover;
-        min-height: 151px;
+        min-height: 170px;
     }
     .tripfluencer_pop_ctn {
         padding: 10px;
