@@ -76,7 +76,7 @@
 </section>
 
 <section class="tripfluencer_modal modal fade comman_modal" id="trip_modal" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <button *ngIf="!showTripfluencerThankyou" type="button" class="close" data-dismiss="modal" (click)="closeModal()">
@@ -122,7 +122,7 @@
                             </div>
                         </div>
                         <p>{{'become_tripfluencer_1' | translate}}</p>
-                        <button class="btn cstm_theme_btn_comman"><i *ngIf="submitted" class="fa fa-spinner fa-spin"></i>{{'send' | translate}}</button>
+                        <button class="btn cstm_theme_btn_comman"><i *ngIf="submitted" class="fa fa-spinner fa-spin mr-2"></i>{{'send' | translate}}</button>
                     </form>
                 </div>
                 <div class="tripfluencer_thanks" *ngIf="showTripfluencerThankyou">
