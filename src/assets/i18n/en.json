@@ -716,7 +716,6 @@
     "become_tripfluencer": "Become a Tripfluencer!",
     "become_tripfluencer_button": "Become a Tripfluencer",
     "discover_our_ambassadoer_program": "Discover our ambassador program",
-    "keep_in_touch": "Keep in touch",
     "for_dicounts_to_you": "for discounts to your",
     "favorite_destinations": "favorite destinations.",
     "deals": "Deals",
@@ -737,7 +736,8 @@
     "enter_username": "Enter username",
     "enter_name": "Enter name",
     "tripluencer_static_content": "Members of our ambassador program can earn rewards from Laytrip by sharing posts on social media during trips purchased with us…",
-    "price_guaranteed_all_layaway_plans": "Price guaranteed on all layaway plans!"
+    "price_guaranteed_all_layaway_plans": "Price guaranteed on all layaway plans!",
+    "keep_in_touch": "Keep in touch!"
 
 
 }
