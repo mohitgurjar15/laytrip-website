@@ -72,9 +72,9 @@ export class HomeComponent implements OnInit {
     window.scrollTo(0, 0);
     this.landingPageName = this.route.snapshot.queryParams['utm_source']
     this.tripfluencer = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required,Validators.email]],
-      social_name: [''],
+      name: ['', [Validators.required,Validators.pattern('^(?! )(?!.* $)[a-zA-Z0-9,.: ()-]+$')]],
+      email: ['', [Validators.required,Validators.email,Validators.pattern('^(?! )(?!.* $)[a-zA-Z0-9,.: ()-]+$')]],
+      social_name: ['',Validators.pattern('^(?! )(?!.* $)[a-zA-Z0-9,.: ()-]+$')],
     });
     this.host = window.location.host;
     this.isRefferal = this.commonFunction.isRefferal();

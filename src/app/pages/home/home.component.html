@@ -97,7 +97,7 @@
                         </div>
                         <div class="form-group">
                             <label>{{'email' | translate}}<sup>*</sup></label>
-                            <input type="email" class="form-control" formControlName="email" placeholder="{{'emai_Placeholder' | translate}}" required>
+                            <input type="email" class="form-control" onkeypress='return event.charCode != 32' formControlName="email" placeholder="{{'emai_Placeholder' | translate}}" required>
                             <div *ngIf="(submitted  || tripfluencer.controls.email.touched) && tripfluencer.controls.email.errors" class="focus-input100 login-error error">
                                 <div *ngIf="tripfluencer.controls.email.errors.required" class="text-danger">
                                     {{'tripfluencer_email_touch_validate' |translate}}
@@ -105,15 +105,16 @@
                                 <div *ngIf="tripfluencer.controls.email.errors.email" class="text-danger">
                                     {{'email_invalid_validation' | translate}}
                                 </div>
+                                <!-- <div *ngIf="tripfluencer.controls.email.errors.pattern" class="text-danger">{{'white_space_not_allow' | translate}}</div> -->
                             </div>
                         </div>
                         <div class="form-group w-100">
                             <label>{{'social' | translate}}</label>
                             <input type="text" class="form-control" formControlName="social_name" placeholder="{{'enter_username' | translate}}">
-                            <!-- <div *ngIf="(submitted  || tripfluencer.controls.social_name.touched) && tripfluencer.controls.social_name.errors" class="focus-input100 login-error">
-                                <div *ngIf="tripfluencer.controls.social_name.errors.required" class="text-danger">Please enter social name.</div>
-                                <div *ngIf="tripfluencer.controls.social_name.errors.pattern" class="text-danger">Whitespace not allow at the beginning and end.</div>
-                            </div> -->
+                            <div *ngIf="(submitted  || tripfluencer.controls.social_name.touched) && tripfluencer.controls.social_name.errors" class="focus-input100 login-error">
+                                <!-- <div *ngIf="tripfluencer.controls.social_name.errors.required" class="text-danger">Please enter social name.</div> -->
+                                <div *ngIf="tripfluencer.controls.social_name.errors.pattern" class="text-danger">{{'white_space_not_allow' | translate}}</div>
+                            </div>
                         </div>
                         <p>{{'become_tripfluencer_1' | translate}}</p>
                         <button class="btn cstm_theme_btn_comman">{{'send' | translate}}</button>
