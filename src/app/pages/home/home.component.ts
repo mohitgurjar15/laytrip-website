@@ -248,7 +248,7 @@ export class HomeComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
     if(this.tripfluencer.invalid){
-      console.log(this.tripfluencer)
+    this.submitted = false;
       return;
     }else{
       let json_Data = {
