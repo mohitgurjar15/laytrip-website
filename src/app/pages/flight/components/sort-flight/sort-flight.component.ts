@@ -71,7 +71,7 @@ export class SortFlightComponent implements OnInit {
   resetSorting(key, order) {
     if(this.delta.length){
       this.sortType = 'relevance';
-      this.sortFlight.emit({key : 'relevance',order : 'DESC'})
+      this.sortFlight.emit({key : 'relevance',order : 'reset'})
     }else{
       this.sortType = 'lh_price';
       this.sortFlight.emit({ key, order })

@@ -26,6 +26,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   isResetFilter: string = 'no';
   subscriptions: Subscription[] = [];
   tripType: string = '';
+  deltaLength = false;
 
   flexibleLoading: boolean = true;
   flexibleNotFound: boolean = false;
@@ -168,7 +169,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
             this.isNotFound = true;
           }
         }
-        console.log('on one way search with result')
+        // console.log('on one way search with result')
 
         //this.homeService.setDeaslToggle(this.dealIcon)
       }, err => {
@@ -197,6 +198,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
       this.getCalenderPrice(payload);
     }
+    this.sortByRelevant(this.flightDetails,'','')
     this.filteredLabel = "Price Low to High";
     this.setFilteredLabel('filter_1');
   }
@@ -317,6 +319,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.flightDetails = this.sortByDeparture(this.flightDetails, key, order);
       }
     } else if (key === 'relevance') {
+      if(order = 'reset'){
+        this.flightDetails = this.sortJSON(this.flightDetails, 'selling_price', 'ASC');
+      }
       this.setFilteredLabel('filter_13');
       this.flightDetails = this.sortByRelevant(this.flightDetails, key, order);
     }
@@ -332,6 +337,10 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.flightDetails = this.sortJSON(this.flightDetails, key, order);
       }
     }
+    // if(this.deltaLength === true){
+    //   this.setFilteredLabel('filter_13');
+    //   this.flightDetails = this.sortByRelevant(this.flightDetails, key, order);
+    // }
     this.flightService.setFlights(this.flightDetails)
   }
 
@@ -408,10 +417,12 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   sortByRelevant(data, key, way) {
+    // console.log('in sort rel')
     let delta = [];
     let flightDetails = []
     for (let item of data) {
       if (item.airline_name == 'Delta') {
+        this.deltaLength = true;
         delta.push(item)
       }
       if (item.airline_name != 'Delta') {
@@ -422,8 +433,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       for (let item of delta) {
         flightDetails.push(item)
       }
-      return flightDetails;
     }
+    return flightDetails;
   }
 
   filterFlight(event) {
