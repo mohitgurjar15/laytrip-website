@@ -53,7 +53,7 @@
 <app-mobile-and-subscribe></app-mobile-and-subscribe>
 
 <section class="block_contact_us_main modal fade comman_modal" id="works_modal" data-keyboard="false">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="contact_modal_wrp">
                 <div class="modal_title">
@@ -63,7 +63,12 @@
                     </button>
                 </div>
                 <div class="modal_content text-center">
-                    <iframe src="https://www.youtube.com/embed/Ji7WcGuTABY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width: calc(100% - 30px); height: 100%; min-height: 400px; margin: 0 auto 15px; display: inline-block;"></iframe>
+                    <video controls autoplay loop>
+                        <source src="{{s3BucketUrl}}assets/video/marketing_video.mp4" type="video/mp4">
+                        <!-- <source src="{{s3BucketUrl}}assets/video/marketing_video.ogg" type="video/ogg"> -->
+                        <!-- <source src="{{s3BucketUrl}}assets/video/marketing_video.mpeg" type="video/mpeg"> -->
+                        Your browser does not support the video element. Kindly update it to latest version.
+                      </video >
                 </div>
             </div>
         </div>
@@ -117,7 +122,7 @@
                             </div>
                         </div>
                         <p>{{'become_tripfluencer_1' | translate}}</p>
-                        <button class="btn cstm_theme_btn_comman">{{'send' | translate}}</button>
+                        <button class="btn cstm_theme_btn_comman"><i *ngIf="submitted" class="fa fa-spinner fa-spin"></i>{{'send' | translate}}</button>
                     </form>
                 </div>
                 <div class="tripfluencer_thanks" *ngIf="showTripfluencerThankyou">
