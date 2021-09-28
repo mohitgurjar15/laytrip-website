@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 // declare var $: any;
 @Component({
@@ -9,11 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LandingVideoComponent implements OnInit {
   landingPageName;
-
-  constructor(private route: ActivatedRoute) { }
+  image: any;
+  constructor(
+     private route: ActivatedRoute,   
+     private translate: TranslateService
+    ) { 
+    translate.onLangChange.subscribe(lang => this.setLanguage());
+  }
 
   ngOnInit(): void {
     this.landingPageName = this.route.snapshot.queryParams['utm_source']
+    this.setLanguage();
     // $(window).scroll(function () {
     //   $('video').each(function () {
     //     if ($(this).visible(true)) {
@@ -23,6 +30,19 @@ export class LandingVideoComponent implements OnInit {
     //     }
     //   })
     // });
+  }
+
+  setLanguage() {
+    const userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
+    switch (userLang) {
+      case "es":
+        this.image = 'assets/images/infographic.png'
+        break;
+        default:
+        this.image = 'assets/images/infographicEnglish.png'
+        break;
+    }
+    console.log(this.image)
   }
 
 }
