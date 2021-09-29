@@ -1,17 +1,14 @@
 <div [formGroup]="form" class="lab_wrapper">
     <label class="{{data|json}}">{{label}}</label>
-    <ng-select [formControlName]="controlName" [loading]="false" id="{{id}}" [selectOnTab]="true" [items]="data"
-        bindLabel="display_name" bindValue="city" [clearable]="true" notFoundText="" [virtualScroll]="true"
-        [(ngModel)]="defaultCity" (click)="onInputClick()" (search)="onChangeSearch($event)" loadingText="" (change)="selectEvent($event, id)"
-        (clear)="onRemove($event)" class="laytrip-input custom_inputs from_to_inputs" placeholder="{{ placeHolder }}"
-        [tabIndex]="tabIndex" [clearSearchOnAdd]="true" [clearOnBackspace]="true" [hideSelected]="false"
-        [searchable]="true" (focus)="onFocus()" (close)="onClose($event)">
+    <ng-select [formControlName]="controlName" [loading]="false" id="{{id}}" [selectOnTab]="true" [items]="data" bindLabel="display_name" bindValue="city" [clearable]="true" notFoundText="" [virtualScroll]="true" [(ngModel)]="defaultCity" (click)="onInputClick()"
+        (search)="onChangeSearch($event)" loadingText="" (remove)="onRemove($event)" (change)="selectEvent($event, id)" (clear)="onRemove($event)" class="laytrip-input custom_inputs from_to_inputs" placeholder="{{ placeHolder }}" [tabIndex]="tabIndex" [clearSearchOnAdd]="true"
+        [clearOnBackspace]="true" [hideSelected]="false" [searchable]="true" (focus)="onFocus()" (close)="onClose($event)">
         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-            <div  [ngClass]="(item.parentId==0)?'parent':'child'">
+            <div [ngClass]="(item.parentId==0)?'parent':'child'">
                 {{item.code}} {{item.city}},{{item.country}}-{{item.name}}
             </div>
         </ng-template>
-        <ng-template ng-label-tmp let-item="item" >
+        <ng-template ng-label-tmp let-item="item">
             {{item.city}}, {{item.country}} ({{item.code}})
         </ng-template>
     </ng-select>

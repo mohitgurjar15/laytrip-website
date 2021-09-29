@@ -82,7 +82,7 @@ export class SearchAirportComponent implements OnInit {
     else {
       alternateLocation = localStorage.getItem('__from') || '';
     }
-    alternateLocation = ''
+    // alternateLocation = ''
     console.log(alternateLocation)
     this.$autoComplete = this.flightService.searchRoute(searchItem, isFromLocation, alternateLocation).subscribe((response: any) => {
       this.flightSearchRoute.emit(response);
@@ -149,6 +149,18 @@ export class SearchAirportComponent implements OnInit {
   }
 
   selectEvent(event, index) {
+    if(typeof event === 'undefined'){
+      if(index === 'fromSearch'){
+      this.changeValue.emit({ key: 'fromSearch', value: event });
+      localStorage.setItem('__from','')
+      }
+    }
+    if(typeof event === 'undefined'){
+      if(index === 'toSearch'){
+        localStorage.setItem('__to','')
+      this.changeValue.emit({ key: 'toSearch', value: event });
+      }
+    }
     if (!event) {
       this.placeHolder = this.placeHolder;
     }
@@ -171,6 +183,7 @@ export class SearchAirportComponent implements OnInit {
   }
 
   onRemove(event) {
+    console.log('removed')
     this.selectedAirport = {};
   }
 

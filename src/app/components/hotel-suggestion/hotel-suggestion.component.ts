@@ -108,11 +108,14 @@ export class HotelSuggestionComponent implements OnInit {
   }
 
   selectHotelItem(item) {
-    this.isShowDropDown = false;
-    this.searchItem = item.title;
-    this.selectedHotel.emit(item);
-    this.validateSearch.emit(true);
-    this.isValidSearch = true;
+    console.log(item)
+    if(item){
+      this.isShowDropDown = false;
+      this.searchItem = item.title;
+      this.selectedHotel.emit(item);
+      this.validateSearch.emit(true);
+      this.isValidSearch = true;
+    }
   }
 
   @HostListener('document:click')

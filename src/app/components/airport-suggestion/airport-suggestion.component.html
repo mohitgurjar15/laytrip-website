@@ -4,9 +4,8 @@
             <img src="{{s3BucketUrl}}assets/images/icon/close-icon.svg" alt="Close Icon">
         </button>
     </div>
-    <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all"
-        pointerEventsMethod="scrollbar">
-         <span *ngIf="loading">Loading...</span> 
+    <ng-scrollbar class="custom_scroll_suggetion" barClass="scrollbar" customview="true" #scrollable track="all" pointerEventsMethod="scrollbar">
+        <span *ngIf="loading">{{'loading' | translate}}</span>
         <div class="suggtions_wrps_mn">
             <div class="suggtions">
                 <div class="sug_line_box">
@@ -17,27 +16,27 @@
                             {{item.city}}, {{item.country}} ({{item.code}})
                                 <span class="airport_names">
                                     <ul>
-                                        <ng-conatiner *ngFor="let sub_item of item.sub_airport">
+                                        <ng-conatiner *ngFor="let sub_item of item.sub_airport || item.child">
                                             <li  (click)="selectAirport(sub_item)" >                                        
                                                 {{sub_item.name}} ({{sub_item.code}})
                                             </li>
                                         </ng-conatiner>                                    
                                     </ul>
                                 </span>
-                            </span>                        
-                            <span class="line_names" (click)="selectAirport(item)" *ngIf="!isSuggestionWithCountry(item.code)">
+                    </span>
+                    <span class="line_names" (click)="selectAirport(item)" *ngIf="!isSuggestionWithCountry(item.code)">
                             {{item.city}} ({{item.code}})
                                 <span class="airport_names">
                                     <ul>
-                                        <ng-conatiner *ngFor="let sub_item of item.sub_airport">
+                                        <ng-conatiner *ngFor="let sub_item of item.sub_airport || item.child">
                                             <li (click)="selectAirport(sub_item)" >                                        
                                                 {{sub_item.name}} ({{sub_item.code}})
                                             </li>
                                         </ng-conatiner>                                    
                                     </ul>
                                 </span>
-                            </span>                        
-                        </ng-conatiner>                                               
+                    </span>
+                    </ng-conatiner>
                     </span>
                 </div>
             </div>
