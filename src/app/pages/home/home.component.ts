@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
   submitted = false;
   showTripfluencerThankyou = false;
   $landingPageData;
+  loading = false;
   constructor(
     private genericService: GenericService,
     public commonFunction: CommonFunction,
@@ -247,8 +248,9 @@ export class HomeComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
+    this.loading = true;
     if(this.tripfluencer.invalid){
-    this.submitted = false;
+      this.loading = false;
       return;
     }else{
       let json_Data = {
@@ -259,14 +261,17 @@ export class HomeComponent implements OnInit {
       this.homeService.tripfluencerEnquiry(json_Data).subscribe((data: any) => {
         this.showTripfluencerThankyou = true;
         this.submitted = false;
+      this.loading = false;
       }, (error: HttpErrorResponse) => {
         this.submitted = false;
+      this.loading = false;
       });
     }
   }
 
   closeModal(){
     this.submitted =false;
+    this.loading = false;
     this.showTripfluencerThankyou = false;
     this.tripfluencer.reset();
     const controls = this.tripfluencer.controls;

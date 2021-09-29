@@ -122,7 +122,8 @@
                             </div>
                         </div>
                         <p>{{'become_tripfluencer_1' | translate}}</p>
-                        <button class="btn cstm_theme_btn_comman"><i *ngIf="submitted" class="fa fa-spinner fa-spin mr-2"></i>{{'send' | translate}}</button>
+      this.submitted = false;
+                        <button class="btn cstm_theme_btn_comman"><i *ngIf="loading && !this.tripfluencer.invalid" class="fa fa-spinner fa-spin mr-2"></i>{{'send' | translate}}</button>
                     </form>
                 </div>
                 <div class="tripfluencer_thanks" *ngIf="showTripfluencerThankyou">
