@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 // declare var $: any;
 @Component({
@@ -11,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class LandingVideoComponent implements OnInit {
   landingPageName;
   image: any;
+  s3BucketUrl=environment.s3BucketUrl
   constructor(
      private route: ActivatedRoute,   
      private translate: TranslateService
