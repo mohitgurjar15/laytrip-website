@@ -413,164 +413,164 @@
             padding: 0;
         }
     }
-    //<!-- Start Result listing section -->
     .price_by_date {
         width: 100%;
         margin: 0 0 30px;
-        
+    
         @include ipad-view {
-        margin-top: 10px;
+          margin-top: 10px;
         }
-        
+    
         label {
-        font-size: 16px;
-        font-weight: 500;
-        color: $text-grey;
-        margin: 0 0 5px;
-        display: flex;
-        justify-content: space-between;
-        span {
-        &.pink_txt {
-        color: $pink;
-        display: flex;
-        align-items: center;
-        &::before {
-        content: "";
-        background: $pink;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        margin-right: 8px;
+          font-size: 16px;
+          font-weight: 500;
+          color: $text-grey;
+          margin: 0 0 5px;
+          display: flex;
+          justify-content: space-between;
+          span {
+            &.pink_txt {
+              color: $pink;
+              display: flex;
+              align-items: center;
+              &::before {
+                content: "";
+                background: $pink;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                margin-right: 8px;
+              }
+            }
+          }
         }
-        }
-        }
-        }
-        
+    
         .price_day_slider {
-        width: 100%;
-        padding: 0 30px;
-        background: #fff;
-        border-radius: 8px;
-        position: relative;
-        border: 1px solid #e5e8eb;
-        
-        .inner {
-        padding: 0;
-        
-        .slid_block {
-        width: 100%;
-        display: flex;
-        flex-flow: column;
-        background: #fff;
-        //border-left: 1px solid #e5e8eb;
-        border-right: 1px solid #e5e8eb;
-        text-align: center;
+          width: 100%;
+          padding: 0 30px;
+          background: #fff;
+          border-radius: 8px;
+          position: relative;
+          border: 1px solid #e5e8eb;
+    
+          .inner {
+            padding: 0;
+    
+            .slid_block {
+              width: 100%;
+              display: flex;
+              flex-flow: column;
+              background: #fff;
+              //border-left: 1px solid #e5e8eb;
+              border-right: 1px solid #e5e8eb;
+              text-align: center;
+            }
+          }
+    
+          .slick-arrow {
+            font-size: 0;
+            line-height: 0;
+            position: absolute;
+            top: 50%;
+            display: block;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            margin-top: -10px\9;
+            -webkit-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+            cursor: pointer;
+            color: transparent;
+            border: none;
+            outline: none;
+            background: transparent;
+    
+            &.slick-prev {
+              left: -25px;
+              background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_prev.svg) no-repeat;
+              background-position: center;
+    
+              &::before {
+                content: none;
+              }
+            }
+    
+            &.slick-next {
+              right: -25px;
+              background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg) no-repeat;
+              background-position: center;
+    
+              &::before {
+                content: none;
+              }
+            }
+          }
+    
+          .slick-list {
+            &.draggable {
+              border-left: 1px solid #e5e8eb;
+              border-right: 1px solid #e5e8eb;
+            }
+          }
+          .slider_item {
+            a {
+              font-weight: 500;
+              display: flex;
+              flex-flow: column;
+              width: 100%;
+    
+              .top_dates {
+                height: 34.5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-bottom: 1px solid #e5e8eb;
+    
+                p {
+                  margin: 0;
+                  font-size: 10px;
+                  color: $text-grey;
+                  text-transform: uppercase;
+                }
+              }
+    
+              .btm_price {
+                height: 34.5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+    
+                span {
+                  margin: 0;
+                  font-size: 14px;
+                  color: $text-black;
+                }
+              }
+    
+              &.selected {
+                background: $primary-color;
+                border-radius: 5px;
+    
+                .top_dates {
+                  background: transparent;
+                  color: $text-white !important;
+    
+                  span {
+                    color: $text-white;
+                    font-size: 12px;
+                  }
+                }
+    
+                .btm_price {
+                  background: $text-white;
+                }
+              }
+            }
+          }
         }
-        }
-        
-        .slick-arrow {
-        font-size: 0;
-        line-height: 0;
-        position: absolute;
-        top: 50%;
-        display: block;
-        width: 20px;
-        height: 20px;
-        padding: 0;
-        margin-top: -10px\9;
-        -webkit-transform: translate(0, -50%);
-        -ms-transform: translate(0, -50%);
-        transform: translate(0, -50%);
-        cursor: pointer;
-        color: transparent;
-        border: none;
-        outline: none;
-        background: transparent;
-        
-        &.slick-prev {
-        left: -25px;
-        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_prev.svg) no-repeat;
-        background-position: center;
-        
-        &::before {
-        content: none;
-        }
-        }
-        
-        &.slick-next {
-        right: -25px;
-        background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/icon/slid_next.svg) no-repeat;
-        background-position: center;
-        
-        &::before {
-        content: none;
-        }
-        }
-        }
-        
-        .slick-list {
-        &.draggable {
-        border-left: 1px solid #e5e8eb;
-        border-right: 1px solid #e5e8eb;
-        }
-        }
-        .slider_item {
-        a {
-        font-weight: 500;
-        display: flex;
-        flex-flow: column;
-        width: 100%;
-        
-        .top_dates {
-        height: 34.5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-bottom: 1px solid #e5e8eb;
-        
-        p {
-        margin: 0;
-        font-size: 10px;
-        color: $text-grey;
-        text-transform: uppercase;
-        }
-        }
-        
-        .btm_price {
-        height: 34.5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        span {
-        margin: 0;
-        font-size: 14px;
-        color: $text-black;
-        }
-        }
-        
-        &.selected {
-        background: $primary-color;
-        border-radius: 5px;
-        
-        .top_dates {
-        background: transparent;
-        color: $text-white !important;
-        
-        span {
-        color: $text-white;
-        font-size: 12px;
-        }
-        }
-        
-        .btm_price {
-        background: $text-white;
-        }
-        }
-        }
-        }
-        }
-        }
+      }
+    
     .result_listing {
         width: 100%;
         display: flex;
