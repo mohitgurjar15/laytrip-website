@@ -20,7 +20,7 @@
                         <span>{{items.moduleInfo[0].hotel_name}} ({{items.moduleInfo[0].input_data.num_nights}} {{(items.moduleInfo[0].input_data.num_nights >1 ? 'nights' : 'night') | translate }} x ${{items.totalAmount | number : '1.2-2'}})</span>
                     </div>
                     <div class="summary_item_price">
-                        ${{beforeDesimal(items.moduleInfo[0].retail.sub_total)}}<sup>.{{afterDesimal(items.moduleInfo[0].retail.sub_total)}}</sup>
+                        ${{beforeDesimal(items.moduleInfo[0].selling.discounted_sub_total)}}<sup>.{{afterDesimal(items.moduleInfo[0].selling.discounted_sub_total)}}</sup>
                     </div>
                 </div>
                 <div class="summary_item">
@@ -33,6 +33,16 @@
                 </div>
                 <ng-container *ngIf="items.moduleInfo[0].mandatory_fee_details.is_postpaid === true">
                     <div class="summary_item" *ngFor="let item of items.moduleInfo[0].mandatory_fee_details.postpaid_break_dwon">
+                        <div class="summary_type">
+                            <span>{{items.moduleInfo[0].hotel_name}} {{item.name}}</span>
+                        </div>
+                        <div class="summary_item_price">
+                            ${{beforeDesimal(item.price)}}<sup>.{{afterDesimal(item.price)}}</sup>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="items.moduleInfo[0].mandatory_fee_details.is_prepaid === true">
+                    <div class="summary_item" *ngFor="let item of items.moduleInfo[0].mandatory_fee_details.prepaid_break_dwon">
                         <div class="summary_type">
                             <span>{{items.moduleInfo[0].hotel_name}} {{item.name}}</span>
                         </div>
