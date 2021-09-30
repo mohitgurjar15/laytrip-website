@@ -39,6 +39,7 @@ export class FlightSearchWidgetComponent implements OnInit {
   monthYearArr = [];
   toSearch: any = {};
   showRetivePriceText = false;
+  showAirportSuggestionIn = ''
 
   locale = {
     format: 'MM/DD/YYYY',
@@ -706,14 +707,16 @@ export class FlightSearchWidgetComponent implements OnInit {
     this.searchFlightInfo.arrival = this.toSearch.code;
   }
 
-  getflightSearchRoutes(event) {
+  getflightSearchRoutes(event,type) {
+    this.showAirportSuggestionIn = type
     this.showFromAirportSuggestion = true;
     this.searchedFlightData = event;
     this.routeSearch = true;
     this.currentChangeCounter.emit(this.counterChangeVal += 1);
 
   }
-  getflightToSearchRoutes(event) {
+  getflightToSearchRoutes(event,type) {
+    this.showAirportSuggestionIn = type
     this.showToAirportSuggestion = true;
     this.searchedFlightData = event;
     this.routeSearch = true;
