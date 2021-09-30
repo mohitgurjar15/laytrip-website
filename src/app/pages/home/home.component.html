@@ -9,12 +9,14 @@
                     <h2>$9.99 NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_3' | translate}}{{'now' | translate}}!</h2>
                 </span>
                 <span class="banner_text_span" *ngIf="!isRefferal || landingPageName === 'antinoti'">
-                    <h2 [innerHTML]="'flight_main_title' | translate"></h2>
-                    <img class="" src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Flight Icon" />!
+                    <h2 *ngIf="landingPageName != 'antinoti'" [innerHTML]="'flight_main_title' | translate"></h2>
+                    <h2 *ngIf="landingPageName === 'antinoti'">{{'sergio_home_content_1' | translate}}</h2>
+                    <img *ngIf="landingPageName != 'antinoti'" class="" src="{{s3BucketUrl}}assets/images/laytrip_logo_white.svg" alt="Flight Icon" /><ng-container *ngIf="landingPageName != 'antinoti'">!</ng-container>
                 </span>
                 <p *ngIf="isRefferal && landingPageName != 'antinoti'">{{'promo_421_1' | translate}} NY {{'to' | translate}} {{banner_city_name}} {{'promo_421_2' | translate}}.*</p>
-                <p *ngIf="!isRefferal || landingPageName === 'antinoti'" [innerHTML]="'flight_third_title' | translate"></p>
-                <a href="javascript:void(0);" class="cstm_theme_btn_comman banner_new_btn" data-toggle="modal" data-target="#works_modal" [ngClass]="{'sergio_banner_btn' : landingPageName === 'antinoti'}">{{'installment_info_page_small_title' | translate}}</a>
+                <p *ngIf="!isRefferal" [innerHTML]="'flight_third_title' | translate"></p>
+                <p *ngIf="landingPageName === 'antinoti'">{{'sergio_home_content_2' | translate}}</p>
+                <a *ngIf="landingPageName != 'antinoti'" href="javascript:void(0);" class="cstm_theme_btn_comman banner_new_btn" data-toggle="modal" data-target="#works_modal" [ngClass]="{'sergio_banner_btn' : landingPageName === 'antinoti'}">{{'installment_info_page_small_title' | translate}}</a>
             </div>
         </div>
         <div class="banner_tab">
@@ -122,7 +124,7 @@
                             </div>
                         </div>
                         <p>{{'become_tripfluencer_1' | translate}}</p>
-                        <button class="btn cstm_theme_btn_comman"><i *ngIf="submitted" class="fa fa-spinner fa-spin mr-2"></i>{{'send' | translate}}</button>
+                        <button class="btn cstm_theme_btn_comman"><i *ngIf="loading && !this.tripfluencer.invalid" class="fa fa-spinner fa-spin mr-2"></i>{{'send' | translate}}</button>
                     </form>
                 </div>
                 <div class="tripfluencer_thanks" *ngIf="showTripfluencerThankyou">
