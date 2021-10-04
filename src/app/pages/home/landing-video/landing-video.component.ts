@@ -38,10 +38,10 @@ export class LandingVideoComponent implements OnInit {
     const userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     switch (userLang) {
       case "es":
-        this.image = 'assets/images/infographic.jpg'
+        this.image = `${this.s3BucketUrl}assets/images/spanish_infograph.png`
         break;
         default:
-        this.image = 'assets/images/infographicEnglish.jpg'
+        this.image = `${this.s3BucketUrl}assets/images/english_infograph.png`
         break;
     }
     console.log(this.image)
