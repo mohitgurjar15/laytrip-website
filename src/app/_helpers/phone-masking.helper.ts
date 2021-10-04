@@ -9,7 +9,7 @@ export const PHONE_NUMBER_MASK = {
     '+36': {format: "(0) 000 0000", length: 8},
     '+39': {format: "00 0000 0000", length: 10},
     '+40': {format: "000 000 0000", length: 10},
-    '+41': {format: "000 000 00 00", length: 10},
+    '+41': {format: "000 000 00 00", length: 9},
     '+43': {format: "0000 000000", length: 10},
     '+44': {format: "000 0000 0000", length: 11},
     '+45': {format: "00 00 00 00", length: 8},
