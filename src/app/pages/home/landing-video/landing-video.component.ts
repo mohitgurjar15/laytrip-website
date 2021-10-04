@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 // declare var $: any;
 @Component({
@@ -11,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class LandingVideoComponent implements OnInit {
   landingPageName;
   image: any;
+  s3BucketUrl=environment.s3BucketUrl
   constructor(
      private route: ActivatedRoute,   
      private translate: TranslateService
@@ -36,10 +38,10 @@ export class LandingVideoComponent implements OnInit {
     const userLang: string = JSON.parse(localStorage.getItem('_lang')).iso_1Code;
     switch (userLang) {
       case "es":
-        this.image = 'assets/images/infographic.png'
+        this.image = `${this.s3BucketUrl}assets/images/spanish_infograph.png`
         break;
         default:
-        this.image = 'assets/images/infographicEnglish.png'
+        this.image = `${this.s3BucketUrl}assets/images/english_infograph.png`
         break;
     }
     console.log(this.image)

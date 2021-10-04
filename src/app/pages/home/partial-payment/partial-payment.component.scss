@@ -3,21 +3,19 @@
 @import "../../../../_hotel.scss";
 @import "../../../../_dr_home_variable.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 //<!-- Start Partial Payment Section css -->
 .partial_payment {
-	//padding: 102px 0 0;
-	padding: 10px 0 35px;
-	// background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/partial_payment_bg.webp) no-repeat;
-	// background-size: cover;
-	position: relative;
-	margin: 10px 0;
-
-	@include tab-view {
+    //padding: 102px 0 0;
+    padding: 10px 0 35px;
+    // background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/partial_payment_bg.webp) no-repeat;
+    // background-size: cover;
+    position: relative;
+    margin: 10px 0;
+    @include tab-view {
         padding: 15px 0 0 0;
         margin: 0;
-	}
-    .pink_notification{
+    }
+    .pink_notification {
         color: $pink;
         font-size: 25px;
         font-weight: 600;
@@ -26,75 +24,73 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        @include tab-view{
+        @include tab-view {
             font-size: 16px;
             margin: 0 15px 40px 15px;
         }
     }
-	.partial_payment_info {
+    .partial_payment_info {
         display: flex;
         justify-content: space-evenly;
         // align-items: center;
         width: 100%;
-
-        @include tab-view{
+        @include tab-view {
             flex-direction: column;
         }
-        .partial_info_sections{
+        .partial_info_sections {
             text-align: center;
             max-width: 245px;
             @include tab-view {
                 max-width: 100%;
             }
-            &:last-child{
-                .pay_info_inner_wrapper{
-                    @include mobile-view{
+            &:last-child {
+                .pay_info_inner_wrapper {
+                    @include mobile-view {
                         padding: 0px 15px;
                     }
                 }
             }
-            .pay_info_inner_wrapper{
+            .pay_info_inner_wrapper {
                 color: $text-black;
                 // padding: 10px 75px;
-                @include ipad-view{
+                @include ipad-view {
                     padding: 20px 0;
                 }
-                @include tab-view{
+                @include tab-view {
                     padding: 0px 15px 15px;
                 }
-                
-                .pay_type_img_wrap{
+                .pay_type_img_wrap {
                     margin-bottom: 15px;
                     min-height: 90px;
-                    @include tab-view{
+                    @include tab-view {
                         min-height: auto;
                     }
-                    img{
-                        @include tab-view{
+                    img {
+                        @include tab-view {
                             max-height: 80px;
                             max-width: 90px;
                         }
                     }
                 }
-                .pay_title{
+                .pay_title {
                     margin: 15px 0;
                     font-weight: 800;
                     font-size: 21px;
                     line-height: 23px;
                     padding: 0 17px;
                     width: 100%;
-                    @include mobile-view{
+                    @include mobile-view {
                         margin: 10px 0 0px;
                         padding: 0;
                         font-size: 14px;
                         line-height: 21px;
                     }
                 }
-                p{
+                p {
                     margin: 5px 0 10px;
                     font-size: 18px;
                     line-height: 23px;
-                    @include mobile-view{
+                    @include mobile-view {
                         margin: 5px 0 20px;
                         font-size: 14px;
                         line-height: 21px;
@@ -102,7 +98,6 @@
                 }
             }
         }
-		
     }
     // .cta_extra_btn_wrapper{
     //     display: flex;
@@ -125,8 +120,6 @@
     //         z-index: 9;
     //         overflow: hidden;
     //         white-space: normal;
-            
-    
     //         &::before {
     //             content: "";
     //             position: absolute;
@@ -139,7 +132,6 @@
     //             transition: 0.8s;
     //             border-radius: 25px;
     //         }
-    
     //         &:hover {
     //             border: 1px solid $hotel-secondary-color;
     //             color: $hotel-secondary-color;
@@ -151,7 +143,7 @@
     //         }
     //     }
     // }
-    .cta_extra_btn_wrapper{
+    .cta_extra_btn_wrapper {
         display: flex;
         justify-content: center;
         width: 100%;
@@ -174,12 +166,10 @@
             z-index: 9;
             overflow: hidden;
             white-space: normal;
-            
-            @include tab-view{
+            @include tab-view {
                 font-size: 14px;
                 height: 38px;
             }
-    
             // &::before {
             //     content: "";
             //     position: absolute;
@@ -192,7 +182,6 @@
             //     transition: 0.8s;
             //     border-radius: 25px;
             // }
-    
             &:hover {
                 // border: 1px solid $hotel-secondary-color;
                 // color: $hotel-secondary-color;
@@ -205,55 +194,53 @@
             }
         }
     }
-    
 }
 
 //<!-- Close Partial Payment Section css -->
-
-.tripfluencer_block{
+.tripfluencer_block {
     // background: url(src/assets/images/tripfluencer_orignal.jpg);
-    background: url(src/assets/images/tripfluencer_banner.jpg) center no-repeat;
+    background: url(https://d2q1prebf1m2s9.cloudfront.net/assets/images/tripfluencer_banner.jpg) center no-repeat;
     background-size: cover;
     background-attachment: fixed;
     padding: 51px 0 47px;
     text-align: center;
-    h2{
+    h2 {
         font-size: 40px;
         font-weight: 600;
         color: $text-white;
         margin-bottom: 0;
-        span{
+        span {
             font-weight: 700;
             display: block;
             color: #FFAC00;
         }
-        @include ipad-view{
+        @include ipad-view {
             font-size: 32px;
         }
-        @include tab-view{
+        @include tab-view {
             font-size: 24px;
-            span{
+            span {
                 font-size: 20px;
             }
         }
-        @include mobile-view{
+        @include mobile-view {
             font-size: 20px;
-            span{
+            span {
                 font-size: 16px;
             }
         }
     }
-    a{
+    a {
         margin-top: 25px;
         min-width: 220px;
-        @include mobile-view{
+        @include mobile-view {
             margin-top: 17px;
         }
     }
-    @include tab-view{
+    @include tab-view {
         padding: 60px 0;
     }
-    @include mobile-view{
+    @include mobile-view {
         padding: 80px 0;
     }
 }
